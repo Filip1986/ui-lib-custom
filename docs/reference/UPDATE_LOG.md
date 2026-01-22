@@ -118,7 +118,7 @@ npm install primeng@21 primeicons@7
 ### 4. Update the UI Library
 
 ```bash
-npm install @filip86/ui-components@latest
+npm install ui-lib-custom@latest
 ```
 
 ### 5. Test Your Application

@@ -7,7 +7,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To use this library in your Angular application:
 
 ```bash
-npm install @filip86/ui-components
+npm install ui-lib-custom
 ```
 
 ### Requirements
@@ -22,7 +22,7 @@ No additional setup or external dependencies required!
 Import the components you need in your Angular application:
 
 ```typescript
-import { LoginComponent } from '@filip86/ui-components';
+import { LoginComponent } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-root',

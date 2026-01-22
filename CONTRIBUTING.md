@@ -5,7 +5,7 @@ Thank you for your interest in contributing to the UI Components Library! This g
 ## 📁 Project Structure
 
 ```
-ui-lib2/
+ui-lib-custom/
 ├── README.md                    # Main project README with API reference
 ├── docs/                        # 📚 All documentation lives here
 │   ├── README.md               # Documentation index
@@ -24,7 +24,7 @@ ui-lib2/
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd ui-lib2/ui-lib2
+   cd ui-lib-custom
    ```
 
 2. **Install dependencies**

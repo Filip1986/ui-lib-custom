@@ -69,7 +69,7 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 
 2. **Build the library:**
    ```bash
-   cd ui-lib2
+   cd ui-lib-custom
    ng build ui-components
    ```
    This will generate the dist folder with your updated package.json metadata.
@@ -103,7 +103,7 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 
 1. **Build the library:**
    ```bash
-   cd ui-lib2
+   cd ui-lib-custom
    ng build ui-components
    ```
 
@@ -129,9 +129,9 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
    git push
    ```
 
-2. **Install in other projects:**
+2. **Install from Git** (private/public):
    ```bash
-   npm install git+https://github.com/yourusername/ui-lib2.git#branch-name
+   npm install git+https://github.com/yourusername/ui-lib-custom.git#branch-name
    ```
 
 ### Option 4: Use from Local File System
@@ -141,11 +141,11 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
    ng build ui-components
    ```
 
-2. **In your other Angular project's package.json:**
+3. **Use file path** (local development):
    ```json
    {
      "dependencies": {
-       "ui-components": "file:../ui-lib2/ui-lib2/dist/ui-components"
+       "ui-components": "file:../ui-lib-custom/dist/ui-components"
      }
    }
    ```
@@ -276,7 +276,7 @@ npm install ui-components
 npm link ui-components
 
 # Or use local file
-npm install ../ui-lib2/ui-lib2/dist/ui-components
+npm install ../ui-lib-custom/dist/ui-components
 ```
 
 ### Step 3: Create a component
@@ -356,7 +356,7 @@ When actively developing the library and using it in another project:
 
 1. **Watch mode for library:**
    ```bash
-   cd ui-lib2/ui-lib2
+   cd ui-lib-custom
    ng build ui-components --watch
    ```
 

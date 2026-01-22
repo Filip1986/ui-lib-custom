@@ -9,7 +9,7 @@
 ## 📂 New Documentation Structure
 
 ```
-ui-lib2/
+ui-lib-custom/
 │
 ├── README.md                           # 📖 Main README with API reference
 ├── CONTRIBUTING.md                     # 🤝 How to contribute

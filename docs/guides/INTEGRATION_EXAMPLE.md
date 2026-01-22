@@ -9,7 +9,7 @@ This is a complete example showing how to integrate the ui-components library in
 #### Option A: Using npm link (Best for local development)
 ```bash
 # In the library directory (one-time setup)
-cd D:\Work\Personal\Github\ui-lib2\ui-lib2\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
 npm link
 
 # In your Angular project
@@ -25,7 +25,7 @@ In your project's `package.json`:
     "@angular/animations": "^20.0.0",
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0",
-    "ui-components": "file:../ui-lib2/ui-lib2/dist/ui-components"
+    "ui-components": "file:../ui-lib-custom/dist/ui-components"
   }
 }
 ```

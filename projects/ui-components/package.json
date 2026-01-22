@@ -1,5 +1,5 @@
 {
-  "name": "@filip86/ui-components",
+  "name": "ui-lib-custom",
   "version": "1.0.0",
   "description": "A flexible Angular UI component library with multiple design variants.",
   "author": "Luca Filip <filip.luca.work@gmail.com>",
@@ -18,12 +18,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/filip86/ui-lib2.git"
+    "url": "https://github.com/yourusername/ui-lib-custom.git"
   },
   "bugs": {
-    "url": "https://github.com/filip86/ui-lib2/issues"
+    "url": "https://github.com/yourusername/ui-lib-custom/issues"
   },
-  "homepage": "https://github.com/filip86/ui-lib2#readme",
+  "homepage": "https://github.com/yourusername/ui-lib-custom#readme",
   "peerDependencies": {
     "@angular/common": "^21.0.0 || ^22.0.0",
     "@angular/core": "^21.0.0 || ^22.0.0"

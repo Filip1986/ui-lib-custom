@@ -29,7 +29,7 @@ Edit `projects/ui-components/package.json`:
 
 ```json
 {
-  "name": "@filip86/ui-components",
+  "name": "ui-lib-custom",
   "version": "1.0.1",  // ← Update this
   // ... rest of config
 }
@@ -38,7 +38,7 @@ Edit `projects/ui-components/package.json`:
 ### 2. Build the Library
 
 ```bash
-cd ui-lib2
+cd ui-lib-custom
 ng build ui-components
 ```
 
@@ -86,8 +86,8 @@ npm install @filip86/ui-components@beta
 Use npm version commands to automatically update version and create git tags:
 
 ```bash
-# From the root of ui-lib2 project
-cd projects/ui-components
+# From the root of ui-lib-custom project
+ng build ui-components
 
 # Patch release (1.0.0 → 1.0.1)
 npm version patch
@@ -147,7 +147,7 @@ All package metadata is configured in `projects/ui-components/package.json`:
 
 ```json
 {
-  "name": "@filip86/ui-components",
+  "name": "ui-lib-custom",
   "version": "1.0.0",
   "description": "A flexible Angular UI component library",
   "author": "Your Name <email@example.com>",
@@ -155,12 +155,12 @@ All package metadata is configured in `projects/ui-components/package.json`:
   "keywords": ["angular", "components", "ui"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/filip86/ui-lib2.git"
+    "url": "https://github.com/yourusername/ui-lib-custom.git"
   },
   "bugs": {
-    "url": "https://github.com/filip86/ui-lib2/issues"
+    "url": "https://github.com/yourusername/ui-lib-custom/issues"
   },
-  "homepage": "https://github.com/filip86/ui-lib2#readme"
+  "homepage": "https://github.com/yourusername/ui-lib-custom#readme"
 }
 ```
 
@@ -170,24 +170,24 @@ This metadata will automatically be included in the built package.
 
 ### Check Current Published Version
 ```bash
-npm view @filip86/ui-components version
+npm view ui-lib-custom version
 ```
 
 ### List All Published Versions
 ```bash
-npm view @filip86/ui-components versions
+npm view ui-lib-custom versions
 ```
 
 ### Check Latest Tag
 ```bash
-npm view @filip86/ui-components dist-tags
+npm view ui-lib-custom dist-tags
 ```
 
 ### Update a Distribution Tag
 ```bash
 # Point 'latest' tag to a specific version
-npm dist-tag add @filip86/ui-components@1.0.1 latest
+npm dist-tag add ui-lib-custom@1.0.1 latest
 
 # Add a 'stable' tag
-npm dist-tag add @filip86/ui-components@1.0.0 stable
+npm dist-tag add ui-lib-custom@1.0.0 stable
 ```

@@ -255,7 +255,7 @@ Full icon list: https://primeng.org/icons
 ## Running the Demo
 
 ```bash
-cd ui-lib2
+cd ui-lib-custom
 npm start
 ```
 

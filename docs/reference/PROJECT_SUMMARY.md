@@ -31,7 +31,7 @@ A complete, production-ready Angular UI component library with multiple design v
 ## 📁 Project Structure
 
 ```
-D:\Work\Personal\Github\ui-lib2\ui-lib2\
+D:\Work\Personal\Github\ui-lib-custom\
 │
 ├── projects/
 │   ├── ui-components/              # ⭐ THE LIBRARY
@@ -114,7 +114,7 @@ D:\Work\Personal\Github\ui-lib2\ui-lib2\
 
 **Setup (one-time):**
 ```bash
-cd D:\Work\Personal\Github\ui-lib2\ui-lib2\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
 npm link
 ```
 
@@ -143,7 +143,7 @@ export class MyComponent {}
 ```json
 {
   "dependencies": {
-    "ui-components": "file:../ui-lib2/ui-lib2/dist/ui-components"
+    "ui-components": "file:../ui-lib-custom/dist/ui-components"
   }
 }
 ```
@@ -219,7 +219,7 @@ npm install ui-components
 
 ### Rebuild Library
 ```bash
-cd D:\Work\Personal\Github\ui-lib2\ui-lib2
+cd D:\Work\Personal\Github\ui-lib-custom
 ng build ui-components
 ```
 

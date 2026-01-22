@@ -6,7 +6,7 @@ Before running the demo application, you need to:
 
 1. **Install dependencies** (if not already done):
    ```bash
-   cd D:\Work\Personal\Github\ui-lib2\ui-lib2
+   cd D:\Work\Personal\Github\ui-lib-custom
    npm install
    ```
 
@@ -86,7 +86,7 @@ ui-lib2/
 
 **One-time setup in the library:**
 ```bash
-cd D:\Work\Personal\Github\ui-lib2\ui-lib2\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
 npm link
 ```
 
@@ -120,11 +120,11 @@ export class ExampleComponent {}
 
 ### Method 2: Local File Path
 
-**In your other project's package.json:**
+In your project's `package.json`:
 ```json
 {
   "dependencies": {
-    "ui-components": "file:../ui-lib2/ui-lib2/dist/ui-components"
+    "ui-components": "file:../ui-lib-custom/dist/ui-components"
   }
 }
 ```
@@ -138,7 +138,7 @@ npm install
 
 1. **Build the library:**
    ```bash
-   cd D:\Work\Personal\Github\ui-lib2\ui-lib2
+   cd D:\Work\Personal\Github\ui-lib-custom
    ng build ui-components --configuration production
    ```
 
@@ -223,7 +223,7 @@ npm install
 
 ### Rebuild the Library
 ```bash
-cd D:\Work\Personal\Github\ui-lib2\ui-lib2
+cd D:\Work\Personal\Github\ui-lib-custom
 ng build ui-components
 ```
 

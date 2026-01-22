@@ -1,5 +1,5 @@
 {
-  "name": "ui-lib2",
+  "name": "ui-lib-custom",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

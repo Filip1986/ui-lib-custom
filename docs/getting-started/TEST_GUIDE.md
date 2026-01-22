@@ -7,7 +7,7 @@
 Open a **NEW terminal** (keep the demo running in the current one) and run:
 
 ```bash
-# Navigate to a different folder (not inside ui-lib2)
+# Navigate to a different folder (not inside ui-lib-custom)
 cd D:\Work\Personal\Github
 
 # Create a new Angular project
@@ -19,11 +19,11 @@ ng new test-ui-lib --routing=false --style=css
 cd test-ui-lib
 ```
 
-### Step 2: Link the UI Library (30 seconds)
+### Link the Library
 
 ```bash
 # First, create the link in the library (if not done already)
-cd D:\Work\Personal\Github\ui-lib2\ui-lib2\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
 npm link
 
 # Then link it in your test project
@@ -194,13 +194,13 @@ Try changing the examples:
 
 ---
 
-## 🔄 Making Changes to the Library
+### Workflow for Changes
 
-1. **Edit a component** in `D:\Work\Personal\Github\ui-lib2\ui-lib2\projects\ui-components\src\lib\`
+1. **Edit a component** in `D:\Work\Personal\Github\ui-lib-custom\projects\ui-components\src\lib\`
 
 2. **Rebuild the library:**
    ```bash
-   cd D:\Work\Personal\Github\ui-lib2\ui-lib2
+   cd D:\Work\Personal\Github\ui-lib-custom
    ng build ui-components
    ```
 
@@ -233,7 +233,7 @@ If you don't want to use npm link, add this to your project's `package.json`:
 ```json
 {
   "dependencies": {
-    "ui-components": "file:../ui-lib2/ui-lib2/dist/ui-components"
+    "ui-components": "file:../ui-lib-custom/dist/ui-components"
   }
 }
 ```

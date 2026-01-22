@@ -258,7 +258,7 @@ Now that everything is verified, you can:
 ## 📞 Quick Reference
 
 **Demo:** http://localhost:4200
-**Library:** D:\Work\Personal\Github\ui-lib2\ui-lib2\dist\ui-components\
+**Library:** D:\Work\Personal\Github\ui-lib-custom\dist\ui-components\
 **Docs:** See PROJECT_SUMMARY.md
 
 **To use:**

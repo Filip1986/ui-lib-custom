@@ -4,8 +4,8 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    UI COMPONENTS LIBRARY                         │
-│              (D:\Work\Personal\Github\ui-lib2\ui-lib2)          │
+│              YOUR ANGULAR WORKSPACE                             │
+│              (D:\Work\Personal\Github\ui-lib-custom)          │
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -333,7 +333,7 @@ app.ts (Your Component)
 http://localhost:4200
 
 # Rebuild Library
-cd D:\Work\Personal\Github\ui-lib2\ui-lib2
+cd D:\Work\Personal\Github\ui-lib-custom
 ng build ui-components
 
 # Watch Mode

@@ -142,7 +142,7 @@ If you want to build the library from source:
 git clone <repository-url>
 
 # Install dependencies
-cd ui-lib2/ui-lib2
+cd ui-lib-custom
 npm install
 
 # Build the library
