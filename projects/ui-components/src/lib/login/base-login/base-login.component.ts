@@ -1,29 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { LoginFeatures, LoginFormData } from '../models/login-contract';
-import { CheckboxChangeEvent } from 'primeng/checkbox';
-
 import { ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { CardModule } from 'primeng/card';
-import { DividerModule } from 'primeng/divider';
-import { RippleModule } from 'primeng/ripple';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    ButtonModule,
-    CheckboxModule,
-    InputTextModule,
-    PasswordModule,
-    CardModule,
-    DividerModule,
-    RippleModule
+    CommonModule
 ],
   template: '',
 })
@@ -61,8 +46,7 @@ export class BaseLoginComponent implements OnInit {
 
 
   constructor(
-    protected formBuilder: FormBuilder,
-    protected messageService: MessageService,
+    protected formBuilder: FormBuilder
   ) {
     this.loginForm = this.createLoginForm();
   }
@@ -84,9 +68,10 @@ export class BaseLoginComponent implements OnInit {
   /**
    * Handle remember me checkbox change
    */
-  onRememberMeChange(event: CheckboxChangeEvent): void {
-    this.setRememberMePreference(event.checked);
-    this.rememberMeChange.emit(event.checked);
+  onRememberMeChange(event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.setRememberMePreference(checked);
+    this.rememberMeChange.emit(checked);
   }
 
   /**

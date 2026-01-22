@@ -40,19 +40,17 @@
 
       <!-- Password field -->
       <div data-testid="login-2-password-field">
-        <span class="p-input-icon-left w-full">
-          <i class="pi pi-lock"></i>
-          <p-password
+        <div class="input-icon-left w-full">
+          <span class="icon">🔒</span>
+          <input
             id="password"
+            type="password"
             formControlName="password"
             placeholder="Enter your password"
-            [toggleMask]="true"
-            [feedback]="false"
-            styleClass="w-full"
-            [inputStyleClass]="'w-full'"
+            class="w-full input-text"
             data-testid="login-2-password-input"
           />
-        </span>
+        </div>
         @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted)) {
           <small class="text-red-500 block mt-1" data-testid="login-2-password-error">
             Password is required
@@ -69,19 +67,20 @@
           <div
             class="flex items-center"
             data-testid="login-2-remember-me-section"
-            >
-            <p-checkbox
-              (onChange)="onRememberMeChange($event)"
-              [binary]="true"
-              data-testid="login-2-remember-me-checkbox"
+          >
+            <input
+              type="checkbox"
+              (change)="onRememberMeChange($event)"
               formControlName="rememberMe"
-              inputId="rememberMe"
-              />
+              id="rememberMe"
+              class="checkbox"
+              data-testid="login-2-remember-me-checkbox"
+            />
             <label
               class="ml-2 text-gray-700 cursor-pointer"
               data-testid="login-2-remember-me-label"
               for="rememberMe"
-              >
+            >
               Remember me
             </label>
           </div>
@@ -102,14 +101,17 @@
 
       <!-- Sign in button -->
       <button
-        [loading]="loading"
-        aria-label="Sign In"
-        class="w-full mt-4"
-        data-testid="login-2-submit-button"
-        label="Sign In"
-        pButton
         type="submit"
-      ></button>
+        [disabled]="loading"
+        aria-label="Sign In"
+        class="w-full mt-4 btn btn-primary"
+        data-testid="login-2-submit-button"
+      >
+        @if (loading) {
+          <span class="spinner"></span>
+        }
+        Sign In
+      </button>
 
       <!-- Register link -->
       @if (features.showRegisterLink) {
@@ -132,7 +134,7 @@
 
       <!-- Social Login -->
       @if (features.showSocialLogin) {
-        <ng-container data-testid="login-2-social-login-section">
+        <div data-testid="login-2-social-login-section">
           <div class="relative my-6" data-testid="login-2-social-divider">
             <div class="absolute inset-0 flex items-center">
               <div class="w-full border-t border-gray-300"></div>
@@ -144,26 +146,26 @@
           <div class="flex space-x-4" data-testid="login-2-social-buttons">
             <button
               (click)="onSocialLogin('google')"
-              aria-label="Google Login"
-              class="flex-1 p-button-text p-button-raised social-btn"
-              data-testid="login-2-google-button"
-              icon="pi pi-google"
-              label="Google"
-              pButton
               type="button"
-            ></button>
+              aria-label="Google Login"
+              class="flex-1 btn btn-outlined social-btn"
+              data-testid="login-2-google-button"
+            >
+              <span class="icon">G</span>
+              Google
+            </button>
             <button
               (click)="onSocialLogin('facebook')"
-              aria-label="Facebook Login"
-              class="flex-1 p-button-text p-button-raised social-btn"
-              data-testid="login-2-facebook-button"
-              icon="pi pi-facebook"
-              label="Facebook"
-              pButton
               type="button"
-            ></button>
+              aria-label="Facebook Login"
+              class="flex-1 btn btn-outlined social-btn"
+              data-testid="login-2-facebook-button"
+            >
+              <span class="icon">f</span>
+              Facebook
+            </button>
           </div>
-        </ng-container>
+        </div>
       }
     </form>
   </div>

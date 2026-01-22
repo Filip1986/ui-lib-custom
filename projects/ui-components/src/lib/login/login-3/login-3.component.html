@@ -53,21 +53,20 @@
         >
         <!-- Username field -->
         <div data-testid="login-3-username-field">
-          <span class="p-float-label">
-            <span class="p-input-icon-left w-full">
-              <i class="pi pi-user"></i>
+          <div class="input-with-label">
+            <div class="input-icon-left w-full">
+              <span class="icon">👤</span>
               <input
                 id="username"
                 type="text"
-                pInputText
                 formControlName="username"
-                class="w-full"
+                class="w-full input-text"
+                placeholder="Username or Email"
                 data-testid="login-3-username-input"
-                [autofocus]="true"
+                autofocus
               />
-            </span>
-            <label for="username">Username or Email</label>
-          </span>
+            </div>
+          </div>
           @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted)) {
             <small class="text-red-500 block mt-1" data-testid="login-3-username-error">
               Please enter a valid username or email address
@@ -77,36 +76,32 @@
 
         <!-- Password field -->
         <div data-testid="login-3-password-field">
-          @if (features.showForgotPassword) {
-            <span class="p-float-label">
-              <span class="p-input-icon-left w-full">
-                <i class="pi pi-lock"></i>
-                <p-password
-                  id="password"
-                  formControlName="password"
-                  [toggleMask]="true"
-                  [feedback]="false"
-                  styleClass="w-full"
-                  [inputStyleClass]="'w-full'"
-                  data-testid="login-3-password-input"
-                />
-              </span>
-              <label for="password">Password</label>
-            </span>
-            @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted)) {
-              <small class="text-red-500 block mt-1" data-testid="login-3-password-error">
-                Password is required
-              </small>
-            }
+          <div class="input-with-label">
+            <div class="input-icon-left w-full">
+              <span class="icon">🔒</span>
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                class="w-full input-text"
+                placeholder="Password"
+                data-testid="login-3-password-input"
+              />
+            </div>
+          </div>
+          @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted)) {
+            <small class="text-red-500 block mt-1" data-testid="login-3-password-error">
+              Password is required
+            </small>
           }
           @if (features.showForgotPassword) {
             <a
               (click)="onForgotPassword()"
               (keydown.enter)="onForgotPassword()"
-              class="text-sm cursor-pointer float-right mt-2"
+              class="text-sm cursor-pointer float-right mt-2 link"
               data-testid="login-3-forgot-password-link"
               tabindex="0"
-              >
+            >
               Forgot password?
             </a>
           }
@@ -117,20 +112,20 @@
           <div
             class="flex items-center"
             data-testid="login-3-remember-me-section"
-            >
-            <p-checkbox
-              (onChange)="onRememberMeChange($event)"
-              [binary]="true"
-              data-testid="login-3-remember-me-checkbox"
+          >
+            <input
+              type="checkbox"
+              (change)="onRememberMeChange($event)"
               formControlName="rememberMe"
               id="rememberMe"
-              inputId="rememberMe"
-              />
+              class="checkbox"
+              data-testid="login-3-remember-me-checkbox"
+            />
             <label
               class="ml-2 text-sm text-gray-600 cursor-pointer"
               data-testid="login-3-remember-me-label"
               for="rememberMe"
-              >
+            >
               Remember me
             </label>
           </div>
@@ -138,16 +133,18 @@
 
         <!-- Submit button -->
         <button
-          [loading]="loading"
-          aria-label="Sign In"
-          class="w-full p-3 text-center"
-          data-testid="login-3-submit-button"
-          icon="pi pi-sign-in"
-          iconPos="right"
-          label="Sign In"
-          pButton
           type="submit"
-        ></button>
+          [disabled]="loading"
+          aria-label="Sign In"
+          class="w-full p-3 text-center btn btn-primary"
+          data-testid="login-3-submit-button"
+        >
+          @if (loading) {
+            <span class="spinner"></span>
+          }
+          <span class="icon">➜</span>
+          Sign In
+        </button>
 
         <!-- Register link -->
         @if (features.showRegisterLink) {
@@ -170,37 +167,37 @@
 
         <!-- Social login section -->
         @if (features.showSocialLogin) {
-          <ng-container data-testid="login-3-social-login-section">
-            <p-divider align="center" type="dashed">
+          <div data-testid="login-3-social-login-section">
+            <div class="divider">
               <span class="text-xs text-gray-500">OR CONTINUE WITH</span>
-            </p-divider>
+            </div>
             <div class="flex gap-3 mt-4">
               <button
                 (click)="onSocialLogin('google')"
                 (keydown.enter)="onSocialLogin('google')"
-                aria-label="Google Sign In"
-                class="p-button-outlined flex-1"
-                data-testid="login-3-google-button"
-                icon="pi pi-google"
-                label="Google"
-                pButton
-                tabindex="0"
                 type="button"
-              ></button>
+                aria-label="Google Sign In"
+                class="btn btn-outlined flex-1"
+                data-testid="login-3-google-button"
+                tabindex="0"
+              >
+                <span class="icon">G</span>
+                Google
+              </button>
               <button
                 (click)="onSocialLogin('facebook')"
                 (keydown.enter)="onSocialLogin('facebook')"
-                aria-label="Facebook Sign In"
-                class="p-button-outlined flex-1"
-                data-testid="login-3-facebook-button"
-                icon="pi pi-facebook"
-                label="Facebook"
-                pButton
-                tabindex="0"
                 type="button"
-              ></button>
+                aria-label="Facebook Sign In"
+                class="btn btn-outlined flex-1"
+                data-testid="login-3-facebook-button"
+                tabindex="0"
+              >
+                <span class="icon">f</span>
+                Facebook
+              </button>
             </div>
-          </ng-container>
+          </div>
         }
       </form>
     </div>

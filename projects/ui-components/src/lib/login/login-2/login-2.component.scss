@@ -15,89 +15,134 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-::ng-deep {
-  // Input fields
-  .p-inputtext,
-  .p-password input {
+// Input fields with icons
+.input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .icon {
+    position: absolute;
+    left: 0.75rem;
+    z-index: 1;
+    font-size: 1.25rem;
+  }
+
+  .input-text {
     padding: 0.75rem 1rem 0.75rem 2.5rem;
-  }
-
-  // Password field
-  .p-password {
-    .p-password-panel {
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  // Checkbox
-  .p-checkbox {
-    .p-checkbox-box {
-      border: 2px solid #d1d5db;
-      width: 1.2rem;
-      height: 1.2rem;
-      border-radius: 0.25rem;
-
-      &.p-highlight {
-        background-color: #667eea;
-        border-color: #667eea;
-      }
-
-      .p-checkbox-icon {
-        font-size: 0.75rem;
-      }
-    }
-  }
-
-  // Buttons
-  .p-button {
-    font-weight: 500;
-    border-radius: 0.375rem;
-
-    &:not(.p-button-text) {
-      background-color: #667eea;
-      border-color: #667eea;
-      padding: 0.75rem 1.5rem;
-
-      &:hover:enabled {
-        background-color: #5568d3;
-        border-color: #5568d3;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      }
-
-      &:active:enabled {
-        transform: translateY(0);
-      }
-    }
-  }
-
-  // Social login buttons
-  .social-btn {
-    background-color: white;
+    width: 100%;
     border: 1px solid #d1d5db;
-    color: #374151;
     border-radius: 0.375rem;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+  }
+}
+
+// Checkbox
+.checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  accent-color: #667eea;
+  border-radius: 0.25rem;
+}
+
+// Buttons
+.btn {
+  font-weight: 500;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &.btn-primary {
+    background-color: #667eea;
+    border: 1px solid #667eea;
+    color: white;
+    padding: 0.75rem 1.5rem;
+
+    &:hover:not(:disabled) {
+      background-color: #5568d3;
+      border-color: #5568d3;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &.btn-outlined {
+    background-color: transparent;
+    color: #667eea;
+    border: 1px solid #667eea;
     padding: 0.625rem 1rem;
 
-    &:hover:enabled {
-      background-color: #f9fafb;
-      transform: translateY(-1px);
+    &:hover:not(:disabled) {
+      background-color: rgba(102, 126, 234, 0.1);
     }
   }
+}
 
-  // Links
-  a {
-    color: #667eea;
-    text-decoration: none;
+// Social login buttons
+.social-btn {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: #374151;
 
-    &:hover {
-      text-decoration: underline;
-    }
+  &:hover:not(:disabled) {
+    background-color: #f9fafb;
+    transform: translateY(-1px);
   }
+}
 
-  // Error messages
-  small.text-red-500 {
-    color: #ef4444;
-    font-size: 0.875rem;
+// Links
+a {
+  color: #667eea;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Spinner for loading state
+.spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  width: 1rem;
+  height: 1rem;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Error messages
+small.text-red-500 {
+  color: #ef4444;
+  font-size: 0.875rem;
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  .login-2-form-container {
+    padding: 1.5rem;
   }
 }

@@ -1,14 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { CardModule } from 'primeng/card';
-import { DividerModule } from 'primeng/divider';
-import { RippleModule } from 'primeng/ripple';
-import { MessageService } from 'primeng/api';
+import { CommonModule } from '@angular/common';
 import { LoginFeatures, LoginFormData, LoginVariant } from '../models/login-contract';
 import { Login1Component } from '../login-1/login-1.component';
 import { Login3Component } from '../login-3/login-3.component';
@@ -19,18 +11,11 @@ import { Login2Component } from '../login-2/login-2.component';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    ButtonModule,
-    CardModule,
-    InputTextModule,
-    PasswordModule,
-    CheckboxModule,
-    DividerModule,
-    RippleModule,
+    CommonModule,
     Login1Component,
     Login3Component,
     Login2Component
 ],
-  providers: [MessageService],
   templateUrl: './login-factory.component.html',
   styleUrl: './login-factory.component.scss',
 })

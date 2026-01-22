@@ -4,44 +4,18 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Installation
 
-To use this library in your Angular application, install it along with its peer dependencies:
+To use this library in your Angular application:
 
 ```bash
-npm install @filip86/ui-components primeng primeicons
+npm install @filip86/ui-components
 ```
 
 ### Requirements
 
 - **Angular**: 21.x or 22.x
-- **PrimeNG**: 21.x
-- **PrimeIcons**: 7.x
 - **TypeScript**: 5.9+
 
-### PrimeNG Setup
-
-This library uses PrimeNG components internally. You need to include PrimeNG styles in your application.
-
-**Add to your `styles.scss` or `angular.json`:**
-
-```scss
-// PrimeNG Theme and Icons
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";
-```
-
-**Or in `angular.json`:**
-
-```json
-"styles": [
-  "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-  "node_modules/primeng/resources/primeng.css",
-  "node_modules/primeicons/primeicons.css",
-  "src/styles.scss"
-]
-```
-
-You can choose any PrimeNG theme that suits your application. Available themes can be found in `node_modules/primeng/resources/themes/`.
+No additional setup or external dependencies required!
 
 ## Usage
 

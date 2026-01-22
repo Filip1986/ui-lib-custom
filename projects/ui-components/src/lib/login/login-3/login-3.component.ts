@@ -1,14 +1,6 @@
 import { Component, Input } from '@angular/core';
-
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { CardModule } from 'primeng/card';
-import { DividerModule } from 'primeng/divider';
-import { RippleModule } from 'primeng/ripple';
-import { MessageService } from 'primeng/api';
+import { CommonModule } from '@angular/common';
 import { BaseLoginComponent } from '../base-login/base-login.component';
 
 @Component({
@@ -16,15 +8,8 @@ import { BaseLoginComponent } from '../base-login/base-login.component';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    ButtonModule,
-    CardModule,
-    InputTextModule,
-    PasswordModule,
-    CheckboxModule,
-    DividerModule,
-    RippleModule
+    CommonModule
 ],
-  providers: [MessageService],
   templateUrl: './login-3.component.html',
   styleUrls: ['./login-3.component.scss'],
 })
@@ -35,6 +20,6 @@ export class Login3Component extends BaseLoginComponent {
   @Input() override loading = false;
 
   constructor(protected override formBuilder: FormBuilder) {
-    super(formBuilder, new MessageService());
+    super(formBuilder);
   }
 }

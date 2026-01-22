@@ -1,22 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { BaseLoginComponent } from './base-login.component';
-import { CheckboxChangeEvent } from 'primeng/checkbox';
-import { MessageService } from 'primeng/api';
 
 describe('BaseLoginComponent', () => {
   let component: BaseLoginComponent;
   let fixture: ComponentFixture<BaseLoginComponent>;
-  let messageServiceMock: jest.Mocked<MessageService>;
 
   beforeEach(async () => {
-    messageServiceMock = {
-      add: jest.fn(),
-    } as any;
-
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, BaseLoginComponent],
-      providers: [FormBuilder, { provide: MessageService, useValue: messageServiceMock }],
+      providers: [FormBuilder],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BaseLoginComponent);

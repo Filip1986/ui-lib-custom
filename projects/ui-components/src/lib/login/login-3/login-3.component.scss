@@ -17,113 +17,137 @@
   }
 }
 
-::ng-deep {
-  // Floating label styling
-  .p-float-label {
-    margin-bottom: 1.5rem;
+// Input with label styling
+.input-with-label {
+  margin-bottom: 1.5rem;
+}
 
-    label {
-      left: 2.5rem;
-    }
+// Input fields with icons
+.input-icon-left {
+  position: relative;
+  display: flex;
+  align-items: center;
 
-    input:focus ~ label,
-    input.p-filled ~ label,
-    .p-inputwrapper-focus ~ label,
-    .p-inputwrapper-filled ~ label {
-      top: -0.75rem;
-      font-size: 0.75rem;
-      left: 0.5rem;
-      background: white;
-      padding: 0 0.25rem;
-    }
+  .icon {
+    position: absolute;
+    left: 0.75rem;
+    z-index: 1;
+    font-size: 1.25rem;
   }
 
-  // Input fields
-  .p-inputtext,
-  .p-password input {
+  .input-text {
     padding: 0.75rem 1rem 0.75rem 2.5rem;
-  }
-
-  // Modern password input styling
-  .modern-password {
-    .p-password-input {
-      padding-left: 2.5rem !important;
-    }
-
-    .p-password-panel {
-      overflow: hidden;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  // Checkbox
-  .p-checkbox {
-    .p-checkbox-box {
-      background-color: white;
-      border-color: #d1d5db;
-
-      &.p-highlight {
-        background-color: #667eea;
-        border-color: #667eea;
-      }
-
-      &:hover {
-        border-color: #667eea;
-      }
-    }
-  }
-
-  // Buttons
-  .p-button {
-    padding: 0.625rem 1rem;
-    font-weight: 600;
+    width: 100%;
+    border: 1px solid #d1d5db;
     border-radius: 0.375rem;
+    font-size: 1rem;
 
-    &:not(.p-button-outlined) {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-color: transparent;
-
-      &:hover:enabled {
-        background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    &.p-button-outlined {
-      background-color: transparent;
-      color: #667eea;
+    &:focus {
+      outline: none;
       border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+  }
+}
 
-      &:hover:enabled {
-        background-color: rgba(102, 126, 234, 0.1);
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      }
+// Checkbox
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: #667eea;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Buttons
+.btn {
+  padding: 0.625rem 1rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
   }
 
-  // Divider
-  .p-divider {
-    margin: 1rem 0;
-
-    .p-divider-content {
-      background-color: white !important;
-      padding: 0 0.5rem;
-    }
-  }
-
-  // Links
-  a {
+  &.btn-outlined {
+    background-color: transparent;
     color: #667eea;
-    text-decoration: none;
+    border: 1px solid #667eea;
 
-    &:hover {
-      text-decoration: underline;
+    &:hover:not(:disabled) {
+      background-color: rgba(102, 126, 234, 0.1);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     }
   }
+}
 
-  // Error messages
-  small.text-red-500 {
-    color: #ef4444;
-    font-size: 0.875rem;
+// Divider
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1rem 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px dashed #d1d5db;
   }
+
+  span {
+    padding: 0 0.5rem;
+    background-color: white;
+  }
+}
+
+// Links
+a, .link {
+  color: #667eea;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Spinner for loading state
+.spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  width: 1rem;
+  height: 1rem;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// Error messages
+small.text-red-500 {
+  color: #ef4444;
+  font-size: 0.875rem;
 }
