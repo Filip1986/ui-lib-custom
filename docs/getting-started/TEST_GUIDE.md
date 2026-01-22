@@ -233,7 +233,7 @@ If you don't want to use npm link, add this to your project's `package.json`:
 ```json
 {
   "dependencies": {
-    "ui-components": "file:../ui-lib-custom/dist/ui-components"
+    "ui-lib-custom": "file:../ui-lib-custom/dist/ui-lib-custom"
   }
 }
 ```
@@ -247,7 +247,7 @@ Then run: `npm install`
 You now have a working UI component library that you can use across all your Angular projects!
 
 **Key Points:**
-- Library is built and ready: `dist/ui-components/`
+- Library is built and ready: `dist/ui-lib-custom/`
 - Use `npm link` for easy development
 - Import components: `import { Button, Card } from 'ui-components'`
 - Use in templates: `<uilib-button>` and `<uilib-card>`

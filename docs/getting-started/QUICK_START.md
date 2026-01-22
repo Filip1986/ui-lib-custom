@@ -76,7 +76,7 @@ ui-lib2/
 │               ├── app.html     # Demo template
 │               └── app.css      # Demo styles
 ├── dist/
-│   └── ui-components/           # Built library (ready to publish)
+│   └── ui-lib-custom/           # Built library (ready to publish)
 └── README.md                    # Documentation
 ```
 
@@ -245,7 +245,7 @@ Press `Ctrl+C` in the terminal where it's running
 1. **Edit component files** in `projects/ui-components/src/lib/`
 2. **Rebuild the library:**
    ```bash
-   ng build ui-components
+   ng build ui-lib-custom
    ```
 3. **The demo will automatically refresh** if it's running in watch mode
 4. **Projects using npm link will automatically get the updates**

@@ -146,7 +146,7 @@ cd ui-lib-custom
 npm install
 
 # Build the library
-ng build ui-components
+ng build ui-lib-custom
 
 # Run the demo application
 ng serve demo

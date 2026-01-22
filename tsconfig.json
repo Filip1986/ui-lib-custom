@@ -15,8 +15,8 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "ui-components": [
-        "./dist/ui-components"
+      "ui-lib-custom": [
+        "./dist/ui-lib-custom"
       ]
     }
   },
