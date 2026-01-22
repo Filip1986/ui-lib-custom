@@ -1,0 +1,108 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+}
+
+::ng-deep {
+  .p-card {
+    background-color: var(--surface-color) !important; // This will change with the theme
+  }
+}
+
+:host ::ng-deep {
+  // Base styles for all login component elements
+  .login-container {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    box-shadow: var(--card-shadow);
+    border-color: var(--border-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  // Input fields
+  .p-inputtext {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+    &:enabled:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 1px var(--primary-color);
+    }
+  }
+
+  // Buttons
+  .p-button {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--primary-color);
+      opacity: 0.9;
+    }
+
+    &.p-button-outlined {
+      background-color: transparent;
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+
+      &:hover {
+        background-color: rgba(var(--primary-color-rgb), 0.1);
+      }
+    }
+  }
+
+  // Links and Text
+  .login-link {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--primary-color);
+      opacity: 0.8;
+    }
+  }
+
+  // Divider
+  .p-divider {
+    border-color: var(--border-color);
+    color: var(--text-color-secondary);
+
+    .p-divider-content {
+      background-color: var(--surface-color) !important;
+    }
+  }
+
+  // Social login buttons
+  .social-login-button {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--surface-hover, rgba(0,0,0,0.1));
+    }
+  }
+
+  // Error messages
+  .error-message {
+    color: var(--red-500);
+  }
+}
+
+// Responsive adjustments
+@media screen and (max-width: 768px) {
+  :host ::ng-deep .login-container {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "@filip86/ui-components",
+  "version": "1.0.0",
+  "description": "A flexible Angular UI component library with multiple design variants.",
+  "author": "Luca Filip <filip.luca.work@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "components",
+    "ui",
+    "ui-library",
+    "material-design",
+    "bootstrap",
+    "button",
+    "card",
+    "angular-components",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filip86/ui-lib2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/filip86/ui-lib2/issues"
+  },
+  "homepage": "https://github.com/filip86/ui-lib2#readme",
+  "peerDependencies": {
+    "@angular/common": "^21.0.0 || ^22.0.0",
+    "@angular/core": "^21.0.0 || ^22.0.0",
+    "primeng": "^21.0.0",
+    "primeicons": "^7.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

@@ -1,0 +1,161 @@
+<div class="doc-page">
+  <div class="doc-header">
+    <h1>Card</h1>
+    <p class="doc-description">
+      Versatile card components with customizable headers, footers, and elevation levels.
+      Available in Material Design, Bootstrap, and Minimal styles to match your application's design system.
+    </p>
+  </div>
+
+  <div class="doc-section">
+    <h2>Material Design Variant</h2>
+    <p>
+      Material Design cards with elevation shadows and rounded corners. Perfect for modern, clean interfaces
+      that follow Material Design principles.
+    </p>
+
+    <div class="doc-demo-group">
+      <h3>Elevation Levels</h3>
+      <div class="card-grid">
+        <uilib-card variant="material" elevation="low">
+          <div card-header>Low Elevation</div>
+          <p>Subtle shadows for content that doesn't need much emphasis.</p>
+          <div card-footer>
+            <uilib-button variant="material" color="primary" size="small">Action</uilib-button>
+          </div>
+        </uilib-card>
+
+        <uilib-card variant="material" elevation="medium">
+          <div card-header>Medium Elevation</div>
+          <p>Balanced visual hierarchy, perfect for most use cases.</p>
+          <div card-footer>
+            <uilib-button variant="material" color="success" size="small">Confirm</uilib-button>
+          </div>
+        </uilib-card>
+
+        <uilib-card variant="material" elevation="high">
+          <div card-header>High Elevation</div>
+          <p>Prominent shadows for important content.</p>
+          <div card-footer>
+            <uilib-button variant="material" color="danger" size="small">Delete</uilib-button>
+          </div>
+        </uilib-card>
+      </div>
+      <div class="doc-code">
+        <pre><code>&lt;uilib-card variant="material" elevation="low"&gt;
+  &lt;div card-header&gt;Low Elevation&lt;/div&gt;
+  &lt;p&gt;Card content&lt;/p&gt;
+&lt;/uilib-card&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="doc-demo-group">
+      <h3>Hoverable Card</h3>
+      <div class="card-grid">
+        <uilib-card variant="material" elevation="medium" [hoverable]="true">
+          <div card-header>Hoverable Card</div>
+          <p>This card has hover effects enabled. Try hovering over it!</p>
+        </uilib-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Bootstrap Variant</h2>
+    <p>
+      Classic Bootstrap-styled cards with borders and subtle shadows.
+      Ideal for applications using Bootstrap design patterns.
+    </p>
+
+    <div class="doc-demo-group">
+      <div class="card-grid">
+        <uilib-card variant="bootstrap" elevation="low">
+          <div card-header>Default Card</div>
+          <p>Bootstrap-styled card with low elevation.</p>
+          <div card-footer>
+            <uilib-button variant="bootstrap" color="primary" size="small">Action</uilib-button>
+          </div>
+        </uilib-card>
+
+
+        <uilib-card variant="bootstrap" elevation="medium" [bordered]="true">
+          <div card-header>Bordered Card</div>
+          <p>Explicit borders for better definition.</p>
+          <div card-footer>
+            <uilib-button variant="bootstrap" color="success" size="small">Submit</uilib-button>
+          </div>
+        </uilib-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Minimal Variant</h2>
+    <p>
+      Clean, minimalist cards with optional borders and no shadows.
+      Perfect for content-focused layouts.
+    </p>
+
+    <div class="doc-demo-group">
+      <div class="card-grid">
+        <uilib-card variant="minimal" elevation="none" [bordered]="true">
+          <div card-header>Bordered Minimal</div>
+          <p>Minimal card with clean borders.</p>
+          <div card-footer>
+            <uilib-button variant="minimal" color="primary" size="small">Learn More</uilib-button>
+          </div>
+        </uilib-card>
+
+        <uilib-card variant="minimal" elevation="none" [bordered]="false">
+          <div card-header>No Border</div>
+          <p>Ultra-clean appearance for modern designs.</p>
+        </uilib-card>
+
+        <uilib-card variant="minimal" elevation="none" [bordered]="true" [hoverable]="true">
+          <div card-header>Interactive</div>
+          <p>Hover to see the subtle effect!</p>
+        </uilib-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Properties</h2>
+    <table class="doc-properties">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
+          <td><code>'material'</code></td>
+          <td>Visual style of the card</td>
+        </tr>
+        <tr>
+          <td><code>elevation</code></td>
+          <td><code>'none' | 'low' | 'medium' | 'high'</code></td>
+          <td><code>'medium'</code></td>
+          <td>Shadow depth of the card</td>
+        </tr>
+        <tr>
+          <td><code>bordered</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Whether to show borders</td>
+        </tr>
+        <tr>
+          <td><code>hoverable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Whether to enable hover effects</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

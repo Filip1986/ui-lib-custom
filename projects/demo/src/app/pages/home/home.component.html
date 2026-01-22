@@ -1,0 +1,99 @@
+<div class="doc-page">
+  <div class="doc-header">
+    <h1>UI Components Library</h1>
+    <p class="doc-description">
+      A comprehensive collection of beautifully designed, reusable UI components for Angular applications.
+      Explore our components below to see live examples and implementation details.
+    </p>
+  </div>
+
+  <div class="quick-links-section">
+    <a routerLink="/buttons" class="quick-link-card">
+      <i class="pi pi-circle"></i>
+      <h3>Buttons</h3>
+      <p>Material, Bootstrap & Minimal variants with multiple colors and sizes</p>
+    </a>
+    <a routerLink="/cards" class="quick-link-card">
+      <i class="pi pi-id-card"></i>
+      <h3>Cards</h3>
+      <p>Flexible card components with headers, footers and multiple styles</p>
+    </a>
+    <a routerLink="/login" class="quick-link-card">
+      <i class="pi pi-sign-in"></i>
+      <h3>Login Forms</h3>
+      <p>Three beautiful pre-built login form designs</p>
+    </a>
+  </div>
+
+  <div class="doc-section">
+    <h2>Features</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <i class="pi pi-palette"></i>
+        <h4>Multiple Variants</h4>
+        <p>Choose from Material Design, Bootstrap, or Minimal styles to match your design system</p>
+      </div>
+      <div class="feature-item">
+        <i class="pi pi-cog"></i>
+        <h4>Fully Customizable</h4>
+        <p>Extensive configuration options with sensible defaults for rapid development</p>
+      </div>
+      <div class="feature-item">
+        <i class="pi pi-mobile"></i>
+        <h4>Responsive Design</h4>
+        <p>All components are fully responsive and work seamlessly across all devices</p>
+      </div>
+      <div class="feature-item">
+        <i class="pi pi-check-circle"></i>
+        <h4>TypeScript Support</h4>
+        <p>Built with TypeScript for excellent IDE support and type safety</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Quick Preview</h2>
+
+    <h3>Buttons</h3>
+    <div class="doc-demo centered">
+      <uilib-button variant="material" color="primary">Material</uilib-button>
+      <uilib-button variant="bootstrap" color="success">Bootstrap</uilib-button>
+      <uilib-button variant="minimal" color="danger">Minimal</uilib-button>
+    </div>
+
+    <h3 style="margin-top: 2rem;">Cards</h3>
+    <div class="cards-preview">
+      <uilib-card variant="material" elevation="medium">
+        <div card-header>Material Card</div>
+        <p>Clean design with shadows</p>
+      </uilib-card>
+      <uilib-card variant="bootstrap" elevation="low">
+        <div card-header>Bootstrap Card</div>
+        <p>Classic Bootstrap styling</p>
+      </uilib-card>
+      <uilib-card variant="minimal" elevation="none" [bordered]="true">
+        <div card-header>Minimal Card</div>
+        <p>Simple and clean</p>
+      </uilib-card>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Getting Started</h2>
+    <p>Install the library via npm:</p>
+    <div class="doc-code">
+      <pre><code>npm install &#64;filip86/ui-components</code></pre>
+    </div>
+    <p>Import components in your Angular module or component:</p>
+    <div class="doc-code">
+      <pre><code>import {{ '{' }} Button, Card {{ '}' }} from '&#64;filip86/ui-components';
+
+&#64;Component({{'{' }}
+  standalone: true,
+  imports: [Button, Card],
+  // ...
+{{'}'}})</code></pre>
+    </div>
+  </div>
+</div>
+

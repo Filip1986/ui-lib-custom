@@ -1,0 +1,208 @@
+<div
+  class="login-3-container min-h-screen flex items-center justify-center p-4"
+  data-testid="login-3-container"
+  >
+  <div
+    class="login-3-wrapper max-w-4xl w-full flex flex-col md:flex-row overflow-hidden shadow-xl"
+    data-testid="login-3-wrapper"
+    >
+    <!-- Left side decorative panel -->
+    <div
+      class="bg-gradient-to-br from-primary-600 to-primary-900 text-white p-8 md:w-2/5 flex flex-col justify-between"
+      data-testid="login-3-left-panel"
+      >
+      <div data-testid="login-3-left-panel-header">
+        <h1 class="text-3xl font-bold mb-4" data-testid="login-3-title">Welcome Back</h1>
+        <p class="text-primary-100 mb-6" data-testid="login-3-subtitle">
+          Sign in to continue your journey with us.
+        </p>
+      </div>
+
+      <div class="hidden md:block" data-testid="login-3-left-panel-graphic">
+        <svg
+          class="w-full h-auto"
+          fill="none"
+          viewBox="0 0 900 600"
+          xmlns="http://www.w3.org/2000/svg"
+          >
+          <path
+            d="M0 549.5L21.5 546.2C43 542.8 86 536.2 129.2 534.5C172.3 532.8 215.7 536.2 258.8 545.3C302 554.5 345 569.5 388.2 564.3C431.3 559.2 474.7 533.8 517.8 528.3C561 522.8 604 537.2 647.2 539.5C690.3 541.8 733.7 532.2 776.8 530.7C820 529.2 863 535.8 884.5 539.2L906 542.5V601H884.5C863 601 820 601 776.8 601C733.7 601 690.3 601 647.2 601C604 601 561 601 517.8 601C474.7 601 431.3 601 388.2 601C345 601 302 601 258.8 601C215.7 601 172.3 601 129.2 601C86 601 43 601 21.5 601H0V549.5Z"
+            fill="rgba(255,255,255,0.2)"
+            />
+          <circle cx="776.5" cy="222.5" fill="rgba(255,255,255,0.1)" r="38.5" />
+          <circle cx="116.5" cy="167.5" fill="rgba(255,255,255,0.1)" r="24.5" />
+          <circle cx="446.5" cy="367.5" fill="rgba(255,255,255,0.1)" r="48.5" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Right side login form -->
+    <div class="p-8 md:w-3/5" data-testid="login-3-right-panel">
+      <div class="text-center md:text-left mb-8" data-testid="login-3-header">
+        <h2 class="text-2xl font-bold text-gray-800" data-testid="login-3-form-title">
+          {{ title }}
+        </h2>
+        <p class="text-gray-600 mt-1" data-testid="login-3-form-subtitle">Access your account</p>
+      </div>
+
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="loginForm"
+        class="space-y-6"
+        data-testid="login-3-form"
+        >
+        <!-- Username field -->
+        <div data-testid="login-3-username-field">
+          <span class="p-float-label">
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-user"></i>
+              <input
+                id="username"
+                type="text"
+                pInputText
+                formControlName="username"
+                class="w-full"
+                data-testid="login-3-username-input"
+                [autofocus]="true"
+              />
+            </span>
+            <label for="username">Username or Email</label>
+          </span>
+          @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted)) {
+            <small class="text-red-500 block mt-1" data-testid="login-3-username-error">
+              Please enter a valid username or email address
+            </small>
+          }
+        </div>
+
+        <!-- Password field -->
+        <div data-testid="login-3-password-field">
+          @if (features.showForgotPassword) {
+            <span class="p-float-label">
+              <span class="p-input-icon-left w-full">
+                <i class="pi pi-lock"></i>
+                <p-password
+                  id="password"
+                  formControlName="password"
+                  [toggleMask]="true"
+                  [feedback]="false"
+                  styleClass="w-full"
+                  [inputStyleClass]="'w-full'"
+                  data-testid="login-3-password-input"
+                />
+              </span>
+              <label for="password">Password</label>
+            </span>
+            @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted)) {
+              <small class="text-red-500 block mt-1" data-testid="login-3-password-error">
+                Password is required
+              </small>
+            }
+          }
+          @if (features.showForgotPassword) {
+            <a
+              (click)="onForgotPassword()"
+              (keydown.enter)="onForgotPassword()"
+              class="text-sm cursor-pointer float-right mt-2"
+              data-testid="login-3-forgot-password-link"
+              tabindex="0"
+              >
+              Forgot password?
+            </a>
+          }
+        </div>
+
+        <!-- Remember Me option -->
+        @if (features.showRememberMe) {
+          <div
+            class="flex items-center"
+            data-testid="login-3-remember-me-section"
+            >
+            <p-checkbox
+              (onChange)="onRememberMeChange($event)"
+              [binary]="true"
+              data-testid="login-3-remember-me-checkbox"
+              formControlName="rememberMe"
+              id="rememberMe"
+              inputId="rememberMe"
+              />
+            <label
+              class="ml-2 text-sm text-gray-600 cursor-pointer"
+              data-testid="login-3-remember-me-label"
+              for="rememberMe"
+              >
+              Remember me
+            </label>
+          </div>
+        }
+
+        <!-- Submit button -->
+        <button
+          [loading]="loading"
+          aria-label="Sign In"
+          class="w-full p-3 text-center"
+          data-testid="login-3-submit-button"
+          icon="pi pi-sign-in"
+          iconPos="right"
+          label="Sign In"
+          pButton
+          type="submit"
+        ></button>
+
+        <!-- Register link -->
+        @if (features.showRegisterLink) {
+          <div
+            class="text-center text-sm text-gray-600"
+            data-testid="login-3-register-section"
+            >
+            Don't have an account?
+            <a
+              (click)="onRegister()"
+              (keydown.enter)="onRegister()"
+              class="cursor-pointer font-medium"
+              data-testid="login-3-register-link"
+              tabindex="0"
+              >
+              Sign up now
+            </a>
+          </div>
+        }
+
+        <!-- Social login section -->
+        @if (features.showSocialLogin) {
+          <ng-container data-testid="login-3-social-login-section">
+            <p-divider align="center" type="dashed">
+              <span class="text-xs text-gray-500">OR CONTINUE WITH</span>
+            </p-divider>
+            <div class="flex gap-3 mt-4">
+              <button
+                (click)="onSocialLogin('google')"
+                (keydown.enter)="onSocialLogin('google')"
+                aria-label="Google Sign In"
+                class="p-button-outlined flex-1"
+                data-testid="login-3-google-button"
+                icon="pi pi-google"
+                label="Google"
+                pButton
+                tabindex="0"
+                type="button"
+              ></button>
+              <button
+                (click)="onSocialLogin('facebook')"
+                (keydown.enter)="onSocialLogin('facebook')"
+                aria-label="Facebook Sign In"
+                class="p-button-outlined flex-1"
+                data-testid="login-3-facebook-button"
+                icon="pi pi-facebook"
+                label="Facebook"
+                pButton
+                tabindex="0"
+                type="button"
+              ></button>
+            </div>
+          </ng-container>
+        }
+      </form>
+    </div>
+  </div>
+</div>

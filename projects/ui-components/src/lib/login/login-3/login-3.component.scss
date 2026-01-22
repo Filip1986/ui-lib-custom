@@ -1,0 +1,129 @@
+:host {
+  display: block;
+}
+
+.login-3-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.login-3-wrapper {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+::ng-deep {
+  // Floating label styling
+  .p-float-label {
+    margin-bottom: 1.5rem;
+
+    label {
+      left: 2.5rem;
+    }
+
+    input:focus ~ label,
+    input.p-filled ~ label,
+    .p-inputwrapper-focus ~ label,
+    .p-inputwrapper-filled ~ label {
+      top: -0.75rem;
+      font-size: 0.75rem;
+      left: 0.5rem;
+      background: white;
+      padding: 0 0.25rem;
+    }
+  }
+
+  // Input fields
+  .p-inputtext,
+  .p-password input {
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+  }
+
+  // Modern password input styling
+  .modern-password {
+    .p-password-input {
+      padding-left: 2.5rem !important;
+    }
+
+    .p-password-panel {
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Checkbox
+  .p-checkbox {
+    .p-checkbox-box {
+      background-color: white;
+      border-color: #d1d5db;
+
+      &.p-highlight {
+        background-color: #667eea;
+        border-color: #667eea;
+      }
+
+      &:hover {
+        border-color: #667eea;
+      }
+    }
+  }
+
+  // Buttons
+  .p-button {
+    padding: 0.625rem 1rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+
+    &:not(.p-button-outlined) {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: transparent;
+
+      &:hover:enabled {
+        background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    &.p-button-outlined {
+      background-color: transparent;
+      color: #667eea;
+      border-color: #667eea;
+
+      &:hover:enabled {
+        background-color: rgba(102, 126, 234, 0.1);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  // Divider
+  .p-divider {
+    margin: 1rem 0;
+
+    .p-divider-content {
+      background-color: white !important;
+      padding: 0 0.5rem;
+    }
+  }
+
+  // Links
+  a {
+    color: #667eea;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Error messages
+  small.text-red-500 {
+    color: #ef4444;
+    font-size: 0.875rem;
+  }
+}

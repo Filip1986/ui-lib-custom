@@ -1,0 +1,143 @@
+<div class="doc-page">
+  <div class="doc-header">
+    <h1>Button</h1>
+    <p class="doc-description">
+      Flexible button components with multiple design variants, colors, and sizes.
+      Choose from Material Design, Bootstrap, or Minimal styles to match your application's design system.
+    </p>
+  </div>
+
+  <div class="doc-section">
+    <h2>Material Design Variant</h2>
+    <p>
+      Material Design buttons with elevation and ripple effects. Perfect for modern, clean interfaces
+      that follow Material Design principles.
+    </p>
+
+    <div class="doc-demo-group">
+      <h3>Colors</h3>
+      <div class="doc-demo centered">
+        <uilib-button variant="material" color="primary">Primary</uilib-button>
+        <uilib-button variant="material" color="secondary">Secondary</uilib-button>
+        <uilib-button variant="material" color="success">Success</uilib-button>
+        <uilib-button variant="material" color="danger">Danger</uilib-button>
+        <uilib-button variant="material" color="warning">Warning</uilib-button>
+      </div>
+      <div class="doc-code">
+        <pre><code>&lt;uilib-button variant="material" color="primary"&gt;Primary&lt;/uilib-button&gt;
+&lt;uilib-button variant="material" color="secondary"&gt;Secondary&lt;/uilib-button&gt;
+&lt;uilib-button variant="material" color="success"&gt;Success&lt;/uilib-button&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="doc-demo-group">
+      <h3>Sizes</h3>
+      <div class="doc-demo centered">
+        <uilib-button variant="material" size="small" color="primary">Small</uilib-button>
+        <uilib-button variant="material" size="medium" color="primary">Medium</uilib-button>
+        <uilib-button variant="material" size="large" color="primary">Large</uilib-button>
+      </div>
+      <div class="doc-code">
+        <pre><code>&lt;uilib-button variant="material" size="small" color="primary"&gt;Small&lt;/uilib-button&gt;
+&lt;uilib-button variant="material" size="medium" color="primary"&gt;Medium&lt;/uilib-button&gt;
+&lt;uilib-button variant="material" size="large" color="primary"&gt;Large&lt;/uilib-button&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="doc-demo-group">
+      <h3>Disabled State</h3>
+      <div class="doc-demo centered">
+        <uilib-button variant="material" color="primary" [disabled]="true">Disabled Primary</uilib-button>
+        <uilib-button variant="material" color="success" [disabled]="true">Disabled Success</uilib-button>
+        <uilib-button variant="material" color="danger" [disabled]="true">Disabled Danger</uilib-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Bootstrap Variant</h2>
+    <p>
+      Classic Bootstrap-styled buttons with solid colors and subtle shadows.
+      Ideal for applications using Bootstrap design patterns.
+    </p>
+
+    <div class="doc-demo-group">
+      <h3>Colors</h3>
+      <div class="doc-demo centered">
+        <uilib-button variant="bootstrap" color="primary">Primary</uilib-button>
+        <uilib-button variant="bootstrap" color="secondary">Secondary</uilib-button>
+        <uilib-button variant="bootstrap" color="success">Success</uilib-button>
+        <uilib-button variant="bootstrap" color="danger">Danger</uilib-button>
+        <uilib-button variant="bootstrap" color="warning">Warning</uilib-button>
+      </div>
+    </div>
+
+    <div class="doc-demo-group">
+      <h3>Sizes</h3>
+      <div class="doc-demo centered">
+        <uilib-button variant="bootstrap" size="small" color="primary">Small</uilib-button>
+        <uilib-button variant="bootstrap" size="medium" color="primary">Medium</uilib-button>
+        <uilib-button variant="bootstrap" size="large" color="primary">Large</uilib-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Minimal Variant</h2>
+    <p>
+      Minimalist buttons with clean lines and subtle hover effects. Ideal for modern, uncluttered UIs.
+    </p>
+
+    <div class="doc-demo-group">
+      <h3>Colors</h3>
+      <div class="doc-demo centered">
+        <uilib-button variant="minimal" color="primary">Primary</uilib-button>
+        <uilib-button variant="minimal" color="secondary">Secondary</uilib-button>
+        <uilib-button variant="minimal" color="success">Success</uilib-button>
+        <uilib-button variant="minimal" color="danger">Danger</uilib-button>
+        <uilib-button variant="minimal" color="warning">Warning</uilib-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-section">
+    <h2>Properties</h2>
+    <table class="doc-properties">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
+          <td><code>'material'</code></td>
+          <td>Visual style of the button</td>
+        </tr>
+        <tr>
+          <td><code>color</code></td>
+          <td><code>'primary' | 'secondary' | 'success' | 'danger' | 'warning'</code></td>
+          <td><code>'primary'</code></td>
+          <td>Color theme of the button</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'small' | 'medium' | 'large'</code></td>
+          <td><code>'medium'</code></td>
+          <td>Size of the button</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Whether the button is disabled</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

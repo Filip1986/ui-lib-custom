@@ -1,0 +1,215 @@
+// SCSS Variables
+$transition-speed: 0.3s;
+$border-radius: 4px;
+
+// Size Variables
+$size-small-padding: 0.25rem 0.75rem;
+$size-small-font: 0.875rem;
+$size-medium-padding: 0.5rem 1rem;
+$size-medium-font: 1rem;
+$size-large-padding: 0.75rem 1.5rem;
+$size-large-font: 1.125rem;
+
+// Color Variables
+$material-primary: #1976d2;
+$material-primary-hover: #1565c0;
+$material-secondary: #757575;
+$material-secondary-hover: #616161;
+$material-success: #388e3c;
+$material-success-hover: #2e7d32;
+$material-danger: #d32f2f;
+$material-danger-hover: #c62828;
+$material-warning: #f57c00;
+$material-warning-hover: #ef6c00;
+
+$bootstrap-primary: #0d6efd;
+$bootstrap-secondary: #6c757d;
+$bootstrap-success: #198754;
+$bootstrap-danger: #dc3545;
+$bootstrap-warning: #ffc107;
+
+// Mixins
+@mixin button-base {
+  padding: $size-medium-padding;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all $transition-speed ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  text-transform: none;
+
+  &:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+@mixin button-size($padding, $font-size) {
+  padding: $padding;
+  font-size: $font-size;
+}
+
+@mixin material-button($bg-color, $hover-color) {
+  background-color: $bg-color;
+  color: white;
+
+  &:hover:not(.btn-disabled) {
+    background-color: $hover-color;
+  }
+}
+
+@mixin bootstrap-button($bg-color) {
+  background-color: $bg-color;
+  border-color: $bg-color;
+  @if $bg-color == $bootstrap-warning {
+    color: #000;
+  } @else {
+    color: #fff;
+  }
+}
+
+@mixin minimal-button($color) {
+  color: $color;
+  border-color: $color;
+
+  &:hover:not(.btn-disabled) {
+    background-color: $color;
+    color: white;
+  }
+}
+
+/* Base Button Styles */
+.btn {
+  @include button-base;
+
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &-full-width {
+    width: 100%;
+  }
+
+  /* Size Variants */
+  &-small {
+    @include button-size($size-small-padding, $size-small-font);
+  }
+
+  &-medium {
+    @include button-size($size-medium-padding, $size-medium-font);
+  }
+
+  &-large {
+    @include button-size($size-large-padding, $size-large-font);
+  }
+
+  /* Material Design Variant */
+  &-material {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:hover:not(.btn-disabled) {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(.btn-disabled) {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      transform: translateY(0);
+    }
+
+    &.btn-primary {
+      @include material-button($material-primary, $material-primary-hover);
+    }
+
+    &.btn-secondary {
+      @include material-button($material-secondary, $material-secondary-hover);
+    }
+
+    &.btn-success {
+      @include material-button($material-success, $material-success-hover);
+    }
+
+    &.btn-danger {
+      @include material-button($material-danger, $material-danger-hover);
+    }
+
+    &.btn-warning {
+      @include material-button($material-warning, $material-warning-hover);
+    }
+  }
+
+  /* Bootstrap Variant */
+  &-bootstrap {
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+
+    &:hover:not(.btn-disabled) {
+      filter: brightness(0.9);
+    }
+
+    &:active:not(.btn-disabled) {
+      filter: brightness(0.8);
+    }
+
+    &.btn-primary {
+      @include bootstrap-button($bootstrap-primary);
+    }
+
+    &.btn-secondary {
+      @include bootstrap-button($bootstrap-secondary);
+    }
+
+    &.btn-success {
+      @include bootstrap-button($bootstrap-success);
+    }
+
+    &.btn-danger {
+      @include bootstrap-button($bootstrap-danger);
+    }
+
+    &.btn-warning {
+      @include bootstrap-button($bootstrap-warning);
+    }
+  }
+
+  /* Minimal Variant */
+  &-minimal {
+    background-color: transparent;
+    border: 1px solid currentColor;
+    box-shadow: none;
+
+    &:hover:not(.btn-disabled) {
+      background-color: currentColor;
+      color: white;
+    }
+
+    &.btn-primary {
+      @include minimal-button($material-primary);
+    }
+
+    &.btn-secondary {
+      @include minimal-button($material-secondary);
+    }
+
+    &.btn-success {
+      @include minimal-button($material-success);
+    }
+
+    &.btn-danger {
+      @include minimal-button($material-danger);
+    }
+
+    &.btn-warning {
+      @include minimal-button($material-warning);
+    }
+  }
+}

@@ -1,0 +1,170 @@
+<div
+  class="login-2-container flex flex-col justify-center min-h-screen p-4"
+  data-testid="login-2-container"
+  >
+  <div class="login-2-form-container mx-auto w-full max-w-sm" data-testid="login-2-form-container">
+    <div class="text-center mb-8" data-testid="login-2-header">
+      <h1 class="text-3xl font-bold" data-testid="login-2-title">{{ title }}</h1>
+      <p class="text-gray-600 mt-2" data-testid="login-2-subtitle">
+        Enter your credentials to continue
+      </p>
+    </div>
+
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="loginForm"
+      class="space-y-4"
+      data-testid="login-2-form"
+      >
+      <!-- Username field -->
+      <div data-testid="login-2-username-field">
+        <span class="p-input-icon-left w-full">
+          <i class="pi pi-user"></i>
+          <input
+            id="username"
+            type="text"
+            pInputText
+            formControlName="username"
+            placeholder="Enter your username or email"
+            class="w-full"
+            data-testid="login-2-username-input"
+            [autofocus]="true"
+          />
+        </span>
+        @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted)) {
+          <small class="text-red-500 block mt-1" data-testid="login-2-username-error">
+            Username is required
+          </small>
+        }
+      </div>
+
+      <!-- Password field -->
+      <div data-testid="login-2-password-field">
+        <span class="p-input-icon-left w-full">
+          <i class="pi pi-lock"></i>
+          <p-password
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            [toggleMask]="true"
+            [feedback]="false"
+            styleClass="w-full"
+            [inputStyleClass]="'w-full'"
+            data-testid="login-2-password-input"
+          />
+        </span>
+        @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted)) {
+          <small class="text-red-500 block mt-1" data-testid="login-2-password-error">
+            Password is required
+          </small>
+        }
+      </div>
+
+      <!-- Remember me & Forgot password -->
+      <div
+        class="flex justify-between items-center text-sm"
+        data-testid="login-2-remember-forgot-section"
+        >
+        @if (features.showRememberMe) {
+          <div
+            class="flex items-center"
+            data-testid="login-2-remember-me-section"
+            >
+            <p-checkbox
+              (onChange)="onRememberMeChange($event)"
+              [binary]="true"
+              data-testid="login-2-remember-me-checkbox"
+              formControlName="rememberMe"
+              inputId="rememberMe"
+              />
+            <label
+              class="ml-2 text-gray-700 cursor-pointer"
+              data-testid="login-2-remember-me-label"
+              for="rememberMe"
+              >
+              Remember me
+            </label>
+          </div>
+        }
+
+        @if (features.showForgotPassword) {
+          <a
+            (click)="onForgotPassword()"
+            (keydown.enter)="onForgotPassword()"
+            class="cursor-pointer"
+            data-testid="login-2-forgot-password-link"
+            tabindex="0"
+            >
+            Forgot password?
+          </a>
+        }
+      </div>
+
+      <!-- Sign in button -->
+      <button
+        [loading]="loading"
+        aria-label="Sign In"
+        class="w-full mt-4"
+        data-testid="login-2-submit-button"
+        label="Sign In"
+        pButton
+        type="submit"
+      ></button>
+
+      <!-- Register link -->
+      @if (features.showRegisterLink) {
+        <div
+          class="text-center text-sm mt-4"
+          data-testid="login-2-register-section"
+          >
+          <span class="text-gray-600">Don't have an account?</span>
+          <a
+            (click)="onRegister()"
+            (keydown.enter)="onRegister()"
+            class="cursor-pointer"
+            data-testid="login-2-register-link"
+            tabindex="0"
+            >
+            Create account
+          </a>
+        </div>
+      }
+
+      <!-- Social Login -->
+      @if (features.showSocialLogin) {
+        <ng-container data-testid="login-2-social-login-section">
+          <div class="relative my-6" data-testid="login-2-social-divider">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-background-color"> Or continue with </span>
+            </div>
+          </div>
+          <div class="flex space-x-4" data-testid="login-2-social-buttons">
+            <button
+              (click)="onSocialLogin('google')"
+              aria-label="Google Login"
+              class="flex-1 p-button-text p-button-raised social-btn"
+              data-testid="login-2-google-button"
+              icon="pi pi-google"
+              label="Google"
+              pButton
+              type="button"
+            ></button>
+            <button
+              (click)="onSocialLogin('facebook')"
+              aria-label="Facebook Login"
+              class="flex-1 p-button-text p-button-raised social-btn"
+              data-testid="login-2-facebook-button"
+              icon="pi pi-facebook"
+              label="Facebook"
+              pButton
+              type="button"
+            ></button>
+          </div>
+        </ng-container>
+      }
+    </form>
+  </div>
+</div>

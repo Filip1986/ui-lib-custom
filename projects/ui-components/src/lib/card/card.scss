@@ -1,0 +1,156 @@
+// SCSS Variables
+$card-border-radius: 4px;
+$card-transition: all 0.3s ease;
+$card-padding: 1.5rem;
+$card-header-padding: 1rem 1.5rem;
+$card-footer-padding: 1rem 1.5rem;
+
+// Border and Background Colors
+$border-color: #e0e0e0;
+$border-color-dark: rgba(0, 0, 0, 0.125);
+$bg-light: #f5f5f5;
+$bg-lighter: #fafafa;
+$bg-bootstrap: rgba(0, 0, 0, 0.03);
+
+// Shadow Variables
+$shadow-low: 0 1px 3px rgba(0, 0, 0, 0.12);
+$shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.15);
+$shadow-high: 0 4px 16px rgba(0, 0, 0, 0.2);
+$shadow-hover-material: 0 8px 24px rgba(0, 0, 0, 0.25);
+
+// Mixins
+@mixin card-base {
+  background: white;
+  border-radius: $card-border-radius;
+  overflow: hidden;
+  transition: $card-transition;
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin card-section($padding) {
+  padding: $padding;
+}
+
+@mixin card-elevation($shadow) {
+  box-shadow: $shadow;
+}
+
+/* Base Card Styles */
+.card {
+  @include card-base;
+
+  &-header {
+    @include card-section($card-header-padding);
+    border-bottom: 1px solid $border-color;
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+
+  &-body {
+    @include card-section($card-padding);
+    flex: 1;
+  }
+
+  &-footer {
+    @include card-section($card-footer-padding);
+    border-top: 1px solid $border-color;
+    background-color: $bg-lighter;
+  }
+
+  /* Options */
+  &-bordered {
+    border: 1px solid $border-color;
+  }
+
+  &-hoverable {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Elevation Levels */
+  &-elevation {
+    &-none {
+      box-shadow: none;
+    }
+
+    &-low {
+      @include card-elevation($shadow-low);
+    }
+
+    &-medium {
+      @include card-elevation($shadow-medium);
+    }
+
+    &-high {
+      @include card-elevation($shadow-high);
+    }
+  }
+
+  /* Material Design Variant */
+  &-material {
+    border-radius: 4px;
+
+    .card-header {
+      background-color: $bg-light;
+    }
+
+    &.card-hoverable:hover {
+      box-shadow: $shadow-hover-material;
+    }
+  }
+
+  /* Bootstrap Variant */
+  &-bootstrap {
+    border-radius: 0.25rem;
+    border: 1px solid $border-color-dark;
+
+    .card-header {
+      background-color: $bg-bootstrap;
+      border-bottom-color: $border-color-dark;
+    }
+
+    .card-footer {
+      background-color: $bg-bootstrap;
+      border-top-color: $border-color-dark;
+    }
+
+    &.card-hoverable:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Minimal Variant */
+  &-minimal {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+
+    &.card-bordered {
+      border: 1px solid $border-color;
+    }
+
+    .card-header {
+      background-color: transparent;
+      border-bottom: 1px solid $border-color;
+      padding: 1rem 0;
+    }
+
+    .card-body {
+      padding: 1.5rem 0;
+    }
+
+    .card-footer {
+      background-color: transparent;
+      border-top: 1px solid $border-color;
+      padding: 1rem 0;
+    }
+
+    &.card-hoverable:hover {
+      background-color: $bg-lighter;
+    }
+  }
+}

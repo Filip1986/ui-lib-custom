@@ -1,0 +1,34 @@
+<div class="sidebar">
+  <div class="sidebar-content">
+    <nav class="sidebar-nav">
+      <ul class="nav-list">
+        @for (item of menuItems; track item.label) {
+          <li class="nav-item" [class.has-children]="item.items">
+            @if (item.items) {
+              <div class="nav-link nav-header" (click)="toggleSection(item)">
+                <i [class]="item.icon" *ngIf="item.icon"></i>
+                <span>{{ item.label }}</span>
+                <i class="pi toggle-icon" [class.pi-chevron-down]="item.expanded" [class.pi-chevron-right]="!item.expanded"></i>
+              </div>
+              <ul class="nav-submenu" [class.expanded]="item.expanded">
+                @for (subItem of item.items; track subItem.label) {
+                  <li class="nav-subitem">
+                    <a [routerLink]="subItem.route" routerLinkActive="active" class="nav-link">
+                      <i [class]="subItem.icon" *ngIf="subItem.icon"></i>
+                      <span>{{ subItem.label }}</span>
+                    </a>
+                  </li>
+                }
+              </ul>
+            } @else {
+              <a [routerLink]="item.route" routerLinkActive="active" class="nav-link">
+                <i [class]="item.icon" *ngIf="item.icon"></i>
+                <span>{{ item.label }}</span>
+              </a>
+            }
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
+</div>

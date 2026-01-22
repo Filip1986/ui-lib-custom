@@ -1,0 +1,226 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Login Components</h1>
+    <p class="page-description">
+      Multiple beautiful login form variants with full functionality including social login, remember me, and forgot password features.
+      Choose the variant that best fits your application's design language.
+    </p>
+  </div>
+
+  <!-- Variant Tabs -->
+  <div class="variant-tabs">
+    @for (variant of variants; track variant.id) {
+      <button
+        class="variant-tab"
+        [class.active]="activeVariant === variant.id"
+        (click)="selectVariant(variant.id)">
+        {{ variant.title.split(' - ')[1] }}
+      </button>
+    }
+  </div>
+
+  <!-- Active Variant Content -->
+  @if (getActiveVariant(); as variant) {
+    <div class="variant-content">
+      <!-- Description Section -->
+      <section class="variant-section">
+        <h2>{{ variant.title }}</h2>
+        <p class="variant-description">{{ variant.description }}</p>
+      </section>
+
+      <!-- Preview Section -->
+      <section class="variant-section">
+        <h3>Live Preview</h3>
+        <div class="login-demo-container" [class]="variant.background">
+          @switch (variant.id) {
+            @case ('variant1') {
+              <lib-login-1
+                [loading]="loginLoading"
+                (submitLogin)="onLogin($any($event))"
+                (registerClick)="onRegister()"
+                (forgotPasswordClick)="onForgotPassword($any($event))"
+                (socialLoginClick)="onSocialLogin($any($event))"
+                (rememberMeChange)="onRememberMeChange($any($event))"
+              ></lib-login-1>
+            }
+            @case ('variant2') {
+              <lib-login-2
+                [loading]="loginLoading"
+                (submitLogin)="onLogin($any($event))"
+                (registerClick)="onRegister()"
+                (forgotPasswordClick)="onForgotPassword($any($event))"
+                (socialLoginClick)="onSocialLogin($any($event))"
+                (rememberMeChange)="onRememberMeChange($any($event))"
+              ></lib-login-2>
+            }
+            @case ('variant3') {
+              <lib-login-3
+                [loading]="loginLoading"
+                (submitLogin)="onLogin($any($event))"
+                (registerClick)="onRegister()"
+                (forgotPasswordClick)="onForgotPassword($any($event))"
+                (socialLoginClick)="onSocialLogin($any($event))"
+                (rememberMeChange)="onRememberMeChange($any($event))"
+              ></lib-login-3>
+            }
+          }
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="variant-section">
+        <h3>Features</h3>
+        <ul class="features-list">
+          @for (feature of variant.features; track feature) {
+            <li>{{ feature }}</li>
+          }
+        </ul>
+      </section>
+
+      <!-- Code Section -->
+      <section class="variant-section">
+        <h3>How to Use</h3>
+
+        <!-- Import Code -->
+        <div class="code-block-container">
+          <div class="code-block-header">
+            <span class="code-block-title">1. Import the Component</span>
+            <button
+              class="copy-button"
+              (click)="copyToClipboard(variant.importCode, variant.id + '-import')"
+              [class.copied]="isCopied(variant.id + '-import')">
+              @if (isCopied(variant.id + '-import')) {
+                <span>✓ Copied!</span>
+              } @else {
+                <span>Copy</span>
+              }
+            </button>
+          </div>
+          <pre class="code-block"><code>{{ variant.importCode }}</code></pre>
+        </div>
+
+        <!-- Usage Code -->
+        <div class="code-block-container">
+          <div class="code-block-header">
+            <span class="code-block-title">2. Use in Template</span>
+            <button
+              class="copy-button"
+              (click)="copyToClipboard(variant.usageCode, variant.id + '-usage')"
+              [class.copied]="isCopied(variant.id + '-usage')">
+              @if (isCopied(variant.id + '-usage')) {
+                <span>✓ Copied!</span>
+              } @else {
+                <span>Copy</span>
+              }
+            </button>
+          </div>
+          <pre class="code-block"><code>{{ variant.usageCode }}</code></pre>
+        </div>
+
+        <!-- Event Handlers Code -->
+        <div class="code-block-container">
+          <div class="code-block-header">
+            <span class="code-block-title">3. Implement Event Handlers</span>
+            <button
+              class="copy-button"
+              (click)="copyToClipboard(eventHandlersCode, 'event-handlers')"
+              [class.copied]="isCopied('event-handlers')">
+              @if (isCopied('event-handlers')) {
+                <span>✓ Copied!</span>
+              } @else {
+                <span>Copy</span>
+              }
+            </button>
+          </div>
+          <pre class="code-block"><code>{{ eventHandlersCode }}</code></pre>
+        </div>
+      </section>
+    </div>
+  }
+
+  <!-- API Reference Section -->
+  <section class="api-reference">
+    <h2>API Reference</h2>
+    <p class="section-description">All login components share the same API for consistent integration.</p>
+
+    <div class="api-grid">
+      <div class="api-section">
+        <h3>Inputs</h3>
+        <div class="api-table">
+          <div class="api-row api-header">
+            <div class="api-cell">Property</div>
+            <div class="api-cell">Type</div>
+            <div class="api-cell">Description</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>loading</code></div>
+            <div class="api-cell"><code>boolean</code></div>
+            <div class="api-cell">Shows loading state with spinner</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="api-section">
+        <h3>Outputs</h3>
+        <div class="api-table">
+          <div class="api-row api-header">
+            <div class="api-cell">Event</div>
+            <div class="api-cell">Payload Type</div>
+            <div class="api-cell">Description</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>submitLogin</code></div>
+            <div class="api-cell"><code>LoginFormData</code></div>
+            <div class="api-cell">Emitted when form is submitted</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>registerClick</code></div>
+            <div class="api-cell"><code>void</code></div>
+            <div class="api-cell">Emitted when register link is clicked</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>forgotPasswordClick</code></div>
+            <div class="api-cell"><code>string</code></div>
+            <div class="api-cell">Emits username when forgot password is clicked</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>socialLoginClick</code></div>
+            <div class="api-cell"><code>string</code></div>
+            <div class="api-cell">Emits provider name (google, facebook, github)</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>rememberMeChange</code></div>
+            <div class="api-cell"><code>boolean</code></div>
+            <div class="api-cell">Emits when remember me is toggled</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="api-section">
+        <h3>LoginFormData Interface</h3>
+        <div class="api-table">
+          <div class="api-row api-header">
+            <div class="api-cell">Property</div>
+            <div class="api-cell">Type</div>
+            <div class="api-cell">Description</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>username</code></div>
+            <div class="api-cell"><code>string</code></div>
+            <div class="api-cell">User's username or email</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>password</code></div>
+            <div class="api-cell"><code>string</code></div>
+            <div class="api-cell">User's password</div>
+          </div>
+          <div class="api-row">
+            <div class="api-cell"><code>rememberMe</code></div>
+            <div class="api-cell"><code>boolean</code></div>
+            <div class="api-cell">Remember me checkbox state</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
