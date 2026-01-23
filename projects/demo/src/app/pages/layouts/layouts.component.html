@@ -1,145 +1,157 @@
 <div class="doc-page">
-  <h1>Layout Primitives</h1>
-  <p class="lead">
-    Performance-first layout components using Signals, OnPush change detection, and design tokens.
-    Each component renders a single element with zero runtime overhead.
-  </p>
+  <div class="doc-header">
+    <h1>Layout Primitives</h1>
+    <p class="doc-description">
+      Performance-first layout components using signals, OnPush change detection, and design tokens. Each component renders a single
+      element with zero runtime overhead.
+    </p>
+  </div>
 
-  <!-- Stack Section -->
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Stack</h2>
     <p>A flexible vertical or horizontal layout primitive with configurable gap and alignment.</p>
 
-    <h3>Vertical Stack (Default)</h3>
-    <div class="demo-container">
-      <uilib-stack [gap]="4">
-        <div class="demo-box">Item 1</div>
-        <div class="demo-box">Item 2</div>
-        <div class="demo-box">Item 3</div>
-      </uilib-stack>
+    <div class="doc-demo-group">
+      <h3>Vertical Stack (Default)</h3>
+      <div class="doc-demo centered">
+        <uilib-stack [gap]="4">
+          <div class="demo-box">Item 1</div>
+          <div class="demo-box">Item 2</div>
+          <div class="demo-box">Item 3</div>
+        </uilib-stack>
+      </div>
     </div>
 
-    <h3>Horizontal Stack</h3>
-    <div class="demo-container">
-      <uilib-stack direction="horizontal" [gap]="4">
-        <div class="demo-box">Item 1</div>
-        <div class="demo-box">Item 2</div>
-        <div class="demo-box">Item 3</div>
-      </uilib-stack>
+    <div class="doc-demo-group">
+      <h3>Horizontal Stack</h3>
+      <div class="doc-demo centered">
+        <uilib-stack direction="horizontal" [gap]="4">
+          <div class="demo-box">Item 1</div>
+          <div class="demo-box">Item 2</div>
+          <div class="demo-box">Item 3</div>
+        </uilib-stack>
+      </div>
     </div>
 
-    <h3>Centered Stack</h3>
-    <div class="demo-container">
-      <uilib-stack [gap]="3" align="center" justify="center" style="min-height: 200px;">
-        <div class="demo-box">Centered Item 1</div>
-        <div class="demo-box">Centered Item 2</div>
-      </uilib-stack>
+    <div class="doc-demo-group">
+      <h3>Centered Stack</h3>
+      <div class="doc-demo centered">
+        <uilib-stack [gap]="3" align="center" justify="center" style="min-height: 200px;">
+          <div class="demo-box">Centered Item 1</div>
+          <div class="demo-box">Centered Item 2</div>
+        </uilib-stack>
+      </div>
     </div>
 
-    <h3>Space Between</h3>
-    <div class="demo-container">
-      <uilib-stack direction="horizontal" justify="space-between" style="width: 100%;">
-        <div class="demo-box">Left</div>
-        <div class="demo-box">Center</div>
-        <div class="demo-box">Right</div>
-      </uilib-stack>
+    <div class="doc-demo-group">
+      <h3>Space Between</h3>
+      <div class="doc-demo centered">
+        <uilib-stack direction="horizontal" justify="space-between" style="width: 100%;">
+          <div class="demo-box">Left</div>
+          <div class="demo-box">Center</div>
+          <div class="demo-box">Right</div>
+        </uilib-stack>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Inline Section -->
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Inline</h2>
     <p>An inline layout with wrapping, perfect for tags, chips, or button groups.</p>
 
-    <h3>Basic Inline</h3>
-    <div class="demo-container">
-      <uilib-inline [gap]="2">
-        <span class="demo-tag">JavaScript</span>
-        <span class="demo-tag">TypeScript</span>
-        <span class="demo-tag">Angular</span>
-        <span class="demo-tag">React</span>
-        <span class="demo-tag">Vue</span>
-        <span class="demo-tag">Svelte</span>
-        <span class="demo-tag">Node.js</span>
-        <span class="demo-tag">Python</span>
-      </uilib-inline>
+    <div class="doc-demo-group">
+      <h3>Basic Inline</h3>
+      <div class="doc-demo centered">
+        <uilib-inline [gap]="2">
+          <span class="demo-tag">JavaScript</span>
+          <span class="demo-tag">TypeScript</span>
+          <span class="demo-tag">Angular</span>
+          <span class="demo-tag">React</span>
+          <span class="demo-tag">Vue</span>
+          <span class="demo-tag">Svelte</span>
+          <span class="demo-tag">Node.js</span>
+          <span class="demo-tag">Python</span>
+        </uilib-inline>
+      </div>
     </div>
 
-    <h3>Centered Inline</h3>
-    <div class="demo-container">
-      <uilib-inline [gap]="3" justify="center">
-        <span class="demo-tag">Tag 1</span>
-        <span class="demo-tag">Tag 2</span>
-        <span class="demo-tag">Tag 3</span>
-      </uilib-inline>
+    <div class="doc-demo-group">
+      <h3>Centered Inline</h3>
+      <div class="doc-demo centered">
+        <uilib-inline [gap]="3" justify="center">
+          <span class="demo-tag">Tag 1</span>
+          <span class="demo-tag">Tag 2</span>
+          <span class="demo-tag">Tag 3</span>
+        </uilib-inline>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Grid Section -->
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Grid</h2>
     <p>A CSS Grid layout primitive with configurable columns and responsive behavior.</p>
 
-    <h3>12 Column Grid</h3>
-    <div class="demo-container">
-      <uilib-grid [columns]="12" [gap]="2">
-        @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
-          <div class="demo-grid-cell">{{ i }}</div>
-        }
-      </uilib-grid>
+    <div class="doc-demo-group">
+      <h3>12 Column Grid</h3>
+      <div class="doc-demo">
+        <uilib-grid [columns]="12" [gap]="2">
+          @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
+            <div class="demo-grid-cell">{{ i }}</div>
+          }
+        </uilib-grid>
+      </div>
     </div>
 
-    <h3>4 Column Grid</h3>
-    <div class="demo-container">
-      <uilib-grid [columns]="4" [gap]="4">
-        @for (i of [1,2,3,4,5,6,7,8]; track i) {
-          <div class="demo-grid-cell">Cell {{ i }}</div>
-        }
-      </uilib-grid>
+    <div class="doc-demo-group">
+      <h3>4 Column Grid</h3>
+      <div class="doc-demo">
+        <uilib-grid [columns]="4" [gap]="4">
+          @for (i of [1,2,3,4,5,6,7,8]; track i) {
+            <div class="demo-grid-cell">Cell {{ i }}</div>
+          }
+        </uilib-grid>
+      </div>
     </div>
 
-    <h3>Responsive Grid (auto-fit)</h3>
-    <p>Resize the window to see this grid adapt.</p>
-    <div class="demo-container">
-      <uilib-grid [gap]="4" minColumnWidth="200px">
-        @for (i of [1,2,3,4,5,6]; track i) {
-          <div class="demo-grid-cell large">Card {{ i }}</div>
-        }
-      </uilib-grid>
+    <div class="doc-demo-group">
+      <h3>Responsive Grid (auto-fit)</h3>
+      <p>Resize the window to see this grid adapt.</p>
+      <div class="doc-demo">
+        <uilib-grid [gap]="4" minColumnWidth="200px">
+          @for (i of [1,2,3,4,5,6]; track i) {
+            <div class="demo-grid-cell large">Card {{ i }}</div>
+          }
+        </uilib-grid>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Container Section -->
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Container</h2>
     <p>A centered container with max-width constraints and padding.</p>
+    <div class="doc-demo stacked">
+      <uilib-container size="sm" [padding]="4" style="background: #f5f5f5;">
+        <p>This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </uilib-container>
 
-    <h3>Small Container</h3>
-    <uilib-container size="sm" [padding]="4" style="background: #f5f5f5;">
-      <p>This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </uilib-container>
+      <uilib-container size="md" [padding]="6" style="background: #f5f5f5;">
+        <p>This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </uilib-container>
 
-    <h3>Medium Container</h3>
-    <uilib-container size="md" [padding]="6" style="background: #f5f5f5; margin-top: 1rem;">
-      <p>This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </uilib-container>
+      <uilib-container size="lg" [padding]="8" style="background: #f5f5f5;">
+        <p>This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </uilib-container>
+    </div>
+  </div>
 
-    <h3>Large Container (Default)</h3>
-    <uilib-container size="lg" [padding]="8" style="background: #f5f5f5; margin-top: 1rem;">
-      <p>This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </uilib-container>
-  </section>
-
-  <!-- Composition Section -->
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Composition</h2>
     <p>Layout primitives can be composed together for complex layouts.</p>
 
-    <div class="demo-container">
+    <div class="doc-demo">
       <uilib-container size="lg" [padding]="6">
         <uilib-stack [gap]="6">
           <h3>Dashboard Layout</h3>
-
           <uilib-grid [columns]="3" [gap]="4">
             <div class="demo-card">
               <uilib-stack [gap]="3">
@@ -177,15 +189,13 @@
         </uilib-stack>
       </uilib-container>
     </div>
-  </section>
+  </div>
 
-  <!-- API Reference -->
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Design Tokens</h2>
     <p>All spacing uses a consistent token system:</p>
-
     <div class="token-table">
-      <table>
+      <table class="doc-table">
         <thead>
           <tr>
             <th>Token</th>
@@ -209,10 +219,9 @@
         </tbody>
       </table>
     </div>
-  </section>
+  </div>
 
-  <!-- Themed Layouts Section -->
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Themed Layouts</h2>
     <p>Layout primitives inherit CSS variables. Scoped <code>data-theme</code> shows light/dark surfaces.</p>
 
@@ -259,5 +268,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </div>

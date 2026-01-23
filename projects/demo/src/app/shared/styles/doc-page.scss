@@ -1,6 +1,7 @@
 .doc-page {
   max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 2rem;
 }
 
 .doc-header {
@@ -19,6 +20,13 @@
     font-size: 1.125rem;
     color: #6c757d;
     line-height: 1.6;
+    margin: 0;
+  }
+
+  .doc-lead {
+    font-size: 1.05rem;
+    color: #5c6770;
+    line-height: 1.7;
     margin: 0;
   }
 }
@@ -67,6 +75,12 @@
     flex-wrap: wrap;
     gap: 1rem;
   }
+
+  &.stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .doc-demo-group {
@@ -74,6 +88,35 @@
 
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.doc-table,
+.doc-properties {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.doc-table {
+  th,
+  td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    color: #566069;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  thead th {
+    font-weight: 600;
+    background: #f8f9fa;
+    color: #495057;
   }
 }
 
@@ -172,6 +215,64 @@
   align-items: center;
 }
 
+.doc-list {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  color: #566069;
+  line-height: 1.7;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.doc-code-block {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  margin-top: 1rem;
+
+  .doc-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+
+    .doc-code-title {
+      font-weight: 600;
+      color: #495057;
+    }
+  }
+
+  .doc-code {
+    margin: 0;
+  }
+}
+
+.doc-copy {
+  border: 1px solid #dee2e6;
+  background: #ffffff;
+  color: #495057;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: #f1f3f5;
+  }
+
+  &.copied {
+    background: #e6f4ea;
+    border-color: #9ad29a;
+    color: #2f7d32;
+  }
+}
+
 // Responsive
 @media (max-width: 768px) {
   .doc-header {
@@ -196,7 +297,8 @@
     overflow-x: auto;
   }
 
-  .doc-properties {
+  .doc-properties,
+  .doc-table {
     display: block;
     overflow-x: auto;
   }

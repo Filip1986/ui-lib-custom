@@ -1,8 +1,4 @@
-.doc-page {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
+@use '../../shared/styles/doc-page.scss';
 
 .theme-grid {
   display: grid;

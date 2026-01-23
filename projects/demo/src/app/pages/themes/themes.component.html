@@ -1,12 +1,15 @@
 <div class="doc-page">
-  <h1>Theme Switcher</h1>
-  <p class="lead">
-    Toggle between light and dark themes by setting <code>data-theme="light|dark"</code> on <code>html</code> or any container.
-    CSS variables in <code>ui-lib-custom/src/lib/themes/themes.css</code> drive component colors.
-  </p>
+  <div class="doc-header">
+    <h1>Theme Switcher</h1>
+    <p class="doc-description">
+      Toggle between light and dark themes by setting <code>data-theme="light|dark"</code> on <code>html</code> or any container.
+      CSS variables in <code>ui-lib-custom/src/lib/themes/themes.css</code> drive component colors.
+    </p>
+  </div>
 
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Side-by-side Themes</h2>
+    <p>Preview components inheriting theme variables in isolated panels.</p>
     <div class="theme-grid">
       <div class="theme-panel" data-theme="light">
         <div class="panel-header">Light Theme</div>
@@ -52,14 +55,14 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="demo-section">
+  <div class="doc-section">
     <h2>Toggle in Your App</h2>
     <ol>
       <li>Import <code>themes.css</code> once globally (see Quick Start).</li>
       <li>Set <code>data-theme</code> on <code>html</code> or a container, e.g. via a toggle.</li>
       <li>All components consume CSS variables; override them per brand if needed.</li>
     </ol>
-  </section>
+  </div>
 </div>
