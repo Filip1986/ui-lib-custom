@@ -1,6 +1,6 @@
 <div class="topbar">
   <div class="topbar-left">
-    <button class="menu-button" (click)="onMenuButtonClick()">
+    <button class="menu-button" (click)="onMenuButtonClick()" aria-label="Toggle sidebar">
       <i class="pi pi-bars"></i>
     </button>
     <a routerLink="/" class="logo">
@@ -10,14 +10,14 @@
   </div>
 
   <div class="topbar-right">
-    <a href="https://github.com" target="_blank" class="topbar-link" title="GitHub">
+    <a href="https://github.com" target="_blank" class="topbar-link" title="GitHub" aria-label="GitHub">
       <i class="pi pi-github"></i>
     </a>
-    <a href="#" class="topbar-link" title="Documentation">
+    <a href="#" class="topbar-link" title="Documentation" aria-label="Documentation">
       <i class="pi pi-book"></i>
     </a>
-    <button class="theme-toggle" title="Toggle Dark Mode">
-      <i class="pi pi-moon"></i>
+    <button class="theme-toggle" title="Toggle Theme" aria-label="Toggle Theme" (click)="onThemeToggle()">
+      <i class="pi" [ngClass]="theme() === 'dark' ? 'pi-sun' : 'pi-moon'"></i>
     </button>
   </div>
 </div>

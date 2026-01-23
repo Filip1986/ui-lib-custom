@@ -1,6 +1,9 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CONTAINER_MAX_WIDTHS, ContainerSize, SPACING_TOKENS, SpacingToken } from '../design-tokens';
 
+const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const containerVar = (size: ContainerSize) => `var(--uilib-container-${size}, ${CONTAINER_MAX_WIDTHS[size]})`;
+
 /**
  * Container - A performant container layout primitive
  *
@@ -32,11 +35,11 @@ export class Container {
   padding = input<SpacingToken>(4);
 
   /** Computed max-width value */
-  protected _maxWidth = computed(() => CONTAINER_MAX_WIDTHS[this.size()]);
+  protected _maxWidth = computed(() => containerVar(this.size()));
 
   /** Computed centered value (for host binding) */
   protected _centered = computed(() => this.centered());
 
   /** Computed padding value from token */
-  protected _paddingValue = computed(() => SPACING_TOKENS[this.padding()]);
+  protected _paddingValue = computed(() => spacingVar(this.padding()));
 }

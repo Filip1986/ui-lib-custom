@@ -65,6 +65,11 @@ export class SidebarComponent {
       ]
     },
     {
+      label: 'Theming',
+      icon: 'pi pi-palette',
+      route: '/themes'
+    },
+    {
       label: 'Form',
       icon: 'pi pi-check-square',
       expanded: false,

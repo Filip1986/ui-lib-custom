@@ -1,14 +1,4 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import {
-  SEMANTIC_COLORS,
-  FONT_SIZES,
-  SPACING_TOKENS,
-  BORDER_RADIUS,
-  type SemanticColor,
-  type FontSize,
-  type SpacingToken,
-  type BorderRadius,
-} from '../design-tokens';
 
 export type BadgeVariant = 'solid' | 'outline' | 'subtle';
 export type BadgeColor = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral';
@@ -29,20 +19,11 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
   selector: 'uilib-badge',
   standalone: true,
   template: '<ng-content />',
+  styleUrl: './badge.scss',
   host: {
-    '[style.display]': '"inline-flex"',
-    '[style.align-items]': '"center"',
-    '[style.justify-content]': '"center"',
-    '[style.font-size]': '_fontSize()',
-    '[style.font-weight]': '"500"',
-    '[style.line-height]': '"1"',
-    '[style.padding]': '_padding()',
-    '[style.border-radius]': '_borderRadius()',
-    '[style.white-space]': '"nowrap"',
-    '[style.background-color]': '_backgroundColor()',
-    '[style.color]': '_textColor()',
-    '[style.border]': '_border()',
-    '[style.min-width]': '_minWidth()',
+    '[class]': 'badgeClasses()',
+    '[attr.role]': 'roleAttr()',
+    '[attr.aria-label]': 'ariaLabel()'
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -62,102 +43,32 @@ export class Badge {
   /** Whether the badge is a dot (small circular indicator) */
   dot = input<boolean>(false);
 
-  /** Computed font size based on size */
-  protected _fontSize = computed(() => {
-    const sizeMap: Record<BadgeSize, keyof typeof FONT_SIZES> = {
-      sm: 'xs',
-      md: 'sm',
-      lg: 'base',
-    };
-    return FONT_SIZES[sizeMap[this.size()]];
-  });
+  /** Accessible label for the badge, used when screen reader support is needed */
+  label = input<string | null>(null);
 
-  /** Computed padding based on size and dot mode */
-  protected _padding = computed(() => {
+  /** Computed CSS classes for the badge element */
+  badgeClasses = computed(() => {
+    const classes = [
+      'badge',
+      `badge-variant-${this.variant()}`,
+      `badge-color-${this.color()}`,
+      `badge-size-${this.size()}`,
+    ];
+
+    if (this.pill()) {
+      classes.push('badge-pill');
+    }
+
     if (this.dot()) {
-      const dotSizes = { sm: '0.25rem', md: '0.375rem', lg: '0.5rem' };
-      return dotSizes[this.size()];
+      classes.push('badge-dot');
     }
 
-    const paddingMap: Record<BadgeSize, string> = {
-      sm: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[2]}`,  // 4px 8px
-      md: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[3]}`,  // 4px 12px
-      lg: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`,  // 8px 16px
-    };
-    return paddingMap[this.size()];
+    return classes.join(' ');
   });
 
-  /** Computed border radius */
-  protected _borderRadius = computed(() => {
-    if (this.pill() || this.dot()) {
-      return BORDER_RADIUS.full;
-    }
-    const radiusMap: Record<BadgeSize, keyof typeof BORDER_RADIUS> = {
-      sm: 'sm',
-      md: 'base',
-      lg: 'md',
-    };
-    return BORDER_RADIUS[radiusMap[this.size()]];
-  });
+  /** Computed ARIA label for the badge, falls back to color for dot badges */
+  ariaLabel = computed(() => this.label() ?? (this.dot() ? this.color() : null));
 
-  /** Computed background color based on variant and color */
-  protected _backgroundColor = computed(() => {
-    const variant = this.variant();
-    const color = this.color();
-
-    if (variant === 'outline') {
-      return 'transparent';
-    }
-
-    const colorMap: Record<BadgeColor, string> = {
-      primary: variant === 'solid' ? SEMANTIC_COLORS.primary : SEMANTIC_COLORS['primary-light'] + '20',
-      secondary: variant === 'solid' ? SEMANTIC_COLORS.secondary : SEMANTIC_COLORS['secondary-light'] + '20',
-      success: variant === 'solid' ? SEMANTIC_COLORS.success : SEMANTIC_COLORS['success-light'] + '20',
-      danger: variant === 'solid' ? SEMANTIC_COLORS.danger : SEMANTIC_COLORS['danger-light'] + '20',
-      warning: variant === 'solid' ? SEMANTIC_COLORS.warning : SEMANTIC_COLORS['warning-light'] + '20',
-      info: variant === 'solid' ? SEMANTIC_COLORS.info : SEMANTIC_COLORS['info-light'] + '20',
-      neutral: variant === 'solid' ? SEMANTIC_COLORS.secondary : SEMANTIC_COLORS['background-alt'],
-    };
-
-    return colorMap[color];
-  });
-
-  /** Computed text color based on variant and color */
-  protected _textColor = computed(() => {
-    const variant = this.variant();
-    const color = this.color();
-
-    if (variant === 'solid') {
-      return '#ffffff';
-    }
-
-    const colorMap: Record<BadgeColor, string> = {
-      primary: SEMANTIC_COLORS.primary,
-      secondary: SEMANTIC_COLORS.secondary,
-      success: SEMANTIC_COLORS.success,
-      danger: SEMANTIC_COLORS.danger,
-      warning: SEMANTIC_COLORS.warning,
-      info: SEMANTIC_COLORS.info,
-      neutral: SEMANTIC_COLORS.text,
-    };
-
-    return colorMap[color];
-  });
-
-  /** Computed border based on variant */
-  protected _border = computed(() => {
-    if (this.variant() === 'outline') {
-      return `1px solid ${this._textColor()}`;
-    }
-    return 'none';
-  });
-
-  /** Computed min-width for dot mode */
-  protected _minWidth = computed(() => {
-    if (this.dot()) {
-      const dotSizes = { sm: '0.5rem', md: '0.75rem', lg: '1rem' };
-      return dotSizes[this.size()];
-    }
-    return 'auto';
-  });
+  /** Computed role attribute for the badge, 'status' for dot badges */
+  roleAttr = computed(() => (this.dot() ? 'status' : null));
 }

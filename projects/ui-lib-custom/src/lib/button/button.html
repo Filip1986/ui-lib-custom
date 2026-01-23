@@ -1,4 +1,10 @@
-<button [ngClass]="buttonClasses()" [disabled]="disabled()">
+<button
+  [ngClass]="buttonClasses()"
+  [attr.type]="type()"
+  [disabled]="isDisabled()"
+  [attr.aria-disabled]="ariaDisabled()"
+  [attr.aria-busy]="loading() ? true : null"
+>
+  <span class="btn-spinner" *ngIf="loading()" aria-hidden="true"></span>
   <ng-content />
 </button>
-

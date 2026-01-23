@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { SPACING_TOKENS, SpacingToken } from '../design-tokens';
 
+const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+
 export type StackDirection = 'vertical' | 'horizontal';
 export type StackAlign = 'start' | 'center' | 'end' | 'stretch';
 export type StackJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly';
@@ -56,5 +58,5 @@ export class Stack {
   });
 
   /** Computed gap value from token */
-  protected _gapValue = computed(() => SPACING_TOKENS[this.gap()]);
+  protected _gapValue = computed(() => spacingVar(this.gap()));
 }

@@ -1,0 +1,65 @@
+<div class="doc-page">
+  <h1>Theme Switcher</h1>
+  <p class="lead">
+    Toggle between light and dark themes by setting <code>data-theme="light|dark"</code> on <code>html</code> or any container.
+    CSS variables in <code>ui-lib-custom/src/lib/themes/themes.css</code> drive component colors.
+  </p>
+
+  <section class="demo-section">
+    <h2>Side-by-side Themes</h2>
+    <div class="theme-grid">
+      <div class="theme-panel" data-theme="light">
+        <div class="panel-header">Light Theme</div>
+        <div class="panel-body">
+          <uilib-inline [gap]="2">
+            <uilib-button color="primary">Primary</uilib-button>
+            <uilib-button variant="bootstrap" color="success">Success</uilib-button>
+            <uilib-button variant="minimal" color="danger">Danger</uilib-button>
+          </uilib-inline>
+
+          <uilib-inline [gap]="2">
+            <uilib-badge color="primary">Primary</uilib-badge>
+            <uilib-badge color="success" variant="subtle">Success</uilib-badge>
+            <uilib-badge color="warning" variant="outline">Warning</uilib-badge>
+          </uilib-inline>
+
+          <uilib-card variant="material" elevation="medium" [hoverable]="true">
+            <div card-header>Light Surface</div>
+            <p>Cards, buttons, and badges inherit CSS variables for this theme.</p>
+          </uilib-card>
+        </div>
+      </div>
+
+      <div class="theme-panel" data-theme="dark">
+        <div class="panel-header">Dark Theme</div>
+        <div class="panel-body">
+          <uilib-inline [gap]="2">
+            <uilib-button color="primary">Primary</uilib-button>
+            <uilib-button variant="bootstrap" color="success">Success</uilib-button>
+            <uilib-button variant="minimal" color="danger">Danger</uilib-button>
+          </uilib-inline>
+
+          <uilib-inline [gap]="2">
+            <uilib-badge color="primary">Primary</uilib-badge>
+            <uilib-badge color="success" variant="subtle">Success</uilib-badge>
+            <uilib-badge color="warning" variant="outline">Warning</uilib-badge>
+          </uilib-inline>
+
+          <uilib-card variant="material" elevation="medium" [hoverable]="true">
+            <div card-header>Dark Surface</div>
+            <p>Scoped <code>data-theme="dark"</code> overrides CSS vars for this panel.</p>
+          </uilib-card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h2>Toggle in Your App</h2>
+    <ol>
+      <li>Import <code>themes.css</code> once globally (see Quick Start).</li>
+      <li>Set <code>data-theme</code> on <code>html</code> or a container, e.g. via a toggle.</li>
+      <li>All components consume CSS variables; override them per brand if needed.</li>
+    </ol>
+  </section>
+</div>

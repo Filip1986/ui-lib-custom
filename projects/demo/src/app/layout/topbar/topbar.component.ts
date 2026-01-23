@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -12,8 +12,14 @@ import { RouterModule } from '@angular/router';
 })
 export class TopbarComponent {
   menuButtonClick = output<void>();
+  themeToggle = output<void>();
+  theme = input<'light' | 'dark'>('light');
 
   onMenuButtonClick() {
     this.menuButtonClick.emit();
+  }
+
+  onThemeToggle() {
+    this.themeToggle.emit();
   }
 }

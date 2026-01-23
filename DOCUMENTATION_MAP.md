@@ -28,6 +28,7 @@ docs/
 │   │   ├── README.md                 # Systems index
 │   │   ├── DESIGN_TOKENS.md          # Design token reference
 │   │   ├── LAYOUT_SYSTEM.md          # Layout API reference
+│   │   ├── THEMING.md                # Theming guide
 │   │   └── LAYOUT_IMPLEMENTATION.md  # Layout implementation
 │   └── project/                      # Project docs
 │       ├── README.md                 # Project index
@@ -56,6 +57,9 @@ docs/
 
 ### 📐 I want to build layouts
 → [docs/reference/systems/LAYOUT_SYSTEM.md](docs/reference/systems/LAYOUT_SYSTEM.md)
+
+### 🎨 I want to style my components
+→ [docs/reference/systems/THEMING.md](docs/reference/systems/THEMING.md)
 
 ### 🏗️ I want to create a new component
 1. [docs/reference/systems/DESIGN_TOKENS.md](docs/reference/systems/DESIGN_TOKENS.md) - Use design tokens
@@ -112,6 +116,7 @@ docs/
 #### Systems (`docs/reference/systems/`)
 - Design token system
 - Layout system
+- Theming guide
 - Cross-cutting concerns
 
 #### Project (`docs/reference/project/`)
@@ -188,6 +193,7 @@ docs/
 | | Button, Card | ⚠️ In root README |
 | **Systems** | Design Tokens | ✅ Complete |
 | | Layout System | ✅ Complete |
+| | Theming | ✅ Complete |
 | **Project** | Summary, Logs, Checklist | ✅ Complete |
 | **Guides** | Integration, Publishing | ✅ Complete |
 

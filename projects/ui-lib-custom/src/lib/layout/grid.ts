@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { SPACING_TOKENS, SpacingToken, GRID_COLUMNS, GridColumns } from '../design-tokens';
 
+const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+
 export type GridAlign = 'start' | 'center' | 'end' | 'stretch';
 export type GridJustify = 'start' | 'center' | 'end' | 'stretch';
 
@@ -51,5 +53,5 @@ export class Grid {
   });
 
   /** Computed gap value from token */
-  protected _gapValue = computed(() => SPACING_TOKENS[this.gap()]);
+  protected _gapValue = computed(() => spacingVar(this.gap()));
 }

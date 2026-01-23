@@ -1,4 +1,4 @@
-<div [ngClass]="cardClasses">
+<div [ngClass]="cardClasses()">
   @if (hasHeader) {
     <div class="card-header">
       <ng-content select="[card-header]" />
@@ -13,4 +13,3 @@
     </div>
   }
 </div>
-

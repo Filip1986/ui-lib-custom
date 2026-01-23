@@ -210,4 +210,54 @@
       </table>
     </div>
   </section>
+
+  <!-- Themed Layouts Section -->
+  <section class="demo-section">
+    <h2>Themed Layouts</h2>
+    <p>Layout primitives inherit CSS variables. Scoped <code>data-theme</code> shows light/dark surfaces.</p>
+
+    <div class="theme-grid">
+      <div class="theme-panel" data-theme="light">
+        <div class="panel-header">Light Theme</div>
+        <div class="panel-body">
+          <uilib-container size="md" [padding]="4" style="background: var(--uilib-surface, #fff);">
+            <uilib-stack [gap]="3">
+              <h4>Stack + Inline</h4>
+              <uilib-inline [gap]="2">
+                <span class="demo-tag">Item A</span>
+                <span class="demo-tag">Item B</span>
+                <span class="demo-tag">Item C</span>
+              </uilib-inline>
+              <uilib-grid [columns]="3" [gap]="2">
+                @for (i of [1,2,3]; track i) {
+                  <div class="demo-grid-cell">Cell {{ i }}</div>
+                }
+              </uilib-grid>
+            </uilib-stack>
+          </uilib-container>
+        </div>
+      </div>
+
+      <div class="theme-panel" data-theme="dark">
+        <div class="panel-header">Dark Theme</div>
+        <div class="panel-body">
+          <uilib-container size="md" [padding]="4" style="background: var(--uilib-surface, #1a1c1f);">
+            <uilib-stack [gap]="3">
+              <h4>Stack + Inline</h4>
+              <uilib-inline [gap]="2">
+                <span class="demo-tag">Item A</span>
+                <span class="demo-tag">Item B</span>
+                <span class="demo-tag">Item C</span>
+              </uilib-inline>
+              <uilib-grid [columns]="3" [gap]="2">
+                @for (i of [1,2,3]; track i) {
+                  <div class="demo-grid-cell">Cell {{ i }}</div>
+                }
+              </uilib-grid>
+            </uilib-stack>
+          </uilib-container>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

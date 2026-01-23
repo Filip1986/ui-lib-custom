@@ -288,6 +288,19 @@ ng build ui-components
 - Content-focused
 - Perfect for: Blogs, content sites, minimal UIs
 
+## Theming (light/dark)
+
+1. Import the library theme variables once (e.g., in your global styles):
+   ```scss
+   @import 'ui-lib-custom/themes/themes.css';
+   ```
+2. Toggle themes by setting `data-theme="light" | "dark"` on `html` or any container. Example:
+   ```typescript
+   // in your root component
+   document.documentElement.setAttribute('data-theme', 'dark');
+   ```
+3. Components read CSS variables; override `--uilib-*` tokens in your own theme file for branding.
+
 ## Next Steps
 
 1. ✅ **Test the demo** - Open http://localhost:4200

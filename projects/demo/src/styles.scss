@@ -1,5 +1,7 @@
 /* Global SCSS Styles */
 
+@import '../ui-lib-custom/src/lib/themes/themes.css';
+
 // SCSS Variables
 $font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -21,5 +23,6 @@ html, body {
 body {
   margin: 0;
   font-family: $font-family-base;
+  background: var(--uilib-page-bg, var(--uilib-color-neutral-50, #f5f5f5));
+  color: var(--uilib-page-fg, var(--uilib-color-neutral-900, #1f2933));
 }
-

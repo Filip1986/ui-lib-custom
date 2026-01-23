@@ -1,5 +1,9 @@
 <div class="layout-wrapper">
-  <app-topbar (menuButtonClick)="toggleSidebar()"></app-topbar>
+  <app-topbar
+    (menuButtonClick)="toggleSidebar()"
+    (themeToggle)="toggleTheme()"
+    [theme]="theme()"
+  ></app-topbar>
 
   <div class="layout-container">
     <app-sidebar [class.mobile-visible]="sidebarVisible()"></app-sidebar>
@@ -13,4 +17,3 @@
 @if (sidebarVisible()) {
   <div class="layout-mask" (click)="toggleSidebar()"></div>
 }
-

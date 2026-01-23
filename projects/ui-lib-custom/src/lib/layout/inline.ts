@@ -1,6 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { SPACING_TOKENS, SpacingToken } from '../design-tokens';
 
+const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+
 export type InlineAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
 export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around';
 
@@ -47,5 +49,5 @@ export class Inline {
   });
 
   /** Computed gap value from token */
-  protected _gapValue = computed(() => SPACING_TOKENS[this.gap()]);
+  protected _gapValue = computed(() => spacingVar(this.gap()));
 }
