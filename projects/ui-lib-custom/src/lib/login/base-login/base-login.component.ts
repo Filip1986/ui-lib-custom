@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, input, output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginFeatures, LoginFormData } from '../models/login-contract';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,38 +11,39 @@ import { CommonModule } from '@angular/common';
     CommonModule
 ],
   template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseLoginComponent implements OnInit {
   private static readonly REMEMBER_ME_KEY = 'remember_me_preference';
 
-  @Input() title = 'Sign In';
+  title = input<string>('Sign In');
 
   /**
    * Login features configuration
    */
-  @Input() features: LoginFeatures = {
+  features = input<LoginFeatures>({
     showSocialLogin: true,
     showRememberMe: true,
     showForgotPassword: true,
     showRegisterLink: true,
-  };
+  });
 
   /**
    * Loading state for the login button
    */
-  @Input() loading = false;
+  loading = input<boolean>(false);
 
   // Output events
-  @Output() submitLogin: EventEmitter<LoginFormData> = new EventEmitter<LoginFormData>();
-  @Output() registerClick: EventEmitter<void> = new EventEmitter<void>();
-  @Output() forgotPasswordClick: EventEmitter<string> = new EventEmitter<string>();
-  @Output() socialLoginClick: EventEmitter<string> = new EventEmitter<string>();
-  @Output() rememberMeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  submitLogin = output<LoginFormData>();
+  registerClick = output<void>();
+  forgotPasswordClick = output<string>();
+  socialLoginClick = output<string>();
+  rememberMeChange = output<boolean>();
 
-  // Form and state
+  // Form and state as signals
   loginForm: FormGroup;
-  submitted = false;
-  rememberMe = false;
+  submitted = signal(false);
+  rememberMe = signal(false);
 
 
   constructor(
@@ -78,7 +79,7 @@ export class BaseLoginComponent implements OnInit {
    * Handle form submission
    */
   onSubmit(): void {
-    this.submitted = true;
+    this.submitted.set(true);
 
     if (this.loginForm.invalid) {
       return;
@@ -124,7 +125,7 @@ export class BaseLoginComponent implements OnInit {
     return this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      rememberMe: [this.rememberMe],
+      rememberMe: [this.rememberMe()],
     });
   }
 
@@ -133,7 +134,7 @@ export class BaseLoginComponent implements OnInit {
    */
   private initializeRememberMe(): void {
     const rememberMePreference: boolean = this.getRememberMePreference();
-    this.rememberMe = rememberMePreference;
+    this.rememberMe.set(rememberMePreference);
     this.loginForm.patchValue({ rememberMe: rememberMePreference });
   }
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { LoginFactoryComponent } from './login-factory.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginVariant } from '../models/login-contract';
@@ -10,6 +11,7 @@ describe('LoginFactoryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LoginFactoryComponent, ReactiveFormsModule],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginFactoryComponent);
@@ -22,21 +24,21 @@ describe('LoginFactoryComponent', () => {
   });
 
   it('should render Login1Component for variant "1"', () => {
-    component.variant = '1';
+    fixture.componentRef.setInput('variant', '1');
     fixture.detectChanges();
     const login1Element = fixture.nativeElement.querySelector('lib-login-1');
     expect(login1Element).toBeTruthy();
   });
 
   it('should render Login3Component for variant "2"', () => {
-    component.variant = '2';
+    fixture.componentRef.setInput('variant', '2');
     fixture.detectChanges();
     const login3Element = fixture.nativeElement.querySelector('lib-login-3');
     expect(login3Element).toBeTruthy();
   });
 
   it('should render Login2Component for default variant', () => {
-    component.variant = 'unknown' as LoginVariant;
+    fixture.componentRef.setInput('variant', 'unknown' as LoginVariant);
     fixture.detectChanges();
     const login2Element = fixture.nativeElement.querySelector('lib-login-2');
     expect(login2Element).toBeTruthy();

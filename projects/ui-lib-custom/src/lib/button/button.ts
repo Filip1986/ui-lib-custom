@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
@@ -10,15 +10,16 @@ export type ButtonColor = 'primary' | 'secondary' | 'success' | 'danger' | 'warn
   imports: [CommonModule],
   templateUrl: './button.html',
   styleUrl: './button.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Button {
-  @Input() variant: ButtonVariant = 'material';
-  @Input() size: ButtonSize = 'medium';
-  @Input() color: ButtonColor = 'primary';
-  @Input() disabled: boolean = false;
-  @Input() fullWidth: boolean = false;
+  variant = input<ButtonVariant>('material');
+  size = input<ButtonSize>('medium');
+  color = input<ButtonColor>('primary');
+  disabled = input<boolean>(false);
+  fullWidth = input<boolean>(false);
 
-  get buttonClasses(): string {
-    return `btn btn-${this.variant} btn-${this.size} btn-${this.color} ${this.fullWidth ? 'btn-full-width' : ''} ${this.disabled ? 'btn-disabled' : ''}`;
-  }
+  buttonClasses = computed(() =>
+    `btn btn-${this.variant()} btn-${this.size()} btn-${this.color()} ${this.fullWidth() ? 'btn-full-width' : ''} ${this.disabled() ? 'btn-disabled' : ''}`
+  );
 }

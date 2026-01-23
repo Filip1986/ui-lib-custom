@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginFeatures, LoginFormData, LoginVariant } from '../models/login-contract';
@@ -18,23 +18,24 @@ import { Login2Component } from '../login-2/login-2.component';
 ],
   templateUrl: './login-factory.component.html',
   styleUrl: './login-factory.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFactoryComponent {
-  @Input() title = 'Sign In';
-  @Input() variant: LoginVariant = '1';
-  @Input() loading = false;
-  @Input() features: LoginFeatures = {
+  title = input<string>('Sign In');
+  variant = input<LoginVariant>('1');
+  loading = input<boolean>(false);
+  features = input<LoginFeatures>({
     showSocialLogin: true,
     showRememberMe: true,
     showForgotPassword: true,
     showRegisterLink: true,
-  };
+  });
 
-  @Output() submitLogin: EventEmitter<LoginFormData> = new EventEmitter<LoginFormData>();
-  @Output() registerClick: EventEmitter<void> = new EventEmitter<void>();
-  @Output() forgotPasswordClick: EventEmitter<string> = new EventEmitter<string>();
-  @Output() socialLoginClick: EventEmitter<string> = new EventEmitter<string>();
-  @Output() rememberMeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  submitLogin = output<LoginFormData>();
+  registerClick = output<void>();
+  forgotPasswordClick = output<string>();
+  socialLoginClick = output<string>();
+  rememberMeChange = output<boolean>();
 
   onSubmitLogin(data: LoginFormData): void {
     this.submitLogin.emit(data);

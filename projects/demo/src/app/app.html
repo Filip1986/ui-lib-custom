@@ -2,7 +2,7 @@
   <app-topbar (menuButtonClick)="toggleSidebar()"></app-topbar>
 
   <div class="layout-container">
-    <app-sidebar [class.mobile-visible]="sidebarVisible"></app-sidebar>
+    <app-sidebar [class.mobile-visible]="sidebarVisible()"></app-sidebar>
 
     <div class="layout-content">
       <router-outlet></router-outlet>
@@ -10,7 +10,7 @@
   </div>
 </div>
 
-@if (sidebarVisible) {
+@if (sidebarVisible()) {
   <div class="layout-mask" (click)="toggleSidebar()"></div>
 }
 

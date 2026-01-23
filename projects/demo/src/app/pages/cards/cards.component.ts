@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
@@ -7,7 +7,8 @@ import { Button } from 'ui-lib-custom';
   selector: 'app-cards',
   imports: [CommonModule, Card, Button],
   templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss'
+  styleUrl: './cards.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsComponent {
 }

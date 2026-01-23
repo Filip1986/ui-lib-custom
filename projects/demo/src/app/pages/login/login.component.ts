@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Login1Component, Login2Component, Login3Component, LoginFormData } from 'ui-lib-custom';
 
@@ -16,41 +16,38 @@ interface LoginVariant {
   selector: 'app-login',
   imports: [CommonModule, Login1Component, Login2Component, Login3Component],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  loginLoading = false;
-  activeVariant = 'variant1';
-  copiedStates: { [key: string]: boolean } = {};
+  loginLoading = signal(false);
+  activeVariant = signal('variant1');
+  copiedStates = signal<{ [key: string]: boolean }>({});
 
   eventHandlersCode = `onLogin(data: LoginFormData) {
   console.log('Login attempt:', data);
-  this.loginLoading = true;
+  this.loginLoading.set(true);
 
   // Simulate API call
   setTimeout(() => {
-    this.loginLoading = false;
+    this.loginLoading.set(false);
     alert(\`Login successful!\\nUsername: \${data.username}\`);
   }, 2000);
 }
 
 onRegister() {
-  // Navigate to registration page or show registration modal
   console.log('Register clicked');
 }
 
 onForgotPassword(username: string) {
-  // Handle password reset flow
   console.log(\`Password reset requested for: \${username}\`);
 }
 
 onSocialLogin(provider: string) {
-  // Handle social authentication
   console.log(\`Social login with: \${provider}\`);
 }
 
 onRememberMeChange(checked: boolean) {
-  // Store remember me preference
   console.log('Remember me:', checked);
 }`;
 
@@ -152,19 +149,19 @@ export class ExampleComponent { }`,
   ];
 
   selectVariant(variantId: string) {
-    this.activeVariant = variantId;
+    this.activeVariant.set(variantId);
   }
 
   getActiveVariant(): LoginVariant {
-    return this.variants.find(v => v.id === this.activeVariant) || this.variants[0];
+    return this.variants.find(v => v.id === this.activeVariant()) || this.variants[0];
   }
 
   async copyToClipboard(text: string, key: string) {
     try {
       await navigator.clipboard.writeText(text);
-      this.copiedStates[key] = true;
+      this.copiedStates.update(s => ({ ...s, [key]: true }));
       setTimeout(() => {
-        this.copiedStates[key] = false;
+        this.copiedStates.update(s => ({ ...s, [key]: false }));
       }, 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
@@ -172,15 +169,15 @@ export class ExampleComponent { }`,
   }
 
   isCopied(key: string): boolean {
-    return this.copiedStates[key] || false;
+    return this.copiedStates()[key] || false;
   }
 
   onLogin(data: LoginFormData) {
     console.log('Login attempt:', data);
-    this.loginLoading = true;
+    this.loginLoading.set(true);
 
     setTimeout(() => {
-      this.loginLoading = false;
+      this.loginLoading.set(false);
       alert(`Login successful!\nUsername: ${data.username}`);
     }, 2000);
   }

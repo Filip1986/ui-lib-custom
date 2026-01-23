@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Badge, Stack, Inline } from '../../../../../ui-lib-custom/src/public-api';
 
 @Component({
@@ -7,5 +7,6 @@ import { Badge, Stack, Inline } from '../../../../../ui-lib-custom/src/public-ap
   imports: [Badge, Stack, Inline],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgesComponent {}

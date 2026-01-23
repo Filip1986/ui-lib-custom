@@ -40,7 +40,7 @@
     <div class="p-8 md:w-3/5" data-testid="login-3-right-panel">
       <div class="text-center md:text-left mb-8" data-testid="login-3-header">
         <h2 class="text-2xl font-bold text-gray-800" data-testid="login-3-form-title">
-          {{ title }}
+          {{ title() }}
         </h2>
         <p class="text-gray-600 mt-1" data-testid="login-3-form-subtitle">Access your account</p>
       </div>
@@ -67,7 +67,7 @@
               />
             </div>
           </div>
-          @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted)) {
+          @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted())) {
             <small class="text-red-500 block mt-1" data-testid="login-3-username-error">
               Please enter a valid username or email address
             </small>
@@ -89,12 +89,12 @@
               />
             </div>
           </div>
-          @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted)) {
+          @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted())) {
             <small class="text-red-500 block mt-1" data-testid="login-3-password-error">
               Password is required
             </small>
           }
-          @if (features.showForgotPassword) {
+          @if (features().showForgotPassword) {
             <a
               (click)="onForgotPassword()"
               (keydown.enter)="onForgotPassword()"
@@ -108,7 +108,7 @@
         </div>
 
         <!-- Remember Me option -->
-        @if (features.showRememberMe) {
+        @if (features().showRememberMe) {
           <div
             class="flex items-center"
             data-testid="login-3-remember-me-section"
@@ -134,12 +134,12 @@
         <!-- Submit button -->
         <button
           type="submit"
-          [disabled]="loading"
+          [disabled]="loading()"
           aria-label="Sign In"
           class="w-full p-3 text-center btn btn-primary"
           data-testid="login-3-submit-button"
         >
-          @if (loading) {
+          @if (loading()) {
             <span class="spinner"></span>
           }
           <span class="icon">➜</span>
@@ -147,7 +147,7 @@
         </button>
 
         <!-- Register link -->
-        @if (features.showRegisterLink) {
+        @if (features().showRegisterLink) {
           <div
             class="text-center text-sm text-gray-600"
             data-testid="login-3-register-section"
@@ -166,7 +166,7 @@
         }
 
         <!-- Social login section -->
-        @if (features.showSocialLogin) {
+        @if (features().showSocialLogin) {
           <div data-testid="login-3-social-login-section">
             <div class="divider">
               <span class="text-xs text-gray-500">OR CONTINUE WITH</span>

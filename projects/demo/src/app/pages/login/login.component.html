@@ -12,7 +12,7 @@
     @for (variant of variants; track variant.id) {
       <button
         class="variant-tab"
-        [class.active]="activeVariant === variant.id"
+        [class.active]="activeVariant() === variant.id"
         (click)="selectVariant(variant.id)">
         {{ variant.title.split(' - ')[1] }}
       </button>
@@ -35,7 +35,7 @@
           @switch (variant.id) {
             @case ('variant1') {
               <lib-login-1
-                [loading]="loginLoading"
+                [loading]="loginLoading()"
                 (submitLogin)="onLogin($any($event))"
                 (registerClick)="onRegister()"
                 (forgotPasswordClick)="onForgotPassword($any($event))"
@@ -45,7 +45,7 @@
             }
             @case ('variant2') {
               <lib-login-2
-                [loading]="loginLoading"
+                [loading]="loginLoading()"
                 (submitLogin)="onLogin($any($event))"
                 (registerClick)="onRegister()"
                 (forgotPasswordClick)="onForgotPassword($any($event))"
@@ -55,7 +55,7 @@
             }
             @case ('variant3') {
               <lib-login-3
-                [loading]="loginLoading"
+                [loading]="loginLoading()"
                 (submitLogin)="onLogin($any($event))"
                 (registerClick)="onRegister()"
                 (forgotPasswordClick)="onForgotPassword($any($event))"

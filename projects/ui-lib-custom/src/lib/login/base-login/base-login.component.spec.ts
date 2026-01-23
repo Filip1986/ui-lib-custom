@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { BaseLoginComponent } from './base-login.component';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('BaseLoginComponent', () => {
   let component: BaseLoginComponent;
@@ -9,7 +10,7 @@ describe('BaseLoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, BaseLoginComponent],
-      providers: [FormBuilder],
+      providers: [FormBuilder, provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BaseLoginComponent);
@@ -36,7 +37,7 @@ describe('BaseLoginComponent', () => {
     it('should initialize rememberMe from localStorage', () => {
       localStorage.setItem('remember_me_preference', 'true');
       component.ngOnInit();
-      expect(component.rememberMe).toBe(true);
+      expect(component.rememberMe()).toBe(true);
       expect(component.loginForm.get('rememberMe')?.value).toBe(true);
     });
   });
@@ -68,7 +69,7 @@ describe('BaseLoginComponent', () => {
 
       component.onSubmit();
 
-      expect(component.submitted).toBe(true);
+      expect(component.submitted()).toBe(true);
       expect(component.submitLogin.emit).not.toHaveBeenCalled();
     });
 

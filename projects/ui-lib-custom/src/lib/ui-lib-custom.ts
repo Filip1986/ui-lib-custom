@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'uilib-ui-lib-custom',
@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
     </p>
   `,
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UiLibCustom {
 

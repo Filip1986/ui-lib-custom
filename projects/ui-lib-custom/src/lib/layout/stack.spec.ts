@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { Stack } from './stack';
 import { Component } from '@angular/core';
 
@@ -21,58 +22,59 @@ class TestHostComponent {
 }
 
 describe('Stack', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
-  let stackElement: HTMLElement;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
-
-    fixture = TestBed.createComponent(TestHostComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    stackElement = fixture.nativeElement.querySelector('uilib-stack');
   });
 
+  function bootstrap(initial?: Partial<TestHostComponent>) {
+    const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
+    const component = fixture.componentInstance;
+    Object.assign(component, initial);
+    fixture.detectChanges();
+    const stackElement: HTMLElement = fixture.nativeElement.querySelector('uilib-stack');
+    return { fixture, component, stackElement };
+  }
+
   it('should create', () => {
+    const { stackElement } = bootstrap();
     expect(stackElement).toBeTruthy();
   });
 
   it('should render vertical stack by default', () => {
+    const { stackElement } = bootstrap();
     expect(stackElement.style.flexDirection).toBe('column');
   });
 
   it('should render horizontal stack when direction is horizontal', () => {
-    component.direction = 'horizontal';
-    fixture.detectChanges();
+    const { stackElement } = bootstrap({ direction: 'horizontal' });
     expect(stackElement.style.flexDirection).toBe('row');
   });
 
   it('should apply gap from design tokens', () => {
+    const { stackElement } = bootstrap();
     expect(stackElement.style.gap).toBe('1rem'); // gap 4 = 1rem
   });
 
   it('should apply different gap tokens', () => {
-    component.gap = 2;
-    fixture.detectChanges();
+    const { stackElement } = bootstrap({ gap: 2 });
     expect(stackElement.style.gap).toBe('0.5rem'); // gap 2 = 0.5rem
   });
 
   it('should apply align-items', () => {
-    component.align = 'center';
-    fixture.detectChanges();
+    const { stackElement } = bootstrap({ align: 'center' });
     expect(stackElement.style.alignItems).toBe('center');
   });
 
   it('should apply justify-content', () => {
-    component.justify = 'center';
-    fixture.detectChanges();
+    const { stackElement } = bootstrap({ justify: 'center' });
     expect(stackElement.style.justifyContent).toBe('center');
   });
 
   it('should project content', () => {
+    const { stackElement } = bootstrap();
     const items = stackElement.querySelectorAll('div');
     expect(items.length).toBe(3);
     expect(items[0].textContent).toBe('Item 1');

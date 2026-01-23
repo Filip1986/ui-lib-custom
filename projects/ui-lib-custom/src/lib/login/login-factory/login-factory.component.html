@@ -1,5 +1,4 @@
-
-@switch (variant) {
+@switch (variant()) {
   @case ('1') {
     <lib-login-1
       (forgotPasswordClick)="onForgotPasswordClick($event)"
@@ -7,9 +6,9 @@
       (rememberMeChange)="onRememberMeChange($event)"
       (socialLoginClick)="onSocialLoginClick($event)"
       (submitLogin)="onSubmitLogin($event)"
-      [features]="features"
-      [loading]="loading"
-      [title]="title"
+      [features]="features()"
+      [loading]="loading()"
+      [title]="title()"
       />
   }
   @case ('2') {
@@ -19,9 +18,9 @@
       (rememberMeChange)="onRememberMeChange($event)"
       (socialLoginClick)="onSocialLoginClick($event)"
       (submitLogin)="onSubmitLogin($event)"
-      [features]="features"
-      [loading]="loading"
-      [title]="title"
+      [features]="features()"
+      [loading]="loading()"
+      [title]="title()"
       />
   }
   @default {
@@ -31,9 +30,9 @@
       (rememberMeChange)="onRememberMeChange($event)"
       (socialLoginClick)="onSocialLoginClick($event)"
       (submitLogin)="onSubmitLogin($event)"
-      [features]="features"
-      [loading]="loading"
-      [title]="title"
+      [features]="features()"
+      [loading]="loading()"
+      [title]="title()"
       />
   }
 }

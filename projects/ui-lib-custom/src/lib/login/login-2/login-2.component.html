@@ -4,7 +4,7 @@
   >
   <div class="login-2-form-container mx-auto w-full max-w-sm" data-testid="login-2-form-container">
     <div class="text-center mb-8" data-testid="login-2-header">
-      <h1 class="text-3xl font-bold" data-testid="login-2-title">{{ title }}</h1>
+      <h1 class="text-3xl font-bold" data-testid="login-2-title">{{ title() }}</h1>
       <p class="text-gray-600 mt-2" data-testid="login-2-subtitle">
         Enter your credentials to continue
       </p>
@@ -23,7 +23,6 @@
           <input
             id="username"
             type="text"
-            pInputText
             formControlName="username"
             placeholder="Enter your username or email"
             class="w-full"
@@ -31,7 +30,7 @@
             [autofocus]="true"
           />
         </span>
-        @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted)) {
+        @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted())) {
           <small class="text-red-500 block mt-1" data-testid="login-2-username-error">
             Username is required
           </small>
@@ -51,7 +50,7 @@
             data-testid="login-2-password-input"
           />
         </div>
-        @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted)) {
+        @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted())) {
           <small class="text-red-500 block mt-1" data-testid="login-2-password-error">
             Password is required
           </small>
@@ -63,7 +62,7 @@
         class="flex justify-between items-center text-sm"
         data-testid="login-2-remember-forgot-section"
         >
-        @if (features.showRememberMe) {
+        @if (features().showRememberMe) {
           <div
             class="flex items-center"
             data-testid="login-2-remember-me-section"
@@ -86,7 +85,7 @@
           </div>
         }
 
-        @if (features.showForgotPassword) {
+        @if (features().showForgotPassword) {
           <a
             (click)="onForgotPassword()"
             (keydown.enter)="onForgotPassword()"
@@ -102,19 +101,19 @@
       <!-- Sign in button -->
       <button
         type="submit"
-        [disabled]="loading"
+        [disabled]="loading()"
         aria-label="Sign In"
         class="w-full mt-4 btn btn-primary"
         data-testid="login-2-submit-button"
       >
-        @if (loading) {
+        @if (loading()) {
           <span class="spinner"></span>
         }
         Sign In
       </button>
 
       <!-- Register link -->
-      @if (features.showRegisterLink) {
+      @if (features().showRegisterLink) {
         <div
           class="text-center text-sm mt-4"
           data-testid="login-2-register-section"
@@ -133,7 +132,7 @@
       }
 
       <!-- Social Login -->
-      @if (features.showSocialLogin) {
+      @if (features().showSocialLogin) {
         <div data-testid="login-2-social-login-section">
           <div class="relative my-6" data-testid="login-2-social-divider">
             <div class="absolute inset-0 flex items-center">

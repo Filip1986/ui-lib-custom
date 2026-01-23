@@ -2,7 +2,7 @@
   <div class="sidebar-content">
     <nav class="sidebar-nav">
       <ul class="nav-list">
-        @for (item of menuItems; track item.label) {
+        @for (item of menuItems(); track item.label) {
           <li class="nav-item" [class.has-children]="item.items">
             @if (item.items) {
               <div class="nav-link nav-header" (click)="toggleSection(item)">

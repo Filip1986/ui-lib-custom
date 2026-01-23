@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -15,10 +15,11 @@ export interface NavItem {
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  menuItems: NavItem[] = [
+  menuItems = signal<NavItem[]>([
     {
       label: 'Getting Started',
       icon: 'pi pi-home',
@@ -80,9 +81,17 @@ export class SidebarComponent {
         }
       ]
     }
-  ];
+  ]);
 
   toggleSection(item: NavItem) {
-    item.expanded = !item.expanded;
+    this.menuItems.update(items =>
+      items.map(it =>
+        it === item
+          ? { ...it, expanded: !it.expanded }
+          : it.items?.includes(item)
+            ? { ...it, items: it.items?.map(sub => sub === item ? { ...sub, expanded: !sub.expanded } : sub) }
+            : it
+      )
+    );
   }
 }

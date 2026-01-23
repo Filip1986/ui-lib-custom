@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { Badge } from './badge';
 import { Component } from '@angular/core';
 
@@ -26,44 +27,46 @@ class TestHostComponent {
 }
 
 describe('Badge', () => {
-  let component: TestHostComponent;
-  let fixture: ComponentFixture<TestHostComponent>;
-  let badgeElement: HTMLElement;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
-
-    fixture = TestBed.createComponent(TestHostComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    badgeElement = fixture.nativeElement.querySelector('uilib-badge');
   });
 
+  function bootstrap(initial?: Partial<TestHostComponent>) {
+    const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
+    const component = fixture.componentInstance;
+    Object.assign(component, initial);
+    fixture.detectChanges();
+    const badgeElement: HTMLElement = fixture.nativeElement.querySelector('uilib-badge');
+    return { fixture, component, badgeElement };
+  }
+
   it('should create', () => {
+    const { badgeElement } = bootstrap();
     expect(badgeElement).toBeTruthy();
   });
 
   it('should render as inline-flex', () => {
+    const { badgeElement } = bootstrap();
     expect(badgeElement.style.display).toBe('inline-flex');
   });
 
   it('should render solid variant by default', () => {
+    const { badgeElement } = bootstrap();
     expect(badgeElement.style.backgroundColor).toBeTruthy();
     expect(badgeElement.style.border).toBe('none');
   });
 
   it('should render outline variant', () => {
-    component.variant = 'outline';
-    fixture.detectChanges();
+    const { badgeElement } = bootstrap({ variant: 'outline' });
     expect(badgeElement.style.backgroundColor).toBe('transparent');
     expect(badgeElement.style.border).toContain('1px solid');
   });
 
   it('should render subtle variant', () => {
-    component.variant = 'subtle';
-    fixture.detectChanges();
+    const { badgeElement } = bootstrap({ variant: 'subtle' });
     expect(badgeElement.style.backgroundColor).toBeTruthy();
     expect(badgeElement.style.backgroundColor).not.toBe('transparent');
   });
@@ -71,54 +74,42 @@ describe('Badge', () => {
   it('should apply different colors', () => {
     const colors = ['primary', 'success', 'danger', 'warning', 'info'];
     colors.forEach(color => {
-      component.color = color as any;
-      fixture.detectChanges();
+      const { badgeElement } = bootstrap({ color: color as any });
       expect(badgeElement.style.backgroundColor).toBeTruthy();
     });
   });
 
   it('should apply different sizes', () => {
-    const initialFontSize = badgeElement.style.fontSize;
+    const { badgeElement: small } = bootstrap({ size: 'sm' });
+    const { badgeElement: large } = bootstrap({ size: 'lg' });
 
-    component.size = 'sm';
-    fixture.detectChanges();
-    const smallFontSize = badgeElement.style.fontSize;
-
-    component.size = 'lg';
-    fixture.detectChanges();
-    const largeFontSize = badgeElement.style.fontSize;
-
-    expect(smallFontSize).toBeTruthy();
-    expect(largeFontSize).toBeTruthy();
+    expect(small.style.fontSize).toBeTruthy();
+    expect(large.style.fontSize).toBeTruthy();
   });
 
   it('should render as pill when pill is true', () => {
-    component.pill = true;
-    fixture.detectChanges();
+    const { badgeElement } = bootstrap({ pill: true });
     expect(badgeElement.style.borderRadius).toBe('9999px');
   });
 
   it('should render as dot when dot is true', () => {
-    component.dot = true;
-    component.content = '';
-    fixture.detectChanges();
+    const { badgeElement } = bootstrap({ dot: true, content: '' });
     expect(badgeElement.style.borderRadius).toBe('9999px');
     expect(badgeElement.style.minWidth).toBeTruthy();
   });
 
   it('should project content', () => {
+    const { badgeElement } = bootstrap();
     expect(badgeElement.textContent?.trim()).toBe('Badge');
   });
 
   it('should apply white text color for solid variant', () => {
-    component.variant = 'solid';
-    fixture.detectChanges();
+    const { badgeElement } = bootstrap({ variant: 'solid' });
     expect(badgeElement.style.color).toContain('rgb(255, 255, 255)');
   });
 
   it('should apply colored text for outline variant', () => {
-    component.variant = 'outline';
-    fixture.detectChanges();
+    const { badgeElement } = bootstrap({ variant: 'outline' });
     expect(badgeElement.style.color).toBeTruthy();
     expect(badgeElement.style.color).not.toContain('rgb(255, 255, 255)');
   });

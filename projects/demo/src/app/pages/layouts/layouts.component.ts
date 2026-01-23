@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Stack, Inline, Grid, Container } from '../../../../../ui-lib-custom/src/public-api';
 
 @Component({
@@ -7,5 +7,6 @@ import { Stack, Inline, Grid, Container } from '../../../../../ui-lib-custom/src
   imports: [Stack, Inline, Grid, Container],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutsComponent {}
