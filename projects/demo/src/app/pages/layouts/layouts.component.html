@@ -1,0 +1,213 @@
+<div class="doc-page">
+  <h1>Layout Primitives</h1>
+  <p class="lead">
+    Performance-first layout components using Signals, OnPush change detection, and design tokens.
+    Each component renders a single element with zero runtime overhead.
+  </p>
+
+  <!-- Stack Section -->
+  <section class="demo-section">
+    <h2>Stack</h2>
+    <p>A flexible vertical or horizontal layout primitive with configurable gap and alignment.</p>
+
+    <h3>Vertical Stack (Default)</h3>
+    <div class="demo-container">
+      <uilib-stack [gap]="4">
+        <div class="demo-box">Item 1</div>
+        <div class="demo-box">Item 2</div>
+        <div class="demo-box">Item 3</div>
+      </uilib-stack>
+    </div>
+
+    <h3>Horizontal Stack</h3>
+    <div class="demo-container">
+      <uilib-stack direction="horizontal" [gap]="4">
+        <div class="demo-box">Item 1</div>
+        <div class="demo-box">Item 2</div>
+        <div class="demo-box">Item 3</div>
+      </uilib-stack>
+    </div>
+
+    <h3>Centered Stack</h3>
+    <div class="demo-container">
+      <uilib-stack [gap]="3" align="center" justify="center" style="min-height: 200px;">
+        <div class="demo-box">Centered Item 1</div>
+        <div class="demo-box">Centered Item 2</div>
+      </uilib-stack>
+    </div>
+
+    <h3>Space Between</h3>
+    <div class="demo-container">
+      <uilib-stack direction="horizontal" justify="space-between" style="width: 100%;">
+        <div class="demo-box">Left</div>
+        <div class="demo-box">Center</div>
+        <div class="demo-box">Right</div>
+      </uilib-stack>
+    </div>
+  </section>
+
+  <!-- Inline Section -->
+  <section class="demo-section">
+    <h2>Inline</h2>
+    <p>An inline layout with wrapping, perfect for tags, chips, or button groups.</p>
+
+    <h3>Basic Inline</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="2">
+        <span class="demo-tag">JavaScript</span>
+        <span class="demo-tag">TypeScript</span>
+        <span class="demo-tag">Angular</span>
+        <span class="demo-tag">React</span>
+        <span class="demo-tag">Vue</span>
+        <span class="demo-tag">Svelte</span>
+        <span class="demo-tag">Node.js</span>
+        <span class="demo-tag">Python</span>
+      </uilib-inline>
+    </div>
+
+    <h3>Centered Inline</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="3" justify="center">
+        <span class="demo-tag">Tag 1</span>
+        <span class="demo-tag">Tag 2</span>
+        <span class="demo-tag">Tag 3</span>
+      </uilib-inline>
+    </div>
+  </section>
+
+  <!-- Grid Section -->
+  <section class="demo-section">
+    <h2>Grid</h2>
+    <p>A CSS Grid layout primitive with configurable columns and responsive behavior.</p>
+
+    <h3>12 Column Grid</h3>
+    <div class="demo-container">
+      <uilib-grid [columns]="12" [gap]="2">
+        @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
+          <div class="demo-grid-cell">{{ i }}</div>
+        }
+      </uilib-grid>
+    </div>
+
+    <h3>4 Column Grid</h3>
+    <div class="demo-container">
+      <uilib-grid [columns]="4" [gap]="4">
+        @for (i of [1,2,3,4,5,6,7,8]; track i) {
+          <div class="demo-grid-cell">Cell {{ i }}</div>
+        }
+      </uilib-grid>
+    </div>
+
+    <h3>Responsive Grid (auto-fit)</h3>
+    <p>Resize the window to see this grid adapt.</p>
+    <div class="demo-container">
+      <uilib-grid [gap]="4" minColumnWidth="200px">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="demo-grid-cell large">Card {{ i }}</div>
+        }
+      </uilib-grid>
+    </div>
+  </section>
+
+  <!-- Container Section -->
+  <section class="demo-section">
+    <h2>Container</h2>
+    <p>A centered container with max-width constraints and padding.</p>
+
+    <h3>Small Container</h3>
+    <uilib-container size="sm" [padding]="4" style="background: #f5f5f5;">
+      <p>This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </uilib-container>
+
+    <h3>Medium Container</h3>
+    <uilib-container size="md" [padding]="6" style="background: #f5f5f5; margin-top: 1rem;">
+      <p>This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </uilib-container>
+
+    <h3>Large Container (Default)</h3>
+    <uilib-container size="lg" [padding]="8" style="background: #f5f5f5; margin-top: 1rem;">
+      <p>This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </uilib-container>
+  </section>
+
+  <!-- Composition Section -->
+  <section class="demo-section">
+    <h2>Composition</h2>
+    <p>Layout primitives can be composed together for complex layouts.</p>
+
+    <div class="demo-container">
+      <uilib-container size="lg" [padding]="6">
+        <uilib-stack [gap]="6">
+          <h3>Dashboard Layout</h3>
+
+          <uilib-grid [columns]="3" [gap]="4">
+            <div class="demo-card">
+              <uilib-stack [gap]="3">
+                <h4>Card 1</h4>
+                <p>Content goes here</p>
+                <uilib-inline [gap]="2">
+                  <span class="demo-tag">Tag 1</span>
+                  <span class="demo-tag">Tag 2</span>
+                </uilib-inline>
+              </uilib-stack>
+            </div>
+
+            <div class="demo-card">
+              <uilib-stack [gap]="3">
+                <h4>Card 2</h4>
+                <p>Content goes here</p>
+                <uilib-inline [gap]="2">
+                  <span class="demo-tag">Tag 3</span>
+                </uilib-inline>
+              </uilib-stack>
+            </div>
+
+            <div class="demo-card">
+              <uilib-stack [gap]="3">
+                <h4>Card 3</h4>
+                <p>Content goes here</p>
+                <uilib-inline [gap]="2">
+                  <span class="demo-tag">Tag 4</span>
+                  <span class="demo-tag">Tag 5</span>
+                  <span class="demo-tag">Tag 6</span>
+                </uilib-inline>
+              </uilib-stack>
+            </div>
+          </uilib-grid>
+        </uilib-stack>
+      </uilib-container>
+    </div>
+  </section>
+
+  <!-- API Reference -->
+  <section class="demo-section">
+    <h2>Design Tokens</h2>
+    <p>All spacing uses a consistent token system:</p>
+
+    <div class="token-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Value</th>
+            <th>Pixels</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>0</td><td>0px</td></tr>
+          <tr><td>1</td><td>0.25rem</td><td>4px</td></tr>
+          <tr><td>2</td><td>0.5rem</td><td>8px</td></tr>
+          <tr><td>3</td><td>0.75rem</td><td>12px</td></tr>
+          <tr><td>4</td><td>1rem</td><td>16px</td></tr>
+          <tr><td>5</td><td>1.25rem</td><td>20px</td></tr>
+          <tr><td>6</td><td>1.5rem</td><td>24px</td></tr>
+          <tr><td>8</td><td>2rem</td><td>32px</td></tr>
+          <tr><td>10</td><td>2.5rem</td><td>40px</td></tr>
+          <tr><td>12</td><td>3rem</td><td>48px</td></tr>
+          <tr><td>16</td><td>4rem</td><td>64px</td></tr>
+          <tr><td>20</td><td>5rem</td><td>80px</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

@@ -25,8 +25,20 @@ export class SidebarComponent {
       route: '/',
     },
     {
-      label: 'Components',
+      label: 'Layout',
       icon: 'pi pi-th-large',
+      expanded: true,
+      items: [
+        {
+          label: 'Layout Primitives',
+          icon: 'pi pi-circle',
+          route: '/layouts'
+        }
+      ]
+    },
+    {
+      label: 'Components',
+      icon: 'pi pi-box',
       expanded: true,
       items: [
         {

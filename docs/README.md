@@ -74,6 +74,19 @@ docs/
 
 **Technical documentation and API reference:**
 
+- **[Layout Primitives](reference/LAYOUT_PRIMITIVES.md)** - Complete layout system documentation
+  - Stack, Inline, Grid, Container APIs
+  - Design tokens reference
+  - Performance benefits
+  - Composition patterns
+  - Migration guides
+
+- **[Layout Implementation Details](reference/LAYOUT_IMPLEMENTATION.md)** - Implementation summary
+  - Architecture decisions
+  - Performance characteristics
+  - Test coverage
+  - Maintenance notes
+
 - **[Project Summary](reference/PROJECT_SUMMARY.md)** - Complete project overview
   - What was built
   - Component features
