@@ -114,10 +114,10 @@ More detailed explanation of the topic.
 
 Content here with examples:
 
-\`\`\`typescript
+```typescript
 // Code example
-import { Button } from 'ui-components';
-\`\`\`
+import { Button } from 'ui-lib-custom';
+```
 
 ## [Additional Sections]
 
@@ -133,7 +133,7 @@ Additional content...
 
 When adding a new component:
 
-1. **Create component folder** in `projects/ui-components/src/lib/`
+1. **Create component folder** in `projects/ui-lib-custom/src/lib/`
    ```
    new-component/
    ├── new-component.ts        # Component logic
@@ -142,7 +142,7 @@ When adding a new component:
    └── new-component.spec.ts   # Tests
    ```
 
-2. **Export from public API** in `projects/ui-components/src/public-api.ts`
+2. **Export from public API** in `projects/ui-lib-custom/src/public-api.ts`
    ```typescript
    export * from './lib/new-component/new-component';
    ```

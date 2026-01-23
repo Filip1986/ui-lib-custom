@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'uilib-ui-components',
+  selector: 'uilib-ui-lib-custom',
   imports: [],
   template: `
     <p>
-      ui-components works!
+      ui-lib-custom works!
     </p>
   `,
   styles: ``,
 })
-export class UiComponents {
+export class UiLibCustom {
 
 }

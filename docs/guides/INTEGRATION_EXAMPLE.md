@@ -1,6 +1,6 @@
 # Example: Using UI Components in Your Angular Project
 
-This is a complete example showing how to integrate the ui-components library into your Angular application.
+This is a complete example showing how to integrate the ui-lib-custom library into your Angular application.
 
 ## Step-by-Step Integration Example
 
@@ -14,7 +14,7 @@ npm link
 
 # In your Angular project
 cd /path/to/your/project
-npm link ui-components
+npm link ui-lib-custom
 ```
 
 #### Option B: Using local file path
@@ -25,7 +25,7 @@ In your project's `package.json`:
     "@angular/animations": "^20.0.0",
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0",
-    "ui-components": "file:../ui-lib-custom/dist/ui-components"
+    "ui-lib-custom": "file:../ui-lib-custom/dist/ui-components"
   }
 }
 ```
@@ -47,7 +47,7 @@ ng generate component pages/dashboard
 ```typescript
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 
 interface User {
   id: number;
@@ -479,7 +479,7 @@ Visit http://localhost:4200 and you'll see your dashboard using the UI component
 
 ## Key Takeaways
 
-1. **Import components** from 'ui-components'
+1. **Import components** from 'ui-lib-custom'
 2. **Add to imports array** in your component decorator
 3. **Use in templates** with the `uilib-` prefix
 4. **Customize** using input properties

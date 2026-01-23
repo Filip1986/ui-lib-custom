@@ -34,7 +34,7 @@ A versatile button component with multiple variants, sizes, and colors.
 #### Usage
 
 ```typescript
-import { Button } from 'ui-components';
+import { Button } from 'ui-lib-custom';
 
 @Component({
   imports: [Button],
@@ -67,7 +67,7 @@ A flexible card component with support for headers, footers, and different eleva
 #### Usage
 
 ```typescript
-import { Card } from 'ui-components';
+import { Card } from 'ui-lib-custom';
 
 @Component({
   imports: [Card],
@@ -101,20 +101,20 @@ export class YourComponent {}
 ## Installation
 
 ```bash
-npm install ui-components
+npm install ui-lib-custom
 ```
 
 ## Getting Started
 
 1. Install the package:
 ```bash
-npm install ui-components
+npm install ui-lib-custom
 ```
 
 2. Import the components in your Angular component:
 ```typescript
 import { Component } from '@angular/core';
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-root',

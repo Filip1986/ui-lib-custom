@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UiComponents } from './ui-components';
+import { UiLibCustom } from './ui-lib-custom';
 
-describe('UiComponents', () => {
-  let component: UiComponents;
-  let fixture: ComponentFixture<UiComponents>;
+describe('UiLibCustom', () => {
+  let component: UiLibCustom;
+  let fixture: ComponentFixture<UiLibCustom>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UiComponents]
+      imports: [UiLibCustom]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UiComponents);
+    fixture = TestBed.createComponent(UiLibCustom);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

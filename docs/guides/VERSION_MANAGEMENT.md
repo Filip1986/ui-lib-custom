@@ -4,8 +4,8 @@
 
 ### Where to Update Version Information
 
-**Always edit:** `projects/ui-components/package.json`  
-**Never edit:** `dist/ui-components/package.json` (auto-generated on build)
+**Always edit:** `projects/ui-lib-custom/package.json`  
+**Never edit:** `dist/ui-lib-custom/package.json` (auto-generated on build)
 
 ### Version Numbering (Semantic Versioning)
 
@@ -25,7 +25,7 @@ Examples:
 
 ### 1. Update Version in Source
 
-Edit `projects/ui-components/package.json`:
+Edit `projects/ui-lib-custom/package.json`:
 
 ```json
 {
@@ -39,13 +39,13 @@ Edit `projects/ui-components/package.json`:
 
 ```bash
 cd ui-lib-custom
-ng build ui-components
+ng build ui-lib-custom
 ```
 
 ### 3. Publish to npm
 
 ```bash
-cd dist/ui-components
+cd dist/ui-lib-custom
 npm publish --access public
 ```
 
@@ -87,7 +87,7 @@ Use npm version commands to automatically update version and create git tags:
 
 ```bash
 # From the root of ui-lib-custom project
-ng build ui-components
+ng build ui-lib-custom
 
 # Patch release (1.0.0 → 1.0.1)
 npm version patch
@@ -108,8 +108,8 @@ npm version 1.2.3
 Then build and publish:
 ```bash
 cd ../..
-ng build ui-components
-cd dist/ui-components
+ng build ui-lib-custom
+cd dist/ui-lib-custom
 npm publish --access public
 ```
 
@@ -117,11 +117,11 @@ npm publish --access public
 
 Before publishing a new version:
 
-- [ ] Update version in `projects/ui-components/package.json`
+- [ ] Update version in `projects/ui-lib-custom/package.json`
 - [ ] Update CHANGELOG.md with changes (if you have one)
-- [ ] Run tests: `ng test ui-components`
-- [ ] Build the library: `ng build ui-components`
-- [ ] Verify the build output in `dist/ui-components`
+- [ ] Run tests: `ng test ui-lib-custom`
+- [ ] Build the library: `ng build ui-lib-custom`
+- [ ] Verify the build output in `dist/ui-lib-custom`
 - [ ] Publish: `npm publish --access public`
 - [ ] Create git tag for the version
 - [ ] Push tag to repository
@@ -143,7 +143,7 @@ npm deprecate @filip86/ui-components@1.0.1 "This version has critical bugs. Plea
 
 ## Package Metadata Configuration
 
-All package metadata is configured in `projects/ui-components/package.json`:
+All package metadata is configured in `projects/ui-lib-custom/package.json`:
 
 ```json
 {

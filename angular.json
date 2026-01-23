@@ -5,18 +5,18 @@
   "projects": {
     "ui-lib-custom": {
       "projectType": "library",
-      "root": "projects/ui-components",
-      "sourceRoot": "projects/ui-components/src",
+      "root": "projects/ui-lib-custom",
+      "sourceRoot": "projects/ui-lib-custom/src",
       "prefix": "uilib",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
           "configurations": {
             "production": {
-              "tsConfig": "projects/ui-components/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ui-lib-custom/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ui-components/tsconfig.lib.json"
+              "tsConfig": "projects/ui-lib-custom/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -24,7 +24,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/ui-components/tsconfig.spec.json"
+            "tsConfig": "projects/ui-lib-custom/tsconfig.spec.json"
           }
         }
       }

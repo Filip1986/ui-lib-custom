@@ -12,10 +12,10 @@ Before running the demo application, you need to:
 
 2. **Build the UI components library first** (REQUIRED):
    ```bash
-   ng build ui-components
+   ng build ui-lib-custom
    ```
    
-   ⚠️ **Important**: You must build the library before running the demo app. The demo imports components from the built library in `dist/ui-components/`. Without building first, you'll get module import errors.
+   ⚠️ **Important**: You must build the library before running the demo app. The demo imports components from the built library in `dist/ui-lib-custom/`. Without building first, you'll get module import errors.
 
 3. **Start the demo application**:
    ```bash
@@ -31,7 +31,7 @@ Before running the demo application, you need to:
 ✅ **Angular UI Components Library** with:
 - Button component (3 design variants: Material, Bootstrap, Minimal)
 - Card component (3 design variants: Material, Bootstrap, Minimal)
-- Built library in `dist/ui-components/`
+- Built library in `dist/ui-lib-custom/`
 - Demo application ready to run
 
 ✅ **Demo Application** showcasing all components:
@@ -54,9 +54,9 @@ You'll see:
 ## Project Structure
 
 ```
-ui-lib2/
+ui-lib-custom/
 ├── projects/
-│   ├── ui-components/           # Your UI library
+│   ├── ui-lib-custom/           # Your UI library
 │   │   ├── src/
 │   │   │   ├── lib/
 │   │   │   │   ├── button/     # Button component
@@ -86,20 +86,20 @@ ui-lib2/
 
 **One-time setup in the library:**
 ```bash
-cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-lib-custom
 npm link
 ```
 
 **In any Angular project where you want to use it:**
 ```bash
 cd /path/to/your/angular/project
-npm link ui-components
+npm link ui-lib-custom
 ```
 
 **Use in your components:**
 ```typescript
 import { Component } from '@angular/core';
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-example',
@@ -124,7 +124,7 @@ In your project's `package.json`:
 ```json
 {
   "dependencies": {
-    "ui-components": "file:../ui-lib-custom/dist/ui-components"
+    "ui-lib-custom": "file:../ui-lib-custom/dist/ui-lib-custom"
   }
 }
 ```
@@ -139,27 +139,27 @@ npm install
 1. **Build the library:**
    ```bash
    cd D:\Work\Personal\Github\ui-lib-custom
-   ng build ui-components --configuration production
+   ng build ui-lib-custom --configuration production
    ```
 
-2. **Update package name in** `projects/ui-components/package.json`:
+2. **Update package name in** `projects/ui-lib-custom/package.json`:
    ```json
    {
-     "name": "@your-username/ui-components",
+     "name": "@your-username/ui-lib-custom",
      "version": "1.0.0"
    }
    ```
 
 3. **Publish:**
    ```bash
-   cd dist/ui-components
+   cd dist/ui-lib-custom
    npm login
    npm publish --access public
    ```
 
 4. **Install in other projects:**
    ```bash
-   npm install @your-username/ui-components
+   npm install @your-username/ui-lib-custom
    ```
 
 ## Component Examples
@@ -242,7 +242,7 @@ Press `Ctrl+C` in the terminal where it's running
 
 ## Making Changes to Components
 
-1. **Edit component files** in `projects/ui-components/src/lib/`
+1. **Edit component files** in `projects/ui-lib-custom/src/lib/`
 2. **Rebuild the library:**
    ```bash
    ng build ui-lib-custom
@@ -254,11 +254,11 @@ Press `Ctrl+C` in the terminal where it's running
 
 ### Generate a new component:
 ```bash
-ng generate component your-component --project=ui-components --export
+ng generate component your-component --project=ui-lib-custom --export
 ```
 
 ### Add it to the public API:
-Edit `projects/ui-components/src/public-api.ts`:
+Edit `projects/ui-lib-custom/src/public-api.ts`:
 ```typescript
 export * from './lib/your-component/your-component';
 ```

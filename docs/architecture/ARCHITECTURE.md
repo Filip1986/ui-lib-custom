@@ -33,11 +33,11 @@
     │ • TypeScript Types  │
     └─────────────────────┘
                 │
-                │ ng build ui-components
+                │ ng build ui-lib-custom
                 ▼
     ┌─────────────────────┐
     │   BUILT LIBRARY     │
-    │ (dist/ui-components)│
+    │ (dist/ui-lib-custom)│
     ├─────────────────────┤
     │ • ES Modules        │
     │ • Type Definitions  │
@@ -61,7 +61,7 @@
     │    YOUR ANGULAR PROJECTS           │
     │                                    │
     │  import { Button, Card }           │
-    │  from 'ui-components';             │
+    │  from 'ui-lib-custom';             │
     │                                    │
     │  <uilib-button>                    │
     │  <uilib-card>                      │
@@ -100,7 +100,7 @@ Button Component                    Card Component
 1. CREATE/EDIT COMPONENTS
    │
    ▼
-   projects/ui-components/src/lib/
+   projects/ui-lib-custom/src/lib/
    ├── button/
    │   ├── button.ts
    │   ├── button.html
@@ -113,17 +113,17 @@ Button Component                    Card Component
 2. EXPORT IN PUBLIC API
    │
    ▼
-   projects/ui-components/src/public-api.ts
+   projects/ui-lib-custom/src/public-api.ts
    export * from './lib/button/button';
    export * from './lib/card/card';
 
 3. BUILD LIBRARY
    │
    ▼
-   ng build ui-components [--watch]
+   ng build ui-lib-custom [--watch]
    │
    ▼
-   dist/ui-components/
+   dist/ui-lib-custom/
    ├── esm2022/
    ├── fesm2022/
    ├── index.d.ts
@@ -144,7 +144,7 @@ Button Component                    Card Component
    │
    ▼
    Your Angular Project:
-   import { Button, Card } from 'ui-components';
+   import { Button, Card } from 'ui-lib-custom';
    <uilib-button variant="material">Click</uilib-button>
 ```
 
@@ -269,16 +269,16 @@ CSS Classes Applied:
 ```
 app.ts (Your Component)
     │
-    ├─ import { Button, Card } from 'ui-components'
+    ├─ import { Button, Card } from 'ui-lib-custom'
     │                               │
     │                               ▼
-    │                    dist/ui-components/index.d.ts
+    │                    dist/ui-lib-custom/index.d.ts
     │                               │
     │                               ├─→ button.d.ts
     │                               └─→ card.d.ts
     │
     ├─ imports: [Button, Card]
-    │
+```
     └─ template: `
          <uilib-button>    ──────→  button.html
          <uilib-card>      ──────→  card.html
@@ -334,26 +334,26 @@ http://localhost:4200
 
 # Rebuild Library
 cd D:\Work\Personal\Github\ui-lib-custom
-ng build ui-components
+ng build ui-lib-custom
 
 # Watch Mode
-ng build ui-components --watch
+ng build ui-lib-custom --watch
 
 # Link Library (one-time)
-cd dist/ui-components
+cd dist/ui-lib-custom
 npm link
 
 # Use in Project
 cd /path/to/project
-npm link ui-components
+npm link ui-lib-custom
 
 # Import in Code
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 ```
 
 ---
 
 **Status: ✅ COMPLETE AND OPERATIONAL**
 **Demo: 🟢 Running at http://localhost:4200**
-**Library: 📦 Built and ready in dist/ui-components/**
+**Library: 📦 Built and ready in dist/ui-lib-custom/**
 **Ready to use: ✨ YES!**

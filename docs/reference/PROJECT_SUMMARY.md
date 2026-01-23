@@ -34,7 +34,7 @@ A complete, production-ready Angular UI component library with multiple design v
 D:\Work\Personal\Github\ui-lib-custom\
 │
 ├── projects/
-│   ├── ui-components/              # ⭐ THE LIBRARY
+│   ├── ui-lib-custom/              # ⭐ THE LIBRARY
 │   │   ├── src/
 │   │   │   ├── lib/
 │   │   │   │   ├── button/
@@ -47,7 +47,7 @@ D:\Work\Personal\Github\ui-lib-custom\
 │   │   │   │   │   ├── card.html           # Template
 │   │   │   │   │   ├── card.css            # Styles with variants
 │   │   │   │   │   └── card.spec.ts        # Tests
-│   │   │   │   └── ui-components.ts
+│   │   │   │   └── ui-lib-custom.ts
 │   │   │   ├── public-api.ts              # Exported APIs
 │   │   │   └── ng-package.json
 │   │   └── package.json
@@ -63,7 +63,7 @@ D:\Work\Personal\Github\ui-lib-custom\
 │       └── tsconfig.app.json
 │
 ├── dist/
-│   └── ui-components/               # 📦 BUILT LIBRARY (ready to use!)
+│   └── ui-lib-custom/               # 📦 BUILT LIBRARY (ready to use!)
 │       ├── esm2022/                        # ES modules
 │       ├── fesm2022/                       # Flat ES modules
 │       ├── button/
@@ -114,18 +114,18 @@ D:\Work\Personal\Github\ui-lib-custom\
 
 **Setup (one-time):**
 ```bash
-cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-lib-custom
 npm link
 ```
 
 **In your Angular project:**
 ```bash
-npm link ui-components
+npm link ui-lib-custom
 ```
 
 **Use in your component:**
 ```typescript
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 
 @Component({
   imports: [Button, Card],
@@ -143,7 +143,7 @@ export class MyComponent {}
 ```json
 {
   "dependencies": {
-    "ui-components": "file:../ui-lib-custom/dist/ui-components"
+    "ui-lib-custom": "file:../ui-lib-custom/dist/ui-lib-custom"
   }
 }
 ```
@@ -151,13 +151,13 @@ export class MyComponent {}
 ### Option 3: Publish to npm
 
 ```bash
-cd dist/ui-components
+cd dist/ui-lib-custom
 npm publish
 ```
 
 Then in any project:
 ```bash
-npm install ui-components
+npm install ui-lib-custom
 ```
 
 ---
@@ -220,12 +220,12 @@ npm install ui-components
 ### Rebuild Library
 ```bash
 cd D:\Work\Personal\Github\ui-lib-custom
-ng build ui-components
+ng build ui-lib-custom
 ```
 
 ### Watch Mode (auto-rebuild)
 ```bash
-ng build ui-components --watch
+ng build ui-lib-custom --watch
 ```
 
 ### Run Demo
@@ -235,7 +235,7 @@ ng serve demo
 
 ### Production Build
 ```bash
-ng build ui-components --configuration production
+ng build ui-lib-custom --configuration production
 ```
 
 ---
@@ -320,6 +320,6 @@ You now have a **complete, working UI component library** that:
 - Check the demo at http://localhost:4200
 - Read README.md for API details
 - See INTEGRATION_EXAMPLE.md for usage examples
-- Review component source code in `projects/ui-components/src/lib/`
+- Review component source code in `projects/ui-lib-custom/src/lib/`
 
 **Happy coding! 🚀**

@@ -44,10 +44,10 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 
 1. **Update package.json with your publishing details:**
    
-   > **IMPORTANT:** Edit the source package.json at `projects/ui-components/package.json`, NOT the dist version!
+   > **IMPORTANT:** Edit the source package.json at `projects/ui-lib-custom/package.json`, NOT the dist version!
    > The dist version is regenerated on every build and any changes there will be lost.
 
-   Update `projects/ui-components/package.json`:
+   Update `projects/ui-lib-custom/package.json`:
    ```json
    {
      "name": "@yourusername/ui-components",
@@ -70,13 +70,13 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 2. **Build the library:**
    ```bash
    cd ui-lib-custom
-   ng build ui-components
+   ng build ui-lib-custom
    ```
    This will generate the dist folder with your updated package.json metadata.
 
 3. **Navigate to the dist folder:**
    ```bash
-   cd dist/ui-components
+   cd dist/ui-lib-custom
    ```
 
 
@@ -87,7 +87,7 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 
 5. **Publish:**
    ```bash
-   # For scoped packages (e.g., @yourusername/ui-components):
+   # For scoped packages (e.g., @yourusername/ui-lib-custom):
    npm publish --access public
    
    # For unscoped packages:
@@ -104,27 +104,27 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 1. **Build the library:**
    ```bash
    cd ui-lib-custom
-   ng build ui-components
+   ng build ui-lib-custom
    ```
 
 2. **Create npm link:**
    ```bash
-   cd dist/ui-components
+   cd dist/ui-lib-custom
    npm link
    ```
 
 3. **In your other Angular project, link the package:**
    ```bash
    cd /path/to/your/other/project
-   npm link ui-components
+   npm link ui-lib-custom
    ```
 
 ### Option 3: Use from Git Repository
 
 1. **Build and commit:**
    ```bash
-   ng build ui-components
-   git add dist/ui-components
+   ng build ui-lib-custom
+   git add dist/ui-lib-custom
    git commit -m "Build library"
    git push
    ```
@@ -162,7 +162,7 @@ npm requires two-factor authentication (2FA) for publishing packages. You have t
 Choose one of the installation methods above. For published packages:
 
 ```bash
-npm install ui-components
+npm install ui-lib-custom
 ```
 
 ### 2. Import Components
@@ -171,7 +171,7 @@ In your Angular component file:
 
 ```typescript
 import { Component } from '@angular/core';
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-example',
@@ -242,7 +242,7 @@ If you're using traditional NgModule-based components:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 
 @NgModule({
   declarations: [
@@ -270,10 +270,10 @@ cd my-app
 
 ```bash
 # If published to npm
-npm install ui-components
+npm install ui-lib-custom
 
 # Or use npm link
-npm link ui-components
+npm link ui-lib-custom
 
 # Or use local file
 npm install ../ui-lib-custom/dist/ui-components
@@ -290,7 +290,7 @@ ng generate component user-profile
 **user-profile.component.ts:**
 ```typescript
 import { Component } from '@angular/core';
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -362,7 +362,7 @@ When actively developing the library and using it in another project:
 
 2. **In your consuming project, use npm link:**
    ```bash
-   npm link ui-components
+   npm link ui-lib-custom
    ```
 
 3. **Run your application:**
@@ -417,7 +417,7 @@ npm error 403 You do not have permission to publish "ui-components"
 
 **Solution:** 
 - Use a scoped package name: `@yourusername/ui-components`
-- Update `package.json` in `projects/ui-components/package.json`:
+- Update `package.json` in `projects/ui-lib-custom/package.json`:
   ```json
   {
     "name": "@yourusername/ui-components",
@@ -455,11 +455,11 @@ npm install --save-dev typescript@latest
 
 ## Version Management
 
-Update version in `projects/ui-components/package.json` before publishing:
+Update version in `projects/ui-lib-custom/package.json` before publishing:
 
 ```json
 {
-  "name": "ui-components",
+  "name": "ui-lib-custom",
   "version": "1.0.1",
   ...
 }

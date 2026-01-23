@@ -34,7 +34,7 @@ ui-lib-custom/
 │       └── ARCHITECTURE.md             # Architecture docs
 │
 └── projects/                           # 💻 Source code
-    ├── ui-components/                  # The library
+    ├── ui-lib-custom/                  # The library
     └── demo/                           # Demo app
 ```
 

@@ -34,7 +34,7 @@ This document tracks the upgrade to the latest versions of Angular and PrimeNG.
 
 ## Configuration Updates
 
-### Library Package.json (`projects/ui-components/package.json`)
+### Library Package.json (`projects/ui-lib-custom/package.json`)
 
 Updated peer dependencies to reflect new versions:
 
@@ -58,7 +58,7 @@ Fixed deprecated Sass syntax in `button.scss`:
 
 Updated the following files to reflect new versions:
 
-1. **projects/ui-components/README.md**
+1. **projects/ui-lib-custom/README.md**
    - Updated Angular CLI version reference
    - Added requirements section with version constraints
 

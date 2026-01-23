@@ -30,10 +30,10 @@
   "files": [],
   "references": [
     {
-      "path": "./projects/ui-components/tsconfig.lib.json"
+      "path": "./projects/ui-lib-custom/tsconfig.lib.json"
     },
     {
-      "path": "./projects/ui-components/tsconfig.spec.json"
+      "path": "./projects/ui-lib-custom/tsconfig.spec.json"
     },
     {
       "path": "./projects/demo/tsconfig.app.json"

@@ -23,12 +23,12 @@ cd test-ui-lib
 
 ```bash
 # First, create the link in the library (if not done already)
-cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-lib-custom
 npm link
 
 # Then link it in your test project
 cd D:\Work\Personal\Github\test-ui-lib
-npm link ui-components
+npm link ui-lib-custom
 ```
 
 ### Step 3: Use the Components (2 minutes)
@@ -37,7 +37,7 @@ Edit `src/app/app.ts`:
 
 ```typescript
 import { Component } from '@angular/core';
-import { Button, Card } from 'ui-components';
+import { Button, Card } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-root',
@@ -196,19 +196,19 @@ Try changing the examples:
 
 ### Workflow for Changes
 
-1. **Edit a component** in `D:\Work\Personal\Github\ui-lib-custom\projects\ui-components\src\lib\`
+1. **Edit a component** in `D:\Work\Personal\Github\ui-lib-custom\projects\ui-lib-custom\src\lib\`
 
 2. **Rebuild the library:**
    ```bash
    cd D:\Work\Personal\Github\ui-lib-custom
-   ng build ui-components
+   ng build ui-lib-custom
    ```
 
 3. **Refresh your test app** - Changes will be automatically available!
 
 For continuous development, use watch mode:
 ```bash
-ng build ui-components --watch
+ng build ui-lib-custom --watch
 ```
 
 ---
@@ -219,7 +219,7 @@ Once you've tested it, you can use the **exact same steps** in any of your real 
 
 ```bash
 cd /path/to/your/real/project
-npm link ui-components
+npm link ui-lib-custom
 ```
 
 Then import and use the components just like in this test!
@@ -249,7 +249,7 @@ You now have a working UI component library that you can use across all your Ang
 **Key Points:**
 - Library is built and ready: `dist/ui-lib-custom/`
 - Use `npm link` for easy development
-- Import components: `import { Button, Card } from 'ui-components'`
+- Import components: `import { Button, Card } from 'ui-lib-custom'`
 - Use in templates: `<uilib-button>` and `<uilib-card>`
 - Three design variants: Material, Bootstrap, Minimal
 

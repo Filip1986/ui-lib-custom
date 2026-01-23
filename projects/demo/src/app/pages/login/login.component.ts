@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Login1Component, Login2Component, Login3Component, LoginFormData } from 'ui-components';
+import { Login1Component, Login2Component, Login3Component, LoginFormData } from 'ui-lib-custom';
 
 interface LoginVariant {
   id: string;
@@ -68,7 +68,7 @@ onRememberMeChange(checked: boolean) {
         'Loading state with spinner',
         'Form validation'
       ],
-      importCode: `import { Login1Component, LoginFormData } from 'ui-components';
+      importCode: `import { Login1Component, LoginFormData } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-example',
@@ -99,7 +99,7 @@ export class ExampleComponent { }`,
         'Simple registration flow',
         'Responsive layout'
       ],
-      importCode: `import { Login2Component, LoginFormData } from 'ui-components';
+      importCode: `import { Login2Component, LoginFormData } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-example',
@@ -131,7 +131,7 @@ export class ExampleComponent { }`,
         'Sign-up navigation',
         'Modern animations'
       ],
-      importCode: `import { Login3Component, LoginFormData } from 'ui-components';
+      importCode: `import { Login3Component, LoginFormData } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-example',
