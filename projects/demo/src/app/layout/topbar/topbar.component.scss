@@ -92,3 +92,15 @@
     color: var(--uilib-topbar-accent, #007bff);
   }
 }
+
+.theme-toggle {
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  width: auto;
+  height: auto;
+}
+
+.theme-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}

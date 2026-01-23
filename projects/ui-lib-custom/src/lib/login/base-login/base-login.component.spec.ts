@@ -8,6 +8,7 @@ describe('BaseLoginComponent', () => {
   let fixture: ComponentFixture<BaseLoginComponent>;
 
   beforeEach(async () => {
+    localStorage.removeItem('remember_me_preference');
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, BaseLoginComponent],
       providers: [FormBuilder, provideZonelessChangeDetection()],

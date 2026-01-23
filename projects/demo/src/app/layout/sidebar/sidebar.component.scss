@@ -131,6 +131,16 @@
   }
 }
 
+.sidebar-tip {
+  padding: 1rem;
+  border-top: 1px solid var(--uilib-border, #e0e0e0);
+  color: var(--uilib-muted, #6c757d);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
 // Mobile responsive
 @media (max-width: 968px) {
   .sidebar {

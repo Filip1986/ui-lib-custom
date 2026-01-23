@@ -12,13 +12,24 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
+  private readonly THEME_KEY = 'uilib-theme';
   sidebarVisible = signal(false);
-  theme = signal<'light' | 'dark'>('light');
+  theme = signal<'light' | 'dark'>(this.getInitialTheme());
 
   constructor() {
     effect(() => {
       document.documentElement.setAttribute('data-theme', this.theme());
+      localStorage.setItem(this.THEME_KEY, this.theme());
     });
+  }
+
+  private getInitialTheme(): 'light' | 'dark' {
+    const stored = localStorage.getItem(this.THEME_KEY) as 'light' | 'dark' | null;
+    if (stored === 'light' || stored === 'dark') {
+      return stored;
+    }
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
   }
 
   toggleSidebar() {
