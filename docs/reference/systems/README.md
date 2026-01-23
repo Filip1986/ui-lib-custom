@@ -1,0 +1,120 @@
+# Systems Documentation
+
+System-level documentation for design systems, architectural patterns, and cross-cutting concerns.
+
+---
+
+## 🎨 Available Systems
+
+### Design Token System
+**File:** [DESIGN_TOKENS.md](DESIGN_TOKENS.md)
+
+**Status:** ✅ Complete
+
+**Includes:**
+- 177+ design tokens across 8 categories
+- Color palettes (primary, secondary, success, danger, warning, info, neutral)
+- Spacing tokens (0-20 scale)
+- Typography tokens (font sizes, weights, line heights)
+- Border tokens (radius, width)
+- Shadow tokens (elevation system)
+- Transition tokens (duration, timing)
+- Z-index tokens (stacking context)
+
+**Use for:** Consistent styling across all components
+
+---
+
+### Layout System
+**Files:**
+- [LAYOUT_SYSTEM.md](LAYOUT_SYSTEM.md) - Complete API reference
+- [LAYOUT_IMPLEMENTATION.md](LAYOUT_IMPLEMENTATION.md) - Implementation details
+
+**Status:** ✅ Complete
+
+**Includes:**
+- Stack component (vertical/horizontal layouts)
+- Inline component (wrapping inline layouts)
+- Grid component (CSS Grid with columns)
+- Container component (centered max-width)
+
+**Use for:** Building layouts without ad-hoc CSS
+
+---
+
+## 📋 What Goes Here
+
+The **systems** folder contains documentation for:
+
+### ✅ DO Include:
+- Design systems (tokens, themes)
+- Architectural patterns (layout systems)
+- Shared utilities and helpers
+- Cross-cutting concerns
+- System-wide configurations
+
+### ❌ DON'T Include:
+- Individual component docs (use `components/` folder)
+- Project-level docs (use `project/` folder)
+- Getting started guides (use `getting-started/` folder)
+- How-to guides (use `guides/` folder)
+
+---
+
+## 🎯 System Documentation Standards
+
+Each system should have:
+
+### 1. Main Documentation (`SYSTEM_NAME.md`)
+**Purpose:** Complete reference for the system
+
+**Should include:**
+- System overview and purpose
+- Complete API/token reference
+- Usage examples
+- Best practices
+- Type safety information
+- Migration guides
+
+### 2. Implementation Details (optional: `SYSTEM_NAME_IMPLEMENTATION.md`)
+**Purpose:** Technical implementation notes
+
+**Should include:**
+- Architecture decisions
+- Performance characteristics
+- Integration notes
+- Build/test status
+- Future enhancements
+
+---
+
+## 🔗 Related Documentation
+
+- **Components:** [../components/README.md](../components/README.md)
+- **Project Docs:** [../project/README.md](../project/README.md)
+- **Getting Started:** [../../getting-started/QUICK_START.md](../../getting-started/QUICK_START.md)
+
+---
+
+## 📊 Systems Overview
+
+| System | Description | Tokens/Components | Status |
+|--------|-------------|-------------------|--------|
+| Design Tokens | Consistent styling values | 177+ tokens | ✅ Complete |
+| Layout | Layout primitives | 4 components | ✅ Complete |
+
+---
+
+## ✍️ Adding New Systems
+
+When documenting a new system:
+
+1. Create `SYSTEM_NAME.md` with complete reference
+2. Create `SYSTEM_NAME_IMPLEMENTATION.md` if needed
+3. Update this README with system entry
+4. Update [../README.md](../README.md) with links
+5. Ensure cross-references are correct
+
+---
+
+**← Back to:** [Reference Index](../README.md) | [Main Documentation](../../README.md)

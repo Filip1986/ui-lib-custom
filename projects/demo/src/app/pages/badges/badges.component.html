@@ -1,0 +1,268 @@
+<div class="doc-page">
+  <h1>Badge</h1>
+  <p class="lead">
+    Performance-first badge component for labels, status indicators, counts, and tags.
+    Uses design tokens, OnPush change detection, and signal-based inputs for optimal performance.
+  </p>
+
+  <!-- Variants Section -->
+  <section class="demo-section">
+    <h2>Variants</h2>
+    <p>Three visual styles to match your design needs.</p>
+
+    <h3>Solid (Default)</h3>
+    <p>Filled background with white text for maximum visibility.</p>
+    <div class="demo-container">
+      <uilib-inline [gap]="3">
+        <uilib-badge color="primary" variant="solid">Primary</uilib-badge>
+        <uilib-badge color="secondary" variant="solid">Secondary</uilib-badge>
+        <uilib-badge color="success" variant="solid">Success</uilib-badge>
+        <uilib-badge color="danger" variant="solid">Danger</uilib-badge>
+        <uilib-badge color="warning" variant="solid">Warning</uilib-badge>
+        <uilib-badge color="info" variant="solid">Info</uilib-badge>
+        <uilib-badge color="neutral" variant="solid">Neutral</uilib-badge>
+      </uilib-inline>
+    </div>
+
+    <h3>Outline</h3>
+    <p>Transparent background with colored border and text.</p>
+    <div class="demo-container">
+      <uilib-inline [gap]="3">
+        <uilib-badge color="primary" variant="outline">Primary</uilib-badge>
+        <uilib-badge color="secondary" variant="outline">Secondary</uilib-badge>
+        <uilib-badge color="success" variant="outline">Success</uilib-badge>
+        <uilib-badge color="danger" variant="outline">Danger</uilib-badge>
+        <uilib-badge color="warning" variant="outline">Warning</uilib-badge>
+        <uilib-badge color="info" variant="outline">Info</uilib-badge>
+        <uilib-badge color="neutral" variant="outline">Neutral</uilib-badge>
+      </uilib-inline>
+    </div>
+
+    <h3>Subtle</h3>
+    <p>Light background with colored text for a softer appearance.</p>
+    <div class="demo-container">
+      <uilib-inline [gap]="3">
+        <uilib-badge color="primary" variant="subtle">Primary</uilib-badge>
+        <uilib-badge color="secondary" variant="subtle">Secondary</uilib-badge>
+        <uilib-badge color="success" variant="subtle">Success</uilib-badge>
+        <uilib-badge color="danger" variant="subtle">Danger</uilib-badge>
+        <uilib-badge color="warning" variant="subtle">Warning</uilib-badge>
+        <uilib-badge color="info" variant="subtle">Info</uilib-badge>
+        <uilib-badge color="neutral" variant="subtle">Neutral</uilib-badge>
+      </uilib-inline>
+    </div>
+  </section>
+
+  <!-- Sizes Section -->
+  <section class="demo-section">
+    <h2>Sizes</h2>
+    <p>Three sizes for different use cases.</p>
+
+    <div class="demo-container">
+      <uilib-inline [gap]="3" align="center">
+        <uilib-badge color="primary" size="sm">Small</uilib-badge>
+        <uilib-badge color="primary" size="md">Medium</uilib-badge>
+        <uilib-badge color="primary" size="lg">Large</uilib-badge>
+      </uilib-inline>
+    </div>
+
+    <h3>With Numbers</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="3" align="center">
+        <uilib-badge color="danger" size="sm">3</uilib-badge>
+        <uilib-badge color="danger" size="md">12</uilib-badge>
+        <uilib-badge color="danger" size="lg">99+</uilib-badge>
+      </uilib-inline>
+    </div>
+  </section>
+
+  <!-- Pill Shape Section -->
+  <section class="demo-section">
+    <h2>Pill Shape</h2>
+    <p>Fully rounded badges for a modern look.</p>
+
+    <div class="demo-container">
+      <uilib-inline [gap]="3">
+        <uilib-badge color="primary" [pill]="true">Primary</uilib-badge>
+        <uilib-badge color="success" [pill]="true">Active</uilib-badge>
+        <uilib-badge color="warning" [pill]="true">Pending</uilib-badge>
+        <uilib-badge color="danger" [pill]="true">Inactive</uilib-badge>
+        <uilib-badge color="info" [pill]="true" variant="outline">Beta</uilib-badge>
+      </uilib-inline>
+    </div>
+  </section>
+
+  <!-- Dot Indicators Section -->
+  <section class="demo-section">
+    <h2>Dot Indicators</h2>
+    <p>Small circular indicators for status.</p>
+
+    <div class="demo-container">
+      <uilib-stack [gap]="3">
+        <uilib-inline [gap]="2" align="center">
+          <uilib-badge color="success" [dot]="true"></uilib-badge>
+          <span>Online</span>
+        </uilib-inline>
+        <uilib-inline [gap]="2" align="center">
+          <uilib-badge color="warning" [dot]="true"></uilib-badge>
+          <span>Away</span>
+        </uilib-inline>
+        <uilib-inline [gap]="2" align="center">
+          <uilib-badge color="danger" [dot]="true"></uilib-badge>
+          <span>Busy</span>
+        </uilib-inline>
+        <uilib-inline [gap]="2" align="center">
+          <uilib-badge color="neutral" [dot]="true"></uilib-badge>
+          <span>Offline</span>
+        </uilib-inline>
+      </uilib-stack>
+    </div>
+
+    <h3>Different Sizes</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="4" align="center">
+        <uilib-badge color="success" [dot]="true" size="sm"></uilib-badge>
+        <uilib-badge color="success" [dot]="true" size="md"></uilib-badge>
+        <uilib-badge color="success" [dot]="true" size="lg"></uilib-badge>
+      </uilib-inline>
+    </div>
+  </section>
+
+  <!-- Real-World Examples Section -->
+  <section class="demo-section">
+    <h2>Real-World Examples</h2>
+
+    <h3>Status Tags</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="2">
+        <uilib-badge color="success" variant="solid" [pill]="true">Published</uilib-badge>
+        <uilib-badge color="warning" variant="solid" [pill]="true">Draft</uilib-badge>
+        <uilib-badge color="info" variant="solid" [pill]="true">In Review</uilib-badge>
+        <uilib-badge color="danger" variant="solid" [pill]="true">Archived</uilib-badge>
+      </uilib-inline>
+    </div>
+
+    <h3>Notification Counts</h3>
+    <div class="demo-container">
+      <uilib-stack [gap]="3">
+        <uilib-inline [gap]="3" align="center">
+          <span style="font-weight: 500;">Messages</span>
+          <uilib-badge color="danger" size="sm" [pill]="true">5</uilib-badge>
+        </uilib-inline>
+        <uilib-inline [gap]="3" align="center">
+          <span style="font-weight: 500;">Notifications</span>
+          <uilib-badge color="primary" size="sm" [pill]="true">12</uilib-badge>
+        </uilib-inline>
+        <uilib-inline [gap]="3" align="center">
+          <span style="font-weight: 500;">Updates</span>
+          <uilib-badge color="info" size="sm" [pill]="true">2</uilib-badge>
+        </uilib-inline>
+      </uilib-stack>
+    </div>
+
+    <h3>Technology Tags</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="2">
+        <uilib-badge color="info" variant="subtle">TypeScript</uilib-badge>
+        <uilib-badge color="primary" variant="subtle">Angular</uilib-badge>
+        <uilib-badge color="success" variant="subtle">Node.js</uilib-badge>
+        <uilib-badge color="warning" variant="subtle">JavaScript</uilib-badge>
+        <uilib-badge color="danger" variant="subtle">HTML</uilib-badge>
+        <uilib-badge color="info" variant="subtle">CSS</uilib-badge>
+      </uilib-inline>
+    </div>
+
+    <h3>User Roles</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="2">
+        <uilib-badge color="danger" variant="outline" size="sm">Admin</uilib-badge>
+        <uilib-badge color="primary" variant="outline" size="sm">Moderator</uilib-badge>
+        <uilib-badge color="success" variant="outline" size="sm">Member</uilib-badge>
+        <uilib-badge color="neutral" variant="outline" size="sm">Guest</uilib-badge>
+      </uilib-inline>
+    </div>
+
+    <h3>Version Labels</h3>
+    <div class="demo-container">
+      <uilib-inline [gap]="2">
+        <uilib-badge color="success" [pill]="true">v2.0.0</uilib-badge>
+        <uilib-badge color="info" variant="outline" [pill]="true">Beta</uilib-badge>
+        <uilib-badge color="warning" variant="outline" [pill]="true">Deprecated</uilib-badge>
+      </uilib-inline>
+    </div>
+  </section>
+
+  <!-- API Reference Section -->
+  <section class="demo-section">
+    <h2>API Reference</h2>
+
+    <h3>Inputs</h3>
+    <table class="api-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'solid' | 'outline' | 'subtle'</code></td>
+          <td><code>'solid'</code></td>
+          <td>Visual style of the badge</td>
+        </tr>
+        <tr>
+          <td><code>color</code></td>
+          <td><code>'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral'</code></td>
+          <td><code>'primary'</code></td>
+          <td>Color theme from design tokens</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size of the badge</td>
+        </tr>
+        <tr>
+          <td><code>pill</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Fully rounded pill shape</td>
+        </tr>
+        <tr>
+          <td><code>dot</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Small circular indicator (no content)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Usage</h3>
+    <pre><code>import {{ '{' }} Badge {{ '}' }} from 'ui-lib-custom';
+
+&#64;Component({{'{' }}
+  imports: [Badge],
+  template: `
+    &lt;uilib-badge color="success" variant="solid"&gt;
+      Active
+    &lt;/uilib-badge&gt;
+  `
+{{ '}' }})</code></pre>
+  </section>
+
+  <!-- Performance Section -->
+  <section class="demo-section">
+    <h2>Performance Features</h2>
+    <ul>
+      <li><strong>OnPush Change Detection</strong> - Only re-renders when inputs change</li>
+      <li><strong>Signal-Based</strong> - Uses Angular signals for optimal reactivity</li>
+      <li><strong>Single Element</strong> - Renders as single DOM element (no wrappers)</li>
+      <li><strong>Design Tokens</strong> - Uses centralized design system</li>
+      <li><strong>Zero Runtime Logic</strong> - All styles computed via memoized signals</li>
+      <li><strong>Host Bindings</strong> - Direct style application (no ngClass overhead)</li>
+    </ul>
+  </section>
+</div>

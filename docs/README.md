@@ -74,7 +74,10 @@ docs/
 
 **Technical documentation and API reference:**
 
-- **[Design Token System](reference/DESIGN_TOKENS.md)** - Complete design token reference
+- **[Reference Documentation Index](reference/README.md)** - Organized technical documentation
+
+#### 🎨 Design Systems
+- **[Design Token System](reference/systems/DESIGN_TOKENS.md)** - Complete design token reference
   - Color palettes and semantic colors
   - Spacing and sizing tokens
   - Typography system
@@ -82,24 +85,36 @@ docs/
   - Type-safe token usage
   - Best practices and migration guide
 
-- **[Layout Primitives](reference/LAYOUT_PRIMITIVES.md)** - Complete layout system documentation
+- **[Layout System](reference/systems/LAYOUT_SYSTEM.md)** - Layout primitives documentation
   - Stack, Inline, Grid, Container APIs
   - Design tokens reference
   - Performance benefits
   - Composition patterns
-  - Migration guides
+  - Implementation: [LAYOUT_IMPLEMENTATION.md](reference/systems/LAYOUT_IMPLEMENTATION.md)
 
-- **[Layout Implementation Details](reference/LAYOUT_IMPLEMENTATION.md)** - Implementation summary
-  - Architecture decisions
+#### 📦 Component Reference
+- **[Badge Component](reference/components/BADGE.md)** - Badge/Tag component reference
+  - Complete API documentation
+  - Variants, colors, and sizes
+  - Real-world examples
   - Performance characteristics
-  - Test coverage
-  - Maintenance notes
+  - Implementation: [BADGE_IMPLEMENTATION.md](reference/components/BADGE_IMPLEMENTATION.md)
 
-- **[Project Summary](reference/PROJECT_SUMMARY.md)** - Complete project overview
+#### 📋 Project Documentation
+- **[Project Summary](reference/project/PROJECT_SUMMARY.md)** - Complete project overview
   - What was built
   - Component features
   - Project structure
   - Current status
+
+- **[Update Log](reference/project/UPDATE_LOG.md)** - Version history
+  - Angular 21 upgrade details
+  - Breaking changes
+  - Migration guide
+
+- **[Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md)** - Quality assurance
+  - Feature verification
+  - Testing checklist
 
 - **[Update Log](reference/UPDATE_LOG.md)** - Version upgrade history
   - Angular 21 upgrade details

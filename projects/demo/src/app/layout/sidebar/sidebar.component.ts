@@ -42,6 +42,11 @@ export class SidebarComponent {
       expanded: true,
       items: [
         {
+          label: 'Badge',
+          icon: 'pi pi-circle',
+          route: '/badges'
+        },
+        {
           label: 'Button',
           icon: 'pi pi-circle',
           route: '/buttons'

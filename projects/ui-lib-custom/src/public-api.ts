@@ -6,6 +6,7 @@ export * from './lib/ui-lib-custom';
 export * from './lib/design-tokens';
 export * from './lib/button/button';
 export * from './lib/card/card';
+export * from './lib/badge/badge';
 export * from './lib/login/login-1/login-1.component';
 export * from './lib/login/login-2/login-2.component';
 export * from './lib/login/login-3/login-3.component';
