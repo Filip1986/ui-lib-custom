@@ -5,18 +5,21 @@
 - Prioritize DX: predictable API shapes, sensible defaults, and minimal setup to swap themes or override styles.
 
 ## Framework & Architecture
-- Angular 18+ (current baseline: Angular 21), standalone components only, `ChangeDetectionStrategy.OnPush`, signals for inputs/derived state.
+- Angular 21+, standalone components only, `ChangeDetectionStrategy.OnPush`, signals for inputs/derived state.
 - Host-first: avoid wrapper elements; apply styles via host bindings instead of extra DOM nodes.
 - Strong typing on all inputs; provide defaults so components render well without configuration.
 - Barrel exports stay tree-shakable; keep `sideEffects: false` and avoid global side effects.
+- Templates use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`); avoid legacy structural directives (`*ngIf/*ngFor`) in new code.
 
 ## API Surface (PrimeNG-inspired)
 - Prefix selectors with `uilib-`. Inputs favor these patterns: `variant/appearance`, `severity|color`, `size`, `shape`, `state` (`disabled`, `loading`, `active`, `readonly`), `fullWidth`, `iconPosition`.
 - Keep inputs declarative; avoid imperative setters. Derived values must use `computed()`.
 - Favor composition via content projection over configuration explosion; expose lightweight structural parts (`header`, `footer`, `prefix`, `suffix` slots).
+- Template control flow follows the Angular 21 block syntax (`@if/@for/@switch`) and signal-friendly bindings; no imperative DOM tweaks.
 
 ## Styling & Theming
 - SCSS for authoring; output uses CSS custom properties for runtime theming. No `::ng-deep` or global resets.
+- Author component styles in SCSS only (no `.css` files); share mixins/variables and pull values from design tokens or CSS vars.
 - Theming layers (do not bypass):
   1. **Design tokens** (`design-tokens.ts`) define canonical values.
   2. **CSS variables**: expose tokens as `--uilib-*` on `:root` or `[data-theme]` scopes.
@@ -47,6 +50,7 @@
 ## Documentation & Demos
 - Update `docs/` when adding or changing components (API, usage, theming knobs, accessibility notes).
 - Demo app lives in `projects/demo`; provide at least one example per component and per theme.
+- Demos and docs should showcase the Angular 21 block syntax and SCSS usage (e.g., `@if`/`@for` plus token-driven SCSS snippets).
 
 ## Contribution Guidelines
 - Maintain OnPush + signals + standalone pattern.
