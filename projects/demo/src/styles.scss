@@ -1,6 +1,6 @@
 /* Global SCSS Styles */
 
-@import '../ui-lib-custom/src/lib/themes/themes.css';
+@use '../../ui-lib-custom/src/lib/themes/themes.scss' as *;
 
 // SCSS Variables
 $font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,

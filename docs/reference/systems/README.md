@@ -1,4 +1,4 @@
-# Systems Documentation
+ fol# Systems Documentation
 
 System-level documentation for design systems, architectural patterns, and cross-cutting concerns.
 
@@ -39,6 +39,21 @@ System-level documentation for design systems, architectural patterns, and cross
 - Container component (centered max-width)
 
 **Use for:** Building layouts without ad-hoc CSS
+
+---
+
+### Theming System
+**File:** [THEMING.md](THEMING.md)
+
+**Status:** ✅ Complete
+
+**Includes:**
+- Light/dark presets via CSS variables
+- `data-theme` switching guidance
+- Brand override example with `--uilib-*` vars
+- Key variable groups: page/surface, topbar, buttons, badges, cards, layout spacing/containers
+
+**Use for:** Runtime theme switching and brand customization without code changes
 
 ---
 
