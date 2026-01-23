@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  --doc-rail-width: 250px;
+  --doc-top-offset: 96px;
+  --doc-anchor-offset: 96px;
+}
+
+.doc-page {
+  --doc-max-width: 1400px;
+  padding-bottom: 2rem;
+}
+
+.doc-layout {
+  display: flex;
+  gap: clamp(1.25rem, 2vw, 2.5rem);
+  align-items: flex-start;
+
+  @media (min-width: 1025px) {
+    padding-right: calc(var(--doc-rail-width) + clamp(1.25rem, 2vw, 2.5rem));
+  }
+}
+
+.doc-main {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.doc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.doc-rail {
+  flex: 0 0 var(--doc-rail-width);
+  width: var(--doc-rail-width);
+  position: fixed;
+  top: var(--doc-top-offset);
+  right: max(16px, calc((100vw - var(--doc-max-width)) / 2));
+  z-index: 10;
+  height: max-content;
+}
+
+:host ::ng-deep [data-doc-anchor] {
+  scroll-margin-top: var(--doc-anchor-offset);
+}
+
+@media (max-width: 1024px) {
+  .doc-layout {
+    gap: 1.25rem;
+  }
+
+  .doc-rail {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .doc-page {
+    padding: 0 0 1.5rem;
+  }
+}

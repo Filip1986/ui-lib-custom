@@ -1,7 +1,13 @@
 .doc-page {
-  max-width: 1200px;
+  --doc-max-width: 1200px;
+  --doc-anchor-offset: 96px;
+  max-width: var(--doc-max-width);
   margin: 0 auto;
   padding-bottom: 2rem;
+
+  [data-doc-anchor] {
+    scroll-margin-top: var(--doc-anchor-offset);
+  }
 }
 
 .doc-header {

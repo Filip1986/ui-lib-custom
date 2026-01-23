@@ -1,5 +1,5 @@
-<div class="doc-page">
-  <div class="doc-header">
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
     <h1>Theme Switcher</h1>
     <p class="doc-description">
       Toggle between light and dark themes by setting <code>data-theme="light|dark"</code> on <code>html</code> or any container.
@@ -7,7 +7,7 @@
     </p>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="side-by-side" data-doc-anchor>
     <h2>Side-by-side Themes</h2>
     <p>Preview components inheriting theme variables in isolated panels.</p>
     <div class="theme-grid">
@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="toggle" data-doc-anchor>
     <h2>Toggle in Your App</h2>
     <ol>
       <li>Import <code>themes.css</code> once globally (see Quick Start).</li>
@@ -65,4 +65,4 @@
       <li>All components consume CSS variables; override them per brand if needed.</li>
     </ol>
   </div>
-</div>
+</app-doc-page-layout>

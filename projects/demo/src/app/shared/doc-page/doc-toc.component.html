@@ -1,0 +1,39 @@
+<nav class="doc-toc" aria-label="On-page navigation">
+  <div class="doc-toc__title">On this page</div>
+
+  @if (sections.length === 0) {
+    <p class="doc-toc__empty">Sections will appear here.</p>
+  } @else {
+    <ul class="doc-toc__list">
+      @for (section of sections; track section.id) {
+        <li class="doc-toc__item">
+          <button
+            type="button"
+            class="doc-toc__link"
+            [class.active]="activeId === section.id"
+            (click)="onSelect(section.id)"
+          >
+            <span>{{ section.label }}</span>
+          </button>
+
+          @if (section.children?.length) {
+            <ul class="doc-toc__sublist">
+              @for (child of section.children; track child.id) {
+                <li class="doc-toc__item is-child">
+                  <button
+                    type="button"
+                    class="doc-toc__link"
+                    [class.active]="activeId === child.id"
+                    (click)="onSelect(child.id)"
+                  >
+                    <span>{{ child.label }}</span>
+                  </button>
+                </li>
+              }
+            </ul>
+          }
+        </li>
+      }
+    </ul>
+  }
+</nav>

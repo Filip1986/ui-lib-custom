@@ -1,0 +1,22 @@
+<ui-lib-container class="doc-page" size="2xl" [padding]="6">
+  <div class="doc-layout">
+    <div class="doc-main">
+      <ng-content select="[docHeader]"></ng-content>
+      <div class="doc-body">
+        <ng-content></ng-content>
+      </div>
+    </div>
+
+    @if (sections.length) {
+      <div class="doc-rail">
+        <ui-lib-card variant="minimal" elevation="low" [bordered]="true">
+          <app-doc-toc
+            [sections]="sections"
+            [activeId]="activeSectionId()"
+            (sectionSelected)="scrollToSection($event)"
+          ></app-doc-toc>
+        </ui-lib-card>
+      </div>
+    }
+  </div>
+</ui-lib-container>

@@ -1,5 +1,5 @@
-<div class="doc-page">
-  <div class="doc-header">
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
     <h1>Badge</h1>
     <p class="doc-description">
       Performance-first badge component for labels, status indicators, counts, and tags. Uses design tokens, OnPush change detection,
@@ -7,7 +7,7 @@
     </p>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="variants" data-doc-anchor>
     <h2>Variants</h2>
     <p>Three visual styles to match your design needs.</p>
 
@@ -63,7 +63,7 @@
     </div>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="sizes" data-doc-anchor>
     <h2>Sizes</h2>
     <p>Three sizes for different use cases.</p>
 
@@ -89,7 +89,7 @@
     </div>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="pill-shape" data-doc-anchor>
     <h2>Pill Shape</h2>
     <p>Fully rounded badges for a modern look.</p>
     <div class="doc-demo centered">
@@ -103,7 +103,7 @@
     </div>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="dot-indicators" data-doc-anchor>
     <h2>Dot Indicators</h2>
     <p>Small circular indicators for status with optional sizes.</p>
 
@@ -141,7 +141,7 @@
     </div>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="real-world-examples" data-doc-anchor>
     <h2>Real-World Examples</h2>
 
     <div class="doc-demo-group">
@@ -212,7 +212,7 @@
     </div>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="api-reference" data-doc-anchor>
     <h2>API Reference</h2>
     <table class="doc-properties">
       <thead>
@@ -276,7 +276,7 @@
     </div>
   </div>
 
-  <div class="doc-section">
+  <div class="doc-section" id="performance" data-doc-anchor>
     <h2>Performance Features</h2>
     <ul class="doc-list">
       <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
@@ -287,4 +287,4 @@
       <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
     </ul>
   </div>
-</div>
+</app-doc-page-layout>
