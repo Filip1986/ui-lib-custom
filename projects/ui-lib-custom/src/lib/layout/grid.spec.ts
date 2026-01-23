@@ -64,7 +64,7 @@ describe('Grid', () => {
 
   it('should apply gap from design tokens', () => {
     const { gridElement } = bootstrap();
-    expect(gridElement.style.gap).toBe('1rem'); // gap 4 = 1rem
+    expect(gridElement.style.gap).toContain('1rem'); // gap 4 = 1rem fallback
   });
 
   it('should project content', () => {

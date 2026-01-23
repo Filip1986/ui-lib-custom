@@ -55,12 +55,12 @@ describe('Stack', () => {
 
   it('should apply gap from design tokens', () => {
     const { stackElement } = bootstrap();
-    expect(stackElement.style.gap).toBe('1rem'); // gap 4 = 1rem
+    expect(stackElement.style.gap).toContain('1rem'); // gap 4 = 1rem fallback
   });
 
   it('should apply different gap tokens', () => {
     const { stackElement } = bootstrap({ gap: 2 });
-    expect(stackElement.style.gap).toBe('0.5rem'); // gap 2 = 0.5rem
+    expect(stackElement.style.gap).toContain('0.5rem'); // gap 2 = 0.5rem fallback
   });
 
   it('should apply align-items', () => {

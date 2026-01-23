@@ -1,15 +1,11 @@
 <div [ngClass]="cardClasses()">
-  @if (hasHeader) {
-    <div class="card-header">
-      <ng-content select="[card-header]" />
-    </div>
-  }
+  <div class="card-header">
+    <ng-content select="[card-header]" />
+  </div>
   <div class="card-body">
     <ng-content />
   </div>
-  @if (hasFooter) {
-    <div class="card-footer">
-      <ng-content select="[card-footer]" />
-    </div>
-  }
+  <div class="card-footer">
+    <ng-content select="[card-footer]" />
+  </div>
 </div>

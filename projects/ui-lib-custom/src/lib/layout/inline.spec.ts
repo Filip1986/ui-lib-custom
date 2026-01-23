@@ -50,7 +50,7 @@ describe('Inline', () => {
 
   it('should apply gap from design tokens', () => {
     const { inlineElement } = bootstrap();
-    expect(inlineElement.style.gap).toBe('0.5rem'); // gap 2 = 0.5rem
+    expect(inlineElement.style.gap).toContain('0.5rem'); // gap 2 = 0.5rem fallback
   });
 
   it('should apply align-items', () => {

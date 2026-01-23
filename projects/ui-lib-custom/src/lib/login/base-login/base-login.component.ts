@@ -125,7 +125,7 @@ export class BaseLoginComponent implements OnInit {
     return this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      rememberMe: [this.rememberMe()],
+      rememberMe: [false],
     });
   }
 

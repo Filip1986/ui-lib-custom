@@ -91,7 +91,9 @@
 }
 
 :host(.badge-variant-outline) {
-  --badge-bg: var(--badge-bg-outline);
+  background-color: transparent !important;
+  border-color: var(--badge-border-color, currentColor);
+  color: var(--badge-fg, currentColor);
   --badge-border-width: 1px;
 }
 

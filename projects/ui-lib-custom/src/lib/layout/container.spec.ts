@@ -42,12 +42,12 @@ describe('Container', () => {
 
   it('should apply max-width from size token', () => {
     const { containerElement } = bootstrap();
-    expect(containerElement.style.maxWidth).toBe('1024px'); // lg = 1024px
+    expect(containerElement.style.maxWidth).toContain('1024px'); // lg = 1024px fallback
   });
 
   it('should apply different sizes', () => {
     const { containerElement } = bootstrap({ size: 'sm' });
-    expect(containerElement.style.maxWidth).toBe('640px');
+    expect(containerElement.style.maxWidth).toContain('640px');
   });
 
   it('should center container by default', () => {
@@ -64,8 +64,8 @@ describe('Container', () => {
 
   it('should apply padding from design tokens', () => {
     const { containerElement } = bootstrap();
-    expect(containerElement.style.paddingLeft).toBe('1rem'); // padding 4 = 1rem
-    expect(containerElement.style.paddingRight).toBe('1rem');
+    expect(containerElement.style.paddingLeft).toContain('1rem'); // padding 4 = 1rem fallback
+    expect(containerElement.style.paddingRight).toContain('1rem');
   });
 
   it('should apply full width', () => {

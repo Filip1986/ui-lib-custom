@@ -24,10 +24,10 @@ describe('Button', () => {
   });
 
   it('applies classes from inputs', () => {
-    component.variant.set('bootstrap');
-    component.size.set('large');
-    component.color.set('danger');
-    component.appearance.set('outline');
+    fixture.componentRef.setInput('variant', 'bootstrap');
+    fixture.componentRef.setInput('size', 'large');
+    fixture.componentRef.setInput('color', 'danger');
+    fixture.componentRef.setInput('appearance', 'outline');
     fixture.detectChanges();
 
     const btn = getButton();
@@ -38,15 +38,15 @@ describe('Button', () => {
   });
 
   it('disables and sets aria state when disabled or loading', () => {
-    component.disabled.set(true);
+    fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
     let btn = getButton();
     expect(btn.disabled).toBeTrue();
     expect(btn.getAttribute('aria-disabled')).toBe('true');
 
-    component.disabled.set(false);
-    component.loading.set(true);
+    fixture.componentRef.setInput('disabled', false);
+    fixture.componentRef.setInput('loading', true);
     fixture.detectChanges();
 
     btn = getButton();
@@ -55,7 +55,7 @@ describe('Button', () => {
   });
 
   it('renders spinner when loading', () => {
-    component.loading.set(true);
+    fixture.componentRef.setInput('loading', true);
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelector('.btn-spinner')).toBeTruthy();

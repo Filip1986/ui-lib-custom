@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { Card, CardVariant, CardElevation } from './card';
 
@@ -27,41 +28,42 @@ class CardHost {
 }
 
 describe('Card', () => {
-  let fixture: ComponentFixture<CardHost>;
-  let host: CardHost;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CardHost]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(CardHost);
-    host = fixture.componentInstance;
+  async function bootstrap(initial?: Partial<CardHost>) {
+    await TestBed.configureTestingModule({ imports: [CardHost] }).compileComponents();
+    const fixture: ComponentFixture<CardHost> = TestBed.createComponent(CardHost);
+    Object.assign(fixture.componentInstance, initial);
     fixture.detectChanges();
+    return fixture;
+  }
+
+  const getCard = (fixture: ComponentFixture<CardHost>): HTMLElement => fixture.nativeElement.querySelector('.card');
+
+  it('should create', async () => {
+    const fixture = await bootstrap();
+    expect(getCard(fixture)).toBeTruthy();
   });
 
-  const getCard = (): HTMLElement => fixture.nativeElement.querySelector('.card');
-
-  it('should create', () => {
-    expect(getCard()).toBeTruthy();
-  });
-
-  it('applies variant, elevation, and bordered classes', () => {
-    host.variant = 'bootstrap';
-    host.elevation = 'high';
-    host.hoverable = true;
-    fixture.detectChanges();
-
-    const card = getCard();
+  it('applies variant, elevation, and bordered classes', async () => {
+    const fixture = await bootstrap({ variant: 'bootstrap', elevation: 'high', hoverable: true });
+    const card = getCard(fixture);
     expect(card.className).toContain('card-bootstrap');
     expect(card.className).toContain('card-elevation-high');
     expect(card.className).toContain('card-bordered');
     expect(card.className).toContain('card-hoverable');
   });
 
-  it('projects header and footer slots', () => {
-    const header = fixture.nativeElement.querySelector('.card-header');
-    const footer = fixture.nativeElement.querySelector('.card-footer');
+  it('projects header and footer slots', async () => {
+    const fixture = await bootstrap();
+    if (fixture.whenRenderingDone) {
+      await fixture.whenRenderingDone();
+    }
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const cardDebug = fixture.debugElement.query(By.directive(Card));
+    const cardEl: HTMLElement | null = cardDebug?.nativeElement ?? null;
+    const header = cardEl?.querySelector('.card-header');
+    const footer = cardEl?.querySelector('.card-footer');
 
     expect(header?.textContent?.trim()).toBe('Header');
     expect(footer?.textContent?.trim()).toBe('Footer');
