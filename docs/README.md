@@ -74,6 +74,14 @@ docs/
 
 **Technical documentation and API reference:**
 
+- **[Design Token System](reference/DESIGN_TOKENS.md)** - Complete design token reference
+  - Color palettes and semantic colors
+  - Spacing and sizing tokens
+  - Typography system
+  - Border, shadow, and transition tokens
+  - Type-safe token usage
+  - Best practices and migration guide
+
 - **[Layout Primitives](reference/LAYOUT_PRIMITIVES.md)** - Complete layout system documentation
   - Stack, Inline, Grid, Container APIs
   - Design tokens reference

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken } from './tokens';
+import { SPACING_TOKENS, SpacingToken } from '../design-tokens';
 
 export type StackDirection = 'vertical' | 'horizontal';
 export type StackAlign = 'start' | 'center' | 'end' | 'stretch';

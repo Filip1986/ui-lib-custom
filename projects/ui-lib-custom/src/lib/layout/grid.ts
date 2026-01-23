@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken, GRID_COLUMNS, GridColumns } from './tokens';
+import { SPACING_TOKENS, SpacingToken, GRID_COLUMNS, GridColumns } from '../design-tokens';
 
 export type GridAlign = 'start' | 'center' | 'end' | 'stretch';
 export type GridJustify = 'start' | 'center' | 'end' | 'stretch';

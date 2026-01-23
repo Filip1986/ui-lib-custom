@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken } from './tokens';
+import { SPACING_TOKENS, SpacingToken } from '../design-tokens';
 
 export type InlineAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
 export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around';

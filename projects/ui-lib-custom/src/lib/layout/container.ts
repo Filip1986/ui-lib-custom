@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { CONTAINER_MAX_WIDTHS, ContainerSize, SPACING_TOKENS, SpacingToken } from './tokens';
+import { CONTAINER_MAX_WIDTHS, ContainerSize, SPACING_TOKENS, SpacingToken } from '../design-tokens';
 
 /**
  * Container - A performant container layout primitive
