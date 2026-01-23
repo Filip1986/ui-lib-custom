@@ -14,43 +14,43 @@
     <div class="doc-demo-group">
       <h3>Vertical Stack (Default)</h3>
       <div class="doc-demo centered">
-        <uilib-stack [gap]="4">
+        <ui-lib-stack [gap]="4">
           <div class="demo-box">Item 1</div>
           <div class="demo-box">Item 2</div>
           <div class="demo-box">Item 3</div>
-        </uilib-stack>
+        </ui-lib-stack>
       </div>
     </div>
 
     <div class="doc-demo-group">
       <h3>Horizontal Stack</h3>
       <div class="doc-demo centered">
-        <uilib-stack direction="horizontal" [gap]="4">
+        <ui-lib-stack direction="horizontal" [gap]="4">
           <div class="demo-box">Item 1</div>
           <div class="demo-box">Item 2</div>
           <div class="demo-box">Item 3</div>
-        </uilib-stack>
+        </ui-lib-stack>
       </div>
     </div>
 
     <div class="doc-demo-group">
       <h3>Centered Stack</h3>
       <div class="doc-demo centered">
-        <uilib-stack [gap]="3" align="center" justify="center" style="min-height: 200px;">
+        <ui-lib-stack [gap]="3" align="center" justify="center" style="min-height: 200px;">
           <div class="demo-box">Centered Item 1</div>
           <div class="demo-box">Centered Item 2</div>
-        </uilib-stack>
+        </ui-lib-stack>
       </div>
     </div>
 
     <div class="doc-demo-group">
       <h3>Space Between</h3>
       <div class="doc-demo centered">
-        <uilib-stack direction="horizontal" justify="space-between" style="width: 100%;">
+        <ui-lib-stack direction="horizontal" justify="space-between" style="width: 100%;">
           <div class="demo-box">Left</div>
           <div class="demo-box">Center</div>
           <div class="demo-box">Right</div>
-        </uilib-stack>
+        </ui-lib-stack>
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@
     <div class="doc-demo-group">
       <h3>Basic Inline</h3>
       <div class="doc-demo centered">
-        <uilib-inline [gap]="2">
+        <ui-lib-inline [gap]="2">
           <span class="demo-tag">JavaScript</span>
           <span class="demo-tag">TypeScript</span>
           <span class="demo-tag">Angular</span>
@@ -71,18 +71,18 @@
           <span class="demo-tag">Svelte</span>
           <span class="demo-tag">Node.js</span>
           <span class="demo-tag">Python</span>
-        </uilib-inline>
+        </ui-lib-inline>
       </div>
     </div>
 
     <div class="doc-demo-group">
       <h3>Centered Inline</h3>
       <div class="doc-demo centered">
-        <uilib-inline [gap]="3" justify="center">
+        <ui-lib-inline [gap]="3" justify="center">
           <span class="demo-tag">Tag 1</span>
           <span class="demo-tag">Tag 2</span>
           <span class="demo-tag">Tag 3</span>
-        </uilib-inline>
+        </ui-lib-inline>
       </div>
     </div>
   </div>
@@ -94,22 +94,22 @@
     <div class="doc-demo-group">
       <h3>12 Column Grid</h3>
       <div class="doc-demo">
-        <uilib-grid [columns]="12" [gap]="2">
+        <ui-lib-grid [columns]="12" [gap]="2">
           @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
             <div class="demo-grid-cell">{{ i }}</div>
           }
-        </uilib-grid>
+        </ui-lib-grid>
       </div>
     </div>
 
     <div class="doc-demo-group">
       <h3>4 Column Grid</h3>
       <div class="doc-demo">
-        <uilib-grid [columns]="4" [gap]="4">
+        <ui-lib-grid [columns]="4" [gap]="4">
           @for (i of [1,2,3,4,5,6,7,8]; track i) {
             <div class="demo-grid-cell">Cell {{ i }}</div>
           }
-        </uilib-grid>
+        </ui-lib-grid>
       </div>
     </div>
 
@@ -117,11 +117,11 @@
       <h3>Responsive Grid (auto-fit)</h3>
       <p>Resize the window to see this grid adapt.</p>
       <div class="doc-demo">
-        <uilib-grid [gap]="4" minColumnWidth="200px">
+        <ui-lib-grid [gap]="4" minColumnWidth="200px">
           @for (i of [1,2,3,4,5,6]; track i) {
             <div class="demo-grid-cell large">Card {{ i }}</div>
           }
-        </uilib-grid>
+        </ui-lib-grid>
       </div>
     </div>
   </div>
@@ -130,17 +130,17 @@
     <h2>Container</h2>
     <p>A centered container with max-width constraints and padding.</p>
     <div class="doc-demo stacked">
-      <uilib-container size="sm" [padding]="4" style="background: #f5f5f5;">
+      <ui-lib-container size="sm" [padding]="4" style="background: #f5f5f5;">
         <p>This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </uilib-container>
+      </ui-lib-container>
 
-      <uilib-container size="md" [padding]="6" style="background: #f5f5f5;">
+      <ui-lib-container size="md" [padding]="6" style="background: #f5f5f5;">
         <p>This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </uilib-container>
+      </ui-lib-container>
 
-      <uilib-container size="lg" [padding]="8" style="background: #f5f5f5;">
+      <ui-lib-container size="lg" [padding]="8" style="background: #f5f5f5;">
         <p>This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </uilib-container>
+      </ui-lib-container>
     </div>
   </div>
 
@@ -149,45 +149,45 @@
     <p>Layout primitives can be composed together for complex layouts.</p>
 
     <div class="doc-demo">
-      <uilib-container size="lg" [padding]="6">
-        <uilib-stack [gap]="6">
+      <ui-lib-container size="lg" [padding]="6">
+        <ui-lib-stack [gap]="6">
           <h3>Dashboard Layout</h3>
-          <uilib-grid [columns]="3" [gap]="4">
+          <ui-lib-grid [columns]="3" [gap]="4">
             <div class="demo-card">
-              <uilib-stack [gap]="3">
+              <ui-lib-stack [gap]="3">
                 <h4>Card 1</h4>
                 <p>Content goes here</p>
-                <uilib-inline [gap]="2">
+                <ui-lib-inline [gap]="2">
                   <span class="demo-tag">Tag 1</span>
                   <span class="demo-tag">Tag 2</span>
-                </uilib-inline>
-              </uilib-stack>
+                </ui-lib-inline>
+              </ui-lib-stack>
             </div>
 
             <div class="demo-card">
-              <uilib-stack [gap]="3">
+              <ui-lib-stack [gap]="3">
                 <h4>Card 2</h4>
                 <p>Content goes here</p>
-                <uilib-inline [gap]="2">
+                <ui-lib-inline [gap]="2">
                   <span class="demo-tag">Tag 3</span>
-                </uilib-inline>
-              </uilib-stack>
+                </ui-lib-inline>
+              </ui-lib-stack>
             </div>
 
             <div class="demo-card">
-              <uilib-stack [gap]="3">
+              <ui-lib-stack [gap]="3">
                 <h4>Card 3</h4>
                 <p>Content goes here</p>
-                <uilib-inline [gap]="2">
+                <ui-lib-inline [gap]="2">
                   <span class="demo-tag">Tag 4</span>
                   <span class="demo-tag">Tag 5</span>
                   <span class="demo-tag">Tag 6</span>
-                </uilib-inline>
-              </uilib-stack>
+                </ui-lib-inline>
+              </ui-lib-stack>
             </div>
-          </uilib-grid>
-        </uilib-stack>
-      </uilib-container>
+          </ui-lib-grid>
+        </ui-lib-stack>
+      </ui-lib-container>
     </div>
   </div>
 
@@ -229,42 +229,42 @@
       <div class="theme-panel" data-theme="light">
         <div class="panel-header">Light Theme</div>
         <div class="panel-body">
-          <uilib-container size="md" [padding]="4" style="background: var(--uilib-surface, #fff);">
-            <uilib-stack [gap]="3">
+          <ui-lib-container size="md" [padding]="4" style="background: var(--uilib-surface, #fff);">
+            <ui-lib-stack [gap]="3">
               <h4>Stack + Inline</h4>
-              <uilib-inline [gap]="2">
+              <ui-lib-inline [gap]="2">
                 <span class="demo-tag">Item A</span>
                 <span class="demo-tag">Item B</span>
                 <span class="demo-tag">Item C</span>
-              </uilib-inline>
-              <uilib-grid [columns]="3" [gap]="2">
+              </ui-lib-inline>
+              <ui-lib-grid [columns]="3" [gap]="2">
                 @for (i of [1,2,3]; track i) {
                   <div class="demo-grid-cell">Cell {{ i }}</div>
                 }
-              </uilib-grid>
-            </uilib-stack>
-          </uilib-container>
+              </ui-lib-grid>
+            </ui-lib-stack>
+          </ui-lib-container>
         </div>
       </div>
 
       <div class="theme-panel" data-theme="dark">
         <div class="panel-header">Dark Theme</div>
         <div class="panel-body">
-          <uilib-container size="md" [padding]="4" style="background: var(--uilib-surface, #1a1c1f);">
-            <uilib-stack [gap]="3">
+          <ui-lib-container size="md" [padding]="4" style="background: var(--uilib-surface, #1a1c1f);">
+            <ui-lib-stack [gap]="3">
               <h4>Stack + Inline</h4>
-              <uilib-inline [gap]="2">
+              <ui-lib-inline [gap]="2">
                 <span class="demo-tag">Item A</span>
                 <span class="demo-tag">Item B</span>
                 <span class="demo-tag">Item C</span>
-              </uilib-inline>
-              <uilib-grid [columns]="3" [gap]="2">
+              </ui-lib-inline>
+              <ui-lib-grid [columns]="3" [gap]="2">
                 @for (i of [1,2,3]; track i) {
                   <div class="demo-grid-cell">Cell {{ i }}</div>
                 }
-              </uilib-grid>
-            </uilib-stack>
-          </uilib-container>
+              </ui-lib-grid>
+            </ui-lib-stack>
+          </ui-lib-container>
         </div>
       </div>
     </div>

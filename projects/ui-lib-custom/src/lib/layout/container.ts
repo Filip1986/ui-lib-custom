@@ -11,7 +11,7 @@ const containerVar = (size: ContainerSize) => `var(--uilib-container-${size}, ${
  * Single element, no wrapper divs, optimal performance.
  */
 @Component({
-  selector: 'uilib-container',
+  selector: 'ui-lib-container',
   standalone: true,
   template: '<ng-content />',
   host: {

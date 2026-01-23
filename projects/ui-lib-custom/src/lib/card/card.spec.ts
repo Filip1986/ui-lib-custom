@@ -8,7 +8,7 @@ import { Card, CardVariant, CardElevation } from './card';
   standalone: true,
   imports: [Card],
   template: `
-    <uilib-card
+    <ui-lib-card
       [variant]="variant"
       [elevation]="elevation"
       [bordered]="bordered"
@@ -17,7 +17,7 @@ import { Card, CardVariant, CardElevation } from './card';
       <div card-header>Header</div>
       Body
       <div card-footer>Footer</div>
-    </uilib-card>
+    </ui-lib-card>
   `,
 })
 class CardHost {

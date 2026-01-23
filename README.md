@@ -45,16 +45,16 @@ export class YourComponent {}
 
 ```html
 <!-- Material Design Button -->
-<uilib-button variant="material" color="primary">Click Me</uilib-button>
+<ui-lib-button variant="material" color="primary">Click Me</ui-lib-button>
 
 <!-- Bootstrap Button -->
-<uilib-button variant="bootstrap" size="large" color="success">Submit</uilib-button>
+<ui-lib-button variant="bootstrap" size="large" color="success">Submit</ui-lib-button>
 
 <!-- Minimal Button -->
-<uilib-button variant="minimal" color="danger" [disabled]="true">Delete</uilib-button>
+<ui-lib-button variant="minimal" color="danger" [disabled]="true">Delete</ui-lib-button>
 
 <!-- Full Width Button -->
-<uilib-button variant="material" [fullWidth]="true">Full Width</uilib-button>
+<ui-lib-button variant="material" [fullWidth]="true">Full Width</ui-lib-button>
 ```
 
 ### Card Component
@@ -78,24 +78,24 @@ export class YourComponent {}
 
 ```html
 <!-- Material Design Card -->
-<uilib-card variant="material" elevation="medium">
+<ui-lib-card variant="material" elevation="medium">
   <div card-header>Card Title</div>
   <p>Card content goes here...</p>
   <div card-footer>
     <button>Action</button>
   </div>
-</uilib-card>
+</ui-lib-card>
 
 <!-- Bootstrap Card with Border -->
-<uilib-card variant="bootstrap" [bordered]="true">
+<ui-lib-card variant="bootstrap" [bordered]="true">
   <p>Simple card content</p>
-</uilib-card>
+</ui-lib-card>
 
 <!-- Minimal Hoverable Card -->
-<uilib-card variant="minimal" [hoverable]="true">
+<ui-lib-card variant="minimal" [hoverable]="true">
   <div card-header>Hover over me!</div>
   <p>This card will respond to hover events.</p>
-</uilib-card>
+</ui-lib-card>
 ```
 
 ## Installation
@@ -120,14 +120,14 @@ import { Button, Card } from 'ui-lib-custom';
   selector: 'app-root',
   imports: [Button, Card],
   template: `
-    <uilib-button variant="material" color="primary">
+    <ui-lib-button variant="material" color="primary">
       Hello World
-    </uilib-button>
+    </ui-lib-button>
     
-    <uilib-card variant="material">
+    <ui-lib-card variant="material">
       <div card-header>Welcome</div>
       <p>This is a card component</p>
-    </uilib-card>
+    </ui-lib-card>
   `
 })
 export class AppComponent {}

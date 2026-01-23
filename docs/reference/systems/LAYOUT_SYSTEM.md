@@ -26,11 +26,11 @@ import { Stack } from 'ui-lib-custom';
 @Component({
   imports: [Stack],
   template: `
-    <uilib-stack [gap]="4" direction="vertical" align="stretch" justify="start">
+    <ui-lib-stack [gap]="4" direction="vertical" align="stretch" justify="start">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
-    </uilib-stack>
+    </ui-lib-stack>
   `
 })
 ```
@@ -48,28 +48,28 @@ import { Stack } from 'ui-lib-custom';
 
 ```html
 <!-- Vertical stack (default) -->
-<uilib-stack [gap]="4">
+<ui-lib-stack [gap]="4">
   <div>Item 1</div>
   <div>Item 2</div>
-</uilib-stack>
+</ui-lib-stack>
 
 <!-- Horizontal stack -->
-<uilib-stack direction="horizontal" [gap]="3">
+<ui-lib-stack direction="horizontal" [gap]="3">
   <button>Button 1</button>
   <button>Button 2</button>
-</uilib-stack>
+</ui-lib-stack>
 
 <!-- Centered stack -->
-<uilib-stack [gap]="6" align="center" justify="center">
+<ui-lib-stack [gap]="6" align="center" justify="center">
   <h1>Title</h1>
   <p>Subtitle</p>
-</uilib-stack>
+</ui-lib-stack>
 
 <!-- Space between -->
-<uilib-stack direction="horizontal" justify="space-between">
+<ui-lib-stack direction="horizontal" justify="space-between">
   <div>Left</div>
   <div>Right</div>
-</uilib-stack>
+</ui-lib-stack>
 ```
 
 ---
@@ -86,11 +86,11 @@ import { Inline } from 'ui-lib-custom';
 @Component({
   imports: [Inline],
   template: `
-    <uilib-inline [gap]="2" align="center" justify="start">
+    <ui-lib-inline [gap]="2" align="center" justify="start">
       <span>Tag 1</span>
       <span>Tag 2</span>
       <span>Tag 3</span>
-    </uilib-inline>
+    </ui-lib-inline>
   `
 })
 ```
@@ -107,25 +107,25 @@ import { Inline } from 'ui-lib-custom';
 
 ```html
 <!-- Tags that wrap -->
-<uilib-inline [gap]="2">
+<ui-lib-inline [gap]="2">
   <span class="tag">JavaScript</span>
   <span class="tag">TypeScript</span>
   <span class="tag">Angular</span>
   <span class="tag">React</span>
-</uilib-inline>
+</ui-lib-inline>
 
 <!-- Centered badges -->
-<uilib-inline [gap]="3" justify="center">
+<ui-lib-inline [gap]="3" justify="center">
   <span class="badge">New</span>
   <span class="badge">Featured</span>
-</uilib-inline>
+</ui-lib-inline>
 
 <!-- Button group -->
-<uilib-inline [gap]="2" align="center">
+<ui-lib-inline [gap]="2" align="center">
   <button>Edit</button>
   <button>Delete</button>
   <button>Share</button>
-</uilib-inline>
+</ui-lib-inline>
 ```
 
 ---
@@ -143,19 +143,19 @@ import { Grid } from 'ui-lib-custom';
   imports: [Grid],
   template: `
     <!-- Fixed columns -->
-    <uilib-grid [columns]="4" [gap]="4">
+    <ui-lib-grid [columns]="4" [gap]="4">
       <div>Cell 1</div>
       <div>Cell 2</div>
       <div>Cell 3</div>
       <div>Cell 4</div>
-    </uilib-grid>
+    </ui-lib-grid>
 
     <!-- Responsive grid -->
-    <uilib-grid [gap]="4" minColumnWidth="200px">
+    <ui-lib-grid [gap]="4" minColumnWidth="200px">
       <div>Card 1</div>
       <div>Card 2</div>
       <div>Card 3</div>
-    </uilib-grid>
+    </ui-lib-grid>
   `
 })
 ```
@@ -174,33 +174,33 @@ import { Grid } from 'ui-lib-custom';
 
 ```html
 <!-- 4-column grid -->
-<uilib-grid [columns]="4" [gap]="4">
+<ui-lib-grid [columns]="4" [gap]="4">
   <div>Card 1</div>
   <div>Card 2</div>
   <div>Card 3</div>
   <div>Card 4</div>
-</uilib-grid>
+</ui-lib-grid>
 
 <!-- 3-column grid with larger gap -->
-<uilib-grid [columns]="3" [gap]="6">
+<ui-lib-grid [columns]="3" [gap]="6">
   <div>Item 1</div>
   <div>Item 2</div>
   <div>Item 3</div>
-</uilib-grid>
+</ui-lib-grid>
 
 <!-- Responsive grid (auto-fit) -->
-<uilib-grid minColumnWidth="250px" [gap]="4">
+<ui-lib-grid minColumnWidth="250px" [gap]="4">
   <div class="card">Card 1</div>
   <div class="card">Card 2</div>
   <div class="card">Card 3</div>
   <div class="card">Card 4</div>
-</uilib-grid>
+</ui-lib-grid>
 
 <!-- 12-column layout system -->
-<uilib-grid [columns]="12" [gap]="2">
+<ui-lib-grid [columns]="12" [gap]="2">
   <div style="grid-column: span 8">Main content</div>
   <div style="grid-column: span 4">Sidebar</div>
-</uilib-grid>
+</ui-lib-grid>
 ```
 
 ---
@@ -217,10 +217,10 @@ import { Container } from 'ui-lib-custom';
 @Component({
   imports: [Container],
   template: `
-    <uilib-container size="lg" [padding]="6" [centered]="true">
+    <ui-lib-container size="lg" [padding]="6" [centered]="true">
       <h1>Welcome</h1>
       <p>Container content goes here</p>
-    </uilib-container>
+    </ui-lib-container>
   `
 })
 ```
@@ -248,25 +248,25 @@ import { Container } from 'ui-lib-custom';
 
 ```html
 <!-- Small container -->
-<uilib-container size="sm" [padding]="4">
+<ui-lib-container size="sm" [padding]="4">
   <p>Narrow content for readability</p>
-</uilib-container>
+</ui-lib-container>
 
 <!-- Large container (default) -->
-<uilib-container size="lg" [padding]="6">
+<ui-lib-container size="lg" [padding]="6">
   <h1>Dashboard</h1>
   <p>Main content area</p>
-</uilib-container>
+</ui-lib-container>
 
 <!-- Full-width container -->
-<uilib-container size="full" [padding]="8">
+<ui-lib-container size="full" [padding]="8">
   <p>Full-width content</p>
-</uilib-container>
+</ui-lib-container>
 
 <!-- Non-centered container -->
-<uilib-container size="md" [centered]="false" [padding]="4">
+<ui-lib-container size="md" [centered]="false" [padding]="4">
   <p>Left-aligned container</p>
-</uilib-container>
+</ui-lib-container>
 ```
 
 ---
@@ -306,43 +306,43 @@ Layout primitives can be composed together for complex layouts:
 @Component({
   imports: [Container, Stack, Grid, Inline],
   template: `
-    <uilib-container size="lg" [padding]="6">
-      <uilib-stack [gap]="6">
+    <ui-lib-container size="lg" [padding]="6">
+      <ui-lib-stack [gap]="6">
         <header>
-          <uilib-stack [gap]="2">
+          <ui-lib-stack [gap]="2">
             <h1>Dashboard</h1>
             <p>Welcome back!</p>
-          </uilib-stack>
+          </ui-lib-stack>
         </header>
         
-        <uilib-grid [columns]="3" [gap]="4">
+        <ui-lib-grid [columns]="3" [gap]="4">
           <div class="card">
-            <uilib-stack [gap]="3">
+            <ui-lib-stack [gap]="3">
               <h3>Card 1</h3>
               <p>Content here</p>
-              <uilib-inline [gap]="2">
+              <ui-lib-inline [gap]="2">
                 <span class="tag">Tag 1</span>
                 <span class="tag">Tag 2</span>
-              </uilib-inline>
-            </uilib-stack>
+              </ui-lib-inline>
+            </ui-lib-stack>
           </div>
           
           <div class="card">
-            <uilib-stack [gap]="3">
+            <ui-lib-stack [gap]="3">
               <h3>Card 2</h3>
               <p>More content</p>
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
           
           <div class="card">
-            <uilib-stack [gap]="3">
+            <ui-lib-stack [gap]="3">
               <h3>Card 3</h3>
               <p>Even more content</p>
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
-        </uilib-grid>
-      </uilib-stack>
-    </uilib-container>
+        </ui-lib-grid>
+      </ui-lib-stack>
+    </ui-lib-container>
   `
 })
 ```
@@ -357,14 +357,14 @@ Each layout component renders exactly **one DOM element** (the component's host)
 
 ```html
 <!-- This: -->
-<uilib-stack [gap]="4">
+<ui-lib-stack [gap]="4">
   <div>Item</div>
-</uilib-stack>
+</ui-lib-stack>
 
 <!-- Results in minimal DOM: -->
-<uilib-stack style="display: flex; flex-direction: column; gap: 1rem;">
+<ui-lib-stack style="display: flex; flex-direction: column; gap: 1rem;">
   <div>Item</div>
-</uilib-stack>
+</ui-lib-stack>
 ```
 
 No wrapper divs, no unnecessary nesting.
@@ -400,10 +400,10 @@ Styles are applied directly via host bindings, avoiding:
 
 ```typescript
 // Good
-<uilib-stack [gap]="4">
+<ui-lib-stack [gap]="4">
   <div>Item 1</div>
   <div>Item 2</div>
-</uilib-stack>
+</ui-lib-stack>
 ```
 
 ### ❌ DON'T: Write Ad-hoc Flex
@@ -420,27 +420,27 @@ Styles are applied directly via host bindings, avoiding:
 
 ```typescript
 // Good
-<uilib-stack [gap]="4">
+<ui-lib-stack [gap]="4">
 ```
 
 ### ❌ DON'T: Use Arbitrary Values
 
 ```typescript
 // Avoid
-<uilib-stack [gap]="7"> <!-- Token 7 doesn't exist -->
+<ui-lib-stack [gap]="7"> <!-- Token 7 doesn't exist -->
 ```
 
 ### ✅ DO: Compose Components
 
 ```typescript
 // Good - Semantic, composable
-<uilib-container size="lg">
-  <uilib-stack [gap]="6">
-    <uilib-grid [columns]="3" [gap]="4">
+<ui-lib-container size="lg">
+  <ui-lib-stack [gap]="6">
+    <ui-lib-grid [columns]="3" [gap]="4">
       <!-- Content -->
-    </uilib-grid>
-  </uilib-stack>
-</uilib-container>
+    </ui-lib-grid>
+  </ui-lib-stack>
+</ui-lib-container>
 ```
 
 ### ❌ DON'T: Use Tailwind in Templates
@@ -468,10 +468,10 @@ Styles are applied directly via host bindings, avoiding:
 </div>
 
 <!-- After -->
-<uilib-stack [gap]="4">
+<ui-lib-stack [gap]="4">
   <div>Item 1</div>
   <div>Item 2</div>
-</uilib-stack>
+</ui-lib-stack>
 ```
 
 ### From Material Layout
@@ -483,9 +483,9 @@ Styles are applied directly via host bindings, avoiding:
 </mat-grid-list>
 
 <!-- After -->
-<uilib-grid [columns]="4" [gap]="4">
+<ui-lib-grid [columns]="4" [gap]="4">
   <div>Cell 1</div>
-</uilib-grid>
+</ui-lib-grid>
 ```
 
 ### From Bootstrap
@@ -501,13 +501,13 @@ Styles are applied directly via host bindings, avoiding:
 </div>
 
 <!-- After -->
-<uilib-container size="lg" [padding]="6">
-  <uilib-grid [columns]="3" [gap]="4">
+<ui-lib-container size="lg" [padding]="6">
+  <ui-lib-grid [columns]="3" [gap]="4">
     <div>Column 1</div>
     <div>Column 2</div>
     <div>Column 3</div>
-  </uilib-grid>
-</uilib-container>
+  </ui-lib-grid>
+</ui-lib-container>
 ```
 
 ---

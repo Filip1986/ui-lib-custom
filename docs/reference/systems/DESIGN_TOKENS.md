@@ -119,8 +119,8 @@ const gap: SpacingToken = 4; // 1rem (16px)
 
 **Usage:**
 ```typescript
-<uilib-stack [gap]="4">  <!-- 16px gap -->
-<uilib-container [padding]="6">  <!-- 24px padding -->
+<ui-lib-stack [gap]="4">  <!-- 16px gap -->
+<ui-lib-container [padding]="6">  <!-- 24px padding -->
 ```
 
 ---
@@ -351,9 +351,9 @@ export class MyComponent {
 ### With Layout Primitives
 
 ```typescript
-<uilib-stack [gap]="6">  <!-- Uses SPACING_TOKENS[6] -->
-<uilib-container size="lg" [padding]="4">  <!-- Uses tokens -->
-<uilib-grid [columns]="3" [gap]="4">  <!-- Grid + spacing tokens -->
+<ui-lib-stack [gap]="6">  <!-- Uses SPACING_TOKENS[6] -->
+<ui-lib-container size="lg" [padding]="4">  <!-- Uses tokens -->
+<ui-lib-grid [columns]="3" [gap]="4">  <!-- Grid + spacing tokens -->
 ```
 
 ### In SCSS (Advanced)
@@ -440,7 +440,7 @@ const color = '#1976d2';
 
 ```typescript
 // Good
-<uilib-stack [gap]="4">
+<ui-lib-stack [gap]="4">
 ```
 
 ### ❌ DON'T: Use Arbitrary Values

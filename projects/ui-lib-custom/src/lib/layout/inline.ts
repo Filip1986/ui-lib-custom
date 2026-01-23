@@ -13,7 +13,7 @@ export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'spac
  * Ideal for tags, chips, button groups, or any inline content that should wrap.
  */
 @Component({
-  selector: 'uilib-inline',
+  selector: 'ui-lib-inline',
   standalone: true,
   template: '<ng-content />',
   host: {

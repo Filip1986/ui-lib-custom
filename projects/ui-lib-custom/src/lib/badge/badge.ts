@@ -11,12 +11,12 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
  * Uses design tokens for consistent styling.
  *
  * @example
- * <uilib-badge color="success" variant="solid">Active</uilib-badge>
- * <uilib-badge color="danger" variant="outline" size="sm">3</uilib-badge>
- * <uilib-badge color="info" variant="subtle">New</uilib-badge>
+ * <ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>
+ * <ui-lib-badge color="danger" variant="outline" size="sm">3</ui-lib-badge>
+ * <ui-lib-badge color="info" variant="subtle">New</ui-lib-badge>
  */
 @Component({
-  selector: 'uilib-badge',
+  selector: 'ui-lib-badge',
   standalone: true,
   template: '<ng-content />',
   styleUrl: './badge.scss',

@@ -9,7 +9,7 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 export type IconPosition = 'start' | 'end';
 
 @Component({
-  selector: 'uilib-button',
+  selector: 'ui-lib-button',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.html',

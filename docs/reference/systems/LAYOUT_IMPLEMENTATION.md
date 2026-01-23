@@ -10,7 +10,7 @@ Four performance-first layout primitives have been implemented for the ui-lib-cu
 
 ## Components Implemented
 
-### 1. Stack (`uilib-stack`)
+### 1. Stack (`ui-lib-stack`)
 **File:** `projects/ui-lib-custom/src/lib/layout/stack.ts`
 
 **Purpose:** Vertical or horizontal flex layout with configurable gap and alignment.
@@ -32,7 +32,7 @@ gap: SpacingToken = 4
 
 ---
 
-### 2. Inline (`uilib-inline`)
+### 2. Inline (`ui-lib-inline`)
 **File:** `projects/ui-lib-custom/src/lib/layout/inline.ts`
 
 **Purpose:** Horizontal inline layout with wrapping for tags, chips, badges, and button groups.
@@ -52,7 +52,7 @@ gap: SpacingToken = 2
 
 ---
 
-### 3. Grid (`uilib-grid`)
+### 3. Grid (`ui-lib-grid`)
 **File:** `projects/ui-lib-custom/src/lib/layout/grid.ts`
 
 **Purpose:** CSS Grid layout with fixed or responsive columns.
@@ -75,7 +75,7 @@ minColumnWidth?: string
 
 ---
 
-### 4. Container (`uilib-container`)
+### 4. Container (`ui-lib-container`)
 **File:** `projects/ui-lib-custom/src/lib/layout/container.ts`
 
 **Purpose:** Centered container with max-width constraints and padding.
@@ -293,64 +293,64 @@ import { Stack, Inline, Grid, Container } from 'ui-lib-custom';
   standalone: true,
   imports: [Stack, Inline, Grid, Container],
   template: `
-    <uilib-container size="xl" [padding]="6">
-      <uilib-stack [gap]="6">
+    <ui-lib-container size="xl" [padding]="6">
+      <ui-lib-stack [gap]="6">
         <!-- Header -->
         <header>
-          <uilib-stack [gap]="2">
+          <ui-lib-stack [gap]="2">
             <h1>Dashboard</h1>
-            <uilib-inline [gap]="2">
+            <ui-lib-inline [gap]="2">
               <span class="badge">Admin</span>
               <span class="badge">Premium</span>
-            </uilib-inline>
-          </uilib-stack>
+            </ui-lib-inline>
+          </ui-lib-stack>
         </header>
 
         <!-- Stats Grid -->
-        <uilib-grid [columns]="4" [gap]="4">
+        <ui-lib-grid [columns]="4" [gap]="4">
           <div class="stat-card">
-            <uilib-stack [gap]="2">
+            <ui-lib-stack [gap]="2">
               <h3>Users</h3>
               <p>1,234</p>
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
           <div class="stat-card">
-            <uilib-stack [gap]="2">
+            <ui-lib-stack [gap]="2">
               <h3>Revenue</h3>
               <p>$45,678</p>
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
           <div class="stat-card">
-            <uilib-stack [gap]="2">
+            <ui-lib-stack [gap]="2">
               <h3>Orders</h3>
               <p>890</p>
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
           <div class="stat-card">
-            <uilib-stack [gap]="2">
+            <ui-lib-stack [gap]="2">
               <h3>Growth</h3>
               <p>23%</p>
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
-        </uilib-grid>
+        </ui-lib-grid>
 
         <!-- Content Grid -->
-        <uilib-grid [columns]="2" [gap]="6">
+        <ui-lib-grid [columns]="2" [gap]="6">
           <div class="chart-card">
-            <uilib-stack [gap]="4">
+            <ui-lib-stack [gap]="4">
               <h2>Sales Chart</h2>
               <!-- Chart component here -->
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
           <div class="chart-card">
-            <uilib-stack [gap]="4">
+            <ui-lib-stack [gap]="4">
               <h2>Traffic Chart</h2>
               <!-- Chart component here -->
-            </uilib-stack>
+            </ui-lib-stack>
           </div>
-        </uilib-grid>
-      </uilib-stack>
-    </uilib-container>
+        </ui-lib-grid>
+      </ui-lib-stack>
+    </ui-lib-container>
   `
 })
 export class DashboardComponent {}

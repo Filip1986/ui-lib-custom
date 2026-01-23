@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'uilib-ui-lib-custom',
+  selector: 'ui-lib-ui-lib-custom',
   imports: [],
   template: `
     <p>

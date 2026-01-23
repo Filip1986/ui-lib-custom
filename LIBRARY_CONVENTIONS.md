@@ -12,7 +12,7 @@
 - Templates use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`); avoid legacy structural directives (`*ngIf/*ngFor`) in new code.
 
 ## API Surface (PrimeNG-inspired)
-- Prefix selectors with `uilib-`. Inputs favor these patterns: `variant/appearance`, `severity|color`, `size`, `shape`, `state` (`disabled`, `loading`, `active`, `readonly`), `fullWidth`, `iconPosition`.
+- Prefix selectors with `ui-lib-`. Inputs favor these patterns: `variant/appearance`, `severity|color`, `size`, `shape`, `state` (`disabled`, `loading`, `active`, `readonly`), `fullWidth`, `iconPosition`.
 - Keep inputs declarative; avoid imperative setters. Derived values must use `computed()`.
 - Favor composition via content projection over configuration explosion; expose lightweight structural parts (`header`, `footer`, `prefix`, `suffix` slots).
 - Template control flow follows the Angular 21 block syntax (`@if/@for/@switch`) and signal-friendly bindings; no imperative DOM tweaks.

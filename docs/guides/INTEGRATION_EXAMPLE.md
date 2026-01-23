@@ -126,33 +126,33 @@ export class DashboardComponent {
   </header>
 
   <!-- Action Bar -->
-  <uilib-card variant="material" elevation="low">
+  <ui-lib-card variant="material" elevation="low">
     <div class="action-bar">
       <div class="button-group">
-        <uilib-button 
+        <ui-lib-button 
           variant="material" 
           color="primary"
           [disabled]="isLoading"
           (click)="addNewUser()">
           {{ isLoading ? 'Adding...' : 'Add User' }}
-        </uilib-button>
+        </ui-lib-button>
         
-        <uilib-button 
+        <ui-lib-button 
           variant="bootstrap" 
           color="success"
           (click)="exportData()">
           Export
-        </uilib-button>
+        </ui-lib-button>
         
-        <uilib-button 
+        <ui-lib-button 
           variant="minimal" 
           color="secondary"
           (click)="refreshData()">
           Refresh
-        </uilib-button>
+        </ui-lib-button>
       </div>
     </div>
-  </uilib-card>
+  </ui-lib-card>
 
   <!-- User Grid -->
   <div class="user-grid">
@@ -160,7 +160,7 @@ export class DashboardComponent {
     <div class="users-section">
       <h2>Users</h2>
       <div class="cards-container">
-        <uilib-card 
+        <ui-lib-card 
           *ngFor="let user of users"
           variant="bootstrap"
           elevation="medium"
@@ -186,22 +186,22 @@ export class DashboardComponent {
           </div>
 
           <div card-footer>
-            <uilib-button 
+            <ui-lib-button 
               variant="bootstrap" 
               color="primary" 
               size="small"
               (click)="selectUser(user); $event.stopPropagation()">
               View
-            </uilib-button>
-            <uilib-button 
+            </ui-lib-button>
+            <ui-lib-button 
               variant="minimal" 
               color="danger" 
               size="small"
               (click)="deleteUser(user); $event.stopPropagation()">
               Delete
-            </uilib-button>
+            </ui-lib-button>
           </div>
-        </uilib-card>
+        </ui-lib-card>
       </div>
     </div>
 
@@ -209,7 +209,7 @@ export class DashboardComponent {
     <div class="details-section">
       <h2>Details</h2>
       
-      <uilib-card 
+      <ui-lib-card 
         *ngIf="selectedUser; else noSelection"
         variant="material"
         elevation="high">
@@ -249,52 +249,52 @@ export class DashboardComponent {
         </div>
 
         <div card-footer>
-          <uilib-button 
+          <ui-lib-button 
             variant="material" 
             color="primary"
             [fullWidth]="true">
             Edit User
-          </uilib-button>
-          <uilib-button 
+          </ui-lib-button>
+          <ui-lib-button 
             variant="material" 
             color="danger"
             [fullWidth]="true"
             (click)="deleteUser(selectedUser)">
             Delete User
-          </uilib-button>
+          </ui-lib-button>
         </div>
-      </uilib-card>
+      </ui-lib-card>
 
       <ng-template #noSelection>
-        <uilib-card variant="minimal" elevation="none" [bordered]="true">
+        <ui-lib-card variant="minimal" elevation="none" [bordered]="true">
           <div class="no-selection">
             <p>Select a user to view details</p>
           </div>
-        </uilib-card>
+        </ui-lib-card>
       </ng-template>
     </div>
   </div>
 
   <!-- Statistics Cards -->
   <div class="stats-grid">
-    <uilib-card variant="material" elevation="medium">
+    <ui-lib-card variant="material" elevation="medium">
       <div card-header>Total Users</div>
       <div class="stat-value">{{ users.length }}</div>
-    </uilib-card>
+    </ui-lib-card>
 
-    <uilib-card variant="material" elevation="medium">
+    <ui-lib-card variant="material" elevation="medium">
       <div card-header>Active Users</div>
       <div class="stat-value">
         {{ (users | filter:'status':'active').length }}
       </div>
-    </uilib-card>
+    </ui-lib-card>
 
-    <uilib-card variant="material" elevation="medium">
+    <ui-lib-card variant="material" elevation="medium">
       <div card-header>Inactive Users</div>
       <div class="stat-value">
         {{ (users | filter:'status':'inactive').length }}
       </div>
-    </uilib-card>
+    </ui-lib-card>
   </div>
 </div>
 ```
@@ -481,7 +481,7 @@ Visit http://localhost:4200 and you'll see your dashboard using the UI component
 
 1. **Import components** from 'ui-lib-custom'
 2. **Add to imports array** in your component decorator
-3. **Use in templates** with the `uilib-` prefix
+3. **Use in templates** with the `ui-lib-` prefix
 4. **Customize** using input properties
 5. **Handle events** with Angular event binding
 6. **Style as needed** - components work with your CSS

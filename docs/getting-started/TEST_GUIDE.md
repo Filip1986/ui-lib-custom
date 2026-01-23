@@ -49,66 +49,66 @@ import { Button, Card } from 'ui-lib-custom';
       <div style="margin: 2rem 0;">
         <h2>Buttons</h2>
         <div style="display: flex; gap: 1rem; margin: 1rem 0;">
-          <uilib-button variant="material" color="primary">Material</uilib-button>
-          <uilib-button variant="bootstrap" color="success">Bootstrap</uilib-button>
-          <uilib-button variant="minimal" color="danger">Minimal</uilib-button>
+          <ui-lib-button variant="material" color="primary">Material</ui-lib-button>
+          <ui-lib-button variant="bootstrap" color="success">Bootstrap</ui-lib-button>
+          <ui-lib-button variant="minimal" color="danger">Minimal</ui-lib-button>
         </div>
       </div>
 
       <div style="margin: 2rem 0;">
         <h2>Cards</h2>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-          <uilib-card variant="material" elevation="medium">
+          <ui-lib-card variant="material" elevation="medium">
             <div card-header>Material Card</div>
             <p>This is a Material Design card.</p>
             <div card-footer>
-              <uilib-button variant="material" size="small">Action</uilib-button>
+              <ui-lib-button variant="material" size="small">Action</ui-lib-button>
             </div>
-          </uilib-card>
+          </ui-lib-card>
 
-          <uilib-card variant="bootstrap" [bordered]="true">
+          <ui-lib-card variant="bootstrap" [bordered]="true">
             <div card-header>Bootstrap Card</div>
             <p>This is a Bootstrap-styled card.</p>
-          </uilib-card>
+          </ui-lib-card>
 
-          <uilib-card variant="minimal" [hoverable]="true">
+          <ui-lib-card variant="minimal" [hoverable]="true">
             <div card-header>Minimal Card</div>
             <p>Hover over this card!</p>
-          </uilib-card>
+          </ui-lib-card>
         </div>
       </div>
 
       <div style="margin: 2rem 0;">
         <h2>Interactive Example</h2>
-        <uilib-card variant="material">
+        <ui-lib-card variant="material">
           <div card-header>Counter: {{ count }}</div>
           <p>Click the buttons to change the count</p>
           <div card-footer>
             <div style="display: flex; gap: 0.5rem;">
-              <uilib-button 
+              <ui-lib-button 
                 variant="material" 
                 color="primary" 
                 size="small"
                 (click)="increment()">
                 Increment
-              </uilib-button>
-              <uilib-button 
+              </ui-lib-button>
+              <ui-lib-button 
                 variant="bootstrap" 
                 color="danger" 
                 size="small"
                 (click)="decrement()">
                 Decrement
-              </uilib-button>
-              <uilib-button 
+              </ui-lib-button>
+              <ui-lib-button 
                 variant="minimal" 
                 color="secondary" 
                 size="small"
                 (click)="reset()">
                 Reset
-              </uilib-button>
+              </ui-lib-button>
             </div>
           </div>
-        </uilib-card>
+        </ui-lib-card>
       </div>
     </div>
   `,
@@ -173,23 +173,23 @@ Try changing the examples:
 
 ### Change Button Variants:
 ```html
-<uilib-button variant="bootstrap" color="warning" size="large">
+<ui-lib-button variant="bootstrap" color="warning" size="large">
   Large Warning
-</uilib-button>
+</ui-lib-button>
 ```
 
 ### Change Card Elevation:
 ```html
-<uilib-card variant="material" elevation="high" [hoverable]="true">
+<ui-lib-card variant="material" elevation="high" [hoverable]="true">
   High elevation card
-</uilib-card>
+</ui-lib-card>
 ```
 
 ### Make Full-Width Buttons:
 ```html
-<uilib-button variant="material" [fullWidth]="true">
+<ui-lib-button variant="material" [fullWidth]="true">
   Full Width Button
-</uilib-button>
+</ui-lib-button>
 ```
 
 ---
@@ -250,7 +250,7 @@ You now have a working UI component library that you can use across all your Ang
 - Library is built and ready: `dist/ui-lib-custom/`
 - Use `npm link` for easy development
 - Import components: `import { Button, Card } from 'ui-lib-custom'`
-- Use in templates: `<uilib-button>` and `<uilib-card>`
+- Use in templates: `<ui-lib-button>` and `<ui-lib-card>`
 - Three design variants: Material, Bootstrap, Minimal
 
 **Happy coding! 🚀**

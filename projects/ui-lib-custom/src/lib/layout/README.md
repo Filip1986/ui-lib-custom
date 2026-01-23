@@ -75,7 +75,7 @@ Defined in `tokens.ts` as `GRID_COLUMNS`:
 ### Stack Component
 ```typescript
 @Component({
-  selector: 'uilib-stack',
+  selector: 'ui-lib-stack',
   standalone: true,
   template: '<ng-content />',
   host: {

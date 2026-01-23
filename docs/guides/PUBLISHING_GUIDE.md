@@ -189,27 +189,27 @@ export class ExampleComponent {
 
 ```html
 <!-- Button Examples -->
-<uilib-button variant="material" color="primary">
+<ui-lib-button variant="material" color="primary">
   Click Me
-</uilib-button>
+</ui-lib-button>
 
-<uilib-button 
+<ui-lib-button 
   variant="bootstrap" 
   size="large" 
   color="success"
   (click)="onSubmit()">
   Submit Form
-</uilib-button>
+</ui-lib-button>
 
-<uilib-button 
+<ui-lib-button 
   variant="minimal" 
   [disabled]="isLoading"
   [fullWidth]="true">
   {{ isLoading ? 'Loading...' : 'Process' }}
-</uilib-button>
+</ui-lib-button>
 
 <!-- Card Examples -->
-<uilib-card variant="material" elevation="medium">
+<ui-lib-card variant="material" elevation="medium">
   <div card-header>User Information</div>
   
   <div class="user-details">
@@ -218,22 +218,22 @@ export class ExampleComponent {
   </div>
   
   <div card-footer>
-    <uilib-button variant="material" color="primary" size="small">
+    <ui-lib-button variant="material" color="primary" size="small">
       Edit
-    </uilib-button>
-    <uilib-button variant="minimal" color="secondary" size="small">
+    </ui-lib-button>
+    <ui-lib-button variant="minimal" color="secondary" size="small">
       Cancel
-    </uilib-button>
+    </ui-lib-button>
   </div>
-</uilib-card>
+</ui-lib-card>
 
-<uilib-card 
+<ui-lib-card 
   variant="bootstrap" 
   [bordered]="true"
   [hoverable]="true"
   (click)="onCardClick()">
   <p>Clickable card with hover effect</p>
-</uilib-card>
+</ui-lib-card>
 ```
 
 ### 4. Module-Based Projects (Non-Standalone)
@@ -318,7 +318,7 @@ export class UserProfileComponent {
 **user-profile.component.html:**
 ```html
 <div class="profile-container">
-  <uilib-card variant="material" elevation="medium">
+  <ui-lib-card variant="material" elevation="medium">
     <div card-header>
       <h2>User Profile</h2>
     </div>
@@ -330,23 +330,23 @@ export class UserProfileComponent {
     </div>
 
     <div card-footer>
-      <uilib-button 
+      <ui-lib-button 
         variant="material" 
         color="primary" 
         size="small"
         (click)="toggleEdit()">
         {{ isEditing ? 'Save' : 'Edit' }}
-      </uilib-button>
-      <uilib-button 
+      </ui-lib-button>
+      <ui-lib-button 
         variant="minimal" 
         color="secondary" 
         size="small"
         *ngIf="isEditing"
         (click)="toggleEdit()">
         Cancel
-      </uilib-button>
+      </ui-lib-button>
     </div>
-  </uilib-card>
+  </ui-lib-card>
 </div>
 ```
 

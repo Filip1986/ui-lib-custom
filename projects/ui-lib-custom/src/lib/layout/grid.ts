@@ -13,7 +13,7 @@ export type GridJustify = 'start' | 'center' | 'end' | 'stretch';
  * Uses signals and host bindings for optimal performance.
  */
 @Component({
-  selector: 'uilib-grid',
+  selector: 'ui-lib-grid',
   standalone: true,
   template: '<ng-content />',
   host: {

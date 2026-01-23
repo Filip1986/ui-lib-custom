@@ -5,7 +5,7 @@ export type CardVariant = 'material' | 'bootstrap' | 'minimal';
 export type CardElevation = 'none' | 'low' | 'medium' | 'high';
 
 @Component({
-  selector: 'uilib-card',
+  selector: 'ui-lib-card',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card.html',

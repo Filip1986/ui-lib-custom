@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Inline],
   template: `
-    <uilib-inline [gap]="gap" [align]="align" [justify]="justify">
+    <ui-lib-inline [gap]="gap" [align]="align" [justify]="justify">
       <span>Tag 1</span>
       <span>Tag 2</span>
       <span>Tag 3</span>
-    </uilib-inline>
+    </ui-lib-inline>
   `,
 })
 class TestHostComponent {
@@ -33,7 +33,7 @@ describe('Inline', () => {
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const inlineElement: HTMLElement = fixture.nativeElement.querySelector('uilib-inline');
+    const inlineElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-inline');
     return { fixture, component, inlineElement };
   }
 

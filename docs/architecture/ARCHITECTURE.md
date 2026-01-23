@@ -63,8 +63,8 @@
     │  import { Button, Card }           │
     │  from 'ui-lib-custom';             │
     │                                    │
-    │  <uilib-button>                    │
-    │  <uilib-card>                      │
+    │  <ui-lib-button>                    │
+    │  <ui-lib-card>                      │
     └────────────────────────────────────┘
 ```
 
@@ -145,7 +145,7 @@ Button Component                    Card Component
    ▼
    Your Angular Project:
    import { Button, Card } from 'ui-lib-custom';
-   <uilib-button variant="material">Click</uilib-button>
+   <ui-lib-button variant="material">Click</ui-lib-button>
 ```
 
 ## Variant System
@@ -259,7 +259,7 @@ CSS Classes Applied:
          ↓
 6. USE
    ┌─────────────┐
-   │<uilib-      │
+   │<ui-lib-      │
    │button>      │
    └─────────────┘
 ```
@@ -280,8 +280,8 @@ app.ts (Your Component)
     ├─ imports: [Button, Card]
 ```
     └─ template: `
-         <uilib-button>    ──────→  button.html
-         <uilib-card>      ──────→  card.html
+         <ui-lib-button>    ──────→  button.html
+         <ui-lib-card>      ──────→  card.html
        `
                                         │
                                         ├─→ button.css

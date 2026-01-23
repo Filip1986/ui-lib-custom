@@ -130,8 +130,8 @@ import { Button, Card } from 'ui-lib-custom';
 @Component({
   imports: [Button, Card],
   template: `
-    <uilib-button variant="material" color="primary">Click Me</uilib-button>
-    <uilib-card variant="material">Content here</uilib-card>
+    <ui-lib-button variant="material" color="primary">Click Me</ui-lib-button>
+    <ui-lib-card variant="material">Content here</ui-lib-card>
   `
 })
 export class MyComponent {}
@@ -167,50 +167,50 @@ npm install ui-lib-custom
 ### Button Usage
 ```html
 <!-- Variants -->
-<uilib-button variant="material">Material</uilib-button>
-<uilib-button variant="bootstrap">Bootstrap</uilib-button>
-<uilib-button variant="minimal">Minimal</uilib-button>
+<ui-lib-button variant="material">Material</ui-lib-button>
+<ui-lib-button variant="bootstrap">Bootstrap</ui-lib-button>
+<ui-lib-button variant="minimal">Minimal</ui-lib-button>
 
 <!-- Sizes -->
-<uilib-button size="small">Small</uilib-button>
-<uilib-button size="medium">Medium</uilib-button>
-<uilib-button size="large">Large</uilib-button>
+<ui-lib-button size="small">Small</ui-lib-button>
+<ui-lib-button size="medium">Medium</ui-lib-button>
+<ui-lib-button size="large">Large</ui-lib-button>
 
 <!-- Colors -->
-<uilib-button color="primary">Primary</uilib-button>
-<uilib-button color="secondary">Secondary</uilib-button>
-<uilib-button color="success">Success</uilib-button>
-<uilib-button color="danger">Danger</uilib-button>
-<uilib-button color="warning">Warning</uilib-button>
+<ui-lib-button color="primary">Primary</ui-lib-button>
+<ui-lib-button color="secondary">Secondary</ui-lib-button>
+<ui-lib-button color="success">Success</ui-lib-button>
+<ui-lib-button color="danger">Danger</ui-lib-button>
+<ui-lib-button color="warning">Warning</ui-lib-button>
 
 <!-- States -->
-<uilib-button [disabled]="true">Disabled</uilib-button>
-<uilib-button [fullWidth]="true">Full Width</uilib-button>
+<ui-lib-button [disabled]="true">Disabled</ui-lib-button>
+<ui-lib-button [fullWidth]="true">Full Width</ui-lib-button>
 ```
 
 ### Card Usage
 ```html
 <!-- Full Card -->
-<uilib-card variant="material" elevation="medium">
+<ui-lib-card variant="material" elevation="medium">
   <div card-header>Header</div>
   <p>Content</p>
   <div card-footer>Footer</div>
-</uilib-card>
+</ui-lib-card>
 
 <!-- Variants -->
-<uilib-card variant="material">Material</uilib-card>
-<uilib-card variant="bootstrap">Bootstrap</uilib-card>
-<uilib-card variant="minimal">Minimal</uilib-card>
+<ui-lib-card variant="material">Material</ui-lib-card>
+<ui-lib-card variant="bootstrap">Bootstrap</ui-lib-card>
+<ui-lib-card variant="minimal">Minimal</ui-lib-card>
 
 <!-- Elevation -->
-<uilib-card elevation="none">No shadow</uilib-card>
-<uilib-card elevation="low">Low shadow</uilib-card>
-<uilib-card elevation="medium">Medium shadow</uilib-card>
-<uilib-card elevation="high">High shadow</uilib-card>
+<ui-lib-card elevation="none">No shadow</ui-lib-card>
+<ui-lib-card elevation="low">Low shadow</ui-lib-card>
+<ui-lib-card elevation="medium">Medium shadow</ui-lib-card>
+<ui-lib-card elevation="high">High shadow</ui-lib-card>
 
 <!-- Options -->
-<uilib-card [bordered]="true">With border</uilib-card>
-<uilib-card [hoverable]="true">Hover effect</uilib-card>
+<ui-lib-card [bordered]="true">With border</ui-lib-card>
+<ui-lib-card [hoverable]="true">Hover effect</ui-lib-card>
 ```
 
 ---

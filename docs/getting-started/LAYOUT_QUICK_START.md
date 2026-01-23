@@ -33,17 +33,17 @@ export class MyComponent {}
 @Component({
   template: `
     <!-- Vertical stack -->
-    <uilib-stack [gap]="4">
+    <ui-lib-stack [gap]="4">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
-    </uilib-stack>
+    </ui-lib-stack>
 
     <!-- Horizontal stack -->
-    <uilib-stack direction="horizontal" [gap]="3">
+    <ui-lib-stack direction="horizontal" [gap]="3">
       <button>Cancel</button>
       <button>Submit</button>
-    </uilib-stack>
+    </ui-lib-stack>
   `
 })
 ```
@@ -53,11 +53,11 @@ export class MyComponent {}
 ```typescript
 @Component({
   template: `
-    <uilib-inline [gap]="2">
+    <ui-lib-inline [gap]="2">
       <span class="tag">JavaScript</span>
       <span class="tag">TypeScript</span>
       <span class="tag">Angular</span>
-    </uilib-inline>
+    </ui-lib-inline>
   `
 })
 ```
@@ -68,18 +68,18 @@ export class MyComponent {}
 @Component({
   template: `
     <!-- 3-column grid -->
-    <uilib-grid [columns]="3" [gap]="4">
+    <ui-lib-grid [columns]="3" [gap]="4">
       <div>Cell 1</div>
       <div>Cell 2</div>
       <div>Cell 3</div>
-    </uilib-grid>
+    </ui-lib-grid>
 
     <!-- Responsive grid -->
-    <uilib-grid minColumnWidth="200px" [gap]="4">
+    <ui-lib-grid minColumnWidth="200px" [gap]="4">
       <div>Card 1</div>
       <div>Card 2</div>
       <div>Card 3</div>
-    </uilib-grid>
+    </ui-lib-grid>
   `
 })
 ```
@@ -89,10 +89,10 @@ export class MyComponent {}
 ```typescript
 @Component({
   template: `
-    <uilib-container size="lg" [padding]="6">
+    <ui-lib-container size="lg" [padding]="6">
       <h1>Welcome</h1>
       <p>Your content here</p>
-    </uilib-container>
+    </ui-lib-container>
   `
 })
 ```
@@ -104,13 +104,13 @@ export class MyComponent {}
 ```typescript
 @Component({
   template: `
-    <uilib-container size="xl" [padding]="6">
-      <uilib-grid [columns]="3" [gap]="4">
+    <ui-lib-container size="xl" [padding]="6">
+      <ui-lib-grid [columns]="3" [gap]="4">
         <div class="card">Card 1</div>
         <div class="card">Card 2</div>
         <div class="card">Card 3</div>
-      </uilib-grid>
-    </uilib-container>
+      </ui-lib-grid>
+    </ui-lib-container>
   `
 })
 ```
@@ -120,21 +120,21 @@ export class MyComponent {}
 ```typescript
 @Component({
   template: `
-    <uilib-container size="sm" [padding]="6">
-      <uilib-stack [gap]="6">
+    <ui-lib-container size="sm" [padding]="6">
+      <ui-lib-stack [gap]="6">
         <h1>Login</h1>
         
-        <uilib-stack [gap]="4">
+        <ui-lib-stack [gap]="4">
           <input type="email" placeholder="Email">
           <input type="password" placeholder="Password">
           
-          <uilib-stack direction="horizontal" justify="space-between">
+          <ui-lib-stack direction="horizontal" justify="space-between">
             <button>Cancel</button>
             <button>Login</button>
-          </uilib-stack>
-        </uilib-stack>
-      </uilib-stack>
-    </uilib-container>
+          </ui-lib-stack>
+        </ui-lib-stack>
+      </ui-lib-stack>
+    </ui-lib-container>
   `
 })
 ```
@@ -144,25 +144,25 @@ export class MyComponent {}
 ```typescript
 @Component({
   template: `
-    <uilib-container size="xl" [padding]="6">
-      <uilib-stack [gap]="6">
+    <ui-lib-container size="xl" [padding]="6">
+      <ui-lib-stack [gap]="6">
         <header>
           <h1>Dashboard</h1>
         </header>
         
-        <uilib-grid [columns]="4" [gap]="4">
+        <ui-lib-grid [columns]="4" [gap]="4">
           <div class="stat-card">Stat 1</div>
           <div class="stat-card">Stat 2</div>
           <div class="stat-card">Stat 3</div>
           <div class="stat-card">Stat 4</div>
-        </uilib-grid>
+        </ui-lib-grid>
         
-        <uilib-grid [columns]="2" [gap]="6">
+        <ui-lib-grid [columns]="2" [gap]="6">
           <div class="chart">Chart 1</div>
           <div class="chart">Chart 2</div>
-        </uilib-grid>
-      </uilib-stack>
-    </uilib-container>
+        </ui-lib-grid>
+      </ui-lib-stack>
+    </ui-lib-container>
   `
 })
 ```

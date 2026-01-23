@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Grid],
   template: `
-    <uilib-grid [columns]="columns" [gap]="gap" [minColumnWidth]="minColumnWidth">
+    <ui-lib-grid [columns]="columns" [gap]="gap" [minColumnWidth]="minColumnWidth">
       <div>Cell 1</div>
       <div>Cell 2</div>
       <div>Cell 3</div>
-    </uilib-grid>
+    </ui-lib-grid>
   `,
 })
 class TestHostComponent {
@@ -33,7 +33,7 @@ describe('Grid', () => {
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const gridElement: HTMLElement = fixture.nativeElement.querySelector('uilib-grid');
+    const gridElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-grid');
     return { fixture, component, gridElement };
   }
 

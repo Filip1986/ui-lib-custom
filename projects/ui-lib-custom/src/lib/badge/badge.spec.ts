@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Badge],
   template: `
-    <uilib-badge
+    <ui-lib-badge
       [variant]="variant"
       [color]="color"
       [size]="size"
@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
       [label]="label"
     >
       {{ content }}
-    </uilib-badge>
+    </ui-lib-badge>
   `,
 })
 class TestHostComponent {
@@ -41,7 +41,7 @@ describe('Badge', () => {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     Object.assign(fixture.componentInstance, initial);
     fixture.detectChanges();
-    const badgeElement: HTMLElement = fixture.nativeElement.querySelector('uilib-badge');
+    const badgeElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-badge');
     const styles = getComputedStyle(badgeElement);
     return { fixture, badgeElement, styles };
   }

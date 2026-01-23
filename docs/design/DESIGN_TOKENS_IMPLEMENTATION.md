@@ -217,7 +217,7 @@ import {
 
 ```typescript
 // Layout components already use tokens
-<uilib-stack [gap]="4">  <!-- Uses SPACING_TOKENS[4] -->
+<ui-lib-stack [gap]="4">  <!-- Uses SPACING_TOKENS[4] -->
 
 // Use in custom components
 @Component({

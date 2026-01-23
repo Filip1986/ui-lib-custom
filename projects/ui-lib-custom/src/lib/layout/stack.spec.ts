@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Stack],
   template: `
-    <uilib-stack [direction]="direction" [gap]="gap" [align]="align" [justify]="justify">
+    <ui-lib-stack [direction]="direction" [gap]="gap" [align]="align" [justify]="justify">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
-    </uilib-stack>
+    </ui-lib-stack>
   `,
 })
 class TestHostComponent {
@@ -34,7 +34,7 @@ describe('Stack', () => {
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const stackElement: HTMLElement = fixture.nativeElement.querySelector('uilib-stack');
+    const stackElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-stack');
     return { fixture, component, stackElement };
   }
 

@@ -105,14 +105,14 @@ import { Button, Card } from 'ui-lib-custom';
   selector: 'app-example',
   imports: [Button, Card],
   template: `
-    <uilib-button variant="material" color="primary">
+    <ui-lib-button variant="material" color="primary">
       Hello from my project!
-    </uilib-button>
+    </ui-lib-button>
     
-    <uilib-card variant="material">
+    <ui-lib-card variant="material">
       <div card-header>My Card</div>
       <p>This is working!</p>
-    </uilib-card>
+    </ui-lib-card>
   `
 })
 export class ExampleComponent {}
@@ -168,55 +168,55 @@ npm install
 
 ```html
 <!-- Different Variants -->
-<uilib-button variant="material" color="primary">Material</uilib-button>
-<uilib-button variant="bootstrap" color="success">Bootstrap</uilib-button>
-<uilib-button variant="minimal" color="danger">Minimal</uilib-button>
+<ui-lib-button variant="material" color="primary">Material</ui-lib-button>
+<ui-lib-button variant="bootstrap" color="success">Bootstrap</ui-lib-button>
+<ui-lib-button variant="minimal" color="danger">Minimal</ui-lib-button>
 
 <!-- Different Sizes -->
-<uilib-button size="small">Small</uilib-button>
-<uilib-button size="medium">Medium</uilib-button>
-<uilib-button size="large">Large</uilib-button>
+<ui-lib-button size="small">Small</ui-lib-button>
+<ui-lib-button size="medium">Medium</ui-lib-button>
+<ui-lib-button size="large">Large</ui-lib-button>
 
 <!-- States -->
-<uilib-button [disabled]="true">Disabled</uilib-button>
-<uilib-button [fullWidth]="true">Full Width</uilib-button>
+<ui-lib-button [disabled]="true">Disabled</ui-lib-button>
+<ui-lib-button [fullWidth]="true">Full Width</ui-lib-button>
 
 <!-- With Click Handler -->
-<uilib-button 
+<ui-lib-button 
   variant="material" 
   color="primary"
   (click)="handleClick()">
   Click Me
-</uilib-button>
+</ui-lib-button>
 ```
 
 ### Card Component
 
 ```html
 <!-- Full Card with Header and Footer -->
-<uilib-card variant="material" elevation="medium">
+<ui-lib-card variant="material" elevation="medium">
   <div card-header>Card Title</div>
   
   <p>Card content goes here...</p>
   <p>You can put any HTML content inside.</p>
   
   <div card-footer>
-    <uilib-button variant="material" size="small">Action</uilib-button>
+    <ui-lib-button variant="material" size="small">Action</ui-lib-button>
   </div>
-</uilib-card>
+</ui-lib-card>
 
 <!-- Simple Card -->
-<uilib-card variant="bootstrap">
+<ui-lib-card variant="bootstrap">
   <p>Simple card without header or footer</p>
-</uilib-card>
+</ui-lib-card>
 
 <!-- Hoverable Card -->
-<uilib-card 
+<ui-lib-card 
   variant="minimal" 
   [hoverable]="true"
   [bordered]="true">
   <p>Hover over me!</p>
-</uilib-card>
+</ui-lib-card>
 ```
 
 ## Common Commands

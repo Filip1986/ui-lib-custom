@@ -124,7 +124,7 @@ import { Badge } from 'ui-lib-custom';
 @Component({
   imports: [Badge],
   template: `
-    <uilib-badge color="success">Active</uilib-badge>
+    <ui-lib-badge color="success">Active</ui-lib-badge>
   `
 })
 ```
@@ -132,27 +132,27 @@ import { Badge } from 'ui-lib-custom';
 ### Status Tags
 
 ```html
-<uilib-badge color="success" [pill]="true">Published</uilib-badge>
-<uilib-badge color="warning" [pill]="true">Draft</uilib-badge>
-<uilib-badge color="danger" [pill]="true">Archived</uilib-badge>
+<ui-lib-badge color="success" [pill]="true">Published</ui-lib-badge>
+<ui-lib-badge color="warning" [pill]="true">Draft</ui-lib-badge>
+<ui-lib-badge color="danger" [pill]="true">Archived</ui-lib-badge>
 ```
 
 ### Notification Counts
 
 ```html
-<uilib-inline [gap]="2" align="center">
+<ui-lib-inline [gap]="2" align="center">
   <span>Messages</span>
-  <uilib-badge color="danger" size="sm" [pill]="true">5</uilib-badge>
-</uilib-inline>
+  <ui-lib-badge color="danger" size="sm" [pill]="true">5</ui-lib-badge>
+</ui-lib-inline>
 ```
 
 ### Dot Indicators
 
 ```html
-<uilib-inline [gap]="2" align="center">
-  <uilib-badge color="success" [dot]="true"></uilib-badge>
+<ui-lib-inline [gap]="2" align="center">
+  <ui-lib-badge color="success" [dot]="true"></ui-lib-badge>
   <span>Online</span>
-</uilib-inline>
+</ui-lib-inline>
 ```
 
 ---
@@ -173,7 +173,7 @@ import { Badge } from 'ui-lib-custom';
 ### DOM Structure
 ```html
 <!-- Single element, no wrappers -->
-<uilib-badge style="...">Content</uilib-badge>
+<ui-lib-badge style="...">Content</ui-lib-badge>
 ```
 
 ---
@@ -343,9 +343,9 @@ npm install ui-lib-custom
 import { Badge } from 'ui-lib-custom';
 
 // Use
-<uilib-badge color="success">Active</uilib-badge>
-<uilib-badge color="danger" size="sm" [pill]="true">5</uilib-badge>
-<uilib-badge color="warning" variant="outline">Beta</uilib-badge>
+<ui-lib-badge color="success">Active</ui-lib-badge>
+<ui-lib-badge color="danger" size="sm" [pill]="true">5</ui-lib-badge>
+<ui-lib-badge color="warning" variant="outline">Beta</ui-lib-badge>
 ```
 
 **View demo:** http://localhost:51614/badges

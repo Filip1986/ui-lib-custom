@@ -12,7 +12,7 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
-  private readonly THEME_KEY = 'uilib-theme';
+  private readonly THEME_KEY = 'ui-lib-theme';
   sidebarVisible = signal(false);
   theme = signal<'light' | 'dark'>(this.getInitialTheme());
 

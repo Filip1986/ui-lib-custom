@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Container],
   template: `
-    <uilib-container [size]="size" [centered]="centered" [padding]="padding">
+    <ui-lib-container [size]="size" [centered]="centered" [padding]="padding">
       <p>Container content</p>
-    </uilib-container>
+    </ui-lib-container>
   `,
 })
 class TestHostComponent {
@@ -31,7 +31,7 @@ describe('Container', () => {
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const containerElement: HTMLElement = fixture.nativeElement.querySelector('uilib-container');
+    const containerElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-container');
     return { fixture, component, containerElement };
   }
 

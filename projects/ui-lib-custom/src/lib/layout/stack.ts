@@ -14,7 +14,7 @@ export type StackJustify = 'start' | 'center' | 'end' | 'space-between' | 'space
  * Uses signals for optimal change detection performance.
  */
 @Component({
-  selector: 'uilib-stack',
+  selector: 'ui-lib-stack',
   standalone: true,
   template: '<ng-content />',
   host: {

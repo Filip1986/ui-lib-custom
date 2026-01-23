@@ -177,7 +177,7 @@ Each component page follows this structure:
     <div class="doc-demo-group">
       <h3>Colors</h3>
       <div class="doc-demo centered">
-        <uilib-button>Example</uilib-button>
+        <ui-lib-button>Example</ui-lib-button>
       </div>
       <div class="doc-code">
         <pre><code>...</code></pre>

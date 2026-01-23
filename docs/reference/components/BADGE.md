@@ -47,7 +47,7 @@ import { Badge } from 'ui-lib-custom';
   standalone: true,
   imports: [Badge],
   template: `
-    <uilib-badge color="success">Active</uilib-badge>
+    <ui-lib-badge color="success">Active</ui-lib-badge>
   `
 })
 export class MyComponent {}
@@ -88,27 +88,27 @@ const size: BadgeSize = 'md';
 Filled background with white text for maximum visibility.
 
 ```html
-<uilib-badge color="primary" variant="solid">Primary</uilib-badge>
-<uilib-badge color="success" variant="solid">Success</uilib-badge>
-<uilib-badge color="danger" variant="solid">Danger</uilib-badge>
+<ui-lib-badge color="primary" variant="solid">Primary</ui-lib-badge>
+<ui-lib-badge color="success" variant="solid">Success</ui-lib-badge>
+<ui-lib-badge color="danger" variant="solid">Danger</ui-lib-badge>
 ```
 
 #### Outline
 Transparent background with colored border and text.
 
 ```html
-<uilib-badge color="primary" variant="outline">Primary</uilib-badge>
-<uilib-badge color="success" variant="outline">Success</uilib-badge>
-<uilib-badge color="danger" variant="outline">Danger</uilib-badge>
+<ui-lib-badge color="primary" variant="outline">Primary</ui-lib-badge>
+<ui-lib-badge color="success" variant="outline">Success</ui-lib-badge>
+<ui-lib-badge color="danger" variant="outline">Danger</ui-lib-badge>
 ```
 
 #### Subtle
 Light background with colored text for a softer appearance.
 
 ```html
-<uilib-badge color="primary" variant="subtle">Primary</uilib-badge>
-<uilib-badge color="success" variant="subtle">Success</uilib-badge>
-<uilib-badge color="danger" variant="subtle">Danger</uilib-badge>
+<ui-lib-badge color="primary" variant="subtle">Primary</ui-lib-badge>
+<ui-lib-badge color="success" variant="subtle">Success</ui-lib-badge>
+<ui-lib-badge color="danger" variant="subtle">Danger</ui-lib-badge>
 ```
 
 ---
@@ -117,13 +117,13 @@ Light background with colored text for a softer appearance.
 
 ```html
 <!-- Small -->
-<uilib-badge color="primary" size="sm">Small</uilib-badge>
+<ui-lib-badge color="primary" size="sm">Small</ui-lib-badge>
 
 <!-- Medium (default) -->
-<uilib-badge color="primary" size="md">Medium</uilib-badge>
+<ui-lib-badge color="primary" size="md">Medium</ui-lib-badge>
 
 <!-- Large -->
-<uilib-badge color="primary" size="lg">Large</uilib-badge>
+<ui-lib-badge color="primary" size="lg">Large</ui-lib-badge>
 ```
 
 ---
@@ -131,9 +131,9 @@ Light background with colored text for a softer appearance.
 ### Pill Shape
 
 ```html
-<uilib-badge color="success" [pill]="true">Active</uilib-badge>
-<uilib-badge color="warning" [pill]="true">Pending</uilib-badge>
-<uilib-badge color="danger" [pill]="true">Inactive</uilib-badge>
+<ui-lib-badge color="success" [pill]="true">Active</ui-lib-badge>
+<ui-lib-badge color="warning" [pill]="true">Pending</ui-lib-badge>
+<ui-lib-badge color="danger" [pill]="true">Inactive</ui-lib-badge>
 ```
 
 ---
@@ -144,20 +144,20 @@ Perfect for status indicators.
 
 ```html
 <!-- Inline with text -->
-<uilib-inline [gap]="2" align="center">
-  <uilib-badge color="success" [dot]="true"></uilib-badge>
+<ui-lib-inline [gap]="2" align="center">
+  <ui-lib-badge color="success" [dot]="true"></ui-lib-badge>
   <span>Online</span>
-</uilib-inline>
+</ui-lib-inline>
 
-<uilib-inline [gap]="2" align="center">
-  <uilib-badge color="danger" [dot]="true"></uilib-badge>
+<ui-lib-inline [gap]="2" align="center">
+  <ui-lib-badge color="danger" [dot]="true"></ui-lib-badge>
   <span>Offline</span>
-</uilib-inline>
+</ui-lib-inline>
 
 <!-- Different sizes -->
-<uilib-badge color="success" [dot]="true" size="sm"></uilib-badge>
-<uilib-badge color="success" [dot]="true" size="md"></uilib-badge>
-<uilib-badge color="success" [dot]="true" size="lg"></uilib-badge>
+<ui-lib-badge color="success" [dot]="true" size="sm"></ui-lib-badge>
+<ui-lib-badge color="success" [dot]="true" size="md"></ui-lib-badge>
+<ui-lib-badge color="success" [dot]="true" size="lg"></ui-lib-badge>
 ```
 
 ---
@@ -167,56 +167,56 @@ Perfect for status indicators.
 ### Status Tags
 
 ```html
-<uilib-badge color="success" [pill]="true">Published</uilib-badge>
-<uilib-badge color="warning" [pill]="true">Draft</uilib-badge>
-<uilib-badge color="info" [pill]="true">In Review</uilib-badge>
-<uilib-badge color="danger" [pill]="true">Archived</uilib-badge>
+<ui-lib-badge color="success" [pill]="true">Published</ui-lib-badge>
+<ui-lib-badge color="warning" [pill]="true">Draft</ui-lib-badge>
+<ui-lib-badge color="info" [pill]="true">In Review</ui-lib-badge>
+<ui-lib-badge color="danger" [pill]="true">Archived</ui-lib-badge>
 ```
 
 ### Notification Counts
 
 ```html
-<uilib-inline [gap]="3" align="center">
+<ui-lib-inline [gap]="3" align="center">
   <span>Messages</span>
-  <uilib-badge color="danger" size="sm" [pill]="true">5</uilib-badge>
-</uilib-inline>
+  <ui-lib-badge color="danger" size="sm" [pill]="true">5</ui-lib-badge>
+</ui-lib-inline>
 
-<uilib-inline [gap]="3" align="center">
+<ui-lib-inline [gap]="3" align="center">
   <span>Notifications</span>
-  <uilib-badge color="primary" size="sm" [pill]="true">12</uilib-badge>
-</uilib-inline>
+  <ui-lib-badge color="primary" size="sm" [pill]="true">12</ui-lib-badge>
+</ui-lib-inline>
 ```
 
 ### Technology Tags
 
 ```html
-<uilib-inline [gap]="2">
-  <uilib-badge color="info" variant="subtle">TypeScript</uilib-badge>
-  <uilib-badge color="primary" variant="subtle">Angular</uilib-badge>
-  <uilib-badge color="success" variant="subtle">Node.js</uilib-badge>
-  <uilib-badge color="warning" variant="subtle">JavaScript</uilib-badge>
-</uilib-inline>
+<ui-lib-inline [gap]="2">
+  <ui-lib-badge color="info" variant="subtle">TypeScript</ui-lib-badge>
+  <ui-lib-badge color="primary" variant="subtle">Angular</ui-lib-badge>
+  <ui-lib-badge color="success" variant="subtle">Node.js</ui-lib-badge>
+  <ui-lib-badge color="warning" variant="subtle">JavaScript</ui-lib-badge>
+</ui-lib-inline>
 ```
 
 ### User Roles
 
 ```html
-<uilib-inline [gap]="2">
-  <uilib-badge color="danger" variant="outline" size="sm">Admin</uilib-badge>
-  <uilib-badge color="primary" variant="outline" size="sm">Moderator</uilib-badge>
-  <uilib-badge color="success" variant="outline" size="sm">Member</uilib-badge>
-  <uilib-badge color="neutral" variant="outline" size="sm">Guest</uilib-badge>
-</uilib-inline>
+<ui-lib-inline [gap]="2">
+  <ui-lib-badge color="danger" variant="outline" size="sm">Admin</ui-lib-badge>
+  <ui-lib-badge color="primary" variant="outline" size="sm">Moderator</ui-lib-badge>
+  <ui-lib-badge color="success" variant="outline" size="sm">Member</ui-lib-badge>
+  <ui-lib-badge color="neutral" variant="outline" size="sm">Guest</ui-lib-badge>
+</ui-lib-inline>
 ```
 
 ### Version Labels
 
 ```html
-<uilib-inline [gap]="2">
-  <uilib-badge color="success" [pill]="true">v2.0.0</uilib-badge>
-  <uilib-badge color="info" variant="outline" [pill]="true">Beta</uilib-badge>
-  <uilib-badge color="warning" variant="outline" [pill]="true">Deprecated</uilib-badge>
-</uilib-inline>
+<ui-lib-inline [gap]="2">
+  <ui-lib-badge color="success" [pill]="true">v2.0.0</ui-lib-badge>
+  <ui-lib-badge color="info" variant="outline" [pill]="true">Beta</ui-lib-badge>
+  <ui-lib-badge color="warning" variant="outline" [pill]="true">Deprecated</ui-lib-badge>
+</ui-lib-inline>
 ```
 
 ---
@@ -227,27 +227,27 @@ Badge works great with layout primitives:
 
 ```html
 <!-- With Stack -->
-<uilib-stack [gap]="3">
-  <uilib-inline [gap]="2" align="center">
-    <uilib-badge color="success" [dot]="true"></uilib-badge>
+<ui-lib-stack [gap]="3">
+  <ui-lib-inline [gap]="2" align="center">
+    <ui-lib-badge color="success" [dot]="true"></ui-lib-badge>
     <span>Server Online</span>
-  </uilib-inline>
-  <uilib-inline [gap]="2" align="center">
-    <uilib-badge color="warning" [dot]="true"></uilib-badge>
+  </ui-lib-inline>
+  <ui-lib-inline [gap]="2" align="center">
+    <ui-lib-badge color="warning" [dot]="true"></ui-lib-badge>
     <span>Database Slow</span>
-  </uilib-inline>
-</uilib-stack>
+  </ui-lib-inline>
+</ui-lib-stack>
 
 <!-- With Grid -->
-<uilib-grid [columns]="3" [gap]="4">
+<ui-lib-grid [columns]="3" [gap]="4">
   <div class="card">
-    <uilib-stack [gap]="2">
+    <ui-lib-stack [gap]="2">
       <h3>Task 1</h3>
-      <uilib-badge color="success" variant="solid">Complete</uilib-badge>
-    </uilib-stack>
+      <ui-lib-badge color="success" variant="solid">Complete</ui-lib-badge>
+    </ui-lib-stack>
   </div>
   <!-- More cards -->
-</uilib-grid>
+</ui-lib-grid>
 ```
 
 ---
@@ -268,10 +268,10 @@ Badge works great with layout primitives:
 ### DOM Structure
 ```html
 <!-- Input -->
-<uilib-badge color="success">Active</uilib-badge>
+<ui-lib-badge color="success">Active</ui-lib-badge>
 
 <!-- Output (single element) -->
-<uilib-badge style="...">Active</uilib-badge>
+<ui-lib-badge style="...">Active</ui-lib-badge>
 ```
 
 No wrapper divs or unnecessary elements.
@@ -316,7 +316,7 @@ No wrapper divs or unnecessary elements.
 <mat-chip>Active</mat-chip>
 
 <!-- Our Badge -->
-<uilib-badge color="success">Active</uilib-badge>
+<ui-lib-badge color="success">Active</ui-lib-badge>
 ```
 
 **Advantages:**
@@ -331,7 +331,7 @@ No wrapper divs or unnecessary elements.
 <span class="badge bg-success">Active</span>
 
 <!-- Our Badge -->
-<uilib-badge color="success">Active</uilib-badge>
+<ui-lib-badge color="success">Active</ui-lib-badge>
 ```
 
 **Advantages:**
@@ -348,35 +348,35 @@ No wrapper divs or unnecessary elements.
 
 ```html
 <!-- Good -->
-<uilib-badge color="success">Active</uilib-badge>
-<uilib-badge color="danger">Error</uilib-badge>
+<ui-lib-badge color="success">Active</ui-lib-badge>
+<ui-lib-badge color="danger">Error</ui-lib-badge>
 ```
 
 ### ❌ DON'T: Override Colors with Inline Styles
 
 ```html
 <!-- Avoid -->
-<uilib-badge color="success" style="background: red;">Active</uilib-badge>
+<ui-lib-badge color="success" style="background: red;">Active</ui-lib-badge>
 ```
 
 ### ✅ DO: Use with Layout Primitives
 
 ```html
 <!-- Good -->
-<uilib-inline [gap]="2">
-  <uilib-badge color="info" variant="subtle">Tag 1</uilib-badge>
-  <uilib-badge color="info" variant="subtle">Tag 2</uilib-badge>
-</uilib-inline>
+<ui-lib-inline [gap]="2">
+  <ui-lib-badge color="info" variant="subtle">Tag 1</ui-lib-badge>
+  <ui-lib-badge color="info" variant="subtle">Tag 2</ui-lib-badge>
+</ui-lib-inline>
 ```
 
 ### ✅ DO: Use Appropriate Sizes
 
 ```html
 <!-- Good - Small for counts -->
-<uilib-badge color="danger" size="sm" [pill]="true">5</uilib-badge>
+<ui-lib-badge color="danger" size="sm" [pill]="true">5</ui-lib-badge>
 
 <!-- Good - Medium for labels -->
-<uilib-badge color="success" size="md">Active</uilib-badge>
+<ui-lib-badge color="success" size="md">Active</ui-lib-badge>
 ```
 
 ---
@@ -421,7 +421,7 @@ No polyfills required.
 <span class="custom-badge custom-badge-success">Active</span>
 
 <!-- After -->
-<uilib-badge color="success">Active</uilib-badge>
+<ui-lib-badge color="success">Active</ui-lib-badge>
 ```
 
 ### From Material Chips
@@ -434,10 +434,10 @@ No polyfills required.
 </mat-chip-listbox>
 
 <!-- After -->
-<uilib-inline [gap]="2">
-  <uilib-badge color="info" variant="subtle">TypeScript</uilib-badge>
-  <uilib-badge color="primary" variant="subtle">Angular</uilib-badge>
-</uilib-inline>
+<ui-lib-inline [gap]="2">
+  <ui-lib-badge color="info" variant="subtle">TypeScript</ui-lib-badge>
+  <ui-lib-badge color="primary" variant="subtle">Angular</ui-lib-badge>
+</ui-lib-inline>
 ```
 
 ---
