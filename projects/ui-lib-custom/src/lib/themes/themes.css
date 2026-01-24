@@ -53,28 +53,41 @@
   /* Buttons */
   --uilib-button-primary-bg: var(--uilib-color-primary-600);
   --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
+  --uilib-button-primary-bg-active: var(--uilib-color-primary-700);
   --uilib-button-primary-border: var(--uilib-color-primary-600);
   --uilib-button-primary-fg: #fff;
 
   --uilib-button-secondary-bg: var(--uilib-color-secondary-600);
   --uilib-button-secondary-bg-hover: var(--uilib-color-secondary-700);
+  --uilib-button-secondary-bg-active: var(--uilib-color-secondary-700);
   --uilib-button-secondary-border: var(--uilib-color-secondary-600);
   --uilib-button-secondary-fg: #fff;
 
   --uilib-button-success-bg: var(--uilib-color-success-600);
   --uilib-button-success-bg-hover: var(--uilib-color-success-700);
+  --uilib-button-success-bg-active: var(--uilib-color-success-700);
   --uilib-button-success-border: var(--uilib-color-success-600);
   --uilib-button-success-fg: #fff;
 
   --uilib-button-danger-bg: var(--uilib-color-danger-600);
   --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
+  --uilib-button-danger-bg-active: var(--uilib-color-danger-700);
   --uilib-button-danger-border: var(--uilib-color-danger-600);
   --uilib-button-danger-fg: #fff;
 
   --uilib-button-warning-bg: var(--uilib-color-warning-600);
   --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
+  --uilib-button-warning-bg-active: var(--uilib-color-warning-700);
   --uilib-button-warning-border: var(--uilib-color-warning-600);
   --uilib-button-warning-fg: #000;
+
+  --uilib-button-padding-small: 0.25rem 0.75rem;
+  --uilib-button-padding-medium: 0.5rem 1rem;
+  --uilib-button-padding-large: 0.75rem 1.25rem;
+  --uilib-button-font-size-small: 0.875rem;
+  --uilib-button-font-size-medium: 1rem;
+  --uilib-button-font-size-large: 1.125rem;
+  --uilib-button-radius: var(--uilib-radius-md);
 
   /* Cards */
   --uilib-card-bg: #fff;
@@ -135,28 +148,41 @@
   /* Buttons */
   --uilib-button-primary-bg: var(--uilib-color-primary-600);
   --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
+  --uilib-button-primary-bg-active: var(--uilib-color-primary-700);
   --uilib-button-primary-border: var(--uilib-color-primary-600);
   --uilib-button-primary-fg: #fff;
 
   --uilib-button-secondary-bg: var(--uilib-color-secondary-600);
   --uilib-button-secondary-bg-hover: var(--uilib-color-secondary-700);
+  --uilib-button-secondary-bg-active: var(--uilib-color-secondary-700);
   --uilib-button-secondary-border: var(--uilib-color-secondary-600);
   --uilib-button-secondary-fg: #fff;
 
   --uilib-button-success-bg: var(--uilib-color-success-600);
   --uilib-button-success-bg-hover: var(--uilib-color-success-700);
+  --uilib-button-success-bg-active: var(--uilib-color-success-700);
   --uilib-button-success-border: var(--uilib-color-success-600);
   --uilib-button-success-fg: #fff;
 
   --uilib-button-danger-bg: var(--uilib-color-danger-600);
   --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
+  --uilib-button-danger-bg-active: var(--uilib-color-danger-700);
   --uilib-button-danger-border: var(--uilib-color-danger-600);
   --uilib-button-danger-fg: #fff;
 
   --uilib-button-warning-bg: var(--uilib-color-warning-600);
   --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
+  --uilib-button-warning-bg-active: var(--uilib-color-warning-700);
   --uilib-button-warning-border: var(--uilib-color-warning-600);
   --uilib-button-warning-fg: #000;
+
+  --uilib-button-padding-small: 0.25rem 0.75rem;
+  --uilib-button-padding-medium: 0.5rem 1rem;
+  --uilib-button-padding-large: 0.75rem 1.25rem;
+  --uilib-button-font-size-small: 0.875rem;
+  --uilib-button-font-size-medium: 1rem;
+  --uilib-button-font-size-large: 1.125rem;
+  --uilib-button-radius: var(--uilib-radius-md);
 
   --uilib-card-bg: #1f1f1f;
   --uilib-card-text-color: var(--uilib-color-neutral-900);

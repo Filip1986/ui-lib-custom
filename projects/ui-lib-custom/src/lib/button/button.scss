@@ -21,32 +21,28 @@
   --uilib-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --uilib-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
-  /* Color tokens (fallbacks mirror design-tokens.ts) */
-  --uilib-color-primary-100: #bbdefb;
-  --uilib-color-primary-500: #2196f3;
-  --uilib-color-primary-600: #1e88e5;
-  --uilib-color-primary-700: #1976d2;
-  --uilib-color-neutral-50: #fafafa;
-  --uilib-color-neutral-100: #f5f5f5;
-  --uilib-color-neutral-200: #eeeeee;
-  --uilib-color-neutral-400: #bdbdbd;
-  --uilib-color-neutral-900: #212121;
-  --uilib-color-success-600: #43a047;
-  --uilib-color-success-700: #388e3c;
-  --uilib-color-danger-600: #e53935;
-  --uilib-color-danger-700: #d32f2f;
-  --uilib-color-warning-600: #fb8c00;
-  --uilib-color-warning-700: #f57c00;
-  --uilib-color-secondary-600: #757575;
-  --uilib-color-secondary-700: #616161;
-
-  /* Component-level variables */
+  /* Component-level variables (CSS-var first, no hardcoded colors) */
   --uilib-button-radius: var(--uilib-radius-md);
   --uilib-button-gap: var(--uilib-space-2);
   --uilib-button-transition: all 0.2s ease;
   --uilib-button-focus-color: var(--uilib-color-primary-500);
-  --uilib-button-focus-ring: 0 0 0 3px var(--uilib-color-primary-100, #e3f2fd);
+  --uilib-button-focus-ring-color: var(--uilib-color-primary-100);
+  --uilib-button-focus-ring: 0 0 0 3px var(--uilib-button-focus-ring-color);
   --uilib-button-disabled-opacity: 0.5;
+  --uilib-button-border-width: 1px;
+  --uilib-button-border-style: solid;
+  --uilib-button-shadow: var(--uilib-shadow-sm);
+  --uilib-button-shadow-hover: var(--uilib-shadow-md);
+  --uilib-button-text-transform: none;
+  --uilib-button-letter-spacing: normal;
+
+  /* Size variables */
+  --uilib-button-padding-small: var(--uilib-space-1) var(--uilib-space-3);
+  --uilib-button-padding-medium: var(--uilib-space-2) var(--uilib-space-4);
+  --uilib-button-padding-large: var(--uilib-space-3) var(--uilib-space-5);
+  --uilib-button-font-size-small: var(--uilib-font-size-sm);
+  --uilib-button-font-size-medium: var(--uilib-font-size-md);
+  --uilib-button-font-size-large: var(--uilib-font-size-lg);
 
   display: inline-flex;
 }
@@ -56,18 +52,21 @@ button {
   align-items: center;
   justify-content: center;
   gap: var(--uilib-button-gap);
-  border-radius: var(--uilib-button-radius);
-  border: 1px solid transparent;
+  border-radius: var(--uilib-button-radius, var(--uilib-radius-md));
+  border: var(--uilib-button-border-width) var(--uilib-button-border-style) var(--btn-border, currentColor);
   font-weight: var(--uilib-font-weight-semibold);
   font-family: inherit;
-  text-transform: none;
-  padding: var(--uilib-space-2) var(--uilib-space-4);
-  background-color: var(--btn-bg, var(--uilib-color-neutral-100));
-  color: var(--btn-fg, var(--uilib-color-neutral-900));
+  text-transform: var(--uilib-button-text-transform);
+  letter-spacing: var(--uilib-button-letter-spacing);
+  padding: var(--uilib-button-padding, var(--uilib-button-padding-medium));
+  background-color: var(--btn-bg, var(--uilib-button-secondary-bg, var(--uilib-color-secondary-100)));
+  color: var(--btn-fg, var(--uilib-button-secondary-fg, inherit));
   transition: var(--uilib-button-transition);
   cursor: pointer;
   position: relative;
   outline: none;
+  font-size: var(--uilib-button-font-size, var(--uilib-button-font-size-medium));
+  box-shadow: var(--uilib-button-shadow, none);
 }
 
 button:focus-visible {
@@ -79,6 +78,7 @@ button:focus-visible {
 button:hover:not(.btn-disabled) {
   background-color: var(--btn-bg-hover, var(--btn-bg));
   color: var(--btn-fg-hover, var(--btn-fg));
+  box-shadow: var(--uilib-button-shadow-hover, var(--uilib-button-shadow));
 }
 
 button:active:not(.btn-disabled) {
@@ -103,111 +103,99 @@ button:active:not(.btn-disabled) {
   }
 
   &-small {
-    padding: var(--uilib-space-1) var(--uilib-space-3);
-    font-size: var(--uilib-font-size-sm);
+    --uilib-button-padding: var(--uilib-button-padding-small);
+    --uilib-button-font-size: var(--uilib-button-font-size-small);
   }
 
   &-medium {
-    padding: var(--uilib-space-2) var(--uilib-space-4);
-    font-size: var(--uilib-font-size-md);
+    --uilib-button-padding: var(--uilib-button-padding-medium);
+    --uilib-button-font-size: var(--uilib-button-font-size-medium);
   }
 
   &-large {
-    padding: var(--uilib-space-3) var(--uilib-space-5);
-    font-size: var(--uilib-font-size-lg);
+    --uilib-button-padding: var(--uilib-button-padding-large);
+    --uilib-button-font-size: var(--uilib-button-font-size-large);
   }
 
   /* Appearance modifiers */
   &-appearance-outline {
     background-color: transparent;
-    color: var(--btn-border, var(--btn-bg));
-    border-color: var(--btn-border, var(--btn-bg));
+    color: var(--btn-border, var(--btn-bg, currentColor));
+    border-color: var(--btn-border, var(--btn-bg, currentColor));
   }
 
   &-appearance-ghost {
     background-color: transparent;
-    color: var(--btn-border, var(--btn-bg));
+    color: var(--btn-border, var(--btn-bg, currentColor));
     border-color: transparent;
   }
 
   &-material {
-    box-shadow: var(--uilib-shadow-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    &:hover:not(.btn-disabled) {
-      box-shadow: var(--uilib-shadow-md);
-      transform: translateY(-1px);
-    }
-
-    &:active:not(.btn-disabled) {
-      transform: translateY(0);
-    }
+    --uilib-button-shadow: var(--uilib-shadow-sm);
+    --uilib-button-shadow-hover: var(--uilib-shadow-md);
+    --uilib-button-text-transform: uppercase;
+    --uilib-button-letter-spacing: 0.5px;
   }
 
   &-bootstrap {
-    border-radius: var(--uilib-radius-sm);
-    border: 1px solid var(--btn-border, currentColor);
-
-    &:hover:not(.btn-disabled) {
-      filter: brightness(0.95);
-    }
-
-    &:active:not(.btn-disabled) {
-      filter: brightness(0.9);
-    }
+    --uilib-button-radius: var(--uilib-radius-sm);
+    --uilib-button-border-width: 1px;
   }
 
   &-minimal {
+    --uilib-button-radius: 0;
+    --uilib-button-shadow: none;
+    --uilib-button-shadow-hover: none;
+    --uilib-button-border-style: solid;
     background-color: transparent;
-    border: 1px solid var(--btn-border, currentColor);
+    border-color: var(--btn-border, currentColor);
     box-shadow: none;
 
     &:hover:not(.btn-disabled) {
       background-color: var(--btn-bg-hover, var(--btn-border, currentColor));
-      color: var(--btn-fg-hover, #fff);
+      color: var(--btn-fg-hover, var(--btn-fg, inherit));
     }
   }
 
   /* Severity palettes via CSS vars */
   &-primary {
-    --btn-bg: var(--uilib-button-primary-bg, var(--uilib-color-primary-600));
-    --btn-bg-hover: var(--uilib-button-primary-bg-hover, var(--uilib-color-primary-700));
-    --btn-bg-active: var(--uilib-button-primary-bg-active, var(--uilib-color-primary-700));
-    --btn-border: var(--uilib-button-primary-border, var(--uilib-color-primary-600));
-    --btn-fg: var(--uilib-button-primary-fg, #fff);
+    --btn-bg: var(--uilib-button-primary-bg);
+    --btn-bg-hover: var(--uilib-button-primary-bg-hover);
+    --btn-bg-active: var(--uilib-button-primary-bg-active, var(--uilib-button-primary-bg-hover));
+    --btn-border: var(--uilib-button-primary-border);
+    --btn-fg: var(--uilib-button-primary-fg);
   }
 
   &-secondary {
-    --btn-bg: var(--uilib-button-secondary-bg, var(--uilib-color-secondary-600));
-    --btn-bg-hover: var(--uilib-button-secondary-bg-hover, var(--uilib-color-secondary-700));
-    --btn-bg-active: var(--uilib-button-secondary-bg-active, var(--uilib-color-secondary-700));
-    --btn-border: var(--uilib-button-secondary-border, var(--uilib-color-secondary-600));
-    --btn-fg: var(--uilib-button-secondary-fg, #fff);
+    --btn-bg: var(--uilib-button-secondary-bg);
+    --btn-bg-hover: var(--uilib-button-secondary-bg-hover);
+    --btn-bg-active: var(--uilib-button-secondary-bg-active, var(--uilib-button-secondary-bg-hover));
+    --btn-border: var(--uilib-button-secondary-border);
+    --btn-fg: var(--uilib-button-secondary-fg);
   }
 
   &-success {
-    --btn-bg: var(--uilib-button-success-bg, var(--uilib-color-success-600));
-    --btn-bg-hover: var(--uilib-button-success-bg-hover, var(--uilib-color-success-700));
-    --btn-bg-active: var(--uilib-button-success-bg-active, var(--uilib-color-success-700));
-    --btn-border: var(--uilib-button-success-border, var(--uilib-color-success-600));
-    --btn-fg: var(--uilib-button-success-fg, #fff);
+    --btn-bg: var(--uilib-button-success-bg);
+    --btn-bg-hover: var(--uilib-button-success-bg-hover);
+    --btn-bg-active: var(--uilib-button-success-bg-active, var(--uilib-button-success-bg-hover));
+    --btn-border: var(--uilib-button-success-border);
+    --btn-fg: var(--uilib-button-success-fg);
   }
 
   &-danger {
-    --btn-bg: var(--uilib-button-danger-bg, var(--uilib-color-danger-600));
-    --btn-bg-hover: var(--uilib-button-danger-bg-hover, var(--uilib-color-danger-700));
-    --btn-bg-active: var(--uilib-button-danger-bg-active, var(--uilib-color-danger-700));
-    --btn-border: var(--uilib-button-danger-border, var(--uilib-color-danger-600));
-    --btn-fg: var(--uilib-button-danger-fg, #fff);
+    --btn-bg: var(--uilib-button-danger-bg);
+    --btn-bg-hover: var(--uilib-button-danger-bg-hover);
+    --btn-bg-active: var(--uilib-button-danger-bg-active, var(--uilib-button-danger-bg-hover));
+    --btn-border: var(--uilib-button-danger-border);
+    --btn-fg: var(--uilib-button-danger-fg);
   }
 
   &-warning {
-    --btn-bg: var(--uilib-button-warning-bg, var(--uilib-color-warning-600));
-    --btn-bg-hover: var(--uilib-button-warning-bg-hover, var(--uilib-color-warning-700));
-    --btn-bg-active: var(--uilib-button-warning-bg-active, var(--uilib-color-warning-700));
-    --btn-border: var(--uilib-button-warning-border, var(--uilib-color-warning-600));
-    --btn-fg: var(--uilib-button-warning-fg, #000);
+    --btn-bg: var(--uilib-button-warning-bg);
+    --btn-bg-hover: var(--uilib-button-warning-bg-hover);
+    --btn-bg-active: var(--uilib-button-warning-bg-active, var(--uilib-button-warning-bg-hover));
+    --btn-border: var(--uilib-button-warning-border);
+    --btn-fg: var(--uilib-button-warning-fg);
   }
 }
 
