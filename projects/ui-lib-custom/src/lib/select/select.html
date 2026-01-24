@@ -1,0 +1,66 @@
+<div [class]="hostClasses()">
+  @if (label()) {
+    <label class="ui-select-label" [attr.for]="controlId()">
+      <span>{{ label() }}</span>
+    </label>
+  }
+
+  <div
+    class="ui-select-control"
+    (click)="togglePanel()"
+    [attr.aria-disabled]="isDisabled() || loading() ? 'true' : null"
+    [attr.aria-expanded]="open()"
+    role="combobox"
+    [attr.id]="controlId()"
+    [attr.aria-controls]="panelId()"
+    tabindex="0">
+    <div class="ui-select-value" [class.ui-select-placeholder]="!displayValue()">
+      @if (displayValue()) { {{ displayValue() }} } @else { {{ placeholder() }} }
+    </div>
+    <div class="ui-select-actions">
+      @if (loading()) {
+        <span class="ui-select-spinner"></span>
+      }
+      @if (displayValue()) {
+        <button type="button" class="ui-select-clear" (click)="$event.stopPropagation(); clear()" aria-label="Clear selection">×</button>
+      }
+      <span class="ui-select-arrow">▾</span>
+    </div>
+  </div>
+
+  @if (open()) {
+    <div class="ui-select-panel" #panel [id]="panelId()" role="listbox" [attr.aria-multiselectable]="multiple() ? 'true' : null">
+      @if (searchable()) {
+        <div class="ui-select-search">
+          <input #inputEl type="text" [value]="filter()" (input)="onFilter($any($event.target).value)" placeholder="Search..." />
+        </div>
+      }
+
+      @for (groupKey of groupKeys(); track groupKey) {
+        @if (groupKey !== '__ungrouped') {
+          <div class="ui-select-group">{{ groupKey }}</div>
+        }
+        @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
+          <div
+            class="ui-select-option"
+            [class.selected]="isSelected(opt)"
+            [class.disabled]="opt.disabled"
+            (click)="selectOption(opt)"
+            role="option"
+            [attr.aria-selected]="isSelected(opt)"
+          >
+            @if (optionTemplate()) {
+              <ng-container *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"></ng-container>
+            } @else {
+              <span>{{ opt.label }}</span>
+            }
+          </div>
+        }
+      }
+
+      @if (filteredOptions().length === 0) {
+        <div class="ui-select-empty">No results</div>
+      }
+    </div>
+  }
+</div>

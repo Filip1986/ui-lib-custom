@@ -66,6 +66,11 @@ export class SidebarComponent {
           label: 'Input',
           icon: 'pi pi-circle',
           route: '/inputs'
+        },
+        {
+          label: 'Select',
+          icon: 'pi pi-circle',
+          route: '/select'
         }
       ]
     },

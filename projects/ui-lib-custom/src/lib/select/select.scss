@@ -1,0 +1,142 @@
+.ui-select {
+  --ui-select-bg: var(--uilib-select-bg, var(--uilib-surface, #fff));
+  --ui-select-border: var(--uilib-select-border, var(--uilib-border, #d0d7e2));
+  --ui-select-radius: var(--uilib-select-radius, var(--uilib-radius-md, 8px));
+  --ui-select-dropdown-bg: var(--uilib-select-dropdown-bg, var(--uilib-surface, #fff));
+  --ui-select-option-hover: var(--uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 8%, transparent));
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  color: var(--uilib-page-fg, #111827);
+}
+
+.ui-select-label {
+  font-weight: 600;
+  color: inherit;
+}
+
+.ui-select-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--ui-select-bg);
+  border: 1px solid var(--ui-select-border);
+  border-radius: var(--ui-select-radius);
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ui-select-control:focus-visible {
+  outline: 2px solid var(--uilib-color-primary-500, #1e88e5);
+  outline-offset: 2px;
+}
+
+.ui-select-value {
+  min-height: 1.25rem;
+}
+
+.ui-select-placeholder {
+  color: var(--uilib-input-placeholder, #9ca3af);
+}
+
+.ui-select-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.ui-select-clear {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--uilib-input-placeholder, #9ca3af);
+}
+
+.ui-select-arrow {
+  font-size: 0.8rem;
+  color: var(--uilib-input-placeholder, #9ca3af);
+}
+
+.ui-select-panel {
+  position: absolute;
+  inset-inline: 0;
+  margin-top: 0.35rem;
+  background: var(--ui-select-dropdown-bg);
+  border: 1px solid var(--ui-select-border);
+  border-radius: var(--ui-select-radius);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  max-height: 260px;
+  overflow: auto;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ui-select-search {
+  padding: 0.5rem 0.75rem 0 0.75rem;
+}
+
+.ui-select-search input {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--ui-select-radius);
+  border: 1px solid var(--ui-select-border);
+  background: var(--ui-select-bg);
+  color: inherit;
+}
+
+.ui-select-group {
+  padding: 0.25rem 0.75rem;
+  font-weight: 600;
+  color: var(--uilib-muted, #6b7280);
+}
+
+.ui-select-option {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ui-select-option:hover {
+  background: var(--ui-select-option-hover);
+}
+
+.ui-select-option.selected {
+  font-weight: 600;
+}
+
+.ui-select-option.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ui-select-empty {
+  padding: 0.75rem;
+  text-align: center;
+  color: var(--uilib-input-placeholder, #9ca3af);
+}
+
+.ui-select.ui-select-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.ui-select-spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid var(--uilib-input-placeholder, #9ca3af);
+  border-top-color: transparent;
+  animation: ui-select-spin 0.8s linear infinite;
+}
+
+@keyframes ui-select-spin {
+  to { transform: rotate(360deg); }
+}

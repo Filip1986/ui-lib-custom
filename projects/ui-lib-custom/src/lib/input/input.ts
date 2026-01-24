@@ -57,13 +57,14 @@ export class UiLibInput implements ControlValueAccessor {
 
   readonly hostClasses = computed(() => {
     const classes = ['ui-input', `ui-input-${this.variant()}`];
-    if (this.disabled() || this._disabled()) classes.push('ui-input-disabled');
+    if (this.isDisabled()) classes.push('ui-input-disabled');
     if (this.error()) classes.push('ui-input-error');
     if (this.isFloating()) classes.push('ui-input-floating');
     return classes.join(' ');
   });
 
   readonly isFloating = computed(() => this.variant() === 'material' && (this.focused() || !!this.value()));
+  readonly isDisabled = computed(() => this.disabled() || this._disabled());
 
   constructor(private readonly el: ElementRef<HTMLElement>) {}
 
@@ -95,7 +96,7 @@ export class UiLibInput implements ControlValueAccessor {
   }
 
   clear(): void {
-    if (this.disabled()) return;
+    if (this.isDisabled()) return;
     this.onInput('');
   }
 
