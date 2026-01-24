@@ -1,0 +1,71 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Input</h1>
+    <p class="page-description">Reusable input component with variants, prefix/suffix slots, clear button, counter, and password toggle.</p>
+  </div>
+
+  <section class="controls">
+    <div class="control-group">
+      <div class="label">Variant</div>
+      @for (v of variants; track v) {
+        <button class="chip" [class.active]="variant() === v" (click)="setVariant(v)">{{ v }}</button>
+      }
+    </div>
+    <div class="control-group">
+      <div class="label">Type</div>
+      <select [ngModel]="inputType()" (ngModelChange)="setType($event)">
+        @for (t of types; track t) {
+          <option [value]="t">{{ t }}</option>
+        }
+      </select>
+    </div>
+    <div class="control-group toggles">
+      <label><input type="checkbox" [checked]="showCounter()" (change)="showCounter.set($any($event.target).checked)"> Show counter</label>
+      <label><input type="checkbox" [checked]="showClear()" (change)="showClear.set($any($event.target).checked)"> Show clear</label>
+      <label><input type="checkbox" [checked]="showToggle()" (change)="showToggle.set($any($event.target).checked)"> Password toggle</label>
+      <label><input type="checkbox" [checked]="required()" (change)="required.set($any($event.target).checked)"> Required</label>
+    </div>
+  </section>
+
+  <section class="preview">
+    <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
+      <ui-lib-input
+        [variant]="variant()"
+        [type]="inputType()"
+        label="Email"
+        placeholder="you@example.com"
+        [required]="required()"
+        [showCounter]="showCounter()"
+        [maxLength]="80"
+        [showClear]="showClear()"
+        [error]="error()"
+        [ngModel]="value()"
+        (ngModelChange)="value.set($event)"
+        name="demoInput">
+        <span prefix class="pi pi-envelope"></span>
+        <span suffix class="pi pi-check"></span>
+      </ui-lib-input>
+
+      @if (inputType() === 'password') {
+        <ui-lib-input
+          [variant]="variant()"
+          type="password"
+          label="Password"
+          placeholder="Enter password"
+          [showTogglePassword]="showToggle()"
+          [showClear]="showClear()"
+          [required]="required()"
+          name="demoPassword"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)">
+          <span prefix class="pi pi-lock"></span>
+        </ui-lib-input>
+      }
+
+      <div class="actions">
+        <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+        <ui-lib-button type="button" appearance="ghost" (click)="demoForm.resetForm(); value.set(''); error.set('');">Reset</ui-lib-button>
+      </div>
+    </form>
+  </section>
+</div>

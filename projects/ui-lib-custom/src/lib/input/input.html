@@ -1,0 +1,53 @@
+<div [class]="hostClasses()">
+  <label class="ui-input-label" [attr.for]="controlId()">
+    <span class="ui-input-label-text">
+      {{ label() }}
+      @if (required()) { <span class="required-indicator">*</span> }
+    </span>
+  </label>
+
+  <div class="ui-input-field">
+    <span class="ui-input-prefix">
+      <ng-content select="[prefix]"></ng-content>
+    </span>
+
+    <div class="ui-input-control-wrapper">
+      <input
+        [id]="controlId()"
+        [name]="name() ?? controlId()"
+        [type]="inputType()"
+        [placeholder]="placeholder()"
+        [disabled]="disabled()"
+        [required]="required() || null"
+        [attr.aria-invalid]="error() ? 'true' : null"
+        [attr.aria-required]="required() ? 'true' : null"
+        [attr.aria-describedby]="describedById()"
+        [value]="value()"
+        (input)="onInput($any($event.target).value)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+      />
+
+      @if (showClear() && value() && !disabled()) {
+        <button type="button" class="ui-input-clear" (click)="clear()" aria-label="Clear input">×</button>
+      }
+
+      @if (type() === 'password' && showTogglePassword()) {
+        <button type="button" class="ui-input-toggle" (click)="togglePassword()" aria-label="Toggle password visibility">
+          <span aria-hidden="true">{{ showPassword() ? 'Hide' : 'Show' }}</span>
+        </button>
+      }
+    </div>
+
+    <span class="ui-input-suffix">
+      <ng-content select="[suffix]"></ng-content>
+    </span>
+  </div>
+
+  <div class="ui-input-meta">
+    <span class="ui-input-error-text" *ngIf="error()" [id]="describedById()">{{ error() }}</span>
+    @if (showCounter() && maxLength()) {
+      <span class="ui-input-counter">{{ currentLength() }} / {{ maxLength() }}</span>
+    }
+  </div>
+</div>

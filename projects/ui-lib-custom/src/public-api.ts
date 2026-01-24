@@ -15,3 +15,4 @@ export * from './lib/layout';
 export * from './lib/theming/theme-config.service';
 export * from './lib/theming/theme-preset.interface';
 export * from './lib/login-form/login-form';
+export * from './lib/input/input';

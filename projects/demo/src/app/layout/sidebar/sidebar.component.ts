@@ -61,6 +61,11 @@ export class SidebarComponent {
           label: 'Login Forms',
           icon: 'pi pi-sign-in',
           route: '/login'
+        },
+        {
+          label: 'Input',
+          icon: 'pi pi-circle',
+          route: '/inputs'
         }
       ]
     },
