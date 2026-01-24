@@ -1,0 +1,82 @@
+:host {
+  display: block;
+}
+
+.doc-code-snippet {
+  position: relative;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+
+  .doc-code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    gap: 0.5rem;
+  }
+
+  .doc-code-title {
+    font-weight: 600;
+    color: #495057;
+  }
+
+  .doc-code {
+    margin: 0;
+
+    pre {
+      background: #282c34;
+      color: #abb2bf;
+      border-radius: 0 0 8px 8px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.5;
+
+      code {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      }
+    }
+  }
+
+  .doc-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid #dee2e6;
+    background: #ffffff;
+    color: #495057;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: #f1f3f5;
+    }
+
+    &.copied {
+      background: #e6f4ea;
+      border-color: #9ad29a;
+      color: #2f7d32;
+    }
+  }
+
+  &:hover .doc-copy,
+  .doc-copy:focus-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .doc-copy-icon {
+    width: 16px;
+    height: 16px;
+  }
+}

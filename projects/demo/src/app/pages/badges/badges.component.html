@@ -25,9 +25,7 @@
           <ui-lib-badge color="neutral" variant="solid">Neutral</ui-lib-badge>
         </ui-lib-inline>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;ui-lib-badge color="primary" variant="solid"&gt;Primary&lt;/ui-lib-badge&gt;</code></pre>
-      </div>
+      <app-doc-code-snippet title="Solid" [code]="snippets.solid"></app-doc-code-snippet>
     </div>
 
     <div class="doc-demo-group">
@@ -44,6 +42,7 @@
           <ui-lib-badge color="neutral" variant="outline">Neutral</ui-lib-badge>
         </ui-lib-inline>
       </div>
+      <app-doc-code-snippet title="Outline" [code]="snippets.outline"></app-doc-code-snippet>
     </div>
 
     <div class="doc-demo-group">
@@ -60,6 +59,7 @@
           <ui-lib-badge color="neutral" variant="subtle">Neutral</ui-lib-badge>
         </ui-lib-inline>
       </div>
+      <app-doc-code-snippet title="Subtle" [code]="snippets.subtle"></app-doc-code-snippet>
     </div>
   </div>
 
@@ -75,6 +75,7 @@
           <ui-lib-badge color="primary" size="lg">Large</ui-lib-badge>
         </ui-lib-inline>
       </div>
+      <app-doc-code-snippet title="Sizes" [code]="snippets.sizes"></app-doc-code-snippet>
     </div>
 
     <div class="doc-demo-group">
@@ -101,6 +102,7 @@
         <ui-lib-badge color="info" [pill]="true" variant="outline">Beta</ui-lib-badge>
       </ui-lib-inline>
     </div>
+    <app-doc-code-snippet title="Pill" [code]="snippets.pill"></app-doc-code-snippet>
   </div>
 
   <div class="doc-section" id="dot-indicators" data-doc-anchor>
@@ -127,6 +129,7 @@
           <span>Offline</span>
         </ui-lib-inline>
       </div>
+      <app-doc-code-snippet title="Dot status" [code]="snippets.dotStatus"></app-doc-code-snippet>
     </div>
 
     <div class="doc-demo-group">
@@ -138,6 +141,7 @@
           <ui-lib-badge color="success" [dot]="true" size="lg"></ui-lib-badge>
         </ui-lib-inline>
       </div>
+      <app-doc-code-snippet title="Dot sizes" [code]="snippets.dotSizes"></app-doc-code-snippet>
     </div>
   </div>
 
@@ -257,23 +261,7 @@
       </tbody>
     </table>
 
-    <div class="doc-code-block">
-      <div class="doc-code-header">
-        <span class="doc-code-title">Usage</span>
-      </div>
-      <div class="doc-code">
-        <pre><code>import {{ '{' }} Badge {{ '}' }} from 'ui-lib-custom';
-
-&#64;Component({{'{' }}
-  imports: [Badge],
-  template: `
-    &lt;ui-lib-badge color="success" variant="solid"&gt;
-      Active
-    &lt;/ui-lib-badge&gt;
-  `
-{{ '}' }})</code></pre>
-      </div>
-    </div>
+    <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
   </div>
 
   <div class="doc-section" id="performance" data-doc-anchor>
