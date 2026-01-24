@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 export class TopbarComponent {
   menuButtonClick = output<void>();
   themeToggle = output<void>();
+  viewportToggle = output<void>();
   theme = input<'light' | 'dark' | 'brand-example'>('light');
 
   onMenuButtonClick() {
@@ -21,5 +22,9 @@ export class TopbarComponent {
 
   onThemeToggle() {
     this.themeToggle.emit();
+  }
+
+  onViewportToggle() {
+    this.viewportToggle.emit();
   }
 }

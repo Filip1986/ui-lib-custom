@@ -5,10 +5,11 @@ import { TopbarComponent } from './layout/topbar/topbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ThemeConfigService } from 'ui-lib-custom';
 import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
+import { ViewportPreviewComponent } from './shared/viewport-preview/viewport-preview.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, TopbarComponent, SidebarComponent, ThemeEditorComponent],
+  imports: [CommonModule, RouterOutlet, TopbarComponent, SidebarComponent, ThemeEditorComponent, ViewportPreviewComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,7 @@ export class App {
   private readonly themeService = inject(ThemeConfigService);
   sidebarVisible = signal(false);
   theme = computed<'light' | 'dark' | 'brand-example'>(() => this.themeService.preset().name as 'light' | 'dark' | 'brand-example');
+  viewportEnabled = signal(false);
 
   constructor() {
     // Ensure initial application of CSS vars when the component instantiates.
@@ -30,6 +32,10 @@ export class App {
   toggleTheme() {
     const next = this.theme() === 'dark' ? 'light' : 'dark';
     this.applyPreset(next);
+  }
+
+  toggleViewport() {
+    this.viewportEnabled.update((v) => !v);
   }
 
   private applyPreset(name: 'light' | 'dark' | 'brand-example') {
