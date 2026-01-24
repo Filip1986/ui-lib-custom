@@ -3,6 +3,12 @@
 ## Purpose
 - Build a PrimeNG-like Angular library that is lighter, tree-shakable, and easy to theme/customize for new projects.
 - Prioritize DX: predictable API shapes, sensible defaults, and minimal setup to swap themes or override styles.
+  This library enables rapid project bootstrapping by providing:
+1. Pre-built component variants (Material, Bootstrap, Minimal) for different aesthetics
+2. Runtime theme customization via CSS variables
+3. Theme presets that can be saved/loaded as JSON configs
+4. A demo app with live preview and theme editor
+
 
 ## Framework & Architecture
 - Angular 21+, standalone components only, `ChangeDetectionStrategy.OnPush`, signals for inputs/derived state.
@@ -56,3 +62,9 @@
 - Maintain OnPush + signals + standalone pattern.
 - Align new components to the API shape and theming layers above.
 - No silent global CSS; scope everything to component hosts and CSS vars.
+
+### Key Architectural Decisions
+- **Variants** define structural/visual differences (e.g., floating label vs top label)
+- **Themes** define colors, spacing, and shape via CSS variables
+- Variants are chosen at component level; themes apply globally
+- All components must react to theme changes without rebuild
