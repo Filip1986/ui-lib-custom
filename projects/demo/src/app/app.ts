@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { TopbarComponent } from './layout/topbar/topbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ThemeConfigService } from 'ui-lib-custom';
+import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, TopbarComponent, SidebarComponent],
+  imports: [CommonModule, RouterOutlet, TopbarComponent, SidebarComponent, ThemeEditorComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

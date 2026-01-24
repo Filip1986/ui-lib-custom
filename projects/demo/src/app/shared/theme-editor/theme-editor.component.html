@@ -1,0 +1,72 @@
+<div class="theme-toggle" (click)="onTogglePanel()" title="Toggle Theme Editor">
+  ⚙
+</div>
+
+<div class="theme-panel" [class.theme-panel--open]="showPanel()">
+  <div class="theme-panel__header">
+    <div>
+      <div class="title">Theme Editor</div>
+      <div class="subtitle">Live tweak and export</div>
+    </div>
+    <button class="ghost" (click)="onTogglePanel()" aria-label="Close editor">✕</button>
+  </div>
+
+  <div class="section">
+    <label class="label">Preset</label>
+    <select [ngModel]="currentPreset().name" (ngModelChange)="onPresetChange($event)">
+      @for (name of presetNames(); track name) {
+        <option [value]="name">{{ name }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="section grid">
+    <div class="label full">Colors</div>
+    @for (key of colorKeys; track key) {
+      <label class="color-field">
+        <span class="label">{{ key | titlecase }}</span>
+        <input type="color" [ngModel]="currentPreset().colors[key]" (ngModelChange)="onColorChange(key, $event)">
+      </label>
+    }
+  </div>
+
+  <div class="section">
+    <label class="label">Border radius</label>
+    <select [ngModel]="currentPreset().shape.borderRadius" (ngModelChange)="onRadiusChange($event)">
+      @for (opt of radiusOptions; track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="section">
+    <label class="label">Variant</label>
+    <div class="radio-group">
+      @for (opt of variantOptions; track opt.value) {
+        <label class="radio">
+          <input type="radio" name="variant" [value]="opt.value" [checked]="currentPreset().variant === opt.value" (change)="onVariantChange(opt.value)">
+          <span>{{ opt.label }}</span>
+        </label>
+      }
+    </div>
+  </div>
+
+  <div class="section">
+    <label class="label">Font family</label>
+    <select [ngModel]="currentPreset().typography.fontFamily" (ngModelChange)="onFontChange($event)">
+      @for (opt of fontOptions; track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="section">
+    <label class="label">Base font size: {{ currentPreset().typography.baseFontSize }}</label>
+    <input type="range" min="12" max="20" step="1" [ngModel]="currentPreset().typography.baseFontSize.replace('px','')" (ngModelChange)="onBaseSizeChange($event)">
+  </div>
+
+  <div class="actions">
+    <button class="primary" (click)="exportTheme()">Export Theme</button>
+    <button class="ghost" (click)="resetToDefault()">Reset to Default</button>
+  </div>
+</div>
