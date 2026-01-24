@@ -93,6 +93,16 @@
   --uilib-card-bg: #fff;
   --uilib-card-text-color: var(--uilib-color-neutral-900);
   --uilib-card-border: var(--uilib-color-neutral-200);
+  --uilib-card-header-bg: var(--uilib-surface-alt);
+  --uilib-card-footer-bg: var(--uilib-surface-alt);
+  --uilib-card-radius: var(--uilib-radius-lg);
+  --uilib-card-border-width: 0;
+  --uilib-card-shadow-none: none;
+  --uilib-card-shadow-low: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --uilib-card-shadow: var(--uilib-card-shadow-medium);
+  --uilib-card-shadow-hover: var(--uilib-card-shadow-high);
 }
 
 [data-theme="dark"] {
@@ -187,4 +197,14 @@
   --uilib-card-bg: #1f1f1f;
   --uilib-card-text-color: var(--uilib-color-neutral-900);
   --uilib-card-border: var(--uilib-color-neutral-300);
+  --uilib-card-header-bg: var(--uilib-surface-alt);
+  --uilib-card-footer-bg: var(--uilib-surface-alt);
+  --uilib-card-radius: var(--uilib-radius-lg);
+  --uilib-card-border-width: 0;
+  --uilib-card-shadow-none: none;
+  --uilib-card-shadow-low: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --uilib-card-shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --uilib-card-shadow-high: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --uilib-card-shadow: var(--uilib-card-shadow-medium);
+  --uilib-card-shadow-hover: var(--uilib-card-shadow-high);
 }
