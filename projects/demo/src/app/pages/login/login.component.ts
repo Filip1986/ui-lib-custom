@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Login1Component, Login2Component, Login3Component, LoginFormData } from 'ui-lib-custom';
+import { Login1Component, Login2Component, Login3Component, LoginFormData, LoginForm } from 'ui-lib-custom';
 
 interface LoginVariant {
   id: string;
@@ -14,7 +14,7 @@ interface LoginVariant {
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, Login1Component, Login2Component, Login3Component],
+  imports: [CommonModule, Login1Component, Login2Component, Login3Component, LoginForm],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -145,6 +145,36 @@ export class ExampleComponent { }`,
   (rememberMeChange)="onRememberMeChange($event)"
 ></lib-login-3>`,
       background: 'split-style-bg'
+    },
+    {
+      id: 'login-form',
+      title: 'Login Form (New) - Centered/Split/Minimal',
+      description: 'New composable login form that switches between centered, split, and minimal variants, using library Button/Card and CSS-variable theming.',
+      features: [
+        'Three structural variants (centered, split, minimal)',
+        'Slots for logo and social buttons',
+        'Remember me + forgot password hooks',
+        'CSS variables for light/dark themes',
+        'Uses ui-lib Button and Card components',
+      ],
+      importCode: `import { LoginForm } from 'ui-lib-custom';
+
+@Component({
+  selector: 'app-example',
+  imports: [LoginForm],
+  template: '...'
+})
+export class ExampleComponent { }`,
+      usageCode: `<ui-lib-login-form
+  [variant]="'centered'"
+  [showSocialLogin]="true"
+  [showRememberMe]="true"
+  (login)="onLoginForm($event)"
+  (forgotPassword)="onForgotPassword('')"
+  (socialLogin)="onSocialLogin($event)">
+  <ng-template #logo>My Brand</ng-template>
+</ui-lib-login-form>`,
+      background: 'card-style-bg'
     }
   ];
 
@@ -196,5 +226,9 @@ export class ExampleComponent { }`,
 
   onRememberMeChange(checked: boolean) {
     console.log('Remember me:', checked);
+  }
+
+  onLoginForm(data: { email: string; password: string; remember: boolean }) {
+    alert(`Login submitted: ${data.email}\nRemember: ${data.remember}`);
   }
 }

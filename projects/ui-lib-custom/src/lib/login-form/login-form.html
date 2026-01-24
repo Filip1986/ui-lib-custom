@@ -1,0 +1,149 @@
+<div class="login-form" [class]="layoutClass()">
+  @switch (variant()) {
+    @case ('centered') {
+      <div class="centered-wrapper">
+        <ui-lib-card variant="material" elevation="medium" class="login-card">
+          @let logo = logoTemplate();
+          @if (logo) {
+            <div class="logo">
+              <ng-container *ngTemplateOutlet="logo"></ng-container>
+            </div>
+          } @else {
+            <div class="logo placeholder">Your Logo</div>
+          }
+
+          <form class="form" (ngSubmit)="onSubmit()">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required [ngModel]="email()" (ngModelChange)="email.set($event)">
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" required [ngModel]="password()" (ngModelChange)="password.set($event)">
+            </div>
+
+            @if (showRememberMe()) {
+              <label class="remember">
+                <input type="checkbox" [checked]="remember()" (change)="remember.set($any($event.target).checked)">
+                <span>Remember me</span>
+              </label>
+            }
+
+            <div class="actions">
+              <ui-lib-button type="submit" color="primary" variant="material" [fullWidth]="true">Login</ui-lib-button>
+              <button type="button" class="link" (click)="onForgot()">Forgot password?</button>
+            </div>
+
+            @if (showSocialLogin()) {
+              <div class="social">
+                <div class="divider">Or continue with</div>
+                <div class="social-buttons">
+                  <ng-content select="[social-buttons]"></ng-content>
+                  <ui-lib-button variant="bootstrap" color="secondary" (click)="onSocial('google')">Google</ui-lib-button>
+                  <ui-lib-button variant="bootstrap" color="secondary" (click)="onSocial('github')">GitHub</ui-lib-button>
+                  <ui-lib-button variant="bootstrap" color="secondary" (click)="onSocial('microsoft')">Microsoft</ui-lib-button>
+                </div>
+              </div>
+            }
+          </form>
+        </ui-lib-card>
+      </div>
+    }
+
+    @case ('split') {
+      <div class="split-wrapper">
+        <div class="branding">
+          @let logo = logoTemplate();
+          @if (logo) {
+            <ng-container *ngTemplateOutlet="logo"></ng-container>
+          } @else {
+            <div class="logo placeholder">Your Brand</div>
+          }
+          <div class="tagline">Welcome back! Please sign in to continue.</div>
+        </div>
+        <div class="form-panel">
+          <ui-lib-card variant="material" elevation="medium" class="login-card">
+            <form class="form" (ngSubmit)="onSubmit()">
+              <div class="field">
+                <label for="email-split">Email</label>
+                <input id="email-split" name="email" type="email" required [ngModel]="email()" (ngModelChange)="email.set($event)">
+              </div>
+
+              <div class="field">
+                <label for="password-split">Password</label>
+                <input id="password-split" name="password" type="password" required [ngModel]="password()" (ngModelChange)="password.set($event)">
+              </div>
+
+              @if (showRememberMe()) {
+                <label class="remember">
+                  <input type="checkbox" [checked]="remember()" (change)="remember.set($any($event.target).checked)">
+                  <span>Remember me</span>
+                </label>
+              }
+
+              <div class="actions">
+                <ui-lib-button type="submit" color="primary" variant="material" [fullWidth]="true">Login</ui-lib-button>
+                <button type="button" class="link" (click)="onForgot()">Forgot password?</button>
+              </div>
+
+              @if (showSocialLogin()) {
+                <div class="social">
+                  <div class="divider">Or continue with</div>
+                  <div class="social-buttons">
+                    <ng-content select="[social-buttons]"></ng-content>
+                    <ui-lib-button variant="bootstrap" color="secondary" (click)="onSocial('google')">Google</ui-lib-button>
+                    <ui-lib-button variant="bootstrap" color="secondary" (click)="onSocial('github')">GitHub</ui-lib-button>
+                    <ui-lib-button variant="bootstrap" color="secondary" (click)="onSocial('microsoft')">Microsoft</ui-lib-button>
+                  </div>
+                </div>
+              }
+            </form>
+          </ui-lib-card>
+        </div>
+      </div>
+    }
+
+    @case ('minimal') {
+      <div class="minimal-wrapper">
+        <ui-lib-card variant="minimal" elevation="low" class="login-card minimal-card">
+          <form class="form" (ngSubmit)="onSubmit()">
+            <div class="field">
+              <label for="email-minimal">Email</label>
+              <input id="email-minimal" name="email" type="email" required [ngModel]="email()" (ngModelChange)="email.set($event)">
+            </div>
+
+            <div class="field">
+              <label for="password-minimal">Password</label>
+              <input id="password-minimal" name="password" type="password" required [ngModel]="password()" (ngModelChange)="password.set($event)">
+            </div>
+
+            @if (showRememberMe()) {
+              <label class="remember">
+                <input type="checkbox" [checked]="remember()" (change)="remember.set($any($event.target).checked)">
+                <span>Remember me</span>
+              </label>
+            }
+
+            <div class="actions">
+              <ui-lib-button type="submit" color="primary" variant="minimal" [fullWidth]="true">Login</ui-lib-button>
+              <button type="button" class="link" (click)="onForgot()">Forgot password?</button>
+            </div>
+
+            @if (showSocialLogin()) {
+              <div class="social">
+                <div class="divider">Or continue with</div>
+                <div class="social-buttons">
+                  <ng-content select="[social-buttons]"></ng-content>
+                  <ui-lib-button variant="minimal" color="secondary" (click)="onSocial('google')">Google</ui-lib-button>
+                  <ui-lib-button variant="minimal" color="secondary" (click)="onSocial('github')">GitHub</ui-lib-button>
+                  <ui-lib-button variant="minimal" color="secondary" (click)="onSocial('microsoft')">Microsoft</ui-lib-button>
+                </div>
+              </div>
+            }
+          </form>
+        </ui-lib-card>
+      </div>
+    }
+  }
+</div>

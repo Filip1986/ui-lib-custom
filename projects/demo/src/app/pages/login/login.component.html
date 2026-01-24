@@ -63,6 +63,17 @@
                 (rememberMeChange)="onRememberMeChange($any($event))"
               ></lib-login-3>
             }
+            @case ('login-form') {
+              <ui-lib-login-form
+                [variant]="'centered'"
+                [showSocialLogin]="true"
+                [showRememberMe]="true"
+                (login)="onLoginForm($event)"
+                (forgotPassword)="onForgotPassword('')"
+                (socialLogin)="onSocialLogin($event)">
+                <ng-template #logo>Demo Brand</ng-template>
+              </ui-lib-login-form>
+            }
           }
         </div>
       </section>
