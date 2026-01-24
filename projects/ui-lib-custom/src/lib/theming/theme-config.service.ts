@@ -1,0 +1,316 @@
+import { DOCUMENT } from '@angular/common';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { BORDER_RADIUS } from '../design-tokens';
+import brandExamplePreset from './presets/brand-example.json';
+import darkPreset from './presets/dark.json';
+import lightPreset from './presets/light.json';
+import { DeepPartial, ThemePreset, ThemePresetOverrides, ThemeShapeRadius } from './theme-preset.interface';
+
+type LoadOptions = {
+  merge?: boolean;
+  persist?: boolean;
+  apply?: boolean;
+  target?: HTMLElement | null;
+  base?: ThemePreset | null;
+};
+
+@Injectable({ providedIn: 'root' })
+export class ThemeConfigService {
+  private readonly doc = inject(DOCUMENT);
+  private readonly storageKey = 'ui-lib-custom.theme';
+  private readonly defaultPreset: ThemePreset = lightPreset as ThemePreset;
+  private readonly builtInPresets: Record<string, ThemePreset> = {
+    light: lightPreset as ThemePreset,
+    dark: darkPreset as ThemePreset,
+    'brand-example': brandExamplePreset as ThemePreset,
+  };
+
+  private readonly hostRef = signal<HTMLElement | null>(this.doc?.documentElement ?? null);
+  private readonly presetSignal = signal<ThemePreset>(this.defaultPreset);
+
+  readonly preset = computed(() => this.presetSignal());
+
+  constructor() {
+    const stored = this.readStoredPreset();
+    const initial = stored
+      ? this.mergePresets(this.defaultPreset, stored)
+      : this.defaultPreset;
+    this.presetSignal.set(initial);
+    this.applyToRoot(initial);
+  }
+
+  getPreset(): ThemePreset {
+    return this.presetSignal();
+  }
+
+  listBuiltInPresets(): Record<string, ThemePreset> {
+    return this.builtInPresets;
+  }
+
+  loadPreset(preset: ThemePreset | ThemePresetOverrides, options?: LoadOptions): ThemePreset {
+    const merge = options?.merge ?? true;
+    const apply = options?.apply ?? true;
+    const persist = options?.persist ?? true;
+    const base = merge
+      ? options?.base ?? this.presetSignal() ?? this.defaultPreset
+      : options?.base ?? this.defaultPreset;
+
+    const resolved = this.mergePresets(base, preset);
+    this.presetSignal.set(resolved);
+
+    if (persist) {
+      this.persistPreset(resolved);
+    }
+    if (apply) {
+      this.applyToRoot(resolved, options?.target ?? undefined);
+    }
+
+    return resolved;
+  }
+
+  async loadPresetAsync(
+    source: string | Promise<ThemePreset | ThemePresetOverrides> | (() => Promise<ThemePreset | ThemePresetOverrides>),
+    options?: LoadOptions,
+  ): Promise<ThemePreset> {
+    let presetLike: ThemePreset | ThemePresetOverrides;
+
+    if (typeof source === 'string') {
+      presetLike = await this.fetchPreset(source);
+    } else if (typeof source === 'function') {
+      presetLike = await source();
+    } else {
+      presetLike = await source;
+    }
+
+    return this.loadPreset(presetLike, options);
+  }
+
+  applyToRoot(preset: ThemePreset | null = null, target?: HTMLElement | null): void {
+    if (target) {
+      this.hostRef.set(target);
+    }
+    const host = target ?? this.hostRef();
+    const current = preset ?? this.presetSignal();
+    if (!host || !current) {
+      return;
+    }
+
+    const vars = this.mapPresetToCssVars(current);
+    Object.entries(vars).forEach(([name, value]) => {
+      host.style.setProperty(name, value);
+    });
+    host.setAttribute('data-theme', current.name);
+  }
+
+  exportAsCSS(preset: ThemePreset = this.presetSignal()): string {
+    const vars = this.mapPresetToCssVars(preset);
+    const body = Object.entries(vars)
+      .map(([name, value]) => `  ${name}: ${value};`)
+      .join('\n');
+    return `:root {\n${body}\n}`;
+  }
+
+  exportAsJSON(preset: ThemePreset = this.presetSignal()): string {
+    return JSON.stringify(preset, null, 2);
+  }
+
+  private mapPresetToCssVars(preset: ThemePreset): Record<string, string> {
+    const vars: Record<string, string> = {};
+    const set = (name: string, value: string | undefined) => {
+      if (value !== undefined) {
+        vars[name] = value;
+      }
+    };
+    const applyColor = (value: string, ...names: string[]) => {
+      names.forEach((name) => set(name, value));
+    };
+
+    const { colors, shape, typography } = preset;
+
+    applyColor(colors.primary,
+      '--uilib-color-primary-100',
+      '--uilib-color-primary-500',
+      '--uilib-color-primary-600',
+      '--uilib-color-primary-700',
+      '--uilib-button-primary-bg',
+      '--uilib-button-primary-bg-hover',
+      '--uilib-button-primary-bg-active',
+      '--uilib-button-primary-border',
+      '--uilib-topbar-accent'
+    );
+    set('--uilib-button-primary-fg', '#fff');
+
+    applyColor(colors.secondary,
+      '--uilib-color-secondary-50',
+      '--uilib-color-secondary-100',
+      '--uilib-color-secondary-600',
+      '--uilib-color-secondary-700',
+      '--uilib-button-secondary-bg',
+      '--uilib-button-secondary-bg-hover',
+      '--uilib-button-secondary-bg-active',
+      '--uilib-button-secondary-border'
+    );
+    set('--uilib-button-secondary-fg', '#fff');
+
+    applyColor(colors.success,
+      '--uilib-color-success-50',
+      '--uilib-color-success-600',
+      '--uilib-color-success-700',
+      '--uilib-button-success-bg',
+      '--uilib-button-success-bg-hover',
+      '--uilib-button-success-bg-active',
+      '--uilib-button-success-border'
+    );
+    set('--uilib-button-success-fg', '#fff');
+
+    applyColor(colors.danger,
+      '--uilib-color-danger-50',
+      '--uilib-color-danger-600',
+      '--uilib-color-danger-700',
+      '--uilib-button-danger-bg',
+      '--uilib-button-danger-bg-hover',
+      '--uilib-button-danger-bg-active',
+      '--uilib-button-danger-border'
+    );
+    set('--uilib-button-danger-fg', '#fff');
+
+    applyColor(colors.warning,
+      '--uilib-color-warning-50',
+      '--uilib-color-warning-600',
+      '--uilib-color-warning-700',
+      '--uilib-button-warning-bg',
+      '--uilib-button-warning-bg-hover',
+      '--uilib-button-warning-bg-active',
+      '--uilib-button-warning-border'
+    );
+    set('--uilib-button-warning-fg', '#000');
+
+    applyColor(colors.info,
+      '--uilib-color-info-50',
+      '--uilib-color-info-600',
+      '--uilib-color-info-700'
+    );
+
+    applyColor(colors.background,
+      '--uilib-page-bg'
+    );
+    applyColor(colors.text,
+      '--uilib-page-fg'
+    );
+    applyColor(colors.surface,
+      '--uilib-surface',
+      '--uilib-topbar-bg'
+    );
+    applyColor(colors.surfaceAlt,
+      '--uilib-surface-alt',
+      '--uilib-topbar-hover'
+    );
+    applyColor(colors.border,
+      '--uilib-border',
+      '--uilib-topbar-border',
+      '--uilib-card-border'
+    );
+    applyColor(colors.textSecondary,
+      '--uilib-muted'
+    );
+    applyColor(colors.text,
+      '--uilib-topbar-fg'
+    );
+
+    set('--uilib-card-bg', colors.surface);
+    set('--uilib-card-text-color', colors.text);
+    set('--uilib-card-header-bg', colors.surfaceAlt);
+    set('--uilib-card-footer-bg', colors.surfaceAlt);
+
+    const resolvedBorderRadius = this.resolveRadius(shape.borderRadius);
+    set('--uilib-radius-sm', BORDER_RADIUS.sm);
+    set('--uilib-radius-md', BORDER_RADIUS.md);
+    set('--uilib-radius-lg', BORDER_RADIUS.lg);
+    set('--uilib-radius-xl', BORDER_RADIUS.xl);
+    set('--uilib-radius-2xl', BORDER_RADIUS['2xl']);
+    set('--uilib-radius-full', BORDER_RADIUS.full);
+
+    set('--uilib-button-radius', this.resolveRadius(shape.buttonRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
+    set('--uilib-card-radius', this.resolveRadius(shape.cardRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
+    set('--uilib-input-radius', this.resolveRadius(shape.inputRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
+
+    set('--uilib-font-family-base', typography.fontFamily);
+    set('--uilib-font-size-base', typography.baseFontSize);
+
+    return vars;
+  }
+
+  private resolveRadius(value: ThemeShapeRadius | undefined): string | undefined {
+    if (value === undefined || value === null) {
+      return undefined;
+    }
+
+    const key = value as keyof typeof BORDER_RADIUS;
+    if (key in BORDER_RADIUS) {
+      return BORDER_RADIUS[key];
+    }
+    return value as string;
+  }
+
+  private mergePresets(base: ThemePreset, overrides: DeepPartial<ThemePreset>): ThemePreset {
+    return this.deepMerge(base, overrides);
+  }
+
+  private deepMerge<T>(base: T, patch: DeepPartial<T>): T {
+    const source = patch ?? {};
+    const clone: any = Array.isArray(base) ? [...(base as any)] : { ...(base as any) };
+
+    Object.entries(source).forEach(([key, value]) => {
+      if (value === undefined) {
+        return;
+      }
+
+      const existing = (base as any)[key];
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        clone[key] = this.deepMerge(existing ?? {}, value as any);
+      } else {
+        clone[key] = value as any;
+      }
+    });
+
+    return clone as T;
+  }
+
+  private persistPreset(preset: ThemePreset): void {
+    if (!this.hasLocalStorage()) {
+      return;
+    }
+    try {
+      this.doc?.defaultView?.localStorage?.setItem(this.storageKey, JSON.stringify(preset));
+    } catch {
+      // ignore persistence errors (e.g., SSR or private mode)
+    }
+  }
+
+  private readStoredPreset(): ThemePreset | null {
+    if (!this.hasLocalStorage()) {
+      return null;
+    }
+    try {
+      const raw = this.doc?.defaultView?.localStorage?.getItem(this.storageKey);
+      if (!raw) {
+        return null;
+      }
+      return JSON.parse(raw) as ThemePreset;
+    } catch {
+      return null;
+    }
+  }
+
+  private hasLocalStorage(): boolean {
+    return Boolean(this.doc?.defaultView?.localStorage);
+  }
+
+  private async fetchPreset(url: string): Promise<ThemePreset | ThemePresetOverrides> {
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`Failed to load theme preset from ${url} (${response.status})`);
+    }
+    return response.json();
+  }
+}

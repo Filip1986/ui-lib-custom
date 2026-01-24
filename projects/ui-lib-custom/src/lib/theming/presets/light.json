@@ -1,0 +1,28 @@
+{
+  "name": "light",
+  "variant": "material",
+  "colors": {
+    "primary": "#1976d2",
+    "secondary": "#616161",
+    "success": "#388e3c",
+    "danger": "#d32f2f",
+    "warning": "#f57c00",
+    "info": "#0288d1",
+    "background": "#f7f7f9",
+    "surface": "#ffffff",
+    "surfaceAlt": "#f1f3f5",
+    "text": "#1f2933",
+    "textSecondary": "#5f6c80",
+    "border": "#e0e0e0"
+  },
+  "shape": {
+    "borderRadius": "md",
+    "buttonRadius": "md",
+    "cardRadius": "md",
+    "inputRadius": "md"
+  },
+  "typography": {
+    "fontFamily": "'Inter', 'Segoe UI', sans-serif",
+    "baseFontSize": "16px"
+  }
+}

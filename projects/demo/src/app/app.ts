@@ -1,8 +1,9 @@
-import { Component, ChangeDetectionStrategy, signal, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TopbarComponent } from './layout/topbar/topbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { ThemeConfigService } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-root',
@@ -12,24 +13,13 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
-  private readonly THEME_KEY = 'ui-lib-theme';
+  private readonly themeService = inject(ThemeConfigService);
   sidebarVisible = signal(false);
-  theme = signal<'light' | 'dark'>(this.getInitialTheme());
+  theme = computed<'light' | 'dark' | 'brand-example'>(() => this.themeService.preset().name as 'light' | 'dark' | 'brand-example');
 
   constructor() {
-    effect(() => {
-      document.documentElement.setAttribute('data-theme', this.theme());
-      localStorage.setItem(this.THEME_KEY, this.theme());
-    });
-  }
-
-  private getInitialTheme(): 'light' | 'dark' {
-    const stored = localStorage.getItem(this.THEME_KEY) as 'light' | 'dark' | null;
-    if (stored === 'light' || stored === 'dark') {
-      return stored;
-    }
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? 'dark' : 'light';
+    // Ensure initial application of CSS vars when the component instantiates.
+    this.themeService.applyToRoot();
   }
 
   toggleSidebar() {
@@ -37,6 +27,14 @@ export class App {
   }
 
   toggleTheme() {
-    this.theme.update(t => (t === 'light' ? 'dark' : 'light'));
+    const next = this.theme() === 'dark' ? 'light' : 'dark';
+    this.applyPreset(next);
+  }
+
+  private applyPreset(name: 'light' | 'dark' | 'brand-example') {
+    const preset = this.themeService.listBuiltInPresets()[name];
+    if (preset) {
+      this.themeService.loadPreset(preset, { apply: true, persist: true, merge: false });
+    }
   }
 }

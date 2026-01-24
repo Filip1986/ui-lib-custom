@@ -12,3 +12,5 @@ export * from './lib/login/login-2/login-2.component';
 export * from './lib/login/login-3/login-3.component';
 export * from './lib/login/models/login-contract';
 export * from './lib/layout';
+export * from './lib/theming/theme-config.service';
+export * from './lib/theming/theme-preset.interface';

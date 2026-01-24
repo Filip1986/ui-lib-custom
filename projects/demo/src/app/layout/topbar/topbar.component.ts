@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 export class TopbarComponent {
   menuButtonClick = output<void>();
   themeToggle = output<void>();
-  theme = input<'light' | 'dark'>('light');
+  theme = input<'light' | 'dark' | 'brand-example'>('light');
 
   onMenuButtonClick() {
     this.menuButtonClick.emit();
