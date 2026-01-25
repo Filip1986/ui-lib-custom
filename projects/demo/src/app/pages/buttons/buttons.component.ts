@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant, IconPosition, ThemeConfigService } from 'ui-lib-custom';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { ThemeScopeDirective } from '../../shared/theme-scope.directive';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 
 @Component({
   selector: 'app-buttons',

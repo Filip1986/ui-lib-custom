@@ -20,7 +20,9 @@
       "ui-lib-custom": [
         "./projects/ui-lib-custom/src/public-api.ts",
         "./dist/ui-lib-custom"
-      ]
+      ],
+      "@demo/shared/*": ["projects/demo/src/app/shared/*"],
+      "@demo/pages/*": ["projects/demo/src/app/pages/*"]
     }
   },
   "angularCompilerOptions": {

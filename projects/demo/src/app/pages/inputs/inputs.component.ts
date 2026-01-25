@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UiLibInput, InputVariant, InputType, ThemeConfigService } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { ThemeScopeDirective } from '../../shared/theme-scope.directive';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 
 @Component({
   selector: 'app-inputs',

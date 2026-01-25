@@ -68,3 +68,5 @@
 - **Themes** define colors, spacing, and shape via CSS variables
 - Variants are chosen at component level; themes apply globally
 - All components must react to theme changes without rebuild
+
+- Use TS path aliases for demo code: `@demo/shared/*` for shared utilities/components and `@demo/pages/*` for pages; keep them updated in `tsconfig.json` when moving files.
