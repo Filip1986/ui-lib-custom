@@ -1,7 +1,9 @@
 <div class="doc-demo-viewport">
-  <app-viewport-preview mode="inline">
-    <div class="doc-demo-viewport__content">
-      <ng-content></ng-content>
-    </div>
-  </app-viewport-preview>
+  <ui-lib-card variant="material" class="doc-demo-card" [bordered]="true">
+    <app-viewport-preview mode="inline">
+      <div class="doc-demo-viewport__content">
+        <ng-content></ng-content>
+      </div>
+    </app-viewport-preview>
+  </ui-lib-card>
 </div>
