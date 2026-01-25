@@ -24,6 +24,18 @@ export const SPACING_TOKENS = {
 
 export type SpacingToken = keyof typeof SPACING_TOKENS;
 
+export const SPACING_ALIASES = {
+  xs: SPACING_TOKENS[1],   // 4px
+  sm: SPACING_TOKENS[2],   // 8px
+  md: SPACING_TOKENS[4],   // 16px (base)
+  lg: SPACING_TOKENS[6],   // 24px
+  xl: SPACING_TOKENS[8],   // 32px
+  '2xl': SPACING_TOKENS[12], // 48px
+} as const;
+
+export type SpacingAlias = keyof typeof SPACING_ALIASES;
+export type SpacingKey = SpacingToken | SpacingAlias;
+
 export const INSET_TOKENS = {
   xs: SPACING_TOKENS[1],  // 4px
   sm: SPACING_TOKENS[2],  // 8px
