@@ -1,13 +1,43 @@
-.doc-demo-viewport {
-  overflow: hidden;
-  background: var(--uilib-surface, #fff);
-}
-
-.doc-demo-viewport__content {
-  padding: 1rem;
-}
-
 .doc-demo-card {
   display: flex;
   flex-direction: column;
+}
+
+.doc-demo-toolbar {
+  padding: 0.5rem 0.75rem;
+}
+
+.viewport-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .custom {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    input {
+      width: 5rem;
+      padding: 0.25rem 0.35rem;
+    }
+  }
+}
+
+.controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .dims {
+    font-size: 0.9rem;
+    color: var(--uilib-muted, #5f6c80);
+  }
 }
