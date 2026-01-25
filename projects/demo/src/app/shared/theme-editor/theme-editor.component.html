@@ -65,6 +65,15 @@
     <input type="range" min="12" max="20" step="1" [ngModel]="currentPreset().typography.baseFontSize.replace('px','')" (ngModelChange)="onBaseSizeChange($event)">
   </div>
 
+  <div class="section">
+    <label class="label">Shadow</label>
+    <select [ngModel]="currentPreset().shadow || shadowOptions[0]?.value" (ngModelChange)="onShadowChange($event)">
+      @for (opt of shadowOptions; track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+  </div>
+
   <div class="actions">
     <button class="primary" (click)="exportTheme()">Export Theme</button>
     <button class="ghost" (click)="resetToDefault()">Reset to Default</button>

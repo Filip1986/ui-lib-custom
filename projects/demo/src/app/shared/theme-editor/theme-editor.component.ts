@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ThemeConfigService, ThemePreset, ThemePresetColors, ThemeVariant } from 'ui-lib-custom';
+import { ThemeConfigService, ThemePreset, ThemePresetColors, ThemeVariant, SHADOWS } from 'ui-lib-custom';
 
 interface SelectOption<T> {
   label: string;
@@ -57,6 +57,10 @@ export class ThemeEditorComponent {
     'text',
   ];
 
+  readonly shadowOptions: SelectOption<string>[] = Object.keys(SHADOWS as Record<string, string>)
+    .filter((key) => key.startsWith('shadow-'))
+    .map((key) => ({ label: key, value: key }));
+
   onTogglePanel(): void {
     this.showPanel.update((v) => !v);
   }
@@ -88,6 +92,13 @@ export class ThemeEditorComponent {
     const numeric = Number(value);
     if (Number.isFinite(numeric)) {
       this.themeService.loadPreset({ typography: { baseFontSize: `${numeric}px` } }, { merge: true, apply: true, persist: true });
+    }
+  }
+
+  onShadowChange(value: string): void {
+    const exists = (SHADOWS as Record<string, string>)[value];
+    if (exists) {
+      this.themeService.loadPreset({ shadow: value }, { merge: true, apply: true, persist: true });
     }
   }
 

@@ -7,6 +7,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 
 type ShadowKey = string;
+const SHADOW_MAP = SHADOWS as Record<string, string>;
 
 @Component({
   selector: 'app-cards',
@@ -65,14 +66,21 @@ export class CardsComponent {
     return { ...base, ...this.localVars() };
   });
 
-  readonly shadowOptions: ShadowKey[] = Object.keys(SHADOWS as Record<string, string>).filter(key => key.startsWith('shadow-'));
-  readonly selectedShadow = signal<ShadowKey>('shadow-1');
-  readonly shadowValue = computed(() => (SHADOWS as Record<string, string>)[this.selectedShadow()] ?? 'none');
+  readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter(key => key.startsWith('shadow-'));
+  readonly globalShadow = computed(() => SHADOW_MAP[this.themeService.preset().shadow ?? ''] ?? 'none');
+  readonly selectedShadow = signal<ShadowKey>(this.resolveShadowKey(this.themeService.preset().shadow));
+  readonly shadowValue = computed(() => this.useLocalTheme()
+    ? (SHADOW_MAP[this.selectedShadow()] ?? 'none')
+    : this.globalShadow());
 
   setShadow(value: string) {
-    if ((SHADOWS as Record<string, string>)[value]) {
+    if (SHADOW_MAP[value]) {
       this.selectedShadow.set(value);
     }
+  }
+
+  private resolveShadowKey(value?: string): ShadowKey {
+    return value && SHADOW_MAP[value] ? value : 'shadow-1';
   }
 
   constructor() {

@@ -24,5 +24,6 @@
   "typography": {
     "fontFamily": "'Inter', 'Segoe UI', sans-serif",
     "baseFontSize": "16px"
-  }
+  },
+  "shadow": "shadow-3"
 }
