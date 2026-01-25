@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal, Signal } from '@angular/core';
 import { BORDER_RADIUS } from '../design-tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
@@ -29,8 +29,10 @@ export class ThemeConfigService {
 
   private readonly hostRef = signal<HTMLElement | null>(this.doc?.documentElement ?? null);
   private readonly presetSignal = signal<ThemePreset>(this.defaultPreset);
+  private readonly savedThemesSignal = signal<string[]>(this.listSavedThemeNames());
 
   readonly preset = computed(() => this.presetSignal());
+  readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
 
   constructor() {
     const stored = this.readStoredPreset();
@@ -39,6 +41,7 @@ export class ThemeConfigService {
       : this.defaultPreset;
     this.presetSignal.set(initial);
     this.applyToRoot(initial);
+    this.syncSavedThemes();
   }
 
   getPreset(): ThemePreset {
@@ -137,6 +140,7 @@ export class ThemeConfigService {
     const map = this.readSavedThemes();
     map[name] = preset;
     this.writeSavedThemes(map);
+    this.syncSavedThemes(map);
   }
 
   loadFromLocalStorage(name: string, options?: LoadOptions): ThemePreset | null {
@@ -155,6 +159,7 @@ export class ThemeConfigService {
     if (map[name]) {
       delete map[name];
       this.writeSavedThemes(map);
+      this.syncSavedThemes(map);
     }
   }
 
@@ -369,6 +374,16 @@ export class ThemeConfigService {
     } catch {
       return {};
     }
+  }
+
+  private listSavedThemeNames(): string[] {
+    const map = this.readSavedThemes();
+    return Object.keys(map);
+  }
+
+  private syncSavedThemes(map?: Record<string, ThemePreset>): void {
+    const source = map ?? this.readSavedThemes();
+    this.savedThemesSignal.set(Object.keys(source));
   }
 
   private writeSavedThemes(map: Record<string, ThemePreset>): void {

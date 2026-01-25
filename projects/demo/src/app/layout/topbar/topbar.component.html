@@ -10,14 +10,6 @@
   </div>
 
   <div class="topbar-right">
-    <button class="topbar-link" title="New Project" aria-label="New Project" (click)="onNewProject()">
-      <i class="pi pi-plus"></i>
-      <span class="hide-compact">New Project</span>
-    </button>
-    <button class="topbar-link" title="Save Theme" aria-label="Save Theme" (click)="onSaveTheme()">
-      <i class="pi pi-save"></i>
-      <span class="hide-compact">Save Theme</span>
-    </button>
     <div class="topbar-select">
       <select (change)="onLoadTheme($any($event.target).value)" [value]="''">
         <option value="" disabled>Select saved theme</option>

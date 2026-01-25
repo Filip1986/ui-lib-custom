@@ -1,5 +1,17 @@
 @use '../../shared/styles/doc-page.scss';
 
+.theme-actions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status {
+  color: var(--uilib-color-success-700, #0f5132);
+  font-weight: 600;
+}
+
 .theme-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

@@ -5,6 +5,29 @@
       Toggle between light and dark themes by setting <code>data-theme="light|dark"</code> on <code>html</code> or any container.
       CSS variables in <code>ui-lib-custom/src/lib/themes/themes.css</code> drive component colors.
     </p>
+
+    <div class="theme-actions">
+      <ui-lib-inline [gap]="2">
+        <ui-lib-input
+          label="Theme name"
+          placeholder="e.g. brand-x"
+          name="themeName"
+          [ngModel]="themeName()"
+          (ngModelChange)="themeName.set($event || '')"
+        ></ui-lib-input>
+        <ui-lib-button color="primary" (click)="saveTheme()">
+          <i class="pi pi-save"></i>
+          Save theme
+        </ui-lib-button>
+        <ui-lib-button variant="bootstrap" color="secondary" (click)="goToProjectStarter()">
+          <i class="pi pi-plus"></i>
+          New project
+        </ui-lib-button>
+      </ui-lib-inline>
+      @if (status()) {
+        <div class="status">{{ status() }}</div>
+      }
+    </div>
   </div>
 
   <div class="doc-section" id="side-by-side" data-doc-anchor>
