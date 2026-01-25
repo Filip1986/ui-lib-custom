@@ -30,6 +30,15 @@
         </div>
       </div>
 
+      <div class="control">
+        <label>Shadow</label>
+        <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
+          @for (s of shadowOptions; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+      </div>
+
       <div class="toggles">
         <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
         <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
@@ -51,7 +60,7 @@
       </div>
     </div>
 
-    <app-doc-demo-viewport>
+    <app-doc-demo-viewport [shadow]="shadowValue()">
       <div class="card-grid" [appThemeScope]="appliedTheme()">
         <ui-lib-card
           [variant]="variant()"
@@ -59,7 +68,8 @@
           [bordered]="bordered()"
           [hoverable]="hoverable()"
           [showHeader]="showHeader()"
-          [showFooter]="showFooter()">
+          [showFooter]="showFooter()"
+          [shadow]="shadowValue()">
           @if (showHeader()) {
             <div card-header>{{ title() || 'Card Title' }}</div>
           }

@@ -1,10 +1,12 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, CardVariant, CardElevation, ThemeConfigService, Button } from 'ui-lib-custom';
+import { Card, CardVariant, CardElevation, ThemeConfigService, Button, SHADOWS } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
+
+type ShadowKey = string;
 
 @Component({
   selector: 'app-cards',
@@ -62,6 +64,16 @@ export class CardsComponent {
     if (!this.useLocalTheme()) return base;
     return { ...base, ...this.localVars() };
   });
+
+  readonly shadowOptions: ShadowKey[] = Object.keys(SHADOWS as Record<string, string>).filter(key => key.startsWith('shadow-'));
+  readonly selectedShadow = signal<ShadowKey>('shadow-1');
+  readonly shadowValue = computed(() => (SHADOWS as Record<string, string>)[this.selectedShadow()] ?? 'none');
+
+  setShadow(value: string) {
+    if ((SHADOWS as Record<string, string>)[value]) {
+      this.selectedShadow.set(value);
+    }
+  }
 
   constructor() {
     effect(() => {

@@ -1,4 +1,4 @@
-<div [ngClass]="cardClasses()">
+<div [ngClass]="cardClasses()" [style.--uilib-card-shadow]="shadow()" [style.--uilib-card-shadow-hover]="shadow()">
   @if (headerVisible()) {
     <div class="card-header">
       <ng-content select="[card-header]"></ng-content>

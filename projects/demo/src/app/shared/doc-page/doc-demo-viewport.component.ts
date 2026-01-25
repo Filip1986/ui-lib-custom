@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ViewportPreviewComponent } from '../viewport-preview/viewport-preview.component';
@@ -12,4 +12,6 @@ import { Card, Button } from 'ui-lib-custom';
   styleUrl: './doc-demo-viewport.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocDemoViewportComponent {}
+export class DocDemoViewportComponent {
+  shadow = input<string | null>(null);
+}
