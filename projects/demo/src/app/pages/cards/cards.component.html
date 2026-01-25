@@ -15,9 +15,10 @@
         <label>Variant</label>
         <div class="chips">
           @for (v of variants; track v) {
-            <button class="chip" [class.active]="variant() === v" (click)="variant.set(v)">{{ v }}</button>
+            <button class="chip" [class.active]="variant() === v" (click)="selectVariant(v)">{{ v }}</button>
           }
         </div>
+        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
       </div>
 
       <div class="control">
@@ -44,10 +45,14 @@
         <label>Body</label>
         <textarea rows="3" [value]="body()" (input)="body.set($any($event.target).value)"></textarea>
       </div>
+
+      <div class="control">
+        <label><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
+      </div>
     </div>
 
     <app-doc-demo-viewport>
-      <div class="card-grid">
+      <div class="card-grid" [appThemeScope]="appliedTheme()">
         <ui-lib-card
           [variant]="variant()"
           [elevation]="elevation()"

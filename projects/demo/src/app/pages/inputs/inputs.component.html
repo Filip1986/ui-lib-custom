@@ -15,6 +15,7 @@
             <button class="chip" [class.active]="variant() === v" (click)="setVariant(v)">{{ v }}</button>
           }
         </div>
+        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
       </div>
 
       <div class="control">
@@ -45,7 +46,7 @@
     </div>
 
     <app-doc-demo-viewport>
-      <div class="doc-demo centered">
+      <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
         <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
           <ui-lib-input
             [variant]="variant()"

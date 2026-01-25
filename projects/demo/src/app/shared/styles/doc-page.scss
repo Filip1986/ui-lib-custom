@@ -341,6 +341,15 @@
   }
 }
 
+.theme-overrides {
+  display: grid;
+  gap: 0.75rem;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
 // Responsive
 @media (max-width: 768px) {
   .doc-header {

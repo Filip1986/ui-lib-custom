@@ -33,6 +33,7 @@ export class ThemeConfigService {
 
   readonly preset = computed(() => this.presetSignal());
   readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
+  readonly cssVars = computed(() => this.mapPresetToCssVars(this.presetSignal()));
 
   constructor() {
     const stored = this.readStoredPreset();
@@ -176,6 +177,11 @@ export class ThemeConfigService {
     saveAs('theme.json', json, 'application/json');
     saveAs('theme.css', css, 'text/css');
     saveAs('_theme-variables.scss', scss, 'text/x-scss');
+  }
+
+  getCssVars(preset: ThemePreset | null = null): Record<string, string> {
+    const source = preset ?? this.presetSignal();
+    return this.mapPresetToCssVars(source);
   }
 
   private mapPresetToCssVars(preset: ThemePreset): Record<string, string> {
