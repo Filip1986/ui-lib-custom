@@ -10,9 +10,10 @@ import { InputsComponent } from './pages/inputs/inputs.component';
 import { SelectComponent } from './pages/select/select.component';
 import { SidebarMenuDemoComponent } from './pages/sidebar-menu/sidebar-menu.component';
 import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
+import { ShadowsComponent } from './pages/shadows/shadows.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title: 'Home - UI Components Library' },
+  { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
   { path: 'buttons', component: ButtonsComponent, title: 'Buttons - UI Components Library' },
   { path: 'cards', component: CardsComponent, title: 'Cards - UI Components Library' },
   { path: 'badges', component: BadgesComponent, title: 'Badges - UI Components Library' },
@@ -23,5 +24,7 @@ export const routes: Routes = [
   { path: 'select', component: SelectComponent, title: 'Select - UI Components Library' },
   { path: 'sidebar-menu', component: SidebarMenuDemoComponent, title: 'Sidebar Menu - UI Components Library' },
   { path: 'project-starter', component: ProjectStarterComponent, title: 'Project Starter - UI Components Library' },
-  { path: '**', redirectTo: '' }
+  { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
+  { path: '', redirectTo: 'shadows', pathMatch: 'full' },
+  { path: '**', redirectTo: 'shadows' }
 ];

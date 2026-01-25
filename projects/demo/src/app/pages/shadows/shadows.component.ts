@@ -1,0 +1,48 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Card, CardElevation } from 'ui-lib-custom';
+import { SHADOWS } from 'ui-lib-custom';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+
+interface ElevationExample {
+  level: number;
+  label: string;
+  token: ShadowKey;
+  elevation: CardElevation;
+  description: string;
+}
+
+type ShadowKey = keyof typeof SHADOWS;
+
+@Component({
+  selector: 'app-shadows',
+  standalone: true,
+  imports: [CommonModule, Card, DocPageLayoutComponent, DocDemoViewportComponent],
+  templateUrl: './shadows.component.html',
+  styleUrl: './shadows.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ShadowsComponent {
+  readonly sections: DocSection[] = [
+    { id: 'examples', label: 'Examples' },
+    { id: 'tokens', label: 'Tokens' },
+  ];
+
+  readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
+
+  readonly examples: ElevationExample[] = Object.entries(this.shadowValues)
+    .filter(([key]) => key.startsWith('shadow-'))
+    .map(([key, value]) => {
+      const level = Number(key.split('-')[1]);
+      return {
+        level,
+        label: `Shadow ${level}`,
+        token: key as ShadowKey,
+        elevation: 'none' as CardElevation,
+        description: value,
+      } satisfies ElevationExample;
+    })
+    .sort((a, b) => a.level - b.level);
+}

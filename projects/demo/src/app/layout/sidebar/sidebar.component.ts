@@ -23,7 +23,7 @@ export class SidebarComponent {
     {
       label: 'Getting Started',
       icon: 'pi pi-home',
-      route: '/',
+      route: '/home',
     },
     {
       label: 'Layout',
@@ -56,6 +56,11 @@ export class SidebarComponent {
           label: 'Card',
           icon: 'pi pi-id-card',
           route: '/cards'
+        },
+        {
+          label: 'Shadows',
+          icon: 'pi pi-circle',
+          route: '/shadows'
         },
         {
           label: 'Login Forms',
