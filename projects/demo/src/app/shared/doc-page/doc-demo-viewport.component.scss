@@ -41,3 +41,12 @@
     color: var(--uilib-muted, #5f6c80);
   }
 }
+
+.doc-demo-viewport {
+  overflow: hidden;
+  background: var(--uilib-surface, #fff);
+}
+
+.doc-demo-viewport__content {
+  padding: 1rem;
+}
