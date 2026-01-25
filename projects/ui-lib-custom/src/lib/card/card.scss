@@ -99,7 +99,43 @@
     --uilib-card-radius: 0;
     --uilib-card-shadow: var(--uilib-card-shadow-none, none);
     --uilib-card-shadow-hover: var(--uilib-card-shadow-low, var(--uilib-card-shadow-none, none));
-    --uilib-card-header-bg: var(--uilib-card-header-bg, transparent);
-    --uilib-card-footer-bg: var(--uilib-card-footer-bg, transparent);
+    --uilib-card-header-bg: var(--uilib-card-bg, var(--uilib-surface));
+    --uilib-card-footer-bg: var(--uilib-card-bg, var(--uilib-surface));
+    --uilib-card-border: var(--uilib-border, currentColor);
+
+    .card-header,
+    .card-footer {
+      position: relative;
+    }
+
+    .card-header {
+      border-bottom: 0;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: var(--uilib-space-4);
+        right: var(--uilib-space-4);
+        bottom: 0;
+        height: 1px;
+        background: var(--uilib-card-border, var(--uilib-border, currentColor));
+        opacity: 0.9;
+      }
+    }
+
+    .card-footer {
+      border-top: 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: var(--uilib-space-4);
+        right: var(--uilib-space-4);
+        top: 0;
+        height: 1px;
+        background: var(--uilib-card-border, var(--uilib-border, currentColor));
+        opacity: 0.9;
+      }
+    }
   }
 }
