@@ -112,6 +112,34 @@ export class ThemeEditorComponent {
     }
   }
 
+  onCardShadowChange(value: string): void {
+    const exists = (SHADOWS as Record<string, string>)[value] ?? (value === 'none' ? 'none' : undefined);
+    if (exists !== undefined) {
+      this.themeService.loadPreset({ cardShadow: value }, { merge: true, apply: true, persist: true });
+    }
+  }
+
+  onCardShadowPreview(value: string): void {
+    const exists = (SHADOWS as Record<string, string>)[value] ?? (value === 'none' ? 'none' : undefined);
+    if (exists !== undefined) {
+      this.themeService.loadPreset({ cardShadow: value }, { merge: true, apply: true, persist: false });
+    }
+  }
+
+  onButtonShadowChange(value: string): void {
+    const exists = (SHADOWS as Record<string, string>)[value] ?? (value === 'none' ? 'none' : undefined);
+    if (exists !== undefined) {
+      this.themeService.loadPreset({ buttonShadow: value }, { merge: true, apply: true, persist: true });
+    }
+  }
+
+  onButtonShadowPreview(value: string): void {
+    const exists = (SHADOWS as Record<string, string>)[value] ?? (value === 'none' ? 'none' : undefined);
+    if (exists !== undefined) {
+      this.themeService.loadPreset({ buttonShadow: value }, { merge: true, apply: true, persist: false });
+    }
+  }
+
   resetToDefault(): void {
     const base = this.themeService.listBuiltInPresets()['light'] as ThemePreset | undefined;
     if (base) {

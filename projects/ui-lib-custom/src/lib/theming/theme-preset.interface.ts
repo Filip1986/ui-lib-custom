@@ -36,6 +36,8 @@ export interface ThemePreset {
   shape: ThemePresetShape;
   typography: ThemePresetTypography;
   shadow?: string;
+  cardShadow?: string;
+  buttonShadow?: string;
 }
 
 export type ThemePresetOverrides = DeepPartial<ThemePreset>;

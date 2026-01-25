@@ -25,5 +25,7 @@
     "fontFamily": "'Inter', 'Segoe UI', sans-serif",
     "baseFontSize": "16px"
   },
-  "shadow": "shadow-3"
+  "shadow": "shadow-3",
+  "cardShadow": "shadow-3",
+  "buttonShadow": "shadow-1"
 }

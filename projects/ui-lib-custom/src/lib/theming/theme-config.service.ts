@@ -195,7 +195,7 @@ export class ThemeConfigService {
       names.forEach((name) => set(name, value));
     };
 
-    const { colors, shape, typography, shadow } = preset;
+    const { colors, shape, typography, shadow, cardShadow, buttonShadow } = preset;
 
     applyColor(colors.primary,
       '--uilib-color-primary-100',
@@ -308,15 +308,16 @@ export class ThemeConfigService {
     set('--uilib-font-family-base', typography.fontFamily);
     set('--uilib-font-size-base', typography.baseFontSize);
 
-    const shadowValue = (SHADOWS as Record<string, string>)[shadow ?? ''] ?? 'none';
-    set('--uilib-card-shadow', shadowValue);
-    set('--uilib-card-shadow-hover', shadowValue);
-    set('--uilib-card-shadow-medium', shadowValue);
-    set('--uilib-card-shadow-high', shadowValue);
-    set('--uilib-button-shadow', shadowValue);
-    set('--uilib-button-shadow-hover', shadowValue);
-    set('--uilib-shadow-sm', shadowValue);
-    set('--uilib-shadow-md', shadowValue);
+    const shadowValueCard = (SHADOWS as Record<string, string>)[cardShadow ?? shadow ?? ''] ?? 'none';
+    const shadowValueButton = (SHADOWS as Record<string, string>)[buttonShadow ?? shadow ?? ''] ?? 'none';
+    set('--uilib-card-shadow', shadowValueCard);
+    set('--uilib-card-shadow-hover', shadowValueCard);
+    set('--uilib-card-shadow-medium', shadowValueCard);
+    set('--uilib-card-shadow-high', shadowValueCard);
+    set('--uilib-button-shadow', shadowValueButton);
+    set('--uilib-button-shadow-hover', shadowValueButton);
+    set('--uilib-shadow-sm', shadowValueButton);
+    set('--uilib-shadow-md', shadowValueButton);
 
     return vars;
   }

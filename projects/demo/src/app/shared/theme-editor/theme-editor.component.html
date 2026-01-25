@@ -74,6 +74,24 @@
     </select>
   </div>
 
+  <div class="section">
+    <label class="label">Card shadow</label>
+    <select [ngModel]="currentPreset().cardShadow || currentPreset().shadow || shadowOptions[0]?.value" (change)="onCardShadowPreview($any($event.target).value)" (ngModelChange)="onCardShadowChange($event)">
+      @for (opt of shadowOptions; track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="section">
+    <label class="label">Button shadow</label>
+    <select [ngModel]="currentPreset().buttonShadow || currentPreset().shadow || shadowOptions[0]?.value" (change)="onButtonShadowPreview($any($event.target).value)" (ngModelChange)="onButtonShadowChange($event)">
+      @for (opt of shadowOptions; track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+  </div>
+
   <div class="actions">
     <button class="primary" (click)="exportTheme()">Export Theme</button>
     <button class="ghost" (click)="resetToDefault()">Reset to Default</button>

@@ -67,8 +67,8 @@ export class CardsComponent {
   });
 
   readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter(key => key.startsWith('shadow-'));
-  readonly globalShadow = computed(() => SHADOW_MAP[this.themeService.preset().shadow ?? ''] ?? 'none');
-  readonly selectedShadow = signal<ShadowKey>(this.resolveShadowKey(this.themeService.preset().shadow));
+  readonly globalShadow = computed(() => SHADOW_MAP[this.themeService.preset().cardShadow ?? this.themeService.preset().shadow ?? ''] ?? 'none');
+  readonly selectedShadow = signal<ShadowKey>(this.resolveShadowKey(this.themeService.preset().cardShadow ?? this.themeService.preset().shadow));
   readonly shadowValue = computed(() => this.useLocalTheme()
     ? (SHADOW_MAP[this.selectedShadow()] ?? 'none')
     : this.globalShadow());
