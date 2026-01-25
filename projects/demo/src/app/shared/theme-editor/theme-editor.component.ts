@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThemeConfigService, ThemePreset, ThemePresetColors, ThemeVariant, SHADOWS } from 'ui-lib-custom';
+const SHADOW_MAP = SHADOWS as Record<string, string>;
 
 interface SelectOption<T> {
   label: string;
@@ -29,8 +30,7 @@ export class ThemeEditorComponent {
     { label: 'Small', value: 'sm' },
     { label: 'Medium', value: 'md' },
     { label: 'Large', value: 'lg' },
-    { label: 'XL', value: 'xl' },
-    { label: 'Full', value: 'full' },
+    { label: 'XL', value: 'xl' }
   ];
 
   readonly variantOptions: SelectOption<ThemeVariant>[] = [
@@ -99,6 +99,13 @@ export class ThemeEditorComponent {
     const exists = (SHADOWS as Record<string, string>)[value];
     if (exists) {
       this.themeService.loadPreset({ shadow: value }, { merge: true, apply: true, persist: true });
+    }
+  }
+
+  onShadowPreview(value: string): void {
+    const exists = (SHADOWS as Record<string, string>)[value];
+    if (exists) {
+      this.themeService.loadPreset({ shadow: value }, { merge: true, apply: true, persist: false });
     }
   }
 

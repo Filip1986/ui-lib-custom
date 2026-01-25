@@ -293,11 +293,12 @@ export class ThemeConfigService {
     set('--uilib-card-footer-bg', colors.surfaceAlt);
 
     const resolvedBorderRadius = this.resolveRadius(shape.borderRadius);
-    set('--uilib-radius-sm', BORDER_RADIUS.sm);
-    set('--uilib-radius-md', BORDER_RADIUS.md);
-    set('--uilib-radius-lg', BORDER_RADIUS.lg);
-    set('--uilib-radius-xl', BORDER_RADIUS.xl);
-    set('--uilib-radius-2xl', BORDER_RADIUS['2xl']);
+    const radiusBase = resolvedBorderRadius ?? BORDER_RADIUS.md;
+    set('--uilib-radius-sm', radiusBase);
+    set('--uilib-radius-md', radiusBase);
+    set('--uilib-radius-lg', radiusBase);
+    set('--uilib-radius-xl', radiusBase);
+    set('--uilib-radius-2xl', radiusBase);
     set('--uilib-radius-full', BORDER_RADIUS.full);
 
     set('--uilib-button-radius', this.resolveRadius(shape.buttonRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
