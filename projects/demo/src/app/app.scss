@@ -15,7 +15,7 @@
   margin-left: 250px;
   padding: 2rem;
   background: #f8f9fa;
-  overflow-x: hidden;
+  overflow: visible;
 
   @media (max-width: 968px) {
     margin-left: 0;
@@ -46,4 +46,3 @@
     opacity: 1;
   }
 }
-

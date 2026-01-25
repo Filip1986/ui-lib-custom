@@ -9,13 +9,15 @@
 
     @if (sections.length) {
       <div class="doc-rail">
-        <ui-lib-card variant="minimal" elevation="low" [bordered]="true">
-          <app-doc-toc
-            [sections]="sections"
-            [activeId]="activeSectionId()"
-            (sectionSelected)="scrollToSection($event)"
-          ></app-doc-toc>
-        </ui-lib-card>
+        <div class="doc-rail__inner">
+          <ui-lib-card variant="minimal" elevation="low" [bordered]="true">
+            <app-doc-toc
+              [sections]="sections"
+              [activeId]="activeSectionId()"
+              (sectionSelected)="scrollToSection($event)"
+            ></app-doc-toc>
+          </ui-lib-card>
+        </div>
       </div>
     }
   </div>

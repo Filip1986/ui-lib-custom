@@ -25,7 +25,7 @@ import { Container, Card } from '../../../../../ui-lib-custom/src/public-api';
 })
 export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input({ required: true }) sections: DocSection[] = [];
-  @Input() topOffset = 96;
+  @Input() topOffset = 80;
   @Input() railWidth = 250;
 
   @HostBinding('style.--doc-top-offset.px') get docTopOffset(): number {
