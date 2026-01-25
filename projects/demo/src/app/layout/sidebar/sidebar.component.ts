@@ -71,6 +71,11 @@ export class SidebarComponent {
           label: 'Select',
           icon: 'pi pi-circle',
           route: '/select'
+        },
+        {
+          label: 'Sidebar Menu',
+          icon: 'pi pi-circle',
+          route: '/sidebar-menu'
         }
       ]
     },

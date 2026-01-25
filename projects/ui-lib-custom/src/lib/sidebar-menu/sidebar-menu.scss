@@ -1,0 +1,165 @@
+.ui-sidebar {
+  --ui-sidebar-bg: var(--uilib-sidebar-bg, var(--uilib-surface, #fff));
+  --ui-sidebar-width: var(--uilib-sidebar-width, 260px);
+  --ui-sidebar-collapsed-width: var(--uilib-sidebar-collapsed-width, 72px);
+  --ui-sidebar-item-hover: var(--uilib-sidebar-item-hover, color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 8%, transparent));
+  --ui-sidebar-item-active: var(--uilib-sidebar-item-active, color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 16%, transparent));
+  --ui-sidebar-text: var(--uilib-sidebar-text, var(--uilib-page-fg, #111827));
+  --ui-sidebar-icon: var(--uilib-sidebar-icon, var(--uilib-muted, #6b7280));
+
+  width: var(--ui-sidebar-width);
+  background: var(--ui-sidebar-bg);
+  color: var(--ui-sidebar-text);
+  border-right: 1px solid var(--uilib-border, #e0e0e0);
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  transition: width 0.2s ease;
+  min-height: 100%;
+}
+
+.ui-sidebar-collapsed {
+  width: var(--ui-sidebar-collapsed-width);
+}
+
+.ui-sidebar-brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.ui-sidebar-toggle {
+  width: 100%;
+  border: 1px solid var(--uilib-border, #e0e0e0);
+  background: transparent;
+  color: inherit;
+  border-radius: var(--uilib-radius-md, 8px);
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+}
+
+.ui-sidebar-menu,
+.ui-sidebar-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ui-sidebar-item > .ui-sidebar-link,
+.ui-sidebar-subitem > .ui-sidebar-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--uilib-radius-md, 8px);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ui-sidebar-item:hover > .ui-sidebar-link,
+.ui-sidebar-subitem:hover > .ui-sidebar-link {
+  background: var(--ui-sidebar-item-hover);
+}
+
+.ui-sidebar-item.active > .ui-sidebar-link,
+.ui-sidebar-subitem.active > .ui-sidebar-link {
+  background: var(--ui-sidebar-item-active);
+  color: var(--uilib-color-primary-700, #1976d2);
+}
+
+.ui-sidebar-item.disabled > .ui-sidebar-link,
+.ui-sidebar-subitem.disabled > .ui-sidebar-link {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ui-sidebar-icon {
+  color: var(--ui-sidebar-icon);
+  display: inline-flex;
+  justify-content: center;
+  width: 1.5rem;
+}
+
+.ui-sidebar-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui-sidebar-badge {
+  background: var(--uilib-color-primary-600, #1e88e5);
+  color: #fff;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--uilib-radius-md, 8px);
+  font-size: 0.75rem;
+}
+
+.ui-sidebar-submenu {
+  margin-top: 0.15rem;
+  margin-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.ui-sidebar-footer {
+  margin-top: auto;
+  padding: 0.5rem 0.25rem;
+}
+
+/* Variant: compact */
+.ui-sidebar.ui-sidebar-compact {
+  width: var(--ui-sidebar-width);
+}
+
+.ui-sidebar.ui-sidebar-compact.ui-sidebar-collapsed {
+  width: var(--ui-sidebar-collapsed-width);
+}
+
+.ui-sidebar.ui-sidebar-compact .ui-sidebar-label,
+.ui-sidebar.ui-sidebar-compact .ui-sidebar-badge {
+  display: inline-flex;
+}
+
+.ui-sidebar.ui-sidebar-collapsed .ui-sidebar-label,
+.ui-sidebar.ui-sidebar-collapsed .ui-sidebar-badge {
+  display: none;
+}
+
+.ui-sidebar.ui-sidebar-collapsed .ui-sidebar-submenu {
+  display: none;
+}
+
+/* Variant: modern */
+.ui-sidebar.ui-sidebar-modern {
+  border: none;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 1rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 12%, transparent), var(--ui-sidebar-bg));
+  backdrop-filter: blur(10px);
+}
+
+.ui-sidebar.ui-sidebar-modern .ui-sidebar-link {
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ui-sidebar-bg) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--uilib-border, #e0e0e0) 60%, transparent);
+}
+
+.ui-sidebar.ui-sidebar-modern .ui-sidebar-item.active > .ui-sidebar-link {
+  border-color: var(--uilib-color-primary-600, #1e88e5);
+}
