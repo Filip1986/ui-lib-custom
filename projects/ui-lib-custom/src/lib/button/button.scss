@@ -33,9 +33,9 @@
   --uilib-button-letter-spacing: normal;
 
   /* Size variables */
-  --uilib-button-padding-small: var(--uilib-space-1) var(--uilib-space-3);
-  --uilib-button-padding-medium: var(--uilib-space-2) var(--uilib-space-4);
-  --uilib-button-padding-large: var(--uilib-space-3) var(--uilib-space-5);
+  --uilib-button-padding-small: var(--uilib-button-padding-y-small, var(--uilib-space-1)) var(--uilib-button-padding-x-small, var(--uilib-space-3));
+  --uilib-button-padding-medium: var(--uilib-button-padding-y-medium, var(--uilib-space-2)) var(--uilib-button-padding-x-medium, var(--uilib-space-4));
+  --uilib-button-padding-large: var(--uilib-button-padding-y-large, var(--uilib-space-3)) var(--uilib-button-padding-x-large, var(--uilib-space-5));
   --uilib-button-font-size-small: var(--uilib-font-size-sm);
   --uilib-button-font-size-medium: var(--uilib-font-size-md);
   --uilib-button-font-size-large: var(--uilib-font-size-lg);
@@ -82,7 +82,7 @@ button:active:not(.btn-disabled) {
 }
 
 .btn {
-  min-height: 2.5rem;
+  min-height: var(--uilib-button-min-height, 44px);
 
   &-disabled {
     opacity: var(--uilib-button-disabled-opacity);

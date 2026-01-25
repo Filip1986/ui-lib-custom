@@ -4,10 +4,11 @@
   z-index: 5;
   background: var(--uilib-surface, #fff);
   border-bottom: 1px solid var(--uilib-border, #e0e0e0);
-  padding: 0.5rem 0.75rem;
+  padding: var(--uilib-toolbar-padding-y, 0.5rem) var(--uilib-toolbar-padding-x, 0.75rem);
+  min-height: var(--uilib-toolbar-height, var(--uilib-touch-size-min, 44px));
   display: flex;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--uilib-inline-md, 0.75rem);
 }
 
 :host(.mode-inline) .viewport-toolbar {

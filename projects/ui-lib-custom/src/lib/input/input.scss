@@ -32,7 +32,8 @@
   background: var(--ui-input-bg);
   border: 1px solid var(--ui-input-border);
   border-radius: var(--ui-input-radius);
-  padding: 0.5rem 0.75rem;
+  padding: var(--uilib-input-padding-y, 0.5rem) var(--uilib-input-padding-x, 0.75rem);
+  min-height: var(--uilib-input-min-height, 44px);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 

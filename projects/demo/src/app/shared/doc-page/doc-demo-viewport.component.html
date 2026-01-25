@@ -15,6 +15,12 @@
       <div class="controls">
         <span class="dims">{{ p.displayWidth() }} × {{ p.displayHeight() }}px</span>
         <ui-lib-button size="small" appearance="ghost" (click)="p.rotate()">Rotate</ui-lib-button>
+        <div class="density-toggle">
+          <span>Density</span>
+          <ui-lib-button size="small" appearance="ghost" (click)="setDensity('default')" [class.active]="density() === 'default'">Default</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setDensity('comfortable')" [class.active]="density() === 'comfortable'">Comfortable</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setDensity('compact')" [class.active]="density() === 'compact'">Compact</ui-lib-button>
+        </div>
       </div>
     </div>
   }

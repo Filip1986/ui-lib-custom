@@ -35,58 +35,66 @@
   --uilib-color-neutral-400: #bdbdbd;
   --uilib-color-neutral-900: #212121;
 
-  /* Spacing scale aliases */
-  --uilib-space-xs: 0.25rem;
-  --uilib-space-sm: 0.5rem;
-  --uilib-space-md: 1rem;
-  --uilib-space-lg: 1.5rem;
-  --uilib-space-xl: 2rem;
-  --uilib-space-2xl: 3rem;
+  --uilib-touch-size-min: 44px;
+  --uilib-density-scale-y: 1;
 
-  /* Spacing (EightShapes) */
-  --uilib-inset-xs: 0.25rem;
-  --uilib-inset-sm: 0.5rem;
-  --uilib-inset-md: 1rem;
-  --uilib-inset-lg: 1.5rem;
-  --uilib-inset-xl: 2rem;
+  /* Component spacing bases */
+  --uilib-button-padding-x-small-base: 1rem;
+  --uilib-button-padding-y-small-base: 0.5rem;
+  --uilib-button-padding-x-medium-base: 2rem;
+  --uilib-button-padding-y-medium-base: 1rem;
+  --uilib-button-padding-x-large-base: 3rem;
+  --uilib-button-padding-y-large-base: 1.5rem;
+  --uilib-button-gap-base: 0.5rem; /* inline-sm */
+  --uilib-button-min-height: var(--uilib-touch-size-min);
 
-  --uilib-squish-xs: 0.25rem 0.5rem;
-  --uilib-squish-sm: 0.5rem 1rem;
-  --uilib-squish-md: 1rem 2rem;
-  --uilib-squish-lg: 1.5rem 3rem;
-  --uilib-squish-xl: 2rem 4rem;
+  --uilib-card-padding-base: 1rem; /* inset-md */
+  --uilib-card-header-padding-base: 0.5rem; /* inset-sm */
+  --uilib-card-body-padding-base: 1rem; /* inset-md */
+  --uilib-card-footer-padding-base: 0.5rem; /* inset-sm */
 
-  --uilib-stretch-xs: 0.5rem 0.25rem;
-  --uilib-stretch-sm: 1rem 0.5rem;
-  --uilib-stretch-md: 2rem 1rem;
-  --uilib-stretch-lg: 3rem 1.5rem;
-  --uilib-stretch-xl: 4rem 2rem;
+  --uilib-input-padding-x-base: 0.5rem; /* stretch-sm horizontal */
+  --uilib-input-padding-y-base: 1rem; /* stretch-sm vertical */
+  --uilib-input-min-height: var(--uilib-touch-size-min);
 
-  --uilib-stack-xs: 0.25rem;
-  --uilib-stack-sm: 0.5rem;
-  --uilib-stack-md: 1rem;
-  --uilib-stack-lg: 1.5rem;
-  --uilib-stack-xl: 2rem;
+  --uilib-badge-padding-y-base: 0.25rem; /* squish-xs vertical */
+  --uilib-badge-padding-x-base: 0.5rem; /* squish-xs horizontal */
+
+  --uilib-toolbar-height-base: 3rem;
+  --uilib-toolbar-padding-y-base: 0.5rem;
+  --uilib-toolbar-padding-x-base: 0.75rem;
+  --uilib-toolbar-height: max(var(--uilib-touch-size-min), calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y)));
+  --uilib-toolbar-padding-y: calc(var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
+
+  --uilib-table-row-height-base: 3rem;
+  --uilib-table-row-height: max(var(--uilib-touch-size-min), calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y)));
+
+  --uilib-list-item-padding-y-base: 0.75rem;
+  --uilib-list-item-padding-x-base: 0.75rem;
+  --uilib-list-item-padding-y: calc(var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
+  --uilib-list-item-min-height: var(--uilib-touch-size-min);
 
   /* Component spacing */
-  --uilib-button-padding-x-small: 1rem; /* squish-sm horizontal */
-  --uilib-button-padding-y-small: 0.5rem; /* squish-sm vertical */
-  --uilib-button-padding-x-medium: 2rem; /* squish-md horizontal */
-  --uilib-button-padding-y-medium: 1rem; /* squish-md vertical */
-  --uilib-button-padding-x-large: 3rem; /* squish-lg horizontal */
-  --uilib-button-padding-y-large: 1.5rem; /* squish-lg vertical */
-  --uilib-button-gap: 0.5rem; /* inline-sm */
+  --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
+  --uilib-button-padding-y-small: calc(var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
+  --uilib-button-padding-y-medium: calc(var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
+  --uilib-button-padding-y-large: calc(var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y));
+  --uilib-button-gap: var(--uilib-button-gap-base);
 
-  --uilib-card-padding: 1rem; /* inset-md */
-  --uilib-card-header-padding: 0.5rem; /* inset-sm */
-  --uilib-card-body-padding: 1rem; /* inset-md */
-  --uilib-card-footer-padding: 0.5rem; /* inset-sm */
+  --uilib-card-padding: var(--uilib-card-padding-base);
+  --uilib-card-header-padding: var(--uilib-card-header-padding-base);
+  --uilib-card-body-padding: var(--uilib-card-body-padding-base);
+  --uilib-card-footer-padding: var(--uilib-card-footer-padding-base);
 
-  --uilib-input-padding-y: 1rem; /* stretch-sm vertical */
-  --uilib-input-padding-x: 0.5rem; /* stretch-sm horizontal */
+  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-input-padding-x: var(--uilib-input-padding-x-base);
 
-  --uilib-badge-padding-y: 0.25rem; /* squish-xs vertical */
-  --uilib-badge-padding-x: 0.5rem; /* squish-xs horizontal */
+  --uilib-badge-padding-y: var(--uilib-badge-padding-y-base);
+  --uilib-badge-padding-x: var(--uilib-badge-padding-x-base);
 
   --uilib-inline-xs: 0.25rem;
   --uilib-inline-sm: 0.5rem;
@@ -176,58 +184,72 @@
   --uilib-color-neutral-400: #5a5a5a;
   --uilib-color-neutral-900: #f5f5f5;
 
-  /* Spacing scale aliases */
-  --uilib-space-xs: 0.25rem;
-  --uilib-space-sm: 0.5rem;
-  --uilib-space-md: 1rem;
-  --uilib-space-lg: 1.5rem;
-  --uilib-space-xl: 2rem;
-  --uilib-space-2xl: 3rem;
+  --uilib-touch-size-min: 44px;
+  --uilib-density-scale-y: 1;
 
-  /* Spacing (EightShapes) */
-  --uilib-inset-xs: 0.25rem;
-  --uilib-inset-sm: 0.5rem;
-  --uilib-inset-md: 1rem;
-  --uilib-inset-lg: 1.5rem;
-  --uilib-inset-xl: 2rem;
+  /* Component spacing bases */
+  --uilib-button-padding-x-small-base: 1rem;
+  --uilib-button-padding-y-small-base: 0.5rem;
+  --uilib-button-padding-x-medium-base: 2rem;
+  --uilib-button-padding-y-medium-base: 1rem;
+  --uilib-button-padding-x-large-base: 3rem;
+  --uilib-button-padding-y-large-base: 1.5rem;
+  --uilib-button-gap-base: 0.5rem;
+  --uilib-button-min-height: var(--uilib-touch-size-min);
 
-  --uilib-squish-xs: 0.25rem 0.5rem;
-  --uilib-squish-sm: 0.5rem 1rem;
-  --uilib-squish-md: 1rem 2rem;
-  --uilib-squish-lg: 1.5rem 3rem;
-  --uilib-squish-xl: 2rem 4rem;
+  --uilib-card-padding-base: 1rem;
+  --uilib-card-header-padding-base: 0.5rem;
+  --uilib-card-body-padding-base: 1rem;
+  --uilib-card-footer-padding-base: 0.5rem;
 
-  --uilib-stretch-xs: 0.5rem 0.25rem;
-  --uilib-stretch-sm: 1rem 0.5rem;
-  --uilib-stretch-md: 2rem 1rem;
-  --uilib-stretch-lg: 3rem 1.5rem;
-  --uilib-stretch-xl: 4rem 2rem;
+  --uilib-input-padding-x-base: 0.5rem;
+  --uilib-input-padding-y-base: 1rem;
+  --uilib-input-min-height: var(--uilib-touch-size-min);
 
-  --uilib-stack-xs: 0.25rem;
-  --uilib-stack-sm: 0.5rem;
-  --uilib-stack-md: 1rem;
-  --uilib-stack-lg: 1.5rem;
-  --uilib-stack-xl: 2rem;
+  --uilib-badge-padding-y-base: 0.25rem;
+  --uilib-badge-padding-x-base: 0.5rem;
+
+  --uilib-toolbar-height-base: 3rem;
+  --uilib-toolbar-padding-y-base: 0.5rem;
+  --uilib-toolbar-padding-x-base: 0.75rem;
+  --uilib-toolbar-height: max(var(--uilib-touch-size-min), calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y)));
+  --uilib-toolbar-padding-y: calc(var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
+
+  --uilib-table-row-height-base: 3rem;
+  --uilib-table-row-height: max(var(--uilib-touch-size-min), calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y)));
+
+  --uilib-list-item-padding-y-base: 0.75rem;
+  --uilib-list-item-padding-x-base: 0.75rem;
+  --uilib-list-item-padding-y: calc(var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
+  --uilib-list-item-min-height: var(--uilib-touch-size-min);
 
   /* Component spacing */
-  --uilib-button-padding-x-small: 1rem;
-  --uilib-button-padding-y-small: 0.5rem;
-  --uilib-button-padding-x-medium: 2rem;
-  --uilib-button-padding-y-medium: 1rem;
-  --uilib-button-padding-x-large: 3rem;
-  --uilib-button-padding-y-large: 1.5rem;
-  --uilib-button-gap: 0.5rem;
+  --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
+  --uilib-button-padding-y-small: calc(var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
+  --uilib-button-padding-y-medium: calc(var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
+  --uilib-button-padding-y-large: calc(var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y));
+  --uilib-button-gap: var(--uilib-button-gap-base);
 
-  --uilib-card-padding: 1rem;
-  --uilib-card-header-padding: 0.5rem;
-  --uilib-card-body-padding: 1rem;
-  --uilib-card-footer-padding: 0.5rem;
+  --uilib-card-padding: var(--uilib-card-padding-base);
+  --uilib-card-header-padding: var(--uilib-card-header-padding-base);
+  --uilib-card-body-padding: var(--uilib-card-body-padding-base);
+  --uilib-card-footer-padding: var(--uilib-card-footer-padding-base);
 
-  --uilib-input-padding-y: 1rem;
-  --uilib-input-padding-x: 0.5rem;
+  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-input-padding-x: var(--uilib-input-padding-x-base);
 
-  --uilib-badge-padding-y: 0.25rem;
-  --uilib-badge-padding-x: 0.5rem;
+  --uilib-badge-padding-y: var(--uilib-badge-padding-y-base);
+  --uilib-badge-padding-x: var(--uilib-badge-padding-x-base);
+
+  --uilib-inline-xs: 0.25rem;
+  --uilib-inline-sm: 0.5rem;
+  --uilib-inline-md: 1rem;
+  --uilib-inline-lg: 1.5rem;
+  --uilib-inline-xl: 2rem;
 
   /* Surfaces & text */
   --uilib-page-bg: #101214;
@@ -243,34 +265,12 @@
   --uilib-topbar-fg: #e6e8eb;
   --uilib-topbar-hover: #262a30;
   --uilib-topbar-accent: var(--uilib-color-primary-500);
+}
 
-  /* Buttons */
-  --uilib-button-primary-bg: var(--uilib-color-primary-600);
-  --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
-  --uilib-button-primary-border: var(--uilib-color-primary-600);
-  --uilib-button-primary-fg: #fff;
+[data-density="comfortable"] {
+  --uilib-density-scale-y: 0.75;
+}
 
-  --uilib-button-secondary-bg: var(--uilib-color-secondary-600);
-  --uilib-button-secondary-bg-hover: var(--uilib-color-secondary-700);
-  --uilib-button-secondary-border: var(--uilib-color-secondary-600);
-  --uilib-button-secondary-fg: #fff;
-
-  --uilib-button-success-bg: var(--uilib-color-success-600);
-  --uilib-button-success-bg-hover: var(--uilib-color-success-700);
-  --uilib-button-success-border: var(--uilib-color-success-600);
-  --uilib-button-success-fg: #fff;
-
-  --uilib-button-danger-bg: var(--uilib-color-danger-600);
-  --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
-  --uilib-button-danger-border: var(--uilib-color-danger-600);
-  --uilib-button-danger-fg: #fff;
-
-  --uilib-button-warning-bg: var(--uilib-color-warning-600);
-  --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
-  --uilib-button-warning-border: var(--uilib-color-warning-600);
-  --uilib-button-warning-fg: #000;
-
-  --uilib-card-bg: #1f1f1f;
-  --uilib-card-text-color: var(--uilib-color-neutral-900);
-  --uilib-card-border: var(--uilib-color-neutral-300);
+[data-density="compact"] {
+  --uilib-density-scale-y: 0.5;
 }
