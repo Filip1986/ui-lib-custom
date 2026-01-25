@@ -7,6 +7,40 @@
     </p>
   </div>
 
+  <div class="doc-section" id="semantic-spacing" data-doc-anchor>
+    <h2>Semantic Spacing</h2>
+    <p>Use t-shirt sizes to pull semantic spacing tokens without hardcoding gaps or padding.</p>
+    <div class="doc-demo-group">
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-grid spacing="md" [columns]="3">
+            <ui-lib-stack spacing="sm">
+              <h4>Stack spacing="sm"</h4>
+              <ui-lib-stack spacing="sm">
+                <div class="demo-box">Item 1</div>
+                <div class="demo-box">Item 2</div>
+              </ui-lib-stack>
+            </ui-lib-stack>
+            <ui-lib-stack spacing="sm">
+              <h4>Inline spacing="sm"</h4>
+              <ui-lib-inline spacing="sm">
+                <span class="demo-tag">One</span>
+                <span class="demo-tag">Two</span>
+                <span class="demo-tag">Three</span>
+              </ui-lib-inline>
+            </ui-lib-stack>
+            <ui-lib-stack spacing="sm">
+              <h4>Container inset="lg"</h4>
+              <ui-lib-container inset="lg" style="background: #f5f5f5;">
+                <p class="no-margin">Inset padding comes from `--uilib-inset-lg` (24px).</p>
+              </ui-lib-container>
+            </ui-lib-stack>
+          </ui-lib-grid>
+        </div>
+      </app-doc-demo-viewport>
+    </div>
+  </div>
+
   <div class="doc-section" id="stack" data-doc-anchor>
     <h2>Stack</h2>
     <p>A flexible vertical or horizontal layout primitive with configurable gap and alignment.</p>
@@ -15,7 +49,7 @@
       <h3>Vertical Stack (Default)</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-stack [gap]="4">
+          <ui-lib-stack spacing="md">
             <div class="demo-box">Item 1</div>
             <div class="demo-box">Item 2</div>
             <div class="demo-box">Item 3</div>
@@ -28,7 +62,7 @@
       <h3>Horizontal Stack</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-stack direction="horizontal" [gap]="4">
+          <ui-lib-stack direction="horizontal" spacing="md">
             <div class="demo-box">Item 1</div>
             <div class="demo-box">Item 2</div>
             <div class="demo-box">Item 3</div>
@@ -41,7 +75,7 @@
       <h3>Centered Stack</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-stack [gap]="3" align="center" justify="center" style="min-height: 200px;">
+          <ui-lib-stack spacing="sm" align="center" justify="center" style="min-height: 200px;">
             <div class="demo-box">Centered Item 1</div>
             <div class="demo-box">Centered Item 2</div>
           </ui-lib-stack>
@@ -53,7 +87,7 @@
       <h3>Space Between</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-stack direction="horizontal" justify="space-between" style="width: 100%;">
+          <ui-lib-stack direction="horizontal" justify="space-between" spacing="sm" style="width: 100%;">
             <div class="demo-box">Left</div>
             <div class="demo-box">Center</div>
             <div class="demo-box">Right</div>
@@ -71,7 +105,7 @@
       <h3>Basic Inline</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-inline [gap]="2">
+          <ui-lib-inline spacing="sm">
             <span class="demo-tag">JavaScript</span>
             <span class="demo-tag">TypeScript</span>
             <span class="demo-tag">Angular</span>
@@ -89,7 +123,7 @@
       <h3>Centered Inline</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-inline [gap]="3" justify="center">
+          <ui-lib-inline spacing="md" justify="center">
             <span class="demo-tag">Tag 1</span>
             <span class="demo-tag">Tag 2</span>
             <span class="demo-tag">Tag 3</span>
@@ -107,7 +141,7 @@
       <h3>12 Column Grid</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo">
-          <ui-lib-grid [columns]="12" [gap]="2">
+          <ui-lib-grid [columns]="12" spacing="sm">
             @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
               <div class="demo-grid-cell">{{ i }}</div>
             }
@@ -120,7 +154,7 @@
       <h3>4 Column Grid</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo">
-          <ui-lib-grid [columns]="4" [gap]="4">
+          <ui-lib-grid [columns]="4" spacing="md">
             @for (i of [1,2,3,4,5,6,7,8]; track i) {
               <div class="demo-grid-cell">Cell {{ i }}</div>
             }
@@ -134,7 +168,7 @@
       <p>Resize the window to see this grid adapt.</p>
       <app-doc-demo-viewport>
         <div class="doc-demo">
-          <ui-lib-grid [gap]="4" minColumnWidth="200px">
+          <ui-lib-grid spacing="lg" minColumnWidth="200px">
             @for (i of [1,2,3,4,5,6]; track i) {
               <div class="demo-grid-cell large">Card {{ i }}</div>
             }
@@ -149,15 +183,15 @@
     <p>A centered container with max-width constraints and padding.</p>
     <app-doc-demo-viewport>
       <div class="doc-demo stacked">
-        <ui-lib-container size="sm" [padding]="4" style="background: #f5f5f5;">
+        <ui-lib-container size="sm" inset="md" style="background: #f5f5f5;">
           <p>This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </ui-lib-container>
 
-        <ui-lib-container size="md" [padding]="6" style="background: #f5f5f5;">
+        <ui-lib-container size="md" inset="lg" style="background: #f5f5f5;">
           <p>This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </ui-lib-container>
 
-        <ui-lib-container size="lg" [padding]="8" style="background: #f5f5f5;">
+        <ui-lib-container size="lg" inset="xl" style="background: #f5f5f5;">
           <p>This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </ui-lib-container>
       </div>
@@ -170,15 +204,15 @@
 
     <app-doc-demo-viewport>
       <div class="doc-demo">
-        <ui-lib-container size="lg" [padding]="6">
-          <ui-lib-stack [gap]="6">
+        <ui-lib-container size="lg" inset="lg">
+          <ui-lib-stack spacing="lg">
             <h3>Dashboard Layout</h3>
-            <ui-lib-grid [columns]="3" [gap]="4">
+            <ui-lib-grid [columns]="3" spacing="md">
               <div class="demo-card">
-                <ui-lib-stack [gap]="3">
+                <ui-lib-stack spacing="sm">
                   <h4>Card 1</h4>
                   <p>Content goes here</p>
-                  <ui-lib-inline [gap]="2">
+                  <ui-lib-inline spacing="sm">
                     <span class="demo-tag">Tag 1</span>
                     <span class="demo-tag">Tag 2</span>
                   </ui-lib-inline>
@@ -186,20 +220,20 @@
               </div>
 
               <div class="demo-card">
-                <ui-lib-stack [gap]="3">
+                <ui-lib-stack spacing="sm">
                   <h4>Card 2</h4>
                   <p>Content goes here</p>
-                  <ui-lib-inline [gap]="2">
+                  <ui-lib-inline spacing="sm">
                     <span class="demo-tag">Tag 3</span>
                   </ui-lib-inline>
                 </ui-lib-stack>
               </div>
 
               <div class="demo-card">
-                <ui-lib-stack [gap]="3">
+                <ui-lib-stack spacing="sm">
                   <h4>Card 3</h4>
                   <p>Content goes here</p>
-                  <ui-lib-inline [gap]="2">
+                  <ui-lib-inline spacing="sm">
                     <span class="demo-tag">Tag 4</span>
                     <span class="demo-tag">Tag 5</span>
                     <span class="demo-tag">Tag 6</span>
@@ -252,15 +286,15 @@
         <div class="theme-panel" data-theme="light">
           <div class="panel-header">Light Theme</div>
           <div class="panel-body">
-            <ui-lib-container size="md" [padding]="4" style="background: var(--uilib-surface, #fff);">
-              <ui-lib-stack [gap]="3">
+            <ui-lib-container size="md" inset="md" style="background: var(--uilib-surface, #fff);">
+              <ui-lib-stack spacing="md">
                 <h4>Stack + Inline</h4>
-                <ui-lib-inline [gap]="2">
+                <ui-lib-inline spacing="sm">
                   <span class="demo-tag">Item A</span>
                   <span class="demo-tag">Item B</span>
                   <span class="demo-tag">Item C</span>
                 </ui-lib-inline>
-                <ui-lib-grid [columns]="3" [gap]="2">
+                <ui-lib-grid [columns]="3" spacing="sm">
                   @for (i of [1,2,3]; track i) {
                     <div class="demo-grid-cell">Cell {{ i }}</div>
                   }
@@ -273,15 +307,15 @@
         <div class="theme-panel" data-theme="dark">
           <div class="panel-header">Dark Theme</div>
           <div class="panel-body">
-            <ui-lib-container size="md" [padding]="4" style="background: var(--uilib-surface, #1a1c1f);">
-              <ui-lib-stack [gap]="3">
+            <ui-lib-container size="md" inset="md" style="background: var(--uilib-surface, #1a1c1f);">
+              <ui-lib-stack spacing="md">
                 <h4>Stack + Inline</h4>
-                <ui-lib-inline [gap]="2">
+                <ui-lib-inline spacing="sm">
                   <span class="demo-tag">Item A</span>
                   <span class="demo-tag">Item B</span>
                   <span class="demo-tag">Item C</span>
                 </ui-lib-inline>
-                <ui-lib-grid [columns]="3" [gap]="2">
+                <ui-lib-grid [columns]="3" spacing="sm">
                   @for (i of [1,2,3]; track i) {
                     <div class="demo-grid-cell">Cell {{ i }}</div>
                   }

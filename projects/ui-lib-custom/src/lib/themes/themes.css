@@ -392,11 +392,3 @@
   --uilib-card-shadow: var(--uilib-card-shadow-medium);
   --uilib-card-shadow-hover: var(--uilib-card-shadow-high);
 }
-
-[data-density="comfortable"] {
-  --uilib-density-scale-y: 0.75;
-}
-
-[data-density="compact"] {
-  --uilib-density-scale-y: 0.5;
-}

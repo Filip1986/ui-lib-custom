@@ -14,6 +14,7 @@ import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewpor
 })
 export class LayoutsComponent {
   readonly sections: DocSection[] = [
+    { id: 'semantic-spacing', label: 'Semantic Spacing' },
     { id: 'stack', label: 'Stack' },
     { id: 'inline', label: 'Inline' },
     { id: 'grid', label: 'Grid' },
