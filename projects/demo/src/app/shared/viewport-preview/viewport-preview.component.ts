@@ -32,6 +32,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   @ViewChild('frameHost', { static: false }) frameHost?: ElementRef<HTMLDivElement>;
 
   readonly presets: ViewportPreset[] = [
+    { key: 'full', label: 'Full width', width: 0, height: 900 },
     { key: 'desktop', label: 'Desktop', width: 1440, height: 900 },
     { key: 'laptop', label: 'Laptop', width: 1024, height: 768 },
     { key: 'tablet', label: 'Tablet', width: 768, height: 1024 },
@@ -69,6 +70,10 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   }
 
   setPreset(preset: ViewportPreset): void {
+    if (preset.key === 'full') {
+      this.setFullWidth();
+      return;
+    }
     this.width.set(preset.width);
     this.height.set(preset.height);
     this.isPortrait.set(false);
@@ -82,6 +87,16 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
       this.height.set(900);
       this.isPortrait.set(false);
       this.computeScale();
+    }
+  }
+
+  setFullWidth(): void {
+    const host = this.frameHost?.nativeElement?.parentElement;
+    const avail = host?.clientWidth ?? this.width();
+    if (avail > 0) {
+      this.width.set(avail);
+      this.isPortrait.set(false);
+      this.scale.set(1);
     }
   }
 

@@ -1,10 +1,5 @@
 @use '../../shared/styles/doc-page.scss';
 
-.preview-shell {
-  padding: 1.5rem;
-  display: block;
-}
-
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

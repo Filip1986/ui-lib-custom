@@ -20,7 +20,7 @@
   </div>
 }
 
-<div class="viewport-frame" #frameHost [style.width.px]="displayWidth()" [style.height.px]="displayHeight()" [style.transform]="'scale(' + scale() + ')'">
+<div class="viewport-frame" #frameHost [style.width]="'100%'" [style.height.px]="displayHeight()" [style.transform]="'scale(' + scale() + ')'">
   <ng-content></ng-content>
 </div>
 

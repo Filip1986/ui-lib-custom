@@ -52,28 +52,15 @@
     </div>
 
     <app-doc-demo-viewport>
-      <ui-lib-card class="preview-shell" variant="material" [bordered]="true" [showFooter]="false" [showHeader]="false">
-        <div class="card-grid" [appThemeScope]="appliedTheme()">
-          <ui-lib-card
-            [variant]="variant()"
-            [elevation]="elevation()"
-            [bordered]="bordered()"
-            [hoverable]="hoverable()"
-            [showHeader]="showHeader()"
-            [showFooter]="showFooter()">
-            @if (showHeader()) {
-              <div card-header>{{ title() || 'Card Title' }}</div>
-            }
-            <p>{{ body() || 'Cards can host arbitrary content and actions.' }}</p>
-            @if (showFooter()) {
-              <div card-footer>
-                <ui-lib-button [variant]="variant()" color="primary" size="small">Action</ui-lib-button>
-                <ui-lib-button [variant]="variant()" appearance="ghost" color="secondary" size="small">Secondary</ui-lib-button>
-              </div>
-            }
-          </ui-lib-card>
-        </div>
-      </ui-lib-card>
+      <div class="card-grid" [appThemeScope]="appliedTheme()">
+        <ui-lib-card
+          [variant]="variant()"
+          [elevation]="elevation()"
+          [bordered]="bordered()"
+          [hoverable]="hoverable()">
+          <p>{{ body() || 'Cards can host arbitrary content and actions.' }}</p>
+        </ui-lib-card>
+      </div>
     </app-doc-demo-viewport>
   </div>
 
