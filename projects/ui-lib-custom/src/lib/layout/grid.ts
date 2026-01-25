@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken, GRID_COLUMNS, GridColumns } from '../design-tokens';
+import { SPACING_TOKENS, SpacingToken, GRID_COLUMNS, GridColumns, STACK_TOKENS, StackToken } from '../design-tokens';
 
-const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const stackVar = (token: StackToken) => `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
+const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
 
 export type GridAlign = 'start' | 'center' | 'end' | 'stretch';
 export type GridJustify = 'start' | 'center' | 'end' | 'stretch';
@@ -35,7 +36,13 @@ export class Grid {
   /** Justification of items along the inline axis */
   justify = input<GridJustify>('stretch');
 
-  /** Gap between items (using design tokens) */
+  /**
+   * Semantic spacing using stack tokens (preferred for grid gaps).
+   * Accepts t-shirt sizes that map to `--uilib-stack-*` CSS variables.
+   */
+  spacing = input<StackToken | SpacingToken | number | null>(null);
+
+  /** Back-compat numeric gap using spacing scale (remains supported). */
   gap = input<SpacingToken>(4);
 
   /** Optional minimum column width (enables auto-fit) */
@@ -52,6 +59,12 @@ export class Grid {
     return `repeat(${GRID_COLUMNS[this.columns()]}, 1fr)`;
   });
 
-  /** Computed gap value from token */
-  protected _gapValue = computed(() => spacingVar(this.gap()));
+  /** Computed gap value from semantic spacing (falls back to numeric gap) */
+  protected _gapValue = computed(() => {
+    const semantic = this.spacing();
+    if (semantic !== null && semantic !== undefined) {
+      return typeof semantic === 'number' ? spaceVar(semantic as SpacingToken) : stackVar(semantic as StackToken);
+    }
+    return spaceVar(this.gap());
+  });
 }

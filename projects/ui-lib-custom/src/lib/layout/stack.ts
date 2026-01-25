@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken } from '../design-tokens';
+import { SPACING_TOKENS, SpacingToken, STACK_TOKENS, StackToken } from '../design-tokens';
 
-const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const stackVar = (token: StackToken) => `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
+const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
 
 export type StackDirection = 'vertical' | 'horizontal';
 export type StackAlign = 'start' | 'center' | 'end' | 'stretch';
@@ -36,7 +37,13 @@ export class Stack {
   /** Justification of items along the main axis */
   justify = input<StackJustify>('start');
 
-  /** Gap between items (using design tokens) */
+  /**
+   * Semantic spacing using stack tokens (preferred).
+   * Accepts t-shirt sizes that map to `--uilib-stack-*` CSS variables.
+   */
+  spacing = input<StackToken | SpacingToken | number | null>(null);
+
+  /** Back-compat numeric gap using spacing scale (remains supported). */
   gap = input<SpacingToken>(4);
 
   /** Computed flex-direction value */
@@ -57,6 +64,12 @@ export class Stack {
     return justifyMap[this.justify()];
   });
 
-  /** Computed gap value from token */
-  protected _gapValue = computed(() => spacingVar(this.gap()));
+  /** Computed gap value from semantic spacing (falls back to numeric gap) */
+  protected _gapValue = computed(() => {
+    const semantic = this.spacing();
+    if (semantic !== null && semantic !== undefined) {
+      return typeof semantic === 'number' ? spaceVar(semantic as SpacingToken) : stackVar(semantic as StackToken);
+    }
+    return spaceVar(this.gap());
+  });
 }

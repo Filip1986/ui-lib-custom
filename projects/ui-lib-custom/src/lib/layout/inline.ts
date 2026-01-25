@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken } from '../design-tokens';
+import { SPACING_TOKENS, SpacingToken, INLINE_TOKENS, InlineToken } from '../design-tokens';
 
-const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const inlineVar = (token: InlineToken) => `var(--uilib-inline-${token}, ${INLINE_TOKENS[token]})`;
+const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
 
 export type InlineAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
 export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around';
@@ -33,7 +34,13 @@ export class Inline {
   /** Justification of items along the main axis */
   justify = input<InlineJustify>('start');
 
-  /** Gap between items (using design tokens) */
+  /**
+   * Semantic spacing using inline tokens (preferred).
+   * Accepts t-shirt sizes that map to `--uilib-inline-*` CSS variables.
+   */
+  spacing = input<InlineToken | SpacingToken | number | null>(null);
+
+  /** Back-compat numeric gap using spacing scale (remains supported). */
   gap = input<SpacingToken>(2);
 
   /** Computed justify-content value */
@@ -48,6 +55,12 @@ export class Inline {
     return justifyMap[this.justify()];
   });
 
-  /** Computed gap value from token */
-  protected _gapValue = computed(() => spacingVar(this.gap()));
+  /** Computed gap value from semantic spacing (falls back to numeric gap) */
+  protected _gapValue = computed(() => {
+    const semantic = this.spacing();
+    if (semantic !== null && semantic !== undefined) {
+      return typeof semantic === 'number' ? spaceVar(semantic as SpacingToken) : inlineVar(semantic as InlineToken);
+    }
+    return spaceVar(this.gap());
+  });
 }

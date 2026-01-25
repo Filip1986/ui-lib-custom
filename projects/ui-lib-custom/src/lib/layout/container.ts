@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { CONTAINER_MAX_WIDTHS, ContainerSize, SPACING_TOKENS, SpacingToken } from '../design-tokens';
+import { CONTAINER_MAX_WIDTHS, ContainerSize, SPACING_TOKENS, SpacingToken, INSET_TOKENS, InsetToken } from '../design-tokens';
 
-const spacingVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const insetVar = (token: InsetToken) => `var(--uilib-inset-${token}, ${INSET_TOKENS[token]})`;
 const containerVar = (size: ContainerSize) => `var(--uilib-container-${size}, ${CONTAINER_MAX_WIDTHS[size]})`;
 
 /**
@@ -21,6 +22,8 @@ const containerVar = (size: ContainerSize) => `var(--uilib-container-${size}, ${
     '[style.margin-right]': '_centered() ? "auto" : null',
     '[style.padding-left]': '_paddingValue()',
     '[style.padding-right]': '_paddingValue()',
+    '[style.padding-top]': '_paddingValue()',
+    '[style.padding-bottom]': '_paddingValue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -31,7 +34,13 @@ export class Container {
   /** Whether to center the container */
   centered = input<boolean>(true);
 
-  /** Horizontal padding (using design tokens) */
+  /**
+   * Semantic inset padding using inset tokens (preferred).
+   * Accepts t-shirt sizes that map to `--uilib-inset-*` CSS variables.
+   */
+  inset = input<Exclude<InsetToken, 'xs'> | null>(null);
+
+  /** Back-compat horizontal padding using numeric spacing tokens. */
   padding = input<SpacingToken>(4);
 
   /** Computed max-width value */
@@ -40,6 +49,12 @@ export class Container {
   /** Computed centered value (for host binding) */
   protected _centered = computed(() => this.centered());
 
-  /** Computed padding value from token */
-  protected _paddingValue = computed(() => spacingVar(this.padding()));
+  /** Computed padding value from inset (falls back to numeric padding) */
+  protected _paddingValue = computed(() => {
+    const semantic = this.inset();
+    if (semantic !== null && semantic !== undefined) {
+      return insetVar(semantic as InsetToken);
+    }
+    return spaceVar(this.padding());
+  });
 }
