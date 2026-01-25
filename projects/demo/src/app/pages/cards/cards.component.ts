@@ -1,7 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card } from 'ui-lib-custom';
-import { Button } from 'ui-lib-custom';
+import { Card, Button, CardVariant, CardElevation } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -15,9 +14,18 @@ import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewpor
 })
 export class CardsComponent {
   readonly sections: DocSection[] = [
-    { id: 'material-variant', label: 'Material Design Variant' },
-    { id: 'bootstrap-variant', label: 'Bootstrap Variant' },
-    { id: 'minimal-variant', label: 'Minimal Variant' },
+    { id: 'playground', label: 'Playground' },
     { id: 'properties', label: 'Properties' },
   ];
+
+  variant = signal<CardVariant>('material');
+  elevation = signal<CardElevation>('medium');
+  bordered = signal(false);
+  hoverable = signal(false);
+  title = signal('Card Title');
+  body = signal('Cards can host arbitrary content and actions.');
+  showFooter = signal(true);
+
+  readonly variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];
+  readonly elevations: CardElevation[] = ['none', 'low', 'medium', 'high'];
 }

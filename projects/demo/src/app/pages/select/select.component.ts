@@ -3,24 +3,29 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UiLibSelect, SelectOption, SelectVariant } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibSelect, Button, DocDemoViewportComponent],
+  imports: [CommonModule, FormsModule, UiLibSelect, DocPageLayoutComponent, DocDemoViewportComponent],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {
+  readonly sections: DocSection[] = [
+    { id: 'playground', label: 'Playground' },
+  ];
+
   variant = signal<SelectVariant>('material');
   searchable = signal(true);
   multiple = signal(false);
   disabled = signal(false);
   loading = signal(false);
   placeholder = signal('Choose an option');
-
   value = signal<unknown | unknown[] | null>(null);
 
   variants: SelectVariant[] = ['material', 'bootstrap', 'minimal'];

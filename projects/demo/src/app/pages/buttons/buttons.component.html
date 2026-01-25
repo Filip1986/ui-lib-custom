@@ -2,114 +2,93 @@
   <div class="doc-header" docHeader>
     <h1>Button</h1>
     <p class="doc-description">
-      Flexible button components with multiple design variants, colors, and sizes.
-      Choose from Material Design, Bootstrap, or Minimal styles to match your application's design system.
+      Flexible button components with multiple design variants, colors, and sizes. Adjust the controls below to see the live preview update.
     </p>
   </div>
 
-  <div class="doc-section" id="material" data-doc-anchor>
-    <h2>Material Design Variant</h2>
-    <p>
-      Material Design buttons with elevation and ripple effects. Perfect for modern, clean interfaces
-      that follow Material Design principles.
-    </p>
+  <div class="doc-section" id="playground" data-doc-anchor>
+    <h2>Playground</h2>
+    <p>Configure variant, appearance, color, size, and state to preview the button.</p>
 
-    <div class="doc-demo-group">
-      <h3>Colors</h3>
-      <app-doc-demo-viewport>
-        <div class="doc-demo centered">
-          <ui-lib-button variant="material" color="primary">Primary</ui-lib-button>
-          <ui-lib-button variant="material" color="secondary">Secondary</ui-lib-button>
-          <ui-lib-button variant="material" color="success">Success</ui-lib-button>
-          <ui-lib-button variant="material" color="danger">Danger</ui-lib-button>
-          <ui-lib-button variant="material" color="warning">Warning</ui-lib-button>
+    <div class="doc-controls">
+      <div class="control">
+        <label>Variant</label>
+        <div class="chips">
+          @for (v of variants; track v) {
+            <button class="chip" [class.active]="variant() === v" (click)="variant.set(v)">{{ v }}</button>
+          }
         </div>
-      </app-doc-demo-viewport>
-      <div class="doc-code">
-        <pre><code>&lt;ui-lib-button variant="material" color="primary"&gt;Primary&lt;/ui-lib-button&gt;
-&lt;ui-lib-button variant="material" color="secondary"&gt;Secondary&lt;/ui-lib-button&gt;
-&lt;ui-lib-button variant="material" color="success"&gt;Success&lt;/ui-lib-button&gt;</code></pre>
+      </div>
+
+      <div class="control">
+        <label>Appearance</label>
+        <div class="chips">
+          @for (a of appearances; track a) {
+            <button class="chip" [class.active]="appearance() === a" (click)="appearance.set(a)">{{ a }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="control">
+        <label>Color</label>
+        <div class="chips">
+          @for (c of colors; track c) {
+            <button class="chip" [class.active]="color() === c" (click)="color.set(c)">{{ c }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="control">
+        <label>Size</label>
+        <div class="chips">
+          @for (s of sizes; track s) {
+            <button class="chip" [class.active]="size() === s" (click)="size.set(s)">{{ s }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="control">
+        <label>Icon position</label>
+        <div class="chips">
+          @for (p of iconPositions; track p) {
+            <button class="chip" [class.active]="iconPosition() === p" (click)="iconPosition.set(p)">{{ p }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="toggles">
+        <label><input type="checkbox" [checked]="disabled()" (change)="disabled.set($any($event.target).checked)"> Disabled</label>
+        <label><input type="checkbox" [checked]="loading()" (change)="loading.set($any($event.target).checked)"> Loading</label>
+        <label><input type="checkbox" [checked]="fullWidth()" (change)="fullWidth.set($any($event.target).checked)"> Full width</label>
+      </div>
+
+      <div class="control">
+        <label>Label</label>
+        <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
       </div>
     </div>
 
-    <div class="doc-demo-group">
-      <h3>Sizes</h3>
-      <app-doc-demo-viewport>
-        <div class="doc-demo centered">
-          <ui-lib-button variant="material" size="small" color="primary">Small</ui-lib-button>
-          <ui-lib-button variant="material" size="medium" color="primary">Medium</ui-lib-button>
-          <ui-lib-button variant="material" size="large" color="primary">Large</ui-lib-button>
-        </div>
-      </app-doc-demo-viewport>
-      <div class="doc-code">
-        <pre><code>&lt;ui-lib-button variant="material" size="small" color="primary"&gt;Small&lt;/ui-lib-button&gt;
-&lt;ui-lib-button variant="material" size="medium" color="primary"&gt;Medium&lt;/ui-lib-button&gt;
-&lt;ui-lib-button variant="material" size="large" color="primary"&gt;Large&lt;/ui-lib-button&gt;</code></pre>
+    <app-doc-demo-viewport>
+      <div class="doc-demo centered">
+        <ui-lib-button
+          [variant]="variant()"
+          [appearance]="appearance()"
+          [color]="color()"
+          [size]="size()"
+          [disabled]="disabled()"
+          [loading]="loading()"
+          [fullWidth]="fullWidth()"
+          [iconPosition]="iconPosition()">
+          @if (iconPosition() === 'start') {
+            <i class="pi pi-star"></i>
+          }
+          {{ label() }}
+          @if (iconPosition() === 'end') {
+            <i class="pi pi-arrow-right"></i>
+          }
+        </ui-lib-button>
       </div>
-    </div>
-
-    <div class="doc-demo-group">
-      <h3>Disabled State</h3>
-      <app-doc-demo-viewport>
-        <div class="doc-demo centered">
-          <ui-lib-button variant="material" color="primary" [disabled]="true">Disabled Primary</ui-lib-button>
-          <ui-lib-button variant="material" color="success" [disabled]="true">Disabled Success</ui-lib-button>
-          <ui-lib-button variant="material" color="danger" [disabled]="true">Disabled Danger</ui-lib-button>
-        </div>
-      </app-doc-demo-viewport>
-    </div>
-  </div>
-
-  <div class="doc-section" id="bootstrap" data-doc-anchor>
-    <h2>Bootstrap Variant</h2>
-    <p>
-      Classic Bootstrap-styled buttons with solid colors and subtle shadows.
-      Ideal for applications using Bootstrap design patterns.
-    </p>
-
-    <div class="doc-demo-group">
-      <h3>Colors</h3>
-      <app-doc-demo-viewport>
-        <div class="doc-demo centered">
-          <ui-lib-button variant="bootstrap" color="primary">Primary</ui-lib-button>
-          <ui-lib-button variant="bootstrap" color="secondary">Secondary</ui-lib-button>
-          <ui-lib-button variant="bootstrap" color="success">Success</ui-lib-button>
-          <ui-lib-button variant="bootstrap" color="danger">Danger</ui-lib-button>
-          <ui-lib-button variant="bootstrap" color="warning">Warning</ui-lib-button>
-        </div>
-      </app-doc-demo-viewport>
-    </div>
-
-    <div class="doc-demo-group">
-      <h3>Sizes</h3>
-      <app-doc-demo-viewport>
-        <div class="doc-demo centered">
-          <ui-lib-button variant="bootstrap" size="small" color="primary">Small</ui-lib-button>
-          <ui-lib-button variant="bootstrap" size="medium" color="primary">Medium</ui-lib-button>
-          <ui-lib-button variant="bootstrap" size="large" color="primary">Large</ui-lib-button>
-        </div>
-      </app-doc-demo-viewport>
-    </div>
-  </div>
-
-  <div class="doc-section" id="minimal" data-doc-anchor>
-    <h2>Minimal Variant</h2>
-    <p>
-      Minimalist buttons with clean lines and subtle hover effects. Ideal for modern, uncluttered UIs.
-    </p>
-
-    <div class="doc-demo-group">
-      <h3>Colors</h3>
-      <app-doc-demo-viewport>
-        <div class="doc-demo centered">
-          <ui-lib-button variant="minimal" color="primary">Primary</ui-lib-button>
-          <ui-lib-button variant="minimal" color="secondary">Secondary</ui-lib-button>
-          <ui-lib-button variant="minimal" color="success">Success</ui-lib-button>
-          <ui-lib-button variant="minimal" color="danger">Danger</ui-lib-button>
-          <ui-lib-button variant="minimal" color="warning">Warning</ui-lib-button>
-        </div>
-      </app-doc-demo-viewport>
-    </div>
+    </app-doc-demo-viewport>
   </div>
 
   <div class="doc-section" id="properties" data-doc-anchor>
@@ -131,22 +110,34 @@
           <td>Visual style of the button</td>
         </tr>
         <tr>
+          <td><code>appearance</code></td>
+          <td><code>'solid' | 'outline' | 'ghost'</code></td>
+          <td><code>'solid'</code></td>
+          <td>Fill style of the button</td>
+        </tr>
+        <tr>
           <td><code>color</code></td>
           <td><code>'primary' | 'secondary' | 'success' | 'danger' | 'warning'</code></td>
           <td><code>'primary'</code></td>
-          <td>Color theme of the button</td>
+          <td>Theme color</td>
         </tr>
         <tr>
           <td><code>size</code></td>
           <td><code>'small' | 'medium' | 'large'</code></td>
           <td><code>'medium'</code></td>
-          <td>Size of the button</td>
+          <td>Button size</td>
         </tr>
         <tr>
           <td><code>disabled</code></td>
           <td><code>boolean</code></td>
           <td><code>false</code></td>
-          <td>Whether the button is disabled</td>
+          <td>Disable the button</td>
+        </tr>
+        <tr>
+          <td><code>loading</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Show loading state</td>
         </tr>
       </tbody>
     </table>

@@ -2,129 +2,67 @@
   <div class="doc-header" docHeader>
     <h1>Card</h1>
     <p class="doc-description">
-      Versatile card components with customizable headers, footers, and elevation levels.
-      Available in Material Design, Bootstrap, and Minimal styles to match your application's design system.
+      Versatile card component with headers, footers, borders, and elevation. Use the controls to adjust the live card.
     </p>
   </div>
 
-  <div class="doc-section" id="material-variant" data-doc-anchor>
-    <h2>Material Design Variant</h2>
-    <p>
-      Material Design cards with elevation shadows and rounded corners. Perfect for modern, clean interfaces
-      that follow Material Design principles.
-    </p>
+  <div class="doc-section" id="playground" data-doc-anchor>
+    <h2>Playground</h2>
+    <p>Pick variant, elevation, borders, and content.</p>
 
-    <div class="doc-demo-group">
-      <h3>Elevation Levels</h3>
-      <app-doc-demo-viewport>
-        <div class="card-grid">
-          <ui-lib-card variant="material" elevation="low">
-            <div card-header>Low Elevation</div>
-            <p>Subtle shadows for content that doesn't need much emphasis.</p>
-            <div card-footer>
-              <ui-lib-button variant="material" color="primary" size="small">Action</ui-lib-button>
-            </div>
-          </ui-lib-card>
-
-          <ui-lib-card variant="material" elevation="medium">
-            <div card-header>Medium Elevation</div>
-            <p>Balanced visual hierarchy, perfect for most use cases.</p>
-            <div card-footer>
-              <ui-lib-button variant="material" color="success" size="small">Confirm</ui-lib-button>
-            </div>
-          </ui-lib-card>
-
-          <ui-lib-card variant="material" elevation="high">
-            <div card-header>High Elevation</div>
-            <p>Prominent shadows for important content.</p>
-            <div card-footer>
-              <ui-lib-button variant="material" color="danger" size="small">Delete</ui-lib-button>
-            </div>
-          </ui-lib-card>
+    <div class="doc-controls">
+      <div class="control">
+        <label>Variant</label>
+        <div class="chips">
+          @for (v of variants; track v) {
+            <button class="chip" [class.active]="variant() === v" (click)="variant.set(v)">{{ v }}</button>
+          }
         </div>
-      </app-doc-demo-viewport>
-      <div class="doc-code">
-        <pre><code>&lt;ui-lib-card variant="material" elevation="low"&gt;
-  &lt;div card-header&gt;Low Elevation&lt;/div&gt;
-  &lt;p&gt;Card content&lt;/p&gt;
-&lt;/ui-lib-card&gt;</code></pre>
+      </div>
+
+      <div class="control">
+        <label>Elevation</label>
+        <div class="chips">
+          @for (e of elevations; track e) {
+            <button class="chip" [class.active]="elevation() === e" (click)="elevation.set(e)">{{ e }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="toggles">
+        <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
+        <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
+        <label><input type="checkbox" [checked]="showFooter()" (change)="showFooter.set($any($event.target).checked)"> Show footer</label>
+      </div>
+
+      <div class="control">
+        <label>Title</label>
+        <input type="text" [value]="title()" (input)="title.set($any($event.target).value)">
+      </div>
+      <div class="control">
+        <label>Body</label>
+        <textarea rows="3" [value]="body()" (input)="body.set($any($event.target).value)"></textarea>
       </div>
     </div>
 
-    <div class="doc-demo-group">
-      <h3>Hoverable Card</h3>
-      <app-doc-demo-viewport>
-        <div class="card-grid">
-          <ui-lib-card variant="material" elevation="medium" [hoverable]="true">
-            <div card-header>Hoverable Card</div>
-            <p>This card has hover effects enabled. Try hovering over it!</p>
-          </ui-lib-card>
-        </div>
-      </app-doc-demo-viewport>
-    </div>
-  </div>
-
-  <div class="doc-section" id="bootstrap-variant" data-doc-anchor>
-    <h2>Bootstrap Variant</h2>
-    <p>
-      Classic Bootstrap-styled cards with borders and subtle shadows.
-      Ideal for applications using Bootstrap design patterns.
-    </p>
-
-    <div class="doc-demo-group">
-      <app-doc-demo-viewport>
-        <div class="card-grid">
-          <ui-lib-card variant="bootstrap" elevation="low">
-            <div card-header>Default Card</div>
-            <p>Bootstrap-styled card with low elevation.</p>
+    <app-doc-demo-viewport>
+      <div class="card-grid">
+        <ui-lib-card
+          [variant]="variant()"
+          [elevation]="elevation()"
+          [bordered]="bordered()"
+          [hoverable]="hoverable()">
+          <div card-header>{{ title() || 'Card Title' }}</div>
+          <p>{{ body() || 'Cards can host arbitrary content and actions.' }}</p>
+          @if (showFooter()) {
             <div card-footer>
-              <ui-lib-button variant="bootstrap" color="primary" size="small">Action</ui-lib-button>
+              <ui-lib-button [variant]="variant()" color="primary" size="small">Action</ui-lib-button>
+              <ui-lib-button [variant]="variant()" appearance="ghost" color="secondary" size="small">Secondary</ui-lib-button>
             </div>
-          </ui-lib-card>
-
-
-          <ui-lib-card variant="bootstrap" elevation="medium" [bordered]="true">
-            <div card-header>Bordered Card</div>
-            <p>Explicit borders for better definition.</p>
-            <div card-footer>
-              <ui-lib-button variant="bootstrap" color="success" size="small">Submit</ui-lib-button>
-            </div>
-          </ui-lib-card>
-        </div>
-      </app-doc-demo-viewport>
-    </div>
-  </div>
-
-  <div class="doc-section" id="minimal-variant" data-doc-anchor>
-    <h2>Minimal Variant</h2>
-    <p>
-      Clean, minimalist cards with optional borders and no shadows.
-      Perfect for content-focused layouts.
-    </p>
-
-    <div class="doc-demo-group">
-      <app-doc-demo-viewport>
-        <div class="card-grid">
-          <ui-lib-card variant="minimal" elevation="none" [bordered]="true">
-            <div card-header>Bordered Minimal</div>
-            <p>Minimal card with clean borders.</p>
-            <div card-footer>
-              <ui-lib-button variant="minimal" color="primary" size="small">Learn More</ui-lib-button>
-            </div>
-          </ui-lib-card>
-
-          <ui-lib-card variant="minimal" elevation="none" [bordered]="false">
-            <div card-header>No Border</div>
-            <p>Ultra-clean appearance for modern designs.</p>
-          </ui-lib-card>
-
-          <ui-lib-card variant="minimal" elevation="none" [bordered]="true" [hoverable]="true">
-            <div card-header>Interactive</div>
-            <p>Hover to see the subtle effect!</p>
-          </ui-lib-card>
-        </div>
-      </app-doc-demo-viewport>
-    </div>
+          }
+        </ui-lib-card>
+      </div>
+    </app-doc-demo-viewport>
   </div>
 
   <div class="doc-section" id="properties" data-doc-anchor>
@@ -149,19 +87,19 @@
           <td><code>elevation</code></td>
           <td><code>'none' | 'low' | 'medium' | 'high'</code></td>
           <td><code>'medium'</code></td>
-          <td>Shadow depth of the card</td>
+          <td>Shadow depth</td>
         </tr>
         <tr>
           <td><code>bordered</code></td>
           <td><code>boolean</code></td>
           <td><code>false</code></td>
-          <td>Whether to show borders</td>
+          <td>Enable border</td>
         </tr>
         <tr>
           <td><code>hoverable</code></td>
           <td><code>boolean</code></td>
           <td><code>false</code></td>
-          <td>Whether to enable hover effects</td>
+          <td>Enable hover effect</td>
         </tr>
       </tbody>
     </table>
