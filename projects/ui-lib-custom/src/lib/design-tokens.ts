@@ -24,6 +24,63 @@ export const SPACING_TOKENS = {
 
 export type SpacingToken = keyof typeof SPACING_TOKENS;
 
+export const INSET_TOKENS = {
+  xs: SPACING_TOKENS[1],  // 4px
+  sm: SPACING_TOKENS[2],  // 8px
+  md: SPACING_TOKENS[4],  // 16px
+  lg: SPACING_TOKENS[6],  // 24px
+  xl: SPACING_TOKENS[8],  // 32px
+} as const;
+
+export type InsetToken = keyof typeof INSET_TOKENS;
+
+export const SQUISH_TOKENS = {
+  xs: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[2]}`,  // 4px 8px
+  sm: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`,  // 8px 16px
+  md: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[8]}`,  // 16px 32px
+  lg: `${SPACING_TOKENS[6]} ${SPACING_TOKENS[12] ?? '3rem'}`,  // 24px 48px
+  xl: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[16] ?? '4rem'}`,  // 32px 64px
+} as const;
+
+export type SquishToken = keyof typeof SQUISH_TOKENS;
+
+export const STRETCH_TOKENS = {
+  xs: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[1]}`,  // 8px 4px
+  sm: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[2]}`,  // 16px 8px
+  md: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[4]}`,  // 32px 16px
+  lg: `${SPACING_TOKENS[12] ?? '3rem'} ${SPACING_TOKENS[6]}`,  // 48px 24px
+  xl: `${SPACING_TOKENS[16] ?? '4rem'} ${SPACING_TOKENS[8]}`,  // 64px 32px
+} as const;
+
+export type StretchToken = keyof typeof STRETCH_TOKENS;
+
+export const STACK_TOKENS = {
+  xs: SPACING_TOKENS[1],  // 4px
+  sm: SPACING_TOKENS[2],  // 8px
+  md: SPACING_TOKENS[4],  // 16px
+  lg: SPACING_TOKENS[6],  // 24px
+  xl: SPACING_TOKENS[8],  // 32px
+} as const;
+
+export type StackToken = keyof typeof STACK_TOKENS;
+
+export const INLINE_TOKENS = {
+  xs: SPACING_TOKENS[1],  // 4px
+  sm: SPACING_TOKENS[2],  // 8px
+  md: SPACING_TOKENS[4],  // 16px
+  lg: SPACING_TOKENS[6],  // 24px
+  xl: SPACING_TOKENS[8],  // 32px
+} as const;
+
+export type InlineToken = keyof typeof INLINE_TOKENS;
+
+export type SpacingPatternToken =
+  | InsetToken
+  | SquishToken
+  | StretchToken
+  | StackToken
+  | InlineToken;
+
 // ============================================================================
 // SIZING TOKENS
 // ============================================================================

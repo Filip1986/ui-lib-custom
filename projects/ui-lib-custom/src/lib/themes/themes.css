@@ -35,6 +35,37 @@
   --uilib-color-neutral-400: #bdbdbd;
   --uilib-color-neutral-900: #212121;
 
+  /* Spacing (EightShapes) */
+  --uilib-inset-xs: 0.25rem;
+  --uilib-inset-sm: 0.5rem;
+  --uilib-inset-md: 1rem;
+  --uilib-inset-lg: 1.5rem;
+  --uilib-inset-xl: 2rem;
+
+  --uilib-squish-xs: 0.25rem 0.5rem;
+  --uilib-squish-sm: 0.5rem 1rem;
+  --uilib-squish-md: 1rem 2rem;
+  --uilib-squish-lg: 1.5rem 3rem;
+  --uilib-squish-xl: 2rem 4rem;
+
+  --uilib-stretch-xs: 0.5rem 0.25rem;
+  --uilib-stretch-sm: 1rem 0.5rem;
+  --uilib-stretch-md: 2rem 1rem;
+  --uilib-stretch-lg: 3rem 1.5rem;
+  --uilib-stretch-xl: 4rem 2rem;
+
+  --uilib-stack-xs: 0.25rem;
+  --uilib-stack-sm: 0.5rem;
+  --uilib-stack-md: 1rem;
+  --uilib-stack-lg: 1.5rem;
+  --uilib-stack-xl: 2rem;
+
+  --uilib-inline-xs: 0.25rem;
+  --uilib-inline-sm: 0.5rem;
+  --uilib-inline-md: 1rem;
+  --uilib-inline-lg: 1.5rem;
+  --uilib-inline-xl: 2rem;
+
   /* Surfaces & text */
   --uilib-page-bg: #f7f7f9;
   --uilib-page-fg: #1f2933;
@@ -139,6 +170,37 @@
   --uilib-color-neutral-300: #4a4a4a;
   --uilib-color-neutral-400: #5a5a5a;
   --uilib-color-neutral-900: #f5f5f5;
+
+  /* Spacing (EightShapes) */
+  --uilib-inset-xs: 0.25rem;
+  --uilib-inset-sm: 0.5rem;
+  --uilib-inset-md: 1rem;
+  --uilib-inset-lg: 1.5rem;
+  --uilib-inset-xl: 2rem;
+
+  --uilib-squish-xs: 0.25rem 0.5rem;
+  --uilib-squish-sm: 0.5rem 1rem;
+  --uilib-squish-md: 1rem 2rem;
+  --uilib-squish-lg: 1.5rem 3rem;
+  --uilib-squish-xl: 2rem 4rem;
+
+  --uilib-stretch-xs: 0.5rem 0.25rem;
+  --uilib-stretch-sm: 1rem 0.5rem;
+  --uilib-stretch-md: 2rem 1rem;
+  --uilib-stretch-lg: 3rem 1.5rem;
+  --uilib-stretch-xl: 4rem 2rem;
+
+  --uilib-stack-xs: 0.25rem;
+  --uilib-stack-sm: 0.5rem;
+  --uilib-stack-md: 1rem;
+  --uilib-stack-lg: 1.5rem;
+  --uilib-stack-xl: 2rem;
+
+  --uilib-inline-xs: 0.25rem;
+  --uilib-inline-sm: 0.5rem;
+  --uilib-inline-md: 1rem;
+  --uilib-inline-lg: 1.5rem;
+  --uilib-inline-xl: 2rem;
 
   /* Surfaces & text */
   --uilib-page-bg: #101214;
