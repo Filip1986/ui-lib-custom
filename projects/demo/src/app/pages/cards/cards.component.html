@@ -32,6 +32,7 @@
       <div class="toggles">
         <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
         <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
+        <label><input type="checkbox" [checked]="showHeader()" (change)="showHeader.set($any($event.target).checked)"> Show header</label>
         <label><input type="checkbox" [checked]="showFooter()" (change)="showFooter.set($any($event.target).checked)"> Show footer</label>
       </div>
 
@@ -51,8 +52,12 @@
           [variant]="variant()"
           [elevation]="elevation()"
           [bordered]="bordered()"
-          [hoverable]="hoverable()">
-          <div card-header>{{ title() || 'Card Title' }}</div>
+          [hoverable]="hoverable()"
+          [showHeader]="showHeader()"
+          [showFooter]="showFooter()">
+          @if (showHeader()) {
+            <div card-header>{{ title() || 'Card Title' }}</div>
+          }
           <p>{{ body() || 'Cards can host arbitrary content and actions.' }}</p>
           @if (showFooter()) {
             <div card-footer>

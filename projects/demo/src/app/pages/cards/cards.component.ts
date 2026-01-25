@@ -24,6 +24,7 @@ export class CardsComponent {
   hoverable = signal(false);
   title = signal('Card Title');
   body = signal('Cards can host arbitrary content and actions.');
+  showHeader = signal(true);
   showFooter = signal(true);
 
   readonly variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];

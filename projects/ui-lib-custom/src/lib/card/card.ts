@@ -1,4 +1,6 @@
-import { Component, ChangeDetectionStrategy, input, ContentChild, ElementRef, computed, AfterContentInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component, ChangeDetectionStrategy, input, computed
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export type CardVariant = 'material' | 'bootstrap' | 'minimal';
@@ -12,23 +14,16 @@ export type CardElevation = 'none' | 'low' | 'medium' | 'high';
   styleUrl: './card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Card implements AfterContentInit {
+export class Card {
   variant = input<CardVariant>('material');
   elevation = input<CardElevation>('medium');
   bordered = input<boolean>(false);
   hoverable = input<boolean>(false);
+  showHeader = input<boolean | null>(null);
+  showFooter = input<boolean | null>(null);
 
-  @ContentChild('[card-header]', { static: true }) header?: ElementRef;
-  @ContentChild('[card-footer]', { static: true }) footer?: ElementRef;
-
-  constructor(private cdr: ChangeDetectorRef) {}
-
-  ngAfterContentInit(): void {
-    this.cdr.markForCheck();
-  }
-
-  get hasHeader(): boolean { return !!this.header; }
-  get hasFooter(): boolean { return !!this.footer; }
+  headerVisible = computed(() => this.showHeader() !== false);
+  footerVisible = computed(() => this.showFooter() !== false);
 
   cardClasses = computed(() => {
     const classes = [
