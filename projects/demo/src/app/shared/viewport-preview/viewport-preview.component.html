@@ -1,4 +1,4 @@
-@if (mode === 'inline' || activeSignal()) {
+@if (showToolbar && (mode === 'inline' || activeSignal())) {
   <div class="viewport-toolbar">
     <div class="preset-buttons">
       @for (preset of presets; track preset.key) {

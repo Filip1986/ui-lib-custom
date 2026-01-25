@@ -1,6 +1,30 @@
 <div class="doc-demo-viewport">
   <ui-lib-card variant="material" class="doc-demo-card" [bordered]="true">
-    <app-viewport-preview mode="inline">
+    <div card-header class="doc-demo-toolbar">
+      @if (preview; as p) {
+        <div class="viewport-toolbar">
+          <div class="preset-buttons">
+            @for (preset of p.presets; track preset.key) {
+              <button (click)="p.setPreset(preset)">{{ preset.label }}</button>
+            }
+            <div class="custom">
+              <label>Custom</label>
+              <input type="number" min="200" max="2000" [ngModel]="p.customWidth()" (ngModelChange)="p.customWidth.set($event)">
+              <button (click)="p.setCustom()">Apply</button>
+            </div>
+          </div>
+          <div class="controls">
+            <span class="dims">{{ p.displayWidth() }} × {{ p.displayHeight() }}px</span>
+            <button (click)="p.rotate()">Rotate</button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <app-viewport-preview
+      #preview="viewportPreview"
+      mode="inline"
+      [showToolbar]="false">
       <div class="doc-demo-viewport__content">
         <ng-content></ng-content>
       </div>

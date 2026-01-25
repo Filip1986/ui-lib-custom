@@ -16,9 +16,11 @@ interface ViewportPreset {
   templateUrl: './viewport-preview.component.html',
   styleUrl: './viewport-preview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  exportAs: 'viewportPreview',
 })
 export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   @Input() mode: 'inline' | 'floating' = 'inline';
+  @Input() showToolbar = true;
   @Input() set active(val: boolean) {
     this.activeSignal.set(val);
   }
