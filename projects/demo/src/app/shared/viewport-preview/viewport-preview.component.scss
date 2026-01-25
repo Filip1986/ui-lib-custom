@@ -10,6 +10,12 @@
   gap: 0.75rem;
 }
 
+:host(.mode-inline) .viewport-toolbar {
+  position: static;
+  border: 1px solid var(--uilib-border, #e0e0e0);
+  border-radius: 12px 12px 0 0;
+}
+
 .preset-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -56,6 +62,10 @@
   padding: 1rem 0;
 }
 
+:host(.mode-inline) .viewport-wrapper {
+  padding: 0;
+}
+
 .viewport-frame {
   border: 1px solid var(--uilib-border, #d0d0d0);
   border-radius: 16px;
@@ -79,4 +89,8 @@
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   z-index: 900;
+}
+
+:host(.mode-inline) .viewport-launcher {
+  display: none;
 }

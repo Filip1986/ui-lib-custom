@@ -1,0 +1,10 @@
+.doc-demo-viewport {
+  border: 1px solid var(--uilib-border, #e0e0e0);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--uilib-surface, #fff);
+}
+
+.doc-demo-viewport__content {
+  padding: 1rem;
+}

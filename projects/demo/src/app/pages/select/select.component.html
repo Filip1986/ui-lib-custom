@@ -20,46 +20,48 @@
   </section>
 
   <section class="preview">
-    <div class="preview-grid">
-      <div>
-        <h3>Default Template</h3>
-        <ui-lib-select
-          label="Options"
-          [options]="options"
-          [variant]="variant()"
-          [searchable]="searchable()"
-          [multiple]="multiple()"
-          [disabled]="disabled()"
-          [loading]="loading()"
-          [placeholder]="placeholder()"
-          [ngModel]="value()"
-          (ngModelChange)="value.set($event)">
-        </ui-lib-select>
+    <app-doc-demo-viewport>
+      <div class="preview-grid">
+        <div>
+          <h3>Default Template</h3>
+          <ui-lib-select
+            label="Options"
+            [options]="options"
+            [variant]="variant()"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
+            [disabled]="disabled()"
+            [loading]="loading()"
+            [placeholder]="placeholder()"
+            [ngModel]="value()"
+            (ngModelChange)="value.set($event)">
+          </ui-lib-select>
 
-        <div class="current-value">
-          <strong>Value:</strong> {{ value() | json }}
+          <div class="current-value">
+            <strong>Value:</strong> {{ value() | json }}
+          </div>
+        </div>
+
+        <div>
+          <h3>Custom Option Template</h3>
+          <ui-lib-select
+            label="Status"
+            [options]="options"
+            [variant]="variant()"
+            [searchable]="searchable()"
+            [placeholder]="'Pick a status'"
+            [ngModel]="value()"
+            (ngModelChange)="value.set($event)"
+            [optionTemplate]="optionTpl">
+          </ui-lib-select>
+
+          <ng-template #optionTpl let-opt>
+            <span class="dot" [class.disabled-dot]="opt.disabled"></span>
+            <span>{{ opt.label }}</span>
+          </ng-template>
         </div>
       </div>
-
-      <div>
-        <h3>Custom Option Template</h3>
-        <ui-lib-select
-          label="Status"
-          [options]="options"
-          [variant]="variant()"
-          [searchable]="searchable()"
-          [placeholder]="'Pick a status'"
-          [ngModel]="value()"
-          (ngModelChange)="value.set($event)"
-          [optionTemplate]="optionTpl">
-        </ui-lib-select>
-
-        <ng-template #optionTpl let-opt>
-          <span class="dot" [class.disabled-dot]="opt.disabled"></span>
-          <span>{{ opt.label }}</span>
-        </ng-template>
-      </div>
-    </div>
+    </app-doc-demo-viewport>
 
     <div class="actions">
       <ui-lib-button type="button" color="primary" (click)="onClear()">Clear</ui-lib-button>

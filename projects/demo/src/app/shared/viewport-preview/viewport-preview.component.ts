@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, signal, computed, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, signal, computed, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
 
 interface ViewportPreset {
   key: string;
@@ -18,10 +18,14 @@ interface ViewportPreset {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
+  @Input() mode: 'inline' | 'floating' = 'inline';
   @Input() set active(val: boolean) {
     this.activeSignal.set(val);
   }
   @Output() activeChange = new EventEmitter<boolean>();
+
+  @HostBinding('class.mode-inline') get isInline() { return this.mode === 'inline'; }
+  @HostBinding('class.mode-floating') get isFloating() { return this.mode === 'floating'; }
 
   @ViewChild('frameHost', { static: false }) frameHost?: ElementRef<HTMLDivElement>;
 
@@ -32,7 +36,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     { key: 'mobile', label: 'Mobile', width: 375, height: 812 },
   ];
 
-  readonly activeSignal = signal(false);
+  readonly activeSignal = signal(true);
   readonly width = signal(1440);
   readonly height = signal(900);
   readonly isPortrait = signal(false);
@@ -57,7 +61,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   }
 
   toggleActive(): void {
-    const next = !this.activeSignal();
+    const next = this.mode === 'inline' ? true : !this.activeSignal();
     this.activeSignal.set(next);
     this.activeChange.emit(next);
   }

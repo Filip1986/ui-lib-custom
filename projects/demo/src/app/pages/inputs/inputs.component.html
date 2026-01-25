@@ -28,44 +28,46 @@
   </section>
 
   <section class="preview">
-    <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
-      <ui-lib-input
-        [variant]="variant()"
-        [type]="inputType()"
-        label="Email"
-        placeholder="you@example.com"
-        [required]="required()"
-        [showCounter]="showCounter()"
-        [maxLength]="80"
-        [showClear]="showClear()"
-        [error]="error()"
-        [ngModel]="value()"
-        (ngModelChange)="value.set($event)"
-        name="demoInput">
-        <span prefix class="pi pi-envelope"></span>
-        <span suffix class="pi pi-check"></span>
-      </ui-lib-input>
-
-      @if (inputType() === 'password') {
+    <app-doc-demo-viewport>
+      <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)">
         <ui-lib-input
           [variant]="variant()"
-          type="password"
-          label="Password"
-          placeholder="Enter password"
-          [showTogglePassword]="showToggle()"
-          [showClear]="showClear()"
+          [type]="inputType()"
+          label="Email"
+          placeholder="you@example.com"
           [required]="required()"
-          name="demoPassword"
-          [ngModel]="password()"
-          (ngModelChange)="password.set($event)">
-          <span prefix class="pi pi-lock"></span>
+          [showCounter]="showCounter()"
+          [maxLength]="80"
+          [showClear]="showClear()"
+          [error]="error()"
+          [ngModel]="value()"
+          (ngModelChange)="value.set($event)"
+          name="demoInput">
+          <span prefix class="pi pi-envelope"></span>
+          <span suffix class="pi pi-check"></span>
         </ui-lib-input>
-      }
 
-      <div class="actions">
-        <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
-        <ui-lib-button type="button" appearance="ghost" (click)="demoForm.resetForm(); value.set(''); error.set('');">Reset</ui-lib-button>
-      </div>
-    </form>
+        @if (inputType() === 'password') {
+          <ui-lib-input
+            [variant]="variant()"
+            type="password"
+            label="Password"
+            placeholder="Enter password"
+            [showTogglePassword]="showToggle()"
+            [showClear]="showClear()"
+            [required]="required()"
+            name="demoPassword"
+            [ngModel]="password()"
+            (ngModelChange)="password.set($event)">
+            <span prefix class="pi pi-lock"></span>
+          </ui-lib-input>
+        }
+
+        <div class="actions">
+          <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+          <ui-lib-button type="button" appearance="ghost" (click)="demoForm.resetForm(); value.set(''); error.set('');">Reset</ui-lib-button>
+        </div>
+      </form>
+    </app-doc-demo-viewport>
   </section>
 </div>

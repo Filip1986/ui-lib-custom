@@ -4,10 +4,11 @@ import { Card } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 
 @Component({
   selector: 'app-cards',
-  imports: [CommonModule, Card, Button, DocPageLayoutComponent],
+  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocDemoViewportComponent],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -2,7 +2,6 @@
   <app-topbar
     (menuButtonClick)="toggleSidebar()"
     (themeToggle)="toggleTheme()"
-    (viewportToggle)="toggleViewport()"
     (loadTheme)="loadTheme($event)"
     [savedThemes]="savedThemes()"
     [theme]="theme()"
@@ -14,9 +13,7 @@
     <app-sidebar [class.mobile-visible]="sidebarVisible()"></app-sidebar>
 
     <div class="layout-content">
-      <app-viewport-preview [active]="viewportEnabled()" (activeChange)="viewportEnabled.set($event)">
-        <router-outlet></router-outlet>
-      </app-viewport-preview>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

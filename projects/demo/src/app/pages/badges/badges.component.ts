@@ -1,13 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Badge, Inline } from '../../../../../ui-lib-custom/src/public-api';
+import { Badge, Inline } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 
 @Component({
   selector: 'app-badges',
   standalone: true,
-  imports: [Badge, Inline, DocPageLayoutComponent, DocCodeSnippetComponent],
+  imports: [Badge, Inline, DocPageLayoutComponent, DocCodeSnippetComponent, DocDemoViewportComponent],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

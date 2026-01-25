@@ -3,11 +3,12 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UiLibInput, InputVariant, InputType } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
+import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 
 @Component({
   selector: 'app-inputs',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibInput, Button],
+  imports: [CommonModule, FormsModule, UiLibInput, Button, DocDemoViewportComponent],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

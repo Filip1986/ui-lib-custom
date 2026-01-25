@@ -1,12 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Stack, Inline, Grid, Container } from '../../../../../ui-lib-custom/src/public-api';
+import { Stack, Inline, Grid, Container } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 
 @Component({
   selector: 'app-layouts',
   standalone: true,
-  imports: [Stack, Inline, Grid, Container, DocPageLayoutComponent],
+  imports: [Stack, Inline, Grid, Container, DocPageLayoutComponent, DocDemoViewportComponent],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

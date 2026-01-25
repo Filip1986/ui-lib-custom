@@ -3,11 +3,12 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UiLibSelect, SelectOption, SelectVariant } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
+import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibSelect, Button],
+  imports: [CommonModule, FormsModule, UiLibSelect, Button, DocDemoViewportComponent],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
