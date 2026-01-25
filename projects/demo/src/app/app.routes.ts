@@ -9,6 +9,7 @@ import { ThemesComponent } from './pages/themes/themes.component';
 import { InputsComponent } from './pages/inputs/inputs.component';
 import { SelectComponent } from './pages/select/select.component';
 import { SidebarMenuDemoComponent } from './pages/sidebar-menu/sidebar-menu.component';
+import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -21,5 +22,6 @@ export const routes: Routes = [
   { path: 'inputs', component: InputsComponent, title: 'Inputs - UI Components Library' },
   { path: 'select', component: SelectComponent, title: 'Select - UI Components Library' },
   { path: 'sidebar-menu', component: SidebarMenuDemoComponent, title: 'Sidebar Menu - UI Components Library' },
+  { path: 'project-starter', component: ProjectStarterComponent, title: 'Project Starter - UI Components Library' },
   { path: '**', redirectTo: '' }
 ];

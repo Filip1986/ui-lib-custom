@@ -14,7 +14,11 @@ export class TopbarComponent {
   menuButtonClick = output<void>();
   themeToggle = output<void>();
   viewportToggle = output<void>();
+  saveTheme = output<void>();
+  loadTheme = output<string>();
+  newProject = output<void>();
   theme = input<'light' | 'dark' | 'brand-example'>('light');
+  savedThemes = input<string[]>([]);
 
   onMenuButtonClick() {
     this.menuButtonClick.emit();
@@ -26,5 +30,19 @@ export class TopbarComponent {
 
   onViewportToggle() {
     this.viewportToggle.emit();
+  }
+
+  onSaveTheme() {
+    this.saveTheme.emit();
+  }
+
+  onLoadTheme(name: string) {
+    if (name) {
+      this.loadTheme.emit(name);
+    }
+  }
+
+  onNewProject() {
+    this.newProject.emit();
   }
 }

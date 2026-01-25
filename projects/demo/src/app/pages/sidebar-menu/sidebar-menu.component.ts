@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SidebarMenu, SidebarMenuItem, SidebarVariant } from '../../../../../ui-lib-custom/src/lib/sidebar-menu/sidebar-menu';
+import { SidebarMenu, SidebarMenuItem, SidebarVariant } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-sidebar-menu-demo',

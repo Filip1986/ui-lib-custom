@@ -5,6 +5,7 @@ import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
 import lightPreset from './presets/light.json';
 import { DeepPartial, ThemePreset, ThemePresetOverrides, ThemeShapeRadius } from './theme-preset.interface';
+import { saveAs } from './utils/file-download';
 
 type LoadOptions = {
   merge?: boolean;
@@ -18,6 +19,7 @@ type LoadOptions = {
 export class ThemeConfigService {
   private readonly doc = inject(DOCUMENT);
   private readonly storageKey = 'ui-lib-custom.theme';
+  private readonly savedThemesKey = 'ui-lib-custom.saved-themes';
   private readonly defaultPreset: ThemePreset = lightPreset as ThemePreset;
   private readonly builtInPresets: Record<string, ThemePreset> = {
     light: lightPreset as ThemePreset,
@@ -110,8 +112,65 @@ export class ThemeConfigService {
     return `:root {\n${body}\n}`;
   }
 
-  exportAsJSON(preset: ThemePreset = this.presetSignal()): string {
-    return JSON.stringify(preset, null, 2);
+  exportAsJSON(preset: ThemePreset = this.presetSignal(), download = false): string {
+    const json = JSON.stringify(preset, null, 2);
+    if (download) {
+      saveAs('theme.json', json, 'application/json');
+    }
+    return json;
+  }
+
+  exportAsScss(preset: ThemePreset = this.presetSignal(), download = false): string {
+    const vars = this.mapPresetToCssVars(preset);
+    const body = Object.entries(vars)
+      .map(([name, value]) => `$${name.replace(/^--/, '')}: ${value};`)
+      .join('\n');
+    const scss = `// Generated from UI Lib theme preset\n${body}\n`;
+    if (download) {
+      saveAs('_theme-variables.scss', scss, 'text/x-scss');
+    }
+    return scss;
+  }
+
+  saveToLocalStorage(name: string, preset: ThemePreset = this.presetSignal()): void {
+    if (!name || !this.hasLocalStorage()) return;
+    const map = this.readSavedThemes();
+    map[name] = preset;
+    this.writeSavedThemes(map);
+  }
+
+  loadFromLocalStorage(name: string, options?: LoadOptions): ThemePreset | null {
+    const map = this.readSavedThemes();
+    const found = map[name];
+    if (!found) return null;
+    return this.loadPreset(found, { merge: false, apply: true, persist: true, ...options });
+  }
+
+  listSavedThemes(): string[] {
+    return Object.keys(this.readSavedThemes());
+  }
+
+  deleteSavedTheme(name: string): void {
+    const map = this.readSavedThemes();
+    if (map[name]) {
+      delete map[name];
+      this.writeSavedThemes(map);
+    }
+  }
+
+  async importFromJSON(file: File, options?: LoadOptions): Promise<ThemePreset> {
+    const text = await file.text();
+    const parsed = JSON.parse(text) as ThemePreset;
+    return this.loadPreset(parsed, { merge: false, apply: true, persist: true, ...options });
+  }
+
+  downloadPresetFiles(preset: ThemePreset = this.presetSignal()): void {
+    const json = this.exportAsJSON(preset);
+    const css = this.exportAsCSS(preset);
+    const scss = this.exportAsScss(preset);
+    saveAs('theme.json', json, 'application/json');
+    saveAs('theme.css', css, 'text/css');
+    saveAs('_theme-variables.scss', scss, 'text/x-scss');
   }
 
   private mapPresetToCssVars(preset: ThemePreset): Record<string, string> {
@@ -299,6 +358,25 @@ export class ThemeConfigService {
       return JSON.parse(raw) as ThemePreset;
     } catch {
       return null;
+    }
+  }
+
+  private readSavedThemes(): Record<string, ThemePreset> {
+    if (!this.hasLocalStorage()) return {};
+    try {
+      const raw = this.doc?.defaultView?.localStorage?.getItem(this.savedThemesKey);
+      return raw ? (JSON.parse(raw) as Record<string, ThemePreset>) : {};
+    } catch {
+      return {};
+    }
+  }
+
+  private writeSavedThemes(map: Record<string, ThemePreset>): void {
+    if (!this.hasLocalStorage()) return;
+    try {
+      this.doc?.defaultView?.localStorage?.setItem(this.savedThemesKey, JSON.stringify(map));
+    } catch {
+      // ignore
     }
   }
 

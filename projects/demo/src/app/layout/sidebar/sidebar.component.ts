@@ -76,6 +76,11 @@ export class SidebarComponent {
           label: 'Sidebar Menu',
           icon: 'pi pi-circle',
           route: '/sidebar-menu'
+        },
+        {
+          label: 'Project Starter',
+          icon: 'pi pi-circle',
+          route: '/project-starter'
         }
       ]
     },

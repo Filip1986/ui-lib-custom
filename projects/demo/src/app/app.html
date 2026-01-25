@@ -3,6 +3,10 @@
     (menuButtonClick)="toggleSidebar()"
     (themeToggle)="toggleTheme()"
     (viewportToggle)="toggleViewport()"
+    (saveTheme)="saveTheme()"
+    (loadTheme)="loadTheme($event)"
+    (newProject)="goToProjectStarter()"
+    [savedThemes]="savedThemes()"
     [theme]="theme()"
   ></app-topbar>
 
