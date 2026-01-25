@@ -1,3 +1,15 @@
+# Update Log - January 25, 2026
+
+## Demo Theming Improvements
+- Component playgrounds (buttons, cards, inputs, select) now follow the Theme Editor variant by default, with a per-demo toggle to opt out.
+- Demo previews apply theme changes via scoped CSS variables so global theme edits update live; local overrides are available but kept hidden in the UI for now.
+- Added a reusable theme scope directive to keep overrides contained to each preview.
+
+## Card Minimal Styling
+- Minimal variant now uses the card background for header/footer and inset separators for a cleaner look.
+
+---
+
 # Update Log - January 22, 2026
 
 ## Major Version Updates
