@@ -68,6 +68,26 @@
   --uilib-stack-lg: 1.5rem;
   --uilib-stack-xl: 2rem;
 
+  /* Component spacing */
+  --uilib-button-padding-x-small: 1rem;
+  --uilib-button-padding-y-small: 0.5rem;
+  --uilib-button-padding-x-medium: 2rem;
+  --uilib-button-padding-y-medium: 1rem;
+  --uilib-button-padding-x-large: 3rem;
+  --uilib-button-padding-y-large: 1.5rem;
+  --uilib-button-gap: 0.5rem;
+
+  --uilib-card-padding: 1rem;
+  --uilib-card-header-padding: 0.5rem;
+  --uilib-card-body-padding: 1rem;
+  --uilib-card-footer-padding: 0.5rem;
+
+  --uilib-input-padding-y: 1rem;
+  --uilib-input-padding-x: 0.5rem;
+
+  --uilib-badge-padding-y: 0.25rem;
+  --uilib-badge-padding-x: 0.5rem;
+
   --uilib-inline-xs: 0.25rem;
   --uilib-inline-sm: 0.5rem;
   --uilib-inline-md: 1rem;
@@ -211,6 +231,26 @@
   --uilib-stack-md: 1rem;
   --uilib-stack-lg: 1.5rem;
   --uilib-stack-xl: 2rem;
+
+  /* Component spacing */
+  --uilib-button-padding-x-small: 1rem;
+  --uilib-button-padding-y-small: 0.5rem;
+  --uilib-button-padding-x-medium: 2rem;
+  --uilib-button-padding-y-medium: 1rem;
+  --uilib-button-padding-x-large: 3rem;
+  --uilib-button-padding-y-large: 1.5rem;
+  --uilib-button-gap: 0.5rem;
+
+  --uilib-card-padding: 1rem;
+  --uilib-card-header-padding: 0.5rem;
+  --uilib-card-body-padding: 1rem;
+  --uilib-card-footer-padding: 0.5rem;
+
+  --uilib-input-padding-y: 1rem;
+  --uilib-input-padding-x: 0.5rem;
+
+  --uilib-badge-padding-y: 0.25rem;
+  --uilib-badge-padding-x: 0.5rem;
 
   --uilib-inline-xs: 0.25rem;
   --uilib-inline-sm: 0.5rem;
