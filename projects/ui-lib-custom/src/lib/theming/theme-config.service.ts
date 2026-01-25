@@ -315,6 +315,8 @@ export class ThemeConfigService {
     set('--uilib-card-shadow-high', shadowValue);
     set('--uilib-button-shadow', shadowValue);
     set('--uilib-button-shadow-hover', shadowValue);
+    set('--uilib-shadow-sm', shadowValue);
+    set('--uilib-shadow-md', shadowValue);
 
     return vars;
   }
@@ -422,3 +424,5 @@ export class ThemeConfigService {
     return response.json();
   }
 }
+
+

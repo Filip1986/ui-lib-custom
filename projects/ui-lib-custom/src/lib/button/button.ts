@@ -26,6 +26,7 @@ export class Button {
   loading = input<boolean>(false);
   fullWidth = input<boolean>(false);
   iconPosition = input<IconPosition>('start');
+  shadow = input<string | null>(null);
 
   buttonClasses = computed(() => {
     const classes = [

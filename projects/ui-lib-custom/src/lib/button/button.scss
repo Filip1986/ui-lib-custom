@@ -15,9 +15,7 @@
   /* Radius tokens */
   /* removed hardcoded radius defaults to honor theme vars */
 
-  /* Shadow tokens */
-  --uilib-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --uilib-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Shadow tokens removed to honor theme-provided values */
 
   /* Component-level variables (CSS-var first, no hardcoded colors) */
   --uilib-button-radius: var(--uilib-radius-md);
@@ -29,8 +27,8 @@
   --uilib-button-disabled-opacity: 0.5;
   --uilib-button-border-width: 1px;
   --uilib-button-border-style: solid;
-  --uilib-button-shadow: var(--uilib-shadow-sm);
-  --uilib-button-shadow-hover: var(--uilib-shadow-md);
+  --uilib-button-shadow: var(--uilib-shadow-sm, none);
+  --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-shadow-sm, none));
   --uilib-button-text-transform: none;
   --uilib-button-letter-spacing: normal;
 
@@ -129,14 +127,14 @@ button:active:not(.btn-disabled) {
   }
 
   &-material {
-    --uilib-button-shadow: var(--uilib-shadow-sm);
-    --uilib-button-shadow-hover: var(--uilib-shadow-md);
+    --uilib-button-shadow: var(--uilib-shadow-sm, var(--uilib-button-shadow));
+    --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-button-shadow));
     --uilib-button-text-transform: uppercase;
     --uilib-button-letter-spacing: 0.5px;
   }
 
   &-bootstrap {
-    --uilib-button-radius: var(--uilib-radius-sm);
+    --uilib-button-radius: var(--uilib-radius-sm, var(--uilib-button-radius));
     --uilib-button-border-width: 1px;
   }
 

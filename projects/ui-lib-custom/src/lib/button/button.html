@@ -4,6 +4,8 @@
   [disabled]="isDisabled()"
   [attr.aria-disabled]="ariaDisabled()"
   [attr.aria-busy]="loading() ? true : null"
+  [style.--uilib-button-shadow]="shadow()"
+  [style.--uilib-button-shadow-hover]="shadow()"
 >
   <span class="btn-spinner" *ngIf="loading()" aria-hidden="true"></span>
   <ng-content />

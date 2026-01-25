@@ -57,9 +57,12 @@ export class ThemeEditorComponent {
     'text',
   ];
 
-  readonly shadowOptions: SelectOption<string>[] = Object.keys(SHADOWS as Record<string, string>)
-    .filter((key) => key.startsWith('shadow-'))
-    .map((key) => ({ label: key, value: key }));
+  readonly shadowOptions: SelectOption<string>[] = [
+    { label: 'none', value: 'none' },
+    ...Object.keys(SHADOWS as Record<string, string>)
+      .filter((key) => key.startsWith('shadow-'))
+      .map((key) => ({ label: key, value: key })),
+  ];
 
   onTogglePanel(): void {
     this.showPanel.update((v) => !v);
