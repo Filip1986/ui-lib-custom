@@ -105,11 +105,10 @@
   color: var(--ui-input-placeholder);
 }
 
-.ui-input-float-on .ui-input-label {
-  top: 0;
-  transform: translate(var(--ui-input-label-offset-x), calc(-1 * var(--ui-input-label-on-offset))) scale(var(--ui-input-label-floating-scale));
+.ui-input-floating-active.ui-input-float-on .ui-input-label {
+  transform: translate(var(--ui-input-label-offset-x), calc(-175%)) scale(var(--ui-input-label-floating-scale));
   background: var(--ui-input-label-bg);
-  padding: 0 0.35rem;
+  padding: 0 0.35rem 0 0;
   color: var(--ui-input-placeholder);
 }
 

@@ -74,7 +74,6 @@ export class UiLibInput implements ControlValueAccessor {
   readonly isFloating = computed(() => {
     const mode = this.labelFloat();
     if (mode === 'over') return false;
-    if (mode === 'on') return true;
     return this.focused() || !!this.value();
   });
   readonly isDisabled = computed(() => this.disabled() || this._disabled());
