@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation, computed, forwardRef, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, ViewEncapsulation, computed, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputVariant = 'material' | 'bootstrap' | 'minimal';
+export type InputLabelFloat = 'over' | 'in' | 'on';
 export type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url';
 
 let inputIdCounter = 0;
@@ -29,6 +30,7 @@ export class UiLibInput implements ControlValueAccessor {
   variant = input<InputVariant>('material');
   type = input<InputType>('text');
   label = input<string>('');
+  labelFloat = input<InputLabelFloat>('over');
   placeholder = input<string>('');
   error = input<string>('');
   disabled = input<boolean>(false);
@@ -48,6 +50,7 @@ export class UiLibInput implements ControlValueAccessor {
 
   readonly controlId = computed(() => this.id() ?? `ui-lib-input-${++inputIdCounter}`);
   readonly describedById = computed(() => (this.error() ? `${this.controlId()}-error` : undefined));
+  readonly displayPlaceholder = computed(() => (this.labelFloat() === 'over' ? this.placeholder() : ''));
   readonly inputType = computed<InputType>(() => {
     if (this.type() === 'password' && this.showTogglePassword()) {
       return this.showPassword() ? 'text' : 'password';
@@ -56,15 +59,27 @@ export class UiLibInput implements ControlValueAccessor {
   });
 
   readonly hostClasses = computed(() => {
-    const classes = ['ui-input', `ui-input-${this.variant()}`];
+    const classes = [
+      'ui-input',
+      `ui-input-${this.variant()}`,
+      `ui-input-float-${this.labelFloat()}`,
+    ];
+    if (this.labelFloat() !== 'over') classes.push('ui-input-has-floating');
     if (this.isDisabled()) classes.push('ui-input-disabled');
     if (this.error()) classes.push('ui-input-error');
-    if (this.isFloating()) classes.push('ui-input-floating');
+    if (this.isFloating()) classes.push('ui-input-floating-active');
     return classes.join(' ');
   });
 
-  readonly isFloating = computed(() => this.variant() === 'material' && (this.focused() || !!this.value()));
+  readonly isFloating = computed(() => {
+    const mode = this.labelFloat();
+    if (mode === 'over') return false;
+    if (mode === 'on') return true;
+    return this.focused() || !!this.value();
+  });
   readonly isDisabled = computed(() => this.disabled() || this._disabled());
+
+  @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
 
   constructor(private readonly el: ElementRef<HTMLElement>) {}
 
@@ -106,5 +121,13 @@ export class UiLibInput implements ControlValueAccessor {
 
   currentLength(): number {
     return this.value()?.length ?? 0;
+  }
+
+  focusInput(event?: MouseEvent): void {
+    if (event) {
+      const target = event.target as HTMLElement;
+      if (target.closest('button')) return;
+    }
+    this.inputEl?.nativeElement.focus();
   }
 }

@@ -27,6 +27,15 @@
         </div>
       </div>
 
+      <div class="control">
+        <label>Label float</label>
+        <div class="chips">
+          @for (lf of labelFloats; track lf) {
+            <button class="chip" [class.active]="labelFloat() === lf" (click)="setLabelFloat(lf)">{{ lf }}</button>
+          }
+        </div>
+      </div>
+
       <div class="toggles">
         <label><input type="checkbox" [checked]="showCounter()" (change)="showCounter.set($any($event.target).checked)"> Show counter</label>
         <label><input type="checkbox" [checked]="showClear()" (change)="showClear.set($any($event.target).checked)"> Show clear</label>
@@ -52,6 +61,7 @@
             [variant]="variant()"
             [type]="inputType()"
             [label]="label()"
+            [labelFloat]="labelFloat()"
             [placeholder]="placeholder()"
             [required]="required()"
             [showCounter]="showCounter()"
@@ -70,6 +80,7 @@
               [variant]="variant()"
               type="password"
               label="Password"
+              [labelFloat]="labelFloat()"
               placeholder="Enter password"
               [showTogglePassword]="showToggle()"
               [showClear]="showClear()"

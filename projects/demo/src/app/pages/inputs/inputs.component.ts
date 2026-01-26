@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { UiLibInput, InputVariant, InputType, ThemeConfigService } from 'ui-lib-custom';
+import { UiLibInput, InputVariant, InputType, InputLabelFloat, ThemeConfigService } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -25,6 +25,7 @@ export class InputsComponent {
 
   variant = signal<InputVariant>('material');
   inputType = signal<InputType>('text');
+  labelFloat = signal<InputLabelFloat>('over');
   value = signal('');
   password = signal('');
   error = signal('');
@@ -38,6 +39,7 @@ export class InputsComponent {
 
   variants: InputVariant[] = ['material', 'bootstrap', 'minimal'];
   types: InputType[] = ['text', 'email', 'password', 'number', 'search', 'tel', 'url'];
+  labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
 
   private readonly globalVars = computed(() => {
     const preset = this.themeService.preset();
@@ -81,5 +83,9 @@ export class InputsComponent {
 
   setType(t: InputType) {
     this.inputType.set(t);
+  }
+
+  setLabelFloat(mode: InputLabelFloat) {
+    this.labelFloat.set(mode);
   }
 }
