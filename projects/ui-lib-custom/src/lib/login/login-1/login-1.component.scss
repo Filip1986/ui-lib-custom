@@ -1,6 +1,7 @@
 :host {
   display: block;
   min-height: 100vh;
+  font-family: var(--uilib-font-body, inherit), sans-serif;
 }
 
 .login-1-card {
@@ -8,10 +9,12 @@
   border-radius: 0.5rem;
   background: white;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  font-family: var(--uilib-font-body, inherit), sans-serif;
 
   .card-header {
     padding: 0;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: var(--uilib-font-heading, inherit), sans-serif;
   }
 }
 
@@ -63,6 +66,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  font-family: var(--uilib-font-ui, inherit), sans-serif;
 
   &:disabled {
     opacity: 0.6;
@@ -93,6 +97,7 @@
 .link {
   color: #667eea;
   text-decoration: none;
+  font-family: var(--uilib-font-ui, inherit), sans-serif;
 
   &:hover {
     text-decoration: underline;

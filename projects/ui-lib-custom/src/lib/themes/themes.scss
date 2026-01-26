@@ -147,6 +147,14 @@
   --uilib-card-bg: #fff;
   --uilib-card-text-color: var(--uilib-color-neutral-900);
   --uilib-card-border: var(--uilib-color-neutral-200);
+
+  /* Typography defaults */
+  --uilib-font-heading: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
+  --uilib-font-body: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
+  --uilib-font-ui: var(--uilib-font-body, var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif));
+  --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --uilib-font-heading-weight: 600;
+  --uilib-font-body-weight: 400;
 }
 
 [data-theme="dark"] {
@@ -265,6 +273,45 @@
   --uilib-topbar-fg: #e6e8eb;
   --uilib-topbar-hover: #262a30;
   --uilib-topbar-accent: var(--uilib-color-primary-500);
+
+  /* Buttons */
+  --uilib-button-primary-bg: var(--uilib-color-primary-600);
+  --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
+  --uilib-button-primary-border: var(--uilib-color-primary-600);
+  --uilib-button-primary-fg: #fff;
+
+  --uilib-button-secondary-bg: var(--uilib-color-secondary-600);
+  --uilib-button-secondary-bg-hover: var(--uilib-color-secondary-700);
+  --uilib-button-secondary-border: var(--uilib-color-secondary-600);
+  --uilib-button-secondary-fg: #fff;
+
+  --uilib-button-success-bg: var(--uilib-color-success-600);
+  --uilib-button-success-bg-hover: var(--uilib-color-success-700);
+  --uilib-button-success-border: var(--uilib-color-success-600);
+  --uilib-button-success-fg: #fff;
+
+  --uilib-button-danger-bg: var(--uilib-color-danger-600);
+  --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
+  --uilib-button-danger-border: var(--uilib-color-danger-600);
+  --uilib-button-danger-fg: #fff;
+
+  --uilib-button-warning-bg: var(--uilib-color-warning-600);
+  --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
+  --uilib-button-warning-border: var(--uilib-color-warning-600);
+  --uilib-button-warning-fg: #000;
+
+  /* Cards */
+  --uilib-card-bg: #fff;
+  --uilib-card-text-color: var(--uilib-color-neutral-900);
+  --uilib-card-border: var(--uilib-color-neutral-200);
+
+  /* Typography defaults */
+  --uilib-font-heading: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
+  --uilib-font-body: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
+  --uilib-font-ui: var(--uilib-font-body, var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif));
+  --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --uilib-font-heading-weight: 600;
+  --uilib-font-body-weight: 400;
 }
 
 [data-density="comfortable"] {
@@ -273,4 +320,24 @@
 
 [data-density="compact"] {
   --uilib-density-scale-y: 0.5;
+}
+
+/* Base typography mapping */
+h1, h2, h3, h4, h5, h6,
+.heading {
+  font-family: var(--uilib-font-heading, var(--uilib-font-family-base)), sans-serif;
+  font-weight: var(--uilib-font-heading-weight, 600);
+}
+
+p, .body-text {
+  font-family: var(--uilib-font-body, var(--uilib-font-family-base)), sans-serif;
+  font-weight: var(--uilib-font-body-weight, 400);
+}
+
+button, .btn, nav, label, input, select, textarea {
+  font-family: var(--uilib-font-ui, var(--uilib-font-body, var(--uilib-font-family-base))), sans-serif;
+}
+
+code, pre, .monospace {
+  font-family: var(--uilib-font-mono, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace), monospace;
 }

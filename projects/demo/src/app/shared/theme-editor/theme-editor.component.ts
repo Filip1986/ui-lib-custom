@@ -49,13 +49,25 @@ export class ThemeEditorComponent {
     { label: 'System', value: "system-ui, -apple-system, 'Segoe UI', sans-serif" },
   ];
 
-  readonly fontOptions = computed<SelectOption<string>[]>(() => {
-    const google = this.googleFonts.fonts().map<SelectOption<string>>((family) => ({
-      label: family,
-      value: this.toFontValue(family),
-    }));
-    return [...this.baseFontOptions, ...google];
-  });
+  readonly headingFontOptions = computed<SelectOption<string>[]>(() =>
+    this.combineFontOptions([
+      this.googleFonts.displayFonts(),
+      this.googleFonts.sansSerifFonts(),
+    ]));
+
+  readonly bodyFontOptions = computed<SelectOption<string>[]>(() =>
+    this.combineFontOptions([
+      this.googleFonts.serifFonts(),
+      this.googleFonts.sansSerifFonts(),
+    ]));
+
+  readonly uiFontOptions = computed<SelectOption<string>[]>(() =>
+    this.combineFontOptions([this.googleFonts.sansSerifFonts()]));
+
+  readonly monoFontOptions = computed<SelectOption<string>[]>(() =>
+    this.combineFontOptions([this.googleFonts.monospaceFonts()]));
+
+  readonly fontOptions = computed<SelectOption<string>[]>(() => this.headingFontOptions()); // backward compatibility if needed
 
   readonly colorKeys: (keyof ThemePresetColors)[] = [
     'primary',
@@ -74,6 +86,13 @@ export class ThemeEditorComponent {
       .filter((key) => key.startsWith('shadow-'))
       .map((key) => ({ label: key, value: key })),
   ];
+
+  readonly syncUIWithBody = signal(true);
+
+  readonly headingFont = computed(() => this.currentPreset().typography.fontHeading ?? this.currentPreset().typography.fontBody ?? this.currentPreset().typography.fontFamily);
+  readonly bodyFont = computed(() => this.currentPreset().typography.fontBody ?? this.currentPreset().typography.fontFamily);
+  readonly uiFont = computed(() => this.currentPreset().typography.fontUI ?? this.bodyFont() ?? this.currentPreset().typography.fontFamily);
+  readonly monoFont = computed(() => this.currentPreset().typography.fontMonospace ?? "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace");
 
   onTogglePanel(): void {
     this.showPanel.update((v) => !v);
@@ -99,8 +118,42 @@ export class ThemeEditorComponent {
   }
 
   onFontChange(value: string): void {
+    // Backward compat: set body/ui/heading together
+    this.onBodyFontChange(value, { applyToUI: true, applyToHeading: true });
+  }
+
+  onHeadingFontChange(value: string): void {
     this.ensureGoogleFontLoaded(value);
-    this.themeService.loadPreset({ typography: { fontFamily: value } }, { merge: true, apply: true, persist: true });
+    this.themeService.loadPreset({ typography: { fontHeading: value } }, { merge: true, apply: true, persist: true });
+  }
+
+  onBodyFontChange(value: string, opts?: { applyToUI?: boolean; applyToHeading?: boolean }): void {
+    this.ensureGoogleFontLoaded(value);
+    const patch: any = { fontBody: value };
+    if (opts?.applyToUI || this.syncUIWithBody()) {
+      patch.fontUI = value;
+    }
+    if (opts?.applyToHeading) {
+      patch.fontHeading = value;
+    }
+    this.themeService.loadPreset({ typography: patch }, { merge: true, apply: true, persist: true });
+  }
+
+  onUIFontChange(value: string): void {
+    this.ensureGoogleFontLoaded(value);
+    this.themeService.loadPreset({ typography: { fontUI: value } }, { merge: true, apply: true, persist: true });
+  }
+
+  onMonoFontChange(value: string): void {
+    this.ensureGoogleFontLoaded(value);
+    this.themeService.loadPreset({ typography: { fontMonospace: value } }, { merge: true, apply: true, persist: true });
+  }
+
+  onSyncUIToggle(checked: boolean): void {
+    this.syncUIWithBody.set(checked);
+    if (checked) {
+      this.onUIFontChange(this.bodyFont());
+    }
   }
 
   onBaseSizeChange(value: number | string): void {
@@ -216,8 +269,22 @@ export class ThemeEditorComponent {
     });
 
     effect(() => {
-      const current = this.currentPreset().typography.fontFamily;
-      this.ensureGoogleFontLoaded(current);
+      const current = this.currentPreset().typography;
+      [
+        current.fontFamily,
+        current.fontHeading,
+        current.fontBody,
+        current.fontUI,
+        current.fontMonospace,
+      ].forEach((f) => f && this.ensureGoogleFontLoaded(f));
     });
+  }
+
+  private combineFontOptions(groups: string[][]): SelectOption<string>[] {
+    const set = new Set<string>();
+    const push = (value: string) => set.add(this.toFontValue(value));
+    this.baseFontOptions.forEach((o) => push(this.extractPrimaryFamily(o.value) ?? o.value));
+    groups.forEach((group) => group.forEach((f) => push(f)));
+    return Array.from(set).map((value) => ({ label: this.extractPrimaryFamily(value) ?? value, value }));
   }
 }

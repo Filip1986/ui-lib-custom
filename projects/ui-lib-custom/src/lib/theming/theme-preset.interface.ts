@@ -25,8 +25,15 @@ export interface ThemePresetShape {
 }
 
 export interface ThemePresetTypography {
+  /** Backward compat: treated as alias for fontBody */
   fontFamily: string;
+  fontHeading: string;
+  fontBody: string;
+  fontUI: string;
+  fontMonospace: string;
   baseFontSize: string;
+  headingWeight?: number; // default 600
+  bodyWeight?: number; // default 400
 }
 
 export interface ThemePreset {

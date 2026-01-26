@@ -33,6 +33,12 @@
   4. **State tokens**: hover/active/disabled values derived via CSS vars, not hardcoded colors.
 - Theme switching: toggle `[data-theme="light|dark|brand-x"]` on `html/body`; each theme file sets only CSS vars.
 - Tailwind-compatible: selectors stay simple, no mandatory global styles; allow consumers to set CSS vars via Tailwind `theme()` in `:root`.
+- Typography mapping (via CSS vars):
+  - Headings (`h1`-`h6`, `.heading`): `var(--uilib-font-heading)` + `--uilib-font-heading-weight`.
+  - Body copy (`p`, `.body-text`): `var(--uilib-font-body)` + `--uilib-font-body-weight`.
+  - UI text (buttons, labels, nav, form controls, `.btn`): `var(--uilib-font-ui)`.
+  - Monospace (`code`, `pre`, `.monospace`): `var(--uilib-font-mono)`.
+  - Theme presets supply these via `ThemePresetTypography`; `fontFamily` remains a backward-compatible alias for body/UI fonts.
 
 ## Design Tokens
 - Source of truth: `projects/ui-lib-custom/src/lib/design-tokens.ts` (spacing, colors, typography, shadows, z-index, transitions, sizing).

@@ -1,8 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 
 interface FontsResponse {
-  items: { family: string }[];
+  items: { family: string; category: string; variants: string[] }[];
+}
+
+export interface GoogleFont {
+  family: string;
+  category: string;
+  variants: string[];
 }
 
 @Injectable({ providedIn: 'root' })
@@ -10,9 +16,15 @@ export class GoogleFontsService {
   private readonly http = inject(HttpClient);
   private loaded = false;
 
-  readonly fonts = signal<string[]>([]);
+  readonly fonts = signal<string[]>([]); // backward compatibility: family names only
+  readonly fontMeta = signal<GoogleFont[]>([]);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
+
+  readonly serifFonts = computed(() => this.getFontsByCategory('serif'));
+  readonly sansSerifFonts = computed(() => this.getFontsByCategory('sans-serif'));
+  readonly displayFonts = computed(() => this.getFontsByCategory('display'));
+  readonly monospaceFonts = computed(() => this.getFontsByCategory('monospace'));
 
   loadFonts(apiKey: string): void {
     if (this.loaded || this.loading()) return;
@@ -23,7 +35,9 @@ export class GoogleFontsService {
       })
       .subscribe({
         next: (res) => {
-          this.fonts.set(res.items?.map((i) => i.family) ?? []);
+          const meta = res.items?.map((i) => ({ family: i.family, category: i.category, variants: i.variants })) ?? [];
+          this.fontMeta.set(meta);
+          this.fonts.set(meta.map((i) => i.family));
           this.loaded = true;
           this.loading.set(false);
           this.error.set(null);
@@ -34,5 +48,12 @@ export class GoogleFontsService {
           this.error.set('Failed to load fonts');
         },
       });
+  }
+
+  getFontsByCategory(category: string): string[] {
+    const normalized = category?.toLowerCase();
+    return this.fontMeta()
+      .filter((f) => f.category?.toLowerCase() === normalized)
+      .map((f) => f.family);
   }
 }

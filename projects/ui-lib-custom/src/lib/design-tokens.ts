@@ -341,6 +341,14 @@ export const LINE_HEIGHTS = {
 
 export type LineHeight = keyof typeof LINE_HEIGHTS;
 
+// Exposed CSS custom properties for typography categories
+export const FONT_FAMILY_VARS = {
+  heading: '--uilib-font-heading',
+  body: '--uilib-font-body',
+  ui: '--uilib-font-ui',
+  monospace: '--uilib-font-mono',
+} as const;
+
 // ============================================================================
 // BORDER TOKENS
 // ============================================================================

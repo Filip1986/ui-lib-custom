@@ -51,7 +51,7 @@ button {
   border-radius: var(--uilib-button-radius, var(--uilib-radius-md));
   border: var(--uilib-button-border-width) var(--uilib-button-border-style) var(--btn-border, currentColor);
   font-weight: var(--uilib-font-weight-semibold);
-  font-family: inherit;
+  font-family: var(--uilib-font-ui, inherit), sans-serif;
   text-transform: var(--uilib-button-text-transform);
   letter-spacing: var(--uilib-button-letter-spacing);
   padding: var(--uilib-button-padding, var(--uilib-button-padding-medium));

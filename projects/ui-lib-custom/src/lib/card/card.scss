@@ -31,17 +31,21 @@
     border-bottom: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
     font-weight: 600;
     font-size: 1.125rem;
+    font-family: var(--uilib-font-heading, inherit), sans-serif;
+    color: var(--uilib-card-text-color, inherit);
   }
 
   &-body {
     padding: var(--uilib-card-body-padding);
     flex: 1;
+    font-family: var(--uilib-font-body, inherit), sans-serif;
   }
 
   &-footer {
     padding: var(--uilib-card-footer-padding);
     background-color: var(--uilib-card-footer-bg, var(--uilib-surface-alt, var(--uilib-card-bg, inherit)));
     border-top: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
+    font-family: var(--uilib-font-ui, inherit), sans-serif;
   }
 
   &-bordered {

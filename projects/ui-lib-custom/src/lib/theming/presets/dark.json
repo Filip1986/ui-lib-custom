@@ -23,7 +23,13 @@
   },
   "typography": {
     "fontFamily": "'Inter', 'Segoe UI', sans-serif",
-    "baseFontSize": "16px"
+    "fontHeading": "'Inter', 'Segoe UI', sans-serif",
+    "fontBody": "'Inter', 'Segoe UI', sans-serif",
+    "fontUI": "'Inter', 'Segoe UI', sans-serif",
+    "fontMonospace": "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+    "baseFontSize": "16px",
+    "headingWeight": 600,
+    "bodyWeight": 400
   },
   "shadow": "shadow-3",
   "cardShadow": "shadow-3",

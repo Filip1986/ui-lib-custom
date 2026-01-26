@@ -305,8 +305,21 @@ export class ThemeConfigService {
     set('--uilib-card-radius', this.resolveRadius(shape.cardRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
     set('--uilib-input-radius', this.resolveRadius(shape.inputRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
 
-    set('--uilib-font-family-base', typography.fontFamily);
+    const fontBody = typography.fontBody ?? typography.fontFamily;
+    const fontUI = typography.fontUI ?? fontBody ?? typography.fontFamily;
+    const fontHeading = typography.fontHeading ?? fontBody ?? typography.fontFamily;
+    const fontMonospace = typography.fontMonospace ?? "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
+    const headingWeight = typography.headingWeight ?? 600;
+    const bodyWeight = typography.bodyWeight ?? 400;
+
+    set('--uilib-font-family-base', fontBody);
     set('--uilib-font-size-base', typography.baseFontSize);
+    set('--uilib-font-body', fontBody);
+    set('--uilib-font-ui', fontUI);
+    set('--uilib-font-heading', fontHeading);
+    set('--uilib-font-mono', fontMonospace);
+    set('--uilib-font-heading-weight', `${headingWeight}`);
+    set('--uilib-font-body-weight', `${bodyWeight}`);
 
     const shadowValueCard = (SHADOWS as Record<string, string>)[cardShadow ?? shadow ?? ''] ?? 'none';
     const shadowValueButton = (SHADOWS as Record<string, string>)[buttonShadow ?? shadow ?? ''] ?? 'none';

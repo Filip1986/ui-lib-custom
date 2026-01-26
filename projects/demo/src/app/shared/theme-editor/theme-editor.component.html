@@ -52,9 +52,37 @@
   </div>
 
   <div class="section">
-    <label class="label">Font family</label>
-    <select [ngModel]="currentPreset().typography.fontFamily" (ngModelChange)="onFontChange($event)">
-      @for (opt of fontOptions(); track opt.value) {
+    <div class="label">Typography</div>
+    <label class="sub-label">Heading font</label>
+    <select [ngModel]="headingFont()" (ngModelChange)="onHeadingFontChange($event)">
+      @for (opt of headingFontOptions(); track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+
+    <label class="sub-label">Body font</label>
+    <select [ngModel]="bodyFont()" (ngModelChange)="onBodyFontChange($event)">
+      @for (opt of bodyFontOptions(); track opt.value) {
+        <option [value]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+
+    <label class="sub-label">UI font</label>
+    <div class="inline">
+      <select [ngModel]="uiFont()" [disabled]="syncUIWithBody()" (ngModelChange)="onUIFontChange($event)">
+        @for (opt of uiFontOptions(); track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+      <label class="inline-toggle">
+        <input type="checkbox" [checked]="syncUIWithBody()" (change)="onSyncUIToggle($any($event.target).checked)">
+        Sync UI with Body
+      </label>
+    </div>
+
+    <label class="sub-label">Code font</label>
+    <select [ngModel]="monoFont()" (ngModelChange)="onMonoFontChange($event)">
+      @for (opt of monoFontOptions(); track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
     </select>
