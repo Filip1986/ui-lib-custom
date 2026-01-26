@@ -54,7 +54,7 @@
   <div class="section">
     <label class="label">Font family</label>
     <select [ngModel]="currentPreset().typography.fontFamily" (ngModelChange)="onFontChange($event)">
-      @for (opt of fontOptions; track opt.value) {
+      @for (opt of fontOptions(); track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
     </select>

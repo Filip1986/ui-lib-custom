@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { Component, ChangeDetectionStrategy, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThemeConfigService, ThemePreset, ThemePresetColors, ThemeVariant, SHADOWS } from 'ui-lib-custom';
+import { GoogleFontsService } from './google-fonts.service';
 const SHADOW_MAP = SHADOWS as Record<string, string>;
 
 interface SelectOption<T> {
@@ -9,16 +11,19 @@ interface SelectOption<T> {
   value: T;
 }
 
+const GOOGLE_FONTS_API_KEY = 'AIzaSyDarBrNj_ISn3VSURsfzSLmhVhnbHZ_CcU';
+
 @Component({
   selector: 'app-theme-editor',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './theme-editor.component.html',
   styleUrl: './theme-editor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeEditorComponent {
   private readonly themeService = inject(ThemeConfigService);
+  private readonly googleFonts = inject(GoogleFontsService);
 
   showPanel = signal(false);
 
@@ -39,12 +44,20 @@ export class ThemeEditorComponent {
     { label: 'Minimal', value: 'minimal' },
   ];
 
-  readonly fontOptions: SelectOption<string>[] = [
+  private readonly baseFontOptions: SelectOption<string>[] = [
     { label: 'Inter', value: "'Inter', 'Segoe UI', sans-serif" },
     { label: 'Segoe UI', value: "'Segoe UI', sans-serif" },
     { label: 'Roboto', value: "'Roboto', 'Segoe UI', sans-serif" },
     { label: 'System', value: "system-ui, -apple-system, 'Segoe UI', sans-serif" },
   ];
+
+  readonly fontOptions = computed<SelectOption<string>[]>(() => {
+    const google = this.googleFonts.fonts().map<SelectOption<string>>((family) => ({
+      label: family,
+      value: this.toFontValue(family),
+    }));
+    return [...this.baseFontOptions, ...google];
+  });
 
   readonly colorKeys: (keyof ThemePresetColors)[] = [
     'primary',
@@ -88,6 +101,7 @@ export class ThemeEditorComponent {
   }
 
   onFontChange(value: string): void {
+    this.ensureGoogleFontLoaded(value);
     this.themeService.loadPreset({ typography: { fontFamily: value } }, { merge: true, apply: true, persist: true });
   }
 
@@ -178,5 +192,41 @@ export class ThemeEditorComponent {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+  }
+
+  private toFontValue(family: string): string {
+    return `'${family}', 'Segoe UI', sans-serif`;
+  }
+
+  private ensureGoogleFontLoaded(fontValue: string): void {
+    const family = this.extractPrimaryFamily(fontValue);
+    if (!family) return;
+    if (!this.googleFonts.fonts().includes(family)) return; // only load link for google fonts
+
+    const id = `google-font-${family.replace(/\s+/g, '-')}`;
+    if (document.getElementById(id)) return;
+    const link = document.createElement('link');
+    link.id = id;
+    link.rel = 'stylesheet';
+    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@400;500;600;700&display=swap`;
+    document.head.appendChild(link);
+  }
+
+  private extractPrimaryFamily(fontValue: string): string | null {
+    const match = fontValue.match(/'([^']+)'/);
+    if (match) return match[1];
+    const first = fontValue.split(',')[0]?.trim();
+    return first || null;
+  }
+
+  constructor() {
+    effect(() => {
+      this.googleFonts.loadFonts(GOOGLE_FONTS_API_KEY);
+    });
+
+    effect(() => {
+      const current = this.currentPreset().typography.fontFamily;
+      this.ensureGoogleFontLoaded(current);
+    });
   }
 }
