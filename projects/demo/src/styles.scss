@@ -15,14 +15,14 @@ $font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
 
 html, body {
   height: 100%;
-  font-family: $font-family-base;
+  font-family: var(--uilib-font-family-base, $font-family-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  font-family: $font-family-base;
+  font-family: var(--uilib-font-family-base, $font-family-base);
   background: var(--uilib-page-bg, var(--uilib-color-neutral-50, #f5f5f5));
   color: var(--uilib-page-fg, var(--uilib-color-neutral-900, #1f2933));
 }
