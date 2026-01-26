@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, ChangeDetectionStrategy, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ThemeConfigService, ThemePreset, ThemePresetColors, ThemeVariant, SHADOWS } from 'ui-lib-custom';
 import { GoogleFontsService } from './google-fonts.service';
-const SHADOW_MAP = SHADOWS as Record<string, string>;
 
 interface SelectOption<T> {
   label: string;
@@ -16,7 +14,7 @@ const GOOGLE_FONTS_API_KEY = 'AIzaSyDarBrNj_ISn3VSURsfzSLmhVhnbHZ_CcU';
 @Component({
   selector: 'app-theme-editor',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './theme-editor.component.html',
   styleUrl: './theme-editor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -116,13 +114,6 @@ export class ThemeEditorComponent {
     const exists = (SHADOWS as Record<string, string>)[value];
     if (exists) {
       this.themeService.loadPreset({ shadow: value }, { merge: true, apply: true, persist: true });
-    }
-  }
-
-  onShadowPreview(value: string): void {
-    const exists = (SHADOWS as Record<string, string>)[value];
-    if (exists) {
-      this.themeService.loadPreset({ shadow: value }, { merge: true, apply: true, persist: false });
     }
   }
 
