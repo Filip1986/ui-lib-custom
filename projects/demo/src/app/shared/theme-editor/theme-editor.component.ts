@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, computed, effect, inject, signal } 
 import { FormsModule } from '@angular/forms';
 import { ThemeConfigService, ThemePreset, ThemePresetColors, ThemeVariant, SHADOWS } from 'ui-lib-custom';
 import { GoogleFontsService } from './google-fonts.service';
+import { FontPairingService } from './font-pairing.service';
 
 interface SelectOption<T> {
   label: string;
@@ -22,6 +23,7 @@ const GOOGLE_FONTS_API_KEY = 'AIzaSyDarBrNj_ISn3VSURsfzSLmhVhnbHZ_CcU';
 export class ThemeEditorComponent {
   private readonly themeService = inject(ThemeConfigService);
   private readonly googleFonts = inject(GoogleFontsService);
+  private readonly fontPairings = inject(FontPairingService);
 
   showPanel = signal(false);
 
@@ -69,6 +71,8 @@ export class ThemeEditorComponent {
 
   readonly fontOptions = computed<SelectOption<string>[]>(() => this.headingFontOptions()); // backward compatibility if needed
 
+  readonly pairingOptions = computed(() => this.fontPairings.list());
+
   readonly colorKeys: (keyof ThemePresetColors)[] = [
     'primary',
     'secondary',
@@ -93,6 +97,7 @@ export class ThemeEditorComponent {
   readonly bodyFont = computed(() => this.currentPreset().typography.fontBody ?? this.currentPreset().typography.fontFamily);
   readonly uiFont = computed(() => this.currentPreset().typography.fontUI ?? this.bodyFont() ?? this.currentPreset().typography.fontFamily);
   readonly monoFont = computed(() => this.currentPreset().typography.fontMonospace ?? "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace");
+  readonly selectedPairing = signal<string>('');
 
   onTogglePanel(): void {
     this.showPanel.update((v) => !v);
@@ -147,6 +152,32 @@ export class ThemeEditorComponent {
   onMonoFontChange(value: string): void {
     this.ensureGoogleFontLoaded(value);
     this.themeService.loadPreset({ typography: { fontMonospace: value } }, { merge: true, apply: true, persist: true });
+  }
+
+  onPairingSelect(name: string): void {
+    const pairing = this.fontPairings.findByName(name);
+    if (!pairing) {
+      this.selectedPairing.set('');
+      return;
+    }
+
+    const heading = this.toFontValue(pairing.heading);
+    const body = this.toFontValue(pairing.body);
+    const ui = this.toFontValue(pairing.ui);
+    const mono = this.toFontValue(pairing.mono);
+
+    [heading, body, ui, mono].forEach((f) => this.ensureGoogleFontLoaded(f));
+    this.selectedPairing.set(name);
+    this.syncUIWithBody.set(ui === body);
+
+    this.themeService.loadPreset({
+      typography: {
+        fontHeading: heading,
+        fontBody: body,
+        fontUI: ui,
+        fontMonospace: mono,
+      }
+    }, { merge: true, apply: true, persist: true });
   }
 
   onSyncUIToggle(checked: boolean): void {
@@ -245,7 +276,7 @@ export class ThemeEditorComponent {
   private ensureGoogleFontLoaded(fontValue: string): void {
     const family = this.extractPrimaryFamily(fontValue);
     if (!family) return;
-    if (!this.googleFonts.fonts().includes(family)) return; // only load link for google fonts
+    if (this.googleFonts.fonts().length && !this.googleFonts.fonts().includes(family)) return; // only skip if list is loaded and missing
 
     const id = `google-font-${family.replace(/\s+/g, '-')}`;
     if (document.getElementById(id)) return;

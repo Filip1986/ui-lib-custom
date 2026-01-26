@@ -7,6 +7,7 @@ This repo now lets you browse and apply any free Google Font directly from the T
 - The font dropdown in `theme-editor.component` merges built-in font choices with the fetched Google Fonts list.
 - When you pick a Google font, the editor injects a `<link>` tag for that family (weights 400/500/600/700) and updates the theme preset (`typography.fontFamily`).
 - Global styles reference `--uilib-font-family-base`, so the selected font cascades across the demo and components.
+- Suggested pairings: `font-pairing.service.ts` provides curated combos (e.g., Modern: Poppins + Inter + Fira Code). The “Suggested pairings” dropdown in the Typography section applies heading/body/UI/mono together and auto-loads the Google fonts.
 
 ## API key
 - The demo currently uses a baked-in key for convenience:

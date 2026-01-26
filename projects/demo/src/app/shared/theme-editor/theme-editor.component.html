@@ -53,6 +53,14 @@
 
   <div class="section">
     <div class="label">Typography</div>
+    <label class="sub-label">Suggested pairings</label>
+    <select [ngModel]="selectedPairing()" (ngModelChange)="onPairingSelect($event)">
+      <option value="">-- Select pairing --</option>
+      @for (pair of pairingOptions(); track pair.name) {
+        <option [value]="pair.name">{{ pair.name }} ({{ pair.description || pair.category }})</option>
+      }
+    </select>
+
     <label class="sub-label">Heading font</label>
     <select [ngModel]="headingFont()" (ngModelChange)="onHeadingFontChange($event)">
       @for (opt of headingFontOptions(); track opt.value) {
