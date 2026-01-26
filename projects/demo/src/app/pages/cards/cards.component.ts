@@ -31,6 +31,8 @@ export class CardsComponent {
   body = signal('Cards can host arbitrary content and actions.');
   showHeader = signal(true);
   showFooter = signal(true);
+  headerBg = signal('');
+  footerBg = signal('');
 
   useGlobalVariant = signal(true);
   readonly variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -94,6 +96,8 @@ export class CardsComponent {
   resetLocalTheme() {
     this.localSurface.set('');
     this.localBorder.set('');
+    this.headerBg.set('');
+    this.footerBg.set('');
   }
 
   selectVariant(v: CardVariant) {

@@ -22,6 +22,8 @@ export class Card {
   showHeader = input<boolean | null>(null);
   showFooter = input<boolean | null>(null);
   shadow = input<string | null>(null);
+  headerBg = input<string | null>(null);
+  footerBg = input<string | null>(null);
 
   headerVisible = computed(() => this.showHeader() !== false);
   footerVisible = computed(() => this.showFooter() !== false);

@@ -39,6 +39,19 @@
         </select>
       </div>
 
+      <div class="control two-cols">
+        <div>
+          <label>Header BG</label>
+          <input type="color" [value]="headerBg() || '#ffffff'" (input)="headerBg.set($any($event.target).value)">
+          <input type="text" placeholder="#f5f7fb" [value]="headerBg()" (input)="headerBg.set($any($event.target).value)">
+        </div>
+        <div>
+          <label>Footer BG</label>
+          <input type="color" [value]="footerBg() || '#ffffff'" (input)="footerBg.set($any($event.target).value)">
+          <input type="text" placeholder="#eef2ff" [value]="footerBg()" (input)="footerBg.set($any($event.target).value)">
+        </div>
+      </div>
+
       <div class="toggles">
         <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
         <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
@@ -69,7 +82,9 @@
           [hoverable]="hoverable()"
           [showHeader]="showHeader()"
           [showFooter]="showFooter()"
-          [shadow]="shadowValue()">
+          [shadow]="shadowValue()"
+          [headerBg]="headerBg()"
+          [footerBg]="footerBg()">
           @if (showHeader()) {
             <div card-header>{{ title() || 'Card Title' }}</div>
           }
