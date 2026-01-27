@@ -1,0 +1,16 @@
+@use '../../shared/styles/doc-page.scss';
+
+.doc-demo.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.demo-checkbox {
+  min-width: 0;
+}
+
+textarea {
+  width: 100%;
+  min-height: 68px;
+}

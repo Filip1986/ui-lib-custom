@@ -1,0 +1,17 @@
+<div class="checkbox-box" aria-hidden="true">
+  <span class="checkbox-icon checkbox-icon-check"></span>
+  <span class="checkbox-icon checkbox-icon-indeterminate"></span>
+</div>
+<div class="checkbox-content">
+  <span class="checkbox-label" [id]="labelElementId">
+    @if (label()) {
+      {{ label() }}
+    }
+    <ng-content />
+  </span>
+  @if (showDescription()) {
+    <span class="checkbox-description" [id]="descriptionElementId">
+      {{ description() }}
+    </span>
+  }
+</div>

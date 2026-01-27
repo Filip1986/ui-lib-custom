@@ -1,0 +1,168 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Checkbox</h1>
+    <p class="doc-description">
+      Accessible, variant-aware checkbox for forms and preference toggles. Adjust the controls to preview styles, sizes, and
+      state handling in real time.
+    </p>
+  </div>
+
+  <div class="doc-section" id="playground" data-doc-anchor>
+    <h2>Playground</h2>
+    <p>Use the controls to explore variants, sizes, and states.</p>
+
+    <div class="doc-controls">
+      <app-doc-control-group title="Style" description="Switch appearance and sizing." [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="selectVariant(v)">{{ v }}</ui-lib-button>
+            }
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Size</label>
+          <div class="chips">
+            @for (s of sizes; track s) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="size() === s ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="selectSize(s)">{{ s }}</ui-lib-button>
+            }
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Label</label>
+          <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
+        </div>
+      </app-doc-control-group>
+
+      <app-doc-control-group title="State" description="Toggle interaction states." [columns]="2">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="disabled()" (change)="disabled.set($any($event.target).checked)"> Disabled</label>
+          <label><input type="checkbox" [checked]="indeterminate()" (change)="indeterminate.set($any($event.target).checked)"> Indeterminate</label>
+          <label><input type="checkbox" [checked]="showDescription()" (change)="showDescription.set($any($event.target).checked)"> Show description</label>
+        </div>
+
+        <div class="control">
+          <label>Description</label>
+          <textarea rows="2" [value]="description()" (input)="description.set($any($event.target).value)"></textarea>
+        </div>
+      </app-doc-control-group>
+    </div>
+
+    <app-doc-demo-viewport>
+      <div class="doc-demo stack">
+        <ui-lib-checkbox
+          class="demo-checkbox"
+          [variant]="variant()"
+          [size]="size()"
+          [disabled]="disabled()"
+          [indeterminate]="indeterminate()"
+          [label]="label()"
+          [description]="playgroundDescription()"
+          [checked]="checkedPrimary"
+          (checkedChange)="onPrimaryChange($event)"
+        ></ui-lib-checkbox>
+
+        <ui-lib-checkbox
+          class="demo-checkbox"
+          [variant]="variant()"
+          [size]="size()"
+          label="Projected label"
+          description="Content projection works too."
+          [checked]="checkedSecondary"
+          (checkedChange)="onSecondaryChange($event)"
+        >
+          <span>Projected label <small>({{ size() }})</small></span>
+        </ui-lib-checkbox>
+
+        <div class="doc-note">
+          <strong>State:</strong> @if (indeterminate()) { Mixed } @else if (checkedPrimary) { Checked } @else { Unchecked }
+        </div>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+
+  <div class="doc-section" id="api-reference" data-doc-anchor>
+    <h2>API Reference</h2>
+    <table class="doc-properties">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string \| null</code></td>
+          <td><code>null</code></td>
+          <td>Optional text label (use projection for custom markup).</td>
+        </tr>
+        <tr>
+          <td><code>description</code></td>
+          <td><code>string \| null</code></td>
+          <td><code>null</code></td>
+          <td>Supporting text rendered under the label.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
+          <td><code>'material'</code></td>
+          <td>Controls visual treatment of the control box.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Adjusts checkbox dimensions and typography.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Disables click and keyboard interaction.</td>
+        </tr>
+        <tr>
+          <td><code>indeterminate</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Shows the mixed state (aria-checked="mixed").</td>
+        </tr>
+        <tr>
+          <td><code>checked</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Two-way bound value via <code>[(checked)]</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
+  </div>
+
+  <div class="doc-section" id="accessibility" data-doc-anchor>
+    <h2>Accessibility</h2>
+    <ul class="doc-list">
+      <li><strong>Role driven:</strong> rendered host exposes <code>role="checkbox"</code>, <code>aria-checked</code>, and tabindex.</li>
+      <li><strong>Keyboard:</strong> Space & Enter toggle the state; focus ring uses CSS vars for WCAG-compliant contrast.</li>
+      <li><strong>Labeling:</strong> Provide <code>label</code> / projected content or use <code>ariaLabel</code> for icon-only cases.</li>
+      <li><strong>Indeterminate:</strong> Parent form logic should clear <code>indeterminate</code> after user action.</li>
+    </ul>
+  </div>
+</app-doc-page-layout>

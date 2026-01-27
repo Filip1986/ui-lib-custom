@@ -11,6 +11,7 @@ import { SelectComponent } from './pages/select/select.component';
 import { SidebarMenuDemoComponent } from './pages/sidebar-menu/sidebar-menu.component';
 import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
 import { ShadowsComponent } from './pages/shadows/shadows.component';
+import { CheckboxesComponent } from './pages/checkboxes/checkboxes.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'themes', component: ThemesComponent, title: 'Themes - UI Components Library' },
   { path: 'inputs', component: InputsComponent, title: 'Inputs - UI Components Library' },
   { path: 'select', component: SelectComponent, title: 'Select - UI Components Library' },
+  { path: 'checkbox', component: CheckboxesComponent, title: 'Checkbox - UI Components Library' },
   { path: 'sidebar-menu', component: SidebarMenuDemoComponent, title: 'Sidebar Menu - UI Components Library' },
   { path: 'project-starter', component: ProjectStarterComponent, title: 'Project Starter - UI Components Library' },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
