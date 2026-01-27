@@ -5,6 +5,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
+import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
 
 type ShadowKey = string;
 const SHADOW_MAP = SHADOWS as Record<string, string>;
@@ -12,7 +13,7 @@ const SHADOW_MAP = SHADOWS as Record<string, string>;
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocDemoViewportComponent, ThemeScopeDirective],
+  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

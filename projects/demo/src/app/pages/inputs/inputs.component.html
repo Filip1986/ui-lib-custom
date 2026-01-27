@@ -8,50 +8,74 @@
     <h2>Playground</h2>
 
     <div class="doc-controls">
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <button class="chip" [class.active]="variant() === v" (click)="setVariant(v)">{{ v }}</button>
-          }
+      <app-doc-control-group title="Style" description="Variant, input type, and label float behavior." [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setVariant(v)">{{ v }}</ui-lib-button>
+            }
+          </div>
+          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
         </div>
-        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
-      </div>
 
-      <div class="control">
-        <label>Type</label>
-        <div class="chips">
-          @for (t of types; track t) {
-            <button class="chip" [class.active]="inputType() === t" (click)="setType(t)">{{ t }}</button>
-          }
+        <div class="control">
+          <label>Type</label>
+          <div class="chips">
+            @for (t of types; track t) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="inputType() === t ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setType(t)">{{ t }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
 
-      <div class="control">
-        <label>Label float</label>
-        <div class="chips">
-          @for (lf of labelFloats; track lf) {
-            <button class="chip" [class.active]="labelFloat() === lf" (click)="setLabelFloat(lf)">{{ lf }}</button>
-          }
+        <div class="control">
+          <label>Label float</label>
+          <div class="chips">
+            @for (lf of labelFloats; track lf) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="labelFloat() === lf ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setLabelFloat(lf)">{{ lf }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
+      </app-doc-control-group>
 
-      <div class="toggles">
-        <label><input type="checkbox" [checked]="showCounter()" (change)="showCounter.set($any($event.target).checked)"> Show counter</label>
-        <label><input type="checkbox" [checked]="showClear()" (change)="showClear.set($any($event.target).checked)"> Show clear</label>
-        <label><input type="checkbox" [checked]="showToggle()" (change)="showToggle.set($any($event.target).checked)"> Password toggle</label>
-        <label><input type="checkbox" [checked]="required()" (change)="required.set($any($event.target).checked)"> Required</label>
-      </div>
+      <app-doc-control-group title="Behavior" description="Toggle helpers and validation.">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="showCounter()" (change)="showCounter.set($any($event.target).checked)"> Show counter</label>
+          <label><input type="checkbox" [checked]="showClear()" (change)="showClear.set($any($event.target).checked)"> Show clear</label>
+          <label><input type="checkbox" [checked]="showToggle()" (change)="showToggle.set($any($event.target).checked)"> Password toggle</label>
+          <label><input type="checkbox" [checked]="required()" (change)="required.set($any($event.target).checked)"> Required</label>
+        </div>
+      </app-doc-control-group>
 
-      <div class="control">
-        <label>Label</label>
-        <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
-      </div>
+      <app-doc-control-group title="Content" description="Update labels and placeholder copy.">
+        <div class="control">
+          <label>Label</label>
+          <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
+        </div>
 
-      <div class="control">
-        <label>Placeholder</label>
-        <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
-      </div>
+        <div class="control">
+          <label>Placeholder</label>
+          <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
+        </div>
+      </app-doc-control-group>
     </div>
 
     <app-doc-demo-viewport>

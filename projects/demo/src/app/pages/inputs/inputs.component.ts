@@ -7,11 +7,12 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
+import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
 
 @Component({
   selector: 'app-inputs',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibInput, Button, DocPageLayoutComponent, DocDemoViewportComponent, ThemeScopeDirective],
+  imports: [CommonModule, FormsModule, UiLibInput, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

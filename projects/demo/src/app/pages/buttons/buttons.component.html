@@ -11,66 +11,100 @@
     <p>Configure variant, appearance, color, size, and state to preview the button.</p>
 
     <div class="doc-controls">
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <button class="chip" [class.active]="variant() === v" (click)="selectVariant(v)">{{ v }}</button>
-          }
+      <app-doc-control-group title="Style" description="Variant, appearance, color, size, and icon alignment." [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="selectVariant(v)">{{ v }}</ui-lib-button>
+            }
+          </div>
+          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
         </div>
-        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
-      </div>
 
-      <div class="control">
-        <label>Appearance</label>
-        <div class="chips">
-          @for (a of appearances; track a) {
-            <button class="chip" [class.active]="appearance() === a" (click)="appearance.set(a)">{{ a }}</button>
-          }
+        <div class="control">
+          <label>Appearance</label>
+          <div class="chips">
+            @for (a of appearances; track a) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="appearance() === a ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="appearance.set(a)">{{ a }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
 
-      <div class="control">
-        <label>Color</label>
-        <div class="chips">
-          @for (c of colors; track c) {
-            <button class="chip" [class.active]="color() === c" (click)="color.set(c)">{{ c }}</button>
-          }
+        <div class="control">
+          <label>Color</label>
+          <div class="chips">
+            @for (c of colors; track c) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="color() === c ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="color.set(c)">{{ c }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
 
-      <div class="control">
-        <label>Size</label>
-        <div class="chips">
-          @for (s of sizes; track s) {
-            <button class="chip" [class.active]="size() === s" (click)="size.set(s)">{{ s }}</button>
-          }
+        <div class="control">
+          <label>Size</label>
+          <div class="chips">
+            @for (s of sizes; track s) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="size() === s ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="size.set(s)">{{ s }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
 
-      <div class="control">
-        <label>Icon position</label>
-        <div class="chips">
-          @for (p of iconPositions; track p) {
-            <button class="chip" [class.active]="iconPosition() === p" (click)="iconPosition.set(p)">{{ p }}</button>
-          }
+        <div class="control">
+          <label>Icon position</label>
+          <div class="chips">
+            @for (p of iconPositions; track p) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="iconPosition() === p ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="iconPosition.set(p)">{{ p }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
+      </app-doc-control-group>
 
-      <div class="toggles">
-        <label><input type="checkbox" [checked]="disabled()" (change)="disabled.set($any($event.target).checked)"> Disabled</label>
-        <label><input type="checkbox" [checked]="loading()" (change)="loading.set($any($event.target).checked)"> Loading</label>
-        <label><input type="checkbox" [checked]="fullWidth()" (change)="fullWidth.set($any($event.target).checked)"> Full width</label>
-      </div>
+      <app-doc-control-group title="State & content" description="Toggle behavior and update the label.">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="disabled()" (change)="disabled.set($any($event.target).checked)"> Disabled</label>
+          <label><input type="checkbox" [checked]="loading()" (change)="loading.set($any($event.target).checked)"> Loading</label>
+          <label><input type="checkbox" [checked]="fullWidth()" (change)="fullWidth.set($any($event.target).checked)"> Full width</label>
+        </div>
 
-      <div class="control">
-        <label>Label</label>
-        <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
-      </div>
+        <div class="control">
+          <label>Label</label>
+          <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
+        </div>
 
-      <div class="control">
-        <label><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
-      </div>
+        <div class="control">
+          <label class="inline-toggle"><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
+        </div>
+      </app-doc-control-group>
     </div>
 
     <app-doc-demo-viewport>

@@ -11,66 +11,83 @@
     <p>Pick variant, elevation, borders, and content.</p>
 
     <div class="doc-controls">
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <button class="chip" [class.active]="variant() === v" (click)="selectVariant(v)">{{ v }}</button>
-          }
+      <app-doc-control-group title="Style & surface" description="Variant, elevation, shadow, and surface colors." [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="selectVariant(v)">{{ v }}</ui-lib-button>
+            }
+          </div>
+          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
         </div>
-        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
-      </div>
 
-      <div class="control">
-        <label>Elevation</label>
-        <div class="chips">
-          @for (e of elevations; track e) {
-            <button class="chip" [class.active]="elevation() === e" (click)="elevation.set(e)">{{ e }}</button>
-          }
+        <div class="control">
+          <label>Elevation</label>
+          <div class="chips">
+            @for (e of elevations; track e) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="elevation() === e ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="elevation.set(e)">{{ e }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
 
-      <div class="control">
-        <label>Shadow</label>
-        <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
-          @for (s of shadowOptions; track s) {
-            <option [value]="s">{{ s }}</option>
-          }
-        </select>
-      </div>
-
-      <div class="control two-cols">
-        <div>
-          <label>Header BG</label>
-          <input type="color" [value]="headerBg() || '#ffffff'" (input)="headerBg.set($any($event.target).value)">
-          <input type="text" placeholder="#f5f7fb" [value]="headerBg()" (input)="headerBg.set($any($event.target).value)">
+        <div class="control">
+          <label>Shadow</label>
+          <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
+            @for (s of shadowOptions; track s) {
+              <option [value]="s">{{ s }}</option>
+            }
+          </select>
         </div>
-        <div>
-          <label>Footer BG</label>
-          <input type="color" [value]="footerBg() || '#ffffff'" (input)="footerBg.set($any($event.target).value)">
-          <input type="text" placeholder="#eef2ff" [value]="footerBg()" (input)="footerBg.set($any($event.target).value)">
+
+        <div class="control two-cols">
+          <div>
+            <label>Header BG</label>
+            <input type="color" [value]="headerBg() || '#ffffff'" (input)="headerBg.set($any($event.target).value)">
+            <input type="text" placeholder="#f5f7fb" [value]="headerBg()" (input)="headerBg.set($any($event.target).value)">
+          </div>
+          <div>
+            <label>Footer BG</label>
+            <input type="color" [value]="footerBg() || '#ffffff'" (input)="footerBg.set($any($event.target).value)">
+            <input type="text" placeholder="#eef2ff" [value]="footerBg()" (input)="footerBg.set($any($event.target).value)">
+          </div>
         </div>
-      </div>
+      </app-doc-control-group>
 
-      <div class="toggles">
-        <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
-        <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
-        <label><input type="checkbox" [checked]="showHeader()" (change)="showHeader.set($any($event.target).checked)"> Show header</label>
-        <label><input type="checkbox" [checked]="showFooter()" (change)="showFooter.set($any($event.target).checked)"> Show footer</label>
-      </div>
+      <app-doc-control-group title="Layout & borders" description="Toggle borders, hover, header, and footer.">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
+          <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
+          <label><input type="checkbox" [checked]="showHeader()" (change)="showHeader.set($any($event.target).checked)"> Show header</label>
+          <label><input type="checkbox" [checked]="showFooter()" (change)="showFooter.set($any($event.target).checked)"> Show footer</label>
+        </div>
+      </app-doc-control-group>
 
-      <div class="control">
-        <label>Title</label>
-        <input type="text" [value]="title()" (input)="title.set($any($event.target).value)">
-      </div>
-      <div class="control">
-        <label>Body</label>
-        <textarea rows="3" [value]="body()" (input)="body.set($any($event.target).value)"></textarea>
-      </div>
-
-      <div class="control">
-        <label><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
-      </div>
+      <app-doc-control-group title="Content & theme" description="Edit text content or enable local theme overrides.">
+        <div class="control">
+          <label>Title</label>
+          <input type="text" [value]="title()" (input)="title.set($any($event.target).value)">
+        </div>
+        <div class="control">
+          <label>Body</label>
+          <textarea rows="3" [value]="body()" (input)="body.set($any($event.target).value)"></textarea>
+        </div>
+        <div class="control">
+          <label class="inline-toggle"><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
+        </div>
+      </app-doc-control-group>
     </div>
 
     <app-doc-demo-viewport [shadow]="shadowValue()">

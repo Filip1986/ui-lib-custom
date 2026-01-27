@@ -1,0 +1,11 @@
+<div class="control-group__header" *ngIf="title() || description()">
+  <div>
+    <div class="control-group__title" *ngIf="title()">{{ title() }}</div>
+    <p class="control-group__description" *ngIf="description()">{{ description() }}</p>
+  </div>
+  <ng-content select="[actions]"></ng-content>
+</div>
+
+<div class="control-group__grid">
+  <ng-content></ng-content>
+</div>

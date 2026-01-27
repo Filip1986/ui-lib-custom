@@ -1,14 +1,15 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
-import { Badge, Inline, BadgeColor, BadgeVariant, BadgeSize } from 'ui-lib-custom';
+import { Badge, Inline, BadgeColor, BadgeVariant, BadgeSize, Button } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-group.component';
 
 @Component({
   selector: 'app-badges',
   standalone: true,
-  imports: [Badge, DocPageLayoutComponent, DocCodeSnippetComponent, DocDemoViewportComponent],
+  imports: [Badge, Button, DocPageLayoutComponent, DocCodeSnippetComponent, DocControlGroupComponent, DocDemoViewportComponent],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

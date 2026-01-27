@@ -8,27 +8,39 @@
     <h2>Playground</h2>
 
     <div class="doc-controls">
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <button class="chip" [class.active]="variant() === v" (click)="setVariant(v)">{{ v }}</button>
-          }
+      <app-doc-control-group title="Style" description="Choose variant and follow theme defaults.">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setVariant(v)">{{ v }}</ui-lib-button>
+            }
+          </div>
+          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
         </div>
-        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
-      </div>
+      </app-doc-control-group>
 
-      <div class="toggles">
-        <label><input type="checkbox" [checked]="multiple()" (change)="toggleMultiple($any($event.target).checked)"> Multiple</label>
-        <label><input type="checkbox" [checked]="searchable()" (change)="toggleSearchable($any($event.target).checked)"> Searchable</label>
-        <label><input type="checkbox" [checked]="disabled()" (change)="toggleDisabled($any($event.target).checked)"> Disabled</label>
-        <label><input type="checkbox" [checked]="loading()" (change)="toggleLoading($any($event.target).checked)"> Loading</label>
-      </div>
+      <app-doc-control-group title="Behavior" description="Toggle selection, search, and states.">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="multiple()" (change)="toggleMultiple($any($event.target).checked)"> Multiple</label>
+          <label><input type="checkbox" [checked]="searchable()" (change)="toggleSearchable($any($event.target).checked)"> Searchable</label>
+          <label><input type="checkbox" [checked]="disabled()" (change)="toggleDisabled($any($event.target).checked)"> Disabled</label>
+          <label><input type="checkbox" [checked]="loading()" (change)="toggleLoading($any($event.target).checked)"> Loading</label>
+        </div>
+      </app-doc-control-group>
 
-      <div class="control">
-        <label>Placeholder</label>
-        <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
-      </div>
+      <app-doc-control-group title="Content" description="Set placeholder text.">
+        <div class="control">
+          <label>Placeholder</label>
+          <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
+        </div>
+      </app-doc-control-group>
     </div>
 
     <app-doc-demo-viewport>
