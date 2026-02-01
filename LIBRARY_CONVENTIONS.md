@@ -9,6 +9,9 @@
 3. Theme presets that can be saved/loaded as JSON configs
 4. A demo app with live preview and theme editor
 
+## AI Agent & Development Environment
+- **Terminal**: Use **PowerShell** for all terminal commands. Do not use bash, cmd, or other shells.
+- **Custom Components First**: When building new features, components, or demos within this library, always prefer using the library's own custom components (`ui-lib-*`) over third-party alternatives (e.g., PrimeNG, Angular Material) whenever a suitable custom component exists. This ensures dogfooding, consistency, and helps identify gaps in the component library.
 
 ## Framework & Architecture
 - Angular 21+, standalone components only, `ChangeDetectionStrategy.OnPush`, signals for inputs/derived state.
@@ -63,6 +66,7 @@
 - Update `docs/` when adding or changing components (API, usage, theming knobs, accessibility notes).
 - Demo app lives in `projects/demo`; provide at least one example per component and per theme.
 - Demos and docs should showcase the Angular 21 block syntax and SCSS usage (e.g., `@if`/`@for` plus token-driven SCSS snippets).
+- Use TS path aliases for demo code: `@demo/shared/*` for shared utilities/components and `@demo/pages/*` for pages; keep them updated in `tsconfig.json` when moving files.
 
 ## Contribution Guidelines
 - Maintain OnPush + signals + standalone pattern.
@@ -74,5 +78,3 @@
 - **Themes** define colors, spacing, and shape via CSS variables
 - Variants are chosen at component level; themes apply globally
 - All components must react to theme changes without rebuild
-
-- Use TS path aliases for demo code: `@demo/shared/*` for shared utilities/components and `@demo/pages/*` for pages; keep them updated in `tsconfig.json` when moving files.
