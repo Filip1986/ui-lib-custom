@@ -3,11 +3,6 @@
 }
 
 .doc-toc {
-  padding: 1rem 1rem 1.25rem;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
   max-height: calc(100vh - var(--doc-top-offset, 80px) - 16px);
   overflow: auto;
   scrollbar-width: thin;
