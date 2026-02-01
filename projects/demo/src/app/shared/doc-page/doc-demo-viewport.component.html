@@ -1,17 +1,15 @@
 <div class="doc-demo-viewport">
 
-  <ui-lib-card variant="material" class="doc-demo-card" [bordered]="true" [showFooter]="false" [showHeader]="false">
-    <app-viewport-preview
-      #preview="viewportPreview"
-      mode="inline"
-      [showToolbar]="false">
-      <div
-        class="doc-demo-viewport__content"
-        [style.--uilib-card-shadow]="shadow()"
-        [style.--uilib-card-shadow-hover]="shadow()"
-        [style.--uilib-button-shadow]="shadow()">
-        <ng-content></ng-content>
-      </div>
-    </app-viewport-preview>
-  </ui-lib-card>
+  <app-viewport-preview
+    #preview="viewportPreview"
+    mode="inline"
+    [showToolbar]="false">
+    <div
+      class="doc-demo-viewport__content"
+      [style.--uilib-card-shadow]="shadow()"
+      [style.--uilib-card-shadow-hover]="shadow()"
+      [style.--uilib-button-shadow]="shadow()">
+      <ng-content></ng-content>
+    </div>
+  </app-viewport-preview>
 </div>
