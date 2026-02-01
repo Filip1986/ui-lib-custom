@@ -31,9 +31,9 @@
     <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
       <div card-header>Density</div>
       <div class="density-controls">
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewportDensity() === 'default'">Default</ui-lib-button>
+        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewportDensity() === 'comfortable'">Comfortable</ui-lib-button>
+        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewportDensity() === 'compact'">Compact</ui-lib-button>
       </div>
     </ui-lib-card>
   </div>

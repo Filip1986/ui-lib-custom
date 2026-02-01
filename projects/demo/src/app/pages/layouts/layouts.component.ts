@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Card, Stack, Inline, Grid, Container, Button } from 'ui-lib-custom';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -25,41 +25,53 @@ export class LayoutsComponent {
     { id: 'themed-layouts', label: 'Themed Layouts' },
   ];
 
-  @ViewChild('layoutsViewport') viewport?: DocDemoViewportComponent;
+  @ViewChildren(DocDemoViewportComponent) viewports?: QueryList<DocDemoViewportComponent>;
+
+  private primaryViewport(): DocDemoViewportComponent | undefined {
+    return this.viewports?.first;
+  }
 
   get viewportPresets() {
-    return this.viewport?.presets() ?? [];
+    return this.primaryViewport()?.presets() ?? [];
   }
 
   viewportDisplayWidth() {
-    return this.viewport?.displayWidth() ?? 0;
+    return this.primaryViewport()?.displayWidth() ?? 0;
   }
 
   viewportDisplayHeight() {
-    return this.viewport?.displayHeight() ?? 0;
+    return this.primaryViewport()?.displayHeight() ?? 0;
   }
 
   viewportCustomWidth() {
-    return this.viewport?.customWidth() ?? 0;
+    return this.primaryViewport()?.customWidth() ?? 0;
+  }
+
+  viewportDensity() {
+    return this.primaryViewport()?.densityValue() ?? 'default';
+  }
+
+  private forEachViewport(fn: (vp: DocDemoViewportComponent) => void) {
+    this.viewports?.forEach(fn);
   }
 
   setViewportCustomWidth(value: number) {
-    this.viewport?.setCustomWidth(value);
+    this.forEachViewport(vp => vp.setCustomWidth(value));
   }
 
   setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
-    this.viewport?.setPreset(preset);
+    this.forEachViewport(vp => vp.setPreset(preset));
   }
 
   applyViewportCustom() {
-    this.viewport?.setCustom();
+    this.forEachViewport(vp => vp.setCustom());
   }
 
   rotateViewport() {
-    this.viewport?.rotate();
+    this.forEachViewport(vp => vp.rotate());
   }
 
   setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
-    this.viewport?.setDensity(value);
+    this.forEachViewport(vp => vp.setDensity(value));
   }
 }
