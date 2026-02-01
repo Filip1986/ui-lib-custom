@@ -15,8 +15,13 @@
           size="lg"
         />
       }
-      <div class="card-header-content">
-        <ng-content select="[card-header]"></ng-content>
+      <div class="card-header-text">
+        <div class="card-title">
+          <ng-content select="[card-header]"></ng-content>
+        </div>
+        @if (subtitle()) {
+          <div class="card-subtitle">{{ subtitle() }}</div>
+        }
       </div>
       @if (closable()) {
         <ui-lib-icon

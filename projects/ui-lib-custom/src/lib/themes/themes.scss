@@ -1,5 +1,11 @@
 :root,
 [data-theme="light"] {
+  /* Spacing scale */
+  --uilib-space-2: 0.5rem;
+  --uilib-space-3: 0.75rem;
+  --uilib-space-4: 1rem;
+  --uilib-space-5: 1.25rem;
+
   /* Core palette */
   --uilib-color-primary-100: #bbdefb;
   --uilib-color-primary-500: #2196f3;
@@ -49,7 +55,7 @@
   --uilib-button-min-height: var(--uilib-touch-size-min);
 
   --uilib-card-padding-base: 1rem; /* inset-md */
-  --uilib-card-header-padding-base: 0.5rem; /* inset-sm */
+  --uilib-card-header-padding-base: 0.75rem 1rem; /* inset-sm */
   --uilib-card-body-padding-base: 1rem; /* inset-md */
   --uilib-card-footer-padding-base: 0.5rem; /* inset-sm */
 
@@ -216,7 +222,7 @@
   --uilib-button-min-height: var(--uilib-touch-size-min);
 
   --uilib-card-padding-base: 1rem;
-  --uilib-card-header-padding-base: 0.5rem;
+  --uilib-card-header-padding-base: var(--uilib-space-3) var(--uilib-space-4);
   --uilib-card-body-padding-base: 1rem;
   --uilib-card-footer-padding-base: 0.5rem;
 

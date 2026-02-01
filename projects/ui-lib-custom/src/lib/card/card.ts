@@ -1,5 +1,5 @@
 import {
-  Component, ChangeDetectionStrategy, input, computed, output
+  Component, ChangeDetectionStrategy, input, computed, output, ViewEncapsulation
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Icon } from '../icon/icon';
@@ -15,6 +15,7 @@ export type CardElevation = 'none' | 'low' | 'medium' | 'high';
   templateUrl: './card.html',
   styleUrl: './card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Card {
   variant = input<CardVariant>('material');
@@ -28,6 +29,7 @@ export class Card {
   footerBg = input<string | null>(null);
   headerIcon = input<SemanticIcon | string | null>(null);
   closable = input<boolean>(false);
+  subtitle = input<string | null>(null);
 
   closed = output<void>();
 

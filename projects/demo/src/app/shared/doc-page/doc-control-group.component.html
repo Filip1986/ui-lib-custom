@@ -3,19 +3,14 @@
   [bordered]="true"
   [showFooter]="false"
   [showHeader]="headerVisible()"
-  [style.--uilib-card-header-padding]="'0.75rem 1rem'"
+  [subtitle]="description() || null"
   [style.--uilib-card-body-padding]="'1rem'"
 >
   @if (headerVisible()) {
     <div card-header class="control-group__header">
-      <div>
-        @if (title()) {
-          <div class="control-group__title">{{ title() }}</div>
-        }
-        @if (description()) {
-          <p class="control-group__description">{{ description() }}</p>
-        }
-      </div>
+      @if (title()) {
+        <div class="control-group__title">{{ title() }}</div>
+      }
       <ng-content select="[actions]"></ng-content>
     </div>
   }

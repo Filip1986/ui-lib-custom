@@ -1,15 +1,9 @@
 :host {
-  /* Spacing tokens */
-  --uilib-space-2: 0.5rem;
-  --uilib-space-3: 0.75rem;
-  --uilib-space-4: 1rem;
-  --uilib-space-5: 1.25rem;
-
   /* Component defaults (all color-sensitive values via CSS vars) */
   --uilib-card-border-width: 0;
-  --uilib-card-header-padding: var(--uilib-space-4) var(--uilib-space-5);
-  --uilib-card-body-padding: 1.5rem;
-  --uilib-card-footer-padding: var(--uilib-space-4) var(--uilib-space-5);
+  --uilib-card-header-padding: var(--uilib-card-header-padding-base, var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem));
+  --uilib-card-body-padding: var(--uilib-card-body-padding-base, 1.5rem);
+  --uilib-card-footer-padding: var(--uilib-card-footer-padding-base, var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem));
 
   display: block;
 }
@@ -27,15 +21,34 @@
 
   &-header {
     display: flex;
-    align-items: center;
-    gap: var(--uilib-space-2);
+    align-items: flex-start;
+    gap: var(--uilib-space-2, 0.5rem);
     padding: var(--uilib-card-header-padding);
     background-color: var(--uilib-card-header-bg, var(--uilib-surface-alt, var(--uilib-card-bg, inherit)));
     border-bottom: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
+    font-family: var(--uilib-font-heading, inherit), sans-serif;
+  }
+
+  .card-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+    min-height: calc((1.125rem * 1.4) + 0.125rem + (0.95rem * 1.4));
+    justify-content: center;
+  }
+
+  .card-title {
     font-weight: 600;
     font-size: 1.125rem;
-    font-family: var(--uilib-font-heading, inherit), sans-serif;
+    line-height: 1.4;
     color: var(--uilib-card-text-color, inherit);
+  }
+
+  .card-subtitle {
+    font-size: 0.95rem;
+    color: var(--uilib-muted, #4b5563);
+    line-height: 1.4;
   }
 
   &-body {
