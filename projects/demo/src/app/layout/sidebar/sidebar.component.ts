@@ -86,6 +86,11 @@ export class SidebarComponent {
           label: 'Project Starter',
           icon: 'pi pi-circle',
           route: '/project-starter'
+        },
+        {
+          label: 'Icons',
+          icon: 'pi pi-circle',
+          route: '/icons'
         }
       ]
     },

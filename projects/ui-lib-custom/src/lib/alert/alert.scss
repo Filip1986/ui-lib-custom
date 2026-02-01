@@ -1,0 +1,31 @@
+.alert {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--uilib-inline-sm, 0.5rem);
+  align-items: center;
+  padding: var(--uilib-inline-md, 1rem);
+  border-radius: var(--uilib-radius-md, 0.5rem);
+  background-color: var(--alert-bg, var(--uilib-surface, #fff));
+  color: var(--alert-fg, currentColor);
+
+  &-material {
+    --alert-bg: var(--uilib-surface, #fff);
+  }
+
+  &-bootstrap {
+    --alert-bg: var(--uilib-color-primary-50, #eef2ff);
+  }
+
+  &-minimal {
+    border: 1px solid var(--uilib-border, currentColor);
+  }
+}
+
+.alert-icon {
+  color: inherit;
+}
+
+.alert-close {
+  cursor: pointer;
+  color: inherit;
+}

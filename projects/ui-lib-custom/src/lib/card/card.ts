@@ -1,7 +1,9 @@
 import {
-  Component, ChangeDetectionStrategy, input, computed
+  Component, ChangeDetectionStrategy, input, computed, output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Icon } from '../icon/icon';
+import { SemanticIcon } from '../icon/icon.semantics';
 
 export type CardVariant = 'material' | 'bootstrap' | 'minimal';
 export type CardElevation = 'none' | 'low' | 'medium' | 'high';
@@ -9,7 +11,7 @@ export type CardElevation = 'none' | 'low' | 'medium' | 'high';
 @Component({
   selector: 'ui-lib-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Icon],
   templateUrl: './card.html',
   styleUrl: './card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +26,10 @@ export class Card {
   shadow = input<string | null>(null);
   headerBg = input<string | null>(null);
   footerBg = input<string | null>(null);
+  headerIcon = input<SemanticIcon | string | null>(null);
+  closable = input<boolean>(false);
+
+  closed = output<void>();
 
   headerVisible = computed(() => this.showHeader() !== false);
   footerVisible = computed(() => this.showFooter() !== false);
@@ -45,4 +51,8 @@ export class Card {
 
     return classes.join(' ');
   });
+
+  onClose() {
+    this.closed.emit();
+  }
 }

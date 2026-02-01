@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ThemeConfigService, ThemePreset, ThemePresetColors, ThemeVariant, SHADOWS } from 'ui-lib-custom';
 import { GoogleFontsService } from './google-fonts.service';
 import { FontPairingService } from './font-pairing.service';
+import { IconEditorPanel } from './panels/icon-editor-panel';
+import { IconPreview } from './icon-preview';
 
 interface SelectOption<T> {
   label: string;
@@ -15,7 +17,7 @@ const GOOGLE_FONTS_API_KEY = 'AIzaSyDarBrNj_ISn3VSURsfzSLmhVhnbHZ_CcU';
 @Component({
   selector: 'app-theme-editor',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IconEditorPanel, IconPreview],
   templateUrl: './theme-editor.component.html',
   styleUrl: './theme-editor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

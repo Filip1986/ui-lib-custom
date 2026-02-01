@@ -1,0 +1,52 @@
+<div class="editor-panel">
+  <h3>Icon Settings</h3>
+
+  <div class="editor-field">
+    <label>Default Library</label>
+    <select [value]="config().defaultLibrary" (change)="onLibraryChange($event)">
+      @for (lib of libraries; track lib) {
+        <option [value]="lib">{{ lib | titlecase }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="editor-field">
+    <label>Default Size</label>
+    <select [value]="config().defaultSize" (change)="onSizeChange($event)">
+      @for (size of sizes; track size) {
+        <option [value]="size">{{ size }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="editor-section">
+    <h4>Size Scale</h4>
+    @for (size of sizes; track size) {
+      <div class="size-editor">
+        <label>{{ size }}</label>
+        <input
+          type="text"
+          [value]="config().sizes[size]"
+          (input)="onSizeValueChange(size, $event)"
+        />
+        <ui-lib-icon name="star" [size]="size" class="size-preview" />
+      </div>
+    }
+  </div>
+
+  <div class="editor-section">
+    <h4>Preview</h4>
+    <div class="icon-preview-grid">
+      @for (icon of previewIcons; track icon) {
+        <div class="preview-item">
+          <ui-lib-icon
+            [name]="icon"
+            [library]="config().defaultLibrary"
+            size="lg"
+          />
+          <span>{{ icon }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>

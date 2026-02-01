@@ -26,6 +26,9 @@
   flex-direction: column;
 
   &-header {
+    display: flex;
+    align-items: center;
+    gap: var(--uilib-space-2);
     padding: var(--uilib-card-header-padding);
     background-color: var(--uilib-card-header-bg, var(--uilib-surface-alt, var(--uilib-card-bg, inherit)));
     border-bottom: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
@@ -141,5 +144,14 @@
         opacity: 0.9;
       }
     }
+  }
+
+  .card-header-icon,
+  .card-close-icon {
+    flex-shrink: 0;
+  }
+
+  .card-close-icon {
+    cursor: pointer;
   }
 }

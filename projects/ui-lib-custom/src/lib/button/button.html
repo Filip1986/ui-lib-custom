@@ -7,6 +7,33 @@
   [style.--uilib-button-shadow]="shadow()"
   [style.--uilib-button-shadow-hover]="shadow()"
 >
-  <span class="btn-spinner" *ngIf="loading()" aria-hidden="true"></span>
-  <ng-content />
+  @if (iconPosition() === 'left' && icon()) {
+  <ui-lib-icon
+    class="btn-icon btn-icon--left"
+    [name]="icon()!"
+    [size]="iconSize()"
+    [variant]="variant()"
+  />
+  }
+
+  <span class="btn-content">
+    <ng-content />
+  </span>
+
+  @if (iconPosition() === 'right' && icon()) {
+  <ui-lib-icon
+    class="btn-icon btn-icon--right"
+    [name]="icon()!"
+    [size]="iconSize()"
+    [variant]="variant()"
+  />
+  }
+
+  @if (loading()) {
+  <ui-lib-icon
+    class="btn-icon btn-icon--loading"
+    name="spinner"
+    [size]="iconSize()"
+  />
+  }
 </button>

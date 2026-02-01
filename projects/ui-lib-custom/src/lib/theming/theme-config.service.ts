@@ -4,7 +4,8 @@ import { BORDER_RADIUS, SHADOWS } from '../design-tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
 import lightPreset from './presets/light.json';
-import { DeepPartial, ThemePreset, ThemePresetOverrides, ThemeShapeRadius } from './theme-preset.interface';
+import { ICON_SIZES } from '../icon/icon.types';
+import { DeepPartial, ThemePreset, ThemePresetOverrides, ThemeShapeRadius, ThemeIconConfig } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
 
 type LoadOptions = {
@@ -20,11 +21,16 @@ export class ThemeConfigService {
   private readonly doc = inject(DOCUMENT);
   private readonly storageKey = 'ui-lib-custom.theme';
   private readonly savedThemesKey = 'ui-lib-custom.saved-themes';
-  private readonly defaultPreset: ThemePreset = lightPreset as ThemePreset;
+  private readonly defaultIconConfig: ThemeIconConfig = {
+    defaultLibrary: 'lucide',
+    defaultSize: 'md',
+    sizes: { ...ICON_SIZES },
+  };
+  private readonly defaultPreset: ThemePreset = this.ensureIconDefaults(lightPreset as ThemePreset);
   private readonly builtInPresets: Record<string, ThemePreset> = {
-    light: lightPreset as ThemePreset,
-    dark: darkPreset as ThemePreset,
-    'brand-example': brandExamplePreset as ThemePreset,
+    light: this.ensureIconDefaults(lightPreset as ThemePreset),
+    dark: this.ensureIconDefaults(darkPreset as ThemePreset),
+    'brand-example': this.ensureIconDefaults(brandExamplePreset as ThemePreset),
   };
 
   private readonly hostRef = signal<HTMLElement | null>(this.doc?.documentElement ?? null);
@@ -38,7 +44,7 @@ export class ThemeConfigService {
   constructor() {
     const stored = this.readStoredPreset();
     const initial = stored
-      ? this.mergePresets(this.defaultPreset, stored)
+      ? this.ensureIconDefaults(this.mergePresets(this.defaultPreset, stored))
       : this.defaultPreset;
     this.presetSignal.set(initial);
     this.applyToRoot(initial);
@@ -61,7 +67,7 @@ export class ThemeConfigService {
       ? options?.base ?? this.presetSignal() ?? this.defaultPreset
       : options?.base ?? this.defaultPreset;
 
-    const resolved = this.mergePresets(base, preset);
+    const resolved = this.ensureIconDefaults(this.mergePresets(base, preset));
     this.presetSignal.set(resolved);
 
     if (persist) {
@@ -117,7 +123,8 @@ export class ThemeConfigService {
   }
 
   exportAsJSON(preset: ThemePreset = this.presetSignal(), download = false): string {
-    const json = JSON.stringify(preset, null, 2);
+    const normalized = this.ensureIconDefaults(preset);
+    const json = JSON.stringify(normalized, null, 2);
     if (download) {
       saveAs('theme.json', json, 'application/json');
     }
@@ -195,7 +202,8 @@ export class ThemeConfigService {
       names.forEach((name) => set(name, value));
     };
 
-    const { colors, shape, typography, shadow, cardShadow, buttonShadow } = preset;
+    const presetWithIcons = this.ensureIconDefaults(preset);
+    const { colors, shape, typography, shadow, cardShadow, buttonShadow, icons } = presetWithIcons;
 
     applyColor(colors.primary,
       '--uilib-color-primary-100',
@@ -332,6 +340,9 @@ export class ThemeConfigService {
     set('--uilib-shadow-sm', shadowValueButton);
     set('--uilib-shadow-md', shadowValueButton);
 
+    const iconSizes = icons?.sizes ?? this.defaultIconConfig.sizes;
+    Object.entries(iconSizes).forEach(([key, value]) => set(`--uilib-icon-size-${key}`, value));
+
     return vars;
   }
 
@@ -436,6 +447,15 @@ export class ThemeConfigService {
       throw new Error(`Failed to load theme preset from ${url} (${response.status})`);
     }
     return response.json();
+  }
+
+  private ensureIconDefaults(preset: ThemePreset): ThemePreset {
+    const icons: ThemeIconConfig = {
+      defaultLibrary: preset.icons?.defaultLibrary ?? this.defaultIconConfig.defaultLibrary,
+      defaultSize: preset.icons?.defaultSize ?? this.defaultIconConfig.defaultSize,
+      sizes: { ...this.defaultIconConfig.sizes, ...(preset.icons?.sizes ?? {}) },
+    };
+    return { ...preset, icons };
   }
 }
 

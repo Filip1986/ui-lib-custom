@@ -7,7 +7,27 @@
 >
   @if (headerVisible()) {
     <div class="card-header">
-      <ng-content select="[card-header]"></ng-content>
+      @if (headerIcon()) {
+        <ui-lib-icon
+          class="card-header-icon"
+          [name]="headerIcon()!"
+          [variant]="variant()"
+          size="lg"
+        />
+      }
+      <div class="card-header-content">
+        <ng-content select="[card-header]"></ng-content>
+      </div>
+      @if (closable()) {
+        <ui-lib-icon
+          class="card-close-icon"
+          name="close"
+          [variant]="variant()"
+          size="md"
+          [clickable]="true"
+          (click)="onClose()"
+        />
+      }
     </div>
   }
   <div class="card-body">

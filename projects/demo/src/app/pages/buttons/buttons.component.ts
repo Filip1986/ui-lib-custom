@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant, IconPosition, ThemeConfigService } from 'ui-lib-custom';
+import { Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant, IconButton, IconPosition, ThemeConfigService } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -9,7 +9,7 @@ import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-grou
 
 @Component({
   selector: 'app-buttons',
-  imports: [CommonModule, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
+  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +29,7 @@ export class ButtonsComponent {
   disabled = signal(false);
   loading = signal(false);
   fullWidth = signal(false);
-  iconPosition = signal<IconPosition>('start');
+  iconPosition = signal<IconPosition>('left');
   label = signal('Click me');
 
   useGlobalVariant = signal(true);
@@ -41,7 +41,8 @@ export class ButtonsComponent {
   readonly appearances: ButtonAppearance[] = ['solid', 'outline', 'ghost'];
   readonly sizes: ButtonSize[] = ['small', 'medium', 'large'];
   readonly colors: ButtonColor[] = ['primary', 'secondary', 'success', 'danger', 'warning'];
-  readonly iconPositions: IconPosition[] = ['start', 'end'];
+  readonly iconPositions: IconPosition[] = ['left', 'right'];
+  readonly demoIcon = signal('search');
 
   private readonly globalVars = computed(() => {
     const preset = this.themeService.preset();

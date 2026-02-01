@@ -155,6 +155,16 @@
   --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --uilib-font-heading-weight: 600;
   --uilib-font-body-weight: 400;
+
+  --uilib-icon-size-xs: 0.75rem;
+  --uilib-icon-size-sm: 1rem;
+  --uilib-icon-size-md: 1.25rem;
+  --uilib-icon-size-lg: 1.5rem;
+  --uilib-icon-size-xl: 2rem;
+  --uilib-icon-size-2xl: 2.5rem;
+  --uilib-transition-fast: 150ms ease;
+  --uilib-icon-color: currentColor;
+  --uilib-icon-transition: var(--uilib-transition-fast);
 }
 
 [data-theme="dark"] {
@@ -312,6 +322,16 @@
   --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --uilib-font-heading-weight: 600;
   --uilib-font-body-weight: 400;
+
+  --uilib-icon-size-xs: 0.75rem;
+  --uilib-icon-size-sm: 1rem;
+  --uilib-icon-size-md: 1.25rem;
+  --uilib-icon-size-lg: 1.5rem;
+  --uilib-icon-size-xl: 2rem;
+  --uilib-icon-size-2xl: 2.5rem;
+  --uilib-transition-fast: 150ms ease;
+  --uilib-icon-color: currentColor;
+  --uilib-icon-transition: var(--uilib-transition-fast);
 }
 
 [data-density="comfortable"] {

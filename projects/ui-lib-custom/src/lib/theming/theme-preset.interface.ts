@@ -1,3 +1,5 @@
+import { IconLibrary, IconSize } from '../icon/icon.types';
+
 export type ThemeVariant = 'material' | 'bootstrap' | 'minimal';
 
 export type ThemeShapeRadius = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' | string;
@@ -36,6 +38,12 @@ export interface ThemePresetTypography {
   bodyWeight?: number; // default 400
 }
 
+export interface ThemeIconConfig {
+  defaultLibrary: IconLibrary;
+  defaultSize: IconSize;
+  sizes: Record<IconSize, string>;
+}
+
 export interface ThemePreset {
   name: string;
   variant: ThemeVariant;
@@ -45,6 +53,7 @@ export interface ThemePreset {
   shadow?: string;
   cardShadow?: string;
   buttonShadow?: string;
+  icons?: ThemeIconConfig;
 }
 
 export type ThemePresetOverrides = DeepPartial<ThemePreset>;

@@ -87,6 +87,21 @@
             }
           </div>
         </div>
+
+        <div class="control">
+          <label>Icon</label>
+          <div class="chips">
+            @for (name of ['search','close','menu','arrow-right','check']; track name) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="demoIcon() === name ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="demoIcon.set(name)">{{ name }}</ui-lib-button>
+            }
+          </div>
+        </div>
       </app-doc-control-group>
 
       <app-doc-control-group title="State & content" description="Toggle behavior and update the label.">
@@ -117,15 +132,18 @@
           [disabled]="disabled()"
           [loading]="loading()"
           [fullWidth]="fullWidth()"
-          [iconPosition]="iconPosition()">
-          @if (iconPosition() === 'start') {
-            <i class="pi pi-star"></i>
-          }
+          [iconPosition]="iconPosition()"
+          [icon]="demoIcon()"
+        >
           {{ label() }}
-          @if (iconPosition() === 'end') {
-            <i class="pi pi-arrow-right"></i>
-          }
         </ui-lib-button>
+
+        <ui-lib-icon-button
+          class="demo-icon-only"
+          [variant]="variant()"
+          [icon]="demoIcon()"
+          ariaLabel="Icon button"
+        />
       </div>
     </app-doc-demo-viewport>
   </div>

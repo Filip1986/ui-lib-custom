@@ -1,0 +1,32 @@
+.icon-preview {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.library-preview {
+  display: grid;
+  gap: 0.25rem;
+  align-items: center;
+  justify-items: center;
+  padding: 0.5rem;
+  border: 1px solid var(--uilib-border, currentColor);
+  border-radius: var(--uilib-radius-sm, 0.375rem);
+}
+
+.library-name {
+  font-size: 0.9rem;
+  color: var(--uilib-muted, currentColor);
+}

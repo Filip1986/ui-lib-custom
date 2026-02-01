@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideIcons } from '@ng-icons/core';
+import { lucideAudioWaveform } from '@ng-icons/lucide';
 
 import { Button } from './button';
+import { Icon } from '../icon/icon';
 
 describe('Button', () => {
   let component: Button;
@@ -8,7 +11,8 @@ describe('Button', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Button]
+      imports: [Button, Icon],
+      providers: [provideIcons({ lucideAudioWaveform })],
     })
     .compileComponents();
 
@@ -58,6 +62,6 @@ describe('Button', () => {
     fixture.componentRef.setInput('loading', true);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelector('.btn-spinner')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.btn-icon--loading')).toBeTruthy();
   });
 });

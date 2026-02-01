@@ -27,6 +27,7 @@ export const routes: Routes = [
   { path: 'sidebar-menu', component: SidebarMenuDemoComponent, title: 'Sidebar Menu - UI Components Library' },
   { path: 'project-starter', component: ProjectStarterComponent, title: 'Project Starter - UI Components Library' },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
+  { path: 'icons', loadComponent: () => import('./pages/icons/icons-demo.component').then(m => m.IconsDemoComponent), title: 'Icons - UI Components Library' },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' }
 ];

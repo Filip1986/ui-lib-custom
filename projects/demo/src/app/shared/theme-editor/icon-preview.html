@@ -1,0 +1,23 @@
+<div class="icon-preview">
+  <div class="preview-header">
+    <h4>Icon Library Comparison</h4>
+    <select (change)="onIconSelect($event)">
+      @for (icon of semanticIcons; track icon) {
+        <option [value]="icon" [selected]="icon === selectedIcon()">{{ icon }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="preview-grid">
+    @for (lib of libraries; track lib) {
+      <div class="library-preview">
+        <span class="library-name">{{ lib }}</span>
+        <ui-lib-icon
+          [name]="selectedIcon()"
+          [library]="lib"
+          size="xl"
+        />
+      </div>
+    }
+  </div>
+</div>

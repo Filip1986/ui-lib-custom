@@ -1,0 +1,12 @@
+.ui-lib-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: var(--icon-color, var(--uilib-icon-color, currentColor));
+  transition: var(--uilib-icon-transition, 150ms ease);
+}
+
+.ui-lib-icon--clickable {
+  cursor: pointer;
+}

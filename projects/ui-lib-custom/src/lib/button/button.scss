@@ -82,7 +82,11 @@ button:active:not(.btn-disabled) {
 }
 
 .btn {
-  min-height: var(--uilib-button-min-height, 44px);
+  --btn-icon-gap: var(--uilib-space-2);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--btn-icon-gap);
 
   &-disabled {
     opacity: var(--uilib-button-disabled-opacity);
@@ -193,6 +197,28 @@ button:active:not(.btn-disabled) {
     --btn-border: var(--uilib-button-warning-border);
     --btn-fg: var(--uilib-button-warning-fg);
   }
+
+  .btn-icon {
+    flex-shrink: 0;
+
+    &--loading {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  &.btn-icon-only {
+    padding: var(--uilib-button-padding-y, var(--uilib-space-2));
+    aspect-ratio: 1;
+    justify-content: center;
+  }
+
+  .btn-icon--left {
+    order: 0;
+  }
+
+  .btn-icon--right {
+    order: 2;
+  }
 }
 
 .btn-spinner {
@@ -212,4 +238,9 @@ button:active:not(.btn-disabled) {
   100% {
     transform: rotate(360deg);
   }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
