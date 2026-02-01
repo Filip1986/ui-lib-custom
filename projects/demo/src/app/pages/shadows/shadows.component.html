@@ -6,54 +6,71 @@
     </p>
   </div>
 
-  <div id="examples" data-doc-anchor>
-    <h2>Examples</h2>
-    <p>All numeric shadows from the library <code>SHADOWS</code> tokens.</p>
-
-    <app-doc-demo-viewport>
-      <div class="card-grid scrollable-grid">
-        @for (example of examples; track example.level) {
-          <ui-lib-card
-            variant="material"
-            [style.box-shadow]="shadowValues[example.token]">
-            <div card-header>{{ example.label }}</div>
-            <p>{{ example.description }}</p>
-            <div card-footer class="card-footer-meta">
-              <div>
-                <span class="meta-label">Token</span>
-                <code>{{ example.token }}</code>
-              </div>
-              <div>
-                <span class="meta-label">Value</span>
-                <code>{{ shadowValues[example.token] }}</code>
-              </div>
-            </div>
-          </ui-lib-card>
-        }
-      </div>
-    </app-doc-demo-viewport>
+  <div class="doc-tabs">
+    <button class="doc-tab" [class.active]="activeTab() === 'playground'" (click)="setTab('playground')">Playground</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'api-reference'" (click)="setTab('api-reference')">API Reference</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'usage'" (click)="setTab('usage')">Usage</button>
   </div>
 
-  <div id="tokens" data-doc-anchor>
-    <h2>Tokens</h2>
-    <p>Shadow values from <code>design-tokens.ts</code> you can reuse in components or themes.</p>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (example of examples; track example.level) {
+  @if (activeTab() === 'playground') {
+    <ui-lib-card class="doc-section" [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+      <div card-header>Playground</div>
+      <p>All numeric shadows from the library <code>SHADOWS</code> tokens.</p>
+
+      <app-doc-demo-viewport>
+        <div class="card-grid scrollable-grid">
+          @for (example of examples; track example.level) {
+            <ui-lib-card
+              variant="material"
+              [style.box-shadow]="shadowValues[example.token]">
+              <div card-header>{{ example.label }}</div>
+              <p>{{ example.description }}</p>
+              <div card-footer class="card-footer-meta">
+                <div>
+                  <span class="meta-label">Token</span>
+                  <code>{{ example.token }}</code>
+                </div>
+                <div>
+                  <span class="meta-label">Value</span>
+                  <code>{{ shadowValues[example.token] }}</code>
+                </div>
+              </div>
+            </ui-lib-card>
+          }
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card class="doc-section" [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <p>Shadow token names and values available from the design tokens.</p>
+      <table class="doc-properties">
+        <thead>
           <tr>
-            <td><code>{{ example.level }}</code></td>
-            <td><code>{{ example.token }}</code></td>
-            <td><code>{{ shadowValues[example.token] }}</code></td>
+            <th>#</th>
+            <th>Name</th>
+            <th>Value</th>
           </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          @for (example of examples; track example.level) {
+            <tr>
+              <td><code>{{ example.level }}</code></td>
+              <td><code>{{ example.token }}</code></td>
+              <td><code>{{ shadowValues[example.token] }}</code></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'usage') {
+    <ui-lib-card class="doc-section" [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
+    </ui-lib-card>
+  }
 </app-doc-page-layout>

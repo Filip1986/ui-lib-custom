@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card, CardElevation } from 'ui-lib-custom';
 import { SHADOWS } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 interface ElevationExample {
   level: number;
@@ -19,16 +20,35 @@ type ShadowKey = keyof typeof SHADOWS;
 @Component({
   selector: 'app-shadows',
   standalone: true,
-  imports: [CommonModule, Card, DocPageLayoutComponent, DocDemoViewportComponent],
+  imports: [CommonModule, Card, DocPageLayoutComponent, DocDemoViewportComponent, DocCodeSnippetComponent],
   templateUrl: './shadows.component.html',
   styleUrl: './shadows.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShadowsComponent {
   readonly sections: DocSection[] = [
-    { id: 'examples', label: 'Examples' },
-    { id: 'tokens', label: 'Tokens' },
+    { id: 'playground', label: 'Playground' },
+    { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
   ];
+
+  activeTab = signal<'playground' | 'api-reference' | 'usage'>('playground');
+
+  setTab(tab: 'playground' | 'api-reference' | 'usage') {
+    this.activeTab.set(tab);
+  }
+
+  readonly snippets = {
+    usage: `/* Use CSS var with your component */
+.my-card {
+  box-shadow: var(--uilib-card-shadow-medium);
+}
+
+/* Or apply a specific token */
+.my-surface {
+  box-shadow: var(--uilib-shadow-4);
+}`,
+  } as const;
 
   readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
 
