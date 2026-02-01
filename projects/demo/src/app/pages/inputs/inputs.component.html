@@ -75,34 +75,36 @@
     </app-doc-control-group>
   </div>
 
-  <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-    <div card-header>Viewport width</div>
-    <div class="viewport-controls">
-      <div class="preset-buttons">
-        @for (preset of viewportPresets; track preset.key) {
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
-        }
-        <div class="custom">
-          <label>Custom</label>
-          <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-          <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+  <div class="viewport-control-stack">
+    <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
+      <div card-header>Viewport width</div>
+      <div class="viewport-controls">
+        <div class="preset-buttons">
+          @for (preset of viewportPresets; track preset.key) {
+            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+          }
+          <div class="custom">
+            <label>Custom</label>
+            <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
+            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+          </div>
+        </div>
+        <div class="controls">
+          <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
+          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
         </div>
       </div>
-      <div class="controls">
-        <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-        <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
-      </div>
-    </div>
-  </ui-lib-card>
+    </ui-lib-card>
 
-  <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-    <div card-header>Density</div>
-    <div class="density-controls">
-      <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-      <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-      <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
-    </div>
-  </ui-lib-card>
+    <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
+      <div card-header>Density</div>
+      <div class="density-controls">
+        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
+        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
+        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+      </div>
+    </ui-lib-card>
+  </div>
 
   <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
     <div card-header>Playground</div>
