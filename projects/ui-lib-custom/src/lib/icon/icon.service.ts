@@ -28,11 +28,18 @@ export class IconService {
     return preset?.variant ?? null;
   });
 
+  private readonly themeIcons = computed(() => this.themeConfig?.getPreset?.()?.icons ?? this.themeConfig?.preset?.()?.icons ?? null);
+
   getLibraryForVariant(variant?: ComponentVariant | null): IconLibrary {
     const cfg = this.configSignal();
-    const target = variant ?? this.themeVariant();
-    if (target && cfg.variantMapping[target as ThemeVariant]) {
-      return cfg.variantMapping[target as ThemeVariant];
+    const themeIcons = this.themeIcons();
+    if (variant) {
+      if (cfg.variantMapping[variant as ThemeVariant]) {
+        return cfg.variantMapping[variant as ThemeVariant];
+      }
+    }
+    if (themeIcons?.defaultLibrary) {
+      return themeIcons.defaultLibrary;
     }
     return cfg.defaultLibrary;
   }
@@ -50,13 +57,16 @@ export class IconService {
   }
 
   getIconSize(size?: IconSize | null): string {
+    const themeIcons = this.themeIcons();
     const target = size ?? this.configSignal().defaultSize;
-    return ICON_SIZES[target];
+    const themeSize = themeIcons?.sizes?.[target];
+    return themeSize ?? ICON_SIZES[target];
   }
 
   resolveLibrary(override?: IconLibrary | null, variant?: ComponentVariant | null): IconLibrary {
     if (override) return override;
-    return this.getLibraryForVariant(variant ?? this.themeVariant());
+    if (variant) return this.getLibraryForVariant(variant);
+    return this.getLibraryForVariant(null);
   }
 
   resolveIcon(semantic: SemanticIcon, library?: IconLibrary): string {

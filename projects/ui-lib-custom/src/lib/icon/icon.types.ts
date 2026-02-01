@@ -31,7 +31,7 @@ export const ICON_SIZES: Record<IconSize, string> = {
 };
 
 export const ICON_LIBRARY_PREFIX: Record<IconLibrary, string> = {
-  material: 'matOutlined',
+  material: '',
   bootstrap: 'bootstrap',
   lucide: 'lucide',
   heroicons: 'hero',
@@ -42,7 +42,7 @@ export const DEFAULT_ICON_CONFIG: IconConfig = {
   defaultLibrary: 'lucide',
   defaultSize: 'md',
   variantMapping: {
-    material: 'lucide',
+    material: 'material',
     bootstrap: 'bootstrap',
     minimal: 'lucide',
   },

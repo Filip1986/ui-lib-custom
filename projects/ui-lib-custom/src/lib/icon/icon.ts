@@ -11,6 +11,11 @@ const normalizeIconName = (value: string): string =>
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join('');
 
+const hasKnownPrefix = (value: string): boolean => {
+  const prefixes = Object.values(ICON_LIBRARY_PREFIX).filter(Boolean).map((p) => p.toLowerCase());
+  return prefixes.some((p) => value.toLowerCase().startsWith(p));
+};
+
 @Component({
   selector: 'ui-lib-icon',
   standalone: true,
@@ -46,11 +51,11 @@ export class Icon {
       ? this.iconService.resolveIcon(raw as SemanticIcon, library)
       : raw;
     const prefix = ICON_LIBRARY_PREFIX[library];
-    if (prefix && base.toLowerCase().startsWith(prefix.toLowerCase())) {
+    // If the base already carries any known library prefix, return it as-is
+    if (!prefix || hasKnownPrefix(base)) {
       return base;
     }
     const baseName = normalizeIconName(base);
-    if (!prefix) return baseName;
     return `${prefix}${baseName}`;
   });
 
