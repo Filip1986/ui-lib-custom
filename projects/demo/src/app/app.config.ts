@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { ThemeConfigService } from 'ui-lib-custom';
+import { provideUiLibIcons } from 'ui-lib-custom';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -10,6 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideHttpClient(),
     provideRouter(routes),
+    provideUiLibIcons(),
     provideAppInitializer(() => {
       const themeService = inject(ThemeConfigService);
       const hasStored = typeof localStorage !== 'undefined' && !!localStorage.getItem('ui-lib-custom.theme');

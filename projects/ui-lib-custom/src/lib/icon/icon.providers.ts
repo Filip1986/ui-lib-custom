@@ -17,7 +17,7 @@ export function provideUiLibIcons(options?: { defaultLibrary?: IconLibrary; addi
     defaultLibrary: options?.defaultLibrary ?? 'lucide',
     defaultSize: 'md',
     variantMapping: {
-      material: 'material',
+      material: 'lucide',
       bootstrap: 'bootstrap',
       minimal: 'lucide',
     },

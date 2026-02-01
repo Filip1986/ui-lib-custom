@@ -42,7 +42,7 @@ export const DEFAULT_ICON_CONFIG: IconConfig = {
   defaultLibrary: 'lucide',
   defaultSize: 'md',
   variantMapping: {
-    material: 'material',
+    material: 'lucide',
     bootstrap: 'bootstrap',
     minimal: 'lucide',
   },
