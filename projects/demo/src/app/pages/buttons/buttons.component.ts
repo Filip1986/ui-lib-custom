@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant,
@@ -9,10 +9,11 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-buttons',
-  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card],
+  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, FormsModule],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -95,5 +96,43 @@ export class ButtonsComponent {
       const v = this.themeService.preset().variant as ButtonVariant;
       this.variant.set(v);
     }
+  }
+
+  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+
+  get viewportPresets() {
+    return this.viewport?.presets() ?? [];
+  }
+
+  viewportDisplayWidth() {
+    return this.viewport?.displayWidth() ?? 0;
+  }
+
+  viewportDisplayHeight() {
+    return this.viewport?.displayHeight() ?? 0;
+  }
+
+  viewportCustomWidth() {
+    return this.viewport?.customWidth() ?? 0;
+  }
+
+  setViewportCustomWidth(value: number) {
+    this.viewport?.setCustomWidth(value);
+  }
+
+  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+    this.viewport?.setPreset(preset);
+  }
+
+  applyViewportCustom() {
+    this.viewport?.setCustom();
+  }
+
+  rotateViewport() {
+    this.viewport?.rotate();
+  }
+
+  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+    this.viewport?.setDensity(value);
   }
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {Button, Card, Checkbox, CheckboxSize, CheckboxVariant} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -18,6 +19,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
     DocControlGroupComponent,
     DocDemoViewportComponent,
     DocCodeSnippetComponent,
+    FormsModule,
     Card,
   ],
   templateUrl: './checkboxes.component.html',
@@ -44,6 +46,8 @@ export class CheckboxesComponent {
 
   checkedPrimary = false;
   checkedSecondary = true;
+
+  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
 
   readonly playgroundDescription = computed(() => (this.showDescription() ? this.description() : null));
 
@@ -82,5 +86,41 @@ export class SettingsComponent {
 
   onSecondaryChange(next: boolean): void {
     this.checkedSecondary = next;
+  }
+
+  get viewportPresets() {
+    return this.viewport?.presets() ?? [];
+  }
+
+  viewportDisplayWidth() {
+    return this.viewport?.displayWidth() ?? 0;
+  }
+
+  viewportDisplayHeight() {
+    return this.viewport?.displayHeight() ?? 0;
+  }
+
+  viewportCustomWidth() {
+    return this.viewport?.customWidth() ?? 0;
+  }
+
+  setViewportCustomWidth(value: number) {
+    this.viewport?.setCustomWidth(value);
+  }
+
+  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+    this.viewport?.setPreset(preset);
+  }
+
+  applyViewportCustom() {
+    this.viewport?.setCustom();
+  }
+
+  rotateViewport() {
+    this.viewport?.rotate();
+  }
+
+  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+    this.viewport?.setDensity(value);
   }
 }

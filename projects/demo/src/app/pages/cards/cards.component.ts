@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card, CardVariant, CardElevation, ThemeConfigService, Button, SHADOWS } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
@@ -6,6 +6,7 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
+import { FormsModule } from '@angular/forms';
 
 type ShadowKey = string;
 const SHADOW_MAP = SHADOWS as Record<string, string>;
@@ -13,7 +14,7 @@ const SHADOW_MAP = SHADOWS as Record<string, string>;
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
+  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, FormsModule],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -112,5 +113,43 @@ export class CardsComponent {
       const v = this.themeService.preset().variant as CardVariant;
       this.variant.set(v);
     }
+  }
+
+  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+
+  get viewportPresets() {
+    return this.viewport?.presets() ?? [];
+  }
+
+  viewportDisplayWidth() {
+    return this.viewport?.displayWidth() ?? 0;
+  }
+
+  viewportDisplayHeight() {
+    return this.viewport?.displayHeight() ?? 0;
+  }
+
+  viewportCustomWidth() {
+    return this.viewport?.customWidth() ?? 0;
+  }
+
+  setViewportCustomWidth(value: number) {
+    this.viewport?.setCustomWidth(value);
+  }
+
+  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+    this.viewport?.setPreset(preset);
+  }
+
+  applyViewportCustom() {
+    this.viewport?.setCustom();
+  }
+
+  rotateViewport() {
+    this.viewport?.rotate();
+  }
+
+  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+    this.viewport?.setDensity(value);
   }
 }

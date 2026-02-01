@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal, computed, inject, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, inject, effect, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {UiLibSelect, SelectOption, SelectVariant, ThemeConfigService, Button, Card} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
@@ -51,12 +51,50 @@ export class SelectComponent {
 
   readonly appliedTheme = computed(() => this.globalVars());
 
+  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+
   constructor() {
     effect(() => {
       if (!this.useGlobalVariant()) return;
       const v = this.themeService.preset().variant as SelectVariant;
       this.variant.set(v);
     });
+  }
+
+  get viewportPresets() {
+    return this.viewport?.presets() ?? [];
+  }
+
+  viewportDisplayWidth() {
+    return this.viewport?.displayWidth() ?? 0;
+  }
+
+  viewportDisplayHeight() {
+    return this.viewport?.displayHeight() ?? 0;
+  }
+
+  viewportCustomWidth() {
+    return this.viewport?.customWidth() ?? 0;
+  }
+
+  setViewportCustomWidth(value: number) {
+    this.viewport?.setCustomWidth(value);
+  }
+
+  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+    this.viewport?.setPreset(preset);
+  }
+
+  applyViewportCustom() {
+    this.viewport?.setCustom();
+  }
+
+  rotateViewport() {
+    this.viewport?.rotate();
+  }
+
+  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+    this.viewport?.setDensity(value);
   }
 
   setVariant(v: SelectVariant) {

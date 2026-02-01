@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {Badge, Inline, BadgeColor, BadgeVariant, BadgeSize, Button, Card} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -9,7 +10,7 @@ import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-grou
 @Component({
   selector: 'app-badges',
   standalone: true,
-  imports: [Badge, Button, DocPageLayoutComponent, DocCodeSnippetComponent, DocControlGroupComponent, DocDemoViewportComponent, Card],
+  imports: [Badge, Button, DocPageLayoutComponent, DocCodeSnippetComponent, DocControlGroupComponent, DocDemoViewportComponent, Card, FormsModule],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,4 +42,42 @@ export class BadgesComponent {
     '<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>'
 })`
   } as const;
+
+  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+
+  get viewportPresets() {
+    return this.viewport?.presets() ?? [];
+  }
+
+  viewportDisplayWidth() {
+    return this.viewport?.displayWidth() ?? 0;
+  }
+
+  viewportDisplayHeight() {
+    return this.viewport?.displayHeight() ?? 0;
+  }
+
+  viewportCustomWidth() {
+    return this.viewport?.customWidth() ?? 0;
+  }
+
+  setViewportCustomWidth(value: number) {
+    this.viewport?.setCustomWidth(value);
+  }
+
+  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+    this.viewport?.setPreset(preset);
+  }
+
+  applyViewportCustom() {
+    this.viewport?.setCustom();
+  }
+
+  rotateViewport() {
+    this.viewport?.rotate();
+  }
+
+  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+    this.viewport?.setDensity(value);
+  }
 }
