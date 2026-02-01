@@ -8,11 +8,12 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
+import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 @Component({
   selector: 'app-inputs',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibInput, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card],
+  imports: [CommonModule, FormsModule, UiLibInput, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, DocCodeSnippetComponent],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,7 +21,27 @@ import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-grou
 export class InputsComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
+    { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
+    { id: 'performance', label: 'Performance Features' },
   ];
+
+  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+
+  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+    this.activeTab.set(tab);
+  }
+
+  readonly snippets = {
+    usage: `import { UiLibInput } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [UiLibInput],
+  template: '<ui-lib-input label="Email" placeholder="you@example.com"></ui-lib-input>'
+})
+export class Example {}`,
+  } as const;
 
   private readonly themeService = inject(ThemeConfigService);
 

@@ -6,185 +6,220 @@
     </p>
   </div>
 
-  <div class="doc-controls">
-    <app-doc-control-group title="Style & surface" description="Variant, elevation, shadow, and surface colors." [columns]="3">
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="variant() === v ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="selectVariant(v)">{{ v }}</ui-lib-button>
-          }
-        </div>
-        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
-      </div>
-
-      <div class="control">
-        <label>Elevation</label>
-        <div class="chips">
-          @for (e of elevations; track e) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="elevation() === e ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="elevation.set(e)">{{ e }}</ui-lib-button>
-          }
-        </div>
-      </div>
-
-      <div class="control">
-        <label>Shadow</label>
-        <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
-          @for (s of shadowOptions; track s) {
-            <option [value]="s">{{ s }}</option>
-          }
-        </select>
-      </div>
-
-      <div class="control two-cols">
-        <div>
-          <label>Header BG</label>
-          <input type="color" [value]="headerBg() || '#ffffff'" (input)="headerBg.set($any($event.target).value)">
-          <input type="text" placeholder="#f5f7fb" [value]="headerBg()" (input)="headerBg.set($any($event.target).value)">
-        </div>
-        <div>
-          <label>Footer BG</label>
-          <input type="color" [value]="footerBg() || '#ffffff'" (input)="footerBg.set($any($event.target).value)">
-          <input type="text" placeholder="#eef2ff" [value]="footerBg()" (input)="footerBg.set($any($event.target).value)">
-        </div>
-      </div>
-    </app-doc-control-group>
-
-    <app-doc-control-group title="Layout & borders" description="Toggle borders, hover, header, and footer.">
-      <div class="toggles">
-        <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
-        <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
-        <label><input type="checkbox" [checked]="showHeader()" (change)="showHeader.set($any($event.target).checked)"> Show header</label>
-        <label><input type="checkbox" [checked]="showFooter()" (change)="showFooter.set($any($event.target).checked)"> Show footer</label>
-      </div>
-    </app-doc-control-group>
-
-    <app-doc-control-group title="Content & theme" description="Edit text content or enable local theme overrides.">
-      <div class="control">
-        <label>Title</label>
-        <input type="text" [value]="title()" (input)="title.set($any($event.target).value)">
-      </div>
-      <div class="control">
-        <label>Body</label>
-        <textarea rows="3" [value]="body()" (input)="body.set($any($event.target).value)"></textarea>
-      </div>
-      <div class="control">
-        <label class="inline-toggle"><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
-      </div>
-    </app-doc-control-group>
+  <div class="doc-tabs">
+    <button class="doc-tab" [class.active]="activeTab() === 'playground'" (click)="setTab('playground')">Playground</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'api-reference'" (click)="setTab('api-reference')">API Reference</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'usage'" (click)="setTab('usage')">Usage</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'performance'" (click)="setTab('performance')">Performance</button>
   </div>
 
-  <div class="viewport-control-stack">
-    <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Viewport width</div>
-      <div class="viewport-controls">
-        <div class="preset-buttons">
-          @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
-          }
-          <div class="custom">
-            <label>Custom</label>
-            <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+  @if (activeTab() === 'playground') {
+    <div class="doc-controls">
+      <app-doc-control-group title="Style & surface" description="Variant, elevation, shadow, and surface colors." [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="selectVariant(v)">{{ v }}</ui-lib-button>
+            }
+          </div>
+          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
+        </div>
+
+        <div class="control">
+          <label>Elevation</label>
+          <div class="chips">
+            @for (e of elevations; track e) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="elevation() === e ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="elevation.set(e)">{{ e }}</ui-lib-button>
+            }
           </div>
         </div>
-        <div class="controls">
-          <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+
+        <div class="control">
+          <label>Shadow</label>
+          <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
+            @for (s of shadowOptions; track s) {
+              <option [value]="s">{{ s }}</option>
+            }
+          </select>
         </div>
-      </div>
-    </ui-lib-card>
 
-    <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Density</div>
-      <div class="density-controls">
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
-      </div>
-    </ui-lib-card>
-  </div>
+        <div class="control two-cols">
+          <div>
+            <label>Header BG</label>
+            <input type="color" [value]="headerBg() || '#ffffff'" (input)="headerBg.set($any($event.target).value)">
+            <input type="text" placeholder="#f5f7fb" [value]="headerBg()" (input)="headerBg.set($any($event.target).value)">
+          </div>
+          <div>
+            <label>Footer BG</label>
+            <input type="color" [value]="footerBg() || '#ffffff'" (input)="footerBg.set($any($event.target).value)">
+            <input type="text" placeholder="#eef2ff" [value]="footerBg()" (input)="footerBg.set($any($event.target).value)">
+          </div>
+        </div>
+      </app-doc-control-group>
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-    <div card-header>Playground</div>
-    <p>Pick variant, elevation, borders, and content.</p>
+      <app-doc-control-group title="Layout & borders" description="Toggle borders, hover, header, and footer.">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="bordered()" (change)="bordered.set($any($event.target).checked)"> Bordered</label>
+          <label><input type="checkbox" [checked]="hoverable()" (change)="hoverable.set($any($event.target).checked)"> Hoverable</label>
+          <label><input type="checkbox" [checked]="showHeader()" (change)="showHeader.set($any($event.target).checked)"> Show header</label>
+          <label><input type="checkbox" [checked]="showFooter()" (change)="showFooter.set($any($event.target).checked)"> Show footer</label>
+        </div>
+      </app-doc-control-group>
 
-    <app-doc-demo-viewport [shadow]="shadowValue()">
-      <div class="card-grid" [appThemeScope]="appliedTheme()">
-        <ui-lib-card
-          [variant]="variant()"
-          [elevation]="elevation()"
-          [bordered]="bordered()"
-          [hoverable]="hoverable()"
-          [showHeader]="showHeader()"
-          [showFooter]="showFooter()"
-          [shadow]="shadowValue()"
-          [headerBg]="headerBg()"
-          [footerBg]="footerBg()">
-          @if (showHeader()) {
-            <div card-header>{{ title() || 'Card Title' }}</div>
-          }
-          <p>{{ body() || 'Cards can host arbitrary content and actions.' }}</p>
-          @if (showFooter()) {
-            <div card-footer>
-              <ui-lib-button [variant]="variant()" color="primary" size="small">Action</ui-lib-button>
-              <ui-lib-button [variant]="variant()" appearance="ghost" color="secondary" size="small">Secondary</ui-lib-button>
+      <app-doc-control-group title="Content & theme" description="Edit text content or enable local theme overrides.">
+        <div class="control">
+          <label>Title</label>
+          <input type="text" [value]="title()" (input)="title.set($any($event.target).value)">
+        </div>
+        <div class="control">
+          <label>Body</label>
+          <textarea rows="3" [value]="body()" (input)="body.set($any($event.target).value)"></textarea>
+        </div>
+        <div class="control">
+          <label class="inline-toggle"><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
+        </div>
+      </app-doc-control-group>
+    </div>
+
+    <div class="viewport-control-stack">
+      <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Viewport width</div>
+        <div class="viewport-controls">
+          <div class="preset-buttons">
+            @for (preset of viewportPresets; track preset.key) {
+              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+            }
+            <div class="custom">
+              <label>Custom</label>
+              <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
+              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
             </div>
-          }
-        </ui-lib-card>
-      </div>
-    </app-doc-demo-viewport>
-  </ui-lib-card>
+          </div>
+          <div class="controls">
+            <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
+            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+          </div>
+        </div>
+      </ui-lib-card>
 
-  <div class="doc-section" id="properties" data-doc-anchor>
-    <h2>Properties</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-          <td><code>'material'</code></td>
-          <td>Visual style of the card</td>
-        </tr>
-        <tr>
-          <td><code>elevation</code></td>
-          <td><code>'none' | 'low' | 'medium' | 'high'</code></td>
-          <td><code>'medium'</code></td>
-          <td>Shadow depth</td>
-        </tr>
-        <tr>
-          <td><code>bordered</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Enable border</td>
-        </tr>
-        <tr>
-          <td><code>hoverable</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Enable hover effect</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Density</div>
+        <div class="density-controls">
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+        </div>
+      </ui-lib-card>
+    </div>
+
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+      <div card-header>Playground</div>
+      <p>Pick variant, elevation, borders, and content.</p>
+
+      <app-doc-demo-viewport [shadow]="shadowValue()">
+        <div class="card-grid" [appThemeScope]="appliedTheme()">
+          <ui-lib-card
+            [variant]="variant()"
+            [elevation]="elevation()"
+            [bordered]="bordered()"
+            [hoverable]="hoverable()"
+            [showHeader]="showHeader()"
+            [showFooter]="showFooter()"
+            [shadow]="shadowValue()"
+            [headerBg]="headerBg()"
+            [footerBg]="footerBg()">
+            @if (showHeader()) {
+              <div card-header>{{ title() || 'Card Title' }}</div>
+            }
+            <p>{{ body() || 'Cards can host arbitrary content and actions.' }}</p>
+            @if (showFooter()) {
+              <div card-footer>
+                <ui-lib-button [variant]="variant()" color="primary" size="small">Action</ui-lib-button>
+                <ui-lib-button [variant]="variant()" appearance="ghost" color="secondary" size="small">Secondary</ui-lib-button>
+              </div>
+            }
+          </ui-lib-card>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <div class="doc-section" id="properties" data-doc-anchor>
+        <h2>Properties</h2>
+        <table class="doc-properties">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>variant</code></td>
+              <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
+              <td><code>'material'</code></td>
+              <td>Visual style of the card</td>
+            </tr>
+            <tr>
+              <td><code>elevation</code></td>
+              <td><code>'none' | 'low' | 'medium' | 'high'</code></td>
+              <td><code>'medium'</code></td>
+              <td>Shadow depth</td>
+            </tr>
+            <tr>
+              <td><code>bordered</code></td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+              <td>Enable border</td>
+            </tr>
+            <tr>
+              <td><code>hoverable</code></td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+              <td>Enable hover effect</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'usage') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'performance') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
+      <div card-header>Performance Features</div>
+      <ul class="doc-list">
+        <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
+        <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
+        <li><strong>Single Element</strong> - renders as single DOM element (no wrappers)</li>
+        <li><strong>Design Tokens</strong> - uses centralized design system</li>
+        <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
+        <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
 </app-doc-page-layout>

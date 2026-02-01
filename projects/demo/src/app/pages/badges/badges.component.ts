@@ -19,8 +19,15 @@ export class BadgesComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
   ];
+
+  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+
+  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+    this.activeTab.set(tab);
+  }
 
   variant = signal<BadgeVariant>('solid');
   color = signal<BadgeColor>('primary');

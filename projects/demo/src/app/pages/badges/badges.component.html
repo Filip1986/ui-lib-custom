@@ -6,173 +6,191 @@
     </p>
   </div>
 
-  <div class="doc-controls">
-    <app-doc-control-group title="Style" description="Adjust variant, color, and size." [columns]="3">
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="variant() === v ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="variant.set(v)">{{ v }}</ui-lib-button>
-          }
-        </div>
-      </div>
-
-      <div class="control">
-        <label>Color</label>
-        <div class="chips">
-          @for (c of colors; track c) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="color() === c ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="color.set(c)">{{ c }}</ui-lib-button>
-          }
-        </div>
-      </div>
-
-      <div class="control">
-        <label>Size</label>
-        <div class="chips">
-          @for (s of sizes; track s) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="size() === s ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="size.set(s)">{{ s }}</ui-lib-button>
-          }
-        </div>
-      </div>
-    </app-doc-control-group>
-
-    <app-doc-control-group title="State & label" description="Toggle shape and set badge text.">
-      <div class="toggles">
-        <label><input type="checkbox" [checked]="pill()" (change)="pill.set($any($event.target).checked)"> Pill shape</label>
-        <label><input type="checkbox" [checked]="dot()" (change)="dot.set($any($event.target).checked)"> Dot only</label>
-      </div>
-
-      <div class="control">
-        <label>Label</label>
-        <input type="text" [value]="text()" (input)="text.set($any($event.target).value)">
-      </div>
-    </app-doc-control-group>
+  <div class="doc-tabs">
+    <button class="doc-tab" [class.active]="activeTab() === 'playground'" (click)="setTab('playground')">Playground</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'api-reference'" (click)="setTab('api-reference')">API Reference</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'usage'" (click)="setTab('usage')">Usage</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'performance'" (click)="setTab('performance')">Performance</button>
   </div>
 
-  <div class="viewport-control-stack">
-    <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Viewport width</div>
-      <div class="viewport-controls">
-        <div class="preset-buttons">
-          @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
-          }
-          <div class="custom">
-            <label>Custom</label>
-            <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+  @if (activeTab() === 'playground') {
+    <div class="doc-controls" id="playground" data-doc-anchor>
+      <app-doc-control-group title="Style" description="Adjust variant, color, and size." [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="variant.set(v)">{{ v }}</ui-lib-button>
+            }
           </div>
         </div>
-        <div class="controls">
-          <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+
+        <div class="control">
+          <label>Color</label>
+          <div class="chips">
+            @for (c of colors; track c) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="color() === c ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="color.set(c)">{{ c }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
+
+        <div class="control">
+          <label>Size</label>
+          <div class="chips">
+            @for (s of sizes; track s) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="size() === s ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="size.set(s)">{{ s }}</ui-lib-button>
+            }
+          </div>
+        </div>
+      </app-doc-control-group>
+
+      <app-doc-control-group title="State & label" description="Toggle shape and set badge text.">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="pill()" (change)="pill.set($any($event.target).checked)"> Pill shape</label>
+          <label><input type="checkbox" [checked]="dot()" (change)="dot.set($any($event.target).checked)"> Dot only</label>
+        </div>
+
+        <div class="control">
+          <label>Label</label>
+          <input type="text" [value]="text()" (input)="text.set($any($event.target).value)">
+        </div>
+      </app-doc-control-group>
+    </div>
+
+    <div class="viewport-control-stack">
+      <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Viewport width</div>
+        <div class="viewport-controls">
+          <div class="preset-buttons">
+            @for (preset of viewportPresets; track preset.key) {
+              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+            }
+            <div class="custom">
+              <label>Custom</label>
+              <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
+              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+            </div>
+          </div>
+          <div class="controls">
+            <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
+            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+          </div>
+        </div>
+      </ui-lib-card>
+
+      <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Density</div>
+        <div class="density-controls">
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+        </div>
+      </ui-lib-card>
+    </div>
+
+    <ui-lib-card [showHeader]="true" [showFooter]="false">
+      <div card-header>Playground</div>
+      <p>Toggle variant, color, size, pill, and dot options.</p>
+
+      <app-doc-demo-viewport>
+        <div class="doc-demo centered">
+          <ui-lib-badge
+            [variant]="variant()"
+            [color]="color()"
+            [size]="size()"
+            [pill]="pill()"
+            [dot]="dot()">
+            @if (!dot()) { {{ text() || 'New' }} }
+          </ui-lib-badge>
+        </div>
+      </app-doc-demo-viewport>
     </ui-lib-card>
+  }
 
-    <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Density</div>
-      <div class="density-controls">
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
-      </div>
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'solid' | 'outline' | 'subtle'</code></td>
+            <td><code>'solid'</code></td>
+            <td>Visual style</td>
+          </tr>
+          <tr>
+            <td><code>color</code></td>
+            <td><code>'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral'</code></td>
+            <td><code>'primary'</code></td>
+            <td>Theme color</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>'sm' | 'md' | 'lg'</code></td>
+            <td><code>'md'</code></td>
+            <td>Badge size</td>
+          </tr>
+          <tr>
+            <td><code>pill</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Rounded pill shape</td>
+          </tr>
+          <tr>
+            <td><code>dot</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Dot indicator (no label)</td>
+          </tr>
+        </tbody>
+      </table>
     </ui-lib-card>
-  </div>
+  }
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-    <div card-header>Playground</div>
-    <p>Toggle variant, color, size, pill, and dot options.</p>
+  @if (activeTab() === 'usage') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
+    </ui-lib-card>
+  }
 
-    <app-doc-demo-viewport>
-      <div class="doc-demo centered">
-        <ui-lib-badge
-          [variant]="variant()"
-          [color]="color()"
-          [size]="size()"
-          [pill]="pill()"
-          [dot]="dot()">
-          @if (!dot()) { {{ text() || 'New' }} }
-        </ui-lib-badge>
-      </div>
-    </app-doc-demo-viewport>
-  </ui-lib-card>
-
-  <div class="doc-section" id="api-reference" data-doc-anchor>
-    <h2>API Reference</h2>
-    <table class="doc-properties">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'solid' | 'outline' | 'subtle'</code></td>
-          <td><code>'solid'</code></td>
-          <td>Visual style</td>
-        </tr>
-        <tr>
-          <td><code>color</code></td>
-          <td><code>'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral'</code></td>
-          <td><code>'primary'</code></td>
-          <td>Theme color</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Badge size</td>
-        </tr>
-        <tr>
-          <td><code>pill</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Rounded pill shape</td>
-        </tr>
-        <tr>
-          <td><code>dot</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>Dot indicator (no label)</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
-  </div>
-
-  <div class="doc-section" id="performance" data-doc-anchor>
-    <h2>Performance Features</h2>
-    <ul class="doc-list">
-      <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
-      <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
-      <li><strong>Single Element</strong> - renders as single DOM element (no wrappers)</li>
-      <li><strong>Design Tokens</strong> - uses centralized design system</li>
-      <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
-      <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
-    </ul>
-  </div>
+  @if (activeTab() === 'performance') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
+      <div card-header>Performance Features</div>
+      <ul class="doc-list">
+        <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
+        <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
+        <li><strong>Single Element</strong> - renders as single DOM element (no wrappers)</li>
+        <li><strong>Design Tokens</strong> - uses centralized design system</li>
+        <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
+        <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
 </app-doc-page-layout>

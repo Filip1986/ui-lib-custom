@@ -10,10 +10,11 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
 import { FormsModule } from '@angular/forms';
+import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 @Component({
   selector: 'app-buttons',
-  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, FormsModule],
+  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, FormsModule, DocCodeSnippetComponent],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,8 +22,27 @@ import { FormsModule } from '@angular/forms';
 export class ButtonsComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
-    { id: 'properties', label: 'Properties' },
+    { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
+    { id: 'performance', label: 'Performance Features' },
   ];
+
+  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+
+  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+    this.activeTab.set(tab);
+  }
+
+  readonly snippets = {
+    usage: `import { Button } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [Button],
+  template: '<ui-lib-button color="primary">Click me</ui-lib-button>'
+})
+export class Example {}`,
+  } as const;
 
   private readonly themeService = inject(ThemeConfigService);
 

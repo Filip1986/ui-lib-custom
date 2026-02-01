@@ -7,6 +7,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
 import { FormsModule } from '@angular/forms';
+import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 type ShadowKey = string;
 const SHADOW_MAP = SHADOWS as Record<string, string>;
@@ -14,7 +15,7 @@ const SHADOW_MAP = SHADOWS as Record<string, string>;
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, FormsModule],
+  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, FormsModule, DocCodeSnippetComponent],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,8 +23,31 @@ const SHADOW_MAP = SHADOWS as Record<string, string>;
 export class CardsComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
-    { id: 'properties', label: 'Properties' },
+    { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
+    { id: 'performance', label: 'Performance Features' },
   ];
+
+  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+
+  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+    this.activeTab.set(tab);
+  }
+
+  readonly snippets = {
+    usage: `import { Card } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [Card],
+  template:
+    '<ui-lib-card showHeader>\n' +
+    '  <div card-header>Title</div>\n' +
+    '  Body content\n' +
+    '</ui-lib-card>'
+})
+export class Example {}`,
+  } as const;
 
   variant = signal<CardVariant>('material');
   elevation = signal<CardElevation>('medium');

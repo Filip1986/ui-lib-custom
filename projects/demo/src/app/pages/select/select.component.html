@@ -4,93 +4,171 @@
     <p class="doc-description">Dropdown component with search, multi-select, and templates. Use the controls to see live changes.</p>
   </div>
 
-  <div class="doc-controls">
-    <app-doc-control-group title="Style" description="Choose variant and follow theme defaults.">
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="variant() === v ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="setVariant(v)">{{ v }}</ui-lib-button>
-          }
-        </div>
-        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
-      </div>
-    </app-doc-control-group>
-
-    <app-doc-control-group title="Behavior" description="Toggle selection, search, and states.">
-      <div class="toggles">
-        <label><input type="checkbox" [checked]="multiple()" (change)="toggleMultiple($any($event.target).checked)"> Multiple</label>
-        <label><input type="checkbox" [checked]="searchable()" (change)="toggleSearchable($any($event.target).checked)"> Searchable</label>
-        <label><input type="checkbox" [checked]="disabled()" (change)="toggleDisabled($any($event.target).checked)"> Disabled</label>
-        <label><input type="checkbox" [checked]="loading()" (change)="toggleLoading($any($event.target).checked)"> Loading</label>
-      </div>
-    </app-doc-control-group>
-
-    <app-doc-control-group title="Content" description="Set placeholder text.">
-      <div class="control">
-        <label>Placeholder</label>
-        <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
-      </div>
-    </app-doc-control-group>
+  <div class="doc-tabs">
+    <button class="doc-tab" [class.active]="activeTab() === 'playground'" (click)="setTab('playground')">Playground</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'api-reference'" (click)="setTab('api-reference')">API Reference</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'usage'" (click)="setTab('usage')">Usage</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'performance'" (click)="setTab('performance')">Performance</button>
   </div>
 
-  <div class="viewport-control-stack">
-    <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Viewport width</div>
-      <div class="viewport-controls">
-        <div class="preset-buttons">
-          @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
-          }
-          <div class="custom">
-            <label>Custom</label>
-            <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+  @if (activeTab() === 'playground') {
+    <div class="doc-controls">
+      <app-doc-control-group title="Style" description="Choose variant and follow theme defaults.">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setVariant(v)">{{ v }}</ui-lib-button>
+            }
+          </div>
+          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
+        </div>
+      </app-doc-control-group>
+
+      <app-doc-control-group title="Behavior" description="Toggle selection, search, and states.">
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="multiple()" (change)="toggleMultiple($any($event.target).checked)"> Multiple</label>
+          <label><input type="checkbox" [checked]="searchable()" (change)="toggleSearchable($any($event.target).checked)"> Searchable</label>
+          <label><input type="checkbox" [checked]="disabled()" (change)="toggleDisabled($any($event.target).checked)"> Disabled</label>
+          <label><input type="checkbox" [checked]="loading()" (change)="toggleLoading($any($event.target).checked)"> Loading</label>
+        </div>
+      </app-doc-control-group>
+
+      <app-doc-control-group title="Content" description="Set placeholder text.">
+        <div class="control">
+          <label>Placeholder</label>
+          <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
+        </div>
+      </app-doc-control-group>
+    </div>
+
+    <div class="viewport-control-stack">
+      <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Viewport width</div>
+        <div class="viewport-controls">
+          <div class="preset-buttons">
+            @for (preset of viewportPresets; track preset.key) {
+              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+            }
+            <div class="custom">
+              <label>Custom</label>
+              <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
+              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+            </div>
+          </div>
+          <div class="controls">
+            <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
+            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
           </div>
         </div>
-        <div class="controls">
-          <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+      </ui-lib-card>
+
+      <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Density</div>
+        <div class="density-controls">
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
         </div>
-      </div>
+      </ui-lib-card>
+    </div>
+
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+      <div card-header>Playground</div>
+
+      <app-doc-demo-viewport>
+        <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
+          <ui-lib-select
+            label="Options"
+            [options]="options"
+            [variant]="variant()"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
+            [disabled]="disabled()"
+            [loading]="loading()"
+            [placeholder]="placeholder()"
+            [ngModel]="value()"
+            (ngModelChange)="value.set($event)">
+          </ui-lib-select>
+
+          <div class="current-value"><strong>Value:</strong> {{ value() | json }}</div>
+        </div>
+      </app-doc-demo-viewport>
     </ui-lib-card>
+  }
 
-    <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Density</div>
-      <div class="density-controls">
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
-      </div>
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
+            <td><code>'material'</code></td>
+            <td>Visual style</td>
+          </tr>
+          <tr>
+            <td><code>options</code></td>
+            <td><code>SelectOption[]</code></td>
+            <td><code>[]</code></td>
+            <td>List of options (label/value)</td>
+          </tr>
+          <tr>
+            <td><code>multiple</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Enable multi-select</td>
+          </tr>
+          <tr>
+            <td><code>searchable</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>Toggle search input</td>
+          </tr>
+          <tr>
+            <td><code>placeholder</code></td>
+            <td><code>string</code></td>
+            <td><code>'Choose an option'</code></td>
+            <td>Placeholder text</td>
+          </tr>
+        </tbody>
+      </table>
     </ui-lib-card>
-  </div>
+  }
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-    <div card-header>Playground</div>
+  @if (activeTab() === 'usage') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
+    </ui-lib-card>
+  }
 
-    <app-doc-demo-viewport>
-      <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
-        <ui-lib-select
-          label="Options"
-          [options]="options"
-          [variant]="variant()"
-          [searchable]="searchable()"
-          [multiple]="multiple()"
-          [disabled]="disabled()"
-          [loading]="loading()"
-          [placeholder]="placeholder()"
-          [ngModel]="value()"
-          (ngModelChange)="value.set($event)">
-        </ui-lib-select>
-
-        <div class="current-value"><strong>Value:</strong> {{ value() | json }}</div>
-      </div>
-    </app-doc-demo-viewport>
-  </ui-lib-card>
+  @if (activeTab() === 'performance') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
+      <div card-header>Performance Features</div>
+      <ul class="doc-list">
+        <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
+        <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
+        <li><strong>Single Element</strong> - renders as single DOM element (no wrappers)</li>
+        <li><strong>Design Tokens</strong> - uses centralized design system</li>
+        <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
+        <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
 </app-doc-page-layout>

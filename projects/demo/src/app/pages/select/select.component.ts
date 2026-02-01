@@ -7,11 +7,12 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
+import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibSelect, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card],
+  imports: [CommonModule, FormsModule, UiLibSelect, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, DocCodeSnippetComponent],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,7 +20,27 @@ import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-grou
 export class SelectComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
+    { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
+    { id: 'performance', label: 'Performance Features' },
   ];
+
+  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+
+  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+    this.activeTab.set(tab);
+  }
+
+  readonly snippets = {
+    usage: `import { UiLibSelect } from 'ui-lib-custom';
+
+@Component({
+  standalone: true,
+  imports: [UiLibSelect],
+  template: '<ui-lib-select [options]="[{ label: \'One\', value: 1 }]" label="Choose"></ui-lib-select>'
+})
+export class Example {}`,
+  } as const;
 
   private readonly themeService = inject(ThemeConfigService);
 
