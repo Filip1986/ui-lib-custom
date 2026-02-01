@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import { UiLibInput, InputVariant, InputType, InputLabelFloat, ThemeConfigService } from 'ui-lib-custom';
+import {UiLibInput, InputVariant, InputType, InputLabelFloat, ThemeConfigService, Card} from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -12,7 +12,7 @@ import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-grou
 @Component({
   selector: 'app-inputs',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibInput, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
+  imports: [CommonModule, FormsModule, UiLibInput, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

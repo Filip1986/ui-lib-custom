@@ -1,6 +1,9 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant, IconButton, IconPosition, ThemeConfigService } from 'ui-lib-custom';
+import {
+  Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant,
+  Card, IconButton, IconPosition, ThemeConfigService
+} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -9,7 +12,7 @@ import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-grou
 
 @Component({
   selector: 'app-buttons',
-  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
+  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { Button, Checkbox, CheckboxSize, CheckboxVariant } from 'ui-lib-custom';
+import {Button, Card, Checkbox, CheckboxSize, CheckboxVariant} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-group.component';
@@ -18,6 +18,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
     DocControlGroupComponent,
     DocDemoViewportComponent,
     DocCodeSnippetComponent,
+    Card,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',

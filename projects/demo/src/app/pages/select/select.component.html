@@ -4,8 +4,8 @@
     <p class="doc-description">Dropdown component with search, multi-select, and templates. Use the controls to see live changes.</p>
   </div>
 
-  <div class="doc-section" id="playground" data-doc-anchor>
-    <h2>Playground</h2>
+  <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+    <div card-header>Playground</div>
 
     <div class="doc-controls">
       <app-doc-control-group title="Style" description="Choose variant and follow theme defaults.">
@@ -61,5 +61,5 @@
         <div class="current-value"><strong>Value:</strong> {{ value() | json }}</div>
       </div>
     </app-doc-demo-viewport>
-  </div>
+  </ui-lib-card>
 </app-doc-page-layout>

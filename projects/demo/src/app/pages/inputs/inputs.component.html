@@ -4,8 +4,8 @@
     <p class="doc-description">Configure variant, type, and helpers to see the live input preview.</p>
   </div>
 
-  <div class="doc-section" id="playground" data-doc-anchor>
-    <h2>Playground</h2>
+  <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+    <div card-header>Playground</div>
 
     <div class="doc-controls">
       <app-doc-control-group title="Style" description="Variant, input type, and label float behavior." [columns]="3">
@@ -123,5 +123,5 @@
         </form>
       </div>
     </app-doc-demo-viewport>
-  </div>
+  </ui-lib-card>
 </app-doc-page-layout>

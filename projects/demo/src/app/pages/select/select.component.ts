@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal, computed, inject, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UiLibSelect, SelectOption, SelectVariant, ThemeConfigService, Button } from 'ui-lib-custom';
+import {UiLibSelect, SelectOption, SelectVariant, ThemeConfigService, Button, Card} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -11,7 +11,7 @@ import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-grou
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibSelect, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective],
+  imports: [CommonModule, FormsModule, UiLibSelect, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
