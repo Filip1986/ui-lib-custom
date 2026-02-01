@@ -6,6 +6,12 @@
 .doc-demo-viewport__content {
   padding: 1rem;
 }
+
+.viewport-width-card,
+.viewport-density-card {
+  margin-bottom: 0.5rem;
+}
+
 .viewport-controls {
   display: flex;
   justify-content: space-between;
@@ -41,4 +47,10 @@
     font-size: 0.9rem;
     color: var(--uilib-muted, #5f6c80);
   }
+}
+
+.density-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
