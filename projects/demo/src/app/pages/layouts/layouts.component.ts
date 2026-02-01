@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Stack, Inline, Grid, Container } from 'ui-lib-custom';
+import { Card, Stack, Inline, Grid, Container } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -7,7 +7,7 @@ import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewpor
 @Component({
   selector: 'app-layouts',
   standalone: true,
-  imports: [Stack, Inline, Grid, Container, DocPageLayoutComponent, DocDemoViewportComponent],
+  imports: [Stack, Inline, Grid, Container, Card, DocPageLayoutComponent, DocDemoViewportComponent],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

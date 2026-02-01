@@ -5,6 +5,3 @@ export interface DocSection {
   level?: 2 | 3;
   children?: DocSection[];
 }
-
-// Alias for consumers that store the active section id as a signal.
-export type ActiveSectionId = string | null;
