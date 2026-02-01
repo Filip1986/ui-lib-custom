@@ -1,11 +1,26 @@
-<div class="control-group__header" *ngIf="title() || description()">
-  <div>
-    <div class="control-group__title" *ngIf="title()">{{ title() }}</div>
-    <p class="control-group__description" *ngIf="description()">{{ description() }}</p>
-  </div>
-  <ng-content select="[actions]"></ng-content>
-</div>
+<ui-lib-card
+  class="control-group-card"
+  [bordered]="true"
+  [showFooter]="false"
+  [showHeader]="headerVisible()"
+  [style.--uilib-card-header-padding]="'0.75rem 1rem'"
+  [style.--uilib-card-body-padding]="'1rem'"
+>
+  @if (headerVisible()) {
+    <div card-header class="control-group__header">
+      <div>
+        @if (title()) {
+          <div class="control-group__title">{{ title() }}</div>
+        }
+        @if (description()) {
+          <p class="control-group__description">{{ description() }}</p>
+        }
+      </div>
+      <ng-content select="[actions]"></ng-content>
+    </div>
+  }
 
-<div class="control-group__grid">
-  <ng-content></ng-content>
-</div>
+  <div class="control-group__grid">
+    <ng-content></ng-content>
+  </div>
+</ui-lib-card>

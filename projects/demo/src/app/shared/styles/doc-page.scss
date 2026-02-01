@@ -285,67 +285,57 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
   margin: 1rem 0 1.5rem;
+
+  .control-group {
+    display: block;
+  }
+
+  .control-group__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .control-group__title {
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .control-group__description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+
+  .control-group__grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .control-group--columns-3 .control-group__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 1200px) {
   .doc-controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .control-group--columns-3 .control-group__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 }
 
 @media (max-width: 768px) {
   .doc-controls {
     grid-template-columns: 1fr;
-  }
-}
 
-.control-group {
-  display: grid;
-  gap: 0.75rem;
-  padding: 1rem;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06);
-}
-
-.control-group__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-
-.control-group__title {
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.control-group__description {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #6b7280;
-}
-
-.control-group__grid {
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.control-group--columns-3 .control-group__grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-@media (max-width: 1200px) {
-  .control-group--columns-3 .control-group__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .control-group--columns-3 .control-group__grid {
-    grid-template-columns: 1fr;
+    .control-group--columns-3 .control-group__grid {
+      grid-template-columns: 1fr;
+    }
   }
 }
 

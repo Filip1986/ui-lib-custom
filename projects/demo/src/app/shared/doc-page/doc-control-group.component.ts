@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, HostBinding, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Card } from 'ui-lib-custom';
 
 @Component({
   selector: 'app-doc-control-group',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Card],
   templateUrl: './doc-control-group.component.html',
   styleUrl: './doc-control-group.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,6 +15,8 @@ export class DocControlGroupComponent {
   title = input<string>('');
   description = input<string>('');
   columns = input<number | null>(null);
+
+  headerVisible = computed(() => !!this.title()?.trim() || !!this.description()?.trim());
 
   @HostBinding('class.control-group--columns-3')
   get isThreeColumns(): boolean {
