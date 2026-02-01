@@ -4,44 +4,44 @@
     <p class="doc-description">Dropdown component with search, multi-select, and templates. Use the controls to see live changes.</p>
   </div>
 
+  <div class="doc-controls">
+    <app-doc-control-group title="Style" description="Choose variant and follow theme defaults.">
+      <div class="control">
+        <label>Variant</label>
+        <div class="chips">
+          @for (v of variants; track v) {
+            <ui-lib-button
+              class="control-chip"
+              size="small"
+              [variant]="'minimal'"
+              [appearance]="variant() === v ? 'solid' : 'ghost'"
+              color="primary"
+              (click)="setVariant(v)">{{ v }}</ui-lib-button>
+          }
+        </div>
+        <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
+      </div>
+    </app-doc-control-group>
+
+    <app-doc-control-group title="Behavior" description="Toggle selection, search, and states.">
+      <div class="toggles">
+        <label><input type="checkbox" [checked]="multiple()" (change)="toggleMultiple($any($event.target).checked)"> Multiple</label>
+        <label><input type="checkbox" [checked]="searchable()" (change)="toggleSearchable($any($event.target).checked)"> Searchable</label>
+        <label><input type="checkbox" [checked]="disabled()" (change)="toggleDisabled($any($event.target).checked)"> Disabled</label>
+        <label><input type="checkbox" [checked]="loading()" (change)="toggleLoading($any($event.target).checked)"> Loading</label>
+      </div>
+    </app-doc-control-group>
+
+    <app-doc-control-group title="Content" description="Set placeholder text.">
+      <div class="control">
+        <label>Placeholder</label>
+        <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
+      </div>
+    </app-doc-control-group>
+  </div>
+
   <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
     <div card-header>Playground</div>
-
-    <div class="doc-controls">
-      <app-doc-control-group title="Style" description="Choose variant and follow theme defaults.">
-        <div class="control">
-          <label>Variant</label>
-          <div class="chips">
-            @for (v of variants; track v) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="variant() === v ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="setVariant(v)">{{ v }}</ui-lib-button>
-            }
-          </div>
-          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
-        </div>
-      </app-doc-control-group>
-
-      <app-doc-control-group title="Behavior" description="Toggle selection, search, and states.">
-        <div class="toggles">
-          <label><input type="checkbox" [checked]="multiple()" (change)="toggleMultiple($any($event.target).checked)"> Multiple</label>
-          <label><input type="checkbox" [checked]="searchable()" (change)="toggleSearchable($any($event.target).checked)"> Searchable</label>
-          <label><input type="checkbox" [checked]="disabled()" (change)="toggleDisabled($any($event.target).checked)"> Disabled</label>
-          <label><input type="checkbox" [checked]="loading()" (change)="toggleLoading($any($event.target).checked)"> Loading</label>
-        </div>
-      </app-doc-control-group>
-
-      <app-doc-control-group title="Content" description="Set placeholder text.">
-        <div class="control">
-          <label>Placeholder</label>
-          <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
-        </div>
-      </app-doc-control-group>
-    </div>
 
     <app-doc-demo-viewport>
       <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
