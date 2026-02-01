@@ -8,7 +8,7 @@ import { Icon, IconLibrary, IconSize, SemanticIcon, ThemeConfigService, ThemeIco
   standalone: true,
   imports: [CommonModule, FormsModule, Icon, TitleCasePipe],
   templateUrl: './icon-editor-panel.html',
-  styleUrl: './icon-editor-panel.scss',
+  styleUrls: ['./icon-editor-panel.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconEditorPanel {

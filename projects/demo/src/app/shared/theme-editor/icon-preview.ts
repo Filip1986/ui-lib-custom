@@ -7,7 +7,7 @@ import { Icon, IconLibrary, SemanticIcon, SEMANTIC_ICONS } from 'ui-lib-custom';
   standalone: true,
   imports: [CommonModule, Icon],
   templateUrl: './icon-preview.html',
-  styleUrl: './icon-preview.scss',
+  styleUrls: ['./icon-preview.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconPreview {
