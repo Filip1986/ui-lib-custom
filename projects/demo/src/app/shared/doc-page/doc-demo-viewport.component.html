@@ -1,28 +1,30 @@
 <div class="doc-demo-viewport">
   @if (preview; as p) {
-    <div class="viewport-controls">
-      <div class="preset-buttons">
-        <ui-lib-button size="small" appearance="ghost" (click)="p.setPreset(p.presets[0])">Full width</ui-lib-button>
-        @for (preset of p.presets.slice(1); track preset.key) {
-          <ui-lib-button size="small" appearance="ghost" (click)="p.setPreset(preset)">{{ preset.label }}</ui-lib-button>
-        }
-        <div class="custom">
-          <label>Custom</label>
-          <input type="number" min="200" max="2000" [ngModel]="p.customWidth()" (ngModelChange)="p.customWidth.set($event)">
-          <ui-lib-button size="small" appearance="ghost" (click)="p.setCustom()">Apply</ui-lib-button>
+    <ui-lib-card class="viewport-controls-card" variant="material" [bordered]="true" [showHeader]="false" [showFooter]="false">
+      <div class="viewport-controls">
+        <div class="preset-buttons">
+          <ui-lib-button size="small" appearance="ghost" (click)="p.setPreset(p.presets[0])">Full width</ui-lib-button>
+          @for (preset of p.presets.slice(1); track preset.key) {
+            <ui-lib-button size="small" appearance="ghost" (click)="p.setPreset(preset)">{{ preset.label }}</ui-lib-button>
+          }
+          <div class="custom">
+            <label>Custom</label>
+            <input type="number" min="200" max="2000" [ngModel]="p.customWidth()" (ngModelChange)="p.customWidth.set($event)">
+            <ui-lib-button size="small" appearance="ghost" (click)="p.setCustom()">Apply</ui-lib-button>
+          </div>
+        </div>
+        <div class="controls">
+          <span class="dims">{{ p.displayWidth() }} × {{ p.displayHeight() }}px</span>
+          <ui-lib-button size="small" appearance="ghost" (click)="p.rotate()">Rotate</ui-lib-button>
+          <div class="density-toggle">
+            <span>Density</span>
+            <ui-lib-button size="small" appearance="ghost" (click)="setDensity('default')" [class.active]="density() === 'default'">Default</ui-lib-button>
+            <ui-lib-button size="small" appearance="ghost" (click)="setDensity('comfortable')" [class.active]="density() === 'comfortable'">Comfortable</ui-lib-button>
+            <ui-lib-button size="small" appearance="ghost" (click)="setDensity('compact')" [class.active]="density() === 'compact'">Compact</ui-lib-button>
+          </div>
         </div>
       </div>
-      <div class="controls">
-        <span class="dims">{{ p.displayWidth() }} × {{ p.displayHeight() }}px</span>
-        <ui-lib-button size="small" appearance="ghost" (click)="p.rotate()">Rotate</ui-lib-button>
-        <div class="density-toggle">
-          <span>Density</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="setDensity('default')" [class.active]="density() === 'default'">Default</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setDensity('comfortable')" [class.active]="density() === 'comfortable'">Comfortable</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setDensity('compact')" [class.active]="density() === 'compact'">Compact</ui-lib-button>
-        </div>
-      </div>
-    </div>
+    </ui-lib-card>
   }
 
   <ui-lib-card variant="material" class="doc-demo-card" [bordered]="true" [showFooter]="false" [showHeader]="false">

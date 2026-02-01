@@ -7,16 +7,16 @@
   padding: 1rem;
 }
 
+.viewport-controls-card {
+  margin-bottom: 0.5rem;
+}
+
 .viewport-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 0.75rem;
-  margin-bottom: 0.5rem;
-  background: var(--uilib-surface, #fff);
-  border: 1px solid var(--uilib-border, #e0e0e0);
-  border-radius: var(--uilib-radius-md, 8px);
 }
 
 .preset-buttons {
