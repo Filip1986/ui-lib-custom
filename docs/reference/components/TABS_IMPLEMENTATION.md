@@ -1,0 +1,20 @@
+# Tabs Implementation Notes
+
+## Architecture
+- Compound pattern: `ui-lib-tabs` hosts tablist and panels; projected `ui-lib-tab` carries label/content templates; `ui-lib-tab-panel` renders panels.
+- Roving tabindex on tab triggers; orientation-aware keyboard map; animated indicator for material variant.
+- Controlled/uncontrolled: `selectedIndex`/`selectedValue` vs `defaultIndex`/`defaultValue`; internal signal keeps state when uncontrolled.
+- Lazy rendering: `lazy=false` eager; `lazy='unmount'` removes inactive panels; `lazy='keep-alive'` caches once rendered.
+- Focus: stays on trigger by default; optional `focusPanelOnSelect` moves focus into active panel.
+
+## Performance
+- Standalone + OnPush + signals throughout; computed classes/ids only.
+- Single host elements for tabs/panels; minimal DOM (buttons for triggers, direct panel hosts).
+- Indicator updates scheduled via `queueMicrotask` to avoid layout thrash; only material variant computes indicator position.
+- Lazy modes reduce DOM weight for large tab sets; `keep-alive` avoids remount cost.
+
+## Extension Points
+- Styling via CSS vars (`--uilib-tabs-*`, `--uilib-tab-*`, `--uilib-tabs-indicator-*`); variants map to tokens.
+- Slots: `uiLibTabLabel` template for custom labels (icons, stacks); panel content via projection.
+- Events: `selectedChange`, `selectedIndexChange`, `tabClose`, `tabFocus` for external orchestration; controlled mode with `selectedValue` preferred for dynamic lists.
+- Future: overflow handling (`scrollBehavior='arrows'|'overflow-menu'`), primitives (`ui-lib-tab-list`) if deeper composition needed.

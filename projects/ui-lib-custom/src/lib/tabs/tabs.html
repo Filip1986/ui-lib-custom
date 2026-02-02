@@ -1,0 +1,71 @@
+<nav
+  [class]="'tab-list ' + tabsClasses()"
+  role="tablist"
+  [attr.aria-orientation]="orientation()"
+  #tabList
+>
+  @for (tab of tabContexts(); track tab.index) {
+    <div class="tab-trigger-wrapper" [class.tab-active]="isActive(tab.index)">
+      <button
+        #tabButton
+        type="button"
+        class="tab-trigger"
+        [class.tab-active]="isActive(tab.index)"
+        [class.tab-disabled]="tab.disabled || disabled()"
+        role="tab"
+        [id]="tabId(tab.index)"
+        [attr.aria-selected]="isActive(tab.index)"
+        [attr.aria-controls]="panelId(tab.index)"
+        [attr.aria-disabled]="(tab.disabled || disabled()) ? true : null"
+        [attr.tabindex]="tabTabIndex(tab.index, tab.disabled)"
+        (click)="onSelect(tab)"
+        (focus)="onFocus(tab)"
+        (keydown)="onKeydown($event, tab.index)"
+      >
+        <span class="tab-label" [class.tab-label-icon-top]="iconPosition() === 'top'">
+          @if (tab.labelTemplate) {
+            <ng-container [ngTemplateOutlet]="tab.labelTemplate"></ng-container>
+          } @else {
+            {{ tab.label ?? ('Tab ' + (tab.index + 1)) }}
+          }
+        </span>
+      </button>
+      @if (tab.closable) {
+        <button
+          type="button"
+          class="tab-close"
+          tabindex="-1"
+          aria-label="Close tab"
+          (click)="onClose(tab, $event)"
+        >
+          ×
+        </button>
+      }
+    </div>
+  }
+
+  @if (variant() === 'material' && indicatorStyles()) {
+    <span
+      class="tab-indicator"
+      [style.transform]="indicatorStyles()?.transform"
+      [style.width]="indicatorStyles()?.width"
+    ></span>
+  }
+</nav>
+
+<section class="tab-panels">
+  @for (tab of tabContexts(); track tab.index) {
+    @if (shouldRenderPanel(tab.value, tab.index)) {
+      <ui-lib-tab-panel
+        class="tab-panel-host"
+        [id]="panelId(tab.index)"
+        [labelId]="tabId(tab.index)"
+        [active]="isActive(tab.index)"
+      >
+        @if (tab.content) {
+          <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
+        }
+      </ui-lib-tab-panel>
+    }
+  }
+</section>

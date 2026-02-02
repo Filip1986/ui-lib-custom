@@ -12,6 +12,7 @@ import { SidebarMenuDemoComponent } from './pages/sidebar-menu/sidebar-menu.comp
 import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
 import { ShadowsComponent } from './pages/shadows/shadows.component';
 import { CheckboxesComponent } from './pages/checkboxes/checkboxes.component';
+import { TabsDemoComponent } from './pages/tabs/tabs.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -27,6 +28,7 @@ export const routes: Routes = [
   { path: 'sidebar-menu', component: SidebarMenuDemoComponent, title: 'Sidebar Menu - UI Components Library' },
   { path: 'project-starter', component: ProjectStarterComponent, title: 'Project Starter - UI Components Library' },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
+  { path: 'tabs', component: TabsDemoComponent, title: 'Tabs - UI Components Library' },
   { path: 'icons', loadComponent: () => import('./pages/icons/icons-demo.component').then(m => m.IconsDemoComponent), title: 'Icons - UI Components Library' },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' }

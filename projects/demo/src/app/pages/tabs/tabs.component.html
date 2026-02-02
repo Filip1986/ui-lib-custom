@@ -1,0 +1,316 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Tabs</h1>
+    <p class="doc-description">
+      Switch between content sections with accessible, theme-aware tabs. Configure variant, size, orientation, alignment, and lazy behavior in the playground.
+    </p>
+  </div>
+
+  <div class="doc-tabs">
+    <button class="doc-tab" [class.active]="activeTab() === 'playground'" (click)="setTab('playground')">Playground</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'api-reference'" (click)="setTab('api-reference')">API Reference</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'usage'" (click)="setTab('usage')">Usage</button>
+    <button class="doc-tab" [class.active]="activeTab() === 'accessibility'" (click)="setTab('accessibility')">Accessibility</button>
+  </div>
+
+  <ng-container *ngIf="activeTab() === 'playground'">
+    <div class="doc-controls">
+      <app-doc-control-group title="Style" description="Variant, size, orientation, alignment." [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            <ng-container *ngFor="let v of variants; trackBy: track">
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setVariant(v)"
+              >{{ v }}</ui-lib-button>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Size</label>
+          <div class="chips">
+            <ng-container *ngFor="let s of sizes; trackBy: track">
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="size() === s ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setSize(s)"
+              >{{ s }}</ui-lib-button>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Orientation</label>
+          <div class="chips">
+            <ng-container *ngFor="let o of orientations; trackBy: track">
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="orientation() === o ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setOrientation(o)"
+              >{{ o }}</ui-lib-button>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Alignment</label>
+          <div class="chips">
+            <ng-container *ngFor="let a of aligns; trackBy: track">
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="align() === a ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setAlign(a)"
+              >{{ a }}</ui-lib-button>
+            </ng-container>
+          </div>
+        </div>
+      </app-doc-control-group>
+
+      <app-doc-control-group title="Behavior" description="Closable, lazy rendering, disabled." [columns]="2">
+        <div class="control">
+          <label>Lazy rendering</label>
+          <div class="chips">
+            <ng-container *ngFor="let mode of lazyModes; trackBy: track">
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="lazy() === mode ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setLazy(mode)"
+              >{{ mode === false ? 'off' : mode }}</ui-lib-button>
+            </ng-container>
+          </div>
+        </div>
+        <div class="toggles">
+          <label><input type="checkbox" [checked]="closable()" (change)="toggleClosable($any($event.target).checked)"> Closable</label>
+          <label><input type="checkbox" [checked]="disabledAll()" (change)="toggleDisabled($any($event.target).checked)"> Disable all</label>
+        </div>
+      </app-doc-control-group>
+    </div>
+
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+      <div card-header>Playground</div>
+      <p>Adjust the controls above to see the tabs update live.</p>
+
+      <app-doc-demo-viewport>
+        <div class="doc-demo" [appThemeScope]="appliedTheme()">
+          <ui-lib-tabs
+            [variant]="variant()"
+            [size]="size()"
+            [orientation]="orientation()"
+            [align]="align()"
+            [lazy]="lazy()"
+            [closable]="closable()"
+            [disabled]="disabledAll()"
+          >
+            <ng-container *ngFor="let tab of playgroundTabs(); trackBy: track">
+              <ui-lib-tab [value]="tab.value" [label]="tab.label" [disabled]="!!tab.disabled" [closable]="!!tab.closable">
+                {{ tab.content }}
+              </ui-lib-tab>
+            </ng-container>
+          </ui-lib-tabs>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+
+    <div class="demo-grid">
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Basic tabs</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs>
+              <ui-lib-tab label="Home">Home content</ui-lib-tab>
+              <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
+              <ui-lib-tab label="Settings">Settings content</ui-lib-tab>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Icon tabs</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs variant="material">
+              <ng-container *ngFor="let tab of iconTabs; trackBy: track">
+                <ui-lib-tab [value]="tab.value">
+                  <ng-template uiLibTabLabel>
+                    <ui-lib-icon [name]="tab.icon || ''" /> {{ tab.label }}
+                  </ng-template>
+                  {{ tab.content }}
+                </ui-lib-tab>
+              </ng-container>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Icon + text (stacked)</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs variant="material" iconPosition="top">
+              <ng-container *ngFor="let tab of iconTextTabs; trackBy: track">
+                <ui-lib-tab [value]="tab.value">
+                  <ng-template uiLibTabLabel>
+                    <ui-lib-icon [name]="tab.icon || ''" /> {{ tab.label }}
+                  </ng-template>
+                  {{ tab.content }}
+                </ui-lib-tab>
+              </ng-container>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Vertical tabs</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs orientation="vertical" size="small">
+              <ng-container *ngFor="let tab of verticalTabs; trackBy: track">
+                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                  {{ tab.content }}
+                </ui-lib-tab>
+              </ng-container>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Closable tabs</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs [closable]="true" (tabClose)="onCloseTab($event)">
+              <ng-container *ngFor="let tab of closableTabs(); trackBy: track">
+                <ui-lib-tab [value]="tab.value" [label]="tab.label" [closable]="!!tab.closable">
+                  {{ tab.content }}
+                </ui-lib-tab>
+              </ng-container>
+            </ui-lib-tabs>
+            <ui-lib-button size="small" variant="minimal" appearance="ghost" (click)="resetClosableTabs()">Reset tabs</ui-lib-button>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Disabled tabs</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs>
+              <ui-lib-tab label="Active">Active content</ui-lib-tab>
+              <ui-lib-tab label="Disabled" [disabled]="true">Disabled content</ui-lib-tab>
+              <ui-lib-tab label="Another">Another content</ui-lib-tab>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Lazy loading</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs lazy="keep-alive">
+              <ng-container *ngFor="let tab of lazyTabs; trackBy: track">
+                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                  {{ tab.content }}
+                </ui-lib-tab>
+              </ng-container>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Controlled mode</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <div class="control-row">
+              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(0)">Select first</ui-lib-button>
+              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(1)">Select second</ui-lib-button>
+              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(2)">Select third</ui-lib-button>
+            </div>
+            <ui-lib-tabs [selectedIndex]="controlledSelection()" (selectedChange)="onControlledChange($event)">
+              <ng-container *ngFor="let tab of controlledTabs; trackBy: track">
+                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                  {{ tab.content }}
+                </ui-lib-tab>
+              </ng-container>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab() === 'api-reference'">
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>variant</code></td><td><code>TabsVariant</code></td><td><code>material</code></td><td>Visual style (material, bootstrap, minimal)</td></tr>
+          <tr><td><code>size</code></td><td><code>TabsSize</code></td><td><code>medium</code></td><td>Control padding/typography</td></tr>
+          <tr><td><code>orientation</code></td><td><code>TabsOrientation</code></td><td><code>horizontal</code></td><td>Orientation of tab list</td></tr>
+          <tr><td><code>align</code></td><td><code>TabsAlignment</code></td><td><code>start</code></td><td>Alignment of tab triggers</td></tr>
+          <tr><td><code>selectedIndex</code></td><td><code>number</code></td><td><code>null</code></td><td>Controlled selection by index</td></tr>
+          <tr><td><code>selectedValue</code></td><td><code>TabsValue</code></td><td><code>null</code></td><td>Controlled selection by value</td></tr>
+          <tr><td><code>lazy</code></td><td><code>false | 'unmount' | 'keep-alive'</code></td><td><code>false</code></td><td>Panel rendering strategy</td></tr>
+          <tr><td><code>closable</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Show close affordance on tabs</td></tr>
+          <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disable all tabs</td></tr>
+          <tr><td><code>selectedChange</code></td><td><code>&#123; value: TabsValue &#124; null; index: number &#125;</code></td><td>-</td><td>Emits when selection changes</td></tr>
+          <tr><td><code>selectedIndexChange</code></td><td><code>number</code></td><td>-</td><td>Index-only selection change</td></tr>
+          <tr><td><code>tabClose</code></td><td><code>&#123; value: TabsValue &#124; null; index: number &#125;</code></td><td>-</td><td>Emits when a tab is closed</td></tr>
+        </tbody>
+      </table>
+    </ui-lib-card>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab() === 'usage'">
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Basic" [code]="snippets.basic"></app-doc-code-snippet>
+      <app-doc-code-snippet title="Icon tabs" [code]="snippets.icons"></app-doc-code-snippet>
+      <app-doc-code-snippet title="Vertical" [code]="snippets.vertical"></app-doc-code-snippet>
+      <app-doc-code-snippet title="Closable" [code]="snippets.closable"></app-doc-code-snippet>
+      <app-doc-code-snippet title="Controlled" [code]="snippets.controlled"></app-doc-code-snippet>
+    </ui-lib-card>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab() === 'accessibility'">
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
+      <div card-header>Accessibility</div>
+      <ul class="doc-list">
+        <li>Uses <code>role="tablist"</code>, <code>role="tab"</code>, and <code>role="tabpanel"</code> for structure.</li>
+        <li>Roving tabindex keeps one tabbable trigger; arrow keys navigate per orientation.</li>
+        <li><code>aria-selected</code>, <code>aria-controls</code>, and <code>aria-labelledby</code> link tabs to panels.</li>
+        <li>Disabled tabs set <code>aria-disabled="true"</code> and are skipped by keyboard navigation.</li>
+        <li>Indicator and focus styles use design tokens for contrast; provide <code>aria-label</code> for icon-only tabs.</li>
+      </ul>
+    </ui-lib-card>
+  </ng-container>
+</app-doc-page-layout>

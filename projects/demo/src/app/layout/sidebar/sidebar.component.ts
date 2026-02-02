@@ -63,6 +63,11 @@ export class SidebarComponent {
           route: '/shadows'
         },
         {
+          label: 'Tabs',
+          icon: 'pi pi-circle',
+          route: '/tabs'
+        },
+        {
           label: 'Login Forms',
           icon: 'pi pi-sign-in',
           route: '/login'

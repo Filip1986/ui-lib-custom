@@ -1,0 +1,19 @@
+@use '../../shared/styles/doc-page.scss';
+
+.doc-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.control-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
