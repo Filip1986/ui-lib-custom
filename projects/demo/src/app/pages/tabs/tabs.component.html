@@ -13,13 +13,13 @@
     <button class="doc-tab" [class.active]="activeTab() === 'accessibility'" (click)="setTab('accessibility')">Accessibility</button>
   </div>
 
-  <ng-container *ngIf="activeTab() === 'playground'">
+  @if (activeTab() === 'playground') {
     <div class="doc-controls">
       <app-doc-control-group title="Style" description="Variant, size, orientation, alignment." [columns]="3">
         <div class="control">
           <label>Variant</label>
           <div class="chips">
-            <ng-container *ngFor="let v of variants; trackBy: track">
+            @for (v of variants; track v) {
               <ui-lib-button
                 class="control-chip"
                 size="small"
@@ -28,14 +28,14 @@
                 color="primary"
                 (click)="setVariant(v)"
               >{{ v }}</ui-lib-button>
-            </ng-container>
+            }
           </div>
         </div>
 
         <div class="control">
           <label>Size</label>
           <div class="chips">
-            <ng-container *ngFor="let s of sizes; trackBy: track">
+            @for (s of sizes; track s) {
               <ui-lib-button
                 class="control-chip"
                 size="small"
@@ -44,14 +44,14 @@
                 color="primary"
                 (click)="setSize(s)"
               >{{ s }}</ui-lib-button>
-            </ng-container>
+            }
           </div>
         </div>
 
         <div class="control">
           <label>Orientation</label>
           <div class="chips">
-            <ng-container *ngFor="let o of orientations; trackBy: track">
+            @for (o of orientations; track o) {
               <ui-lib-button
                 class="control-chip"
                 size="small"
@@ -60,14 +60,14 @@
                 color="primary"
                 (click)="setOrientation(o)"
               >{{ o }}</ui-lib-button>
-            </ng-container>
+            }
           </div>
         </div>
 
         <div class="control">
           <label>Alignment</label>
           <div class="chips">
-            <ng-container *ngFor="let a of aligns; trackBy: track">
+            @for (a of aligns; track a) {
               <ui-lib-button
                 class="control-chip"
                 size="small"
@@ -76,7 +76,7 @@
                 color="primary"
                 (click)="setAlign(a)"
               >{{ a }}</ui-lib-button>
-            </ng-container>
+            }
           </div>
         </div>
       </app-doc-control-group>
@@ -85,7 +85,7 @@
         <div class="control">
           <label>Lazy rendering</label>
           <div class="chips">
-            <ng-container *ngFor="let mode of lazyModes; trackBy: track">
+            @for (mode of lazyModes; track mode) {
               <ui-lib-button
                 class="control-chip"
                 size="small"
@@ -94,7 +94,7 @@
                 color="primary"
                 (click)="setLazy(mode)"
               >{{ mode === false ? 'off' : mode }}</ui-lib-button>
-            </ng-container>
+            }
           </div>
         </div>
         <div class="toggles">
@@ -119,11 +119,11 @@
             [closable]="closable()"
             [disabled]="disabledAll()"
           >
-            <ng-container *ngFor="let tab of playgroundTabs(); trackBy: track">
+            @for (tab of playgroundTabs(); track tab.value) {
               <ui-lib-tab [value]="tab.value" [label]="tab.label" [disabled]="!!tab.disabled" [closable]="!!tab.closable">
                 {{ tab.content }}
               </ui-lib-tab>
-            </ng-container>
+            }
           </ui-lib-tabs>
         </div>
       </app-doc-demo-viewport>
@@ -148,14 +148,14 @@
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs variant="material">
-              <ng-container *ngFor="let tab of iconTabs; trackBy: track">
+              @for (tab of iconTabs; track tab.value) {
                 <ui-lib-tab [value]="tab.value">
                   <ng-template uiLibTabLabel>
                     <ui-lib-icon [name]="tab.icon || ''" /> {{ tab.label }}
                   </ng-template>
                   {{ tab.content }}
                 </ui-lib-tab>
-              </ng-container>
+              }
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
@@ -166,14 +166,14 @@
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs variant="material" iconPosition="top">
-              <ng-container *ngFor="let tab of iconTextTabs; trackBy: track">
+              @for (tab of iconTextTabs; track tab.value) {
                 <ui-lib-tab [value]="tab.value">
                   <ng-template uiLibTabLabel>
                     <ui-lib-icon [name]="tab.icon || ''" /> {{ tab.label }}
                   </ng-template>
                   {{ tab.content }}
                 </ui-lib-tab>
-              </ng-container>
+              }
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
@@ -184,11 +184,11 @@
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs orientation="vertical" size="small">
-              <ng-container *ngFor="let tab of verticalTabs; trackBy: track">
+              @for (tab of verticalTabs; track tab.value) {
                 <ui-lib-tab [value]="tab.value" [label]="tab.label">
                   {{ tab.content }}
                 </ui-lib-tab>
-              </ng-container>
+              }
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
@@ -199,11 +199,11 @@
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs [closable]="true" (tabClose)="onCloseTab($event)">
-              <ng-container *ngFor="let tab of closableTabs(); trackBy: track">
+              @for (tab of closableTabs(); track tab.value) {
                 <ui-lib-tab [value]="tab.value" [label]="tab.label" [closable]="!!tab.closable">
                   {{ tab.content }}
                 </ui-lib-tab>
-              </ng-container>
+              }
             </ui-lib-tabs>
             <ui-lib-button size="small" variant="minimal" appearance="ghost" (click)="resetClosableTabs()">Reset tabs</ui-lib-button>
           </div>
@@ -228,11 +228,11 @@
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <ui-lib-tabs lazy="keep-alive">
-              <ng-container *ngFor="let tab of lazyTabs; trackBy: track">
+              @for (tab of lazyTabs; track tab.value) {
                 <ui-lib-tab [value]="tab.value" [label]="tab.label">
                   {{ tab.content }}
                 </ui-lib-tab>
-              </ng-container>
+              }
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
@@ -248,19 +248,19 @@
               <ui-lib-button size="small" variant="minimal" (click)="selectControlled(2)">Select third</ui-lib-button>
             </div>
             <ui-lib-tabs [selectedIndex]="controlledSelection()" (selectedChange)="onControlledChange($event)">
-              <ng-container *ngFor="let tab of controlledTabs; trackBy: track">
+              @for (tab of controlledTabs; track tab.value) {
                 <ui-lib-tab [value]="tab.value" [label]="tab.label">
                   {{ tab.content }}
                 </ui-lib-tab>
-              </ng-container>
+              }
             </ui-lib-tabs>
           </div>
         </app-doc-demo-viewport>
       </ui-lib-card>
     </div>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="activeTab() === 'api-reference'">
+  @if (activeTab() === 'api-reference') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
       <div card-header>API Reference</div>
       <table class="doc-properties">
@@ -282,15 +282,15 @@
           <tr><td><code>lazy</code></td><td><code>false | 'unmount' | 'keep-alive'</code></td><td><code>false</code></td><td>Panel rendering strategy</td></tr>
           <tr><td><code>closable</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Show close affordance on tabs</td></tr>
           <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disable all tabs</td></tr>
-          <tr><td><code>selectedChange</code></td><td><code>&#123; value: TabsValue &#124; null; index: number &#125;</code></td><td>-</td><td>Emits when selection changes</td></tr>
+          <tr><td><code>selectedChange</code></td><td><code>&#123; value: TabsValue or null; index: number &#125;</code></td><td>-</td><td>Emits when selection changes</td></tr>
           <tr><td><code>selectedIndexChange</code></td><td><code>number</code></td><td>-</td><td>Index-only selection change</td></tr>
-          <tr><td><code>tabClose</code></td><td><code>&#123; value: TabsValue &#124; null; index: number &#125;</code></td><td>-</td><td>Emits when a tab is closed</td></tr>
+          <tr><td><code>tabClose</code></td><td><code>&#123; value: TabsValue or null; index: number &#125;</code></td><td>-</td><td>Emits when a tab is closed</td></tr>
         </tbody>
       </table>
     </ui-lib-card>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="activeTab() === 'usage'">
+  @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
       <app-doc-code-snippet title="Basic" [code]="snippets.basic"></app-doc-code-snippet>
@@ -299,9 +299,9 @@
       <app-doc-code-snippet title="Closable" [code]="snippets.closable"></app-doc-code-snippet>
       <app-doc-code-snippet title="Controlled" [code]="snippets.controlled"></app-doc-code-snippet>
     </ui-lib-card>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="activeTab() === 'accessibility'">
+  @if (activeTab() === 'accessibility') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
       <div card-header>Accessibility</div>
       <ul class="doc-list">
@@ -312,5 +312,5 @@
         <li>Indicator and focus styles use design tokens for contrast; provide <code>aria-label</code> for icon-only tabs.</li>
       </ul>
     </ui-lib-card>
-  </ng-container>
+  }
 </app-doc-page-layout>

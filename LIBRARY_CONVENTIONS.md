@@ -19,6 +19,7 @@
 - Strong typing on all inputs; provide defaults so components render well without configuration.
 - Barrel exports stay tree-shakable; keep `sideEffects: false` and avoid global side effects.
 - Templates use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`); avoid legacy structural directives (`*ngIf/*ngFor`) in new code.
+- **HTML Special Characters**: Always escape special characters in templates that could be interpreted by Angular. Use `&#123;` for `{` and `&#125;` for `}` when displaying literal braces (e.g., in code examples or documentation). Alternatively, use `{{ '{' }}` and `{{ '}' }}` for interpolation-safe output.
 
 ## API Surface (PrimeNG-inspired)
 - Prefix selectors with `ui-lib-`. Inputs favor these patterns: `variant/appearance`, `severity|color`, `size`, `shape`, `state` (`disabled`, `loading`, `active`, `readonly`), `fullWidth`, `iconPosition`.
