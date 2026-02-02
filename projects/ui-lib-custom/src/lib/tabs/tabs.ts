@@ -12,6 +12,7 @@ import {
   input,
   output,
   signal,
+  OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Tab } from './tab';
@@ -34,7 +35,7 @@ import {
   styleUrl: './tabs.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Tabs {
+export class Tabs implements OnDestroy {
   private static nextId = 0;
   readonly uid = `ui-lib-tabs-${++Tabs.nextId}`;
 
@@ -134,6 +135,9 @@ export class Tabs {
     return classes.join(' ');
   });
 
+  private indicatorKey: string | null = null;
+  private indicatorRaf: number | null = null;
+
   constructor() {
     effect(() => {
       if (!this.controlled()) {
@@ -143,21 +147,53 @@ export class Tabs {
 
     effect(() => {
       const active = this.activeSelection();
+      const variant = this.variant();
+
       if (this.lazy() === 'keep-alive') {
-        const next = new Set(this.renderedValues());
-        next.add(active.value);
-        this.renderedValues.set(next);
+        const current = this.renderedValues();
+        if (!current.has(active.value)) {
+          const next = new Set(current);
+          next.add(active.value);
+          this.renderedValues.set(next);
+        }
       }
+
       if (this.focusPanelOnSelect()) {
         queueMicrotask(() => this.focusActivePanel());
       }
-      queueMicrotask(() => this.updateIndicator());
-    });
 
-    effect(() => {
-      this.tabContexts();
-      queueMicrotask(() => this.updateIndicator());
+      const key = variant === 'material' ? `${variant}:${this.orientation()}:${active.index}` : null;
+      if (variant !== 'material') {
+        this.indicatorKey = null;
+        this.cancelIndicatorRaf();
+        this.indicatorStyle.set(null);
+        return;
+      }
+
+      if (key !== this.indicatorKey) {
+        this.indicatorKey = key;
+        this.scheduleIndicatorUpdate();
+      }
     });
+  }
+
+  ngOnDestroy() {
+    this.cancelIndicatorRaf();
+  }
+
+  private scheduleIndicatorUpdate() {
+    this.cancelIndicatorRaf();
+    this.indicatorRaf = requestAnimationFrame(() => {
+      this.indicatorRaf = null;
+      this.updateIndicator();
+    });
+  }
+
+  private cancelIndicatorRaf() {
+    if (this.indicatorRaf !== null) {
+      cancelAnimationFrame(this.indicatorRaf);
+      this.indicatorRaf = null;
+    }
   }
 
   onSelect(tab: { value: TabsValue | null; index: number; disabled: boolean }) {

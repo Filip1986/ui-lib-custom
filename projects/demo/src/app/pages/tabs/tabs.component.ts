@@ -20,7 +20,7 @@ interface DemoTab {
 @Component({
   selector: 'app-tabs-demo',
   standalone: true,
-  imports: [CommonModule, Tabs, Tab, TabLabel, Card, Button, Icon, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, DocCodeSnippetComponent],
+  imports: [CommonModule, Tabs, Tab, TabLabel, Card, Button, Icon, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, DocCodeSnippetComponent, TabLabel, Icon],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
