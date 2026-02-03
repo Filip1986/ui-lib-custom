@@ -1,13 +1,39 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ThemeConfigService } from 'ui-lib-custom';
-import { Button, Card, UiLibInput, UiLibSelect } from 'ui-lib-custom';
+import {
+  ThemeConfigService,
+  Button,
+  Card,
+  UiLibInput,
+  UiLibSelect,
+  Tabs,
+  Tab,
+  TabsValue,
+} from 'ui-lib-custom';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+
+type TabKey = 'playground' | 'api-reference' | 'usage';
 
 @Component({
   selector: 'app-project-starter',
   standalone: true,
-  imports: [CommonModule, FormsModule, Button, Card, UiLibInput, UiLibSelect],
+  imports: [
+    CommonModule,
+    FormsModule,
+    Tabs,
+    Tab,
+    Card,
+    Button,
+    UiLibInput,
+    UiLibSelect,
+    DocPageLayoutComponent,
+    DocDemoViewportComponent,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './project-starter.component.html',
   styleUrl: './project-starter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,8 +52,25 @@ export class ProjectStarterComponent {
     { label: 'Gamma', value: 'gamma' },
   ];
 
+  readonly sections: DocSection[] = [
+    { id: 'playground', label: 'Playground' },
+    { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
+  ];
+
+  activeTab = signal<TabKey>('playground');
+
   constructor() {
     this.refreshSaved();
+  }
+
+  setTab(tab: TabKey) {
+    this.activeTab.set(tab);
+  }
+
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
   }
 
   saveTheme(): void {
@@ -102,4 +145,18 @@ export class ProjectStarterComponent {
   private refreshSaved(): void {
     this.savedThemes.set(this.themeService.listSavedThemes());
   }
+
+  readonly snippets = {
+    usage: `import { ThemeConfigService } from 'ui-lib-custom';
+
+constructor(private theme: ThemeConfigService) {}
+
+saveTheme(name: string) {
+  this.theme.saveToLocalStorage(name);
+}
+
+loadTheme(name: string) {
+  this.theme.loadFromLocalStorage(name);
+}`,
+  } as const;
 }
