@@ -123,7 +123,8 @@
 }
 
 // Links
-a, .link {
+a,
+.link {
   color: #667eea;
   text-decoration: none;
 
@@ -143,7 +144,9 @@ a, .link {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // Error messages

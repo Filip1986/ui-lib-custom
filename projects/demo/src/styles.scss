@@ -3,8 +3,18 @@
 @use '../../ui-lib-custom/src/lib/themes/themes.scss' as *;
 
 // SCSS Variables
-$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-  Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$font-family-base:
+  'Inter',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  Helvetica,
+  Arial,
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol';
 
 // Global Reset
 * {
@@ -13,7 +23,8 @@ $font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   font-family: var(--uilib-font-family-base, $font-family-base);
   -webkit-font-smoothing: antialiased;

@@ -61,8 +61,18 @@ import { IconSize, SemanticIcon, SEMANTIC_ICONS } from 'ui-lib-custom';
             <div class="icon-button-group">
               <h4>{{ variant | titlecase }}</h4>
               <ui-lib-icon-button icon="settings" [variant]="variant" ariaLabel="Settings" />
-              <ui-lib-icon-button icon="edit" [variant]="variant" color="primary" ariaLabel="Edit" />
-              <ui-lib-icon-button icon="delete" [variant]="variant" color="danger" ariaLabel="Delete" />
+              <ui-lib-icon-button
+                icon="edit"
+                [variant]="variant"
+                color="primary"
+                ariaLabel="Edit"
+              />
+              <ui-lib-icon-button
+                icon="delete"
+                [variant]="variant"
+                color="danger"
+                ariaLabel="Delete"
+              />
             </div>
           }
         </div>
@@ -110,8 +120,21 @@ export class IconsDemoComponent {
   variants = ['material', 'bootstrap', 'minimal'] as const;
   severities = ['success', 'error', 'warning', 'info'] as const;
   semanticIcons: SemanticIcon[] = [
-    'close', 'menu', 'search', 'settings', 'add', 'edit', 'delete',
-    'home', 'user', 'mail', 'check', 'x', 'star', 'heart', 'bell',
+    'close',
+    'menu',
+    'search',
+    'settings',
+    'add',
+    'edit',
+    'delete',
+    'home',
+    'user',
+    'mail',
+    'check',
+    'x',
+    'star',
+    'heart',
+    'bell',
   ];
 
   loading = signal(false);
@@ -122,7 +145,7 @@ export class IconsDemoComponent {
   filteredIcons = computed(() => {
     const query = this.searchQuery().toLowerCase();
     if (!query) return this.allIcons;
-    return this.allIcons.filter(icon => icon.toLowerCase().includes(query));
+    return this.allIcons.filter((icon) => icon.toLowerCase().includes(query));
   });
 
   onSearch(event: Event) {

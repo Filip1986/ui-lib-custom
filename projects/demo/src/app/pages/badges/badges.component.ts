@@ -1,6 +1,17 @@
 import { Component, ChangeDetectionStrategy, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {Badge, Inline, BadgeColor, BadgeVariant, BadgeSize, Button, Card, Tabs, Tab, TabsValue} from 'ui-lib-custom';
+import {
+  Badge,
+  Inline,
+  BadgeColor,
+  BadgeVariant,
+  BadgeSize,
+  Button,
+  Card,
+  Tabs,
+  Tab,
+  TabsValue,
+} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -12,7 +23,18 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 @Component({
   selector: 'app-badges',
   standalone: true,
-  imports: [Badge, Button, Tabs, Tab, DocPageLayoutComponent, DocCodeSnippetComponent, DocControlGroupComponent, DocDemoViewportComponent, Card, FormsModule],
+  imports: [
+    Badge,
+    Button,
+    Tabs,
+    Tab,
+    DocPageLayoutComponent,
+    DocCodeSnippetComponent,
+    DocControlGroupComponent,
+    DocDemoViewportComponent,
+    Card,
+    FormsModule,
+  ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,7 +66,15 @@ export class BadgesComponent {
   text = signal('New');
 
   readonly variants: BadgeVariant[] = ['solid', 'outline', 'subtle'];
-  readonly colors: BadgeColor[] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'neutral'];
+  readonly colors: BadgeColor[] = [
+    'primary',
+    'secondary',
+    'success',
+    'danger',
+    'warning',
+    'info',
+    'neutral',
+  ];
   readonly sizes: BadgeSize[] = ['sm', 'md', 'lg'];
 
   readonly snippets = {
@@ -54,7 +84,7 @@ export class BadgesComponent {
   imports: [Badge],
   template: \
     '<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>'
-})`
+})`,
   } as const;
 
   @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;

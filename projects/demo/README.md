@@ -3,6 +3,7 @@
 ## Overview
 
 The demo application now features a complete routing system with a professional navigation menu. Users can:
+
 - View all components on the home page with quick links
 - Navigate to individual component pages for detailed exploration
 - Use a responsive PrimeNG Menubar for navigation
@@ -82,17 +83,20 @@ projects/demo/src/app/
 ## Features
 
 ### Responsive Design
+
 - Mobile-friendly navigation with hamburger menu
 - Adaptive layouts for all screen sizes
 - Touch-friendly interface
 
 ### User Experience
+
 - Smooth transitions between pages
 - Consistent styling across all pages
 - Clear visual hierarchy
 - Interactive hover effects
 
 ### Navigation
+
 - Dropdown menus for organized navigation
 - Breadcrumb-style navigation on home page
 - Direct links from component previews
@@ -101,11 +105,13 @@ projects/demo/src/app/
 ## Usage
 
 ### Running the Demo
+
 ```bash
 npm start
 ```
 
 ### Navigation Flow
+
 1. Start at the home page to see an overview
 2. Click on quick link cards or use the navigation menu
 3. Explore individual component pages in detail
@@ -116,6 +122,7 @@ npm start
 To add a new component to the demo:
 
 1. Create a new page component:
+
    ```bash
    # In projects/demo/src/app/pages/
    mkdir new-component
@@ -126,6 +133,7 @@ To add a new component to the demo:
    ```
 
 2. Add the route in `app.routes.ts`:
+
    ```typescript
    {
      path: 'new-component',
@@ -135,6 +143,7 @@ To add a new component to the demo:
    ```
 
 3. Add menu item in `app.ts`:
+
    ```typescript
    {
      label: 'New Component',
@@ -148,25 +157,31 @@ To add a new component to the demo:
 ## Styling
 
 ### Theme Variables
+
 The app uses consistent SCSS variables:
+
 - Primary gradient: `#667eea` to `#764ba2`
 - Breakpoints: Mobile (768px), Tablet (968px)
 - Spacing: Small (1rem), Medium (2rem), Large (3rem)
 
 ### Menubar Customization
+
 The PrimeNG Menubar is heavily customized with:
+
 - Glass morphism effect (backdrop blur)
 - Gradient hover states
 - Custom colors and spacing
 - Smooth transitions
 
 ## Browser Support
+
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari (latest)
 - Mobile browsers
 
 ## Performance
+
 - Lazy loading ready (can be implemented)
 - Optimized bundle sizes
 - Fast navigation with Angular router

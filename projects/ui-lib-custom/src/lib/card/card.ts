@@ -1,5 +1,10 @@
 import {
-  Component, ChangeDetectionStrategy, input, computed, output, ViewEncapsulation
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  computed,
+  output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Icon } from '../icon/icon';
@@ -37,11 +42,7 @@ export class Card {
   footerVisible = computed(() => this.showFooter() !== false);
 
   cardClasses = computed(() => {
-    const classes = [
-      'card',
-      `card-${this.variant()}`,
-      `card-elevation-${this.elevation()}`,
-    ];
+    const classes = ['card', `card-${this.variant()}`, `card-elevation-${this.elevation()}`];
 
     if (this.bordered()) {
       classes.push('card-bordered');

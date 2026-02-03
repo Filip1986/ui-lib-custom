@@ -1,5 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, TemplateRef, ViewChild, ViewEncapsulation, computed, forwardRef, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  TemplateRef,
+  ViewChild,
+  ViewEncapsulation,
+  computed,
+  forwardRef,
+  input,
+  signal,
+} from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type SelectVariant = 'material' | 'bootstrap' | 'minimal';
@@ -69,7 +81,7 @@ export class UiLibSelect implements ControlValueAccessor {
     const vals = this.internalValue();
     const opts = this.options();
     if (!vals || vals.length === 0) return '';
-    const labels = vals.map(v => opts.find(o => o.value === v)?.label ?? String(v));
+    const labels = vals.map((v) => opts.find((o) => o.value === v)?.label ?? String(v));
     return labels.join(', ');
   });
 
@@ -77,12 +89,12 @@ export class UiLibSelect implements ControlValueAccessor {
     const term = this.filter().toLowerCase();
     const opts = this.options();
     if (!term) return opts;
-    return opts.filter(o => o.label.toLowerCase().includes(term));
+    return opts.filter((o) => o.label.toLowerCase().includes(term));
   });
 
   readonly groupedOptions = computed(() => {
     const groups: Record<string, SelectOption[]> = {};
-    this.filteredOptions().forEach(opt => {
+    this.filteredOptions().forEach((opt) => {
       const key = opt.group ?? '__ungrouped';
       groups[key] = groups[key] || [];
       groups[key].push(opt);
@@ -111,7 +123,7 @@ export class UiLibSelect implements ControlValueAccessor {
 
   togglePanel(): void {
     if (this.isDisabled() || this.loading()) return;
-    this.open.update(v => !v);
+    this.open.update((v) => !v);
     if (this.open()) {
       queueMicrotask(() => this.inputEl?.nativeElement?.focus());
     }
@@ -127,8 +139,8 @@ export class UiLibSelect implements ControlValueAccessor {
     if (opt.disabled || this.isDisabled()) return;
     if (this.multiple()) {
       const current = this.internalValue() ?? [];
-      const exists = current.some(v => v === opt.value);
-      const next = exists ? current.filter(v => v !== opt.value) : [...current, opt.value];
+      const exists = current.some((v) => v === opt.value);
+      const next = exists ? current.filter((v) => v !== opt.value) : [...current, opt.value];
       this.internalValue.set(next);
       this.onChange(next);
     } else {
@@ -144,7 +156,7 @@ export class UiLibSelect implements ControlValueAccessor {
   }
 
   isSelected(opt: SelectOption): boolean {
-    return (this.internalValue() ?? []).some(v => v === opt.value);
+    return (this.internalValue() ?? []).some((v) => v === opt.value);
   }
 
   moveFocus(delta: number): void {

@@ -54,7 +54,9 @@
   border-radius: var(--ui-input-radius);
   padding: var(--uilib-input-padding-y, 0.5rem) var(--uilib-input-padding-x, 0.75rem);
   min-height: var(--uilib-input-min-height, 44px);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
   position: relative;
   cursor: text;
 }
@@ -91,7 +93,12 @@
   top: 50%;
   transform: translate(var(--ui-input-label-offset-x), -50%);
   transform-origin: left top;
-  transition: transform 0.15s ease, font-size 0.15s ease, color 0.15s ease, padding 0.15s ease, background-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    font-size 0.15s ease,
+    color 0.15s ease,
+    padding 0.15s ease,
+    background-color 0.15s ease;
   background: transparent;
   z-index: 1;
   padding: 0;
@@ -106,7 +113,8 @@
 }
 
 .ui-input-floating-active.ui-input-float-on .ui-input-label {
-  transform: translate(var(--ui-input-label-offset-x), calc(-175%)) scale(var(--ui-input-label-floating-scale));
+  transform: translate(var(--ui-input-label-offset-x), calc(-175%))
+    scale(var(--ui-input-label-floating-scale));
   background: var(--ui-input-label-bg);
   padding: 0 0.35rem 0 0;
   color: var(--ui-input-placeholder);

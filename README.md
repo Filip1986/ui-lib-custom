@@ -7,6 +7,7 @@ A flexible Angular UI component library with multiple design variants (Material,
 **New here?** Check out the complete documentation: **[📖 Documentation Index](docs/README.md)**
 
 Quick links:
+
 - 🚀 [Quick Start Guide](docs/getting-started/QUICK_START.md) - Get started in 5 minutes
 - 📘 [Integration Examples](docs/guides/INTEGRATION_EXAMPLE.md) - Real-world usage examples
 - 🏗️ [Architecture](docs/architecture/ARCHITECTURE.md) - System design and structure
@@ -107,11 +108,13 @@ npm install ui-lib-custom
 ## Getting Started
 
 1. Install the package:
+
 ```bash
 npm install ui-lib-custom
 ```
 
 2. Import the components in your Angular component:
+
 ```typescript
 import { Component } from '@angular/core';
 import { Button, Card } from 'ui-lib-custom';
@@ -120,15 +123,13 @@ import { Button, Card } from 'ui-lib-custom';
   selector: 'app-root',
   imports: [Button, Card],
   template: `
-    <ui-lib-button variant="material" color="primary">
-      Hello World
-    </ui-lib-button>
-    
+    <ui-lib-button variant="material" color="primary"> Hello World </ui-lib-button>
+
     <ui-lib-card variant="material">
       <div card-header>Welcome</div>
       <p>This is a card component</p>
     </ui-lib-card>
-  `
+  `,
 })
 export class AppComponent {}
 ```
@@ -155,34 +156,37 @@ ng serve demo
 ## Design Variants
 
 ### Material Design
+
 Clean, modern design with elevation shadows and smooth animations. Perfect for contemporary applications.
 
 ### Bootstrap
+
 Traditional Bootstrap-inspired styling with subtle borders and gradients. Great for business applications.
 
 ### Minimal
+
 Clean, borderless design with minimal shadows. Ideal for content-focused layouts.
 
 ## API Reference
 
 ### Button
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| variant | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Design variant |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Button size |
-| color | `'primary' \| 'secondary' \| 'success' \| 'danger' \| 'warning'` | `'primary'` | Button color |
-| disabled | `boolean` | `false` | Disabled state |
-| fullWidth | `boolean` | `false` | Full width button |
+| Input     | Type                                                             | Default      | Description       |
+| --------- | ---------------------------------------------------------------- | ------------ | ----------------- |
+| variant   | `'material' \| 'bootstrap' \| 'minimal'`                         | `'material'` | Design variant    |
+| size      | `'small' \| 'medium' \| 'large'`                                 | `'medium'`   | Button size       |
+| color     | `'primary' \| 'secondary' \| 'success' \| 'danger' \| 'warning'` | `'primary'`  | Button color      |
+| disabled  | `boolean`                                                        | `false`      | Disabled state    |
+| fullWidth | `boolean`                                                        | `false`      | Full width button |
 
 ### Card
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| variant | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Design variant |
-| elevation | `'none' \| 'low' \| 'medium' \| 'high'` | `'medium'` | Shadow elevation |
-| bordered | `boolean` | `false` | Add border |
-| hoverable | `boolean` | `false` | Enable hover effects |
+| Input     | Type                                     | Default      | Description          |
+| --------- | ---------------------------------------- | ------------ | -------------------- |
+| variant   | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Design variant       |
+| elevation | `'none' \| 'low' \| 'medium' \| 'high'`  | `'medium'`   | Shadow elevation     |
+| bordered  | `boolean`                                | `false`      | Add border           |
+| hoverable | `boolean`                                | `false`      | Enable hover effects |
 
 ## Browser Support
 
@@ -198,6 +202,7 @@ MIT
 ## Contributing
 
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) to learn about:
+
 - Setting up your development environment
 - Where to add new documentation
 - Component development guidelines

@@ -1,5 +1,5 @@
 :root,
-[data-theme="light"] {
+[data-theme='light'] {
   /* Core palette */
   --uilib-color-primary-100: #bbdefb;
   --uilib-color-primary-500: #2196f3;
@@ -62,16 +62,26 @@
   --uilib-toolbar-height-base: 3rem;
   --uilib-toolbar-padding-y-base: 0.5rem;
   --uilib-toolbar-padding-x-base: 0.75rem;
-  --uilib-toolbar-height: max(var(--uilib-touch-size-min), calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y)));
-  --uilib-toolbar-padding-y: calc(var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-toolbar-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y))
+  );
+  --uilib-toolbar-padding-y: calc(
+    var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
 
   --uilib-table-row-height-base: 3rem;
-  --uilib-table-row-height: max(var(--uilib-touch-size-min), calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y)));
+  --uilib-table-row-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y))
+  );
 
   --uilib-list-item-padding-y-base: 0.75rem;
   --uilib-list-item-padding-x-base: 0.75rem;
-  --uilib-list-item-padding-y: calc(var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-list-item-padding-y: calc(
+    var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
   --uilib-list-item-min-height: var(--uilib-touch-size-min);
 
@@ -110,11 +120,17 @@
 
   /* Component spacing */
   --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
-  --uilib-button-padding-y-small: calc(var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-small: calc(
+    var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
-  --uilib-button-padding-y-medium: calc(var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-medium: calc(
+    var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
-  --uilib-button-padding-y-large: calc(var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-large: calc(
+    var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-gap: var(--uilib-button-gap-base);
   --uilib-button-padding-small: 0.25rem 0.75rem;
   --uilib-button-padding-medium: 0.5rem 1rem;
@@ -208,7 +224,7 @@
   --uilib-tabs-padding-y: var(--uilib-space-sm);
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --uilib-color-primary-100: #1a3d5f;
   --uilib-color-primary-500: #1e88e5;
   --uilib-color-primary-600: #1565c0;
@@ -270,16 +286,26 @@
   --uilib-toolbar-height-base: 3rem;
   --uilib-toolbar-padding-y-base: 0.5rem;
   --uilib-toolbar-padding-x-base: 0.75rem;
-  --uilib-toolbar-height: max(var(--uilib-touch-size-min), calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y)));
-  --uilib-toolbar-padding-y: calc(var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-toolbar-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y))
+  );
+  --uilib-toolbar-padding-y: calc(
+    var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
 
   --uilib-table-row-height-base: 3rem;
-  --uilib-table-row-height: max(var(--uilib-touch-size-min), calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y)));
+  --uilib-table-row-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y))
+  );
 
   --uilib-list-item-padding-y-base: 0.75rem;
   --uilib-list-item-padding-x-base: 0.75rem;
-  --uilib-list-item-padding-y: calc(var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-list-item-padding-y: calc(
+    var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
   --uilib-list-item-min-height: var(--uilib-touch-size-min);
 
@@ -318,11 +344,17 @@
 
   /* Component spacing */
   --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
-  --uilib-button-padding-y-small: calc(var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-small: calc(
+    var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
-  --uilib-button-padding-y-medium: calc(var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-medium: calc(
+    var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
-  --uilib-button-padding-y-large: calc(var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-large: calc(
+    var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-gap: var(--uilib-button-gap-base);
   --uilib-button-padding-small: 0.25rem 0.75rem;
   --uilib-button-padding-medium: 0.5rem 1rem;

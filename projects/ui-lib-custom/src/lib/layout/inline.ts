@@ -46,9 +46,9 @@ export class Inline {
   /** Computed justify-content value */
   protected _justifyContent = computed(() => {
     const justifyMap: Record<InlineJustify, string> = {
-      'start': 'flex-start',
-      'center': 'center',
-      'end': 'flex-end',
+      start: 'flex-start',
+      center: 'center',
+      end: 'flex-end',
       'space-between': 'space-between',
       'space-around': 'space-around',
     };
@@ -59,7 +59,9 @@ export class Inline {
   protected _gapValue = computed(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
-      return typeof semantic === 'number' ? spaceVar(semantic as SpacingToken) : inlineVar(semantic as InlineToken);
+      return typeof semantic === 'number'
+        ? spaceVar(semantic as SpacingToken)
+        : inlineVar(semantic as InlineToken);
     }
     return spaceVar(this.gap());
   });

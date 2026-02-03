@@ -3,7 +3,9 @@
     <label class="ui-input-label" [attr.for]="controlId()">
       <span class="ui-input-label-text">
         {{ label() }}
-        @if (required()) { <span class="required-indicator">*</span> }
+        @if (required()) {
+          <span class="required-indicator">*</span>
+        }
       </span>
     </label>
   }
@@ -18,7 +20,9 @@
         <label class="ui-input-label ui-input-label-floating" [attr.for]="controlId()">
           <span class="ui-input-label-text">
             {{ label() }}
-            @if (required()) { <span class="required-indicator">*</span> }
+            @if (required()) {
+              <span class="required-indicator">*</span>
+            }
           </span>
         </label>
       }
@@ -41,11 +45,18 @@
       />
 
       @if (showClear() && value() && !disabled()) {
-        <button type="button" class="ui-input-clear" (click)="clear()" aria-label="Clear input">×</button>
+        <button type="button" class="ui-input-clear" (click)="clear()" aria-label="Clear input">
+          ×
+        </button>
       }
 
       @if (type() === 'password' && showTogglePassword()) {
-        <button type="button" class="ui-input-toggle" (click)="togglePassword()" aria-label="Toggle password visibility">
+        <button
+          type="button"
+          class="ui-input-toggle"
+          (click)="togglePassword()"
+          aria-label="Toggle password visibility"
+        >
           <span aria-hidden="true">{{ showPassword() ? 'Hide' : 'Show' }}</span>
         </button>
       }

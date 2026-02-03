@@ -1,7 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Icon, IconLibrary, IconSize, SemanticIcon, ThemeConfigService, ThemeIconConfig } from 'ui-lib-custom';
+import {
+  Icon,
+  IconLibrary,
+  IconSize,
+  SemanticIcon,
+  ThemeConfigService,
+  ThemeIconConfig,
+} from 'ui-lib-custom';
 
 @Component({
   selector: 'ui-lib-icon-editor-panel',
@@ -26,11 +33,14 @@ export class IconEditorPanel {
     '2xl': '2.5rem',
   };
 
-  config = computed<ThemeIconConfig>(() => this.themeService.preset().icons ?? {
-    defaultLibrary: 'lucide',
-    defaultSize: 'md',
-    sizes: { ...this.defaultSizes },
-  });
+  config = computed<ThemeIconConfig>(
+    () =>
+      this.themeService.preset().icons ?? {
+        defaultLibrary: 'lucide',
+        defaultSize: 'md',
+        sizes: { ...this.defaultSizes },
+      }
+  );
 
   private pushPatch(patch: Partial<ThemeIconConfig>) {
     const current = this.config();

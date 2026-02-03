@@ -6,7 +6,13 @@ const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING
 
 export type StackDirection = 'vertical' | 'horizontal';
 export type StackAlign = 'start' | 'center' | 'end' | 'stretch';
-export type StackJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly';
+export type StackJustify =
+  | 'start'
+  | 'center'
+  | 'end'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly';
 
 /**
  * Stack - A performant vertical or horizontal layout primitive
@@ -47,16 +53,14 @@ export class Stack {
   gap = input<SpacingToken>(4);
 
   /** Computed flex-direction value */
-  protected _flexDirection = computed(() =>
-    this.direction() === 'vertical' ? 'column' : 'row'
-  );
+  protected _flexDirection = computed(() => (this.direction() === 'vertical' ? 'column' : 'row'));
 
   /** Computed justify-content value */
   protected _justifyContent = computed(() => {
     const justifyMap: Record<StackJustify, string> = {
-      'start': 'flex-start',
-      'center': 'center',
-      'end': 'flex-end',
+      start: 'flex-start',
+      center: 'center',
+      end: 'flex-end',
       'space-between': 'space-between',
       'space-around': 'space-around',
       'space-evenly': 'space-evenly',
@@ -68,7 +72,9 @@ export class Stack {
   protected _gapValue = computed(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
-      return typeof semantic === 'number' ? spaceVar(semantic as SpacingToken) : stackVar(semantic as StackToken);
+      return typeof semantic === 'number'
+        ? spaceVar(semantic as SpacingToken)
+        : stackVar(semantic as StackToken);
     }
     return spaceVar(this.gap());
   });

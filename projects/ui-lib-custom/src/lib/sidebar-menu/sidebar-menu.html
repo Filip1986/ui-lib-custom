@@ -4,34 +4,65 @@
   </div>
 
   @if (collapsible()) {
-    <button class="ui-sidebar-toggle" type="button" (click)="toggleCollapse()" aria-label="Toggle sidebar">
+    <button
+      class="ui-sidebar-toggle"
+      type="button"
+      (click)="toggleCollapse()"
+      aria-label="Toggle sidebar"
+    >
       <span class="pi" [ngClass]="collapsed() ? 'pi-chevron-right' : 'pi-chevron-left'"></span>
     </button>
   }
 
   <ul class="ui-sidebar-menu" role="menu">
     @for (item of items(); track item.id) {
-      <li class="ui-sidebar-item" [class.active]="item.active" [class.disabled]="item.disabled" role="none">
+      <li
+        class="ui-sidebar-item"
+        [class.active]="item.active"
+        [class.disabled]="item.disabled"
+        role="none"
+      >
         <div
           class="ui-sidebar-link"
           role="menuitem"
           [attr.aria-expanded]="item.children?.length ? isExpanded(item.id) : null"
           [attr.title]="isCollapsed() ? item.label : null"
-          (click)="item.children?.length ? toggleItem(item.id, true) : null">
+          (click)="item.children?.length ? toggleItem(item.id, true) : null"
+        >
           <span class="ui-sidebar-icon" *ngIf="item.icon"><i [class]="item.icon"></i></span>
           <span class="ui-sidebar-label">{{ item.label }}</span>
-          @if (item.badge) { <span class="ui-sidebar-badge">{{ item.badge }}</span> }
-          @if (item.children?.length) { <span class="pi" [ngClass]="isExpanded(item.id) ? 'pi-chevron-down' : 'pi-chevron-right'"></span> }
+          @if (item.badge) {
+            <span class="ui-sidebar-badge">{{ item.badge }}</span>
+          }
+          @if (item.children?.length) {
+            <span
+              class="pi"
+              [ngClass]="isExpanded(item.id) ? 'pi-chevron-down' : 'pi-chevron-right'"
+            ></span>
+          }
         </div>
 
         @if (item.children?.length && isExpanded(item.id) && !isCollapsed()) {
           <ul class="ui-sidebar-submenu" role="menu">
             @for (child of item.children; track child.id) {
-              <li class="ui-sidebar-subitem" [class.active]="child.active" [class.disabled]="child.disabled" role="none">
-                <div class="ui-sidebar-link" role="menuitem" [attr.title]="isCollapsed() ? child.label : null">
-                  <span class="ui-sidebar-icon" *ngIf="child.icon"><i [class]="child.icon"></i></span>
+              <li
+                class="ui-sidebar-subitem"
+                [class.active]="child.active"
+                [class.disabled]="child.disabled"
+                role="none"
+              >
+                <div
+                  class="ui-sidebar-link"
+                  role="menuitem"
+                  [attr.title]="isCollapsed() ? child.label : null"
+                >
+                  <span class="ui-sidebar-icon" *ngIf="child.icon"
+                    ><i [class]="child.icon"></i
+                  ></span>
                   <span class="ui-sidebar-label">{{ child.label }}</span>
-                  @if (child.badge) { <span class="ui-sidebar-badge">{{ child.badge }}</span> }
+                  @if (child.badge) {
+                    <span class="ui-sidebar-badge">{{ child.badge }}</span>
+                  }
                 </div>
               </li>
             }

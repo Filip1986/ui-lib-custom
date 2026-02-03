@@ -2,7 +2,14 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { ThemeConfigService } from '../theming/theme-config.service';
 import { ThemeVariant } from '../theming/theme-preset.interface';
 import { ICON_CONFIG } from './icon.tokens';
-import { ComponentVariant, DEFAULT_ICON_CONFIG, IconConfig, IconLibrary, IconSize, ICON_SIZES } from './icon.types';
+import {
+  ComponentVariant,
+  DEFAULT_ICON_CONFIG,
+  IconConfig,
+  IconLibrary,
+  IconSize,
+  ICON_SIZES,
+} from './icon.types';
 import { LUCIDE_ICON_MAPPING } from './presets/minimal-icons';
 import { BOOTSTRAP_ICON_MAPPING } from './presets/bootstrap-icons';
 import { MATERIAL_ICON_MAPPING } from './presets/material-icons';
@@ -12,7 +19,9 @@ import { IconMapping, SemanticIcon } from './icon.semantics';
 export class IconService {
   private readonly themeConfig = inject(ThemeConfigService, { optional: true });
   private readonly injectedConfig = inject(ICON_CONFIG, { optional: true });
-  private readonly configSignal = signal<IconConfig>(this.injectedConfig ?? { ...DEFAULT_ICON_CONFIG });
+  private readonly configSignal = signal<IconConfig>(
+    this.injectedConfig ?? { ...DEFAULT_ICON_CONFIG }
+  );
   private mappings: Record<IconLibrary, IconMapping> = {
     material: MATERIAL_ICON_MAPPING,
     bootstrap: BOOTSTRAP_ICON_MAPPING,
@@ -28,7 +37,9 @@ export class IconService {
     return preset?.variant ?? null;
   });
 
-  private readonly themeIcons = computed(() => this.themeConfig?.getPreset?.()?.icons ?? this.themeConfig?.preset?.()?.icons ?? null);
+  private readonly themeIcons = computed(
+    () => this.themeConfig?.getPreset?.()?.icons ?? this.themeConfig?.preset?.()?.icons ?? null
+  );
 
   getLibraryForVariant(variant?: ComponentVariant | null): IconLibrary {
     const cfg = this.configSignal();
@@ -53,7 +64,10 @@ export class IconService {
   }
 
   setVariantMapping(mapping: Partial<IconConfig['variantMapping']>): void {
-    this.configSignal.update((current) => ({ ...current, variantMapping: { ...current.variantMapping, ...mapping } }));
+    this.configSignal.update((current) => ({
+      ...current,
+      variantMapping: { ...current.variantMapping, ...mapping },
+    }));
   }
 
   getIconSize(size?: IconSize | null): string {

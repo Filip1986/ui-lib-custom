@@ -12,7 +12,9 @@
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   z-index: 1100;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -81,15 +83,15 @@
   }
 
   select,
-  input[type="color"],
-  input[type="range"],
+  input[type='color'],
+  input[type='range'],
   button {
     font: inherit;
   }
 
   select,
-  input[type="color"],
-  input[type="range"] {
+  input[type='color'],
+  input[type='range'] {
     padding: 0.4rem 0.5rem;
     border: 1px solid var(--uilib-border, #e0e0e0);
     border-radius: var(--uilib-radius-sm, 4px);
@@ -97,7 +99,7 @@
     color: inherit;
   }
 
-  input[type="color"] {
+  input[type='color'] {
     height: 2.25rem;
     padding: 0.2rem;
   }

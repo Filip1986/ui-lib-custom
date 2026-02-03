@@ -1,7 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal, computed, inject, effect, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  computed,
+  inject,
+  effect,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {UiLibSelect, SelectOption, SelectVariant, ThemeConfigService, Button, Card, Tabs, Tab, TabsValue} from 'ui-lib-custom';
+import {
+  UiLibSelect,
+  SelectOption,
+  SelectVariant,
+  ThemeConfigService,
+  Button,
+  Card,
+  Tabs,
+  Tab,
+  TabsValue,
+} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -14,7 +32,20 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibSelect, Button, Tabs, Tab, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, DocCodeSnippetComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    UiLibSelect,
+    Button,
+    Tabs,
+    Tab,
+    DocPageLayoutComponent,
+    DocControlGroupComponent,
+    DocDemoViewportComponent,
+    ThemeScopeDirective,
+    Card,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

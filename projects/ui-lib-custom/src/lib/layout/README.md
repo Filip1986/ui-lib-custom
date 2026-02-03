@@ -39,24 +39,31 @@ layout/
 ## Design Tokens
 
 ### Spacing Tokens
+
 Defined in `tokens.ts` as `SPACING_TOKENS`:
+
 - Values: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20
 - Units: rem (relative to root font size)
 - Type: `SpacingToken`
 
 ### Container Sizes
+
 Defined in `tokens.ts` as `CONTAINER_MAX_WIDTHS`:
+
 - Values: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px), full (100%)
 - Type: `ContainerSize`
 
 ### Grid Columns
+
 Defined in `tokens.ts` as `GRID_COLUMNS`:
+
 - Values: 1-12
 - Type: `GridColumns`
 
 ## Performance Characteristics
 
 ### Bundle Size
+
 - **Stack**: ~600 bytes (minified + gzipped)
 - **Inline**: ~550 bytes
 - **Grid**: ~700 bytes
@@ -65,6 +72,7 @@ Defined in `tokens.ts` as `GRID_COLUMNS`:
 - **Total**: ~2.5KB for all layout primitives
 
 ### Runtime Performance
+
 - **Change Detection**: OnPush only (runs only when inputs change)
 - **Computations**: Memoized via `computed()` signals
 - **DOM Operations**: Zero (styles applied declaratively)
@@ -73,6 +81,7 @@ Defined in `tokens.ts` as `GRID_COLUMNS`:
 ## Code Example
 
 ### Stack Component
+
 ```typescript
 @Component({
   selector: 'ui-lib-stack',
@@ -93,12 +102,10 @@ export class Stack {
   justify = input<StackJustify>('start');
   gap = input<SpacingToken>(4);
 
-  protected _flexDirection = computed(() => 
-    this.direction() === 'vertical' ? 'column' : 'row'
-  );
+  protected _flexDirection = computed(() => (this.direction() === 'vertical' ? 'column' : 'row'));
 
   protected _justifyContent = computed(() => {
-    const map = { 'start': 'flex-start', /* ... */ };
+    const map = { start: 'flex-start' /* ... */ };
     return map[this.justify()];
   });
 
@@ -111,15 +118,12 @@ export class Stack {
 1. **No Wrapper Elements**: Component host IS the layout container
    - Less DOM nodes = better performance
    - Simpler CSS selector matching
-   
 2. **Static Template**: Just `<ng-content />`
    - No template compilation overhead
    - No dynamic content
-   
 3. **Computed Signals**: Values memoized automatically
    - Only recompute when inputs change
    - No manual change detection needed
-   
 4. **Host Bindings**: Direct style application
    - Faster than ngClass
    - No runtime class string concatenation
@@ -127,11 +131,13 @@ export class Stack {
 ## Testing
 
 Run tests:
+
 ```bash
 npm test -- --include='**/layout/*.spec.ts'
 ```
 
 Each component has comprehensive tests covering:
+
 - Creation and initialization
 - Input signal changes
 - Style binding application
@@ -156,7 +162,9 @@ To add a new layout primitive:
 ## Maintenance
 
 ### Adding Spacing Tokens
+
 Edit `tokens.ts`:
+
 ```typescript
 export const SPACING_TOKENS = {
   // ... existing
@@ -165,7 +173,9 @@ export const SPACING_TOKENS = {
 ```
 
 ### Modifying Component
+
 Always maintain:
+
 - OnPush change detection
 - Signal-based inputs
 - Computed derived values
@@ -173,7 +183,9 @@ Always maintain:
 - Single element rendering
 
 ### Breaking Changes
+
 Avoid breaking changes. To add features:
+
 - Add new optional inputs (with defaults)
 - Create new components for new patterns
 - Keep existing API stable

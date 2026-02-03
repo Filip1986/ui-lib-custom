@@ -5,7 +5,10 @@ import { LUCIDE_ICONS } from './presets/minimal-icons';
 import { MATERIAL_ICONS } from './presets/material-icons';
 import { BOOTSTRAP_ICONS } from './presets/bootstrap-icons';
 
-export function provideUiLibIcons(options?: { defaultLibrary?: IconLibrary; additionalIcons?: Record<string, unknown> }) {
+export function provideUiLibIcons(options?: {
+  defaultLibrary?: IconLibrary;
+  additionalIcons?: Record<string, unknown>;
+}) {
   const baseIcons = {
     ...MATERIAL_ICONS,
     ...BOOTSTRAP_ICONS,

@@ -1,16 +1,16 @@
 <div
   class="login-3-container min-h-screen flex items-center justify-center p-4"
   data-testid="login-3-container"
-  >
+>
   <div
     class="login-3-wrapper max-w-4xl w-full flex flex-col md:flex-row overflow-hidden shadow-xl"
     data-testid="login-3-wrapper"
-    >
+  >
     <!-- Left side decorative panel -->
     <div
       class="bg-gradient-to-br from-primary-600 to-primary-900 text-white p-8 md:w-2/5 flex flex-col justify-between"
       data-testid="login-3-left-panel"
-      >
+    >
       <div data-testid="login-3-left-panel-header">
         <h1 class="text-3xl font-bold mb-4" data-testid="login-3-title">Welcome Back</h1>
         <p class="text-primary-100 mb-6" data-testid="login-3-subtitle">
@@ -24,11 +24,11 @@
           fill="none"
           viewBox="0 0 900 600"
           xmlns="http://www.w3.org/2000/svg"
-          >
+        >
           <path
             d="M0 549.5L21.5 546.2C43 542.8 86 536.2 129.2 534.5C172.3 532.8 215.7 536.2 258.8 545.3C302 554.5 345 569.5 388.2 564.3C431.3 559.2 474.7 533.8 517.8 528.3C561 522.8 604 537.2 647.2 539.5C690.3 541.8 733.7 532.2 776.8 530.7C820 529.2 863 535.8 884.5 539.2L906 542.5V601H884.5C863 601 820 601 776.8 601C733.7 601 690.3 601 647.2 601C604 601 561 601 517.8 601C474.7 601 431.3 601 388.2 601C345 601 302 601 258.8 601C215.7 601 172.3 601 129.2 601C86 601 43 601 21.5 601H0V549.5Z"
             fill="rgba(255,255,255,0.2)"
-            />
+          />
           <circle cx="776.5" cy="222.5" fill="rgba(255,255,255,0.1)" r="38.5" />
           <circle cx="116.5" cy="167.5" fill="rgba(255,255,255,0.1)" r="24.5" />
           <circle cx="446.5" cy="367.5" fill="rgba(255,255,255,0.1)" r="48.5" />
@@ -50,7 +50,7 @@
         [formGroup]="loginForm"
         class="space-y-6"
         data-testid="login-3-form"
-        >
+      >
         <!-- Username field -->
         <div data-testid="login-3-username-field">
           <div class="input-with-label">
@@ -67,7 +67,12 @@
               />
             </div>
           </div>
-          @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted())) {
+          @if (
+            loginForm.controls['username'].invalid &&
+            (loginForm.controls['username'].dirty ||
+              loginForm.controls['username'].touched ||
+              submitted())
+          ) {
             <small class="text-red-500 block mt-1" data-testid="login-3-username-error">
               Please enter a valid username or email address
             </small>
@@ -89,7 +94,12 @@
               />
             </div>
           </div>
-          @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted())) {
+          @if (
+            loginForm.controls['password'].invalid &&
+            (loginForm.controls['password'].dirty ||
+              loginForm.controls['password'].touched ||
+              submitted())
+          ) {
             <small class="text-red-500 block mt-1" data-testid="login-3-password-error">
               Password is required
             </small>
@@ -109,10 +119,7 @@
 
         <!-- Remember Me option -->
         @if (features().showRememberMe) {
-          <div
-            class="flex items-center"
-            data-testid="login-3-remember-me-section"
-          >
+          <div class="flex items-center" data-testid="login-3-remember-me-section">
             <input
               type="checkbox"
               (change)="onRememberMeChange($event)"
@@ -148,10 +155,7 @@
 
         <!-- Register link -->
         @if (features().showRegisterLink) {
-          <div
-            class="text-center text-sm text-gray-600"
-            data-testid="login-3-register-section"
-            >
+          <div class="text-center text-sm text-gray-600" data-testid="login-3-register-section">
             Don't have an account?
             <a
               (click)="onRegister()"
@@ -159,7 +163,7 @@
               class="cursor-pointer font-medium"
               data-testid="login-3-register-link"
               tabindex="0"
-              >
+            >
               Sign up now
             </a>
           </div>

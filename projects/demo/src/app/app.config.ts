@@ -1,4 +1,10 @@
-import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
@@ -14,13 +20,16 @@ export const appConfig: ApplicationConfig = {
     provideUiLibIcons(),
     provideAppInitializer(() => {
       const themeService = inject(ThemeConfigService);
-      const hasStored = typeof localStorage !== 'undefined' && !!localStorage.getItem('ui-lib-custom.theme');
+      const hasStored =
+        typeof localStorage !== 'undefined' && !!localStorage.getItem('ui-lib-custom.theme');
       if (hasStored) {
         return;
       }
-      return themeService.loadPresetAsync('/presets/brand-example.json', { merge: true, persist: true }).catch(() => {
-        themeService.applyToRoot(themeService.getPreset());
-      });
-    })
-  ]
+      return themeService
+        .loadPresetAsync('/presets/brand-example.json', { merge: true, persist: true })
+        .catch(() => {
+          themeService.applyToRoot(themeService.getPreset());
+        });
+    }),
+  ],
 };

@@ -36,7 +36,8 @@ describe('Card', () => {
     return fixture;
   }
 
-  const getCard = (fixture: ComponentFixture<CardHost>): HTMLElement => fixture.nativeElement.querySelector('.card');
+  const getCard = (fixture: ComponentFixture<CardHost>): HTMLElement =>
+    fixture.nativeElement.querySelector('.card');
 
   it('should create', async () => {
     const fixture = await bootstrap();

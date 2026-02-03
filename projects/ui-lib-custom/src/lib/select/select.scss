@@ -3,7 +3,10 @@
   --ui-select-border: var(--uilib-select-border, var(--uilib-border, #d0d7e2));
   --ui-select-radius: var(--uilib-select-radius, var(--uilib-radius-md, 8px));
   --ui-select-dropdown-bg: var(--uilib-select-dropdown-bg, var(--uilib-surface, #fff));
-  --ui-select-option-hover: var(--uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 8%, transparent));
+  --ui-select-option-hover: var(
+    --uilib-select-option-hover,
+    color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 8%, transparent)
+  );
 
   display: flex;
   flex-direction: column;
@@ -27,7 +30,9 @@
   border-radius: var(--ui-select-radius);
   padding: 0.55rem 0.75rem;
   cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .ui-select-control:focus-visible {
@@ -138,5 +143,7 @@
 }
 
 @keyframes ui-select-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

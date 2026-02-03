@@ -1,6 +1,4 @@
-<div class="theme-toggle" (click)="onTogglePanel()" title="Toggle Theme Editor">
-  ⚙
-</div>
+<div class="theme-toggle" (click)="onTogglePanel()" title="Toggle Theme Editor">⚙</div>
 
 <div class="theme-panel" [class.theme-panel--open]="showPanel()">
   <div class="theme-panel__header">
@@ -25,7 +23,11 @@
     @for (key of colorKeys; track key) {
       <label class="color-field">
         <span class="label">{{ key | titlecase }}</span>
-        <input type="color" [ngModel]="currentPreset().colors[key]" (ngModelChange)="onColorChange(key, $event)">
+        <input
+          type="color"
+          [ngModel]="currentPreset().colors[key]"
+          (ngModelChange)="onColorChange(key, $event)"
+        />
       </label>
     }
   </div>
@@ -44,7 +46,13 @@
     <div class="radio-group">
       @for (opt of variantOptions; track opt.value) {
         <label class="radio">
-          <input type="radio" name="variant" [value]="opt.value" [checked]="currentPreset().variant === opt.value" (change)="onVariantChange(opt.value)">
+          <input
+            type="radio"
+            name="variant"
+            [value]="opt.value"
+            [checked]="currentPreset().variant === opt.value"
+            (change)="onVariantChange(opt.value)"
+          />
           <span>{{ opt.label }}</span>
         </label>
       }
@@ -57,7 +65,9 @@
     <select [ngModel]="selectedPairing()" (ngModelChange)="onPairingSelect($event)">
       <option value="">-- Select pairing --</option>
       @for (pair of pairingOptions(); track pair.name) {
-        <option [value]="pair.name">{{ pair.name }} ({{ pair.description || pair.category }})</option>
+        <option [value]="pair.name">
+          {{ pair.name }} ({{ pair.description || pair.category }})
+        </option>
       }
     </select>
 
@@ -77,13 +87,21 @@
 
     <label class="sub-label">UI font</label>
     <div class="inline">
-      <select [ngModel]="uiFont()" [disabled]="syncUIWithBody()" (ngModelChange)="onUIFontChange($event)">
+      <select
+        [ngModel]="uiFont()"
+        [disabled]="syncUIWithBody()"
+        (ngModelChange)="onUIFontChange($event)"
+      >
         @for (opt of uiFontOptions(); track opt.value) {
           <option [value]="opt.value">{{ opt.label }}</option>
         }
       </select>
       <label class="inline-toggle">
-        <input type="checkbox" [checked]="syncUIWithBody()" (change)="onSyncUIToggle($any($event.target).checked)">
+        <input
+          type="checkbox"
+          [checked]="syncUIWithBody()"
+          (change)="onSyncUIToggle($any($event.target).checked)"
+        />
         Sync UI with Body
       </label>
     </div>
@@ -98,12 +116,22 @@
 
   <div class="section">
     <label class="label">Base font size: {{ currentPreset().typography.baseFontSize }}</label>
-    <input type="range" min="12" max="20" step="1" [ngModel]="currentPreset().typography.baseFontSize.replace('px','')" (ngModelChange)="onBaseSizeChange($event)">
+    <input
+      type="range"
+      min="12"
+      max="20"
+      step="1"
+      [ngModel]="currentPreset().typography.baseFontSize.replace('px', '')"
+      (ngModelChange)="onBaseSizeChange($event)"
+    />
   </div>
 
   <div class="section">
     <label class="label">Shadow</label>
-    <select [ngModel]="currentPreset().shadow || shadowOptions[0]?.value" (ngModelChange)="onShadowChange($event)">
+    <select
+      [ngModel]="currentPreset().shadow || shadowOptions[0]?.value"
+      (ngModelChange)="onShadowChange($event)"
+    >
       @for (opt of shadowOptions; track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
@@ -112,7 +140,11 @@
 
   <div class="section">
     <label class="label">Card shadow</label>
-    <select [ngModel]="currentPreset().cardShadow || currentPreset().shadow || shadowOptions[0]?.value" (change)="onCardShadowPreview($any($event.target).value)" (ngModelChange)="onCardShadowChange($event)">
+    <select
+      [ngModel]="currentPreset().cardShadow || currentPreset().shadow || shadowOptions[0]?.value"
+      (change)="onCardShadowPreview($any($event.target).value)"
+      (ngModelChange)="onCardShadowChange($event)"
+    >
       @for (opt of shadowOptions; track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
@@ -121,7 +153,11 @@
 
   <div class="section">
     <label class="label">Button shadow</label>
-    <select [ngModel]="currentPreset().buttonShadow || currentPreset().shadow || shadowOptions[0]?.value" (change)="onButtonShadowPreview($any($event.target).value)" (ngModelChange)="onButtonShadowChange($event)">
+    <select
+      [ngModel]="currentPreset().buttonShadow || currentPreset().shadow || shadowOptions[0]?.value"
+      (change)="onButtonShadowPreview($any($event.target).value)"
+      (ngModelChange)="onButtonShadowChange($event)"
+    >
       @for (opt of shadowOptions; track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }

@@ -1,6 +1,28 @@
-import { ChangeDetectionStrategy, Component, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewChild,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Tabs, Tab, TabLabel, TabsAlignment, TabsLazyMode, TabsOrientation, TabsSize, TabsValue, TabsVariant, Card, Button, Icon, ThemeConfigService } from 'ui-lib-custom';
+import {
+  Tabs,
+  Tab,
+  TabLabel,
+  TabsAlignment,
+  TabsLazyMode,
+  TabsOrientation,
+  TabsSize,
+  TabsValue,
+  TabsVariant,
+  Card,
+  Button,
+  Icon,
+  ThemeConfigService,
+} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
@@ -22,7 +44,22 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 @Component({
   selector: 'app-tabs-demo',
   standalone: true,
-  imports: [CommonModule, Tabs, Tab, TabLabel, Card, Button, Icon, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, DocCodeSnippetComponent, TabLabel, Icon],
+  imports: [
+    CommonModule,
+    Tabs,
+    Tab,
+    TabLabel,
+    Card,
+    Button,
+    Icon,
+    DocPageLayoutComponent,
+    DocControlGroupComponent,
+    DocDemoViewportComponent,
+    ThemeScopeDirective,
+    DocCodeSnippetComponent,
+    TabLabel,
+    Icon,
+  ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,19 +100,39 @@ export class TabsDemoComponent {
   playgroundTabs = signal<DemoTab[]>([
     { value: 'overview', label: 'Overview', content: 'High-level summary of the selected topic.' },
     { value: 'details', label: 'Details', content: 'Deeper dive content for the tab selection.' },
-    { value: 'disabled', label: 'Disabled', content: 'This tab is disabled to demonstrate state.', disabled: true },
+    {
+      value: 'disabled',
+      label: 'Disabled',
+      content: 'This tab is disabled to demonstrate state.',
+      disabled: true,
+    },
   ]);
 
   iconTabs: DemoTab[] = [
     { value: 'home', label: 'Home', icon: 'home', content: 'Home overview content.' },
     { value: 'activity', label: 'Activity', icon: 'activity', content: 'Recent activity feed.' },
-    { value: 'settings', label: 'Settings', icon: 'settings', content: 'User preferences and settings.' },
+    {
+      value: 'settings',
+      label: 'Settings',
+      icon: 'settings',
+      content: 'User preferences and settings.',
+    },
   ];
 
   iconTextTabs: DemoTab[] = [
     { value: 'profile', label: 'Profile', icon: 'user', content: 'User profile content.' },
-    { value: 'notifications', label: 'Notifications', icon: 'bell', content: 'Notification center content.' },
-    { value: 'billing', label: 'Billing', icon: 'credit-card', content: 'Billing and invoices content.' },
+    {
+      value: 'notifications',
+      label: 'Notifications',
+      icon: 'bell',
+      content: 'Notification center content.',
+    },
+    {
+      value: 'billing',
+      label: 'Billing',
+      icon: 'credit-card',
+      content: 'Billing and invoices content.',
+    },
   ];
 
   verticalTabs: DemoTab[] = [
@@ -105,7 +162,8 @@ export class TabsDemoComponent {
   controlledIndex = signal(0);
   controlledSelection = computed(() => this.controlledIndex());
 
-  track = (_: number, item: any) => (item && typeof item === 'object' && 'value' in item ? (item as any).value : item ?? _);
+  track = (_: number, item: any) =>
+    item && typeof item === 'object' && 'value' in item ? (item as any).value : (item ?? _);
 
   readonly snippets = {
     basic: `<ui-lib-tabs>
@@ -134,7 +192,7 @@ export class TabsDemoComponent {
     controlled: `<ui-lib-tabs [selectedIndex]="index" (selectedIndexChange)="index = $event">
   <ui-lib-tab label="One">One</ui-lib-tab>
   <ui-lib-tab label="Two">Two</ui-lib-tab>
-</ui-lib-tabs>`
+</ui-lib-tabs>`,
   } as const;
 
   readonly appliedTheme = computed(() => this.themeService.getCssVars(this.themeService.preset()));
@@ -177,7 +235,7 @@ export class TabsDemoComponent {
   }
 
   onCloseTab(payload: { value: TabsValue | null; index: number }) {
-    this.closableTabs.update(tabs => tabs.filter(tab => tab.value !== payload.value));
+    this.closableTabs.update((tabs) => tabs.filter((tab) => tab.value !== payload.value));
   }
 
   resetClosableTabs() {

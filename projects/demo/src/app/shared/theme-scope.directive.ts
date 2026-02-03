@@ -9,7 +9,10 @@ export class ThemeScopeDirective implements OnChanges {
 
   private previousKeys = new Set<string>();
 
-  constructor(private el: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+  constructor(
+    private el: ElementRef<HTMLElement>,
+    private renderer: Renderer2
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes['themeVars']) return;

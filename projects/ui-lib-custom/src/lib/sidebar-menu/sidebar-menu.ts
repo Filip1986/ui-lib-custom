@@ -42,7 +42,7 @@ export class SidebarMenu {
 
   toggleCollapse(): void {
     if (!this.collapsible()) return;
-    this.internalCollapsed.update(v => !v);
+    this.internalCollapsed.update((v) => !v);
   }
 
   isExpanded(id: string): boolean {

@@ -51,7 +51,9 @@ describe('Checkbox', () => {
   it('should render label and description', () => {
     const el = checkboxEl();
     expect(el.querySelector('.checkbox-label')?.textContent).toContain('Accept terms');
-    expect(el.querySelector('.checkbox-description')?.textContent).toContain('Required to continue');
+    expect(el.querySelector('.checkbox-description')?.textContent).toContain(
+      'Required to continue'
+    );
   });
 
   it('applies variant, size, and checked classes', () => {

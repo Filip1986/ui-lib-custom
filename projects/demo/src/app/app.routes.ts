@@ -19,17 +19,34 @@ export const routes: Routes = [
   { path: 'buttons', component: ButtonsComponent, title: 'Buttons - UI Components Library' },
   { path: 'cards', component: CardsComponent, title: 'Cards - UI Components Library' },
   { path: 'badges', component: BadgesComponent, title: 'Badges - UI Components Library' },
-  { path: 'layouts', component: LayoutsComponent, title: 'Layout Primitives - UI Components Library' },
+  {
+    path: 'layouts',
+    component: LayoutsComponent,
+    title: 'Layout Primitives - UI Components Library',
+  },
   { path: 'login', component: LoginComponent, title: 'Login Forms - UI Components Library' },
   { path: 'themes', component: ThemesComponent, title: 'Themes - UI Components Library' },
   { path: 'inputs', component: InputsComponent, title: 'Inputs - UI Components Library' },
   { path: 'select', component: SelectComponent, title: 'Select - UI Components Library' },
   { path: 'checkbox', component: CheckboxesComponent, title: 'Checkbox - UI Components Library' },
-  { path: 'sidebar-menu', component: SidebarMenuDemoComponent, title: 'Sidebar Menu - UI Components Library' },
-  { path: 'project-starter', component: ProjectStarterComponent, title: 'Project Starter - UI Components Library' },
+  {
+    path: 'sidebar-menu',
+    component: SidebarMenuDemoComponent,
+    title: 'Sidebar Menu - UI Components Library',
+  },
+  {
+    path: 'project-starter',
+    component: ProjectStarterComponent,
+    title: 'Project Starter - UI Components Library',
+  },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
   { path: 'tabs', component: TabsDemoComponent, title: 'Tabs - UI Components Library' },
-  { path: 'icons', loadComponent: () => import('./pages/icons/icons-demo.component').then(m => m.IconsDemoComponent), title: 'Icons - UI Components Library' },
+  {
+    path: 'icons',
+    loadComponent: () =>
+      import('./pages/icons/icons-demo.component').then((m) => m.IconsDemoComponent),
+    title: 'Icons - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
-  { path: '**', redirectTo: 'shadows' }
+  { path: '**', redirectTo: 'shadows' },
 ];

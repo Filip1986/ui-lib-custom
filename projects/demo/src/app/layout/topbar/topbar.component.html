@@ -18,13 +18,24 @@
         }
       </select>
     </div>
-    <a href="https://github.com" target="_blank" class="topbar-link" title="GitHub" aria-label="GitHub">
+    <a
+      href="https://github.com"
+      target="_blank"
+      class="topbar-link"
+      title="GitHub"
+      aria-label="GitHub"
+    >
       <i class="pi pi-github"></i>
     </a>
     <a href="#" class="topbar-link" title="Documentation" aria-label="Documentation">
       <i class="pi pi-book"></i>
     </a>
-    <button class="theme-toggle" title="Toggle Theme" aria-label="Toggle Theme" (click)="onThemeToggle()">
+    <button
+      class="theme-toggle"
+      title="Toggle Theme"
+      aria-label="Toggle Theme"
+      (click)="onThemeToggle()"
+    >
       <i class="pi" [ngClass]="theme() === 'dark' ? 'pi-sun' : 'pi-moon'"></i>
       <span class="theme-label">{{ theme() === 'dark' ? 'Light' : 'Dark' }}</span>
     </button>

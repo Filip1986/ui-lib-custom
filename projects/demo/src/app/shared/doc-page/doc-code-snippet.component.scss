@@ -56,7 +56,11 @@
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    transition:
+      opacity 0.15s ease,
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
 
     &:hover {
       background: #f1f3f5;

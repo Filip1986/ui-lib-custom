@@ -1,5 +1,12 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken, GRID_COLUMNS, GridColumns, STACK_TOKENS, StackToken } from '../design-tokens';
+import {
+  SPACING_TOKENS,
+  SpacingToken,
+  GRID_COLUMNS,
+  GridColumns,
+  STACK_TOKENS,
+  StackToken,
+} from '../design-tokens';
 
 const stackVar = (token: StackToken) => `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
 const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
@@ -63,7 +70,9 @@ export class Grid {
   protected _gapValue = computed(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
-      return typeof semantic === 'number' ? spaceVar(semantic as SpacingToken) : stackVar(semantic as StackToken);
+      return typeof semantic === 'number'
+        ? spaceVar(semantic as SpacingToken)
+        : stackVar(semantic as StackToken);
     }
     return spaceVar(this.gap());
   });

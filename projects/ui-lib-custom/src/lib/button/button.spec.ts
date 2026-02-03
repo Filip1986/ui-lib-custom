@@ -13,8 +13,7 @@ describe('Button', () => {
     await TestBed.configureTestingModule({
       imports: [Button, Icon],
       providers: [provideIcons({ lucideAudioWaveform })],
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Button);
     component = fixture.componentInstance;

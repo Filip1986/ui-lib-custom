@@ -35,7 +35,12 @@ export class GoogleFontsService {
       })
       .subscribe({
         next: (res) => {
-          const meta = res.items?.map((i) => ({ family: i.family, category: i.category, variants: i.variants })) ?? [];
+          const meta =
+            res.items?.map((i) => ({
+              family: i.family,
+              category: i.category,
+              variants: i.variants,
+            })) ?? [];
           this.fontMeta.set(meta);
           this.fonts.set(meta.map((i) => i.family));
           this.loaded = true;

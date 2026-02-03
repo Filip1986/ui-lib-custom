@@ -5,7 +5,13 @@ import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
 import lightPreset from './presets/light.json';
 import { ICON_SIZES } from '../icon/icon.types';
-import { DeepPartial, ThemePreset, ThemePresetOverrides, ThemeShapeRadius, ThemeIconConfig } from './theme-preset.interface';
+import {
+  DeepPartial,
+  ThemePreset,
+  ThemePresetOverrides,
+  ThemeShapeRadius,
+  ThemeIconConfig,
+} from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
 
 type LoadOptions = {
@@ -64,8 +70,8 @@ export class ThemeConfigService {
     const apply = options?.apply ?? true;
     const persist = options?.persist ?? true;
     const base = merge
-      ? options?.base ?? this.presetSignal() ?? this.defaultPreset
-      : options?.base ?? this.defaultPreset;
+      ? (options?.base ?? this.presetSignal() ?? this.defaultPreset)
+      : (options?.base ?? this.defaultPreset);
 
     const resolved = this.ensureIconDefaults(this.mergePresets(base, preset));
     this.presetSignal.set(resolved);
@@ -81,8 +87,11 @@ export class ThemeConfigService {
   }
 
   async loadPresetAsync(
-    source: string | Promise<ThemePreset | ThemePresetOverrides> | (() => Promise<ThemePreset | ThemePresetOverrides>),
-    options?: LoadOptions,
+    source:
+      | string
+      | Promise<ThemePreset | ThemePresetOverrides>
+      | (() => Promise<ThemePreset | ThemePresetOverrides>),
+    options?: LoadOptions
   ): Promise<ThemePreset> {
     let presetLike: ThemePreset | ThemePresetOverrides;
 
@@ -205,7 +214,8 @@ export class ThemeConfigService {
     const presetWithIcons = this.ensureIconDefaults(preset);
     const { colors, shape, typography, shadow, cardShadow, buttonShadow, icons } = presetWithIcons;
 
-    applyColor(colors.primary,
+    applyColor(
+      colors.primary,
       '--uilib-color-primary-100',
       '--uilib-color-primary-500',
       '--uilib-color-primary-600',
@@ -218,7 +228,8 @@ export class ThemeConfigService {
     );
     set('--uilib-button-primary-fg', '#fff');
 
-    applyColor(colors.secondary,
+    applyColor(
+      colors.secondary,
       '--uilib-color-secondary-50',
       '--uilib-color-secondary-100',
       '--uilib-color-secondary-600',
@@ -230,7 +241,8 @@ export class ThemeConfigService {
     );
     set('--uilib-button-secondary-fg', '#fff');
 
-    applyColor(colors.success,
+    applyColor(
+      colors.success,
       '--uilib-color-success-50',
       '--uilib-color-success-600',
       '--uilib-color-success-700',
@@ -241,7 +253,8 @@ export class ThemeConfigService {
     );
     set('--uilib-button-success-fg', '#fff');
 
-    applyColor(colors.danger,
+    applyColor(
+      colors.danger,
       '--uilib-color-danger-50',
       '--uilib-color-danger-600',
       '--uilib-color-danger-700',
@@ -252,7 +265,8 @@ export class ThemeConfigService {
     );
     set('--uilib-button-danger-fg', '#fff');
 
-    applyColor(colors.warning,
+    applyColor(
+      colors.warning,
       '--uilib-color-warning-50',
       '--uilib-color-warning-600',
       '--uilib-color-warning-700',
@@ -263,37 +277,20 @@ export class ThemeConfigService {
     );
     set('--uilib-button-warning-fg', '#000');
 
-    applyColor(colors.info,
+    applyColor(
+      colors.info,
       '--uilib-color-info-50',
       '--uilib-color-info-600',
       '--uilib-color-info-700'
     );
 
-    applyColor(colors.background,
-      '--uilib-page-bg'
-    );
-    applyColor(colors.text,
-      '--uilib-page-fg'
-    );
-    applyColor(colors.surface,
-      '--uilib-surface',
-      '--uilib-topbar-bg'
-    );
-    applyColor(colors.surfaceAlt,
-      '--uilib-surface-alt',
-      '--uilib-topbar-hover'
-    );
-    applyColor(colors.border,
-      '--uilib-border',
-      '--uilib-topbar-border',
-      '--uilib-card-border'
-    );
-    applyColor(colors.textSecondary,
-      '--uilib-muted'
-    );
-    applyColor(colors.text,
-      '--uilib-topbar-fg'
-    );
+    applyColor(colors.background, '--uilib-page-bg');
+    applyColor(colors.text, '--uilib-page-fg');
+    applyColor(colors.surface, '--uilib-surface', '--uilib-topbar-bg');
+    applyColor(colors.surfaceAlt, '--uilib-surface-alt', '--uilib-topbar-hover');
+    applyColor(colors.border, '--uilib-border', '--uilib-topbar-border', '--uilib-card-border');
+    applyColor(colors.textSecondary, '--uilib-muted');
+    applyColor(colors.text, '--uilib-topbar-fg');
 
     set('--uilib-card-bg', colors.surface);
     set('--uilib-card-text-color', colors.text);
@@ -309,14 +306,25 @@ export class ThemeConfigService {
     set('--uilib-radius-2xl', radiusBase);
     set('--uilib-radius-full', BORDER_RADIUS.full);
 
-    set('--uilib-button-radius', this.resolveRadius(shape.buttonRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
-    set('--uilib-card-radius', this.resolveRadius(shape.cardRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
-    set('--uilib-input-radius', this.resolveRadius(shape.inputRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md);
+    set(
+      '--uilib-button-radius',
+      this.resolveRadius(shape.buttonRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md
+    );
+    set(
+      '--uilib-card-radius',
+      this.resolveRadius(shape.cardRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md
+    );
+    set(
+      '--uilib-input-radius',
+      this.resolveRadius(shape.inputRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md
+    );
 
     const fontBody = typography.fontBody ?? typography.fontFamily;
     const fontUI = typography.fontUI ?? fontBody ?? typography.fontFamily;
     const fontHeading = typography.fontHeading ?? fontBody ?? typography.fontFamily;
-    const fontMonospace = typography.fontMonospace ?? "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
+    const fontMonospace =
+      typography.fontMonospace ??
+      "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
     const headingWeight = typography.headingWeight ?? 600;
     const bodyWeight = typography.bodyWeight ?? 400;
 
@@ -329,8 +337,10 @@ export class ThemeConfigService {
     set('--uilib-font-heading-weight', `${headingWeight}`);
     set('--uilib-font-body-weight', `${bodyWeight}`);
 
-    const shadowValueCard = (SHADOWS as Record<string, string>)[cardShadow ?? shadow ?? ''] ?? 'none';
-    const shadowValueButton = (SHADOWS as Record<string, string>)[buttonShadow ?? shadow ?? ''] ?? 'none';
+    const shadowValueCard =
+      (SHADOWS as Record<string, string>)[cardShadow ?? shadow ?? ''] ?? 'none';
+    const shadowValueButton =
+      (SHADOWS as Record<string, string>)[buttonShadow ?? shadow ?? ''] ?? 'none';
     set('--uilib-card-shadow', shadowValueCard);
     set('--uilib-card-shadow-hover', shadowValueCard);
     set('--uilib-card-shadow-medium', shadowValueCard);
@@ -458,5 +468,3 @@ export class ThemeConfigService {
     return { ...preset, icons };
   }
 }
-
-

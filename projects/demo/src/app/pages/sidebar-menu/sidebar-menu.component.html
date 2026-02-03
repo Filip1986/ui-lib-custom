@@ -1,19 +1,38 @@
 <div class="page-container">
   <div class="page-header">
     <h1>Sidebar Menu</h1>
-    <p class="page-description">Sidebar navigation with classic, compact, and modern variants. Supports collapse, nested items, and theming via CSS variables.</p>
+    <p class="page-description">
+      Sidebar navigation with classic, compact, and modern variants. Supports collapse, nested
+      items, and theming via CSS variables.
+    </p>
   </div>
 
   <section class="controls">
     <div class="control-group">
       <div class="label">Variant</div>
       @for (v of variants; track v) {
-        <button class="chip" [class.active]="variant() === v" (click)="setVariant(v)">{{ v }}</button>
+        <button class="chip" [class.active]="variant() === v" (click)="setVariant(v)">
+          {{ v }}
+        </button>
       }
     </div>
     <div class="control-group toggles">
-      <label><input type="checkbox" [checked]="collapsible()" (change)="collapsible.set($any($event.target).checked)"> Collapsible</label>
-      <label><input type="checkbox" [checked]="collapsed()" (change)="collapsed.set($any($event.target).checked)"> Collapsed</label>
+      <label
+        ><input
+          type="checkbox"
+          [checked]="collapsible()"
+          (change)="collapsible.set($any($event.target).checked)"
+        />
+        Collapsible</label
+      >
+      <label
+        ><input
+          type="checkbox"
+          [checked]="collapsed()"
+          (change)="collapsed.set($any($event.target).checked)"
+        />
+        Collapsed</label
+      >
     </div>
   </section>
 
@@ -23,7 +42,8 @@
         [variant]="variant()"
         [items]="items"
         [collapsed]="collapsed()"
-        [collapsible]="collapsible()">
+        [collapsible]="collapsible()"
+      >
         <div sidebar-brand class="brand">UI Lib</div>
         <div sidebar-footer class="footer">
           <div class="user">

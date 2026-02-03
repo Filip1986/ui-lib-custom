@@ -1,8 +1,26 @@
-import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, ViewChild } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+  inject,
+  effect,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant,
-  Card, IconButton, IconPosition, ThemeConfigService, Tabs, Tab, TabsValue
+  Button,
+  ButtonAppearance,
+  ButtonColor,
+  ButtonSize,
+  ButtonVariant,
+  Card,
+  IconButton,
+  IconPosition,
+  ThemeConfigService,
+  Tabs,
+  Tab,
+  TabsValue,
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -16,7 +34,20 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 
 @Component({
   selector: 'app-buttons',
-  imports: [CommonModule, Tabs, Tab, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, FormsModule, DocCodeSnippetComponent],
+  imports: [
+    CommonModule,
+    Tabs,
+    Tab,
+    Button,
+    IconButton,
+    DocPageLayoutComponent,
+    DocControlGroupComponent,
+    DocDemoViewportComponent,
+    ThemeScopeDirective,
+    Card,
+    FormsModule,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -33,9 +33,12 @@
   --uilib-button-letter-spacing: normal;
 
   /* Size variables */
-  --uilib-button-padding-small: var(--uilib-button-padding-y-small, var(--uilib-space-1)) var(--uilib-button-padding-x-small, var(--uilib-space-3));
-  --uilib-button-padding-medium: var(--uilib-button-padding-y-medium, var(--uilib-space-2)) var(--uilib-button-padding-x-medium, var(--uilib-space-4));
-  --uilib-button-padding-large: var(--uilib-button-padding-y-large, var(--uilib-space-3)) var(--uilib-button-padding-x-large, var(--uilib-space-5));
+  --uilib-button-padding-small: var(--uilib-button-padding-y-small, var(--uilib-space-1))
+    var(--uilib-button-padding-x-small, var(--uilib-space-3));
+  --uilib-button-padding-medium: var(--uilib-button-padding-y-medium, var(--uilib-space-2))
+    var(--uilib-button-padding-x-medium, var(--uilib-space-4));
+  --uilib-button-padding-large: var(--uilib-button-padding-y-large, var(--uilib-space-3))
+    var(--uilib-button-padding-x-large, var(--uilib-space-5));
   --uilib-button-font-size-small: var(--uilib-font-size-sm);
   --uilib-button-font-size-medium: var(--uilib-font-size-md);
   --uilib-button-font-size-large: var(--uilib-font-size-lg);
@@ -49,13 +52,17 @@ button {
   justify-content: center;
   gap: var(--uilib-button-gap);
   border-radius: var(--uilib-button-radius, var(--uilib-radius-md));
-  border: var(--uilib-button-border-width) var(--uilib-button-border-style) var(--btn-border, currentColor);
+  border: var(--uilib-button-border-width) var(--uilib-button-border-style)
+    var(--btn-border, currentColor);
   font-weight: var(--uilib-font-weight-semibold);
   font-family: var(--uilib-font-ui, inherit), sans-serif;
   text-transform: var(--uilib-button-text-transform);
   letter-spacing: var(--uilib-button-letter-spacing);
   padding: var(--uilib-button-padding, var(--uilib-button-padding-medium));
-  background-color: var(--btn-bg, var(--uilib-button-secondary-bg, var(--uilib-color-secondary-100)));
+  background-color: var(
+    --btn-bg,
+    var(--uilib-button-secondary-bg, var(--uilib-color-secondary-100))
+  );
   color: var(--btn-fg, var(--uilib-button-secondary-fg, inherit));
   transition: var(--uilib-button-transition);
   cursor: pointer;
@@ -169,7 +176,10 @@ button:active:not(.btn-disabled) {
   &-secondary {
     --btn-bg: var(--uilib-button-secondary-bg);
     --btn-bg-hover: var(--uilib-button-secondary-bg-hover);
-    --btn-bg-active: var(--uilib-button-secondary-bg-active, var(--uilib-button-secondary-bg-hover));
+    --btn-bg-active: var(
+      --uilib-button-secondary-bg-active,
+      var(--uilib-button-secondary-bg-hover)
+    );
     --btn-border: var(--uilib-button-secondary-border);
     --btn-fg: var(--uilib-button-secondary-fg);
   }
@@ -241,6 +251,10 @@ button:active:not(.btn-disabled) {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

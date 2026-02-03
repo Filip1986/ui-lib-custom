@@ -2,7 +2,8 @@
   <div class="doc-header" docHeader>
     <h1>Button</h1>
     <p class="doc-description">
-      Flexible button components with multiple design variants, colors, and sizes. Adjust the controls below to see the live preview update.
+      Flexible button components with multiple design variants, colors, and sizes. Adjust the
+      controls below to see the live preview update.
     </p>
   </div>
 
@@ -22,7 +23,11 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <app-doc-control-group title="Style" description="Variant, appearance, color, size, and icon alignment." [columns]="3">
+      <app-doc-control-group
+        title="Style"
+        description="Variant, appearance, color, size, and icon alignment."
+        [columns]="3"
+      >
         <div class="control">
           <label>Variant</label>
           <div class="chips">
@@ -33,10 +38,19 @@
                 [variant]="'minimal'"
                 [appearance]="variant() === v ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="selectVariant(v)">{{ v }}</ui-lib-button>
+                (click)="selectVariant(v)"
+                >{{ v }}</ui-lib-button
+              >
             }
           </div>
-          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
+          <label class="inline-toggle"
+            ><input
+              type="checkbox"
+              [checked]="useGlobalVariant()"
+              (change)="setFollowThemeVariant($any($event.target).checked)"
+            />
+            Follow theme variant</label
+          >
         </div>
 
         <div class="control">
@@ -49,7 +63,9 @@
                 [variant]="'minimal'"
                 [appearance]="appearance() === a ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="appearance.set(a)">{{ a }}</ui-lib-button>
+                (click)="appearance.set(a)"
+                >{{ a }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -64,7 +80,9 @@
                 [variant]="'minimal'"
                 [appearance]="color() === c ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="color.set(c)">{{ c }}</ui-lib-button>
+                (click)="color.set(c)"
+                >{{ c }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -79,7 +97,9 @@
                 [variant]="'minimal'"
                 [appearance]="size() === s ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="size.set(s)">{{ s }}</ui-lib-button>
+                (click)="size.set(s)"
+                >{{ s }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -94,7 +114,9 @@
                 [variant]="'minimal'"
                 [appearance]="iconPosition() === p ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="iconPosition.set(p)">{{ p }}</ui-lib-button>
+                (click)="iconPosition.set(p)"
+                >{{ p }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -102,33 +124,66 @@
         <div class="control">
           <label>Icon</label>
           <div class="chips">
-            @for (name of ['search','close','menu','arrow-right','check']; track name) {
+            @for (name of ['search', 'close', 'menu', 'arrow-right', 'check']; track name) {
               <ui-lib-button
                 class="control-chip"
                 size="small"
                 [variant]="'minimal'"
                 [appearance]="demoIcon() === name ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="demoIcon.set(name)">{{ name }}</ui-lib-button>
+                (click)="demoIcon.set(name)"
+                >{{ name }}</ui-lib-button
+              >
             }
           </div>
         </div>
       </app-doc-control-group>
 
-      <app-doc-control-group title="State & content" description="Toggle behavior and update the label.">
+      <app-doc-control-group
+        title="State & content"
+        description="Toggle behavior and update the label."
+      >
         <div class="toggles">
-          <label><input type="checkbox" [checked]="disabled()" (change)="disabled.set($any($event.target).checked)"> Disabled</label>
-          <label><input type="checkbox" [checked]="loading()" (change)="loading.set($any($event.target).checked)"> Loading</label>
-          <label><input type="checkbox" [checked]="fullWidth()" (change)="fullWidth.set($any($event.target).checked)"> Full width</label>
+          <label
+            ><input
+              type="checkbox"
+              [checked]="disabled()"
+              (change)="disabled.set($any($event.target).checked)"
+            />
+            Disabled</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="loading()"
+              (change)="loading.set($any($event.target).checked)"
+            />
+            Loading</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="fullWidth()"
+              (change)="fullWidth.set($any($event.target).checked)"
+            />
+            Full width</label
+          >
         </div>
 
         <div class="control">
           <label>Label</label>
-          <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
+          <input type="text" [value]="label()" (input)="label.set($any($event.target).value)" />
         </div>
 
         <div class="control">
-          <label class="inline-toggle"><input type="checkbox" [checked]="useLocalTheme()" (change)="useLocalTheme.set($any($event.target).checked)"> Use local theme overrides</label>
+          <label class="inline-toggle"
+            ><input
+              type="checkbox"
+              [checked]="useLocalTheme()"
+              (change)="useLocalTheme.set($any($event.target).checked)"
+            />
+            Use local theme overrides</label
+          >
         </div>
       </app-doc-control-group>
     </div>
@@ -139,17 +194,29 @@
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
-              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
+                preset.label
+              }}</ui-lib-button>
             }
             <div class="custom">
               <label>Custom</label>
-              <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+              <input
+                type="number"
+                min="200"
+                max="2000"
+                [ngModel]="viewportCustomWidth()"
+                (ngModelChange)="setViewportCustomWidth($event)"
+              />
+              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
+                >Apply</ui-lib-button
+              >
             </div>
           </div>
           <div class="controls">
             <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
+              >Rotate</ui-lib-button
+            >
           </div>
         </div>
       </ui-lib-card>
@@ -157,9 +224,27 @@
       <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
         <div card-header>Density</div>
         <div class="density-controls">
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('default')"
+            [class.active]="viewport?.densityValue() === 'default'"
+            >Default</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('comfortable')"
+            [class.active]="viewport?.densityValue() === 'comfortable'"
+            >Comfortable</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('compact')"
+            [class.active]="viewport?.densityValue() === 'compact'"
+            >Compact</ui-lib-button
+          >
         </div>
       </ui-lib-card>
     </div>

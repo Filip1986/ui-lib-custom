@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {Button, Card, Checkbox, CheckboxSize, CheckboxVariant} from 'ui-lib-custom';
+import { Button, Card, Checkbox, CheckboxSize, CheckboxVariant } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-group.component';
@@ -49,7 +49,9 @@ export class CheckboxesComponent {
 
   @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
 
-  readonly playgroundDescription = computed(() => (this.showDescription() ? this.description() : null));
+  readonly playgroundDescription = computed(() =>
+    this.showDescription() ? this.description() : null
+  );
 
   readonly snippets = {
     usage: `import { Checkbox } from 'ui-lib-custom';

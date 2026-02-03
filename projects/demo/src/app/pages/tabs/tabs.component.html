@@ -2,7 +2,8 @@
   <div class="doc-header" docHeader>
     <h1>Tabs</h1>
     <p class="doc-description">
-      Switch between content sections with accessible, theme-aware tabs. Configure variant, size, orientation, alignment, and lazy behavior in the playground.
+      Switch between content sections with accessible, theme-aware tabs. Configure variant, size,
+      orientation, alignment, and lazy behavior in the playground.
     </p>
   </div>
 
@@ -22,7 +23,11 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <app-doc-control-group title="Style" description="Variant, size, orientation, alignment." [columns]="3">
+      <app-doc-control-group
+        title="Style"
+        description="Variant, size, orientation, alignment."
+        [columns]="3"
+      >
         <div class="control">
           <label>Variant</label>
           <div class="chips">
@@ -34,7 +39,8 @@
                 [appearance]="variant() === v ? 'solid' : 'ghost'"
                 color="primary"
                 (click)="setVariant(v)"
-              >{{ v }}</ui-lib-button>
+                >{{ v }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -50,7 +56,8 @@
                 [appearance]="size() === s ? 'solid' : 'ghost'"
                 color="primary"
                 (click)="setSize(s)"
-              >{{ s }}</ui-lib-button>
+                >{{ s }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -66,7 +73,8 @@
                 [appearance]="orientation() === o ? 'solid' : 'ghost'"
                 color="primary"
                 (click)="setOrientation(o)"
-              >{{ o }}</ui-lib-button>
+                >{{ o }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -82,13 +90,18 @@
                 [appearance]="align() === a ? 'solid' : 'ghost'"
                 color="primary"
                 (click)="setAlign(a)"
-              >{{ a }}</ui-lib-button>
+                >{{ a }}</ui-lib-button
+              >
             }
           </div>
         </div>
       </app-doc-control-group>
 
-      <app-doc-control-group title="Behavior" description="Closable, lazy rendering, disabled." [columns]="2">
+      <app-doc-control-group
+        title="Behavior"
+        description="Closable, lazy rendering, disabled."
+        [columns]="2"
+      >
         <div class="control">
           <label>Lazy rendering</label>
           <div class="chips">
@@ -100,13 +113,28 @@
                 [appearance]="lazy() === mode ? 'solid' : 'ghost'"
                 color="primary"
                 (click)="setLazy(mode)"
-              >{{ mode === false ? 'off' : mode }}</ui-lib-button>
+                >{{ mode === false ? 'off' : mode }}</ui-lib-button
+              >
             }
           </div>
         </div>
         <div class="toggles">
-          <label><input type="checkbox" [checked]="closable()" (change)="toggleClosable($any($event.target).checked)"> Closable</label>
-          <label><input type="checkbox" [checked]="disabledAll()" (change)="toggleDisabled($any($event.target).checked)"> Disable all</label>
+          <label
+            ><input
+              type="checkbox"
+              [checked]="closable()"
+              (change)="toggleClosable($any($event.target).checked)"
+            />
+            Closable</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="disabledAll()"
+              (change)="toggleDisabled($any($event.target).checked)"
+            />
+            Disable all</label
+          >
         </div>
       </app-doc-control-group>
     </div>
@@ -127,7 +155,12 @@
             [disabled]="disabledAll()"
           >
             @for (tab of playgroundTabs(); track tab.value) {
-              <ui-lib-tab [value]="tab.value" [label]="tab.label" [disabled]="!!tab.disabled" [closable]="!!tab.closable">
+              <ui-lib-tab
+                [value]="tab.value"
+                [label]="tab.label"
+                [disabled]="!!tab.disabled"
+                [closable]="!!tab.closable"
+              >
                 {{ tab.content }}
               </ui-lib-tab>
             }
@@ -212,7 +245,13 @@
                 </ui-lib-tab>
               }
             </ui-lib-tabs>
-            <ui-lib-button size="small" variant="minimal" appearance="ghost" (click)="resetClosableTabs()">Reset tabs</ui-lib-button>
+            <ui-lib-button
+              size="small"
+              variant="minimal"
+              appearance="ghost"
+              (click)="resetClosableTabs()"
+              >Reset tabs</ui-lib-button
+            >
           </div>
         </app-doc-demo-viewport>
       </ui-lib-card>
@@ -250,11 +289,20 @@
         <app-doc-demo-viewport>
           <div class="doc-demo">
             <div class="control-row">
-              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(0)">Select first</ui-lib-button>
-              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(1)">Select second</ui-lib-button>
-              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(2)">Select third</ui-lib-button>
+              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(0)"
+                >Select first</ui-lib-button
+              >
+              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(1)"
+                >Select second</ui-lib-button
+              >
+              <ui-lib-button size="small" variant="minimal" (click)="selectControlled(2)"
+                >Select third</ui-lib-button
+              >
             </div>
-            <ui-lib-tabs [selectedIndex]="controlledSelection()" (selectedChange)="onControlledChange($event)">
+            <ui-lib-tabs
+              [selectedIndex]="controlledSelection()"
+              (selectedChange)="onControlledChange($event)"
+            >
               @for (tab of controlledTabs; track tab.value) {
                 <ui-lib-tab [value]="tab.value" [label]="tab.label">
                   {{ tab.content }}
@@ -280,18 +328,78 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>variant</code></td><td><code>TabsVariant</code></td><td><code>material</code></td><td>Visual style (material, bootstrap, minimal)</td></tr>
-          <tr><td><code>size</code></td><td><code>TabsSize</code></td><td><code>medium</code></td><td>Control padding/typography</td></tr>
-          <tr><td><code>orientation</code></td><td><code>TabsOrientation</code></td><td><code>horizontal</code></td><td>Orientation of tab list</td></tr>
-          <tr><td><code>align</code></td><td><code>TabsAlignment</code></td><td><code>start</code></td><td>Alignment of tab triggers</td></tr>
-          <tr><td><code>selectedIndex</code></td><td><code>number</code></td><td><code>null</code></td><td>Controlled selection by index</td></tr>
-          <tr><td><code>selectedValue</code></td><td><code>TabsValue</code></td><td><code>null</code></td><td>Controlled selection by value</td></tr>
-          <tr><td><code>lazy</code></td><td><code>false | 'unmount' | 'keep-alive'</code></td><td><code>false</code></td><td>Panel rendering strategy</td></tr>
-          <tr><td><code>closable</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Show close affordance on tabs</td></tr>
-          <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disable all tabs</td></tr>
-          <tr><td><code>selectedChange</code></td><td><code>&#123; value: TabsValue or null; index: number &#125;</code></td><td>-</td><td>Emits when selection changes</td></tr>
-          <tr><td><code>selectedIndexChange</code></td><td><code>number</code></td><td>-</td><td>Index-only selection change</td></tr>
-          <tr><td><code>tabClose</code></td><td><code>&#123; value: TabsValue or null; index: number &#125;</code></td><td>-</td><td>Emits when a tab is closed</td></tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>TabsVariant</code></td>
+            <td><code>material</code></td>
+            <td>Visual style (material, bootstrap, minimal)</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>TabsSize</code></td>
+            <td><code>medium</code></td>
+            <td>Control padding/typography</td>
+          </tr>
+          <tr>
+            <td><code>orientation</code></td>
+            <td><code>TabsOrientation</code></td>
+            <td><code>horizontal</code></td>
+            <td>Orientation of tab list</td>
+          </tr>
+          <tr>
+            <td><code>align</code></td>
+            <td><code>TabsAlignment</code></td>
+            <td><code>start</code></td>
+            <td>Alignment of tab triggers</td>
+          </tr>
+          <tr>
+            <td><code>selectedIndex</code></td>
+            <td><code>number</code></td>
+            <td><code>null</code></td>
+            <td>Controlled selection by index</td>
+          </tr>
+          <tr>
+            <td><code>selectedValue</code></td>
+            <td><code>TabsValue</code></td>
+            <td><code>null</code></td>
+            <td>Controlled selection by value</td>
+          </tr>
+          <tr>
+            <td><code>lazy</code></td>
+            <td><code>false | 'unmount' | 'keep-alive'</code></td>
+            <td><code>false</code></td>
+            <td>Panel rendering strategy</td>
+          </tr>
+          <tr>
+            <td><code>closable</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Show close affordance on tabs</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Disable all tabs</td>
+          </tr>
+          <tr>
+            <td><code>selectedChange</code></td>
+            <td><code>&#123; value: TabsValue or null; index: number &#125;</code></td>
+            <td>-</td>
+            <td>Emits when selection changes</td>
+          </tr>
+          <tr>
+            <td><code>selectedIndexChange</code></td>
+            <td><code>number</code></td>
+            <td>-</td>
+            <td>Index-only selection change</td>
+          </tr>
+          <tr>
+            <td><code>tabClose</code></td>
+            <td><code>&#123; value: TabsValue or null; index: number &#125;</code></td>
+            <td>-</td>
+            <td>Emits when a tab is closed</td>
+          </tr>
         </tbody>
       </table>
     </ui-lib-card>
@@ -312,11 +420,23 @@
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
       <div card-header>Accessibility</div>
       <ul class="doc-list">
-        <li>Uses <code>role="tablist"</code>, <code>role="tab"</code>, and <code>role="tabpanel"</code> for structure.</li>
+        <li>
+          Uses <code>role="tablist"</code>, <code>role="tab"</code>, and
+          <code>role="tabpanel"</code> for structure.
+        </li>
         <li>Roving tabindex keeps one tabbable trigger; arrow keys navigate per orientation.</li>
-        <li><code>aria-selected</code>, <code>aria-controls</code>, and <code>aria-labelledby</code> link tabs to panels.</li>
-        <li>Disabled tabs set <code>aria-disabled="true"</code> and are skipped by keyboard navigation.</li>
-        <li>Indicator and focus styles use design tokens for contrast; provide <code>aria-label</code> for icon-only tabs.</li>
+        <li>
+          <code>aria-selected</code>, <code>aria-controls</code>, and
+          <code>aria-labelledby</code> link tabs to panels.
+        </li>
+        <li>
+          Disabled tabs set <code>aria-disabled="true"</code> and are skipped by keyboard
+          navigation.
+        </li>
+        <li>
+          Indicator and focus styles use design tokens for contrast; provide
+          <code>aria-label</code> for icon-only tabs.
+        </li>
       </ul>
     </ui-lib-card>
   }

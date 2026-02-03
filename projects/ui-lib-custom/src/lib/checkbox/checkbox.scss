@@ -1,14 +1,30 @@
 :host {
   --uilib-checkbox-gap: var(--uilib-space-3, 0.75rem);
-  --uilib-checkbox-border: var(--uilib-checkbox-border-color, var(--uilib-color-neutral-400, #cbd5f5));
-  --uilib-checkbox-border-hover: var(--uilib-checkbox-border-hover-color, var(--uilib-color-primary-500, #3b82f6));
-  --uilib-checkbox-border-active: var(--uilib-checkbox-border-active-color, var(--uilib-color-primary-600, #2563eb));
+  --uilib-checkbox-border: var(
+    --uilib-checkbox-border-color,
+    var(--uilib-color-neutral-400, #cbd5f5)
+  );
+  --uilib-checkbox-border-hover: var(
+    --uilib-checkbox-border-hover-color,
+    var(--uilib-color-primary-500, #3b82f6)
+  );
+  --uilib-checkbox-border-active: var(
+    --uilib-checkbox-border-active-color,
+    var(--uilib-color-primary-600, #2563eb)
+  );
   --uilib-checkbox-bg: var(--uilib-checkbox-bg-color, var(--uilib-surface, #fff));
-  --uilib-checkbox-bg-checked: var(--uilib-checkbox-bg-checked-color, var(--uilib-color-primary-500, #3b82f6));
+  --uilib-checkbox-bg-checked: var(
+    --uilib-checkbox-bg-checked-color,
+    var(--uilib-color-primary-500, #3b82f6)
+  );
   --uilib-checkbox-check-color: var(--uilib-checkbox-check-color, #fff);
-  --uilib-checkbox-description-color: var(--uilib-checkbox-description-color, var(--uilib-color-neutral-600, #4b5563));
+  --uilib-checkbox-description-color: var(
+    --uilib-checkbox-description-color,
+    var(--uilib-color-neutral-600, #4b5563)
+  );
   --uilib-checkbox-radius: var(--uilib-checkbox-radius-value, var(--uilib-radius-sm, 0.25rem));
-  --uilib-checkbox-focus-ring: 0 0 0 3px color-mix(in srgb, var(--uilib-checkbox-border-hover) 30%, transparent);
+  --uilib-checkbox-focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--uilib-checkbox-border-hover) 30%, transparent);
   --uilib-checkbox-size-sm: 1rem;
   --uilib-checkbox-size-md: 1.25rem;
   --uilib-checkbox-size-lg: 1.5rem;
@@ -38,7 +54,10 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 :host(:not(.ui-checkbox-disabled)) .checkbox-box {

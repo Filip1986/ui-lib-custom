@@ -6,10 +6,7 @@ import { BaseLoginComponent } from '../base-login/base-login.component';
 @Component({
   selector: 'lib-login-1',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule
-],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login-1.component.html',
   styleUrls: ['./login-1.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

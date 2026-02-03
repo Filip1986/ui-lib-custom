@@ -1,6 +1,24 @@
-import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, ViewChild } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+  inject,
+  effect,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, CardVariant, CardElevation, ThemeConfigService, Button, SHADOWS, Tabs, Tab, TabsValue } from 'ui-lib-custom';
+import {
+  Card,
+  CardVariant,
+  CardElevation,
+  ThemeConfigService,
+  Button,
+  SHADOWS,
+  Tabs,
+  Tab,
+  TabsValue,
+} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -17,7 +35,19 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [CommonModule, Card, Tabs, Tab, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, FormsModule, DocCodeSnippetComponent],
+  imports: [
+    CommonModule,
+    Card,
+    Tabs,
+    Tab,
+    Button,
+    DocPageLayoutComponent,
+    DocControlGroupComponent,
+    DocDemoViewportComponent,
+    ThemeScopeDirective,
+    FormsModule,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -101,12 +131,23 @@ export class Example {}`,
     return { ...base, ...this.localVars() };
   });
 
-  readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter(key => key.startsWith('shadow-'));
-  readonly globalShadow = computed(() => SHADOW_MAP[this.themeService.preset().cardShadow ?? this.themeService.preset().shadow ?? ''] ?? 'none');
-  readonly selectedShadow = signal<ShadowKey>(this.resolveShadowKey(this.themeService.preset().cardShadow ?? this.themeService.preset().shadow));
-  readonly shadowValue = computed(() => this.useLocalTheme()
-    ? (SHADOW_MAP[this.selectedShadow()] ?? 'none')
-    : this.globalShadow());
+  readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter((key) =>
+    key.startsWith('shadow-')
+  );
+  readonly globalShadow = computed(
+    () =>
+      SHADOW_MAP[
+        this.themeService.preset().cardShadow ?? this.themeService.preset().shadow ?? ''
+      ] ?? 'none'
+  );
+  readonly selectedShadow = signal<ShadowKey>(
+    this.resolveShadowKey(
+      this.themeService.preset().cardShadow ?? this.themeService.preset().shadow
+    )
+  );
+  readonly shadowValue = computed(() =>
+    this.useLocalTheme() ? (SHADOW_MAP[this.selectedShadow()] ?? 'none') : this.globalShadow()
+  );
 
   setShadow(value: string) {
     if (SHADOW_MAP[value]) {

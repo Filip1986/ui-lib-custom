@@ -39,11 +39,7 @@
     <div class="icon-preview-grid">
       @for (icon of previewIcons; track icon) {
         <div class="preview-item">
-          <ui-lib-icon
-            [name]="icon"
-            [library]="config().defaultLibrary"
-            size="lg"
-          />
+          <ui-lib-icon [name]="icon" [library]="config().defaultLibrary" size="lg" />
           <span>{{ icon }}</span>
         </div>
       }

@@ -16,7 +16,9 @@ import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.compone
 export class App {
   private readonly themeService = inject(ThemeConfigService);
   sidebarVisible = signal(false);
-  theme = computed<'light' | 'dark' | 'brand-example'>(() => this.themeService.preset().name as 'light' | 'dark' | 'brand-example');
+  theme = computed<'light' | 'dark' | 'brand-example'>(
+    () => this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
+  );
   savedThemes = this.themeService.savedThemes;
 
   constructor() {
@@ -25,7 +27,7 @@ export class App {
   }
 
   toggleSidebar() {
-    this.sidebarVisible.update(v => !v);
+    this.sidebarVisible.update((v) => !v);
   }
 
   toggleTheme() {

@@ -8,7 +8,11 @@
               <div class="nav-link nav-header" (click)="toggleSection(item)">
                 <i [class]="item.icon" *ngIf="item.icon"></i>
                 <span>{{ item.label }}</span>
-                <i class="pi toggle-icon" [class.pi-chevron-down]="item.expanded" [class.pi-chevron-right]="!item.expanded"></i>
+                <i
+                  class="pi toggle-icon"
+                  [class.pi-chevron-down]="item.expanded"
+                  [class.pi-chevron-right]="!item.expanded"
+                ></i>
               </div>
               <ul class="nav-submenu" [class.expanded]="item.expanded">
                 @for (subItem of item.items; track subItem.label) {

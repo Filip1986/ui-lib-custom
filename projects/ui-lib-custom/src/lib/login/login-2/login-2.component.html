@@ -1,7 +1,7 @@
 <div
   class="login-2-container flex flex-col justify-center min-h-screen p-4"
   data-testid="login-2-container"
-  >
+>
   <div class="login-2-form-container mx-auto w-full max-w-sm" data-testid="login-2-form-container">
     <div class="text-center mb-8" data-testid="login-2-header">
       <h1 class="text-3xl font-bold" data-testid="login-2-title">{{ title() }}</h1>
@@ -15,7 +15,7 @@
       [formGroup]="loginForm"
       class="space-y-4"
       data-testid="login-2-form"
-      >
+    >
       <!-- Username field -->
       <div data-testid="login-2-username-field">
         <span class="p-input-icon-left w-full">
@@ -30,7 +30,12 @@
             [autofocus]="true"
           />
         </span>
-        @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted())) {
+        @if (
+          loginForm.controls['username'].invalid &&
+          (loginForm.controls['username'].dirty ||
+            loginForm.controls['username'].touched ||
+            submitted())
+        ) {
           <small class="text-red-500 block mt-1" data-testid="login-2-username-error">
             Username is required
           </small>
@@ -50,7 +55,12 @@
             data-testid="login-2-password-input"
           />
         </div>
-        @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted())) {
+        @if (
+          loginForm.controls['password'].invalid &&
+          (loginForm.controls['password'].dirty ||
+            loginForm.controls['password'].touched ||
+            submitted())
+        ) {
           <small class="text-red-500 block mt-1" data-testid="login-2-password-error">
             Password is required
           </small>
@@ -61,12 +71,9 @@
       <div
         class="flex justify-between items-center text-sm"
         data-testid="login-2-remember-forgot-section"
-        >
+      >
         @if (features().showRememberMe) {
-          <div
-            class="flex items-center"
-            data-testid="login-2-remember-me-section"
-          >
+          <div class="flex items-center" data-testid="login-2-remember-me-section">
             <input
               type="checkbox"
               (change)="onRememberMeChange($event)"
@@ -92,7 +99,7 @@
             class="cursor-pointer"
             data-testid="login-2-forgot-password-link"
             tabindex="0"
-            >
+          >
             Forgot password?
           </a>
         }
@@ -114,10 +121,7 @@
 
       <!-- Register link -->
       @if (features().showRegisterLink) {
-        <div
-          class="text-center text-sm mt-4"
-          data-testid="login-2-register-section"
-          >
+        <div class="text-center text-sm mt-4" data-testid="login-2-register-section">
           <span class="text-gray-600">Don't have an account?</span>
           <a
             (click)="onRegister()"
@@ -125,7 +129,7 @@
             class="cursor-pointer"
             data-testid="login-2-register-link"
             tabindex="0"
-            >
+          >
             Create account
           </a>
         </div>

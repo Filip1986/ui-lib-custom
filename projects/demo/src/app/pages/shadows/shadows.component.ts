@@ -21,7 +21,15 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
 @Component({
   selector: 'app-shadows',
   standalone: true,
-  imports: [CommonModule, Card, Tabs, Tab, DocPageLayoutComponent, DocDemoViewportComponent, DocCodeSnippetComponent],
+  imports: [
+    CommonModule,
+    Card,
+    Tabs,
+    Tab,
+    DocPageLayoutComponent,
+    DocDemoViewportComponent,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './shadows.component.html',
   styleUrl: './shadows.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

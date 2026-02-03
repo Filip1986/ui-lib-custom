@@ -1,6 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, signal, computed, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostBinding } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  signal,
+  computed,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+  HostBinding,
+} from '@angular/core';
 
 interface ViewportPreset {
   key: string;
@@ -26,8 +39,12 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   }
   @Output() activeChange = new EventEmitter<boolean>();
 
-  @HostBinding('class.mode-inline') get isInline() { return this.mode === 'inline'; }
-  @HostBinding('class.mode-floating') get isFloating() { return this.mode === 'floating'; }
+  @HostBinding('class.mode-inline') get isInline() {
+    return this.mode === 'inline';
+  }
+  @HostBinding('class.mode-floating') get isFloating() {
+    return this.mode === 'floating';
+  }
 
   @ViewChild('frameHost', { static: false }) frameHost?: ElementRef<HTMLDivElement>;
 
@@ -54,7 +71,9 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     if (this.frameHost?.nativeElement) {
       this.resizeObserver = new ResizeObserver(() => this.computeScale());
-      this.resizeObserver.observe(this.frameHost.nativeElement.parentElement ?? this.frameHost.nativeElement);
+      this.resizeObserver.observe(
+        this.frameHost.nativeElement.parentElement ?? this.frameHost.nativeElement
+      );
       this.computeScale();
     }
   }

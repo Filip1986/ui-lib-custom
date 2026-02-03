@@ -2,8 +2,8 @@
   <div class="doc-header" docHeader>
     <h1>Layout Primitives</h1>
     <p class="doc-description">
-      Performance-first layout components using signals, OnPush change detection, and design tokens. Each component renders a single
-      element with zero runtime overhead.
+      Performance-first layout components using signals, OnPush change detection, and design tokens.
+      Each component renders a single element with zero runtime overhead.
     </p>
   </div>
 
@@ -13,17 +13,29 @@
       <div class="viewport-controls">
         <div class="preset-buttons">
           @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
+              preset.label
+            }}</ui-lib-button>
           }
           <div class="custom">
             <label>Custom</label>
-            <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+            <input
+              type="number"
+              min="200"
+              max="2000"
+              [ngModel]="viewportCustomWidth()"
+              (ngModelChange)="setViewportCustomWidth($event)"
+            />
+            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
+              >Apply</ui-lib-button
+            >
           </div>
         </div>
         <div class="controls">
           <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
+            >Rotate</ui-lib-button
+          >
         </div>
       </div>
     </ui-lib-card>
@@ -31,9 +43,27 @@
     <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
       <div card-header>Density</div>
       <div class="density-controls">
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewportDensity() === 'default'">Default</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewportDensity() === 'comfortable'">Comfortable</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewportDensity() === 'compact'">Compact</ui-lib-button>
+        <ui-lib-button
+          size="small"
+          appearance="ghost"
+          (click)="setViewportDensity('default')"
+          [class.active]="viewportDensity() === 'default'"
+          >Default</ui-lib-button
+        >
+        <ui-lib-button
+          size="small"
+          appearance="ghost"
+          (click)="setViewportDensity('comfortable')"
+          [class.active]="viewportDensity() === 'comfortable'"
+          >Comfortable</ui-lib-button
+        >
+        <ui-lib-button
+          size="small"
+          appearance="ghost"
+          (click)="setViewportDensity('compact')"
+          [class.active]="viewportDensity() === 'compact'"
+          >Compact</ui-lib-button
+        >
       </div>
     </ui-lib-card>
   </div>
@@ -62,7 +92,7 @@
             </ui-lib-stack>
             <ui-lib-stack spacing="sm">
               <h4>Container inset="lg"</h4>
-              <ui-lib-container inset="lg" style="background: #f5f5f5;">
+              <ui-lib-container inset="lg" style="background: #f5f5f5">
                 <p class="no-margin">Inset padding comes from `--uilib-inset-lg` (24px).</p>
               </ui-lib-container>
             </ui-lib-stack>
@@ -106,7 +136,7 @@
       <h3>Centered Stack</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-stack spacing="sm" align="center" justify="center" style="min-height: 200px;">
+          <ui-lib-stack spacing="sm" align="center" justify="center" style="min-height: 200px">
             <div class="demo-box">Centered Item 1</div>
             <div class="demo-box">Centered Item 2</div>
           </ui-lib-stack>
@@ -118,7 +148,12 @@
       <h3>Space Between</h3>
       <app-doc-demo-viewport>
         <div class="doc-demo centered">
-          <ui-lib-stack direction="horizontal" justify="space-between" spacing="sm" style="width: 100%;">
+          <ui-lib-stack
+            direction="horizontal"
+            justify="space-between"
+            spacing="sm"
+            style="width: 100%"
+          >
             <div class="demo-box">Left</div>
             <div class="demo-box">Center</div>
             <div class="demo-box">Right</div>
@@ -173,7 +208,7 @@
       <app-doc-demo-viewport>
         <div class="doc-demo">
           <ui-lib-grid [columns]="12" spacing="sm">
-            @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
+            @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; track i) {
               <div class="demo-grid-cell">{{ i }}</div>
             }
           </ui-lib-grid>
@@ -186,7 +221,7 @@
       <app-doc-demo-viewport>
         <div class="doc-demo">
           <ui-lib-grid [columns]="4" spacing="md">
-            @for (i of [1,2,3,4,5,6,7,8]; track i) {
+            @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
               <div class="demo-grid-cell">Cell {{ i }}</div>
             }
           </ui-lib-grid>
@@ -200,7 +235,7 @@
       <app-doc-demo-viewport>
         <div class="doc-demo">
           <ui-lib-grid spacing="lg" minColumnWidth="200px">
-            @for (i of [1,2,3,4,5,6]; track i) {
+            @for (i of [1, 2, 3, 4, 5, 6]; track i) {
               <div class="demo-grid-cell large">Card {{ i }}</div>
             }
           </ui-lib-grid>
@@ -214,16 +249,25 @@
     <p>A centered container with max-width constraints and padding.</p>
     <app-doc-demo-viewport>
       <div class="doc-demo stacked">
-        <ui-lib-container size="sm" inset="md" style="background: #f5f5f5;">
-          <p>This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <ui-lib-container size="sm" inset="md" style="background: #f5f5f5">
+          <p>
+            This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit.
+          </p>
         </ui-lib-container>
 
-        <ui-lib-container size="md" inset="lg" style="background: #f5f5f5;">
-          <p>This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <ui-lib-container size="md" inset="lg" style="background: #f5f5f5">
+          <p>
+            This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit.
+          </p>
         </ui-lib-container>
 
-        <ui-lib-container size="lg" inset="xl" style="background: #f5f5f5;">
-          <p>This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <ui-lib-container size="lg" inset="xl" style="background: #f5f5f5">
+          <p>
+            This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit.
+          </p>
         </ui-lib-container>
       </div>
     </app-doc-demo-viewport>
@@ -291,18 +335,66 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>0</td><td>0</td><td>0px</td></tr>
-          <tr><td>1</td><td>0.25rem</td><td>4px</td></tr>
-          <tr><td>2</td><td>0.5rem</td><td>8px</td></tr>
-          <tr><td>3</td><td>0.75rem</td><td>12px</td></tr>
-          <tr><td>4</td><td>1rem</td><td>16px</td></tr>
-          <tr><td>5</td><td>1.25rem</td><td>20px</td></tr>
-          <tr><td>6</td><td>1.5rem</td><td>24px</td></tr>
-          <tr><td>8</td><td>2rem</td><td>32px</td></tr>
-          <tr><td>10</td><td>2.5rem</td><td>40px</td></tr>
-          <tr><td>12</td><td>3rem</td><td>48px</td></tr>
-          <tr><td>16</td><td>4rem</td><td>64px</td></tr>
-          <tr><td>20</td><td>5rem</td><td>80px</td></tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0px</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0.25rem</td>
+            <td>4px</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>0.5rem</td>
+            <td>8px</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>0.75rem</td>
+            <td>12px</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>1rem</td>
+            <td>16px</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>1.25rem</td>
+            <td>20px</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>1.5rem</td>
+            <td>24px</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>2rem</td>
+            <td>32px</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>2.5rem</td>
+            <td>40px</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>3rem</td>
+            <td>48px</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>4rem</td>
+            <td>64px</td>
+          </tr>
+          <tr>
+            <td>20</td>
+            <td>5rem</td>
+            <td>80px</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -310,14 +402,17 @@
 
   <ui-lib-card [showHeader]="true" [showFooter]="false" id="themed-layouts" data-doc-anchor>
     <div card-header>Themed Layouts</div>
-    <p>Layout primitives inherit CSS variables. Scoped <code>data-theme</code> shows light/dark surfaces.</p>
+    <p>
+      Layout primitives inherit CSS variables. Scoped <code>data-theme</code> shows light/dark
+      surfaces.
+    </p>
 
     <app-doc-demo-viewport>
       <div class="theme-grid">
         <div class="theme-panel" data-theme="light">
           <div class="panel-header">Light Theme</div>
           <div class="panel-body">
-            <ui-lib-container size="md" inset="md" style="background: var(--uilib-surface, #fff);">
+            <ui-lib-container size="md" inset="md" style="background: var(--uilib-surface, #fff)">
               <ui-lib-stack spacing="md">
                 <h4>Stack + Inline</h4>
                 <ui-lib-inline spacing="sm">
@@ -326,7 +421,7 @@
                   <span class="demo-tag">Item C</span>
                 </ui-lib-inline>
                 <ui-lib-grid [columns]="3" spacing="sm">
-                  @for (i of [1,2,3]; track i) {
+                  @for (i of [1, 2, 3]; track i) {
                     <div class="demo-grid-cell">Cell {{ i }}</div>
                   }
                 </ui-lib-grid>
@@ -338,7 +433,11 @@
         <div class="theme-panel" data-theme="dark">
           <div class="panel-header">Dark Theme</div>
           <div class="panel-body">
-            <ui-lib-container size="md" inset="md" style="background: var(--uilib-surface, #1a1c1f);">
+            <ui-lib-container
+              size="md"
+              inset="md"
+              style="background: var(--uilib-surface, #1a1c1f)"
+            >
               <ui-lib-stack spacing="md">
                 <h4>Stack + Inline</h4>
                 <ui-lib-inline spacing="sm">
@@ -347,7 +446,7 @@
                   <span class="demo-tag">Item C</span>
                 </ui-lib-inline>
                 <ui-lib-grid [columns]="3" spacing="sm">
-                  @for (i of [1,2,3]; track i) {
+                  @for (i of [1, 2, 3]; track i) {
                     <div class="demo-grid-cell">Cell {{ i }}</div>
                   }
                 </ui-lib-grid>

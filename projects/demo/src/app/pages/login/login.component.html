@@ -2,8 +2,9 @@
   <div class="page-header">
     <h1>Login Components</h1>
     <p class="page-description">
-      Multiple beautiful login form variants with full functionality including social login, remember me, and forgot password features.
-      Choose the variant that best fits your application's design language.
+      Multiple beautiful login form variants with full functionality including social login,
+      remember me, and forgot password features. Choose the variant that best fits your
+      application's design language.
     </p>
   </div>
 
@@ -13,7 +14,8 @@
       <button
         class="variant-tab"
         [class.active]="activeVariant() === variant.id"
-        (click)="selectVariant(variant.id)">
+        (click)="selectVariant(variant.id)"
+      >
         {{ variant.title.split(' - ')[1] }}
       </button>
     }
@@ -70,7 +72,8 @@
                 [showRememberMe]="true"
                 (login)="onLoginForm($event)"
                 (forgotPassword)="onForgotPassword('')"
-                (socialLogin)="onSocialLogin($event)">
+                (socialLogin)="onSocialLogin($event)"
+              >
                 <ng-template #logo>Demo Brand</ng-template>
               </ui-lib-login-form>
             }
@@ -99,7 +102,8 @@
             <button
               class="copy-button"
               (click)="copyToClipboard(variant.importCode, variant.id + '-import')"
-              [class.copied]="isCopied(variant.id + '-import')">
+              [class.copied]="isCopied(variant.id + '-import')"
+            >
               @if (isCopied(variant.id + '-import')) {
                 <span>✓ Copied!</span>
               } @else {
@@ -117,7 +121,8 @@
             <button
               class="copy-button"
               (click)="copyToClipboard(variant.usageCode, variant.id + '-usage')"
-              [class.copied]="isCopied(variant.id + '-usage')">
+              [class.copied]="isCopied(variant.id + '-usage')"
+            >
               @if (isCopied(variant.id + '-usage')) {
                 <span>✓ Copied!</span>
               } @else {
@@ -135,7 +140,8 @@
             <button
               class="copy-button"
               (click)="copyToClipboard(eventHandlersCode, 'event-handlers')"
-              [class.copied]="isCopied('event-handlers')">
+              [class.copied]="isCopied('event-handlers')"
+            >
               @if (isCopied('event-handlers')) {
                 <span>✓ Copied!</span>
               } @else {
@@ -152,7 +158,9 @@
   <!-- API Reference Section -->
   <section class="api-reference">
     <h2>API Reference</h2>
-    <p class="section-description">All login components share the same API for consistent integration.</p>
+    <p class="section-description">
+      All login components share the same API for consistent integration.
+    </p>
 
     <div class="api-grid">
       <div class="api-section">

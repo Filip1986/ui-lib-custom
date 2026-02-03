@@ -1,31 +1,49 @@
 <div class="page-container">
   <div class="page-header">
     <h1>Project Starter</h1>
-    <p class="page-description">Configure a theme, preview components, and download starter assets (JSON, CSS, SCSS).</p>
+    <p class="page-description">
+      Configure a theme, preview components, and download starter assets (JSON, CSS, SCSS).
+    </p>
   </div>
 
   <section class="controls">
     <div class="control-group">
       <label>Theme name</label>
-      <input type="text" [ngModel]="themeName()" (ngModelChange)="themeName.set($event)">
+      <input type="text" [ngModel]="themeName()" (ngModelChange)="themeName.set($event)" />
       <button type="button" class="chip" (click)="saveTheme()">Save Theme</button>
     </div>
     <div class="control-group">
       <label>Saved themes</label>
-      <select [ngModel]="selectedSaved()" (ngModelChange)="selectedSaved.set($event); loadTheme($event)">
+      <select
+        [ngModel]="selectedSaved()"
+        (ngModelChange)="selectedSaved.set($event); loadTheme($event)"
+      >
         <option value="">Select saved</option>
         @for (name of savedThemes(); track name) {
           <option [value]="name">{{ name }}</option>
         }
       </select>
-      <button type="button" class="chip" (click)="deleteTheme(selectedSaved())" [disabled]="!selectedSaved()">Delete</button>
+      <button
+        type="button"
+        class="chip"
+        (click)="deleteTheme(selectedSaved())"
+        [disabled]="!selectedSaved()"
+      >
+        Delete
+      </button>
     </div>
     <div class="control-group">
       <label>Import theme.json</label>
-      <input type="file" accept="application/json" (change)="importTheme($any($event.target).files)">
+      <input
+        type="file"
+        accept="application/json"
+        (change)="importTheme($any($event.target).files)"
+      />
     </div>
     <div class="actions">
-      <button type="button" class="chip primary" (click)="exportStarterPackage()">Download Starter Package</button>
+      <button type="button" class="chip primary" (click)="exportStarterPackage()">
+        Download Starter Package
+      </button>
     </div>
     @if (message()) {
       <div class="message">{{ message() }}</div>
@@ -48,7 +66,12 @@
         <div card-header>Inputs</div>
         <div class="stack">
           <ui-lib-input label="Email" placeholder="you@example.com"></ui-lib-input>
-          <ui-lib-input label="Password" type="password" [showTogglePassword]="true" placeholder="••••••"></ui-lib-input>
+          <ui-lib-input
+            label="Password"
+            type="password"
+            [showTogglePassword]="true"
+            placeholder="••••••"
+          ></ui-lib-input>
         </div>
       </ui-lib-card>
 

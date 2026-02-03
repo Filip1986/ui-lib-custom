@@ -7,11 +7,7 @@ import { LoginFeatures, LoginFormData, LoginVariant } from './models/login-contr
 @Component({
   selector: 'lib-login',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    LoginFactoryComponent
-],
+  imports: [ReactiveFormsModule, CommonModule, LoginFactoryComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -8,12 +8,12 @@
   [style.--uilib-button-shadow-hover]="shadow()"
 >
   @if (iconPosition() === 'left' && icon()) {
-  <ui-lib-icon
-    class="btn-icon btn-icon--left"
-    [name]="icon()!"
-    [size]="iconSize()"
-    [variant]="variant()"
-  />
+    <ui-lib-icon
+      class="btn-icon btn-icon--left"
+      [name]="icon()!"
+      [size]="iconSize()"
+      [variant]="variant()"
+    />
   }
 
   <span class="btn-content">
@@ -21,19 +21,15 @@
   </span>
 
   @if (iconPosition() === 'right' && icon()) {
-  <ui-lib-icon
-    class="btn-icon btn-icon--right"
-    [name]="icon()!"
-    [size]="iconSize()"
-    [variant]="variant()"
-  />
+    <ui-lib-icon
+      class="btn-icon btn-icon--right"
+      [name]="icon()!"
+      [size]="iconSize()"
+      [variant]="variant()"
+    />
   }
 
   @if (loading()) {
-  <ui-lib-icon
-    class="btn-icon btn-icon--loading"
-    name="spinner"
-    [size]="iconSize()"
-  />
+    <ui-lib-icon class="btn-icon btn-icon--loading" name="spinner" [size]="iconSize()" />
   }
 </button>

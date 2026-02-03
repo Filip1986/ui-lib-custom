@@ -29,17 +29,17 @@ import { LoginComponent } from 'ui-lib-custom';
   standalone: true,
   imports: [LoginComponent],
   template: `
-    <lib-login 
+    <lib-login
       [variant]="'1'"
       [features]="{
         showSocialLogin: true,
         showRememberMe: true,
         showForgotPassword: true,
-        showRegisterLink: true
+        showRegisterLink: true,
       }"
       (submitLogin)="onLogin($event)"
     />
-  `
+  `,
 })
 export class AppComponent {
   onLogin(data: any) {
@@ -77,6 +77,7 @@ This command will compile your project, and the build artifacts will be placed i
 Once the project is built, you can publish your library by following these steps:
 
 1. Navigate to the `dist` directory:
+
    ```bash
    cd dist/ui-lib-custom
    ```

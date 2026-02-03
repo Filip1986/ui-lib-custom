@@ -9,27 +9,27 @@
 
 export const SPACING_TOKENS = {
   0: '0',
-  1: '0.25rem',  // 4px
-  2: '0.5rem',   // 8px
-  3: '0.75rem',  // 12px
-  4: '1rem',     // 16px
-  5: '1.25rem',  // 20px
-  6: '1.5rem',   // 24px
-  8: '2rem',     // 32px
-  10: '2.5rem',  // 40px
-  12: '3rem',    // 48px
-  16: '4rem',    // 64px
-  20: '5rem',    // 80px
+  1: '0.25rem', // 4px
+  2: '0.5rem', // 8px
+  3: '0.75rem', // 12px
+  4: '1rem', // 16px
+  5: '1.25rem', // 20px
+  6: '1.5rem', // 24px
+  8: '2rem', // 32px
+  10: '2.5rem', // 40px
+  12: '3rem', // 48px
+  16: '4rem', // 64px
+  20: '5rem', // 80px
 } as const;
 
 export type SpacingToken = keyof typeof SPACING_TOKENS;
 
 export const SPACING_ALIASES = {
-  xs: SPACING_TOKENS[1],   // 4px
-  sm: SPACING_TOKENS[2],   // 8px
-  md: SPACING_TOKENS[4],   // 16px (base)
-  lg: SPACING_TOKENS[6],   // 24px
-  xl: SPACING_TOKENS[8],   // 32px
+  xs: SPACING_TOKENS[1], // 4px
+  sm: SPACING_TOKENS[2], // 8px
+  md: SPACING_TOKENS[4], // 16px (base)
+  lg: SPACING_TOKENS[6], // 24px
+  xl: SPACING_TOKENS[8], // 32px
   '2xl': SPACING_TOKENS[12], // 48px
 } as const;
 
@@ -37,51 +37,51 @@ export type SpacingAlias = keyof typeof SPACING_ALIASES;
 export type SpacingKey = SpacingToken | SpacingAlias;
 
 export const INSET_TOKENS = {
-  xs: SPACING_TOKENS[1],  // 4px
-  sm: SPACING_TOKENS[2],  // 8px
-  md: SPACING_TOKENS[4],  // 16px
-  lg: SPACING_TOKENS[6],  // 24px
-  xl: SPACING_TOKENS[8],  // 32px
+  xs: SPACING_TOKENS[1], // 4px
+  sm: SPACING_TOKENS[2], // 8px
+  md: SPACING_TOKENS[4], // 16px
+  lg: SPACING_TOKENS[6], // 24px
+  xl: SPACING_TOKENS[8], // 32px
 } as const;
 
 export type InsetToken = keyof typeof INSET_TOKENS;
 
 export const SQUISH_TOKENS = {
-  xs: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[2]}`,  // 4px 8px
-  sm: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`,  // 8px 16px
-  md: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[8]}`,  // 16px 32px
-  lg: `${SPACING_TOKENS[6]} ${SPACING_TOKENS[12] ?? '3rem'}`,  // 24px 48px
-  xl: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[16] ?? '4rem'}`,  // 32px 64px
+  xs: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[2]}`, // 4px 8px
+  sm: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`, // 8px 16px
+  md: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[8]}`, // 16px 32px
+  lg: `${SPACING_TOKENS[6]} ${SPACING_TOKENS[12] ?? '3rem'}`, // 24px 48px
+  xl: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[16] ?? '4rem'}`, // 32px 64px
 } as const;
 
 export type SquishToken = keyof typeof SQUISH_TOKENS;
 
 export const STRETCH_TOKENS = {
-  xs: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[1]}`,  // 8px 4px
-  sm: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[2]}`,  // 16px 8px
-  md: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[4]}`,  // 32px 16px
-  lg: `${SPACING_TOKENS[12] ?? '3rem'} ${SPACING_TOKENS[6]}`,  // 48px 24px
-  xl: `${SPACING_TOKENS[16] ?? '4rem'} ${SPACING_TOKENS[8]}`,  // 64px 32px
+  xs: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[1]}`, // 8px 4px
+  sm: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[2]}`, // 16px 8px
+  md: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[4]}`, // 32px 16px
+  lg: `${SPACING_TOKENS[12] ?? '3rem'} ${SPACING_TOKENS[6]}`, // 48px 24px
+  xl: `${SPACING_TOKENS[16] ?? '4rem'} ${SPACING_TOKENS[8]}`, // 64px 32px
 } as const;
 
 export type StretchToken = keyof typeof STRETCH_TOKENS;
 
 export const STACK_TOKENS = {
-  xs: SPACING_TOKENS[1],  // 4px
-  sm: SPACING_TOKENS[2],  // 8px
-  md: SPACING_TOKENS[4],  // 16px
-  lg: SPACING_TOKENS[6],  // 24px
-  xl: SPACING_TOKENS[8],  // 32px
+  xs: SPACING_TOKENS[1], // 4px
+  sm: SPACING_TOKENS[2], // 8px
+  md: SPACING_TOKENS[4], // 16px
+  lg: SPACING_TOKENS[6], // 24px
+  xl: SPACING_TOKENS[8], // 32px
 } as const;
 
 export type StackToken = keyof typeof STACK_TOKENS;
 
 export const INLINE_TOKENS = {
-  xs: SPACING_TOKENS[1],  // 4px
-  sm: SPACING_TOKENS[2],  // 8px
-  md: SPACING_TOKENS[4],  // 16px
-  lg: SPACING_TOKENS[6],  // 24px
-  xl: SPACING_TOKENS[8],  // 32px
+  xs: SPACING_TOKENS[1], // 4px
+  sm: SPACING_TOKENS[2], // 8px
+  md: SPACING_TOKENS[4], // 16px
+  lg: SPACING_TOKENS[6], // 24px
+  xl: SPACING_TOKENS[8], // 32px
 } as const;
 
 export type InlineToken = keyof typeof INLINE_TOKENS;
@@ -136,9 +136,9 @@ export const COLOR_PRIMARY = {
   200: '#90caf9',
   300: '#64b5f6',
   400: '#42a5f5',
-  500: '#2196f3',  // Base primary
+  500: '#2196f3', // Base primary
   600: '#1e88e5',
-  700: '#1976d2',  // Material primary
+  700: '#1976d2', // Material primary
   800: '#1565c0',
   900: '#0d47a1',
 } as const;
@@ -153,8 +153,8 @@ export const COLOR_NEUTRAL = {
   200: '#eeeeee',
   300: '#e0e0e0',
   400: '#bdbdbd',
-  500: '#9e9e9e',  // Base neutral
-  600: '#757575',  // Material secondary
+  500: '#9e9e9e', // Base neutral
+  600: '#757575', // Material secondary
   700: '#616161',
   800: '#424242',
   900: '#212121',
@@ -172,9 +172,9 @@ export const COLOR_SUCCESS = {
   200: '#a5d6a7',
   300: '#81c784',
   400: '#66bb6a',
-  500: '#4caf50',  // Base success
+  500: '#4caf50', // Base success
   600: '#43a047',
-  700: '#388e3c',  // Material success
+  700: '#388e3c', // Material success
   800: '#2e7d32',
   900: '#1b5e20',
 } as const;
@@ -189,9 +189,9 @@ export const COLOR_DANGER = {
   200: '#ef9a9a',
   300: '#e57373',
   400: '#ef5350',
-  500: '#f44336',  // Base danger
+  500: '#f44336', // Base danger
   600: '#e53935',
-  700: '#d32f2f',  // Material danger
+  700: '#d32f2f', // Material danger
   800: '#c62828',
   900: '#b71c1c',
 } as const;
@@ -206,9 +206,9 @@ export const COLOR_WARNING = {
   200: '#ffcc80',
   300: '#ffb74d',
   400: '#ffa726',
-  500: '#ff9800',  // Base warning
+  500: '#ff9800', // Base warning
   600: '#fb8c00',
-  700: '#f57c00',  // Material warning
+  700: '#f57c00', // Material warning
   800: '#ef6c00',
   900: '#e65100',
 } as const;
@@ -223,7 +223,7 @@ export const COLOR_INFO = {
   200: '#81d4fa',
   300: '#4fc3f7',
   400: '#29b6f6',
-  500: '#03a9f4',  // Base info
+  500: '#03a9f4', // Base info
   600: '#039be5',
   700: '#0288d1',
   800: '#0277bd',
@@ -303,15 +303,15 @@ export const BOOTSTRAP_COLORS = {
  * Font size tokens
  */
 export const FONT_SIZES = {
-  xs: '0.75rem',    // 12px
-  sm: '0.875rem',   // 14px
-  base: '1rem',     // 16px
-  lg: '1.125rem',   // 18px
-  xl: '1.25rem',    // 20px
-  '2xl': '1.5rem',  // 24px
+  xs: '0.75rem', // 12px
+  sm: '0.875rem', // 14px
+  base: '1rem', // 16px
+  lg: '1.125rem', // 18px
+  xl: '1.25rem', // 20px
+  '2xl': '1.5rem', // 24px
   '3xl': '1.875rem', // 30px
   '4xl': '2.25rem', // 36px
-  '5xl': '3rem',    // 48px
+  '5xl': '3rem', // 48px
 } as const;
 
 export type FontSize = keyof typeof FONT_SIZES;
@@ -358,12 +358,12 @@ export const FONT_FAMILY_VARS = {
  */
 export const BORDER_RADIUS = {
   none: '0',
-  sm: '0.125rem',   // 2px
-  base: '0.25rem',  // 4px
-  md: '0.375rem',   // 6px
-  lg: '0.5rem',     // 8px
-  xl: '0.75rem',    // 12px
-  '2xl': '1rem',    // 16px
+  sm: '0.125rem', // 2px
+  base: '0.25rem', // 4px
+  md: '0.375rem', // 6px
+  lg: '0.5rem', // 8px
+  xl: '0.75rem', // 12px
+  '2xl': '1rem', // 16px
   full: '9999px',
 } as const;
 
@@ -521,10 +521,13 @@ const SHADOW_VALUES = [
 ] as const;
 
 type ShadowKeyName = `shadow-${number}`;
-const NUMERIC_SHADOWS = SHADOW_VALUES.reduce((acc, value, idx) => {
-  acc[`shadow-${idx + 1}` as ShadowKeyName] = value;
-  return acc;
-}, {} as Record<ShadowKeyName, string>);
+const NUMERIC_SHADOWS = SHADOW_VALUES.reduce(
+  (acc, value, idx) => {
+    acc[`shadow-${idx + 1}` as ShadowKeyName] = value;
+    return acc;
+  },
+  {} as Record<ShadowKeyName, string>
+);
 
 export const SHADOWS = {
   none: 'none',
@@ -581,4 +584,3 @@ export const Z_INDEX = {
 } as const;
 
 export type ZIndex = keyof typeof Z_INDEX;
-

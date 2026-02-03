@@ -1,7 +1,14 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 
 export type BadgeVariant = 'solid' | 'outline' | 'subtle';
-export type BadgeColor = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral';
+export type BadgeColor =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'warning'
+  | 'info'
+  | 'neutral';
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
 /**
@@ -23,7 +30,7 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
   host: {
     '[class]': 'badgeClasses()',
     '[attr.role]': 'roleAttr()',
-    '[attr.aria-label]': 'ariaLabel()'
+    '[attr.aria-label]': 'ariaLabel()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

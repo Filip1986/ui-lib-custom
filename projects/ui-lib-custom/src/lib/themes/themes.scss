@@ -1,5 +1,5 @@
 :root,
-[data-theme="light"] {
+[data-theme='light'] {
   /* Spacing scale */
   --uilib-space-2: 0.5rem;
   --uilib-space-3: 0.75rem;
@@ -69,26 +69,42 @@
   --uilib-toolbar-height-base: 3rem;
   --uilib-toolbar-padding-y-base: 0.5rem;
   --uilib-toolbar-padding-x-base: 0.75rem;
-  --uilib-toolbar-height: max(var(--uilib-touch-size-min), calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y)));
-  --uilib-toolbar-padding-y: calc(var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-toolbar-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y))
+  );
+  --uilib-toolbar-padding-y: calc(
+    var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
 
   --uilib-table-row-height-base: 3rem;
-  --uilib-table-row-height: max(var(--uilib-touch-size-min), calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y)));
+  --uilib-table-row-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y))
+  );
 
   --uilib-list-item-padding-y-base: 0.75rem;
   --uilib-list-item-padding-x-base: 0.75rem;
-  --uilib-list-item-padding-y: calc(var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-list-item-padding-y: calc(
+    var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
   --uilib-list-item-min-height: var(--uilib-touch-size-min);
 
   /* Component spacing */
   --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
-  --uilib-button-padding-y-small: calc(var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-small: calc(
+    var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
-  --uilib-button-padding-y-medium: calc(var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-medium: calc(
+    var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
-  --uilib-button-padding-y-large: calc(var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-large: calc(
+    var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-gap: var(--uilib-button-gap-base);
 
   --uilib-card-padding: var(--uilib-card-padding-base);
@@ -157,8 +173,12 @@
   /* Typography defaults */
   --uilib-font-heading: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
   --uilib-font-body: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
-  --uilib-font-ui: var(--uilib-font-body, var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif));
-  --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --uilib-font-ui: var(
+    --uilib-font-body,
+    var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif)
+  );
+  --uilib-font-mono:
+    SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --uilib-font-heading-weight: 600;
   --uilib-font-body-weight: 400;
 
@@ -173,7 +193,7 @@
   --uilib-icon-transition: var(--uilib-transition-fast);
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --uilib-color-primary-100: #1a3d5f;
   --uilib-color-primary-500: #1e88e5;
   --uilib-color-primary-600: #1565c0;
@@ -236,26 +256,42 @@
   --uilib-toolbar-height-base: 3rem;
   --uilib-toolbar-padding-y-base: 0.5rem;
   --uilib-toolbar-padding-x-base: 0.75rem;
-  --uilib-toolbar-height: max(var(--uilib-touch-size-min), calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y)));
-  --uilib-toolbar-padding-y: calc(var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-toolbar-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-toolbar-height-base) * var(--uilib-density-scale-y))
+  );
+  --uilib-toolbar-padding-y: calc(
+    var(--uilib-toolbar-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-toolbar-padding-x: var(--uilib-toolbar-padding-x-base);
 
   --uilib-table-row-height-base: 3rem;
-  --uilib-table-row-height: max(var(--uilib-touch-size-min), calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y)));
+  --uilib-table-row-height: max(
+    var(--uilib-touch-size-min),
+    calc(var(--uilib-table-row-height-base) * var(--uilib-density-scale-y))
+  );
 
   --uilib-list-item-padding-y-base: 0.75rem;
   --uilib-list-item-padding-x-base: 0.75rem;
-  --uilib-list-item-padding-y: calc(var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y));
+  --uilib-list-item-padding-y: calc(
+    var(--uilib-list-item-padding-y-base) * var(--uilib-density-scale-y)
+  );
   --uilib-list-item-padding-x: var(--uilib-list-item-padding-x-base);
   --uilib-list-item-min-height: var(--uilib-touch-size-min);
 
   /* Component spacing */
   --uilib-button-padding-x-small: var(--uilib-button-padding-x-small-base);
-  --uilib-button-padding-y-small: calc(var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-small: calc(
+    var(--uilib-button-padding-y-small-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-medium: var(--uilib-button-padding-x-medium-base);
-  --uilib-button-padding-y-medium: calc(var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-medium: calc(
+    var(--uilib-button-padding-y-medium-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-padding-x-large: var(--uilib-button-padding-x-large-base);
-  --uilib-button-padding-y-large: calc(var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y));
+  --uilib-button-padding-y-large: calc(
+    var(--uilib-button-padding-y-large-base) * var(--uilib-density-scale-y)
+  );
   --uilib-button-gap: var(--uilib-button-gap-base);
 
   --uilib-card-padding: var(--uilib-card-padding-base);
@@ -324,8 +360,12 @@
   /* Typography defaults */
   --uilib-font-heading: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
   --uilib-font-body: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
-  --uilib-font-ui: var(--uilib-font-body, var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif));
-  --uilib-font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --uilib-font-ui: var(
+    --uilib-font-body,
+    var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif)
+  );
+  --uilib-font-mono:
+    SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --uilib-font-heading-weight: 600;
   --uilib-font-body-weight: 400;
 
@@ -340,30 +380,56 @@
   --uilib-icon-transition: var(--uilib-transition-fast);
 }
 
-[data-density="comfortable"] {
+[data-density='comfortable'] {
   --uilib-density-scale-y: 0.75;
 }
 
-[data-density="compact"] {
+[data-density='compact'] {
   --uilib-density-scale-y: 0.5;
 }
 
 /* Base typography mapping */
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .heading {
   font-family: var(--uilib-font-heading, var(--uilib-font-family-base)), sans-serif;
   font-weight: var(--uilib-font-heading-weight, 600);
 }
 
-p, .body-text {
+p,
+.body-text {
   font-family: var(--uilib-font-body, var(--uilib-font-family-base)), sans-serif;
   font-weight: var(--uilib-font-body-weight, 400);
 }
 
-button, .btn, nav, label, input, select, textarea {
-  font-family: var(--uilib-font-ui, var(--uilib-font-body, var(--uilib-font-family-base))), sans-serif;
+button,
+.btn,
+nav,
+label,
+input,
+select,
+textarea {
+  font-family:
+    var(--uilib-font-ui, var(--uilib-font-body, var(--uilib-font-family-base))), sans-serif;
 }
 
-code, pre, .monospace {
-  font-family: var(--uilib-font-mono, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace), monospace;
+code,
+pre,
+.monospace {
+  font-family:
+    var(
+      --uilib-font-mono,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      'Liberation Mono',
+      'Courier New',
+      monospace
+    ),
+    monospace;
 }

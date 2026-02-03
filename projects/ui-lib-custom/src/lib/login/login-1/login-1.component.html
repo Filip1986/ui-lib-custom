@@ -32,7 +32,12 @@
                 autofocus
               />
             </div>
-            @if (loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched || submitted())) {
+            @if (
+              loginForm.controls['username'].invalid &&
+              (loginForm.controls['username'].dirty ||
+                loginForm.controls['username'].touched ||
+                submitted())
+            ) {
               <small class="text-red-500" data-testid="login-1-username-error">
                 Please enter a valid username or email
               </small>
@@ -55,7 +60,12 @@
                 data-testid="login-1-password-input"
               />
             </div>
-            @if (loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched || submitted())) {
+            @if (
+              loginForm.controls['password'].invalid &&
+              (loginForm.controls['password'].dirty ||
+                loginForm.controls['password'].touched ||
+                submitted())
+            ) {
               <small class="text-red-500" data-testid="login-1-password-error">
                 Password is required
               </small>
@@ -81,7 +91,8 @@
                   class="ml-2 text-sm text-gray-600 cursor-pointer"
                   data-testid="login-1-remember-me-label"
                   for="rememberMe"
-                >Remember me</label>
+                  >Remember me</label
+                >
               </div>
               @if (features().showForgotPassword) {
                 <a
@@ -114,10 +125,7 @@
 
           <!-- Register link section -->
           @if (features().showRegisterLink) {
-            <div
-              class="text-center mt-4"
-              data-testid="login-1-register-link-section"
-            >
+            <div class="text-center mt-4" data-testid="login-1-register-link-section">
               <p class="text-sm text-gray-600">
                 Don't have an account?
                 <a

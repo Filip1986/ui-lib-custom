@@ -1,5 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, ViewEncapsulation, computed, forwardRef, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild,
+  ViewEncapsulation,
+  computed,
+  forwardRef,
+  input,
+  signal,
+} from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputVariant = 'material' | 'bootstrap' | 'minimal';
@@ -50,7 +60,9 @@ export class UiLibInput implements ControlValueAccessor {
 
   readonly controlId = computed(() => this.id() ?? `ui-lib-input-${++inputIdCounter}`);
   readonly describedById = computed(() => (this.error() ? `${this.controlId()}-error` : undefined));
-  readonly displayPlaceholder = computed(() => (this.labelFloat() === 'over' ? this.placeholder() : ''));
+  readonly displayPlaceholder = computed(() =>
+    this.labelFloat() === 'over' ? this.placeholder() : ''
+  );
   readonly inputType = computed<InputType>(() => {
     if (this.type() === 'password' && this.showTogglePassword()) {
       return this.showPassword() ? 'text' : 'password';

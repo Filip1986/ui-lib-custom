@@ -66,8 +66,13 @@ export class Tabs implements OnDestroy {
   @ViewChildren(TabPanel) tabPanels?: QueryList<TabPanel>;
 
   private renderedValues = signal<Set<TabsValue | null>>(new Set());
-  private indicatorStyle = signal<{ transform: string; width?: string; height?: string } | null>(null);
-  private internalSelection = signal<{ value: TabsValue | null; index: number }>({ value: null, index: -1 });
+  private indicatorStyle = signal<{ transform: string; width?: string; height?: string } | null>(
+    null
+  );
+  private internalSelection = signal<{ value: TabsValue | null; index: number }>({
+    value: null,
+    index: -1,
+  });
 
   tabContexts = computed(() => {
     const tabs = this.tabs();
@@ -83,13 +88,15 @@ export class Tabs implements OnDestroy {
     }));
   });
 
-  private controlled = computed(() => this.selectedValue() !== null || this.selectedIndex() !== null);
+  private controlled = computed(
+    () => this.selectedValue() !== null || this.selectedIndex() !== null
+  );
 
   private resolvedSelection = computed(() => {
     const tabs = this.tabContexts();
     const byValue = this.selectedValue();
     if (byValue !== null) {
-      const idx = tabs.findIndex(t => t.value === byValue);
+      const idx = tabs.findIndex((t) => t.value === byValue);
       if (idx !== -1) {
         return { value: byValue, index: idx };
       }
@@ -102,7 +109,7 @@ export class Tabs implements OnDestroy {
 
     const defValue = this.defaultValue();
     if (defValue !== null) {
-      const idx = tabs.findIndex(t => t.value === defValue);
+      const idx = tabs.findIndex((t) => t.value === defValue);
       if (idx !== -1) {
         return { value: defValue, index: idx };
       }
@@ -113,11 +120,13 @@ export class Tabs implements OnDestroy {
       return { value: tabs[defIndex]?.value ?? null, index: defIndex };
     }
 
-    const firstEnabled = tabs.find(t => !t.disabled);
+    const firstEnabled = tabs.find((t) => !t.disabled);
     return { value: firstEnabled?.value ?? null, index: firstEnabled?.index ?? -1 };
   });
 
-  activeSelection = computed(() => (this.controlled() ? this.resolvedSelection() : this.internalSelection()));
+  activeSelection = computed(() =>
+    this.controlled() ? this.resolvedSelection() : this.internalSelection()
+  );
 
   tabsClasses = computed(() => {
     const classes = [
@@ -162,7 +171,8 @@ export class Tabs implements OnDestroy {
         queueMicrotask(() => this.focusActivePanel());
       }
 
-      const key = variant === 'material' ? `${variant}:${this.orientation()}:${active.index}` : null;
+      const key =
+        variant === 'material' ? `${variant}:${this.orientation()}:${active.index}` : null;
       if (variant !== 'material') {
         this.indicatorKey = null;
         this.cancelIndicatorRaf();
@@ -321,7 +331,7 @@ export class Tabs implements OnDestroy {
   }
 
   private firstEnabledIndex() {
-    return this.tabContexts().find(t => !t.disabled)?.index ?? -1;
+    return this.tabContexts().find((t) => !t.disabled)?.index ?? -1;
   }
 
   private lastEnabledIndex() {

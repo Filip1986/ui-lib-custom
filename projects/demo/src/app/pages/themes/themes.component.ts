@@ -10,7 +10,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-themes',
   standalone: true,
-  imports: [CommonModule, FormsModule, Button, Card, Badge, Inline, UiLibInput, DocPageLayoutComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    Button,
+    Card,
+    Badge,
+    Inline,
+    UiLibInput,
+    DocPageLayoutComponent,
+  ],
   templateUrl: './themes.component.html',
   styleUrl: './themes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

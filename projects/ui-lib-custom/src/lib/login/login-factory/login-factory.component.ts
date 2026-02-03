@@ -9,13 +9,7 @@ import { Login2Component } from '../login-2/login-2.component';
 @Component({
   selector: 'lib-login-factory',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    Login1Component,
-    Login3Component,
-    Login2Component
-],
+  imports: [ReactiveFormsModule, CommonModule, Login1Component, Login3Component, Login2Component],
   templateUrl: './login-factory.component.html',
   styleUrl: './login-factory.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

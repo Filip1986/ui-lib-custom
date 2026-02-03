@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Directive, TemplateRef, ViewChild, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Directive,
+  TemplateRef,
+  ViewChild,
+  input,
+} from '@angular/core';
 import { TabsValue } from './tabs.types';
 
 @Directive({

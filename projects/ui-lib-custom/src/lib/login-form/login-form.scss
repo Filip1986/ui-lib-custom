@@ -109,7 +109,11 @@
   overflow: hidden;
 
   .branding {
-    background: linear-gradient(135deg, var(--uilib-color-primary-600, #1e88e5), var(--uilib-color-primary-700, #1976d2));
+    background: linear-gradient(
+      135deg,
+      var(--uilib-color-primary-600, #1e88e5),
+      var(--uilib-color-primary-700, #1976d2)
+    );
     color: #fff;
     padding: 2rem;
     display: flex;

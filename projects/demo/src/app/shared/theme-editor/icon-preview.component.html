@@ -12,11 +12,7 @@
     @for (lib of libraries; track lib) {
       <div class="library-preview">
         <span class="library-name">{{ lib }}</span>
-        <ui-lib-icon
-          [name]="selectedIcon()"
-          [library]="lib"
-          size="xl"
-        />
+        <ui-lib-icon [name]="selectedIcon()" [library]="lib" size="xl" />
       </div>
     }
   </div>

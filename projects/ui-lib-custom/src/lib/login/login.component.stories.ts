@@ -25,4 +25,3 @@ export const Style3: Story = {
     variant: '3',
   },
 };
-

@@ -22,11 +22,11 @@ export interface IconConfig {
 
 // Size to pixel/rem mapping (align with design tokens)
 export const ICON_SIZES: Record<IconSize, string> = {
-  xs: '0.75rem',   // 12px
-  sm: '1rem',      // 16px
-  md: '1.25rem',   // 20px
-  lg: '1.5rem',    // 24px
-  xl: '2rem',      // 32px
+  xs: '0.75rem', // 12px
+  sm: '1rem', // 16px
+  md: '1.25rem', // 20px
+  lg: '1.5rem', // 24px
+  xl: '2rem', // 32px
   '2xl': '2.5rem', // 40px
 };
 

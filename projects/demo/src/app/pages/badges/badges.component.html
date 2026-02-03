@@ -2,7 +2,8 @@
   <div class="doc-header" docHeader>
     <h1>Badge</h1>
     <p class="doc-description">
-      Performance-first badge component for labels and status indicators. Use the controls to see the live badge update in the viewport.
+      Performance-first badge component for labels and status indicators. Use the controls to see
+      the live badge update in the viewport.
     </p>
   </div>
 
@@ -22,7 +23,11 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls" id="playground" data-doc-anchor>
-      <app-doc-control-group title="Style" description="Adjust variant, color, and size." [columns]="3">
+      <app-doc-control-group
+        title="Style"
+        description="Adjust variant, color, and size."
+        [columns]="3"
+      >
         <div class="control">
           <label>Variant</label>
           <div class="chips">
@@ -33,7 +38,9 @@
                 [variant]="'minimal'"
                 [appearance]="variant() === v ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="variant.set(v)">{{ v }}</ui-lib-button>
+                (click)="variant.set(v)"
+                >{{ v }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -48,7 +55,9 @@
                 [variant]="'minimal'"
                 [appearance]="color() === c ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="color.set(c)">{{ c }}</ui-lib-button>
+                (click)="color.set(c)"
+                >{{ c }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -63,7 +72,9 @@
                 [variant]="'minimal'"
                 [appearance]="size() === s ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="size.set(s)">{{ s }}</ui-lib-button>
+                (click)="size.set(s)"
+                >{{ s }}</ui-lib-button
+              >
             }
           </div>
         </div>
@@ -71,13 +82,27 @@
 
       <app-doc-control-group title="State & label" description="Toggle shape and set badge text.">
         <div class="toggles">
-          <label><input type="checkbox" [checked]="pill()" (change)="pill.set($any($event.target).checked)"> Pill shape</label>
-          <label><input type="checkbox" [checked]="dot()" (change)="dot.set($any($event.target).checked)"> Dot only</label>
+          <label
+            ><input
+              type="checkbox"
+              [checked]="pill()"
+              (change)="pill.set($any($event.target).checked)"
+            />
+            Pill shape</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="dot()"
+              (change)="dot.set($any($event.target).checked)"
+            />
+            Dot only</label
+          >
         </div>
 
         <div class="control">
           <label>Label</label>
-          <input type="text" [value]="text()" (input)="text.set($any($event.target).value)">
+          <input type="text" [value]="text()" (input)="text.set($any($event.target).value)" />
         </div>
       </app-doc-control-group>
     </div>
@@ -88,17 +113,29 @@
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
-              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
+                preset.label
+              }}</ui-lib-button>
             }
             <div class="custom">
               <label>Custom</label>
-              <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+              <input
+                type="number"
+                min="200"
+                max="2000"
+                [ngModel]="viewportCustomWidth()"
+                (ngModelChange)="setViewportCustomWidth($event)"
+              />
+              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
+                >Apply</ui-lib-button
+              >
             </div>
           </div>
           <div class="controls">
             <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
+              >Rotate</ui-lib-button
+            >
           </div>
         </div>
       </ui-lib-card>
@@ -106,9 +143,27 @@
       <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
         <div card-header>Density</div>
         <div class="density-controls">
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('default')"
+            [class.active]="viewport?.densityValue() === 'default'"
+            >Default</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('comfortable')"
+            [class.active]="viewport?.densityValue() === 'comfortable'"
+            >Comfortable</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('compact')"
+            [class.active]="viewport?.densityValue() === 'compact'"
+            >Compact</ui-lib-button
+          >
         </div>
       </ui-lib-card>
     </div>
@@ -124,8 +179,11 @@
             [color]="color()"
             [size]="size()"
             [pill]="pill()"
-            [dot]="dot()">
-            @if (!dot()) { {{ text() || 'New' }} }
+            [dot]="dot()"
+          >
+            @if (!dot()) {
+              {{ text() || 'New' }}
+            }
           </ui-lib-badge>
         </div>
       </app-doc-demo-viewport>
@@ -153,7 +211,12 @@
           </tr>
           <tr>
             <td><code>color</code></td>
-            <td><code>'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral'</code></td>
+            <td>
+              <code
+                >'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' |
+                'neutral'</code
+              >
+            </td>
             <td><code>'primary'</code></td>
             <td>Theme color</td>
           </tr>

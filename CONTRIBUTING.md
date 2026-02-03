@@ -22,22 +22,26 @@ ui-lib-custom/
 ## 🔧 Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd ui-lib-custom
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start the demo application**
+
    ```bash
    npm start
    # or
    ng serve demo
    ```
+
    Visit http://localhost:4200 to see the demo
 
 4. **Build the library**
@@ -48,11 +52,13 @@ ui-lib-custom/
 ## 🧪 Testing
 
 Run tests for the library:
+
 ```bash
 ng test ui-components
 ```
 
 Run tests for a specific component:
+
 ```bash
 ng test ui-components --include='**/button.spec.ts'
 ```
@@ -101,7 +107,7 @@ Choose the appropriate location based on content type:
 
 ### Template for New Documentation
 
-```markdown
+````markdown
 # [Document Title]
 
 Brief introduction explaining what this document covers.
@@ -118,6 +124,7 @@ Content here with examples:
 // Code example
 import { Button } from 'ui-lib-custom';
 ```
+````
 
 ## [Additional Sections]
 
@@ -127,6 +134,7 @@ Additional content...
 
 - [Related Doc 1](./related-doc-1.md)
 - [Related Doc 2](./related-doc-2.md)
+
 ```
 
 ## 🎨 Adding New Components
@@ -134,18 +142,20 @@ Additional content...
 When adding a new component:
 
 1. **Create component folder** in `projects/ui-lib-custom/src/lib/`
-   ```
-   new-component/
-   ├── new-component.ts        # Component logic
-   ├── new-component.html      # Template
-   ├── new-component.scss      # Styles
-   └── new-component.spec.ts   # Tests
-   ```
+```
+
+new-component/
+├── new-component.ts # Component logic
+├── new-component.html # Template
+├── new-component.scss # Styles
+└── new-component.spec.ts # Tests
+
+````
 
 2. **Export from public API** in `projects/ui-lib-custom/src/public-api.ts`
-   ```typescript
-   export * from './lib/new-component/new-component';
-   ```
+```typescript
+export * from './lib/new-component/new-component';
+````
 
 3. **Add to demo app** in `projects/demo/src/app/app.html`
 
@@ -165,23 +175,28 @@ When adding a new component:
 ## 🎯 Component Development Guidelines
 
 ### Variants
+
 Each component should support these variants:
+
 - `material` - Material Design style
 - `bootstrap` - Bootstrap-inspired style
 - `minimal` - Minimal/clean style
 
 ### Styling
+
 - Use `:host` selector for component wrapper
 - Use CSS custom properties for themeable values
 - Keep variant styles isolated using classes
 - Ensure responsive design
 
 ### TypeScript
+
 - Use strict typing
 - Export interfaces for component inputs
 - Add JSDoc comments for public APIs
 
 ### Accessibility
+
 - Include proper ARIA attributes
 - Ensure keyboard navigation
 - Test with screen readers
@@ -190,6 +205,7 @@ Each component should support these variants:
 ## 🚀 Pull Request Process
 
 1. **Create a feature branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -200,17 +216,19 @@ Each component should support these variants:
    - Update documentation
 
 3. **Test your changes**
+
    ```bash
    ng test ui-components
    ng build ui-components
    ```
 
 4. **Commit your changes**
+
    ```bash
    git add .
    git commit -m "feat: add new feature"
    ```
-   
+
    Use conventional commits:
    - `feat:` - New feature
    - `fix:` - Bug fix
@@ -221,6 +239,7 @@ Each component should support these variants:
    - `chore:` - Build/tooling changes
 
 5. **Push to your fork**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -256,6 +275,7 @@ Each component should support these variants:
 ## 📧 Questions?
 
 Feel free to open an issue for:
+
 - Bug reports
 - Feature requests
 - Documentation improvements

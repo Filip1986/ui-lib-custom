@@ -52,7 +52,12 @@ describe('Badge', () => {
   });
 
   it('applies classes from inputs', () => {
-    const { badgeElement } = bootstrap({ variant: 'outline', color: 'danger', size: 'lg', pill: true });
+    const { badgeElement } = bootstrap({
+      variant: 'outline',
+      color: 'danger',
+      size: 'lg',
+      pill: true,
+    });
     expect(badgeElement.className).toContain('badge');
     expect(badgeElement.className).toContain('badge-variant-outline');
     expect(badgeElement.className).toContain('badge-color-danger');

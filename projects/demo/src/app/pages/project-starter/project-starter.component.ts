@@ -77,14 +77,16 @@ export class ProjectStarterComponent {
 
   private buildReadme(name: string): string {
     const escapedName = name || 'theme';
-    return `# ${escapedName} Theme Starter\n\n` +
-`Files included:\n- theme.json (UI Lib theme preset)\n- theme.css (CSS variables)\n- _theme-variables.scss (SCSS variables)\n\n` +
-`## Usage\n\n` +
-`1. Copy files into your project (e.g., \`src/styles/themes/${escapedName}\`).\n` +
-`2. Include \`theme.css\` globally or scope via \`[data-theme]\`.\n` +
-`3. If using SCSS, import \`_theme-variables.scss\` to access variables:\n\n` +
-`\`\`\`scss\n@use '_theme-variables' as *;\n:root {\n  --uilib-color-primary-500: $uilib-color-primary-500;\n}\n\`\`\`\n\n` +
-`4. For runtime switching, load \`theme.json\` via \`ThemeConfigService.loadPresetAsync\` or \`loadFromLocalStorage\`.`;
+    return (
+      `# ${escapedName} Theme Starter\n\n` +
+      `Files included:\n- theme.json (UI Lib theme preset)\n- theme.css (CSS variables)\n- _theme-variables.scss (SCSS variables)\n\n` +
+      `## Usage\n\n` +
+      `1. Copy files into your project (e.g., \`src/styles/themes/${escapedName}\`).\n` +
+      `2. Include \`theme.css\` globally or scope via \`[data-theme]\`.\n` +
+      `3. If using SCSS, import \`_theme-variables.scss\` to access variables:\n\n` +
+      `\`\`\`scss\n@use '_theme-variables' as *;\n:root {\n  --uilib-color-primary-500: $uilib-color-primary-500;\n}\n\`\`\`\n\n` +
+      `4. For runtime switching, load \`theme.json\` via \`ThemeConfigService.loadPresetAsync\` or \`loadFromLocalStorage\`.`
+    );
   }
 
   private saveFile(filename: string, content: string, type: string) {

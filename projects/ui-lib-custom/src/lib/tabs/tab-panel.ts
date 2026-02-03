@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, computed, input } from 
     '[attr.aria-hidden]': '!active() ? true : null',
     '[hidden]': '!active()',
     '[id]': 'id()',
-  }
+  },
 })
 export class TabPanel {
   constructor(private readonly el: ElementRef<HTMLElement>) {}

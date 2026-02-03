@@ -12,7 +12,9 @@ const normalizeIconName = (value: string): string =>
     .join('');
 
 const hasKnownPrefix = (value: string): boolean => {
-  const prefixes = Object.values(ICON_LIBRARY_PREFIX).filter(Boolean).map((p) => p.toLowerCase());
+  const prefixes = Object.values(ICON_LIBRARY_PREFIX)
+    .filter(Boolean)
+    .map((p) => p.toLowerCase());
   return prefixes.some((p) => value.toLowerCase().startsWith(p));
 };
 
@@ -41,15 +43,16 @@ export class Icon {
   semantic = input<boolean>(false);
 
   private readonly resolvedLibrary = computed<IconLibrary>(() =>
-    this.iconService.resolveLibrary(this.library(), this.variant()),
+    this.iconService.resolveLibrary(this.library(), this.variant())
   );
 
   resolvedName = computed(() => {
     const library = this.resolvedLibrary();
     const raw = this.name();
-    const base = this.semantic() || this.isSemanticIcon(raw)
-      ? this.iconService.resolveIcon(raw as SemanticIcon, library)
-      : raw;
+    const base =
+      this.semantic() || this.isSemanticIcon(raw)
+        ? this.iconService.resolveIcon(raw as SemanticIcon, library)
+        : raw;
     const prefix = ICON_LIBRARY_PREFIX[library];
     // If the base already carries any known library prefix, return it as-is
     if (!prefix || hasKnownPrefix(base)) {

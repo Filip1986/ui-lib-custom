@@ -1,9 +1,15 @@
 :host {
   /* Component defaults (all color-sensitive values via CSS vars) */
   --uilib-card-border-width: 0;
-  --uilib-card-header-padding: var(--uilib-card-header-padding-base, var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem));
+  --uilib-card-header-padding: var(
+    --uilib-card-header-padding-base,
+    var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)
+  );
   --uilib-card-body-padding: var(--uilib-card-body-padding-base, 1.5rem);
-  --uilib-card-footer-padding: var(--uilib-card-footer-padding-base, var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem));
+  --uilib-card-footer-padding: var(
+    --uilib-card-footer-padding-base,
+    var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)
+  );
 
   display: block;
 }
@@ -13,9 +19,12 @@
   color: var(--uilib-card-text-color, var(--uilib-page-fg));
   border-radius: var(--uilib-card-radius, var(--uilib-radius-lg));
   box-shadow: var(--uilib-card-shadow, var(--uilib-card-shadow-medium, none));
-  border: var(--uilib-card-border-width, 0) solid var(--uilib-card-border, var(--uilib-border, currentColor));
+  border: var(--uilib-card-border-width, 0) solid
+    var(--uilib-card-border, var(--uilib-border, currentColor));
   overflow: hidden;
-  transition: 0.2s ease box-shadow, 0.2s ease transform;
+  transition:
+    0.2s ease box-shadow,
+    0.2s ease transform;
   display: flex;
   flex-direction: column;
 
@@ -24,7 +33,10 @@
     align-items: flex-start;
     gap: var(--uilib-space-2, 0.5rem);
     padding: var(--uilib-card-header-padding);
-    background-color: var(--uilib-card-header-bg, var(--uilib-surface-alt, var(--uilib-card-bg, inherit)));
+    background-color: var(
+      --uilib-card-header-bg,
+      var(--uilib-surface-alt, var(--uilib-card-bg, inherit))
+    );
     border-bottom: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
     font-family: var(--uilib-font-heading, inherit), sans-serif;
   }
@@ -59,7 +71,10 @@
 
   &-footer {
     padding: var(--uilib-card-footer-padding);
-    background-color: var(--uilib-card-footer-bg, var(--uilib-surface-alt, var(--uilib-card-bg, inherit)));
+    background-color: var(
+      --uilib-card-footer-bg,
+      var(--uilib-surface-alt, var(--uilib-card-bg, inherit))
+    );
     border-top: 1px solid var(--uilib-card-border, var(--uilib-border, currentColor));
     font-family: var(--uilib-font-ui, inherit), sans-serif;
   }
@@ -72,7 +87,10 @@
     cursor: pointer;
 
     &:hover {
-      box-shadow: var(--uilib-card-shadow-hover, var(--uilib-card-shadow, var(--uilib-card-shadow-medium, none)));
+      box-shadow: var(
+        --uilib-card-shadow-hover,
+        var(--uilib-card-shadow, var(--uilib-card-shadow-medium, none))
+      );
       transform: translateY(-2px);
     }
   }

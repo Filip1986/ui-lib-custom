@@ -7,12 +7,7 @@ import { StatusIcon } from '../icon/icon.semantics';
   standalone: true,
   imports: [Icon],
   template: `
-    <ui-lib-icon
-      class="alert-icon"
-      [name]="statusIcon()"
-      [variant]="variant()"
-      size="lg"
-    />
+    <ui-lib-icon class="alert-icon" [name]="statusIcon()" [variant]="variant()" size="lg" />
     <div class="alert-content">
       <ng-content />
     </div>

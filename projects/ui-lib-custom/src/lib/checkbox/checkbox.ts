@@ -23,8 +23,8 @@ let checkboxId = 0;
     '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'hostClasses()',
     '(click)': 'onToggle($event)',
-    '(keydown)': 'onKeydown($event)'
-  }
+    '(keydown)': 'onKeydown($event)',
+  },
 })
 export class Checkbox {
   label = input<string | null>(null);
@@ -45,7 +45,7 @@ export class Checkbox {
     const classes = [
       'ui-checkbox',
       `ui-checkbox-variant-${this.variant()}`,
-      `ui-checkbox-size-${this.size()}`
+      `ui-checkbox-size-${this.size()}`,
     ];
 
     if (this.checked()) {
@@ -63,10 +63,14 @@ export class Checkbox {
     return classes.join(' ');
   });
 
-  readonly ariaChecked = computed(() => this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false');
+  readonly ariaChecked = computed(() =>
+    this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false'
+  );
   readonly hostTabIndex = computed(() => (this.disabled() ? -1 : 0));
   readonly ariaLabelledby = computed(() => (this.ariaLabel() ? null : this.labelElementId));
-  readonly ariaDescribedby = computed(() => (this.description() ? this.descriptionElementId : null));
+  readonly ariaDescribedby = computed(() =>
+    this.description() ? this.descriptionElementId : null
+  );
   readonly showDescription = computed(() => !!this.description());
 
   onToggle(event: Event): void {

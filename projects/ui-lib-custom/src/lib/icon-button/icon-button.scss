@@ -12,7 +12,9 @@
   cursor: pointer;
   border-radius: var(--uilib-radius-sm, 0.375rem);
   color: inherit;
-  transition: color 150ms ease, background-color 150ms ease;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
 
   &-disabled {
     opacity: 0.5;

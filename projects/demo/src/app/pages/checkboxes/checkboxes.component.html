@@ -2,8 +2,8 @@
   <div class="doc-header" docHeader>
     <h1>Checkbox</h1>
     <p class="doc-description">
-      Accessible, variant-aware checkbox for forms and preference toggles. Adjust the controls to preview styles, sizes, and
-      state handling in real time.
+      Accessible, variant-aware checkbox for forms and preference toggles. Adjust the controls to
+      preview styles, sizes, and state handling in real time.
     </p>
   </div>
 
@@ -19,7 +19,9 @@
               [variant]="'minimal'"
               [appearance]="variant() === v ? 'solid' : 'ghost'"
               color="primary"
-              (click)="selectVariant(v)">{{ v }}</ui-lib-button>
+              (click)="selectVariant(v)"
+              >{{ v }}</ui-lib-button
+            >
           }
         </div>
       </div>
@@ -34,27 +36,54 @@
               [variant]="'minimal'"
               [appearance]="size() === s ? 'solid' : 'ghost'"
               color="primary"
-              (click)="selectSize(s)">{{ s }}</ui-lib-button>
+              (click)="selectSize(s)"
+              >{{ s }}</ui-lib-button
+            >
           }
         </div>
       </div>
 
       <div class="control">
         <label>Label</label>
-        <input type="text" [value]="label()" (input)="label.set($any($event.target).value)">
+        <input type="text" [value]="label()" (input)="label.set($any($event.target).value)" />
       </div>
     </app-doc-control-group>
 
     <app-doc-control-group title="State" description="Toggle interaction states." [columns]="2">
       <div class="toggles">
-        <label><input type="checkbox" [checked]="disabled()" (change)="disabled.set($any($event.target).checked)"> Disabled</label>
-        <label><input type="checkbox" [checked]="indeterminate()" (change)="indeterminate.set($any($event.target).checked)"> Indeterminate</label>
-        <label><input type="checkbox" [checked]="showDescription()" (change)="showDescription.set($any($event.target).checked)"> Show description</label>
+        <label
+          ><input
+            type="checkbox"
+            [checked]="disabled()"
+            (change)="disabled.set($any($event.target).checked)"
+          />
+          Disabled</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            [checked]="indeterminate()"
+            (change)="indeterminate.set($any($event.target).checked)"
+          />
+          Indeterminate</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            [checked]="showDescription()"
+            (change)="showDescription.set($any($event.target).checked)"
+          />
+          Show description</label
+        >
       </div>
 
       <div class="control">
         <label>Description</label>
-        <textarea rows="2" [value]="description()" (input)="description.set($any($event.target).value)"></textarea>
+        <textarea
+          rows="2"
+          [value]="description()"
+          (input)="description.set($any($event.target).value)"
+        ></textarea>
       </div>
     </app-doc-control-group>
   </div>
@@ -65,17 +94,29 @@
       <div class="viewport-controls">
         <div class="preset-buttons">
           @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
+              preset.label
+            }}</ui-lib-button>
           }
           <div class="custom">
             <label>Custom</label>
-            <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+            <input
+              type="number"
+              min="200"
+              max="2000"
+              [ngModel]="viewportCustomWidth()"
+              (ngModelChange)="setViewportCustomWidth($event)"
+            />
+            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
+              >Apply</ui-lib-button
+            >
           </div>
         </div>
         <div class="controls">
           <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
+            >Rotate</ui-lib-button
+          >
         </div>
       </div>
     </ui-lib-card>
@@ -83,9 +124,27 @@
     <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
       <div card-header>Density</div>
       <div class="density-controls">
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-        <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+        <ui-lib-button
+          size="small"
+          appearance="ghost"
+          (click)="setViewportDensity('default')"
+          [class.active]="viewport?.densityValue() === 'default'"
+          >Default</ui-lib-button
+        >
+        <ui-lib-button
+          size="small"
+          appearance="ghost"
+          (click)="setViewportDensity('comfortable')"
+          [class.active]="viewport?.densityValue() === 'comfortable'"
+          >Comfortable</ui-lib-button
+        >
+        <ui-lib-button
+          size="small"
+          appearance="ghost"
+          (click)="setViewportDensity('compact')"
+          [class.active]="viewport?.densityValue() === 'compact'"
+          >Compact</ui-lib-button
+        >
       </div>
     </ui-lib-card>
   </div>
@@ -117,11 +176,20 @@
           [checked]="checkedSecondary"
           (checkedChange)="onSecondaryChange($event)"
         >
-          <span>Projected label <small>({{ size() }})</small></span>
+          <span
+            >Projected label <small>({{ size() }})</small></span
+          >
         </ui-lib-checkbox>
 
         <div class="doc-note">
-          <strong>State:</strong> @if (indeterminate()) { Mixed } @else if (checkedPrimary) { Checked } @else { Unchecked }
+          <strong>State:</strong>
+          @if (indeterminate()) {
+            Mixed
+          } @else if (checkedPrimary) {
+            Checked
+          } @else {
+            Unchecked
+          }
         </div>
       </div>
     </app-doc-demo-viewport>
@@ -190,10 +258,22 @@
   <div id="accessibility" data-doc-anchor>
     <h2>Accessibility</h2>
     <ul class="doc-list">
-      <li><strong>Role driven:</strong> rendered host exposes <code>role="checkbox"</code>, <code>aria-checked</code>, and tabindex.</li>
-      <li><strong>Keyboard:</strong> Space & Enter toggle the state; focus ring uses CSS vars for WCAG-compliant contrast.</li>
-      <li><strong>Labeling:</strong> Provide <code>label</code> / projected content or use <code>ariaLabel</code> for icon-only cases.</li>
-      <li><strong>Indeterminate:</strong> Parent form logic should clear <code>indeterminate</code> after user action.</li>
+      <li>
+        <strong>Role driven:</strong> rendered host exposes <code>role="checkbox"</code>,
+        <code>aria-checked</code>, and tabindex.
+      </li>
+      <li>
+        <strong>Keyboard:</strong> Space & Enter toggle the state; focus ring uses CSS vars for
+        WCAG-compliant contrast.
+      </li>
+      <li>
+        <strong>Labeling:</strong> Provide <code>label</code> / projected content or use
+        <code>ariaLabel</code> for icon-only cases.
+      </li>
+      <li>
+        <strong>Indeterminate:</strong> Parent form logic should clear
+        <code>indeterminate</code> after user action.
+      </li>
     </ul>
   </div>
 </app-doc-page-layout>

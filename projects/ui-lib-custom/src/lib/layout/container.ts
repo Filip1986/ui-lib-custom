@@ -1,9 +1,17 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { CONTAINER_MAX_WIDTHS, ContainerSize, SPACING_TOKENS, SpacingToken, INSET_TOKENS, InsetToken } from '../design-tokens';
+import {
+  CONTAINER_MAX_WIDTHS,
+  ContainerSize,
+  SPACING_TOKENS,
+  SpacingToken,
+  INSET_TOKENS,
+  InsetToken,
+} from '../design-tokens';
 
 const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
 const insetVar = (token: InsetToken) => `var(--uilib-inset-${token}, ${INSET_TOKENS[token]})`;
-const containerVar = (size: ContainerSize) => `var(--uilib-container-${size}, ${CONTAINER_MAX_WIDTHS[size]})`;
+const containerVar = (size: ContainerSize) =>
+  `var(--uilib-container-${size}, ${CONTAINER_MAX_WIDTHS[size]})`;
 
 /**
  * Container - A performant container layout primitive

@@ -8,9 +8,8 @@ describe('UiLibCustom', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UiLibCustom]
-    })
-    .compileComponents();
+      imports: [UiLibCustom],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UiLibCustom);
     component = fixture.componentInstance;

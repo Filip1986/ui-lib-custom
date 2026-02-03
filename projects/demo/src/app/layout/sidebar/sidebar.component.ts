@@ -33,9 +33,9 @@ export class SidebarComponent {
         {
           label: 'Layout Primitives',
           icon: 'pi pi-circle',
-          route: '/layouts'
-        }
-      ]
+          route: '/layouts',
+        },
+      ],
     },
     {
       label: 'Components',
@@ -45,64 +45,64 @@ export class SidebarComponent {
         {
           label: 'Badge',
           icon: 'pi pi-circle',
-          route: '/badges'
+          route: '/badges',
         },
         {
           label: 'Button',
           icon: 'pi pi-circle',
-          route: '/buttons'
+          route: '/buttons',
         },
         {
           label: 'Card',
           icon: 'pi pi-id-card',
-          route: '/cards'
+          route: '/cards',
         },
         {
           label: 'Shadows',
           icon: 'pi pi-circle',
-          route: '/shadows'
+          route: '/shadows',
         },
         {
           label: 'Tabs',
           icon: 'pi pi-circle',
-          route: '/tabs'
+          route: '/tabs',
         },
         {
           label: 'Login Forms',
           icon: 'pi pi-sign-in',
-          route: '/login'
+          route: '/login',
         },
         {
           label: 'Input',
           icon: 'pi pi-circle',
-          route: '/inputs'
+          route: '/inputs',
         },
         {
           label: 'Select',
           icon: 'pi pi-circle',
-          route: '/select'
+          route: '/select',
         },
         {
           label: 'Sidebar Menu',
           icon: 'pi pi-circle',
-          route: '/sidebar-menu'
+          route: '/sidebar-menu',
         },
         {
           label: 'Project Starter',
           icon: 'pi pi-circle',
-          route: '/project-starter'
+          route: '/project-starter',
         },
         {
           label: 'Icons',
           icon: 'pi pi-circle',
-          route: '/icons'
-        }
-      ]
+          route: '/icons',
+        },
+      ],
     },
     {
       label: 'Theming',
       icon: 'pi pi-palette',
-      route: '/themes'
+      route: '/themes',
     },
     {
       label: 'Form',
@@ -112,24 +112,29 @@ export class SidebarComponent {
         {
           label: 'Input Text',
           icon: 'pi pi-circle',
-          route: '/input-text'
+          route: '/input-text',
         },
         {
           label: 'Checkbox',
           icon: 'pi pi-circle',
-          route: '/checkbox'
-        }
-      ]
-    }
+          route: '/checkbox',
+        },
+      ],
+    },
   ]);
 
   toggleSection(item: NavItem) {
-    this.menuItems.update(items =>
-      items.map(it =>
+    this.menuItems.update((items) =>
+      items.map((it) =>
         it === item
           ? { ...it, expanded: !it.expanded }
           : it.items?.includes(item)
-            ? { ...it, items: it.items?.map(sub => sub === item ? { ...sub, expanded: !sub.expanded } : sub) }
+            ? {
+                ...it,
+                items: it.items?.map((sub) =>
+                  sub === item ? { ...sub, expanded: !sub.expanded } : sub
+                ),
+              }
             : it
       )
     );

@@ -47,6 +47,6 @@ export class IconButton {
       this.disabled() ? 'icon-button-disabled' : '',
     ]
       .filter(Boolean)
-      .join(' '),
+      .join(' ')
   );
 }

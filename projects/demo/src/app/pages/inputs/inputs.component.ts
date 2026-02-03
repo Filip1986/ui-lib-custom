@@ -1,7 +1,25 @@
-import { Component, ChangeDetectionStrategy, signal, ViewChild, computed, inject, effect } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  ViewChild,
+  computed,
+  inject,
+  effect,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
-import {UiLibInput, InputVariant, InputType, InputLabelFloat, ThemeConfigService, Card, Tabs, Tab, TabsValue} from 'ui-lib-custom';
+import {
+  UiLibInput,
+  InputVariant,
+  InputType,
+  InputLabelFloat,
+  ThemeConfigService,
+  Card,
+  Tabs,
+  Tab,
+  TabsValue,
+} from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -15,7 +33,20 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 @Component({
   selector: 'app-inputs',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibInput, Button, Tabs, Tab, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, DocCodeSnippetComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    UiLibInput,
+    Button,
+    Tabs,
+    Tab,
+    DocPageLayoutComponent,
+    DocControlGroupComponent,
+    DocDemoViewportComponent,
+    ThemeScopeDirective,
+    Card,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

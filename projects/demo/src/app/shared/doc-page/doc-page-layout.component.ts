@@ -77,10 +77,10 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
     const ids = this.flattenSections(this.sections);
     if (!ids.length) return;
 
-    this.observer = new IntersectionObserver(
-      (entries) => this.updateActive(entries, ids),
-      { rootMargin: `-${this.topOffset}px 0px -60% 0px`, threshold: [0, 0.25, 0.5, 1] }
-    );
+    this.observer = new IntersectionObserver((entries) => this.updateActive(entries, ids), {
+      rootMargin: `-${this.topOffset}px 0px -60% 0px`,
+      threshold: [0, 0.25, 0.5, 1],
+    });
 
     ids.forEach((id) => {
       const el = this.document.getElementById(id);
@@ -126,6 +126,9 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
   }
 
   private flattenSections(sections: DocSection[]): string[] {
-    return sections.flatMap((section) => [section.id, ...(section.children?.map((child) => child.id) ?? [])]);
+    return sections.flatMap((section) => [
+      section.id,
+      ...(section.children?.map((child) => child.id) ?? []),
+    ]);
   }
 }

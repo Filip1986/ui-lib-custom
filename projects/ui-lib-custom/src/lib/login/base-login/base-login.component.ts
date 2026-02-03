@@ -6,10 +6,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule
-],
+  imports: [ReactiveFormsModule, CommonModule],
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -45,10 +42,7 @@ export class BaseLoginComponent implements OnInit {
   submitted = signal(false);
   rememberMe = signal(false);
 
-
-  constructor(
-    protected formBuilder: FormBuilder
-  ) {
+  constructor(protected formBuilder: FormBuilder) {
     this.loginForm = this.createLoginForm();
   }
 

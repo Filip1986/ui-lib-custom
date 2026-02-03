@@ -13,26 +13,50 @@
     role="combobox"
     [attr.id]="controlId()"
     [attr.aria-controls]="panelId()"
-    tabindex="0">
+    tabindex="0"
+  >
     <div class="ui-select-value" [class.ui-select-placeholder]="!displayValue()">
-      @if (displayValue()) { {{ displayValue() }} } @else { {{ placeholder() }} }
+      @if (displayValue()) {
+        {{ displayValue() }}
+      } @else {
+        {{ placeholder() }}
+      }
     </div>
     <div class="ui-select-actions">
       @if (loading()) {
         <span class="ui-select-spinner"></span>
       }
       @if (displayValue()) {
-        <button type="button" class="ui-select-clear" (click)="$event.stopPropagation(); clear()" aria-label="Clear selection">×</button>
+        <button
+          type="button"
+          class="ui-select-clear"
+          (click)="$event.stopPropagation(); clear()"
+          aria-label="Clear selection"
+        >
+          ×
+        </button>
       }
       <span class="ui-select-arrow">▾</span>
     </div>
   </div>
 
   @if (open()) {
-    <div class="ui-select-panel" #panel [id]="panelId()" role="listbox" [attr.aria-multiselectable]="multiple() ? 'true' : null">
+    <div
+      class="ui-select-panel"
+      #panel
+      [id]="panelId()"
+      role="listbox"
+      [attr.aria-multiselectable]="multiple() ? 'true' : null"
+    >
       @if (searchable()) {
         <div class="ui-select-search">
-          <input #inputEl type="text" [value]="filter()" (input)="onFilter($any($event.target).value)" placeholder="Search..." />
+          <input
+            #inputEl
+            type="text"
+            [value]="filter()"
+            (input)="onFilter($any($event.target).value)"
+            placeholder="Search..."
+          />
         </div>
       }
 
@@ -50,7 +74,9 @@
             [attr.aria-selected]="isSelected(opt)"
           >
             @if (optionTemplate()) {
-              <ng-container *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"></ng-container>
+              <ng-container
+                *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"
+              ></ng-container>
             } @else {
               <span>{{ opt.label }}</span>
             }

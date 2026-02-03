@@ -1,7 +1,10 @@
 <app-doc-page-layout [sections]="sections">
   <div class="doc-header" docHeader>
     <h1>Select</h1>
-    <p class="doc-description">Dropdown component with search, multi-select, and templates. Use the controls to see live changes.</p>
+    <p class="doc-description">
+      Dropdown component with search, multi-select, and templates. Use the controls to see live
+      changes.
+    </p>
   </div>
 
   <div class="doc-tabs">
@@ -31,26 +34,67 @@
                 [variant]="'minimal'"
                 [appearance]="variant() === v ? 'solid' : 'ghost'"
                 color="primary"
-                (click)="setVariant(v)">{{ v }}</ui-lib-button>
+                (click)="setVariant(v)"
+                >{{ v }}</ui-lib-button
+              >
             }
           </div>
-          <label class="inline-toggle"><input type="checkbox" [checked]="useGlobalVariant()" (change)="setFollowThemeVariant($any($event.target).checked)"> Follow theme variant</label>
+          <label class="inline-toggle"
+            ><input
+              type="checkbox"
+              [checked]="useGlobalVariant()"
+              (change)="setFollowThemeVariant($any($event.target).checked)"
+            />
+            Follow theme variant</label
+          >
         </div>
       </app-doc-control-group>
 
       <app-doc-control-group title="Behavior" description="Toggle selection, search, and states.">
         <div class="toggles">
-          <label><input type="checkbox" [checked]="multiple()" (change)="toggleMultiple($any($event.target).checked)"> Multiple</label>
-          <label><input type="checkbox" [checked]="searchable()" (change)="toggleSearchable($any($event.target).checked)"> Searchable</label>
-          <label><input type="checkbox" [checked]="disabled()" (change)="toggleDisabled($any($event.target).checked)"> Disabled</label>
-          <label><input type="checkbox" [checked]="loading()" (change)="toggleLoading($any($event.target).checked)"> Loading</label>
+          <label
+            ><input
+              type="checkbox"
+              [checked]="multiple()"
+              (change)="toggleMultiple($any($event.target).checked)"
+            />
+            Multiple</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="searchable()"
+              (change)="toggleSearchable($any($event.target).checked)"
+            />
+            Searchable</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="disabled()"
+              (change)="toggleDisabled($any($event.target).checked)"
+            />
+            Disabled</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="loading()"
+              (change)="toggleLoading($any($event.target).checked)"
+            />
+            Loading</label
+          >
         </div>
       </app-doc-control-group>
 
       <app-doc-control-group title="Content" description="Set placeholder text.">
         <div class="control">
           <label>Placeholder</label>
-          <input type="text" [value]="placeholder()" (input)="placeholder.set($any($event.target).value)">
+          <input
+            type="text"
+            [value]="placeholder()"
+            (input)="placeholder.set($any($event.target).value)"
+          />
         </div>
       </app-doc-control-group>
     </div>
@@ -61,17 +105,29 @@
         <div class="viewport-controls">
           <div class="preset-buttons">
             @for (preset of viewportPresets; track preset.key) {
-              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{ preset.label }}</ui-lib-button>
+              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
+                preset.label
+              }}</ui-lib-button>
             }
             <div class="custom">
               <label>Custom</label>
-              <input type="number" min="200" max="2000" [ngModel]="viewportCustomWidth()" (ngModelChange)="setViewportCustomWidth($event)">
-              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()">Apply</ui-lib-button>
+              <input
+                type="number"
+                min="200"
+                max="2000"
+                [ngModel]="viewportCustomWidth()"
+                (ngModelChange)="setViewportCustomWidth($event)"
+              />
+              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
+                >Apply</ui-lib-button
+              >
             </div>
           </div>
           <div class="controls">
             <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()">Rotate</ui-lib-button>
+            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
+              >Rotate</ui-lib-button
+            >
           </div>
         </div>
       </ui-lib-card>
@@ -79,9 +135,27 @@
       <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
         <div card-header>Density</div>
         <div class="density-controls">
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('default')" [class.active]="viewport?.densityValue() === 'default'">Default</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('comfortable')" [class.active]="viewport?.densityValue() === 'comfortable'">Comfortable</ui-lib-button>
-          <ui-lib-button size="small" appearance="ghost" (click)="setViewportDensity('compact')" [class.active]="viewport?.densityValue() === 'compact'">Compact</ui-lib-button>
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('default')"
+            [class.active]="viewport?.densityValue() === 'default'"
+            >Default</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('comfortable')"
+            [class.active]="viewport?.densityValue() === 'comfortable'"
+            >Comfortable</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('compact')"
+            [class.active]="viewport?.densityValue() === 'compact'"
+            >Compact</ui-lib-button
+          >
         </div>
       </ui-lib-card>
     </div>
@@ -101,7 +175,8 @@
             [loading]="loading()"
             [placeholder]="placeholder()"
             [ngModel]="value()"
-            (ngModelChange)="value.set($event)">
+            (ngModelChange)="value.set($event)"
+          >
           </ui-lib-select>
 
           <div class="current-value"><strong>Value:</strong> {{ value() | json }}</div>
