@@ -1,3 +1,5 @@
+@use "../../shared/styles/doc-page.scss" as *;
+
 .demo-page {
   display: flex;
   flex-direction: column;
@@ -97,6 +99,11 @@
 .empty {
   color: var(--uilib-muted, #6b7280);
   font-style: italic;
+}
+
+.lead {
+  color: var(--uilib-muted, #5f6c80);
+  margin: 0 0 1rem;
 }
 
 @media (max-width: 768px) {
