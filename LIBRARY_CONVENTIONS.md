@@ -24,6 +24,38 @@
 - Barrel exports stay tree-shakable; keep `sideEffects: false` and avoid global side effects.
 - Templates use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`); avoid legacy structural directives (`*ngIf/*ngFor`) in new code.
 - **HTML Special Characters**: Always escape special characters in templates that could be interpreted by Angular. Use `&#123;` for `{` and `&#125;` for `}` when displaying literal braces (e.g., in code examples or documentation). Alternatively, use `{{ '{' }}` and `{{ '}' }}` for interpolation-safe output.
+- **Self-Closing Tags**: Use Angular's self-closing tag syntax whenever possible for cleaner, more concise templates. Prefer `<ui-lib-button />` over `<ui-lib-button></ui-lib-button>`. This applies to all components without projected content.
+- **Explicit Typing**: Always provide explicit type annotations for return types, variables, and function parameters. Never rely on type inference for public APIs, class members, or any non-trivial expressions.
+
+  ```typescript
+  // ❌ Bad - implicit return type
+  get viewportPresets() {
+    return this.viewport?.presets() ?? [];
+  }
+
+  // ✅ Good - explicit return type
+  get viewportPresets(): ViewportPreset[] {
+    return this.viewport?.presets() ?? [];
+  }
+
+  // ❌ Bad - implicit types
+  const items = [];
+  const config = { ... };
+
+  // ✅ Good - explicit types
+  const items: MenuItem[] = [];
+  const config: ThemeConfig = { ... };
+
+  // ❌ Bad - implicit parameter and return types
+  function processItems(items) {
+    return items.map(i => i.name);
+  }
+
+  // ✅ Good - explicit parameter and return types
+  function processItems(items: Item[]): string[] {
+    return items.map(i => i.name);
+  }
+  ```
 
 ## API Surface (PrimeNG-inspired)
 
