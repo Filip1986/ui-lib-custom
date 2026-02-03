@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, CardElevation } from 'ui-lib-custom';
+import { Card, CardElevation, Tabs, Tab, TabsValue } from 'ui-lib-custom';
 import { SHADOWS } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -16,11 +16,12 @@ interface ElevationExample {
 }
 
 type ShadowKey = keyof typeof SHADOWS;
+type TabKey = 'playground' | 'api-reference' | 'usage';
 
 @Component({
   selector: 'app-shadows',
   standalone: true,
-  imports: [CommonModule, Card, DocPageLayoutComponent, DocDemoViewportComponent, DocCodeSnippetComponent],
+  imports: [CommonModule, Card, Tabs, Tab, DocPageLayoutComponent, DocDemoViewportComponent, DocCodeSnippetComponent],
   templateUrl: './shadows.component.html',
   styleUrl: './shadows.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,10 +33,15 @@ export class ShadowsComponent {
     { id: 'usage', label: 'Usage' },
   ];
 
-  activeTab = signal<'playground' | 'api-reference' | 'usage'>('playground');
+  activeTab = signal<TabKey>('playground');
 
-  setTab(tab: 'playground' | 'api-reference' | 'usage') {
+  setTab(tab: TabKey) {
     this.activeTab.set(tab);
+  }
+
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
   }
 
   readonly snippets = {

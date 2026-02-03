@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal, computed, inject, effect, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {UiLibSelect, SelectOption, SelectVariant, ThemeConfigService, Button, Card} from 'ui-lib-custom';
+import {UiLibSelect, SelectOption, SelectVariant, ThemeConfigService, Button, Card, Tabs, Tab, TabsValue} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -9,10 +9,12 @@ import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
+type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
+
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, UiLibSelect, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, DocCodeSnippetComponent],
+  imports: [CommonModule, FormsModule, UiLibSelect, Button, Tabs, Tab, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, DocCodeSnippetComponent],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,10 +27,15 @@ export class SelectComponent {
     { id: 'performance', label: 'Performance Features' },
   ];
 
-  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+  activeTab = signal<TabKey>('playground');
 
-  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+  setTab(tab: TabKey) {
     this.activeTab.set(tab);
+  }
+
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
   }
 
   readonly snippets = {

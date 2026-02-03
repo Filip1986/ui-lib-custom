@@ -17,6 +17,8 @@ interface DemoTab {
   content: string;
 }
 
+type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
+
 @Component({
   selector: 'app-tabs-demo',
   standalone: true,
@@ -33,9 +35,13 @@ export class TabsDemoComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'accessibility'>('playground');
-  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'accessibility') {
+  activeTab = signal<TabKey>('playground');
+  setTab(tab: TabKey) {
     this.activeTab.set(tab);
+  }
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
   }
 
   private readonly themeService = inject(ThemeConfigService);

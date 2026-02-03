@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, CardVariant, CardElevation, ThemeConfigService, Button, SHADOWS } from 'ui-lib-custom';
+import { Card, CardVariant, CardElevation, ThemeConfigService, Button, SHADOWS, Tabs, Tab, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -12,10 +12,12 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 type ShadowKey = string;
 const SHADOW_MAP = SHADOWS as Record<string, string>;
 
+type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
+
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [CommonModule, Card, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, FormsModule, DocCodeSnippetComponent],
+  imports: [CommonModule, Card, Tabs, Tab, Button, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, FormsModule, DocCodeSnippetComponent],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,10 +30,15 @@ export class CardsComponent {
     { id: 'performance', label: 'Performance Features' },
   ];
 
-  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+  activeTab = signal<TabKey>('playground');
 
-  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+  setTab(tab: TabKey) {
     this.activeTab.set(tab);
+  }
+
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
   }
 
   readonly snippets = {

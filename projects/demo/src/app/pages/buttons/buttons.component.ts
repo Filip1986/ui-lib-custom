@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, signal, computed, inject, effect, V
 import { CommonModule } from '@angular/common';
 import {
   Button, ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant,
-  Card, IconButton, IconPosition, ThemeConfigService
+  Card, IconButton, IconPosition, ThemeConfigService, Tabs, Tab, TabsValue
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -12,9 +12,11 @@ import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-grou
 import { FormsModule } from '@angular/forms';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
+type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
+
 @Component({
   selector: 'app-buttons',
-  imports: [CommonModule, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, FormsModule, DocCodeSnippetComponent],
+  imports: [CommonModule, Tabs, Tab, Button, IconButton, DocPageLayoutComponent, DocControlGroupComponent, DocDemoViewportComponent, ThemeScopeDirective, Card, FormsModule, DocCodeSnippetComponent],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,10 +29,15 @@ export class ButtonsComponent {
     { id: 'performance', label: 'Performance Features' },
   ];
 
-  activeTab = signal<'playground' | 'api-reference' | 'usage' | 'performance'>('playground');
+  activeTab = signal<TabKey>('playground');
 
-  setTab(tab: 'playground' | 'api-reference' | 'usage' | 'performance') {
+  setTab(tab: TabKey) {
     this.activeTab.set(tab);
+  }
+
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
   }
 
   readonly snippets = {
