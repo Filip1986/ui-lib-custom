@@ -11,14 +11,13 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { DocTocComponent } from './doc-toc.component';
-import { DocSection } from './doc-section.model';
 import { Container, Card } from '../../../../../ui-lib-custom/src/public-api';
+import { DocSection } from './doc-section.model';
 
 @Component({
   selector: 'app-doc-page-layout',
   standalone: true,
-  imports: [CommonModule, DocTocComponent, Container, Card],
+  imports: [CommonModule, Container],
   templateUrl: './doc-page-layout.component.html',
   styleUrl: './doc-page-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

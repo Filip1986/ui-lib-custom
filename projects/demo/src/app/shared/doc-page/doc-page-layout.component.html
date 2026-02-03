@@ -8,19 +8,7 @@
     </div>
 
     @if (sections.length) {
-      <div class="doc-rail">
-        <div class="doc-rail__inner">
-          <ui-lib-card [bordered]="true" [showFooter]="false">
-            <div card-header>On this page</div>
-
-            <app-doc-toc
-              [sections]="sections"
-              [activeId]="activeSectionId()"
-              (sectionSelected)="scrollToSection($event)"
-            ></app-doc-toc>
-          </ui-lib-card>
-        </div>
-      </div>
+            <ng-content select="[docRail]"></ng-content>
     }
   </div>
 </ui-lib-container>
