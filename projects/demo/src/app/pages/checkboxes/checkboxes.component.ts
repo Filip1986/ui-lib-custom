@@ -1,12 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Button, Card, Checkbox, CheckboxSize, CheckboxVariant } from 'ui-lib-custom';
+import {
+  Button,
+  Card,
+  Checkbox,
+  CheckboxSize,
+  CheckboxVariant,
+  Tabs,
+  Tab,
+  TabsValue,
+} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-group.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+
+type TabKey = 'playground' | 'api-reference' | 'accessibility' | 'usage';
 
 @Component({
   selector: 'app-checkboxes',
@@ -15,12 +26,14 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
     CommonModule,
     Checkbox,
     Button,
+    Tabs,
+    Tab,
+    Card,
     DocPageLayoutComponent,
     DocControlGroupComponent,
     DocDemoViewportComponent,
     DocCodeSnippetComponent,
     FormsModule,
-    Card,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -30,6 +43,7 @@ export class CheckboxesComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
+    { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
@@ -46,6 +60,8 @@ export class CheckboxesComponent {
 
   checkedPrimary = false;
   checkedSecondary = true;
+
+  activeTab = signal<TabKey>('playground');
 
   @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
 
@@ -88,6 +104,15 @@ export class SettingsComponent {
 
   onSecondaryChange(next: boolean): void {
     this.checkedSecondary = next;
+  }
+
+  setTab(tab: TabKey) {
+    this.activeTab.set(tab);
+  }
+
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
   }
 
   get viewportPresets() {

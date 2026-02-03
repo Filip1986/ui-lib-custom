@@ -73,16 +73,6 @@ export class SidebarComponent {
           route: '/login',
         },
         {
-          label: 'Input',
-          icon: 'pi pi-circle',
-          route: '/inputs',
-        },
-        {
-          label: 'Select',
-          icon: 'pi pi-circle',
-          route: '/select',
-        },
-        {
           label: 'Sidebar Menu',
           icon: 'pi pi-circle',
           route: '/sidebar-menu',
@@ -113,6 +103,11 @@ export class SidebarComponent {
           label: 'Input Text',
           icon: 'pi pi-circle',
           route: '/input-text',
+        },
+        {
+          label: 'Select',
+          icon: 'pi pi-circle',
+          route: '/select',
         },
         {
           label: 'Checkbox',

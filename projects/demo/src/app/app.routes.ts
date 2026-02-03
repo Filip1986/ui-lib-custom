@@ -26,7 +26,8 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginComponent, title: 'Login Forms - UI Components Library' },
   { path: 'themes', component: ThemesComponent, title: 'Themes - UI Components Library' },
-  { path: 'inputs', component: InputsComponent, title: 'Inputs - UI Components Library' },
+  { path: 'input-text', component: InputsComponent, title: 'Input Text - UI Components Library' },
+  { path: 'inputs', redirectTo: 'input-text', pathMatch: 'full' },
   { path: 'select', component: SelectComponent, title: 'Select - UI Components Library' },
   { path: 'checkbox', component: CheckboxesComponent, title: 'Checkbox - UI Components Library' },
   {
