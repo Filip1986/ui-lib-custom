@@ -6,87 +6,125 @@
       <code>html</code> or any container. CSS variables in
       <code>ui-lib-custom/src/lib/themes/themes.css</code> drive component colors.
     </p>
-
-    <div class="theme-actions">
-      <ui-lib-inline [gap]="2">
-        <ui-lib-input
-          label="Theme name"
-          placeholder="e.g. brand-x"
-          name="themeName"
-          [ngModel]="themeName()"
-          (ngModelChange)="themeName.set($event || '')"
-        ></ui-lib-input>
-        <ui-lib-button color="primary" (click)="saveTheme()">
-          <i class="pi pi-save"></i>
-          Save theme
-        </ui-lib-button>
-        <ui-lib-button variant="bootstrap" color="secondary" (click)="goToProjectStarter()">
-          <i class="pi pi-plus"></i>
-          New project
-        </ui-lib-button>
-      </ui-lib-inline>
-      @if (status()) {
-        <div class="status">{{ status() }}</div>
-      }
-    </div>
   </div>
 
-  <div id="side-by-side" data-doc-anchor>
-    <h2>Side-by-side Themes</h2>
-    <p>Preview components inheriting theme variables in isolated panels.</p>
-    <div class="theme-grid">
-      <div class="theme-panel" data-theme="light">
-        <div class="panel-header">Light Theme</div>
-        <div class="panel-body">
-          <ui-lib-inline [gap]="2">
-            <ui-lib-button color="primary">Primary</ui-lib-button>
-            <ui-lib-button variant="bootstrap" color="success">Success</ui-lib-button>
-            <ui-lib-button variant="minimal" color="danger">Danger</ui-lib-button>
-          </ui-lib-inline>
+  <div class="doc-tabs">
+    <ui-lib-tabs
+      variant="minimal"
+      size="small"
+      [selectedValue]="activeTab()"
+      (selectedChange)="onTabChange($event.value)"
+    >
+      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
+      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
+    </ui-lib-tabs>
+  </div>
 
-          <ui-lib-inline [gap]="2">
-            <ui-lib-badge color="primary">Primary</ui-lib-badge>
-            <ui-lib-badge color="success" variant="subtle">Success</ui-lib-badge>
-            <ui-lib-badge color="warning" variant="outline">Warning</ui-lib-badge>
-          </ui-lib-inline>
+  @if (activeTab() === 'playground') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+      <div card-header>Playground</div>
+      <p class="lead">Save or load themes and preview light/dark panels side by side.</p>
 
-          <ui-lib-card variant="material" elevation="medium" [hoverable]="true">
-            <div card-header>Light Surface</div>
-            <p>Cards, buttons, and badges inherit CSS variables for this theme.</p>
-          </ui-lib-card>
-        </div>
+      <div class="theme-actions">
+        <ui-lib-inline [gap]="2">
+          <ui-lib-input
+            label="Theme name"
+            placeholder="e.g. brand-x"
+            name="themeName"
+            [ngModel]="themeName()"
+            (ngModelChange)="themeName.set($event || '')"
+          ></ui-lib-input>
+          <ui-lib-button color="primary" (click)="saveTheme()">
+            <i class="pi pi-save"></i>
+            Save theme
+          </ui-lib-button>
+          <ui-lib-button variant="bootstrap" color="secondary" (click)="goToProjectStarter()">
+            <i class="pi pi-plus"></i>
+            New project
+          </ui-lib-button>
+        </ui-lib-inline>
+        @if (status()) {
+          <div class="status">{{ status() }}</div>
+        }
       </div>
 
-      <div class="theme-panel" data-theme="dark">
-        <div class="panel-header">Dark Theme</div>
-        <div class="panel-body">
-          <ui-lib-inline [gap]="2">
-            <ui-lib-button color="primary">Primary</ui-lib-button>
-            <ui-lib-button variant="bootstrap" color="success">Success</ui-lib-button>
-            <ui-lib-button variant="minimal" color="danger">Danger</ui-lib-button>
-          </ui-lib-inline>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <div class="theme-grid">
+            <div class="theme-panel" data-theme="light">
+              <div class="panel-header">Light Theme</div>
+              <div class="panel-body">
+                <ui-lib-inline [gap]="2">
+                  <ui-lib-button color="primary">Primary</ui-lib-button>
+                  <ui-lib-button variant="bootstrap" color="success">Success</ui-lib-button>
+                  <ui-lib-button variant="minimal" color="danger">Danger</ui-lib-button>
+                </ui-lib-inline>
 
-          <ui-lib-inline [gap]="2">
-            <ui-lib-badge color="primary">Primary</ui-lib-badge>
-            <ui-lib-badge color="success" variant="subtle">Success</ui-lib-badge>
-            <ui-lib-badge color="warning" variant="outline">Warning</ui-lib-badge>
-          </ui-lib-inline>
+                <ui-lib-inline [gap]="2">
+                  <ui-lib-badge color="primary">Primary</ui-lib-badge>
+                  <ui-lib-badge color="success" variant="subtle">Success</ui-lib-badge>
+                  <ui-lib-badge color="warning" variant="outline">Warning</ui-lib-badge>
+                </ui-lib-inline>
 
-          <ui-lib-card variant="material" elevation="medium" [hoverable]="true">
-            <div card-header>Dark Surface</div>
-            <p>Scoped <code>data-theme="dark"</code> overrides CSS vars for this panel.</p>
-          </ui-lib-card>
+                <ui-lib-card variant="material" elevation="medium" [hoverable]="true">
+                  <div card-header>Light Surface</div>
+                  <p>Cards, buttons, and badges inherit CSS variables for this theme.</p>
+                </ui-lib-card>
+              </div>
+            </div>
+
+            <div class="theme-panel" data-theme="dark">
+              <div class="panel-header">Dark Theme</div>
+              <div class="panel-body">
+                <ui-lib-inline [gap]="2">
+                  <ui-lib-button color="primary">Primary</ui-lib-button>
+                  <ui-lib-button variant="bootstrap" color="success">Success</ui-lib-button>
+                  <ui-lib-button variant="minimal" color="danger">Danger</ui-lib-button>
+                </ui-lib-inline>
+
+                <ui-lib-inline [gap]="2">
+                  <ui-lib-badge color="primary">Primary</ui-lib-badge>
+                  <ui-lib-badge color="success" variant="subtle">Success</ui-lib-badge>
+                  <ui-lib-badge color="warning" variant="outline">Warning</ui-lib-badge>
+                </ui-lib-inline>
+
+                <ui-lib-card variant="material" elevation="medium" [hoverable]="true">
+                  <div card-header>Dark Surface</div>
+                  <p>Scoped <code>data-theme="dark"</code> overrides CSS vars for this panel.</p>
+                </ui-lib-card>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
 
-  <div id="toggle" data-doc-anchor>
-    <h2>Toggle in Your App</h2>
-    <ol>
-      <li>Import <code>themes.css</code> once globally (see Quick Start).</li>
-      <li>Set <code>data-theme</code> on <code>html</code> or a container, e.g. via a toggle.</li>
-      <li>All components consume CSS variables; override them per brand if needed.</li>
-    </ol>
-  </div>
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>saveToLocalStorage(name)</code></td><td><code>void</code></td><td>Persist current theme preset under the provided name.</td></tr>
+          <tr><td><code>loadFromLocalStorage(name)</code></td><td><code>void</code></td><td>Load a saved preset and apply it.</td></tr>
+          <tr><td><code>preset()</code></td><td><code>ThemePreset</code></td><td>Returns the active theme preset.</td></tr>
+        </tbody>
+      </table>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'usage') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Toggle data-theme" [code]="snippets.usage"></app-doc-code-snippet>
+    </ui-lib-card>
+  }
 </app-doc-page-layout>
