@@ -1,245 +1,230 @@
-<div class="page-container">
-  <div class="page-header">
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
     <h1>Login Components</h1>
-    <p class="page-description">
-      Multiple beautiful login form variants with full functionality including social login,
-      remember me, and forgot password features. Choose the variant that best fits your
-      application's design language.
+    <p class="doc-description">
+      Multiple beautiful login form variants with social login, remember me, and forgot password flows.
+      Pick the variant that matches your product’s visual language.
     </p>
   </div>
 
-  <!-- Variant Tabs -->
-  <div class="variant-tabs">
-    @for (variant of variants; track variant.id) {
-      <button
-        class="variant-tab"
-        [class.active]="activeVariant() === variant.id"
-        (click)="selectVariant(variant.id)"
-      >
-        {{ variant.title.split(' - ')[1] }}
-      </button>
-    }
+  <div class="doc-tabs">
+    <ui-lib-tabs
+      variant="minimal"
+      size="small"
+      [selectedValue]="activeTab()"
+      (selectedChange)="onTabChange($event.value)"
+    >
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
+      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
+    </ui-lib-tabs>
   </div>
 
-  <!-- Active Variant Content -->
-  @if (getActiveVariant(); as variant) {
-    <div class="variant-content">
-      <!-- Description Section -->
-      <section class="variant-section">
-        <h2>{{ variant.title }}</h2>
-        <p class="variant-description">{{ variant.description }}</p>
-      </section>
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p class="lead">Switch between variants and preview the login experiences live.</p>
 
-      <!-- Preview Section -->
-      <section class="variant-section">
-        <h3>Live Preview</h3>
-        <div class="login-demo-container" [class]="variant.background">
-          @switch (variant.id) {
-            @case ('variant1') {
-              <lib-login-1
-                [loading]="loginLoading()"
-                (submitLogin)="onLogin($any($event))"
-                (registerClick)="onRegister()"
-                (forgotPasswordClick)="onForgotPassword($any($event))"
-                (socialLoginClick)="onSocialLogin($any($event))"
-                (rememberMeChange)="onRememberMeChange($any($event))"
-              ></lib-login-1>
-            }
-            @case ('variant2') {
-              <lib-login-2
-                [loading]="loginLoading()"
-                (submitLogin)="onLogin($any($event))"
-                (registerClick)="onRegister()"
-                (forgotPasswordClick)="onForgotPassword($any($event))"
-                (socialLoginClick)="onSocialLogin($any($event))"
-                (rememberMeChange)="onRememberMeChange($any($event))"
-              ></lib-login-2>
-            }
-            @case ('variant3') {
-              <lib-login-3
-                [loading]="loginLoading()"
-                (submitLogin)="onLogin($any($event))"
-                (registerClick)="onRegister()"
-                (forgotPasswordClick)="onForgotPassword($any($event))"
-                (socialLoginClick)="onSocialLogin($any($event))"
-                (rememberMeChange)="onRememberMeChange($any($event))"
-              ></lib-login-3>
-            }
-            @case ('login-form') {
-              <ui-lib-login-form
-                [variant]="'centered'"
-                [showSocialLogin]="true"
-                [showRememberMe]="true"
-                (login)="onLoginForm($event)"
-                (forgotPassword)="onForgotPassword('')"
-                (socialLogin)="onSocialLogin($event)"
-              >
-                <ng-template #logo>Demo Brand</ng-template>
-              </ui-lib-login-form>
-            }
+      <div class="variant-picker">
+        <ui-lib-tabs
+          variant="minimal"
+          size="small"
+          [selectedValue]="activeVariant()"
+          (selectedChange)="onVariantChange($event.value)"
+        >
+          @for (variant of variants; track variant.id) {
+            <ui-lib-tab [value]="variant.id" [label]="variant.title.split(' - ')[1]"></ui-lib-tab>
           }
-        </div>
-      </section>
+        </ui-lib-tabs>
+      </div>
 
-      <!-- Features Section -->
-      <section class="variant-section">
-        <h3>Features</h3>
-        <ul class="features-list">
-          @for (feature of variant.features; track feature) {
-            <li>{{ feature }}</li>
-          }
-        </ul>
-      </section>
-
-      <!-- Code Section -->
-      <section class="variant-section">
-        <h3>How to Use</h3>
-
-        <!-- Import Code -->
-        <div class="code-block-container">
-          <div class="code-block-header">
-            <span class="code-block-title">1. Import the Component</span>
-            <button
-              class="copy-button"
-              (click)="copyToClipboard(variant.importCode, variant.id + '-import')"
-              [class.copied]="isCopied(variant.id + '-import')"
-            >
-              @if (isCopied(variant.id + '-import')) {
-                <span>✓ Copied!</span>
-              } @else {
-                <span>Copy</span>
-              }
-            </button>
+      @if (getActiveVariant(); as variant) {
+        <div class="variant-card">
+          <div class="variant-header">
+            <h2>{{ variant.title }}</h2>
+            <p class="variant-description">{{ variant.description }}</p>
           </div>
-          <pre class="code-block"><code>{{ variant.importCode }}</code></pre>
-        </div>
 
-        <!-- Usage Code -->
-        <div class="code-block-container">
-          <div class="code-block-header">
-            <span class="code-block-title">2. Use in Template</span>
-            <button
-              class="copy-button"
-              (click)="copyToClipboard(variant.usageCode, variant.id + '-usage')"
-              [class.copied]="isCopied(variant.id + '-usage')"
-            >
-              @if (isCopied(variant.id + '-usage')) {
-                <span>✓ Copied!</span>
-              } @else {
-                <span>Copy</span>
+          <app-doc-demo-viewport>
+            <div class="doc-demo centered login-demo" [class]="variant.background">
+              @switch (variant.id) {
+                @case ('variant1') {
+                  <lib-login-1
+                    [loading]="loginLoading()"
+                    (submitLogin)="onLogin($any($event))"
+                    (registerClick)="onRegister()"
+                    (forgotPasswordClick)="onForgotPassword($any($event))"
+                    (socialLoginClick)="onSocialLogin($any($event))"
+                    (rememberMeChange)="onRememberMeChange($any($event))"
+                  ></lib-login-1>
+                }
+                @case ('variant2') {
+                  <lib-login-2
+                    [loading]="loginLoading()"
+                    (submitLogin)="onLogin($any($event))"
+                    (registerClick)="onRegister()"
+                    (forgotPasswordClick)="onForgotPassword($any($event))"
+                    (socialLoginClick)="onSocialLogin($any($event))"
+                    (rememberMeChange)="onRememberMeChange($any($event))"
+                  ></lib-login-2>
+                }
+                @case ('variant3') {
+                  <lib-login-3
+                    [loading]="loginLoading()"
+                    (submitLogin)="onLogin($any($event))"
+                    (registerClick)="onRegister()"
+                    (forgotPasswordClick)="onForgotPassword($any($event))"
+                    (socialLoginClick)="onSocialLogin($any($event))"
+                    (rememberMeChange)="onRememberMeChange($any($event))"
+                  ></lib-login-3>
+                }
+                @case ('login-form') {
+                  <ui-lib-login-form
+                    [variant]="'centered'"
+                    [showSocialLogin]="true"
+                    [showRememberMe]="true"
+                    (login)="onLoginForm($event)"
+                    (forgotPassword)="onForgotPassword('')"
+                    (socialLogin)="onSocialLogin($event)"
+                  >
+                    <ng-template #logo>Demo Brand</ng-template>
+                  </ui-lib-login-form>
+                }
               }
-            </button>
-          </div>
-          <pre class="code-block"><code>{{ variant.usageCode }}</code></pre>
-        </div>
+            </div>
+          </app-doc-demo-viewport>
 
-        <!-- Event Handlers Code -->
-        <div class="code-block-container">
-          <div class="code-block-header">
-            <span class="code-block-title">3. Implement Event Handlers</span>
-            <button
-              class="copy-button"
-              (click)="copyToClipboard(eventHandlersCode, 'event-handlers')"
-              [class.copied]="isCopied('event-handlers')"
-            >
-              @if (isCopied('event-handlers')) {
-                <span>✓ Copied!</span>
-              } @else {
-                <span>Copy</span>
-              }
-            </button>
+          <div class="variant-columns">
+            <div class="variant-column">
+              <h3>Features</h3>
+              <ul class="features-list">
+                @for (feature of variant.features; track feature) {
+                  <li>{{ feature }}</li>
+                }
+              </ul>
+            </div>
+            <div class="variant-column">
+              <h3>How to Use</h3>
+
+              <div class="code-block-container">
+                <div class="code-block-header">
+                  <span class="code-block-title">1. Import the Component</span>
+                  <button
+                    class="copy-button"
+                    (click)="copyToClipboard(variant.importCode, variant.id + '-import')"
+                    [class.copied]="isCopied(variant.id + '-import')"
+                  >
+                    @if (isCopied(variant.id + '-import')) {
+                      <span>✓ Copied!</span>
+                    } @else {
+                      <span>Copy</span>
+                    }
+                  </button>
+                </div>
+                <pre class="code-block"><code>{{ variant.importCode }}</code></pre>
+              </div>
+
+              <div class="code-block-container">
+                <div class="code-block-header">
+                  <span class="code-block-title">2. Use in Template</span>
+                  <button
+                    class="copy-button"
+                    (click)="copyToClipboard(variant.usageCode, variant.id + '-usage')"
+                    [class.copied]="isCopied(variant.id + '-usage')"
+                  >
+                    @if (isCopied(variant.id + '-usage')) {
+                      <span>✓ Copied!</span>
+                    } @else {
+                      <span>Copy</span>
+                    }
+                  </button>
+                </div>
+                <pre class="code-block"><code>{{ variant.usageCode }}</code></pre>
+              </div>
+
+              <div class="code-block-container">
+                <div class="code-block-header">
+                  <span class="code-block-title">3. Implement Event Handlers</span>
+                  <button
+                    class="copy-button"
+                    (click)="copyToClipboard(eventHandlersCode, 'event-handlers')"
+                    [class.copied]="isCopied('event-handlers')"
+                  >
+                    @if (isCopied('event-handlers')) {
+                      <span>✓ Copied!</span>
+                    } @else {
+                      <span>Copy</span>
+                    }
+                  </button>
+                </div>
+                <pre class="code-block"><code>{{ eventHandlersCode }}</code></pre>
+              </div>
+            </div>
           </div>
-          <pre class="code-block"><code>{{ eventHandlersCode }}</code></pre>
         </div>
-      </section>
-    </div>
+      }
+    </ui-lib-card>
   }
 
-  <!-- API Reference Section -->
-  <section class="api-reference">
-    <h2>API Reference</h2>
-    <p class="section-description">
-      All login components share the same API for consistent integration.
-    </p>
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <p class="section-description">All login components share the same API for consistent integration.</p>
 
-    <div class="api-grid">
-      <div class="api-section">
-        <h3>Inputs</h3>
-        <div class="api-table">
-          <div class="api-row api-header">
-            <div class="api-cell">Property</div>
-            <div class="api-cell">Type</div>
-            <div class="api-cell">Description</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>loading</code></div>
-            <div class="api-cell"><code>boolean</code></div>
-            <div class="api-cell">Shows loading state with spinner</div>
-          </div>
-        </div>
-      </div>
+      <h3>Inputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>loading</code></td>
+            <td><code>boolean</code></td>
+            <td>Shows loading state with spinner</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div class="api-section">
-        <h3>Outputs</h3>
-        <div class="api-table">
-          <div class="api-row api-header">
-            <div class="api-cell">Event</div>
-            <div class="api-cell">Payload Type</div>
-            <div class="api-cell">Description</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>submitLogin</code></div>
-            <div class="api-cell"><code>LoginFormData</code></div>
-            <div class="api-cell">Emitted when form is submitted</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>registerClick</code></div>
-            <div class="api-cell"><code>void</code></div>
-            <div class="api-cell">Emitted when register link is clicked</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>forgotPasswordClick</code></div>
-            <div class="api-cell"><code>string</code></div>
-            <div class="api-cell">Emits username when forgot password is clicked</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>socialLoginClick</code></div>
-            <div class="api-cell"><code>string</code></div>
-            <div class="api-cell">Emits provider name (google, facebook, github)</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>rememberMeChange</code></div>
-            <div class="api-cell"><code>boolean</code></div>
-            <div class="api-cell">Emits when remember me is toggled</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="api-section">
-        <h3>LoginFormData Interface</h3>
-        <div class="api-table">
-          <div class="api-row api-header">
-            <div class="api-cell">Property</div>
-            <div class="api-cell">Type</div>
-            <div class="api-cell">Description</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>username</code></div>
-            <div class="api-cell"><code>string</code></div>
-            <div class="api-cell">User's username or email</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>password</code></div>
-            <div class="api-cell"><code>string</code></div>
-            <div class="api-cell">User's password</div>
-          </div>
-          <div class="api-row">
-            <div class="api-cell"><code>rememberMe</code></div>
-            <div class="api-cell"><code>boolean</code></div>
-            <div class="api-cell">Remember me checkbox state</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+      <h3>Outputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Payload Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>submitLogin</code></td>
+            <td><code>LoginFormData</code></td>
+            <td>Emitted when form is submitted</td>
+          </tr>
+          <tr>
+            <td><code>registerClick</code></td>
+            <td><code>void</code></td>
+            <td>Emitted when register link is clicked</td>
+          </tr>
+          <tr>
+            <td><code>forgotPasswordClick</code></td>
+            <td><code>string</code></td>
+            <td>Emitted when forgot password is requested</td>
+          </tr>
+          <tr>
+            <td><code>socialLoginClick</code></td>
+            <td><code>string</code></td>
+            <td>Emitted when a social provider button is clicked</td>
+          </tr>
+          <tr>
+            <td><code>rememberMeChange</code></td>
+            <td><code>boolean</code></td>
+            <td>Emitted when the remember me checkbox changes</td>
+          </tr>
+        </tbody>
+      </table>
+    </ui-lib-card>
+  }
+</app-doc-page-layout>

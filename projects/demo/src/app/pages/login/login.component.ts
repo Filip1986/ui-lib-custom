@@ -6,7 +6,14 @@ import {
   Login3Component,
   LoginFormData,
   LoginForm,
+  Tabs,
+  Tab,
+  TabsValue,
+  Card,
 } from 'ui-lib-custom';
+import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
+import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 
 interface LoginVariant {
   id: string;
@@ -18,14 +25,43 @@ interface LoginVariant {
   background: string;
 }
 
+type TabKey = 'variants' | 'api-reference';
+
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, Login1Component, Login2Component, Login3Component, LoginForm],
+  imports: [
+    CommonModule,
+    Tabs,
+    Tab,
+    Card,
+    Login1Component,
+    Login2Component,
+    Login3Component,
+    LoginForm,
+    DocPageLayoutComponent,
+    DocDemoViewportComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
+  readonly sections: DocSection[] = [
+    { id: 'variants', label: 'Variants' },
+    { id: 'api-reference', label: 'API Reference' },
+  ];
+
+  activeTab = signal<TabKey>('variants');
+
+  setTab(tab: TabKey) {
+    this.activeTab.set(tab);
+  }
+
+  onTabChange(value: TabsValue | null) {
+    if (value === null) return;
+    this.setTab(value as TabKey);
+  }
+
   loginLoading = signal(false);
   activeVariant = signal('variant1');
   copiedStates = signal<{ [key: string]: boolean }>({});
@@ -190,6 +226,12 @@ export class ExampleComponent { }`,
 
   selectVariant(variantId: string) {
     this.activeVariant.set(variantId);
+  }
+
+  onVariantChange(value: TabsValue | null) {
+    if (value) {
+      this.activeVariant.set(String(value));
+    }
   }
 
   getActiveVariant(): LoginVariant {

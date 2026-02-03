@@ -18,13 +18,7 @@
   </div>
 
   @if (activeTab() === 'playground') {
-    <ui-lib-card
-      class="doc-section"
-      [showHeader]="true"
-      [showFooter]="false"
-      id="playground"
-      data-doc-anchor
-    >
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
       <div card-header>Playground</div>
       <p>All numeric shadows from the library <code>SHADOWS</code> tokens.</p>
 
@@ -52,13 +46,7 @@
   }
 
   @if (activeTab() === 'api-reference') {
-    <ui-lib-card
-      class="doc-section"
-      [showHeader]="true"
-      [showFooter]="false"
-      id="api-reference"
-      data-doc-anchor
-    >
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
       <div card-header>API Reference</div>
       <p>Shadow token names and values available from the design tokens.</p>
       <table class="doc-properties">
@@ -89,13 +77,7 @@
   }
 
   @if (activeTab() === 'usage') {
-    <ui-lib-card
-      class="doc-section"
-      [showHeader]="true"
-      [showFooter]="false"
-      id="usage"
-      data-doc-anchor
-    >
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
       <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
     </ui-lib-card>
