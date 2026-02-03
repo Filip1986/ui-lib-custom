@@ -22,7 +22,9 @@
   @if (activeTab() === 'playground') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
       <div card-header>Playground</div>
-      <p class="lead">Manage theme presets and preview common components with the selected theme.</p>
+      <p class="lead">
+        Manage theme presets and preview common components with the selected theme.
+      </p>
 
       <div class="controls">
         <div class="control-group">
@@ -32,20 +34,36 @@
         </div>
         <div class="control-group">
           <label>Saved themes</label>
-          <select [ngModel]="selectedSaved()" (ngModelChange)="selectedSaved.set($event); loadTheme($event)">
+          <select
+            [ngModel]="selectedSaved()"
+            (ngModelChange)="selectedSaved.set($event); loadTheme($event)"
+          >
             <option value="">Select saved</option>
             @for (name of savedThemes(); track name) {
               <option [value]="name">{{ name }}</option>
             }
           </select>
-          <button type="button" class="chip" (click)="deleteTheme(selectedSaved())" [disabled]="!selectedSaved()">Delete</button>
+          <button
+            type="button"
+            class="chip"
+            (click)="deleteTheme(selectedSaved())"
+            [disabled]="!selectedSaved()"
+          >
+            Delete
+          </button>
         </div>
         <div class="control-group">
           <label>Import theme.json</label>
-          <input type="file" accept="application/json" (change)="importTheme($any($event.target).files)" />
+          <input
+            type="file"
+            accept="application/json"
+            (change)="importTheme($any($event.target).files)"
+          />
         </div>
         <div class="actions">
-          <button type="button" class="chip primary" (click)="exportStarterPackage()">Download Starter Package</button>
+          <button type="button" class="chip primary" (click)="exportStarterPackage()">
+            Download Starter Package
+          </button>
         </div>
         @if (message()) {
           <div class="message">{{ message() }}</div>
@@ -69,13 +87,22 @@
               <div card-header>Inputs</div>
               <div class="stack">
                 <ui-lib-input label="Email" placeholder="you@example.com"></ui-lib-input>
-                <ui-lib-input label="Password" type="password" [showTogglePassword]="true" placeholder="••••••"></ui-lib-input>
+                <ui-lib-input
+                  label="Password"
+                  type="password"
+                  [showTogglePassword]="true"
+                  placeholder="••••••"
+                ></ui-lib-input>
               </div>
             </ui-lib-card>
 
             <ui-lib-card variant="material" elevation="medium">
               <div card-header>Select</div>
-              <ui-lib-select label="Status" [options]="sampleOptions" [searchable]="true"></ui-lib-select>
+              <ui-lib-select
+                label="Status"
+                [options]="sampleOptions"
+                [searchable]="true"
+              ></ui-lib-select>
             </ui-lib-card>
           </div>
         </div>
@@ -95,11 +122,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>saveToLocalStorage(name)</code></td><td><code>void</code></td><td>Persists current theme preset under the provided name.</td></tr>
-          <tr><td><code>loadFromLocalStorage(name)</code></td><td><code>void</code></td><td>Loads a saved preset and applies it.</td></tr>
-          <tr><td><code>exportAsJSON(preset)</code></td><td><code>string</code></td><td>Exports the preset to JSON for reuse.</td></tr>
-          <tr><td><code>exportAsCSS(preset)</code></td><td><code>string</code></td><td>Exports CSS variables for runtime theming.</td></tr>
-          <tr><td><code>exportAsScss(preset)</code></td><td><code>string</code></td><td>Exports SCSS variables for build-time theming.</td></tr>
+          <tr>
+            <td><code>saveToLocalStorage(name)</code></td>
+            <td><code>void</code></td>
+            <td>Persists current theme preset under the provided name.</td>
+          </tr>
+          <tr>
+            <td><code>loadFromLocalStorage(name)</code></td>
+            <td><code>void</code></td>
+            <td>Loads a saved preset and applies it.</td>
+          </tr>
+          <tr>
+            <td><code>exportAsJSON(preset)</code></td>
+            <td><code>string</code></td>
+            <td>Exports the preset to JSON for reuse.</td>
+          </tr>
+          <tr>
+            <td><code>exportAsCSS(preset)</code></td>
+            <td><code>string</code></td>
+            <td>Exports CSS variables for runtime theming.</td>
+          </tr>
+          <tr>
+            <td><code>exportAsScss(preset)</code></td>
+            <td><code>string</code></td>
+            <td>Exports SCSS variables for build-time theming.</td>
+          </tr>
         </tbody>
       </table>
     </ui-lib-card>
@@ -108,7 +155,10 @@
   @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
-      <app-doc-code-snippet title="Theme persistence" [code]="snippets.usage"></app-doc-code-snippet>
+      <app-doc-code-snippet
+        title="Theme persistence"
+        [code]="snippets.usage"
+      ></app-doc-code-snippet>
     </ui-lib-card>
   }
 </app-doc-page-layout>

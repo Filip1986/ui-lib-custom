@@ -113,9 +113,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>saveToLocalStorage(name)</code></td><td><code>void</code></td><td>Persist current theme preset under the provided name.</td></tr>
-          <tr><td><code>loadFromLocalStorage(name)</code></td><td><code>void</code></td><td>Load a saved preset and apply it.</td></tr>
-          <tr><td><code>preset()</code></td><td><code>ThemePreset</code></td><td>Returns the active theme preset.</td></tr>
+          <tr>
+            <td><code>saveToLocalStorage(name)</code></td>
+            <td><code>void</code></td>
+            <td>Persist current theme preset under the provided name.</td>
+          </tr>
+          <tr>
+            <td><code>loadFromLocalStorage(name)</code></td>
+            <td><code>void</code></td>
+            <td>Load a saved preset and apply it.</td>
+          </tr>
+          <tr>
+            <td><code>preset()</code></td>
+            <td><code>ThemePreset</code></td>
+            <td>Returns the active theme preset.</td>
+          </tr>
         </tbody>
       </table>
     </ui-lib-card>
@@ -124,7 +136,10 @@
   @if (activeTab() === 'usage') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
       <div card-header>Usage</div>
-      <app-doc-code-snippet title="Toggle data-theme" [code]="snippets.usage"></app-doc-code-snippet>
+      <app-doc-code-snippet
+        title="Toggle data-theme"
+        [code]="snippets.usage"
+      ></app-doc-code-snippet>
     </ui-lib-card>
   }
 </app-doc-page-layout>

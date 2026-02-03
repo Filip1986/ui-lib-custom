@@ -2,7 +2,8 @@
   <div class="doc-header" docHeader>
     <h1>Sidebar Menu</h1>
     <p class="doc-description">
-      Sidebar navigation with classic, compact, and modern variants. Supports collapse, nested items, and theming via CSS variables.
+      Sidebar navigation with classic, compact, and modern variants. Supports collapse, nested
+      items, and theming via CSS variables.
     </p>
   </div>
 
@@ -34,8 +35,22 @@
           }
         </div>
         <div class="control-group toggles">
-          <label><input type="checkbox" [checked]="collapsible()" (change)="collapsible.set($any($event.target).checked)"> Collapsible</label>
-          <label><input type="checkbox" [checked]="collapsed()" (change)="collapsed.set($any($event.target).checked)"> Collapsed</label>
+          <label
+            ><input
+              type="checkbox"
+              [checked]="collapsible()"
+              (change)="collapsible.set($any($event.target).checked)"
+            />
+            Collapsible</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="collapsed()"
+              (change)="collapsed.set($any($event.target).checked)"
+            />
+            Collapsed</label
+          >
         </div>
       </div>
 
@@ -76,10 +91,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>variant</code></td><td><code>'classic' | 'compact' | 'modern'</code></td><td><code>'classic'</code></td><td>Visual style of the sidebar</td></tr>
-          <tr><td><code>items</code></td><td><code>SidebarMenuItem[]</code></td><td><code>[]</code></td><td>Navigation tree</td></tr>
-          <tr><td><code>collapsed</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Collapse state</td></tr>
-          <tr><td><code>collapsible</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Allow user to collapse</td></tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'classic' | 'compact' | 'modern'</code></td>
+            <td><code>'classic'</code></td>
+            <td>Visual style of the sidebar</td>
+          </tr>
+          <tr>
+            <td><code>items</code></td>
+            <td><code>SidebarMenuItem[]</code></td>
+            <td><code>[]</code></td>
+            <td>Navigation tree</td>
+          </tr>
+          <tr>
+            <td><code>collapsed</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Collapse state</td>
+          </tr>
+          <tr>
+            <td><code>collapsible</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>Allow user to collapse</td>
+          </tr>
         </tbody>
       </table>
     </ui-lib-card>
