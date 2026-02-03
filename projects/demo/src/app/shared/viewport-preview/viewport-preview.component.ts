@@ -34,6 +34,7 @@ interface ViewportPreset {
 export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   @Input() mode: 'inline' | 'floating' = 'inline';
   @Input() showToolbar = true;
+  @Input() autoHeight = false;
   @Input() set active(val: boolean) {
     this.activeSignal.set(val);
   }
@@ -125,6 +126,10 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   }
 
   private computeScale(): void {
+    if (this.autoHeight) {
+      this.scale.set(1);
+      return;
+    }
     const host = this.frameHost?.nativeElement?.parentElement;
     if (!host) {
       return;

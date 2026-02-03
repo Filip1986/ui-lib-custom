@@ -18,7 +18,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-group.component';
 
-type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
+type TabKey = 'api-reference' | 'usage' | 'performance';
 
 @Component({
   selector: 'app-badges',
@@ -47,7 +47,7 @@ export class BadgesComponent {
     { id: 'performance', label: 'Performance Features' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  activeTab = signal<TabKey>('api-reference');
 
   setTab(tab: TabKey) {
     this.activeTab.set(tab);

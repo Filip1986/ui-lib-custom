@@ -14,6 +14,7 @@ import { ViewportPreviewComponent } from '../viewport-preview/viewport-preview.c
 })
 export class DocDemoViewportComponent {
   shadow = input<string | null>(null);
+  autoHeight = input<boolean>(false);
   density = signal<'default' | 'comfortable' | 'compact'>('default');
 
   @ViewChild('preview') preview?: ViewportPreviewComponent;
