@@ -19,6 +19,19 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### Accordion
+**Files:**
+- [ACCORDION.md](ACCORDION.md) - Complete API reference and usage guide
+- [ACCORDION_IMPLEMENTATION.md](ACCORDION_IMPLEMENTATION.md) - Implementation details and architecture
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/accordion)
+- [Source Code](../../projects/ui-lib-custom/src/lib/accordion/)
+
+---
+
 ## 📋 Documentation Structure
 
 Each component should have two documentation files:
@@ -56,6 +69,7 @@ Each component should have two documentation files:
 | Badge | Labels, status, counts | 3 | 7 | 3 | ✅ Complete |
 | Button | Action buttons | 3 | 5 | 3 | ✅ Existing |
 | Card | Content container | 3 | - | - | ✅ Existing |
+| Accordion | Expandable panels | 3 | - | 3 | ✅ Complete |
 
 ---
 

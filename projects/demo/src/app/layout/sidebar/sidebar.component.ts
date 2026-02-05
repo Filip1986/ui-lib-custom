@@ -87,6 +87,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/icons',
         },
+        {
+          label: 'Accordion',
+          icon: 'pi pi-circle',
+          route: '/accordion',
+        },
       ],
     },
     {

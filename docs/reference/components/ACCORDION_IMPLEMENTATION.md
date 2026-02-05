@@ -1,0 +1,34 @@
+# Accordion Implementation Notes
+
+## Architecture
+- Compound structure: `ui-lib-accordion` container managing expansion + keyboard focus; `ui-lib-accordion-panel` items render headers and content.
+- Container provides context via `ACCORDION_CONTEXT` so panels can toggle, query expansion, and receive variant/size/expandMode.
+- Panels register/unregister with the container; ids resolve from `value` or generated uuid/counter.
+
+## Communication Pattern
+- Context injection shares callbacks (`togglePanel`, `isPanelExpanded`, `focusHeader`) and signals (variant, size, expandMode).
+- Container computes panel contexts with `contentChildren(AccordionPanel)` and `computed()` to keep state memoized.
+- Toggling routes through container to respect expand mode (single clears others, multiple maintains a Set) and emits `panelToggle` + `expandedChange`.
+
+## Performance
+- Standalone + `ChangeDetectionStrategy.OnPush` everywhere.
+- Signal-based inputs; derived state via `computed()`; expansion set stored as `Set<string>` for O(1) lookups.
+- No subscriptions; effects confined to syncing controlled inputs and enforcing single-mode constraint.
+- Minimal DOM: header button + content region; host classes computed once.
+
+## Animation Strategy
+- CSS-only expand/collapse using grid-row technique: `.accordion-panel-content` switches `grid-template-rows` between `0fr` and `1fr` with transition vars (`--uilib-accordion-transition-duration`, `--uilib-accordion-transition-easing`).
+- Chevron rotation via `transform` + `--uilib-accordion-icon-transition`.
+- `hidden` attribute on collapsed content keeps accessibility intact; prefers-reduced-motion can override transitions via consumer CSS.
+
+## Extension Points
+- Theming via CSS vars (`--uilib-accordion-*`); variants map defaults for elevation, borders, spacing.
+- Panel headers accept projected `accordionHeader` template for fully custom layouts (icons, metadata, actions).
+- Controlled mode through `expandedPanels`; uncontrolled via `defaultExpandedPanels`.
+- Size + variant passed through context so nested/child styling can align.
+
+## Future Enhancements
+- Add `collapsible=false` option for single mode to keep one panel always open.
+- Expose roving tabindex hints for better focus restoration after dynamic list changes.
+- Optional lazy content rendering for heavy panel bodies.
+- Demo: add async loading example and density controls.

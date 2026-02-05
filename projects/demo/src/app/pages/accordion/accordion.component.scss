@@ -1,0 +1,75 @@
+.doc-tabs {
+  margin-bottom: 1rem;
+}
+
+.doc-controls {
+  margin-bottom: 1.5rem;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.chips {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.control-chip {
+  text-transform: capitalize;
+}
+
+.demo-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.doc-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.custom-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.api-table {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.api-row {
+  display: grid;
+  grid-template-columns: 160px 220px 1fr;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--uilib-color-border, #e5e7eb);
+  border-radius: var(--uilib-radius-sm, 6px);
+  background: var(--uilib-surface, #fff);
+}
+
+.api-header {
+  background: var(--uilib-color-surface-subtle, #f9fafb);
+  font-weight: 600;
+}
+
+.a11y-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.controlled-state {
+  font-size: 0.9rem;
+  color: var(--uilib-color-text-secondary, #6b7280);
+}

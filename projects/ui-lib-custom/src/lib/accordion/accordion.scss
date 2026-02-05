@@ -1,0 +1,53 @@
+:host,
+.ui-lib-accordion {
+  --uilib-accordion-gap: var(--uilib-spacing-2);
+  --uilib-accordion-border-radius: var(--uilib-radius-md);
+}
+
+.ui-lib-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-accordion-gap);
+
+  &.accordion-variant-material {
+    --uilib-accordion-panel-bg: var(--uilib-color-surface);
+    --uilib-accordion-panel-border: 1px solid transparent;
+    --uilib-accordion-panel-radius: var(--uilib-radius-md);
+    --uilib-accordion-gap: var(--uilib-spacing-2);
+  }
+
+  &.accordion-variant-bootstrap {
+    --uilib-accordion-panel-bg: var(--uilib-color-surface);
+    --uilib-accordion-panel-border: 1px solid var(--uilib-color-border);
+    --uilib-accordion-panel-radius: 0;
+    --uilib-accordion-gap: 0;
+  }
+
+  &.accordion-variant-minimal {
+    --uilib-accordion-panel-bg: transparent;
+    --uilib-accordion-panel-border: 0 solid transparent;
+    --uilib-accordion-panel-radius: 0;
+    --uilib-accordion-gap: 0;
+  }
+
+  &.accordion-size-sm {
+    --uilib-accordion-header-padding: var(--uilib-spacing-3);
+    --uilib-accordion-content-padding: var(--uilib-spacing-3);
+    --uilib-accordion-icon-size: 1rem;
+    font-size: var(--uilib-font-size-sm);
+  }
+
+  &.accordion-size-md {
+    --uilib-accordion-header-padding: var(--uilib-spacing-4);
+    --uilib-accordion-content-padding: var(--uilib-spacing-4);
+    --uilib-accordion-icon-size: 1.25rem;
+    font-size: var(--uilib-font-size-md);
+  }
+
+  &.accordion-size-lg {
+    --uilib-accordion-header-padding: var(--uilib-spacing-5);
+    --uilib-accordion-content-padding: var(--uilib-spacing-5);
+    --uilib-accordion-icon-size: 1.5rem;
+    font-size: var(--uilib-font-size-lg);
+  }
+}

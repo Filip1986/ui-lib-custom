@@ -1,0 +1,153 @@
+:host,
+.ui-lib-accordion-panel {
+  --uilib-accordion-panel-bg: var(--uilib-color-surface);
+  --uilib-accordion-panel-border: 1px solid var(--uilib-color-border);
+  --uilib-accordion-panel-radius: var(--uilib-radius-md);
+  --uilib-accordion-header-padding: var(--uilib-spacing-4);
+  --uilib-accordion-header-bg: transparent;
+  --uilib-accordion-header-bg-hover: var(--uilib-color-surface-hover);
+  --uilib-accordion-header-color: var(--uilib-color-text);
+  --uilib-accordion-header-font-weight: var(--uilib-font-weight-medium);
+  --uilib-accordion-content-padding: var(--uilib-spacing-4);
+  --uilib-accordion-content-bg: var(--uilib-color-surface);
+  --uilib-accordion-icon-size: 1.25rem;
+  --uilib-accordion-icon-color: var(--uilib-color-text-secondary);
+  --uilib-accordion-icon-transition: transform 200ms ease;
+  --uilib-accordion-focus-ring: 0 0 0 2px var(--uilib-color-primary-alpha);
+  --uilib-accordion-transition-duration: 200ms;
+  --uilib-accordion-transition-easing: ease-out;
+}
+
+.ui-lib-accordion-panel {
+  background: var(--uilib-accordion-panel-bg);
+  border: var(--uilib-accordion-panel-border);
+  border-radius: var(--uilib-accordion-panel-radius);
+  overflow: hidden;
+  display: block;
+
+  &.is-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .accordion-panel-header {
+    display: flex;
+    align-items: center;
+    gap: var(--uilib-spacing-2);
+    width: 100%;
+    padding: var(--uilib-accordion-header-padding);
+    background: var(--uilib-accordion-header-bg);
+    color: var(--uilib-accordion-header-color);
+    font-weight: var(--uilib-accordion-header-font-weight);
+    cursor: pointer;
+    border: none;
+    outline: none;
+
+    &:hover {
+      background: var(--uilib-accordion-header-bg-hover);
+    }
+
+    &:focus-visible {
+      box-shadow: var(--uilib-accordion-focus-ring);
+    }
+
+    .accordion-panel-title {
+      flex: 1 1 auto;
+    }
+
+    .accordion-panel-icon {
+      width: var(--uilib-accordion-icon-size);
+      height: var(--uilib-accordion-icon-size);
+      color: var(--uilib-accordion-icon-color);
+      transition: var(--uilib-accordion-icon-transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      &.expanded {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .accordion-panel-content {
+    background: var(--uilib-accordion-content-bg);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--uilib-accordion-transition-duration)
+      var(--uilib-accordion-transition-easing);
+
+    &.expanded {
+      grid-template-rows: 1fr;
+    }
+
+    > .accordion-panel-body {
+      overflow: hidden;
+      padding: var(--uilib-accordion-content-padding);
+    }
+  }
+}
+
+/* Material */
+.ui-lib-accordion.accordion-variant-material {
+  .ui-lib-accordion-panel {
+    box-shadow: var(--uilib-shadow-md);
+    transition: box-shadow 150ms ease, transform 150ms ease;
+    border: none;
+
+    &:hover {
+      box-shadow: var(--uilib-shadow-lg);
+    }
+  }
+}
+
+/* Bootstrap */
+.ui-lib-accordion.accordion-variant-bootstrap {
+  .ui-lib-accordion-panel {
+    border-radius: 0;
+    border-left: var(--uilib-accordion-panel-border);
+    border-right: var(--uilib-accordion-panel-border);
+
+    &:first-child {
+      border-top: var(--uilib-accordion-panel-border);
+      border-top-left-radius: var(--uilib-accordion-border-radius);
+      border-top-right-radius: var(--uilib-accordion-border-radius);
+    }
+
+    &:last-child {
+      border-bottom: var(--uilib-accordion-panel-border);
+      border-bottom-left-radius: var(--uilib-accordion-border-radius);
+      border-bottom-right-radius: var(--uilib-accordion-border-radius);
+    }
+
+    .accordion-panel-header:hover {
+      background: var(--uilib-color-surface-hover);
+    }
+  }
+}
+
+/* Minimal */
+.ui-lib-accordion.accordion-variant-minimal {
+  .ui-lib-accordion-panel {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    .accordion-panel-header {
+      background: transparent;
+      border-bottom: 1px solid var(--uilib-color-border-subtle);
+
+      &:hover {
+        background: var(--uilib-color-surface-subtle);
+      }
+    }
+
+    .accordion-panel-content {
+      border-bottom: 1px solid var(--uilib-color-border-subtle);
+    }
+
+    &:last-child .accordion-panel-content {
+      border-bottom: none;
+    }
+  }
+}

@@ -32,3 +32,13 @@ export * from './lib/tabs/tab';
 export { TabLabel } from './lib/tabs/tab';
 export * from './lib/tabs/tab-panel';
 export * from './lib/tabs/tabs.types';
+
+// Accordion
+export { Accordion } from './lib/accordion/accordion';
+export { AccordionPanel } from './lib/accordion/accordion-panel';
+export type {
+  AccordionVariant,
+  AccordionSize,
+  AccordionExpandMode,
+  AccordionChangeEvent,
+} from './lib/accordion/accordion.types';

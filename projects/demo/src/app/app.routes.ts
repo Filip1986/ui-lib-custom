@@ -48,6 +48,12 @@ export const routes: Routes = [
       import('./pages/icons/icons-demo.component').then((m) => m.IconsDemoComponent),
     title: 'Icons - UI Components Library',
   },
+  {
+    path: 'accordion',
+    loadComponent: () =>
+      import('./pages/accordion/accordion.component').then((m) => m.AccordionComponent),
+    title: 'Accordion - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

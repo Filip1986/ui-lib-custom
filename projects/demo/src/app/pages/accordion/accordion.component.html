@@ -1,0 +1,292 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Accordion</h1>
+    <p class="doc-description">
+      Expand and collapse content panels with accessible keyboard navigation, variants, and signal
+      inputs.
+    </p>
+  </div>
+
+  <div class="doc-tabs">
+    <ui-lib-tabs
+      variant="minimal"
+      size="small"
+      [selectedValue]="activeTab()"
+      (selectedChange)="onTabChange($event.value)"
+    >
+      <ui-lib-tab value="playground" label="Playground" />
+      <ui-lib-tab value="variants" label="Variants" />
+      <ui-lib-tab value="sizes" label="Sizes" />
+      <ui-lib-tab value="controlled" label="Controlled" />
+      <ui-lib-tab value="custom-headers" label="Custom Headers" />
+      <ui-lib-tab value="disabled" label="Disabled" />
+      <ui-lib-tab value="api-reference" label="API Reference" />
+      <ui-lib-tab value="accessibility" label="Accessibility" />
+    </ui-lib-tabs>
+  </div>
+
+  @if (activeTab() === 'playground') {
+    <div class="doc-controls">
+      <app-doc-control-group title="Appearance" description="Variant and size" [columns]="3">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setVariant(v)"
+                >{{ v }}</ui-lib-button
+              >
+            }
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Size</label>
+          <div class="chips">
+            @for (s of sizes; track s) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="size() === s ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setSize(s)"
+                >{{ s }}</ui-lib-button
+              >
+            }
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Expand mode</label>
+          <div class="chips">
+            @for (mode of expandModes; track mode) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                variant="minimal"
+                [appearance]="expandMode() === mode ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="setExpandMode(mode)"
+                >{{ mode }}</ui-lib-button
+              >
+            }
+          </div>
+        </div>
+      </app-doc-control-group>
+    </div>
+
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+      <div card-header>Playground</div>
+      <p>Adjust the controls above to see the accordion update live.</p>
+
+      <app-doc-demo-viewport>
+        <div class="doc-demo" [appThemeScope]="appliedTheme()">
+          <ui-lib-accordion [variant]="variant()" [size]="size()" [expandMode]="expandMode()">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'variants') {
+    <div class="demo-grid" id="variants" data-doc-anchor>
+      @for (variant of variantExamples; track variant) {
+        <ui-lib-card [showHeader]="true" [showFooter]="false">
+          <div card-header>{{ variant | titlecase }} variant</div>
+          <app-doc-demo-viewport>
+            <div class="doc-demo">
+              <ui-lib-accordion [variant]="variant">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-card>
+      }
+    </div>
+  }
+
+  @if (activeTab() === 'sizes') {
+    <div class="demo-grid" id="sizes" data-doc-anchor>
+      @for (size of sizeExamples; track size) {
+        <ui-lib-card [showHeader]="true" [showFooter]="false">
+          <div card-header>Size: {{ size }}</div>
+          <app-doc-demo-viewport>
+            <div class="doc-demo">
+              <ui-lib-accordion [size]="size">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-card>
+      }
+    </div>
+  }
+
+  @if (activeTab() === 'controlled') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="controlled" data-doc-anchor>
+      <div card-header>Controlled mode</div>
+      <p>
+        Manage expanded panels externally via <code>expandedPanels</code> and respond to
+        <code>expandedChange</code>.
+      </p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-button
+            size="small"
+            variant="minimal"
+            appearance="ghost"
+            (click)="resetControlled()"
+            >Reset</ui-lib-button
+          >
+          <ui-lib-accordion
+            expandMode="multiple"
+            [expandedPanels]="controlledExpanded()"
+            (expandedChange)="toggleControlled($event.panelId)"
+          >
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+          <div class="controlled-state">
+            Expanded: {{ controlledExpanded().join(', ') || 'none' }}
+          </div>
+        </div>
+      </app-doc-demo-viewport>
+      <app-doc-code-snippet [code]="snippets.controlled" language="typescript" />
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'custom-headers') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="custom-headers" data-doc-anchor>
+      <div card-header>Custom headers</div>
+      <p>Use the <code>accordionHeader</code> directive for custom header content.</p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-accordion>
+            @for (item of customHeaderItems; track item.value) {
+              <ui-lib-accordion-panel [value]="item.value">
+                <div accordionHeader class="custom-header-row">
+                  <ui-lib-icon name="chevron-right" />
+                  <span>{{ item.header }}</span>
+                </div>
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+      <app-doc-code-snippet [code]="snippets.customHeader" language="html" />
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'disabled') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="disabled" data-doc-anchor>
+      <div card-header>Disabled panels</div>
+      <p>Disabled panels cannot be toggled and are skipped by keyboard navigation.</p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-accordion>
+            @for (item of disabledItems; track item.value) {
+              <ui-lib-accordion-panel
+                [header]="item.header"
+                [value]="item.value"
+                [disabled]="!!item.disabled"
+              >
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <div class="api-table">
+        <div class="api-row api-header">
+          <div>Name</div>
+          <div>Type</div>
+          <div>Description</div>
+        </div>
+        <div class="api-row">
+          <div>variant</div>
+          <div><code>AccordionVariant</code></div>
+          <div>Visual style: material | bootstrap | minimal.</div>
+        </div>
+        <div class="api-row">
+          <div>size</div>
+          <div><code>AccordionSize</code></div>
+          <div>Spacing scale: sm | md | lg.</div>
+        </div>
+        <div class="api-row">
+          <div>expandMode</div>
+          <div><code>'single' | 'multiple'</code></div>
+          <div>Allow one or many panels to be expanded.</div>
+        </div>
+        <div class="api-row">
+          <div>expandedPanels</div>
+          <div><code>string[]</code></div>
+          <div>Controlled list of expanded panel ids.</div>
+        </div>
+        <div class="api-row">
+          <div>defaultExpandedPanels</div>
+          <div><code>string[]</code></div>
+          <div>Uncontrolled initial expanded panels.</div>
+        </div>
+        <div class="api-row">
+          <div>expandedChange</div>
+          <div><code>Event&lt;AccordionChangeEvent&gt;</code></div>
+          <div>Emits on expansion state changes.</div>
+        </div>
+        <div class="api-row">
+          <div>panelToggle</div>
+          <div><code>Event&lt;AccordionChangeEvent&gt;</code></div>
+          <div>Emits every toggle interaction.</div>
+        </div>
+      </div>
+      <app-doc-code-snippet [code]="snippets.basic" language="html" />
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'accessibility') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
+      <div card-header>Accessibility</div>
+      <ul class="a11y-list">
+        <li>Header buttons use <code>role="button"</code> with <code>aria-expanded</code>.</li>
+        <li>
+          Panels use <code>role="region"</code> and link to headers via
+          <code>aria-labelledby</code>.
+        </li>
+        <li>Keyboard: Arrow Up/Down/Home/End for focus movement; Enter/Space toggles.</li>
+        <li>Disabled panels expose <code>aria-disabled="true"</code> and skip navigation.</li>
+        <li>
+          Focus ring visible on headers; content is hidden with <code>hidden</code> attribute when
+          collapsed.
+        </li>
+      </ul>
+    </ui-lib-card>
+  }
+</app-doc-page-layout>
