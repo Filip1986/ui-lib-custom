@@ -29,40 +29,9 @@ export class AccordionHeader {
 @Component({
   selector: 'ui-lib-accordion-panel',
   standalone: true,
-  imports: [CommonModule],
-  template: `
-    <button
-      #headerButton
-      type="button"
-      class="accordion-panel-header"
-      role="button"
-      [attr.id]="headerId()"
-      [attr.aria-expanded]="isExpanded()"
-      [attr.aria-controls]="panelId()"
-      [attr.aria-disabled]="disabled() ? true : null"
-      [attr.tabindex]="disabled() ? -1 : 0"
-      (click)="toggle()"
-      (keydown)="onKeydown($event)"
-    >
-      <ng-content select="[accordionHeader]" />
-      @if (!hasCustomHeader()) {
-        <span class="accordion-panel-title">{{ header() }}</span>
-      }
-      <span class="accordion-panel-icon" [class.expanded]="isExpanded()" aria-hidden="true"></span>
-    </button>
-    <div
-      class="accordion-panel-content"
-      [attr.id]="panelId()"
-      role="region"
-      [attr.aria-labelledby]="headerId()"
-      [attr.hidden]="isExpanded() ? null : ''"
-      [attr.data-state]="isExpanded() ? 'expanded' : 'collapsed'"
-    >
-      <div class="accordion-panel-body">
-        <ng-content />
-      </div>
-    </div>
-  `,
+  imports: [CommonModule, AccordionHeader],
+  templateUrl: './accordion-panel.html',
+  styleUrl: './accordion-panel.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'hostClasses()',

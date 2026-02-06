@@ -1,21 +1,24 @@
 :host,
 .ui-lib-accordion-panel {
-  --uilib-accordion-panel-bg: var(--uilib-color-surface);
-  --uilib-accordion-panel-border: 1px solid var(--uilib-color-border);
-  --uilib-accordion-panel-radius: var(--uilib-radius-md);
-  --uilib-accordion-header-padding: var(--uilib-spacing-4);
+  --uilib-accordion-panel-bg: var(--uilib-surface, #fff);
+  --uilib-accordion-panel-border: 1px solid var(--uilib-border, #e5e7eb);
+  --uilib-accordion-panel-radius: var(--uilib-radius-md, 0.5rem);
+  --uilib-accordion-header-padding: var(--uilib-space-4, 1rem);
   --uilib-accordion-header-bg: transparent;
-  --uilib-accordion-header-bg-hover: var(--uilib-color-surface-hover);
-  --uilib-accordion-header-color: var(--uilib-color-text);
-  --uilib-accordion-header-font-weight: var(--uilib-font-weight-medium);
-  --uilib-accordion-content-padding: var(--uilib-spacing-4);
-  --uilib-accordion-content-bg: var(--uilib-color-surface);
+  --uilib-accordion-header-bg-hover: var(
+    --uilib-surface-hover,
+    color-mix(in srgb, currentColor 6%, transparent)
+  );
+  --uilib-accordion-header-color: var(--uilib-page-fg, currentColor);
+  --uilib-accordion-header-font-weight: var(--uilib-font-weight-500, 500);
+  --uilib-accordion-content-padding: var(--uilib-space-4, 1rem);
+  --uilib-accordion-content-bg: var(--uilib-surface, #fff);
   --uilib-accordion-icon-size: 1.25rem;
-  --uilib-accordion-icon-color: var(--uilib-color-text-secondary);
-  --uilib-accordion-icon-transition: transform 200ms ease;
-  --uilib-accordion-focus-ring: 0 0 0 2px var(--uilib-color-primary-alpha);
-  --uilib-accordion-transition-duration: 200ms;
-  --uilib-accordion-transition-easing: ease-out;
+  --uilib-accordion-icon-color: var(--uilib-muted, currentColor);
+  --uilib-accordion-icon-transition: transform var(--uilib-transition-fast, 200ms ease);
+  --uilib-accordion-focus-ring: 0 0 0 2px var(--uilib-focus-ring-color, #2563eb55);
+  --uilib-accordion-transition-duration: var(--uilib-transition-fast-duration, 200ms);
+  --uilib-accordion-transition-easing: var(--uilib-transition-ease-out, ease-out);
 }
 
 .ui-lib-accordion-panel {
@@ -33,7 +36,7 @@
   .accordion-panel-header {
     display: flex;
     align-items: center;
-    gap: var(--uilib-spacing-2);
+    gap: var(--uilib-space-2, 0.5rem);
     width: 100%;
     padding: var(--uilib-accordion-header-padding);
     background: var(--uilib-accordion-header-bg);
@@ -91,12 +94,13 @@
 /* Material */
 .ui-lib-accordion.accordion-variant-material {
   .ui-lib-accordion-panel {
-    box-shadow: var(--uilib-shadow-md);
-    transition: box-shadow 150ms ease, transform 150ms ease;
+    box-shadow: var(--uilib-card-shadow, var(--uilib-shadow-md, none));
+    transition: box-shadow var(--uilib-transition-fast, 150ms ease),
+      transform var(--uilib-transition-fast, 150ms ease);
     border: none;
 
     &:hover {
-      box-shadow: var(--uilib-shadow-lg);
+      box-shadow: var(--uilib-shadow-lg, var(--uilib-card-shadow-hover, var(--uilib-shadow-lg, none)));
     }
   }
 }
@@ -121,7 +125,7 @@
     }
 
     .accordion-panel-header:hover {
-      background: var(--uilib-color-surface-hover);
+      background: var(--uilib-surface-hover, color-mix(in srgb, currentColor 6%, transparent));
     }
   }
 }
@@ -135,15 +139,15 @@
 
     .accordion-panel-header {
       background: transparent;
-      border-bottom: 1px solid var(--uilib-color-border-subtle);
+      border-bottom: 1px solid var(--uilib-border-subtle, #e5e7eb);
 
       &:hover {
-        background: var(--uilib-color-surface-subtle);
+        background: var(--uilib-surface-subtle, color-mix(in srgb, currentColor 4%, transparent));
       }
     }
 
     .accordion-panel-content {
-      border-bottom: 1px solid var(--uilib-color-border-subtle);
+      border-bottom: 1px solid var(--uilib-border-subtle, #e5e7eb);
     }
 
     &:last-child .accordion-panel-content {

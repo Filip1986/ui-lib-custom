@@ -1,7 +1,7 @@
 :host,
 .ui-lib-accordion {
-  --uilib-accordion-gap: var(--uilib-spacing-2);
-  --uilib-accordion-border-radius: var(--uilib-radius-md);
+  --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
+  --uilib-accordion-border-radius: var(--uilib-radius-md, 0.5rem);
 }
 
 .ui-lib-accordion {
@@ -10,15 +10,15 @@
   gap: var(--uilib-accordion-gap);
 
   &.accordion-variant-material {
-    --uilib-accordion-panel-bg: var(--uilib-color-surface);
+    --uilib-accordion-panel-bg: var(--uilib-surface, #fff);
     --uilib-accordion-panel-border: 1px solid transparent;
-    --uilib-accordion-panel-radius: var(--uilib-radius-md);
-    --uilib-accordion-gap: var(--uilib-spacing-2);
+    --uilib-accordion-panel-radius: var(--uilib-radius-md, 0.5rem);
+    --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
   }
 
   &.accordion-variant-bootstrap {
-    --uilib-accordion-panel-bg: var(--uilib-color-surface);
-    --uilib-accordion-panel-border: 1px solid var(--uilib-color-border);
+    --uilib-accordion-panel-bg: var(--uilib-surface, #fff);
+    --uilib-accordion-panel-border: 1px solid var(--uilib-border, #e5e7eb);
     --uilib-accordion-panel-radius: 0;
     --uilib-accordion-gap: 0;
   }
@@ -31,23 +31,23 @@
   }
 
   &.accordion-size-sm {
-    --uilib-accordion-header-padding: var(--uilib-spacing-3);
-    --uilib-accordion-content-padding: var(--uilib-spacing-3);
+    --uilib-accordion-header-padding: var(--uilib-space-3, 0.75rem);
+    --uilib-accordion-content-padding: var(--uilib-space-3, 0.75rem);
     --uilib-accordion-icon-size: 1rem;
-    font-size: var(--uilib-font-size-sm);
+    font-size: var(--uilib-font-size-sm, 0.875rem);
   }
 
   &.accordion-size-md {
-    --uilib-accordion-header-padding: var(--uilib-spacing-4);
-    --uilib-accordion-content-padding: var(--uilib-spacing-4);
+    --uilib-accordion-header-padding: var(--uilib-space-4, 1rem);
+    --uilib-accordion-content-padding: var(--uilib-space-4, 1rem);
     --uilib-accordion-icon-size: 1.25rem;
-    font-size: var(--uilib-font-size-md);
+    font-size: var(--uilib-font-size-md, 1rem);
   }
 
   &.accordion-size-lg {
-    --uilib-accordion-header-padding: var(--uilib-spacing-5);
-    --uilib-accordion-content-padding: var(--uilib-spacing-5);
+    --uilib-accordion-header-padding: var(--uilib-space-5, 1.25rem);
+    --uilib-accordion-content-padding: var(--uilib-space-5, 1.25rem);
     --uilib-accordion-icon-size: 1.5rem;
-    font-size: var(--uilib-font-size-lg);
+    font-size: var(--uilib-font-size-lg, 1.125rem);
   }
 }
