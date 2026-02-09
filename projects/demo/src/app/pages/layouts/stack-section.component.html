@@ -21,61 +21,84 @@
 
   @if (activeTab() === 'demo') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="stack" data-doc-anchor>
-      <div card-header>Stack demos</div>
-      <div class="doc-demo-group">
-        <h3>Vertical Stack (Default)</h3>
-        <app-doc-demo-viewport>
-          <div class="doc-demo centered">
+      <div card-header>Stack Playground</div>
+      <p>Adjust direction, spacing, alignment, and distribution to see changes live.</p>
+      <div class="doc-demo-group spacing-playground">
+        <ui-lib-stack spacing="lg" class="spacing-stack">
+          <div class="control-panel">
             <ui-lib-stack spacing="md">
-              <div class="demo-box">Item 1</div>
-              <div class="demo-box">Item 2</div>
-              <div class="demo-box">Item 3</div>
-            </ui-lib-stack>
-          </div>
-        </app-doc-demo-viewport>
-      </div>
+              <div class="panel-title">
+                <h4>Adjust stack</h4>
+                <ui-lib-button appearance="ghost" size="small" (click)="resetControls()"
+                  >Reset</ui-lib-button
+                >
+              </div>
+              <div class="control-grid">
+                <ui-lib-select
+                  label="Spacing"
+                  [options]="spacingOptions"
+                  [ngModel]="spacing()"
+                  (ngModelChange)="setSpacing($event)"
+                />
+                <ui-lib-select
+                  label="Direction"
+                  [options]="directionOptions"
+                  [ngModel]="direction()"
+                  (ngModelChange)="setDirection($event)"
+                />
+                <ui-lib-select
+                  label="Align"
+                  [options]="alignOptions"
+                  [ngModel]="align()"
+                  (ngModelChange)="setAlign($event)"
+                />
+                <ui-lib-select
+                  label="Justify"
+                  [options]="justifyOptions"
+                  [ngModel]="justify()"
+                  (ngModelChange)="setJustify($event)"
+                />
+              </div>
 
-      <div class="doc-demo-group">
-        <h3>Horizontal Stack</h3>
-        <app-doc-demo-viewport>
-          <div class="doc-demo centered">
-            <ui-lib-stack direction="horizontal" spacing="md">
-              <div class="demo-box">Item 1</div>
-              <div class="demo-box">Item 2</div>
-              <div class="demo-box">Item 3</div>
+              <div class="token-readouts">
+                <span>Spacing: {{ spacingLabel() }}</span>
+                <span>Direction: {{ direction() }}</span>
+                <span>Align: {{ alignLabel() }}</span>
+                <span>Justify: {{ justifyLabel() }}</span>
+              </div>
             </ui-lib-stack>
           </div>
-        </app-doc-demo-viewport>
-      </div>
 
-      <div class="doc-demo-group">
-        <h3>Centered Stack</h3>
-        <app-doc-demo-viewport>
-          <div class="doc-demo centered">
-            <ui-lib-stack spacing="sm" align="center" justify="center" style="min-height: 200px">
-              <div class="demo-box">Centered Item 1</div>
-              <div class="demo-box">Centered Item 2</div>
-            </ui-lib-stack>
-          </div>
-        </app-doc-demo-viewport>
-      </div>
+          <app-doc-demo-viewport>
+            <div class="doc-demo spacing-preview">
+              <ui-lib-grid spacing="md" [columns]="2" class="preview-grid">
+                <ui-lib-stack spacing="sm" class="preview-block">
+                  <h4>Live stack</h4>
+                  <ui-lib-stack
+                    [direction]="direction()"
+                    [align]="align()"
+                    [justify]="justify()"
+                    [spacing]="spacing()"
+                    style="min-height: 220px"
+                  >
+                    <div class="demo-box">Item 1</div>
+                    <div class="demo-box">Item 2</div>
+                    <div class="demo-box">Item 3</div>
+                  </ui-lib-stack>
+                </ui-lib-stack>
 
-      <div class="doc-demo-group">
-        <h3>Space Between</h3>
-        <app-doc-demo-viewport>
-          <div class="doc-demo centered">
-            <ui-lib-stack
-              direction="horizontal"
-              justify="space-between"
-              spacing="sm"
-              style="width: 100%"
-            >
-              <div class="demo-box">Left</div>
-              <div class="demo-box">Center</div>
-              <div class="demo-box">Right</div>
-            </ui-lib-stack>
-          </div>
-        </app-doc-demo-viewport>
+                <ui-lib-stack spacing="sm" class="preview-block">
+                  <h4>Toolbar</h4>
+                  <ui-lib-stack direction="horizontal" [justify]="justify()" [spacing]="spacing()">
+                    <div class="demo-box">Left</div>
+                    <div class="demo-box">Center</div>
+                    <div class="demo-box">Right</div>
+                  </ui-lib-stack>
+                </ui-lib-stack>
+              </ui-lib-grid>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-stack>
       </div>
     </ui-lib-card>
   }

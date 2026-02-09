@@ -33,30 +33,32 @@
                   >Reset</ui-lib-button
                 >
               </div>
-              <ui-lib-select
-                label="Stack spacing"
-                [options]="stackOptions"
-                [ngModel]="stackSpacing()"
-                (ngModelChange)="setStackSpacing($event)"
-              />
-              <ui-lib-select
-                label="Inline spacing"
-                [options]="inlineOptions"
-                [ngModel]="inlineSpacing()"
-                (ngModelChange)="setInlineSpacing($event)"
-              />
-              <ui-lib-select
-                label="Grid spacing"
-                [options]="stackOptions"
-                [ngModel]="gridSpacing()"
-                (ngModelChange)="setGridSpacing($event)"
-              />
-              <ui-lib-select
-                label="Container inset"
-                [options]="insetOptions"
-                [ngModel]="inset()"
-                (ngModelChange)="setInset($event)"
-              />
+              <div class="control-grid">
+                <ui-lib-select
+                  label="Stack spacing"
+                  [options]="stackOptions"
+                  [ngModel]="stackSpacing()"
+                  (ngModelChange)="setStackSpacing($event)"
+                />
+                <ui-lib-select
+                  label="Inline spacing"
+                  [options]="inlineOptions"
+                  [ngModel]="inlineSpacing()"
+                  (ngModelChange)="setInlineSpacing($event)"
+                />
+                <ui-lib-select
+                  label="Grid spacing"
+                  [options]="stackOptions"
+                  [ngModel]="gridSpacing()"
+                  (ngModelChange)="setGridSpacing($event)"
+                />
+                <ui-lib-select
+                  label="Container inset"
+                  [options]="insetOptions"
+                  [ngModel]="inset()"
+                  (ngModelChange)="setInset($event)"
+                />
+              </div>
 
               <div class="token-readouts">
                 <span>Stack gap: {{ stackSpacingLabel() }}</span>
