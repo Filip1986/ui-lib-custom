@@ -1,53 +1,170 @@
 <ui-lib-card [showHeader]="true" [showFooter]="false" id="themed-layouts" data-doc-anchor>
   <div card-header>Themed Layouts</div>
   <p>
-    Layout primitives inherit CSS variables. Scoped <code>data-theme</code> shows light/dark
-    surfaces.
+    Layout primitives inherit CSS variables. Use scoped themes to preview light/dark surfaces side
+    by side.
   </p>
 
-  <app-doc-demo-viewport>
-    <div class="theme-grid">
-      <div class="theme-panel" data-theme="light">
-        <div class="panel-header">Light Theme</div>
-        <div class="panel-body">
-          <ui-lib-container size="md" inset="md" style="background: var(--uilib-surface, #fff)">
-            <ui-lib-stack spacing="md">
-              <h4>Stack + Inline</h4>
-              <ui-lib-inline spacing="sm">
-                <span class="demo-tag">Item A</span>
-                <span class="demo-tag">Item B</span>
-                <span class="demo-tag">Item C</span>
-              </ui-lib-inline>
-              <ui-lib-grid [columns]="3" spacing="sm">
-                @for (i of [1, 2, 3]; track i) {
-                  <div class="demo-grid-cell">Cell {{ i }}</div>
-                }
-              </ui-lib-grid>
-            </ui-lib-stack>
-          </ui-lib-container>
-        </div>
-      </div>
+  <div class="doc-tabs">
+    <ui-lib-tabs
+      variant="minimal"
+      size="small"
+      [selectedValue]="activeTab()"
+      (selectedChange)="onTabChange($event.value)"
+    >
+      <ui-lib-tab value="demo" label="Demo" />
+      <ui-lib-tab value="usage" label="Usage" />
+      <ui-lib-tab value="api" label="API Reference" />
+    </ui-lib-tabs>
+  </div>
 
-      <div class="theme-panel" data-theme="dark">
-        <div class="panel-header">Dark Theme</div>
-        <div class="panel-body">
-          <ui-lib-container size="md" inset="md" style="background: var(--uilib-surface, #1a1c1f)">
-            <ui-lib-stack spacing="md">
-              <h4>Stack + Inline</h4>
-              <ui-lib-inline spacing="sm">
-                <span class="demo-tag">Item A</span>
-                <span class="demo-tag">Item B</span>
-                <span class="demo-tag">Item C</span>
-              </ui-lib-inline>
-              <ui-lib-grid [columns]="3" spacing="sm">
-                @for (i of [1, 2, 3]; track i) {
-                  <div class="demo-grid-cell">Cell {{ i }}</div>
-                }
-              </ui-lib-grid>
-            </ui-lib-stack>
-          </ui-lib-container>
+  @if (activeTab() === 'demo') {
+    <div class="doc-demo-group spacing-playground">
+      <ui-lib-stack spacing="lg" class="spacing-stack">
+        <div class="control-panel">
+          <ui-lib-stack spacing="md">
+            <div class="panel-title">
+              <h4>Adjust themes</h4>
+              <ui-lib-button appearance="ghost" size="small" (click)="resetControls()"
+                >Reset</ui-lib-button
+              >
+            </div>
+            <div class="control-grid">
+              <ui-lib-select
+                label="Container size"
+                [options]="sizeOptions"
+                [ngModel]="containerSize()"
+                (ngModelChange)="setContainerSize($event)"
+              />
+              <ui-lib-select
+                label="Container inset"
+                [options]="insetOptions"
+                [ngModel]="containerInset()"
+                (ngModelChange)="setContainerInset($event)"
+              />
+              <ui-lib-select
+                label="Stack spacing"
+                [options]="spacingOptions"
+                [ngModel]="stackSpacing()"
+                (ngModelChange)="setStackSpacing($event)"
+              />
+              <ui-lib-select
+                label="Inline spacing"
+                [options]="inlineSpacingOptions"
+                [ngModel]="inlineSpacing()"
+                (ngModelChange)="setInlineSpacing($event)"
+              />
+              <ui-lib-select
+                label="Grid spacing"
+                [options]="spacingOptions"
+                [ngModel]="gridSpacing()"
+                (ngModelChange)="setGridSpacing($event)"
+              />
+              <ui-lib-select
+                label="Grid columns"
+                [options]="columnOptions"
+                [ngModel]="columns()"
+                (ngModelChange)="setColumns($event)"
+              />
+              <ui-lib-select
+                label="Left theme"
+                [options]="themeOptions"
+                [ngModel]="leftTheme()"
+                (ngModelChange)="setLeftTheme($event)"
+              />
+              <ui-lib-select
+                label="Right theme"
+                [options]="themeOptions"
+                [ngModel]="rightTheme()"
+                (ngModelChange)="setRightTheme($event)"
+              />
+            </div>
+
+            <div class="token-readouts">
+              <span>Container: {{ sizeLabel() }} / {{ insetLabel() }}</span>
+              <span>Stack gap: {{ stackLabel() }}</span>
+              <span>Inline gap: {{ inlineLabel() }}</span>
+              <span>Grid: {{ columnsLabel() }}, gap {{ gridSpacingLabel() }}</span>
+              <span>Themes: {{ themePairLabel() }}</span>
+            </div>
+          </ui-lib-stack>
         </div>
-      </div>
+
+        <app-doc-demo-viewport>
+          <div class="theme-grid">
+            <div class="theme-panel" [attr.data-theme]="leftTheme()">
+              <div class="panel-header">{{ leftTheme() | titlecase }} Theme</div>
+              <div class="panel-body">
+                <ui-lib-container
+                  [size]="containerSize()"
+                  [inset]="containerInset()"
+                  style="background: var(--uilib-surface)"
+                >
+                  <ui-lib-stack [spacing]="stackSpacing()">
+                    <h4>Stack + Inline</h4>
+                    <ui-lib-inline [spacing]="inlineSpacing()">
+                      <span class="demo-tag">Item A</span>
+                      <span class="demo-tag">Item B</span>
+                      <span class="demo-tag">Item C</span>
+                    </ui-lib-inline>
+                    <ui-lib-grid [columns]="columns()" [spacing]="gridSpacing()">
+                      @for (i of [1, 2, 3, 4]; track i) {
+                        <div class="demo-grid-cell">Cell {{ i }}</div>
+                      }
+                    </ui-lib-grid>
+                  </ui-lib-stack>
+                </ui-lib-container>
+              </div>
+            </div>
+
+            <div class="theme-panel" [attr.data-theme]="rightTheme()">
+              <div class="panel-header">{{ rightTheme() | titlecase }} Theme</div>
+              <div class="panel-body">
+                <ui-lib-container
+                  [size]="containerSize()"
+                  [inset]="containerInset()"
+                  style="background: var(--uilib-surface)"
+                >
+                  <ui-lib-stack [spacing]="stackSpacing()">
+                    <h4>Stack + Inline</h4>
+                    <ui-lib-inline [spacing]="inlineSpacing()">
+                      <span class="demo-tag">Item A</span>
+                      <span class="demo-tag">Item B</span>
+                      <span class="demo-tag">Item C</span>
+                    </ui-lib-inline>
+                    <ui-lib-grid [columns]="columns()" [spacing]="gridSpacing()">
+                      @for (i of [1, 2, 3, 4]; track i) {
+                        <div class="demo-grid-cell">Cell {{ i }}</div>
+                      }
+                    </ui-lib-grid>
+                  </ui-lib-stack>
+                </ui-lib-container>
+              </div>
+            </div>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-stack>
     </div>
-  </app-doc-demo-viewport>
+  }
+
+  @if (activeTab() === 'usage') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false">
+      <div card-header>Usage</div>
+      <p class="no-margin">
+        Use <code>data-theme</code> scopes or theme services to preview palettes.
+      </p>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'api') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false">
+      <div card-header>API Reference</div>
+      <div class="doc-demo-group">
+        <p>
+          Scoped themes are applied via <code>data-theme</code> plus your CSS variables. Layout
+          props respond to semantic spacing and inset tokens.
+        </p>
+      </div>
+    </ui-lib-card>
+  }
 </ui-lib-card>
