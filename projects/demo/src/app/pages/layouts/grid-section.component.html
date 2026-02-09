@@ -19,45 +19,95 @@
 
   @if (activeTab() === 'demo') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="grid" data-doc-anchor>
-      <div card-header>Grid demos</div>
-      <div class="doc-demo-group">
-        <h3>12 Column Grid</h3>
-        <app-doc-demo-viewport>
-          <div class="doc-demo">
-            <ui-lib-grid [columns]="12" spacing="sm">
-              @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; track i) {
-                <div class="demo-grid-cell">{{ i }}</div>
-              }
-            </ui-lib-grid>
-          </div>
-        </app-doc-demo-viewport>
-      </div>
+      <div card-header>Grid Playground</div>
+      <p>Experiment with column counts, gaps, alignment, and responsive min widths.</p>
+      <div class="doc-demo-group spacing-playground">
+        <ui-lib-stack spacing="lg" class="spacing-stack">
+          <div class="control-panel">
+            <ui-lib-stack spacing="md">
+              <div class="panel-title">
+                <h4>Adjust grid</h4>
+                <ui-lib-button appearance="ghost" size="small" (click)="resetControls()"
+                  >Reset</ui-lib-button
+                >
+              </div>
+              <div class="control-grid">
+                <ui-lib-select
+                  label="Spacing"
+                  [options]="spacingOptions"
+                  [ngModel]="spacing()"
+                  (ngModelChange)="setSpacing($event)"
+                />
+                <ui-lib-select
+                  label="Columns"
+                  [options]="columnOptions"
+                  [ngModel]="columns()"
+                  (ngModelChange)="setColumns($event)"
+                />
+                <ui-lib-select
+                  label="Min column width"
+                  [options]="minWidthOptions"
+                  [ngModel]="minWidth()"
+                  (ngModelChange)="setMinWidth($event)"
+                />
+                <ui-lib-select
+                  label="Align"
+                  [options]="alignOptions"
+                  [ngModel]="align()"
+                  (ngModelChange)="setAlign($event)"
+                />
+                <ui-lib-select
+                  label="Justify"
+                  [options]="justifyOptions"
+                  [ngModel]="justify()"
+                  (ngModelChange)="setJustify($event)"
+                />
+              </div>
 
-      <div class="doc-demo-group">
-        <h3>4 Column Grid</h3>
-        <app-doc-demo-viewport>
-          <div class="doc-demo">
-            <ui-lib-grid [columns]="4" spacing="md">
-              @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
-                <div class="demo-grid-cell">Cell {{ i }}</div>
-              }
-            </ui-lib-grid>
+              <div class="token-readouts">
+                <span>Spacing: {{ spacingLabel() }}</span>
+                <span>Columns: {{ columnLabel() }}</span>
+                <span>Min width: {{ minWidthLabel() }}</span>
+                <span>Align: {{ alignLabel() }}</span>
+                <span>Justify: {{ justifyLabel() }}</span>
+              </div>
+            </ui-lib-stack>
           </div>
-        </app-doc-demo-viewport>
-      </div>
 
-      <div class="doc-demo-group">
-        <h3>Responsive Grid (auto-fit)</h3>
-        <p>Resize the window to see this grid adapt.</p>
-        <app-doc-demo-viewport>
-          <div class="doc-demo">
-            <ui-lib-grid spacing="lg" minColumnWidth="200px">
-              @for (i of [1, 2, 3, 4, 5, 6]; track i) {
-                <div class="demo-grid-cell large">Card {{ i }}</div>
-              }
-            </ui-lib-grid>
-          </div>
-        </app-doc-demo-viewport>
+          <app-doc-demo-viewport>
+            <div class="doc-demo spacing-preview">
+              <ui-lib-grid spacing="md" [columns]="2" class="preview-grid">
+                <ui-lib-stack spacing="sm" class="preview-block">
+                  <h4>Fixed grid</h4>
+                  <ui-lib-grid
+                    [columns]="columns()"
+                    [spacing]="spacing()"
+                    [align]="align()"
+                    [justify]="justify()"
+                  >
+                    @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+                      <div class="demo-grid-cell">Cell {{ i }}</div>
+                    }
+                  </ui-lib-grid>
+                </ui-lib-stack>
+
+                <ui-lib-stack spacing="sm" class="preview-block">
+                  <h4>Responsive (auto-fit)</h4>
+                  <ui-lib-grid
+                    [spacing]="spacing()"
+                    [minColumnWidth]="minWidth() || undefined"
+                    [align]="align()"
+                    [justify]="justify()"
+                  >
+                    @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+                      <div class="demo-grid-cell large">Card {{ i }}</div>
+                    }
+                  </ui-lib-grid>
+                </ui-lib-stack>
+              </ui-lib-grid>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-stack>
       </div>
     </ui-lib-card>
   }
