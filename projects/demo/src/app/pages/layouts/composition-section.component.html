@@ -1,48 +1,91 @@
-<ui-lib-card [showHeader]="true" [showFooter]="false" id="composition" data-doc-anchor>
-  <div card-header>Composition</div>
-  <p>Layout primitives can be composed together for complex layouts.</p>
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Composition</h1>
+    <p class="doc-description">
+      Compose layout primitives together for dashboards and page scaffolds.
+    </p>
+  </div>
 
-  <app-doc-demo-viewport>
-    <div class="doc-demo">
-      <ui-lib-container size="lg" inset="lg">
-        <ui-lib-stack spacing="lg">
-          <h3>Dashboard Layout</h3>
-          <ui-lib-grid [columns]="3" spacing="md">
-            <div class="demo-card">
-              <ui-lib-stack spacing="sm">
-                <h4>Card 1</h4>
-                <p>Content goes here</p>
-                <ui-lib-inline spacing="sm">
-                  <span class="demo-tag">Tag 1</span>
-                  <span class="demo-tag">Tag 2</span>
-                </ui-lib-inline>
-              </ui-lib-stack>
-            </div>
+  <div class="doc-tabs">
+    <ui-lib-tabs
+      variant="minimal"
+      size="small"
+      [selectedValue]="activeTab()"
+      (selectedChange)="onTabChange($event.value)"
+    >
+      <ui-lib-tab value="demo" label="Demo" />
+      <ui-lib-tab value="usage" label="Usage" />
+      <ui-lib-tab value="api" label="API Reference" />
+    </ui-lib-tabs>
+  </div>
 
-            <div class="demo-card">
-              <ui-lib-stack spacing="sm">
-                <h4>Card 2</h4>
-                <p>Content goes here</p>
-                <ui-lib-inline spacing="sm">
-                  <span class="demo-tag">Tag 3</span>
-                </ui-lib-inline>
-              </ui-lib-stack>
-            </div>
+  @if (activeTab() === 'demo') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="composition" data-doc-anchor>
+      <div card-header>Composition demo</div>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-container size="lg" inset="lg">
+            <ui-lib-stack spacing="lg">
+              <h3>Dashboard Layout</h3>
+              <ui-lib-grid [columns]="3" spacing="md">
+                <div class="demo-card">
+                  <ui-lib-stack spacing="sm">
+                    <h4>Card 1</h4>
+                    <p>Content goes here</p>
+                    <ui-lib-inline spacing="sm">
+                      <span class="demo-tag">Tag 1</span>
+                      <span class="demo-tag">Tag 2</span>
+                    </ui-lib-inline>
+                  </ui-lib-stack>
+                </div>
 
-            <div class="demo-card">
-              <ui-lib-stack spacing="sm">
-                <h4>Card 3</h4>
-                <p>Content goes here</p>
-                <ui-lib-inline spacing="sm">
-                  <span class="demo-tag">Tag 4</span>
-                  <span class="demo-tag">Tag 5</span>
-                  <span class="demo-tag">Tag 6</span>
-                </ui-lib-inline>
-              </ui-lib-stack>
-            </div>
-          </ui-lib-grid>
-        </ui-lib-stack>
-      </ui-lib-container>
-    </div>
-  </app-doc-demo-viewport>
-</ui-lib-card>
+                <div class="demo-card">
+                  <ui-lib-stack spacing="sm">
+                    <h4>Card 2</h4>
+                    <p>Content goes here</p>
+                    <ui-lib-inline spacing="sm">
+                      <span class="demo-tag">Tag 3</span>
+                    </ui-lib-inline>
+                  </ui-lib-stack>
+                </div>
+
+                <div class="demo-card">
+                  <ui-lib-stack spacing="sm">
+                    <h4>Card 3</h4>
+                    <p>Content goes here</p>
+                    <ui-lib-inline spacing="sm">
+                      <span class="demo-tag">Tag 4</span>
+                      <span class="demo-tag">Tag 5</span>
+                      <span class="demo-tag">Tag 6</span>
+                    </ui-lib-inline>
+                  </ui-lib-stack>
+                </div>
+              </ui-lib-grid>
+            </ui-lib-stack>
+          </ui-lib-container>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'usage') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false">
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Usage" [code]="usageSnippet"></app-doc-code-snippet>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'api') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false">
+      <div card-header>API Reference</div>
+      <div class="doc-demo-group">
+        <p>Composition combines Stack, Inline, Grid, and Container props. Key props include:</p>
+        <ul>
+          <li><code>spacing</code> on Stack/Inline/Grid for consistent gaps.</li>
+          <li><code>columns</code> or <code>minColumnWidth</code> on Grid for layout control.</li>
+          <li><code>inset</code> and <code>size</code> on Container for padding and max-width.</li>
+        </ul>
+      </div>
+    </ui-lib-card>
+  }
+</app-doc-page-layout>
