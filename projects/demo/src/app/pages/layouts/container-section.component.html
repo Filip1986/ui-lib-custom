@@ -19,31 +19,79 @@
 
   @if (activeTab() === 'demo') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="container" data-doc-anchor>
-      <div card-header>Container demos</div>
-      <app-doc-demo-viewport>
-        <div class="doc-demo stacked">
-          <ui-lib-container size="sm" inset="md" style="background: #f5f5f5">
-            <p>
-              This is a small container (max-width: 640px). Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit.
-            </p>
-          </ui-lib-container>
+      <div card-header>Container Playground</div>
+      <p>Change max-width, inset padding, and centering to see containers adapt.</p>
+      <div class="doc-demo-group spacing-playground">
+        <ui-lib-stack spacing="lg" class="spacing-stack">
+          <div class="control-panel">
+            <ui-lib-stack spacing="md">
+              <div class="panel-title">
+                <h4>Adjust container</h4>
+                <ui-lib-button appearance="ghost" size="small" (click)="resetControls()"
+                  >Reset</ui-lib-button
+                >
+              </div>
+              <div class="control-grid">
+                <ui-lib-select
+                  label="Size"
+                  [options]="sizeOptions"
+                  [ngModel]="size()"
+                  (ngModelChange)="setSize($event)"
+                />
+                <ui-lib-select
+                  label="Inset"
+                  [options]="insetOptions"
+                  [ngModel]="inset()"
+                  (ngModelChange)="setInset($event)"
+                />
+                <ui-lib-select
+                  label="Centering"
+                  [options]="centeredOptions"
+                  [ngModel]="centered()"
+                  (ngModelChange)="setCentered($event)"
+                />
+              </div>
 
-          <ui-lib-container size="md" inset="lg" style="background: #f5f5f5">
-            <p>
-              This is a medium container (max-width: 768px). Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit.
-            </p>
-          </ui-lib-container>
+              <div class="token-readouts">
+                <span>Size: {{ sizeLabel() }}</span>
+                <span>Inset: {{ insetLabel() }}</span>
+                <span>Centering: {{ centeredLabel() }}</span>
+              </div>
+            </ui-lib-stack>
+          </div>
 
-          <ui-lib-container size="lg" inset="xl" style="background: #f5f5f5">
-            <p>
-              This is a large container (max-width: 1024px). Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit.
-            </p>
-          </ui-lib-container>
-        </div>
-      </app-doc-demo-viewport>
+          <app-doc-demo-viewport>
+            <div class="doc-demo spacing-preview">
+              <ui-lib-grid spacing="md" [columns]="2" class="preview-grid">
+                <ui-lib-stack spacing="sm" class="preview-block">
+                  <h4>Content area</h4>
+                  <ui-lib-container
+                    [size]="size()"
+                    [inset]="inset()"
+                    [centered]="centered()"
+                    style="background: #f5f5f5"
+                  >
+                    <h4 class="no-margin">Semantic container</h4>
+                    <p class="no-margin">Max-width and padding respond to your selections.</p>
+                  </ui-lib-container>
+                </ui-lib-stack>
+
+                <ui-lib-stack spacing="sm" class="preview-block">
+                  <h4>Callout</h4>
+                  <ui-lib-container
+                    [size]="size()"
+                    [inset]="inset()"
+                    [centered]="centered()"
+                    style="background: var(--uilib-surface-alt, #eef2f7)"
+                  >
+                    <p class="no-margin">Use containers to align sections with page gutters.</p>
+                  </ui-lib-container>
+                </ui-lib-stack>
+              </ui-lib-grid>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-stack>
+      </div>
     </ui-lib-card>
   }
 
