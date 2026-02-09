@@ -21,50 +21,144 @@
 
   @if (activeTab() === 'demo') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="composition" data-doc-anchor>
-      <div card-header>Composition demo</div>
-      <app-doc-demo-viewport>
-        <div class="doc-demo">
-          <ui-lib-container size="lg" inset="lg">
-            <ui-lib-stack spacing="lg">
-              <h3>Dashboard Layout</h3>
-              <ui-lib-grid [columns]="3" spacing="md">
-                <div class="demo-card">
-                  <ui-lib-stack spacing="sm">
-                    <h4>Card 1</h4>
-                    <p>Content goes here</p>
-                    <ui-lib-inline spacing="sm">
-                      <span class="demo-tag">Tag 1</span>
-                      <span class="demo-tag">Tag 2</span>
-                    </ui-lib-inline>
-                  </ui-lib-stack>
-                </div>
+      <div card-header>Composition Playground</div>
+      <p>Tweak container, stack, and grid props to see a dashboard layout adapt in real time.</p>
+      <div class="doc-demo-group spacing-playground">
+        <ui-lib-stack spacing="lg" class="spacing-stack">
+          <div class="control-panel">
+            <ui-lib-stack spacing="md">
+              <div class="panel-title">
+                <h4>Adjust layout</h4>
+                <ui-lib-button appearance="ghost" size="small" (click)="resetControls()"
+                  >Reset</ui-lib-button
+                >
+              </div>
+              <div class="control-grid">
+                <ui-lib-select
+                  label="Container size"
+                  [options]="sizeOptions"
+                  [ngModel]="containerSize()"
+                  (ngModelChange)="setContainerSize($event)"
+                />
+                <ui-lib-select
+                  label="Container inset"
+                  [options]="insetOptions"
+                  [ngModel]="containerInset()"
+                  (ngModelChange)="setContainerInset($event)"
+                />
+                <ui-lib-select
+                  label="Stack spacing"
+                  [options]="spacingOptions"
+                  [ngModel]="stackSpacing()"
+                  (ngModelChange)="setStackSpacing($event)"
+                />
+                <ui-lib-select
+                  label="Grid spacing"
+                  [options]="spacingOptions"
+                  [ngModel]="gridSpacing()"
+                  (ngModelChange)="setGridSpacing($event)"
+                />
+                <ui-lib-select
+                  label="Grid columns"
+                  [options]="gridColumnOptions"
+                  [ngModel]="gridColumns()"
+                  (ngModelChange)="setGridColumns($event)"
+                />
+                <ui-lib-select
+                  label="Grid min width"
+                  [options]="minWidthOptions"
+                  [ngModel]="gridMinWidth()"
+                  (ngModelChange)="setGridMinWidth($event)"
+                />
+                <ui-lib-select
+                  label="Grid align"
+                  [options]="alignOptions"
+                  [ngModel]="gridAlign()"
+                  (ngModelChange)="setGridAlign($event)"
+                />
+                <ui-lib-select
+                  label="Grid justify"
+                  [options]="justifyOptions"
+                  [ngModel]="gridJustify()"
+                  (ngModelChange)="setGridJustify($event)"
+                />
+                <ui-lib-select
+                  label="Inline spacing"
+                  [options]="inlineSpacingOptions"
+                  [ngModel]="inlineSpacing()"
+                  (ngModelChange)="setInlineSpacing($event)"
+                />
+              </div>
 
-                <div class="demo-card">
-                  <ui-lib-stack spacing="sm">
-                    <h4>Card 2</h4>
-                    <p>Content goes here</p>
-                    <ui-lib-inline spacing="sm">
-                      <span class="demo-tag">Tag 3</span>
-                    </ui-lib-inline>
-                  </ui-lib-stack>
-                </div>
-
-                <div class="demo-card">
-                  <ui-lib-stack spacing="sm">
-                    <h4>Card 3</h4>
-                    <p>Content goes here</p>
-                    <ui-lib-inline spacing="sm">
-                      <span class="demo-tag">Tag 4</span>
-                      <span class="demo-tag">Tag 5</span>
-                      <span class="demo-tag">Tag 6</span>
-                    </ui-lib-inline>
-                  </ui-lib-stack>
-                </div>
-              </ui-lib-grid>
+              <div class="token-readouts">
+                <span>Container: {{ sizeLabel() }} / {{ insetLabel() }}</span>
+                <span>Stack spacing: {{ stackLabel() }}</span>
+                <span
+                  >Grid: {{ gridColumnsLabel() }}, gap {{ gridSpacingLabel() }}, min
+                  {{ gridMinWidthLabel() }}</span
+                >
+                <span>Grid align/justify: {{ gridAlignLabel() }} / {{ gridJustifyLabel() }}</span>
+                <span>Inline spacing: {{ inlineSpacingLabel() }}</span>
+              </div>
             </ui-lib-stack>
-          </ui-lib-container>
-        </div>
-      </app-doc-demo-viewport>
+          </div>
+
+          <app-doc-demo-viewport>
+            <div class="doc-demo spacing-preview">
+              <ui-lib-container
+                [size]="containerSize()"
+                [inset]="containerInset()"
+                [centered]="true"
+                style="background: #f5f5f5"
+              >
+                <ui-lib-stack [spacing]="stackSpacing()">
+                  <h3>Dashboard Layout</h3>
+                  <ui-lib-grid
+                    [columns]="gridColumns()"
+                    [spacing]="gridSpacing()"
+                    [minColumnWidth]="gridMinWidth() || undefined"
+                    [align]="gridAlign()"
+                    [justify]="gridJustify()"
+                  >
+                    <div class="demo-card">
+                      <ui-lib-stack spacing="sm">
+                        <h4>Card 1</h4>
+                        <p>Content goes here</p>
+                        <ui-lib-inline [spacing]="inlineSpacing()">
+                          <span class="demo-tag">Tag 1</span>
+                          <span class="demo-tag">Tag 2</span>
+                        </ui-lib-inline>
+                      </ui-lib-stack>
+                    </div>
+
+                    <div class="demo-card">
+                      <ui-lib-stack spacing="sm">
+                        <h4>Card 2</h4>
+                        <p>Content goes here</p>
+                        <ui-lib-inline [spacing]="inlineSpacing()">
+                          <span class="demo-tag">Tag 3</span>
+                        </ui-lib-inline>
+                      </ui-lib-stack>
+                    </div>
+
+                    <div class="demo-card">
+                      <ui-lib-stack spacing="sm">
+                        <h4>Card 3</h4>
+                        <p>Content goes here</p>
+                        <ui-lib-inline [spacing]="inlineSpacing()">
+                          <span class="demo-tag">Tag 4</span>
+                          <span class="demo-tag">Tag 5</span>
+                          <span class="demo-tag">Tag 6</span>
+                        </ui-lib-inline>
+                      </ui-lib-stack>
+                    </div>
+                  </ui-lib-grid>
+                </ui-lib-stack>
+              </ui-lib-container>
+            </div>
+          </app-doc-demo-viewport>
+        </ui-lib-stack>
+      </div>
     </ui-lib-card>
   }
 
