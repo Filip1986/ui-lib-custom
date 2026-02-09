@@ -29,7 +29,7 @@ export class AccordionHeader {
 @Component({
   selector: 'ui-lib-accordion-panel',
   standalone: true,
-  imports: [CommonModule, AccordionHeader],
+  imports: [CommonModule],
   templateUrl: './accordion-panel.html',
   styleUrl: './accordion-panel.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

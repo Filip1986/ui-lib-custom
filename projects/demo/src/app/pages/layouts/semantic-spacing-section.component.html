@@ -1,0 +1,33 @@
+<ui-lib-card [showHeader]="true" [showFooter]="false" id="semantic-spacing" data-doc-anchor>
+  <div card-header>Semantic Spacing</div>
+  <p>Use t-shirt sizes to pull semantic spacing tokens without hardcoding gaps or padding.</p>
+  <div class="doc-demo-group">
+    <app-doc-demo-viewport #layoutsViewport>
+      <div class="doc-demo">
+        <ui-lib-grid spacing="md" [columns]="3">
+          <ui-lib-stack spacing="sm">
+            <h4>Stack spacing="sm"</h4>
+            <ui-lib-stack spacing="sm">
+              <div class="demo-box">Item 1</div>
+              <div class="demo-box">Item 2</div>
+            </ui-lib-stack>
+          </ui-lib-stack>
+          <ui-lib-stack spacing="sm">
+            <h4>Inline spacing="sm"</h4>
+            <ui-lib-inline spacing="sm">
+              <span class="demo-tag">One</span>
+              <span class="demo-tag">Two</span>
+              <span class="demo-tag">Three</span>
+            </ui-lib-inline>
+          </ui-lib-stack>
+          <ui-lib-stack spacing="sm">
+            <h4>Container inset="lg"</h4>
+            <ui-lib-container inset="lg" style="background: #f5f5f5">
+              <p class="no-margin">Inset padding comes from `--uilib-inset-lg` (24px).</p>
+            </ui-lib-container>
+          </ui-lib-stack>
+        </ui-lib-grid>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+</ui-lib-card>

@@ -6,6 +6,7 @@ export interface NavItem {
   label: string;
   icon?: string;
   route?: string;
+  fragment?: string;
   items?: NavItem[];
   expanded?: boolean;
 }
@@ -30,11 +31,14 @@ export class SidebarComponent {
       icon: 'pi pi-th-large',
       expanded: true,
       items: [
-        {
-          label: 'Layout Primitives',
-          icon: 'pi pi-circle',
-          route: '/layouts',
-        },
+        { label: 'Semantic Spacing', icon: 'pi pi-circle', route: '/layouts/semantic-spacing' },
+        { label: 'Stack', icon: 'pi pi-circle', route: '/layouts/stack' },
+        { label: 'Inline', icon: 'pi pi-circle', route: '/layouts/inline' },
+        { label: 'Grid', icon: 'pi pi-circle', route: '/layouts/grid' },
+        { label: 'Container', icon: 'pi pi-circle', route: '/layouts/container' },
+        { label: 'Composition', icon: 'pi pi-circle', route: '/layouts/composition' },
+        { label: 'Design Tokens', icon: 'pi pi-circle', route: '/layouts/design-tokens' },
+        { label: 'Themed Layouts', icon: 'pi pi-circle', route: '/layouts/themed-layouts' },
       ],
     },
     {

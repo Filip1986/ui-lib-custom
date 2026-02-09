@@ -1,0 +1,35 @@
+<ui-lib-card [showHeader]="true" [showFooter]="false" id="inline" data-doc-anchor>
+  <div card-header>Inline</div>
+  <p>An inline layout with wrapping, perfect for tags, chips, or button groups.</p>
+
+  <div class="doc-demo-group">
+    <h3>Basic Inline</h3>
+    <app-doc-demo-viewport>
+      <div class="doc-demo centered">
+        <ui-lib-inline spacing="sm">
+          <span class="demo-tag">JavaScript</span>
+          <span class="demo-tag">TypeScript</span>
+          <span class="demo-tag">Angular</span>
+          <span class="demo-tag">React</span>
+          <span class="demo-tag">Vue</span>
+          <span class="demo-tag">Svelte</span>
+          <span class="demo-tag">Node.js</span>
+          <span class="demo-tag">Python</span>
+        </ui-lib-inline>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+
+  <div class="doc-demo-group">
+    <h3>Centered Inline</h3>
+    <app-doc-demo-viewport>
+      <div class="doc-demo centered">
+        <ui-lib-inline spacing="md" justify="center">
+          <span class="demo-tag">Tag 1</span>
+          <span class="demo-tag">Tag 2</span>
+          <span class="demo-tag">Tag 3</span>
+        </ui-lib-inline>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+</ui-lib-card>

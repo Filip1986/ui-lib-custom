@@ -1,0 +1,60 @@
+<ui-lib-card [showHeader]="true" [showFooter]="false" id="stack" data-doc-anchor>
+  <div card-header>Stack</div>
+  <p>A flexible vertical or horizontal layout primitive with configurable gap and alignment.</p>
+
+  <div class="doc-demo-group">
+    <h3>Vertical Stack (Default)</h3>
+    <app-doc-demo-viewport>
+      <div class="doc-demo centered">
+        <ui-lib-stack spacing="md">
+          <div class="demo-box">Item 1</div>
+          <div class="demo-box">Item 2</div>
+          <div class="demo-box">Item 3</div>
+        </ui-lib-stack>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+
+  <div class="doc-demo-group">
+    <h3>Horizontal Stack</h3>
+    <app-doc-demo-viewport>
+      <div class="doc-demo centered">
+        <ui-lib-stack direction="horizontal" spacing="md">
+          <div class="demo-box">Item 1</div>
+          <div class="demo-box">Item 2</div>
+          <div class="demo-box">Item 3</div>
+        </ui-lib-stack>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+
+  <div class="doc-demo-group">
+    <h3>Centered Stack</h3>
+    <app-doc-demo-viewport>
+      <div class="doc-demo centered">
+        <ui-lib-stack spacing="sm" align="center" justify="center" style="min-height: 200px">
+          <div class="demo-box">Centered Item 1</div>
+          <div class="demo-box">Centered Item 2</div>
+        </ui-lib-stack>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+
+  <div class="doc-demo-group">
+    <h3>Space Between</h3>
+    <app-doc-demo-viewport>
+      <div class="doc-demo centered">
+        <ui-lib-stack
+          direction="horizontal"
+          justify="space-between"
+          spacing="sm"
+          style="width: 100%"
+        >
+          <div class="demo-box">Left</div>
+          <div class="demo-box">Center</div>
+          <div class="demo-box">Right</div>
+        </ui-lib-stack>
+      </div>
+    </app-doc-demo-viewport>
+  </div>
+</ui-lib-card>

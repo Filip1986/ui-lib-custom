@@ -1,0 +1,48 @@
+<ui-lib-card [showHeader]="true" [showFooter]="false" id="composition" data-doc-anchor>
+  <div card-header>Composition</div>
+  <p>Layout primitives can be composed together for complex layouts.</p>
+
+  <app-doc-demo-viewport>
+    <div class="doc-demo">
+      <ui-lib-container size="lg" inset="lg">
+        <ui-lib-stack spacing="lg">
+          <h3>Dashboard Layout</h3>
+          <ui-lib-grid [columns]="3" spacing="md">
+            <div class="demo-card">
+              <ui-lib-stack spacing="sm">
+                <h4>Card 1</h4>
+                <p>Content goes here</p>
+                <ui-lib-inline spacing="sm">
+                  <span class="demo-tag">Tag 1</span>
+                  <span class="demo-tag">Tag 2</span>
+                </ui-lib-inline>
+              </ui-lib-stack>
+            </div>
+
+            <div class="demo-card">
+              <ui-lib-stack spacing="sm">
+                <h4>Card 2</h4>
+                <p>Content goes here</p>
+                <ui-lib-inline spacing="sm">
+                  <span class="demo-tag">Tag 3</span>
+                </ui-lib-inline>
+              </ui-lib-stack>
+            </div>
+
+            <div class="demo-card">
+              <ui-lib-stack spacing="sm">
+                <h4>Card 3</h4>
+                <p>Content goes here</p>
+                <ui-lib-inline spacing="sm">
+                  <span class="demo-tag">Tag 4</span>
+                  <span class="demo-tag">Tag 5</span>
+                  <span class="demo-tag">Tag 6</span>
+                </ui-lib-inline>
+              </ui-lib-stack>
+            </div>
+          </ui-lib-grid>
+        </ui-lib-stack>
+      </ui-lib-container>
+    </div>
+  </app-doc-demo-viewport>
+</ui-lib-card>

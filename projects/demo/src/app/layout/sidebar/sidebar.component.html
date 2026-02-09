@@ -17,7 +17,12 @@
               <ul class="nav-submenu" [class.expanded]="item.expanded">
                 @for (subItem of item.items; track subItem.label) {
                   <li class="nav-subitem">
-                    <a [routerLink]="subItem.route" routerLinkActive="active" class="nav-link">
+                    <a
+                      [routerLink]="subItem.route"
+                      [fragment]="subItem.fragment"
+                      routerLinkActive="active"
+                      class="nav-link"
+                    >
                       <i [class]="subItem.icon" *ngIf="subItem.icon"></i>
                       <span>{{ subItem.label }}</span>
                     </a>
@@ -25,7 +30,12 @@
                 }
               </ul>
             } @else {
-              <a [routerLink]="item.route" routerLinkActive="active" class="nav-link">
+              <a
+                [routerLink]="item.route"
+                [fragment]="item.fragment"
+                routerLinkActive="active"
+                class="nav-link"
+              >
                 <i [class]="item.icon" *ngIf="item.icon"></i>
                 <span>{{ item.label }}</span>
               </a>
