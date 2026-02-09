@@ -29,8 +29,8 @@
 <div
   class="viewport-frame"
   #frameHost
-  [style.width]="autoHeight ? '100%' : displayWidth() + 'px'"
-  [style.height]="autoHeight ? 'auto' : displayHeight() + 'px'"
+  [style.width]="autoHeight || isFullWidth() ? '100%' : displayWidth() + 'px'"
+  [style.height]="autoHeight || isFullWidth() ? 'auto' : displayHeight() + 'px'"
   [style.transform]="autoHeight ? 'none' : 'scale(' + scale() + ')'"
 >
   <ng-content></ng-content>

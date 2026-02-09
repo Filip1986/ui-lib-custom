@@ -58,12 +58,20 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   ];
 
   readonly activeSignal = signal(true);
-  readonly width = signal(1440);
-  readonly height = signal(900);
+  readonly width = signal(1024);
+  readonly height = signal(768);
   readonly isPortrait = signal(false);
   readonly customWidth = signal(480);
+  readonly isFullWidth = signal(true);
+  readonly hostWidth = signal(0);
 
-  readonly displayWidth = computed(() => (this.isPortrait() ? this.height() : this.width()));
+  readonly displayWidth = computed(() => {
+    if (this.isFullWidth()) {
+      const hostWidth = this.hostWidth();
+      return hostWidth > 0 ? hostWidth : this.width();
+    }
+    return this.isPortrait() ? this.height() : this.width();
+  });
   readonly displayHeight = computed(() => (this.isPortrait() ? this.width() : this.height()));
 
   private resizeObserver?: ResizeObserver;
@@ -94,6 +102,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
       this.setFullWidth();
       return;
     }
+    this.isFullWidth.set(false);
     this.width.set(preset.width);
     this.height.set(preset.height);
     this.isPortrait.set(false);
@@ -103,6 +112,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   setCustom(): void {
     const val = this.customWidth();
     if (val > 0) {
+      this.isFullWidth.set(false);
       this.width.set(val);
       this.height.set(900);
       this.isPortrait.set(false);
@@ -111,13 +121,9 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   }
 
   setFullWidth(): void {
-    const host = this.frameHost?.nativeElement?.parentElement;
-    const avail = host?.clientWidth ?? this.width();
-    if (avail > 0) {
-      this.width.set(avail);
-      this.isPortrait.set(false);
-      this.scale.set(1);
-    }
+    this.isFullWidth.set(true);
+    this.isPortrait.set(false);
+    this.computeScale();
   }
 
   rotate(): void {
@@ -132,6 +138,11 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     }
     const host = this.frameHost?.nativeElement?.parentElement;
     if (!host) {
+      return;
+    }
+    this.hostWidth.set(host.clientWidth);
+    if (this.isFullWidth()) {
+      this.scale.set(1);
       return;
     }
     const avail = host.clientWidth - 32;
