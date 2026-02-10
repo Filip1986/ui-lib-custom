@@ -61,6 +61,7 @@ export class LayoutGridSectionComponent {
   readonly minWidth = signal<string>('');
   readonly align = signal<GridAlign>('stretch');
   readonly justify = signal<GridJustify>('stretch');
+  readonly cardCount = signal<number>(8);
 
   readonly spacingOptions = this.buildOptions(STACK_TOKENS);
   readonly columnOptions = Object.keys(GRID_COLUMNS).map((key) => ({
@@ -85,12 +86,23 @@ export class LayoutGridSectionComponent {
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
   ];
+  readonly cardOptions: { label: string; value: number }[] = Array.from(
+    { length: 12 },
+    (_, index) => {
+      const count = index + 1;
+      return { label: `${count} cards`, value: count };
+    }
+  );
 
   readonly spacingLabel = computed(() => this.displayLabel(this.spacing(), this.spacingOptions));
   readonly columnLabel = computed(() => `${this.columns()} cols`);
   readonly minWidthLabel = computed(() => (this.minWidth() ? this.minWidth() : 'Fixed columns'));
   readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
   readonly justifyLabel = computed(() => this.displayLabel(this.justify(), this.justifyOptions));
+  readonly cardLabel = computed(() => `${this.cardCount()} cards`);
+  readonly cardRange = computed(() =>
+    Array.from({ length: this.cardCount() }, (_, index) => index + 1)
+  );
 
   setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
@@ -121,12 +133,17 @@ export class LayoutGridSectionComponent {
     this.justify.set(value);
   }
 
+  setCardCount(value: number): void {
+    this.cardCount.set(value);
+  }
+
   resetControls(): void {
     this.spacing.set('md');
     this.columns.set(4);
     this.minWidth.set('');
     this.align.set('stretch');
     this.justify.set('stretch');
+    this.cardCount.set(8);
   }
 
   private buildOptions<T extends string>(tokens: Record<T, string>): { label: string; value: T }[] {
