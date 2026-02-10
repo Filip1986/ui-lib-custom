@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Signal, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, WritableSignal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Container, Grid, Inline, Stack, Button, Tabs, Tab, TabsValue } from 'ui-lib-custom';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
