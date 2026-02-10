@@ -1,7 +1,12 @@
 import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LoginFeatures, LoginFormData, LoginVariant } from '../models/login-contract';
+import {
+  LoginFeatures,
+  LoginFormData,
+  LoginVariant,
+  LoginSocialProvider,
+} from '../models/login-contract';
 import { Login1Component } from '../login-1/login-1.component';
 import { Login3Component } from '../login-3/login-3.component';
 import { Login2Component } from '../login-2/login-2.component';
@@ -24,6 +29,7 @@ export class LoginFactoryComponent {
     showForgotPassword: true,
     showRegisterLink: true,
   });
+  socialProviders = input<LoginSocialProvider[]>([]);
 
   submitLogin = output<LoginFormData>();
   registerClick = output<void>();

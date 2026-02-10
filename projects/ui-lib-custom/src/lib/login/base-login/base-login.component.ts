@@ -1,8 +1,14 @@
 import { Component, ChangeDetectionStrategy, OnInit, input, output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginFeatures, LoginFormData } from '../models/login-contract';
+import { LoginFeatures, LoginFormData, LoginSocialProvider } from '../models/login-contract';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+export const DEFAULT_SOCIAL_PROVIDERS: LoginSocialProvider[] = [
+  { id: 'google', label: 'Google', icon: 'google' },
+  { id: 'github', label: 'GitHub', icon: 'github' },
+  { id: 'microsoft', label: 'Microsoft', icon: 'microsoft' },
+];
 
 @Component({
   standalone: true,
@@ -29,6 +35,11 @@ export class BaseLoginComponent implements OnInit {
    * Loading state for the login button
    */
   loading = input<boolean>(false);
+
+  /**
+   * Available social login providers
+   */
+  socialProviders = input<LoginSocialProvider[]>(DEFAULT_SOCIAL_PROVIDERS);
 
   // Output events
   submitLogin = output<LoginFormData>();

@@ -1,175 +1,138 @@
-<div
-  class="login-2-container flex flex-col justify-center min-h-screen p-4"
-  data-testid="login-2-container"
->
-  <div class="login-2-form-container mx-auto w-full max-w-sm" data-testid="login-2-form-container">
-    <div class="text-center mb-8" data-testid="login-2-header">
-      <h1 class="text-3xl font-bold" data-testid="login-2-title">{{ title() }}</h1>
-      <p class="text-gray-600 mt-2" data-testid="login-2-subtitle">
-        Enter your credentials to continue
-      </p>
-    </div>
-
-    <form
-      (ngSubmit)="onSubmit()"
-      [formGroup]="loginForm"
-      class="space-y-4"
-      data-testid="login-2-form"
-    >
-      <!-- Username field -->
-      <div data-testid="login-2-username-field">
-        <span class="p-input-icon-left w-full">
-          <i class="pi pi-user"></i>
-          <input
-            id="username"
-            type="text"
-            formControlName="username"
-            placeholder="Enter your username or email"
-            class="w-full"
-            data-testid="login-2-username-input"
-            [autofocus]="true"
-          />
-        </span>
-        @if (
-          loginForm.controls['username'].invalid &&
-          (loginForm.controls['username'].dirty ||
-            loginForm.controls['username'].touched ||
-            submitted())
-        ) {
-          <small class="text-red-500 block mt-1" data-testid="login-2-username-error">
-            Username is required
-          </small>
-        }
-      </div>
-
-      <!-- Password field -->
-      <div data-testid="login-2-password-field">
-        <div class="input-icon-left w-full">
-          <span class="icon">🔒</span>
-          <input
-            id="password"
-            type="password"
-            formControlName="password"
-            placeholder="Enter your password"
-            class="w-full input-text"
-            data-testid="login-2-password-input"
-          />
+<ui-lib-container size="sm" inset="lg" class="login-2-shell">
+  <ui-lib-stack [spacing]="6" align="stretch" justify="center" class="login-2-stack">
+    <ui-lib-card variant="material" elevation="medium" [bordered]="true" class="login-2-card">
+      <ui-lib-stack [spacing]="4">
+        <div class="header" data-testid="login-2-header">
+          <h1 data-testid="login-2-title">{{ title() }}</h1>
+          <p data-testid="login-2-subtitle">Enter your credentials to continue</p>
         </div>
-        @if (
-          loginForm.controls['password'].invalid &&
-          (loginForm.controls['password'].dirty ||
-            loginForm.controls['password'].touched ||
-            submitted())
-        ) {
-          <small class="text-red-500 block mt-1" data-testid="login-2-password-error">
-            Password is required
-          </small>
-        }
-      </div>
 
-      <!-- Remember me & Forgot password -->
-      <div
-        class="flex justify-between items-center text-sm"
-        data-testid="login-2-remember-forgot-section"
-      >
-        @if (features().showRememberMe) {
-          <div class="flex items-center" data-testid="login-2-remember-me-section">
-            <input
-              type="checkbox"
-              (change)="onRememberMeChange($event)"
-              formControlName="rememberMe"
-              id="rememberMe"
-              class="checkbox"
-              data-testid="login-2-remember-me-checkbox"
-            />
-            <label
-              class="ml-2 text-gray-700 cursor-pointer"
-              data-testid="login-2-remember-me-label"
-              for="rememberMe"
-            >
-              Remember me
-            </label>
-          </div>
-        }
-
-        @if (features().showForgotPassword) {
-          <a
-            (click)="onForgotPassword()"
-            (keydown.enter)="onForgotPassword()"
-            class="cursor-pointer"
-            data-testid="login-2-forgot-password-link"
-            tabindex="0"
-          >
-            Forgot password?
-          </a>
-        }
-      </div>
-
-      <!-- Sign in button -->
-      <button
-        type="submit"
-        [disabled]="loading()"
-        aria-label="Sign In"
-        class="w-full mt-4 btn btn-primary"
-        data-testid="login-2-submit-button"
-      >
-        @if (loading()) {
-          <span class="spinner"></span>
-        }
-        Sign In
-      </button>
-
-      <!-- Register link -->
-      @if (features().showRegisterLink) {
-        <div class="text-center text-sm mt-4" data-testid="login-2-register-section">
-          <span class="text-gray-600">Don't have an account?</span>
-          <a
-            (click)="onRegister()"
-            (keydown.enter)="onRegister()"
-            class="cursor-pointer"
-            data-testid="login-2-register-link"
-            tabindex="0"
-          >
-            Create account
-          </a>
-        </div>
-      }
-
-      <!-- Social Login -->
-      @if (features().showSocialLogin) {
-        <div data-testid="login-2-social-login-section">
-          <div class="relative my-6" data-testid="login-2-social-divider">
-            <div class="absolute inset-0 flex items-center">
-              <div class="w-full border-t border-gray-300"></div>
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+          class="form"
+          data-testid="login-2-form"
+        >
+          <ui-lib-stack [spacing]="4">
+            <div>
+              <ui-lib-input
+                id="username"
+                label="Username or Email"
+                placeholder="Enter your username or email"
+                formControlName="username"
+                variant="material"
+                type="text"
+                data-testid="login-2-username-input"
+              ></ui-lib-input>
+              @if (
+                loginForm.controls['username'].invalid &&
+                (loginForm.controls['username'].dirty ||
+                  loginForm.controls['username'].touched ||
+                  submitted())
+              ) {
+                <small class="error" data-testid="login-2-username-error"
+                  >Username is required</small
+                >
+              }
             </div>
-            <div class="relative flex justify-center text-sm">
-              <span class="px-2 bg-background-color"> Or continue with </span>
+
+            <div>
+              <ui-lib-input
+                id="password"
+                label="Password"
+                placeholder="Enter your password"
+                formControlName="password"
+                variant="material"
+                type="password"
+                [showTogglePassword]="true"
+                data-testid="login-2-password-input"
+              ></ui-lib-input>
+              @if (
+                loginForm.controls['password'].invalid &&
+                (loginForm.controls['password'].dirty ||
+                  loginForm.controls['password'].touched ||
+                  submitted())
+              ) {
+                <small class="error" data-testid="login-2-password-error"
+                  >Password is required</small
+                >
+              }
             </div>
-          </div>
-          <div class="flex space-x-4" data-testid="login-2-social-buttons">
-            <button
-              (click)="onSocialLogin('google')"
-              type="button"
-              aria-label="Google Login"
-              class="flex-1 btn btn-outlined social-btn"
-              data-testid="login-2-google-button"
+
+            <ui-lib-inline justify="space-between" align="center">
+              @if (features().showRememberMe) {
+                <label class="remember" data-testid="login-2-remember-me-section">
+                  <input
+                    type="checkbox"
+                    formControlName="rememberMe"
+                    (change)="onRememberMeChange($event)"
+                    data-testid="login-2-remember-me-checkbox"
+                  />
+                  <span>Remember me</span>
+                </label>
+              }
+
+              @if (features().showForgotPassword) {
+                <button
+                  type="button"
+                  class="link"
+                  (click)="onForgotPassword()"
+                  data-testid="login-2-forgot-password-link"
+                >
+                  Forgot password?
+                </button>
+              }
+            </ui-lib-inline>
+
+            <ui-lib-button
+              type="submit"
+              color="primary"
+              variant="material"
+              [fullWidth]="true"
+              [loading]="loading()"
+              data-testid="login-2-submit-button"
             >
-              <span class="icon">G</span>
-              Google
-            </button>
-            <button
-              (click)="onSocialLogin('facebook')"
-              type="button"
-              aria-label="Facebook Login"
-              class="flex-1 btn btn-outlined social-btn"
-              data-testid="login-2-facebook-button"
-            >
-              <span class="icon">f</span>
-              Facebook
-            </button>
-          </div>
-        </div>
-      }
-    </form>
-  </div>
-</div>
+              Sign In
+            </ui-lib-button>
+
+            @if (features().showRegisterLink) {
+              <div class="register" data-testid="login-2-register-section">
+                <span>Don't have an account?</span>
+                <button
+                  type="button"
+                  class="link"
+                  (click)="onRegister()"
+                  data-testid="login-2-register-link"
+                >
+                  Create account
+                </button>
+              </div>
+            }
+
+            @if (features().showSocialLogin) {
+              <div class="social" data-testid="login-2-social-login-section">
+                <div class="divider">Or continue with</div>
+                <ui-lib-inline [spacing]="3" align="center" justify="start">
+                  @for (provider of socialProviders(); track provider.id) {
+                    <ui-lib-button
+                      type="button"
+                      variant="material"
+                      appearance="outline"
+                      color="secondary"
+                      [fullWidth]="true"
+                      [icon]="provider.icon ?? null"
+                      (click)="onSocialLogin(provider.id)"
+                      [attr.data-testid]="'login-2-' + provider.id + '-login-button'"
+                    >
+                      {{ provider.label }}
+                    </ui-lib-button>
+                  }
+                </ui-lib-inline>
+              </div>
+            }
+          </ui-lib-stack>
+        </form>
+      </ui-lib-stack>
+    </ui-lib-card>
+  </ui-lib-stack>
+</ui-lib-container>

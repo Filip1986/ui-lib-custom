@@ -5,6 +5,12 @@ export interface LoginFeatures {
   showRegisterLink?: boolean;
 }
 
+export interface LoginSocialProvider {
+  id: string;
+  label: string;
+  icon?: string;
+}
+
 export interface LoginSuccessEvent {
   success: boolean;
   refreshTokenIdentifier?: string;
