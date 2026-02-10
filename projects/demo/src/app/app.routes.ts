@@ -20,6 +20,7 @@ import { LayoutContainerSectionComponent } from './pages/layouts/container-secti
 import { LayoutCompositionSectionComponent } from './pages/layouts/composition-section.component';
 import { LayoutDesignTokensSectionComponent } from './pages/layouts/design-tokens-section.component';
 import { LayoutThemedLayoutsSectionComponent } from './pages/layouts/themed-layouts-section.component';
+import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -66,6 +67,11 @@ export const routes: Routes = [
     path: 'layouts/themed-layouts',
     component: LayoutThemedLayoutsSectionComponent,
     title: 'Themed Layouts - UI Components Library',
+  },
+  {
+    path: 'layouts/examples',
+    component: LayoutExamplesSectionComponent,
+    title: 'Examples - UI Components Library',
   },
   { path: 'login', component: LoginComponent, title: 'Login Forms - UI Components Library' },
   { path: 'themes', component: ThemesComponent, title: 'Themes - UI Components Library' },

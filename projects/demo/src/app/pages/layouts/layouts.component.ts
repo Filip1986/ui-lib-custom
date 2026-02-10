@@ -12,6 +12,7 @@ import { LayoutContainerSectionComponent } from './container-section.component';
 import { LayoutCompositionSectionComponent } from './composition-section.component';
 import { LayoutDesignTokensSectionComponent } from './design-tokens-section.component';
 import { LayoutThemedLayoutsSectionComponent } from './themed-layouts-section.component';
+import { LayoutExamplesSectionComponent } from './examples-section.component';
 
 @Component({
   selector: 'app-layouts',
@@ -29,6 +30,7 @@ import { LayoutThemedLayoutsSectionComponent } from './themed-layouts-section.co
     LayoutCompositionSectionComponent,
     LayoutDesignTokensSectionComponent,
     LayoutThemedLayoutsSectionComponent,
+    LayoutExamplesSectionComponent,
   ],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',
@@ -44,6 +46,7 @@ export class LayoutsComponent {
     { id: 'composition', label: 'Composition' },
     { id: 'design-tokens', label: 'Design Tokens' },
     { id: 'themed-layouts', label: 'Themed Layouts' },
+    { id: 'examples', label: 'Examples' },
   ];
 
   private readonly viewportSet = new Set<DocDemoViewportComponent>();

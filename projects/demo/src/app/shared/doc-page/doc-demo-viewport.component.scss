@@ -3,8 +3,13 @@
   flex-direction: column;
 }
 
-.doc-demo-viewport__content {
-  padding: 1rem;
+.doc-demo-viewport {
+  .viewport-frame {
+    padding: 1rem;
+    --uilib-card-shadow: var(--uilib-card-shadow, none);
+    --uilib-card-shadow-hover: var(--uilib-card-shadow-hover, none);
+    --uilib-button-shadow: var(--uilib-button-shadow, none);
+  }
 }
 
 .viewport-width-card,

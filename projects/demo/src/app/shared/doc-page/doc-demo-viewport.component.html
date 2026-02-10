@@ -5,13 +5,6 @@
     [showToolbar]="false"
     [autoHeight]="autoHeight()"
   >
-    <div
-      class="doc-demo-viewport__content"
-      [style.--uilib-card-shadow]="shadow()"
-      [style.--uilib-card-shadow-hover]="shadow()"
-      [style.--uilib-button-shadow]="shadow()"
-    >
-      <ng-content></ng-content>
-    </div>
+    <ng-content></ng-content>
   </app-viewport-preview>
 </div>

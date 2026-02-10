@@ -39,6 +39,7 @@ export class SidebarComponent {
         { label: 'Composition', icon: 'pi pi-circle', route: '/layouts/composition' },
         { label: 'Design Tokens', icon: 'pi pi-circle', route: '/layouts/design-tokens' },
         { label: 'Themed Layouts', icon: 'pi pi-circle', route: '/layouts/themed-layouts' },
+        { label: 'Examples', icon: 'pi pi-circle', route: '/layouts/examples' },
       ],
     },
     {
