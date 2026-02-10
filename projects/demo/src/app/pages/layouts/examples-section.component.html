@@ -6,162 +6,250 @@
     </p>
   </div>
 
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="examples" data-doc-anchor>
-    <div card-header>UX Examples</div>
-    <div class="doc-demo-group spacing-playground">
-      <ui-lib-stack spacing="lg" class="spacing-stack">
-        <app-doc-demo-viewport>
-          <div class="doc-demo spacing-preview">
-            <ui-lib-grid spacing="md" [columns]="2" class="preview-grid">
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Marketing Hero</h4>
-                <ui-lib-container
-                  size="lg"
-                  inset="xl"
-                  style="background: var(--uilib-surface-alt, #f5f7fb)"
-                >
-                  <ui-lib-stack spacing="md">
-                    <ui-lib-inline spacing="sm">
-                      <span class="demo-tag">New</span>
-                      <span class="demo-tag">AI Ready</span>
-                    </ui-lib-inline>
-                    <h2 class="no-margin">Ship UI faster with composable layouts</h2>
-                    <p class="no-margin">
-                      Stacks, grids, and insets keep marketing pages consistent.
-                    </p>
-                    <ui-lib-inline spacing="sm">
-                      <ui-lib-button appearance="solid">Get started</ui-lib-button>
-                      <ui-lib-button appearance="ghost">Learn more</ui-lib-button>
-                    </ui-lib-inline>
-                  </ui-lib-stack>
-                </ui-lib-container>
-              </ui-lib-stack>
-
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Feature Highlights</h4>
-                <ui-lib-grid [columns]="3" spacing="md">
-                  @for (feature of ['Analytics', 'Automation', 'Collaboration']; track feature) {
-                    <ui-lib-stack spacing="xs" class="demo-card">
-                      <h4 class="no-margin">{{ feature }}</h4>
-                      <p class="no-margin">Brief summary of the value prop.</p>
-                    </ui-lib-stack>
-                  }
-                </ui-lib-grid>
-              </ui-lib-stack>
-
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Dashboard KPI Row</h4>
-                <ui-lib-grid [columns]="4" spacing="md">
-                  @for (
-                    metric of ['Revenue', 'Sessions', 'Conversion', 'NPS'];
-                    track metric;
-                    let i = $index
-                  ) {
-                    <ui-lib-stack spacing="xs" class="demo-card">
-                      <span class="demo-tag">{{ metric }}</span>
-                      <h3 class="no-margin">{{ metrics[i] }}%</h3>
-                      <p class="no-margin">vs last week</p>
-                    </ui-lib-stack>
-                  }
-                </ui-lib-grid>
-              </ui-lib-stack>
-
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Sidebar Layout</h4>
-                <ui-lib-grid [columns]="3" spacing="md">
-                  <ui-lib-stack spacing="sm" class="demo-card" style="grid-column: span 1">
-                    <h4 class="no-margin">Navigation</h4>
-                    <ui-lib-stack spacing="xs">
-                      @for (item of ['Home', 'Reports', 'Settings', 'Help']; track item) {
-                        <span>{{ item }}</span>
-                      }
-                    </ui-lib-stack>
-                  </ui-lib-stack>
-                  <ui-lib-stack spacing="md" class="demo-card" style="grid-column: span 2">
-                    <h4 class="no-margin">Content</h4>
-                    <p class="no-margin">Main area uses Stack with semantic spacing.</p>
-                    <ui-lib-grid [columns]="2" spacing="sm">
-                      @for (card of ['Alpha', 'Beta', 'Gamma', 'Delta']; track card) {
-                        <div class="demo-grid-cell">{{ card }}</div>
-                      }
-                    </ui-lib-grid>
-                  </ui-lib-stack>
-                </ui-lib-grid>
-              </ui-lib-stack>
-
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Pricing Tiers</h4>
-                <ui-lib-grid [columns]="3" spacing="md">
-                  @for (plan of ['Starter', 'Growth', 'Enterprise']; track plan) {
-                    <ui-lib-stack spacing="sm" class="demo-card">
-                      <h3 class="no-margin">{{ plan }}</h3>
-                      <p class="no-margin">$ {{ pricing[$index] }}/mo</p>
-                      <ui-lib-inline spacing="xs">
-                        <span class="demo-tag">Feature A</span>
-                        <span class="demo-tag">Feature B</span>
-                        <span class="demo-tag">Feature C</span>
-                      </ui-lib-inline>
-                      <ui-lib-button appearance="solid">Choose</ui-lib-button>
-                    </ui-lib-stack>
-                  }
-                </ui-lib-grid>
-              </ui-lib-stack>
-
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Content + CTA Split</h4>
-                <ui-lib-grid [columns]="2" spacing="md">
-                  <ui-lib-stack spacing="sm" class="demo-card">
-                    <h3 class="no-margin">Engaging headline</h3>
-                    <p class="no-margin">Support text explaining the primary action.</p>
-                    <ui-lib-inline spacing="sm">
-                      <ui-lib-button appearance="solid">Primary</ui-lib-button>
-                      <ui-lib-button appearance="ghost">Secondary</ui-lib-button>
-                    </ui-lib-inline>
-                  </ui-lib-stack>
-                  <ui-lib-stack spacing="sm" class="demo-card">
-                    <h3 class="no-margin">Checklist</h3>
-                    <ui-lib-stack spacing="xs">
-                      @for (
-                        item of ['Fast setup', 'Themeable', 'Responsive', 'Accessible'];
-                        track item
-                      ) {
-                        <span>• {{ item }}</span>
-                      }
-                    </ui-lib-stack>
-                  </ui-lib-stack>
-                </ui-lib-grid>
-              </ui-lib-stack>
-
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Timeline</h4>
-                <ui-lib-stack spacing="sm">
-                  @for (step of ['Sign up', 'Onboard', 'Configure', 'Launch']; track step) {
-                    <ui-lib-stack spacing="xs" class="demo-card">
-                      <strong>{{ step }}</strong>
-                      <p class="no-margin">Describe what happens in this phase.</p>
-                    </ui-lib-stack>
-                  }
+  <div class="doc-demo-group spacing-playground">
+    <ui-lib-stack spacing="lg" class="spacing-stack">
+      <app-doc-demo-viewport>
+        <ui-lib-stack spacing="lg">
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('hero')"
+              (selectedChange)="onTabChange('hero', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('hero') === 'example') {
+              <ui-lib-container
+                size="lg"
+                inset="xl"
+                style="background: var(--uilib-surface-alt, #f5f7fb)"
+              >
+                <ui-lib-stack spacing="md">
+                  <ui-lib-inline spacing="sm">
+                    <span class="demo-tag">New</span>
+                    <span class="demo-tag">AI Ready</span>
+                  </ui-lib-inline>
+                  <h2 class="no-margin">Ship UI faster with composable layouts</h2>
+                  <p class="no-margin">
+                    Stacks, grids, and insets keep marketing pages consistent.
+                  </p>
+                  <ui-lib-inline spacing="sm">
+                    <ui-lib-button appearance="solid">Get started</ui-lib-button>
+                    <ui-lib-button appearance="ghost">Learn more</ui-lib-button>
+                  </ui-lib-inline>
                 </ui-lib-stack>
-              </ui-lib-stack>
+              </ui-lib-container>
+            } @else {
+              <app-doc-code-snippet title="Hero" [code]="heroSnippet" />
+            }
+          </ui-lib-stack>
 
-              <ui-lib-stack spacing="sm" class="preview-block">
-                <h4>Cards Masonry (auto-fit)</h4>
-                <ui-lib-grid spacing="md" minColumnWidth="220px">
-                  @for (
-                    card of ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta'];
-                    track card
-                  ) {
-                    <div class="demo-card">
-                      <h4 class="no-margin">{{ card }}</h4>
-                      <p class="no-margin">Responsive auto-fit grid using minColumnWidth.</p>
-                    </div>
-                  }
-                </ui-lib-grid>
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('features')"
+              (selectedChange)="onTabChange('features', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('features') === 'example') {
+              <ui-lib-grid [columns]="3" spacing="md">
+                @for (feature of ['Analytics', 'Automation', 'Collaboration']; track feature) {
+                  <ui-lib-stack spacing="xs" class="demo-card">
+                    <h4 class="no-margin">{{ feature }}</h4>
+                    <p class="no-margin">Brief summary of the value prop.</p>
+                  </ui-lib-stack>
+                }
+              </ui-lib-grid>
+            } @else {
+              <app-doc-code-snippet title="Feature Highlights" [code]="featuresSnippet" />
+            }
+          </ui-lib-stack>
+
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('kpis')"
+              (selectedChange)="onTabChange('kpis', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('kpis') === 'example') {
+              <ui-lib-grid [columns]="4" spacing="md">
+                @for (
+                  metric of ['Revenue', 'Sessions', 'Conversion', 'NPS'];
+                  track metric;
+                  let i = $index
+                ) {
+                  <ui-lib-stack spacing="xs" class="demo-card">
+                    <span class="demo-tag">{{ metric }}</span>
+                    <h3 class="no-margin">{{ metrics[i] }}%</h3>
+                    <p class="no-margin">vs last week</p>
+                  </ui-lib-stack>
+                }
+              </ui-lib-grid>
+            } @else {
+              <app-doc-code-snippet title="Dashboard KPI Row" [code]="kpiSnippet" />
+            }
+          </ui-lib-stack>
+
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('sidebar')"
+              (selectedChange)="onTabChange('sidebar', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('sidebar') === 'example') {
+              <ui-lib-grid [columns]="3" spacing="md">
+                <ui-lib-stack spacing="sm" class="demo-card" style="grid-column: span 1">
+                  <h4 class="no-margin">Navigation</h4>
+                  <ui-lib-stack spacing="xs">
+                    @for (item of ['Home', 'Reports', 'Settings', 'Help']; track item) {
+                      <span>{{ item }}</span>
+                    }
+                  </ui-lib-stack>
+                </ui-lib-stack>
+                <ui-lib-stack spacing="md" class="demo-card" style="grid-column: span 2">
+                  <h4 class="no-margin">Content</h4>
+                  <p class="no-margin">Main area uses Stack with semantic spacing.</p>
+                  <ui-lib-grid [columns]="2" spacing="sm">
+                    @for (card of ['Alpha', 'Beta', 'Gamma', 'Delta']; track card) {
+                      <div class="demo-grid-cell">{{ card }}</div>
+                    }
+                  </ui-lib-grid>
+                </ui-lib-stack>
+              </ui-lib-grid>
+            } @else {
+              <app-doc-code-snippet title="Sidebar Layout" [code]="sidebarSnippet" />
+            }
+          </ui-lib-stack>
+
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('pricing')"
+              (selectedChange)="onTabChange('pricing', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('pricing') === 'example') {
+              <ui-lib-grid [columns]="3" spacing="md">
+                @for (plan of ['Starter', 'Growth', 'Enterprise']; track plan) {
+                  <ui-lib-stack spacing="sm" class="demo-card">
+                    <h3 class="no-margin">{{ plan }}</h3>
+                    <p class="no-margin">$ {{ pricing[$index] }}/mo</p>
+                    <ui-lib-inline spacing="xs">
+                      <span class="demo-tag">Feature A</span>
+                      <span class="demo-tag">Feature B</span>
+                      <span class="demo-tag">Feature C</span>
+                    </ui-lib-inline>
+                    <ui-lib-button appearance="solid">Choose</ui-lib-button>
+                  </ui-lib-stack>
+                }
+              </ui-lib-grid>
+            } @else {
+              <app-doc-code-snippet title="Pricing" [code]="pricingSnippet" />
+            }
+          </ui-lib-stack>
+
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('cta')"
+              (selectedChange)="onTabChange('cta', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('cta') === 'example') {
+              <ui-lib-grid [columns]="2" spacing="md">
+                <ui-lib-stack spacing="sm" class="demo-card">
+                  <h3 class="no-margin">Engaging headline</h3>
+                  <p class="no-margin">Support text explaining the primary action.</p>
+                  <ui-lib-inline spacing="sm">
+                    <ui-lib-button appearance="solid">Primary</ui-lib-button>
+                    <ui-lib-button appearance="ghost">Secondary</ui-lib-button>
+                  </ui-lib-inline>
+                </ui-lib-stack>
+                <ui-lib-stack spacing="sm" class="demo-card">
+                  <h3 class="no-margin">Checklist</h3>
+                  <ui-lib-stack spacing="xs">
+                    @for (
+                      item of ['Fast setup', 'Themeable', 'Responsive', 'Accessible'];
+                      track item
+                    ) {
+                      <span>• {{ item }}</span>
+                    }
+                  </ui-lib-stack>
+                </ui-lib-stack>
+              </ui-lib-grid>
+            } @else {
+              <app-doc-code-snippet title="Content + CTA" [code]="ctaSnippet" />
+            }
+          </ui-lib-stack>
+
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('timeline')"
+              (selectedChange)="onTabChange('timeline', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('timeline') === 'example') {
+              <ui-lib-stack spacing="sm">
+                @for (step of ['Sign up', 'Onboard', 'Configure', 'Launch']; track step) {
+                  <ui-lib-stack spacing="xs" class="demo-card">
+                    <strong>{{ step }}</strong>
+                    <p class="no-margin">Describe what happens in this phase.</p>
+                  </ui-lib-stack>
+                }
               </ui-lib-stack>
-            </ui-lib-grid>
-          </div>
-        </app-doc-demo-viewport>
-      </ui-lib-stack>
-    </div>
-  </ui-lib-card>
+            } @else {
+              <app-doc-code-snippet title="Timeline" [code]="timelineSnippet" />
+            }
+          </ui-lib-stack>
+
+          <ui-lib-stack spacing="sm" class="preview-block">
+            <ui-lib-tabs
+              variant="minimal"
+              size="small"
+              [selectedValue]="tabValue('masonry')"
+              (selectedChange)="onTabChange('masonry', $event.value)"
+            >
+              <ui-lib-tab value="example" label="Example" />
+              <ui-lib-tab value="code" label="Code" />
+            </ui-lib-tabs>
+            @if (tabValue('masonry') === 'example') {
+              <ui-lib-grid spacing="md" minColumnWidth="220px">
+                @for (card of ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta']; track card) {
+                  <div class="demo-card">
+                    <h4 class="no-margin">{{ card }}</h4>
+                    <p class="no-margin">Responsive auto-fit grid using minColumnWidth.</p>
+                  </div>
+                }
+              </ui-lib-grid>
+            } @else {
+              <app-doc-code-snippet title="Masonry" [code]="masonrySnippet" />
+            }
+          </ui-lib-stack>
+        </ui-lib-stack>
+      </app-doc-demo-viewport>
+    </ui-lib-stack>
+  </div>
 </app-doc-page-layout>
