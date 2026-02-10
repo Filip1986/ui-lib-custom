@@ -1,7 +1,6 @@
 :host {
   display: block;
   min-height: 100vh;
-  background: var(--uilib-page-bg, var(--uilib-surface, #f5f7fb));
   color: var(--uilib-page-fg, #0f172a);
   font-family: var(--uilib-font-body, inherit), sans-serif;
 }
