@@ -18,6 +18,7 @@
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
+      <ui-lib-tab value="examples" label="Examples"></ui-lib-tab>
     </ui-lib-tabs>
   </div>
 
@@ -278,7 +279,140 @@
         </div>
       </app-doc-demo-viewport>
     </ui-lib-card>
+  }
 
+  @if (activeTab() === 'api-reference') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
+      <div card-header>API Reference</div>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
+            <td><code>'material'</code></td>
+            <td>Visual style of the button</td>
+          </tr>
+          <tr>
+            <td><code>appearance</code></td>
+            <td><code>'solid' | 'outline' | 'ghost'</code></td>
+            <td><code>'solid'</code></td>
+            <td>Fill style of the button</td>
+          </tr>
+          <tr>
+            <td><code>severity</code></td>
+            <td>
+              <code>primary | secondary | success | info | warning | help | danger | contrast</code>
+            </td>
+            <td><code>'primary'</code></td>
+            <td>Theme severity (color)</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>'small' | 'medium' | 'large'</code></td>
+            <td><code>'medium'</code></td>
+            <td>Button size</td>
+          </tr>
+          <tr>
+            <td><code>raised</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Elevated shadow</td>
+          </tr>
+          <tr>
+            <td><code>rounded</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Pill shape</td>
+          </tr>
+          <tr>
+            <td><code>text</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Text/ghost style</td>
+          </tr>
+          <tr>
+            <td><code>outlined</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Outlined style</td>
+          </tr>
+          <tr>
+            <td><code>link</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Link-like appearance</td>
+          </tr>
+          <tr>
+            <td><code>badge</code></td>
+            <td><code>string | number | null</code></td>
+            <td><code>null</code></td>
+            <td>Badge content</td>
+          </tr>
+          <tr>
+            <td><code>badgeColor</code></td>
+            <td><code>BadgeSeverity</code></td>
+            <td><code>'danger'</code></td>
+            <td>Badge severity/color</td>
+          </tr>
+          <tr>
+            <td><code>icon</code></td>
+            <td><code>SemanticIcon | string | null</code></td>
+            <td><code>null</code></td>
+            <td>Icon name</td>
+          </tr>
+          <tr>
+            <td><code>iconPosition</code></td>
+            <td><code>'left' | 'right' | 'top' | 'bottom'</code></td>
+            <td><code>'left'</code></td>
+            <td>Icon placement</td>
+          </tr>
+          <tr>
+            <td><code>loading</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Loading state with spinner</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Disable the button</td>
+          </tr>
+        </tbody>
+      </table>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'usage') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
+      <div card-header>Usage</div>
+      <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'performance') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
+      <div card-header>Performance Features</div>
+      <ul class="doc-list">
+        <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
+        <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
+        <li><strong>Single Element</strong> - renders as single DOM element (no wrappers)</li>
+        <li><strong>Design Tokens</strong> - uses centralized design system</li>
+        <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
+        <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'examples') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="examples" data-doc-anchor>
       <div card-header>Examples</div>
       <div class="examples">
@@ -443,137 +577,6 @@
           </section>
         </ui-lib-stack>
       </div>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-            <td><code>'material'</code></td>
-            <td>Visual style of the button</td>
-          </tr>
-          <tr>
-            <td><code>appearance</code></td>
-            <td><code>'solid' | 'outline' | 'ghost'</code></td>
-            <td><code>'solid'</code></td>
-            <td>Fill style of the button</td>
-          </tr>
-          <tr>
-            <td><code>severity</code></td>
-            <td>
-              <code>primary | secondary | success | info | warning | help | danger | contrast</code>
-            </td>
-            <td><code>'primary'</code></td>
-            <td>Theme severity (color)</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'small' | 'medium' | 'large'</code></td>
-            <td><code>'medium'</code></td>
-            <td>Button size</td>
-          </tr>
-          <tr>
-            <td><code>raised</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Elevated shadow</td>
-          </tr>
-          <tr>
-            <td><code>rounded</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Pill shape</td>
-          </tr>
-          <tr>
-            <td><code>text</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Text/ghost style</td>
-          </tr>
-          <tr>
-            <td><code>outlined</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Outlined style</td>
-          </tr>
-          <tr>
-            <td><code>link</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Link-like appearance</td>
-          </tr>
-          <tr>
-            <td><code>badge</code></td>
-            <td><code>string | number | null</code></td>
-            <td><code>null</code></td>
-            <td>Badge content</td>
-          </tr>
-          <tr>
-            <td><code>badgeColor</code></td>
-            <td><code>BadgeSeverity</code></td>
-            <td><code>'danger'</code></td>
-            <td>Badge severity/color</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>SemanticIcon | string | null</code></td>
-            <td><code>null</code></td>
-            <td>Icon name</td>
-          </tr>
-          <tr>
-            <td><code>iconPosition</code></td>
-            <td><code>'left' | 'right' | 'top' | 'bottom'</code></td>
-            <td><code>'left'</code></td>
-            <td>Icon placement</td>
-          </tr>
-          <tr>
-            <td><code>loading</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Loading state with spinner</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Disable the button</td>
-          </tr>
-        </tbody>
-      </table>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
-      <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'performance') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
-      <div card-header>Performance Features</div>
-      <ul class="doc-list">
-        <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
-        <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
-        <li><strong>Single Element</strong> - renders as single DOM element (no wrappers)</li>
-        <li><strong>Design Tokens</strong> - uses centralized design system</li>
-        <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
-        <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
-      </ul>
     </ui-lib-card>
   }
 </app-doc-page-layout>
