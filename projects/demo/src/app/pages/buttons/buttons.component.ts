@@ -25,6 +25,7 @@ import {
   Tab,
   TabsValue,
   ButtonGroup,
+  Grid,
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -44,6 +45,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance' | 'exampl
     Tab,
     Button,
     ButtonGroup,
+    Grid,
     IconButton,
     Inline,
     Stack,
