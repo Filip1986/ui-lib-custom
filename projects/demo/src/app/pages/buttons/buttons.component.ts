@@ -12,15 +12,19 @@ import {
   Button,
   ButtonAppearance,
   ButtonColor,
+  ButtonSeverity,
   ButtonSize,
   ButtonVariant,
   Card,
+  Inline,
+  Stack,
   IconButton,
   IconPosition,
   ThemeConfigService,
   Tabs,
   Tab,
   TabsValue,
+  ButtonGroup,
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -39,7 +43,10 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
     Tabs,
     Tab,
     Button,
+    ButtonGroup,
     IconButton,
+    Inline,
+    Stack,
     DocPageLayoutComponent,
     DocControlGroupComponent,
     DocDemoViewportComponent,
@@ -102,8 +109,27 @@ export class Example {}`,
   readonly variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
   readonly appearances: ButtonAppearance[] = ['solid', 'outline', 'ghost'];
   readonly sizes: ButtonSize[] = ['small', 'medium', 'large'];
-  readonly colors: ButtonColor[] = ['primary', 'secondary', 'success', 'danger', 'warning'];
-  readonly iconPositions: IconPosition[] = ['left', 'right'];
+  readonly colors: ButtonColor[] = [
+    'primary',
+    'secondary',
+    'success',
+    'info',
+    'warning',
+    'help',
+    'danger',
+    'contrast',
+  ];
+  readonly severities: ButtonSeverity[] = [
+    'primary',
+    'secondary',
+    'success',
+    'info',
+    'warning',
+    'help',
+    'danger',
+    'contrast',
+  ];
+  readonly iconPositions: IconPosition[] = ['left', 'right', 'top', 'bottom'];
   readonly demoIcon = signal('search');
 
   private readonly globalVars = computed(() => {

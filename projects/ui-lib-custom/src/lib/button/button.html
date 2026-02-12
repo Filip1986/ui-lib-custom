@@ -7,9 +7,9 @@
   [style.--uilib-button-shadow]="shadow()"
   [style.--uilib-button-shadow-hover]="shadow()"
 >
-  @if (iconPosition() === 'left' && icon()) {
+  @if ((iconPosition() === 'left' || iconPosition() === 'top') && icon()) {
     <ui-lib-icon
-      class="btn-icon btn-icon--left"
+      class="btn-icon btn-icon--start"
       [name]="icon()!"
       [size]="iconSize()"
       [variant]="variant()"
@@ -20,9 +20,9 @@
     <ng-content />
   </span>
 
-  @if (iconPosition() === 'right' && icon()) {
+  @if ((iconPosition() === 'right' || iconPosition() === 'bottom') && icon()) {
     <ui-lib-icon
-      class="btn-icon btn-icon--right"
+      class="btn-icon btn-icon--end"
       [name]="icon()!"
       [size]="iconSize()"
       [variant]="variant()"
@@ -30,6 +30,20 @@
   }
 
   @if (loading()) {
-    <ui-lib-icon class="btn-icon btn-icon--loading" name="spinner" [size]="iconSize()" />
+    <ui-lib-icon class="btn-icon btn-icon--loading" [name]="loadingIcon()" [size]="iconSize()" />
+  }
+
+  @if (hasBadge()) {
+    <span class="btn-badge-wrapper" [ngClass]="badgeClass()">
+      <ui-lib-badge
+        class="btn-badge"
+        [color]="badgeColorResolved()"
+        size="sm"
+        variant="solid"
+        [pill]="true"
+      >
+        {{ badge() }}
+      </ui-lib-badge>
+    </span>
   }
 </button>

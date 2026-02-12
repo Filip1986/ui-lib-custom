@@ -1,1 +1,27 @@
 @use '../../shared/styles/doc-page.scss';
+
+.examples {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.examples section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.examples h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.examples h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.examples ui-lib-inline {
+  width: 100%;
+  flex-wrap: wrap;
+}

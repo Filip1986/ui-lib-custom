@@ -278,6 +278,172 @@
         </div>
       </app-doc-demo-viewport>
     </ui-lib-card>
+
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="examples" data-doc-anchor>
+      <div card-header>Examples</div>
+      <div class="examples">
+        <ui-lib-stack [gap]="4">
+          <section>
+            <h3>Basic</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button>Default</ui-lib-button>
+              <ui-lib-button severity="primary">Primary</ui-lib-button>
+              <ui-lib-button severity="secondary">Secondary</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Icons</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button icon="arrow-left">Back</ui-lib-button>
+              <ui-lib-button icon="arrow-right" iconPosition="right">Next</ui-lib-button>
+              <ui-lib-button icon="user" iconPosition="top">Profile</ui-lib-button>
+              <ui-lib-button
+                icon="more-horizontal"
+                [iconOnly]="true"
+                aria-label="More"
+              ></ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Loading</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button [loading]="true">Saving</ui-lib-button>
+              <ui-lib-button [loading]="true" severity="secondary">Loading</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Severities</h3>
+            <ui-lib-inline spacing="sm">
+              @for (s of severities; track s) {
+                <ui-lib-button [severity]="s">{{ s }}</ui-lib-button>
+              }
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Raised</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button [raised]="true">Primary</ui-lib-button>
+              <ui-lib-button [raised]="true" color="secondary">Secondary</ui-lib-button>
+              <ui-lib-button [raised]="true" color="success">Success</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Rounded</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button [rounded]="true">Primary</ui-lib-button>
+              <ui-lib-button [rounded]="true" severity="success">Success</ui-lib-button>
+              <ui-lib-button [rounded]="true" severity="danger">Danger</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Text</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button [text]="true">Text</ui-lib-button>
+              <ui-lib-button [text]="true" severity="secondary">Secondary</ui-lib-button>
+              <ui-lib-button [text]="true" severity="danger">Danger</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Outlined</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button [outlined]="true">Primary</ui-lib-button>
+              <ui-lib-button [outlined]="true" severity="help">Help</ui-lib-button>
+              <ui-lib-button [outlined]="true" severity="contrast">Contrast</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Link</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button [link]="true">Link</ui-lib-button>
+              <ui-lib-button [link]="true" severity="info">Info Link</ui-lib-button>
+              <ui-lib-button [link]="true" severity="contrast">Dark Link</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Badges</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button badge="5">Notifications</ui-lib-button>
+              <ui-lib-button badge="99+" badgeColor="danger">Messages</ui-lib-button>
+              <ui-lib-button badge="1" [iconOnly]="true" icon="mail"></ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Button Groups</h3>
+            <ui-lib-stack [gap]="2">
+              <ui-lib-button-group>
+                <ui-lib-button>Save</ui-lib-button>
+                <ui-lib-button severity="danger">Delete</ui-lib-button>
+                <ui-lib-button [text]="true">Cancel</ui-lib-button>
+              </ui-lib-button-group>
+              <ui-lib-button-group [vertical]="true">
+                <ui-lib-button>Top</ui-lib-button>
+                <ui-lib-button>Middle</ui-lib-button>
+                <ui-lib-button>Bottom</ui-lib-button>
+              </ui-lib-button-group>
+            </ui-lib-stack>
+          </section>
+
+          <section>
+            <h3>Sizes</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button size="small">Small</ui-lib-button>
+              <ui-lib-button size="medium">Medium</ui-lib-button>
+              <ui-lib-button size="large">Large</ui-lib-button>
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Combinations</h3>
+            <ui-lib-inline spacing="sm">
+              <ui-lib-button [raised]="true" [rounded]="true" severity="primary"
+                >Raised Pill</ui-lib-button
+              >
+              <ui-lib-button [text]="true" [rounded]="true">Text Pill</ui-lib-button>
+              <ui-lib-button [outlined]="true" [rounded]="true" severity="danger"
+                >Outline Pill</ui-lib-button
+              >
+            </ui-lib-inline>
+          </section>
+
+          <section>
+            <h3>Variant Comparison</h3>
+            <ui-lib-inline spacing="md">
+              <ui-lib-stack [gap]="2">
+                <h4>Material</h4>
+                <ui-lib-inline spacing="sm">
+                  <ui-lib-button variant="material" severity="primary">Primary</ui-lib-button>
+                  <ui-lib-button variant="material" [text]="true">Text</ui-lib-button>
+                </ui-lib-inline>
+              </ui-lib-stack>
+              <ui-lib-stack [gap]="2">
+                <h4>Bootstrap</h4>
+                <ui-lib-inline spacing="sm">
+                  <ui-lib-button variant="bootstrap" severity="primary">Primary</ui-lib-button>
+                  <ui-lib-button variant="bootstrap" [outlined]="true">Outline</ui-lib-button>
+                </ui-lib-inline>
+              </ui-lib-stack>
+              <ui-lib-stack [gap]="2">
+                <h4>Minimal</h4>
+                <ui-lib-inline spacing="sm">
+                  <ui-lib-button variant="minimal" severity="contrast">Contrast</ui-lib-button>
+                  <ui-lib-button variant="minimal" [link]="true">Link</ui-lib-button>
+                </ui-lib-inline>
+              </ui-lib-stack>
+            </ui-lib-inline>
+          </section>
+        </ui-lib-stack>
+      </div>
+    </ui-lib-card>
   }
 
   @if (activeTab() === 'api-reference') {
@@ -306,10 +472,12 @@
             <td>Fill style of the button</td>
           </tr>
           <tr>
-            <td><code>color</code></td>
-            <td><code>'primary' | 'secondary' | 'success' | 'danger' | 'warning'</code></td>
+            <td><code>severity</code></td>
+            <td>
+              <code>primary | secondary | success | info | warning | help | danger | contrast</code>
+            </td>
             <td><code>'primary'</code></td>
-            <td>Theme color</td>
+            <td>Theme severity (color)</td>
           </tr>
           <tr>
             <td><code>size</code></td>
@@ -318,16 +486,70 @@
             <td>Button size</td>
           </tr>
           <tr>
-            <td><code>disabled</code></td>
+            <td><code>raised</code></td>
             <td><code>boolean</code></td>
             <td><code>false</code></td>
-            <td>Disable the button</td>
+            <td>Elevated shadow</td>
+          </tr>
+          <tr>
+            <td><code>rounded</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Pill shape</td>
+          </tr>
+          <tr>
+            <td><code>text</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Text/ghost style</td>
+          </tr>
+          <tr>
+            <td><code>outlined</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Outlined style</td>
+          </tr>
+          <tr>
+            <td><code>link</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Link-like appearance</td>
+          </tr>
+          <tr>
+            <td><code>badge</code></td>
+            <td><code>string | number | null</code></td>
+            <td><code>null</code></td>
+            <td>Badge content</td>
+          </tr>
+          <tr>
+            <td><code>badgeColor</code></td>
+            <td><code>BadgeSeverity</code></td>
+            <td><code>'danger'</code></td>
+            <td>Badge severity/color</td>
+          </tr>
+          <tr>
+            <td><code>icon</code></td>
+            <td><code>SemanticIcon | string | null</code></td>
+            <td><code>null</code></td>
+            <td>Icon name</td>
+          </tr>
+          <tr>
+            <td><code>iconPosition</code></td>
+            <td><code>'left' | 'right' | 'top' | 'bottom'</code></td>
+            <td><code>'left'</code></td>
+            <td>Icon placement</td>
           </tr>
           <tr>
             <td><code>loading</code></td>
             <td><code>boolean</code></td>
             <td><code>false</code></td>
-            <td>Show loading state</td>
+            <td>Loading state with spinner</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Disable the button</td>
           </tr>
         </tbody>
       </table>

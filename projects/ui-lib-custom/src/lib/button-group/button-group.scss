@@ -1,0 +1,72 @@
+:host {
+  display: inline-flex;
+  width: auto;
+}
+
+.btn-group {
+  display: inline-flex;
+  align-items: stretch;
+
+  &.btn-group-vertical {
+    flex-direction: column;
+  }
+
+  &.btn-group-size-small > ui-lib-button .btn {
+    --uilib-button-padding: var(--uilib-button-padding-small);
+    --uilib-button-font-size: var(--uilib-button-font-size-small);
+  }
+
+  &.btn-group-size-large > ui-lib-button .btn {
+    --uilib-button-padding: var(--uilib-button-padding-large);
+    --uilib-button-font-size: var(--uilib-button-font-size-large);
+  }
+
+  > ui-lib-button {
+    display: inline-flex;
+
+    &:not(:first-child) button,
+    &:not(:first-child) .btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: -1px;
+    }
+
+    &:not(:last-child) button,
+    &:not(:last-child) .btn {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &.btn-group-vertical > ui-lib-button {
+    &:not(:first-child) button,
+    &:not(:first-child) .btn {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      margin-top: -1px;
+      margin-left: 0;
+    }
+
+    &:not(:last-child) button,
+    &:not(:last-child) .btn {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &.btn-group-material > ui-lib-button .btn {
+    --uilib-button-shadow: var(--uilib-shadow-sm, var(--uilib-button-shadow));
+    --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-button-shadow-hover));
+  }
+
+  &.btn-group-bootstrap > ui-lib-button .btn {
+    --uilib-button-radius: var(--uilib-radius-sm, var(--uilib-button-radius));
+    --uilib-button-border-width: 1px;
+  }
+
+  &.btn-group-minimal > ui-lib-button .btn {
+    --uilib-button-shadow: none;
+    --uilib-button-shadow-hover: none;
+    --uilib-button-radius: 0;
+  }
+}

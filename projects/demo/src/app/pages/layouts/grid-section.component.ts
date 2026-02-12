@@ -61,7 +61,7 @@ export class LayoutGridSectionComponent {
   readonly minWidth = signal<string>('');
   readonly align = signal<GridAlign>('stretch');
   readonly justify = signal<GridJustify>('stretch');
-  readonly cardCount = signal<number>(8);
+  readonly cardCount = signal<number>(2);
 
   readonly spacingOptions = this.buildOptions(STACK_TOKENS);
   readonly columnOptions = Object.keys(GRID_COLUMNS).map((key) => ({

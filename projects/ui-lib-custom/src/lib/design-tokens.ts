@@ -231,6 +231,25 @@ export const COLOR_INFO = {
 } as const;
 
 /**
+ * Help color palette
+ * Used for helper/info-adjacent states
+ */
+export const COLOR_HELP = {
+  50: '#f3e8ff',
+  100: '#e9d5ff',
+  200: '#d8b4fe',
+  300: '#c084fc',
+  400: '#a855f7',
+  500: '#9333ea',
+  600: '#7e22ce',
+  700: '#6b21a8',
+  800: '#581c87',
+  900: '#3b0764',
+} as const;
+
+export type HelpColor = keyof typeof COLOR_HELP;
+
+/**
  * Semantic color mapping
  * Maps semantic color names to specific palette values
  */
@@ -265,6 +284,18 @@ export const SEMANTIC_COLORS = {
   'info-light': COLOR_INFO[500],
   'info-dark': COLOR_INFO[900],
 
+  help: COLOR_HELP[700],
+  'help-hover': COLOR_HELP[800],
+  'help-light': COLOR_HELP[500],
+  'help-dark': COLOR_HELP[900],
+
+  contrast: COLOR_NEUTRAL.black,
+  'contrast-hover': COLOR_NEUTRAL[800],
+  'contrast-light': COLOR_NEUTRAL.white,
+  'contrast-dark': COLOR_NEUTRAL.black,
+
+  warn: COLOR_WARNING[700],
+
   text: COLOR_NEUTRAL[900],
   'text-secondary': COLOR_NEUTRAL[600],
   'text-disabled': COLOR_NEUTRAL[400],
@@ -279,21 +310,6 @@ export const SEMANTIC_COLORS = {
 } as const;
 
 export type SemanticColor = keyof typeof SEMANTIC_COLORS;
-
-/**
- * Bootstrap-compatible color palette
- * Provides Bootstrap-style colors for compatibility
- */
-export const BOOTSTRAP_COLORS = {
-  primary: '#0d6efd',
-  secondary: '#6c757d',
-  success: '#198754',
-  danger: '#dc3545',
-  warning: '#ffc107',
-  info: '#0dcaf0',
-  light: '#f8f9fa',
-  dark: '#212529',
-} as const;
 
 // ============================================================================
 // TYPOGRAPHY TOKENS
@@ -529,10 +545,10 @@ const NUMERIC_SHADOWS = SHADOW_VALUES.reduce(
   {} as Record<ShadowKeyName, string>
 );
 
-export const SHADOWS = {
+export const SHADOWS: Record<'none' | ShadowKeyName, string> = {
   none: 'none',
   ...NUMERIC_SHADOWS,
-} as const;
+};
 
 export type Shadow = keyof typeof SHADOWS;
 
@@ -565,10 +581,6 @@ export const TRANSITION_TIMING = {
 
 export type TransitionTiming = keyof typeof TRANSITION_TIMING;
 
-// ============================================================================
-// Z-INDEX TOKENS
-// ============================================================================
-
 /**
  * Z-index tokens for stacking context
  */
@@ -584,3 +596,65 @@ export const Z_INDEX = {
 } as const;
 
 export type ZIndex = keyof typeof Z_INDEX;
+
+/**
+ * Button token defaults
+ */
+export const BUTTON_TOKENS = {
+  info: {
+    bg: COLOR_INFO[700],
+    bgHover: COLOR_INFO[800],
+    bgActive: COLOR_INFO[900],
+    border: COLOR_INFO[700],
+    fg: COLOR_NEUTRAL.white,
+  },
+  help: {
+    bg: COLOR_HELP[600],
+    bgHover: COLOR_HELP[700],
+    bgActive: COLOR_HELP[800],
+    border: COLOR_HELP[600],
+    fg: COLOR_NEUTRAL.white,
+  },
+  contrast: {
+    bg: COLOR_NEUTRAL.black,
+    bgHover: COLOR_NEUTRAL[800],
+    bgActive: COLOR_NEUTRAL[900],
+    border: COLOR_NEUTRAL.black,
+    fg: COLOR_NEUTRAL.white,
+  },
+  warn: {
+    bg: COLOR_WARNING[700],
+    bgHover: COLOR_WARNING[800],
+    bgActive: COLOR_WARNING[900],
+    border: COLOR_WARNING[700],
+    fg: COLOR_NEUTRAL.black,
+  },
+  raised: {
+    shadow: SHADOWS['shadow-40'],
+    shadowHover: SHADOWS['shadow-50'],
+  },
+  text: {
+    fg: SEMANTIC_COLORS.primary,
+    fgHover: SEMANTIC_COLORS['primary-hover'],
+  },
+  outline: {
+    border: SEMANTIC_COLORS.primary,
+    borderHover: SEMANTIC_COLORS['primary-hover'],
+    fg: SEMANTIC_COLORS.primary,
+    fgHover: SEMANTIC_COLORS['primary-hover'],
+  },
+  radiusRounded: BORDER_RADIUS.lg,
+  radiusPill: BORDER_RADIUS.full,
+  badge: {
+    offsetX: SPACING_TOKENS[2],
+    offsetY: SPACING_TOKENS[2],
+    radius: BORDER_RADIUS.full,
+    shadow: SHADOWS['shadow-20'],
+    fontSize: FONT_SIZES.sm,
+    padding: SQUISH_TOKENS.xs,
+    bg: COLOR_DANGER[500],
+    fg: COLOR_NEUTRAL.white,
+  },
+} as const;
+
+export type ButtonTokenKey = keyof typeof BUTTON_TOKENS;

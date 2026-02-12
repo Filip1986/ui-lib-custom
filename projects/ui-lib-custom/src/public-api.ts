@@ -5,6 +5,7 @@
 export * from './lib/ui-lib-custom';
 export * from './lib/design-tokens';
 export * from './lib/button/button';
+export * from './lib/button-group/button-group';
 export * from './lib/card/card';
 export * from './lib/badge/badge';
 export * from './lib/checkbox/checkbox';
