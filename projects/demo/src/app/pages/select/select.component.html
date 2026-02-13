@@ -23,7 +23,11 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <app-doc-control-group title="Style" description="Choose variant and follow theme defaults.">
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Style</div>
+          <p class="card-description">Choose variant and follow theme defaults.</p>
+        </div>
         <div class="control">
           <label>Variant</label>
           <div class="chips">
@@ -48,9 +52,13 @@
             Follow theme variant</label
           >
         </div>
-      </app-doc-control-group>
+      </ui-lib-card>
 
-      <app-doc-control-group title="Behavior" description="Toggle selection, search, and states.">
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Behavior</div>
+          <p class="card-description">Toggle selection, search, and states.</p>
+        </div>
         <div class="toggles">
           <label
             ><input
@@ -85,9 +93,13 @@
             Loading</label
           >
         </div>
-      </app-doc-control-group>
+      </ui-lib-card>
 
-      <app-doc-control-group title="Content" description="Set placeholder text.">
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Content</div>
+          <p class="card-description">Set placeholder text.</p>
+        </div>
         <div class="control">
           <label>Placeholder</label>
           <input
@@ -96,7 +108,7 @@
             (input)="placeholder.set($any($event.target).value)"
           />
         </div>
-      </app-doc-control-group>
+      </ui-lib-card>
     </div>
 
     <div class="viewport-control-stack">

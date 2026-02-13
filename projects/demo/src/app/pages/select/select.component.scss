@@ -48,6 +48,35 @@
   }
 }
 
+.toggles {
+  display: grid;
+  gap: 0.75rem;
+
+  label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .inline-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+}
+
 .preview {
   padding: 1rem;
   background: var(--uilib-surface);
