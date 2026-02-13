@@ -25,7 +25,6 @@ import {
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
@@ -53,7 +52,6 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     Button,
     Icon,
     DocPageLayoutComponent,
-    DocControlGroupComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
     DocCodeSnippetComponent,

@@ -24,7 +24,6 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
-import { DocControlGroupComponent } from '@demo/shared/doc-page/doc-control-group.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
@@ -40,7 +39,6 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
     Tabs,
     Tab,
     DocPageLayoutComponent,
-    DocControlGroupComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
     Card,

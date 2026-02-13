@@ -13,7 +13,6 @@ import {
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-group.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
@@ -30,7 +29,6 @@ type TabKey = 'playground' | 'api-reference' | 'accessibility' | 'usage';
     Tab,
     Card,
     DocPageLayoutComponent,
-    DocControlGroupComponent,
     DocDemoViewportComponent,
     DocCodeSnippetComponent,
     FormsModule,

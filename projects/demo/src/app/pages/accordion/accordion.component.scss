@@ -73,3 +73,9 @@
   font-size: 0.9rem;
   color: var(--uilib-color-text-secondary, #6b7280);
 }
+
+.control-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}

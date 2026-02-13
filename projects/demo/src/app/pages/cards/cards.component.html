@@ -23,98 +23,101 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <app-doc-control-group
-        title="Style & surface"
-        description="Variant, elevation, shadow, and surface colors."
-        [columns]="3"
-      >
-        <div class="control">
-          <label>Variant</label>
-          <div class="chips">
-            @for (v of variants; track v) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="variant() === v ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="selectVariant(v)"
-                >{{ v }}</ui-lib-button
-              >
-            }
-          </div>
-          <label class="inline-toggle"
-            ><input
-              type="checkbox"
-              [checked]="useGlobalVariant()"
-              (change)="setFollowThemeVariant($any($event.target).checked)"
-            />
-            Follow theme variant</label
-          >
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Style & surface</div>
+          <p class="card-description">Variant, elevation, shadow, and surface colors.</p>
         </div>
+        <div class="control-grid">
+          <div class="control">
+            <label>Variant</label>
+            <div class="chips">
+              @for (v of variants; track v) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  [variant]="'minimal'"
+                  [appearance]="variant() === v ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="selectVariant(v)"
+                  >{{ v }}</ui-lib-button
+                >
+              }
+            </div>
+            <label class="inline-toggle"
+              ><input
+                type="checkbox"
+                [checked]="useGlobalVariant()"
+                (change)="setFollowThemeVariant($any($event.target).checked)"
+              />
+              Follow theme variant</label
+            >
+          </div>
 
-        <div class="control">
-          <label>Elevation</label>
-          <div class="chips">
-            @for (e of elevations; track e) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="elevation() === e ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="elevation.set(e)"
-                >{{ e }}</ui-lib-button
-              >
-            }
+          <div class="control">
+            <label>Elevation</label>
+            <div class="chips">
+              @for (e of elevations; track e) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  [variant]="'minimal'"
+                  [appearance]="elevation() === e ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="elevation.set(e)"
+                  >{{ e }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Shadow</label>
+            <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
+              @for (s of shadowOptions; track s) {
+                <option [value]="s">{{ s }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="control two-cols">
+            <div>
+              <label>Header BG</label>
+              <input
+                type="color"
+                [value]="headerBg() || '#ffffff'"
+                (input)="headerBg.set($any($event.target).value)"
+              />
+              <input
+                type="text"
+                placeholder="#f5f7fb"
+                [value]="headerBg()"
+                (input)="headerBg.set($any($event.target).value)"
+              />
+            </div>
+            <div>
+              <label>Footer BG</label>
+              <input
+                type="color"
+                [value]="footerBg() || '#ffffff'"
+                (input)="footerBg.set($any($event.target).value)"
+              />
+              <input
+                type="text"
+                placeholder="#eef2ff"
+                [value]="footerBg()"
+                (input)="footerBg.set($any($event.target).value)"
+              />
+            </div>
           </div>
         </div>
+      </ui-lib-card>
 
-        <div class="control">
-          <label>Shadow</label>
-          <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
-            @for (s of shadowOptions; track s) {
-              <option [value]="s">{{ s }}</option>
-            }
-          </select>
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Layout & borders</div>
+          <p class="card-description">Toggle borders, hover, header, and footer.</p>
         </div>
-
-        <div class="control two-cols">
-          <div>
-            <label>Header BG</label>
-            <input
-              type="color"
-              [value]="headerBg() || '#ffffff'"
-              (input)="headerBg.set($any($event.target).value)"
-            />
-            <input
-              type="text"
-              placeholder="#f5f7fb"
-              [value]="headerBg()"
-              (input)="headerBg.set($any($event.target).value)"
-            />
-          </div>
-          <div>
-            <label>Footer BG</label>
-            <input
-              type="color"
-              [value]="footerBg() || '#ffffff'"
-              (input)="footerBg.set($any($event.target).value)"
-            />
-            <input
-              type="text"
-              placeholder="#eef2ff"
-              [value]="footerBg()"
-              (input)="footerBg.set($any($event.target).value)"
-            />
-          </div>
-        </div>
-      </app-doc-control-group>
-
-      <app-doc-control-group
-        title="Layout & borders"
-        description="Toggle borders, hover, header, and footer."
-      >
         <div class="toggles">
           <label
             ><input
@@ -149,12 +152,13 @@
             Show footer</label
           >
         </div>
-      </app-doc-control-group>
+      </ui-lib-card>
 
-      <app-doc-control-group
-        title="Content & theme"
-        description="Edit text content or enable local theme overrides."
-      >
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Content & theme</div>
+          <p class="card-description">Edit text content or enable local theme overrides.</p>
+        </div>
         <div class="control">
           <label>Title</label>
           <input type="text" [value]="title()" (input)="title.set($any($event.target).value)" />
@@ -177,7 +181,7 @@
             Use local theme overrides</label
           >
         </div>
-      </app-doc-control-group>
+      </ui-lib-card>
     </div>
 
     <div class="viewport-control-stack">

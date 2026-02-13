@@ -27,58 +27,64 @@
 
   @if (activeTab() === 'playground') {
     <div class="doc-controls">
-      <app-doc-control-group title="Appearance" description="Variant and size" [columns]="3">
-        <div class="control">
-          <label>Variant</label>
-          <div class="chips">
-            @for (v of variants; track v) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                variant="minimal"
-                [appearance]="variant() === v ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="setVariant(v)"
-                >{{ v }}</ui-lib-button
-              >
-            }
-          </div>
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Appearance</div>
+          <p class="card-description">Variant and size</p>
         </div>
+        <div class="control-grid">
+          <div class="control">
+            <label>Variant</label>
+            <div class="chips">
+              @for (v of variants; track v) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  variant="minimal"
+                  [appearance]="variant() === v ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="setVariant(v)"
+                  >{{ v }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
 
-        <div class="control">
-          <label>Size</label>
-          <div class="chips">
-            @for (s of sizes; track s) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                variant="minimal"
-                [appearance]="size() === s ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="setSize(s)"
-                >{{ s }}</ui-lib-button
-              >
-            }
+          <div class="control">
+            <label>Size</label>
+            <div class="chips">
+              @for (s of sizes; track s) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  variant="minimal"
+                  [appearance]="size() === s ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="setSize(s)"
+                  >{{ s }}</ui-lib-button
+                >
+              }
+            </div>
           </div>
-        </div>
 
-        <div class="control">
-          <label>Expand mode</label>
-          <div class="chips">
-            @for (mode of expandModes; track mode) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                variant="minimal"
-                [appearance]="expandMode() === mode ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="setExpandMode(mode)"
-                >{{ mode }}</ui-lib-button
-              >
-            }
+          <div class="control">
+            <label>Expand mode</label>
+            <div class="chips">
+              @for (mode of expandModes; track mode) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  variant="minimal"
+                  [appearance]="expandMode() === mode ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="setExpandMode(mode)"
+                  >{{ mode }}</ui-lib-button
+                >
+              }
+            </div>
           </div>
         </div>
-      </app-doc-control-group>
+      </ui-lib-card>
     </div>
 
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>

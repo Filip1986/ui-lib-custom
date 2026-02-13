@@ -16,7 +16,6 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocControlGroupComponent } from '../../shared/doc-page/doc-control-group.component';
 
 type TabKey = 'api-reference' | 'usage' | 'performance';
 
@@ -30,7 +29,6 @@ type TabKey = 'api-reference' | 'usage' | 'performance';
     Tab,
     DocPageLayoutComponent,
     DocCodeSnippetComponent,
-    DocControlGroupComponent,
     DocDemoViewportComponent,
     Card,
     FormsModule,

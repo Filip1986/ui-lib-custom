@@ -8,88 +8,96 @@
   </div>
 
   <div class="doc-controls" docRail>
-    <app-doc-control-group
-      title="Style"
-      description="Adjust variant, color, and size."
-      [columns]="3"
-    >
-      <div class="control">
-        <label>Variant</label>
-        <div class="chips">
-          @for (v of variants; track v) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="variant() === v ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="variant.set(v)"
-              >{{ v }}</ui-lib-button
-            >
-          }
+    <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+      <div card-header>
+        <div class="card-title">Style</div>
+        <p class="card-description">Adjust variant, color, and size.</p>
+      </div>
+      <div class="control-grid">
+        <div class="control">
+          <label>Variant</label>
+          <div class="chips">
+            @for (v of variants; track v) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="variant() === v ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="variant.set(v)"
+                >{{ v }}</ui-lib-button
+              >
+            }
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Color</label>
+          <div class="chips">
+            @for (c of colors; track c) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="color() === c ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="color.set(c)"
+                >{{ c }}</ui-lib-button
+              >
+            }
+          </div>
+        </div>
+
+        <div class="control">
+          <label>Size</label>
+          <div class="chips">
+            @for (s of sizes; track s) {
+              <ui-lib-button
+                class="control-chip"
+                size="small"
+                [variant]="'minimal'"
+                [appearance]="size() === s ? 'solid' : 'ghost'"
+                color="primary"
+                (click)="size.set(s)"
+                >{{ s }}</ui-lib-button
+              >
+            }
+          </div>
         </div>
       </div>
+    </ui-lib-card>
 
-      <div class="control">
-        <label>Color</label>
-        <div class="chips">
-          @for (c of colors; track c) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="color() === c ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="color.set(c)"
-              >{{ c }}</ui-lib-button
-            >
-          }
+    <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+      <div card-header>
+        <div class="card-title">State & label</div>
+        <p class="card-description">Toggle shape and set badge text.</p>
+      </div>
+      <div class="control-grid">
+        <div class="toggles">
+          <label
+            ><input
+              type="checkbox"
+              [checked]="pill()"
+              (change)="pill.set($any($event.target).checked)"
+            />
+            Pill shape</label
+          >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="dot()"
+              (change)="dot.set($any($event.target).checked)"
+            />
+            Dot only</label
+          >
+        </div>
+
+        <div class="control">
+          <label>Label</label>
+          <input type="text" [value]="text()" (input)="text.set($any($event.target).value)" />
         </div>
       </div>
-
-      <div class="control">
-        <label>Size</label>
-        <div class="chips">
-          @for (s of sizes; track s) {
-            <ui-lib-button
-              class="control-chip"
-              size="small"
-              [variant]="'minimal'"
-              [appearance]="size() === s ? 'solid' : 'ghost'"
-              color="primary"
-              (click)="size.set(s)"
-              >{{ s }}</ui-lib-button
-            >
-          }
-        </div>
-      </div>
-    </app-doc-control-group>
-
-    <app-doc-control-group title="State & label" description="Toggle shape and set badge text.">
-      <div class="toggles">
-        <label
-          ><input
-            type="checkbox"
-            [checked]="pill()"
-            (change)="pill.set($any($event.target).checked)"
-          />
-          Pill shape</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            [checked]="dot()"
-            (change)="dot.set($any($event.target).checked)"
-          />
-          Dot only</label
-        >
-      </div>
-
-      <div class="control">
-        <label>Label</label>
-        <input type="text" [value]="text()" (input)="text.set($any($event.target).value)" />
-      </div>
-    </app-doc-control-group>
+    </ui-lib-card>
   </div>
 
   <div class="viewport-control-stack">
