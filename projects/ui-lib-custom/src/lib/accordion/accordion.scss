@@ -28,23 +28,23 @@
   }
 
   &.accordion-size-sm {
-    --uilib-accordion-header-padding: var(--uilib-space-3, 0.75rem);
+    --uilib-accordion-header-padding: var(--uilib-accordion-header-padding-sm);
+    --uilib-accordion-icon-size: var(--uilib-accordion-icon-size-sm);
     --uilib-accordion-content-padding: var(--uilib-space-3, 0.75rem);
-    --uilib-accordion-icon-size: 1rem;
     font-size: var(--uilib-font-size-sm, 0.875rem);
   }
 
   &.accordion-size-md {
-    --uilib-accordion-header-padding: var(--uilib-space-4, 1rem);
+    --uilib-accordion-header-padding: var(--uilib-accordion-header-padding-md);
+    --uilib-accordion-icon-size: var(--uilib-accordion-icon-size-md);
     --uilib-accordion-content-padding: var(--uilib-space-4, 1rem);
-    --uilib-accordion-icon-size: 1.25rem;
     font-size: var(--uilib-font-size-md, 1rem);
   }
 
   &.accordion-size-lg {
-    --uilib-accordion-header-padding: var(--uilib-space-5, 1.25rem);
+    --uilib-accordion-header-padding: var(--uilib-accordion-header-padding-lg);
+    --uilib-accordion-icon-size: var(--uilib-accordion-icon-size-lg);
     --uilib-accordion-content-padding: var(--uilib-space-5, 1.25rem);
-    --uilib-accordion-icon-size: 1.5rem;
     font-size: var(--uilib-font-size-lg, 1.125rem);
   }
 }

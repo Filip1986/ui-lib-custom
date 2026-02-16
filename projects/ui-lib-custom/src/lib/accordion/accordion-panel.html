@@ -11,14 +11,42 @@
   (click)="toggle()"
   (keydown)="onKeydown($event)"
 >
+  @if (showIcon() && iconPosition() === 'start') {
+    <span
+      class="accordion-panel-icon icon-start"
+      [class.expanded]="isExpanded()"
+      aria-hidden="true"
+    >
+      @if (toggleIconTemplate) {
+        <ng-container
+          [ngTemplateOutlet]="toggleIconTemplate.template"
+          [ngTemplateOutletContext]="{ $implicit: isExpanded(), expanded: isExpanded() }"
+        />
+      } @else {
+        <ui-lib-icon [name]="resolvedIconName()" />
+      }
+    </span>
+  }
   <ng-content select="[accordionHeader]" />
   @if (!hasCustomHeader()) {
     <span class="accordion-panel-title">{{ header() }}</span>
   }
-  <span class="accordion-panel-icon" [class.expanded]="isExpanded()" aria-hidden="true"></span>
+  @if (showIcon() && iconPosition() === 'end') {
+    <span class="accordion-panel-icon icon-end" [class.expanded]="isExpanded()" aria-hidden="true">
+      @if (toggleIconTemplate) {
+        <ng-container
+          [ngTemplateOutlet]="toggleIconTemplate.template"
+          [ngTemplateOutletContext]="{ $implicit: isExpanded(), expanded: isExpanded() }"
+        />
+      } @else {
+        <ui-lib-icon [name]="resolvedIconName()" />
+      }
+    </span>
+  }
 </button>
 <div
   class="accordion-panel-content"
+  [class.expanded]="isExpanded()"
   [attr.id]="panelId()"
   role="region"
   [attr.aria-labelledby]="headerId()"

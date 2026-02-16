@@ -37,10 +37,15 @@ export * from './lib/tabs/tabs.types';
 
 // Accordion
 export { Accordion } from './lib/accordion/accordion';
-export { AccordionPanel } from './lib/accordion/accordion-panel';
+export {
+  AccordionPanel,
+  AccordionHeader,
+  AccordionToggleIcon,
+} from './lib/accordion/accordion-panel';
 export type {
   AccordionVariant,
   AccordionSize,
   AccordionExpandMode,
   AccordionChangeEvent,
+  AccordionIconPosition,
 } from './lib/accordion/accordion.types';

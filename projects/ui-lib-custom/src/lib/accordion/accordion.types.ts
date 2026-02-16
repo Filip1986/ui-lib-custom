@@ -40,3 +40,8 @@ export interface AccordionChangeEvent {
   /** Zero-based index of the panel within the accordion. */
   index: number;
 }
+
+/**
+ * Icon placement within the accordion panel header.
+ */
+export type AccordionIconPosition = 'start' | 'end';

@@ -18,17 +18,22 @@
 
 ## Animation Strategy
 - CSS-only expand/collapse using grid-row technique: `.accordion-panel-content` switches `grid-template-rows` between `0fr` and `1fr` with transition vars (`--uilib-accordion-transition-duration`, `--uilib-accordion-transition-easing`).
-- Chevron rotation via `transform` + `--uilib-accordion-icon-transition`.
-- `hidden` attribute on collapsed content keeps accessibility intact; prefers-reduced-motion can override transitions via consumer CSS.
+- Toggle icons swap between `collapseIcon` and `expandIcon` names (no rotation required).
+- `accordionToggleIcon` template allows fully custom icon content.
+- `prefers-reduced-motion` disables icon/content transitions when requested.
 
 ## Extension Points
 - Theming via CSS vars (`--uilib-accordion-*`); variants map defaults for elevation, borders, spacing.
 - Panel headers accept projected `accordionHeader` template for fully custom layouts (icons, metadata, actions).
-- Controlled mode through `expandedPanels`; uncontrolled via `defaultExpandedPanels`.
-- Size + variant passed through context so nested/child styling can align.
+- Custom toggle icon content via `accordionToggleIcon` template.
+- `iconPosition` controls icon placement (default `end`).
 
 ## Future Enhancements
 - Add `collapsible=false` option for single mode to keep one panel always open.
 - Expose roving tabindex hints for better focus restoration after dynamic list changes.
 - Optional lazy content rendering for heavy panel bodies.
 - Demo: add async loading example and density controls.
+
+## Backward Compatibility
+- Existing headers/content and expand behavior continue to work.
+- **Breaking:** icon placement default is now `end`; use `iconPosition="start"` to preserve prior layouts.

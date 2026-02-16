@@ -15,6 +15,8 @@ import {
   signal,
 } from '@angular/core';
 import { AccordionContext, ACCORDION_CONTEXT } from './accordion';
+import { AccordionIconPosition } from './accordion.types';
+import { Icon } from '../icon/icon';
 
 let accordionPanelId = 0;
 
@@ -26,10 +28,23 @@ export class AccordionHeader {
   constructor(public readonly template: TemplateRef<unknown>) {}
 }
 
+export interface AccordionToggleIconContext {
+  $implicit: boolean;
+  expanded: boolean;
+}
+
+@Directive({
+  selector: '[accordionToggleIcon]',
+  standalone: true,
+})
+export class AccordionToggleIcon {
+  constructor(public readonly template: TemplateRef<AccordionToggleIconContext>) {}
+}
+
 @Component({
   selector: 'ui-lib-accordion-panel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, Icon],
   templateUrl: './accordion-panel.html',
   styleUrl: './accordion-panel.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,6 +59,10 @@ export class AccordionPanel implements OnDestroy {
   value: InputSignal<string | null> = input<string | null>(null);
   disabled: InputSignal<boolean> = input<boolean>(false);
   expanded: InputSignal<boolean> = input<boolean>(false);
+  iconPosition: InputSignal<AccordionIconPosition> = input<AccordionIconPosition>('end');
+  expandIcon: InputSignal<string> = input<string>('chevron-up');
+  collapseIcon: InputSignal<string> = input<string>('chevron-down');
+  showIcon: InputSignal<boolean> = input<boolean>(true);
 
   constructor() {
     if (this.context) {
@@ -52,6 +71,7 @@ export class AccordionPanel implements OnDestroy {
   }
 
   @ContentChild(AccordionHeader) headerTemplate?: AccordionHeader;
+  @ContentChild(AccordionToggleIcon) toggleIconTemplate?: AccordionToggleIcon;
   @ViewChild('headerButton', { static: true })
   headerButton?: ElementRef<HTMLButtonElement>;
 
@@ -62,7 +82,7 @@ export class AccordionPanel implements OnDestroy {
   private readonly internalExpanded = signal<boolean>(this.expanded());
 
   readonly hostClasses = computed(() => {
-    const classes: string[] = ['accordion-panel'];
+    const classes: string[] = ['ui-lib-accordion-panel', 'accordion-panel'];
     if (this.isExpanded()) {
       classes.push('accordion-panel-expanded');
     }
@@ -80,6 +100,10 @@ export class AccordionPanel implements OnDestroy {
 
   readonly headerId = computed((): string => `${this.uid}-header`);
   readonly panelId = computed((): string => `${this.uid}-panel`);
+  readonly resolvedIconName = computed((): string =>
+    this.isExpanded() ? this.expandIcon() : this.collapseIcon()
+  );
+  readonly isIconEnd = computed((): boolean => this.iconPosition() === 'end');
 
   toggle(): void {
     if (this.disabled()) {
