@@ -79,3 +79,110 @@
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
+
+.size-comparison {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.size-column {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.size-label {
+  font-weight: 600;
+  color: var(--uilib-color-text-secondary, #6b7280);
+}
+
+.custom-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: var(--uilib-surface, #fff);
+  color: var(--uilib-color-text-secondary, #6b7280);
+  border: 1px solid var(--uilib-color-border, #e5e7eb);
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.custom-indicator.active {
+  color: var(--uilib-color-primary, #2563eb);
+  border-color: var(--uilib-color-primary, #2563eb);
+  background: color-mix(in srgb, var(--uilib-color-primary, #2563eb) 12%, transparent);
+}
+
+.indicator-rotate {
+  animation: demo-spin 1.2s linear infinite;
+}
+
+.indicator-pulse {
+  animation: demo-pulse 1.4s ease-in-out infinite;
+}
+
+.icon-with-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-with-badge .icon-badge {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.35rem;
+}
+
+.demo-reduced-motion {
+  --uilib-accordion-content-animation-duration: 0ms;
+  --uilib-accordion-content-fade-duration: 0ms;
+  --uilib-accordion-icon-animation-duration: 0ms;
+  --uilib-accordion-transition-duration: 0ms;
+}
+
+.demo-fast-motion {
+  --uilib-accordion-content-animation-duration: 120ms;
+  --uilib-accordion-content-fade-duration: 80ms;
+  --uilib-accordion-icon-animation-duration: 100ms;
+}
+
+.demo-slow-motion {
+  --uilib-accordion-content-animation-duration: 420ms;
+  --uilib-accordion-content-fade-duration: 200ms;
+  --uilib-accordion-icon-animation-duration: 240ms;
+}
+
+.animation-speed-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.speed-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--uilib-color-text-secondary, #6b7280);
+  margin-bottom: 0.35rem;
+}
+
+@keyframes demo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes demo-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}

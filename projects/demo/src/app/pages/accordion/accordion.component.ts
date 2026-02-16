@@ -13,6 +13,8 @@ import {
   AccordionExpandMode,
   AccordionSize,
   AccordionVariant,
+  AccordionToggleIcon,
+  Badge,
   Button,
   Card,
   Tab,
@@ -41,6 +43,9 @@ type AccordionTab =
   | 'controlled'
   | 'custom-headers'
   | 'disabled'
+  | 'icons'
+  | 'toggle-icons'
+  | 'animations'
   | 'api-reference'
   | 'accessibility';
 
@@ -51,6 +56,8 @@ type AccordionTab =
     CommonModule,
     Accordion,
     AccordionPanel,
+    AccordionToggleIcon,
+    Badge,
     Card,
     Button,
     Tabs,
@@ -73,6 +80,9 @@ export class AccordionComponent {
     { id: 'controlled', label: 'Controlled Mode' },
     { id: 'custom-headers', label: 'Custom Headers' },
     { id: 'disabled', label: 'Disabled Panels' },
+    { id: 'icons', label: 'Icon Customization' },
+    { id: 'toggle-icons', label: 'Toggle Icon Templates' },
+    { id: 'animations', label: 'Animations' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
@@ -214,5 +224,33 @@ export class AccordionComponent {
 
   resetControlled(): void {
     this.controlledExpanded.set(['shipping']);
+  }
+
+  readonly iconSnippets: Readonly<
+    Record<'customIcons' | 'iconPosition' | 'toggleTemplate', string>
+  > = {
+    customIcons: `<ui-lib-accordion-panel
+  header="Using Plus/Minus"
+  expandIcon="minus"
+  collapseIcon="plus"
+/>`,
+    iconPosition: `<ui-lib-accordion-panel
+  iconPosition="start"
+  header="Icon at Start"
+/>`,
+    toggleTemplate: `<ui-lib-accordion-panel>
+  <ng-template accordionToggleIcon let-expanded>
+    <span class="custom-indicator" [class.active]="expanded">
+      {{ expanded ? '−' : '+' }}
+    </span>
+  </ng-template>
+  Content
+</ui-lib-accordion-panel>`,
+  };
+
+  readonly reduceMotionDemo = signal<boolean>(false);
+
+  toggleReducedMotion(): void {
+    this.reduceMotionDemo.update((value: boolean) => !value);
   }
 }

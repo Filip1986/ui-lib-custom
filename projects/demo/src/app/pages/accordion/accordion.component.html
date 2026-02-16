@@ -20,6 +20,9 @@
       <ui-lib-tab value="controlled" label="Controlled" />
       <ui-lib-tab value="custom-headers" label="Custom Headers" />
       <ui-lib-tab value="disabled" label="Disabled" />
+      <ui-lib-tab value="icons" label="Icons" />
+      <ui-lib-tab value="toggle-icons" label="Toggle Icons" />
+      <ui-lib-tab value="animations" label="Animations" />
       <ui-lib-tab value="api-reference" label="API Reference" />
       <ui-lib-tab value="accessibility" label="Accessibility" />
     </ui-lib-tabs>
@@ -144,6 +147,44 @@
           </app-doc-demo-viewport>
         </ui-lib-card>
       }
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Side-by-side size comparison</div>
+        <app-doc-demo-viewport>
+          <div class="size-comparison">
+            <div class="size-column">
+              <div class="size-label">Small</div>
+              <ui-lib-accordion size="sm">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+            <div class="size-column">
+              <div class="size-label">Medium</div>
+              <ui-lib-accordion size="md">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+            <div class="size-column">
+              <div class="size-label">Large</div>
+              <ui-lib-accordion size="lg">
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
     </div>
   }
 
@@ -226,6 +267,190 @@
         </div>
       </app-doc-demo-viewport>
     </ui-lib-card>
+  }
+
+  @if (activeTab() === 'icons') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="icons" data-doc-anchor>
+      <div card-header>Icon customization</div>
+      <p>Swap icon names, move icon placement, or hide the icon entirely.</p>
+      <app-doc-demo-viewport>
+        <div class="doc-demo">
+          <ui-lib-accordion>
+            <ui-lib-accordion-panel
+              header="Using Plus/Minus"
+              expandIcon="minus"
+              collapseIcon="plus"
+            >
+              Shows plus when collapsed and minus when expanded.
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel
+              header="Arrow Icons"
+              expandIcon="arrow-up"
+              collapseIcon="arrow-down"
+            >
+              Swap arrow icon names per state.
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel header="Default Chevrons">
+              Defaults to chevron-down/up.
+            </ui-lib-accordion-panel>
+          </ui-lib-accordion>
+
+          <ui-lib-accordion>
+            <ui-lib-accordion-panel header="Icon at Start" iconPosition="start">
+              Icon appears at the start of the header.
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel header="Icon at End" iconPosition="end">
+              Icon appears at the end of the header.
+            </ui-lib-accordion-panel>
+          </ui-lib-accordion>
+
+          <ui-lib-accordion>
+            <ui-lib-accordion-panel header="Hidden Icon" [showIcon]="false">
+              Hide the toggle icon for a clean header.
+            </ui-lib-accordion-panel>
+          </ui-lib-accordion>
+        </div>
+      </app-doc-demo-viewport>
+      <app-doc-code-snippet [code]="iconSnippets.customIcons" language="html" />
+      <app-doc-code-snippet [code]="iconSnippets.iconPosition" language="html" />
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'toggle-icons') {
+    <div class="demo-grid" id="toggle-icons" data-doc-anchor>
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Custom toggle icon template</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              <ui-lib-accordion-panel header="Status Indicator">
+                <ng-template accordionToggleIcon let-expanded>
+                  <span class="custom-indicator" [class.active]="expanded">
+                    {{ expanded ? '−' : '+' }}
+                  </span>
+                </ng-template>
+                Template switches indicator color per state.
+              </ui-lib-accordion-panel>
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+        <app-doc-code-snippet [code]="iconSnippets.toggleTemplate" language="html" />
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Animated toggle icon</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              <ui-lib-accordion-panel header="Rotating Indicator">
+                <ng-template accordionToggleIcon let-expanded>
+                  <ui-lib-icon [name]="expanded ? 'loader' : 'loader-2'" class="indicator-rotate" />
+                </ng-template>
+                Uses a rotating icon animation.
+              </ui-lib-accordion-panel>
+              <ui-lib-accordion-panel header="Pulsing Indicator">
+                <ng-template accordionToggleIcon let-expanded>
+                  <ui-lib-icon
+                    [name]="expanded ? 'circle-dot' : 'circle'"
+                    class="indicator-pulse"
+                  />
+                </ng-template>
+                Pulses the icon when expanded.
+              </ui-lib-accordion-panel>
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Toggle icon with badge</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              <ui-lib-accordion-panel header="Notifications">
+                <ng-template accordionToggleIcon let-expanded>
+                  <span class="icon-with-badge" [class.is-active]="expanded">
+                    <ui-lib-icon [name]="expanded ? 'bell-off' : 'bell'" />
+                    <ui-lib-badge class="icon-badge" color="danger" size="sm">3</ui-lib-badge>
+                  </span>
+                </ng-template>
+                Badge stays visible regardless of state.
+              </ui-lib-accordion-panel>
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+    </div>
+  }
+
+  @if (activeTab() === 'animations') {
+    <div class="demo-grid" id="animations" data-doc-anchor>
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Default animation</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-accordion>
+              @for (item of faqItems; track item.value) {
+                <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                  {{ item.content }}
+                </ui-lib-accordion-panel>
+              }
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Reduced motion (simulated)</div>
+        <ui-lib-button
+          size="small"
+          variant="minimal"
+          appearance="ghost"
+          (click)="toggleReducedMotion()"
+        >
+          {{ reduceMotionDemo() ? 'Disable' : 'Enable' }} reduced motion
+        </ui-lib-button>
+        <app-doc-demo-viewport>
+          <div class="doc-demo" [class.demo-reduced-motion]="reduceMotionDemo()">
+            <ui-lib-accordion>
+              @for (item of faqItems; track item.value) {
+                <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                  {{ item.content }}
+                </ui-lib-accordion-panel>
+              }
+            </ui-lib-accordion>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Custom transition speeds</div>
+        <app-doc-demo-viewport>
+          <div class="animation-speed-grid">
+            <div class="doc-demo demo-fast-motion">
+              <div class="speed-label">Fast</div>
+              <ui-lib-accordion>
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+            <div class="doc-demo demo-slow-motion">
+              <div class="speed-label">Slow</div>
+              <ui-lib-accordion>
+                @for (item of faqItems; track item.value) {
+                  <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                    {{ item.content }}
+                  </ui-lib-accordion-panel>
+                }
+              </ui-lib-accordion>
+            </div>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+    </div>
   }
 
   @if (activeTab() === 'api-reference') {
