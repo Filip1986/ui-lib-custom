@@ -60,10 +60,10 @@ import {
 | `value` | `string \| null` | `null` | Unique id; auto-generated when null. |
 | `disabled` | `boolean` | `false` | Disables focus and toggle. |
 | `expanded` | `boolean` | `false` | Initial expanded state when uncontrolled. |
-| `iconPosition` | `AccordionIconPosition` | `'end'` | Icon placement: start or end. |
-| `expandIcon` | `string` | `'chevron-up'` | Icon name when expanded. |
-| `collapseIcon` | `string` | `'chevron-down'` | Icon name when collapsed. |
-| `showIcon` | `boolean` | `true` | Toggles icon visibility in the header. |
+| `iconPosition` | `'start' \| 'end'` | `'end'` | Position of the toggle icon in header. |
+| `expandIcon` | `string` | `'chevron-up'` | Icon name shown when panel is expanded. |
+| `collapseIcon` | `string` | `'chevron-down'` | Icon name shown when panel is collapsed. |
+| `showIcon` | `boolean` | `true` | Whether to show the toggle icon. |
 
 ### Template Directives
 | Name | Context | Description |
@@ -151,6 +151,50 @@ import { type AccordionVariant, type AccordionSize, type AccordionExpandMode, ty
 </ui-lib-accordion>
 ```
 
+## Icon Customization
+
+### Default Icons
+The accordion shows a chevron-down when collapsed and chevron-up when expanded.
+Icons appear at the end (right side) of the header by default.
+
+### Custom Icon Names
+```html
+<ui-lib-accordion-panel
+  header="Settings"
+  expandIcon="minus"
+  collapseIcon="plus"
+/>
+```
+
+### Icon Position
+```html
+<!-- Icon at start (left) -->
+<ui-lib-accordion-panel iconPosition="start" header="Start" />
+
+<!-- Icon at end (right, default) -->
+<ui-lib-accordion-panel iconPosition="end" header="End" />
+```
+
+### Hide Icon
+```html
+<ui-lib-accordion-panel [showIcon]="false" header="No Icon" />
+```
+
+### Custom Toggle Icon Template
+For complete control over the toggle indicator:
+```html
+<ui-lib-accordion-panel value="custom">
+  <ng-template accordionToggleIcon let-expanded>
+    @if (expanded) &#123;
+      <ui-lib-icon name="chevron-up" class="text-primary" />
+    &#125; @else &#123;
+      <ui-lib-icon name="chevron-down" class="text-muted" />
+    &#125;
+  </ng-template>
+  Content here
+</ui-lib-accordion-panel>
+```
+
 ## Theming
 Component CSS variables (set on host or theme scope):
 
@@ -165,11 +209,18 @@ Component CSS variables (set on host or theme scope):
 | `--uilib-accordion-header-padding-md` | `var(--uilib-space-4, 1rem)` | Header padding for medium size. |
 | `--uilib-accordion-header-padding-lg` | `var(--uilib-space-5, 1.25rem)` | Header padding for large size. |
 | `--uilib-accordion-header-padding` | `var(--uilib-accordion-header-padding-md, var(--uilib-space-4, 1rem))` | Effective header padding. |
+| `--uilib-accordion-header-font-size-sm` | `var(--uilib-font-size-sm, 0.875rem)` | Header font size for small. |
+| `--uilib-accordion-header-font-size-md` | `var(--uilib-font-size-md, 1rem)` | Header font size for medium. |
+| `--uilib-accordion-header-font-size-lg` | `var(--uilib-font-size-lg, 1.125rem)` | Header font size for large. |
+| `--uilib-accordion-header-font-size` | `var(--uilib-accordion-header-font-size-md, var(--uilib-font-size-md, 1rem))` | Effective header font size. |
 | `--uilib-accordion-header-bg` | `var(--uilib-surface, transparent)` | Header background. |
 | `--uilib-accordion-header-bg-hover` | `var(--uilib-surface-hover, color-mix(in srgb, currentColor 6%, transparent))` | Header hover background. |
 | `--uilib-accordion-header-color` | `var(--uilib-page-fg, #111827)` | Header text color. |
 | `--uilib-accordion-header-font-weight` | `var(--uilib-font-weight-500, 500)` | Header font weight. |
-| `--uilib-accordion-content-padding` | `var(--uilib-space-4, 1rem)` | Content padding. |
+| `--uilib-accordion-content-padding-sm` | `var(--uilib-space-3, 0.75rem)` | Content padding for small. |
+| `--uilib-accordion-content-padding-md` | `var(--uilib-space-4, 1rem)` | Content padding for medium. |
+| `--uilib-accordion-content-padding-lg` | `var(--uilib-space-5, 1.25rem)` | Content padding for large. |
+| `--uilib-accordion-content-padding` | `var(--uilib-accordion-content-padding-md, var(--uilib-space-4, 1rem))` | Effective content padding. |
 | `--uilib-accordion-content-bg` | `var(--uilib-surface, #ffffff)` | Content background. |
 | `--uilib-accordion-icon-size-sm` | `var(--uilib-icon-size-sm, 1rem)` | Icon size for small. |
 | `--uilib-accordion-icon-size-md` | `var(--uilib-icon-size-md, 1.25rem)` | Icon size for medium. |
@@ -180,11 +231,16 @@ Component CSS variables (set on host or theme scope):
 | `--uilib-accordion-icon-color-expanded` | `var(--uilib-primary, #2563eb)` | Icon color when expanded. |
 | `--uilib-accordion-icon-rotation` | `var(--uilib-rotation-0, 0deg)` | Rotation applied when expanded. |
 | `--uilib-accordion-icon-transition` | `transform var(--uilib-transition-fast, 200ms ease)` | Icon transition. |
+| `--uilib-accordion-icon-animation-duration` | `var(--uilib-transition-fast-duration, 150ms)` | Icon swap animation duration. |
+| `--uilib-accordion-icon-animation-easing` | `ease-in-out` | Icon swap animation easing. |
 | `--uilib-accordion-icon-gap` | `var(--uilib-space-2, 0.5rem)` | Gap between title and icon. |
 | `--uilib-accordion-icon-align` | `center` | Icon vertical alignment. |
 | `--uilib-accordion-focus-ring` | `0 0 0 2px var(--uilib-focus-ring-color, #2563eb55)` | Focus ring style. |
-| `--uilib-accordion-transition-duration` | `var(--uilib-transition-fast-duration, 200ms)` | Content transition duration. |
-| `--uilib-accordion-transition-easing` | `var(--uilib-transition-ease-out, ease-out)` | Content transition easing. |
+| `--uilib-accordion-content-animation-duration` | `var(--uilib-transition-normal-duration, 250ms)` | Content expand/collapse duration. |
+| `--uilib-accordion-content-animation-easing` | `var(--uilib-transition-ease-out, ease-out)` | Content expand/collapse easing. |
+| `--uilib-accordion-content-fade-duration` | `150ms` | Content fade duration. |
+| `--uilib-accordion-transition-duration` | `var(--uilib-transition-fast-duration, 200ms)` | Legacy content transition duration. |
+| `--uilib-accordion-transition-easing` | `var(--uilib-transition-ease-out, ease-out)` | Legacy content transition easing. |
 
 ### Theme Override Example
 ```scss
@@ -226,3 +282,4 @@ powershell -ExecutionPolicy Bypass -NoLogo -Command "cd D:/Work/Personal/Github/
 
 ## Breaking Changes
 - Icon placement now defaults to `end`. Set `iconPosition="start"` to keep the old layout.
+- Icon behavior now swaps between `collapseIcon` and `expandIcon` instead of rotation-only styling.

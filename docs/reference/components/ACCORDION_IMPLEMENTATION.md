@@ -17,8 +17,10 @@
 - Minimal DOM: header button + content region; host classes computed once.
 
 ## Animation Strategy
-- CSS-only expand/collapse using grid-row technique: `.accordion-panel-content` switches `grid-template-rows` between `0fr` and `1fr` with transition vars (`--uilib-accordion-transition-duration`, `--uilib-accordion-transition-easing`).
-- Toggle icons swap between `collapseIcon` and `expandIcon` names (no rotation required).
+- CSS-only expand/collapse using grid-row technique: `.accordion-panel-content` switches `grid-template-rows` between `0fr` and `1fr` with transition vars (`--uilib-accordion-content-animation-duration`, `--uilib-accordion-content-animation-easing`).
+- Content fades in/out via opacity (`--uilib-accordion-content-fade-duration`) to reduce perceived layout jumps.
+- Toggle icons cross-fade between `collapseIcon` and `expandIcon` layers with `--uilib-accordion-icon-animation-duration` and `--uilib-accordion-icon-animation-easing`.
+- `will-change: grid-template-rows, opacity` is applied to content for smoother transitions on large panels.
 - `accordionToggleIcon` template allows fully custom icon content.
 - `prefers-reduced-motion` disables icon/content transitions when requested.
 
