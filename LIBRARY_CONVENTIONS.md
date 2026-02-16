@@ -81,6 +81,15 @@
   - UI text (buttons, labels, nav, form controls, `.btn`): `var(--uilib-font-ui)`.
   - Monospace (`code`, `pre`, `.monospace`): `var(--uilib-font-mono)`.
   - Theme presets supply these via `ThemePresetTypography`; `fontFamily` remains a backward-compatible alias for body/UI fonts.
+- **View Encapsulation**: All library components **must** use `ViewEncapsulation.None`. This is critical for CSS variable cascading and transitions/animations to work correctly across component boundaries. Angular's default emulated encapsulation breaks theming by scoping selectors with `_ngcontent-*` attributes.
+```typescript
+  import { ViewEncapsulation } from '@angular/core';
+
+  @Component({
+    // ...
+    encapsulation: ViewEncapsulation.None,  // Required for all ui-lib-* components
+  })
+```
 
 ## Design Tokens
 
