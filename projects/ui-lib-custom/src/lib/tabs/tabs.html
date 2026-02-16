@@ -1,7 +1,24 @@
+@if (shouldShowScrollButtons()) {
+  <button
+    type="button"
+    class="tab-scroll tab-scroll-prev"
+    [attr.aria-controls]="tabListDomId()"
+    [attr.aria-label]="scrollPrevLabel()"
+    [attr.aria-disabled]="!canScrollPrevTab() ? true : null"
+    [attr.tabindex]="canScrollPrevTab() ? 0 : -1"
+    [disabled]="!canScrollPrevTab()"
+    (click)="onScrollPrev()"
+  >
+    <ui-lib-icon [name]="scrollPrevIcon()" />
+  </button>
+}
+
 <nav
   [class]="'tab-list ' + tabsClasses()"
   role="tablist"
   [attr.aria-orientation]="orientation()"
+  [id]="tabListDomId()"
+  (scroll)="onTabListScrolled()"
   #tabList
 >
   @for (tab of tabContexts(); track tab.index) {
@@ -52,6 +69,21 @@
     ></span>
   }
 </nav>
+
+@if (shouldShowScrollButtons()) {
+  <button
+    type="button"
+    class="tab-scroll tab-scroll-next"
+    [attr.aria-controls]="tabListDomId()"
+    [attr.aria-label]="scrollNextLabel()"
+    [attr.aria-disabled]="!canScrollNextTab() ? true : null"
+    [attr.tabindex]="canScrollNextTab() ? 0 : -1"
+    [disabled]="!canScrollNextTab()"
+    (click)="onScrollNext()"
+  >
+    <ui-lib-icon [name]="scrollNextIcon()" />
+  </button>
+}
 
 <section class="tab-panels">
   @for (tab of tabContexts(); track tab.index) {

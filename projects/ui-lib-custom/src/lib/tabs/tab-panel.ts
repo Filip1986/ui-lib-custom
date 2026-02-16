@@ -1,10 +1,18 @@
-import { ChangeDetectionStrategy, Component, ElementRef, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  computed,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'ui-lib-tab-panel',
   standalone: true,
   template: '<ng-content />',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'panelClasses()',
     '[attr.role]': '"tabpanel"',
@@ -21,7 +29,7 @@ export class TabPanel {
   labelId = input<string>('');
   active = input<boolean>(false);
 
-  panelClasses = computed(() => {
+  panelClasses = computed<string>(() => {
     const classes = ['tab-panel'];
     if (this.active()) {
       classes.push('tab-panel-active');
@@ -29,7 +37,7 @@ export class TabPanel {
     return classes.join(' ');
   });
 
-  focus() {
+  focus(): void {
     this.el.nativeElement.focus();
   }
 }

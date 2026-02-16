@@ -17,4 +17,5 @@
 - Styling via CSS vars (`--uilib-tabs-*`, `--uilib-tab-*`, `--uilib-tabs-indicator-*`); variants map to tokens.
 - Slots: `uiLibTabLabel` template for custom labels (icons, stacks); panel content via projection.
 - Events: `selectedChange`, `selectedIndexChange`, `tabClose`, `tabFocus` for external orchestration; controlled mode with `selectedValue` preferred for dynamic lists.
-- Future: overflow handling (`scrollBehavior='arrows'|'overflow-menu'`), primitives (`ui-lib-tab-list`) if deeper composition needed.
+- Scroll behavior: `scrollBehavior='arrows'` renders prev/next buttons when overflow is detected; ResizeObserver drives visibility and disablement.
+- Future: primitives (`ui-lib-tab-list`) if deeper composition needed.

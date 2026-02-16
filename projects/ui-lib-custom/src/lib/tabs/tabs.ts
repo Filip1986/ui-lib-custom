@@ -13,8 +13,13 @@ import {
   output,
   signal,
   OnDestroy,
+  AfterViewInit,
+  ViewEncapsulation,
+  Signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Icon } from '../icon/icon';
+import { SemanticIcon } from '../icon/icon.semantics';
 import { Tab } from './tab';
 import { TabPanel } from './tab-panel';
 import {
@@ -25,17 +30,40 @@ import {
   TabsSize,
   TabsValue,
   TabsVariant,
+  TabContext,
 } from './tabs.types';
+
+type RtlScrollAxis = 'default' | 'negative' | 'reverse';
+
+type TabsSelection = { value: TabsValue | null; index: number };
+
+type TabsContextItem = TabContext & {
+  ref: Tab;
+  disabled: boolean;
+  closable: boolean;
+  label?: string;
+};
+
+interface ScrollMetrics {
+  axis: 'horizontal' | 'vertical';
+  max: number;
+  position: number;
+}
 
 @Component({
   selector: 'ui-lib-tabs',
   standalone: true,
-  imports: [CommonModule, TabPanel],
+  imports: [CommonModule, TabPanel, Icon],
   templateUrl: './tabs.html',
   styleUrl: './tabs.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    '[attr.data-scroll-arrows]': 'shouldShowScrollButtons() ? true : null',
+    '[attr.data-orientation]': 'orientation()',
+  },
 })
-export class Tabs implements OnDestroy {
+export class Tabs implements OnDestroy, AfterViewInit {
   private static nextId = 0;
   readonly uid = `ui-lib-tabs-${++Tabs.nextId}`;
 
@@ -59,40 +87,54 @@ export class Tabs implements OnDestroy {
   tabClose = output<{ value: TabsValue | null; index: number }>();
   tabFocus = output<{ value: TabsValue | null; index: number }>();
 
-  readonly tabs = contentChildren(Tab);
+  readonly tabs: Signal<readonly Tab[]> = contentChildren(Tab);
 
   @ViewChildren('tabButton') tabButtons?: QueryList<ElementRef<HTMLButtonElement>>;
   @ViewChild('tabList') tabList?: ElementRef<HTMLElement>;
   @ViewChildren(TabPanel) tabPanels?: QueryList<TabPanel>;
 
   private renderedValues = signal<Set<TabsValue | null>>(new Set());
+  private readonly overflowDetected = signal<boolean>(false);
+  private readonly canScrollPrev = signal<boolean>(false);
+  private readonly canScrollNext = signal<boolean>(false);
+  private readonly scrollable = computed<boolean>(() => this.scrollBehavior() === 'arrows');
+  private readonly showScrollButtons = computed<boolean>(
+    () => this.scrollable() && this.overflowDetected()
+  );
+  private readonly scrollAxis = computed<'horizontal' | 'vertical'>(() =>
+    this.orientation() === 'vertical' ? 'vertical' : 'horizontal'
+  );
+  private readonly tabListId = computed<string>(() => `${this.uid}-tablist`);
+
   private indicatorStyle = signal<{ transform: string; width?: string; height?: string } | null>(
     null
   );
-  private internalSelection = signal<{ value: TabsValue | null; index: number }>({
+  private internalSelection = signal<TabsSelection>({
     value: null,
     index: -1,
   });
 
-  tabContexts = computed(() => {
+  tabContexts = computed<TabsContextItem[]>(() => {
     const tabs = this.tabs();
-    return tabs.map((tab, index) => ({
-      ref: tab,
-      value: tab.value() ?? index,
-      index,
-      disabled: this.disabled() || tab.disabled(),
-      closable: tab.closable() || this.closable(),
-      label: tab.label(),
-      labelTemplate: tab.labelTemplate?.template as TemplateRef<unknown> | undefined,
-      content: tab.content,
-    }));
+    return tabs.map(
+      (tab, index): TabsContextItem => ({
+        ref: tab,
+        value: tab.value() ?? index,
+        index,
+        disabled: this.disabled() || tab.disabled(),
+        closable: tab.closable() || this.closable(),
+        label: tab.label() ?? undefined,
+        labelTemplate: tab.labelTemplate?.template as TemplateRef<unknown> | undefined,
+        content: tab.content,
+      })
+    );
   });
 
-  private controlled = computed(
+  private controlled = computed<boolean>(
     () => this.selectedValue() !== null || this.selectedIndex() !== null
   );
 
-  private resolvedSelection = computed(() => {
+  private resolvedSelection = computed<TabsSelection>(() => {
     const tabs = this.tabContexts();
     const byValue = this.selectedValue();
     if (byValue !== null) {
@@ -124,11 +166,11 @@ export class Tabs implements OnDestroy {
     return { value: firstEnabled?.value ?? null, index: firstEnabled?.index ?? -1 };
   });
 
-  activeSelection = computed(() =>
+  activeSelection = computed<TabsSelection>(() =>
     this.controlled() ? this.resolvedSelection() : this.internalSelection()
   );
 
-  tabsClasses = computed(() => {
+  tabsClasses = computed<string>(() => {
     const classes = [
       'tabs-root',
       `tabs-${this.variant()}`,
@@ -146,12 +188,34 @@ export class Tabs implements OnDestroy {
 
   private indicatorKey: string | null = null;
   private indicatorRaf: number | null = null;
+  private scrollStateRaf: number | null = null;
+  private scrollIntoViewRaf: number | null = null;
+  private resizeObserver: ResizeObserver | null = null;
+  private isRtl = false;
+  private rtlScrollAxis: RtlScrollAxis = 'default';
+
+  private readonly onTabListScroll: () => void = () => {
+    this.scheduleScrollStateUpdate();
+  };
 
   constructor() {
     effect(() => {
       if (!this.controlled()) {
         this.internalSelection.set(this.resolvedSelection());
       }
+    });
+
+    effect(() => {
+      this.tabContexts();
+      this.orientation();
+      this.scrollBehavior();
+      if (!this.scrollable()) {
+        this.overflowDetected.set(false);
+        this.canScrollPrev.set(false);
+        this.canScrollNext.set(false);
+        return;
+      }
+      queueMicrotask(() => this.scheduleScrollStateUpdate());
     });
 
     effect(() => {
@@ -171,6 +235,8 @@ export class Tabs implements OnDestroy {
         queueMicrotask(() => this.focusActivePanel());
       }
 
+      this.scheduleScrollIntoView(active.index);
+
       const key =
         variant === 'material' ? `${variant}:${this.orientation()}:${active.index}` : null;
       if (variant !== 'material') {
@@ -187,11 +253,19 @@ export class Tabs implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.cancelIndicatorRaf();
+  ngAfterViewInit(): void {
+    this.setupScrollObservers();
+    this.scheduleScrollStateUpdate();
   }
 
-  private scheduleIndicatorUpdate() {
+  ngOnDestroy(): void {
+    this.cancelIndicatorRaf();
+    this.cancelScrollRaf();
+    this.cancelScrollIntoViewRaf();
+    this.teardownScrollObservers();
+  }
+
+  private scheduleIndicatorUpdate(): void {
     this.cancelIndicatorRaf();
     this.indicatorRaf = requestAnimationFrame(() => {
       this.indicatorRaf = null;
@@ -199,14 +273,14 @@ export class Tabs implements OnDestroy {
     });
   }
 
-  private cancelIndicatorRaf() {
+  private cancelIndicatorRaf(): void {
     if (this.indicatorRaf !== null) {
       cancelAnimationFrame(this.indicatorRaf);
       this.indicatorRaf = null;
     }
   }
 
-  onSelect(tab: { value: TabsValue | null; index: number; disabled: boolean }) {
+  onSelect(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
     if (tab.disabled || this.disabled()) {
       return;
     }
@@ -217,16 +291,21 @@ export class Tabs implements OnDestroy {
 
     this.selectedChange.emit({ value: tab.value, index: tab.index });
     this.selectedIndexChange.emit(tab.index);
+    this.scheduleScrollIntoView(tab.index);
   }
 
-  onFocus(tab: { value: TabsValue | null; index: number; disabled: boolean }) {
+  onFocus(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
     if (tab.disabled || this.disabled()) {
       return;
     }
     this.tabFocus.emit({ value: tab.value, index: tab.index });
+    this.scheduleScrollIntoView(tab.index);
   }
 
-  onClose(tab: { value: TabsValue | null; index: number; disabled: boolean }, event: MouseEvent) {
+  onClose(
+    tab: { value: TabsValue | null; index: number; disabled: boolean },
+    event: MouseEvent
+  ): void {
     event.stopPropagation();
     if (tab.disabled || this.disabled()) {
       return;
@@ -234,26 +313,26 @@ export class Tabs implements OnDestroy {
     this.tabClose.emit({ value: tab.value, index: tab.index });
   }
 
-  isActive(index: number) {
+  isActive(index: number): boolean {
     return this.activeSelection().index === index;
   }
 
-  tabId(index: number) {
+  tabId(index: number): string {
     return `${this.uid}-tab-${index}`;
   }
 
-  panelId(index: number) {
+  panelId(index: number): string {
     return `${this.uid}-panel-${index}`;
   }
 
-  tabTabIndex(index: number, disabled: boolean) {
+  tabTabIndex(index: number, disabled: boolean): number {
     if (disabled || this.disabled()) {
       return -1;
     }
     return this.isActive(index) ? 0 : -1;
   }
 
-  shouldRenderPanel(value: TabsValue | null, index: number) {
+  shouldRenderPanel(value: TabsValue | null, index: number): boolean {
     const lazy = this.lazy();
     if (lazy === false) {
       return true;
@@ -271,7 +350,7 @@ export class Tabs implements OnDestroy {
     return true;
   }
 
-  onKeydown(event: KeyboardEvent, currentIndex: number) {
+  onKeydown(event: KeyboardEvent, currentIndex: number): void {
     const key = event.key;
     if (key === 'Home') {
       event.preventDefault();
@@ -308,7 +387,7 @@ export class Tabs implements OnDestroy {
     }
   }
 
-  private focusNext(currentIndex: number) {
+  private focusNext(currentIndex: number): void {
     const tabs = this.tabContexts();
     for (let i = currentIndex + 1; i < tabs.length; i++) {
       if (!tabs[i].disabled) {
@@ -319,7 +398,7 @@ export class Tabs implements OnDestroy {
     }
   }
 
-  private focusPrev(currentIndex: number) {
+  private focusPrev(currentIndex: number): void {
     const tabs = this.tabContexts();
     for (let i = currentIndex - 1; i >= 0; i--) {
       if (!tabs[i].disabled) {
@@ -330,11 +409,11 @@ export class Tabs implements OnDestroy {
     }
   }
 
-  private firstEnabledIndex() {
+  private firstEnabledIndex(): number {
     return this.tabContexts().find((t) => !t.disabled)?.index ?? -1;
   }
 
-  private lastEnabledIndex() {
+  private lastEnabledIndex(): number {
     const tabs = this.tabContexts();
     for (let i = tabs.length - 1; i >= 0; i--) {
       if (!tabs[i].disabled) {
@@ -344,17 +423,18 @@ export class Tabs implements OnDestroy {
     return -1;
   }
 
-  private focusIndex(index: number) {
+  private focusIndex(index: number): void {
     if (index < 0) {
       return;
     }
     const btn = this.tabButtons?.get(index)?.nativeElement;
     if (btn) {
+      this.scheduleScrollIntoView(index);
       btn.focus();
     }
   }
 
-  private focusActivePanel() {
+  private focusActivePanel(): void {
     const activeIndex = this.activeSelection().index;
     const panel = this.tabPanels?.get(activeIndex);
     if (panel) {
@@ -362,7 +442,7 @@ export class Tabs implements OnDestroy {
     }
   }
 
-  private updateIndicator() {
+  private updateIndicator(): void {
     if (this.variant() !== 'material') {
       this.indicatorStyle.set(null);
       return;
@@ -396,7 +476,262 @@ export class Tabs implements OnDestroy {
     }
   }
 
-  indicatorStyles() {
+  indicatorStyles(): { transform: string; width?: string; height?: string } | null {
     return this.indicatorStyle();
+  }
+
+  tabListDomId(): string {
+    return this.tabListId();
+  }
+
+  shouldShowScrollButtons(): boolean {
+    return this.showScrollButtons();
+  }
+
+  canScrollPrevTab(): boolean {
+    return this.canScrollPrev();
+  }
+
+  canScrollNextTab(): boolean {
+    return this.canScrollNext();
+  }
+
+  scrollPrevLabel(): string {
+    return 'Previous tabs';
+  }
+
+  scrollNextLabel(): string {
+    return 'Next tabs';
+  }
+
+  scrollPrevIcon(): SemanticIcon {
+    return this.orientation() === 'vertical' ? 'chevron-up' : 'chevron-left';
+  }
+
+  scrollNextIcon(): SemanticIcon {
+    return this.orientation() === 'vertical' ? 'chevron-down' : 'chevron-right';
+  }
+
+  onScrollPrev(): void {
+    this.scrollByStep('prev');
+  }
+
+  onScrollNext(): void {
+    this.scrollByStep('next');
+  }
+
+  onTabListScrolled(): void {
+    this.onTabListScroll();
+  }
+
+  private setupScrollObservers(): void {
+    const list = this.tabList?.nativeElement;
+    if (!list) {
+      return;
+    }
+
+    if (typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.scheduleScrollStateUpdate();
+      });
+      this.resizeObserver.observe(list);
+    }
+  }
+
+  private teardownScrollObservers(): void {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
+  }
+
+  private cancelScrollRaf(): void {
+    if (this.scrollStateRaf !== null) {
+      cancelAnimationFrame(this.scrollStateRaf);
+      this.scrollStateRaf = null;
+    }
+  }
+
+  private cancelScrollIntoViewRaf(): void {
+    if (this.scrollIntoViewRaf !== null) {
+      cancelAnimationFrame(this.scrollIntoViewRaf);
+      this.scrollIntoViewRaf = null;
+    }
+  }
+
+  private scheduleScrollStateUpdate(): void {
+    this.cancelScrollRaf();
+    this.scrollStateRaf = requestAnimationFrame(() => {
+      this.scrollStateRaf = null;
+      this.updateScrollState();
+    });
+  }
+
+  private scheduleScrollIntoView(index: number): void {
+    this.cancelScrollIntoViewRaf();
+    this.scrollIntoViewRaf = requestAnimationFrame(() => {
+      this.scrollIntoViewRaf = null;
+      const btn = this.tabButtons?.get(index)?.nativeElement;
+      if (!btn) {
+        return;
+      }
+      const options: ScrollIntoViewOptions = {
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest',
+      };
+      btn.scrollIntoView(options);
+      this.scheduleScrollStateUpdate();
+    });
+  }
+
+  private updateScrollState(): void {
+    if (!this.scrollable()) {
+      this.overflowDetected.set(false);
+      this.canScrollPrev.set(false);
+      this.canScrollNext.set(false);
+      return;
+    }
+    const list = this.tabList?.nativeElement;
+    if (!list) {
+      this.overflowDetected.set(false);
+      this.canScrollPrev.set(false);
+      this.canScrollNext.set(false);
+      return;
+    }
+
+    const isRtl: boolean = this.readIsRtl(list);
+    if (isRtl !== this.isRtl) {
+      this.isRtl = isRtl;
+      this.rtlScrollAxis = isRtl ? this.detectRtlScrollAxis(list) : 'default';
+    }
+
+    const metrics: ScrollMetrics = this.computeScrollMetrics(
+      list,
+      this.scrollAxis(),
+      this.isRtl,
+      this.rtlScrollAxis
+    );
+
+    this.overflowDetected.set(metrics.max > 1);
+    this.canScrollPrev.set(metrics.position > 1);
+    this.canScrollNext.set(metrics.position < metrics.max - 1);
+  }
+
+  private computeScrollMetrics(
+    list: HTMLElement,
+    axis: 'horizontal' | 'vertical',
+    isRtl: boolean,
+    rtlAxis: RtlScrollAxis
+  ): ScrollMetrics {
+    if (axis === 'vertical') {
+      const max: number = Math.max(0, list.scrollHeight - list.clientHeight);
+      const position: number = list.scrollTop;
+      return { axis, max, position };
+    }
+
+    const max: number = Math.max(0, list.scrollWidth - list.clientWidth);
+    const position: number = this.getNormalizedScrollPosition(list, isRtl, rtlAxis, max);
+    return { axis, max, position };
+  }
+
+  private getNormalizedScrollPosition(
+    list: HTMLElement,
+    isRtl: boolean,
+    rtlAxis: RtlScrollAxis,
+    max: number
+  ): number {
+    if (!isRtl) {
+      return list.scrollLeft;
+    }
+
+    if (rtlAxis === 'negative') {
+      return Math.abs(list.scrollLeft);
+    }
+
+    if (rtlAxis === 'reverse') {
+      return max - list.scrollLeft;
+    }
+
+    return list.scrollLeft;
+  }
+
+  private setNormalizedScrollPosition(
+    list: HTMLElement,
+    axis: 'horizontal' | 'vertical',
+    position: number,
+    isRtl: boolean,
+    rtlAxis: RtlScrollAxis
+  ): void {
+    if (axis === 'vertical') {
+      list.scrollTo({ top: position, behavior: 'smooth' });
+      return;
+    }
+
+    if (!isRtl) {
+      list.scrollTo({ left: position, behavior: 'smooth' });
+      return;
+    }
+
+    const max: number = Math.max(0, list.scrollWidth - list.clientWidth);
+
+    if (rtlAxis === 'negative') {
+      list.scrollTo({ left: -position, behavior: 'smooth' });
+      return;
+    }
+
+    if (rtlAxis === 'reverse') {
+      list.scrollTo({ left: max - position, behavior: 'smooth' });
+      return;
+    }
+
+    list.scrollTo({ left: position, behavior: 'smooth' });
+  }
+
+  private scrollByStep(direction: 'prev' | 'next'): void {
+    const list = this.tabList?.nativeElement;
+    if (!list) {
+      return;
+    }
+
+    const axis: 'horizontal' | 'vertical' = this.scrollAxis();
+    const viewport: number = axis === 'horizontal' ? list.clientWidth : list.clientHeight;
+    const step: number = Math.max(1, Math.floor(viewport * 0.8));
+
+    const metrics: ScrollMetrics = this.computeScrollMetrics(
+      list,
+      axis,
+      this.isRtl,
+      this.rtlScrollAxis
+    );
+    const delta: number = direction === 'prev' ? -step : step;
+    const next: number = Math.min(Math.max(0, metrics.position + delta), metrics.max);
+
+    this.setNormalizedScrollPosition(list, axis, next, this.isRtl, this.rtlScrollAxis);
+    this.scheduleScrollStateUpdate();
+  }
+
+  private readIsRtl(list: HTMLElement): boolean {
+    const direction: string = getComputedStyle(list).direction;
+    return direction === 'rtl';
+  }
+
+  private detectRtlScrollAxis(list: HTMLElement): RtlScrollAxis {
+    const original: number = list.scrollLeft;
+    list.scrollLeft = 1;
+    const positive: number = list.scrollLeft;
+    list.scrollLeft = -1;
+    const negative: number = list.scrollLeft;
+    list.scrollLeft = original;
+
+    if (negative < 0) {
+      return 'negative';
+    }
+
+    if (positive === 0) {
+      return 'reverse';
+    }
+
+    return 'default';
   }
 }

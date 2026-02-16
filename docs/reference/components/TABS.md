@@ -10,6 +10,7 @@ Accessible, theme-aware tabs for switching between content sections. Supports Ma
 - Orientation, alignment, icon+text labels, closable/disabled tabs
 - Animated indicator (material), roving tabindex + keyboard navigation
 - CSS variable theming hooked to design tokens
+- Scrollable tablist with optional arrows (`scrollBehavior='arrows'`)
 
 ## Usage
 ```html
@@ -47,6 +48,17 @@ Closable with lazy keep-alive:
 </ui-lib-tabs>
 ```
 
+Scrollable with arrows:
+```html
+<ui-lib-tabs scrollBehavior="arrows">
+  <ui-lib-tab label="Overview">Overview content</ui-lib-tab>
+  <ui-lib-tab label="Billing">Billing content</ui-lib-tab>
+  <ui-lib-tab label="Usage">Usage content</ui-lib-tab>
+  <ui-lib-tab label="Security">Security content</ui-lib-tab>
+  <ui-lib-tab label="Audit">Audit content</ui-lib-tab>
+</ui-lib-tabs>
+```
+
 ## API Reference
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
@@ -59,7 +71,7 @@ Closable with lazy keep-alive:
 | `defaultIndex` | `number \| null` | `null` | Uncontrolled initial index |
 | `defaultValue` | `TabsValue \| null` | `null` | Uncontrolled initial value |
 | `lazy` | `TabsLazyMode` | `false` | Panel rendering: eager (`false`), unmount on blur (`'unmount'`), cache (`'keep-alive'`) |
-| `scrollBehavior` | `TabsScrollBehavior` | `'auto'` | Overflow handling (future: arrows/menu) |
+| `scrollBehavior` | `TabsScrollBehavior` | `'auto'` | Overflow handling: native scroll (`'auto'`), arrows when overflow (`'arrows'`), menu (future) |
 | `closable` | `boolean` | `false` | Makes tabs closable unless overridden per tab |
 | `disabled` | `boolean` | `false` | Disable entire tablist |
 | `focusPanelOnSelect` | `boolean` | `false` | Move focus into panel after selection |
@@ -92,6 +104,7 @@ export type TabsValue = string | number;
 - Keyboard: Left/Right (or Up/Down when vertical) to navigate; Home/End jump ends; Enter/Space activate
 - Disabled tabs set `aria-disabled="true"` and are skipped by roving focus
 - Indicator/focus states use theme tokens; icon-only tabs should set `aria-label`
+- Scroll arrows use `aria-label` and are disabled when at the start/end
 
 ## Variants
 - **material**: underline indicator with animation; hover background subtle; transparent base
@@ -102,3 +115,34 @@ export type TabsValue = string | number;
 - Lazy `keep-alive` caches rendered panels; `unmount` removes inactive panels
 - Controlled mode prefers `selectedValue` for dynamic tab lists; `selectedIndex` kept for PrimeNG parity
 - Use CSS vars (`--uilib-tabs-*`, `--uilib-tab-*`) to theme without rebuild
+- Scroll arrows appear only when the tablist overflows
+- Scroll buttons are styled via CSS vars (see below)
+
+## Theming (Scroll Arrows)
+Set these CSS variables to customize the arrow buttons:
+- `--uilib-tabs-nav-button-size`
+- `--uilib-tabs-nav-button-bg`
+- `--uilib-tabs-nav-button-hover-bg`
+- `--uilib-tabs-nav-button-disabled-opacity`
+- `--uilib-tabs-nav-button-color`
+- `--uilib-tabs-nav-button-border`
+- `--uilib-tabs-nav-button-radius`
+- `--uilib-tabs-nav-button-shadow`
+- `--uilib-tabs-nav-button-active-bg`
+- `--uilib-tabs-nav-button-gap`
+
+**Defaults:**
+```css
+:root {
+  --uilib-tabs-nav-button-size: 2rem;
+  --uilib-tabs-nav-button-bg: var(--uilib-surface-secondary);
+  --uilib-tabs-nav-button-hover-bg: var(--uilib-surface-tertiary);
+  --uilib-tabs-nav-button-disabled-opacity: 0.4;
+  --uilib-tabs-nav-button-color: var(--uilib-tabs-color);
+  --uilib-tabs-nav-button-border: transparent;
+  --uilib-tabs-nav-button-radius: var(--uilib-radius-md);
+  --uilib-tabs-nav-button-shadow: none;
+  --uilib-tabs-nav-button-active-bg: color-mix(in srgb, currentColor 10%, transparent);
+  --uilib-tabs-nav-button-gap: var(--uilib-space-2);
+}
+```

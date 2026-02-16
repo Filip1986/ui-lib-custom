@@ -6,6 +6,7 @@ import {
   TemplateRef,
   ViewChild,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
 import { TabsValue } from './tabs.types';
 
@@ -22,6 +23,7 @@ export class TabLabel {
   standalone: true,
   template: '<ng-template><ng-content /></ng-template>',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Tab {
   value = input<TabsValue | null>(null);
