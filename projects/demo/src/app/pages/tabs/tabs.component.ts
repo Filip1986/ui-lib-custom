@@ -12,6 +12,7 @@ import {
   Tabs,
   Tab,
   TabLabel,
+  TabContent,
   TabsAlignment,
   TabsLazyMode,
   TabsOrientation,
@@ -48,6 +49,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     Tabs,
     Tab,
     TabLabel,
+    TabContent,
     Card,
     Button,
     Icon,
@@ -71,10 +73,10 @@ export class TabsDemoComponent {
   ];
 
   activeTab = signal<TabKey>('playground');
-  setTab(tab: TabKey) {
+  setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
-  onTabChange(value: TabsValue | null) {
+  onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
@@ -157,11 +159,13 @@ export class TabsDemoComponent {
     { value: 'third', label: 'Third', content: 'Controlled tab three.' },
   ];
 
-  controlledIndex = signal(0);
-  controlledSelection = computed(() => this.controlledIndex());
+  controlledIndex = signal<number>(0);
+  controlledSelection = computed<number>(() => this.controlledIndex());
 
-  track = (_: number, item: any) =>
-    item && typeof item === 'object' && 'value' in item ? (item as any).value : (item ?? _);
+  track = (_: number, item: unknown): TabsValue | number =>
+    item && typeof item === 'object' && 'value' in (item as { value?: unknown })
+      ? ((item as { value: TabsValue }).value ?? _)
+      : _;
 
   readonly snippets = {
     basic: `<ui-lib-tabs>
@@ -191,6 +195,14 @@ export class TabsDemoComponent {
   <ui-lib-tab label="One">One</ui-lib-tab>
   <ui-lib-tab label="Two">Two</ui-lib-tab>
 </ui-lib-tabs>`,
+    perTabLazy: `<ui-lib-tabs>
+  <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
+  <ui-lib-tab label="Lazy" lazy="unmount">
+    <ng-template uiLibTabContent>
+      <heavy-component />
+    </ng-template>
+  </ui-lib-tab>
+</ui-lib-tabs>`,
   } as const;
 
   readonly appliedTheme = computed(() => this.themeService.getCssVars(this.themeService.preset()));
@@ -204,39 +216,39 @@ export class TabsDemoComponent {
     });
   }
 
-  setVariant(variant: TabsVariant) {
+  setVariant(variant: TabsVariant): void {
     this.variant.set(variant);
   }
 
-  setSize(size: TabsSize) {
+  setSize(size: TabsSize): void {
     this.size.set(size);
   }
 
-  setOrientation(orientation: TabsOrientation) {
+  setOrientation(orientation: TabsOrientation): void {
     this.orientation.set(orientation);
   }
 
-  setAlign(align: TabsAlignment) {
+  setAlign(align: TabsAlignment): void {
     this.align.set(align);
   }
 
-  setLazy(mode: TabsLazyMode) {
+  setLazy(mode: TabsLazyMode): void {
     this.lazy.set(mode);
   }
 
-  toggleClosable(on: boolean) {
+  toggleClosable(on: boolean): void {
     this.closable.set(on);
   }
 
-  toggleDisabled(on: boolean) {
+  toggleDisabled(on: boolean): void {
     this.disabledAll.set(on);
   }
 
-  onCloseTab(payload: { value: TabsValue | null; index: number }) {
+  onCloseTab(payload: { value: TabsValue | null; index: number }): void {
     this.closableTabs.update((tabs) => tabs.filter((tab) => tab.value !== payload.value));
   }
 
-  resetClosableTabs() {
+  resetClosableTabs(): void {
     this.closableTabs.set([
       { value: 'alpha', label: 'Alpha', closable: true, content: 'Alpha content' },
       { value: 'beta', label: 'Beta', closable: true, content: 'Beta content' },
@@ -244,11 +256,11 @@ export class TabsDemoComponent {
     ]);
   }
 
-  onControlledChange(payload: { value: TabsValue | null; index: number }) {
+  onControlledChange(payload: { value: TabsValue | null; index: number }): void {
     this.controlledIndex.set(payload.index);
   }
 
-  selectControlled(index: number) {
+  selectControlled(index: number): void {
     this.controlledIndex.set(index);
   }
 }

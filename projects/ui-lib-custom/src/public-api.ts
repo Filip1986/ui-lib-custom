@@ -31,7 +31,7 @@ export * from './lib/icon-button/icon-button';
 export * from './lib/alert/alert';
 export * from './lib/tabs/tabs';
 export * from './lib/tabs/tab';
-export { TabLabel } from './lib/tabs/tab';
+export { TabLabel, TabContent } from './lib/tabs/tab';
 export * from './lib/tabs/tab-panel';
 export * from './lib/tabs/tabs.types';
 

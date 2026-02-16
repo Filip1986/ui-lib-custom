@@ -8,13 +8,21 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { TabsValue } from './tabs.types';
+import { TabsLazyMode, TabsValue } from './tabs.types';
 
 @Directive({
   selector: '[uiLibTabLabel]',
   standalone: true,
 })
 export class TabLabel {
+  constructor(public readonly template: TemplateRef<unknown>) {}
+}
+
+@Directive({
+  selector: '[uiLibTabContent]',
+  standalone: true,
+})
+export class TabContent {
   constructor(public readonly template: TemplateRef<unknown>) {}
 }
 
@@ -30,7 +38,9 @@ export class Tab {
   label = input<string | null>(null);
   disabled = input<boolean>(false);
   closable = input<boolean>(false);
+  lazy = input<TabsLazyMode | undefined>(undefined);
 
   @ViewChild(TemplateRef, { static: true }) content?: TemplateRef<unknown>;
   @ContentChild(TabLabel) labelTemplate?: TabLabel;
+  @ContentChild(TabContent) contentTemplate?: TabContent;
 }

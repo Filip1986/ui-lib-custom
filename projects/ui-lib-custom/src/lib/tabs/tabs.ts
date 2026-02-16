@@ -31,6 +31,7 @@ import {
   TabsValue,
   TabsVariant,
   TabContext,
+  TabsMode,
 } from './tabs.types';
 
 type RtlScrollAxis = 'default' | 'negative' | 'reverse';
@@ -42,6 +43,8 @@ type TabsContextItem = TabContext & {
   disabled: boolean;
   closable: boolean;
   label?: string;
+  contentTemplate?: TemplateRef<unknown>;
+  lazy: TabsLazyMode;
 };
 
 interface ScrollMetrics {
@@ -71,6 +74,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   size = input<TabsSize>('medium');
   orientation = input<TabsOrientation>('horizontal');
   align = input<TabsAlignment>('start');
+  mode = input<TabsMode>('default');
   selectedValue = input<TabsValue | null>(null);
   selectedIndex = input<number | null>(null);
   defaultValue = input<TabsValue | null>(null);
@@ -84,6 +88,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   selectedChange = output<{ value: TabsValue | null; index: number }>();
   selectedIndexChange = output<number>();
+  navigate = output<{ value: TabsValue | null; index: number }>();
   tabClose = output<{ value: TabsValue | null; index: number }>();
   tabFocus = output<{ value: TabsValue | null; index: number }>();
 
@@ -104,6 +109,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   private readonly scrollAxis = computed<'horizontal' | 'vertical'>(() =>
     this.orientation() === 'vertical' ? 'vertical' : 'horizontal'
   );
+  private readonly isNavigationMode = computed<boolean>(() => this.mode() === 'navigation');
   private readonly tabListId = computed<string>(() => `${this.uid}-tablist`);
 
   private indicatorStyle = signal<{ transform: string; width?: string; height?: string } | null>(
@@ -116,8 +122,10 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   tabContexts = computed<TabsContextItem[]>(() => {
     const tabs = this.tabs();
-    return tabs.map(
-      (tab, index): TabsContextItem => ({
+    return tabs.map((tab, index): TabsContextItem => {
+      const tabLazy = tab.lazy();
+      const effectiveLazy: TabsLazyMode = tabLazy !== undefined ? tabLazy : this.lazy();
+      return {
         ref: tab,
         value: tab.value() ?? index,
         index,
@@ -126,8 +134,10 @@ export class Tabs implements OnDestroy, AfterViewInit {
         label: tab.label() ?? undefined,
         labelTemplate: tab.labelTemplate?.template as TemplateRef<unknown> | undefined,
         content: tab.content,
-      })
-    );
+        contentTemplate: tab.contentTemplate?.template as TemplateRef<unknown> | undefined,
+        lazy: effectiveLazy,
+      };
+    });
   });
 
   private controlled = computed<boolean>(
@@ -209,6 +219,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
       this.tabContexts();
       this.orientation();
       this.scrollBehavior();
+      this.mode();
       if (!this.scrollable()) {
         this.overflowDetected.set(false);
         this.canScrollPrev.set(false);
@@ -221,17 +232,19 @@ export class Tabs implements OnDestroy, AfterViewInit {
     effect(() => {
       const active = this.activeSelection();
       const variant = this.variant();
+      const activeTab = this.tabContexts()[active.index];
+      const activeLazy: TabsLazyMode | undefined = activeTab?.lazy;
 
-      if (this.lazy() === 'keep-alive') {
+      if (activeLazy === 'keep-alive' && activeTab) {
         const current = this.renderedValues();
-        if (!current.has(active.value)) {
+        if (!current.has(activeTab.value)) {
           const next = new Set(current);
-          next.add(active.value);
+          next.add(activeTab.value);
           this.renderedValues.set(next);
         }
       }
 
-      if (this.focusPanelOnSelect()) {
+      if (this.focusPanelOnSelect() && !this.isNavigationMode()) {
         queueMicrotask(() => this.focusActivePanel());
       }
 
@@ -291,6 +304,11 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
     this.selectedChange.emit({ value: tab.value, index: tab.index });
     this.selectedIndexChange.emit(tab.index);
+
+    if (this.isNavigationMode()) {
+      this.navigate.emit({ value: tab.value, index: tab.index });
+    }
+
     this.scheduleScrollIntoView(tab.index);
   }
 
@@ -332,19 +350,22 @@ export class Tabs implements OnDestroy, AfterViewInit {
     return this.isActive(index) ? 0 : -1;
   }
 
-  shouldRenderPanel(value: TabsValue | null, index: number): boolean {
-    const lazy = this.lazy();
+  shouldRenderPanel(tab: TabsContextItem): boolean {
+    if (this.isNavigationMode()) {
+      return false;
+    }
+    const lazy: TabsLazyMode = tab.lazy;
     if (lazy === false) {
       return true;
     }
 
-    const isActive = this.activeSelection().index === index;
+    const isActive = this.activeSelection().index === tab.index;
     if (lazy === 'unmount') {
       return isActive;
     }
 
     if (lazy === 'keep-alive') {
-      return isActive || this.renderedValues().has(value);
+      return isActive || this.renderedValues().has(tab.value);
     }
 
     return true;
@@ -733,5 +754,9 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
 
     return 'default';
+  }
+
+  isNavigation(): boolean {
+    return this.isNavigationMode();
   }
 }

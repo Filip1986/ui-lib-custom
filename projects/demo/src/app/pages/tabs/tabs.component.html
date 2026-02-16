@@ -289,6 +289,31 @@
       </ui-lib-card>
 
       <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Per-tab lazy</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs>
+              <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
+              <ui-lib-tab label="Lazy keep-alive" lazy="keep-alive">
+                <ng-template uiLibTabContent>
+                  <ui-lib-card [showHeader]="false" [showFooter]="false">
+                    <div>Deferred content (cached once activated).</div>
+                  </ui-lib-card>
+                </ng-template>
+              </ui-lib-tab>
+              <ui-lib-tab label="Lazy unmount" lazy="unmount">
+                <ng-template uiLibTabContent>
+                  <ui-lib-card [showHeader]="false" [showFooter]="false">
+                    <div>Deferred content (destroyed on blur).</div>
+                  </ui-lib-card>
+                </ng-template>
+              </ui-lib-tab>
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
         <div card-header>Controlled mode</div>
         <app-doc-demo-viewport>
           <div class="doc-demo">
@@ -417,6 +442,10 @@
       <app-doc-code-snippet title="Vertical" [code]="snippets.vertical"></app-doc-code-snippet>
       <app-doc-code-snippet title="Closable" [code]="snippets.closable"></app-doc-code-snippet>
       <app-doc-code-snippet title="Controlled" [code]="snippets.controlled"></app-doc-code-snippet>
+      <app-doc-code-snippet
+        title="Per-tab lazy"
+        [code]="snippets.perTabLazy"
+      ></app-doc-code-snippet>
     </ui-lib-card>
   }
 

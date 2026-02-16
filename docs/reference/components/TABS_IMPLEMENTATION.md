@@ -18,4 +18,6 @@
 - Slots: `uiLibTabLabel` template for custom labels (icons, stacks); panel content via projection.
 - Events: `selectedChange`, `selectedIndexChange`, `tabClose`, `tabFocus` for external orchestration; controlled mode with `selectedValue` preferred for dynamic lists.
 - Scroll behavior: `scrollBehavior='arrows'` renders prev/next buttons when overflow is detected; ResizeObserver drives visibility and disablement.
+- Navigation mode: `mode='navigation'` skips panels and emits `navigate` on selection for router-driven UIs
 - Future: primitives (`ui-lib-tab-list`) if deeper composition needed.
+- Per-tab lazy: `ui-lib-tab[lazy]` overrides parent `lazy`; `uiLibTabContent` defers template instantiation until activation

@@ -32,7 +32,7 @@
         role="tab"
         [id]="tabId(tab.index)"
         [attr.aria-selected]="isActive(tab.index)"
-        [attr.aria-controls]="panelId(tab.index)"
+        [attr.aria-controls]="!isNavigation() ? panelId(tab.index) : null"
         [attr.aria-disabled]="tab.disabled || disabled() ? true : null"
         [attr.tabindex]="tabTabIndex(tab.index, tab.disabled)"
         (click)="onSelect(tab)"
@@ -85,19 +85,23 @@
   </button>
 }
 
-<section class="tab-panels">
-  @for (tab of tabContexts(); track tab.index) {
-    @if (shouldRenderPanel(tab.value, tab.index)) {
-      <ui-lib-tab-panel
-        class="tab-panel-host"
-        [id]="panelId(tab.index)"
-        [labelId]="tabId(tab.index)"
-        [active]="isActive(tab.index)"
-      >
-        @if (tab.content) {
-          <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
-        }
-      </ui-lib-tab-panel>
+@if (!isNavigation()) {
+  <section class="tab-panels">
+    @for (tab of tabContexts(); track tab.index) {
+      @if (shouldRenderPanel(tab)) {
+        <ui-lib-tab-panel
+          class="tab-panel-host"
+          [id]="panelId(tab.index)"
+          [labelId]="tabId(tab.index)"
+          [active]="isActive(tab.index)"
+        >
+          @if (tab.contentTemplate) {
+            <ng-container [ngTemplateOutlet]="tab.contentTemplate"></ng-container>
+          } @else if (tab.content) {
+            <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
+          }
+        </ui-lib-tab-panel>
+      }
     }
-  }
-</section>
+  </section>
+}

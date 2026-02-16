@@ -59,6 +59,31 @@ Scrollable with arrows:
 </ui-lib-tabs>
 ```
 
+Navigation (tab menu) mode:
+```html
+<ui-lib-tabs
+  mode="navigation"
+  [selectedValue]="activeRoute()"
+  (navigate)="onNavigate($event.value)"
+>
+  <ui-lib-tab value="/dashboard" label="Dashboard" />
+  <ui-lib-tab value="/reports" label="Reports" />
+  <ui-lib-tab value="/settings" label="Settings" />
+</ui-lib-tabs>
+```
+
+Per-tab lazy overrides with deferred content:
+```html
+<ui-lib-tabs>
+  <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
+  <ui-lib-tab label="Lazy" lazy="unmount">
+    <ng-template uiLibTabContent>
+      <heavy-component />
+    </ng-template>
+  </ui-lib-tab>
+</ui-lib-tabs>
+```
+
 ## API Reference
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
@@ -76,16 +101,18 @@ Scrollable with arrows:
 | `disabled` | `boolean` | `false` | Disable entire tablist |
 | `focusPanelOnSelect` | `boolean` | `false` | Move focus into panel after selection |
 | `iconPosition` | `'left' \| 'top' \| 'right'` | `'left'` | Icon/text layout for triggers |
+| `mode` | `TabsMode` | `'default'` | `'default'` renders panels; `'navigation'` renders tablist only (menu mode) |
 
 Outputs:
 | Name | Payload | Description |
 |------|---------|-------------|
 | `selectedChange` | `{ value: TabsValue \| null; index: number }` | Fired on selection change |
 | `selectedIndexChange` | `number` | Index-only change (PrimeNG parity) |
+| `navigate` | `{ value: TabsValue \| null; index: number }` | Fired on selection in `navigation` mode |
 | `tabClose` | `{ value: TabsValue \| null; index: number }` | Fired when a closable tab is closed |
 | `tabFocus` | `{ value: TabsValue \| null; index: number }` | Fired when a tab trigger receives focus |
 
-Per-tab inputs (`ui-lib-tab`): `value`, `label`, `disabled`, `closable`; label template slot via `uiLibTabLabel`.
+Per-tab inputs (`ui-lib-tab`): `value`, `label`, `disabled`, `closable`, `lazy`; label template slot via `uiLibTabLabel`; deferred content via `uiLibTabContent`.
 
 ## Types
 ```typescript
@@ -96,6 +123,7 @@ export type TabsAlignment = 'start' | 'center' | 'end' | 'stretch';
 export type TabsLazyMode = false | 'unmount' | 'keep-alive';
 export type TabsScrollBehavior = 'auto' | 'arrows' | 'overflow-menu';
 export type TabsValue = string | number;
+export type TabsMode = 'default' | 'navigation';
 ```
 
 ## Accessibility
@@ -117,6 +145,8 @@ export type TabsValue = string | number;
 - Use CSS vars (`--uilib-tabs-*`, `--uilib-tab-*`) to theme without rebuild
 - Scroll arrows appear only when the tablist overflows
 - Scroll buttons are styled via CSS vars (see below)
+- Per-tab `lazy` overrides the parent `lazy` input
+- Use `uiLibTabContent` to defer template initialization until the tab is activated
 
 ## Theming (Scroll Arrows)
 Set these CSS variables to customize the arrow buttons:
