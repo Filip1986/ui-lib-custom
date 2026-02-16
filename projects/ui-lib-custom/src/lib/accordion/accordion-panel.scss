@@ -34,6 +34,11 @@
   --uilib-accordion-focus-ring: 0 0 0 2px var(--uilib-focus-ring-color, #2563eb55);
   --uilib-accordion-transition-duration: var(--uilib-transition-fast-duration, 200ms);
   --uilib-accordion-transition-easing: var(--uilib-transition-ease-out, ease-out);
+  --uilib-accordion-content-animation-duration: var(--uilib-transition-normal-duration, 250ms);
+  --uilib-accordion-content-animation-easing: var(--uilib-transition-ease-out, ease-out);
+  --uilib-accordion-content-fade-duration: 150ms;
+  --uilib-accordion-icon-animation-duration: var(--uilib-transition-fast-duration, 150ms);
+  --uilib-accordion-icon-animation-easing: ease-in-out;
   --uilib-accordion-icon-gap: var(--uilib-space-2, 0.5rem);
   --uilib-accordion-icon-align: center;
 }
@@ -85,12 +90,16 @@
       height: var(--uilib-accordion-icon-size);
       color: var(--uilib-accordion-icon-color);
       align-self: var(--uilib-accordion-icon-align);
-      transition: color var(--uilib-transition-fast, 200ms ease),
-        opacity var(--uilib-transition-fast, 200ms ease),
-        transform var(--uilib-transition-fast, 200ms ease);
+      transition: color var(--uilib-accordion-icon-animation-duration)
+          var(--uilib-accordion-icon-animation-easing),
+        opacity var(--uilib-accordion-icon-animation-duration)
+          var(--uilib-accordion-icon-animation-easing),
+        transform var(--uilib-accordion-icon-animation-duration)
+          var(--uilib-accordion-icon-animation-easing);
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      position: relative;
 
       &.icon-start {
         order: 0;
@@ -102,9 +111,36 @@
         margin-left: auto;
       }
 
+      .icon-collapsed,
+      .icon-expanded {
+        position: absolute;
+        inset: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity var(--uilib-accordion-icon-animation-duration)
+          var(--uilib-accordion-icon-animation-easing);
+      }
+
+      .icon-collapsed {
+        opacity: 1;
+      }
+
+      .icon-expanded {
+        opacity: 0;
+      }
+
       &.expanded {
         color: var(--uilib-accordion-icon-color-expanded);
         transform: rotate(var(--uilib-accordion-icon-rotation));
+
+        .icon-collapsed {
+          opacity: 0;
+        }
+
+        .icon-expanded {
+          opacity: 1;
+        }
       }
     }
   }
@@ -113,15 +149,24 @@
     background: var(--uilib-accordion-content-bg);
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows var(--uilib-accordion-transition-duration)
-      var(--uilib-accordion-transition-easing);
+    opacity: 0;
+    will-change: grid-template-rows, opacity;
+    transition: grid-template-rows var(--uilib-accordion-content-animation-duration)
+        var(--uilib-accordion-content-animation-easing),
+      opacity var(--uilib-accordion-content-fade-duration)
+        var(--uilib-accordion-content-animation-easing);
 
     &.expanded {
       grid-template-rows: 1fr;
+      opacity: 1;
     }
 
     > .accordion-panel-body {
       overflow: hidden;
+      padding: 0;
+    }
+
+    &.expanded > .accordion-panel-body {
       padding: var(--uilib-accordion-content-padding);
     }
   }
@@ -194,11 +239,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ui-lib-accordion-panel {
-    .accordion-panel-content {
-      transition: none;
-    }
-
-    .accordion-panel-header .accordion-panel-icon {
+    .accordion-panel-content,
+    .accordion-panel-header .accordion-panel-icon,
+    .accordion-panel-header .accordion-panel-icon .icon-collapsed,
+    .accordion-panel-header .accordion-panel-icon .icon-expanded {
       transition: none;
     }
   }

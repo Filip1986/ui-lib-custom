@@ -18,12 +18,21 @@
       aria-hidden="true"
     >
       @if (toggleIconTemplate) {
-        <ng-container
-          [ngTemplateOutlet]="toggleIconTemplate.template"
-          [ngTemplateOutletContext]="{ $implicit: isExpanded(), expanded: isExpanded() }"
-        />
+        <span class="icon-collapsed">
+          <ng-container
+            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutletContext]="{ $implicit: false, expanded: false }"
+          />
+        </span>
+        <span class="icon-expanded">
+          <ng-container
+            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutletContext]="{ $implicit: true, expanded: true }"
+          />
+        </span>
       } @else {
-        <ui-lib-icon [name]="resolvedIconName()" />
+        <ui-lib-icon class="icon-collapsed" [name]="collapseIcon()" />
+        <ui-lib-icon class="icon-expanded" [name]="expandIcon()" />
       }
     </span>
   }
@@ -34,12 +43,21 @@
   @if (showIcon() && iconPosition() === 'end') {
     <span class="accordion-panel-icon icon-end" [class.expanded]="isExpanded()" aria-hidden="true">
       @if (toggleIconTemplate) {
-        <ng-container
-          [ngTemplateOutlet]="toggleIconTemplate.template"
-          [ngTemplateOutletContext]="{ $implicit: isExpanded(), expanded: isExpanded() }"
-        />
+        <span class="icon-collapsed">
+          <ng-container
+            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutletContext]="{ $implicit: false, expanded: false }"
+          />
+        </span>
+        <span class="icon-expanded">
+          <ng-container
+            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutletContext]="{ $implicit: true, expanded: true }"
+          />
+        </span>
       } @else {
-        <ui-lib-icon [name]="resolvedIconName()" />
+        <ui-lib-icon class="icon-collapsed" [name]="collapseIcon()" />
+        <ui-lib-icon class="icon-expanded" [name]="expandIcon()" />
       }
     </span>
   }
