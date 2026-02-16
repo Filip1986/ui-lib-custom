@@ -72,6 +72,8 @@
   [attr.data-state]="isExpanded() ? 'expanded' : 'collapsed'"
 >
   <div class="accordion-panel-body">
-    <ng-content />
+    <div class="accordion-panel-body-inner">
+      <ng-content />
+    </div>
   </div>
 </div>

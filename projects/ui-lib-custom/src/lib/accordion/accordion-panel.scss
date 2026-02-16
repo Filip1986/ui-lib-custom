@@ -157,7 +157,6 @@
   }
 
   .accordion-panel-content {
-    background: var(--uilib-accordion-content-bg);
     display: grid;
     grid-template-rows: 0fr;
     opacity: 0;
@@ -174,10 +173,9 @@
 
     > .accordion-panel-body {
       overflow: hidden;
-      padding: 0;
     }
 
-    &.expanded > .accordion-panel-body {
+    .accordion-panel-body-inner {
       padding: var(--uilib-accordion-content-padding);
     }
   }
