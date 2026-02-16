@@ -122,22 +122,32 @@
             </div>
           </div>
           <div class="toggles">
-            <label
-              ><input
-                type="checkbox"
-                [checked]="closable()"
-                (change)="toggleClosable($any($event.target).checked)"
-              />
-              Closable</label
-            >
-            <label
-              ><input
-                type="checkbox"
-                [checked]="disabledAll()"
-                (change)="toggleDisabled($any($event.target).checked)"
-              />
-              Disable all</label
-            >
+            <ui-lib-checkbox
+              label="Scrollable (50 tabs)"
+              [checked]="scrollable()"
+              (checkedChange)="setScrollable($event)"
+            />
+            <ui-lib-checkbox
+              label="Tab menu mode"
+              [checked]="menuMode()"
+              (checkedChange)="setMenuMode($event)"
+            />
+            <ui-lib-checkbox
+              label="Closable"
+              [checked]="closable()"
+              (checkedChange)="toggleClosable($event)"
+            />
+            <ui-lib-checkbox
+              label="Disable all"
+              [checked]="disabledAll()"
+              (checkedChange)="toggleDisabled($event)"
+            />
+            <ui-lib-select
+              label="Per-tab lazy"
+              [options]="perTabLazyOptions"
+              [ngModel]="perTabLazy()"
+              (ngModelChange)="setPerTabLazy($event)"
+            />
           </div>
         </div>
       </ui-lib-card>
@@ -155,15 +165,18 @@
             [orientation]="orientation()"
             [align]="align()"
             [lazy]="lazy()"
+            [scrollBehavior]="playgroundScrollBehavior()"
+            [mode]="playgroundMode()"
             [closable]="closable()"
             [disabled]="disabledAll()"
           >
-            @for (tab of playgroundTabs(); track tab.value) {
+            @for (tab of playgroundTabsResolved(); track tab.value) {
               <ui-lib-tab
                 [value]="tab.value"
                 [label]="tab.label"
                 [disabled]="!!tab.disabled"
                 [closable]="!!tab.closable"
+                [lazy]="tab.value === 'details' ? playgroundPerTabLazy() : undefined"
               >
                 {{ tab.content }}
               </ui-lib-tab>
@@ -183,6 +196,43 @@
               <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
               <ui-lib-tab label="Settings">Settings content</ui-lib-tab>
             </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Scrollable tabs</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo scrollable-demo">
+            <ui-lib-tabs scrollBehavior="arrows">
+              @for (tab of scrollTabs; track tab.value) {
+                <ui-lib-tab [value]="tab.value" [label]="tab.label">
+                  {{ tab.content }}
+                </ui-lib-tab>
+              }
+            </ui-lib-tabs>
+          </div>
+        </app-doc-demo-viewport>
+      </ui-lib-card>
+
+      <ui-lib-card [showHeader]="true" [showFooter]="false">
+        <div card-header>Tab menu</div>
+        <app-doc-demo-viewport>
+          <div class="doc-demo">
+            <ui-lib-tabs
+              mode="navigation"
+              [selectedValue]="navActive()"
+              (navigate)="onNavigate($event.value)"
+            >
+              @for (tab of navTabs; track tab.value) {
+                <ui-lib-tab [value]="tab.value">
+                  <ng-template uiLibTabLabel>
+                    <ui-lib-icon [name]="tab.icon" /> {{ tab.label }}
+                  </ng-template>
+                </ui-lib-tab>
+              }
+            </ui-lib-tabs>
+            <div class="doc-note">Selected route: {{ navActive() }}</div>
           </div>
         </app-doc-demo-viewport>
       </ui-lib-card>
@@ -400,6 +450,18 @@
             <td>Panel rendering strategy</td>
           </tr>
           <tr>
+            <td><code>scrollBehavior</code></td>
+            <td><code>'auto' | 'arrows' | 'overflow-menu'</code></td>
+            <td><code>auto</code></td>
+            <td>Overflow handling for the tab list</td>
+          </tr>
+          <tr>
+            <td><code>mode</code></td>
+            <td><code>'default' | 'navigation'</code></td>
+            <td><code>default</code></td>
+            <td>Panel rendering vs navigation-only mode</td>
+          </tr>
+          <tr>
             <td><code>closable</code></td>
             <td><code>boolean</code></td>
             <td><code>false</code></td>
@@ -424,6 +486,12 @@
             <td>Index-only selection change</td>
           </tr>
           <tr>
+            <td><code>navigate</code></td>
+            <td><code>&#123; value: TabsValue or null; index: number &#125;</code></td>
+            <td>-</td>
+            <td>Emits when a tab is selected in navigation mode</td>
+          </tr>
+          <tr>
             <td><code>tabClose</code></td>
             <td><code>&#123; value: TabsValue or null; index: number &#125;</code></td>
             <td>-</td>
@@ -442,10 +510,9 @@
       <app-doc-code-snippet title="Vertical" [code]="snippets.vertical"></app-doc-code-snippet>
       <app-doc-code-snippet title="Closable" [code]="snippets.closable"></app-doc-code-snippet>
       <app-doc-code-snippet title="Controlled" [code]="snippets.controlled"></app-doc-code-snippet>
-      <app-doc-code-snippet
-        title="Per-tab lazy"
-        [code]="snippets.perTabLazy"
-      ></app-doc-code-snippet>
+      <app-doc-code-snippet title="Scrollable" [code]="snippets.scrollable"></app-doc-code-snippet>
+      <app-doc-code-snippet title="Tab menu" [code]="snippets.tabMenu"></app-doc-code-snippet>
+      <app-doc-code-snippet title="Per-tab lazy" [code]="snippets.perTabLazy" />
     </ui-lib-card>
   }
 

@@ -17,3 +17,17 @@
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
+.toggles {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.scrollable-demo {
+  max-width: 100%;
+}
+
+.doc-note {
+  color: var(--uilib-muted, #6b7280);
+  font-size: 0.875rem;
+}

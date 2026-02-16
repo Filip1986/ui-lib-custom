@@ -6,12 +6,15 @@
 - Controlled/uncontrolled: `selectedIndex`/`selectedValue` vs `defaultIndex`/`defaultValue`; internal signal keeps state when uncontrolled.
 - Lazy rendering: `lazy=false` eager; `lazy='unmount'` removes inactive panels; `lazy='keep-alive'` caches once rendered.
 - Focus: stays on trigger by default; optional `focusPanelOnSelect` moves focus into active panel.
+- Scroll detection: ResizeObserver updates overflow state; scroll position drives arrow enablement with rAF throttling and RTL normalization.
+- Lazy resolution: effective lazy mode uses `tab.lazy ?? tabs.lazy`; panels use `uiLibTabContent` when present, otherwise projected content.
 
 ## Performance
 - Standalone + OnPush + signals throughout; computed classes/ids only.
 - Single host elements for tabs/panels; minimal DOM (buttons for triggers, direct panel hosts).
 - Indicator updates scheduled via `queueMicrotask` to avoid layout thrash; only material variant computes indicator position.
 - Lazy modes reduce DOM weight for large tab sets; `keep-alive` avoids remount cost.
+- Large tab sets: arrows render only on overflow; scroll updates are batched in rAF; prefer `keep-alive` to avoid remount churn.
 
 ## Extension Points
 - Styling via CSS vars (`--uilib-tabs-*`, `--uilib-tab-*`, `--uilib-tabs-indicator-*`); variants map to tokens.

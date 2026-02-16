@@ -48,7 +48,8 @@ Closable with lazy keep-alive:
 </ui-lib-tabs>
 ```
 
-Scrollable with arrows:
+## Scrollable Tabs
+Use arrows to navigate overflowing tab lists when `scrollBehavior="arrows"`.
 ```html
 <ui-lib-tabs scrollBehavior="arrows">
   <ui-lib-tab label="Overview">Overview content</ui-lib-tab>
@@ -56,10 +57,12 @@ Scrollable with arrows:
   <ui-lib-tab label="Usage">Usage content</ui-lib-tab>
   <ui-lib-tab label="Security">Security content</ui-lib-tab>
   <ui-lib-tab label="Audit">Audit content</ui-lib-tab>
+  <ui-lib-tab label="Exports">Exports content</ui-lib-tab>
 </ui-lib-tabs>
 ```
 
-Navigation (tab menu) mode:
+## Tab Menu Mode
+Use navigation mode for router-driven layouts with no panels.
 ```html
 <ui-lib-tabs
   mode="navigation"
@@ -72,7 +75,8 @@ Navigation (tab menu) mode:
 </ui-lib-tabs>
 ```
 
-Per-tab lazy overrides with deferred content:
+## Per-Panel Lazy
+Override the parent `lazy` mode per tab and defer heavy content templates.
 ```html
 <ui-lib-tabs>
   <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>

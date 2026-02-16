@@ -74,20 +74,25 @@ export class Tabs implements OnDestroy, AfterViewInit {
   size = input<TabsSize>('medium');
   orientation = input<TabsOrientation>('horizontal');
   align = input<TabsAlignment>('start');
+  /** Controls panel rendering vs navigation-only mode. */
   mode = input<TabsMode>('default');
   selectedValue = input<TabsValue | null>(null);
   selectedIndex = input<number | null>(null);
   defaultValue = input<TabsValue | null>(null);
   defaultIndex = input<number | null>(null);
+  /** Global lazy rendering mode; can be overridden per tab. */
   lazy = input<TabsLazyMode>(false);
+  /** Scroll handling for overflowing tab lists. */
   scrollBehavior = input<TabsScrollBehavior>('auto');
   closable = input<boolean>(false);
   disabled = input<boolean>(false);
+  /** Moves focus into the active panel on selection. */
   focusPanelOnSelect = input<boolean>(false);
   iconPosition = input<'left' | 'top' | 'right'>('left');
 
   selectedChange = output<{ value: TabsValue | null; index: number }>();
   selectedIndexChange = output<number>();
+  /** Emitted when selection occurs in navigation mode. */
   navigate = output<{ value: TabsValue | null; index: number }>();
   tabClose = output<{ value: TabsValue | null; index: number }>();
   tabFocus = output<{ value: TabsValue | null; index: number }>();
@@ -293,6 +298,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
   }
 
+  /** Selects a tab and emits selection events. */
   onSelect(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
     if (tab.disabled || this.disabled()) {
       return;
@@ -312,6 +318,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     this.scheduleScrollIntoView(tab.index);
   }
 
+  /** Emits focus events and keeps the focused tab in view. */
   onFocus(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
     if (tab.disabled || this.disabled()) {
       return;
@@ -320,6 +327,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     this.scheduleScrollIntoView(tab.index);
   }
 
+  /** Emits close events for closable tabs. */
   onClose(
     tab: { value: TabsValue | null; index: number; disabled: boolean },
     event: MouseEvent
@@ -331,18 +339,22 @@ export class Tabs implements OnDestroy, AfterViewInit {
     this.tabClose.emit({ value: tab.value, index: tab.index });
   }
 
+  /** Returns whether the given index is active. */
   isActive(index: number): boolean {
     return this.activeSelection().index === index;
   }
 
+  /** Stable DOM id for a tab trigger. */
   tabId(index: number): string {
     return `${this.uid}-tab-${index}`;
   }
 
+  /** Stable DOM id for a tab panel. */
   panelId(index: number): string {
     return `${this.uid}-panel-${index}`;
   }
 
+  /** Computes tabindex for roving focus. */
   tabTabIndex(index: number, disabled: boolean): number {
     if (disabled || this.disabled()) {
       return -1;
@@ -350,6 +362,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     return this.isActive(index) ? 0 : -1;
   }
 
+  /** Determines whether a panel should render given the effective lazy mode. */
   shouldRenderPanel(tab: TabsContextItem): boolean {
     if (this.isNavigationMode()) {
       return false;
@@ -371,6 +384,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     return true;
   }
 
+  /** Handles keyboard navigation for the tab list. */
   onKeydown(event: KeyboardEvent, currentIndex: number): void {
     const key = event.key;
     if (key === 'Home') {
@@ -409,7 +423,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private focusNext(currentIndex: number): void {
-    const tabs = this.tabContexts();
+    const tabs: TabsContextItem[] = this.tabContexts();
     for (let i = currentIndex + 1; i < tabs.length; i++) {
       if (!tabs[i].disabled) {
         this.focusIndex(i);
@@ -420,7 +434,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private focusPrev(currentIndex: number): void {
-    const tabs = this.tabContexts();
+    const tabs: TabsContextItem[] = this.tabContexts();
     for (let i = currentIndex - 1; i >= 0; i--) {
       if (!tabs[i].disabled) {
         this.focusIndex(i);
@@ -431,11 +445,11 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private firstEnabledIndex(): number {
-    return this.tabContexts().find((t) => !t.disabled)?.index ?? -1;
+    return this.tabContexts().find((tab) => !tab.disabled)?.index ?? -1;
   }
 
   private lastEnabledIndex(): number {
-    const tabs = this.tabContexts();
+    const tabs: TabsContextItem[] = this.tabContexts();
     for (let i = tabs.length - 1; i >= 0; i--) {
       if (!tabs[i].disabled) {
         return i;
@@ -448,7 +462,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     if (index < 0) {
       return;
     }
-    const btn = this.tabButtons?.get(index)?.nativeElement;
+    const btn: HTMLButtonElement | undefined = this.tabButtons?.get(index)?.nativeElement;
     if (btn) {
       this.scheduleScrollIntoView(index);
       btn.focus();
@@ -456,8 +470,8 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private focusActivePanel(): void {
-    const activeIndex = this.activeSelection().index;
-    const panel = this.tabPanels?.get(activeIndex);
+    const activeIndex: number = this.activeSelection().index;
+    const panel: TabPanel | undefined = this.tabPanels?.get(activeIndex);
     if (panel) {
       queueMicrotask(() => panel.focus());
     }
@@ -469,27 +483,27 @@ export class Tabs implements OnDestroy, AfterViewInit {
       return;
     }
 
-    const activeIndex = this.activeSelection().index;
-    const list = this.tabList?.nativeElement;
-    const btn = this.tabButtons?.get(activeIndex)?.nativeElement;
+    const activeIndex: number = this.activeSelection().index;
+    const list: HTMLElement | undefined = this.tabList?.nativeElement;
+    const btn: HTMLButtonElement | undefined = this.tabButtons?.get(activeIndex)?.nativeElement;
 
     if (!list || !btn) {
       this.indicatorStyle.set(null);
       return;
     }
 
-    const listRect = list.getBoundingClientRect();
-    const btnRect = btn.getBoundingClientRect();
-    const horizontal = this.orientation() === 'horizontal';
+    const listRect: DOMRect = list.getBoundingClientRect();
+    const btnRect: DOMRect = btn.getBoundingClientRect();
+    const horizontal: boolean = this.orientation() === 'horizontal';
 
     if (horizontal) {
-      const left = btnRect.left - listRect.left + list.scrollLeft;
+      const left: number = btnRect.left - listRect.left + list.scrollLeft;
       this.indicatorStyle.set({
         transform: `translateX(${left}px)`,
         width: `${btnRect.width}px`,
       });
     } else {
-      const top = btnRect.top - listRect.top + list.scrollTop;
+      const top: number = btnRect.top - listRect.top + list.scrollTop;
       this.indicatorStyle.set({
         transform: `translateY(${top}px)`,
         height: `${btnRect.height}px`,
@@ -497,52 +511,69 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
   }
 
+  /** Exposes indicator styles for the material variant. */
   indicatorStyles(): { transform: string; width?: string; height?: string } | null {
     return this.indicatorStyle();
   }
 
+  /** DOM id for the tablist (used by scroll buttons). */
   tabListDomId(): string {
     return this.tabListId();
   }
 
+  /** Whether scroll buttons should render. */
   shouldShowScrollButtons(): boolean {
     return this.showScrollButtons();
   }
 
+  /** Whether the tab list can scroll backward. */
   canScrollPrevTab(): boolean {
     return this.canScrollPrev();
   }
 
+  /** Whether the tab list can scroll forward. */
   canScrollNextTab(): boolean {
     return this.canScrollNext();
   }
 
+  /** Label for the previous scroll button. */
   scrollPrevLabel(): string {
     return 'Previous tabs';
   }
 
+  /** Label for the next scroll button. */
   scrollNextLabel(): string {
     return 'Next tabs';
   }
 
+  /** Icon name for the previous scroll button. */
   scrollPrevIcon(): SemanticIcon {
     return this.orientation() === 'vertical' ? 'chevron-up' : 'chevron-left';
   }
 
+  /** Icon name for the next scroll button. */
   scrollNextIcon(): SemanticIcon {
     return this.orientation() === 'vertical' ? 'chevron-down' : 'chevron-right';
   }
 
+  /** Scrolls the tab list backward by one step. */
   onScrollPrev(): void {
     this.scrollByStep('prev');
   }
 
+  /** Scrolls the tab list forward by one step. */
   onScrollNext(): void {
     this.scrollByStep('next');
   }
 
+  /** Updates scroll state on manual scroll. */
   onTabListScrolled(): void {
     this.onTabListScroll();
+  }
+
+  /** Returns true when the component is in navigation mode. */
+  isNavigation(): boolean {
+    return this.isNavigationMode();
   }
 
   private setupScrollObservers(): void {
@@ -754,9 +785,5 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
 
     return 'default';
-  }
-
-  isNavigation(): boolean {
-    return this.isNavigationMode();
   }
 }

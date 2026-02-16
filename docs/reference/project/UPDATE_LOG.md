@@ -1,5 +1,14 @@
 # Update Log - February 16, 2026
 
+## Tabs Enhancements
+- Added scrollable tablist arrows with overflow detection and RTL-aware scrolling.
+- Added navigation mode (`mode='navigation'`) with `navigate` output for router-driven layouts.
+- Added per-tab lazy overrides and `uiLibTabContent` for deferred panel templates.
+- Expanded tabs demos, usage snippets, and implementation notes.
+- Added unit tests for scrollable tabs, navigation mode, and per-tab lazy behaviors.
+
+---
+
 ## Accordion Enhancements
 - Added expand/collapse icon swapping with toggle icon templates and icon positioning.
 - Improved content and icon animations with reduced-motion support and new animation tokens.

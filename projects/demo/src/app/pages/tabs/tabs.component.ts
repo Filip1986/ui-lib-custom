@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
   Tabs,
   Tab,
@@ -19,10 +20,15 @@ import {
   TabsSize,
   TabsValue,
   TabsVariant,
+  TabsScrollBehavior,
+  TabsMode,
   Card,
   Button,
   Icon,
   ThemeConfigService,
+  UiLibSelect,
+  SelectOption,
+  Checkbox,
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
@@ -39,13 +45,21 @@ interface DemoTab {
   content: string;
 }
 
+interface NavTabItem {
+  value: string;
+  label: string;
+  icon: string;
+}
+
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
+type PerTabLazyOption = TabsLazyMode | 'inherit';
 
 @Component({
   selector: 'app-tabs-demo',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     Tabs,
     Tab,
     TabLabel,
@@ -53,12 +67,12 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     Card,
     Button,
     Icon,
+    UiLibSelect,
+    Checkbox,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
     DocCodeSnippetComponent,
-    TabLabel,
-    Icon,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -96,6 +110,15 @@ export class TabsDemoComponent {
   closable = signal<boolean>(false);
   lazy = signal<TabsLazyMode>(false);
   disabledAll = signal<boolean>(false);
+  scrollable = signal<boolean>(false);
+  menuMode = signal<boolean>(false);
+  perTabLazy = signal<PerTabLazyOption>('inherit');
+  readonly perTabLazyOptions: SelectOption[] = [
+    { label: 'Inherit', value: 'inherit' },
+    { label: 'Off', value: false },
+    { label: 'Unmount', value: 'unmount' },
+    { label: 'Keep alive', value: 'keep-alive' },
+  ];
 
   playgroundTabs = signal<DemoTab[]>([
     { value: 'overview', label: 'Overview', content: 'High-level summary of the selected topic.' },
@@ -153,6 +176,23 @@ export class TabsDemoComponent {
     { value: 'history', label: 'History', content: 'Historical data loaded lazily.' },
   ];
 
+  scrollTabs: DemoTab[] = Array.from({ length: 50 }, (_: unknown, index: number): DemoTab => {
+    const label: string = `Tab ${index + 1}`;
+    return {
+      value: `tab-${index + 1}`,
+      label,
+      content: `${label} content`,
+    };
+  });
+
+  navTabs: NavTabItem[] = [
+    { value: '/overview', label: 'Overview', icon: 'home' },
+    { value: '/billing', label: 'Billing', icon: 'activity' },
+    { value: '/usage', label: 'Usage', icon: 'bookmark' },
+    { value: '/settings', label: 'Settings', icon: 'settings' },
+  ];
+  navActive = signal<string>('/overview');
+
   controlledTabs: DemoTab[] = [
     { value: 'first', label: 'First', content: 'Controlled tab one.' },
     { value: 'second', label: 'Second', content: 'Controlled tab two.' },
@@ -161,6 +201,21 @@ export class TabsDemoComponent {
 
   controlledIndex = signal<number>(0);
   controlledSelection = computed<number>(() => this.controlledIndex());
+
+  readonly playgroundTabsResolved = computed<DemoTab[]>(() =>
+    this.scrollable() ? this.scrollTabs : this.playgroundTabs()
+  );
+
+  readonly playgroundScrollBehavior = computed<TabsScrollBehavior>(() =>
+    this.scrollable() ? 'arrows' : 'auto'
+  );
+
+  readonly playgroundMode = computed<TabsMode>(() => (this.menuMode() ? 'navigation' : 'default'));
+
+  readonly playgroundPerTabLazy = computed<TabsLazyMode | undefined>(() => {
+    const selection: PerTabLazyOption = this.perTabLazy();
+    return selection === 'inherit' ? undefined : selection;
+  });
 
   track = (_: number, item: unknown): TabsValue | number =>
     item && typeof item === 'object' && 'value' in (item as { value?: unknown })
@@ -194,6 +249,17 @@ export class TabsDemoComponent {
     controlled: `<ui-lib-tabs [selectedIndex]="index" (selectedIndexChange)="index = $event">
   <ui-lib-tab label="One">One</ui-lib-tab>
   <ui-lib-tab label="Two">Two</ui-lib-tab>
+</ui-lib-tabs>`,
+    scrollable: `<ui-lib-tabs scrollBehavior="arrows">
+  <ui-lib-tab label="Overview">Overview</ui-lib-tab>
+  <ui-lib-tab label="Billing">Billing</ui-lib-tab>
+  <ui-lib-tab label="Usage">Usage</ui-lib-tab>
+  <ui-lib-tab label="Security">Security</ui-lib-tab>
+</ui-lib-tabs>`,
+    tabMenu: `<ui-lib-tabs mode="navigation" (navigate)="onNavigate($event.value)">
+  <ui-lib-tab value="/overview" label="Overview" />
+  <ui-lib-tab value="/billing" label="Billing" />
+  <ui-lib-tab value="/usage" label="Usage" />
 </ui-lib-tabs>`,
     perTabLazy: `<ui-lib-tabs>
   <ui-lib-tab label="Eager">Always rendered</ui-lib-tab>
@@ -236,6 +302,18 @@ export class TabsDemoComponent {
     this.lazy.set(mode);
   }
 
+  setScrollable(enabled: boolean): void {
+    this.scrollable.set(enabled);
+  }
+
+  setMenuMode(enabled: boolean): void {
+    this.menuMode.set(enabled);
+  }
+
+  setPerTabLazy(selection: PerTabLazyOption): void {
+    this.perTabLazy.set(selection);
+  }
+
   toggleClosable(on: boolean): void {
     this.closable.set(on);
   }
@@ -258,6 +336,12 @@ export class TabsDemoComponent {
 
   onControlledChange(payload: { value: TabsValue | null; index: number }): void {
     this.controlledIndex.set(payload.index);
+  }
+
+  onNavigate(value: TabsValue | null): void {
+    if (typeof value === 'string') {
+      this.navActive.set(value);
+    }
   }
 
   selectControlled(index: number): void {
