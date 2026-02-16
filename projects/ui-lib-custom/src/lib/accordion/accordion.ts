@@ -9,6 +9,7 @@ import {
   input,
   output,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 import { AccordionPanel } from './accordion-panel';
 import { ACCORDION_CONTEXT, AccordionContext } from './accordion-context';
@@ -34,6 +35,7 @@ interface AccordionPanelContext {
   template: '<ng-content />',
   styleUrl: './accordion.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'ui-lib-accordion',
     '[class]': 'hostClasses()',

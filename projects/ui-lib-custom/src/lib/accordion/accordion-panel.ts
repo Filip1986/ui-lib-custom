@@ -14,6 +14,7 @@ import {
   inject,
   input,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 import { AccordionContext, ACCORDION_CONTEXT } from './accordion-context';
 import { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
@@ -42,6 +43,7 @@ export class AccordionToggleIcon {
   templateUrl: './accordion-panel.html',
   styleUrl: './accordion-panel.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'hostClasses()',
     '[attr.data-state]': "isExpanded() ? 'expanded' : 'collapsed'",
