@@ -2,9 +2,6 @@
 .ui-lib-accordion {
   --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
   --uilib-accordion-border-radius: var(--uilib-radius-md, 0.5rem);
-}
-
-.ui-lib-accordion {
   display: flex;
   flex-direction: column;
   gap: var(--uilib-accordion-gap);

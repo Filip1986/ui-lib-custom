@@ -44,6 +44,7 @@ export const ACCORDION_CONTEXT = new InjectionToken<AccordionContext>('Accordion
   standalone: true,
   imports: [CommonModule],
   template: '<ng-content />',
+  styleUrl: './accordion.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'ui-lib-accordion',
