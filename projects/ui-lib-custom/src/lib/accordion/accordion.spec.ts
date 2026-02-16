@@ -107,15 +107,16 @@ describe('Accordion', () => {
   }
 
   function getPanelHeaders(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
-    return Array.from(
-      fixture.nativeElement.querySelectorAll<HTMLElement>('.accordion-panel-header')
-    );
+    const headers: NodeListOf<Element> =
+      fixture.nativeElement.querySelectorAll('.accordion-panel-header');
+    return Array.from(headers) as HTMLElement[];
   }
 
   function getPanelContents(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
-    return Array.from(
-      fixture.nativeElement.querySelectorAll<HTMLElement>('.accordion-panel-content')
+    const contents: NodeListOf<Element> = fixture.nativeElement.querySelectorAll(
+      '.accordion-panel-content'
     );
+    return Array.from(contents) as HTMLElement[];
   }
 
   function togglePanel(fixture: ComponentFixture<TestHostComponent>, index: number): void {
@@ -295,9 +296,9 @@ describe('Accordion', () => {
   it('applies expanded state classes and data attributes', () => {
     const fixture = createTestAccordion();
     const contents: HTMLElement[] = getPanelContents(fixture);
-    const panelHosts: HTMLElement[] = Array.from(
-      fixture.nativeElement.querySelectorAll<HTMLElement>('ui-lib-accordion-panel')
-    );
+    const panelNodes: NodeListOf<Element> =
+      fixture.nativeElement.querySelectorAll('ui-lib-accordion-panel');
+    const panelHosts: HTMLElement[] = Array.from(panelNodes) as HTMLElement[];
 
     expect(panelHosts[0].getAttribute('data-state')).toBe('collapsed');
     expect(contents[0].getAttribute('data-state')).toBe('collapsed');

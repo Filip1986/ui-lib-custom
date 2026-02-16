@@ -3,12 +3,19 @@
   --uilib-accordion-panel-bg: var(--uilib-surface, #ffffff);
   --uilib-accordion-panel-border: 1px solid var(--uilib-border, #e5e7eb);
   --uilib-accordion-panel-radius: var(--uilib-radius-md, 0.5rem);
-  --uilib-accordion-header-padding-sm: var(--uilib-space-3, 0.75rem);
-  --uilib-accordion-header-padding-md: var(--uilib-space-4, 1rem);
-  --uilib-accordion-header-padding-lg: var(--uilib-space-5, 1.25rem);
+  --uilib-accordion-header-padding-sm: var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem);
+  --uilib-accordion-header-padding-md: var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem);
+  --uilib-accordion-header-padding-lg: var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem);
   --uilib-accordion-header-padding: var(
     --uilib-accordion-header-padding-md,
-    var(--uilib-space-4, 1rem)
+    var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)
+  );
+  --uilib-accordion-header-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
+  --uilib-accordion-header-font-size-md: var(--uilib-font-size-md, 1rem);
+  --uilib-accordion-header-font-size-lg: var(--uilib-font-size-lg, 1.125rem);
+  --uilib-accordion-header-font-size: var(
+    --uilib-accordion-header-font-size-md,
+    var(--uilib-font-size-md, 1rem)
   );
   --uilib-accordion-header-bg: var(--uilib-surface, transparent);
   --uilib-accordion-header-bg-hover: var(
@@ -17,7 +24,10 @@
   );
   --uilib-accordion-header-color: var(--uilib-page-fg, #111827);
   --uilib-accordion-header-font-weight: var(--uilib-font-weight-500, 500);
-  --uilib-accordion-content-padding: var(--uilib-space-4, 1rem);
+  --uilib-accordion-content-padding-sm: var(--uilib-space-3, 0.75rem);
+  --uilib-accordion-content-padding-md: var(--uilib-space-4, 1rem);
+  --uilib-accordion-content-padding-lg: var(--uilib-space-5, 1.25rem);
+  --uilib-accordion-content-padding: var(--uilib-accordion-content-padding-md, var(--uilib-space-4, 1rem));
   --uilib-accordion-content-bg: var(--uilib-surface, #ffffff);
   --uilib-accordion-icon-size-sm: var(--uilib-icon-size-sm, 1rem);
   --uilib-accordion-icon-size-md: var(--uilib-icon-size-md, 1.25rem);
@@ -67,6 +77,7 @@
     cursor: pointer;
     border: none;
     outline: none;
+    font-size: var(--uilib-accordion-header-font-size);
 
     &:hover {
       background: var(--uilib-accordion-header-bg-hover);

@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { AccordionPanel, AccordionHeader } from './accordion-panel';
+import { By } from '@angular/platform-browser';
+import { Icon } from '../icon/icon';
+import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from './accordion-panel';
 
 @Component({
   standalone: true,
@@ -13,6 +15,10 @@ import { AccordionPanel, AccordionHeader } from './accordion-panel';
       [value]="value()"
       [disabled]="disabled()"
       [expanded]="expanded()"
+      [iconPosition]="iconPosition()"
+      [expandIcon]="expandIcon()"
+      [collapseIcon]="collapseIcon()"
+      [showIcon]="showIcon()"
     >
       @if (useCustomHeader()) {
         <div accordionHeader class="custom-header">Custom Header</div>
@@ -27,6 +33,26 @@ class PanelHostComponent {
   disabled = signal<boolean>(false);
   expanded = signal<boolean>(false);
   useCustomHeader = signal<boolean>(false);
+  iconPosition = signal<'start' | 'end'>('end');
+  expandIcon = signal<string>('chevron-up');
+  collapseIcon = signal<string>('chevron-down');
+  showIcon = signal<boolean>(true);
+}
+
+@Component({
+  standalone: true,
+  imports: [CommonModule, AccordionPanel, AccordionToggleIcon],
+  template: `
+    <ui-lib-accordion-panel [expanded]="expanded()" header="Template Panel">
+      <ng-template accordionToggleIcon let-expanded="expanded">
+        <span class="toggle-text">{{ expanded ? 'Expanded' : 'Collapsed' }}</span>
+      </ng-template>
+      <div class="panel-body">Panel Body</div>
+    </ui-lib-accordion-panel>
+  `,
+})
+class PanelTemplateHostComponent {
+  expanded = signal<boolean>(false);
 }
 
 describe('AccordionPanel', () => {
@@ -52,6 +78,18 @@ describe('AccordionPanel', () => {
 
   function panelHost(): HTMLElement {
     return fixture.nativeElement.querySelector('ui-lib-accordion-panel');
+  }
+
+  function iconContainer(): HTMLElement | null {
+    return fixture.nativeElement.querySelector('.accordion-panel-icon');
+  }
+
+  function iconNames(): string[] {
+    const icons = fixture.debugElement.queryAll(By.directive(Icon));
+    return icons.map((iconEl) => {
+      const instance: Icon = iconEl.componentInstance as Icon;
+      return instance.name();
+    });
   }
 
   it('creates panel and renders projected content', () => {
@@ -144,5 +182,94 @@ describe('AccordionPanel', () => {
     expect(contentId).toBeTruthy();
     expect(header.getAttribute('aria-controls')).toBe(contentId);
     expect(content.getAttribute('aria-labelledby')).toBe(headerId);
+  });
+
+  it('renders default collapse and expand icons', () => {
+    const names: string[] = iconNames();
+    expect(names).toContain('chevron-down');
+    expect(names).toContain('chevron-up');
+  });
+
+  it('renders collapse icon when panel is collapsed', () => {
+    fixture.componentInstance.collapseIcon.set('minus');
+    fixture.componentInstance.expandIcon.set('plus');
+    fixture.detectChanges();
+
+    const names: string[] = iconNames();
+    expect(names).toContain('minus');
+    expect(names).toContain('plus');
+    expect(iconContainer()?.classList.contains('expanded')).toBeFalse();
+  });
+
+  it('applies expanded icon class when panel is expanded', () => {
+    fixture.componentInstance.expanded.set(true);
+    fixture.detectChanges();
+
+    expect(iconContainer()?.classList.contains('expanded')).toBeTrue();
+  });
+
+  it('hides icon when showIcon is false', () => {
+    fixture.componentInstance.showIcon.set(false);
+    fixture.detectChanges();
+
+    expect(iconContainer()).toBeNull();
+  });
+
+  it('positions icon at end by default', () => {
+    const iconEl: HTMLElement | null = iconContainer();
+    expect(iconEl).toBeTruthy();
+    expect(iconEl?.classList.contains('icon-end')).toBeTrue();
+  });
+
+  it('positions icon at start when iconPosition is start', () => {
+    fixture.componentInstance.iconPosition.set('start');
+    fixture.detectChanges();
+
+    const iconEl: HTMLElement | null = iconContainer();
+    expect(iconEl).toBeTruthy();
+    expect(iconEl?.classList.contains('icon-start')).toBeTrue();
+  });
+
+  it('adds expanded class to content when expanded', () => {
+    fixture.componentInstance.expanded.set(true);
+    fixture.detectChanges();
+
+    expect(contentEl().classList.contains('expanded')).toBeTrue();
+  });
+});
+
+describe('AccordionPanel - Toggle Icon Template', () => {
+  let templateFixture: ComponentFixture<PanelTemplateHostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [PanelTemplateHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+
+    templateFixture = TestBed.createComponent(PanelTemplateHostComponent);
+    templateFixture.detectChanges();
+  });
+
+  it('renders custom toggle icon template content', () => {
+    const collapsedText: HTMLElement | null = templateFixture.nativeElement.querySelector(
+      '.accordion-panel-icon .icon-collapsed .toggle-text'
+    );
+    const expandedText: HTMLElement | null = templateFixture.nativeElement.querySelector(
+      '.accordion-panel-icon .icon-expanded .toggle-text'
+    );
+
+    expect(collapsedText?.textContent?.trim()).toBe('Collapsed');
+    expect(expandedText?.textContent?.trim()).toBe('Expanded');
+  });
+
+  it('applies expanded class when panel is expanded', () => {
+    const iconEl: HTMLElement | null =
+      templateFixture.nativeElement.querySelector('.accordion-panel-icon');
+
+    templateFixture.componentInstance.expanded.set(true);
+    templateFixture.detectChanges();
+
+    expect(iconEl?.classList.contains('expanded')).toBeTrue();
   });
 });
