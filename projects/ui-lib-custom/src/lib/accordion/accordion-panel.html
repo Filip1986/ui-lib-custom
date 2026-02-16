@@ -17,16 +17,16 @@
       [class.expanded]="isExpanded()"
       aria-hidden="true"
     >
-      @if (toggleIconTemplate) {
+      @if (toggleIconTemplate(); as iconTpl) {
         <span class="icon-collapsed">
           <ng-container
-            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: false, expanded: false }"
           />
         </span>
         <span class="icon-expanded">
           <ng-container
-            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: true, expanded: true }"
           />
         </span>
@@ -42,16 +42,16 @@
   }
   @if (showIcon() && iconPosition() === 'end') {
     <span class="accordion-panel-icon icon-end" [class.expanded]="isExpanded()" aria-hidden="true">
-      @if (toggleIconTemplate) {
+      @if (toggleIconTemplate(); as iconTpl) {
         <span class="icon-collapsed">
           <ng-container
-            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: false, expanded: false }"
           />
         </span>
         <span class="icon-expanded">
           <ng-container
-            [ngTemplateOutlet]="toggleIconTemplate.template"
+            [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: true, expanded: true }"
           />
         </span>

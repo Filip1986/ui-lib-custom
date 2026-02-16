@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   Directive,
   ElementRef,
   OnDestroy,
@@ -10,12 +9,14 @@ import {
   TemplateRef,
   ViewChild,
   computed,
+  contentChild,
+  effect,
   inject,
   input,
   signal,
 } from '@angular/core';
-import { AccordionContext, ACCORDION_CONTEXT } from './accordion';
-import { AccordionIconPosition } from './accordion.types';
+import { AccordionContext, ACCORDION_CONTEXT } from './accordion-context';
+import { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
 import { Icon } from '../icon/icon';
 
 let accordionPanelId = 0;
@@ -24,14 +25,7 @@ let accordionPanelId = 0;
   selector: '[accordionHeader]',
   standalone: true,
 })
-export class AccordionHeader {
-  constructor(public readonly template: TemplateRef<unknown>) {}
-}
-
-export interface AccordionToggleIconContext {
-  $implicit: boolean;
-  expanded: boolean;
-}
+export class AccordionHeader {}
 
 @Directive({
   selector: '[accordionToggleIcon]',
@@ -68,10 +62,19 @@ export class AccordionPanel implements OnDestroy {
     if (this.context) {
       this.context.registerPanel(this);
     }
+
+    effect(
+      () => {
+        if (!this.context) {
+          this.internalExpanded.set(this.expanded());
+        }
+      },
+      { allowSignalWrites: true }
+    );
   }
 
-  @ContentChild(AccordionHeader) headerTemplate?: AccordionHeader;
-  @ContentChild(AccordionToggleIcon) toggleIconTemplate?: AccordionToggleIcon;
+  readonly headerTemplate = contentChild(AccordionHeader);
+  readonly toggleIconTemplate = contentChild(AccordionToggleIcon);
   @ViewChild('headerButton', { static: true })
   headerButton?: ElementRef<HTMLButtonElement>;
 
@@ -92,7 +95,7 @@ export class AccordionPanel implements OnDestroy {
     return classes.join(' ');
   });
 
-  readonly hasCustomHeader = computed((): boolean => !!this.headerTemplate);
+  readonly hasCustomHeader = computed((): boolean => !!this.headerTemplate());
   readonly resolvedId = computed((): string => this.value() ?? this.panelId());
   readonly isExpanded = computed((): boolean =>
     this.context ? this.context.isPanelExpanded(this.resolvedId()) : this.internalExpanded()

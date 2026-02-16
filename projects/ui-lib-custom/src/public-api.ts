@@ -48,4 +48,5 @@ export type {
   AccordionExpandMode,
   AccordionChangeEvent,
   AccordionIconPosition,
+  AccordionToggleIconContext,
 } from './lib/accordion/accordion.types';

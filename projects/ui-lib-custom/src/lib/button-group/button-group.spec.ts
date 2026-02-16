@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, signal, provideZonelessChangeDetection } from '@angular/core';
 import { ButtonGroup } from './button-group';
-import { Button } from '../button/button';
+import { Button, ButtonSize, ButtonVariant } from '../button/button';
 import { Icon } from '../icon/icon';
 
 @Component({
   standalone: true,
   imports: [ButtonGroup, Button, Icon],
   template: `
-    <ui-lib-button-group [variant]="variant" [vertical]="vertical" [size]="size">
+    <ui-lib-button-group [variant]="variant()" [vertical]="vertical()" [size]="size()">
       <ui-lib-button>One</ui-lib-button>
       <ui-lib-button>Two</ui-lib-button>
     </ui-lib-button-group>
   `,
 })
 class HostComponent {
-  variant = 'material';
-  vertical = false;
-  size: 'small' | 'medium' | 'large' | null = null;
+  variant = signal<ButtonVariant>('material');
+  vertical = signal<boolean>(false);
+  size = signal<ButtonSize | null>(null);
 }
 
 describe('ButtonGroup', () => {
@@ -30,6 +30,7 @@ describe('ButtonGroup', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HostComponent],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HostComponent);
@@ -57,7 +58,7 @@ describe('ButtonGroup', () => {
     });
 
     it('applies vertical class when vertical=true', () => {
-      fixture.componentInstance.vertical = true;
+      fixture.componentInstance.vertical.set(true);
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-vertical')).toBeTrue();
     });
@@ -69,13 +70,13 @@ describe('ButtonGroup', () => {
     });
 
     it('applies bootstrap class when variant=bootstrap', () => {
-      fixture.componentInstance.variant = 'bootstrap';
+      fixture.componentInstance.variant.set('bootstrap');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-bootstrap')).toBeTrue();
     });
 
     it('applies minimal class when variant=minimal', () => {
-      fixture.componentInstance.variant = 'minimal';
+      fixture.componentInstance.variant.set('minimal');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-minimal')).toBeTrue();
     });
@@ -83,13 +84,13 @@ describe('ButtonGroup', () => {
 
   describe('size inheritance', () => {
     it('applies small size class hook', () => {
-      fixture.componentInstance.size = 'small';
+      fixture.componentInstance.size.set('small');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-size-small')).toBeTrue();
     });
 
     it('applies large size class hook', () => {
-      fixture.componentInstance.size = 'large';
+      fixture.componentInstance.size.set('large');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-size-large')).toBeTrue();
     });

@@ -1,3 +1,14 @@
+# Update Log - February 16, 2026
+
+## Accordion Enhancements
+- Added expand/collapse icon swapping with toggle icon templates and icon positioning.
+- Improved content and icon animations with reduced-motion support and new animation tokens.
+- Added size-specific spacing and typography variables for sm/md/lg.
+- Expanded accordion demos with icon, template, size, and animation showcases.
+- Updated accordion documentation and implementation notes.
+
+---
+
 # Update Log - January 25, 2026
 
 ## Demo Theming Improvements

@@ -45,3 +45,11 @@ export interface AccordionChangeEvent {
  * Icon placement within the accordion panel header.
  */
 export type AccordionIconPosition = 'start' | 'end';
+
+/**
+ * Template context for accordion toggle icon.
+ */
+export interface AccordionToggleIconContext {
+  $implicit: boolean;
+  expanded: boolean;
+}

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  InjectionToken,
   Signal,
   contentChildren,
   computed,
@@ -12,22 +11,13 @@ import {
   signal,
 } from '@angular/core';
 import { AccordionPanel } from './accordion-panel';
+import { ACCORDION_CONTEXT, AccordionContext } from './accordion-context';
 import {
   AccordionChangeEvent,
   AccordionExpandMode,
   AccordionSize,
   AccordionVariant,
 } from './accordion.types';
-
-export interface AccordionContext {
-  variant: Signal<AccordionVariant>;
-  size: Signal<AccordionSize>;
-  expandMode: Signal<AccordionExpandMode>;
-  togglePanel: (panelId: string) => void;
-  isPanelExpanded: (panelId: string) => boolean;
-  registerPanel: (panel: AccordionPanel) => void;
-  unregisterPanel: (panel: AccordionPanel) => void;
-}
 
 interface AccordionPanelContext {
   panel: AccordionPanel;
@@ -36,8 +26,6 @@ interface AccordionPanelContext {
   disabled: boolean;
   expanded: boolean;
 }
-
-export const ACCORDION_CONTEXT = new InjectionToken<AccordionContext>('AccordionContext');
 
 @Component({
   selector: 'ui-lib-accordion',
@@ -77,6 +65,16 @@ export class Accordion implements AccordionContext {
   private readonly registeredPanels: Set<AccordionPanel> = new Set<AccordionPanel>();
 
   constructor() {
+    effect(
+      () => {
+        const defaults: string[] = this.defaultExpandedPanels();
+        if (!this.controlled()) {
+          this.internalExpanded.set(new Set(defaults));
+        }
+      },
+      { allowSignalWrites: true }
+    );
+
     effect(
       () => {
         const provided: string[] = this.expandedPanels();

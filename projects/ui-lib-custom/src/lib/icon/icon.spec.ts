@@ -15,7 +15,7 @@ describe('Icon', () => {
 
     fixture = TestBed.createComponent(Icon);
     component = fixture.componentInstance;
-    component.name.set('alert-circle');
+    fixture.componentRef.setInput('name', 'alert-circle');
     fixture.detectChanges();
   });
 
@@ -28,21 +28,21 @@ describe('Icon', () => {
   });
 
   it('keeps explicit prefixed names', () => {
-    component.name.set('lucideAlertCircle');
+    fixture.componentRef.setInput('name', 'lucideAlertCircle');
     fixture.detectChanges();
 
     expect(component.resolvedName()).toBe('lucideAlertCircle');
   });
 
   it('maps sizes using token mapping', () => {
-    component.size.set('lg');
+    fixture.componentRef.setInput('size', 'lg');
     fixture.detectChanges();
 
     expect(component.resolvedSize()).toBe('1.5rem');
   });
 
   it('marks clickable host class', () => {
-    component.clickable.set(true);
+    fixture.componentRef.setInput('clickable', true);
     fixture.detectChanges();
 
     expect(fixture.nativeElement.classList.contains('ui-lib-icon--clickable')).toBeTrue();
