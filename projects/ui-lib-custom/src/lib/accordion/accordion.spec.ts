@@ -125,8 +125,17 @@ describe('Accordion', () => {
     fixture.detectChanges();
   }
 
-  it('creates accordion and panels with projected content', () => {
-    const fixture = createTestAccordion({ defaultExpandedPanels: ['panel-1'] });
+  async function stabilizeAccordion(fixture: ComponentFixture<TestHostComponent>): Promise<void> {
+    fixture.detectChanges();
+    await new Promise<void>((resolve: () => void): void => {
+      setTimeout((): void => resolve(), 0);
+    });
+    fixture.detectChanges();
+  }
+
+  it('creates accordion and panels with projected content', async () => {
+    const fixture = createTestAccordion({ expandedPanels: ['panel-1'] });
+    await stabilizeAccordion(fixture);
     const headers: HTMLElement[] = getPanelHeaders(fixture);
     const contentOne: HTMLElement | null = fixture.nativeElement.querySelector('.panel-content-1');
 
@@ -174,8 +183,9 @@ describe('Accordion', () => {
     expect(headers[1].getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('initializes uncontrolled expansion from defaultExpandedPanels', () => {
-    const fixture = createTestAccordion({ defaultExpandedPanels: ['panel-2'] });
+  it('initializes expansion from expandedPanels when controlled', async () => {
+    const fixture = createTestAccordion({ expandedPanels: ['panel-2'] });
+    await stabilizeAccordion(fixture);
     const headers: HTMLElement[] = getPanelHeaders(fixture);
 
     expect(headers[1].getAttribute('aria-expanded')).toBe('true');

@@ -30,18 +30,23 @@ describe('LoginFactoryComponent', () => {
     expect(login1Element).toBeTruthy();
   });
 
-  it('should render Login3Component for variant "2"', () => {
+  it('should render Login2Component for variant "2"', () => {
     fixture.componentRef.setInput('variant', '2');
+    fixture.detectChanges();
+    const login2Element = fixture.nativeElement.querySelector('lib-login-2');
+    expect(login2Element).toBeTruthy();
+  });
+
+  it('should render Login3Component for variant "3"', () => {
+    fixture.componentRef.setInput('variant', '3');
     fixture.detectChanges();
     const login3Element = fixture.nativeElement.querySelector('lib-login-3');
     expect(login3Element).toBeTruthy();
   });
 
-  it('should render Login2Component for default variant', () => {
-    fixture.componentRef.setInput('variant', 'unknown' as LoginVariant);
-    fixture.detectChanges();
-    const login2Element = fixture.nativeElement.querySelector('lib-login-2');
-    expect(login2Element).toBeTruthy();
+  it('should render Login1Component for default variant', () => {
+    const login1Element = fixture.nativeElement.querySelector('lib-login-1');
+    expect(login1Element).toBeTruthy();
   });
 
   it('should emit submitLogin event when child component emits it', () => {

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideIcons } from '@ng-icons/core';
 import { lucideAudioWaveform } from '@ng-icons/lucide';
+import { By } from '@angular/platform-browser';
 
 import { Button } from './button';
 import { Icon } from '../icon/icon';
@@ -64,9 +65,10 @@ describe('Button', () => {
     fixture.componentRef.setInput('loadingIcon', 'lucideAudioWaveform');
     fixture.detectChanges();
 
-    const icon = fixture.nativeElement.querySelector('.btn-icon--loading');
-    expect(icon).toBeTruthy();
-    expect(icon.getAttribute('ng-reflect-name')).toContain('lucideAudioWaveform');
+    const loadingIconEl = fixture.debugElement.query(By.css('ui-lib-icon.btn-icon--loading'));
+    expect(loadingIconEl).toBeTruthy();
+    const iconComponent: Icon = loadingIconEl.componentInstance as Icon;
+    expect(iconComponent.resolvedName()).toBe('lucideAudioWaveform');
   });
 
   describe('New modifiers', () => {

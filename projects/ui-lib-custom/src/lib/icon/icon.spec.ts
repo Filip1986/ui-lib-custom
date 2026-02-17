@@ -15,6 +15,7 @@ describe('Icon', () => {
 
     fixture = TestBed.createComponent(Icon);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('library', 'lucide');
     fixture.componentRef.setInput('name', 'alert-circle');
     fixture.detectChanges();
   });
@@ -28,6 +29,7 @@ describe('Icon', () => {
   });
 
   it('keeps explicit prefixed names', () => {
+    fixture.componentRef.setInput('library', 'lucide');
     fixture.componentRef.setInput('name', 'lucideAlertCircle');
     fixture.detectChanges();
 
