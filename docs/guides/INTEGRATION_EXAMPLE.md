@@ -6,10 +6,12 @@ This is a complete example showing how to integrate the ui-lib-custom library in
 
 ### 1. Setup (Choose One Method)
 
+Use secondary entry points when importing components to keep bundles lean.
+
 #### Option A: Using npm link (Best for local development)
 ```bash
 # In the library directory (one-time setup)
-cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-components
+cd D:\Work\Personal\Github\ui-lib-custom\dist\ui-lib-custom
 npm link
 
 # In your Angular project
@@ -22,10 +24,10 @@ In your project's `package.json`:
 ```json
 {
   "dependencies": {
-    "@angular/animations": "^20.0.0",
-    "@angular/common": "^20.0.0",
-    "@angular/core": "^20.0.0",
-    "ui-lib-custom": "file:../ui-lib-custom/dist/ui-components"
+    "@angular/animations": "^21.0.0",
+    "@angular/common": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "ui-lib-custom": "file:../ui-lib-custom/dist/ui-lib-custom"
   }
 }
 ```
@@ -47,7 +49,8 @@ ng generate component pages/dashboard
 ```typescript
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Button, Card } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
 
 interface User {
   id: number;
@@ -62,7 +65,7 @@ interface User {
   standalone: true,
   imports: [CommonModule, Button, Card],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
   users: User[] = [
@@ -160,48 +163,49 @@ export class DashboardComponent {
     <div class="users-section">
       <h2>Users</h2>
       <div class="cards-container">
-        <ui-lib-card 
-          *ngFor="let user of users"
-          variant="bootstrap"
-          elevation="medium"
-          [hoverable]="true"
-          [class.selected]="selectedUser?.id === user.id"
-          (click)="selectUser(user)">
-          
-          <div card-header>
-            <div class="user-header">
-              <span class="user-name">{{ user.name }}</span>
-              <span 
-                class="status-badge" 
-                [class.active]="user.status === 'active'"
-                [class.inactive]="user.status === 'inactive'">
-                {{ user.status }}
-              </span>
+        @for (user of users; track user.id) {
+          <ui-lib-card 
+            variant="bootstrap"
+            elevation="medium"
+            [hoverable]="true"
+            [class.selected]="selectedUser?.id === user.id"
+            (click)="selectUser(user)">
+            
+            <div card-header>
+              <div class="user-header">
+                <span class="user-name">{{ user.name }}</span>
+                <span 
+                  class="status-badge" 
+                  [class.active]="user.status === 'active'"
+                  [class.inactive]="user.status === 'inactive'">
+                  {{ user.status }}
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div class="user-info">
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Role:</strong> {{ user.role }}</p>
-          </div>
+            <div class="user-info">
+              <p><strong>Email:</strong> {{ user.email }}</p>
+              <p><strong>Role:</strong> {{ user.role }}</p>
+            </div>
 
-          <div card-footer>
-            <ui-lib-button 
-              variant="bootstrap" 
-              color="primary" 
-              size="small"
-              (click)="selectUser(user); $event.stopPropagation()">
-              View
-            </ui-lib-button>
-            <ui-lib-button 
-              variant="minimal" 
-              color="danger" 
-              size="small"
-              (click)="deleteUser(user); $event.stopPropagation()">
-              Delete
-            </ui-lib-button>
-          </div>
-        </ui-lib-card>
+            <div card-footer>
+              <ui-lib-button 
+                variant="bootstrap" 
+                color="primary" 
+                size="small"
+                (click)="selectUser(user); $event.stopPropagation()">
+                View
+              </ui-lib-button>
+              <ui-lib-button 
+                variant="minimal" 
+                color="danger" 
+                size="small"
+                (click)="deleteUser(user); $event.stopPropagation()">
+                Delete
+              </ui-lib-button>
+            </div>
+          </ui-lib-card>
+        }
       </div>
     </div>
 
@@ -209,69 +213,66 @@ export class DashboardComponent {
     <div class="details-section">
       <h2>Details</h2>
       
-      <ui-lib-card 
-        *ngIf="selectedUser; else noSelection"
-        variant="material"
-        elevation="high">
-        
-        <div card-header>
-          <h3>{{ selectedUser.name }}</h3>
-        </div>
+      @if (selectedUser) {
+        <ui-lib-card 
+          variant="material"
+          elevation="high">
+          
+          <div card-header>
+            <h3>{{ selectedUser.name }}</h3>
+          </div>
 
-        <div class="detail-content">
-          <div class="detail-row">
-            <span class="label">User ID:</span>
-            <span class="value">{{ selectedUser.id }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Name:</span>
-            <span class="value">{{ selectedUser.name }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Email:</span>
-            <span class="value">{{ selectedUser.email }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Role:</span>
-            <span class="value">{{ selectedUser.role }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Status:</span>
-            <span class="value">
-              <span 
-                class="status-badge" 
-                [class.active]="selectedUser.status === 'active'"
-                [class.inactive]="selectedUser.status === 'inactive'">
-                {{ selectedUser.status }}
+          <div class="detail-content">
+            <div class="detail-row">
+              <span class="label">User ID:</span>
+              <span class="value">{{ selectedUser.id }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Name:</span>
+              <span class="value">{{ selectedUser.name }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Email:</span>
+              <span class="value">{{ selectedUser.email }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Role:</span>
+              <span class="value">{{ selectedUser.role }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="label">Status:</span>
+              <span class="value">
+                <span 
+                  class="status-badge" 
+                  [class.active]="selectedUser.status === 'active'"
+                  [class.inactive]="selectedUser.status === 'inactive'">
+                  {{ selectedUser.status }}
+                </span>
               </span>
-            </span>
+            </div>
           </div>
-        </div>
 
-        <div card-footer>
-          <ui-lib-button 
-            variant="material" 
-            color="primary"
-            [fullWidth]="true">
-            Edit User
-          </ui-lib-button>
-          <ui-lib-button 
-            variant="material" 
-            color="danger"
-            [fullWidth]="true"
-            (click)="deleteUser(selectedUser)">
-            Delete User
-          </ui-lib-button>
-        </div>
-      </ui-lib-card>
-
-      <ng-template #noSelection>
-        <ui-lib-card variant="minimal" elevation="none" [bordered]="true">
-          <div class="no-selection">
-            <p>Select a user to view details</p>
+          <div card-footer>
+            <ui-lib-button 
+              variant="material" 
+              color="primary"
+              [fullWidth]="true">
+              Edit User
+            </ui-lib-button>
+            <ui-lib-button 
+              variant="material" 
+              color="danger"
+              [fullWidth]="true"
+              (click)="deleteUser(selectedUser)">
+              Delete User
+            </ui-lib-button>
           </div>
         </ui-lib-card>
-      </ng-template>
+      } @else {
+        <div class="no-selection">
+          <p>Select a user to see details.</p>
+        </div>
+      }
     </div>
   </div>
 

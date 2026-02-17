@@ -2,6 +2,40 @@
 
 A flexible Angular UI component library with multiple design variants (Material, Bootstrap, and Minimal) that can be easily integrated into your Angular projects.
 
+## Importing Components
+
+### Recommended: Secondary Entry Points
+
+```typescript
+import { Button } from 'ui-lib-custom/button';
+```
+
+### Alternative: Primary Entry Point
+
+```typescript
+import { Button } from 'ui-lib-custom';
+```
+
+## Available Entry Points
+
+| Entry Point | Contents |
+|-------------|----------|
+| ui-lib-custom | All public exports (primary barrel) |
+| ui-lib-custom/accordion | Accordion components and types |
+| ui-lib-custom/badge | Badge component and types |
+| ui-lib-custom/button | Button component and types |
+| ui-lib-custom/card | Card component and types |
+| ui-lib-custom/checkbox | Checkbox component and types |
+| ui-lib-custom/core | Shared tokens and types |
+| ui-lib-custom/icon | Icon component, service, and types |
+| ui-lib-custom/input | Input component and types |
+| ui-lib-custom/layout | Layout primitives and tokens |
+| ui-lib-custom/select | Select component and types |
+| ui-lib-custom/select-button | SelectButton component and types |
+| ui-lib-custom/tabs | Tabs components and types |
+| ui-lib-custom/theme | Theme services and types |
+| ui-lib-custom/tokens | Design tokens |
+
 ## 📚 Documentation
 
 **New here?** Check out the complete documentation: **[📖 Documentation Index](docs/README.md)**
@@ -35,7 +69,7 @@ A versatile button component with multiple variants, sizes, and colors.
 #### Usage
 
 ```typescript
-import { Button } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
 
 @Component({
   imports: [Button],
@@ -68,7 +102,7 @@ A flexible card component with support for headers, footers, and different eleva
 #### Usage
 
 ```typescript
-import { Card } from 'ui-lib-custom';
+import { Card } from 'ui-lib-custom/card';
 
 @Component({
   imports: [Card],
@@ -117,7 +151,8 @@ npm install ui-lib-custom
 
 ```typescript
 import { Component } from '@angular/core';
-import { Button, Card } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
 
 @Component({
   selector: 'app-root',

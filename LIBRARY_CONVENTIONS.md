@@ -114,6 +114,14 @@
 - Keep exports flat; prefer per-component entry points for tree-shaking.
 - Semantic versioning; document breaking changes in `docs/project/UPDATE_LOG.md`.
 
+## Entry Points & Tree-Shaking
+
+- Each component or feature should have a secondary entry point under `projects/ui-lib-custom/<entry>/`.
+- Each entry point must include `ng-package.json` and a minimal `public-api.ts` exporting only that feature.
+- Avoid re-exporting secondary entry points from the primary barrel to prevent circular package graphs.
+- If a new entry point is added, update `projects/ui-lib-custom/package.json` exports and `typesVersions`.
+- Keep entry point public APIs narrow and stable; internal code should import via relative `src/lib/...` paths.
+
 ## Documentation & Demos
 
 - Update `docs/` when adding or changing components (API, usage, theming knobs, accessibility notes).

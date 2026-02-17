@@ -2,6 +2,20 @@
  * Public API Surface of ui-lib-custom
  */
 
+export * from '../accordion/public-api';
+export * from '../badge/public-api';
+export * from '../button/public-api';
+export * from '../card/public-api';
+export * from '../checkbox/public-api';
+export * from '../core/public-api';
+export * from '../icon/public-api';
+export * from '../input/public-api';
+export * from '../layout/public-api';
+export * from '../select/public-api';
+export * from '../select-button/public-api';
+export * from '../tabs/public-api';
+export * from '../theme/public-api';
+export * from '../tokens/public-api';
 export * from './lib/ui-lib-custom';
 export * from './lib/design-tokens';
 export * from './lib/button/button';

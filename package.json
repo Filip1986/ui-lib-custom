@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:minimal": "ng build minimal",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "format": "prettier --write \"projects/**/*.{ts,html,scss,css,js,json,md}\" \"docs/**/*.{md}\" \"*.{json,md}\"",

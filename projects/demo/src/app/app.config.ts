@@ -8,8 +8,8 @@ import {
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { ThemeConfigService } from 'ui-lib-custom';
-import { provideUiLibIcons } from 'ui-lib-custom';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 
 export const appConfig: ApplicationConfig = {
   providers: [

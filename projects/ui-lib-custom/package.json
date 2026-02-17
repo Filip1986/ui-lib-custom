@@ -31,6 +31,129 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/ui-lib-custom.mjs",
+      "default": "./fesm2022/ui-lib-custom.mjs"
+    },
+    "./accordion": {
+      "types": "./accordion/index.d.ts",
+      "esm2022": "./esm2022/accordion/ui-lib-custom-accordion.mjs",
+      "default": "./fesm2022/ui-lib-custom-accordion.mjs"
+    },
+    "./badge": {
+      "types": "./badge/index.d.ts",
+      "esm2022": "./esm2022/badge/ui-lib-custom-badge.mjs",
+      "default": "./fesm2022/ui-lib-custom-badge.mjs"
+    },
+    "./button": {
+      "types": "./button/index.d.ts",
+      "esm2022": "./esm2022/button/ui-lib-custom-button.mjs",
+      "default": "./fesm2022/ui-lib-custom-button.mjs"
+    },
+    "./card": {
+      "types": "./card/index.d.ts",
+      "esm2022": "./esm2022/card/ui-lib-custom-card.mjs",
+      "default": "./fesm2022/ui-lib-custom-card.mjs"
+    },
+    "./checkbox": {
+      "types": "./checkbox/index.d.ts",
+      "esm2022": "./esm2022/checkbox/ui-lib-custom-checkbox.mjs",
+      "default": "./fesm2022/ui-lib-custom-checkbox.mjs"
+    },
+    "./core": {
+      "types": "./core/index.d.ts",
+      "esm2022": "./esm2022/core/ui-lib-custom-core.mjs",
+      "default": "./fesm2022/ui-lib-custom-core.mjs"
+    },
+    "./icon": {
+      "types": "./icon/index.d.ts",
+      "esm2022": "./esm2022/icon/ui-lib-custom-icon.mjs",
+      "default": "./fesm2022/ui-lib-custom-icon.mjs"
+    },
+    "./input": {
+      "types": "./input/index.d.ts",
+      "esm2022": "./esm2022/input/ui-lib-custom-input.mjs",
+      "default": "./fesm2022/ui-lib-custom-input.mjs"
+    },
+    "./layout": {
+      "types": "./layout/index.d.ts",
+      "esm2022": "./esm2022/layout/ui-lib-custom-layout.mjs",
+      "default": "./fesm2022/ui-lib-custom-layout.mjs"
+    },
+    "./select": {
+      "types": "./select/index.d.ts",
+      "esm2022": "./esm2022/select/ui-lib-custom-select.mjs",
+      "default": "./fesm2022/ui-lib-custom-select.mjs"
+    },
+    "./select-button": {
+      "types": "./select-button/index.d.ts",
+      "esm2022": "./esm2022/select-button/ui-lib-custom-select-button.mjs",
+      "default": "./fesm2022/ui-lib-custom-select-button.mjs"
+    },
+    "./tabs": {
+      "types": "./tabs/index.d.ts",
+      "esm2022": "./esm2022/tabs/ui-lib-custom-tabs.mjs",
+      "default": "./fesm2022/ui-lib-custom-tabs.mjs"
+    },
+    "./theme": {
+      "types": "./theme/index.d.ts",
+      "esm2022": "./esm2022/theme/ui-lib-custom-theme.mjs",
+      "default": "./fesm2022/ui-lib-custom-theme.mjs"
+    },
+    "./tokens": {
+      "types": "./tokens/index.d.ts",
+      "esm2022": "./esm2022/tokens/ui-lib-custom-tokens.mjs",
+      "default": "./fesm2022/ui-lib-custom-tokens.mjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "accordion": [
+        "./accordion/index.d.ts"
+      ],
+      "badge": [
+        "./badge/index.d.ts"
+      ],
+      "button": [
+        "./button/index.d.ts"
+      ],
+      "card": [
+        "./card/index.d.ts"
+      ],
+      "checkbox": [
+        "./checkbox/index.d.ts"
+      ],
+      "core": [
+        "./core/index.d.ts"
+      ],
+      "icon": [
+        "./icon/index.d.ts"
+      ],
+      "input": [
+        "./input/index.d.ts"
+      ],
+      "layout": [
+        "./layout/index.d.ts"
+      ],
+      "select": [
+        "./select/index.d.ts"
+      ],
+      "select-button": [
+        "./select-button/index.d.ts"
+      ],
+      "tabs": [
+        "./tabs/index.d.ts"
+      ],
+      "theme": [
+        "./theme/index.d.ts"
+      ],
+      "tokens": [
+        "./tokens/index.d.ts"
+      ]
+    }
+  },
   "sideEffects": false,
   "engines": {
     "node": ">=18.0.0",

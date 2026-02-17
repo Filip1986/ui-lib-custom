@@ -102,6 +102,35 @@
           }
         }
       }
+    },
+    "minimal": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/minimal",
+      "sourceRoot": "projects/minimal/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/minimal/src/main.ts",
+            "tsConfig": "projects/minimal/tsconfig.app.json",
+            "assets": [],
+            "styles": ["projects/minimal/src/styles.scss"]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
     }
   },
   "cli": {

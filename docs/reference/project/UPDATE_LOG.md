@@ -18,6 +18,13 @@
 
 ---
 
+## Secondary Entry Points
+- Added secondary entry points for all components
+- Enables per-component imports for tree-shaking
+- Backward compatible
+
+---
+
 # Update Log - January 25, 2026
 
 ## Demo Theming Improvements

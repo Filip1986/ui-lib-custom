@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TopbarComponent } from './layout/topbar/topbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { ThemeConfigService } from 'ui-lib-custom';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
 
 @Component({
