@@ -20,7 +20,7 @@ export * from './lib/theming/theme-preset.interface';
 export * from './lib/login-form/login-form';
 export * from './lib/input/input';
 export * from './lib/select/select';
-export * from './lib/select-button/select-button';
+export * from './lib/select-button';
 export * from './lib/sidebar-menu/sidebar-menu';
 export * from './lib/icon';
 export { Icon } from './lib/icon/icon';
