@@ -39,6 +39,8 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
     Grid,
     DocPageLayoutComponent,
     DocCodeSnippetComponent,
+    Icon,
+    Icon,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',

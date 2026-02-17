@@ -32,7 +32,7 @@
         <ui-lib-select-button [options]="justifyOptions" [(value)]="justifyValue">
           <ng-template #item let-option>
             <ui-lib-inline align="center" [gap]="2">
-              <ui-lib-icon [name]="option.icon" />
+              <ui-lib-icon [name]="option.icon" library="lucide" />
               <span class="icon-label">{{ option.label }}</span>
             </ui-lib-inline>
           </ng-template>
