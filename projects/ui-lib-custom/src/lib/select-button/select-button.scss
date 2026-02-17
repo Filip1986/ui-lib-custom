@@ -1,127 +1,48 @@
 .ui-lib-select-button {
-  --uilib-selectbutton-gap: var(--uilib-selectbutton-gap, 0);
-  --uilib-selectbutton-border-radius: var(--uilib-selectbutton-border-radius, var(--uilib-radius-md, 8px));
-  --uilib-selectbutton-border: var(--uilib-selectbutton-border, var(--uilib-border, #d0d7e2));
-  --uilib-selectbutton-fg: var(--uilib-selectbutton-fg, var(--uilib-text, inherit));
-  --uilib-selectbutton-selected-border: var(
-    --uilib-selectbutton-selected-border,
-    var(--uilib-button-primary-border)
-  );
-  --uilib-selectbutton-selected-fg: var(--uilib-selectbutton-selected-fg, #fff);
-  --uilib-selectbutton-invalid-border: var(
-    --uilib-selectbutton-invalid-border,
-    var(--uilib-color-danger-600, #d32f2f)
-  );
-  --uilib-selectbutton-disabled-opacity: var(--uilib-selectbutton-disabled-opacity, 0.6);
-
-  --uilib-selectbutton-material-bg: var(--uilib-selectbutton-material-bg, var(--uilib-surface, #fff));
-  --uilib-selectbutton-material-selected-bg: var(
-    --uilib-selectbutton-material-selected-bg,
-    var(--uilib-button-primary-bg)
-  );
-  --uilib-selectbutton-material-hover-bg: var(
-    --uilib-selectbutton-material-hover-bg,
-    color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 8%, transparent)
-  );
-
-  --uilib-selectbutton-bootstrap-bg: var(--uilib-selectbutton-bootstrap-bg, var(--uilib-surface, #fff));
-  --uilib-selectbutton-bootstrap-selected-bg: var(
-    --uilib-selectbutton-bootstrap-selected-bg,
-    var(--uilib-button-primary-bg)
-  );
-  --uilib-selectbutton-bootstrap-hover-bg: var(
-    --uilib-selectbutton-bootstrap-hover-bg,
-    color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 6%, transparent)
-  );
-
-  --uilib-selectbutton-minimal-bg: var(--uilib-selectbutton-minimal-bg, transparent);
-  --uilib-selectbutton-minimal-selected-bg: var(
-    --uilib-selectbutton-minimal-selected-bg,
-    var(--uilib-button-primary-bg)
-  );
-  --uilib-selectbutton-minimal-hover-bg: var(
-    --uilib-selectbutton-minimal-hover-bg,
-    color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 6%, transparent)
-  );
-
-  --uilib-selectbutton-small-padding: var(
-    --uilib-selectbutton-small-padding,
-    var(--uilib-button-padding-small)
-  );
-  --uilib-selectbutton-medium-padding: var(
-    --uilib-selectbutton-medium-padding,
-    var(--uilib-button-padding-medium)
-  );
-  --uilib-selectbutton-large-padding: var(
-    --uilib-selectbutton-large-padding,
-    var(--uilib-button-padding-large)
-  );
-  --uilib-selectbutton-small-font-size: var(
-    --uilib-selectbutton-small-font-size,
-    var(--uilib-button-font-size-small)
-  );
-  --uilib-selectbutton-medium-font-size: var(
-    --uilib-selectbutton-medium-font-size,
-    var(--uilib-button-font-size-medium)
-  );
-  --uilib-selectbutton-large-font-size: var(
-    --uilib-selectbutton-large-font-size,
-    var(--uilib-button-font-size-large)
-  );
+  --_sb-gap: var(--uilib-selectbutton-gap, 0);
+  --_sb-radius: var(--uilib-selectbutton-border-radius, 4px);
+  --_sb-bg: var(--uilib-selectbutton-bg, var(--uilib-surface-100));
+  --_sb-border: var(--uilib-selectbutton-border, var(--uilib-border-color));
+  --_sb-selected-bg: var(--uilib-selectbutton-selected-bg, var(--uilib-primary-500));
+  --_sb-selected-fg: var(--uilib-selectbutton-selected-fg, var(--uilib-primary-contrast));
+  --_sb-hover-bg: var(--uilib-selectbutton-hover-bg, var(--uilib-surface-200));
+  --_sb-shadow: var(--uilib-selectbutton-shadow, none);
+  --_sb-disabled-opacity: var(--uilib-selectbutton-disabled-opacity, 0.6);
+  --_sb-invalid-border: var(--uilib-selectbutton-invalid-border, var(--uilib-danger-500));
+  --_sb-padding: var(--uilib-selectbutton-medium-padding, 0.625rem 1rem);
+  --_sb-font-size: var(--uilib-selectbutton-medium-font-size, 1rem);
+  --_sb-min-height: var(--uilib-selectbutton-medium-min-height, 2.5rem);
 
   display: inline-flex;
   align-items: stretch;
-  gap: var(--uilib-selectbutton-gap);
-}
-
-.ui-lib-select-button--material {
-  --ui-selectbutton-bg: var(--uilib-selectbutton-material-bg);
-  --ui-selectbutton-selected-bg: var(--uilib-selectbutton-material-selected-bg);
-  --ui-selectbutton-hover-bg: var(--uilib-selectbutton-material-hover-bg);
-}
-
-.ui-lib-select-button--bootstrap {
-  --ui-selectbutton-bg: var(--uilib-selectbutton-bootstrap-bg);
-  --ui-selectbutton-selected-bg: var(--uilib-selectbutton-bootstrap-selected-bg);
-  --ui-selectbutton-hover-bg: var(--uilib-selectbutton-bootstrap-hover-bg);
-}
-
-.ui-lib-select-button--minimal {
-  --ui-selectbutton-bg: var(--uilib-selectbutton-minimal-bg);
-  --ui-selectbutton-selected-bg: var(--uilib-selectbutton-minimal-selected-bg);
-  --ui-selectbutton-hover-bg: var(--uilib-selectbutton-minimal-hover-bg);
-}
-
-.ui-lib-select-button--small {
-  --ui-selectbutton-padding: var(--uilib-selectbutton-small-padding);
-  --ui-selectbutton-font-size: var(--uilib-selectbutton-small-font-size);
-}
-
-.ui-lib-select-button--medium {
-  --ui-selectbutton-padding: var(--uilib-selectbutton-medium-padding);
-  --ui-selectbutton-font-size: var(--uilib-selectbutton-medium-font-size);
-}
-
-.ui-lib-select-button--large {
-  --ui-selectbutton-padding: var(--uilib-selectbutton-large-padding);
-  --ui-selectbutton-font-size: var(--uilib-selectbutton-large-font-size);
+  gap: var(--_sb-gap);
+  border-radius: var(--_sb-radius);
+  overflow: hidden;
 }
 
 .ui-lib-select-button--fluid {
+  display: flex;
   width: 100%;
+
+  .ui-lib-select-button__item {
+    flex: 1;
+  }
 }
 
-.ui-lib-select-button > ui-lib-button {
+.ui-lib-select-button__item {
   flex: 1 1 auto;
 }
 
 .ui-lib-select-button__item .btn {
   width: 100%;
-  --uilib-button-padding: var(--ui-selectbutton-padding, var(--uilib-button-padding-medium));
-  --uilib-button-font-size: var(--ui-selectbutton-font-size, var(--uilib-button-font-size-medium));
-  --btn-bg: var(--ui-selectbutton-bg, var(--uilib-surface, #fff));
-  --btn-border: var(--uilib-selectbutton-border, var(--uilib-border, #d0d7e2));
-  --btn-fg: var(--uilib-selectbutton-fg, var(--uilib-text, inherit));
+  min-height: var(--_sb-min-height);
+  --uilib-button-padding: var(--_sb-padding);
+  --uilib-button-font-size: var(--_sb-font-size);
+  --btn-bg: var(--_sb-bg);
+  --btn-border: var(--_sb-border);
+  --btn-fg: var(--uilib-selectbutton-fg, var(--uilib-text-primary));
+  box-shadow: var(--_sb-shadow);
+  border-radius: 0;
 }
 
 .ui-lib-select-button__item .btn:focus-visible {
@@ -130,41 +51,90 @@
 }
 
 .ui-lib-select-button__item .btn:hover:not(.btn-disabled) {
-  --btn-bg-hover: var(--ui-selectbutton-hover-bg);
+  --btn-bg-hover: var(--_sb-hover-bg);
 }
 
 .ui-lib-select-button__item--selected .btn {
-  --btn-bg: var(--ui-selectbutton-selected-bg);
-  --btn-bg-hover: var(--ui-selectbutton-selected-bg);
-  --btn-border: var(--uilib-selectbutton-selected-border, var(--ui-selectbutton-selected-bg));
-  --btn-fg: var(--uilib-selectbutton-selected-fg, #fff);
+  --btn-bg: var(--_sb-selected-bg);
+  --btn-bg-hover: var(--_sb-selected-bg);
+  --btn-fg: var(--_sb-selected-fg);
 }
 
-.ui-lib-select-button--invalid {
-  --uilib-button-outline-border: var(--uilib-selectbutton-invalid-border);
-  --uilib-button-outline-border-hover: var(--uilib-selectbutton-invalid-border);
+.ui-lib-select-button__item:first-child .btn {
+  border-top-left-radius: var(--_sb-radius);
+  border-bottom-left-radius: var(--_sb-radius);
 }
 
-.ui-lib-select-button--disabled {
-  opacity: var(--uilib-selectbutton-disabled-opacity, 0.6);
-  pointer-events: none;
+.ui-lib-select-button__item:last-child .btn {
+  border-top-right-radius: var(--_sb-radius);
+  border-bottom-right-radius: var(--_sb-radius);
 }
 
-.ui-lib-select-button > ui-lib-button {
-  display: inline-flex;
-}
-
-.ui-lib-select-button > ui-lib-button:not(:first-child) .btn {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+.ui-lib-select-button__item:not(:first-child) .btn {
   margin-left: -1px;
 }
 
-.ui-lib-select-button > ui-lib-button:not(:last-child) .btn {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+.ui-lib-select-button--material {
+  --_sb-radius: var(
+    --uilib-selectbutton-material-border-radius,
+    var(--uilib-selectbutton-border-radius, 4px)
+  );
+  --_sb-bg: var(--uilib-selectbutton-material-bg, var(--uilib-surface-100));
+  --_sb-selected-bg: var(--uilib-selectbutton-material-selected-bg, var(--uilib-primary-500));
+  --_sb-selected-fg: var(--uilib-selectbutton-material-selected-fg, var(--uilib-primary-contrast));
+  --_sb-hover-bg: var(--uilib-selectbutton-material-hover-bg, var(--uilib-surface-200));
+  --_sb-border: var(--uilib-selectbutton-material-border, var(--uilib-border-color));
+  --_sb-shadow: var(--uilib-selectbutton-material-shadow, 0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-.ui-lib-select-button .btn {
-  border-radius: var(--uilib-selectbutton-border-radius);
+.ui-lib-select-button--bootstrap {
+  --_sb-radius: var(
+    --uilib-selectbutton-bootstrap-border-radius,
+    var(--uilib-selectbutton-border-radius, 6px)
+  );
+  --_sb-bg: var(--uilib-selectbutton-bootstrap-bg, var(--uilib-surface-100));
+  --_sb-selected-bg: var(--uilib-selectbutton-bootstrap-selected-bg, var(--uilib-primary-500));
+  --_sb-selected-fg: var(--uilib-selectbutton-bootstrap-selected-fg, var(--uilib-primary-contrast));
+  --_sb-hover-bg: var(--uilib-selectbutton-bootstrap-hover-bg, var(--uilib-surface-200));
+  --_sb-border: var(--uilib-selectbutton-bootstrap-border, var(--uilib-border-color));
+}
+
+.ui-lib-select-button--minimal {
+  --_sb-radius: var(
+    --uilib-selectbutton-minimal-border-radius,
+    var(--uilib-selectbutton-border-radius, 0)
+  );
+  --_sb-bg: var(--uilib-selectbutton-minimal-bg, transparent);
+  --_sb-selected-bg: var(--uilib-selectbutton-minimal-selected-bg, var(--uilib-surface-200));
+  --_sb-selected-fg: var(--uilib-selectbutton-minimal-selected-fg, var(--uilib-text-primary));
+  --_sb-hover-bg: var(--uilib-selectbutton-minimal-hover-bg, var(--uilib-surface-100));
+  --_sb-border: var(--uilib-selectbutton-minimal-border, transparent);
+  --_sb-shadow: none;
+}
+
+.ui-lib-select-button--small {
+  --_sb-padding: var(--uilib-selectbutton-small-padding, 0.5rem 0.75rem);
+  --_sb-font-size: var(--uilib-selectbutton-small-font-size, 0.875rem);
+  --_sb-min-height: var(--uilib-selectbutton-small-min-height, 2rem);
+}
+
+.ui-lib-select-button--medium {
+  --_sb-padding: var(--uilib-selectbutton-medium-padding, 0.625rem 1rem);
+  --_sb-font-size: var(--uilib-selectbutton-medium-font-size, 1rem);
+  --_sb-min-height: var(--uilib-selectbutton-medium-min-height, 2.5rem);
+}
+
+.ui-lib-select-button--large {
+  --_sb-padding: var(--uilib-selectbutton-large-padding, 0.75rem 1.25rem);
+  --_sb-font-size: var(--uilib-selectbutton-large-font-size, 1.125rem);
+  --_sb-min-height: var(--uilib-selectbutton-large-min-height, 3rem);
+}
+
+.ui-lib-select-button--disabled {
+  opacity: var(--_sb-disabled-opacity);
+  pointer-events: none;
+}
+
+.ui-lib-select-button--invalid {
+  --_sb-border: var(--_sb-invalid-border);
 }

@@ -74,7 +74,7 @@ Use the `#item` template to customize item rendering.
 
 ```html
 <ui-lib-select-button [options]="options" [(value)]="selected">
-  <ng-template #item let-option>
+  <ng-template #item let-option="option">
     <ui-lib-icon [name]="option.icon" />
     {{ option.label }}
   </ng-template>
@@ -89,6 +89,9 @@ Template context:
 ### Core
 - `--uilib-selectbutton-gap`
 - `--uilib-selectbutton-border-radius`
+- `--uilib-selectbutton-material-border-radius`
+- `--uilib-selectbutton-bootstrap-border-radius`
+- `--uilib-selectbutton-minimal-border-radius`
 - `--uilib-selectbutton-border`
 - `--uilib-selectbutton-fg`
 - `--uilib-selectbutton-selected-border`
@@ -104,6 +107,7 @@ Template context:
 ### Size-based
 - `--uilib-selectbutton-{size}-padding`
 - `--uilib-selectbutton-{size}-font-size`
+- `--uilib-selectbutton-{size}-min-height`
 
 ## Usage Examples
 
@@ -154,7 +158,7 @@ Template context:
 ### Custom Item Template
 ```html
 <ui-lib-select-button [options]="options" [(value)]="selected">
-  <ng-template #item let-option>
+  <ng-template #item let-option="option">
     <ui-lib-icon [name]="option.icon" />
     {{ option.label }}
   </ng-template>

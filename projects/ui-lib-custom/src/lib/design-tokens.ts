@@ -664,18 +664,51 @@ export type ButtonTokenKey = keyof typeof BUTTON_TOKENS;
 // ============================================================================
 
 export const SELECTBUTTON_TOKENS = {
-  bg: COLOR_NEUTRAL.white,
-  border: COLOR_NEUTRAL[300],
-  fg: SEMANTIC_COLORS.text,
-  hoverBg: COLOR_NEUTRAL[100],
-  hoverFg: SEMANTIC_COLORS.text,
-  selectedBg: SEMANTIC_COLORS.primary,
-  selectedFg: COLOR_NEUTRAL.white,
-  selectedBorder: SEMANTIC_COLORS.primary,
-  invalidBorder: COLOR_DANGER[600],
-  radius: BORDER_RADIUS.md,
-  itemGap: SPACING_TOKENS[0],
-  disabledOpacity: 0.6,
+  gap: '0',
+  borderRadius: {
+    material: '4px',
+    bootstrap: '6px',
+    minimal: '0',
+  },
+  sizes: {
+    small: {
+      padding: '0.5rem 0.75rem',
+      fontSize: '0.875rem',
+      minHeight: '2rem',
+    },
+    medium: {
+      padding: '0.625rem 1rem',
+      fontSize: '1rem',
+      minHeight: '2.5rem',
+    },
+    large: {
+      padding: '0.75rem 1.25rem',
+      fontSize: '1.125rem',
+      minHeight: '3rem',
+    },
+  },
+  material: {
+    bg: 'var(--uilib-surface-100)',
+    selectedBg: 'var(--uilib-primary-500)',
+    selectedFg: 'var(--uilib-primary-contrast)',
+    hoverBg: 'var(--uilib-surface-200)',
+    border: 'var(--uilib-border-color)',
+    shadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+  bootstrap: {
+    bg: 'var(--uilib-surface-100)',
+    selectedBg: 'var(--uilib-primary-500)',
+    selectedFg: 'var(--uilib-primary-contrast)',
+    hoverBg: 'var(--uilib-surface-200)',
+    border: 'var(--uilib-border-color)',
+  },
+  minimal: {
+    bg: 'transparent',
+    selectedBg: 'var(--uilib-surface-200)',
+    selectedFg: 'var(--uilib-text-primary)',
+    hoverBg: 'var(--uilib-surface-100)',
+    border: 'transparent',
+  },
 } as const;
 
 export type SelectButtonTokenKey = keyof typeof SELECTBUTTON_TOKENS;

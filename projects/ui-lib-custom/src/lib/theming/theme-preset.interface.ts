@@ -1,4 +1,4 @@
-import { IconLibrary, IconSize } from '../icon/icon.types';
+import type { IconLibrary, IconSize } from '../icon';
 
 export type ThemeVariant = 'material' | 'bootstrap' | 'minimal';
 
@@ -24,6 +24,40 @@ export interface ThemePresetShape {
   buttonRadius: ThemeShapeRadius;
   cardRadius: ThemeShapeRadius;
   inputRadius: ThemeShapeRadius;
+}
+
+export interface ThemePresetSelectButtonSize {
+  padding?: string;
+  fontSize?: string;
+  minHeight?: string;
+}
+
+export interface ThemePresetSelectButtonVariantState {
+  bg?: string;
+  selectedBg?: string;
+  selectedFg?: string;
+  hoverBg?: string;
+  border?: string;
+  shadow?: string;
+}
+
+export interface ThemePresetSelectButton {
+  gap?: string;
+  disabledOpacity?: string;
+  invalidBorder?: string;
+  borderRadius?: {
+    material?: string;
+    bootstrap?: string;
+    minimal?: string;
+  };
+  sizes?: {
+    small?: ThemePresetSelectButtonSize;
+    medium?: ThemePresetSelectButtonSize;
+    large?: ThemePresetSelectButtonSize;
+  };
+  material?: ThemePresetSelectButtonVariantState;
+  bootstrap?: ThemePresetSelectButtonVariantState;
+  minimal?: ThemePresetSelectButtonVariantState;
 }
 
 export interface ThemePresetTypography {
@@ -54,6 +88,7 @@ export interface ThemePreset {
   cardShadow?: string;
   buttonShadow?: string;
   icons?: ThemeIconConfig;
+  selectButton?: ThemePresetSelectButton;
 }
 
 export type ThemePresetOverrides = DeepPartial<ThemePreset>;

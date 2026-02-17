@@ -1,10 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, computed, inject, signal, Signal } from '@angular/core';
-import { BORDER_RADIUS, SHADOWS } from '../design-tokens';
+import { BORDER_RADIUS, SHADOWS, SELECTBUTTON_TOKENS } from '../design-tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
 import lightPreset from './presets/light.json';
-import { ICON_SIZES } from '../icon/icon.types';
+import { ICON_SIZES } from '../icon';
 import {
   DeepPartial,
   ThemePreset,
@@ -349,6 +349,44 @@ export class ThemeConfigService {
     set('--uilib-button-shadow-hover', shadowValueButton);
     set('--uilib-shadow-sm', shadowValueButton);
     set('--uilib-shadow-md', shadowValueButton);
+
+    set('--uilib-selectbutton-gap', SELECTBUTTON_TOKENS.gap);
+    set('--uilib-selectbutton-border-radius', SELECTBUTTON_TOKENS.borderRadius.material);
+    set('--uilib-selectbutton-material-border-radius', SELECTBUTTON_TOKENS.borderRadius.material);
+    set('--uilib-selectbutton-bootstrap-border-radius', SELECTBUTTON_TOKENS.borderRadius.bootstrap);
+    set('--uilib-selectbutton-minimal-border-radius', SELECTBUTTON_TOKENS.borderRadius.minimal);
+
+    set('--uilib-selectbutton-small-padding', SELECTBUTTON_TOKENS.sizes.small.padding);
+    set('--uilib-selectbutton-small-font-size', SELECTBUTTON_TOKENS.sizes.small.fontSize);
+    set('--uilib-selectbutton-small-min-height', SELECTBUTTON_TOKENS.sizes.small.minHeight);
+    set('--uilib-selectbutton-medium-padding', SELECTBUTTON_TOKENS.sizes.medium.padding);
+    set('--uilib-selectbutton-medium-font-size', SELECTBUTTON_TOKENS.sizes.medium.fontSize);
+    set('--uilib-selectbutton-medium-min-height', SELECTBUTTON_TOKENS.sizes.medium.minHeight);
+    set('--uilib-selectbutton-large-padding', SELECTBUTTON_TOKENS.sizes.large.padding);
+    set('--uilib-selectbutton-large-font-size', SELECTBUTTON_TOKENS.sizes.large.fontSize);
+    set('--uilib-selectbutton-large-min-height', SELECTBUTTON_TOKENS.sizes.large.minHeight);
+
+    set('--uilib-selectbutton-fg', colors.text);
+    set('--uilib-selectbutton-invalid-border', colors.danger);
+
+    set('--uilib-selectbutton-material-bg', colors.surface);
+    set('--uilib-selectbutton-material-hover-bg', colors.surfaceAlt);
+    set('--uilib-selectbutton-material-border', colors.border);
+    set('--uilib-selectbutton-material-selected-bg', colors.primary);
+    set('--uilib-selectbutton-material-selected-fg', '#fff');
+    set('--uilib-selectbutton-material-shadow', SELECTBUTTON_TOKENS.material.shadow);
+
+    set('--uilib-selectbutton-bootstrap-bg', colors.surface);
+    set('--uilib-selectbutton-bootstrap-hover-bg', colors.surfaceAlt);
+    set('--uilib-selectbutton-bootstrap-border', colors.border);
+    set('--uilib-selectbutton-bootstrap-selected-bg', colors.primary);
+    set('--uilib-selectbutton-bootstrap-selected-fg', '#fff');
+
+    set('--uilib-selectbutton-minimal-bg', SELECTBUTTON_TOKENS.minimal.bg);
+    set('--uilib-selectbutton-minimal-hover-bg', colors.surfaceAlt);
+    set('--uilib-selectbutton-minimal-border', SELECTBUTTON_TOKENS.minimal.border);
+    set('--uilib-selectbutton-minimal-selected-bg', colors.surfaceAlt);
+    set('--uilib-selectbutton-minimal-selected-fg', colors.text);
 
     const iconSizes = icons?.sizes ?? this.defaultIconConfig.sizes;
     Object.entries(iconSizes).forEach(([key, value]) => set(`--uilib-icon-size-${key}`, value));
