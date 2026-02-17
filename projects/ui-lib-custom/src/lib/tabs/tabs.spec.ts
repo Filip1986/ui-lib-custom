@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Tabs } from './tabs';
-import { Tab, TabContent } from './tab';
+import { Tab } from './tab';
 
 @Component({
   standalone: true,
@@ -18,19 +18,15 @@ class TabsHostComponent {}
 
 @Component({
   standalone: true,
-  imports: [Tabs, Tab, TabContent],
+  imports: [Tabs, Tab],
   template: `
     <ui-lib-tabs>
       <ui-lib-tab label="One">One content</ui-lib-tab>
       <ui-lib-tab label="Lazy" lazy="unmount">
-        <ng-template uiLibTabContent>
-          <div class="lazy-content">Lazy content</div>
-        </ng-template>
+        <div class="lazy-content">Lazy content</div>
       </ui-lib-tab>
       <ui-lib-tab label="Keep" lazy="keep-alive">
-        <ng-template uiLibTabContent>
-          <div class="keep-content">Keep content</div>
-        </ng-template>
+        <div class="keep-content">Keep content</div>
       </ui-lib-tab>
     </ui-lib-tabs>
   `,
@@ -84,29 +80,40 @@ class TabsNavigationHostComponent {
 
 @Component({
   standalone: true,
-  imports: [Tabs, Tab, TabContent],
+  imports: [Tabs, Tab],
   template: `
     <ui-lib-tabs lazy="keep-alive">
       <ui-lib-tab label="Eager">
-        <ng-template uiLibTabContent>
-          <div class="eager-content">Eager content</div>
-        </ng-template>
+        <div class="eager-content">Eager content</div>
       </ui-lib-tab>
       <ui-lib-tab label="Override" lazy="unmount">
-        <ng-template uiLibTabContent>
-          <div class="override-content">Override content</div>
-        </ng-template>
+        <div class="override-content">Override content</div>
       </ui-lib-tab>
     </ui-lib-tabs>
   `,
 })
 class TabsPerTabOverrideHostComponent {}
 
+let rafQueue: FrameRequestCallback[] = [];
+
 function stubRaf(): jasmine.Spy {
+  rafQueue = [];
   return spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback): number => {
-    cb(0);
-    return 0;
+    rafQueue.push(cb);
+    return rafQueue.length;
   });
+}
+
+function flushRaf(): void {
+  const queue: FrameRequestCallback[] = [...rafQueue];
+  rafQueue = [];
+  queue.forEach((cb: FrameRequestCallback): void => cb(0));
+}
+
+async function stabilizeFixture(fixture: ComponentFixture<unknown>): Promise<void> {
+  fixture.detectChanges();
+  await fixture.whenStable();
+  fixture.detectChanges();
 }
 
 function setScrollMetrics(
@@ -160,31 +167,39 @@ describe('Tabs per-tab lazy', () => {
     fixture.detectChanges();
   });
 
-  it('should unmount lazy content when tab deactivates', () => {
-    const buttons = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
-    expect(buttons.length).toBe(3);
+  it('should unmount lazy content when tab deactivates', async () => {
+    const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
+      .componentInstance as Tabs;
+    const tabs = component.tabContexts();
 
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeNull();
 
-    buttons[1].nativeElement.click();
-    fixture.detectChanges();
+    const lazyTab = tabs[1];
+    component.onSelect({ value: lazyTab.value, index: lazyTab.index, disabled: false });
+    await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeTruthy();
 
-    buttons[0].nativeElement.click();
-    fixture.detectChanges();
+    const firstTab = tabs[0];
+    component.onSelect({ value: firstTab.value, index: firstTab.index, disabled: false });
+    await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeNull();
   });
 
-  it('should keep cached content for keep-alive tabs', () => {
-    const buttons = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
+  it('should keep cached content for keep-alive tabs', async () => {
+    const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
+      .componentInstance as Tabs;
+    const tabs = component.tabContexts();
+
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeNull();
 
-    buttons[2].nativeElement.click();
-    fixture.detectChanges();
+    const keepTab = tabs[2];
+    component.onSelect({ value: keepTab.value, index: keepTab.index, disabled: false });
+    await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeTruthy();
 
-    buttons[0].nativeElement.click();
-    fixture.detectChanges();
+    const firstTab = tabs[0];
+    component.onSelect({ value: firstTab.value, index: firstTab.index, disabled: false });
+    await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeTruthy();
   });
 });
@@ -209,6 +224,7 @@ describe('Scrollable Tabs', () => {
     setScrollMetrics(list, 500, 100, 0);
 
     component.onTabListScrolled();
+    flushRaf();
     fixture.detectChanges();
 
     const arrows: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-scroll'));
@@ -223,6 +239,7 @@ describe('Scrollable Tabs', () => {
     setScrollMetrics(list, 100, 100, 0);
 
     component.onTabListScrolled();
+    flushRaf();
     fixture.detectChanges();
 
     const arrows: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-scroll'));
@@ -237,6 +254,7 @@ describe('Scrollable Tabs', () => {
 
     setScrollMetrics(list, 500, 100, 0);
     component.onTabListScrolled();
+    flushRaf();
     fixture.detectChanges();
 
     const prev: HTMLButtonElement = fixture.debugElement.query(By.css('button.tab-scroll-prev'))
@@ -248,6 +266,7 @@ describe('Scrollable Tabs', () => {
 
     list.scrollLeft = 400;
     component.onTabListScrolled();
+    flushRaf();
     fixture.detectChanges();
     expect(next.disabled).toBe(true);
   });
@@ -261,11 +280,13 @@ describe('Scrollable Tabs', () => {
     setScrollMetrics(list, 500, 100, 0);
 
     component.onTabListScrolled();
+    flushRaf();
     fixture.detectChanges();
 
     const next: HTMLButtonElement = fixture.debugElement.query(By.css('button.tab-scroll-next'))
       .nativeElement as HTMLButtonElement;
     next.click();
+    flushRaf();
     expect(scrollToSpy).toHaveBeenCalled();
   });
 
@@ -278,6 +299,7 @@ describe('Scrollable Tabs', () => {
     stubRaf();
 
     target.dispatchEvent(new Event('focus'));
+    flushRaf();
     fixture.detectChanges();
 
     component.onTabListScrolled();
@@ -333,20 +355,25 @@ describe('Per-Panel Lazy', () => {
     fixture.detectChanges();
   });
 
-  it('should respect per-tab lazy override', () => {
-    const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
+  it('should respect per-tab lazy override', async () => {
+    const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
+      .componentInstance as Tabs;
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
 
-    buttons[1].nativeElement.click();
-    fixture.detectChanges();
+    const tabs = component.tabContexts();
+    const overrideTab = tabs[1];
+    component.onSelect({ value: overrideTab.value, index: overrideTab.index, disabled: false });
+    await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeTruthy();
 
-    buttons[0].nativeElement.click();
-    fixture.detectChanges();
+    const eagerTab = tabs[0];
+    component.onSelect({ value: eagerTab.value, index: eagerTab.index, disabled: false });
+    await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
   });
 
-  it('should defer template rendering until active', () => {
+  it('should defer template rendering until active', async () => {
+    await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.eager-content'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
   });
