@@ -201,5 +201,19 @@ describe('Button', () => {
       expect(btn.getAttribute('type')).toBe('button');
       expect(btn.tabIndex).toBe(0);
     });
+
+    it('supports role, tabindex, and aria-pressed/checked overrides', () => {
+      fixture.componentRef.setInput('role', 'radio');
+      fixture.componentRef.setInput('tabIndex', -1);
+      fixture.componentRef.setInput('ariaPressed', true);
+      fixture.componentRef.setInput('ariaChecked', true);
+      fixture.detectChanges();
+
+      const btn = getButton();
+      expect(btn.getAttribute('role')).toBe('radio');
+      expect(btn.getAttribute('tabindex')).toBe('-1');
+      expect(btn.getAttribute('aria-pressed')).toBe('true');
+      expect(btn.getAttribute('aria-checked')).toBe('true');
+    });
   });
 });

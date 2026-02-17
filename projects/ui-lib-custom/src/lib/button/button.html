@@ -4,6 +4,10 @@
   [disabled]="isDisabled()"
   [attr.aria-disabled]="ariaDisabled()"
   [attr.aria-busy]="loading() ? true : null"
+  [attr.role]="role()"
+  [attr.tabindex]="tabIndex()"
+  [attr.aria-pressed]="ariaPressed() === null ? null : ariaPressed()"
+  [attr.aria-checked]="ariaChecked() === null ? null : ariaChecked()"
   [style.--uilib-button-shadow]="shadow()"
   [style.--uilib-button-shadow-hover]="shadow()"
 >

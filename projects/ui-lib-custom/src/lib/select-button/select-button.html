@@ -1,0 +1,24 @@
+@for (option of options(); track trackOption($index, option)) {
+  <ui-lib-button
+    class="ui-lib-select-button__item"
+    [class.ui-lib-select-button__item--selected]="isSelected(option)"
+    [variant]="variant()"
+    [size]="size()"
+    [appearance]="isSelected(option) ? 'solid' : 'outline'"
+    [disabled]="isDisabled() || isOptionDisabled(option)"
+    [fullWidth]="fluid()"
+    role="button"
+    [ariaPressed]="isSelected(option)"
+    [tabIndex]="tabIndexFor($index)"
+    (click)="onOptionClick(option, $index, $event)"
+  >
+    @if (itemTemplate()) {
+      <ng-container
+        [ngTemplateOutlet]="itemTemplate()"
+        [ngTemplateOutletContext]="{ $implicit: option }"
+      />
+    } @else {
+      {{ resolveLabel(option) }}
+    }
+  </ui-lib-button>
+}

@@ -658,3 +658,24 @@ export const BUTTON_TOKENS = {
 } as const;
 
 export type ButtonTokenKey = keyof typeof BUTTON_TOKENS;
+
+// ============================================================================
+// SELECT BUTTON TOKENS
+// ============================================================================
+
+export const SELECTBUTTON_TOKENS = {
+  bg: COLOR_NEUTRAL.white,
+  border: COLOR_NEUTRAL[300],
+  fg: SEMANTIC_COLORS.text,
+  hoverBg: COLOR_NEUTRAL[100],
+  hoverFg: SEMANTIC_COLORS.text,
+  selectedBg: SEMANTIC_COLORS.primary,
+  selectedFg: COLOR_NEUTRAL.white,
+  selectedBorder: SEMANTIC_COLORS.primary,
+  invalidBorder: COLOR_DANGER[600],
+  radius: BORDER_RADIUS.md,
+  itemGap: SPACING_TOKENS[0],
+  disabledOpacity: 0.6,
+} as const;
+
+export type SelectButtonTokenKey = keyof typeof SELECTBUTTON_TOKENS;

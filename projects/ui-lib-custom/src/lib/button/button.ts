@@ -57,6 +57,10 @@ export class Button {
   badgeSeverity = input<BadgeSeverity | null>(null);
   badgeClass = input<string | null>(null);
   loadingIcon = input<SemanticIcon | string>('spinner');
+  role = input<string | null>(null);
+  tabIndex = input<number | null>(null);
+  ariaPressed = input<boolean | null>(null);
+  ariaChecked = input<boolean | null>(null);
 
   readonly iconOnlyComputed = computed<boolean>(() => this.iconOnly() ?? this.iconOnlyInput());
   iconSize = computed<IconSize>(() => {
