@@ -99,6 +99,11 @@ docs/
   - Real-world examples
   - Performance characteristics
   - Implementation: [BADGE_IMPLEMENTATION.md](reference/components/BADGE_IMPLEMENTATION.md)
+- **[SelectButton Component](reference/components/SELECTBUTTON.md)** - SelectButton component reference
+  - Complete API documentation
+  - Variants and sizes
+  - Form integration and templates
+  - Implementation: [SELECTBUTTON_IMPLEMENTATION.md](reference/components/SELECTBUTTON_IMPLEMENTATION.md)
 
 #### 📋 Project Documentation
 - **[Project Summary](reference/project/PROJECT_SUMMARY.md)** - Complete project overview

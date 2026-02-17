@@ -124,6 +124,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/checkbox',
         },
+        {
+          label: 'Select Buttons',
+          icon: 'pi pi-circle',
+          route: '/select-buttons',
+        },
       ],
     },
   ]);

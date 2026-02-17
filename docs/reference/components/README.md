@@ -32,6 +32,19 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### SelectButton
+**Files:**
+- [SELECTBUTTON.md](SELECTBUTTON.md) - Complete API reference and usage guide
+- [SELECTBUTTON_IMPLEMENTATION.md](SELECTBUTTON_IMPLEMENTATION.md) - Implementation details and architecture
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/select-buttons)
+- [Source Code](../../projects/ui-lib-custom/src/lib/select-button/)
+
+---
+
 ## 📋 Documentation Structure
 
 Each component should have two documentation files:
@@ -70,6 +83,7 @@ Each component should have two documentation files:
 | Button | Action buttons | 3 | 5 | 3 | ✅ Existing |
 | Card | Content container | 3 | - | - | ✅ Existing |
 | Accordion | Expandable panels | 3 | - | 3 | ✅ Complete |
+| SelectButton | Segmented selection control | 3 | - | 3 | ✅ Complete |
 
 ---
 

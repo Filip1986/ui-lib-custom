@@ -21,6 +21,7 @@ import { LayoutCompositionSectionComponent } from './pages/layouts/composition-s
 import { LayoutDesignTokensSectionComponent } from './pages/layouts/design-tokens-section.component';
 import { LayoutThemedLayoutsSectionComponent } from './pages/layouts/themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
+import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -102,6 +103,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/accordion/accordion.component').then((m) => m.AccordionComponent),
     title: 'Accordion - UI Components Library',
+  },
+  {
+    path: 'select-buttons',
+    component: SelectButtonsComponent,
+    title: 'Select Buttons - UI Components Library',
   },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
