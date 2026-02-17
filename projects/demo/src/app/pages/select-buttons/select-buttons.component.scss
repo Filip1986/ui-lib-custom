@@ -44,3 +44,14 @@ h3 {
   background: var(--uilib-surface-100, #f3f4f6);
 }
 
+.icon-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -67,41 +67,32 @@ export class Accordion implements AccordionContext {
   private readonly registeredPanels: Set<AccordionPanel> = new Set<AccordionPanel>();
 
   constructor() {
-    effect(
-      () => {
-        const defaults: string[] = this.defaultExpandedPanels();
-        if (!this.controlled()) {
-          this.internalExpanded.set(new Set(defaults));
-        }
-      },
-      { allowSignalWrites: true }
-    );
+    effect((): void => {
+      const defaults: string[] = this.defaultExpandedPanels();
+      if (!this.controlled()) {
+        this.internalExpanded.set(new Set(defaults));
+      }
+    });
 
-    effect(
-      () => {
-        const provided: string[] = this.expandedPanels();
-        if (!this.controlled() && provided !== this.initialExpandedRef) {
-          this.controlled.set(true);
-        }
-        if (this.controlled()) {
-          this.internalExpanded.set(new Set(provided));
-        }
-      },
-      { allowSignalWrites: true }
-    );
+    effect((): void => {
+      const provided: string[] = this.expandedPanels();
+      if (!this.controlled() && provided !== this.initialExpandedRef) {
+        this.controlled.set(true);
+      }
+      if (this.controlled()) {
+        this.internalExpanded.set(new Set(provided));
+      }
+    });
 
-    effect(
-      () => {
-        if (this.expandMode() === 'single') {
-          const current: Set<string> = new Set<string>(this.internalExpanded());
-          if (current.size > 1) {
-            const first: string | undefined = Array.from(current)[0];
-            this.internalExpanded.set(first ? new Set<string>([first]) : new Set<string>());
-          }
+    effect((): void => {
+      if (this.expandMode() === 'single') {
+        const current: Set<string> = new Set<string>(this.internalExpanded());
+        if (current.size > 1) {
+          const first: string | undefined = Array.from(current)[0];
+          this.internalExpanded.set(first ? new Set<string>([first]) : new Set<string>());
         }
-      },
-      { allowSignalWrites: true }
-    );
+      }
+    });
   }
 
   hostClasses = computed((): string => {

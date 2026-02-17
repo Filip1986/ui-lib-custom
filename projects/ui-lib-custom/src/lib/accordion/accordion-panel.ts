@@ -65,14 +65,11 @@ export class AccordionPanel implements OnDestroy {
       this.context.registerPanel(this);
     }
 
-    effect(
-      () => {
-        if (!this.context) {
-          this.internalExpanded.set(this.expanded());
-        }
-      },
-      { allowSignalWrites: true }
-    );
+    effect((): void => {
+      if (!this.context) {
+        this.internalExpanded.set(this.expanded());
+      }
+    });
   }
 
   readonly headerTemplate = contentChild(AccordionHeader);

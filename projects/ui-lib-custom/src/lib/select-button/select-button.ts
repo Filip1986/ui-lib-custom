@@ -371,14 +371,11 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   constructor(private readonly el: ElementRef<HTMLElement>) {
-    effect(
-      (): void => {
-        const inputValue: any | any[] | null | undefined = this.value();
-        if (inputValue !== undefined) {
-          this.internalValue.set(this.normalizeValues(inputValue));
-        }
-      },
-      { allowSignalWrites: true }
-    );
+    effect((): void => {
+      const inputValue: any | any[] | null | undefined = this.value();
+      if (inputValue !== undefined) {
+        this.internalValue.set(this.normalizeValues(inputValue));
+      }
+    });
   }
 }
