@@ -69,47 +69,38 @@ projects/ui-lib-custom/
       core/   (new shared types/utilities)
   accordion/
     ng-package.json
-    public-api.ts
   badge/
     ng-package.json
-    public-api.ts
   button/
     ng-package.json
-    public-api.ts
   card/
     ng-package.json
-    public-api.ts
   checkbox/
     ng-package.json
-    public-api.ts
   core/
     ng-package.json
-    public-api.ts
   icon/
     ng-package.json
-    public-api.ts
   input/
     ng-package.json
-    public-api.ts
   layout/
     ng-package.json
-    public-api.ts
   select/
     ng-package.json
-    public-api.ts
   select-button/
     ng-package.json
-    public-api.ts
   tabs/
     ng-package.json
-    public-api.ts
   theme/
     ng-package.json
-    public-api.ts
   tokens/
     ng-package.json
-    public-api.ts
 ```
+
+## Implementation Notes
+
+- Secondary entry points do not use per-entry `public-api.ts` files.
+- Each `ng-package.json` `entryFile` points directly to `../src/lib/<name>/index.ts`.
 
 ## Dependency Resolution Strategy
 
@@ -158,8 +149,11 @@ Mitigation strategy:
 ### Phase 1: Add secondary entry points (no breaking changes)
 
 - Keep `projects/ui-lib-custom/src/public-api.ts` as the primary barrel.
-- Add secondary entry point folders with `ng-package.json` + `public-api.ts`.
+- Add secondary entry point folders with `ng-package.json` pointing to `../src/lib/<name>/index.ts`.
 - Release as a minor version with updated docs showing new import paths.
+- Status: complete.
+  - Implemented: button, badge, accordion, tabs, input, select-button, core.
+  - Pending: card, checkbox, select, icon, layout, theme, tokens.
 
 ### Phase 2: Introduce `core` for shared types
 

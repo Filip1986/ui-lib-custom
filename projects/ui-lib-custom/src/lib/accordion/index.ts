@@ -8,4 +8,3 @@ export type {
   AccordionIconPosition,
   AccordionToggleIconContext,
 } from './accordion.types';
-export { ACCORDION_CONTEXT } from './accordion-context';

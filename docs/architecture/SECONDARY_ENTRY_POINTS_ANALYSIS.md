@@ -1,5 +1,10 @@
 # Secondary Entry Points Analysis
 
+## Current Status
+
+- Implemented: button, badge, accordion, tabs, input, select-button, core.
+- Pending: card, checkbox, select, icon, layout, theme, tokens.
+
 ## Export Inventory (current public-api.ts)
 
 Primary entry point exports from `projects/ui-lib-custom/src/public-api.ts`:
@@ -283,4 +288,3 @@ Notes:
 - Some components (login templates) are composite and will import multiple entry points; tree-shaking gains are limited for those features.
 - Exporting `design-tokens` in both `layout` and a dedicated `design-tokens` entry point can cause redundant imports; ensure re-exports are intentional and consistent.
 - If `themes.scss` and `themes.css` assets are needed by consumers, ensure they are still copied via `ng-package.json` assets when adding secondary entry points.
-

@@ -117,10 +117,11 @@
 ## Entry Points & Tree-Shaking
 
 - Each component or feature should have a secondary entry point under `projects/ui-lib-custom/<entry>/`.
-- Each entry point must include `ng-package.json` and a minimal `public-api.ts` exporting only that feature.
+- Each entry point must include `ng-package.json`; `public-api.ts` is optional. The `ng-package.json` may point directly to `src/lib/<name>/index.ts` (current convention).
 - Avoid re-exporting secondary entry points from the primary barrel to prevent circular package graphs.
 - If a new entry point is added, update `projects/ui-lib-custom/package.json` exports and `typesVersions`.
 - Keep entry point public APIs narrow and stable; internal code should import via relative `src/lib/...` paths.
+- The `<entry>/src/` subfolder pattern is not used; do not create `public-api.ts` files inside secondary entry point folders.
 
 ## Documentation & Demos
 
