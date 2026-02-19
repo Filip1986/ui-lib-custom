@@ -7,6 +7,17 @@
     </p>
   </div>
 
+  <app-code-preview [code]="accordionExample">
+    <ui-lib-accordion variant="material">
+      <ui-lib-accordion-panel header="Shipping">
+        Standard (5-7 days), express (2-3 days), and overnight options.
+      </ui-lib-accordion-panel>
+      <ui-lib-accordion-panel header="Returns">
+        Items can be returned within 30 days of purchase.
+      </ui-lib-accordion-panel>
+    </ui-lib-accordion>
+  </app-code-preview>
+
   <div class="doc-tabs">
     <ui-lib-tabs
       variant="minimal"

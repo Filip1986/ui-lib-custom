@@ -17,6 +17,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
@@ -36,6 +37,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     DocCodeSnippetComponent,
+    CodePreviewComponent,
   ],
   templateUrl: './icons-demo.component.html',
   styleUrl: './icons-demo.component.scss',
@@ -94,6 +96,8 @@ export class IconsDemoComponent {
   readonly snippets = {
     usage: `<ui-lib-icon name="search" size="lg" variant="material" />`,
   } as const;
+
+  readonly iconExample = `<ui-lib-icon name="search" size="lg" variant="material" />`;
 
   onSearch(event: Event) {
     this.searchQuery.set((event.target as HTMLInputElement).value);

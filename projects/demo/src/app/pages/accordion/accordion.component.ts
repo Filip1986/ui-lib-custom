@@ -28,6 +28,7 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 interface FaqItem {
   value: string;
@@ -67,6 +68,7 @@ type AccordionTab =
     DocDemoViewportComponent,
     ThemeScopeDirective,
     DocCodeSnippetComponent,
+    CodePreviewComponent,
   ],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
@@ -253,4 +255,13 @@ export class AccordionComponent {
   toggleReducedMotion(): void {
     this.reduceMotionDemo.update((value: boolean) => !value);
   }
+
+  readonly accordionExample = `<ui-lib-accordion variant="material">
+  <ui-lib-accordion-panel header="Shipping">
+    Standard (5-7 days), express (2-3 days), and overnight options.
+  </ui-lib-accordion-panel>
+  <ui-lib-accordion-panel header="Returns">
+    Items can be returned within 30 days of purchase.
+  </ui-lib-accordion-panel>
+</ui-lib-accordion>`;
 }

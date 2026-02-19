@@ -35,6 +35,7 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 interface DemoTab {
   value: TabsValue;
@@ -73,6 +74,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     DocDemoViewportComponent,
     ThemeScopeDirective,
     DocCodeSnippetComponent,
+    CodePreviewComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -347,4 +349,9 @@ export class TabsDemoComponent {
   selectControlled(index: number): void {
     this.controlledIndex.set(index);
   }
+
+  readonly tabsExample = `<ui-lib-tabs>
+  <ui-lib-tab label="Home">Home content</ui-lib-tab>
+  <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
+</ui-lib-tabs>`;
 }

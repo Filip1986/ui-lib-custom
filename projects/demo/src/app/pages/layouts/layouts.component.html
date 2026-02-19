@@ -7,6 +7,13 @@
     </p>
   </div>
 
+  <app-code-preview [code]="layoutExample">
+    <ui-lib-stack [gap]="3">
+      <ui-lib-card>Card A</ui-lib-card>
+      <ui-lib-card>Card B</ui-lib-card>
+    </ui-lib-stack>
+  </app-code-preview>
+
   <div class="viewport-control-stack">
     <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
       <div card-header>Viewport width</div>

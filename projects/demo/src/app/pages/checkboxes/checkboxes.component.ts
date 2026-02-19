@@ -15,6 +15,7 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 type TabKey = 'playground' | 'api-reference' | 'accessibility' | 'usage';
 
@@ -32,6 +33,7 @@ type TabKey = 'playground' | 'api-reference' | 'accessibility' | 'usage';
     DocDemoViewportComponent,
     DocCodeSnippetComponent,
     FormsModule,
+    CodePreviewComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -87,6 +89,8 @@ export class SettingsComponent {
   syncEnabled = false;
 }`,
   } as const;
+
+  readonly checkboxExample = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
 
   selectVariant(value: CheckboxVariant): void {
     this.variant.set(value);

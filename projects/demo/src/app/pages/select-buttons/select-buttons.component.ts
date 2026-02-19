@@ -22,6 +22,7 @@ import {
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 @Component({
   selector: 'app-select-buttons',
@@ -39,8 +40,7 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
     Grid,
     DocPageLayoutComponent,
     DocCodeSnippetComponent,
-    Icon,
-    Icon,
+    CodePreviewComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -76,6 +76,8 @@ export class Example {
   value = 1;
 }`,
   };
+
+  readonly selectButtonExample = `<ui-lib-select-button [options]="basicOptions" [(value)]="basicValue" />`;
 
   // Basic
   basicOptions: SelectButtonOption[] = [

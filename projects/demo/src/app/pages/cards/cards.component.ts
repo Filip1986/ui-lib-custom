@@ -25,6 +25,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { FormsModule } from '@angular/forms';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 type ShadowKey = string;
 const SHADOW_MAP = SHADOWS as Record<string, string>;
@@ -45,6 +46,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
     ThemeScopeDirective,
     FormsModule,
     DocCodeSnippetComponent,
+    CodePreviewComponent,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
@@ -83,6 +85,12 @@ export class CardsComponent {
 })
 export class Example {}`,
   } as const;
+
+  readonly cardExample = `<ui-lib-card>
+  <div card-header>Card Title</div>
+  Card content
+  <div card-footer>Actions</div>
+</ui-lib-card>`;
 
   variant = signal<CardVariant>('material');
   elevation = signal<CardElevation>('medium');

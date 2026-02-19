@@ -25,6 +25,7 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 
@@ -43,6 +44,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
     ThemeScopeDirective,
     Card,
     DocCodeSnippetComponent,
+    CodePreviewComponent,
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
@@ -77,6 +79,8 @@ export class SelectComponent {
 })
 export class Example {}`,
   } as const;
+
+  readonly selectExample = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;
 
   private readonly themeService = inject(ThemeConfigService);
 

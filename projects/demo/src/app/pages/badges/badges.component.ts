@@ -16,6 +16,7 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 type TabKey = 'api-reference' | 'usage' | 'performance';
 
@@ -32,6 +33,7 @@ type TabKey = 'api-reference' | 'usage' | 'performance';
     DocDemoViewportComponent,
     Card,
     FormsModule,
+    CodePreviewComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
@@ -122,4 +124,6 @@ export class BadgesComponent {
   setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
     this.viewport?.setDensity(value);
   }
+
+  readonly badgeExample = `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`;
 }

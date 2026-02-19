@@ -26,6 +26,7 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 
@@ -44,6 +45,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
     ThemeScopeDirective,
     Card,
     DocCodeSnippetComponent,
+    CodePreviewComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
@@ -184,4 +186,6 @@ export class Example {}`,
   setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
     this.viewport?.setDensity(value);
   }
+
+  readonly inputExample = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
 }

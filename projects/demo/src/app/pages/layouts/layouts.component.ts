@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
-import { Card, Button } from 'ui-lib-custom';
+import { Card, Button, Stack } from 'ui-lib-custom';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,6 +13,7 @@ import { LayoutCompositionSectionComponent } from './composition-section.compone
 import { LayoutDesignTokensSectionComponent } from './design-tokens-section.component';
 import { LayoutThemedLayoutsSectionComponent } from './themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './examples-section.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 @Component({
   selector: 'app-layouts',
@@ -31,6 +32,8 @@ import { LayoutExamplesSectionComponent } from './examples-section.component';
     LayoutDesignTokensSectionComponent,
     LayoutThemedLayoutsSectionComponent,
     LayoutExamplesSectionComponent,
+    CodePreviewComponent,
+    Stack,
   ],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',
@@ -112,4 +115,9 @@ export class LayoutsComponent {
   setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.forEachViewport((vp: DocDemoViewportComponent) => vp.setDensity(value));
   }
+
+  readonly layoutExample = `<ui-lib-stack [gap]="3">
+  <ui-lib-card>Card A</ui-lib-card>
+  <ui-lib-card>Card B</ui-lib-card>
+</ui-lib-stack>`;
 }
