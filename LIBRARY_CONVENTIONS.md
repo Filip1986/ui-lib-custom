@@ -177,6 +177,14 @@ All CSS custom properties MUST follow this pattern:
 - Align new components to the API shape and theming layers above.
 - No silent global CSS; scope everything to component hosts and CSS vars.
 
+## Changelog & Versioning
+
+- Maintain `CHANGELOG.md` at the project root.
+- Follow the Keep a Changelog format.
+- Follow Semantic Versioning.
+- Document breaking changes immediately.
+- Create migration guides for major/minor versions with breaking changes.
+
 ### Key Architectural Decisions
 
 - **Variants** define structural/visual differences (e.g., floating label vs top label)

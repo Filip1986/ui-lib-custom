@@ -211,7 +211,7 @@ New documentation to add?
 | `INTEGRATION_EXAMPLE.md` | `docs/guides/INTEGRATION_EXAMPLE.md` | Guides |
 | `PUBLISHING_GUIDE.md` | `docs/guides/PUBLISHING_GUIDE.md` | Guides |
 | `PROJECT_SUMMARY.md` | `docs/reference/PROJECT_SUMMARY.md` | Reference |
-| `VERIFICATION_CHECKLIST.md` | `docs/reference/VERIFICATION_CHECKLIST.md` | Reference |
+| `VERIFICATION_CHECKLIST.md` | `docs/reference/project/VERIFICATION_CHECKLIST.md` | Reference |
 | `ARCHITECTURE.md` | `docs/architecture/ARCHITECTURE.md` | Architecture |
 | `DOCUMENTATION_INDEX.md` | ~~Removed~~ | Replaced by `docs/README.md` |
 
