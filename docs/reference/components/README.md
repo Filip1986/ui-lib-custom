@@ -32,6 +32,92 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### Button
+**Files:**
+- [BUTTON.md](BUTTON.md) - Complete API reference and usage guide
+- [BUTTON_IMPLEMENTATION.md](BUTTON_IMPLEMENTATION.md) - Implementation details and architecture
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/buttons)
+- [Source Code](../../projects/ui-lib-custom/src/lib/button/)
+
+---
+
+### Card
+**Files:**
+- [CARD.md](CARD.md) - API reference and usage guide
+- [CARD_IMPLEMENTATION.md](CARD_IMPLEMENTATION.md) - Implementation details and architecture
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/cards)
+- [Source Code](../../projects/ui-lib-custom/src/lib/card/)
+
+---
+
+### Checkbox
+**Files:**
+- [CHECKBOX.md](CHECKBOX.md) - API reference and usage guide
+- _Implementation doc pending_
+
+**Status:** ⚠️ API only
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/checkbox/)
+
+---
+
+### Icon
+**Files:**
+- [ICON.md](ICON.md) - API reference and usage guide
+- _Implementation doc pending_
+
+**Status:** ⚠️ API only
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/icon/)
+
+---
+
+### Icon Button
+**Files:**
+- [ICON_BUTTON.md](ICON_BUTTON.md) - API reference and usage guide
+- _Implementation doc pending_
+
+**Status:** ⚠️ API only
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/icon-button/)
+
+---
+
+### Input
+**Files:**
+- [INPUT.md](INPUT.md) - API reference and usage guide
+- [INPUT_IMPLEMENTATION.md](INPUT_IMPLEMENTATION.md) - Implementation details and architecture
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/inputs)
+- [Source Code](../../projects/ui-lib-custom/src/lib/input/)
+
+---
+
+### Select
+**Files:**
+- _Docs pending_
+
+**Status:** ❌ Missing
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/select/)
+
+---
+
 ### SelectButton
 **Files:**
 - [SELECTBUTTON.md](SELECTBUTTON.md) - Complete API reference and usage guide
@@ -42,6 +128,29 @@ Individual component documentation with complete API references and implementati
 **Quick Links:**
 - [Live Demo](http://localhost:4200/select-buttons)
 - [Source Code](../../projects/ui-lib-custom/src/lib/select-button/)
+
+---
+
+### Tabs
+**Files:**
+- [TABS.md](TABS.md) - API reference and usage guide
+- [TABS_IMPLEMENTATION.md](TABS_IMPLEMENTATION.md) - Implementation details and architecture
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/tabs/)
+
+---
+
+### Layout
+**Files:**
+- _Docs pending (Stack/Inline/Grid/Container)_
+
+**Status:** ❌ Missing
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/layout/)
 
 ---
 
@@ -80,10 +189,17 @@ Each component should have two documentation files:
 | Component | Description | Variants | Colors | Sizes | Status |
 |-----------|-------------|----------|--------|-------|--------|
 | Badge | Labels, status, counts | 3 | 7 | 3 | ✅ Complete |
-| Button | Action buttons | 3 | 5 | 3 | ✅ Existing |
-| Card | Content container | 3 | - | - | ✅ Existing |
+| Button | Action buttons | 3 | 5 | 3 | ✅ Complete |
+| Card | Content container | 3 | - | - | ✅ Complete |
 | Accordion | Expandable panels | 3 | - | 3 | ✅ Complete |
 | SelectButton | Segmented selection control | 3 | - | 3 | ✅ Complete |
+| Checkbox | Form control | 3 | - | 3 | ⚠️ API only |
+| Icon | Icon rendering | - | - | 6 | ⚠️ API only |
+| Icon Button | Icon-only button | 3 | 5 | 3 | ⚠️ API only |
+| Input | Form control | 3 | - | - | ✅ Complete |
+| Select | Dropdown select | 3 | - | - | ❌ Missing |
+| Tabs | Navigation | 3 | - | - | ✅ Complete |
+| Layout | Stack/Inline/Grid/Container | - | - | - | ❌ Missing |
 
 ---
 

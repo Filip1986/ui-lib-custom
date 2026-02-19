@@ -99,11 +99,24 @@ docs/
   - Real-world examples
   - Performance characteristics
   - Implementation: [BADGE_IMPLEMENTATION.md](reference/components/BADGE_IMPLEMENTATION.md)
+- **[Button Component](reference/components/BUTTON.md)** - Button component reference
+  - Variants, appearances, and sizes
+  - Icons, badges, and loading states
+  - Implementation: [BUTTON_IMPLEMENTATION.md](reference/components/BUTTON_IMPLEMENTATION.md)
+- **[Card Component](reference/components/CARD.md)** - Card component reference
+  - Variants, elevations, and slots
+  - Implementation: [CARD_IMPLEMENTATION.md](reference/components/CARD_IMPLEMENTATION.md)
+- **[Input Component](reference/components/INPUT.md)** - Input component reference
+  - Floating labels and validation states
+  - Form integration
+  - Implementation: [INPUT_IMPLEMENTATION.md](reference/components/INPUT_IMPLEMENTATION.md)
 - **[SelectButton Component](reference/components/SELECTBUTTON.md)** - SelectButton component reference
-  - Complete API documentation
   - Variants and sizes
   - Form integration and templates
   - Implementation: [SELECTBUTTON_IMPLEMENTATION.md](reference/components/SELECTBUTTON_IMPLEMENTATION.md)
+- **[Tabs Component](reference/components/TABS.md)** - Tabs component reference
+  - Variants, lazy loading, navigation mode
+  - Implementation: [TABS_IMPLEMENTATION.md](reference/components/TABS_IMPLEMENTATION.md)
 
 #### 📋 Project Documentation
 - **[Project Summary](reference/project/PROJECT_SUMMARY.md)** - Complete project overview

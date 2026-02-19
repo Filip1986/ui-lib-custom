@@ -52,8 +52,17 @@ docs/
 → [docs/reference/components/](docs/reference/components/)
 
 - [Badge](docs/reference/components/BADGE.md)
-- Button (in root README.md)
-- Card (in root README.md)
+- [Accordion](docs/reference/components/ACCORDION.md)
+- [Button](docs/reference/components/BUTTON.md)
+- [Card](docs/reference/components/CARD.md)
+- [Input](docs/reference/components/INPUT.md)
+- [SelectButton](docs/reference/components/SELECTBUTTON.md)
+- [Tabs](docs/reference/components/TABS.md)
+- Checkbox (API only)
+- Icon (API only)
+- Icon Button (API only)
+- Select (missing)
+- Layout primitives (missing)
 
 ### 🎨 I want to understand the design system
 
@@ -213,16 +222,20 @@ docs/
 
 ## 📊 Documentation Status
 
-| Category            | Documentation            | Status            |
-| ------------------- | ------------------------ | ----------------- |
-| **Getting Started** | Quick start guides       | ✅ Complete       |
-| **Components**      | Badge                    | ✅ Complete       |
-|                     | Button, Card             | ⚠️ In root README |
-| **Systems**         | Design Tokens            | ✅ Complete       |
-|                     | Layout System            | ✅ Complete       |
-|                     | Theming                  | ✅ Complete       |
-| **Project**         | Summary, Logs, Checklist | ✅ Complete       |
-| **Guides**          | Integration, Publishing  | ✅ Complete       |
+| Component | API Docs | Implementation | Status |
+| --- | --- | --- | --- |
+| Badge | ✅ | ✅ | Complete |
+| Button | ✅ | ✅ | Complete |
+| Card | ✅ | ✅ | Complete |
+| Accordion | ✅ | ✅ | Complete |
+| Tabs | ✅ | ✅ | Complete |
+| Input | ✅ | ✅ | Complete |
+| SelectButton | ✅ | ✅ | Complete |
+| Checkbox | ✅ | ❌ | API only |
+| Icon | ✅ | ❌ | API only |
+| Icon Button | ✅ | ❌ | API only |
+| Select | ❌ | ❌ | Missing |
+| Layout | ❌ | ❌ | Missing |
 
 ---
 

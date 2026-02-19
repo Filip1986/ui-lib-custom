@@ -62,6 +62,8 @@ Quick links:
 
 A versatile button component with multiple variants, sizes, and colors.
 
+**Docs:** `docs/reference/components/BUTTON.md`
+
 **Variants**: `material` | `bootstrap` | `minimal`  
 **Sizes**: `small` | `medium` | `large`  
 **Colors**: `primary` | `secondary` | `success` | `danger` | `warning`
@@ -95,6 +97,8 @@ export class YourComponent {}
 ### Card Component
 
 A flexible card component with support for headers, footers, and different elevation levels.
+
+**Docs:** _Pending (currently documented in this README only)_
 
 **Variants**: `material` | `bootstrap` | `minimal`  
 **Elevation**: `none` | `low` | `medium` | `high`
