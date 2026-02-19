@@ -13,6 +13,22 @@ Individual component documentation with complete API references, examples, and i
   - API reference, variants, colors, sizes
   - Real-world examples
   - Implementation details: [BADGE_IMPLEMENTATION.md](components/BADGE_IMPLEMENTATION.md)
+- **[Button Component](components/BUTTON.md)** - Button component reference
+  - Variants, appearances, sizes
+  - Icons, badges, loading
+  - Implementation details: [BUTTON_IMPLEMENTATION.md](components/BUTTON_IMPLEMENTATION.md)
+- **[Card Component](components/CARD.md)** - Card component reference
+  - Variants, elevations, slots
+  - Implementation details: [CARD_IMPLEMENTATION.md](components/CARD_IMPLEMENTATION.md)
+- **[Input Component](components/INPUT.md)** - Input component reference
+  - Floating labels, validation states
+  - Implementation details: [INPUT_IMPLEMENTATION.md](components/INPUT_IMPLEMENTATION.md)
+- **[SelectButton Component](components/SELECTBUTTON.md)** - SelectButton component reference
+  - Variants, sizes, templates
+  - Implementation details: [SELECTBUTTON_IMPLEMENTATION.md](components/SELECTBUTTON_IMPLEMENTATION.md)
+- **[Tabs Component](components/TABS.md)** - Tabs component reference
+  - Variants, lazy loading, navigation mode
+  - Implementation details: [TABS_IMPLEMENTATION.md](components/TABS_IMPLEMENTATION.md)
 
 ---
 
@@ -62,7 +78,7 @@ Project-level documentation, changelogs, and verification tools.
 Start here if you want to use existing components:
 1. [Design Tokens](systems/DESIGN_TOKENS.md) - Understand the token system
 2. [Layout System](systems/LAYOUT_SYSTEM.md) - Learn layout primitives
-3. [Badge Component](components/BADGE.md) - Badge API reference
+3. [Components Index](components/README.md) - Full component list
 
 ### 🏗️ For Development
 Start here if you're developing new components:
@@ -84,8 +100,16 @@ Start here for project overview and status:
 | Component | API Docs | Implementation | Status |
 |-----------|----------|----------------|--------|
 | Badge | [BADGE.md](components/BADGE.md) | [BADGE_IMPLEMENTATION.md](components/BADGE_IMPLEMENTATION.md) | ✅ Complete |
-| Button | README.md | - | ✅ Existing |
-| Card | README.md | - | ✅ Existing |
+| Button | [BUTTON.md](components/BUTTON.md) | [BUTTON_IMPLEMENTATION.md](components/BUTTON_IMPLEMENTATION.md) | ✅ Complete |
+| Card | [CARD.md](components/CARD.md) | [CARD_IMPLEMENTATION.md](components/CARD_IMPLEMENTATION.md) | ✅ Complete |
+| Input | [INPUT.md](components/INPUT.md) | [INPUT_IMPLEMENTATION.md](components/INPUT_IMPLEMENTATION.md) | ✅ Complete |
+| SelectButton | [SELECTBUTTON.md](components/SELECTBUTTON.md) | [SELECTBUTTON_IMPLEMENTATION.md](components/SELECTBUTTON_IMPLEMENTATION.md) | ✅ Complete |
+| Tabs | [TABS.md](components/TABS.md) | [TABS_IMPLEMENTATION.md](components/TABS_IMPLEMENTATION.md) | ✅ Complete |
+| Checkbox | [CHECKBOX.md](components/CHECKBOX.md) | - | ⚠️ API only |
+| Icon | [ICON.md](components/ICON.md) | - | ⚠️ API only |
+| Icon Button | [ICON_BUTTON.md](components/ICON_BUTTON.md) | - | ⚠️ API only |
+| Select | - | - | ❌ Missing |
+| Layout | - | - | ❌ Missing |
 
 ### Systems
 | System | Documentation | Implementation | Status |

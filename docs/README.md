@@ -133,23 +133,13 @@ docs/
 - **[Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md)** - Quality assurance
   - Feature verification
   - Testing checklist
-
-- **[Update Log](reference/UPDATE_LOG.md)** - Version upgrade history
-  - Angular 21 upgrade details
-  - PrimeNG version updates
-  - Breaking changes
-  - Migration guide for consumers
+  - Documentation validation
 
 - **[API Reference](../README.md)** - Component API documentation
   - Button component API
   - Card component API
   - Props and configuration options
   - TypeScript interfaces
-
-- **[Verification Checklist](reference/VERIFICATION_CHECKLIST.md)** - Quality assurance
-  - Feature verification
-  - Testing checklist
-  - Documentation validation
 
 ---
 
@@ -180,9 +170,9 @@ docs/
 | **Publish the library** | [Publishing Guide](guides/PUBLISHING_GUIDE.md) |
 | **Learn the component APIs** | [API Reference](../README.md) |
 | **Understand the architecture** | [Architecture Docs](architecture/ARCHITECTURE.md) |
-| **Get a project overview** | [Project Summary](reference/PROJECT_SUMMARY.md) |
-| **See version upgrade history** | [Update Log](reference/UPDATE_LOG.md) |
-| **Verify everything works** | [Verification Checklist](reference/VERIFICATION_CHECKLIST.md) |
+| **Get a project overview** | [Project Summary](reference/project/PROJECT_SUMMARY.md) |
+| **See version upgrade history** | [Update Log](reference/project/UPDATE_LOG.md) |
+| **Verify everything works** | [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) |
 
 ### By Role
 
@@ -194,13 +184,13 @@ docs/
 
 **🚀 Contributor (Developing the Library)**
 1. [Architecture Documentation](architecture/ARCHITECTURE.md) - System design
-2. [Project Summary](reference/PROJECT_SUMMARY.md) - What's been built
-3. [Update Log](reference/UPDATE_LOG.md) - Version history and upgrades
-4. [Verification Checklist](reference/VERIFICATION_CHECKLIST.md) - Testing checklist
+2. [Project Summary](reference/project/PROJECT_SUMMARY.md) - What's been built
+3. [Update Log](reference/project/UPDATE_LOG.md) - Version history and upgrades
+4. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Testing checklist
 
 **📦 Publisher (Distributing the Library)**
 1. [Publishing Guide](guides/PUBLISHING_GUIDE.md) - How to publish
-2. [Verification Checklist](reference/VERIFICATION_CHECKLIST.md) - Pre-publish checks
+2. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Pre-publish checks
 
 ---
 
