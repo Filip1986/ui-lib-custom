@@ -33,6 +33,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { FormsModule } from '@angular/forms';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
+import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance' | 'examples';
 
@@ -54,6 +55,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance' | 'exampl
     Card,
     FormsModule,
     DocCodeSnippetComponent,
+    CodePreviewComponent,
   ],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
@@ -220,4 +222,6 @@ export class Example {}`,
   setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
     this.viewport?.setDensity(value);
   }
+
+  readonly buttonExample = `<ui-lib-button color="primary">Primary Button</ui-lib-button>`;
 }
