@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken, INLINE_TOKENS, InlineToken } from '../design-tokens';
+import { SPACING_TOKENS, SpacingToken, INLINE_TOKENS, InlineToken } from 'ui-lib-custom/tokens';
 
 const inlineVar = (token: InlineToken) => `var(--uilib-inline-${token}, ${INLINE_TOKENS[token]})`;
 const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;

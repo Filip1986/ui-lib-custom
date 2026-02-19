@@ -1,6 +1,6 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { ThemeConfigService } from '../theming/theme-config.service';
-import { ThemeVariant } from '../theming/theme-preset.interface';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { ThemeVariant } from 'ui-lib-custom/theme';
 import { ICON_CONFIG } from './icon.tokens';
 import {
   ComponentVariant,

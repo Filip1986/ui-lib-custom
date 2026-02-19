@@ -4,8 +4,8 @@ import { lucideAudioWaveform } from '@ng-icons/lucide';
 import { By } from '@angular/platform-browser';
 
 import { Button } from './button';
-import { Icon } from '../icon/icon';
-import { Badge } from '../badge/badge';
+import { Icon } from 'ui-lib-custom/icon';
+import { Badge } from 'ui-lib-custom/badge';
 
 describe('Button', () => {
   let component: Button;

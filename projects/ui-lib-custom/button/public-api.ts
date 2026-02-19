@@ -1,1 +1,1 @@
-export * from '../src/lib/button';
+export * from '../src/lib/button/index';

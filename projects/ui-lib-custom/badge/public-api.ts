@@ -1,1 +1,1 @@
-export * from '../src/lib/badge';
+export * from '../src/lib/badge/index';

@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon } from '../icon/icon';
-import { IconSize } from '../icon/icon.types';
-import { SemanticIcon } from '../icon/icon.semantics';
-import { Badge, BadgeColor } from '../badge/badge';
+import { Icon } from 'ui-lib-custom/icon';
+import { IconSize } from 'ui-lib-custom/icon';
+import { SemanticIcon } from 'ui-lib-custom/icon';
+import { Badge, BadgeColor } from 'ui-lib-custom/badge';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
 export type ButtonAppearance = 'solid' | 'outline' | 'ghost';

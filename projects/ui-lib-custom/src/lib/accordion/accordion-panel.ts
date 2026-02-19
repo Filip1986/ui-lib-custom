@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { AccordionContext, ACCORDION_CONTEXT } from './accordion-context';
 import { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
-import { Icon } from '../icon/icon';
+import { Icon } from 'ui-lib-custom/icon';
 
 let accordionPanelId = 0;
 

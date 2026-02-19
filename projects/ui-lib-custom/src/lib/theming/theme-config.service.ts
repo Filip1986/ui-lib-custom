@@ -1,10 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, computed, inject, signal, Signal } from '@angular/core';
-import { BORDER_RADIUS, SHADOWS, SELECTBUTTON_TOKENS } from '../design-tokens';
+import { BORDER_RADIUS, SHADOWS, SELECTBUTTON_TOKENS } from 'ui-lib-custom/tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
 import lightPreset from './presets/light.json';
-import { ICON_SIZES } from '../icon';
+import { ICON_SIZES } from 'ui-lib-custom/core';
 import {
   DeepPartial,
   ThemePreset,

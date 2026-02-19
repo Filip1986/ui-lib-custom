@@ -18,8 +18,8 @@ import {
   Signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon } from '../icon/icon';
-import { SemanticIcon } from '../icon/icon.semantics';
+import { Icon } from 'ui-lib-custom/icon';
+import { SemanticIcon } from 'ui-lib-custom/icon';
 import { Tab } from './tab';
 import { TabPanel } from './tab-panel';
 import {

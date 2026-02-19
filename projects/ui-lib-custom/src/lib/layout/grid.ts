@@ -6,7 +6,7 @@ import {
   GridColumns,
   STACK_TOKENS,
   StackToken,
-} from '../design-tokens';
+} from 'ui-lib-custom/tokens';
 
 const stackVar = (token: StackToken) => `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
 const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;

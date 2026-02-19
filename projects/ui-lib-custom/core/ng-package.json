@@ -1,6 +1,6 @@
 {
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "lib": {
-    "entryFile": "../src/lib/design-tokens.ts"
+    "entryFile": "public-api.ts"
   }
 }

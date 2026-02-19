@@ -1,34 +1,31 @@
-import { ThemeVariant } from '../theming/theme-preset.interface';
+// Temporarily inline types to avoid circular dependency
+// ThemeVariant is exported from ui-lib-custom/theme, not re-exported here
 
-// Icon size tokens aligned with design-tokens.ts
+type ThemeVariant = 'material' | 'bootstrap' | 'minimal';
+
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-
-// Icon library identifiers
 export type IconLibrary = 'material' | 'bootstrap' | 'lucide' | 'heroicons' | 'tabler';
 
-// Variant to default icon library mapping
+export const ICON_SIZES: Record<IconSize, string> = {
+  xs: '0.75rem',
+  sm: '1rem',
+  md: '1.25rem',
+  lg: '1.5rem',
+  xl: '2rem',
+  '2xl': '2.5rem',
+};
+
 export type VariantIconMapping = {
   material: IconLibrary;
   bootstrap: IconLibrary;
   minimal: IconLibrary;
 };
 
-// Icon configuration
 export interface IconConfig {
   defaultLibrary: IconLibrary;
   defaultSize: IconSize;
   variantMapping: VariantIconMapping;
 }
-
-// Size to pixel/rem mapping (align with design tokens)
-export const ICON_SIZES: Record<IconSize, string> = {
-  xs: '0.75rem', // 12px
-  sm: '1rem', // 16px
-  md: '1.25rem', // 20px
-  lg: '1.5rem', // 24px
-  xl: '2rem', // 32px
-  '2xl': '2.5rem', // 40px
-};
 
 export const ICON_LIBRARY_PREFIX: Record<IconLibrary, string> = {
   material: '',
@@ -48,4 +45,5 @@ export const DEFAULT_ICON_CONFIG: IconConfig = {
   },
 };
 
+// Internal alias for use within icon module
 export type ComponentVariant = ThemeVariant;

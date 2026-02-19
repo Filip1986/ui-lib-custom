@@ -6,7 +6,7 @@ import {
   SpacingToken,
   INSET_TOKENS,
   InsetToken,
-} from '../design-tokens';
+} from 'ui-lib-custom/tokens';
 
 const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
 const insetVar = (token: InsetToken) => `var(--uilib-inset-${token}, ${INSET_TOKENS[token]})`;

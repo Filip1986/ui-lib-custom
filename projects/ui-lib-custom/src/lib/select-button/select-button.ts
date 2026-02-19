@@ -15,7 +15,7 @@ import {
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Button } from '../button/button';
+import { Button } from 'ui-lib-custom/button';
 import {
   SelectButtonChangeEvent,
   SelectButtonItemContext,

@@ -1,9 +1,9 @@
 import { provideIcons } from '@ng-icons/core';
 import { ICON_CONFIG } from './icon.tokens';
 import { IconConfig, IconLibrary } from './icon.types';
-import { LUCIDE_ICONS } from './presets/minimal-icons';
-import { MATERIAL_ICONS } from './presets/material-icons';
-import { BOOTSTRAP_ICONS } from './presets/bootstrap-icons';
+import { LUCIDE_ICONS } from './presets';
+import { MATERIAL_ICONS } from './presets';
+import { BOOTSTRAP_ICONS } from './presets';
 
 export function provideUiLibIcons(options?: {
   defaultLibrary?: IconLibrary;

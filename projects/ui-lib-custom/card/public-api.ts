@@ -1,1 +1,1 @@
-export * from '../src/lib/card';
+export * from '../src/lib/card/index';

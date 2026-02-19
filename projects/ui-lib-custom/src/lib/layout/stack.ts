@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
-import { SPACING_TOKENS, SpacingToken, STACK_TOKENS, StackToken } from '../design-tokens';
+import { SPACING_TOKENS, SpacingToken, STACK_TOKENS, StackToken } from 'ui-lib-custom/tokens';
 
 const stackVar = (token: StackToken) => `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
 const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;

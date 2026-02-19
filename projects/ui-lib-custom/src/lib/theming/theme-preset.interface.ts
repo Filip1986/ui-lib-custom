@@ -1,6 +1,8 @@
-import type { IconLibrary, IconSize } from '../icon';
+import type { IconLibrary, IconSize, ThemeVariant } from 'ui-lib-custom/core';
 
-export type ThemeVariant = 'material' | 'bootstrap' | 'minimal';
+// Re-export for backward compatibility
+export type { ThemeVariant };
+
 
 export type ThemeShapeRadius = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' | string;
 
