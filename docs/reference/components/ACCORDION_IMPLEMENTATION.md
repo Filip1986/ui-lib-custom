@@ -16,6 +16,21 @@
 - No subscriptions; effects confined to syncing controlled inputs and enforcing single-mode constraint.
 - Minimal DOM: header button + content region; host classes computed once.
 
+## Performance Characteristics
+
+### Bundle Impact
+- Component size: X KB (gzipped).
+- Dependencies: `ui-lib-icon`.
+
+### Runtime
+- Change detection: OnPush.
+- Signals: inputs + computed selection state.
+- DOM nodes: header + content per panel.
+
+### Benchmarks
+- Initial render: X ms.
+- Re-render on input change: X ms.
+
 ## Animation Strategy
 - CSS-only expand/collapse using grid-row technique: `.accordion-panel-content` switches `grid-template-rows` between `0fr` and `1fr` with transition vars (`--uilib-accordion-content-animation-duration`, `--uilib-accordion-content-animation-easing`).
 - Content fades in/out via opacity (`--uilib-accordion-content-fade-duration`) to reduce perceived layout jumps.

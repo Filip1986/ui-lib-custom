@@ -19,6 +19,21 @@
 - Minimal DOM: header/footer only render when enabled.
 - No subscriptions; `computed()` memoizes class lists.
 
+## Performance Characteristics
+
+### Bundle Impact
+- Component size: X KB (gzipped).
+- Dependencies: `ui-lib-icon` (optional header/close icons).
+
+### Runtime
+- Change detection: OnPush.
+- Signals: inputs + computed classes.
+- DOM nodes: header/body/footer containers.
+
+### Benchmarks
+- Initial render: X ms.
+- Re-render on input change: X ms.
+
 ## Accessibility Implementation
 - Semantic projection: slots allow consumers to use headings, lists, and buttons.
 - Close icon is a button-like icon; pair with descriptive header text.
@@ -54,4 +69,3 @@
 - Add optional action slots for header/footer utilities.
 - Provide density presets for padding.
 - Add a dedicated interactive card mode with keyboard focus style.
-

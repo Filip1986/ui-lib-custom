@@ -29,6 +29,7 @@ docs/
 │   │   ├── README.md                 # Systems index
 │   │   ├── DESIGN_TOKENS.md          # Design token reference
 │   │   ├── ACCESSIBILITY.md          # Accessibility guide
+│   │   ├── PERFORMANCE.md            # Performance guide
 │   │   ├── LAYOUT_SYSTEM.md          # Layout API reference
 │   │   ├── THEMING.md                # Theming guide
 │   │   └── LAYOUT_IMPLEMENTATION.md  # Layout implementation
@@ -70,6 +71,7 @@ docs/
 
 → [docs/reference/systems/DESIGN_TOKENS.md](docs/reference/systems/DESIGN_TOKENS.md)
 → [docs/reference/systems/ACCESSIBILITY.md](docs/reference/systems/ACCESSIBILITY.md)
+→ [docs/reference/systems/PERFORMANCE.md](docs/reference/systems/PERFORMANCE.md)
 
 ### 📐 I want to build layouts
 
@@ -211,6 +213,7 @@ docs/
 - [Design Tokens](docs/reference/systems/DESIGN_TOKENS.md) - Color, spacing, typography
 - [Layout System](docs/reference/systems/LAYOUT_SYSTEM.md) - Layout primitives
 - [Accessibility Guide](docs/reference/systems/ACCESSIBILITY.md) - WCAG/ARIA guidance and testing
+- [Performance Guide](docs/reference/systems/PERFORMANCE.md) - Bundle size and runtime guidance
 
 #### Components
 

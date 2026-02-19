@@ -72,6 +72,20 @@ System-level documentation for design systems, architectural patterns, and cross
 
 ---
 
+### Performance System
+**File:** [PERFORMANCE.md](PERFORMANCE.md)
+
+**Status:** ✅ Complete
+
+**Includes:**
+- Bundle size guidance and tracking
+- Runtime performance characteristics
+- Consumer best practices
+
+**Use for:** Tracking and optimizing size and runtime behavior
+
+---
+
 ## 📋 What Goes Here
 
 The **systems** folder contains documentation for:
@@ -133,6 +147,7 @@ Each system should have:
 | Design Tokens | Consistent styling values | 177+ tokens | ✅ Complete |
 | Layout | Layout primitives | 4 components | ✅ Complete |
 | Accessibility | WCAG/ARIA guidance | Components + testing | ✅ Complete |
+| Performance | Size/runtime guidance | Components + builds | ✅ Complete |
 
 ---
 

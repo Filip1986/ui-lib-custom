@@ -73,6 +73,10 @@ docs/
   - Common accessibility issues
   - Fixing accessibility bugs
 
+- **[Bundle Size Tracking](guides/BUNDLE_SIZE_TRACKING.md)** - Size budgets and CI guidance
+  - Manual size checks
+  - CI integration examples
+
 ---
 
 ## 📋 Reference
@@ -98,6 +102,7 @@ docs/
   - Implementation: [LAYOUT_IMPLEMENTATION.md](reference/systems/LAYOUT_IMPLEMENTATION.md)
 
 - **[Accessibility Guide](reference/systems/ACCESSIBILITY.md)** - WCAG 2.1 AA guidance and testing
+- **[Performance Guide](reference/systems/PERFORMANCE.md)** - Bundle size and runtime guidance
 
 #### 📦 Component Reference
 - **[Badge Component](reference/components/BADGE.md)** - Badge/Tag component reference

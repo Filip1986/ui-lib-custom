@@ -54,6 +54,21 @@
 - Lazy modes reduce DOM weight for large tab sets.
 - Indicator updates are scheduled with `queueMicrotask` to avoid layout thrash.
 
+## Performance Characteristics
+
+### Bundle Impact
+- Component size: X KB (gzipped).
+- Dependencies: `ui-lib-icon` (scroll arrows), `ui-lib-tab-panel`.
+
+### Runtime
+- Change detection: OnPush.
+- Signals: inputs + computed selection/contexts.
+- DOM nodes: tab buttons + optional panels.
+
+### Benchmarks
+- Initial render: X ms.
+- Re-render on selection change: X ms.
+
 ## Extension Points
 - Custom labels via `uiLibTabLabel` template.
 - Lazy content via `uiLibTabContent` template.

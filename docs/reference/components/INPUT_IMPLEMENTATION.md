@@ -50,3 +50,17 @@
 - Add size variants for compact/comfortable padding presets.
 - Add explicit `ariaLabel` input for icon-only contexts.
 
+## Performance Characteristics
+
+### Bundle Impact
+- Component size: X KB (gzipped).
+- Dependencies: Angular Forms (CVA).
+
+### Runtime
+- Change detection: OnPush.
+- Signals: inputs + computed floating/disabled state.
+- DOM nodes: label + input + helper elements.
+
+### Benchmarks
+- Initial render: X ms.
+- Re-render on input change: X ms.

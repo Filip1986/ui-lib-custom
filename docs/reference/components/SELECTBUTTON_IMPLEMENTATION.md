@@ -27,9 +27,19 @@
 - Component SCSS maps CSS vars to internal `--_sb-*` variables and supports size/variant overrides.
 
 ## Performance Characteristics
-- **Change detection**: `OnPush` with signals.
-- **Rendering**: `@for` with `track` to minimize DOM churn.
-- **Focus management**: roving index with queued focus to avoid layout thrash.
+
+### Bundle Impact
+- Component size: X KB (gzipped).
+- Dependencies: `ui-lib-icon` (optional) and base tokens.
+
+### Runtime
+- Change detection: OnPush.
+- Signals: inputs + computed selection state.
+- DOM nodes: button per option.
+
+### Benchmarks
+- Initial render: X ms.
+- Re-render on input change: X ms.
 
 ## Accessibility
 - Host role `group` and `aria-labelledby` support.
@@ -41,4 +51,3 @@
 - Expose optional icon-only mode for compact icon sets.
 - Add docs for advanced templating patterns (badges, counts, status pills).
 - Add e2e visual snapshots for theme regressions.
-

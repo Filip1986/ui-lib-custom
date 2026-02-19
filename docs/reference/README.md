@@ -49,6 +49,7 @@ System-level documentation for design systems and architectural patterns.
 
 - **[Theming Guide](systems/THEMING.md)** – Light/Dark presets, CSS vars, brand overrides
 - **[Accessibility Guide](systems/ACCESSIBILITY.md)** – WCAG 2.1 AA guidance and testing
+- **[Performance Guide](systems/PERFORMANCE.md)** – Bundle size and runtime guidance
 
 ---
 
@@ -117,6 +118,8 @@ Start here for project overview and status:
 |--------|---------------|----------------|--------|
 | Design Tokens | [DESIGN_TOKENS.md](systems/DESIGN_TOKENS.md) | - | ✅ Complete |
 | Layout | [LAYOUT_SYSTEM.md](systems/LAYOUT_SYSTEM.md) | [LAYOUT_IMPLEMENTATION.md](systems/LAYOUT_IMPLEMENTATION.md) | ✅ Complete |
+| Accessibility | [ACCESSIBILITY.md](systems/ACCESSIBILITY.md) | - | ✅ Complete |
+| Performance | [PERFORMANCE.md](systems/PERFORMANCE.md) | - | ✅ Complete |
 
 ---
 

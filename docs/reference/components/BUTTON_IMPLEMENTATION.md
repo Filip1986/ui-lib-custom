@@ -23,6 +23,21 @@
 - Minimal DOM: only optional icons and badge elements are conditionally rendered.
 - No subscriptions or manual change detection.
 
+## Performance Characteristics
+
+### Bundle Impact
+- Component size: X KB (gzipped).
+- Dependencies: `ui-lib-icon`, `ui-lib-badge`.
+
+### Runtime
+- Change detection: OnPush.
+- Signals: inputs + computed class/derived state.
+- DOM nodes: 1 button + optional icons/badge.
+
+### Benchmarks
+- Initial render: X ms.
+- Re-render on input change: X ms.
+
 ## Accessibility Implementation
 - ARIA attributes bound on the native button:
   - `aria-disabled` for disabled/loading

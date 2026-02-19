@@ -159,6 +159,19 @@ import { Badge } from 'ui-lib-custom';
 
 ## Performance Characteristics
 
+### Bundle Impact
+- Component size: X KB (gzipped).
+- Dependencies: none.
+
+### Runtime
+- Change detection: OnPush.
+- Signals: inputs + computed styles.
+- DOM nodes: single host element.
+
+### Benchmarks
+- Initial render: X ms.
+- Re-render on input change: X ms.
+
 ### Bundle Size
 - **Minified:** ~2 KB
 - **Gzipped:** ~800 bytes
