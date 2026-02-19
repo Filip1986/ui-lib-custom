@@ -2,7 +2,7 @@
 .ui-lib-accordion-panel {
   --uilib-accordion-panel-bg: var(--uilib-surface, #ffffff);
   --uilib-accordion-panel-border: 1px solid var(--uilib-border, #e5e7eb);
-  --uilib-accordion-panel-radius: var(--uilib-radius-md, 0.5rem);
+  --uilib-accordion-panel-radius: var(--uilib-radius-md, 8px);
   --uilib-accordion-header-padding-sm: var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem);
   --uilib-accordion-header-padding-md: var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem);
   --uilib-accordion-header-padding-lg: var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem);
@@ -37,11 +37,15 @@
     var(--uilib-icon-size-md, 1.25rem)
   );
   --uilib-accordion-icon-color: var(--uilib-muted, #6b7280);
-  --uilib-accordion-icon-color-hover: var(--uilib-primary, #2563eb);
-  --uilib-accordion-icon-color-expanded: var(--uilib-primary, #2563eb);
+  --uilib-accordion-icon-color-hover: var(--uilib-color-primary-600, #1e88e5);
+  --uilib-accordion-icon-color-expanded: var(--uilib-color-primary-600, #1e88e5);
   --uilib-accordion-icon-rotation: var(--uilib-rotation-0, 0deg);
   --uilib-accordion-icon-transition: transform var(--uilib-transition-fast, 200ms ease);
-  --uilib-accordion-focus-ring: 0 0 0 2px var(--uilib-focus-ring-color, #2563eb55);
+  --uilib-accordion-focus-ring: 0 0 0 2px
+    var(
+      --uilib-focus-ring-color,
+      color-mix(in srgb, var(--uilib-color-primary-500, #1e88e5) 35%, transparent)
+    );
   --uilib-accordion-transition-duration: var(--uilib-transition-fast-duration, 200ms);
   --uilib-accordion-transition-easing: var(--uilib-transition-ease-out, ease-out);
   --uilib-accordion-content-animation-duration: var(--uilib-transition-normal-duration, 250ms);
@@ -204,14 +208,14 @@
 
     &:first-child {
       border-top: var(--uilib-accordion-panel-border);
-      border-top-left-radius: var(--uilib-accordion-border-radius);
-      border-top-right-radius: var(--uilib-accordion-border-radius);
+      border-top-left-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
+      border-top-right-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
     }
 
     &:last-child {
       border-bottom: var(--uilib-accordion-panel-border);
-      border-bottom-left-radius: var(--uilib-accordion-border-radius);
-      border-bottom-right-radius: var(--uilib-accordion-border-radius);
+      border-bottom-left-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
+      border-bottom-right-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
     }
 
     .accordion-panel-header:hover {
@@ -229,7 +233,7 @@
 
     .accordion-panel-header {
       background: transparent;
-      border-bottom: 1px solid var(--uilib-border-subtle, #e5e7eb);
+      border-bottom: 1px solid var(--uilib-border-subtle, var(--uilib-border));
 
       &:hover {
         background: var(--uilib-surface-subtle, color-mix(in srgb, currentColor 4%, transparent));
@@ -237,7 +241,7 @@
     }
 
     .accordion-panel-content {
-      border-bottom: 1px solid var(--uilib-border-subtle, #e5e7eb);
+      border-bottom: 1px solid var(--uilib-border-subtle, var(--uilib-border));
     }
 
     &:last-child .accordion-panel-content {

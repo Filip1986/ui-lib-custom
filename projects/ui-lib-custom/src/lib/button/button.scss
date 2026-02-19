@@ -18,11 +18,11 @@
   /* Shadow tokens removed to honor theme-provided values */
 
   /* Component-level variables (CSS-var first, no hardcoded colors) */
-  --uilib-button-radius: var(--uilib-radius-md);
-  --uilib-button-gap: var(--uilib-space-2);
+  --uilib-button-radius: var(--uilib-radius-md, 8px);
+  --uilib-button-gap: var(--uilib-space-2, 0.5rem);
   --uilib-button-transition: all 0.2s ease;
-  --uilib-button-focus-color: var(--uilib-color-primary-500);
-  --uilib-button-focus-ring-color: var(--uilib-color-primary-100);
+  --uilib-button-focus-color: var(--uilib-color-primary-500, #1e88e5);
+  --uilib-button-focus-ring-color: var(--uilib-color-primary-100, #bbdefb);
   --uilib-button-focus-ring: 0 0 0 3px var(--uilib-button-focus-ring-color);
   --uilib-button-disabled-opacity: 0.5;
   --uilib-button-border-width: 1px;
@@ -87,7 +87,10 @@
   --uilib-button-badge-font-size: var(--uilib-button-badge-font-size, var(--uilib-font-size-sm));
   --uilib-button-badge-padding: var(--uilib-button-badge-padding, var(--uilib-space-1) var(--uilib-space-2));
   --uilib-button-badge-bg: var(--uilib-button-badge-bg, var(--uilib-button-danger-bg, currentColor));
-  --uilib-button-badge-fg: var(--uilib-button-badge-fg, var(--uilib-button-danger-fg, #fff));
+  --uilib-button-badge-fg: var(
+    --uilib-button-badge-fg,
+    var(--uilib-button-danger-fg, var(--uilib-color-neutral-50))
+  );
 }
 
 button {
@@ -97,17 +100,17 @@ button {
   gap: var(--uilib-button-gap);
   border-radius: var(--uilib-button-radius, var(--uilib-radius-md));
   border: var(--uilib-button-border-width) var(--uilib-button-border-style)
-    var(--btn-border, currentColor);
+    var(--uilib-button-border, currentColor);
   font-weight: var(--uilib-font-weight-semibold);
   font-family: var(--uilib-font-ui, inherit), sans-serif;
   text-transform: var(--uilib-button-text-transform);
   letter-spacing: var(--uilib-button-letter-spacing);
   padding: var(--uilib-button-padding, var(--uilib-button-padding-medium));
   background-color: var(
-    --btn-bg,
+    --uilib-button-bg,
     var(--uilib-button-secondary-bg, var(--uilib-color-secondary-100))
   );
-  color: var(--btn-fg, var(--uilib-button-secondary-fg, inherit));
+  color: var(--uilib-button-fg, var(--uilib-button-secondary-fg, inherit));
   transition: var(--uilib-button-transition);
   cursor: pointer;
   position: relative;
@@ -124,21 +127,24 @@ button:focus-visible {
 }
 
 button:hover:not(.btn-disabled) {
-  background-color: var(--btn-bg-hover, var(--btn-bg));
-  color: var(--btn-fg-hover, var(--btn-fg));
+  background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
+  color: var(--uilib-button-fg-hover, var(--uilib-button-fg));
   box-shadow: var(--uilib-button-shadow-hover, var(--uilib-button-shadow));
 }
 
 button:active:not(.btn-disabled) {
-  background-color: var(--btn-bg-active, var(--btn-bg-hover, var(--btn-bg)));
+  background-color: var(
+    --uilib-button-bg-active,
+    var(--uilib-button-bg-hover, var(--uilib-button-bg))
+  );
 }
 
 .btn {
-  --btn-icon-gap: var(--uilib-space-2);
+  --uilib-button-icon-gap: var(--uilib-space-2);
 
   display: inline-flex;
   align-items: center;
-  gap: var(--btn-icon-gap);
+  gap: var(--uilib-button-icon-gap);
 
   &-disabled {
     opacity: var(--uilib-button-disabled-opacity);
@@ -172,73 +178,46 @@ button:active:not(.btn-disabled) {
   /* Appearance modifiers */
   &-appearance-outline {
     background-color: transparent;
-    color: var(--btn-border, var(--btn-bg, currentColor));
-    border-color: var(--btn-border, var(--btn-bg, currentColor));
+    color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
+    border-color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
   }
 
   &-appearance-ghost {
     background-color: transparent;
-    color: var(--btn-border, var(--btn-bg, currentColor));
+    color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
     border-color: transparent;
   }
 
   &-text {
-    --btn-bg: var(--uilib-button-text-bg);
-    --btn-bg-hover: var(--uilib-button-text-bg-hover, var(--btn-bg));
-    --btn-border: transparent;
-    --btn-fg: var(--uilib-button-text-fg);
-    --btn-fg-hover: var(--uilib-button-text-fg-hover, var(--btn-fg));
+    --uilib-button-bg: var(--uilib-button-text-bg);
+    --uilib-button-bg-hover: var(--uilib-button-text-bg-hover, var(--uilib-button-bg));
+    --uilib-button-border: transparent;
+    --uilib-button-fg: var(--uilib-button-text-fg);
+    --uilib-button-fg-hover: var(--uilib-button-text-fg-hover, var(--uilib-button-fg));
 
     &:hover:not(.btn-disabled) {
       background-color: var(
         --uilib-button-text-hover-bg,
-        var(--uilib-button-text-bg-hover, var(--btn-bg, transparent))
+        var(--uilib-button-text-bg-hover, var(--uilib-button-bg, transparent))
       );
     }
   }
 
   &-outlined {
-    --btn-bg: var(--uilib-button-outline-bg);
-    --btn-bg-hover: var(--uilib-button-outline-bg-hover, var(--btn-bg));
-    --btn-border: var(--uilib-button-outline-border);
-    --btn-fg: var(--uilib-button-outline-fg);
-    --btn-fg-hover: var(--uilib-button-outline-fg-hover, var(--btn-fg));
+    --uilib-button-bg: var(--uilib-button-outline-bg);
+    --uilib-button-bg-hover: var(--uilib-button-outline-bg-hover, var(--uilib-button-bg));
+    --uilib-button-border: var(--uilib-button-outline-border);
+    --uilib-button-fg: var(--uilib-button-outline-fg);
+    --uilib-button-fg-hover: var(--uilib-button-outline-fg-hover, var(--uilib-button-fg));
   }
 
   &-link {
-    --btn-bg: transparent;
-    --btn-border: transparent;
-    --btn-fg: var(--uilib-button-primary-fg, currentColor);
+    --uilib-button-bg: transparent;
+    --uilib-button-border: transparent;
+    --uilib-button-fg: var(--uilib-button-primary-fg, currentColor);
     text-decoration: underline;
     padding: 0;
     border: none;
-  }
-
-  &-material {
-    --uilib-button-shadow: var(--uilib-shadow-sm, var(--uilib-button-shadow));
-    --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-button-shadow));
-
-    &.btn-raised {
-      transform: translateY(0);
-
-      &:hover:not(.btn-disabled) {
-        transform: translateY(-1px);
-      }
-    }
-
-    &.btn-rounded {
-      --uilib-button-radius: var(--uilib-button-radius-pill, var(--uilib-radius-full));
-    }
-
-    &.btn-text {
-      position: relative;
-      overflow: hidden;
-    }
-
-    &.btn-link {
-      color: var(--uilib-button-primary-fg, currentColor);
-      text-decoration-color: var(--uilib-button-primary-fg, currentColor);
-    }
   }
 
   &-bootstrap {
@@ -250,21 +229,13 @@ button:active:not(.btn-disabled) {
     &.btn-raised {
       background-image: linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--btn-bg) 85%, #ffffff 15%),
-        var(--btn-bg)
+        color-mix(in srgb, var(--uilib-button-bg) 85%, var(--uilib-color-neutral-50) 15%),
+        var(--uilib-button-bg)
       );
     }
 
-    &.btn-rounded {
-      --uilib-button-radius: var(--uilib-radius-pill, var(--uilib-radius-full));
-    }
-
-    &.btn-text {
-      text-decoration: none;
-    }
-
     &.btn-link {
-      color: var(--btn-fg, var(--uilib-button-primary-fg, currentColor));
+      color: var(--uilib-button-fg, var(--uilib-button-primary-fg, currentColor));
       text-decoration: underline;
       padding: 0;
     }
@@ -276,7 +247,7 @@ button:active:not(.btn-disabled) {
     --uilib-button-shadow-hover: none;
     --uilib-button-border-style: solid;
     background-color: transparent;
-    border-color: var(--btn-border, currentColor);
+    border-color: var(--uilib-button-border, currentColor);
     box-shadow: none;
 
     &.btn-raised {
@@ -289,92 +260,111 @@ button:active:not(.btn-disabled) {
     }
 
     &.btn-text {
-      --btn-bg: transparent;
-      --btn-fg: var(--btn-border, currentColor);
+      --uilib-button-bg: transparent;
+      --uilib-button-fg: var(--uilib-button-border, currentColor);
 
       &:hover:not(.btn-disabled) {
-        background-color: color-mix(in srgb, var(--btn-border, currentColor) 8%, transparent);
+        background-color: color-mix(
+          in srgb,
+          var(--uilib-button-border, currentColor) 8%,
+          transparent
+        );
       }
     }
 
-    &.btn-link {
-      text-decoration: underline;
-      padding: 0;
-      border: none;
-    }
-
     &:hover:not(.btn-disabled) {
-      background-color: var(--btn-bg-hover, var(--btn-border, currentColor));
-      color: var(--btn-fg-hover, var(--btn-fg, inherit));
+      background-color: var(--uilib-button-bg-hover, var(--uilib-button-border, currentColor));
+      color: var(--uilib-button-fg-hover, var(--uilib-button-fg, inherit));
     }
   }
 
   /* Severity palettes via CSS vars */
   &-primary {
-    --btn-bg: var(--uilib-button-primary-bg);
-    --btn-bg-hover: var(--uilib-button-primary-bg-hover);
-    --btn-bg-active: var(--uilib-button-primary-bg-active, var(--uilib-button-primary-bg-hover));
-    --btn-border: var(--uilib-button-primary-border);
-    --btn-fg: var(--uilib-button-primary-fg);
+    --uilib-button-bg: var(--uilib-button-primary-bg);
+    --uilib-button-bg-hover: var(--uilib-button-primary-bg-hover);
+    --uilib-button-bg-active: var(
+      --uilib-button-primary-bg-active,
+      var(--uilib-button-primary-bg-hover)
+    );
+    --uilib-button-border: var(--uilib-button-primary-border);
+    --uilib-button-fg: var(--uilib-button-primary-fg);
   }
 
   &-secondary {
-    --btn-bg: var(--uilib-button-secondary-bg);
-    --btn-bg-hover: var(--uilib-button-secondary-bg-hover);
-    --btn-bg-active: var(
+    --uilib-button-bg: var(--uilib-button-secondary-bg);
+    --uilib-button-bg-hover: var(--uilib-button-secondary-bg-hover);
+    --uilib-button-bg-active: var(
       --uilib-button-secondary-bg-active,
       var(--uilib-button-secondary-bg-hover)
     );
-    --btn-border: var(--uilib-button-secondary-border);
-    --btn-fg: var(--uilib-button-secondary-fg);
+    --uilib-button-border: var(--uilib-button-secondary-border);
+    --uilib-button-fg: var(--uilib-button-secondary-fg);
   }
 
   &-success {
-    --btn-bg: var(--uilib-button-success-bg);
-    --btn-bg-hover: var(--uilib-button-success-bg-hover);
-    --btn-bg-active: var(--uilib-button-success-bg-active, var(--uilib-button-success-bg-hover));
-    --btn-border: var(--uilib-button-success-border);
-    --btn-fg: var(--uilib-button-success-fg);
+    --uilib-button-bg: var(--uilib-button-success-bg);
+    --uilib-button-bg-hover: var(--uilib-button-success-bg-hover);
+    --uilib-button-bg-active: var(
+      --uilib-button-success-bg-active,
+      var(--uilib-button-success-bg-hover)
+    );
+    --uilib-button-border: var(--uilib-button-success-border);
+    --uilib-button-fg: var(--uilib-button-success-fg);
   }
 
   &-danger {
-    --btn-bg: var(--uilib-button-danger-bg);
-    --btn-bg-hover: var(--uilib-button-danger-bg-hover);
-    --btn-bg-active: var(--uilib-button-danger-bg-active, var(--uilib-button-danger-bg-hover));
-    --btn-border: var(--uilib-button-danger-border);
-    --btn-fg: var(--uilib-button-danger-fg);
+    --uilib-button-bg: var(--uilib-button-danger-bg);
+    --uilib-button-bg-hover: var(--uilib-button-danger-bg-hover);
+    --uilib-button-bg-active: var(
+      --uilib-button-danger-bg-active,
+      var(--uilib-button-danger-bg-hover)
+    );
+    --uilib-button-border: var(--uilib-button-danger-border);
+    --uilib-button-fg: var(--uilib-button-danger-fg);
   }
 
   &-warning {
-    --btn-bg: var(--uilib-button-warning-bg);
-    --btn-bg-hover: var(--uilib-button-warning-bg-hover);
-    --btn-bg-active: var(--uilib-button-warning-bg-active, var(--uilib-button-warning-bg-hover));
-    --btn-border: var(--uilib-button-warning-border);
-    --btn-fg: var(--uilib-button-warning-fg);
+    --uilib-button-bg: var(--uilib-button-warning-bg);
+    --uilib-button-bg-hover: var(--uilib-button-warning-bg-hover);
+    --uilib-button-bg-active: var(
+      --uilib-button-warning-bg-active,
+      var(--uilib-button-warning-bg-hover)
+    );
+    --uilib-button-border: var(--uilib-button-warning-border);
+    --uilib-button-fg: var(--uilib-button-warning-fg);
   }
 
   &-info {
-    --btn-bg: var(--uilib-button-info-bg);
-    --btn-bg-hover: var(--uilib-button-info-bg-hover, var(--btn-bg));
-    --btn-bg-active: var(--uilib-button-info-bg-active, var(--btn-bg-hover));
-    --btn-border: var(--uilib-button-info-border, var(--btn-bg));
-    --btn-fg: var(--uilib-button-info-fg, var(--uilib-button-secondary-fg, inherit));
+    --uilib-button-bg: var(--uilib-button-info-bg);
+    --uilib-button-bg-hover: var(--uilib-button-info-bg-hover, var(--uilib-button-bg));
+    --uilib-button-bg-active: var(--uilib-button-info-bg-active, var(--uilib-button-bg-hover));
+    --uilib-button-border: var(--uilib-button-info-border, var(--uilib-button-bg));
+    --uilib-button-fg: var(
+      --uilib-button-info-fg,
+      var(--uilib-button-secondary-fg, inherit)
+    );
   }
 
   &-help {
-    --btn-bg: var(--uilib-button-help-bg);
-    --btn-bg-hover: var(--uilib-button-help-bg-hover, var(--btn-bg));
-    --btn-bg-active: var(--uilib-button-help-bg-active, var(--btn-bg-hover));
-    --btn-border: var(--uilib-button-help-border, var(--btn-bg));
-    --btn-fg: var(--uilib-button-help-fg, var(--uilib-button-secondary-fg, inherit));
+    --uilib-button-bg: var(--uilib-button-help-bg);
+    --uilib-button-bg-hover: var(--uilib-button-help-bg-hover, var(--uilib-button-bg));
+    --uilib-button-bg-active: var(--uilib-button-help-bg-active, var(--uilib-button-bg-hover));
+    --uilib-button-border: var(--uilib-button-help-border, var(--uilib-button-bg));
+    --uilib-button-fg: var(
+      --uilib-button-help-fg,
+      var(--uilib-button-secondary-fg, inherit)
+    );
   }
 
   &-contrast {
-    --btn-bg: var(--uilib-button-contrast-bg, var(--uilib-color-neutral-900, #000));
-    --btn-bg-hover: var(--uilib-button-contrast-bg-hover, var(--btn-bg));
-    --btn-bg-active: var(--uilib-button-contrast-bg-active, var(--btn-bg-hover));
-    --btn-border: var(--uilib-button-contrast-border, var(--btn-bg));
-    --btn-fg: var(--uilib-button-contrast-fg, #fff);
+    --uilib-button-bg: var(--uilib-button-contrast-bg, var(--uilib-color-neutral-900));
+    --uilib-button-bg-hover: var(--uilib-button-contrast-bg-hover, var(--uilib-button-bg));
+    --uilib-button-bg-active: var(
+      --uilib-button-contrast-bg-active,
+      var(--uilib-button-bg-hover)
+    );
+    --uilib-button-border: var(--uilib-button-contrast-border, var(--uilib-button-bg));
+    --uilib-button-fg: var(--uilib-button-contrast-fg, var(--uilib-color-neutral-50));
   }
 
   .btn-icon {

@@ -68,6 +68,15 @@
 
 - SCSS for authoring; output uses CSS custom properties for runtime theming. No `::ng-deep` or global resets.
 - Author component styles in SCSS only (no `.css` files); share mixins/variables and pull values from design tokens or CSS vars.
+- CSS custom property naming:
+  - Standard pattern: `--uilib-{component}-{property}[-{variant}][-{state}]`.
+  - Component parts follow the component name (for example: `--uilib-accordion-header-padding`).
+  - Variants append after the property (for example: `--uilib-card-shadow-material`).
+  - States append last (for example: `--uilib-button-bg-hover`).
+  - Reserved global prefixes (system tokens only):
+    - `--uilib-color-*`, `--uilib-spacing-*`, `--uilib-radius-*`, `--uilib-shadow-*`, `--uilib-font-*`,
+      `--uilib-transition-*`, `--uilib-z-*`, `--uilib-surface`/`--uilib-surface-*`, `--uilib-page-*`.
+  - Avoid unprefixed or underscored variables (`--ui-*`, `--_tabs-*`) in public API.
 - Theming layers (do not bypass):
   1. **Design tokens** (`design-tokens.ts`) define canonical values.
   2. **CSS variables**: expose tokens as `--uilib-*` on `:root` or `[data-theme]` scopes.
@@ -90,6 +99,38 @@
     encapsulation: ViewEncapsulation.None,  // Required for all ui-lib-* components
   })
 ```
+
+## CSS Custom Properties Naming Convention
+
+All CSS custom properties MUST follow this pattern:
+
+`--uilib-{component}-{property}[-{state}]`
+
+### Examples
+
+- `--uilib-button-bg`
+- `--uilib-button-bg-hover`
+- `--uilib-select-dropdown-bg`
+- `--uilib-accordion-header-padding`
+- `--uilib-card-shadow`
+
+### Reserved Global Prefixes
+
+- `--uilib-color-*`        Color palette tokens
+- `--uilib-spacing-*`      Spacing tokens
+- `--uilib-radius-*`       Border radius tokens
+- `--uilib-shadow-*`       Shadow tokens
+- `--uilib-font-*`         Typography tokens
+- `--uilib-surface`        Surface colors
+- `--uilib-page-*`         Page-level variables
+
+### Adding New Variables
+
+1. Check if a design token exists first.
+2. Use component name as first segment.
+3. Use descriptive property name.
+4. Add state suffix for interactive states (`-hover`, `-active`, `-disabled`).
+5. Document in component SCSS with comments.
 
 ## Design Tokens
 

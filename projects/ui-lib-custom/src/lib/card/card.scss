@@ -59,7 +59,7 @@
 
   .card-subtitle {
     font-size: 0.95rem;
-    color: var(--uilib-muted, #4b5563);
+    color: var(--uilib-muted, var(--uilib-color-neutral-600));
     line-height: 1.4;
   }
 

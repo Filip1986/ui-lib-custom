@@ -159,7 +159,7 @@ Responsive: use `fullWidth` for fluid layouts; size tokens map to padding/font v
 ## States
 - Loading: `loading=true` adds spinner, disables button, sets `aria-busy="true"`.
 - Disabled: `disabled=true` sets native disabled and `aria-disabled="true"`.
-- Focus/Active: focus ring via CSS vars (`--uilib-button-focus-*`); active state uses `--btn-bg-active`.
+- Focus/Active: focus ring via CSS vars (`--uilib-button-focus-*`); active state uses `--uilib-button-bg-active`.
 
 ---
 ## Accessibility

@@ -1,3 +1,29 @@
+# Update Log - February 19, 2026
+
+## CSS Custom Properties Standardization (BREAKING CHANGE)
+
+### Changed
+- Standardized all CSS custom properties to use the `--uilib-{component}-{property}` pattern.
+- Renamed `--ui-select-*` to `--uilib-select-*`.
+- Renamed `--ui-input-*` to `--uilib-input-*`.
+- Renamed `--ui-sidebar-*` to `--uilib-sidebar-*`.
+- Renamed `--btn-*` to `--uilib-button-*`.
+- Renamed `--badge-*` to `--uilib-badge-*`.
+- Renamed `--alert-*` to `--uilib-alert-*`.
+- Renamed `--icon-color` to `--uilib-icon-color`.
+- Renamed `--uilib-selectbutton-*` to `--uilib-select-button-*`.
+- Renamed `--_tabs-*`/`--_tab-*`/`--_indicator-*`/`--_scroll-btn-*` to `--uilib-tabs-*`/`--uilib-tab-*`/`--uilib-tabs-indicator-*`/`--uilib-tabs-nav-button-*`.
+- Renamed login-related variables (`--background-color`, `--text-color`, `--surface-color`, `--card-shadow`, `--border-color`,
+  `--primary-color`, `--primary-color-rgb`, `--text-color-secondary`, `--surface-hover`, `--red-500`) to `--uilib-login-*`.
+- Renamed login-form variables (`--login-*`) to `--uilib-login-form-*`.
+- Renamed `--card-radius` to `--uilib-login-1-card-radius`.
+- Checkbox variables were already compliant (`--uilib-checkbox-*`); no rename required.
+
+### Migration
+See `docs/guides/MIGRATION_CSS_VARIABLES.md` for details.
+
+---
+
 # Update Log - February 16, 2026
 
 ## Tabs Enhancements

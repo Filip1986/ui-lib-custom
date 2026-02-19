@@ -1,22 +1,55 @@
 .ui-lib-select-button {
-  --_sb-gap: var(--uilib-selectbutton-gap, 0);
-  --_sb-radius: var(--uilib-selectbutton-border-radius, 4px);
-  --_sb-bg: var(--uilib-selectbutton-bg, var(--uilib-surface-100));
-  --_sb-border: var(--uilib-selectbutton-border, var(--uilib-border-color));
-  --_sb-selected-bg: var(--uilib-selectbutton-selected-bg, var(--uilib-primary-500));
-  --_sb-selected-fg: var(--uilib-selectbutton-selected-fg, var(--uilib-primary-contrast));
-  --_sb-hover-bg: var(--uilib-selectbutton-hover-bg, var(--uilib-surface-200));
-  --_sb-shadow: var(--uilib-selectbutton-shadow, none);
-  --_sb-disabled-opacity: var(--uilib-selectbutton-disabled-opacity, 0.6);
-  --_sb-invalid-border: var(--uilib-selectbutton-invalid-border, var(--uilib-danger-500));
-  --_sb-padding: var(--uilib-selectbutton-medium-padding, 0.625rem 1rem);
-  --_sb-font-size: var(--uilib-selectbutton-medium-font-size, 1rem);
-  --_sb-min-height: var(--uilib-selectbutton-medium-min-height, 2.5rem);
+  --uilib-select-button-gap-resolved: var(--uilib-select-button-gap, 0);
+  --uilib-select-button-border-radius-resolved: var(
+    --uilib-select-button-border-radius,
+    var(--uilib-radius-md, 8px)
+  );
+  --uilib-select-button-bg-resolved: var(
+    --uilib-select-button-bg,
+    var(--uilib-surface-100, #f5f5f5)
+  );
+  --uilib-select-button-border-resolved: var(
+    --uilib-select-button-border,
+    var(--uilib-border-color, #e5e7eb)
+  );
+  --uilib-select-button-selected-bg-resolved: var(
+    --uilib-select-button-selected-bg,
+    var(--uilib-primary-500, var(--uilib-color-primary-500, #1e88e5))
+  );
+  --uilib-select-button-selected-fg-resolved: var(
+    --uilib-select-button-selected-fg,
+    var(--uilib-primary-contrast, #ffffff)
+  );
+  --uilib-select-button-hover-bg-resolved: var(
+    --uilib-select-button-hover-bg,
+    var(--uilib-surface-200, #eeeeee)
+  );
+  --uilib-select-button-shadow-resolved: var(--uilib-select-button-shadow, none);
+  --uilib-select-button-disabled-opacity-resolved: var(
+    --uilib-select-button-disabled-opacity,
+    0.6
+  );
+  --uilib-select-button-invalid-border-resolved: var(
+    --uilib-select-button-invalid-border,
+    var(--uilib-danger-500, #e53935)
+  );
+  --uilib-select-button-padding-resolved: var(
+    --uilib-select-button-medium-padding,
+    0.625rem 1rem
+  );
+  --uilib-select-button-font-size-resolved: var(
+    --uilib-select-button-medium-font-size,
+    1rem
+  );
+  --uilib-select-button-min-height-resolved: var(
+    --uilib-select-button-medium-min-height,
+    2.5rem
+  );
 
   display: inline-flex;
   align-items: stretch;
-  gap: var(--_sb-gap);
-  border-radius: var(--_sb-radius);
+  gap: var(--uilib-select-button-gap-resolved);
+  border-radius: var(--uilib-select-button-border-radius-resolved);
   overflow: hidden;
 }
 
@@ -35,13 +68,16 @@
 
 .ui-lib-select-button__item .btn {
   width: 100%;
-  min-height: var(--_sb-min-height);
-  --uilib-button-padding: var(--_sb-padding);
-  --uilib-button-font-size: var(--_sb-font-size);
-  --btn-bg: var(--_sb-bg);
-  --btn-border: var(--_sb-border);
-  --btn-fg: var(--uilib-selectbutton-fg, var(--uilib-text-primary));
-  box-shadow: var(--_sb-shadow);
+  min-height: var(--uilib-select-button-min-height-resolved);
+  --uilib-button-padding: var(--uilib-select-button-padding-resolved);
+  --uilib-button-font-size: var(--uilib-select-button-font-size-resolved);
+  --uilib-button-bg: var(--uilib-select-button-bg-resolved);
+  --uilib-button-border: var(--uilib-select-button-border-resolved);
+  --uilib-button-fg: var(
+    --uilib-select-button-fg,
+    var(--uilib-text-primary, var(--uilib-page-fg, #111827))
+  );
+  box-shadow: var(--uilib-select-button-shadow-resolved);
   border-radius: 0;
 }
 
@@ -51,23 +87,23 @@
 }
 
 .ui-lib-select-button__item .btn:hover:not(.btn-disabled) {
-  --btn-bg-hover: var(--_sb-hover-bg);
+  --uilib-button-bg-hover: var(--uilib-select-button-hover-bg-resolved);
 }
 
 .ui-lib-select-button__item--selected .btn {
-  --btn-bg: var(--_sb-selected-bg);
-  --btn-bg-hover: var(--_sb-selected-bg);
-  --btn-fg: var(--_sb-selected-fg);
+  --uilib-button-bg: var(--uilib-select-button-selected-bg-resolved);
+  --uilib-button-bg-hover: var(--uilib-select-button-selected-bg-resolved);
+  --uilib-button-fg: var(--uilib-select-button-selected-fg-resolved);
 }
 
 .ui-lib-select-button__item:first-child .btn {
-  border-top-left-radius: var(--_sb-radius);
-  border-bottom-left-radius: var(--_sb-radius);
+  border-top-left-radius: var(--uilib-select-button-border-radius-resolved);
+  border-bottom-left-radius: var(--uilib-select-button-border-radius-resolved);
 }
 
 .ui-lib-select-button__item:last-child .btn {
-  border-top-right-radius: var(--_sb-radius);
-  border-bottom-right-radius: var(--_sb-radius);
+  border-top-right-radius: var(--uilib-select-button-border-radius-resolved);
+  border-bottom-right-radius: var(--uilib-select-button-border-radius-resolved);
 }
 
 .ui-lib-select-button__item:not(:first-child) .btn {
@@ -75,66 +111,117 @@
 }
 
 .ui-lib-select-button--material {
-  --_sb-radius: var(
-    --uilib-selectbutton-material-border-radius,
-    var(--uilib-selectbutton-border-radius, 4px)
+  --uilib-select-button-border-radius-resolved: var(
+    --uilib-select-button-material-border-radius,
+    var(--uilib-select-button-border-radius, var(--uilib-radius-md, 8px))
   );
-  --_sb-bg: var(--uilib-selectbutton-material-bg, var(--uilib-surface-100));
-  --_sb-selected-bg: var(--uilib-selectbutton-material-selected-bg, var(--uilib-primary-500));
-  --_sb-selected-fg: var(--uilib-selectbutton-material-selected-fg, var(--uilib-primary-contrast));
-  --_sb-hover-bg: var(--uilib-selectbutton-material-hover-bg, var(--uilib-surface-200));
-  --_sb-border: var(--uilib-selectbutton-material-border, var(--uilib-border-color));
-  --_sb-shadow: var(--uilib-selectbutton-material-shadow, 0 2px 4px rgba(0, 0, 0, 0.1));
+  --uilib-select-button-bg-resolved: var(
+    --uilib-select-button-material-bg,
+    var(--uilib-surface-100, #f5f5f5)
+  );
+  --uilib-select-button-selected-bg-resolved: var(
+    --uilib-select-button-material-selected-bg,
+    var(--uilib-primary-500, var(--uilib-color-primary-500, #1e88e5))
+  );
+  --uilib-select-button-selected-fg-resolved: var(
+    --uilib-select-button-material-selected-fg,
+    var(--uilib-primary-contrast, #ffffff)
+  );
+  --uilib-select-button-hover-bg-resolved: var(
+    --uilib-select-button-material-hover-bg,
+    var(--uilib-surface-200, #eeeeee)
+  );
+  --uilib-select-button-border-resolved: var(
+    --uilib-select-button-material-border,
+    var(--uilib-border-color, #e5e7eb)
+  );
+  --uilib-select-button-shadow-resolved: var(
+    --uilib-select-button-material-shadow,
+    0 2px 4px rgba(0, 0, 0, 0.1)
+  );
 }
 
 .ui-lib-select-button--bootstrap {
-  --_sb-radius: var(
-    --uilib-selectbutton-bootstrap-border-radius,
-    var(--uilib-selectbutton-border-radius, 6px)
+  --uilib-select-button-border-radius-resolved: var(
+    --uilib-select-button-bootstrap-border-radius,
+    var(--uilib-select-button-border-radius, var(--uilib-radius-md, 8px))
   );
-  --_sb-bg: var(--uilib-selectbutton-bootstrap-bg, var(--uilib-surface-100));
-  --_sb-selected-bg: var(--uilib-selectbutton-bootstrap-selected-bg, var(--uilib-primary-500));
-  --_sb-selected-fg: var(--uilib-selectbutton-bootstrap-selected-fg, var(--uilib-primary-contrast));
-  --_sb-hover-bg: var(--uilib-selectbutton-bootstrap-hover-bg, var(--uilib-surface-200));
-  --_sb-border: var(--uilib-selectbutton-bootstrap-border, var(--uilib-border-color));
+  --uilib-select-button-bg-resolved: var(
+    --uilib-select-button-bootstrap-bg,
+    var(--uilib-surface-100, #f5f5f5)
+  );
+  --uilib-select-button-selected-bg-resolved: var(
+    --uilib-select-button-bootstrap-selected-bg,
+    var(--uilib-primary-500, var(--uilib-color-primary-500, #1e88e5))
+  );
+  --uilib-select-button-selected-fg-resolved: var(
+    --uilib-select-button-bootstrap-selected-fg,
+    var(--uilib-primary-contrast, #ffffff)
+  );
+  --uilib-select-button-hover-bg-resolved: var(
+    --uilib-select-button-bootstrap-hover-bg,
+    var(--uilib-surface-200, #eeeeee)
+  );
+  --uilib-select-button-border-resolved: var(
+    --uilib-select-button-bootstrap-border,
+    var(--uilib-border-color, #e5e7eb)
+  );
 }
 
 .ui-lib-select-button--minimal {
-  --_sb-radius: var(
-    --uilib-selectbutton-minimal-border-radius,
-    var(--uilib-selectbutton-border-radius, 0)
+  --uilib-select-button-border-radius-resolved: var(
+    --uilib-select-button-minimal-border-radius,
+    var(--uilib-select-button-border-radius, 0)
   );
-  --_sb-bg: var(--uilib-selectbutton-minimal-bg, transparent);
-  --_sb-selected-bg: var(--uilib-selectbutton-minimal-selected-bg, var(--uilib-surface-200));
-  --_sb-selected-fg: var(--uilib-selectbutton-minimal-selected-fg, var(--uilib-text-primary));
-  --_sb-hover-bg: var(--uilib-selectbutton-minimal-hover-bg, var(--uilib-surface-100));
-  --_sb-border: var(--uilib-selectbutton-minimal-border, transparent);
-  --_sb-shadow: none;
+  --uilib-select-button-bg-resolved: var(--uilib-select-button-minimal-bg, transparent);
+  --uilib-select-button-selected-bg-resolved: var(
+    --uilib-select-button-minimal-selected-bg,
+    var(--uilib-surface-200, #eeeeee)
+  );
+  --uilib-select-button-selected-fg-resolved: var(
+    --uilib-select-button-minimal-selected-fg,
+    var(--uilib-text-primary, var(--uilib-page-fg, #111827))
+  );
+  --uilib-select-button-hover-bg-resolved: var(
+    --uilib-select-button-minimal-hover-bg,
+    var(--uilib-surface-100, #f5f5f5)
+  );
+  --uilib-select-button-border-resolved: var(--uilib-select-button-minimal-border, transparent);
+  --uilib-select-button-shadow-resolved: none;
 }
 
 .ui-lib-select-button--small {
-  --_sb-padding: var(--uilib-selectbutton-small-padding, 0.5rem 0.75rem);
-  --_sb-font-size: var(--uilib-selectbutton-small-font-size, 0.875rem);
-  --_sb-min-height: var(--uilib-selectbutton-small-min-height, 2rem);
+  --uilib-select-button-padding-resolved: var(
+    --uilib-select-button-small-padding,
+    0.5rem 0.75rem
+  );
+  --uilib-select-button-font-size-resolved: var(--uilib-select-button-small-font-size, 0.875rem);
+  --uilib-select-button-min-height-resolved: var(--uilib-select-button-small-min-height, 2rem);
 }
 
 .ui-lib-select-button--medium {
-  --_sb-padding: var(--uilib-selectbutton-medium-padding, 0.625rem 1rem);
-  --_sb-font-size: var(--uilib-selectbutton-medium-font-size, 1rem);
-  --_sb-min-height: var(--uilib-selectbutton-medium-min-height, 2.5rem);
+  --uilib-select-button-padding-resolved: var(
+    --uilib-select-button-medium-padding,
+    0.625rem 1rem
+  );
+  --uilib-select-button-font-size-resolved: var(--uilib-select-button-medium-font-size, 1rem);
+  --uilib-select-button-min-height-resolved: var(--uilib-select-button-medium-min-height, 2.5rem);
 }
 
 .ui-lib-select-button--large {
-  --_sb-padding: var(--uilib-selectbutton-large-padding, 0.75rem 1.25rem);
-  --_sb-font-size: var(--uilib-selectbutton-large-font-size, 1.125rem);
-  --_sb-min-height: var(--uilib-selectbutton-large-min-height, 3rem);
+  --uilib-select-button-padding-resolved: var(
+    --uilib-select-button-large-padding,
+    0.75rem 1.25rem
+  );
+  --uilib-select-button-font-size-resolved: var(--uilib-select-button-large-font-size, 1.125rem);
+  --uilib-select-button-min-height-resolved: var(--uilib-select-button-large-min-height, 3rem);
 }
 
 .ui-lib-select-button--disabled {
-  opacity: var(--_sb-disabled-opacity);
+  opacity: var(--uilib-select-button-disabled-opacity-resolved);
   pointer-events: none;
 }
 
 .ui-lib-select-button--invalid {
-  --_sb-border: var(--_sb-invalid-border);
+  --uilib-select-button-border-resolved: var(--uilib-select-button-invalid-border-resolved);
 }

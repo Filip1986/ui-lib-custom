@@ -21,6 +21,8 @@ Available presets: `light` (default) and `dark`.
 - **Buttons**: `--uilib-button-<severity>-bg`, `--uilib-button-<severity>-bg-hover`, `--uilib-button-<severity>-border`, `--uilib-button-<severity>-fg`
 - **Badges**: `--uilib-badge-<severity>-bg`, `--uilib-badge-<severity>-bg-subtle`, `--uilib-badge-<severity>-border`, `--uilib-badge-<severity>-fg`
 - **Cards**: `--uilib-card-bg`, `--uilib-card-text-color`, `--uilib-card-border`
+- **Select**: `--uilib-select-bg`, `--uilib-select-border`, `--uilib-select-radius`, `--uilib-select-dropdown-bg`
+- **Select Button**: `--uilib-select-button-bg`, `--uilib-select-button-selected-bg`, `--uilib-select-button-border`
 - **Layout spacing/sizing**: `--uilib-space-<token>` (e.g., `--uilib-space-4`), `--uilib-container-<size>` (e.g., `--uilib-container-lg`)
 
 ## Brand overrides
@@ -31,6 +33,7 @@ Create a brand theme by overriding the variables under a custom selector:
   --uilib-color-primary-700: #59359d;
   --uilib-button-primary-bg: var(--uilib-color-primary-600);
   --uilib-button-primary-bg-hover: var(--uilib-color-primary-700);
+  --uilib-select-button-selected-bg: var(--uilib-color-primary-600);
   --uilib-topbar-accent: var(--uilib-color-primary-600);
   --uilib-page-bg: #0f1116;
   --uilib-page-fg: #e5e7eb;

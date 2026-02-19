@@ -133,29 +133,29 @@ export type SelectButtonSize = 'small' | 'medium' | 'large';
 ---
 ## CSS Custom Properties
 ### Core
-- `--uilib-selectbutton-gap`
-- `--uilib-selectbutton-border-radius`
-- `--uilib-selectbutton-material-border-radius`
-- `--uilib-selectbutton-bootstrap-border-radius`
-- `--uilib-selectbutton-minimal-border-radius`
-- `--uilib-selectbutton-border`
-- `--uilib-selectbutton-fg`
-- `--uilib-selectbutton-selected-fg`
-- `--uilib-selectbutton-invalid-border`
-- `--uilib-selectbutton-disabled-opacity`
+- `--uilib-select-button-gap`
+- `--uilib-select-button-border-radius`
+- `--uilib-select-button-material-border-radius`
+- `--uilib-select-button-bootstrap-border-radius`
+- `--uilib-select-button-minimal-border-radius`
+- `--uilib-select-button-border`
+- `--uilib-select-button-fg`
+- `--uilib-select-button-selected-fg`
+- `--uilib-select-button-invalid-border`
+- `--uilib-select-button-disabled-opacity`
 
 ### Variant-based
-- `--uilib-selectbutton-{variant}-bg`
-- `--uilib-selectbutton-{variant}-selected-bg`
-- `--uilib-selectbutton-{variant}-selected-fg`
-- `--uilib-selectbutton-{variant}-hover-bg`
-- `--uilib-selectbutton-{variant}-border`
-- `--uilib-selectbutton-{variant}-shadow`
+- `--uilib-select-button-{variant}-bg`
+- `--uilib-select-button-{variant}-selected-bg`
+- `--uilib-select-button-{variant}-selected-fg`
+- `--uilib-select-button-{variant}-hover-bg`
+- `--uilib-select-button-{variant}-border`
+- `--uilib-select-button-{variant}-shadow`
 
 ### Size-based
-- `--uilib-selectbutton-{size}-padding`
-- `--uilib-selectbutton-{size}-font-size`
-- `--uilib-selectbutton-{size}-min-height`
+- `--uilib-select-button-{size}-padding`
+- `--uilib-select-button-{size}-font-size`
+- `--uilib-select-button-{size}-min-height`
 
 ---
 ## Files
@@ -163,4 +163,3 @@ export type SelectButtonSize = 'small' | 'medium' | 'large';
 - `projects/ui-lib-custom/src/lib/select-button/select-button.html`
 - `projects/ui-lib-custom/src/lib/select-button/select-button.scss`
 - `projects/ui-lib-custom/src/lib/select-button/select-button.types.ts`
-

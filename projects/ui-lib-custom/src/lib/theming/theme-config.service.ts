@@ -350,43 +350,46 @@ export class ThemeConfigService {
     set('--uilib-shadow-sm', shadowValueButton);
     set('--uilib-shadow-md', shadowValueButton);
 
-    set('--uilib-selectbutton-gap', SELECTBUTTON_TOKENS.gap);
-    set('--uilib-selectbutton-border-radius', SELECTBUTTON_TOKENS.borderRadius.material);
-    set('--uilib-selectbutton-material-border-radius', SELECTBUTTON_TOKENS.borderRadius.material);
-    set('--uilib-selectbutton-bootstrap-border-radius', SELECTBUTTON_TOKENS.borderRadius.bootstrap);
-    set('--uilib-selectbutton-minimal-border-radius', SELECTBUTTON_TOKENS.borderRadius.minimal);
+    set('--uilib-select-button-gap', SELECTBUTTON_TOKENS.gap);
+    set('--uilib-select-button-border-radius', SELECTBUTTON_TOKENS.borderRadius.material);
+    set('--uilib-select-button-material-border-radius', SELECTBUTTON_TOKENS.borderRadius.material);
+    set(
+      '--uilib-select-button-bootstrap-border-radius',
+      SELECTBUTTON_TOKENS.borderRadius.bootstrap
+    );
+    set('--uilib-select-button-minimal-border-radius', SELECTBUTTON_TOKENS.borderRadius.minimal);
 
-    set('--uilib-selectbutton-small-padding', SELECTBUTTON_TOKENS.sizes.small.padding);
-    set('--uilib-selectbutton-small-font-size', SELECTBUTTON_TOKENS.sizes.small.fontSize);
-    set('--uilib-selectbutton-small-min-height', SELECTBUTTON_TOKENS.sizes.small.minHeight);
-    set('--uilib-selectbutton-medium-padding', SELECTBUTTON_TOKENS.sizes.medium.padding);
-    set('--uilib-selectbutton-medium-font-size', SELECTBUTTON_TOKENS.sizes.medium.fontSize);
-    set('--uilib-selectbutton-medium-min-height', SELECTBUTTON_TOKENS.sizes.medium.minHeight);
-    set('--uilib-selectbutton-large-padding', SELECTBUTTON_TOKENS.sizes.large.padding);
-    set('--uilib-selectbutton-large-font-size', SELECTBUTTON_TOKENS.sizes.large.fontSize);
-    set('--uilib-selectbutton-large-min-height', SELECTBUTTON_TOKENS.sizes.large.minHeight);
+    set('--uilib-select-button-small-padding', SELECTBUTTON_TOKENS.sizes.small.padding);
+    set('--uilib-select-button-small-font-size', SELECTBUTTON_TOKENS.sizes.small.fontSize);
+    set('--uilib-select-button-small-min-height', SELECTBUTTON_TOKENS.sizes.small.minHeight);
+    set('--uilib-select-button-medium-padding', SELECTBUTTON_TOKENS.sizes.medium.padding);
+    set('--uilib-select-button-medium-font-size', SELECTBUTTON_TOKENS.sizes.medium.fontSize);
+    set('--uilib-select-button-medium-min-height', SELECTBUTTON_TOKENS.sizes.medium.minHeight);
+    set('--uilib-select-button-large-padding', SELECTBUTTON_TOKENS.sizes.large.padding);
+    set('--uilib-select-button-large-font-size', SELECTBUTTON_TOKENS.sizes.large.fontSize);
+    set('--uilib-select-button-large-min-height', SELECTBUTTON_TOKENS.sizes.large.minHeight);
 
-    set('--uilib-selectbutton-fg', colors.text);
-    set('--uilib-selectbutton-invalid-border', colors.danger);
+    set('--uilib-select-button-fg', colors.text);
+    set('--uilib-select-button-invalid-border', colors.danger);
 
-    set('--uilib-selectbutton-material-bg', colors.surface);
-    set('--uilib-selectbutton-material-hover-bg', colors.surfaceAlt);
-    set('--uilib-selectbutton-material-border', colors.border);
-    set('--uilib-selectbutton-material-selected-bg', colors.primary);
-    set('--uilib-selectbutton-material-selected-fg', '#fff');
-    set('--uilib-selectbutton-material-shadow', SELECTBUTTON_TOKENS.material.shadow);
+    set('--uilib-select-button-material-bg', colors.surface);
+    set('--uilib-select-button-material-hover-bg', colors.surfaceAlt);
+    set('--uilib-select-button-material-border', colors.border);
+    set('--uilib-select-button-material-selected-bg', colors.primary);
+    set('--uilib-select-button-material-selected-fg', '#fff');
+    set('--uilib-select-button-material-shadow', SELECTBUTTON_TOKENS.material.shadow);
 
-    set('--uilib-selectbutton-bootstrap-bg', colors.surface);
-    set('--uilib-selectbutton-bootstrap-hover-bg', colors.surfaceAlt);
-    set('--uilib-selectbutton-bootstrap-border', colors.border);
-    set('--uilib-selectbutton-bootstrap-selected-bg', colors.primary);
-    set('--uilib-selectbutton-bootstrap-selected-fg', '#fff');
+    set('--uilib-select-button-bootstrap-bg', colors.surface);
+    set('--uilib-select-button-bootstrap-hover-bg', colors.surfaceAlt);
+    set('--uilib-select-button-bootstrap-border', colors.border);
+    set('--uilib-select-button-bootstrap-selected-bg', colors.primary);
+    set('--uilib-select-button-bootstrap-selected-fg', '#fff');
 
-    set('--uilib-selectbutton-minimal-bg', SELECTBUTTON_TOKENS.minimal.bg);
-    set('--uilib-selectbutton-minimal-hover-bg', colors.surfaceAlt);
-    set('--uilib-selectbutton-minimal-border', SELECTBUTTON_TOKENS.minimal.border);
-    set('--uilib-selectbutton-minimal-selected-bg', colors.surfaceAlt);
-    set('--uilib-selectbutton-minimal-selected-fg', colors.text);
+    set('--uilib-select-button-minimal-bg', SELECTBUTTON_TOKENS.minimal.bg);
+    set('--uilib-select-button-minimal-hover-bg', colors.surfaceAlt);
+    set('--uilib-select-button-minimal-border', SELECTBUTTON_TOKENS.minimal.border);
+    set('--uilib-select-button-minimal-selected-bg', colors.surfaceAlt);
+    set('--uilib-select-button-minimal-selected-fg', colors.text);
 
     const iconSizes = icons?.sizes ?? this.defaultIconConfig.sizes;
     Object.entries(iconSizes).forEach(([key, value]) => set(`--uilib-icon-size-${key}`, value));
