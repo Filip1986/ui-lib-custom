@@ -1,4 +1,4 @@
- fol# Systems Documentation
+# Systems Documentation
 
 System-level documentation for design systems, architectural patterns, and cross-cutting concerns.
 
@@ -54,6 +54,21 @@ System-level documentation for design systems, architectural patterns, and cross
 - Key variable groups: page/surface, topbar, buttons, badges, cards, layout spacing/containers
 
 **Use for:** Runtime theme switching and brand customization without code changes
+
+---
+
+### Accessibility System
+**File:** [ACCESSIBILITY.md](ACCESSIBILITY.md)
+
+**Status:** ✅ Complete
+
+**Includes:**
+- WCAG 2.1 AA principles
+- Per-component accessibility expectations
+- Keyboard and screen reader guidance
+- Testing checklist and tooling pointers
+
+**Use for:** Ensuring accessible usage and QA across components
 
 ---
 
@@ -117,6 +132,7 @@ Each system should have:
 |--------|-------------|-------------------|--------|
 | Design Tokens | Consistent styling values | 177+ tokens | ✅ Complete |
 | Layout | Layout primitives | 4 components | ✅ Complete |
+| Accessibility | WCAG/ARIA guidance | Components + testing | ✅ Complete |
 
 ---
 

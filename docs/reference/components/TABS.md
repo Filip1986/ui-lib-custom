@@ -131,12 +131,38 @@ export type TabsMode = 'default' | 'navigation';
 ```
 
 ## Accessibility
-- `role="tablist"` on container; `role="tab"` on triggers; `role="tabpanel"` on panels
-- `aria-selected`, `aria-controls`, `aria-labelledby` kept in sync; only active tab has `tabindex="0"`
-- Keyboard: Left/Right (or Up/Down when vertical) to navigate; Home/End jump ends; Enter/Space activate
-- Disabled tabs set `aria-disabled="true"` and are skipped by roving focus
-- Indicator/focus states use theme tokens; icon-only tabs should set `aria-label`
-- Scroll arrows use `aria-label` and are disabled when at the start/end
+
+### Keyboard Interaction
+| Key | Action |
+| --- | --- |
+| Tab | Focus active tab |
+| Arrow Left/Right | Move focus (horizontal) |
+| Arrow Up/Down | Move focus (vertical) |
+| Home/End | Jump to first/last tab |
+| Enter | Activate focused tab |
+| Space | Activate focused tab |
+
+### ARIA Attributes
+| Attribute | Usage |
+| --- | --- |
+| `role="tablist"` | Set on tab list |
+| `role="tab"` | Set on each trigger |
+| `role="tabpanel"` | Set on each panel |
+| `aria-selected` | Active tab state |
+| `aria-controls` | Points to panel id |
+| `aria-labelledby` | Panel references tab id |
+| `aria-disabled` | Disabled tabs |
+
+### Focus Management
+- Roving tabindex keeps only the active tab focusable.
+- Optional `focusPanelOnSelect` moves focus into the panel.
+
+### Screen Reader Behavior
+- Tab labels are announced with selected state.
+- Panels announce their content when activated.
+
+### Known Issues & Solutions
+- Avoid icon-only labels; use `aria-label` when needed.
 
 ## Variants
 - **material**: underline indicator with animation; hover background subtle; transparent base

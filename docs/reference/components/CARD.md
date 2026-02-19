@@ -159,9 +159,26 @@ Cards project content using attribute selectors:
 
 ## Accessibility
 
-- Use semantic elements inside the slots (for example, headings in the header, buttons in the footer).
-- The close icon is clickable; provide clear labels in surrounding content.
-- Ensure sufficient color contrast when overriding header/footer backgrounds.
+### Keyboard Interaction
+| Key | Action |
+| --- | --- |
+| Tab | Focus interactive elements inside the card |
+
+### ARIA Attributes
+| Attribute | Usage |
+| --- | --- |
+| n/a | Card is a container; apply ARIA to child controls |
+
+### Focus Management
+- Card does not trap focus.
+- Focus indicators belong to child controls.
+
+### Screen Reader Behavior
+- Use headings in header slots for clear structure.
+- Close icon should have an accessible label via surrounding context.
+
+### Known Issues & Solutions
+- Avoid using a bare icon as the only affordance for close; pair with text or aria label.
 
 ---
 
@@ -183,4 +200,3 @@ Cards project content using attribute selectors:
 - `docs/reference/components/BUTTON.md`
 - `docs/reference/components/ICON.md`
 - `docs/reference/components/ACCORDION.md`
-

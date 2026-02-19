@@ -238,10 +238,34 @@ type IconPosition = 'left' | 'right' | 'top' | 'bottom';
 
 ## Accessibility
 
-- Keyboard: Enter/Space activates the button (native behavior).
-- Focus management: uses `:focus-visible` with CSS variable control (`--uilib-button-focus-*`).
-- ARIA: `aria-disabled` is set when `disabled` or `loading` is true; `aria-pressed`/`aria-checked` available for toggle use.
-- Icon-only buttons should set `aria-label`.
+### Keyboard Interaction
+| Key | Action |
+| --- | --- |
+| Tab | Move focus to/from button |
+| Enter | Activate button |
+| Space | Activate button |
+
+### ARIA Attributes
+| Attribute | Usage |
+| --- | --- |
+| `aria-disabled` | Set when `disabled` or `loading` is true |
+| `aria-busy` | Set when `loading` is true |
+| `aria-pressed` | For toggle buttons |
+| `aria-checked` | For button-as-checkbox patterns |
+| `aria-label` | Required for icon-only buttons |
+
+### Focus Management
+- Focus ring uses `--uilib-button-focus-*` variables.
+- Focus visible appears only for keyboard navigation.
+
+### Screen Reader Behavior
+- Button text is announced by default.
+- Loading state is conveyed via `aria-busy`; add hidden text if state change needs emphasis.
+- Disabled state is conveyed via `aria-disabled`.
+
+### Known Issues & Solutions
+- Icon-only buttons: always provide `aria-label`.
+- Loading state: include a visually hidden label if action changes.
 
 ---
 

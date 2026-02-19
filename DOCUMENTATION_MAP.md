@@ -17,6 +17,7 @@ docs/
 │   ├── INTEGRATION_EXAMPLE.md        # Real-world integration
 │   ├── PUBLISHING_GUIDE.md           # npm publishing
 │   ├── VERSION_MANAGEMENT.md         # Version control
+│   ├── ACCESSIBILITY_TESTING.md      # Accessibility testing guide
 │   └── ...
 ├── reference/                         # Technical reference
 │   ├── README.md                     # Reference index
@@ -27,6 +28,7 @@ docs/
 │   ├── systems/                      # System docs
 │   │   ├── README.md                 # Systems index
 │   │   ├── DESIGN_TOKENS.md          # Design token reference
+│   │   ├── ACCESSIBILITY.md          # Accessibility guide
 │   │   ├── LAYOUT_SYSTEM.md          # Layout API reference
 │   │   ├── THEMING.md                # Theming guide
 │   │   └── LAYOUT_IMPLEMENTATION.md  # Layout implementation
@@ -67,6 +69,7 @@ docs/
 ### 🎨 I want to understand the design system
 
 → [docs/reference/systems/DESIGN_TOKENS.md](docs/reference/systems/DESIGN_TOKENS.md)
+→ [docs/reference/systems/ACCESSIBILITY.md](docs/reference/systems/ACCESSIBILITY.md)
 
 ### 📐 I want to build layouts
 
@@ -89,6 +92,10 @@ docs/
 ### 📖 I want to publish the library
 
 → [docs/guides/PUBLISHING_GUIDE.md](docs/guides/PUBLISHING_GUIDE.md)
+
+### ♿ I want to test accessibility
+
+→ [docs/guides/ACCESSIBILITY_TESTING.md](docs/guides/ACCESSIBILITY_TESTING.md)
 
 ---
 
@@ -119,6 +126,7 @@ docs/
 - Integration examples
 - Publishing guides
 - Version management
+- Accessibility testing guide
 - Best practices
 
 ---
@@ -202,6 +210,7 @@ docs/
 
 - [Design Tokens](docs/reference/systems/DESIGN_TOKENS.md) - Color, spacing, typography
 - [Layout System](docs/reference/systems/LAYOUT_SYSTEM.md) - Layout primitives
+- [Accessibility Guide](docs/reference/systems/ACCESSIBILITY.md) - WCAG/ARIA guidance and testing
 
 #### Components
 
@@ -217,6 +226,7 @@ docs/
 
 - [Integration Examples](docs/guides/INTEGRATION_EXAMPLE.md) - Real-world usage
 - [Quick Start](docs/getting-started/QUICK_START.md) - Getting started
+- [Accessibility Testing Guide](docs/guides/ACCESSIBILITY_TESTING.md) - Manual and automated checks
 
 ---
 

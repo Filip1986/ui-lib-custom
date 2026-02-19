@@ -133,10 +133,29 @@ type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | '
 
 ## Accessibility
 
-- `aria-required` and `aria-invalid` are applied based on inputs.
-- Error text is linked through `aria-describedby`.
-- Clear and toggle buttons include `aria-label` attributes.
-- Use meaningful labels and avoid placeholder-only inputs.
+### Keyboard Interaction
+| Key | Action |
+| --- | --- |
+| Tab | Focus the input |
+| Enter | Submit parent form |
+
+### ARIA Attributes
+| Attribute | Usage |
+| --- | --- |
+| `aria-required` | When `required` is true |
+| `aria-invalid` | When `error` is set |
+| `aria-describedby` | Links error text |
+
+### Focus Management
+- Focus ring uses the input focus styles and `:focus-within` on the field.
+- Clear and toggle buttons are keyboard accessible.
+
+### Screen Reader Behavior
+- Label text is associated with the input.
+- Error text is announced via `aria-describedby`.
+
+### Known Issues & Solutions
+- Avoid placeholder-only labels; always set `label`.
 
 ---
 
@@ -159,4 +178,3 @@ type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | '
 - `docs/reference/components/CARD.md`
 - `docs/reference/components/SELECT.md`
 - `docs/reference/components/CHECKBOX.md`
-

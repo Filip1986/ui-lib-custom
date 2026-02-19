@@ -101,10 +101,32 @@ Override them globally (`:root`, `[data-theme]`) or on a container to preview br
 
 ## Accessibility
 
-- Host element sets `role="checkbox"`, `tabindex="0"`, and `aria-checked` / `aria-disabled`
-- `aria-labelledby` points to the generated label span; `aria-describedby` references the optional description
-- Keyboard interaction: **Space** and **Enter** toggle the state (preventing default to avoid page scroll)
-- Focus ring honors WCAG by default via `--uilib-checkbox-focus-ring`
+### Keyboard Interaction
+| Key | Action |
+| --- | --- |
+| Tab | Focus checkbox |
+| Space | Toggle checked state |
+| Enter | Toggle checked state |
+
+### ARIA Attributes
+| Attribute | Usage |
+| --- | --- |
+| `role="checkbox"` | Applied to the host |
+| `aria-checked` | `true`, `false`, or `mixed` for indeterminate |
+| `aria-disabled` | When disabled |
+| `aria-labelledby` | References label text |
+| `aria-describedby` | References description |
+
+### Focus Management
+- Focus ring uses `--uilib-checkbox-focus-ring`.
+- Disabled state removes pointer and keyboard interaction.
+
+### Screen Reader Behavior
+- Label and description are read when present.
+- Indeterminate state announces `mixed`.
+
+### Known Issues & Solutions
+- Use `ariaLabel` only when there is no visible label.
 
 ---
 

@@ -48,6 +48,7 @@ System-level documentation for design systems and architectural patterns.
   - Implementation details: [LAYOUT_IMPLEMENTATION.md](systems/LAYOUT_IMPLEMENTATION.md)
 
 - **[Theming Guide](systems/THEMING.md)** – Light/Dark presets, CSS vars, brand overrides
+- **[Accessibility Guide](systems/ACCESSIBILITY.md)** – WCAG 2.1 AA guidance and testing
 
 ---
 

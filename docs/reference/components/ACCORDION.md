@@ -258,10 +258,36 @@ Component CSS variables (set on host or theme scope):
 ```
 
 ## Accessibility
-- Header uses `role="button"`, `aria-expanded`, `aria-controls`, `aria-disabled`.
-- Panel content uses `role="region"` + `aria-labelledby` and `hidden` when collapsed.
-- Keyboard: Arrow Up/Down (and Left/Right) move focus; Home/End jump to first/last; Enter/Space toggle.
-- Focus stays on headers; disabled panels are skipped in navigation.
+
+### Keyboard Interaction
+| Key | Action |
+| --- | --- |
+| Tab | Focus header buttons |
+| Arrow Up/Down | Move focus between headers |
+| Arrow Left/Right | Move focus between headers |
+| Home/End | Jump to first/last header |
+| Enter | Toggle panel |
+| Space | Toggle panel |
+
+### ARIA Attributes
+| Attribute | Usage |
+| --- | --- |
+| `aria-expanded` | Header expanded state |
+| `aria-controls` | Points to panel id |
+| `aria-disabled` | Disabled panels |
+| `aria-labelledby` | Panel references header |
+| `role="region"` | Panel content region |
+
+### Focus Management
+- Focus remains on headers after toggle.
+- Disabled headers are skipped in navigation.
+
+### Screen Reader Behavior
+- Header text is announced with expanded/collapsed state.
+- Panel content is hidden when collapsed.
+
+### Known Issues & Solutions
+- Avoid placing non-toggle interactive elements inside headers unless they are part of the toggle.
 
 ## Best Practices
 - Provide stable `value` ids for panels to keep controlled mode predictable.

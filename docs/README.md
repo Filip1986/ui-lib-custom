@@ -68,6 +68,11 @@ docs/
   - Git-based distribution
   - Continuous development workflow
 
+- **[Accessibility Testing Guide](guides/ACCESSIBILITY_TESTING.md)** - Manual and automated a11y checks
+  - Tools and libraries for testing
+  - Common accessibility issues
+  - Fixing accessibility bugs
+
 ---
 
 ## 📋 Reference
@@ -91,6 +96,8 @@ docs/
   - Performance benefits
   - Composition patterns
   - Implementation: [LAYOUT_IMPLEMENTATION.md](reference/systems/LAYOUT_IMPLEMENTATION.md)
+
+- **[Accessibility Guide](reference/systems/ACCESSIBILITY.md)** - WCAG 2.1 AA guidance and testing
 
 #### 📦 Component Reference
 - **[Badge Component](reference/components/BADGE.md)** - Badge/Tag component reference
