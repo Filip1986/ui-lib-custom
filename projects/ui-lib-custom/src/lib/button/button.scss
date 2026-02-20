@@ -21,8 +21,8 @@
   --uilib-button-radius: var(--uilib-radius-md, 8px);
   --uilib-button-gap: var(--uilib-space-2, 0.5rem);
   --uilib-button-transition: all 0.2s ease;
-  --uilib-button-focus-color: var(--uilib-color-primary-500, #1e88e5);
-  --uilib-button-focus-ring-color: var(--uilib-color-primary-100, #bbdefb);
+  --uilib-button-focus-color: var(--uilib-color-primary-500);
+  --uilib-button-focus-ring-color: var(--uilib-color-primary-100);
   --uilib-button-focus-ring: 0 0 0 3px var(--uilib-button-focus-ring-color);
   --uilib-button-disabled-opacity: 0.5;
   --uilib-button-border-width: 1px;

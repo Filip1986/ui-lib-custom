@@ -1,8 +1,8 @@
 ui-lib-tabs {
   display: block;
   /* Component-level variables with fallbacks to design tokens */
-  --uilib-tabs-bg-resolved: var(--uilib-tabs-bg, var(--uilib-surface, #ffffff));
-  --uilib-tabs-border-resolved: var(--uilib-tabs-border, var(--uilib-border, #e5e7eb));
+  --uilib-tabs-bg-resolved: var(--uilib-tabs-bg, var(--uilib-surface));
+  --uilib-tabs-border-resolved: var(--uilib-tabs-border, var(--uilib-border));
   --uilib-tabs-border-width-resolved: var(--uilib-tabs-border-width, 1px);
   --uilib-tabs-border-style-resolved: var(--uilib-tabs-border-style, solid);
   --uilib-tabs-radius-resolved: var(--uilib-tabs-radius, var(--uilib-radius-md, 8px));
@@ -17,9 +17,9 @@ ui-lib-tabs {
   --uilib-tabs-color-resolved: var(--uilib-tabs-color, var(--uilib-page-fg, currentColor));
   --uilib-tabs-color-active-resolved: var(
     --uilib-tabs-color-active,
-    var(--uilib-color-primary-600, #1e88e5)
+    var(--uilib-color-primary-600)
   );
-  --uilib-tabs-color-disabled-resolved: var(--uilib-tabs-color-disabled, var(--uilib-muted, #6b7280));
+  --uilib-tabs-color-disabled-resolved: var(--uilib-tabs-color-disabled, var(--uilib-muted));
   --uilib-tab-bg-resolved: var(--uilib-tab-bg, transparent);
   --uilib-tab-bg-hover-resolved: var(
     --uilib-tab-bg-hover,
@@ -38,7 +38,7 @@ ui-lib-tabs {
 
   --uilib-tabs-indicator-color-resolved: var(
     --uilib-tabs-indicator-color,
-    var(--uilib-color-primary-600, #1e88e5)
+    var(--uilib-color-primary-600)
   );
   --uilib-tabs-indicator-height-resolved: var(--uilib-tabs-indicator-height, 2px);
   --uilib-tabs-indicator-radius-resolved: var(--uilib-tabs-indicator-radius, 999px);

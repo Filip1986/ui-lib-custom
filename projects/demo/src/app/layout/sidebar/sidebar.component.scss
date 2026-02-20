@@ -1,7 +1,18 @@
 .sidebar {
+  --demo-sidebar-bg: var(--uilib-surface);
+  --demo-sidebar-border: var(--uilib-border);
+  --demo-sidebar-fg: var(--uilib-page-fg);
+  --demo-sidebar-muted: var(--uilib-muted);
+  --demo-sidebar-hover-bg: var(--uilib-surface-alt);
+  --demo-sidebar-accent: var(--uilib-color-primary-600);
+  --demo-sidebar-accent-strong: var(--uilib-color-primary-700);
+  --demo-scrollbar-track: var(--uilib-surface-alt);
+  --demo-scrollbar-thumb: var(--uilib-border);
+  --demo-scrollbar-thumb-hover: var(--uilib-color-primary-600);
+
   width: 250px;
-  background: #ffffff;
-  border-right: 1px solid #dee2e6;
+  background: var(--demo-sidebar-bg);
+  border-right: 1px solid var(--demo-sidebar-border);
   height: 100%;
   overflow-y: auto;
   position: fixed;
@@ -15,15 +26,15 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--demo-scrollbar-track);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
+    background: var(--demo-scrollbar-thumb);
     border-radius: 3px;
 
     &:hover {
-      background: #a8a8a8;
+      background: var(--demo-scrollbar-thumb-hover);
     }
   }
 }
@@ -53,7 +64,7 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  color: #495057;
+  color: var(--demo-sidebar-fg);
   text-decoration: none;
   transition: all 0.2s;
   font-size: 0.875rem;
@@ -63,25 +74,25 @@
   i {
     margin-right: 0.75rem;
     font-size: 1rem;
-    color: #6c757d;
+    color: var(--demo-sidebar-muted);
   }
 
   &:hover {
-    background: #f8f9fa;
-    color: #007bff;
+    background: var(--demo-sidebar-hover-bg);
+    color: var(--demo-sidebar-accent);
 
     i {
-      color: #007bff;
+      color: var(--demo-sidebar-accent);
     }
   }
 
   &.active {
-    background: #e7f3ff;
-    color: #007bff;
-    border-left-color: #007bff;
+    background: var(--demo-sidebar-hover-bg);
+    color: var(--demo-sidebar-accent);
+    border-left-color: var(--demo-sidebar-accent-strong);
 
     i {
-      color: #007bff;
+      color: var(--demo-sidebar-accent-strong);
     }
   }
 }
@@ -92,7 +103,7 @@
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.5px;
-  color: #6c757d;
+  color: var(--demo-sidebar-muted);
 
   .toggle-icon {
     position: absolute;
@@ -102,7 +113,7 @@
   }
 
   &:hover {
-    background: #f8f9fa;
+    background: var(--demo-sidebar-hover-bg);
   }
 }
 
@@ -133,8 +144,8 @@
 
 .sidebar-tip {
   padding: 1rem;
-  border-top: 1px solid var(--uilib-border, #e0e0e0);
-  color: var(--uilib-muted, #6c757d);
+  border-top: 1px solid var(--uilib-border);
+  color: var(--uilib-muted);
   display: flex;
   align-items: center;
   gap: 0.5rem;

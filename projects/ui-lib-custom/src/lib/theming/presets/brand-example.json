@@ -1,6 +1,7 @@
 {
   "name": "brand-example",
   "variant": "minimal",
+  "colorScheme": "light",
   "colors": {
     "primary": "#7c3aed",
     "secondary": "#0f172a",

@@ -11,6 +11,8 @@ import {
   ThemePresetOverrides,
   ThemeShapeRadius,
   ThemeIconConfig,
+  ThemeConfig,
+  ThemeMode,
 } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
 
@@ -42,18 +44,35 @@ export class ThemeConfigService {
   private readonly hostRef = signal<HTMLElement | null>(this.doc?.documentElement ?? null);
   private readonly presetSignal = signal<ThemePreset>(this.defaultPreset);
   private readonly savedThemesSignal = signal<string[]>(this.listSavedThemeNames());
+  private readonly modeSignal = signal<ThemeMode>('auto');
+  private mediaQuery: MediaQueryList | null = null;
 
   readonly preset = computed(() => this.presetSignal());
   readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
   readonly cssVars = computed(() => this.mapPresetToCssVars(this.presetSignal()));
+  readonly mode: Signal<ThemeMode> = this.modeSignal.asReadonly();
+  readonly effectiveTheme = computed<'light' | 'dark'>(() => {
+    const mode = this.modeSignal();
+    if (mode === 'auto') {
+      return this.getSystemPreference();
+    }
+    return mode;
+  });
 
   constructor() {
-    const stored = this.readStoredPreset();
-    const initial = stored
-      ? this.ensureIconDefaults(this.mergePresets(this.defaultPreset, stored))
+    this.setupSystemPreferenceListener();
+    const stored = this.readStoredConfig();
+    const storedMode = this.getStoredMode(stored);
+    if (storedMode) {
+      this.modeSignal.set(storedMode);
+    }
+    const storedPreset = this.getStoredPreset(stored);
+    const initial = storedPreset
+      ? this.ensureIconDefaults(this.mergePresets(this.defaultPreset, storedPreset))
       : this.defaultPreset;
     this.presetSignal.set(initial);
     this.applyToRoot(initial);
+    this.applyThemeToDocument();
     this.syncSavedThemes();
   }
 
@@ -77,10 +96,11 @@ export class ThemeConfigService {
     this.presetSignal.set(resolved);
 
     if (persist) {
-      this.persistPreset(resolved);
+      this.persistConfig(resolved, this.modeSignal());
     }
     if (apply) {
       this.applyToRoot(resolved, options?.target ?? undefined);
+      this.applyThemeToDocument(options?.target ?? undefined);
     }
 
     return resolved;
@@ -120,7 +140,32 @@ export class ThemeConfigService {
     Object.entries(vars).forEach(([name, value]) => {
       host.style.setProperty(name, value);
     });
-    host.setAttribute('data-theme', current.name);
+  }
+
+  setMode(mode: ThemeMode): void {
+    this.modeSignal.set(mode);
+    this.applyThemeToDocument();
+    this.persistConfig(this.presetSignal(), mode);
+  }
+
+  toggleDarkMode(): void {
+    const current = this.effectiveTheme();
+    this.setMode(current === 'dark' ? 'light' : 'dark');
+  }
+
+  applyThemeToDocument(target?: HTMLElement | null): void {
+    if (target) {
+      this.hostRef.set(target);
+    }
+    const host = target ?? this.hostRef();
+    if (!host) {
+      return;
+    }
+
+    const mode = this.modeSignal();
+    const effective = this.effectiveTheme();
+    host.removeAttribute('data-theme');
+    host.setAttribute('data-theme', mode === 'auto' ? effective : mode);
   }
 
   exportAsCSS(preset: ThemePreset = this.presetSignal()): string {
@@ -201,7 +246,7 @@ export class ThemeConfigService {
   }
 
   saveCurrentPreset(): void {
-    this.persistPreset(this.presetSignal());
+    this.persistConfig(this.presetSignal(), this.modeSignal());
   }
 
   clearStoredPreset(): void {
@@ -213,6 +258,28 @@ export class ThemeConfigService {
     } catch {
       // ignore
     }
+  }
+
+  private setupSystemPreferenceListener(): void {
+    const win = this.doc?.defaultView;
+    if (!win?.matchMedia) {
+      return;
+    }
+
+    this.mediaQuery = win.matchMedia('(prefers-color-scheme: dark)');
+    this.mediaQuery.addEventListener('change', () => {
+      if (this.modeSignal() === 'auto') {
+        this.applyThemeToDocument();
+      }
+    });
+  }
+
+  private getSystemPreference(): 'light' | 'dark' {
+    const win = this.doc?.defaultView;
+    if (!win?.matchMedia) {
+      return 'light';
+    }
+    return win.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
   private mapPresetToCssVars(preset: ThemePreset): Record<string, string> {
@@ -448,18 +515,19 @@ export class ThemeConfigService {
     return clone as T;
   }
 
-  private persistPreset(preset: ThemePreset): void {
+  private persistConfig(preset: ThemePreset, mode: ThemeMode): void {
     if (!this.hasLocalStorage()) {
       return;
     }
     try {
-      this.doc?.defaultView?.localStorage?.setItem(this.storageKey, JSON.stringify(preset));
+      const payload: ThemeConfig = { mode, preset };
+      this.doc?.defaultView?.localStorage?.setItem(this.storageKey, JSON.stringify(payload));
     } catch {
       // ignore persistence errors (e.g., SSR or private mode)
     }
   }
 
-  private readStoredPreset(): ThemePreset | null {
+  private readStoredConfig(): ThemeConfig | ThemePreset | null {
     if (!this.hasLocalStorage()) {
       return null;
     }
@@ -468,10 +536,38 @@ export class ThemeConfigService {
       if (!raw) {
         return null;
       }
-      return JSON.parse(raw) as ThemePreset;
+      return JSON.parse(raw) as ThemeConfig | ThemePreset;
     } catch {
       return null;
     }
+  }
+
+  private getStoredMode(value: ThemeConfig | ThemePreset | null): ThemeMode | null {
+    if (value && this.isThemeConfig(value)) {
+      return value.mode;
+    }
+    return null;
+  }
+
+  private getStoredPreset(value: ThemeConfig | ThemePreset | null): ThemePreset | null {
+    if (!value) {
+      return null;
+    }
+    if (this.isThemeConfig(value)) {
+      return value.preset ?? null;
+    }
+    if (this.isThemePreset(value)) {
+      return value;
+    }
+    return null;
+  }
+
+  private isThemeConfig(value: unknown): value is ThemeConfig {
+    return Boolean(value && typeof value === 'object' && 'mode' in value && 'preset' in value);
+  }
+
+  private isThemePreset(value: unknown): value is ThemePreset {
+    return Boolean(value && typeof value === 'object' && 'colors' in value && 'shape' in value);
   }
 
   private readSavedThemes(): Record<string, ThemePreset> {

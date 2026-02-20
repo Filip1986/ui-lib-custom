@@ -1,8 +1,8 @@
 :host {
   display: block;
   min-height: 100vh;
-  background: var(--uilib-page-bg, var(--uilib-surface, #f9fafb));
-  color: var(--uilib-page-fg, #0f172a);
+  background: var(--uilib-page-bg, var(--uilib-surface));
+  color: var(--uilib-page-fg);
   font-family: var(--uilib-font-body, inherit), sans-serif;
 }
 
@@ -29,7 +29,7 @@
 
   p {
     margin: 0.5rem 0 0;
-    color: var(--uilib-muted, #4b5563);
+    color: var(--uilib-muted);
   }
 }
 
@@ -43,13 +43,13 @@
   display: inline-flex;
   align-items: center;
   gap: var(--uilib-space-2, 0.5rem);
-  color: var(--uilib-muted, #4b5563);
+  color: var(--uilib-muted);
 }
 
 .link {
   background: none;
   border: none;
-  color: var(--uilib-color-primary-600, #1e88e5);
+  color: var(--uilib-color-primary-600);
   cursor: pointer;
   padding: 0;
   font-weight: 600;
@@ -60,23 +60,23 @@
   gap: var(--uilib-space-2, 0.5rem);
   align-items: center;
   justify-content: center;
-  color: var(--uilib-muted, #4b5563);
+  color: var(--uilib-muted);
 }
 
 .social {
   display: flex;
   flex-direction: column;
-  gap: var(--uilib-space-3, 0.75rem);
+  gap: var(--uilib-space-3);
 }
 
 .divider {
   text-align: center;
-  color: var(--uilib-muted, #6b7280);
+  color: var(--uilib-muted);
   font-size: 0.9rem;
 }
 
 .error {
-  color: var(--uilib-color-danger-600, #e53935);
+  color: var(--uilib-color-danger-600);
   font-size: 0.875rem;
 }
 

@@ -105,6 +105,11 @@ export class SidebarComponent {
       route: '/themes',
     },
     {
+      label: 'Dark Mode',
+      icon: 'pi pi-moon',
+      route: '/dark-mode',
+    },
+    {
       label: 'Form',
       icon: 'pi pi-check-square',
       expanded: false,

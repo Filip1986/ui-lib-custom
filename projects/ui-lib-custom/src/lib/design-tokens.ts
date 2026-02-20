@@ -312,6 +312,105 @@ export const SEMANTIC_COLORS = {
 export type SemanticColor = keyof typeof SEMANTIC_COLORS;
 
 // ============================================================================
+// DARK MODE TOKENS
+// ============================================================================
+
+/**
+ * Dark mode surface colors (Material Design elevation system)
+ * Higher numbers = more elevated = slightly lighter
+ */
+export const DARK_SURFACES = {
+  0: '#121212', // Base background
+  1: '#1e1e1e', // Cards, dialogs at elevation 1
+  2: '#232323', // Elevation 2
+  3: '#252525', // Elevation 3
+  4: '#272727', // Elevation 4
+  5: '#2c2c2c', // Elevation 5 (dropdowns, menus)
+} as const;
+
+export type DarkSurface = keyof typeof DARK_SURFACES;
+
+/**
+ * Dark mode text colors with opacity for hierarchy
+ */
+export const DARK_TEXT = {
+  primary: 'rgba(255, 255, 255, 0.87)',
+  secondary: 'rgba(255, 255, 255, 0.60)',
+  disabled: 'rgba(255, 255, 255, 0.38)',
+  hint: 'rgba(255, 255, 255, 0.38)',
+} as const;
+
+export type DarkText = keyof typeof DARK_TEXT;
+
+/**
+ * Dark mode border colors
+ */
+export const DARK_BORDERS = {
+  default: 'rgba(255, 255, 255, 0.12)',
+  light: 'rgba(255, 255, 255, 0.08)',
+  strong: 'rgba(255, 255, 255, 0.20)',
+} as const;
+
+/**
+ * Dark mode shadows (lighter, more diffuse)
+ */
+export const DARK_SHADOWS = {
+  sm: '0 1px 3px rgba(0, 0, 0, 0.4)',
+  md: '0 4px 6px rgba(0, 0, 0, 0.4)',
+  lg: '0 10px 20px rgba(0, 0, 0, 0.5)',
+  xl: '0 20px 40px rgba(0, 0, 0, 0.6)',
+} as const;
+
+/**
+ * Adjusted primary colors for dark backgrounds (higher luminance)
+ */
+export const DARK_PRIMARY = {
+  50: '#e3f2fd',
+  100: '#bbdefb',
+  200: '#90caf9', // Use as primary in dark mode
+  300: '#64b5f6',
+  400: '#42a5f5',
+  500: '#2196f3',
+  600: '#1e88e5',
+  700: '#1976d2',
+  800: '#1565c0',
+  900: '#0d47a1',
+} as const;
+
+/**
+ * Semantic dark mappings for component defaults
+ */
+export const DARK_SEMANTIC_COLORS = {
+  // Surfaces
+  surface: DARK_SURFACES[1],
+  surfaceAlt: DARK_SURFACES[2],
+  background: DARK_SURFACES[0],
+  backgroundAlt: DARK_SURFACES[1],
+
+  // Text
+  text: DARK_TEXT.primary,
+  textSecondary: DARK_TEXT.secondary,
+  textDisabled: DARK_TEXT.disabled,
+
+  // Borders
+  border: DARK_BORDERS.default,
+  borderLight: DARK_BORDERS.light,
+
+  // Brand colors (adjusted for dark)
+  primary: DARK_PRIMARY[200],
+  primaryHover: DARK_PRIMARY[100],
+
+  // Component-specific
+  cardBg: DARK_SURFACES[1],
+  cardBgHover: DARK_SURFACES[2],
+  inputBg: DARK_SURFACES[1],
+  inputBgFocus: DARK_SURFACES[2],
+  selectDropdownBg: DARK_SURFACES[3],
+  accordionBg: DARK_SURFACES[1],
+  accordionHeaderBg: DARK_SURFACES[2],
+} as const;
+
+// ============================================================================
 // TYPOGRAPHY TOKENS
 // ============================================================================
 

@@ -22,6 +22,7 @@ import { LayoutDesignTokensSectionComponent } from './pages/layouts/design-token
 import { LayoutThemedLayoutsSectionComponent } from './pages/layouts/themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
 import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.component';
+import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -109,6 +110,7 @@ export const routes: Routes = [
     component: SelectButtonsComponent,
     title: 'Select Buttons - UI Components Library',
   },
+  { path: 'dark-mode', component: DarkModeComponent, title: 'Dark Mode - UI Library' },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

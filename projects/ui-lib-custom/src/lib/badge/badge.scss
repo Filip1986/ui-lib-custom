@@ -16,37 +16,11 @@
   --uilib-radius-lg: 0.375rem;
   --uilib-radius-full: 9999px;
 
-  /* Color tokens */
-  --uilib-color-primary-50: #e3f2fd;
-  --uilib-color-primary-700: #1976d2;
-  --uilib-color-secondary-50: #f5f5f5;
-  --uilib-color-secondary-700: #616161;
-  --uilib-color-success-50: #e8f5e9;
-  --uilib-color-success-700: #388e3c;
-  --uilib-color-danger-50: #ffebee;
-  --uilib-color-danger-700: #d32f2f;
-  --uilib-color-warning-50: #fff3e0;
-  --uilib-color-warning-700: #f57c00;
-  --uilib-color-info-50: #e1f5fe;
-  --uilib-color-info-700: #0288d1;
-  --uilib-color-neutral-50: #fafafa;
-  --uilib-color-neutral-200: #eeeeee;
-  --uilib-color-neutral-900: #212121;
-
   /* Component defaults */
-  --uilib-badge-bg-resolved: var(
-    --uilib-badge-bg,
-    var(--uilib-color-neutral-50, #fafafa)
-  );
-  --uilib-badge-bg-subtle-resolved: var(
-    --uilib-badge-bg-subtle,
-    var(--uilib-color-neutral-50, #fafafa)
-  );
+  --uilib-badge-bg-resolved: var(--uilib-badge-bg, var(--uilib-color-neutral-50));
+  --uilib-badge-bg-subtle-resolved: var(--uilib-badge-bg-subtle, var(--uilib-color-neutral-50));
   --uilib-badge-bg-outline-resolved: transparent;
-  --uilib-badge-fg-resolved: var(
-    --uilib-badge-fg,
-    var(--uilib-color-neutral-900, #212121)
-  );
+  --uilib-badge-fg-resolved: var(--uilib-badge-fg, var(--uilib-color-neutral-900));
   --uilib-badge-border-color-resolved: transparent;
   --uilib-badge-border-width-resolved: 0;
   --uilib-badge-radius-resolved: var(--uilib-radius-md);
@@ -113,135 +87,132 @@
 
 /* Colors */
 :host(.badge-color-primary) {
-  --uilib-badge-bg-resolved: var(
-    --uilib-badge-primary-bg,
-    var(--uilib-color-primary-700, #1976d2)
-  );
+  --uilib-badge-bg-resolved: var(--uilib-badge-primary-bg, var(--uilib-color-primary-700));
   --uilib-badge-bg-subtle-resolved: var(
     --uilib-badge-primary-bg-subtle,
-    var(--uilib-color-primary-50, #e3f2fd)
+    var(--uilib-color-primary-50)
   );
   --uilib-badge-fg-resolved: var(
     --uilib-badge-primary-fg,
-    var(--uilib-color-neutral-50, #fafafa)
+    var(--uilib-color-neutral-50)
   );
   --uilib-badge-border-color-resolved: var(
     --uilib-badge-primary-border,
-    var(--uilib-color-primary-700, #1976d2)
+    var(--uilib-color-primary-700)
   );
 }
 
 :host(.badge-color-secondary) {
   --uilib-badge-bg-resolved: var(
     --uilib-badge-secondary-bg,
-    var(--uilib-color-secondary-700, #616161)
+    var(--uilib-color-secondary-700)
   );
   --uilib-badge-bg-subtle-resolved: var(
     --uilib-badge-secondary-bg-subtle,
-    var(--uilib-color-secondary-50, #f5f5f5)
+    var(--uilib-color-secondary-50)
   );
   --uilib-badge-fg-resolved: var(
     --uilib-badge-secondary-fg,
-    var(--uilib-color-neutral-50, #fafafa)
+    var(--uilib-color-neutral-50)
   );
   --uilib-badge-border-color-resolved: var(
     --uilib-badge-secondary-border,
-    var(--uilib-color-secondary-700, #616161)
+    var(--uilib-color-secondary-700)
   );
 }
 
 :host(.badge-color-success) {
   --uilib-badge-bg-resolved: var(
     --uilib-badge-success-bg,
-    var(--uilib-color-success-700, #388e3c)
+    var(--uilib-color-success-700)
   );
   --uilib-badge-bg-subtle-resolved: var(
     --uilib-badge-success-bg-subtle,
-    var(--uilib-color-success-50, #e8f5e9)
+    var(--uilib-color-success-50)
   );
   --uilib-badge-fg-resolved: var(
     --uilib-badge-success-fg,
-    var(--uilib-color-neutral-50, #fafafa)
+    var(--uilib-color-neutral-50)
   );
   --uilib-badge-border-color-resolved: var(
     --uilib-badge-success-border,
-    var(--uilib-color-success-700, #388e3c)
+    var(--uilib-color-success-700)
   );
 }
 
 :host(.badge-color-danger) {
   --uilib-badge-bg-resolved: var(
     --uilib-badge-danger-bg,
-    var(--uilib-color-danger-700, #d32f2f)
+    var(--uilib-color-danger-700)
   );
   --uilib-badge-bg-subtle-resolved: var(
     --uilib-badge-danger-bg-subtle,
-    var(--uilib-color-danger-50, #ffebee)
+    var(--uilib-color-danger-50)
   );
   --uilib-badge-fg-resolved: var(
     --uilib-badge-danger-fg,
-    var(--uilib-color-neutral-50, #fafafa)
+    var(--uilib-color-neutral-50)
   );
   --uilib-badge-border-color-resolved: var(
     --uilib-badge-danger-border,
-    var(--uilib-color-danger-700, #d32f2f)
+    var(--uilib-color-danger-700)
   );
 }
 
 :host(.badge-color-warning) {
   --uilib-badge-bg-resolved: var(
     --uilib-badge-warning-bg,
-    var(--uilib-color-warning-700, #f57c00)
+    var(--uilib-color-warning-700)
   );
   --uilib-badge-bg-subtle-resolved: var(
     --uilib-badge-warning-bg-subtle,
-    var(--uilib-color-warning-50, #fff3e0)
+    var(--uilib-color-warning-50)
   );
   --uilib-badge-fg-resolved: var(
     --uilib-badge-warning-fg,
-    var(--uilib-color-neutral-900, #212121)
+    var(--uilib-color-neutral-900)
   );
   --uilib-badge-border-color-resolved: var(
     --uilib-badge-warning-border,
-    var(--uilib-color-warning-700, #f57c00)
+    var(--uilib-color-warning-700)
   );
 }
 
 :host(.badge-color-info) {
   --uilib-badge-bg-resolved: var(
     --uilib-badge-info-bg,
-    var(--uilib-color-info-700, #0288d1)
+    var(--uilib-color-info-700)
   );
   --uilib-badge-bg-subtle-resolved: var(
     --uilib-badge-info-bg-subtle,
-    var(--uilib-color-info-50, #e1f5fe)
+    var(--uilib-color-info-50)
   );
   --uilib-badge-fg-resolved: var(
     --uilib-badge-info-fg,
-    var(--uilib-color-neutral-50, #fafafa)
+    var(--uilib-color-neutral-50)
   );
   --uilib-badge-border-color-resolved: var(
     --uilib-badge-info-border,
-    var(--uilib-color-info-700, #0288d1)
+    var(--uilib-color-info-700)
   );
 }
 
 :host(.badge-color-neutral) {
   --uilib-badge-bg-resolved: var(
     --uilib-badge-neutral-bg,
-    var(--uilib-color-neutral-200, #eeeeee)
+    var(--uilib-color-neutral-200)
   );
   --uilib-badge-bg-subtle-resolved: var(
     --uilib-badge-neutral-bg-subtle,
-    var(--uilib-color-neutral-50, #fafafa)
+    var(--uilib-color-neutral-50)
   );
   --uilib-badge-fg-resolved: var(
     --uilib-badge-neutral-fg,
-    var(--uilib-color-neutral-900, #212121)
+    var(--uilib-color-neutral-900)
   );
   --uilib-badge-border-color-resolved: var(
     --uilib-badge-neutral-border,
-    var(--uilib-color-neutral-200, #eeeeee)
+    var(--uilib-color-neutral-200)
   );
 }
 

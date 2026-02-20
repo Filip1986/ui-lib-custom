@@ -3,6 +3,12 @@ import type { IconLibrary, IconSize, ThemeVariant } from 'ui-lib-custom/core';
 // Re-export for backward compatibility
 export type { ThemeVariant };
 
+export type ThemeMode = 'auto' | 'light' | 'dark';
+
+export interface ThemeConfig {
+  mode: ThemeMode;
+  preset: ThemePreset;
+}
 
 export type ThemeShapeRadius = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' | string;
 
@@ -91,6 +97,7 @@ export interface ThemePreset {
   buttonShadow?: string;
   icons?: ThemeIconConfig;
   selectButton?: ThemePresetSelectButton;
+  colorScheme?: 'light' | 'dark';
 }
 
 export type ThemePresetOverrides = DeepPartial<ThemePreset>;

@@ -7,15 +7,15 @@
   gap: var(--uilib-accordion-gap);
 
   &.accordion-variant-material {
-    --uilib-accordion-panel-bg: var(--uilib-surface, #ffffff);
+    --uilib-accordion-panel-bg: var(--uilib-surface);
     --uilib-accordion-panel-border: 1px solid transparent;
     --uilib-accordion-panel-radius: var(--uilib-radius-md, 8px);
     --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
   }
 
   &.accordion-variant-bootstrap {
-    --uilib-accordion-panel-bg: var(--uilib-surface, #ffffff);
-    --uilib-accordion-panel-border: 1px solid var(--uilib-border, #e5e7eb);
+    --uilib-accordion-panel-bg: var(--uilib-surface);
+    --uilib-accordion-panel-border: 1px solid var(--uilib-border);
     --uilib-accordion-panel-radius: 0;
     --uilib-accordion-gap: 0;
   }

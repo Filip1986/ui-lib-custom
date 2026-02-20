@@ -1,6 +1,7 @@
 {
   "name": "light",
   "variant": "material",
+  "colorScheme": "light",
   "colors": {
     "primary": "#1976d2",
     "secondary": "#616161",

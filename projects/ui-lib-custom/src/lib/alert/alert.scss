@@ -4,16 +4,16 @@
   gap: var(--uilib-inline-sm, 0.5rem);
   align-items: center;
   padding: var(--uilib-inline-md, 1rem);
-  border-radius: var(--uilib-radius-md, 0.5rem);
-  background-color: var(--alert-bg, var(--uilib-surface, #fff));
+  border-radius: var(--uilib-radius-md);
+  background-color: var(--alert-bg, var(--uilib-surface));
   color: var(--alert-fg, currentColor);
 
   &-material {
-    --alert-bg: var(--uilib-surface, #fff);
+    --alert-bg: var(--uilib-surface);
   }
 
   &-bootstrap {
-    --alert-bg: var(--uilib-color-primary-50, #eef2ff);
+    --alert-bg: var(--uilib-color-primary-50);
   }
 
   &-minimal {

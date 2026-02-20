@@ -1,0 +1,11 @@
+@use './theme-mixins' as *;
+
+/**
+ * Light Theme CSS Variables (explicit)
+ * Use [data-theme="light"] to force light mode
+ */
+
+[data-theme="light"] {
+  @include light-theme-vars;
+}
+

@@ -1,0 +1,148 @@
+// Theme variable mixins for light and dark modes.
+
+@mixin dark-theme-vars {
+  // Surface colors
+  --uilib-surface: #1e1e1e;
+  --uilib-surface-alt: #232323;
+  --uilib-page-bg: #121212;
+  --uilib-page-bg-alt: #1e1e1e;
+
+  // Text colors
+  --uilib-page-fg: rgba(255, 255, 255, 0.87);
+  --uilib-text-secondary: rgba(255, 255, 255, 0.60);
+  --uilib-text-disabled: rgba(255, 255, 255, 0.38);
+
+  // Border colors
+  --uilib-border: rgba(255, 255, 255, 0.12);
+  --uilib-border-light: rgba(255, 255, 255, 0.08);
+
+  // Shadows (more subtle in dark mode)
+  --uilib-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --uilib-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --uilib-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+
+  // Focus ring (more visible on dark)
+  --uilib-focus-ring: 0 0 0 3px rgba(144, 202, 249, 0.4);
+
+  // =========================================
+  // Component-specific overrides
+  // =========================================
+
+  // Button
+  --uilib-button-ghost-hover-bg: rgba(255, 255, 255, 0.08);
+  --uilib-button-ghost-active-bg: rgba(255, 255, 255, 0.12);
+
+  // Card
+  --uilib-card-bg: #1e1e1e;
+  --uilib-card-bg-hover: #232323;
+  --uilib-card-border: rgba(255, 255, 255, 0.12);
+  --uilib-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+
+  // Input
+  --uilib-input-bg: #1e1e1e;
+  --uilib-input-border: rgba(255, 255, 255, 0.23);
+  --uilib-input-border-hover: rgba(255, 255, 255, 0.4);
+  --uilib-input-border-focus: var(--uilib-color-primary-300);
+  --uilib-input-placeholder: rgba(255, 255, 255, 0.38);
+
+  // Select
+  --uilib-select-bg: #1e1e1e;
+  --uilib-select-border: rgba(255, 255, 255, 0.23);
+  --uilib-select-dropdown-bg: #252525;
+  --uilib-select-option-hover: rgba(255, 255, 255, 0.08);
+  --uilib-select-option-selected: rgba(144, 202, 249, 0.16);
+
+  // Checkbox
+  --uilib-checkbox-bg: transparent;
+  --uilib-checkbox-border: rgba(255, 255, 255, 0.6);
+  --uilib-checkbox-bg-checked: var(--uilib-color-primary-300);
+
+  // Accordion
+  --uilib-accordion-bg: #1e1e1e;
+  --uilib-accordion-header-bg: #232323;
+  --uilib-accordion-header-bg-hover: #272727;
+  --uilib-accordion-border: rgba(255, 255, 255, 0.12);
+
+  // Tabs
+  --uilib-tabs-bg: transparent;
+  --uilib-tabs-border: rgba(255, 255, 255, 0.12);
+  --uilib-tabs-indicator: var(--uilib-color-primary-300);
+  --uilib-tab-hover-bg: rgba(255, 255, 255, 0.08);
+
+  // Badge
+  --uilib-badge-subtle-bg: rgba(255, 255, 255, 0.08);
+}
+
+@mixin light-theme-vars {
+  // Surface colors
+  --uilib-surface: #ffffff;
+  --uilib-surface-alt: #f1f3f5;
+  --uilib-page-bg: #f7f7f9;
+  --uilib-page-bg-alt: #ffffff;
+
+  // Text colors
+  --uilib-page-fg: #1f2933;
+  --uilib-text-secondary: #5f6c80;
+  --uilib-text-disabled: #9aa4b5;
+
+  // Border colors
+  --uilib-border: #e0e0e0;
+  --uilib-border-light: #eeeeee;
+
+  // Shadows
+  --uilib-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --uilib-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.16);
+  --uilib-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+  // Focus ring
+  --uilib-focus-ring: 0 0 0 3px rgba(25, 118, 210, 0.3);
+
+  // =========================================
+  // Component-specific overrides
+  // =========================================
+
+  // Button
+  --uilib-button-ghost-hover-bg: rgba(0, 0, 0, 0.04);
+  --uilib-button-ghost-active-bg: rgba(0, 0, 0, 0.08);
+
+  // Card
+  --uilib-card-bg: #ffffff;
+  --uilib-card-bg-hover: #f1f3f5;
+  --uilib-card-border: #e0e0e0;
+  --uilib-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+  // Input
+  --uilib-input-bg: #ffffff;
+  --uilib-input-border: rgba(0, 0, 0, 0.12);
+  --uilib-input-border-hover: rgba(0, 0, 0, 0.2);
+  --uilib-input-border-focus: var(--uilib-color-primary-600);
+  --uilib-input-placeholder: rgba(0, 0, 0, 0.38);
+
+  // Select
+  --uilib-select-bg: #ffffff;
+  --uilib-select-border: rgba(0, 0, 0, 0.12);
+  --uilib-select-dropdown-bg: #ffffff;
+  --uilib-select-option-hover: rgba(0, 0, 0, 0.04);
+  --uilib-select-option-selected: rgba(25, 118, 210, 0.12);
+
+  // Checkbox
+  --uilib-checkbox-bg: transparent;
+  --uilib-checkbox-border: rgba(0, 0, 0, 0.6);
+  --uilib-checkbox-bg-checked: var(--uilib-color-primary-600);
+
+  // Accordion
+  --uilib-accordion-bg: #ffffff;
+  --uilib-accordion-header-bg: #f1f3f5;
+  --uilib-accordion-header-bg-hover: #e9ecef;
+  --uilib-accordion-border: rgba(0, 0, 0, 0.12);
+
+  // Tabs
+  --uilib-tabs-bg: transparent;
+  --uilib-tabs-border: rgba(0, 0, 0, 0.12);
+  --uilib-tabs-indicator: var(--uilib-color-primary-600);
+  --uilib-tab-hover-bg: rgba(0, 0, 0, 0.04);
+
+  // Badge
+  --uilib-badge-subtle-bg: rgba(0, 0, 0, 0.06);
+}
+

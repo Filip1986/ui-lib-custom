@@ -1,11 +1,11 @@
 .login-form {
   width: 100%;
   color: var(--uilib-page-fg);
-  --login-card-bg: var(--uilib-card-bg, #fff);
-  --login-card-text: var(--uilib-card-text-color, #0f172a);
-  --login-card-border: var(--uilib-card-border, #e2e8f0);
-  --login-surface: var(--uilib-surface, #fff);
-  --login-muted: var(--uilib-muted, #6b7280);
+  --login-card-bg: var(--uilib-card-bg);
+  --login-card-text: var(--uilib-card-text-color);
+  --login-card-border: var(--uilib-card-border);
+  --login-surface: var(--uilib-surface);
+  --login-muted: var(--uilib-muted);
 }
 
 .login-card {
@@ -53,7 +53,7 @@
   .link {
     background: transparent;
     border: none;
-    color: var(--uilib-button-primary-bg, #1e88e5);
+    color: var(--uilib-button-primary-bg);
     text-align: left;
     cursor: pointer;
     padding: 0;
@@ -105,16 +105,16 @@
   min-height: 75vh;
   background: var(--login-surface);
   border: 1px solid var(--login-card-border);
-  border-radius: var(--uilib-radius-lg, 12px);
+  border-radius: var(--uilib-radius-lg);
   overflow: hidden;
 
   .branding {
     background: linear-gradient(
       135deg,
-      var(--uilib-color-primary-600, #1e88e5),
-      var(--uilib-color-primary-700, #1976d2)
+      var(--uilib-color-primary-600),
+      var(--uilib-color-primary-700)
     );
-    color: #fff;
+    color: var(--uilib-color-neutral-50);
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -137,7 +137,7 @@
 }
 
 .minimal-card {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--uilib-card-shadow, var(--uilib-shadow-lg, none));
   border: 1px solid var(--login-card-border);
 }
 

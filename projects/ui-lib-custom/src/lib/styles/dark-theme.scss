@@ -1,0 +1,21 @@
+@use './theme-mixins' as *;
+
+/**
+ * Dark Theme CSS Variables
+ * Apply via [data-theme="dark"] on html or body element
+ */
+
+[data-theme="dark"] {
+  @include dark-theme-vars;
+}
+
+/**
+ * Auto dark mode based on system preference
+ * Only applies when no explicit data-theme is set
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme]) {
+    @include dark-theme-vars;
+  }
+}
+

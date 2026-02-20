@@ -1,0 +1,138 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Dark Mode</h1>
+    <p class="doc-description">Complete dark mode support with system preference detection.</p>
+  </div>
+
+  <ui-lib-card [showHeader]="true" [showFooter]="false" id="mode" data-doc-anchor>
+    <div card-header>Theme Mode</div>
+
+    <div class="mode-selector">
+      <div class="mode-info">
+        <p>
+          Current mode: <strong>{{ mode() }}</strong>
+        </p>
+        <p>
+          Effective theme: <strong>{{ effectiveTheme() }}</strong>
+        </p>
+        <p>
+          System preference: <strong>{{ systemPreference() }}</strong>
+        </p>
+      </div>
+
+      <div class="mode-buttons">
+        <ui-lib-button
+          [appearance]="mode() === 'light' ? 'solid' : 'outline'"
+          (click)="setMode('light')"
+        >
+          Light
+        </ui-lib-button>
+
+        <ui-lib-button
+          [appearance]="mode() === 'dark' ? 'solid' : 'outline'"
+          (click)="setMode('dark')"
+        >
+          Dark
+        </ui-lib-button>
+
+        <ui-lib-button
+          [appearance]="mode() === 'auto' ? 'solid' : 'outline'"
+          (click)="setMode('auto')"
+        >
+          Auto
+        </ui-lib-button>
+      </div>
+
+      <p class="mode-description">
+        <strong>Auto</strong> follows your system preference (prefers-color-scheme media query).
+      </p>
+    </div>
+  </ui-lib-card>
+
+  <ui-lib-card [showHeader]="true" [showFooter]="false" id="showcase" data-doc-anchor>
+    <div card-header>Component Showcase</div>
+
+    <div class="component-showcase">
+      <section class="showcase-section">
+        <h3>Buttons</h3>
+        <div class="showcase-row">
+          <ui-lib-button color="primary">Primary</ui-lib-button>
+          <ui-lib-button color="secondary">Secondary</ui-lib-button>
+          <ui-lib-button color="success">Success</ui-lib-button>
+          <ui-lib-button color="danger">Danger</ui-lib-button>
+          <ui-lib-button appearance="outline">Outline</ui-lib-button>
+          <ui-lib-button appearance="ghost">Ghost</ui-lib-button>
+        </div>
+      </section>
+
+      <section class="showcase-section">
+        <h3>Badges</h3>
+        <div class="showcase-row">
+          <ui-lib-badge color="primary">Primary</ui-lib-badge>
+          <ui-lib-badge color="success">Success</ui-lib-badge>
+          <ui-lib-badge color="danger">Error</ui-lib-badge>
+          <ui-lib-badge variant="outline">Outline</ui-lib-badge>
+          <ui-lib-badge variant="subtle">Subtle</ui-lib-badge>
+        </div>
+      </section>
+
+      <section class="showcase-section">
+        <h3>Form Controls</h3>
+        <div class="showcase-form">
+          <ui-lib-input label="Email" placeholder="Enter email" />
+          <ui-lib-input label="Password" type="password" placeholder="Enter password" />
+          <ui-lib-select [options]="selectOptions" placeholder="Select option" />
+          <ui-lib-checkbox label="Remember me" />
+        </div>
+      </section>
+
+      <section class="showcase-section">
+        <h3>Accordion</h3>
+        <ui-lib-accordion>
+          <ui-lib-accordion-panel header="Section 1">
+            Content for section 1. Demonstrates dark mode in expandable panels.
+          </ui-lib-accordion-panel>
+          <ui-lib-accordion-panel header="Section 2">
+            Content for section 2.
+          </ui-lib-accordion-panel>
+        </ui-lib-accordion>
+      </section>
+
+      <section class="showcase-section">
+        <h3>Tabs</h3>
+        <ui-lib-tabs>
+          <ui-lib-tab value="tab1" label="Tab 1"> Tab 1 content in dark mode. </ui-lib-tab>
+          <ui-lib-tab value="tab2" label="Tab 2"> Tab 2 content in dark mode. </ui-lib-tab>
+        </ui-lib-tabs>
+      </section>
+
+      <section class="showcase-section">
+        <h3>Cards</h3>
+        <div class="showcase-cards">
+          <ui-lib-card>
+            <div card-header>Card Title</div>
+            <p>Card content demonstrating dark mode styling.</p>
+          </ui-lib-card>
+          <ui-lib-card variant="bootstrap">
+            <div card-header>Bootstrap Variant</div>
+            <p>Bootstrap-styled card in dark mode.</p>
+          </ui-lib-card>
+        </div>
+      </section>
+    </div>
+  </ui-lib-card>
+
+  <ui-lib-card [showHeader]="true" [showFooter]="false" id="implementation" data-doc-anchor>
+    <div card-header>Implementation</div>
+
+    <h4>Using Theme Mode</h4>
+    <app-doc-code-snippet [code]="usageCode" language="typescript" />
+
+    <h4>CSS Variables</h4>
+    <p>All components automatically adapt to dark mode via CSS custom properties.</p>
+    <app-doc-code-snippet [code]="cssCode" language="css" />
+
+    <h4>System Preference</h4>
+    <p>Set mode to 'auto' to follow the user's system preference.</p>
+  </ui-lib-card>
+</app-doc-page-layout>
