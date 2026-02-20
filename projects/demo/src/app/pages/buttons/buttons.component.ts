@@ -34,6 +34,7 @@ import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { FormsModule } from '@angular/forms';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance' | 'examples';
 
@@ -56,6 +57,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance' | 'exampl
     FormsModule,
     DocCodeSnippetComponent,
     CodePreviewComponent,
+    VariantComparisonComponent,
   ],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',

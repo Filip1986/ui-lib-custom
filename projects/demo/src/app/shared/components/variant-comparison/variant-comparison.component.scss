@@ -1,0 +1,50 @@
+.variant-comparison {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    gap: 1rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      cursor: pointer;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .variant-column {
+    border: 1px solid var(--uilib-border);
+    border-radius: var(--uilib-radius-md);
+    overflow: hidden;
+  }
+
+  .variant-label {
+    padding: 0.5rem 1rem;
+    background: var(--uilib-page-bg-alt, var(--uilib-surface));
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--uilib-border);
+  }
+
+  .variant-content {
+    padding: 1.5rem;
+  }
+}
+
