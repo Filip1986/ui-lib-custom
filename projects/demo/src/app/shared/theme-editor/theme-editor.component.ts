@@ -45,6 +45,11 @@ export class ThemeEditorComponent {
   @ViewChild('importInput') private readonly importInput?: ElementRef<HTMLInputElement>;
 
   showPanel = signal(false);
+  exportFormat = signal<'json' | 'css' | 'scss' | 'figma'>('json');
+  showExportPreview = signal(false);
+  exportPreview = signal('');
+  exportNotice = signal('');
+  importNotice = signal('');
 
   readonly presetNames = computed(() => Object.keys(this.themeService.listBuiltInPresets()));
   readonly currentPreset = computed(() => this.themeService.preset());
@@ -332,16 +337,72 @@ export class ThemeEditorComponent {
     const file = input?.files?.[0];
     if (!file) return;
     await this.themeService.importFromJSON(file, { merge: false, apply: true, persist: true });
+    this.importNotice.set('Imported theme JSON');
     if (input) {
       input.value = '';
     }
+    setTimeout(() => this.importNotice.set(''), 2000);
   }
 
-  async exportTheme(): Promise<void> {
-    const css = this.themeService.exportAsCSS();
-    const json = this.themeService.exportAsJSON();
-    await this.copyText(css);
-    this.downloadJson(json, `theme-${this.currentPreset().name}.json`);
+  showPasteDialog(): void {
+    const text = this.docPrompt('Paste theme JSON');
+    if (!text?.trim()) {
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(text) as ThemePreset;
+      this.themeService.loadPreset(parsed, { merge: false, apply: true, persist: true });
+      this.importNotice.set('Imported theme JSON');
+      setTimeout(() => this.importNotice.set(''), 2000);
+    } catch {
+      this.importNotice.set('Invalid JSON');
+      setTimeout(() => this.importNotice.set(''), 2000);
+    }
+  }
+
+  setExportFormat(format: 'json' | 'css' | 'scss' | 'figma'): void {
+    this.exportFormat.set(format);
+    this.updateExportPreview();
+  }
+
+  updateExportPreview(): void {
+    const format = this.exportFormat();
+    switch (format) {
+      case 'scss':
+        this.exportPreview.set(this.themeService.exportAsScss());
+        break;
+      case 'css':
+        this.exportPreview.set(this.themeService.exportAsCss());
+        break;
+      case 'figma':
+        this.exportPreview.set(this.themeService.exportAsFigmaTokens());
+        break;
+      case 'json':
+      default:
+        this.exportPreview.set(this.themeService.exportAsJson());
+        break;
+    }
+  }
+
+  toggleExportPreview(): void {
+    this.showExportPreview.update((v) => !v);
+    if (this.showExportPreview()) {
+      this.updateExportPreview();
+    }
+  }
+
+  downloadTheme(): void {
+    this.themeService.downloadExport(this.exportFormat());
+  }
+
+  async copyToClipboard(): Promise<void> {
+    if (!this.exportPreview()) {
+      this.updateExportPreview();
+    }
+    await this.copyText(this.exportPreview());
+    this.exportNotice.set('Copied');
+    setTimeout(() => this.exportNotice.set(''), 1500);
   }
 
   private async copyText(text: string): Promise<void> {
@@ -356,6 +417,10 @@ export class ThemeEditorComponent {
       document.execCommand('copy');
       document.body.removeChild(textarea);
     }
+  }
+
+  private docPrompt(message: string): string | null {
+    return this.themeService.getPreset() ? window.prompt(message) : null;
   }
 
   private downloadJson(json: string, filename: string): void {

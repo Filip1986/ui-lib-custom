@@ -15,6 +15,9 @@ import {
   ThemeMode,
 } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
+import { exportThemeAsScss, ScssExportOptions } from './exporters/scss-exporter';
+import { exportThemeAsCss, CssExportOptions } from './exporters/css-exporter';
+import { exportThemeAsFigmaJson } from './exporters/figma-exporter';
 
 type LoadOptions = {
   merge?: boolean;
@@ -185,16 +188,71 @@ export class ThemeConfigService {
     return json;
   }
 
-  exportAsScss(preset: ThemePreset = this.presetSignal(), download = false): string {
-    const vars = this.mapPresetToCssVars(preset);
-    const body = Object.entries(vars)
-      .map(([name, value]) => `$${name.replace(/^--/, '')}: ${value};`)
-      .join('\n');
-    const scss = `// Generated from UI Lib theme preset\n${body}\n`;
-    if (download) {
-      saveAs('_theme-variables.scss', scss, 'text/x-scss');
+  exportAsScss(options?: ScssExportOptions): string;
+  exportAsScss(preset: ThemePreset, download?: boolean): string;
+  exportAsScss(
+    presetOrOptions: ThemePreset | ScssExportOptions = this.presetSignal(),
+    download = false
+  ): string {
+    if (this.isThemePreset(presetOrOptions)) {
+      const vars = this.mapPresetToCssVars(presetOrOptions);
+      const body = Object.entries(vars)
+        .map(([name, value]) => `$${name.replace(/^--/, '')}: ${value};`)
+        .join('\n');
+      const scss = `// Generated from UI Lib theme preset\n${body}\n`;
+      if (download) {
+        saveAs('_theme-variables.scss', scss, 'text/x-scss');
+      }
+      return scss;
     }
-    return scss;
+
+    return exportThemeAsScss(this.presetSignal(), presetOrOptions);
+  }
+
+  exportAsCss(options?: CssExportOptions): string {
+    return exportThemeAsCss(this.presetSignal(), options);
+  }
+
+  exportAsJson(): string {
+    return this.exportAsJSON(this.presetSignal(), false);
+  }
+
+  exportAsFigmaTokens(): string {
+    return exportThemeAsFigmaJson(this.presetSignal());
+  }
+
+  downloadExport(format: 'scss' | 'css' | 'json' | 'figma'): void {
+    let content: string;
+    let filename: string;
+    let mimeType: string;
+
+    const safeName = this.toFileSafeName(this.presetSignal().name);
+
+    switch (format) {
+      case 'scss':
+        content = this.exportAsScss();
+        filename = `theme-${safeName}.scss`;
+        mimeType = 'text/plain';
+        break;
+      case 'css':
+        content = this.exportAsCss();
+        filename = `theme-${safeName}.css`;
+        mimeType = 'text/css';
+        break;
+      case 'figma':
+        content = this.exportAsFigmaTokens();
+        filename = `theme-${safeName}-figma.json`;
+        mimeType = 'application/json';
+        break;
+      case 'json':
+      default:
+        content = this.exportAsJson();
+        filename = `theme-${safeName}.json`;
+        mimeType = 'application/json';
+        break;
+    }
+
+    this.triggerDownload(content, filename, mimeType);
   }
 
   saveToLocalStorage(name: string, preset: ThemePreset = this.presetSignal()): void {
@@ -258,6 +316,23 @@ export class ThemeConfigService {
     } catch {
       // ignore
     }
+  }
+
+  private triggerDownload(content: string, filename: string, mimeType: string): void {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const anchor = this.doc?.createElement('a');
+    if (!anchor) {
+      return;
+    }
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+
+  private toFileSafeName(value: string): string {
+    return value.trim().toLowerCase().replace(/\s+/g, '-');
   }
 
   private setupSystemPreferenceListener(): void {

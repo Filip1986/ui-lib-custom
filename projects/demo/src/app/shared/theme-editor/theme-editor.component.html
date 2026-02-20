@@ -172,17 +172,99 @@
     <ui-lib-icon-preview />
   </div>
 
+  <div class="export-section">
+    <div class="section-header">
+      <span class="label">Export Theme</span>
+      <button class="ghost toggle-btn" (click)="toggleExportPreview()">
+        {{ showExportPreview() ? 'Hide' : 'Show' }} Preview
+      </button>
+    </div>
+
+    <div class="export-formats">
+      <label class="format-option">
+        <input
+          type="radio"
+          name="exportFormat"
+          value="json"
+          [checked]="exportFormat() === 'json'"
+          (change)="setExportFormat('json')"
+        />
+        <span>JSON</span>
+      </label>
+      <label class="format-option">
+        <input
+          type="radio"
+          name="exportFormat"
+          value="css"
+          [checked]="exportFormat() === 'css'"
+          (change)="setExportFormat('css')"
+        />
+        <span>CSS</span>
+      </label>
+      <label class="format-option">
+        <input
+          type="radio"
+          name="exportFormat"
+          value="scss"
+          [checked]="exportFormat() === 'scss'"
+          (change)="setExportFormat('scss')"
+        />
+        <span>SCSS</span>
+      </label>
+      <label class="format-option">
+        <input
+          type="radio"
+          name="exportFormat"
+          value="figma"
+          [checked]="exportFormat() === 'figma'"
+          (change)="setExportFormat('figma')"
+        />
+        <span>Figma Tokens</span>
+      </label>
+    </div>
+
+    @if (showExportPreview()) {
+      <div class="export-preview">
+        <pre><code>{{ exportPreview() }}</code></pre>
+      </div>
+      <div class="export-actions">
+        @if (exportNotice()) {
+          <span class="export-status">{{ exportNotice() }}</span>
+        }
+        <button class="ghost copy-btn" (click)="copyToClipboard()">Copy</button>
+      </div>
+    }
+
+    <div class="export-buttons">
+      <button class="primary" (click)="downloadTheme()">
+        Download {{ exportFormat().toUpperCase() }}
+      </button>
+    </div>
+  </div>
+
+  <div class="import-section">
+    <div class="section-header">
+      <span class="label">Import Theme</span>
+    </div>
+
+    <div class="import-options">
+      <input
+        #importInput
+        class="file-input"
+        type="file"
+        accept="application/json,.json"
+        (change)="importTheme($event)"
+      />
+      <button class="ghost" (click)="openImportDialog()">Import JSON</button>
+      <button class="ghost" (click)="showPasteDialog()">Paste JSON</button>
+    </div>
+    @if (importNotice()) {
+      <div class="import-status">{{ importNotice() }}</div>
+    }
+  </div>
+
   <div class="actions">
-    <input
-      #importInput
-      class="file-input"
-      type="file"
-      accept="application/json,.json"
-      (change)="importTheme($event)"
-    />
     <button class="primary" (click)="saveTheme()">Save Theme</button>
-    <button class="ghost" (click)="openImportDialog()">Import Theme</button>
-    <button class="ghost" (click)="exportTheme()">Export Theme</button>
     <button class="ghost" (click)="resetTheme()">Reset to Default</button>
   </div>
 </div>

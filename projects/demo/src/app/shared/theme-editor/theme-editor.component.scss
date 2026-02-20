@@ -181,3 +181,73 @@ button.ghost {
   padding: 0.5rem 0.75rem;
   cursor: pointer;
 }
+
+.export-section,
+.import-section {
+  border-top: 1px solid var(--uilib-border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.toggle-btn {
+  font-size: 0.85rem;
+}
+
+.export-formats {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  flex-wrap: wrap;
+}
+
+.format-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.export-preview {
+  background: var(--uilib-surface-alt);
+  border: 1px solid var(--uilib-border);
+  border-radius: var(--uilib-radius-md, 6px);
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  max-height: 200px;
+  overflow: auto;
+
+  pre {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--uilib-page-fg);
+    white-space: pre-wrap;
+  }
+}
+
+.export-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.export-status,
+.import-status {
+  font-size: 0.8rem;
+  color: var(--uilib-muted);
+}
+
+.export-buttons,
+.import-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
