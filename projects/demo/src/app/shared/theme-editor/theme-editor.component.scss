@@ -144,6 +144,10 @@ table {
   flex-wrap: wrap;
 }
 
+.file-input {
+  display: none;
+}
+
 button.primary {
   background: var(--uilib-button-primary-bg, #1e88e5);
   color: var(--uilib-button-primary-fg, #fff);

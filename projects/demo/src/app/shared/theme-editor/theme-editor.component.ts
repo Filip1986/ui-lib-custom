@@ -6,6 +6,8 @@ import {
   effect,
   inject,
   signal,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -39,6 +41,8 @@ export class ThemeEditorComponent {
   private readonly themeService = inject(ThemeConfigService);
   private readonly googleFonts = inject(GoogleFontsService);
   private readonly fontPairings = inject(FontPairingService);
+
+  @ViewChild('importInput') private readonly importInput?: ElementRef<HTMLInputElement>;
 
   showPanel = signal(false);
 
@@ -307,6 +311,29 @@ export class ThemeEditorComponent {
     const base = this.themeService.listBuiltInPresets()['light'] as ThemePreset | undefined;
     if (base) {
       this.themeService.loadPreset(base, { merge: false, apply: true, persist: true });
+    }
+  }
+
+  saveTheme(): void {
+    this.themeService.saveCurrentPreset();
+  }
+
+  resetTheme(): void {
+    this.themeService.clearStoredPreset();
+    this.resetToDefault();
+  }
+
+  openImportDialog(): void {
+    this.importInput?.nativeElement?.click();
+  }
+
+  async importTheme(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement | null;
+    const file = input?.files?.[0];
+    if (!file) return;
+    await this.themeService.importFromJSON(file, { merge: false, apply: true, persist: true });
+    if (input) {
+      input.value = '';
     }
   }
 

@@ -200,6 +200,21 @@ export class ThemeConfigService {
     return this.mapPresetToCssVars(source);
   }
 
+  saveCurrentPreset(): void {
+    this.persistPreset(this.presetSignal());
+  }
+
+  clearStoredPreset(): void {
+    if (!this.hasLocalStorage()) {
+      return;
+    }
+    try {
+      this.doc?.defaultView?.localStorage?.removeItem(this.storageKey);
+    } catch {
+      // ignore
+    }
+  }
+
   private mapPresetToCssVars(preset: ThemePreset): Record<string, string> {
     const vars: Record<string, string> = {};
     const set = (name: string, value: string | undefined) => {

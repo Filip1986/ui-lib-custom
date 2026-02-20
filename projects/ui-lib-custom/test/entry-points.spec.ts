@@ -31,7 +31,7 @@ describe('Secondary Entry Points', (): void => {
 
   it('should import from core', async (): Promise<void> => {
     const mod: typeof import('ui-lib-custom/core') = await import('ui-lib-custom/core');
-    expect(mod.SPACING_TOKENS).toBeDefined();
+    expect(mod.ICON_SIZES).toBeDefined();
   });
 
   it('should import from icon', async (): Promise<void> => {

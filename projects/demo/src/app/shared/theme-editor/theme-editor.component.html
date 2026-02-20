@@ -173,7 +173,16 @@
   </div>
 
   <div class="actions">
-    <button class="primary" (click)="exportTheme()">Export Theme</button>
-    <button class="ghost" (click)="resetToDefault()">Reset to Default</button>
+    <input
+      #importInput
+      class="file-input"
+      type="file"
+      accept="application/json,.json"
+      (change)="importTheme($event)"
+    />
+    <button class="primary" (click)="saveTheme()">Save Theme</button>
+    <button class="ghost" (click)="openImportDialog()">Import Theme</button>
+    <button class="ghost" (click)="exportTheme()">Export Theme</button>
+    <button class="ghost" (click)="resetTheme()">Reset to Default</button>
   </div>
 </div>
