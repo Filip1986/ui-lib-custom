@@ -143,3 +143,9 @@
     transform: rotate(360deg);
   }
 }
+
+.ui-select-option--active {
+  background: var(--uilib-select-option-hover);
+  outline: 2px solid var(--uilib-color-primary-500);
+  outline-offset: -2px;
+}

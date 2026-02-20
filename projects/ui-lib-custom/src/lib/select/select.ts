@@ -40,6 +40,20 @@ let selectIdCounter = 0;
       multi: true,
     },
   ],
+  host: {
+    role: 'combobox',
+    '[attr.aria-expanded]': 'open() ? "true" : "false"',
+    '[attr.aria-haspopup]': '"listbox"',
+    '[attr.aria-controls]': 'listboxId() || null',
+    '[attr.aria-activedescendant]': 'activeDescendantId() || null',
+    '[attr.aria-label]': 'ariaLabel() || null',
+    '[attr.aria-labelledby]': 'resolvedLabelledBy() || null',
+    '[attr.aria-invalid]': 'invalid() ? "true" : null',
+    '[attr.aria-disabled]': 'isDisabled() || loading() ? "true" : null',
+    '[attr.aria-required]': 'required() ? "true" : null',
+    '[attr.tabindex]': 'isDisabled() || loading() ? -1 : 0',
+    '(keydown)': 'onKeydown($event)',
+  },
 })
 export class UiLibSelect implements ControlValueAccessor {
   options = input<SelectOption[]>([]);
@@ -51,9 +65,14 @@ export class UiLibSelect implements ControlValueAccessor {
   loading = input<boolean>(false);
   optionTemplate = input<TemplateRef<any> | null>(null);
   label = input<string>('');
+  ariaLabel = input<string | null>(null);
+  ariaLabelledBy = input<string | null>(null);
+  invalid = input<boolean>(false);
+  required = input<boolean>(false);
 
   @ViewChild('panel', { static: false }) panel?: ElementRef<HTMLDivElement>;
   @ViewChild('inputEl', { static: false }) inputEl?: ElementRef<HTMLInputElement>;
+  @ViewChild('controlEl', { static: false }) controlEl?: ElementRef<HTMLDivElement>;
 
   readonly open = signal(false);
   readonly filter = signal('');
@@ -65,8 +84,20 @@ export class UiLibSelect implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   private readonly controlIdValue = `ui-lib-select-${++selectIdCounter}`;
-  readonly controlId = computed(() => this.controlIdValue);
-  readonly panelId = computed(() => `${this.controlIdValue}-panel`);
+  readonly controlId = computed((): string => this.controlIdValue);
+  readonly labelId = computed((): string => `${this.controlIdValue}-label`);
+  readonly listboxId = computed((): string => `${this.controlIdValue}-listbox`);
+
+  readonly activeDescendantId = computed((): string | null => {
+    const index: number = this.focusedIndex();
+    if (index < 0 || !this.open()) return null;
+    return `${this.controlIdValue}-option-${index}`;
+  });
+
+  readonly resolvedLabelledBy = computed((): string | null => {
+    if (this.ariaLabelledBy()) return this.ariaLabelledBy();
+    return this.label() ? this.labelId() : null;
+  });
 
   readonly hostClasses = computed(() => {
     const classes = ['ui-select', `ui-select-${this.variant()}`];
@@ -81,7 +112,7 @@ export class UiLibSelect implements ControlValueAccessor {
     const vals = this.internalValue();
     const opts = this.options();
     if (!vals || vals.length === 0) return '';
-    const labels = vals.map((v) => opts.find((o) => o.value === v)?.label ?? String(v));
+    const labels = vals.map((v) => this.getOptionLabel(opts.find((o) => o.value === v) ?? v));
     return labels.join(', ');
   });
 
@@ -125,14 +156,26 @@ export class UiLibSelect implements ControlValueAccessor {
     if (this.isDisabled() || this.loading()) return;
     this.open.update((v) => !v);
     if (this.open()) {
-      queueMicrotask(() => this.inputEl?.nativeElement?.focus());
+      this.openPanel();
+    } else {
+      this.closePanel();
     }
+  }
+
+  openPanel(): void {
+    if (this.isDisabled() || this.loading()) return;
+    this.open.set(true);
+    const selectedIndex = this.getSelectedIndex();
+    const fallbackIndex = this.findFirstEnabledIndex();
+    this.focusedIndex.set(selectedIndex >= 0 ? selectedIndex : fallbackIndex);
+    queueMicrotask(() => this.inputEl?.nativeElement?.focus());
   }
 
   closePanel(): void {
     this.open.set(false);
     this.focusedIndex.set(-1);
     this.onTouched();
+    this.el.nativeElement.focus();
   }
 
   selectOption(opt: SelectOption): void {
@@ -162,10 +205,34 @@ export class UiLibSelect implements ControlValueAccessor {
   moveFocus(delta: number): void {
     const opts = this.filteredOptions();
     if (!opts.length) return;
+    const maxIndex = opts.length - 1;
     let idx = this.focusedIndex();
-    idx = (idx + delta + opts.length) % opts.length;
-    this.focusedIndex.set(idx);
-    queueMicrotask(() => this.scrollIntoView(idx));
+    let attempts = 0;
+    let nextIndex = idx;
+
+    do {
+      nextIndex = (nextIndex + delta + opts.length) % opts.length;
+      attempts += 1;
+      if (!opts[nextIndex]?.disabled) {
+        break;
+      }
+    } while (attempts <= opts.length);
+
+    nextIndex = Math.max(0, Math.min(maxIndex, nextIndex));
+    this.focusedIndex.set(nextIndex);
+    this.scrollActiveOptionIntoView();
+  }
+
+  setActiveIndex(index: number): void {
+    const opts = this.filteredOptions();
+    if (!opts.length) return;
+    const maxIndex = opts.length - 1;
+    const next = Math.max(0, Math.min(maxIndex, index));
+    if (opts[next]?.disabled) {
+      return;
+    }
+    this.focusedIndex.set(next);
+    this.scrollActiveOptionIntoView();
   }
 
   commitFocused(): void {
@@ -178,7 +245,8 @@ export class UiLibSelect implements ControlValueAccessor {
 
   onFilter(term: string): void {
     this.filter.set(term);
-    this.focusedIndex.set(0);
+    const fallbackIndex = this.findFirstEnabledIndex();
+    this.focusedIndex.set(fallbackIndex);
   }
 
   @HostListener('document:click', ['$event'])
@@ -190,47 +258,114 @@ export class UiLibSelect implements ControlValueAccessor {
 
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent): void {
-    if (!this.open()) {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        this.togglePanel();
-      }
-      return;
-    }
+    if (this.isDisabled() || this.loading()) return;
+
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        this.moveFocus(1);
+        if (!this.open()) {
+          this.openPanel();
+        } else {
+          this.moveFocus(1);
+        }
         break;
       case 'ArrowUp':
         event.preventDefault();
-        this.moveFocus(-1);
+        if (!this.open()) {
+          this.openPanel();
+        } else {
+          this.moveFocus(-1);
+        }
         break;
       case 'Enter':
       case ' ': {
         event.preventDefault();
-        this.commitFocused();
+        if (this.open() && this.focusedIndex() >= 0) {
+          this.commitFocused();
+        } else {
+          this.openPanel();
+        }
         break;
       }
       case 'Escape':
-        this.closePanel();
+        if (this.open()) {
+          event.preventDefault();
+          this.closePanel();
+        }
+        break;
+      case 'Home':
+        if (this.open()) {
+          event.preventDefault();
+          this.setActiveIndex(0);
+        }
+        break;
+      case 'End':
+        if (this.open()) {
+          event.preventDefault();
+          this.setActiveIndex(this.filteredOptions().length - 1);
+        }
+        break;
+      default:
+        if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+          this.handleTypeahead(event.key);
+        }
         break;
     }
   }
 
-  private scrollIntoView(idx: number): void {
-    const panelEl = this.panel?.nativeElement;
-    if (!panelEl) return;
-    const item = panelEl.querySelectorAll('.ui-select-option')[idx] as HTMLElement | undefined;
-    if (item) {
-      const { offsetTop, offsetHeight } = item;
-      const { scrollTop, clientHeight } = panelEl;
-      if (offsetTop < scrollTop) {
-        panelEl.scrollTop = offsetTop;
-      } else if (offsetTop + offsetHeight > scrollTop + clientHeight) {
-        panelEl.scrollTop = offsetTop + offsetHeight - clientHeight;
+  private handleTypeahead(char: string): void {
+    const opts = this.filteredOptions();
+    if (!opts.length) return;
+    const searchChar = char.toLowerCase();
+    const startIndex = this.focusedIndex() + 1;
+
+    for (let i = 0; i < opts.length; i += 1) {
+      const index = (startIndex + i) % opts.length;
+      const option = opts[index];
+      if (option.disabled) continue;
+      const label = this.getOptionLabel(option).toLowerCase();
+      if (label.startsWith(searchChar)) {
+        this.setActiveIndex(index);
+        return;
       }
     }
+  }
+
+  private scrollActiveOptionIntoView(): void {
+    const activeId = this.activeDescendantId();
+    if (!activeId) return;
+
+    requestAnimationFrame(() => {
+      const element = document.getElementById(activeId);
+      element?.scrollIntoView({ block: 'nearest' });
+    });
+  }
+
+  private findFirstEnabledIndex(): number {
+    const opts = this.filteredOptions();
+    for (let i = 0; i < opts.length; i += 1) {
+      if (!opts[i]?.disabled) return i;
+    }
+    return -1;
+  }
+
+  private getSelectedIndex(): number {
+    const opts = this.filteredOptions();
+    const selected = this.internalValue() ?? [];
+    if (!selected.length) return -1;
+    const value = selected[0];
+    return opts.findIndex((opt) => opt.value === value);
+  }
+
+  optionIndex(opt: SelectOption): number {
+    return this.filteredOptions().indexOf(opt);
+  }
+
+  getOptionLabel(opt: SelectOption | unknown): string {
+    if (opt && typeof opt === 'object' && 'label' in opt) {
+      return String((opt as SelectOption).label ?? '');
+    }
+    return String(opt ?? '');
   }
 
   constructor(private readonly el: ElementRef<HTMLElement>) {}

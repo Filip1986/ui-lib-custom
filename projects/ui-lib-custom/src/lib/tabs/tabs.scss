@@ -93,9 +93,24 @@ ui-lib-tabs[data-scroll-arrows] {
   align-items: center;
 }
 
+ui-lib-tabs[dir='rtl'][data-scroll-arrows] {
+  grid-template-areas:
+    "next list prev"
+    "panels panels panels";
+}
+
 ui-lib-tabs[data-scroll-arrows][data-orientation='vertical'] {
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "prev"
+    "list"
+    "next"
+    "panels";
+  align-items: stretch;
+}
+
+ui-lib-tabs[dir='rtl'][data-scroll-arrows][data-orientation='vertical'] {
   grid-template-areas:
     "prev"
     "list"
@@ -211,7 +226,7 @@ ui-lib-tabs[data-scroll-arrows] .tab-scroll-next {
 }
 
 .tab-close {
-  margin-left: var(--uilib-space-1, 0.25rem);
+  margin-inline-start: var(--uilib-space-1, 0.25rem);
   border: none;
   background: transparent;
   cursor: pointer;
@@ -239,6 +254,16 @@ ui-lib-tabs[data-scroll-arrows] .tab-scroll-next {
   right: var(--uilib-tabs-indicator-offset-resolved);
   top: 0;
   width: var(--uilib-tabs-indicator-height-resolved);
+}
+
+.ui-tabs--rtl.tabs-orientation-horizontal .tab-indicator {
+  left: auto;
+  right: 0;
+}
+
+.ui-tabs--rtl .tab-scroll-prev,
+.ui-tabs--rtl .tab-scroll-next {
+  justify-self: stretch;
 }
 
 .tab-panels {

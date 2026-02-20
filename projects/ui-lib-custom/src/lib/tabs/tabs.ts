@@ -16,6 +16,7 @@ import {
   AfterViewInit,
   ViewEncapsulation,
   Signal,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
@@ -64,12 +65,17 @@ interface ScrollMetrics {
   host: {
     '[attr.data-scroll-arrows]': 'shouldShowScrollButtons() ? true : null',
     '[attr.data-orientation]': 'orientation()',
+    '[attr.dir]': 'hostDir() || null',
+    '[class.ui-tabs--rtl]': 'isRtl() ? true : null',
   },
 })
 export class Tabs implements OnDestroy, AfterViewInit {
   private static nextId = 0;
   readonly uid = `ui-lib-tabs-${++Tabs.nextId}`;
 
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
+
+  dir = input<'ltr' | 'rtl' | 'auto'>('auto');
   variant = input<TabsVariant>('material');
   size = input<TabsSize>('medium');
   orientation = input<TabsOrientation>('horizontal');
@@ -116,6 +122,23 @@ export class Tabs implements OnDestroy, AfterViewInit {
   );
   private readonly isNavigationMode = computed<boolean>(() => this.mode() === 'navigation');
   private readonly tabListId = computed<string>(() => `${this.uid}-tablist`);
+  protected readonly hostDir = computed<'ltr' | 'rtl' | null>(() => {
+    const explicit = this.dir();
+    return explicit === 'auto' ? null : explicit;
+  });
+  protected readonly isRtl = computed<boolean>(() => {
+    const explicit = this.dir();
+    if (explicit !== 'auto') {
+      return explicit === 'rtl';
+    }
+
+    const list = this.tabList?.nativeElement ?? this.elementRef.nativeElement;
+    if (!list || typeof getComputedStyle === 'undefined') {
+      return false;
+    }
+
+    return getComputedStyle(list).direction === 'rtl';
+  });
 
   private indicatorStyle = signal<{ transform: string; width?: string; height?: string } | null>(
     null
@@ -206,7 +229,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   private scrollStateRaf: number | null = null;
   private scrollIntoViewRaf: number | null = null;
   private resizeObserver: ResizeObserver | null = null;
-  private isRtl = false;
+  private scrollIsRtl = false;
   private rtlScrollAxis: RtlScrollAxis = 'default';
 
   private readonly onTabListScroll: () => void = () => {
@@ -400,8 +423,9 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
 
     const horizontal = this.orientation() === 'horizontal';
-    const forward = horizontal ? key === 'ArrowRight' : key === 'ArrowDown';
-    const backward = horizontal ? key === 'ArrowLeft' : key === 'ArrowUp';
+    const rtl = this.isRtl();
+    const forward = horizontal ? key === (rtl ? 'ArrowLeft' : 'ArrowRight') : key === 'ArrowDown';
+    const backward = horizontal ? key === (rtl ? 'ArrowRight' : 'ArrowLeft') : key === 'ArrowUp';
 
     if (forward) {
       event.preventDefault();
@@ -497,9 +521,18 @@ export class Tabs implements OnDestroy, AfterViewInit {
     const horizontal: boolean = this.orientation() === 'horizontal';
 
     if (horizontal) {
-      const left: number = btnRect.left - listRect.left + list.scrollLeft;
+      const max: number = Math.max(0, list.scrollWidth - list.clientWidth);
+      const scrollPos: number = this.getNormalizedScrollPosition(
+        list,
+        this.isRtl(),
+        this.rtlScrollAxis,
+        max
+      );
+      const offset: number = this.isRtl()
+        ? listRect.right - btnRect.right + scrollPos
+        : btnRect.left - listRect.left + scrollPos;
       this.indicatorStyle.set({
-        transform: `translateX(${left}px)`,
+        transform: `translateX(${offset}px)`,
         width: `${btnRect.width}px`,
       });
     } else {
@@ -548,12 +581,18 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   /** Icon name for the previous scroll button. */
   scrollPrevIcon(): SemanticIcon {
-    return this.orientation() === 'vertical' ? 'chevron-up' : 'chevron-left';
+    if (this.orientation() === 'vertical') {
+      return 'chevron-up';
+    }
+    return this.isRtl() ? 'chevron-right' : 'chevron-left';
   }
 
   /** Icon name for the next scroll button. */
   scrollNextIcon(): SemanticIcon {
-    return this.orientation() === 'vertical' ? 'chevron-down' : 'chevron-right';
+    if (this.orientation() === 'vertical') {
+      return 'chevron-down';
+    }
+    return this.isRtl() ? 'chevron-left' : 'chevron-right';
   }
 
   /** Scrolls the tab list backward by one step. */
@@ -652,16 +691,16 @@ export class Tabs implements OnDestroy, AfterViewInit {
       return;
     }
 
-    const isRtl: boolean = this.readIsRtl(list);
-    if (isRtl !== this.isRtl) {
-      this.isRtl = isRtl;
+    const isRtl: boolean = this.isRtl();
+    if (isRtl !== this.scrollIsRtl) {
+      this.scrollIsRtl = isRtl;
       this.rtlScrollAxis = isRtl ? this.detectRtlScrollAxis(list) : 'default';
     }
 
     const metrics: ScrollMetrics = this.computeScrollMetrics(
       list,
       this.scrollAxis(),
-      this.isRtl,
+      this.scrollIsRtl,
       this.rtlScrollAxis
     );
 
@@ -753,13 +792,14 @@ export class Tabs implements OnDestroy, AfterViewInit {
     const metrics: ScrollMetrics = this.computeScrollMetrics(
       list,
       axis,
-      this.isRtl,
+      this.scrollIsRtl,
       this.rtlScrollAxis
     );
-    const delta: number = direction === 'prev' ? -step : step;
+    const baseDelta: number = direction === 'prev' ? -step : step;
+    const delta: number = this.isRtl() && axis === 'horizontal' ? -baseDelta : baseDelta;
     const next: number = Math.min(Math.max(0, metrics.position + delta), metrics.max);
 
-    this.setNormalizedScrollPosition(list, axis, next, this.isRtl, this.rtlScrollAxis);
+    this.setNormalizedScrollPosition(list, axis, next, this.scrollIsRtl, this.rtlScrollAxis);
     this.scheduleScrollStateUpdate();
   }
 

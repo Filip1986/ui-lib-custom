@@ -581,4 +581,18 @@
       </ul>
     </ui-lib-card>
   }
+
+  <ui-lib-card [showHeader]="true" [showFooter]="false">
+    <div card-header>RTL Tabs</div>
+    <app-doc-demo-viewport>
+      <section class="doc-demo rtl-demo" dir="rtl">
+        <h3>RTL Mode</h3>
+        <ui-lib-tabs>
+          <ui-lib-tab value="1" label="כרטיסייה 1">תוכן ראשון</ui-lib-tab>
+          <ui-lib-tab value="2" label="כרטיסייה 2">תוכן שני</ui-lib-tab>
+          <ui-lib-tab value="3" label="כרטיסייה 3">תוכן שלישי</ui-lib-tab>
+        </ui-lib-tabs>
+      </section>
+    </app-doc-demo-viewport>
+  </ui-lib-card>
 </app-doc-page-layout>

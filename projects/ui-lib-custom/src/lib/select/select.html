@@ -1,20 +1,11 @@
 <div [class]="hostClasses()">
   @if (label()) {
-    <label class="ui-select-label" [attr.for]="controlId()">
+    <label class="ui-select-label" [attr.id]="labelId()">
       <span>{{ label() }}</span>
     </label>
   }
 
-  <div
-    class="ui-select-control"
-    (click)="togglePanel()"
-    [attr.aria-disabled]="isDisabled() || loading() ? 'true' : null"
-    [attr.aria-expanded]="open()"
-    role="combobox"
-    [attr.id]="controlId()"
-    [attr.aria-controls]="panelId()"
-    tabindex="0"
-  >
+  <div class="ui-select-control" #controlEl (click)="togglePanel()">
     <div class="ui-select-value" [class.ui-select-placeholder]="!displayValue()">
       @if (displayValue()) {
         {{ displayValue() }}
@@ -44,8 +35,9 @@
     <div
       class="ui-select-panel"
       #panel
-      [id]="panelId()"
+      [id]="listboxId()"
       role="listbox"
+      [attr.aria-label]="placeholder()"
       [attr.aria-multiselectable]="multiple() ? 'true' : null"
     >
       @if (searchable()) {
@@ -56,6 +48,7 @@
             [value]="filter()"
             (input)="onFilter($any($event.target).value)"
             placeholder="Search..."
+            aria-label="Search options"
           />
         </div>
       }
@@ -67,11 +60,17 @@
         @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
           <div
             class="ui-select-option"
+            [id]="controlId() + '-option-' + optionIndex(opt)"
+            [class.ui-select-option--active]="optionIndex(opt) === focusedIndex()"
+            [class.ui-select-option--selected]="isSelected(opt)"
+            [class.ui-select-option--disabled]="opt.disabled"
             [class.selected]="isSelected(opt)"
             [class.disabled]="opt.disabled"
             (click)="selectOption(opt)"
+            (mouseenter)="setActiveIndex(optionIndex(opt))"
             role="option"
             [attr.aria-selected]="isSelected(opt)"
+            [attr.aria-disabled]="opt.disabled ? 'true' : null"
           >
             @if (optionTemplate()) {
               <ng-container
