@@ -157,6 +157,30 @@ Cards project content using attribute selectors:
 
 ---
 
+## Scoped Theming
+
+Override the theme for a specific card and its children:
+
+```html
+<!-- Dark card in light page -->
+<ui-lib-card theme="dark">
+  <p>This card uses dark theme</p>
+  <ui-lib-button>Also dark</ui-lib-button>
+</ui-lib-card>
+
+<!-- Custom colors -->
+<ui-lib-card [theme]="{ colors: { primary: '#ff5722' } }">
+  <ui-lib-button color="primary">Orange button</ui-lib-button>
+</ui-lib-card>
+
+<!-- Full preset -->
+<ui-lib-card [theme]="{ preset: customPreset }">
+  Fully customized
+</ui-lib-card>
+```
+
+---
+
 ## Accessibility
 
 ### Keyboard Interaction

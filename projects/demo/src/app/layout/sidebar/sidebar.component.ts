@@ -110,6 +110,11 @@ export class SidebarComponent {
       route: '/dark-mode',
     },
     {
+      label: 'Scoped Theming',
+      icon: 'pi pi-sitemap',
+      route: '/scoped-theming',
+    },
+    {
       label: 'Form',
       icon: 'pi pi-check-square',
       expanded: false,

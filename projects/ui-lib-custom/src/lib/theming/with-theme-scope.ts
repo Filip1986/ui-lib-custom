@@ -1,88 +1,29 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  input,
-  computed,
-  output,
-  ViewEncapsulation,
-  ElementRef,
-  inject,
-  effect,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Icon } from 'ui-lib-custom/icon';
-import { SemanticIcon } from 'ui-lib-custom/icon';
-import {
-  ThemeConfigService,
-  ThemeScopeInput,
-  ThemePreset,
-  ThemePresetColors,
-  ThemeVariant,
-} from 'ui-lib-custom/theme';
+import { Directive, ElementRef, effect, inject, input } from '@angular/core';
+import { ThemeConfigService } from './theme-config.service';
+import { ThemePreset, ThemePresetColors, ThemeVariant } from './theme-preset.interface';
+import { ThemeScopeInput } from './theme-scope.directive';
 
-export type CardVariant = 'material' | 'bootstrap' | 'minimal';
-export type CardElevation = 'none' | 'low' | 'medium' | 'high';
-
-@Component({
-  selector: 'ui-lib-card',
+/**
+ * Mixin to add theme scope capability to a component
+ * Use with host directive pattern
+ */
+@Directive({
   standalone: true,
-  imports: [CommonModule, Icon],
-  templateUrl: './card.html',
-  styleUrl: './card.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
 })
-export class Card {
-  variant = input<CardVariant>('material');
-  elevation = input<CardElevation>('medium');
-  bordered = input<boolean>(false);
-  hoverable = input<boolean>(false);
-  showHeader = input<boolean | null>(null);
-  showFooter = input<boolean | null>(null);
-  shadow = input<string | null>(null);
-  headerBg = input<string | null>(null);
-  footerBg = input<string | null>(null);
-  headerIcon = input<SemanticIcon | string | null>(null);
-  closable = input<boolean>(false);
-  subtitle = input<string | null>(null);
-
-  /** Optional scoped theme override */
-  theme = input<ThemeScopeInput>(null);
-
+export class WithThemeScopeMixin {
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly themeService = inject(ThemeConfigService);
   private readonly appliedVars = new Set<string>();
 
-  closed = output<void>();
-
-  headerVisible = computed(() => this.showHeader() !== false);
-  footerVisible = computed(() => this.showFooter() !== false);
-
-  cardClasses = computed(() => {
-    const classes = ['card', `card-${this.variant()}`, `card-elevation-${this.elevation()}`];
-
-    if (this.bordered()) {
-      classes.push('card-bordered');
-    }
-
-    if (this.hoverable()) {
-      classes.push('card-hoverable');
-    }
-
-    return classes.join(' ');
-  });
+  theme = input<ThemeScopeInput>(null);
 
   constructor() {
     effect(() => {
-      this.applyThemeScope();
+      this.applyTheme();
     });
   }
 
-  onClose() {
-    this.closed.emit();
-  }
-
-  private applyThemeScope(): void {
+  private applyTheme(): void {
     const config = this.theme();
     this.clearAppliedStyles();
 
@@ -100,8 +41,8 @@ export class Card {
       this.applyColorScheme(config.colorScheme);
     }
 
-    const basePreset: ThemePreset = config.preset ?? this.themeService.getPreset();
-    const resolvedPreset: ThemePreset = this.mergePreset(basePreset, config);
+    const basePreset = config.preset ?? this.themeService.getPreset();
+    const resolvedPreset = this.mergePreset(basePreset, config);
     if (config.preset || config.colors || config.variant) {
       this.applyVariables(this.themeService.getCssVars(resolvedPreset));
     }

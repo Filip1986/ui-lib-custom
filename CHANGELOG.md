@@ -8,10 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- 
+- Complete dark mode support with system preference detection.
+- Theme export in SCSS, CSS, and Figma Tokens formats.
+- Scoped theming via `[uiLibTheme]` directive.
+- Component-level theme inputs (Card).
+- Dark mode demo page.
+- Scoped theming demo page.
 
 ### Changed
-- 
+- All components now support dark mode.
+- ThemeConfigService now supports mode (`auto`/`light`/`dark`).
 
 ### Deprecated
 - 

@@ -56,6 +56,12 @@ Quick links:
 - 💪 **TypeScript**: Full TypeScript support with type definitions
 - 🎯 **Zero Dependencies**: No external CSS frameworks required
 
+## Theming Highlights
+
+- 🌙 **Dark Mode**: `data-theme="dark"` or `ThemeConfigService.setMode('auto' | 'light' | 'dark')`
+- 🎛️ **Scoped Theming**: `[uiLibTheme]`, `uiLibDarkTheme`, and component `theme` inputs
+- 📤 **Exports**: JSON, CSS, SCSS, and Figma Tokens formats
+
 ## Components
 
 ### Button Component

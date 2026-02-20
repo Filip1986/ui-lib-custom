@@ -100,6 +100,28 @@
   })
 ```
 
+## Theming
+
+### Dark Mode
+
+- All components support light and dark modes via CSS custom properties.
+- Use `data-theme="dark"` on `html`/`body` (or a container) for global dark mode.
+- Use `ThemeConfigService.setMode('auto' | 'light' | 'dark')` for programmatic control.
+- System preference detection uses `prefers-color-scheme` when mode is `auto`.
+
+### Theme Export
+
+- **JSON**: Full preset configuration for persistence and sharing.
+- **CSS**: CSS custom properties for runtime theming.
+- **SCSS**: SCSS variables or map output for build-time usage.
+- **Figma**: Tokens Studio-compatible JSON for design handoff.
+
+### Scoped Theming
+
+- Use `[uiLibTheme]` to scope a theme to a subtree.
+- Use `theme` input on components that expose it (e.g., `ui-lib-card`).
+- Nested scopes override parent scopes via CSS cascade.
+
 ## CSS Custom Properties Naming Convention
 
 All CSS custom properties MUST follow this pattern:

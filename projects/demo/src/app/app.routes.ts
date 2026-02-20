@@ -23,6 +23,7 @@ import { LayoutThemedLayoutsSectionComponent } from './pages/layouts/themed-layo
 import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
 import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.component';
 import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
+import { ScopedThemingComponent } from './pages/scoped-theming/scoped-theming.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -111,6 +112,11 @@ export const routes: Routes = [
     title: 'Select Buttons - UI Components Library',
   },
   { path: 'dark-mode', component: DarkModeComponent, title: 'Dark Mode - UI Library' },
+  {
+    path: 'scoped-theming',
+    component: ScopedThemingComponent,
+    title: 'Scoped Theming - UI Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];
