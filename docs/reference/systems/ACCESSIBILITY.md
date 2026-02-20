@@ -270,3 +270,28 @@ This library follows WCAG 2.1 AA standards and WAI-ARIA best practices.
 - Integration with axe-core (if applicable).
 - Accessibility unit tests.
 
+## High Contrast Mode
+
+The library supports Windows High Contrast Mode and the `forced-colors` media query.
+
+### Automatic Support
+
+Components automatically adapt when high contrast is enabled:
+- Borders become visible on all interactive elements.
+- Focus indicators are highly prominent.
+- Selection states use system colors.
+
+### Including High Contrast Styles
+
+```scss
+// In your global styles
+@import 'ui-lib-custom/styles/high-contrast';
+```
+
+### System Colors Used
+
+- `ButtonText` / `ButtonFace` - Button colors
+- `Highlight` / `HighlightText` - Selected/focused elements
+- `Canvas` / `CanvasText` - Background/text
+- `Field` / `FieldText` - Input fields
+- `GrayText` - Disabled elements

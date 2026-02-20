@@ -24,6 +24,7 @@ import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section
 import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.component';
 import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
 import { ScopedThemingComponent } from './pages/scoped-theming/scoped-theming.component';
+import { AccessibilityComponent } from './pages/accessibility/accessibility.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -117,6 +118,7 @@ export const routes: Routes = [
     component: ScopedThemingComponent,
     title: 'Scoped Theming - UI Library',
   },
+  { path: 'accessibility', component: AccessibilityComponent, title: 'Accessibility - UI Library' },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

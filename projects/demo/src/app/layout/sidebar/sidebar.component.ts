@@ -115,6 +115,11 @@ export class SidebarComponent {
       route: '/scoped-theming',
     },
     {
+      label: 'Accessibility',
+      icon: 'pi pi-universal-access',
+      route: '/accessibility',
+    },
+    {
       label: 'Form',
       icon: 'pi pi-check-square',
       expanded: false,

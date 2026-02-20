@@ -1,0 +1,251 @@
+/**
+ * High Contrast Mode Support
+ * Ensures components remain usable when system high contrast is enabled
+ */
+
+@media (forced-colors: active) {
+  /* =========================================
+   * Global Adjustments
+   * ========================================= */
+
+  button,
+  [role='button'],
+  input,
+  select,
+  textarea {
+    border: 1px solid ButtonText !important;
+  }
+
+  :focus-visible {
+    outline: 3px solid Highlight !important;
+    outline-offset: 2px !important;
+  }
+
+  /* =========================================
+   * Button Component
+   * ========================================= */
+
+  .btn,
+  ui-lib-button {
+    border: 2px solid ButtonText !important;
+    background: ButtonFace !important;
+    color: ButtonText !important;
+
+    &:hover {
+      border-color: Highlight !important;
+    }
+
+    &:focus-visible {
+      outline: 3px solid Highlight !important;
+    }
+
+    &[aria-disabled='true'],
+    &:disabled {
+      border-color: GrayText !important;
+      color: GrayText !important;
+    }
+  }
+
+  /* =========================================
+   * Card Component
+   * ========================================= */
+
+  ui-lib-card,
+  .card {
+    border: 2px solid CanvasText !important;
+    background: Canvas !important;
+
+    [card-header] {
+      border-bottom: 1px solid CanvasText !important;
+    }
+
+    [card-footer] {
+      border-top: 1px solid CanvasText !important;
+    }
+  }
+
+  /* =========================================
+   * Input Component
+   * ========================================= */
+
+  ui-lib-input,
+  .ui-input {
+    input {
+      border: 2px solid ButtonText !important;
+      background: Field !important;
+      color: FieldText !important;
+
+      &:focus {
+        border-color: Highlight !important;
+      }
+
+      &::placeholder {
+        color: GrayText !important;
+      }
+    }
+
+    label {
+      color: CanvasText !important;
+    }
+
+    .ui-input-error-text {
+      color: LinkText !important;
+    }
+  }
+
+  /* =========================================
+   * Checkbox Component
+   * ========================================= */
+
+  ui-lib-checkbox,
+  .ui-checkbox {
+    .checkbox-box {
+      border: 2px solid ButtonText !important;
+      background: Field !important;
+    }
+
+    &[aria-checked='true'] .checkbox-box {
+      background: Highlight !important;
+    }
+
+    .checkbox-icon {
+      color: HighlightText !important;
+    }
+
+    &[aria-disabled='true'] .checkbox-box {
+      border-color: GrayText !important;
+    }
+  }
+
+  /* =========================================
+   * Select Component
+   * ========================================= */
+
+  ui-lib-select,
+  .ui-select {
+    .ui-select-control {
+      border: 2px solid ButtonText !important;
+      background: Field !important;
+      color: FieldText !important;
+    }
+
+    .ui-select-panel {
+      border: 2px solid CanvasText !important;
+      background: Canvas !important;
+    }
+
+    .ui-select-option--active,
+    .ui-select-option:hover {
+      background: Highlight !important;
+      color: HighlightText !important;
+    }
+
+    .ui-select-option--selected {
+      border-inline-start: 3px solid Highlight !important;
+    }
+
+    .ui-select-option--disabled,
+    .ui-select-option.disabled {
+      color: GrayText !important;
+    }
+  }
+
+  /* =========================================
+   * Tabs Component
+   * ========================================= */
+
+  ui-lib-tabs {
+    .tab-list {
+      border-bottom: 2px solid CanvasText !important;
+    }
+
+    .tab-trigger {
+      border: 2px solid transparent !important;
+
+      &[aria-selected='true'] {
+        border-color: Highlight !important;
+        background: Highlight !important;
+        color: HighlightText !important;
+      }
+
+      &:focus-visible {
+        outline: 3px solid Highlight !important;
+      }
+
+      &[aria-disabled='true'] {
+        color: GrayText !important;
+      }
+    }
+
+    .tab-indicator {
+      display: none !important;
+    }
+  }
+
+  /* =========================================
+   * Accordion Component
+   * ========================================= */
+
+  ui-lib-accordion {
+    .accordion-panel {
+      border: 2px solid CanvasText !important;
+    }
+
+    .accordion-panel-header {
+      border: 1px solid ButtonText !important;
+
+      &:hover {
+        border-color: Highlight !important;
+      }
+
+      &[aria-expanded='true'] {
+        background: Highlight !important;
+        color: HighlightText !important;
+      }
+    }
+  }
+
+  /* =========================================
+   * Badge Component
+   * ========================================= */
+
+  ui-lib-badge,
+  .badge {
+    border: 1px solid CanvasText !important;
+    color: CanvasText !important;
+    background: Canvas !important;
+  }
+
+  /* =========================================
+   * Focus Indicators for All Components
+   * ========================================= */
+
+  [tabindex]:focus-visible,
+  [role='button']:focus-visible,
+  [role='tab']:focus-visible,
+  [role='option']:focus-visible,
+  [role='checkbox']:focus-visible {
+    outline: 3px solid Highlight !important;
+    outline-offset: 2px !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --uilib-border: #000000;
+    --uilib-border-light: #333333;
+    --uilib-text-secondary: #444444;
+    --uilib-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --uilib-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --uilib-focus-ring: 0 0 0 3px rgba(0, 0, 255, 0.7);
+  }
+}
+
+@media (prefers-contrast: less) {
+  :root {
+    --uilib-border: #cccccc;
+    --uilib-text-secondary: #777777;
+    --uilib-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
