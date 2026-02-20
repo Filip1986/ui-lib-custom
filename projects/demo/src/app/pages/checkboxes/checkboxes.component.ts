@@ -16,8 +16,9 @@ import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
-type TabKey = 'playground' | 'api-reference' | 'accessibility' | 'usage';
+type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 
 @Component({
   selector: 'app-checkboxes',
@@ -34,6 +35,7 @@ type TabKey = 'playground' | 'api-reference' | 'accessibility' | 'usage';
     DocCodeSnippetComponent,
     FormsModule,
     CodePreviewComponent,
+    VariantComparisonComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',
@@ -42,6 +44,7 @@ type TabKey = 'playground' | 'api-reference' | 'accessibility' | 'usage';
 export class CheckboxesComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
+    { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },

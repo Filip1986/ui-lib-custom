@@ -27,8 +27,15 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
-type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
+type TabKey =
+  | 'playground'
+  | 'variants'
+  | 'api-reference'
+  | 'usage'
+  | 'performance'
+  | 'accessibility';
 
 @Component({
   selector: 'app-inputs',
@@ -46,6 +53,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
     Card,
     DocCodeSnippetComponent,
     CodePreviewComponent,
+    VariantComparisonComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',
@@ -54,9 +62,11 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance';
 export class InputsComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
+    { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   activeTab = signal<TabKey>('playground');

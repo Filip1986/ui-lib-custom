@@ -19,7 +19,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
-type TabKey = 'playground' | 'api-reference' | 'usage';
+type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
 @Component({
   selector: 'app-icons-demo',
@@ -48,6 +48,7 @@ export class IconsDemoComponent {
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   activeTab = signal<TabKey>('playground');

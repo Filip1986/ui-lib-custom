@@ -19,6 +19,7 @@
       (selectedChange)="onTabChange($event.value)"
     >
       <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
@@ -224,6 +225,45 @@
           </div>
         </div>
       </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p>Compare checkbox variants with the same label and size.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-checkbox
+            variant="material"
+            [size]="size()"
+            [label]="label()"
+            [checked]="checkedPrimary"
+            (checkedChange)="onPrimaryChange($event)"
+          ></ui-lib-checkbox>
+        </div>
+
+        <div bootstrap>
+          <ui-lib-checkbox
+            variant="bootstrap"
+            [size]="size()"
+            [label]="label()"
+            [checked]="checkedPrimary"
+            (checkedChange)="onPrimaryChange($event)"
+          ></ui-lib-checkbox>
+        </div>
+
+        <div minimal>
+          <ui-lib-checkbox
+            variant="minimal"
+            [size]="size()"
+            [label]="label()"
+            [checked]="checkedPrimary"
+            (checkedChange)="onPrimaryChange($event)"
+          ></ui-lib-checkbox>
+        </div>
+      </app-variant-comparison>
     </ui-lib-card>
   }
 

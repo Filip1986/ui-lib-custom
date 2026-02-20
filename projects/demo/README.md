@@ -2,11 +2,22 @@
 
 ## Overview
 
-The demo application now features a complete routing system with a professional navigation menu. Users can:
+The demo application features a component-driven layout with live playgrounds, theme tooling, and
+code previews.
 
-- View all components on the home page with quick links
-- Navigate to individual component pages for detailed exploration
-- Use a responsive PrimeNG Menubar for navigation
+## Features
+
+- Live component demos with playground controls
+- Interactive theme editor with persistence
+- Code preview with copy support
+- Variant comparison views
+- Responsive layout and mobile-friendly tooling
+
+## Running the Demo
+
+```bash
+ng serve demo
+```
 
 ## Structure
 

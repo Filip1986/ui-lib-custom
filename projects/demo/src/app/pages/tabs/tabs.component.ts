@@ -36,6 +36,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
 interface DemoTab {
   value: TabsValue;
@@ -52,7 +53,7 @@ interface NavTabItem {
   icon: string;
 }
 
-type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
+type TabKey = 'playground' | 'variants' | 'api-reference' | 'usage' | 'accessibility';
 type PerTabLazyOption = TabsLazyMode | 'inherit';
 
 @Component({
@@ -75,6 +76,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     ThemeScopeDirective,
     DocCodeSnippetComponent,
     CodePreviewComponent,
+    VariantComparisonComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
@@ -83,6 +85,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
 export class TabsDemoComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
+    { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },

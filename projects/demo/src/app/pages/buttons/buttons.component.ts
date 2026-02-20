@@ -36,7 +36,14 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
-type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance' | 'examples';
+type TabKey =
+  | 'playground'
+  | 'variants'
+  | 'api-reference'
+  | 'usage'
+  | 'performance'
+  | 'examples'
+  | 'accessibility';
 
 @Component({
   selector: 'app-buttons',
@@ -66,10 +73,12 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'performance' | 'exampl
 export class ButtonsComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
+    { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
     { id: 'examples', label: 'Examples' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   activeTab = signal<TabKey>('playground');

@@ -104,3 +104,34 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
+
+.theme-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--uilib-topbar-border, #dee2e6);
+  background: var(--uilib-topbar-hover, #f8f9fa);
+  font-size: 0.85rem;
+  text-transform: capitalize;
+
+  .theme-name {
+    font-weight: 600;
+  }
+
+  .theme-variant {
+    color: var(--uilib-muted, #6b7280);
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar-right {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .theme-indicator {
+    order: -1;
+  }
+}

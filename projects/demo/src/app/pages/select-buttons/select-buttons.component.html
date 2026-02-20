@@ -95,6 +95,34 @@
 
     <section id="variants">
       <h3>Variants</h3>
+      <ui-lib-card class="variant-compare-card">
+        <app-variant-comparison>
+          <div material>
+            <ui-lib-select-button
+              [options]="variantOptions"
+              variant="material"
+              [(value)]="materialValue"
+            />
+          </div>
+
+          <div bootstrap>
+            <ui-lib-select-button
+              [options]="variantOptions"
+              variant="bootstrap"
+              [(value)]="bootstrapValue"
+            />
+          </div>
+
+          <div minimal>
+            <ui-lib-select-button
+              [options]="variantOptions"
+              variant="minimal"
+              [(value)]="minimalValue"
+            />
+          </div>
+        </app-variant-comparison>
+      </ui-lib-card>
+
       <ui-lib-grid minColumnWidth="260px" [spacing]="4">
         <ui-lib-card>
           <p class="section-label">Material</p>
@@ -205,11 +233,18 @@
           </tbody>
         </table>
       </ui-lib-card>
+    </section>
+
+    <section id="accessibility">
+      <h3>Accessibility</h3>
       <ui-lib-card>
-        <ui-lib-stack [gap]="2">
-          <h4>Usage Snippet</h4>
-          <app-doc-code-snippet [code]="snippets.usage" language="ts" />
-        </ui-lib-stack>
+        <ul class="doc-list">
+          <li>Use clear labels for each option and avoid icon-only buttons without text.</li>
+          <li>
+            Ensure selected state is conveyed both visually and via <code>aria-pressed</code>.
+          </li>
+          <li>For multi-select, announce changes in selection count where possible.</li>
+        </ul>
       </ui-lib-card>
     </section>
   </div>

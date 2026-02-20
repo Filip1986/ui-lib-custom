@@ -22,6 +22,7 @@
       (selectedChange)="onTabChange($event.value)"
     >
       <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
@@ -399,6 +400,39 @@
         </app-doc-demo-viewport>
       </ui-lib-card>
     </div>
+  }
+
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p>Compare the three tab variants with a shared tab set.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-tabs variant="material">
+            <ui-lib-tab label="Home">Home</ui-lib-tab>
+            <ui-lib-tab label="Profile">Profile</ui-lib-tab>
+            <ui-lib-tab label="Billing">Billing</ui-lib-tab>
+          </ui-lib-tabs>
+        </div>
+
+        <div bootstrap>
+          <ui-lib-tabs variant="bootstrap">
+            <ui-lib-tab label="Home">Home</ui-lib-tab>
+            <ui-lib-tab label="Profile">Profile</ui-lib-tab>
+            <ui-lib-tab label="Billing">Billing</ui-lib-tab>
+          </ui-lib-tabs>
+        </div>
+
+        <div minimal>
+          <ui-lib-tabs variant="minimal">
+            <ui-lib-tab label="Home">Home</ui-lib-tab>
+            <ui-lib-tab label="Profile">Profile</ui-lib-tab>
+            <ui-lib-tab label="Billing">Billing</ui-lib-tab>
+          </ui-lib-tabs>
+        </div>
+      </app-variant-comparison>
+    </ui-lib-card>
   }
 
   @if (activeTab() === 'api-reference') {

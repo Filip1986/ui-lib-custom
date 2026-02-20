@@ -19,6 +19,8 @@ export class App {
   theme = computed<'light' | 'dark' | 'brand-example'>(
     () => this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
   );
+  themeName = computed(() => this.themeService.preset().name);
+  themeVariant = computed(() => this.themeService.preset().variant ?? 'material');
   savedThemes = this.themeService.savedThemes;
 
   constructor() {

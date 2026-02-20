@@ -23,9 +23,11 @@
       (selectedChange)="onTabChange($event.value)"
     >
       <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
+      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
     </ui-lib-tabs>
   </div>
 
@@ -294,6 +296,54 @@
     </ui-lib-card>
   }
 
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p>Compare the three card variants using the same content and elevation.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-card
+            variant="material"
+            [elevation]="elevation()"
+            [showHeader]="showHeader()"
+            [showFooter]="showFooter()"
+          >
+            <div card-header>Material</div>
+            {{ body() }}
+            <div card-footer>Footer</div>
+          </ui-lib-card>
+        </div>
+
+        <div bootstrap>
+          <ui-lib-card
+            variant="bootstrap"
+            [elevation]="elevation()"
+            [showHeader]="showHeader()"
+            [showFooter]="showFooter()"
+          >
+            <div card-header>Bootstrap</div>
+            {{ body() }}
+            <div card-footer>Footer</div>
+          </ui-lib-card>
+        </div>
+
+        <div minimal>
+          <ui-lib-card
+            variant="minimal"
+            [elevation]="elevation()"
+            [showHeader]="showHeader()"
+            [showFooter]="showFooter()"
+          >
+            <div card-header>Minimal</div>
+            {{ body() }}
+            <div card-footer>Footer</div>
+          </ui-lib-card>
+        </div>
+      </app-variant-comparison>
+    </ui-lib-card>
+  }
+
   @if (activeTab() === 'api-reference') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
       <div card-header>API Reference</div>
@@ -356,6 +406,17 @@
         <li><strong>Design Tokens</strong> - uses centralized design system</li>
         <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
         <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'accessibility') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
+      <div card-header>Accessibility</div>
+      <ul class="doc-list">
+        <li>Use semantic headings inside <code>card-header</code> for structure.</li>
+        <li>Ensure any interactive elements in headers/footers are keyboard reachable.</li>
+        <li>Provide sufficient contrast between card background and text.</li>
       </ul>
     </ui-lib-card>
   }

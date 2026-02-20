@@ -252,10 +252,12 @@
       (selectedChange)="onTabChange($event.value)"
     >
       <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
       <ui-lib-tab value="examples" label="Examples"></ui-lib-tab>
+      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
     </ui-lib-tabs>
   </div>
 
@@ -288,6 +290,51 @@
           />
         </div>
       </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p>Compare the three button variants side-by-side with the same configuration.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-button
+            variant="material"
+            [appearance]="appearance()"
+            [color]="color()"
+            [size]="size()"
+            [icon]="demoIcon()"
+          >
+            {{ label() }}
+          </ui-lib-button>
+        </div>
+
+        <div bootstrap>
+          <ui-lib-button
+            variant="bootstrap"
+            [appearance]="appearance()"
+            [color]="color()"
+            [size]="size()"
+            [icon]="demoIcon()"
+          >
+            {{ label() }}
+          </ui-lib-button>
+        </div>
+
+        <div minimal>
+          <ui-lib-button
+            variant="minimal"
+            [appearance]="appearance()"
+            [color]="color()"
+            [size]="size()"
+            [icon]="demoIcon()"
+          >
+            {{ label() }}
+          </ui-lib-button>
+        </div>
+      </app-variant-comparison>
     </ui-lib-card>
   }
 
@@ -560,6 +607,18 @@
           </section>
         </ui-lib-stack>
       </div>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'accessibility') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
+      <div card-header>Accessibility</div>
+      <ul class="doc-list">
+        <li>Keyboard: Tab to focus, Enter/Space activate the button.</li>
+        <li>Use <code>aria-label</code> for icon-only buttons.</li>
+        <li>Set <code>disabled</code> to prevent focus and interaction.</li>
+        <li>When loading, consider <code>aria-busy="true"</code> for screen readers.</li>
+      </ul>
     </ui-lib-card>
   }
 </app-doc-page-layout>

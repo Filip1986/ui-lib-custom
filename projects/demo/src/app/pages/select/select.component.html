@@ -19,9 +19,11 @@
       (selectedChange)="onTabChange($event.value)"
     >
       <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
+      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
     </ui-lib-tabs>
   </div>
 
@@ -201,6 +203,48 @@
     </ui-lib-card>
   }
 
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p>Compare select variants using the same options and behavior.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-select
+            label="Options"
+            [options]="options"
+            variant="material"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
+            [placeholder]="placeholder()"
+          ></ui-lib-select>
+        </div>
+
+        <div bootstrap>
+          <ui-lib-select
+            label="Options"
+            [options]="options"
+            variant="bootstrap"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
+            [placeholder]="placeholder()"
+          ></ui-lib-select>
+        </div>
+
+        <div minimal>
+          <ui-lib-select
+            label="Options"
+            [options]="options"
+            variant="minimal"
+            [searchable]="searchable()"
+            [multiple]="multiple()"
+            [placeholder]="placeholder()"
+          ></ui-lib-select>
+        </div>
+      </app-variant-comparison>
+    </ui-lib-card>
+  }
+
   @if (activeTab() === 'api-reference') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
       <div card-header>API Reference</div>
@@ -266,6 +310,17 @@
         <li><strong>Design Tokens</strong> - uses centralized design system</li>
         <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
         <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'accessibility') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
+      <div card-header>Accessibility</div>
+      <ul class="doc-list">
+        <li>Use a clear <code>label</code> for the trigger button.</li>
+        <li>Ensure listbox options are keyboard navigable.</li>
+        <li>Announce selection changes for screen readers.</li>
       </ul>
     </ui-lib-card>
   }

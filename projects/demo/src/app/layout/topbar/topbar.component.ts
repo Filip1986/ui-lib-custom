@@ -15,6 +15,8 @@ export class TopbarComponent {
   themeToggle = output<void>();
   loadTheme = output<string>();
   theme = input<'light' | 'dark' | 'brand-example'>('light');
+  themeName = input<string>('light');
+  themeVariant = input<string>('material');
   savedThemes = input<string[]>([]);
 
   onMenuButtonClick() {

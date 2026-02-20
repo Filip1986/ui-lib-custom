@@ -120,6 +120,43 @@
   }
 
   @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variant comparison</div>
+      <p>Compare accordion variants with the same FAQ content.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-accordion variant="material">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+
+        <div bootstrap>
+          <ui-lib-accordion variant="bootstrap">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+
+        <div minimal>
+          <ui-lib-accordion variant="minimal">
+            @for (item of faqItems; track item.value) {
+              <ui-lib-accordion-panel [header]="item.header" [value]="item.value">
+                {{ item.content }}
+              </ui-lib-accordion-panel>
+            }
+          </ui-lib-accordion>
+        </div>
+      </app-variant-comparison>
+    </ui-lib-card>
+
     <div class="demo-grid" id="variants" data-doc-anchor>
       @for (variant of variantExamples; track variant) {
         <ui-lib-card [showHeader]="true" [showFooter]="false">

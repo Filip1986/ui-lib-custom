@@ -11,181 +11,6 @@
     <ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>
   </app-code-preview>
 
-  <div class="doc-controls" docRail>
-    <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>
-        <div class="card-title">Style</div>
-        <p class="card-description">Adjust variant, color, and size.</p>
-      </div>
-      <div class="control-grid">
-        <div class="control">
-          <label>Variant</label>
-          <div class="chips">
-            @for (v of variants; track v) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="variant() === v ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="variant.set(v)"
-                >{{ v }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
-
-        <div class="control">
-          <label>Color</label>
-          <div class="chips">
-            @for (c of colors; track c) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="color() === c ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="color.set(c)"
-                >{{ c }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
-
-        <div class="control">
-          <label>Size</label>
-          <div class="chips">
-            @for (s of sizes; track s) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="size() === s ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="size.set(s)"
-                >{{ s }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
-      </div>
-    </ui-lib-card>
-
-    <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>
-        <div class="card-title">State & label</div>
-        <p class="card-description">Toggle shape and set badge text.</p>
-      </div>
-      <div class="control-grid">
-        <div class="toggles">
-          <label
-            ><input
-              type="checkbox"
-              [checked]="pill()"
-              (change)="pill.set($any($event.target).checked)"
-            />
-            Pill shape</label
-          >
-          <label
-            ><input
-              type="checkbox"
-              [checked]="dot()"
-              (change)="dot.set($any($event.target).checked)"
-            />
-            Dot only</label
-          >
-        </div>
-
-        <div class="control">
-          <label>Label</label>
-          <input type="text" [value]="text()" (input)="text.set($any($event.target).value)" />
-        </div>
-      </div>
-    </ui-lib-card>
-  </div>
-
-  <div class="viewport-control-stack">
-    <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Viewport width</div>
-      <div class="viewport-controls">
-        <div class="preset-buttons">
-          @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
-              preset.label
-            }}</ui-lib-button>
-          }
-          <div class="custom">
-            <label>Custom</label>
-            <input
-              type="number"
-              min="200"
-              max="2000"
-              [ngModel]="viewportCustomWidth()"
-              (ngModelChange)="setViewportCustomWidth($event)"
-            />
-            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
-              >Apply</ui-lib-button
-            >
-          </div>
-        </div>
-        <div class="controls">
-          <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
-            >Rotate</ui-lib-button
-          >
-        </div>
-      </div>
-    </ui-lib-card>
-
-    <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Density</div>
-      <div class="density-controls">
-        <ui-lib-button
-          size="small"
-          appearance="ghost"
-          (click)="setViewportDensity('default')"
-          [class.active]="viewport?.densityValue() === 'default'"
-          >Default</ui-lib-button
-        >
-        <ui-lib-button
-          size="small"
-          appearance="ghost"
-          (click)="setViewportDensity('comfortable')"
-          [class.active]="viewport?.densityValue() === 'comfortable'"
-          >Comfortable</ui-lib-button
-        >
-        <ui-lib-button
-          size="small"
-          appearance="ghost"
-          (click)="setViewportDensity('compact')"
-          [class.active]="viewport?.densityValue() === 'compact'"
-          >Compact</ui-lib-button
-        >
-      </div>
-    </ui-lib-card>
-  </div>
-
-  <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-    <div card-header>Playground</div>
-    <p>Toggle variant, color, size, pill, and dot options.</p>
-
-    <app-doc-demo-viewport [autoHeight]="true">
-      <div class="doc-demo centered">
-        <ui-lib-badge
-          [variant]="variant()"
-          [color]="color()"
-          [size]="size()"
-          [pill]="pill()"
-          [dot]="dot()"
-        >
-          @if (!dot()) {
-            {{ text() || 'New' }}
-          }
-        </ui-lib-badge>
-      </div>
-    </app-doc-demo-viewport>
-  </ui-lib-card>
-
   <div class="doc-tabs">
     <ui-lib-tabs
       variant="minimal"
@@ -193,11 +18,212 @@
       [selectedValue]="activeTab()"
       (selectedChange)="onTabChange($event.value)"
     >
+      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
+      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
     </ui-lib-tabs>
   </div>
+
+  @if (activeTab() === 'playground') {
+    <div class="doc-controls" docRail>
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">Style</div>
+          <p class="card-description">Adjust variant, color, and size.</p>
+        </div>
+        <div class="control-grid">
+          <div class="control">
+            <label>Variant</label>
+            <div class="chips">
+              @for (v of variants; track v) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  [variant]="'minimal'"
+                  [appearance]="variant() === v ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="variant.set(v)"
+                  >{{ v }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Color</label>
+            <div class="chips">
+              @for (c of colors; track c) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  [variant]="'minimal'"
+                  [appearance]="color() === c ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="color.set(c)"
+                  >{{ c }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Size</label>
+            <div class="chips">
+              @for (s of sizes; track s) {
+                <ui-lib-button
+                  class="control-chip"
+                  size="small"
+                  [variant]="'minimal'"
+                  [appearance]="size() === s ? 'solid' : 'ghost'"
+                  color="primary"
+                  (click)="size.set(s)"
+                  >{{ s }}</ui-lib-button
+                >
+              }
+            </div>
+          </div>
+        </div>
+      </ui-lib-card>
+
+      <ui-lib-card class="doc-control-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>
+          <div class="card-title">State & label</div>
+          <p class="card-description">Toggle shape and set badge text.</p>
+        </div>
+        <div class="control-grid">
+          <div class="toggles">
+            <label
+              ><input
+                type="checkbox"
+                [checked]="pill()"
+                (change)="pill.set($any($event.target).checked)"
+              />
+              Pill shape</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                [checked]="dot()"
+                (change)="dot.set($any($event.target).checked)"
+              />
+              Dot only</label
+            >
+          </div>
+
+          <div class="control">
+            <label>Label</label>
+            <input type="text" [value]="text()" (input)="text.set($any($event.target).value)" />
+          </div>
+        </div>
+      </ui-lib-card>
+    </div>
+  }
+
+  @if (activeTab() === 'playground') {
+    <div class="viewport-control-stack">
+      <ui-lib-card class="viewport-width-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Viewport width</div>
+        <div class="viewport-controls">
+          <div class="preset-buttons">
+            @for (preset of viewportPresets; track preset.key) {
+              <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
+                preset.label
+              }}</ui-lib-button>
+            }
+            <div class="custom">
+              <label>Custom</label>
+              <input
+                type="number"
+                min="200"
+                max="2000"
+                [ngModel]="viewportCustomWidth()"
+                (ngModelChange)="setViewportCustomWidth($event)"
+              />
+              <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
+                >Apply</ui-lib-button
+              >
+            </div>
+          </div>
+          <div class="controls">
+            <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
+            <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
+              >Rotate</ui-lib-button
+            >
+          </div>
+        </div>
+      </ui-lib-card>
+
+      <ui-lib-card class="viewport-density-card" [showHeader]="true" [showFooter]="false">
+        <div card-header>Density</div>
+        <div class="density-controls">
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('default')"
+            [class.active]="viewport?.densityValue() === 'default'"
+            >Default</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('comfortable')"
+            [class.active]="viewport?.densityValue() === 'comfortable'"
+            >Comfortable</ui-lib-button
+          >
+          <ui-lib-button
+            size="small"
+            appearance="ghost"
+            (click)="setViewportDensity('compact')"
+            [class.active]="viewport?.densityValue() === 'compact'"
+            >Compact</ui-lib-button
+          >
+        </div>
+      </ui-lib-card>
+    </div>
+
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
+      <div card-header>Playground</div>
+      <p>Toggle variant, color, size, pill, and dot options.</p>
+
+      <app-doc-demo-viewport [autoHeight]="true">
+        <div class="doc-demo centered">
+          <ui-lib-badge
+            [variant]="variant()"
+            [color]="color()"
+            [size]="size()"
+            [pill]="pill()"
+            [dot]="dot()"
+          >
+            @if (!dot()) {
+              {{ text() || 'New' }}
+            }
+          </ui-lib-badge>
+        </div>
+      </app-doc-demo-viewport>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p>Compare the three badge variants with the same color and size.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-badge variant="solid" color="primary">Solid</ui-lib-badge>
+        </div>
+        <div bootstrap>
+          <ui-lib-badge variant="outline" color="primary">Outline</ui-lib-badge>
+        </div>
+        <div minimal>
+          <ui-lib-badge variant="subtle" color="primary">Subtle</ui-lib-badge>
+        </div>
+      </app-variant-comparison>
+    </ui-lib-card>
+  }
 
   @if (activeTab() === 'api-reference') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
@@ -269,6 +295,17 @@
         <li><strong>Design Tokens</strong> - uses centralized design system</li>
         <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
         <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'accessibility') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
+      <div card-header>Accessibility</div>
+      <ul class="doc-list">
+        <li>Keep badge text concise so it is announced clearly by screen readers.</li>
+        <li>Do not rely on color alone to convey meaning.</li>
+        <li>Use <code>aria-label</code> on wrapped controls when badges are purely decorative.</li>
       </ul>
     </ui-lib-card>
   }

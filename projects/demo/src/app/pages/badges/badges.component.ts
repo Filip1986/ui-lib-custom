@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, signal, ViewChild } from '@angular/
 import { FormsModule } from '@angular/forms';
 import {
   Badge,
-  Inline,
   BadgeColor,
   BadgeVariant,
   BadgeSize,
@@ -17,8 +16,15 @@ import { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
-type TabKey = 'api-reference' | 'usage' | 'performance';
+type TabKey =
+  | 'playground'
+  | 'variants'
+  | 'api-reference'
+  | 'usage'
+  | 'performance'
+  | 'accessibility';
 
 @Component({
   selector: 'app-badges',
@@ -34,6 +40,7 @@ type TabKey = 'api-reference' | 'usage' | 'performance';
     Card,
     FormsModule,
     CodePreviewComponent,
+    VariantComparisonComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',
@@ -42,12 +49,14 @@ type TabKey = 'api-reference' | 'usage' | 'performance';
 export class BadgesComponent {
   readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
+    { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'performance', label: 'Performance Features' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('api-reference');
+  activeTab = signal<TabKey>('playground');
 
   setTab(tab: TabKey) {
     this.activeTab.set(tab);

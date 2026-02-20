@@ -18,9 +18,11 @@
       (selectedChange)="onTabChange($event.value)"
     >
       <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
+      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
       <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
+      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
     </ui-lib-tabs>
   </div>
 
@@ -274,6 +276,45 @@
     </ui-lib-card>
   }
 
+  @if (activeTab() === 'variants') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
+      <div card-header>Variants</div>
+      <p>Compare input variants using the same label, placeholder, and type.</p>
+
+      <app-variant-comparison>
+        <div material>
+          <ui-lib-input
+            variant="material"
+            [type]="inputType()"
+            [labelFloat]="labelFloat()"
+            [label]="label()"
+            [placeholder]="placeholder()"
+          />
+        </div>
+
+        <div bootstrap>
+          <ui-lib-input
+            variant="bootstrap"
+            [type]="inputType()"
+            [labelFloat]="labelFloat()"
+            [label]="label()"
+            [placeholder]="placeholder()"
+          />
+        </div>
+
+        <div minimal>
+          <ui-lib-input
+            variant="minimal"
+            [type]="inputType()"
+            [labelFloat]="labelFloat()"
+            [label]="label()"
+            [placeholder]="placeholder()"
+          />
+        </div>
+      </app-variant-comparison>
+    </ui-lib-card>
+  }
+
   @if (activeTab() === 'api-reference') {
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
       <div card-header>API Reference</div>
@@ -341,6 +382,17 @@
         <li><strong>Design Tokens</strong> - uses centralized design system</li>
         <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
         <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
+      </ul>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'accessibility') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
+      <div card-header>Accessibility</div>
+      <ul class="doc-list">
+        <li>Associate labels with inputs via the <code>label</code> input.</li>
+        <li>Provide error text and link with <code>aria-describedby</code> when invalid.</li>
+        <li>Ensure required fields are announced and visually indicated.</li>
       </ul>
     </ui-lib-card>
   }

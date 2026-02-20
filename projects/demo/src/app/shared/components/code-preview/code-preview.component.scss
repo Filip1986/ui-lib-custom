@@ -21,6 +21,9 @@
     color: #d4d4d4;
     padding: 1rem;
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: min(60vh, 520px);
+    -webkit-overflow-scrolling: touch;
 
     pre {
       margin: 0;
@@ -52,3 +55,12 @@
   margin-left: auto;
 }
 
+@media (max-width: 640px) {
+  .code-preview__toolbar {
+    flex-wrap: wrap;
+  }
+
+  .copy-btn {
+    margin-left: 0;
+  }
+}

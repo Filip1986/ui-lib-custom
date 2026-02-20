@@ -21,8 +21,8 @@ import {
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { DocSection } from '@demo/shared/doc-page/doc-section.model';
-import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
 @Component({
   selector: 'app-select-buttons',
@@ -39,8 +39,8 @@ import { CodePreviewComponent } from '../../shared/components/code-preview/code-
     Inline,
     Grid,
     DocPageLayoutComponent,
-    DocCodeSnippetComponent,
     CodePreviewComponent,
+    VariantComparisonComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
@@ -58,6 +58,7 @@ export class SelectButtonsComponent {
     { id: 'variants', label: 'Variants' },
     { id: 'forms', label: 'Forms' },
     { id: 'api', label: 'API Reference' },
+    { id: 'accessibility', label: 'Accessibility' },
   ];
 
   readonly snippets: { usage: string } = {
