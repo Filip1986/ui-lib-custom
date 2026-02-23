@@ -1,5 +1,7 @@
 <div
   [ngClass]="cardClasses()"
+  [attr.role]="hoverable() ? 'button' : null"
+  [attr.tabindex]="hoverable() ? 0 : null"
   [style.--uilib-card-shadow]="shadow()"
   [style.--uilib-card-shadow-hover]="shadow()"
   [style.--uilib-card-header-bg]="headerBg()"
