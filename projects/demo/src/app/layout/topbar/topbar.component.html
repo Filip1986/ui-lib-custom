@@ -11,7 +11,11 @@
 
   <div class="topbar-right">
     <div class="topbar-select">
-      <select (change)="onLoadTheme($any($event.target).value)" [value]="''">
+      <select
+        aria-label="Select saved theme"
+        (change)="onLoadTheme($any($event.target).value)"
+        [value]="''"
+      >
         <option value="" disabled>Select saved theme</option>
         @for (themeName of savedThemes(); track themeName) {
           <option [value]="themeName">{{ themeName }}</option>

@@ -23,7 +23,7 @@
       <p>All numeric shadows from the library <code>SHADOWS</code> tokens.</p>
 
       <app-doc-demo-viewport>
-        <div class="card-grid scrollable-grid">
+        <div class="card-grid scrollable-grid" tabindex="0" aria-label="Shadow examples">
           @for (example of examples; track example.level) {
             <ui-lib-card variant="material" [style.box-shadow]="shadowValues[example.token]">
               <div card-header>{{ example.label }}</div>

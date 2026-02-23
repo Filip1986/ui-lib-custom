@@ -3,7 +3,11 @@
 
   <div class="editor-field">
     <label>Default Library</label>
-    <select [value]="config().defaultLibrary" (change)="onLibraryChange($event)">
+    <select
+      aria-label="Default icon library"
+      [value]="config().defaultLibrary"
+      (change)="onLibraryChange($event)"
+    >
       @for (lib of libraries; track lib) {
         <option [value]="lib">{{ lib | titlecase }}</option>
       }
@@ -12,7 +16,11 @@
 
   <div class="editor-field">
     <label>Default Size</label>
-    <select [value]="config().defaultSize" (change)="onSizeChange($event)">
+    <select
+      aria-label="Default icon size"
+      [value]="config().defaultSize"
+      (change)="onSizeChange($event)"
+    >
       @for (size of sizes; track size) {
         <option [value]="size">{{ size }}</option>
       }
@@ -26,6 +34,7 @@
         <label>{{ size }}</label>
         <input
           type="text"
+          [attr.aria-label]="'Icon size ' + size"
           [value]="config().sizes[size]"
           (input)="onSizeValueChange(size, $event)"
         />

@@ -1,26 +1,25 @@
 import { defineConfig } from '@playwright/test';
 
-});
-  },
-    timeout: 120000,
-    reuseExistingServer: !process.env.CI,
-    url: 'http://localhost:4200',
-    command: 'npm run serve:demo',
-  webServer: {
-  },
-    screenshot: 'only-on-failure',
-    trace: 'on-first-retry',
-    baseURL: 'http://localhost:4200',
-  use: {
-  ],
-    ['json', { outputFile: 'test-results/a11y-results.json' }],
-    ['html', { outputFolder: 'playwright-report' }],
-  reporter: [
-  workers: process.env.CI ? 1 : undefined,
-  retries: process.env.CI ? 2 : 0,
-  forbidOnly: !!process.env.CI,
-  fullyParallel: true,
-  testMatch: '**/*.spec.ts',
-  testDir: './e2e',
 export default defineConfig({
-
+  testDir: './e2e',
+  testMatch: '**/*.spec.ts',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: [
+    ['html', { outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results/a11y-results.json' }],
+  ],
+  use: {
+    baseURL: 'http://localhost:4200',
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+  },
+  webServer: {
+    command: 'npm run serve:demo',
+    url: 'http://localhost:4200',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120000,
+  },
+});

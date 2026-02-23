@@ -7,7 +7,6 @@
     [appearance]="isSelected(option) ? 'solid' : 'outline'"
     [disabled]="isDisabled() || isOptionDisabled(option)"
     [fullWidth]="fluid()"
-    role="button"
     [ariaPressed]="isSelected(option)"
     [tabIndex]="tabIndexFor($index)"
     (click)="onOptionClick(option, $index, $event)"

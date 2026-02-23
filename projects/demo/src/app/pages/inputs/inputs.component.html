@@ -143,13 +143,19 @@
         </div>
         <div class="control">
           <label>Label</label>
-          <input type="text" [value]="label()" (input)="label.set($any($event.target).value)" />
+          <input
+            type="text"
+            aria-label="Input label"
+            [value]="label()"
+            (input)="label.set($any($event.target).value)"
+          />
         </div>
 
         <div class="control">
           <label>Placeholder</label>
           <input
             type="text"
+            aria-label="Input placeholder"
             [value]="placeholder()"
             (input)="placeholder.set($any($event.target).value)"
           />
@@ -171,6 +177,7 @@
               <label>Custom</label>
               <input
                 type="number"
+                aria-label="Custom viewport width"
                 min="200"
                 max="2000"
                 [ngModel]="viewportCustomWidth()"

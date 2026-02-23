@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Component-level theme inputs (Card).
 - Dark mode demo page.
 - Scoped theming demo page.
+- Automated accessibility testing with axe-core
+- E2E accessibility tests with Playwright
+- LiveAnnouncerService for screen reader announcements
+- High contrast mode support
+- RTL support for Tabs component
 
 ### Changed
 - All components now support dark mode.
@@ -26,7 +31,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 
 
 ### Fixed
-- 
+- Select component now has proper aria-activedescendant
+- Form errors now announce to screen readers
+- Focus management in Select dropdown
+- Keyboard navigation in all components
 
 ### Security
 - 

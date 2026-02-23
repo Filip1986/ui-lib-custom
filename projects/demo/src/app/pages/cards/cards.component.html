@@ -83,7 +83,11 @@
 
           <div class="control">
             <label>Shadow</label>
-            <select [value]="selectedShadow()" (change)="setShadow($any($event.target).value)">
+            <select
+              aria-label="Card shadow"
+              [value]="selectedShadow()"
+              (change)="setShadow($any($event.target).value)"
+            >
               @for (s of shadowOptions; track s) {
                 <option [value]="s">{{ s }}</option>
               }
@@ -95,11 +99,13 @@
               <label>Header BG</label>
               <input
                 type="color"
+                aria-label="Header background color"
                 [value]="headerBg() || '#ffffff'"
                 (input)="headerBg.set($any($event.target).value)"
               />
               <input
                 type="text"
+                aria-label="Header background value"
                 placeholder="#f5f7fb"
                 [value]="headerBg()"
                 (input)="headerBg.set($any($event.target).value)"
@@ -109,11 +115,13 @@
               <label>Footer BG</label>
               <input
                 type="color"
+                aria-label="Footer background color"
                 [value]="footerBg() || '#ffffff'"
                 (input)="footerBg.set($any($event.target).value)"
               />
               <input
                 type="text"
+                aria-label="Footer background value"
                 placeholder="#eef2ff"
                 [value]="footerBg()"
                 (input)="footerBg.set($any($event.target).value)"

@@ -29,12 +29,18 @@
       <div class="controls">
         <div class="control-group">
           <label>Theme name</label>
-          <input type="text" [ngModel]="themeName()" (ngModelChange)="themeName.set($event)" />
+          <input
+            type="text"
+            aria-label="Theme name"
+            [ngModel]="themeName()"
+            (ngModelChange)="themeName.set($event)"
+          />
           <button type="button" class="chip" (click)="saveTheme()">Save Theme</button>
         </div>
         <div class="control-group">
           <label>Saved themes</label>
           <select
+            aria-label="Saved themes"
             [ngModel]="selectedSaved()"
             (ngModelChange)="selectedSaved.set($event); loadTheme($event)"
           >

@@ -11,7 +11,11 @@
 
   <div class="section">
     <label class="label">Preset</label>
-    <select [ngModel]="currentPreset().name" (ngModelChange)="onPresetChange($event)">
+    <select
+      aria-label="Theme preset"
+      [ngModel]="currentPreset().name"
+      (ngModelChange)="onPresetChange($event)"
+    >
       @for (name of presetNames(); track name) {
         <option [value]="name">{{ name }}</option>
       }
@@ -34,7 +38,11 @@
 
   <div class="section">
     <label class="label">Border radius</label>
-    <select [ngModel]="currentPreset().shape.borderRadius" (ngModelChange)="onRadiusChange($event)">
+    <select
+      aria-label="Border radius"
+      [ngModel]="currentPreset().shape.borderRadius"
+      (ngModelChange)="onRadiusChange($event)"
+    >
       @for (opt of radiusOptions; track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
@@ -62,7 +70,11 @@
   <div class="section">
     <div class="label">Typography</div>
     <label class="sub-label">Suggested pairings</label>
-    <select [ngModel]="selectedPairing()" (ngModelChange)="onPairingSelect($event)">
+    <select
+      aria-label="Suggested font pairing"
+      [ngModel]="selectedPairing()"
+      (ngModelChange)="onPairingSelect($event)"
+    >
       <option value="">-- Select pairing --</option>
       @for (pair of pairingOptions(); track pair.name) {
         <option [value]="pair.name">
@@ -72,14 +84,22 @@
     </select>
 
     <label class="sub-label">Heading font</label>
-    <select [ngModel]="headingFont()" (ngModelChange)="onHeadingFontChange($event)">
+    <select
+      aria-label="Heading font"
+      [ngModel]="headingFont()"
+      (ngModelChange)="onHeadingFontChange($event)"
+    >
       @for (opt of headingFontOptions(); track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
     </select>
 
     <label class="sub-label">Body font</label>
-    <select [ngModel]="bodyFont()" (ngModelChange)="onBodyFontChange($event)">
+    <select
+      aria-label="Body font"
+      [ngModel]="bodyFont()"
+      (ngModelChange)="onBodyFontChange($event)"
+    >
       @for (opt of bodyFontOptions(); track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
@@ -88,6 +108,7 @@
     <label class="sub-label">UI font</label>
     <div class="inline">
       <select
+        aria-label="UI font"
         [ngModel]="uiFont()"
         [disabled]="syncUIWithBody()"
         (ngModelChange)="onUIFontChange($event)"
@@ -107,7 +128,11 @@
     </div>
 
     <label class="sub-label">Code font</label>
-    <select [ngModel]="monoFont()" (ngModelChange)="onMonoFontChange($event)">
+    <select
+      aria-label="Code font"
+      [ngModel]="monoFont()"
+      (ngModelChange)="onMonoFontChange($event)"
+    >
       @for (opt of monoFontOptions(); track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
@@ -117,6 +142,7 @@
   <div class="section">
     <label class="label">Base font size: {{ currentPreset().typography.baseFontSize }}</label>
     <input
+      aria-label="Base font size"
       type="range"
       min="12"
       max="20"
@@ -129,6 +155,7 @@
   <div class="section">
     <label class="label">Shadow</label>
     <select
+      aria-label="Shadow"
       [ngModel]="currentPreset().shadow || shadowOptions[0]?.value"
       (ngModelChange)="onShadowChange($event)"
     >
@@ -141,6 +168,7 @@
   <div class="section">
     <label class="label">Card shadow</label>
     <select
+      aria-label="Card shadow"
       [ngModel]="currentPreset().cardShadow || currentPreset().shadow || shadowOptions[0]?.value"
       (change)="onCardShadowPreview($any($event.target).value)"
       (ngModelChange)="onCardShadowChange($event)"
@@ -154,6 +182,7 @@
   <div class="section">
     <label class="label">Button shadow</label>
     <select
+      aria-label="Button shadow"
       [ngModel]="currentPreset().buttonShadow || currentPreset().shadow || shadowOptions[0]?.value"
       (change)="onButtonShadowPreview($any($event.target).value)"
       (ngModelChange)="onButtonShadowChange($event)"
