@@ -44,6 +44,33 @@
   opacity: 0.6;
 }
 
+:host(.ng-touched) .checkbox-box {
+  border-color: var(
+    --uilib-checkbox-border-touched,
+    var(--uilib-checkbox-border-active)
+  );
+}
+
+:host(.ng-dirty) .checkbox-box {
+  border-color: var(
+    --uilib-checkbox-border-dirty,
+    var(--uilib-checkbox-border-active)
+  );
+}
+
+:host(.ng-invalid.ng-touched) .checkbox-box,
+:host(.ng-invalid.ng-dirty) .checkbox-box {
+  border-color: var(
+    --uilib-checkbox-border-invalid,
+    var(--uilib-color-danger-600)
+  );
+}
+
+:host(.ng-disabled) {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .checkbox-box {
   width: var(--uilib-checkbox-size, var(--uilib-checkbox-size-md));
   height: var(--uilib-checkbox-size, var(--uilib-checkbox-size-md));

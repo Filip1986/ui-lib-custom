@@ -129,7 +129,7 @@ describe('AccordionPanel', () => {
     fixture.detectChanges();
 
     expect(panelHost().getAttribute('data-state')).toBe('expanded');
-    expect(contentEl().hasAttribute('hidden')).toBeFalse();
+    expect(contentEl().hasAttribute('hidden')).toBeFalsy();
     expect(headerButton().getAttribute('aria-expanded')).toBe('true');
   });
 
@@ -198,14 +198,14 @@ describe('AccordionPanel', () => {
     const names: string[] = iconNames();
     expect(names).toContain('minus');
     expect(names).toContain('plus');
-    expect(iconContainer()?.classList.contains('expanded')).toBeFalse();
+    expect(iconContainer()?.classList.contains('expanded')).toBeFalsy();
   });
 
   it('applies expanded icon class when panel is expanded', () => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
-    expect(iconContainer()?.classList.contains('expanded')).toBeTrue();
+    expect(iconContainer()?.classList.contains('expanded')).toBeTruthy();
   });
 
   it('hides icon when showIcon is false', () => {
@@ -218,7 +218,7 @@ describe('AccordionPanel', () => {
   it('positions icon at end by default', () => {
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect(iconEl?.classList.contains('icon-end')).toBeTrue();
+    expect(iconEl?.classList.contains('icon-end')).toBeTruthy();
   });
 
   it('positions icon at start when iconPosition is start', () => {
@@ -227,14 +227,14 @@ describe('AccordionPanel', () => {
 
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect(iconEl?.classList.contains('icon-start')).toBeTrue();
+    expect(iconEl?.classList.contains('icon-start')).toBeTruthy();
   });
 
   it('adds expanded class to content when expanded', () => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
-    expect(contentEl().classList.contains('expanded')).toBeTrue();
+    expect(contentEl().classList.contains('expanded')).toBeTruthy();
   });
 });
 
@@ -270,6 +270,6 @@ describe('AccordionPanel - Toggle Icon Template', () => {
     templateFixture.componentInstance.expanded.set(true);
     templateFixture.detectChanges();
 
-    expect(iconEl?.classList.contains('expanded')).toBeTrue();
+    expect(iconEl?.classList.contains('expanded')).toBeTruthy();
   });
 });

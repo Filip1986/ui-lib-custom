@@ -194,6 +194,7 @@ export class UiLibSelect implements ControlValueAccessor {
   }
 
   clear(): void {
+    if (this.isDisabled() || this.loading()) return;
     this.internalValue.set([]);
     this.onChange(this.multiple() ? [] : null);
   }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { UiLibSelect, SelectOption } from './select';
-import { checkA11y, A11Y_RULES } from '../../test/a11y-utils';
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 @Component({
   standalone: true,
@@ -30,7 +30,7 @@ describe('Select Accessibility', () => {
   });
 
   it('should have no violations when closed', async () => {
-    await checkA11y(fixture, { rules: A11Y_RULES.skipColorContrast });
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('should have no violations when open', async () => {
@@ -38,7 +38,7 @@ describe('Select Accessibility', () => {
     control.click();
     fixture.detectChanges();
 
-    await checkA11y(fixture, { rules: A11Y_RULES.skipColorContrast });
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
   it('should have combobox role', () => {

@@ -33,7 +33,7 @@
         [name]="name() ?? controlId()"
         [type]="inputType()"
         [placeholder]="displayPlaceholder()"
-        [disabled]="disabled()"
+        [disabled]="isDisabled()"
         [required]="required() || null"
         [attr.aria-invalid]="error() ? 'true' : null"
         [attr.aria-required]="required() ? 'true' : null"
@@ -44,7 +44,7 @@
         (blur)="onBlur()"
       />
 
-      @if (showClear() && value() && !disabled()) {
+      @if (showClear() && value() && !isDisabled()) {
         <button type="button" class="ui-input-clear" (click)="clear()" aria-label="Clear input">
           ×
         </button>

@@ -48,7 +48,7 @@ describe('Button', () => {
     fixture.detectChanges();
 
     let btn = getButton();
-    expect(btn.disabled).toBeTrue();
+    expect(btn.disabled).toBeTruthy();
     expect(btn.getAttribute('aria-disabled')).toBe('true');
 
     fixture.componentRef.setInput('disabled', false);
@@ -56,7 +56,7 @@ describe('Button', () => {
     fixture.detectChanges();
 
     btn = getButton();
-    expect(btn.disabled).toBeTrue();
+    expect(btn.disabled).toBeTruthy();
     expect(btn.getAttribute('aria-busy')).toBe('true');
   });
 
@@ -76,28 +76,28 @@ describe('Button', () => {
       fixture.componentRef.setInput('raised', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-raised')).toBeTrue();
+      expect(getButton().classList.contains('btn-raised')).toBeTruthy();
     });
 
     it('applies btn-rounded class when rounded is true', () => {
       fixture.componentRef.setInput('rounded', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-rounded')).toBeTrue();
+      expect(getButton().classList.contains('btn-rounded')).toBeTruthy();
     });
 
     it('applies btn-text class when text is true', () => {
       fixture.componentRef.setInput('text', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-text')).toBeTrue();
+      expect(getButton().classList.contains('btn-text')).toBeTruthy();
     });
 
     it('applies btn-link class when link is true', () => {
       fixture.componentRef.setInput('link', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-link')).toBeTrue();
+      expect(getButton().classList.contains('btn-link')).toBeTruthy();
     });
   });
 
@@ -108,8 +108,8 @@ describe('Button', () => {
       fixture.detectChanges();
 
       const btn = getButton();
-      expect(btn.classList.contains('btn-raised')).toBeTrue();
-      expect(btn.classList.contains('btn-rounded')).toBeTrue();
+      expect(btn.classList.contains('btn-raised')).toBeTruthy();
+      expect(btn.classList.contains('btn-rounded')).toBeTruthy();
     });
 
     it('applies text and rounded together', () => {
@@ -118,8 +118,8 @@ describe('Button', () => {
       fixture.detectChanges();
 
       const btn = getButton();
-      expect(btn.classList.contains('btn-text')).toBeTrue();
-      expect(btn.classList.contains('btn-rounded')).toBeTrue();
+      expect(btn.classList.contains('btn-text')).toBeTruthy();
+      expect(btn.classList.contains('btn-rounded')).toBeTruthy();
     });
 
     it('applies outlined and rounded together', () => {
@@ -128,8 +128,8 @@ describe('Button', () => {
       fixture.detectChanges();
 
       const btn = getButton();
-      expect(btn.classList.contains('btn-outlined')).toBeTrue();
-      expect(btn.classList.contains('btn-rounded')).toBeTrue();
+      expect(btn.classList.contains('btn-outlined')).toBeTruthy();
+      expect(btn.classList.contains('btn-rounded')).toBeTruthy();
     });
   });
 
@@ -138,7 +138,7 @@ describe('Button', () => {
       fixture.componentRef.setInput('badge', '3');
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-has-badge')).toBeTrue();
+      expect(getButton().classList.contains('btn-has-badge')).toBeTruthy();
       expect(getBadge()).toBeTruthy();
       expect(getBadge()?.textContent?.trim()).toBe('3');
     });
@@ -167,7 +167,7 @@ describe('Button', () => {
       fixture.componentRef.setInput('badgeColor', 'info');
       fixture.detectChanges();
 
-      expect(getBadge()?.classList.contains('badge-color-info')).toBeTrue();
+      expect(getBadge()?.classList.contains('badge-color-info')).toBeTruthy();
     });
   });
 

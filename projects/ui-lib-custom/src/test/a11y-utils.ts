@@ -1,13 +1,15 @@
 import { ComponentFixture } from '@angular/core/testing';
-import { axe, toHaveNoViolations } from 'jest-axe';
-
-expect.extend(toHaveNoViolations);
+import { axe } from 'jest-axe';
 
 export interface A11yTestOptions {
   rules?: Record<string, { enabled: boolean }>;
   runOnly?: string[] | { type: 'tag'; values: string[] };
   exclude?: string[];
 }
+
+export const SKIP_COLOR_CONTRAST_RULES: Record<string, { enabled: boolean }> = {
+  'color-contrast': { enabled: false },
+};
 
 /**
  * Run axe accessibility checks on a component fixture
@@ -19,14 +21,16 @@ export async function checkA11y(
   fixture.detectChanges();
   await fixture.whenStable();
 
-  const element = fixture.nativeElement as HTMLElement;
-  const results = await axe(element, {
+  const element: HTMLElement = fixture.nativeElement as HTMLElement;
+  const target: HTMLElement = options.exclude?.length
+    ? sanitizeA11yTarget(element, options.exclude)
+    : element;
+  const results: Awaited<ReturnType<typeof axe>> = await axe(target, {
     rules: options.rules,
     runOnly: options.runOnly,
-    exclude: options.exclude,
   });
 
-  expect(results).toHaveNoViolations();
+  expect(results.violations.length).toBe(0);
 }
 
 /**
@@ -35,24 +39,36 @@ export async function checkA11y(
 export async function getA11yResults(
   fixture: ComponentFixture<unknown>,
   options: A11yTestOptions = {}
-) {
+): Promise<ReturnType<typeof axe>> {
   fixture.detectChanges();
   await fixture.whenStable();
 
-  return axe(fixture.nativeElement, {
+  const element: HTMLElement = fixture.nativeElement as HTMLElement;
+  const target: HTMLElement = options.exclude?.length
+    ? sanitizeA11yTarget(element, options.exclude)
+    : element;
+
+  return axe(target, {
     rules: options.rules,
     runOnly: options.runOnly,
-    exclude: options.exclude,
   });
+}
+
+function sanitizeA11yTarget(root: HTMLElement, excludeSelectors: string[]): HTMLElement {
+  const clone: HTMLElement = root.cloneNode(true) as HTMLElement;
+  excludeSelectors.forEach((selector: string): void => {
+    clone.querySelectorAll(selector).forEach((node: Element): void => {
+      node.remove();
+    });
+  });
+  return clone;
 }
 
 /**
  * Common rule configurations
  */
 export const A11Y_RULES = {
-  skipColorContrast: {
-    'color-contrast': { enabled: false },
-  },
+  skipColorContrast: SKIP_COLOR_CONTRAST_RULES,
   criticalOnly: {
     runOnly: { type: 'tag', values: ['critical', 'serious'] },
   },

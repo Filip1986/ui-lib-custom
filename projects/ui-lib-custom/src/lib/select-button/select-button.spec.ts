@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { SelectButton } from './select-button';
 import {
@@ -114,6 +114,22 @@ class ObjectValueHostComponent {
   value: { id: number } | null = null;
 }
 
+@Component({
+  standalone: true,
+  imports: [SelectButton, ReactiveFormsModule],
+  template: `
+    <form [formGroup]="form">
+      <ui-lib-select-button [options]="options" formControlName="choice" />
+    </form>
+  `,
+})
+class ReactiveFormNameHostComponent {
+  options: SelectButtonOption[] = defaultOptions;
+  form: FormGroup<{ choice: FormControl<string | null> }> = new FormGroup({
+    choice: new FormControl<string | null>('opt2'),
+  });
+}
+
 describe('SelectButton', () => {
   let fixture: ComponentFixture<HostComponent>;
 
@@ -141,8 +157,8 @@ describe('SelectButton', () => {
     });
 
     it('has default values', () => {
-      expect(fixture.componentInstance.multiple()).toBeFalse();
-      expect(fixture.componentInstance.allowEmpty()).toBeFalse();
+      expect(fixture.componentInstance.multiple()).toBeFalsy();
+      expect(fixture.componentInstance.allowEmpty()).toBeFalsy();
       expect(fixture.componentInstance.variant()).toBe('material');
       expect(fixture.componentInstance.size()).toBe('medium');
     });
@@ -346,6 +362,54 @@ describe('SelectButton', () => {
       expect(btns[0].getAttribute('aria-pressed')).toBe('true');
     });
 
+    it('works with formControlName', () => {
+      const reactiveFixture: ComponentFixture<ReactiveFormNameHostComponent> =
+        TestBed.createComponent(ReactiveFormNameHostComponent);
+      reactiveFixture.detectChanges();
+
+      const btns: HTMLButtonElement[] = Array.from(
+        reactiveFixture.nativeElement.querySelectorAll('button')
+      );
+      expect(btns[1].getAttribute('aria-pressed')).toBe('true');
+
+      const control: FormControl<string | null> =
+        reactiveFixture.componentInstance.form.controls.choice;
+      control.setValue('opt1');
+      reactiveFixture.detectChanges();
+
+      expect(btns[0].getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('marks control as touched on focusout', () => {
+      const reactiveFixture: ComponentFixture<ReactiveFormNameHostComponent> =
+        TestBed.createComponent(ReactiveFormNameHostComponent);
+      reactiveFixture.detectChanges();
+
+      const control: FormControl<string | null> =
+        reactiveFixture.componentInstance.form.controls.choice;
+
+      const btns: HTMLButtonElement[] = Array.from(
+        reactiveFixture.nativeElement.querySelectorAll('button')
+      );
+      btns[0].dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
+
+      expect(control.touched).toBeTruthy();
+    });
+
+    it('reflects disabled state from control', () => {
+      const reactiveFixture: ComponentFixture<ReactiveFormNameHostComponent> =
+        TestBed.createComponent(ReactiveFormNameHostComponent);
+      reactiveFixture.detectChanges();
+
+      const control: FormControl<string | null> =
+        reactiveFixture.componentInstance.form.controls.choice;
+      control.disable();
+      reactiveFixture.detectChanges();
+
+      const host: HTMLElement = reactiveFixture.nativeElement.querySelector('ui-lib-select-button');
+      expect(host.className).toContain('ui-lib-select-button--disabled');
+    });
+
     it('registerOnChange fires on selection', () => {
       const selectFixture: ComponentFixture<SelectButton> = TestBed.createComponent(SelectButton);
       selectFixture.componentRef.setInput('options', defaultOptions);
@@ -449,8 +513,9 @@ describe('SelectButton', () => {
       expect(hostEl().getAttribute('role')).toBe('group');
     });
 
-    it('buttons have role="button"', () => {
-      expect(buttons()[0].getAttribute('role')).toBe('button');
+    it('buttons render as native button elements', () => {
+      const button: HTMLButtonElement = buttons()[0];
+      expect(button.tagName.toLowerCase()).toBe('button');
     });
 
     it('aria-pressed reflects selection state', () => {

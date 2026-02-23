@@ -124,6 +124,17 @@ export type SelectButtonSize = 'small' | 'medium' | 'large';
 ```
 
 ---
+## Form State Styling
+
+When used with Angular forms, the host element receives `ng-touched`, `ng-dirty`, `ng-invalid`, and `ng-disabled` classes. Styling can be customized with:
+
+| Variable | Purpose |
+| --- | --- |
+| `--uilib-select-button-border-touched` | Border color when the control is touched. |
+| `--uilib-select-button-border-dirty` | Border color when the control is dirty. |
+| `--uilib-select-button-invalid-border` | Border color when invalid. |
+
+---
 ## Accessibility
 - Host role: `group`.
 - Options use `aria-pressed` to reflect selection.

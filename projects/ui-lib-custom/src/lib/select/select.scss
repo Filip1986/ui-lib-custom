@@ -149,3 +149,26 @@
   outline: 2px solid var(--uilib-color-primary-500);
   outline-offset: -2px;
 }
+
+ui-lib-select.ng-touched .ui-select-control {
+  border-color: var(
+    --uilib-select-border-touched,
+    var(--uilib-color-primary-600)
+  );
+}
+
+ui-lib-select.ng-dirty .ui-select-control {
+  border-color: var(
+    --uilib-select-border-dirty,
+    var(--uilib-color-primary-600)
+  );
+}
+
+ui-lib-select.ng-invalid.ng-touched .ui-select-control,
+ui-lib-select.ng-invalid.ng-dirty .ui-select-control {
+  border-color: var(--uilib-select-border-invalid, var(--uilib-color-danger-600));
+}
+
+ui-lib-select.ng-disabled .ui-select-control {
+  opacity: 0.6;
+}

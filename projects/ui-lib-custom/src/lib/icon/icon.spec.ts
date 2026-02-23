@@ -47,6 +47,6 @@ describe('Icon', () => {
     fixture.componentRef.setInput('clickable', true);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.classList.contains('ui-lib-icon--clickable')).toBeTrue();
+    expect(fixture.nativeElement.classList.contains('ui-lib-icon--clickable')).toBeTruthy();
   });
 });

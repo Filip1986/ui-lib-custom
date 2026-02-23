@@ -40,7 +40,7 @@ describe('ButtonGroup', () => {
   describe('basic rendering', () => {
     it('renders with btn-group class and projects children', () => {
       const group = getGroup();
-      expect(group.classList.contains('btn-group')).toBeTrue();
+      expect(group.classList.contains('btn-group')).toBeTruthy();
       const buttons = getButtons();
       expect(buttons.length).toBe(2);
       expect(buttons[0].textContent?.trim()).toBe('One');
@@ -54,31 +54,31 @@ describe('ButtonGroup', () => {
 
   describe('orientation', () => {
     it('is horizontal by default', () => {
-      expect(getGroup().classList.contains('btn-group-vertical')).toBeFalse();
+      expect(getGroup().classList.contains('btn-group-vertical')).toBeFalsy();
     });
 
     it('applies vertical class when vertical=true', () => {
       fixture.componentInstance.vertical.set(true);
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-vertical')).toBeTrue();
+      expect(getGroup().classList.contains('btn-group-vertical')).toBeTruthy();
     });
   });
 
   describe('variant inheritance', () => {
     it('applies material class by default', () => {
-      expect(getGroup().classList.contains('btn-group-material')).toBeTrue();
+      expect(getGroup().classList.contains('btn-group-material')).toBeTruthy();
     });
 
     it('applies bootstrap class when variant=bootstrap', () => {
       fixture.componentInstance.variant.set('bootstrap');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-bootstrap')).toBeTrue();
+      expect(getGroup().classList.contains('btn-group-bootstrap')).toBeTruthy();
     });
 
     it('applies minimal class when variant=minimal', () => {
       fixture.componentInstance.variant.set('minimal');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-minimal')).toBeTrue();
+      expect(getGroup().classList.contains('btn-group-minimal')).toBeTruthy();
     });
   });
 
@@ -86,13 +86,13 @@ describe('ButtonGroup', () => {
     it('applies small size class hook', () => {
       fixture.componentInstance.size.set('small');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-size-small')).toBeTrue();
+      expect(getGroup().classList.contains('btn-group-size-small')).toBeTruthy();
     });
 
     it('applies large size class hook', () => {
       fixture.componentInstance.size.set('large');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-size-large')).toBeTrue();
+      expect(getGroup().classList.contains('btn-group-size-large')).toBeTruthy();
     });
   });
 

@@ -225,3 +225,26 @@
 .ui-lib-select-button--invalid {
   --uilib-select-button-border-resolved: var(--uilib-select-button-invalid-border-resolved);
 }
+
+ui-lib-select-button.ng-touched {
+  --uilib-select-button-border-resolved: var(
+    --uilib-select-button-border-touched,
+    var(--uilib-select-button-border-resolved)
+  );
+}
+
+ui-lib-select-button.ng-dirty {
+  --uilib-select-button-border-resolved: var(
+    --uilib-select-button-border-dirty,
+    var(--uilib-select-button-border-resolved)
+  );
+}
+
+ui-lib-select-button.ng-invalid.ng-touched,
+ui-lib-select-button.ng-invalid.ng-dirty {
+  --uilib-select-button-border-resolved: var(--uilib-select-button-invalid-border-resolved);
+}
+
+ui-lib-select-button.ng-disabled {
+  opacity: var(--uilib-select-button-disabled-opacity-resolved);
+}

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
-import { checkA11y, A11Y_RULES } from '../../test/a11y-utils';
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 @Component({
   standalone: true,
@@ -28,6 +28,6 @@ describe('Tabs Accessibility', () => {
   });
 
   it('should have no accessibility violations', async () => {
-    await checkA11y(fixture, { rules: A11Y_RULES.skipColorContrast });
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 });

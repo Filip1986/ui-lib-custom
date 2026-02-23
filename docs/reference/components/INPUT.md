@@ -162,6 +162,18 @@ export class MyComponent {
 
 ---
 
+## Form State Styling
+
+When used with Angular forms, the host element receives `ng-touched`, `ng-dirty`, `ng-invalid`, and `ng-disabled` classes. The input styles react via CSS variables:
+
+| Variable | Purpose |
+| --- | --- |
+| `--uilib-input-border-touched` | Border color when the control is touched. |
+| `--uilib-input-border-dirty` | Border color when the control is dirty. |
+| `--uilib-input-error` | Border and text color when invalid. |
+
+---
+
 ## Accessibility
 
 ### Keyboard Interaction

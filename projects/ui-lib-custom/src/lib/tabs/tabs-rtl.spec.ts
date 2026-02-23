@@ -48,7 +48,7 @@ describe('Tabs RTL Support', () => {
 
   it('should apply rtl class when dir is rtl', () => {
     const tabsEl: HTMLElement = fixture.nativeElement.querySelector('ui-lib-tabs');
-    expect(tabsEl.classList.contains('ui-tabs--rtl')).toBeTrue();
+    expect(tabsEl.classList.contains('ui-tabs--rtl')).toBeTruthy();
   });
 
   it('should navigate to next tab with ArrowLeft in RTL', () => {

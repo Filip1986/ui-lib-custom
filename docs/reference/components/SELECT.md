@@ -1,5 +1,29 @@
 # Combobox Component
 
+## Form Integration
+
+### Template-driven
+```html
+<ui-lib-select [options]="options" [(ngModel)]="value" />
+```
+
+### Reactive Forms
+```html
+<form [formGroup]="form">
+  <ui-lib-select [options]="options" formControlName="choice" />
+</form>
+```
+
+## Form State Styling
+
+When used with Angular forms, the host element receives `ng-touched`, `ng-dirty`, `ng-invalid`, and `ng-disabled` classes. Styling can be customized with:
+
+| Variable | Purpose |
+| --- | --- |
+| `--uilib-select-border-touched` | Border color when the control is touched. |
+| `--uilib-select-border-dirty` | Border color when the control is dirty. |
+| `--uilib-select-border-invalid` | Border color when invalid. |
+
 ## Accessibility
 
 ### ARIA Attributes

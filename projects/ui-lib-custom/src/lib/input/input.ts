@@ -98,7 +98,7 @@ export class UiLibInput implements ControlValueAccessor {
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
   private previousError: string | null = null;
 
-  constructor(private readonly el: ElementRef<HTMLElement>) {
+  constructor() {
     effect((): void => {
       const currentError: string | null = this.error();
 
@@ -143,6 +143,7 @@ export class UiLibInput implements ControlValueAccessor {
   }
 
   togglePassword(): void {
+    if (this.isDisabled()) return;
     this.showPassword.update((v) => !v);
   }
 

@@ -318,6 +318,6 @@ describe('Accordion', () => {
     expect(panelHosts[0].className).toContain('accordion-panel-expanded');
     expect(panelHosts[0].getAttribute('data-state')).toBe('expanded');
     expect(contents[0].getAttribute('data-state')).toBe('expanded');
-    expect(contents[0].hasAttribute('hidden')).toBeFalse();
+    expect(contents[0].hasAttribute('hidden')).toBeFalsy();
   });
 });

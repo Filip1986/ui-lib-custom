@@ -17,6 +17,7 @@ The checkbox renders a host-only control with configurable variants (Material, B
 - ♿ **Accessibility** – `role="checkbox"`, `aria-checked`, keyboard toggle (Space/Enter), configurable labeling
 - 🧪 **Tested** – unit tests cover inputs, aria states, click/keyboard toggles, and disabled state
 - 🧱 **Host-only markup** – no wrapper elements; layout handled via host classes and inline template parts
+- 🧩 **ControlValueAccessor** – supports `formControlName` and `[(ngModel)]` bindings
 
 ---
 
@@ -71,6 +72,32 @@ With projected label content:
 | Output | Payload | Description |
 |--------|---------|-------------|
 | `checkedChange` | `boolean` | Fires whenever the checkbox is toggled (emitted by `model()`) |
+
+---
+
+## Form Integration
+
+### Template-driven
+```html
+<ui-lib-checkbox [(ngModel)]="accepted" label="Accept" />
+```
+
+### Reactive Forms
+```html
+<form [formGroup]="form">
+  <ui-lib-checkbox formControlName="accepted" label="Accept" />
+</form>
+```
+
+## Form State Styling
+
+When used with Angular forms, the host element receives `ng-touched`, `ng-dirty`, `ng-invalid`, and `ng-disabled` classes. Styling can be customized with:
+
+| Variable | Purpose |
+| --- | --- |
+| `--uilib-checkbox-border-touched` | Border color when the control is touched. |
+| `--uilib-checkbox-border-dirty` | Border color when the control is dirty. |
+| `--uilib-checkbox-border-invalid` | Border color when invalid. |
 
 ---
 

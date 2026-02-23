@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Checkbox, CheckboxSize, CheckboxVariant } from './checkbox';
 
@@ -81,7 +82,7 @@ describe('Checkbox', () => {
     el.click();
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.checked).toBeTrue();
+    expect(fixture.componentInstance.checked).toBeTruthy();
     expect(el.getAttribute('aria-checked')).toBe('true');
   });
 
@@ -93,7 +94,7 @@ describe('Checkbox', () => {
     el.click();
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.checked).toBeFalse();
+    expect(fixture.componentInstance.checked).toBeFalsy();
     expect(el.getAttribute('aria-checked')).toBe('false');
   });
 
@@ -102,11 +103,71 @@ describe('Checkbox', () => {
     el.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.checked).toBeTrue();
+    expect(fixture.componentInstance.checked).toBeTruthy();
 
     el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
     fixture.detectChanges();
 
-    expect(fixture.componentInstance.checked).toBeFalse();
+    expect(fixture.componentInstance.checked).toBeFalsy();
+  });
+});
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, Checkbox],
+  template: `
+    <form [formGroup]="form">
+      <ui-lib-checkbox label="Accept" formControlName="accepted" />
+    </form>
+  `,
+})
+class ReactiveHostComponent {
+  readonly form: FormGroup<{ accepted: FormControl<boolean> }> = new FormGroup({
+    accepted: new FormControl<boolean>(false, { nonNullable: true }),
+  });
+}
+
+describe('Checkbox Reactive Forms', () => {
+  let fixture: ComponentFixture<ReactiveHostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ReactiveHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ReactiveHostComponent);
+    fixture.detectChanges();
+  });
+
+  function checkboxEl(): HTMLElement {
+    return fixture.nativeElement.querySelector('ui-lib-checkbox');
+  }
+
+  it('updates control value on click', () => {
+    const control: FormControl<boolean> = fixture.componentInstance.form.controls.accepted;
+
+    checkboxEl().click();
+    fixture.detectChanges();
+
+    expect(control.value).toBeTruthy();
+  });
+
+  it('marks control as touched on focusout', () => {
+    const control: FormControl<boolean> = fixture.componentInstance.form.controls.accepted;
+
+    checkboxEl().dispatchEvent(new FocusEvent('focusout', { relatedTarget: null }));
+    fixture.detectChanges();
+
+    expect(control.touched).toBeTruthy();
+  });
+
+  it('reflects disabled state from control', () => {
+    const control: FormControl<boolean> = fixture.componentInstance.form.controls.accepted;
+
+    control.disable();
+    fixture.detectChanges();
+
+    expect(checkboxEl().getAttribute('aria-disabled')).toBe('true');
   });
 });

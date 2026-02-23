@@ -167,3 +167,26 @@
   border-color: var(--uilib-input-border-focus, var(--uilib-color-primary-600));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-input-border-focus, var(--uilib-color-primary-600)) 25%, transparent);
 }
+
+ui-lib-input.ng-touched .ui-input-field {
+  border-color: var(
+    --uilib-input-border-touched,
+    var(--uilib-input-border-focus, var(--uilib-color-primary-600))
+  );
+}
+
+ui-lib-input.ng-dirty .ui-input-field {
+  border-color: var(
+    --uilib-input-border-dirty,
+    var(--uilib-input-border-focus, var(--uilib-color-primary-600))
+  );
+}
+
+ui-lib-input.ng-invalid.ng-touched .ui-input-field,
+ui-lib-input.ng-invalid.ng-dirty .ui-input-field {
+  border-color: var(--uilib-input-error, var(--uilib-color-danger-600));
+}
+
+ui-lib-input.ng-disabled .ui-input-field {
+  opacity: 0.6;
+}
