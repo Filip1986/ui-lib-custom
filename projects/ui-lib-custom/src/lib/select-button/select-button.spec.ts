@@ -26,6 +26,7 @@ const defaultOptions: SelectButtonOption[] = [
       [variant]="variant()"
       [size]="size()"
       [disabled]="disabled()"
+      [invalid]="invalid()"
       [allowEmpty]="allowEmpty()"
       [optionLabel]="optionLabel()"
       [optionValue]="optionValue()"
@@ -42,6 +43,7 @@ class HostComponent {
   variant = signal<SelectButtonVariant>('material');
   size = signal<SelectButtonSize>('medium');
   disabled = signal<boolean>(false);
+  invalid = signal<boolean>(false);
   allowEmpty = signal<boolean>(false);
   optionLabel = signal<string>('label');
   optionValue = signal<string>('value');
@@ -165,6 +167,21 @@ describe('SelectButton', () => {
 
     it('renders correct number of option buttons', () => {
       expect(buttons().length).toBe(3);
+    });
+
+    it('applies aria-disabled when disabled', () => {
+      fixture.componentInstance.disabled.set(true);
+      fixture.detectChanges();
+
+      expect(hostEl().getAttribute('aria-disabled')).toBe('true');
+    });
+
+    it('applies aria-invalid and invalid class when invalid', () => {
+      fixture.componentInstance.invalid.set(true);
+      fixture.detectChanges();
+
+      expect(hostEl().getAttribute('aria-invalid')).toBe('true');
+      expect(hostEl().className).toContain('ui-lib-select-button--invalid');
     });
   });
 
@@ -454,6 +471,20 @@ describe('SelectButton', () => {
       const host: HTMLElement = selectFixture.nativeElement as HTMLElement;
       expect(host.className).toContain('ui-lib-select-button--disabled');
     });
+
+    it('writeValue updates selection', () => {
+      const selectFixture: ComponentFixture<SelectButton> = TestBed.createComponent(SelectButton);
+      selectFixture.componentRef.setInput('options', defaultOptions);
+      selectFixture.detectChanges();
+
+      selectFixture.componentInstance.writeValue('opt1');
+      selectFixture.detectChanges();
+
+      const btns: HTMLButtonElement[] = Array.from(
+        selectFixture.nativeElement.querySelectorAll('button')
+      );
+      expect(btns[0].getAttribute('aria-pressed')).toBe('true');
+    });
   });
 
   describe('Disabled state', () => {
@@ -502,9 +533,12 @@ describe('SelectButton', () => {
     });
 
     it('size classes applied correctly', () => {
-      fixture.componentInstance.size.set('large');
-      fixture.detectChanges();
-      expect(hostEl().className).toContain('ui-lib-select-button--large');
+      const sizes: SelectButtonSize[] = ['small', 'medium', 'large'];
+      sizes.forEach((size: SelectButtonSize): void => {
+        fixture.componentInstance.size.set(size);
+        fixture.detectChanges();
+        expect(hostEl().className).toContain(`ui-lib-select-button--${size}`);
+      });
     });
   });
 
@@ -551,5 +585,110 @@ describe('SelectButton', () => {
       expect(customItems.length).toBe(3);
       expect(customItems[0].textContent?.trim()).toBe('Option 1');
     });
+  });
+});
+
+describe('SelectButton keyboard behavior', () => {
+  let fixture: ComponentFixture<SelectButton>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [SelectButton],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(SelectButton);
+    fixture.componentRef.setInput('options', defaultOptions);
+    fixture.detectChanges();
+  });
+
+  function hostEl(): HTMLElement {
+    return fixture.nativeElement as HTMLElement;
+  }
+
+  function buttons(): HTMLButtonElement[] {
+    return Array.from(fixture.nativeElement.querySelectorAll('button'));
+  }
+
+  it('moves focus with arrow keys', () => {
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.focusedIndex()).toBe(1);
+  });
+
+  it('moves focus to start/end with Home/End', () => {
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }));
+    fixture.detectChanges();
+    expect(fixture.componentInstance.focusedIndex()).toBe(1);
+
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }));
+    fixture.detectChanges();
+    expect(fixture.componentInstance.focusedIndex()).toBe(0);
+  });
+
+  it('commits focused option on Enter', () => {
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    fixture.detectChanges();
+
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    fixture.detectChanges();
+
+    expect(buttons()[1].getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('tabIndexFor returns 0 for active option', () => {
+    fixture.componentInstance.focusedIndex.set(0);
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.tabIndexFor(0)).toBe(0);
+    expect(fixture.componentInstance.tabIndexFor(1)).toBe(-1);
+  });
+});
+
+describe('SelectButton resolvers', () => {
+  let fixture: ComponentFixture<SelectButton>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [SelectButton],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(SelectButton);
+  });
+
+  it('resolveLabel falls back to value', () => {
+    const option: SelectButtonOption = { value: 'Alpha' } as SelectButtonOption;
+    fixture.detectChanges();
+
+    const label: string = fixture.componentInstance.resolveLabel(option);
+    expect(label).toBe('Alpha');
+  });
+
+  it('resolveValue falls back to label and option', () => {
+    const option: SelectButtonOption = { label: 'Alpha' } as SelectButtonOption;
+    fixture.detectChanges();
+
+    const value: any = fixture.componentInstance.resolveValue(option);
+    expect(value).toBe('Alpha');
+  });
+
+  it('trackOption returns index for object values', () => {
+    const option: SelectButtonOption = { label: 'Alpha', value: { id: 1 } } as SelectButtonOption;
+    fixture.detectChanges();
+
+    const track: string | number = fixture.componentInstance.trackOption(2, option);
+    expect(track).toBe(2);
+  });
+
+  it('activeIndex uses selected value when available', () => {
+    const options: SelectButtonOption[] = [
+      { label: 'A', value: 'a' },
+      { label: 'B', value: 'b' },
+    ];
+    fixture.componentRef.setInput('options', options);
+    fixture.componentRef.setInput('value', 'b');
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.activeIndex()).toBe(1);
   });
 });

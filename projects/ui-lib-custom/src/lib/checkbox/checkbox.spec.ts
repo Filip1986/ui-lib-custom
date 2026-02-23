@@ -110,6 +110,36 @@ describe('Checkbox', () => {
 
     expect(fixture.componentInstance.checked).toBeFalsy();
   });
+
+  it('creates with defaults', () => {
+    expect(fixture.componentInstance).toBeTruthy();
+    const el: HTMLElement = checkboxEl();
+    expect(el.classList.contains('ui-checkbox')).toBeTruthy();
+    expect(el.classList.contains('ui-checkbox-variant-material')).toBeTruthy();
+    expect(el.classList.contains('ui-checkbox-size-md')).toBeTruthy();
+  });
+
+  it('applies each variant class', () => {
+    const variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
+
+    variants.forEach((variant: CheckboxVariant): void => {
+      fixture.componentInstance.variant.set(variant);
+      fixture.detectChanges();
+
+      expect(checkboxEl().classList.contains(`ui-checkbox-variant-${variant}`)).toBeTruthy();
+    });
+  });
+
+  it('applies each size class', () => {
+    const sizes: CheckboxSize[] = ['sm', 'md', 'lg'];
+
+    sizes.forEach((size: CheckboxSize): void => {
+      fixture.componentInstance.size.set(size);
+      fixture.detectChanges();
+
+      expect(checkboxEl().classList.contains(`ui-checkbox-size-${size}`)).toBeTruthy();
+    });
+  });
 });
 
 @Component({
@@ -169,5 +199,56 @@ describe('Checkbox Reactive Forms', () => {
     fixture.detectChanges();
 
     expect(checkboxEl().getAttribute('aria-disabled')).toBe('true');
+  });
+});
+
+describe('Checkbox CVA', () => {
+  let fixture: ComponentFixture<Checkbox>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [Checkbox],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(Checkbox);
+    fixture.detectChanges();
+  });
+
+  function hostEl(): HTMLElement {
+    return fixture.nativeElement as HTMLElement;
+  }
+
+  it('writeValue updates checked state', () => {
+    fixture.componentInstance.writeValue(true);
+    fixture.detectChanges();
+
+    expect(hostEl().getAttribute('aria-checked')).toBe('true');
+  });
+
+  it('registerOnChange fires when toggled', () => {
+    const onChange: jasmine.Spy = jasmine.createSpy('onChange');
+    fixture.componentInstance.registerOnChange(onChange);
+
+    hostEl().click();
+    fixture.detectChanges();
+
+    expect(onChange).toHaveBeenCalledWith(true);
+  });
+
+  it('registerOnTouched fires on focusout', () => {
+    const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
+    fixture.componentInstance.registerOnTouched(onTouched);
+
+    hostEl().dispatchEvent(new FocusEvent('focusout', { relatedTarget: null }));
+    fixture.detectChanges();
+
+    expect(onTouched).toHaveBeenCalled();
+  });
+
+  it('setDisabledState disables the host', () => {
+    fixture.componentInstance.setDisabledState(true);
+    fixture.detectChanges();
+
+    expect(hostEl().getAttribute('aria-disabled')).toBe('true');
   });
 });
