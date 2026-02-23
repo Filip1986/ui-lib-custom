@@ -1,4 +1,4 @@
-.alert {
+:host.alert {
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: var(--uilib-inline-sm, 0.5rem);
@@ -21,11 +21,11 @@
   }
 }
 
-.alert-icon {
+:host .alert-icon {
   color: inherit;
 }
 
-.alert-close {
+:host .alert-close {
   cursor: pointer;
   color: inherit;
 }

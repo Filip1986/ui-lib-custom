@@ -5,15 +5,15 @@
   font-family: var(--uilib-font-body, inherit), sans-serif;
 }
 
-.login-1-shell {
+:host .login-1-shell {
   width: 100%;
 }
 
-.login-1-stack {
+:host .login-1-stack {
   min-height: 100vh;
 }
 
-.login-1-card {
+:host .login-1-card {
   --card-radius: var(--uilib-card-radius, var(--uilib-radius-lg));
   border-radius: var(--card-radius);
   overflow: hidden;
@@ -36,21 +36,21 @@
   }
 }
 
-.form {
+:host .form {
   padding: var(--uilib-space-5);
   display: flex;
   flex-direction: column;
   gap: var(--uilib-space-4);
 }
 
-.remember {
+:host .remember {
   display: inline-flex;
   align-items: center;
   gap: var(--uilib-space-2);
   color: var(--uilib-muted);
 }
 
-.link {
+:host .link {
   background: none;
   border: none;
   color: var(--uilib-color-primary-600);
@@ -59,7 +59,7 @@
   font-weight: 600;
 }
 
-.register {
+:host .register {
   display: flex;
   gap: var(--uilib-space-2);
   align-items: center;
@@ -67,26 +67,26 @@
   color: var(--uilib-muted);
 }
 
-.social {
+:host .social {
   display: flex;
   flex-direction: column;
   gap: var(--uilib-space-3);
 }
 
-.divider {
+:host .divider {
   text-align: center;
   color: var(--uilib-muted);
   font-size: 0.85rem;
   letter-spacing: 0.05em;
 }
 
-.error {
+:host .error {
   color: var(--uilib-color-danger-600);
   font-size: 0.875rem;
 }
 
 @media (max-width: 768px) {
-  .form {
+  :host .form {
     padding: var(--uilib-space-4, 1rem);
   }
 }

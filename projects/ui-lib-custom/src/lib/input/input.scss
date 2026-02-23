@@ -1,10 +1,10 @@
-.ui-input {
+:host .ui-input {
   display: grid;
   gap: 0.35rem;
   color: var(--uilib-input-text, var(--uilib-page-fg));
 }
 
-.ui-input-label {
+:host .ui-input-label {
   font-weight: 600;
   color: var(--uilib-input-label-color, var(--uilib-input-text, var(--uilib-page-fg)));
   display: inline-flex;
@@ -14,21 +14,21 @@
   cursor: text;
 }
 
-.ui-input-label-text {
+:host .ui-input-label-text {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.ui-input-float-over .ui-input-label {
+:host .ui-input-float-over .ui-input-label {
   position: static;
 }
 
-.required-indicator {
+:host .required-indicator {
   color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-.ui-input-field {
+:host .ui-input-field {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -45,7 +45,7 @@
   cursor: text;
 }
 
-.ui-input-float-in .ui-input-field {
+:host .ui-input-float-in .ui-input-field {
   padding-top: calc(var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem));
   padding-bottom: calc(var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem));
   min-height: calc(
@@ -54,13 +54,13 @@
   cursor: text;
 }
 
-.ui-input-control-wrapper {
+:host .ui-input-control-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.ui-input input {
+:host .ui-input input {
   width: 100%;
   border: none;
   outline: none;
@@ -73,7 +73,7 @@
   }
 }
 
-.ui-input-has-floating .ui-input-label {
+:host .ui-input-has-floating .ui-input-label {
   position: absolute;
   left: 0;
   top: 50%;
@@ -91,14 +91,14 @@
   pointer-events: none; // prevent overlap clicks while floating
 }
 
-.ui-input-floating-active.ui-input-float-in .ui-input-label {
+:host .ui-input-floating-active.ui-input-float-in .ui-input-label {
   transform: translate(var(--uilib-input-label-offset-x, 0), calc(-145%)) scale(0.8);
   background: transparent;
   padding: 0;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-input-floating-active.ui-input-float-on .ui-input-label {
+:host .ui-input-floating-active.ui-input-float-on .ui-input-label {
   transform: translate(var(--uilib-input-label-offset-x, 0), calc(-175%))
     scale(var(--uilib-input-label-floating-scale, 0.85));
   background: var(--uilib-input-label-bg, var(--uilib-input-bg, var(--uilib-surface)));
@@ -106,15 +106,15 @@
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-input-prefix,
-.ui-input-suffix {
+:host .ui-input-prefix,
+:host .ui-input-suffix {
   display: inline-flex;
   align-items: center;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-input-clear,
-.ui-input-toggle {
+:host .ui-input-clear,
+:host .ui-input-toggle {
   position: absolute;
   right: 0.35rem;
   border: none;
@@ -125,11 +125,11 @@
   font: inherit;
 }
 
-.ui-input-toggle {
+:host .ui-input-toggle {
   right: 2rem;
 }
 
-.ui-input-meta {
+:host .ui-input-meta {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
@@ -137,57 +137,57 @@
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-input-error-text {
+:host .ui-input-error-text {
   color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-.ui-input-error .ui-input-field {
+:host .ui-input-error .ui-input-field {
   border-color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-.ui-input.ui-input-disabled {
+:host .ui-input.ui-input-disabled {
   opacity: 0.6;
 }
 
-.ui-input.ui-input-bootstrap .ui-input-field,
-.ui-input.ui-input-minimal .ui-input-field {
+:host .ui-input.ui-input-bootstrap .ui-input-field,
+:host .ui-input.ui-input-minimal .ui-input-field {
   border-radius: var(--uilib-input-radius, var(--uilib-radius-md));
 }
 
-.ui-input.ui-input-bootstrap .ui-input-field {
+:host .ui-input.ui-input-bootstrap .ui-input-field {
   border-width: 1px;
 }
 
-.ui-input.ui-input-minimal .ui-input-field {
+:host .ui-input.ui-input-minimal .ui-input-field {
   border: 1px solid var(--uilib-input-border, var(--uilib-border));
   background: transparent;
 }
 
-.ui-input-field:focus-within {
+:host .ui-input-field:focus-within {
   border-color: var(--uilib-input-border-focus, var(--uilib-color-primary-600));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-input-border-focus, var(--uilib-color-primary-600)) 25%, transparent);
 }
 
-ui-lib-input.ng-touched .ui-input-field {
+:host.ng-touched .ui-input-field {
   border-color: var(
     --uilib-input-border-touched,
     var(--uilib-input-border-focus, var(--uilib-color-primary-600))
   );
 }
 
-ui-lib-input.ng-dirty .ui-input-field {
+:host.ng-dirty .ui-input-field {
   border-color: var(
     --uilib-input-border-dirty,
     var(--uilib-input-border-focus, var(--uilib-color-primary-600))
   );
 }
 
-ui-lib-input.ng-invalid.ng-touched .ui-input-field,
-ui-lib-input.ng-invalid.ng-dirty .ui-input-field {
+:host.ng-invalid.ng-touched .ui-input-field,
+:host.ng-invalid.ng-dirty .ui-input-field {
   border-color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-ui-lib-input.ng-disabled .ui-input-field {
+:host.ng-disabled .ui-input-field {
   opacity: 0.6;
 }
 

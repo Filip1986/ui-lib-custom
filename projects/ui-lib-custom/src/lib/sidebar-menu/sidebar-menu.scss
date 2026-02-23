@@ -1,4 +1,4 @@
-.ui-sidebar {
+:host .ui-sidebar {
   --ui-sidebar-bg: var(--uilib-sidebar-bg, var(--uilib-surface));
   --ui-sidebar-width: var(--uilib-sidebar-width, 260px);
   --ui-sidebar-collapsed-width: var(--uilib-sidebar-collapsed-width, 72px);
@@ -26,11 +26,11 @@
   min-height: 100%;
 }
 
-.ui-sidebar-collapsed {
+:host .ui-sidebar-collapsed {
   width: var(--ui-sidebar-collapsed-width);
 }
 
-.ui-sidebar-brand {
+:host .ui-sidebar-brand {
   font-weight: 700;
   font-size: 1.05rem;
   padding: 0 0.25rem;
@@ -40,7 +40,7 @@
   white-space: nowrap;
 }
 
-.ui-sidebar-toggle {
+:host .ui-sidebar-toggle {
   width: 100%;
   border: 1px solid var(--uilib-border);
   background: transparent;
@@ -50,21 +50,21 @@
   cursor: pointer;
 }
 
-.ui-sidebar-menu,
-.ui-sidebar-submenu {
+:host .ui-sidebar-menu,
+:host .ui-sidebar-submenu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.ui-sidebar-menu {
+:host .ui-sidebar-menu {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
-.ui-sidebar-item > .ui-sidebar-link,
-.ui-sidebar-subitem > .ui-sidebar-link {
+:host .ui-sidebar-item > .ui-sidebar-link,
+:host .ui-sidebar-subitem > .ui-sidebar-link {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -79,37 +79,37 @@
     color 0.15s ease;
 }
 
-.ui-sidebar-item:hover > .ui-sidebar-link,
-.ui-sidebar-subitem:hover > .ui-sidebar-link {
+:host .ui-sidebar-item:hover > .ui-sidebar-link,
+:host .ui-sidebar-subitem:hover > .ui-sidebar-link {
   background: var(--ui-sidebar-item-hover);
 }
 
-.ui-sidebar-item.active > .ui-sidebar-link,
-.ui-sidebar-subitem.active > .ui-sidebar-link {
+:host .ui-sidebar-item.active > .ui-sidebar-link,
+:host .ui-sidebar-subitem.active > .ui-sidebar-link {
   background: var(--ui-sidebar-item-active);
   color: var(--uilib-color-primary-700);
 }
 
-.ui-sidebar-item.disabled > .ui-sidebar-link,
-.ui-sidebar-subitem.disabled > .ui-sidebar-link {
+:host .ui-sidebar-item.disabled > .ui-sidebar-link,
+:host .ui-sidebar-subitem.disabled > .ui-sidebar-link {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.ui-sidebar-icon {
+:host .ui-sidebar-icon {
   color: var(--ui-sidebar-icon);
   display: inline-flex;
   justify-content: center;
   width: 1.5rem;
 }
 
-.ui-sidebar-label {
+:host .ui-sidebar-label {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.ui-sidebar-badge {
+:host .ui-sidebar-badge {
   background: var(--uilib-color-primary-600);
   color: var(--uilib-color-neutral-50);
   padding: 0.15rem 0.4rem;
@@ -117,7 +117,7 @@
   font-size: 0.75rem;
 }
 
-.ui-sidebar-submenu {
+:host .ui-sidebar-submenu {
   margin-top: 0.15rem;
   margin-left: 1.5rem;
   display: flex;
@@ -125,36 +125,36 @@
   gap: 0.1rem;
 }
 
-.ui-sidebar-footer {
+:host .ui-sidebar-footer {
   margin-top: auto;
   padding: 0.5rem 0.25rem;
 }
 
 /* Variant: compact */
-.ui-sidebar.ui-sidebar-compact {
+:host .ui-sidebar.ui-sidebar-compact {
   width: var(--ui-sidebar-width);
 }
 
-.ui-sidebar.ui-sidebar-compact.ui-sidebar-collapsed {
+:host .ui-sidebar.ui-sidebar-compact.ui-sidebar-collapsed {
   width: var(--ui-sidebar-collapsed-width);
 }
 
-.ui-sidebar.ui-sidebar-compact .ui-sidebar-label,
-.ui-sidebar.ui-sidebar-compact .ui-sidebar-badge {
+:host .ui-sidebar.ui-sidebar-compact .ui-sidebar-label,
+:host .ui-sidebar.ui-sidebar-compact .ui-sidebar-badge {
   display: inline-flex;
 }
 
-.ui-sidebar.ui-sidebar-collapsed .ui-sidebar-label,
-.ui-sidebar.ui-sidebar-collapsed .ui-sidebar-badge {
+:host .ui-sidebar.ui-sidebar-collapsed .ui-sidebar-label,
+:host .ui-sidebar.ui-sidebar-collapsed .ui-sidebar-badge {
   display: none;
 }
 
-.ui-sidebar.ui-sidebar-collapsed .ui-sidebar-submenu {
+:host .ui-sidebar.ui-sidebar-collapsed .ui-sidebar-submenu {
   display: none;
 }
 
 /* Variant: modern */
-.ui-sidebar.ui-sidebar-modern {
+:host .ui-sidebar.ui-sidebar-modern {
   border: none;
   box-shadow: var(--ui-sidebar-shadow);
   border-radius: 16px;
@@ -167,12 +167,12 @@
   backdrop-filter: blur(10px);
 }
 
-.ui-sidebar.ui-sidebar-modern .ui-sidebar-link {
+:host .ui-sidebar.ui-sidebar-modern .ui-sidebar-link {
   border-radius: 12px;
   background: color-mix(in srgb, var(--ui-sidebar-bg) 70%, transparent);
   border: 1px solid color-mix(in srgb, var(--uilib-border) 60%, transparent);
 }
 
-.ui-sidebar.ui-sidebar-modern .ui-sidebar-item.active > .ui-sidebar-link {
+:host .ui-sidebar.ui-sidebar-modern .ui-sidebar-item.active > .ui-sidebar-link {
   border-color: var(--uilib-color-primary-600);
 }

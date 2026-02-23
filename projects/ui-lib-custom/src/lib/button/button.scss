@@ -93,7 +93,7 @@
   );
 }
 
-button {
+:host button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -120,26 +120,26 @@ button {
   align-self: stretch;
 }
 
-button:focus-visible {
+:host button:focus-visible {
   outline: 2px solid var(--uilib-button-focus-color);
   outline-offset: 2px;
   box-shadow: var(--uilib-button-focus-ring);
 }
 
-button:hover:not(.btn-disabled) {
+:host button:hover:not(.btn-disabled) {
   background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
   color: var(--uilib-button-fg-hover, var(--uilib-button-fg));
   box-shadow: var(--uilib-button-shadow-hover, var(--uilib-button-shadow));
 }
 
-button:active:not(.btn-disabled) {
+:host button:active:not(.btn-disabled) {
   background-color: var(
     --uilib-button-bg-active,
     var(--uilib-button-bg-hover, var(--uilib-button-bg))
   );
 }
 
-.btn {
+:host .btn {
   --uilib-button-icon-gap: var(--uilib-space-2);
 
   display: inline-flex;
@@ -371,7 +371,7 @@ button:active:not(.btn-disabled) {
     flex-shrink: 0;
 
     &--loading {
-      animation: spin 1s linear infinite;
+      animation: uilib-spin 1s linear infinite;
     }
     &--start {
       order: 0;
@@ -436,16 +436,16 @@ button:active:not(.btn-disabled) {
   }
 }
 
-.btn-spinner {
+:host .btn-spinner {
   width: 1em;
   height: 1em;
   border-radius: 50%;
   border: 2px solid currentColor;
   border-right-color: transparent;
-  animation: btn-spin 0.8s linear infinite;
+  animation: uilib-btn-spin 0.8s linear infinite;
 }
 
-@keyframes btn-spin {
+@keyframes uilib-btn-spin {
   0% {
     transform: rotate(0deg);
   }
@@ -455,7 +455,7 @@ button:active:not(.btn-disabled) {
   }
 }
 
-@keyframes spin {
+@keyframes uilib-spin {
   from {
     transform: rotate(0deg);
   }

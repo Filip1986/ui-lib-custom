@@ -14,7 +14,7 @@
   display: block;
 }
 
-.card {
+:host .card {
   background: var(--uilib-card-bg, var(--uilib-surface));
   color: var(--uilib-card-text-color, var(--uilib-page-fg));
   border-radius: var(--uilib-card-radius, var(--uilib-radius-lg));

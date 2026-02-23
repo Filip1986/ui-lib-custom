@@ -10,13 +10,11 @@
   font-family: var(--uilib-font-body, inherit), sans-serif;
 }
 
-::ng-deep {
-  .p-card {
-    background-color: var(--uilib-surface) !important;
-  }
+:host .p-card {
+  background-color: var(--uilib-surface) !important;
 }
 
-:host ::ng-deep {
+:host {
   // Base styles for all login component elements
   .login-container {
     background-color: var(--uilib-surface);
@@ -117,7 +115,7 @@
 
 // Responsive adjustments
 @media screen and (max-width: 768px) {
-  :host ::ng-deep .login-container {
+  :host .login-container {
     width: 100%;
     margin: 0;
     border-radius: 0;

@@ -1,5 +1,4 @@
-:host,
-.ui-lib-accordion {
+:host {
   --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
   --uilib-accordion-border-radius: var(--uilib-radius-md, 8px);
   display: flex;

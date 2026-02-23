@@ -1,4 +1,4 @@
-.ui-lib-icon {
+:host .ui-lib-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7,7 +7,7 @@
   transition: var(--uilib-icon-transition, 150ms ease);
 }
 
-.ui-lib-icon--clickable {
+:host .ui-lib-icon--clickable {
   cursor: pointer;
 }
 

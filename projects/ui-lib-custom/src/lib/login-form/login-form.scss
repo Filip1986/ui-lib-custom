@@ -1,4 +1,4 @@
-.login-form {
+:host .login-form {
   width: 100%;
   color: var(--uilib-page-fg);
   --login-card-bg: var(--uilib-card-bg);
@@ -8,18 +8,18 @@
   --login-muted: var(--uilib-muted);
 }
 
-.login-card {
+:host .login-card {
   background: var(--login-card-bg);
   color: var(--login-card-text);
 }
 
-.form {
+:host .form {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.field {
+:host .field {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -38,14 +38,14 @@
   }
 }
 
-.remember {
+:host .remember {
   display: inline-flex;
   gap: 0.35rem;
   align-items: center;
   color: var(--login-muted);
 }
 
-.actions {
+:host .actions {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -60,7 +60,7 @@
   }
 }
 
-.social {
+:host .social {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -78,7 +78,7 @@
   }
 }
 
-.logo {
+:host .logo {
   text-align: center;
   margin-bottom: 0.5rem;
 
@@ -92,14 +92,14 @@
 }
 
 /* Layouts */
-.centered-wrapper {
+:host .centered-wrapper {
   min-height: 70vh;
   display: grid;
   place-items: center;
   padding: 2rem 1rem;
 }
 
-.split-wrapper {
+:host .split-wrapper {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   min-height: 75vh;
@@ -130,19 +130,19 @@
   }
 }
 
-.minimal-wrapper {
+:host .minimal-wrapper {
   display: grid;
   place-items: center;
   padding: 2rem 1rem;
 }
 
-.minimal-card {
+:host .minimal-card {
   box-shadow: var(--uilib-card-shadow, var(--uilib-shadow-lg, none));
   border: 1px solid var(--login-card-border);
 }
 
 @media (max-width: 900px) {
-  .split-wrapper {
+  :host .split-wrapper {
     grid-template-columns: 1fr;
 
     .branding {

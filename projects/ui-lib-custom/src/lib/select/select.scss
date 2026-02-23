@@ -1,4 +1,4 @@
-.ui-select {
+:host .ui-select {
   --uilib-select-option-hover: var(
     --uilib-select-option-hover,
     color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent)
@@ -11,12 +11,12 @@
   color: var(--uilib-page-fg);
 }
 
-.ui-select-label {
+:host .ui-select-label {
   font-weight: 600;
   color: inherit;
 }
 
-.ui-select-control {
+:host .ui-select-control {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -31,38 +31,38 @@
     box-shadow 0.15s ease;
 }
 
-.ui-select-control:focus-visible {
+:host .ui-select-control:focus-visible {
   outline: 2px solid var(--uilib-color-primary-500);
   outline-offset: 2px;
 }
 
-.ui-select-value {
+:host .ui-select-value {
   min-height: 1.25rem;
 }
 
-.ui-select-placeholder {
+:host .ui-select-placeholder {
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-select-actions {
+:host .ui-select-actions {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-.ui-select-clear {
+:host .ui-select-clear {
   border: none;
   background: transparent;
   cursor: pointer;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-select-arrow {
+:host .ui-select-arrow {
   font-size: 0.8rem;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-select-panel {
+:host .ui-select-panel {
   position: absolute;
   inset-inline: 0;
   margin-top: 0.35rem;
@@ -78,11 +78,11 @@
   gap: 0.25rem;
 }
 
-.ui-select-search {
+:host .ui-select-search {
   padding: 0.5rem 0.75rem 0 0.75rem;
 }
 
-.ui-select-search input {
+:host .ui-select-search input {
   width: 100%;
   padding: 0.45rem 0.6rem;
   border-radius: var(--uilib-select-radius, var(--uilib-radius-md));
@@ -91,13 +91,13 @@
   color: inherit;
 }
 
-.ui-select-group {
+:host .ui-select-group {
   padding: 0.25rem 0.75rem;
   font-weight: 600;
   color: var(--uilib-muted);
 }
 
-.ui-select-option {
+:host .ui-select-option {
   padding: 0.5rem 0.75rem;
   cursor: pointer;
   display: flex;
@@ -105,71 +105,71 @@
   gap: 0.5rem;
 }
 
-.ui-select-option:hover {
+:host .ui-select-option:hover {
   background: var(--uilib-select-option-hover);
 }
 
-.ui-select-option.selected {
+:host .ui-select-option.selected {
   font-weight: 600;
 }
 
-.ui-select-option.disabled {
+:host .ui-select-option.disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.ui-select-empty {
+:host .ui-select-empty {
   padding: 0.75rem;
   text-align: center;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-.ui-select.ui-select-disabled {
+:host .ui-select.ui-select-disabled {
   opacity: 0.6;
   pointer-events: none;
 }
 
-.ui-select-spinner {
+:host .ui-select-spinner {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
   border: 2px solid var(--uilib-input-placeholder, var(--uilib-muted));
   border-top-color: transparent;
-  animation: ui-select-spin 0.8s linear infinite;
+  animation: uilib-select-spin 0.8s linear infinite;
 }
 
-@keyframes ui-select-spin {
+@keyframes uilib-select-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-.ui-select-option--active {
+:host .ui-select-option--active {
   background: var(--uilib-select-option-hover);
   outline: 2px solid var(--uilib-color-primary-500);
   outline-offset: -2px;
 }
 
-ui-lib-select.ng-touched .ui-select-control {
+:host.ng-touched .ui-select-control {
   border-color: var(
     --uilib-select-border-touched,
     var(--uilib-color-primary-600)
   );
 }
 
-ui-lib-select.ng-dirty .ui-select-control {
+:host.ng-dirty .ui-select-control {
   border-color: var(
     --uilib-select-border-dirty,
     var(--uilib-color-primary-600)
   );
 }
 
-ui-lib-select.ng-invalid.ng-touched .ui-select-control,
-ui-lib-select.ng-invalid.ng-dirty .ui-select-control {
+:host.ng-invalid.ng-touched .ui-select-control,
+:host.ng-invalid.ng-dirty .ui-select-control {
   border-color: var(--uilib-select-border-invalid, var(--uilib-color-danger-600));
 }
 
-ui-lib-select.ng-disabled .ui-select-control {
+:host.ng-disabled .ui-select-control {
   opacity: 0.6;
 }
 

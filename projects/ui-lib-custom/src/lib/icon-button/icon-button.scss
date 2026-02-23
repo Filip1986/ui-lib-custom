@@ -2,7 +2,7 @@
   display: inline-flex;
 }
 
-.icon-button {
+:host .icon-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -22,6 +22,6 @@
   }
 }
 
-.icon-button__icon {
+:host .icon-button__icon {
   pointer-events: none;
 }
