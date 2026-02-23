@@ -18,4 +18,5 @@ module.exports = {
       },
     ],
   },
+  coverageDirectory: '<rootDir>/coverage/a11y',
 };
