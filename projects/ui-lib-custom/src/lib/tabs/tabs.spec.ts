@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
+import { TabsVariant } from './tabs.types';
 
 @Component({
   standalone: true,
@@ -93,6 +94,21 @@ class TabsNavigationHostComponent {
   `,
 })
 class TabsPerTabOverrideHostComponent {}
+
+@Component({
+  standalone: true,
+  imports: [Tabs, Tab],
+  template: `
+    <ui-lib-tabs [variant]="variant">
+      <ui-lib-tab label="First">First panel</ui-lib-tab>
+      <ui-lib-tab label="Second">Second panel</ui-lib-tab>
+      <ui-lib-tab label="Disabled" [disabled]="true">Disabled panel</ui-lib-tab>
+    </ui-lib-tabs>
+  `,
+})
+class TabsInteractionHostComponent {
+  variant: TabsVariant = 'material';
+}
 
 let rafQueue: FrameRequestCallback[] = [];
 
@@ -376,5 +392,92 @@ describe('Per-Panel Lazy', () => {
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.eager-content'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
+  });
+});
+
+describe('Tabs interactions', () => {
+  let fixture: ComponentFixture<TabsInteractionHostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TabsInteractionHostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TabsInteractionHostComponent);
+    fixture.detectChanges();
+  });
+
+  function tabButtons(): HTMLButtonElement[] {
+    return Array.from(fixture.nativeElement.querySelectorAll('button.tab-trigger'));
+  }
+
+  function tabPanels(): HTMLElement[] {
+    return Array.from(fixture.nativeElement.querySelectorAll('ui-lib-tab-panel'));
+  }
+
+  it('selects the first tab by default', () => {
+    const buttons: HTMLButtonElement[] = tabButtons();
+    expect(buttons[0].getAttribute('aria-selected')).toBe('true');
+    expect(buttons[1].getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('switches tabs on click', () => {
+    const buttons: HTMLButtonElement[] = tabButtons();
+    buttons[1].click();
+    fixture.detectChanges();
+
+    expect(buttons[1].getAttribute('aria-selected')).toBe('true');
+    expect(buttons[0].getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('switches tabs with ArrowRight key', () => {
+    const buttons: HTMLButtonElement[] = tabButtons();
+    buttons[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    fixture.detectChanges();
+
+    expect(buttons[1].getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('does not select disabled tab', () => {
+    const buttons: HTMLButtonElement[] = tabButtons();
+    buttons[2].click();
+    fixture.detectChanges();
+
+    expect(buttons[2].getAttribute('aria-disabled')).toBe('true');
+    expect(buttons[0].getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('shows and hides tab panels correctly', () => {
+    const buttons: HTMLButtonElement[] = tabButtons();
+    const panels: HTMLElement[] = tabPanels();
+
+    expect(panels[0].hasAttribute('hidden')).toBe(false);
+    expect(panels[1].hasAttribute('hidden')).toBe(true);
+
+    buttons[1].click();
+    fixture.detectChanges();
+
+    expect(panels[0].hasAttribute('hidden')).toBe(true);
+    expect(panels[1].hasAttribute('hidden')).toBe(false);
+  });
+
+  it('applies variant classes on the tab list', () => {
+    const createVariantFixture = (variant: TabsVariant): HTMLElement => {
+      const freshFixture: ComponentFixture<TabsInteractionHostComponent> = TestBed.createComponent(
+        TabsInteractionHostComponent
+      );
+      freshFixture.componentInstance.variant = variant;
+      freshFixture.detectChanges();
+      return freshFixture.nativeElement.querySelector('nav.tab-list');
+    };
+
+    const materialList: HTMLElement = createVariantFixture('material');
+    expect(materialList.className).toContain('tabs-material');
+
+    const bootstrapList: HTMLElement = createVariantFixture('bootstrap');
+    expect(bootstrapList.className).toContain('tabs-bootstrap');
+
+    const minimalList: HTMLElement = createVariantFixture('minimal');
+    expect(minimalList.className).toContain('tabs-minimal');
   });
 });

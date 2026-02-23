@@ -7,7 +7,14 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Grid],
   template: `
-    <ui-lib-grid [columns]="columns" [gap]="gap" [minColumnWidth]="minColumnWidth">
+    <ui-lib-grid
+      [columns]="columns"
+      [gap]="gap"
+      [spacing]="spacing"
+      [align]="align"
+      [justify]="justify"
+      [minColumnWidth]="minColumnWidth"
+    >
       <div>Cell 1</div>
       <div>Cell 2</div>
       <div>Cell 3</div>
@@ -17,13 +24,27 @@ import { Component } from '@angular/core';
 class TestHostComponent {
   columns: any = 12;
   gap: any = 4;
+  spacing: any = null;
+  align: any = 'stretch';
+  justify: any = 'stretch';
   minColumnWidth: string | undefined = undefined;
 }
+
+@Component({
+  standalone: true,
+  imports: [Grid],
+  template: `
+    <ui-lib-grid>
+      <div>Cell A</div>
+    </ui-lib-grid>
+  `,
+})
+class DefaultHostComponent {}
 
 describe('Grid', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestHostComponent],
+      imports: [TestHostComponent, DefaultHostComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
@@ -35,6 +56,13 @@ describe('Grid', () => {
     fixture.detectChanges();
     const gridElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-grid');
     return { fixture, component, gridElement };
+  }
+
+  function bootstrapDefault(): ComponentFixture<DefaultHostComponent> {
+    const fixture: ComponentFixture<DefaultHostComponent> =
+      TestBed.createComponent(DefaultHostComponent);
+    fixture.detectChanges();
+    return fixture;
   }
 
   it('should create', () => {
@@ -72,5 +100,31 @@ describe('Grid', () => {
     const items = gridElement.querySelectorAll('div');
     expect(items.length).toBe(3);
     expect(items[0].textContent).toBe('Cell 1');
+  });
+
+  it('creates with no inputs', () => {
+    const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
+    const gridElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-grid');
+    expect(gridElement).toBeTruthy();
+  });
+
+  it('should apply align-items', () => {
+    const { gridElement } = bootstrap({ align: 'center' });
+    expect(gridElement.style.alignItems).toBe('center');
+  });
+
+  it('should apply justify-items', () => {
+    const { gridElement } = bootstrap({ justify: 'end' });
+    expect(gridElement.style.justifyItems).toBe('end');
+  });
+
+  it('uses semantic spacing tokens when spacing is set', () => {
+    const { gridElement } = bootstrap({ spacing: 'md' });
+    expect(gridElement.style.gap).toContain('1rem');
+  });
+
+  it('accepts numeric spacing when spacing is a number', () => {
+    const { gridElement } = bootstrap({ spacing: 2 });
+    expect(gridElement.style.gap).toContain('0.5rem');
   });
 });

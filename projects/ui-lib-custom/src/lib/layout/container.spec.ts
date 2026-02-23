@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Container],
   template: `
-    <ui-lib-container [size]="size" [centered]="centered" [padding]="padding">
+    <ui-lib-container [size]="size" [centered]="centered" [padding]="padding" [inset]="inset">
       <p>Container content</p>
     </ui-lib-container>
   `,
@@ -16,12 +16,24 @@ class TestHostComponent {
   size: any = 'lg';
   centered = true;
   padding: any = 4;
+  inset: any = null;
 }
+
+@Component({
+  standalone: true,
+  imports: [Container],
+  template: `
+    <ui-lib-container>
+      <p>Default content</p>
+    </ui-lib-container>
+  `,
+})
+class DefaultHostComponent {}
 
 describe('Container', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestHostComponent],
+      imports: [TestHostComponent, DefaultHostComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
@@ -33,6 +45,13 @@ describe('Container', () => {
     fixture.detectChanges();
     const containerElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-container');
     return { fixture, component, containerElement };
+  }
+
+  function bootstrapDefault(): ComponentFixture<DefaultHostComponent> {
+    const fixture: ComponentFixture<DefaultHostComponent> =
+      TestBed.createComponent(DefaultHostComponent);
+    fixture.detectChanges();
+    return fixture;
   }
 
   it('should create', () => {
@@ -78,5 +97,17 @@ describe('Container', () => {
     const paragraph = containerElement.querySelector('p');
     expect(paragraph).toBeTruthy();
     expect(paragraph?.textContent).toBe('Container content');
+  });
+
+  it('creates with no inputs', () => {
+    const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
+    const containerElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-container');
+    expect(containerElement).toBeTruthy();
+  });
+
+  it('uses inset tokens when inset is set', () => {
+    const { containerElement } = bootstrap({ inset: 'lg' });
+    expect(containerElement.style.paddingLeft).toContain('1.5rem');
+    expect(containerElement.style.paddingRight).toContain('1.5rem');
   });
 });

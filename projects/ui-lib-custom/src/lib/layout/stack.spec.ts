@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Stack],
   template: `
-    <ui-lib-stack [direction]="direction" [gap]="gap" [align]="align" [justify]="justify">
+    <ui-lib-stack
+      [direction]="direction"
+      [gap]="gap"
+      [spacing]="spacing"
+      [align]="align"
+      [justify]="justify"
+    >
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -17,14 +23,26 @@ import { Component } from '@angular/core';
 class TestHostComponent {
   direction: 'vertical' | 'horizontal' = 'vertical';
   gap: any = 4;
+  spacing: any = null;
   align: any = 'stretch';
   justify: any = 'start';
 }
 
+@Component({
+  standalone: true,
+  imports: [Stack],
+  template: `
+    <ui-lib-stack>
+      <div>Only Item</div>
+    </ui-lib-stack>
+  `,
+})
+class DefaultHostComponent {}
+
 describe('Stack', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestHostComponent],
+      imports: [TestHostComponent, DefaultHostComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
@@ -36,6 +54,13 @@ describe('Stack', () => {
     fixture.detectChanges();
     const stackElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-stack');
     return { fixture, component, stackElement };
+  }
+
+  function bootstrapDefault(): ComponentFixture<DefaultHostComponent> {
+    const fixture: ComponentFixture<DefaultHostComponent> =
+      TestBed.createComponent(DefaultHostComponent);
+    fixture.detectChanges();
+    return fixture;
   }
 
   it('should create', () => {
@@ -78,5 +103,21 @@ describe('Stack', () => {
     const items = stackElement.querySelectorAll('div');
     expect(items.length).toBe(3);
     expect(items[0].textContent).toBe('Item 1');
+  });
+
+  it('creates with no inputs', () => {
+    const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
+    const stackElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-stack');
+    expect(stackElement).toBeTruthy();
+  });
+
+  it('uses semantic spacing tokens when spacing is set', () => {
+    const { stackElement } = bootstrap({ spacing: 'lg' });
+    expect(stackElement.style.gap).toContain('1.5rem');
+  });
+
+  it('accepts numeric spacing when spacing is a number', () => {
+    const { stackElement } = bootstrap({ spacing: 2 });
+    expect(stackElement.style.gap).toContain('0.5rem');
   });
 });

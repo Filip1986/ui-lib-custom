@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [Inline],
   template: `
-    <ui-lib-inline [gap]="gap" [align]="align" [justify]="justify">
+    <ui-lib-inline [gap]="gap" [spacing]="spacing" [align]="align" [justify]="justify">
       <span>Tag 1</span>
       <span>Tag 2</span>
       <span>Tag 3</span>
@@ -16,14 +16,26 @@ import { Component } from '@angular/core';
 })
 class TestHostComponent {
   gap: any = 2;
+  spacing: any = null;
   align: any = 'center';
   justify: any = 'start';
 }
 
+@Component({
+  standalone: true,
+  imports: [Inline],
+  template: `
+    <ui-lib-inline>
+      <span>Only Tag</span>
+    </ui-lib-inline>
+  `,
+})
+class DefaultHostComponent {}
+
 describe('Inline', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TestHostComponent],
+      imports: [TestHostComponent, DefaultHostComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
@@ -35,6 +47,13 @@ describe('Inline', () => {
     fixture.detectChanges();
     const inlineElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-inline');
     return { fixture, component, inlineElement };
+  }
+
+  function bootstrapDefault(): ComponentFixture<DefaultHostComponent> {
+    const fixture: ComponentFixture<DefaultHostComponent> =
+      TestBed.createComponent(DefaultHostComponent);
+    fixture.detectChanges();
+    return fixture;
   }
 
   it('should create', () => {
@@ -68,5 +87,21 @@ describe('Inline', () => {
     const items = inlineElement.querySelectorAll('span');
     expect(items.length).toBe(3);
     expect(items[0].textContent).toBe('Tag 1');
+  });
+
+  it('creates with no inputs', () => {
+    const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
+    const inlineElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-inline');
+    expect(inlineElement).toBeTruthy();
+  });
+
+  it('uses semantic spacing tokens when spacing is set', () => {
+    const { inlineElement } = bootstrap({ spacing: 'sm' });
+    expect(inlineElement.style.gap).toContain('0.5rem');
+  });
+
+  it('accepts numeric spacing when spacing is a number', () => {
+    const { inlineElement } = bootstrap({ spacing: 4 });
+    expect(inlineElement.style.gap).toContain('1rem');
   });
 });

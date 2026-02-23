@@ -101,4 +101,36 @@ describe('Badge', () => {
     expect(badgeElement.getAttribute('role')).toBe('status');
     expect(badgeElement.getAttribute('aria-label')).toBe('online');
   });
+
+  it('applies each color class', () => {
+    const colors: BadgeColor[] = [
+      'primary',
+      'secondary',
+      'success',
+      'danger',
+      'warning',
+      'info',
+      'neutral',
+    ];
+
+    colors.forEach((color: BadgeColor): void => {
+      const { badgeElement } = bootstrap({ color });
+      expect(badgeElement.className).toContain(`badge-color-${color}`);
+    });
+  });
+
+  it('applies each size class', () => {
+    const sizes: BadgeSize[] = ['sm', 'md', 'lg'];
+
+    sizes.forEach((size: BadgeSize): void => {
+      const { badgeElement } = bootstrap({ size });
+      expect(badgeElement.className).toContain(`badge-size-${size}`);
+    });
+  });
+
+  it('renders dot mode without text content', () => {
+    const { badgeElement, styles } = bootstrap({ dot: true, label: 'status' });
+    expect(badgeElement.className).toContain('badge-dot');
+    expect(styles.fontSize).toBe('0px');
+  });
 });
