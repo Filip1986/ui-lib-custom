@@ -1,4 +1,20 @@
 @use './theme-mixins' as *;
+@use '../button/button' as button;
+@use '../card/card' as card;
+@use '../input/input' as input;
+@use '../select/select' as select;
+@use '../checkbox/checkbox' as checkbox;
+@use '../select-button/select-button' as selectButton;
+@use '../badge/badge' as badge;
+@use '../tabs/tabs' as tabs;
+@use '../accordion/accordion' as accordion;
+@use '../accordion/accordion-panel' as accordionPanel;
+@use '../layout/stack' as stack;
+@use '../layout/inline' as inline;
+@use '../layout/grid' as grid;
+@use '../layout/container' as container;
+@use '../icon/icon' as icon;
+@use '../alert/alert' as alert;
 
 /**
  * Dark Theme CSS Variables
@@ -7,6 +23,22 @@
 
 [data-theme="dark"] {
   @include dark-theme-vars;
+  @include button.button-dark-theme;
+  @include card.card-dark-theme;
+  @include input.input-dark-theme;
+  @include select.select-dark-theme;
+  @include checkbox.checkbox-dark-theme;
+  @include selectButton.select-button-dark-theme;
+  @include badge.badge-dark-theme;
+  @include tabs.tabs-dark-theme;
+  @include accordion.accordion-dark-theme;
+  @include accordionPanel.accordion-panel-dark-theme;
+  @include stack.stack-dark-theme;
+  @include inline.inline-dark-theme;
+  @include grid.grid-dark-theme;
+  @include container.container-dark-theme;
+  @include icon.icon-dark-theme;
+  @include alert.alert-dark-theme;
 }
 
 /**
@@ -16,6 +48,21 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme]) {
     @include dark-theme-vars;
+    @include button.button-dark-theme;
+    @include card.card-dark-theme;
+    @include input.input-dark-theme;
+    @include select.select-dark-theme;
+    @include checkbox.checkbox-dark-theme;
+    @include selectButton.select-button-dark-theme;
+    @include badge.badge-dark-theme;
+    @include tabs.tabs-dark-theme;
+    @include accordion.accordion-dark-theme;
+    @include accordionPanel.accordion-panel-dark-theme;
+    @include stack.stack-dark-theme;
+    @include inline.inline-dark-theme;
+    @include grid.grid-dark-theme;
+    @include container.container-dark-theme;
+    @include icon.icon-dark-theme;
+    @include alert.alert-dark-theme;
   }
 }
-

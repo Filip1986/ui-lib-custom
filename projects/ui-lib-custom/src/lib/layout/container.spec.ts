@@ -110,4 +110,19 @@ describe('Container', () => {
     expect(containerElement.style.paddingLeft).toContain('1.5rem');
     expect(containerElement.style.paddingRight).toContain('1.5rem');
   });
+
+  it('applies dark theme variables', () => {
+    const { containerElement } = bootstrap();
+    const light: string = getComputedStyle(containerElement)
+      .getPropertyValue('--uilib-container-fg')
+      .trim();
+
+    containerElement.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(containerElement)
+      .getPropertyValue('--uilib-container-fg')
+      .trim();
+
+    expect(dark).not.toBe(light);
+    containerElement.removeAttribute('data-theme');
+  });
 });

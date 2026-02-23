@@ -127,4 +127,15 @@ describe('Grid', () => {
     const { gridElement } = bootstrap({ spacing: 2 });
     expect(gridElement.style.gap).toContain('0.5rem');
   });
+
+  it('applies dark theme variables', () => {
+    const { gridElement } = bootstrap();
+    const light: string = getComputedStyle(gridElement).getPropertyValue('--uilib-grid-fg').trim();
+
+    gridElement.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(gridElement).getPropertyValue('--uilib-grid-fg').trim();
+
+    expect(dark).not.toBe(light);
+    gridElement.removeAttribute('data-theme');
+  });
 });

@@ -10,3 +10,7 @@
 .ui-lib-icon--clickable {
   cursor: pointer;
 }
+
+@mixin icon-dark-theme {
+  --uilib-icon-color: var(--uilib-text-dark-primary);
+}

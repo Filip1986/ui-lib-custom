@@ -370,3 +370,15 @@ ui-lib-tabs[data-orientation='vertical'] .tab-panels {
   grid-area: panels;
   margin-top: 0;
 }
+
+@mixin tabs-dark-theme {
+  --uilib-tabs-bg: transparent;
+  --uilib-tabs-border: var(--uilib-border-dark);
+  --uilib-tabs-indicator-color: var(--uilib-color-primary-dark);
+  --uilib-tabs-color: var(--uilib-text-dark-primary);
+  --uilib-tabs-color-active: var(--uilib-color-primary-dark);
+  --uilib-tabs-color-disabled: var(--uilib-text-dark-disabled);
+  --uilib-tab-bg-hover: color-mix(in srgb, var(--uilib-text-dark-primary) 6%, transparent);
+  --uilib-tab-bg-active: color-mix(in srgb, var(--uilib-text-dark-primary) 10%, transparent);
+  --uilib-focus-ring-color: var(--uilib-color-primary-dark);
+}

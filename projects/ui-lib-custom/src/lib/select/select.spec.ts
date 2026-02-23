@@ -280,6 +280,17 @@ describe('UiLibSelect basics', () => {
     const valueEl: HTMLElement = fixture.nativeElement.querySelector('.ui-select-value');
     expect(valueEl.textContent?.trim()).toBe('Alpha');
   });
+
+  it('applies dark theme variables', () => {
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const light: string = getComputedStyle(host).getPropertyValue('--uilib-select-bg').trim();
+
+    host.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(host).getPropertyValue('--uilib-select-bg').trim();
+
+    expect(dark).not.toBe(light);
+    host.removeAttribute('data-theme');
+  });
 });
 
 describe('UiLibSelect ngModel', () => {

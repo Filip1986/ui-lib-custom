@@ -104,4 +104,19 @@ describe('Inline', () => {
     const { inlineElement } = bootstrap({ spacing: 4 });
     expect(inlineElement.style.gap).toContain('1rem');
   });
+
+  it('applies dark theme variables', () => {
+    const { inlineElement } = bootstrap();
+    const light: string = getComputedStyle(inlineElement)
+      .getPropertyValue('--uilib-inline-fg')
+      .trim();
+
+    inlineElement.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(inlineElement)
+      .getPropertyValue('--uilib-inline-fg')
+      .trim();
+
+    expect(dark).not.toBe(light);
+    inlineElement.removeAttribute('data-theme');
+  });
 });

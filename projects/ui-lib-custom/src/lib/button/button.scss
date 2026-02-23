@@ -463,3 +463,46 @@ button:active:not(.btn-disabled) {
     transform: rotate(360deg);
   }
 }
+
+@mixin button-dark-theme {
+  --uilib-button-primary-bg: var(--uilib-color-primary-dark);
+  --uilib-button-primary-bg-hover: color-mix(in srgb, var(--uilib-color-primary-dark) 85%, #000000);
+  --uilib-button-primary-border: var(--uilib-color-primary-dark);
+  --uilib-button-primary-fg: #0b1220;
+
+  --uilib-button-secondary-bg: var(--uilib-surface-dark-4);
+  --uilib-button-secondary-bg-hover: var(--uilib-surface-dark-5);
+  --uilib-button-secondary-border: var(--uilib-border-dark);
+  --uilib-button-secondary-fg: var(--uilib-text-dark-primary);
+
+  --uilib-button-success-bg: var(--uilib-color-success-600);
+  --uilib-button-success-bg-hover: var(--uilib-color-success-700);
+  --uilib-button-success-border: var(--uilib-color-success-600);
+  --uilib-button-success-fg: #0b1220;
+
+  --uilib-button-danger-bg: var(--uilib-color-danger-600);
+  --uilib-button-danger-bg-hover: var(--uilib-color-danger-700);
+  --uilib-button-danger-border: var(--uilib-color-danger-600);
+  --uilib-button-danger-fg: #0b1220;
+
+  --uilib-button-warning-bg: var(--uilib-color-warning-600);
+  --uilib-button-warning-bg-hover: var(--uilib-color-warning-700);
+  --uilib-button-warning-border: var(--uilib-color-warning-600);
+  --uilib-button-warning-fg: #0b1220;
+
+  --uilib-button-info-bg: var(--uilib-color-info-600);
+  --uilib-button-info-bg-hover: var(--uilib-color-info-700);
+  --uilib-button-info-border: var(--uilib-color-info-600);
+  --uilib-button-info-fg: #0b1220;
+
+  --uilib-button-contrast-bg: var(--uilib-text-dark-primary);
+  --uilib-button-contrast-bg-hover: var(--uilib-text-dark-secondary);
+  --uilib-button-contrast-border: var(--uilib-text-dark-primary);
+  --uilib-button-contrast-fg: #0b1220;
+
+  --uilib-button-ghost-hover-bg: rgba(255, 255, 255, 0.08);
+  --uilib-button-ghost-active-bg: rgba(255, 255, 255, 0.12);
+
+  --uilib-button-focus-color: var(--uilib-color-primary-dark);
+  --uilib-button-focus-ring-color: color-mix(in srgb, var(--uilib-color-primary-dark) 30%, transparent);
+}

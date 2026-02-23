@@ -169,6 +169,17 @@ describe('Tabs', () => {
     expect(tabButtons[0].attributes['aria-selected']).toBe('true');
     expect(tabButtons[1].attributes['aria-selected']).toBe('false');
   });
+
+  it('applies dark theme variables', () => {
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const light: string = getComputedStyle(host).getPropertyValue('--uilib-tabs-color').trim();
+
+    host.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(host).getPropertyValue('--uilib-tabs-color').trim();
+
+    expect(dark).not.toBe(light);
+    host.removeAttribute('data-theme');
+  });
 });
 
 describe('Tabs per-tab lazy', () => {

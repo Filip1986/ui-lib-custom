@@ -120,4 +120,17 @@ describe('Stack', () => {
     const { stackElement } = bootstrap({ spacing: 2 });
     expect(stackElement.style.gap).toContain('0.5rem');
   });
+
+  it('applies dark theme variables', () => {
+    const { stackElement } = bootstrap();
+    const light: string = getComputedStyle(stackElement)
+      .getPropertyValue('--uilib-stack-fg')
+      .trim();
+
+    stackElement.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(stackElement).getPropertyValue('--uilib-stack-fg').trim();
+
+    expect(dark).not.toBe(light);
+    stackElement.removeAttribute('data-theme');
+  });
 });

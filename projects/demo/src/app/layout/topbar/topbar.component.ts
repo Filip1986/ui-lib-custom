@@ -19,15 +19,15 @@ export class TopbarComponent {
   themeVariant = input<string>('material');
   savedThemes = input<string[]>([]);
 
-  onMenuButtonClick() {
+  onMenuButtonClick(): void {
     this.menuButtonClick.emit();
   }
 
-  onThemeToggle() {
+  onThemeToggle(): void {
     this.themeToggle.emit();
   }
 
-  onLoadTheme(name: string) {
+  onLoadTheme(name: string): void {
     if (name) {
       this.loadTheme.emit(name);
     }

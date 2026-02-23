@@ -51,3 +51,11 @@
     font-size: var(--uilib-font-size-lg, 1.125rem);
   }
 }
+
+@mixin accordion-dark-theme {
+  --uilib-accordion-panel-bg: var(--uilib-surface-dark-1);
+  --uilib-accordion-panel-border: 1px solid var(--uilib-border-dark);
+  --uilib-accordion-header-bg: var(--uilib-surface-dark-2);
+  --uilib-accordion-header-bg-hover: var(--uilib-surface-dark-3);
+  --uilib-accordion-content-bg: var(--uilib-surface-dark-1);
+}

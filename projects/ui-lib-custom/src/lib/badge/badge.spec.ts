@@ -133,4 +133,15 @@ describe('Badge', () => {
     expect(badgeElement.className).toContain('badge-dot');
     expect(styles.fontSize).toBe('0px');
   });
+
+  it('applies dark theme variables', () => {
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const light: string = getComputedStyle(host).getPropertyValue('--uilib-badge-bg').trim();
+
+    host.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(host).getPropertyValue('--uilib-badge-bg').trim();
+
+    expect(dark).not.toBe(light);
+    host.removeAttribute('data-theme');
+  });
 });

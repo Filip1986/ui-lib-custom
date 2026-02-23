@@ -49,4 +49,15 @@ describe('Icon', () => {
 
     expect(fixture.nativeElement.classList.contains('ui-lib-icon--clickable')).toBeTruthy();
   });
+
+  it('applies dark theme variables', () => {
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const light: string = getComputedStyle(host).getPropertyValue('--uilib-icon-color').trim();
+
+    host.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(host).getPropertyValue('--uilib-icon-color').trim();
+
+    expect(dark).not.toBe(light);
+    host.removeAttribute('data-theme');
+  });
 });

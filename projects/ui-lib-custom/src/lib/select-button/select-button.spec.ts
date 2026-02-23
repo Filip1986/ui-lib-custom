@@ -586,6 +586,21 @@ describe('SelectButton', () => {
       expect(customItems[0].textContent?.trim()).toBe('Option 1');
     });
   });
+
+  it('applies dark theme variables', () => {
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const light: string = getComputedStyle(host)
+      .getPropertyValue('--uilib-select-button-material-bg')
+      .trim();
+
+    host.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(host)
+      .getPropertyValue('--uilib-select-button-material-bg')
+      .trim();
+
+    expect(dark).not.toBe(light);
+    host.removeAttribute('data-theme');
+  });
 });
 
 describe('SelectButton keyboard behavior', () => {
