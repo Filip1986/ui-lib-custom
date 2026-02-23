@@ -263,6 +263,18 @@ describe('UiLibInput basics', () => {
 
     expect(inputEl().getAttribute('type')).toBe('password');
   });
+
+  it('applies dark theme variables', () => {
+    const root: HTMLElement = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(root).getPropertyValue('--uilib-input-bg').trim();
+
+    root.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(root).getPropertyValue('--uilib-input-bg').trim();
+
+    expect(dark).not.toBe(light);
+    root.removeAttribute('data-theme');
+  });
 });
 
 describe('UiLibInput ngModel integration', () => {

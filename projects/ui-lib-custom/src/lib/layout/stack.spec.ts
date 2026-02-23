@@ -122,15 +122,18 @@ describe('Stack', () => {
   });
 
   it('applies dark theme variables', () => {
-    const { stackElement } = bootstrap();
-    const light: string = getComputedStyle(stackElement)
-      .getPropertyValue('--uilib-stack-fg')
-      .trim();
+    const root: HTMLElement = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    const scope: HTMLDivElement = document.createElement('div');
+    document.body.appendChild(scope);
+    scope.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(scope).getPropertyValue('--uilib-stack-fg').trim();
 
-    stackElement.setAttribute('data-theme', 'dark');
-    const dark: string = getComputedStyle(stackElement).getPropertyValue('--uilib-stack-fg').trim();
+    scope.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-stack-fg').trim();
 
     expect(dark).not.toBe(light);
-    stackElement.removeAttribute('data-theme');
+    scope.remove();
+    root.removeAttribute('data-theme');
   });
 });

@@ -106,17 +106,18 @@ describe('Inline', () => {
   });
 
   it('applies dark theme variables', () => {
-    const { inlineElement } = bootstrap();
-    const light: string = getComputedStyle(inlineElement)
-      .getPropertyValue('--uilib-inline-fg')
-      .trim();
+    const root: HTMLElement = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    const scope: HTMLDivElement = document.createElement('div');
+    document.body.appendChild(scope);
+    scope.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(scope).getPropertyValue('--uilib-inline-fg').trim();
 
-    inlineElement.setAttribute('data-theme', 'dark');
-    const dark: string = getComputedStyle(inlineElement)
-      .getPropertyValue('--uilib-inline-fg')
-      .trim();
+    scope.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-inline-fg').trim();
 
     expect(dark).not.toBe(light);
-    inlineElement.removeAttribute('data-theme');
+    scope.remove();
+    root.removeAttribute('data-theme');
   });
 });

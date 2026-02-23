@@ -157,15 +157,16 @@ describe('Card', () => {
   });
 
   it('applies dark theme variables', async () => {
-    const fixture: ComponentFixture<CardHost> = await bootstrap();
-    const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    const light: string = getComputedStyle(host).getPropertyValue('--uilib-card-bg').trim();
+    const scope: HTMLDivElement = document.createElement('div');
+    document.body.appendChild(scope);
+    scope.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(scope).getPropertyValue('--uilib-card-bg').trim();
 
-    host.setAttribute('data-theme', 'dark');
-    const dark: string = getComputedStyle(host).getPropertyValue('--uilib-card-bg').trim();
+    scope.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-card-bg').trim();
 
     expect(dark).not.toBe(light);
-    host.removeAttribute('data-theme');
+    scope.remove();
   });
 });
 

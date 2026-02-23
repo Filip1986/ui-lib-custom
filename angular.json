@@ -24,7 +24,11 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "tsConfig": "projects/ui-lib-custom/tsconfig.spec.json"
+            "tsConfig": "projects/ui-lib-custom/tsconfig.spec.json",
+            "styles": [
+              "projects/ui-lib-custom/src/lib/themes/themes.scss",
+              "projects/ui-lib-custom/src/lib/styles/dark-theme.scss"
+            ]
           }
         }
       }

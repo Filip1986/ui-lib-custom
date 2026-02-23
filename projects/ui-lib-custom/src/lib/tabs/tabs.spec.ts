@@ -171,14 +171,15 @@ describe('Tabs', () => {
   });
 
   it('applies dark theme variables', () => {
-    const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    const light: string = getComputedStyle(host).getPropertyValue('--uilib-tabs-color').trim();
+    const root: HTMLElement = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(root).getPropertyValue('--uilib-tabs-color').trim();
 
-    host.setAttribute('data-theme', 'dark');
-    const dark: string = getComputedStyle(host).getPropertyValue('--uilib-tabs-color').trim();
+    root.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(root).getPropertyValue('--uilib-tabs-color').trim();
 
     expect(dark).not.toBe(light);
-    host.removeAttribute('data-theme');
+    root.removeAttribute('data-theme');
   });
 });
 

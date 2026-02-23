@@ -588,18 +588,23 @@ describe('SelectButton', () => {
   });
 
   it('applies dark theme variables', () => {
-    const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    const light: string = getComputedStyle(host)
+    const root: HTMLElement = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    const scope: HTMLDivElement = document.createElement('div');
+    document.body.appendChild(scope);
+    scope.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(scope)
       .getPropertyValue('--uilib-select-button-material-bg')
       .trim();
 
-    host.setAttribute('data-theme', 'dark');
-    const dark: string = getComputedStyle(host)
+    scope.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(scope)
       .getPropertyValue('--uilib-select-button-material-bg')
       .trim();
 
     expect(dark).not.toBe(light);
-    host.removeAttribute('data-theme');
+    scope.remove();
+    root.removeAttribute('data-theme');
   });
 });
 

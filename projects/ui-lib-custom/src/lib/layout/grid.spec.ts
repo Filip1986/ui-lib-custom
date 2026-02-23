@@ -129,13 +129,18 @@ describe('Grid', () => {
   });
 
   it('applies dark theme variables', () => {
-    const { gridElement } = bootstrap();
-    const light: string = getComputedStyle(gridElement).getPropertyValue('--uilib-grid-fg').trim();
+    const root: HTMLElement = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    const scope: HTMLDivElement = document.createElement('div');
+    document.body.appendChild(scope);
+    scope.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(scope).getPropertyValue('--uilib-grid-fg').trim();
 
-    gridElement.setAttribute('data-theme', 'dark');
-    const dark: string = getComputedStyle(gridElement).getPropertyValue('--uilib-grid-fg').trim();
+    scope.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-grid-fg').trim();
 
     expect(dark).not.toBe(light);
-    gridElement.removeAttribute('data-theme');
+    scope.remove();
+    root.removeAttribute('data-theme');
   });
 });

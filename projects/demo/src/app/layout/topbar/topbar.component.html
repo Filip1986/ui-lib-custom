@@ -40,14 +40,14 @@
     <a href="#" class="topbar-link" title="Documentation" aria-label="Documentation">
       <i class="pi pi-book"></i>
     </a>
-    <button
-      class="theme-toggle"
-      title="Toggle Theme"
-      aria-label="Toggle Theme"
+    <ui-lib-button
+      variant="minimal"
+      size="small"
+      appearance="ghost"
       (click)="onThemeToggle()"
+      aria-label="Toggle dark mode"
     >
-      <i class="pi" [ngClass]="theme() === 'dark' ? 'pi-sun' : 'pi-moon'"></i>
-      <span class="theme-label">{{ theme() === 'dark' ? 'Light' : 'Dark' }}</span>
-    </button>
+      {{ mode() === 'dark' ? 'Light mode' : 'Dark mode' }}
+    </ui-lib-button>
   </div>
 </div>

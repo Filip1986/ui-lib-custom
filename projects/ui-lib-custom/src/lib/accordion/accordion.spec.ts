@@ -320,4 +320,21 @@ describe('Accordion', () => {
     expect(contents[0].getAttribute('data-state')).toBe('expanded');
     expect(contents[0].hasAttribute('hidden')).toBeFalsy();
   });
+
+  it('applies dark theme variables', () => {
+    const fixture = createTestAccordion();
+    const host: HTMLElement = fixture.nativeElement.querySelector('ui-lib-accordion');
+    host.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(host)
+      .getPropertyValue('--uilib-accordion-panel-bg')
+      .trim();
+
+    host.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(host)
+      .getPropertyValue('--uilib-accordion-panel-bg')
+      .trim();
+
+    expect(dark).not.toBe(light);
+    host.removeAttribute('data-theme');
+  });
 });

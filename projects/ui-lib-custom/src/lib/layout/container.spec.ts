@@ -112,17 +112,18 @@ describe('Container', () => {
   });
 
   it('applies dark theme variables', () => {
-    const { containerElement } = bootstrap();
-    const light: string = getComputedStyle(containerElement)
-      .getPropertyValue('--uilib-container-fg')
-      .trim();
+    const root: HTMLElement = document.documentElement;
+    root.setAttribute('data-theme', 'light');
+    const scope: HTMLDivElement = document.createElement('div');
+    document.body.appendChild(scope);
+    scope.setAttribute('data-theme', 'light');
+    const light: string = getComputedStyle(scope).getPropertyValue('--uilib-container-fg').trim();
 
-    containerElement.setAttribute('data-theme', 'dark');
-    const dark: string = getComputedStyle(containerElement)
-      .getPropertyValue('--uilib-container-fg')
-      .trim();
+    scope.setAttribute('data-theme', 'dark');
+    const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-container-fg').trim();
 
     expect(dark).not.toBe(light);
-    containerElement.removeAttribute('data-theme');
+    scope.remove();
+    root.removeAttribute('data-theme');
   });
 });
