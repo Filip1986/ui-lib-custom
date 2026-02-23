@@ -9,8 +9,11 @@ import {
   forwardRef,
   input,
   signal,
+  effect,
+  inject,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 export type InputVariant = 'material' | 'bootstrap' | 'minimal';
 export type InputLabelFloat = 'over' | 'in' | 'on';
@@ -42,7 +45,7 @@ export class UiLibInput implements ControlValueAccessor {
   label = input<string>('');
   labelFloat = input<InputLabelFloat>('over');
   placeholder = input<string>('');
-  error = input<string>('');
+  error = input<string | null>(null);
   disabled = input<boolean>(false);
   required = input<boolean>(false);
   showCounter = input<boolean>(false);
@@ -92,7 +95,20 @@ export class UiLibInput implements ControlValueAccessor {
 
   @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
 
-  constructor(private readonly el: ElementRef<HTMLElement>) {}
+  private readonly liveAnnouncer = inject(LiveAnnouncerService);
+  private previousError: string | null = null;
+
+  constructor(private readonly el: ElementRef<HTMLElement>) {
+    effect((): void => {
+      const currentError: string | null = this.error();
+
+      if (currentError && currentError !== this.previousError) {
+        this.liveAnnouncer.announceError(currentError);
+      }
+
+      this.previousError = currentError;
+    });
+  }
 
   writeValue(obj: unknown): void {
     this.value.set((obj ?? '') as string);

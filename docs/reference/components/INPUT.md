@@ -87,6 +87,37 @@ type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | '
 - Error state is triggered when `error` has a non-empty value.
 - Required indicator renders when `required=true`.
 - `aria-invalid` and `aria-describedby` are set when an error is present.
+- Error messages are announced to screen readers when they change.
+
+---
+
+## Error Announcements
+
+Form errors are automatically announced to screen readers:
+
+```html
+<ui-lib-input label="Email" [error]="emailError" />
+```
+
+When `error` changes, the message is announced via an aria-live region.
+
+### Manual Announcements
+
+```typescript
+import { LiveAnnouncerService } from 'ui-lib-custom';
+
+export class MyComponent {
+  private readonly announcer = inject(LiveAnnouncerService);
+
+  onSave(): void {
+    this.announcer.announceSuccess('Changes saved successfully');
+  }
+
+  onError(message: string): void {
+    this.announcer.announceError(message);
+  }
+}
+```
 
 ---
 

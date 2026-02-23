@@ -68,7 +68,11 @@
   </div>
 
   <div class="ui-input-meta">
-    <span class="ui-input-error-text" *ngIf="error()" [id]="describedById()">{{ error() }}</span>
+    @if (error()) {
+      <div class="ui-input-error-text" [id]="describedById()" role="alert">
+        {{ error() }}
+      </div>
+    }
     @if (showCounter() && maxLength()) {
       <span class="ui-input-counter">{{ currentLength() }} / {{ maxLength() }}</span>
     }

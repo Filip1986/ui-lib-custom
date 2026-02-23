@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, model, inject } from '@angular/core';
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 export type CheckboxVariant = 'material' | 'bootstrap' | 'minimal';
 export type CheckboxSize = 'sm' | 'md' | 'lg';
@@ -41,6 +42,8 @@ export class Checkbox {
   readonly labelElementId = `${this.controlId}-label`;
   readonly descriptionElementId = `${this.controlId}-description`;
 
+  private readonly liveAnnouncer = inject(LiveAnnouncerService);
+
   readonly hostClasses = computed(() => {
     const classes = [
       'ui-checkbox',
@@ -78,7 +81,12 @@ export class Checkbox {
     if (this.disabled()) {
       return;
     }
-    this.checked.set(!this.checked());
+    const nextValue: boolean = !this.checked();
+    this.checked.set(nextValue);
+
+    const label: string = this.label() ?? this.ariaLabel() ?? 'Checkbox';
+    const state: string = nextValue ? 'checked' : 'unchecked';
+    this.liveAnnouncer.announce(`${label} ${state}`, 'polite');
   }
 
   onKeydown(event: KeyboardEvent): void {
