@@ -202,6 +202,33 @@ Each component should support these variants:
 - Test with screen readers
 - Follow WCAG 2.1 guidelines
 
+## Accessibility Requirements
+
+All new components must:
+
+1. **Pass automated tests**
+   - Add `component.a11y.spec.ts` file
+   - Run `npm run test:a11y` before submitting PR
+
+2. **Follow ARIA patterns**
+   - Use semantic HTML where possible
+   - Apply appropriate ARIA roles and attributes
+   - Follow WAI-ARIA Authoring Practices
+
+3. **Support keyboard navigation**
+   - All interactive elements must be focusable
+   - Include appropriate keyboard shortcuts
+   - Document keyboard interaction
+
+4. **Announce dynamic changes**
+   - Use LiveAnnouncerService for status updates
+   - Include aria-live regions where needed
+
+5. **Document accessibility features**
+   - Add accessibility section to component docs
+   - Include keyboard interaction table
+   - List ARIA attributes used
+
 ## 🚀 Pull Request Process
 
 1. **Create a feature branch**

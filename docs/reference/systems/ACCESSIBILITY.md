@@ -1,7 +1,6 @@
 # Accessibility Guide
 
-## Overview
-This library follows WCAG 2.1 AA standards and WAI-ARIA best practices.
+This library is designed to meet WCAG 2.1 AA standards and WAI-ARIA best practices.
 
 ## General Principles
 
@@ -259,16 +258,115 @@ This library follows WCAG 2.1 AA standards and WAI-ARIA best practices.
 
 ## Testing
 
-### Manual Testing Checklist
-- [ ] Navigate with keyboard only.
-- [ ] Test with screen reader (NVDA/VoiceOver).
-- [ ] Check color contrast.
-- [ ] Verify focus visibility.
-- [ ] Test at 200% zoom.
-
 ### Automated Testing
-- Integration with axe-core (if applicable).
-- Accessibility unit tests.
+
+Run accessibility tests:
+
+```bash
+npm run test:a11y
+npm run test:a11y:e2e
+npm run test:a11y:all
+```
+
+### Manual Testing Checklist
+
+#### Keyboard Navigation
+
+- [ ] All interactive elements are focusable with Tab
+- [ ] Focus order follows visual order
+- [ ] Focus indicator is always visible
+- [ ] No keyboard traps
+- [ ] Escape closes overlays/dropdowns
+- [ ] Arrow keys work for menu/list navigation
+
+#### Screen Reader Testing
+
+Test with at least one screen reader:
+- **Windows:** NVDA (free) or JAWS
+- **macOS:** VoiceOver (built-in)
+- **Linux:** Orca
+- **Mobile:** TalkBack (Android), VoiceOver (iOS)
+
+Checklist:
+- [ ] All content is announced
+- [ ] Form labels are associated with inputs
+- [ ] Error messages are announced
+- [ ] Dynamic content changes are announced
+- [ ] Buttons describe their action
+- [ ] Images have alt text (if applicable)
+
+#### Visual Testing
+
+- [ ] Color contrast meets 4.5:1 for text
+- [ ] Color contrast meets 3:1 for UI components
+- [ ] Content is readable at 200% zoom
+- [ ] No horizontal scrolling at 320px width
+- [ ] High contrast mode is supported
+
+## Component Accessibility Patterns
+
+### Buttons
+
+- Use `<button>` element (not div/span)
+- Include accessible name (text content or aria-label)
+- Disabled buttons use `aria-disabled` or `disabled`
+- Loading state includes `aria-busy`
+
+### Form Inputs
+
+- Labels associated via `for`/`id` or wrapping
+- Required fields indicated with `aria-required`
+- Invalid fields use `aria-invalid` and `aria-describedby`
+- Error messages announced via live region
+
+### Select/Dropdown
+
+- Uses combobox pattern (role="combobox")
+- `aria-expanded` indicates open/closed state
+- `aria-activedescendant` tracks keyboard focus
+- Options have role="option"
+
+### Tabs
+
+- Container has role="tablist"
+- Tabs have role="tab"
+- Panels have role="tabpanel"
+- Selection indicated with `aria-selected`
+- Arrow keys navigate tabs
+- RTL support included
+
+### Accordion
+
+- Headers are buttons
+- `aria-expanded` indicates open/closed
+- Panels associated via `aria-controls`
+- Enter/Space toggles panels
+
+## Adding Accessibility Tests
+
+When creating a new component, add an accessibility test file:
+
+```typescript
+import { checkA11y } from '../../test/a11y-utils';
+
+describe('Component Accessibility', () => {
+  it('should have no violations', async () => {
+    await checkA11y(fixture);
+  });
+
+  it('should have no violations when disabled', async () => {
+    component.disabled = true;
+    await checkA11y(fixture);
+  });
+});
+```
+
+## Resources
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
+- [axe-core Rules](https://dequeuniversity.com/rules/axe/)
+- [MDN Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
 
 ## High Contrast Mode
 
