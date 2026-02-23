@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest", "node"]
+  },
+  "include": [
+    "projects/**/*.a11y.spec.ts",
+    "projects/**/a11y-utils.ts",
+    "setup-a11y.ts",
+    "setup-jest.ts"
+  ]
+}

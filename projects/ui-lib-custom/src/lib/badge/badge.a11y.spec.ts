@@ -1,0 +1,30 @@
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Badge } from './badge';
+import { checkA11y, A11Y_RULES } from '../../test/a11y-utils';
+
+@Component({
+  standalone: true,
+  imports: [Badge],
+  template: `
+    <ui-lib-badge>New</ui-lib-badge>
+    <ui-lib-badge color="success">Success</ui-lib-badge>
+  `,
+})
+class TestHostComponent {}
+
+describe('Badge Accessibility', () => {
+  let fixture: ComponentFixture<TestHostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TestHostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestHostComponent);
+  });
+
+  it('should have no accessibility violations', async () => {
+    await checkA11y(fixture, { rules: A11Y_RULES.skipColorContrast });
+  });
+});
