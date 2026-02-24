@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Accordion } from './accordion';
 import { AccordionPanel } from './accordion-panel';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 @Component({
@@ -25,7 +25,10 @@ describe('Accordion Accessibility', () => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
+    const variant = signal<ThemeVariant>('material');
     const mockTheme = {
+      variant,
+      setVariant: (value: ThemeVariant): void => variant.set(value),
       getPreset: () => ({
         variant: 'material',
         icons: {

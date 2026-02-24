@@ -9,6 +9,7 @@ import {
   output,
   signal,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { AccordionPanel } from './accordion-panel';
 import { ACCORDION_CONTEXT, AccordionContext } from './accordion-context';
@@ -18,6 +19,7 @@ import {
   AccordionSize,
   AccordionVariant,
 } from './accordion.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 interface AccordionPanelContext {
   panel: AccordionPanel;
@@ -49,7 +51,9 @@ interface AccordionPanelContext {
   ],
 })
 export class Accordion implements AccordionContext {
-  variant = input<AccordionVariant>('material');
+  private readonly themeConfig = inject(ThemeConfigService);
+
+  variantInput = input<AccordionVariant | null>(null, { alias: 'variant' });
   size = input<AccordionSize>('md');
   expandMode = input<AccordionExpandMode>('single');
   expandedPanels = input<string[]>([]);
@@ -94,6 +98,9 @@ export class Accordion implements AccordionContext {
     });
   }
 
+  readonly variant = computed<AccordionVariant>(
+    () => this.variantInput() ?? this.themeConfig.variant()
+  );
   hostClasses = computed<string>(() => {
     const classes: string[] = [
       'ui-lib-accordion',

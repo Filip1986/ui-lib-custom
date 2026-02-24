@@ -177,6 +177,19 @@ Use Cases:              Use Cases:              Use Cases:
 • SaaS products        • Business apps         • Minimal UIs
 ```
 
+### Global variant default
+`ThemeConfigService` exposes a global `variant` signal (`material | bootstrap | minimal`) that components use as a default when no per-instance `variant` input is provided. This allows live switching across the entire app while keeping per-component overrides intact.
+
+```ts
+const themeService = inject(ThemeConfigService);
+themeService.setVariant('bootstrap');
+```
+
+Components compute:
+```
+const effectiveVariant = computed(() => this.variant() ?? themeService.variant());
+```
+
 ## Component Properties
 
 ```

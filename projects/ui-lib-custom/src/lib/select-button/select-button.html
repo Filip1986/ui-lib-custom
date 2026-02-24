@@ -2,7 +2,7 @@
   <ui-lib-button
     class="ui-lib-select-button__item"
     [class.ui-lib-select-button__item--selected]="isSelected(option)"
-    [variant]="variant()"
+    [variant]="effectiveVariant()"
     [size]="size()"
     [appearance]="isSelected(option) ? 'solid' : 'outline'"
     [disabled]="isDisabled() || isOptionDisabled(option)"

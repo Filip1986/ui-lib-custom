@@ -1,8 +1,16 @@
-import { Component, ChangeDetectionStrategy, input, output, inject, Signal } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  output,
+  inject,
+  Signal,
+  computed,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Button } from 'ui-lib-custom/button';
-import { ThemeConfigService, ThemeMode } from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
 
 @Component({
   selector: 'app-topbar',
@@ -15,6 +23,7 @@ import { ThemeConfigService, ThemeMode } from 'ui-lib-custom/theme';
 export class TopbarComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
   readonly mode: Signal<ThemeMode> = this.themeService.mode;
+  readonly variant = computed<ThemeVariant>(() => this.themeService.variant());
 
   menuButtonClick = output<void>();
   themeToggle = output<void>();
@@ -39,5 +48,9 @@ export class TopbarComponent {
     if (name) {
       this.loadTheme.emit(name);
     }
+  }
+
+  setVariant(variant: ThemeVariant): void {
+    this.themeService.setVariant(variant);
   }
 }

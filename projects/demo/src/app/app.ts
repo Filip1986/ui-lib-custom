@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TopbarComponent } from './layout/topbar/topbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
 import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
 
 @Component({
@@ -19,8 +19,8 @@ export class App {
   theme = computed<'light' | 'dark' | 'brand-example'>(
     () => this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
   );
-  themeName = computed(() => this.themeService.preset().name);
-  themeVariant = computed(() => this.themeService.preset().variant ?? 'material');
+  themeName = computed<string>(() => this.themeService.preset().name);
+  themeVariant = computed<ThemeVariant>(() => this.themeService.variant());
   savedThemes = this.themeService.savedThemes;
 
   constructor() {

@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed, inject } from '@angular/core';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type BadgeVariant = 'solid' | 'outline' | 'subtle';
 export type BadgeColor =
@@ -35,8 +36,10 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Badge {
+  private readonly themeConfig = inject(ThemeConfigService);
+
   /** Visual variant of the badge */
-  variant = input<BadgeVariant>('solid');
+  variant = input<BadgeVariant | null>(null);
 
   /** Color theme of the badge */
   color = input<BadgeColor>('primary');
@@ -53,11 +56,23 @@ export class Badge {
   /** Accessible label for the badge, used when screen reader support is needed */
   label = input<string | null>(null);
 
+  private readonly effectiveVariant = computed<BadgeVariant>(() => {
+    const direct = this.variant();
+    if (direct) return direct;
+    const global = this.themeConfig.variant();
+    const map: Record<'material' | 'bootstrap' | 'minimal', BadgeVariant> = {
+      material: 'solid',
+      bootstrap: 'outline',
+      minimal: 'subtle',
+    };
+    return map[global] ?? 'solid';
+  });
+
   /** Computed CSS classes for the badge element */
   badgeClasses = computed<string>(() => {
     const classes = [
       'badge',
-      `badge-variant-${this.variant()}`,
+      `badge-variant-${this.effectiveVariant()}`,
       `badge-color-${this.color()}`,
       `badge-size-${this.size()}`,
     ];

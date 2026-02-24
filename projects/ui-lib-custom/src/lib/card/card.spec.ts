@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
 
 import { Card, CardVariant, CardElevation } from './card';
 
@@ -78,6 +78,12 @@ class CardThemeHost {
 }
 
 class MockThemeConfigService {
+  readonly variant = signal<ThemeVariant>('material');
+
+  setVariant(variant: ThemeVariant): void {
+    this.variant.set(variant);
+  }
+
   getPreset(): { variant: string; colors: Record<string, string> } {
     return { variant: 'material', colors: {} };
   }

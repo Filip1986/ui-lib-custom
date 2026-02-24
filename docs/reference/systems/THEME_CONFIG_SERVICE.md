@@ -88,3 +88,22 @@ const json = themeService.exportAsJSON(); // serialized ThemePreset
 
 ## Shape & radius
 `ThemeShapeRadius` accepts `sm|md|lg|xl|2xl|full` or any CSS size string. The service resolves tokens from `design-tokens.ts` before falling back to raw values.
+
+## Global variant
+`ThemeConfigService` now owns a global component variant signal used as the default when a component does not receive a per-instance `variant` input. This lets apps switch all components between Material/Bootstrap/Minimal without wiring `variant` on every component.
+
+```ts
+import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
+
+const themeService = inject(ThemeConfigService);
+
+themeService.setVariant('bootstrap');
+const current: ThemeVariant = themeService.variant();
+```
+
+Components with a `variant` input use:
+```
+const effectiveVariant = computed(() => this.variant() ?? themeService.variant());
+```
+
+Per-instance inputs still override the global default.

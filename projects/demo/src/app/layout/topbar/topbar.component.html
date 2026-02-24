@@ -28,6 +28,36 @@
       <span class="theme-variant">{{ themeVariant() }}</span>
     </div>
 
+    <div class="variant-switcher" role="group" aria-label="Component variant">
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="variant() === 'material'"
+        (click)="setVariant('material')"
+        [attr.aria-pressed]="variant() === 'material'"
+      >
+        Material
+      </ui-lib-button>
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="variant() === 'bootstrap'"
+        (click)="setVariant('bootstrap')"
+        [attr.aria-pressed]="variant() === 'bootstrap'"
+      >
+        Bootstrap
+      </ui-lib-button>
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="variant() === 'minimal'"
+        (click)="setVariant('minimal')"
+        [attr.aria-pressed]="variant() === 'minimal'"
+      >
+        Minimal
+      </ui-lib-button>
+    </div>
+
     <a
       href="https://github.com"
       target="_blank"

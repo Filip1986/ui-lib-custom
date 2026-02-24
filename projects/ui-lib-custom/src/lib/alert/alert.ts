@@ -1,13 +1,19 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, inject } from '@angular/core';
 import { Icon } from '../icon/icon';
 import { StatusIcon } from '../icon/icon.semantics';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 @Component({
   selector: 'ui-lib-alert',
   standalone: true,
   imports: [Icon],
   template: `
-    <ui-lib-icon class="alert-icon" [name]="statusIcon()" [variant]="variant()" size="lg" />
+    <ui-lib-icon
+      class="alert-icon"
+      [name]="statusIcon()"
+      [variant]="effectiveVariant()"
+      size="lg"
+    />
     <div class="alert-content">
       <ng-content />
     </div>
@@ -15,7 +21,7 @@ import { StatusIcon } from '../icon/icon.semantics';
       <ui-lib-icon
         class="alert-close"
         name="close"
-        [variant]="variant()"
+        [variant]="effectiveVariant()"
         size="sm"
         [clickable]="true"
         (click)="onDismiss()"
@@ -31,8 +37,10 @@ import { StatusIcon } from '../icon/icon.semantics';
   },
 })
 export class Alert {
+  private readonly themeConfig = inject(ThemeConfigService);
+
   severity = input<'success' | 'error' | 'warning' | 'info'>('info');
-  variant = input<'material' | 'bootstrap' | 'minimal'>('material');
+  variant = input<'material' | 'bootstrap' | 'minimal' | null>(null);
   dismissible = input<boolean>(false);
 
   dismissed = output<void>();
@@ -47,7 +55,11 @@ export class Alert {
     return iconMap[this.severity()];
   });
 
-  hostClasses = computed<string>(() => `alert-${this.variant()} alert-${this.severity()}`);
+  readonly effectiveVariant = computed<'material' | 'bootstrap' | 'minimal'>(
+    () => this.variant() ?? this.themeConfig.variant()
+  );
+
+  hostClasses = computed<string>(() => `alert-${this.effectiveVariant()} alert-${this.severity()}`);
 
   onDismiss(): void {
     this.dismissed.emit();

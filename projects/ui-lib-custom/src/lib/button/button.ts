@@ -1,9 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
 import { IconSize } from 'ui-lib-custom/icon';
 import { SemanticIcon } from 'ui-lib-custom/icon';
 import { Badge, BadgeColor } from 'ui-lib-custom/badge';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
 export type ButtonAppearance = 'solid' | 'outline' | 'ghost';
@@ -32,7 +33,9 @@ export type BadgeSeverity = ButtonSeverity | 'neutral';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Button {
-  variant = input<ButtonVariant>('material');
+  private readonly themeConfig = inject(ThemeConfigService);
+
+  variant = input<ButtonVariant | null>(null);
   appearance = input<ButtonAppearance>('solid');
   size = input<ButtonSize>('md');
   color = input<ButtonColor>('primary');
@@ -78,6 +81,9 @@ export class Button {
     }
   );
 
+  readonly effectiveVariant = computed<ButtonVariant>(
+    () => this.variant() ?? this.themeConfig.variant()
+  );
   readonly iconOnlyComputed = computed<boolean>(() => this.iconOnly() ?? this.iconOnlyLegacy());
   iconSize = computed<IconSize>(() => {
     const sizeMap: Record<'small' | 'medium' | 'large', IconSize> = {
@@ -145,7 +151,7 @@ export class Button {
   buttonClasses = computed<string>(() => {
     const classes: string[] = [
       'btn',
-      `btn-${this.variant()}`,
+      `btn-${this.effectiveVariant()}`,
       `btn-${this.normalizedSize()}`,
       `btn-${this.effectiveSeverity()}`,
       `btn-appearance-${this.effectiveAppearance()}`,

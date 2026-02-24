@@ -34,6 +34,7 @@ import {
   TabContext,
   TabsMode,
 } from './tabs.types';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 
@@ -74,9 +75,10 @@ export class Tabs implements OnDestroy, AfterViewInit {
   readonly uid = `ui-lib-tabs-${++Tabs.nextId}`;
 
   private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly themeConfig = inject(ThemeConfigService);
 
   dir = input<'ltr' | 'rtl' | 'auto'>('auto');
-  variant = input<TabsVariant>('material');
+  variant = input<TabsVariant | null>(null);
   size = input<TabsSize>('md');
   orientation = input<TabsOrientation>('horizontal');
   align = input<TabsAlignment>('start');
@@ -223,10 +225,14 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
   );
 
+  readonly effectiveVariant = computed<TabsVariant>(
+    () => this.variant() ?? this.themeConfig.variant()
+  );
+
   tabsClasses = computed<string>(() => {
     const classes = [
       'tabs-root',
-      `tabs-${this.variant()}`,
+      `tabs-${this.effectiveVariant()}`,
       `tabs-${this.normalizedSize()}`,
       `tabs-orientation-${this.orientation()}`,
       `tabs-align-${this.align()}`,
@@ -274,7 +280,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
     effect(() => {
       const active = this.activeSelection();
-      const variant = this.variant();
+      const variant = this.effectiveVariant();
       const activeTab = this.tabContexts()[active.index];
       const activeLazy: TabsLazyMode | undefined = activeTab?.lazy;
 
@@ -517,7 +523,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private updateIndicator(): void {
-    if (this.variant() !== 'material') {
+    if (this.effectiveVariant() !== 'material') {
       this.indicatorStyle.set(null);
       return;
     }

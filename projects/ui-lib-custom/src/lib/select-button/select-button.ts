@@ -13,9 +13,11 @@ import {
   input,
   output,
   signal,
+  inject,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Button } from 'ui-lib-custom/button';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
   SelectButtonChangeEvent,
   SelectButtonItemContext,
@@ -41,9 +43,9 @@ import {
   ],
   host: {
     class: 'ui-lib-select-button',
-    '[class.ui-lib-select-button--material]': "variant() === 'material'",
-    '[class.ui-lib-select-button--bootstrap]': "variant() === 'bootstrap'",
-    '[class.ui-lib-select-button--minimal]': "variant() === 'minimal'",
+    '[class.ui-lib-select-button--material]': "effectiveVariant() === 'material'",
+    '[class.ui-lib-select-button--bootstrap]': "effectiveVariant() === 'bootstrap'",
+    '[class.ui-lib-select-button--minimal]': "effectiveVariant() === 'minimal'",
     '[class.ui-lib-select-button--small]': "normalizedSize() === 'small'",
     '[class.ui-lib-select-button--medium]': "normalizedSize() === 'medium'",
     '[class.ui-lib-select-button--large]': "normalizedSize() === 'large'",
@@ -57,7 +59,10 @@ import {
   },
 })
 export class SelectButton implements ControlValueAccessor {
+  private readonly themeConfig = inject(ThemeConfigService);
+
   options = input<SelectButtonOption[]>([]);
+  variant = input<SelectButtonVariant | null>(null);
   value = input<unknown | unknown[] | null>(null);
   optionLabel = input<string>('label');
   optionValue = input<string>('value');
@@ -66,7 +71,6 @@ export class SelectButton implements ControlValueAccessor {
   multiple = input<boolean>(false);
   allowEmpty = input<boolean>(false);
 
-  variant = input<SelectButtonVariant>('material');
   size = input<SelectButtonSize>('md');
   disabled = input<boolean>(false);
   invalid = input<boolean>(false);
@@ -101,6 +105,9 @@ export class SelectButton implements ControlValueAccessor {
     }
   );
 
+  readonly effectiveVariant = computed<SelectButtonVariant>(
+    () => this.variant() ?? this.themeConfig.variant()
+  );
   readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
 
   readonly activeIndex = computed<number>(() => {

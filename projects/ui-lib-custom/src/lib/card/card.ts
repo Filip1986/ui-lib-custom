@@ -33,7 +33,7 @@ export type CardElevation = 'none' | 'low' | 'medium' | 'high';
   encapsulation: ViewEncapsulation.None,
 })
 export class Card {
-  variant = input<CardVariant>('material');
+  variant = input<CardVariant | null>(null);
   elevation = input<CardElevation>('medium');
   bordered = input<boolean>(false);
   hoverable = input<boolean>(false);
@@ -55,11 +55,18 @@ export class Card {
 
   closed = output<void>();
 
+  readonly effectiveVariant = computed<CardVariant>(
+    () => this.variant() ?? this.themeService.variant()
+  );
   headerVisible = computed<boolean>(() => this.showHeader() !== false);
   footerVisible = computed<boolean>(() => this.showFooter() !== false);
 
   cardClasses = computed<string>(() => {
-    const classes = ['card', `card-${this.variant()}`, `card-elevation-${this.elevation()}`];
+    const classes = [
+      'card',
+      `card-${this.effectiveVariant()}`,
+      `card-elevation-${this.elevation()}`,
+    ];
 
     if (this.bordered()) {
       classes.push('card-bordered');

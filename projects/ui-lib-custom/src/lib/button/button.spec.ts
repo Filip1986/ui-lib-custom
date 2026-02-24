@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideAudioWaveform } from '@ng-icons/lucide';
 import { By } from '@angular/platform-browser';
@@ -7,6 +7,7 @@ import { By } from '@angular/platform-browser';
 import { Button, ButtonColor, ButtonSize, ButtonVariant } from './button';
 import { Icon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 @Component({
   standalone: true,
@@ -25,6 +26,18 @@ class ButtonClickHostComponent {
   onClick(): void {
     this.clickCount += 1;
   }
+}
+
+@Component({
+  standalone: true,
+  imports: [Button],
+  template: `
+    <ui-lib-button>Global</ui-lib-button>
+    <ui-lib-button [variant]="overrideVariant()">Override</ui-lib-button>
+  `,
+})
+class ButtonVariantHostComponent {
+  overrideVariant = signal<ButtonVariant | null>(null);
 }
 
 describe('Button', () => {
@@ -515,5 +528,35 @@ describe('Button interactions', () => {
     fixture.detectChanges();
 
     expect(host.clickCount).toBe(2);
+  });
+});
+
+describe('Button variant', () => {
+  let fixture: ComponentFixture<ButtonVariantHostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ButtonVariantHostComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ButtonVariantHostComponent);
+    fixture.detectChanges();
+  });
+
+  it('applies global variant and allows per-instance override', () => {
+    const service: ThemeConfigService = TestBed.inject(ThemeConfigService);
+    service.setVariant('bootstrap');
+    fixture.detectChanges();
+
+    let buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+    expect(buttons[0].classList.contains('btn-bootstrap')).toBeTruthy();
+    expect(buttons[1].classList.contains('btn-bootstrap')).toBeTruthy();
+
+    fixture.componentInstance.overrideVariant.set('minimal');
+    fixture.detectChanges();
+
+    buttons = fixture.nativeElement.querySelectorAll('button');
+    expect(buttons[0].classList.contains('btn-bootstrap')).toBeTruthy();
+    expect(buttons[1].classList.contains('btn-minimal')).toBeTruthy();
   });
 });

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Alert } from './alert';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 describe('Alert', () => {
   let fixture: ComponentFixture<Alert>;
@@ -27,5 +28,14 @@ describe('Alert', () => {
 
     expect(dark).not.toBe(light);
     root.removeAttribute('data-theme');
+  });
+
+  it('uses global variant when no variant input provided', () => {
+    const service: ThemeConfigService = TestBed.inject(ThemeConfigService);
+    service.setVariant('minimal');
+    fixture.detectChanges();
+
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    expect(host.className).toContain('alert-minimal');
   });
 });

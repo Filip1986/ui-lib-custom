@@ -11,8 +11,10 @@ import {
   forwardRef,
   input,
   signal,
+  inject,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type SelectVariant = 'material' | 'bootstrap' | 'minimal';
 export type SelectSize = 'sm' | 'md' | 'lg';
@@ -58,7 +60,7 @@ let selectIdCounter = 0;
 })
 export class UiLibSelect implements ControlValueAccessor {
   options = input<SelectOption[]>([]);
-  variant = input<SelectVariant>('material');
+  variant = input<SelectVariant | null>(null);
   size = input<SelectSize>('md');
   multiple = input<boolean>(false);
   searchable = input<boolean>(false);
@@ -81,6 +83,7 @@ export class UiLibSelect implements ControlValueAccessor {
   readonly focusedIndex = signal<number>(-1);
   readonly internalValue = signal<unknown[] | null>(null);
   private readonly cvaDisabled = signal(false);
+  private readonly themeConfig = inject(ThemeConfigService);
 
   private onChange: (value: unknown) => void = () => {};
   private onTouched: () => void = () => {};
@@ -111,10 +114,13 @@ export class UiLibSelect implements ControlValueAccessor {
     return this.label() ? this.labelId() : null;
   });
 
+  readonly effectiveVariant = computed<SelectVariant>(
+    () => this.variant() ?? this.themeConfig.variant()
+  );
   readonly hostClasses = computed<string>(() => {
     const classes = [
       'ui-select',
-      `ui-select-${this.variant()}`,
+      `ui-select-${this.effectiveVariant()}`,
       `ui-select-size-${this.normalizedSize()}`,
     ];
     if (this.isDisabled() || this.loading()) classes.push('ui-select-disabled');

@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type InputVariant = 'material' | 'bootstrap' | 'minimal';
 export type InputLabelFloat = 'over' | 'in' | 'on';
@@ -41,7 +42,7 @@ let inputIdCounter = 0;
 export class UiLibInput implements ControlValueAccessor {
   id = input<string | null>(null);
   name = input<string | null>(null);
-  variant = input<InputVariant>('material');
+  variant = input<InputVariant | null>(null);
   size = input<InputSize>('md');
   type = input<InputType>('text');
   label = input<string>('');
@@ -77,10 +78,15 @@ export class UiLibInput implements ControlValueAccessor {
     return this.type();
   });
 
+  private readonly themeConfig = inject(ThemeConfigService);
+
+  readonly effectiveVariant = computed<InputVariant>(
+    () => this.variant() ?? this.themeConfig.variant()
+  );
   readonly hostClasses = computed<string>(() => {
     const classes: string[] = [
       'ui-input',
-      `ui-input-${this.variant()}`,
+      `ui-input-${this.effectiveVariant()}`,
       `ui-input-size-${this.size()}`,
       `ui-input-float-${this.labelFloat()}`,
     ];

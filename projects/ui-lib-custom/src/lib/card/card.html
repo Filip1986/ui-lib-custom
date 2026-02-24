@@ -13,7 +13,7 @@
         <ui-lib-icon
           class="card-header-icon"
           [name]="headerIcon()!"
-          [variant]="variant()"
+          [variant]="effectiveVariant()"
           size="lg"
         />
       }
@@ -29,7 +29,7 @@
         <ui-lib-icon
           class="card-close-icon"
           name="close"
-          [variant]="variant()"
+          [variant]="effectiveVariant()"
           size="md"
           [clickable]="true"
           (click)="onClose()"

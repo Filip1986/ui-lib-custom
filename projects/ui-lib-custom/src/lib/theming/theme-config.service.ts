@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, computed, inject, signal, Signal } from '@angular/core';
+import { Injectable, computed, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { BORDER_RADIUS, SHADOWS, SELECTBUTTON_TOKENS } from 'ui-lib-custom/tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
@@ -13,6 +13,7 @@ import {
   ThemeIconConfig,
   ThemeConfig,
   ThemeMode,
+  ThemeVariant,
 } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
 import { exportThemeAsScss, ScssExportOptions } from './exporters/scss-exporter';
@@ -48,6 +49,7 @@ export class ThemeConfigService {
   private readonly presetSignal = signal<ThemePreset>(this.defaultPreset);
   private readonly savedThemesSignal = signal<string[]>(this.listSavedThemeNames());
   private readonly modeSignal = signal<ThemeMode>('auto');
+  readonly variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
   private mediaQuery: MediaQueryList | null = null;
 
   readonly preset = computed<ThemePreset>(() => this.presetSignal());
@@ -318,6 +320,10 @@ export class ThemeConfigService {
     } catch {
       // ignore
     }
+  }
+
+  setVariant(variant: ThemeVariant): void {
+    this.variant.set(variant);
   }
 
   private triggerDownload(content: string, filename: string, mimeType: string): void {

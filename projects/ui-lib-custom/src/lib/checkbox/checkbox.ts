@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type CheckboxVariant = 'material' | 'bootstrap' | 'minimal';
 export type CheckboxSize = 'sm' | 'md' | 'lg';
@@ -51,7 +52,7 @@ export class Checkbox implements ControlValueAccessor {
   label = input<string | null>(null);
   description = input<string | null>(null);
   ariaLabel = input<string | null>(null);
-  variant = input<CheckboxVariant>('material');
+  variant = input<CheckboxVariant | null>(null);
   size = input<CheckboxSize>('md');
   disabled = input<boolean>(false);
   indeterminate = input<boolean>(false);
@@ -67,11 +68,15 @@ export class Checkbox implements ControlValueAccessor {
   readonly descriptionElementId = `${this.controlId}-description`;
 
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
+  private readonly themeConfig = inject(ThemeConfigService);
 
+  readonly effectiveVariant = computed<CheckboxVariant>(
+    () => this.variant() ?? this.themeConfig.variant()
+  );
   readonly hostClasses = computed<string>(() => {
     const classes = [
       'ui-checkbox',
-      `ui-checkbox-variant-${this.variant()}`,
+      `ui-checkbox-variant-${this.effectiveVariant()}`,
       `ui-checkbox-size-${this.size()}`,
     ];
 
