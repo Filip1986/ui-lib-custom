@@ -47,9 +47,9 @@ export class Alert {
     return iconMap[this.severity()];
   });
 
-  hostClasses = computed(() => `alert-${this.variant()} alert-${this.severity()}`);
+  hostClasses = computed<string>(() => `alert-${this.variant()} alert-${this.severity()}`);
 
-  onDismiss() {
+  onDismiss(): void {
     this.dismissed.emit();
   }
 }

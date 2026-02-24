@@ -58,7 +58,7 @@ export class AccordionPanel implements OnDestroy {
   iconPosition: InputSignal<AccordionIconPosition> = input<AccordionIconPosition>('end');
   expandIcon: InputSignal<string> = input<string>('chevron-up');
   collapseIcon: InputSignal<string> = input<string>('chevron-down');
-  showIcon: InputSignal<boolean> = input<boolean>(true);
+  showIcon: InputSignal<boolean> = input<boolean>(false);
 
   constructor() {
     if (this.context) {
@@ -83,7 +83,7 @@ export class AccordionPanel implements OnDestroy {
   private readonly uid: string = this.createId();
   private readonly internalExpanded = signal<boolean>(this.expanded());
 
-  readonly hostClasses = computed(() => {
+  readonly hostClasses = computed<string>(() => {
     const classes: string[] = ['ui-lib-accordion-panel', 'accordion-panel'];
     if (this.isExpanded()) {
       classes.push('accordion-panel-expanded');

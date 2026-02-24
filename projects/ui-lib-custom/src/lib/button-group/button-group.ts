@@ -10,8 +10,8 @@ import { ButtonVariant, ButtonSize } from '../button/button';
   host: {
     class: 'btn-group',
     '[class.btn-group-vertical]': 'vertical()',
-    '[class.btn-group-size-small]': "size() === 'small'",
-    '[class.btn-group-size-large]': "size() === 'large'",
+    '[class.btn-group-size-small]': "normalizedSize() === 'small'",
+    '[class.btn-group-size-large]': "normalizedSize() === 'large'",
     '[class.btn-group-material]': "variant() === 'material'",
     '[class.btn-group-bootstrap]': "variant() === 'bootstrap'",
     '[class.btn-group-minimal]': "variant() === 'minimal'",
@@ -21,7 +21,22 @@ import { ButtonVariant, ButtonSize } from '../button/button';
 export class ButtonGroup {
   variant = input<ButtonVariant>('material');
   vertical = input<boolean>(false);
-  size = input<ButtonSize | null>(null);
+  size = input<ButtonSize>('md');
 
-  hostClasses = computed(() => '');
+  readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
+    (): 'small' | 'medium' | 'large' => {
+      const size: ButtonSize = this.size();
+      const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
+        sm: 'small',
+        md: 'medium',
+        lg: 'large',
+        small: 'small',
+        medium: 'medium',
+        large: 'large',
+      };
+      return map[size] ?? 'medium';
+    }
+  );
+
+  hostClasses = computed<string>(() => '');
 }

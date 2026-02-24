@@ -50,9 +50,11 @@ export class ThemeConfigService {
   private readonly modeSignal = signal<ThemeMode>('auto');
   private mediaQuery: MediaQueryList | null = null;
 
-  readonly preset = computed(() => this.presetSignal());
+  readonly preset = computed<ThemePreset>(() => this.presetSignal());
   readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
-  readonly cssVars = computed(() => this.mapPresetToCssVars(this.presetSignal()));
+  readonly cssVars = computed<Record<string, string>>(() =>
+    this.mapPresetToCssVars(this.presetSignal())
+  );
   readonly mode: Signal<ThemeMode> = this.modeSignal.asReadonly();
   readonly effectiveTheme = computed<'light' | 'dark'>(() => {
     const mode = this.modeSignal();

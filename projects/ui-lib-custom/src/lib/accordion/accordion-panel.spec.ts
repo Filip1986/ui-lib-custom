@@ -43,7 +43,7 @@ class PanelHostComponent {
   standalone: true,
   imports: [CommonModule, AccordionPanel, AccordionToggleIcon],
   template: `
-    <ui-lib-accordion-panel [expanded]="expanded()" header="Template Panel">
+    <ui-lib-accordion-panel [expanded]="expanded()" [showIcon]="showIcon()" header="Template Panel">
       <ng-template accordionToggleIcon let-expanded="expanded">
         <span class="toggle-text">{{ expanded ? 'Expanded' : 'Collapsed' }}</span>
       </ng-template>
@@ -53,6 +53,7 @@ class PanelHostComponent {
 })
 class PanelTemplateHostComponent {
   expanded = signal<boolean>(false);
+  showIcon = signal<boolean>(true);
 }
 
 describe('AccordionPanel', () => {

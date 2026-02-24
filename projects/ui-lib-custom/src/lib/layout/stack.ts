@@ -53,10 +53,12 @@ export class Stack {
   gap = input<SpacingToken>(4);
 
   /** Computed flex-direction value */
-  protected _flexDirection = computed(() => (this.direction() === 'vertical' ? 'column' : 'row'));
+  protected _flexDirection = computed<string>(() =>
+    this.direction() === 'vertical' ? 'column' : 'row'
+  );
 
   /** Computed justify-content value */
-  protected _justifyContent = computed(() => {
+  protected _justifyContent = computed<string>(() => {
     const justifyMap: Record<StackJustify, string> = {
       start: 'flex-start',
       center: 'center',
@@ -69,7 +71,7 @@ export class Stack {
   });
 
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
-  protected _gapValue = computed(() => {
+  protected _gapValue = computed<string>(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
       return typeof semantic === 'number'

@@ -60,7 +60,7 @@ export class BaseLoginComponent implements OnInit {
   /**
    * Getter for form controls
    */
-  get formControls() {
+  get formControls(): FormGroup['controls'] {
     return this.loginForm.controls;
   }
 

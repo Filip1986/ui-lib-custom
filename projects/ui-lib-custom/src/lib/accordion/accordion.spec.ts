@@ -324,6 +324,9 @@ describe('Accordion', () => {
   it('applies dark theme variables', () => {
     const fixture = createTestAccordion();
     const host: HTMLElement = fixture.nativeElement.querySelector('ui-lib-accordion');
+    const root: HTMLElement = document.documentElement;
+
+    root.setAttribute('data-theme', 'light');
     host.setAttribute('data-theme', 'light');
     const light: string = getComputedStyle(host)
       .getPropertyValue('--uilib-accordion-panel-bg')
@@ -336,5 +339,6 @@ describe('Accordion', () => {
 
     expect(dark).not.toBe(light);
     host.removeAttribute('data-theme');
+    root.removeAttribute('data-theme');
   });
 });

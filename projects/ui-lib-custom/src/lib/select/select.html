@@ -1,4 +1,4 @@
-<div [class]="hostClasses()">
+<div [class]="hostClasses()" [style.pointer-events]="isDisabled() || loading() ? 'none' : 'auto'">
   @if (label()) {
     <label class="ui-select-label" [attr.id]="labelId()">
       <span>{{ label() }}</span>

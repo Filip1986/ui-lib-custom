@@ -94,7 +94,7 @@ export class Accordion implements AccordionContext {
     });
   }
 
-  hostClasses = computed((): string => {
+  hostClasses = computed<string>(() => {
     const classes: string[] = [
       'ui-lib-accordion',
       `accordion-variant-${this.variant()}`,
@@ -104,7 +104,7 @@ export class Accordion implements AccordionContext {
     return classes.join(' ');
   });
 
-  panelContexts = computed((): AccordionPanelContext[] => {
+  panelContexts = computed<AccordionPanelContext[]>(() => {
     const panels: readonly AccordionPanel[] = this.panels();
     return panels.map((panel, index) => {
       const id: string = this.resolvePanelId(panel);

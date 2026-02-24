@@ -25,8 +25,8 @@ export type SocialProvider = 'google' | 'github' | 'microsoft';
 })
 export class LoginForm {
   variant = input<LoginFormVariant>('centered');
-  showSocialLogin = input<boolean>(true);
-  showRememberMe = input<boolean>(true);
+  showSocialLogin = input<boolean>(false);
+  showRememberMe = input<boolean>(false);
   logoTemplate = input<TemplateRef<unknown> | null>(null);
 
   login = output<{ email: string; password: string; remember: boolean }>();
@@ -37,7 +37,7 @@ export class LoginForm {
   readonly password = signal('');
   readonly remember = signal(true);
 
-  readonly layoutClass = computed(() => `login-${this.variant()}`);
+  readonly layoutClass = computed<string>(() => `login-${this.variant()}`);
 
   onSubmit(): void {
     this.login.emit({

@@ -39,7 +39,7 @@ export class IconButton {
     return map[this.size()];
   });
 
-  hostClasses = computed(() =>
+  hostClasses = computed<string>(() =>
     [
       `icon-button-${this.variant()}`,
       `icon-button-${this.size()}`,

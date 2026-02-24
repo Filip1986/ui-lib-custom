@@ -55,10 +55,10 @@ export class Card {
 
   closed = output<void>();
 
-  headerVisible = computed(() => this.showHeader() !== false);
-  footerVisible = computed(() => this.showFooter() !== false);
+  headerVisible = computed<boolean>(() => this.showHeader() !== false);
+  footerVisible = computed<boolean>(() => this.showFooter() !== false);
 
-  cardClasses = computed(() => {
+  cardClasses = computed<string>(() => {
     const classes = ['card', `card-${this.variant()}`, `card-elevation-${this.elevation()}`];
 
     if (this.bordered()) {
@@ -78,7 +78,7 @@ export class Card {
     });
   }
 
-  onClose() {
+  onClose(): void {
     this.closed.emit();
   }
 

@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
 })
 class TestHostComponent {
   size: any = 'lg';
-  centered = true;
+  centered = false;
   padding: any = 4;
   inset: any = null;
 }
@@ -69,16 +69,22 @@ describe('Container', () => {
     expect(containerElement.style.maxWidth).toContain('640px');
   });
 
-  it('should center container by default', () => {
+  it('should not center container by default', () => {
     const { containerElement } = bootstrap();
-    expect(containerElement.style.marginLeft).toBe('auto');
-    expect(containerElement.style.marginRight).toBe('auto');
+    expect(containerElement.style.marginLeft).toBe('');
+    expect(containerElement.style.marginRight).toBe('');
   });
 
   it('should not center when centered is false', () => {
     const { containerElement } = bootstrap({ centered: false });
     expect(containerElement.style.marginLeft).toBe('');
     expect(containerElement.style.marginRight).toBe('');
+  });
+
+  it('should center when centered is true', () => {
+    const { containerElement } = bootstrap({ centered: true });
+    expect(containerElement.style.marginLeft).toBe('auto');
+    expect(containerElement.style.marginRight).toBe('auto');
   });
 
   it('should apply padding from design tokens', () => {

@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 
 export type TabsVariant = 'material' | 'bootstrap' | 'minimal';
-export type TabsSize = 'small' | 'medium' | 'large';
+export type TabsSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
 export type TabsOrientation = 'horizontal' | 'vertical';
 export type TabsAlignment = 'start' | 'center' | 'end' | 'stretch';
 export type TabsLazyMode = false | 'unmount' | 'keep-alive';

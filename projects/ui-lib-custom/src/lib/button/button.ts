@@ -17,7 +17,7 @@ export type ButtonSeverity =
   | 'help'
   | 'danger'
   | 'contrast';
-export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
 export type ButtonColor = ButtonSeverity;
 export type ButtonType = 'button' | 'submit' | 'reset';
 export type IconPosition = 'left' | 'right' | 'top' | 'bottom';
@@ -34,7 +34,7 @@ export type BadgeSeverity = ButtonSeverity | 'neutral';
 export class Button {
   variant = input<ButtonVariant>('material');
   appearance = input<ButtonAppearance>('solid');
-  size = input<ButtonSize>('medium');
+  size = input<ButtonSize>('md');
   color = input<ButtonColor>('primary');
   severity = input<ButtonSeverity | null>(null);
   type = input<ButtonType>('button');
@@ -45,7 +45,8 @@ export class Button {
   shadow = input<string | null>(null);
   icon = input<SemanticIcon | string | null>(null);
   iconOnly = input<boolean | null>(null);
-  iconOnlyInput = input<boolean>(false);
+  /** @deprecated Use iconOnly instead. */
+  iconOnlyLegacy = input<boolean>(false, { alias: 'iconOnlyInput' });
   raised = input<boolean>(false);
   rounded = input<boolean>(false);
   text = input<boolean>(false);
@@ -62,18 +63,35 @@ export class Button {
   ariaPressed = input<boolean | null>(null);
   ariaChecked = input<boolean | null>(null);
 
-  readonly iconOnlyComputed = computed<boolean>(() => this.iconOnly() ?? this.iconOnlyInput());
+  private readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
+    (): 'small' | 'medium' | 'large' => {
+      const size: ButtonSize = this.size();
+      const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
+        sm: 'small',
+        md: 'medium',
+        lg: 'large',
+        small: 'small',
+        medium: 'medium',
+        large: 'large',
+      };
+      return map[size] ?? 'medium';
+    }
+  );
+
+  readonly iconOnlyComputed = computed<boolean>(() => this.iconOnly() ?? this.iconOnlyLegacy());
   iconSize = computed<IconSize>(() => {
-    const sizeMap: Record<string, IconSize> = {
+    const sizeMap: Record<'small' | 'medium' | 'large', IconSize> = {
       small: 'sm',
       medium: 'md',
       large: 'lg',
     };
-    return sizeMap[this.size()] ?? 'md';
+    return sizeMap[this.normalizedSize()];
   });
 
   effectiveSeverity = computed<ButtonSeverity>(() => {
-    const severity = this.contrast() ? 'contrast' : (this.severity() ?? this.color());
+    const severity: ButtonSeverity = this.contrast()
+      ? 'contrast'
+      : (this.severity() ?? this.color());
     return severity === 'warn' ? 'warning' : severity;
   });
 
@@ -92,13 +110,13 @@ export class Button {
   hasBadge = computed<boolean>(() => this.badge() !== null && this.badge() !== undefined);
 
   normalizeBadgeSeverity = computed<BadgeSeverity>(() => {
-    const inputSeverity = this.badgeSeverity() ?? this.badgeColor();
-    const normalized = inputSeverity === 'warn' ? 'warning' : inputSeverity;
+    const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();
+    const normalized: BadgeSeverity = inputSeverity === 'warn' ? 'warning' : inputSeverity;
     return normalized;
   });
 
   badgeColorResolved = computed<BadgeColor>(() => {
-    const severity = this.normalizeBadgeSeverity();
+    const severity: BadgeSeverity = this.normalizeBadgeSeverity();
     const allowed: BadgeColor[] = [
       'primary',
       'secondary',
@@ -124,11 +142,11 @@ export class Button {
     return 'neutral';
   });
 
-  buttonClasses = computed(() => {
-    const classes = [
+  buttonClasses = computed<string>(() => {
+    const classes: string[] = [
       'btn',
       `btn-${this.variant()}`,
-      `btn-${this.size()}`,
+      `btn-${this.normalizedSize()}`,
       `btn-${this.effectiveSeverity()}`,
       `btn-appearance-${this.effectiveAppearance()}`,
       `btn-icon-${this.iconPosition()}`,
@@ -185,6 +203,6 @@ export class Button {
     return classes.join(' ');
   });
 
-  ariaDisabled = computed(() => (this.disabled() || this.loading() ? true : null));
-  isDisabled = computed(() => this.disabled() || this.loading());
+  ariaDisabled = computed<boolean | null>(() => (this.disabled() || this.loading() ? true : null));
+  isDisabled = computed<boolean>(() => this.disabled() || this.loading());
 }

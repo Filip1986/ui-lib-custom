@@ -26,19 +26,19 @@ export class SidebarMenu {
   variant = input<SidebarVariant>('classic');
   items = input<SidebarMenuItem[]>([]);
   collapsed = input<boolean>(false);
-  collapsible = input<boolean>(true);
+  collapsible = input<boolean>(false);
 
   private readonly internalCollapsed = signal(false);
 
   private readonly expandedIds = signal<Set<string>>(new Set());
 
-  readonly hostClasses = computed(() => {
+  readonly hostClasses = computed<string>(() => {
     const classes = ['ui-sidebar', `ui-sidebar-${this.variant()}`];
     if (this.isCollapsed()) classes.push('ui-sidebar-collapsed');
     return classes.join(' ');
   });
 
-  readonly isCollapsed = computed(() => this.collapsed() || this.internalCollapsed());
+  readonly isCollapsed = computed<boolean>(() => this.collapsed() || this.internalCollapsed());
 
   toggleCollapse(): void {
     if (!this.collapsible()) return;

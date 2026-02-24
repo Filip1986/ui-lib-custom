@@ -68,7 +68,7 @@ export class Checkbox implements ControlValueAccessor {
 
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
 
-  readonly hostClasses = computed(() => {
+  readonly hostClasses = computed<string>(() => {
     const classes = [
       'ui-checkbox',
       `ui-checkbox-variant-${this.variant()}`,
@@ -90,16 +90,18 @@ export class Checkbox implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  readonly ariaChecked = computed(() =>
+  readonly ariaChecked = computed<string>(() =>
     this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false'
   );
-  readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
-  readonly hostTabIndex = computed(() => (this.isDisabled() ? -1 : 0));
-  readonly ariaLabelledby = computed(() => (this.ariaLabel() ? null : this.labelElementId));
-  readonly ariaDescribedby = computed(() =>
+  readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
+  readonly hostTabIndex = computed<number>(() => (this.isDisabled() ? -1 : 0));
+  readonly ariaLabelledby = computed<string | null>(() =>
+    this.ariaLabel() ? null : this.labelElementId
+  );
+  readonly ariaDescribedby = computed<string | null>(() =>
     this.description() ? this.descriptionElementId : null
   );
-  readonly showDescription = computed(() => !!this.description());
+  readonly showDescription = computed<boolean>(() => !!this.description());
 
   writeValue(value: boolean | null): void {
     this.checked.set(!!value);

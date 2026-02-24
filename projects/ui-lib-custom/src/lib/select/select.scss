@@ -180,3 +180,21 @@
   --uilib-select-option-hover: color-mix(in srgb, var(--uilib-color-primary-dark) 10%, transparent);
   --uilib-select-option-selected: color-mix(in srgb, var(--uilib-color-primary-dark) 20%, transparent);
 }
+
+:host .ui-select.ui-select-size-sm .ui-select-control {
+  padding: 0.35rem 0.5rem;
+  min-height: 32px;
+  font-size: 0.875rem;
+}
+
+:host .ui-select.ui-select-size-md .ui-select-control {
+  padding: 0.55rem 0.75rem;
+  min-height: 40px;
+  font-size: 1rem;
+}
+
+:host .ui-select.ui-select-size-lg .ui-select-control {
+  padding: 0.65rem 0.9rem;
+  min-height: 48px;
+  font-size: 1.125rem;
+}

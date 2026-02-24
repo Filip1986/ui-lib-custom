@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeIconConfig } from 'ui-lib-custom/theme';
 import { ThemeVariant } from 'ui-lib-custom/theme';
 import { ICON_CONFIG } from './icon.tokens';
 import {
@@ -30,14 +30,14 @@ export class IconService {
     tabler: LUCIDE_ICON_MAPPING,
   };
 
-  readonly config = computed(() => this.configSignal());
+  readonly config = computed<IconConfig>(() => this.configSignal());
 
   readonly themeVariant = computed<ThemeVariant | null>(() => {
     const preset = this.themeConfig?.getPreset?.();
     return preset?.variant ?? null;
   });
 
-  private readonly themeIcons = computed(
+  private readonly themeIcons = computed<ThemeIconConfig | null>(
     () => this.themeConfig?.getPreset?.()?.icons ?? this.themeConfig?.preset?.()?.icons ?? null
   );
 

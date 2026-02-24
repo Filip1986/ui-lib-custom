@@ -15,6 +15,7 @@ import {
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type SelectVariant = 'material' | 'bootstrap' | 'minimal';
+export type SelectSize = 'sm' | 'md' | 'lg';
 
 export interface SelectOption {
   label: string;
@@ -58,12 +59,13 @@ let selectIdCounter = 0;
 export class UiLibSelect implements ControlValueAccessor {
   options = input<SelectOption[]>([]);
   variant = input<SelectVariant>('material');
+  size = input<SelectSize>('md');
   multiple = input<boolean>(false);
   searchable = input<boolean>(false);
   placeholder = input<string>('Select...');
   disabled = input<boolean>(false);
   loading = input<boolean>(false);
-  optionTemplate = input<TemplateRef<any> | null>(null);
+  optionTemplate = input<TemplateRef<unknown> | null>(null);
   label = input<string>('');
   ariaLabel = input<string | null>(null);
   ariaLabelledBy = input<string | null>(null);
@@ -84,31 +86,45 @@ export class UiLibSelect implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   private readonly controlIdValue = `ui-lib-select-${++selectIdCounter}`;
-  readonly controlId = computed((): string => this.controlIdValue);
-  readonly labelId = computed((): string => `${this.controlIdValue}-label`);
-  readonly listboxId = computed((): string => `${this.controlIdValue}-listbox`);
+  readonly controlId = computed<string>(() => this.controlIdValue);
+  readonly labelId = computed<string>(() => `${this.controlIdValue}-label`);
+  readonly listboxId = computed<string>(() => `${this.controlIdValue}-listbox`);
 
-  readonly activeDescendantId = computed((): string | null => {
+  private readonly normalizedSize = computed<'sm' | 'md' | 'lg'>((): 'sm' | 'md' | 'lg' => {
+    const size: SelectSize = this.size();
+    const map: Record<SelectSize, 'sm' | 'md' | 'lg'> = {
+      sm: 'sm',
+      md: 'md',
+      lg: 'lg',
+    };
+    return map[size] ?? 'md';
+  });
+
+  readonly activeDescendantId = computed<string | null>(() => {
     const index: number = this.focusedIndex();
     if (index < 0 || !this.open()) return null;
     return `${this.controlIdValue}-option-${index}`;
   });
 
-  readonly resolvedLabelledBy = computed((): string | null => {
+  readonly resolvedLabelledBy = computed<string | null>(() => {
     if (this.ariaLabelledBy()) return this.ariaLabelledBy();
     return this.label() ? this.labelId() : null;
   });
 
-  readonly hostClasses = computed(() => {
-    const classes = ['ui-select', `ui-select-${this.variant()}`];
+  readonly hostClasses = computed<string>(() => {
+    const classes = [
+      'ui-select',
+      `ui-select-${this.variant()}`,
+      `ui-select-size-${this.normalizedSize()}`,
+    ];
     if (this.isDisabled() || this.loading()) classes.push('ui-select-disabled');
     if (this.multiple()) classes.push('ui-select-multiple');
     return classes.join(' ');
   });
 
-  readonly isDisabled = computed(() => this.disabled() || this.cvaDisabled());
+  readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
 
-  readonly displayValue = computed(() => {
+  readonly displayValue = computed<string>(() => {
     const vals = this.internalValue();
     const opts = this.options();
     if (!vals || vals.length === 0) return '';
@@ -116,14 +132,14 @@ export class UiLibSelect implements ControlValueAccessor {
     return labels.join(', ');
   });
 
-  readonly filteredOptions = computed(() => {
+  readonly filteredOptions = computed<SelectOption[]>(() => {
     const term = this.filter().toLowerCase();
     const opts = this.options();
     if (!term) return opts;
     return opts.filter((o) => o.label.toLowerCase().includes(term));
   });
 
-  readonly groupedOptions = computed(() => {
+  readonly groupedOptions = computed<Record<string, SelectOption[]>>(() => {
     const groups: Record<string, SelectOption[]> = {};
     this.filteredOptions().forEach((opt) => {
       const key = opt.group ?? '__ungrouped';
@@ -133,9 +149,9 @@ export class UiLibSelect implements ControlValueAccessor {
     return groups;
   });
 
-  readonly groupKeys = computed(() => Object.keys(this.groupedOptions()));
+  readonly groupKeys = computed<string[]>(() => Object.keys(this.groupedOptions()));
 
-  writeValue(obj: any): void {
+  writeValue(obj: unknown): void {
     if (this.multiple()) {
       this.internalValue.set(Array.isArray(obj) ? obj : obj == null ? [] : [obj]);
     } else {

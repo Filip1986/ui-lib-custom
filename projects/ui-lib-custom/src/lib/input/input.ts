@@ -18,6 +18,7 @@ import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 export type InputVariant = 'material' | 'bootstrap' | 'minimal';
 export type InputLabelFloat = 'over' | 'in' | 'on';
 export type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url';
+export type InputSize = 'sm' | 'md' | 'lg';
 
 let inputIdCounter = 0;
 
@@ -41,6 +42,7 @@ export class UiLibInput implements ControlValueAccessor {
   id = input<string | null>(null);
   name = input<string | null>(null);
   variant = input<InputVariant>('material');
+  size = input<InputSize>('md');
   type = input<InputType>('text');
   label = input<string>('');
   labelFloat = input<InputLabelFloat>('over');
@@ -61,9 +63,11 @@ export class UiLibInput implements ControlValueAccessor {
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
 
-  readonly controlId = computed(() => this.id() ?? `ui-lib-input-${++inputIdCounter}`);
-  readonly describedById = computed(() => (this.error() ? `${this.controlId()}-error` : undefined));
-  readonly displayPlaceholder = computed(() =>
+  readonly controlId = computed<string>(() => this.id() ?? `ui-lib-input-${++inputIdCounter}`);
+  readonly describedById = computed<string | undefined>(() =>
+    this.error() ? `${this.controlId()}-error` : undefined
+  );
+  readonly displayPlaceholder = computed<string>(() =>
     this.labelFloat() === 'over' ? this.placeholder() : ''
   );
   readonly inputType = computed<InputType>(() => {
@@ -73,10 +77,11 @@ export class UiLibInput implements ControlValueAccessor {
     return this.type();
   });
 
-  readonly hostClasses = computed(() => {
-    const classes = [
+  readonly hostClasses = computed<string>(() => {
+    const classes: string[] = [
       'ui-input',
       `ui-input-${this.variant()}`,
+      `ui-input-size-${this.size()}`,
       `ui-input-float-${this.labelFloat()}`,
     ];
     if (this.labelFloat() !== 'over') classes.push('ui-input-has-floating');
@@ -86,12 +91,12 @@ export class UiLibInput implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  readonly isFloating = computed(() => {
-    const mode = this.labelFloat();
+  readonly isFloating = computed<boolean>(() => {
+    const mode: InputLabelFloat = this.labelFloat();
     if (mode === 'over') return false;
     return this.focused() || !!this.value();
   });
-  readonly isDisabled = computed(() => this.disabled() || this._disabled());
+  readonly isDisabled = computed<boolean>(() => this.disabled() || this._disabled());
 
   @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
 

@@ -54,7 +54,7 @@ export class Badge {
   label = input<string | null>(null);
 
   /** Computed CSS classes for the badge element */
-  badgeClasses = computed(() => {
+  badgeClasses = computed<string>(() => {
     const classes = [
       'badge',
       `badge-variant-${this.variant()}`,
@@ -74,8 +74,8 @@ export class Badge {
   });
 
   /** Computed ARIA label for the badge, falls back to color for dot badges */
-  ariaLabel = computed(() => this.label() ?? (this.dot() ? this.color() : null));
+  ariaLabel = computed<string | null>(() => this.label() ?? (this.dot() ? this.color() : null));
 
   /** Computed role attribute for the badge, 'status' for dot badges */
-  roleAttr = computed(() => (this.dot() ? 'status' : null));
+  roleAttr = computed<string | null>(() => (this.dot() ? 'status' : null));
 }

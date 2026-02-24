@@ -40,7 +40,7 @@ export class Container {
   size = input<ContainerSize>('lg');
 
   /** Whether to center the container */
-  centered = input<boolean>(true);
+  centered = input<boolean>(false);
 
   /**
    * Semantic inset padding using inset tokens (preferred).
@@ -52,13 +52,13 @@ export class Container {
   padding = input<SpacingToken>(4);
 
   /** Computed max-width value */
-  protected _maxWidth = computed(() => containerVar(this.size()));
+  protected _maxWidth = computed<string>(() => containerVar(this.size()));
 
   /** Computed centered value (for host binding) */
-  protected _centered = computed(() => this.centered());
+  protected _centered = computed<boolean>(() => this.centered());
 
   /** Computed padding value from inset (falls back to numeric padding) */
-  protected _paddingValue = computed(() => {
+  protected _paddingValue = computed<string>(() => {
     const semantic = this.inset();
     if (semantic !== null && semantic !== undefined) {
       return insetVar(semantic as InsetToken);

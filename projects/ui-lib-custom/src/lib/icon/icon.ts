@@ -22,7 +22,11 @@ const hasKnownPrefix = (value: string): boolean => {
   selector: 'ui-lib-icon',
   standalone: true,
   imports: [NgIcon],
-  template: `<ng-icon [name]="resolvedName()" [size]="resolvedSize()" [color]="color()" />`,
+  template: `<ng-icon
+    [name]="resolvedName()"
+    [size]="resolvedSize()"
+    [color]="color() ?? undefined"
+  />`,
   styleUrl: './icon.scss',
   host: {
     class: 'ui-lib-icon',
@@ -36,9 +40,9 @@ export class Icon {
 
   name = input.required<string | SemanticIcon>();
   size = input<IconSize>('md');
-  color = input<string>();
+  color = input<string | null>(null);
   clickable = input<boolean>(false);
-  library = input<IconLibrary>();
+  library = input<IconLibrary | null>(null);
   variant = input<ComponentVariant | null>(null);
   semantic = input<boolean>(false);
 
@@ -46,7 +50,7 @@ export class Icon {
     this.iconService.resolveLibrary(this.library(), this.variant())
   );
 
-  resolvedName = computed(() => {
+  resolvedName = computed<string>(() => {
     const library = this.resolvedLibrary();
     const raw = this.name();
     const base =
@@ -62,7 +66,7 @@ export class Icon {
     return `${prefix}${baseName}`;
   });
 
-  resolvedSize = computed(() => this.iconService.getIconSize(this.size()));
+  resolvedSize = computed<string>(() => this.iconService.getIconSize(this.size()));
 
   private isSemanticIcon(value: string | SemanticIcon): value is SemanticIcon {
     return SEMANTIC_ICONS.includes(value as SemanticIcon);

@@ -44,7 +44,7 @@ export class Inline {
   gap = input<SpacingToken>(2);
 
   /** Computed justify-content value */
-  protected _justifyContent = computed(() => {
+  protected _justifyContent = computed<string>(() => {
     const justifyMap: Record<InlineJustify, string> = {
       start: 'flex-start',
       center: 'center',
@@ -56,7 +56,7 @@ export class Inline {
   });
 
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
-  protected _gapValue = computed(() => {
+  protected _gapValue = computed<string>(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
       return typeof semantic === 'number'

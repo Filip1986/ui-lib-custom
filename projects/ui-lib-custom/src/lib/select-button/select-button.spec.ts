@@ -41,7 +41,7 @@ class HostComponent {
   options = signal<SelectButtonOption[]>(defaultOptions);
   multiple = signal<boolean>(false);
   variant = signal<SelectButtonVariant>('material');
-  size = signal<SelectButtonSize>('medium');
+  size = signal<SelectButtonSize>('md');
   disabled = signal<boolean>(false);
   invalid = signal<boolean>(false);
   allowEmpty = signal<boolean>(false);
@@ -162,7 +162,7 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.multiple()).toBeFalsy();
       expect(fixture.componentInstance.allowEmpty()).toBeFalsy();
       expect(fixture.componentInstance.variant()).toBe('material');
-      expect(fixture.componentInstance.size()).toBe('medium');
+      expect(fixture.componentInstance.size()).toBe('md');
     });
 
     it('renders correct number of option buttons', () => {

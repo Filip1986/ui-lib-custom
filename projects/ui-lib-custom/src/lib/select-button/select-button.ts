@@ -44,9 +44,9 @@ import {
     '[class.ui-lib-select-button--material]': "variant() === 'material'",
     '[class.ui-lib-select-button--bootstrap]': "variant() === 'bootstrap'",
     '[class.ui-lib-select-button--minimal]': "variant() === 'minimal'",
-    '[class.ui-lib-select-button--small]': "size() === 'small'",
-    '[class.ui-lib-select-button--medium]': "size() === 'medium'",
-    '[class.ui-lib-select-button--large]': "size() === 'large'",
+    '[class.ui-lib-select-button--small]': "normalizedSize() === 'small'",
+    '[class.ui-lib-select-button--medium]': "normalizedSize() === 'medium'",
+    '[class.ui-lib-select-button--large]': "normalizedSize() === 'large'",
     '[class.ui-lib-select-button--disabled]': 'isDisabled()',
     '[class.ui-lib-select-button--invalid]': 'invalid()',
     '[class.ui-lib-select-button--fluid]': 'fluid()',
@@ -58,16 +58,16 @@ import {
 })
 export class SelectButton implements ControlValueAccessor {
   options = input<SelectButtonOption[]>([]);
-  value = input<any | any[] | null | undefined>(undefined);
+  value = input<unknown | unknown[] | null>(null);
   optionLabel = input<string>('label');
   optionValue = input<string>('value');
   optionDisabled = input<string>('disabled');
 
   multiple = input<boolean>(false);
-  allowEmpty = input<boolean>(true);
+  allowEmpty = input<boolean>(false);
 
   variant = input<SelectButtonVariant>('material');
-  size = input<SelectButtonSize>('medium');
+  size = input<SelectButtonSize>('md');
   disabled = input<boolean>(false);
   invalid = input<boolean>(false);
   fluid = input<boolean>(false);
@@ -75,16 +75,31 @@ export class SelectButton implements ControlValueAccessor {
   ariaLabelledBy = input<string | null>(null);
 
   onChange = output<SelectButtonChangeEvent>();
-  valueChange = output<any | any[]>();
+  valueChange = output<unknown | unknown[]>();
 
   readonly itemTemplate = contentChild<TemplateRef<SelectButtonItemContext>>('item');
 
   readonly focusedIndex = signal<number>(-1);
-  readonly internalValue = signal<any[]>([]);
+  readonly internalValue = signal<unknown[]>([]);
   private readonly cvaDisabled = signal<boolean>(false);
 
-  private onCvaChange: (value: any | any[]) => void = () => {};
+  private onCvaChange: (value: unknown | unknown[]) => void = () => {};
   private onCvaTouched: () => void = () => {};
+
+  readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
+    (): 'small' | 'medium' | 'large' => {
+      const size: SelectButtonSize = this.size();
+      const map: Record<SelectButtonSize, 'small' | 'medium' | 'large'> = {
+        sm: 'small',
+        md: 'medium',
+        lg: 'large',
+        small: 'small',
+        medium: 'medium',
+        large: 'large',
+      };
+      return map[size] ?? 'medium';
+    }
+  );
 
   readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
 
@@ -103,12 +118,12 @@ export class SelectButton implements ControlValueAccessor {
     return this.findFirstEnabledIndex(opts);
   });
 
-  writeValue(obj: any): void {
-    const next: any[] = this.normalizeValues(obj);
+  writeValue(obj: unknown): void {
+    const next: unknown[] = this.normalizeValues(obj);
     this.internalValue.set(next);
   }
 
-  registerOnChange(fn: (value: any | any[]) => void): void {
+  registerOnChange(fn: (value: unknown | unknown[]) => void): void {
     this.onCvaChange = fn;
   }
 
@@ -133,14 +148,14 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   isSelected(option: SelectButtonOption): boolean {
-    const value: any = this.resolveValue(option);
-    return this.internalValue().some((v: any) => v === value);
+    const value: unknown = this.resolveValue(option);
+    return this.internalValue().some((v: unknown) => v === value);
   }
 
   isOptionDisabled(option: SelectButtonOption): boolean {
     const resolver: string = this.optionDisabled();
     if (resolver) {
-      const fieldValue: any = this.readOptionField(option, resolver);
+      const fieldValue: unknown = this.readOptionField(option, resolver);
       return fieldValue === true;
     }
 
@@ -150,7 +165,7 @@ export class SelectButton implements ControlValueAccessor {
   resolveLabel(option: SelectButtonOption): string {
     const resolver: string = this.optionLabel();
     if (resolver) {
-      const fieldValue: any = this.readOptionField(option, resolver);
+      const fieldValue: unknown = this.readOptionField(option, resolver);
       if (fieldValue !== undefined && fieldValue !== null) {
         return String(fieldValue);
       }
@@ -160,14 +175,14 @@ export class SelectButton implements ControlValueAccessor {
       return String(option.label);
     }
 
-    const fallbackValue: any = option.value ?? '';
+    const fallbackValue: unknown = option.value ?? '';
     return String(fallbackValue);
   }
 
-  resolveValue(option: SelectButtonOption): any {
+  resolveValue(option: SelectButtonOption): unknown {
     const resolver: string = this.optionValue();
     if (resolver) {
-      const fieldValue: any = this.readOptionField(option, resolver);
+      const fieldValue: unknown = this.readOptionField(option, resolver);
       if (fieldValue !== undefined) {
         return fieldValue;
       }
@@ -177,67 +192,27 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   trackOption(index: number, option: SelectButtonOption): string | number {
-    const value: any = this.resolveValue(option);
+    const value: unknown = this.resolveValue(option);
     if (typeof value === 'string' || typeof value === 'number') {
       return value;
     }
     return index;
   }
 
-  @HostListener('keydown', ['$event'])
-  onKeydown(event: KeyboardEvent): void {
-    if (this.isDisabled()) return;
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        event.preventDefault();
-        this.moveFocus(1);
-        break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        event.preventDefault();
-        this.moveFocus(-1);
-        break;
-      case 'Home':
-        event.preventDefault();
-        this.moveFocusToStart();
-        break;
-      case 'End':
-        event.preventDefault();
-        this.moveFocusToEnd();
-        break;
-      case ' ':
-      case 'Enter':
-        event.preventDefault();
-        this.commitFocused(event);
-        break;
-      default:
-        break;
-    }
-  }
-
-  @HostListener('focusout', ['$event'])
-  onFocusOut(event: FocusEvent): void {
-    const nextTarget: Node | null = event.relatedTarget as Node | null;
-    if (nextTarget && this.el.nativeElement.contains(nextTarget)) {
-      return;
-    }
-    this.onCvaTouched();
-  }
-
   private toggleOption(option: SelectButtonOption, event: Event): void {
-    const value: any = this.resolveValue(option);
+    const value: unknown = this.resolveValue(option);
 
     if (this.multiple()) {
-      const current: any[] = this.internalValue();
-      const exists: boolean = current.some((v: any) => v === value);
-      const next: any[] = exists ? current.filter((v: any) => v !== value) : [...current, value];
+      const current: unknown[] = this.internalValue();
+      const exists: boolean = current.some((v: unknown) => v === value);
+      const next: unknown[] = exists
+        ? current.filter((v: unknown) => v !== value)
+        : [...current, value];
       this.applySelection(next, event);
       return;
     }
 
-    const currentValue: any = this.internalValue()[0] ?? null;
+    const currentValue: unknown = this.internalValue()[0] ?? null;
     const isSame: boolean = currentValue === value;
     if (isSame && this.allowEmpty()) {
       this.applySelection([], event);
@@ -247,9 +222,9 @@ export class SelectButton implements ControlValueAccessor {
     this.applySelection([value], event);
   }
 
-  private applySelection(nextValues: any[], event: Event): void {
+  private applySelection(nextValues: unknown[], event: Event): void {
     this.internalValue.set(nextValues);
-    const outputValue: any | any[] = this.multiple() ? nextValues : (nextValues[0] ?? null);
+    const outputValue: unknown | unknown[] = this.multiple() ? nextValues : (nextValues[0] ?? null);
 
     this.onChange.emit({ originalEvent: event, value: outputValue });
     this.valueChange.emit(outputValue);
@@ -308,7 +283,7 @@ export class SelectButton implements ControlValueAccessor {
     });
   }
 
-  private normalizeValues(value: any | any[] | null | undefined): any[] {
+  private normalizeValues(value: unknown | unknown[] | null): unknown[] {
     if (Array.isArray(value)) {
       return value;
     }
@@ -320,7 +295,7 @@ export class SelectButton implements ControlValueAccessor {
 
   private findSelectedIndex(options: SelectButtonOption[]): number {
     if (this.multiple()) return -1;
-    const currentValue: any = this.internalValue()[0] ?? null;
+    const currentValue: unknown = this.internalValue()[0] ?? null;
     if (currentValue === null || currentValue === undefined) return -1;
 
     for (let i: number = 0; i < options.length; i += 1) {
@@ -363,7 +338,7 @@ export class SelectButton implements ControlValueAccessor {
     return -1;
   }
 
-  private readOptionField(option: SelectButtonOption, field: string): any {
+  private readOptionField(option: SelectButtonOption, field: string): unknown {
     if (option && Object.prototype.hasOwnProperty.call(option, field)) {
       return option[field];
     }
@@ -372,10 +347,52 @@ export class SelectButton implements ControlValueAccessor {
 
   constructor(private readonly el: ElementRef<HTMLElement>) {
     effect((): void => {
-      const inputValue: any | any[] | null | undefined = this.value();
-      if (inputValue !== undefined) {
+      const inputValue: unknown | unknown[] | null = this.value();
+      if (inputValue !== null) {
         this.internalValue.set(this.normalizeValues(inputValue));
       }
     });
+  }
+
+  @HostListener('keydown', ['$event'])
+  onKeydown(event: KeyboardEvent): void {
+    if (this.isDisabled()) return;
+
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        this.moveFocus(1);
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        this.moveFocus(-1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        this.moveFocusToStart();
+        break;
+      case 'End':
+        event.preventDefault();
+        this.moveFocusToEnd();
+        break;
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        this.commitFocused(event);
+        break;
+      default:
+        break;
+    }
+  }
+
+  @HostListener('focusout', ['$event'])
+  onFocusOut(event: FocusEvent): void {
+    const nextTarget: Node | null = event.relatedTarget as Node | null;
+    if (nextTarget && this.el.nativeElement.contains(nextTarget)) {
+      return;
+    }
+    this.onCvaTouched();
   }
 }

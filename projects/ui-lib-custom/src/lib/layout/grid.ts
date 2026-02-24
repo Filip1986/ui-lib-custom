@@ -56,7 +56,7 @@ export class Grid {
   minColumnWidth = input<string | undefined>(undefined);
 
   /** Computed grid-template-columns value */
-  protected _gridTemplateColumns = computed(() => {
+  protected _gridTemplateColumns = computed<string>(() => {
     const minWidth = this.minColumnWidth();
     if (minWidth) {
       // Auto-fit responsive grid
@@ -67,7 +67,7 @@ export class Grid {
   });
 
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
-  protected _gapValue = computed(() => {
+  protected _gapValue = computed<string>(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
       return typeof semantic === 'number'

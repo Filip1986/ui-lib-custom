@@ -77,7 +77,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   dir = input<'ltr' | 'rtl' | 'auto'>('auto');
   variant = input<TabsVariant>('material');
-  size = input<TabsSize>('medium');
+  size = input<TabsSize>('md');
   orientation = input<TabsOrientation>('horizontal');
   align = input<TabsAlignment>('start');
   /** Controls panel rendering vs navigation-only mode. */
@@ -208,11 +208,26 @@ export class Tabs implements OnDestroy, AfterViewInit {
     this.controlled() ? this.resolvedSelection() : this.internalSelection()
   );
 
+  private readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
+    (): 'small' | 'medium' | 'large' => {
+      const size: TabsSize = this.size();
+      const map: Record<TabsSize, 'small' | 'medium' | 'large'> = {
+        sm: 'small',
+        md: 'medium',
+        lg: 'large',
+        small: 'small',
+        medium: 'medium',
+        large: 'large',
+      };
+      return map[size] ?? 'medium';
+    }
+  );
+
   tabsClasses = computed<string>(() => {
     const classes = [
       'tabs-root',
       `tabs-${this.variant()}`,
-      `tabs-size-${this.size()}`,
+      `tabs-${this.normalizedSize()}`,
       `tabs-orientation-${this.orientation()}`,
       `tabs-align-${this.align()}`,
     ];

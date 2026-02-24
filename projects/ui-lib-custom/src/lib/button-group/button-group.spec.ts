@@ -17,7 +17,7 @@ import { Icon } from '../icon/icon';
 class HostComponent {
   variant = signal<ButtonVariant>('material');
   vertical = signal<boolean>(false);
-  size = signal<ButtonSize | null>(null);
+  size = signal<ButtonSize>('md');
 }
 
 describe('ButtonGroup', () => {
