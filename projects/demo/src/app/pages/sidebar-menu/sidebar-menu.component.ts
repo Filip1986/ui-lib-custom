@@ -55,7 +55,7 @@ export class SidebarMenuDemoComponent {
 
   variant = signal<SidebarVariant>('classic');
   collapsed = signal(false);
-  collapsible = signal(true);
+  collapsible = signal(false);
 
   variants: SidebarVariant[] = ['classic', 'compact', 'modern'];
 
@@ -64,7 +64,7 @@ export class SidebarMenuDemoComponent {
   variant="classic"
   [items]="items"
   [collapsed]="false"
-  [collapsible]="true">
+  [collapsible]="false">
   <div sidebar-brand>Brand</div>
   <div sidebar-footer>Footer</div>
 </ui-lib-sidebar-menu>`,
