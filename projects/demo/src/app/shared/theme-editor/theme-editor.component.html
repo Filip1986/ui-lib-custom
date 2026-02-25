@@ -1,318 +1,182 @@
-<div class="theme-toggle" (click)="onTogglePanel()" title="Toggle Theme Editor">⚙</div>
+<ui-lib-button class="theme-editor-fab" size="sm" appearance="solid" (click)="togglePanel()">
+  ⚙
+</ui-lib-button>
 
-<div class="theme-panel" [class.theme-panel--open]="showPanel()">
-  <div class="theme-panel__header">
-    <div>
-      <div class="title">Theme Editor</div>
-      <div class="subtitle">Live tweak and export</div>
+<div class="theme-editor-shell" [class.is-open]="isOpen()" data-theme="light">
+  <div class="theme-editor-backdrop" (click)="closePanel()"></div>
+
+  <aside class="theme-editor-panel" role="dialog" aria-label="Theme editor">
+    <div class="theme-editor-header">
+      <div>
+        <div class="title">Theme Editor</div>
+        <div class="subtitle">Live customize demo theme</div>
+      </div>
+      <ui-lib-button size="sm" appearance="ghost" (click)="closePanel()">Close</ui-lib-button>
     </div>
-    <button class="ghost" (click)="onTogglePanel()" aria-label="Close editor">✕</button>
-  </div>
 
-  <div class="section">
-    <label class="label">Preset</label>
-    <select
-      aria-label="Theme preset"
-      [ngModel]="currentPreset().name"
-      (ngModelChange)="onPresetChange($event)"
-    >
-      @for (name of presetNames(); track name) {
-        <option [value]="name">{{ name }}</option>
-      }
-    </select>
-  </div>
+    <section class="theme-editor-section">
+      <div class="section-title">Variant</div>
+      <div class="pill-group">
+        @for (opt of variants; track opt.value) {
+          <ui-lib-button
+            size="sm"
+            [appearance]="variant() === opt.value ? 'solid' : 'outline'"
+            (click)="setVariant(opt.value)"
+            class="pill"
+            [style.--uilib-button-radius]="'9999px'"
+          >
+            {{ opt.label }}
+          </ui-lib-button>
+        }
+      </div>
+    </section>
 
-  <div class="section">
-    <div class="label">Saved presets</div>
-    <div class="inline">
-      <input
-        type="text"
-        aria-label="Preset name"
-        placeholder="Preset name"
-        [ngModel]="presetName()"
-        (ngModelChange)="presetName.set($event)"
-      />
-      <button class="primary" type="button" (click)="savePreset()">Save</button>
-      <button class="ghost" type="button" (click)="importPresetJson()">Import</button>
-    </div>
-    @if (presetNotice()) {
-      <div class="notice">{{ presetNotice() }}</div>
-    }
-    <div class="preset-list">
-      @for (preset of savedPresets(); track preset.id) {
-        <div class="preset-item">
-          <span class="preset-name">{{ preset.name }}</span>
-          <div class="preset-actions">
-            <button class="ghost" type="button" (click)="applySavedPreset(preset.id)">Apply</button>
-            <button class="ghost" type="button" (click)="exportSavedPreset(preset.id)">
-              Export
-            </button>
-            <button class="ghost" type="button" (click)="deleteSavedPreset(preset.id)">
-              Delete
-            </button>
+    <section class="theme-editor-section">
+      <div class="section-title">Shape</div>
+      <div class="pill-group">
+        @for (opt of shapes; track opt.value) {
+          <ui-lib-button
+            size="sm"
+            [appearance]="shape() === opt.value ? 'solid' : 'outline'"
+            (click)="setShape(opt.value)"
+            class="pill"
+            [style.--uilib-button-radius]="'9999px'"
+          >
+            <span class="shape-icon" [attr.data-shape]="opt.value"></span>
+            {{ opt.label }}
+          </ui-lib-button>
+        }
+      </div>
+    </section>
+
+    <section class="theme-editor-section">
+      <div class="section-title">Density</div>
+      <div class="pill-group">
+        @for (opt of densities; track opt.value) {
+          <ui-lib-button
+            size="sm"
+            [appearance]="density() === opt.value ? 'solid' : 'outline'"
+            (click)="setDensity(opt.value)"
+            class="pill"
+            [style.--uilib-button-radius]="'9999px'"
+          >
+            {{ opt.label }}
+          </ui-lib-button>
+        }
+      </div>
+    </section>
+
+    <section class="theme-editor-section">
+      <div class="section-title">Dark Mode</div>
+      <div class="pill-group">
+        @for (opt of modes; track opt.value) {
+          <ui-lib-button
+            size="sm"
+            [appearance]="mode() === opt.value ? 'solid' : 'outline'"
+            (click)="setMode(opt.value)"
+            class="pill"
+            [style.--uilib-button-radius]="'9999px'"
+          >
+            {{ opt.label }}
+          </ui-lib-button>
+        }
+      </div>
+    </section>
+
+    <section class="theme-editor-section">
+      <div class="section-title">Colors</div>
+      <div class="color-list">
+        @for (color of colors; track color.key) {
+          <div class="color-row">
+            <button
+              class="color-swatch"
+              type="button"
+              [style.background]="colorValues()[color.key]"
+              (click)="swatchInput.click()"
+            ></button>
+            <div class="color-meta">
+              <div class="color-label">{{ color.label }}</div>
+              <ui-lib-input
+                size="sm"
+                [ngModel]="colorValues()[color.key]"
+                (ngModelChange)="onHexChange(color.key, $event)"
+                placeholder="#000000"
+              />
+            </div>
+            <ui-lib-button size="sm" appearance="ghost" (click)="resetColor(color.key)">
+              Reset
+            </ui-lib-button>
+            <input
+              #swatchInput
+              class="color-input"
+              type="color"
+              [value]="colorValues()[color.key]"
+              (input)="onSwatchChange(color.key, $event.target.value)"
+            />
           </div>
-        </div>
-      }
-      @if (savedPresets().length === 0) {
-        <div class="preset-empty">No saved presets</div>
-      }
-    </div>
-  </div>
-
-  <div class="section grid">
-    <div class="label full">Colors</div>
-    @for (key of colorKeys; track key) {
-      <label class="color-field">
-        <span class="label">{{ key | titlecase }}</span>
-        <input
-          type="color"
-          [ngModel]="currentPreset().colors[key]"
-          (ngModelChange)="onColorChange(key, $event)"
-        />
-      </label>
-    }
-  </div>
-
-  <div class="section">
-    <label class="label">Border radius</label>
-    <select
-      aria-label="Border radius"
-      [ngModel]="currentRadius()"
-      (ngModelChange)="onRadiusChange($event)"
-    >
-      @for (opt of radiusOptions; track opt.value) {
-        <option [value]="opt.value">{{ opt.label }}</option>
-      }
-    </select>
-  </div>
-
-  <div class="section">
-    <div class="label">Typography</div>
-    <label class="sub-label">Suggested pairings</label>
-    <select
-      aria-label="Suggested font pairing"
-      [ngModel]="selectedPairing()"
-      (ngModelChange)="onPairingSelect($event)"
-    >
-      <option value="">-- Select pairing --</option>
-      @for (pair of pairingOptions(); track pair.name) {
-        <option [value]="pair.name">
-          {{ pair.name }} ({{ pair.description || pair.category }})
-        </option>
-      }
-    </select>
-
-    <label class="sub-label">Heading font</label>
-    <select
-      aria-label="Heading font"
-      [ngModel]="headingFont()"
-      (ngModelChange)="onHeadingFontChange($event)"
-    >
-      @for (opt of headingFontOptions(); track opt.value) {
-        <option [value]="opt.value">{{ opt.label }}</option>
-      }
-    </select>
-
-    <label class="sub-label">Body font</label>
-    <select
-      aria-label="Body font"
-      [ngModel]="bodyFont()"
-      (ngModelChange)="onBodyFontChange($event)"
-    >
-      @for (opt of bodyFontOptions(); track opt.value) {
-        <option [value]="opt.value">{{ opt.label }}</option>
-      }
-    </select>
-
-    <label class="sub-label">UI font</label>
-    <div class="inline">
-      <select
-        aria-label="UI font"
-        [ngModel]="uiFont()"
-        [disabled]="syncUIWithBody()"
-        (ngModelChange)="onUIFontChange($event)"
-      >
-        @for (opt of uiFontOptions(); track opt.value) {
-          <option [value]="opt.value">{{ opt.label }}</option>
         }
-      </select>
-      <label class="inline-toggle">
-        <input
-          type="checkbox"
-          [checked]="syncUIWithBody()"
-          (change)="onSyncUIToggleEvent($event)"
-        />
-        Sync UI with Body
-      </label>
-    </div>
-
-    <label class="sub-label">Code font</label>
-    <select
-      aria-label="Code font"
-      [ngModel]="monoFont()"
-      (ngModelChange)="onMonoFontChange($event)"
-    >
-      @for (opt of monoFontOptions(); track opt.value) {
-        <option [value]="opt.value">{{ opt.label }}</option>
-      }
-    </select>
-  </div>
-
-  <div class="section">
-    <label class="label">Base font size: {{ currentTypography().baseFontSize }}</label>
-    <input
-      aria-label="Base font size"
-      type="range"
-      min="12"
-      max="20"
-      step="1"
-      [ngModel]="currentTypography().baseFontSize.replace('px', '')"
-      (ngModelChange)="onBaseSizeChange($event)"
-    />
-  </div>
-
-  <div class="section">
-    <label class="label">Shadow</label>
-    <select
-      aria-label="Shadow"
-      [ngModel]="currentPreset().shadow || shadowOptions[0]?.value"
-      (ngModelChange)="onShadowChange($event)"
-    >
-      @for (opt of shadowOptions; track opt.value) {
-        <option [value]="opt.value">{{ opt.label }}</option>
-      }
-    </select>
-  </div>
-
-  <div class="section">
-    <label class="label">Card shadow</label>
-    <select
-      aria-label="Card shadow"
-      [ngModel]="currentPreset().cardShadow || currentPreset().shadow || shadowOptions[0]?.value"
-      (change)="onCardShadowPreview($any($event.target).value)"
-      (ngModelChange)="onCardShadowChange($event)"
-    >
-      @for (opt of shadowOptions; track opt.value) {
-        <option [value]="opt.value">{{ opt.label }}</option>
-      }
-    </select>
-  </div>
-
-  <div class="section">
-    <label class="label">Button shadow</label>
-    <select
-      aria-label="Button shadow"
-      [ngModel]="currentPreset().buttonShadow || currentPreset().shadow || shadowOptions[0]?.value"
-      (change)="onButtonShadowPreview($any($event.target).value)"
-      (ngModelChange)="onButtonShadowChange($event)"
-    >
-      @for (opt of shadowOptions; track opt.value) {
-        <option [value]="opt.value">{{ opt.label }}</option>
-      }
-    </select>
-  </div>
-
-  <div class="section">
-    <ui-lib-icon-editor-panel />
-  </div>
-
-  <div class="section">
-    <ui-lib-icon-preview />
-  </div>
-
-  <div class="export-section">
-    <div class="section-header">
-      <span class="label">Export Theme</span>
-      <button class="ghost toggle-btn" (click)="toggleExportPreview()">
-        {{ showExportPreview() ? 'Hide' : 'Show' }} Preview
-      </button>
-    </div>
-
-    <div class="export-formats">
-      <label class="format-option">
-        <input
-          type="radio"
-          name="exportFormat"
-          value="json"
-          [checked]="exportFormat() === 'json'"
-          (change)="setExportFormat('json')"
-        />
-        <span>JSON</span>
-      </label>
-      <label class="format-option">
-        <input
-          type="radio"
-          name="exportFormat"
-          value="css"
-          [checked]="exportFormat() === 'css'"
-          (change)="setExportFormat('css')"
-        />
-        <span>CSS</span>
-      </label>
-      <label class="format-option">
-        <input
-          type="radio"
-          name="exportFormat"
-          value="scss"
-          [checked]="exportFormat() === 'scss'"
-          (change)="setExportFormat('scss')"
-        />
-        <span>SCSS</span>
-      </label>
-      <label class="format-option">
-        <input
-          type="radio"
-          name="exportFormat"
-          value="figma"
-          [checked]="exportFormat() === 'figma'"
-          (change)="setExportFormat('figma')"
-        />
-        <span>Figma Tokens</span>
-      </label>
-    </div>
-
-    @if (showExportPreview()) {
-      <div class="export-preview">
-        <pre><code>{{ exportPreview() }}</code></pre>
       </div>
+    </section>
+
+    <section class="theme-editor-section">
+      <div class="section-title">Typography</div>
+      <div class="type-row">
+        <ui-lib-input
+          label="Heading Font"
+          size="sm"
+          [ngModel]="headingFont()"
+          (ngModelChange)="headingFont.set($event)"
+          (blur)="onHeadingBlur(headingFont())"
+          placeholder="'Inter', sans-serif"
+        />
+      </div>
+      <div class="type-row">
+        <ui-lib-input
+          label="Body Font"
+          size="sm"
+          [ngModel]="bodyFont()"
+          (ngModelChange)="bodyFont.set($event)"
+          (blur)="onBodyBlur(bodyFont())"
+          placeholder="'Inter', sans-serif"
+        />
+      </div>
+    </section>
+
+    <section class="theme-editor-section">
+      <div class="section-title">Presets</div>
+      <div class="preset-actions">
+        <ui-lib-button size="sm" appearance="solid" (click)="savePreset()">
+          Save current as preset
+        </ui-lib-button>
+      </div>
+      <div class="preset-list">
+        @for (preset of savedPresets(); track preset.id) {
+          <div class="preset-row">
+            <span class="preset-name">{{ preset.name }}</span>
+            <div class="preset-buttons">
+              <ui-lib-button size="sm" appearance="outline" (click)="applyPreset(preset)">
+                Apply
+              </ui-lib-button>
+              <ui-lib-button size="sm" appearance="ghost" (click)="deletePreset(preset.id)">
+                Delete
+              </ui-lib-button>
+            </div>
+          </div>
+        }
+        @if (savedPresets().length === 0) {
+          <div class="preset-empty">No saved presets</div>
+        }
+      </div>
+    </section>
+
+    <section class="theme-editor-section">
+      <div class="section-title">Export</div>
       <div class="export-actions">
-        @if (exportNotice()) {
-          <span class="export-status">{{ exportNotice() }}</span>
-        }
-        <button class="ghost copy-btn" (click)="copyToClipboard()">Copy</button>
+        <ui-lib-button size="sm" appearance="outline" (click)="exportJson()">
+          Export JSON
+        </ui-lib-button>
+        <ui-lib-button size="sm" appearance="outline" (click)="copyCss()"> Copy CSS </ui-lib-button>
       </div>
-    }
-
-    <div class="export-buttons">
-      <button class="primary" (click)="downloadTheme()">
-        Download {{ exportFormat().toUpperCase() }}
-      </button>
-    </div>
-  </div>
-
-  <div class="import-section">
-    <div class="section-header">
-      <span class="label">Import Theme</span>
-    </div>
-
-    <div class="import-options">
-      <input
-        #importInput
-        class="file-input"
-        type="file"
-        accept="application/json,.json"
-        (change)="importTheme($event)"
-      />
-      <button class="ghost" (click)="openImportDialog()">Import JSON</button>
-      <button class="ghost" (click)="showPasteDialog()">Paste JSON</button>
-    </div>
-    @if (importNotice()) {
-      <div class="import-status">{{ importNotice() }}</div>
-    }
-  </div>
-
-  <div class="actions">
-    <button class="primary" (click)="saveTheme()">Save Theme</button>
-    <button class="ghost" (click)="resetTheme()">Reset to Default</button>
-  </div>
+    </section>
+  </aside>
 </div>
