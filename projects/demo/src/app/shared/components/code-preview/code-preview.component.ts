@@ -61,7 +61,7 @@ export class CodePreviewComponent {
       } else {
         this.fallbackCopy(text);
       }
-    } catch (error) {
+    } catch {
       this.fallbackCopy(text);
     }
 

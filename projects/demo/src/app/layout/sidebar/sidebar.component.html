@@ -6,7 +6,9 @@
           <li class="nav-item" [class.has-children]="item.items">
             @if (item.items) {
               <div class="nav-link nav-header" (click)="toggleSection(item)">
-                <i [class]="item.icon" *ngIf="item.icon"></i>
+                @if (item.icon) {
+                  <i [class]="item.icon"></i>
+                }
                 <span>{{ item.label }}</span>
                 <i
                   class="pi toggle-icon"
@@ -23,7 +25,9 @@
                       routerLinkActive="active"
                       class="nav-link"
                     >
-                      <i [class]="subItem.icon" *ngIf="subItem.icon"></i>
+                      @if (subItem.icon) {
+                        <i [class]="subItem.icon"></i>
+                      }
                       <span>{{ subItem.label }}</span>
                     </a>
                   </li>
@@ -36,7 +40,9 @@
                 routerLinkActive="active"
                 class="nav-link"
               >
-                <i [class]="item.icon" *ngIf="item.icon"></i>
+                @if (item.icon) {
+                  <i [class]="item.icon"></i>
+                }
                 <span>{{ item.label }}</span>
               </a>
             }

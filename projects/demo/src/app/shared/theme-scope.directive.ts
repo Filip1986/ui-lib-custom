@@ -1,4 +1,12 @@
-import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  Renderer2,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
 
 @Directive({
   selector: '[appThemeScope]',
@@ -7,12 +15,9 @@ import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } fro
 export class ThemeScopeDirective implements OnChanges {
   @Input('appThemeScope') themeVars: Record<string, string> | null = null;
 
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly renderer = inject(Renderer2);
   private previousKeys = new Set<string>();
-
-  constructor(
-    private el: ElementRef<HTMLElement>,
-    private renderer: Renderer2
-  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes['themeVars']) return;

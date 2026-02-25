@@ -101,7 +101,7 @@
   ],
   "lint-staged": {
     "*.ts": [
-      "ng lint --fix",
+      "scripts/lint-staged-eslint.sh",
       "prettier --write"
     ],
     "*.scss": [

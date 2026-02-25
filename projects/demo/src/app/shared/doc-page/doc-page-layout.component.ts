@@ -11,7 +11,7 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Container, Card } from '../../../../../ui-lib-custom/src/public-api';
+import { Container } from '../../../../../ui-lib-custom/src/public-api';
 import { DocSection } from './doc-section.model';
 
 @Component({

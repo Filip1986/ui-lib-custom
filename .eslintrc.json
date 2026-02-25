@@ -6,8 +6,8 @@
       "files": ["*.ts"],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "project": ["./tsconfig.json"],
-        "createDefaultProgram": true
+        "project": ["./tsconfig.eslint.json"],
+        "createDefaultProgram": false
       },
       "plugins": ["@angular-eslint", "@typescript-eslint"],
       "extends": [

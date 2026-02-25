@@ -25,7 +25,7 @@ export class DocCodeSnippetComponent {
       } else {
         this.fallbackCopy(text);
       }
-    } catch (error) {
+    } catch {
       this.fallbackCopy(text);
     }
 
