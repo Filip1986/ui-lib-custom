@@ -1,0 +1,165 @@
+<div class="gallery-page" [class.present-mode]="presentMode()">
+  <div class="gallery-topbar">
+    <div class="gallery-title">
+      <h1>Component Gallery</h1>
+      <p class="gallery-subtitle">Live preview for client demos</p>
+    </div>
+    <div class="gallery-actions">
+      @if (shareNotice()) {
+        <span class="share-notice">{{ shareNotice() }}</span>
+      }
+      <ui-lib-button size="sm" appearance="outline" (click)="copyShareLink()">
+        Share link
+      </ui-lib-button>
+      <ui-lib-button size="sm" appearance="outline" (click)="togglePresentMode()">
+        {{ presentMode() ? 'Exit Present Mode' : 'Present Mode' }}
+      </ui-lib-button>
+    </div>
+  </div>
+
+  <div class="gallery-layout">
+    <div class="gallery-preview">
+      <section class="gallery-section">
+        <div class="section-heading">
+          <h2>Buttons</h2>
+          <p>All severities, sizes, and variants</p>
+        </div>
+        <div class="button-grid">
+          @for (variant of variants; track variant) {
+            <div class="button-group">
+              <h3>{{ variant | titlecase }}</h3>
+              @for (size of sizes; track size) {
+                <div class="button-row">
+                  <span class="button-size">{{ size.toUpperCase() }}</span>
+                  <div class="button-row-grid">
+                    @for (severity of severities; track severity) {
+                      <ui-lib-button [variant]="variant" [size]="size" [color]="severity">
+                        {{ severity | titlecase }}
+                      </ui-lib-button>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="section-heading">
+          <h2>Form Controls</h2>
+          <p>Mock registration form</p>
+        </div>
+        <div class="form-card">
+          <ui-lib-input label="Full Name" placeholder="Jane Doe" />
+          <ui-lib-input label="Email" type="email" placeholder="jane@company.com" />
+          <ui-lib-select label="Role" [options]="roles" placeholder="Select role" />
+          <ui-lib-checkbox label="I agree to the terms" />
+          <ui-lib-button appearance="solid" color="primary">Submit</ui-lib-button>
+        </div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="section-heading">
+          <h2>Cards</h2>
+          <p>Elevated, outlined, and flat styles</p>
+        </div>
+        <div class="card-grid">
+          <ui-lib-card variant="material">
+            <div class="card-body">
+              <div class="avatar">JD</div>
+              <h3>Elevated Card</h3>
+              <p>Modern card with elevated shadow and crisp layout.</p>
+              <div class="card-actions">
+                <ui-lib-button size="sm">Details</ui-lib-button>
+                <ui-lib-button size="sm" appearance="outline">Share</ui-lib-button>
+              </div>
+            </div>
+          </ui-lib-card>
+
+          <ui-lib-card variant="bootstrap">
+            <div class="card-body">
+              <div class="avatar">AC</div>
+              <h3>Outlined Card</h3>
+              <p>Clear structure with border emphasis for dashboards.</p>
+              <div class="card-actions">
+                <ui-lib-button size="sm">Details</ui-lib-button>
+                <ui-lib-button size="sm" appearance="outline">Share</ui-lib-button>
+              </div>
+            </div>
+          </ui-lib-card>
+
+          <ui-lib-card variant="minimal">
+            <div class="card-body">
+              <div class="avatar">MP</div>
+              <h3>Flat Card</h3>
+              <p>Lightweight card for minimal layouts and content.</p>
+              <div class="card-actions">
+                <ui-lib-button size="sm">Details</ui-lib-button>
+                <ui-lib-button size="sm" appearance="outline">Share</ui-lib-button>
+              </div>
+            </div>
+          </ui-lib-card>
+        </div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="section-heading">
+          <h2>Data Display</h2>
+          <p>Badges, tabs, and accordion content</p>
+        </div>
+        <div class="data-grid">
+          <div class="badge-group">
+            @for (severity of severities; track severity) {
+              <ui-lib-badge [color]="severity">{{ severity | titlecase }}</ui-lib-badge>
+            }
+          </div>
+
+          <ui-lib-tabs>
+            <ui-lib-tab label="Overview">
+              <p>Project status, milestones, and highlights.</p>
+            </ui-lib-tab>
+            <ui-lib-tab label="Team">
+              <p>Team members, assignments, and roles.</p>
+            </ui-lib-tab>
+            <ui-lib-tab label="Timeline">
+              <p>Upcoming dates and delivery checkpoints.</p>
+            </ui-lib-tab>
+          </ui-lib-tabs>
+
+          <ui-lib-accordion>
+            <ui-lib-accordion-panel header="What’s new">
+              <p>Feature updates and release notes for this sprint.</p>
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel header="Performance">
+              <p>Latest build metrics and SLA performance.</p>
+            </ui-lib-accordion-panel>
+            <ui-lib-accordion-panel header="Support">
+              <p>Help resources and customer success contacts.</p>
+            </ui-lib-accordion-panel>
+          </ui-lib-accordion>
+        </div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="section-heading">
+          <h2>Typography</h2>
+          <p>Live font preview</p>
+        </div>
+        <div class="type-sample">
+          <h1>Heading 1 — Product Name</h1>
+          <h2>Heading 2 — Section Title</h2>
+          <h3>Heading 3 — Subsection</h3>
+          <h4>Heading 4 — Detail Heading</h4>
+          <p>Body text showcases readability and rhythm for long-form content and product copy.</p>
+          <p class="caption">Caption text for hints and metadata.</p>
+          <pre class="monospace">const theme = 'custom';</pre>
+        </div>
+      </section>
+    </div>
+
+    <div class="gallery-editor" [class.is-hidden]="presentMode()">
+      <app-theme-editor [embedded]="true" [showFab]="false" />
+    </div>
+  </div>
+</div>

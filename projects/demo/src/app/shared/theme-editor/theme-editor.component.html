@@ -1,9 +1,18 @@
-<ui-lib-button class="theme-editor-fab" size="sm" appearance="solid" (click)="togglePanel()">
-  ⚙
-</ui-lib-button>
+@if (showFab() && !embedded()) {
+  <ui-lib-button class="theme-editor-fab" size="sm" appearance="solid" (click)="togglePanel()">
+    ⚙
+  </ui-lib-button>
+}
 
-<div class="theme-editor-shell" [class.is-open]="isOpen()" data-theme="light">
-  <div class="theme-editor-backdrop" (click)="closePanel()"></div>
+<div
+  class="theme-editor-shell"
+  [class.is-open]="panelOpen()"
+  [class.embedded]="embedded()"
+  data-theme="light"
+>
+  @if (!embedded()) {
+    <div class="theme-editor-backdrop" (click)="closePanel()"></div>
+  }
 
   <aside class="theme-editor-panel" role="dialog" aria-label="Theme editor">
     <div class="theme-editor-header">

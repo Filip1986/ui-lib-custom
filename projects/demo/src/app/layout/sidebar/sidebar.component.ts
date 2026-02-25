@@ -48,6 +48,11 @@ export class SidebarComponent {
       expanded: true,
       items: [
         {
+          label: 'Gallery',
+          icon: 'pi pi-images',
+          route: '/gallery',
+        },
+        {
           label: 'Badge',
           icon: 'pi pi-circle',
           route: '/badges',

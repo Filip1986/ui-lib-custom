@@ -25,6 +25,7 @@ import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.co
 import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
 import { ScopedThemingComponent } from './pages/scoped-theming/scoped-theming.component';
 import { AccessibilityComponent } from './pages/accessibility/accessibility.component';
+import { GalleryComponent } from './pages/gallery/gallery.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -119,6 +120,7 @@ export const routes: Routes = [
     title: 'Scoped Theming - UI Library',
   },
   { path: 'accessibility', component: AccessibilityComponent, title: 'Accessibility - UI Library' },
+  { path: 'gallery', component: GalleryComponent, title: 'Gallery - UI Library' },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

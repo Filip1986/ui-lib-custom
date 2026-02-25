@@ -23,6 +23,20 @@
   }
 }
 
+.theme-editor-shell.embedded {
+  position: static;
+  pointer-events: auto;
+}
+
+.theme-editor-shell.embedded .theme-editor-panel {
+  position: static;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  transform: none;
+  box-shadow: none;
+}
+
 .theme-editor-backdrop {
   position: absolute;
   inset: 0;

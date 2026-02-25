@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   ThemeConfigService,
@@ -34,11 +34,15 @@ interface ColorOption {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeEditorComponent {
+  embedded = input<boolean>(false);
+  showFab = input<boolean>(true);
+
   private readonly themeConfig = inject(ThemeConfigService);
   private readonly presetService = inject(ThemePresetService);
   private readonly editorService = inject(ThemeEditorService);
 
   readonly isOpen = signal<boolean>(false);
+  readonly panelOpen = computed<boolean>(() => this.embedded() || this.isOpen());
   readonly pendingColors = this.editorService.pendingColors;
 
   readonly variant = computed<ThemeVariant>(() => this.themeConfig.variant());
@@ -94,10 +98,16 @@ export class ThemeEditorComponent {
   }
 
   togglePanel(): void {
+    if (this.embedded()) {
+      return;
+    }
     this.isOpen.update((v) => !v);
   }
 
   closePanel(): void {
+    if (this.embedded()) {
+      return;
+    }
     this.isOpen.set(false);
   }
 
