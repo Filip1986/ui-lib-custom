@@ -1,5 +1,5 @@
 import type { ThemePreset } from '../theme-preset.interface';
-import { BORDER_RADIUS, SHADOWS } from 'ui-lib-custom/tokens';
+import { BORDER_RADIUS, SHADOWS, SHAPE_TOKENS } from 'ui-lib-custom/tokens';
 
 export interface CssExportOptions {
   includeComments?: boolean;
@@ -36,12 +36,12 @@ export function exportThemeAsCss(preset: ThemePreset, options: CssExportOptions 
 
   lines.push('');
   lines.push('  /* Shape */');
-  lines.push(`  --uilib-border-radius: ${mapBorderRadius(preset.shape.borderRadius)};`);
+  lines.push(`  --uilib-border-radius: ${mapShapeRadius(preset.shape)};`);
 
   lines.push('');
   lines.push('  /* Typography */');
-  lines.push(`  --uilib-font-family: ${preset.typography.fontFamily};`);
-  lines.push(`  --uilib-font-size-base: ${preset.typography.baseFontSize};`);
+  lines.push(`  --uilib-font-family: ${preset.fonts.body};`);
+  lines.push(`  --uilib-font-size-base: ${preset.typography?.baseFontSize ?? '16px'};`);
 
   if (preset.shadow) {
     lines.push('');
@@ -83,6 +83,14 @@ function mapShadow(value: string): string {
   };
 
   return fallback[value] ?? value;
+}
+
+function mapShapeRadius(value: string): string {
+  const shapeKey = value as keyof typeof SHAPE_TOKENS;
+  if (shapeKey in SHAPE_TOKENS) {
+    return SHAPE_TOKENS[shapeKey];
+  }
+  return mapBorderRadius(value);
 }
 
 function kebabCase(value: string): string {

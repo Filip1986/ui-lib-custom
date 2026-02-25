@@ -4,6 +4,8 @@ import type { IconLibrary, IconSize, ThemeVariant } from 'ui-lib-custom/core';
 export type { ThemeVariant };
 
 export type ThemeMode = 'auto' | 'light' | 'dark';
+export type ThemeShape = 'sharp' | 'rounded' | 'soft' | 'pill';
+export type ThemeDensity = 'compact' | 'default' | 'comfortable';
 
 export interface ThemeConfig {
   mode: ThemeMode;
@@ -19,12 +21,18 @@ export interface ThemePresetColors {
   danger: string;
   warning: string;
   info: string;
-  background: string;
   surface: string;
-  surfaceAlt: string;
-  text: string;
-  textSecondary: string;
-  border: string;
+  background: string;
+  surfaceAlt?: string;
+  text?: string;
+  textSecondary?: string;
+  border?: string;
+}
+
+export interface ThemePresetFonts {
+  heading: string;
+  body: string;
+  mono: string;
 }
 
 export interface ThemePresetShape {
@@ -87,11 +95,19 @@ export interface ThemeIconConfig {
 }
 
 export interface ThemePreset {
+  id: string;
   name: string;
+  description?: string;
   variant: ThemeVariant;
+  shape: ThemeShape;
+  density: ThemeDensity;
+  darkMode: ThemeMode;
   colors: ThemePresetColors;
-  shape: ThemePresetShape;
-  typography: ThemePresetTypography;
+  fonts: ThemePresetFonts;
+  customCssVars?: Record<string, string>;
+  createdAt: number;
+  updatedAt: number;
+  typography?: ThemePresetTypography;
   shadow?: string;
   cardShadow?: string;
   buttonShadow?: string;

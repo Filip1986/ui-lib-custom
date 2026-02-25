@@ -1,6 +1,11 @@
 {
+  "id": "preset-brand-example",
   "name": "brand-example",
+  "description": "Brand example preset",
   "variant": "minimal",
+  "shape": "rounded",
+  "density": "default",
+  "darkMode": "light",
   "colorScheme": "light",
   "colors": {
     "primary": "#7c3aed",
@@ -16,11 +21,10 @@
     "textSecondary": "#475569",
     "border": "#e2e8f0"
   },
-  "shape": {
-    "borderRadius": "lg",
-    "buttonRadius": "lg",
-    "cardRadius": "lg",
-    "inputRadius": "lg"
+  "fonts": {
+    "heading": "'Inter', 'Segoe UI', sans-serif",
+    "body": "'Inter', 'Segoe UI', sans-serif",
+    "mono": "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
   },
   "typography": {
     "fontFamily": "'Inter', 'Segoe UI', sans-serif",
@@ -46,5 +50,7 @@
       "xl": "2rem",
       "2xl": "2.5rem"
     }
-  }
+  },
+  "createdAt": 1700000000000,
+  "updatedAt": 1700000000000
 }

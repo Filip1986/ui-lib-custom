@@ -1,4 +1,5 @@
 import type { ThemePreset } from '../theme-preset.interface';
+import { SHAPE_TOKENS } from 'ui-lib-custom/tokens';
 
 /**
  * Figma Tokens format (compatible with Figma Tokens plugin)
@@ -79,22 +80,21 @@ export function exportThemeAsFigmaTokens(preset: ThemePreset): FigmaTokenSet {
       xl: { value: '12px', type: 'borderRadius' },
       full: { value: '9999px', type: 'borderRadius' },
       default: {
-        value: mapBorderRadiusToPixels(preset.shape.borderRadius),
+        value: mapShapeRadiusToPixels(preset.shape),
         type: 'borderRadius',
       },
     },
     fontFamily: {
       base: {
-        value: preset.typography?.fontFamily || 'Inter, sans-serif',
+        value: preset.fonts.body || 'Inter, sans-serif',
         type: 'fontFamily',
       },
       heading: {
-        value:
-          preset.typography?.fontHeading || preset.typography?.fontFamily || 'Inter, sans-serif',
+        value: preset.fonts.heading || preset.fonts.body || 'Inter, sans-serif',
         type: 'fontFamily',
       },
       mono: {
-        value: preset.typography?.fontMonospace || 'Fira Code, monospace',
+        value: preset.fonts.mono || 'Fira Code, monospace',
         type: 'fontFamily',
       },
     },
@@ -124,6 +124,14 @@ export function exportThemeAsFigmaTokens(preset: ThemePreset): FigmaTokenSet {
 export function exportThemeAsFigmaJson(preset: ThemePreset): string {
   const tokens = exportThemeAsFigmaTokens(preset);
   return JSON.stringify(tokens, null, 2);
+}
+
+function mapShapeRadiusToPixels(value: string): string {
+  const shapeKey = value as keyof typeof SHAPE_TOKENS;
+  if (shapeKey in SHAPE_TOKENS) {
+    return SHAPE_TOKENS[shapeKey];
+  }
+  return mapBorderRadiusToPixels(value);
 }
 
 function mapBorderRadiusToPixels(value: string): string {

@@ -1,4 +1,5 @@
 import type { ThemePreset } from '../theme-preset.interface';
+import { SHAPE_TOKENS } from 'ui-lib-custom/tokens';
 
 export interface ScssExportOptions {
   includeComments?: boolean;
@@ -26,12 +27,12 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
 
     lines.push('');
     lines.push('// Shape');
-    lines.push(`$${variablePrefix}-border-radius: ${preset.shape.borderRadius};`);
+    lines.push(`$${variablePrefix}-border-radius: ${mapShapeRadius(preset.shape)};`);
 
     lines.push('');
     lines.push('// Typography');
-    lines.push(`$${variablePrefix}-font-family: ${preset.typography.fontFamily};`);
-    lines.push(`$${variablePrefix}-font-size-base: ${preset.typography.baseFontSize};`);
+    lines.push(`$${variablePrefix}-font-family: ${preset.fonts.body};`);
+    lines.push(`$${variablePrefix}-font-size-base: ${preset.typography?.baseFontSize ?? '16px'};`);
 
     if (preset.shadow) {
       lines.push('');
@@ -57,11 +58,19 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
       lines.push(`    '${kebabCase(key)}': ${value}${comma}`);
     });
     lines.push(`  ),`);
-    lines.push(`  'border-radius': ${preset.shape.borderRadius}`);
+    lines.push(`  'border-radius': ${mapShapeRadius(preset.shape)}`);
     lines.push(');');
   }
 
   return lines.join('\n');
+}
+
+function mapShapeRadius(value: string): string {
+  const shapeKey = value as keyof typeof SHAPE_TOKENS;
+  if (shapeKey in SHAPE_TOKENS) {
+    return SHAPE_TOKENS[shapeKey];
+  }
+  return value;
 }
 
 function kebabCase(value: string): string {

@@ -22,6 +22,7 @@ import {
   ThemeConfig,
   ThemeMode,
   ThemeVariant,
+  ThemePresetShape,
 } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
 import { exportThemeAsScss, ScssExportOptions } from './exporters/scss-exporter';
@@ -401,7 +402,12 @@ export class ThemeConfigService {
     };
 
     const presetWithIcons = this.ensureIconDefaults(preset);
-    const { colors, shape, typography, shadow, cardShadow, buttonShadow, icons } = presetWithIcons;
+    const { colors, typography, shadow, cardShadow, buttonShadow, icons, shape } = presetWithIcons;
+
+    const surfaceAlt: string = colors.surfaceAlt ?? colors.surface;
+    const textColor: string = colors.text ?? colors.primary;
+    const textSecondary: string = colors.textSecondary ?? colors.secondary;
+    const borderColor: string = colors.border ?? colors.secondary;
 
     applyColor(
       colors.primary,
@@ -474,51 +480,51 @@ export class ThemeConfigService {
     );
 
     applyColor(colors.background, '--uilib-page-bg');
-    applyColor(colors.text, '--uilib-page-fg');
+    applyColor(textColor, '--uilib-page-fg');
     applyColor(colors.surface, '--uilib-surface', '--uilib-topbar-bg');
-    applyColor(colors.surfaceAlt, '--uilib-surface-alt', '--uilib-topbar-hover');
-    applyColor(colors.border, '--uilib-border', '--uilib-topbar-border', '--uilib-card-border');
-    applyColor(colors.textSecondary, '--uilib-muted');
-    applyColor(colors.text, '--uilib-topbar-fg');
+    applyColor(surfaceAlt, '--uilib-surface-alt', '--uilib-topbar-hover');
+    applyColor(borderColor, '--uilib-border', '--uilib-topbar-border', '--uilib-card-border');
+    applyColor(textSecondary, '--uilib-muted');
+    applyColor(textColor, '--uilib-topbar-fg');
 
     set('--uilib-card-bg', colors.surface);
-    set('--uilib-card-text-color', colors.text);
-    set('--uilib-card-header-bg', colors.surfaceAlt);
-    set('--uilib-card-footer-bg', colors.surfaceAlt);
+    set('--uilib-card-text-color', textColor);
+    set('--uilib-card-header-bg', surfaceAlt);
+    set('--uilib-card-footer-bg', surfaceAlt);
 
-    const resolvedBorderRadius = this.resolveRadius(shape.borderRadius);
-    const radiusBase = resolvedBorderRadius ?? BORDER_RADIUS.md;
-    set('--uilib-radius-sm', radiusBase);
-    set('--uilib-radius-md', radiusBase);
-    set('--uilib-radius-lg', radiusBase);
-    set('--uilib-radius-xl', radiusBase);
-    set('--uilib-radius-2xl', radiusBase);
+    const resolvedBorderRadius: string = this.resolveShapeValue(shape);
+    const shapeConfig: ThemePresetShape | null = this.resolveLegacyShape(shape);
+    const buttonRadius: string =
+      this.resolveRadius(shapeConfig?.buttonRadius) ?? resolvedBorderRadius;
+    const cardRadius: string = this.resolveRadius(shapeConfig?.cardRadius) ?? resolvedBorderRadius;
+    const inputRadius: string =
+      this.resolveRadius(shapeConfig?.inputRadius) ?? resolvedBorderRadius;
+
+    set('--uilib-radius-sm', resolvedBorderRadius);
+    set('--uilib-radius-md', resolvedBorderRadius);
+    set('--uilib-radius-lg', resolvedBorderRadius);
+    set('--uilib-radius-xl', resolvedBorderRadius);
+    set('--uilib-radius-2xl', resolvedBorderRadius);
     set('--uilib-radius-full', BORDER_RADIUS.full);
 
-    set(
-      '--uilib-button-radius',
-      this.resolveRadius(shape.buttonRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md
-    );
-    set(
-      '--uilib-card-radius',
-      this.resolveRadius(shape.cardRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md
-    );
-    set(
-      '--uilib-input-radius',
-      this.resolveRadius(shape.inputRadius) ?? resolvedBorderRadius ?? BORDER_RADIUS.md
-    );
+    set('--uilib-button-radius', buttonRadius);
+    set('--uilib-card-radius', cardRadius);
+    set('--uilib-input-radius', inputRadius);
 
-    const fontBody = typography.fontBody ?? typography.fontFamily;
-    const fontUI = typography.fontUI ?? fontBody ?? typography.fontFamily;
-    const fontHeading = typography.fontHeading ?? fontBody ?? typography.fontFamily;
-    const fontMonospace =
-      typography.fontMonospace ??
+    const fontBody: string =
+      presetWithIcons.fonts?.body ?? typography?.fontBody ?? typography?.fontFamily;
+    const fontUI: string = presetWithIcons.fonts?.body ?? typography?.fontUI ?? fontBody;
+    const fontHeading: string =
+      presetWithIcons.fonts?.heading ?? typography?.fontHeading ?? fontBody;
+    const fontMonospace: string =
+      presetWithIcons.fonts?.mono ??
+      typography?.fontMonospace ??
       "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
-    const headingWeight = typography.headingWeight ?? 600;
-    const bodyWeight = typography.bodyWeight ?? 400;
+    const headingWeight: number = typography?.headingWeight ?? 600;
+    const bodyWeight: number = typography?.bodyWeight ?? 400;
 
     set('--uilib-font-family-base', fontBody);
-    set('--uilib-font-size-base', typography.baseFontSize);
+    set('--uilib-font-size-base', typography?.baseFontSize ?? '1rem');
     set('--uilib-font-body', fontBody);
     set('--uilib-font-ui', fontUI);
     set('--uilib-font-heading', fontHeading);
@@ -596,6 +602,26 @@ export class ThemeConfigService {
       return BORDER_RADIUS[key];
     }
     return value as string;
+  }
+
+  private resolveShapeValue(shape: unknown): string {
+    if (typeof shape === 'string') {
+      const key = shape as keyof typeof SHAPE_TOKENS;
+      return SHAPE_TOKENS[key] ?? SHAPE_TOKENS.rounded;
+    }
+    const legacy: ThemePresetShape | null = this.resolveLegacyShape(shape);
+    return this.resolveRadius(legacy?.borderRadius) ?? SHAPE_TOKENS.rounded;
+  }
+
+  private resolveLegacyShape(shape: unknown): ThemePresetShape | null {
+    if (!shape || typeof shape !== 'object') {
+      return null;
+    }
+    const legacy = shape as ThemePresetShape;
+    if (!('borderRadius' in legacy)) {
+      return null;
+    }
+    return legacy;
   }
 
   private mergePresets(base: ThemePreset, overrides: DeepPartial<ThemePreset>): ThemePreset {

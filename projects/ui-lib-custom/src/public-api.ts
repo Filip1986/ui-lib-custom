@@ -16,6 +16,7 @@ export * from './lib/login/models/login-contract';
 export type { LoginSocialProvider } from './lib/login/models/login-contract';
 export * from './lib/layout';
 export * from './lib/theming/theme-config.service';
+export * from './lib/theming/theme-preset.service';
 export * from './lib/theming/theme-preset.interface';
 export * from './lib/theming/exporters/scss-exporter';
 export * from './lib/theming/exporters/css-exporter';

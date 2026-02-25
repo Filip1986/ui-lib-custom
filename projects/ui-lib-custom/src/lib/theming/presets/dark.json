@@ -1,6 +1,11 @@
 {
+  "id": "preset-dark",
   "name": "dark",
+  "description": "Default dark preset",
   "variant": "material",
+  "shape": "rounded",
+  "density": "default",
+  "darkMode": "dark",
   "colorScheme": "dark",
   "colors": {
     "primary": "#90caf9",
@@ -16,11 +21,10 @@
     "textSecondary": "rgba(255, 255, 255, 0.60)",
     "border": "rgba(255, 255, 255, 0.12)"
   },
-  "shape": {
-    "borderRadius": "md",
-    "buttonRadius": "md",
-    "cardRadius": "md",
-    "inputRadius": "md"
+  "fonts": {
+    "heading": "'Inter', 'Segoe UI', sans-serif",
+    "body": "'Inter', 'Segoe UI', sans-serif",
+    "mono": "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
   },
   "typography": {
     "fontFamily": "'Inter', 'Segoe UI', sans-serif",
@@ -46,5 +50,7 @@
       "xl": "2rem",
       "2xl": "2.5rem"
     }
-  }
+  },
+  "createdAt": 1700000000000,
+  "updatedAt": 1700000000000
 }
