@@ -7,6 +7,7 @@ import {
   ViewChild,
   input,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { TabsLazyMode, TabsValue } from './tabs.types';
 
@@ -15,7 +16,7 @@ import { TabsLazyMode, TabsValue } from './tabs.types';
   standalone: true,
 })
 export class TabLabel {
-  constructor(public readonly template: TemplateRef<unknown>) {}
+  readonly template = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
 @Directive({
@@ -23,7 +24,7 @@ export class TabLabel {
   standalone: true,
 })
 export class TabContent {
-  constructor(public readonly template: TemplateRef<unknown>) {}
+  readonly template = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
 @Component({

@@ -7,13 +7,6 @@ import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 @Component({
   standalone: true,
-  imports: [UiLibInput],
-  template: ` <ui-lib-input /> `,
-})
-class DefaultHostComponent {}
-
-@Component({
-  standalone: true,
   imports: [FormsModule, UiLibInput],
   template: `
     <ui-lib-input

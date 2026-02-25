@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { LoginFactoryComponent } from './login-factory.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginVariant } from '../models/login-contract';
 
 describe('LoginFactoryComponent', () => {
   let component: LoginFactoryComponent;

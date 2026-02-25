@@ -23,16 +23,6 @@ const meta: Meta = {
 
 export default meta;
 
-type InputStoryArgs = {
-  label: string;
-  placeholder: string;
-  variant?: string | null;
-  size?: string;
-  disabled?: boolean;
-  required?: boolean;
-  error?: string | null;
-};
-
 const renderInput = (
   args: Record<string, any>
 ): { props: Record<string, any>; template: string } => ({

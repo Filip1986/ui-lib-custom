@@ -3,16 +3,6 @@ import { Checkbox } from './checkbox';
 
 type Story = StoryObj;
 
-type CheckboxStoryArgs = {
-  label: string | null;
-  description: string | null;
-  variant?: string | null;
-  size?: string;
-  disabled?: boolean;
-  indeterminate?: boolean;
-  checked?: boolean;
-};
-
 const meta: Meta = {
   title: 'Components/Checkbox',
   component: Checkbox,

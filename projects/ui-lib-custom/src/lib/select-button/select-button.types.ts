@@ -11,6 +11,9 @@ export interface SelectButtonChangeEvent {
   value: unknown | unknown[];
 }
 
+// Deprecated alias for legacy event naming.
+export type SelectButtonSelectionChangeEvent = SelectButtonChangeEvent;
+
 export type SelectButtonVariant = 'material' | 'bootstrap' | 'minimal';
 export type SelectButtonSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
 

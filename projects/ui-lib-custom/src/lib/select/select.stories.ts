@@ -3,19 +3,6 @@ import { UiLibSelect, SelectOption } from './select';
 
 type Story = StoryObj;
 
-type SelectStoryArgs = {
-  label: string;
-  placeholder: string;
-  variant?: string | null;
-  size?: string;
-  disabled?: boolean;
-  required?: boolean;
-  invalid?: boolean;
-  multiple?: boolean;
-  searchable?: boolean;
-  loading?: boolean;
-};
-
 const options: SelectOption[] = [
   { label: 'Alpha', value: 'alpha' },
   { label: 'Beta', value: 'beta' },

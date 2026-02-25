@@ -84,6 +84,7 @@ export class UiLibSelect implements ControlValueAccessor {
   readonly internalValue = signal<unknown[] | null>(null);
   private readonly cvaDisabled = signal(false);
   private readonly themeConfig = inject(ThemeConfigService);
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
 
   private onChange: (value: unknown) => void = () => {};
   private onTouched: () => void = () => {};
@@ -229,7 +230,7 @@ export class UiLibSelect implements ControlValueAccessor {
     const opts = this.filteredOptions();
     if (!opts.length) return;
     const maxIndex = opts.length - 1;
-    let idx = this.focusedIndex();
+    const idx = this.focusedIndex();
     let attempts = 0;
     let nextIndex = idx;
 
@@ -391,5 +392,5 @@ export class UiLibSelect implements ControlValueAccessor {
     return String(opt ?? '');
   }
 
-  constructor(private readonly el: ElementRef<HTMLElement>) {}
+  constructor() {}
 }

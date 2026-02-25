@@ -33,7 +33,7 @@ const defaultOptions: SelectButtonOption[] = [
       [optionDisabled]="optionDisabled()"
       [ariaLabelledBy]="ariaLabelledBy()"
       [(value)]="value"
-      (onChange)="onChange($event)"
+      (selectionChange)="onChange($event)"
     />
   `,
 })

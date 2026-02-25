@@ -49,7 +49,7 @@ export class Button {
   icon = input<SemanticIcon | string | null>(null);
   iconOnly = input<boolean | null>(null);
   /** @deprecated Use iconOnly instead. */
-  iconOnlyLegacy = input<boolean>(false, { alias: 'iconOnlyInput' });
+  iconOnlyInput = input<boolean>(false);
   raised = input<boolean>(false);
   rounded = input<boolean>(false);
   text = input<boolean>(false);
@@ -85,7 +85,7 @@ export class Button {
   readonly effectiveVariant = computed<ButtonVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
-  readonly iconOnlyComputed = computed<boolean>(() => this.iconOnly() ?? this.iconOnlyLegacy());
+  readonly iconOnlyComputed = computed<boolean>(() => this.iconOnly() ?? this.iconOnlyInput());
   iconSize = computed<IconSize>(() => {
     const sizeMap: Record<'small' | 'medium' | 'large', IconSize> = {
       small: 'sm',

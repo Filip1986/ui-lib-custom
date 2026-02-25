@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseLoginComponent } from '../base-login/base-login.component';
 import { Container } from '../../layout/container';
@@ -33,8 +33,4 @@ export class Login3Component extends BaseLoginComponent {
    * Override loading property from base component
    */
   override loading = input<boolean>(false);
-
-  constructor(protected override formBuilder: FormBuilder) {
-    super(formBuilder);
-  }
 }

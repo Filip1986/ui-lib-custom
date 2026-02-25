@@ -29,7 +29,9 @@
           [attr.title]="isCollapsed() ? item.label : null"
           (click)="item.children?.length ? toggleItem(item.id, true) : null"
         >
-          <span class="ui-sidebar-icon" *ngIf="item.icon"><i [class]="item.icon"></i></span>
+          @if (item.icon) {
+            <span class="ui-sidebar-icon"><i [class]="item.icon"></i></span>
+          }
           <span class="ui-sidebar-label">{{ item.label }}</span>
           @if (item.badge) {
             <span class="ui-sidebar-badge">{{ item.badge }}</span>
@@ -56,9 +58,9 @@
                   role="menuitem"
                   [attr.title]="isCollapsed() ? child.label : null"
                 >
-                  <span class="ui-sidebar-icon" *ngIf="child.icon"
-                    ><i [class]="child.icon"></i
-                  ></span>
+                  @if (child.icon) {
+                    <span class="ui-sidebar-icon"><i [class]="child.icon"></i></span>
+                  }
                   <span class="ui-sidebar-label">{{ child.label }}</span>
                   @if (child.badge) {
                     <span class="ui-sidebar-badge">{{ child.badge }}</span>

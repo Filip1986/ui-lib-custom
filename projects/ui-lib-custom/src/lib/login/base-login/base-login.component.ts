@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, OnInit, input, output, signal } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  input,
+  output,
+  signal,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginFeatures, LoginFormData, LoginSocialProvider } from '../models/login-contract';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +26,8 @@ export const DEFAULT_SOCIAL_PROVIDERS: LoginSocialProvider[] = [
 })
 export class BaseLoginComponent implements OnInit {
   private static readonly REMEMBER_ME_KEY = 'remember_me_preference';
+
+  private readonly formBuilder = inject(FormBuilder);
 
   title = input<string>('Sign In');
 
@@ -49,13 +59,9 @@ export class BaseLoginComponent implements OnInit {
   rememberMeChange = output<boolean>();
 
   // Form and state as signals
-  loginForm: FormGroup;
+  loginForm: FormGroup = this.createLoginForm();
   submitted = signal(false);
   rememberMe = signal(false);
-
-  constructor(protected formBuilder: FormBuilder) {
-    this.loginForm = this.createLoginForm();
-  }
 
   /**
    * Getter for form controls

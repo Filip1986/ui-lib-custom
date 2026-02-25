@@ -61,6 +61,7 @@ import {
 })
 export class SelectButton implements ControlValueAccessor {
   private readonly themeConfig = inject(ThemeConfigService);
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
 
   options = input<SelectButtonOption[]>([]);
   variant = input<SelectButtonVariant | null>(null);
@@ -80,7 +81,7 @@ export class SelectButton implements ControlValueAccessor {
   ariaLabelledBy = input<string | null>(null);
   ariaLabel = input<string | null>(null);
 
-  onChange = output<SelectButtonChangeEvent>();
+  selectionChange = output<SelectButtonChangeEvent>();
   valueChange = output<unknown | unknown[]>();
 
   readonly itemTemplate = contentChild<TemplateRef<SelectButtonItemContext>>('item');
@@ -248,7 +249,7 @@ export class SelectButton implements ControlValueAccessor {
     this.internalValue.set(nextValues);
     const outputValue: unknown | unknown[] = this.multiple() ? nextValues : (nextValues[0] ?? null);
 
-    this.onChange.emit({ originalEvent: event, value: outputValue });
+    this.selectionChange.emit({ originalEvent: event, value: outputValue });
     this.valueChange.emit(outputValue);
     this.onCvaChange(outputValue);
   }
@@ -367,7 +368,7 @@ export class SelectButton implements ControlValueAccessor {
     return undefined;
   }
 
-  constructor(private readonly el: ElementRef<HTMLElement>) {
+  constructor() {
     effect((): void => {
       const inputValue: unknown | unknown[] | null = this.value();
       if (inputValue !== null) {

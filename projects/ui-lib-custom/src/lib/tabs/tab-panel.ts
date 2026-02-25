@@ -5,6 +5,7 @@ import {
   computed,
   input,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 
 @Component({
@@ -24,7 +25,7 @@ import {
   },
 })
 export class TabPanel {
-  constructor(private readonly el: ElementRef<HTMLElement>) {}
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
   id = input<string>('');
   labelId = input<string>('');
   active = input<boolean>(false);

@@ -53,7 +53,7 @@ interface AccordionPanelContext {
 export class Accordion implements AccordionContext {
   private readonly themeConfig = inject(ThemeConfigService);
 
-  variantInput = input<AccordionVariant | null>(null, { alias: 'variant' });
+  variantInput = input<AccordionVariant | null>(null);
   size = input<AccordionSize>('md');
   expandMode = input<AccordionExpandMode>('single');
   expandedPanels = input<string[]>([]);

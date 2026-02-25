@@ -33,7 +33,7 @@ export class AccordionHeader {}
   standalone: true,
 })
 export class AccordionToggleIcon {
-  constructor(public readonly template: TemplateRef<AccordionToggleIconContext>) {}
+  readonly template = inject<TemplateRef<AccordionToggleIconContext>>(TemplateRef);
 }
 
 @Component({

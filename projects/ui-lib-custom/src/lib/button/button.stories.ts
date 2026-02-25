@@ -1,17 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Button } from './button';
 
-type ButtonStoryArgs = {
-  label: string;
-  variant?: string | null;
-  size?: string;
-  color?: string;
-  disabled?: boolean;
-  loading?: boolean;
-  appearance?: string;
-  icon?: string | null;
-};
-
 type Story = StoryObj;
 
 const meta: Meta = {
