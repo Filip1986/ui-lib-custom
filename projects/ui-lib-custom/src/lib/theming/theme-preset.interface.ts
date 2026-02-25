@@ -119,5 +119,5 @@ export interface ThemePreset {
 export type ThemePresetOverrides = DeepPartial<ThemePreset>;
 
 export type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
+  [K in keyof T]?: T[K] extends object ? DeepPartial<NonNullable<T[K]>> : T[K];
 };

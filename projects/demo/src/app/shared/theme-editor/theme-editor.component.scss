@@ -251,3 +251,40 @@ button.ghost {
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
+.notice {
+  color: var(--uilib-color-success-700, #2e7d32);
+  font-size: 0.85rem;
+}
+
+.preset-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.preset-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--uilib-border, #e0e0e0);
+  border-radius: var(--uilib-radius-sm, 4px);
+  background: var(--uilib-surface, #fff);
+}
+
+.preset-name {
+  font-weight: 600;
+}
+
+.preset-actions {
+  display: inline-flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.preset-empty {
+  font-size: 0.85rem;
+  color: var(--uilib-muted, #6b7280);
+}

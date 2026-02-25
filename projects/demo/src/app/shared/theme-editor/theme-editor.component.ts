@@ -14,7 +14,11 @@ import {
   ThemeConfigService,
   ThemePreset,
   ThemePresetColors,
+  ThemePresetService,
   ThemeVariant,
+  ThemeShape,
+  ThemePresetTypography,
+  ThemePresetOverrides,
   SHADOWS,
 } from 'ui-lib-custom';
 import { GoogleFontsService } from './google-fonts.service';
@@ -41,6 +45,7 @@ export class ThemeEditorComponent {
   private readonly themeService = inject(ThemeConfigService);
   private readonly googleFonts = inject(GoogleFontsService);
   private readonly fontPairings = inject(FontPairingService);
+  private readonly presetService = inject(ThemePresetService);
 
   @ViewChild('importInput') private readonly importInput?: ElementRef<HTMLInputElement>;
 
@@ -50,9 +55,31 @@ export class ThemeEditorComponent {
   exportPreview = signal('');
   exportNotice = signal('');
   importNotice = signal('');
+  presetName = signal('My Preset');
+  presetNotice = signal('');
 
+  readonly savedPresets = computed<ThemePreset[]>(() => this.presetService.presets());
   readonly presetNames = computed(() => Object.keys(this.themeService.listBuiltInPresets()));
   readonly currentPreset = computed(() => this.themeService.preset());
+  readonly currentTypography = computed<ThemePresetTypography>(() => {
+    const typography = this.currentPreset().typography;
+    return (
+      typography ?? {
+        fontFamily: "'Inter', 'Segoe UI', sans-serif",
+        fontHeading: "'Inter', 'Segoe UI', sans-serif",
+        fontBody: "'Inter', 'Segoe UI', sans-serif",
+        fontUI: "'Inter', 'Segoe UI', sans-serif",
+        fontMonospace:
+          "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+        baseFontSize: '16px',
+        headingWeight: 600,
+        bodyWeight: 400,
+      }
+    );
+  });
+  readonly currentRadius = computed<string>(() =>
+    this.mapShapeToRadius(this.currentPreset().shape)
+  );
 
   readonly radiusOptions: SelectOption<string>[] = [
     { label: 'None', value: '0' },
@@ -115,26 +142,25 @@ export class ThemeEditorComponent {
 
   readonly syncUIWithBody = signal(true);
 
-  readonly headingFont = computed(
-    () =>
-      this.currentPreset().typography.fontHeading ??
-      this.currentPreset().typography.fontBody ??
-      this.currentPreset().typography.fontFamily
-  );
-  readonly bodyFont = computed(
-    () => this.currentPreset().typography.fontBody ?? this.currentPreset().typography.fontFamily
-  );
-  readonly uiFont = computed(
-    () =>
-      this.currentPreset().typography.fontUI ??
-      this.bodyFont() ??
-      this.currentPreset().typography.fontFamily
-  );
-  readonly monoFont = computed(
-    () =>
-      this.currentPreset().typography.fontMonospace ??
+  readonly headingFont = computed(() => {
+    const typography = this.currentTypography();
+    return typography.fontHeading ?? typography.fontBody ?? typography.fontFamily;
+  });
+  readonly bodyFont = computed(() => {
+    const typography = this.currentTypography();
+    return typography.fontBody ?? typography.fontFamily;
+  });
+  readonly uiFont = computed(() => {
+    const typography = this.currentTypography();
+    return typography.fontUI ?? this.bodyFont() ?? typography.fontFamily;
+  });
+  readonly monoFont = computed(() => {
+    const typography = this.currentTypography();
+    return (
+      typography.fontMonospace ??
       "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
-  );
+    );
+  });
   readonly selectedPairing = signal<string>('');
 
   onTogglePanel(): void {
@@ -145,6 +171,13 @@ export class ThemeEditorComponent {
     const preset = this.themeService.listBuiltInPresets()[name];
     if (preset) {
       this.themeService.loadPreset(preset, { merge: false, apply: true, persist: true });
+      this.themeService.setShape(preset.shape);
+      if (preset.density) {
+        this.themeService.setDensity(preset.density);
+      }
+      if (preset.darkMode) {
+        this.themeService.setMode(preset.darkMode);
+      }
     }
   }
 
@@ -156,12 +189,12 @@ export class ThemeEditorComponent {
   }
 
   onRadiusChange(value: string): void {
+    const shapeToken: ThemeShape = this.mapRadiusToShape(value);
     this.themeService.loadPreset(
-      {
-        shape: { borderRadius: value, cardRadius: value, buttonRadius: value, inputRadius: value },
-      },
+      { shape: shapeToken },
       { merge: true, apply: true, persist: true }
     );
+    this.themeService.setShape(shapeToken);
   }
 
   onVariantChange(value: ThemeVariant): void {
@@ -178,41 +211,32 @@ export class ThemeEditorComponent {
 
   onHeadingFontChange(value: string): void {
     this.ensureGoogleFontLoaded(value);
-    this.themeService.loadPreset(
-      { typography: { fontHeading: value } },
-      { merge: true, apply: true, persist: true }
-    );
+    const patch: ThemePresetOverrides = this.buildTypographyPatch({ fontHeading: value });
+    this.themeService.loadPreset(patch, { merge: true, apply: true, persist: true });
   }
 
   onBodyFontChange(value: string, opts?: { applyToUI?: boolean; applyToHeading?: boolean }): void {
     this.ensureGoogleFontLoaded(value);
-    const patch: any = { fontBody: value };
+    let patch: ThemePresetOverrides = this.buildTypographyPatch({ fontBody: value });
     if (opts?.applyToUI || this.syncUIWithBody()) {
-      patch.fontUI = value;
+      patch = this.buildTypographyPatch({ fontBody: value, fontUI: value });
     }
     if (opts?.applyToHeading) {
-      patch.fontHeading = value;
+      patch = this.buildTypographyPatch({ fontBody: value, fontHeading: value, fontUI: value });
     }
-    this.themeService.loadPreset(
-      { typography: patch },
-      { merge: true, apply: true, persist: true }
-    );
+    this.themeService.loadPreset(patch, { merge: true, apply: true, persist: true });
   }
 
   onUIFontChange(value: string): void {
     this.ensureGoogleFontLoaded(value);
-    this.themeService.loadPreset(
-      { typography: { fontUI: value } },
-      { merge: true, apply: true, persist: true }
-    );
+    const patch: ThemePresetOverrides = this.buildTypographyPatch({ fontUI: value });
+    this.themeService.loadPreset(patch, { merge: true, apply: true, persist: true });
   }
 
   onMonoFontChange(value: string): void {
     this.ensureGoogleFontLoaded(value);
-    this.themeService.loadPreset(
-      { typography: { fontMonospace: value } },
-      { merge: true, apply: true, persist: true }
-    );
+    const patch: ThemePresetOverrides = this.buildTypographyPatch({ fontMonospace: value });
+    this.themeService.loadPreset(patch, { merge: true, apply: true, persist: true });
   }
 
   onPairingSelect(name: string): void {
@@ -231,33 +255,28 @@ export class ThemeEditorComponent {
     this.selectedPairing.set(name);
     this.syncUIWithBody.set(ui === body);
 
-    this.themeService.loadPreset(
-      {
-        typography: {
-          fontHeading: heading,
-          fontBody: body,
-          fontUI: ui,
-          fontMonospace: mono,
-        },
-      },
-      { merge: true, apply: true, persist: true }
-    );
-  }
+    const typography: ThemePresetTypography = {
+      ...this.currentTypography(),
+      fontHeading: heading,
+      fontBody: body,
+      fontUI: ui,
+      fontMonospace: mono,
+    };
 
-  onSyncUIToggle(checked: boolean): void {
-    this.syncUIWithBody.set(checked);
-    if (checked) {
-      this.onUIFontChange(this.bodyFont());
-    }
+    this.themeService.loadPreset({ typography } as ThemePresetOverrides, {
+      merge: true,
+      apply: true,
+      persist: true,
+    });
   }
 
   onBaseSizeChange(value: number | string): void {
     const numeric = Number(value);
     if (Number.isFinite(numeric)) {
-      this.themeService.loadPreset(
-        { typography: { baseFontSize: `${numeric}px` } },
-        { merge: true, apply: true, persist: true }
-      );
+      const patch: ThemePresetOverrides = this.buildTypographyPatch({
+        baseFontSize: `${numeric}px`,
+      });
+      this.themeService.loadPreset(patch, { merge: true, apply: true, persist: true });
     }
   }
 
@@ -405,6 +424,52 @@ export class ThemeEditorComponent {
     setTimeout(() => this.exportNotice.set(''), 1500);
   }
 
+  savePreset(): void {
+    const name: string = this.presetName().trim();
+    if (!name) {
+      this.presetNotice.set('Preset name required');
+      setTimeout(() => this.presetNotice.set(''), 1500);
+      return;
+    }
+    const preset: ThemePreset = this.presetService.captureCurrentTheme(name);
+    this.presetService.savePreset(preset);
+    this.presetNotice.set('Preset saved');
+    setTimeout(() => this.presetNotice.set(''), 1500);
+  }
+
+  applySavedPreset(id: string): void {
+    const preset: ThemePreset | undefined = this.savedPresets().find((p) => p.id === id);
+    if (!preset) return;
+    this.presetService.applyPreset(preset);
+  }
+
+  deleteSavedPreset(id: string): void {
+    this.presetService.deletePreset(id);
+  }
+
+  exportSavedPreset(id: string): void {
+    const preset: ThemePreset | undefined = this.savedPresets().find((p) => p.id === id);
+    if (!preset) return;
+    this.presetService.exportAsJson(preset);
+  }
+
+  importPresetJson(): void {
+    const text: string | null = window.prompt('Paste ThemePreset JSON');
+    if (!text?.trim()) {
+      return;
+    }
+    try {
+      const preset: ThemePreset = this.presetService.importFromJson(text);
+      this.presetService.savePreset(preset);
+      this.presetService.applyPreset(preset);
+      this.presetNotice.set('Preset imported');
+      setTimeout(() => this.presetNotice.set(''), 1500);
+    } catch {
+      this.presetNotice.set('Invalid preset JSON');
+      setTimeout(() => this.presetNotice.set(''), 1500);
+    }
+  }
+
   private async copyText(text: string): Promise<void> {
     if (navigator?.clipboard?.writeText) {
       await navigator.clipboard.writeText(text);
@@ -442,14 +507,16 @@ export class ThemeEditorComponent {
   private ensureGoogleFontLoaded(fontValue: string): void {
     const family = this.extractPrimaryFamily(fontValue);
     if (!family) return;
-    if (this.googleFonts.fonts().length && !this.googleFonts.fonts().includes(family)) return; // only skip if list is loaded and missing
+    if (this.googleFonts.fonts().length && !this.googleFonts.fonts().includes(family)) return;
 
     const id = `google-font-${family.replace(/\s+/g, '-')}`;
     if (document.getElementById(id)) return;
     const link = document.createElement('link');
     link.id = id;
     link.rel = 'stylesheet';
-    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@400;500;600;700&display=swap`;
+    link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(
+      family
+    )}:wght@400;500;600;700&display=swap`;
     document.head.appendChild(link);
   }
 
@@ -460,13 +527,44 @@ export class ThemeEditorComponent {
     return first || null;
   }
 
+  private mapShapeToRadius(shape: ThemeShape): string {
+    switch (shape) {
+      case 'sharp':
+        return '0';
+      case 'soft':
+        return 'xl';
+      case 'pill':
+        return 'full';
+      case 'rounded':
+      default:
+        return 'md';
+    }
+  }
+
+  private mapRadiusToShape(value: string): ThemeShape {
+    switch (value) {
+      case '0':
+        return 'sharp';
+      case 'full':
+        return 'pill';
+      case 'lg':
+      case 'xl':
+      case '2xl':
+        return 'soft';
+      case 'sm':
+      case 'md':
+      default:
+        return 'rounded';
+    }
+  }
+
   constructor() {
     effect(() => {
       this.googleFonts.loadFonts(GOOGLE_FONTS_API_KEY);
     });
 
     effect(() => {
-      const current = this.currentPreset().typography;
+      const current = this.currentTypography();
       [
         current.fontFamily,
         current.fontHeading,
@@ -486,5 +584,22 @@ export class ThemeEditorComponent {
       label: this.extractPrimaryFamily(value) ?? value,
       value,
     }));
+  }
+
+  private buildTypographyPatch(partial: Partial<ThemePresetTypography>): ThemePresetOverrides {
+    const typography: ThemePresetTypography = { ...this.currentTypography(), ...partial };
+    return { typography } as ThemePresetOverrides;
+  }
+
+  onSyncUIToggle(checked: boolean): void {
+    this.syncUIWithBody.set(checked);
+    if (checked) {
+      this.onUIFontChange(this.bodyFont());
+    }
+  }
+
+  onSyncUIToggleEvent(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    this.onSyncUIToggle(Boolean(target?.checked));
   }
 }

@@ -22,6 +22,43 @@
     </select>
   </div>
 
+  <div class="section">
+    <div class="label">Saved presets</div>
+    <div class="inline">
+      <input
+        type="text"
+        aria-label="Preset name"
+        placeholder="Preset name"
+        [ngModel]="presetName()"
+        (ngModelChange)="presetName.set($event)"
+      />
+      <button class="primary" type="button" (click)="savePreset()">Save</button>
+      <button class="ghost" type="button" (click)="importPresetJson()">Import</button>
+    </div>
+    @if (presetNotice()) {
+      <div class="notice">{{ presetNotice() }}</div>
+    }
+    <div class="preset-list">
+      @for (preset of savedPresets(); track preset.id) {
+        <div class="preset-item">
+          <span class="preset-name">{{ preset.name }}</span>
+          <div class="preset-actions">
+            <button class="ghost" type="button" (click)="applySavedPreset(preset.id)">Apply</button>
+            <button class="ghost" type="button" (click)="exportSavedPreset(preset.id)">
+              Export
+            </button>
+            <button class="ghost" type="button" (click)="deleteSavedPreset(preset.id)">
+              Delete
+            </button>
+          </div>
+        </div>
+      }
+      @if (savedPresets().length === 0) {
+        <div class="preset-empty">No saved presets</div>
+      }
+    </div>
+  </div>
+
   <div class="section grid">
     <div class="label full">Colors</div>
     @for (key of colorKeys; track key) {
@@ -40,31 +77,13 @@
     <label class="label">Border radius</label>
     <select
       aria-label="Border radius"
-      [ngModel]="currentPreset().shape.borderRadius"
+      [ngModel]="currentRadius()"
       (ngModelChange)="onRadiusChange($event)"
     >
       @for (opt of radiusOptions; track opt.value) {
         <option [value]="opt.value">{{ opt.label }}</option>
       }
     </select>
-  </div>
-
-  <div class="section">
-    <label class="label">Variant</label>
-    <div class="radio-group">
-      @for (opt of variantOptions; track opt.value) {
-        <label class="radio">
-          <input
-            type="radio"
-            name="variant"
-            [value]="opt.value"
-            [checked]="currentPreset().variant === opt.value"
-            (change)="onVariantChange(opt.value)"
-          />
-          <span>{{ opt.label }}</span>
-        </label>
-      }
-    </div>
   </div>
 
   <div class="section">
@@ -121,7 +140,7 @@
         <input
           type="checkbox"
           [checked]="syncUIWithBody()"
-          (change)="onSyncUIToggle($any($event.target).checked)"
+          (change)="onSyncUIToggleEvent($event)"
         />
         Sync UI with Body
       </label>
@@ -140,14 +159,14 @@
   </div>
 
   <div class="section">
-    <label class="label">Base font size: {{ currentPreset().typography.baseFontSize }}</label>
+    <label class="label">Base font size: {{ currentTypography().baseFontSize }}</label>
     <input
       aria-label="Base font size"
       type="range"
       min="12"
       max="20"
       step="1"
-      [ngModel]="currentPreset().typography.baseFontSize.replace('px', '')"
+      [ngModel]="currentTypography().baseFontSize.replace('px', '')"
       (ngModelChange)="onBaseSizeChange($event)"
     />
   </div>
