@@ -15,6 +15,7 @@ import { Checkbox, CheckboxSize, CheckboxVariant } from './checkbox';
       [size]="size()"
       [disabled]="disabled()"
       [indeterminate]="indeterminate()"
+      [ariaLabel]="ariaLabel()"
       [(checked)]="checked"
     >
       {{ content() }}
@@ -28,6 +29,7 @@ class HostComponent {
   size = signal<CheckboxSize>('md');
   disabled = signal(false);
   indeterminate = signal(false);
+  ariaLabel = signal<string | null>(null);
   checked = false;
   content = signal('');
 }
@@ -157,6 +159,23 @@ describe('Checkbox', () => {
     expect(dark).not.toBe(light);
     scope.remove();
     root.removeAttribute('data-theme');
+  });
+
+  it('associates label via aria-labelledby', () => {
+    fixture.detectChanges();
+
+    const el = checkboxEl();
+    const labelEl: HTMLElement | null = el.querySelector('.checkbox-label');
+    expect(el.getAttribute('aria-labelledby')).toBe(labelEl?.id ?? null);
+  });
+
+  it('uses aria-label when provided', () => {
+    fixture.componentInstance.label.set(null as unknown as string);
+    fixture.componentInstance.description.set(null as unknown as string);
+    fixture.componentInstance.ariaLabel.set('Custom label');
+    fixture.detectChanges();
+
+    expect(checkboxEl().getAttribute('aria-label')).toBe('Custom label');
   });
 });
 

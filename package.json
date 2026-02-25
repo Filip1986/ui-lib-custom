@@ -101,11 +101,11 @@
   ],
   "lint-staged": {
     "*.ts": [
-      "ng lint --fix",
+      "eslint --fix --config .eslintrc.json --config-type eslintrc",
       "prettier --write"
     ],
     "*.scss": [
       "prettier --write"
     ]
   }
-}
+}git

@@ -518,10 +518,6 @@
   --uilib-button-contrast-bg-hover: var(--uilib-text-dark-secondary);
   --uilib-button-contrast-border: var(--uilib-text-dark-primary);
   --uilib-button-contrast-fg: #0b1220;
-
-  --uilib-button-ghost-hover-bg: rgba(255, 255, 255, 0.08);
-  --uilib-button-ghost-active-bg: rgba(255, 255, 255, 0.12);
-
-  --uilib-button-focus-color: var(--uilib-color-primary-dark);
-  --uilib-button-focus-ring-color: color-mix(in srgb, var(--uilib-color-primary-dark) 30%, transparent);
+  --uilib-button-focus-color: var(--uilib-color-primary-200);
+  --uilib-button-focus-ring-color: color-mix(in srgb, var(--uilib-color-primary-200) 35%, transparent);
 }

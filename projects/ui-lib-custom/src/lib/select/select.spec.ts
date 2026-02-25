@@ -106,6 +106,17 @@ describe('UiLibSelect accessibility', () => {
     fixture.detectChanges();
     expect(selectEl().getAttribute('aria-expanded')).toBe('false');
   });
+
+  it('should close with Escape and return focus to the trigger', () => {
+    openSelect();
+
+    selectEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    fixture.detectChanges();
+
+    expect(selectEl().getAttribute('aria-expanded')).toBe('false');
+    const active = document.activeElement as HTMLElement | null;
+    expect(active === selectEl() || selectEl().contains(active)).toBeTruthy();
+  });
 });
 
 @Component({

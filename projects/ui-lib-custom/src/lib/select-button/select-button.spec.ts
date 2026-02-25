@@ -222,8 +222,8 @@ describe('SelectButton', () => {
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBe('opt2');
-      expect(buttons()[0].getAttribute('aria-pressed')).toBe('false');
-      expect(buttons()[1].getAttribute('aria-pressed')).toBe('true');
+      expect(buttons()[0].getAttribute('aria-checked')).toBe('false');
+      expect(buttons()[1].getAttribute('aria-checked')).toBe('true');
     });
 
     it('emits onChange with correct value', () => {
@@ -372,11 +372,11 @@ describe('SelectButton', () => {
       const btns: HTMLButtonElement[] = Array.from(
         reactiveFixture.nativeElement.querySelectorAll('button')
       );
-      expect(btns[1].getAttribute('aria-pressed')).toBe('true');
+      expect(btns[1].getAttribute('aria-checked')).toBe('true');
 
       reactiveFixture.componentInstance.control.setValue('opt1');
       reactiveFixture.detectChanges();
-      expect(btns[0].getAttribute('aria-pressed')).toBe('true');
+      expect(btns[0].getAttribute('aria-checked')).toBe('true');
     });
 
     it('works with formControlName', () => {
@@ -387,14 +387,14 @@ describe('SelectButton', () => {
       const btns: HTMLButtonElement[] = Array.from(
         reactiveFixture.nativeElement.querySelectorAll('button')
       );
-      expect(btns[1].getAttribute('aria-pressed')).toBe('true');
+      expect(btns[1].getAttribute('aria-checked')).toBe('true');
 
       const control: FormControl<string | null> =
         reactiveFixture.componentInstance.form.controls.choice;
       control.setValue('opt1');
       reactiveFixture.detectChanges();
 
-      expect(btns[0].getAttribute('aria-pressed')).toBe('true');
+      expect(btns[0].getAttribute('aria-checked')).toBe('true');
     });
 
     it('marks control as touched on focusout', () => {
@@ -483,7 +483,7 @@ describe('SelectButton', () => {
       const btns: HTMLButtonElement[] = Array.from(
         selectFixture.nativeElement.querySelectorAll('button')
       );
-      expect(btns[0].getAttribute('aria-pressed')).toBe('true');
+      expect(btns[0].getAttribute('aria-checked')).toBe('true');
     });
   });
 
@@ -544,6 +544,9 @@ describe('SelectButton', () => {
 
   describe('Accessibility', () => {
     it('has role="group" on container', () => {
+      expect(hostEl().getAttribute('role')).toBe('radiogroup');
+      fixture.componentInstance.multiple.set(true);
+      fixture.detectChanges();
       expect(hostEl().getAttribute('role')).toBe('group');
     });
 
@@ -556,7 +559,7 @@ describe('SelectButton', () => {
       buttons()[0].click();
       fixture.detectChanges();
 
-      expect(buttons()[0].getAttribute('aria-pressed')).toBe('true');
+      expect(buttons()[0].getAttribute('aria-checked')).toBe('true');
     });
 
     it('aria-labelledby applied when set', () => {
@@ -653,7 +656,7 @@ describe('SelectButton keyboard behavior', () => {
     hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
     fixture.detectChanges();
 
-    expect(buttons()[1].getAttribute('aria-pressed')).toBe('true');
+    expect(buttons()[1].getAttribute('aria-checked')).toBe('true');
   });
 
   it('tabIndexFor returns 0 for active option', () => {

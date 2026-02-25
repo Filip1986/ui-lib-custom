@@ -65,6 +65,7 @@ export class Button {
   tabIndex = input<number | null>(null);
   ariaPressed = input<boolean | null>(null);
   ariaChecked = input<boolean | null>(null);
+  ariaLabel = input<string | null>(null);
 
   private readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
     (): 'small' | 'medium' | 'large' => {
@@ -210,5 +211,14 @@ export class Button {
   });
 
   ariaDisabled = computed<boolean | null>(() => (this.disabled() || this.loading() ? true : null));
+  ariaLabelResolved = computed<string | null>(() => {
+    if (this.loading()) {
+      return this.ariaLabel() ?? 'Loading';
+    }
+    if (this.iconOnlyComputed()) {
+      return this.ariaLabel() ?? 'Button';
+    }
+    return this.ariaLabel();
+  });
   isDisabled = computed<boolean>(() => this.disabled() || this.loading());
 }

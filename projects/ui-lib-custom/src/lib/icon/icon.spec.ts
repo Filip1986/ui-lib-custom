@@ -50,6 +50,28 @@ describe('Icon', () => {
     expect(fixture.nativeElement.classList.contains('ui-lib-icon--clickable')).toBeTruthy();
   });
 
+  it('sets role, tabindex, and aria-label when clickable', () => {
+    fixture.componentRef.setInput('clickable', true);
+    fixture.componentRef.setInput('ariaLabel', 'Close');
+    fixture.detectChanges();
+
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    expect(host.getAttribute('role')).toBe('button');
+    expect(host.getAttribute('tabindex')).toBe('0');
+    expect(host.getAttribute('aria-label')).toBe('Close');
+  });
+
+  it('activates click on Enter key when clickable', () => {
+    fixture.componentRef.setInput('clickable', true);
+    fixture.detectChanges();
+
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const clickSpy: jasmine.Spy = spyOn(host, 'click');
+    host.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+    expect(clickSpy).toHaveBeenCalled();
+  });
+
   it('applies dark theme variables', () => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');

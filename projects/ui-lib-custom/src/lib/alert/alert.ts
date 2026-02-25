@@ -24,6 +24,7 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
         [variant]="effectiveVariant()"
         size="sm"
         [clickable]="true"
+        ariaLabel="Dismiss alert"
         (click)="onDismiss()"
       />
     }

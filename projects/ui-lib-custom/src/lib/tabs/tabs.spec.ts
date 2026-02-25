@@ -492,4 +492,22 @@ describe('Tabs interactions', () => {
     const minimalList: HTMLElement = createVariantFixture('minimal');
     expect(minimalList.className).toContain('tabs-minimal');
   });
+
+  it('exposes tablist, tab, and tabpanel roles with proper aria linkage', () => {
+    const tabList: HTMLElement | null = fixture.nativeElement.querySelector('nav.tab-list');
+    const buttons: HTMLButtonElement[] = tabButtons();
+    const panels: HTMLElement[] = tabPanels();
+
+    expect(tabList?.getAttribute('role')).toBe('tablist');
+    expect(buttons[0].getAttribute('role')).toBe('tab');
+    expect(panels[0].getAttribute('role')).toBe('tabpanel');
+
+    const controlsId: string | null = buttons[0].getAttribute('aria-controls');
+    const panelId: string | null = panels[0].getAttribute('id');
+    expect(controlsId).toBe(panelId);
+
+    const labelledBy: string | null = panels[0].getAttribute('aria-labelledby');
+    const tabId: string | null = buttons[0].getAttribute('id');
+    expect(labelledBy).toBe(tabId);
+  });
 });

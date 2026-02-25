@@ -406,3 +406,49 @@ describe('UiLibInput announcer', () => {
     expect(announcer.announceError).toHaveBeenCalledWith('Required');
   });
 });
+
+describe('UiLibInput accessibility', () => {
+  let fixture: ComponentFixture<UiLibInput>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [UiLibInput],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(UiLibInput);
+    fixture.detectChanges();
+  });
+
+  function inputEl(): HTMLInputElement {
+    return fixture.nativeElement.querySelector('input');
+  }
+
+  it('associates label with input via for/id', () => {
+    fixture.componentRef.setInput('label', 'Email');
+    fixture.detectChanges();
+
+    const labelEl: HTMLLabelElement | null =
+      fixture.nativeElement.querySelector('label.ui-input-label');
+    const inputId: string | null = inputEl().getAttribute('id');
+    expect(labelEl?.getAttribute('for')).toBe(inputId);
+  });
+
+  it('sets aria-describedby to the error element', () => {
+    fixture.componentRef.setInput('error', 'Required');
+    fixture.detectChanges();
+
+    const errorEl: HTMLElement | null = fixture.nativeElement.querySelector('.ui-input-error-text');
+    expect(inputEl().getAttribute('aria-describedby')).toBe(errorEl?.id ?? null);
+  });
+
+  it('marks touched on blur after keyboard focus', () => {
+    const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
+    fixture.componentInstance.registerOnTouched(onTouched);
+
+    inputEl().dispatchEvent(new FocusEvent('focus'));
+    inputEl().dispatchEvent(new FocusEvent('blur'));
+    fixture.detectChanges();
+
+    expect(onTouched).toHaveBeenCalled();
+  });
+});

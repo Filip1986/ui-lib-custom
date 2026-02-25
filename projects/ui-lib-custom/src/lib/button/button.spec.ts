@@ -250,6 +250,22 @@ describe('Button', () => {
       expect(btn.getAttribute('aria-pressed')).toBe('true');
       expect(btn.getAttribute('aria-checked')).toBe('true');
     });
+
+    it('sets aria-label during loading', () => {
+      fixture.componentRef.setInput('loading', true);
+      fixture.componentRef.setInput('ariaLabel', 'Saving changes');
+      fixture.detectChanges();
+
+      expect(getButton().getAttribute('aria-label')).toBe('Saving changes');
+    });
+
+    it('sets a fallback aria-label for icon-only buttons', () => {
+      fixture.componentRef.setInput('icon', 'lucideAudioWaveform');
+      fixture.componentRef.setInput('iconOnly', true);
+      fixture.detectChanges();
+
+      expect(getButton().getAttribute('aria-label')).toBe('Button');
+    });
   });
 
   it('applies each variant class', () => {

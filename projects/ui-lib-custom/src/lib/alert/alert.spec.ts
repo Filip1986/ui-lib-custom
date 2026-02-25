@@ -38,4 +38,14 @@ describe('Alert', () => {
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
     expect(host.className).toContain('alert-minimal');
   });
+
+  it('adds accessible dismiss control when dismissible', () => {
+    fixture.componentRef.setInput('dismissible', true);
+    fixture.detectChanges();
+
+    const closeIcon: HTMLElement | null = fixture.nativeElement.querySelector('.alert-close');
+    expect(closeIcon).toBeTruthy();
+    expect(closeIcon?.getAttribute('role')).toBe('button');
+    expect(closeIcon?.getAttribute('aria-label')).toBe('Dismiss alert');
+  });
 });

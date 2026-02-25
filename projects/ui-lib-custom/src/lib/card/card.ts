@@ -45,6 +45,7 @@ export class Card {
   headerIcon = input<SemanticIcon | string | null>(null);
   closable = input<boolean>(false);
   subtitle = input<string | null>(null);
+  ariaLabel = input<string | null>(null);
 
   /** Optional scoped theme override */
   theme = input<ThemeScopeInput>(null);
@@ -87,6 +88,14 @@ export class Card {
 
   onClose(): void {
     this.closed.emit();
+  }
+
+  onKeydown(event: KeyboardEvent): void {
+    if (!this.hoverable()) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.el.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    }
   }
 
   private applyThemeScope(): void {

@@ -35,7 +35,7 @@ class CardHost {
   standalone: true,
   imports: [Card],
   template: `
-    <ui-lib-card [hoverable]="true" (click)="onClick()">
+    <ui-lib-card [hoverable]="true" [ariaLabel]="'Open card'" (click)="onClick()">
       <div card-header>Clickable</div>
       Click body
     </ui-lib-card>
@@ -301,5 +301,45 @@ describe('Card clickable behavior', () => {
     const card: HTMLElement = getCard();
     expect(card.getAttribute('role')).toBe('button');
     expect(card.getAttribute('tabindex')).toBe('0');
+  });
+});
+
+describe('Card keyboard accessibility', () => {
+  let fixture: ComponentFixture<ClickableCardHost>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ClickableCardHost],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ClickableCardHost);
+    fixture.detectChanges();
+  });
+
+  function cardEl(): HTMLElement {
+    return fixture.nativeElement.querySelector('.card');
+  }
+
+  it('sets role, tabindex, and aria-label when hoverable', () => {
+    const card = cardEl();
+    expect(card.getAttribute('role')).toBe('button');
+    expect(card.getAttribute('tabindex')).toBe('0');
+    expect(card.getAttribute('aria-label')).toBe('Open card');
+  });
+
+  it('fires click on Enter key', () => {
+    const card = cardEl();
+    card.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.clickCount).toBe(1);
+  });
+
+  it('fires click on Space key', () => {
+    const card = cardEl();
+    card.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.clickCount).toBe(1);
   });
 });

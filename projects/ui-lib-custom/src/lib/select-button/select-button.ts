@@ -52,8 +52,9 @@ import {
     '[class.ui-lib-select-button--disabled]': 'isDisabled()',
     '[class.ui-lib-select-button--invalid]': 'invalid()',
     '[class.ui-lib-select-button--fluid]': 'fluid()',
-    '[attr.role]': "'group'",
+    '[attr.role]': 'groupRole()',
     '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
+    '[attr.aria-label]': 'ariaLabelResolved()',
     '[attr.aria-disabled]': 'isDisabled() ? true : null',
     '[attr.aria-invalid]': 'invalid() ? true : null',
   },
@@ -77,6 +78,7 @@ export class SelectButton implements ControlValueAccessor {
   fluid = input<boolean>(false);
 
   ariaLabelledBy = input<string | null>(null);
+  ariaLabel = input<string | null>(null);
 
   onChange = output<SelectButtonChangeEvent>();
   valueChange = output<unknown | unknown[]>();
@@ -124,6 +126,19 @@ export class SelectButton implements ControlValueAccessor {
 
     return this.findFirstEnabledIndex(opts);
   });
+
+  readonly groupRole = computed<string>(() => (this.multiple() ? 'group' : 'radiogroup'));
+  readonly itemRole = computed<string>(() => (this.multiple() ? 'checkbox' : 'radio'));
+  readonly ariaLabelResolved = computed<string | null>(() => {
+    if (this.ariaLabelledBy()) {
+      return null;
+    }
+    return this.ariaLabel() ?? 'Select options';
+  });
+
+  optionAriaChecked(option: SelectButtonOption): string {
+    return this.isSelected(option) ? 'true' : 'false';
+  }
 
   writeValue(obj: unknown): void {
     const next: unknown[] = this.normalizeValues(obj);

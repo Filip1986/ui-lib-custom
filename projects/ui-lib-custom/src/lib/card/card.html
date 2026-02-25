@@ -2,6 +2,8 @@
   [ngClass]="cardClasses()"
   [attr.role]="hoverable() ? 'button' : null"
   [attr.tabindex]="hoverable() ? 0 : null"
+  [attr.aria-label]="hoverable() ? ariaLabel() || null : null"
+  (keydown)="onKeydown($event)"
   [style.--uilib-card-shadow]="shadow()"
   [style.--uilib-card-shadow-hover]="shadow()"
   [style.--uilib-card-header-bg]="headerBg()"
@@ -32,6 +34,7 @@
           [variant]="effectiveVariant()"
           size="md"
           [clickable]="true"
+          ariaLabel="Close card"
           (click)="onClose()"
         />
       }

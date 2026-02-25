@@ -32,6 +32,11 @@ const hasKnownPrefix = (value: string): boolean => {
     class: 'ui-lib-icon',
     '[class.ui-lib-icon--clickable]': 'clickable()',
     '[style.--icon-color]': 'color()',
+    '[attr.role]': 'clickable() ? "button" : null',
+    '[attr.tabindex]': 'clickable() ? 0 : null',
+    '[attr.aria-label]': 'ariaLabelResolved()',
+    '[attr.aria-hidden]': 'ariaHidden()',
+    '(keydown)': 'onKeydown($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,6 +47,7 @@ export class Icon {
   size = input<IconSize>('md');
   color = input<string | null>(null);
   clickable = input<boolean>(false);
+  ariaLabel = input<string | null>(null);
   library = input<IconLibrary | null>(null);
   variant = input<ComponentVariant | null>(null);
   semantic = input<boolean>(false);
@@ -67,8 +73,22 @@ export class Icon {
   });
 
   resolvedSize = computed<string>(() => this.iconService.getIconSize(this.size()));
+  ariaLabelResolved = computed<string | null>(() =>
+    this.clickable() ? (this.ariaLabel() ?? 'Icon') : this.ariaLabel()
+  );
+  ariaHidden = computed<string | null>(() =>
+    this.clickable() || this.ariaLabel() ? null : 'true'
+  );
 
   private isSemanticIcon(value: string | SemanticIcon): value is SemanticIcon {
     return SEMANTIC_ICONS.includes(value as SemanticIcon);
+  }
+
+  onKeydown(event: KeyboardEvent): void {
+    if (!this.clickable()) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      (event.currentTarget as HTMLElement).click();
+    }
   }
 }
