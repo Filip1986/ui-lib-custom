@@ -2,6 +2,10 @@
   display: grid;
   gap: 0.35rem;
   color: var(--uilib-input-text, var(--uilib-page-fg));
+  --uilib-input-padding-y-base: 0.5rem;
+  --uilib-input-padding-x-base: 0.75rem;
+  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
+  --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
 }
 
 :host .ui-input-label {
@@ -192,22 +196,28 @@
 }
 
 :host .ui-input.ui-input-size-sm {
-  --uilib-input-padding-y: 0.35rem;
-  --uilib-input-padding-x: 0.5rem;
+  --uilib-input-padding-y-base: 0.35rem;
+  --uilib-input-padding-x-base: 0.5rem;
+  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
+  --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
   --uilib-input-min-height: 36px;
   font-size: 0.875rem;
 }
 
 :host .ui-input.ui-input-size-md {
-  --uilib-input-padding-y: 0.5rem;
-  --uilib-input-padding-x: 0.75rem;
+  --uilib-input-padding-y-base: 0.5rem;
+  --uilib-input-padding-x-base: 0.75rem;
+  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
+  --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
   --uilib-input-min-height: 44px;
   font-size: 1rem;
 }
 
 :host .ui-input.ui-input-size-lg {
-  --uilib-input-padding-y: 0.65rem;
-  --uilib-input-padding-x: 0.9rem;
+  --uilib-input-padding-y-base: 0.65rem;
+  --uilib-input-padding-x-base: 0.9rem;
+  --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
+  --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
   --uilib-input-min-height: 52px;
   font-size: 1.125rem;
 }

@@ -1,15 +1,15 @@
 :host {
-  /* Component defaults (all color-sensitive values via CSS vars) */
+  --uilib-card-header-padding-y-base: 0.75rem;
+  --uilib-card-header-padding-x-base: 1rem;
+  --uilib-card-body-padding-base: 1rem;
+  --uilib-card-footer-padding-y-base: 0.5rem;
+  --uilib-card-footer-padding-x-base: 1rem;
+  --uilib-card-header-padding: calc(var(--uilib-card-header-padding-y-base) * var(--uilib-density, 1))
+    calc(var(--uilib-card-header-padding-x-base) * var(--uilib-density, 1));
+  --uilib-card-body-padding: calc(var(--uilib-card-body-padding-base) * var(--uilib-density, 1));
+  --uilib-card-footer-padding: calc(var(--uilib-card-footer-padding-y-base) * var(--uilib-density, 1))
+    calc(var(--uilib-card-footer-padding-x-base) * var(--uilib-density, 1));
   --uilib-card-border-width: 0;
-  --uilib-card-header-padding: var(
-    --uilib-card-header-padding-base,
-    var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)
-  );
-  --uilib-card-body-padding: var(--uilib-card-body-padding-base, 1.5rem);
-  --uilib-card-footer-padding: var(
-    --uilib-card-footer-padding-base,
-    var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem)
-  );
 
   display: block;
 }

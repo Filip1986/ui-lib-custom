@@ -20,3 +20,23 @@ describe('ThemeConfigService shape', () => {
     expect(root.style.getPropertyValue('--uilib-shape-base')).toBe('9999px');
   });
 });
+
+describe('ThemeConfigService density', () => {
+  let service: ThemeConfigService;
+  let root: HTMLElement;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ThemeConfigService);
+    root = document.documentElement;
+  });
+
+  afterEach(() => {
+    root.style.removeProperty('--uilib-density');
+  });
+
+  it('sets the density variable on the root element', () => {
+    service.setDensity('comfortable');
+    expect(root.style.getPropertyValue('--uilib-density')).toBe('1.33');
+  });
+});

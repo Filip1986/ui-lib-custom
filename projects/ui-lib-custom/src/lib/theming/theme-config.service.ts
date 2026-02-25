@@ -6,6 +6,8 @@ import {
   SELECTBUTTON_TOKENS,
   SHAPE_TOKENS,
   ShapeToken,
+  DENSITY_TOKENS,
+  DensityToken,
 } from 'ui-lib-custom/tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
@@ -57,6 +59,7 @@ export class ThemeConfigService {
   private readonly modeSignal = signal<ThemeMode>('auto');
   readonly variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
   readonly shape: WritableSignal<ShapeToken> = signal<ShapeToken>('rounded');
+  readonly density: WritableSignal<DensityToken> = signal<DensityToken>('default');
   private mediaQuery: MediaQueryList | null = null;
 
   readonly preset = computed<ThemePreset>(() => this.presetSignal());
@@ -88,6 +91,7 @@ export class ThemeConfigService {
     this.applyToRoot(initial);
     this.applyThemeToDocument();
     this.setShape(this.shape());
+    this.setDensity(this.density());
     this.syncSavedThemes();
   }
 
@@ -338,6 +342,12 @@ export class ThemeConfigService {
     this.shape.set(shape);
     const value: string = SHAPE_TOKENS[shape] ?? SHAPE_TOKENS.rounded;
     this.doc?.documentElement?.style?.setProperty('--uilib-shape-base', value);
+  }
+
+  setDensity(density: DensityToken): void {
+    this.density.set(density);
+    const scale: string = String(DENSITY_TOKENS[density]?.scale ?? 1);
+    this.doc?.documentElement?.style?.setProperty('--uilib-density', scale);
   }
 
   private triggerDownload(content: string, filename: string, mimeType: string): void {

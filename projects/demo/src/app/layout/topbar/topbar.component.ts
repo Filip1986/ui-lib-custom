@@ -10,7 +10,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Button } from 'ui-lib-custom/button';
-import { ThemeConfigService, ThemeMode, ThemeVariant, ShapeToken } from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
+import { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
 
 @Component({
   selector: 'app-topbar',
@@ -25,6 +26,7 @@ export class TopbarComponent {
   readonly mode: Signal<ThemeMode> = this.themeService.mode;
   readonly variant = computed<ThemeVariant>(() => this.themeService.variant());
   readonly shape = computed<ShapeToken>(() => this.themeService.shape());
+  readonly density = computed<DensityToken>(() => this.themeService.density());
 
   menuButtonClick = output<void>();
   themeToggle = output<void>();
@@ -57,5 +59,9 @@ export class TopbarComponent {
 
   setShape(shape: ShapeToken): void {
     this.themeService.setShape(shape);
+  }
+
+  setDensity(density: DensityToken): void {
+    this.themeService.setDensity(density);
   }
 }

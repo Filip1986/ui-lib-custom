@@ -24,6 +24,14 @@ export const SPACING_TOKENS = {
 
 export type SpacingToken = keyof typeof SPACING_TOKENS;
 
+export const DENSITY_TOKENS = {
+  compact: { scale: 0.75, label: 'Compact' },
+  default: { scale: 1, label: 'Default' },
+  comfortable: { scale: 1.33, label: 'Comfortable' },
+} as const;
+
+export type DensityToken = keyof typeof DENSITY_TOKENS;
+
 export const SPACING_ALIASES = {
   xs: SPACING_TOKENS[1], // 4px
   sm: SPACING_TOKENS[2], // 8px

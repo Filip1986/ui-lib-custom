@@ -29,6 +29,7 @@
   --uilib-checkbox-size-md: 1.25rem;
   --uilib-checkbox-size-lg: 1.5rem;
   --uilib-checkbox-font: var(--uilib-font-ui, inherit);
+  --uilib-checkbox-padding-base: 0rem;
 
   display: inline-flex;
   align-items: center;
@@ -37,6 +38,7 @@
   font-family: var(--uilib-checkbox-font);
   color: inherit;
   outline: none;
+  padding: calc(var(--uilib-checkbox-padding-base) * var(--uilib-density, 1));
 }
 
 :host(.ui-checkbox-disabled) {

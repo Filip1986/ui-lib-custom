@@ -29,6 +29,11 @@
   --uilib-badge-gap-resolved: var(--uilib-space-1);
   --uilib-badge-font-size-resolved: var(--uilib-font-size-sm);
 
+  --uilib-badge-padding-y-base: 0.25rem;
+  --uilib-badge-padding-x-base: 0.5rem;
+  --uilib-badge-padding-y-resolved: calc(var(--uilib-badge-padding-y-base) * var(--uilib-density, 1));
+  --uilib-badge-padding-x-resolved: calc(var(--uilib-badge-padding-x-base) * var(--uilib-density, 1));
+
   display: inline-flex;
 }
 
@@ -54,18 +59,33 @@
   --uilib-badge-font-size-resolved: var(--uilib-font-size-xs);
   --uilib-badge-padding-y-resolved: var(--uilib-space-1);
   --uilib-badge-padding-x-resolved: var(--uilib-space-2);
+
+  --uilib-badge-padding-y-base: 0.25rem;
+  --uilib-badge-padding-x-base: 0.5rem;
+  --uilib-badge-padding-y-resolved: calc(var(--uilib-badge-padding-y-base) * var(--uilib-density, 1));
+  --uilib-badge-padding-x-resolved: calc(var(--uilib-badge-padding-x-base) * var(--uilib-density, 1));
 }
 
 :host(.badge-size-md) {
   --uilib-badge-font-size-resolved: var(--uilib-font-size-sm);
   --uilib-badge-padding-y-resolved: var(--uilib-space-1);
   --uilib-badge-padding-x-resolved: var(--uilib-space-3);
+
+  --uilib-badge-padding-y-base: 0.25rem;
+  --uilib-badge-padding-x-base: 0.75rem;
+  --uilib-badge-padding-y-resolved: calc(var(--uilib-badge-padding-y-base) * var(--uilib-density, 1));
+  --uilib-badge-padding-x-resolved: calc(var(--uilib-badge-padding-x-base) * var(--uilib-density, 1));
 }
 
 :host(.badge-size-lg) {
   --uilib-badge-font-size-resolved: var(--uilib-font-size-md);
   --uilib-badge-padding-y-resolved: var(--uilib-space-2);
   --uilib-badge-padding-x-resolved: var(--uilib-space-4);
+
+  --uilib-badge-padding-y-base: 0.5rem;
+  --uilib-badge-padding-x-base: 1rem;
+  --uilib-badge-padding-y-resolved: calc(var(--uilib-badge-padding-y-base) * var(--uilib-density, 1));
+  --uilib-badge-padding-x-resolved: calc(var(--uilib-badge-padding-x-base) * var(--uilib-density, 1));
 }
 
 /* Variants */

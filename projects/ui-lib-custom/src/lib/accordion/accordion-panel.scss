@@ -2,13 +2,21 @@
   --uilib-accordion-panel-bg: var(--uilib-surface, #ffffff);
   --uilib-accordion-panel-border: 1px solid var(--uilib-border, #e5e7eb);
   --uilib-accordion-panel-radius: var(--uilib-shape-base, 6px);
-  --uilib-accordion-header-padding-sm: var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem);
-  --uilib-accordion-header-padding-md: var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem);
-  --uilib-accordion-header-padding-lg: var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem);
-  --uilib-accordion-header-padding: var(
-    --uilib-accordion-header-padding-md,
-    var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem)
-  );
+  --uilib-accordion-header-padding-y-base: 0.75rem;
+  --uilib-accordion-header-padding-x-base: 1rem;
+  --uilib-accordion-header-padding-sm-base-y: 0.5rem;
+  --uilib-accordion-header-padding-sm-base-x: 0.75rem;
+  --uilib-accordion-header-padding-md-base-y: 0.75rem;
+  --uilib-accordion-header-padding-md-base-x: 1rem;
+  --uilib-accordion-header-padding-lg-base-y: 1rem;
+  --uilib-accordion-header-padding-lg-base-x: 1.25rem;
+  --uilib-accordion-header-padding-sm: calc(var(--uilib-accordion-header-padding-sm-base-y) * var(--uilib-density, 1))
+    calc(var(--uilib-accordion-header-padding-sm-base-x) * var(--uilib-density, 1));
+  --uilib-accordion-header-padding-md: calc(var(--uilib-accordion-header-padding-md-base-y) * var(--uilib-density, 1))
+    calc(var(--uilib-accordion-header-padding-md-base-x) * var(--uilib-density, 1));
+  --uilib-accordion-header-padding-lg: calc(var(--uilib-accordion-header-padding-lg-base-y) * var(--uilib-density, 1))
+    calc(var(--uilib-accordion-header-padding-lg-base-x) * var(--uilib-density, 1));
+  --uilib-accordion-header-padding: var(--uilib-accordion-header-padding-md, var(--uilib-space-4, 1rem));
   --uilib-accordion-header-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
   --uilib-accordion-header-font-size-md: var(--uilib-font-size-md, 1rem);
   --uilib-accordion-header-font-size-lg: var(--uilib-font-size-lg, 1.125rem);

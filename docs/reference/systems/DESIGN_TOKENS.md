@@ -123,6 +123,25 @@ const gap: SpacingToken = 4; // 1rem (16px)
 <ui-lib-container [padding]="6">  <!-- 24px padding -->
 ```
 
+#### Density Tokens
+
+Density tokens control the global spacing scale via `--uilib-density`.
+
+```typescript
+import { DENSITY_TOKENS, type DensityToken } from 'ui-lib-custom';
+
+const density: DensityToken = 'default';
+const scale = DENSITY_TOKENS[density].scale;
+```
+
+| Token | Scale | Usage |
+|-------|-------|-------|
+| `compact` | 0.75 | Tighter layouts |
+| `default` | 1 | Default spacing |
+| `comfortable` | 1.33 | Looser layouts |
+
+**CSS Variable:** `--uilib-density`
+
 ---
 
 ### 📐 **Sizing Tokens**

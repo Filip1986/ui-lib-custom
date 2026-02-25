@@ -1,5 +1,6 @@
 :root,
 [data-theme='light'] {
+  --uilib-density: 1;
   --uilib-shape-base: 6px;
   /* Spacing scale */
   --uilib-space-2: 0.5rem;
@@ -195,6 +196,7 @@
 }
 
 [data-theme='dark'] {
+  --uilib-density: 1;
   --uilib-shape-base: 6px;
   --uilib-color-primary-100: #1a3d5f;
   --uilib-color-primary-500: #1e88e5;

@@ -33,10 +33,10 @@
     --uilib-select-button-invalid-border,
     var(--uilib-color-danger-600)
   );
-  --uilib-select-button-padding-resolved: var(
-    --uilib-select-button-medium-padding,
-    0.625rem 1rem
-  );
+  --uilib-select-button-padding-y-base: 0.625rem;
+  --uilib-select-button-padding-x-base: 1rem;
+  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+    calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
   --uilib-select-button-font-size-resolved: var(
     --uilib-select-button-medium-font-size,
     1rem
@@ -191,28 +191,28 @@
 }
 
 :host .ui-lib-select-button--small {
-  --uilib-select-button-padding-resolved: var(
-    --uilib-select-button-small-padding,
-    0.5rem 0.75rem
-  );
+  --uilib-select-button-padding-y-base: 0.5rem;
+  --uilib-select-button-padding-x-base: 0.75rem;
+  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+    calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
   --uilib-select-button-font-size-resolved: var(--uilib-select-button-small-font-size, 0.875rem);
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-small-min-height, 2rem);
 }
 
 :host .ui-lib-select-button--medium {
-  --uilib-select-button-padding-resolved: var(
-    --uilib-select-button-medium-padding,
-    0.625rem 1rem
-  );
+  --uilib-select-button-padding-y-base: 0.625rem;
+  --uilib-select-button-padding-x-base: 1rem;
+  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+    calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
   --uilib-select-button-font-size-resolved: var(--uilib-select-button-medium-font-size, 1rem);
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-medium-min-height, 2.5rem);
 }
 
 :host .ui-lib-select-button--large {
-  --uilib-select-button-padding-resolved: var(
-    --uilib-select-button-large-padding,
-    0.75rem 1.25rem
-  );
+  --uilib-select-button-padding-y-base: 0.75rem;
+  --uilib-select-button-padding-x-base: 1.25rem;
+  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+    calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
   --uilib-select-button-font-size-resolved: var(--uilib-select-button-large-font-size, 1.125rem);
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-large-min-height, 3rem);
 }

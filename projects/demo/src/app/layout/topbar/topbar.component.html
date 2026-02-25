@@ -97,6 +97,36 @@
       </ui-lib-button>
     </div>
 
+    <div class="density-switcher" role="group" aria-label="Component density">
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="density() === 'compact'"
+        (click)="setDensity('compact')"
+        [attr.aria-pressed]="density() === 'compact'"
+      >
+        Compact
+      </ui-lib-button>
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="density() === 'default'"
+        (click)="setDensity('default')"
+        [attr.aria-pressed]="density() === 'default'"
+      >
+        Default
+      </ui-lib-button>
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="density() === 'comfortable'"
+        (click)="setDensity('comfortable')"
+        [attr.aria-pressed]="density() === 'comfortable'"
+      >
+        Comfortable
+      </ui-lib-button>
+    </div>
+
     <a
       href="https://github.com"
       target="_blank"

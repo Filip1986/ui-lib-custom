@@ -91,6 +91,25 @@
     --uilib-button-badge-fg,
     var(--uilib-button-danger-fg, var(--uilib-color-neutral-50))
   );
+
+  --uilib-button-padding-x-small: calc(
+    var(--uilib-button-padding-x-small-base, 1rem) * var(--uilib-density, 1)
+  );
+  --uilib-button-padding-y-small: calc(
+    var(--uilib-button-padding-y-small-base, 0.5rem) * var(--uilib-density, 1)
+  );
+  --uilib-button-padding-x-medium: calc(
+    var(--uilib-button-padding-x-medium-base, 2rem) * var(--uilib-density, 1)
+  );
+  --uilib-button-padding-y-medium: calc(
+    var(--uilib-button-padding-y-medium-base, 1rem) * var(--uilib-density, 1)
+  );
+  --uilib-button-padding-x-large: calc(
+    var(--uilib-button-padding-x-large-base, 3rem) * var(--uilib-density, 1)
+  );
+  --uilib-button-padding-y-large: calc(
+    var(--uilib-button-padding-y-large-base, 1.5rem) * var(--uilib-density, 1)
+  );
 }
 
 :host button {

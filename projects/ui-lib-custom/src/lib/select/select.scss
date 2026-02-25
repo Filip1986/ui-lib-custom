@@ -4,6 +4,25 @@
     color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent)
   );
 
+  --uilib-select-padding-y-base: 0.55rem;
+  --uilib-select-padding-x-base: 0.75rem;
+  --uilib-select-search-padding-y-base: 0.5rem;
+  --uilib-select-search-padding-x-base: 0.75rem;
+  --uilib-select-option-padding-y-base: 0.5rem;
+  --uilib-select-option-padding-x-base: 0.75rem;
+  --uilib-select-group-padding-y-base: 0.25rem;
+  --uilib-select-group-padding-x-base: 0.75rem;
+  --uilib-select-empty-padding-base: 0.75rem;
+  --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));
+  --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
+  --uilib-select-search-padding-y: calc(var(--uilib-select-search-padding-y-base) * var(--uilib-density, 1));
+  --uilib-select-search-padding-x: calc(var(--uilib-select-search-padding-x-base) * var(--uilib-density, 1));
+  --uilib-select-option-padding-y: calc(var(--uilib-select-option-padding-y-base) * var(--uilib-density, 1));
+  --uilib-select-option-padding-x: calc(var(--uilib-select-option-padding-x-base) * var(--uilib-density, 1));
+  --uilib-select-group-padding-y: calc(var(--uilib-select-group-padding-y-base) * var(--uilib-density, 1));
+  --uilib-select-group-padding-x: calc(var(--uilib-select-group-padding-x-base) * var(--uilib-density, 1));
+  --uilib-select-empty-padding: calc(var(--uilib-select-empty-padding-base) * var(--uilib-density, 1));
+
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -24,7 +43,7 @@
   background: var(--uilib-select-bg, var(--uilib-surface));
   border: 1px solid var(--uilib-select-border, var(--uilib-border));
   border-radius: var(--uilib-select-radius, var(--uilib-shape-base, 6px));
-  padding: 0.55rem 0.75rem;
+  padding: var(--uilib-select-padding-y) var(--uilib-select-padding-x);
   cursor: pointer;
   transition:
     border-color 0.15s ease,
@@ -79,12 +98,13 @@
 }
 
 :host .ui-select-search {
-  padding: 0.5rem 0.75rem 0 0.75rem;
+  padding: var(--uilib-select-search-padding-y) var(--uilib-select-search-padding-x) 0
+    var(--uilib-select-search-padding-x);
 }
 
 :host .ui-select-search input {
   width: 100%;
-  padding: 0.45rem 0.6rem;
+  padding: var(--uilib-select-search-input-padding-y) var(--uilib-select-search-input-padding-x);
   border-radius: var(--uilib-select-radius, var(--uilib-shape-base, 6px));
   border: 1px solid var(--uilib-select-border, var(--uilib-border));
   background: var(--uilib-select-bg, var(--uilib-surface));
@@ -92,13 +112,13 @@
 }
 
 :host .ui-select-group {
-  padding: 0.25rem 0.75rem;
+  padding: var(--uilib-select-group-padding-y) var(--uilib-select-group-padding-x);
   font-weight: 600;
   color: var(--uilib-muted);
 }
 
 :host .ui-select-option {
-  padding: 0.5rem 0.75rem;
+  padding: var(--uilib-select-option-padding-y) var(--uilib-select-option-padding-x);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -119,7 +139,7 @@
 }
 
 :host .ui-select-empty {
-  padding: 0.75rem;
+  padding: var(--uilib-select-empty-padding);
   text-align: center;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
@@ -182,19 +202,31 @@
 }
 
 :host .ui-select.ui-select-size-sm .ui-select-control {
-  padding: 0.35rem 0.5rem;
+  --uilib-select-padding-y-base: 0.35rem;
+  --uilib-select-padding-x-base: 0.5rem;
+  --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));
+  --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
+  padding: var(--uilib-select-padding-y) var(--uilib-select-padding-x);
   min-height: 32px;
   font-size: 0.875rem;
 }
 
 :host .ui-select.ui-select-size-md .ui-select-control {
-  padding: 0.55rem 0.75rem;
+  --uilib-select-padding-y-base: 0.55rem;
+  --uilib-select-padding-x-base: 0.75rem;
+  --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));
+  --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
+  padding: var(--uilib-select-padding-y) var(--uilib-select-padding-x);
   min-height: 40px;
   font-size: 1rem;
 }
 
 :host .ui-select.ui-select-size-lg .ui-select-control {
-  padding: 0.65rem 0.9rem;
+  --uilib-select-padding-y-base: 0.65rem;
+  --uilib-select-padding-x-base: 0.9rem;
+  --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));
+  --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
+  padding: var(--uilib-select-padding-y) var(--uilib-select-padding-x);
   min-height: 48px;
   font-size: 1.125rem;
 }
