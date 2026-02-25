@@ -31,6 +31,15 @@
             ]
           }
         },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ui-lib-custom/**/*.ts",
+              "projects/ui-lib-custom/**/*.html"
+            ]
+          }
+        },
         "storybook": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
@@ -127,6 +136,12 @@
               }
             ],
             "styles": ["projects/demo/src/styles.scss"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/demo/**/*.ts", "projects/demo/**/*.html"]
           }
         }
       }
