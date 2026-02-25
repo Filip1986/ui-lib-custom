@@ -83,10 +83,16 @@ describe('Badge', () => {
   });
 
   it('adjusts radius for pill and dot', () => {
+    const shapeBase: string = getComputedStyle(document.documentElement)
+      .getPropertyValue('--uilib-shape-base')
+      .trim();
+    const expectedRadius: string = shapeBase || '6px';
+
     const pill = bootstrap({ pill: true }).styles;
-    expect(pill.borderRadius).toBe('9999px');
+    expect(pill.borderRadius).toBe(expectedRadius);
 
     const dot = bootstrap({ dot: true, size: 'sm' }).styles;
+    expect(dot.borderRadius).toBe(expectedRadius);
     expect(dot.width).not.toBe('auto');
     expect(dot.fontSize).toBe('0px');
   });

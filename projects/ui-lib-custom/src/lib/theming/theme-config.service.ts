@@ -1,6 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, computed, inject, signal, Signal, WritableSignal } from '@angular/core';
-import { BORDER_RADIUS, SHADOWS, SELECTBUTTON_TOKENS } from 'ui-lib-custom/tokens';
+import {
+  BORDER_RADIUS,
+  SHADOWS,
+  SELECTBUTTON_TOKENS,
+  SHAPE_TOKENS,
+  ShapeToken,
+} from 'ui-lib-custom/tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
 import lightPreset from './presets/light.json';
@@ -50,6 +56,7 @@ export class ThemeConfigService {
   private readonly savedThemesSignal = signal<string[]>(this.listSavedThemeNames());
   private readonly modeSignal = signal<ThemeMode>('auto');
   readonly variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
+  readonly shape: WritableSignal<ShapeToken> = signal<ShapeToken>('rounded');
   private mediaQuery: MediaQueryList | null = null;
 
   readonly preset = computed<ThemePreset>(() => this.presetSignal());
@@ -80,6 +87,7 @@ export class ThemeConfigService {
     this.presetSignal.set(initial);
     this.applyToRoot(initial);
     this.applyThemeToDocument();
+    this.setShape(this.shape());
     this.syncSavedThemes();
   }
 
@@ -324,6 +332,12 @@ export class ThemeConfigService {
 
   setVariant(variant: ThemeVariant): void {
     this.variant.set(variant);
+  }
+
+  setShape(shape: ShapeToken): void {
+    this.shape.set(shape);
+    const value: string = SHAPE_TOKENS[shape] ?? SHAPE_TOKENS.rounded;
+    this.doc?.documentElement?.style?.setProperty('--uilib-shape-base', value);
   }
 
   private triggerDownload(content: string, filename: string, mimeType: string): void {

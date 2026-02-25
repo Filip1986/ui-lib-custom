@@ -1,6 +1,6 @@
 :host {
   --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
-  --uilib-accordion-border-radius: var(--uilib-radius-md, 8px);
+  --uilib-accordion-border-radius: var(--uilib-shape-base, 6px);
   display: flex;
   flex-direction: column;
   gap: var(--uilib-accordion-gap);
@@ -8,21 +8,21 @@
   &.accordion-variant-material {
     --uilib-accordion-panel-bg: var(--uilib-surface);
     --uilib-accordion-panel-border: 1px solid transparent;
-    --uilib-accordion-panel-radius: var(--uilib-radius-md, 8px);
+    --uilib-accordion-panel-radius: var(--uilib-shape-base, 6px);
     --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
   }
 
   &.accordion-variant-bootstrap {
     --uilib-accordion-panel-bg: var(--uilib-surface);
     --uilib-accordion-panel-border: 1px solid var(--uilib-border);
-    --uilib-accordion-panel-radius: 0;
+    --uilib-accordion-panel-radius: calc(var(--uilib-shape-base, 6px) * 0);
     --uilib-accordion-gap: 0;
   }
 
   &.accordion-variant-minimal {
     --uilib-accordion-panel-bg: transparent;
     --uilib-accordion-panel-border: 0 solid transparent;
-    --uilib-accordion-panel-radius: 0;
+    --uilib-accordion-panel-radius: calc(var(--uilib-shape-base, 6px) * 0);
     --uilib-accordion-gap: 0;
   }
 

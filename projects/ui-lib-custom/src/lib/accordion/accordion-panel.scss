@@ -1,7 +1,7 @@
 :host {
   --uilib-accordion-panel-bg: var(--uilib-surface, #ffffff);
   --uilib-accordion-panel-border: 1px solid var(--uilib-border, #e5e7eb);
-  --uilib-accordion-panel-radius: var(--uilib-radius-md, 8px);
+  --uilib-accordion-panel-radius: var(--uilib-shape-base, 6px);
   --uilib-accordion-header-padding-sm: var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem);
   --uilib-accordion-header-padding-md: var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem);
   --uilib-accordion-header-padding-lg: var(--uilib-space-4, 1rem) var(--uilib-space-5, 1.25rem);
@@ -199,20 +199,20 @@
 
 :host-context(.ui-lib-accordion.accordion-variant-bootstrap) {
   &:host {
-    border-radius: 0;
+    border-radius: calc(var(--uilib-shape-base, 6px) * 0);
     border-left: var(--uilib-accordion-panel-border);
     border-right: var(--uilib-accordion-panel-border);
 
     &:first-child {
       border-top: var(--uilib-accordion-panel-border);
-      border-top-left-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
-      border-top-right-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
+      border-top-left-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
+      border-top-right-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
     }
 
     &:last-child {
       border-bottom: var(--uilib-accordion-panel-border);
-      border-bottom-left-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
-      border-bottom-right-radius: var(--uilib-accordion-border-radius, var(--uilib-radius-md, 8px));
+      border-bottom-left-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
+      border-bottom-right-radius: var(--uilib-accordion-border-radius, var(--uilib-shape-base, 6px));
     }
   }
 

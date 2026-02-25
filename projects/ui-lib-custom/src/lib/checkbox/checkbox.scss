@@ -22,7 +22,7 @@
     --uilib-checkbox-description-color,
     var(--uilib-color-neutral-600)
   );
-  --uilib-checkbox-radius: var(--uilib-checkbox-radius-value, var(--uilib-radius-sm, 0.25rem));
+  --uilib-checkbox-radius: var(--uilib-shape-base, 6px);
   --uilib-checkbox-focus-ring: 0 0 0 3px
     color-mix(in srgb, var(--uilib-checkbox-border-hover) 30%, transparent);
   --uilib-checkbox-size-sm: 1rem;
@@ -176,7 +176,7 @@
 }
 
 :host(.ui-checkbox-variant-bootstrap) .checkbox-box {
-  border-radius: var(--uilib-radius-sm, 0.25rem);
+  border-radius: calc(var(--uilib-shape-base, 6px) * 0.5);
 }
 
 :host(.ui-checkbox-variant-minimal) {

@@ -135,6 +135,16 @@
   box-shadow: 0 0 0 1px var(--uilib-color-primary-500) inset;
 }
 
+.shape-switcher {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.shape-switcher .active {
+  box-shadow: 0 0 0 1px var(--uilib-color-primary-500) inset;
+}
+
 @media (max-width: 720px) {
   .topbar-right {
     flex-wrap: wrap;

@@ -2,7 +2,7 @@
   --uilib-select-button-gap-resolved: var(--uilib-select-button-gap, 0);
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-border-radius,
-    var(--uilib-radius-md, 8px)
+    var(--uilib-shape-base, 6px)
   );
   --uilib-select-button-bg-resolved: var(
     --uilib-select-button-bg,
@@ -78,7 +78,7 @@
     var(--uilib-page-fg)
   );
   box-shadow: var(--uilib-select-button-shadow-resolved);
-  border-radius: 0;
+  border-radius: calc(var(--uilib-shape-base, 6px) * 0);
 }
 
 :host .ui-lib-select-button__item .btn:focus-visible {
@@ -97,13 +97,13 @@
 }
 
 :host .ui-lib-select-button__item:first-child .btn {
-  border-top-left-radius: var(--uilib-select-button-border-radius-resolved);
-  border-bottom-left-radius: var(--uilib-select-button-border-radius-resolved);
+  border-top-left-radius: var(--uilib-shape-base, 6px);
+  border-bottom-left-radius: var(--uilib-shape-base, 6px);
 }
 
 :host .ui-lib-select-button__item:last-child .btn {
-  border-top-right-radius: var(--uilib-select-button-border-radius-resolved);
-  border-bottom-right-radius: var(--uilib-select-button-border-radius-resolved);
+  border-top-right-radius: var(--uilib-shape-base, 6px);
+  border-bottom-right-radius: var(--uilib-shape-base, 6px);
 }
 
 :host .ui-lib-select-button__item:not(:first-child) .btn {
@@ -113,7 +113,7 @@
 :host .ui-lib-select-button--material {
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-material-border-radius,
-    var(--uilib-select-button-border-radius, var(--uilib-radius-md, 8px))
+    var(--uilib-select-button-border-radius, var(--uilib-shape-base, 6px))
   );
   --uilib-select-button-bg-resolved: var(
     --uilib-select-button-material-bg,
@@ -144,7 +144,7 @@
 :host .ui-lib-select-button--bootstrap {
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-bootstrap-border-radius,
-    var(--uilib-select-button-border-radius, var(--uilib-radius-md, 8px))
+    var(--uilib-select-button-border-radius, var(--uilib-shape-base, 6px))
   );
   --uilib-select-button-bg-resolved: var(
     --uilib-select-button-bootstrap-bg,
@@ -171,7 +171,7 @@
 :host .ui-lib-select-button--minimal {
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-minimal-border-radius,
-    var(--uilib-select-button-border-radius, 0)
+    var(--uilib-select-button-border-radius, calc(var(--uilib-shape-base, 6px) * 0))
   );
   --uilib-select-button-bg-resolved: var(--uilib-select-button-minimal-bg, transparent);
   --uilib-select-button-selected-bg-resolved: var(

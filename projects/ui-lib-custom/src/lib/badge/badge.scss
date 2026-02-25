@@ -23,7 +23,7 @@
   --uilib-badge-fg-resolved: var(--uilib-badge-fg, var(--uilib-color-neutral-900));
   --uilib-badge-border-color-resolved: transparent;
   --uilib-badge-border-width-resolved: 0;
-  --uilib-badge-radius-resolved: var(--uilib-radius-md);
+  --uilib-badge-radius-resolved: var(--uilib-shape-base, 6px);
   --uilib-badge-padding-y-resolved: var(--uilib-space-1);
   --uilib-badge-padding-x-resolved: var(--uilib-space-2);
   --uilib-badge-gap-resolved: var(--uilib-space-1);
@@ -218,13 +218,13 @@
 
 /* Shape modifiers */
 :host(.badge-pill) {
-  --uilib-badge-radius-resolved: var(--uilib-radius-full);
+  --uilib-badge-radius-resolved: var(--uilib-shape-base, 6px);
 }
 
 :host(.badge-dot) {
   --uilib-badge-padding-y-resolved: 0;
   --uilib-badge-padding-x-resolved: 0;
-  --uilib-badge-radius-resolved: var(--uilib-radius-full);
+  --uilib-badge-radius-resolved: var(--uilib-shape-base, 6px);
   width: var(--uilib-badge-dot-size, 0.75rem);
   height: var(--uilib-badge-dot-size, 0.75rem);
   min-width: var(--uilib-badge-dot-size, 0.75rem);

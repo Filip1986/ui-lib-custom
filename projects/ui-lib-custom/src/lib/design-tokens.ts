@@ -484,6 +484,15 @@ export const BORDER_RADIUS = {
 
 export type BorderRadius = keyof typeof BORDER_RADIUS;
 
+export const SHAPE_TOKENS = {
+  sharp: '0px',
+  rounded: '6px',
+  soft: '12px',
+  pill: '9999px',
+} as const;
+
+export type ShapeToken = keyof typeof SHAPE_TOKENS;
+
 /**
  * Border width tokens
  */

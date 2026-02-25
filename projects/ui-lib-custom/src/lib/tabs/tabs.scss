@@ -5,7 +5,7 @@
   --uilib-tabs-border-resolved: var(--uilib-tabs-border, var(--uilib-border));
   --uilib-tabs-border-width-resolved: var(--uilib-tabs-border-width, 1px);
   --uilib-tabs-border-style-resolved: var(--uilib-tabs-border-style, solid);
-  --uilib-tabs-radius-resolved: var(--uilib-tabs-radius, var(--uilib-radius-md, 8px));
+  --uilib-tabs-radius-resolved: var(--uilib-tabs-radius, var(--uilib-shape-base, 6px));
   --uilib-tabs-gap-resolved: var(--uilib-tabs-gap, var(--uilib-space-3, 0.5rem));
   --uilib-tabs-padding-resolved: var(--uilib-tabs-padding, var(--uilib-space-3, 0.5rem));
 
@@ -34,14 +34,14 @@
     --uilib-tab-border-active,
     var(--uilib-tab-border, transparent)
   );
-  --uilib-tab-radius-resolved: var(--uilib-tab-radius, var(--uilib-radius-md, 8px));
+  --uilib-tab-radius-resolved: var(--uilib-tab-radius, var(--uilib-shape-base, 6px));
 
   --uilib-tabs-indicator-color-resolved: var(
     --uilib-tabs-indicator-color,
     var(--uilib-color-primary-600)
   );
   --uilib-tabs-indicator-height-resolved: var(--uilib-tabs-indicator-height, 2px);
-  --uilib-tabs-indicator-radius-resolved: var(--uilib-tabs-indicator-radius, 999px);
+  --uilib-tabs-indicator-radius-resolved: var(--uilib-tabs-indicator-radius, var(--uilib-shape-base, 6px));
   --uilib-tabs-indicator-offset-resolved: var(--uilib-tabs-indicator-offset, 0px);
   --uilib-tabs-transition-resolved: var(
     --uilib-tabs-transition,
@@ -60,7 +60,7 @@
   --uilib-tabs-nav-button-border-resolved: var(--uilib-tabs-nav-button-border, transparent);
   --uilib-tabs-nav-button-radius-resolved: var(
     --uilib-tabs-nav-button-radius,
-    var(--uilib-radius-md, 8px)
+    var(--uilib-shape-base, 6px)
   );
   --uilib-tabs-nav-button-shadow-resolved: var(--uilib-tabs-nav-button-shadow, none);
   --uilib-tabs-nav-button-hover-bg-resolved: var(

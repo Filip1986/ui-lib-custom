@@ -18,7 +18,7 @@
   /* Shadow tokens removed to honor theme-provided values */
 
   /* Component-level variables (CSS-var first, no hardcoded colors) */
-  --uilib-button-radius: var(--uilib-radius-md, 8px);
+  --uilib-button-radius: var(--uilib-shape-base, 6px);
   --uilib-button-gap: var(--uilib-space-2, 0.5rem);
   --uilib-button-transition: all 0.2s ease;
   --uilib-button-focus-color: var(--uilib-color-primary-500);
@@ -45,8 +45,8 @@
 
   display: inline-flex;
 
-  --uilib-button-radius-rounded: var(--uilib-button-radius-rounded, var(--uilib-radius-lg, var(--uilib-radius-md)));
-  --uilib-button-radius-pill: var(--uilib-button-radius-pill, var(--uilib-radius-full, 9999px));
+  --uilib-button-radius-rounded: var(--uilib-button-radius-rounded, var(--uilib-shape-base, 6px));
+  --uilib-button-radius-pill: var(--uilib-button-radius-pill, var(--uilib-shape-base, 6px));
   --uilib-button-text-fg: var(--uilib-button-text-fg, var(--uilib-button-primary-fg, inherit));
   --uilib-button-text-fg-hover: var(
     --uilib-button-text-fg-hover,
@@ -82,7 +82,7 @@
   );
   --uilib-button-badge-offset-x: var(--uilib-button-badge-offset-x, var(--uilib-space-2));
   --uilib-button-badge-offset-y: var(--uilib-button-badge-offset-y, var(--uilib-space-2));
-  --uilib-button-badge-radius: var(--uilib-button-badge-radius, var(--uilib-radius-full));
+  --uilib-button-badge-radius: var(--uilib-button-badge-radius, var(--uilib-shape-base, 6px));
   --uilib-button-badge-shadow: var(--uilib-button-badge-shadow, var(--uilib-shadow-sm));
   --uilib-button-badge-font-size: var(--uilib-button-badge-font-size, var(--uilib-font-size-sm));
   --uilib-button-badge-padding: var(--uilib-button-badge-padding, var(--uilib-space-1) var(--uilib-space-2));
@@ -221,7 +221,7 @@
   }
 
   &-bootstrap {
-    --uilib-button-radius: var(--uilib-radius-sm, var(--uilib-button-radius));
+    --uilib-button-radius: var(--uilib-shape-base, 6px);
     --uilib-button-border-width: 1px;
     --uilib-button-shadow: var(--uilib-button-shadow, var(--uilib-shadow-sm));
     --uilib-button-shadow-hover: var(--uilib-button-shadow-hover, var(--uilib-shadow-md));
@@ -242,7 +242,7 @@
   }
 
   &-minimal {
-    --uilib-button-radius: 0;
+    --uilib-button-radius: var(--uilib-shape-base, 6px);
     --uilib-button-shadow: none;
     --uilib-button-shadow-hover: none;
     --uilib-button-border-style: solid;
@@ -256,7 +256,7 @@
     }
 
     &.btn-rounded {
-      --uilib-button-radius: var(--uilib-radius-full, 9999px);
+      --uilib-button-radius: var(--uilib-shape-base, 6px);
     }
 
     &.btn-text {
@@ -414,8 +414,8 @@
   }
 
   &-rounded {
-    --uilib-button-radius: var(--uilib-button-radius-pill);
-    border-radius: var(--uilib-button-radius-pill, var(--uilib-radius-full, 9999px));
+    --uilib-button-radius: var(--uilib-shape-base, 6px);
+    border-radius: var(--uilib-shape-base, 6px);
   }
 
   &-has-badge {
@@ -439,7 +439,7 @@
 :host .btn-spinner {
   width: 1em;
   height: 1em;
-  border-radius: 50%;
+  border-radius: var(--uilib-shape-base, 6px);
   border: 2px solid currentColor;
   border-right-color: transparent;
   animation: uilib-btn-spin 0.8s linear infinite;
@@ -492,7 +492,7 @@
 
   --uilib-button-info-bg: var(--uilib-color-info-600);
   --uilib-button-info-bg-hover: var(--uilib-color-info-700);
-  --uilib-button-info-border: var(--uilib-color-info-600);
+  --uilib-button_info-border: var(--uilib-color-info-600);
   --uilib-button-info-fg: #0b1220;
 
   --uilib-button-contrast-bg: var(--uilib-text-dark-primary);

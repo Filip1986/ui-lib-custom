@@ -35,7 +35,7 @@
   gap: 0.5rem;
   background: var(--uilib-input-bg, var(--uilib-surface));
   border: 1px solid var(--uilib-input-border, var(--uilib-border));
-  border-radius: var(--uilib-input-radius, var(--uilib-radius-md));
+  border-radius: var(--uilib-input-radius, var(--uilib-shape-base, 6px));
   padding: var(--uilib-input-padding-y, 0.5rem) var(--uilib-input-padding-x, 0.75rem);
   min-height: var(--uilib-input-min-height, 44px);
   transition:
@@ -151,7 +151,7 @@
 
 :host .ui-input.ui-input-bootstrap .ui-input-field,
 :host .ui-input.ui-input-minimal .ui-input-field {
-  border-radius: var(--uilib-input-radius, var(--uilib-radius-md));
+  border-radius: var(--uilib-input-radius, var(--uilib-shape-base, 6px));
 }
 
 :host .ui-input.ui-input-bootstrap .ui-input-field {

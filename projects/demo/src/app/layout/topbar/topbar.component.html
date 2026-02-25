@@ -58,6 +58,45 @@
       </ui-lib-button>
     </div>
 
+    <div class="shape-switcher" role="group" aria-label="Component shape">
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="shape() === 'sharp'"
+        (click)="setShape('sharp')"
+        [attr.aria-pressed]="shape() === 'sharp'"
+      >
+        Sharp
+      </ui-lib-button>
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="shape() === 'rounded'"
+        (click)="setShape('rounded')"
+        [attr.aria-pressed]="shape() === 'rounded'"
+      >
+        Rounded
+      </ui-lib-button>
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="shape() === 'soft'"
+        (click)="setShape('soft')"
+        [attr.aria-pressed]="shape() === 'soft'"
+      >
+        Soft
+      </ui-lib-button>
+      <ui-lib-button
+        size="small"
+        appearance="ghost"
+        [class.active]="shape() === 'pill'"
+        (click)="setShape('pill')"
+        [attr.aria-pressed]="shape() === 'pill'"
+      >
+        Pill
+      </ui-lib-button>
+    </div>
+
     <a
       href="https://github.com"
       target="_blank"

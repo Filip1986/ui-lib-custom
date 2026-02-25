@@ -207,6 +207,24 @@ import { LINE_HEIGHTS, type LineHeight } from 'ui-lib-custom';
 
 ### 🎭 **Border Tokens**
 
+#### Shape Tokens
+
+Global shape tokens map to `--uilib-shape-base`, allowing a single switch to control component border-radius personality.
+
+```typescript
+import { SHAPE_TOKENS, type ShapeToken } from 'ui-lib-custom';
+
+const shape: ShapeToken = 'rounded';
+const radiusValue = SHAPE_TOKENS[shape];
+```
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `sharp` | 0px | Square corners |
+| `rounded` | 6px | Default rounding |
+| `soft` | 12px | Softer cards/inputs |
+| `pill` | 9999px | Pills/circles |
+
 #### Border Radius
 
 ```typescript

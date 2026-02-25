@@ -1,5 +1,6 @@
 :root,
 [data-theme='light'] {
+  --uilib-shape-base: 6px;
   /* Spacing scale */
   --uilib-space-2: 0.5rem;
   --uilib-space-3: 0.75rem;
@@ -194,6 +195,7 @@
 }
 
 [data-theme='dark'] {
+  --uilib-shape-base: 6px;
   --uilib-color-primary-100: #1a3d5f;
   --uilib-color-primary-500: #1e88e5;
   --uilib-color-primary-600: #1565c0;
