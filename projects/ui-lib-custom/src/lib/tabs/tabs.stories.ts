@@ -1,0 +1,125 @@
+import type { Meta, StoryObj } from '@storybook/angular';
+import { Tabs } from './tabs';
+import { Tab } from './tab';
+
+type Story = StoryObj;
+
+type TabsStoryArgs = Record<string, any>;
+
+const meta: Meta = {
+  title: 'Components/Tabs',
+  component: Tabs,
+  tags: ['autodocs'],
+  parameters: { a11y: { disable: false } },
+  argTypes: {
+    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    align: { control: 'select', options: ['start', 'center', 'end', 'stretch'] },
+    orientation: { control: 'select', options: ['horizontal', 'vertical'] },
+  },
+};
+
+export default meta;
+
+const renderTabs = (
+  args: TabsStoryArgs
+): { props: TabsStoryArgs; template: string; moduleMetadata: { imports: unknown[] } } => ({
+  props: args,
+  moduleMetadata: { imports: [Tabs, Tab] },
+  template: `
+    <ui-lib-tabs [variant]="variant" [size]="size" [align]="align" [orientation]="orientation">
+      <ui-lib-tab label="Overview">Overview content</ui-lib-tab>
+      <ui-lib-tab label="Details">Details content</ui-lib-tab>
+      <ui-lib-tab label="Settings">Settings content</ui-lib-tab>
+    </ui-lib-tabs>
+  `,
+});
+
+export const Default: Story = {
+  render: renderTabs,
+  args: {
+    variant: null,
+    size: 'md',
+    align: 'start',
+    orientation: 'horizontal',
+  },
+};
+
+export const Variants: Story = {
+  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+    moduleMetadata: { imports: [Tabs, Tab] },
+    template: `
+      <div style="display:grid; gap:1rem;">
+        <ui-lib-tabs variant="material">
+          <ui-lib-tab label="Material">Material tabs</ui-lib-tab>
+          <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
+        </ui-lib-tabs>
+        <ui-lib-tabs variant="bootstrap">
+          <ui-lib-tab label="Bootstrap">Bootstrap tabs</ui-lib-tab>
+          <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
+        </ui-lib-tabs>
+        <ui-lib-tabs variant="minimal">
+          <ui-lib-tab label="Minimal">Minimal tabs</ui-lib-tab>
+          <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
+        </ui-lib-tabs>
+      </div>
+    `,
+  }),
+};
+
+export const Sizes: Story = {
+  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+    moduleMetadata: { imports: [Tabs, Tab] },
+    template: `
+      <div style="display:grid; gap:1rem;">
+        <ui-lib-tabs size="sm">
+          <ui-lib-tab label="Small">Small tabs</ui-lib-tab>
+          <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
+        </ui-lib-tabs>
+        <ui-lib-tabs size="md">
+          <ui-lib-tab label="Medium">Medium tabs</ui-lib-tab>
+          <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
+        </ui-lib-tabs>
+        <ui-lib-tabs size="lg">
+          <ui-lib-tab label="Large">Large tabs</ui-lib-tab>
+          <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
+        </ui-lib-tabs>
+      </div>
+    `,
+  }),
+};
+
+export const States: Story = {
+  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+    moduleMetadata: { imports: [Tabs, Tab] },
+    template: `
+      <ui-lib-tabs>
+        <ui-lib-tab label="Active">Active content</ui-lib-tab>
+        <ui-lib-tab label="Disabled" [disabled]="true">Disabled content</ui-lib-tab>
+      </ui-lib-tabs>
+    `,
+  }),
+};
+
+export const DarkMode: Story = {
+  parameters: { globals: { mode: 'dark' } },
+  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+    moduleMetadata: { imports: [Tabs, Tab] },
+    template: `
+      <ui-lib-tabs>
+        <ui-lib-tab label="Dark">Dark mode content</ui-lib-tab>
+        <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
+      </ui-lib-tabs>
+    `,
+  }),
+};
+
+export const FullApi: Story = {
+  render: renderTabs,
+  args: {
+    variant: 'bootstrap',
+    size: 'lg',
+    align: 'center',
+    orientation: 'horizontal',
+  },
+};

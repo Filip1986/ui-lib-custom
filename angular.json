@@ -30,6 +30,26 @@
               "projects/ui-lib-custom/src/lib/styles/dark-theme.scss"
             ]
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "demo:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "projects/ui-lib-custom"],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "demo:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "projects/ui-lib-custom"],
+            "outputDir": "dist/storybook/ui-lib-custom"
+          }
         }
       }
     },
@@ -51,7 +71,11 @@
                 "input": "projects/demo/public"
               }
             ],
-            "styles": ["projects/demo/src/styles.scss"]
+            "styles": [
+              "projects/demo/src/styles.scss",
+              "projects/ui-lib-custom/src/lib/themes/themes.scss",
+              "projects/ui-lib-custom/src/lib/styles/dark-theme.scss"
+            ]
           },
           "configurations": {
             "production": {

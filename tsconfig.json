@@ -31,6 +31,7 @@
     "strictTemplates": true
   },
   "files": [],
+  "include": [".storybook/**/*.ts", "projects/ui-lib-custom/src/lib/**/*.stories.ts"],
   "references": [
     {
       "path": "./projects/ui-lib-custom/tsconfig.lib.json"

@@ -1,0 +1,145 @@
+import type { Meta, StoryObj } from '@storybook/angular';
+import { UiLibSelect, SelectOption } from './select';
+
+type Story = StoryObj;
+
+type SelectStoryArgs = {
+  label: string;
+  placeholder: string;
+  variant?: string | null;
+  size?: string;
+  disabled?: boolean;
+  required?: boolean;
+  invalid?: boolean;
+  multiple?: boolean;
+  searchable?: boolean;
+  loading?: boolean;
+};
+
+const options: SelectOption[] = [
+  { label: 'Alpha', value: 'alpha' },
+  { label: 'Beta', value: 'beta' },
+  { label: 'Gamma', value: 'gamma' },
+];
+
+const meta: Meta = {
+  title: 'Components/Select',
+  component: UiLibSelect,
+  tags: ['autodocs'],
+  parameters: { a11y: { disable: false } },
+  argTypes: {
+    label: { control: 'text' },
+    placeholder: { control: 'text' },
+    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    disabled: { control: 'boolean' },
+    required: { control: 'boolean' },
+    invalid: { control: 'boolean' },
+    multiple: { control: 'boolean' },
+    searchable: { control: 'boolean' },
+    loading: { control: 'boolean' },
+  },
+};
+
+export default meta;
+
+const renderSelect = (
+  args: Record<string, any>
+): { props: Record<string, any>; template: string } => ({
+  props: { ...args, options },
+  template: `
+    <ui-lib-select
+      [label]="label"
+      [placeholder]="placeholder"
+      [variant]="variant"
+      [size]="size"
+      [disabled]="disabled"
+      [required]="required"
+      [invalid]="invalid"
+      [multiple]="multiple"
+      [searchable]="searchable"
+      [loading]="loading"
+      [options]="options"
+    />
+  `,
+});
+
+export const Default: Story = {
+  render: renderSelect,
+  args: {
+    label: 'Role',
+    placeholder: 'Select role',
+    variant: null,
+    size: 'md',
+    disabled: false,
+    required: false,
+    invalid: false,
+    multiple: false,
+    searchable: false,
+    loading: false,
+  },
+};
+
+export const Variants: Story = {
+  render: (): { props: { options: SelectOption[] }; template: string } => ({
+    props: { options },
+    template: `
+      <div style="display:grid; gap:0.75rem;">
+        <ui-lib-select label="Material" variant="material" placeholder="Material" [options]="options" />
+        <ui-lib-select label="Bootstrap" variant="bootstrap" placeholder="Bootstrap" [options]="options" />
+        <ui-lib-select label="Minimal" variant="minimal" placeholder="Minimal" [options]="options" />
+      </div>
+    `,
+  }),
+};
+
+export const Sizes: Story = {
+  render: (): { props: { options: SelectOption[] }; template: string } => ({
+    props: { options },
+    template: `
+      <div style="display:grid; gap:0.75rem;">
+        <ui-lib-select label="Small" size="sm" placeholder="Small" [options]="options" />
+        <ui-lib-select label="Medium" size="md" placeholder="Medium" [options]="options" />
+        <ui-lib-select label="Large" size="lg" placeholder="Large" [options]="options" />
+      </div>
+    `,
+  }),
+};
+
+export const States: Story = {
+  render: (): { props: { options: SelectOption[] }; template: string } => ({
+    props: { options },
+    template: `
+      <div style="display:grid; gap:0.75rem;">
+        <ui-lib-select label="Normal" placeholder="Normal" [options]="options" />
+        <ui-lib-select label="Disabled" placeholder="Disabled" [disabled]="true" [options]="options" />
+        <ui-lib-select label="Loading" placeholder="Loading" [loading]="true" [options]="options" />
+        <ui-lib-select label="Invalid" placeholder="Invalid" [invalid]="true" [options]="options" />
+      </div>
+    `,
+  }),
+};
+
+export const DarkMode: Story = {
+  parameters: { globals: { mode: 'dark' } },
+  render: (): { props: { options: SelectOption[] }; template: string } => ({
+    props: { options },
+    template: `<ui-lib-select label="Dark" placeholder="Dark mode" [options]="options" />`,
+  }),
+};
+
+export const FullApi: Story = {
+  render: renderSelect,
+  args: {
+    label: 'Full API',
+    placeholder: 'Searchable',
+    variant: 'bootstrap',
+    size: 'lg',
+    disabled: false,
+    required: true,
+    invalid: false,
+    multiple: true,
+    searchable: true,
+    loading: false,
+  },
+};

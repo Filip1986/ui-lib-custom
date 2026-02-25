@@ -17,7 +17,9 @@
     "test:a11y:report": "node scripts/generate-a11y-report.js",
     "test:all": "npm run test && npm run test:a11y",
     "format": "prettier --write \"projects/**/*.{ts,html,scss,css,js,json,md}\" \"docs/**/*.{md}\" \"*.{json,md}\"",
-    "format:check": "prettier --check \"projects/**/*.{ts,html,scss,css,js,json,md}\" \"docs/**/*.{md}\" \"*.{json,md}\""
+    "format:check": "prettier --check \"projects/**/*.{ts,html,scss,css,js,json,md}\" \"docs/**/*.{md}\" \"*.{json,md}\"",
+    "storybook": "ng run ui-lib-custom:storybook",
+    "build-storybook": "ng run ui-lib-custom:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -37,12 +39,20 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.2101.1",
+    "@angular-devkit/build-angular": "^21.1.1",
+    "@angular-devkit/core": "^21.1.1",
     "@angular/build": "^21.1.1",
     "@angular/cli": "^21.1.1",
     "@angular/compiler-cli": "^21.1.1",
     "@angular/platform-browser-dynamic": "^21.1.5",
     "@axe-core/playwright": "^4.9.1",
+    "@compodoc/compodoc": "^1.1.16",
     "@playwright/test": "^1.50.0",
+    "@storybook/addon-a11y": "^10.2.12",
+    "@storybook/addon-docs": "^10.2.12",
+    "@storybook/addon-onboarding": "^10.2.12",
+    "@storybook/angular": "^10.2.12",
     "@types/jasmine": "~5.1.0",
     "@types/jest": "^29.5.12",
     "@types/jest-axe": "^3.5.6",
@@ -61,6 +71,7 @@
     "ng-packagr": "^21.1.0",
     "playwright": "^1.50.0",
     "prettier": "^3.8.1",
+    "storybook": "^10.2.12",
     "ts-node": "^10.9.2",
     "typescript": "5.9",
     "zone.js": "^0.15.0"
