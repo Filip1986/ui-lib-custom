@@ -254,3 +254,123 @@ You now have a working UI component library that you can use across all your Ang
 - Three design variants: Material, Bootstrap, Minimal
 
 **Happy coding! 🚀**
+
+---
+
+## Consumer Test (Verified)
+
+### Steps
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+
+# Build the library
+cd D:\Work\Personal\Github\ui-lib-custom
+ng build ui-lib-custom
+
+# Create a new consumer app
+cd D:\Work\Personal\Github
+ng new consumer-test --standalone --routing --style=scss --skip-git --no-interactive
+
+# Pin Angular to match library build
+cd D:\Work\Personal\Github\consumer-test
+npm install @angular/common@21.1.5 @angular/compiler@21.1.5 @angular/core@21.1.5 @angular/forms@21.1.5 @angular/platform-browser@21.1.5 @angular/router@21.1.5 @angular/cli@21.1.5 @angular/compiler-cli@21.1.5 @angular/build@21.1.5 typescript@5.9.3 --save-exact
+
+# Install the library from dist
+npm install ..\ui-lib-custom\dist\ui-lib-custom
+```
+
+Add global theme styles in `src/styles.scss`:
+
+```scss
+@import 'ui-lib-custom/themes/themes.css';
+```
+
+### Consumer App Code
+
+`src/app/app.ts`
+```typescript
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+
+@Component({
+  selector: 'app-root',
+  imports: [Button, Card, UiLibInput, FormsModule],
+  templateUrl: './app.html',
+  styleUrl: './app.scss',
+})
+export class App {
+  private readonly theme = inject(ThemeConfigService);
+
+  name = '';
+  email = '';
+  isDark = false;
+
+  setBootstrapVariant(): void {
+    this.theme.setVariant('bootstrap');
+  }
+
+  setPillShape(): void {
+    this.theme.setShape('pill');
+  }
+
+  toggleDarkMode(): void {
+    this.isDark = !this.isDark;
+    this.theme.setMode(this.isDark ? 'dark' : 'light');
+  }
+}
+```
+
+`src/app/app.html`
+```html
+<main class="demo">
+  <ui-lib-card variant="material" class="demo-card">
+    <div card-header>Consumer Test Form</div>
+    <form class="demo-form">
+      <ui-lib-input
+        label="Name"
+        placeholder="Ada Lovelace"
+        name="name"
+        [(ngModel)]="name"
+      />
+      <ui-lib-input
+        label="Email"
+        placeholder="ada@example.com"
+        name="email"
+        [(ngModel)]="email"
+      />
+    </form>
+    <div card-footer class="demo-actions">
+      <ui-lib-button (click)="setBootstrapVariant()">Variant: Bootstrap</ui-lib-button>
+      <ui-lib-button (click)="setPillShape()">Shape: Pill</ui-lib-button>
+      <ui-lib-button (click)="toggleDarkMode()">
+        Dark Mode: {{ isDark ? 'On' : 'Off' }}
+      </ui-lib-button>
+    </div>
+  </ui-lib-card>
+</main>
+```
+
+### Build and Serve
+
+```powershell
+ng build
+ng serve --port 4300
+```
+
+### Results
+
+- ✅ `ng build` succeeds with Angular 21.1.5.
+- ✅ `ng serve` renders the form and theme controls.
+- ✅ Theme controls update variant, shape, and dark mode in real time.
+
+### Issues Found (Resolved)
+
+1. **Signal input brand mismatch** when consumer app used Angular 20/21.2.
+   - Fix: pin consumer app to Angular `21.1.5` to match the library build.
+2. **Theme CSS import not exported** (`ui-lib-custom/themes/themes.css`).
+   - Fix: expose theme assets via `exports` and copy assets to package root.

@@ -35,5 +35,16 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
+  },
+  "exports": {
+    "./themes/themes.css": {
+      "default": "./themes/themes.css"
+    },
+    "./themes/themes.scss": {
+      "default": "./themes/themes.scss"
+    },
+    "./styles/*": {
+      "default": "./styles/*"
+    }
   }
 }

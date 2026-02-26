@@ -224,12 +224,12 @@ npm install
 ### Rebuild the Library
 ```bash
 cd D:\Work\Personal\Github\ui-lib-custom
-ng build ui-components
+ng build ui-lib-custom
 ```
 
 ### Watch Mode (Auto-rebuild on changes)
 ```bash
-ng build ui-components --watch
+ng build ui-lib-custom --watch
 ```
 
 ### Run Demo Application
@@ -325,3 +325,33 @@ Your UI component library is ready to use! You can now:
 - ✅ Publish to npm when ready
 
 **The full workflow is complete from development to consumption!**
+
+## Consumer Install Test (Verified)
+
+Use these exact steps to validate the library from a clean consumer app:
+
+```powershell
+# Build the library
+Set-ExecutionPolicy -Scope Process Bypass
+cd D:\Work\Personal\Github\ui-lib-custom
+ng build ui-lib-custom
+
+# Create a fresh consumer app (outside workspace)
+cd D:\Work\Personal\Github
+ng new consumer-test --standalone --routing --style=scss --skip-git --no-interactive
+
+# Pin Angular to 21.1.5 (match library build)
+cd D:\Work\Personal\Github\consumer-test
+npm install @angular/common@21.1.5 @angular/compiler@21.1.5 @angular/core@21.1.5 @angular/forms@21.1.5 @angular/platform-browser@21.1.5 @angular/router@21.1.5 @angular/cli@21.1.5 @angular/compiler-cli@21.1.5 @angular/build@21.1.5 typescript@5.9.3 --save-exact
+
+# Install the library from dist
+npm install ..\ui-lib-custom\dist\ui-lib-custom
+```
+
+Then update `src/styles.scss` in the consumer app:
+
+```scss
+@import 'ui-lib-custom/themes/themes.css';
+```
+
+And use Button/Card/Input + ThemeConfigService in `src/app/app.ts` and `src/app/app.html` (see `docs/getting-started/TEST_GUIDE.md` for the full example).

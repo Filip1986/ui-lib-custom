@@ -3,7 +3,7 @@ import type { AccordionPanel } from './accordion-panel';
 import { AccordionExpandMode, AccordionSize, AccordionVariant } from './accordion.types';
 
 export interface AccordionContext {
-  variant: Signal<AccordionVariant>;
+  variant: Signal<AccordionVariant | null>;
   size: Signal<AccordionSize>;
   expandMode: Signal<AccordionExpandMode>;
   togglePanel: (panelId: string) => void;

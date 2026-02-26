@@ -53,7 +53,7 @@ interface AccordionPanelContext {
 export class Accordion implements AccordionContext {
   private readonly themeConfig = inject(ThemeConfigService);
 
-  variantInput = input<AccordionVariant | null>(null);
+  variant = input<AccordionVariant | null>(null);
   size = input<AccordionSize>('md');
   expandMode = input<AccordionExpandMode>('single');
   expandedPanels = input<string[]>([]);
@@ -98,13 +98,13 @@ export class Accordion implements AccordionContext {
     });
   }
 
-  readonly variant = computed<AccordionVariant>(
-    () => this.variantInput() ?? this.themeConfig.variant()
+  readonly resolvedVariant = computed<AccordionVariant>(
+    () => this.variant() ?? this.themeConfig.variant()
   );
   hostClasses = computed<string>(() => {
     const classes: string[] = [
       'ui-lib-accordion',
-      `accordion-variant-${this.variant()}`,
+      `accordion-variant-${this.resolvedVariant()}`,
       `accordion-size-${this.size()}`,
       `accordion-expand-mode-${this.expandMode()}`,
     ];
