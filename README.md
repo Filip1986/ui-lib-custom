@@ -21,6 +21,7 @@ import { Button } from 'ui-lib-custom';
 | Entry Point | Contents |
 |-------------|----------|
 | ui-lib-custom | All public exports (primary barrel) |
+| ui-lib-custom/a11y | Live announcer and a11y utilities |
 | ui-lib-custom/accordion | Accordion components and types |
 | ui-lib-custom/badge | Badge component and types |
 | ui-lib-custom/button | Button component and types |
@@ -62,92 +63,65 @@ Quick links:
 - 🎛️ **Scoped Theming**: `[uiLibTheme]`, `uiLibDarkTheme`, and component `theme` inputs
 - 📤 **Exports**: JSON, CSS, SCSS, and Figma Tokens formats
 
-## Components
+## Theming
 
-### Button Component
-
-A versatile button component with multiple variants, sizes, and colors.
-
-**Docs:** `docs/reference/components/BUTTON.md`
-
-**Variants**: `material` | `bootstrap` | `minimal`  
-**Sizes**: `small` | `medium` | `large`  
-**Colors**: `primary` | `secondary` | `success` | `danger` | `warning`
-
-#### Usage
+Use `ThemeConfigService` and CSS variables to control appearance globally.
 
 ```typescript
-import { Button } from 'ui-lib-custom/button';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
-@Component({
-  imports: [Button],
-  // ...
-})
-export class YourComponent {}
+export class AppComponent {
+  private readonly theme = inject(ThemeConfigService);
+
+  setDark(): void {
+    this.theme.setMode('dark');
+  }
+
+  setVariant(): void {
+    this.theme.setVariant('bootstrap');
+  }
+
+  setShape(): void {
+    this.theme.setShape('soft');
+  }
+
+  setDensity(): void {
+    this.theme.setDensity('comfortable');
+  }
+}
 ```
 
-```html
-<!-- Material Design Button -->
-<ui-lib-button variant="material" color="primary">Click Me</ui-lib-button>
+For presets, import `ThemePresetService` and capture or apply presets. See:
+- `docs/guides/THEMING_GUIDE.md`
+- `docs/guides/THEME_EDITOR_GOOGLE_FONTS.md`
 
-<!-- Bootstrap Button -->
-<ui-lib-button variant="bootstrap" size="large" color="success">Submit</ui-lib-button>
+## Theme Editor
 
-<!-- Minimal Button -->
-<ui-lib-button variant="minimal" color="danger" [disabled]="true">Delete</ui-lib-button>
+The demo app ships with a live Theme Editor sidebar for real-time customization. Use it to preview variant, shape, density, dark mode, and color changes. See `docs/guides/THEMING_GUIDE.md` for details.
 
-<!-- Full Width Button -->
-<ui-lib-button variant="material" [fullWidth]="true">Full Width</ui-lib-button>
-```
-
-### Card Component
-
-A flexible card component with support for headers, footers, and different elevation levels.
-
-**Docs:** _Pending (currently documented in this README only)_
-
-**Variants**: `material` | `bootstrap` | `minimal`  
-**Elevation**: `none` | `low` | `medium` | `high`
-
-#### Usage
-
-```typescript
-import { Card } from 'ui-lib-custom/card';
-
-@Component({
-  imports: [Card],
-  // ...
-})
-export class YourComponent {}
-```
-
-```html
-<!-- Material Design Card -->
-<ui-lib-card variant="material" elevation="medium">
-  <div card-header>Card Title</div>
-  <p>Card content goes here...</p>
-  <div card-footer>
-    <button>Action</button>
-  </div>
-</ui-lib-card>
-
-<!-- Bootstrap Card with Border -->
-<ui-lib-card variant="bootstrap" [bordered]="true">
-  <p>Simple card content</p>
-</ui-lib-card>
-
-<!-- Minimal Hoverable Card -->
-<ui-lib-card variant="minimal" [hoverable]="true">
-  <div card-header>Hover over me!</div>
-  <p>This card will respond to hover events.</p>
-</ui-lib-card>
-```
-
-## Installation
+## Installation (Quick Start)
 
 ```bash
 npm install ui-lib-custom
 ```
+
+```typescript
+import { Component } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+
+@Component({
+  standalone: true,
+  imports: [Button, Card],
+  template: `
+    <ui-lib-button>Primary</ui-lib-button>
+    <ui-lib-card>Content</ui-lib-card>
+  `,
+})
+export class AppComponent {}
+```
+
+Add global theme styles and configuration as described in `docs/guides/THEMING_GUIDE.md`.
 
 ## Getting Started
 

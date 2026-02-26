@@ -608,4 +608,4 @@ import {
 
 ---
 
-**Next:** See [Layout Primitives](./LAYOUT_PRIMITIVES.md) for components that use these tokens.
+**Next:** See [Layout Primitives](../components/LAYOUT.md) for components that use these tokens.

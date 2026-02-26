@@ -165,3 +165,4 @@ const imported = presetService.importFromJson(presetJson);
 - [ ] Demo pages work
 - [ ] Documentation is complete
 
+> For the full guide (variant, shape, density, presets, scoped theming), see `docs/guides/THEMING_GUIDE.md`.

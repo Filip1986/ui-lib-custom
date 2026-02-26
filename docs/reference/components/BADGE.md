@@ -80,6 +80,46 @@ const size: BadgeSize = 'md';
 
 ---
 
+## Theming & CSS Variables
+
+| Variable | Purpose |
+| --- | --- |
+| `--uilib-badge-bg` | Base background (solid variant). |
+| `--uilib-badge-bg-subtle` | Subtle background. |
+| `--uilib-badge-fg` | Text color. |
+| `--uilib-badge-border` | Border color (outline variant). |
+| `--uilib-badge-radius-resolved` | Badge corner radius. |
+| `--uilib-badge-padding-y-base` | Base vertical padding (density scaled). |
+| `--uilib-badge-padding-x-base` | Base horizontal padding (density scaled). |
+| `--uilib-badge-font-size-resolved` | Resolved font size. |
+| `--uilib-badge-dot-size` | Size for dot badges. |
+| `--uilib-badge-primary-*` | Per-color overrides for primary (bg/fg/border). |
+| `--uilib-badge-secondary-*` | Per-color overrides for secondary (bg/fg/border). |
+| `--uilib-badge-success-*` | Per-color overrides for success (bg/fg/border). |
+| `--uilib-badge-danger-*` | Per-color overrides for danger (bg/fg/border). |
+| `--uilib-badge-warning-*` | Per-color overrides for warning (bg/fg/border). |
+| `--uilib-badge-info-*` | Per-color overrides for info (bg/fg/border). |
+| `--uilib-badge-neutral-*` | Per-color overrides for neutral (bg/fg/border). |
+
+### Theme Override Example
+
+```scss
+[data-theme='brand-x'] {
+  --uilib-badge-bg: #0f172a;
+  --uilib-badge-fg: #e2e8f0;
+  --uilib-badge-border: #334155;
+}
+```
+
+---
+
+## Accessibility
+
+- Dot badges use `role="status"` with an accessible label.
+- Provide `label` input when the badge has no visible text.
+
+---
+
 ## Examples
 
 ### Variants
@@ -465,4 +505,4 @@ Possible additions:
 
 ---
 
-**Next:** See [Layout Primitives](./LAYOUT_PRIMITIVES.md) for components that work well with Badge.
+**Next:** See [Layout Primitives](./LAYOUT.md) for components that work well with Badge.

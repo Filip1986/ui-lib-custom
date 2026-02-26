@@ -40,19 +40,6 @@ docs/
   - Styling integration
   - Best practices
 
-- **[PrimeNG Integration](guides/PRIMENG_INTEGRATION.md)** - PrimeNG setup and configuration
-  - Installation and setup
-  - Version compatibility
-  - Theme configuration
-  - Consuming applications setup
-  - Troubleshooting
-
-- **[Modern Angular Features](guides/MODERN_ANGULAR_FEATURES.md)** - Modern Angular syntax guide
-  - New control flow syntax (`@if`, `@for`, `@switch`)
-  - Self-closing tags
-  - Performance benefits
-  - Migration examples
-
 - **[Publishing Guide](guides/PUBLISHING_GUIDE.md)** - Distribution and publishing
   - Publish to npm
   - Authentication setup (2FA/tokens)
@@ -76,6 +63,10 @@ docs/
 - **[Bundle Size Tracking](guides/BUNDLE_SIZE_TRACKING.md)** - Size budgets and CI guidance
   - Manual size checks
   - CI integration examples
+
+- **[Storybook Guide](guides/STORYBOOK.md)** - Component development with Storybook
+- **[Theming Guide](guides/THEMING_GUIDE.md)** - CSS variables, presets, and runtime customization
+- **[Theme Editor Google Fonts](guides/THEME_EDITOR_GOOGLE_FONTS.md)** - Loading fonts in the demo editor
 
 ---
 
@@ -129,6 +120,9 @@ docs/
 - **[Tabs Component](reference/components/TABS.md)** - Tabs component reference
   - Variants, lazy loading, navigation mode
   - Implementation: [TABS_IMPLEMENTATION.md](reference/components/TABS_IMPLEMENTATION.md)
+- **[Select Component](reference/components/SELECT.md)** - Select/combobox component reference
+- **[Alert Component](reference/components/ALERT.md)** - Alert/status banner reference
+- **[Layout Primitives](reference/components/LAYOUT.md)** - Stack/Inline/Grid/Container reference
 
 #### 📋 Project Documentation
 - **[Project Summary](reference/project/PROJECT_SUMMARY.md)** - Complete project overview
@@ -177,8 +171,6 @@ docs/
 | **Get started quickly** | [Quick Start Guide](getting-started/QUICK_START.md) |
 | **Test in a new project** | [Testing Guide](getting-started/TEST_GUIDE.md) |
 | **See real-world examples** | [Integration Examples](guides/INTEGRATION_EXAMPLE.md) |
-| **Setup PrimeNG** | [PrimeNG Integration](guides/PRIMENG_INTEGRATION.md) |
-| **Learn modern Angular features** | [Modern Angular Features](guides/MODERN_ANGULAR_FEATURES.md) |
 | **Publish the library** | [Publishing Guide](guides/PUBLISHING_GUIDE.md) |
 | **Learn the component APIs** | [API Reference](../README.md) |
 | **Understand the architecture** | [Architecture Docs](architecture/ARCHITECTURE.md) |
@@ -190,7 +182,7 @@ docs/
 
 **👨‍💻 Developer (Using the Library)**
 1. [Quick Start Guide](getting-started/QUICK_START.md) - How to use in your projects
-2. [PrimeNG Integration](guides/PRIMENG_INTEGRATION.md) - Setup PrimeNG dependencies
+2. [Theming Guide](guides/THEMING_GUIDE.md) - Customize variant, colors, shape, density
 3. [API Reference](../README.md) - Component APIs and props
 4. [Integration Examples](guides/INTEGRATION_EXAMPLE.md) - Real-world examples
 

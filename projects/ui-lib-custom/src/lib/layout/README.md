@@ -157,7 +157,7 @@ To add a new layout primitive:
    - Static template
 3. Create tests (e.g., `spacer.spec.ts`)
 4. Export from `index.ts`
-5. Document in `docs/reference/LAYOUT_PRIMITIVES.md`
+5. Document in `docs/reference/components/LAYOUT.md`
 
 ## Maintenance
 
@@ -192,7 +192,7 @@ Avoid breaking changes. To add features:
 
 ## Documentation
 
-- **Full API**: `docs/reference/LAYOUT_PRIMITIVES.md`
+- **Full API**: `docs/reference/components/LAYOUT.md`
 - **Quick Start**: `docs/getting-started/LAYOUT_QUICK_START.md`
 - **Implementation**: `docs/reference/LAYOUT_IMPLEMENTATION.md`
 - **Demo**: `projects/demo/src/app/pages/layouts/`

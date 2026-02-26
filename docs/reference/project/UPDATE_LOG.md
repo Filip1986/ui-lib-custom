@@ -127,10 +127,8 @@ Updated the following files to reflect new versions:
    - Updated Angular CLI version reference
    - Added requirements section with version constraints
 
-2. **docs/guides/PRIMENG_INTEGRATION.md**
-   - Updated version information
-   - Removed legacy-peer-deps references (no longer needed)
-   - Updated compatibility matrix
+2. **docs/guides/INTEGRATION_EXAMPLE.md**
+   - Kept as the primary integration reference
 
 ## Build Verification
 

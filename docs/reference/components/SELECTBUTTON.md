@@ -11,7 +11,7 @@ Segmented button control for single or multiple selection.
 
 **Import**
 ```typescript
-import { SelectButton } from 'ui-lib-custom';
+import { SelectButton } from 'ui-lib-custom/select-button';
 ```
 
 ---
@@ -31,14 +31,14 @@ Location: `projects/ui-lib-custom/src/lib/select-button/select-button.ts`
 | Input | Type | Default | Description |
 | --- | --- | --- | --- |
 | `options` | `SelectButtonOption[]` | `[]` | Option items to render |
-| `value` | `any \| any[] \| null \| undefined` | `undefined` | Controlled value(s) |
-| `optionLabel` | `string` | `'label'` | Field name for label |
-| `optionValue` | `string` | `'value'` | Field name for value |
-| `optionDisabled` | `string` | `'disabled'` | Field name for disabled |
-| `multiple` | `boolean` | `false` | Enable multi-select |
-| `allowEmpty` | `boolean` | `true` | Allow deselect in single mode |
-| `variant` | `SelectButtonVariant` | `'material'` | Visual variant |
-| `size` | `SelectButtonSize` | `'medium'` | Visual size |
+| `value` | `any \| any[] \| null` | `null` | Controlled value(s). |
+| `optionLabel` | `string` | `'label'` | Field name for label. |
+| `optionValue` | `string` | `'value'` | Field name for value. |
+| `optionDisabled` | `string` | `'disabled'` | Field name for disabled. |
+| `multiple` | `boolean` | `false` | Enable multi-select. |
+| `allowEmpty` | `boolean` | `false` | Allow deselect in single mode. |
+| `variant` | `SelectButtonVariant \| null` | `null` | Visual variant (falls back to global variant). |
+| `size` | `SelectButtonSize` | `'md'` | Visual size. |
 | `disabled` | `boolean` | `false` | Disable control |
 | `invalid` | `boolean` | `false` | Invalid state for forms |
 | `fluid` | `boolean` | `false` | Full-width mode |
@@ -47,8 +47,8 @@ Location: `projects/ui-lib-custom/src/lib/select-button/select-button.ts`
 ### Outputs
 | Output | Type | Description |
 | --- | --- | --- |
-| `onChange` | `SelectButtonChangeEvent` | Fires on selection change |
-| `valueChange` | `any \| any[]` | Two-way binding support |
+| `selectionChange` | `SelectButtonChangeEvent` | Fires on selection change. |
+| `valueChange` | `any \| any[]` | Two-way binding support. |
 
 ### Types
 ```typescript
@@ -66,7 +66,7 @@ export interface SelectButtonChangeEvent {
 }
 
 export type SelectButtonVariant = 'material' | 'bootstrap' | 'minimal';
-export type SelectButtonSize = 'small' | 'medium' | 'large';
+export type SelectButtonSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
 ```
 
 ---
@@ -137,7 +137,7 @@ When used with Angular forms, the host element receives `ng-touched`, `ng-dirty`
 ---
 ## Accessibility
 - Host role: `group`.
-- Options use `aria-pressed` to reflect selection.
+- Options use `aria-checked` to reflect selection.
 - `aria-labelledby` supported for external labels.
 - Keyboard: Tab focuses the group, Space/Enter toggles the focused option.
 

@@ -109,9 +109,9 @@ Individual component documentation with complete API references and implementati
 
 ### Select
 **Files:**
-- _Docs pending_
+- [SELECT.md](SELECT.md) - Complete API reference and usage guide
 
-**Status:** ❌ Missing
+**Status:** ✅ Complete
 
 **Quick Links:**
 - [Source Code](../../projects/ui-lib-custom/src/lib/select/)
@@ -143,11 +143,22 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### Alert
+**Files:**
+- [ALERT.md](ALERT.md) - Complete API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/alert/)
+
+---
+
 ### Layout
 **Files:**
-- _Docs pending (Stack/Inline/Grid/Container)_
+- [LAYOUT.md](LAYOUT.md) - Layout primitives reference (Stack/Inline/Grid/Container)
 
-**Status:** ❌ Missing
+**Status:** ✅ Complete
 
 **Quick Links:**
 - [Source Code](../../projects/ui-lib-custom/src/lib/layout/)
@@ -197,9 +208,10 @@ Each component should have two documentation files:
 | Icon | Icon rendering | - | - | 6 | ⚠️ API only |
 | Icon Button | Icon-only button | 3 | 5 | 3 | ⚠️ API only |
 | Input | Form control | 3 | - | - | ✅ Complete |
-| Select | Dropdown select | 3 | - | - | ❌ Missing |
+| Select | Dropdown select | 3 | - | - | ✅ Complete |
 | Tabs | Navigation | 3 | - | - | ✅ Complete |
-| Layout | Stack/Inline/Grid/Container | - | - | - | ❌ Missing |
+| Layout | Stack/Inline/Grid/Container | - | - | - | ✅ Complete |
+| Alert | Status alerts | 3 | - | - | ✅ Complete |
 
 ---
 

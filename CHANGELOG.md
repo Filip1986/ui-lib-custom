@@ -19,10 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - LiveAnnouncerService for screen reader announcements
 - High contrast mode support
 - RTL support for Tabs component
+- New component docs for Select, Alert, and Layout primitives.
+- Comprehensive theming guide (`docs/guides/THEMING_GUIDE.md`).
 
 ### Changed
 - All components now support dark mode.
 - ThemeConfigService now supports mode (`auto`/`light`/`dark`).
+- Documentation index updates for new component references.
+- Main README now includes theming and theme editor guidance.
 
 ### Deprecated
 - 

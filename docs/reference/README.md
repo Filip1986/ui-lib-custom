@@ -29,6 +29,12 @@ Individual component documentation with complete API references, examples, and i
 - **[Tabs Component](components/TABS.md)** - Tabs component reference
   - Variants, lazy loading, navigation mode
   - Implementation details: [TABS_IMPLEMENTATION.md](components/TABS_IMPLEMENTATION.md)
+- **[Select Component](components/SELECT.md)** - Select/combobox component reference
+  - Form integration, options, and accessibility
+- **[Alert Component](components/ALERT.md)** - Alert/status banner reference
+  - Dismissible alerts and theming
+- **[Layout Primitives](components/LAYOUT.md)** - Stack/Inline/Grid/Container reference
+  - Layout APIs and usage examples
 
 ---
 
@@ -110,8 +116,9 @@ Start here for project overview and status:
 | Checkbox | [CHECKBOX.md](components/CHECKBOX.md) | - | ⚠️ API only |
 | Icon | [ICON.md](components/ICON.md) | - | ⚠️ API only |
 | Icon Button | [ICON_BUTTON.md](components/ICON_BUTTON.md) | - | ⚠️ API only |
-| Select | - | - | ❌ Missing |
-| Layout | - | - | ❌ Missing |
+| Select | [SELECT.md](components/SELECT.md) | - | ✅ Complete |
+| Alert | [ALERT.md](components/ALERT.md) | - | ✅ Complete |
+| Layout | [LAYOUT.md](components/LAYOUT.md) | - | ✅ Complete |
 
 ### Systems
 | System | Documentation | Implementation | Status |

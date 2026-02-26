@@ -233,7 +233,7 @@ Added route:
 ## Documentation Created
 
 ### 1. Full API Reference
-**File:** `docs/reference/LAYOUT_PRIMITIVES.md`
+**File:** `docs/reference/components/LAYOUT.md`
 
 **Contents:**
 - Component overviews

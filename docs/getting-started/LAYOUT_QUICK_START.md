@@ -194,7 +194,7 @@ Use these spacing tokens for `gap` and `padding`:
 
 ## Next Steps
 
-- [Full API Reference](./LAYOUT_PRIMITIVES.md)
+- [Full API Reference](../reference/components/LAYOUT.md)
 - [View Live Demo](http://localhost:4200/layouts)
 - [Architecture Guide](../architecture/ARCHITECTURE.md)
 
@@ -209,4 +209,4 @@ Use these spacing tokens for `gap` and `padding`:
 
 ## Need Help?
 
-Check the full documentation at `docs/reference/LAYOUT_PRIMITIVES.md` for detailed examples and API reference.
+Check the full documentation at `docs/reference/components/LAYOUT.md` for detailed examples and API reference.
