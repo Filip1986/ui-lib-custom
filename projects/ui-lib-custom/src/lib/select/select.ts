@@ -157,6 +157,14 @@ export class UiLibSelect implements ControlValueAccessor {
   });
 
   readonly groupKeys = computed<string[]>(() => Object.keys(this.groupedOptions()));
+  readonly selectedValues = computed<Set<unknown>>((): Set<unknown> => {
+    const values: unknown[] = this.internalValue() ?? [];
+    return new Set<unknown>(values);
+  });
+  readonly optionIndexMap = computed<Map<SelectOption, number>>(
+    (): Map<SelectOption, number> =>
+      new Map<SelectOption, number>(this.filteredOptions().map((opt, index) => [opt, index]))
+  );
 
   writeValue(obj: unknown): void {
     if (this.multiple()) {
@@ -220,10 +228,6 @@ export class UiLibSelect implements ControlValueAccessor {
     if (this.isDisabled() || this.loading()) return;
     this.internalValue.set([]);
     this.onChange(this.multiple() ? [] : null);
-  }
-
-  isSelected(opt: SelectOption): boolean {
-    return (this.internalValue() ?? []).some((v) => v === opt.value);
   }
 
   moveFocus(delta: number): void {
@@ -379,10 +383,6 @@ export class UiLibSelect implements ControlValueAccessor {
     if (!selected.length) return -1;
     const value = selected[0];
     return opts.findIndex((opt) => opt.value === value);
-  }
-
-  optionIndex(opt: SelectOption): number {
-    return this.filteredOptions().indexOf(opt);
   }
 
   getOptionLabel(opt: SelectOption | unknown): string {

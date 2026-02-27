@@ -1,4 +1,4 @@
-:host {
+ui-lib-button {
   /* Spacing tokens */
   --uilib-space-1: 0.25rem;
   --uilib-space-2: 0.5rem;
@@ -71,7 +71,10 @@
     var(--uilib-button-outline-fg)
   );
   --uilib-button-outline-bg: var(--uilib-button-outline-bg, transparent);
-  --uilib-button-outline-bg-hover: var(--uilib-button-outline-bg-hover, var(--uilib-button-outline-bg));
+  --uilib-button-outline-bg-hover: var(
+    --uilib-button-outline-bg-hover,
+    var(--uilib-button-outline-bg)
+  );
   --uilib-button-shadow-raised: var(
     --uilib-button-shadow-raised,
     var(--uilib-button-shadow, var(--uilib-shadow-md, none))
@@ -85,8 +88,14 @@
   --uilib-button-badge-radius: var(--uilib-button-badge-radius, var(--uilib-shape-base, 6px));
   --uilib-button-badge-shadow: var(--uilib-button-badge-shadow, var(--uilib-shadow-sm));
   --uilib-button-badge-font-size: var(--uilib-button-badge-font-size, var(--uilib-font-size-sm));
-  --uilib-button-badge-padding: var(--uilib-button-badge-padding, var(--uilib-space-1) var(--uilib-space-2));
-  --uilib-button-badge-bg: var(--uilib-button-badge-bg, var(--uilib-button-danger-bg, currentColor));
+  --uilib-button-badge-padding: var(
+    --uilib-button-badge-padding,
+    var(--uilib-space-1) var(--uilib-space-2)
+  );
+  --uilib-button-badge-bg: var(
+    --uilib-button-badge-bg,
+    var(--uilib-button-danger-bg, currentColor)
+  );
   --uilib-button-badge-fg: var(
     --uilib-button-badge-fg,
     var(--uilib-button-danger-fg, var(--uilib-color-neutral-50))
@@ -112,7 +121,7 @@
   );
 }
 
-:host button {
+ui-lib-button button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -139,26 +148,42 @@
   align-self: stretch;
 }
 
-:host button:focus-visible {
+ui-lib-button button:focus-visible {
   outline: 2px solid var(--uilib-button-focus-color);
   outline-offset: 2px;
   box-shadow: var(--uilib-button-focus-ring);
 }
 
-:host button:hover:not(.btn-disabled) {
+ui-lib-button button:focus {
+  outline: 2px solid var(--uilib-button-focus-color);
+  outline-offset: 2px;
+  box-shadow: var(--uilib-button-focus-ring);
+}
+
+ui-lib-button button.btn-focused {
+  outline: 2px solid var(--uilib-button-focus-color);
+  outline-offset: 2px;
+  box-shadow: var(--uilib-button-focus-ring);
+}
+
+ui-lib-button button.btn-disabled {
+  pointer-events: none;
+}
+
+ui-lib-button button:hover:not(.btn-disabled) {
   background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
   color: var(--uilib-button-fg-hover, var(--uilib-button-fg));
   box-shadow: var(--uilib-button-shadow-hover, var(--uilib-button-shadow));
 }
 
-:host button:active:not(.btn-disabled) {
+ui-lib-button button:active:not(.btn-disabled) {
   background-color: var(
     --uilib-button-bg-active,
     var(--uilib-button-bg-hover, var(--uilib-button-bg))
   );
 }
 
-:host .btn {
+ui-lib-button .btn {
   --uilib-button-icon-gap: var(--uilib-space-2);
 
   display: inline-flex;
@@ -358,10 +383,7 @@
     --uilib-button-bg-hover: var(--uilib-button-info-bg-hover, var(--uilib-button-bg));
     --uilib-button-bg-active: var(--uilib-button-info-bg-active, var(--uilib-button-bg-hover));
     --uilib-button-border: var(--uilib-button-info-border, var(--uilib-button-bg));
-    --uilib-button-fg: var(
-      --uilib-button-info-fg,
-      var(--uilib-button-secondary-fg, inherit)
-    );
+    --uilib-button-fg: var(--uilib-button-info-fg, var(--uilib-button-secondary-fg, inherit));
   }
 
   &-help {
@@ -369,19 +391,13 @@
     --uilib-button-bg-hover: var(--uilib-button-help-bg-hover, var(--uilib-button-bg));
     --uilib-button-bg-active: var(--uilib-button-help-bg-active, var(--uilib-button-bg-hover));
     --uilib-button-border: var(--uilib-button-help-border, var(--uilib-button-bg));
-    --uilib-button-fg: var(
-      --uilib-button-help-fg,
-      var(--uilib-button-secondary-fg, inherit)
-    );
+    --uilib-button-fg: var(--uilib-button-help-fg, var(--uilib-button-secondary-fg, inherit));
   }
 
   &-contrast {
     --uilib-button-bg: var(--uilib-button-contrast-bg, var(--uilib-color-neutral-900));
     --uilib-button-bg-hover: var(--uilib-button-contrast-bg-hover, var(--uilib-button-bg));
-    --uilib-button-bg-active: var(
-      --uilib-button-contrast-bg-active,
-      var(--uilib-button-bg-hover)
-    );
+    --uilib-button-bg-active: var(--uilib-button-contrast-bg-active, var(--uilib-button-bg-hover));
     --uilib-button-border: var(--uilib-button-contrast-border, var(--uilib-button-bg));
     --uilib-button-fg: var(--uilib-button-contrast-fg, var(--uilib-color-neutral-50));
   }
@@ -455,7 +471,7 @@
   }
 }
 
-:host .btn-spinner {
+ui-lib-button .btn-spinner {
   width: 1em;
   height: 1em;
   border-radius: var(--uilib-shape-base, 6px);
@@ -519,5 +535,9 @@
   --uilib-button-contrast-border: var(--uilib-text-dark-primary);
   --uilib-button-contrast-fg: #0b1220;
   --uilib-button-focus-color: var(--uilib-color-primary-200);
-  --uilib-button-focus-ring-color: color-mix(in srgb, var(--uilib-color-primary-200) 35%, transparent);
+  --uilib-button-focus-ring-color: color-mix(
+    in srgb,
+    var(--uilib-color-primary-200) 35%,
+    transparent
+  );
 }

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, input, computed } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  computed,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ButtonVariant, ButtonSize } from '../button/button';
 
 @Component({
@@ -7,6 +13,7 @@ import { ButtonVariant, ButtonSize } from '../button/button';
   template: '<ng-content />',
   styleUrl: './button-group.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'btn-group',
     '[class.btn-group-vertical]': 'vertical()',

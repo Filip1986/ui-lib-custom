@@ -19,5 +19,6 @@ export class HomeComponent {
     { id: 'quick-preview', label: 'Quick Preview' },
     { id: 'theme-preview', label: 'Theme Preview' },
     { id: 'getting-started', label: 'Getting Started' },
+    { id: 'profiling-notes', label: 'Profiling Notes' },
   ];
 }

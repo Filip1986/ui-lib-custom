@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  computed,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   SPACING_TOKENS,
   SpacingToken,
@@ -32,6 +38,7 @@ export type GridJustify = 'start' | 'center' | 'end' | 'stretch';
     '[style.gap]': '_gapValue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Grid {
   /** Number of columns (using design tokens) */

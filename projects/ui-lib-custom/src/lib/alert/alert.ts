@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  output,
+  inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Icon } from '../icon/icon';
 import { StatusIcon } from '../icon/icon.semantics';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -31,6 +39,7 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
   `,
   styleUrl: './alert.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'alert',
     '[class]': 'hostClasses()',

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseLoginComponent } from '../base-login/base-login.component';
@@ -16,6 +16,7 @@ import { Inline } from '../../layout/inline';
   templateUrl: './login-1.component.html',
   styleUrls: ['./login-1.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Login1Component extends BaseLoginComponent {
   /**

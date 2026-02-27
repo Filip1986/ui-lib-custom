@@ -22,7 +22,11 @@
     "build-storybook": "ng run ui-lib-custom:build-storybook",
     "lint": "ng lint",
     "bundlesize": "bundlesize",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:coverage": "ng test ui-lib-custom --watch=false --code-coverage",
+    "coverage:summary": "node scripts/coverage-summary.js --threshold 90",
+    "verify:tree-shaking": "node scripts/verify-tree-shaking.js",
+    "verify:tree-shaking:dry": "node scripts/verify-tree-shaking.js --dry-run"
   },
   "private": true,
   "dependencies": {

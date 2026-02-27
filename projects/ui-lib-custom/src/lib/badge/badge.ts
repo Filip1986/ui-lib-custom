@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, input, computed, inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  computed,
+  inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type BadgeVariant = 'solid' | 'outline' | 'subtle';
@@ -34,6 +41,7 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
     '[attr.aria-label]': 'ariaLabel()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Badge {
   private readonly themeConfig = inject(ThemeConfigService);

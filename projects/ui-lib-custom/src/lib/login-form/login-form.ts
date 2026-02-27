@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   TemplateRef,
+  ViewEncapsulation,
   computed,
   input,
   output,
@@ -22,6 +23,7 @@ export type SocialProvider = 'google' | 'github' | 'microsoft';
   templateUrl: './login-form.html',
   styleUrl: './login-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginForm {
   variant = input<LoginFormVariant>('centered');

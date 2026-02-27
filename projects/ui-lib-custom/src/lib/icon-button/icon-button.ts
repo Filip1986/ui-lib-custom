@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Icon } from '../icon/icon';
 import { IconSize } from '../icon/icon.types';
 import { SemanticIcon } from '../icon/icon.semantics';
@@ -17,6 +23,7 @@ import { SemanticIcon } from '../icon/icon.semantics';
   `,
   styleUrl: './icon-button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'icon-button',
     '[class]': 'hostClasses()',

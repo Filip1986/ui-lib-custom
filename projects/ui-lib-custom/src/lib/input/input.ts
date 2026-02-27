@@ -103,6 +103,10 @@ export class UiLibInput implements ControlValueAccessor {
     return this.focused() || !!this.value();
   });
   readonly isDisabled = computed<boolean>(() => this.disabled() || this._disabled());
+  readonly currentLength = computed<number>(() => {
+    const value: string = this.value();
+    return value.length;
+  });
 
   @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
 
@@ -156,10 +160,6 @@ export class UiLibInput implements ControlValueAccessor {
   togglePassword(): void {
     if (this.isDisabled()) return;
     this.showPassword.update((v) => !v);
-  }
-
-  currentLength(): number {
-    return this.value()?.length ?? 0;
   }
 
   focusInput(event?: MouseEvent): void {

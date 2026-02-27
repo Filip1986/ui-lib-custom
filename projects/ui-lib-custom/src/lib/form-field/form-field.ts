@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, effect, input, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  input,
+  inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 let formFieldId = 0;
@@ -27,6 +34,7 @@ let formFieldId = 0;
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class FormField {
   private readonly liveAnnouncer = inject(LiveAnnouncerService);

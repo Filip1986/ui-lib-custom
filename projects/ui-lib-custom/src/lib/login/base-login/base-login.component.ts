@@ -6,6 +6,7 @@ import {
   output,
   signal,
   inject,
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginFeatures, LoginFormData, LoginSocialProvider } from '../models/login-contract';
@@ -19,10 +20,12 @@ export const DEFAULT_SOCIAL_PROVIDERS: LoginSocialProvider[] = [
 ];
 
 @Component({
+  selector: 'lib-base-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class BaseLoginComponent implements OnInit {
   private static readonly REMEMBER_ME_KEY = 'remember_me_preference';

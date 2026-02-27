@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  computed,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   CONTAINER_MAX_WIDTHS,
   ContainerSize,
@@ -34,6 +40,7 @@ const containerVar = (size: ContainerSize) =>
     '[style.padding-bottom]': '_paddingValue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Container {
   /** Maximum width of the container */

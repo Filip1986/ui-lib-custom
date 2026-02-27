@@ -117,4 +117,27 @@
 {{'}'}})</code></pre>
     </div>
   </div>
+
+  <div id="profiling-notes" data-doc-anchor>
+    <h2>Profiling Notes</h2>
+    <p>Use Angular DevTools to validate change detection and rendering behavior.</p>
+    <ul class="doc-list">
+      <li>
+        <strong>Profiler</strong> - record a short interaction and verify only affected components
+        render.
+      </li>
+      <li>
+        <strong>Change Detection</strong> - confirm OnPush components skip renders when inputs are
+        unchanged.
+      </li>
+      <li>
+        <strong>Signals</strong> - verify derived state comes from computed signals (no
+        effect-driven UI updates).
+      </li>
+      <li>
+        <strong>Interactions</strong> - watch for unexpected renders when opening Select, Tabs, or
+        Accordion.
+      </li>
+    </ul>
+  </div>
 </app-doc-page-layout>

@@ -1,4 +1,15 @@
-import { Component, ChangeDetectionStrategy, input, computed, inject } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  computed,
+  inject,
+  ViewEncapsulation,
+  AfterViewChecked,
+  ElementRef,
+  ViewChild,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
 import { IconSize } from 'ui-lib-custom/icon';
@@ -31,8 +42,9 @@ export type BadgeSeverity = ButtonSeverity | 'neutral';
   templateUrl: './button.html',
   styleUrl: './button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class Button {
+export class Button implements AfterViewChecked {
   private readonly themeConfig = inject(ThemeConfigService);
 
   variant = input<ButtonVariant | null>(null);
@@ -66,6 +78,10 @@ export class Button {
   ariaPressed = input<boolean | null>(null);
   ariaChecked = input<boolean | null>(null);
   ariaLabel = input<string | null>(null);
+
+  readonly focused = signal<boolean>(false);
+
+  @ViewChild('btnEl') private readonly buttonEl?: ElementRef<HTMLButtonElement>;
 
   private readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
     (): 'small' | 'medium' | 'large' => {
@@ -207,6 +223,10 @@ export class Button {
       classes.push('btn-vertical');
     }
 
+    if (this.focused()) {
+      classes.push('btn-focused');
+    }
+
     return classes.join(' ');
   });
 
@@ -221,4 +241,20 @@ export class Button {
     return this.ariaLabel();
   });
   isDisabled = computed<boolean>(() => this.disabled() || this.loading());
+
+  setFocused(isFocused: boolean): void {
+    this.focused.set(isFocused);
+  }
+
+  ngAfterViewChecked(): void {
+    this.syncFocusState();
+  }
+
+  private syncFocusState(): void {
+    const element: HTMLButtonElement | undefined = this.buttonEl?.nativeElement;
+    const isFocused: boolean = !!element && document.activeElement === element;
+    if (isFocused !== this.focused()) {
+      this.focused.set(isFocused);
+    }
+  }
 }

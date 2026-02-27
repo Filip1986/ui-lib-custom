@@ -1,4 +1,5 @@
 <button
+  #btnEl
   [ngClass]="buttonClasses()"
   [attr.type]="type()"
   [disabled]="isDisabled()"
@@ -11,6 +12,9 @@
   [attr.aria-checked]="ariaChecked() === null ? null : ariaChecked()"
   [style.--uilib-button-shadow]="shadow()"
   [style.--uilib-button-shadow-hover]="shadow()"
+  [style.pointer-events]="isDisabled() ? 'none' : null"
+  (focus)="setFocused(true)"
+  (blur)="setFocused(false)"
 >
   @if ((iconPosition() === 'left' || iconPosition() === 'top') && icon()) {
     <ui-lib-icon

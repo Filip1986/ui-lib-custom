@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { IconService } from './icon.service';
 import { ICON_LIBRARY_PREFIX, IconLibrary, IconSize, ComponentVariant } from './icon.types';
@@ -39,6 +46,7 @@ const hasKnownPrefix = (value: string): boolean => {
     '(keydown)': 'onKeydown($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Icon {
   private readonly iconService = inject(IconService);

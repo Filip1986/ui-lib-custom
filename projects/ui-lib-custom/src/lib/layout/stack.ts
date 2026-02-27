@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  computed,
+  ViewEncapsulation,
+} from '@angular/core';
 import { SPACING_TOKENS, SpacingToken, STACK_TOKENS, StackToken } from 'ui-lib-custom/tokens';
 
 const stackVar = (token: StackToken) => `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
@@ -32,6 +38,7 @@ export type StackJustify =
     '[style.gap]': '_gapValue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Stack {
   /** Direction of the stack layout */

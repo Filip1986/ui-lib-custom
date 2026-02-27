@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {
@@ -16,8 +22,9 @@ import { Login2Component } from '../login-2/login-2.component';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, Login1Component, Login3Component, Login2Component],
   templateUrl: './login-factory.component.html',
-  styleUrl: './login-factory.component.scss',
+  styleUrls: ['./login-factory.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginFactoryComponent {
   title = input<string>('Sign In');

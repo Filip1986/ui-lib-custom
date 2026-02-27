@@ -60,16 +60,16 @@
         @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
           <div
             class="ui-select-option"
-            [id]="controlId() + '-option-' + optionIndex(opt)"
-            [class.ui-select-option--active]="optionIndex(opt) === focusedIndex()"
-            [class.ui-select-option--selected]="isSelected(opt)"
+            [id]="controlId() + '-option-' + (optionIndexMap().get(opt) ?? -1)"
+            [class.ui-select-option--active]="(optionIndexMap().get(opt) ?? -1) === focusedIndex()"
+            [class.ui-select-option--selected]="selectedValues().has(opt.value)"
             [class.ui-select-option--disabled]="opt.disabled"
-            [class.selected]="isSelected(opt)"
+            [class.selected]="selectedValues().has(opt.value)"
             [class.disabled]="opt.disabled"
             (click)="selectOption(opt)"
-            (mouseenter)="setActiveIndex(optionIndex(opt))"
+            (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
             role="option"
-            [attr.aria-selected]="isSelected(opt)"
+            [attr.aria-selected]="selectedValues().has(opt.value)"
             [attr.aria-disabled]="opt.disabled ? 'true' : null"
           >
             @if (optionTemplate()) {

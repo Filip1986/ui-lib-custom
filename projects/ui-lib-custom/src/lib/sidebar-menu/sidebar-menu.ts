@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 
 export interface SidebarMenuItem {
   id: string;
@@ -21,6 +28,7 @@ export type SidebarVariant = 'classic' | 'compact' | 'modern';
   templateUrl: './sidebar-menu.html',
   styleUrl: './sidebar-menu.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidebarMenu {
   variant = input<SidebarVariant>('classic');

@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginFactoryComponent } from './login-factory/login-factory.component';
@@ -17,6 +23,7 @@ import { DEFAULT_SOCIAL_PROVIDERS } from './base-login/base-login.component';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
   title = input<string>('Sign In');

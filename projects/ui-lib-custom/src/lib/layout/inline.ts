@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  computed,
+  ViewEncapsulation,
+} from '@angular/core';
 import { SPACING_TOKENS, SpacingToken, INLINE_TOKENS, InlineToken } from 'ui-lib-custom/tokens';
 
 const inlineVar = (token: InlineToken) => `var(--uilib-inline-${token}, ${INLINE_TOKENS[token]})`;
@@ -26,6 +32,7 @@ export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'spac
     '[style.gap]': '_gapValue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class Inline {
   /** Alignment of items along the cross axis */
