@@ -1,5 +1,5 @@
+import type { ApplicationConfig } from '@angular/core';
 import {
-  ApplicationConfig,
   inject,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       const themeService = inject(ThemeConfigService);
       const hasStored =
-        typeof localStorage !== 'undefined' && !!localStorage.getItem('ui-lib-custom.theme');
+        typeof localStorage !== 'undefined' && Boolean(localStorage.getItem('ui-lib-custom.theme'));
       if (hasStored) {
         return;
       }

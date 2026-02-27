@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { Login3Component } from './login-3.component';
 import { ReactiveFormsModule } from '@angular/forms';
 

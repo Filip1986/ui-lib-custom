@@ -106,10 +106,10 @@ export class Checkbox implements ControlValueAccessor {
   readonly ariaDescribedby = computed<string | null>(() =>
     this.description() ? this.descriptionElementId : null
   );
-  readonly showDescription = computed<boolean>(() => !!this.description());
+  readonly showDescription = computed<boolean>(() => Boolean(this.description()));
 
   writeValue(value: boolean | null): void {
-    this.checked.set(!!value);
+    this.checked.set(Boolean(value));
   }
 
   registerOnChange(fn: (value: boolean) => void): void {

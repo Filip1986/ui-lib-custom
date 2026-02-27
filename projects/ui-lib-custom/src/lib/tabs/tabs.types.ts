@@ -1,4 +1,4 @@
-import { TemplateRef } from '@angular/core';
+import type { TemplateRef } from '@angular/core';
 
 export type TabsVariant = 'material' | 'bootstrap' | 'minimal';
 export type TabsSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';

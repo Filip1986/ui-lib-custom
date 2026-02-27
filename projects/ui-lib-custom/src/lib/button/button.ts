@@ -252,7 +252,7 @@ export class Button implements AfterViewChecked {
 
   private syncFocusState(): void {
     const element: HTMLButtonElement | undefined = this.buttonEl?.nativeElement;
-    const isFocused: boolean = !!element && document.activeElement === element;
+    const isFocused: boolean = Boolean(element) && document.activeElement === element;
     if (isFocused !== this.focused()) {
       this.focused.set(isFocused);
     }

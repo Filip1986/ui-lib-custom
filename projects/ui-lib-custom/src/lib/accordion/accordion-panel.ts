@@ -94,7 +94,7 @@ export class AccordionPanel implements OnDestroy {
     return classes.join(' ');
   });
 
-  readonly hasCustomHeader = computed((): boolean => !!this.headerTemplate());
+  readonly hasCustomHeader = computed((): boolean => Boolean(this.headerTemplate()));
   readonly resolvedId = computed((): string => this.value() ?? this.panelId());
   readonly isExpanded = computed((): boolean =>
     this.context ? this.context.isPanelExpanded(this.resolvedId()) : this.internalExpanded()

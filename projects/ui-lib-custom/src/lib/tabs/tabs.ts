@@ -111,7 +111,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   @ViewChild('tabList') tabList?: ElementRef<HTMLElement>;
   @ViewChildren(TabPanel) tabPanels?: QueryList<TabPanel>;
 
-  private renderedValues = signal<Set<TabsValue | null>>(new Set());
+  private readonly renderedValues = signal<Set<TabsValue | null>>(new Set());
   private readonly overflowDetected = signal<boolean>(false);
   private readonly canScrollPrev = signal<boolean>(false);
   private readonly canScrollNext = signal<boolean>(false);
@@ -142,10 +142,12 @@ export class Tabs implements OnDestroy, AfterViewInit {
     return getComputedStyle(list).direction === 'rtl';
   });
 
-  private indicatorStyle = signal<{ transform: string; width?: string; height?: string } | null>(
-    null
-  );
-  private internalSelection = signal<TabsSelection>({
+  private readonly indicatorStyle = signal<{
+    transform: string;
+    width?: string;
+    height?: string;
+  } | null>(null);
+  private readonly internalSelection = signal<TabsSelection>({
     value: null,
     index: -1,
   });
@@ -170,11 +172,11 @@ export class Tabs implements OnDestroy, AfterViewInit {
     });
   });
 
-  private controlled = computed<boolean>(
+  private readonly controlled = computed<boolean>(
     () => this.selectedValue() !== null || this.selectedIndex() !== null
   );
 
-  private resolvedSelection = computed<TabsSelection>(() => {
+  private readonly resolvedSelection = computed<TabsSelection>(() => {
     const tabs = this.tabContexts();
     const byValue = this.selectedValue();
     if (byValue !== null) {

@@ -86,7 +86,7 @@ export class IconsDemoComponent {
   loading = signal(false);
   searchQuery = signal('');
 
-  private allIcons = SEMANTIC_ICONS;
+  private readonly allIcons = SEMANTIC_ICONS;
 
   filteredIcons = computed(() => {
     const query = this.searchQuery().toLowerCase();

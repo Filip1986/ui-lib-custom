@@ -17,7 +17,7 @@ export class ThemeScopeDirective implements OnChanges {
 
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly renderer = inject(Renderer2);
-  private previousKeys = new Set<string>();
+  private readonly previousKeys = new Set<string>();
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes['themeVars']) return;

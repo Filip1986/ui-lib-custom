@@ -1,5 +1,5 @@
 import { provideIcons } from '@ng-icons/core';
-import { IconMapping } from '../icon.semantics';
+import type { IconMapping } from '../icon.semantics';
 import {
   bootstrapX,
   bootstrapList,

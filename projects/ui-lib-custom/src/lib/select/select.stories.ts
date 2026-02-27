@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { UiLibSelect, SelectOption } from './select';
+import type { SelectOption } from './select';
+import { UiLibSelect } from './select';
 
 type Story = StoryObj;
 

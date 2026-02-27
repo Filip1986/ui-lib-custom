@@ -110,7 +110,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
         const el = this.document.getElementById(id);
         return el ? { id, top: el.getBoundingClientRect().top + scrollY } : null;
       })
-      .filter((entry): entry is { id: string; top: number } => !!entry);
+      .filter((entry): entry is { id: string; top: number } => Boolean(entry));
 
     let candidate: { id: string; top: number } | null = null;
     for (const item of positions) {

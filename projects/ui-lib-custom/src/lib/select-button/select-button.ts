@@ -182,7 +182,7 @@ export class SelectButton implements ControlValueAccessor {
       return fieldValue === true;
     }
 
-    return !!option.disabled;
+    return Boolean(option.disabled);
   }
 
   resolveLabel(option: SelectButtonOption): string {

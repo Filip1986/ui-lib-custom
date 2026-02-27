@@ -51,7 +51,7 @@ import {
   lucideBellDot,
   lucideBellElectric,
 } from '@ng-icons/lucide';
-import { IconMapping } from '../icon.semantics';
+import type { IconMapping } from '../icon.semantics';
 
 export const LUCIDE_ICON_MAPPING: IconMapping = {
   // Actions

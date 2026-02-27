@@ -21,6 +21,8 @@
     "storybook": "ng run ui-lib-custom:storybook",
     "build-storybook": "ng run ui-lib-custom:build-storybook",
     "lint": "ng lint",
+    "lint:fix": "eslint . --fix",
+    "lint:ci": "eslint . --max-warnings 0",
     "bundlesize": "bundlesize",
     "prepare": "husky install",
     "test:coverage": "ng test ui-lib-custom --watch=false --code-coverage",

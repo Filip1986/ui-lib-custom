@@ -22,7 +22,7 @@ export class IconService {
   private readonly configSignal = signal<IconConfig>(
     this.injectedConfig ?? { ...DEFAULT_ICON_CONFIG }
   );
-  private mappings: Record<IconLibrary, IconMapping> = {
+  private readonly mappings: Record<IconLibrary, IconMapping> = {
     material: MATERIAL_ICON_MAPPING,
     bootstrap: BOOTSTRAP_ICON_MAPPING,
     lucide: LUCIDE_ICON_MAPPING,
