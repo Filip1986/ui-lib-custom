@@ -30,9 +30,9 @@ export class IconService {
     tabler: LUCIDE_ICON_MAPPING,
   };
 
-  readonly config = computed<IconConfig>(() => this.configSignal());
+  public readonly config = computed<IconConfig>(() => this.configSignal());
 
-  readonly themeVariant = computed<ThemeVariant | null>(() => {
+  public readonly themeVariant = computed<ThemeVariant | null>(() => {
     const preset = this.themeConfig?.getPreset?.();
     return preset?.variant ?? null;
   });
@@ -41,7 +41,7 @@ export class IconService {
     () => this.themeConfig?.getPreset?.()?.icons ?? this.themeConfig?.preset?.()?.icons ?? null
   );
 
-  getLibraryForVariant(variant?: ComponentVariant | null): IconLibrary {
+  public getLibraryForVariant(variant?: ComponentVariant | null): IconLibrary {
     const cfg = this.configSignal();
     const themeIcons = this.themeIcons();
     if (variant) {
@@ -55,41 +55,44 @@ export class IconService {
     return cfg.defaultLibrary;
   }
 
-  setDefaultLibrary(library: IconLibrary): void {
+  public setDefaultLibrary(library: IconLibrary): void {
     this.configSignal.update((current) => ({ ...current, defaultLibrary: library }));
   }
 
-  setDefaultSize(size: IconSize): void {
+  public setDefaultSize(size: IconSize): void {
     this.configSignal.update((current) => ({ ...current, defaultSize: size }));
   }
 
-  setVariantMapping(mapping: Partial<IconConfig['variantMapping']>): void {
+  public setVariantMapping(mapping: Partial<IconConfig['variantMapping']>): void {
     this.configSignal.update((current) => ({
       ...current,
       variantMapping: { ...current.variantMapping, ...mapping },
     }));
   }
 
-  getIconSize(size?: IconSize | null): string {
+  public getIconSize(size?: IconSize | null): string {
     const themeIcons = this.themeIcons();
     const target = size ?? this.configSignal().defaultSize;
     const themeSize = themeIcons?.sizes?.[target];
     return themeSize ?? ICON_SIZES[target];
   }
 
-  resolveLibrary(override?: IconLibrary | null, variant?: ComponentVariant | null): IconLibrary {
+  public resolveLibrary(
+    override?: IconLibrary | null,
+    variant?: ComponentVariant | null
+  ): IconLibrary {
     if (override) return override;
     if (variant) return this.getLibraryForVariant(variant);
     return this.getLibraryForVariant(null);
   }
 
-  resolveIcon(semantic: SemanticIcon, library?: IconLibrary): string {
+  public resolveIcon(semantic: SemanticIcon, library?: IconLibrary): string {
     const lib = library ?? this.configSignal().defaultLibrary;
     const mapping = this.mappings[lib];
     return mapping?.[semantic] ?? semantic;
   }
 
-  getIconForVariant(semantic: SemanticIcon, variant: ComponentVariant = 'minimal'): string {
+  public getIconForVariant(semantic: SemanticIcon, variant: ComponentVariant = 'minimal'): string {
     const library = this.getLibraryForVariant(variant);
     return this.resolveIcon(semantic, library);
   }

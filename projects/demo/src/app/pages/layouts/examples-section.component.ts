@@ -27,10 +27,10 @@ import { DocSection } from '../../shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutExamplesSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'examples', label: 'Examples' }];
+  public readonly sections: DocSection[] = [{ id: 'examples', label: 'Examples' }];
 
-  readonly metrics = [72.4, 48.1, 33.7, 68.9];
-  readonly pricing = [29, 59, 129];
+  public readonly metrics: number[] = [72.4, 48.1, 33.7, 68.9];
+  public readonly pricing: number[] = [29, 59, 129];
 
   private readonly exampleTabs: Record<ExampleId, WritableSignal<ExampleTab>> = {
     hero: signal<ExampleTab>('example'),
@@ -43,7 +43,7 @@ export class LayoutExamplesSectionComponent {
     masonry: signal<ExampleTab>('example'),
   };
 
-  readonly heroSnippet = `<ui-lib-container size="lg" inset="xl">
+  public readonly heroSnippet = `<ui-lib-container size="lg" inset="xl">
   <ui-lib-stack spacing="md">
     <ui-lib-inline spacing="sm">
       <span class="demo-tag">New</span>
@@ -58,7 +58,7 @@ export class LayoutExamplesSectionComponent {
   </ui-lib-stack>
 </ui-lib-container>`;
 
-  readonly featuresSnippet = `<ui-lib-grid [columns]="3" spacing="md">
+  public readonly featuresSnippet = `<ui-lib-grid [columns]="3" spacing="md">
   <ui-lib-stack spacing="xs" class="demo-card">
     <h4 class="no-margin">Analytics</h4>
     <p class="no-margin">Brief summary.</p>
@@ -66,7 +66,7 @@ export class LayoutExamplesSectionComponent {
   <!-- repeat for Automation, Collaboration -->
 </ui-lib-grid>`;
 
-  readonly kpiSnippet = `<ui-lib-grid [columns]="4" spacing="md">
+  public readonly kpiSnippet = `<ui-lib-grid [columns]="4" spacing="md">
   <ui-lib-stack spacing="xs" class="demo-card">
     <span class="demo-tag">Revenue</span>
     <h3 class="no-margin">72.4%</h3>
@@ -75,7 +75,7 @@ export class LayoutExamplesSectionComponent {
   <!-- repeat for Sessions, Conversion, NPS -->
 </ui-lib-grid>`;
 
-  readonly sidebarSnippet = `<ui-lib-grid [columns]="3" spacing="md">
+  public readonly sidebarSnippet = `<ui-lib-grid [columns]="3" spacing="md">
   <ui-lib-stack spacing="sm" class="demo-card" style="grid-column: span 1">
     <h4>Navigation</h4>
     <ui-lib-stack spacing="xs">
@@ -94,7 +94,7 @@ export class LayoutExamplesSectionComponent {
   </ui-lib-stack>
 </ui-lib-grid>`;
 
-  readonly pricingSnippet = `<ui-lib-grid [columns]="3" spacing="md">
+  public readonly pricingSnippet = `<ui-lib-grid [columns]="3" spacing="md">
   <ui-lib-stack spacing="sm" class="demo-card">
     <h3 class="no-margin">Starter</h3>
     <p class="no-margin">$29/mo</p>
@@ -107,7 +107,7 @@ export class LayoutExamplesSectionComponent {
   <!-- Growth, Enterprise -->
 </ui-lib-grid>`;
 
-  readonly ctaSnippet = `<ui-lib-grid [columns]="2" spacing="md">
+  public readonly ctaSnippet = `<ui-lib-grid [columns]="2" spacing="md">
   <ui-lib-stack spacing="sm" class="demo-card">
     <h3>Engaging headline</h3>
     <p>Support text for the primary action.</p>
@@ -125,7 +125,7 @@ export class LayoutExamplesSectionComponent {
   </ui-lib-stack>
 </ui-lib-grid>`;
 
-  readonly timelineSnippet = `<ui-lib-stack spacing="sm">
+  public readonly timelineSnippet = `<ui-lib-stack spacing="sm">
   <ui-lib-stack spacing="xs" class="demo-card">
     <strong>Sign up</strong>
     <p class="no-margin">Describe what happens in this phase.</p>
@@ -133,7 +133,7 @@ export class LayoutExamplesSectionComponent {
   <!-- Onboard, Configure, Launch -->
 </ui-lib-stack>`;
 
-  readonly masonrySnippet = `<ui-lib-grid spacing="md" minColumnWidth="220px">
+  public readonly masonrySnippet = `<ui-lib-grid spacing="md" minColumnWidth="220px">
   <div class="demo-card">
     <h4 class="no-margin">Alpha</h4>
     <p class="no-margin">Responsive auto-fit grid.</p>
@@ -141,11 +141,11 @@ export class LayoutExamplesSectionComponent {
   <!-- more cards -->
 </ui-lib-grid>`;
 
-  tabValue(id: ExampleId): ExampleTab {
+  public tabValue(id: ExampleId): ExampleTab {
     return this.exampleTabs[id]();
   }
 
-  onTabChange(id: ExampleId, value: TabsValue | null): void {
+  public onTabChange(id: ExampleId, value: TabsValue | null): void {
     if (value === null) return;
     this.exampleTabs[id].set(value as ExampleTab);
   }

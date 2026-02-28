@@ -54,15 +54,22 @@ export class GalleryComponent {
   private readonly themeConfig = inject(ThemeConfigService);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly presentMode = signal<boolean>(false);
-  readonly shareNotice = signal<string>('');
-  readonly variant = computed<ThemeVariant>(() => this.themeConfig.variant());
+  public readonly presentMode = signal<boolean>(false);
+  public readonly shareNotice = signal<string>('');
+  public readonly variant = computed<ThemeVariant>(() => this.themeConfig.variant());
 
-  readonly sizes = ['sm', 'md', 'lg'] as const;
-  readonly variants: ThemeVariant[] = ['material', 'bootstrap', 'minimal'];
-  readonly severities = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'] as const;
+  public readonly sizes: readonly ['sm', 'md', 'lg'] = ['sm', 'md', 'lg'];
+  public readonly variants: ThemeVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly severities: readonly [
+    'primary',
+    'secondary',
+    'success',
+    'danger',
+    'warning',
+    'info',
+  ] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
 
-  readonly roles = [
+  public readonly roles: { label: string; value: string }[] = [
     { label: 'Designer', value: 'designer' },
     { label: 'Engineer', value: 'engineer' },
     { label: 'Manager', value: 'manager' },
@@ -86,11 +93,11 @@ export class GalleryComponent {
     });
   }
 
-  togglePresentMode(): void {
+  public togglePresentMode(): void {
     this.presentMode.update((value: boolean) => !value);
   }
 
-  async copyShareLink(): Promise<void> {
+  public async copyShareLink(): Promise<void> {
     const url: string = this.buildShareUrl();
     if (navigator?.clipboard?.writeText) {
       await navigator.clipboard.writeText(url);

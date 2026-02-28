@@ -43,9 +43,9 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutStackSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'stack', label: 'Stack' }];
+  public readonly sections: DocSection[] = [{ id: 'stack', label: 'Stack' }];
 
-  readonly usageSnippet: string = `
+  public readonly usageSnippet: string = `
 <ui-lib-stack spacing="md" direction="horizontal" justify="space-between">
   <div class="card">Left</div>
   <div class="card">Center</div>
@@ -53,25 +53,25 @@ export class LayoutStackSectionComponent {
 </ui-lib-stack>
 `;
 
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  readonly spacing = signal<StackToken>('md');
-  readonly direction = signal<StackDirection>('vertical');
-  readonly align = signal<StackAlign>('center');
-  readonly justify = signal<StackJustify>('space-between');
+  public readonly spacing = signal<StackToken>('md');
+  public readonly direction = signal<StackDirection>('vertical');
+  public readonly align = signal<StackAlign>('center');
+  public readonly justify = signal<StackJustify>('space-between');
 
-  readonly spacingOptions = this.buildOptions(STACK_TOKENS);
-  readonly directionOptions: { label: string; value: StackDirection }[] = [
+  public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
+  public readonly directionOptions: { label: string; value: StackDirection }[] = [
     { label: 'Vertical', value: 'vertical' },
     { label: 'Horizontal', value: 'horizontal' },
   ];
-  readonly alignOptions: { label: string; value: StackAlign }[] = [
+  public readonly alignOptions: { label: string; value: StackAlign }[] = [
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
     { label: 'Stretch', value: 'stretch' },
   ];
-  readonly justifyOptions: { label: string; value: StackJustify }[] = [
+  public readonly justifyOptions: { label: string; value: StackJustify }[] = [
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
@@ -80,36 +80,40 @@ export class LayoutStackSectionComponent {
     { label: 'Space Evenly', value: 'space-evenly' },
   ];
 
-  readonly spacingLabel = computed(() => this.displayLabel(this.spacing(), this.spacingOptions));
-  readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
-  readonly justifyLabel = computed(() => this.displayLabel(this.justify(), this.justifyOptions));
+  public readonly spacingLabel = computed(() =>
+    this.displayLabel(this.spacing(), this.spacingOptions)
+  );
+  public readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
+  public readonly justifyLabel = computed(() =>
+    this.displayLabel(this.justify(), this.justifyOptions)
+  );
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }
 
-  setSpacing(value: StackToken): void {
+  public setSpacing(value: StackToken): void {
     this.spacing.set(value);
   }
 
-  setDirection(value: StackDirection): void {
+  public setDirection(value: StackDirection): void {
     this.direction.set(value);
   }
 
-  setAlign(value: StackAlign): void {
+  public setAlign(value: StackAlign): void {
     this.align.set(value);
   }
 
-  setJustify(value: StackJustify): void {
+  public setJustify(value: StackJustify): void {
     this.justify.set(value);
   }
 
-  resetControls(): void {
+  public resetControls(): void {
     this.spacing.set('md');
     this.direction.set('vertical');
     this.align.set('center');

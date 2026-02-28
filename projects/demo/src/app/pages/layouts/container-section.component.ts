@@ -44,62 +44,62 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutContainerSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'container', label: 'Container' }];
+  public readonly sections: DocSection[] = [{ id: 'container', label: 'Container' }];
 
-  readonly usageSnippet: string = `
+  public readonly usageSnippet: string = `
 <ui-lib-container size="md" inset="lg">
   <h3>Content title</h3>
   <p class="no-margin">Keep content aligned with page max-width.</p>
 </ui-lib-container>
 `;
 
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  readonly size = signal<ContainerSize>('md');
-  readonly inset = signal<Exclude<InsetToken, 'xs'>>('lg');
-  readonly centered = signal<boolean>(true);
+  public readonly size = signal<ContainerSize>('md');
+  public readonly inset = signal<Exclude<InsetToken, 'xs'>>('lg');
+  public readonly centered = signal<boolean>(true);
 
-  readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
+  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
     label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
     value: key as ContainerSize,
   }));
-  readonly insetOptions = Object.entries(INSET_TOKENS)
+  public readonly insetOptions = Object.entries(INSET_TOKENS)
     .filter(([key]) => key !== 'xs')
     .map(([key, value]) => ({
       label: `${key} (${value})`,
       value: key as Exclude<InsetToken, 'xs'>,
     }));
-  readonly centeredOptions = [
+  public readonly centeredOptions = [
     { label: 'Centered', value: true },
     { label: 'Left-aligned', value: false },
   ];
 
-  readonly sizeLabel = computed(() => this.displayLabel(this.size(), this.sizeOptions));
-  readonly insetLabel = computed(() => this.displayLabel(this.inset(), this.insetOptions));
-  readonly centeredLabel = computed(() => (this.centered() ? 'Centered' : 'Left-aligned'));
+  public readonly sizeLabel = computed(() => this.displayLabel(this.size(), this.sizeOptions));
+  public readonly insetLabel = computed(() => this.displayLabel(this.inset(), this.insetOptions));
+  public readonly centeredLabel = computed(() => (this.centered() ? 'Centered' : 'Left-aligned'));
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }
 
-  setSize(value: ContainerSize): void {
+  public setSize(value: ContainerSize): void {
     this.size.set(value);
   }
 
-  setInset(value: Exclude<InsetToken, 'xs'>): void {
+  public setInset(value: Exclude<InsetToken, 'xs'>): void {
     this.inset.set(value);
   }
 
-  setCentered(value: boolean): void {
+  public setCentered(value: boolean): void {
     this.centered.set(value);
   }
 
-  resetControls(): void {
+  public resetControls(): void {
     this.size.set('md');
     this.inset.set('lg');
     this.centered.set(true);

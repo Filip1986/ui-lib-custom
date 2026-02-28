@@ -50,9 +50,9 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutSemanticSpacingSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'semantic-spacing', label: 'Semantic Spacing' }];
+  public readonly sections: DocSection[] = [{ id: 'semantic-spacing', label: 'Semantic Spacing' }];
 
-  readonly usageSnippet: string = `
+  public readonly usageSnippet: string = `
 <ui-lib-stack spacing="md">
   <ui-lib-inline spacing="sm">
     <span class="chip">Item A</span>
@@ -64,57 +64,59 @@ export class LayoutSemanticSpacingSectionComponent {
 </ui-lib-stack>
 `;
 
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  readonly stackSpacing = signal<StackToken>('sm');
-  readonly inlineSpacing = signal<InlineToken>('sm');
-  readonly gridSpacing = signal<StackToken>('md');
-  readonly inset = signal<Exclude<InsetToken, 'xs'>>('lg');
+  public readonly stackSpacing = signal<StackToken>('sm');
+  public readonly inlineSpacing = signal<InlineToken>('sm');
+  public readonly gridSpacing = signal<StackToken>('md');
+  public readonly inset = signal<Exclude<InsetToken, 'xs'>>('lg');
 
-  readonly stackOptions = this.buildOptions<StackToken>(STACK_TOKENS);
-  readonly inlineOptions = this.buildOptions<InlineToken>(INLINE_TOKENS);
-  readonly insetOptions = this.buildOptions<Exclude<InsetToken, 'xs'>>(
+  public readonly stackOptions = this.buildOptions<StackToken>(STACK_TOKENS);
+  public readonly inlineOptions = this.buildOptions<InlineToken>(INLINE_TOKENS);
+  public readonly insetOptions = this.buildOptions<Exclude<InsetToken, 'xs'>>(
     INSET_TOKENS as Record<InsetToken, string>,
     (key) => key !== 'xs'
   );
 
-  readonly stackSpacingLabel = computed<string>(() =>
+  public readonly stackSpacingLabel = computed<string>(() =>
     this.displayLabel(this.stackSpacing(), this.stackOptions)
   );
-  readonly inlineSpacingLabel = computed<string>(() =>
+  public readonly inlineSpacingLabel = computed<string>(() =>
     this.displayLabel(this.inlineSpacing(), this.inlineOptions)
   );
-  readonly gridSpacingLabel = computed<string>(() =>
+  public readonly gridSpacingLabel = computed<string>(() =>
     this.displayLabel(this.gridSpacing(), this.stackOptions)
   );
-  readonly insetLabel = computed<string>(() => this.displayLabel(this.inset(), this.insetOptions));
+  public readonly insetLabel = computed<string>(() =>
+    this.displayLabel(this.inset(), this.insetOptions)
+  );
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }
 
-  setStackSpacing(value: StackToken): void {
+  public setStackSpacing(value: StackToken): void {
     this.stackSpacing.set(value);
   }
 
-  setInlineSpacing(value: InlineToken): void {
+  public setInlineSpacing(value: InlineToken): void {
     this.inlineSpacing.set(value);
   }
 
-  setGridSpacing(value: StackToken): void {
+  public setGridSpacing(value: StackToken): void {
     this.gridSpacing.set(value);
   }
 
-  setInset(value: Exclude<InsetToken, 'xs'>): void {
+  public setInset(value: Exclude<InsetToken, 'xs'>): void {
     this.inset.set(value);
   }
 
-  resetControls(): void {
+  public resetControls(): void {
     this.stackSpacing.set('sm');
     this.inlineSpacing.set('sm');
     this.gridSpacing.set('md');

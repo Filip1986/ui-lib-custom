@@ -37,6 +37,8 @@ type TabKey =
   | 'performance'
   | 'accessibility';
 
+type ViewportPreset = { key: string; label: string; width: number; height: number };
+
 @Component({
   selector: 'app-inputs',
   standalone: true,
@@ -60,7 +62,7 @@ type TabKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputsComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
@@ -69,18 +71,18 @@ export class InputsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `import { UiLibInput } from 'ui-lib-custom';
 
 @Component({
@@ -93,30 +95,38 @@ export class Example {}`,
 
   private readonly themeService = inject(ThemeConfigService);
 
-  variant = signal<InputVariant>('material');
-  inputType = signal<InputType>('text');
-  labelFloat = signal<InputLabelFloat>('over');
-  value = signal('');
-  password = signal('');
-  error = signal('');
-  showCounter = signal(true);
-  showClear = signal(true);
-  showToggle = signal(true);
-  required = signal(true);
-  label = signal('Email');
-  placeholder = signal('you@example.com');
-  useGlobalVariant = signal(true);
+  public readonly variant = signal<InputVariant>('material');
+  public readonly inputType = signal<InputType>('text');
+  public readonly labelFloat = signal<InputLabelFloat>('over');
+  public readonly value = signal('');
+  public readonly password = signal('');
+  public readonly error = signal('');
+  public readonly showCounter = signal(true);
+  public readonly showClear = signal(true);
+  public readonly showToggle = signal(true);
+  public readonly required = signal(true);
+  public readonly label = signal('Email');
+  public readonly placeholder = signal('you@example.com');
+  public readonly useGlobalVariant = signal(true);
 
-  variants: InputVariant[] = ['material', 'bootstrap', 'minimal'];
-  types: InputType[] = ['text', 'email', 'password', 'number', 'search', 'tel', 'url'];
-  labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
+  public readonly variants: InputVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly types: InputType[] = [
+    'text',
+    'email',
+    'password',
+    'number',
+    'search',
+    'tel',
+    'url',
+  ];
+  public readonly labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
 
   private readonly globalVars = computed(() => {
     const preset = this.themeService.preset();
     return this.themeService.getCssVars(preset);
   });
 
-  readonly appliedTheme = computed(() => this.globalVars());
+  public readonly appliedTheme = computed(() => this.globalVars());
 
   constructor() {
     effect(() => {
@@ -126,7 +136,7 @@ export class Example {}`,
     });
   }
 
-  onSubmit(form: NgForm) {
+  public onSubmit(form: NgForm): void {
     if (!this.value().trim()) {
       this.error.set('Required field');
       return;
@@ -138,12 +148,12 @@ export class Example {}`,
     this.password.set('');
   }
 
-  setVariant(v: InputVariant) {
+  public setVariant(v: InputVariant): void {
     this.useGlobalVariant.set(false);
     this.variant.set(v);
   }
 
-  setFollowThemeVariant(on: boolean) {
+  public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
       const v = this.themeService.preset().variant as InputVariant;
@@ -151,51 +161,51 @@ export class Example {}`,
     }
   }
 
-  setType(t: InputType) {
+  public setType(t: InputType): void {
     this.inputType.set(t);
   }
 
-  setLabelFloat(mode: InputLabelFloat) {
+  public setLabelFloat(mode: InputLabelFloat): void {
     this.labelFloat.set(mode);
   }
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  get viewportPresets() {
+  public get viewportPresets(): ViewportPreset[] {
     return this.viewport?.presets() ?? [];
   }
 
-  viewportDisplayWidth() {
+  public viewportDisplayWidth(): number {
     return this.viewport?.displayWidth() ?? 0;
   }
 
-  viewportDisplayHeight() {
+  public viewportDisplayHeight(): number {
     return this.viewport?.displayHeight() ?? 0;
   }
 
-  viewportCustomWidth() {
+  public viewportCustomWidth(): number {
     return this.viewport?.customWidth() ?? 0;
   }
 
-  setViewportCustomWidth(value: number) {
+  public setViewportCustomWidth(value: number): void {
     this.viewport?.setCustomWidth(value);
   }
 
-  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+  public setViewportPreset(preset: ViewportPreset): void {
     this.viewport?.setPreset(preset);
   }
 
-  applyViewportCustom() {
+  public applyViewportCustom(): void {
     this.viewport?.setCustom();
   }
 
-  rotateViewport() {
+  public rotateViewport(): void {
     this.viewport?.rotate();
   }
 
-  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+  public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
 
-  readonly inputExample = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
+  public readonly inputExample = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
 }

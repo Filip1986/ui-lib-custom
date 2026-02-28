@@ -40,38 +40,40 @@ let inputIdCounter = 0;
   ],
 })
 export class UiLibInput implements ControlValueAccessor {
-  id = input<string | null>(null);
-  name = input<string | null>(null);
-  variant = input<InputVariant | null>(null);
-  size = input<InputSize>('md');
-  type = input<InputType>('text');
-  label = input<string>('');
-  labelFloat = input<InputLabelFloat>('over');
-  placeholder = input<string>('');
-  error = input<string | null>(null);
-  disabled = input<boolean>(false);
-  required = input<boolean>(false);
-  showCounter = input<boolean>(false);
-  maxLength = input<number | null>(null);
-  showClear = input<boolean>(false);
-  showTogglePassword = input<boolean>(false);
+  public readonly id = input<string | null>(null);
+  public readonly name = input<string | null>(null);
+  public readonly variant = input<InputVariant | null>(null);
+  public readonly size = input<InputSize>('md');
+  public readonly type = input<InputType>('text');
+  public readonly label = input<string>('');
+  public readonly labelFloat = input<InputLabelFloat>('over');
+  public readonly placeholder = input<string>('');
+  public readonly error = input<string | null>(null);
+  public readonly disabled = input<boolean>(false);
+  public readonly required = input<boolean>(false);
+  public readonly showCounter = input<boolean>(false);
+  public readonly maxLength = input<number | null>(null);
+  public readonly showClear = input<boolean>(false);
+  public readonly showTogglePassword = input<boolean>(false);
 
-  readonly value = signal<string>('');
-  readonly focused = signal(false);
-  readonly showPassword = signal(false);
+  public readonly value = signal<string>('');
+  public readonly focused = signal(false);
+  public readonly showPassword = signal(false);
   private readonly _disabled = signal(false);
 
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
 
-  readonly controlId = computed<string>(() => this.id() ?? `ui-lib-input-${++inputIdCounter}`);
-  readonly describedById = computed<string | undefined>(() =>
+  public readonly controlId = computed<string>(
+    () => this.id() ?? `ui-lib-input-${++inputIdCounter}`
+  );
+  public readonly describedById = computed<string | undefined>(() =>
     this.error() ? `${this.controlId()}-error` : undefined
   );
-  readonly displayPlaceholder = computed<string>(() =>
+  public readonly displayPlaceholder = computed<string>(() =>
     this.labelFloat() === 'over' ? this.placeholder() : ''
   );
-  readonly inputType = computed<InputType>(() => {
+  public readonly inputType = computed<InputType>(() => {
     if (this.type() === 'password' && this.showTogglePassword()) {
       return this.showPassword() ? 'text' : 'password';
     }
@@ -80,10 +82,10 @@ export class UiLibInput implements ControlValueAccessor {
 
   private readonly themeConfig = inject(ThemeConfigService);
 
-  readonly effectiveVariant = computed<InputVariant>(
+  public readonly effectiveVariant = computed<InputVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
-  readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>(() => {
     const classes: string[] = [
       'ui-input',
       `ui-input-${this.effectiveVariant()}`,
@@ -97,18 +99,18 @@ export class UiLibInput implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  readonly isFloating = computed<boolean>(() => {
+  public readonly isFloating = computed<boolean>(() => {
     const mode: InputLabelFloat = this.labelFloat();
     if (mode === 'over') return false;
     return this.focused() || Boolean(this.value());
   });
-  readonly isDisabled = computed<boolean>(() => this.disabled() || this._disabled());
-  readonly currentLength = computed<number>(() => {
+  public readonly isDisabled = computed<boolean>(() => this.disabled() || this._disabled());
+  public readonly currentLength = computed<number>(() => {
     const value: string = this.value();
     return value.length;
   });
 
-  @ViewChild('inputEl') inputEl?: ElementRef<HTMLInputElement>;
+  @ViewChild('inputEl') public inputEl?: ElementRef<HTMLInputElement>;
 
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
   private previousError: string | null = null;
@@ -118,51 +120,51 @@ export class UiLibInput implements ControlValueAccessor {
       const currentError: string | null = this.error();
 
       if (currentError && currentError !== this.previousError) {
-        this.liveAnnouncer.announceError(currentError);
+        void this.liveAnnouncer.announceError(currentError);
       }
 
       this.previousError = currentError;
     });
   }
 
-  writeValue(obj: unknown): void {
+  public writeValue(obj: unknown): void {
     this.value.set((obj ?? '') as string);
   }
-  registerOnChange(fn: (value: string) => void): void {
+  public registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this._disabled.set(isDisabled);
   }
 
-  onInput(val: string): void {
+  public onInput(val: string): void {
     this.value.set(val);
     this.onChange(val);
   }
 
-  onBlur(): void {
+  public onBlur(): void {
     this.focused.set(false);
     this.onTouched();
   }
 
-  onFocus(): void {
+  public onFocus(): void {
     this.focused.set(true);
   }
 
-  clear(): void {
+  public clear(): void {
     if (this.isDisabled()) return;
     this.onInput('');
   }
 
-  togglePassword(): void {
+  public togglePassword(): void {
     if (this.isDisabled()) return;
     this.showPassword.update((v) => !v);
   }
 
-  focusInput(event?: MouseEvent): void {
+  public focusInput(event?: MouseEvent): void {
     if (event) {
       const target = event.target as HTMLElement;
       if (target.closest('button')) return;

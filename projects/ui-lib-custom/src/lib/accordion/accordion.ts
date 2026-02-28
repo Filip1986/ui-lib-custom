@@ -53,16 +53,16 @@ interface AccordionPanelContext {
 export class Accordion implements AccordionContext {
   private readonly themeConfig = inject(ThemeConfigService);
 
-  variant = input<AccordionVariant | null>(null);
-  size = input<AccordionSize>('md');
-  expandMode = input<AccordionExpandMode>('single');
-  expandedPanels = input<string[]>([]);
-  defaultExpandedPanels = input<string[]>([]);
+  public readonly variant = input<AccordionVariant | null>(null);
+  public readonly size = input<AccordionSize>('md');
+  public readonly expandMode = input<AccordionExpandMode>('single');
+  public readonly expandedPanels = input<string[]>([]);
+  public readonly defaultExpandedPanels = input<string[]>([]);
 
-  expandedChange = output<AccordionChangeEvent>();
-  panelToggle = output<AccordionChangeEvent>();
+  public readonly expandedChange = output<AccordionChangeEvent>();
+  public readonly panelToggle = output<AccordionChangeEvent>();
 
-  readonly panels = contentChildren(AccordionPanel);
+  public readonly panels = contentChildren(AccordionPanel);
 
   private readonly initialExpandedRef: string[] = this.expandedPanels();
   private readonly controlled = signal<boolean>(false);
@@ -98,10 +98,10 @@ export class Accordion implements AccordionContext {
     });
   }
 
-  readonly resolvedVariant = computed<AccordionVariant>(
+  public readonly resolvedVariant = computed<AccordionVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
-  hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>(() => {
     const classes: string[] = [
       'ui-lib-accordion',
       `accordion-variant-${this.resolvedVariant()}`,
@@ -111,7 +111,7 @@ export class Accordion implements AccordionContext {
     return classes.join(' ');
   });
 
-  panelContexts = computed<AccordionPanelContext[]>(() => {
+  public readonly panelContexts = computed<AccordionPanelContext[]>(() => {
     const panels: readonly AccordionPanel[] = this.panels();
     return panels.map((panel, index) => {
       const id: string = this.resolvePanelId(panel);
@@ -125,7 +125,7 @@ export class Accordion implements AccordionContext {
     });
   });
 
-  togglePanel(panelId: string): void {
+  public togglePanel(panelId: string): void {
     const contexts = this.panelContexts();
     const ctx = contexts.find((c) => c.id === panelId);
     if (!ctx || ctx.disabled) {
@@ -162,19 +162,19 @@ export class Accordion implements AccordionContext {
     this.expandedChange.emit(event);
   }
 
-  isPanelExpanded(panelId: string): boolean {
+  public isPanelExpanded(panelId: string): boolean {
     return this.internalExpanded().has(panelId);
   }
 
-  registerPanel(panel: AccordionPanel): void {
+  public registerPanel(panel: AccordionPanel): void {
     this.registeredPanels.add(panel);
   }
 
-  unregisterPanel(panel: AccordionPanel): void {
+  public unregisterPanel(panel: AccordionPanel): void {
     this.registeredPanels.delete(panel);
   }
 
-  onKeydown(event: KeyboardEvent): void {
+  public onKeydown(event: KeyboardEvent): void {
     const key: string = event.key;
     if (key === 'ArrowDown' || key === 'ArrowRight') {
       event.preventDefault();

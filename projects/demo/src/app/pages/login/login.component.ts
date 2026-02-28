@@ -46,27 +46,27 @@ type TabKey = 'variants' | 'api-reference';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
   ];
 
-  activeTab = signal<TabKey>('variants');
+  public readonly activeTab = signal<TabKey>('variants');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  loginLoading = signal(false);
-  activeVariant = signal('variant1');
-  copiedStates = signal<{ [key: string]: boolean }>({});
+  public readonly loginLoading = signal(false);
+  public readonly activeVariant = signal('variant1');
+  public readonly copiedStates = signal<{ [key: string]: boolean }>({});
 
-  eventHandlersCode = `onLogin(data: LoginFormData) {
+  public readonly eventHandlersCode = `onLogin(data: LoginFormData) {
   console.log('Login attempt:', data);
   this.loginLoading.set(true);
 
@@ -93,7 +93,7 @@ onRememberMeChange(checked: boolean) {
   console.log('Remember me:', checked);
 }`;
 
-  variants: LoginVariant[] = [
+  public readonly variants: LoginVariant[] = [
     {
       id: 'variant1',
       title: 'Login Variant 1 - Card Style',
@@ -224,38 +224,39 @@ export class ExampleComponent { }`,
     },
   ];
 
-  selectVariant(variantId: string) {
+  public selectVariant(variantId: string): void {
     this.activeVariant.set(variantId);
   }
 
-  onVariantChange(value: TabsValue | null) {
+  public onVariantChange(value: TabsValue | null): void {
     if (value) {
       this.activeVariant.set(String(value));
     }
   }
 
-  getActiveVariant(): LoginVariant {
+  public getActiveVariant(): LoginVariant {
     return this.variants.find((v) => v.id === this.activeVariant()) || this.variants[0];
   }
 
-  async copyToClipboard(text: string, key: string) {
+  public async copyToClipboard(text: string, key: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(text);
       this.copiedStates.update((s) => ({ ...s, [key]: true }));
       setTimeout(() => {
         this.copiedStates.update((s) => ({ ...s, [key]: false }));
       }, 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error('Failed to copy:', message);
     }
   }
 
-  isCopied(key: string): boolean {
+  public isCopied(key: string): boolean {
     return this.copiedStates()[key] || false;
   }
 
-  onLogin(data: LoginFormData) {
-    console.log('Login attempt:', data);
+  public onLogin(data: LoginFormData): void {
+    console.warn('Login attempt:', data);
     this.loginLoading.set(true);
 
     setTimeout(() => {
@@ -264,23 +265,23 @@ export class ExampleComponent { }`,
     }, 2000);
   }
 
-  onRegister() {
+  public onRegister(): void {
     alert('Register clicked');
   }
 
-  onForgotPassword(username: string) {
+  public onForgotPassword(username: string): void {
     alert(`Password reset requested for: ${username}`);
   }
 
-  onSocialLogin(provider: string) {
+  public onSocialLogin(provider: string): void {
     alert(`Social login with: ${provider}`);
   }
 
-  onRememberMeChange(checked: boolean) {
-    console.log('Remember me:', checked);
+  public onRememberMeChange(checked: boolean): void {
+    console.warn('Remember me:', checked);
   }
 
-  onLoginForm(data: { email: string; password: string; remember: boolean }) {
+  public onLoginForm(data: { email: string; password: string; remember: boolean }): void {
     alert(`Login submitted: ${data.email}\nRemember: ${data.remember}`);
   }
 }

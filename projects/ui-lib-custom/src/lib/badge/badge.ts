@@ -47,22 +47,22 @@ export class Badge {
   private readonly themeConfig = inject(ThemeConfigService);
 
   /** Visual variant of the badge */
-  variant = input<BadgeVariant | null>(null);
+  public readonly variant = input<BadgeVariant | null>(null);
 
   /** Color theme of the badge */
-  color = input<BadgeColor>('primary');
+  public readonly color = input<BadgeColor>('primary');
 
   /** Size of the badge */
-  size = input<BadgeSize>('md');
+  public readonly size = input<BadgeSize>('md');
 
   /** Whether the badge is a pill shape (fully rounded) */
-  pill = input<boolean>(false);
+  public readonly pill = input<boolean>(false);
 
   /** Whether the badge is a dot (small circular indicator) */
-  dot = input<boolean>(false);
+  public readonly dot = input<boolean>(false);
 
   /** Accessible label for the badge, used when screen reader support is needed */
-  label = input<string | null>(null);
+  public readonly label = input<string | null>(null);
 
   private readonly effectiveVariant = computed<BadgeVariant>(() => {
     const direct = this.variant();
@@ -77,7 +77,7 @@ export class Badge {
   });
 
   /** Computed CSS classes for the badge element */
-  badgeClasses = computed<string>(() => {
+  public readonly badgeClasses = computed<string>(() => {
     const classes = [
       'badge',
       `badge-variant-${this.effectiveVariant()}`,
@@ -97,8 +97,10 @@ export class Badge {
   });
 
   /** Computed ARIA label for the badge, falls back to color for dot badges */
-  ariaLabel = computed<string | null>(() => this.label() ?? (this.dot() ? this.color() : null));
+  public readonly ariaLabel = computed<string | null>(
+    () => this.label() ?? (this.dot() ? this.color() : null)
+  );
 
   /** Computed role attribute for the badge, 'status' for dot badges */
-  roleAttr = computed<string | null>(() => (this.dot() ? 'status' : null));
+  public readonly roleAttr = computed<string | null>(() => (this.dot() ? 'status' : null));
 }

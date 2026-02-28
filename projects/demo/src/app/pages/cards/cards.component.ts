@@ -39,6 +39,8 @@ type TabKey =
   | 'performance'
   | 'accessibility';
 
+type ViewportPreset = { key: string; label: string; width: number; height: number };
+
 @Component({
   selector: 'app-cards',
   standalone: true,
@@ -61,7 +63,7 @@ type TabKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
@@ -70,18 +72,18 @@ export class CardsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `import { Card } from 'ui-lib-custom';
 
 @Component({
@@ -96,32 +98,32 @@ export class CardsComponent {
 export class Example {}`,
   } as const;
 
-  readonly cardExample = `<ui-lib-card>
+  public readonly cardExample = `<ui-lib-card>
   <div card-header>Card Title</div>
   Card content
   <div card-footer>Actions</div>
 </ui-lib-card>`;
 
-  variant = signal<CardVariant>('material');
-  elevation = signal<CardElevation>('medium');
-  bordered = signal(false);
-  hoverable = signal(false);
-  title = signal('Card Title');
-  body = signal('Cards can host arbitrary content and actions.');
-  showHeader = signal(true);
-  showFooter = signal(true);
-  headerBg = signal('');
-  footerBg = signal('');
+  public readonly variant = signal<CardVariant>('material');
+  public readonly elevation = signal<CardElevation>('medium');
+  public readonly bordered = signal(false);
+  public readonly hoverable = signal(false);
+  public readonly title = signal('Card Title');
+  public readonly body = signal('Cards can host arbitrary content and actions.');
+  public readonly showHeader = signal(true);
+  public readonly showFooter = signal(true);
+  public readonly headerBg = signal('');
+  public readonly footerBg = signal('');
 
-  useGlobalVariant = signal(true);
-  readonly variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];
-  readonly elevations: CardElevation[] = ['none', 'low', 'medium', 'high'];
+  public readonly useGlobalVariant = signal(true);
+  public readonly variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly elevations: CardElevation[] = ['none', 'low', 'medium', 'high'];
 
   private readonly themeService = inject(ThemeConfigService);
 
-  useLocalTheme = signal(false);
-  localSurface = signal('');
-  localBorder = signal('');
+  public readonly useLocalTheme = signal(false);
+  public readonly localSurface = signal('');
+  public readonly localBorder = signal('');
 
   private readonly globalVars = computed(() => {
     const preset = this.themeService.preset();
@@ -141,31 +143,31 @@ export class Example {}`,
     return vars;
   });
 
-  readonly appliedTheme = computed(() => {
+  public readonly appliedTheme = computed(() => {
     const base = this.globalVars();
     if (!this.useLocalTheme()) return base;
     return { ...base, ...this.localVars() };
   });
 
-  readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter((key) =>
+  public readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter((key) =>
     key.startsWith('shadow-')
   );
-  readonly globalShadow = computed(
+  public readonly globalShadow = computed(
     () =>
       SHADOW_MAP[
         this.themeService.preset().cardShadow ?? this.themeService.preset().shadow ?? ''
       ] ?? 'none'
   );
-  readonly selectedShadow = signal<ShadowKey>(
+  public readonly selectedShadow = signal<ShadowKey>(
     this.resolveShadowKey(
       this.themeService.preset().cardShadow ?? this.themeService.preset().shadow
     )
   );
-  readonly shadowValue = computed(() =>
+  public readonly shadowValue = computed(() =>
     this.useLocalTheme() ? (SHADOW_MAP[this.selectedShadow()] ?? 'none') : this.globalShadow()
   );
 
-  setShadow(value: string) {
+  public setShadow(value: string): void {
     if (SHADOW_MAP[value]) {
       this.selectedShadow.set(value);
     }
@@ -183,19 +185,19 @@ export class Example {}`,
     });
   }
 
-  resetLocalTheme() {
+  public resetLocalTheme(): void {
     this.localSurface.set('');
     this.localBorder.set('');
     this.headerBg.set('');
     this.footerBg.set('');
   }
 
-  selectVariant(v: CardVariant) {
+  public selectVariant(v: CardVariant): void {
     this.useGlobalVariant.set(false);
     this.variant.set(v);
   }
 
-  setFollowThemeVariant(on: boolean) {
+  public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
       const v = this.themeService.preset().variant as CardVariant;
@@ -203,41 +205,41 @@ export class Example {}`,
     }
   }
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  get viewportPresets() {
+  public get viewportPresets(): ViewportPreset[] {
     return this.viewport?.presets() ?? [];
   }
 
-  viewportDisplayWidth() {
+  public viewportDisplayWidth(): number {
     return this.viewport?.displayWidth() ?? 0;
   }
 
-  viewportDisplayHeight() {
+  public viewportDisplayHeight(): number {
     return this.viewport?.displayHeight() ?? 0;
   }
 
-  viewportCustomWidth() {
+  public viewportCustomWidth(): number {
     return this.viewport?.customWidth() ?? 0;
   }
 
-  setViewportCustomWidth(value: number) {
+  public setViewportCustomWidth(value: number): void {
     this.viewport?.setCustomWidth(value);
   }
 
-  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+  public setViewportPreset(preset: ViewportPreset): void {
     this.viewport?.setPreset(preset);
   }
 
-  applyViewportCustom() {
+  public applyViewportCustom(): void {
     this.viewport?.setCustom();
   }
 
-  rotateViewport() {
+  public rotateViewport(): void {
     this.viewport?.rotate();
   }
 
-  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+  public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
 }

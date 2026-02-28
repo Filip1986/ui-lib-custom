@@ -44,28 +44,37 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconsDemoComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  sizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
-  variants = ['material', 'bootstrap', 'minimal'] as const;
-  severities = ['success', 'error', 'warning', 'info'] as const;
-  semanticIcons: SemanticIcon[] = [
+  public readonly sizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+  public readonly variants: readonly ['material', 'bootstrap', 'minimal'] = [
+    'material',
+    'bootstrap',
+    'minimal',
+  ];
+  public readonly severities: readonly ['success', 'error', 'warning', 'info'] = [
+    'success',
+    'error',
+    'warning',
+    'info',
+  ];
+  public readonly semanticIcons: SemanticIcon[] = [
     'close',
     'menu',
     'search',
@@ -83,30 +92,36 @@ export class IconsDemoComponent {
     'bell',
   ];
 
-  loading = signal(false);
-  searchQuery = signal('');
+  public readonly loading = signal(false);
+  public readonly searchQuery = signal('');
 
   private readonly allIcons = SEMANTIC_ICONS;
 
-  filteredIcons = computed(() => {
+  public readonly filteredIcons = computed<SemanticIcon[]>(() => {
     const query = this.searchQuery().toLowerCase();
     if (!query) return this.allIcons;
     return this.allIcons.filter((icon) => icon.toLowerCase().includes(query));
   });
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `<ui-lib-icon name="search" size="lg" variant="material" />`,
   } as const;
 
-  readonly iconExample = `<ui-lib-icon name="search" size="lg" variant="material" />`;
+  public readonly iconExample = `<ui-lib-icon name="search" size="lg" variant="material" />`;
 
-  onSearch(event: Event) {
+  public onSearch(event: Event): void {
     this.searchQuery.set((event.target as HTMLInputElement).value);
   }
 
-  copyIconName(icon: string) {
-    if (navigator?.clipboard?.writeText) {
-      navigator.clipboard.writeText(`<ui-lib-icon name="${icon}" />`);
+  public copyIconName(icon: string): void {
+    if (
+      typeof navigator !== 'undefined' &&
+      navigator.clipboard &&
+      typeof navigator.clipboard.writeText === 'function'
+    ) {
+      void navigator.clipboard.writeText(`<ui-lib-icon name="${icon}" />`).catch((err: unknown) => {
+        console.error(err);
+      });
     }
   }
 }

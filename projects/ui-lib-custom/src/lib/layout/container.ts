@@ -44,28 +44,28 @@ const containerVar = (size: ContainerSize) =>
 })
 export class Container {
   /** Maximum width of the container */
-  size = input<ContainerSize>('lg');
+  public readonly size = input<ContainerSize>('lg');
 
   /** Whether to center the container */
-  centered = input<boolean>(false);
+  public readonly centered = input<boolean>(false);
 
   /**
    * Semantic inset padding using inset tokens (preferred).
    * Accepts t-shirt sizes that map to `--uilib-inset-*` CSS variables.
    */
-  inset = input<Exclude<InsetToken, 'xs'> | null>(null);
+  public readonly inset = input<Exclude<InsetToken, 'xs'> | null>(null);
 
   /** Back-compat horizontal padding using numeric spacing tokens. */
-  padding = input<SpacingToken>(4);
+  public readonly padding = input<SpacingToken>(4);
 
   /** Computed max-width value */
-  protected _maxWidth = computed<string>(() => containerVar(this.size()));
+  protected readonly _maxWidth = computed<string>(() => containerVar(this.size()));
 
   /** Computed centered value (for host binding) */
-  protected _centered = computed<boolean>(() => this.centered());
+  protected readonly _centered = computed<boolean>(() => this.centered());
 
   /** Computed padding value from inset (falls back to numeric padding) */
-  protected _paddingValue = computed<string>(() => {
+  protected readonly _paddingValue = computed<string>(() => {
     const semantic = this.inset();
     if (semantic !== null && semantic !== undefined) {
       return insetVar(semantic as InsetToken);

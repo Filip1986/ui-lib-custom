@@ -39,12 +39,12 @@ let formFieldId = 0;
 export class FormField {
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
 
-  error = input<string | null>(null);
-  hint = input<string | null>(null);
+  public readonly error = input<string | null>(null);
+  public readonly hint = input<string | null>(null);
 
   private readonly uniqueId: string = `form-field-${++formFieldId}`;
-  readonly errorId: string = `${this.uniqueId}-error`;
-  readonly hintId: string = `${this.uniqueId}-hint`;
+  public readonly errorId: string = `${this.uniqueId}-error`;
+  public readonly hintId: string = `${this.uniqueId}-hint`;
 
   private previousError: string | null = null;
 
@@ -53,7 +53,7 @@ export class FormField {
       const currentError: string | null = this.error();
 
       if (currentError && currentError !== this.previousError) {
-        this.liveAnnouncer.announceError(currentError);
+        void this.liveAnnouncer.announceError(currentError);
       }
 
       this.previousError = currentError;
@@ -63,7 +63,7 @@ export class FormField {
   /**
    * Get the ID for aria-describedby
    */
-  get describedById(): string | null {
+  public get describedById(): string | null {
     if (this.error()) return this.errorId;
     if (this.hint()) return this.hintId;
     return null;

@@ -40,7 +40,7 @@ import { CodePreviewComponent } from '../../shared/components/code-preview/code-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutsComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'semantic-spacing', label: 'Semantic Spacing' },
     { id: 'stack', label: 'Stack' },
     { id: 'inline', label: 'Inline' },
@@ -53,16 +53,16 @@ export class LayoutsComponent {
   ];
 
   private readonly viewportSet = new Set<DocDemoViewportComponent>();
-  readonly viewports = signal<DocDemoViewportComponent[]>([]);
+  public readonly viewports = signal<DocDemoViewportComponent[]>([]);
 
-  readonly registerViewport = (viewport: DocDemoViewportComponent): void => {
+  public readonly registerViewport = (viewport: DocDemoViewportComponent): void => {
     if (!this.viewportSet.has(viewport)) {
       this.viewportSet.add(viewport);
       this.viewports.set([...this.viewportSet]);
     }
   };
 
-  readonly unregisterViewport = (viewport: DocDemoViewportComponent): void => {
+  public readonly unregisterViewport = (viewport: DocDemoViewportComponent): void => {
     if (this.viewportSet.delete(viewport)) {
       this.viewports.set([...this.viewportSet]);
     }
@@ -72,23 +72,23 @@ export class LayoutsComponent {
     return this.viewports()[0];
   }
 
-  get viewportPresets(): { key: string; label: string; width: number; height: number }[] {
+  public get viewportPresets(): { key: string; label: string; width: number; height: number }[] {
     return this.primaryViewport()?.presets() ?? [];
   }
 
-  viewportDisplayWidth(): number {
+  public viewportDisplayWidth(): number {
     return this.primaryViewport()?.displayWidth() ?? 0;
   }
 
-  viewportDisplayHeight(): number {
+  public viewportDisplayHeight(): number {
     return this.primaryViewport()?.displayHeight() ?? 0;
   }
 
-  viewportCustomWidth(): number {
+  public viewportCustomWidth(): number {
     return this.primaryViewport()?.customWidth() ?? 0;
   }
 
-  viewportDensity(): 'default' | 'comfortable' | 'compact' {
+  public viewportDensity(): 'default' | 'comfortable' | 'compact' {
     return this.primaryViewport()?.densityValue() ?? 'default';
   }
 
@@ -96,27 +96,32 @@ export class LayoutsComponent {
     this.viewports().forEach(fn);
   }
 
-  setViewportCustomWidth(value: number): void {
+  public setViewportCustomWidth(value: number): void {
     this.forEachViewport((vp: DocDemoViewportComponent) => vp.setCustomWidth(value));
   }
 
-  setViewportPreset(preset: { key: string; label: string; width: number; height: number }): void {
+  public setViewportPreset(preset: {
+    key: string;
+    label: string;
+    width: number;
+    height: number;
+  }): void {
     this.forEachViewport((vp: DocDemoViewportComponent) => vp.setPreset(preset));
   }
 
-  applyViewportCustom(): void {
+  public applyViewportCustom(): void {
     this.forEachViewport((vp: DocDemoViewportComponent) => vp.setCustom());
   }
 
-  rotateViewport(): void {
+  public rotateViewport(): void {
     this.forEachViewport((vp: DocDemoViewportComponent) => vp.rotate());
   }
 
-  setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
+  public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.forEachViewport((vp: DocDemoViewportComponent) => vp.setDensity(value));
   }
 
-  readonly layoutExample = `<ui-lib-stack [gap]="3">
+  public readonly layoutExample = `<ui-lib-stack [gap]="3">
   <ui-lib-card>Card A</ui-lib-card>
   <ui-lib-card>Card B</ui-lib-card>
 </ui-lib-stack>`;

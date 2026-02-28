@@ -47,39 +47,39 @@ export type BadgeSeverity = ButtonSeverity | 'neutral';
 export class Button implements AfterViewChecked {
   private readonly themeConfig = inject(ThemeConfigService);
 
-  variant = input<ButtonVariant | null>(null);
-  appearance = input<ButtonAppearance>('solid');
-  size = input<ButtonSize>('md');
-  color = input<ButtonColor>('primary');
-  severity = input<ButtonSeverity | null>(null);
-  type = input<ButtonType>('button');
-  disabled = input<boolean>(false);
-  loading = input<boolean>(false);
-  fullWidth = input<boolean>(false);
-  iconPosition = input<IconPosition>('left');
-  shadow = input<string | null>(null);
-  icon = input<SemanticIcon | string | null>(null);
-  iconOnly = input<boolean | null>(null);
+  public readonly variant = input<ButtonVariant | null>(null);
+  public readonly appearance = input<ButtonAppearance>('solid');
+  public readonly size = input<ButtonSize>('md');
+  public readonly color = input<ButtonColor>('primary');
+  public readonly severity = input<ButtonSeverity | null>(null);
+  public readonly type = input<ButtonType>('button');
+  public readonly disabled = input<boolean>(false);
+  public readonly loading = input<boolean>(false);
+  public readonly fullWidth = input<boolean>(false);
+  public readonly iconPosition = input<IconPosition>('left');
+  public readonly shadow = input<string | null>(null);
+  public readonly icon = input<SemanticIcon | string | null>(null);
+  public readonly iconOnly = input<boolean | null>(null);
   /** @deprecated Use iconOnly instead. */
-  iconOnlyInput = input<boolean>(false);
-  raised = input<boolean>(false);
-  rounded = input<boolean>(false);
-  text = input<boolean>(false);
-  outlined = input<boolean>(false);
-  link = input<boolean>(false);
-  contrast = input<boolean>(false);
-  badge = input<string | number | null>(null);
-  badgeColor = input<BadgeSeverity>('danger');
-  badgeSeverity = input<BadgeSeverity | null>(null);
-  badgeClass = input<string | null>(null);
-  loadingIcon = input<SemanticIcon | string>('spinner');
-  role = input<string | null>(null);
-  tabIndex = input<number | null>(null);
-  ariaPressed = input<boolean | null>(null);
-  ariaChecked = input<boolean | null>(null);
-  ariaLabel = input<string | null>(null);
+  public readonly iconOnlyInput = input<boolean>(false);
+  public readonly raised = input<boolean>(false);
+  public readonly rounded = input<boolean>(false);
+  public readonly text = input<boolean>(false);
+  public readonly outlined = input<boolean>(false);
+  public readonly link = input<boolean>(false);
+  public readonly contrast = input<boolean>(false);
+  public readonly badge = input<string | number | null>(null);
+  public readonly badgeColor = input<BadgeSeverity>('danger');
+  public readonly badgeSeverity = input<BadgeSeverity | null>(null);
+  public readonly badgeClass = input<string | null>(null);
+  public readonly loadingIcon = input<SemanticIcon | string>('spinner');
+  public readonly role = input<string | null>(null);
+  public readonly tabIndex = input<number | null>(null);
+  public readonly ariaPressed = input<boolean | null>(null);
+  public readonly ariaChecked = input<boolean | null>(null);
+  public readonly ariaLabel = input<string | null>(null);
 
-  readonly focused = signal<boolean>(false);
+  public readonly focused = signal<boolean>(false);
 
   @ViewChild('btnEl') private readonly buttonEl?: ElementRef<HTMLButtonElement>;
 
@@ -98,11 +98,13 @@ export class Button implements AfterViewChecked {
     }
   );
 
-  readonly effectiveVariant = computed<ButtonVariant>(
+  public readonly effectiveVariant = computed<ButtonVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
-  readonly iconOnlyComputed = computed<boolean>(() => this.iconOnly() ?? this.iconOnlyInput());
-  iconSize = computed<IconSize>(() => {
+  public readonly iconOnlyComputed = computed<boolean>(
+    () => this.iconOnly() ?? this.iconOnlyInput()
+  );
+  public readonly iconSize = computed<IconSize>(() => {
     const sizeMap: Record<'small' | 'medium' | 'large', IconSize> = {
       small: 'sm',
       medium: 'md',
@@ -111,14 +113,14 @@ export class Button implements AfterViewChecked {
     return sizeMap[this.normalizedSize()];
   });
 
-  effectiveSeverity = computed<ButtonSeverity>(() => {
+  public readonly effectiveSeverity = computed<ButtonSeverity>(() => {
     const severity: ButtonSeverity = this.contrast()
       ? 'contrast'
       : (this.severity() ?? this.color());
     return severity === 'warn' ? 'warning' : severity;
   });
 
-  effectiveAppearance = computed<ButtonAppearance>(() => {
+  public readonly effectiveAppearance = computed<ButtonAppearance>(() => {
     if (this.text()) {
       return 'ghost';
     }
@@ -130,15 +132,17 @@ export class Button implements AfterViewChecked {
     return this.appearance();
   });
 
-  hasBadge = computed<boolean>(() => this.badge() !== null && this.badge() !== undefined);
+  public readonly hasBadge = computed<boolean>(
+    () => this.badge() !== null && this.badge() !== undefined
+  );
 
-  normalizeBadgeSeverity = computed<BadgeSeverity>(() => {
+  public readonly normalizeBadgeSeverity = computed<BadgeSeverity>(() => {
     const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();
     const normalized: BadgeSeverity = inputSeverity === 'warn' ? 'warning' : inputSeverity;
     return normalized;
   });
 
-  badgeColorResolved = computed<BadgeColor>(() => {
+  public readonly badgeColorResolved = computed<BadgeColor>(() => {
     const severity: BadgeSeverity = this.normalizeBadgeSeverity();
     const allowed: BadgeColor[] = [
       'primary',
@@ -165,7 +169,7 @@ export class Button implements AfterViewChecked {
     return 'neutral';
   });
 
-  buttonClasses = computed<string>(() => {
+  public readonly buttonClasses = computed<string>(() => {
     const classes: string[] = [
       'btn',
       `btn-${this.effectiveVariant()}`,
@@ -230,8 +234,10 @@ export class Button implements AfterViewChecked {
     return classes.join(' ');
   });
 
-  ariaDisabled = computed<boolean | null>(() => (this.disabled() || this.loading() ? true : null));
-  ariaLabelResolved = computed<string | null>(() => {
+  public readonly ariaDisabled = computed<boolean | null>(() =>
+    this.disabled() || this.loading() ? true : null
+  );
+  public readonly ariaLabelResolved = computed<string | null>(() => {
     if (this.loading()) {
       return this.ariaLabel() ?? 'Loading';
     }
@@ -240,13 +246,13 @@ export class Button implements AfterViewChecked {
     }
     return this.ariaLabel();
   });
-  isDisabled = computed<boolean>(() => this.disabled() || this.loading());
+  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.loading());
 
-  setFocused(isFocused: boolean): void {
+  public setFocused(isFocused: boolean): void {
     this.focused.set(isFocused);
   }
 
-  ngAfterViewChecked(): void {
+  public ngAfterViewChecked(): void {
     this.syncFocusState();
   }
 

@@ -49,31 +49,31 @@ let checkboxId = 0;
   },
 })
 export class Checkbox implements ControlValueAccessor {
-  label = input<string | null>(null);
-  description = input<string | null>(null);
-  ariaLabel = input<string | null>(null);
-  variant = input<CheckboxVariant | null>(null);
-  size = input<CheckboxSize>('md');
-  disabled = input<boolean>(false);
-  indeterminate = input<boolean>(false);
+  public readonly label = input<string | null>(null);
+  public readonly description = input<string | null>(null);
+  public readonly ariaLabel = input<string | null>(null);
+  public readonly variant = input<CheckboxVariant | null>(null);
+  public readonly size = input<CheckboxSize>('md');
+  public readonly disabled = input<boolean>(false);
+  public readonly indeterminate = input<boolean>(false);
 
-  readonly checked = model<boolean>(false);
+  public readonly checked = model<boolean>(false);
   private readonly cvaDisabled = signal<boolean>(false);
 
   private onChange: (value: boolean) => void = () => {};
   private onTouched: () => void = () => {};
 
   private readonly controlId = `ui-lib-checkbox-${++checkboxId}`;
-  readonly labelElementId = `${this.controlId}-label`;
-  readonly descriptionElementId = `${this.controlId}-description`;
+  public readonly labelElementId = `${this.controlId}-label`;
+  public readonly descriptionElementId = `${this.controlId}-description`;
 
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
   private readonly themeConfig = inject(ThemeConfigService);
 
-  readonly effectiveVariant = computed<CheckboxVariant>(
+  public readonly effectiveVariant = computed<CheckboxVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
-  readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>(() => {
     const classes = [
       'ui-checkbox',
       `ui-checkbox-variant-${this.effectiveVariant()}`,
@@ -95,36 +95,36 @@ export class Checkbox implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  readonly ariaChecked = computed<string>(() =>
+  public readonly ariaChecked = computed<string>(() =>
     this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false'
   );
-  readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
-  readonly hostTabIndex = computed<number>(() => (this.isDisabled() ? -1 : 0));
-  readonly ariaLabelledby = computed<string | null>(() =>
+  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
+  public readonly hostTabIndex = computed<number>(() => (this.isDisabled() ? -1 : 0));
+  public readonly ariaLabelledby = computed<string | null>(() =>
     this.ariaLabel() ? null : this.labelElementId
   );
-  readonly ariaDescribedby = computed<string | null>(() =>
+  public readonly ariaDescribedby = computed<string | null>(() =>
     this.description() ? this.descriptionElementId : null
   );
-  readonly showDescription = computed<boolean>(() => Boolean(this.description()));
+  public readonly showDescription = computed<boolean>(() => Boolean(this.description()));
 
-  writeValue(value: boolean | null): void {
+  public writeValue(value: boolean | null): void {
     this.checked.set(Boolean(value));
   }
 
-  registerOnChange(fn: (value: boolean) => void): void {
+  public registerOnChange(fn: (value: boolean) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.cvaDisabled.set(isDisabled);
   }
 
-  onToggle(event: Event): void {
+  public onToggle(event: Event): void {
     event.preventDefault();
     if (this.isDisabled()) {
       return;
@@ -136,17 +136,17 @@ export class Checkbox implements ControlValueAccessor {
 
     const label: string = this.label() ?? this.ariaLabel() ?? 'Checkbox';
     const state: string = nextValue ? 'checked' : 'unchecked';
-    this.liveAnnouncer.announce(`${label} ${state}`, 'polite');
+    void this.liveAnnouncer.announce(`${label} ${state}`, 'polite');
   }
 
-  onKeydown(event: KeyboardEvent): void {
+  public onKeydown(event: KeyboardEvent): void {
     if (event.key === ' ' || event.key === 'Enter') {
       event.preventDefault();
       this.onToggle(event);
     }
   }
 
-  onFocusOut(event: FocusEvent): void {
+  public onFocusOut(event: FocusEvent): void {
     const nextTarget: Node | null = event.relatedTarget as Node | null;
     if (nextTarget && (event.currentTarget as HTMLElement).contains(nextTarget)) {
       return;

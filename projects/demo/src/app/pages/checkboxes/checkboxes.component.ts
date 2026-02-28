@@ -19,6 +19,7 @@ import { CodePreviewComponent } from '../../shared/components/code-preview/code-
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
+type ViewportPreset = { key: string; label: string; width: number; height: number };
 
 @Component({
   selector: 'app-checkboxes',
@@ -42,7 +43,7 @@ type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'u
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxesComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
@@ -50,29 +51,29 @@ export class CheckboxesComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  readonly variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
-  readonly sizes: CheckboxSize[] = ['sm', 'md', 'lg'];
+  public readonly variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly sizes: CheckboxSize[] = ['sm', 'md', 'lg'];
 
-  variant = signal<CheckboxVariant>('material');
-  size = signal<CheckboxSize>('md');
-  disabled = signal(false);
-  indeterminate = signal(false);
-  showDescription = signal(true);
-  label = signal('Receive product updates');
-  description = signal('Weekly highlights, delivered every Monday.');
+  public readonly variant = signal<CheckboxVariant>('material');
+  public readonly size = signal<CheckboxSize>('md');
+  public readonly disabled = signal(false);
+  public readonly indeterminate = signal(false);
+  public readonly showDescription = signal(true);
+  public readonly label = signal('Receive product updates');
+  public readonly description = signal('Weekly highlights, delivered every Monday.');
 
-  checkedPrimary = false;
-  checkedSecondary = true;
+  public checkedPrimary: boolean = false;
+  public checkedSecondary: boolean = true;
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  readonly playgroundDescription = computed(() =>
+  public readonly playgroundDescription = computed(() =>
     this.showDescription() ? this.description() : null
   );
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `import { Checkbox } from 'ui-lib-custom';
 
 @Component({
@@ -93,66 +94,66 @@ export class SettingsComponent {
 }`,
   } as const;
 
-  readonly checkboxExample = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
+  public readonly checkboxExample = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
 
-  selectVariant(value: CheckboxVariant): void {
+  public selectVariant(value: CheckboxVariant): void {
     this.variant.set(value);
   }
 
-  selectSize(value: CheckboxSize): void {
+  public selectSize(value: CheckboxSize): void {
     this.size.set(value);
   }
 
-  onPrimaryChange(next: boolean): void {
+  public onPrimaryChange(next: boolean): void {
     this.checkedPrimary = next;
   }
 
-  onSecondaryChange(next: boolean): void {
+  public onSecondaryChange(next: boolean): void {
     this.checkedSecondary = next;
   }
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  get viewportPresets() {
+  public get viewportPresets(): ViewportPreset[] {
     return this.viewport?.presets() ?? [];
   }
 
-  viewportDisplayWidth() {
+  public viewportDisplayWidth(): number {
     return this.viewport?.displayWidth() ?? 0;
   }
 
-  viewportDisplayHeight() {
+  public viewportDisplayHeight(): number {
     return this.viewport?.displayHeight() ?? 0;
   }
 
-  viewportCustomWidth() {
+  public viewportCustomWidth(): number {
     return this.viewport?.customWidth() ?? 0;
   }
 
-  setViewportCustomWidth(value: number) {
+  public setViewportCustomWidth(value: number): void {
     this.viewport?.setCustomWidth(value);
   }
 
-  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+  public setViewportPreset(preset: ViewportPreset): void {
     this.viewport?.setPreset(preset);
   }
 
-  applyViewportCustom() {
+  public applyViewportCustom(): void {
     this.viewport?.setCustom();
   }
 
-  rotateViewport() {
+  public rotateViewport(): void {
     this.viewport?.rotate();
   }
 
-  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+  public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
 }

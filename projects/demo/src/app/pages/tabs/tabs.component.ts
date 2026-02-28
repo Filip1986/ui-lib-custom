@@ -83,7 +83,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsDemoComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
@@ -91,41 +91,41 @@ export class TabsDemoComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('playground');
-  setTab(tab: TabKey): void {
+  public readonly activeTab = signal<TabKey>('playground');
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
   private readonly themeService = inject(ThemeConfigService);
 
-  readonly variants: TabsVariant[] = ['material', 'bootstrap', 'minimal'];
-  readonly sizes: TabsSize[] = ['small', 'medium', 'large'];
-  readonly orientations: TabsOrientation[] = ['horizontal', 'vertical'];
-  readonly aligns: TabsAlignment[] = ['start', 'center', 'end', 'stretch'];
-  readonly lazyModes: TabsLazyMode[] = [false, 'unmount', 'keep-alive'];
+  public readonly variants: TabsVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly sizes: TabsSize[] = ['small', 'medium', 'large'];
+  public readonly orientations: TabsOrientation[] = ['horizontal', 'vertical'];
+  public readonly aligns: TabsAlignment[] = ['start', 'center', 'end', 'stretch'];
+  public readonly lazyModes: TabsLazyMode[] = [false, 'unmount', 'keep-alive'];
 
-  variant = signal<TabsVariant>('material');
-  size = signal<TabsSize>('medium');
-  orientation = signal<TabsOrientation>('horizontal');
-  align = signal<TabsAlignment>('start');
-  closable = signal<boolean>(false);
-  lazy = signal<TabsLazyMode>(false);
-  disabledAll = signal<boolean>(false);
-  scrollable = signal<boolean>(false);
-  menuMode = signal<boolean>(false);
-  perTabLazy = signal<PerTabLazyOption>('inherit');
-  readonly perTabLazyOptions: SelectOption[] = [
+  public readonly variant = signal<TabsVariant>('material');
+  public readonly size = signal<TabsSize>('medium');
+  public readonly orientation = signal<TabsOrientation>('horizontal');
+  public readonly align = signal<TabsAlignment>('start');
+  public readonly closable = signal<boolean>(false);
+  public readonly lazy = signal<TabsLazyMode>(false);
+  public readonly disabledAll = signal<boolean>(false);
+  public readonly scrollable = signal<boolean>(false);
+  public readonly menuMode = signal<boolean>(false);
+  public readonly perTabLazy = signal<PerTabLazyOption>('inherit');
+  public readonly perTabLazyOptions: SelectOption[] = [
     { label: 'Inherit', value: 'inherit' },
     { label: 'Off', value: false },
     { label: 'Unmount', value: 'unmount' },
     { label: 'Keep alive', value: 'keep-alive' },
   ];
 
-  playgroundTabs = signal<DemoTab[]>([
+  public readonly playgroundTabs = signal<DemoTab[]>([
     { value: 'overview', label: 'Overview', content: 'High-level summary of the selected topic.' },
     { value: 'details', label: 'Details', content: 'Deeper dive content for the tab selection.' },
     {
@@ -136,7 +136,7 @@ export class TabsDemoComponent {
     },
   ]);
 
-  iconTabs: DemoTab[] = [
+  public readonly iconTabs: DemoTab[] = [
     { value: 'home', label: 'Home', icon: 'home', content: 'Home overview content.' },
     { value: 'activity', label: 'Activity', icon: 'activity', content: 'Recent activity feed.' },
     {
@@ -147,7 +147,7 @@ export class TabsDemoComponent {
     },
   ];
 
-  iconTextTabs: DemoTab[] = [
+  public readonly iconTextTabs: DemoTab[] = [
     { value: 'profile', label: 'Profile', icon: 'user', content: 'User profile content.' },
     {
       value: 'notifications',
@@ -163,71 +163,76 @@ export class TabsDemoComponent {
     },
   ];
 
-  verticalTabs: DemoTab[] = [
+  public readonly verticalTabs: DemoTab[] = [
     { value: 'analytics', label: 'Analytics', content: 'KPI overview dashboard.' },
     { value: 'reports', label: 'Reports', content: 'Saved and scheduled reports.' },
     { value: 'integrations', label: 'Integrations', content: 'Connected services and APIs.' },
   ];
 
-  closableTabs = signal<DemoTab[]>([
+  public readonly closableTabs = signal<DemoTab[]>([
     { value: 'alpha', label: 'Alpha', closable: true, content: 'Alpha content' },
     { value: 'beta', label: 'Beta', closable: true, content: 'Beta content' },
     { value: 'gamma', label: 'Gamma', closable: true, content: 'Gamma content' },
   ]);
 
-  lazyTabs: DemoTab[] = [
+  public readonly lazyTabs: DemoTab[] = [
     { value: 'summary', label: 'Summary', content: 'Summary content rendered lazily.' },
     { value: 'logs', label: 'Logs', content: 'Log stream loaded on demand.' },
     { value: 'history', label: 'History', content: 'Historical data loaded lazily.' },
   ];
 
-  scrollTabs: DemoTab[] = Array.from({ length: 50 }, (_: unknown, index: number): DemoTab => {
-    const label: string = `Tab ${index + 1}`;
-    return {
-      value: `tab-${index + 1}`,
-      label,
-      content: `${label} content`,
-    };
-  });
+  public readonly scrollTabs: DemoTab[] = Array.from(
+    { length: 50 },
+    (_: unknown, index: number): DemoTab => {
+      const label: string = `Tab ${index + 1}`;
+      return {
+        value: `tab-${index + 1}`,
+        label,
+        content: `${label} content`,
+      };
+    }
+  );
 
-  navTabs: NavTabItem[] = [
+  public readonly navTabs: NavTabItem[] = [
     { value: '/overview', label: 'Overview', icon: 'home' },
     { value: '/billing', label: 'Billing', icon: 'activity' },
     { value: '/usage', label: 'Usage', icon: 'bookmark' },
     { value: '/settings', label: 'Settings', icon: 'settings' },
   ];
-  navActive = signal<string>('/overview');
+  public readonly navActive = signal<string>('/overview');
 
-  controlledTabs: DemoTab[] = [
+  public readonly controlledTabs: DemoTab[] = [
     { value: 'first', label: 'First', content: 'Controlled tab one.' },
     { value: 'second', label: 'Second', content: 'Controlled tab two.' },
     { value: 'third', label: 'Third', content: 'Controlled tab three.' },
   ];
 
-  controlledIndex = signal<number>(0);
-  controlledSelection = computed<number>(() => this.controlledIndex());
+  public readonly controlledIndex = signal<number>(0);
+  public readonly controlledSelection = computed<number>(() => this.controlledIndex());
 
-  readonly playgroundTabsResolved = computed<DemoTab[]>(() =>
+  public readonly playgroundTabsResolved = computed<DemoTab[]>(() =>
     this.scrollable() ? this.scrollTabs : this.playgroundTabs()
   );
 
-  readonly playgroundScrollBehavior = computed<TabsScrollBehavior>(() =>
+  public readonly playgroundScrollBehavior = computed<TabsScrollBehavior>(() =>
     this.scrollable() ? 'arrows' : 'auto'
   );
 
-  readonly playgroundMode = computed<TabsMode>(() => (this.menuMode() ? 'navigation' : 'default'));
+  public readonly playgroundMode = computed<TabsMode>(() =>
+    this.menuMode() ? 'navigation' : 'default'
+  );
 
-  readonly playgroundPerTabLazy = computed<TabsLazyMode | undefined>(() => {
+  public readonly playgroundPerTabLazy = computed<TabsLazyMode | undefined>(() => {
     const selection: PerTabLazyOption = this.perTabLazy();
     return selection === 'inherit' ? undefined : selection;
   });
 
-  track = (_: number, item: unknown): TabsValue | number =>
+  public readonly track = (_: number, item: unknown): TabsValue | number =>
     item && typeof item === 'object' && 'value' in (item as { value?: unknown })
       ? ((item as { value: TabsValue }).value ?? _)
       : _;
 
-  readonly snippets = {
+  public readonly snippets = {
     basic: `<ui-lib-tabs>
   <ui-lib-tab label="Home">Home content</ui-lib-tab>
   <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
@@ -276,9 +281,11 @@ export class TabsDemoComponent {
 </ui-lib-tabs>`,
   } as const;
 
-  readonly appliedTheme = computed(() => this.themeService.getCssVars(this.themeService.preset()));
+  public readonly appliedTheme = computed(() =>
+    this.themeService.getCssVars(this.themeService.preset())
+  );
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
   constructor() {
     effect(() => {
@@ -287,51 +294,51 @@ export class TabsDemoComponent {
     });
   }
 
-  setVariant(variant: TabsVariant): void {
+  public setVariant(variant: TabsVariant): void {
     this.variant.set(variant);
   }
 
-  setSize(size: TabsSize): void {
+  public setSize(size: TabsSize): void {
     this.size.set(size);
   }
 
-  setOrientation(orientation: TabsOrientation): void {
+  public setOrientation(orientation: TabsOrientation): void {
     this.orientation.set(orientation);
   }
 
-  setAlign(align: TabsAlignment): void {
+  public setAlign(align: TabsAlignment): void {
     this.align.set(align);
   }
 
-  setLazy(mode: TabsLazyMode): void {
+  public setLazy(mode: TabsLazyMode): void {
     this.lazy.set(mode);
   }
 
-  setScrollable(enabled: boolean): void {
+  public setScrollable(enabled: boolean): void {
     this.scrollable.set(enabled);
   }
 
-  setMenuMode(enabled: boolean): void {
+  public setMenuMode(enabled: boolean): void {
     this.menuMode.set(enabled);
   }
 
-  setPerTabLazy(selection: PerTabLazyOption): void {
+  public setPerTabLazy(selection: PerTabLazyOption): void {
     this.perTabLazy.set(selection);
   }
 
-  toggleClosable(on: boolean): void {
+  public toggleClosable(on: boolean): void {
     this.closable.set(on);
   }
 
-  toggleDisabled(on: boolean): void {
+  public toggleDisabled(on: boolean): void {
     this.disabledAll.set(on);
   }
 
-  onCloseTab(payload: { value: TabsValue | null; index: number }): void {
+  public onCloseTab(payload: { value: TabsValue | null; index: number }): void {
     this.closableTabs.update((tabs) => tabs.filter((tab) => tab.value !== payload.value));
   }
 
-  resetClosableTabs(): void {
+  public resetClosableTabs(): void {
     this.closableTabs.set([
       { value: 'alpha', label: 'Alpha', closable: true, content: 'Alpha content' },
       { value: 'beta', label: 'Beta', closable: true, content: 'Beta content' },
@@ -339,21 +346,21 @@ export class TabsDemoComponent {
     ]);
   }
 
-  onControlledChange(payload: { value: TabsValue | null; index: number }): void {
+  public onControlledChange(payload: { value: TabsValue | null; index: number }): void {
     this.controlledIndex.set(payload.index);
   }
 
-  onNavigate(value: TabsValue | null): void {
+  public onNavigate(value: TabsValue | null): void {
     if (typeof value === 'string') {
       this.navActive.set(value);
     }
   }
 
-  selectControlled(index: number): void {
+  public selectControlled(index: number): void {
     this.controlledIndex.set(index);
   }
 
-  readonly tabsExample = `<ui-lib-tabs>
+  public readonly tabsExample = `<ui-lib-tabs>
   <ui-lib-tab label="Home">Home content</ui-lib-tab>
   <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
 </ui-lib-tabs>`;

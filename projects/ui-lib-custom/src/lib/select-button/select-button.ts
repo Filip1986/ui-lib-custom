@@ -23,6 +23,7 @@ import {
   SelectButtonItemContext,
   SelectButtonOption,
   SelectButtonSize,
+  SelectButtonValue,
   SelectButtonVariant,
 } from './select-button.types';
 
@@ -63,37 +64,37 @@ export class SelectButton implements ControlValueAccessor {
   private readonly themeConfig = inject(ThemeConfigService);
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  options = input<SelectButtonOption[]>([]);
-  variant = input<SelectButtonVariant | null>(null);
-  value = input<unknown | unknown[] | null>(null);
-  optionLabel = input<string>('label');
-  optionValue = input<string>('value');
-  optionDisabled = input<string>('disabled');
+  public readonly options = input<SelectButtonOption[]>([]);
+  public readonly variant = input<SelectButtonVariant | null>(null);
+  public readonly value = input<SelectButtonValue | SelectButtonValue[] | null>(null);
+  public readonly optionLabel = input<string>('label');
+  public readonly optionValue = input<string>('value');
+  public readonly optionDisabled = input<string>('disabled');
 
-  multiple = input<boolean>(false);
-  allowEmpty = input<boolean>(false);
+  public readonly multiple = input<boolean>(false);
+  public readonly allowEmpty = input<boolean>(false);
 
-  size = input<SelectButtonSize>('md');
-  disabled = input<boolean>(false);
-  invalid = input<boolean>(false);
-  fluid = input<boolean>(false);
+  public readonly size = input<SelectButtonSize>('md');
+  public readonly disabled = input<boolean>(false);
+  public readonly invalid = input<boolean>(false);
+  public readonly fluid = input<boolean>(false);
 
-  ariaLabelledBy = input<string | null>(null);
-  ariaLabel = input<string | null>(null);
+  public readonly ariaLabelledBy = input<string | null>(null);
+  public readonly ariaLabel = input<string | null>(null);
 
-  selectionChange = output<SelectButtonChangeEvent>();
-  valueChange = output<unknown | unknown[]>();
+  public readonly selectionChange = output<SelectButtonChangeEvent>();
+  public readonly valueChange = output<SelectButtonValue | SelectButtonValue[] | null>();
 
-  readonly itemTemplate = contentChild<TemplateRef<SelectButtonItemContext>>('item');
+  public readonly itemTemplate = contentChild<TemplateRef<SelectButtonItemContext>>('item');
 
-  readonly focusedIndex = signal<number>(-1);
-  readonly internalValue = signal<unknown[]>([]);
+  public readonly focusedIndex = signal<number>(-1);
+  public readonly internalValue = signal<SelectButtonValue[]>([]);
   private readonly cvaDisabled = signal<boolean>(false);
 
-  private onCvaChange: (value: unknown | unknown[]) => void = () => {};
+  private onCvaChange: (value: SelectButtonValue | SelectButtonValue[]) => void = () => {};
   private onCvaTouched: () => void = () => {};
 
-  readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
+  public readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
     (): 'small' | 'medium' | 'large' => {
       const size: SelectButtonSize = this.size();
       const map: Record<SelectButtonSize, 'small' | 'medium' | 'large'> = {
@@ -108,12 +109,12 @@ export class SelectButton implements ControlValueAccessor {
     }
   );
 
-  readonly effectiveVariant = computed<SelectButtonVariant>(
+  public readonly effectiveVariant = computed<SelectButtonVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
-  readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
+  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
 
-  readonly activeIndex = computed<number>(() => {
+  public readonly activeIndex = computed<number>(() => {
     const opts: SelectButtonOption[] = this.options();
     const focused: number = this.focusedIndex();
     if (focused >= 0 && focused < opts.length) {
@@ -128,67 +129,67 @@ export class SelectButton implements ControlValueAccessor {
     return this.findFirstEnabledIndex(opts);
   });
 
-  readonly groupRole = computed<string>(() => (this.multiple() ? 'group' : 'radiogroup'));
-  readonly itemRole = computed<string>(() => (this.multiple() ? 'checkbox' : 'radio'));
-  readonly ariaLabelResolved = computed<string | null>(() => {
+  public readonly groupRole = computed<string>(() => (this.multiple() ? 'group' : 'radiogroup'));
+  public readonly itemRole = computed<string>(() => (this.multiple() ? 'checkbox' : 'radio'));
+  public readonly ariaLabelResolved = computed<string | null>(() => {
     if (this.ariaLabelledBy()) {
       return null;
     }
     return this.ariaLabel() ?? 'Select options';
   });
 
-  optionAriaChecked(option: SelectButtonOption): string {
+  public optionAriaChecked(option: SelectButtonOption): string {
     return this.isSelected(option) ? 'true' : 'false';
   }
 
-  writeValue(obj: unknown): void {
-    const next: unknown[] = this.normalizeValues(obj);
+  public writeValue(obj: SelectButtonValue | SelectButtonValue[] | null): void {
+    const next: SelectButtonValue[] = this.normalizeValues(obj);
     this.internalValue.set(next);
   }
 
-  registerOnChange(fn: (value: unknown | unknown[]) => void): void {
+  public registerOnChange(fn: (value: SelectButtonValue | SelectButtonValue[]) => void): void {
     this.onCvaChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onCvaTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.cvaDisabled.set(isDisabled);
   }
 
-  onOptionClick(option: SelectButtonOption, index: number, event: MouseEvent): void {
+  public onOptionClick(option: SelectButtonOption, index: number, event: MouseEvent): void {
     event.preventDefault();
     if (this.isDisabled() || this.isOptionDisabled(option)) return;
     this.focusedIndex.set(index);
     this.toggleOption(option, event);
   }
 
-  tabIndexFor(index: number): number {
+  public tabIndexFor(index: number): number {
     if (this.isDisabled()) return -1;
     return this.activeIndex() === index ? 0 : -1;
   }
 
-  isSelected(option: SelectButtonOption): boolean {
-    const value: unknown = this.resolveValue(option);
-    return this.internalValue().some((v: unknown) => v === value);
+  public isSelected(option: SelectButtonOption): boolean {
+    const value: SelectButtonValue = this.resolveValue(option);
+    return this.internalValue().some((v: SelectButtonValue) => v === value);
   }
 
-  isOptionDisabled(option: SelectButtonOption): boolean {
+  public isOptionDisabled(option: SelectButtonOption): boolean {
     const resolver: string = this.optionDisabled();
     if (resolver) {
-      const fieldValue: unknown = this.readOptionField(option, resolver);
+      const fieldValue: SelectButtonValue | undefined = this.readOptionField(option, resolver);
       return fieldValue === true;
     }
 
     return Boolean(option.disabled);
   }
 
-  resolveLabel(option: SelectButtonOption): string {
+  public resolveLabel(option: SelectButtonOption): string {
     const resolver: string = this.optionLabel();
     if (resolver) {
-      const fieldValue: unknown = this.readOptionField(option, resolver);
+      const fieldValue: SelectButtonValue | undefined = this.readOptionField(option, resolver);
       if (fieldValue !== undefined && fieldValue !== null) {
         return String(fieldValue);
       }
@@ -198,14 +199,14 @@ export class SelectButton implements ControlValueAccessor {
       return String(option.label);
     }
 
-    const fallbackValue: unknown = option.value ?? '';
+    const fallbackValue: SelectButtonValue = option.value ?? '';
     return String(fallbackValue);
   }
 
-  resolveValue(option: SelectButtonOption): unknown {
+  public resolveValue(option: SelectButtonOption): SelectButtonValue {
     const resolver: string = this.optionValue();
     if (resolver) {
-      const fieldValue: unknown = this.readOptionField(option, resolver);
+      const fieldValue: SelectButtonValue | undefined = this.readOptionField(option, resolver);
       if (fieldValue !== undefined) {
         return fieldValue;
       }
@@ -214,28 +215,79 @@ export class SelectButton implements ControlValueAccessor {
     return option.value ?? option.label ?? option;
   }
 
-  trackOption(index: number, option: SelectButtonOption): string | number {
-    const value: unknown = this.resolveValue(option);
+  public trackOption(index: number, option: SelectButtonOption): string | number {
+    const value: SelectButtonValue = this.resolveValue(option);
     if (typeof value === 'string' || typeof value === 'number') {
       return value;
     }
     return index;
   }
 
+  public constructor() {
+    effect((): void => {
+      const inputValue: SelectButtonValue | SelectButtonValue[] | null = this.value();
+      if (inputValue !== null) {
+        this.internalValue.set(this.normalizeValues(inputValue));
+      }
+    });
+  }
+
+  @HostListener('keydown', ['$event'])
+  public onKeydown(event: KeyboardEvent): void {
+    if (this.isDisabled()) return;
+
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        this.moveFocus(1);
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        this.moveFocus(-1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        this.moveFocusToStart();
+        break;
+      case 'End':
+        event.preventDefault();
+        this.moveFocusToEnd();
+        break;
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        this.commitFocused(event);
+        break;
+      default:
+        break;
+    }
+  }
+
+  @HostListener('focusout', ['$event'])
+  public onFocusOut(event: FocusEvent): void {
+    const nextTarget: Node | null = event.relatedTarget as Node | null;
+    if (nextTarget && this.el.nativeElement.contains(nextTarget)) {
+      return;
+    }
+    this.onCvaTouched();
+  }
+
   private toggleOption(option: SelectButtonOption, event: Event): void {
-    const value: unknown = this.resolveValue(option);
+    const value: SelectButtonValue = this.resolveValue(option);
 
     if (this.multiple()) {
-      const current: unknown[] = this.internalValue();
-      const exists: boolean = current.some((v: unknown) => v === value);
-      const next: unknown[] = exists
-        ? current.filter((v: unknown) => v !== value)
+      const current: SelectButtonValue[] = this.internalValue();
+      const exists: boolean = current.some((v: SelectButtonValue) => v === value);
+      const next: SelectButtonValue[] = exists
+        ? current.filter((v: SelectButtonValue) => v !== value)
         : [...current, value];
       this.applySelection(next, event);
       return;
     }
 
-    const currentValue: unknown = this.internalValue()[0] ?? null;
+    const currentValue: SelectButtonValue | null = this.internalValue()[0] ?? null;
     const isSame: boolean = currentValue === value;
     if (isSame && this.allowEmpty()) {
       this.applySelection([], event);
@@ -245,9 +297,11 @@ export class SelectButton implements ControlValueAccessor {
     this.applySelection([value], event);
   }
 
-  private applySelection(nextValues: unknown[], event: Event): void {
+  private applySelection(nextValues: SelectButtonValue[], event: Event): void {
     this.internalValue.set(nextValues);
-    const outputValue: unknown | unknown[] = this.multiple() ? nextValues : (nextValues[0] ?? null);
+    const outputValue: SelectButtonValue | SelectButtonValue[] = this.multiple()
+      ? nextValues
+      : (nextValues[0] ?? null);
 
     this.selectionChange.emit({ originalEvent: event, value: outputValue });
     this.valueChange.emit(outputValue);
@@ -306,7 +360,9 @@ export class SelectButton implements ControlValueAccessor {
     });
   }
 
-  private normalizeValues(value: unknown | unknown[] | null): unknown[] {
+  private normalizeValues(
+    value: SelectButtonValue | SelectButtonValue[] | null
+  ): SelectButtonValue[] {
     if (Array.isArray(value)) {
       return value;
     }
@@ -318,7 +374,7 @@ export class SelectButton implements ControlValueAccessor {
 
   private findSelectedIndex(options: SelectButtonOption[]): number {
     if (this.multiple()) return -1;
-    const currentValue: unknown = this.internalValue()[0] ?? null;
+    const currentValue: SelectButtonValue | null = this.internalValue()[0] ?? null;
     if (currentValue === null || currentValue === undefined) return -1;
 
     for (let i: number = 0; i < options.length; i += 1) {
@@ -361,61 +417,13 @@ export class SelectButton implements ControlValueAccessor {
     return -1;
   }
 
-  private readOptionField(option: SelectButtonOption, field: string): unknown {
+  private readOptionField(
+    option: SelectButtonOption,
+    field: string
+  ): SelectButtonValue | undefined {
     if (option && Object.prototype.hasOwnProperty.call(option, field)) {
       return option[field];
     }
     return undefined;
-  }
-
-  constructor() {
-    effect((): void => {
-      const inputValue: unknown | unknown[] | null = this.value();
-      if (inputValue !== null) {
-        this.internalValue.set(this.normalizeValues(inputValue));
-      }
-    });
-  }
-
-  @HostListener('keydown', ['$event'])
-  onKeydown(event: KeyboardEvent): void {
-    if (this.isDisabled()) return;
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        event.preventDefault();
-        this.moveFocus(1);
-        break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        event.preventDefault();
-        this.moveFocus(-1);
-        break;
-      case 'Home':
-        event.preventDefault();
-        this.moveFocusToStart();
-        break;
-      case 'End':
-        event.preventDefault();
-        this.moveFocusToEnd();
-        break;
-      case ' ':
-      case 'Enter':
-        event.preventDefault();
-        this.commitFocused(event);
-        break;
-      default:
-        break;
-    }
-  }
-
-  @HostListener('focusout', ['$event'])
-  onFocusOut(event: FocusEvent): void {
-    const nextTarget: Node | null = event.relatedTarget as Node | null;
-    if (nextTarget && this.el.nativeElement.contains(nextTarget)) {
-      return;
-    }
-    this.onCvaTouched();
   }
 }

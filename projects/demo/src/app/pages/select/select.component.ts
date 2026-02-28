@@ -36,6 +36,8 @@ type TabKey =
   | 'performance'
   | 'accessibility';
 
+type ViewportPreset = { key: string; label: string; width: number; height: number };
+
 @Component({
   selector: 'app-select',
   standalone: true,
@@ -59,7 +61,7 @@ type TabKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
@@ -68,18 +70,18 @@ export class SelectComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `import { UiLibSelect } from 'ui-lib-custom';
 
 @Component({
@@ -90,22 +92,22 @@ export class SelectComponent {
 export class Example {}`,
   } as const;
 
-  readonly selectExample = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;
+  public readonly selectExample = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;
 
   private readonly themeService = inject(ThemeConfigService);
 
-  variant = signal<SelectVariant>('material');
-  searchable = signal(true);
-  multiple = signal(false);
-  disabled = signal(false);
-  loading = signal(false);
-  placeholder = signal('Choose an option');
-  value = signal<unknown | unknown[] | null>(null);
-  useGlobalVariant = signal(true);
+  public readonly variant = signal<SelectVariant>('material');
+  public readonly searchable = signal(true);
+  public readonly multiple = signal(false);
+  public readonly disabled = signal(false);
+  public readonly loading = signal(false);
+  public readonly placeholder = signal('Choose an option');
+  public readonly value = signal<SelectOption['value'] | SelectOption['value'][] | null>(null);
+  public readonly useGlobalVariant = signal(true);
 
-  variants: SelectVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly variants: SelectVariant[] = ['material', 'bootstrap', 'minimal'];
 
-  options: SelectOption[] = [
+  public readonly options: SelectOption[] = [
     { label: 'Alpha', value: 'alpha', group: 'Group A' },
     { label: 'Beta', value: 'beta', group: 'Group A' },
     { label: 'Gamma', value: 'gamma', group: 'Group A' },
@@ -120,9 +122,9 @@ export class Example {}`,
     return this.themeService.getCssVars(preset);
   });
 
-  readonly appliedTheme = computed(() => this.globalVars());
+  public readonly appliedTheme = computed(() => this.globalVars());
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
   constructor() {
     effect(() => {
@@ -132,48 +134,48 @@ export class Example {}`,
     });
   }
 
-  get viewportPresets() {
+  public get viewportPresets(): ViewportPreset[] {
     return this.viewport?.presets() ?? [];
   }
 
-  viewportDisplayWidth() {
+  public viewportDisplayWidth(): number {
     return this.viewport?.displayWidth() ?? 0;
   }
 
-  viewportDisplayHeight() {
+  public viewportDisplayHeight(): number {
     return this.viewport?.displayHeight() ?? 0;
   }
 
-  viewportCustomWidth() {
+  public viewportCustomWidth(): number {
     return this.viewport?.customWidth() ?? 0;
   }
 
-  setViewportCustomWidth(value: number) {
+  public setViewportCustomWidth(value: number): void {
     this.viewport?.setCustomWidth(value);
   }
 
-  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+  public setViewportPreset(preset: ViewportPreset): void {
     this.viewport?.setPreset(preset);
   }
 
-  applyViewportCustom() {
+  public applyViewportCustom(): void {
     this.viewport?.setCustom();
   }
 
-  rotateViewport() {
+  public rotateViewport(): void {
     this.viewport?.rotate();
   }
 
-  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+  public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
 
-  setVariant(v: SelectVariant) {
+  public setVariant(v: SelectVariant): void {
     this.useGlobalVariant.set(false);
     this.variant.set(v);
   }
 
-  setFollowThemeVariant(on: boolean) {
+  public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
       const v = this.themeService.preset().variant as SelectVariant;
@@ -181,24 +183,24 @@ export class Example {}`,
     }
   }
 
-  toggleMultiple(ev: boolean) {
+  public toggleMultiple(ev: boolean): void {
     this.multiple.set(ev);
     this.value.set(ev ? [] : null);
   }
 
-  toggleSearchable(ev: boolean) {
+  public toggleSearchable(ev: boolean): void {
     this.searchable.set(ev);
   }
 
-  toggleDisabled(ev: boolean) {
+  public toggleDisabled(ev: boolean): void {
     this.disabled.set(ev);
   }
 
-  toggleLoading(ev: boolean) {
+  public toggleLoading(ev: boolean): void {
     this.loading.set(ev);
   }
 
-  onClear() {
+  public onClear(): void {
     this.value.set(this.multiple() ? [] : null);
   }
 }

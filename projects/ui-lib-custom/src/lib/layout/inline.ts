@@ -36,22 +36,22 @@ export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'spac
 })
 export class Inline {
   /** Alignment of items along the cross axis */
-  align = input<InlineAlign>('center');
+  public readonly align = input<InlineAlign>('center');
 
   /** Justification of items along the main axis */
-  justify = input<InlineJustify>('start');
+  public readonly justify = input<InlineJustify>('start');
 
   /**
    * Semantic spacing using inline tokens (preferred).
    * Accepts t-shirt sizes that map to `--uilib-inline-*` CSS variables.
    */
-  spacing = input<InlineToken | SpacingToken | number | null>(null);
+  public readonly spacing = input<InlineToken | SpacingToken | number | null>(null);
 
   /** Back-compat numeric gap using spacing scale (remains supported). */
-  gap = input<SpacingToken>(2);
+  public readonly gap = input<SpacingToken>(2);
 
   /** Computed justify-content value */
-  protected _justifyContent = computed<string>(() => {
+  protected readonly _justifyContent = computed<string>(() => {
     const justifyMap: Record<InlineJustify, string> = {
       start: 'flex-start',
       center: 'center',
@@ -63,7 +63,7 @@ export class Inline {
   });
 
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
-  protected _gapValue = computed<string>(() => {
+  protected readonly _gapValue = computed<string>(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
       return typeof semantic === 'number'

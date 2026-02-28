@@ -72,44 +72,44 @@ interface ScrollMetrics {
 })
 export class Tabs implements OnDestroy, AfterViewInit {
   private static nextId = 0;
-  readonly uid = `ui-lib-tabs-${++Tabs.nextId}`;
+  public readonly uid = `ui-lib-tabs-${++Tabs.nextId}`;
 
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly themeConfig = inject(ThemeConfigService);
 
-  dir = input<'ltr' | 'rtl' | 'auto'>('auto');
-  variant = input<TabsVariant | null>(null);
-  size = input<TabsSize>('md');
-  orientation = input<TabsOrientation>('horizontal');
-  align = input<TabsAlignment>('start');
+  public readonly dir = input<'ltr' | 'rtl' | 'auto'>('auto');
+  public readonly variant = input<TabsVariant | null>(null);
+  public readonly size = input<TabsSize>('md');
+  public readonly orientation = input<TabsOrientation>('horizontal');
+  public readonly align = input<TabsAlignment>('start');
   /** Controls panel rendering vs navigation-only mode. */
-  mode = input<TabsMode>('default');
-  selectedValue = input<TabsValue | null>(null);
-  selectedIndex = input<number | null>(null);
-  defaultValue = input<TabsValue | null>(null);
-  defaultIndex = input<number | null>(null);
+  public readonly mode = input<TabsMode>('default');
+  public readonly selectedValue = input<TabsValue | null>(null);
+  public readonly selectedIndex = input<number | null>(null);
+  public readonly defaultValue = input<TabsValue | null>(null);
+  public readonly defaultIndex = input<number | null>(null);
   /** Global lazy rendering mode; can be overridden per tab. */
-  lazy = input<TabsLazyMode>(false);
+  public readonly lazy = input<TabsLazyMode>(false);
   /** Scroll handling for overflowing tab lists. */
-  scrollBehavior = input<TabsScrollBehavior>('auto');
-  closable = input<boolean>(false);
-  disabled = input<boolean>(false);
+  public readonly scrollBehavior = input<TabsScrollBehavior>('auto');
+  public readonly closable = input<boolean>(false);
+  public readonly disabled = input<boolean>(false);
   /** Moves focus into the active panel on selection. */
-  focusPanelOnSelect = input<boolean>(false);
-  iconPosition = input<'left' | 'top' | 'right'>('left');
+  public readonly focusPanelOnSelect = input<boolean>(false);
+  public readonly iconPosition = input<'left' | 'top' | 'right'>('left');
 
-  selectedChange = output<{ value: TabsValue | null; index: number }>();
-  selectedIndexChange = output<number>();
+  public readonly selectedChange = output<{ value: TabsValue | null; index: number }>();
+  public readonly selectedIndexChange = output<number>();
   /** Emitted when selection occurs in navigation mode. */
-  navigate = output<{ value: TabsValue | null; index: number }>();
-  tabClose = output<{ value: TabsValue | null; index: number }>();
-  tabFocus = output<{ value: TabsValue | null; index: number }>();
+  public readonly navigate = output<{ value: TabsValue | null; index: number }>();
+  public readonly tabClose = output<{ value: TabsValue | null; index: number }>();
+  public readonly tabFocus = output<{ value: TabsValue | null; index: number }>();
 
-  readonly tabs: Signal<readonly Tab[]> = contentChildren(Tab);
+  public readonly tabs: Signal<readonly Tab[]> = contentChildren(Tab);
 
-  @ViewChildren('tabButton') tabButtons?: QueryList<ElementRef<HTMLButtonElement>>;
-  @ViewChild('tabList') tabList?: ElementRef<HTMLElement>;
-  @ViewChildren(TabPanel) tabPanels?: QueryList<TabPanel>;
+  @ViewChildren('tabButton') public tabButtons?: QueryList<ElementRef<HTMLButtonElement>>;
+  @ViewChild('tabList') public tabList?: ElementRef<HTMLElement>;
+  @ViewChildren(TabPanel) public tabPanels?: QueryList<TabPanel>;
 
   private readonly renderedValues = signal<Set<TabsValue | null>>(new Set());
   private readonly overflowDetected = signal<boolean>(false);
@@ -152,7 +152,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     index: -1,
   });
 
-  tabContexts = computed<TabsContextItem[]>(() => {
+  public readonly tabContexts = computed<TabsContextItem[]>(() => {
     const tabs = this.tabs();
     return tabs.map((tab, index): TabsContextItem => {
       const tabLazy = tab.lazy();
@@ -208,7 +208,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     return { value: firstEnabled?.value ?? null, index: firstEnabled?.index ?? -1 };
   });
 
-  activeSelection = computed<TabsSelection>(() =>
+  public readonly activeSelection = computed<TabsSelection>(() =>
     this.controlled() ? this.resolvedSelection() : this.internalSelection()
   );
 
@@ -227,11 +227,11 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
   );
 
-  readonly effectiveVariant = computed<TabsVariant>(
+  public readonly effectiveVariant = computed<TabsVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
 
-  tabsClasses = computed<string>(() => {
+  public readonly tabsClasses = computed<string>(() => {
     const classes = [
       'tabs-root',
       `tabs-${this.effectiveVariant()}`,
@@ -317,12 +317,12 @@ export class Tabs implements OnDestroy, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.setupScrollObservers();
     this.scheduleScrollStateUpdate();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.cancelIndicatorRaf();
     this.cancelScrollRaf();
     this.cancelScrollIntoViewRaf();
@@ -345,7 +345,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Selects a tab and emits selection events. */
-  onSelect(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
+  public onSelect(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
     if (tab.disabled || this.disabled()) {
       return;
     }
@@ -365,7 +365,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Emits focus events and keeps the focused tab in view. */
-  onFocus(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
+  public onFocus(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
     if (tab.disabled || this.disabled()) {
       return;
     }
@@ -374,7 +374,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Emits close events for closable tabs. */
-  onClose(
+  public onClose(
     tab: { value: TabsValue | null; index: number; disabled: boolean },
     event: MouseEvent
   ): void {
@@ -386,22 +386,22 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Returns whether the given index is active. */
-  isActive(index: number): boolean {
+  public isActive(index: number): boolean {
     return this.activeSelection().index === index;
   }
 
   /** Stable DOM id for a tab trigger. */
-  tabId(index: number): string {
+  public tabId(index: number): string {
     return `${this.uid}-tab-${index}`;
   }
 
   /** Stable DOM id for a tab panel. */
-  panelId(index: number): string {
+  public panelId(index: number): string {
     return `${this.uid}-panel-${index}`;
   }
 
   /** Computes tabindex for roving focus. */
-  tabTabIndex(index: number, disabled: boolean): number {
+  public tabTabIndex(index: number, disabled: boolean): number {
     if (disabled || this.disabled()) {
       return -1;
     }
@@ -409,7 +409,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Determines whether a panel should render given the effective lazy mode. */
-  shouldRenderPanel(tab: TabsContextItem): boolean {
+  public shouldRenderPanel(tab: TabsContextItem): boolean {
     if (this.isNavigationMode()) {
       return false;
     }
@@ -431,7 +431,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Handles keyboard navigation for the tab list. */
-  onKeydown(event: KeyboardEvent, currentIndex: number): void {
+  public onKeydown(event: KeyboardEvent, currentIndex: number): void {
     const key = event.key;
     if (key === 'Home') {
       event.preventDefault();
@@ -568,42 +568,42 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Exposes indicator styles for the material variant. */
-  indicatorStyles(): { transform: string; width?: string; height?: string } | null {
+  public indicatorStyles(): { transform: string; width?: string; height?: string } | null {
     return this.indicatorStyle();
   }
 
   /** DOM id for the tablist (used by scroll buttons). */
-  tabListDomId(): string {
+  public tabListDomId(): string {
     return this.tabListId();
   }
 
   /** Whether scroll buttons should render. */
-  shouldShowScrollButtons(): boolean {
+  public shouldShowScrollButtons(): boolean {
     return this.showScrollButtons();
   }
 
   /** Whether the tab list can scroll backward. */
-  canScrollPrevTab(): boolean {
+  public canScrollPrevTab(): boolean {
     return this.canScrollPrev();
   }
 
   /** Whether the tab list can scroll forward. */
-  canScrollNextTab(): boolean {
+  public canScrollNextTab(): boolean {
     return this.canScrollNext();
   }
 
   /** Label for the previous scroll button. */
-  scrollPrevLabel(): string {
+  public scrollPrevLabel(): string {
     return 'Previous tabs';
   }
 
   /** Label for the next scroll button. */
-  scrollNextLabel(): string {
+  public scrollNextLabel(): string {
     return 'Next tabs';
   }
 
   /** Icon name for the previous scroll button. */
-  scrollPrevIcon(): SemanticIcon {
+  public scrollPrevIcon(): SemanticIcon {
     if (this.orientation() === 'vertical') {
       return 'chevron-up';
     }
@@ -611,7 +611,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Icon name for the next scroll button. */
-  scrollNextIcon(): SemanticIcon {
+  public scrollNextIcon(): SemanticIcon {
     if (this.orientation() === 'vertical') {
       return 'chevron-down';
     }
@@ -619,22 +619,22 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   /** Scrolls the tab list backward by one step. */
-  onScrollPrev(): void {
+  public onScrollPrev(): void {
     this.scrollByStep('prev');
   }
 
   /** Scrolls the tab list forward by one step. */
-  onScrollNext(): void {
+  public onScrollNext(): void {
     this.scrollByStep('next');
   }
 
   /** Updates scroll state on manual scroll. */
-  onTabListScrolled(): void {
+  public onTabListScrolled(): void {
     this.onTabListScroll();
   }
 
   /** Returns true when the component is in navigation mode. */
-  isNavigation(): boolean {
+  public isNavigation(): boolean {
     return this.isNavigationMode();
   }
 

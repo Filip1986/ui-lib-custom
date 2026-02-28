@@ -41,39 +41,39 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
 export class ProjectStarterComponent {
   private readonly themeService = inject(ThemeConfigService);
 
-  themeName = signal('my-theme');
-  savedThemes = signal<string[]>([]);
-  selectedSaved = signal('');
-  message = signal('');
+  public readonly themeName = signal('my-theme');
+  public readonly savedThemes = signal<string[]>([]);
+  public readonly selectedSaved = signal('');
+  public readonly message = signal('');
 
-  sampleOptions = [
+  public readonly sampleOptions: { label: string; value: string }[] = [
     { label: 'Alpha', value: 'alpha' },
     { label: 'Beta', value: 'beta' },
     { label: 'Gamma', value: 'gamma' },
   ];
 
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
   constructor() {
     this.refreshSaved();
   }
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  saveTheme(): void {
+  public saveTheme(): void {
     const name = this.themeName().trim();
     if (!name) return;
     this.themeService.saveToLocalStorage(name);
@@ -81,14 +81,14 @@ export class ProjectStarterComponent {
     this.message.set(`Saved theme as "${name}"`);
   }
 
-  loadTheme(name: string): void {
+  public loadTheme(name: string): void {
     if (!name) return;
     this.themeService.loadFromLocalStorage(name);
     this.themeName.set(name);
     this.message.set(`Loaded theme "${name}"`);
   }
 
-  deleteTheme(name: string): void {
+  public deleteTheme(name: string): void {
     this.themeService.deleteSavedTheme(name);
     if (this.selectedSaved() === name) {
       this.selectedSaved.set('');
@@ -97,7 +97,7 @@ export class ProjectStarterComponent {
     this.message.set(`Deleted theme "${name}"`);
   }
 
-  async importTheme(fileList: FileList | null): Promise<void> {
+  public async importTheme(fileList: FileList | null): Promise<void> {
     const file = fileList?.item(0);
     if (!file) return;
     await this.themeService.importFromJSON(file);
@@ -105,7 +105,7 @@ export class ProjectStarterComponent {
     this.message.set(`Imported theme from ${file.name}`);
   }
 
-  exportStarterPackage(): void {
+  public exportStarterPackage(): void {
     const preset = this.themeService.getPreset();
     const json = this.themeService.exportAsJSON(preset);
     const css = this.themeService.exportAsCSS(preset);
@@ -132,7 +132,7 @@ export class ProjectStarterComponent {
     );
   }
 
-  private saveFile(filename: string, content: string, type: string) {
+  private saveFile(filename: string, content: string, type: string): void {
     const blob = new Blob([content], { type });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -146,7 +146,7 @@ export class ProjectStarterComponent {
     this.savedThemes.set(this.themeService.listSavedThemes());
   }
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `import { ThemeConfigService } from 'ui-lib-custom';
 
 constructor(private theme: ThemeConfigService) {}

@@ -49,13 +49,13 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 export class Alert {
   private readonly themeConfig = inject(ThemeConfigService);
 
-  severity = input<'success' | 'error' | 'warning' | 'info'>('info');
-  variant = input<'material' | 'bootstrap' | 'minimal' | null>(null);
-  dismissible = input<boolean>(false);
+  public readonly severity = input<'success' | 'error' | 'warning' | 'info'>('info');
+  public readonly variant = input<'material' | 'bootstrap' | 'minimal' | null>(null);
+  public readonly dismissible = input<boolean>(false);
 
-  dismissed = output<void>();
+  public readonly dismissed = output<void>();
 
-  statusIcon = computed<StatusIcon>(() => {
+  public readonly statusIcon = computed<StatusIcon>(() => {
     const iconMap: Record<string, StatusIcon> = {
       success: 'success',
       error: 'error',
@@ -65,13 +65,15 @@ export class Alert {
     return iconMap[this.severity()];
   });
 
-  readonly effectiveVariant = computed<'material' | 'bootstrap' | 'minimal'>(
+  public readonly effectiveVariant = computed<'material' | 'bootstrap' | 'minimal'>(
     () => this.variant() ?? this.themeConfig.variant()
   );
 
-  hostClasses = computed<string>(() => `alert-${this.effectiveVariant()} alert-${this.severity()}`);
+  public readonly hostClasses = computed<string>(
+    () => `alert-${this.effectiveVariant()} alert-${this.severity()}`
+  );
 
-  onDismiss(): void {
+  public onDismiss(): void {
     this.dismissed.emit();
   }
 }

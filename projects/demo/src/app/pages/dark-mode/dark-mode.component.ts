@@ -44,23 +44,25 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 export class DarkModeComponent {
   private readonly themeService = inject(ThemeConfigService);
 
-  readonly mode = computed<ThemeMode>(() => this.themeService.mode());
-  readonly effectiveTheme = computed<'light' | 'dark'>(() => this.themeService.effectiveTheme());
-  readonly systemPreference = signal<'light' | 'dark'>('light');
+  public readonly mode = computed<ThemeMode>(() => this.themeService.mode());
+  public readonly effectiveTheme = computed<'light' | 'dark'>(() =>
+    this.themeService.effectiveTheme()
+  );
+  public readonly systemPreference = signal<'light' | 'dark'>('light');
 
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'mode', label: 'Theme Mode' },
     { id: 'showcase', label: 'Component Showcase' },
     { id: 'implementation', label: 'Implementation' },
   ];
 
-  readonly selectOptions: SelectOption[] = [
+  public readonly selectOptions: SelectOption[] = [
     { label: 'Option One', value: 'one' },
     { label: 'Option Two', value: 'two' },
     { label: 'Option Three', value: 'three' },
   ];
 
-  readonly usageCode: string = `import { ThemeConfigService, ThemeMode } from 'ui-lib-custom';
+  public readonly usageCode: string = `import { ThemeConfigService, ThemeMode } from 'ui-lib-custom';
 
 @Component({
   // ...
@@ -73,7 +75,7 @@ export class Example {
   }
 }`;
 
-  readonly cssCode: string = `[data-theme="dark"] {
+  public readonly cssCode: string = `[data-theme="dark"] {
   --uilib-surface: #1e1e1e;
   --uilib-page-bg: #121212;
   --uilib-page-fg: rgba(255, 255, 255, 0.87);
@@ -87,11 +89,11 @@ export class Example {
     }
   }
 
-  setMode(mode: ThemeMode): void {
+  public setMode(mode: ThemeMode): void {
     this.themeService.setMode(mode);
   }
 
-  toggleDarkMode(): void {
+  public toggleDarkMode(): void {
     this.themeService.toggleDarkMode();
   }
 }

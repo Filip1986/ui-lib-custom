@@ -44,9 +44,9 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutInlineSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'inline', label: 'Inline' }];
+  public readonly sections: DocSection[] = [{ id: 'inline', label: 'Inline' }];
 
-  readonly usageSnippet: string = `
+  public readonly usageSnippet: string = `
 <ui-lib-inline spacing="sm" justify="center">
   <span class="chip">Tag 1</span>
   <span class="chip">Tag 2</span>
@@ -54,21 +54,21 @@ export class LayoutInlineSectionComponent {
 </ui-lib-inline>
 `;
 
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  readonly spacing = signal<InlineToken>('sm');
-  readonly justify = signal<InlineJustify>('start');
-  readonly align = signal<InlineAlign>('center');
+  public readonly spacing = signal<InlineToken>('sm');
+  public readonly justify = signal<InlineJustify>('start');
+  public readonly align = signal<InlineAlign>('center');
 
-  readonly spacingOptions = this.buildOptions(INLINE_TOKENS);
-  readonly justifyOptions: { label: string; value: InlineJustify }[] = [
+  public readonly spacingOptions = this.buildOptions(INLINE_TOKENS);
+  public readonly justifyOptions: { label: string; value: InlineJustify }[] = [
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
     { label: 'Space Between', value: 'space-between' },
     { label: 'Space Around', value: 'space-around' },
   ];
-  readonly alignOptions: { label: string; value: InlineAlign }[] = [
+  public readonly alignOptions: { label: string; value: InlineAlign }[] = [
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
@@ -76,32 +76,36 @@ export class LayoutInlineSectionComponent {
     { label: 'Stretch', value: 'stretch' },
   ];
 
-  readonly spacingLabel = computed(() => this.displayLabel(this.spacing(), this.spacingOptions));
-  readonly justifyLabel = computed(() => this.displayLabel(this.justify(), this.justifyOptions));
-  readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
+  public readonly spacingLabel = computed(() =>
+    this.displayLabel(this.spacing(), this.spacingOptions)
+  );
+  public readonly justifyLabel = computed(() =>
+    this.displayLabel(this.justify(), this.justifyOptions)
+  );
+  public readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }
 
-  setSpacing(value: InlineToken): void {
+  public setSpacing(value: InlineToken): void {
     this.spacing.set(value);
   }
 
-  setJustify(value: InlineJustify): void {
+  public setJustify(value: InlineJustify): void {
     this.justify.set(value);
   }
 
-  setAlign(value: InlineAlign): void {
+  public setAlign(value: InlineAlign): void {
     this.align.set(value);
   }
 
-  resetControls(): void {
+  public resetControls(): void {
     this.spacing.set('sm');
     this.justify.set('start');
     this.align.set('center');

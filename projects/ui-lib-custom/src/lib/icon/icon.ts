@@ -51,20 +51,20 @@ const hasKnownPrefix = (value: string): boolean => {
 export class Icon {
   private readonly iconService = inject(IconService);
 
-  name = input.required<string | SemanticIcon>();
-  size = input<IconSize>('md');
-  color = input<string | null>(null);
-  clickable = input<boolean>(false);
-  ariaLabel = input<string | null>(null);
-  library = input<IconLibrary | null>(null);
-  variant = input<ComponentVariant | null>(null);
-  semantic = input<boolean>(false);
+  public readonly name = input.required<string | SemanticIcon>();
+  public readonly size = input<IconSize>('md');
+  public readonly color = input<string | null>(null);
+  public readonly clickable = input<boolean>(false);
+  public readonly ariaLabel = input<string | null>(null);
+  public readonly library = input<IconLibrary | null>(null);
+  public readonly variant = input<ComponentVariant | null>(null);
+  public readonly semantic = input<boolean>(false);
 
   private readonly resolvedLibrary = computed<IconLibrary>(() =>
     this.iconService.resolveLibrary(this.library(), this.variant())
   );
 
-  resolvedName = computed<string>(() => {
+  public readonly resolvedName = computed<string>(() => {
     const library = this.resolvedLibrary();
     const raw = this.name();
     const base =
@@ -80,11 +80,11 @@ export class Icon {
     return `${prefix}${baseName}`;
   });
 
-  resolvedSize = computed<string>(() => this.iconService.getIconSize(this.size()));
-  ariaLabelResolved = computed<string | null>(() =>
+  public readonly resolvedSize = computed<string>(() => this.iconService.getIconSize(this.size()));
+  public readonly ariaLabelResolved = computed<string | null>(() =>
     this.clickable() ? (this.ariaLabel() ?? 'Icon') : this.ariaLabel()
   );
-  ariaHidden = computed<string | null>(() =>
+  public readonly ariaHidden = computed<string | null>(() =>
     this.clickable() || this.ariaLabel() ? null : 'true'
   );
 
@@ -92,7 +92,7 @@ export class Icon {
     return SEMANTIC_ICONS.includes(value as SemanticIcon);
   }
 
-  onKeydown(event: KeyboardEvent): void {
+  public onKeydown(event: KeyboardEvent): void {
     if (!this.clickable()) return;
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();

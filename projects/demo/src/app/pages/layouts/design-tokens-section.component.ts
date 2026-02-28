@@ -13,22 +13,22 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutDesignTokensSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'design-tokens', label: 'Design Tokens' }];
+  public readonly sections: DocSection[] = [{ id: 'design-tokens', label: 'Design Tokens' }];
 
-  readonly usageSnippet: string = `
+  public readonly usageSnippet: string = `
 :root {
   --uilib-spacing-md: 16px;
   --uilib-inset-lg: 24px;
 }
 `;
 
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }

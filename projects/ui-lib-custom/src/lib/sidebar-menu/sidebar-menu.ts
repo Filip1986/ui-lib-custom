@@ -31,33 +31,35 @@ export type SidebarVariant = 'classic' | 'compact' | 'modern';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidebarMenu {
-  variant = input<SidebarVariant>('classic');
-  items = input<SidebarMenuItem[]>([]);
-  collapsed = input<boolean>(false);
-  collapsible = input<boolean>(false);
+  public readonly variant = input<SidebarVariant>('classic');
+  public readonly items = input<SidebarMenuItem[]>([]);
+  public readonly collapsed = input<boolean>(false);
+  public readonly collapsible = input<boolean>(false);
 
   private readonly internalCollapsed = signal(false);
 
   private readonly expandedIds = signal<Set<string>>(new Set());
 
-  readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>(() => {
     const classes = ['ui-sidebar', `ui-sidebar-${this.variant()}`];
     if (this.isCollapsed()) classes.push('ui-sidebar-collapsed');
     return classes.join(' ');
   });
 
-  readonly isCollapsed = computed<boolean>(() => this.collapsed() || this.internalCollapsed());
+  public readonly isCollapsed = computed<boolean>(
+    () => this.collapsed() || this.internalCollapsed()
+  );
 
-  toggleCollapse(): void {
+  public toggleCollapse(): void {
     if (!this.collapsible()) return;
     this.internalCollapsed.update((v) => !v);
   }
 
-  isExpanded(id: string): boolean {
+  public isExpanded(id: string): boolean {
     return this.expandedIds().has(id);
   }
 
-  toggleItem(id: string, hasChildren: boolean): void {
+  public toggleItem(id: string, hasChildren: boolean): void {
     if (!hasChildren || this.isCollapsed()) return;
     const next = new Set(this.expandedIds());
     if (next.has(id)) {

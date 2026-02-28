@@ -36,7 +36,7 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScopedThemingComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic Scoped Themes' },
     { id: 'directive', label: 'Directive Usage' },
     { id: 'custom', label: 'Custom Colors' },
@@ -44,14 +44,14 @@ export class ScopedThemingComponent {
     { id: 'usage', label: 'Usage' },
   ];
 
-  readonly customBlueTheme: ThemeScopeConfig = {
+  public readonly customBlueTheme: ThemeScopeConfig = {
     colors: {
       primary: '#1565c0',
       secondary: '#7b1fa2',
     },
   };
 
-  readonly customWarmTheme: ThemeScopeConfig = {
+  public readonly customWarmTheme: ThemeScopeConfig = {
     colors: {
       primary: '#e65100',
       secondary: '#bf360c',
@@ -62,7 +62,7 @@ export class ScopedThemingComponent {
     },
   };
 
-  readonly componentThemeCode = `<!-- String shorthand -->
+  public readonly componentThemeCode = `<!-- String shorthand -->
 <ui-lib-card theme="dark">
   Dark themed card
 </ui-lib-card>
@@ -72,7 +72,7 @@ export class ScopedThemingComponent {
   Dark themed card
 </ui-lib-card>`;
 
-  readonly directiveCode = `<!-- Using directive -->
+  public readonly directiveCode = `<!-- Using directive -->
 <div [uiLibTheme]="'dark'">
   <ui-lib-button>Dark button</ui-lib-button>
 </div>
@@ -82,7 +82,7 @@ export class ScopedThemingComponent {
   <ui-lib-button>Dark button</ui-lib-button>
 </section>`;
 
-  readonly customColorsCode = `// In component
+  public readonly customColorsCode = `// In component
 customTheme: ThemeScopeConfig = {
   colors: {
     primary: '#e65100',

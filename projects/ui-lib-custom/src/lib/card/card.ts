@@ -33,36 +33,36 @@ export type CardElevation = 'none' | 'low' | 'medium' | 'high';
   encapsulation: ViewEncapsulation.None,
 })
 export class Card {
-  variant = input<CardVariant | null>(null);
-  elevation = input<CardElevation>('medium');
-  bordered = input<boolean>(false);
-  hoverable = input<boolean>(false);
-  showHeader = input<boolean | null>(null);
-  showFooter = input<boolean | null>(null);
-  shadow = input<string | null>(null);
-  headerBg = input<string | null>(null);
-  footerBg = input<string | null>(null);
-  headerIcon = input<SemanticIcon | string | null>(null);
-  closable = input<boolean>(false);
-  subtitle = input<string | null>(null);
-  ariaLabel = input<string | null>(null);
+  public readonly variant = input<CardVariant | null>(null);
+  public readonly elevation = input<CardElevation>('medium');
+  public readonly bordered = input<boolean>(false);
+  public readonly hoverable = input<boolean>(false);
+  public readonly showHeader = input<boolean | null>(null);
+  public readonly showFooter = input<boolean | null>(null);
+  public readonly shadow = input<string | null>(null);
+  public readonly headerBg = input<string | null>(null);
+  public readonly footerBg = input<string | null>(null);
+  public readonly headerIcon = input<SemanticIcon | string | null>(null);
+  public readonly closable = input<boolean>(false);
+  public readonly subtitle = input<string | null>(null);
+  public readonly ariaLabel = input<string | null>(null);
 
   /** Optional scoped theme override */
-  theme = input<ThemeScopeInput>(null);
+  public readonly theme = input<ThemeScopeInput>(null);
 
-  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly themeService = inject(ThemeConfigService);
   private readonly appliedVars = new Set<string>();
 
-  closed = output<void>();
+  public readonly closed = output<void>();
 
-  readonly effectiveVariant = computed<CardVariant>(
+  public readonly effectiveVariant = computed<CardVariant>(
     () => this.variant() ?? this.themeService.variant()
   );
-  headerVisible = computed<boolean>(() => this.showHeader() !== false);
-  footerVisible = computed<boolean>(() => this.showFooter() !== false);
+  public readonly headerVisible = computed<boolean>(() => this.showHeader() !== false);
+  public readonly footerVisible = computed<boolean>(() => this.showFooter() !== false);
 
-  cardClasses = computed<string>(() => {
+  public readonly cardClasses = computed<string>(() => {
     const classes = [
       'card',
       `card-${this.effectiveVariant()}`,
@@ -86,11 +86,11 @@ export class Card {
     });
   }
 
-  onClose(): void {
+  public onClose(): void {
     this.closed.emit();
   }
 
-  onKeydown(event: KeyboardEvent): void {
+  public onKeydown(event: KeyboardEvent): void {
     if (!this.hoverable()) return;
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
@@ -136,7 +136,7 @@ export class Card {
   }
 
   private applyVariables(variables: Record<string, string>): void {
-    const element = this.el.nativeElement;
+    const element: HTMLElement = this.el.nativeElement;
     Object.entries(variables).forEach(([key, value]) => {
       const varName = key.startsWith('--') ? key : `--${key}`;
       element.style.setProperty(varName, value);
@@ -145,13 +145,13 @@ export class Card {
   }
 
   private clearThemeScope(): void {
-    const element = this.el.nativeElement;
+    const element: HTMLElement = this.el.nativeElement;
     element.removeAttribute('data-theme');
     element.removeAttribute('data-variant');
   }
 
   private clearAppliedStyles(): void {
-    const element = this.el.nativeElement;
+    const element: HTMLElement = this.el.nativeElement;
     this.appliedVars.forEach((key) => element.style.removeProperty(key));
     this.appliedVars.clear();
     element.removeAttribute('data-variant');

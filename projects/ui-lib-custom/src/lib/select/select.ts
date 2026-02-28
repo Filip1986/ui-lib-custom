@@ -18,10 +18,13 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type SelectVariant = 'material' | 'bootstrap' | 'minimal';
 export type SelectSize = 'sm' | 'md' | 'lg';
+export type SelectValueObject = Record<string, string | number | boolean | null>;
+export type SelectValue = string | number | boolean | null | SelectValueObject;
+export type SelectCvaValue = SelectValue | SelectValue[] | null;
 
 export interface SelectOption {
   label: string;
-  value: unknown;
+  value: SelectValue;
   group?: string;
   disabled?: boolean;
 }
@@ -59,40 +62,40 @@ let selectIdCounter = 0;
   },
 })
 export class UiLibSelect implements ControlValueAccessor {
-  options = input<SelectOption[]>([]);
-  variant = input<SelectVariant | null>(null);
-  size = input<SelectSize>('md');
-  multiple = input<boolean>(false);
-  searchable = input<boolean>(false);
-  placeholder = input<string>('Select...');
-  disabled = input<boolean>(false);
-  loading = input<boolean>(false);
-  optionTemplate = input<TemplateRef<unknown> | null>(null);
-  label = input<string>('');
-  ariaLabel = input<string | null>(null);
-  ariaLabelledBy = input<string | null>(null);
-  invalid = input<boolean>(false);
-  required = input<boolean>(false);
+  public readonly options = input<SelectOption[]>([]);
+  public readonly variant = input<SelectVariant | null>(null);
+  public readonly size = input<SelectSize>('md');
+  public readonly multiple = input<boolean>(false);
+  public readonly searchable = input<boolean>(false);
+  public readonly placeholder = input<string>('Select...');
+  public readonly disabled = input<boolean>(false);
+  public readonly loading = input<boolean>(false);
+  public readonly optionTemplate = input<TemplateRef<unknown> | null>(null);
+  public readonly label = input<string>('');
+  public readonly ariaLabel = input<string | null>(null);
+  public readonly ariaLabelledBy = input<string | null>(null);
+  public readonly invalid = input<boolean>(false);
+  public readonly required = input<boolean>(false);
 
-  @ViewChild('panel', { static: false }) panel?: ElementRef<HTMLDivElement>;
-  @ViewChild('inputEl', { static: false }) inputEl?: ElementRef<HTMLInputElement>;
-  @ViewChild('controlEl', { static: false }) controlEl?: ElementRef<HTMLDivElement>;
+  @ViewChild('panel', { static: false }) public panel?: ElementRef<HTMLDivElement>;
+  @ViewChild('inputEl', { static: false }) public inputEl?: ElementRef<HTMLInputElement>;
+  @ViewChild('controlEl', { static: false }) public controlEl?: ElementRef<HTMLDivElement>;
 
-  readonly open = signal(false);
-  readonly filter = signal('');
-  readonly focusedIndex = signal<number>(-1);
-  readonly internalValue = signal<unknown[] | null>(null);
+  public readonly open = signal(false);
+  public readonly filter = signal('');
+  public readonly focusedIndex = signal<number>(-1);
+  public readonly internalValue = signal<SelectValue[] | null>(null);
   private readonly cvaDisabled = signal(false);
   private readonly themeConfig = inject(ThemeConfigService);
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  private onChange: (value: unknown) => void = () => {};
+  private onChange: (value: SelectCvaValue) => void = () => {};
   private onTouched: () => void = () => {};
 
   private readonly controlIdValue = `ui-lib-select-${++selectIdCounter}`;
-  readonly controlId = computed<string>(() => this.controlIdValue);
-  readonly labelId = computed<string>(() => `${this.controlIdValue}-label`);
-  readonly listboxId = computed<string>(() => `${this.controlIdValue}-listbox`);
+  public readonly controlId = computed<string>(() => this.controlIdValue);
+  public readonly labelId = computed<string>(() => `${this.controlIdValue}-label`);
+  public readonly listboxId = computed<string>(() => `${this.controlIdValue}-listbox`);
 
   private readonly normalizedSize = computed<'sm' | 'md' | 'lg'>((): 'sm' | 'md' | 'lg' => {
     const size: SelectSize = this.size();
@@ -101,24 +104,24 @@ export class UiLibSelect implements ControlValueAccessor {
       md: 'md',
       lg: 'lg',
     };
-    return map[size] ?? 'md';
+    return map[size];
   });
 
-  readonly activeDescendantId = computed<string | null>(() => {
+  public readonly activeDescendantId = computed<string | null>(() => {
     const index: number = this.focusedIndex();
     if (index < 0 || !this.open()) return null;
     return `${this.controlIdValue}-option-${index}`;
   });
 
-  readonly resolvedLabelledBy = computed<string | null>(() => {
+  public readonly resolvedLabelledBy = computed<string | null>(() => {
     if (this.ariaLabelledBy()) return this.ariaLabelledBy();
     return this.label() ? this.labelId() : null;
   });
 
-  readonly effectiveVariant = computed<SelectVariant>(
+  public readonly effectiveVariant = computed<SelectVariant>(
     () => this.variant() ?? this.themeConfig.variant()
   );
-  readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>(() => {
     const classes = [
       'ui-select',
       `ui-select-${this.effectiveVariant()}`,
@@ -129,9 +132,9 @@ export class UiLibSelect implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
+  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
 
-  readonly displayValue = computed<string>(() => {
+  public readonly displayValue = computed<string>(() => {
     const vals = this.internalValue();
     const opts = this.options();
     if (!vals || vals.length === 0) return '';
@@ -139,14 +142,14 @@ export class UiLibSelect implements ControlValueAccessor {
     return labels.join(', ');
   });
 
-  readonly filteredOptions = computed<SelectOption[]>(() => {
+  public readonly filteredOptions = computed<SelectOption[]>(() => {
     const term = this.filter().toLowerCase();
     const opts = this.options();
     if (!term) return opts;
     return opts.filter((o) => o.label.toLowerCase().includes(term));
   });
 
-  readonly groupedOptions = computed<Record<string, SelectOption[]>>(() => {
+  public readonly groupedOptions = computed<Record<string, SelectOption[]>>(() => {
     const groups: Record<string, SelectOption[]> = {};
     this.filteredOptions().forEach((opt) => {
       const key = opt.group ?? '__ungrouped';
@@ -156,34 +159,34 @@ export class UiLibSelect implements ControlValueAccessor {
     return groups;
   });
 
-  readonly groupKeys = computed<string[]>(() => Object.keys(this.groupedOptions()));
-  readonly selectedValues = computed<Set<unknown>>((): Set<unknown> => {
-    const values: unknown[] = this.internalValue() ?? [];
-    return new Set<unknown>(values);
+  public readonly groupKeys = computed<string[]>(() => Object.keys(this.groupedOptions()));
+  public readonly selectedValues = computed<Set<SelectValue>>((): Set<SelectValue> => {
+    const values: SelectValue[] = this.internalValue() ?? [];
+    return new Set<SelectValue>(values);
   });
-  readonly optionIndexMap = computed<Map<SelectOption, number>>(
+  public readonly optionIndexMap = computed<Map<SelectOption, number>>(
     (): Map<SelectOption, number> =>
       new Map<SelectOption, number>(this.filteredOptions().map((opt, index) => [opt, index]))
   );
 
-  writeValue(obj: unknown): void {
+  public writeValue(obj: SelectCvaValue): void {
     if (this.multiple()) {
-      this.internalValue.set(Array.isArray(obj) ? obj : obj == null ? [] : [obj]);
+      this.internalValue.set(Array.isArray(obj) ? obj : obj === null ? [] : [obj]);
     } else {
-      this.internalValue.set(obj == null ? [] : [obj]);
+      this.internalValue.set(obj === null ? [] : [obj]);
     }
   }
-  registerOnChange(fn: (value: unknown) => void): void {
+  public registerOnChange(fn: (value: SelectCvaValue) => void): void {
     this.onChange = fn;
   }
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.cvaDisabled.set(isDisabled);
   }
 
-  togglePanel(): void {
+  public togglePanel(): void {
     if (this.isDisabled() || this.loading()) return;
     this.open.update((v) => !v);
     if (this.open()) {
@@ -193,28 +196,30 @@ export class UiLibSelect implements ControlValueAccessor {
     }
   }
 
-  openPanel(): void {
+  public openPanel(): void {
     if (this.isDisabled() || this.loading()) return;
     this.open.set(true);
     const selectedIndex = this.getSelectedIndex();
     const fallbackIndex = this.findFirstEnabledIndex();
     this.focusedIndex.set(selectedIndex >= 0 ? selectedIndex : fallbackIndex);
-    queueMicrotask(() => this.inputEl?.nativeElement?.focus());
+    queueMicrotask(() => this.inputEl?.nativeElement.focus());
   }
 
-  closePanel(): void {
+  public closePanel(): void {
     this.open.set(false);
     this.focusedIndex.set(-1);
     this.onTouched();
     this.el.nativeElement.focus();
   }
 
-  selectOption(opt: SelectOption): void {
+  public selectOption(opt: SelectOption): void {
     if (opt.disabled || this.isDisabled()) return;
     if (this.multiple()) {
-      const current = this.internalValue() ?? [];
+      const current: SelectValue[] = this.internalValue() ?? [];
       const exists = current.some((v) => v === opt.value);
-      const next = exists ? current.filter((v) => v !== opt.value) : [...current, opt.value];
+      const next: SelectValue[] = exists
+        ? current.filter((v) => v !== opt.value)
+        : [...current, opt.value];
       this.internalValue.set(next);
       this.onChange(next);
     } else {
@@ -224,13 +229,13 @@ export class UiLibSelect implements ControlValueAccessor {
     }
   }
 
-  clear(): void {
+  public clear(): void {
     if (this.isDisabled() || this.loading()) return;
     this.internalValue.set([]);
     this.onChange(this.multiple() ? [] : null);
   }
 
-  moveFocus(delta: number): void {
+  public moveFocus(delta: number): void {
     const opts = this.filteredOptions();
     if (!opts.length) return;
     const maxIndex = opts.length - 1;
@@ -251,7 +256,7 @@ export class UiLibSelect implements ControlValueAccessor {
     this.scrollActiveOptionIntoView();
   }
 
-  setActiveIndex(index: number): void {
+  public setActiveIndex(index: number): void {
     const opts = this.filteredOptions();
     if (!opts.length) return;
     const maxIndex = opts.length - 1;
@@ -263,7 +268,7 @@ export class UiLibSelect implements ControlValueAccessor {
     this.scrollActiveOptionIntoView();
   }
 
-  commitFocused(): void {
+  public commitFocused(): void {
     const idx = this.focusedIndex();
     const opts = this.filteredOptions();
     if (idx >= 0 && idx < opts.length) {
@@ -271,21 +276,21 @@ export class UiLibSelect implements ControlValueAccessor {
     }
   }
 
-  onFilter(term: string): void {
+  public onFilter(term: string): void {
     this.filter.set(term);
     const fallbackIndex = this.findFirstEnabledIndex();
     this.focusedIndex.set(fallbackIndex);
   }
 
   @HostListener('document:click', ['$event'])
-  onDocClick(event: MouseEvent): void {
+  public onDocClick(event: MouseEvent): void {
     if (this.open() && !this.el.nativeElement.contains(event.target as Node)) {
       this.closePanel();
     }
   }
 
   @HostListener('keydown', ['$event'])
-  onKeydown(event: KeyboardEvent): void {
+  public onKeydown(event: KeyboardEvent): void {
     if (this.isDisabled() || this.loading()) return;
 
     switch (event.key) {
@@ -341,6 +346,15 @@ export class UiLibSelect implements ControlValueAccessor {
     }
   }
 
+  public getOptionLabel(opt: SelectOption | SelectValue): string {
+    if (opt && typeof opt === 'object' && 'label' in opt) {
+      return String((opt as SelectOption).label);
+    }
+    return String(opt ?? '');
+  }
+
+  constructor() {}
+
   private handleTypeahead(char: string): void {
     const opts = this.filteredOptions();
     if (!opts.length) return;
@@ -384,13 +398,4 @@ export class UiLibSelect implements ControlValueAccessor {
     const value = selected[0];
     return opts.findIndex((opt) => opt.value === value);
   }
-
-  getOptionLabel(opt: SelectOption | unknown): string {
-    if (opt && typeof opt === 'object' && 'label' in opt) {
-      return String((opt as SelectOption).label ?? '');
-    }
-    return String(opt ?? '');
-  }
-
-  constructor() {}
 }

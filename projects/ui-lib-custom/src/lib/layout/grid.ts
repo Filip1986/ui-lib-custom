@@ -42,28 +42,28 @@ export type GridJustify = 'start' | 'center' | 'end' | 'stretch';
 })
 export class Grid {
   /** Number of columns (using design tokens) */
-  columns = input<GridColumns>(12);
+  public readonly columns = input<GridColumns>(12);
 
   /** Alignment of items along the block axis */
-  align = input<GridAlign>('stretch');
+  public readonly align = input<GridAlign>('stretch');
 
   /** Justification of items along the inline axis */
-  justify = input<GridJustify>('stretch');
+  public readonly justify = input<GridJustify>('stretch');
 
   /**
    * Semantic spacing using stack tokens (preferred for grid gaps).
    * Accepts t-shirt sizes that map to `--uilib-stack-*` CSS variables.
    */
-  spacing = input<StackToken | SpacingToken | number | null>(null);
+  public readonly spacing = input<StackToken | SpacingToken | number | null>(null);
 
   /** Back-compat numeric gap using spacing scale (remains supported). */
-  gap = input<SpacingToken>(4);
+  public readonly gap = input<SpacingToken>(4);
 
   /** Optional minimum column width (enables auto-fit) */
-  minColumnWidth = input<string | undefined>(undefined);
+  public readonly minColumnWidth = input<string | undefined>(undefined);
 
   /** Computed grid-template-columns value */
-  protected _gridTemplateColumns = computed<string>(() => {
+  protected readonly _gridTemplateColumns = computed<string>(() => {
     const minWidth = this.minColumnWidth();
     if (minWidth) {
       // Auto-fit responsive grid
@@ -74,7 +74,7 @@ export class Grid {
   });
 
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
-  protected _gapValue = computed<string>(() => {
+  protected readonly _gapValue = computed<string>(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
       return typeof semantic === 'number'

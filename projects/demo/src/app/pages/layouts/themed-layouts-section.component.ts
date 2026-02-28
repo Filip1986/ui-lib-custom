@@ -23,6 +23,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import { DocSection } from '../../shared/doc-page/doc-section.model';
 
 @Component({
   selector: 'app-layout-themed-layouts-section',
@@ -46,90 +47,99 @@ import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewpor
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutThemedLayoutsSectionComponent {
-  readonly sections = [{ id: 'themed-layouts', label: 'Themed Layouts' }];
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly sections: DocSection[] = [{ id: 'themed-layouts', label: 'Themed Layouts' }];
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  readonly containerSize = signal<ContainerSize>('md');
-  readonly containerInset = signal<Exclude<InsetToken, 'xs'>>('md');
-  readonly stackSpacing = signal<StackToken>('md');
-  readonly inlineSpacing = signal<InlineToken>('sm');
-  readonly gridSpacing = signal<StackToken>('sm');
-  readonly columns = signal<GridColumns>(3);
-  readonly leftTheme = signal<'light' | 'dark'>('light');
-  readonly rightTheme = signal<'light' | 'dark'>('dark');
+  public readonly containerSize = signal<ContainerSize>('md');
+  public readonly containerInset = signal<Exclude<InsetToken, 'xs'>>('md');
+  public readonly stackSpacing = signal<StackToken>('md');
+  public readonly inlineSpacing = signal<InlineToken>('sm');
+  public readonly gridSpacing = signal<StackToken>('sm');
+  public readonly columns = signal<GridColumns>(3);
+  public readonly leftTheme = signal<'light' | 'dark'>('light');
+  public readonly rightTheme = signal<'light' | 'dark'>('dark');
 
-  readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
+  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
     label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
     value: key as ContainerSize,
   }));
-  readonly insetOptions = Object.entries(INSET_TOKENS)
+  public readonly insetOptions = Object.entries(INSET_TOKENS)
     .filter(([key]) => key !== 'xs')
     .map(([key, value]) => ({
       label: `${key} (${value})`,
       value: key as Exclude<InsetToken, 'xs'>,
     }));
-  readonly spacingOptions = this.buildOptions(STACK_TOKENS);
-  readonly inlineSpacingOptions = this.buildOptions(INLINE_TOKENS);
-  readonly columnOptions = [2, 3, 4].map((c) => ({ label: `${c} cols`, value: c as GridColumns }));
-  readonly themeOptions = [
+  public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
+  public readonly inlineSpacingOptions = this.buildOptions(INLINE_TOKENS);
+  public readonly columnOptions = [2, 3, 4].map((c) => ({
+    label: `${c} cols`,
+    value: c as GridColumns,
+  }));
+  public readonly themeOptions = [
     { label: 'Light', value: 'light' },
     { label: 'Dark', value: 'dark' },
   ];
 
-  readonly sizeLabel = computed(() => this.displayLabel(this.containerSize(), this.sizeOptions));
-  readonly insetLabel = computed(() => this.displayLabel(this.containerInset(), this.insetOptions));
-  readonly stackLabel = computed(() => this.displayLabel(this.stackSpacing(), this.spacingOptions));
-  readonly inlineLabel = computed(() =>
+  public readonly sizeLabel = computed(() =>
+    this.displayLabel(this.containerSize(), this.sizeOptions)
+  );
+  public readonly insetLabel = computed(() =>
+    this.displayLabel(this.containerInset(), this.insetOptions)
+  );
+  public readonly stackLabel = computed(() =>
+    this.displayLabel(this.stackSpacing(), this.spacingOptions)
+  );
+  public readonly inlineLabel = computed(() =>
     this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions)
   );
-  readonly gridSpacingLabel = computed(() =>
+  public readonly gridSpacingLabel = computed(() =>
     this.displayLabel(this.gridSpacing(), this.spacingOptions)
   );
-  readonly columnsLabel = computed(() => `${this.columns()} cols`);
-  readonly themePairLabel = computed(() => `${this.leftTheme()} / ${this.rightTheme()}`);
+  public readonly columnsLabel = computed(() => `${this.columns()} cols`);
+  public readonly themePairLabel = computed(() => `${this.leftTheme()} / ${this.rightTheme()}`);
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }
 
-  setContainerSize(value: ContainerSize): void {
+  public setContainerSize(value: ContainerSize): void {
     this.containerSize.set(value);
   }
 
-  setContainerInset(value: Exclude<InsetToken, 'xs'>): void {
+  public setContainerInset(value: Exclude<InsetToken, 'xs'>): void {
     this.containerInset.set(value);
   }
 
-  setStackSpacing(value: StackToken): void {
+  public setStackSpacing(value: StackToken): void {
     this.stackSpacing.set(value);
   }
 
-  setInlineSpacing(value: InlineToken): void {
+  public setInlineSpacing(value: InlineToken): void {
     this.inlineSpacing.set(value);
   }
 
-  setGridSpacing(value: StackToken): void {
+  public setGridSpacing(value: StackToken): void {
     this.gridSpacing.set(value);
   }
 
-  setColumns(value: GridColumns): void {
+  public setColumns(value: GridColumns): void {
     this.columns.set(value);
   }
 
-  setLeftTheme(value: 'light' | 'dark'): void {
+  public setLeftTheme(value: 'light' | 'dark'): void {
     this.leftTheme.set(value);
   }
 
-  setRightTheme(value: 'light' | 'dark'): void {
+  public setRightTheme(value: 'light' | 'dark'): void {
     this.rightTheme.set(value);
   }
 
-  resetControls(): void {
+  public resetControls(): void {
     this.containerSize.set('md');
     this.containerInset.set('md');
     this.stackSpacing.set('md');

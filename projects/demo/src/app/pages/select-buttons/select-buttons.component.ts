@@ -47,7 +47,7 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButtonsComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'multiple', label: 'Multiple' },
     { id: 'custom-template', label: 'Custom Template' },
@@ -61,13 +61,13 @@ export class SelectButtonsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  readonly snippets: { usage: string } = {
+  public readonly snippets: { usage: string } = {
     usage: `import { SelectButton } from 'ui-lib-custom';
 
 @Component({
   standalone: true,
   imports: [SelectButton],
-  template: \`<ui-lib-select-button [options]=\"options\" [(value)]=\"value\" />\`,
+  template: \`<ui-lib-select-button [options]="options" [(value)]="value" />\`,
 })
 export class Example {
   options = [
@@ -78,90 +78,90 @@ export class Example {
 }`,
   };
 
-  readonly selectButtonExample = `<ui-lib-select-button [options]="basicOptions" [(value)]="basicValue" />`;
+  public readonly selectButtonExample = `<ui-lib-select-button [options]="basicOptions" [(value)]="basicValue" />`;
 
   // Basic
-  basicOptions: SelectButtonOption[] = [
+  public readonly basicOptions: SelectButtonOption[] = [
     { label: 'One-Way', value: 'one-way' },
     { label: 'Return', value: 'return' },
   ];
-  basicValue: string = 'one-way';
+  public basicValue: string = 'one-way';
 
   // Multiple
-  multipleOptions: SelectButtonOption[] = [
+  public readonly multipleOptions: SelectButtonOption[] = [
     { label: 'Option 1', value: 1 },
     { label: 'Option 2', value: 2 },
     { label: 'Option 3', value: 3 },
   ];
-  multipleValue: number[] = [1, 2];
+  public multipleValue: number[] = [1, 2];
 
   // With icons
-  justifyOptions: SelectButtonOption[] = [
+  public readonly justifyOptions: SelectButtonOption[] = [
     { label: 'Left', icon: 'align-left', value: 'left' },
     { label: 'Center', icon: 'align-center', value: 'center' },
     { label: 'Right', icon: 'align-right', value: 'right' },
     { label: 'Justify', icon: 'align-justify', value: 'justify' },
   ];
-  justifyValue: string = 'left';
+  public justifyValue: string = 'left';
 
   // Sizes
-  sizeOptions: SelectButtonOption[] = [
+  public readonly sizeOptions: SelectButtonOption[] = [
     { label: 'Small', value: 'sm' },
     { label: 'Medium', value: 'md' },
     { label: 'Large', value: 'lg' },
   ];
-  sizeValue: string = 'md';
+  public sizeValue: string = 'md';
 
   // Fluid
-  fluidOptions: SelectButtonOption[] = [
+  public readonly fluidOptions: SelectButtonOption[] = [
     { label: 'Monthly', value: 'monthly' },
     { label: 'Yearly', value: 'yearly' },
   ];
-  fluidValue: string = 'monthly';
+  public fluidValue: string = 'monthly';
 
   // Disabled
-  disabledOptions: SelectButtonOption[] = [
+  public readonly disabledOptions: SelectButtonOption[] = [
     { label: 'Enabled', value: 'enabled' },
     { label: 'Disabled', value: 'disabled', disabled: true },
   ];
-  disabledValue: string = 'enabled';
+  public disabledValue: string = 'enabled';
 
   // Invalid
-  invalidOptions: SelectButtonOption[] = [
+  public readonly invalidOptions: SelectButtonOption[] = [
     { label: 'Option A', value: 'a' },
     { label: 'Option B', value: 'b' },
   ];
-  invalidValue: string | null = null;
-  invalidTouched: boolean = false;
+  public invalidValue: string | null = null;
+  public invalidTouched: boolean = false;
 
   // Variants
-  variantOptions: SelectButtonOption[] = [
+  public readonly variantOptions: SelectButtonOption[] = [
     { label: 'Daily', value: 'daily' },
     { label: 'Weekly', value: 'weekly' },
     { label: 'Monthly', value: 'monthly' },
   ];
-  materialValue: string = 'daily';
-  bootstrapValue: string = 'daily';
-  minimalValue: string = 'daily';
+  public materialValue: string = 'daily';
+  public bootstrapValue: string = 'daily';
+  public minimalValue: string = 'daily';
 
   // Forms
-  form: FormGroup<{ selection: FormControl<string | null> }> = new FormGroup({
+  public readonly form: FormGroup<{ selection: FormControl<string | null> }> = new FormGroup({
     selection: new FormControl<string | null>('opt1', {
       validators: [Validators.required],
       nonNullable: false,
     }),
   });
-  templateValue: string | null = 'opt1';
-  formOptions: SelectButtonOption[] = [
+  public templateValue: string | null = 'opt1';
+  public readonly formOptions: SelectButtonOption[] = [
     { label: 'Opt 1', value: 'opt1' },
     { label: 'Opt 2', value: 'opt2' },
     { label: 'Opt 3', value: 'opt3' },
   ];
 
-  sizes: SelectButtonSize[] = ['small', 'medium', 'large'];
-  variants: SelectButtonVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly sizes: SelectButtonSize[] = ['small', 'medium', 'large'];
+  public readonly variants: SelectButtonVariant[] = ['material', 'bootstrap', 'minimal'];
 
-  markInvalidTouched(): void {
+  public markInvalidTouched(): void {
     this.invalidTouched = true;
   }
 }

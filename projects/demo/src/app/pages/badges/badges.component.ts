@@ -26,6 +26,8 @@ type TabKey =
   | 'performance'
   | 'accessibility';
 
+type ViewportPreset = { key: string; label: string; width: number; height: number };
+
 @Component({
   selector: 'app-badges',
   standalone: true,
@@ -47,7 +49,7 @@ type TabKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgesComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
@@ -56,26 +58,26 @@ export class BadgesComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  variant = signal<BadgeVariant>('solid');
-  color = signal<BadgeColor>('primary');
-  size = signal<BadgeSize>('md');
-  pill = signal(false);
-  dot = signal(false);
-  text = signal('New');
+  public readonly variant = signal<BadgeVariant>('solid');
+  public readonly color = signal<BadgeColor>('primary');
+  public readonly size = signal<BadgeSize>('md');
+  public readonly pill = signal(false);
+  public readonly dot = signal(false);
+  public readonly text = signal('New');
 
-  readonly variants: BadgeVariant[] = ['solid', 'outline', 'subtle'];
-  readonly colors: BadgeColor[] = [
+  public readonly variants: BadgeVariant[] = ['solid', 'outline', 'subtle'];
+  public readonly colors: BadgeColor[] = [
     'primary',
     'secondary',
     'success',
@@ -84,9 +86,9 @@ export class BadgesComponent {
     'info',
     'neutral',
   ];
-  readonly sizes: BadgeSize[] = ['sm', 'md', 'lg'];
+  public readonly sizes: BadgeSize[] = ['sm', 'md', 'lg'];
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `import { Badge } from 'ui-lib-custom';
 
 @Component({
@@ -96,43 +98,43 @@ export class BadgesComponent {
 })`,
   } as const;
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  get viewportPresets() {
+  public get viewportPresets(): ViewportPreset[] {
     return this.viewport?.presets() ?? [];
   }
 
-  viewportDisplayWidth() {
+  public viewportDisplayWidth(): number {
     return this.viewport?.displayWidth() ?? 0;
   }
 
-  viewportDisplayHeight() {
+  public viewportDisplayHeight(): number {
     return this.viewport?.displayHeight() ?? 0;
   }
 
-  viewportCustomWidth() {
+  public viewportCustomWidth(): number {
     return this.viewport?.customWidth() ?? 0;
   }
 
-  setViewportCustomWidth(value: number) {
+  public setViewportCustomWidth(value: number): void {
     this.viewport?.setCustomWidth(value);
   }
 
-  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+  public setViewportPreset(preset: ViewportPreset): void {
     this.viewport?.setPreset(preset);
   }
 
-  applyViewportCustom() {
+  public applyViewportCustom(): void {
     this.viewport?.setCustom();
   }
 
-  rotateViewport() {
+  public rotateViewport(): void {
     this.viewport?.rotate();
   }
 
-  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+  public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
 
-  readonly badgeExample = `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`;
+  public readonly badgeExample = `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`;
 }

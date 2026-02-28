@@ -36,17 +36,20 @@ export class ThemesComponent {
   private readonly themeService = inject(ThemeConfigService);
   private readonly router = inject(Router);
 
-  readonly sections: DocSection[] = [
+  private readonly initialThemeName: string =
+    this.themeService.preset().name.length > 0 ? this.themeService.preset().name : 'theme';
+
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
   ];
 
-  themeName = signal<string>(this.themeService.preset().name ?? 'theme');
-  status = signal('');
-  activeTab = signal<TabKey>('playground');
+  public readonly themeName = signal<string>(this.initialThemeName);
+  public readonly status = signal('');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  saveTheme(): void {
+  public saveTheme(): void {
     const name = this.themeName().trim();
     if (!name) {
       this.status.set('Enter a name before saving');
@@ -56,20 +59,22 @@ export class ThemesComponent {
     this.status.set(`Saved theme as "${name}"`);
   }
 
-  goToProjectStarter(): void {
-    this.router.navigate(['/project-starter']);
+  public goToProjectStarter(): void {
+    void this.router.navigate(['/project-starter']).catch((err: unknown) => {
+      console.error(err);
+    });
   }
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `<!-- Toggle data-theme on html/body or a container -->
 <button (click)="isDark = !isDark">Toggle theme</button>
 <div [attr.data-theme]="isDark ? 'dark' : 'light'">

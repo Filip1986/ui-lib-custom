@@ -36,30 +36,30 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarMenuDemoComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  variant = signal<SidebarVariant>('classic');
-  collapsed = signal(false);
-  collapsible = signal(false);
+  public readonly variant = signal<SidebarVariant>('classic');
+  public readonly collapsed = signal(false);
+  public readonly collapsible = signal(false);
 
-  variants: SidebarVariant[] = ['classic', 'compact', 'modern'];
+  public readonly variants: SidebarVariant[] = ['classic', 'compact', 'modern'];
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `<ui-lib-sidebar-menu
   variant="classic"
   [items]="items"
@@ -70,7 +70,7 @@ export class SidebarMenuDemoComponent {
 </ui-lib-sidebar-menu>`,
   } as const;
 
-  items: SidebarMenuItem[] = [
+  public readonly items: SidebarMenuItem[] = [
     {
       id: 'dashboard',
       label: 'Dashboard',
@@ -103,7 +103,7 @@ export class SidebarMenuDemoComponent {
     },
   ];
 
-  setVariant(v: SidebarVariant): void {
+  public setVariant(v: SidebarVariant): void {
     this.variant.set(v);
   }
 }

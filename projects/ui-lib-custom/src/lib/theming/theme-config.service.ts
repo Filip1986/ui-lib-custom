@@ -58,12 +58,12 @@ export class ThemeConfigService {
   private readonly presetSignal = signal<ThemePreset>(this.defaultPreset);
   private readonly savedThemesSignal = signal<string[]>(this.listSavedThemeNames());
   private readonly modeSignal = signal<ThemeMode>('auto');
-  readonly variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
-  readonly shape: WritableSignal<ShapeToken> = signal<ShapeToken>('rounded');
-  readonly density: WritableSignal<DensityToken> = signal<DensityToken>('default');
+  private readonly variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
+  private readonly shape: WritableSignal<ShapeToken> = signal<ShapeToken>('rounded');
+  private readonly density: WritableSignal<DensityToken> = signal<DensityToken>('default');
   private mediaQuery: MediaQueryList | null = null;
 
-  readonly preset = computed<ThemePreset>(() => this.presetSignal());
+  private readonly preset = computed<ThemePreset>(() => this.presetSignal());
   readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
   readonly cssVars = computed<Record<string, string>>(() =>
     this.mapPresetToCssVars(this.presetSignal())
@@ -628,24 +628,31 @@ export class ThemeConfigService {
     return this.deepMerge(base, overrides);
   }
 
-  private deepMerge<T>(base: T, patch: DeepPartial<T>): T {
-    const source = patch ?? {};
-    const clone: any = Array.isArray(base) ? [...(base as any)] : { ...(base as any) };
+  private deepMerge<T extends Record<string, unknown> | unknown[]>(
+    base: T,
+    patch: DeepPartial<T>
+  ): T {
+    const source: Record<string, unknown> =
+      (patch as Record<string, unknown> | null | undefined) ?? (Array.isArray(base) ? {} : {});
+    const clone: T = (Array.isArray(base) ? [...base] : { ...base }) as T;
 
     Object.entries(source).forEach(([key, value]) => {
       if (value === undefined) {
         return;
       }
 
-      const existing = (base as any)[key];
+      const existing: unknown = (base as Record<string, unknown>)[key];
       if (value && typeof value === 'object' && !Array.isArray(value)) {
-        clone[key] = this.deepMerge(existing ?? {}, value as any);
+        (clone as Record<string, unknown>)[key] = this.deepMerge(
+          (existing ?? {}) as Record<string, unknown>,
+          value as DeepPartial<Record<string, unknown>>
+        );
       } else {
-        clone[key] = value as any;
+        (clone as Record<string, unknown>)[key] = value as unknown;
       }
     });
 
-    return clone as T;
+    return clone;
   }
 
   private persistConfig(preset: ThemePreset, mode: ThemeMode): void {

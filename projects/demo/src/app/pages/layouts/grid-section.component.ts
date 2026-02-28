@@ -44,9 +44,9 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutGridSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'grid', label: 'Grid' }];
+  public readonly sections: DocSection[] = [{ id: 'grid', label: 'Grid' }];
 
-  readonly usageSnippet: string = `
+  public readonly usageSnippet: string = `
 <ui-lib-grid [columns]="12" spacing="sm">
   <div class="cell">1</div>
   <div class="cell">2</div>
@@ -54,39 +54,39 @@ export class LayoutGridSectionComponent {
 </ui-lib-grid>
 `;
 
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  readonly spacing = signal<StackToken>('md');
-  readonly columns = signal<GridColumns>(4);
-  readonly minWidth = signal<string>('');
-  readonly align = signal<GridAlign>('stretch');
-  readonly justify = signal<GridJustify>('stretch');
-  readonly cardCount = signal<number>(2);
+  public readonly spacing = signal<StackToken>('md');
+  public readonly columns = signal<GridColumns>(4);
+  public readonly minWidth = signal<string>('');
+  public readonly align = signal<GridAlign>('stretch');
+  public readonly justify = signal<GridJustify>('stretch');
+  public readonly cardCount = signal<number>(2);
 
-  readonly spacingOptions = this.buildOptions(STACK_TOKENS);
-  readonly columnOptions = Object.keys(GRID_COLUMNS).map((key) => ({
+  public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
+  public readonly columnOptions = Object.keys(GRID_COLUMNS).map((key) => ({
     label: `${key} cols`,
     value: Number(key) as GridColumns,
   }));
-  readonly minWidthOptions = [
+  public readonly minWidthOptions = [
     { label: 'None (fixed)', value: '' },
     { label: '160px', value: '160px' },
     { label: '200px', value: '200px' },
     { label: '240px', value: '240px' },
   ];
-  readonly alignOptions: { label: string; value: GridAlign }[] = [
+  public readonly alignOptions: { label: string; value: GridAlign }[] = [
     { label: 'Stretch', value: 'stretch' },
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
   ];
-  readonly justifyOptions: { label: string; value: GridJustify }[] = [
+  public readonly justifyOptions: { label: string; value: GridJustify }[] = [
     { label: 'Stretch', value: 'stretch' },
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
   ];
-  readonly cardOptions: { label: string; value: number }[] = Array.from(
+  public readonly cardOptions: { label: string; value: number }[] = Array.from(
     { length: 12 },
     (_, index) => {
       const count = index + 1;
@@ -94,50 +94,56 @@ export class LayoutGridSectionComponent {
     }
   );
 
-  readonly spacingLabel = computed(() => this.displayLabel(this.spacing(), this.spacingOptions));
-  readonly columnLabel = computed(() => `${this.columns()} cols`);
-  readonly minWidthLabel = computed(() => (this.minWidth() ? this.minWidth() : 'Fixed columns'));
-  readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
-  readonly justifyLabel = computed(() => this.displayLabel(this.justify(), this.justifyOptions));
-  readonly cardLabel = computed(() => `${this.cardCount()} cards`);
-  readonly cardRange = computed(() =>
+  public readonly spacingLabel = computed(() =>
+    this.displayLabel(this.spacing(), this.spacingOptions)
+  );
+  public readonly columnLabel = computed(() => `${this.columns()} cols`);
+  public readonly minWidthLabel = computed(() =>
+    this.minWidth() ? this.minWidth() : 'Fixed columns'
+  );
+  public readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
+  public readonly justifyLabel = computed(() =>
+    this.displayLabel(this.justify(), this.justifyOptions)
+  );
+  public readonly cardLabel = computed(() => `${this.cardCount()} cards`);
+  public readonly cardRange = computed(() =>
     Array.from({ length: this.cardCount() }, (_, index) => index + 1)
   );
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }
 
-  setSpacing(value: StackToken): void {
+  public setSpacing(value: StackToken): void {
     this.spacing.set(value);
   }
 
-  setColumns(value: GridColumns): void {
+  public setColumns(value: GridColumns): void {
     this.columns.set(value);
   }
 
-  setMinWidth(value: string): void {
+  public setMinWidth(value: string): void {
     this.minWidth.set(value);
   }
 
-  setAlign(value: GridAlign): void {
+  public setAlign(value: GridAlign): void {
     this.align.set(value);
   }
 
-  setJustify(value: GridJustify): void {
+  public setJustify(value: GridJustify): void {
     this.justify.set(value);
   }
 
-  setCardCount(value: number): void {
+  public setCardCount(value: number): void {
     this.cardCount.set(value);
   }
 
-  resetControls(): void {
+  public resetControls(): void {
     this.spacing.set('md');
     this.columns.set(4);
     this.minWidth.set('');

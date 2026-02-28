@@ -34,19 +34,21 @@ import { SemanticIcon } from '../icon/icon.semantics';
   },
 })
 export class IconButton {
-  icon = input.required<SemanticIcon | string>();
-  size = input<'sm' | 'md' | 'lg'>('md');
-  variant = input<'material' | 'bootstrap' | 'minimal'>('material');
-  color = input<'primary' | 'secondary' | 'danger' | 'success' | 'warning' | null>(null);
-  disabled = input<boolean>(false);
-  ariaLabel = input<string | null>(null);
+  public readonly icon = input.required<SemanticIcon | string>();
+  public readonly size = input<'sm' | 'md' | 'lg'>('md');
+  public readonly variant = input<'material' | 'bootstrap' | 'minimal'>('material');
+  public readonly color = input<'primary' | 'secondary' | 'danger' | 'success' | 'warning' | null>(
+    null
+  );
+  public readonly disabled = input<boolean>(false);
+  public readonly ariaLabel = input<string | null>(null);
 
-  iconSize = computed<IconSize>(() => {
-    const map = { sm: 'sm', md: 'md', lg: 'lg' } as const;
+  public readonly iconSize = computed<IconSize>(() => {
+    const map: Record<'sm' | 'md' | 'lg', IconSize> = { sm: 'sm', md: 'md', lg: 'lg' };
     return map[this.size()];
   });
 
-  hostClasses = computed<string>(() =>
+  public readonly hostClasses = computed<string>(() =>
     [
       `icon-button-${this.variant()}`,
       `icon-button-${this.size()}`,

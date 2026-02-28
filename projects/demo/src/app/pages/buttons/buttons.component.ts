@@ -44,6 +44,7 @@ type TabKey =
   | 'performance'
   | 'examples'
   | 'accessibility';
+type ViewportPreset = { key: string; label: string; width: number; height: number };
 
 @Component({
   selector: 'app-buttons',
@@ -71,7 +72,7 @@ type TabKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonsComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'api-reference', label: 'API Reference' },
@@ -81,18 +82,18 @@ export class ButtonsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `import { Button } from 'ui-lib-custom';
 
 @Component({
@@ -105,25 +106,25 @@ export class Example {}`,
 
   private readonly themeService = inject(ThemeConfigService);
 
-  variant = signal<ButtonVariant>('material');
-  appearance = signal<ButtonAppearance>('solid');
-  size = signal<ButtonSize>('medium');
-  color = signal<ButtonColor>('primary');
-  disabled = signal(false);
-  loading = signal(false);
-  fullWidth = signal(false);
-  iconPosition = signal<IconPosition>('left');
-  label = signal('Click me');
+  public readonly variant = signal<ButtonVariant>('material');
+  public readonly appearance = signal<ButtonAppearance>('solid');
+  public readonly size = signal<ButtonSize>('medium');
+  public readonly color = signal<ButtonColor>('primary');
+  public readonly disabled = signal(false);
+  public readonly loading = signal(false);
+  public readonly fullWidth = signal(false);
+  public readonly iconPosition = signal<IconPosition>('left');
+  public readonly label = signal('Click me');
 
-  useGlobalVariant = signal(true);
-  useLocalTheme = signal(false);
-  localPrimary = signal('');
-  localSurface = signal('');
+  public readonly useGlobalVariant = signal(true);
+  public readonly useLocalTheme = signal(false);
+  public readonly localPrimary = signal('');
+  public readonly localSurface = signal('');
 
-  readonly variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
-  readonly appearances: ButtonAppearance[] = ['solid', 'outline', 'ghost'];
-  readonly sizes: ButtonSize[] = ['small', 'medium', 'large'];
-  readonly colors: ButtonColor[] = [
+  public readonly variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly appearances: ButtonAppearance[] = ['solid', 'outline', 'ghost'];
+  public readonly sizes: ButtonSize[] = ['small', 'medium', 'large'];
+  public readonly colors: ButtonColor[] = [
     'primary',
     'secondary',
     'success',
@@ -133,7 +134,7 @@ export class Example {}`,
     'danger',
     'contrast',
   ];
-  readonly severities: ButtonSeverity[] = [
+  public readonly severities: ButtonSeverity[] = [
     'primary',
     'secondary',
     'success',
@@ -143,8 +144,8 @@ export class Example {}`,
     'danger',
     'contrast',
   ];
-  readonly iconPositions: IconPosition[] = ['left', 'right', 'top', 'bottom'];
-  readonly demoIcon = signal('search');
+  public readonly iconPositions: IconPosition[] = ['left', 'right', 'top', 'bottom'];
+  public readonly demoIcon = signal('search');
 
   private readonly globalVars = computed(() => {
     const preset = this.themeService.preset();
@@ -164,7 +165,7 @@ export class Example {}`,
     return vars;
   });
 
-  readonly appliedTheme = computed(() => {
+  public readonly appliedTheme = computed(() => {
     const base = this.globalVars();
     if (!this.useLocalTheme()) return base;
     return { ...base, ...this.localVars() };
@@ -178,17 +179,17 @@ export class Example {}`,
     });
   }
 
-  resetLocalTheme() {
+  public resetLocalTheme(): void {
     this.localPrimary.set('');
     this.localSurface.set('');
   }
 
-  selectVariant(v: ButtonVariant) {
+  public selectVariant(v: ButtonVariant): void {
     this.useGlobalVariant.set(false);
     this.variant.set(v);
   }
 
-  setFollowThemeVariant(on: boolean) {
+  public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
       const v = this.themeService.preset().variant as ButtonVariant;
@@ -196,43 +197,43 @@ export class Example {}`,
     }
   }
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  get viewportPresets() {
+  public get viewportPresets(): ViewportPreset[] {
     return this.viewport?.presets() ?? [];
   }
 
-  viewportDisplayWidth() {
+  public viewportDisplayWidth(): number {
     return this.viewport?.displayWidth() ?? 0;
   }
 
-  viewportDisplayHeight() {
+  public viewportDisplayHeight(): number {
     return this.viewport?.displayHeight() ?? 0;
   }
 
-  viewportCustomWidth() {
+  public viewportCustomWidth(): number {
     return this.viewport?.customWidth() ?? 0;
   }
 
-  setViewportCustomWidth(value: number) {
+  public setViewportCustomWidth(value: number): void {
     this.viewport?.setCustomWidth(value);
   }
 
-  setViewportPreset(preset: { key: string; label: string; width: number; height: number }) {
+  public setViewportPreset(preset: ViewportPreset): void {
     this.viewport?.setPreset(preset);
   }
 
-  applyViewportCustom() {
+  public applyViewportCustom(): void {
     this.viewport?.setCustom();
   }
 
-  rotateViewport() {
+  public rotateViewport(): void {
     this.viewport?.rotate();
   }
 
-  setViewportDensity(value: 'default' | 'comfortable' | 'compact') {
+  public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.viewport?.setDensity(value);
   }
 
-  readonly buttonExample = `<ui-lib-button color="primary">Primary Button</ui-lib-button>`;
+  public readonly buttonExample = `<ui-lib-button color="primary">Primary Button</ui-lib-button>`;
 }

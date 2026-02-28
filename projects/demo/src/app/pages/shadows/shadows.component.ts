@@ -35,24 +35,24 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShadowsComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
   ];
 
-  activeTab = signal<TabKey>('playground');
+  public readonly activeTab = signal<TabKey>('playground');
 
-  setTab(tab: TabKey) {
+  public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null) {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as TabKey);
   }
 
-  readonly snippets = {
+  public readonly snippets = {
     usage: `/* Use CSS var with your component */
 .my-card {
   box-shadow: var(--uilib-card-shadow-medium);
@@ -64,9 +64,9 @@ export class ShadowsComponent {
 }`,
   } as const;
 
-  readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
+  public readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
 
-  readonly examples: ElevationExample[] = Object.entries(this.shadowValues)
+  public readonly examples: ElevationExample[] = Object.entries(this.shadowValues)
     .filter(([key]) => key.startsWith('shadow-'))
     .map(([key, value]) => {
       const level = Number(key.split('-')[1]);

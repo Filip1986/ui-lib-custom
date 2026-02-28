@@ -13,7 +13,7 @@ import { DocSection } from '../../shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'quick-links', label: 'Quick Links' },
     { id: 'features', label: 'Features' },
     { id: 'quick-preview', label: 'Quick Preview' },

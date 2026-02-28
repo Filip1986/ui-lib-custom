@@ -42,30 +42,30 @@ export type StackJustify =
 })
 export class Stack {
   /** Direction of the stack layout */
-  direction = input<StackDirection>('vertical');
+  public readonly direction = input<StackDirection>('vertical');
 
   /** Alignment of items along the cross axis */
-  align = input<StackAlign>('stretch');
+  public readonly align = input<StackAlign>('stretch');
 
   /** Justification of items along the main axis */
-  justify = input<StackJustify>('start');
+  public readonly justify = input<StackJustify>('start');
 
   /**
    * Semantic spacing using stack tokens (preferred).
    * Accepts t-shirt sizes that map to `--uilib-stack-*` CSS variables.
    */
-  spacing = input<StackToken | SpacingToken | number | null>(null);
+  public readonly spacing = input<StackToken | SpacingToken | number | null>(null);
 
   /** Back-compat numeric gap using spacing scale (remains supported). */
-  gap = input<SpacingToken>(4);
+  public readonly gap = input<SpacingToken>(4);
 
   /** Computed flex-direction value */
-  protected _flexDirection = computed<string>(() =>
+  protected readonly _flexDirection = computed<string>(() =>
     this.direction() === 'vertical' ? 'column' : 'row'
   );
 
   /** Computed justify-content value */
-  protected _justifyContent = computed<string>(() => {
+  protected readonly _justifyContent = computed<string>(() => {
     const justifyMap: Record<StackJustify, string> = {
       start: 'flex-start',
       center: 'center',
@@ -78,7 +78,7 @@ export class Stack {
   });
 
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
-  protected _gapValue = computed<string>(() => {
+  protected readonly _gapValue = computed<string>(() => {
     const semantic = this.spacing();
     if (semantic !== null && semantic !== undefined) {
       return typeof semantic === 'number'

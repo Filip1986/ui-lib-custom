@@ -54,9 +54,9 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutCompositionSectionComponent {
-  readonly sections: DocSection[] = [{ id: 'composition', label: 'Composition' }];
+  public readonly sections: DocSection[] = [{ id: 'composition', label: 'Composition' }];
 
-  readonly usageSnippet: string = `
+  public readonly usageSnippet: string = `
 <ui-lib-container size="lg" inset="lg">
   <ui-lib-stack spacing="lg">
     <ui-lib-grid [columns]="3" spacing="md">
@@ -68,117 +68,125 @@ export class LayoutCompositionSectionComponent {
 </ui-lib-container>
 `;
 
-  readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
 
-  readonly containerSize = signal<ContainerSize>('lg');
-  readonly containerInset = signal<Exclude<InsetToken, 'xs'>>('lg');
-  readonly stackSpacing = signal<StackToken>('lg');
-  readonly gridSpacing = signal<StackToken>('md');
-  readonly gridColumns = signal<GridColumns>(3);
-  readonly gridMinWidth = signal<string>('');
-  readonly gridAlign = signal<GridAlign>('stretch');
-  readonly gridJustify = signal<GridJustify>('stretch');
-  readonly inlineSpacing = signal<InlineToken>('sm');
+  public readonly containerSize = signal<ContainerSize>('lg');
+  public readonly containerInset = signal<Exclude<InsetToken, 'xs'>>('lg');
+  public readonly stackSpacing = signal<StackToken>('lg');
+  public readonly gridSpacing = signal<StackToken>('md');
+  public readonly gridColumns = signal<GridColumns>(3);
+  public readonly gridMinWidth = signal<string>('');
+  public readonly gridAlign = signal<GridAlign>('stretch');
+  public readonly gridJustify = signal<GridJustify>('stretch');
+  public readonly inlineSpacing = signal<InlineToken>('sm');
 
-  readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
+  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
     label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
     value: key as ContainerSize,
   }));
-  readonly insetOptions = Object.entries(INSET_TOKENS)
+  public readonly insetOptions = Object.entries(INSET_TOKENS)
     .filter(([key]) => key !== 'xs')
     .map(([key, value]) => ({
       label: `${key} (${value})`,
       value: key as Exclude<InsetToken, 'xs'>,
     }));
-  readonly spacingOptions = this.buildOptions(STACK_TOKENS);
-  readonly gridColumnOptions = Object.keys(GRID_COLUMNS).map((key) => ({
+  public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
+  public readonly gridColumnOptions = Object.keys(GRID_COLUMNS).map((key) => ({
     label: `${key} cols`,
     value: Number(key) as GridColumns,
   }));
-  readonly minWidthOptions = [
+  public readonly minWidthOptions = [
     { label: 'Fixed', value: '' },
     { label: '160px', value: '160px' },
     { label: '200px', value: '200px' },
     { label: '240px', value: '240px' },
   ];
-  readonly alignOptions: { label: string; value: GridAlign }[] = [
+  public readonly alignOptions: { label: string; value: GridAlign }[] = [
     { label: 'Stretch', value: 'stretch' },
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
   ];
-  readonly justifyOptions: { label: string; value: GridJustify }[] = [
+  public readonly justifyOptions: { label: string; value: GridJustify }[] = [
     { label: 'Stretch', value: 'stretch' },
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
   ];
-  readonly inlineSpacingOptions = this.buildOptions(INLINE_TOKENS);
+  public readonly inlineSpacingOptions = this.buildOptions(INLINE_TOKENS);
 
-  readonly sizeLabel = computed(() => this.displayLabel(this.containerSize(), this.sizeOptions));
-  readonly insetLabel = computed(() => this.displayLabel(this.containerInset(), this.insetOptions));
-  readonly stackLabel = computed(() => this.displayLabel(this.stackSpacing(), this.spacingOptions));
-  readonly gridSpacingLabel = computed(() =>
+  public readonly sizeLabel = computed(() =>
+    this.displayLabel(this.containerSize(), this.sizeOptions)
+  );
+  public readonly insetLabel = computed(() =>
+    this.displayLabel(this.containerInset(), this.insetOptions)
+  );
+  public readonly stackLabel = computed(() =>
+    this.displayLabel(this.stackSpacing(), this.spacingOptions)
+  );
+  public readonly gridSpacingLabel = computed(() =>
     this.displayLabel(this.gridSpacing(), this.spacingOptions)
   );
-  readonly gridColumnsLabel = computed(() => `${this.gridColumns()} cols`);
-  readonly gridMinWidthLabel = computed(() =>
+  public readonly gridColumnsLabel = computed(() => `${this.gridColumns()} cols`);
+  public readonly gridMinWidthLabel = computed(() =>
     this.gridMinWidth() ? this.gridMinWidth() : 'Fixed'
   );
-  readonly gridAlignLabel = computed(() => this.displayLabel(this.gridAlign(), this.alignOptions));
-  readonly gridJustifyLabel = computed(() =>
+  public readonly gridAlignLabel = computed(() =>
+    this.displayLabel(this.gridAlign(), this.alignOptions)
+  );
+  public readonly gridJustifyLabel = computed(() =>
     this.displayLabel(this.gridJustify(), this.justifyOptions)
   );
-  readonly inlineSpacingLabel = computed(() =>
+  public readonly inlineSpacingLabel = computed(() =>
     this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions)
   );
 
-  setTab(tab: 'demo' | 'usage' | 'api'): void {
+  public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) return;
     this.setTab(value as 'demo' | 'usage' | 'api');
   }
 
-  setContainerSize(value: ContainerSize): void {
+  public setContainerSize(value: ContainerSize): void {
     this.containerSize.set(value);
   }
 
-  setContainerInset(value: Exclude<InsetToken, 'xs'>): void {
+  public setContainerInset(value: Exclude<InsetToken, 'xs'>): void {
     this.containerInset.set(value);
   }
 
-  setStackSpacing(value: StackToken): void {
+  public setStackSpacing(value: StackToken): void {
     this.stackSpacing.set(value);
   }
 
-  setGridSpacing(value: StackToken): void {
+  public setGridSpacing(value: StackToken): void {
     this.gridSpacing.set(value);
   }
 
-  setGridColumns(value: GridColumns): void {
+  public setGridColumns(value: GridColumns): void {
     this.gridColumns.set(value);
   }
 
-  setGridMinWidth(value: string): void {
+  public setGridMinWidth(value: string): void {
     this.gridMinWidth.set(value);
   }
 
-  setGridAlign(value: GridAlign): void {
+  public setGridAlign(value: GridAlign): void {
     this.gridAlign.set(value);
   }
 
-  setGridJustify(value: GridJustify): void {
+  public setGridJustify(value: GridJustify): void {
     this.gridJustify.set(value);
   }
 
-  setInlineSpacing(value: InlineToken): void {
+  public setInlineSpacing(value: InlineToken): void {
     this.inlineSpacing.set(value);
   }
 
-  resetControls(): void {
+  public resetControls(): void {
     this.containerSize.set('lg');
     this.containerInset.set('lg');
     this.stackSpacing.set('lg');

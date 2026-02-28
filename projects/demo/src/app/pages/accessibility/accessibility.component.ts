@@ -30,9 +30,9 @@ import { DocSection } from '@demo/shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccessibilityComponent {
-  readonly sections: DocSection[] = [{ id: 'high-contrast', label: 'High Contrast' }];
+  public readonly sections: DocSection[] = [{ id: 'high-contrast', label: 'High Contrast' }];
 
-  readonly options: SelectOption[] = [
+  public readonly options: SelectOption[] = [
     { label: 'Option 1', value: 'opt1' },
     { label: 'Option 2', value: 'opt2' },
     { label: 'Option 3', value: 'opt3' },

@@ -77,7 +77,7 @@ type AccordionTab =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccordionComponent {
-  readonly sections: DocSection[] = [
+  public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
     { id: 'sizes', label: 'Sizes' },
@@ -91,29 +91,29 @@ export class AccordionComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  activeTab = signal<AccordionTab>('playground');
+  public readonly activeTab = signal<AccordionTab>('playground');
 
-  setTab(tab: AccordionTab): void {
+  public setTab(tab: AccordionTab): void {
     this.activeTab.set(tab);
   }
 
-  onTabChange(value: TabsValue | null): void {
+  public onTabChange(value: TabsValue | null): void {
     if (value === null) {
       return;
     }
     this.setTab(value as AccordionTab);
   }
 
-  readonly variants: AccordionVariant[] = ['material', 'bootstrap', 'minimal'];
-  readonly sizes: AccordionSize[] = ['sm', 'md', 'lg'];
-  readonly expandModes: AccordionExpandMode[] = ['single', 'multiple'];
+  public readonly variants: AccordionVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly sizes: AccordionSize[] = ['sm', 'md', 'lg'];
+  public readonly expandModes: AccordionExpandMode[] = ['single', 'multiple'];
 
-  variant = signal<AccordionVariant>('material');
-  size = signal<AccordionSize>('md');
-  expandMode = signal<AccordionExpandMode>('single');
-  themeScope = signal<Record<string, string>>({});
+  public readonly variant = signal<AccordionVariant>('material');
+  public readonly size = signal<AccordionSize>('md');
+  public readonly expandMode = signal<AccordionExpandMode>('single');
+  public readonly themeScope = signal<Record<string, string>>({});
 
-  readonly faqItems: FaqItem[] = [
+  public readonly faqItems: FaqItem[] = [
     {
       value: 'shipping',
       header: 'What are the shipping options?',
@@ -131,12 +131,12 @@ export class AccordionComponent {
     },
   ];
 
-  readonly variantExamples: AccordionVariant[] = ['material', 'bootstrap', 'minimal'];
-  readonly sizeExamples: AccordionSize[] = ['sm', 'md', 'lg'];
+  public readonly variantExamples: AccordionVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly sizeExamples: AccordionSize[] = ['sm', 'md', 'lg'];
 
-  readonly controlledExpanded = signal<string[]>(['shipping']);
+  public readonly controlledExpanded = signal<string[]>(['shipping']);
 
-  readonly customHeaderItems: FaqItem[] = [
+  public readonly customHeaderItems: FaqItem[] = [
     {
       value: 'overview',
       header: 'Project Overview',
@@ -149,7 +149,7 @@ export class AccordionComponent {
     },
   ];
 
-  readonly disabledItems: FaqItem[] = [
+  public readonly disabledItems: FaqItem[] = [
     {
       value: 'active',
       header: 'Active Panel',
@@ -168,7 +168,7 @@ export class AccordionComponent {
     },
   ];
 
-  readonly snippets = {
+  public readonly snippets = {
     basic: `<ui-lib-accordion variant="material" expandMode="single">
   <ui-lib-accordion-panel header="Shipping" value="shipping">
     Standard (5-7 days), express (2-3 days), and overnight shipping.
@@ -197,23 +197,25 @@ export class AccordionComponent {
 
   private readonly themeService = inject(ThemeConfigService);
 
-  readonly appliedTheme = computed(() => this.themeService.getCssVars(this.themeService.preset()));
+  public readonly appliedTheme = computed(() =>
+    this.themeService.getCssVars(this.themeService.preset())
+  );
 
-  @ViewChild(DocDemoViewportComponent) viewport?: DocDemoViewportComponent;
+  @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  setVariant(value: AccordionVariant): void {
+  public setVariant(value: AccordionVariant): void {
     this.variant.set(value);
   }
 
-  setSize(value: AccordionSize): void {
+  public setSize(value: AccordionSize): void {
     this.size.set(value);
   }
 
-  setExpandMode(value: AccordionExpandMode): void {
+  public setExpandMode(value: AccordionExpandMode): void {
     this.expandMode.set(value);
   }
 
-  toggleControlled(value: string | number): void {
+  public toggleControlled(value: string | number): void {
     const id: string = String(value);
     this.controlledExpanded.update((current: string[]) => {
       const next: Set<string> = new Set<string>(current);
@@ -226,11 +228,11 @@ export class AccordionComponent {
     });
   }
 
-  resetControlled(): void {
+  public resetControlled(): void {
     this.controlledExpanded.set(['shipping']);
   }
 
-  readonly iconSnippets: Readonly<
+  public readonly iconSnippets: Readonly<
     Record<'customIcons' | 'iconPosition' | 'toggleTemplate', string>
   > = {
     customIcons: `<ui-lib-accordion-panel
@@ -252,13 +254,13 @@ export class AccordionComponent {
 </ui-lib-accordion-panel>`,
   };
 
-  readonly reduceMotionDemo = signal<boolean>(false);
+  public readonly reduceMotionDemo = signal<boolean>(false);
 
-  toggleReducedMotion(): void {
+  public toggleReducedMotion(): void {
     this.reduceMotionDemo.update((value: boolean) => !value);
   }
 
-  readonly accordionExample = `<ui-lib-accordion variant="material">
+  public readonly accordionExample = `<ui-lib-accordion variant="material">
   <ui-lib-accordion-panel header="Shipping">
     Standard (5-7 days), express (2-3 days), and overnight options.
   </ui-lib-accordion-panel>
