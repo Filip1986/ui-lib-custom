@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { Button } from './button';
 import type { ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant } from './button';
 
-type Story = StoryObj<typeof Button>;
-
 type ButtonStoryArgs = {
   label: string;
   variant: ButtonVariant | null;
@@ -15,7 +13,9 @@ type ButtonStoryArgs = {
   icon?: string;
 };
 
-const meta: Meta = {
+type Story = StoryObj<ButtonStoryArgs>;
+
+const meta: Meta<ButtonStoryArgs> = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],

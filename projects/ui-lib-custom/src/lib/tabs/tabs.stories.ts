@@ -3,8 +3,6 @@ import { Tabs } from './tabs';
 import { Tab } from './tab';
 import type { TabsAlignment, TabsOrientation, TabsSize, TabsVariant } from './tabs.types';
 
-type Story = StoryObj<typeof Tabs>;
-
 type TabsStoryArgs = {
   variant: TabsVariant | null;
   size: TabsSize;
@@ -12,7 +10,9 @@ type TabsStoryArgs = {
   orientation: TabsOrientation;
 };
 
-const meta: Meta = {
+type Story = StoryObj<TabsStoryArgs>;
+
+const meta: Meta<TabsStoryArgs> = {
   title: 'Components/Tabs',
   component: Tabs,
   tags: ['autodocs'],

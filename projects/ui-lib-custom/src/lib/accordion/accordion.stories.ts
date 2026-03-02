@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Accordion } from './accordion';
-import { AccordionPanel, AccordionHeader } from './accordion-panel';
-import type { AccordionVariant, AccordionSize, AccordionExpandMode } from './accordion';
-
-type Story = StoryObj<typeof Accordion>;
+import { AccordionPanel, AccordionHeader } from 'ui-lib-custom';
+import type { AccordionVariant, AccordionSize, AccordionExpandMode } from 'ui-lib-custom';
 
 type AccordionStoryArgs = {
   variant: AccordionVariant | null;
@@ -11,7 +9,9 @@ type AccordionStoryArgs = {
   expandMode: AccordionExpandMode;
 };
 
-const meta: Meta = {
+type Story = StoryObj<AccordionStoryArgs>;
+
+const meta: Meta<AccordionStoryArgs> = {
   title: 'Components/Accordion',
   component: Accordion,
   tags: ['autodocs'],

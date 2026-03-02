@@ -68,6 +68,13 @@ docs/
 - **[Theming Guide](guides/THEMING_GUIDE.md)** - CSS variables, presets, and runtime customization
 - **[Theme Editor Google Fonts](guides/THEME_EDITOR_GOOGLE_FONTS.md)** - Loading fonts in the demo editor
 
+Storybook scripts set `NODE_ENV` via `cross-env` to avoid DefinePlugin warnings about conflicting values. If you update `package.json`, run `npm install` so `cross-env` is available.
+
+```bash
+npm run storybook
+npm run build-storybook
+```
+
 ---
 
 ## 📋 Reference

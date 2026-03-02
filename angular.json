@@ -44,6 +44,7 @@
           "builder": "@storybook/angular:start-storybook",
           "options": {
             "configDir": ".storybook",
+            "tsConfig": ".storybook/tsconfig.json",
             "browserTarget": "demo:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/ui-lib-custom"],
@@ -54,6 +55,7 @@
           "builder": "@storybook/angular:build-storybook",
           "options": {
             "configDir": ".storybook",
+            "tsConfig": ".storybook/tsconfig.json",
             "browserTarget": "demo:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/ui-lib-custom"],

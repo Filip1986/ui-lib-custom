@@ -1,29 +1,36 @@
 import type { Preview } from '@storybook/angular';
+import type { IStory } from '@storybook/angular';
+import type { DecoratorFunction, StoryContext } from 'storybook/internal/types';
 import { moduleMetadata } from '@storybook/angular';
 import { ThemeWrapperComponent } from './theme-wrapper.component';
 import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
 import type { ShapeToken } from 'ui-lib-custom/tokens';
+
+const withThemeWrapper: DecoratorFunction = (
+  storyFn: () => IStory,
+  context: StoryContext
+): IStory => {
+  const story: IStory = storyFn();
+  const template: string = story.template ?? '';
+  const globals = context.globals as StoryGlobals;
+  return {
+    ...story,
+    template: `<sb-theme-wrapper [variant]="variant" [mode]="mode" [shape]="shape">${template}</sb-theme-wrapper>`,
+    props: {
+      ...(story.props ?? {}),
+      variant: globals.variant,
+      mode: globals.mode,
+      shape: globals.shape,
+    },
+  };
+};
 
 const preview: Preview = {
   decorators: [
     moduleMetadata({
       imports: [ThemeWrapperComponent],
     }),
-    (storyFn: () => StoryResult, context: { globals: StoryGlobals }): StoryResult => {
-      const story: StoryResult = storyFn();
-      const template: string = story.template ?? '';
-      const globals: StoryGlobals = context.globals;
-      return {
-        ...story,
-        template: `<sb-theme-wrapper [variant]="variant" [mode]="mode" [shape]="shape">${template}</sb-theme-wrapper>`,
-        props: {
-          ...(story.props ?? {}),
-          variant: globals.variant,
-          mode: globals.mode,
-          shape: globals.shape,
-        },
-      };
-    },
+    withThemeWrapper,
   ],
   globalTypes: {
     variant: {
@@ -67,9 +74,4 @@ interface StoryGlobals {
   variant: ThemeVariant;
   mode: ThemeMode;
   shape: ShapeToken;
-}
-
-interface StoryResult {
-  template?: string;
-  props?: Record<string, unknown>;
 }

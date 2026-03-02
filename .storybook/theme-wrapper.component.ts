@@ -9,8 +9,9 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { ShapeToken } from 'ui-lib-custom/tokens';
-import { ThemeConfigService, ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
+import type { ShapeToken } from 'ui-lib-custom/tokens';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
 
 @Component({
   selector: 'sb-theme-wrapper',

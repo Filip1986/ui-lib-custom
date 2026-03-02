@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { Checkbox } from './checkbox';
 import type { CheckboxSize, CheckboxVariant } from './checkbox';
 
-type Story = StoryObj<typeof Checkbox>;
-
 type CheckboxStoryArgs = {
   label: string;
   description: string;
@@ -14,7 +12,9 @@ type CheckboxStoryArgs = {
   checked: boolean;
 };
 
-const meta: Meta = {
+type Story = StoryObj<CheckboxStoryArgs>;
+
+const meta: Meta<CheckboxStoryArgs> = {
   title: 'Components/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],

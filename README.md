@@ -172,6 +172,16 @@ ng build ui-lib-custom
 ng serve demo
 ```
 
+## Storybook
+
+Storybook scripts set `NODE_ENV` via `cross-env` to avoid DefinePlugin warnings about conflicting values.
+If you update `package.json`, run `npm install` so `cross-env` is available.
+
+```bash
+npm run storybook
+npm run build-storybook
+```
+
 ## Design Variants
 
 ### Material Design

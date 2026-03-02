@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { UiLibInput } from './input';
 import type { InputSize, InputVariant } from './input';
 
-type Story = StoryObj<typeof UiLibInput>;
-
 type InputStoryArgs = {
   label: string;
   placeholder: string;
@@ -14,7 +12,9 @@ type InputStoryArgs = {
   error: string | null;
 };
 
-const meta: Meta = {
+type Story = StoryObj<InputStoryArgs>;
+
+const meta: Meta<InputStoryArgs> = {
   title: 'Components/Input',
   component: UiLibInput,
   tags: ['autodocs'],

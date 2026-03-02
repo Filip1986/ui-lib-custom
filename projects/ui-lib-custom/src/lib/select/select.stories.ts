@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import type { SelectOption, SelectVariant, SelectSize } from './select';
 import { UiLibSelect } from './select';
 
-type Story = StoryObj<typeof UiLibSelect>;
-
 type SelectStoryArgs = {
   label: string;
   placeholder: string;
@@ -17,13 +15,15 @@ type SelectStoryArgs = {
   loading: boolean;
 };
 
+type Story = StoryObj<SelectStoryArgs>;
+
 const options: SelectOption[] = [
   { label: 'Alpha', value: 'alpha' },
   { label: 'Beta', value: 'beta' },
   { label: 'Gamma', value: 'gamma' },
 ];
 
-const meta: Meta = {
+const meta: Meta<SelectStoryArgs> = {
   title: 'Components/Select',
   component: UiLibSelect,
   tags: ['autodocs'],

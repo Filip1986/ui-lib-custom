@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [
+    "./preview.ts",
+    "./theme-wrapper.component.ts",
+    "../projects/ui-lib-custom/src/lib/**/*.stories.ts"
+  ],
+  "exclude": ["./main.ts"]
+}
