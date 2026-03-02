@@ -57,6 +57,35 @@
   }
   ```
 
+## Code Style
+
+...
+
+### Inline Variables (Avoid Single-Use Assignments)
+
+Do not assign a value to a named variable only to immediately `return` or pass it.
+Inline it directly instead.
+
+❌ Avoid:
+```ts
+const context: TabsContextItem = { ... };
+return context;
+```
+
+✅ Prefer:
+```ts
+return { ... } satisfies TabsContextItem;
+```
+
+Use `satisfies Type` instead of `: Type` annotation when inlining a returned object literal,
+as type annotations cannot be applied directly to return expressions without a variable.
+
+**Exceptions — keep the variable when:**
+- It is referenced more than once
+- Naming it significantly clarifies complex logic
+- A temporary debug breakpoint is intentional (remove before committing)
+
+
 ## API Surface (PrimeNG-inspired)
 
 - Prefix selectors with `ui-lib-`. Inputs favor these patterns: `variant/appearance`, `severity|color`, `size`, `shape`, `state` (`disabled`, `loading`, `active`, `readonly`), `fullWidth`, `iconPosition`.
