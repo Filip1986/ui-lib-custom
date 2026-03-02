@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Checkbox } from './checkbox';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
@@ -10,6 +10,7 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
     <ui-lib-checkbox label="Accept" />
     <ui-lib-checkbox label="Disabled" [disabled]="true" />
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {}
 

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Accordion } from './accordion';
@@ -45,23 +45,24 @@ interface AccordionConfig {
       </ui-lib-accordion-panel>
     </ui-lib-accordion>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  variant = signal<AccordionVariant>('material');
-  size = signal<AccordionSize>('md');
-  expandMode = signal<AccordionExpandMode>('single');
-  expandedPanels = signal<string[]>([]);
-  defaultExpandedPanels = signal<string[]>([]);
-  disabledSecond = signal<boolean>(false);
-  disabledThird = signal<boolean>(false);
-  expandedEvents: AccordionChangeEvent[] = [];
-  toggleEvents: AccordionChangeEvent[] = [];
+  public readonly variant = signal<AccordionVariant>('material');
+  public readonly size = signal<AccordionSize>('md');
+  public readonly expandMode = signal<AccordionExpandMode>('single');
+  public readonly expandedPanels = signal<string[]>([]);
+  public readonly defaultExpandedPanels = signal<string[]>([]);
+  public readonly disabledSecond = signal<boolean>(false);
+  public readonly disabledThird = signal<boolean>(false);
+  public readonly expandedEvents: AccordionChangeEvent[] = [];
+  public readonly toggleEvents: AccordionChangeEvent[] = [];
 
-  onExpanded(event: AccordionChangeEvent): void {
+  public onExpanded(event: AccordionChangeEvent): void {
     this.expandedEvents.push(event);
   }
 
-  onToggle(event: AccordionChangeEvent): void {
+  public onToggle(event: AccordionChangeEvent): void {
     this.toggleEvents.push(event);
   }
 }
@@ -107,13 +108,14 @@ describe('Accordion', () => {
   }
 
   function getPanelHeaders(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
-    const headers: NodeListOf<Element> =
-      fixture.nativeElement.querySelectorAll('.accordion-panel-header');
+    const headers: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
+      '.accordion-panel-header'
+    );
     return Array.from(headers) as HTMLElement[];
   }
 
   function getPanelContents(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
-    const contents: NodeListOf<Element> = fixture.nativeElement.querySelectorAll(
+    const contents: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
       '.accordion-panel-content'
     );
     return Array.from(contents) as HTMLElement[];
@@ -137,17 +139,24 @@ describe('Accordion', () => {
     const fixture = createTestAccordion({ expandedPanels: ['panel-1'] });
     await stabilizeAccordion(fixture);
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const contentOne: HTMLElement | null = fixture.nativeElement.querySelector('.panel-content-1');
+    const contentOne: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.panel-content-1'
+    );
 
     expect(fixture.componentInstance).toBeTruthy();
     expect(headers.length).toBe(3);
-    expect(contentOne?.textContent?.trim()).toBe('Content One');
+    expect(contentOne).toBeTruthy();
+    const contentText = (contentOne as HTMLElement).textContent;
+    expect(contentText).toBeTruthy();
+    expect((contentText as string).trim()).toBe('Content One');
     expect(headers[0].getAttribute('aria-expanded')).toBe('true');
   });
 
   it('applies variant and size classes and updates on change', () => {
     const fixture = createTestAccordion();
-    const accordionEl: HTMLElement = fixture.nativeElement.querySelector('ui-lib-accordion');
+    const accordionEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-accordion'
+    ) as HTMLElement;
 
     expect(accordionEl.className).toContain('accordion-variant-material');
     expect(accordionEl.className).toContain('accordion-size-md');
@@ -306,8 +315,9 @@ describe('Accordion', () => {
   it('applies expanded state classes and data attributes', () => {
     const fixture = createTestAccordion();
     const contents: HTMLElement[] = getPanelContents(fixture);
-    const panelNodes: NodeListOf<Element> =
-      fixture.nativeElement.querySelectorAll('ui-lib-accordion-panel');
+    const panelNodes: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
+      'ui-lib-accordion-panel'
+    );
     const panelHosts: HTMLElement[] = Array.from(panelNodes) as HTMLElement[];
 
     expect(panelHosts[0].getAttribute('data-state')).toBe('collapsed');
@@ -323,7 +333,9 @@ describe('Accordion', () => {
 
   it('applies dark theme variables', () => {
     const fixture = createTestAccordion();
-    const host: HTMLElement = fixture.nativeElement.querySelector('ui-lib-accordion');
+    const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-accordion'
+    ) as HTMLElement;
     const root: HTMLElement = document.documentElement;
 
     root.setAttribute('data-theme', 'light');

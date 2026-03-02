@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 async function assertNoViolations(results: { violations: unknown[] }): Promise<void> {
-  const violations = results.violations ?? [];
+  const violations: unknown[] = results.violations;
   if (violations.length > 0) {
     const formatted = JSON.stringify(violations, null, 2);
     await test.info().attach('axe-violations.json', {
@@ -91,11 +91,11 @@ test.describe('Accessibility', () => {
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
 
-    const focusedElement = page.locator(':focus');
+    const dialog = page.locator('[role="dialog"]');
+    const focusedElement = dialog.locator(':focus');
     await expect(focusedElement).toBeVisible();
-    await expect(page.locator('[role="dialog"]')).toContainElement(focusedElement);
 
     await page.keyboard.press('Escape');
-    await expect(page.locator('[role="dialog"]')).not.toBeVisible();
+    await expect(dialog).not.toBeVisible();
   });
 });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Badge } from './badge';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
@@ -10,6 +10,7 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
     <ui-lib-badge>New</ui-lib-badge>
     <ui-lib-badge color="success">Success</ui-lib-badge>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {}
 

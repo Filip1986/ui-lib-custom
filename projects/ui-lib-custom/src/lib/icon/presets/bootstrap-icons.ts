@@ -29,6 +29,7 @@ import {
   bootstrapChevronUp,
   bootstrapChevronDown,
 } from '@ng-icons/bootstrap-icons';
+import type { Provider } from '@angular/core';
 
 export const BOOTSTRAP_ICON_MAPPING: IconMapping = {
   close: 'bootstrapX',
@@ -94,6 +95,6 @@ export const BOOTSTRAP_ICONS = {
   bootstrapChevronDown,
 };
 
-export function provideBootstrapIcons(extra: Record<string, unknown> = {}) {
+export function provideBootstrapIcons(extra: Record<string, unknown> = {}): Provider[] {
   return provideIcons({ ...BOOTSTRAP_ICONS, ...extra });
 }

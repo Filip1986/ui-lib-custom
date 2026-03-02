@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Grid } from './grid';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -20,14 +20,15 @@ import { Component } from '@angular/core';
       <div>Cell 3</div>
     </ui-lib-grid>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  columns: any = 12;
-  gap: any = 4;
-  spacing: any = null;
-  align: any = 'stretch';
-  justify: any = 'stretch';
-  minColumnWidth: string | undefined = undefined;
+  public columns: number = 12;
+  public gap: number = 4;
+  public spacing: number | null = null;
+  public align: string = 'stretch';
+  public justify: string = 'stretch';
+  public minColumnWidth: string | undefined = undefined;
 }
 
 @Component({
@@ -38,6 +39,7 @@ class TestHostComponent {
       <div>Cell A</div>
     </ui-lib-grid>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DefaultHostComponent {}
 
@@ -49,12 +51,18 @@ describe('Grid', () => {
     }).compileComponents();
   });
 
-  function bootstrap(initial?: Partial<TestHostComponent>) {
+  function bootstrap(initial?: Partial<TestHostComponent>): {
+    fixture: ComponentFixture<TestHostComponent>;
+    component: TestHostComponent;
+    gridElement: HTMLElement;
+  } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const gridElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-grid');
+    const gridElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-grid'
+    ) as HTMLElement;
     return { fixture, component, gridElement };
   }
 
@@ -104,7 +112,9 @@ describe('Grid', () => {
 
   it('creates with no inputs', () => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
-    const gridElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-grid');
+    const gridElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-grid'
+    ) as HTMLElement;
     expect(gridElement).toBeTruthy();
   });
 

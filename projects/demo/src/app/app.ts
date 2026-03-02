@@ -15,33 +15,33 @@ import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.compone
 })
 export class App {
   private readonly themeService = inject(ThemeConfigService);
-  sidebarVisible = signal(false);
-  theme = computed<'light' | 'dark' | 'brand-example'>(
+  public readonly sidebarVisible = signal<boolean>(false);
+  public readonly theme = computed<'light' | 'dark' | 'brand-example'>(
     () => this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
   );
-  themeName = computed<string>(() => this.themeService.preset().name);
-  themeVariant = computed<ThemeVariant>(() => this.themeService.variant());
-  savedThemes = this.themeService.savedThemes;
+  public readonly themeName = computed<string>(() => this.themeService.preset().name);
+  public readonly themeVariant = computed<ThemeVariant>(() => this.themeService.variant());
+  public readonly savedThemes = this.themeService.savedThemes;
 
   constructor() {
     // Ensure initial application of CSS vars when the component instantiates.
     this.themeService.applyToRoot();
   }
 
-  toggleSidebar() {
-    this.sidebarVisible.update((v) => !v);
+  public toggleSidebar(): void {
+    this.sidebarVisible.update((v: boolean) => !v);
   }
 
-  toggleTheme() {
+  public toggleTheme(): void {
     const next = this.theme() === 'dark' ? 'light' : 'dark';
     this.applyPreset(next);
   }
 
-  loadTheme(name: string) {
+  public loadTheme(name: string): void {
     this.themeService.loadFromLocalStorage(name);
   }
 
-  private applyPreset(name: 'light' | 'dark' | 'brand-example') {
+  private applyPreset(name: 'light' | 'dark' | 'brand-example'): void {
     const preset = this.themeService.listBuiltInPresets()[name];
     if (preset) {
       this.themeService.loadPreset(preset, { apply: true, persist: true, merge: false });

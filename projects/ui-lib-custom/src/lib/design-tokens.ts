@@ -58,8 +58,8 @@ export const SQUISH_TOKENS = {
   xs: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[2]}`, // 4px 8px
   sm: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`, // 8px 16px
   md: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[8]}`, // 16px 32px
-  lg: `${SPACING_TOKENS[6]} ${SPACING_TOKENS[12] ?? '3rem'}`, // 24px 48px
-  xl: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[16] ?? '4rem'}`, // 32px 64px
+  lg: `${SPACING_TOKENS[6]} ${SPACING_TOKENS[12]}`, // 24px 48px
+  xl: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[16]}`, // 32px 64px
 } as const;
 
 export type SquishToken = keyof typeof SQUISH_TOKENS;
@@ -68,8 +68,8 @@ export const STRETCH_TOKENS = {
   xs: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[1]}`, // 8px 4px
   sm: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[2]}`, // 16px 8px
   md: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[4]}`, // 32px 16px
-  lg: `${SPACING_TOKENS[12] ?? '3rem'} ${SPACING_TOKENS[6]}`, // 48px 24px
-  xl: `${SPACING_TOKENS[16] ?? '4rem'} ${SPACING_TOKENS[8]}`, // 64px 32px
+  lg: `${SPACING_TOKENS[12]} ${SPACING_TOKENS[6]}`, // 48px 24px
+  xl: `${SPACING_TOKENS[16]} ${SPACING_TOKENS[8]}`, // 64px 32px
 } as const;
 
 export type StretchToken = keyof typeof STRETCH_TOKENS;

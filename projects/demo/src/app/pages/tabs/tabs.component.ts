@@ -229,7 +229,7 @@ export class TabsDemoComponent {
 
   public readonly track = (_: number, item: unknown): TabsValue | number =>
     item && typeof item === 'object' && 'value' in (item as { value?: unknown })
-      ? ((item as { value: TabsValue }).value ?? _)
+      ? (item as { value: TabsValue }).value
       : _;
 
   public readonly snippets = {

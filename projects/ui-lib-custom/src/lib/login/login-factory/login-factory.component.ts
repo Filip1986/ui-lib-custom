@@ -27,40 +27,40 @@ import { Login2Component } from '../login-2/login-2.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginFactoryComponent {
-  title = input<string>('Sign In');
-  variant = input<LoginVariant>('1');
-  loading = input<boolean>(false);
-  features = input<LoginFeatures>({
+  public readonly title = input<string>('Sign In');
+  public readonly variant = input<LoginVariant>('1');
+  public readonly loading = input<boolean>(false);
+  public readonly features = input<LoginFeatures>({
     showSocialLogin: true,
     showRememberMe: true,
     showForgotPassword: true,
     showRegisterLink: true,
   });
-  socialProviders = input<LoginSocialProvider[]>([]);
+  public readonly socialProviders = input<LoginSocialProvider[]>([]);
 
-  submitLogin = output<LoginFormData>();
-  registerClick = output<void>();
-  forgotPasswordClick = output<string>();
-  socialLoginClick = output<string>();
-  rememberMeChange = output<boolean>();
+  public readonly submitLogin = output<LoginFormData>();
+  public readonly registerClick = output<void>();
+  public readonly forgotPasswordClick = output<string>();
+  public readonly socialLoginClick = output<string>();
+  public readonly rememberMeChange = output<boolean>();
 
-  onSubmitLogin(data: LoginFormData): void {
+  public onSubmitLogin(data: LoginFormData): void {
     this.submitLogin.emit(data);
   }
 
-  onRegisterClick(): void {
+  public onRegisterClick(): void {
     this.registerClick.emit();
   }
 
-  onForgotPasswordClick(email: string): void {
+  public onForgotPasswordClick(email: string): void {
     this.forgotPasswordClick.emit(email);
   }
 
-  onSocialLoginClick(provider: string): void {
+  public onSocialLoginClick(provider: string): void {
     this.socialLoginClick.emit(provider);
   }
 
-  onRememberMeChange(remembered: boolean): void {
+  public onRememberMeChange(remembered: boolean): void {
     this.rememberMeChange.emit(remembered);
   }
 }

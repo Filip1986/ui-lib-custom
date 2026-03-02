@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
@@ -15,15 +15,16 @@ import { UiLibSelect, SelectOption, SelectVariant } from './select';
       [(ngModel)]="value"
     />
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-  options = signal<SelectOption[]>([
+  public readonly options = signal<SelectOption[]>([
     { label: 'Alpha', value: 'alpha' },
     { label: 'Beta', value: 'beta' },
     { label: 'Gamma', value: 'gamma' },
   ]);
-  label = signal<string>('Pick one');
-  value: string | null = null;
+  public readonly label = signal<string>('Pick one');
+  public value: string | null = null;
 }
 
 describe('UiLibSelect accessibility', () => {
@@ -40,11 +41,13 @@ describe('UiLibSelect accessibility', () => {
   });
 
   function selectEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('ui-lib-select');
+    return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-select') as HTMLElement;
   }
 
   function controlEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('.ui-select-control');
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-control'
+    ) as HTMLElement;
   }
 
   function openSelect(): void {
@@ -76,15 +79,18 @@ describe('UiLibSelect accessibility', () => {
   it('should have listbox role on dropdown', () => {
     openSelect();
 
-    const listbox: HTMLElement | null = fixture.nativeElement.querySelector('[role="listbox"]');
+    const listbox: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '[role="listbox"]'
+    );
     expect(listbox).toBeTruthy();
   });
 
   it('should have option role on each option', () => {
     openSelect();
 
-    const options: NodeListOf<HTMLElement> =
-      fixture.nativeElement.querySelectorAll('[role="option"]');
+    const options: NodeListOf<HTMLElement> = (
+      fixture.nativeElement as HTMLElement
+    ).querySelectorAll('[role="option"]');
     expect(options.length).toBeGreaterThan(0);
   });
 
@@ -127,13 +133,14 @@ describe('UiLibSelect accessibility', () => {
       <ui-lib-select [options]="options" formControlName="choice" />
     </form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ReactiveHostComponent {
-  readonly options: SelectOption[] = [
+  public readonly options: SelectOption[] = [
     { label: 'Alpha', value: 'alpha' },
     { label: 'Beta', value: 'beta' },
   ];
-  readonly form: FormGroup<{ choice: FormControl<string | null> }> = new FormGroup({
+  public readonly form: FormGroup<{ choice: FormControl<string | null> }> = new FormGroup({
     choice: new FormControl<string | null>(null),
   });
 }
@@ -152,11 +159,13 @@ describe('UiLibSelect Reactive Forms', () => {
   });
 
   function hostEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('ui-lib-select');
+    return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-select') as HTMLElement;
   }
 
   function controlEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('.ui-select-control');
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-control'
+    ) as HTMLElement;
   }
 
   function openSelect(): void {
@@ -165,7 +174,7 @@ describe('UiLibSelect Reactive Forms', () => {
   }
 
   function optionEls(): HTMLElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('.ui-select-option'));
+    return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('.ui-select-option'));
   }
 
   it('updates control value when option is selected', () => {
@@ -211,11 +220,13 @@ describe('UiLibSelect basics', () => {
   });
 
   function hostWrapper(): HTMLElement {
-    return fixture.nativeElement.querySelector('.ui-select');
+    return (fixture.nativeElement as HTMLElement).querySelector('.ui-select') as HTMLElement;
   }
 
   function controlEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('.ui-select-control');
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-control'
+    ) as HTMLElement;
   }
 
   function hostEl(): HTMLElement {
@@ -240,17 +251,26 @@ describe('UiLibSelect basics', () => {
   });
 
   it('renders placeholder by default', () => {
-    const valueEl: HTMLElement = fixture.nativeElement.querySelector('.ui-select-value');
+    const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-value'
+    ) as HTMLElement;
     expect(valueEl.classList.contains('ui-select-placeholder')).toBeTruthy();
-    expect(valueEl.textContent?.trim()).toBe('Select...');
+    const valueText = valueEl.textContent;
+    expect(valueText).toBeTruthy();
+    expect((valueText as string).trim()).toBe('Select...');
   });
 
   it('renders label when provided', () => {
     fixture.componentRef.setInput('label', 'Pick one');
     fixture.detectChanges();
 
-    const labelEl: HTMLElement | null = fixture.nativeElement.querySelector('.ui-select-label');
-    expect(labelEl?.textContent).toContain('Pick one');
+    const labelEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-label'
+    ) as HTMLElement | null;
+    expect(labelEl).toBeTruthy();
+    const labelText = (labelEl as HTMLElement).textContent;
+    expect(labelText).toBeTruthy();
+    expect(labelText as string).toContain('Pick one');
   });
 
   it('sets aria-disabled and blocks interaction when disabled', () => {
@@ -288,8 +308,12 @@ describe('UiLibSelect basics', () => {
     fixture.componentInstance.writeValue('alpha');
     fixture.detectChanges();
 
-    const valueEl: HTMLElement = fixture.nativeElement.querySelector('.ui-select-value');
-    expect(valueEl.textContent?.trim()).toBe('Alpha');
+    const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-value'
+    ) as HTMLElement;
+    const valueText = valueEl.textContent;
+    expect(valueText).toBeTruthy();
+    expect((valueText as string).trim()).toBe('Alpha');
   });
 
   it('applies dark theme variables', () => {
@@ -334,8 +358,12 @@ describe('UiLibSelect ngModel', () => {
     await flushMicrotasks();
     freshFixture.detectChanges(false);
 
-    const valueEl: HTMLElement = freshFixture.nativeElement.querySelector('.ui-select-value');
-    expect(valueEl.textContent?.trim()).toBe('Beta');
+    const valueEl: HTMLElement = (freshFixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-value'
+    ) as HTMLElement;
+    const valueText = valueEl.textContent;
+    expect(valueText).toBeTruthy();
+    expect((valueText as string).trim()).toBe('Beta');
   });
 });
 
@@ -358,8 +386,12 @@ describe('UiLibSelect Reactive Forms', () => {
     control.setValue('beta');
     fixture.detectChanges();
 
-    const valueEl: HTMLElement = fixture.nativeElement.querySelector('.ui-select-value');
-    expect(valueEl.textContent?.trim()).toBe('Beta');
+    const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-value'
+    ) as HTMLElement;
+    const valueText = valueEl.textContent;
+    expect(valueText).toBeTruthy();
+    expect((valueText as string).trim()).toBe('Beta');
   });
 
   it('registerOnChange fires on option selection', () => {
@@ -374,11 +406,15 @@ describe('UiLibSelect Reactive Forms', () => {
     const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
     selectFixture.componentInstance.registerOnChange(onChangeSpy);
 
-    const control: HTMLElement = selectFixture.nativeElement.querySelector('.ui-select-control');
+    const control: HTMLElement = (selectFixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-control'
+    ) as HTMLElement;
     control.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     selectFixture.detectChanges();
 
-    const option: HTMLElement = selectFixture.nativeElement.querySelector('.ui-select-option');
+    const option: HTMLElement = (selectFixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-option'
+    ) as HTMLElement;
     option.click();
     selectFixture.detectChanges();
 
@@ -430,8 +466,12 @@ describe('UiLibSelect behavior', () => {
     fixture.componentInstance.writeValue(['alpha', 'beta']);
     fixture.detectChanges();
 
-    const valueEl: HTMLElement = fixture.nativeElement.querySelector('.ui-select-value');
-    expect(valueEl.textContent?.trim()).toBe('Alpha, Beta');
+    const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-select-value'
+    ) as HTMLElement;
+    const valueText = valueEl.textContent;
+    expect(valueText).toBeTruthy();
+    expect((valueText as string).trim()).toBe('Alpha, Beta');
   });
 
   it('clear emits null for single select', () => {
@@ -530,8 +570,9 @@ describe('UiLibSelect behavior', () => {
     fixture.componentInstance.openPanel();
     fixture.detectChanges();
 
-    const searchInput: HTMLInputElement | null =
-      fixture.nativeElement.querySelector('.ui-select-search input');
+    const searchInput: HTMLInputElement | null = (
+      fixture.nativeElement as HTMLElement
+    ).querySelector('.ui-select-search input');
     expect(searchInput).toBeTruthy();
   });
 });

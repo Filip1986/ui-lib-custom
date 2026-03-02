@@ -26,15 +26,15 @@ import { DEFAULT_SOCIAL_PROVIDERS } from './base-login/base-login.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
-  title = input<string>('Sign In');
-  variant = input<LoginVariant>('1');
-  loading = input<boolean>(false);
-  socialProviders = input<LoginSocialProvider[]>(DEFAULT_SOCIAL_PROVIDERS);
+  public readonly title = input<string>('Sign In');
+  public readonly variant = input<LoginVariant>('1');
+  public readonly loading = input<boolean>(false);
+  public readonly socialProviders = input<LoginSocialProvider[]>(DEFAULT_SOCIAL_PROVIDERS);
 
   /**
    * Configure which features are enabled in the login component
    */
-  features = input<LoginFeatures>({
+  public readonly features = input<LoginFeatures>({
     showSocialLogin: true,
     showRememberMe: true,
     showForgotPassword: true,
@@ -42,9 +42,9 @@ export class LoginComponent {
   });
 
   // Output events
-  submitLogin = output<LoginFormData>();
-  registerClick = output<void>();
-  forgotPasswordClick = output<string>();
-  socialLoginClick = output<string>();
-  rememberMeChange = output<boolean>();
+  public readonly submitLogin = output<LoginFormData>();
+  public readonly registerClick = output<void>();
+  public readonly forgotPasswordClick = output<string>();
+  public readonly socialLoginClick = output<string>();
+  public readonly rememberMeChange = output<boolean>();
 }

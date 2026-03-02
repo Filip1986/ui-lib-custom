@@ -13,13 +13,13 @@ import {
   standalone: true,
 })
 export class ThemeScopeDirective implements OnChanges {
-  @Input('appThemeScope') themeVars: Record<string, string> | null = null;
+  @Input('appThemeScope') public themeVars: Record<string, string> | null = null;
 
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly renderer = inject(Renderer2);
   private readonly previousKeys = new Set<string>();
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (!changes['themeVars']) return;
     const target = this.el.nativeElement;
     const next = this.themeVars ?? {};

@@ -109,15 +109,15 @@ export class ThemeEditorService {
   private readonly presetService = inject(ThemePresetService);
 
   private readonly originalColors: Map<string, Record<string, string | null>> = new Map();
-  readonly pendingColors: WritableSignal<Record<string, string>> = signal<Record<string, string>>(
-    {}
-  );
-  readonly hasUnsavedChanges: Signal<boolean> = computed(() => {
+  public readonly pendingColors: WritableSignal<Record<string, string>> = signal<
+    Record<string, string>
+  >({});
+  public readonly hasUnsavedChanges: Signal<boolean> = computed(() => {
     const pending = this.pendingColors();
     return Object.keys(pending).length > 0;
   });
 
-  applyColorChange(semanticKey: string, hexValue: string): void {
+  public applyColorChange(semanticKey: string, hexValue: string): void {
     if (!COLOR_VAR_MAP[semanticKey]) {
       return;
     }
@@ -135,16 +135,13 @@ export class ThemeEditorService {
     this.pendingColors.update((state) => ({ ...state, [semanticKey]: normalized }));
   }
 
-  resetColor(semanticKey: string): void {
+  public resetColor(semanticKey: string): void {
     const original = this.originalColors.get(semanticKey);
     if (!original) {
       return;
     }
 
-    const root = this.doc?.documentElement ?? null;
-    if (!root) {
-      return;
-    }
+    const root = this.doc.documentElement;
 
     Object.entries(original).forEach(([name, value]) => {
       if (value === null) {
@@ -161,12 +158,12 @@ export class ThemeEditorService {
     });
   }
 
-  resetAll(): void {
+  public resetAll(): void {
     const keys = Object.keys(this.pendingColors());
     keys.forEach((key) => this.resetColor(key));
   }
 
-  saveAsPreset(name: string): ThemePreset {
+  public saveAsPreset(name: string): ThemePreset {
     const preset = this.presetService.captureCurrentTheme(name);
     this.presetService.savePreset(preset);
     this.pendingColors.set({});
@@ -178,14 +175,14 @@ export class ThemeEditorService {
       return;
     }
 
-    const root = this.doc?.documentElement ?? null;
-    if (!root) {
-      return;
-    }
-
+    const root = this.doc.documentElement;
     const styles = getComputedStyle(root);
     const original: Record<string, string | null> = {};
-    COLOR_VAR_MAP[semanticKey].forEach((name) => {
+    const vars = COLOR_VAR_MAP[semanticKey];
+    if (!vars) {
+      return;
+    }
+    vars.forEach((name) => {
       const value = styles.getPropertyValue(name).trim();
       original[name] = value || null;
     });
@@ -193,12 +190,13 @@ export class ThemeEditorService {
   }
 
   private applyVariants(semanticKey: string, variants: ColorVariants): void {
-    const root = this.doc?.documentElement ?? null;
-    if (!root) {
+    const root = this.doc.documentElement;
+    const vars = COLOR_VAR_MAP[semanticKey];
+    if (!vars) {
       return;
     }
 
-    COLOR_VAR_MAP[semanticKey].forEach((name) => {
+    vars.forEach((name) => {
       const lower = name.toLowerCase();
       let value = variants.base;
 

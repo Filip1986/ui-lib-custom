@@ -16,7 +16,7 @@ import { TabsLazyMode, TabsValue } from './tabs.types';
   standalone: true,
 })
 export class TabLabel {
-  readonly template = inject<TemplateRef<unknown>>(TemplateRef);
+  public readonly template = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
 @Directive({
@@ -24,7 +24,7 @@ export class TabLabel {
   standalone: true,
 })
 export class TabContent {
-  readonly template = inject<TemplateRef<unknown>>(TemplateRef);
+  public readonly template = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
 @Component({
@@ -40,14 +40,14 @@ export class TabContent {
   encapsulation: ViewEncapsulation.None,
 })
 export class Tab {
-  value = input<TabsValue | null>(null);
-  label = input<string | null>(null);
-  disabled = input<boolean>(false);
-  closable = input<boolean>(false);
+  public readonly value = input<TabsValue | null>(null);
+  public readonly label = input<string | null>(null);
+  public readonly disabled = input<boolean>(false);
+  public readonly closable = input<boolean>(false);
   /** Per-tab lazy override; falls back to the parent tabs lazy mode when undefined. */
-  lazy = input<TabsLazyMode | undefined>(undefined);
+  public readonly lazy = input<TabsLazyMode | undefined>(undefined);
 
-  @ViewChild('defaultContent', { static: true }) content?: TemplateRef<unknown>;
-  @ContentChild(TabLabel) labelTemplate?: TabLabel;
-  @ContentChild(TabContent) contentTemplate?: TabContent;
+  @ViewChild('defaultContent', { static: true }) public content?: TemplateRef<unknown>;
+  @ContentChild(TabLabel) public labelTemplate?: TabLabel;
+  @ContentChild(TabContent) public contentTemplate?: TabContent;
 }

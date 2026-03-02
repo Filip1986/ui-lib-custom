@@ -16,17 +16,17 @@ export class GoogleFontsService {
   private readonly http = inject(HttpClient);
   private loaded = false;
 
-  readonly fonts = signal<string[]>([]); // backward compatibility: family names only
-  readonly fontMeta = signal<GoogleFont[]>([]);
-  readonly loading = signal(false);
-  readonly error = signal<string | null>(null);
+  public readonly fonts = signal<string[]>([]); // backward compatibility: family names only
+  public readonly fontMeta = signal<GoogleFont[]>([]);
+  public readonly loading = signal<boolean>(false);
+  public readonly error = signal<string | null>(null);
 
-  readonly serifFonts = computed(() => this.getFontsByCategory('serif'));
-  readonly sansSerifFonts = computed(() => this.getFontsByCategory('sans-serif'));
-  readonly displayFonts = computed(() => this.getFontsByCategory('display'));
-  readonly monospaceFonts = computed(() => this.getFontsByCategory('monospace'));
+  public readonly serifFonts = computed<string[]>(() => this.getFontsByCategory('serif'));
+  public readonly sansSerifFonts = computed<string[]>(() => this.getFontsByCategory('sans-serif'));
+  public readonly displayFonts = computed<string[]>(() => this.getFontsByCategory('display'));
+  public readonly monospaceFonts = computed<string[]>(() => this.getFontsByCategory('monospace'));
 
-  loadFonts(apiKey: string): void {
+  public loadFonts(apiKey: string): void {
     if (this.loaded || this.loading()) return;
     this.loading.set(true);
     this.http
@@ -35,14 +35,13 @@ export class GoogleFontsService {
       })
       .subscribe({
         next: (res) => {
-          const meta =
-            res.items?.map((i) => ({
-              family: i.family,
-              category: i.category,
-              variants: i.variants,
-            })) ?? [];
+          const meta = res.items.map((item) => ({
+            family: item.family,
+            category: item.category,
+            variants: item.variants,
+          }));
           this.fontMeta.set(meta);
-          this.fonts.set(meta.map((i) => i.family));
+          this.fonts.set(meta.map((item) => item.family));
           this.loaded = true;
           this.loading.set(false);
           this.error.set(null);
@@ -55,10 +54,10 @@ export class GoogleFontsService {
       });
   }
 
-  getFontsByCategory(category: string): string[] {
-    const normalized = category?.toLowerCase();
+  public getFontsByCategory(category: string): string[] {
+    const normalized = category.toLowerCase();
     return this.fontMeta()
-      .filter((f) => f.category?.toLowerCase() === normalized)
-      .map((f) => f.family);
+      .filter((font) => font.category.toLowerCase() === normalized)
+      .map((font) => font.family);
   }
 }

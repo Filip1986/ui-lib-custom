@@ -1,10 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
 
 import { Card, CardVariant, CardElevation } from './card';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [Card],
   template: `
@@ -23,12 +24,12 @@ import { Card, CardVariant, CardElevation } from './card';
   `,
 })
 class CardHost {
-  variant: CardVariant = 'material';
-  elevation: CardElevation = 'medium';
-  bordered: boolean = true;
-  hoverable: boolean = false;
-  showHeader: boolean | null = null;
-  showFooter: boolean | null = null;
+  public variant: CardVariant = 'material';
+  public elevation: CardElevation = 'medium';
+  public bordered: boolean = true;
+  public hoverable: boolean = false;
+  public showHeader: boolean | null = null;
+  public showFooter: boolean | null = null;
 }
 
 @Component({
@@ -40,11 +41,12 @@ class CardHost {
       Click body
     </ui-lib-card>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ClickableCardHost {
-  clickCount: number = 0;
+  public clickCount: number = 0;
 
-  onClick(): void {
+  public onClick(): void {
     this.clickCount += 1;
   }
 }
@@ -64,31 +66,32 @@ class ClickableCardHost {
       Body
     </ui-lib-card>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CardThemeHost {
-  theme: unknown = null;
-  headerIcon: string | null = null;
-  subtitle: string | null = null;
-  closable: boolean = false;
-  closedCount: number = 0;
+  public theme: unknown = null;
+  public headerIcon: string | null = null;
+  public subtitle: string | null = null;
+  public closable: boolean = false;
+  public closedCount: number = 0;
 
-  onClosed(): void {
+  public onClosed(): void {
     this.closedCount += 1;
   }
 }
 
 class MockThemeConfigService {
-  readonly variant = signal<ThemeVariant>('material');
+  public readonly variant = signal<ThemeVariant>('material');
 
-  setVariant(variant: ThemeVariant): void {
+  public setVariant(variant: ThemeVariant): void {
     this.variant.set(variant);
   }
 
-  getPreset(): { variant: string; colors: Record<string, string> } {
+  public getPreset(): { variant: string; colors: Record<string, string> } {
     return { variant: 'material', colors: {} };
   }
 
-  getCssVars(): Record<string, string> {
+  public getCssVars(): Record<string, string> {
     return { '--uilib-card-bg': 'rgb(1, 2, 3)' };
   }
 }
@@ -109,7 +112,7 @@ describe('Card', () => {
   }
 
   const getCard = (fixture: ComponentFixture<CardHost>): HTMLElement =>
-    fixture.nativeElement.querySelector('.card');
+    (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
 
   it('should create', async () => {
     const fixture = await bootstrap();
@@ -137,15 +140,19 @@ describe('Card', () => {
 
   it('projects header, body, and footer slots', async () => {
     const fixture = await bootstrap();
-    if (fixture.whenRenderingDone) {
-      await fixture.whenRenderingDone();
-    }
+    await fixture.whenRenderingDone();
     await fixture.whenStable();
     fixture.detectChanges();
 
-    const header: HTMLElement | null = fixture.nativeElement.querySelector('.card-header');
-    const body: HTMLElement | null = fixture.nativeElement.querySelector('.card-body');
-    const footer: HTMLElement | null = fixture.nativeElement.querySelector('.card-footer');
+    const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-header'
+    );
+    const body: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-body'
+    );
+    const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-footer'
+    );
 
     expect(header?.textContent).toContain('Header');
     expect(body?.textContent).toContain('Body');
@@ -155,8 +162,12 @@ describe('Card', () => {
   it('respects showHeader/showFooter visibility controls', async () => {
     const fixture = await bootstrap({ showHeader: false, showFooter: false });
 
-    const header: HTMLElement | null = fixture.nativeElement.querySelector('.card-header');
-    const footer: HTMLElement | null = fixture.nativeElement.querySelector('.card-footer');
+    const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-header'
+    );
+    const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-footer'
+    );
 
     expect(header).toBeNull();
     expect(footer).toBeNull();
@@ -189,7 +200,7 @@ describe('Card theme and header features', () => {
   });
 
   function cardEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('ui-lib-card');
+    return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-card') as HTMLElement;
   }
 
   async function setTheme(value: unknown): Promise<void> {
@@ -248,7 +259,9 @@ describe('Card theme and header features', () => {
     const freshFixture: ComponentFixture<CardThemeHost> = TestBed.createComponent(CardThemeHost);
     freshFixture.detectChanges();
 
-    const freshHost: HTMLElement = freshFixture.nativeElement.querySelector('ui-lib-card');
+    const freshHost: HTMLElement = (freshFixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-card'
+    ) as HTMLElement;
     expect(freshHost.getAttribute('data-theme')).toBeNull();
     expect(freshHost.getAttribute('data-variant')).toBeNull();
   });
@@ -256,8 +269,12 @@ describe('Card theme and header features', () => {
   it('renders header icon and subtitle when provided', async () => {
     await setHeaderContent('info', 'Details');
 
-    const iconEl: HTMLElement | null = fixture.nativeElement.querySelector('.card-header-icon');
-    const subtitleEl: HTMLElement | null = fixture.nativeElement.querySelector('.card-subtitle');
+    const iconEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-header-icon'
+    );
+    const subtitleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-subtitle'
+    );
 
     expect(iconEl).toBeTruthy();
     expect(subtitleEl?.textContent).toContain('Details');
@@ -266,7 +283,9 @@ describe('Card theme and header features', () => {
   it('emits closed when close icon is clicked', async () => {
     await setClosable(true);
 
-    const closeIcon: HTMLElement | null = fixture.nativeElement.querySelector('.card-close-icon');
+    const closeIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.card-close-icon'
+    );
     closeIcon?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
 
@@ -287,7 +306,8 @@ describe('Card clickable behavior', () => {
     fixture.detectChanges();
   });
 
-  const getCard = (): HTMLElement => fixture.nativeElement.querySelector('.card');
+  const getCard = (): HTMLElement =>
+    (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
 
   it('emits click events when hoverable', () => {
     const host: ClickableCardHost = fixture.componentInstance;
@@ -317,7 +337,7 @@ describe('Card keyboard accessibility', () => {
   });
 
   function cardEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('.card');
+    return (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
   }
 
   it('sets role, tabindex, and aria-label when hoverable', () => {

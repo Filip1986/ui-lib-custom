@@ -7,6 +7,4 @@ import {
 
 getTestBed().initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
-if (!HTMLElement.prototype.scrollIntoView) {
-  HTMLElement.prototype.scrollIntoView = function scrollIntoView(): void {};
-}
+HTMLElement.prototype.scrollIntoView = function scrollIntoView(): void {};

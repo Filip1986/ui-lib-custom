@@ -16,10 +16,10 @@ export class ThemePresetService {
   private readonly activePresetSignal: WritableSignal<ThemePreset | null> =
     signal<ThemePreset | null>(null);
 
-  readonly presets: Signal<ThemePreset[]> = this.presetsSignal.asReadonly();
-  readonly activePreset: Signal<ThemePreset | null> = this.activePresetSignal.asReadonly();
+  public readonly presets: Signal<ThemePreset[]> = this.presetsSignal.asReadonly();
+  public readonly activePreset: Signal<ThemePreset | null> = this.activePresetSignal.asReadonly();
 
-  savePreset(preset: ThemePreset): void {
+  public savePreset(preset: ThemePreset): void {
     const now: number = Date.now();
     const normalized: ThemePreset = {
       ...preset,
@@ -38,16 +38,13 @@ export class ThemePresetService {
     this.persistPresets(list);
   }
 
-  applyPreset(preset: ThemePreset): void {
+  public applyPreset(preset: ThemePreset): void {
     this.themeConfig.setVariant(preset.variant);
     this.themeConfig.setShape(preset.shape);
     this.themeConfig.setDensity(preset.density);
     this.themeConfig.setMode(preset.darkMode);
 
-    const root: HTMLElement | null = this.doc?.documentElement ?? null;
-    if (!root) {
-      return;
-    }
+    const root: HTMLElement = this.doc.documentElement;
 
     const vars: Record<string, string> = this.buildCssVars(preset);
     Object.entries(vars).forEach(([key, value]) => {
@@ -56,7 +53,7 @@ export class ThemePresetService {
     this.activePresetSignal.set(preset);
   }
 
-  deletePreset(id: string): void {
+  public deletePreset(id: string): void {
     const list: ThemePreset[] = this.presetsSignal().filter((item: ThemePreset) => item.id !== id);
     this.presetsSignal.set(list);
     this.persistPresets(list);
@@ -66,12 +63,12 @@ export class ThemePresetService {
     }
   }
 
-  exportAsJson(preset: ThemePreset): void {
+  public exportAsJson(preset: ThemePreset): void {
     const json: string = JSON.stringify(preset, null, 2);
     saveAs(`theme-preset-${preset.name}.json`, json, 'application/json');
   }
 
-  exportAsCss(preset: ThemePreset): string {
+  public exportAsCss(preset: ThemePreset): string {
     const vars: Record<string, string> = this.buildCssVars(preset);
     const body: string = Object.entries(vars)
       .map(([name, value]) => `  ${name}: ${value};`)
@@ -79,7 +76,7 @@ export class ThemePresetService {
     return `:root {\n${body}\n}`;
   }
 
-  importFromJson(json: string): ThemePreset {
+  public importFromJson(json: string): ThemePreset {
     const parsed: unknown = JSON.parse(json);
     if (!this.isThemePreset(parsed)) {
       throw new Error('Invalid ThemePreset JSON');
@@ -87,10 +84,10 @@ export class ThemePresetService {
     return parsed;
   }
 
-  captureCurrentTheme(name: string): ThemePreset {
+  public captureCurrentTheme(name: string): ThemePreset {
     const now: number = Date.now();
-    const root: HTMLElement | null = this.doc?.documentElement ?? null;
-    const styles: CSSStyleDeclaration | null = root ? getComputedStyle(root) : null;
+    const root: HTMLElement = this.doc.documentElement;
+    const styles: CSSStyleDeclaration = getComputedStyle(root);
 
     const colors: ThemePresetColors = {
       primary: this.readCssVar(styles, '--uilib-color-primary-600', '#1976d2'),
@@ -122,7 +119,6 @@ export class ThemePresetService {
       darkMode: this.themeConfig.mode(),
       colors,
       fonts,
-      customCssVars: undefined,
       createdAt: now,
       updatedAt: now,
     };
@@ -131,7 +127,7 @@ export class ThemePresetService {
   }
 
   private loadPresets(): ThemePreset[] {
-    const storage: Storage | null = this.doc?.defaultView?.localStorage ?? null;
+    const storage: Storage | null = this.doc.defaultView?.localStorage ?? null;
     if (!storage) {
       return [];
     }
@@ -151,7 +147,7 @@ export class ThemePresetService {
   }
 
   private persistPresets(list: ThemePreset[]): void {
-    const storage: Storage | null = this.doc?.defaultView?.localStorage ?? null;
+    const storage: Storage | null = this.doc.defaultView?.localStorage ?? null;
     if (!storage) {
       return;
     }
@@ -205,7 +201,7 @@ export class ThemePresetService {
   }
 
   private createId(): string {
-    const cryptoRef: Crypto | undefined = this.doc?.defaultView?.crypto;
+    const cryptoRef: Crypto | undefined = this.doc.defaultView?.crypto;
     if (cryptoRef?.randomUUID) {
       return cryptoRef.randomUUID();
     }
@@ -232,30 +228,32 @@ export class ThemePresetService {
     );
   }
 
-  private isPresetColors(colors: ThemePresetColors): boolean {
+  private isPresetColors(colors: unknown): colors is ThemePresetColors {
     if (!colors || typeof colors !== 'object') {
       return false;
     }
+    const value = colors as ThemePresetColors;
     return (
-      typeof colors.primary === 'string' &&
-      typeof colors.secondary === 'string' &&
-      typeof colors.success === 'string' &&
-      typeof colors.danger === 'string' &&
-      typeof colors.warning === 'string' &&
-      typeof colors.info === 'string' &&
-      typeof colors.surface === 'string' &&
-      typeof colors.background === 'string'
+      typeof value.primary === 'string' &&
+      typeof value.secondary === 'string' &&
+      typeof value.success === 'string' &&
+      typeof value.danger === 'string' &&
+      typeof value.warning === 'string' &&
+      typeof value.info === 'string' &&
+      typeof value.surface === 'string' &&
+      typeof value.background === 'string'
     );
   }
 
-  private isPresetFonts(fonts: ThemePresetFonts): boolean {
+  private isPresetFonts(fonts: unknown): fonts is ThemePresetFonts {
     if (!fonts || typeof fonts !== 'object') {
       return false;
     }
+    const value = fonts as ThemePresetFonts;
     return (
-      typeof fonts.heading === 'string' &&
-      typeof fonts.body === 'string' &&
-      typeof fonts.mono === 'string'
+      typeof value.heading === 'string' &&
+      typeof value.body === 'string' &&
+      typeof value.mono === 'string'
     );
   }
 }

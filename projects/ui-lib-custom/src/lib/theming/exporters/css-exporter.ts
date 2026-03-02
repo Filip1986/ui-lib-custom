@@ -72,7 +72,7 @@ function mapBorderRadius(value: string): string {
 
 function mapShadow(value: string): string {
   if (value in SHADOWS) {
-    return SHADOWS[value as keyof typeof SHADOWS];
+    return SHADOWS[value as keyof typeof SHADOWS] ?? 'none';
   }
 
   const fallback: Record<string, string> = {

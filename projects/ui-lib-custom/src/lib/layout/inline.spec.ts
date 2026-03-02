@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Inline } from './inline';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -13,12 +13,13 @@ import { Component } from '@angular/core';
       <span>Tag 3</span>
     </ui-lib-inline>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  gap: any = 2;
-  spacing: any = null;
-  align: any = 'center';
-  justify: any = 'start';
+  public gap: number = 2;
+  public spacing: number | null = null;
+  public align: string = 'center';
+  public justify: string = 'start';
 }
 
 @Component({
@@ -29,6 +30,7 @@ class TestHostComponent {
       <span>Only Tag</span>
     </ui-lib-inline>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DefaultHostComponent {}
 
@@ -40,12 +42,18 @@ describe('Inline', () => {
     }).compileComponents();
   });
 
-  function bootstrap(initial?: Partial<TestHostComponent>) {
+  function bootstrap(initial?: Partial<TestHostComponent>): {
+    fixture: ComponentFixture<TestHostComponent>;
+    component: TestHostComponent;
+    inlineElement: HTMLElement;
+  } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const inlineElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-inline');
+    const inlineElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-inline'
+    ) as HTMLElement;
     return { fixture, component, inlineElement };
   }
 
@@ -91,7 +99,9 @@ describe('Inline', () => {
 
   it('creates with no inputs', () => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
-    const inlineElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-inline');
+    const inlineElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-inline'
+    ) as HTMLElement;
     expect(inlineElement).toBeTruthy();
   });
 

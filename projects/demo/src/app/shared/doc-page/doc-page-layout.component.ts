@@ -23,45 +23,48 @@ import { DocSection } from './doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestroy {
-  @Input({ required: true }) sections: DocSection[] = [];
-  @Input() topOffset = 80;
-  @Input() railWidth = 250;
+  @Input({ required: true }) public sections: DocSection[] = [];
+  @Input() public topOffset: number = 80;
+  @Input() public railWidth: number = 250;
 
-  @HostBinding('style.--doc-top-offset.px') get docTopOffset(): number {
+  @HostBinding('style.--doc-top-offset.px')
+  public get docTopOffset(): number {
     return this.topOffset;
   }
 
-  @HostBinding('style.--doc-anchor-offset.px') get docAnchorOffset(): number {
+  @HostBinding('style.--doc-anchor-offset.px')
+  public get docAnchorOffset(): number {
     return this.topOffset;
   }
 
-  @HostBinding('style.--doc-rail-width.px') get docRailWidth(): number {
+  @HostBinding('style.--doc-rail-width.px')
+  public get docRailWidth(): number {
     return this.railWidth;
   }
 
-  readonly activeSectionId = signal<string | null>(null);
+  public readonly activeSectionId = signal<string | null>(null);
 
   private readonly document = inject(DOCUMENT);
   private observer?: IntersectionObserver;
   private viewReady = false;
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.viewReady = true;
     this.setupObserver();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (!this.viewReady) return;
     if (changes['sections'] || changes['topOffset']) {
       this.setupObserver();
     }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.observer?.disconnect();
   }
 
-  scrollToSection(id: string): void {
+  public scrollToSection(id: string): void {
     // Pre-set active so click feedback is instant even before intersection observer fires
     this.activeSectionId.set(id);
 
@@ -94,7 +97,8 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
       .filter((entry) => entry.isIntersecting)
       .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
-    const nextActive = visible[0]?.target?.id ?? this.findNearestAbove(ids);
+    const first = visible[0];
+    const nextActive = first ? (first.target as HTMLElement).id : this.findNearestAbove(ids);
     if (nextActive && nextActive !== this.activeSectionId()) {
       this.activeSectionId.set(nextActive);
     }

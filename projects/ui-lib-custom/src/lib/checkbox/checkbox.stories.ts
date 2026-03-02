@@ -1,7 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Checkbox } from './checkbox';
+import type { CheckboxSize, CheckboxVariant } from './checkbox';
 
-type Story = StoryObj;
+type Story = StoryObj<typeof Checkbox>;
+
+type CheckboxStoryArgs = {
+  label: string;
+  description: string;
+  variant: CheckboxVariant | null;
+  size: CheckboxSize;
+  disabled: boolean;
+  indeterminate: boolean;
+  checked: boolean;
+};
 
 const meta: Meta = {
   title: 'Components/Checkbox',
@@ -22,8 +33,8 @@ const meta: Meta = {
 export default meta;
 
 const renderCheckbox = (
-  args: Record<string, any>
-): { props: Record<string, any>; template: string } => ({
+  args: Partial<CheckboxStoryArgs>
+): { props: Partial<CheckboxStoryArgs>; template: string } => ({
   props: args,
   template: `
     <ui-lib-checkbox

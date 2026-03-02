@@ -14,9 +14,11 @@ import {
   InsetToken,
 } from 'ui-lib-custom/tokens';
 
-const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
-const insetVar = (token: InsetToken) => `var(--uilib-inset-${token}, ${INSET_TOKENS[token]})`;
-const containerVar = (size: ContainerSize) =>
+const spaceVar = (token: SpacingToken): string =>
+  `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const insetVar = (token: InsetToken): string =>
+  `var(--uilib-inset-${token}, ${INSET_TOKENS[token]})`;
+const containerVar = (size: ContainerSize): string =>
   `var(--uilib-container-${size}, ${CONTAINER_MAX_WIDTHS[size]})`;
 
 /**
@@ -67,7 +69,7 @@ export class Container {
   /** Computed padding value from inset (falls back to numeric padding) */
   protected readonly _paddingValue = computed<string>(() => {
     const semantic = this.inset();
-    if (semantic !== null && semantic !== undefined) {
+    if (semantic !== null) {
       return insetVar(semantic as InsetToken);
     }
     return spaceVar(this.padding());

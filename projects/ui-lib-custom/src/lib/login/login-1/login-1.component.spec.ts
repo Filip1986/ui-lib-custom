@@ -49,7 +49,7 @@ describe('Login1Component', () => {
   });
 
   it('should call onRememberMeChange and update localStorage', () => {
-    const event = { target: { checked: true } } as any;
+    const event = { target: { checked: true } } as { target: { checked: boolean } };
 
     const setItemSpy = spyOn(localStorage, 'setItem');
     spyOn(component.rememberMeChange, 'emit');

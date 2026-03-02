@@ -48,7 +48,8 @@ describe('Icon', () => {
     fixture.componentRef.setInput('clickable', true);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.classList.contains('ui-lib-icon--clickable')).toBeTruthy();
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    expect(host.classList.contains('ui-lib-icon--clickable')).toBeTruthy();
   });
 
   it('sets role, tabindex, and aria-label when clickable', () => {

@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { Checkbox, CheckboxSize, CheckboxVariant } from './checkbox';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [Checkbox],
   template: `
@@ -23,15 +24,15 @@ import { Checkbox, CheckboxSize, CheckboxVariant } from './checkbox';
   `,
 })
 class HostComponent {
-  label = signal('Accept terms');
-  description = signal('Required to continue');
-  variant = signal<CheckboxVariant>('material');
-  size = signal<CheckboxSize>('md');
-  disabled = signal(false);
-  indeterminate = signal(false);
-  ariaLabel = signal<string | null>(null);
-  checked = false;
-  content = signal('');
+  public readonly label = signal('Accept terms');
+  public readonly description = signal('Required to continue');
+  public readonly variant = signal<CheckboxVariant>('material');
+  public readonly size = signal<CheckboxSize>('md');
+  public readonly disabled = signal(false);
+  public readonly indeterminate = signal(false);
+  public readonly ariaLabel = signal<string | null>(null);
+  public checked = false;
+  public readonly content = signal('');
 }
 
 describe('Checkbox', () => {
@@ -48,7 +49,7 @@ describe('Checkbox', () => {
   });
 
   function checkboxEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('ui-lib-checkbox');
+    return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-checkbox') as HTMLElement;
   }
 
   it('should render label and description', () => {
@@ -187,9 +188,10 @@ describe('Checkbox', () => {
       <ui-lib-checkbox label="Accept" formControlName="accepted" />
     </form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ReactiveHostComponent {
-  readonly form: FormGroup<{ accepted: FormControl<boolean> }> = new FormGroup({
+  public readonly form: FormGroup<{ accepted: FormControl<boolean> }> = new FormGroup({
     accepted: new FormControl<boolean>(false, { nonNullable: true }),
   });
 }
@@ -208,7 +210,7 @@ describe('Checkbox Reactive Forms', () => {
   });
 
   function checkboxEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('ui-lib-checkbox');
+    return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-checkbox') as HTMLElement;
   }
 
   it('updates control value on click', () => {

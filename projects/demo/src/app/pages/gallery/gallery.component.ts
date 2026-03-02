@@ -99,9 +99,9 @@ export class GalleryComponent {
 
   public async copyShareLink(): Promise<void> {
     const url: string = this.buildShareUrl();
-    if (navigator?.clipboard?.writeText) {
+    try {
       await navigator.clipboard.writeText(url);
-    } else {
+    } catch {
       const textarea: HTMLTextAreaElement = document.createElement('textarea');
       textarea.value = url;
       textarea.style.position = 'fixed';

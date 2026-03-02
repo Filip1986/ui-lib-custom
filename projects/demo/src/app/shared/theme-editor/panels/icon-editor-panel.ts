@@ -21,9 +21,22 @@ import {
 export class IconEditorPanel {
   private readonly themeService = inject(ThemeConfigService);
 
-  libraries: IconLibrary[] = ['material', 'bootstrap', 'lucide', 'heroicons', 'tabler'];
-  sizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
-  previewIcons: SemanticIcon[] = ['home', 'user', 'settings', 'search', 'mail', 'star'];
+  public readonly libraries: IconLibrary[] = [
+    'material',
+    'bootstrap',
+    'lucide',
+    'heroicons',
+    'tabler',
+  ];
+  public readonly sizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+  public readonly previewIcons: SemanticIcon[] = [
+    'home',
+    'user',
+    'settings',
+    'search',
+    'mail',
+    'star',
+  ];
   private readonly defaultSizes: Record<IconSize, string> = {
     xs: '0.75rem',
     sm: '1rem',
@@ -33,7 +46,7 @@ export class IconEditorPanel {
     '2xl': '2.5rem',
   };
 
-  config = computed<ThemeIconConfig>(
+  public readonly config = computed<ThemeIconConfig>(
     () =>
       this.themeService.preset().icons ?? {
         defaultLibrary: 'lucide',
@@ -42,7 +55,7 @@ export class IconEditorPanel {
       }
   );
 
-  private pushPatch(patch: Partial<ThemeIconConfig>) {
+  private pushPatch(patch: Partial<ThemeIconConfig>): void {
     const current = this.config();
     const next: ThemeIconConfig = {
       defaultLibrary: patch.defaultLibrary ?? current.defaultLibrary,
@@ -52,17 +65,17 @@ export class IconEditorPanel {
     this.themeService.loadPreset({ icons: next }, { merge: true, apply: true, persist: true });
   }
 
-  onLibraryChange(event: Event) {
+  public onLibraryChange(event: Event): void {
     const library = (event.target as HTMLSelectElement).value as IconLibrary;
     this.pushPatch({ defaultLibrary: library });
   }
 
-  onSizeChange(event: Event) {
+  public onSizeChange(event: Event): void {
     const size = (event.target as HTMLSelectElement).value as IconSize;
     this.pushPatch({ defaultSize: size });
   }
 
-  onSizeValueChange(size: IconSize, event: Event) {
+  public onSizeValueChange(size: IconSize, event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     const mergedSizes = { ...this.config().sizes, [size]: value } as Record<IconSize, string>;
     this.pushPatch({ sizes: mergedSizes });

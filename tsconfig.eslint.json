@@ -1,5 +1,18 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["projects/**/*.ts", "projects/**/*.tsx", "projects/**/*.js", "projects/**/*.jsx"],
+  "include": [
+    ".storybook/**/*.ts",
+    ".storybook/**/*.d.ts",
+    "e2e/**/*.ts",
+    "playwright.config.ts",
+    "projects/**/*.ts",
+    "projects/**/*.tsx",
+    "projects/**/*.js",
+    "projects/**/*.jsx",
+    "projects/ui-lib-custom/.storybook/**/*.ts",
+    "projects/ui-lib-custom/.storybook/**/*.d.ts",
+    "scripts/**/*.ts",
+    "setup-*.ts"
+  ],
   "exclude": ["dist/**", "coverage/**", "storybook-static/**"]
 }

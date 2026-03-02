@@ -11,11 +11,11 @@ import { DocSection } from './doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocTocComponent {
-  @Input({ required: true }) sections: DocSection[] = [];
-  @Input() activeId: string | null = null;
-  @Output() sectionSelected = new EventEmitter<string>();
+  @Input({ required: true }) public sections: DocSection[] = [];
+  @Input() public activeId: string | null = null;
+  @Output() public sectionSelected: EventEmitter<string> = new EventEmitter<string>();
 
-  onSelect(id: string): void {
+  public onSelect(id: string): void {
     this.sectionSelected.emit(id);
   }
 }

@@ -94,7 +94,7 @@ export class Button implements AfterViewChecked {
         medium: 'medium',
         large: 'large',
       };
-      return map[size] ?? 'medium';
+      return map[size];
     }
   );
 
@@ -132,9 +132,7 @@ export class Button implements AfterViewChecked {
     return this.appearance();
   });
 
-  public readonly hasBadge = computed<boolean>(
-    () => this.badge() !== null && this.badge() !== undefined
-  );
+  public readonly hasBadge = computed<boolean>(() => this.badge() !== null);
 
   public readonly normalizeBadgeSeverity = computed<BadgeSeverity>(() => {
     const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();

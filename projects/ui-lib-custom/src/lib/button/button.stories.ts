@@ -1,7 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Button } from './button';
+import type { ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant } from './button';
 
-type Story = StoryObj;
+type Story = StoryObj<typeof Button>;
+
+type ButtonStoryArgs = {
+  label: string;
+  variant: ButtonVariant | null;
+  size: ButtonSize;
+  color: ButtonColor;
+  appearance: ButtonAppearance;
+  disabled: boolean;
+  loading: boolean;
+  icon?: string;
+};
 
 const meta: Meta = {
   title: 'Components/Button',
@@ -28,8 +40,8 @@ const meta: Meta = {
 export default meta;
 
 const renderButton = (
-  args: Record<string, any>
-): { props: Record<string, any>; template: string } => ({
+  args: Partial<ButtonStoryArgs>
+): { props: Partial<ButtonStoryArgs>; template: string } => ({
   props: args,
   template: `
     <ui-lib-button

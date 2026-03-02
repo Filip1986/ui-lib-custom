@@ -72,11 +72,11 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VariantComparisonComponent {
-  showMaterial = signal(true);
-  showBootstrap = signal(true);
-  showMinimal = signal(true);
+  public readonly showMaterial = signal<boolean>(true);
+  public readonly showBootstrap = signal<boolean>(true);
+  public readonly showMinimal = signal<boolean>(true);
 
-  gridColumns = computed(() => {
+  public readonly gridColumns = computed<string>(() => {
     const count = [this.showMaterial(), this.showBootstrap(), this.showMinimal()].filter(
       Boolean
     ).length;

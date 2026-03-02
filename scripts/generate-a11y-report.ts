@@ -17,21 +17,72 @@ interface AxeViolation {
   }>;
 }
 
+type AxeResults = {
+  violations?: AxeViolation[];
+};
+
+const isStringArray = (value: unknown): value is string[] =>
+  Array.isArray(value) && value.every((item) => typeof item === 'string');
+
+const isAxeViolation = (value: unknown): value is AxeViolation => {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+  const record = value as Record<string, unknown>;
+  const nodes = record.nodes;
+  return (
+    typeof record.id === 'string' &&
+    typeof record.impact === 'string' &&
+    typeof record.description === 'string' &&
+    typeof record.help === 'string' &&
+    typeof record.helpUrl === 'string' &&
+    Array.isArray(nodes) &&
+    nodes.every((node) => {
+      if (!node || typeof node !== 'object') {
+        return false;
+      }
+      const nodeRecord = node as Record<string, unknown>;
+      return (
+        isStringArray(nodeRecord.target) &&
+        typeof nodeRecord.html === 'string' &&
+        typeof nodeRecord.failureSummary === 'string'
+      );
+    })
+  );
+};
+
+const isAxeResults = (value: unknown): value is AxeResults => {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+  const record = value as Record<string, unknown>;
+  if (!('violations' in record)) {
+    return true;
+  }
+  const violations = record.violations;
+  return Array.isArray(violations) && violations.every(isAxeViolation);
+};
+
 function generateReport(resultsPath: string): string {
   const raw = fs.readFileSync(resultsPath, 'utf-8');
-  const results = JSON.parse(raw);
+  const parsed: unknown = JSON.parse(raw);
+  if (!isAxeResults(parsed)) {
+    throw new Error('Invalid accessibility results format.');
+  }
+  const results: AxeResults = parsed;
+  const violations: AxeViolation[] = results.violations ?? [];
 
   let report = '# Accessibility Test Report\n\n';
   report += `Generated: ${new Date().toISOString()}\n\n`;
 
-  if (!results.violations || results.violations.length === 0) {
+  if (violations.length === 0) {
     report += '✅ **No accessibility violations found!**\n';
     return report;
   }
 
-  report += `❌ **${results.violations.length} violations found**\n\n`;
+  report += `❌ **${violations.length} violations found**\n\n`;
 
-  results.violations.forEach((violation: AxeViolation, index: number): void => {
+  violations.forEach((violation: AxeViolation, index: number): void => {
     report += `## ${index + 1}. ${violation.description}\n\n`;
     report += `- **Impact:** ${violation.impact}\n`;
     report += `- **Rule:** ${violation.id}\n`;
@@ -56,7 +107,7 @@ if (require.main === module) {
   const outputPath = path.resolve('./test-results/a11y-report.md');
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, report);
-  console.log(`Report generated: ${outputPath}`);
+  console.warn(`Report generated: ${outputPath}`);
 }
 
 export { generateReport };

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Button } from './button';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
@@ -11,9 +11,10 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
     <ui-lib-button [disabled]="true">Disabled</ui-lib-button>
     <ui-lib-button color="primary">Primary</ui-lib-button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  loading = false;
+  public loading = false;
 }
 
 describe('Button Accessibility', () => {

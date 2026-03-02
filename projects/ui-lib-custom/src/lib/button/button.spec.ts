@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideAudioWaveform } from '@ng-icons/lucide';
 import { By } from '@angular/platform-browser';
@@ -17,13 +17,14 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
       Click me
     </ui-lib-button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ButtonClickHostComponent {
-  disabled: boolean = false;
-  loading: boolean = false;
-  clickCount: number = 0;
+  public disabled: boolean = false;
+  public loading: boolean = false;
+  public clickCount: number = 0;
 
-  onClick(): void {
+  public onClick(): void {
     this.clickCount += 1;
   }
 }
@@ -35,9 +36,10 @@ class ButtonClickHostComponent {
     <ui-lib-button>Global</ui-lib-button>
     <ui-lib-button [variant]="overrideVariant()">Override</ui-lib-button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ButtonVariantHostComponent {
-  overrideVariant = signal<ButtonVariant | null>(null);
+  public overrideVariant = signal<ButtonVariant | null>(null);
 }
 
 describe('Button', () => {
@@ -55,8 +57,13 @@ describe('Button', () => {
     fixture.detectChanges();
   });
 
-  const getButton = (): HTMLButtonElement => fixture.nativeElement.querySelector('button');
-  const getBadge = (): HTMLElement | null => fixture.nativeElement.querySelector('ui-lib-badge');
+  function rootEl(): HTMLElement {
+    return fixture.nativeElement as HTMLElement;
+  }
+
+  const getButton = (): HTMLButtonElement => rootEl().querySelector('button') as HTMLButtonElement;
+  const getBadge = (): HTMLElement | null =>
+    rootEl().querySelector('ui-lib-badge') as HTMLElement | null;
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -172,15 +179,22 @@ describe('Button', () => {
       fixture.detectChanges();
 
       expect(getButton().classList.contains('btn-has-badge')).toBeTruthy();
-      expect(getBadge()).toBeTruthy();
-      expect(getBadge()?.textContent?.trim()).toBe('3');
+      const badgeEl = getBadge();
+      expect(badgeEl).toBeTruthy();
+      const badgeText = (badgeEl as HTMLElement).textContent;
+      expect(badgeText).toBeTruthy();
+      expect((badgeText as string).trim()).toBe('3');
     });
 
     it('renders badge with number content', () => {
       fixture.componentRef.setInput('badge', 7);
       fixture.detectChanges();
 
-      expect(getBadge()?.textContent?.trim()).toBe('7');
+      const badgeEl = getBadge();
+      expect(badgeEl).toBeTruthy();
+      const badgeText = (badgeEl as HTMLElement).textContent;
+      expect(badgeText).toBeTruthy();
+      expect((badgeText as string).trim()).toBe('7');
     });
 
     it('hides badge when null or undefined', () => {
@@ -200,7 +214,9 @@ describe('Button', () => {
       fixture.componentRef.setInput('badgeColor', 'info');
       fixture.detectChanges();
 
-      expect(getBadge()?.classList.contains('badge-color-info')).toBeTruthy();
+      const badgeEl = getBadge();
+      expect(badgeEl).toBeTruthy();
+      expect((badgeEl as HTMLElement).classList.contains('badge-color-info')).toBeTruthy();
     });
   });
 
@@ -330,22 +346,16 @@ describe('Button', () => {
     fixture.componentRef.setInput('iconPosition', 'left');
     fixture.detectChanges();
 
-    const leftIcon: HTMLElement | null = fixture.nativeElement.querySelector(
-      'ui-lib-icon.btn-icon--start'
-    );
-    const leftEndIcon: HTMLElement | null = fixture.nativeElement.querySelector(
-      'ui-lib-icon.btn-icon--end'
-    );
+    const leftIcon: HTMLElement | null = rootEl().querySelector('ui-lib-icon.btn-icon--start');
+    const leftEndIcon: HTMLElement | null = rootEl().querySelector('ui-lib-icon.btn-icon--end');
     expect(leftIcon).toBeTruthy();
     expect(leftEndIcon).toBeNull();
 
     fixture.componentRef.setInput('iconPosition', 'right');
     fixture.detectChanges();
 
-    const rightIcon: HTMLElement | null = fixture.nativeElement.querySelector(
-      'ui-lib-icon.btn-icon--end'
-    );
-    const rightStartIcon: HTMLElement | null = fixture.nativeElement.querySelector(
+    const rightIcon: HTMLElement | null = rootEl().querySelector('ui-lib-icon.btn-icon--end');
+    const rightStartIcon: HTMLElement | null = rootEl().querySelector(
       'ui-lib-icon.btn-icon--start'
     );
     expect(rightIcon).toBeTruthy();
@@ -432,13 +442,15 @@ describe('Button', () => {
     fixture.detectChanges();
 
     const badgeHelp: HTMLElement | null = getBadge();
-    expect(badgeHelp?.classList.contains('badge-color-info')).toBeTruthy();
+    expect(badgeHelp).toBeTruthy();
+    expect((badgeHelp as HTMLElement).classList.contains('badge-color-info')).toBeTruthy();
 
     fixture.componentRef.setInput('badgeSeverity', 'contrast');
     fixture.detectChanges();
 
     const badgeContrast: HTMLElement | null = getBadge();
-    expect(badgeContrast?.classList.contains('badge-color-neutral')).toBeTruthy();
+    expect(badgeContrast).toBeTruthy();
+    expect((badgeContrast as HTMLElement).classList.contains('badge-color-neutral')).toBeTruthy();
   });
 
   it('applies shadow CSS variables when shadow is set', () => {
@@ -489,7 +501,7 @@ describe('Button interactions', () => {
   }
 
   const getButton = (fixture: ComponentFixture<ButtonClickHostComponent>): HTMLButtonElement =>
-    fixture.nativeElement.querySelector('button');
+    (fixture.nativeElement as HTMLElement).querySelector('button') as HTMLButtonElement;
 
   it('emits click when enabled', async () => {
     const fixture: ComponentFixture<ButtonClickHostComponent> = await createFixture();
@@ -564,14 +576,16 @@ describe('Button variant', () => {
     service.setVariant('bootstrap');
     fixture.detectChanges();
 
-    let buttons: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll('button');
+    let buttons: NodeListOf<HTMLButtonElement> = (
+      fixture.nativeElement as HTMLElement
+    ).querySelectorAll('button');
     expect(buttons[0].classList.contains('btn-bootstrap')).toBeTruthy();
     expect(buttons[1].classList.contains('btn-bootstrap')).toBeTruthy();
 
     fixture.componentInstance.overrideVariant.set('minimal');
     fixture.detectChanges();
 
-    buttons = fixture.nativeElement.querySelectorAll('button');
+    buttons = (fixture.nativeElement as HTMLElement).querySelectorAll('button');
     expect(buttons[0].classList.contains('btn-bootstrap')).toBeTruthy();
     expect(buttons[1].classList.contains('btn-minimal')).toBeTruthy();
   });

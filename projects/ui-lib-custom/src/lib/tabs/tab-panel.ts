@@ -26,11 +26,11 @@ import {
 })
 export class TabPanel {
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-  id = input<string>('');
-  labelId = input<string>('');
-  active = input<boolean>(false);
+  public readonly id = input<string>('');
+  public readonly labelId = input<string>('');
+  public readonly active = input<boolean>(false);
 
-  panelClasses = computed<string>(() => {
+  public readonly panelClasses = computed<string>(() => {
     const classes = ['tab-panel'];
     if (this.active()) {
       classes.push('tab-panel-active');
@@ -38,7 +38,7 @@ export class TabPanel {
     return classes.join(' ');
   });
 
-  focus(): void {
+  public focus(): void {
     this.el.nativeElement.focus();
   }
 }

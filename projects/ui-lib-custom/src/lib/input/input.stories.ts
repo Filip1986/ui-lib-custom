@@ -1,7 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { UiLibInput } from './input';
+import type { InputSize, InputVariant } from './input';
 
-type Story = StoryObj;
+type Story = StoryObj<typeof UiLibInput>;
+
+type InputStoryArgs = {
+  label: string;
+  placeholder: string;
+  variant: InputVariant | null;
+  size: InputSize;
+  disabled: boolean;
+  required: boolean;
+  error: string | null;
+};
 
 const meta: Meta = {
   title: 'Components/Input',
@@ -24,8 +35,8 @@ const meta: Meta = {
 export default meta;
 
 const renderInput = (
-  args: Record<string, any>
-): { props: Record<string, any>; template: string } => ({
+  args: Partial<InputStoryArgs>
+): { props: Partial<InputStoryArgs>; template: string } => ({
   props: args,
   template: `
     <ui-lib-input

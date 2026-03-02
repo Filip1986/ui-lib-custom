@@ -134,8 +134,9 @@ export class Tabs implements OnDestroy, AfterViewInit {
       return explicit === 'rtl';
     }
 
-    const list = this.tabList?.nativeElement ?? this.elementRef.nativeElement;
-    if (!list || typeof getComputedStyle === 'undefined') {
+    const list: HTMLElement = (this.tabList?.nativeElement ??
+      this.elementRef.nativeElement) as HTMLElement;
+    if (typeof getComputedStyle === 'undefined') {
       return false;
     }
 
@@ -157,18 +158,22 @@ export class Tabs implements OnDestroy, AfterViewInit {
     return tabs.map((tab, index): TabsContextItem => {
       const tabLazy = tab.lazy();
       const effectiveLazy: TabsLazyMode = tabLazy !== undefined ? tabLazy : this.lazy();
-      return {
+      const label = tab.label();
+      const labelTemplate = tab.labelTemplate?.template as TemplateRef<unknown> | undefined;
+      const contentTemplate = tab.contentTemplate?.template as TemplateRef<unknown> | undefined;
+      const context: TabsContextItem = {
         ref: tab,
         value: tab.value() ?? index,
         index,
         disabled: this.disabled() || tab.disabled(),
         closable: tab.closable() || this.closable(),
-        label: tab.label() ?? undefined,
-        labelTemplate: tab.labelTemplate?.template as TemplateRef<unknown> | undefined,
-        content: tab.content,
-        contentTemplate: tab.contentTemplate?.template as TemplateRef<unknown> | undefined,
+        ...(label !== undefined && label !== null ? { label } : {}),
+        ...(labelTemplate ? { labelTemplate } : {}),
+        ...(tab.content ? { content: tab.content } : {}),
+        ...(contentTemplate ? { contentTemplate } : {}),
         lazy: effectiveLazy,
       };
+      return context;
     });
   });
 
@@ -223,7 +228,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
         medium: 'medium',
         large: 'large',
       };
-      return map[size] ?? 'medium';
+      return map[size];
     }
   );
 
@@ -423,11 +428,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
       return isActive;
     }
 
-    if (lazy === 'keep-alive') {
-      return isActive || this.renderedValues().has(tab.value);
-    }
-
-    return true;
+    return isActive || this.renderedValues().has(tab.value);
   }
 
   /** Handles keyboard navigation for the tab list. */
@@ -472,9 +473,10 @@ export class Tabs implements OnDestroy, AfterViewInit {
   private focusNext(currentIndex: number): void {
     const tabs: TabsContextItem[] = this.tabContexts();
     for (let i = currentIndex + 1; i < tabs.length; i++) {
-      if (!tabs[i].disabled) {
+      const tab = tabs[i];
+      if (tab && !tab.disabled) {
         this.focusIndex(i);
-        this.onSelect(tabs[i]);
+        this.onSelect(tab);
         break;
       }
     }
@@ -483,9 +485,10 @@ export class Tabs implements OnDestroy, AfterViewInit {
   private focusPrev(currentIndex: number): void {
     const tabs: TabsContextItem[] = this.tabContexts();
     for (let i = currentIndex - 1; i >= 0; i--) {
-      if (!tabs[i].disabled) {
+      const tab = tabs[i];
+      if (tab && !tab.disabled) {
         this.focusIndex(i);
-        this.onSelect(tabs[i]);
+        this.onSelect(tab);
         break;
       }
     }
@@ -498,7 +501,8 @@ export class Tabs implements OnDestroy, AfterViewInit {
   private lastEnabledIndex(): number {
     const tabs: TabsContextItem[] = this.tabContexts();
     for (let i = tabs.length - 1; i >= 0; i--) {
-      if (!tabs[i].disabled) {
+      const tab = tabs[i];
+      if (tab && !tab.disabled) {
         return i;
       }
     }

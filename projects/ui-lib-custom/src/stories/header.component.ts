@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ButtonComponent } from './button.component';
@@ -63,17 +63,18 @@ import type { User } from './user';
     </div>
   </header>`,
   styleUrls: ['./header.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   @Input()
-  user: User | null = null;
+  public user: User | null = null;
 
   @Output()
-  login = new EventEmitter<Event>();
+  public login = new EventEmitter<Event>();
 
   @Output()
-  logout = new EventEmitter<Event>();
+  public logout = new EventEmitter<Event>();
 
   @Output()
-  createAccount = new EventEmitter<Event>();
+  public createAccount = new EventEmitter<Event>();
 }

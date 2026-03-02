@@ -34,7 +34,11 @@ export class ThemeScopeDirective {
   private readonly appliedVars = new Set<string>();
 
   /** Theme configuration input */
-  uiLibTheme = input<ThemeScopeInput>(null);
+  public readonly uiLibTheme = input<ThemeScopeInput>(null);
+
+  private get hostElement(): HTMLElement {
+    return this.el.nativeElement as HTMLElement;
+  }
 
   constructor() {
     effect(() => {
@@ -67,7 +71,7 @@ export class ThemeScopeDirective {
     }
 
     if (config.variant) {
-      this.el.nativeElement.setAttribute('data-variant', config.variant);
+      this.hostElement.setAttribute('data-variant', config.variant);
     }
 
     if (config.variables) {
@@ -76,11 +80,11 @@ export class ThemeScopeDirective {
   }
 
   private applyColorScheme(scheme: 'light' | 'dark'): void {
-    this.el.nativeElement.setAttribute('data-theme', scheme);
+    this.hostElement.setAttribute('data-theme', scheme);
   }
 
   private applyVariables(variables: Record<string, string>): void {
-    const element = this.el.nativeElement;
+    const element: HTMLElement = this.hostElement;
     Object.entries(variables).forEach(([key, value]) => {
       const varName = key.startsWith('--') ? key : `--${key}`;
       element.style.setProperty(varName, value);
@@ -89,13 +93,13 @@ export class ThemeScopeDirective {
   }
 
   private clearThemeScope(): void {
-    const element = this.el.nativeElement;
+    const element: HTMLElement = this.hostElement;
     element.removeAttribute('data-theme');
     element.removeAttribute('data-variant');
   }
 
   private clearAppliedStyles(): void {
-    const element = this.el.nativeElement;
+    const element: HTMLElement = this.hostElement;
     this.appliedVars.forEach((key) => element.style.removeProperty(key));
     this.appliedVars.clear();
     element.removeAttribute('data-variant');

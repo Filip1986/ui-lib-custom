@@ -53,7 +53,7 @@ describe('BaseLoginComponent', () => {
     });
 
     it('should update localStorage and emit rememberMeChange', () => {
-      const event = { target: { checked: true } } as any;
+      const event = { target: { checked: true } } as { target: { checked: boolean } };
 
       spyOn(component.rememberMeChange, 'emit');
 

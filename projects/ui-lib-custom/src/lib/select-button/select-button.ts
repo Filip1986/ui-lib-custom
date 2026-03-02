@@ -105,7 +105,7 @@ export class SelectButton implements ControlValueAccessor {
         medium: 'medium',
         large: 'large',
       };
-      return map[size] ?? 'medium';
+      return map[size];
     }
   );
 
@@ -195,7 +195,7 @@ export class SelectButton implements ControlValueAccessor {
       }
     }
 
-    if (option.label !== undefined && option.label !== null) {
+    if (option.label !== undefined) {
       return String(option.label);
     }
 
@@ -212,7 +212,7 @@ export class SelectButton implements ControlValueAccessor {
       }
     }
 
-    return option.value ?? option.label ?? option;
+    return option.value ?? option.label ?? null;
   }
 
   public trackOption(index: number, option: SelectButtonOption): string | number {
@@ -223,7 +223,7 @@ export class SelectButton implements ControlValueAccessor {
     return index;
   }
 
-  public constructor() {
+  constructor() {
     effect((): void => {
       const inputValue: SelectButtonValue | SelectButtonValue[] | null = this.value();
       if (inputValue !== null) {
@@ -345,8 +345,8 @@ export class SelectButton implements ControlValueAccessor {
     const opts: SelectButtonOption[] = this.options();
     if (idx < 0 || idx >= opts.length) return;
 
-    const option: SelectButtonOption = opts[idx];
-    if (this.isOptionDisabled(option)) return;
+    const option = opts[idx];
+    if (!option || this.isOptionDisabled(option)) return;
 
     this.toggleOption(option, event);
   }
@@ -366,7 +366,7 @@ export class SelectButton implements ControlValueAccessor {
     if (Array.isArray(value)) {
       return value;
     }
-    if (value === null || value === undefined) {
+    if (value === null) {
       return [];
     }
     return [value];
@@ -375,10 +375,11 @@ export class SelectButton implements ControlValueAccessor {
   private findSelectedIndex(options: SelectButtonOption[]): number {
     if (this.multiple()) return -1;
     const currentValue: SelectButtonValue | null = this.internalValue()[0] ?? null;
-    if (currentValue === null || currentValue === undefined) return -1;
+    if (currentValue === null) return -1;
 
     for (let i: number = 0; i < options.length; i += 1) {
-      const option: SelectButtonOption = options[i];
+      const option = options[i];
+      if (!option) continue;
       if (this.resolveValue(option) === currentValue) return i;
     }
 
@@ -387,14 +388,18 @@ export class SelectButton implements ControlValueAccessor {
 
   private findFirstEnabledIndex(options: SelectButtonOption[]): number {
     for (let i: number = 0; i < options.length; i += 1) {
-      if (!this.isOptionDisabled(options[i])) return i;
+      const option = options[i];
+      if (!option) continue;
+      if (!this.isOptionDisabled(option)) return i;
     }
     return -1;
   }
 
   private findLastEnabledIndex(options: SelectButtonOption[]): number {
     for (let i: number = options.length - 1; i >= 0; i -= 1) {
-      if (!this.isOptionDisabled(options[i])) return i;
+      const option = options[i];
+      if (!option) continue;
+      if (!this.isOptionDisabled(option)) return i;
     }
     return -1;
   }
@@ -409,7 +414,9 @@ export class SelectButton implements ControlValueAccessor {
     let idx: number = currentIndex;
     for (let i: number = 0; i < options.length; i += 1) {
       idx = (idx + delta + options.length) % options.length;
-      if (!this.isOptionDisabled(options[idx])) {
+      const option = options[idx];
+      if (!option) continue;
+      if (!this.isOptionDisabled(option)) {
         return idx;
       }
     }
@@ -421,7 +428,7 @@ export class SelectButton implements ControlValueAccessor {
     option: SelectButtonOption,
     field: string
   ): SelectButtonValue | undefined {
-    if (option && Object.prototype.hasOwnProperty.call(option, field)) {
+    if (Object.prototype.hasOwnProperty.call(option, field)) {
       return option[field];
     }
     return undefined;

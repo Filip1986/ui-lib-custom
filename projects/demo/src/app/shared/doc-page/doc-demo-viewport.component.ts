@@ -3,6 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ViewportPreviewComponent } from '../viewport-preview/viewport-preview.component';
 
+interface ViewportPreset {
+  key: string;
+  label: string;
+  width: number;
+  height: number;
+}
+
 @Component({
   selector: 'app-doc-demo-viewport',
   standalone: true,
@@ -13,49 +20,49 @@ import { ViewportPreviewComponent } from '../viewport-preview/viewport-preview.c
   exportAs: 'docDemoViewport',
 })
 export class DocDemoViewportComponent {
-  shadow = input<string | null>(null);
-  autoHeight = input<boolean>(false);
-  density = signal<'default' | 'comfortable' | 'compact'>('default');
+  public readonly shadow = input<string | null>(null);
+  public readonly autoHeight = input<boolean>(false);
+  public readonly density = signal<'default' | 'comfortable' | 'compact'>('default');
 
-  @ViewChild('preview') preview?: ViewportPreviewComponent;
+  @ViewChild('preview') public preview?: ViewportPreviewComponent;
 
-  presets() {
+  public presets(): ViewportPreset[] {
     return this.preview?.presets ?? [];
   }
 
-  displayWidth() {
+  public displayWidth(): number {
     return this.preview?.displayWidth() ?? 0;
   }
 
-  displayHeight() {
+  public displayHeight(): number {
     return this.preview?.displayHeight() ?? 0;
   }
 
-  customWidth() {
+  public customWidth(): number {
     return this.preview?.customWidth() ?? 0;
   }
 
-  setCustomWidth(value: number) {
+  public setCustomWidth(value: number): void {
     this.preview?.customWidth.set(value);
   }
 
-  setPreset(preset: { key: string; label: string; width: number; height: number }) {
+  public setPreset(preset: ViewportPreset): void {
     this.preview?.setPreset(preset);
   }
 
-  setCustom() {
+  public setCustom(): void {
     this.preview?.setCustom();
   }
 
-  rotate() {
+  public rotate(): void {
     this.preview?.rotate();
   }
 
-  densityValue() {
+  public densityValue(): 'default' | 'comfortable' | 'compact' {
     return this.density();
   }
 
-  setDensity(value: 'default' | 'comfortable' | 'compact') {
+  public setDensity(value: 'default' | 'comfortable' | 'compact'): void {
     this.density.set(value);
     if (value === 'default') {
       document.documentElement.removeAttribute('data-density');

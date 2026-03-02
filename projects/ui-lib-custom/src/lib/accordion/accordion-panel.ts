@@ -33,7 +33,7 @@ export class AccordionHeader {}
   standalone: true,
 })
 export class AccordionToggleIcon {
-  readonly template = inject<TemplateRef<AccordionToggleIconContext>>(TemplateRef);
+  public readonly template = inject<TemplateRef<AccordionToggleIconContext>>(TemplateRef);
 }
 
 @Component({
@@ -51,14 +51,15 @@ export class AccordionToggleIcon {
   },
 })
 export class AccordionPanel implements OnDestroy {
-  header: InputSignal<string> = input<string>('');
-  value: InputSignal<string | null> = input<string | null>(null);
-  disabled: InputSignal<boolean> = input<boolean>(false);
-  expanded: InputSignal<boolean> = input<boolean>(false);
-  iconPosition: InputSignal<AccordionIconPosition> = input<AccordionIconPosition>('end');
-  expandIcon: InputSignal<string> = input<string>('chevron-up');
-  collapseIcon: InputSignal<string> = input<string>('chevron-down');
-  showIcon: InputSignal<boolean> = input<boolean>(false);
+  public readonly header: InputSignal<string> = input<string>('');
+  public readonly value: InputSignal<string | null> = input<string | null>(null);
+  public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly expanded: InputSignal<boolean> = input<boolean>(false);
+  public readonly iconPosition: InputSignal<AccordionIconPosition> =
+    input<AccordionIconPosition>('end');
+  public readonly expandIcon: InputSignal<string> = input<string>('chevron-up');
+  public readonly collapseIcon: InputSignal<string> = input<string>('chevron-down');
+  public readonly showIcon: InputSignal<boolean> = input<boolean>(false);
 
   constructor() {
     if (this.context) {
@@ -72,10 +73,9 @@ export class AccordionPanel implements OnDestroy {
     });
   }
 
-  readonly headerTemplate = contentChild(AccordionHeader);
-  readonly toggleIconTemplate = contentChild(AccordionToggleIcon);
-  @ViewChild('headerButton', { static: true })
-  headerButton?: ElementRef<HTMLButtonElement>;
+  public readonly headerTemplate = contentChild(AccordionHeader);
+  public readonly toggleIconTemplate = contentChild(AccordionToggleIcon);
+  @ViewChild('headerButton', { static: true }) public headerButton?: ElementRef<HTMLButtonElement>;
 
   private readonly context: AccordionContext | null = inject(ACCORDION_CONTEXT, {
     optional: true,
@@ -83,7 +83,7 @@ export class AccordionPanel implements OnDestroy {
   private readonly uid: string = this.createId();
   private readonly internalExpanded = signal<boolean>(this.expanded());
 
-  readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>(() => {
     const classes: string[] = ['ui-lib-accordion-panel', 'accordion-panel'];
     if (this.isExpanded()) {
       classes.push('accordion-panel-expanded');
@@ -94,20 +94,20 @@ export class AccordionPanel implements OnDestroy {
     return classes.join(' ');
   });
 
-  readonly hasCustomHeader = computed((): boolean => Boolean(this.headerTemplate()));
-  readonly resolvedId = computed((): string => this.value() ?? this.panelId());
-  readonly isExpanded = computed((): boolean =>
+  public readonly hasCustomHeader = computed((): boolean => Boolean(this.headerTemplate()));
+  public readonly resolvedId = computed((): string => this.value() ?? this.panelId());
+  public readonly isExpanded = computed((): boolean =>
     this.context ? this.context.isPanelExpanded(this.resolvedId()) : this.internalExpanded()
   );
 
-  readonly headerId = computed((): string => `${this.uid}-header`);
-  readonly panelId = computed((): string => `${this.uid}-panel`);
-  readonly resolvedIconName = computed((): string =>
+  public readonly headerId = computed((): string => `${this.uid}-header`);
+  public readonly panelId = computed((): string => `${this.uid}-panel`);
+  public readonly resolvedIconName = computed((): string =>
     this.isExpanded() ? this.expandIcon() : this.collapseIcon()
   );
-  readonly isIconEnd = computed((): boolean => this.iconPosition() === 'end');
+  public readonly isIconEnd = computed((): boolean => this.iconPosition() === 'end');
 
-  toggle(): void {
+  public toggle(): void {
     if (this.disabled()) {
       return;
     }
@@ -118,7 +118,7 @@ export class AccordionPanel implements OnDestroy {
     this.internalExpanded.set(!this.internalExpanded());
   }
 
-  onKeydown(event: KeyboardEvent): void {
+  public onKeydown(event: KeyboardEvent): void {
     const key: string = event.key;
     if (key === ' ' || key === 'Enter') {
       event.preventDefault();
@@ -126,14 +126,14 @@ export class AccordionPanel implements OnDestroy {
     }
   }
 
-  focusHeader(): void {
+  public focusHeader(): void {
     const button: HTMLButtonElement | undefined = this.headerButton?.nativeElement;
     if (button && !this.disabled()) {
       button.focus();
     }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.context?.unregisterPanel(this);
   }
 

@@ -26,22 +26,22 @@ export type SocialProvider = 'google' | 'github' | 'microsoft';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginForm {
-  variant = input<LoginFormVariant>('centered');
-  showSocialLogin = input<boolean>(false);
-  showRememberMe = input<boolean>(false);
-  logoTemplate = input<TemplateRef<unknown> | null>(null);
+  public readonly variant = input<LoginFormVariant>('centered');
+  public readonly showSocialLogin = input<boolean>(false);
+  public readonly showRememberMe = input<boolean>(false);
+  public readonly logoTemplate = input<TemplateRef<unknown> | null>(null);
 
-  login = output<{ email: string; password: string; remember: boolean }>();
-  forgotPassword = output<void>();
-  socialLogin = output<SocialProvider>();
+  public readonly login = output<{ email: string; password: string; remember: boolean }>();
+  public readonly forgotPassword = output<void>();
+  public readonly socialLogin = output<SocialProvider>();
 
-  readonly email = signal('');
-  readonly password = signal('');
-  readonly remember = signal(true);
+  public readonly email = signal('');
+  public readonly password = signal('');
+  public readonly remember = signal(true);
 
-  readonly layoutClass = computed<string>(() => `login-${this.variant()}`);
+  public readonly layoutClass = computed<string>(() => `login-${this.variant()}`);
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.login.emit({
       email: this.email().trim(),
       password: this.password(),
@@ -49,11 +49,11 @@ export class LoginForm {
     });
   }
 
-  onForgot(): void {
+  public onForgot(): void {
     this.forgotPassword.emit();
   }
 
-  onSocial(provider: SocialProvider): void {
+  public onSocial(provider: SocialProvider): void {
     this.socialLogin.emit(provider);
   }
 }

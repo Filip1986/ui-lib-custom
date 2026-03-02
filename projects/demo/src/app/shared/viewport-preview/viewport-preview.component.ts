@@ -13,6 +13,8 @@ import {
   AfterViewInit,
   OnDestroy,
   HostBinding,
+  Signal,
+  WritableSignal,
 } from '@angular/core';
 
 interface ViewportPreset {
@@ -32,24 +34,28 @@ interface ViewportPreset {
   exportAs: 'viewportPreview',
 })
 export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
-  @Input() mode: 'inline' | 'floating' = 'inline';
-  @Input() showToolbar = true;
-  @Input() autoHeight = false;
-  @Input() set active(val: boolean) {
+  @Input() public mode: 'inline' | 'floating' = 'inline';
+  @Input() public showToolbar: boolean = true;
+  @Input() public autoHeight: boolean = false;
+  @Input()
+  public set active(val: boolean) {
     this.activeSignal.set(val);
   }
-  @Output() activeChange = new EventEmitter<boolean>();
+  @Output() public activeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @HostBinding('class.mode-inline') get isInline() {
+  @HostBinding('class.mode-inline')
+  public get isInline(): boolean {
     return this.mode === 'inline';
   }
-  @HostBinding('class.mode-floating') get isFloating() {
+  @HostBinding('class.mode-floating')
+  public get isFloating(): boolean {
     return this.mode === 'floating';
   }
 
-  @ViewChild('frameHost', { static: false }) frameHost?: ElementRef<HTMLDivElement>;
+  @ViewChild('frameHost', { static: false })
+  private readonly frameHost?: ElementRef<HTMLDivElement>;
 
-  readonly presets: ViewportPreset[] = [
+  public readonly presets: ViewportPreset[] = [
     { key: 'full', label: 'Full width', width: 0, height: 900 },
     { key: 'desktop', label: 'Desktop', width: 1440, height: 900 },
     { key: 'laptop', label: 'Laptop', width: 1024, height: 768 },
@@ -57,27 +63,29 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     { key: 'mobile', label: 'Mobile', width: 375, height: 812 },
   ];
 
-  readonly activeSignal = signal(true);
-  readonly width = signal(1024);
-  readonly height = signal(768);
-  readonly isPortrait = signal(false);
-  readonly customWidth = signal(480);
-  readonly isFullWidth = signal(true);
-  readonly hostWidth = signal(0);
+  public readonly activeSignal: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly width: WritableSignal<number> = signal<number>(1024);
+  public readonly height: WritableSignal<number> = signal<number>(768);
+  public readonly isPortrait: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly customWidth: WritableSignal<number> = signal<number>(480);
+  public readonly isFullWidth: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly hostWidth: WritableSignal<number> = signal<number>(0);
 
-  readonly displayWidth = computed(() => {
+  public readonly displayWidth: Signal<number> = computed<number>(() => {
     if (this.isFullWidth()) {
       const hostWidth = this.hostWidth();
       return hostWidth > 0 ? hostWidth : this.width();
     }
     return this.isPortrait() ? this.height() : this.width();
   });
-  readonly displayHeight = computed(() => (this.isPortrait() ? this.width() : this.height()));
+  public readonly displayHeight: Signal<number> = computed<number>(() =>
+    this.isPortrait() ? this.width() : this.height()
+  );
 
   private resizeObserver?: ResizeObserver;
-  readonly scale = signal(1);
+  public readonly scale: WritableSignal<number> = signal<number>(1);
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     if (this.frameHost?.nativeElement) {
       this.resizeObserver = new ResizeObserver(() => this.computeScale());
       this.resizeObserver.observe(
@@ -87,17 +95,17 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.resizeObserver?.disconnect();
   }
 
-  toggleActive(): void {
+  public toggleActive(): void {
     const next = this.mode === 'inline' ? true : !this.activeSignal();
     this.activeSignal.set(next);
     this.activeChange.emit(next);
   }
 
-  setPreset(preset: ViewportPreset): void {
+  public setPreset(preset: ViewportPreset): void {
     if (preset.key === 'full') {
       this.setFullWidth();
       return;
@@ -109,7 +117,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     this.computeScale();
   }
 
-  setCustom(): void {
+  public setCustom(): void {
     const val = this.customWidth();
     if (val > 0) {
       this.isFullWidth.set(false);
@@ -120,14 +128,14 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  setFullWidth(): void {
+  public setFullWidth(): void {
     this.isFullWidth.set(true);
     this.isPortrait.set(false);
     this.computeScale();
   }
 
-  rotate(): void {
-    this.isPortrait.update((v) => !v);
+  public rotate(): void {
+    this.isPortrait.update((v: boolean): boolean => !v);
     this.computeScale();
   }
 
@@ -136,10 +144,11 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
       this.scale.set(1);
       return;
     }
-    const host = this.frameHost?.nativeElement?.parentElement;
-    if (!host) {
+    const frameHost = this.frameHost;
+    if (!frameHost) {
       return;
     }
+    const host = frameHost.nativeElement.parentElement ?? frameHost.nativeElement;
     this.hostWidth.set(host.clientWidth);
     if (this.isFullWidth()) {
       this.scale.set(1);

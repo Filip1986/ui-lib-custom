@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectButton } from './select-button';
 import { SelectButtonOption } from './select-button.types';
@@ -8,14 +8,15 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
   standalone: true,
   imports: [SelectButton],
   template: ` <ui-lib-select-button [options]="options" [value]="value"></ui-lib-select-button> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  options: SelectButtonOption[] = [
+  public options: SelectButtonOption[] = [
     { label: 'Left', value: 'left' },
     { label: 'Center', value: 'center' },
     { label: 'Right', value: 'right', disabled: true },
   ];
-  value = 'left';
+  public value = 'left';
 }
 
 describe('SelectButton Accessibility', () => {

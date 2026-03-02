@@ -23,45 +23,45 @@ import { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
 })
 export class TopbarComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
-  readonly mode: Signal<ThemeMode> = this.themeService.mode;
-  readonly variant = computed<ThemeVariant>(() => this.themeService.variant());
-  readonly shape = computed<ShapeToken>(() => this.themeService.shape());
-  readonly density = computed<DensityToken>(() => this.themeService.density());
+  public readonly mode: Signal<ThemeMode> = this.themeService.mode;
+  public readonly variant = computed<ThemeVariant>(() => this.themeService.variant());
+  public readonly shape = computed<ShapeToken>(() => this.themeService.shape());
+  public readonly density = computed<DensityToken>(() => this.themeService.density());
 
-  menuButtonClick = output<void>();
-  themeToggle = output<void>();
-  loadTheme = output<string>();
-  theme = input<'light' | 'dark' | 'brand-example'>('light');
-  themeName = input<string>('light');
-  themeVariant = input<string>('material');
-  savedThemes = input<string[]>([]);
+  public readonly menuButtonClick = output<void>();
+  public readonly themeToggle = output<void>();
+  public readonly loadTheme = output<string>();
+  public readonly theme = input<'light' | 'dark' | 'brand-example'>('light');
+  public readonly themeName = input<string>('light');
+  public readonly themeVariant = input<string>('material');
+  public readonly savedThemes = input<string[]>([]);
 
-  onMenuButtonClick(): void {
+  public onMenuButtonClick(): void {
     this.menuButtonClick.emit();
   }
 
-  onThemeToggle(): void {
+  public onThemeToggle(): void {
     const current: ThemeMode = this.mode();
     const next: ThemeMode = current === 'dark' ? 'light' : 'dark';
     this.themeService.setMode(next);
     this.themeToggle.emit();
   }
 
-  onLoadTheme(name: string): void {
+  public onLoadTheme(name: string): void {
     if (name) {
       this.loadTheme.emit(name);
     }
   }
 
-  setVariant(variant: ThemeVariant): void {
+  public setVariant(variant: ThemeVariant): void {
     this.themeService.setVariant(variant);
   }
 
-  setShape(shape: ShapeToken): void {
+  public setShape(shape: ShapeToken): void {
     this.themeService.setShape(shape);
   }
 
-  setDensity(density: DensityToken): void {
+  public setDensity(density: DensityToken): void {
     this.themeService.setDensity(density);
   }
 }

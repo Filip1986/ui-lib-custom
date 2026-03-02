@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { LoginForm } from './login-form';
+import type { LoginFormVariant } from './login-form';
 
-type Story = StoryObj;
+type LoginFormStoryArgs = {
+  variant?: LoginFormVariant;
+  showSocialLogin?: boolean;
+  showRememberMe?: boolean;
+};
 
-type LoginFormStoryArgs = Record<string, any>;
+type Story = StoryObj<LoginFormStoryArgs>;
 
-const meta: Meta = {
+const meta: Meta<LoginForm> = {
   title: 'Components/Login Form',
   component: LoginForm,
   tags: ['autodocs'],

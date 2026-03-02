@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Tabs } from './tabs';
@@ -14,6 +14,7 @@ import { TabsVariant } from './tabs.types';
       <ui-lib-tab value="two" label="Two">Two</ui-lib-tab>
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TabsHostComponent {}
 
@@ -31,6 +32,7 @@ class TabsHostComponent {}
       </ui-lib-tab>
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TabsLazyHostComponent {}
 
@@ -52,6 +54,7 @@ interface NavTabItem {
       <ui-lib-tab label="Six">Six</ui-lib-tab>
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TabsScrollableHostComponent {}
 
@@ -65,16 +68,17 @@ class TabsScrollableHostComponent {}
       }
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TabsNavigationHostComponent {
-  navTabs: NavTabItem[] = [
+  public navTabs: NavTabItem[] = [
     { value: '/dashboard', label: 'Dashboard' },
     { value: '/reports', label: 'Reports' },
     { value: '/settings', label: 'Settings' },
   ];
-  lastNavigate: string | null = null;
+  public lastNavigate: string | null = null;
 
-  onNavigate(value: string | number | null): void {
+  public onNavigate(value: string | number | null): void {
     this.lastNavigate = typeof value === 'string' ? value : null;
   }
 }
@@ -92,6 +96,7 @@ class TabsNavigationHostComponent {
       </ui-lib-tab>
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TabsPerTabOverrideHostComponent {}
 
@@ -105,25 +110,37 @@ class TabsPerTabOverrideHostComponent {}
       <ui-lib-tab label="Disabled" [disabled]="true">Disabled panel</ui-lib-tab>
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TabsInteractionHostComponent {
-  variant: TabsVariant = 'material';
+  public variant: TabsVariant = 'material';
 }
 
 let rafQueue: FrameRequestCallback[] = [];
+let originalRaf: ((cb: FrameRequestCallback) => number) | null = null;
 
-function stubRaf(): jasmine.Spy {
+function stubRaf(): void {
   rafQueue = [];
-  return spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback): number => {
+  if (!originalRaf) {
+    originalRaf = window.requestAnimationFrame;
+  }
+  window.requestAnimationFrame = (cb: FrameRequestCallback): number => {
     rafQueue.push(cb);
     return rafQueue.length;
-  });
+  };
 }
 
 function flushRaf(): void {
   const queue: FrameRequestCallback[] = [...rafQueue];
   rafQueue = [];
   queue.forEach((cb: FrameRequestCallback): void => cb(0));
+}
+
+function restoreRaf(): void {
+  if (originalRaf) {
+    window.requestAnimationFrame = originalRaf;
+    originalRaf = null;
+  }
 }
 
 async function stabilizeFixture(fixture: ComponentFixture<unknown>): Promise<void> {
@@ -157,6 +174,10 @@ describe('Tabs', () => {
 
     fixture = TestBed.createComponent(TabsHostComponent);
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    restoreRaf();
   });
 
   it('should create host component', () => {
@@ -193,6 +214,10 @@ describe('Tabs per-tab lazy', () => {
 
     fixture = TestBed.createComponent(TabsLazyHostComponent);
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    restoreRaf();
   });
 
   it('should unmount lazy content when tab deactivates', async () => {
@@ -244,8 +269,13 @@ describe('Scrollable Tabs', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    restoreRaf();
+  });
+
   it('should show arrows when tabs overflow', () => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list')).nativeElement;
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+      .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     stubRaf();
@@ -260,7 +290,8 @@ describe('Scrollable Tabs', () => {
   });
 
   it('should hide arrows when all tabs are visible', () => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list')).nativeElement;
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+      .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     stubRaf();
@@ -275,7 +306,8 @@ describe('Scrollable Tabs', () => {
   });
 
   it('should disable prev at start and next at end', () => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list')).nativeElement;
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+      .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     stubRaf();
@@ -300,7 +332,8 @@ describe('Scrollable Tabs', () => {
   });
 
   it('should scroll on arrow click', () => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list')).nativeElement;
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+      .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     const scrollToSpy: jasmine.Spy = spyOn(list, 'scrollTo');
@@ -347,6 +380,10 @@ describe('Tab Menu Mode', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    restoreRaf();
+  });
+
   it('should render without panels in navigation mode', () => {
     const panels: DebugElement | null = fixture.debugElement.query(By.css('section.tab-panels'));
     expect(panels).toBeNull();
@@ -354,7 +391,8 @@ describe('Tab Menu Mode', () => {
 
   it('should emit value on tab click', () => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
-    buttons[1].nativeElement.click();
+    const target: HTMLButtonElement = buttons[1].nativeElement as HTMLButtonElement;
+    target.click();
     fixture.detectChanges();
 
     const component: TabsNavigationHostComponent = fixture.componentInstance;
@@ -363,7 +401,8 @@ describe('Tab Menu Mode', () => {
 
   it('should highlight the active tab', () => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
-    buttons[2].nativeElement.click();
+    const target: HTMLButtonElement = buttons[2].nativeElement as HTMLButtonElement;
+    target.click();
     fixture.detectChanges();
 
     expect(buttons[2].attributes['aria-selected']).toBe('true');
@@ -381,6 +420,10 @@ describe('Per-Panel Lazy', () => {
 
     fixture = TestBed.createComponent(TabsPerTabOverrideHostComponent);
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    restoreRaf();
   });
 
   it('should respect per-tab lazy override', async () => {
@@ -419,12 +462,18 @@ describe('Tabs interactions', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    restoreRaf();
+  });
+
   function tabButtons(): HTMLButtonElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('button.tab-trigger'));
+    return Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button.tab-trigger')
+    );
   }
 
   function tabPanels(): HTMLElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('ui-lib-tab-panel'));
+    return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-tab-panel'));
   }
 
   it('selects the first tab by default', () => {
@@ -480,7 +529,9 @@ describe('Tabs interactions', () => {
       );
       freshFixture.componentInstance.variant = variant;
       freshFixture.detectChanges();
-      return freshFixture.nativeElement.querySelector('nav.tab-list');
+      return (freshFixture.nativeElement as HTMLElement).querySelector(
+        'nav.tab-list'
+      ) as HTMLElement;
     };
 
     const materialList: HTMLElement = createVariantFixture('material');
@@ -494,7 +545,9 @@ describe('Tabs interactions', () => {
   });
 
   it('exposes tablist, tab, and tabpanel roles with proper aria linkage', () => {
-    const tabList: HTMLElement | null = fixture.nativeElement.querySelector('nav.tab-list');
+    const tabList: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'nav.tab-list'
+    );
     const buttons: HTMLButtonElement[] = tabButtons();
     const panels: HTMLElement[] = tabPanels();
 

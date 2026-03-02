@@ -18,7 +18,7 @@ export class LiveAnnouncerService implements OnDestroy {
   /**
    * Announce a message to screen readers
    */
-  announce(
+  public announce(
     message: string,
     politeness: AriaLivePoliteness = 'polite',
     duration: number = 0
@@ -58,21 +58,21 @@ export class LiveAnnouncerService implements OnDestroy {
   /**
    * Announce an error message (assertive)
    */
-  announceError(message: string): Promise<void> {
+  public announceError(message: string): Promise<void> {
     return this.announce(message, 'assertive');
   }
 
   /**
    * Announce a success message (polite)
    */
-  announceSuccess(message: string): Promise<void> {
+  public announceSuccess(message: string): Promise<void> {
     return this.announce(message, 'polite');
   }
 
   /**
    * Clear any current announcement
    */
-  clear(): void {
+  public clear(): void {
     if (this.liveElement) {
       this.liveElement.textContent = '';
     }
@@ -104,7 +104,7 @@ export class LiveAnnouncerService implements OnDestroy {
     document.body.appendChild(this.liveElement);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.liveElement?.remove();
     if (this.currentTimeout) {
       clearTimeout(this.currentTimeout);

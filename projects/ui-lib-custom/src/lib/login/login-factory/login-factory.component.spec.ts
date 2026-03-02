@@ -26,26 +26,34 @@ describe('LoginFactoryComponent', () => {
   it('should render Login1Component for variant "1"', () => {
     fixture.componentRef.setInput('variant', '1');
     fixture.detectChanges();
-    const login1Element = fixture.nativeElement.querySelector('lib-login-1');
+    const login1Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'lib-login-1'
+    );
     expect(login1Element).toBeTruthy();
   });
 
   it('should render Login2Component for variant "2"', () => {
     fixture.componentRef.setInput('variant', '2');
     fixture.detectChanges();
-    const login2Element = fixture.nativeElement.querySelector('lib-login-2');
+    const login2Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'lib-login-2'
+    );
     expect(login2Element).toBeTruthy();
   });
 
   it('should render Login3Component for variant "3"', () => {
     fixture.componentRef.setInput('variant', '3');
     fixture.detectChanges();
-    const login3Element = fixture.nativeElement.querySelector('lib-login-3');
+    const login3Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'lib-login-3'
+    );
     expect(login3Element).toBeTruthy();
   });
 
   it('should render Login1Component for default variant', () => {
-    const login1Element = fixture.nativeElement.querySelector('lib-login-1');
+    const login1Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'lib-login-1'
+    );
     expect(login1Element).toBeTruthy();
   });
 

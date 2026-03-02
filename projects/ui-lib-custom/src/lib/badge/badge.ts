@@ -73,7 +73,7 @@ export class Badge {
       bootstrap: 'outline',
       minimal: 'subtle',
     };
-    return map[global] ?? 'solid';
+    return map[global];
   });
 
   /** Computed CSS classes for the badge element */

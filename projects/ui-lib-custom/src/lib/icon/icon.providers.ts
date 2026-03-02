@@ -4,11 +4,12 @@ import type { IconConfig, IconLibrary } from './icon.types';
 import { LUCIDE_ICONS } from './presets';
 import { MATERIAL_ICONS } from './presets';
 import { BOOTSTRAP_ICONS } from './presets';
+import type { Provider } from '@angular/core';
 
 export function provideUiLibIcons(options?: {
   defaultLibrary?: IconLibrary;
   additionalIcons?: Record<string, unknown>;
-}) {
+}): Provider[] {
   const baseIcons = {
     ...MATERIAL_ICONS,
     ...BOOTSTRAP_ICONS,

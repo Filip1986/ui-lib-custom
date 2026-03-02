@@ -53,11 +53,11 @@ const PAIRINGS: FontPairing[] = [
 
 @Injectable({ providedIn: 'root' })
 export class FontPairingService {
-  list(): FontPairing[] {
+  public list(): FontPairing[] {
     return PAIRINGS;
   }
 
-  findByName(name: string): FontPairing | undefined {
+  public findByName(name: string): FontPairing | undefined {
     return PAIRINGS.find((p) => p.name === name);
   }
 }

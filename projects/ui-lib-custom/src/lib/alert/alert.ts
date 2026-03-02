@@ -62,7 +62,7 @@ export class Alert {
       warning: 'warning',
       info: 'info',
     };
-    return iconMap[this.severity()];
+    return iconMap[this.severity()] ?? 'info';
   });
 
   public readonly effectiveVariant = computed<'material' | 'bootstrap' | 'minimal'>(

@@ -20,7 +20,7 @@ export interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  menuItems = signal<NavItem[]>([
+  public readonly menuItems = signal<NavItem[]>([
     {
       label: 'Getting Started',
       icon: 'pi pi-home',
@@ -153,20 +153,22 @@ export class SidebarComponent {
     },
   ]);
 
-  toggleSection(item: NavItem) {
+  public toggleSection(item: NavItem): void {
     this.menuItems.update((items) =>
-      items.map((it) =>
-        it === item
-          ? { ...it, expanded: !it.expanded }
-          : it.items?.includes(item)
-            ? {
-                ...it,
-                items: it.items?.map((sub) =>
-                  sub === item ? { ...sub, expanded: !sub.expanded } : sub
-                ),
-              }
-            : it
-      )
+      items.map((it) => {
+        if (it === item) {
+          return { ...it, expanded: !it.expanded };
+        }
+        if (it.items && it.items.includes(item)) {
+          return {
+            ...it,
+            items: it.items.map((sub) =>
+              sub === item ? { ...sub, expanded: !sub.expanded } : sub
+            ),
+          };
+        }
+        return it;
+      })
     );
   }
 }

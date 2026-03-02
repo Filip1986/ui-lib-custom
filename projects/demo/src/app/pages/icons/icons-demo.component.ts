@@ -114,14 +114,14 @@ export class IconsDemoComponent {
   }
 
   public copyIconName(icon: string): void {
-    if (
-      typeof navigator !== 'undefined' &&
-      navigator.clipboard &&
-      typeof navigator.clipboard.writeText === 'function'
-    ) {
-      void navigator.clipboard.writeText(`<ui-lib-icon name="${icon}" />`).catch((err: unknown) => {
-        console.error(err);
-      });
+    try {
+      void navigator.clipboard
+        .writeText(`<ui-lib-icon name=\"${icon}\" />`)
+        .catch((err: unknown) => {
+          console.error(err);
+        });
+    } catch {
+      // Ignore clipboard failures in non-secure contexts.
     }
   }
 }

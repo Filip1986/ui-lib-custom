@@ -11,14 +11,14 @@ import { LiveAnnouncerService, AriaLivePoliteness } from './live-announcer.servi
 export class AnnounceDirective {
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
 
-  uiLibAnnounce = input<string>('');
-  politeness = input<AriaLivePoliteness>('polite');
+  public readonly uiLibAnnounce = input<string>('');
+  public readonly politeness = input<AriaLivePoliteness>('polite');
 
   constructor() {
     effect((): void => {
       const message: string = this.uiLibAnnounce();
       if (message) {
-        this.liveAnnouncer.announce(message, this.politeness());
+        void this.liveAnnouncer.announce(message, this.politeness());
       }
     });
   }
@@ -33,14 +33,15 @@ export class AnnounceDirective {
 })
 export class AnnounceOnChangeDirective {
   private readonly liveAnnouncer = inject(LiveAnnouncerService);
-  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly el = inject(ElementRef) as ElementRef<HTMLElement>;
 
   @HostListener('change')
   @HostListener('input')
-  onValueChange(): void {
-    const message: string | null = this.el.nativeElement.getAttribute('data-announce-message');
+  public onValueChange(): void {
+    const element: HTMLElement = this.el.nativeElement;
+    const message: string | null = element.getAttribute('data-announce-message');
     if (message) {
-      this.liveAnnouncer.announce(message, 'polite');
+      void this.liveAnnouncer.announce(message, 'polite');
     }
   }
 }

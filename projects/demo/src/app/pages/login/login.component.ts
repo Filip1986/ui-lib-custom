@@ -235,7 +235,23 @@ export class ExampleComponent { }`,
   }
 
   public getActiveVariant(): LoginVariant {
-    return this.variants.find((v) => v.id === this.activeVariant()) || this.variants[0];
+    const current = this.variants.find((v) => v.id === this.activeVariant());
+    if (current) {
+      return current;
+    }
+    const fallback = this.variants[0];
+    if (fallback) {
+      return fallback;
+    }
+    return {
+      id: 'variant1',
+      title: 'Login Variant 1',
+      description: '',
+      features: [],
+      importCode: '',
+      usageCode: '',
+      background: '',
+    };
   }
 
   public async copyToClipboard(text: string, key: string): Promise<void> {

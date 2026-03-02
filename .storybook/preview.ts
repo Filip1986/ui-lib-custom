@@ -1,23 +1,26 @@
 import type { Preview } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { ThemeWrapperComponent } from './theme-wrapper.component';
+import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
+import type { ShapeToken } from 'ui-lib-custom/tokens';
 
 const preview: Preview = {
   decorators: [
     moduleMetadata({
       imports: [ThemeWrapperComponent],
     }),
-    (storyFn, context) => {
-      const story = storyFn();
+    (storyFn: () => StoryResult, context: { globals: StoryGlobals }): StoryResult => {
+      const story: StoryResult = storyFn();
       const template: string = story.template ?? '';
+      const globals: StoryGlobals = context.globals;
       return {
         ...story,
         template: `<sb-theme-wrapper [variant]="variant" [mode]="mode" [shape]="shape">${template}</sb-theme-wrapper>`,
         props: {
           ...(story.props ?? {}),
-          variant: context.globals['variant'],
-          mode: context.globals['mode'],
-          shape: context.globals['shape'],
+          variant: globals.variant,
+          mode: globals.mode,
+          shape: globals.shape,
         },
       };
     },
@@ -59,3 +62,14 @@ const preview: Preview = {
 };
 
 export default preview;
+
+interface StoryGlobals {
+  variant: ThemeVariant;
+  mode: ThemeMode;
+  shape: ShapeToken;
+}
+
+interface StoryResult {
+  template?: string;
+  props?: Record<string, unknown>;
+}

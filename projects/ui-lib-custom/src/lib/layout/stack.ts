@@ -7,8 +7,10 @@ import {
 } from '@angular/core';
 import { SPACING_TOKENS, SpacingToken, STACK_TOKENS, StackToken } from 'ui-lib-custom/tokens';
 
-const stackVar = (token: StackToken) => `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
-const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const stackVar = (token: StackToken): string =>
+  `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
+const spaceVar = (token: SpacingToken): string =>
+  `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
 
 export type StackDirection = 'vertical' | 'horizontal';
 export type StackAlign = 'start' | 'center' | 'end' | 'stretch';
@@ -80,7 +82,7 @@ export class Stack {
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
   protected readonly _gapValue = computed<string>(() => {
     const semantic = this.spacing();
-    if (semantic !== null && semantic !== undefined) {
+    if (semantic !== null) {
       return typeof semantic === 'number'
         ? spaceVar(semantic as SpacingToken)
         : stackVar(semantic as StackToken);

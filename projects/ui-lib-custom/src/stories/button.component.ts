@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'storybook-button',
@@ -14,19 +14,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     {{ label }}
   </button>`,
   styleUrls: ['./button.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   /** Is this the principal call to action on the page? */
   @Input()
-  primary = false;
+  public primary = false;
 
   /** What background color to use */
   @Input()
-  backgroundColor?: string;
+  public backgroundColor?: string;
 
   /** How large should the button be? */
   @Input()
-  size: 'small' | 'medium' | 'large' = 'medium';
+  public size: 'small' | 'medium' | 'large' = 'medium';
 
   /**
    * Button contents
@@ -34,11 +35,11 @@ export class ButtonComponent {
    * @required
    */
   @Input()
-  label = 'Button';
+  public label = 'Button';
 
   /** Optional click handler */
   @Output()
-  clicked = new EventEmitter<Event>();
+  public clicked = new EventEmitter<Event>();
 
   public get classes(): string[] {
     const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
@@ -6,6 +6,7 @@ import { UiLibInput, InputVariant } from './input';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [FormsModule, UiLibInput],
   template: `
@@ -19,7 +20,7 @@ import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
   `,
 })
 class NgModelHostComponent {
-  value: string = 'Ada';
+  public value: string = 'Ada';
 }
 
 @Component({
@@ -30,9 +31,10 @@ class NgModelHostComponent {
       <ui-lib-input label="Name" formControlName="name" />
     </form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ReactiveHostComponent {
-  readonly form: FormGroup<{ name: FormControl<string> }> = new FormGroup({
+  public readonly form: FormGroup<{ name: FormControl<string> }> = new FormGroup({
     name: new FormControl<string>('', { nonNullable: true }),
   });
 }
@@ -49,12 +51,16 @@ describe('UiLibInput basics', () => {
     fixture.detectChanges();
   });
 
+  function rootEl(): HTMLElement {
+    return fixture.nativeElement as HTMLElement;
+  }
+
   function hostEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('.ui-input');
+    return rootEl().querySelector('.ui-input') as HTMLElement;
   }
 
   function inputEl(): HTMLInputElement {
-    return fixture.nativeElement.querySelector('input');
+    return rootEl().querySelector('input') as HTMLInputElement;
   }
 
   it('creates with defaults', () => {
@@ -79,7 +85,7 @@ describe('UiLibInput basics', () => {
     fixture.componentRef.setInput('label', 'Email');
     fixture.detectChanges();
 
-    const label: HTMLElement | null = fixture.nativeElement.querySelector('.ui-input-label-text');
+    const label: HTMLElement | null = rootEl().querySelector('.ui-input-label-text');
     expect(label?.textContent).toContain('Email');
   });
 
@@ -156,8 +162,7 @@ describe('UiLibInput basics', () => {
     fixture.componentInstance.writeValue('Ada');
     fixture.detectChanges();
 
-    const clearBtn: HTMLButtonElement | null =
-      fixture.nativeElement.querySelector('button.ui-input-clear');
+    const clearBtn: HTMLButtonElement | null = rootEl().querySelector('button.ui-input-clear');
     expect(clearBtn).toBeTruthy();
 
     clearBtn?.click();
@@ -171,8 +176,7 @@ describe('UiLibInput basics', () => {
     fixture.componentRef.setInput('showTogglePassword', true);
     fixture.detectChanges();
 
-    const toggleBtn: HTMLButtonElement | null =
-      fixture.nativeElement.querySelector('button.ui-input-toggle');
+    const toggleBtn: HTMLButtonElement | null = rootEl().querySelector('button.ui-input-toggle');
     expect(inputEl().getAttribute('type')).toBe('password');
 
     toggleBtn?.click();
@@ -187,7 +191,7 @@ describe('UiLibInput basics', () => {
     fixture.componentInstance.writeValue('Ada');
     fixture.detectChanges();
 
-    const counter: HTMLElement | null = fixture.nativeElement.querySelector('.ui-input-counter');
+    const counter: HTMLElement | null = rootEl().querySelector('.ui-input-counter');
     expect(counter?.textContent).toContain('3 / 10');
   });
 
@@ -213,8 +217,7 @@ describe('UiLibInput basics', () => {
     fixture.componentInstance.writeValue('Ada');
     fixture.detectChanges();
 
-    const clearBtn: HTMLButtonElement | null =
-      fixture.nativeElement.querySelector('button.ui-input-clear');
+    const clearBtn: HTMLButtonElement | null = rootEl().querySelector('button.ui-input-clear');
     const spy: jasmine.Spy = spyOn(inputEl(), 'focus');
 
     const mockTarget: { closest: (selector: string) => HTMLButtonElement | null } = {
@@ -235,8 +238,7 @@ describe('UiLibInput basics', () => {
     fixture.componentInstance.writeValue('Ada');
     fixture.detectChanges();
 
-    const clearBtn: HTMLButtonElement | null =
-      fixture.nativeElement.querySelector('button.ui-input-clear');
+    const clearBtn: HTMLButtonElement | null = rootEl().querySelector('button.ui-input-clear');
     clearBtn?.click();
     fixture.detectChanges();
 
@@ -249,8 +251,7 @@ describe('UiLibInput basics', () => {
     fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
-    const toggleBtn: HTMLButtonElement | null =
-      fixture.nativeElement.querySelector('button.ui-input-toggle');
+    const toggleBtn: HTMLButtonElement | null = rootEl().querySelector('button.ui-input-toggle');
     toggleBtn?.click();
     fixture.detectChanges();
 
@@ -289,7 +290,7 @@ describe('UiLibInput ngModel integration', () => {
   });
 
   function inputEl(): HTMLInputElement {
-    return fixture.nativeElement.querySelector('input');
+    return (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
   }
 
   it('reflects ngModel value in the input', async () => {
@@ -300,7 +301,9 @@ describe('UiLibInput ngModel integration', () => {
     await flushMicrotasks();
     freshFixture.detectChanges(false);
 
-    const freshInput: HTMLInputElement = freshFixture.nativeElement.querySelector('input');
+    const freshInput: HTMLInputElement = (freshFixture.nativeElement as HTMLElement).querySelector(
+      'input'
+    ) as HTMLInputElement;
     expect(freshInput.value).toBe('Grace');
   });
 
@@ -328,7 +331,7 @@ describe('UiLibInput Reactive Forms', () => {
   });
 
   function inputEl(): HTMLInputElement {
-    return fixture.nativeElement.querySelector('input');
+    return (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
   }
 
   it('updates control value and dirty state', () => {
@@ -413,15 +416,16 @@ describe('UiLibInput accessibility', () => {
   });
 
   function inputEl(): HTMLInputElement {
-    return fixture.nativeElement.querySelector('input');
+    return (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
   }
 
   it('associates label with input via for/id', () => {
     fixture.componentRef.setInput('label', 'Email');
     fixture.detectChanges();
 
-    const labelEl: HTMLLabelElement | null =
-      fixture.nativeElement.querySelector('label.ui-input-label');
+    const labelEl: HTMLLabelElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'label.ui-input-label'
+    );
     const inputId: string | null = inputEl().getAttribute('id');
     expect(labelEl?.getAttribute('for')).toBe(inputId);
   });
@@ -430,7 +434,9 @@ describe('UiLibInput accessibility', () => {
     fixture.componentRef.setInput('error', 'Required');
     fixture.detectChanges();
 
-    const errorEl: HTMLElement | null = fixture.nativeElement.querySelector('.ui-input-error-text');
+    const errorEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-input-error-text'
+    );
     expect(inputEl().getAttribute('aria-describedby')).toBe(errorEl?.id ?? null);
   });
 

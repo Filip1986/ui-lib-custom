@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Tabs } from './tabs';
@@ -14,6 +14,7 @@ import { Tab } from './tab';
       <ui-lib-tab label="Tab 3">Three</ui-lib-tab>
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RtlTabsHostComponent {}
 
@@ -27,6 +28,7 @@ class RtlTabsHostComponent {}
       <ui-lib-tab label="Gamma">Gamma</ui-lib-tab>
     </ui-lib-tabs>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class RtlScrollableTabsHostComponent {}
 
@@ -43,11 +45,15 @@ describe('Tabs RTL Support', () => {
   });
 
   function tabButtons(): HTMLButtonElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('button.tab-trigger'));
+    return Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button.tab-trigger')
+    );
   }
 
   it('should apply rtl class when dir is rtl', () => {
-    const tabsEl: HTMLElement = fixture.nativeElement.querySelector('ui-lib-tabs');
+    const tabsEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-tabs'
+    ) as HTMLElement;
     expect(tabsEl.classList.contains('ui-tabs--rtl')).toBeTruthy();
   });
 

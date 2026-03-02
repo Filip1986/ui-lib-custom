@@ -11,12 +11,18 @@ import { Icon, IconLibrary, SemanticIcon, SEMANTIC_ICONS } from 'ui-lib-custom';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconPreview {
-  libraries: IconLibrary[] = ['lucide', 'bootstrap', 'material', 'heroicons', 'tabler'];
-  semanticIcons: SemanticIcon[] = SEMANTIC_ICONS;
+  public readonly libraries: IconLibrary[] = [
+    'lucide',
+    'bootstrap',
+    'material',
+    'heroicons',
+    'tabler',
+  ];
+  public readonly semanticIcons: SemanticIcon[] = SEMANTIC_ICONS;
 
-  selectedIcon = signal<SemanticIcon>('home');
+  public readonly selectedIcon = signal<SemanticIcon>('home');
 
-  onIconSelect(event: Event) {
+  public onIconSelect(event: Event): void {
     this.selectedIcon.set((event.target as HTMLSelectElement).value as SemanticIcon);
   }
 }

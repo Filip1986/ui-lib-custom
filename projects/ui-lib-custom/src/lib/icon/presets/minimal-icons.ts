@@ -52,6 +52,7 @@ import {
   lucideBellElectric,
 } from '@ng-icons/lucide';
 import type { IconMapping } from '../icon.semantics';
+import type { Provider } from '@angular/core';
 
 export const LUCIDE_ICON_MAPPING: IconMapping = {
   // Actions
@@ -185,6 +186,6 @@ export const LUCIDE_ICONS = {
   lucideBellElectric,
 };
 
-export function provideMinimalIcons(extra: Record<string, unknown> = {}) {
+export function provideMinimalIcons(extra: Record<string, unknown> = {}): Provider[] {
   return provideIcons({ ...LUCIDE_ICONS, ...extra });
 }

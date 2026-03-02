@@ -44,7 +44,9 @@ describe('Alert', () => {
     fixture.componentRef.setInput('dismissible', true);
     fixture.detectChanges();
 
-    const closeIcon: HTMLElement | null = fixture.nativeElement.querySelector('.alert-close');
+    const closeIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.alert-close'
+    );
     expect(closeIcon).toBeTruthy();
     expect(closeIcon?.getAttribute('role')).toBe('button');
     expect(closeIcon?.getAttribute('aria-label')).toBe('Dismiss alert');

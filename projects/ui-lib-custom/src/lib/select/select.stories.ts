@@ -1,8 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import type { SelectOption } from './select';
+import type { SelectOption, SelectVariant, SelectSize } from './select';
 import { UiLibSelect } from './select';
 
-type Story = StoryObj;
+type Story = StoryObj<typeof UiLibSelect>;
+
+type SelectStoryArgs = {
+  label: string;
+  placeholder: string;
+  variant: SelectVariant | null;
+  size: SelectSize;
+  disabled: boolean;
+  required: boolean;
+  invalid: boolean;
+  multiple: boolean;
+  searchable: boolean;
+  loading: boolean;
+};
 
 const options: SelectOption[] = [
   { label: 'Alpha', value: 'alpha' },
@@ -32,8 +45,8 @@ const meta: Meta = {
 export default meta;
 
 const renderSelect = (
-  args: Record<string, any>
-): { props: Record<string, any>; template: string } => ({
+  args: Partial<SelectStoryArgs>
+): { props: Partial<SelectStoryArgs> & { options: SelectOption[] }; template: string } => ({
   props: { ...args, options },
   template: `
     <ui-lib-select

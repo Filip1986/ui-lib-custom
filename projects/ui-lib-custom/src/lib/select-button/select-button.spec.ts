@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
@@ -8,6 +8,7 @@ import {
   SelectButtonOption,
   SelectButtonSize,
   SelectButtonVariant,
+  SelectButtonValue,
 } from './select-button.types';
 
 const defaultOptions: SelectButtonOption[] = [
@@ -36,23 +37,24 @@ const defaultOptions: SelectButtonOption[] = [
       (selectionChange)="onChange($event)"
     />
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-  options = signal<SelectButtonOption[]>(defaultOptions);
-  multiple = signal<boolean>(false);
-  variant = signal<SelectButtonVariant>('material');
-  size = signal<SelectButtonSize>('md');
-  disabled = signal<boolean>(false);
-  invalid = signal<boolean>(false);
-  allowEmpty = signal<boolean>(false);
-  optionLabel = signal<string>('label');
-  optionValue = signal<string>('value');
-  optionDisabled = signal<string>('disabled');
-  ariaLabelledBy = signal<string | null>(null);
-  value: any | any[] | null = null;
-  lastChange: SelectButtonChangeEvent | null = null;
+  public readonly options = signal<SelectButtonOption[]>(defaultOptions);
+  public readonly multiple = signal<boolean>(false);
+  public readonly variant = signal<SelectButtonVariant>('material');
+  public readonly size = signal<SelectButtonSize>('md');
+  public readonly disabled = signal<boolean>(false);
+  public readonly invalid = signal<boolean>(false);
+  public readonly allowEmpty = signal<boolean>(false);
+  public readonly optionLabel = signal<string>('label');
+  public readonly optionValue = signal<string>('value');
+  public readonly optionDisabled = signal<string>('disabled');
+  public readonly ariaLabelledBy = signal<string | null>(null);
+  public value: SelectButtonValue | SelectButtonValue[] | null = null;
+  public lastChange: SelectButtonChangeEvent | null = null;
 
-  onChange(event: SelectButtonChangeEvent): void {
+  public onChange(event: SelectButtonChangeEvent): void {
     this.lastChange = event;
   }
 }
@@ -61,20 +63,22 @@ class HostComponent {
   standalone: true,
   imports: [SelectButton, FormsModule],
   template: ` <ui-lib-select-button [options]="options" [(ngModel)]="value" /> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class NgModelHostComponent {
-  options: SelectButtonOption[] = defaultOptions;
-  value: string | null = null;
+  public options: SelectButtonOption[] = defaultOptions;
+  public value: string | null = null;
 }
 
 @Component({
   standalone: true,
   imports: [SelectButton, ReactiveFormsModule],
   template: ` <ui-lib-select-button [options]="options" [formControl]="control" /> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ReactiveHostComponent {
-  options: SelectButtonOption[] = defaultOptions;
-  control = new FormControl<string | null>('opt2');
+  public options: SelectButtonOption[] = defaultOptions;
+  public control = new FormControl<string | null>('opt2');
 }
 
 @Component({
@@ -87,33 +91,36 @@ class ReactiveHostComponent {
       </ng-template>
     </ui-lib-select-button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TemplateHostComponent {
-  options: SelectButtonOption[] = defaultOptions;
-  value: string | null = null;
+  public options: SelectButtonOption[] = defaultOptions;
+  public value: string | null = null;
 }
 
 @Component({
   standalone: true,
   imports: [SelectButton],
   template: ` <ui-lib-select-button [options]="options" [(value)]="value" /> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class PrimitiveHostComponent {
-  options: SelectButtonOption[] = ['A', 'B', 'C'] as unknown as SelectButtonOption[];
-  value: string | null = null;
+  public options: SelectButtonOption[] = ['A', 'B', 'C'] as unknown as SelectButtonOption[];
+  public value: string | null = null;
 }
 
 @Component({
   standalone: true,
   imports: [SelectButton],
   template: ` <ui-lib-select-button [options]="options" [(value)]="value" /> `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ObjectValueHostComponent {
-  options: SelectButtonOption[] = [
+  public options: SelectButtonOption[] = [
     { label: 'Alpha', value: { id: 1 } },
     { label: 'Beta', value: { id: 2 } },
   ];
-  value: { id: number } | null = null;
+  public value: { id: number } | null = null;
 }
 
 @Component({
@@ -124,10 +131,11 @@ class ObjectValueHostComponent {
       <ui-lib-select-button [options]="options" formControlName="choice" />
     </form>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ReactiveFormNameHostComponent {
-  options: SelectButtonOption[] = defaultOptions;
-  form: FormGroup<{ choice: FormControl<string | null> }> = new FormGroup({
+  public options: SelectButtonOption[] = defaultOptions;
+  public form: FormGroup<{ choice: FormControl<string | null> }> = new FormGroup({
     choice: new FormControl<string | null>('opt2'),
   });
 }
@@ -146,11 +154,13 @@ describe('SelectButton', () => {
   });
 
   function hostEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('ui-lib-select-button');
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-select-button'
+    ) as HTMLElement;
   }
 
   function buttons(): HTMLButtonElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('button'));
+    return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button'));
   }
 
   describe('Component creation', () => {
@@ -287,7 +297,9 @@ describe('SelectButton', () => {
       fixture.componentInstance.optionLabel.set('name');
       fixture.detectChanges();
 
-      expect(buttons()[0].textContent?.trim()).toBe('A');
+      const text = buttons()[0].textContent;
+      expect(text).toBeTruthy();
+      expect((text as string).trim()).toBe('A');
     });
 
     it('handles optionValue property', () => {
@@ -326,7 +338,7 @@ describe('SelectButton', () => {
       primitiveFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        primitiveFixture.nativeElement.querySelectorAll('button')
+        (primitiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       btns[1].click();
       primitiveFixture.detectChanges();
@@ -340,7 +352,7 @@ describe('SelectButton', () => {
       objectFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        objectFixture.nativeElement.querySelectorAll('button')
+        (objectFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       btns[0].click();
       objectFixture.detectChanges();
@@ -356,7 +368,7 @@ describe('SelectButton', () => {
       ngModelFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        ngModelFixture.nativeElement.querySelectorAll('button')
+        (ngModelFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       btns[0].click();
       ngModelFixture.detectChanges();
@@ -370,7 +382,7 @@ describe('SelectButton', () => {
       reactiveFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        reactiveFixture.nativeElement.querySelectorAll('button')
+        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       expect(btns[1].getAttribute('aria-checked')).toBe('true');
 
@@ -385,7 +397,7 @@ describe('SelectButton', () => {
       reactiveFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        reactiveFixture.nativeElement.querySelectorAll('button')
+        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       expect(btns[1].getAttribute('aria-checked')).toBe('true');
 
@@ -406,7 +418,7 @@ describe('SelectButton', () => {
         reactiveFixture.componentInstance.form.controls.choice;
 
       const btns: HTMLButtonElement[] = Array.from(
-        reactiveFixture.nativeElement.querySelectorAll('button')
+        (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       btns[0].dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
 
@@ -423,7 +435,9 @@ describe('SelectButton', () => {
       control.disable();
       reactiveFixture.detectChanges();
 
-      const host: HTMLElement = reactiveFixture.nativeElement.querySelector('ui-lib-select-button');
+      const host: HTMLElement = (reactiveFixture.nativeElement as HTMLElement).querySelector(
+        'ui-lib-select-button'
+      ) as HTMLElement;
       expect(host.className).toContain('ui-lib-select-button--disabled');
     });
 
@@ -437,7 +451,7 @@ describe('SelectButton', () => {
       component.registerOnChange(onChangeSpy);
 
       const btns: HTMLButtonElement[] = Array.from(
-        selectFixture.nativeElement.querySelectorAll('button')
+        (selectFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       btns[0].click();
       selectFixture.detectChanges();
@@ -481,7 +495,7 @@ describe('SelectButton', () => {
       selectFixture.detectChanges();
 
       const btns: HTMLButtonElement[] = Array.from(
-        selectFixture.nativeElement.querySelectorAll('button')
+        (selectFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
       expect(btns[0].getAttribute('aria-checked')).toBe('true');
     });
@@ -583,10 +597,13 @@ describe('SelectButton', () => {
         TestBed.createComponent(TemplateHostComponent);
       templateFixture.detectChanges();
 
-      const customItems: NodeListOf<HTMLElement> =
-        templateFixture.nativeElement.querySelectorAll('.custom-item');
+      const customItems: NodeListOf<HTMLElement> = (
+        templateFixture.nativeElement as HTMLElement
+      ).querySelectorAll('.custom-item');
       expect(customItems.length).toBe(3);
-      expect(customItems[0].textContent?.trim()).toBe('Option 1');
+      const customText = customItems[0].textContent;
+      expect(customText).toBeTruthy();
+      expect((customText as string).trim()).toBe('Option 1');
     });
   });
 
@@ -629,7 +646,7 @@ describe('SelectButton keyboard behavior', () => {
   }
 
   function buttons(): HTMLButtonElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('button'));
+    return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button'));
   }
 
   it('moves focus with arrow keys', () => {
@@ -691,7 +708,7 @@ describe('SelectButton resolvers', () => {
     const option: SelectButtonOption = { label: 'Alpha' } as SelectButtonOption;
     fixture.detectChanges();
 
-    const value: any = fixture.componentInstance.resolveValue(option);
+    const value: SelectButtonValue = fixture.componentInstance.resolveValue(option);
     expect(value).toBe('Alpha');
   });
 

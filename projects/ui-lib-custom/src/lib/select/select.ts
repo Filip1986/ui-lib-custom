@@ -173,6 +173,11 @@ export class UiLibSelect implements ControlValueAccessor {
     if (this.multiple()) {
       this.internalValue.set(Array.isArray(obj) ? obj : obj === null ? [] : [obj]);
     } else {
+      if (Array.isArray(obj)) {
+        const first = obj[0] ?? null;
+        this.internalValue.set(first === null ? [] : [first]);
+        return;
+      }
       this.internalValue.set(obj === null ? [] : [obj]);
     }
   }
@@ -272,7 +277,10 @@ export class UiLibSelect implements ControlValueAccessor {
     const idx = this.focusedIndex();
     const opts = this.filteredOptions();
     if (idx >= 0 && idx < opts.length) {
-      this.selectOption(opts[idx]);
+      const option = opts[idx];
+      if (option) {
+        this.selectOption(option);
+      }
     }
   }
 
@@ -364,6 +372,7 @@ export class UiLibSelect implements ControlValueAccessor {
     for (let i = 0; i < opts.length; i += 1) {
       const index = (startIndex + i) % opts.length;
       const option = opts[index];
+      if (!option) continue;
       if (option.disabled) continue;
       const label = this.getOptionLabel(option).toLowerCase();
       if (label.startsWith(searchChar)) {

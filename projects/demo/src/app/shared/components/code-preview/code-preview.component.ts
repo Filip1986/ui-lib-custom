@@ -40,27 +40,23 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodePreviewComponent {
-  code = input.required<string>();
-  language = input<string>('html');
+  public readonly code = input.required<string>();
+  public readonly language = input<string>('html');
 
-  showCode = signal(false);
-  copied = signal(false);
+  public readonly showCode = signal<boolean>(false);
+  public readonly copied = signal<boolean>(false);
 
-  highlightedCode = computed(() => this.escapeHtml(this.code()));
+  public readonly highlightedCode = computed<string>(() => this.escapeHtml(this.code()));
 
-  toggleCode(): void {
+  public toggleCode(): void {
     this.showCode.update((value) => !value);
   }
 
-  async copyCode(): Promise<void> {
+  public async copyCode(): Promise<void> {
     const text = this.code().trimEnd();
 
     try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        this.fallbackCopy(text);
-      }
+      await navigator.clipboard.writeText(text);
     } catch {
       this.fallbackCopy(text);
     }

@@ -1,10 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
+import type { TabsAlignment, TabsOrientation, TabsSize, TabsVariant } from './tabs.types';
 
-type Story = StoryObj;
+type Story = StoryObj<typeof Tabs>;
 
-type TabsStoryArgs = Record<string, any>;
+type TabsStoryArgs = {
+  variant: TabsVariant | null;
+  size: TabsSize;
+  align: TabsAlignment;
+  orientation: TabsOrientation;
+};
 
 const meta: Meta = {
   title: 'Components/Tabs',

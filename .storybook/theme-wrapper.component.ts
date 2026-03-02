@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   Input,
@@ -17,22 +18,23 @@ import { ThemeConfigService, ThemeMode, ThemeVariant } from 'ui-lib-custom/theme
   imports: [CommonModule],
   template: '<ng-content />',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeWrapperComponent implements OnChanges, AfterViewInit {
-  @Input() variant: ThemeVariant = 'material';
-  @Input() mode: ThemeMode = 'light';
-  @Input() shape: ShapeToken = 'rounded';
+  @Input() public variant: ThemeVariant = 'material';
+  @Input() public mode: ThemeMode = 'light';
+  @Input() public shape: ShapeToken = 'rounded';
 
   constructor(
     private readonly themeConfig: ThemeConfigService,
     private readonly hostRef: ElementRef<HTMLElement>
   ) {}
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.syncHostTheme();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes['variant']) {
       this.themeConfig.setVariant(this.variant);
     }
@@ -46,7 +48,7 @@ export class ThemeWrapperComponent implements OnChanges, AfterViewInit {
   }
 
   private syncHostTheme(): void {
-    const host = this.hostRef?.nativeElement ?? null;
+    const host: HTMLElement = this.hostRef.nativeElement;
     this.themeConfig.applyToRoot(null, host);
     this.themeConfig.applyThemeToDocument(host);
   }

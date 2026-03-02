@@ -10,21 +10,17 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocCodeSnippetComponent {
-  @Input() title = 'Code';
-  @Input({ required: true }) code = '';
-  @Input() language = '';
+  @Input() public title: string = 'Code';
+  @Input({ required: true }) public code: string = '';
+  @Input() public language: string = '';
 
-  readonly copied = signal(false);
+  public readonly copied = signal<boolean>(false);
 
-  async copy(): Promise<void> {
+  public async copy(): Promise<void> {
     const text = this.code.trimEnd();
 
     try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        this.fallbackCopy(text);
-      }
+      await navigator.clipboard.writeText(text);
     } catch {
       this.fallbackCopy(text);
     }

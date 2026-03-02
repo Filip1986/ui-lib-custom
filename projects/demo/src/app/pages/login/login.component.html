@@ -32,7 +32,10 @@
           (selectedChange)="onVariantChange($event.value)"
         >
           @for (variant of variants; track variant.id) {
-            <ui-lib-tab [value]="variant.id" [label]="variant.title.split(' - ')[1]"></ui-lib-tab>
+            <ui-lib-tab
+              [value]="variant.id"
+              [label]="variant.title.split(' - ')[1] ?? variant.title"
+            ></ui-lib-tab>
           }
         </ui-lib-tabs>
       </div>

@@ -1,10 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Accordion } from './accordion';
 import { AccordionPanel, AccordionHeader } from './accordion-panel';
+import type { AccordionVariant, AccordionSize, AccordionExpandMode } from './accordion';
 
-type Story = StoryObj;
+type Story = StoryObj<typeof Accordion>;
 
-type AccordionStoryArgs = Record<string, any>;
+type AccordionStoryArgs = {
+  variant: AccordionVariant | null;
+  size: AccordionSize;
+  expandMode: AccordionExpandMode;
+};
 
 const meta: Meta = {
   title: 'Components/Accordion',

@@ -22,5 +22,5 @@ export class Login1Component extends BaseLoginComponent {
   /**
    * Override loading property from base component
    */
-  override loading = input<boolean>(false);
+  public override readonly loading = input<boolean>(false);
 }

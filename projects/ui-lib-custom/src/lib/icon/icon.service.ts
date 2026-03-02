@@ -33,21 +33,27 @@ export class IconService {
   public readonly config = computed<IconConfig>(() => this.configSignal());
 
   public readonly themeVariant = computed<ThemeVariant | null>(() => {
-    const preset = this.themeConfig?.getPreset?.();
-    return preset?.variant ?? null;
+    const themeConfig = this.themeConfig;
+    if (!themeConfig) {
+      return null;
+    }
+    return themeConfig.getPreset().variant;
   });
 
-  private readonly themeIcons = computed<ThemeIconConfig | null>(
-    () => this.themeConfig?.getPreset?.()?.icons ?? this.themeConfig?.preset?.()?.icons ?? null
-  );
+  private readonly themeIcons = computed<ThemeIconConfig | null>(() => {
+    const themeConfig = this.themeConfig;
+    if (!themeConfig) {
+      return null;
+    }
+    const preset = themeConfig.getPreset();
+    return preset.icons ?? null;
+  });
 
   public getLibraryForVariant(variant?: ComponentVariant | null): IconLibrary {
     const cfg = this.configSignal();
     const themeIcons = this.themeIcons();
     if (variant) {
-      if (cfg.variantMapping[variant as ThemeVariant]) {
-        return cfg.variantMapping[variant as ThemeVariant];
-      }
+      return cfg.variantMapping[variant as ThemeVariant];
     }
     if (themeIcons?.defaultLibrary) {
       return themeIcons.defaultLibrary;
@@ -73,7 +79,7 @@ export class IconService {
   public getIconSize(size?: IconSize | null): string {
     const themeIcons = this.themeIcons();
     const target = size ?? this.configSignal().defaultSize;
-    const themeSize = themeIcons?.sizes?.[target];
+    const themeSize = themeIcons?.sizes[target];
     return themeSize ?? ICON_SIZES[target];
   }
 
@@ -89,7 +95,7 @@ export class IconService {
   public resolveIcon(semantic: SemanticIcon, library?: IconLibrary): string {
     const lib = library ?? this.configSignal().defaultLibrary;
     const mapping = this.mappings[lib];
-    return mapping?.[semantic] ?? semantic;
+    return mapping[semantic] ?? semantic;
   }
 
   public getIconForVariant(semantic: SemanticIcon, variant: ComponentVariant = 'minimal'): string {

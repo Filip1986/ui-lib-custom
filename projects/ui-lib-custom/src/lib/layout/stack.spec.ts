@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Stack } from './stack';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -19,13 +19,14 @@ import { Component } from '@angular/core';
       <div>Item 3</div>
     </ui-lib-stack>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  direction: 'vertical' | 'horizontal' = 'vertical';
-  gap: any = 4;
-  spacing: any = null;
-  align: any = 'stretch';
-  justify: any = 'start';
+  public direction: 'vertical' | 'horizontal' = 'vertical';
+  public gap: number = 4;
+  public spacing: number | null = null;
+  public align: string = 'stretch';
+  public justify: string = 'start';
 }
 
 @Component({
@@ -36,6 +37,7 @@ class TestHostComponent {
       <div>Only Item</div>
     </ui-lib-stack>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DefaultHostComponent {}
 
@@ -47,12 +49,18 @@ describe('Stack', () => {
     }).compileComponents();
   });
 
-  function bootstrap(initial?: Partial<TestHostComponent>) {
+  function bootstrap(initial?: Partial<TestHostComponent>): {
+    fixture: ComponentFixture<TestHostComponent>;
+    component: TestHostComponent;
+    stackElement: HTMLElement;
+  } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const stackElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-stack');
+    const stackElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-stack'
+    ) as HTMLElement;
     return { fixture, component, stackElement };
   }
 
@@ -107,7 +115,9 @@ describe('Stack', () => {
 
   it('creates with no inputs', () => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
-    const stackElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-stack');
+    const stackElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-stack'
+    ) as HTMLElement;
     expect(stackElement).toBeTruthy();
   });
 

@@ -7,8 +7,10 @@ import {
 } from '@angular/core';
 import { SPACING_TOKENS, SpacingToken, INLINE_TOKENS, InlineToken } from 'ui-lib-custom/tokens';
 
-const inlineVar = (token: InlineToken) => `var(--uilib-inline-${token}, ${INLINE_TOKENS[token]})`;
-const spaceVar = (token: SpacingToken) => `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const inlineVar = (token: InlineToken): string =>
+  `var(--uilib-inline-${token}, ${INLINE_TOKENS[token]})`;
+const spaceVar = (token: SpacingToken): string =>
+  `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
 
 export type InlineAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
 export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around';
@@ -65,7 +67,7 @@ export class Inline {
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
   protected readonly _gapValue = computed<string>(() => {
     const semantic = this.spacing();
-    if (semantic !== null && semantic !== undefined) {
+    if (semantic !== null) {
       return typeof semantic === 'number'
         ? spaceVar(semantic as SpacingToken)
         : inlineVar(semantic as InlineToken);

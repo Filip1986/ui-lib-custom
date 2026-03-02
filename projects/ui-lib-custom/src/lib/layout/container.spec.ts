@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Container } from './container';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [Container],
   template: `
@@ -13,10 +14,10 @@ import { Component } from '@angular/core';
   `,
 })
 class TestHostComponent {
-  size: any = 'lg';
-  centered = false;
-  padding: any = 4;
-  inset: any = null;
+  public size: string = 'lg';
+  public centered = false;
+  public padding: number = 4;
+  public inset: string | null = null;
 }
 
 @Component({
@@ -27,6 +28,7 @@ class TestHostComponent {
       <p>Default content</p>
     </ui-lib-container>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DefaultHostComponent {}
 
@@ -38,12 +40,18 @@ describe('Container', () => {
     }).compileComponents();
   });
 
-  function bootstrap(initial?: Partial<TestHostComponent>) {
+  function bootstrap(initial?: Partial<TestHostComponent>): {
+    fixture: ComponentFixture<TestHostComponent>;
+    component: TestHostComponent;
+    containerElement: HTMLElement;
+  } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     const component = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
-    const containerElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-container');
+    const containerElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-container'
+    ) as HTMLElement;
     return { fixture, component, containerElement };
   }
 
@@ -107,7 +115,9 @@ describe('Container', () => {
 
   it('creates with no inputs', () => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
-    const containerElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-container');
+    const containerElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-container'
+    ) as HTMLElement;
     expect(containerElement).toBeTruthy();
   });
 

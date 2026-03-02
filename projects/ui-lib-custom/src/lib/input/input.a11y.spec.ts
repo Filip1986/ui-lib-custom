@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UiLibInput } from './input';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
@@ -10,9 +10,10 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
     <ui-lib-input label="Email" placeholder="you@example.com" />
     <ui-lib-input label="With error" [error]="error" />
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  error = 'Required';
+  public error = 'Required';
 }
 
 describe('Input Accessibility', () => {

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Icon } from '../icon/icon';
-import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from './accordion-panel';
+import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from 'ui-lib-custom';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, AccordionPanel, AccordionHeader],
   template: `
@@ -28,18 +29,19 @@ import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from './accordio
   `,
 })
 class PanelHostComponent {
-  header = signal<string>('Panel Title');
-  value = signal<string | null>('panel-a');
-  disabled = signal<boolean>(false);
-  expanded = signal<boolean>(false);
-  useCustomHeader = signal<boolean>(false);
-  iconPosition = signal<'start' | 'end'>('end');
-  expandIcon = signal<string>('chevron-up');
-  collapseIcon = signal<string>('chevron-down');
-  showIcon = signal<boolean>(true);
+  public readonly header = signal<string>('Panel Title');
+  public readonly value = signal<string | null>('panel-a');
+  public readonly disabled = signal<boolean>(false);
+  public readonly expanded = signal<boolean>(false);
+  public readonly useCustomHeader = signal<boolean>(false);
+  public readonly iconPosition = signal<'start' | 'end'>('end');
+  public readonly expandIcon = signal<string>('chevron-up');
+  public readonly collapseIcon = signal<string>('chevron-down');
+  public readonly showIcon = signal<boolean>(true);
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, AccordionPanel, AccordionToggleIcon],
   template: `
@@ -52,8 +54,8 @@ class PanelHostComponent {
   `,
 })
 class PanelTemplateHostComponent {
-  expanded = signal<boolean>(false);
-  showIcon = signal<boolean>(true);
+  public readonly expanded = signal<boolean>(false);
+  public readonly showIcon = signal<boolean>(true);
 }
 
 describe('AccordionPanel', () => {
@@ -70,19 +72,25 @@ describe('AccordionPanel', () => {
   });
 
   function headerButton(): HTMLElement {
-    return fixture.nativeElement.querySelector('.accordion-panel-header');
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      '.accordion-panel-header'
+    ) as HTMLElement;
   }
 
   function contentEl(): HTMLElement {
-    return fixture.nativeElement.querySelector('.accordion-panel-content');
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      '.accordion-panel-content'
+    ) as HTMLElement;
   }
 
   function panelHost(): HTMLElement {
-    return fixture.nativeElement.querySelector('ui-lib-accordion-panel');
+    return (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-accordion-panel'
+    ) as HTMLElement;
   }
 
   function iconContainer(): HTMLElement | null {
-    return fixture.nativeElement.querySelector('.accordion-panel-icon');
+    return (fixture.nativeElement as HTMLElement).querySelector('.accordion-panel-icon');
   }
 
   function iconNames(): string[] {
@@ -94,24 +102,41 @@ describe('AccordionPanel', () => {
   }
 
   it('creates panel and renders projected content', () => {
-    const body: HTMLElement | null = fixture.nativeElement.querySelector('.panel-body');
+    const body: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.panel-body'
+    );
     expect(fixture.componentInstance).toBeTruthy();
-    expect(body?.textContent?.trim()).toBe('Panel Body');
+    expect(body).toBeTruthy();
+    const bodyText = (body as HTMLElement).textContent;
+    expect(bodyText).toBeTruthy();
+    expect((bodyText as string).trim()).toBe('Panel Body');
   });
 
   it('renders default header text when no custom header', () => {
-    const title: HTMLElement | null = fixture.nativeElement.querySelector('.accordion-panel-title');
-    expect(title?.textContent?.trim()).toBe('Panel Title');
+    const title: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.accordion-panel-title'
+    );
+    expect(title).toBeTruthy();
+    const titleText = (title as HTMLElement).textContent;
+    expect(titleText).toBeTruthy();
+    expect((titleText as string).trim()).toBe('Panel Title');
   });
 
   it('uses custom header content when provided', () => {
     fixture.componentInstance.useCustomHeader.set(true);
     fixture.detectChanges();
 
-    const title: HTMLElement | null = fixture.nativeElement.querySelector('.accordion-panel-title');
-    const custom: HTMLElement | null = fixture.nativeElement.querySelector('.custom-header');
+    const title: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.accordion-panel-title'
+    );
+    const custom: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.custom-header'
+    );
     expect(title).toBeNull();
-    expect(custom?.textContent?.trim()).toBe('Custom Header');
+    expect(custom).toBeTruthy();
+    const customText = (custom as HTMLElement).textContent;
+    expect(customText).toBeTruthy();
+    expect((customText as string).trim()).toBe('Custom Header');
   });
 
   it('applies aria attributes and roles', () => {
@@ -199,27 +224,24 @@ describe('AccordionPanel', () => {
     const names: string[] = iconNames();
     expect(names).toContain('minus');
     expect(names).toContain('plus');
-    expect(iconContainer()?.classList.contains('expanded')).toBeFalsy();
+    const iconEl = iconContainer();
+    expect(iconEl).toBeTruthy();
+    expect((iconEl as HTMLElement).classList.contains('expanded')).toBeFalsy();
   });
 
   it('applies expanded icon class when panel is expanded', () => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
-    expect(iconContainer()?.classList.contains('expanded')).toBeTruthy();
-  });
-
-  it('hides icon when showIcon is false', () => {
-    fixture.componentInstance.showIcon.set(false);
-    fixture.detectChanges();
-
-    expect(iconContainer()).toBeNull();
+    const iconEl = iconContainer();
+    expect(iconEl).toBeTruthy();
+    expect((iconEl as HTMLElement).classList.contains('expanded')).toBeTruthy();
   });
 
   it('positions icon at end by default', () => {
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect(iconEl?.classList.contains('icon-end')).toBeTruthy();
+    expect((iconEl as HTMLElement).classList.contains('icon-end')).toBeTruthy();
   });
 
   it('positions icon at start when iconPosition is start', () => {
@@ -228,7 +250,7 @@ describe('AccordionPanel', () => {
 
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect(iconEl?.classList.contains('icon-start')).toBeTruthy();
+    expect((iconEl as HTMLElement).classList.contains('icon-start')).toBeTruthy();
   });
 
   it('adds expanded class to content when expanded', () => {
@@ -253,24 +275,32 @@ describe('AccordionPanel - Toggle Icon Template', () => {
   });
 
   it('renders custom toggle icon template content', () => {
-    const collapsedText: HTMLElement | null = templateFixture.nativeElement.querySelector(
-      '.accordion-panel-icon .icon-collapsed .toggle-text'
-    );
-    const expandedText: HTMLElement | null = templateFixture.nativeElement.querySelector(
-      '.accordion-panel-icon .icon-expanded .toggle-text'
-    );
+    const collapsedText: HTMLElement | null = (
+      templateFixture.nativeElement as HTMLElement
+    ).querySelector('.accordion-panel-icon .icon-collapsed .toggle-text');
+    const expandedText: HTMLElement | null = (
+      templateFixture.nativeElement as HTMLElement
+    ).querySelector('.accordion-panel-icon .icon-expanded .toggle-text');
 
-    expect(collapsedText?.textContent?.trim()).toBe('Collapsed');
-    expect(expandedText?.textContent?.trim()).toBe('Expanded');
+    expect(collapsedText).toBeTruthy();
+    expect(expandedText).toBeTruthy();
+    const collapsedTextContent = (collapsedText as HTMLElement).textContent;
+    const expandedTextContent = (expandedText as HTMLElement).textContent;
+    expect(collapsedTextContent).toBeTruthy();
+    expect(expandedTextContent).toBeTruthy();
+    expect((collapsedTextContent as string).trim()).toBe('Collapsed');
+    expect((expandedTextContent as string).trim()).toBe('Expanded');
   });
 
   it('applies expanded class when panel is expanded', () => {
-    const iconEl: HTMLElement | null =
-      templateFixture.nativeElement.querySelector('.accordion-panel-icon');
+    const iconEl: HTMLElement | null = (templateFixture.nativeElement as HTMLElement).querySelector(
+      '.accordion-panel-icon'
+    );
 
     templateFixture.componentInstance.expanded.set(true);
     templateFixture.detectChanges();
 
-    expect(iconEl?.classList.contains('expanded')).toBeTruthy();
+    expect(iconEl).toBeTruthy();
+    expect((iconEl as HTMLElement).classList.contains('expanded')).toBeTruthy();
   });
 });

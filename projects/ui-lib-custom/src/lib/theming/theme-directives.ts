@@ -8,7 +8,7 @@ import { Directive, input } from '@angular/core';
   },
 })
 export class DarkThemeDirective {
-  active = input(true, { alias: 'uiLibDarkTheme' });
+  public readonly active = input(true, { alias: 'uiLibDarkTheme' });
 }
 
 @Directive({
@@ -19,5 +19,5 @@ export class DarkThemeDirective {
   },
 })
 export class LightThemeDirective {
-  active = input(true, { alias: 'uiLibLightTheme' });
+  public readonly active = input(true, { alias: 'uiLibLightTheme' });
 }

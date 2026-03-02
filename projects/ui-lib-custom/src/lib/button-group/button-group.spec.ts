@@ -1,5 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, signal, provideZonelessChangeDetection } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  provideZonelessChangeDetection,
+} from '@angular/core';
 import { ButtonGroup } from './button-group';
 import { Button, ButtonSize, ButtonVariant } from '../button/button';
 import { Icon } from '../icon/icon';
@@ -13,19 +18,21 @@ import { Icon } from '../icon/icon';
       <ui-lib-button>Two</ui-lib-button>
     </ui-lib-button-group>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-  variant = signal<ButtonVariant>('material');
-  vertical = signal<boolean>(false);
-  size = signal<ButtonSize>('md');
+  public readonly variant = signal<ButtonVariant>('material');
+  public readonly vertical = signal<boolean>(false);
+  public readonly size = signal<ButtonSize>('md');
 }
 
 describe('ButtonGroup', () => {
   let fixture: ComponentFixture<HostComponent>;
 
-  const getGroup = (): HTMLElement => fixture.nativeElement.querySelector('ui-lib-button-group');
+  const getGroup = (): HTMLElement =>
+    (fixture.nativeElement as HTMLElement).querySelector('ui-lib-button-group') as HTMLElement;
   const getButtons = (): NodeListOf<HTMLButtonElement> =>
-    fixture.nativeElement.querySelectorAll('button');
+    (fixture.nativeElement as HTMLElement).querySelectorAll('button');
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -43,8 +50,12 @@ describe('ButtonGroup', () => {
       expect(group.classList.contains('btn-group')).toBeTruthy();
       const buttons = getButtons();
       expect(buttons.length).toBe(2);
-      expect(buttons[0].textContent?.trim()).toBe('One');
-      expect(buttons[1].textContent?.trim()).toBe('Two');
+      const firstText = buttons[0].textContent;
+      const secondText = buttons[1].textContent;
+      expect(firstText).toBeTruthy();
+      expect(secondText).toBeTruthy();
+      expect((firstText as string).trim()).toBe('One');
+      expect((secondText as string).trim()).toBe('Two');
     });
 
     it('has role="group" attribute', () => {

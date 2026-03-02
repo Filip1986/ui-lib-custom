@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Badge, BadgeVariant, BadgeColor, BadgeSize } from './badge';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [Badge],
   template: `
@@ -20,13 +21,13 @@ import { Component } from '@angular/core';
   `,
 })
 class TestHostComponent {
-  variant: BadgeVariant = 'solid';
-  color: BadgeColor = 'primary';
-  size: BadgeSize = 'md';
-  pill = false;
-  dot = false;
-  label: string | null = null;
-  content = 'Badge';
+  public variant: BadgeVariant = 'solid';
+  public color: BadgeColor = 'primary';
+  public size: BadgeSize = 'md';
+  public pill = false;
+  public dot = false;
+  public label: string | null = null;
+  public content = 'Badge';
 }
 
 describe('Badge', () => {
@@ -37,11 +38,17 @@ describe('Badge', () => {
     }).compileComponents();
   });
 
-  function bootstrap(initial?: Partial<TestHostComponent>) {
+  function bootstrap(initial?: Partial<TestHostComponent>): {
+    fixture: ComponentFixture<TestHostComponent>;
+    badgeElement: HTMLElement;
+    styles: CSSStyleDeclaration;
+  } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     Object.assign(fixture.componentInstance, initial);
     fixture.detectChanges();
-    const badgeElement: HTMLElement = fixture.nativeElement.querySelector('ui-lib-badge');
+    const badgeElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-badge'
+    ) as HTMLElement;
     const styles = getComputedStyle(badgeElement);
     return { fixture, badgeElement, styles };
   }
@@ -99,7 +106,9 @@ describe('Badge', () => {
 
   it('projects content', () => {
     const { badgeElement } = bootstrap({ content: 'Projected' });
-    expect(badgeElement.textContent?.trim()).toBe('Projected');
+    const text = badgeElement.textContent;
+    expect(text).toBeTruthy();
+    expect((text as string).trim()).toBe('Projected');
   });
 
   it('sets aria attributes for dot badges', () => {
