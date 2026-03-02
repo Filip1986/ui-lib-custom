@@ -100,7 +100,9 @@ export class ThemeScopeDirective {
 
   private clearAppliedStyles(): void {
     const element: HTMLElement = this.hostElement;
-    this.appliedVars.forEach((key): void => element.style.removeProperty(key));
+    this.appliedVars.forEach((key): void => {
+      element.style.removeProperty(key);
+    });
     this.appliedVars.clear();
     element.removeAttribute('data-variant');
   }

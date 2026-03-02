@@ -50,6 +50,14 @@ describe('Tabs RTL Support', (): void => {
     );
   }
 
+  function getRequiredButton(buttons: HTMLButtonElement[], index: number): HTMLButtonElement {
+    const button = buttons[index];
+    if (!button) {
+      throw new Error(`Expected tab button at index ${index}.`);
+    }
+    return button;
+  }
+
   it('should apply rtl class when dir is rtl', (): void => {
     const tabsEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-tabs'
@@ -59,20 +67,24 @@ describe('Tabs RTL Support', (): void => {
 
   it('should navigate to next tab with ArrowLeft in RTL', (): void => {
     const buttons = tabButtons();
-    buttons[0].focus();
-    buttons[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+    const first = getRequiredButton(buttons, 0);
+    const second = getRequiredButton(buttons, 1);
+    first.focus();
+    first.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(buttons[1]);
+    expect(document.activeElement).toBe(second);
   });
 
   it('should navigate to previous tab with ArrowRight in RTL', (): void => {
     const buttons = tabButtons();
-    buttons[1].focus();
-    buttons[1].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    const first = getRequiredButton(buttons, 0);
+    const second = getRequiredButton(buttons, 1);
+    second.focus();
+    second.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     fixture.detectChanges();
 
-    expect(document.activeElement).toBe(buttons[0]);
+    expect(document.activeElement).toBe(first);
   });
 });
 

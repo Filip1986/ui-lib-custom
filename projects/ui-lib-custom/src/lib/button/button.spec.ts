@@ -576,17 +576,31 @@ describe('Button variant', (): void => {
     service.setVariant('bootstrap');
     fixture.detectChanges();
 
-    let buttons: NodeListOf<HTMLButtonElement> = (
-      fixture.nativeElement as HTMLElement
-    ).querySelectorAll('button');
-    expect(buttons[0].classList.contains('btn-bootstrap')).toBeTruthy();
-    expect(buttons[1].classList.contains('btn-bootstrap')).toBeTruthy();
+    const getVariantButtons = (): HTMLButtonElement[] =>
+      Array.from(
+        (fixture.nativeElement as HTMLElement).querySelectorAll('button')
+      ) as HTMLButtonElement[];
+
+    const getRequiredVariantButton = (
+      buttons: HTMLButtonElement[],
+      index: number
+    ): HTMLButtonElement => {
+      const button = buttons[index];
+      if (!button) {
+        throw new Error(`Expected button at index ${index}.`);
+      }
+      return button;
+    };
+
+    let buttons: HTMLButtonElement[] = getVariantButtons();
+    expect(getRequiredVariantButton(buttons, 0).classList.contains('btn-bootstrap')).toBeTruthy();
+    expect(getRequiredVariantButton(buttons, 1).classList.contains('btn-bootstrap')).toBeTruthy();
 
     fixture.componentInstance.overrideVariant.set('minimal');
     fixture.detectChanges();
 
-    buttons = (fixture.nativeElement as HTMLElement).querySelectorAll('button');
-    expect(buttons[0].classList.contains('btn-bootstrap')).toBeTruthy();
-    expect(buttons[1].classList.contains('btn-minimal')).toBeTruthy();
+    buttons = getVariantButtons();
+    expect(getRequiredVariantButton(buttons, 0).classList.contains('btn-bootstrap')).toBeTruthy();
+    expect(getRequiredVariantButton(buttons, 1).classList.contains('btn-minimal')).toBeTruthy();
   });
 });

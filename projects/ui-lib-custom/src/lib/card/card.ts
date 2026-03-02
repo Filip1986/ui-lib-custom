@@ -152,7 +152,9 @@ export class Card {
 
   private clearAppliedStyles(): void {
     const element: HTMLElement = this.el.nativeElement;
-    this.appliedVars.forEach((key): void => element.style.removeProperty(key));
+    this.appliedVars.forEach((key): void => {
+      element.style.removeProperty(key);
+    });
     this.appliedVars.clear();
     element.removeAttribute('data-variant');
   }

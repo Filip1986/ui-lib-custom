@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ThemePresetService } from './theme-preset.service';
-import { ThemeConfigService } from './theme-config.service';
-import type { ThemePreset } from './theme-preset.interface';
+import { ThemePresetService } from 'ui-lib-custom';
+import { ThemeConfigService } from 'ui-lib-custom';
+import type { ThemePreset } from 'ui-lib-custom';
 
 type StorageRecord = Record<string, string>;
 
@@ -37,6 +37,14 @@ const samplePreset = (): ThemePreset => ({
   updatedAt: 100,
 });
 
+function getRequiredItem<T>(items: T[], index: number, label: string): T {
+  const item = items[index];
+  if (!item) {
+    throw new Error(`Expected ${label} at index ${index}.`);
+  }
+  return item;
+}
+
 describe('ThemePresetService', (): void => {
   let service: ThemePresetService;
   let themeConfig: ThemeConfigService;
@@ -54,7 +62,9 @@ describe('ThemePresetService', (): void => {
         storageState = {};
       },
       getItem(key: string): string | null {
-        return Object.prototype.hasOwnProperty.call(storageState, key) ? storageState[key] : null;
+        return Object.prototype.hasOwnProperty.call(storageState, key)
+          ? (storageState[key] ?? null)
+          : null;
       },
       key(index: number): string | null {
         const keys: string[] = Object.keys(storageState);
@@ -85,7 +95,8 @@ describe('ThemePresetService', (): void => {
     TestBed.configureTestingModule({});
     const fresh: ThemePresetService = TestBed.inject(ThemePresetService);
     expect(fresh.presets().length).toBe(1);
-    expect(fresh.presets()[0].id).toBe('preset-1');
+    const firstPreset = getRequiredItem(fresh.presets(), 0, 'preset');
+    expect(firstPreset.id).toBe('preset-1');
   });
 
   it('saves presets and persists them', (): void => {
@@ -95,7 +106,8 @@ describe('ThemePresetService', (): void => {
     expect(raw).toBeTruthy();
     const parsed: ThemePreset[] = JSON.parse(raw as string) as ThemePreset[];
     expect(parsed.length).toBe(1);
-    expect(parsed[0].id).toBe('preset-1');
+    const firstParsed = getRequiredItem(parsed, 0, 'parsed preset');
+    expect(firstParsed.id).toBe('preset-1');
   });
 
   it('updates existing preset on save', (): void => {
@@ -104,7 +116,8 @@ describe('ThemePresetService', (): void => {
     const updated: ThemePreset = { ...preset, name: 'Updated' };
     service.savePreset(updated);
     expect(service.presets().length).toBe(1);
-    expect(service.presets()[0].name).toBe('Updated');
+    const updatedPreset = getRequiredItem(service.presets(), 0, 'preset');
+    expect(updatedPreset.name).toBe('Updated');
   });
 
   it('applies presets using ThemeConfigService setters and CSS vars', (): void => {
@@ -155,7 +168,9 @@ describe('ThemePresetService', (): void => {
 
   it('throws on invalid JSON', (): void => {
     const invalid: string = JSON.stringify({ name: 'bad' });
-    expect((): void => service.importFromJson(invalid)).toThrow();
+    expect((): void => {
+      service.importFromJson(invalid);
+    }).toThrow();
   });
 
   it('captures the current theme into a preset', (): void => {

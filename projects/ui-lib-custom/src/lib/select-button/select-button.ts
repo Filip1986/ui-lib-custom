@@ -193,6 +193,10 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   public resolveLabel(option: SelectButtonOption): string {
+    const raw = option as unknown;
+    if (typeof raw !== 'object' || raw === null) {
+      return String(raw);
+    }
     const resolver: string = this.optionLabel();
     if (resolver) {
       const fieldValue: SelectButtonValue | undefined = this.readOptionField(option, resolver);
@@ -210,6 +214,10 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   public resolveValue(option: SelectButtonOption): SelectButtonValue {
+    const raw = option as unknown;
+    if (typeof raw !== 'object' || raw === null) {
+      return raw as SelectButtonValue;
+    }
     const resolver: string = this.optionValue();
     if (resolver) {
       const fieldValue: SelectButtonValue | undefined = this.readOptionField(option, resolver);
@@ -430,12 +438,13 @@ export class SelectButton implements ControlValueAccessor {
     return -1;
   }
 
-  private readOptionField(
-    option: SelectButtonOption,
-    field: string
-  ): SelectButtonValue | undefined {
-    if (Object.prototype.hasOwnProperty.call(option, field)) {
-      return option[field];
+  private readOptionField(option: unknown, field: string): SelectButtonValue | undefined {
+    if (typeof option !== 'object' || option === null) {
+      return undefined;
+    }
+    const record = option as Record<string, SelectButtonValue | undefined>;
+    if (Object.prototype.hasOwnProperty.call(record, field)) {
+      return record[field];
     }
     return undefined;
   }

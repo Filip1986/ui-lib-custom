@@ -17,6 +17,18 @@ const defaultOptions: SelectButtonOption[] = [
   { label: 'Option 3', value: 'opt3', disabled: true },
 ];
 
+function getRequiredButton(
+  elements: HTMLButtonElement[],
+  index: number,
+  label: string
+): HTMLButtonElement {
+  const button: HTMLButtonElement | undefined = elements[index];
+  if (!button) {
+    throw new Error(`Expected ${label} button at index ${index}.`);
+  }
+  return button;
+}
+
 @Component({
   standalone: true,
   imports: [SelectButton],
@@ -197,7 +209,7 @@ describe('SelectButton', (): void => {
 
   describe('Single selection mode', (): void => {
     it('selects item on click', (): void => {
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBe('opt1');
@@ -207,37 +219,37 @@ describe('SelectButton', (): void => {
       fixture.componentInstance.allowEmpty.set(true);
       fixture.detectChanges();
 
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe('opt1');
 
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBeNull();
     });
 
     it('cannot deselect when allowEmpty is false', (): void => {
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
       expect(fixture.componentInstance.value).toBe('opt1');
     });
 
     it('only one item selected at a time', (): void => {
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
-      buttons()[1].click();
+      getRequiredButton(buttons(), 1, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBe('opt2');
-      expect(buttons()[0].getAttribute('aria-checked')).toBe('false');
-      expect(buttons()[1].getAttribute('aria-checked')).toBe('true');
+      expect(getRequiredButton(buttons(), 0, 'select').getAttribute('aria-checked')).toBe('false');
+      expect(getRequiredButton(buttons(), 1, 'select').getAttribute('aria-checked')).toBe('true');
     });
 
     it('emits onChange with correct value', (): void => {
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.lastChange?.value).toBe('opt1');
@@ -251,36 +263,36 @@ describe('SelectButton', (): void => {
     });
 
     it('selects multiple items', (): void => {
-      buttons()[0].click();
-      buttons()[1].click();
+      getRequiredButton(buttons(), 0, 'select').click();
+      getRequiredButton(buttons(), 1, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toEqual(['opt1', 'opt2']);
     });
 
     it('toggles selection on click', (): void => {
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toEqual([]);
     });
 
     it('emits onChange with array value', (): void => {
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.lastChange?.value).toEqual(['opt1']);
     });
 
     it('can deselect all items', (): void => {
-      buttons()[0].click();
-      buttons()[1].click();
+      getRequiredButton(buttons(), 0, 'select').click();
+      getRequiredButton(buttons(), 1, 'select').click();
       fixture.detectChanges();
 
-      buttons()[0].click();
-      buttons()[1].click();
+      getRequiredButton(buttons(), 0, 'select').click();
+      getRequiredButton(buttons(), 1, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toEqual([]);
@@ -297,7 +309,7 @@ describe('SelectButton', (): void => {
       fixture.componentInstance.optionLabel.set('name');
       fixture.detectChanges();
 
-      const text = buttons()[0].textContent;
+      const text = getRequiredButton(buttons(), 0, 'select').textContent;
       expect(text).toBeTruthy();
       expect((text as string).trim()).toBe('A');
     });
@@ -311,7 +323,7 @@ describe('SelectButton', (): void => {
       fixture.componentInstance.optionValue.set('id');
       fixture.detectChanges();
 
-      buttons()[1].click();
+      getRequiredButton(buttons(), 1, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBe('b');
@@ -326,7 +338,7 @@ describe('SelectButton', (): void => {
       fixture.componentInstance.optionDisabled.set('inactive');
       fixture.detectChanges();
 
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBeNull();
@@ -340,7 +352,9 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (primitiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      btns[1].click();
+      getRequiredButton(btns, 1, 'primitive').click();
+      primitiveFixture.detectChanges();
+      await primitiveFixture.whenStable();
       primitiveFixture.detectChanges();
 
       expect(primitiveFixture.componentInstance.value).toBe('B');
@@ -354,7 +368,7 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (objectFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      btns[0].click();
+      getRequiredButton(btns, 0, 'object').click();
       objectFixture.detectChanges();
 
       expect(objectFixture.componentInstance.value).toEqual({ id: 1 });
@@ -370,7 +384,7 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (ngModelFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      btns[0].click();
+      getRequiredButton(btns, 0, 'ngModel').click();
       ngModelFixture.detectChanges();
 
       expect(ngModelFixture.componentInstance.value).toBe('opt1');
@@ -384,11 +398,11 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      expect(btns[1].getAttribute('aria-checked')).toBe('true');
+      expect(getRequiredButton(btns, 1, 'reactive').getAttribute('aria-checked')).toBe('true');
 
       reactiveFixture.componentInstance.control.setValue('opt1');
       reactiveFixture.detectChanges();
-      expect(btns[0].getAttribute('aria-checked')).toBe('true');
+      expect(getRequiredButton(btns, 0, 'reactive').getAttribute('aria-checked')).toBe('true');
     });
 
     it('works with formControlName', (): void => {
@@ -399,14 +413,14 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      expect(btns[1].getAttribute('aria-checked')).toBe('true');
+      expect(getRequiredButton(btns, 1, 'reactive').getAttribute('aria-checked')).toBe('true');
 
       const control: FormControl<string | null> =
         reactiveFixture.componentInstance.form.controls.choice;
       control.setValue('opt1');
       reactiveFixture.detectChanges();
 
-      expect(btns[0].getAttribute('aria-checked')).toBe('true');
+      expect(getRequiredButton(btns, 0, 'reactive').getAttribute('aria-checked')).toBe('true');
     });
 
     it('marks control as touched on focusout', (): void => {
@@ -420,7 +434,9 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (reactiveFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      btns[0].dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
+      getRequiredButton(btns, 0, 'reactive').dispatchEvent(
+        new FocusEvent('focusout', { bubbles: true, relatedTarget: null })
+      );
 
       expect(control.touched).toBeTruthy();
     });
@@ -453,7 +469,7 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (selectFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      btns[0].click();
+      getRequiredButton(btns, 0, 'select').click();
       selectFixture.detectChanges();
 
       expect(onChangeSpy).toHaveBeenCalledWith('opt1');
@@ -497,7 +513,7 @@ describe('SelectButton', (): void => {
       const btns: HTMLButtonElement[] = Array.from(
         (selectFixture.nativeElement as HTMLElement).querySelectorAll('button')
       );
-      expect(btns[0].getAttribute('aria-checked')).toBe('true');
+      expect(getRequiredButton(btns, 0, 'select').getAttribute('aria-checked')).toBe('true');
     });
   });
 
@@ -506,14 +522,14 @@ describe('SelectButton', (): void => {
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
 
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBeNull();
     });
 
     it('per-option disabled prevents specific option interaction', (): void => {
-      buttons()[2].click();
+      getRequiredButton(buttons(), 2, 'select').click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBeNull();
@@ -565,15 +581,15 @@ describe('SelectButton', (): void => {
     });
 
     it('buttons render as native button elements', (): void => {
-      const button: HTMLButtonElement = buttons()[0];
+      const button: HTMLButtonElement = getRequiredButton(buttons(), 0, 'select');
       expect(button.tagName.toLowerCase()).toBe('button');
     });
 
     it('aria-pressed reflects selection state', (): void => {
-      buttons()[0].click();
+      getRequiredButton(buttons(), 0, 'select').click();
       fixture.detectChanges();
 
-      expect(buttons()[0].getAttribute('aria-checked')).toBe('true');
+      expect(getRequiredButton(buttons(), 0, 'select').getAttribute('aria-checked')).toBe('true');
     });
 
     it('aria-labelledby applied when set', (): void => {
@@ -601,7 +617,11 @@ describe('SelectButton', (): void => {
         templateFixture.nativeElement as HTMLElement
       ).querySelectorAll('.custom-item');
       expect(customItems.length).toBe(3);
-      const customText = customItems[0].textContent;
+      const customItem: HTMLElement | undefined = customItems[0];
+      if (!customItem) {
+        throw new Error('Expected custom item at index 0.');
+      }
+      const customText: string | null = customItem.textContent;
       expect(customText).toBeTruthy();
       expect((customText as string).trim()).toBe('Option 1');
     });
@@ -673,7 +693,7 @@ describe('SelectButton keyboard behavior', (): void => {
     hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
     fixture.detectChanges();
 
-    expect(buttons()[1].getAttribute('aria-checked')).toBe('true');
+    expect(getRequiredButton(buttons(), 1, 'keyboard').getAttribute('aria-checked')).toBe('true');
   });
 
   it('tabIndexFor returns 0 for active option', (): void => {

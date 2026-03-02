@@ -5,8 +5,8 @@ import {
   signal,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { ButtonGroup } from './button-group';
-import { Button, ButtonSize, ButtonVariant } from '../button/button';
+import { ButtonGroup } from 'ui-lib-custom';
+import { Button, ButtonSize, ButtonVariant } from 'ui-lib-custom';
 import { Icon } from '../icon/icon';
 
 @Component({
@@ -31,8 +31,18 @@ describe('ButtonGroup', (): void => {
 
   const getGroup = (): HTMLElement =>
     (fixture.nativeElement as HTMLElement).querySelector('ui-lib-button-group') as HTMLElement;
-  const getButtons = (): NodeListOf<HTMLButtonElement> =>
-    (fixture.nativeElement as HTMLElement).querySelectorAll('button');
+  const getButtons = (): HTMLButtonElement[] =>
+    Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button')
+    ) as HTMLButtonElement[];
+
+  const getRequiredButton = (buttons: HTMLButtonElement[], index: number): HTMLButtonElement => {
+    const button = buttons[index];
+    if (!button) {
+      throw new Error(`Expected button at index ${index}.`);
+    }
+    return button;
+  };
 
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
@@ -50,8 +60,8 @@ describe('ButtonGroup', (): void => {
       expect(group.classList.contains('btn-group')).toBeTruthy();
       const buttons = getButtons();
       expect(buttons.length).toBe(2);
-      const firstText = buttons[0].textContent;
-      const secondText = buttons[1].textContent;
+      const firstText = getRequiredButton(buttons, 0).textContent;
+      const secondText = getRequiredButton(buttons, 1).textContent;
       expect(firstText).toBeTruthy();
       expect(secondText).toBeTruthy();
       expect((firstText as string).trim()).toBe('One');
@@ -114,8 +124,8 @@ describe('ButtonGroup', (): void => {
 
     it('buttons remain focusable in order', (): void => {
       const buttons = getButtons();
-      expect(buttons[0].tabIndex).toBe(0);
-      expect(buttons[1].tabIndex).toBe(0);
+      expect(getRequiredButton(buttons, 0).tabIndex).toBe(0);
+      expect(getRequiredButton(buttons, 1).tabIndex).toBe(0);
     });
   });
 });

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Stack } from './stack';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { SpacingToken, StackToken } from 'ui-lib-custom/tokens';
 
 @Component({
   standalone: true,
@@ -24,7 +25,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 class TestHostComponent {
   public direction: 'vertical' | 'horizontal' = 'vertical';
   public gap: number = 4;
-  public spacing: number | null = null;
+  public spacing: StackToken | SpacingToken | number | null = null;
   public align: string = 'stretch';
   public justify: string = 'start';
 }
@@ -71,6 +72,14 @@ describe('Stack', (): void => {
     return fixture;
   }
 
+  function getRequiredItem(elements: NodeListOf<Element>, index: number): Element {
+    const element = elements[index];
+    if (!element) {
+      throw new Error(`Expected stack item at index ${index}.`);
+    }
+    return element;
+  }
+
   it('should create', (): void => {
     const { stackElement } = bootstrap();
     expect(stackElement).toBeTruthy();
@@ -110,7 +119,7 @@ describe('Stack', (): void => {
     const { stackElement } = bootstrap();
     const items = stackElement.querySelectorAll('div');
     expect(items.length).toBe(3);
-    expect(items[0].textContent).toBe('Item 1');
+    expect(getRequiredItem(items, 0).textContent).toBe('Item 1');
   });
 
   it('creates with no inputs', (): void => {

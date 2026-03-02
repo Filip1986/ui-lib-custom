@@ -25,10 +25,14 @@ export async function checkA11y(
   const target: HTMLElement = options.exclude?.length
     ? sanitizeA11yTarget(element, options.exclude)
     : element;
-  const results: Awaited<ReturnType<typeof axe>> = await axe(target, {
-    rules: options.rules,
-    runOnly: options.runOnly,
-  });
+  const axeOptions: Parameters<typeof axe>[1] = {};
+  if (options.rules) {
+    axeOptions.rules = options.rules;
+  }
+  if (options.runOnly) {
+    axeOptions.runOnly = options.runOnly;
+  }
+  const results: Awaited<ReturnType<typeof axe>> = await axe(target, axeOptions);
 
   expect(results.violations.length).toBe(0);
 }
@@ -47,11 +51,15 @@ export async function getA11yResults(
   const target: HTMLElement = options.exclude?.length
     ? sanitizeA11yTarget(element, options.exclude)
     : element;
+  const axeOptions: Parameters<typeof axe>[1] = {};
+  if (options.rules) {
+    axeOptions.rules = options.rules;
+  }
+  if (options.runOnly) {
+    axeOptions.runOnly = options.runOnly;
+  }
 
-  return axe(target, {
-    rules: options.rules,
-    runOnly: options.runOnly,
-  });
+  return axe(target, axeOptions);
 }
 
 function sanitizeA11yTarget(root: HTMLElement, excludeSelectors: string[]): HTMLElement {

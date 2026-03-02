@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Inline } from './inline';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { InlineToken, SpacingToken } from 'ui-lib-custom/tokens';
 
 @Component({
   standalone: true,
@@ -17,7 +18,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 class TestHostComponent {
   public gap: number = 2;
-  public spacing: number | null = null;
+  public spacing: InlineToken | SpacingToken | number | null = null;
   public align: string = 'center';
   public justify: string = 'start';
 }
@@ -64,6 +65,14 @@ describe('Inline', (): void => {
     return fixture;
   }
 
+  function getRequiredItem(elements: NodeListOf<Element>, index: number): Element {
+    const element = elements[index];
+    if (!element) {
+      throw new Error(`Expected inline item at index ${index}.`);
+    }
+    return element;
+  }
+
   it('should create', (): void => {
     const { inlineElement } = bootstrap();
     expect(inlineElement).toBeTruthy();
@@ -94,7 +103,7 @@ describe('Inline', (): void => {
     const { inlineElement } = bootstrap();
     const items = inlineElement.querySelectorAll('span');
     expect(items.length).toBe(3);
-    expect(items[0].textContent).toBe('Tag 1');
+    expect(getRequiredItem(items, 0).textContent).toBe('Tag 1');
   });
 
   it('creates with no inputs', (): void => {

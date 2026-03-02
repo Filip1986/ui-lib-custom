@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Grid } from './grid';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { SpacingToken, StackToken } from 'ui-lib-custom/tokens';
 
 @Component({
   standalone: true,
@@ -25,7 +26,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 class TestHostComponent {
   public columns: number = 12;
   public gap: number = 4;
-  public spacing: number | null = null;
+  public spacing: StackToken | SpacingToken | number | null = null;
   public align: string = 'stretch';
   public justify: string = 'stretch';
   public minColumnWidth: string | undefined = undefined;
@@ -73,6 +74,14 @@ describe('Grid', (): void => {
     return fixture;
   }
 
+  function getRequiredItem(elements: NodeListOf<Element>, index: number): Element {
+    const element = elements[index];
+    if (!element) {
+      throw new Error(`Expected grid item at index ${index}.`);
+    }
+    return element;
+  }
+
   it('should create', (): void => {
     const { gridElement } = bootstrap();
     expect(gridElement).toBeTruthy();
@@ -107,7 +116,7 @@ describe('Grid', (): void => {
     const { gridElement } = bootstrap();
     const items = gridElement.querySelectorAll('div');
     expect(items.length).toBe(3);
-    expect(items[0].textContent).toBe('Cell 1');
+    expect(getRequiredItem(items, 0).textContent).toBe('Cell 1');
   });
 
   it('creates with no inputs', (): void => {

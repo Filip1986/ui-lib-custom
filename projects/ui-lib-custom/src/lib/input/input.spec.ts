@@ -275,7 +275,9 @@ describe('UiLibInput ngModel integration', (): void => {
   let fixture: ComponentFixture<NgModelHostComponent>;
 
   const flushMicrotasks = async (): Promise<void> => {
-    await new Promise<void>((resolve: () => void): void => setTimeout(resolve, 0));
+    await new Promise<void>((resolve: () => void): void => {
+      setTimeout(resolve, 0);
+    });
   };
 
   beforeEach(async (): Promise<void> => {

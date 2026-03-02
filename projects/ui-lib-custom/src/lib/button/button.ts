@@ -1,19 +1,17 @@
 import {
-  Component,
-  ChangeDetectionStrategy,
-  input,
-  computed,
-  inject,
-  ViewEncapsulation,
   AfterViewChecked,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
   ElementRef,
-  ViewChild,
+  inject,
+  input,
   signal,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon } from 'ui-lib-custom/icon';
-import { IconSize } from 'ui-lib-custom/icon';
-import { SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon, IconSize, SemanticIcon } from 'ui-lib-custom/icon';
 import { Badge, BadgeColor } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
@@ -68,7 +66,7 @@ export class Button implements AfterViewChecked {
   public readonly outlined = input<boolean>(false);
   public readonly link = input<boolean>(false);
   public readonly contrast = input<boolean>(false);
-  public readonly badge = input<string | number | null>(null);
+  public readonly badge = input<string | number | null | undefined>(null);
   public readonly badgeColor = input<BadgeSeverity>('danger');
   public readonly badgeSeverity = input<BadgeSeverity | null>(null);
   public readonly badgeClass = input<string | null>(null);
@@ -132,12 +130,14 @@ export class Button implements AfterViewChecked {
     return this.appearance();
   });
 
-  public readonly hasBadge = computed<boolean>((): boolean => this.badge() !== null);
+  public readonly hasBadge = computed<boolean>((): boolean => {
+    const badgeValue = this.badge();
+    return badgeValue !== null && badgeValue !== undefined;
+  });
 
   public readonly normalizeBadgeSeverity = computed<BadgeSeverity>((): BadgeSeverity => {
     const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();
-    const normalized: BadgeSeverity = inputSeverity === 'warn' ? 'warning' : inputSeverity;
-    return normalized;
+    return inputSeverity === 'warn' ? 'warning' : inputSeverity;
   });
 
   public readonly badgeColorResolved = computed<BadgeColor>((): BadgeColor => {

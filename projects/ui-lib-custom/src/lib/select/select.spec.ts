@@ -4,6 +4,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { provideZonelessChangeDetection } from '@angular/core';
 import { UiLibSelect, SelectOption, SelectVariant } from './select';
 
+function getRequiredItem<T>(items: T[], index: number, label: string): T {
+  const item = items[index];
+  if (!item) {
+    throw new Error(`Expected ${label} at index ${index}.`);
+  }
+  return item;
+}
+
 @Component({
   standalone: true,
   imports: [FormsModule, UiLibSelect],
@@ -181,7 +189,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
     const control: FormControl<string | null> = fixture.componentInstance.form.controls.choice;
 
     openSelect();
-    optionEls()[0].click();
+    getRequiredItem(optionEls(), 0, 'select option').click();
     fixture.detectChanges();
 
     expect(control.value).toBe('alpha');
@@ -191,7 +199,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
     const control: FormControl<string | null> = fixture.componentInstance.form.controls.choice;
 
     openSelect();
-    optionEls()[0].click();
+    getRequiredItem(optionEls(), 0, 'select option').click();
     fixture.detectChanges();
 
     expect(control.touched).toBeTruthy();
@@ -337,7 +345,9 @@ describe('UiLibSelect ngModel', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
   const flushMicrotasks = async (): Promise<void> => {
-    await new Promise<void>((resolve: () => void): void => setTimeout(resolve, 0));
+    await new Promise<void>((resolve: () => void): void => {
+      setTimeout(resolve, 0);
+    });
   };
 
   beforeEach(async (): Promise<void> => {
@@ -509,7 +519,7 @@ describe('UiLibSelect behavior', (): void => {
 
     const filtered: SelectOption[] = fixture.componentInstance.filteredOptions();
     expect(filtered.length).toBe(1);
-    expect(filtered[0].label).toBe('Alpha');
+    expect(getRequiredItem(filtered, 0, 'filtered option').label).toBe('Alpha');
 
     const keys: string[] = fixture.componentInstance.groupKeys();
     expect(keys).toContain('A');

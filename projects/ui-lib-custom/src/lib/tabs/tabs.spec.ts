@@ -143,6 +143,14 @@ function restoreRaf(): void {
   }
 }
 
+function getRequiredItem<T>(items: T[], index: number, label: string): T {
+  const item = items[index];
+  if (!item) {
+    throw new Error(`Expected ${label} at index ${index}.`);
+  }
+  return item;
+}
+
 async function stabilizeFixture(fixture: ComponentFixture<unknown>): Promise<void> {
   fixture.detectChanges();
   await fixture.whenStable();
@@ -187,8 +195,10 @@ describe('Tabs', (): void => {
   it('should render tablist with two tabs', (): void => {
     const tabButtons = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
     expect(tabButtons.length).toBe(2);
-    expect(tabButtons[0].attributes['aria-selected']).toBe('true');
-    expect(tabButtons[1].attributes['aria-selected']).toBe('false');
+    const first = getRequiredItem(tabButtons, 0, 'tab button');
+    const second = getRequiredItem(tabButtons, 1, 'tab button');
+    expect(first.attributes['aria-selected']).toBe('true');
+    expect(second.attributes['aria-selected']).toBe('false');
   });
 
   it('applies dark theme variables', (): void => {
@@ -227,12 +237,12 @@ describe('Tabs per-tab lazy', (): void => {
 
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeNull();
 
-    const lazyTab = tabs[1];
+    const lazyTab = getRequiredItem(tabs, 1, 'tab context');
     component.onSelect({ value: lazyTab.value, index: lazyTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeTruthy();
 
-    const firstTab = tabs[0];
+    const firstTab = getRequiredItem(tabs, 0, 'tab context');
     component.onSelect({ value: firstTab.value, index: firstTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeNull();
@@ -245,12 +255,12 @@ describe('Tabs per-tab lazy', (): void => {
 
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeNull();
 
-    const keepTab = tabs[2];
+    const keepTab = getRequiredItem(tabs, 2, 'tab context');
     component.onSelect({ value: keepTab.value, index: keepTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeTruthy();
 
-    const firstTab = tabs[0];
+    const firstTab = getRequiredItem(tabs, 0, 'tab context');
     component.onSelect({ value: firstTab.value, index: firstTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeTruthy();
@@ -355,7 +365,7 @@ describe('Scrollable Tabs', (): void => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
-    const target: HTMLButtonElement = buttons[4].nativeElement as HTMLButtonElement;
+    const target = getRequiredItem(buttons, 4, 'tab button').nativeElement as HTMLButtonElement;
     const scrollIntoViewSpy: jasmine.Spy = spyOn(target, 'scrollIntoView');
     stubRaf();
 
@@ -391,7 +401,8 @@ describe('Tab Menu Mode', (): void => {
 
   it('should emit value on tab click', (): void => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
-    const target: HTMLButtonElement = buttons[1].nativeElement as HTMLButtonElement;
+    const target: HTMLButtonElement = getRequiredItem(buttons, 1, 'tab button')
+      .nativeElement as HTMLButtonElement;
     target.click();
     fixture.detectChanges();
 
@@ -401,12 +412,13 @@ describe('Tab Menu Mode', (): void => {
 
   it('should highlight the active tab', (): void => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
-    const target: HTMLButtonElement = buttons[2].nativeElement as HTMLButtonElement;
+    const target: HTMLButtonElement = getRequiredItem(buttons, 2, 'tab button')
+      .nativeElement as HTMLButtonElement;
     target.click();
     fixture.detectChanges();
 
-    expect(buttons[2].attributes['aria-selected']).toBe('true');
-    expect(buttons[0].attributes['aria-selected']).toBe('false');
+    expect(getRequiredItem(buttons, 2, 'tab button').attributes['aria-selected']).toBe('true');
+    expect(getRequiredItem(buttons, 0, 'tab button').attributes['aria-selected']).toBe('false');
   });
 });
 
@@ -432,12 +444,12 @@ describe('Per-Panel Lazy', (): void => {
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
 
     const tabs = component.tabContexts();
-    const overrideTab = tabs[1];
+    const overrideTab = getRequiredItem(tabs, 1, 'tab context');
     component.onSelect({ value: overrideTab.value, index: overrideTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeTruthy();
 
-    const eagerTab = tabs[0];
+    const eagerTab = getRequiredItem(tabs, 0, 'tab context');
     component.onSelect({ value: eagerTab.value, index: eagerTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
@@ -478,48 +490,57 @@ describe('Tabs interactions', (): void => {
 
   it('selects the first tab by default', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
-    expect(buttons[0].getAttribute('aria-selected')).toBe('true');
-    expect(buttons[1].getAttribute('aria-selected')).toBe('false');
+    const first = getRequiredItem(buttons, 0, 'tab button');
+    const second = getRequiredItem(buttons, 1, 'tab button');
+    expect(first.getAttribute('aria-selected')).toBe('true');
+    expect(second.getAttribute('aria-selected')).toBe('false');
   });
 
   it('switches tabs on click', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
-    buttons[1].click();
+    const first = getRequiredItem(buttons, 0, 'tab button');
+    const second = getRequiredItem(buttons, 1, 'tab button');
+    second.click();
     fixture.detectChanges();
 
-    expect(buttons[1].getAttribute('aria-selected')).toBe('true');
-    expect(buttons[0].getAttribute('aria-selected')).toBe('false');
+    expect(second.getAttribute('aria-selected')).toBe('true');
+    expect(first.getAttribute('aria-selected')).toBe('false');
   });
 
   it('switches tabs with ArrowRight key', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
-    buttons[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    const second = getRequiredItem(buttons, 1, 'tab button');
+    getRequiredItem(buttons, 0, 'tab button').dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })
+    );
     fixture.detectChanges();
 
-    expect(buttons[1].getAttribute('aria-selected')).toBe('true');
+    expect(second.getAttribute('aria-selected')).toBe('true');
   });
 
   it('does not select disabled tab', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
-    buttons[2].click();
+    getRequiredItem(buttons, 2, 'tab button').click();
     fixture.detectChanges();
 
-    expect(buttons[2].getAttribute('aria-disabled')).toBe('true');
-    expect(buttons[0].getAttribute('aria-selected')).toBe('true');
+    expect(getRequiredItem(buttons, 2, 'tab button').getAttribute('aria-disabled')).toBe('true');
+    expect(getRequiredItem(buttons, 0, 'tab button').getAttribute('aria-selected')).toBe('true');
   });
 
   it('shows and hides tab panels correctly', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     const panels: HTMLElement[] = tabPanels();
+    const firstPanel = getRequiredItem(panels, 0, 'tab panel');
+    const secondPanel = getRequiredItem(panels, 1, 'tab panel');
 
-    expect(panels[0].hasAttribute('hidden')).toBe(false);
-    expect(panels[1].hasAttribute('hidden')).toBe(true);
+    expect(firstPanel.hasAttribute('hidden')).toBe(false);
+    expect(secondPanel.hasAttribute('hidden')).toBe(true);
 
-    buttons[1].click();
+    getRequiredItem(buttons, 1, 'tab button').click();
     fixture.detectChanges();
 
-    expect(panels[0].hasAttribute('hidden')).toBe(true);
-    expect(panels[1].hasAttribute('hidden')).toBe(false);
+    expect(firstPanel.hasAttribute('hidden')).toBe(true);
+    expect(secondPanel.hasAttribute('hidden')).toBe(false);
   });
 
   it('applies variant classes on the tab list', (): void => {
@@ -550,17 +571,19 @@ describe('Tabs interactions', (): void => {
     );
     const buttons: HTMLButtonElement[] = tabButtons();
     const panels: HTMLElement[] = tabPanels();
+    const firstButton = getRequiredItem(buttons, 0, 'tab button');
+    const firstPanel = getRequiredItem(panels, 0, 'tab panel');
 
     expect(tabList?.getAttribute('role')).toBe('tablist');
-    expect(buttons[0].getAttribute('role')).toBe('tab');
-    expect(panels[0].getAttribute('role')).toBe('tabpanel');
+    expect(firstButton.getAttribute('role')).toBe('tab');
+    expect(firstPanel.getAttribute('role')).toBe('tabpanel');
 
-    const controlsId: string | null = buttons[0].getAttribute('aria-controls');
-    const panelId: string | null = panels[0].getAttribute('id');
+    const controlsId: string | null = firstButton.getAttribute('aria-controls');
+    const panelId: string | null = firstPanel.getAttribute('id');
     expect(controlsId).toBe(panelId);
 
-    const labelledBy: string | null = panels[0].getAttribute('aria-labelledby');
-    const tabId: string | null = buttons[0].getAttribute('id');
+    const labelledBy: string | null = firstPanel.getAttribute('aria-labelledby');
+    const tabId: string | null = firstButton.getAttribute('id');
     expect(labelledBy).toBe(tabId);
   });
 });
