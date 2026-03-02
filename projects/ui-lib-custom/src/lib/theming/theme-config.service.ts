@@ -636,7 +636,7 @@ export class ThemeConfigService {
   }
 
   private mergePresets(base: ThemePreset, overrides: DeepPartial<ThemePreset>): ThemePreset {
-    return this.deepMerge(base, overrides);
+    return this.deepMerge<ThemePreset>(base, overrides);
   }
 
   private deepMerge<T extends object>(base: T, patch: DeepPartial<T>): T {

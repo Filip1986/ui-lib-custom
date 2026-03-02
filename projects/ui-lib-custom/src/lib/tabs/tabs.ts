@@ -1,38 +1,37 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  ViewChild,
-  ViewChildren,
-  QueryList,
-  TemplateRef,
   computed,
   contentChildren,
   effect,
-  input,
-  output,
-  signal,
-  OnDestroy,
-  AfterViewInit,
-  ViewEncapsulation,
-  Signal,
+  ElementRef,
   inject,
+  input,
+  OnDestroy,
+  output,
+  QueryList,
+  signal,
+  Signal,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon } from 'ui-lib-custom/icon';
-import { SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon, SemanticIcon } from 'ui-lib-custom/icon';
 import { Tab } from './tab';
 import { TabPanel } from './tab-panel';
 import {
+  TabContext,
   TabsAlignment,
   TabsLazyMode,
+  TabsMode,
   TabsOrientation,
   TabsScrollBehavior,
   TabsSize,
   TabsValue,
   TabsVariant,
-  TabContext,
-  TabsMode,
 } from './tabs.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
@@ -161,19 +160,19 @@ export class Tabs implements OnDestroy, AfterViewInit {
       const label = tab.label();
       const labelTemplate = tab.labelTemplate?.template as TemplateRef<unknown> | undefined;
       const contentTemplate = tab.contentTemplate?.template as TemplateRef<unknown> | undefined;
-      const context: TabsContextItem = {
+
+      return {
         ref: tab,
         value: tab.value() ?? index,
         index,
         disabled: this.disabled() || tab.disabled(),
         closable: tab.closable() || this.closable(),
-        ...(label !== undefined && label !== null ? { label } : {}),
+        ...(label !== null ? { label } : {}),
         ...(labelTemplate ? { labelTemplate } : {}),
         ...(tab.content ? { content: tab.content } : {}),
         ...(contentTemplate ? { contentTemplate } : {}),
         lazy: effectiveLazy,
       };
-      return context;
     });
   });
 
