@@ -18,18 +18,21 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideRouter(routes),
     provideUiLibIcons(),
-    provideAppInitializer((): void | Promise<void> => {
+    provideAppInitializer(async (): Promise<void> => {
       const themeService = inject(ThemeConfigService);
       const hasStored =
         typeof localStorage !== 'undefined' && Boolean(localStorage.getItem('ui-lib-custom.theme'));
       if (hasStored) {
         return;
       }
-      return themeService
-        .loadPresetAsync('/presets/brand-example.json', { merge: true, persist: true })
-        .catch((): void => {
-          themeService.applyToRoot(themeService.getPreset());
+      try {
+        await themeService.loadPresetAsync('/presets/brand-example.json', {
+          merge: true,
+          persist: true,
         });
+      } catch {
+        themeService.applyToRoot(themeService.getPreset());
+      }
     }),
   ],
 };

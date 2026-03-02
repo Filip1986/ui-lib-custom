@@ -1,4 +1,5 @@
 import type { Routes } from '@angular/router';
+import type { Type } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
 import { ButtonsComponent } from './pages/buttons/buttons.component';
 import { CardsComponent } from './pages/cards/cards.component';
@@ -98,17 +99,15 @@ export const routes: Routes = [
   { path: 'tabs', component: TabsDemoComponent, title: 'Tabs - UI Components Library' },
   {
     path: 'icons',
-    loadComponent: (): Promise<unknown> =>
-      import('./pages/icons/icons-demo.component').then(
-        (m: { IconsDemoComponent: unknown }): unknown => m.IconsDemoComponent
-      ),
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/icons/icons-demo.component').then((m): Type<unknown> => m.IconsDemoComponent),
     title: 'Icons - UI Components Library',
   },
   {
     path: 'accordion',
-    loadComponent: (): Promise<unknown> =>
+    loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/accordion/accordion.component').then(
-        (m: { AccordionComponent: unknown }): unknown => m.AccordionComponent
+        (m): Type<unknown> => m.AccordionComponent
       ),
     title: 'Accordion - UI Components Library',
   },

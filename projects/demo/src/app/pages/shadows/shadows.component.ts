@@ -66,14 +66,16 @@ export class ShadowsComponent {
 
   public readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
 
-  public readonly examples: ElevationExample[] = Object.entries(this.shadowValues)
-    .filter(([key]: [ShadowKey, string]): boolean => key.startsWith('shadow-'))
-    .map(([key, value]: [ShadowKey, string]): ElevationExample => {
+  private readonly shadowEntries = Object.entries(this.shadowValues) as [ShadowKey, string][];
+
+  public readonly examples: ElevationExample[] = this.shadowEntries
+    .filter(([key]): boolean => key.startsWith('shadow-'))
+    .map(([key, value]): ElevationExample => {
       const level = Number(key.split('-')[1]);
       return {
         level,
         label: `Shadow ${level}`,
-        token: key as ShadowKey,
+        token: key,
         elevation: 'none' as CardElevation,
         description: value,
       } satisfies ElevationExample;

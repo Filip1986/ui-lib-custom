@@ -1,3 +1,4 @@
+m
 @if (showFab() && !embedded()) {
   <ui-lib-button class="theme-editor-fab" size="sm" appearance="solid" (click)="togglePanel()">
     ⚙
@@ -101,6 +102,7 @@
               class="color-swatch"
               type="button"
               [style.background]="colorValues()[color.key]"
+              [attr.aria-label]="'Select ' + color.label + ' color'"
               (click)="swatchInput.click()"
             ></button>
             <div class="color-meta">
@@ -120,6 +122,7 @@
               class="color-input"
               type="color"
               [value]="colorValues()[color.key]"
+              [attr.aria-label]="color.label + ' color value'"
               (input)="onSwatchChange(color.key, $event.target.value)"
             />
           </div>
