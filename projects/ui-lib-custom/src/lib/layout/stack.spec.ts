@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Stack } from './stack';
+import type { StackAlign, StackJustify } from './stack';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { SpacingToken, StackToken } from 'ui-lib-custom/tokens';
 
@@ -24,10 +25,10 @@ import type { SpacingToken, StackToken } from 'ui-lib-custom/tokens';
 })
 class TestHostComponent {
   public direction: 'vertical' | 'horizontal' = 'vertical';
-  public gap: number = 4;
+  public gap: SpacingToken = 4;
   public spacing: StackToken | SpacingToken | number | null = null;
-  public align: string = 'stretch';
-  public justify: string = 'start';
+  public align: StackAlign = 'stretch';
+  public justify: StackJustify = 'start';
 }
 
 @Component({

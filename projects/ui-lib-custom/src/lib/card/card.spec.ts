@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
+import type { ThemeScopeInput } from 'ui-lib-custom/theme';
 
 import { Card, CardVariant, CardElevation } from './card';
 
@@ -69,7 +70,7 @@ class ClickableCardHost {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CardThemeHost {
-  public theme: unknown = null;
+  public theme: ThemeScopeInput = null;
   public headerIcon: string | null = null;
   public subtitle: string | null = null;
   public closable: boolean = false;
@@ -203,7 +204,7 @@ describe('Card theme and header features', (): void => {
     return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-card') as HTMLElement;
   }
 
-  async function setTheme(value: unknown): Promise<void> {
+  async function setTheme(value: ThemeScopeInput): Promise<void> {
     fixture.componentInstance.theme = value;
     fixture.detectChanges(false);
     await fixture.whenStable();
@@ -233,7 +234,7 @@ describe('Card theme and header features', (): void => {
 
   it('applies variant and variables for scoped theme object', async (): Promise<void> => {
     const scopedTheme: {
-      variant: string;
+      variant: ThemeVariant;
       colors: { primary: string };
       variables: { '--uilib-card-border': string };
       colorScheme: 'light';

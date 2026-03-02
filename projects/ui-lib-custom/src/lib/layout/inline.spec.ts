@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Inline } from './inline';
+import type { InlineAlign, InlineJustify } from './inline';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { InlineToken, SpacingToken } from 'ui-lib-custom/tokens';
 
@@ -17,10 +18,10 @@ import type { InlineToken, SpacingToken } from 'ui-lib-custom/tokens';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  public gap: number = 2;
+  public gap: SpacingToken = 2;
   public spacing: InlineToken | SpacingToken | number | null = null;
-  public align: string = 'center';
-  public justify: string = 'start';
+  public align: InlineAlign = 'center';
+  public justify: InlineJustify = 'start';
 }
 
 @Component({

@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Grid } from './grid';
+import type { GridAlign, GridJustify } from './grid';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import type { SpacingToken, StackToken } from 'ui-lib-custom/tokens';
+import type { GridColumns, SpacingToken, StackToken } from 'ui-lib-custom/tokens';
 
 @Component({
   standalone: true,
@@ -24,11 +25,11 @@ import type { SpacingToken, StackToken } from 'ui-lib-custom/tokens';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  public columns: number = 12;
-  public gap: number = 4;
+  public columns: GridColumns = 12;
+  public gap: SpacingToken = 4;
   public spacing: StackToken | SpacingToken | number | null = null;
-  public align: string = 'stretch';
-  public justify: string = 'stretch';
+  public align: GridAlign = 'stretch';
+  public justify: GridJustify = 'stretch';
   public minColumnWidth: string | undefined = undefined;
 }
 

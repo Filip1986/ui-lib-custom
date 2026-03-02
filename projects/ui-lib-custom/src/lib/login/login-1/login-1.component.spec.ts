@@ -1,6 +1,6 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { Login1Component } from './login-1.component';
+import { Login1Component } from 'ui-lib-custom';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('Login1Component', (): void => {

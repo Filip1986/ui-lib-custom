@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Container } from './container';
+import type { ContainerSize, InsetToken, SpacingToken } from 'ui-lib-custom/tokens';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+type ContainerSizeInput = Exclude<ContainerSize, 'xs' | '2xl' | 'full'>;
+type ContainerInsetInput = Exclude<InsetToken, 'xs'>;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,10 +18,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
 })
 class TestHostComponent {
-  public size: string = 'lg';
+  public size: ContainerSizeInput = 'lg';
   public centered = false;
-  public padding: number = 4;
-  public inset: string | null = null;
+  public padding: SpacingToken = 4;
+  public inset: ContainerInsetInput | null = null;
 }
 
 @Component({
