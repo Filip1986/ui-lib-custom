@@ -35,10 +35,10 @@ class HostComponent {
   public readonly content = signal('');
 }
 
-describe('Checkbox', () => {
+describe('Checkbox', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [HostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -52,7 +52,7 @@ describe('Checkbox', () => {
     return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-checkbox') as HTMLElement;
   }
 
-  it('should render label and description', () => {
+  it('should render label and description', (): void => {
     const el = checkboxEl();
     expect(el.querySelector('.checkbox-label')?.textContent).toContain('Accept terms');
     expect(el.querySelector('.checkbox-description')?.textContent).toContain(
@@ -60,7 +60,7 @@ describe('Checkbox', () => {
     );
   });
 
-  it('applies variant, size, and checked classes', () => {
+  it('applies variant, size, and checked classes', (): void => {
     fixture.componentInstance.variant.set('bootstrap');
     fixture.componentInstance.size.set('lg');
     fixture.componentInstance.checked = true;
@@ -72,7 +72,7 @@ describe('Checkbox', () => {
     expect(el.className).toContain('ui-checkbox-checked');
   });
 
-  it('reflects indeterminate state via aria', () => {
+  it('reflects indeterminate state via aria', (): void => {
     fixture.componentInstance.indeterminate.set(true);
     fixture.detectChanges();
 
@@ -80,7 +80,7 @@ describe('Checkbox', () => {
     expect(checkboxEl().className).toContain('ui-checkbox-indeterminate');
   });
 
-  it('toggles checked state on click when enabled', () => {
+  it('toggles checked state on click when enabled', (): void => {
     const el = checkboxEl();
     el.click();
     fixture.detectChanges();
@@ -89,7 +89,7 @@ describe('Checkbox', () => {
     expect(el.getAttribute('aria-checked')).toBe('true');
   });
 
-  it('does not toggle when disabled', () => {
+  it('does not toggle when disabled', (): void => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
@@ -101,7 +101,7 @@ describe('Checkbox', () => {
     expect(el.getAttribute('aria-checked')).toBe('false');
   });
 
-  it('supports keyboard interaction', () => {
+  it('supports keyboard interaction', (): void => {
     const el = checkboxEl();
     el.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
     fixture.detectChanges();
@@ -114,7 +114,7 @@ describe('Checkbox', () => {
     expect(fixture.componentInstance.checked).toBeFalsy();
   });
 
-  it('creates with defaults', () => {
+  it('creates with defaults', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
     const el: HTMLElement = checkboxEl();
     expect(el.classList.contains('ui-checkbox')).toBeTruthy();
@@ -122,7 +122,7 @@ describe('Checkbox', () => {
     expect(el.classList.contains('ui-checkbox-size-md')).toBeTruthy();
   });
 
-  it('applies each variant class', () => {
+  it('applies each variant class', (): void => {
     const variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
 
     variants.forEach((variant: CheckboxVariant): void => {
@@ -133,7 +133,7 @@ describe('Checkbox', () => {
     });
   });
 
-  it('applies each size class', () => {
+  it('applies each size class', (): void => {
     const sizes: CheckboxSize[] = ['sm', 'md', 'lg'];
 
     sizes.forEach((size: CheckboxSize): void => {
@@ -144,7 +144,7 @@ describe('Checkbox', () => {
     });
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const scope: HTMLDivElement = document.createElement('div');
@@ -162,7 +162,7 @@ describe('Checkbox', () => {
     root.removeAttribute('data-theme');
   });
 
-  it('associates label via aria-labelledby', () => {
+  it('associates label via aria-labelledby', (): void => {
     fixture.detectChanges();
 
     const el = checkboxEl();
@@ -170,7 +170,7 @@ describe('Checkbox', () => {
     expect(el.getAttribute('aria-labelledby')).toBe(labelEl?.id ?? null);
   });
 
-  it('uses aria-label when provided', () => {
+  it('uses aria-label when provided', (): void => {
     fixture.componentInstance.label.set(null as unknown as string);
     fixture.componentInstance.description.set(null as unknown as string);
     fixture.componentInstance.ariaLabel.set('Custom label');
@@ -196,10 +196,10 @@ class ReactiveHostComponent {
   });
 }
 
-describe('Checkbox Reactive Forms', () => {
+describe('Checkbox Reactive Forms', (): void => {
   let fixture: ComponentFixture<ReactiveHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ReactiveHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -213,7 +213,7 @@ describe('Checkbox Reactive Forms', () => {
     return (fixture.nativeElement as HTMLElement).querySelector('ui-lib-checkbox') as HTMLElement;
   }
 
-  it('updates control value on click', () => {
+  it('updates control value on click', (): void => {
     const control: FormControl<boolean> = fixture.componentInstance.form.controls.accepted;
 
     checkboxEl().click();
@@ -222,7 +222,7 @@ describe('Checkbox Reactive Forms', () => {
     expect(control.value).toBeTruthy();
   });
 
-  it('marks control as touched on focusout', () => {
+  it('marks control as touched on focusout', (): void => {
     const control: FormControl<boolean> = fixture.componentInstance.form.controls.accepted;
 
     checkboxEl().dispatchEvent(new FocusEvent('focusout', { relatedTarget: null }));
@@ -231,7 +231,7 @@ describe('Checkbox Reactive Forms', () => {
     expect(control.touched).toBeTruthy();
   });
 
-  it('reflects disabled state from control', () => {
+  it('reflects disabled state from control', (): void => {
     const control: FormControl<boolean> = fixture.componentInstance.form.controls.accepted;
 
     control.disable();
@@ -241,10 +241,10 @@ describe('Checkbox Reactive Forms', () => {
   });
 });
 
-describe('Checkbox CVA', () => {
+describe('Checkbox CVA', (): void => {
   let fixture: ComponentFixture<Checkbox>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Checkbox],
     }).compileComponents();
@@ -257,14 +257,14 @@ describe('Checkbox CVA', () => {
     return fixture.nativeElement as HTMLElement;
   }
 
-  it('writeValue updates checked state', () => {
+  it('writeValue updates checked state', (): void => {
     fixture.componentInstance.writeValue(true);
     fixture.detectChanges();
 
     expect(hostEl().getAttribute('aria-checked')).toBe('true');
   });
 
-  it('registerOnChange fires when toggled', () => {
+  it('registerOnChange fires when toggled', (): void => {
     const onChange: jasmine.Spy = jasmine.createSpy('onChange');
     fixture.componentInstance.registerOnChange(onChange);
 
@@ -274,7 +274,7 @@ describe('Checkbox CVA', () => {
     expect(onChange).toHaveBeenCalledWith(true);
   });
 
-  it('registerOnTouched fires on focusout', () => {
+  it('registerOnTouched fires on focusout', (): void => {
     const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
     fixture.componentInstance.registerOnTouched(onTouched);
 
@@ -284,7 +284,7 @@ describe('Checkbox CVA', () => {
     expect(onTouched).toHaveBeenCalled();
   });
 
-  it('setDisabledState disables the host', () => {
+  it('setDisabledState disables the host', (): void => {
     fixture.componentInstance.setDisabledState(true);
     fixture.detectChanges();
 

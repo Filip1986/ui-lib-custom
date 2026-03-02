@@ -34,7 +34,7 @@ let inputIdCounter = 0;
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => UiLibInput),
+      useExisting: forwardRef((): typeof UiLibInput => UiLibInput),
       multi: true,
     },
   ],
@@ -61,19 +61,19 @@ export class UiLibInput implements ControlValueAccessor {
   public readonly showPassword = signal(false);
   private readonly _disabled = signal(false);
 
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: string) => void = (): void => {};
+  private onTouched: () => void = (): void => {};
 
   public readonly controlId = computed<string>(
-    () => this.id() ?? `ui-lib-input-${++inputIdCounter}`
+    (): string => this.id() ?? `ui-lib-input-${++inputIdCounter}`
   );
-  public readonly describedById = computed<string | undefined>(() =>
+  public readonly describedById = computed<string | undefined>((): string | undefined =>
     this.error() ? `${this.controlId()}-error` : undefined
   );
-  public readonly displayPlaceholder = computed<string>(() =>
+  public readonly displayPlaceholder = computed<string>((): string =>
     this.labelFloat() === 'over' ? this.placeholder() : ''
   );
-  public readonly inputType = computed<InputType>(() => {
+  public readonly inputType = computed<InputType>((): InputType => {
     if (this.type() === 'password' && this.showTogglePassword()) {
       return this.showPassword() ? 'text' : 'password';
     }
@@ -83,9 +83,9 @@ export class UiLibInput implements ControlValueAccessor {
   private readonly themeConfig = inject(ThemeConfigService);
 
   public readonly effectiveVariant = computed<InputVariant>(
-    () => this.variant() ?? this.themeConfig.variant()
+    (): InputVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>((): string => {
     const classes: string[] = [
       'ui-input',
       `ui-input-${this.effectiveVariant()}`,
@@ -99,13 +99,15 @@ export class UiLibInput implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  public readonly isFloating = computed<boolean>(() => {
+  public readonly isFloating = computed<boolean>((): boolean => {
     const mode: InputLabelFloat = this.labelFloat();
     if (mode === 'over') return false;
     return this.focused() || Boolean(this.value());
   });
-  public readonly isDisabled = computed<boolean>(() => this.disabled() || this._disabled());
-  public readonly currentLength = computed<number>(() => {
+  public readonly isDisabled = computed<boolean>(
+    (): boolean => this.disabled() || this._disabled()
+  );
+  public readonly currentLength = computed<number>((): number => {
     const value: string = this.value();
     return value.length;
   });
@@ -161,7 +163,7 @@ export class UiLibInput implements ControlValueAccessor {
 
   public togglePassword(): void {
     if (this.isDisabled()) return;
-    this.showPassword.update((v) => !v);
+    this.showPassword.update((v): boolean => !v);
   }
 
   public focusInput(event?: MouseEvent): void {

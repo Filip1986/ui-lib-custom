@@ -59,7 +59,6 @@
 
 ## Code Style
 
-...
 
 ### Inline Variables (Avoid Single-Use Assignments)
 
@@ -85,6 +84,48 @@ as type annotations cannot be applied directly to return expressions without a v
 - Naming it significantly clarifies complex logic
 - A temporary debug breakpoint is intentional (remove before committing)
 
+### Separate Template Files
+
+Always use a separate `.html` template file for components. Do not use inline `template` in the component decorator.
+
+❌ Avoid:
+```ts
+@Component({
+  selector: 'ui-lib-button',
+  template: `<button>{{ label }}</button>`,
+})
+```
+
+✅ Prefer:
+```ts
+@Component({
+  selector: 'ui-lib-button',
+  templateUrl: './button.component.html',
+})
+```
+
+Same applies to styles — prefer `styleUrl` over inline `styles`.
+
+### Explicit Method Return Types
+
+Always specify the return type on every method, getter, and function.
+Never rely on TypeScript inference for return types.
+
+❌ Avoid:
+```ts
+getItems() {
+  return this.items();
+}
+```
+
+✅ Prefer:
+```ts
+getItems(): TabItem[] {
+  return this.items();
+}
+```
+
+Applies to: class methods, getters, arrow functions assigned to class members, and lifecycle hooks.
 
 ## API Surface (PrimeNG-inspired)
 

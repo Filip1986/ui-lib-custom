@@ -64,10 +64,12 @@ export class LayoutGridSectionComponent {
   public readonly cardCount = signal<number>(2);
 
   public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
-  public readonly columnOptions = Object.keys(GRID_COLUMNS).map((key) => ({
-    label: `${key} cols`,
-    value: Number(key) as GridColumns,
-  }));
+  public readonly columnOptions = Object.keys(GRID_COLUMNS).map(
+    (key: string): { label: string; value: GridColumns } => ({
+      label: `${key} cols`,
+      value: Number(key) as GridColumns,
+    })
+  );
   public readonly minWidthOptions = [
     { label: 'None (fixed)', value: '' },
     { label: '160px', value: '160px' },
@@ -88,26 +90,28 @@ export class LayoutGridSectionComponent {
   ];
   public readonly cardOptions: { label: string; value: number }[] = Array.from(
     { length: 12 },
-    (_, index) => {
+    (_: unknown, index: number): { label: string; value: number } => {
       const count = index + 1;
       return { label: `${count} cards`, value: count };
     }
   );
 
-  public readonly spacingLabel = computed(() =>
+  public readonly spacingLabel = computed<string>((): string =>
     this.displayLabel(this.spacing(), this.spacingOptions)
   );
-  public readonly columnLabel = computed(() => `${this.columns()} cols`);
-  public readonly minWidthLabel = computed(() =>
+  public readonly columnLabel = computed<string>((): string => `${this.columns()} cols`);
+  public readonly minWidthLabel = computed<string>((): string =>
     this.minWidth() ? this.minWidth() : 'Fixed columns'
   );
-  public readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
-  public readonly justifyLabel = computed(() =>
+  public readonly alignLabel = computed<string>((): string =>
+    this.displayLabel(this.align(), this.alignOptions)
+  );
+  public readonly justifyLabel = computed<string>((): string =>
     this.displayLabel(this.justify(), this.justifyOptions)
   );
-  public readonly cardLabel = computed(() => `${this.cardCount()} cards`);
-  public readonly cardRange = computed(() =>
-    Array.from({ length: this.cardCount() }, (_, index) => index + 1)
+  public readonly cardLabel = computed<string>((): string => `${this.cardCount()} cards`);
+  public readonly cardRange = computed<number[]>((): number[] =>
+    Array.from({ length: this.cardCount() }, (_: unknown, index: number): number => index + 1)
   );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
@@ -153,17 +157,21 @@ export class LayoutGridSectionComponent {
   }
 
   private buildOptions<T extends string>(tokens: Record<T, string>): { label: string; value: T }[] {
-    return Object.entries(tokens as Record<string, string>).map(([key, value]) => ({
-      label: `${key} (${this.toPx(value)})`,
-      value: key as T,
-    }));
+    return Object.entries(tokens as Record<string, string>).map(
+      ([key, value]: [string, string]): { label: string; value: T } => ({
+        label: `${key} (${this.toPx(value)})`,
+        value: key as T,
+      })
+    );
   }
 
   private displayLabel<T extends string | number>(
     value: T,
     options: { label: string; value: T }[]
   ): string {
-    const match = options.find((option) => option.value === value);
+    const match = options.find(
+      (option: { label: string; value: T }): boolean => option.value === value
+    );
     return match ? match.label : String(value);
   }
 

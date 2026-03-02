@@ -76,13 +76,15 @@ export class LayoutInlineSectionComponent {
     { label: 'Stretch', value: 'stretch' },
   ];
 
-  public readonly spacingLabel = computed(() =>
+  public readonly spacingLabel = computed<string>((): string =>
     this.displayLabel(this.spacing(), this.spacingOptions)
   );
-  public readonly justifyLabel = computed(() =>
+  public readonly justifyLabel = computed<string>((): string =>
     this.displayLabel(this.justify(), this.justifyOptions)
   );
-  public readonly alignLabel = computed(() => this.displayLabel(this.align(), this.alignOptions));
+  public readonly alignLabel = computed<string>((): string =>
+    this.displayLabel(this.align(), this.alignOptions)
+  );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
@@ -112,14 +114,18 @@ export class LayoutInlineSectionComponent {
   }
 
   private buildOptions<T extends string>(tokens: Record<T, string>): { label: string; value: T }[] {
-    return Object.entries(tokens as Record<string, string>).map(([key, value]) => ({
-      label: `${key} (${this.toPx(value)})`,
-      value: key as T,
-    }));
+    return Object.entries(tokens as Record<string, string>).map(
+      ([key, value]: [string, string]): { label: string; value: T } => ({
+        label: `${key} (${this.toPx(value)})`,
+        value: key as T,
+      })
+    );
   }
 
   private displayLabel<T extends string>(value: T, options: { label: string; value: T }[]): string {
-    const match = options.find((option) => option.value === value);
+    const match = options.find(
+      (option: { label: string; value: T }): boolean => option.value === value
+    );
     return match ? match.label : String(value);
   }
 

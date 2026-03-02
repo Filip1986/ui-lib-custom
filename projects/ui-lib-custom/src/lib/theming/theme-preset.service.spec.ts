@@ -37,13 +37,13 @@ const samplePreset = (): ThemePreset => ({
   updatedAt: 100,
 });
 
-describe('ThemePresetService', () => {
+describe('ThemePresetService', (): void => {
   let service: ThemePresetService;
   let themeConfig: ThemeConfigService;
   let storageState: StorageRecord;
   let originalStorage: Storage;
 
-  beforeEach(() => {
+  beforeEach((): void => {
     storageState = {};
     originalStorage = window.localStorage;
     const mockStorage: Storage = {
@@ -74,11 +74,11 @@ describe('ThemePresetService', () => {
     themeConfig = TestBed.inject(ThemeConfigService);
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     Object.defineProperty(window, 'localStorage', { value: originalStorage, configurable: true });
   });
 
-  it('loads presets from localStorage', () => {
+  it('loads presets from localStorage', (): void => {
     const preset: ThemePreset = samplePreset();
     window.localStorage.setItem('uilib_presets', JSON.stringify([preset]));
     TestBed.resetTestingModule();
@@ -88,7 +88,7 @@ describe('ThemePresetService', () => {
     expect(fresh.presets()[0].id).toBe('preset-1');
   });
 
-  it('saves presets and persists them', () => {
+  it('saves presets and persists them', (): void => {
     const preset: ThemePreset = samplePreset();
     service.savePreset(preset);
     const raw: string | null = window.localStorage.getItem('uilib_presets');
@@ -98,7 +98,7 @@ describe('ThemePresetService', () => {
     expect(parsed[0].id).toBe('preset-1');
   });
 
-  it('updates existing preset on save', () => {
+  it('updates existing preset on save', (): void => {
     const preset: ThemePreset = samplePreset();
     service.savePreset(preset);
     const updated: ThemePreset = { ...preset, name: 'Updated' };
@@ -107,7 +107,7 @@ describe('ThemePresetService', () => {
     expect(service.presets()[0].name).toBe('Updated');
   });
 
-  it('applies presets using ThemeConfigService setters and CSS vars', () => {
+  it('applies presets using ThemeConfigService setters and CSS vars', (): void => {
     const preset: ThemePreset = samplePreset();
     const setVariantSpy = spyOn(themeConfig, 'setVariant');
     const setShapeSpy = spyOn(themeConfig, 'setShape');
@@ -127,38 +127,38 @@ describe('ThemePresetService', () => {
     expect(root.style.getPropertyValue('--uilib-custom-test')).toBe('1px');
   });
 
-  it('deletes presets by id', () => {
+  it('deletes presets by id', (): void => {
     const preset: ThemePreset = samplePreset();
     service.savePreset(preset);
     service.deletePreset('preset-1');
     expect(service.presets().length).toBe(0);
   });
 
-  it('exports preset as JSON via file download', () => {
+  it('exports preset as JSON via file download', (): void => {
     const preset: ThemePreset = samplePreset();
-    expect(() => service.exportAsJson(preset)).not.toThrow();
+    expect((): void => service.exportAsJson(preset)).not.toThrow();
   });
 
-  it('exports preset as CSS string', () => {
+  it('exports preset as CSS string', (): void => {
     const preset: ThemePreset = samplePreset();
     const css: string = service.exportAsCss(preset);
     expect(css).toContain('--uilib-color-primary-600');
     expect(css).toContain('#1976d2');
   });
 
-  it('imports preset from JSON', () => {
+  it('imports preset from JSON', (): void => {
     const preset: ThemePreset = samplePreset();
     const json: string = JSON.stringify(preset);
     const parsed: ThemePreset = service.importFromJson(json);
     expect(parsed.id).toBe('preset-1');
   });
 
-  it('throws on invalid JSON', () => {
+  it('throws on invalid JSON', (): void => {
     const invalid: string = JSON.stringify({ name: 'bad' });
-    expect(() => service.importFromJson(invalid)).toThrow();
+    expect((): void => service.importFromJson(invalid)).toThrow();
   });
 
-  it('captures the current theme into a preset', () => {
+  it('captures the current theme into a preset', (): void => {
     const captured: ThemePreset = service.captureCurrentTheme('Captured');
     expect(captured.name).toBe('Captured');
     expect(captured.colors.primary.length).toBeGreaterThan(0);

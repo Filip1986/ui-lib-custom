@@ -30,9 +30,9 @@ export class IconService {
     tabler: LUCIDE_ICON_MAPPING,
   };
 
-  public readonly config = computed<IconConfig>(() => this.configSignal());
+  public readonly config = computed<IconConfig>((): IconConfig => this.configSignal());
 
-  public readonly themeVariant = computed<ThemeVariant | null>(() => {
+  public readonly themeVariant = computed<ThemeVariant | null>((): ThemeVariant | null => {
     const themeConfig = this.themeConfig;
     if (!themeConfig) {
       return null;
@@ -40,7 +40,7 @@ export class IconService {
     return themeConfig.getPreset().variant;
   });
 
-  private readonly themeIcons = computed<ThemeIconConfig | null>(() => {
+  private readonly themeIcons = computed<ThemeIconConfig | null>((): ThemeIconConfig | null => {
     const themeConfig = this.themeConfig;
     if (!themeConfig) {
       return null;
@@ -62,18 +62,20 @@ export class IconService {
   }
 
   public setDefaultLibrary(library: IconLibrary): void {
-    this.configSignal.update((current) => ({ ...current, defaultLibrary: library }));
+    this.configSignal.update((current): IconConfig => ({ ...current, defaultLibrary: library }));
   }
 
   public setDefaultSize(size: IconSize): void {
-    this.configSignal.update((current) => ({ ...current, defaultSize: size }));
+    this.configSignal.update((current): IconConfig => ({ ...current, defaultSize: size }));
   }
 
   public setVariantMapping(mapping: Partial<IconConfig['variantMapping']>): void {
-    this.configSignal.update((current) => ({
-      ...current,
-      variantMapping: { ...current.variantMapping, ...mapping },
-    }));
+    this.configSignal.update(
+      (current): IconConfig => ({
+        ...current,
+        variantMapping: { ...current.variantMapping, ...mapping },
+      })
+    );
   }
 
   public getIconSize(size?: IconSize | null): string {

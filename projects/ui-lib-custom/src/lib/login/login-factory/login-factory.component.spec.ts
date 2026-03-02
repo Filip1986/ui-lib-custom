@@ -4,11 +4,11 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { LoginFactoryComponent } from './login-factory.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-describe('LoginFactoryComponent', () => {
+describe('LoginFactoryComponent', (): void => {
   let component: LoginFactoryComponent;
   let fixture: ComponentFixture<LoginFactoryComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [LoginFactoryComponent, ReactiveFormsModule],
       providers: [provideZonelessChangeDetection()],
@@ -19,11 +19,11 @@ describe('LoginFactoryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the component', () => {
+  it('should create the component', (): void => {
     expect(component).toBeTruthy();
   });
 
-  it('should render Login1Component for variant "1"', () => {
+  it('should render Login1Component for variant "1"', (): void => {
     fixture.componentRef.setInput('variant', '1');
     fixture.detectChanges();
     const login1Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -32,7 +32,7 @@ describe('LoginFactoryComponent', () => {
     expect(login1Element).toBeTruthy();
   });
 
-  it('should render Login2Component for variant "2"', () => {
+  it('should render Login2Component for variant "2"', (): void => {
     fixture.componentRef.setInput('variant', '2');
     fixture.detectChanges();
     const login2Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -41,7 +41,7 @@ describe('LoginFactoryComponent', () => {
     expect(login2Element).toBeTruthy();
   });
 
-  it('should render Login3Component for variant "3"', () => {
+  it('should render Login3Component for variant "3"', (): void => {
     fixture.componentRef.setInput('variant', '3');
     fixture.detectChanges();
     const login3Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -50,14 +50,14 @@ describe('LoginFactoryComponent', () => {
     expect(login3Element).toBeTruthy();
   });
 
-  it('should render Login1Component for default variant', () => {
+  it('should render Login1Component for default variant', (): void => {
     const login1Element: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
       'lib-login-1'
     );
     expect(login1Element).toBeTruthy();
   });
 
-  it('should emit submitLogin event when child component emits it', () => {
+  it('should emit submitLogin event when child component emits it', (): void => {
     spyOn(component.submitLogin, 'emit');
     component.onSubmitLogin({ username: 'testuser', password: 'password123', rememberMe: true });
     expect(component.submitLogin.emit).toHaveBeenCalledWith({
@@ -67,25 +67,25 @@ describe('LoginFactoryComponent', () => {
     });
   });
 
-  it('should emit registerClick event when child component emits it', () => {
+  it('should emit registerClick event when child component emits it', (): void => {
     spyOn(component.registerClick, 'emit');
     component.onRegisterClick();
     expect(component.registerClick.emit).toHaveBeenCalled();
   });
 
-  it('should emit forgotPasswordClick event when child component emits it', () => {
+  it('should emit forgotPasswordClick event when child component emits it', (): void => {
     spyOn(component.forgotPasswordClick, 'emit');
     component.onForgotPasswordClick('testuser@example.com');
     expect(component.forgotPasswordClick.emit).toHaveBeenCalledWith('testuser@example.com');
   });
 
-  it('should emit socialLoginClick event when child component emits it', () => {
+  it('should emit socialLoginClick event when child component emits it', (): void => {
     spyOn(component.socialLoginClick, 'emit');
     component.onSocialLoginClick('google');
     expect(component.socialLoginClick.emit).toHaveBeenCalledWith('google');
   });
 
-  it('should emit rememberMeChange event when child component emits it', () => {
+  it('should emit rememberMeChange event when child component emits it', (): void => {
     spyOn(component.rememberMeChange, 'emit');
     component.onRememberMeChange(true);
     expect(component.rememberMeChange.emit).toHaveBeenCalledWith(true);

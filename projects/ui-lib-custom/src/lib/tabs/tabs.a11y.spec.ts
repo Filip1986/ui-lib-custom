@@ -17,10 +17,10 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 })
 class TestHostComponent {}
 
-describe('Tabs Accessibility', () => {
+describe('Tabs Accessibility', (): void => {
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
     }).compileComponents();
@@ -28,7 +28,7 @@ describe('Tabs Accessibility', () => {
     fixture = TestBed.createComponent(TestHostComponent);
   });
 
-  it('should have no accessibility violations', async () => {
+  it('should have no accessibility violations', async (): Promise<void> => {
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 });

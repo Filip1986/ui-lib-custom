@@ -125,11 +125,11 @@ export class Example {}`,
   public readonly localSurface = signal('');
   public readonly localBorder = signal('');
 
-  private readonly globalVars = computed(() => {
+  private readonly globalVars = computed<Record<string, string>>((): Record<string, string> => {
     const preset = this.themeService.preset();
     return this.themeService.getCssVars(preset);
   });
-  private readonly localVars = computed(() => {
+  private readonly localVars = computed<Record<string, string>>((): Record<string, string> => {
     const vars: Record<string, string> = {};
     if (this.localSurface().trim()) {
       vars['--uilib-card-bg'] = this.localSurface().trim();
@@ -143,17 +143,17 @@ export class Example {}`,
     return vars;
   });
 
-  public readonly appliedTheme = computed(() => {
+  public readonly appliedTheme = computed<Record<string, string>>((): Record<string, string> => {
     const base = this.globalVars();
     if (!this.useLocalTheme()) return base;
     return { ...base, ...this.localVars() };
   });
 
-  public readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter((key) =>
-    key.startsWith('shadow-')
+  public readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter(
+    (key: string): boolean => key.startsWith('shadow-')
   );
-  public readonly globalShadow = computed(
-    () =>
+  public readonly globalShadow = computed<string>(
+    (): string =>
       SHADOW_MAP[
         this.themeService.preset().cardShadow ?? this.themeService.preset().shadow ?? ''
       ] ?? 'none'
@@ -163,7 +163,7 @@ export class Example {}`,
       this.themeService.preset().cardShadow ?? this.themeService.preset().shadow
     )
   );
-  public readonly shadowValue = computed(() =>
+  public readonly shadowValue = computed<string>((): string =>
     this.useLocalTheme() ? (SHADOW_MAP[this.selectedShadow()] ?? 'none') : this.globalShadow()
   );
 
@@ -178,7 +178,7 @@ export class Example {}`,
   }
 
   constructor() {
-    effect(() => {
+    effect((): void => {
       if (!this.useGlobalVariant()) return;
       const v = this.themeService.preset().variant as CardVariant;
       this.variant.set(v);

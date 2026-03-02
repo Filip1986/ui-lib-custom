@@ -17,10 +17,13 @@ export class App {
   private readonly themeService = inject(ThemeConfigService);
   public readonly sidebarVisible = signal<boolean>(false);
   public readonly theme = computed<'light' | 'dark' | 'brand-example'>(
-    () => this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
+    (): 'light' | 'dark' | 'brand-example' =>
+      this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
   );
-  public readonly themeName = computed<string>(() => this.themeService.preset().name);
-  public readonly themeVariant = computed<ThemeVariant>(() => this.themeService.variant());
+  public readonly themeName = computed<string>((): string => this.themeService.preset().name);
+  public readonly themeVariant = computed<ThemeVariant>(
+    (): ThemeVariant => this.themeService.variant()
+  );
   public readonly savedThemes = this.themeService.savedThemes;
 
   constructor() {
@@ -29,7 +32,7 @@ export class App {
   }
 
   public toggleSidebar(): void {
-    this.sidebarVisible.update((v: boolean) => !v);
+    this.sidebarVisible.update((v: boolean): boolean => !v);
   }
 
   public toggleTheme(): void {

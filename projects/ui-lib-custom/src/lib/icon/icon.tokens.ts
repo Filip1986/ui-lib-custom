@@ -4,5 +4,5 @@ import { DEFAULT_ICON_CONFIG } from './icon.types';
 
 export const ICON_CONFIG = new InjectionToken<IconConfig>('ui-lib-icon-config', {
   providedIn: 'root',
-  factory: () => ({ ...DEFAULT_ICON_CONFIG }),
+  factory: (): IconConfig => ({ ...DEFAULT_ICON_CONFIG }),
 });

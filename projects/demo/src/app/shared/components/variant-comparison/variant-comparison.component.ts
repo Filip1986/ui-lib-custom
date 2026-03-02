@@ -76,9 +76,9 @@ export class VariantComparisonComponent {
   public readonly showBootstrap = signal<boolean>(true);
   public readonly showMinimal = signal<boolean>(true);
 
-  public readonly gridColumns = computed<string>(() => {
+  public readonly gridColumns = computed<string>((): string => {
     const count = [this.showMaterial(), this.showBootstrap(), this.showMinimal()].filter(
-      Boolean
+      (value: boolean): boolean => value
     ).length;
     return `repeat(${Math.max(count, 1)}, 1fr)`;
   });

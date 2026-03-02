@@ -39,10 +39,10 @@ class ReactiveHostComponent {
   });
 }
 
-describe('UiLibInput basics', () => {
+describe('UiLibInput basics', (): void => {
   let fixture: ComponentFixture<UiLibInput>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [UiLibInput],
     }).compileComponents();
@@ -63,14 +63,14 @@ describe('UiLibInput basics', () => {
     return rootEl().querySelector('input') as HTMLInputElement;
   }
 
-  it('creates with defaults', () => {
+  it('creates with defaults', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
     expect(hostEl().classList.contains('ui-input')).toBeTruthy();
     expect(hostEl().classList.contains('ui-input-material')).toBeTruthy();
     expect(hostEl().classList.contains('ui-input-float-over')).toBeTruthy();
   });
 
-  it('applies each variant class', () => {
+  it('applies each variant class', (): void => {
     const variants: InputVariant[] = ['material', 'bootstrap', 'minimal'];
 
     variants.forEach((variant: InputVariant): void => {
@@ -81,7 +81,7 @@ describe('UiLibInput basics', () => {
     });
   });
 
-  it('renders label text when provided', () => {
+  it('renders label text when provided', (): void => {
     fixture.componentRef.setInput('label', 'Email');
     fixture.detectChanges();
 
@@ -89,7 +89,7 @@ describe('UiLibInput basics', () => {
     expect(label?.textContent).toContain('Email');
   });
 
-  it('renders placeholder when labelFloat is over', () => {
+  it('renders placeholder when labelFloat is over', (): void => {
     fixture.componentRef.setInput('placeholder', 'Email');
     fixture.componentRef.setInput('labelFloat', 'over');
     fixture.detectChanges();
@@ -97,7 +97,7 @@ describe('UiLibInput basics', () => {
     expect(inputEl().getAttribute('placeholder')).toBe('Email');
   });
 
-  it('does not show placeholder when labelFloat is not over', () => {
+  it('does not show placeholder when labelFloat is not over', (): void => {
     fixture.componentRef.setInput('placeholder', 'Email');
     fixture.componentRef.setInput('labelFloat', 'in');
     fixture.detectChanges();
@@ -105,7 +105,7 @@ describe('UiLibInput basics', () => {
     expect(inputEl().getAttribute('placeholder')).toBe('');
   });
 
-  it('sets disabled state on the input element', () => {
+  it('sets disabled state on the input element', (): void => {
     fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
@@ -113,7 +113,7 @@ describe('UiLibInput basics', () => {
     expect(hostEl().classList.contains('ui-input-disabled')).toBeTruthy();
   });
 
-  it('applies error state and aria-invalid', () => {
+  it('applies error state and aria-invalid', (): void => {
     fixture.componentRef.setInput('error', 'Required');
     fixture.detectChanges();
 
@@ -121,7 +121,7 @@ describe('UiLibInput basics', () => {
     expect(inputEl().getAttribute('aria-invalid')).toBe('true');
   });
 
-  it('fires registerOnChange when input changes', () => {
+  it('fires registerOnChange when input changes', (): void => {
     const onChange: jasmine.Spy = jasmine.createSpy('onChange');
     fixture.componentInstance.registerOnChange(onChange);
 
@@ -132,7 +132,7 @@ describe('UiLibInput basics', () => {
     expect(onChange).toHaveBeenCalledWith('Ada');
   });
 
-  it('fires registerOnTouched on blur', () => {
+  it('fires registerOnTouched on blur', (): void => {
     const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
     fixture.componentInstance.registerOnTouched(onTouched);
 
@@ -142,21 +142,21 @@ describe('UiLibInput basics', () => {
     expect(onTouched).toHaveBeenCalled();
   });
 
-  it('setDisabledState disables the input', () => {
+  it('setDisabledState disables the input', (): void => {
     fixture.componentInstance.setDisabledState(true);
     fixture.detectChanges();
 
     expect(inputEl().disabled).toBeTruthy();
   });
 
-  it('writeValue updates the displayed value', () => {
+  it('writeValue updates the displayed value', (): void => {
     fixture.componentInstance.writeValue('Ada');
     fixture.detectChanges();
 
     expect(inputEl().value).toBe('Ada');
   });
 
-  it('shows clear button and clears value when clicked', () => {
+  it('shows clear button and clears value when clicked', (): void => {
     fixture.componentRef.setInput('showClear', true);
     fixture.componentRef.setInput('labelFloat', 'over');
     fixture.componentInstance.writeValue('Ada');
@@ -171,7 +171,7 @@ describe('UiLibInput basics', () => {
     expect(inputEl().value).toBe('');
   });
 
-  it('toggles password visibility when enabled', () => {
+  it('toggles password visibility when enabled', (): void => {
     fixture.componentRef.setInput('type', 'password');
     fixture.componentRef.setInput('showTogglePassword', true);
     fixture.detectChanges();
@@ -185,7 +185,7 @@ describe('UiLibInput basics', () => {
     expect(inputEl().getAttribute('type')).toBe('text');
   });
 
-  it('renders counter when enabled with maxLength', () => {
+  it('renders counter when enabled with maxLength', (): void => {
     fixture.componentRef.setInput('showCounter', true);
     fixture.componentRef.setInput('maxLength', 10);
     fixture.componentInstance.writeValue('Ada');
@@ -195,7 +195,7 @@ describe('UiLibInput basics', () => {
     expect(counter?.textContent).toContain('3 / 10');
   });
 
-  it('sets floating class when labelFloat is not over and value exists', () => {
+  it('sets floating class when labelFloat is not over and value exists', (): void => {
     fixture.componentRef.setInput('labelFloat', 'in');
     fixture.componentInstance.writeValue('Ada');
     fixture.detectChanges();
@@ -203,7 +203,7 @@ describe('UiLibInput basics', () => {
     expect(hostEl().classList.contains('ui-input-floating-active')).toBeTruthy();
   });
 
-  it('focusInput focuses input when click is not on a button', () => {
+  it('focusInput focuses input when click is not on a button', (): void => {
     const spy: jasmine.Spy = spyOn(inputEl(), 'focus');
 
     fixture.componentInstance.focusInput();
@@ -212,7 +212,7 @@ describe('UiLibInput basics', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('focusInput ignores clicks on buttons', () => {
+  it('focusInput ignores clicks on buttons', (): void => {
     fixture.componentRef.setInput('showClear', true);
     fixture.componentInstance.writeValue('Ada');
     fixture.detectChanges();
@@ -232,7 +232,7 @@ describe('UiLibInput basics', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('clear does nothing when disabled', () => {
+  it('clear does nothing when disabled', (): void => {
     fixture.componentRef.setInput('showClear', true);
     fixture.componentRef.setInput('disabled', true);
     fixture.componentInstance.writeValue('Ada');
@@ -245,7 +245,7 @@ describe('UiLibInput basics', () => {
     expect(inputEl().value).toBe('Ada');
   });
 
-  it('togglePassword does nothing when disabled', () => {
+  it('togglePassword does nothing when disabled', (): void => {
     fixture.componentRef.setInput('type', 'password');
     fixture.componentRef.setInput('showTogglePassword', true);
     fixture.componentRef.setInput('disabled', true);
@@ -258,7 +258,7 @@ describe('UiLibInput basics', () => {
     expect(inputEl().getAttribute('type')).toBe('password');
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const light: string = getComputedStyle(root).getPropertyValue('--uilib-input-bg').trim();
@@ -271,14 +271,14 @@ describe('UiLibInput basics', () => {
   });
 });
 
-describe('UiLibInput ngModel integration', () => {
+describe('UiLibInput ngModel integration', (): void => {
   let fixture: ComponentFixture<NgModelHostComponent>;
 
   const flushMicrotasks = async (): Promise<void> => {
-    await new Promise<void>((resolve: () => void) => setTimeout(resolve, 0));
+    await new Promise<void>((resolve: () => void): void => setTimeout(resolve, 0));
   };
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [NgModelHostComponent],
     }).compileComponents();
@@ -293,7 +293,7 @@ describe('UiLibInput ngModel integration', () => {
     return (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
   }
 
-  it('reflects ngModel value in the input', async () => {
+  it('reflects ngModel value in the input', async (): Promise<void> => {
     const freshFixture: ComponentFixture<NgModelHostComponent> =
       TestBed.createComponent(NgModelHostComponent);
     freshFixture.componentInstance.value = 'Grace';
@@ -307,7 +307,7 @@ describe('UiLibInput ngModel integration', () => {
     expect(freshInput.value).toBe('Grace');
   });
 
-  it('updates ngModel on user input', async () => {
+  it('updates ngModel on user input', async (): Promise<void> => {
     inputEl().value = 'Linus';
     inputEl().dispatchEvent(new Event('input'));
     fixture.detectChanges(false);
@@ -317,10 +317,10 @@ describe('UiLibInput ngModel integration', () => {
   });
 });
 
-describe('UiLibInput Reactive Forms', () => {
+describe('UiLibInput Reactive Forms', (): void => {
   let fixture: ComponentFixture<ReactiveHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ReactiveHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -334,7 +334,7 @@ describe('UiLibInput Reactive Forms', () => {
     return (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
   }
 
-  it('updates control value and dirty state', () => {
+  it('updates control value and dirty state', (): void => {
     const control: FormControl<string> = fixture.componentInstance.form.controls.name;
 
     inputEl().value = 'Ada';
@@ -345,7 +345,7 @@ describe('UiLibInput Reactive Forms', () => {
     expect(control.dirty).toBeTruthy();
   });
 
-  it('marks control as touched on blur', () => {
+  it('marks control as touched on blur', (): void => {
     const control: FormControl<string> = fixture.componentInstance.form.controls.name;
 
     inputEl().dispatchEvent(new FocusEvent('blur'));
@@ -354,7 +354,7 @@ describe('UiLibInput Reactive Forms', () => {
     expect(control.touched).toBeTruthy();
   });
 
-  it('reflects disabled state from control', () => {
+  it('reflects disabled state from control', (): void => {
     const control: FormControl<string> = fixture.componentInstance.form.controls.name;
 
     control.disable();
@@ -363,7 +363,7 @@ describe('UiLibInput Reactive Forms', () => {
     expect(inputEl().disabled).toBeTruthy();
   });
 
-  it('writeValue updates displayed value', () => {
+  it('writeValue updates displayed value', (): void => {
     const control: FormControl<string> = fixture.componentInstance.form.controls.name;
 
     control.setValue('Ada');
@@ -373,11 +373,11 @@ describe('UiLibInput Reactive Forms', () => {
   });
 });
 
-describe('UiLibInput announcer', () => {
+describe('UiLibInput announcer', (): void => {
   let fixture: ComponentFixture<UiLibInput>;
   let announcer: { announceError: jasmine.Spy };
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     announcer = {
       announceError: jasmine.createSpy('announceError'),
     };
@@ -391,7 +391,7 @@ describe('UiLibInput announcer', () => {
     fixture.detectChanges();
   });
 
-  it('announces new error messages once', () => {
+  it('announces new error messages once', (): void => {
     fixture.componentRef.setInput('error', 'Required');
     fixture.detectChanges();
 
@@ -403,10 +403,10 @@ describe('UiLibInput announcer', () => {
   });
 });
 
-describe('UiLibInput accessibility', () => {
+describe('UiLibInput accessibility', (): void => {
   let fixture: ComponentFixture<UiLibInput>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [UiLibInput],
     }).compileComponents();
@@ -419,7 +419,7 @@ describe('UiLibInput accessibility', () => {
     return (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
   }
 
-  it('associates label with input via for/id', () => {
+  it('associates label with input via for/id', (): void => {
     fixture.componentRef.setInput('label', 'Email');
     fixture.detectChanges();
 
@@ -430,7 +430,7 @@ describe('UiLibInput accessibility', () => {
     expect(labelEl?.getAttribute('for')).toBe(inputId);
   });
 
-  it('sets aria-describedby to the error element', () => {
+  it('sets aria-describedby to the error element', (): void => {
     fixture.componentRef.setInput('error', 'Required');
     fixture.detectChanges();
 
@@ -440,7 +440,7 @@ describe('UiLibInput accessibility', () => {
     expect(inputEl().getAttribute('aria-describedby')).toBe(errorEl?.id ?? null);
   });
 
-  it('marks touched on blur after keyboard focus', () => {
+  it('marks touched on blur after keyboard focus', (): void => {
     const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
     fixture.componentInstance.registerOnTouched(onTouched);
 

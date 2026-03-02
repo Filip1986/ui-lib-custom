@@ -42,7 +42,7 @@ let selectIdCounter = 0;
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => UiLibSelect),
+      useExisting: forwardRef((): typeof UiLibSelect => UiLibSelect),
       multi: true,
     },
   ],
@@ -89,13 +89,13 @@ export class UiLibSelect implements ControlValueAccessor {
   private readonly themeConfig = inject(ThemeConfigService);
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  private onChange: (value: SelectCvaValue) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: SelectCvaValue) => void = (): void => {};
+  private onTouched: () => void = (): void => {};
 
   private readonly controlIdValue = `ui-lib-select-${++selectIdCounter}`;
-  public readonly controlId = computed<string>(() => this.controlIdValue);
-  public readonly labelId = computed<string>(() => `${this.controlIdValue}-label`);
-  public readonly listboxId = computed<string>(() => `${this.controlIdValue}-listbox`);
+  public readonly controlId = computed<string>((): string => this.controlIdValue);
+  public readonly labelId = computed<string>((): string => `${this.controlIdValue}-label`);
+  public readonly listboxId = computed<string>((): string => `${this.controlIdValue}-listbox`);
 
   private readonly normalizedSize = computed<'sm' | 'md' | 'lg'>((): 'sm' | 'md' | 'lg' => {
     const size: SelectSize = this.size();
@@ -107,21 +107,21 @@ export class UiLibSelect implements ControlValueAccessor {
     return map[size];
   });
 
-  public readonly activeDescendantId = computed<string | null>(() => {
+  public readonly activeDescendantId = computed<string | null>((): string | null => {
     const index: number = this.focusedIndex();
     if (index < 0 || !this.open()) return null;
     return `${this.controlIdValue}-option-${index}`;
   });
 
-  public readonly resolvedLabelledBy = computed<string | null>(() => {
+  public readonly resolvedLabelledBy = computed<string | null>((): string | null => {
     if (this.ariaLabelledBy()) return this.ariaLabelledBy();
     return this.label() ? this.labelId() : null;
   });
 
   public readonly effectiveVariant = computed<SelectVariant>(
-    () => this.variant() ?? this.themeConfig.variant()
+    (): SelectVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>((): string => {
     const classes = [
       'ui-select',
       `ui-select-${this.effectiveVariant()}`,
@@ -132,41 +132,51 @@ export class UiLibSelect implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
+  public readonly isDisabled = computed<boolean>(
+    (): boolean => this.disabled() || this.cvaDisabled()
+  );
 
-  public readonly displayValue = computed<string>(() => {
+  public readonly displayValue = computed<string>((): string => {
     const vals = this.internalValue();
     const opts = this.options();
     if (!vals || vals.length === 0) return '';
-    const labels = vals.map((v) => this.getOptionLabel(opts.find((o) => o.value === v) ?? v));
+    const labels = vals.map((v): string =>
+      this.getOptionLabel(opts.find((o): boolean => o.value === v) ?? v)
+    );
     return labels.join(', ');
   });
 
-  public readonly filteredOptions = computed<SelectOption[]>(() => {
+  public readonly filteredOptions = computed<SelectOption[]>((): SelectOption[] => {
     const term = this.filter().toLowerCase();
     const opts = this.options();
     if (!term) return opts;
-    return opts.filter((o) => o.label.toLowerCase().includes(term));
+    return opts.filter((o): boolean => o.label.toLowerCase().includes(term));
   });
 
-  public readonly groupedOptions = computed<Record<string, SelectOption[]>>(() => {
-    const groups: Record<string, SelectOption[]> = {};
-    this.filteredOptions().forEach((opt) => {
-      const key = opt.group ?? '__ungrouped';
-      groups[key] = groups[key] || [];
-      groups[key].push(opt);
-    });
-    return groups;
-  });
+  public readonly groupedOptions = computed<Record<string, SelectOption[]>>(
+    (): Record<string, SelectOption[]> => {
+      const groups: Record<string, SelectOption[]> = {};
+      this.filteredOptions().forEach((opt): void => {
+        const key = opt.group ?? '__ungrouped';
+        groups[key] = groups[key] || [];
+        groups[key].push(opt);
+      });
+      return groups;
+    }
+  );
 
-  public readonly groupKeys = computed<string[]>(() => Object.keys(this.groupedOptions()));
+  public readonly groupKeys = computed<string[]>((): string[] =>
+    Object.keys(this.groupedOptions())
+  );
   public readonly selectedValues = computed<Set<SelectValue>>((): Set<SelectValue> => {
     const values: SelectValue[] = this.internalValue() ?? [];
     return new Set<SelectValue>(values);
   });
   public readonly optionIndexMap = computed<Map<SelectOption, number>>(
     (): Map<SelectOption, number> =>
-      new Map<SelectOption, number>(this.filteredOptions().map((opt, index) => [opt, index]))
+      new Map<SelectOption, number>(
+        this.filteredOptions().map((opt, index): [SelectOption, number] => [opt, index])
+      )
   );
 
   public writeValue(obj: SelectCvaValue): void {
@@ -193,7 +203,7 @@ export class UiLibSelect implements ControlValueAccessor {
 
   public togglePanel(): void {
     if (this.isDisabled() || this.loading()) return;
-    this.open.update((v) => !v);
+    this.open.update((v): boolean => !v);
     if (this.open()) {
       this.openPanel();
     } else {
@@ -207,7 +217,7 @@ export class UiLibSelect implements ControlValueAccessor {
     const selectedIndex = this.getSelectedIndex();
     const fallbackIndex = this.findFirstEnabledIndex();
     this.focusedIndex.set(selectedIndex >= 0 ? selectedIndex : fallbackIndex);
-    queueMicrotask(() => this.inputEl?.nativeElement.focus());
+    queueMicrotask((): void => this.inputEl?.nativeElement.focus());
   }
 
   public closePanel(): void {
@@ -221,9 +231,9 @@ export class UiLibSelect implements ControlValueAccessor {
     if (opt.disabled || this.isDisabled()) return;
     if (this.multiple()) {
       const current: SelectValue[] = this.internalValue() ?? [];
-      const exists = current.some((v) => v === opt.value);
+      const exists = current.some((v): boolean => v === opt.value);
       const next: SelectValue[] = exists
-        ? current.filter((v) => v !== opt.value)
+        ? current.filter((v): boolean => v !== opt.value)
         : [...current, opt.value];
       this.internalValue.set(next);
       this.onChange(next);
@@ -386,7 +396,7 @@ export class UiLibSelect implements ControlValueAccessor {
     const activeId = this.activeDescendantId();
     if (!activeId) return;
 
-    requestAnimationFrame(() => {
+    requestAnimationFrame((): void => {
       const element = document.getElementById(activeId);
       element?.scrollIntoView({ block: 'nearest' });
     });
@@ -405,6 +415,6 @@ export class UiLibSelect implements ControlValueAccessor {
     const selected = this.internalValue() ?? [];
     if (!selected.length) return -1;
     const value = selected[0];
-    return opts.findIndex((opt) => opt.value === value);
+    return opts.findIndex((opt): boolean => opt.value === value);
   }
 }

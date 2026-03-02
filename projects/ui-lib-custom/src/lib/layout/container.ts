@@ -61,13 +61,13 @@ export class Container {
   public readonly padding = input<SpacingToken>(4);
 
   /** Computed max-width value */
-  protected readonly _maxWidth = computed<string>(() => containerVar(this.size()));
+  protected readonly _maxWidth = computed<string>((): string => containerVar(this.size()));
 
   /** Computed centered value (for host binding) */
-  protected readonly _centered = computed<boolean>(() => this.centered());
+  protected readonly _centered = computed<boolean>((): boolean => this.centered());
 
   /** Computed padding value from inset (falls back to numeric padding) */
-  protected readonly _paddingValue = computed<string>(() => {
+  protected readonly _paddingValue = computed<string>((): string => {
     const semantic = this.inset();
     if (semantic !== null) {
       return insetVar(semantic as InsetToken);

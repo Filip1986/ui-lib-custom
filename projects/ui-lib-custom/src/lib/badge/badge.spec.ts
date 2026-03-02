@@ -24,14 +24,14 @@ class TestHostComponent {
   public variant: BadgeVariant = 'solid';
   public color: BadgeColor = 'primary';
   public size: BadgeSize = 'md';
-  public pill = false;
-  public dot = false;
+  public pill: boolean = false;
+  public dot: boolean = false;
   public label: string | null = null;
-  public content = 'Badge';
+  public content: string = 'Badge';
 }
 
-describe('Badge', () => {
-  beforeEach(async () => {
+describe('Badge', (): void => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -53,12 +53,12 @@ describe('Badge', () => {
     return { fixture, badgeElement, styles };
   }
 
-  it('should create', () => {
+  it('should create', (): void => {
     const { badgeElement } = bootstrap();
     expect(badgeElement).toBeTruthy();
   });
 
-  it('applies classes from inputs', () => {
+  it('applies classes from inputs', (): void => {
     const { badgeElement } = bootstrap({
       variant: 'outline',
       color: 'danger',
@@ -72,24 +72,24 @@ describe('Badge', () => {
     expect(badgeElement.className).toContain('badge-pill');
   });
 
-  it('uses solid variant styles by default', () => {
+  it('uses solid variant styles by default', (): void => {
     const { styles } = bootstrap();
     expect(styles.backgroundColor).not.toBe('');
     expect(styles.borderWidth).toBe('0px');
   });
 
-  it('uses outline variant styles', () => {
+  it('uses outline variant styles', (): void => {
     const { styles } = bootstrap({ variant: 'outline' });
     expect(styles.borderWidth).toBe('1px');
     expect(styles.backgroundColor).toBe('rgba(0, 0, 0, 0)');
   });
 
-  it('uses subtle variant styles', () => {
+  it('uses subtle variant styles', (): void => {
     const { styles } = bootstrap({ variant: 'subtle' });
     expect(styles.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
   });
 
-  it('adjusts radius for pill and dot', () => {
+  it('adjusts radius for pill and dot', (): void => {
     const shapeBase: string = getComputedStyle(document.documentElement)
       .getPropertyValue('--uilib-shape-base')
       .trim();
@@ -104,20 +104,20 @@ describe('Badge', () => {
     expect(dot.fontSize).toBe('0px');
   });
 
-  it('projects content', () => {
+  it('projects content', (): void => {
     const { badgeElement } = bootstrap({ content: 'Projected' });
     const text = badgeElement.textContent;
     expect(text).toBeTruthy();
     expect((text as string).trim()).toBe('Projected');
   });
 
-  it('sets aria attributes for dot badges', () => {
+  it('sets aria attributes for dot badges', (): void => {
     const { badgeElement } = bootstrap({ dot: true, label: 'online' });
     expect(badgeElement.getAttribute('role')).toBe('status');
     expect(badgeElement.getAttribute('aria-label')).toBe('online');
   });
 
-  it('applies each color class', () => {
+  it('applies each color class', (): void => {
     const colors: BadgeColor[] = [
       'primary',
       'secondary',
@@ -134,7 +134,7 @@ describe('Badge', () => {
     });
   });
 
-  it('applies each size class', () => {
+  it('applies each size class', (): void => {
     const sizes: BadgeSize[] = ['sm', 'md', 'lg'];
 
     sizes.forEach((size: BadgeSize): void => {
@@ -143,13 +143,13 @@ describe('Badge', () => {
     });
   });
 
-  it('renders dot mode without text content', () => {
+  it('renders dot mode without text content', (): void => {
     const { badgeElement, styles } = bootstrap({ dot: true, label: 'status' });
     expect(badgeElement.className).toContain('badge-dot');
     expect(styles.fontSize).toBe('0px');
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const scope: HTMLDivElement = document.createElement('div');

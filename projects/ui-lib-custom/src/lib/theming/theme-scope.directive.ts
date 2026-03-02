@@ -41,7 +41,7 @@ export class ThemeScopeDirective {
   }
 
   constructor() {
-    effect(() => {
+    effect((): void => {
       this.applyThemeScope();
     });
   }
@@ -85,7 +85,7 @@ export class ThemeScopeDirective {
 
   private applyVariables(variables: Record<string, string>): void {
     const element: HTMLElement = this.hostElement;
-    Object.entries(variables).forEach(([key, value]) => {
+    Object.entries(variables).forEach(([key, value]): void => {
       const varName = key.startsWith('--') ? key : `--${key}`;
       element.style.setProperty(varName, value);
       this.appliedVars.add(varName);
@@ -100,7 +100,7 @@ export class ThemeScopeDirective {
 
   private clearAppliedStyles(): void {
     const element: HTMLElement = this.hostElement;
-    this.appliedVars.forEach((key) => element.style.removeProperty(key));
+    this.appliedVars.forEach((key): void => element.style.removeProperty(key));
     this.appliedVars.clear();
     element.removeAttribute('data-variant');
   }

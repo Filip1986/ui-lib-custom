@@ -55,7 +55,7 @@ export class Alert {
 
   public readonly dismissed = output<void>();
 
-  public readonly statusIcon = computed<StatusIcon>(() => {
+  public readonly statusIcon = computed<StatusIcon>((): StatusIcon => {
     const iconMap: Record<string, StatusIcon> = {
       success: 'success',
       error: 'error',
@@ -66,11 +66,11 @@ export class Alert {
   });
 
   public readonly effectiveVariant = computed<'material' | 'bootstrap' | 'minimal'>(
-    () => this.variant() ?? this.themeConfig.variant()
+    (): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant()
   );
 
   public readonly hostClasses = computed<string>(
-    () => `alert-${this.effectiveVariant()} alert-${this.severity()}`
+    (): string => `alert-${this.effectiveVariant()} alert-${this.severity()}`
   );
 
   public onDismiss(): void {

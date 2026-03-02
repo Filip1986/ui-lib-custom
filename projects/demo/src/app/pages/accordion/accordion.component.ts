@@ -197,8 +197,8 @@ export class AccordionComponent {
 
   private readonly themeService = inject(ThemeConfigService);
 
-  public readonly appliedTheme = computed(() =>
-    this.themeService.getCssVars(this.themeService.preset())
+  public readonly appliedTheme = computed<Record<string, string>>(
+    (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
   );
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
@@ -217,7 +217,7 @@ export class AccordionComponent {
 
   public toggleControlled(value: string | number): void {
     const id: string = String(value);
-    this.controlledExpanded.update((current: string[]) => {
+    this.controlledExpanded.update((current: string[]): string[] => {
       const next: Set<string> = new Set<string>(current);
       if (next.has(id)) {
         next.delete(id);
@@ -257,7 +257,7 @@ export class AccordionComponent {
   public readonly reduceMotionDemo = signal<boolean>(false);
 
   public toggleReducedMotion(): void {
-    this.reduceMotionDemo.update((value: boolean) => !value);
+    this.reduceMotionDemo.update((value: boolean): boolean => !value);
   }
 
   public readonly accordionExample = `<ui-lib-accordion variant="material">

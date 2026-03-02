@@ -28,7 +28,7 @@ export class ThemePresetService {
     };
 
     const list: ThemePreset[] = [...this.presetsSignal()];
-    const index: number = list.findIndex((item: ThemePreset) => item.id === normalized.id);
+    const index: number = list.findIndex((item: ThemePreset): boolean => item.id === normalized.id);
     if (index >= 0) {
       list[index] = normalized;
     } else {
@@ -47,14 +47,16 @@ export class ThemePresetService {
     const root: HTMLElement = this.doc.documentElement;
 
     const vars: Record<string, string> = this.buildCssVars(preset);
-    Object.entries(vars).forEach(([key, value]) => {
+    Object.entries(vars).forEach(([key, value]): void => {
       root.style.setProperty(key, value);
     });
     this.activePresetSignal.set(preset);
   }
 
   public deletePreset(id: string): void {
-    const list: ThemePreset[] = this.presetsSignal().filter((item: ThemePreset) => item.id !== id);
+    const list: ThemePreset[] = this.presetsSignal().filter(
+      (item: ThemePreset): boolean => item.id !== id
+    );
     this.presetsSignal.set(list);
     this.persistPresets(list);
     const active: ThemePreset | null = this.activePresetSignal();
@@ -71,7 +73,7 @@ export class ThemePresetService {
   public exportAsCss(preset: ThemePreset): string {
     const vars: Record<string, string> = this.buildCssVars(preset);
     const body: string = Object.entries(vars)
-      .map(([name, value]) => `  ${name}: ${value};`)
+      .map(([name, value]): string => `  ${name}: ${value};`)
       .join('\n');
     return `:root {\n${body}\n}`;
   }
@@ -138,7 +140,7 @@ export class ThemePresetService {
     try {
       const parsed: unknown = JSON.parse(raw);
       if (Array.isArray(parsed)) {
-        return parsed.filter((item: unknown) => this.isThemePreset(item)) as ThemePreset[];
+        return parsed.filter((item: unknown): boolean => this.isThemePreset(item)) as ThemePreset[];
       }
     } catch {
       return [];
@@ -184,7 +186,7 @@ export class ThemePresetService {
     }
 
     if (preset.customCssVars) {
-      Object.entries(preset.customCssVars).forEach(([key, value]) => {
+      Object.entries(preset.customCssVars).forEach(([key, value]): void => {
         vars[key] = value;
       });
     }

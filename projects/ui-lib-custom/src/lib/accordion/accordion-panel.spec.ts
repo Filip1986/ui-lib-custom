@@ -58,10 +58,10 @@ class PanelTemplateHostComponent {
   public readonly showIcon = signal<boolean>(true);
 }
 
-describe('AccordionPanel', () => {
+describe('AccordionPanel', (): void => {
   let fixture: ComponentFixture<PanelHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [PanelHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -95,13 +95,13 @@ describe('AccordionPanel', () => {
 
   function iconNames(): string[] {
     const icons = fixture.debugElement.queryAll(By.directive(Icon));
-    return icons.map((iconEl) => {
+    return icons.map((iconEl): string => {
       const instance: Icon = iconEl.componentInstance as Icon;
       return instance.name();
     });
   }
 
-  it('creates panel and renders projected content', () => {
+  it('creates panel and renders projected content', (): void => {
     const body: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
       '.panel-body'
     );
@@ -112,7 +112,7 @@ describe('AccordionPanel', () => {
     expect((bodyText as string).trim()).toBe('Panel Body');
   });
 
-  it('renders default header text when no custom header', () => {
+  it('renders default header text when no custom header', (): void => {
     const title: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
       '.accordion-panel-title'
     );
@@ -122,7 +122,7 @@ describe('AccordionPanel', () => {
     expect((titleText as string).trim()).toBe('Panel Title');
   });
 
-  it('uses custom header content when provided', () => {
+  it('uses custom header content when provided', (): void => {
     fixture.componentInstance.useCustomHeader.set(true);
     fixture.detectChanges();
 
@@ -139,7 +139,7 @@ describe('AccordionPanel', () => {
     expect((customText as string).trim()).toBe('Custom Header');
   });
 
-  it('applies aria attributes and roles', () => {
+  it('applies aria attributes and roles', (): void => {
     const header: HTMLElement = headerButton();
     const content: HTMLElement = contentEl();
 
@@ -150,7 +150,7 @@ describe('AccordionPanel', () => {
     expect(header.getAttribute('aria-controls')).toBe(content.getAttribute('id'));
   });
 
-  it('respects initial expanded input when uncontrolled', () => {
+  it('respects initial expanded input when uncontrolled', (): void => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
@@ -159,7 +159,7 @@ describe('AccordionPanel', () => {
     expect(headerButton().getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('toggles expansion on click', () => {
+  it('toggles expansion on click', (): void => {
     const header: HTMLElement = headerButton();
 
     header.click();
@@ -173,7 +173,7 @@ describe('AccordionPanel', () => {
     expect(panelHost().getAttribute('data-state')).toBe('collapsed');
   });
 
-  it('toggles via Enter and Space keys', () => {
+  it('toggles via Enter and Space keys', (): void => {
     const header: HTMLElement = headerButton();
 
     header.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
@@ -185,7 +185,7 @@ describe('AccordionPanel', () => {
     expect(header.getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('does not toggle when disabled', () => {
+  it('does not toggle when disabled', (): void => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
@@ -198,7 +198,7 @@ describe('AccordionPanel', () => {
     expect(header.getAttribute('tabindex')).toBe('-1');
   });
 
-  it('generates unique ids linking header and content', () => {
+  it('generates unique ids linking header and content', (): void => {
     const header: HTMLElement = headerButton();
     const content: HTMLElement = contentEl();
     const headerId: string | null = header.getAttribute('id');
@@ -210,13 +210,13 @@ describe('AccordionPanel', () => {
     expect(content.getAttribute('aria-labelledby')).toBe(headerId);
   });
 
-  it('renders default collapse and expand icons', () => {
+  it('renders default collapse and expand icons', (): void => {
     const names: string[] = iconNames();
     expect(names).toContain('chevron-down');
     expect(names).toContain('chevron-up');
   });
 
-  it('renders collapse icon when panel is collapsed', () => {
+  it('renders collapse icon when panel is collapsed', (): void => {
     fixture.componentInstance.collapseIcon.set('minus');
     fixture.componentInstance.expandIcon.set('plus');
     fixture.detectChanges();
@@ -229,7 +229,7 @@ describe('AccordionPanel', () => {
     expect((iconEl as HTMLElement).classList.contains('expanded')).toBeFalsy();
   });
 
-  it('applies expanded icon class when panel is expanded', () => {
+  it('applies expanded icon class when panel is expanded', (): void => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
@@ -238,13 +238,13 @@ describe('AccordionPanel', () => {
     expect((iconEl as HTMLElement).classList.contains('expanded')).toBeTruthy();
   });
 
-  it('positions icon at end by default', () => {
+  it('positions icon at end by default', (): void => {
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
     expect((iconEl as HTMLElement).classList.contains('icon-end')).toBeTruthy();
   });
 
-  it('positions icon at start when iconPosition is start', () => {
+  it('positions icon at start when iconPosition is start', (): void => {
     fixture.componentInstance.iconPosition.set('start');
     fixture.detectChanges();
 
@@ -253,7 +253,7 @@ describe('AccordionPanel', () => {
     expect((iconEl as HTMLElement).classList.contains('icon-start')).toBeTruthy();
   });
 
-  it('adds expanded class to content when expanded', () => {
+  it('adds expanded class to content when expanded', (): void => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
@@ -261,10 +261,10 @@ describe('AccordionPanel', () => {
   });
 });
 
-describe('AccordionPanel - Toggle Icon Template', () => {
+describe('AccordionPanel - Toggle Icon Template', (): void => {
   let templateFixture: ComponentFixture<PanelTemplateHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [PanelTemplateHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -274,7 +274,7 @@ describe('AccordionPanel - Toggle Icon Template', () => {
     templateFixture.detectChanges();
   });
 
-  it('renders custom toggle icon template content', () => {
+  it('renders custom toggle icon template content', (): void => {
     const collapsedText: HTMLElement | null = (
       templateFixture.nativeElement as HTMLElement
     ).querySelector('.accordion-panel-icon .icon-collapsed .toggle-text');
@@ -292,7 +292,7 @@ describe('AccordionPanel - Toggle Icon Template', () => {
     expect((expandedTextContent as string).trim()).toBe('Expanded');
   });
 
-  it('applies expanded class when panel is expanded', () => {
+  it('applies expanded class when panel is expanded', (): void => {
     const iconEl: HTMLElement | null = (templateFixture.nativeElement as HTMLElement).querySelector(
       '.accordion-panel-icon'
     );

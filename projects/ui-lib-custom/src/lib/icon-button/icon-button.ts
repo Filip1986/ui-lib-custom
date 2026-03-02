@@ -43,12 +43,12 @@ export class IconButton {
   public readonly disabled = input<boolean>(false);
   public readonly ariaLabel = input<string | null>(null);
 
-  public readonly iconSize = computed<IconSize>(() => {
+  public readonly iconSize = computed<IconSize>((): IconSize => {
     const map: Record<'sm' | 'md' | 'lg', IconSize> = { sm: 'sm', md: 'md', lg: 'lg' };
     return map[this.size()];
   });
 
-  public readonly hostClasses = computed<string>(() =>
+  public readonly hostClasses = computed<string>((): string =>
     [
       `icon-button-${this.variant()}`,
       `icon-button-${this.size()}`,

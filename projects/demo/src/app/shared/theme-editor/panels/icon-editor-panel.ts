@@ -47,7 +47,7 @@ export class IconEditorPanel {
   };
 
   public readonly config = computed<ThemeIconConfig>(
-    () =>
+    (): ThemeIconConfig =>
       this.themeService.preset().icons ?? {
         defaultLibrary: 'lucide',
         defaultSize: 'md',

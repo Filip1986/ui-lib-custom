@@ -59,13 +59,15 @@ export class LayoutContainerSectionComponent {
   public readonly inset = signal<Exclude<InsetToken, 'xs'>>('lg');
   public readonly centered = signal<boolean>(true);
 
-  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
-    label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
-    value: key as ContainerSize,
-  }));
+  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map(
+    (key: string): { label: string; value: ContainerSize } => ({
+      label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
+      value: key as ContainerSize,
+    })
+  );
   public readonly insetOptions = Object.entries(INSET_TOKENS)
-    .filter(([key]) => key !== 'xs')
-    .map(([key, value]) => ({
+    .filter(([key]: [string, string]): boolean => key !== 'xs')
+    .map(([key, value]: [string, string]): { label: string; value: Exclude<InsetToken, 'xs'> } => ({
       label: `${key} (${value})`,
       value: key as Exclude<InsetToken, 'xs'>,
     }));
@@ -74,9 +76,15 @@ export class LayoutContainerSectionComponent {
     { label: 'Left-aligned', value: false },
   ];
 
-  public readonly sizeLabel = computed(() => this.displayLabel(this.size(), this.sizeOptions));
-  public readonly insetLabel = computed(() => this.displayLabel(this.inset(), this.insetOptions));
-  public readonly centeredLabel = computed(() => (this.centered() ? 'Centered' : 'Left-aligned'));
+  public readonly sizeLabel = computed<string>((): string =>
+    this.displayLabel(this.size(), this.sizeOptions)
+  );
+  public readonly insetLabel = computed<string>((): string =>
+    this.displayLabel(this.inset(), this.insetOptions)
+  );
+  public readonly centeredLabel = computed<string>((): string =>
+    this.centered() ? 'Centered' : 'Left-aligned'
+  );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
@@ -109,7 +117,9 @@ export class LayoutContainerSectionComponent {
     value: T,
     options: { label: string; value: T }[]
   ): string {
-    const match = options.find((option) => option.value === value);
+    const match = options.find(
+      (option: { label: string; value: T }): boolean => option.value === value
+    );
     return match ? match.label : String(value);
   }
 }

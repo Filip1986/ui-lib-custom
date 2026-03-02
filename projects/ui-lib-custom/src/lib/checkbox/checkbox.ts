@@ -30,7 +30,7 @@ let checkboxId = 0;
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => Checkbox),
+      useExisting: forwardRef((): typeof Checkbox => Checkbox),
       multi: true,
     },
   ],
@@ -60,8 +60,8 @@ export class Checkbox implements ControlValueAccessor {
   public readonly checked = model<boolean>(false);
   private readonly cvaDisabled = signal<boolean>(false);
 
-  private onChange: (value: boolean) => void = () => {};
-  private onTouched: () => void = () => {};
+  private onChange: (value: boolean) => void = (): void => {};
+  private onTouched: () => void = (): void => {};
 
   private readonly controlId = `ui-lib-checkbox-${++checkboxId}`;
   public readonly labelElementId = `${this.controlId}-label`;
@@ -71,9 +71,9 @@ export class Checkbox implements ControlValueAccessor {
   private readonly themeConfig = inject(ThemeConfigService);
 
   public readonly effectiveVariant = computed<CheckboxVariant>(
-    () => this.variant() ?? this.themeConfig.variant()
+    (): CheckboxVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>((): string => {
     const classes = [
       'ui-checkbox',
       `ui-checkbox-variant-${this.effectiveVariant()}`,
@@ -95,18 +95,20 @@ export class Checkbox implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  public readonly ariaChecked = computed<string>(() =>
+  public readonly ariaChecked = computed<string>((): string =>
     this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false'
   );
-  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
-  public readonly hostTabIndex = computed<number>(() => (this.isDisabled() ? -1 : 0));
-  public readonly ariaLabelledby = computed<string | null>(() =>
+  public readonly isDisabled = computed<boolean>(
+    (): boolean => this.disabled() || this.cvaDisabled()
+  );
+  public readonly hostTabIndex = computed<number>((): number => (this.isDisabled() ? -1 : 0));
+  public readonly ariaLabelledby = computed<string | null>((): string | null =>
     this.ariaLabel() ? null : this.labelElementId
   );
-  public readonly ariaDescribedby = computed<string | null>(() =>
+  public readonly ariaDescribedby = computed<string | null>((): string | null =>
     this.description() ? this.descriptionElementId : null
   );
-  public readonly showDescription = computed<boolean>(() => Boolean(this.description()));
+  public readonly showDescription = computed<boolean>((): boolean => Boolean(this.description()));
 
   public writeValue(value: boolean | null): void {
     this.checked.set(Boolean(value));

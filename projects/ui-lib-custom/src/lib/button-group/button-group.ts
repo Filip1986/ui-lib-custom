@@ -45,5 +45,5 @@ export class ButtonGroup {
     }
   );
 
-  public readonly hostClasses = computed<string>(() => '');
+  public readonly hostClasses = computed<string>((): string => '');
 }

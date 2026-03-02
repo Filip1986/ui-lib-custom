@@ -67,8 +67,8 @@ export class ShadowsComponent {
   public readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
 
   public readonly examples: ElevationExample[] = Object.entries(this.shadowValues)
-    .filter(([key]) => key.startsWith('shadow-'))
-    .map(([key, value]) => {
+    .filter(([key]: [ShadowKey, string]): boolean => key.startsWith('shadow-'))
+    .map(([key, value]: [ShadowKey, string]): ElevationExample => {
       const level = Number(key.split('-')[1]);
       return {
         level,
@@ -78,5 +78,5 @@ export class ShadowsComponent {
         description: value,
       } satisfies ElevationExample;
     })
-    .sort((a, b) => a.level - b.level);
+    .sort((a: ElevationExample, b: ElevationExample): number => a.level - b.level);
 }

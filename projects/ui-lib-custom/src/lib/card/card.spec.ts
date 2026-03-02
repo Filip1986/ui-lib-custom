@@ -96,8 +96,8 @@ class MockThemeConfigService {
   }
 }
 
-describe('Card', () => {
-  beforeEach(async () => {
+describe('Card', (): void => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [CardHost],
       providers: [{ provide: ThemeConfigService, useClass: MockThemeConfigService }],
@@ -114,12 +114,12 @@ describe('Card', () => {
   const getCard = (fixture: ComponentFixture<CardHost>): HTMLElement =>
     (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
 
-  it('should create', async () => {
+  it('should create', async (): Promise<void> => {
     const fixture = await bootstrap();
     expect(getCard(fixture)).toBeTruthy();
   });
 
-  it('applies variant, elevation, and bordered classes', async () => {
+  it('applies variant, elevation, and bordered classes', async (): Promise<void> => {
     const fixture = await bootstrap({ variant: 'bootstrap', elevation: 'high', hoverable: true });
     const card = getCard(fixture);
     expect(card.className).toContain('card-bootstrap');
@@ -128,7 +128,7 @@ describe('Card', () => {
     expect(card.className).toContain('card-hoverable');
   });
 
-  it('applies each variant class', async () => {
+  it('applies each variant class', async (): Promise<void> => {
     const variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];
 
     for (const variant of variants) {
@@ -138,7 +138,7 @@ describe('Card', () => {
     }
   });
 
-  it('projects header, body, and footer slots', async () => {
+  it('projects header, body, and footer slots', async (): Promise<void> => {
     const fixture = await bootstrap();
     await fixture.whenRenderingDone();
     await fixture.whenStable();
@@ -159,7 +159,7 @@ describe('Card', () => {
     expect(footer?.textContent).toContain('Footer');
   });
 
-  it('respects showHeader/showFooter visibility controls', async () => {
+  it('respects showHeader/showFooter visibility controls', async (): Promise<void> => {
     const fixture = await bootstrap({ showHeader: false, showFooter: false });
 
     const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -173,7 +173,7 @@ describe('Card', () => {
     expect(footer).toBeNull();
   });
 
-  it('applies dark theme variables', async () => {
+  it('applies dark theme variables', async (): Promise<void> => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
@@ -187,10 +187,10 @@ describe('Card', () => {
   });
 });
 
-describe('Card theme and header features', () => {
+describe('Card theme and header features', (): void => {
   let fixture: ComponentFixture<CardThemeHost>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [CardThemeHost],
       providers: [{ provide: ThemeConfigService, useClass: MockThemeConfigService }],
@@ -225,13 +225,13 @@ describe('Card theme and header features', () => {
     fixture.detectChanges(false);
   }
 
-  it('applies data-theme for string theme values', async () => {
+  it('applies data-theme for string theme values', async (): Promise<void> => {
     await setTheme('dark');
 
     expect(cardEl().getAttribute('data-theme')).toBe('dark');
   });
 
-  it('applies variant and variables for scoped theme object', async () => {
+  it('applies variant and variables for scoped theme object', async (): Promise<void> => {
     const scopedTheme: {
       variant: string;
       colors: { primary: string };
@@ -253,7 +253,7 @@ describe('Card theme and header features', () => {
     expect(el.style.getPropertyValue('--uilib-card-border')).toContain('rgb(2, 3, 4)');
   });
 
-  it('clears theme attributes when theme is reset', async () => {
+  it('clears theme attributes when theme is reset', async (): Promise<void> => {
     await setTheme('dark');
 
     const freshFixture: ComponentFixture<CardThemeHost> = TestBed.createComponent(CardThemeHost);
@@ -266,7 +266,7 @@ describe('Card theme and header features', () => {
     expect(freshHost.getAttribute('data-variant')).toBeNull();
   });
 
-  it('renders header icon and subtitle when provided', async () => {
+  it('renders header icon and subtitle when provided', async (): Promise<void> => {
     await setHeaderContent('info', 'Details');
 
     const iconEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -280,7 +280,7 @@ describe('Card theme and header features', () => {
     expect(subtitleEl?.textContent).toContain('Details');
   });
 
-  it('emits closed when close icon is clicked', async () => {
+  it('emits closed when close icon is clicked', async (): Promise<void> => {
     await setClosable(true);
 
     const closeIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -293,10 +293,10 @@ describe('Card theme and header features', () => {
   });
 });
 
-describe('Card clickable behavior', () => {
+describe('Card clickable behavior', (): void => {
   let fixture: ComponentFixture<ClickableCardHost>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ClickableCardHost],
       providers: [{ provide: ThemeConfigService, useClass: MockThemeConfigService }],
@@ -309,7 +309,7 @@ describe('Card clickable behavior', () => {
   const getCard = (): HTMLElement =>
     (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
 
-  it('emits click events when hoverable', () => {
+  it('emits click events when hoverable', (): void => {
     const host: ClickableCardHost = fixture.componentInstance;
     getCard().click();
     fixture.detectChanges();
@@ -317,17 +317,17 @@ describe('Card clickable behavior', () => {
     expect(host.clickCount).toBe(1);
   });
 
-  it('adds role and tabindex for hoverable cards', () => {
+  it('adds role and tabindex for hoverable cards', (): void => {
     const card: HTMLElement = getCard();
     expect(card.getAttribute('role')).toBe('button');
     expect(card.getAttribute('tabindex')).toBe('0');
   });
 });
 
-describe('Card keyboard accessibility', () => {
+describe('Card keyboard accessibility', (): void => {
   let fixture: ComponentFixture<ClickableCardHost>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ClickableCardHost],
     }).compileComponents();
@@ -340,14 +340,14 @@ describe('Card keyboard accessibility', () => {
     return (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
   }
 
-  it('sets role, tabindex, and aria-label when hoverable', () => {
+  it('sets role, tabindex, and aria-label when hoverable', (): void => {
     const card = cardEl();
     expect(card.getAttribute('role')).toBe('button');
     expect(card.getAttribute('tabindex')).toBe('0');
     expect(card.getAttribute('aria-label')).toBe('Open card');
   });
 
-  it('fires click on Enter key', () => {
+  it('fires click on Enter key', (): void => {
     const card = cardEl();
     card.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     fixture.detectChanges();
@@ -355,7 +355,7 @@ describe('Card keyboard accessibility', () => {
     expect(fixture.componentInstance.clickCount).toBe(1);
   });
 
-  it('fires click on Space key', () => {
+  it('fires click on Space key', (): void => {
     const card = cardEl();
     card.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
     fixture.detectChanges();

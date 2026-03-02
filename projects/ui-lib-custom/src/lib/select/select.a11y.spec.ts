@@ -19,10 +19,10 @@ class TestHostComponent {
   public value: string | null = null;
 }
 
-describe('Select Accessibility', () => {
+describe('Select Accessibility', (): void => {
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
     }).compileComponents();
@@ -30,11 +30,11 @@ describe('Select Accessibility', () => {
     fixture = TestBed.createComponent(TestHostComponent);
   });
 
-  it('should have no violations when closed', async () => {
+  it('should have no violations when closed', async (): Promise<void> => {
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
-  it('should have no violations when open', async () => {
+  it('should have no violations when open', async (): Promise<void> => {
     const control = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-control'
     ) as HTMLElement;
@@ -44,14 +44,14 @@ describe('Select Accessibility', () => {
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
-  it('should have combobox role', () => {
+  it('should have combobox role', (): void => {
     const select = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-select'
     ) as HTMLElement;
     expect(select.getAttribute('role')).toBe('combobox');
   });
 
-  it('should have listbox role on dropdown', () => {
+  it('should have listbox role on dropdown', (): void => {
     const control = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-control'
     ) as HTMLElement;

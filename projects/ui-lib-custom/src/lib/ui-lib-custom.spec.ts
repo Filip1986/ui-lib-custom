@@ -3,11 +3,11 @@ import { TestBed } from '@angular/core/testing';
 
 import { UiLibCustom } from './ui-lib-custom';
 
-describe('UiLibCustom', () => {
+describe('UiLibCustom', (): void => {
   let component: UiLibCustom;
   let fixture: ComponentFixture<UiLibCustom>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [UiLibCustom],
     }).compileComponents();
@@ -17,7 +17,7 @@ describe('UiLibCustom', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', (): void => {
     expect(component).toBeTruthy();
   });
 });

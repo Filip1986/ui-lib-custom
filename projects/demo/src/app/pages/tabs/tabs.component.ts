@@ -208,24 +208,26 @@ export class TabsDemoComponent {
   ];
 
   public readonly controlledIndex = signal<number>(0);
-  public readonly controlledSelection = computed<number>(() => this.controlledIndex());
+  public readonly controlledSelection = computed<number>((): number => this.controlledIndex());
 
-  public readonly playgroundTabsResolved = computed<DemoTab[]>(() =>
+  public readonly playgroundTabsResolved = computed<DemoTab[]>((): DemoTab[] =>
     this.scrollable() ? this.scrollTabs : this.playgroundTabs()
   );
 
-  public readonly playgroundScrollBehavior = computed<TabsScrollBehavior>(() =>
-    this.scrollable() ? 'arrows' : 'auto'
+  public readonly playgroundScrollBehavior = computed<TabsScrollBehavior>(
+    (): TabsScrollBehavior => (this.scrollable() ? 'arrows' : 'auto')
   );
 
-  public readonly playgroundMode = computed<TabsMode>(() =>
-    this.menuMode() ? 'navigation' : 'default'
+  public readonly playgroundMode = computed<TabsMode>(
+    (): TabsMode => (this.menuMode() ? 'navigation' : 'default')
   );
 
-  public readonly playgroundPerTabLazy = computed<TabsLazyMode | undefined>(() => {
-    const selection: PerTabLazyOption = this.perTabLazy();
-    return selection === 'inherit' ? undefined : selection;
-  });
+  public readonly playgroundPerTabLazy = computed<TabsLazyMode | undefined>(
+    (): TabsLazyMode | undefined => {
+      const selection: PerTabLazyOption = this.perTabLazy();
+      return selection === 'inherit' ? undefined : selection;
+    }
+  );
 
   public readonly track = (_: number, item: unknown): TabsValue | number =>
     item && typeof item === 'object' && 'value' in (item as { value?: unknown })
@@ -281,14 +283,14 @@ export class TabsDemoComponent {
 </ui-lib-tabs>`,
   } as const;
 
-  public readonly appliedTheme = computed(() =>
-    this.themeService.getCssVars(this.themeService.preset())
+  public readonly appliedTheme = computed<Record<string, string>>(
+    (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
   );
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
   constructor() {
-    effect(() => {
+    effect((): void => {
       const variant = this.themeService.preset().variant as TabsVariant;
       this.variant.set(variant);
     });
@@ -335,7 +337,9 @@ export class TabsDemoComponent {
   }
 
   public onCloseTab(payload: { value: TabsValue | null; index: number }): void {
-    this.closableTabs.update((tabs) => tabs.filter((tab) => tab.value !== payload.value));
+    this.closableTabs.update((tabs: DemoTab[]): DemoTab[] =>
+      tabs.filter((tab: DemoTab): boolean => tab.value !== payload.value)
+    );
   }
 
   public resetClosableTabs(): void {

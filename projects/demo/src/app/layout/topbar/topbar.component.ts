@@ -24,9 +24,9 @@ import { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
 export class TopbarComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
   public readonly mode: Signal<ThemeMode> = this.themeService.mode;
-  public readonly variant = computed<ThemeVariant>(() => this.themeService.variant());
-  public readonly shape = computed<ShapeToken>(() => this.themeService.shape());
-  public readonly density = computed<DensityToken>(() => this.themeService.density());
+  public readonly variant = computed<ThemeVariant>((): ThemeVariant => this.themeService.variant());
+  public readonly shape = computed<ShapeToken>((): ShapeToken => this.themeService.shape());
+  public readonly density = computed<DensityToken>((): DensityToken => this.themeService.density());
 
   public readonly menuButtonClick = output<void>();
   public readonly themeToggle = output<void>();

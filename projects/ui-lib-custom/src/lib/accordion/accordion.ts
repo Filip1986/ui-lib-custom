@@ -99,9 +99,9 @@ export class Accordion implements AccordionContext {
   }
 
   public readonly resolvedVariant = computed<AccordionVariant>(
-    () => this.variant() ?? this.themeConfig.variant()
+    (): AccordionVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>((): string => {
     const classes: string[] = [
       'ui-lib-accordion',
       `accordion-variant-${this.resolvedVariant()}`,
@@ -111,9 +111,9 @@ export class Accordion implements AccordionContext {
     return classes.join(' ');
   });
 
-  public readonly panelContexts = computed<AccordionPanelContext[]>(() => {
+  public readonly panelContexts = computed<AccordionPanelContext[]>((): AccordionPanelContext[] => {
     const panels: readonly AccordionPanel[] = this.panels();
-    return panels.map((panel, index) => {
+    return panels.map((panel: AccordionPanel, index: number): AccordionPanelContext => {
       const id: string = this.resolvePanelId(panel);
       return {
         panel,
@@ -127,7 +127,7 @@ export class Accordion implements AccordionContext {
 
   public togglePanel(panelId: string): void {
     const contexts = this.panelContexts();
-    const ctx = contexts.find((c) => c.id === panelId);
+    const ctx = contexts.find((c: AccordionPanelContext): boolean => c.id === panelId);
     if (!ctx || ctx.disabled) {
       return;
     }
@@ -275,7 +275,9 @@ export class Accordion implements AccordionContext {
       return -1;
     }
     const contexts = this.panelContexts();
-    return contexts.findIndex((ctx) => ctx.panel.headerButton?.nativeElement === target);
+    return contexts.findIndex(
+      (ctx: AccordionPanelContext): boolean => ctx.panel.headerButton?.nativeElement === target
+    );
   }
 
   private resolvePanelId(panel: AccordionPanel): string {

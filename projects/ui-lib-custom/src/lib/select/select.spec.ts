@@ -27,10 +27,10 @@ class HostComponent {
   public value: string | null = null;
 }
 
-describe('UiLibSelect accessibility', () => {
+describe('UiLibSelect accessibility', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [HostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -55,17 +55,17 @@ describe('UiLibSelect accessibility', () => {
     fixture.detectChanges();
   }
 
-  it('should have combobox role', () => {
+  it('should have combobox role', (): void => {
     expect(selectEl().getAttribute('role')).toBe('combobox');
   });
 
-  it('should have aria-expanded', () => {
+  it('should have aria-expanded', (): void => {
     expect(selectEl().getAttribute('aria-expanded')).toBe('false');
     openSelect();
     expect(selectEl().getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('should update aria-activedescendant on arrow navigation', () => {
+  it('should update aria-activedescendant on arrow navigation', (): void => {
     openSelect();
 
     selectEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
@@ -76,7 +76,7 @@ describe('UiLibSelect accessibility', () => {
     expect(document.getElementById(activeId as string)).toBeTruthy();
   });
 
-  it('should have listbox role on dropdown', () => {
+  it('should have listbox role on dropdown', (): void => {
     openSelect();
 
     const listbox: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -85,7 +85,7 @@ describe('UiLibSelect accessibility', () => {
     expect(listbox).toBeTruthy();
   });
 
-  it('should have option role on each option', () => {
+  it('should have option role on each option', (): void => {
     openSelect();
 
     const options: NodeListOf<HTMLElement> = (
@@ -94,7 +94,7 @@ describe('UiLibSelect accessibility', () => {
     expect(options.length).toBeGreaterThan(0);
   });
 
-  it('should select option with Enter key', () => {
+  it('should select option with Enter key', (): void => {
     openSelect();
 
     selectEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
@@ -104,7 +104,7 @@ describe('UiLibSelect accessibility', () => {
     expect(fixture.componentInstance.value).toBeTruthy();
   });
 
-  it('should close with Escape key', () => {
+  it('should close with Escape key', (): void => {
     openSelect();
     expect(selectEl().getAttribute('aria-expanded')).toBe('true');
 
@@ -113,7 +113,7 @@ describe('UiLibSelect accessibility', () => {
     expect(selectEl().getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('should close with Escape and return focus to the trigger', () => {
+  it('should close with Escape and return focus to the trigger', (): void => {
     openSelect();
 
     selectEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
@@ -145,10 +145,10 @@ class ReactiveHostComponent {
   });
 }
 
-describe('UiLibSelect Reactive Forms', () => {
+describe('UiLibSelect Reactive Forms', (): void => {
   let fixture: ComponentFixture<ReactiveHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ReactiveHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -177,7 +177,7 @@ describe('UiLibSelect Reactive Forms', () => {
     return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('.ui-select-option'));
   }
 
-  it('updates control value when option is selected', () => {
+  it('updates control value when option is selected', (): void => {
     const control: FormControl<string | null> = fixture.componentInstance.form.controls.choice;
 
     openSelect();
@@ -187,7 +187,7 @@ describe('UiLibSelect Reactive Forms', () => {
     expect(control.value).toBe('alpha');
   });
 
-  it('marks control as touched when closed', () => {
+  it('marks control as touched when closed', (): void => {
     const control: FormControl<string | null> = fixture.componentInstance.form.controls.choice;
 
     openSelect();
@@ -197,7 +197,7 @@ describe('UiLibSelect Reactive Forms', () => {
     expect(control.touched).toBeTruthy();
   });
 
-  it('reflects disabled state from control', () => {
+  it('reflects disabled state from control', (): void => {
     const control: FormControl<string | null> = fixture.componentInstance.form.controls.choice;
 
     control.disable();
@@ -207,10 +207,10 @@ describe('UiLibSelect Reactive Forms', () => {
   });
 });
 
-describe('UiLibSelect basics', () => {
+describe('UiLibSelect basics', (): void => {
   let fixture: ComponentFixture<UiLibSelect>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [UiLibSelect],
     }).compileComponents();
@@ -233,13 +233,13 @@ describe('UiLibSelect basics', () => {
     return fixture.nativeElement as HTMLElement;
   }
 
-  it('creates with defaults', () => {
+  it('creates with defaults', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
     expect(hostWrapper().classList.contains('ui-select')).toBeTruthy();
     expect(hostWrapper().classList.contains('ui-select-material')).toBeTruthy();
   });
 
-  it('applies each variant class', () => {
+  it('applies each variant class', (): void => {
     const variants: SelectVariant[] = ['material', 'bootstrap', 'minimal'];
 
     variants.forEach((variant: SelectVariant): void => {
@@ -250,7 +250,7 @@ describe('UiLibSelect basics', () => {
     });
   });
 
-  it('renders placeholder by default', () => {
+  it('renders placeholder by default', (): void => {
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-value'
     ) as HTMLElement;
@@ -260,7 +260,7 @@ describe('UiLibSelect basics', () => {
     expect((valueText as string).trim()).toBe('Select...');
   });
 
-  it('renders label when provided', () => {
+  it('renders label when provided', (): void => {
     fixture.componentRef.setInput('label', 'Pick one');
     fixture.detectChanges();
 
@@ -273,7 +273,7 @@ describe('UiLibSelect basics', () => {
     expect(labelText as string).toContain('Pick one');
   });
 
-  it('sets aria-disabled and blocks interaction when disabled', () => {
+  it('sets aria-disabled and blocks interaction when disabled', (): void => {
     fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
@@ -288,21 +288,21 @@ describe('UiLibSelect basics', () => {
     expect(hostEl().getAttribute('aria-expanded')).toBe('false');
   });
 
-  it('sets aria-invalid when invalid', () => {
+  it('sets aria-invalid when invalid', (): void => {
     fixture.componentRef.setInput('invalid', true);
     fixture.detectChanges();
 
     expect(hostEl().getAttribute('aria-invalid')).toBe('true');
   });
 
-  it('setDisabledState disables the host', () => {
+  it('setDisabledState disables the host', (): void => {
     fixture.componentInstance.setDisabledState(true);
     fixture.detectChanges();
 
     expect(hostEl().getAttribute('aria-disabled')).toBe('true');
   });
 
-  it('writeValue updates the displayed value', () => {
+  it('writeValue updates the displayed value', (): void => {
     const options: SelectOption[] = [{ label: 'Alpha', value: 'alpha' }];
     fixture.componentRef.setInput('options', options);
     fixture.componentInstance.writeValue('alpha');
@@ -316,7 +316,7 @@ describe('UiLibSelect basics', () => {
     expect((valueText as string).trim()).toBe('Alpha');
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const scope: HTMLDivElement = document.createElement('div');
@@ -333,14 +333,14 @@ describe('UiLibSelect basics', () => {
   });
 });
 
-describe('UiLibSelect ngModel', () => {
+describe('UiLibSelect ngModel', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
   const flushMicrotasks = async (): Promise<void> => {
-    await new Promise<void>((resolve: () => void) => setTimeout(resolve, 0));
+    await new Promise<void>((resolve: () => void): void => setTimeout(resolve, 0));
   };
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [HostComponent],
     }).compileComponents();
@@ -351,7 +351,7 @@ describe('UiLibSelect ngModel', () => {
     fixture.detectChanges(false);
   });
 
-  it('updates displayed value when ngModel changes', async () => {
+  it('updates displayed value when ngModel changes', async (): Promise<void> => {
     const freshFixture: ComponentFixture<HostComponent> = TestBed.createComponent(HostComponent);
     freshFixture.componentInstance.value = 'beta';
     freshFixture.detectChanges(false);
@@ -367,10 +367,10 @@ describe('UiLibSelect ngModel', () => {
   });
 });
 
-describe('UiLibSelect Reactive Forms', () => {
+describe('UiLibSelect Reactive Forms', (): void => {
   let fixture: ComponentFixture<ReactiveHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ReactiveHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -380,7 +380,7 @@ describe('UiLibSelect Reactive Forms', () => {
     fixture.detectChanges();
   });
 
-  it('writeValue updates the displayed value', () => {
+  it('writeValue updates the displayed value', (): void => {
     const control: FormControl<string | null> = fixture.componentInstance.form.controls.choice;
 
     control.setValue('beta');
@@ -394,7 +394,7 @@ describe('UiLibSelect Reactive Forms', () => {
     expect((valueText as string).trim()).toBe('Beta');
   });
 
-  it('registerOnChange fires on option selection', () => {
+  it('registerOnChange fires on option selection', (): void => {
     const selectFixture: ComponentFixture<UiLibSelect> = TestBed.createComponent(UiLibSelect);
     const options: SelectOption[] = [
       { label: 'Alpha', value: 'alpha' },
@@ -421,7 +421,7 @@ describe('UiLibSelect Reactive Forms', () => {
     expect(onChangeSpy).toHaveBeenCalledWith('alpha');
   });
 
-  it('registerOnTouched fires when the panel closes', () => {
+  it('registerOnTouched fires when the panel closes', (): void => {
     const selectFixture: ComponentFixture<UiLibSelect> = TestBed.createComponent(UiLibSelect);
     const options: SelectOption[] = [{ label: 'Alpha', value: 'alpha' }];
     selectFixture.componentRef.setInput('options', options);
@@ -438,10 +438,10 @@ describe('UiLibSelect Reactive Forms', () => {
   });
 });
 
-describe('UiLibSelect behavior', () => {
+describe('UiLibSelect behavior', (): void => {
   let fixture: ComponentFixture<UiLibSelect>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [UiLibSelect],
     }).compileComponents();
@@ -455,7 +455,7 @@ describe('UiLibSelect behavior', () => {
     fixture.detectChanges();
   }
 
-  it('supports multiple selection display values', () => {
+  it('supports multiple selection display values', (): void => {
     const options: SelectOption[] = [
       { label: 'Alpha', value: 'alpha' },
       { label: 'Beta', value: 'beta' },
@@ -474,7 +474,7 @@ describe('UiLibSelect behavior', () => {
     expect((valueText as string).trim()).toBe('Alpha, Beta');
   });
 
-  it('clear emits null for single select', () => {
+  it('clear emits null for single select', (): void => {
     const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
     fixture.componentInstance.registerOnChange(onChangeSpy);
     setOptions([{ label: 'Alpha', value: 'alpha' }]);
@@ -485,7 +485,7 @@ describe('UiLibSelect behavior', () => {
     expect(onChangeSpy).toHaveBeenCalledWith(null);
   });
 
-  it('clear emits empty array for multiple select', () => {
+  it('clear emits empty array for multiple select', (): void => {
     const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
     fixture.componentRef.setInput('multiple', true);
     fixture.componentInstance.registerOnChange(onChangeSpy);
@@ -497,7 +497,7 @@ describe('UiLibSelect behavior', () => {
     expect(onChangeSpy).toHaveBeenCalledWith([]);
   });
 
-  it('filters options and groups by group key', () => {
+  it('filters options and groups by group key', (): void => {
     const options: SelectOption[] = [
       { label: 'Alpha', value: 'alpha', group: 'A' },
       { label: 'Beta', value: 'beta', group: 'B' },
@@ -515,7 +515,7 @@ describe('UiLibSelect behavior', () => {
     expect(keys).toContain('A');
   });
 
-  it('moveFocus skips disabled options and commitFocused selects', () => {
+  it('moveFocus skips disabled options and commitFocused selects', (): void => {
     const options: SelectOption[] = [
       { label: 'Alpha', value: 'alpha', disabled: true },
       { label: 'Beta', value: 'beta' },
@@ -531,7 +531,7 @@ describe('UiLibSelect behavior', () => {
     expect(onChangeSpy).toHaveBeenCalledWith('beta');
   });
 
-  it('setActiveIndex ignores disabled options', () => {
+  it('setActiveIndex ignores disabled options', (): void => {
     const options: SelectOption[] = [
       { label: 'Alpha', value: 'alpha', disabled: true },
       { label: 'Beta', value: 'beta' },
@@ -542,7 +542,7 @@ describe('UiLibSelect behavior', () => {
     expect(fixture.componentInstance.focusedIndex()).toBe(-1);
   });
 
-  it('onDocClick closes the panel when clicking outside', () => {
+  it('onDocClick closes the panel when clicking outside', (): void => {
     setOptions([{ label: 'Alpha', value: 'alpha' }]);
     fixture.componentInstance.openPanel();
 
@@ -555,7 +555,7 @@ describe('UiLibSelect behavior', () => {
     expect(fixture.componentInstance.open()).toBeFalsy();
   });
 
-  it('sets aria-required when required', () => {
+  it('sets aria-required when required', (): void => {
     fixture.componentRef.setInput('required', true);
     fixture.detectChanges();
 
@@ -563,7 +563,7 @@ describe('UiLibSelect behavior', () => {
     expect(host.getAttribute('aria-required')).toBe('true');
   });
 
-  it('renders search input when searchable and open', () => {
+  it('renders search input when searchable and open', (): void => {
     fixture.componentRef.setInput('searchable', true);
     setOptions([{ label: 'Alpha', value: 'alpha' }]);
 

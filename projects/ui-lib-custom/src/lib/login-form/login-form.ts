@@ -39,7 +39,7 @@ export class LoginForm {
   public readonly password = signal('');
   public readonly remember = signal(true);
 
-  public readonly layoutClass = computed<string>(() => `login-${this.variant()}`);
+  public readonly layoutClass = computed<string>((): string => `login-${this.variant()}`);
 
   public onSubmit(): void {
     this.login.emit({

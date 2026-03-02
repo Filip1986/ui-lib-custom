@@ -69,7 +69,7 @@ export class CheckboxesComponent {
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  public readonly playgroundDescription = computed(() =>
+  public readonly playgroundDescription = computed<string | null>((): string | null =>
     this.showDescription() ? this.description() : null
   );
 

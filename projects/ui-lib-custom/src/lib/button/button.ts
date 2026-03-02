@@ -99,12 +99,12 @@ export class Button implements AfterViewChecked {
   );
 
   public readonly effectiveVariant = computed<ButtonVariant>(
-    () => this.variant() ?? this.themeConfig.variant()
+    (): ButtonVariant => this.variant() ?? this.themeConfig.variant()
   );
   public readonly iconOnlyComputed = computed<boolean>(
-    () => this.iconOnly() ?? this.iconOnlyInput()
+    (): boolean => this.iconOnly() ?? this.iconOnlyInput()
   );
-  public readonly iconSize = computed<IconSize>(() => {
+  public readonly iconSize = computed<IconSize>((): IconSize => {
     const sizeMap: Record<'small' | 'medium' | 'large', IconSize> = {
       small: 'sm',
       medium: 'md',
@@ -113,14 +113,14 @@ export class Button implements AfterViewChecked {
     return sizeMap[this.normalizedSize()];
   });
 
-  public readonly effectiveSeverity = computed<ButtonSeverity>(() => {
+  public readonly effectiveSeverity = computed<ButtonSeverity>((): ButtonSeverity => {
     const severity: ButtonSeverity = this.contrast()
       ? 'contrast'
       : (this.severity() ?? this.color());
     return severity === 'warn' ? 'warning' : severity;
   });
 
-  public readonly effectiveAppearance = computed<ButtonAppearance>(() => {
+  public readonly effectiveAppearance = computed<ButtonAppearance>((): ButtonAppearance => {
     if (this.text()) {
       return 'ghost';
     }
@@ -132,15 +132,15 @@ export class Button implements AfterViewChecked {
     return this.appearance();
   });
 
-  public readonly hasBadge = computed<boolean>(() => this.badge() !== null);
+  public readonly hasBadge = computed<boolean>((): boolean => this.badge() !== null);
 
-  public readonly normalizeBadgeSeverity = computed<BadgeSeverity>(() => {
+  public readonly normalizeBadgeSeverity = computed<BadgeSeverity>((): BadgeSeverity => {
     const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();
     const normalized: BadgeSeverity = inputSeverity === 'warn' ? 'warning' : inputSeverity;
     return normalized;
   });
 
-  public readonly badgeColorResolved = computed<BadgeColor>(() => {
+  public readonly badgeColorResolved = computed<BadgeColor>((): BadgeColor => {
     const severity: BadgeSeverity = this.normalizeBadgeSeverity();
     const allowed: BadgeColor[] = [
       'primary',
@@ -167,7 +167,7 @@ export class Button implements AfterViewChecked {
     return 'neutral';
   });
 
-  public readonly buttonClasses = computed<string>(() => {
+  public readonly buttonClasses = computed<string>((): string => {
     const classes: string[] = [
       'btn',
       `btn-${this.effectiveVariant()}`,
@@ -232,10 +232,10 @@ export class Button implements AfterViewChecked {
     return classes.join(' ');
   });
 
-  public readonly ariaDisabled = computed<boolean | null>(() =>
+  public readonly ariaDisabled = computed<boolean | null>((): boolean | null =>
     this.disabled() || this.loading() ? true : null
   );
-  public readonly ariaLabelResolved = computed<string | null>(() => {
+  public readonly ariaLabelResolved = computed<string | null>((): string | null => {
     if (this.loading()) {
       return this.ariaLabel() ?? 'Loading';
     }
@@ -244,7 +244,7 @@ export class Button implements AfterViewChecked {
     }
     return this.ariaLabel();
   });
-  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.loading());
+  public readonly isDisabled = computed<boolean>((): boolean => this.disabled() || this.loading());
 
   public setFocused(isFocused: boolean): void {
     this.focused.set(isFocused);

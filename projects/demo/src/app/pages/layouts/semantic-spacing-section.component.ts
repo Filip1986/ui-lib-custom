@@ -75,19 +75,19 @@ export class LayoutSemanticSpacingSectionComponent {
   public readonly inlineOptions = this.buildOptions<InlineToken>(INLINE_TOKENS);
   public readonly insetOptions = this.buildOptions<Exclude<InsetToken, 'xs'>>(
     INSET_TOKENS as Record<InsetToken, string>,
-    (key) => key !== 'xs'
+    (key: string): boolean => key !== 'xs'
   );
 
-  public readonly stackSpacingLabel = computed<string>(() =>
+  public readonly stackSpacingLabel = computed<string>((): string =>
     this.displayLabel(this.stackSpacing(), this.stackOptions)
   );
-  public readonly inlineSpacingLabel = computed<string>(() =>
+  public readonly inlineSpacingLabel = computed<string>((): string =>
     this.displayLabel(this.inlineSpacing(), this.inlineOptions)
   );
-  public readonly gridSpacingLabel = computed<string>(() =>
+  public readonly gridSpacingLabel = computed<string>((): string =>
     this.displayLabel(this.gridSpacing(), this.stackOptions)
   );
-  public readonly insetLabel = computed<string>(() =>
+  public readonly insetLabel = computed<string>((): string =>
     this.displayLabel(this.inset(), this.insetOptions)
   );
 
@@ -128,15 +128,17 @@ export class LayoutSemanticSpacingSectionComponent {
     predicate?: (key: string) => boolean
   ): { label: string; value: T }[] {
     return Object.entries(tokens as Record<string, string>)
-      .filter(([key]) => (predicate ? predicate(key) : true))
-      .map(([key, value]) => ({
+      .filter(([key]: [string, string]): boolean => (predicate ? predicate(key) : true))
+      .map(([key, value]: [string, string]): { label: string; value: T } => ({
         label: `${key} (${this.toPx(value)})`,
         value: key as T,
       }));
   }
 
   private displayLabel<T extends string>(value: T, options: { label: string; value: T }[]): string {
-    const match = options.find((option) => option.value === value);
+    const match = options.find(
+      (option: { label: string; value: T }): boolean => option.value === value
+    );
     return match ? match.label : String(value);
   }
 

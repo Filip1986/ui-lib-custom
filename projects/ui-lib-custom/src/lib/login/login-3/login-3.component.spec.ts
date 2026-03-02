@@ -3,11 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { Login3Component } from './login-3.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-describe('Login3Component', () => {
+describe('Login3Component', (): void => {
   let component: Login3Component;
   let fixture: ComponentFixture<Login3Component>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Login3Component, ReactiveFormsModule],
     }).compileComponents();
@@ -17,17 +17,17 @@ describe('Login3Component', () => {
     fixture.detectChanges();
   });
 
-  it('should create the component', () => {
+  it('should create the component', (): void => {
     expect(component).toBeTruthy();
   });
 
-  it('should have a login form', () => {
+  it('should have a login form', (): void => {
     expect(component.loginForm).toBeTruthy();
     expect(component.loginForm.get('username')).toBeTruthy();
     expect(component.loginForm.get('password')).toBeTruthy();
   });
 
-  it('should call onSubmit and emit submitLogin if the form is valid', () => {
+  it('should call onSubmit and emit submitLogin if the form is valid', (): void => {
     spyOn(component.submitLogin, 'emit');
     component.loginForm.setValue({
       username: 'testuser',
@@ -44,7 +44,7 @@ describe('Login3Component', () => {
     });
   });
 
-  it('should call onRememberMeChange and update localStorage', () => {
+  it('should call onRememberMeChange and update localStorage', (): void => {
     const event = { target: { checked: true } } as { target: { checked: boolean } };
 
     const setItemSpy = spyOn(localStorage, 'setItem');
@@ -56,7 +56,7 @@ describe('Login3Component', () => {
     expect(component.rememberMeChange.emit).toHaveBeenCalledWith(true);
   });
 
-  it('should emit registerClick when onRegister is called', () => {
+  it('should emit registerClick when onRegister is called', (): void => {
     spyOn(component.registerClick, 'emit');
 
     component.onRegister();
@@ -64,7 +64,7 @@ describe('Login3Component', () => {
     expect(component.registerClick.emit).toHaveBeenCalled();
   });
 
-  it('should emit forgotPasswordClick with username when onForgotPassword is called', () => {
+  it('should emit forgotPasswordClick with username when onForgotPassword is called', (): void => {
     component.loginForm.get('username')?.setValue('testuser@example.com');
     spyOn(component.forgotPasswordClick, 'emit');
 
@@ -73,7 +73,7 @@ describe('Login3Component', () => {
     expect(component.forgotPasswordClick.emit).toHaveBeenCalledWith('testuser@example.com');
   });
 
-  it('should emit socialLoginClick with provider when onSocialLogin is called', () => {
+  it('should emit socialLoginClick with provider when onSocialLogin is called', (): void => {
     spyOn(component.socialLoginClick, 'emit');
 
     component.onSocialLogin('google');

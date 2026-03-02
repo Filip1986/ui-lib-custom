@@ -42,13 +42,13 @@ export class ThemeEditorComponent {
   private readonly editorService = inject(ThemeEditorService);
 
   public readonly isOpen = signal<boolean>(false);
-  public readonly panelOpen = computed<boolean>(() => this.embedded() || this.isOpen());
+  public readonly panelOpen = computed<boolean>((): boolean => this.embedded() || this.isOpen());
   public readonly pendingColors = this.editorService.pendingColors;
 
-  public readonly variant = computed<ThemeVariant>(() => this.themeConfig.variant());
-  public readonly shape = computed<ThemeShape>(() => this.themeConfig.shape());
-  public readonly density = computed<ThemeDensity>(() => this.themeConfig.density());
-  public readonly mode = computed<ThemeMode>(() => this.themeConfig.mode());
+  public readonly variant = computed<ThemeVariant>((): ThemeVariant => this.themeConfig.variant());
+  public readonly shape = computed<ThemeShape>((): ThemeShape => this.themeConfig.shape());
+  public readonly density = computed<ThemeDensity>((): ThemeDensity => this.themeConfig.density());
+  public readonly mode = computed<ThemeMode>((): ThemeMode => this.themeConfig.mode());
 
   public readonly variants: ToggleOption<ThemeVariant>[] = [
     { label: 'Material', value: 'material' },
@@ -93,7 +93,9 @@ export class ThemeEditorComponent {
     this.readCssVar('--uilib-font-body', "'Inter', sans-serif")
   );
 
-  public readonly savedPresets = computed<ThemePreset[]>(() => this.presetService.presets());
+  public readonly savedPresets = computed<ThemePreset[]>((): ThemePreset[] =>
+    this.presetService.presets()
+  );
 
   constructor() {
     this.refreshColors();
@@ -103,7 +105,7 @@ export class ThemeEditorComponent {
     if (this.embedded()) {
       return;
     }
-    this.isOpen.update((v) => !v);
+    this.isOpen.update((v: boolean): boolean => !v);
   }
 
   public closePanel(): void {
@@ -131,12 +133,22 @@ export class ThemeEditorComponent {
 
   public applyColor(key: string, value: string): void {
     this.editorService.applyColorChange(key, value);
-    this.colorValues.update((state) => ({ ...state, [key]: value }));
+    this.colorValues.update(
+      (state: Record<string, string>): Record<string, string> => ({
+        ...state,
+        [key]: value,
+      })
+    );
   }
 
   public resetColor(key: string): void {
     this.editorService.resetColor(key);
-    this.colorValues.update((state) => ({ ...state, [key]: this.readColor(key) }));
+    this.colorValues.update(
+      (state: Record<string, string>): Record<string, string> => ({
+        ...state,
+        [key]: this.readColor(key),
+      })
+    );
   }
 
   public onHexChange(key: string, value: string): void {
@@ -205,14 +217,14 @@ export class ThemeEditorComponent {
 
   private refreshColors(): void {
     const values: Record<string, string> = {};
-    this.colors.forEach((color) => {
+    this.colors.forEach((color: ColorOption): void => {
       values[color.key] = this.readColor(color.key);
     });
     this.colorValues.set(values);
   }
 
   private readColor(key: string): string {
-    const def = this.colors.find((color) => color.key === key);
+    const def = this.colors.find((color: ColorOption): boolean => color.key === key);
     if (!def) {
       return '#000000';
     }

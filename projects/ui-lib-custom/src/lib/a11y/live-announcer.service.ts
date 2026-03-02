@@ -23,7 +23,7 @@ export class LiveAnnouncerService implements OnDestroy {
     politeness: AriaLivePoliteness = 'polite',
     duration: number = 0
   ): Promise<void> {
-    return new Promise((resolve: () => void) => {
+    return new Promise((resolve: () => void): void => {
       if (!this.liveElement) {
         resolve();
         return;

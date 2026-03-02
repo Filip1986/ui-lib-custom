@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import type { ParamMap } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ThemeConfigService,
@@ -56,7 +57,7 @@ export class GalleryComponent {
 
   public readonly presentMode = signal<boolean>(false);
   public readonly shareNotice = signal<string>('');
-  public readonly variant = computed<ThemeVariant>(() => this.themeConfig.variant());
+  public readonly variant = computed<ThemeVariant>((): ThemeVariant => this.themeConfig.variant());
 
   public readonly sizes: readonly ['sm', 'md', 'lg'] = ['sm', 'md', 'lg'];
   public readonly variants: ThemeVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -76,25 +77,27 @@ export class GalleryComponent {
   ];
 
   constructor() {
-    this.route.queryParamMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
-      const encoded = params.get('theme');
-      if (!encoded) {
-        return;
-      }
-      const preset = this.decodePreset(encoded);
-      if (!preset) {
-        return;
-      }
-      this.presetService.applyPreset(preset);
-      this.themeConfig.setVariant(preset.variant);
-      this.themeConfig.setShape(preset.shape);
-      this.themeConfig.setDensity(preset.density);
-      this.themeConfig.setMode(preset.darkMode);
-    });
+    this.route.queryParamMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((params: ParamMap): void => {
+        const encoded = params.get('theme');
+        if (!encoded) {
+          return;
+        }
+        const preset = this.decodePreset(encoded);
+        if (!preset) {
+          return;
+        }
+        this.presetService.applyPreset(preset);
+        this.themeConfig.setVariant(preset.variant);
+        this.themeConfig.setShape(preset.shape);
+        this.themeConfig.setDensity(preset.density);
+        this.themeConfig.setMode(preset.darkMode);
+      });
   }
 
   public togglePresentMode(): void {
-    this.presentMode.update((value: boolean) => !value);
+    this.presentMode.update((value: boolean): boolean => !value);
   }
 
   public async copyShareLink(): Promise<void> {
@@ -111,7 +114,7 @@ export class GalleryComponent {
       document.body.removeChild(textarea);
     }
     this.shareNotice.set('Link copied');
-    setTimeout(() => this.shareNotice.set(''), 1500);
+    setTimeout((): void => this.shareNotice.set(''), 1500);
   }
 
   private buildShareUrl(): string {

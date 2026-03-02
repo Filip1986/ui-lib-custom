@@ -32,10 +32,10 @@ class RtlTabsHostComponent {}
 })
 class RtlScrollableTabsHostComponent {}
 
-describe('Tabs RTL Support', () => {
+describe('Tabs RTL Support', (): void => {
   let fixture: ComponentFixture<RtlTabsHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [RtlTabsHostComponent],
     }).compileComponents();
@@ -50,14 +50,14 @@ describe('Tabs RTL Support', () => {
     );
   }
 
-  it('should apply rtl class when dir is rtl', () => {
+  it('should apply rtl class when dir is rtl', (): void => {
     const tabsEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-tabs'
     ) as HTMLElement;
     expect(tabsEl.classList.contains('ui-tabs--rtl')).toBeTruthy();
   });
 
-  it('should navigate to next tab with ArrowLeft in RTL', () => {
+  it('should navigate to next tab with ArrowLeft in RTL', (): void => {
     const buttons = tabButtons();
     buttons[0].focus();
     buttons[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
@@ -66,7 +66,7 @@ describe('Tabs RTL Support', () => {
     expect(document.activeElement).toBe(buttons[1]);
   });
 
-  it('should navigate to previous tab with ArrowRight in RTL', () => {
+  it('should navigate to previous tab with ArrowRight in RTL', (): void => {
     const buttons = tabButtons();
     buttons[1].focus();
     buttons[1].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
@@ -76,10 +76,10 @@ describe('Tabs RTL Support', () => {
   });
 });
 
-describe('Tabs RTL scroll icons', () => {
+describe('Tabs RTL scroll icons', (): void => {
   let fixture: ComponentFixture<RtlScrollableTabsHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [RtlScrollableTabsHostComponent],
     }).compileComponents();
@@ -88,7 +88,7 @@ describe('Tabs RTL scroll icons', () => {
     fixture.detectChanges();
   });
 
-  it('should swap scroll icons in RTL for horizontal tabs', () => {
+  it('should swap scroll icons in RTL for horizontal tabs', (): void => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     expect(component.scrollPrevIcon()).toBe('chevron-right');

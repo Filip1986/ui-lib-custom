@@ -57,12 +57,12 @@ export class Card {
   public readonly closed = output<void>();
 
   public readonly effectiveVariant = computed<CardVariant>(
-    () => this.variant() ?? this.themeService.variant()
+    (): CardVariant => this.variant() ?? this.themeService.variant()
   );
-  public readonly headerVisible = computed<boolean>(() => this.showHeader() !== false);
-  public readonly footerVisible = computed<boolean>(() => this.showFooter() !== false);
+  public readonly headerVisible = computed<boolean>((): boolean => this.showHeader() !== false);
+  public readonly footerVisible = computed<boolean>((): boolean => this.showFooter() !== false);
 
-  public readonly cardClasses = computed<string>(() => {
+  public readonly cardClasses = computed<string>((): string => {
     const classes = [
       'card',
       `card-${this.effectiveVariant()}`,
@@ -81,7 +81,7 @@ export class Card {
   });
 
   constructor() {
-    effect(() => {
+    effect((): void => {
       this.applyThemeScope();
     });
   }
@@ -137,7 +137,7 @@ export class Card {
 
   private applyVariables(variables: Record<string, string>): void {
     const element: HTMLElement = this.el.nativeElement;
-    Object.entries(variables).forEach(([key, value]) => {
+    Object.entries(variables).forEach(([key, value]): void => {
       const varName = key.startsWith('--') ? key : `--${key}`;
       element.style.setProperty(varName, value);
       this.appliedVars.add(varName);
@@ -152,7 +152,7 @@ export class Card {
 
   private clearAppliedStyles(): void {
     const element: HTMLElement = this.el.nativeElement;
-    this.appliedVars.forEach((key) => element.style.removeProperty(key));
+    this.appliedVars.forEach((key): void => element.style.removeProperty(key));
     this.appliedVars.clear();
     element.removeAttribute('data-variant');
   }

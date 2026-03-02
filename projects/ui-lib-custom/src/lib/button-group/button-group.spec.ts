@@ -26,7 +26,7 @@ class HostComponent {
   public readonly size = signal<ButtonSize>('md');
 }
 
-describe('ButtonGroup', () => {
+describe('ButtonGroup', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
   const getGroup = (): HTMLElement =>
@@ -34,7 +34,7 @@ describe('ButtonGroup', () => {
   const getButtons = (): NodeListOf<HTMLButtonElement> =>
     (fixture.nativeElement as HTMLElement).querySelectorAll('button');
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [HostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -44,8 +44,8 @@ describe('ButtonGroup', () => {
     fixture.detectChanges();
   });
 
-  describe('basic rendering', () => {
-    it('renders with btn-group class and projects children', () => {
+  describe('basic rendering', (): void => {
+    it('renders with btn-group class and projects children', (): void => {
       const group = getGroup();
       expect(group.classList.contains('btn-group')).toBeTruthy();
       const buttons = getButtons();
@@ -58,61 +58,61 @@ describe('ButtonGroup', () => {
       expect((secondText as string).trim()).toBe('Two');
     });
 
-    it('has role="group" attribute', () => {
+    it('has role="group" attribute', (): void => {
       expect(getGroup().getAttribute('role')).toBe('group');
     });
   });
 
-  describe('orientation', () => {
-    it('is horizontal by default', () => {
+  describe('orientation', (): void => {
+    it('is horizontal by default', (): void => {
       expect(getGroup().classList.contains('btn-group-vertical')).toBeFalsy();
     });
 
-    it('applies vertical class when vertical=true', () => {
+    it('applies vertical class when vertical=true', (): void => {
       fixture.componentInstance.vertical.set(true);
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-vertical')).toBeTruthy();
     });
   });
 
-  describe('variant inheritance', () => {
-    it('applies material class by default', () => {
+  describe('variant inheritance', (): void => {
+    it('applies material class by default', (): void => {
       expect(getGroup().classList.contains('btn-group-material')).toBeTruthy();
     });
 
-    it('applies bootstrap class when variant=bootstrap', () => {
+    it('applies bootstrap class when variant=bootstrap', (): void => {
       fixture.componentInstance.variant.set('bootstrap');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-bootstrap')).toBeTruthy();
     });
 
-    it('applies minimal class when variant=minimal', () => {
+    it('applies minimal class when variant=minimal', (): void => {
       fixture.componentInstance.variant.set('minimal');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-minimal')).toBeTruthy();
     });
   });
 
-  describe('size inheritance', () => {
-    it('applies small size class hook', () => {
+  describe('size inheritance', (): void => {
+    it('applies small size class hook', (): void => {
       fixture.componentInstance.size.set('small');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-size-small')).toBeTruthy();
     });
 
-    it('applies large size class hook', () => {
+    it('applies large size class hook', (): void => {
       fixture.componentInstance.size.set('large');
       fixture.detectChanges();
       expect(getGroup().classList.contains('btn-group-size-large')).toBeTruthy();
     });
   });
 
-  describe('accessibility', () => {
-    it('role group is present', () => {
+  describe('accessibility', (): void => {
+    it('role group is present', (): void => {
       expect(getGroup().getAttribute('role')).toBe('group');
     });
 
-    it('buttons remain focusable in order', () => {
+    it('buttons remain focusable in order', (): void => {
       const buttons = getButtons();
       expect(buttons[0].tabIndex).toBe(0);
       expect(buttons[1].tabIndex).toBe(0);

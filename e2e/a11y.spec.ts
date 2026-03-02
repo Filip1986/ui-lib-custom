@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import type { Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 async function assertNoViolations(results: { violations: unknown[] }): Promise<void> {
@@ -13,8 +14,8 @@ async function assertNoViolations(results: { violations: unknown[] }): Promise<v
   expect(violations).toEqual([]);
 }
 
-test.describe('Accessibility', () => {
-  test('home page should have no violations', async ({ page }) => {
+test.describe('Accessibility', (): void => {
+  test('home page should have no violations', async ({ page }: { page: Page }): Promise<void> => {
     await page.goto('/');
 
     const results = await new AxeBuilder({ page })
@@ -25,7 +26,11 @@ test.describe('Accessibility', () => {
     await assertNoViolations(results);
   });
 
-  test('buttons page should have no violations', async ({ page }) => {
+  test('buttons page should have no violations', async ({
+    page,
+  }: {
+    page: Page;
+  }): Promise<void> => {
     await page.goto('/buttons');
 
     const results = await new AxeBuilder({ page })
@@ -37,7 +42,7 @@ test.describe('Accessibility', () => {
     await assertNoViolations(results);
   });
 
-  test('forms page should have no violations', async ({ page }) => {
+  test('forms page should have no violations', async ({ page }: { page: Page }): Promise<void> => {
     await page.goto('/inputs');
 
     const results = await new AxeBuilder({ page })
@@ -48,7 +53,11 @@ test.describe('Accessibility', () => {
     await assertNoViolations(results);
   });
 
-  test('select component should have no violations when open', async ({ page }) => {
+  test('select component should have no violations when open', async ({
+    page,
+  }: {
+    page: Page;
+  }): Promise<void> => {
     await page.goto('/select');
 
     await page.click('ui-lib-select');
@@ -62,7 +71,7 @@ test.describe('Accessibility', () => {
     await assertNoViolations(results);
   });
 
-  test('tabs should be keyboard navigable', async ({ page }) => {
+  test('tabs should be keyboard navigable', async ({ page }: { page: Page }): Promise<void> => {
     await page.goto('/tabs');
 
     const firstTab = page.locator('[role="tab"]').first();
@@ -77,7 +86,7 @@ test.describe('Accessibility', () => {
     await expect(secondTab).toHaveAttribute('aria-selected', 'true');
   });
 
-  test('modal focus trap should work', async ({ page }) => {
+  test('modal focus trap should work', async ({ page }: { page: Page }): Promise<void> => {
     await page.goto('/dialogs');
 
     const modalTrigger = page.locator('[data-open-modal]');

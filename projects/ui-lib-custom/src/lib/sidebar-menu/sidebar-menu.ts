@@ -40,19 +40,19 @@ export class SidebarMenu {
 
   private readonly expandedIds = signal<Set<string>>(new Set());
 
-  public readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>((): string => {
     const classes = ['ui-sidebar', `ui-sidebar-${this.variant()}`];
     if (this.isCollapsed()) classes.push('ui-sidebar-collapsed');
     return classes.join(' ');
   });
 
   public readonly isCollapsed = computed<boolean>(
-    () => this.collapsed() || this.internalCollapsed()
+    (): boolean => this.collapsed() || this.internalCollapsed()
   );
 
   public toggleCollapse(): void {
     if (!this.collapsible()) return;
-    this.internalCollapsed.update((v) => !v);
+    this.internalCollapsed.update((v): boolean => !v);
   }
 
   public isExpanded(id: string): boolean {

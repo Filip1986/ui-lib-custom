@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideRouter(routes),
     provideUiLibIcons(),
-    provideAppInitializer(() => {
+    provideAppInitializer((): void | Promise<void> => {
       const themeService = inject(ThemeConfigService);
       const hasStored =
         typeof localStorage !== 'undefined' && Boolean(localStorage.getItem('ui-lib-custom.theme'));
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
       }
       return themeService
         .loadPresetAsync('/presets/brand-example.json', { merge: true, persist: true })
-        .catch(() => {
+        .catch((): void => {
           themeService.applyToRoot(themeService.getPreset());
         });
     }),

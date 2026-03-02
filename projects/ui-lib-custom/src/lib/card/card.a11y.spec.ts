@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Card } from './card';
 import { Button } from 'ui-lib-custom/button';
-import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService, ThemeVariant, ThemePreset } from 'ui-lib-custom/theme';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 @Component({
@@ -21,32 +21,46 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 })
 class TestHostComponent {}
 
-describe('Card Accessibility', () => {
+describe('Card Accessibility', (): void => {
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     const variant = signal<ThemeVariant>('material');
+    const buildPreset = (): ThemePreset => ({
+      id: 'test-preset',
+      name: 'Test Preset',
+      variant: 'material',
+      shape: 'rounded',
+      density: 'default',
+      darkMode: 'light',
+      colors: {
+        primary: '#000000',
+        secondary: '#000000',
+        success: '#000000',
+        danger: '#000000',
+        warning: '#000000',
+        info: '#000000',
+        surface: '#000000',
+        background: '#000000',
+      },
+      fonts: {
+        heading: 'Inter',
+        body: 'Inter',
+        mono: 'monospace',
+      },
+      icons: {
+        defaultLibrary: 'lucide',
+        defaultSize: 'md',
+        sizes: { md: '1rem' },
+      },
+      createdAt: 0,
+      updatedAt: 0,
+    });
     const mockTheme = {
       variant,
       setVariant: (value: ThemeVariant): void => variant.set(value),
-      getPreset: () => ({
-        variant: 'material',
-        icons: {
-          defaultLibrary: 'lucide',
-          defaultSize: 'md',
-          sizes: { md: '1rem' },
-        },
-        colors: {},
-      }),
-      preset: () => ({
-        variant: 'material',
-        icons: {
-          defaultLibrary: 'lucide',
-          defaultSize: 'md',
-          sizes: { md: '1rem' },
-        },
-        colors: {},
-      }),
+      getPreset: (): ThemePreset => buildPreset(),
+      preset: (): ThemePreset => buildPreset(),
     };
 
     await TestBed.configureTestingModule({
@@ -57,7 +71,7 @@ describe('Card Accessibility', () => {
     fixture = TestBed.createComponent(TestHostComponent);
   });
 
-  it('should have no accessibility violations', async () => {
+  it('should have no accessibility violations', async (): Promise<void> => {
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 });

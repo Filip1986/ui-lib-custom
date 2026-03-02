@@ -16,10 +16,10 @@ class TestHostComponent {
   public error = 'Required';
 }
 
-describe('Input Accessibility', () => {
+describe('Input Accessibility', (): void => {
   let fixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
     }).compileComponents();
@@ -27,7 +27,7 @@ describe('Input Accessibility', () => {
     fixture = TestBed.createComponent(TestHostComponent);
   });
 
-  it('should have no accessibility violations', async () => {
+  it('should have no accessibility violations', async (): Promise<void> => {
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 });

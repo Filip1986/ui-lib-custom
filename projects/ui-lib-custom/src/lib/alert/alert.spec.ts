@@ -3,10 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { Alert } from './alert';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
-describe('Alert', () => {
+describe('Alert', (): void => {
   let fixture: ComponentFixture<Alert>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Alert],
     }).compileComponents();
@@ -15,11 +15,11 @@ describe('Alert', () => {
     fixture.detectChanges();
   });
 
-  it('creates', () => {
+  it('creates', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const light: string = getComputedStyle(root).getPropertyValue('--alert-bg').trim();
@@ -31,7 +31,7 @@ describe('Alert', () => {
     root.removeAttribute('data-theme');
   });
 
-  it('uses global variant when no variant input provided', () => {
+  it('uses global variant when no variant input provided', (): void => {
     const service: ThemeConfigService = TestBed.inject(ThemeConfigService);
     service.setVariant('minimal');
     fixture.detectChanges();
@@ -40,7 +40,7 @@ describe('Alert', () => {
     expect(host.className).toContain('alert-minimal');
   });
 
-  it('adds accessible dismiss control when dismissible', () => {
+  it('adds accessible dismiss control when dismissible', (): void => {
     fixture.componentRef.setInput('dismissible', true);
     fixture.detectChanges();
 

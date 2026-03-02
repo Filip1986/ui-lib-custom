@@ -147,11 +147,11 @@ export class Example {}`,
   public readonly iconPositions: IconPosition[] = ['left', 'right', 'top', 'bottom'];
   public readonly demoIcon = signal('search');
 
-  private readonly globalVars = computed(() => {
+  private readonly globalVars = computed<Record<string, string>>((): Record<string, string> => {
     const preset = this.themeService.preset();
     return this.themeService.getCssVars(preset);
   });
-  private readonly localVars = computed(() => {
+  private readonly localVars = computed<Record<string, string>>((): Record<string, string> => {
     const vars: Record<string, string> = {};
     if (this.localPrimary().trim()) {
       vars['--uilib-button-primary-bg'] = this.localPrimary().trim();
@@ -165,14 +165,14 @@ export class Example {}`,
     return vars;
   });
 
-  public readonly appliedTheme = computed(() => {
+  public readonly appliedTheme = computed<Record<string, string>>((): Record<string, string> => {
     const base = this.globalVars();
     if (!this.useLocalTheme()) return base;
     return { ...base, ...this.localVars() };
   });
 
   constructor() {
-    effect(() => {
+    effect((): void => {
       if (!this.useGlobalVariant()) return;
       const v = this.themeService.preset().variant as ButtonVariant;
       this.variant.set(v);

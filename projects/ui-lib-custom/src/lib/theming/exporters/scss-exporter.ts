@@ -21,7 +21,7 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
 
   if (outputFormat === 'variables') {
     lines.push('// Colors');
-    Object.entries(preset.colors).forEach(([key, value]) => {
+    Object.entries(preset.colors).forEach(([key, value]): void => {
       lines.push(`$${variablePrefix}-${kebabCase(key)}: ${value};`);
     });
 
@@ -43,7 +43,7 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
     lines.push('');
     lines.push('// CSS Custom Properties (for :root)');
     lines.push(':root {');
-    Object.entries(preset.colors).forEach(([key]) => {
+    Object.entries(preset.colors).forEach(([key]): void => {
       const name = kebabCase(key);
       lines.push(`  --${variablePrefix}-${name}: #{$${variablePrefix}-${name}};`);
     });
@@ -53,7 +53,7 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
     lines.push(`  'name': '${preset.name}',`);
     lines.push(`  'variant': '${preset.variant}',`);
     lines.push(`  'colors': (`);
-    Object.entries(preset.colors).forEach(([key, value], index, entries) => {
+    Object.entries(preset.colors).forEach(([key, value], index, entries): void => {
       const comma = index < entries.length - 1 ? ',' : '';
       lines.push(`    '${kebabCase(key)}': ${value}${comma}`);
     });

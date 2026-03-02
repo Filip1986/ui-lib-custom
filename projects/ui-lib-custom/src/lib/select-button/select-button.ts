@@ -38,7 +38,7 @@ import {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectButton),
+      useExisting: forwardRef((): typeof SelectButton => SelectButton),
       multi: true,
     },
   ],
@@ -91,8 +91,8 @@ export class SelectButton implements ControlValueAccessor {
   public readonly internalValue = signal<SelectButtonValue[]>([]);
   private readonly cvaDisabled = signal<boolean>(false);
 
-  private onCvaChange: (value: SelectButtonValue | SelectButtonValue[]) => void = () => {};
-  private onCvaTouched: () => void = () => {};
+  private onCvaChange: (value: SelectButtonValue | SelectButtonValue[]) => void = (): void => {};
+  private onCvaTouched: () => void = (): void => {};
 
   public readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
     (): 'small' | 'medium' | 'large' => {
@@ -110,11 +110,13 @@ export class SelectButton implements ControlValueAccessor {
   );
 
   public readonly effectiveVariant = computed<SelectButtonVariant>(
-    () => this.variant() ?? this.themeConfig.variant()
+    (): SelectButtonVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly isDisabled = computed<boolean>(() => this.disabled() || this.cvaDisabled());
+  public readonly isDisabled = computed<boolean>(
+    (): boolean => this.disabled() || this.cvaDisabled()
+  );
 
-  public readonly activeIndex = computed<number>(() => {
+  public readonly activeIndex = computed<number>((): number => {
     const opts: SelectButtonOption[] = this.options();
     const focused: number = this.focusedIndex();
     if (focused >= 0 && focused < opts.length) {
@@ -129,9 +131,13 @@ export class SelectButton implements ControlValueAccessor {
     return this.findFirstEnabledIndex(opts);
   });
 
-  public readonly groupRole = computed<string>(() => (this.multiple() ? 'group' : 'radiogroup'));
-  public readonly itemRole = computed<string>(() => (this.multiple() ? 'checkbox' : 'radio'));
-  public readonly ariaLabelResolved = computed<string | null>(() => {
+  public readonly groupRole = computed<string>((): string =>
+    this.multiple() ? 'group' : 'radiogroup'
+  );
+  public readonly itemRole = computed<string>((): string =>
+    this.multiple() ? 'checkbox' : 'radio'
+  );
+  public readonly ariaLabelResolved = computed<string | null>((): string | null => {
     if (this.ariaLabelledBy()) {
       return null;
     }
@@ -173,7 +179,7 @@ export class SelectButton implements ControlValueAccessor {
 
   public isSelected(option: SelectButtonOption): boolean {
     const value: SelectButtonValue = this.resolveValue(option);
-    return this.internalValue().some((v: SelectButtonValue) => v === value);
+    return this.internalValue().some((v: SelectButtonValue): boolean => v === value);
   }
 
   public isOptionDisabled(option: SelectButtonOption): boolean {
@@ -279,9 +285,9 @@ export class SelectButton implements ControlValueAccessor {
 
     if (this.multiple()) {
       const current: SelectButtonValue[] = this.internalValue();
-      const exists: boolean = current.some((v: SelectButtonValue) => v === value);
+      const exists: boolean = current.some((v: SelectButtonValue): boolean => v === value);
       const next: SelectButtonValue[] = exists
-        ? current.filter((v: SelectButtonValue) => v !== value)
+        ? current.filter((v: SelectButtonValue): boolean => v !== value)
         : [...current, value];
       this.applySelection(next, event);
       return;
@@ -352,7 +358,7 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   private focusButton(index: number): void {
-    queueMicrotask(() => {
+    queueMicrotask((): void => {
       const buttons: NodeListOf<HTMLButtonElement> =
         this.el.nativeElement.querySelectorAll('button');
       const button: HTMLButtonElement | undefined = buttons[index];

@@ -164,10 +164,10 @@ function setScrollMetrics(
   });
 }
 
-describe('Tabs', () => {
+describe('Tabs', (): void => {
   let fixture: ComponentFixture<TabsHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsHostComponent],
     }).compileComponents();
@@ -176,22 +176,22 @@ describe('Tabs', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     restoreRaf();
   });
 
-  it('should create host component', () => {
+  it('should create host component', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render tablist with two tabs', () => {
+  it('should render tablist with two tabs', (): void => {
     const tabButtons = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
     expect(tabButtons.length).toBe(2);
     expect(tabButtons[0].attributes['aria-selected']).toBe('true');
     expect(tabButtons[1].attributes['aria-selected']).toBe('false');
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const light: string = getComputedStyle(root).getPropertyValue('--uilib-tabs-color').trim();
@@ -204,10 +204,10 @@ describe('Tabs', () => {
   });
 });
 
-describe('Tabs per-tab lazy', () => {
+describe('Tabs per-tab lazy', (): void => {
   let fixture: ComponentFixture<TabsLazyHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsLazyHostComponent],
     }).compileComponents();
@@ -216,11 +216,11 @@ describe('Tabs per-tab lazy', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     restoreRaf();
   });
 
-  it('should unmount lazy content when tab deactivates', async () => {
+  it('should unmount lazy content when tab deactivates', async (): Promise<void> => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     const tabs = component.tabContexts();
@@ -238,7 +238,7 @@ describe('Tabs per-tab lazy', () => {
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeNull();
   });
 
-  it('should keep cached content for keep-alive tabs', async () => {
+  it('should keep cached content for keep-alive tabs', async (): Promise<void> => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     const tabs = component.tabContexts();
@@ -257,10 +257,10 @@ describe('Tabs per-tab lazy', () => {
   });
 });
 
-describe('Scrollable Tabs', () => {
+describe('Scrollable Tabs', (): void => {
   let fixture: ComponentFixture<TabsScrollableHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsScrollableHostComponent],
     }).compileComponents();
@@ -269,11 +269,11 @@ describe('Scrollable Tabs', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     restoreRaf();
   });
 
-  it('should show arrows when tabs overflow', () => {
+  it('should show arrows when tabs overflow', (): void => {
     const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
@@ -289,7 +289,7 @@ describe('Scrollable Tabs', () => {
     expect(arrows.length).toBe(2);
   });
 
-  it('should hide arrows when all tabs are visible', () => {
+  it('should hide arrows when all tabs are visible', (): void => {
     const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
@@ -305,7 +305,7 @@ describe('Scrollable Tabs', () => {
     expect(arrows.length).toBe(0);
   });
 
-  it('should disable prev at start and next at end', () => {
+  it('should disable prev at start and next at end', (): void => {
     const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
@@ -331,7 +331,7 @@ describe('Scrollable Tabs', () => {
     expect(next.disabled).toBe(true);
   });
 
-  it('should scroll on arrow click', () => {
+  it('should scroll on arrow click', (): void => {
     const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
@@ -351,7 +351,7 @@ describe('Scrollable Tabs', () => {
     expect(scrollToSpy).toHaveBeenCalled();
   });
 
-  it('should auto-scroll focused tab into view', () => {
+  it('should auto-scroll focused tab into view', (): void => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
@@ -368,10 +368,10 @@ describe('Scrollable Tabs', () => {
   });
 });
 
-describe('Tab Menu Mode', () => {
+describe('Tab Menu Mode', (): void => {
   let fixture: ComponentFixture<TabsNavigationHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsNavigationHostComponent],
     }).compileComponents();
@@ -380,16 +380,16 @@ describe('Tab Menu Mode', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     restoreRaf();
   });
 
-  it('should render without panels in navigation mode', () => {
+  it('should render without panels in navigation mode', (): void => {
     const panels: DebugElement | null = fixture.debugElement.query(By.css('section.tab-panels'));
     expect(panels).toBeNull();
   });
 
-  it('should emit value on tab click', () => {
+  it('should emit value on tab click', (): void => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
     const target: HTMLButtonElement = buttons[1].nativeElement as HTMLButtonElement;
     target.click();
@@ -399,7 +399,7 @@ describe('Tab Menu Mode', () => {
     expect(component.lastNavigate).toBe('/reports');
   });
 
-  it('should highlight the active tab', () => {
+  it('should highlight the active tab', (): void => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
     const target: HTMLButtonElement = buttons[2].nativeElement as HTMLButtonElement;
     target.click();
@@ -410,10 +410,10 @@ describe('Tab Menu Mode', () => {
   });
 });
 
-describe('Per-Panel Lazy', () => {
+describe('Per-Panel Lazy', (): void => {
   let fixture: ComponentFixture<TabsPerTabOverrideHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsPerTabOverrideHostComponent],
     }).compileComponents();
@@ -422,11 +422,11 @@ describe('Per-Panel Lazy', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     restoreRaf();
   });
 
-  it('should respect per-tab lazy override', async () => {
+  it('should respect per-tab lazy override', async (): Promise<void> => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
@@ -443,17 +443,17 @@ describe('Per-Panel Lazy', () => {
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
   });
 
-  it('should defer template rendering until active', async () => {
+  it('should defer template rendering until active', async (): Promise<void> => {
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.eager-content'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
   });
 });
 
-describe('Tabs interactions', () => {
+describe('Tabs interactions', (): void => {
   let fixture: ComponentFixture<TabsInteractionHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsInteractionHostComponent],
     }).compileComponents();
@@ -462,7 +462,7 @@ describe('Tabs interactions', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
+  afterEach((): void => {
     restoreRaf();
   });
 
@@ -476,13 +476,13 @@ describe('Tabs interactions', () => {
     return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-tab-panel'));
   }
 
-  it('selects the first tab by default', () => {
+  it('selects the first tab by default', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     expect(buttons[0].getAttribute('aria-selected')).toBe('true');
     expect(buttons[1].getAttribute('aria-selected')).toBe('false');
   });
 
-  it('switches tabs on click', () => {
+  it('switches tabs on click', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     buttons[1].click();
     fixture.detectChanges();
@@ -491,7 +491,7 @@ describe('Tabs interactions', () => {
     expect(buttons[0].getAttribute('aria-selected')).toBe('false');
   });
 
-  it('switches tabs with ArrowRight key', () => {
+  it('switches tabs with ArrowRight key', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     buttons[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     fixture.detectChanges();
@@ -499,7 +499,7 @@ describe('Tabs interactions', () => {
     expect(buttons[1].getAttribute('aria-selected')).toBe('true');
   });
 
-  it('does not select disabled tab', () => {
+  it('does not select disabled tab', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     buttons[2].click();
     fixture.detectChanges();
@@ -508,7 +508,7 @@ describe('Tabs interactions', () => {
     expect(buttons[0].getAttribute('aria-selected')).toBe('true');
   });
 
-  it('shows and hides tab panels correctly', () => {
+  it('shows and hides tab panels correctly', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     const panels: HTMLElement[] = tabPanels();
 
@@ -522,7 +522,7 @@ describe('Tabs interactions', () => {
     expect(panels[1].hasAttribute('hidden')).toBe(false);
   });
 
-  it('applies variant classes on the tab list', () => {
+  it('applies variant classes on the tab list', (): void => {
     const createVariantFixture = (variant: TabsVariant): HTMLElement => {
       const freshFixture: ComponentFixture<TabsInteractionHostComponent> = TestBed.createComponent(
         TabsInteractionHostComponent
@@ -544,7 +544,7 @@ describe('Tabs interactions', () => {
     expect(minimalList.className).toContain('tabs-minimal');
   });
 
-  it('exposes tablist, tab, and tabpanel roles with proper aria linkage', () => {
+  it('exposes tablist, tab, and tabpanel roles with proper aria linkage', (): void => {
     const tabList: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
       'nav.tab-list'
     );

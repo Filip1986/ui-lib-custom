@@ -112,7 +112,7 @@ export class ThemeEditorService {
   public readonly pendingColors: WritableSignal<Record<string, string>> = signal<
     Record<string, string>
   >({});
-  public readonly hasUnsavedChanges: Signal<boolean> = computed(() => {
+  public readonly hasUnsavedChanges: Signal<boolean> = computed((): boolean => {
     const pending = this.pendingColors();
     return Object.keys(pending).length > 0;
   });
@@ -132,7 +132,12 @@ export class ThemeEditorService {
     const variants: ColorVariants = this.buildVariants(normalized);
     this.applyVariants(semanticKey, variants);
 
-    this.pendingColors.update((state) => ({ ...state, [semanticKey]: normalized }));
+    this.pendingColors.update(
+      (state): Record<string, string> => ({
+        ...state,
+        [semanticKey]: normalized,
+      })
+    );
   }
 
   public resetColor(semanticKey: string): void {
@@ -143,7 +148,7 @@ export class ThemeEditorService {
 
     const root = this.doc.documentElement;
 
-    Object.entries(original).forEach(([name, value]) => {
+    Object.entries(original).forEach(([name, value]): void => {
       if (value === null) {
         root.style.removeProperty(name);
       } else {
@@ -151,7 +156,7 @@ export class ThemeEditorService {
       }
     });
 
-    this.pendingColors.update((state) => {
+    this.pendingColors.update((state): Record<string, string> => {
       const next = { ...state } as Record<string, string>;
       delete next[semanticKey];
       return next;
@@ -160,7 +165,7 @@ export class ThemeEditorService {
 
   public resetAll(): void {
     const keys = Object.keys(this.pendingColors());
-    keys.forEach((key) => this.resetColor(key));
+    keys.forEach((key): void => this.resetColor(key));
   }
 
   public saveAsPreset(name: string): ThemePreset {
@@ -182,7 +187,7 @@ export class ThemeEditorService {
     if (!vars) {
       return;
     }
-    vars.forEach((name) => {
+    vars.forEach((name): void => {
       const value = styles.getPropertyValue(name).trim();
       original[name] = value || null;
     });
@@ -196,7 +201,7 @@ export class ThemeEditorService {
       return;
     }
 
-    vars.forEach((name) => {
+    vars.forEach((name): void => {
       const lower = name.toLowerCase();
       let value = variants.base;
 
@@ -233,7 +238,7 @@ export class ThemeEditorService {
     if (hex.length === 3) {
       const expanded = hex
         .split('')
-        .map((c) => `${c}${c}`)
+        .map((c): string => `${c}${c}`)
         .join('');
       return `#${expanded}`;
     }

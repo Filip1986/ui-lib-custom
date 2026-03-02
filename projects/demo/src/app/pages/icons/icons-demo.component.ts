@@ -97,10 +97,12 @@ export class IconsDemoComponent {
 
   private readonly allIcons = SEMANTIC_ICONS;
 
-  public readonly filteredIcons = computed<SemanticIcon[]>(() => {
+  public readonly filteredIcons = computed<SemanticIcon[]>((): SemanticIcon[] => {
     const query = this.searchQuery().toLowerCase();
     if (!query) return this.allIcons;
-    return this.allIcons.filter((icon) => icon.toLowerCase().includes(query));
+    return this.allIcons.filter((icon: SemanticIcon): boolean =>
+      icon.toLowerCase().includes(query)
+    );
   });
 
   public readonly snippets = {
@@ -117,7 +119,7 @@ export class IconsDemoComponent {
     try {
       void navigator.clipboard
         .writeText(`<ui-lib-icon name=\"${icon}\" />`)
-        .catch((err: unknown) => {
+        .catch((err: unknown): void => {
           console.error(err);
         });
     } catch {

@@ -117,17 +117,19 @@ export class Example {}`,
     { label: 'Unassigned', value: 'ungrouped' },
   ];
 
-  private readonly globalVars = computed(() => {
+  private readonly globalVars = computed<Record<string, string>>((): Record<string, string> => {
     const preset = this.themeService.preset();
     return this.themeService.getCssVars(preset);
   });
 
-  public readonly appliedTheme = computed(() => this.globalVars());
+  public readonly appliedTheme = computed<Record<string, string>>(
+    (): Record<string, string> => this.globalVars()
+  );
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
   constructor() {
-    effect(() => {
+    effect((): void => {
       if (!this.useGlobalVariant()) return;
       const v = this.themeService.preset().variant as SelectVariant;
       this.variant.set(v);

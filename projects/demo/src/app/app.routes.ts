@@ -98,14 +98,18 @@ export const routes: Routes = [
   { path: 'tabs', component: TabsDemoComponent, title: 'Tabs - UI Components Library' },
   {
     path: 'icons',
-    loadComponent: () =>
-      import('./pages/icons/icons-demo.component').then((m) => m.IconsDemoComponent),
+    loadComponent: (): Promise<unknown> =>
+      import('./pages/icons/icons-demo.component').then(
+        (m: { IconsDemoComponent: unknown }): unknown => m.IconsDemoComponent
+      ),
     title: 'Icons - UI Components Library',
   },
   {
     path: 'accordion',
-    loadComponent: () =>
-      import('./pages/accordion/accordion.component').then((m) => m.AccordionComponent),
+    loadComponent: (): Promise<unknown> =>
+      import('./pages/accordion/accordion.component').then(
+        (m: { AccordionComponent: unknown }): unknown => m.AccordionComponent
+      ),
     title: 'Accordion - UI Components Library',
   },
   {

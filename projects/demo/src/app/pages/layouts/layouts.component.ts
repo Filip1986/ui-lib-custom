@@ -97,7 +97,7 @@ export class LayoutsComponent {
   }
 
   public setViewportCustomWidth(value: number): void {
-    this.forEachViewport((vp: DocDemoViewportComponent) => vp.setCustomWidth(value));
+    this.forEachViewport((vp: DocDemoViewportComponent): void => vp.setCustomWidth(value));
   }
 
   public setViewportPreset(preset: {
@@ -106,19 +106,19 @@ export class LayoutsComponent {
     width: number;
     height: number;
   }): void {
-    this.forEachViewport((vp: DocDemoViewportComponent) => vp.setPreset(preset));
+    this.forEachViewport((vp: DocDemoViewportComponent): void => vp.setPreset(preset));
   }
 
   public applyViewportCustom(): void {
-    this.forEachViewport((vp: DocDemoViewportComponent) => vp.setCustom());
+    this.forEachViewport((vp: DocDemoViewportComponent): void => vp.setCustom());
   }
 
   public rotateViewport(): void {
-    this.forEachViewport((vp: DocDemoViewportComponent) => vp.rotate());
+    this.forEachViewport((vp: DocDemoViewportComponent): void => vp.rotate());
   }
 
   public setViewportDensity(value: 'default' | 'comfortable' | 'compact'): void {
-    this.forEachViewport((vp: DocDemoViewportComponent) => vp.setDensity(value));
+    this.forEachViewport((vp: DocDemoViewportComponent): void => vp.setDensity(value));
   }
 
   public readonly layoutExample = `<ui-lib-stack [gap]="3">

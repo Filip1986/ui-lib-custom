@@ -60,7 +60,7 @@ export class ThemesComponent {
   }
 
   public goToProjectStarter(): void {
-    void this.router.navigate(['/project-starter']).catch((err: unknown) => {
+    void this.router.navigate(['/project-starter']).catch((err: unknown): void => {
       console.error(err);
     });
   }

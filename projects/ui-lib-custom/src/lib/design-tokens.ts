@@ -654,7 +654,7 @@ const SHADOW_VALUES = [
 
 type ShadowKeyName = `shadow-${number}`;
 const NUMERIC_SHADOWS = SHADOW_VALUES.reduce(
-  (acc, value, idx) => {
+  (acc, value, idx): Record<ShadowKeyName, string> => {
     acc[`shadow-${idx + 1}` as ShadowKeyName] = value;
     return acc;
   },

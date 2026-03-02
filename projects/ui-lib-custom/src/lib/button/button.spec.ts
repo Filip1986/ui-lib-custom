@@ -42,11 +42,11 @@ class ButtonVariantHostComponent {
   public overrideVariant = signal<ButtonVariant | null>(null);
 }
 
-describe('Button', () => {
+describe('Button', (): void => {
   let component: Button;
   let fixture: ComponentFixture<Button>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Button, Icon, Badge],
       providers: [provideIcons({ lucideAudioWaveform })],
@@ -65,11 +65,11 @@ describe('Button', () => {
   const getBadge = (): HTMLElement | null =>
     rootEl().querySelector('ui-lib-badge') as HTMLElement | null;
 
-  it('should create', () => {
+  it('should create', (): void => {
     expect(component).toBeTruthy();
   });
 
-  it('applies classes from inputs', () => {
+  it('applies classes from inputs', (): void => {
     fixture.componentRef.setInput('variant', 'bootstrap');
     fixture.componentRef.setInput('size', 'large');
     fixture.componentRef.setInput('severity', 'danger');
@@ -83,7 +83,7 @@ describe('Button', () => {
     expect(btn.className).toContain('btn-appearance-outline');
   });
 
-  it('disables and sets aria state when disabled or loading', () => {
+  it('disables and sets aria state when disabled or loading', (): void => {
     fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
@@ -100,7 +100,7 @@ describe('Button', () => {
     expect(btn.getAttribute('aria-busy')).toBe('true');
   });
 
-  it('renders spinner when loading with custom icon', () => {
+  it('renders spinner when loading with custom icon', (): void => {
     fixture.componentRef.setInput('loading', true);
     fixture.componentRef.setInput('loadingIcon', 'lucideAudioWaveform');
     fixture.detectChanges();
@@ -111,29 +111,29 @@ describe('Button', () => {
     expect(iconComponent.resolvedName()).toBe('lucideAudioWaveform');
   });
 
-  describe('New modifiers', () => {
-    it('applies btn-raised class when raised is true', () => {
+  describe('New modifiers', (): void => {
+    it('applies btn-raised class when raised is true', (): void => {
       fixture.componentRef.setInput('raised', true);
       fixture.detectChanges();
 
       expect(getButton().classList.contains('btn-raised')).toBeTruthy();
     });
 
-    it('applies btn-rounded class when rounded is true', () => {
+    it('applies btn-rounded class when rounded is true', (): void => {
       fixture.componentRef.setInput('rounded', true);
       fixture.detectChanges();
 
       expect(getButton().classList.contains('btn-rounded')).toBeTruthy();
     });
 
-    it('applies btn-text class when text is true', () => {
+    it('applies btn-text class when text is true', (): void => {
       fixture.componentRef.setInput('text', true);
       fixture.detectChanges();
 
       expect(getButton().classList.contains('btn-text')).toBeTruthy();
     });
 
-    it('applies btn-link class when link is true', () => {
+    it('applies btn-link class when link is true', (): void => {
       fixture.componentRef.setInput('link', true);
       fixture.detectChanges();
 
@@ -141,8 +141,8 @@ describe('Button', () => {
     });
   });
 
-  describe('Modifier combinations', () => {
-    it('applies raised and rounded together', () => {
+  describe('Modifier combinations', (): void => {
+    it('applies raised and rounded together', (): void => {
       fixture.componentRef.setInput('raised', true);
       fixture.componentRef.setInput('rounded', true);
       fixture.detectChanges();
@@ -152,7 +152,7 @@ describe('Button', () => {
       expect(btn.classList.contains('btn-rounded')).toBeTruthy();
     });
 
-    it('applies text and rounded together', () => {
+    it('applies text and rounded together', (): void => {
       fixture.componentRef.setInput('text', true);
       fixture.componentRef.setInput('rounded', true);
       fixture.detectChanges();
@@ -162,7 +162,7 @@ describe('Button', () => {
       expect(btn.classList.contains('btn-rounded')).toBeTruthy();
     });
 
-    it('applies outlined and rounded together', () => {
+    it('applies outlined and rounded together', (): void => {
       fixture.componentRef.setInput('outlined', true);
       fixture.componentRef.setInput('rounded', true);
       fixture.detectChanges();
@@ -173,8 +173,8 @@ describe('Button', () => {
     });
   });
 
-  describe('Badge integration', () => {
-    it('renders badge with string content', () => {
+  describe('Badge integration', (): void => {
+    it('renders badge with string content', (): void => {
       fixture.componentRef.setInput('badge', '3');
       fixture.detectChanges();
 
@@ -186,7 +186,7 @@ describe('Button', () => {
       expect((badgeText as string).trim()).toBe('3');
     });
 
-    it('renders badge with number content', () => {
+    it('renders badge with number content', (): void => {
       fixture.componentRef.setInput('badge', 7);
       fixture.detectChanges();
 
@@ -197,7 +197,7 @@ describe('Button', () => {
       expect((badgeText as string).trim()).toBe('7');
     });
 
-    it('hides badge when null or undefined', () => {
+    it('hides badge when null or undefined', (): void => {
       fixture.componentRef.setInput('badge', null);
       fixture.detectChanges();
 
@@ -209,7 +209,7 @@ describe('Button', () => {
       expect(getBadge()).toBeNull();
     });
 
-    it('applies badge color class', () => {
+    it('applies badge color class', (): void => {
       fixture.componentRef.setInput('badge', '1');
       fixture.componentRef.setInput('badgeColor', 'info');
       fixture.detectChanges();
@@ -220,8 +220,8 @@ describe('Button', () => {
     });
   });
 
-  describe('Backward compatibility defaults', () => {
-    it('keeps default classes for variant, size, severity, and appearance', () => {
+  describe('Backward compatibility defaults', (): void => {
+    it('keeps default classes for variant, size, severity, and appearance', (): void => {
       fixture.detectChanges();
 
       const btn = getButton();
@@ -232,8 +232,8 @@ describe('Button', () => {
     });
   });
 
-  describe('Accessibility', () => {
-    it('sets aria-disabled and aria-busy appropriately', () => {
+  describe('Accessibility', (): void => {
+    it('sets aria-disabled and aria-busy appropriately', (): void => {
       fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
       let btn = getButton();
@@ -246,14 +246,14 @@ describe('Button', () => {
       expect(btn.getAttribute('aria-busy')).toBe('true');
     });
 
-    it('renders focusable button with type attribute', () => {
+    it('renders focusable button with type attribute', (): void => {
       fixture.detectChanges();
       const btn = getButton();
       expect(btn.getAttribute('type')).toBe('button');
       expect(btn.tabIndex).toBe(0);
     });
 
-    it('supports role, tabindex, and aria-pressed/checked overrides', () => {
+    it('supports role, tabindex, and aria-pressed/checked overrides', (): void => {
       fixture.componentRef.setInput('role', 'radio');
       fixture.componentRef.setInput('tabIndex', -1);
       fixture.componentRef.setInput('ariaPressed', true);
@@ -267,7 +267,7 @@ describe('Button', () => {
       expect(btn.getAttribute('aria-checked')).toBe('true');
     });
 
-    it('sets aria-label during loading', () => {
+    it('sets aria-label during loading', (): void => {
       fixture.componentRef.setInput('loading', true);
       fixture.componentRef.setInput('ariaLabel', 'Saving changes');
       fixture.detectChanges();
@@ -275,7 +275,7 @@ describe('Button', () => {
       expect(getButton().getAttribute('aria-label')).toBe('Saving changes');
     });
 
-    it('sets a fallback aria-label for icon-only buttons', () => {
+    it('sets a fallback aria-label for icon-only buttons', (): void => {
       fixture.componentRef.setInput('icon', 'lucideAudioWaveform');
       fixture.componentRef.setInput('iconOnly', true);
       fixture.detectChanges();
@@ -284,7 +284,7 @@ describe('Button', () => {
     });
   });
 
-  it('applies each variant class', () => {
+  it('applies each variant class', (): void => {
     const variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
 
     variants.forEach((variant: ButtonVariant): void => {
@@ -295,7 +295,7 @@ describe('Button', () => {
     });
   });
 
-  it('applies each severity/color class', () => {
+  it('applies each severity/color class', (): void => {
     const colors: ButtonColor[] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
 
     colors.forEach((color: ButtonColor): void => {
@@ -306,7 +306,7 @@ describe('Button', () => {
     });
   });
 
-  it('applies each size class', () => {
+  it('applies each size class', (): void => {
     const sizes: ButtonSize[] = ['small', 'medium', 'large'];
 
     sizes.forEach((size: ButtonSize): void => {
@@ -317,7 +317,7 @@ describe('Button', () => {
     });
   });
 
-  it('sets aria-disabled and blocks pointer events when disabled', () => {
+  it('sets aria-disabled and blocks pointer events when disabled', (): void => {
     fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
@@ -329,7 +329,7 @@ describe('Button', () => {
     expect(style.pointerEvents).toBe('none');
   });
 
-  it('shows loading spinner and disables interaction when loading', () => {
+  it('shows loading spinner and disables interaction when loading', (): void => {
     fixture.componentRef.setInput('loading', true);
     fixture.detectChanges();
 
@@ -341,7 +341,7 @@ describe('Button', () => {
     expect(btn.classList.contains('btn-loading')).toBeTruthy();
   });
 
-  it('renders icon on the left and right positions', () => {
+  it('renders icon on the left and right positions', (): void => {
     fixture.componentRef.setInput('icon', 'lucideAudioWaveform');
     fixture.componentRef.setInput('iconPosition', 'left');
     fixture.detectChanges();
@@ -362,14 +362,14 @@ describe('Button', () => {
     expect(rightStartIcon).toBeNull();
   });
 
-  it('applies full width class when fullWidth is true', () => {
+  it('applies full width class when fullWidth is true', (): void => {
     fixture.componentRef.setInput('fullWidth', true);
     fixture.detectChanges();
 
     expect(getButton().classList.contains('btn-full-width')).toBeTruthy();
   });
 
-  it('renders focus ring on focus-visible', () => {
+  it('renders focus ring on focus-visible', (): void => {
     const btn: HTMLButtonElement = getButton();
     const tabEvent: KeyboardEvent = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true });
     document.body.dispatchEvent(tabEvent);
@@ -384,21 +384,21 @@ describe('Button', () => {
     expect(hasOutline || hasBoxShadow).toBeTruthy();
   });
 
-  it('normalizes warn severity to warning', () => {
+  it('normalizes warn severity to warning', (): void => {
     fixture.componentRef.setInput('severity', 'warn');
     fixture.detectChanges();
 
     expect(getButton().classList.contains('btn-warning')).toBeTruthy();
   });
 
-  it('uses contrast severity when contrast is true', () => {
+  it('uses contrast severity when contrast is true', (): void => {
     fixture.componentRef.setInput('contrast', true);
     fixture.detectChanges();
 
     expect(getButton().classList.contains('btn-contrast')).toBeTruthy();
   });
 
-  it('prefers ghost appearance when text is true', () => {
+  it('prefers ghost appearance when text is true', (): void => {
     fixture.componentRef.setInput('appearance', 'solid');
     fixture.componentRef.setInput('text', true);
     fixture.detectChanges();
@@ -406,7 +406,7 @@ describe('Button', () => {
     expect(getButton().classList.contains('btn-appearance-ghost')).toBeTruthy();
   });
 
-  it('prefers outline appearance when outlined is true', () => {
+  it('prefers outline appearance when outlined is true', (): void => {
     fixture.componentRef.setInput('appearance', 'solid');
     fixture.componentRef.setInput('outlined', true);
     fixture.detectChanges();
@@ -414,7 +414,7 @@ describe('Button', () => {
     expect(getButton().classList.contains('btn-appearance-outline')).toBeTruthy();
   });
 
-  it('applies icon-only class when iconOnlyInput is true', () => {
+  it('applies icon-only class when iconOnlyInput is true', (): void => {
     fixture.componentRef.setInput('icon', 'lucideAudioWaveform');
     fixture.componentRef.setInput('iconOnlyInput', true);
     fixture.componentRef.setInput('iconOnly', null);
@@ -423,7 +423,7 @@ describe('Button', () => {
     expect(getButton().classList.contains('btn-icon-only')).toBeTruthy();
   });
 
-  it('adds vertical class for top or bottom icon positions', () => {
+  it('adds vertical class for top or bottom icon positions', (): void => {
     fixture.componentRef.setInput('icon', 'lucideAudioWaveform');
     fixture.componentRef.setInput('iconPosition', 'top');
     fixture.detectChanges();
@@ -436,7 +436,7 @@ describe('Button', () => {
     expect(getButton().classList.contains('btn-vertical')).toBeTruthy();
   });
 
-  it('maps badge severity help and contrast to supported badge colors', () => {
+  it('maps badge severity help and contrast to supported badge colors', (): void => {
     fixture.componentRef.setInput('badge', '1');
     fixture.componentRef.setInput('badgeSeverity', 'help');
     fixture.detectChanges();
@@ -453,7 +453,7 @@ describe('Button', () => {
     expect((badgeContrast as HTMLElement).classList.contains('badge-color-neutral')).toBeTruthy();
   });
 
-  it('applies shadow CSS variables when shadow is set', () => {
+  it('applies shadow CSS variables when shadow is set', (): void => {
     fixture.componentRef.setInput('shadow', '0 4px 8px rgba(0,0,0,0.2)');
     fixture.detectChanges();
 
@@ -465,7 +465,7 @@ describe('Button', () => {
     expect(shadowHoverValue).toContain('0 4px 8px');
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
@@ -483,7 +483,7 @@ describe('Button', () => {
   });
 });
 
-describe('Button interactions', () => {
+describe('Button interactions', (): void => {
   async function createFixture(
     initial?: Partial<ButtonClickHostComponent>
   ): Promise<ComponentFixture<ButtonClickHostComponent>> {
@@ -503,7 +503,7 @@ describe('Button interactions', () => {
   const getButton = (fixture: ComponentFixture<ButtonClickHostComponent>): HTMLButtonElement =>
     (fixture.nativeElement as HTMLElement).querySelector('button') as HTMLButtonElement;
 
-  it('emits click when enabled', async () => {
+  it('emits click when enabled', async (): Promise<void> => {
     const fixture: ComponentFixture<ButtonClickHostComponent> = await createFixture();
     const host: ButtonClickHostComponent = fixture.componentInstance;
     getButton(fixture).click();
@@ -512,7 +512,7 @@ describe('Button interactions', () => {
     expect(host.clickCount).toBe(1);
   });
 
-  it('does not emit click when disabled', async () => {
+  it('does not emit click when disabled', async (): Promise<void> => {
     const fixture: ComponentFixture<ButtonClickHostComponent> = await createFixture({
       disabled: true,
     });
@@ -524,7 +524,7 @@ describe('Button interactions', () => {
     expect(host.clickCount).toBe(0);
   });
 
-  it('does not emit click when loading', async () => {
+  it('does not emit click when loading', async (): Promise<void> => {
     const fixture: ComponentFixture<ButtonClickHostComponent> = await createFixture({
       loading: true,
     });
@@ -536,7 +536,7 @@ describe('Button interactions', () => {
     expect(host.clickCount).toBe(0);
   });
 
-  it('fires click on Enter and Space key presses', async () => {
+  it('fires click on Enter and Space key presses', async (): Promise<void> => {
     const fixture: ComponentFixture<ButtonClickHostComponent> = await createFixture();
     const host: ButtonClickHostComponent = fixture.componentInstance;
     const btn: HTMLButtonElement = getButton(fixture);
@@ -559,10 +559,10 @@ describe('Button interactions', () => {
   });
 });
 
-describe('Button variant', () => {
+describe('Button variant', (): void => {
   let fixture: ComponentFixture<ButtonVariantHostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ButtonVariantHostComponent],
     }).compileComponents();
@@ -571,7 +571,7 @@ describe('Button variant', () => {
     fixture.detectChanges();
   });
 
-  it('applies global variant and allows per-instance override', () => {
+  it('applies global variant and allows per-instance override', (): void => {
     const service: ThemeConfigService = TestBed.inject(ThemeConfigService);
     service.setVariant('bootstrap');
     fixture.detectChanges();

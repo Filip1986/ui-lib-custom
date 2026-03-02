@@ -30,7 +30,7 @@ export class TabPanel {
   public readonly labelId = input<string>('');
   public readonly active = input<boolean>(false);
 
-  public readonly panelClasses = computed<string>(() => {
+  public readonly panelClasses = computed<string>((): string => {
     const classes = ['tab-panel'];
     if (this.active()) {
       classes.push('tab-panel-active');

@@ -32,8 +32,8 @@ class TestHostComponent {
 })
 class DefaultHostComponent {}
 
-describe('Container', () => {
-  beforeEach(async () => {
+describe('Container', (): void => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent, DefaultHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -46,7 +46,7 @@ describe('Container', () => {
     containerElement: HTMLElement;
   } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
-    const component = fixture.componentInstance;
+    const component: TestHostComponent = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
     const containerElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
@@ -62,58 +62,58 @@ describe('Container', () => {
     return fixture;
   }
 
-  it('should create', () => {
+  it('should create', (): void => {
     const { containerElement } = bootstrap();
     expect(containerElement).toBeTruthy();
   });
 
-  it('should apply max-width from size token', () => {
+  it('should apply max-width from size token', (): void => {
     const { containerElement } = bootstrap();
     expect(containerElement.style.maxWidth).toContain('1024px'); // lg = 1024px fallback
   });
 
-  it('should apply different sizes', () => {
+  it('should apply different sizes', (): void => {
     const { containerElement } = bootstrap({ size: 'sm' });
     expect(containerElement.style.maxWidth).toContain('640px');
   });
 
-  it('should not center container by default', () => {
+  it('should not center container by default', (): void => {
     const { containerElement } = bootstrap();
     expect(containerElement.style.marginLeft).toBe('');
     expect(containerElement.style.marginRight).toBe('');
   });
 
-  it('should not center when centered is false', () => {
+  it('should not center when centered is false', (): void => {
     const { containerElement } = bootstrap({ centered: false });
     expect(containerElement.style.marginLeft).toBe('');
     expect(containerElement.style.marginRight).toBe('');
   });
 
-  it('should center when centered is true', () => {
+  it('should center when centered is true', (): void => {
     const { containerElement } = bootstrap({ centered: true });
     expect(containerElement.style.marginLeft).toBe('auto');
     expect(containerElement.style.marginRight).toBe('auto');
   });
 
-  it('should apply padding from design tokens', () => {
+  it('should apply padding from design tokens', (): void => {
     const { containerElement } = bootstrap();
     expect(containerElement.style.paddingLeft).toContain('1rem'); // padding 4 = 1rem fallback
     expect(containerElement.style.paddingRight).toContain('1rem');
   });
 
-  it('should apply full width', () => {
+  it('should apply full width', (): void => {
     const { containerElement } = bootstrap();
     expect(containerElement.style.width).toBe('100%');
   });
 
-  it('should project content', () => {
+  it('should project content', (): void => {
     const { containerElement } = bootstrap();
     const paragraph = containerElement.querySelector('p');
     expect(paragraph).toBeTruthy();
     expect(paragraph?.textContent).toBe('Container content');
   });
 
-  it('creates with no inputs', () => {
+  it('creates with no inputs', (): void => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
     const containerElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-container'
@@ -121,13 +121,13 @@ describe('Container', () => {
     expect(containerElement).toBeTruthy();
   });
 
-  it('uses inset tokens when inset is set', () => {
+  it('uses inset tokens when inset is set', (): void => {
     const { containerElement } = bootstrap({ inset: 'lg' });
     expect(containerElement.style.paddingLeft).toContain('1.5rem');
     expect(containerElement.style.paddingRight).toContain('1.5rem');
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const scope: HTMLDivElement = document.createElement('div');

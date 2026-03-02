@@ -44,8 +44,8 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 export class DarkModeComponent {
   private readonly themeService = inject(ThemeConfigService);
 
-  public readonly mode = computed<ThemeMode>(() => this.themeService.mode());
-  public readonly effectiveTheme = computed<'light' | 'dark'>(() =>
+  public readonly mode = computed<ThemeMode>((): ThemeMode => this.themeService.mode());
+  public readonly effectiveTheme = computed<'light' | 'dark'>((): 'light' | 'dark' =>
     this.themeService.effectiveTheme()
   );
   public readonly systemPreference = signal<'light' | 'dark'>('light');

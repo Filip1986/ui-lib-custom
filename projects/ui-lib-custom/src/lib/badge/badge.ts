@@ -64,7 +64,7 @@ export class Badge {
   /** Accessible label for the badge, used when screen reader support is needed */
   public readonly label = input<string | null>(null);
 
-  private readonly effectiveVariant = computed<BadgeVariant>(() => {
+  private readonly effectiveVariant = computed<BadgeVariant>((): BadgeVariant => {
     const direct = this.variant();
     if (direct) return direct;
     const global = this.themeConfig.variant();
@@ -77,7 +77,7 @@ export class Badge {
   });
 
   /** Computed CSS classes for the badge element */
-  public readonly badgeClasses = computed<string>(() => {
+  public readonly badgeClasses = computed<string>((): string => {
     const classes = [
       'badge',
       `badge-variant-${this.effectiveVariant()}`,
@@ -98,9 +98,11 @@ export class Badge {
 
   /** Computed ARIA label for the badge, falls back to color for dot badges */
   public readonly ariaLabel = computed<string | null>(
-    () => this.label() ?? (this.dot() ? this.color() : null)
+    (): string | null => this.label() ?? (this.dot() ? this.color() : null)
   );
 
   /** Computed role attribute for the badge, 'status' for dot badges */
-  public readonly roleAttr = computed<string | null>(() => (this.dot() ? 'status' : null));
+  public readonly roleAttr = computed<string | null>((): string | null =>
+    this.dot() ? 'status' : null
+  );
 }

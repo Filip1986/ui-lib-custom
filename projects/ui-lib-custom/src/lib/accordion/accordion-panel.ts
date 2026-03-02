@@ -83,7 +83,7 @@ export class AccordionPanel implements OnDestroy {
   private readonly uid: string = this.createId();
   private readonly internalExpanded = signal<boolean>(this.expanded());
 
-  public readonly hostClasses = computed<string>(() => {
+  public readonly hostClasses = computed<string>((): string => {
     const classes: string[] = ['ui-lib-accordion-panel', 'accordion-panel'];
     if (this.isExpanded()) {
       classes.push('accordion-panel-expanded');

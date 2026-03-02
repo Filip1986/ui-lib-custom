@@ -59,44 +59,50 @@ export class LayoutThemedLayoutsSectionComponent {
   public readonly leftTheme = signal<'light' | 'dark'>('light');
   public readonly rightTheme = signal<'light' | 'dark'>('dark');
 
-  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map((key) => ({
-    label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
-    value: key as ContainerSize,
-  }));
+  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map(
+    (key: string): { label: string; value: ContainerSize } => ({
+      label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
+      value: key as ContainerSize,
+    })
+  );
   public readonly insetOptions = Object.entries(INSET_TOKENS)
-    .filter(([key]) => key !== 'xs')
-    .map(([key, value]) => ({
+    .filter(([key]: [string, string]): boolean => key !== 'xs')
+    .map(([key, value]: [string, string]): { label: string; value: Exclude<InsetToken, 'xs'> } => ({
       label: `${key} (${value})`,
       value: key as Exclude<InsetToken, 'xs'>,
     }));
   public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
   public readonly inlineSpacingOptions = this.buildOptions(INLINE_TOKENS);
-  public readonly columnOptions = [2, 3, 4].map((c) => ({
-    label: `${c} cols`,
-    value: c as GridColumns,
-  }));
+  public readonly columnOptions = [2, 3, 4].map(
+    (c: number): { label: string; value: GridColumns } => ({
+      label: `${c} cols`,
+      value: c as GridColumns,
+    })
+  );
   public readonly themeOptions = [
     { label: 'Light', value: 'light' },
     { label: 'Dark', value: 'dark' },
   ];
 
-  public readonly sizeLabel = computed(() =>
+  public readonly sizeLabel = computed<string>((): string =>
     this.displayLabel(this.containerSize(), this.sizeOptions)
   );
-  public readonly insetLabel = computed(() =>
+  public readonly insetLabel = computed<string>((): string =>
     this.displayLabel(this.containerInset(), this.insetOptions)
   );
-  public readonly stackLabel = computed(() =>
+  public readonly stackLabel = computed<string>((): string =>
     this.displayLabel(this.stackSpacing(), this.spacingOptions)
   );
-  public readonly inlineLabel = computed(() =>
+  public readonly inlineLabel = computed<string>((): string =>
     this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions)
   );
-  public readonly gridSpacingLabel = computed(() =>
+  public readonly gridSpacingLabel = computed<string>((): string =>
     this.displayLabel(this.gridSpacing(), this.spacingOptions)
   );
-  public readonly columnsLabel = computed(() => `${this.columns()} cols`);
-  public readonly themePairLabel = computed(() => `${this.leftTheme()} / ${this.rightTheme()}`);
+  public readonly columnsLabel = computed<string>((): string => `${this.columns()} cols`);
+  public readonly themePairLabel = computed<string>(
+    (): string => `${this.leftTheme()} / ${this.rightTheme()}`
+  );
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);
@@ -151,17 +157,21 @@ export class LayoutThemedLayoutsSectionComponent {
   }
 
   private buildOptions<T extends string>(tokens: Record<T, string>): { label: string; value: T }[] {
-    return Object.entries(tokens as Record<string, string>).map(([key, value]) => ({
-      label: `${key} (${this.toPx(value)})`,
-      value: key as T,
-    }));
+    return Object.entries(tokens as Record<string, string>).map(
+      ([key, value]: [string, string]): { label: string; value: T } => ({
+        label: `${key} (${this.toPx(value)})`,
+        value: key as T,
+      })
+    );
   }
 
   private displayLabel<T extends string | number>(
     value: T,
     options: { label: string; value: T }[]
   ): string {
-    const match = options.find((option) => option.value === value);
+    const match = options.find(
+      (option: { label: string; value: T }): boolean => option.value === value
+    );
     return match ? match.label : String(value);
   }
 

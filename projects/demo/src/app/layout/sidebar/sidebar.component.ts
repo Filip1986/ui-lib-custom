@@ -154,16 +154,16 @@ export class SidebarComponent {
   ]);
 
   public toggleSection(item: NavItem): void {
-    this.menuItems.update((items) =>
-      items.map((it) => {
+    this.menuItems.update((items: NavItem[]): NavItem[] =>
+      items.map((it: NavItem): NavItem => {
         if (it === item) {
           return { ...it, expanded: !it.expanded };
         }
         if (it.items && it.items.includes(item)) {
           return {
             ...it,
-            items: it.items.map((sub) =>
-              sub === item ? { ...sub, expanded: !sub.expanded } : sub
+            items: it.items.map(
+              (sub: NavItem): NavItem => (sub === item ? { ...sub, expanded: !sub.expanded } : sub)
             ),
           };
         }

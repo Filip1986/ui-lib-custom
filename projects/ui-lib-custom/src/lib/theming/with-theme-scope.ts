@@ -22,7 +22,7 @@ export class WithThemeScopeMixin {
   }
 
   constructor() {
-    effect(() => {
+    effect((): void => {
       this.applyTheme();
     });
   }
@@ -66,7 +66,7 @@ export class WithThemeScopeMixin {
 
   private applyVariables(variables: Record<string, string>): void {
     const element: HTMLElement = this.hostElement;
-    Object.entries(variables).forEach(([key, value]) => {
+    Object.entries(variables).forEach(([key, value]): void => {
       const varName = key.startsWith('--') ? key : `--${key}`;
       element.style.setProperty(varName, value);
       this.appliedVars.add(varName);
@@ -81,7 +81,7 @@ export class WithThemeScopeMixin {
 
   private clearAppliedStyles(): void {
     const element: HTMLElement = this.hostElement;
-    this.appliedVars.forEach((key) => element.style.removeProperty(key));
+    this.appliedVars.forEach((key): void => element.style.removeProperty(key));
     this.appliedVars.clear();
     element.removeAttribute('data-variant');
   }

@@ -30,7 +30,7 @@ export function exportThemeAsCss(preset: ThemePreset, options: CssExportOptions 
   lines.push(`${selector} {`);
 
   lines.push('  /* Colors */');
-  Object.entries(preset.colors).forEach(([key, value]) => {
+  Object.entries(preset.colors).forEach(([key, value]): void => {
     lines.push(`  --uilib-${kebabCase(key)}: ${value};`);
   });
 

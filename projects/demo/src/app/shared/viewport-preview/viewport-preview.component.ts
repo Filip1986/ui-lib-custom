@@ -71,14 +71,14 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   public readonly isFullWidth: WritableSignal<boolean> = signal<boolean>(true);
   public readonly hostWidth: WritableSignal<number> = signal<number>(0);
 
-  public readonly displayWidth: Signal<number> = computed<number>(() => {
+  public readonly displayWidth: Signal<number> = computed<number>((): number => {
     if (this.isFullWidth()) {
       const hostWidth = this.hostWidth();
       return hostWidth > 0 ? hostWidth : this.width();
     }
     return this.isPortrait() ? this.height() : this.width();
   });
-  public readonly displayHeight: Signal<number> = computed<number>(() =>
+  public readonly displayHeight: Signal<number> = computed<number>((): number =>
     this.isPortrait() ? this.width() : this.height()
   );
 
@@ -87,7 +87,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
 
   public ngAfterViewInit(): void {
     if (this.frameHost?.nativeElement) {
-      this.resizeObserver = new ResizeObserver(() => this.computeScale());
+      this.resizeObserver = new ResizeObserver((): void => this.computeScale());
       this.resizeObserver.observe(
         this.frameHost.nativeElement.parentElement ?? this.frameHost.nativeElement
       );

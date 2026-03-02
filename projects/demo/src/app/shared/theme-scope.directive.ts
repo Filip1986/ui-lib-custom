@@ -25,14 +25,14 @@ export class ThemeScopeDirective implements OnChanges {
     const next = this.themeVars ?? {};
 
     // Remove old keys not present anymore
-    this.previousKeys.forEach((key) => {
+    this.previousKeys.forEach((key: string): void => {
       if (!(key in next)) {
         this.renderer.removeStyle(target, key);
       }
     });
 
     // Apply new/updated vars
-    Object.entries(next).forEach(([key, value]) => {
+    Object.entries(next).forEach(([key, value]): void => {
       this.renderer.setStyle(target, key, value);
       this.previousKeys.add(key);
     });

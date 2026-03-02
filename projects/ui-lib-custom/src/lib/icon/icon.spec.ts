@@ -4,11 +4,11 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideAlertCircle } from '@ng-icons/lucide';
 import { Icon } from 'ui-lib-custom/icon';
 
-describe('Icon', () => {
+describe('Icon', (): void => {
   let component: Icon;
   let fixture: ComponentFixture<Icon>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Icon],
       providers: [provideIcons({ lucideAlertCircle })],
@@ -21,15 +21,15 @@ describe('Icon', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', (): void => {
     expect(component).toBeTruthy();
   });
 
-  it('prefixes library names when missing', () => {
+  it('prefixes library names when missing', (): void => {
     expect(component.resolvedName()).toBe('lucideAlertCircle');
   });
 
-  it('keeps explicit prefixed names', () => {
+  it('keeps explicit prefixed names', (): void => {
     fixture.componentRef.setInput('library', 'lucide');
     fixture.componentRef.setInput('name', 'lucideAlertCircle');
     fixture.detectChanges();
@@ -37,14 +37,14 @@ describe('Icon', () => {
     expect(component.resolvedName()).toBe('lucideAlertCircle');
   });
 
-  it('maps sizes using token mapping', () => {
+  it('maps sizes using token mapping', (): void => {
     fixture.componentRef.setInput('size', 'lg');
     fixture.detectChanges();
 
     expect(component.resolvedSize()).toBe('1.5rem');
   });
 
-  it('marks clickable host class', () => {
+  it('marks clickable host class', (): void => {
     fixture.componentRef.setInput('clickable', true);
     fixture.detectChanges();
 
@@ -52,7 +52,7 @@ describe('Icon', () => {
     expect(host.classList.contains('ui-lib-icon--clickable')).toBeTruthy();
   });
 
-  it('sets role, tabindex, and aria-label when clickable', () => {
+  it('sets role, tabindex, and aria-label when clickable', (): void => {
     fixture.componentRef.setInput('clickable', true);
     fixture.componentRef.setInput('ariaLabel', 'Close');
     fixture.detectChanges();
@@ -63,7 +63,7 @@ describe('Icon', () => {
     expect(host.getAttribute('aria-label')).toBe('Close');
   });
 
-  it('activates click on Enter key when clickable', () => {
+  it('activates click on Enter key when clickable', (): void => {
     fixture.componentRef.setInput('clickable', true);
     fixture.detectChanges();
 
@@ -74,7 +74,7 @@ describe('Icon', () => {
     expect(clickSpy).toHaveBeenCalled();
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const light: string = getComputedStyle(root).getPropertyValue('--uilib-icon-color').trim();

@@ -22,7 +22,7 @@ type AxeResults = {
 };
 
 const isStringArray = (value: unknown): value is string[] =>
-  Array.isArray(value) && value.every((item) => typeof item === 'string');
+  Array.isArray(value) && value.every((item): boolean => typeof item === 'string');
 
 const isAxeViolation = (value: unknown): value is AxeViolation => {
   if (!value || typeof value !== 'object') {
@@ -37,7 +37,7 @@ const isAxeViolation = (value: unknown): value is AxeViolation => {
     typeof record.help === 'string' &&
     typeof record.helpUrl === 'string' &&
     Array.isArray(nodes) &&
-    nodes.every((node) => {
+    nodes.every((node): boolean => {
       if (!node || typeof node !== 'object') {
         return false;
       }
@@ -60,7 +60,9 @@ const isAxeResults = (value: unknown): value is AxeResults => {
     return true;
   }
   const violations = record.violations;
-  return Array.isArray(violations) && violations.every(isAxeViolation);
+  return (
+    Array.isArray(violations) && violations.every((violation): boolean => isAxeViolation(violation))
+  );
 };
 
 function generateReport(resultsPath: string): string {

@@ -15,14 +15,14 @@ const normalizeIconName = (value: string): string =>
   value
     .split(/[^a-zA-Z0-9]+/)
     .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .map((part): string => part.charAt(0).toUpperCase() + part.slice(1))
     .join('');
 
 const hasKnownPrefix = (value: string): boolean => {
   const prefixes = Object.values(ICON_LIBRARY_PREFIX)
     .filter(Boolean)
-    .map((p) => p.toLowerCase());
-  return prefixes.some((p) => value.toLowerCase().startsWith(p));
+    .map((p): string => p.toLowerCase());
+  return prefixes.some((p): boolean => value.toLowerCase().startsWith(p));
 };
 
 @Component({
@@ -60,11 +60,11 @@ export class Icon {
   public readonly variant = input<ComponentVariant | null>(null);
   public readonly semantic = input<boolean>(false);
 
-  private readonly resolvedLibrary = computed<IconLibrary>(() =>
-    this.iconService.resolveLibrary(this.library(), this.variant())
+  private readonly resolvedLibrary = computed<IconLibrary>(
+    (): IconLibrary => this.iconService.resolveLibrary(this.library(), this.variant())
   );
 
-  public readonly resolvedName = computed<string>(() => {
+  public readonly resolvedName = computed<string>((): string => {
     const library = this.resolvedLibrary();
     const raw = this.name();
     const base =
@@ -80,11 +80,13 @@ export class Icon {
     return `${prefix}${baseName}`;
   });
 
-  public readonly resolvedSize = computed<string>(() => this.iconService.getIconSize(this.size()));
-  public readonly ariaLabelResolved = computed<string | null>(() =>
+  public readonly resolvedSize = computed<string>((): string =>
+    this.iconService.getIconSize(this.size())
+  );
+  public readonly ariaLabelResolved = computed<string | null>((): string | null =>
     this.clickable() ? (this.ariaLabel() ?? 'Icon') : this.ariaLabel()
   );
-  public readonly ariaHidden = computed<string | null>(() =>
+  public readonly ariaHidden = computed<string | null>((): string | null =>
     this.clickable() || this.ariaLabel() ? null : 'true'
   );
 

@@ -41,8 +41,8 @@ class TestHostComponent {
 })
 class DefaultHostComponent {}
 
-describe('Stack', () => {
-  beforeEach(async () => {
+describe('Stack', (): void => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent, DefaultHostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -55,7 +55,7 @@ describe('Stack', () => {
     stackElement: HTMLElement;
   } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
-    const component = fixture.componentInstance;
+    const component: TestHostComponent = fixture.componentInstance;
     Object.assign(component, initial);
     fixture.detectChanges();
     const stackElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
@@ -71,49 +71,49 @@ describe('Stack', () => {
     return fixture;
   }
 
-  it('should create', () => {
+  it('should create', (): void => {
     const { stackElement } = bootstrap();
     expect(stackElement).toBeTruthy();
   });
 
-  it('should render vertical stack by default', () => {
+  it('should render vertical stack by default', (): void => {
     const { stackElement } = bootstrap();
     expect(stackElement.style.flexDirection).toBe('column');
   });
 
-  it('should render horizontal stack when direction is horizontal', () => {
+  it('should render horizontal stack when direction is horizontal', (): void => {
     const { stackElement } = bootstrap({ direction: 'horizontal' });
     expect(stackElement.style.flexDirection).toBe('row');
   });
 
-  it('should apply gap from design tokens', () => {
+  it('should apply gap from design tokens', (): void => {
     const { stackElement } = bootstrap();
     expect(stackElement.style.gap).toContain('1rem'); // gap 4 = 1rem fallback
   });
 
-  it('should apply different gap tokens', () => {
+  it('should apply different gap tokens', (): void => {
     const { stackElement } = bootstrap({ gap: 2 });
     expect(stackElement.style.gap).toContain('0.5rem'); // gap 2 = 0.5rem fallback
   });
 
-  it('should apply align-items', () => {
+  it('should apply align-items', (): void => {
     const { stackElement } = bootstrap({ align: 'center' });
     expect(stackElement.style.alignItems).toBe('center');
   });
 
-  it('should apply justify-content', () => {
+  it('should apply justify-content', (): void => {
     const { stackElement } = bootstrap({ justify: 'center' });
     expect(stackElement.style.justifyContent).toBe('center');
   });
 
-  it('should project content', () => {
+  it('should project content', (): void => {
     const { stackElement } = bootstrap();
     const items = stackElement.querySelectorAll('div');
     expect(items.length).toBe(3);
     expect(items[0].textContent).toBe('Item 1');
   });
 
-  it('creates with no inputs', () => {
+  it('creates with no inputs', (): void => {
     const fixture: ComponentFixture<DefaultHostComponent> = bootstrapDefault();
     const stackElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-stack'
@@ -121,17 +121,17 @@ describe('Stack', () => {
     expect(stackElement).toBeTruthy();
   });
 
-  it('uses semantic spacing tokens when spacing is set', () => {
+  it('uses semantic spacing tokens when spacing is set', (): void => {
     const { stackElement } = bootstrap({ spacing: 'lg' });
     expect(stackElement.style.gap).toContain('1.5rem');
   });
 
-  it('accepts numeric spacing when spacing is a number', () => {
+  it('accepts numeric spacing when spacing is a number', (): void => {
     const { stackElement } = bootstrap({ spacing: 2 });
     expect(stackElement.style.gap).toContain('0.5rem');
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const scope: HTMLDivElement = document.createElement('div');

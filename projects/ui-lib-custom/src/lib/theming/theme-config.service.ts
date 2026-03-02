@@ -75,16 +75,16 @@ export class ThemeConfigService {
     return this.doc.documentElement;
   }
 
-  public readonly preset = computed<ThemePreset>(() => this.presetSignal());
+  public readonly preset = computed<ThemePreset>((): ThemePreset => this.presetSignal());
   public readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
-  public readonly cssVars = computed<Record<string, string>>(() =>
-    this.mapPresetToCssVars(this.presetSignal())
+  public readonly cssVars = computed<Record<string, string>>(
+    (): Record<string, string> => this.mapPresetToCssVars(this.presetSignal())
   );
   public readonly mode: Signal<ThemeMode> = this.modeSignal.asReadonly();
   public readonly variant: Signal<ThemeVariant> = this.variantSignal.asReadonly();
   public readonly shape: Signal<ShapeToken> = this.shapeSignal.asReadonly();
   public readonly density: Signal<DensityToken> = this.densitySignal.asReadonly();
-  public readonly effectiveTheme = computed<'light' | 'dark'>(() => {
+  public readonly effectiveTheme = computed<'light' | 'dark'>((): 'light' | 'dark' => {
     const mode = this.modeSignal();
     if (mode === 'auto') {
       return this.getSystemPreference();
@@ -175,7 +175,7 @@ export class ThemeConfigService {
     }
 
     const vars = this.mapPresetToCssVars(current);
-    Object.entries(vars).forEach(([name, value]) => {
+    Object.entries(vars).forEach(([name, value]): void => {
       host.style.setProperty(name, value);
     });
   }
@@ -209,7 +209,7 @@ export class ThemeConfigService {
   public exportAsCSS(preset: ThemePreset = this.presetSignal()): string {
     const vars = this.mapPresetToCssVars(preset);
     const body = Object.entries(vars)
-      .map(([name, value]) => `  ${name}: ${value};`)
+      .map(([name, value]): string => `  ${name}: ${value};`)
       .join('\n');
     return `:root {\n${body}\n}`;
   }
@@ -232,7 +232,7 @@ export class ThemeConfigService {
     if (this.isThemePreset(presetOrOptions)) {
       const vars = this.mapPresetToCssVars(presetOrOptions);
       const body = Object.entries(vars)
-        .map(([name, value]) => `$${name.replace(/^--/, '')}: ${value};`)
+        .map(([name, value]): string => `$${name.replace(/^--/, '')}: ${value};`)
         .join('\n');
       const scss = `// Generated from UI Lib theme preset\n${body}\n`;
       if (download) {
@@ -391,7 +391,7 @@ export class ThemeConfigService {
     }
 
     this.mediaQuery = win.matchMedia('(prefers-color-scheme: dark)');
-    this.mediaQuery.addEventListener('change', () => {
+    this.mediaQuery.addEventListener('change', (): void => {
       if (this.modeSignal() === 'auto') {
         this.applyThemeToDocument();
       }
@@ -414,7 +414,7 @@ export class ThemeConfigService {
       }
     };
     const applyColor = (value: string, ...names: string[]): void => {
-      names.forEach((name) => set(name, value));
+      names.forEach((name): void => set(name, value));
     };
 
     const presetWithIcons = this.ensureIconDefaults(preset);
@@ -598,7 +598,9 @@ export class ThemeConfigService {
     set('--uilib-select-button-minimal-selected-fg', colors.text);
 
     const iconSizes = icons?.sizes ?? this.defaultIconConfig.sizes;
-    Object.entries(iconSizes).forEach(([key, value]) => set(`--uilib-icon-size-${key}`, value));
+    Object.entries(iconSizes).forEach(([key, value]): void =>
+      set(`--uilib-icon-size-${key}`, value)
+    );
 
     return vars;
   }
@@ -644,7 +646,7 @@ export class ThemeConfigService {
       (patch as Record<string, unknown> | null | undefined) ?? {};
     const clone: T = { ...(base as Record<string, unknown>) } as T;
 
-    Object.entries(source).forEach(([key, value]) => {
+    Object.entries(source).forEach(([key, value]): void => {
       if (value === undefined) {
         return;
       }

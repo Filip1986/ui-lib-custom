@@ -235,7 +235,7 @@ export class ExampleComponent { }`,
   }
 
   public getActiveVariant(): LoginVariant {
-    const current = this.variants.find((v) => v.id === this.activeVariant());
+    const current = this.variants.find((v: LoginVariant): boolean => v.id === this.activeVariant());
     if (current) {
       return current;
     }
@@ -257,9 +257,19 @@ export class ExampleComponent { }`,
   public async copyToClipboard(text: string, key: string): Promise<void> {
     try {
       await navigator.clipboard.writeText(text);
-      this.copiedStates.update((s) => ({ ...s, [key]: true }));
-      setTimeout(() => {
-        this.copiedStates.update((s) => ({ ...s, [key]: false }));
+      this.copiedStates.update(
+        (s: Record<string, boolean>): Record<string, boolean> => ({
+          ...s,
+          [key]: true,
+        })
+      );
+      setTimeout((): void => {
+        this.copiedStates.update(
+          (s: Record<string, boolean>): Record<string, boolean> => ({
+            ...s,
+            [key]: false,
+          })
+        );
       }, 2000);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err);
@@ -275,7 +285,7 @@ export class ExampleComponent { }`,
     console.warn('Login attempt:', data);
     this.loginLoading.set(true);
 
-    setTimeout(() => {
+    setTimeout((): void => {
       this.loginLoading.set(false);
       alert(`Login successful!\nUsername: ${data.username}`);
     }, 2000);

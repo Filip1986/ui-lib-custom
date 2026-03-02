@@ -58,6 +58,6 @@ export class FontPairingService {
   }
 
   public findByName(name: string): FontPairing | undefined {
-    return PAIRINGS.find((p) => p.name === name);
+    return PAIRINGS.find((p: FontPairing): boolean => p.name === name);
   }
 }

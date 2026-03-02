@@ -46,10 +46,10 @@ export class CodePreviewComponent {
   public readonly showCode = signal<boolean>(false);
   public readonly copied = signal<boolean>(false);
 
-  public readonly highlightedCode = computed<string>(() => this.escapeHtml(this.code()));
+  public readonly highlightedCode = computed<string>((): string => this.escapeHtml(this.code()));
 
   public toggleCode(): void {
-    this.showCode.update((value) => !value);
+    this.showCode.update((value: boolean): boolean => !value);
   }
 
   public async copyCode(): Promise<void> {
@@ -80,7 +80,7 @@ export class CodePreviewComponent {
 
   private showCopiedState(): void {
     this.copied.set(true);
-    setTimeout(() => this.copied.set(false), 2000);
+    setTimeout((): void => this.copied.set(false), 2000);
   }
 
   private escapeHtml(text: string): string {

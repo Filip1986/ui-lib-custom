@@ -140,10 +140,10 @@ class ReactiveFormNameHostComponent {
   });
 }
 
-describe('SelectButton', () => {
+describe('SelectButton', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [HostComponent],
       providers: [provideZonelessChangeDetection()],
@@ -163,30 +163,30 @@ describe('SelectButton', () => {
     return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button'));
   }
 
-  describe('Component creation', () => {
-    it('creates successfully', () => {
+  describe('Component creation', (): void => {
+    it('creates successfully', (): void => {
       expect(fixture.componentInstance).toBeTruthy();
     });
 
-    it('has default values', () => {
+    it('has default values', (): void => {
       expect(fixture.componentInstance.multiple()).toBeFalsy();
       expect(fixture.componentInstance.allowEmpty()).toBeFalsy();
       expect(fixture.componentInstance.variant()).toBe('material');
       expect(fixture.componentInstance.size()).toBe('md');
     });
 
-    it('renders correct number of option buttons', () => {
+    it('renders correct number of option buttons', (): void => {
       expect(buttons().length).toBe(3);
     });
 
-    it('applies aria-disabled when disabled', () => {
+    it('applies aria-disabled when disabled', (): void => {
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
 
       expect(hostEl().getAttribute('aria-disabled')).toBe('true');
     });
 
-    it('applies aria-invalid and invalid class when invalid', () => {
+    it('applies aria-invalid and invalid class when invalid', (): void => {
       fixture.componentInstance.invalid.set(true);
       fixture.detectChanges();
 
@@ -195,15 +195,15 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Single selection mode', () => {
-    it('selects item on click', () => {
+  describe('Single selection mode', (): void => {
+    it('selects item on click', (): void => {
       buttons()[0].click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBe('opt1');
     });
 
-    it('deselects when allowEmpty is true', () => {
+    it('deselects when allowEmpty is true', (): void => {
       fixture.componentInstance.allowEmpty.set(true);
       fixture.detectChanges();
 
@@ -216,7 +216,7 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.value).toBeNull();
     });
 
-    it('cannot deselect when allowEmpty is false', () => {
+    it('cannot deselect when allowEmpty is false', (): void => {
       buttons()[0].click();
       fixture.detectChanges();
 
@@ -225,7 +225,7 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.value).toBe('opt1');
     });
 
-    it('only one item selected at a time', () => {
+    it('only one item selected at a time', (): void => {
       buttons()[0].click();
       fixture.detectChanges();
       buttons()[1].click();
@@ -236,7 +236,7 @@ describe('SelectButton', () => {
       expect(buttons()[1].getAttribute('aria-checked')).toBe('true');
     });
 
-    it('emits onChange with correct value', () => {
+    it('emits onChange with correct value', (): void => {
       buttons()[0].click();
       fixture.detectChanges();
 
@@ -244,13 +244,13 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Multiple selection mode', () => {
-    beforeEach(() => {
+  describe('Multiple selection mode', (): void => {
+    beforeEach((): void => {
       fixture.componentInstance.multiple.set(true);
       fixture.detectChanges();
     });
 
-    it('selects multiple items', () => {
+    it('selects multiple items', (): void => {
       buttons()[0].click();
       buttons()[1].click();
       fixture.detectChanges();
@@ -258,7 +258,7 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.value).toEqual(['opt1', 'opt2']);
     });
 
-    it('toggles selection on click', () => {
+    it('toggles selection on click', (): void => {
       buttons()[0].click();
       fixture.detectChanges();
       buttons()[0].click();
@@ -267,14 +267,14 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.value).toEqual([]);
     });
 
-    it('emits onChange with array value', () => {
+    it('emits onChange with array value', (): void => {
       buttons()[0].click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.lastChange?.value).toEqual(['opt1']);
     });
 
-    it('can deselect all items', () => {
+    it('can deselect all items', (): void => {
       buttons()[0].click();
       buttons()[1].click();
       fixture.detectChanges();
@@ -287,8 +287,8 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Options binding', () => {
-    it('handles optionLabel property', () => {
+  describe('Options binding', (): void => {
+    it('handles optionLabel property', (): void => {
       const options: SelectButtonOption[] = [
         { label: 'Alpha', value: 1, name: 'A' },
         { label: 'Beta', value: 2, name: 'B' },
@@ -302,7 +302,7 @@ describe('SelectButton', () => {
       expect((text as string).trim()).toBe('A');
     });
 
-    it('handles optionValue property', () => {
+    it('handles optionValue property', (): void => {
       const options: SelectButtonOption[] = [
         { label: 'Alpha', value: 1, id: 'a' },
         { label: 'Beta', value: 2, id: 'b' },
@@ -317,7 +317,7 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.value).toBe('b');
     });
 
-    it('handles optionDisabled property', () => {
+    it('handles optionDisabled property', (): void => {
       const options: SelectButtonOption[] = [
         { label: 'Alpha', value: 'a', inactive: true },
         { label: 'Beta', value: 'b' },
@@ -332,7 +332,7 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.value).toBeNull();
     });
 
-    it('works with primitive values (string array)', async () => {
+    it('works with primitive values (string array)', async (): Promise<void> => {
       const primitiveFixture: ComponentFixture<PrimitiveHostComponent> =
         TestBed.createComponent(PrimitiveHostComponent);
       primitiveFixture.detectChanges();
@@ -346,7 +346,7 @@ describe('SelectButton', () => {
       expect(primitiveFixture.componentInstance.value).toBe('B');
     });
 
-    it('works with object values', async () => {
+    it('works with object values', async (): Promise<void> => {
       const objectFixture: ComponentFixture<ObjectValueHostComponent> =
         TestBed.createComponent(ObjectValueHostComponent);
       objectFixture.detectChanges();
@@ -361,8 +361,8 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Forms integration', () => {
-    it('works with ngModel', async () => {
+  describe('Forms integration', (): void => {
+    it('works with ngModel', async (): Promise<void> => {
       const ngModelFixture: ComponentFixture<NgModelHostComponent> =
         TestBed.createComponent(NgModelHostComponent);
       ngModelFixture.detectChanges();
@@ -376,7 +376,7 @@ describe('SelectButton', () => {
       expect(ngModelFixture.componentInstance.value).toBe('opt1');
     });
 
-    it('works with formControlName and writeValue updates selection', async () => {
+    it('works with formControlName and writeValue updates selection', async (): Promise<void> => {
       const reactiveFixture: ComponentFixture<ReactiveHostComponent> =
         TestBed.createComponent(ReactiveHostComponent);
       reactiveFixture.detectChanges();
@@ -391,7 +391,7 @@ describe('SelectButton', () => {
       expect(btns[0].getAttribute('aria-checked')).toBe('true');
     });
 
-    it('works with formControlName', () => {
+    it('works with formControlName', (): void => {
       const reactiveFixture: ComponentFixture<ReactiveFormNameHostComponent> =
         TestBed.createComponent(ReactiveFormNameHostComponent);
       reactiveFixture.detectChanges();
@@ -409,7 +409,7 @@ describe('SelectButton', () => {
       expect(btns[0].getAttribute('aria-checked')).toBe('true');
     });
 
-    it('marks control as touched on focusout', () => {
+    it('marks control as touched on focusout', (): void => {
       const reactiveFixture: ComponentFixture<ReactiveFormNameHostComponent> =
         TestBed.createComponent(ReactiveFormNameHostComponent);
       reactiveFixture.detectChanges();
@@ -425,7 +425,7 @@ describe('SelectButton', () => {
       expect(control.touched).toBeTruthy();
     });
 
-    it('reflects disabled state from control', () => {
+    it('reflects disabled state from control', (): void => {
       const reactiveFixture: ComponentFixture<ReactiveFormNameHostComponent> =
         TestBed.createComponent(ReactiveFormNameHostComponent);
       reactiveFixture.detectChanges();
@@ -441,7 +441,7 @@ describe('SelectButton', () => {
       expect(host.className).toContain('ui-lib-select-button--disabled');
     });
 
-    it('registerOnChange fires on selection', () => {
+    it('registerOnChange fires on selection', (): void => {
       const selectFixture: ComponentFixture<SelectButton> = TestBed.createComponent(SelectButton);
       selectFixture.componentRef.setInput('options', defaultOptions);
       selectFixture.detectChanges();
@@ -459,7 +459,7 @@ describe('SelectButton', () => {
       expect(onChangeSpy).toHaveBeenCalledWith('opt1');
     });
 
-    it('registerOnTouched fires on blur', () => {
+    it('registerOnTouched fires on blur', (): void => {
       const selectFixture: ComponentFixture<SelectButton> = TestBed.createComponent(SelectButton);
       selectFixture.componentRef.setInput('options', defaultOptions);
       selectFixture.detectChanges();
@@ -474,7 +474,7 @@ describe('SelectButton', () => {
       expect(onTouchedSpy).toHaveBeenCalled();
     });
 
-    it('setDisabledState works', () => {
+    it('setDisabledState works', (): void => {
       const selectFixture: ComponentFixture<SelectButton> = TestBed.createComponent(SelectButton);
       selectFixture.componentRef.setInput('options', defaultOptions);
       selectFixture.detectChanges();
@@ -486,7 +486,7 @@ describe('SelectButton', () => {
       expect(host.className).toContain('ui-lib-select-button--disabled');
     });
 
-    it('writeValue updates selection', () => {
+    it('writeValue updates selection', (): void => {
       const selectFixture: ComponentFixture<SelectButton> = TestBed.createComponent(SelectButton);
       selectFixture.componentRef.setInput('options', defaultOptions);
       selectFixture.detectChanges();
@@ -501,8 +501,8 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Disabled state', () => {
-    it('component-level disabled prevents interaction', () => {
+  describe('Disabled state', (): void => {
+    it('component-level disabled prevents interaction', (): void => {
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
 
@@ -512,14 +512,14 @@ describe('SelectButton', () => {
       expect(fixture.componentInstance.value).toBeNull();
     });
 
-    it('per-option disabled prevents specific option interaction', () => {
+    it('per-option disabled prevents specific option interaction', (): void => {
       buttons()[2].click();
       fixture.detectChanges();
 
       expect(fixture.componentInstance.value).toBeNull();
     });
 
-    it('disabled styling applied', () => {
+    it('disabled styling applied', (): void => {
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
 
@@ -527,26 +527,26 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Variants & sizes', () => {
-    it('material variant applies correct classes', () => {
+  describe('Variants & sizes', (): void => {
+    it('material variant applies correct classes', (): void => {
       fixture.componentInstance.variant.set('material');
       fixture.detectChanges();
       expect(hostEl().className).toContain('ui-lib-select-button--material');
     });
 
-    it('bootstrap variant applies correct classes', () => {
+    it('bootstrap variant applies correct classes', (): void => {
       fixture.componentInstance.variant.set('bootstrap');
       fixture.detectChanges();
       expect(hostEl().className).toContain('ui-lib-select-button--bootstrap');
     });
 
-    it('minimal variant applies correct classes', () => {
+    it('minimal variant applies correct classes', (): void => {
       fixture.componentInstance.variant.set('minimal');
       fixture.detectChanges();
       expect(hostEl().className).toContain('ui-lib-select-button--minimal');
     });
 
-    it('size classes applied correctly', () => {
+    it('size classes applied correctly', (): void => {
       const sizes: SelectButtonSize[] = ['small', 'medium', 'large'];
       sizes.forEach((size: SelectButtonSize): void => {
         fixture.componentInstance.size.set(size);
@@ -556,34 +556,34 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Accessibility', () => {
-    it('has role="group" on container', () => {
+  describe('Accessibility', (): void => {
+    it('has role="group" on container', (): void => {
       expect(hostEl().getAttribute('role')).toBe('radiogroup');
       fixture.componentInstance.multiple.set(true);
       fixture.detectChanges();
       expect(hostEl().getAttribute('role')).toBe('group');
     });
 
-    it('buttons render as native button elements', () => {
+    it('buttons render as native button elements', (): void => {
       const button: HTMLButtonElement = buttons()[0];
       expect(button.tagName.toLowerCase()).toBe('button');
     });
 
-    it('aria-pressed reflects selection state', () => {
+    it('aria-pressed reflects selection state', (): void => {
       buttons()[0].click();
       fixture.detectChanges();
 
       expect(buttons()[0].getAttribute('aria-checked')).toBe('true');
     });
 
-    it('aria-labelledby applied when set', () => {
+    it('aria-labelledby applied when set', (): void => {
       fixture.componentInstance.ariaLabelledBy.set('label-id');
       fixture.detectChanges();
 
       expect(hostEl().getAttribute('aria-labelledby')).toBe('label-id');
     });
 
-    it('keyboard navigation (Space) toggles selection', () => {
+    it('keyboard navigation (Space) toggles selection', (): void => {
       hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
       fixture.detectChanges();
 
@@ -591,8 +591,8 @@ describe('SelectButton', () => {
     });
   });
 
-  describe('Custom templates', () => {
-    it('renders custom item template', async () => {
+  describe('Custom templates', (): void => {
+    it('renders custom item template', async (): Promise<void> => {
       const templateFixture: ComponentFixture<TemplateHostComponent> =
         TestBed.createComponent(TemplateHostComponent);
       templateFixture.detectChanges();
@@ -607,7 +607,7 @@ describe('SelectButton', () => {
     });
   });
 
-  it('applies dark theme variables', () => {
+  it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
     const scope: HTMLDivElement = document.createElement('div');
@@ -628,10 +628,10 @@ describe('SelectButton', () => {
   });
 });
 
-describe('SelectButton keyboard behavior', () => {
+describe('SelectButton keyboard behavior', (): void => {
   let fixture: ComponentFixture<SelectButton>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [SelectButton],
     }).compileComponents();
@@ -649,14 +649,14 @@ describe('SelectButton keyboard behavior', () => {
     return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button'));
   }
 
-  it('moves focus with arrow keys', () => {
+  it('moves focus with arrow keys', (): void => {
     hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
     fixture.detectChanges();
 
     expect(fixture.componentInstance.focusedIndex()).toBe(1);
   });
 
-  it('moves focus to start/end with Home/End', () => {
+  it('moves focus to start/end with Home/End', (): void => {
     hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }));
     fixture.detectChanges();
     expect(fixture.componentInstance.focusedIndex()).toBe(1);
@@ -666,7 +666,7 @@ describe('SelectButton keyboard behavior', () => {
     expect(fixture.componentInstance.focusedIndex()).toBe(0);
   });
 
-  it('commits focused option on Enter', () => {
+  it('commits focused option on Enter', (): void => {
     hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
     fixture.detectChanges();
 
@@ -676,7 +676,7 @@ describe('SelectButton keyboard behavior', () => {
     expect(buttons()[1].getAttribute('aria-checked')).toBe('true');
   });
 
-  it('tabIndexFor returns 0 for active option', () => {
+  it('tabIndexFor returns 0 for active option', (): void => {
     fixture.componentInstance.focusedIndex.set(0);
     fixture.detectChanges();
 
@@ -685,10 +685,10 @@ describe('SelectButton keyboard behavior', () => {
   });
 });
 
-describe('SelectButton resolvers', () => {
+describe('SelectButton resolvers', (): void => {
   let fixture: ComponentFixture<SelectButton>;
 
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [SelectButton],
     }).compileComponents();
@@ -696,7 +696,7 @@ describe('SelectButton resolvers', () => {
     fixture = TestBed.createComponent(SelectButton);
   });
 
-  it('resolveLabel falls back to value', () => {
+  it('resolveLabel falls back to value', (): void => {
     const option: SelectButtonOption = { value: 'Alpha' } as SelectButtonOption;
     fixture.detectChanges();
 
@@ -704,7 +704,7 @@ describe('SelectButton resolvers', () => {
     expect(label).toBe('Alpha');
   });
 
-  it('resolveValue falls back to label and option', () => {
+  it('resolveValue falls back to label and option', (): void => {
     const option: SelectButtonOption = { label: 'Alpha' } as SelectButtonOption;
     fixture.detectChanges();
 
@@ -712,7 +712,7 @@ describe('SelectButton resolvers', () => {
     expect(value).toBe('Alpha');
   });
 
-  it('trackOption returns index for object values', () => {
+  it('trackOption returns index for object values', (): void => {
     const option: SelectButtonOption = { label: 'Alpha', value: { id: 1 } } as SelectButtonOption;
     fixture.detectChanges();
 
@@ -720,7 +720,7 @@ describe('SelectButton resolvers', () => {
     expect(track).toBe(2);
   });
 
-  it('activeIndex uses selected value when available', () => {
+  it('activeIndex uses selected value when available', (): void => {
     const options: SelectButtonOption[] = [
       { label: 'A', value: 'a' },
       { label: 'B', value: 'b' },

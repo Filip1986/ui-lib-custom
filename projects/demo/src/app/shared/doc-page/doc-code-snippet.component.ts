@@ -44,6 +44,6 @@ export class DocCodeSnippetComponent {
 
   private showCopiedState(): void {
     this.copied.set(true);
-    setTimeout(() => this.copied.set(false), 1500);
+    setTimeout((): void => this.copied.set(false), 1500);
   }
 }

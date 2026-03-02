@@ -79,12 +79,15 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
     const ids = this.flattenSections(this.sections);
     if (!ids.length) return;
 
-    this.observer = new IntersectionObserver((entries) => this.updateActive(entries, ids), {
-      rootMargin: `-${this.topOffset}px 0px -60% 0px`,
-      threshold: [0, 0.25, 0.5, 1],
-    });
+    this.observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]): void => this.updateActive(entries, ids),
+      {
+        rootMargin: `-${this.topOffset}px 0px -60% 0px`,
+        threshold: [0, 0.25, 0.5, 1],
+      }
+    );
 
-    ids.forEach((id) => {
+    ids.forEach((id: string): void => {
       const el = this.document.getElementById(id);
       if (el) {
         this.observer?.observe(el);
@@ -94,8 +97,11 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
 
   private updateActive(entries: IntersectionObserverEntry[], ids: string[]): void {
     const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      .filter((entry: IntersectionObserverEntry): boolean => entry.isIntersecting)
+      .sort(
+        (a: IntersectionObserverEntry, b: IntersectionObserverEntry): number =>
+          a.boundingClientRect.top - b.boundingClientRect.top
+      );
 
     const first = visible[0];
     const nextActive = first ? (first.target as HTMLElement).id : this.findNearestAbove(ids);
@@ -110,7 +116,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
     const offsetTop = scrollY + this.topOffset + 8;
 
     const positions = ids
-      .map((id) => {
+      .map((id: string): { id: string; top: number } | null => {
         const el = this.document.getElementById(id);
         return el ? { id, top: el.getBoundingClientRect().top + scrollY } : null;
       })
@@ -129,9 +135,9 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
   }
 
   private flattenSections(sections: DocSection[]): string[] {
-    return sections.flatMap((section) => [
+    return sections.flatMap((section: DocSection): string[] => [
       section.id,
-      ...(section.children?.map((child) => child.id) ?? []),
+      ...(section.children?.map((child: DocSection): string => child.id) ?? []),
     ]);
   }
 }
