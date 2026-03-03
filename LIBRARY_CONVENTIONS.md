@@ -283,3 +283,15 @@ All CSS custom properties MUST follow this pattern:
 - **Themes** define colors, spacing, and shape via CSS variables
 - Variants are chosen at component level; themes apply globally
 - All components must react to theme changes without rebuild
+
+## Comments
+
+### When to comment
+- **Always**: non-obvious logic, workarounds, ARIA decisions, CSS variable naming rationale
+- **Never**: obvious code (`// increment counter` above `count++`)
+- **Public API**: all exported classes and inputs must have JSDoc descriptions
+
+### Format
+- Prefer `//` for inline explanations
+- Use `/** */` JSDoc for all exported symbols
+- Reference related specs or issues for workarounds: `// See: https://...`

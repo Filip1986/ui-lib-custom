@@ -5,6 +5,7 @@ import tsParser from '@typescript-eslint/parser';
 import angularPlugin from '@angular-eslint/eslint-plugin';
 import angularTemplateParser from '@angular-eslint/template-parser';
 import angularTemplatePlugin from '@angular-eslint/eslint-plugin-template';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -36,6 +37,7 @@ export default [
     plugins: {
       '@typescript-eslint': tseslint,
       '@angular-eslint': angularPlugin,
+      jsdoc: jsdoc,
     },
     rules: {
       // TypeScript safety and correctness.
@@ -52,6 +54,20 @@ export default [
           arrayDestructuring: false,
         },
       ],
+      // JSDoc: require descriptions on exported symbols only.
+      'jsdoc/require-jsdoc': [
+        'warn',
+        {
+          publicOnly: true,
+          require: {
+            ClassDeclaration: true,
+            MethodDefinition: false,
+            FunctionDeclaration: false,
+          },
+          checkConstructors: false,
+        },
+      ],
+      'jsdoc/require-description': ['warn', { contexts: ['ClassDeclaration'] }],
       '@typescript-eslint/explicit-function-return-type': [
         'error',
         {
