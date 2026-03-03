@@ -38,8 +38,8 @@ const samplePreset: () => ThemePreset = (): ThemePreset => ({
 });
 
 function getRequiredItem<T>(items: T[], index: number, label: string): T {
-  const item: T = items[index];
-  if (!item) {
+  const item: T | undefined = items[index];
+  if (item === undefined) {
     throw new Error(`Expected ${label} at index ${index}.`);
   }
   return item;

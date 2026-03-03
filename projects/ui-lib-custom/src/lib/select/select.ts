@@ -93,15 +93,15 @@ export class UiLibSelect implements ControlValueAccessor {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  private readonly onChange: (value: SelectCvaValue) => void = (): void => {};
-  private readonly onTouched: () => void = (): void => {};
+  private onChange: (value: SelectCvaValue) => void = (): void => {};
+  private onTouched: () => void = (): void => {};
 
-  public registerOnChange(_fn: (value: SelectCvaValue) => void): void {
-    // Implementation would set this.onChange if it wasn't readonly
+  public registerOnChange(fn: (value: SelectCvaValue) => void): void {
+    this.onChange = fn;
   }
 
-  public registerOnTouched(_fn: () => void): void {
-    // Implementation would set this.onTouched if it wasn't readonly
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
   }
 
   public setDisabledState(isDisabled: boolean): void {
@@ -250,6 +250,8 @@ export class UiLibSelect implements ControlValueAccessor {
     this.open.set(false);
     this.focusedIndex.set(-1);
     this.filter.set('');
+    this.onTouched();
+    this.el.nativeElement.focus();
   }
 
   public selectOption(opt: SelectOption): void {

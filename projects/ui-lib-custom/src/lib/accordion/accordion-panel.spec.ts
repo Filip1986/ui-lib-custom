@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal, type WritableSignal } from '@angular/core';
+import { Component, signal, type DebugElement, type WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
-import { By, type DebugElement } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 import { Icon } from '../icon/icon';
 import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from 'ui-lib-custom';
 

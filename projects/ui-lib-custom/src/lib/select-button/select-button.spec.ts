@@ -11,7 +11,7 @@ import type {
   SelectButtonSize,
   SelectButtonVariant,
   SelectButtonValue,
-} from 'ui-lib-custom';
+} from './select-button.types';
 
 const defaultOptions: SelectButtonOption[] = [
   { label: 'Option 1', value: 'opt1' },
@@ -59,7 +59,9 @@ class HostComponent {
   public readonly multiple: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variant: WritableSignal<SelectButtonVariant> =
     signal<SelectButtonVariant>('material');
-  public readonly size: WritableSignal<SelectButtonSize> = signal<SelectButtonSize>('md');
+  public readonly size: WritableSignal<SelectButtonSize> = signal<SelectButtonSize>(
+    'md' as SelectButtonSize
+  );
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly allowEmpty: WritableSignal<boolean> = signal<boolean>(false);
