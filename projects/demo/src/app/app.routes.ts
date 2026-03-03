@@ -100,14 +100,16 @@ export const routes: Routes = [
   {
     path: 'icons',
     loadComponent: (): Promise<Type<unknown>> =>
-      import('./pages/icons/icons-demo.component').then((m): Type<unknown> => m.IconsDemoComponent),
+      import('./pages/icons/icons-demo.component').then(
+        (m: { IconsDemoComponent: Type<unknown> }): Type<unknown> => m.IconsDemoComponent
+      ),
     title: 'Icons - UI Components Library',
   },
   {
     path: 'accordion',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/accordion/accordion.component').then(
-        (m): Type<unknown> => m.AccordionComponent
+        (m: { AccordionComponent: Type<unknown> }): Type<unknown> => m.AccordionComponent
       ),
     title: 'Accordion - UI Components Library',
   },

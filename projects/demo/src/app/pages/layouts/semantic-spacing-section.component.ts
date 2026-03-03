@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+  type Signal,
+  type WritableSignal,
+} from '@angular/core';
 import {
   Button,
   Card,
@@ -8,22 +15,17 @@ import {
   Stack,
   Tab,
   Tabs,
-  TabsValue,
   UiLibSelect,
-} from 'ui-lib-custom';
-import {
   INSET_TOKENS,
   INLINE_TOKENS,
   STACK_TOKENS,
-  InsetToken,
-  InlineToken,
-  StackToken,
 } from 'ui-lib-custom';
+import type { TabsValue, InsetToken, InlineToken, StackToken } from 'ui-lib-custom';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
 @Component({
@@ -64,30 +66,36 @@ export class LayoutSemanticSpacingSectionComponent {
 </ui-lib-stack>
 `;
 
-  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
+    'demo' | 'usage' | 'api'
+  >('demo');
 
-  public readonly stackSpacing = signal<StackToken>('sm');
-  public readonly inlineSpacing = signal<InlineToken>('sm');
-  public readonly gridSpacing = signal<StackToken>('md');
-  public readonly inset = signal<Exclude<InsetToken, 'xs'>>('lg');
+  public readonly stackSpacing: WritableSignal<StackToken> = signal<StackToken>('sm');
+  public readonly inlineSpacing: WritableSignal<InlineToken> = signal<InlineToken>('sm');
+  public readonly gridSpacing: WritableSignal<StackToken> = signal<StackToken>('md');
+  public readonly inset: WritableSignal<Exclude<InsetToken, 'xs'>> =
+    signal<Exclude<InsetToken, 'xs'>>('lg');
 
-  public readonly stackOptions = this.buildOptions<StackToken>(STACK_TOKENS);
-  public readonly inlineOptions = this.buildOptions<InlineToken>(INLINE_TOKENS);
-  public readonly insetOptions = this.buildOptions<Exclude<InsetToken, 'xs'>>(
-    INSET_TOKENS as Record<InsetToken, string>,
-    (key: string): boolean => key !== 'xs'
-  );
+  public readonly stackOptions: { label: string; value: StackToken }[] =
+    this.buildOptions<StackToken>(STACK_TOKENS);
+  public readonly inlineOptions: { label: string; value: InlineToken }[] =
+    this.buildOptions<InlineToken>(INLINE_TOKENS);
+  public readonly insetOptions: { label: string; value: Exclude<InsetToken, 'xs'> }[] =
+    this.buildOptions<Exclude<InsetToken, 'xs'>>(
+      INSET_TOKENS as Record<InsetToken, string>,
+      (key: string): boolean => key !== 'xs'
+    );
 
-  public readonly stackSpacingLabel = computed<string>((): string =>
+  public readonly stackSpacingLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.stackSpacing(), this.stackOptions)
   );
-  public readonly inlineSpacingLabel = computed<string>((): string =>
+  public readonly inlineSpacingLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.inlineSpacing(), this.inlineOptions)
   );
-  public readonly gridSpacingLabel = computed<string>((): string =>
+  public readonly gridSpacingLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.gridSpacing(), this.stackOptions)
   );
-  public readonly insetLabel = computed<string>((): string =>
+  public readonly insetLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.inset(), this.insetOptions)
   );
 
@@ -136,7 +144,7 @@ export class LayoutSemanticSpacingSectionComponent {
   }
 
   private displayLabel<T extends string>(value: T, options: { label: string; value: T }[]): string {
-    const match = options.find(
+    const match: { label: string; value: T } | undefined = options.find(
       (option: { label: string; value: T }): boolean => option.value === value
     );
     return match ? match.label : String(value);
@@ -144,8 +152,8 @@ export class LayoutSemanticSpacingSectionComponent {
 
   private toPx(value: string): string {
     if (value.endsWith('rem')) {
-      const numeric = Number.parseFloat(value.replace('rem', ''));
-      const pixels = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
+      const numeric: number = Number.parseFloat(value.replace('rem', ''));
+      const pixels: number = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
       return `${pixels}px`;
     }
     return value;

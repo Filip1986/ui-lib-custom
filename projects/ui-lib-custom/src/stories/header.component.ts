@@ -70,11 +70,11 @@ export class HeaderComponent {
   public user: User | null = null;
 
   @Output()
-  public login = new EventEmitter<Event>();
+  public login: EventEmitter<Event> = new EventEmitter<Event>();
 
   @Output()
-  public logout = new EventEmitter<Event>();
+  public logout: EventEmitter<Event> = new EventEmitter<Event>();
 
   @Output()
-  public createAccount = new EventEmitter<Event>();
+  public createAccount: EventEmitter<Event> = new EventEmitter<Event>();
 }

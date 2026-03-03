@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Accordion } from './accordion';
-import { AccordionPanel } from './accordion-panel';
-import {
+import { AccordionPanel } from 'ui-lib-custom';
+import type {
   AccordionChangeEvent,
   AccordionExpandMode,
   AccordionSize,
   AccordionVariant,
-} from './accordion.types';
+} from 'ui-lib-custom';
 
 interface AccordionConfig {
   variant: AccordionVariant;
@@ -48,13 +49,14 @@ interface AccordionConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  public readonly variant = signal<AccordionVariant>('material');
-  public readonly size = signal<AccordionSize>('md');
-  public readonly expandMode = signal<AccordionExpandMode>('single');
-  public readonly expandedPanels = signal<string[]>([]);
-  public readonly defaultExpandedPanels = signal<string[]>([]);
-  public readonly disabledSecond = signal<boolean>(false);
-  public readonly disabledThird = signal<boolean>(false);
+  public readonly variant: WritableSignal<AccordionVariant> = signal<AccordionVariant>('material');
+  public readonly size: WritableSignal<AccordionSize> = signal<AccordionSize>('md');
+  public readonly expandMode: WritableSignal<AccordionExpandMode> =
+    signal<AccordionExpandMode>('single');
+  public readonly expandedPanels: WritableSignal<string[]> = signal<string[]>([]);
+  public readonly defaultExpandedPanels: WritableSignal<string[]> = signal<string[]>([]);
+  public readonly disabledSecond: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly disabledThird: WritableSignal<boolean> = signal<boolean>(false);
   public readonly expandedEvents: AccordionChangeEvent[] = [];
   public readonly toggleEvents: AccordionChangeEvent[] = [];
 
@@ -122,7 +124,7 @@ describe('Accordion', (): void => {
   }
 
   function getRequiredElement<T extends Element>(elements: T[], index: number, label: string): T {
-    const element = elements[index];
+    const element: T | undefined = elements[index];
     if (!element) {
       throw new Error(`Expected ${label} at index ${index}.`);
     }
@@ -131,7 +133,7 @@ describe('Accordion', (): void => {
 
   function togglePanel(fixture: ComponentFixture<TestHostComponent>, index: number): void {
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header = getRequiredElement(headers, index, 'accordion header');
+    const header: HTMLElement = getRequiredElement(headers, index, 'accordion header');
     header.click();
     fixture.detectChanges();
   }
@@ -145,7 +147,9 @@ describe('Accordion', (): void => {
   }
 
   it('creates accordion and panels with projected content', async (): Promise<void> => {
-    const fixture = createTestAccordion({ expandedPanels: ['panel-1'] });
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion({
+      expandedPanels: ['panel-1'],
+    });
     await stabilizeAccordion(fixture);
     const headers: HTMLElement[] = getPanelHeaders(fixture);
     const contentOne: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
@@ -155,15 +159,15 @@ describe('Accordion', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
     expect(headers.length).toBe(3);
     expect(contentOne).toBeTruthy();
-    const contentText = (contentOne as HTMLElement).textContent;
+    const contentText: string | null = (contentOne as HTMLElement).textContent;
     expect(contentText).toBeTruthy();
     expect((contentText as string).trim()).toBe('Content One');
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
     expect(header0.getAttribute('aria-expanded')).toBe('true');
   });
 
   it('applies variant and size classes and updates on change', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const accordionEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-accordion'
     ) as HTMLElement;
@@ -180,10 +184,10 @@ describe('Accordion', (): void => {
   });
 
   it('opens only one panel in single mode', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
-    const header1 = getRequiredElement(headers, 1, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
+    const header1: HTMLElement = getRequiredElement(headers, 1, 'accordion header');
 
     togglePanel(fixture, 0);
     expect(header0.getAttribute('aria-expanded')).toBe('true');
@@ -194,10 +198,12 @@ describe('Accordion', (): void => {
   });
 
   it('allows multiple panels in multiple mode', (): void => {
-    const fixture = createTestAccordion({ expandMode: 'multiple' });
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion({
+      expandMode: 'multiple',
+    });
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
-    const header1 = getRequiredElement(headers, 1, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
+    const header1: HTMLElement = getRequiredElement(headers, 1, 'accordion header');
 
     togglePanel(fixture, 0);
     togglePanel(fixture, 1);
@@ -207,22 +213,27 @@ describe('Accordion', (): void => {
   });
 
   it('initializes expansion from expandedPanels when controlled', async (): Promise<void> => {
-    const fixture = createTestAccordion({ expandedPanels: ['panel-2'] });
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion({
+      expandedPanels: ['panel-2'],
+    });
     await stabilizeAccordion(fixture);
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
-    const header1 = getRequiredElement(headers, 1, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
+    const header1: HTMLElement = getRequiredElement(headers, 1, 'accordion header');
 
     expect(header1.getAttribute('aria-expanded')).toBe('true');
     expect(header0.getAttribute('aria-expanded')).toBe('false');
   });
 
   it('reflects controlled expandedPanels input', (): void => {
-    const fixture = createTestAccordion({ expandMode: 'multiple', expandedPanels: ['panel-3'] });
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion({
+      expandMode: 'multiple',
+      expandedPanels: ['panel-3'],
+    });
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
-    const header1 = getRequiredElement(headers, 1, 'accordion header');
-    const header2 = getRequiredElement(headers, 2, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
+    const header1: HTMLElement = getRequiredElement(headers, 1, 'accordion header');
+    const header2: HTMLElement = getRequiredElement(headers, 2, 'accordion header');
 
     expect(header2.getAttribute('aria-expanded')).toBe('true');
 
@@ -235,7 +246,7 @@ describe('Accordion', (): void => {
   });
 
   it('emits panelToggle and expandedChange events on toggle', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
 
     togglePanel(fixture, 0);
 
@@ -246,9 +257,11 @@ describe('Accordion', (): void => {
   });
 
   it('prevents toggling when panel is disabled', (): void => {
-    const fixture = createTestAccordion({ disabledSecond: true });
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion({
+      disabledSecond: true,
+    });
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header1 = getRequiredElement(headers, 1, 'accordion header');
+    const header1: HTMLElement = getRequiredElement(headers, 1, 'accordion header');
 
     togglePanel(fixture, 1);
 
@@ -257,10 +270,12 @@ describe('Accordion', (): void => {
   });
 
   it('skips disabled panels during keyboard navigation', (): void => {
-    const fixture = createTestAccordion({ disabledSecond: true });
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion({
+      disabledSecond: true,
+    });
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
-    const header2 = getRequiredElement(headers, 2, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
+    const header2: HTMLElement = getRequiredElement(headers, 2, 'accordion header');
 
     header0.focus();
     header0.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
@@ -270,11 +285,11 @@ describe('Accordion', (): void => {
   });
 
   it('supports Arrow, Home, End navigation between headers', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
-    const header1 = getRequiredElement(headers, 1, 'accordion header');
-    const header2 = getRequiredElement(headers, 2, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
+    const header1: HTMLElement = getRequiredElement(headers, 1, 'accordion header');
+    const header2: HTMLElement = getRequiredElement(headers, 2, 'accordion header');
 
     header0.focus();
     header0.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
@@ -288,9 +303,9 @@ describe('Accordion', (): void => {
   });
 
   it('toggles with Enter and Space keys', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const headers: HTMLElement[] = getPanelHeaders(fixture);
-    const header0 = getRequiredElement(headers, 0, 'accordion header');
+    const header0: HTMLElement = getRequiredElement(headers, 0, 'accordion header');
 
     header0.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     fixture.detectChanges();
@@ -302,12 +317,12 @@ describe('Accordion', (): void => {
   });
 
   it('exposes proper ARIA relationships', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const headers: HTMLElement[] = getPanelHeaders(fixture);
     const contents: HTMLElement[] = getPanelContents(fixture);
 
     headers.forEach((header: HTMLElement, index: number): void => {
-      const content = getRequiredElement(contents, index, 'accordion content');
+      const content: HTMLElement = getRequiredElement(contents, index, 'accordion content');
       const controls: string | null = header.getAttribute('aria-controls');
       const labelledBy: string | null = content.getAttribute('aria-labelledby');
       expect(header.getAttribute('role')).toBe('button');
@@ -318,14 +333,14 @@ describe('Accordion', (): void => {
   });
 
   it('maintains unique header/content ids and linkage', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const headers: HTMLElement[] = getPanelHeaders(fixture);
     const contents: HTMLElement[] = getPanelContents(fixture);
     const headerIds: Set<string> = new Set<string>();
     const contentIds: Set<string> = new Set<string>();
 
     headers.forEach((header: HTMLElement, index: number): void => {
-      const content = getRequiredElement(contents, index, 'accordion content');
+      const content: HTMLElement = getRequiredElement(contents, index, 'accordion content');
       const headerId: string | null = header.getAttribute('id');
       const contentId: string | null = content.getAttribute('id');
       expect(headerId).toBeTruthy();
@@ -341,14 +356,14 @@ describe('Accordion', (): void => {
   });
 
   it('applies expanded state classes and data attributes', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const contents: HTMLElement[] = getPanelContents(fixture);
     const panelNodes: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
       'ui-lib-accordion-panel'
     );
     const panelHosts: HTMLElement[] = Array.from(panelNodes) as HTMLElement[];
-    const panelHost0 = getRequiredElement(panelHosts, 0, 'accordion panel');
-    const content0 = getRequiredElement(contents, 0, 'accordion content');
+    const panelHost0: HTMLElement = getRequiredElement(panelHosts, 0, 'accordion panel');
+    const content0: HTMLElement = getRequiredElement(contents, 0, 'accordion content');
 
     expect(panelHost0.getAttribute('data-state')).toBe('collapsed');
     expect(content0.getAttribute('data-state')).toBe('collapsed');
@@ -362,7 +377,7 @@ describe('Accordion', (): void => {
   });
 
   it('applies dark theme variables', (): void => {
-    const fixture = createTestAccordion();
+    const fixture: ComponentFixture<TestHostComponent> = createTestAccordion();
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-accordion'
     ) as HTMLElement;

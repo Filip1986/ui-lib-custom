@@ -61,7 +61,7 @@ export const DarkMode: Story = {
 export const FullApi: Story = {
   args: { gap: 3, align: 'center' },
   render: (
-    args
+    args: Record<string, unknown>
   ): {
     props: Record<string, unknown>;
     template: string;

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   ThemeConfigService,
@@ -9,10 +10,10 @@ import {
   UiLibSelect,
   Tabs,
   Tab,
-  TabsValue,
 } from 'ui-lib-custom';
+import type { TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
@@ -39,12 +40,12 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectStarterComponent {
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly themeName = signal('my-theme');
-  public readonly savedThemes = signal<string[]>([]);
-  public readonly selectedSaved = signal('');
-  public readonly message = signal('');
+  public readonly themeName: WritableSignal<string> = signal<string>('my-theme');
+  public readonly savedThemes: WritableSignal<string[]> = signal<string[]>([]);
+  public readonly selectedSaved: WritableSignal<string> = signal<string>('');
+  public readonly message: WritableSignal<string> = signal<string>('');
 
   public readonly sampleOptions: { label: string; value: string }[] = [
     { label: 'Alpha', value: 'alpha' },
@@ -58,7 +59,7 @@ export class ProjectStarterComponent {
     { id: 'usage', label: 'Usage' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   constructor() {
     this.refreshSaved();
@@ -74,7 +75,7 @@ export class ProjectStarterComponent {
   }
 
   public saveTheme(): void {
-    const name = this.themeName().trim();
+    const name: string = this.themeName().trim();
     if (!name) return;
     this.themeService.saveToLocalStorage(name);
     this.refreshSaved();
@@ -98,7 +99,7 @@ export class ProjectStarterComponent {
   }
 
   public async importTheme(fileList: FileList | null): Promise<void> {
-    const file = fileList?.item(0);
+    const file: File | null = fileList?.item(0) ?? null;
     if (!file) return;
     await this.themeService.importFromJSON(file);
     this.refreshSaved();
@@ -106,11 +107,11 @@ export class ProjectStarterComponent {
   }
 
   public exportStarterPackage(): void {
-    const preset = this.themeService.getPreset();
-    const json = this.themeService.exportAsJSON(preset);
-    const css = this.themeService.exportAsCSS(preset);
-    const scss = this.themeService.exportAsScss(preset);
-    const readme = this.buildReadme(this.themeName().trim() || preset.name);
+    const preset: ReturnType<ThemeConfigService['getPreset']> = this.themeService.getPreset();
+    const json: string = this.themeService.exportAsJSON(preset);
+    const css: string = this.themeService.exportAsCSS(preset);
+    const scss: string = this.themeService.exportAsScss(preset);
+    const readme: string = this.buildReadme(this.themeName().trim() || preset.name);
     this.saveFile('theme.json', json, 'application/json');
     this.saveFile('theme.css', css, 'text/css');
     this.saveFile('_theme-variables.scss', scss, 'text/x-scss');
@@ -119,7 +120,7 @@ export class ProjectStarterComponent {
   }
 
   private buildReadme(name: string): string {
-    const escapedName = name || 'theme';
+    const escapedName: string = name || 'theme';
     return (
       `# ${escapedName} Theme Starter\n\n` +
       `Files included:\n- theme.json (UI Lib theme preset)\n- theme.css (CSS variables)\n- _theme-variables.scss (SCSS variables)\n\n` +
@@ -133,9 +134,9 @@ export class ProjectStarterComponent {
   }
 
   private saveFile(filename: string, content: string, type: string): void {
-    const blob = new Blob([content], { type });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const blob: Blob = new Blob([content], { type });
+    const url: string = URL.createObjectURL(blob);
+    const a: HTMLAnchorElement = document.createElement('a');
     a.href = url;
     a.download = filename;
     a.click();
@@ -146,7 +147,7 @@ export class ProjectStarterComponent {
     this.savedThemes.set(this.themeService.listSavedThemes());
   }
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `import { ThemeConfigService } from 'ui-lib-custom';
 
 constructor(private theme: ThemeConfigService) {}

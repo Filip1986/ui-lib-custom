@@ -1,8 +1,8 @@
-export function saveAs(filename: string, content: string, type = 'application/json'): void {
+export function saveAs(filename: string, content: string, type: string = 'application/json'): void {
   try {
-    const blob = new Blob([content], { type });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const blob: Blob = new Blob([content], { type });
+    const url: string = URL.createObjectURL(blob);
+    const link: HTMLAnchorElement = document.createElement('a');
     link.href = url;
     link.download = filename;
     link.style.display = 'none';

@@ -7,7 +7,9 @@
 // SPACING TOKENS
 // ============================================================================
 
-export const SPACING_TOKENS = {
+export type SpacingToken = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | 20;
+
+export const SPACING_TOKENS: Readonly<Record<SpacingToken, string>> = {
   0: '0',
   1: '0.25rem', // 4px
   2: '0.5rem', // 8px
@@ -20,79 +22,79 @@ export const SPACING_TOKENS = {
   12: '3rem', // 48px
   16: '4rem', // 64px
   20: '5rem', // 80px
-} as const;
+};
 
-export type SpacingToken = keyof typeof SPACING_TOKENS;
+export type DensityToken = 'compact' | 'default' | 'comfortable';
+export type DensityConfig = { scale: number; label: string };
 
-export const DENSITY_TOKENS = {
+export const DENSITY_TOKENS: Readonly<Record<DensityToken, DensityConfig>> = {
   compact: { scale: 0.75, label: 'Compact' },
   default: { scale: 1, label: 'Default' },
   comfortable: { scale: 1.33, label: 'Comfortable' },
-} as const;
+};
 
-export type DensityToken = keyof typeof DENSITY_TOKENS;
+export type SpacingAlias = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-export const SPACING_ALIASES = {
+export const SPACING_ALIASES: Readonly<Record<SpacingAlias, string>> = {
   xs: SPACING_TOKENS[1], // 4px
   sm: SPACING_TOKENS[2], // 8px
   md: SPACING_TOKENS[4], // 16px (base)
   lg: SPACING_TOKENS[6], // 24px
   xl: SPACING_TOKENS[8], // 32px
   '2xl': SPACING_TOKENS[12], // 48px
-} as const;
+};
 
-export type SpacingAlias = keyof typeof SPACING_ALIASES;
 export type SpacingKey = SpacingToken | SpacingAlias;
 
-export const INSET_TOKENS = {
+export type InsetToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export const INSET_TOKENS: Readonly<Record<InsetToken, string>> = {
   xs: SPACING_TOKENS[1], // 4px
   sm: SPACING_TOKENS[2], // 8px
   md: SPACING_TOKENS[4], // 16px
   lg: SPACING_TOKENS[6], // 24px
   xl: SPACING_TOKENS[8], // 32px
-} as const;
+};
 
-export type InsetToken = keyof typeof INSET_TOKENS;
+export type SquishToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export const SQUISH_TOKENS = {
+export const SQUISH_TOKENS: Readonly<Record<SquishToken, string>> = {
   xs: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[2]}`, // 4px 8px
   sm: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`, // 8px 16px
   md: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[8]}`, // 16px 32px
   lg: `${SPACING_TOKENS[6]} ${SPACING_TOKENS[12]}`, // 24px 48px
   xl: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[16]}`, // 32px 64px
-} as const;
+};
 
-export type SquishToken = keyof typeof SQUISH_TOKENS;
+export type StretchToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export const STRETCH_TOKENS = {
+export const STRETCH_TOKENS: Readonly<Record<StretchToken, string>> = {
   xs: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[1]}`, // 8px 4px
   sm: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[2]}`, // 16px 8px
   md: `${SPACING_TOKENS[8]} ${SPACING_TOKENS[4]}`, // 32px 16px
   lg: `${SPACING_TOKENS[12]} ${SPACING_TOKENS[6]}`, // 48px 24px
   xl: `${SPACING_TOKENS[16]} ${SPACING_TOKENS[8]}`, // 64px 32px
-} as const;
+};
 
-export type StretchToken = keyof typeof STRETCH_TOKENS;
+export type StackToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export const STACK_TOKENS = {
+export const STACK_TOKENS: Readonly<Record<StackToken, string>> = {
   xs: SPACING_TOKENS[1], // 4px
   sm: SPACING_TOKENS[2], // 8px
   md: SPACING_TOKENS[4], // 16px
   lg: SPACING_TOKENS[6], // 24px
   xl: SPACING_TOKENS[8], // 32px
-} as const;
+};
 
-export type StackToken = keyof typeof STACK_TOKENS;
+export type InlineToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export const INLINE_TOKENS = {
+export const INLINE_TOKENS: Readonly<Record<InlineToken, string>> = {
   xs: SPACING_TOKENS[1], // 4px
   sm: SPACING_TOKENS[2], // 8px
   md: SPACING_TOKENS[4], // 16px
   lg: SPACING_TOKENS[6], // 24px
   xl: SPACING_TOKENS[8], // 32px
-} as const;
-
-export type InlineToken = keyof typeof INLINE_TOKENS;
+};
 
 export type SpacingPatternToken =
   | InsetToken
@@ -105,18 +107,20 @@ export type SpacingPatternToken =
 // SIZING TOKENS
 // ============================================================================
 
-export const CONTAINER_MAX_WIDTHS = {
+export type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+
+export const CONTAINER_MAX_WIDTHS: Readonly<Record<ContainerSize, string>> = {
   sm: '640px',
   md: '768px',
   lg: '1024px',
   xl: '1280px',
   '2xl': '1536px',
   full: '100%',
-} as const;
+};
 
-export type ContainerSize = keyof typeof CONTAINER_MAX_WIDTHS;
+export type GridColumns = 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12;
 
-export const GRID_COLUMNS = {
+export const GRID_COLUMNS: Readonly<Record<GridColumns, number>> = {
   1: 1,
   2: 2,
   3: 3,
@@ -126,9 +130,7 @@ export const GRID_COLUMNS = {
   8: 8,
   10: 10,
   12: 12,
-} as const;
-
-export type GridColumns = keyof typeof GRID_COLUMNS;
+};
 
 // ============================================================================
 // COLOR TOKENS
@@ -138,7 +140,9 @@ export type GridColumns = keyof typeof GRID_COLUMNS;
  * Primary color palette
  * Used for main brand colors and primary actions
  */
-export const COLOR_PRIMARY = {
+export type ColorShade = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+
+export const COLOR_PRIMARY: Readonly<Record<ColorShade, string>> = {
   50: '#e3f2fd',
   100: '#bbdefb',
   200: '#90caf9',
@@ -155,7 +159,9 @@ export const COLOR_PRIMARY = {
  * Secondary/neutral color palette
  * Used for text, borders, and backgrounds
  */
-export const COLOR_NEUTRAL = {
+export type NeutralColorKey = ColorShade | 'black' | 'white';
+
+export const COLOR_NEUTRAL: Readonly<Record<NeutralColorKey, string>> = {
   50: '#fafafa',
   100: '#f5f5f5',
   200: '#eeeeee',
@@ -174,7 +180,7 @@ export const COLOR_NEUTRAL = {
  * Success color palette
  * Used for positive actions and success states
  */
-export const COLOR_SUCCESS = {
+export const COLOR_SUCCESS: Readonly<Record<ColorShade, string>> = {
   50: '#e8f5e9',
   100: '#c8e6c9',
   200: '#a5d6a7',
@@ -191,7 +197,7 @@ export const COLOR_SUCCESS = {
  * Danger/error color palette
  * Used for destructive actions and error states
  */
-export const COLOR_DANGER = {
+export const COLOR_DANGER: Readonly<Record<ColorShade, string>> = {
   50: '#ffebee',
   100: '#ffcdd2',
   200: '#ef9a9a',
@@ -208,7 +214,7 @@ export const COLOR_DANGER = {
  * Warning color palette
  * Used for warning states and caution messages
  */
-export const COLOR_WARNING = {
+export const COLOR_WARNING: Readonly<Record<ColorShade, string>> = {
   50: '#fff3e0',
   100: '#ffe0b2',
   200: '#ffcc80',
@@ -225,7 +231,7 @@ export const COLOR_WARNING = {
  * Info color palette
  * Used for informational messages
  */
-export const COLOR_INFO = {
+export const COLOR_INFO: Readonly<Record<ColorShade, string>> = {
   50: '#e1f5fe',
   100: '#b3e5fc',
   200: '#81d4fa',
@@ -242,7 +248,7 @@ export const COLOR_INFO = {
  * Help color palette
  * Used for helper/info-adjacent states
  */
-export const COLOR_HELP = {
+export const COLOR_HELP: Readonly<Record<ColorShade, string>> = {
   50: '#f3e8ff',
   100: '#e9d5ff',
   200: '#d8b4fe',
@@ -261,7 +267,51 @@ export type HelpColor = keyof typeof COLOR_HELP;
  * Semantic color mapping
  * Maps semantic color names to specific palette values
  */
-export const SEMANTIC_COLORS = {
+export type SemanticColor =
+  | 'primary'
+  | 'primary-hover'
+  | 'primary-light'
+  | 'primary-dark'
+  | 'secondary'
+  | 'secondary-hover'
+  | 'secondary-light'
+  | 'secondary-dark'
+  | 'success'
+  | 'success-hover'
+  | 'success-light'
+  | 'success-dark'
+  | 'danger'
+  | 'danger-hover'
+  | 'danger-light'
+  | 'danger-dark'
+  | 'warning'
+  | 'warning-hover'
+  | 'warning-light'
+  | 'warning-dark'
+  | 'info'
+  | 'info-hover'
+  | 'info-light'
+  | 'info-dark'
+  | 'help'
+  | 'help-hover'
+  | 'help-light'
+  | 'help-dark'
+  | 'contrast'
+  | 'contrast-hover'
+  | 'contrast-light'
+  | 'contrast-dark'
+  | 'warn'
+  | 'text'
+  | 'text-secondary'
+  | 'text-disabled'
+  | 'border'
+  | 'border-light'
+  | 'border-dark'
+  | 'background'
+  | 'background-alt'
+  | 'background-dark';
+
+export const SEMANTIC_COLORS: Readonly<Record<SemanticColor, string>> = {
   primary: COLOR_PRIMARY[700],
   'primary-hover': COLOR_PRIMARY[800],
   'primary-light': COLOR_PRIMARY[500],
@@ -317,8 +367,6 @@ export const SEMANTIC_COLORS = {
   'background-dark': COLOR_NEUTRAL[900],
 } as const;
 
-export type SemanticColor = keyof typeof SEMANTIC_COLORS;
-
 // ============================================================================
 // DARK MODE TOKENS
 // ============================================================================
@@ -327,7 +375,9 @@ export type SemanticColor = keyof typeof SEMANTIC_COLORS;
  * Dark mode surface colors (Material Design elevation system)
  * Higher numbers = more elevated = slightly lighter
  */
-export const DARK_SURFACES = {
+export type DarkSurface = 0 | 1 | 2 | 3 | 4 | 5;
+
+export const DARK_SURFACES: Readonly<Record<DarkSurface, string>> = {
   0: '#121212', // Base background
   1: '#1e1e1e', // Cards, dialogs at elevation 1
   2: '#232323', // Elevation 2
@@ -336,24 +386,18 @@ export const DARK_SURFACES = {
   5: '#2c2c2c', // Elevation 5 (dropdowns, menus)
 } as const;
 
-export type DarkSurface = keyof typeof DARK_SURFACES;
+export type DarkText = 'primary' | 'secondary' | 'disabled' | 'hint';
 
-/**
- * Dark mode text colors with opacity for hierarchy
- */
-export const DARK_TEXT = {
+export const DARK_TEXT: Readonly<Record<DarkText, string>> = {
   primary: 'rgba(255, 255, 255, 0.87)',
   secondary: 'rgba(255, 255, 255, 0.60)',
   disabled: 'rgba(255, 255, 255, 0.38)',
   hint: 'rgba(255, 255, 255, 0.38)',
 } as const;
 
-export type DarkText = keyof typeof DARK_TEXT;
+export type DarkBorder = 'default' | 'light' | 'strong';
 
-/**
- * Dark mode border colors
- */
-export const DARK_BORDERS = {
+export const DARK_BORDERS: Readonly<Record<DarkBorder, string>> = {
   default: 'rgba(255, 255, 255, 0.12)',
   light: 'rgba(255, 255, 255, 0.08)',
   strong: 'rgba(255, 255, 255, 0.20)',
@@ -362,7 +406,9 @@ export const DARK_BORDERS = {
 /**
  * Dark mode shadows (lighter, more diffuse)
  */
-export const DARK_SHADOWS = {
+export type DarkShadow = 'sm' | 'md' | 'lg' | 'xl';
+
+export const DARK_SHADOWS: Readonly<Record<DarkShadow, string>> = {
   sm: '0 1px 3px rgba(0, 0, 0, 0.4)',
   md: '0 4px 6px rgba(0, 0, 0, 0.4)',
   lg: '0 10px 20px rgba(0, 0, 0, 0.5)',
@@ -372,7 +418,7 @@ export const DARK_SHADOWS = {
 /**
  * Adjusted primary colors for dark backgrounds (higher luminance)
  */
-export const DARK_PRIMARY = {
+export const DARK_PRIMARY: Readonly<Record<ColorShade, string>> = {
   50: '#e3f2fd',
   100: '#bbdefb',
   200: '#90caf9', // Use as primary in dark mode
@@ -388,7 +434,27 @@ export const DARK_PRIMARY = {
 /**
  * Semantic dark mappings for component defaults
  */
-export const DARK_SEMANTIC_COLORS = {
+export type DarkSemanticColor =
+  | 'surface'
+  | 'surfaceAlt'
+  | 'background'
+  | 'backgroundAlt'
+  | 'text'
+  | 'textSecondary'
+  | 'textDisabled'
+  | 'border'
+  | 'borderLight'
+  | 'primary'
+  | 'primaryHover'
+  | 'cardBg'
+  | 'cardBgHover'
+  | 'inputBg'
+  | 'inputBgFocus'
+  | 'selectDropdownBg'
+  | 'accordionBg'
+  | 'accordionHeaderBg';
+
+export const DARK_SEMANTIC_COLORS: Readonly<Record<DarkSemanticColor, string>> = {
   // Surfaces
   surface: DARK_SURFACES[1],
   surfaceAlt: DARK_SURFACES[2],
@@ -425,7 +491,9 @@ export const DARK_SEMANTIC_COLORS = {
 /**
  * Font size tokens
  */
-export const FONT_SIZES = {
+export type FontSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
+
+export const FONT_SIZES: Readonly<Record<FontSize, string>> = {
   xs: '0.75rem', // 12px
   sm: '0.875rem', // 14px
   base: '1rem', // 16px
@@ -435,42 +503,35 @@ export const FONT_SIZES = {
   '3xl': '1.875rem', // 30px
   '4xl': '2.25rem', // 36px
   '5xl': '3rem', // 48px
-} as const;
+};
 
-export type FontSize = keyof typeof FONT_SIZES;
+export type FontWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
 
-/**
- * Font weight tokens
- */
-export const FONT_WEIGHTS = {
+export const FONT_WEIGHTS: Readonly<Record<FontWeight, number>> = {
   light: 300,
   normal: 400,
   medium: 500,
   semibold: 600,
   bold: 700,
-} as const;
+};
 
-export type FontWeight = keyof typeof FONT_WEIGHTS;
+export type LineHeight = 'tight' | 'normal' | 'relaxed' | 'loose';
 
-/**
- * Line height tokens
- */
-export const LINE_HEIGHTS = {
+export const LINE_HEIGHTS: Readonly<Record<LineHeight, number>> = {
   tight: 1.25,
   normal: 1.5,
   relaxed: 1.75,
   loose: 2,
-} as const;
+};
 
-export type LineHeight = keyof typeof LINE_HEIGHTS;
+export type FontFamilyVar = 'heading' | 'body' | 'ui' | 'monospace';
 
-// Exposed CSS custom properties for typography categories
-export const FONT_FAMILY_VARS = {
+export const FONT_FAMILY_VARS: Readonly<Record<FontFamilyVar, string>> = {
   heading: '--uilib-font-heading',
   body: '--uilib-font-body',
   ui: '--uilib-font-ui',
   monospace: '--uilib-font-mono',
-} as const;
+};
 
 // ============================================================================
 // BORDER TOKENS
@@ -479,7 +540,9 @@ export const FONT_FAMILY_VARS = {
 /**
  * Border radius tokens
  */
-export const BORDER_RADIUS = {
+export type BorderRadius = 'none' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+
+export const BORDER_RADIUS: Readonly<Record<BorderRadius, string>> = {
   none: '0',
   sm: '0.125rem', // 2px
   base: '0.25rem', // 4px
@@ -488,30 +551,25 @@ export const BORDER_RADIUS = {
   xl: '0.75rem', // 12px
   '2xl': '1rem', // 16px
   full: '9999px',
-} as const;
+};
 
-export type BorderRadius = keyof typeof BORDER_RADIUS;
+export type ShapeToken = 'sharp' | 'rounded' | 'soft' | 'pill';
 
-export const SHAPE_TOKENS = {
+export const SHAPE_TOKENS: Readonly<Record<ShapeToken, string>> = {
   sharp: '0px',
   rounded: '6px',
   soft: '12px',
   pill: '9999px',
-} as const;
+};
 
-export type ShapeToken = keyof typeof SHAPE_TOKENS;
+export type BorderWidth = 0 | 1 | 2 | 4;
 
-/**
- * Border width tokens
- */
-export const BORDER_WIDTH = {
+export const BORDER_WIDTH: Readonly<Record<BorderWidth, string>> = {
   0: '0',
   1: '1px',
   2: '2px',
   4: '4px',
-} as const;
-
-export type BorderWidth = keyof typeof BORDER_WIDTH;
+};
 
 // ============================================================================
 // SHADOW TOKENS
@@ -520,7 +578,7 @@ export type BorderWidth = keyof typeof BORDER_WIDTH;
 /**
  * Box shadow tokens
  */
-const SHADOW_VALUES = [
+const SHADOW_VALUES: readonly string[] = [
   'rgba(149, 157, 165, 0.2) 0px 8px 24px',
   'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px',
   'rgba(0, 0, 0, 0.35) 0px 5px 15px',
@@ -653,8 +711,13 @@ const SHADOW_VALUES = [
 ] as const;
 
 type ShadowKeyName = `shadow-${number}`;
-const NUMERIC_SHADOWS = SHADOW_VALUES.reduce(
-  (acc, value, idx): Record<ShadowKeyName, string> => {
+
+const NUMERIC_SHADOWS: Record<ShadowKeyName, string> = SHADOW_VALUES.reduce(
+  (
+    acc: Record<ShadowKeyName, string>,
+    value: string,
+    idx: number
+  ): Record<ShadowKeyName, string> => {
     acc[`shadow-${idx + 1}` as ShadowKeyName] = value;
     return acc;
   },
@@ -675,32 +738,36 @@ export type Shadow = keyof typeof SHADOWS;
 /**
  * Transition duration tokens
  */
-export const TRANSITION_DURATION = {
+export type TransitionDuration = 'fast' | 'base' | 'slow' | 'slower';
+
+export const TRANSITION_DURATION: Readonly<Record<TransitionDuration, string>> = {
   fast: '150ms',
   base: '200ms',
   slow: '300ms',
   slower: '500ms',
-} as const;
+};
 
-export type TransitionDuration = keyof typeof TRANSITION_DURATION;
+export type TransitionTiming = 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
 
-/**
- * Transition timing function tokens
- */
-export const TRANSITION_TIMING = {
+export const TRANSITION_TIMING: Readonly<Record<TransitionTiming, string>> = {
   linear: 'linear',
   ease: 'ease',
   'ease-in': 'ease-in',
   'ease-out': 'ease-out',
   'ease-in-out': 'ease-in-out',
-} as const;
+};
 
-export type TransitionTiming = keyof typeof TRANSITION_TIMING;
+export type ZIndex =
+  | 'base'
+  | 'dropdown'
+  | 'sticky'
+  | 'fixed'
+  | 'backdrop'
+  | 'modal'
+  | 'popover'
+  | 'tooltip';
 
-/**
- * Z-index tokens for stacking context
- */
-export const Z_INDEX = {
+export const Z_INDEX: Readonly<Record<ZIndex, number>> = {
   base: 0,
   dropdown: 1000,
   sticky: 1020,
@@ -709,14 +776,52 @@ export const Z_INDEX = {
   modal: 1050,
   popover: 1060,
   tooltip: 1070,
-} as const;
-
-export type ZIndex = keyof typeof Z_INDEX;
+};
 
 /**
  * Button token defaults
  */
-export const BUTTON_TOKENS = {
+export type ButtonStateToken = {
+  bg: string;
+  bgHover: string;
+  bgActive: string;
+  border: string;
+  fg: string;
+};
+
+export type ButtonRaisedToken = { shadow: string; shadowHover: string };
+export type ButtonTextToken = { fg: string; fgHover: string };
+export type ButtonOutlineToken = {
+  border: string;
+  borderHover: string;
+  fg: string;
+  fgHover: string;
+};
+export type ButtonBadgeToken = {
+  offsetX: string;
+  offsetY: string;
+  radius: string;
+  shadow: string;
+  fontSize: string;
+  padding: string;
+  bg: string;
+  fg: string;
+};
+
+export type ButtonTokens = {
+  info: ButtonStateToken;
+  help: ButtonStateToken;
+  contrast: ButtonStateToken;
+  warn: ButtonStateToken;
+  raised: ButtonRaisedToken;
+  text: ButtonTextToken;
+  outline: ButtonOutlineToken;
+  radiusRounded: string;
+  radiusPill: string;
+  badge: ButtonBadgeToken;
+};
+
+export const BUTTON_TOKENS: Readonly<ButtonTokens> = {
   info: {
     bg: COLOR_INFO[700],
     bgHover: COLOR_INFO[800],
@@ -738,6 +843,7 @@ export const BUTTON_TOKENS = {
     border: COLOR_NEUTRAL.black,
     fg: COLOR_NEUTRAL.white,
   },
+
   warn: {
     bg: COLOR_WARNING[700],
     bgHover: COLOR_WARNING[800],
@@ -746,8 +852,8 @@ export const BUTTON_TOKENS = {
     fg: COLOR_NEUTRAL.black,
   },
   raised: {
-    shadow: SHADOWS['shadow-40'],
-    shadowHover: SHADOWS['shadow-50'],
+    shadow: SHADOWS['shadow-40']!,
+    shadowHover: SHADOWS['shadow-50']!,
   },
   text: {
     fg: SEMANTIC_COLORS.primary,
@@ -765,13 +871,13 @@ export const BUTTON_TOKENS = {
     offsetX: SPACING_TOKENS[2],
     offsetY: SPACING_TOKENS[2],
     radius: BORDER_RADIUS.full,
-    shadow: SHADOWS['shadow-20'],
+    shadow: SHADOWS['shadow-20']!,
     fontSize: FONT_SIZES.sm,
     padding: SQUISH_TOKENS.xs,
     bg: COLOR_DANGER[500],
     fg: COLOR_NEUTRAL.white,
   },
-} as const;
+};
 
 export type ButtonTokenKey = keyof typeof BUTTON_TOKENS;
 
@@ -779,7 +885,28 @@ export type ButtonTokenKey = keyof typeof BUTTON_TOKENS;
 // SELECT BUTTON TOKENS
 // ============================================================================
 
-export const SELECTBUTTON_TOKENS = {
+export type SelectButtonVariant = 'material' | 'bootstrap' | 'minimal';
+export type SelectButtonSize = 'small' | 'medium' | 'large';
+export type SelectButtonSizeToken = { padding: string; fontSize: string; minHeight: string };
+export type SelectButtonVariantToken = {
+  bg: string;
+  selectedBg: string;
+  selectedFg: string;
+  hoverBg: string;
+  border: string;
+  shadow?: string;
+};
+
+export type SelectButtonTokens = {
+  gap: string;
+  borderRadius: Record<SelectButtonVariant, string>;
+  sizes: Record<SelectButtonSize, SelectButtonSizeToken>;
+  material: SelectButtonVariantToken;
+  bootstrap: SelectButtonVariantToken;
+  minimal: SelectButtonVariantToken;
+};
+
+export const SELECTBUTTON_TOKENS: Readonly<SelectButtonTokens> = {
   gap: '0',
   borderRadius: {
     material: '4px',
@@ -825,6 +952,6 @@ export const SELECTBUTTON_TOKENS = {
     hoverBg: 'var(--uilib-surface-100)',
     border: 'transparent',
   },
-} as const;
+};
 
 export type SelectButtonTokenKey = keyof typeof SELECTBUTTON_TOKENS;

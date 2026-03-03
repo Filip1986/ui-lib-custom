@@ -7,28 +7,31 @@ import {
   effect,
   ViewChild,
 } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Button,
+  Card,
+  Inline,
+  Stack,
+  IconButton,
+  ThemeConfigService,
+  Tabs,
+  Tab,
+  ButtonGroup,
+  Grid,
+} from 'ui-lib-custom';
+import type {
   ButtonAppearance,
   ButtonColor,
   ButtonSeverity,
   ButtonSize,
   ButtonVariant,
-  Card,
-  Inline,
-  Stack,
-  IconButton,
   IconPosition,
-  ThemeConfigService,
-  Tabs,
-  Tab,
   TabsValue,
-  ButtonGroup,
-  Grid,
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { FormsModule } from '@angular/forms';
@@ -82,7 +85,7 @@ export class ButtonsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -93,7 +96,7 @@ export class ButtonsComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `import { Button } from 'ui-lib-custom';
 
 @Component({
@@ -104,22 +107,22 @@ export class ButtonsComponent {
 export class Example {}`,
   } as const;
 
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly variant = signal<ButtonVariant>('material');
-  public readonly appearance = signal<ButtonAppearance>('solid');
-  public readonly size = signal<ButtonSize>('medium');
-  public readonly color = signal<ButtonColor>('primary');
-  public readonly disabled = signal(false);
-  public readonly loading = signal(false);
-  public readonly fullWidth = signal(false);
-  public readonly iconPosition = signal<IconPosition>('left');
-  public readonly label = signal('Click me');
+  public readonly variant: WritableSignal<ButtonVariant> = signal<ButtonVariant>('material');
+  public readonly appearance: WritableSignal<ButtonAppearance> = signal<ButtonAppearance>('solid');
+  public readonly size: WritableSignal<ButtonSize> = signal<ButtonSize>('medium');
+  public readonly color: WritableSignal<ButtonColor> = signal<ButtonColor>('primary');
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly fullWidth: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly iconPosition: WritableSignal<IconPosition> = signal<IconPosition>('left');
+  public readonly label: WritableSignal<string> = signal<string>('Click me');
 
-  public readonly useGlobalVariant = signal(true);
-  public readonly useLocalTheme = signal(false);
-  public readonly localPrimary = signal('');
-  public readonly localSurface = signal('');
+  public readonly useGlobalVariant: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly useLocalTheme: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly localPrimary: WritableSignal<string> = signal<string>('');
+  public readonly localSurface: WritableSignal<string> = signal<string>('');
 
   public readonly variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly appearances: ButtonAppearance[] = ['solid', 'outline', 'ghost'];
@@ -145,36 +148,42 @@ export class Example {}`,
     'contrast',
   ];
   public readonly iconPositions: IconPosition[] = ['left', 'right', 'top', 'bottom'];
-  public readonly demoIcon = signal('search');
+  public readonly demoIcon: WritableSignal<string> = signal<string>('search');
 
-  private readonly globalVars = computed<Record<string, string>>((): Record<string, string> => {
-    const preset = this.themeService.preset();
-    return this.themeService.getCssVars(preset);
-  });
-  private readonly localVars = computed<Record<string, string>>((): Record<string, string> => {
-    const vars: Record<string, string> = {};
-    if (this.localPrimary().trim()) {
-      vars['--uilib-button-primary-bg'] = this.localPrimary().trim();
-      vars['--uilib-button-primary-bg-hover'] = this.localPrimary().trim();
-      vars['--uilib-button-primary-bg-active'] = this.localPrimary().trim();
+  private readonly globalVars: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const preset: ReturnType<ThemeConfigService['preset']> = this.themeService.preset();
+      return this.themeService.getCssVars(preset);
     }
-    if (this.localSurface().trim()) {
-      vars['--uilib-card-bg'] = this.localSurface().trim();
-      vars['--uilib-surface'] = this.localSurface().trim();
+  );
+  private readonly localVars: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const vars: Record<string, string> = {};
+      if (this.localPrimary().trim()) {
+        vars['--uilib-button-primary-bg'] = this.localPrimary().trim();
+        vars['--uilib-button-primary-bg-hover'] = this.localPrimary().trim();
+        vars['--uilib-button-primary-bg-active'] = this.localPrimary().trim();
+      }
+      if (this.localSurface().trim()) {
+        vars['--uilib-card-bg'] = this.localSurface().trim();
+        vars['--uilib-surface'] = this.localSurface().trim();
+      }
+      return vars;
     }
-    return vars;
-  });
+  );
 
-  public readonly appliedTheme = computed<Record<string, string>>((): Record<string, string> => {
-    const base = this.globalVars();
-    if (!this.useLocalTheme()) return base;
-    return { ...base, ...this.localVars() };
-  });
+  public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const base: Record<string, string> = this.globalVars();
+      if (!this.useLocalTheme()) return base;
+      return { ...base, ...this.localVars() };
+    }
+  );
 
   constructor() {
     effect((): void => {
       if (!this.useGlobalVariant()) return;
-      const v = this.themeService.preset().variant as ButtonVariant;
+      const v: ButtonVariant = this.themeService.preset().variant as ButtonVariant;
       this.variant.set(v);
     });
   }
@@ -192,7 +201,7 @@ export class Example {}`,
   public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
-      const v = this.themeService.preset().variant as ButtonVariant;
+      const v: ButtonVariant = this.themeService.preset().variant as ButtonVariant;
       this.variant.set(v);
     }
   }
@@ -235,5 +244,5 @@ export class Example {}`,
     this.viewport?.setDensity(value);
   }
 
-  public readonly buttonExample = `<ui-lib-button color="primary">Primary Button</ui-lib-button>`;
+  public readonly buttonExample: string = `<ui-lib-button color="primary">Primary Button</ui-lib-button>`;
 }

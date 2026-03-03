@@ -62,7 +62,7 @@ export const DarkMode: Story = {
 export const FullApi: Story = {
   args: { columns: 4, gap: 2 },
   render: (
-    args
+    args: Record<string, unknown>
   ): {
     props: Record<string, unknown>;
     template: string;

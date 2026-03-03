@@ -8,12 +8,15 @@ import {
   ElementRef,
   inject,
   effect,
+  type InputSignal,
+  type OutputEmitterRef,
+  type Signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Icon } from 'ui-lib-custom/icon';
-import { SemanticIcon } from 'ui-lib-custom/icon';
-import {
-  ThemeConfigService,
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type {
   ThemeScopeInput,
   ThemePreset,
   ThemePresetColors,
@@ -33,37 +36,43 @@ export type CardElevation = 'none' | 'low' | 'medium' | 'high';
   encapsulation: ViewEncapsulation.None,
 })
 export class Card {
-  public readonly variant = input<CardVariant | null>(null);
-  public readonly elevation = input<CardElevation>('medium');
-  public readonly bordered = input<boolean>(false);
-  public readonly hoverable = input<boolean>(false);
-  public readonly showHeader = input<boolean | null>(null);
-  public readonly showFooter = input<boolean | null>(null);
-  public readonly shadow = input<string | null>(null);
-  public readonly headerBg = input<string | null>(null);
-  public readonly footerBg = input<string | null>(null);
-  public readonly headerIcon = input<SemanticIcon | string | null>(null);
-  public readonly closable = input<boolean>(false);
-  public readonly subtitle = input<string | null>(null);
-  public readonly ariaLabel = input<string | null>(null);
+  public readonly variant: InputSignal<CardVariant | null> = input<CardVariant | null>(null);
+  public readonly elevation: InputSignal<CardElevation> = input<CardElevation>('medium');
+  public readonly bordered: InputSignal<boolean> = input<boolean>(false);
+  public readonly hoverable: InputSignal<boolean> = input<boolean>(false);
+  public readonly showHeader: InputSignal<boolean | null> = input<boolean | null>(null);
+  public readonly showFooter: InputSignal<boolean | null> = input<boolean | null>(null);
+  public readonly shadow: InputSignal<string | null> = input<string | null>(null);
+  public readonly headerBg: InputSignal<string | null> = input<string | null>(null);
+  public readonly footerBg: InputSignal<string | null> = input<string | null>(null);
+  public readonly headerIcon: InputSignal<SemanticIcon | string | null> = input<
+    SemanticIcon | string | null
+  >(null);
+  public readonly closable: InputSignal<boolean> = input<boolean>(false);
+  public readonly subtitle: InputSignal<string | null> = input<string | null>(null);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
   /** Optional scoped theme override */
-  public readonly theme = input<ThemeScopeInput>(null);
+  public readonly theme: InputSignal<ThemeScopeInput | null> = input<ThemeScopeInput | null>(null);
 
-  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly themeService = inject(ThemeConfigService);
-  private readonly appliedVars = new Set<string>();
+  private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+  private readonly appliedVars: Set<string> = new Set<string>();
 
-  public readonly closed = output<void>();
+  public readonly closed: OutputEmitterRef<void> = output<void>();
 
-  public readonly effectiveVariant = computed<CardVariant>(
+  public readonly effectiveVariant: Signal<CardVariant> = computed<CardVariant>(
     (): CardVariant => this.variant() ?? this.themeService.variant()
   );
-  public readonly headerVisible = computed<boolean>((): boolean => this.showHeader() !== false);
-  public readonly footerVisible = computed<boolean>((): boolean => this.showFooter() !== false);
+  public readonly headerVisible: Signal<boolean> = computed<boolean>(
+    (): boolean => this.showHeader() !== false
+  );
+  public readonly footerVisible: Signal<boolean> = computed<boolean>(
+    (): boolean => this.showFooter() !== false
+  );
 
-  public readonly cardClasses = computed<string>((): string => {
-    const classes = [
+  public readonly cardClasses: Signal<string> = computed<string>((): string => {
+    const classes: string[] = [
       'card',
       `card-${this.effectiveVariant()}`,
       `card-elevation-${this.elevation()}`,
@@ -98,8 +107,13 @@ export class Card {
     }
   }
 
+  private readTheme(): ThemeScopeInput | null {
+    const read: () => ThemeScopeInput | null = this.theme as () => ThemeScopeInput | null;
+    return read();
+  }
+
   private applyThemeScope(): void {
-    const config = this.theme();
+    const config: ThemeScopeInput | null = this.readTheme();
     this.clearAppliedStyles();
 
     if (!config) {
@@ -137,8 +151,9 @@ export class Card {
 
   private applyVariables(variables: Record<string, string>): void {
     const element: HTMLElement = this.el.nativeElement;
-    Object.entries(variables).forEach(([key, value]): void => {
-      const varName = key.startsWith('--') ? key : `--${key}`;
+    const entries: [string, string][] = Object.entries(variables) as [string, string][];
+    entries.forEach(([key, value]: [string, string]): void => {
+      const varName: string = key.startsWith('--') ? key : `--${key}`;
       element.style.setProperty(varName, value);
       this.appliedVars.add(varName);
     });
@@ -152,7 +167,7 @@ export class Card {
 
   private clearAppliedStyles(): void {
     const element: HTMLElement = this.el.nativeElement;
-    this.appliedVars.forEach((key): void => {
+    this.appliedVars.forEach((key: string): void => {
       element.style.removeProperty(key);
     });
     this.appliedVars.clear();

@@ -1,18 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, computed, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  Button,
-  Card,
-  Checkbox,
-  CheckboxSize,
-  CheckboxVariant,
-  Tabs,
-  Tab,
-  TabsValue,
-} from 'ui-lib-custom';
+import { Button, Card, Checkbox, Tabs, Tab } from 'ui-lib-custom';
+import type { CheckboxSize, CheckboxVariant, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
@@ -54,26 +47,28 @@ export class CheckboxesComponent {
   public readonly variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: CheckboxSize[] = ['sm', 'md', 'lg'];
 
-  public readonly variant = signal<CheckboxVariant>('material');
-  public readonly size = signal<CheckboxSize>('md');
-  public readonly disabled = signal(false);
-  public readonly indeterminate = signal(false);
-  public readonly showDescription = signal(true);
-  public readonly label = signal('Receive product updates');
-  public readonly description = signal('Weekly highlights, delivered every Monday.');
+  public readonly variant: WritableSignal<CheckboxVariant> = signal<CheckboxVariant>('material');
+  public readonly size: WritableSignal<CheckboxSize> = signal<CheckboxSize>('md');
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly indeterminate: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly showDescription: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly label: WritableSignal<string> = signal<string>('Receive product updates');
+  public readonly description: WritableSignal<string> = signal<string>(
+    'Weekly highlights, delivered every Monday.'
+  );
 
   public checkedPrimary: boolean = false;
   public checkedSecondary: boolean = true;
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   @ViewChild(DocDemoViewportComponent) public viewport?: DocDemoViewportComponent;
 
-  public readonly playgroundDescription = computed<string | null>((): string | null =>
-    this.showDescription() ? this.description() : null
+  public readonly playgroundDescription: Signal<string | null> = computed<string | null>(
+    (): string | null => (this.showDescription() ? this.description() : null)
   );
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `import { Checkbox } from 'ui-lib-custom';
 
 @Component({
@@ -94,7 +89,7 @@ export class SettingsComponent {
 }`,
   } as const;
 
-  public readonly checkboxExample = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
+  public readonly checkboxExample: string = `<ui-lib-checkbox label="Receive updates" [(checked)]="checkedPrimary"></ui-lib-checkbox>`;
 
   public selectVariant(value: CheckboxVariant): void {
     this.variant.set(value);

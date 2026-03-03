@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, signal, ViewChild } from '@angular/core';
+import type { InputSignal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ViewportPreviewComponent } from '../viewport-preview/viewport-preview.component';
@@ -20,9 +21,11 @@ interface ViewportPreset {
   exportAs: 'docDemoViewport',
 })
 export class DocDemoViewportComponent {
-  public readonly shadow = input<string | null>(null);
-  public readonly autoHeight = input<boolean>(false);
-  public readonly density = signal<'default' | 'comfortable' | 'compact'>('default');
+  public readonly shadow: InputSignal<string | null> = input<string | null>(null);
+  public readonly autoHeight: InputSignal<boolean> = input<boolean>(false);
+  public readonly density: WritableSignal<'default' | 'comfortable' | 'compact'> = signal<
+    'default' | 'comfortable' | 'compact'
+  >('default');
 
   @ViewChild('preview') public preview?: ViewportPreviewComponent;
 

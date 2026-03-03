@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon, IconLibrary, SemanticIcon, SEMANTIC_ICONS } from 'ui-lib-custom';
+import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom';
+import type { IconLibrary, SemanticIcon } from 'ui-lib-custom';
 
 @Component({
   selector: 'ui-lib-icon-preview',
@@ -20,7 +22,7 @@ export class IconPreview {
   ];
   public readonly semanticIcons: SemanticIcon[] = SEMANTIC_ICONS;
 
-  public readonly selectedIcon = signal<SemanticIcon>('home');
+  public readonly selectedIcon: WritableSignal<SemanticIcon> = signal<SemanticIcon>('home');
 
   public onIconSelect(event: Event): void {
     this.selectedIcon.set((event.target as HTMLSelectElement).value as SemanticIcon);

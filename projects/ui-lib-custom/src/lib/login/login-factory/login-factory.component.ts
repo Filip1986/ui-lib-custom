@@ -7,15 +7,16 @@ import {
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {
+import type {
   LoginFeatures,
   LoginFormData,
   LoginVariant,
   LoginSocialProvider,
-} from '../models/login-contract';
-import { Login1Component } from '../login-1/login-1.component';
-import { Login3Component } from '../login-3/login-3.component';
-import { Login2Component } from '../login-2/login-2.component';
+} from 'ui-lib-custom';
+import { Login1Component } from 'ui-lib-custom';
+import { Login3Component } from 'ui-lib-custom';
+import { Login2Component } from 'ui-lib-custom';
+import type { InputSignal, OutputEmitterRef } from '@angular/core';
 
 @Component({
   selector: 'lib-login-factory',
@@ -27,22 +28,24 @@ import { Login2Component } from '../login-2/login-2.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginFactoryComponent {
-  public readonly title = input<string>('Sign In');
-  public readonly variant = input<LoginVariant>('1');
-  public readonly loading = input<boolean>(false);
-  public readonly features = input<LoginFeatures>({
+  public readonly title: InputSignal<string> = input<string>('Sign In');
+  public readonly variant: InputSignal<LoginVariant> = input<LoginVariant>('1');
+  public readonly loading: InputSignal<boolean> = input<boolean>(false);
+  public readonly features: InputSignal<LoginFeatures> = input<LoginFeatures>({
     showSocialLogin: true,
     showRememberMe: true,
     showForgotPassword: true,
     showRegisterLink: true,
   });
-  public readonly socialProviders = input<LoginSocialProvider[]>([]);
+  public readonly socialProviders: InputSignal<LoginSocialProvider[]> = input<
+    LoginSocialProvider[]
+  >([]);
 
-  public readonly submitLogin = output<LoginFormData>();
-  public readonly registerClick = output<void>();
-  public readonly forgotPasswordClick = output<string>();
-  public readonly socialLoginClick = output<string>();
-  public readonly rememberMeChange = output<boolean>();
+  public readonly submitLogin: OutputEmitterRef<LoginFormData> = output<LoginFormData>();
+  public readonly registerClick: OutputEmitterRef<void> = output<void>();
+  public readonly forgotPasswordClick: OutputEmitterRef<string> = output<string>();
+  public readonly socialLoginClick: OutputEmitterRef<string> = output<string>();
+  public readonly rememberMeChange: OutputEmitterRef<boolean> = output<boolean>();
 
   public onSubmitLogin(data: LoginFormData): void {
     this.submitLogin.emit(data);

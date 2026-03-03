@@ -39,9 +39,10 @@ const meta: Meta<ButtonStoryArgs> = {
 
 export default meta;
 
-const renderButton = (
-  args: Partial<ButtonStoryArgs>
-): { props: Partial<ButtonStoryArgs>; template: string } => ({
+const renderButton: (args: Partial<ButtonStoryArgs>) => {
+  props: Partial<ButtonStoryArgs>;
+  template: string;
+} = (args: Partial<ButtonStoryArgs>): { props: Partial<ButtonStoryArgs>; template: string } => ({
   props: args,
   template: `
     <ui-lib-button
@@ -100,8 +101,8 @@ export const States: Story = {
     template: `
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
         <ui-lib-button>Normal</ui-lib-button>
-        <ui-lib-button disabled="true">Disabled</ui-lib-button>
-        <ui-lib-button loading="true">Loading</ui-lib-button>
+        <ui-lib-button [disabled]="true">Disabled</ui-lib-button>
+        <ui-lib-button [loading]="true">Loading</ui-lib-button>
       </div>
     `,
   }),

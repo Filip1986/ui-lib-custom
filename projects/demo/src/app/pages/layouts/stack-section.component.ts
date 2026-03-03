@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import {
-  Button,
-  Card,
-  Grid,
-  Stack,
-  Tabs,
-  Tab,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+  type Signal,
+  type WritableSignal,
+} from '@angular/core';
+import { Button, Card, Grid, Stack, Tabs, Tab, UiLibSelect, STACK_TOKENS } from 'ui-lib-custom';
+import type {
   TabsValue,
-  UiLibSelect,
-  STACK_TOKENS,
   StackToken,
   StackDirection,
   StackAlign,
@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
 @Component({
@@ -53,14 +53,17 @@ export class LayoutStackSectionComponent {
 </ui-lib-stack>
 `;
 
-  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
+    'demo' | 'usage' | 'api'
+  >('demo');
 
-  public readonly spacing = signal<StackToken>('md');
-  public readonly direction = signal<StackDirection>('vertical');
-  public readonly align = signal<StackAlign>('center');
-  public readonly justify = signal<StackJustify>('space-between');
+  public readonly spacing: WritableSignal<StackToken> = signal<StackToken>('md');
+  public readonly direction: WritableSignal<StackDirection> = signal<StackDirection>('vertical');
+  public readonly align: WritableSignal<StackAlign> = signal<StackAlign>('center');
+  public readonly justify: WritableSignal<StackJustify> = signal<StackJustify>('space-between');
 
-  public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
+  public readonly spacingOptions: { label: string; value: StackToken }[] =
+    this.buildOptions(STACK_TOKENS);
   public readonly directionOptions: { label: string; value: StackDirection }[] = [
     { label: 'Vertical', value: 'vertical' },
     { label: 'Horizontal', value: 'horizontal' },
@@ -80,13 +83,13 @@ export class LayoutStackSectionComponent {
     { label: 'Space Evenly', value: 'space-evenly' },
   ];
 
-  public readonly spacingLabel = computed<string>((): string =>
+  public readonly spacingLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.spacing(), this.spacingOptions)
   );
-  public readonly alignLabel = computed<string>((): string =>
+  public readonly alignLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.align(), this.alignOptions)
   );
-  public readonly justifyLabel = computed<string>((): string =>
+  public readonly justifyLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.justify(), this.justifyOptions)
   );
 
@@ -132,7 +135,7 @@ export class LayoutStackSectionComponent {
   }
 
   private displayLabel<T extends string>(value: T, options: { label: string; value: T }[]): string {
-    const match = options.find(
+    const match: { label: string; value: T } | undefined = options.find(
       (option: { label: string; value: T }): boolean => option.value === value
     );
     return match ? match.label : String(value);
@@ -140,8 +143,8 @@ export class LayoutStackSectionComponent {
 
   private toPx(value: string): string {
     if (value.endsWith('rem')) {
-      const numeric = Number.parseFloat(value.replace('rem', ''));
-      const pixels = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
+      const numeric: number = Number.parseFloat(value.replace('rem', ''));
+      const pixels: number = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
       return `${pixels}px`;
     }
     return value;

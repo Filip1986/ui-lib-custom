@@ -30,7 +30,7 @@ export function exportThemeAsCss(preset: ThemePreset, options: CssExportOptions 
   lines.push(`${selector} {`);
 
   lines.push('  /* Colors */');
-  Object.entries(preset.colors).forEach(([key, value]): void => {
+  Object.entries(preset.colors).forEach(([key, value]: [string, string]): void => {
     lines.push(`  --uilib-${kebabCase(key)}: ${value};`);
   });
 
@@ -86,7 +86,7 @@ function mapShadow(value: string): string {
 }
 
 function mapShapeRadius(value: string): string {
-  const shapeKey = value as keyof typeof SHAPE_TOKENS;
+  const shapeKey: keyof typeof SHAPE_TOKENS = value as keyof typeof SHAPE_TOKENS;
   if (shapeKey in SHAPE_TOKENS) {
     return SHAPE_TOKENS[shapeKey];
   }

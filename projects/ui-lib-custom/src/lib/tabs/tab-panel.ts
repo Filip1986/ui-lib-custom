@@ -7,6 +7,7 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
+import type { InputSignal, Signal } from '@angular/core';
 
 @Component({
   selector: 'ui-lib-tab-panel',
@@ -25,13 +26,13 @@ import {
   },
 })
 export class TabPanel {
-  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-  public readonly id = input<string>('');
-  public readonly labelId = input<string>('');
-  public readonly active = input<boolean>(false);
+  private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  public readonly id: InputSignal<string> = input<string>('');
+  public readonly labelId: InputSignal<string> = input<string>('');
+  public readonly active: InputSignal<boolean> = input<boolean>(false);
 
-  public readonly panelClasses = computed<string>((): string => {
-    const classes = ['tab-panel'];
+  public readonly panelClasses: Signal<string> = computed<string>((): string => {
+    const classes: string[] = ['tab-panel'];
     if (this.active()) {
       classes.push('tab-panel-active');
     }

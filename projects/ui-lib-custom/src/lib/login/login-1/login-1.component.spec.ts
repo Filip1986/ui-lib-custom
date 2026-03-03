@@ -54,7 +54,7 @@ describe('Login1Component', (): void => {
     const event: Event = new Event('change');
     Object.defineProperty(event, 'target', { value: input });
 
-    const setItemSpy = spyOn(localStorage, 'setItem');
+    const setItemSpy: jasmine.Spy = spyOn(localStorage, 'setItem');
     spyOn(component.rememberMeChange, 'emit');
 
     component.onRememberMeChange(event);

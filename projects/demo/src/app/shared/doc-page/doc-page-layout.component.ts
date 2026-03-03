@@ -1,18 +1,21 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   HostBinding,
   Input,
-  OnChanges,
-  OnDestroy,
-  SimpleChanges,
   signal,
   inject,
 } from '@angular/core';
+import type {
+  AfterViewInit,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  WritableSignal,
+} from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Container } from '../../../../../ui-lib-custom/src/public-api';
-import { DocSection } from './doc-section.model';
+import type { DocSection } from './doc-section.model';
 
 @Component({
   selector: 'app-doc-page-layout',
@@ -42,11 +45,11 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
     return this.railWidth;
   }
 
-  public readonly activeSectionId = signal<string | null>(null);
+  public readonly activeSectionId: WritableSignal<string | null> = signal<string | null>(null);
 
-  private readonly document = inject(DOCUMENT);
-  private observer?: IntersectionObserver;
-  private viewReady = false;
+  private readonly document: Document = inject(DOCUMENT);
+  private observer: IntersectionObserver | undefined;
+  private viewReady: boolean = false;
 
   public ngAfterViewInit(): void {
     this.viewReady = true;
@@ -68,7 +71,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
     // Pre-set active so click feedback is instant even before intersection observer fires
     this.activeSectionId.set(id);
 
-    const el = this.document.getElementById(id);
+    const el: HTMLElement | null = this.document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
@@ -76,7 +79,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
 
   private setupObserver(): void {
     this.observer?.disconnect();
-    const ids = this.flattenSections(this.sections);
+    const ids: string[] = this.flattenSections(this.sections);
     if (!ids.length) return;
 
     this.observer = new IntersectionObserver(
@@ -88,7 +91,7 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
     );
 
     ids.forEach((id: string): void => {
-      const el = this.document.getElementById(id);
+      const el: HTMLElement | null = this.document.getElementById(id);
       if (el) {
         this.observer?.observe(el);
       }
@@ -96,31 +99,35 @@ export class DocPageLayoutComponent implements AfterViewInit, OnChanges, OnDestr
   }
 
   private updateActive(entries: IntersectionObserverEntry[], ids: string[]): void {
-    const visible = entries
+    const visible: IntersectionObserverEntry[] = entries
       .filter((entry: IntersectionObserverEntry): boolean => entry.isIntersecting)
       .sort(
         (a: IntersectionObserverEntry, b: IntersectionObserverEntry): number =>
           a.boundingClientRect.top - b.boundingClientRect.top
       );
 
-    const first = visible[0];
-    const nextActive = first ? (first.target as HTMLElement).id : this.findNearestAbove(ids);
+    const first: IntersectionObserverEntry | undefined = visible[0];
+    const nextActive: string | null = first
+      ? (first.target as HTMLElement).id
+      : this.findNearestAbove(ids);
     if (nextActive && nextActive !== this.activeSectionId()) {
       this.activeSectionId.set(nextActive);
     }
   }
 
   private findNearestAbove(ids: string[]): string | null {
-    const win = this.document.defaultView;
-    const scrollY = win?.scrollY ?? 0;
-    const offsetTop = scrollY + this.topOffset + 8;
+    const win: Window | null = this.document.defaultView;
+    const scrollY: number = win?.scrollY ?? 0;
+    const offsetTop: number = scrollY + this.topOffset + 8;
 
-    const positions = ids
+    const positions: Array<{ id: string; top: number }> = ids
       .map((id: string): { id: string; top: number } | null => {
-        const el = this.document.getElementById(id);
+        const el: HTMLElement | null = this.document.getElementById(id);
         return el ? { id, top: el.getBoundingClientRect().top + scrollY } : null;
       })
-      .filter((entry): entry is { id: string; top: number } => Boolean(entry));
+      .filter((entry: { id: string; top: number } | null): entry is { id: string; top: number } =>
+        Boolean(entry)
+      );
 
     let candidate: { id: string; top: number } | null = null;
     for (const item of positions) {

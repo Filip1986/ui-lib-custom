@@ -12,7 +12,7 @@ const withThemeWrapper: DecoratorFunction = (
 ): IStory => {
   const story: IStory = storyFn();
   const template: string = story.template ?? '';
-  const globals = context.globals as StoryGlobals;
+  const globals: StoryGlobals = context.globals as StoryGlobals;
   return {
     ...story,
     template: `<sb-theme-wrapper [variant]="variant" [mode]="mode" [shape]="shape">${template}</sb-theme-wrapper>`,

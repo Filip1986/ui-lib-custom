@@ -34,9 +34,10 @@ const meta: Meta<InputStoryArgs> = {
 
 export default meta;
 
-const renderInput = (
-  args: Partial<InputStoryArgs>
-): { props: Partial<InputStoryArgs>; template: string } => ({
+const renderInput: (args: Partial<InputStoryArgs>) => {
+  props: Partial<InputStoryArgs>;
+  template: string;
+} = (args: Partial<InputStoryArgs>): { props: Partial<InputStoryArgs>; template: string } => ({
   props: args,
   template: `
     <ui-lib-input

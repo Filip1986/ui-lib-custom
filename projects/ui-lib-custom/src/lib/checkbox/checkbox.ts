@@ -9,15 +9,20 @@ import {
   model,
   inject,
   signal,
+  type InputSignal,
+  type ModelSignal,
+  type Signal,
+  type WritableSignal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type CheckboxVariant = 'material' | 'bootstrap' | 'minimal';
 export type CheckboxSize = 'sm' | 'md' | 'lg';
 
-let checkboxId = 0;
+let checkboxId: number = 0;
 
 @Component({
   selector: 'ui-lib-checkbox',
@@ -49,32 +54,34 @@ let checkboxId = 0;
   },
 })
 export class Checkbox implements ControlValueAccessor {
-  public readonly label = input<string | null>(null);
-  public readonly description = input<string | null>(null);
-  public readonly ariaLabel = input<string | null>(null);
-  public readonly variant = input<CheckboxVariant | null>(null);
-  public readonly size = input<CheckboxSize>('md');
-  public readonly disabled = input<boolean>(false);
-  public readonly indeterminate = input<boolean>(false);
+  public readonly label: InputSignal<string | null> = input<string | null>(null);
+  public readonly description: InputSignal<string | null> = input<string | null>(null);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  public readonly variant: InputSignal<CheckboxVariant | null> = input<CheckboxVariant | null>(
+    null
+  );
+  public readonly size: InputSignal<CheckboxSize> = input<CheckboxSize>('md');
+  public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly indeterminate: InputSignal<boolean> = input<boolean>(false);
 
-  public readonly checked = model<boolean>(false);
-  private readonly cvaDisabled = signal<boolean>(false);
+  public readonly checked: ModelSignal<boolean> = model<boolean>(false);
+  private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
 
   private onChange: (value: boolean) => void = (): void => {};
   private onTouched: () => void = (): void => {};
 
-  private readonly controlId = `ui-lib-checkbox-${++checkboxId}`;
-  public readonly labelElementId = `${this.controlId}-label`;
-  public readonly descriptionElementId = `${this.controlId}-description`;
+  private readonly controlId: string = `ui-lib-checkbox-${++checkboxId}`;
+  public readonly labelElementId: string = `${this.controlId}-label`;
+  public readonly descriptionElementId: string = `${this.controlId}-description`;
 
-  private readonly liveAnnouncer = inject(LiveAnnouncerService);
-  private readonly themeConfig = inject(ThemeConfigService);
+  private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly effectiveVariant = computed<CheckboxVariant>(
+  public readonly effectiveVariant: Signal<CheckboxVariant> = computed<CheckboxVariant>(
     (): CheckboxVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly hostClasses = computed<string>((): string => {
-    const classes = [
+  public readonly hostClasses: Signal<string> = computed<string>((): string => {
+    const classes: string[] = [
       'ui-checkbox',
       `ui-checkbox-variant-${this.effectiveVariant()}`,
       `ui-checkbox-size-${this.size()}`,
@@ -95,20 +102,24 @@ export class Checkbox implements ControlValueAccessor {
     return classes.join(' ');
   });
 
-  public readonly ariaChecked = computed<string>((): string =>
+  public readonly ariaChecked: Signal<string> = computed<string>((): string =>
     this.indeterminate() ? 'mixed' : this.checked() ? 'true' : 'false'
   );
-  public readonly isDisabled = computed<boolean>(
+  public readonly isDisabled: Signal<boolean> = computed<boolean>(
     (): boolean => this.disabled() || this.cvaDisabled()
   );
-  public readonly hostTabIndex = computed<number>((): number => (this.isDisabled() ? -1 : 0));
-  public readonly ariaLabelledby = computed<string | null>((): string | null =>
-    this.ariaLabel() ? null : this.labelElementId
+  public readonly hostTabIndex: Signal<number> = computed<number>((): number =>
+    this.isDisabled() ? -1 : 0
   );
-  public readonly ariaDescribedby = computed<string | null>((): string | null =>
-    this.description() ? this.descriptionElementId : null
+  public readonly ariaLabelledby: Signal<string | null> = computed<string | null>(
+    (): string | null => (this.ariaLabel() ? null : this.labelElementId)
   );
-  public readonly showDescription = computed<boolean>((): boolean => Boolean(this.description()));
+  public readonly ariaDescribedby: Signal<string | null> = computed<string | null>(
+    (): string | null => (this.description() ? this.descriptionElementId : null)
+  );
+  public readonly showDescription: Signal<boolean> = computed<boolean>((): boolean =>
+    Boolean(this.description())
+  );
 
   public writeValue(value: boolean | null): void {
     this.checked.set(Boolean(value));

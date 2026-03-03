@@ -9,13 +9,9 @@ import {
   signal,
   computed,
   ViewChild,
-  ElementRef,
-  AfterViewInit,
-  OnDestroy,
   HostBinding,
-  Signal,
-  WritableSignal,
 } from '@angular/core';
+import type { ElementRef, AfterViewInit, OnDestroy, Signal, WritableSignal } from '@angular/core';
 
 interface ViewportPreset {
   key: string;
@@ -73,7 +69,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
 
   public readonly displayWidth: Signal<number> = computed<number>((): number => {
     if (this.isFullWidth()) {
-      const hostWidth = this.hostWidth();
+      const hostWidth: number = this.hostWidth();
       return hostWidth > 0 ? hostWidth : this.width();
     }
     return this.isPortrait() ? this.height() : this.width();
@@ -100,7 +96,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   }
 
   public toggleActive(): void {
-    const next = this.mode === 'inline' ? true : !this.activeSignal();
+    const next: boolean = this.mode === 'inline' ? true : !this.activeSignal();
     this.activeSignal.set(next);
     this.activeChange.emit(next);
   }
@@ -118,7 +114,7 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
   }
 
   public setCustom(): void {
-    const val = this.customWidth();
+    const val: number = this.customWidth();
     if (val > 0) {
       this.isFullWidth.set(false);
       this.width.set(val);
@@ -144,19 +140,19 @@ export class ViewportPreviewComponent implements AfterViewInit, OnDestroy {
       this.scale.set(1);
       return;
     }
-    const frameHost = this.frameHost;
+    const frameHost: ElementRef<HTMLDivElement> | undefined = this.frameHost;
     if (!frameHost) {
       return;
     }
-    const host = frameHost.nativeElement.parentElement ?? frameHost.nativeElement;
+    const host: HTMLElement = frameHost.nativeElement.parentElement ?? frameHost.nativeElement;
     this.hostWidth.set(host.clientWidth);
     if (this.isFullWidth()) {
       this.scale.set(1);
       return;
     }
-    const avail = host.clientWidth - 32;
-    const target = this.displayWidth();
-    const scale = Math.min(1, Math.max(0.25, avail > 0 ? avail / target : 1));
+    const avail: number = host.clientWidth - 32;
+    const target: number = this.displayWidth();
+    const scale: number = Math.min(1, Math.max(0.25, avail > 0 ? avail / target : 1));
     this.scale.set(scale);
   }
 }

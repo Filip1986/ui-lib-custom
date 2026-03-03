@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 
 interface FontsResponse {
   items: { family: string; category: string; variants: string[] }[];
@@ -13,22 +14,24 @@ export interface GoogleFont {
 
 @Injectable({ providedIn: 'root' })
 export class GoogleFontsService {
-  private readonly http = inject(HttpClient);
-  private loaded = false;
+  private readonly http: HttpClient = inject(HttpClient);
+  private loaded: boolean = false;
 
-  public readonly fonts = signal<string[]>([]); // backward compatibility: family names only
-  public readonly fontMeta = signal<GoogleFont[]>([]);
-  public readonly loading = signal<boolean>(false);
-  public readonly error = signal<string | null>(null);
+  public readonly fonts: WritableSignal<string[]> = signal<string[]>([]); // backward compatibility: family names only
+  public readonly fontMeta: WritableSignal<GoogleFont[]> = signal<GoogleFont[]>([]);
+  public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly error: WritableSignal<string | null> = signal<string | null>(null);
 
-  public readonly serifFonts = computed<string[]>((): string[] => this.getFontsByCategory('serif'));
-  public readonly sansSerifFonts = computed<string[]>((): string[] =>
+  public readonly serifFonts: Signal<string[]> = computed<string[]>((): string[] =>
+    this.getFontsByCategory('serif')
+  );
+  public readonly sansSerifFonts: Signal<string[]> = computed<string[]>((): string[] =>
     this.getFontsByCategory('sans-serif')
   );
-  public readonly displayFonts = computed<string[]>((): string[] =>
+  public readonly displayFonts: Signal<string[]> = computed<string[]>((): string[] =>
     this.getFontsByCategory('display')
   );
-  public readonly monospaceFonts = computed<string[]>((): string[] =>
+  public readonly monospaceFonts: Signal<string[]> = computed<string[]>((): string[] =>
     this.getFontsByCategory('monospace')
   );
 
@@ -63,7 +66,7 @@ export class GoogleFontsService {
   }
 
   public getFontsByCategory(category: string): string[] {
-    const normalized = category.toLowerCase();
+    const normalized: string = category.toLowerCase();
     return this.fontMeta()
       .filter((font: GoogleFont): boolean => font.category.toLowerCase() === normalized)
       .map((font: GoogleFont): string => font.family);

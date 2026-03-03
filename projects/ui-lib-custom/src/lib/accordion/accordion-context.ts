@@ -1,7 +1,7 @@
 import type { Signal } from '@angular/core';
 import { InjectionToken } from '@angular/core';
-import type { AccordionPanel } from './accordion-panel';
-import type { AccordionExpandMode, AccordionSize, AccordionVariant } from './accordion.types';
+import type { AccordionPanel } from 'ui-lib-custom';
+import type { AccordionExpandMode, AccordionSize, AccordionVariant } from 'ui-lib-custom';
 
 export interface AccordionContext {
   variant: Signal<AccordionVariant | null>;
@@ -13,4 +13,5 @@ export interface AccordionContext {
   unregisterPanel: (panel: AccordionPanel) => void;
 }
 
-export const ACCORDION_CONTEXT = new InjectionToken<AccordionContext>('AccordionContext');
+export const ACCORDION_CONTEXT: InjectionToken<AccordionContext> =
+  new InjectionToken<AccordionContext>('AccordionContext');

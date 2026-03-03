@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,10 +15,10 @@ export class DocCodeSnippetComponent {
   @Input({ required: true }) public code: string = '';
   @Input() public language: string = '';
 
-  public readonly copied = signal<boolean>(false);
+  public readonly copied: WritableSignal<boolean> = signal<boolean>(false);
 
   public async copy(): Promise<void> {
-    const text = this.code.trimEnd();
+    const text: string = this.code.trimEnd();
 
     try {
       await navigator.clipboard.writeText(text);
@@ -29,7 +30,7 @@ export class DocCodeSnippetComponent {
   }
 
   private fallbackCopy(text: string): void {
-    const textarea = document.createElement('textarea');
+    const textarea: HTMLTextAreaElement = document.createElement('textarea');
     textarea.value = text;
     textarea.setAttribute('readonly', '');
     textarea.style.position = 'fixed';

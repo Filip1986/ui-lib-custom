@@ -1,7 +1,7 @@
-import { Directive, ElementRef, effect, inject, input } from '@angular/core';
+import { Directive, ElementRef, effect, inject, input, type InputSignal } from '@angular/core';
 import { ThemeConfigService } from './theme-config.service';
-import { ThemePreset, ThemePresetColors, ThemeVariant } from './theme-preset.interface';
-import { ThemeScopeInput } from './theme-scope.directive';
+import type { ThemePreset, ThemePresetColors, ThemeVariant } from './theme-preset.interface';
+import type { ThemeScopeInput } from './theme-scope.directive';
 
 /**
  * Mixin to add theme scope capability to a component
@@ -11,11 +11,11 @@ import { ThemeScopeInput } from './theme-scope.directive';
   standalone: true,
 })
 export class WithThemeScopeMixin {
-  private readonly el = inject(ElementRef<HTMLElement>);
-  private readonly themeService = inject(ThemeConfigService);
-  private readonly appliedVars = new Set<string>();
+  private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+  private readonly appliedVars: Set<string> = new Set<string>();
 
-  public readonly theme = input<ThemeScopeInput>(null);
+  public readonly theme: InputSignal<ThemeScopeInput> = input<ThemeScopeInput>(null);
 
   private get hostElement(): HTMLElement {
     return this.el.nativeElement as HTMLElement;
@@ -28,7 +28,7 @@ export class WithThemeScopeMixin {
   }
 
   private applyTheme(): void {
-    const config = this.theme();
+    const config: ThemeScopeInput = this.theme();
     this.clearAppliedStyles();
 
     if (!config) {
@@ -45,8 +45,8 @@ export class WithThemeScopeMixin {
       this.applyColorScheme(config.colorScheme);
     }
 
-    const basePreset = config.preset ?? this.themeService.getPreset();
-    const resolvedPreset = this.mergePreset(basePreset, config);
+    const basePreset: ThemePreset = config.preset ?? this.themeService.getPreset();
+    const resolvedPreset: ThemePreset = this.mergePreset(basePreset, config);
     if (config.preset || config.colors || config.variant) {
       this.applyVariables(this.themeService.getCssVars(resolvedPreset));
     }
@@ -66,8 +66,8 @@ export class WithThemeScopeMixin {
 
   private applyVariables(variables: Record<string, string>): void {
     const element: HTMLElement = this.hostElement;
-    Object.entries(variables).forEach(([key, value]): void => {
-      const varName = key.startsWith('--') ? key : `--${key}`;
+    Object.entries(variables).forEach(([key, value]: [string, string]): void => {
+      const varName: string = key.startsWith('--') ? key : `--${key}`;
       element.style.setProperty(varName, value);
       this.appliedVars.add(varName);
     });
@@ -81,7 +81,7 @@ export class WithThemeScopeMixin {
 
   private clearAppliedStyles(): void {
     const element: HTMLElement = this.hostElement;
-    this.appliedVars.forEach((key): void => {
+    this.appliedVars.forEach((key: string): void => {
       element.style.removeProperty(key);
     });
     this.appliedVars.clear();

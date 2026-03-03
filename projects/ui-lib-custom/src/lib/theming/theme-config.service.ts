@@ -1,19 +1,20 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, computed, inject, signal, Signal, WritableSignal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   BORDER_RADIUS,
   SHADOWS,
   SELECTBUTTON_TOKENS,
   SHAPE_TOKENS,
-  ShapeToken,
+  type ShapeToken,
   DENSITY_TOKENS,
-  DensityToken,
+  type DensityToken,
 } from 'ui-lib-custom/tokens';
 import brandExamplePreset from './presets/brand-example.json';
 import darkPreset from './presets/dark.json';
 import lightPreset from './presets/light.json';
 import { ICON_SIZES } from 'ui-lib-custom/core';
-import {
+import type {
   DeepPartial,
   ThemePreset,
   ThemePresetOverrides,
@@ -25,8 +26,8 @@ import {
   ThemePresetShape,
 } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
-import { exportThemeAsScss, ScssExportOptions } from './exporters/scss-exporter';
-import { exportThemeAsCss, CssExportOptions } from './exporters/css-exporter';
+import { exportThemeAsScss, type ScssExportOptions } from './exporters/scss-exporter';
+import { exportThemeAsCss, type CssExportOptions } from './exporters/css-exporter';
 import { exportThemeAsFigmaJson } from './exporters/figma-exporter';
 
 type LoadOptions = {
@@ -39,9 +40,9 @@ type LoadOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class ThemeConfigService {
-  private readonly doc = inject(DOCUMENT);
-  private readonly storageKey = 'ui-lib-custom.theme';
-  private readonly savedThemesKey = 'ui-lib-custom.saved-themes';
+  private readonly doc: Document = inject(DOCUMENT);
+  private readonly storageKey: string = 'ui-lib-custom.theme';
+  private readonly savedThemesKey: string = 'ui-lib-custom.saved-themes';
   private readonly defaultIconConfig: ThemeIconConfig = {
     defaultLibrary: 'lucide',
     defaultSize: 'md',
@@ -54,10 +55,16 @@ export class ThemeConfigService {
     'brand-example': this.ensureIconDefaults(brandExamplePreset as ThemePreset),
   };
 
-  private readonly hostRef = signal<HTMLElement | null>(this.doc.documentElement);
-  private readonly presetSignal = signal<ThemePreset>(this.defaultPreset);
-  private readonly savedThemesSignal = signal<string[]>(this.listSavedThemeNames());
-  private readonly modeSignal = signal<ThemeMode>('auto');
+  private readonly hostRef: WritableSignal<HTMLElement | null> = signal<HTMLElement | null>(
+    this.doc.documentElement
+  );
+  private readonly presetSignal: WritableSignal<ThemePreset> = signal<ThemePreset>(
+    this.defaultPreset
+  );
+  private readonly savedThemesSignal: WritableSignal<string[]> = signal<string[]>(
+    this.listSavedThemeNames()
+  );
+  private readonly modeSignal: WritableSignal<ThemeMode> = signal<ThemeMode>('auto');
   private readonly variantSignal: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
   private readonly shapeSignal: WritableSignal<ShapeToken> = signal<ShapeToken>('rounded');
   private readonly densitySignal: WritableSignal<DensityToken> = signal<DensityToken>('default');
@@ -75,32 +82,36 @@ export class ThemeConfigService {
     return this.doc.documentElement;
   }
 
-  public readonly preset = computed<ThemePreset>((): ThemePreset => this.presetSignal());
+  public readonly preset: Signal<ThemePreset> = computed<ThemePreset>(
+    (): ThemePreset => this.presetSignal()
+  );
   public readonly savedThemes: Signal<string[]> = this.savedThemesSignal.asReadonly();
-  public readonly cssVars = computed<Record<string, string>>(
+  public readonly cssVars: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => this.mapPresetToCssVars(this.presetSignal())
   );
   public readonly mode: Signal<ThemeMode> = this.modeSignal.asReadonly();
   public readonly variant: Signal<ThemeVariant> = this.variantSignal.asReadonly();
   public readonly shape: Signal<ShapeToken> = this.shapeSignal.asReadonly();
   public readonly density: Signal<DensityToken> = this.densitySignal.asReadonly();
-  public readonly effectiveTheme = computed<'light' | 'dark'>((): 'light' | 'dark' => {
-    const mode = this.modeSignal();
-    if (mode === 'auto') {
-      return this.getSystemPreference();
+  public readonly effectiveTheme: Signal<'light' | 'dark'> = computed<'light' | 'dark'>(
+    (): 'light' | 'dark' => {
+      const mode: ThemeMode = this.modeSignal();
+      if (mode === 'auto') {
+        return this.getSystemPreference();
+      }
+      return mode;
     }
-    return mode;
-  });
+  );
 
   constructor() {
     this.setupSystemPreferenceListener();
-    const stored = this.readStoredConfig();
-    const storedMode = this.getStoredMode(stored);
+    const stored: ThemeConfig | ThemePreset | null = this.readStoredConfig();
+    const storedMode: ThemeMode | null = this.getStoredMode(stored);
     if (storedMode) {
       this.modeSignal.set(storedMode);
     }
-    const storedPreset = this.getStoredPreset(stored);
-    const initial = storedPreset
+    const storedPreset: ThemePreset | null = this.getStoredPreset(stored);
+    const initial: ThemePreset = storedPreset
       ? this.ensureIconDefaults(this.mergePresets(this.defaultPreset, storedPreset))
       : this.defaultPreset;
     this.presetSignal.set(initial);
@@ -123,14 +134,14 @@ export class ThemeConfigService {
     preset: ThemePreset | ThemePresetOverrides,
     options?: LoadOptions
   ): ThemePreset {
-    const merge = options?.merge ?? true;
-    const apply = options?.apply ?? true;
-    const persist = options?.persist ?? true;
-    const base = merge
+    const merge: boolean = options?.merge ?? true;
+    const apply: boolean = options?.apply ?? true;
+    const persist: boolean = options?.persist ?? true;
+    const base: ThemePreset = merge
       ? (options?.base ?? this.presetSignal())
       : (options?.base ?? this.defaultPreset);
 
-    const resolved = this.ensureIconDefaults(this.mergePresets(base, preset));
+    const resolved: ThemePreset = this.ensureIconDefaults(this.mergePresets(base, preset));
     this.presetSignal.set(resolved);
 
     if (persist) {
@@ -168,14 +179,14 @@ export class ThemeConfigService {
     if (target) {
       this.hostRef.set(target);
     }
-    const host = target ?? this.hostRef();
-    const current = preset ?? this.presetSignal();
+    const host: HTMLElement | null = target ?? this.hostRef();
+    const current: ThemePreset = preset ?? this.presetSignal();
     if (!host) {
       return;
     }
 
-    const vars = this.mapPresetToCssVars(current);
-    Object.entries(vars).forEach(([name, value]): void => {
+    const vars: Record<string, string> = this.mapPresetToCssVars(current);
+    Object.entries(vars).forEach(([name, value]: [string, string]): void => {
       host.style.setProperty(name, value);
     });
   }
@@ -187,7 +198,7 @@ export class ThemeConfigService {
   }
 
   public toggleDarkMode(): void {
-    const current = this.effectiveTheme();
+    const current: 'light' | 'dark' = this.effectiveTheme();
     this.setMode(current === 'dark' ? 'light' : 'dark');
   }
 
@@ -195,28 +206,28 @@ export class ThemeConfigService {
     if (target) {
       this.hostRef.set(target);
     }
-    const host = target ?? this.hostRef();
+    const host: HTMLElement | null = target ?? this.hostRef();
     if (!host) {
       return;
     }
 
-    const mode = this.modeSignal();
-    const effective = this.effectiveTheme();
+    const mode: ThemeMode = this.modeSignal();
+    const effective: 'light' | 'dark' = this.effectiveTheme();
     host.removeAttribute('data-theme');
     host.setAttribute('data-theme', mode === 'auto' ? effective : mode);
   }
 
   public exportAsCSS(preset: ThemePreset = this.presetSignal()): string {
-    const vars = this.mapPresetToCssVars(preset);
-    const body = Object.entries(vars)
-      .map(([name, value]): string => `  ${name}: ${value};`)
+    const vars: Record<string, string> = this.mapPresetToCssVars(preset);
+    const body: string = Object.entries(vars)
+      .map(([name, value]: [string, string]): string => `  ${name}: ${value};`)
       .join('\n');
     return `:root {\n${body}\n}`;
   }
 
   public exportAsJSON(preset: ThemePreset = this.presetSignal(), download = false): string {
-    const normalized = this.ensureIconDefaults(preset);
-    const json = JSON.stringify(normalized, null, 2);
+    const normalized: ThemePreset = this.ensureIconDefaults(preset);
+    const json: string = JSON.stringify(normalized, null, 2);
     if (download) {
       saveAs('theme.json', json, 'application/json');
     }
@@ -230,11 +241,11 @@ export class ThemeConfigService {
     download = false
   ): string {
     if (this.isThemePreset(presetOrOptions)) {
-      const vars = this.mapPresetToCssVars(presetOrOptions);
-      const body = Object.entries(vars)
-        .map(([name, value]): string => `$${name.replace(/^--/, '')}: ${value};`)
+      const vars: Record<string, string> = this.mapPresetToCssVars(presetOrOptions);
+      const body: string = Object.entries(vars)
+        .map(([name, value]: [string, string]): string => `$${name.replace(/^--/, '')}: ${value};`)
         .join('\n');
-      const scss = `// Generated from UI Lib theme preset\n${body}\n`;
+      const scss: string = `// Generated from UI Lib theme preset\n${body}\n`;
       if (download) {
         saveAs('_theme-variables.scss', scss, 'text/x-scss');
       }
@@ -261,7 +272,7 @@ export class ThemeConfigService {
     let filename: string;
     let mimeType: string;
 
-    const safeName = this.toFileSafeName(this.presetSignal().name);
+    const safeName: string = this.toFileSafeName(this.presetSignal().name);
 
     switch (format) {
       case 'scss':
@@ -292,15 +303,15 @@ export class ThemeConfigService {
 
   public saveToLocalStorage(name: string, preset: ThemePreset = this.presetSignal()): void {
     if (!name || !this.hasLocalStorage()) return;
-    const map = this.readSavedThemes();
+    const map: Record<string, ThemePreset> = this.readSavedThemes();
     map[name] = preset;
     this.writeSavedThemes(map);
     this.syncSavedThemes(map);
   }
 
   public loadFromLocalStorage(name: string, options?: LoadOptions): ThemePreset | null {
-    const map = this.readSavedThemes();
-    const found = map[name];
+    const map: Record<string, ThemePreset> = this.readSavedThemes();
+    const found: ThemePreset | undefined = map[name];
     if (!found) return null;
     return this.loadPreset(found, { merge: false, apply: true, persist: true, ...options });
   }
@@ -310,7 +321,7 @@ export class ThemeConfigService {
   }
 
   public deleteSavedTheme(name: string): void {
-    const map = this.readSavedThemes();
+    const map: Record<string, ThemePreset> = this.readSavedThemes();
     if (map[name]) {
       delete map[name];
       this.writeSavedThemes(map);
@@ -319,22 +330,22 @@ export class ThemeConfigService {
   }
 
   public async importFromJSON(file: File, options?: LoadOptions): Promise<ThemePreset> {
-    const text = await file.text();
-    const parsed = JSON.parse(text) as ThemePreset;
+    const text: string = await file.text();
+    const parsed: ThemePreset = JSON.parse(text) as ThemePreset;
     return this.loadPreset(parsed, { merge: false, apply: true, persist: true, ...options });
   }
 
   public downloadPresetFiles(preset: ThemePreset = this.presetSignal()): void {
-    const json = this.exportAsJSON(preset);
-    const css = this.exportAsCSS(preset);
-    const scss = this.exportAsScss(preset);
+    const json: string = this.exportAsJSON(preset);
+    const css: string = this.exportAsCSS(preset);
+    const scss: string = this.exportAsScss(preset);
     saveAs('theme.json', json, 'application/json');
     saveAs('theme.css', css, 'text/css');
     saveAs('_theme-variables.scss', scss, 'text/x-scss');
   }
 
   public getCssVars(preset: ThemePreset | null = null): Record<string, string> {
-    const source = preset ?? this.presetSignal();
+    const source: ThemePreset = preset ?? this.presetSignal();
     return this.mapPresetToCssVars(source);
   }
 
@@ -343,7 +354,7 @@ export class ThemeConfigService {
   }
 
   public clearStoredPreset(): void {
-    const storage = this.storage;
+    const storage: Storage | null = this.storage;
     if (!storage) {
       return;
     }
@@ -371,9 +382,9 @@ export class ThemeConfigService {
   }
 
   private triggerDownload(content: string, filename: string, mimeType: string): void {
-    const blob = new Blob([content], { type: mimeType });
-    const url = URL.createObjectURL(blob);
-    const anchor = this.doc.createElement('a');
+    const blob: Blob = new Blob([content], { type: mimeType });
+    const url: string = URL.createObjectURL(blob);
+    const anchor: HTMLAnchorElement = this.doc.createElement('a');
     anchor.href = url;
     anchor.download = filename;
     anchor.click();
@@ -385,7 +396,7 @@ export class ThemeConfigService {
   }
 
   private setupSystemPreferenceListener(): void {
-    const win = this.windowRef;
+    const win: Window | null = this.windowRef;
     if (!win) {
       return;
     }
@@ -399,7 +410,7 @@ export class ThemeConfigService {
   }
 
   private getSystemPreference(): 'light' | 'dark' {
-    const win = this.windowRef;
+    const win: Window | null = this.windowRef;
     if (!win) {
       return 'light';
     }
@@ -414,10 +425,10 @@ export class ThemeConfigService {
       }
     };
     const applyColor = (value: string, ...names: string[]): void => {
-      names.forEach((name): void => set(name, value));
+      names.forEach((name: string): void => set(name, value));
     };
 
-    const presetWithIcons = this.ensureIconDefaults(preset);
+    const presetWithIcons: ThemePreset = this.ensureIconDefaults(preset);
     const { colors, typography, shadow, cardShadow, buttonShadow, icons, shape } = presetWithIcons;
 
     const surfaceAlt: string = colors.surfaceAlt ?? colors.surface;
@@ -510,11 +521,12 @@ export class ThemeConfigService {
 
     const resolvedBorderRadius: string = this.resolveShapeValue(shape);
     const shapeConfig: ThemePresetShape | null = this.resolveLegacyShape(shape);
-    const buttonRadius: string =
-      this.resolveRadius(shapeConfig?.buttonRadius) ?? resolvedBorderRadius;
-    const cardRadius: string = this.resolveRadius(shapeConfig?.cardRadius) ?? resolvedBorderRadius;
-    const inputRadius: string =
-      this.resolveRadius(shapeConfig?.inputRadius) ?? resolvedBorderRadius;
+    const buttonRadius: string = this.resolveRadius(
+      shapeConfig?.buttonRadius,
+      resolvedBorderRadius
+    );
+    const cardRadius: string = this.resolveRadius(shapeConfig?.cardRadius, resolvedBorderRadius);
+    const inputRadius: string = this.resolveRadius(shapeConfig?.inputRadius, resolvedBorderRadius);
 
     set('--uilib-radius-sm', resolvedBorderRadius);
     set('--uilib-radius-md', resolvedBorderRadius);
@@ -543,9 +555,9 @@ export class ThemeConfigService {
     set('--uilib-font-heading-weight', `${headingWeight}`);
     set('--uilib-font-body-weight', `${bodyWeight}`);
 
-    const shadowValueCard =
+    const shadowValueCard: string =
       (SHADOWS as Record<string, string>)[cardShadow ?? shadow ?? ''] ?? 'none';
-    const shadowValueButton =
+    const shadowValueButton: string =
       (SHADOWS as Record<string, string>)[buttonShadow ?? shadow ?? ''] ?? 'none';
     set('--uilib-card-shadow', shadowValueCard);
     set('--uilib-card-shadow-hover', shadowValueCard);
@@ -597,20 +609,20 @@ export class ThemeConfigService {
     set('--uilib-select-button-minimal-selected-bg', colors.surfaceAlt);
     set('--uilib-select-button-minimal-selected-fg', colors.text);
 
-    const iconSizes = icons?.sizes ?? this.defaultIconConfig.sizes;
-    Object.entries(iconSizes).forEach(([key, value]): void =>
+    const iconSizes: Record<string, string> = icons?.sizes ?? this.defaultIconConfig.sizes;
+    Object.entries(iconSizes).forEach(([key, value]: [string, string]): void =>
       set(`--uilib-icon-size-${key}`, value)
     );
 
     return vars;
   }
 
-  private resolveRadius(value: ThemeShapeRadius | undefined): string | undefined {
+  private resolveRadius(value: ThemeShapeRadius | undefined, defaultValue: string): string {
     if (value === undefined) {
-      return undefined;
+      return defaultValue;
     }
 
-    const key = value as keyof typeof BORDER_RADIUS;
+    const key: keyof typeof BORDER_RADIUS = value as keyof typeof BORDER_RADIUS;
     if (key in BORDER_RADIUS) {
       return BORDER_RADIUS[key];
     }
@@ -619,18 +631,18 @@ export class ThemeConfigService {
 
   private resolveShapeValue(shape: unknown): string {
     if (typeof shape === 'string') {
-      const key = shape as keyof typeof SHAPE_TOKENS;
+      const key: keyof typeof SHAPE_TOKENS = shape as keyof typeof SHAPE_TOKENS;
       return SHAPE_TOKENS[key];
     }
     const legacy: ThemePresetShape | null = this.resolveLegacyShape(shape);
-    return this.resolveRadius(legacy?.borderRadius) ?? SHAPE_TOKENS.rounded;
+    return this.resolveRadius(legacy?.borderRadius, SHAPE_TOKENS.rounded);
   }
 
   private resolveLegacyShape(shape: unknown): ThemePresetShape | null {
     if (!shape || typeof shape !== 'object') {
       return null;
     }
-    const legacy = shape as ThemePresetShape;
+    const legacy: ThemePresetShape = shape as ThemePresetShape;
     if (!('borderRadius' in legacy)) {
       return null;
     }
@@ -646,7 +658,7 @@ export class ThemeConfigService {
       (patch as Record<string, unknown> | null | undefined) ?? {};
     const clone: T = { ...(base as Record<string, unknown>) } as T;
 
-    Object.entries(source).forEach(([key, value]): void => {
+    Object.entries(source).forEach(([key, value]: [string, unknown]): void => {
       if (value === undefined) {
         return;
       }
@@ -666,7 +678,7 @@ export class ThemeConfigService {
   }
 
   private persistConfig(preset: ThemePreset, mode: ThemeMode): void {
-    const storage = this.storage;
+    const storage: Storage | null = this.storage;
     if (!storage) {
       return;
     }
@@ -679,12 +691,12 @@ export class ThemeConfigService {
   }
 
   private readStoredConfig(): ThemeConfig | ThemePreset | null {
-    const storage = this.storage;
+    const storage: Storage | null = this.storage;
     if (!storage) {
       return null;
     }
     try {
-      const raw = storage.getItem(this.storageKey);
+      const raw: string | null = storage.getItem(this.storageKey);
       if (!raw) {
         return null;
       }
@@ -723,10 +735,10 @@ export class ThemeConfigService {
   }
 
   private readSavedThemes(): Record<string, ThemePreset> {
-    const storage = this.storage;
+    const storage: Storage | null = this.storage;
     if (!storage) return {};
     try {
-      const raw = storage.getItem(this.savedThemesKey);
+      const raw: string | null = storage.getItem(this.savedThemesKey);
       return raw ? (JSON.parse(raw) as Record<string, ThemePreset>) : {};
     } catch {
       return {};
@@ -734,17 +746,17 @@ export class ThemeConfigService {
   }
 
   private listSavedThemeNames(): string[] {
-    const map = this.readSavedThemes();
+    const map: Record<string, ThemePreset> = this.readSavedThemes();
     return Object.keys(map);
   }
 
   private syncSavedThemes(map?: Record<string, ThemePreset>): void {
-    const source = map ?? this.readSavedThemes();
+    const source: Record<string, ThemePreset> = map ?? this.readSavedThemes();
     this.savedThemesSignal.set(Object.keys(source));
   }
 
   private writeSavedThemes(map: Record<string, ThemePreset>): void {
-    const storage = this.storage;
+    const storage: Storage | null = this.storage;
     if (!storage) return;
     try {
       storage.setItem(this.savedThemesKey, JSON.stringify(map));
@@ -758,11 +770,13 @@ export class ThemeConfigService {
   }
 
   private async fetchPreset(url: string): Promise<ThemePreset | ThemePresetOverrides> {
-    const response = await fetch(url, { cache: 'no-store' });
+    const response: Response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`Failed to load theme preset from ${url} (${response.status})`);
     }
-    const parsed = (await response.json()) as ThemePreset | ThemePresetOverrides;
+    const parsed: ThemePreset | ThemePresetOverrides = (await response.json()) as
+      | ThemePreset
+      | ThemePresetOverrides;
     return parsed;
   }
 

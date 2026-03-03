@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { UiLibInput, InputVariant } from './input';
+import { UiLibInput, type InputVariant } from './input';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 @Component({
@@ -274,7 +275,7 @@ describe('UiLibInput basics', (): void => {
 describe('UiLibInput ngModel integration', (): void => {
   let fixture: ComponentFixture<NgModelHostComponent>;
 
-  const flushMicrotasks = async (): Promise<void> => {
+  const flushMicrotasks: () => Promise<void> = async (): Promise<void> => {
     await new Promise<void>((resolve: () => void): void => {
       setTimeout(resolve, 0);
     });

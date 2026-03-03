@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectionStrategy, computed, inject, input, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
-  ThemeConfigService,
-  ThemeEditorService,
-  ThemePresetService,
+  Component,
+  ChangeDetectionStrategy,
+  computed,
+  inject,
+  input,
+  signal,
+  type InputSignal,
+  type Signal,
+  type WritableSignal,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ThemeConfigService, ThemeEditorService, ThemePresetService } from 'ui-lib-custom/theme';
+import type {
   ThemePreset,
   ThemeVariant,
   ThemeShape,
@@ -34,21 +42,32 @@ interface ColorOption {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeEditorComponent {
-  public readonly embedded = input<boolean>(false);
-  public readonly showFab = input<boolean>(true);
+  public readonly embedded: InputSignal<boolean> = input<boolean>(false);
+  public readonly showFab: InputSignal<boolean> = input<boolean>(true);
 
-  private readonly themeConfig = inject(ThemeConfigService);
-  private readonly presetService = inject(ThemePresetService);
-  private readonly editorService = inject(ThemeEditorService);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly presetService: ThemePresetService = inject(ThemePresetService);
+  private readonly editorService: ThemeEditorService = inject(ThemeEditorService);
 
-  public readonly isOpen = signal<boolean>(false);
-  public readonly panelOpen = computed<boolean>((): boolean => this.embedded() || this.isOpen());
-  public readonly pendingColors = this.editorService.pendingColors;
+  public readonly isOpen: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly panelOpen: Signal<boolean> = computed<boolean>(
+    (): boolean => this.embedded() || this.isOpen()
+  );
+  public readonly pendingColors: WritableSignal<Record<string, string>> =
+    this.editorService.pendingColors;
 
-  public readonly variant = computed<ThemeVariant>((): ThemeVariant => this.themeConfig.variant());
-  public readonly shape = computed<ThemeShape>((): ThemeShape => this.themeConfig.shape());
-  public readonly density = computed<ThemeDensity>((): ThemeDensity => this.themeConfig.density());
-  public readonly mode = computed<ThemeMode>((): ThemeMode => this.themeConfig.mode());
+  public readonly variant: Signal<ThemeVariant> = computed<ThemeVariant>(
+    (): ThemeVariant => this.themeConfig.variant()
+  );
+  public readonly shape: Signal<ThemeShape> = computed<ThemeShape>(
+    (): ThemeShape => this.themeConfig.shape()
+  );
+  public readonly density: Signal<ThemeDensity> = computed<ThemeDensity>(
+    (): ThemeDensity => this.themeConfig.density()
+  );
+  public readonly mode: Signal<ThemeMode> = computed<ThemeMode>(
+    (): ThemeMode => this.themeConfig.mode()
+  );
 
   public readonly variants: ToggleOption<ThemeVariant>[] = [
     { label: 'Material', value: 'material' },
@@ -84,16 +103,18 @@ export class ThemeEditorComponent {
     { key: 'info', label: 'Info', cssVar: '--uilib-color-info-600' },
   ];
 
-  public readonly colorValues = signal<Record<string, string>>({});
+  public readonly colorValues: WritableSignal<Record<string, string>> = signal<
+    Record<string, string>
+  >({});
 
-  public readonly headingFont = signal<string>(
+  public readonly headingFont: WritableSignal<string> = signal<string>(
     this.readCssVar('--uilib-font-heading', "'Inter', sans-serif")
   );
-  public readonly bodyFont = signal<string>(
+  public readonly bodyFont: WritableSignal<string> = signal<string>(
     this.readCssVar('--uilib-font-body', "'Inter', sans-serif")
   );
 
-  public readonly savedPresets = computed<ThemePreset[]>((): ThemePreset[] =>
+  public readonly savedPresets: Signal<ThemePreset[]> = computed<ThemePreset[]>((): ThemePreset[] =>
     this.presetService.presets()
   );
 
@@ -185,7 +206,7 @@ export class ThemeEditorComponent {
   }
 
   public savePreset(): void {
-    const name = window.prompt('Preset name');
+    const name: string | null = window.prompt('Preset name');
     if (!name) {
       return;
     }
@@ -193,20 +214,20 @@ export class ThemeEditorComponent {
   }
 
   public exportJson(): void {
-    const preset = this.presetService.captureCurrentTheme('export');
+    const preset: ThemePreset = this.presetService.captureCurrentTheme('export');
     this.presetService.exportAsJson(preset);
   }
 
   public async copyCss(): Promise<void> {
-    const preset = this.presetService.captureCurrentTheme('export');
-    const css = this.presetService.exportAsCss(preset);
+    const preset: ThemePreset = this.presetService.captureCurrentTheme('export');
+    const css: string = this.presetService.exportAsCss(preset);
     try {
       await navigator.clipboard.writeText(css);
       return;
     } catch {
       // Fallback to textarea copy.
     }
-    const textarea = document.createElement('textarea');
+    const textarea: HTMLTextAreaElement = document.createElement('textarea');
     textarea.value = css;
     textarea.style.position = 'fixed';
     document.body.appendChild(textarea);
@@ -224,7 +245,9 @@ export class ThemeEditorComponent {
   }
 
   private readColor(key: string): string {
-    const def = this.colors.find((color: ColorOption): boolean => color.key === key);
+    const def: ColorOption | undefined = this.colors.find(
+      (color: ColorOption): boolean => color.key === key
+    );
     if (!def) {
       return '#000000';
     }
@@ -232,17 +255,17 @@ export class ThemeEditorComponent {
   }
 
   private readCssVar(name: string, fallback: string): string {
-    const root = document.documentElement;
-    const value = getComputedStyle(root).getPropertyValue(name).trim();
+    const root: HTMLElement = document.documentElement;
+    const value: string = getComputedStyle(root).getPropertyValue(name).trim();
     return value || fallback;
   }
 
   private applyFont(type: 'heading' | 'body', value: string): void {
-    const family = this.extractFontFamily(value);
+    const family: string | null = this.extractFontFamily(value);
     if (family) {
       this.ensureGoogleFontLoaded(family);
     }
-    const cssVar = type === 'heading' ? '--uilib-font-heading' : '--uilib-font-body';
+    const cssVar: string = type === 'heading' ? '--uilib-font-heading' : '--uilib-font-body';
     document.documentElement.style.setProperty(cssVar, value);
     if (type === 'body') {
       document.documentElement.style.setProperty('--uilib-font-ui', value);
@@ -250,7 +273,7 @@ export class ThemeEditorComponent {
   }
 
   private extractFontFamily(value: string): string | null {
-    const match = value.match(/'([^']+)'/);
+    const match: RegExpMatchArray | null = value.match(/'([^']+)'/);
     if (match) {
       return match[1] ?? null;
     }
@@ -259,11 +282,11 @@ export class ThemeEditorComponent {
   }
 
   private ensureGoogleFontLoaded(family: string): void {
-    const id = `theme-editor-font-${family.replace(/\s+/g, '-')}`;
+    const id: string = `theme-editor-font-${family.replace(/\s+/g, '-')}`;
     if (document.getElementById(id)) {
       return;
     }
-    const link = document.createElement('link');
+    const link: HTMLLinkElement = document.createElement('link');
     link.id = id;
     link.rel = 'stylesheet';
     link.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(

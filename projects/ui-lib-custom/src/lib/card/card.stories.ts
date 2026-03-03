@@ -36,7 +36,11 @@ const meta: Meta = {
 
 export default meta;
 
-const renderCard = (
+const renderCard: (args: CardStoryArgs) => {
+  props: CardStoryArgs;
+  template: string;
+  moduleMetadata: { imports: unknown[] };
+} = (
   args: CardStoryArgs
 ): { props: CardStoryArgs; template: string; moduleMetadata: { imports: unknown[] } } => ({
   props: args,

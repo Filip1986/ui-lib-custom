@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { Card, Tabs, Tab, TabsValue } from 'ui-lib-custom';
+import type { WritableSignal } from '@angular/core';
+import { Card, Tabs, Tab } from 'ui-lib-custom';
+import type { TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
 @Component({
@@ -22,7 +24,9 @@ export class LayoutDesignTokensSectionComponent {
 }
 `;
 
-  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
+    'demo' | 'usage' | 'api'
+  >('demo');
 
   public setTab(tab: 'demo' | 'usage' | 'api'): void {
     this.activeTab.set(tab);

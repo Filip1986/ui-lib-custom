@@ -1,24 +1,23 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   Button,
   Card,
   Container,
-  ContainerSize,
   CONTAINER_MAX_WIDTHS,
   Grid,
   INSET_TOKENS,
-  InsetToken,
   Stack,
   Tabs,
   Tab,
-  TabsValue,
   UiLibSelect,
 } from 'ui-lib-custom';
+import type { ContainerSize, InsetToken, TabsValue } from 'ui-lib-custom';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
 @Component({
@@ -53,36 +52,45 @@ export class LayoutContainerSectionComponent {
 </ui-lib-container>
 `;
 
-  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
+    'demo' | 'usage' | 'api'
+  >('demo');
 
-  public readonly size = signal<ContainerSize>('md');
-  public readonly inset = signal<Exclude<InsetToken, 'xs'>>('lg');
-  public readonly centered = signal<boolean>(true);
+  public readonly size: WritableSignal<ContainerSize> = signal<ContainerSize>('md');
+  public readonly inset: WritableSignal<Exclude<InsetToken, 'xs'>> =
+    signal<Exclude<InsetToken, 'xs'>>('lg');
+  public readonly centered: WritableSignal<boolean> = signal<boolean>(true);
 
-  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map(
-    (key: string): { label: string; value: ContainerSize } => ({
-      label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
-      value: key as ContainerSize,
-    })
-  );
-  public readonly insetOptions = Object.entries(INSET_TOKENS)
-    .filter(([key]: [string, string]): boolean => key !== 'xs')
-    .map(([key, value]: [string, string]): { label: string; value: Exclude<InsetToken, 'xs'> } => ({
-      label: `${key} (${value})`,
-      value: key as Exclude<InsetToken, 'xs'>,
-    }));
-  public readonly centeredOptions = [
+  public readonly sizeOptions: Array<{ label: string; value: ContainerSize }> = Object.keys(
+    CONTAINER_MAX_WIDTHS
+  ).map((key: string): { label: string; value: ContainerSize } => ({
+    label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
+    value: key as ContainerSize,
+  }));
+  public readonly insetOptions: Array<{ label: string; value: Exclude<InsetToken, 'xs'> }> =
+    Object.entries(INSET_TOKENS)
+      .filter(([key]: [string, string]): boolean => key !== 'xs')
+      .map(
+        ([key, value]: [string, string]): {
+          label: string;
+          value: Exclude<InsetToken, 'xs'>;
+        } => ({
+          label: `${key} (${value})`,
+          value: key as Exclude<InsetToken, 'xs'>,
+        })
+      );
+  public readonly centeredOptions: Array<{ label: string; value: boolean }> = [
     { label: 'Centered', value: true },
     { label: 'Left-aligned', value: false },
   ];
 
-  public readonly sizeLabel = computed<string>((): string =>
+  public readonly sizeLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.size(), this.sizeOptions)
   );
-  public readonly insetLabel = computed<string>((): string =>
+  public readonly insetLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.inset(), this.insetOptions)
   );
-  public readonly centeredLabel = computed<string>((): string =>
+  public readonly centeredLabel: Signal<string> = computed<string>((): string =>
     this.centered() ? 'Centered' : 'Left-aligned'
   );
 
@@ -117,7 +125,7 @@ export class LayoutContainerSectionComponent {
     value: T,
     options: { label: string; value: T }[]
   ): string {
-    const match = options.find(
+    const match: { label: string; value: T } | undefined = options.find(
       (option: { label: string; value: T }): boolean => option.value === value
     );
     return match ? match.label : String(value);

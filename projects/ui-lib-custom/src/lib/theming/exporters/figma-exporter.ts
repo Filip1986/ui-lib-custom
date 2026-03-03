@@ -122,12 +122,12 @@ export function exportThemeAsFigmaTokens(preset: ThemePreset): FigmaTokenSet {
 }
 
 export function exportThemeAsFigmaJson(preset: ThemePreset): string {
-  const tokens = exportThemeAsFigmaTokens(preset);
+  const tokens: unknown = exportThemeAsFigmaTokens(preset);
   return JSON.stringify(tokens, null, 2);
 }
 
 function mapShapeRadiusToPixels(value: string): string {
-  const shapeKey = value as keyof typeof SHAPE_TOKENS;
+  const shapeKey: keyof typeof SHAPE_TOKENS = value as keyof typeof SHAPE_TOKENS;
   if (shapeKey in SHAPE_TOKENS) {
     return SHAPE_TOKENS[shapeKey];
   }

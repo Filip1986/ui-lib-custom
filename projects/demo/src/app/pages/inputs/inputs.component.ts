@@ -7,22 +7,15 @@ import {
   inject,
   effect,
 } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import {
-  UiLibInput,
-  InputVariant,
-  InputType,
-  InputLabelFloat,
-  ThemeConfigService,
-  Card,
-  Tabs,
-  Tab,
-  TabsValue,
-} from 'ui-lib-custom';
+import { FormsModule } from '@angular/forms';
+import type { NgForm } from '@angular/forms';
+import { UiLibInput, ThemeConfigService, Card, Tabs, Tab } from 'ui-lib-custom';
+import type { InputVariant, InputType, InputLabelFloat, TabsValue } from 'ui-lib-custom';
 import { Button } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
@@ -71,7 +64,7 @@ export class InputsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -82,7 +75,7 @@ export class InputsComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `import { UiLibInput } from 'ui-lib-custom';
 
 @Component({
@@ -93,47 +86,37 @@ export class InputsComponent {
 export class Example {}`,
   } as const;
 
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly variant = signal<InputVariant>('material');
-  public readonly inputType = signal<InputType>('text');
-  public readonly labelFloat = signal<InputLabelFloat>('over');
-  public readonly value = signal('');
-  public readonly password = signal('');
-  public readonly error = signal('');
-  public readonly showCounter = signal(true);
-  public readonly showClear = signal(true);
-  public readonly showToggle = signal(true);
-  public readonly required = signal(true);
-  public readonly label = signal('Email');
-  public readonly placeholder = signal('you@example.com');
-  public readonly useGlobalVariant = signal(true);
+  public readonly variant: WritableSignal<InputVariant> = signal<InputVariant>('material');
+  public readonly inputType: WritableSignal<InputType> = signal<InputType>('text');
+  public readonly labelFloat: WritableSignal<InputLabelFloat> = signal<InputLabelFloat>('over');
+  public readonly value: WritableSignal<string> = signal<string>('');
+  public readonly password: WritableSignal<string> = signal<string>('');
+  public readonly error: WritableSignal<string> = signal<string>('');
+  public readonly showCounter: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly showClear: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly showToggle: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly required: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly label: WritableSignal<string> = signal<string>('Email');
+  public readonly placeholder: WritableSignal<string> = signal<string>('you@example.com');
+  public readonly useGlobalVariant: WritableSignal<boolean> = signal<boolean>(true);
 
-  public readonly variants: InputVariant[] = ['material', 'bootstrap', 'minimal'];
-  public readonly types: InputType[] = [
-    'text',
-    'email',
-    'password',
-    'number',
-    'search',
-    'tel',
-    'url',
-  ];
-  public readonly labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
+  private readonly globalVars: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const preset: ReturnType<ThemeConfigService['preset']> = this.themeService.preset();
+      return this.themeService.getCssVars(preset);
+    }
+  );
 
-  private readonly globalVars = computed<Record<string, string>>((): Record<string, string> => {
-    const preset = this.themeService.preset();
-    return this.themeService.getCssVars(preset);
-  });
-
-  public readonly appliedTheme = computed<Record<string, string>>(
+  public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => this.globalVars()
   );
 
   constructor() {
     effect((): void => {
       if (!this.useGlobalVariant()) return;
-      const v = this.themeService.preset().variant as InputVariant;
+      const v: InputVariant = this.themeService.preset().variant as InputVariant;
       this.variant.set(v);
     });
   }
@@ -158,7 +141,7 @@ export class Example {}`,
   public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
-      const v = this.themeService.preset().variant as InputVariant;
+      const v: InputVariant = this.themeService.preset().variant as InputVariant;
       this.variant.set(v);
     }
   }
@@ -209,5 +192,17 @@ export class Example {}`,
     this.viewport?.setDensity(value);
   }
 
-  public readonly inputExample = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
+  public readonly variants: InputVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly types: InputType[] = [
+    'text',
+    'email',
+    'password',
+    'number',
+    'search',
+    'tel',
+    'url',
+  ];
+  public readonly labelFloats: InputLabelFloat[] = ['over', 'in', 'on'];
+
+  public readonly inputExample: string = `<ui-lib-input label="Email" placeholder="you@example.com" />`;
 }

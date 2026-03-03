@@ -1,17 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarVariant,
-  Tabs,
-  Tab,
-  TabsValue,
-  Card,
-} from 'ui-lib-custom';
+import { SidebarMenu, Tabs, Tab, Card } from 'ui-lib-custom';
+import type { SidebarMenuItem, SidebarVariant, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
@@ -42,7 +36,7 @@ export class SidebarMenuDemoComponent {
     { id: 'usage', label: 'Usage' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -53,13 +47,13 @@ export class SidebarMenuDemoComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly variant = signal<SidebarVariant>('classic');
-  public readonly collapsed = signal(false);
-  public readonly collapsible = signal(false);
+  public readonly variant: WritableSignal<SidebarVariant> = signal<SidebarVariant>('classic');
+  public readonly collapsed: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly collapsible: WritableSignal<boolean> = signal<boolean>(false);
 
   public readonly variants: SidebarVariant[] = ['classic', 'compact', 'modern'];
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `<ui-lib-sidebar-menu
   variant="classic"
   [items]="items"

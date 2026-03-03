@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { DebugElement } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
-import { TabsVariant } from './tabs.types';
+import type { TabsVariant } from './tabs.types';
+import type { TabsContextItem } from './tabs';
 
 @Component({
   standalone: true,
@@ -144,7 +147,7 @@ function restoreRaf(): void {
 }
 
 function getRequiredItem<T>(items: T[], index: number, label: string): T {
-  const item = items[index];
+  const item: T | undefined = items[index];
   if (!item) {
     throw new Error(`Expected ${label} at index ${index}.`);
   }
@@ -193,10 +196,10 @@ describe('Tabs', (): void => {
   });
 
   it('should render tablist with two tabs', (): void => {
-    const tabButtons = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
+    const tabButtons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
     expect(tabButtons.length).toBe(2);
-    const first = getRequiredItem(tabButtons, 0, 'tab button');
-    const second = getRequiredItem(tabButtons, 1, 'tab button');
+    const first: DebugElement = getRequiredItem(tabButtons, 0, 'tab button');
+    const second: DebugElement = getRequiredItem(tabButtons, 1, 'tab button');
     expect(first.attributes['aria-selected']).toBe('true');
     expect(second.attributes['aria-selected']).toBe('false');
   });
@@ -233,16 +236,16 @@ describe('Tabs per-tab lazy', (): void => {
   it('should unmount lazy content when tab deactivates', async (): Promise<void> => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
-    const tabs = component.tabContexts();
+    const tabs: TabsContextItem[] = component.tabContexts();
 
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeNull();
 
-    const lazyTab = getRequiredItem(tabs, 1, 'tab context');
+    const lazyTab: TabsContextItem = getRequiredItem<TabsContextItem>(tabs, 1, 'tab context');
     component.onSelect({ value: lazyTab.value, index: lazyTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeTruthy();
 
-    const firstTab = getRequiredItem(tabs, 0, 'tab context');
+    const firstTab: TabsContextItem = getRequiredItem<TabsContextItem>(tabs, 0, 'tab context');
     component.onSelect({ value: firstTab.value, index: firstTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.lazy-content'))).toBeNull();
@@ -251,16 +254,16 @@ describe('Tabs per-tab lazy', (): void => {
   it('should keep cached content for keep-alive tabs', async (): Promise<void> => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
-    const tabs = component.tabContexts();
+    const tabs: TabsContextItem[] = component.tabContexts();
 
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeNull();
 
-    const keepTab = getRequiredItem(tabs, 2, 'tab context');
+    const keepTab: TabsContextItem = getRequiredItem<TabsContextItem>(tabs, 2, 'tab context');
     component.onSelect({ value: keepTab.value, index: keepTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeTruthy();
 
-    const firstTab = getRequiredItem(tabs, 0, 'tab context');
+    const firstTab: TabsContextItem = getRequiredItem<TabsContextItem>(tabs, 0, 'tab context');
     component.onSelect({ value: firstTab.value, index: firstTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.keep-content'))).toBeTruthy();
@@ -365,7 +368,8 @@ describe('Scrollable Tabs', (): void => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
-    const target = getRequiredItem(buttons, 4, 'tab button').nativeElement as HTMLButtonElement;
+    const target: HTMLButtonElement = getRequiredItem(buttons, 4, 'tab button')
+      .nativeElement as HTMLButtonElement;
     const scrollIntoViewSpy: jasmine.Spy = spyOn(target, 'scrollIntoView');
     stubRaf();
 
@@ -443,13 +447,13 @@ describe('Per-Panel Lazy', (): void => {
       .componentInstance as Tabs;
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
 
-    const tabs = component.tabContexts();
-    const overrideTab = getRequiredItem(tabs, 1, 'tab context');
+    const tabs: TabsContextItem[] = component.tabContexts();
+    const overrideTab: TabsContextItem = getRequiredItem<TabsContextItem>(tabs, 1, 'tab context');
     component.onSelect({ value: overrideTab.value, index: overrideTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeTruthy();
 
-    const eagerTab = getRequiredItem(tabs, 0, 'tab context');
+    const eagerTab: TabsContextItem = getRequiredItem<TabsContextItem>(tabs, 0, 'tab context');
     component.onSelect({ value: eagerTab.value, index: eagerTab.index, disabled: false });
     await stabilizeFixture(fixture);
     expect(fixture.debugElement.query(By.css('.override-content'))).toBeNull();
@@ -490,16 +494,16 @@ describe('Tabs interactions', (): void => {
 
   it('selects the first tab by default', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
-    const first = getRequiredItem(buttons, 0, 'tab button');
-    const second = getRequiredItem(buttons, 1, 'tab button');
+    const first: HTMLButtonElement = getRequiredItem(buttons, 0, 'tab button');
+    const second: HTMLButtonElement = getRequiredItem(buttons, 1, 'tab button');
     expect(first.getAttribute('aria-selected')).toBe('true');
     expect(second.getAttribute('aria-selected')).toBe('false');
   });
 
   it('switches tabs on click', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
-    const first = getRequiredItem(buttons, 0, 'tab button');
-    const second = getRequiredItem(buttons, 1, 'tab button');
+    const first: HTMLButtonElement = getRequiredItem(buttons, 0, 'tab button');
+    const second: HTMLButtonElement = getRequiredItem(buttons, 1, 'tab button');
     second.click();
     fixture.detectChanges();
 
@@ -509,7 +513,7 @@ describe('Tabs interactions', (): void => {
 
   it('switches tabs with ArrowRight key', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
-    const second = getRequiredItem(buttons, 1, 'tab button');
+    const second: HTMLButtonElement = getRequiredItem(buttons, 1, 'tab button');
     getRequiredItem(buttons, 0, 'tab button').dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })
     );
@@ -530,8 +534,8 @@ describe('Tabs interactions', (): void => {
   it('shows and hides tab panels correctly', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     const panels: HTMLElement[] = tabPanels();
-    const firstPanel = getRequiredItem(panels, 0, 'tab panel');
-    const secondPanel = getRequiredItem(panels, 1, 'tab panel');
+    const firstPanel: HTMLElement = getRequiredItem(panels, 0, 'tab panel');
+    const secondPanel: HTMLElement = getRequiredItem(panels, 1, 'tab panel');
 
     expect(firstPanel.hasAttribute('hidden')).toBe(false);
     expect(secondPanel.hasAttribute('hidden')).toBe(true);
@@ -544,15 +548,18 @@ describe('Tabs interactions', (): void => {
   });
 
   it('applies variant classes on the tab list', (): void => {
-    const createVariantFixture = (variant: TabsVariant): HTMLElement => {
+    const createVariantFixture: (variant: TabsVariant) => HTMLElement = (
+      variant: TabsVariant
+    ): HTMLElement => {
       const freshFixture: ComponentFixture<TabsInteractionHostComponent> = TestBed.createComponent(
         TabsInteractionHostComponent
       );
       freshFixture.componentInstance.variant = variant;
       freshFixture.detectChanges();
-      return (freshFixture.nativeElement as HTMLElement).querySelector(
+      const list: HTMLElement | null = (freshFixture.nativeElement as HTMLElement).querySelector(
         'nav.tab-list'
-      ) as HTMLElement;
+      );
+      return list as HTMLElement;
     };
 
     const materialList: HTMLElement = createVariantFixture('material');
@@ -571,8 +578,8 @@ describe('Tabs interactions', (): void => {
     );
     const buttons: HTMLButtonElement[] = tabButtons();
     const panels: HTMLElement[] = tabPanels();
-    const firstButton = getRequiredItem(buttons, 0, 'tab button');
-    const firstPanel = getRequiredItem(panels, 0, 'tab panel');
+    const firstButton: HTMLButtonElement = getRequiredItem(buttons, 0, 'tab button');
+    const firstPanel: HTMLElement = getRequiredItem(panels, 0, 'tab panel');
 
     expect(tabList?.getAttribute('role')).toBe('tablist');
     expect(firstButton.getAttribute('role')).toBe('tab');

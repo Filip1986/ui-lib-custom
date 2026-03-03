@@ -4,21 +4,23 @@ import {
   input,
   computed,
   ViewEncapsulation,
+  type InputSignal,
+  type Signal,
 } from '@angular/core';
 import {
   CONTAINER_MAX_WIDTHS,
-  ContainerSize,
+  type ContainerSize,
   SPACING_TOKENS,
-  SpacingToken,
+  type SpacingToken,
   INSET_TOKENS,
-  InsetToken,
+  type InsetToken,
 } from 'ui-lib-custom/tokens';
 
-const spaceVar = (token: SpacingToken): string =>
+const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string =>
   `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
-const insetVar = (token: InsetToken): string =>
+const insetVar: (token: InsetToken) => string = (token: InsetToken): string =>
   `var(--uilib-inset-${token}, ${INSET_TOKENS[token]})`;
-const containerVar = (size: ContainerSize): string =>
+const containerVar: (size: ContainerSize) => string = (size: ContainerSize): string =>
   `var(--uilib-container-${size}, ${CONTAINER_MAX_WIDTHS[size]})`;
 
 /**
@@ -46,29 +48,34 @@ const containerVar = (size: ContainerSize): string =>
 })
 export class Container {
   /** Maximum width of the container */
-  public readonly size = input<ContainerSize>('lg');
+  public readonly size: InputSignal<ContainerSize> = input<ContainerSize>('lg');
 
   /** Whether to center the container */
-  public readonly centered = input<boolean>(false);
+  public readonly centered: InputSignal<boolean> = input<boolean>(false);
 
   /**
    * Semantic inset padding using inset tokens (preferred).
    * Accepts t-shirt sizes that map to `--uilib-inset-*` CSS variables.
    */
-  public readonly inset = input<Exclude<InsetToken, 'xs'> | null>(null);
+  public readonly inset: InputSignal<Exclude<InsetToken, 'xs'> | null> = input<Exclude<
+    InsetToken,
+    'xs'
+  > | null>(null);
 
   /** Back-compat horizontal padding using numeric spacing tokens. */
-  public readonly padding = input<SpacingToken>(4);
+  public readonly padding: InputSignal<SpacingToken> = input<SpacingToken>(4);
 
   /** Computed max-width value */
-  protected readonly _maxWidth = computed<string>((): string => containerVar(this.size()));
+  protected readonly _maxWidth: Signal<string> = computed<string>((): string =>
+    containerVar(this.size())
+  );
 
   /** Computed centered value (for host binding) */
-  protected readonly _centered = computed<boolean>((): boolean => this.centered());
+  protected readonly _centered: Signal<boolean> = computed<boolean>((): boolean => this.centered());
 
   /** Computed padding value from inset (falls back to numeric padding) */
-  protected readonly _paddingValue = computed<string>((): string => {
-    const semantic = this.inset();
+  protected readonly _paddingValue: Signal<string> = computed<string>((): string => {
+    const semantic: Exclude<InsetToken, 'xs'> | null = this.inset();
     if (semantic !== null) {
       return insetVar(semantic as InsetToken);
     }

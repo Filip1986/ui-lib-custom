@@ -1,21 +1,16 @@
+import type { OnInit, InputSignal, WritableSignal, OutputEmitterRef } from '@angular/core';
+import type { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import type { LoginFeatures, LoginFormData, LoginSocialProvider } from '../models/login-contract';
 import {
   Component,
   ChangeDetectionStrategy,
-  OnInit,
   input,
   output,
   signal,
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  NonNullableFormBuilder,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
-import { LoginFeatures, LoginFormData, LoginSocialProvider } from '../models/login-contract';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -42,16 +37,16 @@ const requiredValidator: ValidatorFn = Validators.required;
   encapsulation: ViewEncapsulation.None,
 })
 export class BaseLoginComponent implements OnInit {
-  private static readonly REMEMBER_ME_KEY = 'remember_me_preference';
+  private static readonly REMEMBER_ME_KEY: string = 'remember_me_preference';
 
-  private readonly formBuilder = inject(NonNullableFormBuilder);
+  private readonly formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
 
-  public readonly title = input<string>('Sign In');
+  public readonly title: InputSignal<string> = input<string>('Sign In');
 
   /**
    * Login features configuration
    */
-  public readonly features = input<LoginFeatures>({
+  public readonly features: InputSignal<LoginFeatures> = input<LoginFeatures>({
     showSocialLogin: true,
     showRememberMe: true,
     showForgotPassword: true,
@@ -61,24 +56,25 @@ export class BaseLoginComponent implements OnInit {
   /**
    * Loading state for the login button
    */
-  public readonly loading = input<boolean>(false);
+  public readonly loading: InputSignal<boolean> = input<boolean>(false);
 
   /**
    * Available social login providers
    */
-  public readonly socialProviders = input<LoginSocialProvider[]>(DEFAULT_SOCIAL_PROVIDERS);
+  public readonly socialProviders: InputSignal<LoginSocialProvider[]> =
+    input<LoginSocialProvider[]>(DEFAULT_SOCIAL_PROVIDERS);
 
   // Output events
-  public readonly submitLogin = output<LoginFormData>();
-  public readonly registerClick = output<void>();
-  public readonly forgotPasswordClick = output<string>();
-  public readonly socialLoginClick = output<string>();
-  public readonly rememberMeChange = output<boolean>();
+  public readonly submitLogin: OutputEmitterRef<LoginFormData> = output<LoginFormData>();
+  public readonly registerClick: OutputEmitterRef<void> = output<void>();
+  public readonly forgotPasswordClick: OutputEmitterRef<string> = output<string>();
+  public readonly socialLoginClick: OutputEmitterRef<string> = output<string>();
+  public readonly rememberMeChange: OutputEmitterRef<boolean> = output<boolean>();
 
   // Form and state as signals
   public readonly loginForm: FormGroup<LoginFormControls> = this.createLoginForm();
-  public readonly submitted = signal(false);
-  public readonly rememberMe = signal(false);
+  public readonly submitted: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly rememberMe: WritableSignal<boolean> = signal<boolean>(false);
 
   /**
    * Getter for form controls
@@ -98,7 +94,7 @@ export class BaseLoginComponent implements OnInit {
    * Handle remember me checkbox change
    */
   public onRememberMeChange(event: Event): void {
-    const checked = (event.target as HTMLInputElement).checked;
+    const checked: boolean = (event.target as HTMLInputElement).checked;
     this.setRememberMePreference(checked);
     this.rememberMeChange.emit(checked);
   }
@@ -131,7 +127,7 @@ export class BaseLoginComponent implements OnInit {
    * Handle forgot password link click
    */
   public onForgotPassword(): void {
-    const email = this.formControls.username.value;
+    const email: string = this.formControls.username.value;
     this.forgotPasswordClick.emit(email);
   }
 

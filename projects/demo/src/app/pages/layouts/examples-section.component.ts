@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Container, Grid, Inline, Stack, Button, Tabs, Tab, TabsValue } from 'ui-lib-custom';
+import { Container, Grid, Inline, Stack, Button, Tabs, Tab } from 'ui-lib-custom';
+import type { TabsValue } from 'ui-lib-custom';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 @Component({
   selector: 'app-layout-examples-section',
@@ -43,7 +45,7 @@ export class LayoutExamplesSectionComponent {
     masonry: signal<ExampleTab>('example'),
   };
 
-  public readonly heroSnippet = `<ui-lib-container size="lg" inset="xl">
+  public readonly heroSnippet: string = `<ui-lib-container size="lg" inset="xl">
   <ui-lib-stack spacing="md">
     <ui-lib-inline spacing="sm">
       <span class="demo-tag">New</span>
@@ -58,7 +60,7 @@ export class LayoutExamplesSectionComponent {
   </ui-lib-stack>
 </ui-lib-container>`;
 
-  public readonly featuresSnippet = `<ui-lib-grid [columns]="3" spacing="md">
+  public readonly featuresSnippet: string = `<ui-lib-grid [columns]="3" spacing="md">
   <ui-lib-stack spacing="xs" class="demo-card">
     <h4 class="no-margin">Analytics</h4>
     <p class="no-margin">Brief summary.</p>
@@ -66,7 +68,7 @@ export class LayoutExamplesSectionComponent {
   <!-- repeat for Automation, Collaboration -->
 </ui-lib-grid>`;
 
-  public readonly kpiSnippet = `<ui-lib-grid [columns]="4" spacing="md">
+  public readonly kpiSnippet: string = `<ui-lib-grid [columns]="4" spacing="md">
   <ui-lib-stack spacing="xs" class="demo-card">
     <span class="demo-tag">Revenue</span>
     <h3 class="no-margin">72.4%</h3>
@@ -75,7 +77,7 @@ export class LayoutExamplesSectionComponent {
   <!-- repeat for Sessions, Conversion, NPS -->
 </ui-lib-grid>`;
 
-  public readonly sidebarSnippet = `<ui-lib-grid [columns]="3" spacing="md">
+  public readonly sidebarSnippet: string = `<ui-lib-grid [columns]="3" spacing="md">
   <ui-lib-stack spacing="sm" class="demo-card" style="grid-column: span 1">
     <h4>Navigation</h4>
     <ui-lib-stack spacing="xs">
@@ -94,7 +96,7 @@ export class LayoutExamplesSectionComponent {
   </ui-lib-stack>
 </ui-lib-grid>`;
 
-  public readonly pricingSnippet = `<ui-lib-grid [columns]="3" spacing="md">
+  public readonly pricingSnippet: string = `<ui-lib-grid [columns]="3" spacing="md">
   <ui-lib-stack spacing="sm" class="demo-card">
     <h3 class="no-margin">Starter</h3>
     <p class="no-margin">$29/mo</p>
@@ -107,7 +109,7 @@ export class LayoutExamplesSectionComponent {
   <!-- Growth, Enterprise -->
 </ui-lib-grid>`;
 
-  public readonly ctaSnippet = `<ui-lib-grid [columns]="2" spacing="md">
+  public readonly ctaSnippet: string = `<ui-lib-grid [columns]="2" spacing="md">
   <ui-lib-stack spacing="sm" class="demo-card">
     <h3>Engaging headline</h3>
     <p>Support text for the primary action.</p>
@@ -125,7 +127,7 @@ export class LayoutExamplesSectionComponent {
   </ui-lib-stack>
 </ui-lib-grid>`;
 
-  public readonly timelineSnippet = `<ui-lib-stack spacing="sm">
+  public readonly timelineSnippet: string = `<ui-lib-stack spacing="sm">
   <ui-lib-stack spacing="xs" class="demo-card">
     <strong>Sign up</strong>
     <p class="no-margin">Describe what happens in this phase.</p>
@@ -133,7 +135,7 @@ export class LayoutExamplesSectionComponent {
   <!-- Onboard, Configure, Launch -->
 </ui-lib-stack>`;
 
-  public readonly masonrySnippet = `<ui-lib-grid spacing="md" minColumnWidth="220px">
+  public readonly masonrySnippet: string = `<ui-lib-grid spacing="md" minColumnWidth="220px">
   <div class="demo-card">
     <h4 class="no-margin">Alpha</h4>
     <p class="no-margin">Responsive auto-fit grid.</p>

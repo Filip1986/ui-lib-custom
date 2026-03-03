@@ -5,18 +5,19 @@ import {
   Directive,
   TemplateRef,
   ViewChild,
-  input,
   ViewEncapsulation,
   inject,
+  input,
 } from '@angular/core';
-import { TabsLazyMode, TabsValue } from './tabs.types';
+import type { InputSignal } from '@angular/core';
+import type { TabsLazyMode, TabsValue } from './tabs.types';
 
 @Directive({
   selector: '[uiLibTabLabel]',
   standalone: true,
 })
 export class TabLabel {
-  public readonly template = inject<TemplateRef<unknown>>(TemplateRef);
+  public readonly template: TemplateRef<unknown> = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
 @Directive({
@@ -24,7 +25,7 @@ export class TabLabel {
   standalone: true,
 })
 export class TabContent {
-  public readonly template = inject<TemplateRef<unknown>>(TemplateRef);
+  public readonly template: TemplateRef<unknown> = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
 @Component({
@@ -40,12 +41,14 @@ export class TabContent {
   encapsulation: ViewEncapsulation.None,
 })
 export class Tab {
-  public readonly value = input<TabsValue | null>(null);
-  public readonly label = input<string | null>(null);
-  public readonly disabled = input<boolean>(false);
-  public readonly closable = input<boolean>(false);
+  public readonly value: InputSignal<TabsValue | null> = input<TabsValue | null>(null);
+  public readonly label: InputSignal<string | null> = input<string | null>(null);
+  public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly closable: InputSignal<boolean> = input<boolean>(false);
   /** Per-tab lazy override; falls back to the parent tabs lazy mode when undefined. */
-  public readonly lazy = input<TabsLazyMode | undefined>(undefined);
+  public readonly lazy: InputSignal<TabsLazyMode | undefined> = input<TabsLazyMode | undefined>(
+    undefined
+  );
 
   @ViewChild('defaultContent', { static: true }) public content?: TemplateRef<unknown>;
   @ContentChild(TabLabel) public labelTemplate?: TabLabel;

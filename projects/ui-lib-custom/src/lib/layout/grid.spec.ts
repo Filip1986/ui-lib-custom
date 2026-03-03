@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Grid } from './grid';
 import type { GridAlign, GridJustify } from './grid';
@@ -76,7 +77,7 @@ describe('Grid', (): void => {
   }
 
   function getRequiredItem(elements: NodeListOf<Element>, index: number): Element {
-    const element = elements[index];
+    const element: Element | undefined = elements[index];
     if (!element) {
       throw new Error(`Expected grid item at index ${index}.`);
     }
@@ -115,7 +116,7 @@ describe('Grid', (): void => {
 
   it('should project content', (): void => {
     const { gridElement } = bootstrap();
-    const items = gridElement.querySelectorAll('div');
+    const items: NodeListOf<Element> = gridElement.querySelectorAll('div');
     expect(items.length).toBe(3);
     expect(getRequiredItem(items, 0).textContent).toBe('Cell 1');
   });

@@ -1,9 +1,11 @@
 import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Badge, Button, Card, Inline, UiLibInput, Tabs, Tab, TabsValue } from 'ui-lib-custom';
+import { Badge, Button, Card, Inline, UiLibInput, Tabs, Tab } from 'ui-lib-custom';
+import type { TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { ThemeConfigService } from 'ui-lib-custom';
 import { Router } from '@angular/router';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -33,8 +35,8 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemesComponent {
-  private readonly themeService = inject(ThemeConfigService);
-  private readonly router = inject(Router);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+  private readonly router: Router = inject(Router);
 
   private readonly initialThemeName: string =
     this.themeService.preset().name.length > 0 ? this.themeService.preset().name : 'theme';
@@ -45,12 +47,12 @@ export class ThemesComponent {
     { id: 'usage', label: 'Usage' },
   ];
 
-  public readonly themeName = signal<string>(this.initialThemeName);
-  public readonly status = signal('');
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly themeName: WritableSignal<string> = signal<string>(this.initialThemeName);
+  public readonly status: WritableSignal<string> = signal<string>('');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public saveTheme(): void {
-    const name = this.themeName().trim();
+    const name: string = this.themeName().trim();
     if (!name) {
       this.status.set('Enter a name before saving');
       return;
@@ -74,7 +76,7 @@ export class ThemesComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `<!-- Toggle data-theme on html/body or a container -->
 <button (click)="isDark = !isDark">Toggle theme</button>
 <div [attr.data-theme]="isDark ? 'dark' : 'light'">

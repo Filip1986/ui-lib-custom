@@ -10,12 +10,12 @@ export function provideUiLibIcons(options?: {
   defaultLibrary?: IconLibrary;
   additionalIcons?: Record<string, unknown>;
 }): Provider[] {
-  const baseIcons = {
+  const baseIcons: Record<string, string> = {
     ...MATERIAL_ICONS,
     ...BOOTSTRAP_ICONS,
     ...LUCIDE_ICONS,
     ...(options?.additionalIcons ?? {}),
-  };
+  } as Record<string, string>;
 
   const config: IconConfig = {
     defaultLibrary: options?.defaultLibrary ?? 'lucide',

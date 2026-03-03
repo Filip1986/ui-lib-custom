@@ -62,13 +62,19 @@ export const DarkMode: Story = {
   }),
 };
 
+type AlertStoryArgs = {
+  severity: 'success' | 'error' | 'warning' | 'info';
+  variant: 'material' | 'bootstrap' | 'minimal';
+  dismissible: boolean;
+};
+
 export const FullApi: Story = {
   args: {
     severity: 'success',
     variant: 'bootstrap',
     dismissible: true,
   },
-  render: (args): { props: Record<string, unknown>; template: string } => ({
+  render: (args: AlertStoryArgs): { props: Record<string, unknown>; template: string } => ({
     props: { ...args },
     template: `<ui-lib-alert [severity]="severity" [variant]="variant" [dismissible]="dismissible">Full API</ui-lib-alert>`,
   }),

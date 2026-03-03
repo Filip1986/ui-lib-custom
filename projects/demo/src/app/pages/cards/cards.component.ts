@@ -7,20 +7,12 @@ import {
   effect,
   ViewChild,
 } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  Card,
-  CardVariant,
-  CardElevation,
-  ThemeConfigService,
-  Button,
-  SHADOWS,
-  Tabs,
-  Tab,
-  TabsValue,
-} from 'ui-lib-custom';
+import { Card, ThemeConfigService, Button, SHADOWS, Tabs, Tab } from 'ui-lib-custom';
+import type { CardVariant, CardElevation, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +21,7 @@ import { CodePreviewComponent } from '../../shared/components/code-preview/code-
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
 type ShadowKey = string;
-const SHADOW_MAP = SHADOWS as Record<string, string>;
+const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
 
 type TabKey =
   | 'playground'
@@ -72,7 +64,7 @@ export class CardsComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -83,7 +75,7 @@ export class CardsComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `import { Card } from 'ui-lib-custom';
 
 @Component({
@@ -98,72 +90,80 @@ export class CardsComponent {
 export class Example {}`,
   } as const;
 
-  public readonly cardExample = `<ui-lib-card>
+  public readonly cardExample: string = `<ui-lib-card>
   <div card-header>Card Title</div>
   Card content
   <div card-footer>Actions</div>
 </ui-lib-card>`;
 
-  public readonly variant = signal<CardVariant>('material');
-  public readonly elevation = signal<CardElevation>('medium');
-  public readonly bordered = signal(false);
-  public readonly hoverable = signal(false);
-  public readonly title = signal('Card Title');
-  public readonly body = signal('Cards can host arbitrary content and actions.');
-  public readonly showHeader = signal(true);
-  public readonly showFooter = signal(true);
-  public readonly headerBg = signal('');
-  public readonly footerBg = signal('');
+  public readonly variant: WritableSignal<CardVariant> = signal<CardVariant>('material');
+  public readonly elevation: WritableSignal<CardElevation> = signal<CardElevation>('medium');
+  public readonly bordered: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly hoverable: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly title: WritableSignal<string> = signal<string>('Card Title');
+  public readonly body: WritableSignal<string> = signal<string>(
+    'Cards can host arbitrary content and actions.'
+  );
+  public readonly showHeader: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly showFooter: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly headerBg: WritableSignal<string> = signal<string>('');
+  public readonly footerBg: WritableSignal<string> = signal<string>('');
 
-  public readonly useGlobalVariant = signal(true);
+  public readonly useGlobalVariant: WritableSignal<boolean> = signal<boolean>(true);
   public readonly variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly elevations: CardElevation[] = ['none', 'low', 'medium', 'high'];
 
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly useLocalTheme = signal(false);
-  public readonly localSurface = signal('');
-  public readonly localBorder = signal('');
+  public readonly useLocalTheme: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly localSurface: WritableSignal<string> = signal<string>('');
+  public readonly localBorder: WritableSignal<string> = signal<string>('');
 
-  private readonly globalVars = computed<Record<string, string>>((): Record<string, string> => {
-    const preset = this.themeService.preset();
-    return this.themeService.getCssVars(preset);
-  });
-  private readonly localVars = computed<Record<string, string>>((): Record<string, string> => {
-    const vars: Record<string, string> = {};
-    if (this.localSurface().trim()) {
-      vars['--uilib-card-bg'] = this.localSurface().trim();
-      vars['--uilib-surface'] = this.localSurface().trim();
-      vars['--uilib-card-header-bg'] = this.localSurface().trim();
-      vars['--uilib-card-footer-bg'] = this.localSurface().trim();
+  private readonly globalVars: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const preset: ReturnType<ThemeConfigService['preset']> = this.themeService.preset();
+      return this.themeService.getCssVars(preset);
     }
-    if (this.localBorder().trim()) {
-      vars['--uilib-card-border'] = this.localBorder().trim();
+  );
+  private readonly localVars: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const vars: Record<string, string> = {};
+      if (this.localSurface().trim()) {
+        vars['--uilib-card-bg'] = this.localSurface().trim();
+        vars['--uilib-surface'] = this.localSurface().trim();
+        vars['--uilib-card-header-bg'] = this.localSurface().trim();
+        vars['--uilib-card-footer-bg'] = this.localSurface().trim();
+      }
+      if (this.localBorder().trim()) {
+        vars['--uilib-card-border'] = this.localBorder().trim();
+      }
+      return vars;
     }
-    return vars;
-  });
+  );
 
-  public readonly appliedTheme = computed<Record<string, string>>((): Record<string, string> => {
-    const base = this.globalVars();
-    if (!this.useLocalTheme()) return base;
-    return { ...base, ...this.localVars() };
-  });
+  public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const base: Record<string, string> = this.globalVars();
+      if (!this.useLocalTheme()) return base;
+      return { ...base, ...this.localVars() };
+    }
+  );
 
   public readonly shadowOptions: ShadowKey[] = Object.keys(SHADOW_MAP).filter(
     (key: string): boolean => key.startsWith('shadow-')
   );
-  public readonly globalShadow = computed<string>(
+  public readonly globalShadow: Signal<string> = computed<string>(
     (): string =>
       SHADOW_MAP[
         this.themeService.preset().cardShadow ?? this.themeService.preset().shadow ?? ''
       ] ?? 'none'
   );
-  public readonly selectedShadow = signal<ShadowKey>(
+  public readonly selectedShadow: WritableSignal<ShadowKey> = signal<ShadowKey>(
     this.resolveShadowKey(
       this.themeService.preset().cardShadow ?? this.themeService.preset().shadow
     )
   );
-  public readonly shadowValue = computed<string>((): string =>
+  public readonly shadowValue: Signal<string> = computed<string>((): string =>
     this.useLocalTheme() ? (SHADOW_MAP[this.selectedShadow()] ?? 'none') : this.globalShadow()
   );
 
@@ -180,7 +180,7 @@ export class Example {}`,
   constructor() {
     effect((): void => {
       if (!this.useGlobalVariant()) return;
-      const v = this.themeService.preset().variant as CardVariant;
+      const v: CardVariant = this.themeService.preset().variant as CardVariant;
       this.variant.set(v);
     });
   }
@@ -200,7 +200,7 @@ export class Example {}`,
   public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
-      const v = this.themeService.preset().variant as CardVariant;
+      const v: CardVariant = this.themeService.preset().variant as CardVariant;
       this.variant.set(v);
     }
   }

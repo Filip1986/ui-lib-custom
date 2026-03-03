@@ -1,14 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  Icon,
-  IconLibrary,
-  IconSize,
-  SemanticIcon,
-  ThemeConfigService,
-  ThemeIconConfig,
-} from 'ui-lib-custom';
+import { Icon, ThemeConfigService } from 'ui-lib-custom';
+import type { IconLibrary, IconSize, SemanticIcon, ThemeIconConfig } from 'ui-lib-custom';
 
 @Component({
   selector: 'ui-lib-icon-editor-panel',
@@ -19,7 +14,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconEditorPanel {
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
   public readonly libraries: IconLibrary[] = [
     'material',
@@ -46,7 +41,7 @@ export class IconEditorPanel {
     '2xl': '2.5rem',
   };
 
-  public readonly config = computed<ThemeIconConfig>(
+  public readonly config: Signal<ThemeIconConfig> = computed<ThemeIconConfig>(
     (): ThemeIconConfig =>
       this.themeService.preset().icons ?? {
         defaultLibrary: 'lucide',
@@ -56,7 +51,7 @@ export class IconEditorPanel {
   );
 
   private pushPatch(patch: Partial<ThemeIconConfig>): void {
-    const current = this.config();
+    const current: ThemeIconConfig = this.config();
     const next: ThemeIconConfig = {
       defaultLibrary: patch.defaultLibrary ?? current.defaultLibrary,
       defaultSize: patch.defaultSize ?? current.defaultSize,
@@ -66,18 +61,18 @@ export class IconEditorPanel {
   }
 
   public onLibraryChange(event: Event): void {
-    const library = (event.target as HTMLSelectElement).value as IconLibrary;
+    const library: IconLibrary = (event.target as HTMLSelectElement).value as IconLibrary;
     this.pushPatch({ defaultLibrary: library });
   }
 
   public onSizeChange(event: Event): void {
-    const size = (event.target as HTMLSelectElement).value as IconSize;
+    const size: IconSize = (event.target as HTMLSelectElement).value as IconSize;
     this.pushPatch({ defaultSize: size });
   }
 
   public onSizeValueChange(size: IconSize, event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
-    const mergedSizes = { ...this.config().sizes, [size]: value } as Record<IconSize, string>;
+    const value: string = (event.target as HTMLInputElement).value;
+    const mergedSizes: Record<IconSize, string> = { ...this.config().sizes, [size]: value };
     this.pushPatch({ sizes: mergedSizes });
   }
 }

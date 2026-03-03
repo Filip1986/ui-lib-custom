@@ -7,14 +7,13 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { ParamMap } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ThemeConfigService,
   ThemePresetService,
-  ThemePreset,
-  ThemeVariant,
   Button,
   Card,
   Badge,
@@ -26,6 +25,7 @@ import {
   Accordion,
   AccordionPanel,
 } from 'ui-lib-custom';
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom';
 import { ThemeEditorComponent } from '../../shared/theme-editor/theme-editor.component';
 
 @Component({
@@ -50,14 +50,16 @@ import { ThemeEditorComponent } from '../../shared/theme-editor/theme-editor.com
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent {
-  private readonly route = inject(ActivatedRoute);
-  private readonly presetService = inject(ThemePresetService);
-  private readonly themeConfig = inject(ThemeConfigService);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+  private readonly presetService: ThemePresetService = inject(ThemePresetService);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
-  public readonly presentMode = signal<boolean>(false);
-  public readonly shareNotice = signal<string>('');
-  public readonly variant = computed<ThemeVariant>((): ThemeVariant => this.themeConfig.variant());
+  public readonly presentMode: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly shareNotice: WritableSignal<string> = signal<string>('');
+  public readonly variant: Signal<ThemeVariant> = computed<ThemeVariant>(
+    (): ThemeVariant => this.themeConfig.variant()
+  );
 
   public readonly sizes: readonly ['sm', 'md', 'lg'] = ['sm', 'md', 'lg'];
   public readonly variants: ThemeVariant[] = ['material', 'bootstrap', 'minimal'];
@@ -80,11 +82,11 @@ export class GalleryComponent {
     this.route.queryParamMap
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((params: ParamMap): void => {
-        const encoded = params.get('theme');
+        const encoded: string | null = params.get('theme');
         if (!encoded) {
           return;
         }
-        const preset = this.decodePreset(encoded);
+        const preset: ThemePreset | null = this.decodePreset(encoded);
         if (!preset) {
           return;
         }

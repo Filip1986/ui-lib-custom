@@ -29,8 +29,16 @@ export * from './lib/a11y/announce.directive';
 export * from './lib/form-field/form-field';
 export * from './lib/login-form/login-form';
 export * from './lib/input/input';
-export * from './lib/select/select';
-export * from './lib/select-button';
+export * from './lib/select';
+export { SelectButton } from './lib/select-button/select-button';
+export type {
+  SelectButtonOption,
+  SelectButtonChangeEvent,
+  SelectButtonSelectionChangeEvent,
+  SelectButtonValue,
+  SelectButtonValueObject,
+  SelectButtonItemContext,
+} from './lib/select-button/select-button.types';
 export * from './lib/sidebar-menu/sidebar-menu';
 export * from './lib/icon';
 export { Icon } from './lib/icon/icon';

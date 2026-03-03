@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Container } from './container';
 import type { ContainerSize, InsetToken, SpacingToken } from 'ui-lib-custom/tokens';
@@ -19,7 +20,7 @@ type ContainerInsetInput = Exclude<InsetToken, 'xs'>;
 })
 class TestHostComponent {
   public size: ContainerSizeInput = 'lg';
-  public centered = false;
+  public centered: boolean = false;
   public padding: SpacingToken = 4;
   public inset: ContainerInsetInput | null = null;
 }
@@ -112,7 +113,7 @@ describe('Container', (): void => {
 
   it('should project content', (): void => {
     const { containerElement } = bootstrap();
-    const paragraph = containerElement.querySelector('p');
+    const paragraph: HTMLParagraphElement | null = containerElement.querySelector('p');
     expect(paragraph).toBeTruthy();
     expect(paragraph?.textContent).toBe('Container content');
   });

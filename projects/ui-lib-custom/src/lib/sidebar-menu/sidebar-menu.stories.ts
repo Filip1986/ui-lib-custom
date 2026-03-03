@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { SidebarMenu } from './sidebar-menu';
+import type { SidebarMenuItem } from './sidebar-menu';
 
 type Story = StoryObj;
 
@@ -12,10 +13,10 @@ const meta: Meta = {
 
 export default meta;
 
-const items = [
-  { label: 'Dashboard', icon: 'pi pi-home' },
-  { label: 'Reports', icon: 'pi pi-chart-line' },
-  { label: 'Settings', icon: 'pi pi-cog' },
+const items: SidebarMenuItem[] = [
+  { id: '1', label: 'Dashboard', icon: 'pi pi-home' },
+  { id: '2', label: 'Reports', icon: 'pi pi-chart-line' },
+  { id: '3', label: 'Settings', icon: 'pi pi-cog' },
 ];
 
 export const Default: Story = {

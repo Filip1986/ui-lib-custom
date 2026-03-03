@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Stack } from './stack';
 import type { StackAlign, StackJustify } from './stack';
@@ -74,7 +75,7 @@ describe('Stack', (): void => {
   }
 
   function getRequiredItem(elements: NodeListOf<Element>, index: number): Element {
-    const element = elements[index];
+    const element: Element | undefined = elements[index];
     if (!element) {
       throw new Error(`Expected stack item at index ${index}.`);
     }
@@ -118,7 +119,7 @@ describe('Stack', (): void => {
 
   it('should project content', (): void => {
     const { stackElement } = bootstrap();
-    const items = stackElement.querySelectorAll('div');
+    const items: NodeListOf<Element> = stackElement.querySelectorAll('div');
     expect(items.length).toBe(3);
     expect(getRequiredItem(items, 0).textContent).toBe('Item 1');
   });

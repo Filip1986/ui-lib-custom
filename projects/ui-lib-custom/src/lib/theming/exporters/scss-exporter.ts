@@ -21,7 +21,7 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
 
   if (outputFormat === 'variables') {
     lines.push('// Colors');
-    Object.entries(preset.colors).forEach(([key, value]): void => {
+    Object.entries(preset.colors).forEach(([key, value]: [string, string]): void => {
       lines.push(`$${variablePrefix}-${kebabCase(key)}: ${value};`);
     });
 
@@ -43,8 +43,8 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
     lines.push('');
     lines.push('// CSS Custom Properties (for :root)');
     lines.push(':root {');
-    Object.entries(preset.colors).forEach(([key]): void => {
-      const name = kebabCase(key);
+    Object.entries(preset.colors).forEach(([key]: [string, string]): void => {
+      const name: string = kebabCase(key);
       lines.push(`  --${variablePrefix}-${name}: #{$${variablePrefix}-${name}};`);
     });
     lines.push('}');
@@ -53,10 +53,12 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
     lines.push(`  'name': '${preset.name}',`);
     lines.push(`  'variant': '${preset.variant}',`);
     lines.push(`  'colors': (`);
-    Object.entries(preset.colors).forEach(([key, value], index, entries): void => {
-      const comma = index < entries.length - 1 ? ',' : '';
-      lines.push(`    '${kebabCase(key)}': ${value}${comma}`);
-    });
+    Object.entries(preset.colors).forEach(
+      ([key, value]: [string, string], index: number, entries: [string, string][]): void => {
+        const comma: string = index < entries.length - 1 ? ',' : '';
+        lines.push(`    '${kebabCase(key)}': ${value}${comma}`);
+      }
+    );
     lines.push(`  ),`);
     lines.push(`  'border-radius': ${mapShapeRadius(preset.shape)}`);
     lines.push(');');
@@ -66,7 +68,7 @@ export function exportThemeAsScss(preset: ThemePreset, options: ScssExportOption
 }
 
 function mapShapeRadius(value: string): string {
-  const shapeKey = value as keyof typeof SHAPE_TOKENS;
+  const shapeKey: keyof typeof SHAPE_TOKENS = value as keyof typeof SHAPE_TOKENS;
   if (shapeKey in SHAPE_TOKENS) {
     return SHAPE_TOKENS[shapeKey];
   }

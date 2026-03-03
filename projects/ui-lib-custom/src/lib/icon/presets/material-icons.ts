@@ -4,8 +4,8 @@ import { BOOTSTRAP_ICON_MAPPING, BOOTSTRAP_ICONS } from './bootstrap-icons';
 import type { Provider } from '@angular/core';
 
 export const MATERIAL_ICON_MAPPING: IconMapping = { ...BOOTSTRAP_ICON_MAPPING };
-export const MATERIAL_ICONS = { ...BOOTSTRAP_ICONS };
+export const MATERIAL_ICONS: Record<string, string> = { ...BOOTSTRAP_ICONS };
 
-export function provideMaterialIcons(extra: Record<string, unknown> = {}): Provider[] {
+export function provideMaterialIcons(extra: Record<string, string> = {}): Provider[] {
   return provideIcons({ ...MATERIAL_ICONS, ...extra });
 }

@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { Card, Button, Stack } from 'ui-lib-custom';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
-import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { LayoutSemanticSpacingSectionComponent } from './semantic-spacing-section.component';
 import { LayoutStackSectionComponent } from './stack-section.component';
 import { LayoutInlineSectionComponent } from './inline-section.component';
@@ -52,17 +53,23 @@ export class LayoutsComponent {
     { id: 'examples', label: 'Examples' },
   ];
 
-  private readonly viewportSet = new Set<DocDemoViewportComponent>();
-  public readonly viewports = signal<DocDemoViewportComponent[]>([]);
+  private readonly viewportSet: Set<DocDemoViewportComponent> = new Set<DocDemoViewportComponent>();
+  public readonly viewports: WritableSignal<DocDemoViewportComponent[]> = signal<
+    DocDemoViewportComponent[]
+  >([]);
 
-  public readonly registerViewport = (viewport: DocDemoViewportComponent): void => {
+  public readonly registerViewport: (viewport: DocDemoViewportComponent) => void = (
+    viewport: DocDemoViewportComponent
+  ): void => {
     if (!this.viewportSet.has(viewport)) {
       this.viewportSet.add(viewport);
       this.viewports.set([...this.viewportSet]);
     }
   };
 
-  public readonly unregisterViewport = (viewport: DocDemoViewportComponent): void => {
+  public readonly unregisterViewport: (viewport: DocDemoViewportComponent) => void = (
+    viewport: DocDemoViewportComponent
+  ): void => {
     if (this.viewportSet.delete(viewport)) {
       this.viewports.set([...this.viewportSet]);
     }
@@ -121,7 +128,7 @@ export class LayoutsComponent {
     this.forEachViewport((vp: DocDemoViewportComponent): void => vp.setDensity(value));
   }
 
-  public readonly layoutExample = `<ui-lib-stack [gap]="3">
+  public readonly layoutExample: string = `<ui-lib-stack [gap]="3">
   <ui-lib-card>Card A</ui-lib-card>
   <ui-lib-card>Card B</ui-lib-card>
 </ui-lib-stack>`;

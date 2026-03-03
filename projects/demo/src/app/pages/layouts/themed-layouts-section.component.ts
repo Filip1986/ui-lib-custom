@@ -1,29 +1,38 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+  type Signal,
+  type WritableSignal,
+} from '@angular/core';
 import {
   Button,
   Card,
   Container,
-  ContainerSize,
   CONTAINER_MAX_WIDTHS,
   Grid,
-  GridColumns,
   Stack,
   INLINE_TOKENS,
   Inline,
-  InlineToken,
   STACK_TOKENS,
-  StackToken,
   INSET_TOKENS,
-  InsetToken,
   Tabs,
   Tab,
-  TabsValue,
   UiLibSelect,
+} from 'ui-lib-custom';
+import type {
+  ContainerSize,
+  GridColumns,
+  InlineToken,
+  StackToken,
+  InsetToken,
+  TabsValue,
 } from 'ui-lib-custom';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 @Component({
   selector: 'app-layout-themed-layouts-section',
@@ -48,59 +57,69 @@ import { DocSection } from '../../shared/doc-page/doc-section.model';
 })
 export class LayoutThemedLayoutsSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'themed-layouts', label: 'Themed Layouts' }];
-  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
+    'demo' | 'usage' | 'api'
+  >('demo');
 
-  public readonly containerSize = signal<ContainerSize>('md');
-  public readonly containerInset = signal<Exclude<InsetToken, 'xs'>>('md');
-  public readonly stackSpacing = signal<StackToken>('md');
-  public readonly inlineSpacing = signal<InlineToken>('sm');
-  public readonly gridSpacing = signal<StackToken>('sm');
-  public readonly columns = signal<GridColumns>(3);
-  public readonly leftTheme = signal<'light' | 'dark'>('light');
-  public readonly rightTheme = signal<'light' | 'dark'>('dark');
+  public readonly containerSize: WritableSignal<ContainerSize> = signal<ContainerSize>('md');
+  public readonly containerInset: WritableSignal<Exclude<InsetToken, 'xs'>> =
+    signal<Exclude<InsetToken, 'xs'>>('md');
+  public readonly stackSpacing: WritableSignal<StackToken> = signal<StackToken>('md');
+  public readonly inlineSpacing: WritableSignal<InlineToken> = signal<InlineToken>('sm');
+  public readonly gridSpacing: WritableSignal<StackToken> = signal<StackToken>('sm');
+  public readonly columns: WritableSignal<GridColumns> = signal<GridColumns>(3);
+  public readonly leftTheme: WritableSignal<'light' | 'dark'> = signal<'light' | 'dark'>('light');
+  public readonly rightTheme: WritableSignal<'light' | 'dark'> = signal<'light' | 'dark'>('dark');
 
-  public readonly sizeOptions = Object.keys(CONTAINER_MAX_WIDTHS).map(
-    (key: string): { label: string; value: ContainerSize } => ({
-      label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
-      value: key as ContainerSize,
-    })
-  );
-  public readonly insetOptions = Object.entries(INSET_TOKENS)
-    .filter(([key]: [string, string]): boolean => key !== 'xs')
-    .map(([key, value]: [string, string]): { label: string; value: Exclude<InsetToken, 'xs'> } => ({
-      label: `${key} (${value})`,
-      value: key as Exclude<InsetToken, 'xs'>,
-    }));
-  public readonly spacingOptions = this.buildOptions(STACK_TOKENS);
-  public readonly inlineSpacingOptions = this.buildOptions(INLINE_TOKENS);
-  public readonly columnOptions = [2, 3, 4].map(
+  public readonly sizeOptions: { label: string; value: ContainerSize }[] = Object.keys(
+    CONTAINER_MAX_WIDTHS
+  ).map((key: string): { label: string; value: ContainerSize } => ({
+    label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
+    value: key as ContainerSize,
+  }));
+  public readonly insetOptions: { label: string; value: Exclude<InsetToken, 'xs'> }[] =
+    Object.entries(INSET_TOKENS)
+      .filter(([key]: [string, string]): boolean => key !== 'xs')
+      .map(
+        ([key, value]: [string, string]): { label: string; value: Exclude<InsetToken, 'xs'> } => ({
+          label: `${key} (${value})`,
+          value: key as Exclude<InsetToken, 'xs'>,
+        })
+      );
+  public readonly spacingOptions: { label: string; value: StackToken }[] =
+    this.buildOptions(STACK_TOKENS);
+  public readonly inlineSpacingOptions: { label: string; value: InlineToken }[] =
+    this.buildOptions(INLINE_TOKENS);
+  public readonly columnOptions: { label: string; value: GridColumns }[] = [2, 3, 4].map(
     (c: number): { label: string; value: GridColumns } => ({
       label: `${c} cols`,
       value: c as GridColumns,
     })
   );
-  public readonly themeOptions = [
+  public readonly themeOptions: { label: string; value: 'light' | 'dark' }[] = [
     { label: 'Light', value: 'light' },
     { label: 'Dark', value: 'dark' },
   ];
 
-  public readonly sizeLabel = computed<string>((): string =>
+  public readonly sizeLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.containerSize(), this.sizeOptions)
   );
-  public readonly insetLabel = computed<string>((): string =>
+  public readonly insetLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.containerInset(), this.insetOptions)
   );
-  public readonly stackLabel = computed<string>((): string =>
+  public readonly stackLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.stackSpacing(), this.spacingOptions)
   );
-  public readonly inlineLabel = computed<string>((): string =>
+  public readonly inlineLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.inlineSpacing(), this.inlineSpacingOptions)
   );
-  public readonly gridSpacingLabel = computed<string>((): string =>
+  public readonly gridSpacingLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.gridSpacing(), this.spacingOptions)
   );
-  public readonly columnsLabel = computed<string>((): string => `${this.columns()} cols`);
-  public readonly themePairLabel = computed<string>(
+  public readonly columnsLabel: Signal<string> = computed<string>(
+    (): string => `${this.columns()} cols`
+  );
+  public readonly themePairLabel: Signal<string> = computed<string>(
     (): string => `${this.leftTheme()} / ${this.rightTheme()}`
   );
 
@@ -169,7 +188,7 @@ export class LayoutThemedLayoutsSectionComponent {
     value: T,
     options: { label: string; value: T }[]
   ): string {
-    const match = options.find(
+    const match: { label: string; value: T } | undefined = options.find(
       (option: { label: string; value: T }): boolean => option.value === value
     );
     return match ? match.label : String(value);
@@ -177,8 +196,8 @@ export class LayoutThemedLayoutsSectionComponent {
 
   private toPx(value: string): string {
     if (value.endsWith('rem')) {
-      const numeric = Number.parseFloat(value.replace('rem', ''));
-      const pixels = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
+      const numeric: number = Number.parseFloat(value.replace('rem', ''));
+      const pixels: number = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
       return `${pixels}px`;
     }
     return value;

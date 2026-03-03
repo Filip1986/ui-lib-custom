@@ -1,14 +1,13 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   Input,
-  OnChanges,
-  SimpleChanges,
   ViewEncapsulation,
+  inject,
+  ElementRef,
 } from '@angular/core';
+import type { AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import type { ShapeToken } from 'ui-lib-custom/tokens';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
@@ -26,10 +25,8 @@ export class ThemeWrapperComponent implements OnChanges, AfterViewInit {
   @Input() public mode: ThemeMode = 'light';
   @Input() public shape: ShapeToken = 'rounded';
 
-  constructor(
-    private readonly themeConfig: ThemeConfigService,
-    private readonly hostRef: ElementRef<HTMLElement>
-  ) {}
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly hostRef: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
 
   public ngAfterViewInit(): void {
     this.syncHostTheme();

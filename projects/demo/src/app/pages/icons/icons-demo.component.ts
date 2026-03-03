@@ -1,20 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import {
-  Icon,
-  IconButton,
-  Alert,
-  Button,
-  IconSize,
-  SemanticIcon,
-  SEMANTIC_ICONS,
-  Tabs,
-  Tab,
-  TabsValue,
-  Card,
-} from 'ui-lib-custom';
+import { Icon, IconButton, Alert, Button, SEMANTIC_ICONS, Tabs, Tab, Card } from 'ui-lib-custom';
+import type { IconSize, SemanticIcon, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
@@ -51,7 +41,7 @@ export class IconsDemoComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -92,24 +82,26 @@ export class IconsDemoComponent {
     'bell',
   ];
 
-  public readonly loading = signal(false);
-  public readonly searchQuery = signal('');
+  public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly searchQuery: WritableSignal<string> = signal<string>('');
 
-  private readonly allIcons = SEMANTIC_ICONS;
+  private readonly allIcons: SemanticIcon[] = [...SEMANTIC_ICONS];
 
-  public readonly filteredIcons = computed<SemanticIcon[]>((): SemanticIcon[] => {
-    const query = this.searchQuery().toLowerCase();
-    if (!query) return this.allIcons;
-    return this.allIcons.filter((icon: SemanticIcon): boolean =>
-      icon.toLowerCase().includes(query)
-    );
-  });
+  public readonly filteredIcons: Signal<SemanticIcon[]> = computed<SemanticIcon[]>(
+    (): SemanticIcon[] => {
+      const query: string = this.searchQuery().toLowerCase();
+      if (!query) return this.allIcons;
+      return this.allIcons.filter((icon: SemanticIcon): boolean =>
+        icon.toLowerCase().includes(query)
+      );
+    }
+  );
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `<ui-lib-icon name="search" size="lg" variant="material" />`,
   } as const;
 
-  public readonly iconExample = `<ui-lib-icon name="search" size="lg" variant="material" />`;
+  public readonly iconExample: string = `<ui-lib-icon name="search" size="lg" variant="material" />`;
 
   public onSearch(event: Event): void {
     this.searchQuery.set((event.target as HTMLInputElement).value);

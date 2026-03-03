@@ -10,10 +10,15 @@ import {
   signal,
   ViewEncapsulation,
   inject,
+  type InputSignal,
+  type OutputEmitterRef,
+  type Signal,
+  type WritableSignal,
 } from '@angular/core';
 import { AccordionPanel } from './accordion-panel';
-import { ACCORDION_CONTEXT, AccordionContext } from './accordion-context';
-import {
+import { ACCORDION_CONTEXT } from './accordion-context';
+import type { AccordionContext } from './accordion-context';
+import type {
   AccordionChangeEvent,
   AccordionExpandMode,
   AccordionSize,
@@ -51,22 +56,29 @@ interface AccordionPanelContext {
   ],
 })
 export class Accordion implements AccordionContext {
-  private readonly themeConfig = inject(ThemeConfigService);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly variant = input<AccordionVariant | null>(null);
-  public readonly size = input<AccordionSize>('md');
-  public readonly expandMode = input<AccordionExpandMode>('single');
-  public readonly expandedPanels = input<string[]>([]);
-  public readonly defaultExpandedPanels = input<string[]>([]);
+  public readonly variant: InputSignal<AccordionVariant | null> = input<AccordionVariant | null>(
+    null
+  );
+  public readonly size: InputSignal<AccordionSize> = input<AccordionSize>('md');
+  public readonly expandMode: InputSignal<AccordionExpandMode> =
+    input<AccordionExpandMode>('single');
+  public readonly expandedPanels: InputSignal<string[]> = input<string[]>([]);
+  public readonly defaultExpandedPanels: InputSignal<string[]> = input<string[]>([]);
 
-  public readonly expandedChange = output<AccordionChangeEvent>();
-  public readonly panelToggle = output<AccordionChangeEvent>();
+  public readonly expandedChange: OutputEmitterRef<AccordionChangeEvent> =
+    output<AccordionChangeEvent>();
+  public readonly panelToggle: OutputEmitterRef<AccordionChangeEvent> =
+    output<AccordionChangeEvent>();
 
-  public readonly panels = contentChildren(AccordionPanel);
+  public readonly panels: Signal<readonly AccordionPanel[]> = contentChildren(AccordionPanel);
 
   private readonly initialExpandedRef: string[] = this.expandedPanels();
-  private readonly controlled = signal<boolean>(false);
-  private readonly internalExpanded = signal<Set<string>>(new Set(this.defaultExpandedPanels()));
+  private readonly controlled: WritableSignal<boolean> = signal<boolean>(false);
+  private readonly internalExpanded: WritableSignal<Set<string>> = signal<Set<string>>(
+    new Set(this.defaultExpandedPanels())
+  );
   private readonly registeredPanels: Set<AccordionPanel> = new Set<AccordionPanel>();
 
   constructor() {
@@ -98,10 +110,10 @@ export class Accordion implements AccordionContext {
     });
   }
 
-  public readonly resolvedVariant = computed<AccordionVariant>(
+  public readonly resolvedVariant: Signal<AccordionVariant> = computed<AccordionVariant>(
     (): AccordionVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly hostClasses = computed<string>((): string => {
+  public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
       'ui-lib-accordion',
       `accordion-variant-${this.resolvedVariant()}`,
@@ -111,7 +123,9 @@ export class Accordion implements AccordionContext {
     return classes.join(' ');
   });
 
-  public readonly panelContexts = computed<AccordionPanelContext[]>((): AccordionPanelContext[] => {
+  public readonly panelContexts: Signal<AccordionPanelContext[]> = computed<
+    AccordionPanelContext[]
+  >((): AccordionPanelContext[] => {
     const panels: readonly AccordionPanel[] = this.panels();
     return panels.map((panel: AccordionPanel, index: number): AccordionPanelContext => {
       const id: string = this.resolvePanelId(panel);
@@ -126,8 +140,10 @@ export class Accordion implements AccordionContext {
   });
 
   public togglePanel(panelId: string): void {
-    const contexts = this.panelContexts();
-    const ctx = contexts.find((c: AccordionPanelContext): boolean => c.id === panelId);
+    const contexts: AccordionPanelContext[] = this.panelContexts();
+    const ctx: AccordionPanelContext | undefined = contexts.find(
+      (c: AccordionPanelContext): boolean => c.id === panelId
+    );
     if (!ctx || ctx.disabled) {
       return;
     }
@@ -215,24 +231,24 @@ export class Accordion implements AccordionContext {
   }
 
   private focusLast(): void {
-    const contexts = this.panelContexts();
+    const contexts: AccordionPanelContext[] = this.panelContexts();
     this.focusAtIndex(this.findPrevEnabledIndex(contexts.length - 1));
   }
 
   private focusAtIndex(index: number): void {
-    const contexts = this.panelContexts();
+    const contexts: AccordionPanelContext[] = this.panelContexts();
     if (index < 0 || index >= contexts.length) {
       return;
     }
-    const ctx = contexts.at(index);
+    const ctx: AccordionPanelContext | undefined = contexts.at(index);
     if (ctx && !ctx.disabled) {
       ctx.panel.focusHeader();
     }
   }
 
   private findNextEnabledIndex(startIndex: number): number {
-    const contexts = this.panelContexts();
-    for (let i = startIndex; i < contexts.length; i += 1) {
+    const contexts: AccordionPanelContext[] = this.panelContexts();
+    for (let i: number = startIndex; i < contexts.length; i += 1) {
       if (!contexts.at(i)?.disabled) {
         return i;
       }
@@ -241,8 +257,8 @@ export class Accordion implements AccordionContext {
   }
 
   private findPrevEnabledIndex(startIndex: number): number {
-    const contexts = this.panelContexts();
-    for (let i = startIndex; i >= 0; i -= 1) {
+    const contexts: AccordionPanelContext[] = this.panelContexts();
+    for (let i: number = startIndex; i >= 0; i -= 1) {
       if (!contexts.at(i)?.disabled) {
         return i;
       }
@@ -251,8 +267,8 @@ export class Accordion implements AccordionContext {
   }
 
   private findNextEnabledIndexFromStart(): number {
-    const contexts = this.panelContexts();
-    for (let i = 0; i < contexts.length; i += 1) {
+    const contexts: AccordionPanelContext[] = this.panelContexts();
+    for (let i: number = 0; i < contexts.length; i += 1) {
       if (!contexts.at(i)?.disabled) {
         return i;
       }
@@ -261,8 +277,8 @@ export class Accordion implements AccordionContext {
   }
 
   private findPrevEnabledIndexFromEnd(): number {
-    const contexts = this.panelContexts();
-    for (let i = contexts.length - 1; i >= 0; i -= 1) {
+    const contexts: AccordionPanelContext[] = this.panelContexts();
+    for (let i: number = contexts.length - 1; i >= 0; i -= 1) {
       if (!contexts.at(i)?.disabled) {
         return i;
       }
@@ -274,7 +290,7 @@ export class Accordion implements AccordionContext {
     if (!target) {
       return -1;
     }
-    const contexts = this.panelContexts();
+    const contexts: AccordionPanelContext[] = this.panelContexts();
     return contexts.findIndex(
       (ctx: AccordionPanelContext): boolean => ctx.panel.headerButton?.nativeElement === target
     );

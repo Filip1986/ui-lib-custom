@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import type { InputSignal, Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -40,20 +41,22 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodePreviewComponent {
-  public readonly code = input.required<string>();
-  public readonly language = input<string>('html');
+  public readonly code: InputSignal<string> = input.required<string>();
+  public readonly language: InputSignal<string> = input<string>('html');
 
-  public readonly showCode = signal<boolean>(false);
-  public readonly copied = signal<boolean>(false);
+  public readonly showCode: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly copied: WritableSignal<boolean> = signal<boolean>(false);
 
-  public readonly highlightedCode = computed<string>((): string => this.escapeHtml(this.code()));
+  public readonly highlightedCode: Signal<string> = computed<string>((): string =>
+    this.escapeHtml(this.code())
+  );
 
   public toggleCode(): void {
     this.showCode.update((value: boolean): boolean => !value);
   }
 
   public async copyCode(): Promise<void> {
-    const text = this.code().trimEnd();
+    const text: string = this.code().trimEnd();
 
     try {
       await navigator.clipboard.writeText(text);
@@ -65,7 +68,7 @@ export class CodePreviewComponent {
   }
 
   private fallbackCopy(text: string): void {
-    const textarea = document.createElement('textarea');
+    const textarea: HTMLTextAreaElement = document.createElement('textarea');
     textarea.value = text;
     textarea.setAttribute('readonly', '');
     textarea.style.position = 'fixed';

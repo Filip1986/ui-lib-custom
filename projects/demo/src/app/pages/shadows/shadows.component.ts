@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, CardElevation, Tabs, Tab, TabsValue } from 'ui-lib-custom';
+import { Card, Tabs, Tab } from 'ui-lib-custom';
+import type { CardElevation, TabsValue } from 'ui-lib-custom';
 import { SHADOWS } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
@@ -41,7 +43,7 @@ export class ShadowsComponent {
     { id: 'usage', label: 'Usage' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -52,7 +54,7 @@ export class ShadowsComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `/* Use CSS var with your component */
 .my-card {
   box-shadow: var(--uilib-card-shadow-medium);
@@ -66,12 +68,14 @@ export class ShadowsComponent {
 
   public readonly shadowValues: Record<ShadowKey, string> = SHADOWS as Record<ShadowKey, string>;
 
-  private readonly shadowEntries = Object.entries(this.shadowValues) as [ShadowKey, string][];
+  private readonly shadowEntries: Array<[ShadowKey, string]> = Object.entries(
+    this.shadowValues
+  ) as Array<[ShadowKey, string]>;
 
   public readonly examples: ElevationExample[] = this.shadowEntries
-    .filter(([key]): boolean => key.startsWith('shadow-'))
-    .map(([key, value]): ElevationExample => {
-      const level = Number(key.split('-')[1]);
+    .filter(([key]: [ShadowKey, string]): boolean => key.startsWith('shadow-'))
+    .map(([key, value]: [ShadowKey, string]): ElevationExample => {
+      const level: number = Number(key.split('-')[1]);
       return {
         level,
         label: `Shadow ${level}`,

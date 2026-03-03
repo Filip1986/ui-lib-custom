@@ -75,7 +75,15 @@ function sanitizeA11yTarget(root: HTMLElement, excludeSelectors: string[]): HTML
 /**
  * Common rule configurations
  */
-export const A11Y_RULES = {
+export type TagRunOnly = { type: 'tag'; values: string[] };
+
+type A11yRulesConfig = {
+  skipColorContrast: Record<string, { enabled: boolean }>;
+  criticalOnly: { runOnly: TagRunOnly };
+  ariaOnly: { runOnly: TagRunOnly };
+};
+
+export const A11Y_RULES: A11yRulesConfig = {
   skipColorContrast: SKIP_COLOR_CONTRAST_RULES,
   criticalOnly: {
     runOnly: { type: 'tag', values: ['critical', 'serious'] },

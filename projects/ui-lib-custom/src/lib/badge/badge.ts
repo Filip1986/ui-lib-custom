@@ -5,6 +5,8 @@ import {
   computed,
   inject,
   ViewEncapsulation,
+  type InputSignal,
+  type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
@@ -44,41 +46,43 @@ export type BadgeSize = 'sm' | 'md' | 'lg';
   encapsulation: ViewEncapsulation.None,
 })
 export class Badge {
-  private readonly themeConfig = inject(ThemeConfigService);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
   /** Visual variant of the badge */
-  public readonly variant = input<BadgeVariant | null>(null);
+  public readonly variant: InputSignal<BadgeVariant | null> = input<BadgeVariant | null>(null);
 
   /** Color theme of the badge */
-  public readonly color = input<BadgeColor>('primary');
+  public readonly color: InputSignal<BadgeColor> = input<BadgeColor>('primary');
 
   /** Size of the badge */
-  public readonly size = input<BadgeSize>('md');
+  public readonly size: InputSignal<BadgeSize> = input<BadgeSize>('md');
 
   /** Whether the badge is a pill shape (fully rounded) */
-  public readonly pill = input<boolean>(false);
+  public readonly pill: InputSignal<boolean> = input<boolean>(false);
 
   /** Whether the badge is a dot (small circular indicator) */
-  public readonly dot = input<boolean>(false);
+  public readonly dot: InputSignal<boolean> = input<boolean>(false);
 
   /** Accessible label for the badge, used when screen reader support is needed */
-  public readonly label = input<string | null>(null);
+  public readonly label: InputSignal<string | null> = input<string | null>(null);
 
-  private readonly effectiveVariant = computed<BadgeVariant>((): BadgeVariant => {
-    const direct = this.variant();
-    if (direct) return direct;
-    const global = this.themeConfig.variant();
-    const map: Record<'material' | 'bootstrap' | 'minimal', BadgeVariant> = {
-      material: 'solid',
-      bootstrap: 'outline',
-      minimal: 'subtle',
-    };
-    return map[global];
-  });
+  private readonly effectiveVariant: Signal<BadgeVariant> = computed<BadgeVariant>(
+    (): BadgeVariant => {
+      const direct: BadgeVariant | null = this.variant();
+      if (direct) return direct;
+      const global: 'material' | 'bootstrap' | 'minimal' = this.themeConfig.variant();
+      const map: Record<'material' | 'bootstrap' | 'minimal', BadgeVariant> = {
+        material: 'solid',
+        bootstrap: 'outline',
+        minimal: 'subtle',
+      };
+      return map[global];
+    }
+  );
 
   /** Computed CSS classes for the badge element */
-  public readonly badgeClasses = computed<string>((): string => {
-    const classes = [
+  public readonly badgeClasses: Signal<string> = computed<string>((): string => {
+    const classes: string[] = [
       'badge',
       `badge-variant-${this.effectiveVariant()}`,
       `badge-color-${this.color()}`,
@@ -97,12 +101,12 @@ export class Badge {
   });
 
   /** Computed ARIA label for the badge, falls back to color for dot badges */
-  public readonly ariaLabel = computed<string | null>(
+  public readonly ariaLabel: Signal<string | null> = computed<string | null>(
     (): string | null => this.label() ?? (this.dot() ? this.color() : null)
   );
 
   /** Computed role attribute for the badge, 'status' for dot badges */
-  public readonly roleAttr = computed<string | null>((): string | null =>
+  public readonly roleAttr: Signal<string | null> = computed<string | null>((): string | null =>
     this.dot() ? 'status' : null
   );
 }

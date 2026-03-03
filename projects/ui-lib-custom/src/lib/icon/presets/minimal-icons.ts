@@ -133,7 +133,7 @@ export const LUCIDE_ICON_MAPPING: IconMapping = {
   dropdown: 'lucideAlignHorizontalSpaceBetween',
 };
 
-export const LUCIDE_ICONS = {
+export const LUCIDE_ICONS: Record<string, string> = {
   lucideAlertCircle,
   lucideAlertTriangle,
   lucideAlignCenter,
@@ -184,8 +184,8 @@ export const LUCIDE_ICONS = {
   lucideBed,
   lucideBellDot,
   lucideBellElectric,
-};
+} as Record<string, string>;
 
-export function provideMinimalIcons(extra: Record<string, unknown> = {}): Provider[] {
+export function provideMinimalIcons(extra: Record<string, string> = {}): Provider[] {
   return provideIcons({ ...LUCIDE_ICONS, ...extra });
 }

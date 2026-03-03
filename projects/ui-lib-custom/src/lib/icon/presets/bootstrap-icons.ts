@@ -65,7 +65,7 @@ export const BOOTSTRAP_ICON_MAPPING: IconMapping = {
   'arrow-right': 'bootstrapArrowRight',
 };
 
-export const BOOTSTRAP_ICONS = {
+export const BOOTSTRAP_ICONS: Record<string, string> = {
   bootstrapX,
   bootstrapList,
   bootstrapSearch,
@@ -93,8 +93,8 @@ export const BOOTSTRAP_ICONS = {
   bootstrapChevronLeft,
   bootstrapChevronUp,
   bootstrapChevronDown,
-};
+} as Record<string, string>;
 
-export function provideBootstrapIcons(extra: Record<string, unknown> = {}): Provider[] {
+export function provideBootstrapIcons(extra: Record<string, string> = {}): Provider[] {
   return provideIcons({ ...BOOTSTRAP_ICONS, ...extra });
 }

@@ -32,7 +32,10 @@ const meta: Meta<CheckboxStoryArgs> = {
 
 export default meta;
 
-const renderCheckbox = (
+const renderCheckbox: (args: Partial<CheckboxStoryArgs>) => {
+  props: Partial<CheckboxStoryArgs>;
+  template: string;
+} = (
   args: Partial<CheckboxStoryArgs>
 ): { props: Partial<CheckboxStoryArgs>; template: string } => ({
   props: args,

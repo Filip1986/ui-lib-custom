@@ -1,12 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
 import {
   ChangeDetectionStrategy,
   Component,
   signal,
   provideZonelessChangeDetection,
+  type WritableSignal,
 } from '@angular/core';
 import { ButtonGroup } from 'ui-lib-custom';
-import { Button, ButtonSize, ButtonVariant } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom';
+import type { ButtonSize, ButtonVariant } from 'ui-lib-custom';
 import { Icon } from '../icon/icon';
 
 @Component({
@@ -21,23 +24,26 @@ import { Icon } from '../icon/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-  public readonly variant = signal<ButtonVariant>('material');
-  public readonly vertical = signal<boolean>(false);
-  public readonly size = signal<ButtonSize>('md');
+  public readonly variant: WritableSignal<ButtonVariant> = signal<ButtonVariant>('material');
+  public readonly vertical: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly size: WritableSignal<ButtonSize> = signal<ButtonSize>('md');
 }
 
 describe('ButtonGroup', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
-  const getGroup = (): HTMLElement =>
+  const getGroup: () => HTMLElement = (): HTMLElement =>
     (fixture.nativeElement as HTMLElement).querySelector('ui-lib-button-group') as HTMLElement;
-  const getButtons = (): HTMLButtonElement[] =>
+  const getButtons: () => HTMLButtonElement[] = (): HTMLButtonElement[] =>
     Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('button')
     ) as HTMLButtonElement[];
 
-  const getRequiredButton = (buttons: HTMLButtonElement[], index: number): HTMLButtonElement => {
-    const button = buttons[index];
+  const getRequiredButton: (buttons: HTMLButtonElement[], index: number) => HTMLButtonElement = (
+    buttons: HTMLButtonElement[],
+    index: number
+  ): HTMLButtonElement => {
+    const button: HTMLButtonElement | undefined = buttons[index];
     if (!button) {
       throw new Error(`Expected button at index ${index}.`);
     }
@@ -56,12 +62,12 @@ describe('ButtonGroup', (): void => {
 
   describe('basic rendering', (): void => {
     it('renders with btn-group class and projects children', (): void => {
-      const group = getGroup();
+      const group: HTMLElement = getGroup();
       expect(group.classList.contains('btn-group')).toBeTruthy();
-      const buttons = getButtons();
+      const buttons: HTMLButtonElement[] = getButtons();
       expect(buttons.length).toBe(2);
-      const firstText = getRequiredButton(buttons, 0).textContent;
-      const secondText = getRequiredButton(buttons, 1).textContent;
+      const firstText: string | null = getRequiredButton(buttons, 0).textContent;
+      const secondText: string | null = getRequiredButton(buttons, 1).textContent;
       expect(firstText).toBeTruthy();
       expect(secondText).toBeTruthy();
       expect((firstText as string).trim()).toBe('One');
@@ -123,7 +129,7 @@ describe('ButtonGroup', (): void => {
     });
 
     it('buttons remain focusable in order', (): void => {
-      const buttons = getButtons();
+      const buttons: HTMLButtonElement[] = getButtons();
       expect(getRequiredButton(buttons, 0).tabIndex).toBe(0);
       expect(getRequiredButton(buttons, 1).tabIndex).toBe(0);
     });

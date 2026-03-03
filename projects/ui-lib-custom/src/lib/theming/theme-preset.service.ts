@@ -1,14 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, Signal, WritableSignal, inject, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { ThemeConfigService } from './theme-config.service';
 import type { ThemePreset, ThemePresetColors, ThemePresetFonts } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
 
 @Injectable({ providedIn: 'root' })
 export class ThemePresetService {
-  private readonly storageKey = 'uilib_presets';
-  private readonly doc = inject(DOCUMENT);
-  private readonly themeConfig = inject(ThemeConfigService);
+  private readonly storageKey: string = 'uilib_presets';
+  private readonly doc: Document = inject(DOCUMENT);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
   private readonly presetsSignal: WritableSignal<ThemePreset[]> = signal<ThemePreset[]>(
     this.loadPresets()
@@ -47,7 +48,7 @@ export class ThemePresetService {
     const root: HTMLElement = this.doc.documentElement;
 
     const vars: Record<string, string> = this.buildCssVars(preset);
-    Object.entries(vars).forEach(([key, value]): void => {
+    Object.entries(vars).forEach(([key, value]: [string, string]): void => {
       root.style.setProperty(key, value);
     });
     this.activePresetSignal.set(preset);
@@ -73,7 +74,7 @@ export class ThemePresetService {
   public exportAsCss(preset: ThemePreset): string {
     const vars: Record<string, string> = this.buildCssVars(preset);
     const body: string = Object.entries(vars)
-      .map(([name, value]): string => `  ${name}: ${value};`)
+      .map(([name, value]: [string, string]): string => `  ${name}: ${value};`)
       .join('\n');
     return `:root {\n${body}\n}`;
   }
@@ -186,7 +187,7 @@ export class ThemePresetService {
     }
 
     if (preset.customCssVars) {
-      Object.entries(preset.customCssVars).forEach(([key, value]): void => {
+      Object.entries(preset.customCssVars).forEach(([key, value]: [string, string]): void => {
         vars[key] = value;
       });
     }
@@ -215,7 +216,7 @@ export class ThemePresetService {
     if (!value || typeof value !== 'object') {
       return false;
     }
-    const preset = value as ThemePreset;
+    const preset: ThemePreset = value as ThemePreset;
     return (
       typeof preset.id === 'string' &&
       typeof preset.name === 'string' &&
@@ -234,7 +235,7 @@ export class ThemePresetService {
     if (!colors || typeof colors !== 'object') {
       return false;
     }
-    const value = colors as ThemePresetColors;
+    const value: ThemePresetColors = colors as ThemePresetColors;
     return (
       typeof value.primary === 'string' &&
       typeof value.secondary === 'string' &&
@@ -251,7 +252,7 @@ export class ThemePresetService {
     if (!fonts || typeof fonts !== 'object') {
       return false;
     }
-    const value = fonts as ThemePresetFonts;
+    const value: ThemePresetFonts = fonts as ThemePresetFonts;
     return (
       typeof value.heading === 'string' &&
       typeof value.body === 'string' &&

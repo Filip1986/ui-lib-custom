@@ -53,9 +53,9 @@ describe('BaseLoginComponent', (): void => {
     });
 
     it('should update localStorage and emit rememberMeChange', (): void => {
-      const input = document.createElement('input');
+      const input: HTMLInputElement = document.createElement('input');
       input.checked = true;
-      const event = new Event('change');
+      const event: Event = new Event('change');
       Object.defineProperty(event, 'target', { value: input });
 
       spyOn(component.rememberMeChange, 'emit');

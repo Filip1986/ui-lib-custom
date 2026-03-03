@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
@@ -51,7 +52,7 @@ describe('Tabs RTL Support', (): void => {
   }
 
   function getRequiredButton(buttons: HTMLButtonElement[], index: number): HTMLButtonElement {
-    const button = buttons[index];
+    const button: HTMLButtonElement | undefined = buttons[index];
     if (!button) {
       throw new Error(`Expected tab button at index ${index}.`);
     }
@@ -66,9 +67,9 @@ describe('Tabs RTL Support', (): void => {
   });
 
   it('should navigate to next tab with ArrowLeft in RTL', (): void => {
-    const buttons = tabButtons();
-    const first = getRequiredButton(buttons, 0);
-    const second = getRequiredButton(buttons, 1);
+    const buttons: HTMLButtonElement[] = tabButtons();
+    const first: HTMLButtonElement = getRequiredButton(buttons, 0);
+    const second: HTMLButtonElement = getRequiredButton(buttons, 1);
     first.focus();
     first.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
     fixture.detectChanges();
@@ -77,9 +78,9 @@ describe('Tabs RTL Support', (): void => {
   });
 
   it('should navigate to previous tab with ArrowRight in RTL', (): void => {
-    const buttons = tabButtons();
-    const first = getRequiredButton(buttons, 0);
-    const second = getRequiredButton(buttons, 1);
+    const buttons: HTMLButtonElement[] = tabButtons();
+    const first: HTMLButtonElement = getRequiredButton(buttons, 0);
+    const second: HTMLButtonElement = getRequiredButton(buttons, 1);
     second.focus();
     second.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     fixture.detectChanges();

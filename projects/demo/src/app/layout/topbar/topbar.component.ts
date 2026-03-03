@@ -1,17 +1,11 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  input,
-  output,
-  inject,
-  Signal,
-  computed,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, inject, computed } from '@angular/core';
+import type { Signal, InputSignal, OutputEmitterRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Button } from 'ui-lib-custom/button';
-import { ThemeConfigService, ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
-import { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
+import type { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
 
 @Component({
   selector: 'app-topbar',
@@ -24,17 +18,25 @@ import { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
 export class TopbarComponent {
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
   public readonly mode: Signal<ThemeMode> = this.themeService.mode;
-  public readonly variant = computed<ThemeVariant>((): ThemeVariant => this.themeService.variant());
-  public readonly shape = computed<ShapeToken>((): ShapeToken => this.themeService.shape());
-  public readonly density = computed<DensityToken>((): DensityToken => this.themeService.density());
+  public readonly variant: Signal<ThemeVariant> = computed<ThemeVariant>(
+    (): ThemeVariant => this.themeService.variant()
+  );
+  public readonly shape: Signal<ShapeToken> = computed<ShapeToken>(
+    (): ShapeToken => this.themeService.shape()
+  );
+  public readonly density: Signal<DensityToken> = computed<DensityToken>(
+    (): DensityToken => this.themeService.density()
+  );
 
-  public readonly menuButtonClick = output<void>();
-  public readonly themeToggle = output<void>();
-  public readonly loadTheme = output<string>();
-  public readonly theme = input<'light' | 'dark' | 'brand-example'>('light');
-  public readonly themeName = input<string>('light');
-  public readonly themeVariant = input<string>('material');
-  public readonly savedThemes = input<string[]>([]);
+  public readonly menuButtonClick: OutputEmitterRef<void> = output<void>();
+  public readonly themeToggle: OutputEmitterRef<void> = output<void>();
+  public readonly loadTheme: OutputEmitterRef<string> = output<string>();
+  public readonly theme: InputSignal<'light' | 'dark' | 'brand-example'> = input<
+    'light' | 'dark' | 'brand-example'
+  >('light');
+  public readonly themeName: InputSignal<string> = input<string>('light');
+  public readonly themeVariant: InputSignal<string> = input<string>('material');
+  public readonly savedThemes: InputSignal<string[]> = input<string[]>([]);
 
   public onMenuButtonClick(): void {
     this.menuButtonClick.emit();

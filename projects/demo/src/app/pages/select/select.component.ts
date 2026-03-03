@@ -8,20 +8,12 @@ import {
   effect,
   ViewChild,
 } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  UiLibSelect,
-  SelectOption,
-  SelectVariant,
-  ThemeConfigService,
-  Button,
-  Card,
-  Tabs,
-  Tab,
-  TabsValue,
-} from 'ui-lib-custom';
+import { UiLibSelect, ThemeConfigService, Button, Card, Tabs, Tab } from 'ui-lib-custom';
+import type { SelectOption, SelectVariant, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
@@ -70,7 +62,7 @@ export class SelectComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -81,7 +73,7 @@ export class SelectComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `import { UiLibSelect } from 'ui-lib-custom';
 
 @Component({
@@ -92,18 +84,19 @@ export class SelectComponent {
 export class Example {}`,
   } as const;
 
-  public readonly selectExample = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;
+  public readonly selectExample: string = `<ui-lib-select label="Choose" [options]="options"></ui-lib-select>`;
 
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly variant = signal<SelectVariant>('material');
-  public readonly searchable = signal(true);
-  public readonly multiple = signal(false);
-  public readonly disabled = signal(false);
-  public readonly loading = signal(false);
-  public readonly placeholder = signal('Choose an option');
-  public readonly value = signal<SelectOption['value'] | SelectOption['value'][] | null>(null);
-  public readonly useGlobalVariant = signal(true);
+  public readonly variant: WritableSignal<SelectVariant> = signal<SelectVariant>('material');
+  public readonly searchable: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly multiple: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly placeholder: WritableSignal<string> = signal<string>('Choose an option');
+  public readonly value: WritableSignal<SelectOption['value'] | SelectOption['value'][] | null> =
+    signal<SelectOption['value'] | SelectOption['value'][] | null>(null);
+  public readonly useGlobalVariant: WritableSignal<boolean> = signal<boolean>(true);
 
   public readonly variants: SelectVariant[] = ['material', 'bootstrap', 'minimal'];
 
@@ -117,12 +110,14 @@ export class Example {}`,
     { label: 'Unassigned', value: 'ungrouped' },
   ];
 
-  private readonly globalVars = computed<Record<string, string>>((): Record<string, string> => {
-    const preset = this.themeService.preset();
-    return this.themeService.getCssVars(preset);
-  });
+  private readonly globalVars: Signal<Record<string, string>> = computed<Record<string, string>>(
+    (): Record<string, string> => {
+      const preset: ReturnType<ThemeConfigService['preset']> = this.themeService.preset();
+      return this.themeService.getCssVars(preset);
+    }
+  );
 
-  public readonly appliedTheme = computed<Record<string, string>>(
+  public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => this.globalVars()
   );
 
@@ -131,7 +126,7 @@ export class Example {}`,
   constructor() {
     effect((): void => {
       if (!this.useGlobalVariant()) return;
-      const v = this.themeService.preset().variant as SelectVariant;
+      const v: SelectVariant = this.themeService.preset().variant as SelectVariant;
       this.variant.set(v);
     });
   }
@@ -180,7 +175,7 @@ export class Example {}`,
   public setFollowThemeVariant(on: boolean): void {
     this.useGlobalVariant.set(on);
     if (on) {
-      const v = this.themeService.preset().variant as SelectVariant;
+      const v: SelectVariant = this.themeService.preset().variant as SelectVariant;
       this.variant.set(v);
     }
   }

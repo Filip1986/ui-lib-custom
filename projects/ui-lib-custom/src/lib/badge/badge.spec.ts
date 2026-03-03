@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { Badge, BadgeVariant, BadgeColor, BadgeSize } from './badge';
+import { Badge } from './badge';
+import type { BadgeVariant, BadgeColor, BadgeSize } from './badge';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -49,7 +51,7 @@ describe('Badge', (): void => {
     const badgeElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-badge'
     ) as HTMLElement;
-    const styles = getComputedStyle(badgeElement);
+    const styles: CSSStyleDeclaration = getComputedStyle(badgeElement);
     return { fixture, badgeElement, styles };
   }
 
@@ -95,10 +97,10 @@ describe('Badge', (): void => {
       .trim();
     const expectedRadius: string = shapeBase || '6px';
 
-    const pill = bootstrap({ pill: true }).styles;
+    const pill: CSSStyleDeclaration = bootstrap({ pill: true }).styles;
     expect(pill.borderRadius).toBe(expectedRadius);
 
-    const dot = bootstrap({ dot: true, size: 'sm' }).styles;
+    const dot: CSSStyleDeclaration = bootstrap({ dot: true, size: 'sm' }).styles;
     expect(dot.borderRadius).toBe(expectedRadius);
     expect(dot.width).not.toBe('auto');
     expect(dot.fontSize).toBe('0px');
@@ -106,7 +108,7 @@ describe('Badge', (): void => {
 
   it('projects content', (): void => {
     const { badgeElement } = bootstrap({ content: 'Projected' });
-    const text = badgeElement.textContent;
+    const text: string | null = badgeElement.textContent;
     expect(text).toBeTruthy();
     expect((text as string).trim()).toBe('Projected');
   });

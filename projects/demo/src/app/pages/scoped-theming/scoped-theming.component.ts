@@ -9,10 +9,10 @@ import {
   Badge,
   UiLibInput,
   Checkbox,
-  ThemeScopeConfig,
 } from 'ui-lib-custom';
+import type { ThemeScopeConfig } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 @Component({
@@ -62,7 +62,7 @@ export class ScopedThemingComponent {
     },
   };
 
-  public readonly componentThemeCode = `<!-- String shorthand -->
+  public readonly componentThemeCode: string = `<!-- String shorthand -->
 <ui-lib-card theme="dark">
   Dark themed card
 </ui-lib-card>
@@ -72,7 +72,7 @@ export class ScopedThemingComponent {
   Dark themed card
 </ui-lib-card>`;
 
-  public readonly directiveCode = `<!-- Using directive -->
+  public readonly directiveCode: string = `<!-- Using directive -->
 <div [uiLibTheme]="'dark'">
   <ui-lib-button>Dark button</ui-lib-button>
 </div>
@@ -82,7 +82,7 @@ export class ScopedThemingComponent {
   <ui-lib-button>Dark button</ui-lib-button>
 </section>`;
 
-  public readonly customColorsCode = `// In component
+  public readonly customColorsCode: string = `// In component
 customTheme: ThemeScopeConfig = {
   colors: {
     primary: '#e65100',

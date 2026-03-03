@@ -40,6 +40,18 @@ export default [
     rules: {
       // TypeScript safety and correctness.
       '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/typedef': [
+        'error',
+        {
+          variableDeclaration: true,
+          propertyDeclaration: true,
+          memberVariableDeclaration: true,
+          parameter: true,
+          arrowParameter: true,
+          objectDestructuring: false,
+          arrayDestructuring: false,
+        },
+      ],
       '@typescript-eslint/explicit-function-return-type': [
         'error',
         {
@@ -85,6 +97,13 @@ export default [
       '@angular-eslint/no-output-on-prefix': 'error',
       '@angular-eslint/prefer-on-push-component-change-detection': 'error',
       '@angular-eslint/no-inputs-metadata-property': 'error',
+    },
+  },
+  // Disable typedef for theme-config.service.ts as it has explicit types
+  {
+    files: ['projects/ui-lib-custom/src/lib/theming/theme-config.service.ts'],
+    rules: {
+      '@typescript-eslint/typedef': 'off',
     },
   },
   // Angular HTML template parsing (add template rules here when needed).

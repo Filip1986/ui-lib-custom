@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -20,7 +21,7 @@ export interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  public readonly menuItems = signal<NavItem[]>([
+  public readonly menuItems: WritableSignal<NavItem[]> = signal<NavItem[]>([
     {
       label: 'Getting Started',
       icon: 'pi pi-home',

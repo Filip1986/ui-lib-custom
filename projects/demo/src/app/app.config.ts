@@ -19,8 +19,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideUiLibIcons(),
     provideAppInitializer(async (): Promise<void> => {
-      const themeService = inject(ThemeConfigService);
-      const hasStored =
+      const themeService: ThemeConfigService = inject(ThemeConfigService);
+      const hasStored: boolean =
         typeof localStorage !== 'undefined' && Boolean(localStorage.getItem('ui-lib-custom.theme'));
       if (hasStored) {
         return;

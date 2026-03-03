@@ -1,11 +1,12 @@
-import { Injectable, inject, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import type { OnDestroy } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 export type AriaLivePoliteness = 'polite' | 'assertive' | 'off';
 
 @Injectable({ providedIn: 'root' })
 export class LiveAnnouncerService implements OnDestroy {
-  private readonly platformId = inject(PLATFORM_ID);
+  private readonly platformId: object = inject(PLATFORM_ID);
   private liveElement: HTMLElement | null = null;
   private currentTimeout: ReturnType<typeof setTimeout> | null = null;
 

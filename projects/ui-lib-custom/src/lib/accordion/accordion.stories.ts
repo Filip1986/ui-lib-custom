@@ -25,7 +25,11 @@ const meta: Meta<AccordionStoryArgs> = {
 
 export default meta;
 
-const renderAccordion = (
+const renderAccordion: (args: AccordionStoryArgs) => {
+  props: AccordionStoryArgs;
+  template: string;
+  moduleMetadata: { imports: unknown[] };
+} = (
   args: AccordionStoryArgs
 ): { props: AccordionStoryArgs; template: string; moduleMetadata: { imports: unknown[] } } => ({
   props: args,

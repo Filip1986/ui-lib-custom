@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Accordion,
@@ -10,13 +11,12 @@ import {
   Tabs,
   Tab,
   ThemeConfigService,
-  ThemeMode,
   UiLibInput,
   UiLibSelect,
-  SelectOption,
 } from 'ui-lib-custom';
+import type { ThemeMode, SelectOption } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
 @Component({
@@ -42,13 +42,17 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DarkModeComponent {
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly mode = computed<ThemeMode>((): ThemeMode => this.themeService.mode());
-  public readonly effectiveTheme = computed<'light' | 'dark'>((): 'light' | 'dark' =>
-    this.themeService.effectiveTheme()
+  public readonly mode: Signal<ThemeMode> = computed<ThemeMode>(
+    (): ThemeMode => this.themeService.mode()
   );
-  public readonly systemPreference = signal<'light' | 'dark'>('light');
+  public readonly effectiveTheme: Signal<'light' | 'dark'> = computed<'light' | 'dark'>(
+    (): 'light' | 'dark' => this.themeService.effectiveTheme()
+  );
+  public readonly systemPreference: WritableSignal<'light' | 'dark'> = signal<'light' | 'dark'>(
+    'light'
+  );
 
   public readonly sections: DocSection[] = [
     { id: 'mode', label: 'Theme Mode' },

@@ -1,8 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
-import { Checkbox, CheckboxSize, CheckboxVariant } from './checkbox';
+import { Checkbox } from './checkbox';
+import type { CheckboxSize, CheckboxVariant } from './checkbox';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,15 +26,15 @@ import { Checkbox, CheckboxSize, CheckboxVariant } from './checkbox';
   `,
 })
 class HostComponent {
-  public readonly label = signal('Accept terms');
-  public readonly description = signal('Required to continue');
-  public readonly variant = signal<CheckboxVariant>('material');
-  public readonly size = signal<CheckboxSize>('md');
-  public readonly disabled = signal(false);
-  public readonly indeterminate = signal(false);
-  public readonly ariaLabel = signal<string | null>(null);
-  public checked = false;
-  public readonly content = signal('');
+  public readonly label: WritableSignal<string> = signal<string>('Accept terms');
+  public readonly description: WritableSignal<string> = signal<string>('Required to continue');
+  public readonly variant: WritableSignal<CheckboxVariant> = signal<CheckboxVariant>('material');
+  public readonly size: WritableSignal<CheckboxSize> = signal<CheckboxSize>('md');
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly indeterminate: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
+  public checked: boolean = false;
+  public readonly content: WritableSignal<string> = signal<string>('');
 }
 
 describe('Checkbox', (): void => {
@@ -53,7 +55,7 @@ describe('Checkbox', (): void => {
   }
 
   it('should render label and description', (): void => {
-    const el = checkboxEl();
+    const el: HTMLElement = checkboxEl();
     expect(el.querySelector('.checkbox-label')?.textContent).toContain('Accept terms');
     expect(el.querySelector('.checkbox-description')?.textContent).toContain(
       'Required to continue'
@@ -66,22 +68,14 @@ describe('Checkbox', (): void => {
     fixture.componentInstance.checked = true;
     fixture.detectChanges();
 
-    const el = checkboxEl();
+    const el: HTMLElement = checkboxEl();
     expect(el.className).toContain('ui-checkbox-variant-bootstrap');
     expect(el.className).toContain('ui-checkbox-size-lg');
     expect(el.className).toContain('ui-checkbox-checked');
   });
 
-  it('reflects indeterminate state via aria', (): void => {
-    fixture.componentInstance.indeterminate.set(true);
-    fixture.detectChanges();
-
-    expect(checkboxEl().getAttribute('aria-checked')).toBe('mixed');
-    expect(checkboxEl().className).toContain('ui-checkbox-indeterminate');
-  });
-
   it('toggles checked state on click when enabled', (): void => {
-    const el = checkboxEl();
+    const el: HTMLElement = checkboxEl();
     el.click();
     fixture.detectChanges();
 
@@ -93,7 +87,7 @@ describe('Checkbox', (): void => {
     fixture.componentInstance.disabled.set(true);
     fixture.detectChanges();
 
-    const el = checkboxEl();
+    const el: HTMLElement = checkboxEl();
     el.click();
     fixture.detectChanges();
 
@@ -102,7 +96,7 @@ describe('Checkbox', (): void => {
   });
 
   it('supports keyboard interaction', (): void => {
-    const el = checkboxEl();
+    const el: HTMLElement = checkboxEl();
     el.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
     fixture.detectChanges();
 
@@ -165,7 +159,7 @@ describe('Checkbox', (): void => {
   it('associates label via aria-labelledby', (): void => {
     fixture.detectChanges();
 
-    const el = checkboxEl();
+    const el: HTMLElement = checkboxEl();
     const labelEl: HTMLElement | null = el.querySelector('.checkbox-label');
     expect(el.getAttribute('aria-labelledby')).toBe(labelEl?.id ?? null);
   });

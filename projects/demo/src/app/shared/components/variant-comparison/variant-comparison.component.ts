@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -72,12 +73,12 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VariantComparisonComponent {
-  public readonly showMaterial = signal<boolean>(true);
-  public readonly showBootstrap = signal<boolean>(true);
-  public readonly showMinimal = signal<boolean>(true);
+  public readonly showMaterial: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly showBootstrap: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly showMinimal: WritableSignal<boolean> = signal<boolean>(true);
 
-  public readonly gridColumns = computed<string>((): string => {
-    const count = [this.showMaterial(), this.showBootstrap(), this.showMinimal()].filter(
+  public readonly gridColumns: Signal<string> = computed<string>((): string => {
+    const count: number = [this.showMaterial(), this.showBootstrap(), this.showMinimal()].filter(
       (value: boolean): boolean => value
     ).length;
     return `repeat(${Math.max(count, 1)}, 1fr)`;

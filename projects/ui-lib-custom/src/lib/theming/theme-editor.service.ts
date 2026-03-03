@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
-import { ThemePreset } from './theme-preset.interface';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
+import type { ThemePreset } from './theme-preset.interface';
 import { ThemePresetService } from './theme-preset.service';
 
 const COLOR_VAR_MAP: Record<string, string[]> = {
@@ -105,24 +106,24 @@ type ColorVariants = {
 
 @Injectable({ providedIn: 'root' })
 export class ThemeEditorService {
-  private readonly doc = inject(DOCUMENT);
-  private readonly presetService = inject(ThemePresetService);
+  private readonly doc: Document = inject(DOCUMENT);
+  private readonly presetService: ThemePresetService = inject(ThemePresetService);
 
   private readonly originalColors: Map<string, Record<string, string | null>> = new Map();
   public readonly pendingColors: WritableSignal<Record<string, string>> = signal<
     Record<string, string>
   >({});
   public readonly hasUnsavedChanges: Signal<boolean> = computed((): boolean => {
-    const pending = this.pendingColors();
+    const pending: Record<string, string> = this.pendingColors();
     return Object.keys(pending).length > 0;
   });
 
   public applyColorChange(semanticKey: string, hexValue: string): void {
-    if (!COLOR_VAR_MAP[semanticKey]) {
+    if (COLOR_VAR_MAP[semanticKey] === undefined) {
       return;
     }
 
-    const normalized = this.normalizeHex(hexValue);
+    const normalized: string | null = this.normalizeHex(hexValue);
     if (!normalized) {
       return;
     }
@@ -133,7 +134,7 @@ export class ThemeEditorService {
     this.applyVariants(semanticKey, variants);
 
     this.pendingColors.update(
-      (state): Record<string, string> => ({
+      (state: Record<string, string>): Record<string, string> => ({
         ...state,
         [semanticKey]: normalized,
       })
@@ -141,14 +142,15 @@ export class ThemeEditorService {
   }
 
   public resetColor(semanticKey: string): void {
-    const original = this.originalColors.get(semanticKey);
-    if (!original) {
+    const original: Record<string, string | null> | undefined =
+      this.originalColors.get(semanticKey);
+    if (original === undefined) {
       return;
     }
 
-    const root = this.doc.documentElement;
+    const root: HTMLElement = this.doc.documentElement;
 
-    Object.entries(original).forEach(([name, value]): void => {
+    Object.entries(original).forEach(([name, value]: [string, string | null]): void => {
       if (value === null) {
         root.style.removeProperty(name);
       } else {
@@ -156,20 +158,20 @@ export class ThemeEditorService {
       }
     });
 
-    this.pendingColors.update((state): Record<string, string> => {
-      const next = { ...state } as Record<string, string>;
+    this.pendingColors.update((state: Record<string, string>): Record<string, string> => {
+      const next: Record<string, string> = { ...state };
       delete next[semanticKey];
       return next;
     });
   }
 
   public resetAll(): void {
-    const keys = Object.keys(this.pendingColors());
-    keys.forEach((key): void => this.resetColor(key));
+    const keys: string[] = Object.keys(this.pendingColors());
+    keys.forEach((key: string): void => this.resetColor(key));
   }
 
   public saveAsPreset(name: string): ThemePreset {
-    const preset = this.presetService.captureCurrentTheme(name);
+    const preset: ThemePreset = this.presetService.captureCurrentTheme(name);
     this.presetService.savePreset(preset);
     this.pendingColors.set({});
     return preset;
@@ -180,30 +182,30 @@ export class ThemeEditorService {
       return;
     }
 
-    const root = this.doc.documentElement;
-    const styles = getComputedStyle(root);
+    const root: HTMLElement = this.doc.documentElement;
+    const styles: CSSStyleDeclaration = getComputedStyle(root);
     const original: Record<string, string | null> = {};
-    const vars = COLOR_VAR_MAP[semanticKey];
-    if (!vars) {
+    const vars: string[] | undefined = COLOR_VAR_MAP[semanticKey];
+    if (vars === undefined) {
       return;
     }
-    vars.forEach((name): void => {
-      const value = styles.getPropertyValue(name).trim();
+    vars.forEach((name: string): void => {
+      const value: string = styles.getPropertyValue(name).trim();
       original[name] = value || null;
     });
     this.originalColors.set(semanticKey, original);
   }
 
   private applyVariants(semanticKey: string, variants: ColorVariants): void {
-    const root = this.doc.documentElement;
-    const vars = COLOR_VAR_MAP[semanticKey];
-    if (!vars) {
+    const root: HTMLElement = this.doc.documentElement;
+    const vars: string[] | undefined = COLOR_VAR_MAP[semanticKey];
+    if (vars === undefined) {
       return;
     }
 
-    vars.forEach((name): void => {
-      const lower = name.toLowerCase();
-      let value = variants.base;
+    vars.forEach((name: string): void => {
+      const lower: string = name.toLowerCase();
+      let value: string = variants.base;
 
       if (lower.includes('-hover')) {
         value = variants.hover;
@@ -229,16 +231,16 @@ export class ThemeEditorService {
   }
 
   private normalizeHex(value: string): string | null {
-    const raw = value.trim().toLowerCase();
+    const raw: string = value.trim().toLowerCase();
     if (!raw) {
       return null;
     }
 
-    const hex = raw.startsWith('#') ? raw.slice(1) : raw;
+    const hex: string = raw.startsWith('#') ? raw.slice(1) : raw;
     if (hex.length === 3) {
-      const expanded = hex
+      const expanded: string = hex
         .split('')
-        .map((c): string => `${c}${c}`)
+        .map((c: string): string => `${c}${c}`)
         .join('');
       return `#${expanded}`;
     }
@@ -249,46 +251,46 @@ export class ThemeEditorService {
   }
 
   private adjustLightness(hex: string, delta: number): string {
-    const rgb = this.hexToRgb(hex);
+    const rgb: { r: number; g: number; b: number } | null = this.hexToRgb(hex);
     if (!rgb) {
       return hex;
     }
-    const hsl = this.rgbToHsl(rgb.r, rgb.g, rgb.b);
-    const l = this.clamp(hsl.l + delta, 0, 100);
-    const rgbNext = this.hslToRgb(hsl.h, hsl.s, l);
+    const hsl: { h: number; s: number; l: number } = this.rgbToHsl(rgb.r, rgb.g, rgb.b);
+    const l: number = this.clamp(hsl.l + delta, 0, 100);
+    const rgbNext: { r: number; g: number; b: number } = this.hslToRgb(hsl.h, hsl.s, l);
     return this.rgbToHex(rgbNext.r, rgbNext.g, rgbNext.b);
   }
 
   private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
-    const normalized = this.normalizeHex(hex);
+    const normalized: string | null = this.normalizeHex(hex);
     if (!normalized) {
       return null;
     }
-    const value = normalized.slice(1);
-    const r = parseInt(value.slice(0, 2), 16);
-    const g = parseInt(value.slice(2, 4), 16);
-    const b = parseInt(value.slice(4, 6), 16);
+    const value: string = normalized.slice(1);
+    const r: number = parseInt(value.slice(0, 2), 16);
+    const g: number = parseInt(value.slice(2, 4), 16);
+    const b: number = parseInt(value.slice(4, 6), 16);
     return { r, g, b };
   }
 
   private rgbToHex(r: number, g: number, b: number): string {
-    const toHex = (v: number): string => {
-      const clamped = this.clamp(Math.round(v), 0, 255);
+    const toHex: (v: number) => string = (v: number): string => {
+      const clamped: number = this.clamp(Math.round(v), 0, 255);
       return clamped.toString(16).padStart(2, '0');
     };
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
   }
 
   private rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {
-    const rn = r / 255;
-    const gn = g / 255;
-    const bn = b / 255;
+    const rn: number = r / 255;
+    const gn: number = g / 255;
+    const bn: number = b / 255;
 
-    const max = Math.max(rn, gn, bn);
-    const min = Math.min(rn, gn, bn);
-    const delta = max - min;
+    const max: number = Math.max(rn, gn, bn);
+    const min: number = Math.min(rn, gn, bn);
+    const delta: number = max - min;
 
-    let h = 0;
+    let h: number = 0;
     if (delta !== 0) {
       if (max === rn) {
         h = ((gn - bn) / delta) % 6;
@@ -301,22 +303,22 @@ export class ThemeEditorService {
       if (h < 0) h += 360;
     }
 
-    const l = (max + min) / 2;
-    const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    const l: number = (max + min) / 2;
+    const s: number = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
 
     return { h, s: s * 100, l: l * 100 };
   }
 
   private hslToRgb(h: number, s: number, l: number): { r: number; g: number; b: number } {
-    const sn = s / 100;
-    const ln = l / 100;
-    const c = (1 - Math.abs(2 * ln - 1)) * sn;
-    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-    const m = ln - c / 2;
+    const sn: number = s / 100;
+    const ln: number = l / 100;
+    const c: number = (1 - Math.abs(2 * ln - 1)) * sn;
+    const x: number = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m: number = ln - c / 2;
 
-    let r = 0;
-    let g = 0;
-    let b = 0;
+    let r: number = 0;
+    let g: number = 0;
+    let b: number = 0;
 
     if (h >= 0 && h < 60) {
       r = c;

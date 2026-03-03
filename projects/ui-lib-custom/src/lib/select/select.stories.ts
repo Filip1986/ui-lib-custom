@@ -44,7 +44,10 @@ const meta: Meta<SelectStoryArgs> = {
 
 export default meta;
 
-const renderSelect = (
+const renderSelect: (args: Partial<SelectStoryArgs>) => {
+  props: Partial<SelectStoryArgs> & { options: SelectOption[] };
+  template: string;
+} = (
   args: Partial<SelectStoryArgs>
 ): { props: Partial<SelectStoryArgs> & { options: SelectOption[] }; template: string } => ({
   props: { ...args, options },

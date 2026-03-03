@@ -6,9 +6,12 @@ import {
   output,
   inject,
   ViewEncapsulation,
+  type InputSignal,
+  type OutputEmitterRef,
+  type Signal,
 } from '@angular/core';
-import { Icon } from '../icon/icon';
-import { StatusIcon } from '../icon/icon.semantics';
+import { Icon } from '../icon';
+import type { StatusIcon } from '../icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 @Component({
@@ -47,15 +50,19 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
   },
 })
 export class Alert {
-  private readonly themeConfig = inject(ThemeConfigService);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly severity = input<'success' | 'error' | 'warning' | 'info'>('info');
-  public readonly variant = input<'material' | 'bootstrap' | 'minimal' | null>(null);
-  public readonly dismissible = input<boolean>(false);
+  public readonly severity: InputSignal<'success' | 'error' | 'warning' | 'info'> = input<
+    'success' | 'error' | 'warning' | 'info'
+  >('info');
+  public readonly variant: InputSignal<'material' | 'bootstrap' | 'minimal' | null> = input<
+    'material' | 'bootstrap' | 'minimal' | null
+  >(null);
+  public readonly dismissible: InputSignal<boolean> = input<boolean>(false);
 
-  public readonly dismissed = output<void>();
+  public readonly dismissed: OutputEmitterRef<void> = output<void>();
 
-  public readonly statusIcon = computed<StatusIcon>((): StatusIcon => {
+  public readonly statusIcon: Signal<StatusIcon> = computed<StatusIcon>((): StatusIcon => {
     const iconMap: Record<string, StatusIcon> = {
       success: 'success',
       error: 'error',
@@ -65,11 +72,11 @@ export class Alert {
     return iconMap[this.severity()] ?? 'info';
   });
 
-  public readonly effectiveVariant = computed<'material' | 'bootstrap' | 'minimal'>(
-    (): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant()
-  );
+  public readonly effectiveVariant: Signal<'material' | 'bootstrap' | 'minimal'> = computed<
+    'material' | 'bootstrap' | 'minimal'
+  >((): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant());
 
-  public readonly hostClasses = computed<string>(
+  public readonly hostClasses: Signal<string> = computed<string>(
     (): string => `alert-${this.effectiveVariant()} alert-${this.severity()}`
   );
 

@@ -5,24 +5,31 @@ import {
   inject,
   input,
   ViewEncapsulation,
+  type InputSignal,
+  type Signal,
 } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { IconService } from './icon.service';
-import { ICON_LIBRARY_PREFIX, IconLibrary, IconSize, ComponentVariant } from './icon.types';
-import { SEMANTIC_ICONS, SemanticIcon } from './icon.semantics';
+import {
+  ICON_LIBRARY_PREFIX,
+  type IconLibrary,
+  type IconSize,
+  type ComponentVariant,
+} from './icon.types';
+import { SEMANTIC_ICONS, type SemanticIcon } from './icon.semantics';
 
-const normalizeIconName = (value: string): string =>
+const normalizeIconName: (value: string) => string = (value: string): string =>
   value
     .split(/[^a-zA-Z0-9]+/)
     .filter(Boolean)
-    .map((part): string => part.charAt(0).toUpperCase() + part.slice(1))
+    .map((part: string): string => part.charAt(0).toUpperCase() + part.slice(1))
     .join('');
 
-const hasKnownPrefix = (value: string): boolean => {
-  const prefixes = Object.values(ICON_LIBRARY_PREFIX)
+const hasKnownPrefix: (value: string) => boolean = (value: string): boolean => {
+  const prefixes: string[] = Object.values(ICON_LIBRARY_PREFIX)
     .filter(Boolean)
-    .map((p): string => p.toLowerCase());
-  return prefixes.some((p): boolean => value.toLowerCase().startsWith(p));
+    .map((p: string): string => p.toLowerCase());
+  return prefixes.some((p: string): boolean => value.toLowerCase().startsWith(p));
 };
 
 @Component({
@@ -49,44 +56,44 @@ const hasKnownPrefix = (value: string): boolean => {
   encapsulation: ViewEncapsulation.None,
 })
 export class Icon {
-  private readonly iconService = inject(IconService);
+  private readonly iconService: IconService = inject(IconService);
 
-  public readonly name = input.required<string | SemanticIcon>();
-  public readonly size = input<IconSize>('md');
-  public readonly color = input<string | null>(null);
-  public readonly clickable = input<boolean>(false);
-  public readonly ariaLabel = input<string | null>(null);
-  public readonly library = input<IconLibrary | null>(null);
-  public readonly variant = input<ComponentVariant | null>(null);
-  public readonly semantic = input<boolean>(false);
-
-  private readonly resolvedLibrary = computed<IconLibrary>(
-    (): IconLibrary => this.iconService.resolveLibrary(this.library(), this.variant())
+  public readonly name: InputSignal<string | SemanticIcon> = input.required<
+    string | SemanticIcon
+  >();
+  public readonly size: InputSignal<IconSize> = input<IconSize>('md');
+  public readonly color: InputSignal<string | null> = input<string | null>(null);
+  public readonly clickable: InputSignal<boolean> = input<boolean>(false);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  public readonly library: InputSignal<IconLibrary | null> = input<IconLibrary | null>(null);
+  public readonly variant: InputSignal<ComponentVariant | null> = input<ComponentVariant | null>(
+    null
   );
+  public readonly semantic: InputSignal<boolean> = input<boolean>(false);
 
-  public readonly resolvedName = computed<string>((): string => {
-    const library = this.resolvedLibrary();
-    const raw = this.name();
-    const base =
+  public readonly resolvedName: Signal<string> = computed<string>((): string => {
+    const library: IconLibrary = this.iconService.resolveLibrary(this.library(), this.variant());
+    const raw: string | SemanticIcon = this.name();
+    const base: string =
       this.semantic() || this.isSemanticIcon(raw)
         ? this.iconService.resolveIcon(raw as SemanticIcon, library)
         : raw;
-    const prefix = ICON_LIBRARY_PREFIX[library];
+    const prefix: string | undefined = ICON_LIBRARY_PREFIX[library];
     // If the base already carries any known library prefix, return it as-is
     if (!prefix || hasKnownPrefix(base)) {
       return base;
     }
-    const baseName = normalizeIconName(base);
+    const baseName: string = normalizeIconName(base);
     return `${prefix}${baseName}`;
   });
 
-  public readonly resolvedSize = computed<string>((): string =>
+  public readonly resolvedSize: Signal<string> = computed<string>((): string =>
     this.iconService.getIconSize(this.size())
   );
-  public readonly ariaLabelResolved = computed<string | null>((): string | null =>
-    this.clickable() ? (this.ariaLabel() ?? 'Icon') : this.ariaLabel()
+  public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
+    (): string | null => (this.clickable() ? (this.ariaLabel() ?? 'Icon') : this.ariaLabel())
   );
-  public readonly ariaHidden = computed<string | null>((): string | null =>
+  public readonly ariaHidden: Signal<string | null> = computed<string | null>((): string | null =>
     this.clickable() || this.ariaLabel() ? null : 'true'
   );
 

@@ -1,18 +1,23 @@
 import {
-  AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   computed,
-  ElementRef,
   inject,
   input,
   signal,
   ViewChild,
   ViewEncapsulation,
+  type AfterViewChecked,
+  type ElementRef,
+  type InputSignal,
+  type Signal,
+  type WritableSignal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon, IconSize, SemanticIcon } from 'ui-lib-custom/icon';
-import { Badge, BadgeColor } from 'ui-lib-custom/badge';
+import { Icon } from 'ui-lib-custom/icon';
+import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
+import { Badge } from 'ui-lib-custom/badge';
+import type { BadgeColor } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
@@ -43,66 +48,74 @@ export type BadgeSeverity = ButtonSeverity | 'neutral';
   encapsulation: ViewEncapsulation.None,
 })
 export class Button implements AfterViewChecked {
-  private readonly themeConfig = inject(ThemeConfigService);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly variant = input<ButtonVariant | null>(null);
-  public readonly appearance = input<ButtonAppearance>('solid');
-  public readonly size = input<ButtonSize>('md');
-  public readonly color = input<ButtonColor>('primary');
-  public readonly severity = input<ButtonSeverity | null>(null);
-  public readonly type = input<ButtonType>('button');
-  public readonly disabled = input<boolean>(false);
-  public readonly loading = input<boolean>(false);
-  public readonly fullWidth = input<boolean>(false);
-  public readonly iconPosition = input<IconPosition>('left');
-  public readonly shadow = input<string | null>(null);
-  public readonly icon = input<SemanticIcon | string | null>(null);
-  public readonly iconOnly = input<boolean | null>(null);
+  public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
+  public readonly appearance: InputSignal<ButtonAppearance> = input<ButtonAppearance>('solid');
+  public readonly size: InputSignal<ButtonSize> = input<ButtonSize>('md');
+  public readonly color: InputSignal<ButtonColor> = input<ButtonColor>('primary');
+  public readonly severity: InputSignal<ButtonSeverity | null> = input<ButtonSeverity | null>(null);
+  public readonly type: InputSignal<ButtonType> = input<ButtonType>('button');
+  public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly loading: InputSignal<boolean> = input<boolean>(false);
+  public readonly fullWidth: InputSignal<boolean> = input<boolean>(false);
+  public readonly iconPosition: InputSignal<IconPosition> = input<IconPosition>('left');
+  public readonly shadow: InputSignal<string | null> = input<string | null>(null);
+  public readonly icon: InputSignal<SemanticIcon | string | null> = input<
+    SemanticIcon | string | null
+  >(null);
+  public readonly iconOnly: InputSignal<boolean | null> = input<boolean | null>(null);
   /** @deprecated Use iconOnly instead. */
-  public readonly iconOnlyInput = input<boolean>(false);
-  public readonly raised = input<boolean>(false);
-  public readonly rounded = input<boolean>(false);
-  public readonly text = input<boolean>(false);
-  public readonly outlined = input<boolean>(false);
-  public readonly link = input<boolean>(false);
-  public readonly contrast = input<boolean>(false);
-  public readonly badge = input<string | number | null | undefined>(null);
-  public readonly badgeColor = input<BadgeSeverity>('danger');
-  public readonly badgeSeverity = input<BadgeSeverity | null>(null);
-  public readonly badgeClass = input<string | null>(null);
-  public readonly loadingIcon = input<SemanticIcon | string>('spinner');
-  public readonly role = input<string | null>(null);
-  public readonly tabIndex = input<number | null>(null);
-  public readonly ariaPressed = input<boolean | null>(null);
-  public readonly ariaChecked = input<boolean | null>(null);
-  public readonly ariaLabel = input<string | null>(null);
+  public readonly iconOnlyInput: InputSignal<boolean> = input<boolean>(false);
+  public readonly raised: InputSignal<boolean> = input<boolean>(false);
+  public readonly rounded: InputSignal<boolean> = input<boolean>(false);
+  public readonly text: InputSignal<boolean> = input<boolean>(false);
+  public readonly outlined: InputSignal<boolean> = input<boolean>(false);
+  public readonly link: InputSignal<boolean> = input<boolean>(false);
+  public readonly contrast: InputSignal<boolean> = input<boolean>(false);
+  public readonly badge: InputSignal<string | number | null | undefined> = input<
+    string | number | null | undefined
+  >(null);
+  public readonly badgeColor: InputSignal<BadgeSeverity> = input<BadgeSeverity>('danger');
+  public readonly badgeSeverity: InputSignal<BadgeSeverity | null> = input<BadgeSeverity | null>(
+    null
+  );
+  public readonly badgeClass: InputSignal<string | null> = input<string | null>(null);
+  public readonly loadingIcon: InputSignal<SemanticIcon | string> = input<SemanticIcon | string>(
+    'spinner'
+  );
+  public readonly role: InputSignal<string | null> = input<string | null>(null);
+  public readonly tabIndex: InputSignal<number | null> = input<number | null>(null);
+  public readonly ariaPressed: InputSignal<boolean | null> = input<boolean | null>(null);
+  public readonly ariaChecked: InputSignal<boolean | null> = input<boolean | null>(null);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  public readonly focused = signal<boolean>(false);
+  public readonly focused: WritableSignal<boolean> = signal<boolean>(false);
 
   @ViewChild('btnEl') private readonly buttonEl?: ElementRef<HTMLButtonElement>;
 
-  private readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
-    (): 'small' | 'medium' | 'large' => {
-      const size: ButtonSize = this.size();
-      const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
-        sm: 'small',
-        md: 'medium',
-        lg: 'large',
-        small: 'small',
-        medium: 'medium',
-        large: 'large',
-      };
-      return map[size];
-    }
-  );
+  private readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
+    'small' | 'medium' | 'large'
+  >((): 'small' | 'medium' | 'large' => {
+    const size: ButtonSize = this.size();
+    const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
+      sm: 'small',
+      md: 'medium',
+      lg: 'large',
+      small: 'small',
+      medium: 'medium',
+      large: 'large',
+    };
+    return map[size];
+  });
 
-  public readonly effectiveVariant = computed<ButtonVariant>(
+  public readonly effectiveVariant: Signal<ButtonVariant> = computed<ButtonVariant>(
     (): ButtonVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly iconOnlyComputed = computed<boolean>(
+  public readonly iconOnlyComputed: Signal<boolean> = computed<boolean>(
     (): boolean => this.iconOnly() ?? this.iconOnlyInput()
   );
-  public readonly iconSize = computed<IconSize>((): IconSize => {
+  public readonly iconSize: Signal<IconSize> = computed<IconSize>((): IconSize => {
     const sizeMap: Record<'small' | 'medium' | 'large', IconSize> = {
       small: 'sm',
       medium: 'md',
@@ -111,36 +124,42 @@ export class Button implements AfterViewChecked {
     return sizeMap[this.normalizedSize()];
   });
 
-  public readonly effectiveSeverity = computed<ButtonSeverity>((): ButtonSeverity => {
-    const severity: ButtonSeverity = this.contrast()
-      ? 'contrast'
-      : (this.severity() ?? this.color());
-    return severity === 'warn' ? 'warning' : severity;
-  });
-
-  public readonly effectiveAppearance = computed<ButtonAppearance>((): ButtonAppearance => {
-    if (this.text()) {
-      return 'ghost';
+  public readonly effectiveSeverity: Signal<ButtonSeverity> = computed<ButtonSeverity>(
+    (): ButtonSeverity => {
+      const severity: ButtonSeverity = this.contrast()
+        ? 'contrast'
+        : (this.severity() ?? this.color());
+      return severity === 'warn' ? 'warning' : severity;
     }
+  );
 
-    if (this.outlined()) {
-      return 'outline';
+  public readonly effectiveAppearance: Signal<ButtonAppearance> = computed<ButtonAppearance>(
+    (): ButtonAppearance => {
+      if (this.text()) {
+        return 'ghost';
+      }
+
+      if (this.outlined()) {
+        return 'outline';
+      }
+
+      return this.appearance();
     }
+  );
 
-    return this.appearance();
-  });
-
-  public readonly hasBadge = computed<boolean>((): boolean => {
-    const badgeValue = this.badge();
+  public readonly hasBadge: Signal<boolean> = computed<boolean>((): boolean => {
+    const badgeValue: string | number | null | undefined = this.badge();
     return badgeValue !== null && badgeValue !== undefined;
   });
 
-  public readonly normalizeBadgeSeverity = computed<BadgeSeverity>((): BadgeSeverity => {
-    const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();
-    return inputSeverity === 'warn' ? 'warning' : inputSeverity;
-  });
+  public readonly normalizeBadgeSeverity: Signal<BadgeSeverity> = computed<BadgeSeverity>(
+    (): BadgeSeverity => {
+      const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();
+      return inputSeverity === 'warn' ? 'warning' : inputSeverity;
+    }
+  );
 
-  public readonly badgeColorResolved = computed<BadgeColor>((): BadgeColor => {
+  public readonly badgeColorResolved: Signal<BadgeColor> = computed<BadgeColor>((): BadgeColor => {
     const severity: BadgeSeverity = this.normalizeBadgeSeverity();
     const allowed: BadgeColor[] = [
       'primary',
@@ -167,7 +186,7 @@ export class Button implements AfterViewChecked {
     return 'neutral';
   });
 
-  public readonly buttonClasses = computed<string>((): string => {
+  public readonly buttonClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
       'btn',
       `btn-${this.effectiveVariant()}`,
@@ -232,19 +251,23 @@ export class Button implements AfterViewChecked {
     return classes.join(' ');
   });
 
-  public readonly ariaDisabled = computed<boolean | null>((): boolean | null =>
-    this.disabled() || this.loading() ? true : null
+  public readonly ariaDisabled: Signal<boolean | null> = computed<boolean | null>(
+    (): boolean | null => (this.disabled() || this.loading() ? true : null)
   );
-  public readonly ariaLabelResolved = computed<string | null>((): string | null => {
-    if (this.loading()) {
-      return this.ariaLabel() ?? 'Loading';
+  public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      if (this.loading()) {
+        return this.ariaLabel() ?? 'Loading';
+      }
+      if (this.iconOnlyComputed()) {
+        return this.ariaLabel() ?? 'Button';
+      }
+      return this.ariaLabel();
     }
-    if (this.iconOnlyComputed()) {
-      return this.ariaLabel() ?? 'Button';
-    }
-    return this.ariaLabel();
-  });
-  public readonly isDisabled = computed<boolean>((): boolean => this.disabled() || this.loading());
+  );
+  public readonly isDisabled: Signal<boolean> = computed<boolean>(
+    (): boolean => this.disabled() || this.loading()
+  );
 
   public setFocused(isFocused: boolean): void {
     this.focused.set(isFocused);

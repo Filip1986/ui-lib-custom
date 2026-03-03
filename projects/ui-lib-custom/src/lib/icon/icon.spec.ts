@@ -26,7 +26,8 @@ describe('Icon', (): void => {
   });
 
   it('prefixes library names when missing', (): void => {
-    expect(component.resolvedName()).toBe('lucideAlertCircle');
+    const resolvedName: () => string = component.resolvedName as () => string;
+    expect(resolvedName()).toBe('lucideAlertCircle');
   });
 
   it('keeps explicit prefixed names', (): void => {
@@ -34,14 +35,16 @@ describe('Icon', (): void => {
     fixture.componentRef.setInput('name', 'lucideAlertCircle');
     fixture.detectChanges();
 
-    expect(component.resolvedName()).toBe('lucideAlertCircle');
+    const resolvedName: () => string = component.resolvedName as () => string;
+    expect(resolvedName()).toBe('lucideAlertCircle');
   });
 
   it('maps sizes using token mapping', (): void => {
     fixture.componentRef.setInput('size', 'lg');
     fixture.detectChanges();
 
-    expect(component.resolvedSize()).toBe('1.5rem');
+    const resolvedSize: () => string = component.resolvedSize as () => string;
+    expect(resolvedSize()).toBe('1.5rem');
   });
 
   it('marks clickable host class', (): void => {

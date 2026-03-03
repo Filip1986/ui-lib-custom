@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, input, ViewEncapsulation } from '@angular/core';
+import type { InputSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseLoginComponent } from '../base-login/base-login.component';
@@ -33,5 +34,5 @@ export class Login3Component extends BaseLoginComponent {
   /**
    * Override loading property from base component
    */
-  public override readonly loading = input<boolean>(false);
+  public override readonly loading: InputSignal<boolean> = input<boolean>(false);
 }

@@ -1,12 +1,5 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  Renderer2,
-  SimpleChanges,
-  inject,
-} from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2, inject } from '@angular/core';
+import type { OnChanges, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appThemeScope]',
@@ -15,14 +8,14 @@ import {
 export class ThemeScopeDirective implements OnChanges {
   @Input('appThemeScope') public themeVars: Record<string, string> | null = null;
 
-  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly renderer = inject(Renderer2);
-  private readonly previousKeys = new Set<string>();
+  private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly renderer: Renderer2 = inject(Renderer2);
+  private readonly previousKeys: Set<string> = new Set<string>();
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (!changes['themeVars']) return;
-    const target = this.el.nativeElement;
-    const next = this.themeVars ?? {};
+    const target: HTMLElement = this.el.nativeElement;
+    const next: Record<string, string> = this.themeVars ?? {};
 
     // Remove old keys not present anymore
     this.previousKeys.forEach((key: string): void => {
@@ -32,7 +25,7 @@ export class ThemeScopeDirective implements OnChanges {
     });
 
     // Apply new/updated vars
-    Object.entries(next).forEach(([key, value]): void => {
+    Object.entries(next).forEach(([key, value]: [string, string]): void => {
       this.renderer.setStyle(target, key, value);
       this.previousKeys.add(key);
     });

@@ -1,4 +1,4 @@
-import { Directive, input } from '@angular/core';
+import { Directive, input, type InputSignal } from '@angular/core';
 
 @Directive({
   selector: '[uiLibDarkTheme]',
@@ -8,7 +8,7 @@ import { Directive, input } from '@angular/core';
   },
 })
 export class DarkThemeDirective {
-  public readonly active = input(true, { alias: 'uiLibDarkTheme' });
+  public readonly active: InputSignal<boolean> = input(true, { alias: 'uiLibDarkTheme' });
 }
 
 @Directive({
@@ -19,5 +19,5 @@ export class DarkThemeDirective {
   },
 })
 export class LightThemeDirective {
-  public readonly active = input(true, { alias: 'uiLibLightTheme' });
+  public readonly active: InputSignal<boolean> = input(true, { alias: 'uiLibLightTheme' });
 }

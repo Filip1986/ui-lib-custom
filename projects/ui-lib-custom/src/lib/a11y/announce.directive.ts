@@ -1,5 +1,7 @@
 import { Directive, ElementRef, HostListener, effect, inject, input } from '@angular/core';
-import { LiveAnnouncerService, AriaLivePoliteness } from './live-announcer.service';
+import type { InputSignal } from '@angular/core';
+import { LiveAnnouncerService } from './live-announcer.service';
+import type { AriaLivePoliteness } from './live-announcer.service';
 
 /**
  * Directive to announce content changes
@@ -9,10 +11,10 @@ import { LiveAnnouncerService, AriaLivePoliteness } from './live-announcer.servi
   standalone: true,
 })
 export class AnnounceDirective {
-  private readonly liveAnnouncer = inject(LiveAnnouncerService);
+  private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
 
-  public readonly uiLibAnnounce = input<string>('');
-  public readonly politeness = input<AriaLivePoliteness>('polite');
+  public readonly uiLibAnnounce: InputSignal<string> = input<string>('');
+  public readonly politeness: InputSignal<AriaLivePoliteness> = input<AriaLivePoliteness>('polite');
 
   constructor() {
     effect((): void => {
@@ -32,8 +34,8 @@ export class AnnounceDirective {
   standalone: true,
 })
 export class AnnounceOnChangeDirective {
-  private readonly liveAnnouncer = inject(LiveAnnouncerService);
-  private readonly el = inject(ElementRef) as ElementRef<HTMLElement>;
+  private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
+  private readonly el: ElementRef<HTMLElement> = inject(ElementRef) as ElementRef<HTMLElement>;
 
   @HostListener('change')
   @HostListener('input')

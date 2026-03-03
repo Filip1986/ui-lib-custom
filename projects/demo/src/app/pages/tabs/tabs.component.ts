@@ -7,6 +7,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -14,6 +15,14 @@ import {
   Tab,
   TabLabel,
   TabContent,
+  Card,
+  Button,
+  Icon,
+  ThemeConfigService,
+  UiLibSelect,
+  Checkbox,
+} from 'ui-lib-custom';
+import type {
   TabsAlignment,
   TabsLazyMode,
   TabsOrientation,
@@ -22,16 +31,10 @@ import {
   TabsVariant,
   TabsScrollBehavior,
   TabsMode,
-  Card,
-  Button,
-  Icon,
-  ThemeConfigService,
-  UiLibSelect,
   SelectOption,
-  Checkbox,
 } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
@@ -91,7 +94,7 @@ export class TabsDemoComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
   }
@@ -100,7 +103,7 @@ export class TabsDemoComponent {
     this.setTab(value as TabKey);
   }
 
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
   public readonly variants: TabsVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizes: TabsSize[] = ['small', 'medium', 'large'];
@@ -108,16 +111,18 @@ export class TabsDemoComponent {
   public readonly aligns: TabsAlignment[] = ['start', 'center', 'end', 'stretch'];
   public readonly lazyModes: TabsLazyMode[] = [false, 'unmount', 'keep-alive'];
 
-  public readonly variant = signal<TabsVariant>('material');
-  public readonly size = signal<TabsSize>('medium');
-  public readonly orientation = signal<TabsOrientation>('horizontal');
-  public readonly align = signal<TabsAlignment>('start');
-  public readonly closable = signal<boolean>(false);
-  public readonly lazy = signal<TabsLazyMode>(false);
-  public readonly disabledAll = signal<boolean>(false);
-  public readonly scrollable = signal<boolean>(false);
-  public readonly menuMode = signal<boolean>(false);
-  public readonly perTabLazy = signal<PerTabLazyOption>('inherit');
+  public readonly variant: WritableSignal<TabsVariant> = signal<TabsVariant>('material');
+  public readonly size: WritableSignal<TabsSize> = signal<TabsSize>('medium');
+  public readonly orientation: WritableSignal<TabsOrientation> =
+    signal<TabsOrientation>('horizontal');
+  public readonly align: WritableSignal<TabsAlignment> = signal<TabsAlignment>('start');
+  public readonly closable: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly lazy: WritableSignal<TabsLazyMode> = signal<TabsLazyMode>(false);
+  public readonly disabledAll: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly scrollable: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly menuMode: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly perTabLazy: WritableSignal<PerTabLazyOption> =
+    signal<PerTabLazyOption>('inherit');
   public readonly perTabLazyOptions: SelectOption[] = [
     { label: 'Inherit', value: 'inherit' },
     { label: 'Off', value: false },
@@ -125,7 +130,7 @@ export class TabsDemoComponent {
     { label: 'Keep alive', value: 'keep-alive' },
   ];
 
-  public readonly playgroundTabs = signal<DemoTab[]>([
+  public readonly playgroundTabs: WritableSignal<DemoTab[]> = signal<DemoTab[]>([
     { value: 'overview', label: 'Overview', content: 'High-level summary of the selected topic.' },
     { value: 'details', label: 'Details', content: 'Deeper dive content for the tab selection.' },
     {
@@ -169,7 +174,7 @@ export class TabsDemoComponent {
     { value: 'integrations', label: 'Integrations', content: 'Connected services and APIs.' },
   ];
 
-  public readonly closableTabs = signal<DemoTab[]>([
+  public readonly closableTabs: WritableSignal<DemoTab[]> = signal<DemoTab[]>([
     { value: 'alpha', label: 'Alpha', closable: true, content: 'Alpha content' },
     { value: 'beta', label: 'Beta', closable: true, content: 'Beta content' },
     { value: 'gamma', label: 'Gamma', closable: true, content: 'Gamma content' },
@@ -199,7 +204,7 @@ export class TabsDemoComponent {
     { value: '/usage', label: 'Usage', icon: 'bookmark' },
     { value: '/settings', label: 'Settings', icon: 'settings' },
   ];
-  public readonly navActive = signal<string>('/overview');
+  public readonly navActive: WritableSignal<string> = signal<string>('/overview');
 
   public readonly controlledTabs: DemoTab[] = [
     { value: 'first', label: 'First', content: 'Controlled tab one.' },
@@ -207,34 +212,47 @@ export class TabsDemoComponent {
     { value: 'third', label: 'Third', content: 'Controlled tab three.' },
   ];
 
-  public readonly controlledIndex = signal<number>(0);
-  public readonly controlledSelection = computed<number>((): number => this.controlledIndex());
+  public readonly controlledIndex: WritableSignal<number> = signal<number>(0);
+  public readonly controlledSelection: Signal<number> = computed<number>((): number =>
+    this.controlledIndex()
+  );
 
-  public readonly playgroundTabsResolved = computed<DemoTab[]>((): DemoTab[] =>
+  public readonly playgroundTabsResolved: Signal<DemoTab[]> = computed<DemoTab[]>((): DemoTab[] =>
     this.scrollable() ? this.scrollTabs : this.playgroundTabs()
   );
 
-  public readonly playgroundScrollBehavior = computed<TabsScrollBehavior>(
-    (): TabsScrollBehavior => (this.scrollable() ? 'arrows' : 'auto')
-  );
+  public readonly playgroundScrollBehavior: Signal<TabsScrollBehavior> =
+    computed<TabsScrollBehavior>((): TabsScrollBehavior => (this.scrollable() ? 'arrows' : 'auto'));
 
-  public readonly playgroundMode = computed<TabsMode>(
+  public readonly playgroundMode: Signal<TabsMode> = computed<TabsMode>(
     (): TabsMode => (this.menuMode() ? 'navigation' : 'default')
   );
 
-  public readonly playgroundPerTabLazy = computed<TabsLazyMode | undefined>(
-    (): TabsLazyMode | undefined => {
-      const selection: PerTabLazyOption = this.perTabLazy();
-      return selection === 'inherit' ? undefined : selection;
-    }
-  );
+  public readonly playgroundPerTabLazy: Signal<TabsLazyMode | undefined> = computed<
+    TabsLazyMode | undefined
+  >((): TabsLazyMode | undefined => {
+    const selection: PerTabLazyOption = this.perTabLazy();
+    return selection === 'inherit' ? undefined : selection;
+  });
 
-  public readonly track = (_: number, item: unknown): TabsValue | number =>
+  public readonly track: (index: number, item: unknown) => TabsValue | number = (
+    index: number,
+    item: unknown
+  ): TabsValue | number =>
     item && typeof item === 'object' && 'value' in (item as { value?: unknown })
       ? (item as { value: TabsValue }).value
-      : _;
+      : index;
 
-  public readonly snippets = {
+  public readonly snippets: {
+    readonly basic: string;
+    readonly icons: string;
+    readonly vertical: string;
+    readonly closable: string;
+    readonly controlled: string;
+    readonly scrollable: string;
+    readonly tabMenu: string;
+    readonly perTabLazy: string;
+  } = {
     basic: `<ui-lib-tabs>
   <ui-lib-tab label="Home">Home content</ui-lib-tab>
   <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
@@ -283,7 +301,7 @@ export class TabsDemoComponent {
 </ui-lib-tabs>`,
   } as const;
 
-  public readonly appliedTheme = computed<Record<string, string>>(
+  public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
   );
 
@@ -291,7 +309,7 @@ export class TabsDemoComponent {
 
   constructor() {
     effect((): void => {
-      const variant = this.themeService.preset().variant as TabsVariant;
+      const variant: TabsVariant = this.themeService.preset().variant as TabsVariant;
       this.variant.set(variant);
     });
   }
@@ -364,7 +382,7 @@ export class TabsDemoComponent {
     this.controlledIndex.set(index);
   }
 
-  public readonly tabsExample = `<ui-lib-tabs>
+  public readonly tabsExample: string = `<ui-lib-tabs>
   <ui-lib-tab label="Home">Home content</ui-lib-tab>
   <ui-lib-tab label="Profile">Profile content</ui-lib-tab>
 </ui-lib-tabs>`;

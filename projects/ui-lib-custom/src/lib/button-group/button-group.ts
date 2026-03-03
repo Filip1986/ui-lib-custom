@@ -4,8 +4,10 @@ import {
   input,
   computed,
   ViewEncapsulation,
+  type InputSignal,
+  type Signal,
 } from '@angular/core';
-import { ButtonVariant, ButtonSize } from '../button/button';
+import type { ButtonVariant, ButtonSize } from '../button';
 
 @Component({
   selector: 'ui-lib-button-group',
@@ -26,24 +28,24 @@ import { ButtonVariant, ButtonSize } from '../button/button';
   },
 })
 export class ButtonGroup {
-  public readonly variant = input<ButtonVariant>('material');
-  public readonly vertical = input<boolean>(false);
-  public readonly size = input<ButtonSize>('md');
+  public readonly variant: InputSignal<ButtonVariant> = input<ButtonVariant>('material');
+  public readonly vertical: InputSignal<boolean> = input<boolean>(false);
+  public readonly size: InputSignal<ButtonSize> = input<ButtonSize>('md');
 
-  public readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
-    (): 'small' | 'medium' | 'large' => {
-      const size: ButtonSize = this.size();
-      const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
-        sm: 'small',
-        md: 'medium',
-        lg: 'large',
-        small: 'small',
-        medium: 'medium',
-        large: 'large',
-      };
-      return map[size];
-    }
-  );
+  public readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
+    'small' | 'medium' | 'large'
+  >((): 'small' | 'medium' | 'large' => {
+    const size: ButtonSize = this.size();
+    const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
+      sm: 'small',
+      md: 'medium',
+      lg: 'large',
+      small: 'small',
+      medium: 'medium',
+      large: 'large',
+    };
+    return map[size];
+  });
 
-  public readonly hostClasses = computed<string>((): string => '');
+  public readonly hostClasses: Signal<string> = computed<string>((): string => '');
 }

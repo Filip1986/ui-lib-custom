@@ -57,7 +57,7 @@ export const States: Story = {
     template: `
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
         <ui-lib-badge>Normal</ui-lib-badge>
-        <ui-lib-badge pill="true">Pill</ui-lib-badge>
+        <ui-lib-badge [pill]="true">Pill</ui-lib-badge>
       </div>
     `,
   }),
@@ -70,6 +70,13 @@ export const DarkMode: Story = {
   }),
 };
 
+type BadgeStoryArgs = {
+  color: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'neutral';
+  size: 'sm' | 'md' | 'lg';
+  variant: 'solid' | 'outline';
+  pill: boolean;
+};
+
 export const FullApi: Story = {
   args: {
     color: 'info',
@@ -77,7 +84,7 @@ export const FullApi: Story = {
     variant: 'solid',
     pill: true,
   },
-  render: (args): { props: Record<string, unknown>; template: string } => ({
+  render: (args: BadgeStoryArgs): { props: Record<string, unknown>; template: string } => ({
     props: { ...args },
     template: `<ui-lib-badge [color]="color" [size]="size" [variant]="variant" [pill]="pill">Full API</ui-lib-badge>`,
   }),

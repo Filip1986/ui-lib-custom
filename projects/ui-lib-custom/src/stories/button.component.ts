@@ -19,7 +19,7 @@ import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from 
 export class ButtonComponent {
   /** Is this the principal call to action on the page? */
   @Input()
-  public primary = false;
+  public primary: boolean = false;
 
   /** What background color to use */
   @Input()
@@ -35,14 +35,14 @@ export class ButtonComponent {
    * @required
    */
   @Input()
-  public label = 'Button';
+  public label: string = 'Button';
 
   /** Optional click handler */
   @Output()
-  public clicked = new EventEmitter<Event>();
+  public clicked: EventEmitter<Event> = new EventEmitter<Event>();
 
   public get classes(): string[] {
-    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+    const mode: string = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';
 
     return ['storybook-button', `storybook-button--${this.size}`, mode];
   }

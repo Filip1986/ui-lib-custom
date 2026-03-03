@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
 import { Accordion } from './accordion';
 import { AccordionPanel } from './accordion-panel';
-import { ThemeConfigService, ThemeVariant, ThemePreset } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemeVariant, ThemePreset } from 'ui-lib-custom/theme';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 @Component({
@@ -26,8 +28,8 @@ describe('Accordion Accessibility', (): void => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async (): Promise<void> => {
-    const variant = signal<ThemeVariant>('material');
-    const buildPreset = (): ThemePreset => ({
+    const variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
+    const buildPreset: () => ThemePreset = (): ThemePreset => ({
       id: 'test-preset',
       name: 'Test Preset',
       variant: 'material',
@@ -64,7 +66,12 @@ describe('Accordion Accessibility', (): void => {
       createdAt: 0,
       updatedAt: 0,
     });
-    const mockTheme = {
+    const mockTheme: {
+      variant: WritableSignal<ThemeVariant>;
+      setVariant: (value: ThemeVariant) => void;
+      getPreset: () => ThemePreset;
+      preset: () => ThemePreset;
+    } = {
       variant,
       setVariant: (value: ThemeVariant): void => variant.set(value),
       getPreset: (): ThemePreset => buildPreset(),

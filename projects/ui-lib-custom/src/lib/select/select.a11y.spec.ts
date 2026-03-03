@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UiLibSelect, SelectOption } from './select';
-import { ThemeConfigService, ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { UiLibSelect } from './select';
+import type { SelectOption } from './select';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
 @Component({
@@ -24,8 +28,8 @@ describe('Select Accessibility', (): void => {
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async (): Promise<void> => {
-    const variant = signal<ThemeVariant>('material');
-    const buildPreset = (): ThemePreset => ({
+    const variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
+    const buildPreset: () => ThemePreset = (): ThemePreset => ({
       id: 'test-preset',
       name: 'Test Preset',
       variant: 'material',
@@ -62,7 +66,12 @@ describe('Select Accessibility', (): void => {
       createdAt: 0,
       updatedAt: 0,
     });
-    const mockTheme = {
+    const mockTheme: {
+      variant: WritableSignal<ThemeVariant>;
+      setVariant: (value: ThemeVariant) => void;
+      getPreset: () => ThemePreset;
+      preset: () => ThemePreset;
+    } = {
       variant,
       setVariant: (value: ThemeVariant): void => variant.set(value),
       getPreset: (): ThemePreset => buildPreset(),
@@ -82,7 +91,7 @@ describe('Select Accessibility', (): void => {
   });
 
   it('should have no violations when open', async (): Promise<void> => {
-    const control = (fixture.nativeElement as HTMLElement).querySelector(
+    const control: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-control'
     ) as HTMLElement;
     control.click();
@@ -92,20 +101,22 @@ describe('Select Accessibility', (): void => {
   });
 
   it('should have combobox role', (): void => {
-    const select = (fixture.nativeElement as HTMLElement).querySelector(
+    const select: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-select'
     ) as HTMLElement;
     expect(select.getAttribute('role')).toBe('combobox');
   });
 
   it('should have listbox role on dropdown', (): void => {
-    const control = (fixture.nativeElement as HTMLElement).querySelector(
+    const control: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-control'
     ) as HTMLElement;
     control.click();
     fixture.detectChanges();
 
-    const listbox = (fixture.nativeElement as HTMLElement).querySelector('[role="listbox"]');
+    const listbox: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '[role="listbox"]'
+    );
     expect(listbox).toBeTruthy();
   });
 });

@@ -19,14 +19,18 @@ export const LoggedOut: Story = {};
 
 // More on component testing: https://storybook.js.org/docs/writing-tests/interaction-testing
 export const LoggedIn: Story = {
-  play: async ({ canvasElement }): Promise<void> => {
-    const canvas = within(canvasElement);
-    const loginButton = canvas.getByRole('button', { name: /Log in/i });
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }): Promise<void> => {
+    type CanvasQueries = {
+      getByRole: (role: string, options?: { name?: RegExp }) => HTMLElement;
+    };
+
+    const canvas: CanvasQueries = within(canvasElement) as unknown as CanvasQueries;
+    const loginButton: HTMLElement = canvas.getByRole('button', { name: /Log in/i });
     await expect(loginButton).toBeInTheDocument();
     await userEvent.click(loginButton);
     await expect(loginButton).not.toBeInTheDocument();
 
-    const logoutButton = canvas.getByRole('button', { name: /Log out/i });
+    const logoutButton: HTMLElement = canvas.getByRole('button', { name: /Log out/i });
     await expect(logoutButton).toBeInTheDocument();
   },
 };

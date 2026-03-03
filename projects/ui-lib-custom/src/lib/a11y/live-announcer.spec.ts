@@ -15,7 +15,7 @@ describe('LiveAnnouncerService', (): void => {
   });
 
   it('should create live region element', (): void => {
-    const liveRegion = document.getElementById('uilib-live-announcer');
+    const liveRegion: HTMLElement | null = document.getElementById('uilib-live-announcer');
     expect(liveRegion).toBeTruthy();
     expect(liveRegion?.getAttribute('aria-live')).toBe('polite');
   });
@@ -23,14 +23,14 @@ describe('LiveAnnouncerService', (): void => {
   it('should announce message', async (): Promise<void> => {
     await service.announce('Test message');
 
-    const liveRegion = document.getElementById('uilib-live-announcer');
+    const liveRegion: HTMLElement | null = document.getElementById('uilib-live-announcer');
     expect(liveRegion?.textContent).toBe('Test message');
   });
 
   it('should use assertive for errors', async (): Promise<void> => {
     await service.announceError('Error message');
 
-    const liveRegion = document.getElementById('uilib-live-announcer');
+    const liveRegion: HTMLElement | null = document.getElementById('uilib-live-announcer');
     expect(liveRegion?.getAttribute('aria-live')).toBe('assertive');
   });
 
@@ -38,7 +38,7 @@ describe('LiveAnnouncerService', (): void => {
     await service.announce('Test message');
     service.clear();
 
-    const liveRegion = document.getElementById('uilib-live-announcer');
+    const liveRegion: HTMLElement | null = document.getElementById('uilib-live-announcer');
     expect(liveRegion?.textContent).toBe('');
   });
 });

@@ -5,7 +5,7 @@ import type { ThemePreset } from 'ui-lib-custom';
 
 type StorageRecord = Record<string, string>;
 
-const samplePreset = (): ThemePreset => ({
+const samplePreset: () => ThemePreset = (): ThemePreset => ({
   id: 'preset-1',
   name: 'Sample',
   description: 'Sample preset',
@@ -38,7 +38,7 @@ const samplePreset = (): ThemePreset => ({
 });
 
 function getRequiredItem<T>(items: T[], index: number, label: string): T {
-  const item = items[index];
+  const item: T = items[index];
   if (!item) {
     throw new Error(`Expected ${label} at index ${index}.`);
   }
@@ -95,7 +95,7 @@ describe('ThemePresetService', (): void => {
     TestBed.configureTestingModule({});
     const fresh: ThemePresetService = TestBed.inject(ThemePresetService);
     expect(fresh.presets().length).toBe(1);
-    const firstPreset = getRequiredItem(fresh.presets(), 0, 'preset');
+    const firstPreset: ThemePreset = getRequiredItem(fresh.presets(), 0, 'preset');
     expect(firstPreset.id).toBe('preset-1');
   });
 
@@ -106,7 +106,7 @@ describe('ThemePresetService', (): void => {
     expect(raw).toBeTruthy();
     const parsed: ThemePreset[] = JSON.parse(raw as string) as ThemePreset[];
     expect(parsed.length).toBe(1);
-    const firstParsed = getRequiredItem(parsed, 0, 'parsed preset');
+    const firstParsed: ThemePreset = getRequiredItem(parsed, 0, 'parsed preset');
     expect(firstParsed.id).toBe('preset-1');
   });
 
@@ -116,16 +116,16 @@ describe('ThemePresetService', (): void => {
     const updated: ThemePreset = { ...preset, name: 'Updated' };
     service.savePreset(updated);
     expect(service.presets().length).toBe(1);
-    const updatedPreset = getRequiredItem(service.presets(), 0, 'preset');
+    const updatedPreset: ThemePreset = getRequiredItem(service.presets(), 0, 'preset');
     expect(updatedPreset.name).toBe('Updated');
   });
 
   it('applies presets using ThemeConfigService setters and CSS vars', (): void => {
     const preset: ThemePreset = samplePreset();
-    const setVariantSpy = spyOn(themeConfig, 'setVariant');
-    const setShapeSpy = spyOn(themeConfig, 'setShape');
-    const setDensitySpy = spyOn(themeConfig, 'setDensity');
-    const setModeSpy = spyOn(themeConfig, 'setMode');
+    const setVariantSpy: jasmine.Spy = spyOn(themeConfig, 'setVariant');
+    const setShapeSpy: jasmine.Spy = spyOn(themeConfig, 'setShape');
+    const setDensitySpy: jasmine.Spy = spyOn(themeConfig, 'setDensity');
+    const setModeSpy: jasmine.Spy = spyOn(themeConfig, 'setMode');
 
     service.applyPreset(preset);
 

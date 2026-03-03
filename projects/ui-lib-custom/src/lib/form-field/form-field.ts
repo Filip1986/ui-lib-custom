@@ -5,10 +5,11 @@ import {
   input,
   inject,
   ViewEncapsulation,
+  type InputSignal,
 } from '@angular/core';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
-let formFieldId = 0;
+let formFieldId: number = 0;
 
 /**
  * Wrapper component that handles error announcements for any form control
@@ -37,10 +38,10 @@ let formFieldId = 0;
   encapsulation: ViewEncapsulation.None,
 })
 export class FormField {
-  private readonly liveAnnouncer = inject(LiveAnnouncerService);
+  private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
 
-  public readonly error = input<string | null>(null);
-  public readonly hint = input<string | null>(null);
+  public readonly error: InputSignal<string | null> = input<string | null>(null);
+  public readonly hint: InputSignal<string | null> = input<string | null>(null);
 
   private readonly uniqueId: string = `form-field-${++formFieldId}`;
   public readonly errorId: string = `${this.uniqueId}-error`;

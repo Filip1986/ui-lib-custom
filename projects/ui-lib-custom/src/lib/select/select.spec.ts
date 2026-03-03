@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import type { WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { UiLibSelect, SelectOption, SelectVariant } from './select';
+import { UiLibSelect } from './select';
+import type { SelectOption, SelectVariant } from './select';
 
 function getRequiredItem<T>(items: T[], index: number, label: string): T {
-  const item = items[index];
+  const item: T | undefined = items[index];
   if (!item) {
     throw new Error(`Expected ${label} at index ${index}.`);
   }
@@ -26,12 +29,12 @@ function getRequiredItem<T>(items: T[], index: number, label: string): T {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-  public readonly options = signal<SelectOption[]>([
+  public readonly options: WritableSignal<SelectOption[]> = signal<SelectOption[]>([
     { label: 'Alpha', value: 'alpha' },
     { label: 'Beta', value: 'beta' },
     { label: 'Gamma', value: 'gamma' },
   ]);
-  public readonly label = signal<string>('Pick one');
+  public readonly label: WritableSignal<string> = signal<string>('Pick one');
   public value: string | null = null;
 }
 
@@ -128,7 +131,7 @@ describe('UiLibSelect accessibility', (): void => {
     fixture.detectChanges();
 
     expect(selectEl().getAttribute('aria-expanded')).toBe('false');
-    const active = document.activeElement as HTMLElement | null;
+    const active: HTMLElement | null = document.activeElement as HTMLElement | null;
     expect(active === selectEl() || selectEl().contains(active)).toBeTruthy();
   });
 });
@@ -263,7 +266,7 @@ describe('UiLibSelect basics', (): void => {
       '.ui-select-value'
     ) as HTMLElement;
     expect(valueEl.classList.contains('ui-select-placeholder')).toBeTruthy();
-    const valueText = valueEl.textContent;
+    const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect((valueText as string).trim()).toBe('Select...');
   });
@@ -276,7 +279,7 @@ describe('UiLibSelect basics', (): void => {
       '.ui-select-label'
     ) as HTMLElement | null;
     expect(labelEl).toBeTruthy();
-    const labelText = (labelEl as HTMLElement).textContent;
+    const labelText: string | null = (labelEl as HTMLElement).textContent;
     expect(labelText).toBeTruthy();
     expect(labelText as string).toContain('Pick one');
   });
@@ -319,7 +322,7 @@ describe('UiLibSelect basics', (): void => {
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-value'
     ) as HTMLElement;
-    const valueText = valueEl.textContent;
+    const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect((valueText as string).trim()).toBe('Alpha');
   });
@@ -344,7 +347,7 @@ describe('UiLibSelect basics', (): void => {
 describe('UiLibSelect ngModel', (): void => {
   let fixture: ComponentFixture<HostComponent>;
 
-  const flushMicrotasks = async (): Promise<void> => {
+  const flushMicrotasks: () => Promise<void> = async (): Promise<void> => {
     await new Promise<void>((resolve: () => void): void => {
       setTimeout(resolve, 0);
     });
@@ -371,7 +374,7 @@ describe('UiLibSelect ngModel', (): void => {
     const valueEl: HTMLElement = (freshFixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-value'
     ) as HTMLElement;
-    const valueText = valueEl.textContent;
+    const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect((valueText as string).trim()).toBe('Beta');
   });
@@ -399,7 +402,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-value'
     ) as HTMLElement;
-    const valueText = valueEl.textContent;
+    const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect((valueText as string).trim()).toBe('Beta');
   });
@@ -479,7 +482,7 @@ describe('UiLibSelect behavior', (): void => {
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-select-value'
     ) as HTMLElement;
-    const valueText = valueEl.textContent;
+    const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect((valueText as string).trim()).toBe('Alpha, Beta');
   });

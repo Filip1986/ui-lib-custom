@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, signal, type WritableSignal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { By, type DebugElement } from '@angular/platform-browser';
 import { Icon } from '../icon/icon';
 import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from 'ui-lib-custom';
 
@@ -29,15 +30,15 @@ import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from 'ui-lib-cus
   `,
 })
 class PanelHostComponent {
-  public readonly header = signal<string>('Panel Title');
-  public readonly value = signal<string | null>('panel-a');
-  public readonly disabled = signal<boolean>(false);
-  public readonly expanded = signal<boolean>(false);
-  public readonly useCustomHeader = signal<boolean>(false);
-  public readonly iconPosition = signal<'start' | 'end'>('end');
-  public readonly expandIcon = signal<string>('chevron-up');
-  public readonly collapseIcon = signal<string>('chevron-down');
-  public readonly showIcon = signal<boolean>(true);
+  public readonly header: WritableSignal<string> = signal<string>('Panel Title');
+  public readonly value: WritableSignal<string | null> = signal<string | null>('panel-a');
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly expanded: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly useCustomHeader: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly iconPosition: WritableSignal<'start' | 'end'> = signal<'start' | 'end'>('end');
+  public readonly expandIcon: WritableSignal<string> = signal<string>('chevron-up');
+  public readonly collapseIcon: WritableSignal<string> = signal<string>('chevron-down');
+  public readonly showIcon: WritableSignal<boolean> = signal<boolean>(true);
 }
 
 @Component({
@@ -54,8 +55,8 @@ class PanelHostComponent {
   `,
 })
 class PanelTemplateHostComponent {
-  public readonly expanded = signal<boolean>(false);
-  public readonly showIcon = signal<boolean>(true);
+  public readonly expanded: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly showIcon: WritableSignal<boolean> = signal<boolean>(true);
 }
 
 describe('AccordionPanel', (): void => {
@@ -94,11 +95,20 @@ describe('AccordionPanel', (): void => {
   }
 
   function iconNames(): string[] {
-    const icons = fixture.debugElement.queryAll(By.directive(Icon));
-    return icons.map((iconEl): string => {
-      const instance: Icon = iconEl.componentInstance as Icon;
-      return instance.name();
-    });
+    const icons: DebugElement[] = fixture.debugElement.queryAll(By.directive(Icon));
+    return icons
+      .map(
+        (iconEl: DebugElement): unknown =>
+          (iconEl as { componentInstance: unknown }).componentInstance
+      )
+      .filter((instance: unknown): instance is Icon => {
+        if (!instance || typeof instance !== 'object') {
+          return false;
+        }
+        const candidate: { name?: unknown } = instance as { name?: unknown };
+        return typeof candidate.name === 'function';
+      })
+      .map((instance: Icon): string => instance.name());
   }
 
   it('creates panel and renders projected content', (): void => {
@@ -107,7 +117,7 @@ describe('AccordionPanel', (): void => {
     );
     expect(fixture.componentInstance).toBeTruthy();
     expect(body).toBeTruthy();
-    const bodyText = (body as HTMLElement).textContent;
+    const bodyText: string | null = (body as HTMLElement).textContent;
     expect(bodyText).toBeTruthy();
     expect((bodyText as string).trim()).toBe('Panel Body');
   });
@@ -117,7 +127,7 @@ describe('AccordionPanel', (): void => {
       '.accordion-panel-title'
     );
     expect(title).toBeTruthy();
-    const titleText = (title as HTMLElement).textContent;
+    const titleText: string | null = (title as HTMLElement).textContent;
     expect(titleText).toBeTruthy();
     expect((titleText as string).trim()).toBe('Panel Title');
   });
@@ -134,7 +144,7 @@ describe('AccordionPanel', (): void => {
     );
     expect(title).toBeNull();
     expect(custom).toBeTruthy();
-    const customText = (custom as HTMLElement).textContent;
+    const customText: string | null = (custom as HTMLElement).textContent;
     expect(customText).toBeTruthy();
     expect((customText as string).trim()).toBe('Custom Header');
   });
@@ -224,7 +234,7 @@ describe('AccordionPanel', (): void => {
     const names: string[] = iconNames();
     expect(names).toContain('minus');
     expect(names).toContain('plus');
-    const iconEl = iconContainer();
+    const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
     expect((iconEl as HTMLElement).classList.contains('expanded')).toBeFalsy();
   });
@@ -233,7 +243,7 @@ describe('AccordionPanel', (): void => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
-    const iconEl = iconContainer();
+    const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
     expect((iconEl as HTMLElement).classList.contains('expanded')).toBeTruthy();
   });
@@ -284,8 +294,8 @@ describe('AccordionPanel - Toggle Icon Template', (): void => {
 
     expect(collapsedText).toBeTruthy();
     expect(expandedText).toBeTruthy();
-    const collapsedTextContent = (collapsedText as HTMLElement).textContent;
-    const expandedTextContent = (expandedText as HTMLElement).textContent;
+    const collapsedTextContent: string | null = (collapsedText as HTMLElement).textContent;
+    const expandedTextContent: string | null = (expandedText as HTMLElement).textContent;
     expect(collapsedTextContent).toBeTruthy();
     expect(expandedTextContent).toBeTruthy();
     expect((collapsedTextContent as string).trim()).toBe('Collapsed');

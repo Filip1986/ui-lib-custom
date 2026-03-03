@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
-import type { ThemeScopeInput } from 'ui-lib-custom/theme';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemeVariant, ThemeScopeInput } from 'ui-lib-custom/theme';
 
-import { Card, CardVariant, CardElevation } from './card';
+import { Card } from './card';
+import type { CardVariant, CardElevation } from './card';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -82,7 +84,7 @@ class CardThemeHost {
 }
 
 class MockThemeConfigService {
-  public readonly variant = signal<ThemeVariant>('material');
+  public readonly variant: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
 
   public setVariant(variant: ThemeVariant): void {
     this.variant.set(variant);
@@ -112,17 +114,22 @@ describe('Card', (): void => {
     return fixture;
   }
 
-  const getCard = (fixture: ComponentFixture<CardHost>): HTMLElement =>
-    (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
+  const getCard: (fixture: ComponentFixture<CardHost>) => HTMLElement = (
+    fixture: ComponentFixture<CardHost>
+  ): HTMLElement => (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
 
   it('should create', async (): Promise<void> => {
-    const fixture = await bootstrap();
+    const fixture: ComponentFixture<CardHost> = await bootstrap();
     expect(getCard(fixture)).toBeTruthy();
   });
 
   it('applies variant, elevation, and bordered classes', async (): Promise<void> => {
-    const fixture = await bootstrap({ variant: 'bootstrap', elevation: 'high', hoverable: true });
-    const card = getCard(fixture);
+    const fixture: ComponentFixture<CardHost> = await bootstrap({
+      variant: 'bootstrap',
+      elevation: 'high',
+      hoverable: true,
+    });
+    const card: HTMLElement = getCard(fixture);
     expect(card.className).toContain('card-bootstrap');
     expect(card.className).toContain('card-elevation-high');
     expect(card.className).toContain('card-bordered');
@@ -140,7 +147,7 @@ describe('Card', (): void => {
   });
 
   it('projects header, body, and footer slots', async (): Promise<void> => {
-    const fixture = await bootstrap();
+    const fixture: ComponentFixture<CardHost> = await bootstrap();
     await fixture.whenRenderingDone();
     await fixture.whenStable();
     fixture.detectChanges();
@@ -161,7 +168,10 @@ describe('Card', (): void => {
   });
 
   it('respects showHeader/showFooter visibility controls', async (): Promise<void> => {
-    const fixture = await bootstrap({ showHeader: false, showFooter: false });
+    const fixture: ComponentFixture<CardHost> = await bootstrap({
+      showHeader: false,
+      showFooter: false,
+    });
 
     const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
       '.card-header'
@@ -175,6 +185,7 @@ describe('Card', (): void => {
   });
 
   it('applies dark theme variables', async (): Promise<void> => {
+    await bootstrap();
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
@@ -307,7 +318,7 @@ describe('Card clickable behavior', (): void => {
     fixture.detectChanges();
   });
 
-  const getCard = (): HTMLElement =>
+  const getCard: () => HTMLElement = (): HTMLElement =>
     (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
 
   it('emits click events when hoverable', (): void => {
@@ -342,14 +353,14 @@ describe('Card keyboard accessibility', (): void => {
   }
 
   it('sets role, tabindex, and aria-label when hoverable', (): void => {
-    const card = cardEl();
+    const card: HTMLElement = cardEl();
     expect(card.getAttribute('role')).toBe('button');
     expect(card.getAttribute('tabindex')).toBe('0');
     expect(card.getAttribute('aria-label')).toBe('Open card');
   });
 
   it('fires click on Enter key', (): void => {
-    const card = cardEl();
+    const card: HTMLElement = cardEl();
     card.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     fixture.detectChanges();
 
@@ -357,7 +368,7 @@ describe('Card keyboard accessibility', (): void => {
   });
 
   it('fires click on Space key', (): void => {
-    const card = cardEl();
+    const card: HTMLElement = cardEl();
     card.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
     fixture.detectChanges();
 

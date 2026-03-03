@@ -4,10 +4,12 @@ import {
   computed,
   input,
   ViewEncapsulation,
+  type InputSignal,
+  type Signal,
 } from '@angular/core';
 import { Icon } from '../icon/icon';
-import { IconSize } from '../icon/icon.types';
-import { SemanticIcon } from '../icon/icon.semantics';
+import type { IconSize } from '../icon/icon.types';
+import type { SemanticIcon } from '../icon/icon.semantics';
 
 @Component({
   selector: 'ui-lib-icon-button',
@@ -34,28 +36,31 @@ import { SemanticIcon } from '../icon/icon.semantics';
   },
 })
 export class IconButton {
-  public readonly icon = input.required<SemanticIcon | string>();
-  public readonly size = input<'sm' | 'md' | 'lg'>('md');
-  public readonly variant = input<'material' | 'bootstrap' | 'minimal'>('material');
-  public readonly color = input<'primary' | 'secondary' | 'danger' | 'success' | 'warning' | null>(
-    null
-  );
-  public readonly disabled = input<boolean>(false);
-  public readonly ariaLabel = input<string | null>(null);
+  public readonly icon: InputSignal<SemanticIcon | string> = input.required<
+    SemanticIcon | string
+  >();
+  public readonly size: InputSignal<'sm' | 'md' | 'lg'> = input<'sm' | 'md' | 'lg'>('md');
+  public readonly variant: InputSignal<'material' | 'bootstrap' | 'minimal'> = input<
+    'material' | 'bootstrap' | 'minimal'
+  >('material');
+  public readonly color: InputSignal<
+    'primary' | 'secondary' | 'danger' | 'success' | 'warning' | null
+  > = input<'primary' | 'secondary' | 'danger' | 'success' | 'warning' | null>(null);
+  public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  public readonly iconSize = computed<IconSize>((): IconSize => {
+  public readonly iconSize: Signal<IconSize> = computed<IconSize>((): IconSize => {
     const map: Record<'sm' | 'md' | 'lg', IconSize> = { sm: 'sm', md: 'md', lg: 'lg' };
     return map[this.size()];
   });
 
-  public readonly hostClasses = computed<string>((): string =>
-    [
+  public readonly hostClasses: Signal<string> = computed<string>((): string => {
+    const classes: string[] = [
       `icon-button-${this.variant()}`,
       `icon-button-${this.size()}`,
       this.color() ? `icon-button-${this.color()}` : '',
       this.disabled() ? 'icon-button-disabled' : '',
-    ]
-      .filter(Boolean)
-      .join(' ')
-  );
+    ];
+    return classes.filter(Boolean).join(' ');
+  });
 }

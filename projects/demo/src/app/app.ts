@@ -1,9 +1,11 @@
 import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TopbarComponent } from './layout/topbar/topbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { ThemeConfigService, ThemeVariant } from 'ui-lib-custom/theme';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemeVariant } from 'ui-lib-custom/theme';
 import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
 
 @Component({
@@ -14,17 +16,21 @@ import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.compone
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
-  private readonly themeService = inject(ThemeConfigService);
-  public readonly sidebarVisible = signal<boolean>(false);
-  public readonly theme = computed<'light' | 'dark' | 'brand-example'>(
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+  public readonly sidebarVisible: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly theme: Signal<'light' | 'dark' | 'brand-example'> = computed<
+    'light' | 'dark' | 'brand-example'
+  >(
     (): 'light' | 'dark' | 'brand-example' =>
       this.themeService.preset().name as 'light' | 'dark' | 'brand-example'
   );
-  public readonly themeName = computed<string>((): string => this.themeService.preset().name);
-  public readonly themeVariant = computed<ThemeVariant>(
+  public readonly themeName: Signal<string> = computed<string>(
+    (): string => this.themeService.preset().name
+  );
+  public readonly themeVariant: Signal<ThemeVariant> = computed<ThemeVariant>(
     (): ThemeVariant => this.themeService.variant()
   );
-  public readonly savedThemes = this.themeService.savedThemes;
+  public readonly savedThemes: Signal<string[]> = this.themeService.savedThemes;
 
   constructor() {
     // Ensure initial application of CSS vars when the component instantiates.
@@ -36,7 +42,7 @@ export class App {
   }
 
   public toggleTheme(): void {
-    const next = this.theme() === 'dark' ? 'light' : 'dark';
+    const next: 'light' | 'dark' = this.theme() === 'dark' ? 'light' : 'dark';
     this.applyPreset(next);
   }
 
@@ -45,9 +51,8 @@ export class App {
   }
 
   private applyPreset(name: 'light' | 'dark' | 'brand-example'): void {
-    const preset = this.themeService.listBuiltInPresets()[name];
-    if (preset) {
-      this.themeService.loadPreset(preset, { apply: true, persist: true, merge: false });
-    }
+    const preset: ReturnType<ThemeConfigService['listBuiltInPresets']>[typeof name] =
+      this.themeService.listBuiltInPresets()[name]!;
+    this.themeService.loadPreset(preset, { apply: true, persist: true, merge: false });
   }
 }

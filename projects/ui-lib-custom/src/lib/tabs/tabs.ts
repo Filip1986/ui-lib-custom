@@ -1,28 +1,34 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  computed,
-  contentChildren,
-  effect,
   ElementRef,
-  inject,
-  input,
-  OnDestroy,
-  output,
-  QueryList,
-  signal,
-  Signal,
-  TemplateRef,
   ViewChild,
   ViewChildren,
   ViewEncapsulation,
+  computed,
+  contentChildren,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
+import type {
+  AfterViewInit,
+  InputSignal,
+  OnDestroy,
+  OutputEmitterRef,
+  QueryList,
+  Signal,
+  TemplateRef,
+  WritableSignal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon, SemanticIcon } from 'ui-lib-custom/icon';
+import { Icon } from 'ui-lib-custom/icon';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
 import { Tab } from './tab';
 import { TabPanel } from './tab-panel';
-import {
+import type {
   TabContext,
   TabsAlignment,
   TabsLazyMode,
@@ -39,7 +45,7 @@ type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 
 type TabsSelection = { value: TabsValue | null; index: number };
 
-type TabsContextItem = TabContext & {
+export type TabsContextItem = TabContext & {
   ref: Tab;
   disabled: boolean;
   closable: boolean;
@@ -70,39 +76,54 @@ interface ScrollMetrics {
   },
 })
 export class Tabs implements OnDestroy, AfterViewInit {
-  private static nextId = 0;
-  public readonly uid = `ui-lib-tabs-${++Tabs.nextId}`;
+  private static nextId: number = 0;
+  public readonly uid: string = `ui-lib-tabs-${++Tabs.nextId}`;
 
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly themeConfig = inject(ThemeConfigService);
+  private readonly elementRef: ElementRef<HTMLElement> = inject(
+    ElementRef
+  ) as ElementRef<HTMLElement>;
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly dir = input<'ltr' | 'rtl' | 'auto'>('auto');
-  public readonly variant = input<TabsVariant | null>(null);
-  public readonly size = input<TabsSize>('md');
-  public readonly orientation = input<TabsOrientation>('horizontal');
-  public readonly align = input<TabsAlignment>('start');
+  public readonly dir: InputSignal<'ltr' | 'rtl' | 'auto'> = input<'ltr' | 'rtl' | 'auto'>('auto');
+  public readonly variant: InputSignal<TabsVariant | null> = input<TabsVariant | null>(null);
+  public readonly size: InputSignal<TabsSize> = input<TabsSize>('md');
+  public readonly orientation: InputSignal<TabsOrientation> = input<TabsOrientation>('horizontal');
+  public readonly align: InputSignal<TabsAlignment> = input<TabsAlignment>('start');
   /** Controls panel rendering vs navigation-only mode. */
-  public readonly mode = input<TabsMode>('default');
-  public readonly selectedValue = input<TabsValue | null>(null);
-  public readonly selectedIndex = input<number | null>(null);
-  public readonly defaultValue = input<TabsValue | null>(null);
-  public readonly defaultIndex = input<number | null>(null);
+  public readonly mode: InputSignal<TabsMode> = input<TabsMode>('default');
+  public readonly selectedValue: InputSignal<TabsValue | null> = input<TabsValue | null>(null);
+  public readonly selectedIndex: InputSignal<number | null> = input<number | null>(null);
+  public readonly defaultValue: InputSignal<TabsValue | null> = input<TabsValue | null>(null);
+  public readonly defaultIndex: InputSignal<number | null> = input<number | null>(null);
   /** Global lazy rendering mode; can be overridden per tab. */
-  public readonly lazy = input<TabsLazyMode>(false);
+  public readonly lazy: InputSignal<TabsLazyMode> = input<TabsLazyMode>(false);
   /** Scroll handling for overflowing tab lists. */
-  public readonly scrollBehavior = input<TabsScrollBehavior>('auto');
-  public readonly closable = input<boolean>(false);
-  public readonly disabled = input<boolean>(false);
+  public readonly scrollBehavior: InputSignal<TabsScrollBehavior> =
+    input<TabsScrollBehavior>('auto');
+  public readonly closable: InputSignal<boolean> = input<boolean>(false);
+  public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   /** Moves focus into the active panel on selection. */
-  public readonly focusPanelOnSelect = input<boolean>(false);
-  public readonly iconPosition = input<'left' | 'top' | 'right'>('left');
+  public readonly focusPanelOnSelect: InputSignal<boolean> = input<boolean>(false);
+  public readonly iconPosition: InputSignal<'left' | 'top' | 'right'> = input<
+    'left' | 'top' | 'right'
+  >('left');
 
-  public readonly selectedChange = output<{ value: TabsValue | null; index: number }>();
-  public readonly selectedIndexChange = output<number>();
+  public readonly selectedChange: OutputEmitterRef<{ value: TabsValue | null; index: number }> =
+    output<{ value: TabsValue | null; index: number }>();
+  public readonly selectedIndexChange: OutputEmitterRef<number> = output<number>();
   /** Emitted when selection occurs in navigation mode. */
-  public readonly navigate = output<{ value: TabsValue | null; index: number }>();
-  public readonly tabClose = output<{ value: TabsValue | null; index: number }>();
-  public readonly tabFocus = output<{ value: TabsValue | null; index: number }>();
+  public readonly navigate: OutputEmitterRef<{ value: TabsValue | null; index: number }> = output<{
+    value: TabsValue | null;
+    index: number;
+  }>();
+  public readonly tabClose: OutputEmitterRef<{ value: TabsValue | null; index: number }> = output<{
+    value: TabsValue | null;
+    index: number;
+  }>();
+  public readonly tabFocus: OutputEmitterRef<{ value: TabsValue | null; index: number }> = output<{
+    value: TabsValue | null;
+    index: number;
+  }>();
 
   public readonly tabs: Signal<readonly Tab[]> = contentChildren(Tab);
 
@@ -110,29 +131,37 @@ export class Tabs implements OnDestroy, AfterViewInit {
   @ViewChild('tabList') public tabList?: ElementRef<HTMLElement>;
   @ViewChildren(TabPanel) public tabPanels?: QueryList<TabPanel>;
 
-  private readonly renderedValues = signal<Set<TabsValue | null>>(new Set());
-  private readonly overflowDetected = signal<boolean>(false);
-  private readonly canScrollPrev = signal<boolean>(false);
-  private readonly canScrollNext = signal<boolean>(false);
-  private readonly scrollable = computed<boolean>(
+  private readonly renderedValues: WritableSignal<Set<TabsValue | null>> = signal<
+    Set<TabsValue | null>
+  >(new Set());
+  private readonly overflowDetected: WritableSignal<boolean> = signal<boolean>(false);
+  private readonly canScrollPrev: WritableSignal<boolean> = signal<boolean>(false);
+  private readonly canScrollNext: WritableSignal<boolean> = signal<boolean>(false);
+  private readonly scrollable: Signal<boolean> = computed<boolean>(
     (): boolean => this.scrollBehavior() === 'arrows'
   );
-  private readonly showScrollButtons = computed<boolean>(
+  private readonly showScrollButtons: Signal<boolean> = computed<boolean>(
     (): boolean => this.scrollable() && this.overflowDetected()
   );
-  private readonly scrollAxis = computed<'horizontal' | 'vertical'>(
-    (): 'horizontal' | 'vertical' => (this.orientation() === 'vertical' ? 'vertical' : 'horizontal')
+  private readonly scrollAxis: Signal<'horizontal' | 'vertical'> = computed<
+    'horizontal' | 'vertical'
+  >((): 'horizontal' | 'vertical' =>
+    this.orientation() === 'vertical' ? 'vertical' : 'horizontal'
   );
-  private readonly isNavigationMode = computed<boolean>(
+  private readonly isNavigationMode: Signal<boolean> = computed<boolean>(
     (): boolean => this.mode() === 'navigation'
   );
-  private readonly tabListId = computed<string>((): string => `${this.uid}-tablist`);
-  protected readonly hostDir = computed<'ltr' | 'rtl' | null>((): 'ltr' | 'rtl' | null => {
-    const explicit = this.dir();
-    return explicit === 'auto' ? null : explicit;
-  });
-  protected readonly isRtl = computed<boolean>((): boolean => {
-    const explicit = this.dir();
+  private readonly tabListId: Signal<string> = computed<string>(
+    (): string => `${this.uid}-tablist`
+  );
+  protected readonly hostDir: Signal<'ltr' | 'rtl' | null> = computed<'ltr' | 'rtl' | null>(
+    (): 'ltr' | 'rtl' | null => {
+      const explicit: 'ltr' | 'rtl' | 'auto' = this.dir();
+      return explicit === 'auto' ? null : explicit;
+    }
+  );
+  protected readonly isRtl: Signal<boolean> = computed<boolean>((): boolean => {
+    const explicit: 'ltr' | 'rtl' | 'auto' = this.dir();
     if (explicit !== 'auto') {
       return explicit === 'rtl';
     }
@@ -146,101 +175,115 @@ export class Tabs implements OnDestroy, AfterViewInit {
     return getComputedStyle(list).direction === 'rtl';
   });
 
-  private readonly indicatorStyle = signal<{
+  private readonly indicatorStyle: WritableSignal<{
+    transform: string;
+    width?: string;
+    height?: string;
+  } | null> = signal<{
     transform: string;
     width?: string;
     height?: string;
   } | null>(null);
-  private readonly internalSelection = signal<TabsSelection>({
+  private readonly internalSelection: WritableSignal<TabsSelection> = signal<TabsSelection>({
     value: null,
     index: -1,
   });
 
-  public readonly tabContexts = computed<TabsContextItem[]>((): TabsContextItem[] => {
-    const tabs = this.tabs();
-    return tabs.map((tab, index): TabsContextItem => {
-      const tabLazy = tab.lazy();
-      const effectiveLazy: TabsLazyMode = tabLazy !== undefined ? tabLazy : this.lazy();
-      const label = tab.label();
-      const labelTemplate = tab.labelTemplate?.template as TemplateRef<unknown> | undefined;
-      const contentTemplate = tab.contentTemplate?.template as TemplateRef<unknown> | undefined;
+  public readonly tabContexts: Signal<TabsContextItem[]> = computed<TabsContextItem[]>(
+    (): TabsContextItem[] => {
+      const tabs: readonly Tab[] = this.tabs();
+      return tabs.map((tab: Tab, index: number): TabsContextItem => {
+        const tabLazy: TabsLazyMode | undefined = tab.lazy();
+        const effectiveLazy: TabsLazyMode = tabLazy !== undefined ? tabLazy : this.lazy();
+        const label: string | null = tab.label();
+        const labelTemplate: TemplateRef<unknown> | undefined = tab.labelTemplate?.template as
+          | TemplateRef<unknown>
+          | undefined;
+        const contentTemplate: TemplateRef<unknown> | undefined = tab.contentTemplate?.template as
+          | TemplateRef<unknown>
+          | undefined;
 
-      return {
-        ref: tab,
-        value: tab.value() ?? index,
-        index,
-        disabled: this.disabled() || tab.disabled(),
-        closable: tab.closable() || this.closable(),
-        ...(label !== null ? { label } : {}),
-        ...(labelTemplate ? { labelTemplate } : {}),
-        ...(tab.content ? { content: tab.content } : {}),
-        ...(contentTemplate ? { contentTemplate } : {}),
-        lazy: effectiveLazy,
-      };
-    });
-  });
+        return {
+          ref: tab,
+          value: tab.value() ?? index,
+          index,
+          disabled: this.disabled() || tab.disabled(),
+          closable: tab.closable() || this.closable(),
+          ...(label !== null ? { label } : {}),
+          ...(labelTemplate ? { labelTemplate } : {}),
+          ...(tab.content ? { content: tab.content } : {}),
+          ...(contentTemplate ? { contentTemplate } : {}),
+          lazy: effectiveLazy,
+        };
+      });
+    }
+  );
 
-  private readonly controlled = computed<boolean>(
+  private readonly controlled: Signal<boolean> = computed<boolean>(
     (): boolean => this.selectedValue() !== null || this.selectedIndex() !== null
   );
 
-  private readonly resolvedSelection = computed<TabsSelection>((): TabsSelection => {
-    const tabs = this.tabContexts();
-    const byValue = this.selectedValue();
-    if (byValue !== null) {
-      const idx = tabs.findIndex((t): boolean => t.value === byValue);
-      if (idx !== -1) {
-        return { value: byValue, index: idx };
+  private readonly resolvedSelection: Signal<TabsSelection> = computed<TabsSelection>(
+    (): TabsSelection => {
+      const tabs: TabsContextItem[] = this.tabContexts();
+      const byValue: TabsValue | null = this.selectedValue();
+      if (byValue !== null) {
+        const idx: number = tabs.findIndex((t: TabsContextItem): boolean => t.value === byValue);
+        if (idx !== -1) {
+          return { value: byValue, index: idx };
+        }
       }
-    }
 
-    const byIndex = this.selectedIndex();
-    if (byIndex !== null && byIndex >= 0 && byIndex < tabs.length) {
-      return { value: tabs[byIndex]?.value ?? null, index: byIndex };
-    }
-
-    const defValue = this.defaultValue();
-    if (defValue !== null) {
-      const idx = tabs.findIndex((t): boolean => t.value === defValue);
-      if (idx !== -1) {
-        return { value: defValue, index: idx };
+      const byIndex: number | null = this.selectedIndex();
+      if (byIndex !== null && byIndex >= 0 && byIndex < tabs.length) {
+        return { value: tabs[byIndex]?.value ?? null, index: byIndex };
       }
+
+      const defValue: TabsValue | null = this.defaultValue();
+      if (defValue !== null) {
+        const idx: number = tabs.findIndex((t: TabsContextItem): boolean => t.value === defValue);
+        if (idx !== -1) {
+          return { value: defValue, index: idx };
+        }
+      }
+
+      const defIndex: number | null = this.defaultIndex();
+      if (defIndex !== null && defIndex >= 0 && defIndex < tabs.length) {
+        return { value: tabs[defIndex]?.value ?? null, index: defIndex };
+      }
+
+      const firstEnabled: TabsContextItem | undefined = tabs.find(
+        (t: TabsContextItem): boolean => !t.disabled
+      );
+      return { value: firstEnabled?.value ?? null, index: firstEnabled?.index ?? -1 };
     }
+  );
 
-    const defIndex = this.defaultIndex();
-    if (defIndex !== null && defIndex >= 0 && defIndex < tabs.length) {
-      return { value: tabs[defIndex]?.value ?? null, index: defIndex };
-    }
-
-    const firstEnabled = tabs.find((t): boolean => !t.disabled);
-    return { value: firstEnabled?.value ?? null, index: firstEnabled?.index ?? -1 };
-  });
-
-  public readonly activeSelection = computed<TabsSelection>(
+  public readonly activeSelection: Signal<TabsSelection> = computed<TabsSelection>(
     (): TabsSelection => (this.controlled() ? this.resolvedSelection() : this.internalSelection())
   );
 
-  private readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
-    (): 'small' | 'medium' | 'large' => {
-      const size: TabsSize = this.size();
-      const map: Record<TabsSize, 'small' | 'medium' | 'large'> = {
-        sm: 'small',
-        md: 'medium',
-        lg: 'large',
-        small: 'small',
-        medium: 'medium',
-        large: 'large',
-      };
-      return map[size];
-    }
-  );
+  private readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
+    'small' | 'medium' | 'large'
+  >((): 'small' | 'medium' | 'large' => {
+    const size: TabsSize = this.size();
+    const map: Record<TabsSize, 'small' | 'medium' | 'large'> = {
+      sm: 'small',
+      md: 'medium',
+      lg: 'large',
+      small: 'small',
+      medium: 'medium',
+      large: 'large',
+    };
+    return map[size];
+  });
 
-  public readonly effectiveVariant = computed<TabsVariant>(
+  public readonly effectiveVariant: Signal<TabsVariant> = computed<TabsVariant>(
     (): TabsVariant => this.variant() ?? this.themeConfig.variant()
   );
 
-  public readonly tabsClasses = computed<string>((): string => {
-    const classes = [
+  public readonly tabsClasses: Signal<string> = computed<string>((): string => {
+    const classes: string[] = [
       'tabs-root',
       `tabs-${this.effectiveVariant()}`,
       `tabs-${this.normalizedSize()}`,
@@ -260,7 +303,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   private scrollStateRaf: number | null = null;
   private scrollIntoViewRaf: number | null = null;
   private resizeObserver: ResizeObserver | null = null;
-  private scrollIsRtl = false;
+  private scrollIsRtl: boolean = false;
   private rtlScrollAxis: RtlScrollAxis = 'default';
 
   private readonly onTabListScroll: () => void = (): void => {
@@ -289,15 +332,15 @@ export class Tabs implements OnDestroy, AfterViewInit {
     });
 
     effect((): void => {
-      const active = this.activeSelection();
-      const variant = this.effectiveVariant();
-      const activeTab = this.tabContexts()[active.index];
+      const active: TabsSelection = this.activeSelection();
+      const variant: TabsVariant = this.effectiveVariant();
+      const activeTab: TabsContextItem | undefined = this.tabContexts()[active.index];
       const activeLazy: TabsLazyMode | undefined = activeTab?.lazy;
 
       if (activeLazy === 'keep-alive' && activeTab) {
-        const current = this.renderedValues();
+        const current: Set<TabsValue | null> = this.renderedValues();
         if (!current.has(activeTab.value)) {
-          const next = new Set(current);
+          const next: Set<TabsValue | null> = new Set(current);
           next.add(activeTab.value);
           this.renderedValues.set(next);
         }
@@ -309,7 +352,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
       this.scheduleScrollIntoView(active.index);
 
-      const key =
+      const key: string | null =
         variant === 'material' ? `${variant}:${this.orientation()}:${active.index}` : null;
       if (variant !== 'material') {
         this.indicatorKey = null;
@@ -337,20 +380,20 @@ export class Tabs implements OnDestroy, AfterViewInit {
     this.teardownScrollObservers();
   }
 
-  private scheduleIndicatorUpdate(): void {
+  private readonly scheduleIndicatorUpdate: () => void = (): void => {
     this.cancelIndicatorRaf();
     this.indicatorRaf = requestAnimationFrame((): void => {
       this.indicatorRaf = null;
       this.updateIndicator();
     });
-  }
+  };
 
-  private cancelIndicatorRaf(): void {
+  private readonly cancelIndicatorRaf: () => void = (): void => {
     if (this.indicatorRaf !== null) {
       cancelAnimationFrame(this.indicatorRaf);
       this.indicatorRaf = null;
     }
-  }
+  };
 
   /** Selects a tab and emits selection events. */
   public onSelect(tab: { value: TabsValue | null; index: number; disabled: boolean }): void {
@@ -426,7 +469,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
       return true;
     }
 
-    const isActive = this.activeSelection().index === tab.index;
+    const isActive: boolean = this.activeSelection().index === tab.index;
     if (lazy === 'unmount') {
       return isActive;
     }
@@ -436,7 +479,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   /** Handles keyboard navigation for the tab list. */
   public onKeydown(event: KeyboardEvent, currentIndex: number): void {
-    const key = event.key;
+    const key: string = event.key;
     if (key === 'Home') {
       event.preventDefault();
       this.focusIndex(this.firstEnabledIndex());
@@ -449,10 +492,14 @@ export class Tabs implements OnDestroy, AfterViewInit {
       return;
     }
 
-    const horizontal = this.orientation() === 'horizontal';
-    const rtl = this.isRtl();
-    const forward = horizontal ? key === (rtl ? 'ArrowLeft' : 'ArrowRight') : key === 'ArrowDown';
-    const backward = horizontal ? key === (rtl ? 'ArrowRight' : 'ArrowLeft') : key === 'ArrowUp';
+    const horizontal: boolean = this.orientation() === 'horizontal';
+    const rtl: boolean = this.isRtl();
+    const forward: boolean = horizontal
+      ? key === (rtl ? 'ArrowLeft' : 'ArrowRight')
+      : key === 'ArrowDown';
+    const backward: boolean = horizontal
+      ? key === (rtl ? 'ArrowRight' : 'ArrowLeft')
+      : key === 'ArrowUp';
 
     if (forward) {
       event.preventDefault();
@@ -466,7 +513,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
     if (key === 'Enter' || key === ' ') {
       event.preventDefault();
-      const tab = this.tabContexts()[currentIndex];
+      const tab: TabsContextItem | undefined = this.tabContexts()[currentIndex];
       if (tab) {
         this.onSelect(tab);
       }
@@ -475,8 +522,8 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   private focusNext(currentIndex: number): void {
     const tabs: TabsContextItem[] = this.tabContexts();
-    for (let i = currentIndex + 1; i < tabs.length; i++) {
-      const tab = tabs[i];
+    for (let i: number = currentIndex + 1; i < tabs.length; i++) {
+      const tab: TabsContextItem | undefined = tabs[i];
       if (tab && !tab.disabled) {
         this.focusIndex(i);
         this.onSelect(tab);
@@ -487,8 +534,8 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   private focusPrev(currentIndex: number): void {
     const tabs: TabsContextItem[] = this.tabContexts();
-    for (let i = currentIndex - 1; i >= 0; i--) {
-      const tab = tabs[i];
+    for (let i: number = currentIndex - 1; i >= 0; i--) {
+      const tab: TabsContextItem | undefined = tabs[i];
       if (tab && !tab.disabled) {
         this.focusIndex(i);
         this.onSelect(tab);
@@ -498,13 +545,13 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private firstEnabledIndex(): number {
-    return this.tabContexts().find((tab): boolean => !tab.disabled)?.index ?? -1;
+    return this.tabContexts().find((tab: TabsContextItem): boolean => !tab.disabled)?.index ?? -1;
   }
 
   private lastEnabledIndex(): number {
     const tabs: TabsContextItem[] = this.tabContexts();
-    for (let i = tabs.length - 1; i >= 0; i--) {
-      const tab = tabs[i];
+    for (let i: number = tabs.length - 1; i >= 0; i--) {
+      const tab: TabsContextItem | undefined = tabs[i];
       if (tab && !tab.disabled) {
         return i;
       }
@@ -646,7 +693,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private setupScrollObservers(): void {
-    const list = this.tabList?.nativeElement;
+    const list: HTMLElement | null = this.tabList?.nativeElement ?? null;
     if (!list) {
       return;
     }
@@ -692,7 +739,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     this.cancelScrollIntoViewRaf();
     this.scrollIntoViewRaf = requestAnimationFrame((): void => {
       this.scrollIntoViewRaf = null;
-      const btn = this.tabButtons?.get(index)?.nativeElement;
+      const btn: HTMLButtonElement | undefined = this.tabButtons?.get(index)?.nativeElement;
       if (!btn) {
         return;
       }
@@ -713,7 +760,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
       this.canScrollNext.set(false);
       return;
     }
-    const list = this.tabList?.nativeElement;
+    const list: HTMLElement | null = this.tabList?.nativeElement ?? null;
     if (!list) {
       this.overflowDetected.set(false);
       this.canScrollPrev.set(false);
@@ -810,7 +857,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private scrollByStep(direction: 'prev' | 'next'): void {
-    const list = this.tabList?.nativeElement;
+    const list: HTMLElement | null = this.tabList?.nativeElement ?? null;
     if (!list) {
       return;
     }

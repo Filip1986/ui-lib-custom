@@ -27,7 +27,11 @@ const meta: Meta<TabsStoryArgs> = {
 
 export default meta;
 
-const renderTabs = (
+const renderTabs: (args: TabsStoryArgs) => {
+  props: TabsStoryArgs;
+  template: string;
+  moduleMetadata: { imports: unknown[] };
+} = (
   args: TabsStoryArgs
 ): { props: TabsStoryArgs; template: string; moduleMetadata: { imports: unknown[] } } => ({
   props: args,

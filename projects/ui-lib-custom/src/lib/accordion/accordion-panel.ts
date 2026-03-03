@@ -3,11 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   Directive,
-  ElementRef,
-  OnDestroy,
-  InputSignal,
-  TemplateRef,
-  ViewChild,
   computed,
   contentChild,
   effect,
@@ -15,12 +10,20 @@ import {
   input,
   signal,
   ViewEncapsulation,
+  ViewChild,
+  TemplateRef,
+  type ElementRef,
+  type InputSignal,
+  type OnDestroy,
+  type Signal,
+  type WritableSignal,
 } from '@angular/core';
-import { AccordionContext, ACCORDION_CONTEXT } from './accordion-context';
-import { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
+import type { AccordionContext } from './accordion-context';
+import { ACCORDION_CONTEXT } from './accordion-context';
+import type { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
 import { Icon } from 'ui-lib-custom/icon';
 
-let accordionPanelId = 0;
+let accordionPanelId: number = 0;
 
 @Directive({
   selector: '[accordionHeader]',
@@ -33,7 +36,8 @@ export class AccordionHeader {}
   standalone: true,
 })
 export class AccordionToggleIcon {
-  public readonly template = inject<TemplateRef<AccordionToggleIconContext>>(TemplateRef);
+  public readonly template: TemplateRef<AccordionToggleIconContext> =
+    inject<TemplateRef<AccordionToggleIconContext>>(TemplateRef);
 }
 
 @Component({
@@ -73,17 +77,20 @@ export class AccordionPanel implements OnDestroy {
     });
   }
 
-  public readonly headerTemplate = contentChild(AccordionHeader);
-  public readonly toggleIconTemplate = contentChild(AccordionToggleIcon);
-  @ViewChild('headerButton', { static: true }) public headerButton?: ElementRef<HTMLButtonElement>;
+  public readonly headerTemplate: Signal<AccordionHeader | undefined> =
+    contentChild(AccordionHeader);
+  public readonly toggleIconTemplate: Signal<AccordionToggleIcon | undefined> =
+    contentChild(AccordionToggleIcon);
+  @ViewChild('headerButton', { static: true })
+  public headerButton?: ElementRef<HTMLButtonElement>;
 
   private readonly context: AccordionContext | null = inject(ACCORDION_CONTEXT, {
     optional: true,
   });
   private readonly uid: string = this.createId();
-  private readonly internalExpanded = signal<boolean>(this.expanded());
+  private readonly internalExpanded: WritableSignal<boolean> = signal<boolean>(this.expanded());
 
-  public readonly hostClasses = computed<string>((): string => {
+  public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = ['ui-lib-accordion-panel', 'accordion-panel'];
     if (this.isExpanded()) {
       classes.push('accordion-panel-expanded');
@@ -94,18 +101,24 @@ export class AccordionPanel implements OnDestroy {
     return classes.join(' ');
   });
 
-  public readonly hasCustomHeader = computed((): boolean => Boolean(this.headerTemplate()));
-  public readonly resolvedId = computed((): string => this.value() ?? this.panelId());
-  public readonly isExpanded = computed((): boolean =>
+  public readonly hasCustomHeader: Signal<boolean> = computed<boolean>((): boolean =>
+    Boolean(this.headerTemplate())
+  );
+  public readonly resolvedId: Signal<string> = computed<string>(
+    (): string => this.value() ?? this.panelId()
+  );
+  public readonly isExpanded: Signal<boolean> = computed<boolean>((): boolean =>
     this.context ? this.context.isPanelExpanded(this.resolvedId()) : this.internalExpanded()
   );
 
-  public readonly headerId = computed((): string => `${this.uid}-header`);
-  public readonly panelId = computed((): string => `${this.uid}-panel`);
-  public readonly resolvedIconName = computed((): string =>
+  public readonly headerId: Signal<string> = computed<string>((): string => `${this.uid}-header`);
+  public readonly panelId: Signal<string> = computed<string>((): string => `${this.uid}-panel`);
+  public readonly resolvedIconName: Signal<string> = computed<string>((): string =>
     this.isExpanded() ? this.expandIcon() : this.collapseIcon()
   );
-  public readonly isIconEnd = computed((): boolean => this.iconPosition() === 'end');
+  public readonly isIconEnd: Signal<boolean> = computed<boolean>(
+    (): boolean => this.iconPosition() === 'end'
+  );
 
   public toggle(): void {
     if (this.disabled()) {

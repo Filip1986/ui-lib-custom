@@ -2,12 +2,18 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  TemplateRef,
   ViewEncapsulation,
   computed,
   input,
   output,
   signal,
+} from '@angular/core';
+import type {
+  TemplateRef,
+  InputSignal,
+  WritableSignal,
+  Signal,
+  OutputEmitterRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Button } from '../button/button';
@@ -26,20 +32,24 @@ export type SocialProvider = 'google' | 'github' | 'microsoft';
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginForm {
-  public readonly variant = input<LoginFormVariant>('centered');
-  public readonly showSocialLogin = input<boolean>(false);
-  public readonly showRememberMe = input<boolean>(false);
-  public readonly logoTemplate = input<TemplateRef<unknown> | null>(null);
+  public readonly variant: InputSignal<LoginFormVariant> = input<LoginFormVariant>('centered');
+  public readonly showSocialLogin: InputSignal<boolean> = input<boolean>(false);
+  public readonly showRememberMe: InputSignal<boolean> = input<boolean>(false);
+  public readonly logoTemplate: InputSignal<TemplateRef<unknown> | null> =
+    input<TemplateRef<unknown> | null>(null);
 
-  public readonly login = output<{ email: string; password: string; remember: boolean }>();
-  public readonly forgotPassword = output<void>();
-  public readonly socialLogin = output<SocialProvider>();
+  public readonly login: OutputEmitterRef<{ email: string; password: string; remember: boolean }> =
+    output<{ email: string; password: string; remember: boolean }>();
+  public readonly forgotPassword: OutputEmitterRef<void> = output<void>();
+  public readonly socialLogin: OutputEmitterRef<SocialProvider> = output<SocialProvider>();
 
-  public readonly email = signal('');
-  public readonly password = signal('');
-  public readonly remember = signal(true);
+  public readonly email: WritableSignal<string> = signal<string>('');
+  public readonly password: WritableSignal<string> = signal<string>('');
+  public readonly remember: WritableSignal<boolean> = signal<boolean>(true);
 
-  public readonly layoutClass = computed<string>((): string => `login-${this.variant()}`);
+  public readonly layoutClass: Signal<string> = computed<string>(
+    (): string => `login-${this.variant()}`
+  );
 
   public onSubmit(): void {
     this.login.emit({

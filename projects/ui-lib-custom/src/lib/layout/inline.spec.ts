@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Inline } from './inline';
 import type { InlineAlign, InlineJustify } from './inline';
@@ -67,7 +68,7 @@ describe('Inline', (): void => {
   }
 
   function getRequiredItem(elements: NodeListOf<Element>, index: number): Element {
-    const element = elements[index];
+    const element: Element | undefined = elements[index];
     if (!element) {
       throw new Error(`Expected inline item at index ${index}.`);
     }
@@ -102,7 +103,7 @@ describe('Inline', (): void => {
 
   it('should project content', (): void => {
     const { inlineElement } = bootstrap();
-    const items = inlineElement.querySelectorAll('span');
+    const items: NodeListOf<Element> = inlineElement.querySelectorAll('span');
     expect(items.length).toBe(3);
     expect(getRequiredItem(items, 0).textContent).toBe('Tag 1');
   });

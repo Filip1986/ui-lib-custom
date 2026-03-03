@@ -7,24 +7,27 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   Accordion,
   AccordionPanel,
-  AccordionExpandMode,
-  AccordionSize,
-  AccordionVariant,
   AccordionToggleIcon,
   Badge,
   Button,
   Card,
   Tab,
   Tabs,
-  TabsValue,
   Icon,
   ThemeConfigService,
 } from 'ui-lib-custom';
+import type {
+  AccordionExpandMode,
+  AccordionSize,
+  AccordionVariant,
+  TabsValue,
+} from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
@@ -91,7 +94,7 @@ export class AccordionComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<AccordionTab>('playground');
+  public readonly activeTab: WritableSignal<AccordionTab> = signal<AccordionTab>('playground');
 
   public setTab(tab: AccordionTab): void {
     this.activeTab.set(tab);
@@ -108,10 +111,13 @@ export class AccordionComponent {
   public readonly sizes: AccordionSize[] = ['sm', 'md', 'lg'];
   public readonly expandModes: AccordionExpandMode[] = ['single', 'multiple'];
 
-  public readonly variant = signal<AccordionVariant>('material');
-  public readonly size = signal<AccordionSize>('md');
-  public readonly expandMode = signal<AccordionExpandMode>('single');
-  public readonly themeScope = signal<Record<string, string>>({});
+  public readonly variant: WritableSignal<AccordionVariant> = signal<AccordionVariant>('material');
+  public readonly size: WritableSignal<AccordionSize> = signal<AccordionSize>('md');
+  public readonly expandMode: WritableSignal<AccordionExpandMode> =
+    signal<AccordionExpandMode>('single');
+  public readonly themeScope: WritableSignal<Record<string, string>> = signal<
+    Record<string, string>
+  >({});
 
   public readonly faqItems: FaqItem[] = [
     {
@@ -134,7 +140,7 @@ export class AccordionComponent {
   public readonly variantExamples: AccordionVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly sizeExamples: AccordionSize[] = ['sm', 'md', 'lg'];
 
-  public readonly controlledExpanded = signal<string[]>(['shipping']);
+  public readonly controlledExpanded: WritableSignal<string[]> = signal<string[]>(['shipping']);
 
   public readonly customHeaderItems: FaqItem[] = [
     {
@@ -168,7 +174,11 @@ export class AccordionComponent {
     },
   ];
 
-  public readonly snippets = {
+  public readonly snippets: {
+    readonly basic: string;
+    readonly customHeader: string;
+    readonly controlled: string;
+  } = {
     basic: `<ui-lib-accordion variant="material" expandMode="single">
   <ui-lib-accordion-panel header="Shipping" value="shipping">
     Standard (5-7 days), express (2-3 days), and overnight shipping.
@@ -195,9 +205,9 @@ export class AccordionComponent {
 </ui-lib-accordion>`,
   } as const;
 
-  private readonly themeService = inject(ThemeConfigService);
+  private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly appliedTheme = computed<Record<string, string>>(
+  public readonly appliedTheme: Signal<Record<string, string>> = computed<Record<string, string>>(
     (): Record<string, string> => this.themeService.getCssVars(this.themeService.preset())
   );
 
@@ -254,13 +264,13 @@ export class AccordionComponent {
 </ui-lib-accordion-panel>`,
   };
 
-  public readonly reduceMotionDemo = signal<boolean>(false);
+  public readonly reduceMotionDemo: WritableSignal<boolean> = signal<boolean>(false);
 
   public toggleReducedMotion(): void {
     this.reduceMotionDemo.update((value: boolean): boolean => !value);
   }
 
-  public readonly accordionExample = `<ui-lib-accordion variant="material">
+  public readonly accordionExample: string = `<ui-lib-accordion variant="material">
   <ui-lib-accordion-panel header="Shipping">
     Standard (5-7 days), express (2-3 days), and overnight options.
   </ui-lib-accordion-panel>

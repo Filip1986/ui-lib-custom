@@ -58,7 +58,9 @@ export const DarkMode: Story = {
 
 export const FullApi: Story = {
   args: { size: 'lg', padding: 4 },
-  render: (args): { props: Record<string, unknown>; template: string } => ({
+  render: (
+    args: Record<string, unknown>
+  ): { props: Record<string, unknown>; template: string } => ({
     props: { ...args },
     template: `
       <ui-lib-container [size]="size" [padding]="padding">

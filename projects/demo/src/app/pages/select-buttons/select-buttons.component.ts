@@ -7,20 +7,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  Button,
-  Card,
-  Grid,
-  Icon,
-  Inline,
-  SelectButton,
-  SelectButtonOption,
-  SelectButtonSize,
-  SelectButtonVariant,
-  Stack,
-} from 'ui-lib-custom';
+import { Button, Card, Grid, Icon, Inline, SelectButton, Stack } from 'ui-lib-custom';
+import type { SelectButtonOption, SelectButtonSize, SelectButtonVariant } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
@@ -78,7 +68,7 @@ export class Example {
 }`,
   };
 
-  public readonly selectButtonExample = `<ui-lib-select-button [options]="basicOptions" [(value)]="basicValue" />`;
+  public readonly selectButtonExample: string = `<ui-lib-select-button [options]="basicOptions" [(value)]="basicValue" />`;
 
   // Basic
   public readonly basicOptions: SelectButtonOption[] = [

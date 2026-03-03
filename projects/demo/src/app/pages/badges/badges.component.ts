@@ -1,18 +1,10 @@
 import { Component, ChangeDetectionStrategy, signal, ViewChild } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  Badge,
-  BadgeColor,
-  BadgeVariant,
-  BadgeSize,
-  Button,
-  Card,
-  Tabs,
-  Tab,
-  TabsValue,
-} from 'ui-lib-custom';
+import { Badge, Button, Card, Tabs, Tab } from 'ui-lib-custom';
+import type { BadgeColor, BadgeVariant, BadgeSize, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
@@ -58,7 +50,7 @@ export class BadgesComponent {
     { id: 'accessibility', label: 'Accessibility' },
   ];
 
-  public readonly activeTab = signal<TabKey>('playground');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -69,12 +61,12 @@ export class BadgesComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly variant = signal<BadgeVariant>('solid');
-  public readonly color = signal<BadgeColor>('primary');
-  public readonly size = signal<BadgeSize>('md');
-  public readonly pill = signal(false);
-  public readonly dot = signal(false);
-  public readonly text = signal('New');
+  public readonly variant: WritableSignal<BadgeVariant> = signal<BadgeVariant>('solid');
+  public readonly color: WritableSignal<BadgeColor> = signal<BadgeColor>('primary');
+  public readonly size: WritableSignal<BadgeSize> = signal<BadgeSize>('md');
+  public readonly pill: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly dot: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly text: WritableSignal<string> = signal<string>('New');
 
   public readonly variants: BadgeVariant[] = ['solid', 'outline', 'subtle'];
   public readonly colors: BadgeColor[] = [
@@ -88,7 +80,7 @@ export class BadgesComponent {
   ];
   public readonly sizes: BadgeSize[] = ['sm', 'md', 'lg'];
 
-  public readonly snippets = {
+  public readonly snippets: { readonly usage: string } = {
     usage: `import { Badge } from 'ui-lib-custom';
 
 @Component({
@@ -136,5 +128,5 @@ export class BadgesComponent {
     this.viewport?.setDensity(value);
   }
 
-  public readonly badgeExample = `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`;
+  public readonly badgeExample: string = `<ui-lib-badge color="success" variant="solid">Active</ui-lib-badge>`;
 }

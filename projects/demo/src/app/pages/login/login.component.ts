@@ -1,18 +1,18 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Login1Component,
   Login2Component,
   Login3Component,
-  LoginFormData,
   LoginForm,
   Tabs,
   Tab,
-  TabsValue,
   Card,
 } from 'ui-lib-custom';
+import type { LoginFormData, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 
 interface LoginVariant {
@@ -51,7 +51,7 @@ export class LoginComponent {
     { id: 'api-reference', label: 'API Reference' },
   ];
 
-  public readonly activeTab = signal<TabKey>('variants');
+  public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('variants');
 
   public setTab(tab: TabKey): void {
     this.activeTab.set(tab);
@@ -62,11 +62,13 @@ export class LoginComponent {
     this.setTab(value as TabKey);
   }
 
-  public readonly loginLoading = signal(false);
-  public readonly activeVariant = signal('variant1');
-  public readonly copiedStates = signal<{ [key: string]: boolean }>({});
+  public readonly loginLoading: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly activeVariant: WritableSignal<string> = signal<string>('variant1');
+  public readonly copiedStates: WritableSignal<Record<string, boolean>> = signal<
+    Record<string, boolean>
+  >({});
 
-  public readonly eventHandlersCode = `onLogin(data: LoginFormData) {
+  public readonly eventHandlersCode: string = `onLogin(data: LoginFormData) {
   console.log('Login attempt:', data);
   this.loginLoading.set(true);
 
@@ -235,11 +237,13 @@ export class ExampleComponent { }`,
   }
 
   public getActiveVariant(): LoginVariant {
-    const current = this.variants.find((v: LoginVariant): boolean => v.id === this.activeVariant());
+    const current: LoginVariant | undefined = this.variants.find(
+      (v: LoginVariant): boolean => v.id === this.activeVariant()
+    );
     if (current) {
       return current;
     }
-    const fallback = this.variants[0];
+    const fallback: LoginVariant | undefined = this.variants[0];
     if (fallback) {
       return fallback;
     }
@@ -272,7 +276,7 @@ export class ExampleComponent { }`,
         );
       }, 2000);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : String(err);
+      const message: string = err instanceof Error ? err.message : String(err);
       console.error('Failed to copy:', message);
     }
   }

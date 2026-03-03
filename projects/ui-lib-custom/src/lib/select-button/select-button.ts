@@ -4,7 +4,6 @@ import {
   Component,
   ElementRef,
   HostListener,
-  TemplateRef,
   ViewEncapsulation,
   computed,
   contentChild,
@@ -15,10 +14,18 @@ import {
   signal,
   inject,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import type {
+  TemplateRef,
+  InputSignal,
+  WritableSignal,
+  Signal,
+  OutputEmitterRef,
+} from '@angular/core';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import type { ControlValueAccessor } from '@angular/forms';
 import { Button } from 'ui-lib-custom/button';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import {
+import type {
   SelectButtonChangeEvent,
   SelectButtonItemContext,
   SelectButtonOption,
@@ -61,62 +68,70 @@ import {
   },
 })
 export class SelectButton implements ControlValueAccessor {
-  private readonly themeConfig = inject(ThemeConfigService);
-  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  public readonly options = input<SelectButtonOption[]>([]);
-  public readonly variant = input<SelectButtonVariant | null>(null);
-  public readonly value = input<SelectButtonValue | SelectButtonValue[] | null>(null);
-  public readonly optionLabel = input<string>('label');
-  public readonly optionValue = input<string>('value');
-  public readonly optionDisabled = input<string>('disabled');
+  public readonly options: InputSignal<SelectButtonOption[]> = input<SelectButtonOption[]>([]);
+  public readonly variant: InputSignal<SelectButtonVariant | null> =
+    input<SelectButtonVariant | null>(null);
+  public readonly value: InputSignal<SelectButtonValue | SelectButtonValue[] | null> = input<
+    SelectButtonValue | SelectButtonValue[] | null
+  >(null);
+  public readonly optionLabel: InputSignal<string> = input<string>('label');
+  public readonly optionValue: InputSignal<string> = input<string>('value');
+  public readonly optionDisabled: InputSignal<string> = input<string>('disabled');
 
-  public readonly multiple = input<boolean>(false);
-  public readonly allowEmpty = input<boolean>(false);
+  public readonly multiple: InputSignal<boolean> = input<boolean>(false);
+  public readonly allowEmpty: InputSignal<boolean> = input<boolean>(false);
 
-  public readonly size = input<SelectButtonSize>('md');
-  public readonly disabled = input<boolean>(false);
-  public readonly invalid = input<boolean>(false);
-  public readonly fluid = input<boolean>(false);
+  public readonly size: InputSignal<SelectButtonSize> = input<SelectButtonSize>('md');
+  public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  public readonly fluid: InputSignal<boolean> = input<boolean>(false);
 
-  public readonly ariaLabelledBy = input<string | null>(null);
-  public readonly ariaLabel = input<string | null>(null);
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 
-  public readonly selectionChange = output<SelectButtonChangeEvent>();
-  public readonly valueChange = output<SelectButtonValue | SelectButtonValue[] | null>();
+  public readonly selectionChange: OutputEmitterRef<SelectButtonChangeEvent> =
+    output<SelectButtonChangeEvent>();
+  public readonly valueChange: OutputEmitterRef<SelectButtonValue | SelectButtonValue[] | null> =
+    output<SelectButtonValue | SelectButtonValue[] | null>();
 
-  public readonly itemTemplate = contentChild<TemplateRef<SelectButtonItemContext>>('item');
+  public readonly itemTemplate: Signal<TemplateRef<SelectButtonItemContext> | undefined> =
+    contentChild<TemplateRef<SelectButtonItemContext>>('item');
 
-  public readonly focusedIndex = signal<number>(-1);
-  public readonly internalValue = signal<SelectButtonValue[]>([]);
-  private readonly cvaDisabled = signal<boolean>(false);
+  public readonly focusedIndex: WritableSignal<number> = signal<number>(-1);
+  public readonly internalValue: WritableSignal<SelectButtonValue[]> = signal<SelectButtonValue[]>(
+    []
+  );
+  private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
 
   private onCvaChange: (value: SelectButtonValue | SelectButtonValue[]) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};
 
-  public readonly normalizedSize = computed<'small' | 'medium' | 'large'>(
-    (): 'small' | 'medium' | 'large' => {
-      const size: SelectButtonSize = this.size();
-      const map: Record<SelectButtonSize, 'small' | 'medium' | 'large'> = {
-        sm: 'small',
-        md: 'medium',
-        lg: 'large',
-        small: 'small',
-        medium: 'medium',
-        large: 'large',
-      };
-      return map[size];
-    }
-  );
+  public readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
+    'small' | 'medium' | 'large'
+  >((): 'small' | 'medium' | 'large' => {
+    const size: SelectButtonSize = this.size();
+    const map: Record<SelectButtonSize, 'small' | 'medium' | 'large'> = {
+      sm: 'small',
+      md: 'medium',
+      lg: 'large',
+      small: 'small',
+      medium: 'medium',
+      large: 'large',
+    };
+    return map[size];
+  });
 
-  public readonly effectiveVariant = computed<SelectButtonVariant>(
+  public readonly effectiveVariant: Signal<SelectButtonVariant> = computed<SelectButtonVariant>(
     (): SelectButtonVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly isDisabled = computed<boolean>(
+  public readonly isDisabled: Signal<boolean> = computed<boolean>(
     (): boolean => this.disabled() || this.cvaDisabled()
   );
 
-  public readonly activeIndex = computed<number>((): number => {
+  public readonly activeIndex: Signal<number> = computed<number>((): number => {
     const opts: SelectButtonOption[] = this.options();
     const focused: number = this.focusedIndex();
     if (focused >= 0 && focused < opts.length) {
@@ -131,18 +146,20 @@ export class SelectButton implements ControlValueAccessor {
     return this.findFirstEnabledIndex(opts);
   });
 
-  public readonly groupRole = computed<string>((): string =>
+  public readonly groupRole: Signal<string> = computed<string>((): string =>
     this.multiple() ? 'group' : 'radiogroup'
   );
-  public readonly itemRole = computed<string>((): string =>
+  public readonly itemRole: Signal<string> = computed<string>((): string =>
     this.multiple() ? 'checkbox' : 'radio'
   );
-  public readonly ariaLabelResolved = computed<string | null>((): string | null => {
-    if (this.ariaLabelledBy()) {
-      return null;
+  public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      if (this.ariaLabelledBy()) {
+        return null;
+      }
+      return this.ariaLabel() ?? 'Select options';
     }
-    return this.ariaLabel() ?? 'Select options';
-  });
+  );
 
   public optionAriaChecked(option: SelectButtonOption): string {
     return this.isSelected(option) ? 'true' : 'false';
@@ -193,7 +210,7 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   public resolveLabel(option: SelectButtonOption): string {
-    const raw = option as unknown;
+    const raw: unknown = option as unknown;
     if (typeof raw !== 'object' || raw === null) {
       return String(raw);
     }
@@ -214,7 +231,7 @@ export class SelectButton implements ControlValueAccessor {
   }
 
   public resolveValue(option: SelectButtonOption): SelectButtonValue {
-    const raw = option as unknown;
+    const raw: unknown = option as unknown;
     if (typeof raw !== 'object' || raw === null) {
       return raw as SelectButtonValue;
     }
@@ -359,7 +376,7 @@ export class SelectButton implements ControlValueAccessor {
     const opts: SelectButtonOption[] = this.options();
     if (idx < 0 || idx >= opts.length) return;
 
-    const option = opts[idx];
+    const option: SelectButtonOption | undefined = opts[idx];
     if (!option || this.isOptionDisabled(option)) return;
 
     this.toggleOption(option, event);
@@ -392,7 +409,7 @@ export class SelectButton implements ControlValueAccessor {
     if (currentValue === null) return -1;
 
     for (let i: number = 0; i < options.length; i += 1) {
-      const option = options[i];
+      const option: SelectButtonOption | undefined = options[i];
       if (!option) continue;
       if (this.resolveValue(option) === currentValue) return i;
     }
@@ -402,7 +419,7 @@ export class SelectButton implements ControlValueAccessor {
 
   private findFirstEnabledIndex(options: SelectButtonOption[]): number {
     for (let i: number = 0; i < options.length; i += 1) {
-      const option = options[i];
+      const option: SelectButtonOption | undefined = options[i];
       if (!option) continue;
       if (!this.isOptionDisabled(option)) return i;
     }
@@ -411,7 +428,7 @@ export class SelectButton implements ControlValueAccessor {
 
   private findLastEnabledIndex(options: SelectButtonOption[]): number {
     for (let i: number = options.length - 1; i >= 0; i -= 1) {
-      const option = options[i];
+      const option: SelectButtonOption | undefined = options[i];
       if (!option) continue;
       if (!this.isOptionDisabled(option)) return i;
     }
@@ -428,7 +445,7 @@ export class SelectButton implements ControlValueAccessor {
     let idx: number = currentIndex;
     for (let i: number = 0; i < options.length; i += 1) {
       idx = (idx + delta + options.length) % options.length;
-      const option = options[idx];
+      const option: SelectButtonOption | undefined = options[idx];
       if (!option) continue;
       if (!this.isOptionDisabled(option)) {
         return idx;
@@ -442,7 +459,10 @@ export class SelectButton implements ControlValueAccessor {
     if (typeof option !== 'object' || option === null) {
       return undefined;
     }
-    const record = option as Record<string, SelectButtonValue | undefined>;
+    const record: Record<string, SelectButtonValue | undefined> = option as Record<
+      string,
+      SelectButtonValue | undefined
+    >;
     if (Object.prototype.hasOwnProperty.call(record, field)) {
       return record[field];
     }

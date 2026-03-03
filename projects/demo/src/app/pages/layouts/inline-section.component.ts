@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import {
   Button,
   Card,
@@ -7,18 +8,15 @@ import {
   Stack,
   Tabs,
   Tab,
-  TabsValue,
   UiLibSelect,
   INLINE_TOKENS,
-  InlineToken,
-  InlineAlign,
-  InlineJustify,
 } from 'ui-lib-custom';
+import type { TabsValue, InlineToken, InlineAlign, InlineJustify } from 'ui-lib-custom';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
 @Component({
@@ -54,21 +52,24 @@ export class LayoutInlineSectionComponent {
 </ui-lib-inline>
 `;
 
-  public readonly activeTab = signal<'demo' | 'usage' | 'api'>('demo');
+  public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
+    'demo' | 'usage' | 'api'
+  >('demo');
 
-  public readonly spacing = signal<InlineToken>('sm');
-  public readonly justify = signal<InlineJustify>('start');
-  public readonly align = signal<InlineAlign>('center');
+  public readonly spacing: WritableSignal<InlineToken> = signal<InlineToken>('sm');
+  public readonly justify: WritableSignal<InlineJustify> = signal<InlineJustify>('start');
+  public readonly align: WritableSignal<InlineAlign> = signal<InlineAlign>('center');
 
-  public readonly spacingOptions = this.buildOptions(INLINE_TOKENS);
-  public readonly justifyOptions: { label: string; value: InlineJustify }[] = [
+  public readonly spacingOptions: Array<{ label: string; value: InlineToken }> =
+    this.buildOptions(INLINE_TOKENS);
+  public readonly justifyOptions: Array<{ label: string; value: InlineJustify }> = [
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
     { label: 'Space Between', value: 'space-between' },
     { label: 'Space Around', value: 'space-around' },
   ];
-  public readonly alignOptions: { label: string; value: InlineAlign }[] = [
+  public readonly alignOptions: Array<{ label: string; value: InlineAlign }> = [
     { label: 'Start', value: 'start' },
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
@@ -76,13 +77,13 @@ export class LayoutInlineSectionComponent {
     { label: 'Stretch', value: 'stretch' },
   ];
 
-  public readonly spacingLabel = computed<string>((): string =>
+  public readonly spacingLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.spacing(), this.spacingOptions)
   );
-  public readonly justifyLabel = computed<string>((): string =>
+  public readonly justifyLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.justify(), this.justifyOptions)
   );
-  public readonly alignLabel = computed<string>((): string =>
+  public readonly alignLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.align(), this.alignOptions)
   );
 
@@ -123,7 +124,7 @@ export class LayoutInlineSectionComponent {
   }
 
   private displayLabel<T extends string>(value: T, options: { label: string; value: T }[]): string {
-    const match = options.find(
+    const match: { label: string; value: T } | undefined = options.find(
       (option: { label: string; value: T }): boolean => option.value === value
     );
     return match ? match.label : String(value);
@@ -131,8 +132,8 @@ export class LayoutInlineSectionComponent {
 
   private toPx(value: string): string {
     if (value.endsWith('rem')) {
-      const numeric = Number.parseFloat(value.replace('rem', ''));
-      const pixels = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
+      const numeric: number = Number.parseFloat(value.replace('rem', ''));
+      const pixels: number = Number.isFinite(numeric) ? Math.round(numeric * 16) : 0;
       return `${pixels}px`;
     }
     return value;

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Button, Card, Badge } from 'ui-lib-custom';
 import { RouterLink } from '@angular/router';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocSection } from '../../shared/doc-page/doc-section.model';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 @Component({
   selector: 'app-home',

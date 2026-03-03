@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import type { WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { SelectButton } from './select-button';
-import {
+import { SelectButton } from 'ui-lib-custom';
+import type {
   SelectButtonChangeEvent,
   SelectButtonOption,
   SelectButtonSize,
   SelectButtonVariant,
   SelectButtonValue,
-} from './select-button.types';
+} from 'ui-lib-custom';
 
 const defaultOptions: SelectButtonOption[] = [
   { label: 'Option 1', value: 'opt1' },
@@ -52,17 +54,19 @@ function getRequiredButton(
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class HostComponent {
-  public readonly options = signal<SelectButtonOption[]>(defaultOptions);
-  public readonly multiple = signal<boolean>(false);
-  public readonly variant = signal<SelectButtonVariant>('material');
-  public readonly size = signal<SelectButtonSize>('md');
-  public readonly disabled = signal<boolean>(false);
-  public readonly invalid = signal<boolean>(false);
-  public readonly allowEmpty = signal<boolean>(false);
-  public readonly optionLabel = signal<string>('label');
-  public readonly optionValue = signal<string>('value');
-  public readonly optionDisabled = signal<string>('disabled');
-  public readonly ariaLabelledBy = signal<string | null>(null);
+  public readonly options: WritableSignal<SelectButtonOption[]> =
+    signal<SelectButtonOption[]>(defaultOptions);
+  public readonly multiple: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly variant: WritableSignal<SelectButtonVariant> =
+    signal<SelectButtonVariant>('material');
+  public readonly size: WritableSignal<SelectButtonSize> = signal<SelectButtonSize>('md');
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly allowEmpty: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly optionLabel: WritableSignal<string> = signal<string>('label');
+  public readonly optionValue: WritableSignal<string> = signal<string>('value');
+  public readonly optionDisabled: WritableSignal<string> = signal<string>('disabled');
+  public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
   public value: SelectButtonValue | SelectButtonValue[] | null = null;
   public lastChange: SelectButtonChangeEvent | null = null;
 
@@ -90,7 +94,7 @@ class NgModelHostComponent {
 })
 class ReactiveHostComponent {
   public options: SelectButtonOption[] = defaultOptions;
-  public control = new FormControl<string | null>('opt2');
+  public control: FormControl<string | null> = new FormControl<string | null>('opt2');
 }
 
 @Component({
@@ -309,7 +313,7 @@ describe('SelectButton', (): void => {
       fixture.componentInstance.optionLabel.set('name');
       fixture.detectChanges();
 
-      const text = getRequiredButton(buttons(), 0, 'select').textContent;
+      const text: string | null = getRequiredButton(buttons(), 0, 'select').textContent;
       expect(text).toBeTruthy();
       expect((text as string).trim()).toBe('A');
     });

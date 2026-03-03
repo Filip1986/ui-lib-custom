@@ -1,16 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  Badge,
-  Button,
-  Card,
-  Checkbox,
-  SelectOption,
-  UiLibInput,
-  UiLibSelect,
-} from 'ui-lib-custom';
+import { Badge, Button, Card, Checkbox, UiLibInput, UiLibSelect } from 'ui-lib-custom';
+import type { SelectOption } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
-import { DocSection } from '@demo/shared/doc-page/doc-section.model';
+import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
 @Component({
   selector: 'app-accessibility-page',

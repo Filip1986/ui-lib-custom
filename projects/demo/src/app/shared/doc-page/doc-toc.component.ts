@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DocSection } from './doc-section.model';
+import type { DocSection } from './doc-section.model';
 
 @Component({
   selector: 'app-doc-toc',

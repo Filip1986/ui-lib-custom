@@ -24,9 +24,10 @@ const meta: Meta<LoginForm> = {
 
 export default meta;
 
-const renderLoginForm = (
-  args: LoginFormStoryArgs
-): { props: LoginFormStoryArgs; template: string } => ({
+const renderLoginForm: (args: LoginFormStoryArgs) => {
+  props: LoginFormStoryArgs;
+  template: string;
+} = (args: LoginFormStoryArgs): { props: LoginFormStoryArgs; template: string } => ({
   props: args,
   template: `
     <ui-lib-login-form
