@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { SelectButton } from 'ui-lib-custom';
+import { SelectButton } from './select-button';
+import type { SelectButtonOption } from './select-button.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
-import type { SelectButtonOption } from 'ui-lib-custom';
 import type { WritableSignal } from '@angular/core';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 
