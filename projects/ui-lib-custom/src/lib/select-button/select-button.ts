@@ -25,7 +25,12 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { Button } from 'ui-lib-custom/button';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { SHARED_DEFAULTS, SHARED_SIZES, SHARED_THEME_VARIANTS } from '../shared/constants';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZES,
+  SHARED_THEME_VARIANTS,
+  KEYBOARD_KEYS,
+} from '../shared/constants';
 import type {
   SelectButtonChangeEvent,
   SelectButtonItemContext,
@@ -276,26 +281,26 @@ export class SelectButton implements ControlValueAccessor {
     if (this.isDisabled()) return;
 
     switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
+      case KEYBOARD_KEYS.ArrowRight:
+      case KEYBOARD_KEYS.ArrowDown:
         event.preventDefault();
         this.moveFocus(1);
         break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
+      case KEYBOARD_KEYS.ArrowLeft:
+      case KEYBOARD_KEYS.ArrowUp:
         event.preventDefault();
         this.moveFocus(-1);
         break;
-      case 'Home':
+      case KEYBOARD_KEYS.Home:
         event.preventDefault();
         this.moveFocusToStart();
         break;
-      case 'End':
+      case KEYBOARD_KEYS.End:
         event.preventDefault();
         this.moveFocusToEnd();
         break;
-      case ' ':
-      case 'Enter':
+      case KEYBOARD_KEYS.Space:
+      case KEYBOARD_KEYS.Enter:
         event.preventDefault();
         this.commitFocused(event);
         break;

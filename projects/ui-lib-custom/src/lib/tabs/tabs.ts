@@ -40,7 +40,12 @@ import type {
   TabsVariant,
 } from './tabs.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { SHARED_DEFAULTS, SHARED_SIZES, SHARED_THEME_VARIANTS } from '../shared/constants';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZES,
+  SHARED_THEME_VARIANTS,
+  KEYBOARD_KEYS,
+} from '../shared/constants';
 
 type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 
@@ -488,13 +493,13 @@ export class Tabs implements OnDestroy, AfterViewInit {
   /** Handles keyboard navigation for the tab list. */
   public onKeydown(event: KeyboardEvent, currentIndex: number): void {
     const key: string = event.key;
-    if (key === 'Home') {
+    if (key === KEYBOARD_KEYS.Home) {
       event.preventDefault();
       this.focusIndex(this.firstEnabledIndex());
       return;
     }
 
-    if (key === 'End') {
+    if (key === KEYBOARD_KEYS.End) {
       event.preventDefault();
       this.focusIndex(this.lastEnabledIndex());
       return;
@@ -503,11 +508,11 @@ export class Tabs implements OnDestroy, AfterViewInit {
     const horizontal: boolean = this.orientation() === 'horizontal';
     const rtl: boolean = this.isRtl();
     const forward: boolean = horizontal
-      ? key === (rtl ? 'ArrowLeft' : 'ArrowRight')
-      : key === 'ArrowDown';
+      ? key === (rtl ? KEYBOARD_KEYS.ArrowLeft : KEYBOARD_KEYS.ArrowRight)
+      : key === KEYBOARD_KEYS.ArrowDown;
     const backward: boolean = horizontal
-      ? key === (rtl ? 'ArrowRight' : 'ArrowLeft')
-      : key === 'ArrowUp';
+      ? key === (rtl ? KEYBOARD_KEYS.ArrowRight : KEYBOARD_KEYS.ArrowLeft)
+      : key === KEYBOARD_KEYS.ArrowUp;
 
     if (forward) {
       event.preventDefault();
@@ -519,7 +524,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
       this.focusPrev(currentIndex);
     }
 
-    if (key === 'Enter' || key === ' ') {
+    if (key === KEYBOARD_KEYS.Enter || key === KEYBOARD_KEYS.Space) {
       event.preventDefault();
       const tab: TabsContextItem | undefined = this.tabContexts()[currentIndex];
       if (tab) {

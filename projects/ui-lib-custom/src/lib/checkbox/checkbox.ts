@@ -18,6 +18,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { KEYBOARD_KEYS } from '../shared/constants';
 
 export type CheckboxVariant = 'material' | 'bootstrap' | 'minimal';
 export type CheckboxSize = 'sm' | 'md' | 'lg';
@@ -156,7 +157,7 @@ export class Checkbox implements ControlValueAccessor {
   }
 
   public onKeydown(event: KeyboardEvent): void {
-    if (event.key === ' ' || event.key === 'Enter') {
+    if (event.key === KEYBOARD_KEYS.Space || event.key === KEYBOARD_KEYS.Enter) {
       event.preventDefault();
       this.onToggle(event);
     }

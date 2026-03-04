@@ -22,6 +22,7 @@ import type {
   ThemePresetColors,
   ThemeVariant,
 } from 'ui-lib-custom/theme';
+import { KEYBOARD_KEYS } from '../shared/constants';
 
 export type CardVariant = 'material' | 'bootstrap' | 'minimal';
 export type CardElevation = 'none' | 'low' | 'medium' | 'high';
@@ -104,7 +105,7 @@ export class Card {
 
   public onKeydown(event: KeyboardEvent): void {
     if (!this.hoverable()) return;
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === KEYBOARD_KEYS.Enter || event.key === KEYBOARD_KEYS.Space) {
       event.preventDefault();
       this.el.nativeElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     }

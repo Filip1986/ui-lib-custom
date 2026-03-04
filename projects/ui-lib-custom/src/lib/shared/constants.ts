@@ -64,6 +64,38 @@ export const SHARED_VARIANT_OPTIONS: ReadonlyArray<SharedThemeVariant> = [
 ] as const;
 
 /**
+ * Shared keyboard key names used for event handling.
+ */
+export const KEYBOARD_KEYS: {
+  readonly ArrowDown: 'ArrowDown';
+  readonly ArrowUp: 'ArrowUp';
+  readonly ArrowLeft: 'ArrowLeft';
+  readonly ArrowRight: 'ArrowRight';
+  readonly Enter: 'Enter';
+  readonly Space: ' ';
+  readonly Escape: 'Escape';
+  readonly Home: 'Home';
+  readonly End: 'End';
+  readonly Tab: 'Tab';
+} = {
+  ArrowDown: 'ArrowDown',
+  ArrowUp: 'ArrowUp',
+  ArrowLeft: 'ArrowLeft',
+  ArrowRight: 'ArrowRight',
+  Enter: 'Enter',
+  Space: ' ',
+  Escape: 'Escape',
+  Home: 'Home',
+  End: 'End',
+  Tab: 'Tab',
+} as const;
+
+/**
+ * Union type for keyboard key names.
+ */
+export type KeyboardKey = (typeof KEYBOARD_KEYS)[keyof typeof KEYBOARD_KEYS];
+
+/**
  * Union type for shared defaults.
  */
 export type SharedDefault = (typeof SHARED_DEFAULTS)[keyof typeof SHARED_DEFAULTS];

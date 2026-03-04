@@ -24,6 +24,7 @@ import type {
   AccordionSize,
   AccordionVariant,
 } from './accordion.types';
+import { KEYBOARD_KEYS } from '../shared/constants';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 interface AccordionPanelContext {
@@ -195,25 +196,25 @@ export class Accordion implements AccordionContext {
 
   public onKeydown(event: KeyboardEvent): void {
     const key: string = event.key;
-    if (key === 'ArrowDown' || key === 'ArrowRight') {
+    if (key === KEYBOARD_KEYS.ArrowDown || key === KEYBOARD_KEYS.ArrowRight) {
       event.preventDefault();
       this.focusNext(this.indexForEventTarget(event.target));
       return;
     }
 
-    if (key === 'ArrowUp' || key === 'ArrowLeft') {
+    if (key === KEYBOARD_KEYS.ArrowUp || key === KEYBOARD_KEYS.ArrowLeft) {
       event.preventDefault();
       this.focusPrev(this.indexForEventTarget(event.target));
       return;
     }
 
-    if (key === 'Home') {
+    if (key === KEYBOARD_KEYS.Home) {
       event.preventDefault();
       this.focusFirst();
       return;
     }
 
-    if (key === 'End') {
+    if (key === KEYBOARD_KEYS.End) {
       event.preventDefault();
       this.focusLast();
     }

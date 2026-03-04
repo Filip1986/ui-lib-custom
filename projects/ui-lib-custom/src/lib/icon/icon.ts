@@ -17,6 +17,7 @@ import {
   type ComponentVariant,
 } from './icon.types';
 import { SEMANTIC_ICONS, type SemanticIcon } from './icon.semantics';
+import { KEYBOARD_KEYS } from '../shared/constants';
 
 const normalizeIconName: (value: string) => string = (value: string): string =>
   value
@@ -102,7 +103,7 @@ export class Icon {
 
   public onKeydown(event: KeyboardEvent): void {
     if (!this.clickable()) return;
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === KEYBOARD_KEYS.Enter || event.key === KEYBOARD_KEYS.Space) {
       event.preventDefault();
       (event.currentTarget as HTMLElement).click();
     }

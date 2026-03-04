@@ -12,16 +12,13 @@ import {
   ViewEncapsulation,
   ViewChild,
   TemplateRef,
-  type ElementRef,
-  type InputSignal,
-  type OnDestroy,
-  type Signal,
-  type WritableSignal,
 } from '@angular/core';
+import type { ElementRef, InputSignal, OnDestroy, Signal, WritableSignal } from '@angular/core';
 import type { AccordionContext } from './accordion-context';
 import { ACCORDION_CONTEXT } from './accordion-context';
 import type { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
 import { Icon } from 'ui-lib-custom/icon';
+import { KEYBOARD_KEYS } from '../shared/constants';
 
 let accordionPanelId: number = 0;
 
@@ -142,7 +139,7 @@ export class AccordionPanel implements OnDestroy {
 
   public onKeydown(event: KeyboardEvent): void {
     const key: string = event.key;
-    if (key === ' ' || key === 'Enter') {
+    if (key === KEYBOARD_KEYS.Space || key === KEYBOARD_KEYS.Enter) {
       event.preventDefault();
       this.toggle();
     }

@@ -16,7 +16,7 @@ import type { TemplateRef, InputSignal, WritableSignal, Signal } from '@angular/
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { SHARED_DEFAULTS, SHARED_SIZES } from '../shared/constants';
+import { SHARED_DEFAULTS, SHARED_SIZES, KEYBOARD_KEYS } from '../shared/constants';
 
 export type SelectVariant = 'material' | 'bootstrap' | 'minimal';
 export type SelectSize = 'sm' | 'md' | 'lg';
@@ -343,7 +343,7 @@ export class UiLibSelect implements ControlValueAccessor {
     if (this.isDisabled() || this.loading()) return;
 
     switch (event.key) {
-      case 'ArrowDown':
+      case KEYBOARD_KEYS.ArrowDown:
         event.preventDefault();
         if (!this.open()) {
           this.openPanel();
@@ -351,7 +351,7 @@ export class UiLibSelect implements ControlValueAccessor {
           this.moveFocus(1);
         }
         break;
-      case 'ArrowUp':
+      case KEYBOARD_KEYS.ArrowUp:
         event.preventDefault();
         if (!this.open()) {
           this.openPanel();
@@ -359,8 +359,8 @@ export class UiLibSelect implements ControlValueAccessor {
           this.moveFocus(-1);
         }
         break;
-      case 'Enter':
-      case ' ': {
+      case KEYBOARD_KEYS.Enter:
+      case KEYBOARD_KEYS.Space: {
         event.preventDefault();
         if (this.open() && this.focusedIndex() >= 0) {
           this.commitFocused();
@@ -369,19 +369,19 @@ export class UiLibSelect implements ControlValueAccessor {
         }
         break;
       }
-      case 'Escape':
+      case KEYBOARD_KEYS.Escape:
         if (this.open()) {
           event.preventDefault();
           this.closePanel();
         }
         break;
-      case 'Home':
+      case KEYBOARD_KEYS.Home:
         if (this.open()) {
           event.preventDefault();
           this.setActiveIndex(0);
         }
         break;
-      case 'End':
+      case KEYBOARD_KEYS.End:
         if (this.open()) {
           event.preventDefault();
           this.setActiveIndex(this.filteredOptions().length - 1);
