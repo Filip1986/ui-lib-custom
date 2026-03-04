@@ -28,13 +28,16 @@ import {
 import type { ThemePreset, ThemeVariant } from 'ui-lib-custom';
 import { ThemeEditorComponent } from '../../shared/theme-editor/theme-editor.component';
 
+/**
+ * Demo gallery page highlighting multiple components.
+ */
 @Component({
   selector: 'app-gallery',
   standalone: true,
   imports: [
     CommonModule,
-    Button,
     Card,
+    Button,
     Badge,
     UiLibInput,
     UiLibSelect,

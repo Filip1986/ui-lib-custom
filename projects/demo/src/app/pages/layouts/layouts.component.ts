@@ -5,17 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import type { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
-import { LayoutSemanticSpacingSectionComponent } from './semantic-spacing-section.component';
-import { LayoutStackSectionComponent } from './stack-section.component';
-import { LayoutInlineSectionComponent } from './inline-section.component';
-import { LayoutGridSectionComponent } from './grid-section.component';
-import { LayoutContainerSectionComponent } from './container-section.component';
+import { SemanticSpacingSectionComponent } from './semantic-spacing-section.component';
+import { StackSectionComponent } from './stack-section.component';
+import { InlineSectionComponent } from './inline-section.component';
+import { GridSectionComponent } from './grid-section.component';
+import { ContainerSectionComponent } from './container-section.component';
 import { LayoutCompositionSectionComponent } from './composition-section.component';
-import { LayoutDesignTokensSectionComponent } from './design-tokens-section.component';
-import { LayoutThemedLayoutsSectionComponent } from './themed-layouts-section.component';
+import { DesignTokensSectionComponent } from './design-tokens-section.component';
+import { ThemedLayoutsSectionComponent } from './themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './examples-section.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 
+/**
+ * Demo page aggregating layout primitives and sections.
+ */
 @Component({
   selector: 'app-layouts',
   standalone: true,
@@ -24,14 +27,14 @@ import { CodePreviewComponent } from '../../shared/components/code-preview/code-
     Button,
     FormsModule,
     DocPageLayoutComponent,
-    LayoutSemanticSpacingSectionComponent,
-    LayoutStackSectionComponent,
-    LayoutInlineSectionComponent,
-    LayoutGridSectionComponent,
-    LayoutContainerSectionComponent,
+    SemanticSpacingSectionComponent,
+    StackSectionComponent,
+    InlineSectionComponent,
+    GridSectionComponent,
+    ContainerSectionComponent,
     LayoutCompositionSectionComponent,
-    LayoutDesignTokensSectionComponent,
-    LayoutThemedLayoutsSectionComponent,
+    DesignTokensSectionComponent,
+    ThemedLayoutsSectionComponent,
     LayoutExamplesSectionComponent,
     CodePreviewComponent,
     Stack,

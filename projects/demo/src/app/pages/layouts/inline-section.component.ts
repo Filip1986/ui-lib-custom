@@ -19,6 +19,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo section for inline layout usage.
+ */
 @Component({
   selector: 'app-layout-inline-section',
   standalone: true,
@@ -41,7 +44,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutInlineSectionComponent {
+export class InlineSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'inline', label: 'Inline' }];
 
   public readonly usageSnippet: string = `

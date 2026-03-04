@@ -12,6 +12,9 @@ export interface GoogleFont {
   variants: string[];
 }
 
+/**
+ * Loads Google Fonts metadata for the theme editor.
+ */
 @Injectable({ providedIn: 'root' })
 export class GoogleFontsService {
   private readonly http: HttpClient = inject(HttpClient);

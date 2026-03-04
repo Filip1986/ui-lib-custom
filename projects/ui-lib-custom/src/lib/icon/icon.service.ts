@@ -22,6 +22,9 @@ import { BOOTSTRAP_ICON_MAPPING } from './presets';
 import { MATERIAL_ICON_MAPPING } from './presets';
 import type { IconMapping, SemanticIcon } from './icon.semantics';
 
+/**
+ * Resolves icon libraries, sizes, and semantic mappings for ui-lib icons.
+ */
 @Injectable({ providedIn: 'root' })
 export class IconService {
   private readonly themeConfig: ThemeConfigService | null = inject(ThemeConfigService, {

@@ -19,6 +19,7 @@ import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import type { BadgeColor } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { SHARED_DEFAULTS, SHARED_SIZES } from '../shared/constants';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
 export type ButtonAppearance = 'solid' | 'outline' | 'ghost';
@@ -38,6 +39,9 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 export type IconPosition = 'left' | 'right' | 'top' | 'bottom';
 export type BadgeSeverity = ButtonSeverity | 'neutral';
 
+/**
+ * Action button component with variants, appearances, and states.
+ */
 @Component({
   selector: 'ui-lib-button',
   standalone: true,
@@ -52,7 +56,7 @@ export class Button implements AfterViewChecked {
 
   public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
   public readonly appearance: InputSignal<ButtonAppearance> = input<ButtonAppearance>('solid');
-  public readonly size: InputSignal<ButtonSize> = input<ButtonSize>('md');
+  public readonly size: InputSignal<ButtonSize> = input<ButtonSize>(SHARED_DEFAULTS.Size);
   public readonly color: InputSignal<ButtonColor> = input<ButtonColor>('primary');
   public readonly severity: InputSignal<ButtonSeverity | null> = input<ButtonSeverity | null>(null);
   public readonly type: InputSignal<ButtonType> = input<ButtonType>('button');
@@ -99,9 +103,9 @@ export class Button implements AfterViewChecked {
   >((): 'small' | 'medium' | 'large' => {
     const size: ButtonSize = this.size();
     const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
-      sm: 'small',
-      md: 'medium',
-      lg: 'large',
+      [SHARED_SIZES.Sm]: 'small',
+      [SHARED_SIZES.Md]: 'medium',
+      [SHARED_SIZES.Lg]: 'large',
       small: 'small',
       medium: 'medium',
       large: 'large',

@@ -11,7 +11,9 @@ import {
 } from '@angular/core';
 import type { InputSignal } from '@angular/core';
 import type { TabsLazyMode, TabsValue } from './tabs.types';
-
+/**
+ * Template directive for custom tab labels.
+ */
 @Directive({
   selector: '[uiLibTabLabel]',
   standalone: true,
@@ -20,6 +22,9 @@ export class TabLabel {
   public readonly template: TemplateRef<unknown> = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
+/**
+ * Template directive for custom tab content.
+ */
 @Directive({
   selector: '[uiLibTabContent]',
   standalone: true,
@@ -28,6 +33,9 @@ export class TabContent {
   public readonly template: TemplateRef<unknown> = inject<TemplateRef<unknown>>(TemplateRef);
 }
 
+/**
+ * Tab definition used by the tabs container.
+ */
 @Component({
   selector: 'ui-lib-tab',
   standalone: true,

@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { provideZonelessChangeDetection } from '@angular/core';
 import { UiLibSelect } from './select';
 import type { SelectOption, SelectVariant } from './select';
+import { SHARED_VARIANT_OPTIONS } from '../shared/constants';
 
 function getRequiredItem<T>(items: T[], index: number, label: string): T {
   const item: T | undefined = items[index];
@@ -251,7 +252,7 @@ describe('UiLibSelect basics', (): void => {
   });
 
   it('applies each variant class', (): void => {
-    const variants: SelectVariant[] = ['material', 'bootstrap', 'minimal'];
+    const variants: SelectVariant[] = [...SHARED_VARIANT_OPTIONS];
 
     variants.forEach((variant: SelectVariant): void => {
       fixture.componentRef.setInput('variant', variant);

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from '../shared/constants';
 import { Alert } from './alert';
 
 type Story = StoryObj;
@@ -13,7 +14,7 @@ const meta: Meta = {
       control: 'select',
       options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info'],
     },
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
     dismissible: { control: 'boolean' },
   },
 };
@@ -27,12 +28,13 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { template: string } => ({
+  render: (): { template: string; props: { themeVariants: typeof SHARED_THEME_VARIANTS } } => ({
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:grid; gap:0.75rem;">
-        <ui-lib-alert variant="material">Material alert</ui-lib-alert>
-        <ui-lib-alert variant="bootstrap">Bootstrap alert</ui-lib-alert>
-        <ui-lib-alert variant="minimal">Minimal alert</ui-lib-alert>
+        <ui-lib-alert [variant]="themeVariants.Material">Material alert</ui-lib-alert>
+        <ui-lib-alert [variant]="themeVariants.Bootstrap">Bootstrap alert</ui-lib-alert>
+        <ui-lib-alert [variant]="themeVariants.Minimal">Minimal alert</ui-lib-alert>
       </div>
     `,
   }),

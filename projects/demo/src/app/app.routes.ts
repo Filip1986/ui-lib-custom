@@ -12,15 +12,15 @@ import { SidebarMenuDemoComponent } from './pages/sidebar-menu/sidebar-menu.comp
 import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
 import { ShadowsComponent } from './pages/shadows/shadows.component';
 import { CheckboxesComponent } from './pages/checkboxes/checkboxes.component';
-import { TabsDemoComponent } from './pages/tabs/tabs.component';
-import { LayoutSemanticSpacingSectionComponent } from './pages/layouts/semantic-spacing-section.component';
-import { LayoutStackSectionComponent } from './pages/layouts/stack-section.component';
-import { LayoutInlineSectionComponent } from './pages/layouts/inline-section.component';
-import { LayoutGridSectionComponent } from './pages/layouts/grid-section.component';
-import { LayoutContainerSectionComponent } from './pages/layouts/container-section.component';
+import { TabsComponent } from './pages/tabs/tabs.component';
+import { SemanticSpacingSectionComponent } from './pages/layouts/semantic-spacing-section.component';
+import { StackSectionComponent } from './pages/layouts/stack-section.component';
+import { InlineSectionComponent } from './pages/layouts/inline-section.component';
+import { GridSectionComponent } from './pages/layouts/grid-section.component';
+import { ContainerSectionComponent } from './pages/layouts/container-section.component';
 import { LayoutCompositionSectionComponent } from './pages/layouts/composition-section.component';
-import { LayoutDesignTokensSectionComponent } from './pages/layouts/design-tokens-section.component';
-import { LayoutThemedLayoutsSectionComponent } from './pages/layouts/themed-layouts-section.component';
+import { DesignTokensSectionComponent } from './pages/layouts/design-tokens-section.component';
+import { ThemedLayoutsSectionComponent } from './pages/layouts/themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './pages/layouts/examples-section.component';
 import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.component';
 import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
@@ -36,27 +36,27 @@ export const routes: Routes = [
   { path: 'layouts', redirectTo: 'layouts/semantic-spacing', pathMatch: 'full' },
   {
     path: 'layouts/semantic-spacing',
-    component: LayoutSemanticSpacingSectionComponent,
+    component: SemanticSpacingSectionComponent,
     title: 'Semantic Spacing - UI Components Library',
   },
   {
     path: 'layouts/stack',
-    component: LayoutStackSectionComponent,
+    component: StackSectionComponent,
     title: 'Stack - UI Components Library',
   },
   {
     path: 'layouts/inline',
-    component: LayoutInlineSectionComponent,
+    component: InlineSectionComponent,
     title: 'Inline - UI Components Library',
   },
   {
     path: 'layouts/grid',
-    component: LayoutGridSectionComponent,
+    component: GridSectionComponent,
     title: 'Grid - UI Components Library',
   },
   {
     path: 'layouts/container',
-    component: LayoutContainerSectionComponent,
+    component: ContainerSectionComponent,
     title: 'Container - UI Components Library',
   },
   {
@@ -66,12 +66,12 @@ export const routes: Routes = [
   },
   {
     path: 'layouts/design-tokens',
-    component: LayoutDesignTokensSectionComponent,
+    component: DesignTokensSectionComponent,
     title: 'Design Tokens - UI Components Library',
   },
   {
     path: 'layouts/themed-layouts',
-    component: LayoutThemedLayoutsSectionComponent,
+    component: ThemedLayoutsSectionComponent,
     title: 'Themed Layouts - UI Components Library',
   },
   {
@@ -96,7 +96,7 @@ export const routes: Routes = [
     title: 'Project Starter - UI Components Library',
   },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
-  { path: 'tabs', component: TabsDemoComponent, title: 'Tabs - UI Components Library' },
+  { path: 'tabs', component: TabsComponent, title: 'Tabs - UI Components Library' },
   {
     path: 'icons',
     loadComponent: (): Promise<Type<unknown>> =>

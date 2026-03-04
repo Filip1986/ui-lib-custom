@@ -30,6 +30,9 @@ type TabKey =
 
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 
+/**
+ * Demo page for select component usage.
+ */
 @Component({
   selector: 'app-select',
   standalone: true,

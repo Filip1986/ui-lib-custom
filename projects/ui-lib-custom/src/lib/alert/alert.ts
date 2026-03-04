@@ -14,6 +14,9 @@ import { Icon } from '../icon';
 import type { StatusIcon } from '../icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
+/**
+ * Alert component for status messaging with optional dismiss action.
+ */
 @Component({
   selector: 'ui-lib-alert',
   standalone: true,

@@ -20,6 +20,9 @@ interface ElevationExample {
 type ShadowKey = keyof typeof SHADOWS;
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
+/**
+ * Demo page for shadow tokens and examples.
+ */
 @Component({
   selector: 'app-shadows',
   standalone: true,

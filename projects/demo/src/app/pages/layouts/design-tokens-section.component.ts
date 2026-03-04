@@ -6,6 +6,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo section for design tokens usage.
+ */
 @Component({
   selector: 'app-layout-design-tokens-section',
   standalone: true,
@@ -14,7 +17,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutDesignTokensSectionComponent {
+export class DesignTokensSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'design-tokens', label: 'Design Tokens' }];
 
   public readonly usageSnippet: string = `

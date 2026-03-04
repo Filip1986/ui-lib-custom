@@ -28,6 +28,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo section for semantic spacing tokens.
+ */
 @Component({
   selector: 'app-layout-semantic-spacing-section',
   standalone: true,
@@ -51,7 +54,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutSemanticSpacingSectionComponent {
+export class SemanticSpacingSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'semantic-spacing', label: 'Semantic Spacing' }];
 
   public readonly usageSnippet: string = `

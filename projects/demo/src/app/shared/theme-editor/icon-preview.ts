@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom';
 import type { IconLibrary, SemanticIcon } from 'ui-lib-custom';
 
+/**
+ * Preview list of semantic icons for the theme editor.
+ */
 @Component({
   selector: 'ui-lib-icon-preview',
   standalone: true,

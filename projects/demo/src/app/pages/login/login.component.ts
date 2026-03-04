@@ -27,6 +27,9 @@ interface LoginVariant {
 
 type TabKey = 'variants' | 'api-reference';
 
+/**
+ * Demo page for login form variants.
+ */
 @Component({
   selector: 'app-login',
   imports: [

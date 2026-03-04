@@ -104,6 +104,9 @@ type ColorVariants = {
   dark: string;
 };
 
+/**
+ * Service for previewing and applying live theme color edits.
+ */
 @Injectable({ providedIn: 'root' })
 export class ThemeEditorService {
   private readonly doc: Document = inject(DOCUMENT);

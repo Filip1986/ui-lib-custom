@@ -32,6 +32,9 @@ const hasKnownPrefix: (value: string) => boolean = (value: string): boolean => {
   return prefixes.some((p: string): boolean => value.toLowerCase().startsWith(p));
 };
 
+/**
+ * Icon component that resolves semantic names to the active icon library.
+ */
 @Component({
   selector: 'ui-lib-icon',
   standalone: true,

@@ -5,6 +5,9 @@ import type { SelectOption } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 
+/**
+ * Demo page for accessibility guidance and examples.
+ */
 @Component({
   selector: 'app-accessibility-page',
   standalone: true,

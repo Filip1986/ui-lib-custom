@@ -19,6 +19,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo section for grid layout usage.
+ */
 @Component({
   selector: 'app-layout-grid-section',
   standalone: true,
@@ -40,7 +43,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutGridSectionComponent {
+export class GridSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'grid', label: 'Grid' }];
 
   public readonly usageSnippet: string = `

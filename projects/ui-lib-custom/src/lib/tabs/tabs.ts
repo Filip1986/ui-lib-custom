@@ -40,6 +40,7 @@ import type {
   TabsVariant,
 } from './tabs.types';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { SHARED_DEFAULTS, SHARED_SIZES, SHARED_THEME_VARIANTS } from '../shared/constants';
 
 type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 
@@ -60,6 +61,9 @@ interface ScrollMetrics {
   position: number;
 }
 
+/**
+ * Tabs container that manages selection, focus, and scroll behavior.
+ */
 @Component({
   selector: 'ui-lib-tabs',
   standalone: true,
@@ -86,7 +90,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   public readonly dir: InputSignal<'ltr' | 'rtl' | 'auto'> = input<'ltr' | 'rtl' | 'auto'>('auto');
   public readonly variant: InputSignal<TabsVariant | null> = input<TabsVariant | null>(null);
-  public readonly size: InputSignal<TabsSize> = input<TabsSize>('md');
+  public readonly size: InputSignal<TabsSize> = input<TabsSize>(SHARED_DEFAULTS.Size);
   public readonly orientation: InputSignal<TabsOrientation> = input<TabsOrientation>('horizontal');
   public readonly align: InputSignal<TabsAlignment> = input<TabsAlignment>('start');
   /** Controls panel rendering vs navigation-only mode. */
@@ -160,6 +164,8 @@ export class Tabs implements OnDestroy, AfterViewInit {
       return explicit === 'auto' ? null : explicit;
     }
   );
+  protected readonly themeVariants: typeof SHARED_THEME_VARIANTS = SHARED_THEME_VARIANTS;
+
   protected readonly isRtl: Signal<boolean> = computed<boolean>((): boolean => {
     const explicit: 'ltr' | 'rtl' | 'auto' = this.dir();
     if (explicit !== 'auto') {
@@ -268,9 +274,9 @@ export class Tabs implements OnDestroy, AfterViewInit {
   >((): 'small' | 'medium' | 'large' => {
     const size: TabsSize = this.size();
     const map: Record<TabsSize, 'small' | 'medium' | 'large'> = {
-      sm: 'small',
-      md: 'medium',
-      lg: 'large',
+      [SHARED_SIZES.Sm]: 'small',
+      [SHARED_SIZES.Md]: 'medium',
+      [SHARED_SIZES.Lg]: 'large',
       small: 'small',
       medium: 'medium',
       large: 'large',
@@ -353,8 +359,10 @@ export class Tabs implements OnDestroy, AfterViewInit {
       this.scheduleScrollIntoView(active.index);
 
       const key: string | null =
-        variant === 'material' ? `${variant}:${this.orientation()}:${active.index}` : null;
-      if (variant !== 'material') {
+        variant === SHARED_THEME_VARIANTS.Material
+          ? `${variant}:${this.orientation()}:${active.index}`
+          : null;
+      if (variant !== SHARED_THEME_VARIANTS.Material) {
         this.indicatorKey = null;
         this.cancelIndicatorRaf();
         this.indicatorStyle.set(null);
@@ -579,7 +587,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
   }
 
   private updateIndicator(): void {
-    if (this.effectiveVariant() !== 'material') {
+    if (this.effectiveVariant() !== SHARED_THEME_VARIANTS.Material) {
       this.indicatorStyle.set(null);
       return;
     }

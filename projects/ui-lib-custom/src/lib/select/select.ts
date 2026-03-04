@@ -16,6 +16,7 @@ import type { TemplateRef, InputSignal, WritableSignal, Signal } from '@angular/
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { SHARED_DEFAULTS, SHARED_SIZES } from '../shared/constants';
 
 export type SelectVariant = 'material' | 'bootstrap' | 'minimal';
 export type SelectSize = 'sm' | 'md' | 'lg';
@@ -32,6 +33,9 @@ export interface SelectOption {
 
 let selectIdCounter: number = 0;
 
+/**
+ * Select component with single or multiple selection and optional search.
+ */
 @Component({
   selector: 'ui-lib-select',
   standalone: true,
@@ -65,7 +69,7 @@ let selectIdCounter: number = 0;
 export class UiLibSelect implements ControlValueAccessor {
   public readonly options: InputSignal<SelectOption[]> = input<SelectOption[]>([]);
   public readonly variant: InputSignal<SelectVariant | null> = input<SelectVariant | null>(null);
-  public readonly size: InputSignal<SelectSize> = input<SelectSize>('md');
+  public readonly size: InputSignal<SelectSize> = input<SelectSize>(SHARED_DEFAULTS.Size);
   public readonly multiple: InputSignal<boolean> = input<boolean>(false);
   public readonly searchable: InputSignal<boolean> = input<boolean>(false);
   public readonly placeholder: InputSignal<string> = input<string>('Select...');
@@ -121,9 +125,9 @@ export class UiLibSelect implements ControlValueAccessor {
     (): 'sm' | 'md' | 'lg' => {
       const size: SelectSize = this.size();
       const map: Record<SelectSize, 'sm' | 'md' | 'lg'> = {
-        sm: 'sm',
-        md: 'md',
-        lg: 'lg',
+        [SHARED_SIZES.Sm]: SHARED_SIZES.Sm,
+        [SHARED_SIZES.Md]: SHARED_SIZES.Md,
+        [SHARED_SIZES.Lg]: SHARED_SIZES.Lg,
       };
       return map[size];
     }

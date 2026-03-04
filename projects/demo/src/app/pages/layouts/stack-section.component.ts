@@ -21,6 +21,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo section for stack layout usage.
+ */
 @Component({
   selector: 'app-layout-stack-section',
   standalone: true,
@@ -42,7 +45,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutStackSectionComponent {
+export class StackSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'stack', label: 'Stack' }];
 
   public readonly usageSnippet: string = `

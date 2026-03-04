@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import type { User } from './user';
 
+/**
+ * Storybook page component demonstrating composition with the header.
+ */
 @Component({
   selector: 'storybook-page',
   standalone: true,

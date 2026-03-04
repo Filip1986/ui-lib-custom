@@ -20,6 +20,9 @@ interface ViewportPreset {
   height: number;
 }
 
+/**
+ * Embeds a resizable viewport preview frame for demos.
+ */
 @Component({
   selector: 'app-viewport-preview',
   standalone: true,

@@ -16,12 +16,15 @@ import type {
   OutputEmitterRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Button } from '../button/button';
-import { Card } from '../card/card';
+import { Button } from '../button';
+import { Card } from '../card';
 
 export type LoginFormVariant = 'centered' | 'split' | 'minimal';
 export type SocialProvider = 'google' | 'github' | 'microsoft';
 
+/**
+ * Login form component with optional social login actions.
+ */
 @Component({
   selector: 'ui-lib-login-form',
   standalone: true,

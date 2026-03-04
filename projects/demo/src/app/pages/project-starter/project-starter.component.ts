@@ -19,6 +19,9 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
+/**
+ * Demo page for project starter guidance.
+ */
 @Component({
   selector: 'app-project-starter',
   standalone: true,

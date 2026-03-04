@@ -1,4 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import { SelectButton } from './select-button';
 
 type Story = StoryObj;
@@ -11,8 +16,8 @@ const meta: Meta = {
   tags: ['autodocs'],
   parameters: { a11y: { disable: false } },
   argTypes: {
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     multiple: { control: 'boolean' },
     disabled: { control: 'boolean' },
   },
@@ -34,15 +39,18 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { template: string; props: Record<string, unknown> } => ({
+  render: (): {
+    template: string;
+    props: { options: Option[]; themeVariants: typeof SHARED_THEME_VARIANTS };
+  } => ({
     template: `
       <div style="display:grid; gap:0.75rem;">
-        <ui-lib-select-button variant="material" [options]="options" />
-        <ui-lib-select-button variant="bootstrap" [options]="options" />
-        <ui-lib-select-button variant="minimal" [options]="options" />
+        <ui-lib-select-button [variant]="themeVariants.Material" [options]="options" />
+        <ui-lib-select-button [variant]="themeVariants.Bootstrap" [options]="options" />
+        <ui-lib-select-button [variant]="themeVariants.Minimal" [options]="options" />
       </div>
     `,
-    props: { options },
+    props: { options, themeVariants: SHARED_THEME_VARIANTS },
   }),
 };
 

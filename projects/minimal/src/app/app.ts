@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
 
+/**
+ * Minimal demo app root component.
+ */
 @Component({
   selector: 'app-root',
   standalone: true,

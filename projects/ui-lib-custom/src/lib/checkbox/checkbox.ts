@@ -24,6 +24,9 @@ export type CheckboxSize = 'sm' | 'md' | 'lg';
 
 let checkboxId: number = 0;
 
+/**
+ * Checkbox component with accessible labeling and indeterminate support.
+ */
 @Component({
   selector: 'ui-lib-checkbox',
   standalone: true,

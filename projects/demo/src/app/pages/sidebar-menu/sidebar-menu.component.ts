@@ -11,6 +11,9 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
+/**
+ * Demo page for sidebar menu component usage.
+ */
 @Component({
   selector: 'app-sidebar-menu-demo',
   standalone: true,

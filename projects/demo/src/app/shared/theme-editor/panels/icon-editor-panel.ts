@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { Icon, ThemeConfigService } from 'ui-lib-custom';
 import type { IconLibrary, IconSize, SemanticIcon, ThemeIconConfig } from 'ui-lib-custom';
 
+/**
+ * Theme editor panel for icon library and size configuration.
+ */
 @Component({
   selector: 'ui-lib-icon-editor-panel',
   standalone: true,

@@ -19,21 +19,24 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo page for dark mode theming.
+ */
 @Component({
-  selector: 'app-dark-mode-demo',
+  selector: 'app-dark-mode',
   standalone: true,
   imports: [
     CommonModule,
-    Button,
-    Card,
-    Badge,
     Accordion,
     AccordionPanel,
+    Badge,
+    Button,
+    Card,
+    Checkbox,
     Tabs,
     Tab,
-    UiLibSelect,
     UiLibInput,
-    Checkbox,
+    UiLibSelect,
     DocPageLayoutComponent,
     DocCodeSnippetComponent,
   ],

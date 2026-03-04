@@ -16,6 +16,7 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { SHARED_DEFAULTS } from '../shared/constants';
 
 export type InputVariant = 'material' | 'bootstrap' | 'minimal';
 export type InputLabelFloat = 'over' | 'in' | 'on';
@@ -24,6 +25,9 @@ export type InputSize = 'sm' | 'md' | 'lg';
 
 let inputIdCounter: number = 0;
 
+/**
+ * Text input component with floating labels and validation states.
+ */
 @Component({
   selector: 'ui-lib-input',
   standalone: true,
@@ -44,7 +48,7 @@ export class UiLibInput implements ControlValueAccessor {
   public readonly id: InputSignal<string | null> = input<string | null>(null);
   public readonly name: InputSignal<string | null> = input<string | null>(null);
   public readonly variant: InputSignal<InputVariant | null> = input<InputVariant | null>(null);
-  public readonly size: InputSignal<InputSize> = input<InputSize>('md');
+  public readonly size: InputSignal<InputSize> = input<InputSize>(SHARED_DEFAULTS.Size);
   public readonly type: InputSignal<InputType> = input<InputType>('text');
   public readonly label: InputSignal<string> = input<string>('');
   public readonly labelFloat: InputSignal<InputLabelFloat> = input<InputLabelFloat>('over');

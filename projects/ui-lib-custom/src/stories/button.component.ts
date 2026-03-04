@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 
+/**
+ * Storybook demo button component.
+ */
 @Component({
   selector: 'storybook-button',
   standalone: true,

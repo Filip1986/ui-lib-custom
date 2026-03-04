@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core
 import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+/**
+ * Renders a copyable code snippet block for documentation pages.
+ */
 @Component({
   selector: 'app-doc-code-snippet',
   standalone: true,

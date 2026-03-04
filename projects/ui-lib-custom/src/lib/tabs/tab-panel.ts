@@ -9,6 +9,9 @@ import {
 } from '@angular/core';
 import type { InputSignal, Signal } from '@angular/core';
 
+/**
+ * Tab panel content container tied to a tab trigger.
+ */
 @Component({
   selector: 'ui-lib-tab-panel',
   standalone: true,

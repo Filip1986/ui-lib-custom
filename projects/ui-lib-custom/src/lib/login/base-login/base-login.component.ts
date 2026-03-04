@@ -1,6 +1,6 @@
 import type { OnInit, InputSignal, WritableSignal, OutputEmitterRef } from '@angular/core';
 import type { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
-import type { LoginFeatures, LoginFormData, LoginSocialProvider } from '../models/login-contract';
+import type { LoginFeatures, LoginFormData, LoginSocialProvider } from 'ui-lib-custom';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -28,6 +28,9 @@ interface LoginFormControls {
 
 const requiredValidator: ValidatorFn = Validators.required;
 
+/**
+ * Shared base class for login variants, providing form logic and events.
+ */
 @Component({
   selector: 'lib-base-login',
   standalone: true,

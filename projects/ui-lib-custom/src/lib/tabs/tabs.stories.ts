@@ -1,4 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
 import type { TabsAlignment, TabsOrientation, TabsSize, TabsVariant } from './tabs.types';
@@ -18,8 +24,8 @@ const meta: Meta<TabsStoryArgs> = {
   tags: ['autodocs'],
   parameters: { a11y: { disable: false } },
   argTypes: {
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     align: { control: 'select', options: ['start', 'center', 'end', 'stretch'] },
     orientation: { control: 'select', options: ['horizontal', 'vertical'] },
   },
@@ -49,26 +55,31 @@ export const Default: Story = {
   render: renderTabs,
   args: {
     variant: null,
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     align: 'start',
     orientation: 'horizontal',
   },
 };
 
 export const Variants: Story = {
-  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+  render: (): {
+    template: string;
+    moduleMetadata: { imports: unknown[] };
+    props: { themeVariants: typeof SHARED_THEME_VARIANTS };
+  } => ({
     moduleMetadata: { imports: [Tabs, Tab] },
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:grid; gap:1rem;">
-        <ui-lib-tabs variant="material">
+        <ui-lib-tabs [variant]="themeVariants.Material">
           <ui-lib-tab label="Material">Material tabs</ui-lib-tab>
           <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
         </ui-lib-tabs>
-        <ui-lib-tabs variant="bootstrap">
+        <ui-lib-tabs [variant]="themeVariants.Bootstrap">
           <ui-lib-tab label="Bootstrap">Bootstrap tabs</ui-lib-tab>
           <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
         </ui-lib-tabs>
-        <ui-lib-tabs variant="minimal">
+        <ui-lib-tabs [variant]="themeVariants.Minimal">
           <ui-lib-tab label="Minimal">Minimal tabs</ui-lib-tab>
           <ui-lib-tab label="Tab 2">Tab 2</ui-lib-tab>
         </ui-lib-tabs>

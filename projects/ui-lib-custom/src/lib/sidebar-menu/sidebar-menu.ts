@@ -22,6 +22,9 @@ export interface SidebarMenuItem {
 
 export type SidebarVariant = 'classic' | 'compact' | 'modern';
 
+/**
+ * Sidebar navigation menu with collapsible groups and variants.
+ */
 @Component({
   selector: 'ui-lib-sidebar-menu',
   standalone: true,

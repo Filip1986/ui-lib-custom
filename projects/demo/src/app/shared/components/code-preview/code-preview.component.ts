@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, computed, input, signal } from '@an
 import type { InputSignal, Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+/**
+ * Shared demo component for rendering code previews.
+ */
 @Component({
   selector: 'app-code-preview',
   standalone: true,

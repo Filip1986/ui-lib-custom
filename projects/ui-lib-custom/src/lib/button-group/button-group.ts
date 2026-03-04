@@ -9,6 +9,9 @@ import {
 } from '@angular/core';
 import type { ButtonVariant, ButtonSize } from '../button';
 
+/**
+ * Groups buttons with shared sizing and variant styling.
+ */
 @Component({
   selector: 'ui-lib-button-group',
   standalone: true,

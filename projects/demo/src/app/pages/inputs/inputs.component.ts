@@ -32,21 +32,24 @@ type TabKey =
 
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 
+/**
+ * Demo page for input variants and states.
+ */
 @Component({
   selector: 'app-inputs',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     UiLibInput,
     Button,
+    Card,
     Tabs,
     Tab,
     DocPageLayoutComponent,
+    DocCodeSnippetComponent,
     DocDemoViewportComponent,
     ThemeScopeDirective,
-    Card,
-    DocCodeSnippetComponent,
+    FormsModule,
     CodePreviewComponent,
     VariantComparisonComponent,
   ],

@@ -12,7 +12,8 @@ import { lucideAudioWaveform } from '@ng-icons/lucide';
 import { By } from '@angular/platform-browser';
 
 import { Button } from './button';
-import type { ButtonColor, ButtonSize, ButtonVariant } from './button';
+import type { ButtonColor, ButtonVariant, ButtonSize } from './button';
+import { SHARED_VARIANT_OPTIONS } from '../shared/constants';
 import { Icon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -285,7 +286,7 @@ describe('Button', (): void => {
   });
 
   it('applies each variant class', (): void => {
-    const variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
+    const variants: ButtonVariant[] = [...SHARED_VARIANT_OPTIONS];
 
     variants.forEach((variant: ButtonVariant): void => {
       fixture.componentRef.setInput('variant', variant);

@@ -25,6 +25,7 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { Button } from 'ui-lib-custom/button';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { SHARED_DEFAULTS, SHARED_SIZES, SHARED_THEME_VARIANTS } from '../shared/constants';
 import type {
   SelectButtonChangeEvent,
   SelectButtonItemContext,
@@ -34,6 +35,9 @@ import type {
   SelectButtonVariant,
 } from './select-button.types';
 
+/**
+ * Segmented select component that supports single or multiple selection modes.
+ */
 @Component({
   selector: 'ui-lib-select-button',
   standalone: true,
@@ -51,9 +55,9 @@ import type {
   ],
   host: {
     class: 'ui-lib-select-button',
-    '[class.ui-lib-select-button--material]': "effectiveVariant() === 'material'",
-    '[class.ui-lib-select-button--bootstrap]': "effectiveVariant() === 'bootstrap'",
-    '[class.ui-lib-select-button--minimal]': "effectiveVariant() === 'minimal'",
+    '[class.ui-lib-select-button--material]': 'effectiveVariant() === themeVariants.Material',
+    '[class.ui-lib-select-button--bootstrap]': 'effectiveVariant() === themeVariants.Bootstrap',
+    '[class.ui-lib-select-button--minimal]': 'effectiveVariant() === themeVariants.Minimal',
     '[class.ui-lib-select-button--small]': "normalizedSize() === 'small'",
     '[class.ui-lib-select-button--medium]': "normalizedSize() === 'medium'",
     '[class.ui-lib-select-button--large]': "normalizedSize() === 'large'",
@@ -71,6 +75,8 @@ export class SelectButton implements ControlValueAccessor {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  protected readonly themeVariants: typeof SHARED_THEME_VARIANTS = SHARED_THEME_VARIANTS;
+
   public readonly options: InputSignal<SelectButtonOption[]> = input<SelectButtonOption[]>([]);
   public readonly variant: InputSignal<SelectButtonVariant | null> =
     input<SelectButtonVariant | null>(null);
@@ -84,7 +90,9 @@ export class SelectButton implements ControlValueAccessor {
   public readonly multiple: InputSignal<boolean> = input<boolean>(false);
   public readonly allowEmpty: InputSignal<boolean> = input<boolean>(false);
 
-  public readonly size: InputSignal<SelectButtonSize> = input<SelectButtonSize>('md');
+  public readonly size: InputSignal<SelectButtonSize> = input<SelectButtonSize>(
+    SHARED_DEFAULTS.Size
+  );
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
@@ -114,9 +122,9 @@ export class SelectButton implements ControlValueAccessor {
   >((): 'small' | 'medium' | 'large' => {
     const size: SelectButtonSize = this.size();
     const map: Record<SelectButtonSize, 'small' | 'medium' | 'large'> = {
-      sm: 'small',
-      md: 'medium',
-      lg: 'large',
+      [SHARED_SIZES.Sm]: 'small',
+      [SHARED_SIZES.Md]: 'medium',
+      [SHARED_SIZES.Lg]: 'large',
       small: 'small',
       medium: 'medium',
       large: 'large',

@@ -1,33 +1,38 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { Icon, IconButton, Alert, Button, SEMANTIC_ICONS, Tabs, Tab, Card } from 'ui-lib-custom';
+import { Icon, IconButton, Alert, Button, Card, SEMANTIC_ICONS, Tabs, Tab } from 'ui-lib-custom';
 import type { IconSize, SemanticIcon, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { FormsModule } from '@angular/forms';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
 
+/**
+ * Demo page for icon libraries and semantic icons.
+ */
 @Component({
   selector: 'app-icons-demo',
   standalone: true,
   imports: [
     CommonModule,
-    Tabs,
-    Tab,
-    Card,
+    TitleCasePipe,
     Icon,
     IconButton,
-    Button,
     Alert,
-    TitleCasePipe,
+    Button,
+    Card,
+    Tabs,
+    Tab,
     DocPageLayoutComponent,
-    DocDemoViewportComponent,
     DocCodeSnippetComponent,
+    DocDemoViewportComponent,
     CodePreviewComponent,
+    FormsModule,
   ],
   templateUrl: './icons-demo.component.html',
   styleUrl: './icons-demo.component.scss',

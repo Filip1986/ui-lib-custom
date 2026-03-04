@@ -1,4 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import { Accordion } from './accordion';
 import { AccordionPanel, AccordionHeader } from 'ui-lib-custom';
 import type { AccordionVariant, AccordionSize, AccordionExpandMode } from 'ui-lib-custom';
@@ -17,8 +23,8 @@ const meta: Meta<AccordionStoryArgs> = {
   tags: ['autodocs'],
   parameters: { a11y: { disable: false } },
   argTypes: {
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     expandMode: { control: 'select', options: ['single', 'multiple'] },
   },
 };
@@ -47,23 +53,28 @@ export const Default: Story = {
   render: renderAccordion,
   args: {
     variant: null,
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     expandMode: 'single',
   },
 };
 
 export const Variants: Story = {
-  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+  render: (): {
+    template: string;
+    moduleMetadata: { imports: unknown[] };
+    props: { themeVariants: typeof SHARED_THEME_VARIANTS };
+  } => ({
     moduleMetadata: { imports: [Accordion, AccordionPanel] },
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:grid; gap:1rem;">
-        <ui-lib-accordion variant="material">
+        <ui-lib-accordion [variant]="themeVariants.Material">
           <ui-lib-accordion-panel header="Material">Material content</ui-lib-accordion-panel>
         </ui-lib-accordion>
-        <ui-lib-accordion variant="bootstrap">
+        <ui-lib-accordion [variant]="themeVariants.Bootstrap">
           <ui-lib-accordion-panel header="Bootstrap">Bootstrap content</ui-lib-accordion-panel>
         </ui-lib-accordion>
-        <ui-lib-accordion variant="minimal">
+        <ui-lib-accordion [variant]="themeVariants.Minimal">
           <ui-lib-accordion-panel header="Minimal">Minimal content</ui-lib-accordion-panel>
         </ui-lib-accordion>
       </div>

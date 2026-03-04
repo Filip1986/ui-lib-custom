@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { SHARED_DEFAULTS, SHARED_SIZE_OPTIONS } from '../shared/constants';
 import { Badge } from './badge';
 
 type Story = StoryObj;
@@ -15,7 +16,7 @@ const meta: Meta = {
       control: 'select',
       options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'neutral'],
     },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     variant: { control: 'select', options: ['solid', 'outline'] },
     pill: { control: 'boolean' },
   },
@@ -80,7 +81,7 @@ type BadgeStoryArgs = {
 export const FullApi: Story = {
   args: {
     color: 'info',
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     variant: 'solid',
     pill: true,
   },

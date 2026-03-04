@@ -3,6 +3,9 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+/**
+ * Shared demo component for comparing variants side by side.
+ */
 @Component({
   selector: 'app-variant-comparison',
   standalone: true,

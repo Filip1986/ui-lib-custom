@@ -1,4 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import { IconButton } from './icon-button';
 
 type Story = StoryObj;
@@ -10,8 +16,8 @@ const meta: Meta = {
   parameters: { a11y: { disable: false } },
   argTypes: {
     icon: { control: 'text' },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
     disabled: { control: 'boolean' },
   },
 };
@@ -19,16 +25,17 @@ const meta: Meta = {
 export default meta;
 
 export const Default: Story = {
-  args: { icon: 'plus' },
+  args: { icon: 'plus', size: SHARED_DEFAULTS.Size },
 };
 
 export const Variants: Story = {
-  render: (): { template: string } => ({
+  render: (): { template: string; props: { themeVariants: typeof SHARED_THEME_VARIANTS } } => ({
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:flex; gap:0.75rem;">
-        <ui-lib-icon-button icon="plus" variant="material" />
-        <ui-lib-icon-button icon="plus" variant="bootstrap" />
-        <ui-lib-icon-button icon="plus" variant="minimal" />
+        <ui-lib-icon-button icon="plus" [variant]="themeVariants.Material" />
+        <ui-lib-icon-button icon="plus" [variant]="themeVariants.Bootstrap" />
+        <ui-lib-icon-button icon="plus" [variant]="themeVariants.Minimal" />
       </div>
     `,
   }),

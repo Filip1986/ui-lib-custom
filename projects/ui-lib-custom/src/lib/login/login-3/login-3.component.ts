@@ -3,14 +3,17 @@ import type { InputSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BaseLoginComponent } from '../base-login/base-login.component';
-import { Container } from '../../layout/container';
-import { Stack } from '../../layout/stack';
-import { Grid } from '../../layout/grid';
-import { Inline } from '../../layout/inline';
-import { Card } from '../../card/card';
-import { Button } from '../../button/button';
-import { UiLibInput } from '../../input/input';
+import { Container } from '../../layout';
+import { Stack } from '../../layout';
+import { Grid } from '../../layout';
+import { Inline } from '../../layout';
+import { Card } from '../../card';
+import { Button } from '../../button';
+import { UiLibInput } from '../../input';
 
+/**
+ * Login layout variant 3.
+ */
 @Component({
   selector: 'lib-login-3',
   standalone: true,

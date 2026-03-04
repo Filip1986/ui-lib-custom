@@ -8,17 +8,16 @@ import {
   ViewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Card, ThemeConfigService, Button, SHADOWS, Tabs, Tab } from 'ui-lib-custom';
 import type { CardVariant, CardElevation, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
-import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { FormsModule } from '@angular/forms';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 
 type ShadowKey = string;
 const SHADOW_MAP: Record<string, string> = SHADOWS as Record<string, string>;
@@ -33,22 +32,24 @@ type TabKey =
 
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 
+/**
+ * Demo page for card variants and theming.
+ */
 @Component({
   selector: 'app-cards',
   standalone: true,
   imports: [
-    CommonModule,
     Card,
+    Button,
     Tabs,
     Tab,
-    Button,
     DocPageLayoutComponent,
-    DocDemoViewportComponent,
-    ThemeScopeDirective,
-    FormsModule,
     DocCodeSnippetComponent,
+    DocDemoViewportComponent,
+    FormsModule,
     CodePreviewComponent,
     VariantComparisonComponent,
+    ThemeScopeDirective,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',

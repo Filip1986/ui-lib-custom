@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Button } from './button';
 import type { ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant } from './button';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 
 type ButtonStoryArgs = {
   label: string;
@@ -24,8 +30,8 @@ const meta: Meta<ButtonStoryArgs> = {
   },
   argTypes: {
     label: { control: 'text' },
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     color: {
       control: 'select',
       options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info'],
@@ -64,7 +70,7 @@ export const Default: Story = {
   args: {
     label: 'Button',
     variant: null,
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     color: 'primary',
     appearance: 'solid',
     disabled: false,
@@ -73,12 +79,13 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { template: string } => ({
+  render: (): { template: string; props: { themeVariants: typeof SHARED_THEME_VARIANTS } } => ({
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-        <ui-lib-button variant="material">Material</ui-lib-button>
-        <ui-lib-button variant="bootstrap">Bootstrap</ui-lib-button>
-        <ui-lib-button variant="minimal">Minimal</ui-lib-button>
+        <ui-lib-button [variant]="themeVariants.Material">Material</ui-lib-button>
+        <ui-lib-button [variant]="themeVariants.Bootstrap">Bootstrap</ui-lib-button>
+        <ui-lib-button [variant]="themeVariants.Minimal">Minimal</ui-lib-button>
       </div>
     `,
   }),
@@ -114,7 +121,7 @@ export const DarkMode: Story = {
   args: {
     label: 'Dark mode',
     variant: 'material',
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     color: 'primary',
     appearance: 'solid',
   },

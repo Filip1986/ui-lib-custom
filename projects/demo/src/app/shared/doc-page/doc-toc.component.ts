@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { CommonModule } from '@angular/common';
 import type { DocSection } from './doc-section.model';
 
+/**
+ * Table of contents component for documentation sections.
+ */
 @Component({
   selector: 'app-doc-toc',
   standalone: true,

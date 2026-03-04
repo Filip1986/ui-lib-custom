@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from '../shared/constants';
 import { Card } from './card';
 import { Button } from '../button/button';
 
@@ -22,7 +23,7 @@ const meta: Meta = {
   tags: ['autodocs'],
   parameters: { a11y: { disable: false } },
   argTypes: {
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
     elevation: { control: 'select', options: ['none', 'low', 'medium', 'high'] },
     bordered: { control: 'boolean' },
     hoverable: { control: 'boolean' },
@@ -83,13 +84,27 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+  render: (): {
+    template: string;
+    moduleMetadata: { imports: unknown[] };
+    props: { themeVariants: typeof SHARED_THEME_VARIANTS };
+  } => ({
     moduleMetadata: { imports: [Card] },
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:grid; gap:1rem; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));">
-        <ui-lib-card variant="material"><div card-header>Material</div>Material content</ui-lib-card>
-        <ui-lib-card variant="bootstrap"><div card-header>Bootstrap</div>Bootstrap content</ui-lib-card>
-        <ui-lib-card variant="minimal"><div card-header>Minimal</div>Minimal content</ui-lib-card>
+        <ui-lib-card [variant]="themeVariants.Material">
+          <div card-header>Material</div>
+          Material content
+        </ui-lib-card>
+        <ui-lib-card [variant]="themeVariants.Bootstrap">
+          <div card-header>Bootstrap</div>
+          Bootstrap content
+        </ui-lib-card>
+        <ui-lib-card [variant]="themeVariants.Minimal">
+          <div card-header>Minimal</div>
+          Minimal content
+        </ui-lib-card>
       </div>
     `,
   }),

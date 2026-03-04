@@ -26,6 +26,9 @@ import type {
 export type CardVariant = 'material' | 'bootstrap' | 'minimal';
 export type CardElevation = 'none' | 'low' | 'medium' | 'high';
 
+/**
+ * Card container component with optional header, footer, and theme scope.
+ */
 @Component({
   selector: 'ui-lib-card',
   standalone: true,

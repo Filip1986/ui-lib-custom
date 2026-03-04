@@ -7,6 +7,9 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemeMode, ThemeVariant } from 'ui-lib-custom/theme';
 import type { ShapeToken, DensityToken } from 'ui-lib-custom/tokens';
 
+/**
+ * Demo topbar with theme toggles and navigation actions.
+ */
 @Component({
   selector: 'app-topbar',
   standalone: true,

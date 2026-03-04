@@ -1,13 +1,16 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Button, Card, Badge } from 'ui-lib-custom';
-import { RouterLink } from '@angular/router';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
+/**
+ * Demo home page entry for the component library.
+ */
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, Button, Card, Badge, RouterLink, DocPageLayoutComponent],
+  standalone: true,
+  imports: [CommonModule, Card, Button, Badge, DocPageLayoutComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

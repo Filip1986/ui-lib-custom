@@ -12,6 +12,9 @@ export interface NavItem {
   expanded?: boolean;
 }
 
+/**
+ * Demo sidebar navigation for page links.
+ */
 @Component({
   selector: 'app-sidebar',
   standalone: true,

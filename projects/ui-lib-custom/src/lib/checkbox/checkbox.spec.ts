@@ -4,6 +4,7 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { Checkbox } from './checkbox';
+import { SHARED_SIZE_OPTIONS, SHARED_VARIANT_OPTIONS } from '../shared/constants';
 import type { CheckboxSize, CheckboxVariant } from './checkbox';
 
 @Component({
@@ -117,7 +118,7 @@ describe('Checkbox', (): void => {
   });
 
   it('applies each variant class', (): void => {
-    const variants: CheckboxVariant[] = ['material', 'bootstrap', 'minimal'];
+    const variants: CheckboxVariant[] = [...SHARED_VARIANT_OPTIONS];
 
     variants.forEach((variant: CheckboxVariant): void => {
       fixture.componentInstance.variant.set(variant);
@@ -128,7 +129,7 @@ describe('Checkbox', (): void => {
   });
 
   it('applies each size class', (): void => {
-    const sizes: CheckboxSize[] = ['sm', 'md', 'lg'];
+    const sizes: CheckboxSize[] = [...SHARED_SIZE_OPTIONS];
 
     sizes.forEach((size: CheckboxSize): void => {
       fixture.componentInstance.size.set(size);

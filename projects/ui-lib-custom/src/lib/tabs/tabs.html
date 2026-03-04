@@ -61,7 +61,7 @@
     </div>
   }
 
-  @if (effectiveVariant() === 'material' && indicatorStyles()) {
+  @if (effectiveVariant() === themeVariants.Material && indicatorStyles()) {
     <span
       class="tab-indicator"
       [style.transform]="indicatorStyles()?.transform"

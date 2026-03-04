@@ -1,4 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import { UiLibInput } from './input';
 import type { InputSize, InputVariant } from './input';
 
@@ -24,8 +30,8 @@ const meta: Meta<InputStoryArgs> = {
   argTypes: {
     label: { control: 'text' },
     placeholder: { control: 'text' },
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
     error: { control: 'text' },
@@ -58,7 +64,7 @@ export const Default: Story = {
     label: 'Label',
     placeholder: 'Enter value',
     variant: null,
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     disabled: false,
     required: false,
     error: null,
@@ -66,12 +72,13 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { template: string } => ({
+  render: (): { template: string; props: { themeVariants: typeof SHARED_THEME_VARIANTS } } => ({
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:grid; gap:0.75rem;">
-        <ui-lib-input label="Material" variant="material" placeholder="Material" />
-        <ui-lib-input label="Bootstrap" variant="bootstrap" placeholder="Bootstrap" />
-        <ui-lib-input label="Minimal" variant="minimal" placeholder="Minimal" />
+        <ui-lib-input label="Material" [variant]="themeVariants.Material" placeholder="Material" />
+        <ui-lib-input label="Bootstrap" [variant]="themeVariants.Bootstrap" placeholder="Bootstrap" />
+        <ui-lib-input label="Minimal" [variant]="themeVariants.Minimal" placeholder="Minimal" />
       </div>
     `,
   }),

@@ -25,6 +25,7 @@ import type {
   ThemeVariant,
   ThemePresetShape,
 } from './theme-preset.interface';
+import { SHARED_DEFAULTS } from '../shared/constants';
 import { saveAs } from './utils/file-download';
 import { exportThemeAsScss, type ScssExportOptions } from './exporters/scss-exporter';
 import { exportThemeAsCss, type CssExportOptions } from './exporters/css-exporter';
@@ -38,6 +39,9 @@ type LoadOptions = {
   base?: ThemePreset | null;
 };
 
+/**
+ * Central service for theme presets, variants, and CSS variable management.
+ */
 @Injectable({ providedIn: 'root' })
 export class ThemeConfigService {
   private readonly doc: Document = inject(DOCUMENT);
@@ -65,7 +69,9 @@ export class ThemeConfigService {
     this.listSavedThemeNames()
   );
   private readonly modeSignal: WritableSignal<ThemeMode> = signal<ThemeMode>('auto');
-  private readonly variantSignal: WritableSignal<ThemeVariant> = signal<ThemeVariant>('material');
+  private readonly variantSignal: WritableSignal<ThemeVariant> = signal<ThemeVariant>(
+    SHARED_DEFAULTS.Variant
+  );
   private readonly shapeSignal: WritableSignal<ShapeToken> = signal<ShapeToken>('rounded');
   private readonly densitySignal: WritableSignal<DensityToken> = signal<DensityToken>('default');
   private mediaQuery: MediaQueryList | null = null;

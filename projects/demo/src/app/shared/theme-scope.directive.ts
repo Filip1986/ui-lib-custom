@@ -1,6 +1,9 @@
 import { Directive, ElementRef, Input, Renderer2, inject } from '@angular/core';
 import type { OnChanges, SimpleChanges } from '@angular/core';
 
+/**
+ * Applies CSS variables to a subtree for demo theme scoping.
+ */
 @Directive({
   selector: '[appThemeScope]',
   standalone: true,

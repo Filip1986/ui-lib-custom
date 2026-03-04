@@ -21,6 +21,9 @@ export interface ThemeScopeConfig {
 
 export type ThemeScopeInput = ThemeScopeConfig | 'light' | 'dark' | null;
 
+/**
+ * Applies scoped theme variables and attributes to a subtree.
+ */
 @Directive({
   selector: '[uiLibTheme]',
   standalone: true,

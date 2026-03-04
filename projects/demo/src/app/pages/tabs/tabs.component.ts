@@ -59,6 +59,9 @@ interface NavTabItem {
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'usage' | 'accessibility';
 type PerTabLazyOption = TabsLazyMode | 'inherit';
 
+/**
+ * Demo page for tabs component usage.
+ */
 @Component({
   selector: 'app-tabs-demo',
   standalone: true,
@@ -85,7 +88,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   styleUrl: './tabs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsDemoComponent {
+export class TabsComponent {
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },

@@ -14,9 +14,12 @@ import type {
   WritableSignal,
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Container } from '../../../../../ui-lib-custom/src/public-api';
+import { Container } from 'ui-lib-custom';
 import type { DocSection } from './doc-section.model';
 
+/**
+ * Layout wrapper for documentation pages with TOC tracking.
+ */
 @Component({
   selector: 'app-doc-page-layout',
   standalone: true,

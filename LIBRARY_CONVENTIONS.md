@@ -295,3 +295,29 @@ All CSS custom properties MUST follow this pattern:
 - Prefer `//` for inline explanations
 - Use `/** */` JSDoc for all exported symbols
 - Reference related specs or issues for workarounds: `// See: https://...`
+
+### Constants & Enums
+
+- **Never use TypeScript `enum`**. Prefer `as const` objects — they have no runtime overhead,
+  tree-shake cleanly, and compose naturally with string union types.
+```typescript
+  // ❌ Avoid
+  enum ButtonSize { Sm = 'sm', Md = 'md', Lg = 'lg' }
+
+  // ✅ Prefer
+  export const BUTTON_SIZES = { Sm: 'sm', Md: 'md', Lg: 'lg' } as const;
+  export type ButtonSize = typeof BUTTON_SIZES[keyof typeof BUTTON_SIZES];
+```
+
+- **Public input types stay as string unions** (`type InputVariant = 'material' | 'bootstrap' | 'minimal'`).
+  Do not replace these with enums or const objects — string unions are more ergonomic for consumers.
+
+- **Extract repeated internal strings to a co-located constants file** (`[component].constants.ts`)
+  when a literal appears 2 or more times within the same component. This applies to CSS class names,
+  ARIA attribute strings, and default value strings used in logic.
+
+- **Shared cross-component constants** belong in `src/lib/shared/constants.ts`. Only move a
+  constant there if it is used in 3 or more components. Avoid over-centralizing component-specific values.
+
+- Do not export component-internal constants from secondary entry points unless they are
+  explicitly part of the public API contract.

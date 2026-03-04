@@ -1,4 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import { ButtonGroup } from './button-group';
 import { Button } from '../button/button';
 
@@ -10,9 +15,9 @@ const meta: Meta = {
   tags: ['autodocs'],
   parameters: { a11y: { disable: false } },
   argTypes: {
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
     vertical: { control: 'boolean' },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
   },
 };
 
@@ -32,24 +37,29 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
+  render: (): {
+    template: string;
+    moduleMetadata: { imports: unknown[] };
+    props: { themeVariants: typeof SHARED_THEME_VARIANTS };
+  } => ({
     template: `
       <div style="display:grid; gap:1rem;">
-        <ui-lib-button-group variant="material">
+        <ui-lib-button-group [variant]="themeVariants.Material">
           <ui-lib-button>Material</ui-lib-button>
           <ui-lib-button>Group</ui-lib-button>
         </ui-lib-button-group>
-        <ui-lib-button-group variant="bootstrap">
+        <ui-lib-button-group [variant]="themeVariants.Bootstrap">
           <ui-lib-button>Bootstrap</ui-lib-button>
           <ui-lib-button>Group</ui-lib-button>
         </ui-lib-button-group>
-        <ui-lib-button-group variant="minimal">
+        <ui-lib-button-group [variant]="themeVariants.Minimal">
           <ui-lib-button>Minimal</ui-lib-button>
           <ui-lib-button>Group</ui-lib-button>
         </ui-lib-button-group>
       </div>
     `,
     moduleMetadata: { imports: [ButtonGroup, Button] },
+    props: { themeVariants: SHARED_THEME_VARIANTS },
   }),
 };
 

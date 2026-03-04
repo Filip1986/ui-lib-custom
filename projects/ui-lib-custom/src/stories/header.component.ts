@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button.component';
 import type { User } from './user';
 
+/**
+ * Storybook header component showcasing auth actions.
+ */
 @Component({
   selector: 'storybook-header',
   standalone: true,

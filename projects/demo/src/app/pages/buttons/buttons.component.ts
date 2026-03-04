@@ -47,8 +47,12 @@ type TabKey =
   | 'performance'
   | 'examples'
   | 'accessibility';
+
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 
+/**
+ * Demo page for button variants and APIs.
+ */
 @Component({
   selector: 'app-buttons',
   imports: [

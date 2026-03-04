@@ -1,4 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import type { SelectOption, SelectVariant, SelectSize } from './select';
 import { UiLibSelect } from './select';
 
@@ -31,8 +37,8 @@ const meta: Meta<SelectStoryArgs> = {
   argTypes: {
     label: { control: 'text' },
     placeholder: { control: 'text' },
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
     invalid: { control: 'boolean' },
@@ -74,7 +80,7 @@ export const Default: Story = {
     label: 'Role',
     placeholder: 'Select role',
     variant: null,
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     disabled: false,
     required: false,
     invalid: false,
@@ -85,13 +91,31 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { props: { options: SelectOption[] }; template: string } => ({
-    props: { options },
+  render: (): {
+    props: { options: SelectOption[]; themeVariants: typeof SHARED_THEME_VARIANTS };
+    template: string;
+  } => ({
+    props: { options, themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:grid; gap:0.75rem;">
-        <ui-lib-select label="Material" variant="material" placeholder="Material" [options]="options" />
-        <ui-lib-select label="Bootstrap" variant="bootstrap" placeholder="Bootstrap" [options]="options" />
-        <ui-lib-select label="Minimal" variant="minimal" placeholder="Minimal" [options]="options" />
+        <ui-lib-select
+          label="Material"
+          [variant]="themeVariants.Material"
+          placeholder="Material"
+          [options]="options"
+        />
+        <ui-lib-select
+          label="Bootstrap"
+          [variant]="themeVariants.Bootstrap"
+          placeholder="Bootstrap"
+          [options]="options"
+        />
+        <ui-lib-select
+          label="Minimal"
+          [variant]="themeVariants.Minimal"
+          placeholder="Minimal"
+          [options]="options"
+        />
       </div>
     `,
   }),

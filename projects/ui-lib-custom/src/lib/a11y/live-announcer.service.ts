@@ -4,6 +4,9 @@ import { isPlatformBrowser } from '@angular/common';
 
 export type AriaLivePoliteness = 'polite' | 'assertive' | 'off';
 
+/**
+ * Announces ARIA live messages for accessibility.
+ */
 @Injectable({ providedIn: 'root' })
 export class LiveAnnouncerService implements OnDestroy {
   private readonly platformId: object = inject(PLATFORM_ID);

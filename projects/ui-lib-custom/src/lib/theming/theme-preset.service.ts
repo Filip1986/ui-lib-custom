@@ -4,7 +4,9 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { ThemeConfigService } from './theme-config.service';
 import type { ThemePreset, ThemePresetColors, ThemePresetFonts } from './theme-preset.interface';
 import { saveAs } from './utils/file-download';
-
+/**
+ * Manages saved theme presets and applies them to the document.
+ */
 @Injectable({ providedIn: 'root' })
 export class ThemePresetService {
   private readonly storageKey: string = 'uilib_presets';

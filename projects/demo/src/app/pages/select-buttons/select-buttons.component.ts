@@ -14,6 +14,9 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 
+/**
+ * Demo page for select button variants.
+ */
 @Component({
   selector: 'app-select-buttons',
   standalone: true,

@@ -33,6 +33,9 @@ interface ColorOption {
   cssVar: string;
 }
 
+/**
+ * Theme editor panel for runtime theme customization in the demo app.
+ */
 @Component({
   selector: 'app-theme-editor',
   standalone: true,

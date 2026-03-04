@@ -8,6 +8,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
+/**
+ * Demo section with layout examples.
+ */
 @Component({
   selector: 'app-layout-examples-section',
   standalone: true,

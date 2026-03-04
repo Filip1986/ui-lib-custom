@@ -15,6 +15,9 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo page for scoped theming examples.
+ */
 @Component({
   selector: 'app-scoped-theming-demo',
   standalone: true,

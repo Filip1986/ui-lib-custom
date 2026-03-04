@@ -34,6 +34,9 @@ interface AccordionPanelContext {
   expanded: boolean;
 }
 
+/**
+ * Accordion container managing panel expansion state.
+ */
 @Component({
   selector: 'ui-lib-accordion',
   standalone: true,

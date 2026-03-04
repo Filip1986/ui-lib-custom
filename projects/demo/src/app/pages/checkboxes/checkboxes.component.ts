@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Button, Card, Checkbox, Tabs, Tab } from 'ui-lib-custom';
+import { Checkbox, Tabs, Tab, Card, Button } from 'ui-lib-custom';
 import type { CheckboxSize, CheckboxVariant, TabsValue } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -14,19 +13,21 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 
+/**
+ * Demo page for checkbox variants and behavior.
+ */
 @Component({
   selector: 'app-checkboxes',
   standalone: true,
   imports: [
-    CommonModule,
     Checkbox,
-    Button,
     Tabs,
     Tab,
     Card,
+    Button,
     DocPageLayoutComponent,
-    DocDemoViewportComponent,
     DocCodeSnippetComponent,
+    DocDemoViewportComponent,
     FormsModule,
     CodePreviewComponent,
     VariantComparisonComponent,

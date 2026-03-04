@@ -8,6 +8,9 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemeVariant } from 'ui-lib-custom/theme';
 import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
 
+/**
+ * Demo app shell that wires layout and theme controls.
+ */
 @Component({
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, TopbarComponent, SidebarComponent, ThemeEditorComponent],

@@ -33,6 +33,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo section for layout composition patterns.
+ */
 @Component({
   selector: 'app-layout-composition-section',
   standalone: true,

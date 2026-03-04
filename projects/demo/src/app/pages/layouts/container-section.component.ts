@@ -20,6 +20,9 @@ import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.co
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 
+/**
+ * Demo section for container layout usage.
+ */
 @Component({
   selector: 'app-layout-container-section',
   standalone: true,
@@ -42,7 +45,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutContainerSectionComponent {
+export class ContainerSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'container', label: 'Container' }];
 
   public readonly usageSnippet: string = `

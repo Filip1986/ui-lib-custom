@@ -18,6 +18,9 @@ import { Login3Component } from 'ui-lib-custom';
 import { Login2Component } from 'ui-lib-custom';
 import type { InputSignal, OutputEmitterRef } from '@angular/core';
 
+/**
+ * Chooses and renders the configured login layout variant.
+ */
 @Component({
   selector: 'lib-login-factory',
   standalone: true,

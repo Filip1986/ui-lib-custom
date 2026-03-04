@@ -1,5 +1,8 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
+/**
+ * Root placeholder component for the library package.
+ */
 @Component({
   selector: 'ui-lib-ui-lib-custom',
   imports: [],

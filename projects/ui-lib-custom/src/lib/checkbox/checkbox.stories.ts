@@ -1,4 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import {
+  SHARED_DEFAULTS,
+  SHARED_SIZE_OPTIONS,
+  SHARED_THEME_VARIANTS,
+  SHARED_VARIANT_OPTIONS,
+} from '../shared/constants';
 import { Checkbox } from './checkbox';
 import type { CheckboxSize, CheckboxVariant } from './checkbox';
 
@@ -22,8 +28,8 @@ const meta: Meta<CheckboxStoryArgs> = {
   argTypes: {
     label: { control: 'text' },
     description: { control: 'text' },
-    variant: { control: 'select', options: ['material', 'bootstrap', 'minimal'] },
-    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
+    size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     disabled: { control: 'boolean' },
     indeterminate: { control: 'boolean' },
     checked: { control: 'boolean' },
@@ -58,7 +64,7 @@ export const Default: Story = {
     label: 'I agree to terms',
     description: 'Optional helper text',
     variant: null,
-    size: 'md',
+    size: SHARED_DEFAULTS.Size,
     disabled: false,
     indeterminate: false,
     checked: false,
@@ -66,12 +72,13 @@ export const Default: Story = {
 };
 
 export const Variants: Story = {
-  render: (): { template: string } => ({
+  render: (): { template: string; props: { themeVariants: typeof SHARED_THEME_VARIANTS } } => ({
+    props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:grid; gap:0.75rem;">
-        <ui-lib-checkbox label="Material" variant="material" />
-        <ui-lib-checkbox label="Bootstrap" variant="bootstrap" />
-        <ui-lib-checkbox label="Minimal" variant="minimal" />
+        <ui-lib-checkbox label="Material" [variant]="themeVariants.Material" />
+        <ui-lib-checkbox label="Bootstrap" [variant]="themeVariants.Bootstrap" />
+        <ui-lib-checkbox label="Minimal" [variant]="themeVariants.Minimal" />
       </div>
     `,
   }),

@@ -20,6 +20,9 @@ type TabKey =
 
 type ViewportPreset = { key: string; label: string; width: number; height: number };
 
+/**
+ * Demo page for badge variants and usage.
+ */
 @Component({
   selector: 'app-badges',
   standalone: true,

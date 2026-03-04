@@ -34,6 +34,9 @@ import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
+/**
+ * Demo section for themed layout examples.
+ */
 @Component({
   selector: 'app-layout-themed-layouts-section',
   standalone: true,
@@ -55,7 +58,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   styleUrl: './layouts.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutThemedLayoutsSectionComponent {
+export class ThemedLayoutsSectionComponent {
   public readonly sections: DocSection[] = [{ id: 'themed-layouts', label: 'Themed Layouts' }];
   public readonly activeTab: WritableSignal<'demo' | 'usage' | 'api'> = signal<
     'demo' | 'usage' | 'api'

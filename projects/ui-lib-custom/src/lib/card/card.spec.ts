@@ -5,7 +5,8 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemeVariant, ThemeScopeInput } from 'ui-lib-custom/theme';
 
 import { Card } from './card';
-import type { CardVariant, CardElevation } from './card';
+import type { CardElevation, CardVariant } from './card';
+import { SHARED_VARIANT_OPTIONS } from '../shared/constants';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -137,7 +138,7 @@ describe('Card', (): void => {
   });
 
   it('applies each variant class', async (): Promise<void> => {
-    const variants: CardVariant[] = ['material', 'bootstrap', 'minimal'];
+    const variants: CardVariant[] = [...SHARED_VARIANT_OPTIONS];
 
     for (const variant of variants) {
       const variantValue: CardVariant = variant;

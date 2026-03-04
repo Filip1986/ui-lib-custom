@@ -51,6 +51,9 @@ const PAIRINGS: FontPairing[] = [
   },
 ];
 
+/**
+ * Provides curated font pairing presets for the theme editor.
+ */
 @Injectable({ providedIn: 'root' })
 export class FontPairingService {
   public list(): FontPairing[] {

@@ -25,12 +25,18 @@ import { Icon } from 'ui-lib-custom/icon';
 
 let accordionPanelId: number = 0;
 
+/**
+ * Marks a custom accordion header template.
+ */
 @Directive({
   selector: '[accordionHeader]',
   standalone: true,
 })
 export class AccordionHeader {}
 
+/**
+ * Template directive for a custom accordion toggle icon.
+ */
 @Directive({
   selector: '[accordionToggleIcon]',
   standalone: true,
@@ -40,6 +46,9 @@ export class AccordionToggleIcon {
     inject<TemplateRef<AccordionToggleIconContext>>(TemplateRef);
 }
 
+/**
+ * Accordion panel component with header and collapsible content.
+ */
 @Component({
   selector: 'ui-lib-accordion-panel',
   standalone: true,

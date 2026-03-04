@@ -13,6 +13,9 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
 
 type TabKey = 'playground' | 'api-reference' | 'usage';
 
+/**
+ * Demo page for theme presets and switching.
+ */
 @Component({
   selector: 'app-themes',
   standalone: true,

@@ -17,6 +17,9 @@ import type {
 import { DEFAULT_SOCIAL_PROVIDERS } from './base-login/base-login.component';
 import type { InputSignal, OutputEmitterRef } from '@angular/core';
 
+/**
+ * Login container component that renders the selected login variant and emits auth events.
+ */
 @Component({
   selector: 'lib-login',
   standalone: true,

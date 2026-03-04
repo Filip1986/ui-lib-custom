@@ -11,6 +11,9 @@ interface ViewportPreset {
   height: number;
 }
 
+/**
+ * Coordinates the viewport preview controls in doc demos.
+ */
 @Component({
   selector: 'app-doc-demo-viewport',
   standalone: true,

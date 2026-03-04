@@ -54,6 +54,9 @@ type AccordionTab =
   | 'api-reference'
   | 'accessibility';
 
+/**
+ * Demo page showcasing accordion variants and behaviors.
+ */
 @Component({
   selector: 'app-accordion-demo',
   standalone: true,
