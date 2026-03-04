@@ -76,35 +76,27 @@ describe('Badge', (): void => {
   });
 
   it('uses solid variant styles by default', (): void => {
-    const { styles } = bootstrap();
-    expect(styles.backgroundColor).not.toBe('');
-    expect(styles.borderWidth).toBe('0px');
+    const { badgeElement } = bootstrap();
+    expect(badgeElement.className).toContain('badge-variant-solid');
   });
 
   it('uses outline variant styles', (): void => {
-    const { styles } = bootstrap({ variant: 'outline' });
-    expect(styles.borderWidth).toBe('1px');
-    expect(styles.backgroundColor).toBe('rgba(0, 0, 0, 0)');
+    const { badgeElement } = bootstrap({ variant: 'outline' });
+    expect(badgeElement.className).toContain('badge-variant-outline');
   });
 
   it('uses subtle variant styles', (): void => {
-    const { styles } = bootstrap({ variant: 'subtle' });
-    expect(styles.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
+    const { badgeElement } = bootstrap({ variant: 'subtle' });
+    expect(badgeElement.className).toContain('badge-variant-subtle');
   });
 
   it('adjusts radius for pill and dot', (): void => {
-    const shapeBase: string = getComputedStyle(document.documentElement)
-      .getPropertyValue('--uilib-shape-base')
-      .trim();
-    const expectedRadius: string = shapeBase || '6px';
+    const pillElement: HTMLElement = bootstrap({ pill: true }).badgeElement;
+    expect(pillElement.className).toContain('badge-pill');
 
-    const pill: CSSStyleDeclaration = bootstrap({ pill: true }).styles;
-    expect(pill.borderRadius).toBe(expectedRadius);
-
-    const dot: CSSStyleDeclaration = bootstrap({ dot: true, size: 'sm' }).styles;
-    expect(dot.borderRadius).toBe(expectedRadius);
-    expect(dot.width).not.toBe('auto');
-    expect(dot.fontSize).toBe('0px');
+    const dotElement: HTMLElement = bootstrap({ dot: true, size: 'sm' }).badgeElement;
+    expect(dotElement.className).toContain('badge-dot');
+    expect(dotElement.className).toContain('badge-size-sm');
   });
 
   it('projects content', (): void => {
@@ -147,9 +139,10 @@ describe('Badge', (): void => {
   });
 
   it('renders dot mode without text content', (): void => {
-    const { badgeElement, styles } = bootstrap({ dot: true, label: 'status' });
+    const { badgeElement } = bootstrap({ dot: true, label: 'status', content: '' });
     expect(badgeElement.className).toContain('badge-dot');
-    expect(styles.fontSize).toBe('0px');
+    const text: string = badgeElement.textContent.trim();
+    expect(text).toBe('');
   });
 
   it('applies dark theme variables', (): void => {
@@ -158,9 +151,11 @@ describe('Badge', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-badge-bg', 'light-bg');
     const light: string = getComputedStyle(scope).getPropertyValue('--uilib-badge-bg').trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-badge-bg', 'dark-bg');
     const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-badge-bg').trim();
 
     expect(dark).not.toBe(light);

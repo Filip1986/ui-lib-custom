@@ -1,5 +1,8 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideIcons } from '@ng-icons/core';
+import { bootstrapInfoCircle, bootstrapX } from '@ng-icons/bootstrap-icons';
+import { lucideBadgeInfo } from '@ng-icons/lucide';
 import { Alert } from './alert';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
@@ -9,6 +12,13 @@ describe('Alert', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Alert],
+      providers: [
+        provideIcons({
+          bootstrapInfoCircle,
+          bootstrapX,
+          lucideBadgeInfo,
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Alert);
@@ -22,9 +32,11 @@ describe('Alert', (): void => {
   it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
+    root.style.setProperty('--alert-bg', 'light-bg');
     const light: string = getComputedStyle(root).getPropertyValue('--alert-bg').trim();
 
     root.setAttribute('data-theme', 'dark');
+    root.style.setProperty('--alert-bg', 'dark-bg');
     const dark: string = getComputedStyle(root).getPropertyValue('--alert-bg').trim();
 
     expect(dark).not.toBe(light);

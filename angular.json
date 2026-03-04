@@ -21,16 +21,6 @@
           },
           "defaultConfiguration": "production"
         },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "tsConfig": "projects/ui-lib-custom/tsconfig.spec.json",
-            "styles": [
-              "projects/ui-lib-custom/src/lib/themes/themes.scss",
-              "projects/ui-lib-custom/src/lib/styles/dark-theme.scss"
-            ]
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -126,19 +116,6 @@
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
-        },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "tsConfig": "projects/demo/tsconfig.spec.json",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/demo/public"
-              }
-            ],
-            "styles": ["projects/demo/src/styles.scss"]
-          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",

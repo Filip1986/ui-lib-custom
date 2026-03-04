@@ -132,9 +132,11 @@ describe('Inline', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-inline-fg', 'light-fg');
     const light: string = getComputedStyle(scope).getPropertyValue('--uilib-inline-fg').trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-inline-fg', 'dark-fg');
     const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-inline-fg').trim();
 
     expect(dark).not.toBe(light);

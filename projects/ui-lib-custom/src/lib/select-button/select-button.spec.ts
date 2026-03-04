@@ -469,7 +469,7 @@ describe('SelectButton', (): void => {
       selectFixture.detectChanges();
 
       const component: SelectButton = selectFixture.componentInstance;
-      const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
+      const onChangeSpy: jest.Mock = jest.fn();
       component.registerOnChange(onChangeSpy);
 
       const btns: HTMLButtonElement[] = Array.from(
@@ -487,7 +487,7 @@ describe('SelectButton', (): void => {
       selectFixture.detectChanges();
 
       const component: SelectButton = selectFixture.componentInstance;
-      const onTouchedSpy: jasmine.Spy = jasmine.createSpy('onTouched');
+      const onTouchedSpy: jest.Mock = jest.fn();
       component.registerOnTouched(onTouchedSpy);
 
       const host: HTMLElement = selectFixture.nativeElement as HTMLElement;
@@ -639,11 +639,13 @@ describe('SelectButton', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-select-button-material-bg', 'light-bg');
     const light: string = getComputedStyle(scope)
       .getPropertyValue('--uilib-select-button-material-bg')
       .trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-select-button-material-bg', 'dark-bg');
     const dark: string = getComputedStyle(scope)
       .getPropertyValue('--uilib-select-button-material-bg')
       .trim();

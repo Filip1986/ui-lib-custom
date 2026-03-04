@@ -1,6 +1,6 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { Login2Component } from './login-2.component';
+import { Login2Component } from 'ui-lib-custom';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('Login2Component', (): void => {
@@ -28,7 +28,7 @@ describe('Login2Component', (): void => {
   });
 
   it('should call onSubmit and emit submitLogin if the form is valid', (): void => {
-    spyOn(component.submitLogin, 'emit');
+    jest.spyOn(component.submitLogin, 'emit');
     component.loginForm.setValue({
       username: 'testuser',
       password: 'password123',
@@ -50,8 +50,8 @@ describe('Login2Component', (): void => {
     const event: Event = new Event('change');
     Object.defineProperty(event, 'target', { value: input });
 
-    const setItemSpy: jasmine.Spy = spyOn(localStorage, 'setItem');
-    spyOn(component.rememberMeChange, 'emit');
+    const setItemSpy: jest.SpyInstance = jest.spyOn(Storage.prototype, 'setItem');
+    jest.spyOn(component.rememberMeChange, 'emit');
 
     component.onRememberMeChange(event);
 
@@ -60,7 +60,7 @@ describe('Login2Component', (): void => {
   });
 
   it('should emit registerClick when onRegister is called', (): void => {
-    spyOn(component.registerClick, 'emit');
+    jest.spyOn(component.registerClick, 'emit');
 
     component.onRegister();
 
@@ -69,7 +69,7 @@ describe('Login2Component', (): void => {
 
   it('should emit forgotPasswordClick with username when onForgotPassword is called', (): void => {
     component.loginForm.get('username')?.setValue('testuser@example.com');
-    spyOn(component.forgotPasswordClick, 'emit');
+    jest.spyOn(component.forgotPasswordClick, 'emit');
 
     component.onForgotPassword();
 
@@ -77,7 +77,7 @@ describe('Login2Component', (): void => {
   });
 
   it('should emit socialLoginClick with provider when onSocialLogin is called', (): void => {
-    spyOn(component.socialLoginClick, 'emit');
+    jest.spyOn(component.socialLoginClick, 'emit');
 
     component.onSocialLogin('google');
 

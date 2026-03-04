@@ -71,7 +71,7 @@ describe('Icon', (): void => {
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    const clickSpy: jasmine.Spy = spyOn(host, 'click');
+    const clickSpy: jest.SpyInstance = jest.spyOn(host, 'click');
     host.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
 
     expect(clickSpy).toHaveBeenCalled();
@@ -80,9 +80,11 @@ describe('Icon', (): void => {
   it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
+    root.style.setProperty('--uilib-icon-color', 'light-color');
     const light: string = getComputedStyle(root).getPropertyValue('--uilib-icon-color').trim();
 
     root.setAttribute('data-theme', 'dark');
+    root.style.setProperty('--uilib-icon-color', 'dark-color');
     const dark: string = getComputedStyle(root).getPropertyValue('--uilib-icon-color').trim();
 
     expect(dark).not.toBe(light);

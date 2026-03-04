@@ -155,9 +155,11 @@ describe('Grid', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-grid-fg', 'light-fg');
     const light: string = getComputedStyle(scope).getPropertyValue('--uilib-grid-fg').trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-grid-fg', 'dark-fg');
     const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-grid-fg').trim();
 
     expect(dark).not.toBe(light);

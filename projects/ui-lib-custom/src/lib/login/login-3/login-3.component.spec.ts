@@ -1,7 +1,10 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideIcons } from '@ng-icons/core';
 import { Login3Component } from './login-3.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+const MICROSOFT_ICON_SVG: string = '<svg></svg>';
 
 describe('Login3Component', (): void => {
   let component: Login3Component;
@@ -10,6 +13,7 @@ describe('Login3Component', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Login3Component, ReactiveFormsModule],
+      providers: [provideIcons({ microsoft: MICROSOFT_ICON_SVG })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Login3Component);
@@ -28,7 +32,7 @@ describe('Login3Component', (): void => {
   });
 
   it('should call onSubmit and emit submitLogin if the form is valid', (): void => {
-    spyOn(component.submitLogin, 'emit');
+    jest.spyOn(component.submitLogin, 'emit');
     component.loginForm.setValue({
       username: 'testuser',
       password: 'password123',
@@ -50,8 +54,8 @@ describe('Login3Component', (): void => {
     const event: Event = new Event('change');
     Object.defineProperty(event, 'target', { value: input });
 
-    const setItemSpy: jasmine.Spy = spyOn(localStorage, 'setItem');
-    spyOn(component.rememberMeChange, 'emit');
+    const setItemSpy: jest.SpyInstance = jest.spyOn(Storage.prototype, 'setItem');
+    jest.spyOn(component.rememberMeChange, 'emit');
 
     component.onRememberMeChange(event);
 
@@ -60,7 +64,7 @@ describe('Login3Component', (): void => {
   });
 
   it('should emit registerClick when onRegister is called', (): void => {
-    spyOn(component.registerClick, 'emit');
+    jest.spyOn(component.registerClick, 'emit');
 
     component.onRegister();
 
@@ -69,7 +73,7 @@ describe('Login3Component', (): void => {
 
   it('should emit forgotPasswordClick with username when onForgotPassword is called', (): void => {
     component.loginForm.get('username')?.setValue('testuser@example.com');
-    spyOn(component.forgotPasswordClick, 'emit');
+    jest.spyOn(component.forgotPasswordClick, 'emit');
 
     component.onForgotPassword();
 
@@ -77,7 +81,7 @@ describe('Login3Component', (): void => {
   });
 
   it('should emit socialLoginClick with provider when onSocialLogin is called', (): void => {
-    spyOn(component.socialLoginClick, 'emit');
+    jest.spyOn(component.socialLoginClick, 'emit');
 
     component.onSocialLogin('google');
 

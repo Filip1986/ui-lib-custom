@@ -45,11 +45,11 @@ describe('BaseLoginComponent', (): void => {
   });
 
   describe('onRememberMeChange', (): void => {
-    let setItemSpy: jasmine.Spy;
+    let setItemSpy: jest.SpyInstance;
 
     beforeEach((): void => {
       // Mock localStorage
-      setItemSpy = spyOn(localStorage, 'setItem');
+      setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
     });
 
     it('should update localStorage and emit rememberMeChange', (): void => {
@@ -58,7 +58,7 @@ describe('BaseLoginComponent', (): void => {
       const event: Event = new Event('change');
       Object.defineProperty(event, 'target', { value: input });
 
-      spyOn(component.rememberMeChange, 'emit');
+      jest.spyOn(component.rememberMeChange, 'emit');
 
       component.onRememberMeChange(event);
 
@@ -70,7 +70,7 @@ describe('BaseLoginComponent', (): void => {
   describe('onSubmit', (): void => {
     it('should not submit the form if it is invalid', (): void => {
       component.loginForm.get('username')?.setErrors({ required: true });
-      spyOn(component.submitLogin, 'emit');
+      jest.spyOn(component.submitLogin, 'emit');
 
       component.onSubmit();
 
@@ -84,7 +84,7 @@ describe('BaseLoginComponent', (): void => {
         password: 'password123',
         rememberMe: true,
       });
-      spyOn(component.submitLogin, 'emit');
+      jest.spyOn(component.submitLogin, 'emit');
 
       component.onSubmit();
 
@@ -98,7 +98,7 @@ describe('BaseLoginComponent', (): void => {
 
   describe('onRegister', (): void => {
     it('should emit registerClick', (): void => {
-      spyOn(component.registerClick, 'emit');
+      jest.spyOn(component.registerClick, 'emit');
 
       component.onRegister();
 
@@ -109,7 +109,7 @@ describe('BaseLoginComponent', (): void => {
   describe('onForgotPassword', (): void => {
     it('should emit forgotPasswordClick with the username', (): void => {
       component.loginForm.get('username')?.setValue('testuser@example.com');
-      spyOn(component.forgotPasswordClick, 'emit');
+      jest.spyOn(component.forgotPasswordClick, 'emit');
 
       component.onForgotPassword();
 
@@ -119,7 +119,7 @@ describe('BaseLoginComponent', (): void => {
 
   describe('onSocialLogin', (): void => {
     it('should emit socialLoginClick with the provider', (): void => {
-      spyOn(component.socialLoginClick, 'emit');
+      jest.spyOn(component.socialLoginClick, 'emit');
 
       component.onSocialLogin('google');
 

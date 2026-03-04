@@ -279,6 +279,11 @@ All CSS custom properties MUST follow this pattern:
 ## Testing & Quality
 
 - Unit tests per component (`*.spec.ts`) cover creation, input changes (signals), classes/styles, projected content, and accessibility roles.
+- Jest is the sole test runner. Do not add Karma or Jasmine. Use `jest.fn()` / `jest.spyOn()` for mocks.
+- Test scripts:
+  - `npm test`
+  - `npm run test:watch`
+  - `npm run test:coverage`
 - Run `npm test` in CI; add visual/diff tests later for theme regressions.
 
 ## Packaging & Releases

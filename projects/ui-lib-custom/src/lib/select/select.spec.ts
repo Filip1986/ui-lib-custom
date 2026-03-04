@@ -334,9 +334,11 @@ describe('UiLibSelect basics', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-select-bg', 'light-bg');
     const light: string = getComputedStyle(scope).getPropertyValue('--uilib-select-bg').trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-select-bg', 'dark-bg');
     const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-select-bg').trim();
 
     expect(dark).not.toBe(light);
@@ -417,7 +419,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
     selectFixture.componentRef.setInput('options', options);
     selectFixture.detectChanges();
 
-    const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
+    const onChangeSpy: jest.Mock = jest.fn();
     selectFixture.componentInstance.registerOnChange(onChangeSpy);
 
     const control: HTMLElement = (selectFixture.nativeElement as HTMLElement).querySelector(
@@ -441,7 +443,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
     selectFixture.componentRef.setInput('options', options);
     selectFixture.detectChanges();
 
-    const onTouchedSpy: jasmine.Spy = jasmine.createSpy('onTouched');
+    const onTouchedSpy: jest.Mock = jest.fn();
     selectFixture.componentInstance.registerOnTouched(onTouchedSpy);
 
     selectFixture.componentInstance.openPanel();
@@ -489,7 +491,7 @@ describe('UiLibSelect behavior', (): void => {
   });
 
   it('clear emits null for single select', (): void => {
-    const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
+    const onChangeSpy: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnChange(onChangeSpy);
     setOptions([{ label: 'Alpha', value: 'alpha' }]);
 
@@ -500,7 +502,7 @@ describe('UiLibSelect behavior', (): void => {
   });
 
   it('clear emits empty array for multiple select', (): void => {
-    const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
+    const onChangeSpy: jest.Mock = jest.fn();
     fixture.componentRef.setInput('multiple', true);
     fixture.componentInstance.registerOnChange(onChangeSpy);
     setOptions([{ label: 'Alpha', value: 'alpha' }]);
@@ -534,7 +536,7 @@ describe('UiLibSelect behavior', (): void => {
       { label: 'Alpha', value: 'alpha', disabled: true },
       { label: 'Beta', value: 'beta' },
     ];
-    const onChangeSpy: jasmine.Spy = jasmine.createSpy('onChange');
+    const onChangeSpy: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnChange(onChangeSpy);
     setOptions(options);
 

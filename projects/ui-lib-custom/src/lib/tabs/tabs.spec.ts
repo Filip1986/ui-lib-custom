@@ -207,9 +207,11 @@ describe('Tabs', (): void => {
   it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
+    root.style.setProperty('--uilib-tabs-color', 'light-color');
     const light: string = getComputedStyle(root).getPropertyValue('--uilib-tabs-color').trim();
 
     root.setAttribute('data-theme', 'dark');
+    root.style.setProperty('--uilib-tabs-color', 'dark-color');
     const dark: string = getComputedStyle(root).getPropertyValue('--uilib-tabs-color').trim();
 
     expect(dark).not.toBe(light);
@@ -349,7 +351,8 @@ describe('Scrollable Tabs', (): void => {
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
-    const scrollToSpy: jasmine.Spy = spyOn(list, 'scrollTo');
+    const scrollToSpy: jest.Mock = jest.fn();
+    (list as HTMLElement & { scrollTo: jest.Mock }).scrollTo = scrollToSpy;
     stubRaf();
     setScrollMetrics(list, 500, 100, 0);
 
@@ -370,7 +373,7 @@ describe('Scrollable Tabs', (): void => {
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
     const target: HTMLButtonElement = getRequiredItem(buttons, 4, 'tab button')
       .nativeElement as HTMLButtonElement;
-    const scrollIntoViewSpy: jasmine.Spy = spyOn(target, 'scrollIntoView');
+    const scrollIntoViewSpy: jest.SpyInstance = jest.spyOn(target, 'scrollIntoView');
     stubRaf();
 
     target.dispatchEvent(new Event('focus'));

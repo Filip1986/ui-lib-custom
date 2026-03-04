@@ -122,10 +122,10 @@ describe('ThemePresetService', (): void => {
 
   it('applies presets using ThemeConfigService setters and CSS vars', (): void => {
     const preset: ThemePreset = samplePreset();
-    const setVariantSpy: jasmine.Spy = spyOn(themeConfig, 'setVariant');
-    const setShapeSpy: jasmine.Spy = spyOn(themeConfig, 'setShape');
-    const setDensitySpy: jasmine.Spy = spyOn(themeConfig, 'setDensity');
-    const setModeSpy: jasmine.Spy = spyOn(themeConfig, 'setMode');
+    const setVariantSpy: jest.SpyInstance = jest.spyOn(themeConfig, 'setVariant');
+    const setShapeSpy: jest.SpyInstance = jest.spyOn(themeConfig, 'setShape');
+    const setDensitySpy: jest.SpyInstance = jest.spyOn(themeConfig, 'setDensity');
+    const setModeSpy: jest.SpyInstance = jest.spyOn(themeConfig, 'setMode');
 
     service.applyPreset(preset);
 

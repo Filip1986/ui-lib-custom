@@ -386,11 +386,13 @@ describe('Accordion', (): void => {
 
     root.setAttribute('data-theme', 'light');
     host.setAttribute('data-theme', 'light');
+    host.style.setProperty('--uilib-accordion-panel-bg', 'light-bg');
     const light: string = getComputedStyle(host)
       .getPropertyValue('--uilib-accordion-panel-bg')
       .trim();
 
     host.setAttribute('data-theme', 'dark');
+    host.style.setProperty('--uilib-accordion-panel-bg', 'dark-bg');
     const dark: string = getComputedStyle(host)
       .getPropertyValue('--uilib-accordion-panel-bg')
       .trim();

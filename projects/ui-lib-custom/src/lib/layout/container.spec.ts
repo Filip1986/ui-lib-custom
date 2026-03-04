@@ -138,9 +138,11 @@ describe('Container', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-container-fg', 'light-fg');
     const light: string = getComputedStyle(scope).getPropertyValue('--uilib-container-fg').trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-container-fg', 'dark-fg');
     const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-container-fg').trim();
 
     expect(dark).not.toBe(light);

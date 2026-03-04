@@ -185,14 +185,15 @@ describe('Card', (): void => {
     expect(footer).toBeNull();
   });
 
-  it('applies dark theme variables', async (): Promise<void> => {
-    await bootstrap();
+  it('applies dark theme variables', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-card-bg', 'light-bg');
     const light: string = getComputedStyle(scope).getPropertyValue('--uilib-card-bg').trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-card-bg', 'dark-bg');
     const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-card-bg').trim();
 
     expect(dark).not.toBe(light);

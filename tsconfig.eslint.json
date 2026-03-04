@@ -12,7 +12,8 @@
     "projects/ui-lib-custom/.storybook/**/*.ts",
     "projects/ui-lib-custom/.storybook/**/*.d.ts",
     "scripts/**/*.ts",
-    "setup-*.ts"
+    "setup-*.ts",
+    "jest.config.ts"
   ],
   "exclude": ["dist/**", "coverage/**", "storybook-static/**"]
 }

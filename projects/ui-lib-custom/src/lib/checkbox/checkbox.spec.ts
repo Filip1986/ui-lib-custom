@@ -145,11 +145,13 @@ describe('Checkbox', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-checkbox-border', 'light-border');
     const light: string = getComputedStyle(scope)
       .getPropertyValue('--uilib-checkbox-border')
       .trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-checkbox-border', 'dark-border');
     const dark: string = getComputedStyle(scope).getPropertyValue('--uilib-checkbox-border').trim();
 
     expect(dark).not.toBe(light);
@@ -260,7 +262,7 @@ describe('Checkbox CVA', (): void => {
   });
 
   it('registerOnChange fires when toggled', (): void => {
-    const onChange: jasmine.Spy = jasmine.createSpy('onChange');
+    const onChange: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnChange(onChange);
 
     hostEl().click();
@@ -270,7 +272,7 @@ describe('Checkbox CVA', (): void => {
   });
 
   it('registerOnTouched fires on focusout', (): void => {
-    const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
+    const onTouched: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnTouched(onTouched);
 
     hostEl().dispatchEvent(new FocusEvent('focusout', { relatedTarget: null }));

@@ -125,7 +125,7 @@ describe('UiLibInput basics', (): void => {
   });
 
   it('fires registerOnChange when input changes', (): void => {
-    const onChange: jasmine.Spy = jasmine.createSpy('onChange');
+    const onChange: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnChange(onChange);
 
     inputEl().value = 'Ada';
@@ -136,7 +136,7 @@ describe('UiLibInput basics', (): void => {
   });
 
   it('fires registerOnTouched on blur', (): void => {
-    const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
+    const onTouched: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnTouched(onTouched);
 
     inputEl().dispatchEvent(new FocusEvent('blur'));
@@ -207,7 +207,7 @@ describe('UiLibInput basics', (): void => {
   });
 
   it('focusInput focuses input when click is not on a button', (): void => {
-    const spy: jasmine.Spy = spyOn(inputEl(), 'focus');
+    const spy: jest.SpyInstance = jest.spyOn(inputEl(), 'focus');
 
     fixture.componentInstance.focusInput();
     fixture.detectChanges();
@@ -221,7 +221,7 @@ describe('UiLibInput basics', (): void => {
     fixture.detectChanges();
 
     const clearBtn: HTMLButtonElement | null = rootEl().querySelector('button.ui-input-clear');
-    const spy: jasmine.Spy = spyOn(inputEl(), 'focus');
+    const spy: jest.SpyInstance = jest.spyOn(inputEl(), 'focus');
 
     const mockTarget: { closest: (selector: string) => HTMLButtonElement | null } = {
       closest: (selector: string): HTMLButtonElement | null =>
@@ -264,9 +264,11 @@ describe('UiLibInput basics', (): void => {
   it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
+    root.style.setProperty('--uilib-input-bg', 'light-bg');
     const light: string = getComputedStyle(root).getPropertyValue('--uilib-input-bg').trim();
 
     root.setAttribute('data-theme', 'dark');
+    root.style.setProperty('--uilib-input-bg', 'dark-bg');
     const dark: string = getComputedStyle(root).getPropertyValue('--uilib-input-bg').trim();
 
     expect(dark).not.toBe(light);
@@ -380,11 +382,11 @@ describe('UiLibInput Reactive Forms', (): void => {
 
 describe('UiLibInput announcer', (): void => {
   let fixture: ComponentFixture<UiLibInput>;
-  let announcer: { announceError: jasmine.Spy };
+  let announcer: { announceError: jest.Mock };
 
   beforeEach(async (): Promise<void> => {
     announcer = {
-      announceError: jasmine.createSpy('announceError'),
+      announceError: jest.fn(),
     };
 
     await TestBed.configureTestingModule({
@@ -446,7 +448,7 @@ describe('UiLibInput accessibility', (): void => {
   });
 
   it('marks touched on blur after keyboard focus', (): void => {
-    const onTouched: jasmine.Spy = jasmine.createSpy('onTouched');
+    const onTouched: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnTouched(onTouched);
 
     inputEl().dispatchEvent(new FocusEvent('focus'));

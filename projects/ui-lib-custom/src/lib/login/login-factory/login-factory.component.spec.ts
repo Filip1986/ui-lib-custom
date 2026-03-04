@@ -1,8 +1,11 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideIcons } from '@ng-icons/core';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { LoginFactoryComponent } from './login-factory.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+const MICROSOFT_ICON_SVG: string = '<svg></svg>';
 
 describe('LoginFactoryComponent', (): void => {
   let component: LoginFactoryComponent;
@@ -11,7 +14,10 @@ describe('LoginFactoryComponent', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [LoginFactoryComponent, ReactiveFormsModule],
-      providers: [provideZonelessChangeDetection()],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideIcons({ microsoft: MICROSOFT_ICON_SVG }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginFactoryComponent);
@@ -58,7 +64,7 @@ describe('LoginFactoryComponent', (): void => {
   });
 
   it('should emit submitLogin event when child component emits it', (): void => {
-    spyOn(component.submitLogin, 'emit');
+    jest.spyOn(component.submitLogin, 'emit');
     component.onSubmitLogin({ username: 'testuser', password: 'password123', rememberMe: true });
     expect(component.submitLogin.emit).toHaveBeenCalledWith({
       username: 'testuser',
@@ -68,25 +74,25 @@ describe('LoginFactoryComponent', (): void => {
   });
 
   it('should emit registerClick event when child component emits it', (): void => {
-    spyOn(component.registerClick, 'emit');
+    jest.spyOn(component.registerClick, 'emit');
     component.onRegisterClick();
     expect(component.registerClick.emit).toHaveBeenCalled();
   });
 
   it('should emit forgotPasswordClick event when child component emits it', (): void => {
-    spyOn(component.forgotPasswordClick, 'emit');
+    jest.spyOn(component.forgotPasswordClick, 'emit');
     component.onForgotPasswordClick('testuser@example.com');
     expect(component.forgotPasswordClick.emit).toHaveBeenCalledWith('testuser@example.com');
   });
 
   it('should emit socialLoginClick event when child component emits it', (): void => {
-    spyOn(component.socialLoginClick, 'emit');
+    jest.spyOn(component.socialLoginClick, 'emit');
     component.onSocialLoginClick('google');
     expect(component.socialLoginClick.emit).toHaveBeenCalledWith('google');
   });
 
   it('should emit rememberMeChange event when child component emits it', (): void => {
-    spyOn(component.rememberMeChange, 'emit');
+    jest.spyOn(component.rememberMeChange, 'emit');
     component.onRememberMeChange(true);
     expect(component.rememberMeChange.emit).toHaveBeenCalledWith(true);
   });

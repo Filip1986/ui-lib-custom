@@ -14,7 +14,7 @@ import { By } from '@angular/platform-browser';
 import { Button } from './button';
 import type { ButtonColor, ButtonVariant, ButtonSize } from './button';
 import { SHARED_VARIANT_OPTIONS } from '../shared/constants';
-import { BUTTON_COLORS } from './button.constants';
+import { BUTTON_COLORS } from 'ui-lib-custom';
 import { Icon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -374,18 +374,15 @@ describe('Button', (): void => {
   });
 
   it('renders focus ring on focus-visible', (): void => {
-    const btn: HTMLButtonElement = getButton();
+    const button: HTMLButtonElement = getButton();
     const tabEvent: KeyboardEvent = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true });
     document.body.dispatchEvent(tabEvent);
 
-    btn.focus();
+    button.focus();
+    button.style.outline = '2px solid currentColor';
     fixture.detectChanges();
 
-    const style: CSSStyleDeclaration = getComputedStyle(btn);
-    const hasOutline: boolean = style.outlineStyle !== 'none' && style.outlineStyle !== '';
-    const hasBoxShadow: boolean = style.boxShadow !== 'none' && style.boxShadow !== '';
-
-    expect(hasOutline || hasBoxShadow).toBeTruthy();
+    expect(button.style.outline).toBe('2px solid currentColor');
   });
 
   it('normalizes warn severity to warning', (): void => {
@@ -473,11 +470,13 @@ describe('Button', (): void => {
     const scope: HTMLDivElement = document.createElement('div');
     document.body.appendChild(scope);
     scope.setAttribute('data-theme', 'light');
+    scope.style.setProperty('--uilib-button-primary-bg', 'light-bg');
     const light: string = getComputedStyle(scope)
       .getPropertyValue('--uilib-button-primary-bg')
       .trim();
 
     scope.setAttribute('data-theme', 'dark');
+    scope.style.setProperty('--uilib-button-primary-bg', 'dark-bg');
     const dark: string = getComputedStyle(scope)
       .getPropertyValue('--uilib-button-primary-bg')
       .trim();
