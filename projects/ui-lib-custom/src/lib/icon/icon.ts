@@ -39,11 +39,7 @@ const hasKnownPrefix: (value: string) => boolean = (value: string): boolean => {
   selector: 'ui-lib-icon',
   standalone: true,
   imports: [NgIcon],
-  template: `<ng-icon
-    [name]="resolvedName()"
-    [size]="resolvedSize()"
-    [color]="color() ?? undefined"
-  />`,
+  templateUrl: './icon.html',
   styleUrl: './icon.scss',
   host: {
     class: 'ui-lib-icon',

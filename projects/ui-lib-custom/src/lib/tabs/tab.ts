@@ -39,12 +39,7 @@ export class TabContent {
 @Component({
   selector: 'ui-lib-tab',
   standalone: true,
-  template: `
-    <ng-content select="[uiLibTabContent]" />
-    <ng-template #defaultContent>
-      <ng-content />
-    </ng-template>
-  `,
+  templateUrl: './tab.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })

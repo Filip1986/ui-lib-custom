@@ -21,28 +21,7 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
   selector: 'ui-lib-alert',
   standalone: true,
   imports: [Icon],
-  template: `
-    <ui-lib-icon
-      class="alert-icon"
-      [name]="statusIcon()"
-      [variant]="effectiveVariant()"
-      size="lg"
-    />
-    <div class="alert-content">
-      <ng-content />
-    </div>
-    @if (dismissible()) {
-      <ui-lib-icon
-        class="alert-close"
-        name="close"
-        [variant]="effectiveVariant()"
-        size="sm"
-        [clickable]="true"
-        ariaLabel="Dismiss alert"
-        (click)="onDismiss()"
-      />
-    }
-  `,
+  templateUrl: './alert.html',
   styleUrl: './alert.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,

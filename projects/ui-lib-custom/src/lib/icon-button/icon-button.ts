@@ -19,14 +19,7 @@ import { SHARED_DEFAULTS, SHARED_SIZES } from '../shared/constants';
   selector: 'ui-lib-icon-button',
   standalone: true,
   imports: [Icon],
-  template: `
-    <ui-lib-icon
-      [name]="icon()"
-      [size]="iconSize()"
-      [variant]="variant()"
-      class="icon-button__icon"
-    />
-  `,
+  templateUrl: './icon-button.html',
   styleUrl: './icon-button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,

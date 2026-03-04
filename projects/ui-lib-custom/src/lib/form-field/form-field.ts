@@ -17,23 +17,7 @@ let formFieldId: number = 0;
 @Component({
   selector: 'ui-lib-form-field',
   standalone: true,
-  template: `
-    <div class="ui-form-field" [class.ui-form-field--error]="error()">
-      <ng-content></ng-content>
-
-      @if (error()) {
-        <div [id]="errorId" class="ui-form-field-error" role="alert" aria-live="assertive">
-          {{ error() }}
-        </div>
-      }
-
-      @if (hint() && !error()) {
-        <div [id]="hintId" class="ui-form-field-hint">
-          {{ hint() }}
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: './form-field.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
