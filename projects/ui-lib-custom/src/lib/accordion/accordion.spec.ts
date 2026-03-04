@@ -10,6 +10,7 @@ import type {
   AccordionSize,
   AccordionVariant,
 } from 'ui-lib-custom';
+import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
 interface AccordionConfig {
   variant: AccordionVariant;
@@ -365,14 +366,14 @@ describe('Accordion', (): void => {
     const panelHost0: HTMLElement = getRequiredElement(panelHosts, 0, 'accordion panel');
     const content0: HTMLElement = getRequiredElement(contents, 0, 'accordion content');
 
-    expect(panelHost0.getAttribute('data-state')).toBe('collapsed');
-    expect(content0.getAttribute('data-state')).toBe('collapsed');
+    expect(panelHost0.getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Collapsed);
+    expect(content0.getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Collapsed);
 
     togglePanel(fixture, 0);
 
     expect(panelHost0.className).toContain('accordion-panel-expanded');
-    expect(panelHost0.getAttribute('data-state')).toBe('expanded');
-    expect(content0.getAttribute('data-state')).toBe('expanded');
+    expect(panelHost0.getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Expanded);
+    expect(content0.getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Expanded);
     expect(content0.hasAttribute('hidden')).toBeFalsy();
   });
 

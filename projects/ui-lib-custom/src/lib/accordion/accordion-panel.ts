@@ -19,6 +19,7 @@ import { ACCORDION_CONTEXT } from './accordion-context';
 import type { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
 import { Icon } from 'ui-lib-custom/icon';
 import { KEYBOARD_KEYS } from '../shared/constants';
+import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
 let accordionPanelId: number = 0;
 
@@ -56,11 +57,12 @@ export class AccordionToggleIcon {
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'hostClasses()',
-    '[attr.data-state]': "isExpanded() ? 'expanded' : 'collapsed'",
+    '[attr.data-state]': 'isExpanded() ? panelStates.Expanded : panelStates.Collapsed',
     '[attr.data-disabled]': 'disabled() ? true : null',
   },
 })
 export class AccordionPanel implements OnDestroy {
+  public readonly panelStates: typeof ACCORDION_PANEL_STATES = ACCORDION_PANEL_STATES;
   public readonly header: InputSignal<string> = input<string>('');
   public readonly value: InputSignal<string | null> = input<string | null>(null);
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);

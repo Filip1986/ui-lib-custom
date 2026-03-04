@@ -6,6 +6,7 @@ import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angula
 import { By } from '@angular/platform-browser';
 import { Icon } from '../icon/icon';
 import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from 'ui-lib-custom';
+import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -164,7 +165,7 @@ describe('AccordionPanel', (): void => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
-    expect(panelHost().getAttribute('data-state')).toBe('expanded');
+    expect(panelHost().getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Expanded);
     expect(contentEl().hasAttribute('hidden')).toBeFalsy();
     expect(headerButton().getAttribute('aria-expanded')).toBe('true');
   });
@@ -180,7 +181,7 @@ describe('AccordionPanel', (): void => {
     header.click();
     fixture.detectChanges();
     expect(header.getAttribute('aria-expanded')).toBe('false');
-    expect(panelHost().getAttribute('data-state')).toBe('collapsed');
+    expect(panelHost().getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Collapsed);
   });
 
   it('toggles via Enter and Space keys', (): void => {

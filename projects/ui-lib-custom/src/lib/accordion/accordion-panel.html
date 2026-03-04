@@ -69,7 +69,7 @@
   role="region"
   [attr.aria-labelledby]="headerId()"
   [attr.hidden]="isExpanded() ? null : ''"
-  [attr.data-state]="isExpanded() ? 'expanded' : 'collapsed'"
+  [attr.data-state]="isExpanded() ? panelStates.Expanded : panelStates.Collapsed"
 >
   <div class="accordion-panel-body">
     <div class="accordion-panel-body-inner">
