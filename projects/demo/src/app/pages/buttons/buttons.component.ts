@@ -30,6 +30,7 @@ import type {
   IconPosition,
   TabsValue,
 } from 'ui-lib-custom';
+import { BUTTON_COLORS } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -131,26 +132,8 @@ export class Example {}`,
   public readonly variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly appearances: ButtonAppearance[] = ['solid', 'outline', 'ghost'];
   public readonly sizes: ButtonSize[] = ['small', 'medium', 'large'];
-  public readonly colors: ButtonColor[] = [
-    'primary',
-    'secondary',
-    'success',
-    'info',
-    'warning',
-    'help',
-    'danger',
-    'contrast',
-  ];
-  public readonly severities: ButtonSeverity[] = [
-    'primary',
-    'secondary',
-    'success',
-    'info',
-    'warning',
-    'help',
-    'danger',
-    'contrast',
-  ];
+  public readonly colors: ButtonColor[] = [...BUTTON_COLORS];
+  public readonly severities: ButtonSeverity[] = [...BUTTON_COLORS];
   public readonly iconPositions: IconPosition[] = ['left', 'right', 'top', 'bottom'];
   public readonly demoIcon: WritableSignal<string> = signal<string>('search');
 

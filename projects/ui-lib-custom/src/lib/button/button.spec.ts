@@ -14,6 +14,7 @@ import { By } from '@angular/platform-browser';
 import { Button } from './button';
 import type { ButtonColor, ButtonVariant, ButtonSize } from './button';
 import { SHARED_VARIANT_OPTIONS } from '../shared/constants';
+import { BUTTON_COLORS } from './button.constants';
 import { Icon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -297,7 +298,7 @@ describe('Button', (): void => {
   });
 
   it('applies each severity/color class', (): void => {
-    const colors: ButtonColor[] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
+    const colors: ButtonColor[] = [...BUTTON_COLORS];
 
     colors.forEach((color: ButtonColor): void => {
       fixture.componentRef.setInput('color', color);
