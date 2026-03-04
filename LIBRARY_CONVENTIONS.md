@@ -84,6 +84,46 @@ as type annotations cannot be applied directly to return expressions without a v
 - Naming it significantly clarifies complex logic
 - A temporary debug breakpoint is intentional (remove before committing)
 
+### Meaningful Names (No Abbreviations)
+
+Always use full, descriptive names for variables, parameters, functions, and class members.
+Do not shorten names to save keystrokes — the reader's comprehension matters more than the writer's convenience.
+
+❌ Avoid:
+```ts
+function processBtn(e: Event, cfg: ButtonConfig): void { ... }
+const idx = items.findIndex(i => i.val === target);
+```
+
+✅ Prefer:
+```ts
+function processButton(event: Event, config: ButtonConfig): void { ... }
+const index = items.findIndex(item => item.value === target);
+```
+
+**Common offenders:**
+
+| Shortcut | Meaningful name |
+|---|---|
+| `btn` | `button` |
+| `e`, `evt` | `event` |
+| `val` | `value` |
+| `cfg` | `config` |
+| `idx` | `index` |
+| `el`, `elem` | `element` |
+| `cb` | `callback` |
+| `fn` | describe what it does: `handler`, `predicate`, `formatter` |
+| `arr` | describe the contents: `items`, `options`, `entries` |
+| `obj` | describe the shape: `config`, `preset`, `context` |
+| `res` | `response` |
+| `err` | `error` |
+| `arg` | name what the argument actually represents |
+
+**Allowed exceptions:**
+- `id` — universally understood
+- `url` — universally understood
+- `i`, `j` — only inside classic `for` loops of 3 lines or fewer
+
 ### Separate Template Files
 
 Always use a separate `.html` template file for components. Do not use inline `template` in the component decorator.
