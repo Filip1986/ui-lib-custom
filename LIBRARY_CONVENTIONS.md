@@ -13,8 +13,69 @@
 
 ## AI Agent & Development Environment
 
-- **Terminal**: Use **PowerShell** for all terminal commands. Do not use bash, cmd, or other shells.
-- **Custom Components First**: When building new features, components, or demos within this library, always prefer using the library's own custom components (`ui-lib-*`) over third-party alternatives (e.g., PrimeNG, Angular Material) whenever a suitable custom component exists. This ensures dogfooding, consistency, and helps identify gaps in the component library.
+> **Start here.** Before writing any code, read `AI_AGENT_CONTEXT.md` (project root) for the
+> current component inventory, active work, and common task playbooks. Then read the relevant
+> section of this file.
+
+### Environment
+
+- **Terminal:** Use **PowerShell** for all terminal commands. Never bash, cmd, or other shells.
+- **Custom Components First:** Always use `ui-lib-*` components in demos and new features.
+  Never reach for PrimeNG or Angular Material as a substitute when a custom equivalent exists.
+  This enforces dogfooding, surfaces gaps, and ensures library consistency.
+
+### Recommended Reading Order
+
+1. `AI_AGENT_CONTEXT.md` — component inventory, file map, active work, task playbooks
+2. `LIBRARY_CONVENTIONS.md` (this file) — all architectural rules and patterns
+3. Component doc at `docs/reference/components/<n>.md` — if working on a specific component
+4. `docs/architecture/` — if working on cross-cutting concerns (entry points, theming, tokens)
+
+### Code Quality Checklist
+
+Run through this mentally before submitting any output:
+
+- [ ] `ViewEncapsulation.None` present on every library component
+- [ ] All return types are explicit — no inference on class members, public APIs, or `computed()`
+- [ ] Cross-entry-point imports use package paths (`ui-lib-custom/theme`), not relative paths
+- [ ] No new TypeScript enums — use `as const` constant objects
+- [ ] Public component inputs use string union types — not constants objects
+- [ ] Template uses `@if`/`@for`/`@switch` block syntax — no `*ngIf`/`*ngFor`
+- [ ] Self-closing tags used for all components without projected content
+- [ ] No raw hex/px — all new tokens added to `design-tokens.ts` first
+- [ ] If a new secondary entry point was added: `package.json` exports + `typesVersions` updated
+- [ ] Component inventory in `AI_AGENT_CONTEXT.md` updated if component status changed
+
+### Anti-Patterns (Common Mistakes)
+
+These have caused real regressions. Do not repeat them.
+
+| Anti-pattern | Why it's wrong | Correct approach |
+|---|---|---|
+| Relative import across entry points | Causes circular package graphs and ng-packagr build errors | Use `ui-lib-custom/<entry>` package paths for cross-entry imports |
+| Missing `ViewEncapsulation.None` | CSS variables and animations do not cascade correctly | Always add it — no exceptions |
+| Type inference on `computed()` arrow functions | ESLint `allowTypedFunctionExpressions: false` will fail the build | Always annotate: `computed<MyType>((): MyType => ...)` |
+| `enum` instead of `as const` | Enums add runtime overhead and reduce tree-shaking | Use `export const MY_THING = { ... } as const` |
+| Replacing public string union types with constants | Breaks the public API contract for consumers | Only extract *internal* repeated strings; leave public types as union literals |
+| Padding on the `overflow: hidden` collapse wrapper | Padding "leaks" visibly during `grid-row` animation | Use three layers: clip wrapper → padding wrapper → content |
+| Creating `public-api.ts` inside secondary entry folders | Not the established convention; ng-packagr handles it | `ng-package.json` points directly to `../src/lib/<n>/index.ts` |
+| Using `*ngIf` / `*ngFor` | Legacy syntax inconsistent with Angular 21 codebase | Use `@if`, `@for (x of y; track z)`, `@switch` |
+| Inlining raw hex or px values | Bypasses the design token system | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable |
+| Adding PrimeNG/Material components to demo pages | Undermines dogfooding; surfaces library gaps incorrectly | Use `ui-lib-*` equivalents; document gap in component inventory if none exists |
+
+### Session Handoff Protocol
+
+At the end of every productive session, output a brief handoff note and paste it into the
+"Last Session" section of `AI_AGENT_CONTEXT.md`:
+
+```
+Date: YYYY-MM-DD
+Changed: <what files/components were modified>
+State: <what is complete, what is in-progress>
+Next step: <the single most logical next action>
+```
+
+This is mandatory. It closes the loop between sessions and eliminates re-explanation of context.
 
 ## Framework & Architecture
 
@@ -58,7 +119,6 @@
   ```
 
 ## Code Style
-
 
 ### Inline Variables (Avoid Single-Use Assignments)
 
