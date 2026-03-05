@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import type { ThemePreset } from './theme-preset.interface';
-import { ThemePresetService } from './theme-preset.service';
+import type { ThemePreset } from 'ui-lib-custom';
+import { ThemePresetService } from 'ui-lib-custom';
 
 const COLOR_VAR_MAP: Record<string, string[]> = {
   primary: [
@@ -167,12 +167,6 @@ export class ThemeEditorService {
       return next;
     });
   }
-
-  public resetAll(): void {
-    const keys: string[] = Object.keys(this.pendingColors());
-    keys.forEach((key: string): void => this.resetColor(key));
-  }
-
   public saveAsPreset(name: string): ThemePreset {
     const preset: ThemePreset = this.presetService.captureCurrentTheme(name);
     this.presetService.savePreset(preset);
