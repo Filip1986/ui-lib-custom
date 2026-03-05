@@ -19,9 +19,9 @@ import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from '../shared/constants';
+import type { CheckboxVariant, CheckboxSize } from './checkbox.types';
 
-export type CheckboxVariant = 'material' | 'bootstrap' | 'minimal';
-export type CheckboxSize = 'sm' | 'md' | 'lg';
+export type { CheckboxVariant, CheckboxSize } from './checkbox.types';
 
 let checkboxId: number = 0;
 

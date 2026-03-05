@@ -13,21 +13,14 @@ import {
   STACK_TOKENS,
   type StackToken,
 } from 'ui-lib-custom/tokens';
+import type { StackDirection, StackAlign, StackJustify } from './stack.types';
+
+export type { StackDirection, StackAlign, StackJustify } from './stack.types';
 
 const stackVar: (token: StackToken) => string = (token: StackToken): string =>
   `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
 const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string =>
   `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
-
-export type StackDirection = 'vertical' | 'horizontal';
-export type StackAlign = 'start' | 'center' | 'end' | 'stretch';
-export type StackJustify =
-  | 'start'
-  | 'center'
-  | 'end'
-  | 'space-between'
-  | 'space-around'
-  | 'space-evenly';
 
 /**
  * Stack - A performant vertical or horizontal layout primitive

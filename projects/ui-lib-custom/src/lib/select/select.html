@@ -36,7 +36,7 @@
       class="ui-select-panel"
       #panel
       [id]="listboxId()"
-      role="listbox"
+      [attr.role]="listboxRole"
       [attr.aria-label]="placeholder()"
       [attr.aria-multiselectable]="multiple() ? 'true' : null"
     >
@@ -54,13 +54,13 @@
       }
 
       @for (groupKey of groupKeys(); track groupKey) {
-        @if (groupKey !== '__ungrouped') {
+        @if (groupKey !== ungroupedKey) {
           <div class="ui-select-group">{{ groupKey }}</div>
         }
         @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
           <div
             class="ui-select-option"
-            [id]="controlId() + '-option-' + (optionIndexMap().get(opt) ?? -1)"
+            [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
             [class.ui-select-option--active]="(optionIndexMap().get(opt) ?? -1) === focusedIndex()"
             [class.ui-select-option--selected]="selectedValues().has(opt.value)"
             [class.ui-select-option--disabled]="opt.disabled"

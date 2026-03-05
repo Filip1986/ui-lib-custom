@@ -17,11 +17,9 @@ import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { SHARED_DEFAULTS } from '../shared/constants';
+import type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
 
-export type InputVariant = 'material' | 'bootstrap' | 'minimal';
-export type InputLabelFloat = 'over' | 'in' | 'on';
-export type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url';
-export type InputSize = 'sm' | 'md' | 'lg';
+export type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
 
 let inputIdCounter: number = 0;
 
@@ -47,10 +45,10 @@ let inputIdCounter: number = 0;
 export class UiLibInput implements ControlValueAccessor {
   public readonly id: InputSignal<string | null> = input<string | null>(null);
   public readonly name: InputSignal<string | null> = input<string | null>(null);
+  public readonly label: InputSignal<string> = input<string>('');
   public readonly variant: InputSignal<InputVariant | null> = input<InputVariant | null>(null);
   public readonly size: InputSignal<InputSize> = input<InputSize>(SHARED_DEFAULTS.Size);
   public readonly type: InputSignal<InputType> = input<InputType>('text');
-  public readonly label: InputSignal<string> = input<string>('');
   public readonly labelFloat: InputSignal<InputLabelFloat> = input<InputLabelFloat>('over');
   public readonly placeholder: InputSignal<string> = input<string>('');
   public readonly error: InputSignal<string | null> = input<string | null>(null);

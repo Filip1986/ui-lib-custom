@@ -23,9 +23,9 @@ import type {
   ThemeVariant,
 } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from '../shared/constants';
+import type { CardVariant, CardElevation } from './card.types';
 
-export type CardVariant = 'material' | 'bootstrap' | 'minimal';
-export type CardElevation = 'none' | 'low' | 'medium' | 'high';
+export type { CardVariant, CardElevation } from './card.types';
 
 /**
  * Card container component with optional header, footer, and theme scope.

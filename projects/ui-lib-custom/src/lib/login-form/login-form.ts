@@ -18,9 +18,9 @@ import type {
 import { FormsModule } from '@angular/forms';
 import { Button } from '../button';
 import { Card } from '../card';
+import type { LoginFormVariant, SocialProvider } from './login-form.types';
 
-export type LoginFormVariant = 'centered' | 'split' | 'minimal';
-export type SocialProvider = 'google' | 'github' | 'microsoft';
+export type { LoginFormVariant, SocialProvider } from './login-form.types';
 
 /**
  * Login form component with optional social login actions.

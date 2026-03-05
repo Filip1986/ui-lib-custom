@@ -9,17 +9,9 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { BadgeVariant, BadgeColor, BadgeSize } from './badge.types';
 
-export type BadgeVariant = 'solid' | 'outline' | 'subtle';
-export type BadgeColor =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'neutral';
-export type BadgeSize = 'sm' | 'md' | 'lg';
+export type { BadgeVariant, BadgeColor, BadgeSize } from './badge.types';
 
 /**
  * Badge - A performant badge/tag component for labels, status, and counts

@@ -17,19 +17,27 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { SHARED_DEFAULTS, SHARED_SIZES, KEYBOARD_KEYS } from '../shared/constants';
+import {
+  SELECT_LISTBOX_ROLE,
+  SELECT_OPTION_ID_SEPARATOR,
+  SELECT_UNGROUPED_KEY,
+} from './select.constants';
+import type {
+  SelectCvaValue,
+  SelectOption,
+  SelectSize,
+  SelectValue,
+  SelectVariant,
+} from './select.types';
 
-export type SelectVariant = 'material' | 'bootstrap' | 'minimal';
-export type SelectSize = 'sm' | 'md' | 'lg';
-export type SelectValueObject = Record<string, string | number | boolean | null>;
-export type SelectValue = string | number | boolean | null | SelectValueObject;
-export type SelectCvaValue = SelectValue | SelectValue[] | null;
-
-export interface SelectOption {
-  label: string;
-  value: SelectValue;
-  group?: string;
-  disabled?: boolean;
-}
+export type {
+  SelectVariant,
+  SelectSize,
+  SelectValueObject,
+  SelectValue,
+  SelectCvaValue,
+  SelectOption,
+} from './select.types';
 
 let selectIdCounter: number = 0;
 
@@ -67,6 +75,10 @@ let selectIdCounter: number = 0;
   },
 })
 export class UiLibSelect implements ControlValueAccessor {
+  public readonly listboxRole: string = SELECT_LISTBOX_ROLE;
+  public readonly ungroupedKey: string = SELECT_UNGROUPED_KEY;
+  public readonly optionIdSeparator: string = SELECT_OPTION_ID_SEPARATOR;
+
   public readonly options: InputSignal<SelectOption[]> = input<SelectOption[]>([]);
   public readonly variant: InputSignal<SelectVariant | null> = input<SelectVariant | null>(null);
   public readonly size: InputSignal<SelectSize> = input<SelectSize>(SHARED_DEFAULTS.Size);
@@ -133,14 +145,6 @@ export class UiLibSelect implements ControlValueAccessor {
     }
   );
 
-  public readonly activeDescendantId: Signal<string | null> = computed<string | null>(
-    (): string | null => {
-      const index: number = this.focusedIndex();
-      if (index < 0 || !this.open()) return null;
-      return `${this.controlIdValue}-option-${index}`;
-    }
-  );
-
   public readonly resolvedLabelledBy: Signal<string | null> = computed<string | null>(
     (): string | null => {
       if (this.ariaLabelledBy()) return this.ariaLabelledBy();
@@ -167,11 +171,13 @@ export class UiLibSelect implements ControlValueAccessor {
   );
 
   public readonly displayValue: Signal<string> = computed<string>((): string => {
-    const vals: SelectValue[] | null = this.internalValue();
-    const opts: SelectOption[] = this.options();
-    if (!vals || vals.length === 0) return '';
-    const labels: string[] = vals.map((v: SelectValue): string =>
-      this.getOptionLabel(opts.find((o: SelectOption): boolean => o.value === v) ?? v)
+    const values: SelectValue[] | null = this.internalValue();
+    const options: SelectOption[] = this.options();
+    if (!values || values.length === 0) return '';
+    const labels: string[] = values.map((value: SelectValue): string =>
+      this.getOptionLabel(
+        options.find((option: SelectOption): boolean => option.value === value) ?? value
+      )
     );
     return labels.join(', ');
   });
@@ -179,9 +185,19 @@ export class UiLibSelect implements ControlValueAccessor {
   public readonly filteredOptions: Signal<SelectOption[]> = computed<SelectOption[]>(
     (): SelectOption[] => {
       const term: string = this.filter().toLowerCase();
-      const opts: SelectOption[] = this.options();
-      if (!term) return opts;
-      return opts.filter((o: SelectOption): boolean => o.label.toLowerCase().includes(term));
+      const options: SelectOption[] = this.options();
+      if (!term) return options;
+      return options.filter((option: SelectOption): boolean =>
+        option.label.toLowerCase().includes(term)
+      );
+    }
+  );
+
+  public readonly activeDescendantId: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const index: number = this.focusedIndex();
+      if (index < 0 || !this.open()) return null;
+      return `${this.controlIdValue}${this.optionIdSeparator}${index}`;
     }
   );
 
@@ -190,7 +206,7 @@ export class UiLibSelect implements ControlValueAccessor {
   >((): Record<string, SelectOption[]> => {
     const groups: Record<string, SelectOption[]> = {};
     this.filteredOptions().forEach((opt: SelectOption): void => {
-      const key: string = opt.group ?? '__ungrouped';
+      const key: string = opt.group ?? this.ungroupedKey;
       groups[key] = groups[key] || [];
       groups[key].push(opt);
     });

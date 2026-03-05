@@ -15,14 +15,14 @@ import {
   STACK_TOKENS,
   type StackToken,
 } from 'ui-lib-custom/tokens';
+import type { GridAlign, GridJustify } from './grid.types';
+
+export type { GridAlign, GridJustify } from './grid.types';
 
 const stackVar: (token: StackToken) => string = (token: StackToken): string =>
   `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
 const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string =>
   `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
-
-export type GridAlign = 'start' | 'center' | 'end' | 'stretch';
-export type GridJustify = 'start' | 'center' | 'end' | 'stretch';
 
 /**
  * Grid - A performant CSS Grid layout primitive

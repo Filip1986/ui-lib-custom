@@ -8,19 +8,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import type { InputSignal, WritableSignal, Signal } from '@angular/core';
+import type { SidebarMenuItem, SidebarVariant } from './sidebar-menu.types';
 
-export interface SidebarMenuItem {
-  id: string;
-  label: string;
-  icon?: string;
-  active?: boolean;
-  children?: SidebarMenuItem[];
-  disabled?: boolean;
-  badge?: string;
-  url?: string;
-}
-
-export type SidebarVariant = 'classic' | 'compact' | 'modern';
+export type { SidebarMenuItem, SidebarVariant } from './sidebar-menu.types';
 
 /**
  * Sidebar navigation menu with collapsible groups and variants.

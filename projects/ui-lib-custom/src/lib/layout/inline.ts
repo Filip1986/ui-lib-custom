@@ -13,14 +13,14 @@ import {
   INLINE_TOKENS,
   type InlineToken,
 } from 'ui-lib-custom/tokens';
+import type { InlineAlign, InlineJustify } from './inline.types';
+
+export type { InlineAlign, InlineJustify } from './inline.types';
 
 const inlineVar: (token: InlineToken) => string = (token: InlineToken): string =>
   `var(--uilib-inline-${token}, ${INLINE_TOKENS[token]})`;
 const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string =>
   `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
-
-export type InlineAlign = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
-export type InlineJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-around';
 
 /**
  * Inline - A performant inline/horizontal layout primitive with wrapping

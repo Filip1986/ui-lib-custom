@@ -13,6 +13,9 @@ import {
 import { Icon } from '../icon';
 import type { StatusIcon } from '../icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { AlertSeverity, AlertVariant } from './alert.types';
+
+export type { AlertSeverity, AlertVariant } from './alert.types';
 
 /**
  * Alert component for status messaging with optional dismiss action.
@@ -34,12 +37,8 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 export class Alert {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
-  public readonly severity: InputSignal<'success' | 'error' | 'warning' | 'info'> = input<
-    'success' | 'error' | 'warning' | 'info'
-  >('info');
-  public readonly variant: InputSignal<'material' | 'bootstrap' | 'minimal' | null> = input<
-    'material' | 'bootstrap' | 'minimal' | null
-  >(null);
+  public readonly severity: InputSignal<AlertSeverity> = input<AlertSeverity>('info');
+  public readonly variant: InputSignal<AlertVariant | null> = input<AlertVariant | null>(null);
   public readonly dismissible: InputSignal<boolean> = input<boolean>(false);
 
   public readonly dismissed: OutputEmitterRef<void> = output<void>();
@@ -54,9 +53,9 @@ export class Alert {
     return iconMap[this.severity()] ?? 'info';
   });
 
-  public readonly effectiveVariant: Signal<'material' | 'bootstrap' | 'minimal'> = computed<
-    'material' | 'bootstrap' | 'minimal'
-  >((): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant());
+  public readonly effectiveVariant: Signal<AlertVariant> = computed<AlertVariant>(
+    (): AlertVariant => this.variant() ?? this.themeConfig.variant()
+  );
 
   public readonly hostClasses: Signal<string> = computed<string>(
     (): string => `alert-${this.effectiveVariant()} alert-${this.severity()}`
