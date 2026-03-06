@@ -22,7 +22,7 @@
     "format:check": "prettier --check \"projects/**/*.{ts,html,scss,css,js,json,md}\" \"docs/**/*.{md}\" \"*.{json,md}\"",
     "storybook": "cross-env NODE_ENV=development ng run ui-lib-custom:storybook",
     "build-storybook": "cross-env NODE_ENV=production ng run ui-lib-custom:build-storybook",
-    "lint": "ng lint",
+    "lint": "npx eslint",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint . --max-warnings 0",
     "bundlesize": "bundlesize",

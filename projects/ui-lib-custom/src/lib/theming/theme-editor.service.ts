@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import type { ThemePreset } from 'ui-lib-custom';
-import { ThemePresetService } from 'ui-lib-custom';
+import type { ThemePreset } from './theme-preset.interface';
+import { ThemePresetService } from './theme-preset.service';
 
 const COLOR_VAR_MAP: Record<string, string[]> = {
   primary: [

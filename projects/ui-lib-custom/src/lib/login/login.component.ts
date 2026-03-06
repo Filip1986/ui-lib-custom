@@ -13,7 +13,7 @@ import type {
   LoginFormData,
   LoginVariant,
   LoginSocialProvider,
-} from 'ui-lib-custom';
+} from './models/login-contract';
 import { DEFAULT_SOCIAL_PROVIDERS } from './base-login/base-login.component';
 import type { InputSignal, OutputEmitterRef } from '@angular/core';
 

@@ -1,6 +1,6 @@
 import type { OnInit, InputSignal, WritableSignal, OutputEmitterRef } from '@angular/core';
 import type { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
-import type { LoginFeatures, LoginFormData, LoginSocialProvider } from 'ui-lib-custom';
+import type { LoginFeatures, LoginFormData, LoginSocialProvider } from '../models/login-contract';
 import {
   Component,
   ChangeDetectionStrategy,
