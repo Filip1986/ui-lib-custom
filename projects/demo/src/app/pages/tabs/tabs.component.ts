@@ -40,6 +40,7 @@ import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { TabsBasicExampleComponent } from '@demo/examples/tabs-basic-example.component';
 
 interface DemoTab {
   value: TabsValue;
@@ -83,6 +84,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
     DocCodeSnippetComponent,
     CodePreviewComponent,
     VariantComparisonComponent,
+    TabsBasicExampleComponent,
   ],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',

@@ -8,6 +8,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { IconBasicExampleComponent } from '@demo/examples/icon-basic-example.component';
 import { FormsModule } from '@angular/forms';
 
 type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
@@ -32,6 +33,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     DocCodeSnippetComponent,
     DocDemoViewportComponent,
     CodePreviewComponent,
+    IconBasicExampleComponent,
     FormsModule,
   ],
   templateUrl: './icons-demo.component.html',

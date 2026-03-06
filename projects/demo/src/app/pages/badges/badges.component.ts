@@ -9,6 +9,7 @@ import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { BadgeBasicExampleComponent } from '@demo/examples/badge-basic-example.component';
 
 type TabKey =
   | 'playground'
@@ -38,6 +39,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     CodePreviewComponent,
     VariantComparisonComponent,
+    BadgeBasicExampleComponent,
   ],
   templateUrl: './badges.component.html',
   styleUrl: './badges.component.scss',

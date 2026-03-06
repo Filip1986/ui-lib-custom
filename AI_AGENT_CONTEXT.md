@@ -176,7 +176,7 @@ These are the most common sources of mistakes. Verify every output against this 
 
 ```
 Date: 2026-03-06
-Changed: projects/ui-lib-custom/src/lib/select/*, projects/ui-lib-custom/src/lib/alert/alert.types.ts, projects/ui-lib-custom/src/lib/badge/*, projects/ui-lib-custom/src/lib/checkbox/*, projects/ui-lib-custom/src/lib/card/*, projects/ui-lib-custom/src/lib/input/*, projects/ui-lib-custom/src/lib/login-form/login-form.types.ts, projects/ui-lib-custom/src/lib/sidebar-menu/*, projects/ui-lib-custom/src/lib/icon-button/*, projects/ui-lib-custom/src/lib/layout/{stack,inline,grid}.*
-State: Extracted component-local types/constants into co-located files for select, alert, badge, checkbox, card, input, login-form, sidebar-menu, icon-button, and layout primitives; updated barrels and templates to use constants.
-Next step: Review remaining components for constants extraction and update summary table + commit.
+Changed: projects/demo/src/app/examples/{select-basic,icon-basic,input-basic,layout-basic,select-button-basic}.component.ts, projects/demo/src/app/pages/icons/icons-demo.component.ts
+State: Fixed corrupted/empty demo example components, removed missing IconSearchComponent import. Demo build blocked by PowerShell execution policy (npx.ps1).
+Next step: Run demo build via node CLI script or enable process execution policy, then verify UI.
 ```

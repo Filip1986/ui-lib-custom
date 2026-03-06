@@ -9,6 +9,7 @@ import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewpor
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { CheckboxBasicExampleComponent } from '@demo/examples/checkbox-basic-example.component';
 
 type TabKey = 'playground' | 'variants' | 'api-reference' | 'accessibility' | 'usage';
 type ViewportPreset = { key: string; label: string; width: number; height: number };
@@ -31,6 +32,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     CodePreviewComponent,
     VariantComparisonComponent,
+    CheckboxBasicExampleComponent,
   ],
   templateUrl: './checkboxes.component.html',
   styleUrl: './checkboxes.component.scss',

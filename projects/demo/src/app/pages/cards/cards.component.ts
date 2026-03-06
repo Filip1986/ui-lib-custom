@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { CardBasicExampleComponent } from '@demo/examples/card-basic-example.component';
 import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 
 type ShadowKey = string;
@@ -49,6 +50,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     CodePreviewComponent,
     VariantComparisonComponent,
+    CardBasicExampleComponent,
     ThemeScopeDirective,
   ],
   templateUrl: './cards.component.html',

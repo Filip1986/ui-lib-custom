@@ -21,6 +21,7 @@ import { ThemeScopeDirective } from '@demo/shared/theme-scope.directive';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { InputBasicExampleComponent } from '@demo/examples/input-basic-example.component';
 
 type TabKey =
   | 'playground'
@@ -52,6 +53,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     CodePreviewComponent,
     VariantComparisonComponent,
+    InputBasicExampleComponent,
   ],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.scss',

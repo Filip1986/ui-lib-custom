@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { Card, Button, Stack } from 'ui-lib-custom';
+import { Card, Button } from 'ui-lib-custom';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -15,6 +15,7 @@ import { DesignTokensSectionComponent } from './design-tokens-section.component'
 import { ThemedLayoutsSectionComponent } from './themed-layouts-section.component';
 import { LayoutExamplesSectionComponent } from './examples-section.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
+import { LayoutBasicExampleComponent } from '@demo/examples/layout-basic-example.component';
 
 /**
  * Demo page aggregating layout primitives and sections.
@@ -37,7 +38,7 @@ import { CodePreviewComponent } from '../../shared/components/code-preview/code-
     ThemedLayoutsSectionComponent,
     LayoutExamplesSectionComponent,
     CodePreviewComponent,
-    Stack,
+    LayoutBasicExampleComponent,
   ],
   templateUrl: './layouts.component.html',
   styleUrl: './layouts.component.scss',

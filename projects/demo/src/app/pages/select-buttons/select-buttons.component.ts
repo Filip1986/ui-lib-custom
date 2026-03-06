@@ -13,6 +13,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
+import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-basic-example.component';
 
 /**
  * Demo page for select button variants.
@@ -34,6 +35,7 @@ import { VariantComparisonComponent } from '../../shared/components/variant-comp
     DocPageLayoutComponent,
     CodePreviewComponent,
     VariantComparisonComponent,
+    SelectButtonBasicExampleComponent,
   ],
   templateUrl: './select-buttons.component.html',
   styleUrl: './select-buttons.component.scss',
