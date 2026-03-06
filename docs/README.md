@@ -82,6 +82,7 @@ npm run build-storybook
 **Technical documentation and API reference:**
 
 - **[Reference Documentation Index](reference/README.md)** - Organized technical documentation
+- **[Documentation Status Tracker](DOC_STATUS.md)** - Authoritative status of component docs
 
 #### 🎨 Design Systems
 - **[Design Token System](reference/systems/DESIGN_TOKENS.md)** - Complete design token reference

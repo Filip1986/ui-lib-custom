@@ -176,7 +176,7 @@ These are the most common sources of mistakes. Verify every output against this 
 
 ```
 Date: 2026-03-06
-Changed: projects/demo/src/app/examples/{select-basic,icon-basic,input-basic,layout-basic,select-button-basic}.component.ts, projects/demo/src/app/pages/icons/icons-demo.component.ts
-State: Fixed corrupted/empty demo example components, removed missing IconSearchComponent import. Demo build blocked by PowerShell execution policy (npx.ps1).
-Next step: Run demo build via node CLI script or enable process execution policy, then verify UI.
+Changed: docs/DOC_STATUS.md, docs/README.md, docs/architecture/archive/DOCUMENTATION_AUDIT.md
+State: Added living documentation status tracker, linked from docs index, archived the static audit.
+Next step: Review DOC_STATUS rows when docs change; no further action required.
 ```

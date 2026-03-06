@@ -1,5 +1,7 @@
 # Documentation Audit
 
+> Superseded by `docs/DOC_STATUS.md`.
+
 Date: 2026-02-19
 
 ## Scope
@@ -147,4 +149,3 @@ From `BADGE.md` and `ACCORDION.md`, the standard structure includes:
 - `docs/reference/components/README.md` claims Button/Card are “existing” and documented, but they only live in `README.md` currently.
 - `DOCUMENTATION_MAP.md` also points to Button/Card in the root README.
 - Consider updating the component index and documentation map after Button/Card docs are created.
-
