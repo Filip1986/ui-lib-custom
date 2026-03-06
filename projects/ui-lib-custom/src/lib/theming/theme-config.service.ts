@@ -10,9 +10,9 @@ import {
   DENSITY_TOKENS,
   type DensityToken,
 } from 'ui-lib-custom/tokens';
-import brandExamplePreset from './presets/brand-example.json';
-import darkPreset from './presets/dark.json';
-import lightPreset from './presets/light.json';
+import { brandExamplePreset } from './presets/brand-example';
+import { darkPreset } from './presets/dark';
+import { lightPreset } from './presets/light';
 import { ICON_SIZES } from 'ui-lib-custom/core';
 import type {
   DeepPartial,

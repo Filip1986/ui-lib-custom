@@ -12,10 +12,10 @@ import type {
   LoginFormData,
   LoginVariant,
   LoginSocialProvider,
-} from 'ui-lib-custom';
-import { Login1Component } from 'ui-lib-custom';
-import { Login3Component } from 'ui-lib-custom';
-import { Login2Component } from 'ui-lib-custom';
+} from '../models/login-contract';
+import { Login1Component } from '../login-1/login-1.component';
+import { Login3Component } from '../login-3/login-3.component';
+import { Login2Component } from '../login-2/login-2.component';
 import type { InputSignal, OutputEmitterRef } from '@angular/core';
 
 /**

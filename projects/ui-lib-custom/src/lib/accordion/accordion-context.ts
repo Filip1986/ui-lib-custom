@@ -1,6 +1,6 @@
 import type { Signal } from '@angular/core';
 import { InjectionToken } from '@angular/core';
-import type { AccordionPanel } from 'ui-lib-custom';
+import type { AccordionPanel } from './accordion-panel';
 import type { AccordionExpandMode, AccordionSize, AccordionVariant } from './accordion.types';
 
 export interface AccordionContext {

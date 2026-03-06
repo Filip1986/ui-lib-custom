@@ -1,0 +1,62 @@
+import type { ThemePreset } from '../theme-preset.interface';
+
+/**
+ * Theme preset: brand-example.
+ */
+export const brandExamplePreset: ThemePreset = {
+  id: 'preset-brand-example',
+  name: 'brand-example',
+  description: 'Brand example preset',
+  variant: 'minimal',
+  shape: 'rounded',
+  density: 'default',
+  darkMode: 'light',
+  colorScheme: 'light',
+  colors: {
+    primary: '#7c3aed',
+    secondary: '#0f172a',
+    success: '#16a34a',
+    danger: '#dc2626',
+    warning: '#f97316',
+    info: '#0ea5e9',
+    background: '#f8fafc',
+    surface: '#ffffff',
+    surfaceAlt: '#f1f5f9',
+    text: '#0f172a',
+    textSecondary: '#475569',
+    border: '#e2e8f0',
+  },
+  fonts: {
+    heading: "'Inter', 'Segoe UI', sans-serif",
+    body: "'Inter', 'Segoe UI', sans-serif",
+    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+  },
+  typography: {
+    fontFamily: "'Inter', 'Segoe UI', sans-serif",
+    fontHeading: "'Inter', 'Segoe UI', sans-serif",
+    fontBody: "'Inter', 'Segoe UI', sans-serif",
+    fontUI: "'Inter', 'Segoe UI', sans-serif",
+    fontMonospace:
+      "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+    baseFontSize: '16px',
+    headingWeight: 600,
+    bodyWeight: 400,
+  },
+  shadow: 'shadow-3',
+  cardShadow: 'shadow-3',
+  buttonShadow: 'shadow-1',
+  icons: {
+    defaultLibrary: 'lucide',
+    defaultSize: 'md',
+    sizes: {
+      xs: '0.75rem',
+      sm: '1rem',
+      md: '1.25rem',
+      lg: '1.5rem',
+      xl: '2rem',
+      '2xl': '2.5rem',
+    },
+  },
+  createdAt: 1700000000000,
+  updatedAt: 1700000000000,
+};
