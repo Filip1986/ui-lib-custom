@@ -45,7 +45,7 @@ import {
   SHARED_SIZES,
   SHARED_THEME_VARIANTS,
   KEYBOARD_KEYS,
-} from '../core/shared/constants';
+} from 'ui-lib-custom/core';
 
 type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 

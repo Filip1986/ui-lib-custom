@@ -16,7 +16,7 @@ import type { TemplateRef, InputSignal, WritableSignal, Signal } from '@angular/
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { SHARED_DEFAULTS, SHARED_SIZES, KEYBOARD_KEYS } from '../core/shared/constants';
+import { SHARED_DEFAULTS, SHARED_SIZES, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import {
   SELECT_LISTBOX_ROLE,
   SELECT_OPTION_ID_SEPARATOR,

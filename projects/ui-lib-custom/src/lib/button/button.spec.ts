@@ -13,7 +13,7 @@ import { By } from '@angular/platform-browser';
 
 import { Button } from './button';
 import type { ButtonColor, ButtonVariant, ButtonSize } from './button';
-import { SHARED_VARIANT_OPTIONS } from '../core/shared/constants';
+import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
 import { BUTTON_COLORS } from './button.constants';
 import { Icon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';

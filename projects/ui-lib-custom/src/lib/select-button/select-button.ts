@@ -30,7 +30,7 @@ import {
   SHARED_SIZES,
   SHARED_THEME_VARIANTS,
   KEYBOARD_KEYS,
-} from '../core/shared/constants';
+} from 'ui-lib-custom/core';
 import type {
   SelectButtonChangeEvent,
   SelectButtonItemContext,

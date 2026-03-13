@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { SHARED_DEFAULTS, SHARED_SIZE_OPTIONS } from '../core/shared/constants';
+import { SHARED_DEFAULTS, SHARED_SIZE_OPTIONS } from 'ui-lib-custom/core';
 import { Badge } from './badge';
 
 type Story = StoryObj;

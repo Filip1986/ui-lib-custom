@@ -3,7 +3,7 @@ import {
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
-} from '../core/shared/constants';
+} from 'ui-lib-custom/core';
 import { SelectButton } from './select-button';
 
 type Story = StoryObj;

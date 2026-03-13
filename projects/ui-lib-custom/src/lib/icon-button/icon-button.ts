@@ -10,7 +10,7 @@ import {
 import { Icon } from '../icon';
 import type { IconSize } from '../icon';
 import type { SemanticIcon } from '../icon';
-import { SHARED_DEFAULTS, SHARED_SIZES } from '../core/shared/constants';
+import { SHARED_DEFAULTS, SHARED_SIZES } from 'ui-lib-custom/core';
 import type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';
 
 export type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';

@@ -17,7 +17,7 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import { KEYBOARD_KEYS } from '../core/shared/constants';
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import type { CheckboxVariant, CheckboxSize } from './checkbox.types';
 import { ThemeConfigService } from '../theming';
 

@@ -22,7 +22,7 @@ import type {
   ThemePresetColors,
   ThemeVariant,
 } from 'ui-lib-custom/theme';
-import { KEYBOARD_KEYS } from '../core/shared/constants';
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import type { CardVariant, CardElevation } from './card.types';
 
 export type { CardVariant, CardElevation } from './card.types';

@@ -18,7 +18,7 @@ import type { AccordionContext } from './accordion-context';
 import { ACCORDION_CONTEXT } from './accordion-context';
 import type { AccordionIconPosition, AccordionToggleIconContext } from './accordion.types';
 import { Icon } from 'ui-lib-custom/icon';
-import { KEYBOARD_KEYS } from '../core/shared/constants';
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
 let accordionPanelId: number = 0;

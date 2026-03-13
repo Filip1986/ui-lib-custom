@@ -6,7 +6,7 @@ import type { ThemeVariant, ThemeScopeInput } from 'ui-lib-custom/theme';
 
 import { Card } from './card';
 import type { CardElevation, CardVariant } from './card';
-import { SHARED_VARIANT_OPTIONS } from '../core/shared/constants';
+import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

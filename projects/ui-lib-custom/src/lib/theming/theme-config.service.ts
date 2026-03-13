@@ -29,7 +29,7 @@ import { saveAs } from './utils/file-download';
 import { exportThemeAsScss, type ScssExportOptions } from './exporters/scss-exporter';
 import { exportThemeAsCss, type CssExportOptions } from './exporters/css-exporter';
 import { exportThemeAsFigmaJson } from './exporters/figma-exporter';
-import { SHARED_DEFAULTS } from '../core/shared/constants';
+import { SHARED_DEFAULTS } from 'ui-lib-custom/core';
 
 type LoadOptions = {
   merge?: boolean;
