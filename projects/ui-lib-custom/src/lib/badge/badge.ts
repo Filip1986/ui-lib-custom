@@ -75,18 +75,18 @@ export class Badge {
   /** Computed CSS classes for the badge element */
   public readonly badgeClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
-      'badge',
-      `badge-variant-${this.effectiveVariant()}`,
-      `badge-color-${this.color()}`,
-      `badge-size-${this.size()}`,
+      'ui-lib-badge',
+      `ui-lib-badge--variant-${this.effectiveVariant()}`,
+      `ui-lib-badge--color-${this.color()}`,
+      `ui-lib-badge--size-${this.size()}`,
     ];
 
     if (this.pill()) {
-      classes.push('badge-pill');
+      classes.push('ui-lib-badge--pill');
     }
 
     if (this.dot()) {
-      classes.push('badge-dot');
+      classes.push('ui-lib-badge--dot');
     }
 
     return classes.join(' ');

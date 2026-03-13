@@ -68,35 +68,35 @@ describe('Badge', (): void => {
       size: 'lg',
       pill: true,
     });
-    expect(badgeElement.className).toContain('badge');
-    expect(badgeElement.className).toContain('badge-variant-outline');
-    expect(badgeElement.className).toContain('badge-color-danger');
-    expect(badgeElement.className).toContain('badge-size-lg');
-    expect(badgeElement.className).toContain('badge-pill');
+    expect(badgeElement.className).toContain('ui-lib-badge');
+    expect(badgeElement.className).toContain('ui-lib-badge--variant-outline');
+    expect(badgeElement.className).toContain('ui-lib-badge--color-danger');
+    expect(badgeElement.className).toContain('ui-lib-badge--size-lg');
+    expect(badgeElement.className).toContain('ui-lib-badge--pill');
   });
 
   it('uses solid variant styles by default', (): void => {
     const { badgeElement } = bootstrap();
-    expect(badgeElement.className).toContain('badge-variant-solid');
+    expect(badgeElement.className).toContain('ui-lib-badge--variant-solid');
   });
 
   it('uses outline variant styles', (): void => {
     const { badgeElement } = bootstrap({ variant: 'outline' });
-    expect(badgeElement.className).toContain('badge-variant-outline');
+    expect(badgeElement.className).toContain('ui-lib-badge--variant-outline');
   });
 
   it('uses subtle variant styles', (): void => {
     const { badgeElement } = bootstrap({ variant: 'subtle' });
-    expect(badgeElement.className).toContain('badge-variant-subtle');
+    expect(badgeElement.className).toContain('ui-lib-badge--variant-subtle');
   });
 
   it('adjusts radius for pill and dot', (): void => {
     const pillElement: HTMLElement = bootstrap({ pill: true }).badgeElement;
-    expect(pillElement.className).toContain('badge-pill');
+    expect(pillElement.className).toContain('ui-lib-badge--pill');
 
     const dotElement: HTMLElement = bootstrap({ dot: true, size: 'sm' }).badgeElement;
-    expect(dotElement.className).toContain('badge-dot');
-    expect(dotElement.className).toContain('badge-size-sm');
+    expect(dotElement.className).toContain('ui-lib-badge--dot');
+    expect(dotElement.className).toContain('ui-lib-badge--size-sm');
   });
 
   it('projects content', (): void => {
@@ -125,7 +125,7 @@ describe('Badge', (): void => {
 
     colors.forEach((color: BadgeColor): void => {
       const { badgeElement } = bootstrap({ color });
-      expect(badgeElement.className).toContain(`badge-color-${color}`);
+      expect(badgeElement.className).toContain(`ui-lib-badge--color-${color}`);
     });
   });
 
@@ -134,13 +134,13 @@ describe('Badge', (): void => {
 
     sizes.forEach((size: BadgeSize): void => {
       const { badgeElement } = bootstrap({ size });
-      expect(badgeElement.className).toContain(`badge-size-${size}`);
+      expect(badgeElement.className).toContain(`ui-lib-badge--size-${size}`);
     });
   });
 
   it('renders dot mode without text content', (): void => {
     const { badgeElement } = bootstrap({ dot: true, label: 'status', content: '' });
-    expect(badgeElement.className).toContain('badge-dot');
+    expect(badgeElement.className).toContain('ui-lib-badge--dot');
     const text: string = badgeElement.textContent.trim();
     expect(text).toBe('');
   });
