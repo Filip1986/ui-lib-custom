@@ -1,7 +1,7 @@
 <button
   #headerButton
   type="button"
-  class="accordion-panel-header"
+  class="ui-lib-accordion-panel__header"
   role="button"
   [attr.id]="headerId()"
   [attr.aria-expanded]="isExpanded()"
@@ -13,66 +13,70 @@
 >
   @if (showIcon() && iconPosition() === 'start') {
     <span
-      class="accordion-panel-icon icon-start"
-      [class.expanded]="isExpanded()"
+      class="ui-lib-accordion-panel__icon ui-lib-accordion-panel__icon--start"
+      [class.ui-lib-accordion-panel__icon--expanded]="isExpanded()"
       aria-hidden="true"
     >
       @if (toggleIconTemplate(); as iconTpl) {
-        <span class="icon-collapsed">
+        <span class="ui-lib-accordion-panel__icon-collapsed">
           <ng-container
             [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: false, expanded: false }"
           />
         </span>
-        <span class="icon-expanded">
+        <span class="ui-lib-accordion-panel__icon-expanded">
           <ng-container
             [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: true, expanded: true }"
           />
         </span>
       } @else {
-        <ui-lib-icon class="icon-collapsed" [name]="collapseIcon()" />
-        <ui-lib-icon class="icon-expanded" [name]="expandIcon()" />
+        <ui-lib-icon class="ui-lib-accordion-panel__icon-collapsed" [name]="collapseIcon()" />
+        <ui-lib-icon class="ui-lib-accordion-panel__icon-expanded" [name]="expandIcon()" />
       }
     </span>
   }
   <ng-content select="[accordionHeader]" />
   @if (!hasCustomHeader()) {
-    <span class="accordion-panel-title">{{ header() }}</span>
+    <span class="ui-lib-accordion-panel__title">{{ header() }}</span>
   }
   @if (showIcon() && iconPosition() === 'end') {
-    <span class="accordion-panel-icon icon-end" [class.expanded]="isExpanded()" aria-hidden="true">
+    <span
+      class="ui-lib-accordion-panel__icon ui-lib-accordion-panel__icon--end"
+      [class.ui-lib-accordion-panel__icon--expanded]="isExpanded()"
+      aria-hidden="true"
+    >
       @if (toggleIconTemplate(); as iconTpl) {
-        <span class="icon-collapsed">
+        <span class="ui-lib-accordion-panel__icon-collapsed">
           <ng-container
             [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: false, expanded: false }"
           />
         </span>
-        <span class="icon-expanded">
+        <span class="ui-lib-accordion-panel__icon-expanded">
           <ng-container
             [ngTemplateOutlet]="iconTpl.template"
             [ngTemplateOutletContext]="{ $implicit: true, expanded: true }"
           />
         </span>
       } @else {
-        <ui-lib-icon class="icon-collapsed" [name]="collapseIcon()" />
-        <ui-lib-icon class="icon-expanded" [name]="expandIcon()" />
+        <ui-lib-icon class="ui-lib-accordion-panel__icon-collapsed" [name]="collapseIcon()" />
+        <ui-lib-icon class="ui-lib-accordion-panel__icon-expanded" [name]="expandIcon()" />
       }
     </span>
   }
 </button>
 <div
-  class="accordion-panel-content"
-  [class.expanded]="isExpanded()"
+  class="ui-lib-accordion-panel__content"
+  [class.ui-lib-accordion-panel__content--expanded]="isExpanded()"
   [attr.id]="panelId()"
   role="region"
   [attr.aria-labelledby]="headerId()"
   [attr.hidden]="isExpanded() ? null : ''"
   [attr.data-state]="isExpanded() ? panelStates.Expanded : panelStates.Collapsed"
 >
-  <div class="accordion-panel-body">
-    <div class="accordion-panel-body-inner">
+  <div class="ui-lib-accordion-panel__body">
+    <div class="ui-lib-accordion-panel__body-inner">
       <ng-content />
     </div>
   </div>

@@ -99,12 +99,12 @@ export class AccordionPanel implements OnDestroy {
   private readonly internalExpanded: WritableSignal<boolean> = signal<boolean>(this.expanded());
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
-    const classes: string[] = ['ui-lib-accordion-panel', 'accordion-panel'];
+    const classes: string[] = ['ui-lib-accordion-panel'];
     if (this.isExpanded()) {
-      classes.push('accordion-panel-expanded');
+      classes.push('ui-lib-accordion-panel--expanded');
     }
     if (this.disabled()) {
-      classes.push('accordion-panel-disabled');
+      classes.push('ui-lib-accordion-panel--disabled');
     }
     return classes.join(' ');
   });
@@ -121,12 +121,6 @@ export class AccordionPanel implements OnDestroy {
 
   public readonly headerId: Signal<string> = computed<string>((): string => `${this.uid}-header`);
   public readonly panelId: Signal<string> = computed<string>((): string => `${this.uid}-panel`);
-  public readonly resolvedIconName: Signal<string> = computed<string>((): string =>
-    this.isExpanded() ? this.expandIcon() : this.collapseIcon()
-  );
-  public readonly isIconEnd: Signal<boolean> = computed<boolean>(
-    (): boolean => this.iconPosition() === 'end'
-  );
 
   public toggle(): void {
     if (this.disabled()) {

@@ -1,32 +1,32 @@
-:host {
+ui-lib-accordion {
   --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
   --uilib-accordion-border-radius: var(--uilib-shape-base, 6px);
   display: flex;
   flex-direction: column;
   gap: var(--uilib-accordion-gap);
 
-  &.accordion-variant-material {
+  &.ui-lib-accordion--variant-material {
     --uilib-accordion-panel-bg: var(--uilib-surface);
     --uilib-accordion-panel-border: 1px solid transparent;
     --uilib-accordion-panel-radius: var(--uilib-shape-base, 6px);
     --uilib-accordion-gap: var(--uilib-space-2, 0.5rem);
   }
 
-  &.accordion-variant-bootstrap {
+  &.ui-lib-accordion--variant-bootstrap {
     --uilib-accordion-panel-bg: var(--uilib-surface);
     --uilib-accordion-panel-border: 1px solid var(--uilib-border);
     --uilib-accordion-panel-radius: calc(var(--uilib-shape-base, 6px) * 0);
     --uilib-accordion-gap: 0;
   }
 
-  &.accordion-variant-minimal {
+  &.ui-lib-accordion--variant-minimal {
     --uilib-accordion-panel-bg: transparent;
     --uilib-accordion-panel-border: 0 solid transparent;
     --uilib-accordion-panel-radius: calc(var(--uilib-shape-base, 6px) * 0);
     --uilib-accordion-gap: 0;
   }
 
-  &.accordion-size-sm {
+  &.ui-lib-accordion--size-sm {
     --uilib-accordion-header-padding: var(--uilib-accordion-header-padding-sm);
     --uilib-accordion-icon-size: var(--uilib-accordion-icon-size-sm);
     --uilib-accordion-header-font-size: var(--uilib-accordion-header-font-size-sm);
@@ -34,7 +34,7 @@
     font-size: var(--uilib-font-size-sm, 0.875rem);
   }
 
-  &.accordion-size-md {
+  &.ui-lib-accordion--size-md {
     --uilib-accordion-header-padding: var(--uilib-accordion-header-padding-md);
     --uilib-accordion-icon-size: var(--uilib-accordion-icon-size-md);
     --uilib-accordion-header-font-size: var(--uilib-accordion-header-font-size-md);
@@ -42,7 +42,7 @@
     font-size: var(--uilib-font-size-md, 1rem);
   }
 
-  &.accordion-size-lg {
+  &.ui-lib-accordion--size-lg {
     --uilib-accordion-header-padding: var(--uilib-accordion-header-padding-lg);
     --uilib-accordion-icon-size: var(--uilib-accordion-icon-size-lg);
     --uilib-accordion-header-font-size: var(--uilib-accordion-header-font-size-lg);

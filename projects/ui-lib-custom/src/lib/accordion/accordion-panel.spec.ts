@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Icon } from '../icon/icon';
+import { Icon } from 'ui-lib-custom/icon';
 import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from './accordion-panel';
 import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
@@ -75,13 +75,13 @@ describe('AccordionPanel', (): void => {
 
   function headerButton(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.accordion-panel-header'
+      '.ui-lib-accordion-panel__header'
     ) as HTMLElement;
   }
 
   function contentEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.accordion-panel-content'
+      '.ui-lib-accordion-panel__content'
     ) as HTMLElement;
   }
 
@@ -92,7 +92,7 @@ describe('AccordionPanel', (): void => {
   }
 
   function iconContainer(): HTMLElement | null {
-    return (fixture.nativeElement as HTMLElement).querySelector('.accordion-panel-icon');
+    return (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-accordion-panel__icon');
   }
 
   function iconNames(): string[] {
@@ -125,7 +125,7 @@ describe('AccordionPanel', (): void => {
 
   it('renders default header text when no custom header', (): void => {
     const title: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.accordion-panel-title'
+      '.ui-lib-accordion-panel__title'
     );
     expect(title).toBeTruthy();
     const titleText: string | null = (title as HTMLElement).textContent;
@@ -138,7 +138,7 @@ describe('AccordionPanel', (): void => {
     fixture.detectChanges();
 
     const title: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.accordion-panel-title'
+      '.ui-lib-accordion-panel__title'
     );
     const custom: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
       '.custom-header'
@@ -176,7 +176,7 @@ describe('AccordionPanel', (): void => {
     header.click();
     fixture.detectChanges();
     expect(header.getAttribute('aria-expanded')).toBe('true');
-    expect(panelHost().className).toContain('accordion-panel-expanded');
+    expect(panelHost().className).toContain('ui-lib-accordion-panel--expanded');
 
     header.click();
     fixture.detectChanges();
@@ -237,7 +237,9 @@ describe('AccordionPanel', (): void => {
     expect(names).toContain('plus');
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect((iconEl as HTMLElement).classList.contains('expanded')).toBeFalsy();
+    expect(
+      (iconEl as HTMLElement).classList.contains('ui-lib-accordion-panel__icon--expanded')
+    ).toBeFalsy();
   });
 
   it('applies expanded icon class when panel is expanded', (): void => {
@@ -246,13 +248,17 @@ describe('AccordionPanel', (): void => {
 
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect((iconEl as HTMLElement).classList.contains('expanded')).toBeTruthy();
+    expect(
+      (iconEl as HTMLElement).classList.contains('ui-lib-accordion-panel__icon--expanded')
+    ).toBeTruthy();
   });
 
   it('positions icon at end by default', (): void => {
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect((iconEl as HTMLElement).classList.contains('icon-end')).toBeTruthy();
+    expect(
+      (iconEl as HTMLElement).classList.contains('ui-lib-accordion-panel__icon--end')
+    ).toBeTruthy();
   });
 
   it('positions icon at start when iconPosition is start', (): void => {
@@ -261,14 +267,18 @@ describe('AccordionPanel', (): void => {
 
     const iconEl: HTMLElement | null = iconContainer();
     expect(iconEl).toBeTruthy();
-    expect((iconEl as HTMLElement).classList.contains('icon-start')).toBeTruthy();
+    expect(
+      (iconEl as HTMLElement).classList.contains('ui-lib-accordion-panel__icon--start')
+    ).toBeTruthy();
   });
 
   it('adds expanded class to content when expanded', (): void => {
     fixture.componentInstance.expanded.set(true);
     fixture.detectChanges();
 
-    expect(contentEl().classList.contains('expanded')).toBeTruthy();
+    expect(
+      contentEl().classList.contains('ui-lib-accordion-panel__content--expanded')
+    ).toBeTruthy();
   });
 });
 
@@ -288,10 +298,14 @@ describe('AccordionPanel - Toggle Icon Template', (): void => {
   it('renders custom toggle icon template content', (): void => {
     const collapsedText: HTMLElement | null = (
       templateFixture.nativeElement as HTMLElement
-    ).querySelector('.accordion-panel-icon .icon-collapsed .toggle-text');
+    ).querySelector(
+      '.ui-lib-accordion-panel__icon .ui-lib-accordion-panel__icon-collapsed .toggle-text'
+    );
     const expandedText: HTMLElement | null = (
       templateFixture.nativeElement as HTMLElement
-    ).querySelector('.accordion-panel-icon .icon-expanded .toggle-text');
+    ).querySelector(
+      '.ui-lib-accordion-panel__icon .ui-lib-accordion-panel__icon-expanded .toggle-text'
+    );
 
     expect(collapsedText).toBeTruthy();
     expect(expandedText).toBeTruthy();
@@ -305,13 +319,15 @@ describe('AccordionPanel - Toggle Icon Template', (): void => {
 
   it('applies expanded class when panel is expanded', (): void => {
     const iconEl: HTMLElement | null = (templateFixture.nativeElement as HTMLElement).querySelector(
-      '.accordion-panel-icon'
+      '.ui-lib-accordion-panel__icon'
     );
 
     templateFixture.componentInstance.expanded.set(true);
     templateFixture.detectChanges();
 
     expect(iconEl).toBeTruthy();
-    expect((iconEl as HTMLElement).classList.contains('expanded')).toBeTruthy();
+    expect(
+      (iconEl as HTMLElement).classList.contains('ui-lib-accordion-panel__icon--expanded')
+    ).toBeTruthy();
   });
 });

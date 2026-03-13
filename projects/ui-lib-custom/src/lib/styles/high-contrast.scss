@@ -187,11 +187,11 @@
    * ========================================= */
 
   ui-lib-accordion {
-    .accordion-panel {
+    ui-lib-accordion-panel {
       border: 2px solid CanvasText !important;
     }
 
-    .accordion-panel-header {
+    .ui-lib-accordion-panel__header {
       border: 1px solid ButtonText !important;
 
       &:hover {

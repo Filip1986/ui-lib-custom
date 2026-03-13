@@ -112,14 +112,14 @@ describe('Accordion', (): void => {
 
   function getPanelHeaders(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
     const headers: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      '.accordion-panel-header'
+      '.ui-lib-accordion-panel__header'
     );
     return Array.from(headers) as HTMLElement[];
   }
 
   function getPanelContents(fixture: ComponentFixture<TestHostComponent>): HTMLElement[] {
     const contents: NodeListOf<Element> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      '.accordion-panel-content'
+      '.ui-lib-accordion-panel__content'
     );
     return Array.from(contents) as HTMLElement[];
   }
@@ -173,15 +173,15 @@ describe('Accordion', (): void => {
       'ui-lib-accordion'
     ) as HTMLElement;
 
-    expect(accordionEl.className).toContain('accordion-variant-material');
-    expect(accordionEl.className).toContain('accordion-size-md');
+    expect(accordionEl.className).toContain('ui-lib-accordion--variant-material');
+    expect(accordionEl.className).toContain('ui-lib-accordion--size-md');
 
     fixture.componentInstance.variant.set('bootstrap');
     fixture.componentInstance.size.set('lg');
     fixture.detectChanges();
 
-    expect(accordionEl.className).toContain('accordion-variant-bootstrap');
-    expect(accordionEl.className).toContain('accordion-size-lg');
+    expect(accordionEl.className).toContain('ui-lib-accordion--variant-bootstrap');
+    expect(accordionEl.className).toContain('ui-lib-accordion--size-lg');
   });
 
   it('opens only one panel in single mode', (): void => {
@@ -371,7 +371,7 @@ describe('Accordion', (): void => {
 
     togglePanel(fixture, 0);
 
-    expect(panelHost0.className).toContain('accordion-panel-expanded');
+    expect(panelHost0.className).toContain('ui-lib-accordion-panel--expanded');
     expect(panelHost0.getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Expanded);
     expect(content0.getAttribute('data-state')).toBe(ACCORDION_PANEL_STATES.Expanded);
     expect(content0.hasAttribute('hidden')).toBeFalsy();

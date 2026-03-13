@@ -120,9 +120,9 @@ export class Accordion implements AccordionContext {
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
       'ui-lib-accordion',
-      `accordion-variant-${this.resolvedVariant()}`,
-      `accordion-size-${this.size()}`,
-      `accordion-expand-mode-${this.expandMode()}`,
+      `ui-lib-accordion--variant-${this.resolvedVariant()}`,
+      `ui-lib-accordion--size-${this.size()}`,
+      `ui-lib-accordion--expand-mode-${this.expandMode()}`,
     ];
     return classes.join(' ');
   });
