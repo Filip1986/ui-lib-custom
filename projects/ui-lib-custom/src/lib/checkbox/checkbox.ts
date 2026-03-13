@@ -19,7 +19,7 @@ import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import type { CheckboxVariant, CheckboxSize } from './checkbox.types';
-import { ThemeConfigService } from '../theming';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 export type { CheckboxVariant, CheckboxSize } from './checkbox.types';
 
