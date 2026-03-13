@@ -1,16 +1,16 @@
-<div class="checkbox-box" aria-hidden="true">
-  <span class="checkbox-icon checkbox-icon-check"></span>
-  <span class="checkbox-icon checkbox-icon-indeterminate"></span>
+<div class="ui-lib-checkbox__box" aria-hidden="true">
+  <span class="ui-lib-checkbox__icon ui-lib-checkbox__icon--check"></span>
+  <span class="ui-lib-checkbox__icon ui-lib-checkbox__icon--indeterminate"></span>
 </div>
-<div class="checkbox-content">
-  <span class="checkbox-label" [id]="labelElementId">
+<div class="ui-lib-checkbox__content">
+  <span class="ui-lib-checkbox__label" [id]="labelElementId">
     @if (label()) {
       {{ label() }}
     }
     <ng-content />
   </span>
   @if (showDescription()) {
-    <span class="checkbox-description" [id]="descriptionElementId">
+    <span class="ui-lib-checkbox__description" [id]="descriptionElementId">
       {{ description() }}
     </span>
   }

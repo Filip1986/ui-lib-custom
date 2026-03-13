@@ -57,8 +57,8 @@ describe('Checkbox', (): void => {
 
   it('should render label and description', (): void => {
     const el: HTMLElement = checkboxEl();
-    expect(el.querySelector('.checkbox-label')?.textContent).toContain('Accept terms');
-    expect(el.querySelector('.checkbox-description')?.textContent).toContain(
+    expect(el.querySelector('.ui-lib-checkbox__label')?.textContent).toContain('Accept terms');
+    expect(el.querySelector('.ui-lib-checkbox__description')?.textContent).toContain(
       'Required to continue'
     );
   });
@@ -70,9 +70,9 @@ describe('Checkbox', (): void => {
     fixture.detectChanges();
 
     const el: HTMLElement = checkboxEl();
-    expect(el.className).toContain('ui-checkbox-variant-bootstrap');
-    expect(el.className).toContain('ui-checkbox-size-lg');
-    expect(el.className).toContain('ui-checkbox-checked');
+    expect(el.className).toContain('ui-lib-checkbox--variant-bootstrap');
+    expect(el.className).toContain('ui-lib-checkbox--size-lg');
+    expect(el.className).toContain('ui-lib-checkbox--checked');
   });
 
   it('toggles checked state on click when enabled', (): void => {
@@ -112,9 +112,9 @@ describe('Checkbox', (): void => {
   it('creates with defaults', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
     const el: HTMLElement = checkboxEl();
-    expect(el.classList.contains('ui-checkbox')).toBeTruthy();
-    expect(el.classList.contains('ui-checkbox-variant-material')).toBeTruthy();
-    expect(el.classList.contains('ui-checkbox-size-md')).toBeTruthy();
+    expect(el.classList.contains('ui-lib-checkbox')).toBeTruthy();
+    expect(el.classList.contains('ui-lib-checkbox--variant-material')).toBeTruthy();
+    expect(el.classList.contains('ui-lib-checkbox--size-md')).toBeTruthy();
   });
 
   it('applies each variant class', (): void => {
@@ -124,7 +124,7 @@ describe('Checkbox', (): void => {
       fixture.componentInstance.variant.set(variant);
       fixture.detectChanges();
 
-      expect(checkboxEl().classList.contains(`ui-checkbox-variant-${variant}`)).toBeTruthy();
+      expect(checkboxEl().classList.contains(`ui-lib-checkbox--variant-${variant}`)).toBeTruthy();
     });
   });
 
@@ -135,7 +135,7 @@ describe('Checkbox', (): void => {
       fixture.componentInstance.size.set(size);
       fixture.detectChanges();
 
-      expect(checkboxEl().classList.contains(`ui-checkbox-size-${size}`)).toBeTruthy();
+      expect(checkboxEl().classList.contains(`ui-lib-checkbox--size-${size}`)).toBeTruthy();
     });
   });
 
@@ -163,7 +163,7 @@ describe('Checkbox', (): void => {
     fixture.detectChanges();
 
     const el: HTMLElement = checkboxEl();
-    const labelEl: HTMLElement | null = el.querySelector('.checkbox-label');
+    const labelEl: HTMLElement | null = el.querySelector('.ui-lib-checkbox__label');
     expect(el.getAttribute('aria-labelledby')).toBe(labelEl?.id ?? null);
   });
 

@@ -1,9 +1,6 @@
-:host {
+ui-lib-checkbox {
   --uilib-checkbox-gap: var(--uilib-space-3, 0.75rem);
-  --uilib-checkbox-border: var(
-    --uilib-checkbox-border-color,
-    var(--uilib-color-neutral-400)
-  );
+  --uilib-checkbox-border: var(--uilib-checkbox-border-color, var(--uilib-color-neutral-400));
   --uilib-checkbox-border-hover: var(
     --uilib-checkbox-border-hover-color,
     var(--uilib-color-primary-500)
@@ -35,45 +32,36 @@
   align-items: center;
   gap: var(--uilib-checkbox-gap);
   cursor: pointer;
-  font-family: var(--uilib-checkbox-font);
+  font-family: var(--uilib-checkbox-font), sans-serif;
   color: inherit;
   outline: none;
   padding: calc(var(--uilib-checkbox-padding-base) * var(--uilib-density, 1));
 }
 
-:host(.ui-checkbox-disabled) {
+ui-lib-checkbox.ui-lib-checkbox--disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-:host(.ng-touched) .checkbox-box {
-  border-color: var(
-    --uilib-checkbox-border-touched,
-    var(--uilib-checkbox-border-active)
-  );
+ui-lib-checkbox.ng-touched .ui-lib-checkbox__box {
+  border-color: var(--uilib-checkbox-border-touched, var(--uilib-checkbox-border-active));
 }
 
-:host(.ng-dirty) .checkbox-box {
-  border-color: var(
-    --uilib-checkbox-border-dirty,
-    var(--uilib-checkbox-border-active)
-  );
+ui-lib-checkbox.ng-dirty .ui-lib-checkbox__box {
+  border-color: var(--uilib-checkbox-border-dirty, var(--uilib-checkbox-border-active));
 }
 
-:host(.ng-invalid.ng-touched) .checkbox-box,
-:host(.ng-invalid.ng-dirty) .checkbox-box {
-  border-color: var(
-    --uilib-checkbox-border-invalid,
-    var(--uilib-color-danger-600)
-  );
+ui-lib-checkbox.ng-invalid.ng-touched .ui-lib-checkbox__box,
+ui-lib-checkbox.ng-invalid.ng-dirty .ui-lib-checkbox__box {
+  border-color: var(--uilib-checkbox-border-invalid, var(--uilib-color-danger-600));
 }
 
-:host(.ng-disabled) {
+ui-lib-checkbox.ng-disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-:host .checkbox-box {
+ui-lib-checkbox .ui-lib-checkbox__box {
   width: var(--uilib-checkbox-size, var(--uilib-checkbox-size-md));
   height: var(--uilib-checkbox-size, var(--uilib-checkbox-size-md));
   border-radius: var(--uilib-checkbox-radius);
@@ -89,30 +77,31 @@
     box-shadow 0.15s ease;
 }
 
-:host(:not(.ui-checkbox-disabled)) .checkbox-box {
+ui-lib-checkbox:not(.ui-lib-checkbox--disabled) .ui-lib-checkbox__box {
   box-shadow: var(--uilib-checkbox-shadow, none);
 }
 
-:host(:not(.ui-checkbox-disabled):hover) .checkbox-box {
+ui-lib-checkbox:not(.ui-lib-checkbox--disabled):hover .ui-lib-checkbox__box {
   border-color: var(--uilib-checkbox-border-hover);
 }
 
-:host(:not(.ui-checkbox-disabled)) .checkbox-box:active {
+ui-lib-checkbox:not(.ui-lib-checkbox--disabled) .ui-lib-checkbox__box:active {
   border-color: var(--uilib-checkbox-border-active);
   background: color-mix(in srgb, var(--uilib-checkbox-bg-checked) 15%, var(--uilib-checkbox-bg));
 }
 
-:host(.ui-checkbox-checked:not(.ui-checkbox-disabled)) .checkbox-box,
-:host(.ui-checkbox-indeterminate:not(.ui-checkbox-disabled)) .checkbox-box {
+ui-lib-checkbox.ui-lib-checkbox--checked:not(.ui-lib-checkbox--disabled) .ui-lib-checkbox__box,
+ui-lib-checkbox.ui-lib-checkbox--indeterminate:not(.ui-lib-checkbox--disabled)
+  .ui-lib-checkbox__box {
   border-color: var(--uilib-checkbox-bg-checked);
   background: var(--uilib-checkbox-bg-checked);
 }
 
-:host(:focus-visible) .checkbox-box {
+ui-lib-checkbox:focus-visible .ui-lib-checkbox__box {
   box-shadow: var(--uilib-checkbox-focus-ring);
 }
 
-:host .checkbox-icon {
+ui-lib-checkbox .ui-lib-checkbox__icon {
   position: absolute;
   width: 60%;
   height: 60%;
@@ -124,7 +113,7 @@
   align-items: center;
 }
 
-:host .checkbox-icon-check::before {
+ui-lib-checkbox .ui-lib-checkbox__icon--check::before {
   content: '';
   width: 100%;
   height: 100%;
@@ -135,26 +124,26 @@
   transform-origin: center;
 }
 
-:host .checkbox-icon-indeterminate::before {
+ui-lib-checkbox .ui-lib-checkbox__icon--indeterminate::before {
   content: '';
   width: 100%;
   height: 2px;
   background: currentColor;
 }
 
-:host(.ui-checkbox-checked) .checkbox-icon-check,
-:host(.ui-checkbox-indeterminate) .checkbox-icon-indeterminate {
+ui-lib-checkbox.ui-lib-checkbox--checked .ui-lib-checkbox__icon--check,
+ui-lib-checkbox.ui-lib-checkbox--indeterminate .ui-lib-checkbox__icon--indeterminate {
   opacity: 1;
 }
 
-:host .checkbox-content {
+ui-lib-checkbox .ui-lib-checkbox__content {
   display: inline-flex;
   flex-direction: column;
   gap: 0.15rem;
   min-width: 0;
 }
 
-:host .checkbox-label {
+ui-lib-checkbox .ui-lib-checkbox__label {
   font-weight: 600;
   line-height: 1.2;
   display: inline-flex;
@@ -162,33 +151,33 @@
   color: inherit;
 }
 
-:host .checkbox-description {
+ui-lib-checkbox .ui-lib-checkbox__description {
   font-size: 0.875rem;
   color: var(--uilib-checkbox-description-color);
 }
 
-:host(.ui-checkbox-size-sm) {
+ui-lib-checkbox.ui-lib-checkbox--size-sm {
   --uilib-checkbox-size: var(--uilib-checkbox-size-sm);
   font-size: 0.875rem;
 }
 
-:host(.ui-checkbox-size-lg) {
+ui-lib-checkbox.ui-lib-checkbox--size-lg {
   --uilib-checkbox-size: var(--uilib-checkbox-size-lg);
   font-size: 1rem;
 }
 
-:host(.ui-checkbox-variant-bootstrap) .checkbox-box {
+ui-lib-checkbox.ui-lib-checkbox--variant-bootstrap .ui-lib-checkbox__box {
   border-radius: calc(var(--uilib-shape-base, 6px) * 0.5);
 }
 
-:host(.ui-checkbox-variant-minimal) {
+ui-lib-checkbox.ui-lib-checkbox--variant-minimal {
   --uilib-checkbox-bg: transparent;
   --uilib-checkbox-border: var(--uilib-color-neutral-400, currentColor);
   --uilib-checkbox-border-hover: var(--uilib-color-primary-600, currentColor);
   --uilib-checkbox-border-active: var(--uilib-color-primary-700, currentColor);
 }
 
-:host(.ui-checkbox-variant-minimal) .checkbox-box {
+ui-lib-checkbox.ui-lib-checkbox--variant-minimal .ui-lib-checkbox__box {
   border-width: 1.5px;
 }
 
@@ -200,5 +189,6 @@
   --uilib-checkbox-bg-checked: var(--uilib-color-primary-dark);
   --uilib-checkbox-check-color: #0b1220;
   --uilib-checkbox-description-color: var(--uilib-text-dark-secondary);
-  --uilib-checkbox-focus-ring: 0 0 0 3px color-mix(in srgb, var(--uilib-color-primary-dark) 35%, transparent);
+  --uilib-checkbox-focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--uilib-color-primary-dark) 35%, transparent);
 }

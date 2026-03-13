@@ -113,21 +113,21 @@
    * ========================================= */
 
   ui-lib-checkbox,
-  .ui-checkbox {
-    .checkbox-box {
+  .ui-lib-checkbox {
+    .ui-lib-checkbox__box {
       border: 2px solid ButtonText !important;
       background: Field !important;
     }
 
-    &[aria-checked='true'] .checkbox-box {
+    &[aria-checked='true'] .ui-lib-checkbox__box {
       background: Highlight !important;
     }
 
-    .checkbox-icon {
+    .ui-lib-checkbox__icon {
       color: HighlightText !important;
     }
 
-    &[aria-disabled='true'] .checkbox-box {
+    &[aria-disabled='true'] .ui-lib-checkbox__box {
       border-color: GrayText !important;
     }
   }

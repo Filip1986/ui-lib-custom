@@ -86,21 +86,21 @@ export class Checkbox implements ControlValueAccessor {
   );
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
-      'ui-checkbox',
-      `ui-checkbox-variant-${this.effectiveVariant()}`,
-      `ui-checkbox-size-${this.size()}`,
+      'ui-lib-checkbox',
+      `ui-lib-checkbox--variant-${this.effectiveVariant()}`,
+      `ui-lib-checkbox--size-${this.size()}`,
     ];
 
     if (this.checked()) {
-      classes.push('ui-checkbox-checked');
+      classes.push('ui-lib-checkbox--checked');
     }
 
     if (this.indeterminate()) {
-      classes.push('ui-checkbox-indeterminate');
+      classes.push('ui-lib-checkbox--indeterminate');
     }
 
     if (this.isDisabled()) {
-      classes.push('ui-checkbox-disabled');
+      classes.push('ui-lib-checkbox--disabled');
     }
 
     return classes.join(' ');
