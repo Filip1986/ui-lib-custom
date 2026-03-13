@@ -19,6 +19,15 @@ project bootstrapping and live theme demonstrations during client meetings.
 
 ---
 
+## Recommended Reading Order
+
+1. `AI_AGENT_CONTEXT.md` (this file) — active work, file map, and hard constraints
+2. `LIBRARY_CONVENTIONS.md` -> `Active Conventions` first
+3. [Historical] `LIBRARY_CONVENTIONS.md` -> `Historical Migration Notes` only when touching legacy migration-era patterns
+4. Component docs in `docs/reference/components/` or architecture docs in `docs/architecture/` for task-specific details
+
+---
+
 ## Component Inventory
 
 | Component       | Status         | Secondary Entry Point            | Doc Status        | Notes                                              |
@@ -70,6 +79,8 @@ project bootstrapping and live theme demonstrations during client meetings.
 
 These are the most common sources of mistakes. Verify every output against this list.
 
+### Active checks (highest priority)
+
 1. **`ViewEncapsulation.None` is mandatory** on every library component. Without it, CSS variable
    cascading and animations break.
 2. **No relative cross-entry-point imports.** Internal components import from relative `src/lib/...`
@@ -80,14 +91,17 @@ These are the most common sources of mistakes. Verify every output against this 
    PrimeNG or Angular Material as a substitute when a custom equivalent exists.
 5. **Explicit return types everywhere.** No inference on public APIs, class members, or
    `computed()` arrow functions (`allowTypedFunctionExpressions: false` is enforced by ESLint).
-6. **`as const` over TypeScript `enum`.** No new enums — use `as const` constant objects.
-7. **String union types for public inputs.** Do not replace `type InputVariant = 'material' | ...`
+6. **String union types for public inputs.** Do not replace `type InputVariant = 'material' | ...`
    with constants objects. Constants extraction applies to *internal* repeated strings only.
-8. **Angular 21 block syntax only.** Use `@if`, `@for`, `@switch` — never `*ngIf`/`*ngFor`.
-9. **Self-closing tags** for all components without projected content. `<ui-lib-button />` not
+7. **Self-closing tags** for all components without projected content. `<ui-lib-button />` not
    `<ui-lib-button></ui-lib-button>`.
-10. **No new tokens as raw hex/px.** Always add to `design-tokens.ts` first, then reference via
-    CSS variable.
+8. **No new tokens as raw hex/px.** Always add to `design-tokens.ts` first, then reference via
+   CSS variable.
+
+### [Historical] Migration checks (lower priority; keep for context)
+
+9. **[Historical] `as const` over TypeScript `enum`.** Migration-era rule retained to avoid backsliding.
+10. **[Historical] Angular 21 block syntax only.** Use `@if`, `@for`, `@switch` — avoid `*ngIf`/`*ngFor`.
 
 ---
 
@@ -173,6 +187,13 @@ These are the most common sources of mistakes. Verify every output against this 
 ## Last Session
 
 *(Paste agent handoff note here at the end of each session)*
+
+```
+Date: 2026-03-13
+Changed: LIBRARY_CONVENTIONS.md, AI_AGENT_CONTEXT.md
+State: Reorganized conventions into Active Conventions vs Historical Migration Notes; split anti-patterns into active vs resolved; reordered context checks so active checks come first and historical checks are explicitly lower priority. Follow-up pass added consistent `[Historical]` prefixes for quick scanning.
+Next step: Spot-check docs that reference old checklist ordering and update links/wording if needed.
+```
 
 ```
 Date: 2026-03-06

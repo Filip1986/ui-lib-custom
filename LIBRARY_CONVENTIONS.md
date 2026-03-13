@@ -11,6 +11,10 @@
 3. Theme presets that can be saved/loaded as JSON configs
 4. A demo app with live preview and theme editor
 
+## Active Conventions
+
+Use this section for rules that still cause real regressions and should be checked on every task.
+
 ## AI Agent & Development Environment
 
 > **Start here.** Before writing any code, read `AI_AGENT_CONTEXT.md` (project root) for the
@@ -33,35 +37,47 @@
 
 ### Code Quality Checklist
 
-Run through this mentally before submitting any output:
+Run through this mentally before submitting any output.
+
+#### Active checks (enforce on every task)
 
 - [ ] `ViewEncapsulation.None` present on every library component
 - [ ] All return types are explicit — no inference on class members, public APIs, or `computed()`
 - [ ] Cross-entry-point imports use package paths (`ui-lib-custom/theme`), not relative paths
-- [ ] No new TypeScript enums — use `as const` constant objects
 - [ ] Public component inputs use string union types — not constants objects
-- [ ] Template uses `@if`/`@for`/`@switch` block syntax — no `*ngIf`/`*ngFor`
 - [ ] Self-closing tags used for all components without projected content
 - [ ] No raw hex/px — all new tokens added to `design-tokens.ts` first
 - [ ] If a new secondary entry point was added: `package.json` exports + `typesVersions` updated
 - [ ] Component inventory in `AI_AGENT_CONTEXT.md` updated if component status changed
 
+#### [Historical] Migration checks (lower priority; preserved for context)
+
+- [ ] [Historical] No new TypeScript enums — use `as const` constant objects
+- [ ] [Historical] Template uses `@if`/`@for`/`@switch` block syntax — no `*ngIf`/`*ngFor`
+
 ### Anti-Patterns (Common Mistakes)
 
-These have caused real regressions. Do not repeat them.
+These have caused real regressions. Active anti-patterns are still common traps; historical anti-patterns are migration-era reminders kept for context.
+
+#### Active Anti-Patterns
 
 | Anti-pattern | Why it's wrong | Correct approach |
 |---|---|---|
 | Relative import across entry points | Causes circular package graphs and ng-packagr build errors | Use `ui-lib-custom/<entry>` package paths for cross-entry imports |
 | Missing `ViewEncapsulation.None` | CSS variables and animations do not cascade correctly | Always add it — no exceptions |
 | Type inference on `computed()` arrow functions | ESLint `allowTypedFunctionExpressions: false` will fail the build | Always annotate: `computed<MyType>((): MyType => ...)` |
-| `enum` instead of `as const` | Enums add runtime overhead and reduce tree-shaking | Use `export const MY_THING = { ... } as const` |
 | Replacing public string union types with constants | Breaks the public API contract for consumers | Only extract *internal* repeated strings; leave public types as union literals |
-| Padding on the `overflow: hidden` collapse wrapper | Padding "leaks" visibly during `grid-row` animation | Use three layers: clip wrapper → padding wrapper → content |
+| Padding on the `overflow: hidden` collapse wrapper | Padding "leaks" visibly during `grid-row` animation | Use three layers: clip wrapper -> padding wrapper -> content |
 | Creating `public-api.ts` inside secondary entry folders | Not the established convention; ng-packagr handles it | `ng-package.json` points directly to `../src/lib/<n>/index.ts` |
-| Using `*ngIf` / `*ngFor` | Legacy syntax inconsistent with Angular 21 codebase | Use `@if`, `@for (x of y; track z)`, `@switch` |
 | Inlining raw hex or px values | Bypasses the design token system | Add to `design-tokens.ts`, derive a `--uilib-*` CSS variable |
 | Adding PrimeNG/Material components to demo pages | Undermines dogfooding; surfaces library gaps incorrectly | Use `ui-lib-*` equivalents; document gap in component inventory if none exists |
+
+#### [Historical] Resolved Anti-Patterns (Migration Notes)
+
+| Anti-pattern | Why it's wrong | Correct approach |
+|---|---|---|
+| [Historical] `enum` instead of `as const` | Enums add runtime overhead and reduce tree-shaking | Use `export const MY_THING = { ... } as const` |
+| [Historical] Using `*ngIf` / `*ngFor` | Legacy syntax inconsistent with Angular 21 codebase | Use `@if`, `@for (x of y; track z)`, `@switch` |
 
 ### Session Handoff Protocol
 
@@ -83,7 +99,7 @@ This is mandatory. It closes the loop between sessions and eliminates re-explana
 - Host-first: avoid wrapper elements; apply styles via host bindings instead of extra DOM nodes.
 - Strong typing on all inputs; provide defaults so components render well without configuration.
 - Barrel exports stay tree-shakable; keep `sideEffects: false` and avoid global side effects.
-- Templates use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`); avoid legacy structural directives (`*ngIf/*ngFor`) in new code.
+- Templates should use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`) for consistency in all new or touched code. Migration rationale is documented in `Historical Migration Notes`.
 - **HTML Special Characters**: Always escape special characters in templates that could be interpreted by Angular. Use `&#123;` for `{` and `&#125;` for `}` when displaying literal braces (e.g., in code examples or documentation). Alternatively, use `{{ '{' }}` and `{{ '}' }}` for interpolation-safe output.
 - **Self-Closing Tags**: Use Angular's self-closing tag syntax whenever possible for cleaner, more concise templates. Prefer `<ui-lib-button />` over `<ui-lib-button></ui-lib-button>`. This applies to all components without projected content.
 - **Explicit Typing**: Always provide explicit type annotations for return types, variables, and function parameters. Never rely on type inference for public APIs, class members, or any non-trivial expressions.
@@ -401,9 +417,21 @@ All CSS custom properties MUST follow this pattern:
 - Use `/** */` JSDoc for all exported symbols
 - Reference related specs or issues for workarounds: `// See: https://...`
 
-### Constants & Enums
+## Historical Migration Notes
 
-- **Never use TypeScript `enum`**. Prefer `as const` objects — they have no runtime overhead,
+These rules mattered during earlier migration phases and are preserved for onboarding context.
+They are lower-priority checks compared to Active Conventions, but still documented to avoid backsliding.
+All items in this section are labeled with `[Historical]` for quick scanning.
+
+### [Historical] Angular Template Syntax Migration
+
+- [Historical] During Angular 21 migration, the codebase standardized on block syntax.
+- [Historical] Prefer `@if`, `@for`, and `@switch` over legacy `*ngIf`/`*ngFor` in all maintained code.
+- [Historical] Legacy structural directives are considered resolved anti-patterns for this repository.
+
+### [Historical] Constants & Enums
+
+- [Historical] **Never use TypeScript `enum`**. Prefer `as const` objects — they have no runtime overhead,
   tree-shake cleanly, and compose naturally with string union types.
 ```typescript
   // ❌ Avoid
@@ -414,15 +442,15 @@ All CSS custom properties MUST follow this pattern:
   export type ButtonSize = typeof BUTTON_SIZES[keyof typeof BUTTON_SIZES];
 ```
 
-- **Public input types stay as string unions** (`type InputVariant = 'material' | 'bootstrap' | 'minimal'`).
+- [Historical] **Public input types stay as string unions** (`type InputVariant = 'material' | 'bootstrap' | 'minimal'`).
   Do not replace these with enums or const objects — string unions are more ergonomic for consumers.
 
-- **Extract repeated internal strings to a co-located constants file** (`[component].constants.ts`)
+- [Historical] **Extract repeated internal strings to a co-located constants file** (`[component].constants.ts`)
   when a literal appears 2 or more times within the same component. This applies to CSS class names,
   ARIA attribute strings, and default value strings used in logic.
 
-- **Shared cross-component constants** belong in `src/lib/shared/constants.ts`. Only move a
+- [Historical] **Shared cross-component constants** belong in `src/lib/shared/constants.ts`. Only move a
   constant there if it is used in 3 or more components. Avoid over-centralizing component-specific values.
 
-- Do not export component-internal constants from secondary entry points unless they are
+- [Historical] Do not export component-internal constants from secondary entry points unless they are
   explicitly part of the public API contract.
