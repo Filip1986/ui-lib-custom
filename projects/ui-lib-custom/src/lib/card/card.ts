@@ -77,17 +77,17 @@ export class Card {
 
   public readonly cardClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
-      'card',
-      `card-${this.effectiveVariant()}`,
-      `card-elevation-${this.elevation()}`,
+      'ui-lib-card',
+      `ui-lib-card--${this.effectiveVariant()}`,
+      `ui-lib-card--elevation-${this.elevation()}`,
     ];
 
     if (this.bordered()) {
-      classes.push('card-bordered');
+      classes.push('ui-lib-card--bordered');
     }
 
     if (this.hoverable()) {
-      classes.push('card-hoverable');
+      classes.push('ui-lib-card--hoverable');
     }
 
     return classes.join(' ');

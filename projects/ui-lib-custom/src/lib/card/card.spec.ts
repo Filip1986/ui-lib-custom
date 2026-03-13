@@ -117,7 +117,8 @@ describe('Card', (): void => {
 
   const getCard: (fixture: ComponentFixture<CardHost>) => HTMLElement = (
     fixture: ComponentFixture<CardHost>
-  ): HTMLElement => (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
+  ): HTMLElement =>
+    (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-card') as HTMLElement;
 
   it('should create', async (): Promise<void> => {
     const fixture: ComponentFixture<CardHost> = await bootstrap();
@@ -131,10 +132,10 @@ describe('Card', (): void => {
       hoverable: true,
     });
     const card: HTMLElement = getCard(fixture);
-    expect(card.className).toContain('card-bootstrap');
-    expect(card.className).toContain('card-elevation-high');
-    expect(card.className).toContain('card-bordered');
-    expect(card.className).toContain('card-hoverable');
+    expect(card.className).toContain('ui-lib-card--bootstrap');
+    expect(card.className).toContain('ui-lib-card--elevation-high');
+    expect(card.className).toContain('ui-lib-card--bordered');
+    expect(card.className).toContain('ui-lib-card--hoverable');
   });
 
   it('applies each variant class', async (): Promise<void> => {
@@ -143,7 +144,7 @@ describe('Card', (): void => {
     for (const variant of variants) {
       const variantValue: CardVariant = variant;
       const fixture: ComponentFixture<CardHost> = await bootstrap({ variant: variantValue });
-      expect(getCard(fixture).classList.contains(`card-${variantValue}`)).toBeTruthy();
+      expect(getCard(fixture).classList.contains(`ui-lib-card--${variantValue}`)).toBeTruthy();
     }
   });
 
@@ -154,13 +155,13 @@ describe('Card', (): void => {
     fixture.detectChanges();
 
     const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-header'
+      '.ui-lib-card__header'
     );
     const body: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-body'
+      '.ui-lib-card__body'
     );
     const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-footer'
+      '.ui-lib-card__footer'
     );
 
     expect(header?.textContent).toContain('Header');
@@ -175,10 +176,10 @@ describe('Card', (): void => {
     });
 
     const header: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-header'
+      '.ui-lib-card__header'
     );
     const footer: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-footer'
+      '.ui-lib-card__footer'
     );
 
     expect(header).toBeNull();
@@ -284,10 +285,10 @@ describe('Card theme and header features', (): void => {
     await setHeaderContent('info', 'Details');
 
     const iconEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-header-icon'
+      '.ui-lib-card__header-icon'
     );
     const subtitleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-subtitle'
+      '.ui-lib-card__subtitle'
     );
 
     expect(iconEl).toBeTruthy();
@@ -298,7 +299,7 @@ describe('Card theme and header features', (): void => {
     await setClosable(true);
 
     const closeIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.card-close-icon'
+      '.ui-lib-card__close-icon'
     );
     closeIcon?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     fixture.detectChanges();
@@ -321,7 +322,7 @@ describe('Card clickable behavior', (): void => {
   });
 
   const getCard: () => HTMLElement = (): HTMLElement =>
-    (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
+    (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-card') as HTMLElement;
 
   it('emits click events when hoverable', (): void => {
     const host: ClickableCardHost = fixture.componentInstance;
@@ -351,7 +352,7 @@ describe('Card keyboard accessibility', (): void => {
   });
 
   function cardEl(): HTMLElement {
-    return (fixture.nativeElement as HTMLElement).querySelector('.card') as HTMLElement;
+    return (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-card') as HTMLElement;
   }
 
   it('sets role, tabindex, and aria-label when hoverable', (): void => {

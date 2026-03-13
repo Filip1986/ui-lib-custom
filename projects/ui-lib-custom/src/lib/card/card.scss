@@ -1,20 +1,24 @@
-:host {
+ui-lib-card {
   --uilib-card-header-padding-y-base: 0.75rem;
   --uilib-card-header-padding-x-base: 1rem;
   --uilib-card-body-padding-base: 1rem;
   --uilib-card-footer-padding-y-base: 0.5rem;
   --uilib-card-footer-padding-x-base: 1rem;
-  --uilib-card-header-padding: calc(var(--uilib-card-header-padding-y-base) * var(--uilib-density, 1))
+  --uilib-card-header-padding: calc(
+      var(--uilib-card-header-padding-y-base) * var(--uilib-density, 1)
+    )
     calc(var(--uilib-card-header-padding-x-base) * var(--uilib-density, 1));
   --uilib-card-body-padding: calc(var(--uilib-card-body-padding-base) * var(--uilib-density, 1));
-  --uilib-card-footer-padding: calc(var(--uilib-card-footer-padding-y-base) * var(--uilib-density, 1))
+  --uilib-card-footer-padding: calc(
+      var(--uilib-card-footer-padding-y-base) * var(--uilib-density, 1)
+    )
     calc(var(--uilib-card-footer-padding-x-base) * var(--uilib-density, 1));
   --uilib-card-border-width: 0;
 
   display: block;
 }
 
-:host .card {
+ui-lib-card .ui-lib-card {
   background: var(--uilib-card-bg, var(--uilib-surface));
   color: var(--uilib-card-text-color, var(--uilib-page-fg));
   border-radius: var(--uilib-card-radius, var(--uilib-radius-lg));
@@ -28,7 +32,7 @@
   display: flex;
   flex-direction: column;
 
-  &-header {
+  &__header {
     display: flex;
     align-items: flex-start;
     gap: var(--uilib-space-2, 0.5rem);
@@ -41,7 +45,7 @@
     font-family: var(--uilib-font-heading, inherit), sans-serif;
   }
 
-  .card-header-text {
+  &__header-text {
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
@@ -50,26 +54,26 @@
     justify-content: center;
   }
 
-  .card-title {
+  &__title {
     font-weight: 600;
     font-size: 1.125rem;
     line-height: 1.4;
     color: var(--uilib-card-text-color, inherit);
   }
 
-  .card-subtitle {
+  &__subtitle {
     font-size: 0.95rem;
     color: var(--uilib-muted, var(--uilib-color-neutral-600));
     line-height: 1.4;
   }
 
-  &-body {
+  &__body {
     padding: var(--uilib-card-body-padding);
     flex: 1;
     font-family: var(--uilib-font-body, inherit), sans-serif;
   }
 
-  &-footer {
+  &__footer {
     padding: var(--uilib-card-footer-padding);
     background-color: var(
       --uilib-card-footer-bg,
@@ -79,11 +83,11 @@
     font-family: var(--uilib-font-ui, inherit), sans-serif;
   }
 
-  &-bordered {
+  &--bordered {
     --uilib-card-border-width: 1px;
   }
 
-  &-hoverable {
+  &--hoverable {
     cursor: pointer;
 
     &:hover {
@@ -96,28 +100,28 @@
   }
 
   /* Elevations */
-  &-elevation-none {
+  &--elevation-none {
     --uilib-card-shadow: var(--uilib-card-shadow-none, none);
     --uilib-card-shadow-hover: var(--uilib-card-shadow-low, var(--uilib-card-shadow-none, none));
   }
 
-  &-elevation-low {
+  &--elevation-low {
     --uilib-card-shadow: var(--uilib-card-shadow-low, var(--uilib-card-shadow-none, none));
     --uilib-card-shadow-hover: var(--uilib-card-shadow-medium, var(--uilib-card-shadow-low, none));
   }
 
-  &-elevation-medium {
+  &--elevation-medium {
     --uilib-card-shadow: var(--uilib-card-shadow-medium, var(--uilib-card-shadow-low, none));
     --uilib-card-shadow-hover: var(--uilib-card-shadow-high, var(--uilib-card-shadow-medium, none));
   }
 
-  &-elevation-high {
+  &--elevation-high {
     --uilib-card-shadow: var(--uilib-card-shadow-high, var(--uilib-card-shadow-medium, none));
     --uilib-card-shadow-hover: var(--uilib-card-shadow-high, var(--uilib-card-shadow-medium, none));
   }
 
   /* Variants */
-  &-material {
+  &--material {
     --uilib-card-radius: var(--uilib-radius-md);
     --uilib-card-shadow: var(--uilib-card-shadow-medium, var(--uilib-card-shadow-low, none));
     --uilib-card-shadow-hover: var(--uilib-card-shadow-high, var(--uilib-card-shadow-medium, none));
@@ -125,7 +129,7 @@
     --uilib-card-footer-bg: var(--uilib-card-footer-bg, var(--uilib-surface-alt));
   }
 
-  &-bootstrap {
+  &--bootstrap {
     --uilib-card-radius: var(--uilib-radius-sm);
     --uilib-card-border-width: 1px;
     --uilib-card-border: var(--uilib-card-border, var(--uilib-border));
@@ -133,7 +137,7 @@
     --uilib-card-footer-bg: var(--uilib-card-footer-bg, var(--uilib-surface-alt));
   }
 
-  &-minimal {
+  &--minimal {
     --uilib-card-radius: 0;
     --uilib-card-shadow: var(--uilib-card-shadow-none, none);
     --uilib-card-shadow-hover: var(--uilib-card-shadow-low, var(--uilib-card-shadow-none, none));
@@ -141,12 +145,12 @@
     --uilib-card-footer-bg: var(--uilib-card-bg, var(--uilib-surface));
     --uilib-card-border: var(--uilib-border, currentColor);
 
-    .card-header,
-    .card-footer {
+    .ui-lib-card__header,
+    .ui-lib-card__footer {
       position: relative;
     }
 
-    .card-header {
+    .ui-lib-card__header {
       border-bottom: 0;
 
       &::after {
@@ -161,7 +165,7 @@
       }
     }
 
-    .card-footer {
+    .ui-lib-card__footer {
       border-top: 0;
 
       &::before {
@@ -177,12 +181,12 @@
     }
   }
 
-  .card-header-icon,
-  .card-close-icon {
+  &__header-icon,
+  &__close-icon {
     flex-shrink: 0;
   }
 
-  .card-close-icon {
+  &__close-icon {
     cursor: pointer;
   }
 }

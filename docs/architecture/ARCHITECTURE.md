@@ -226,11 +226,12 @@ Content Slots:
 <div card-footer>...</div>     → Footer section
 
 CSS Classes Applied:
-.card
-.card-{variant}
-.card-elevation-{elevation}
-.card-bordered (if bordered)
-.card-hoverable (if hoverable)
+.ui-lib-card
+.ui-lib-card--{variant}
+.ui-lib-card--elevation-{elevation}
+.ui-lib-card--bordered (if bordered)
+.ui-lib-card--hoverable (if hoverable)
+.ui-lib-card__header / __body / __footer
 ```
 
 ## Usage Flow

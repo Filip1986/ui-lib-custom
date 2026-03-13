@@ -10,26 +10,26 @@
   [style.--uilib-card-footer-bg]="footerBg()"
 >
   @if (headerVisible()) {
-    <div class="card-header">
+    <div class="ui-lib-card__header">
       @if (headerIcon()) {
         <ui-lib-icon
-          class="card-header-icon"
+          class="ui-lib-card__header-icon"
           [name]="headerIcon()!"
           [variant]="effectiveVariant()"
           size="lg"
         />
       }
-      <div class="card-header-text">
-        <div class="card-title">
+      <div class="ui-lib-card__header-text">
+        <div class="ui-lib-card__title">
           <ng-content select="[card-header]"></ng-content>
         </div>
         @if (subtitle()) {
-          <div class="card-subtitle">{{ subtitle() }}</div>
+          <div class="ui-lib-card__subtitle">{{ subtitle() }}</div>
         }
       </div>
       @if (closable()) {
         <ui-lib-icon
-          class="card-close-icon"
+          class="ui-lib-card__close-icon"
           name="close"
           [variant]="effectiveVariant()"
           size="md"
@@ -40,11 +40,11 @@
       }
     </div>
   }
-  <div class="card-body">
+  <div class="ui-lib-card__body">
     <ng-content></ng-content>
   </div>
   @if (footerVisible()) {
-    <div class="card-footer">
+    <div class="ui-lib-card__footer">
       <ng-content select="[card-footer]"></ng-content>
     </div>
   }
