@@ -47,7 +47,7 @@ describe('Tabs RTL Support', (): void => {
 
   function tabButtons(): HTMLButtonElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button.tab-trigger')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button.ui-lib-tabs__trigger')
     );
   }
 
@@ -63,7 +63,7 @@ describe('Tabs RTL Support', (): void => {
     const tabsEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-tabs'
     ) as HTMLElement;
-    expect(tabsEl.classList.contains('ui-tabs--rtl')).toBeTruthy();
+    expect(tabsEl.classList.contains('ui-lib-tabs--rtl')).toBeTruthy();
   });
 
   it('should navigate to next tab with ArrowLeft in RTL', (): void => {

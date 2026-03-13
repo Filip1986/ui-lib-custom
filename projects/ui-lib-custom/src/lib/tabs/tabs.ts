@@ -81,7 +81,7 @@ interface ScrollMetrics {
     '[attr.data-scroll-arrows]': 'shouldShowScrollButtons() ? true : null',
     '[attr.data-orientation]': 'orientation()',
     '[attr.dir]': 'hostDir() || null',
-    '[class.ui-tabs--rtl]': 'isRtl() ? true : null',
+    '[class.ui-lib-tabs--rtl]': 'isRtl() ? true : null',
   },
 })
 export class Tabs implements OnDestroy, AfterViewInit {
@@ -295,15 +295,15 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   public readonly tabsClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
-      'tabs-root',
-      `tabs-${this.effectiveVariant()}`,
-      `tabs-${this.normalizedSize()}`,
-      `tabs-orientation-${this.orientation()}`,
-      `tabs-align-${this.align()}`,
+      'ui-lib-tabs',
+      `ui-lib-tabs--${this.effectiveVariant()}`,
+      `ui-lib-tabs--${this.normalizedSize()}`,
+      `ui-lib-tabs--orientation-${this.orientation()}`,
+      `ui-lib-tabs--align-${this.align()}`,
     ];
 
     if (this.disabled()) {
-      classes.push('tabs-disabled');
+      classes.push('ui-lib-tabs--disabled');
     }
 
     return classes.join(' ');
@@ -891,11 +891,6 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
     this.setNormalizedScrollPosition(list, axis, next, this.scrollIsRtl, this.rtlScrollAxis);
     this.scheduleScrollStateUpdate();
-  }
-
-  private readIsRtl(list: HTMLElement): boolean {
-    const direction: string = getComputedStyle(list).direction;
-    return direction === 'rtl';
   }
 
   private detectRtlScrollAxis(list: HTMLElement): RtlScrollAxis {

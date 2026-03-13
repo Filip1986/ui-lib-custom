@@ -35,9 +35,9 @@ export class TabPanel {
   public readonly active: InputSignal<boolean> = input<boolean>(false);
 
   public readonly panelClasses: Signal<string> = computed<string>((): string => {
-    const classes: string[] = ['tab-panel'];
+    const classes: string[] = ['ui-lib-tab-panel'];
     if (this.active()) {
-      classes.push('tab-panel-active');
+      classes.push('ui-lib-tab-panel--active');
     }
     return classes.join(' ');
   });

@@ -1,7 +1,7 @@
 @if (shouldShowScrollButtons()) {
   <button
     type="button"
-    class="tab-scroll tab-scroll-prev"
+    class="ui-lib-tabs__scroll ui-lib-tabs__scroll--prev"
     [attr.aria-controls]="tabListDomId()"
     [attr.aria-label]="scrollPrevLabel()"
     [attr.aria-disabled]="!canScrollPrevTab() ? true : null"
@@ -14,7 +14,7 @@
 }
 
 <nav
-  [class]="'tab-list ' + tabsClasses()"
+  [class]="'ui-lib-tabs__list ' + tabsClasses()"
   role="tablist"
   [attr.aria-orientation]="orientation()"
   [id]="tabListDomId()"
@@ -22,13 +22,16 @@
   #tabList
 >
   @for (tab of tabContexts(); track tab.index) {
-    <div class="tab-trigger-wrapper" [class.tab-active]="isActive(tab.index)">
+    <div
+      class="ui-lib-tabs__trigger-wrapper"
+      [class.ui-lib-tabs__trigger-wrapper--active]="isActive(tab.index)"
+    >
       <button
         #tabButton
         type="button"
-        class="tab-trigger"
-        [class.tab-active]="isActive(tab.index)"
-        [class.tab-disabled]="tab.disabled || disabled()"
+        class="ui-lib-tabs__trigger"
+        [class.ui-lib-tabs__trigger--active]="isActive(tab.index)"
+        [class.ui-lib-tabs__trigger--disabled]="tab.disabled || disabled()"
         role="tab"
         [id]="tabId(tab.index)"
         [attr.aria-selected]="isActive(tab.index)"
@@ -39,7 +42,10 @@
         (focus)="onFocus(tab)"
         (keydown)="onKeydown($event, tab.index)"
       >
-        <span class="tab-label" [class.tab-label-icon-top]="iconPosition() === 'top'">
+        <span
+          class="ui-lib-tabs__label"
+          [class.ui-lib-tabs__label--icon-top]="iconPosition() === 'top'"
+        >
           @if (tab.labelTemplate) {
             <ng-container [ngTemplateOutlet]="tab.labelTemplate"></ng-container>
           } @else {
@@ -50,7 +56,7 @@
       @if (tab.closable) {
         <button
           type="button"
-          class="tab-close"
+          class="ui-lib-tabs__close"
           tabindex="-1"
           aria-label="Close tab"
           (click)="onClose(tab, $event)"
@@ -63,7 +69,7 @@
 
   @if (effectiveVariant() === themeVariants.Material && indicatorStyles()) {
     <span
-      class="tab-indicator"
+      class="ui-lib-tabs__indicator"
       [style.transform]="indicatorStyles()?.transform"
       [style.width]="indicatorStyles()?.width"
     ></span>
@@ -73,7 +79,7 @@
 @if (shouldShowScrollButtons()) {
   <button
     type="button"
-    class="tab-scroll tab-scroll-next"
+    class="ui-lib-tabs__scroll ui-lib-tabs__scroll--next"
     [attr.aria-controls]="tabListDomId()"
     [attr.aria-label]="scrollNextLabel()"
     [attr.aria-disabled]="!canScrollNextTab() ? true : null"
@@ -86,11 +92,11 @@
 }
 
 @if (!isNavigation()) {
-  <section class="tab-panels">
+  <section class="ui-lib-tabs__panels">
     @for (tab of tabContexts(); track tab.index) {
       @if (shouldRenderPanel(tab)) {
         <ui-lib-tab-panel
-          class="tab-panel-host"
+          class="ui-lib-tabs__panel-host"
           [id]="panelId(tab.index)"
           [labelId]="tabId(tab.index)"
           [active]="isActive(tab.index)"

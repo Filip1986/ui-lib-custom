@@ -169,11 +169,11 @@
    * ========================================= */
 
   ui-lib-tabs {
-    .tab-list {
+    .ui-lib-tabs__list {
       border-bottom: 2px solid CanvasText !important;
     }
 
-    .tab-trigger {
+    .ui-lib-tabs__trigger {
       border: 2px solid transparent !important;
 
       &[aria-selected='true'] {
@@ -191,7 +191,7 @@
       }
     }
 
-    .tab-indicator {
+    .ui-lib-tabs__indicator {
       display: none !important;
     }
   }

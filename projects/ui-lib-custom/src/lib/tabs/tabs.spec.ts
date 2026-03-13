@@ -196,7 +196,9 @@ describe('Tabs', (): void => {
   });
 
   it('should render tablist with two tabs', (): void => {
-    const tabButtons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
+    const tabButtons: DebugElement[] = fixture.debugElement.queryAll(
+      By.css('button.ui-lib-tabs__trigger')
+    );
     expect(tabButtons.length).toBe(2);
     const first: DebugElement = getRequiredItem(tabButtons, 0, 'tab button');
     const second: DebugElement = getRequiredItem(tabButtons, 1, 'tab button');
@@ -289,7 +291,7 @@ describe('Scrollable Tabs', (): void => {
   });
 
   it('should show arrows when tabs overflow', (): void => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.ui-lib-tabs__list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
@@ -300,12 +302,14 @@ describe('Scrollable Tabs', (): void => {
     flushRaf();
     fixture.detectChanges();
 
-    const arrows: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-scroll'));
+    const arrows: DebugElement[] = fixture.debugElement.queryAll(
+      By.css('button.ui-lib-tabs__scroll')
+    );
     expect(arrows.length).toBe(2);
   });
 
   it('should hide arrows when all tabs are visible', (): void => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.ui-lib-tabs__list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
@@ -316,12 +320,14 @@ describe('Scrollable Tabs', (): void => {
     flushRaf();
     fixture.detectChanges();
 
-    const arrows: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-scroll'));
+    const arrows: DebugElement[] = fixture.debugElement.queryAll(
+      By.css('button.ui-lib-tabs__scroll')
+    );
     expect(arrows.length).toBe(0);
   });
 
   it('should disable prev at start and next at end', (): void => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.ui-lib-tabs__list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
@@ -332,10 +338,12 @@ describe('Scrollable Tabs', (): void => {
     flushRaf();
     fixture.detectChanges();
 
-    const prev: HTMLButtonElement = fixture.debugElement.query(By.css('button.tab-scroll-prev'))
-      .nativeElement as HTMLButtonElement;
-    const next: HTMLButtonElement = fixture.debugElement.query(By.css('button.tab-scroll-next'))
-      .nativeElement as HTMLButtonElement;
+    const prev: HTMLButtonElement = fixture.debugElement.query(
+      By.css('button.ui-lib-tabs__scroll--prev')
+    ).nativeElement as HTMLButtonElement;
+    const next: HTMLButtonElement = fixture.debugElement.query(
+      By.css('button.ui-lib-tabs__scroll--next')
+    ).nativeElement as HTMLButtonElement;
     expect(prev.disabled).toBe(true);
     expect(next.disabled).toBe(false);
 
@@ -347,7 +355,7 @@ describe('Scrollable Tabs', (): void => {
   });
 
   it('should scroll on arrow click', (): void => {
-    const list: HTMLElement = fixture.debugElement.query(By.css('nav.tab-list'))
+    const list: HTMLElement = fixture.debugElement.query(By.css('nav.ui-lib-tabs__list'))
       .nativeElement as HTMLElement;
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
@@ -360,8 +368,9 @@ describe('Scrollable Tabs', (): void => {
     flushRaf();
     fixture.detectChanges();
 
-    const next: HTMLButtonElement = fixture.debugElement.query(By.css('button.tab-scroll-next'))
-      .nativeElement as HTMLButtonElement;
+    const next: HTMLButtonElement = fixture.debugElement.query(
+      By.css('button.ui-lib-tabs__scroll--next')
+    ).nativeElement as HTMLButtonElement;
     next.click();
     flushRaf();
     expect(scrollToSpy).toHaveBeenCalled();
@@ -370,7 +379,9 @@ describe('Scrollable Tabs', (): void => {
   it('should auto-scroll focused tab into view', (): void => {
     const component: Tabs = fixture.debugElement.query(By.directive(Tabs))
       .componentInstance as Tabs;
-    const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
+    const buttons: DebugElement[] = fixture.debugElement.queryAll(
+      By.css('button.ui-lib-tabs__trigger')
+    );
     const target: HTMLButtonElement = getRequiredItem(buttons, 4, 'tab button')
       .nativeElement as HTMLButtonElement;
     const scrollIntoViewSpy: jest.SpyInstance = jest.spyOn(target, 'scrollIntoView');
@@ -402,12 +413,16 @@ describe('Tab Menu Mode', (): void => {
   });
 
   it('should render without panels in navigation mode', (): void => {
-    const panels: DebugElement | null = fixture.debugElement.query(By.css('section.tab-panels'));
+    const panels: DebugElement | null = fixture.debugElement.query(
+      By.css('section.ui-lib-tabs__panels')
+    );
     expect(panels).toBeNull();
   });
 
   it('should emit value on tab click', (): void => {
-    const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
+    const buttons: DebugElement[] = fixture.debugElement.queryAll(
+      By.css('button.ui-lib-tabs__trigger')
+    );
     const target: HTMLButtonElement = getRequiredItem(buttons, 1, 'tab button')
       .nativeElement as HTMLButtonElement;
     target.click();
@@ -418,7 +433,9 @@ describe('Tab Menu Mode', (): void => {
   });
 
   it('should highlight the active tab', (): void => {
-    const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button.tab-trigger'));
+    const buttons: DebugElement[] = fixture.debugElement.queryAll(
+      By.css('button.ui-lib-tabs__trigger')
+    );
     const target: HTMLButtonElement = getRequiredItem(buttons, 2, 'tab button')
       .nativeElement as HTMLButtonElement;
     target.click();
@@ -487,7 +504,7 @@ describe('Tabs interactions', (): void => {
 
   function tabButtons(): HTMLButtonElement[] {
     return Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button.tab-trigger')
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button.ui-lib-tabs__trigger')
     );
   }
 
@@ -560,24 +577,24 @@ describe('Tabs interactions', (): void => {
       freshFixture.componentInstance.variant = variant;
       freshFixture.detectChanges();
       const list: HTMLElement | null = (freshFixture.nativeElement as HTMLElement).querySelector(
-        'nav.tab-list'
+        'nav.ui-lib-tabs__list'
       );
       return list as HTMLElement;
     };
 
     const materialList: HTMLElement = createVariantFixture('material');
-    expect(materialList.className).toContain('tabs-material');
+    expect(materialList.className).toContain('ui-lib-tabs--material');
 
     const bootstrapList: HTMLElement = createVariantFixture('bootstrap');
-    expect(bootstrapList.className).toContain('tabs-bootstrap');
+    expect(bootstrapList.className).toContain('ui-lib-tabs--bootstrap');
 
     const minimalList: HTMLElement = createVariantFixture('minimal');
-    expect(minimalList.className).toContain('tabs-minimal');
+    expect(minimalList.className).toContain('ui-lib-tabs--minimal');
   });
 
   it('exposes tablist, tab, and tabpanel roles with proper aria linkage', (): void => {
     const tabList: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      'nav.tab-list'
+      'nav.ui-lib-tabs__list'
     );
     const buttons: HTMLButtonElement[] = tabButtons();
     const panels: HTMLElement[] = tabPanels();
