@@ -88,10 +88,10 @@ describe('Button', (): void => {
     fixture.detectChanges();
 
     const btn: HTMLButtonElement = getButton();
-    expect(btn.className).toContain('btn-bootstrap');
-    expect(btn.className).toContain('btn-large');
-    expect(btn.className).toContain('btn-danger');
-    expect(btn.className).toContain('btn-appearance-outline');
+    expect(btn.className).toContain('ui-lib-button--bootstrap');
+    expect(btn.className).toContain('ui-lib-button--size-large');
+    expect(btn.className).toContain('ui-lib-button--danger');
+    expect(btn.className).toContain('ui-lib-button--appearance-outline');
   });
 
   it('disables and sets aria state when disabled or loading', (): void => {
@@ -117,7 +117,7 @@ describe('Button', (): void => {
     fixture.detectChanges();
 
     const loadingIconEl: DebugElement | null = fixture.debugElement.query(
-      By.css('ui-lib-icon.btn-icon--loading')
+      By.css('ui-lib-icon.ui-lib-button__icon--loading')
     );
     expect(loadingIconEl).toBeTruthy();
     const iconComponent: Icon = loadingIconEl.componentInstance as Icon;
@@ -130,28 +130,28 @@ describe('Button', (): void => {
       fixture.componentRef.setInput('raised', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-raised')).toBeTruthy();
+      expect(getButton().classList.contains('ui-lib-button--raised')).toBeTruthy();
     });
 
     it('applies btn-rounded class when rounded is true', (): void => {
       fixture.componentRef.setInput('rounded', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-rounded')).toBeTruthy();
+      expect(getButton().classList.contains('ui-lib-button--rounded')).toBeTruthy();
     });
 
     it('applies btn-text class when text is true', (): void => {
       fixture.componentRef.setInput('text', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-text')).toBeTruthy();
+      expect(getButton().classList.contains('ui-lib-button--text')).toBeTruthy();
     });
 
     it('applies btn-link class when link is true', (): void => {
       fixture.componentRef.setInput('link', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-link')).toBeTruthy();
+      expect(getButton().classList.contains('ui-lib-button--link')).toBeTruthy();
     });
   });
 
@@ -162,8 +162,8 @@ describe('Button', (): void => {
       fixture.detectChanges();
 
       const btn: HTMLButtonElement = getButton();
-      expect(btn.classList.contains('btn-raised')).toBeTruthy();
-      expect(btn.classList.contains('btn-rounded')).toBeTruthy();
+      expect(btn.classList.contains('ui-lib-button--raised')).toBeTruthy();
+      expect(btn.classList.contains('ui-lib-button--rounded')).toBeTruthy();
     });
 
     it('applies text and rounded together', (): void => {
@@ -172,8 +172,8 @@ describe('Button', (): void => {
       fixture.detectChanges();
 
       const btn: HTMLButtonElement = getButton();
-      expect(btn.classList.contains('btn-text')).toBeTruthy();
-      expect(btn.classList.contains('btn-rounded')).toBeTruthy();
+      expect(btn.classList.contains('ui-lib-button--text')).toBeTruthy();
+      expect(btn.classList.contains('ui-lib-button--rounded')).toBeTruthy();
     });
 
     it('applies outlined and rounded together', (): void => {
@@ -182,8 +182,8 @@ describe('Button', (): void => {
       fixture.detectChanges();
 
       const btn: HTMLButtonElement = getButton();
-      expect(btn.classList.contains('btn-outlined')).toBeTruthy();
-      expect(btn.classList.contains('btn-rounded')).toBeTruthy();
+      expect(btn.classList.contains('ui-lib-button--outlined')).toBeTruthy();
+      expect(btn.classList.contains('ui-lib-button--rounded')).toBeTruthy();
     });
   });
 
@@ -192,7 +192,7 @@ describe('Button', (): void => {
       fixture.componentRef.setInput('badge', '3');
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('btn-has-badge')).toBeTruthy();
+      expect(getButton().classList.contains('ui-lib-button--has-badge')).toBeTruthy();
       const badgeEl: HTMLElement | null = getBadge();
       expect(badgeEl).toBeTruthy();
       const badgeText: string | null = badgeEl?.textContent ?? null;
@@ -218,7 +218,7 @@ describe('Button', (): void => {
 
       const badgeEl: HTMLElement | null = getBadge();
       expect(badgeEl).toBeTruthy();
-      expect((badgeEl as HTMLElement).classList.contains('badge-color-info')).toBeTruthy();
+      expect((badgeEl as HTMLElement).classList.contains('ui-lib-badge--color-info')).toBeTruthy();
     });
   });
 
@@ -227,10 +227,10 @@ describe('Button', (): void => {
       fixture.detectChanges();
 
       const btn: HTMLButtonElement = getButton();
-      expect(btn.className).toContain('btn-material');
-      expect(btn.className).toContain('btn-medium');
-      expect(btn.className).toContain('btn-primary');
-      expect(btn.className).toContain('btn-appearance-solid');
+      expect(btn.className).toContain('ui-lib-button--material');
+      expect(btn.className).toContain('ui-lib-button--size-medium');
+      expect(btn.className).toContain('ui-lib-button--primary');
+      expect(btn.className).toContain('ui-lib-button--appearance-solid');
     });
   });
 
@@ -293,7 +293,7 @@ describe('Button', (): void => {
       fixture.componentRef.setInput('variant', variant);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains(`btn-${variant}`)).toBeTruthy();
+      expect(getButton().classList.contains(`ui-lib-button--${variant}`)).toBeTruthy();
     });
   });
 
@@ -304,7 +304,7 @@ describe('Button', (): void => {
       fixture.componentRef.setInput('color', color);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains(`btn-${color}`)).toBeTruthy();
+      expect(getButton().classList.contains(`ui-lib-button--${color}`)).toBeTruthy();
     });
   });
 
@@ -315,7 +315,7 @@ describe('Button', (): void => {
       fixture.componentRef.setInput('size', size);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains(`btn-${size}`)).toBeTruthy();
+      expect(getButton().classList.contains(`ui-lib-button--size-${size}`)).toBeTruthy();
     });
   });
 
@@ -327,7 +327,7 @@ describe('Button', (): void => {
     const style: CSSStyleDeclaration = getComputedStyle(btn);
 
     expect(btn.getAttribute('aria-disabled')).toBe('true');
-    expect(btn.classList.contains('btn-disabled')).toBeTruthy();
+    expect(btn.classList.contains('ui-lib-button--disabled')).toBeTruthy();
     expect(style.pointerEvents).toBe('none');
   });
 
@@ -337,12 +337,12 @@ describe('Button', (): void => {
 
     const btn: HTMLButtonElement = getButton();
     const loadingIconEl: DebugElement | null = fixture.debugElement.query(
-      By.css('ui-lib-icon.btn-icon--loading')
+      By.css('ui-lib-icon.ui-lib-button__icon--loading')
     );
 
     expect(loadingIconEl).toBeTruthy();
     expect(btn.disabled).toBeTruthy();
-    expect(btn.classList.contains('btn-loading')).toBeTruthy();
+    expect(btn.classList.contains('ui-lib-button--loading')).toBeTruthy();
   });
 
   it('renders icon on the left and right positions', (): void => {
@@ -350,17 +350,23 @@ describe('Button', (): void => {
     fixture.componentRef.setInput('iconPosition', 'left');
     fixture.detectChanges();
 
-    const leftIcon: HTMLElement | null = rootEl().querySelector('ui-lib-icon.btn-icon--start');
-    const leftEndIcon: HTMLElement | null = rootEl().querySelector('ui-lib-icon.btn-icon--end');
+    const leftIcon: HTMLElement | null = rootEl().querySelector(
+      'ui-lib-icon.ui-lib-button__icon--start'
+    );
+    const leftEndIcon: HTMLElement | null = rootEl().querySelector(
+      'ui-lib-icon.ui-lib-button__icon--end'
+    );
     expect(leftIcon).toBeTruthy();
     expect(leftEndIcon).toBeNull();
 
     fixture.componentRef.setInput('iconPosition', 'right');
     fixture.detectChanges();
 
-    const rightIcon: HTMLElement | null = rootEl().querySelector('ui-lib-icon.btn-icon--end');
+    const rightIcon: HTMLElement | null = rootEl().querySelector(
+      'ui-lib-icon.ui-lib-button__icon--end'
+    );
     const rightStartIcon: HTMLElement | null = rootEl().querySelector(
-      'ui-lib-icon.btn-icon--start'
+      'ui-lib-icon.ui-lib-button__icon--start'
     );
     expect(rightIcon).toBeTruthy();
     expect(rightStartIcon).toBeNull();
@@ -370,7 +376,7 @@ describe('Button', (): void => {
     fixture.componentRef.setInput('fullWidth', true);
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-full-width')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--full-width')).toBeTruthy();
   });
 
   it('renders focus ring on focus-visible', (): void => {
@@ -389,14 +395,14 @@ describe('Button', (): void => {
     fixture.componentRef.setInput('severity', 'warn');
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-warning')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--warning')).toBeTruthy();
   });
 
   it('uses contrast severity when contrast is true', (): void => {
     fixture.componentRef.setInput('contrast', true);
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-contrast')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--contrast')).toBeTruthy();
   });
 
   it('prefers ghost appearance when text is true', (): void => {
@@ -404,7 +410,7 @@ describe('Button', (): void => {
     fixture.componentRef.setInput('text', true);
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-appearance-ghost')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--appearance-ghost')).toBeTruthy();
   });
 
   it('prefers outline appearance when outlined is true', (): void => {
@@ -412,7 +418,7 @@ describe('Button', (): void => {
     fixture.componentRef.setInput('outlined', true);
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-appearance-outline')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--appearance-outline')).toBeTruthy();
   });
 
   it('applies icon-only class when iconOnlyInput is true', (): void => {
@@ -421,7 +427,7 @@ describe('Button', (): void => {
     fixture.componentRef.setInput('iconOnly', null);
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-icon-only')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--icon-only')).toBeTruthy();
   });
 
   it('adds vertical class for top or bottom icon positions', (): void => {
@@ -429,12 +435,12 @@ describe('Button', (): void => {
     fixture.componentRef.setInput('iconPosition', 'top');
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-vertical')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--vertical')).toBeTruthy();
 
     fixture.componentRef.setInput('iconPosition', 'bottom');
     fixture.detectChanges();
 
-    expect(getButton().classList.contains('btn-vertical')).toBeTruthy();
+    expect(getButton().classList.contains('ui-lib-button--vertical')).toBeTruthy();
   });
 
   it('maps badge severity help and contrast to supported badge colors', (): void => {
@@ -444,14 +450,16 @@ describe('Button', (): void => {
 
     const badgeHelp: HTMLElement | null = getBadge();
     expect(badgeHelp).toBeTruthy();
-    expect((badgeHelp as HTMLElement).classList.contains('badge-color-info')).toBeTruthy();
+    expect((badgeHelp as HTMLElement).classList.contains('ui-lib-badge--color-info')).toBeTruthy();
 
     fixture.componentRef.setInput('badgeSeverity', 'contrast');
     fixture.detectChanges();
 
     const badgeContrast: HTMLElement | null = getBadge();
     expect(badgeContrast).toBeTruthy();
-    expect((badgeContrast as HTMLElement).classList.contains('badge-color-neutral')).toBeTruthy();
+    expect(
+      (badgeContrast as HTMLElement).classList.contains('ui-lib-badge--color-neutral')
+    ).toBeTruthy();
   });
 
   it('applies shadow CSS variables when shadow is set', (): void => {
@@ -598,14 +606,22 @@ describe('Button variant', (): void => {
     };
 
     let buttons: HTMLButtonElement[] = getVariantButtons();
-    expect(getRequiredVariantButton(buttons, 0).classList.contains('btn-bootstrap')).toBeTruthy();
-    expect(getRequiredVariantButton(buttons, 1).classList.contains('btn-bootstrap')).toBeTruthy();
+    expect(
+      getRequiredVariantButton(buttons, 0).classList.contains('ui-lib-button--bootstrap')
+    ).toBeTruthy();
+    expect(
+      getRequiredVariantButton(buttons, 1).classList.contains('ui-lib-button--bootstrap')
+    ).toBeTruthy();
 
     fixture.componentInstance.overrideVariant.set('minimal');
     fixture.detectChanges();
 
     buttons = getVariantButtons();
-    expect(getRequiredVariantButton(buttons, 0).classList.contains('btn-bootstrap')).toBeTruthy();
-    expect(getRequiredVariantButton(buttons, 1).classList.contains('btn-minimal')).toBeTruthy();
+    expect(
+      getRequiredVariantButton(buttons, 0).classList.contains('ui-lib-button--bootstrap')
+    ).toBeTruthy();
+    expect(
+      getRequiredVariantButton(buttons, 1).classList.contains('ui-lib-button--minimal')
+    ).toBeTruthy();
   });
 });

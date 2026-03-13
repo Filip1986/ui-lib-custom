@@ -4,14 +4,8 @@
     --uilib-select-button-border-radius,
     var(--uilib-shape-base, 6px)
   );
-  --uilib-select-button-bg-resolved: var(
-    --uilib-select-button-bg,
-    var(--uilib-surface-100)
-  );
-  --uilib-select-button-border-resolved: var(
-    --uilib-select-button-border,
-    var(--uilib-border)
-  );
+  --uilib-select-button-bg-resolved: var(--uilib-select-button-bg, var(--uilib-surface-100));
+  --uilib-select-button-border-resolved: var(--uilib-select-button-border, var(--uilib-border));
   --uilib-select-button-selected-bg-resolved: var(
     --uilib-select-button-selected-bg,
     var(--uilib-color-primary-500)
@@ -25,26 +19,19 @@
     var(--uilib-surface-200)
   );
   --uilib-select-button-shadow-resolved: var(--uilib-select-button-shadow, none);
-  --uilib-select-button-disabled-opacity-resolved: var(
-    --uilib-select-button-disabled-opacity,
-    0.6
-  );
+  --uilib-select-button-disabled-opacity-resolved: var(--uilib-select-button-disabled-opacity, 0.6);
   --uilib-select-button-invalid-border-resolved: var(
     --uilib-select-button-invalid-border,
     var(--uilib-color-danger-600)
   );
   --uilib-select-button-padding-y-base: 0.625rem;
   --uilib-select-button-padding-x-base: 1rem;
-  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+  --uilib-select-button-padding-resolved: calc(
+      var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1)
+    )
     calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
-  --uilib-select-button-font-size-resolved: var(
-    --uilib-select-button-medium-font-size,
-    1rem
-  );
-  --uilib-select-button-min-height-resolved: var(
-    --uilib-select-button-medium-min-height,
-    2.5rem
-  );
+  --uilib-select-button-font-size-resolved: var(--uilib-select-button-medium-font-size, 1rem);
+  --uilib-select-button-min-height-resolved: var(--uilib-select-button-medium-min-height, 2.5rem);
 
   display: inline-flex;
   align-items: stretch;
@@ -66,47 +53,44 @@
   flex: 1 1 auto;
 }
 
-:host .ui-lib-select-button__item .btn {
+:host .ui-lib-select-button__item .ui-lib-button {
   width: 100%;
   min-height: var(--uilib-select-button-min-height-resolved);
   --uilib-button-padding: var(--uilib-select-button-padding-resolved);
   --uilib-button-font-size: var(--uilib-select-button-font-size-resolved);
   --uilib-button-bg: var(--uilib-select-button-bg-resolved);
   --uilib-button-border: var(--uilib-select-button-border-resolved);
-  --uilib-button-fg: var(
-    --uilib-select-button-fg,
-    var(--uilib-page-fg)
-  );
+  --uilib-button-fg: var(--uilib-select-button-fg, var(--uilib-page-fg));
   box-shadow: var(--uilib-select-button-shadow-resolved);
   border-radius: calc(var(--uilib-shape-base, 6px) * 0);
 }
 
-:host .ui-lib-select-button__item .btn:focus-visible {
+:host .ui-lib-select-button__item .ui-lib-button:focus-visible {
   outline: 2px solid var(--uilib-color-primary-500);
   outline-offset: 2px;
 }
 
-:host .ui-lib-select-button__item .btn:hover:not(.btn-disabled) {
+:host .ui-lib-select-button__item .ui-lib-button:hover:not(.ui-lib-button--disabled) {
   --uilib-button-bg-hover: var(--uilib-select-button-hover-bg-resolved);
 }
 
-:host .ui-lib-select-button__item--selected .btn {
+:host .ui-lib-select-button__item--selected .ui-lib-button {
   --uilib-button-bg: var(--uilib-select-button-selected-bg-resolved);
   --uilib-button-bg-hover: var(--uilib-select-button-selected-bg-resolved);
   --uilib-button-fg: var(--uilib-select-button-selected-fg-resolved);
 }
 
-:host .ui-lib-select-button__item:first-child .btn {
+:host .ui-lib-select-button__item:first-child .ui-lib-button {
   border-top-left-radius: var(--uilib-shape-base, 6px);
   border-bottom-left-radius: var(--uilib-shape-base, 6px);
 }
 
-:host .ui-lib-select-button__item:last-child .btn {
+:host .ui-lib-select-button__item:last-child .ui-lib-button {
   border-top-right-radius: var(--uilib-shape-base, 6px);
   border-bottom-right-radius: var(--uilib-shape-base, 6px);
 }
 
-:host .ui-lib-select-button__item:not(:first-child) .btn {
+:host .ui-lib-select-button__item:not(:first-child) .ui-lib-button {
   margin-left: -1px;
 }
 
@@ -193,7 +177,9 @@
 :host .ui-lib-select-button--small {
   --uilib-select-button-padding-y-base: 0.5rem;
   --uilib-select-button-padding-x-base: 0.75rem;
-  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+  --uilib-select-button-padding-resolved: calc(
+      var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1)
+    )
     calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
   --uilib-select-button-font-size-resolved: var(--uilib-select-button-small-font-size, 0.875rem);
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-small-min-height, 2rem);
@@ -202,7 +188,9 @@
 :host .ui-lib-select-button--medium {
   --uilib-select-button-padding-y-base: 0.625rem;
   --uilib-select-button-padding-x-base: 1rem;
-  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+  --uilib-select-button-padding-resolved: calc(
+      var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1)
+    )
     calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
   --uilib-select-button-font-size-resolved: var(--uilib-select-button-medium-font-size, 1rem);
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-medium-min-height, 2.5rem);
@@ -211,7 +199,9 @@
 :host .ui-lib-select-button--large {
   --uilib-select-button-padding-y-base: 0.75rem;
   --uilib-select-button-padding-x-base: 1.25rem;
-  --uilib-select-button-padding-resolved: calc(var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1))
+  --uilib-select-button-padding-resolved: calc(
+      var(--uilib-select-button-padding-y-base) * var(--uilib-density, 1)
+    )
     calc(var(--uilib-select-button-padding-x-base) * var(--uilib-density, 1));
   --uilib-select-button-font-size-resolved: var(--uilib-select-button-large-font-size, 1.125rem);
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-large-min-height, 3rem);
@@ -263,9 +253,17 @@
   --uilib-select-button-bootstrap-selected-fg: #0b1220;
 
   --uilib-select-button-minimal-bg: transparent;
-  --uilib-select-button-minimal-hover-bg: color-mix(in srgb, var(--uilib-text-dark-primary) 6%, transparent);
+  --uilib-select-button-minimal-hover-bg: color-mix(
+    in srgb,
+    var(--uilib-text-dark-primary) 6%,
+    transparent
+  );
   --uilib-select-button-minimal-border: transparent;
-  --uilib-select-button-minimal-selected-bg: color-mix(in srgb, var(--uilib-text-dark-primary) 10%, transparent);
+  --uilib-select-button-minimal-selected-bg: color-mix(
+    in srgb,
+    var(--uilib-text-dark-primary) 10%,
+    transparent
+  );
   --uilib-select-button-minimal-selected-fg: var(--uilib-text-dark-primary);
 
   --uilib-select-button-fg: var(--uilib-text-dark-primary);

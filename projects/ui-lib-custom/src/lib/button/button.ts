@@ -192,64 +192,64 @@ export class Button implements AfterViewChecked {
 
   public readonly buttonClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
-      'btn',
-      `btn-${this.effectiveVariant()}`,
-      `btn-${this.normalizedSize()}`,
-      `btn-${this.effectiveSeverity()}`,
-      `btn-appearance-${this.effectiveAppearance()}`,
-      `btn-icon-${this.iconPosition()}`,
+      'ui-lib-button',
+      `ui-lib-button--${this.effectiveVariant()}`,
+      `ui-lib-button--size-${this.normalizedSize()}`,
+      `ui-lib-button--${this.effectiveSeverity()}`,
+      `ui-lib-button--appearance-${this.effectiveAppearance()}`,
+      `ui-lib-button--icon-${this.iconPosition()}`,
     ];
 
     if (this.fullWidth()) {
-      classes.push('btn-full-width');
+      classes.push('ui-lib-button--full-width');
     }
 
     if (this.disabled() || this.loading()) {
-      classes.push('btn-disabled');
+      classes.push('ui-lib-button--disabled');
     }
 
     if (this.loading()) {
-      classes.push('btn-loading');
+      classes.push('ui-lib-button--loading');
     }
 
     if (this.icon()) {
-      classes.push('btn-has-icon');
+      classes.push('ui-lib-button--has-icon');
     }
 
     if (this.iconOnlyComputed()) {
-      classes.push('btn-icon-only');
+      classes.push('ui-lib-button--icon-only');
     }
 
     if (this.raised()) {
-      classes.push('btn-raised');
+      classes.push('ui-lib-button--raised');
     }
 
     if (this.rounded()) {
-      classes.push('btn-rounded');
+      classes.push('ui-lib-button--rounded');
     }
 
     if (this.text()) {
-      classes.push('btn-text');
+      classes.push('ui-lib-button--text');
     }
 
     if (this.outlined()) {
-      classes.push('btn-outlined');
+      classes.push('ui-lib-button--outlined');
     }
 
     if (this.link()) {
-      classes.push('btn-link');
+      classes.push('ui-lib-button--link');
     }
 
     if (this.hasBadge()) {
-      classes.push('btn-has-badge');
+      classes.push('ui-lib-button--has-badge');
     }
 
     if (this.iconPosition() === 'top' || this.iconPosition() === 'bottom') {
-      classes.push('btn-vertical');
+      classes.push('ui-lib-button--vertical');
     }
 
     if (this.focused()) {
-      classes.push('btn-focused');
+      classes.push('ui-lib-button--focused');
     }
 
     return classes.join(' ');

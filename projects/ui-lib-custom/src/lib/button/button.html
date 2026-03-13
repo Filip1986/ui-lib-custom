@@ -18,20 +18,20 @@
 >
   @if ((iconPosition() === 'left' || iconPosition() === 'top') && icon()) {
     <ui-lib-icon
-      class="btn-icon btn-icon--start"
+      class="ui-lib-button__icon ui-lib-button__icon--start"
       [name]="icon()!"
       [size]="iconSize()"
       [variant]="effectiveVariant()"
     />
   }
 
-  <span class="btn-content">
+  <span class="ui-lib-button__content">
     <ng-content />
   </span>
 
   @if ((iconPosition() === 'right' || iconPosition() === 'bottom') && icon()) {
     <ui-lib-icon
-      class="btn-icon btn-icon--end"
+      class="ui-lib-button__icon ui-lib-button__icon--end"
       [name]="icon()!"
       [size]="iconSize()"
       [variant]="effectiveVariant()"
@@ -39,13 +39,17 @@
   }
 
   @if (loading()) {
-    <ui-lib-icon class="btn-icon btn-icon--loading" [name]="loadingIcon()" [size]="iconSize()" />
+    <ui-lib-icon
+      class="ui-lib-button__icon ui-lib-button__icon--loading"
+      [name]="loadingIcon()"
+      [size]="iconSize()"
+    />
   }
 
   @if (hasBadge()) {
-    <span class="btn-badge-wrapper" [ngClass]="badgeClass()">
+    <span class="ui-lib-button__badge-wrapper" [ngClass]="badgeClass()">
       <ui-lib-badge
-        class="btn-badge"
+        class="ui-lib-button__badge"
         [color]="badgeColorResolved()"
         size="sm"
         variant="solid"
