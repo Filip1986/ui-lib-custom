@@ -58,7 +58,7 @@ describe('UiLibSelect accessibility', (): void => {
 
   function controlEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-control'
+      '.ui-lib-select__control'
     ) as HTMLElement;
   }
 
@@ -176,7 +176,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
 
   function controlEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-control'
+      '.ui-lib-select__control'
     ) as HTMLElement;
   }
 
@@ -186,7 +186,9 @@ describe('UiLibSelect Reactive Forms', (): void => {
   }
 
   function optionEls(): HTMLElement[] {
-    return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('.ui-select-option'));
+    return Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('.ui-lib-select__option')
+    );
   }
 
   it('updates control value when option is selected', (): void => {
@@ -232,12 +234,12 @@ describe('UiLibSelect basics', (): void => {
   });
 
   function hostWrapper(): HTMLElement {
-    return (fixture.nativeElement as HTMLElement).querySelector('.ui-select') as HTMLElement;
+    return (fixture.nativeElement as HTMLElement).querySelector('.ui-lib-select') as HTMLElement;
   }
 
   function controlEl(): HTMLElement {
     return (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-control'
+      '.ui-lib-select__control'
     ) as HTMLElement;
   }
 
@@ -247,8 +249,8 @@ describe('UiLibSelect basics', (): void => {
 
   it('creates with defaults', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
-    expect(hostWrapper().classList.contains('ui-select')).toBeTruthy();
-    expect(hostWrapper().classList.contains('ui-select-material')).toBeTruthy();
+    expect(hostWrapper().classList.contains('ui-lib-select')).toBeTruthy();
+    expect(hostWrapper().classList.contains('ui-lib-select--material')).toBeTruthy();
   });
 
   it('applies each variant class', (): void => {
@@ -258,15 +260,15 @@ describe('UiLibSelect basics', (): void => {
       fixture.componentRef.setInput('variant', variant);
       fixture.detectChanges();
 
-      expect(hostWrapper().classList.contains(`ui-select-${variant}`)).toBeTruthy();
+      expect(hostWrapper().classList.contains(`ui-lib-select--${variant}`)).toBeTruthy();
     });
   });
 
   it('renders placeholder by default', (): void => {
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-value'
+      '.ui-lib-select__value'
     ) as HTMLElement;
-    expect(valueEl.classList.contains('ui-select-placeholder')).toBeTruthy();
+    expect(valueEl.classList.contains('ui-lib-select__placeholder')).toBeTruthy();
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect((valueText as string).trim()).toBe('Select...');
@@ -277,7 +279,7 @@ describe('UiLibSelect basics', (): void => {
     fixture.detectChanges();
 
     const labelEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-label'
+      '.ui-lib-select__label'
     ) as HTMLElement | null;
     expect(labelEl).toBeTruthy();
     const labelText: string | null = (labelEl as HTMLElement).textContent;
@@ -292,7 +294,7 @@ describe('UiLibSelect basics', (): void => {
     const style: CSSStyleDeclaration = getComputedStyle(hostWrapper());
 
     expect(hostEl().getAttribute('aria-disabled')).toBe('true');
-    expect(hostWrapper().classList.contains('ui-select-disabled')).toBeTruthy();
+    expect(hostWrapper().classList.contains('ui-lib-select--disabled')).toBeTruthy();
     expect(style.pointerEvents).toBe('none');
 
     controlEl().click();
@@ -321,7 +323,7 @@ describe('UiLibSelect basics', (): void => {
     fixture.detectChanges();
 
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-value'
+      '.ui-lib-select__value'
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
@@ -375,7 +377,7 @@ describe('UiLibSelect ngModel', (): void => {
     freshFixture.detectChanges(false);
 
     const valueEl: HTMLElement = (freshFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-value'
+      '.ui-lib-select__value'
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
@@ -403,7 +405,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
     fixture.detectChanges();
 
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-value'
+      '.ui-lib-select__value'
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
@@ -423,13 +425,13 @@ describe('UiLibSelect Reactive Forms', (): void => {
     selectFixture.componentInstance.registerOnChange(onChangeSpy);
 
     const control: HTMLElement = (selectFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-control'
+      '.ui-lib-select__control'
     ) as HTMLElement;
     control.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     selectFixture.detectChanges();
 
     const option: HTMLElement = (selectFixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-option'
+      '.ui-lib-select__option'
     ) as HTMLElement;
     option.click();
     selectFixture.detectChanges();
@@ -483,7 +485,7 @@ describe('UiLibSelect behavior', (): void => {
     fixture.detectChanges();
 
     const valueEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-value'
+      '.ui-lib-select__value'
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
@@ -588,7 +590,7 @@ describe('UiLibSelect behavior', (): void => {
 
     const searchInput: HTMLInputElement | null = (
       fixture.nativeElement as HTMLElement
-    ).querySelector('.ui-select-search input');
+    ).querySelector('.ui-lib-select__search input');
     expect(searchInput).toBeTruthy();
   });
 });

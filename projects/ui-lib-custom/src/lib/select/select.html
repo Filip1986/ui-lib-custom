@@ -1,39 +1,39 @@
 <div [class]="hostClasses()" [style.pointer-events]="isDisabled() || loading() ? 'none' : 'auto'">
   @if (label()) {
-    <label class="ui-select-label" [attr.id]="labelId()">
+    <label class="ui-lib-select__label" [attr.id]="labelId()">
       <span>{{ label() }}</span>
     </label>
   }
 
-  <div class="ui-select-control" #controlEl (click)="togglePanel()">
-    <div class="ui-select-value" [class.ui-select-placeholder]="!displayValue()">
+  <div class="ui-lib-select__control" #controlEl (click)="togglePanel()">
+    <div class="ui-lib-select__value" [class.ui-lib-select__placeholder]="!displayValue()">
       @if (displayValue()) {
         {{ displayValue() }}
       } @else {
         {{ placeholder() }}
       }
     </div>
-    <div class="ui-select-actions">
+    <div class="ui-lib-select__actions">
       @if (loading()) {
-        <span class="ui-select-spinner"></span>
+        <span class="ui-lib-select__spinner"></span>
       }
       @if (displayValue()) {
         <button
           type="button"
-          class="ui-select-clear"
+          class="ui-lib-select__clear"
           (click)="$event.stopPropagation(); clear()"
           aria-label="Clear selection"
         >
           ×
         </button>
       }
-      <span class="ui-select-arrow">▾</span>
+      <span class="ui-lib-select__arrow">▾</span>
     </div>
   </div>
 
   @if (open()) {
     <div
-      class="ui-select-panel"
+      class="ui-lib-select__panel"
       #panel
       [id]="listboxId()"
       [attr.role]="listboxRole"
@@ -41,7 +41,7 @@
       [attr.aria-multiselectable]="multiple() ? 'true' : null"
     >
       @if (searchable()) {
-        <div class="ui-select-search">
+        <div class="ui-lib-select__search">
           <input
             #inputEl
             type="text"
@@ -55,17 +55,17 @@
 
       @for (groupKey of groupKeys(); track groupKey) {
         @if (groupKey !== ungroupedKey) {
-          <div class="ui-select-group">{{ groupKey }}</div>
+          <div class="ui-lib-select__group">{{ groupKey }}</div>
         }
         @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
           <div
-            class="ui-select-option"
+            class="ui-lib-select__option"
             [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
-            [class.ui-select-option--active]="(optionIndexMap().get(opt) ?? -1) === focusedIndex()"
-            [class.ui-select-option--selected]="selectedValues().has(opt.value)"
-            [class.ui-select-option--disabled]="opt.disabled"
-            [class.selected]="selectedValues().has(opt.value)"
-            [class.disabled]="opt.disabled"
+            [class.ui-lib-select__option--active]="
+              (optionIndexMap().get(opt) ?? -1) === focusedIndex()
+            "
+            [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
+            [class.ui-lib-select__option--disabled]="opt.disabled"
             (click)="selectOption(opt)"
             (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
             role="option"
@@ -84,7 +84,7 @@
       }
 
       @if (filteredOptions().length === 0) {
-        <div class="ui-select-empty">No results</div>
+        <div class="ui-lib-select__empty">No results</div>
       }
     </div>
   }

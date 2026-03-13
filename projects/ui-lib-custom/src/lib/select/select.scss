@@ -1,4 +1,4 @@
-:host .ui-select {
+ui-lib-select .ui-lib-select {
   --uilib-select-option-hover: var(
     --uilib-select-option-hover,
     color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent)
@@ -15,13 +15,27 @@
   --uilib-select-empty-padding-base: 0.75rem;
   --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));
   --uilib-select-padding-x: calc(var(--uilib-select-padding-x-base) * var(--uilib-density, 1));
-  --uilib-select-search-padding-y: calc(var(--uilib-select-search-padding-y-base) * var(--uilib-density, 1));
-  --uilib-select-search-padding-x: calc(var(--uilib-select-search-padding-x-base) * var(--uilib-density, 1));
-  --uilib-select-option-padding-y: calc(var(--uilib-select-option-padding-y-base) * var(--uilib-density, 1));
-  --uilib-select-option-padding-x: calc(var(--uilib-select-option-padding-x-base) * var(--uilib-density, 1));
-  --uilib-select-group-padding-y: calc(var(--uilib-select-group-padding-y-base) * var(--uilib-density, 1));
-  --uilib-select-group-padding-x: calc(var(--uilib-select-group-padding-x-base) * var(--uilib-density, 1));
-  --uilib-select-empty-padding: calc(var(--uilib-select-empty-padding-base) * var(--uilib-density, 1));
+  --uilib-select-search-padding-y: calc(
+    var(--uilib-select-search-padding-y-base) * var(--uilib-density, 1)
+  );
+  --uilib-select-search-padding-x: calc(
+    var(--uilib-select-search-padding-x-base) * var(--uilib-density, 1)
+  );
+  --uilib-select-option-padding-y: calc(
+    var(--uilib-select-option-padding-y-base) * var(--uilib-density, 1)
+  );
+  --uilib-select-option-padding-x: calc(
+    var(--uilib-select-option-padding-x-base) * var(--uilib-density, 1)
+  );
+  --uilib-select-group-padding-y: calc(
+    var(--uilib-select-group-padding-y-base) * var(--uilib-density, 1)
+  );
+  --uilib-select-group-padding-x: calc(
+    var(--uilib-select-group-padding-x-base) * var(--uilib-density, 1)
+  );
+  --uilib-select-empty-padding: calc(
+    var(--uilib-select-empty-padding-base) * var(--uilib-density, 1)
+  );
 
   display: flex;
   flex-direction: column;
@@ -30,12 +44,12 @@
   color: var(--uilib-page-fg);
 }
 
-:host .ui-select-label {
+ui-lib-select .ui-lib-select__label {
   font-weight: 600;
   color: inherit;
 }
 
-:host .ui-select-control {
+ui-lib-select .ui-lib-select__control {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -50,38 +64,38 @@
     box-shadow 0.15s ease;
 }
 
-:host .ui-select-control:focus-visible {
+ui-lib-select .ui-lib-select__control:focus-visible {
   outline: 2px solid var(--uilib-color-primary-500);
   outline-offset: 2px;
 }
 
-:host .ui-select-value {
+ui-lib-select .ui-lib-select__value {
   min-height: 1.25rem;
 }
 
-:host .ui-select-placeholder {
+ui-lib-select .ui-lib-select__placeholder {
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-select-actions {
+ui-lib-select .ui-lib-select__actions {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-:host .ui-select-clear {
+ui-lib-select .ui-lib-select__clear {
   border: none;
   background: transparent;
   cursor: pointer;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-select-arrow {
+ui-lib-select .ui-lib-select__arrow {
   font-size: 0.8rem;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-select-panel {
+ui-lib-select .ui-lib-select__panel {
   position: absolute;
   inset-inline: 0;
   margin-top: 0.35rem;
@@ -97,12 +111,12 @@
   gap: 0.25rem;
 }
 
-:host .ui-select-search {
+ui-lib-select .ui-lib-select__search {
   padding: var(--uilib-select-search-padding-y) var(--uilib-select-search-padding-x) 0
     var(--uilib-select-search-padding-x);
 }
 
-:host .ui-select-search input {
+ui-lib-select .ui-lib-select__search input {
   width: 100%;
   padding: var(--uilib-select-search-input-padding-y) var(--uilib-select-search-input-padding-x);
   border-radius: var(--uilib-select-radius, var(--uilib-shape-base, 6px));
@@ -111,13 +125,13 @@
   color: inherit;
 }
 
-:host .ui-select-group {
+ui-lib-select .ui-lib-select__group {
   padding: var(--uilib-select-group-padding-y) var(--uilib-select-group-padding-x);
   font-weight: 600;
   color: var(--uilib-muted);
 }
 
-:host .ui-select-option {
+ui-lib-select .ui-lib-select__option {
   padding: var(--uilib-select-option-padding-y) var(--uilib-select-option-padding-x);
   cursor: pointer;
   display: flex;
@@ -125,31 +139,31 @@
   gap: 0.5rem;
 }
 
-:host .ui-select-option:hover {
+ui-lib-select .ui-lib-select__option:hover {
   background: var(--uilib-select-option-hover);
 }
 
-:host .ui-select-option.selected {
+ui-lib-select .ui-lib-select__option.ui-lib-select__option--selected {
   font-weight: 600;
 }
 
-:host .ui-select-option.disabled {
+ui-lib-select .ui-lib-select__option.ui-lib-select__option--disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-:host .ui-select-empty {
+ui-lib-select .ui-lib-select__empty {
   padding: var(--uilib-select-empty-padding);
   text-align: center;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-select.ui-select-disabled {
+ui-lib-select .ui-lib-select.ui-lib-select--disabled {
   opacity: 0.6;
   pointer-events: none;
 }
 
-:host .ui-select-spinner {
+ui-lib-select .ui-lib-select__spinner {
   width: 1rem;
   height: 1rem;
   border-radius: var(--uilib-shape-base, 6px);
@@ -164,32 +178,26 @@
   }
 }
 
-:host .ui-select-option--active {
+ui-lib-select .ui-lib-select__option--active {
   background: var(--uilib-select-option-hover);
   outline: 2px solid var(--uilib-color-primary-500);
   outline-offset: -2px;
 }
 
-:host.ng-touched .ui-select-control {
-  border-color: var(
-    --uilib-select-border-touched,
-    var(--uilib-color-primary-600)
-  );
+ui-lib-select.ng-touched .ui-lib-select__control {
+  border-color: var(--uilib-select-border-touched, var(--uilib-color-primary-600));
 }
 
-:host.ng-dirty .ui-select-control {
-  border-color: var(
-    --uilib-select-border-dirty,
-    var(--uilib-color-primary-600)
-  );
+ui-lib-select.ng-dirty .ui-lib-select__control {
+  border-color: var(--uilib-select-border-dirty, var(--uilib-color-primary-600));
 }
 
-:host.ng-invalid.ng-touched .ui-select-control,
-:host.ng-invalid.ng-dirty .ui-select-control {
+ui-lib-select.ng-invalid.ng-touched .ui-lib-select__control,
+ui-lib-select.ng-invalid.ng-dirty .ui-lib-select__control {
   border-color: var(--uilib-select-border-invalid, var(--uilib-color-danger-600));
 }
 
-:host.ng-disabled .ui-select-control {
+ui-lib-select.ng-disabled .ui-lib-select__control {
   opacity: 0.6;
 }
 
@@ -198,10 +206,14 @@
   --uilib-select-border: var(--uilib-border-dark);
   --uilib-select-dropdown-bg: var(--uilib-surface-dark-3);
   --uilib-select-option-hover: color-mix(in srgb, var(--uilib-color-primary-dark) 10%, transparent);
-  --uilib-select-option-selected: color-mix(in srgb, var(--uilib-color-primary-dark) 20%, transparent);
+  --uilib-select-option-selected: color-mix(
+    in srgb,
+    var(--uilib-color-primary-dark) 20%,
+    transparent
+  );
 }
 
-:host .ui-select.ui-select-size-sm .ui-select-control {
+ui-lib-select .ui-lib-select.ui-lib-select--size-sm .ui-lib-select__control {
   --uilib-select-padding-y-base: 0.35rem;
   --uilib-select-padding-x-base: 0.5rem;
   --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));
@@ -211,7 +223,7 @@
   font-size: 0.875rem;
 }
 
-:host .ui-select.ui-select-size-md .ui-select-control {
+ui-lib-select .ui-lib-select.ui-lib-select--size-md .ui-lib-select__control {
   --uilib-select-padding-y-base: 0.55rem;
   --uilib-select-padding-x-base: 0.75rem;
   --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));
@@ -221,7 +233,7 @@
   font-size: 1rem;
 }
 
-:host .ui-select.ui-select-size-lg .ui-select-control {
+ui-lib-select .ui-lib-select.ui-lib-select--size-lg .ui-lib-select__control {
   --uilib-select-padding-y-base: 0.65rem;
   --uilib-select-padding-x-base: 0.9rem;
   --uilib-select-padding-y: calc(var(--uilib-select-padding-y-base) * var(--uilib-density, 1));

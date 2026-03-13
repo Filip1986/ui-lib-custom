@@ -92,7 +92,7 @@ describe('Select Accessibility', (): void => {
 
   it('should have no violations when open', async (): Promise<void> => {
     const control: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-control'
+      '.ui-lib-select__control'
     ) as HTMLElement;
     control.click();
     fixture.detectChanges();
@@ -109,7 +109,7 @@ describe('Select Accessibility', (): void => {
 
   it('should have listbox role on dropdown', (): void => {
     const control: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-      '.ui-select-control'
+      '.ui-lib-select__control'
     ) as HTMLElement;
     control.click();
     fixture.detectChanges();

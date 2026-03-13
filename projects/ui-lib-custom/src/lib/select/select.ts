@@ -157,12 +157,12 @@ export class UiLibSelect implements ControlValueAccessor {
   );
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
-      'ui-select',
-      `ui-select-${this.effectiveVariant()}`,
-      `ui-select-size-${this.normalizedSize()}`,
+      'ui-lib-select',
+      `ui-lib-select--${this.effectiveVariant()}`,
+      `ui-lib-select--size-${this.normalizedSize()}`,
     ];
-    if (this.isDisabled() || this.loading()) classes.push('ui-select-disabled');
-    if (this.multiple()) classes.push('ui-select-multiple');
+    if (this.isDisabled() || this.loading()) classes.push('ui-lib-select--disabled');
+    if (this.multiple()) classes.push('ui-lib-select--multiple');
     return classes.join(' ');
   });
 

@@ -137,30 +137,29 @@
    * ========================================= */
 
   ui-lib-select,
-  .ui-select {
-    .ui-select-control {
+  .ui-lib-select {
+    .ui-lib-select__control {
       border: 2px solid ButtonText !important;
       background: Field !important;
       color: FieldText !important;
     }
 
-    .ui-select-panel {
+    .ui-lib-select__panel {
       border: 2px solid CanvasText !important;
       background: Canvas !important;
     }
 
-    .ui-select-option--active,
-    .ui-select-option:hover {
+    .ui-lib-select__option--active,
+    .ui-lib-select__option:hover {
       background: Highlight !important;
       color: HighlightText !important;
     }
 
-    .ui-select-option--selected {
+    .ui-lib-select__option--selected {
       border-inline-start: 3px solid Highlight !important;
     }
 
-    .ui-select-option--disabled,
-    .ui-select-option.disabled {
+    .ui-lib-select__option--disabled {
       color: GrayText !important;
     }
   }
