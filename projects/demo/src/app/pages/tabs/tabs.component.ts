@@ -10,18 +10,7 @@ import {
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  Tabs,
-  Tab,
-  TabLabel,
-  TabContent,
-  Card,
-  Button,
-  Icon,
-  ThemeConfigService,
-  UiLibSelect,
-  Checkbox,
-} from 'ui-lib-custom';
+import { Tabs, Tab, TabLabel, TabContent } from 'ui-lib-custom/tabs';
 import type {
   TabsAlignment,
   TabsLazyMode,
@@ -31,8 +20,14 @@ import type {
   TabsVariant,
   TabsScrollBehavior,
   TabsMode,
-  SelectOption,
-} from 'ui-lib-custom';
+} from 'ui-lib-custom/tabs';
+import { Card } from 'ui-lib-custom/card';
+import { Button } from 'ui-lib-custom/button';
+import { Icon } from 'ui-lib-custom/icon';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption } from 'ui-lib-custom/select';
+import { Checkbox } from 'ui-lib-custom/checkbox';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';

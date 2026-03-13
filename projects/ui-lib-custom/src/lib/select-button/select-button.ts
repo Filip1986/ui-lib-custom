@@ -30,7 +30,7 @@ import {
   SHARED_SIZES,
   SHARED_THEME_VARIANTS,
   KEYBOARD_KEYS,
-} from '../shared/constants';
+} from '../core/shared/constants';
 import type {
   SelectButtonChangeEvent,
   SelectButtonItemContext,

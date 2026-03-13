@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Card } from 'ui-lib-custom/card';
 
 /**
- *
+ * Basic card example.
  */
 @Component({
   selector: 'app-card-basic-example',

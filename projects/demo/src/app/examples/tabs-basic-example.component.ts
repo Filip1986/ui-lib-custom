@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 
 /**
- *
+ * Basic tabs example.
  */
 @Component({
   selector: 'app-tabs-basic-example',

@@ -5,7 +5,7 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Icon } from '../icon/icon';
-import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from 'ui-lib-custom';
+import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from './accordion-panel';
 import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
 @Component({

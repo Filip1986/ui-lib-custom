@@ -4,7 +4,6 @@ import { TestBed } from '@angular/core/testing';
 import type { WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { SelectButton } from 'ui-lib-custom';
 import type {
   SelectButtonChangeEvent,
   SelectButtonOption,
@@ -12,6 +11,7 @@ import type {
   SelectButtonVariant,
   SelectButtonValue,
 } from './select-button.types';
+import { SelectButton } from './select-button';
 
 const defaultOptions: SelectButtonOption[] = [
   { label: 'Option 1', value: 'opt1' },

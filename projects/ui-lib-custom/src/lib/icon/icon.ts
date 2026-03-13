@@ -17,7 +17,7 @@ import {
   type ComponentVariant,
 } from './icon.types';
 import { SEMANTIC_ICONS, type SemanticIcon } from './icon.semantics';
-import { KEYBOARD_KEYS } from '../shared/constants';
+import { KEYBOARD_KEYS } from '../core/shared/constants';
 
 const normalizeIconName: (value: string) => string = (value: string): string =>
   value

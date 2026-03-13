@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import type { ThemePreset } from 'ui-lib-custom';
+import type { ThemePreset } from './theme-preset.interface';
 import { ThemeEditorService } from './theme-editor.service';
-import { ThemePresetService } from 'ui-lib-custom';
+import { ThemePresetService } from './theme-preset.service';
 
 type MockPresetService = {
   captureCurrentTheme: (name: string) => ThemePreset;

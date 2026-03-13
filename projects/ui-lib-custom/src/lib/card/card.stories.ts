@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from '../shared/constants';
+import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from '../core/shared/constants';
 import { Card } from './card';
 import { Button } from '../button/button';
 

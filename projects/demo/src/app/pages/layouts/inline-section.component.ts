@@ -1,17 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import {
-  Button,
-  Card,
-  Grid,
-  Inline,
-  Stack,
-  Tabs,
-  Tab,
-  UiLibSelect,
-  INLINE_TOKENS,
-} from 'ui-lib-custom';
-import type { TabsValue, InlineToken, InlineAlign, InlineJustify } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import { INLINE_TOKENS } from 'ui-lib-custom/tokens';
+import type { InlineToken } from 'ui-lib-custom/tokens';
+import type { InlineAlign, InlineJustify } from 'ui-lib-custom/layout';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { UiLibSelect } from 'ui-lib-custom/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';

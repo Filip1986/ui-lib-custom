@@ -14,7 +14,7 @@ import type {
   WritableSignal,
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Container } from 'ui-lib-custom';
+import { Container } from 'ui-lib-custom/layout';
 import type { DocSection } from './doc-section.model';
 
 /**

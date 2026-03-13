@@ -7,8 +7,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Button, Card, Grid, Icon, Inline, SelectButton, Stack } from 'ui-lib-custom';
-import type { SelectButtonOption, SelectButtonSize, SelectButtonVariant } from 'ui-lib-custom';
+import { SelectButton } from 'ui-lib-custom/select-button';
+import type {
+  SelectButtonOption,
+  SelectButtonSize,
+  SelectButtonVariant,
+} from 'ui-lib-custom/select-button';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import { Icon } from 'ui-lib-custom/icon';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';

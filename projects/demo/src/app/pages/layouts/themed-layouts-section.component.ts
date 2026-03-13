@@ -6,29 +6,26 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
+import { Container, Grid, Stack, Inline } from 'ui-lib-custom/layout';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { UiLibSelect } from 'ui-lib-custom/select';
 import {
-  Button,
-  Card,
-  Container,
   CONTAINER_MAX_WIDTHS,
-  Grid,
-  Stack,
+  GRID_COLUMNS,
   INLINE_TOKENS,
-  Inline,
-  STACK_TOKENS,
   INSET_TOKENS,
-  Tabs,
-  Tab,
-  UiLibSelect,
-} from 'ui-lib-custom';
+  STACK_TOKENS,
+} from 'ui-lib-custom/tokens';
 import type {
   ContainerSize,
   GridColumns,
   InlineToken,
-  StackToken,
   InsetToken,
-  TabsValue,
-} from 'ui-lib-custom';
+  StackToken,
+} from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -74,29 +71,48 @@ export class ThemedLayoutsSectionComponent {
   public readonly leftTheme: WritableSignal<'light' | 'dark'> = signal<'light' | 'dark'>('light');
   public readonly rightTheme: WritableSignal<'light' | 'dark'> = signal<'light' | 'dark'>('dark');
 
-  public readonly sizeOptions: { label: string; value: ContainerSize }[] = Object.keys(
-    CONTAINER_MAX_WIDTHS
-  ).map((key: string): { label: string; value: ContainerSize } => ({
-    label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
-    value: key as ContainerSize,
+  private readonly containerWidths: Record<ContainerSize, string> = CONTAINER_MAX_WIDTHS as Record<
+    ContainerSize,
+    string
+  >;
+  private readonly insetTokens: Record<InsetToken, string> = INSET_TOKENS as Record<
+    InsetToken,
+    string
+  >;
+  private readonly gridColumnsMap: Record<GridColumns, number> = GRID_COLUMNS as Record<
+    GridColumns,
+    number
+  >;
+  private readonly gridColumnsList: GridColumns[] = Object.keys(this.gridColumnsMap).map(
+    (key: string): GridColumns => Number(key) as GridColumns
+  );
+  public readonly sizeOptions: { label: string; value: ContainerSize }[] = (
+    Object.entries(this.containerWidths) as Array<[ContainerSize, string]>
+  ).map(([key, value]: [ContainerSize, string]): { label: string; value: ContainerSize } => ({
+    label: `${key} (${value})`,
+    value: key,
   }));
-  public readonly insetOptions: { label: string; value: Exclude<InsetToken, 'xs'> }[] =
-    Object.entries(INSET_TOKENS)
-      .filter(([key]: [string, string]): boolean => key !== 'xs')
-      .map(
-        ([key, value]: [string, string]): { label: string; value: Exclude<InsetToken, 'xs'> } => ({
-          label: `${key} (${value})`,
-          value: key as Exclude<InsetToken, 'xs'>,
-        })
-      );
+  public readonly insetOptions: { label: string; value: Exclude<InsetToken, 'xs'> }[] = (
+    Object.entries(this.insetTokens) as Array<[InsetToken, string]>
+  )
+    .filter(([key]: [InsetToken, string]): boolean => key !== 'xs')
+    .map(
+      ([key, value]: [InsetToken, string]): {
+        label: string;
+        value: Exclude<InsetToken, 'xs'>;
+      } => ({
+        label: `${key} (${value})`,
+        value: key as Exclude<InsetToken, 'xs'>,
+      })
+    );
   public readonly spacingOptions: { label: string; value: StackToken }[] =
     this.buildOptions(STACK_TOKENS);
   public readonly inlineSpacingOptions: { label: string; value: InlineToken }[] =
     this.buildOptions(INLINE_TOKENS);
-  public readonly columnOptions: { label: string; value: GridColumns }[] = [2, 3, 4].map(
-    (c: number): { label: string; value: GridColumns } => ({
-      label: `${c} cols`,
-      value: c as GridColumns,
+  public readonly columnOptions: { label: string; value: GridColumns }[] = this.gridColumnsList.map(
+    (value: GridColumns): { label: string; value: GridColumns } => ({
+      label: `${value} cols`,
+      value,
     })
   );
   public readonly themeOptions: { label: string; value: 'light' | 'dark' }[] = [

@@ -11,21 +11,16 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import type { ParamMap } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  ThemeConfigService,
-  ThemePresetService,
-  Button,
-  Card,
-  Badge,
-  UiLibInput,
-  UiLibSelect,
-  Checkbox,
-  Tabs,
-  Tab,
-  Accordion,
-  AccordionPanel,
-} from 'ui-lib-custom';
-import type { ThemePreset, ThemeVariant } from 'ui-lib-custom';
+import { ThemeConfigService, ThemePresetService } from 'ui-lib-custom/theme';
+import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Badge } from 'ui-lib-custom/badge';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import { Checkbox } from 'ui-lib-custom/checkbox';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
 import { ThemeEditorComponent } from '../../shared/theme-editor/theme-editor.component';
 
 /**

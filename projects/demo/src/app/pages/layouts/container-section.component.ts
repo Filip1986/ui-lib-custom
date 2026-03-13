@@ -1,18 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import {
-  Button,
-  Card,
-  Container,
-  CONTAINER_MAX_WIDTHS,
-  Grid,
-  INSET_TOKENS,
-  Stack,
-  Tabs,
-  Tab,
-  UiLibSelect,
-} from 'ui-lib-custom';
-import type { ContainerSize, InsetToken, TabsValue } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import { Container, Grid, Stack } from 'ui-lib-custom/layout';
+import { CONTAINER_MAX_WIDTHS, INSET_TOKENS } from 'ui-lib-custom/tokens';
+import type { ContainerSize, InsetToken } from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -64,24 +59,34 @@ export class ContainerSectionComponent {
     signal<Exclude<InsetToken, 'xs'>>('lg');
   public readonly centered: WritableSignal<boolean> = signal<boolean>(true);
 
-  public readonly sizeOptions: Array<{ label: string; value: ContainerSize }> = Object.keys(
-    CONTAINER_MAX_WIDTHS
-  ).map((key: string): { label: string; value: ContainerSize } => ({
-    label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
-    value: key as ContainerSize,
+  private readonly containerWidths: Record<ContainerSize, string> = CONTAINER_MAX_WIDTHS as Record<
+    ContainerSize,
+    string
+  >;
+  private readonly insetTokens: Record<InsetToken, string> = INSET_TOKENS as Record<
+    InsetToken,
+    string
+  >;
+
+  public readonly sizeOptions: Array<{ label: string; value: ContainerSize }> = (
+    Object.entries(this.containerWidths) as Array<[ContainerSize, string]>
+  ).map(([key, value]: [ContainerSize, string]): { label: string; value: ContainerSize } => ({
+    label: `${key} (${value})`,
+    value: key,
   }));
-  public readonly insetOptions: Array<{ label: string; value: Exclude<InsetToken, 'xs'> }> =
-    Object.entries(INSET_TOKENS)
-      .filter(([key]: [string, string]): boolean => key !== 'xs')
-      .map(
-        ([key, value]: [string, string]): {
-          label: string;
-          value: Exclude<InsetToken, 'xs'>;
-        } => ({
-          label: `${key} (${value})`,
-          value: key as Exclude<InsetToken, 'xs'>,
-        })
-      );
+  public readonly insetOptions: Array<{ label: string; value: Exclude<InsetToken, 'xs'> }> = (
+    Object.entries(this.insetTokens) as Array<[InsetToken, string]>
+  )
+    .filter(([key]: [InsetToken, string]): boolean => key !== 'xs')
+    .map(
+      ([key, value]: [InsetToken, string]): {
+        label: string;
+        value: Exclude<InsetToken, 'xs'>;
+      } => ({
+        label: `${key} (${value})`,
+        value: key as Exclude<InsetToken, 'xs'>,
+      })
+    );
   public readonly centeredOptions: Array<{ label: string; value: boolean }> = [
     { label: 'Centered', value: true },
     { label: 'Left-aligned', value: false },

@@ -2,8 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import type { Signal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Icon, ThemeConfigService } from 'ui-lib-custom';
-import type { IconLibrary, IconSize, SemanticIcon, ThemeIconConfig } from 'ui-lib-custom';
+import { Icon } from 'ui-lib-custom/icon';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import type { IconLibrary, IconSize } from 'ui-lib-custom/core';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemeIconConfig } from 'ui-lib-custom/theme';
 
 /**
  * Theme editor panel for icon library and size configuration.

@@ -8,24 +8,15 @@ import {
   signal,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import {
-  Accordion,
-  AccordionPanel,
-  AccordionToggleIcon,
-  Badge,
-  Button,
-  Card,
-  Tab,
-  Tabs,
-  Icon,
-  ThemeConfigService,
-} from 'ui-lib-custom';
-import type {
-  AccordionExpandMode,
-  AccordionSize,
-  AccordionVariant,
-  TabsValue,
-} from 'ui-lib-custom';
+import { Accordion, AccordionPanel, AccordionToggleIcon } from 'ui-lib-custom/accordion';
+import type { AccordionExpandMode, AccordionSize, AccordionVariant } from 'ui-lib-custom/accordion';
+import { Badge } from 'ui-lib-custom/badge';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Icon } from 'ui-lib-custom/icon';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';

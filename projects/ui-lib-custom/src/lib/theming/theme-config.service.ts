@@ -25,11 +25,11 @@ import type {
   ThemeVariant,
   ThemePresetShape,
 } from './theme-preset.interface';
-import { SHARED_DEFAULTS } from '../shared/constants';
 import { saveAs } from './utils/file-download';
 import { exportThemeAsScss, type ScssExportOptions } from './exporters/scss-exporter';
 import { exportThemeAsCss, type CssExportOptions } from './exporters/css-exporter';
 import { exportThemeAsFigmaJson } from './exporters/figma-exporter';
+import { SHARED_DEFAULTS } from '../core/shared/constants';
 
 type LoadOptions = {
   merge?: boolean;

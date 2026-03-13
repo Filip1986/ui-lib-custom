@@ -1,16 +1,11 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  Login1Component,
-  Login2Component,
-  Login3Component,
-  LoginForm,
-  Tabs,
-  Tab,
-  Card,
-} from 'ui-lib-custom';
-import type { LoginFormData, TabsValue } from 'ui-lib-custom';
+import { Login1Component, Login2Component, Login3Component, LoginForm } from 'ui-lib-custom';
+import type { LoginFormData } from 'ui-lib-custom';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Card } from 'ui-lib-custom/card';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';

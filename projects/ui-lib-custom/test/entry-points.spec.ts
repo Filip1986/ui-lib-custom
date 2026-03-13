@@ -17,7 +17,7 @@ import type * as UiLibTokens from 'ui-lib-custom/tokens';
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
     const lib: typeof UiLibCustom = await import('ui-lib-custom');
-    expect(lib.Button).toBeDefined();
+    expect(lib.ButtonGroup).toBeDefined();
   });
 
   it('should import from accordion', async (): Promise<void> => {

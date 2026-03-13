@@ -1,20 +1,17 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  Accordion,
-  AccordionPanel,
-  Badge,
-  Button,
-  Card,
-  Checkbox,
-  Tabs,
-  Tab,
-  ThemeConfigService,
-  UiLibInput,
-  UiLibSelect,
-} from 'ui-lib-custom';
-import type { ThemeMode, SelectOption } from 'ui-lib-custom';
+import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
+import { Badge } from 'ui-lib-custom/badge';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Checkbox } from 'ui-lib-custom/checkbox';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import type { ThemeMode } from 'ui-lib-custom/theme';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption } from 'ui-lib-custom/select';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';

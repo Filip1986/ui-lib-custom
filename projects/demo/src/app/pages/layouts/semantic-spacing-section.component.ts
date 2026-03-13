@@ -6,21 +6,14 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
-import {
-  Button,
-  Card,
-  Container,
-  Grid,
-  Inline,
-  Stack,
-  Tab,
-  Tabs,
-  UiLibSelect,
-  INSET_TOKENS,
-  INLINE_TOKENS,
-  STACK_TOKENS,
-} from 'ui-lib-custom';
-import type { TabsValue, InsetToken, InlineToken, StackToken } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import { INSET_TOKENS, INLINE_TOKENS, STACK_TOKENS } from 'ui-lib-custom/tokens';
+import type { InsetToken, InlineToken, StackToken } from 'ui-lib-custom/tokens';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { UiLibSelect } from 'ui-lib-custom/select';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';

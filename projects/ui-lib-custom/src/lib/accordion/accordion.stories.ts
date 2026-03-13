@@ -4,7 +4,7 @@ import {
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
-} from '../shared/constants';
+} from '../core/shared/constants';
 import { Accordion } from './accordion';
 import { AccordionPanel, AccordionHeader } from 'ui-lib-custom';
 import type { AccordionVariant, AccordionSize, AccordionExpandMode } from 'ui-lib-custom';

@@ -4,7 +4,7 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { Checkbox } from './checkbox';
-import { SHARED_SIZE_OPTIONS, SHARED_VARIANT_OPTIONS } from '../shared/constants';
+import { SHARED_SIZE_OPTIONS, SHARED_VARIANT_OPTIONS } from '../core/shared/constants';
 import type { CheckboxSize, CheckboxVariant } from './checkbox';
 
 @Component({

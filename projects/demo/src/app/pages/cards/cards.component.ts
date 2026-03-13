@@ -8,8 +8,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import { Card, ThemeConfigService, Button, SHADOWS, Tabs, Tab } from 'ui-lib-custom';
-import type { CardVariant, CardElevation, TabsValue } from 'ui-lib-custom';
+import { Card } from 'ui-lib-custom/card';
+import type { CardVariant, CardElevation } from 'ui-lib-custom/card';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { Button } from 'ui-lib-custom/button';
+import { SHADOWS } from 'ui-lib-custom/tokens';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';

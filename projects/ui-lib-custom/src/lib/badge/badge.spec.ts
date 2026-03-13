@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Badge } from './badge';
-import { SHARED_SIZE_OPTIONS } from '../shared/constants';
+import { SHARED_SIZE_OPTIONS } from '../core/shared/constants';
 import type { BadgeVariant, BadgeColor, BadgeSize } from './badge';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 

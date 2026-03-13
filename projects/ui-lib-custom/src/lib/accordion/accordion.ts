@@ -24,7 +24,7 @@ import type {
   AccordionSize,
   AccordionVariant,
 } from './accordion.types';
-import { KEYBOARD_KEYS } from '../shared/constants';
+import { KEYBOARD_KEYS } from '../core/shared/constants';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 interface AccordionPanelContext {

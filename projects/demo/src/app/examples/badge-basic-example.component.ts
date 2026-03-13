@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Badge } from 'ui-lib-custom/badge';
 
 /**
- *
+ * Basic badge example.
  */
 @Component({
   selector: 'app-badge-basic-example',

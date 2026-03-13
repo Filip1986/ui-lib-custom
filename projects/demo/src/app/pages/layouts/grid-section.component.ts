@@ -1,17 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
-import {
-  Button,
-  Card,
-  Grid,
-  STACK_TOKENS,
-  GRID_COLUMNS,
-  Stack,
-  Tabs,
-  Tab,
-  UiLibSelect,
-} from 'ui-lib-custom';
-import type { GridAlign, GridColumns, GridJustify, StackToken, TabsValue } from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import { Grid, Stack } from 'ui-lib-custom/layout';
+import type { GridAlign, GridJustify } from 'ui-lib-custom/layout';
+import { GRID_COLUMNS, STACK_TOKENS } from 'ui-lib-custom/tokens';
+import type { GridColumns, StackToken } from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -67,12 +64,19 @@ export class GridSectionComponent {
 
   public readonly spacingOptions: Array<{ label: string; value: StackToken }> =
     this.buildOptions(STACK_TOKENS);
-  public readonly columnOptions: Array<{ label: string; value: GridColumns }> = Object.keys(
-    GRID_COLUMNS
-  ).map((key: string): { label: string; value: GridColumns } => ({
-    label: `${key} cols`,
-    value: Number(key) as GridColumns,
-  }));
+  private readonly gridColumnsMap: Record<GridColumns, number> = GRID_COLUMNS as Record<
+    GridColumns,
+    number
+  >;
+  private readonly gridColumnsList: GridColumns[] = Object.keys(this.gridColumnsMap).map(
+    (key: string): GridColumns => Number(key) as GridColumns
+  );
+
+  public readonly columnOptions: Array<{ label: string; value: GridColumns }> =
+    this.gridColumnsList.map((value: GridColumns): { label: string; value: GridColumns } => ({
+      label: `${value} cols`,
+      value,
+    }));
   public readonly minWidthOptions: Array<{ label: string; value: string }> = [
     { label: 'None (fixed)', value: '' },
     { label: '160px', value: '160px' },

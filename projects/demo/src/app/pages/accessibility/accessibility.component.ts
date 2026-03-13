@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Badge, Button, Card, Checkbox, UiLibInput, UiLibSelect } from 'ui-lib-custom';
-import type { SelectOption } from 'ui-lib-custom';
+import { Badge } from 'ui-lib-custom/badge';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Checkbox } from 'ui-lib-custom/checkbox';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption } from 'ui-lib-custom/select';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 

@@ -2,16 +2,13 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  ThemeConfigService,
-  Button,
-  Card,
-  UiLibInput,
-  UiLibSelect,
-  Tabs,
-  Tab,
-} from 'ui-lib-custom';
-import type { TabsValue } from 'ui-lib-custom';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';

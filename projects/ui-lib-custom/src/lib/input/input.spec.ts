@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideZonelessChangeDetection } from '@angular/core';
 import type { InputVariant } from './input';
-import { SHARED_VARIANT_OPTIONS } from '../shared/constants';
+import { SHARED_VARIANT_OPTIONS } from '../core/shared/constants';
 import { UiLibInput } from './input';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 

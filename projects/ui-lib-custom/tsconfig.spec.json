@@ -4,7 +4,18 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
-    "types": ["jasmine"]
+    "types": ["jasmine"],
+    "baseUrl": "../../",
+    "paths": {
+      "ui-lib-custom": ["./projects/ui-lib-custom/src/public-api.ts", "./dist/ui-lib-custom"],
+      "ui-lib-custom/tokens": ["./projects/ui-lib-custom/tokens/public-api.ts"],
+      "ui-lib-custom/theme": ["./projects/ui-lib-custom/src/lib/theming/index.ts"],
+      "ui-lib-custom/testing": ["./projects/ui-lib-custom/src/lib/testing/index.ts"],
+      "ui-lib-custom/*": [
+        "./projects/ui-lib-custom/src/lib/*/index.ts",
+        "./projects/ui-lib-custom/*/public-api.ts"
+      ]
+    }
   },
   "include": ["src/**/*.d.ts", "src/**/*.spec.ts", "test/**/*.spec.ts"]
 }

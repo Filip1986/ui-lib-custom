@@ -1,31 +1,26 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Container, Grid, Inline, Stack } from 'ui-lib-custom/layout';
+import type { GridAlign, GridJustify } from 'ui-lib-custom/layout';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { UiLibSelect } from 'ui-lib-custom/select';
 import {
-  Button,
-  Card,
-  Container,
   CONTAINER_MAX_WIDTHS,
-  Grid,
-  Inline,
+  GRID_COLUMNS,
   INLINE_TOKENS,
   INSET_TOKENS,
-  Stack,
   STACK_TOKENS,
-  Tabs,
-  Tab,
-  UiLibSelect,
-  GRID_COLUMNS,
-} from 'ui-lib-custom';
+} from 'ui-lib-custom/tokens';
 import type {
   ContainerSize,
   GridColumns,
-  GridAlign,
-  GridJustify,
   InlineToken,
   InsetToken,
   StackToken,
-  TabsValue,
-} from 'ui-lib-custom';
+} from 'ui-lib-custom/tokens';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';
@@ -89,32 +84,59 @@ export class LayoutCompositionSectionComponent {
   public readonly gridJustify: WritableSignal<GridJustify> = signal<GridJustify>('stretch');
   public readonly inlineSpacing: WritableSignal<InlineToken> = signal<InlineToken>('sm');
 
-  public readonly sizeOptions: Array<{ label: string; value: ContainerSize }> = Object.keys(
-    CONTAINER_MAX_WIDTHS
-  ).map((key: string): { label: string; value: ContainerSize } => ({
-    label: `${key} (${CONTAINER_MAX_WIDTHS[key as ContainerSize]})`,
-    value: key as ContainerSize,
+  private readonly containerWidths: Record<ContainerSize, string> = CONTAINER_MAX_WIDTHS as Record<
+    ContainerSize,
+    string
+  >;
+  private readonly insetTokens: Record<InsetToken, string> = INSET_TOKENS as Record<
+    InsetToken,
+    string
+  >;
+  private readonly stackTokens: Record<StackToken, string> = STACK_TOKENS as Record<
+    StackToken,
+    string
+  >;
+  private readonly inlineTokens: Record<InlineToken, string> = INLINE_TOKENS as Record<
+    InlineToken,
+    string
+  >;
+  private readonly gridColumnsMap: Record<GridColumns, number> = GRID_COLUMNS as Record<
+    GridColumns,
+    number
+  >;
+
+  public readonly sizeOptions: Array<{ label: string; value: ContainerSize }> = (
+    Object.entries(this.containerWidths) as Array<[ContainerSize, string]>
+  ).map(([key, value]: [ContainerSize, string]): { label: string; value: ContainerSize } => ({
+    label: `${key} (${value})`,
+    value: key,
   }));
-  public readonly insetOptions: Array<{ label: string; value: Exclude<InsetToken, 'xs'> }> =
-    Object.entries(INSET_TOKENS)
-      .filter(([key]: [string, string]): boolean => key !== 'xs')
-      .map(
-        ([key, value]: [string, string]): {
-          label: string;
-          value: Exclude<InsetToken, 'xs'>;
-        } => ({
-          label: `${key} (${value})`,
-          value: key as Exclude<InsetToken, 'xs'>,
-        })
-      );
-  public readonly spacingOptions: Array<{ label: string; value: StackToken }> =
-    this.buildOptions(STACK_TOKENS);
-  public readonly gridColumnOptions: Array<{ label: string; value: GridColumns }> = Object.keys(
-    GRID_COLUMNS
-  ).map((key: string): { label: string; value: GridColumns } => ({
-    label: `${key} cols`,
-    value: Number(key) as GridColumns,
-  }));
+  public readonly insetOptions: Array<{ label: string; value: Exclude<InsetToken, 'xs'> }> = (
+    Object.entries(this.insetTokens) as Array<[InsetToken, string]>
+  )
+    .filter(([key]: [InsetToken, string]): boolean => key !== 'xs')
+    .map(
+      ([key, value]: [InsetToken, string]): {
+        label: string;
+        value: Exclude<InsetToken, 'xs'>;
+      } => ({
+        label: `${key} (${value})`,
+        value: key as Exclude<InsetToken, 'xs'>,
+      })
+    );
+  public readonly spacingOptions: Array<{ label: string; value: StackToken }> = this.buildOptions(
+    this.stackTokens
+  );
+  public readonly inlineSpacingOptions: Array<{ label: string; value: InlineToken }> =
+    this.buildOptions(this.inlineTokens);
+  private readonly gridColumnsList: GridColumns[] = Object.keys(this.gridColumnsMap).map(
+    (key: string): GridColumns => Number(key) as GridColumns
+  );
+  public readonly gridColumnOptions: Array<{ label: string; value: GridColumns }> =
+    this.gridColumnsList.map((value: GridColumns): { label: string; value: GridColumns } => ({
+      label: `${value} cols`,
+      value,
+    }));
   public readonly minWidthOptions: Array<{ label: string; value: string }> = [
     { label: 'Fixed', value: '' },
     { label: '160px', value: '160px' },
@@ -133,8 +155,6 @@ export class LayoutCompositionSectionComponent {
     { label: 'Center', value: 'center' },
     { label: 'End', value: 'end' },
   ];
-  public readonly inlineSpacingOptions: Array<{ label: string; value: InlineToken }> =
-    this.buildOptions(INLINE_TOKENS);
 
   public readonly sizeLabel: Signal<string> = computed<string>((): string =>
     this.displayLabel(this.containerSize(), this.sizeOptions)

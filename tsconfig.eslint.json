@@ -15,5 +15,21 @@
     "setup-*.ts",
     "jest.config.ts"
   ],
-  "exclude": ["dist/**", "coverage/**", "storybook-static/**"]
+  "exclude": ["dist/**", "coverage/**", "storybook-static/**"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "ui-lib-custom": ["./projects/ui-lib-custom/src/public-api.ts", "./dist/ui-lib-custom"],
+      "ui-lib-custom/tokens": ["./projects/ui-lib-custom/tokens/public-api.ts"],
+      "ui-lib-custom/theme": ["./projects/ui-lib-custom/src/lib/theming/index.ts"],
+      "ui-lib-custom/testing": ["./projects/ui-lib-custom/src/lib/testing/index.ts"],
+      "ui-lib-custom/*": [
+        "./projects/ui-lib-custom/src/lib/*/index.ts",
+        "./projects/ui-lib-custom/*/public-api.ts"
+      ],
+      "@demo/shared/*": ["projects/demo/src/app/shared/*"],
+      "@demo/pages/*": ["projects/demo/src/app/pages/*"],
+      "@demo/examples/*": ["projects/demo/src/app/examples/*"]
+    }
+  }
 }

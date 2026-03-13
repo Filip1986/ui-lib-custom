@@ -3,7 +3,7 @@ import { Stack } from 'ui-lib-custom/layout';
 import { Card } from 'ui-lib-custom/card';
 
 /**
- *
+ * Basic layout example.
  */
 @Component({
   selector: 'app-layout-basic-example',

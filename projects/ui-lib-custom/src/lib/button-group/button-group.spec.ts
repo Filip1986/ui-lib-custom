@@ -7,9 +7,9 @@ import {
   provideZonelessChangeDetection,
   type WritableSignal,
 } from '@angular/core';
-import { ButtonGroup } from 'ui-lib-custom';
-import { Button } from 'ui-lib-custom';
-import type { ButtonSize, ButtonVariant } from 'ui-lib-custom';
+import { ButtonGroup } from './button-group';
+import { Button } from '../button/button';
+import type { ButtonSize, ButtonVariant } from '../button/button';
 import { Icon } from '../icon/icon';
 
 @Component({

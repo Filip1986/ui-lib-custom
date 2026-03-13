@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UiLibInput } from 'ui-lib-custom/input';
 
 /**
- *
+ * Basic input example.
  */
 @Component({
   selector: 'app-input-basic-example',

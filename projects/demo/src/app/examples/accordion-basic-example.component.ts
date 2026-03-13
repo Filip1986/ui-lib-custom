@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
 
 /**
- *
+ * Basic accordion example.
  */
 @Component({
   selector: 'app-accordion-basic-example',

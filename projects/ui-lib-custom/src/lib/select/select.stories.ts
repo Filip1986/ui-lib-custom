@@ -4,7 +4,7 @@ import {
   SHARED_SIZE_OPTIONS,
   SHARED_THEME_VARIANTS,
   SHARED_VARIANT_OPTIONS,
-} from '../shared/constants';
+} from '../core/shared/constants';
 import type { SelectOption, SelectVariant, SelectSize } from './select';
 import { UiLibSelect } from './select';
 

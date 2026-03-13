@@ -1,72 +1,53 @@
 /*
  * Public API Surface of ui-lib-custom
+ *
+ * Components with secondary entry points are NOT re-exported here
+ * to avoid ng-packagr source file ownership conflicts.
+ *
+ * Use the secondary entry points directly:
+ *   import { Button } from 'ui-lib-custom/button';
+ *   import { Card } from 'ui-lib-custom/card';
+ *   import { ThemeConfigService } from 'ui-lib-custom/theme';
+ *   import { Icon } from 'ui-lib-custom/icon';
+ *   import { Accordion } from 'ui-lib-custom/accordion';
+ *   import { Tabs } from 'ui-lib-custom/tabs';
+ *   import { UiLibInput } from 'ui-lib-custom/input';
+ *   import { UiLibSelect } from 'ui-lib-custom/select';
+ *   import { SelectButton } from 'ui-lib-custom/select-button';
+ *   import { UiLibCheckbox } from 'ui-lib-custom/checkbox';
+ *   import { Badge } from 'ui-lib-custom/badge';
+ *   import { ICON_SIZES } from 'ui-lib-custom/core';
+ *   import { BORDER_RADIUS } from 'ui-lib-custom/tokens';
+ *   import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+ *   import { Stack, Inline, Grid, Container } from 'ui-lib-custom/layout';
  */
 
+// --- Base module (no secondary entry point) ---
 export * from './lib/ui-lib-custom';
-export * from './lib/design-tokens';
-export * from './lib/button/button';
-export * from './lib/button/button.constants';
+
+// --- Components WITHOUT secondary entry points ---
+
+// Button group
 export * from './lib/button-group/button-group';
-export * from './lib/card/card';
-export * from './lib/badge/badge';
-export * from './lib/checkbox/checkbox';
+
+// Login templates
 export * from './lib/login/login-1/login-1.component';
 export * from './lib/login/login-2/login-2.component';
 export * from './lib/login/login-3/login-3.component';
 export * from './lib/login/models/login-contract';
 export type { LoginSocialProvider } from './lib/login/models/login-contract';
-export * from './lib/layout';
-export * from './lib/theming/theme-config.service';
-export * from './lib/theming/theme-preset.service';
-export * from './lib/theming/theme-preset.interface';
-export * from './lib/theming/exporters/scss-exporter';
-export * from './lib/theming/exporters/css-exporter';
-export * from './lib/theming/exporters/figma-exporter';
-export * from './lib/theming/theme-scope.directive';
-export * from './lib/theming/theme-directives';
-export * from './lib/theming/with-theme-scope';
-export * from './lib/a11y/live-announcer.service';
-export * from './lib/a11y/announce.directive';
-export * from './lib/form-field/form-field';
-export * from './lib/login-form/login-form';
-export * from './lib/input/input';
-export * from './lib/select';
-export { SelectButton } from './lib/select-button/select-button';
-export type {
-  SelectButtonOption,
-  SelectButtonChangeEvent,
-  SelectButtonSelectionChangeEvent,
-  SelectButtonValue,
-  SelectButtonValueObject,
-  SelectButtonItemContext,
-} from './lib/select-button/select-button.types';
-export * from './lib/sidebar-menu/sidebar-menu';
-export * from './lib/icon';
-export { Icon } from './lib/icon/icon';
-export { IconService } from './lib/icon/icon.service';
-export type { IconSize, IconLibrary, IconConfig } from './lib/icon/icon.types';
-export type { SemanticIcon } from './lib/icon/icon.semantics';
-export { provideUiLibIcons } from './lib/icon/icon.providers';
-export * from './lib/icon-button/icon-button';
-export * from './lib/alert/alert';
-export * from './lib/tabs/tabs';
-export * from './lib/tabs/tab';
-export { TabLabel, TabContent } from './lib/tabs/tab';
-export * from './lib/tabs/tab-panel';
-export * from './lib/tabs/tabs.types';
 
-// Accordion
-export { Accordion } from './lib/accordion/accordion';
-export {
-  AccordionPanel,
-  AccordionHeader,
-  AccordionToggleIcon,
-} from './lib/accordion/accordion-panel';
-export type {
-  AccordionVariant,
-  AccordionSize,
-  AccordionExpandMode,
-  AccordionChangeEvent,
-  AccordionIconPosition,
-  AccordionToggleIconContext,
-} from './lib/accordion/accordion.types';
+// Login form
+export * from './lib/login-form/login-form';
+
+// Form field
+export * from './lib/form-field/form-field';
+
+// Sidebar menu
+export * from './lib/sidebar-menu/sidebar-menu';
+
+// Icon button (pending secondary entry point)
+export * from './lib/icon-button/icon-button';
+
+// Alert (pending secondary entry point)
+export * from './lib/alert/alert';

@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom';
-import type { IconLibrary, SemanticIcon } from 'ui-lib-custom';
+import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom/icon';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import type { IconLibrary } from 'ui-lib-custom/core';
 
 /**
  * Preview list of semantic icons for the theme editor.

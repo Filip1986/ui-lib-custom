@@ -3,13 +3,13 @@ import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Accordion } from './accordion';
-import { AccordionPanel } from 'ui-lib-custom';
+import { AccordionPanel } from './accordion-panel';
 import type {
   AccordionChangeEvent,
   AccordionExpandMode,
   AccordionSize,
   AccordionVariant,
-} from 'ui-lib-custom';
+} from './accordion.types';
 import { ACCORDION_PANEL_STATES } from './accordion.constants';
 
 interface AccordionConfig {

@@ -19,7 +19,7 @@ import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import type { BadgeColor } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { SHARED_DEFAULTS, SHARED_SIZES } from '../shared/constants';
+import { SHARED_DEFAULTS, SHARED_SIZES } from '../core/shared/constants';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
 export type ButtonAppearance = 'solid' | 'outline' | 'ghost';

@@ -9,18 +9,7 @@ import {
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  Button,
-  Card,
-  Inline,
-  Stack,
-  IconButton,
-  ThemeConfigService,
-  Tabs,
-  Tab,
-  ButtonGroup,
-  Grid,
-} from 'ui-lib-custom';
+import { Button } from 'ui-lib-custom/button';
 import type {
   ButtonAppearance,
   ButtonColor,
@@ -28,9 +17,15 @@ import type {
   ButtonSize,
   ButtonVariant,
   IconPosition,
-  TabsValue,
-} from 'ui-lib-custom';
-import { BUTTON_COLORS } from 'ui-lib-custom';
+} from 'ui-lib-custom/button';
+import { BUTTON_COLORS } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Inline, Stack, Grid } from 'ui-lib-custom/layout';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { ButtonGroup } from 'ui-lib-custom';
+import { IconButton } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';

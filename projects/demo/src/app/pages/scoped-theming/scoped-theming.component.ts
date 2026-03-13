@@ -1,16 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  ThemeScopeDirective,
-  DarkThemeDirective,
-  LightThemeDirective,
-  Button,
-  Card,
-  Badge,
-  UiLibInput,
-  Checkbox,
-} from 'ui-lib-custom';
-import type { ThemeScopeConfig } from 'ui-lib-custom';
+import { ThemeScopeDirective, DarkThemeDirective, LightThemeDirective } from 'ui-lib-custom/theme';
+import type { ThemeScopeConfig } from 'ui-lib-custom/theme';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Badge } from 'ui-lib-custom/badge';
+import { UiLibInput } from 'ui-lib-custom/input';
+import { Checkbox } from 'ui-lib-custom/checkbox';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';

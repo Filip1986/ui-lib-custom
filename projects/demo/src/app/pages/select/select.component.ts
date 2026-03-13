@@ -10,8 +10,13 @@ import {
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UiLibSelect, ThemeConfigService, Button, Card, Tabs, Tab } from 'ui-lib-custom';
-import type { SelectOption, SelectVariant, TabsValue } from 'ui-lib-custom';
+import { UiLibSelect } from 'ui-lib-custom/select';
+import type { SelectOption, SelectVariant } from 'ui-lib-custom/select';
+import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';

@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { Card, Button } from 'ui-lib-custom';
+import { Card } from 'ui-lib-custom/card';
+import { Button } from 'ui-lib-custom/button';
 import { FormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';

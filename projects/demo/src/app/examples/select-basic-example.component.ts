@@ -4,7 +4,7 @@ import { UiLibSelect } from 'ui-lib-custom/select';
 type SelectOptionItem = { label: string; value: string };
 
 /**
- *
+ * Basic select example.
  */
 @Component({
   selector: 'app-select-basic-example',

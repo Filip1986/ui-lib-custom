@@ -4,7 +4,7 @@ import { SelectButton } from 'ui-lib-custom/select-button';
 type SelectButtonOption = { label: string; value: string };
 
 /**
- *
+ * Basic select button example.
  */
 @Component({
   selector: 'app-select-button-basic-example',

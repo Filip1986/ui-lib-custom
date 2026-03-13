@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewChild, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Checkbox, Tabs, Tab, Card, Button } from 'ui-lib-custom';
-import type { CheckboxSize, CheckboxVariant, TabsValue } from 'ui-lib-custom';
+import { Checkbox } from 'ui-lib-custom/checkbox';
+import type { CheckboxSize, CheckboxVariant } from 'ui-lib-custom/checkbox';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { Card } from 'ui-lib-custom/card';
+import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '../../shared/doc-page/doc-demo-viewport.component';

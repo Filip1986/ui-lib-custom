@@ -1,8 +1,12 @@
 import { Component, ChangeDetectionStrategy, signal, ViewChild } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Badge, Button, Card, Tabs, Tab } from 'ui-lib-custom';
-import type { BadgeColor, BadgeVariant, BadgeSize, TabsValue } from 'ui-lib-custom';
+import { Badge } from 'ui-lib-custom/badge';
+import type { BadgeColor, BadgeVariant, BadgeSize } from 'ui-lib-custom/badge';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';

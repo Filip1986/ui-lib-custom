@@ -16,7 +16,7 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { SHARED_DEFAULTS } from '../shared/constants';
+import { SHARED_DEFAULTS } from '../core/shared/constants';
 import type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
 
 export type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';

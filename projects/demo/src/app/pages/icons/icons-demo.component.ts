@@ -1,8 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { Icon, IconButton, Alert, Button, Card, SEMANTIC_ICONS, Tabs, Tab } from 'ui-lib-custom';
-import type { IconSize, SemanticIcon, TabsValue } from 'ui-lib-custom';
+import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom/icon';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
+import type { IconSize } from 'ui-lib-custom/core';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+import { Tabs, Tab } from 'ui-lib-custom/tabs';
+import type { TabsValue } from 'ui-lib-custom/tabs';
+import { IconButton, Alert } from 'ui-lib-custom';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -92,7 +98,7 @@ export class IconsDemoComponent {
   public readonly loading: WritableSignal<boolean> = signal<boolean>(false);
   public readonly searchQuery: WritableSignal<string> = signal<string>('');
 
-  private readonly allIcons: SemanticIcon[] = [...SEMANTIC_ICONS];
+  private readonly allIcons: SemanticIcon[] = SEMANTIC_ICONS;
 
   public readonly filteredIcons: Signal<SemanticIcon[]> = computed<SemanticIcon[]>(
     (): SemanticIcon[] => {
