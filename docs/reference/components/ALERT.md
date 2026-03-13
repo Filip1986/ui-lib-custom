@@ -59,8 +59,8 @@ Dismissible:
 
 | Variable | Purpose |
 | --- | --- |
-| `--alert-bg` | Alert background override (internal). |
-| `--alert-fg` | Alert foreground override (internal). |
+| `--uilib-alert-bg` | Alert background override (internal). |
+| `--uilib-alert-fg` | Alert foreground override (internal). |
 | `--uilib-inline-sm` | Icon/content gap (fallback for inline spacing). |
 | `--uilib-inline-md` | Alert padding (fallback for inline spacing). |
 | `--uilib-radius-md` | Border radius. |
@@ -74,8 +74,8 @@ Dismissible:
 
 ```scss
 [data-theme='brand-x'] {
-  --alert-bg: #0f172a;
-  --alert-fg: #e2e8f0;
+  --uilib-alert-bg: #0f172a;
+  --uilib-alert-fg: #e2e8f0;
 }
 ```
 
@@ -95,4 +95,3 @@ Dismissible:
   We could not save your changes. Please try again.
 </ui-lib-alert>
 ```
-

@@ -65,6 +65,21 @@
   }
 
   /* =========================================
+   * Alert Component
+   * ========================================= */
+
+  ui-lib-alert,
+  .ui-lib-alert {
+    border: 2px solid CanvasText !important;
+    background: Canvas !important;
+    color: CanvasText !important;
+
+    .ui-lib-alert__close {
+      border: 1px solid ButtonText !important;
+    }
+  }
+
+  /* =========================================
    * Input Component
    * ========================================= */
 

@@ -29,7 +29,7 @@ export type { AlertSeverity, AlertVariant } from './alert.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'alert',
+    class: 'ui-lib-alert',
     '[class]': 'hostClasses()',
     role: 'alert',
   },
@@ -57,9 +57,14 @@ export class Alert {
     (): AlertVariant => this.variant() ?? this.themeConfig.variant()
   );
 
-  public readonly hostClasses: Signal<string> = computed<string>(
-    (): string => `alert-${this.effectiveVariant()} alert-${this.severity()}`
-  );
+  public readonly hostClasses: Signal<string> = computed<string>((): string => {
+    const classes: string[] = [
+      'ui-lib-alert',
+      `ui-lib-alert--${this.effectiveVariant()}`,
+      `ui-lib-alert--${this.severity()}`,
+    ];
+    return classes.join(' ');
+  });
 
   public onDismiss(): void {
     this.dismissed.emit();

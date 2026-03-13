@@ -32,12 +32,12 @@ describe('Alert', (): void => {
   it('applies dark theme variables', (): void => {
     const root: HTMLElement = document.documentElement;
     root.setAttribute('data-theme', 'light');
-    root.style.setProperty('--alert-bg', 'light-bg');
-    const light: string = getComputedStyle(root).getPropertyValue('--alert-bg').trim();
+    root.style.setProperty('--uilib-alert-bg', 'light-bg');
+    const light: string = getComputedStyle(root).getPropertyValue('--uilib-alert-bg').trim();
 
     root.setAttribute('data-theme', 'dark');
-    root.style.setProperty('--alert-bg', 'dark-bg');
-    const dark: string = getComputedStyle(root).getPropertyValue('--alert-bg').trim();
+    root.style.setProperty('--uilib-alert-bg', 'dark-bg');
+    const dark: string = getComputedStyle(root).getPropertyValue('--uilib-alert-bg').trim();
 
     expect(dark).not.toBe(light);
     root.removeAttribute('data-theme');
@@ -49,7 +49,7 @@ describe('Alert', (): void => {
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    expect(host.className).toContain('alert-minimal');
+    expect(host.className).toContain('ui-lib-alert--minimal');
   });
 
   it('adds accessible dismiss control when dismissible', (): void => {
@@ -57,7 +57,7 @@ describe('Alert', (): void => {
     fixture.detectChanges();
 
     const closeIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-      '.alert-close'
+      '.ui-lib-alert__close'
     );
     expect(closeIcon).toBeTruthy();
     expect(closeIcon?.getAttribute('role')).toBe('button');

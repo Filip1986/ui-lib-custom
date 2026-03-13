@@ -1,10 +1,15 @@
-<ui-lib-icon class="alert-icon" [name]="statusIcon()" [variant]="effectiveVariant()" size="lg" />
-<div class="alert-content">
+<ui-lib-icon
+  class="ui-lib-alert__icon"
+  [name]="statusIcon()"
+  [variant]="effectiveVariant()"
+  size="lg"
+/>
+<div class="ui-lib-alert__content">
   <ng-content />
 </div>
 @if (dismissible()) {
   <ui-lib-icon
-    class="alert-close"
+    class="ui-lib-alert__close"
     name="close"
     [variant]="effectiveVariant()"
     size="sm"
