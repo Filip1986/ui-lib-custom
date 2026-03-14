@@ -70,9 +70,9 @@ ui-lib-select-button .ui-lib-select-button__item .ui-lib-button:focus-visible {
   outline-offset: 2px;
 }
 
-ui-lib-select-button
-  .ui-lib-select-button__item
-  .ui-lib-button:hover:not(.ui-lib-button--disabled) {
+ui-lib-select-button,
+.ui-lib-select-button__item,
+.ui-lib-button:hover:not(.ui-lib-button--disabled) {
   --uilib-button-bg-hover: var(--uilib-select-button-hover-bg-resolved);
 }
 

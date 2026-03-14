@@ -1,4 +1,4 @@
-:host .ui-input {
+ui-lib-input .ui-input {
   display: grid;
   gap: 0.35rem;
   color: var(--uilib-input-text, var(--uilib-page-fg));
@@ -8,7 +8,7 @@
   --uilib-input-padding-x: calc(var(--uilib-input-padding-x-base) * var(--uilib-density, 1));
 }
 
-:host .ui-input-label {
+ui-lib-input .ui-input-label {
   font-weight: 600;
   color: var(--uilib-input-label-color, var(--uilib-input-text, var(--uilib-page-fg)));
   display: inline-flex;
@@ -18,21 +18,21 @@
   cursor: text;
 }
 
-:host .ui-input-label-text {
+ui-lib-input .ui-input-label-text {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-:host .ui-input-float-over .ui-input-label {
+ui-lib-input .ui-input-float-over .ui-input-label {
   position: static;
 }
 
-:host .required-indicator {
+ui-lib-input .required-indicator {
   color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-:host .ui-input-field {
+ui-lib-input .ui-input-field {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -49,22 +49,26 @@
   cursor: text;
 }
 
-:host .ui-input-float-in .ui-input-field {
-  padding-top: calc(var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem));
-  padding-bottom: calc(var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem));
+ui-lib-input .ui-input-float-in .ui-input-field {
+  padding-top: calc(
+    var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem)
+  );
+  padding-bottom: calc(
+    var(--uilib-input-padding-y, 0.5rem) + var(--uilib-input-float-in-extra-pad, 0.35rem)
+  );
   min-height: calc(
     var(--uilib-input-min-height, 44px) + (var(--uilib-input-float-in-extra-pad, 0.35rem) * 2)
   );
   cursor: text;
 }
 
-:host .ui-input-control-wrapper {
+ui-lib-input .ui-input-control-wrapper {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-:host .ui-input input {
+ui-lib-input .ui-input input {
   width: 100%;
   border: none;
   outline: none;
@@ -77,7 +81,7 @@
   }
 }
 
-:host .ui-input-has-floating .ui-input-label {
+ui-lib-input .ui-input-has-floating .ui-input-label {
   position: absolute;
   left: 0;
   top: 50%;
@@ -95,14 +99,14 @@
   pointer-events: none; // prevent overlap clicks while floating
 }
 
-:host .ui-input-floating-active.ui-input-float-in .ui-input-label {
+ui-lib-input .ui-input-floating-active.ui-input-float-in .ui-input-label {
   transform: translate(var(--uilib-input-label-offset-x, 0), calc(-145%)) scale(0.8);
   background: transparent;
   padding: 0;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-input-floating-active.ui-input-float-on .ui-input-label {
+ui-lib-input .ui-input-floating-active.ui-input-float-on .ui-input-label {
   transform: translate(var(--uilib-input-label-offset-x, 0), calc(-175%))
     scale(var(--uilib-input-label-floating-scale, 0.85));
   background: var(--uilib-input-label-bg, var(--uilib-input-bg, var(--uilib-surface)));
@@ -110,15 +114,15 @@
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-input-prefix,
-:host .ui-input-suffix {
+ui-lib-input .ui-input-prefix,
+ui-lib-input .ui-input-suffix {
   display: inline-flex;
   align-items: center;
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-input-clear,
-:host .ui-input-toggle {
+ui-lib-input .ui-input-clear,
+ui-lib-input .ui-input-toggle {
   position: absolute;
   right: 0.35rem;
   border: none;
@@ -129,11 +133,11 @@
   font: inherit;
 }
 
-:host .ui-input-toggle {
+ui-lib-input .ui-input-toggle {
   right: 2rem;
 }
 
-:host .ui-input-meta {
+ui-lib-input .ui-input-meta {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
@@ -141,61 +145,66 @@
   color: var(--uilib-input-placeholder, var(--uilib-muted));
 }
 
-:host .ui-input-error-text {
+ui-lib-input .ui-input-error-text {
   color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-:host .ui-input-error .ui-input-field {
+ui-lib-input .ui-input-error .ui-input-field {
   border-color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-:host .ui-input.ui-input-disabled {
+ui-lib-input .ui-input.ui-input-disabled {
   opacity: 0.6;
 }
 
-:host .ui-input.ui-input-bootstrap .ui-input-field,
-:host .ui-input.ui-input-minimal .ui-input-field {
+ui-lib-input .ui-input.ui-input-bootstrap .ui-input-field,
+ui-lib-input .ui-input.ui-input-minimal .ui-input-field {
   border-radius: var(--uilib-input-radius, var(--uilib-shape-base, 6px));
 }
 
-:host .ui-input.ui-input-bootstrap .ui-input-field {
+ui-lib-input .ui-input.ui-input-bootstrap .ui-input-field {
   border-width: 1px;
 }
 
-:host .ui-input.ui-input-minimal .ui-input-field {
+ui-lib-input .ui-input.ui-input-minimal .ui-input-field {
   border: 1px solid var(--uilib-input-border, var(--uilib-border));
   background: transparent;
 }
 
-:host .ui-input-field:focus-within {
+ui-lib-input .ui-input-field:focus-within {
   border-color: var(--uilib-input-border-focus, var(--uilib-color-primary-600));
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-input-border-focus, var(--uilib-color-primary-600)) 25%, transparent);
+  box-shadow: 0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--uilib-input-border-focus, var(--uilib-color-primary-600)) 25%,
+      transparent
+    );
 }
 
-:host.ng-touched .ui-input-field {
+ui-lib-input.ng-touched .ui-input-field {
   border-color: var(
     --uilib-input-border-touched,
     var(--uilib-input-border-focus, var(--uilib-color-primary-600))
   );
 }
 
-:host.ng-dirty .ui-input-field {
+ui-lib-input.ng-dirty .ui-input-field {
   border-color: var(
     --uilib-input-border-dirty,
     var(--uilib-input-border-focus, var(--uilib-color-primary-600))
   );
 }
 
-:host.ng-invalid.ng-touched .ui-input-field,
-:host.ng-invalid.ng-dirty .ui-input-field {
+ui-lib-input.ng-invalid.ng-touched .ui-input-field,
+ui-lib-input.ng-invalid.ng-dirty .ui-input-field {
   border-color: var(--uilib-input-error, var(--uilib-color-danger-600));
 }
 
-:host.ng-disabled .ui-input-field {
+ui-lib-input.ng-disabled .ui-input-field {
   opacity: 0.6;
 }
 
-:host .ui-input.ui-input-size-sm {
+ui-lib-input .ui-input.ui-input-size-sm {
   --uilib-input-padding-y-base: 0.35rem;
   --uilib-input-padding-x-base: 0.5rem;
   --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
@@ -204,7 +213,7 @@
   font-size: 0.875rem;
 }
 
-:host .ui-input.ui-input-size-md {
+ui-lib-input .ui-input.ui-input-size-md {
   --uilib-input-padding-y-base: 0.5rem;
   --uilib-input-padding-x-base: 0.75rem;
   --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
@@ -213,7 +222,7 @@
   font-size: 1rem;
 }
 
-:host .ui-input.ui-input-size-lg {
+ui-lib-input .ui-input.ui-input-size-lg {
   --uilib-input-padding-y-base: 0.65rem;
   --uilib-input-padding-x-base: 0.9rem;
   --uilib-input-padding-y: calc(var(--uilib-input-padding-y-base) * var(--uilib-density, 1));
