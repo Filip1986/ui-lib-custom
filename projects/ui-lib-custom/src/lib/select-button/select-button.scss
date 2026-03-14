@@ -1,4 +1,4 @@
-:host .ui-lib-select-button {
+ui-lib-select-button.ui-lib-select-button {
   --uilib-select-button-gap-resolved: var(--uilib-select-button-gap, 0);
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-border-radius,
@@ -40,20 +40,20 @@
   overflow: hidden;
 }
 
-:host .ui-lib-select-button--fluid {
+ui-lib-select-button.ui-lib-select-button--fluid {
   display: flex;
   width: 100%;
-
-  .ui-lib-select-button__item {
-    flex: 1;
-  }
 }
 
-:host .ui-lib-select-button__item {
+ui-lib-select-button.ui-lib-select-button--fluid .ui-lib-select-button__item {
+  flex: 1;
+}
+
+ui-lib-select-button .ui-lib-select-button__item {
   flex: 1 1 auto;
 }
 
-:host .ui-lib-select-button__item .ui-lib-button {
+ui-lib-select-button .ui-lib-select-button__item .ui-lib-button {
   width: 100%;
   min-height: var(--uilib-select-button-min-height-resolved);
   --uilib-button-padding: var(--uilib-select-button-padding-resolved);
@@ -65,36 +65,38 @@
   border-radius: calc(var(--uilib-shape-base, 6px) * 0);
 }
 
-:host .ui-lib-select-button__item .ui-lib-button:focus-visible {
+ui-lib-select-button .ui-lib-select-button__item .ui-lib-button:focus-visible {
   outline: 2px solid var(--uilib-color-primary-500);
   outline-offset: 2px;
 }
 
-:host .ui-lib-select-button__item .ui-lib-button:hover:not(.ui-lib-button--disabled) {
+ui-lib-select-button
+  .ui-lib-select-button__item
+  .ui-lib-button:hover:not(.ui-lib-button--disabled) {
   --uilib-button-bg-hover: var(--uilib-select-button-hover-bg-resolved);
 }
 
-:host .ui-lib-select-button__item--selected .ui-lib-button {
+ui-lib-select-button .ui-lib-select-button__item--selected .ui-lib-button {
   --uilib-button-bg: var(--uilib-select-button-selected-bg-resolved);
   --uilib-button-bg-hover: var(--uilib-select-button-selected-bg-resolved);
   --uilib-button-fg: var(--uilib-select-button-selected-fg-resolved);
 }
 
-:host .ui-lib-select-button__item:first-child .ui-lib-button {
+ui-lib-select-button .ui-lib-select-button__item:first-child .ui-lib-button {
   border-top-left-radius: var(--uilib-shape-base, 6px);
   border-bottom-left-radius: var(--uilib-shape-base, 6px);
 }
 
-:host .ui-lib-select-button__item:last-child .ui-lib-button {
+ui-lib-select-button .ui-lib-select-button__item:last-child .ui-lib-button {
   border-top-right-radius: var(--uilib-shape-base, 6px);
   border-bottom-right-radius: var(--uilib-shape-base, 6px);
 }
 
-:host .ui-lib-select-button__item:not(:first-child) .ui-lib-button {
+ui-lib-select-button .ui-lib-select-button__item:not(:first-child) .ui-lib-button {
   margin-left: -1px;
 }
 
-:host .ui-lib-select-button--material {
+ui-lib-select-button.ui-lib-select-button--material {
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-material-border-radius,
     var(--uilib-select-button-border-radius, var(--uilib-shape-base, 6px))
@@ -125,7 +127,7 @@
   );
 }
 
-:host .ui-lib-select-button--bootstrap {
+ui-lib-select-button.ui-lib-select-button--bootstrap {
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-bootstrap-border-radius,
     var(--uilib-select-button-border-radius, var(--uilib-shape-base, 6px))
@@ -152,7 +154,7 @@
   );
 }
 
-:host .ui-lib-select-button--minimal {
+ui-lib-select-button.ui-lib-select-button--minimal {
   --uilib-select-button-border-radius-resolved: var(
     --uilib-select-button-minimal-border-radius,
     var(--uilib-select-button-border-radius, calc(var(--uilib-shape-base, 6px) * 0))
@@ -174,7 +176,7 @@
   --uilib-select-button-shadow-resolved: none;
 }
 
-:host .ui-lib-select-button--small {
+ui-lib-select-button.ui-lib-select-button--small {
   --uilib-select-button-padding-y-base: 0.5rem;
   --uilib-select-button-padding-x-base: 0.75rem;
   --uilib-select-button-padding-resolved: calc(
@@ -185,7 +187,7 @@
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-small-min-height, 2rem);
 }
 
-:host .ui-lib-select-button--medium {
+ui-lib-select-button.ui-lib-select-button--medium {
   --uilib-select-button-padding-y-base: 0.625rem;
   --uilib-select-button-padding-x-base: 1rem;
   --uilib-select-button-padding-resolved: calc(
@@ -196,7 +198,7 @@
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-medium-min-height, 2.5rem);
 }
 
-:host .ui-lib-select-button--large {
+ui-lib-select-button.ui-lib-select-button--large {
   --uilib-select-button-padding-y-base: 0.75rem;
   --uilib-select-button-padding-x-base: 1.25rem;
   --uilib-select-button-padding-resolved: calc(
@@ -207,35 +209,35 @@
   --uilib-select-button-min-height-resolved: var(--uilib-select-button-large-min-height, 3rem);
 }
 
-:host .ui-lib-select-button--disabled {
+ui-lib-select-button.ui-lib-select-button--disabled {
   opacity: var(--uilib-select-button-disabled-opacity-resolved);
   pointer-events: none;
 }
 
-:host .ui-lib-select-button--invalid {
+ui-lib-select-button.ui-lib-select-button--invalid {
   --uilib-select-button-border-resolved: var(--uilib-select-button-invalid-border-resolved);
 }
 
-:host.ng-touched {
+ui-lib-select-button.ng-touched {
   --uilib-select-button-border-resolved: var(
     --uilib-select-button-border-touched,
     var(--uilib-select-button-border-resolved)
   );
 }
 
-:host.ng-dirty {
+ui-lib-select-button.ng-dirty {
   --uilib-select-button-border-resolved: var(
     --uilib-select-button-border-dirty,
     var(--uilib-select-button-border-resolved)
   );
 }
 
-:host.ng-invalid.ng-touched,
-:host.ng-invalid.ng-dirty {
+ui-lib-select-button.ng-invalid.ng-touched,
+ui-lib-select-button.ng-invalid.ng-dirty {
   --uilib-select-button-border-resolved: var(--uilib-select-button-invalid-border-resolved);
 }
 
-:host.ng-disabled {
+ui-lib-select-button.ng-disabled {
   opacity: var(--uilib-select-button-disabled-opacity-resolved);
 }
 
