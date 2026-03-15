@@ -1,8 +1,4 @@
-:host {
-  display: inline-flex;
-}
-
-:host .icon-button {
+ui-lib-icon-button.ui-lib-icon-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,13 +11,19 @@
   transition:
     color 150ms ease,
     background-color 150ms ease;
-
-  &-disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
 }
 
-:host .icon-button__icon {
+ui-lib-icon-button.ui-lib-icon-button:focus-visible {
+  outline: 2px solid var(--uilib-color-primary-500, currentColor);
+  outline-offset: 2px;
+}
+
+ui-lib-icon-button.ui-lib-icon-button--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+ui-lib-icon-button .ui-lib-icon-button__icon {
   pointer-events: none;
 }

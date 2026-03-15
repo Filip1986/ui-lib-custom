@@ -27,10 +27,9 @@ export type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'icon-button',
     '[class]': 'hostClasses()',
     '[attr.aria-label]': 'ariaLabel()',
-    '[attr.disabled]': 'disabled() || null',
+    '[attr.aria-disabled]': 'disabled() ? true : null',
     role: 'button',
     tabindex: '0',
   },
@@ -58,11 +57,20 @@ export class IconButton {
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
-      `icon-button-${this.variant()}`,
-      `icon-button-${this.size()}`,
-      this.color() ? `icon-button-${this.color()}` : '',
-      this.disabled() ? 'icon-button-disabled' : '',
+      'ui-lib-icon-button',
+      `ui-lib-icon-button--${this.variant()}`,
+      `ui-lib-icon-button--size-${this.size()}`,
     ];
-    return classes.filter(Boolean).join(' ');
+
+    const color: IconButtonColor | null = this.color();
+    if (color) {
+      classes.push(`ui-lib-icon-button--color-${color}`);
+    }
+
+    if (this.disabled()) {
+      classes.push('ui-lib-icon-button--disabled');
+    }
+
+    return classes.join(' ');
   });
 }
