@@ -90,4 +90,20 @@ describe('Icon', (): void => {
     expect(dark).not.toBe(light);
     root.removeAttribute('data-theme');
   });
+
+  it('renders namespaced glyph element class', (): void => {
+    const glyph: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-lib-icon__glyph'
+    );
+    expect(glyph).toBeTruthy();
+  });
+
+  it('binds color input to the host CSS variable token', (): void => {
+    fixture.componentRef.setInput('color', '#ff0000');
+    fixture.detectChanges();
+
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    const token: string = host.style.getPropertyValue('--uilib-icon-color').trim();
+    expect(token).toBe('#ff0000');
+  });
 });

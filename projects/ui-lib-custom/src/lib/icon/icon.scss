@@ -1,4 +1,4 @@
-:host .ui-lib-icon {
+ui-lib-icon.ui-lib-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -7,8 +7,12 @@
   transition: var(--uilib-icon-transition, 150ms ease);
 }
 
-:host .ui-lib-icon--clickable {
+ui-lib-icon.ui-lib-icon--clickable {
   cursor: pointer;
+}
+
+ui-lib-icon .ui-lib-icon__glyph {
+  display: inline-flex;
 }
 
 @mixin icon-dark-theme {

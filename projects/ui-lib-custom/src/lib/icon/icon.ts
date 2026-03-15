@@ -45,7 +45,7 @@ const hasKnownPrefix: (value: string) => boolean = (value: string): boolean => {
   host: {
     class: 'ui-lib-icon',
     '[class.ui-lib-icon--clickable]': 'clickable()',
-    '[style.--icon-color]': 'color()',
+    '[style.--uilib-icon-color]': 'color()',
     '[attr.role]': 'clickable() ? "button" : null',
     '[attr.tabindex]': 'clickable() ? 0 : null',
     '[attr.aria-label]': 'ariaLabelResolved()',
