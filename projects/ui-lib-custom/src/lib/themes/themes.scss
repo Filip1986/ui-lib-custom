@@ -172,6 +172,18 @@
   --uilib-card-text-color: var(--uilib-color-neutral-900);
   --uilib-card-border: var(--uilib-color-neutral-200);
 
+  /* Dialog */
+  --uilib-dialog-shadow-material:
+    0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12);
+  --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --uilib-dialog-border-bootstrap: rgba(0, 0, 0, 0.175);
+  --uilib-dialog-border-minimal: var(--uilib-border);
+  --uilib-dialog-action-hover-material: rgba(0, 0, 0, 0.08);
+  --uilib-overlay-backdrop-bg: var(--uilib-color-neutral-900);
+  --uilib-overlay-backdrop-opacity: 0.5;
+
   /* Typography defaults */
   --uilib-font-heading: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
   --uilib-font-body: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);
@@ -360,6 +372,18 @@
   --uilib-card-bg: #fff;
   --uilib-card-text-color: var(--uilib-color-neutral-900);
   --uilib-card-border: var(--uilib-color-neutral-200);
+
+  /* Dialog */
+  --uilib-dialog-shadow-material:
+    0 11px 15px -7px rgba(0, 0, 0, 0.55), 0 24px 38px 3px rgba(0, 0, 0, 0.4),
+    0 9px 46px 8px rgba(0, 0, 0, 0.35);
+  --uilib-dialog-shadow-bootstrap: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
+  --uilib-dialog-shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --uilib-dialog-border-bootstrap: var(--uilib-border-dark);
+  --uilib-dialog-border-minimal: var(--uilib-border-dark);
+  --uilib-dialog-action-hover-material: rgba(255, 255, 255, 0.08);
+  --uilib-overlay-backdrop-bg: var(--uilib-color-neutral-900);
+  --uilib-overlay-backdrop-opacity: 0.56;
 
   /* Typography defaults */
   --uilib-font-heading: var(--uilib-font-family-base, 'Inter', 'Segoe UI', sans-serif);

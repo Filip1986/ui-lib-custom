@@ -165,6 +165,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### Dialog
+**Files:**
+- [DIALOG.md](DIALOG.md) - API reference and usage guide
+- [DIALOG_IMPLEMENTATION.md](../../implementation/DIALOG_IMPLEMENTATION.md) - Maintainer implementation details
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/dialog/)
+
+---
+
 ## 📋 Documentation Structure
 
 Each component should have two documentation files:
@@ -212,6 +224,7 @@ Each component should have two documentation files:
 | Tabs | Navigation | 3 | - | - | ✅ Complete |
 | Layout | Stack/Inline/Grid/Container | - | - | - | ✅ Complete |
 | Alert | Status alerts | 3 | - | - | ✅ Complete |
+| Dialog | Overlay/modal dialog | 3 | - | - | ✅ Complete |
 
 ---
 
@@ -220,6 +233,7 @@ Each component should have two documentation files:
 - **Design Tokens:** [../systems/DESIGN_TOKENS.md](../systems/DESIGN_TOKENS.md)
 - **Layout System:** [../systems/LAYOUT_SYSTEM.md](../systems/LAYOUT_SYSTEM.md)
 - **Project Summary:** [../project/PROJECT_SUMMARY.md](../project/PROJECT_SUMMARY.md)
+- **Dialog Implementation:** [../../implementation/DIALOG_IMPLEMENTATION.md](../../implementation/DIALOG_IMPLEMENTATION.md)
 
 ---
 

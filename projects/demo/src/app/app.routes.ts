@@ -126,6 +126,14 @@ export const routes: Routes = [
   },
   { path: 'accessibility', component: AccessibilityComponent, title: 'Accessibility - UI Library' },
   { path: 'gallery', component: GalleryComponent, title: 'Gallery - UI Library' },
+  {
+    path: 'dialog',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/dialog/dialog.component').then(
+        (m: { DialogDemoComponent: Type<unknown> }): Type<unknown> => m.DialogDemoComponent
+      ),
+    title: 'Dialog - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

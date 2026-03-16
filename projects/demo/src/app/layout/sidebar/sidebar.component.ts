@@ -106,6 +106,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/accordion',
         },
+        {
+          label: 'Dialog',
+          icon: 'pi pi-circle',
+          route: '/dialog',
+        },
       ],
     },
     {

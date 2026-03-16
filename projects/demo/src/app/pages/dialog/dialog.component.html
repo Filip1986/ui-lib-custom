@@ -1,0 +1,392 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Dialog</h1>
+    <p class="doc-description">
+      Overlay dialog demonstrations for modal and non-modal workflows, projection slots,
+      positioning, drag, maximize, responsive behavior, and variant styling.
+    </p>
+  </div>
+
+  <div class="examples">
+    <section id="basic" class="example-section">
+      <h3>Basic</h3>
+      <p>Simple modal dialog with header text and body content.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="basicVisible = true"
+          [attr.aria-expanded]="basicVisible"
+          aria-controls="dialog-basic-content"
+        >
+          Open Basic Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog [(visible)]="basicVisible" header="Edit Profile" [modal]="true">
+          <div id="dialog-basic-content">
+            <p>Update profile details and save changes when finished.</p>
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="custom-header-footer" class="example-section">
+      <h3>Custom Header & Footer</h3>
+      <p>Projected header and footer content with custom actions.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="customVisible = true"
+          [attr.aria-expanded]="customVisible"
+          aria-controls="dialog-custom-content"
+        >
+          Open Custom Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog [(visible)]="customVisible" [modal]="true" [closable]="true">
+          <div uiLibDialogHeader class="custom-header">
+            <ui-lib-icon name="settings" />
+            <span>Project Settings</span>
+          </div>
+
+          <div id="dialog-custom-content">
+            <p>Configure project-level options and review defaults before saving.</p>
+          </div>
+
+          <div uiLibDialogFooter class="footer-actions">
+            <ui-lib-button variant="minimal" appearance="ghost" (click)="customVisible = false">
+              Cancel
+            </ui-lib-button>
+            <ui-lib-button color="primary" (click)="customVisible = false">Save</ui-lib-button>
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="position" class="example-section">
+      <h3>Position</h3>
+      <p>Open dialogs from 9 predefined viewport positions.</p>
+      <ui-lib-card>
+        <div class="position-grid">
+          @for (position of positions; track position) {
+            <ui-lib-button
+              variant="minimal"
+              appearance="outline"
+              class="position-trigger"
+              (click)="openPosition(position)"
+              [attr.aria-expanded]="positionVisible[position]"
+              [attr.aria-controls]="'dialog-position-content-' + position"
+            >
+              {{ position }}
+            </ui-lib-button>
+
+            <ui-lib-dialog
+              [(visible)]="positionVisible[position]"
+              [position]="position"
+              [modal]="true"
+              [header]="'Position: ' + position"
+            >
+              <div [id]="'dialog-position-content-' + position">
+                <p>
+                  Dialog positioned at <strong>{{ position }}</strong
+                  >.
+                </p>
+              </div>
+            </ui-lib-dialog>
+          }
+        </div>
+      </ui-lib-card>
+    </section>
+
+    <section id="maximizable" class="example-section">
+      <h3>Maximizable</h3>
+      <p>Enable maximize/minimize action in the dialog header.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="maximizableVisible = true"
+          [attr.aria-expanded]="maximizableVisible"
+          aria-controls="dialog-maximizable-content"
+        >
+          Open Maximizable Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog
+          [(visible)]="maximizableVisible"
+          [modal]="true"
+          [maximizable]="true"
+          header="Review Dashboard"
+        >
+          <div id="dialog-maximizable-content">
+            <p>Use the maximize button to expand this dialog to full viewport size.</p>
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="long-content" class="example-section">
+      <h3>Long Content</h3>
+      <p>Demonstrates internal scrolling for long dialog body content.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="longContentVisible = true"
+          [attr.aria-expanded]="longContentVisible"
+          aria-controls="dialog-long-content"
+        >
+          Open Long Content Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog [(visible)]="longContentVisible" [modal]="true" header="Release Notes">
+          <div id="dialog-long-content" class="long-content">
+            @for (paragraph of longParagraphs; track paragraph) {
+              <p>{{ paragraph }}</p>
+            }
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="without-modal" class="example-section">
+      <h3>Without Modal</h3>
+      <p>Dialog without backdrop for non-blocking secondary interactions.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="nonModalVisible = true"
+          [attr.aria-expanded]="nonModalVisible"
+          aria-controls="dialog-non-modal-content"
+        >
+          Open Non-Modal Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog [(visible)]="nonModalVisible" [modal]="false" header="Quick Notes">
+          <div id="dialog-non-modal-content">
+            <p>This dialog keeps background context visible and interactive.</p>
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="responsive" class="example-section">
+      <h3>Responsive</h3>
+      <p>Uses breakpoints to adapt width based on viewport size.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="responsiveVisible = true"
+          [attr.aria-expanded]="responsiveVisible"
+          aria-controls="dialog-responsive-content"
+        >
+          Open Responsive Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog
+          [(visible)]="responsiveVisible"
+          [modal]="true"
+          [breakpoints]="responsiveBreakpoints"
+          header="Responsive Layout"
+        >
+          <div id="dialog-responsive-content">
+            <p>Resize the browser window to observe width changes at configured breakpoints.</p>
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="draggable" class="example-section">
+      <h3>Draggable</h3>
+      <p>Drag the dialog by its header area.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="draggableVisible = true"
+          [attr.aria-expanded]="draggableVisible"
+          aria-controls="dialog-draggable-content"
+        >
+          Open Draggable Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog
+          [(visible)]="draggableVisible"
+          [modal]="false"
+          [draggable]="true"
+          header="Move Me"
+        >
+          <div id="dialog-draggable-content">
+            <p>Click and drag from the header to reposition this dialog.</p>
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="headless" class="example-section">
+      <h3>Headless</h3>
+      <p>Fully custom dialog chrome using the headless projection slot.</p>
+      <ui-lib-card>
+        <ui-lib-button
+          (click)="headlessVisible = true"
+          [attr.aria-expanded]="headlessVisible"
+          aria-controls="dialog-headless-content"
+        >
+          Open Headless Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog [(visible)]="headlessVisible" [headless]="true" [modal]="true">
+          <section
+            uiLibDialogHeadless
+            class="headless-shell"
+            aria-labelledby="dialog-headless-title"
+            id="dialog-headless-content"
+          >
+            <header class="headless-shell__header">
+              <h4 id="dialog-headless-title">Custom Design Review</h4>
+              <ui-lib-button
+                size="small"
+                variant="minimal"
+                appearance="ghost"
+                (click)="headlessVisible = false"
+              >
+                Close
+              </ui-lib-button>
+            </header>
+
+            <div class="headless-shell__body">
+              <p>
+                Headless mode lets you provide fully custom structure while reusing Dialog behavior.
+              </p>
+            </div>
+
+            <footer class="headless-shell__footer">
+              <ui-lib-button
+                variant="minimal"
+                appearance="outline"
+                (click)="headlessVisible = false"
+              >
+                Later
+              </ui-lib-button>
+              <ui-lib-button color="primary" (click)="headlessVisible = false"
+                >Confirm</ui-lib-button
+              >
+            </footer>
+          </section>
+        </ui-lib-dialog>
+      </ui-lib-card>
+    </section>
+
+    <section id="variant-switcher" class="example-section">
+      <h3>Variant Switcher</h3>
+      <p>
+        Switch the active variant and compare Material, Bootstrap, and Minimal styles side by side.
+      </p>
+
+      <ui-lib-card class="variant-switcher-card">
+        <div class="variant-switcher-controls">
+          <ui-lib-button
+            size="small"
+            variant="minimal"
+            [appearance]="selectedVariant === 'material' ? 'solid' : 'ghost'"
+            (click)="setVariant('material')"
+          >
+            Material
+          </ui-lib-button>
+          <ui-lib-button
+            size="small"
+            variant="minimal"
+            [appearance]="selectedVariant === 'bootstrap' ? 'solid' : 'ghost'"
+            (click)="setVariant('bootstrap')"
+          >
+            Bootstrap
+          </ui-lib-button>
+          <ui-lib-button
+            size="small"
+            variant="minimal"
+            [appearance]="selectedVariant === 'minimal' ? 'solid' : 'ghost'"
+            (click)="setVariant('minimal')"
+          >
+            Minimal
+          </ui-lib-button>
+        </div>
+
+        <p class="variant-selection-label">
+          Selected variant: <strong>{{ selectedVariant }}</strong>
+        </p>
+
+        <ui-lib-button
+          color="primary"
+          (click)="variantVisible = true"
+          [attr.aria-expanded]="variantVisible"
+          aria-controls="dialog-variant-content"
+        >
+          Open Selected Variant Dialog
+        </ui-lib-button>
+
+        <ui-lib-dialog
+          [(visible)]="variantVisible"
+          [modal]="true"
+          [variant]="selectedVariant"
+          header="Variant Preview"
+        >
+          <div id="dialog-variant-content">
+            <p>
+              This dialog uses the <strong>{{ selectedVariant }}</strong> variant.
+            </p>
+          </div>
+        </ui-lib-dialog>
+      </ui-lib-card>
+
+      <ui-lib-card>
+        <app-variant-comparison>
+          <div material>
+            <ui-lib-button
+              size="small"
+              (click)="variantCompareVisible.material = true"
+              [attr.aria-expanded]="variantCompareVisible.material"
+              aria-controls="dialog-variant-material-content"
+            >
+              Open Material
+            </ui-lib-button>
+            <ui-lib-dialog
+              [(visible)]="variantCompareVisible.material"
+              [variant]="'material'"
+              [modal]="true"
+              header="Material Variant"
+            >
+              <div id="dialog-variant-material-content">Material variant dialog preview.</div>
+            </ui-lib-dialog>
+          </div>
+
+          <div bootstrap>
+            <ui-lib-button
+              size="small"
+              (click)="variantCompareVisible.bootstrap = true"
+              [attr.aria-expanded]="variantCompareVisible.bootstrap"
+              aria-controls="dialog-variant-bootstrap-content"
+            >
+              Open Bootstrap
+            </ui-lib-button>
+            <ui-lib-dialog
+              [(visible)]="variantCompareVisible.bootstrap"
+              [variant]="'bootstrap'"
+              [modal]="true"
+              header="Bootstrap Variant"
+            >
+              <div id="dialog-variant-bootstrap-content">Bootstrap variant dialog preview.</div>
+            </ui-lib-dialog>
+          </div>
+
+          <div minimal>
+            <ui-lib-button
+              size="small"
+              (click)="variantCompareVisible.minimal = true"
+              [attr.aria-expanded]="variantCompareVisible.minimal"
+              aria-controls="dialog-variant-minimal-content"
+            >
+              Open Minimal
+            </ui-lib-button>
+            <ui-lib-dialog
+              [(visible)]="variantCompareVisible.minimal"
+              [variant]="'minimal'"
+              [modal]="true"
+              header="Minimal Variant"
+            >
+              <div id="dialog-variant-minimal-content">Minimal variant dialog preview.</div>
+            </ui-lib-dialog>
+          </div>
+        </app-variant-comparison>
+      </ui-lib-card>
+    </section>
+  </div>
+</app-doc-page-layout>

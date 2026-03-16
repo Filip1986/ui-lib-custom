@@ -16,6 +16,7 @@
  *   import { SelectButton } from 'ui-lib-custom/select-button';
  *   import { UiLibCheckbox } from 'ui-lib-custom/checkbox';
  *   import { Badge } from 'ui-lib-custom/badge';
+ *   import { DialogComponent } from 'ui-lib-custom/dialog';
  *   import { ICON_SIZES } from 'ui-lib-custom/core';
  *   import { BORDER_RADIUS } from 'ui-lib-custom/tokens';
  *   import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
@@ -51,3 +52,7 @@ export * from './lib/icon-button/icon-button';
 
 // Alert (pending secondary entry point)
 export * from './lib/alert/alert';
+
+// Dialog (backward compatibility re-export)
+export { DialogComponent } from './lib/dialog/dialog.component';
+export type { DialogPosition, DialogVariant } from './lib/dialog/dialog.types';

@@ -15,13 +15,14 @@
 @use '../layout/container' as container;
 @use '../icon/icon' as icon;
 @use '../alert/alert' as alert;
+@use '../dialog/dialog.component' as dialog;
 
 /**
  * Dark Theme CSS Variables
  * Apply via [data-theme="dark"] on html or body element
  */
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   @include dark-theme-vars;
   @include button.button-dark-theme;
   @include card.card-dark-theme;
@@ -39,6 +40,7 @@
   @include container.container-dark-theme;
   @include icon.icon-dark-theme;
   @include alert.alert-dark-theme;
+  @include dialog.dialog-dark-theme;
 }
 
 /**
@@ -46,7 +48,7 @@
  * Only applies when no explicit data-theme is set
  */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not([data-theme]) {
+  :root:not([data-theme='light']):not([data-theme]) {
     @include dark-theme-vars;
     @include button.button-dark-theme;
     @include card.card-dark-theme;
@@ -64,5 +66,6 @@
     @include container.container-dark-theme;
     @include icon.icon-dark-theme;
     @include alert.alert-dark-theme;
+    @include dialog.dialog-dark-theme;
   }
 }

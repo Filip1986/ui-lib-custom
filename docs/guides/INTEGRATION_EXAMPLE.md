@@ -24,7 +24,6 @@ In your project's `package.json`:
 ```json
 {
   "dependencies": {
-    "@angular/animations": "^21.0.0",
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0",
     "ui-lib-custom": "file:../ui-lib-custom/dist/ui-lib-custom"

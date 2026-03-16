@@ -131,6 +131,8 @@ npm run build-storybook
 - **[Select Component](reference/components/SELECT.md)** - Select/combobox component reference
 - **[Alert Component](reference/components/ALERT.md)** - Alert/status banner reference
 - **[Layout Primitives](reference/components/LAYOUT.md)** - Stack/Inline/Grid/Container reference
+- **[Dialog Component](reference/components/DIALOG.md)** - Dialog/overlay component reference
+  - Implementation: [DIALOG_IMPLEMENTATION.md](implementation/DIALOG_IMPLEMENTATION.md)
 
 #### 📋 Project Documentation
 - **[Project Summary](reference/project/PROJECT_SUMMARY.md)** - Complete project overview
@@ -185,6 +187,7 @@ npm run build-storybook
 | **Get a project overview** | [Project Summary](reference/project/PROJECT_SUMMARY.md) |
 | **See version upgrade history** | [Update Log](reference/project/UPDATE_LOG.md) |
 | **Verify everything works** | [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) |
+| **Understand Dialog internals** | [Dialog Implementation](implementation/DIALOG_IMPLEMENTATION.md) |
 
 ### By Role
 
