@@ -134,6 +134,15 @@ export const routes: Routes = [
       ),
     title: 'Dialog - UI Components Library',
   },
+  {
+    path: 'autocomplete',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/autocomplete/autocomplete-demo.component').then(
+        (m: { AutoCompleteDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.AutoCompleteDemoComponent
+      ),
+    title: 'AutoComplete - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

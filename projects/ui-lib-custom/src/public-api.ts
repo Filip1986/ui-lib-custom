@@ -1,8 +1,8 @@
 /*
  * Public API Surface of ui-lib-custom
  *
- * Components with secondary entry points are NOT re-exported here
- * to avoid ng-packagr source file ownership conflicts.
+ * Most components with secondary entry points are consumed directly to avoid
+ * ng-packagr source file ownership conflicts.
  *
  * Use the secondary entry points directly:
  *   import { Button } from 'ui-lib-custom/button';
@@ -52,6 +52,9 @@ export * from './lib/icon-button/icon-button';
 
 // Alert (pending secondary entry point)
 export * from './lib/alert/alert';
+
+// AutoComplete
+export * from './lib/autocomplete/index';
 
 // Dialog (backward compatibility re-export)
 export { DialogComponent } from './lib/dialog/dialog.component';

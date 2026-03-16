@@ -165,6 +165,17 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### AutoComplete
+**Files:**
+- [AUTOCOMPLETE_API.md](AUTOCOMPLETE_API.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/autocomplete/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -225,6 +236,7 @@ Each component should have two documentation files:
 | Layout | Stack/Inline/Grid/Container | - | - | - | ✅ Complete |
 | Alert | Status alerts | 3 | - | - | ✅ Complete |
 | Dialog | Overlay/modal dialog | 3 | - | - | ✅ Complete |
+| AutoComplete | Typeahead suggestions + chips | 3 | - | 3 | ✅ Complete |
 
 ---
 

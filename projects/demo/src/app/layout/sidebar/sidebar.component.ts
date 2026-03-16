@@ -111,6 +111,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/dialog',
         },
+        {
+          label: 'Autocomplete',
+          icon: 'pi pi-circle',
+          route: '/autocomplete',
+        },
       ],
     },
     {
@@ -157,6 +162,11 @@ export class SidebarComponent {
           label: 'Select Buttons',
           icon: 'pi pi-circle',
           route: '/select-buttons',
+        },
+        {
+          label: 'Autocomplete',
+          icon: 'pi pi-circle',
+          route: '/autocomplete',
         },
       ],
     },

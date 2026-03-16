@@ -1,0 +1,246 @@
+<ng-template #autocompleteInputTemplate>
+  <input
+    type="text"
+    role="combobox"
+    class="ui-autocomplete-input"
+    [id]="inputIdInternal()"
+    [value]="query()"
+    [placeholder]="placeholder()"
+    [disabled]="isDisabled()"
+    [readonly]="readonly()"
+    [attr.maxlength]="maxlength()"
+    [tabindex]="tabindex()"
+    [attr.aria-autocomplete]="'list'"
+    [attr.aria-haspopup]="'listbox'"
+    [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+    [attr.aria-controls]="panelVisible() ? listboxId : null"
+    [attr.aria-activedescendant]="activeDescendantId()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    [attr.aria-invalid]="invalid() ? 'true' : null"
+    autocomplete="off"
+    (input)="onInput($event)"
+    (focus)="onInputFocus($event)"
+    (blur)="onInputBlur($event)"
+    (keydown)="onKeydown($event)"
+    (keyup)="onInputKeyUp($event)"
+  />
+</ng-template>
+
+<div class="ui-autocomplete-container">
+  @if (multiple()) {
+    <ul class="ui-autocomplete-chip-list" [attr.aria-disabled]="isDisabled() ? 'true' : null">
+      @for (chip of selectedChips(); track chipTrackBy($index, chip)) {
+        <li
+          class="ui-autocomplete-chip"
+          role="option"
+          [class.ui-autocomplete-chip--focused]="focusedChipIndex() === $index"
+          [attr.aria-label]="getChipLabel(chip)"
+          [attr.data-chip-index]="$index"
+          [attr.tabindex]="focusedChipIndex() === $index ? 0 : -1"
+          (keydown)="onChipKeydown($event, $index)"
+        >
+          @if (selectedItemTemplate()) {
+            <ng-container
+              *ngTemplateOutlet="selectedItemTemplate(); context: { $implicit: chip }"
+            ></ng-container>
+          } @else {
+            <span class="ui-autocomplete-chip-label">{{ getChipLabel(chip) }}</span>
+          }
+
+          @if (!isDisabled() && !readonly()) {
+            <button
+              class="ui-autocomplete-chip-remove"
+              type="button"
+              (click)="removeChip($index, $event)"
+              [attr.aria-label]="'Remove ' + getChipLabel(chip)"
+            >
+              @if (removeTokenIconTemplate()) {
+                <ng-container *ngTemplateOutlet="removeTokenIconTemplate()"></ng-container>
+              } @else {
+                x
+              }
+            </button>
+          }
+        </li>
+      }
+
+      <li class="ui-autocomplete-input-chip">
+        <ng-container [ngTemplateOutlet]="autocompleteInputTemplate"></ng-container>
+      </li>
+    </ul>
+  } @else {
+    <ng-container [ngTemplateOutlet]="autocompleteInputTemplate"></ng-container>
+  }
+
+  @if (showClear() && hasValue() && !isDisabled()) {
+    <button class="ui-autocomplete-clear" type="button" (click)="clear($event)" aria-label="Clear">
+      x
+    </button>
+  }
+
+  @if (dropdown()) {
+    <button
+      class="ui-autocomplete-dropdown-btn"
+      type="button"
+      [disabled]="isDisabled()"
+      aria-label="Show options"
+      (click)="onDropdownButtonClick($event)"
+    >
+      @if (dropdownIconTemplate()) {
+        <ng-container *ngTemplateOutlet="dropdownIconTemplate()"></ng-container>
+      } @else {
+        v
+      }
+    </button>
+  }
+</div>
+
+@if (panelVisible() && (loading() || visibleOptions().length > 0 || emptyTemplate())) {
+  <div
+    class="ui-autocomplete-panel"
+    [id]="listboxId"
+    [attr.role]="listboxRole"
+    [attr.aria-label]="ariaLabel()"
+    [style.max-height]="scrollHeight()"
+  >
+    @if (headerTemplate()) {
+      <div class="ui-autocomplete-panel-header">
+        <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="ui-autocomplete-loading">
+        @if (loadingTemplate()) {
+          <ng-container *ngTemplateOutlet="loadingTemplate()"></ng-container>
+        } @else {
+          Loading...
+        }
+      </div>
+    } @else if (visibleOptions().length === 0) {
+      <div class="ui-autocomplete-empty">
+        @if (emptyTemplate()) {
+          <ng-container *ngTemplateOutlet="emptyTemplate()"></ng-container>
+        } @else {
+          {{ emptyText }}
+        }
+      </div>
+    } @else if (group()) {
+      @for (groupOption of suggestions(); track groupTrackBy($index, groupOption)) {
+        <div class="ui-autocomplete-option-group">
+          @if (groupTemplate()) {
+            <ng-container
+              *ngTemplateOutlet="groupTemplate(); context: { $implicit: groupOption }"
+            ></ng-container>
+          } @else {
+            <div class="ui-autocomplete-option-group-label">{{ getGroupLabel(groupOption) }}</div>
+          }
+
+          @for (option of getGroupChildren(groupOption); track optionTrackBy($index, option)) {
+            @let optionIndex = getOptionIndex(option);
+            <div
+              [id]="getOptionId(optionIndex)"
+              [attr.role]="optionRole"
+              class="ui-autocomplete-option"
+              [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
+              [class.ui-autocomplete-option--selected]="isSelected(option)"
+              [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
+              [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+              [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
+              (mousedown)="$event.preventDefault()"
+              (click)="selectOption(option, $event)"
+              (mouseenter)="setActiveIndex(optionIndex)"
+            >
+              @if (itemTemplate()) {
+                <ng-container
+                  *ngTemplateOutlet="itemTemplate(); context: { $implicit: option }"
+                ></ng-container>
+              } @else {
+                {{ getOptionLabel(option) }}
+              }
+            </div>
+          }
+        </div>
+      }
+    } @else {
+      @if (virtualScrollEnabled()) {
+        <div
+          class="ui-autocomplete-virtual-viewport"
+          [style.max-height]="scrollHeight()"
+          (scroll)="onVirtualViewportScroll($event)"
+        >
+          <div class="ui-autocomplete-virtual-spacer" [style.height.px]="virtualTotalHeightPx()">
+            <div
+              class="ui-autocomplete-virtual-content"
+              [style.transform]="'translateY(' + virtualOffsetPx() + 'px)'"
+            >
+              @for (
+                option of virtualOptions();
+                track virtualOptionTrackBy($index, option);
+                let localIndex = $index
+              ) {
+                @let optionIndex = virtualOptionIndex(localIndex);
+                <div
+                  [id]="getOptionId(optionIndex)"
+                  [attr.role]="optionRole"
+                  class="ui-autocomplete-option"
+                  [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
+                  [class.ui-autocomplete-option--selected]="isSelected(option)"
+                  [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
+                  [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+                  [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
+                  (mousedown)="$event.preventDefault()"
+                  (click)="selectOption(option, $event)"
+                  (mouseenter)="setActiveIndex(optionIndex)"
+                >
+                  @if (itemTemplate()) {
+                    <ng-container
+                      *ngTemplateOutlet="itemTemplate(); context: { $implicit: option }"
+                    ></ng-container>
+                  } @else {
+                    {{ getOptionLabel(option) }}
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      } @else {
+        @for (
+          option of visibleOptions();
+          track optionTrackBy($index, option);
+          let optionIndex = $index
+        ) {
+          <div
+            [id]="getOptionId(optionIndex)"
+            [attr.role]="optionRole"
+            class="ui-autocomplete-option"
+            [class.ui-autocomplete-option--active]="optionIndex === activeIndex()"
+            [class.ui-autocomplete-option--selected]="isSelected(option)"
+            [class.ui-autocomplete-option--disabled]="isOptionDisabled(option)"
+            [attr.aria-selected]="isSelected(option) ? 'true' : 'false'"
+            [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
+            (mousedown)="$event.preventDefault()"
+            (click)="selectOption(option, $event)"
+            (mouseenter)="setActiveIndex(optionIndex)"
+          >
+            @if (itemTemplate()) {
+              <ng-container
+                *ngTemplateOutlet="itemTemplate(); context: { $implicit: option }"
+              ></ng-container>
+            } @else {
+              {{ getOptionLabel(option) }}
+            }
+          </div>
+        }
+      }
+    }
+
+    @if (footerTemplate()) {
+      <div class="ui-autocomplete-panel-footer">
+        <ng-container *ngTemplateOutlet="footerTemplate()"></ng-container>
+      </div>
+    }
+  </div>
+}
