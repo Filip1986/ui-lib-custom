@@ -1,10 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+// noinspection JSUnusedGlobalSymbols
 import { SHARED_THEME_VARIANTS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
 import { Alert } from './alert';
 
-type Story = StoryObj;
+type AlertStoryArgs = {
+  severity: 'success' | 'error' | 'warning' | 'info';
+  variant: 'material' | 'bootstrap' | 'minimal';
+  dismissible: boolean;
+};
 
-const meta: Meta = {
+type Story = StoryObj<AlertStoryArgs>;
+
+const meta: Meta<AlertStoryArgs> = {
   title: 'Components/Alert',
   component: Alert,
   tags: ['autodocs'],
@@ -21,12 +28,14 @@ const meta: Meta = {
 
 export default meta;
 
+// noinspection JSUnusedGlobalSymbols
 export const Default: Story = {
   render: (): { template: string } => ({
     template: `<ui-lib-alert>Alert message</ui-lib-alert>`,
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const Variants: Story = {
   render: (): { template: string; props: { themeVariants: typeof SHARED_THEME_VARIANTS } } => ({
     props: { themeVariants: SHARED_THEME_VARIANTS },
@@ -40,12 +49,14 @@ export const Variants: Story = {
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const Sizes: Story = {
   render: (): { template: string } => ({
     template: `<ui-lib-alert>Default size alert</ui-lib-alert>`,
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const States: Story = {
   render: (): { template: string } => ({
     template: `
@@ -57,6 +68,7 @@ export const States: Story = {
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const DarkMode: Story = {
   parameters: { globals: { mode: 'dark' } },
   render: (): { template: string } => ({
@@ -64,20 +76,16 @@ export const DarkMode: Story = {
   }),
 };
 
-type AlertStoryArgs = {
-  severity: 'success' | 'error' | 'warning' | 'info';
-  variant: 'material' | 'bootstrap' | 'minimal';
-  dismissible: boolean;
-};
-
+// noinspection JSUnusedGlobalSymbols
 export const FullApi: Story = {
   args: {
     severity: 'success',
     variant: 'bootstrap',
     dismissible: true,
   },
-  render: (args: AlertStoryArgs): { props: Record<string, unknown>; template: string } => ({
+  render: (args: AlertStoryArgs): { props: AlertStoryArgs; template: string } => ({
     props: { ...args },
-    template: `<ui-lib-alert [severity]="severity" [variant]="variant" [dismissible]="dismissible">Full API</ui-lib-alert>`,
+    template:
+      '<ui-lib-alert [severity]="severity" [variant]="variant" [dismissible]="dismissible">Full API</ui-lib-alert>',
   }),
 };

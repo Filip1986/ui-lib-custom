@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+// noinspection JSUnusedGlobalSymbols
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
@@ -6,8 +7,8 @@ import {
   SHARED_VARIANT_OPTIONS,
 } from 'ui-lib-custom/core';
 import { Accordion } from './accordion';
-import { AccordionPanel, AccordionHeader } from 'ui-lib-custom';
-import type { AccordionVariant, AccordionSize, AccordionExpandMode } from 'ui-lib-custom';
+import { AccordionPanel, AccordionHeader } from 'ui-lib-custom/accordion';
+import type { AccordionVariant, AccordionSize, AccordionExpandMode } from 'ui-lib-custom/accordion';
 
 type AccordionStoryArgs = {
   variant: AccordionVariant | null;
@@ -29,6 +30,7 @@ const meta: Meta<AccordionStoryArgs> = {
   },
 };
 
+// noinspection JSUnusedGlobalSymbols
 export default meta;
 
 const renderAccordion: (args: AccordionStoryArgs) => {
@@ -58,6 +60,7 @@ export const Default: Story = {
   },
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const Variants: Story = {
   render: (): {
     template: string;
@@ -82,6 +85,7 @@ export const Variants: Story = {
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const Sizes: Story = {
   render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
     moduleMetadata: { imports: [Accordion, AccordionPanel] },
@@ -101,6 +105,7 @@ export const Sizes: Story = {
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const States: Story = {
   render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
     moduleMetadata: { imports: [Accordion, AccordionPanel] },
@@ -114,6 +119,7 @@ export const States: Story = {
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const DarkMode: Story = {
   parameters: { globals: { mode: 'dark' } },
   render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
@@ -126,6 +132,7 @@ export const DarkMode: Story = {
   }),
 };
 
+// noinspection JSUnusedGlobalSymbols
 export const FullApi: Story = {
   render: (): { template: string; moduleMetadata: { imports: unknown[] } } => ({
     moduleMetadata: { imports: [Accordion, AccordionPanel, AccordionHeader] },
