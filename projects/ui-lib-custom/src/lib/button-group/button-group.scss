@@ -1,72 +1,66 @@
-:host {
+ui-lib-button-group.ui-lib-button-group {
   display: inline-flex;
+  align-items: stretch;
   width: auto;
 }
 
-:host .btn-group {
+ui-lib-button-group.ui-lib-button-group--vertical {
+  flex-direction: column;
+}
+
+ui-lib-button-group.ui-lib-button-group--size-small > ui-lib-button .ui-lib-button {
+  --uilib-button-padding: var(--uilib-button-padding-small);
+  --uilib-button-font-size: var(--uilib-button-font-size-small);
+}
+
+ui-lib-button-group.ui-lib-button-group--size-large > ui-lib-button .ui-lib-button {
+  --uilib-button-padding: var(--uilib-button-padding-large);
+  --uilib-button-font-size: var(--uilib-button-font-size-large);
+}
+
+ui-lib-button-group > ui-lib-button {
   display: inline-flex;
-  align-items: stretch;
+}
 
-  &.btn-group-vertical {
-    flex-direction: column;
-  }
+ui-lib-button-group > ui-lib-button:not(:first-child) button,
+ui-lib-button-group > ui-lib-button:not(:first-child) .ui-lib-button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -1px;
+}
 
-  &.btn-group-size-small > ui-lib-button .ui-lib-button {
-    --uilib-button-padding: var(--uilib-button-padding-small);
-    --uilib-button-font-size: var(--uilib-button-font-size-small);
-  }
+ui-lib-button-group > ui-lib-button:not(:last-child) button,
+ui-lib-button-group > ui-lib-button:not(:last-child) .ui-lib-button {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
 
-  &.btn-group-size-large > ui-lib-button .ui-lib-button {
-    --uilib-button-padding: var(--uilib-button-padding-large);
-    --uilib-button-font-size: var(--uilib-button-font-size-large);
-  }
+ui-lib-button-group.ui-lib-button-group--vertical > ui-lib-button:not(:first-child) button,
+ui-lib-button-group.ui-lib-button-group--vertical > ui-lib-button:not(:first-child) .ui-lib-button {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: -1px;
+  margin-left: 0;
+}
 
-  > ui-lib-button {
-    display: inline-flex;
+ui-lib-button-group.ui-lib-button-group--vertical > ui-lib-button:not(:last-child) button,
+ui-lib-button-group.ui-lib-button-group--vertical > ui-lib-button:not(:last-child) .ui-lib-button {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
 
-    &:not(:first-child) button,
-    &:not(:first-child) .ui-lib-button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      margin-left: -1px;
-    }
+ui-lib-button-group.ui-lib-button-group--material > ui-lib-button .ui-lib-button {
+  --uilib-button-shadow: var(--uilib-shadow-sm, var(--uilib-button-shadow));
+  --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-button-shadow-hover));
+}
 
-    &:not(:last-child) button,
-    &:not(:last-child) .ui-lib-button {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  }
+ui-lib-button-group.ui-lib-button-group--bootstrap > ui-lib-button .ui-lib-button {
+  --uilib-button-radius: var(--uilib-radius-sm, var(--uilib-button-radius));
+  --uilib-button-border-width: 1px;
+}
 
-  &.btn-group-vertical > ui-lib-button {
-    &:not(:first-child) button,
-    &:not(:first-child) .ui-lib-button {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      margin-top: -1px;
-      margin-left: 0;
-    }
-
-    &:not(:last-child) button,
-    &:not(:last-child) .ui-lib-button {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  }
-
-  &.btn-group-material > ui-lib-button .ui-lib-button {
-    --uilib-button-shadow: var(--uilib-shadow-sm, var(--uilib-button-shadow));
-    --uilib-button-shadow-hover: var(--uilib-shadow-md, var(--uilib-button-shadow-hover));
-  }
-
-  &.btn-group-bootstrap > ui-lib-button .ui-lib-button {
-    --uilib-button-radius: var(--uilib-radius-sm, var(--uilib-button-radius));
-    --uilib-button-border-width: 1px;
-  }
-
-  &.btn-group-minimal > ui-lib-button .ui-lib-button {
-    --uilib-button-shadow: none;
-    --uilib-button-shadow-hover: none;
-    --uilib-button-radius: 0;
-  }
+ui-lib-button-group.ui-lib-button-group--minimal > ui-lib-button .ui-lib-button {
+  --uilib-button-shadow: none;
+  --uilib-button-shadow-hover: none;
+  --uilib-button-radius: 0;
 }

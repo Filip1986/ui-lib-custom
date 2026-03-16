@@ -20,13 +20,13 @@ import type { ButtonVariant, ButtonSize } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'btn-group',
-    '[class.btn-group-vertical]': 'vertical()',
-    '[class.btn-group-size-small]': "normalizedSize() === 'small'",
-    '[class.btn-group-size-large]': "normalizedSize() === 'large'",
-    '[class.btn-group-material]': "variant() === 'material'",
-    '[class.btn-group-bootstrap]': "variant() === 'bootstrap'",
-    '[class.btn-group-minimal]': "variant() === 'minimal'",
+    class: 'ui-lib-button-group',
+    '[class.ui-lib-button-group--vertical]': 'vertical()',
+    '[class.ui-lib-button-group--size-small]': "normalizedSize() === 'small'",
+    '[class.ui-lib-button-group--size-large]': "normalizedSize() === 'large'",
+    '[class.ui-lib-button-group--material]': "variant() === 'material'",
+    '[class.ui-lib-button-group--bootstrap]': "variant() === 'bootstrap'",
+    '[class.ui-lib-button-group--minimal]': "variant() === 'minimal'",
     '[attr.role]': '"group"',
   },
 })
@@ -49,6 +49,4 @@ export class ButtonGroup {
     };
     return map[size];
   });
-
-  public readonly hostClasses: Signal<string> = computed<string>((): string => '');
 }

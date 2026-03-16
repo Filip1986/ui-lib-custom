@@ -10,11 +10,10 @@ import {
 import { ButtonGroup } from './button-group';
 import { Button } from '../button/button';
 import type { ButtonSize, ButtonVariant } from '../button/button';
-import { Icon } from '../icon/icon';
 
 @Component({
   standalone: true,
-  imports: [ButtonGroup, Button, Icon],
+  imports: [ButtonGroup, Button],
   template: `
     <ui-lib-button-group [variant]="variant()" [vertical]="vertical()" [size]="size()">
       <ui-lib-button>One</ui-lib-button>
@@ -61,9 +60,9 @@ describe('ButtonGroup', (): void => {
   });
 
   describe('basic rendering', (): void => {
-    it('renders with btn-group class and projects children', (): void => {
+    it('renders with ui-lib-button-group class and projects children', (): void => {
       const group: HTMLElement = getGroup();
-      expect(group.classList.contains('btn-group')).toBeTruthy();
+      expect(group.classList.contains('ui-lib-button-group')).toBeTruthy();
       const buttons: HTMLButtonElement[] = getButtons();
       expect(buttons.length).toBe(2);
       const firstText: string | null = getRequiredButton(buttons, 0).textContent;
@@ -81,31 +80,31 @@ describe('ButtonGroup', (): void => {
 
   describe('orientation', (): void => {
     it('is horizontal by default', (): void => {
-      expect(getGroup().classList.contains('btn-group-vertical')).toBeFalsy();
+      expect(getGroup().classList.contains('ui-lib-button-group--vertical')).toBeFalsy();
     });
 
     it('applies vertical class when vertical=true', (): void => {
       fixture.componentInstance.vertical.set(true);
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-vertical')).toBeTruthy();
+      expect(getGroup().classList.contains('ui-lib-button-group--vertical')).toBeTruthy();
     });
   });
 
   describe('variant inheritance', (): void => {
     it('applies material class by default', (): void => {
-      expect(getGroup().classList.contains('btn-group-material')).toBeTruthy();
+      expect(getGroup().classList.contains('ui-lib-button-group--material')).toBeTruthy();
     });
 
     it('applies bootstrap class when variant=bootstrap', (): void => {
       fixture.componentInstance.variant.set('bootstrap');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-bootstrap')).toBeTruthy();
+      expect(getGroup().classList.contains('ui-lib-button-group--bootstrap')).toBeTruthy();
     });
 
     it('applies minimal class when variant=minimal', (): void => {
       fixture.componentInstance.variant.set('minimal');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-minimal')).toBeTruthy();
+      expect(getGroup().classList.contains('ui-lib-button-group--minimal')).toBeTruthy();
     });
   });
 
@@ -113,13 +112,13 @@ describe('ButtonGroup', (): void => {
     it('applies small size class hook', (): void => {
       fixture.componentInstance.size.set('small');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-size-small')).toBeTruthy();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-small')).toBeTruthy();
     });
 
     it('applies large size class hook', (): void => {
       fixture.componentInstance.size.set('large');
       fixture.detectChanges();
-      expect(getGroup().classList.contains('btn-group-size-large')).toBeTruthy();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-large')).toBeTruthy();
     });
   });
 
