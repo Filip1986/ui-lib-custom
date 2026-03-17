@@ -1,0 +1,120 @@
+<div class="ui-lib-cascade-select__trigger" [attr.id]="controlId()" (click)="togglePanel($event)">
+  <div class="ui-lib-cascade-select__value" [class.ui-lib-cascade-select__value--placeholder]="!displayValue()">
+    @if (hasValue()) {
+      @if (valueTemplate()) {
+        <ng-container
+          *ngTemplateOutlet="valueTemplate(); context: { $implicit: selectedOption() }"
+        ></ng-container>
+      } @else {
+        {{ displayValue() }}
+      }
+    } @else {
+      {{ placeholder() }}
+    }
+  </div>
+
+  <div class="ui-lib-cascade-select__actions">
+    @if (showClear() && hasValue() && !isDisabled() && !loading()) {
+      <button
+        type="button"
+        class="ui-lib-cascade-select__clear"
+        aria-label="Clear selection"
+        (click)="$event.stopPropagation(); clearSelection($event)"
+      >
+        x
+      </button>
+    }
+
+    <span class="ui-lib-cascade-select__dropdown-icon" aria-hidden="true">
+      @if (dropdownIconTemplate()) {
+        <ng-container *ngTemplateOutlet="dropdownIconTemplate()"></ng-container>
+      } @else {
+        v
+      }
+    </span>
+  </div>
+</div>
+
+@if (panelVisible()) {
+  <div class="ui-lib-cascade-select__panel" [attr.id]="panelId()" role="tree">
+    @if (headerTemplate()) {
+      <div class="ui-lib-cascade-select__header">
+        <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="ui-lib-cascade-select__loading">
+        @if (loadingTemplate()) {
+          <ng-container *ngTemplateOutlet="loadingTemplate()"></ng-container>
+        } @else {
+          Loading...
+        }
+      </div>
+    } @else {
+      <div class="ui-lib-cascade-select__columns">
+        @for (levelOptions of visibleLevels(); track $index; let level = $index) {
+          <ul class="ui-lib-cascade-select__level" [attr.role]="getLevelRole(level)">
+            @for (
+              option of levelOptions;
+              track optionTrackBy($index, option);
+              let optionIndex = $index
+            ) {
+              <li
+                class="ui-lib-cascade-select__option"
+                [attr.id]="getOptionId(level, optionIndex)"
+                role="treeitem"
+                [attr.aria-level]="level + 1"
+                [attr.aria-setsize]="levelOptions.length"
+                [attr.aria-posinset]="optionIndex + 1"
+                [attr.aria-expanded]="
+                  isOptionGroupAtLevel(option, level)
+                    ? isOptionActive(level, option)
+                      ? 'true'
+                      : 'false'
+                    : null
+                "
+                [attr.aria-selected]="isOptionSelected(option) ? 'true' : 'false'"
+                [attr.aria-disabled]="isOptionDisabled(option) ? 'true' : null"
+                [class.ui-lib-cascade-select__option--active]="isOptionActive(level, option)"
+                [class.ui-lib-cascade-select__option--selected]="isOptionSelected(option)"
+                [class.ui-lib-cascade-select__option--disabled]="isOptionDisabled(option)"
+                [class.ui-lib-cascade-select__option--group]="isOptionGroupAtLevel(option, level)"
+                (mouseenter)="onOptionHover(level, option)"
+                (click)="onOptionInteraction($event, level, option)"
+              >
+                <span class="ui-lib-cascade-select__option-label">
+                  @if (optionTemplate()) {
+                    <ng-container
+                      *ngTemplateOutlet="optionTemplate(); context: { $implicit: option }"
+                    ></ng-container>
+                  } @else {
+                    {{ resolveOptionLabel(option) }}
+                  }
+                </span>
+
+                @if (isOptionGroupAtLevel(option, level)) {
+                  <span class="ui-lib-cascade-select__option-group-icon" aria-hidden="true">
+                    @if (optionGroupIconTemplate()) {
+                      <ng-container
+                        *ngTemplateOutlet="optionGroupIconTemplate(); context: { $implicit: option }"
+                      ></ng-container>
+                    } @else {
+                      >
+                    }
+                  </span>
+                }
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    }
+
+    @if (footerTemplate()) {
+      <div class="ui-lib-cascade-select__footer">
+        <ng-container *ngTemplateOutlet="footerTemplate()"></ng-container>
+      </div>
+    }
+  </div>
+}

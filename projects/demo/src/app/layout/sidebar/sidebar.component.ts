@@ -168,6 +168,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/autocomplete',
         },
+        {
+          label: 'CascadeSelect',
+          icon: 'pi pi-circle',
+          route: '/cascade-select',
+        },
       ],
     },
   ]);

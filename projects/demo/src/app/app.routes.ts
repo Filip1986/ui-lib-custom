@@ -143,6 +143,15 @@ export const routes: Routes = [
       ),
     title: 'AutoComplete - UI Components Library',
   },
+  {
+    path: 'cascade-select',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/cascade-select/cascade-select-demo.component').then(
+        (m: { CascadeSelectDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.CascadeSelectDemoComponent
+      ),
+    title: 'CascadeSelect - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

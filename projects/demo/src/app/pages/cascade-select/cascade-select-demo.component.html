@@ -1,0 +1,317 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+	<h1>CascadeSelect</h1>
+	<p class="doc-description">
+	  Hierarchical single-select demos covering templates, states, forms, and visual variants.
+	</p>
+  </div>
+
+  <app-doc-demo-viewport [autoHeight]="true">
+	<div class="examples">
+	  <section id="basic" data-doc-anchor class="example-section">
+		<h3>1. Basic</h3>
+		<app-code-preview [code]="snippet('basic')">
+		  <ui-lib-card>
+			<ui-lib-cascade-select
+			  [(ngModel)]="basicCode"
+			  [options]="countries"
+			  optionGroupLabel="name"
+			  [optionGroupChildren]="['states', 'cities']"
+			  optionLabel="cname"
+			  optionValue="code"
+			  placeholder="Select city"
+			/>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="template" data-doc-anchor class="example-section">
+		<h3>2. Template</h3>
+		<app-code-preview [code]="snippet('template')">
+		  <ui-lib-card>
+			<ui-lib-cascade-select
+			  [(ngModel)]="templatedCode"
+			  [options]="countries"
+			  optionGroupLabel="name"
+			  [optionGroupChildren]="['states', 'cities']"
+			  optionLabel="cname"
+			  optionValue="code"
+			  placeholder="Templated options"
+			>
+			  <ng-template uiCascadeSelectHeader>
+				<strong>Choose location</strong>
+			  </ng-template>
+
+			  <ng-template uiCascadeSelectOption let-option>
+				<span class="option-template">
+				  <i [class]="resolveNodeIcon(option)"></i>
+				  <span>{{ resolveNodeLabel(option) }}</span>
+				</span>
+			  </ng-template>
+
+			  <ng-template uiCascadeSelectValue let-selected>
+				<span class="value-template">{{ resolveNodeLabel(selected) }}</span>
+			  </ng-template>
+
+			  <ng-template uiCascadeSelectDropdownIcon>
+				<span>v</span>
+			  </ng-template>
+
+			  <ng-template uiCascadeSelectOptionGroupIcon>
+				<span>></span>
+			  </ng-template>
+
+			  <ng-template uiCascadeSelectFooter>
+				<small>{{ countries.length }} countries</small>
+			  </ng-template>
+			</ui-lib-cascade-select>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="loading" data-doc-anchor class="example-section">
+		<h3>3. Loading</h3>
+		<app-code-preview [code]="snippet('loading')">
+		  <ui-lib-card>
+			<div class="form-stack">
+			  <ui-lib-button type="button" color="secondary" (click)="toggleLoading()">
+				Toggle Loading ({{ loading ? 'On' : 'Off' }})
+			  </ui-lib-button>
+			  <ui-lib-cascade-select
+				[(ngModel)]="loadingCode"
+				[options]="countries"
+				[loading]="loading"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+			  >
+				<ng-template uiCascadeSelectLoading>
+				  <span>Loading locations...</span>
+				</ng-template>
+			  </ui-lib-cascade-select>
+			</div>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="clear" data-doc-anchor class="example-section">
+		<h3>4. Clear Icon</h3>
+		<app-code-preview [code]="snippet('clear')">
+		  <ui-lib-card>
+			<ui-lib-cascade-select
+			  [(ngModel)]="clearableCode"
+			  [options]="countries"
+			  [showClear]="true"
+			  optionGroupLabel="name"
+			  [optionGroupChildren]="['states', 'cities']"
+			  optionLabel="cname"
+			  optionValue="code"
+			/>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="sizes" data-doc-anchor class="example-section">
+		<h3>5. Sizes</h3>
+		<app-code-preview [code]="snippet('sizes')">
+		  <ui-lib-card>
+			<div class="row-3">
+			  <ui-lib-cascade-select
+				[(ngModel)]="smallCode"
+				[options]="countries"
+				size="sm"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Small"
+			  />
+			  <ui-lib-cascade-select
+				[(ngModel)]="mediumCode"
+				[options]="countries"
+				size="md"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Medium"
+			  />
+			  <ui-lib-cascade-select
+				[(ngModel)]="largeCode"
+				[options]="countries"
+				size="lg"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Large"
+			  />
+			</div>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="filled" data-doc-anchor class="example-section">
+		<h3>6. Filled</h3>
+		<app-code-preview [code]="snippet('filled')">
+		  <ui-lib-card>
+			<ui-lib-cascade-select
+			  [(ngModel)]="filledCode"
+			  [options]="countries"
+			  [filled]="true"
+			  [showClear]="true"
+			  optionGroupLabel="name"
+			  [optionGroupChildren]="['states', 'cities']"
+			  optionLabel="cname"
+			  optionValue="code"
+			  placeholder="Filled variant"
+			/>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="fluid" data-doc-anchor class="example-section">
+		<h3>7. Fluid</h3>
+		<app-code-preview [code]="snippet('fluid')">
+		  <ui-lib-card>
+			<div class="narrow-parent">
+			  <ui-lib-cascade-select
+				[(ngModel)]="fluidCode"
+				[options]="countries"
+				[fluid]="true"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Fluid in container"
+			  />
+			</div>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="states" data-doc-anchor class="example-section">
+		<h3>8. States</h3>
+		<app-code-preview [code]="snippet('states')">
+		  <ui-lib-card>
+			<div class="row-2">
+			  <ui-lib-cascade-select
+				[(ngModel)]="disabledCode"
+				[options]="countries"
+				[disabled]="true"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Disabled"
+			  />
+			  <ui-lib-cascade-select
+				[(ngModel)]="invalidCode"
+				[options]="countries"
+				[invalid]="true"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Invalid"
+			  />
+			</div>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="forms" data-doc-anchor class="example-section">
+		<h3>9. Forms (Template-driven)</h3>
+		<app-code-preview [code]="snippet('forms')">
+		  <ui-lib-card>
+			<form #demoForm="ngForm" (ngSubmit)="submitTemplateDriven()" class="form-stack">
+			  <ui-lib-cascade-select
+				name="city"
+				required
+				[(ngModel)]="templateDrivenCode"
+				#cityModel="ngModel"
+				[invalid]="!!(cityModel.invalid && cityModel.touched)"
+				[options]="countries"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Template-driven city"
+			  />
+			  <ui-lib-button type="submit" color="primary">Validate</ui-lib-button>
+			  @if (!!(cityModel.invalid && cityModel.touched)) {
+				<p class="error-text">City is required.</p>
+			  }
+			</form>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="reactive-forms" data-doc-anchor class="example-section">
+		<h3>10. Reactive Forms</h3>
+		<app-code-preview [code]="snippet('reactive')">
+		  <ui-lib-card>
+			<form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
+			  <ui-lib-cascade-select
+				formControlName="city"
+				[invalid]="cityControl().invalid && cityControl().touched"
+				[options]="countries"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Reactive city"
+			  />
+			  <ui-lib-button type="submit" color="primary">Validate</ui-lib-button>
+			  @if (cityControl().invalid && cityControl().touched) {
+				<p class="error-text">City is required.</p>
+			  }
+			</form>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+
+	  <section id="variants" data-doc-anchor class="example-section">
+		<h3>11. Variants</h3>
+		<app-code-preview [code]="snippet('variants')">
+		  <ui-lib-card>
+			<div class="row-3">
+			  <ui-lib-cascade-select
+				[(ngModel)]="variantModels['material']"
+				[options]="countries"
+				variant="material"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Material"
+			  />
+			  <ui-lib-cascade-select
+				[(ngModel)]="variantModels['bootstrap']"
+				[options]="countries"
+				variant="bootstrap"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Bootstrap"
+			  />
+			  <ui-lib-cascade-select
+				[(ngModel)]="variantModels['minimal']"
+				[options]="countries"
+				variant="minimal"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Minimal"
+			  />
+			</div>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
+	</div>
+  </app-doc-demo-viewport>
+</app-doc-page-layout>
+

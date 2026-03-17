@@ -176,6 +176,17 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### CascadeSelect
+**Files:**
+- [CASCADESELECT_API.md](CASCADESELECT_API.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Source Code](../../projects/ui-lib-custom/src/lib/cascade-select/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -237,6 +248,7 @@ Each component should have two documentation files:
 | Alert | Status alerts | 3 | - | - | ✅ Complete |
 | Dialog | Overlay/modal dialog | 3 | - | - | ✅ Complete |
 | AutoComplete | Typeahead suggestions + chips | 3 | - | 3 | ✅ Complete |
+| CascadeSelect | Hierarchical dropdown tree select | 3 | - | 3 | ✅ Complete |
 
 ---
 

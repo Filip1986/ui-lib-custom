@@ -1,0 +1,358 @@
+:host {
+  display: block;
+}
+
+ui-lib-cascade-select {
+  display: block;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select {
+  --uilib-cascade-select-bg: var(--uilib-input-bg, var(--uilib-surface));
+  --uilib-cascade-select-border: var(--uilib-input-border, var(--uilib-border));
+  --uilib-cascade-select-border-focus: var(
+    --uilib-input-border-focus,
+    var(--uilib-color-primary-600)
+  );
+  --uilib-cascade-select-radius: var(--uilib-input-radius, var(--uilib-shape-base, 0.375rem));
+  --uilib-cascade-select-text: var(--uilib-input-text, var(--uilib-page-fg));
+  --uilib-cascade-select-placeholder: var(--uilib-input-placeholder, var(--uilib-muted));
+
+  --uilib-cascade-select-padding-y-base: 0.5rem;
+  --uilib-cascade-select-padding-x-base: 0.75rem;
+  --uilib-cascade-select-padding-y: calc(
+    var(--uilib-cascade-select-padding-y-base) * var(--uilib-density, 1)
+  );
+  --uilib-cascade-select-padding-x: calc(
+    var(--uilib-cascade-select-padding-x-base) * var(--uilib-density, 1)
+  );
+  --uilib-cascade-select-min-height: var(--uilib-input-min-height, 2.75rem);
+
+  --uilib-cascade-select-panel-bg: var(--uilib-select-dropdown-bg, var(--uilib-surface));
+  --uilib-cascade-select-panel-border: var(--uilib-cascade-select-border);
+  --uilib-cascade-select-panel-shadow: var(
+    --uilib-select-dropdown-shadow,
+    var(--uilib-shadow-md, none)
+  );
+  --uilib-cascade-select-panel-min-width: 12.5rem;
+  --uilib-cascade-select-panel-max-height: 16.25rem;
+
+  --uilib-cascade-select-option-padding: 0.55rem 0.75rem;
+  --uilib-cascade-select-option-hover-bg: var(
+    --uilib-select-option-hover,
+    color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent)
+  );
+  --uilib-cascade-select-option-selected-bg: color-mix(
+    in srgb,
+    var(--uilib-color-primary-600) 14%,
+    transparent
+  );
+  --uilib-cascade-select-option-disabled-opacity: 0.55;
+
+  --uilib-cascade-select-submenu-icon-size: 0.75rem;
+  --uilib-cascade-select-submenu-gap: 0;
+
+  --uilib-cascade-select-transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  --uilib-cascade-select-loading-size: 1rem;
+
+  position: relative;
+  color: var(--uilib-cascade-select-text);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__trigger {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: var(--uilib-cascade-select-min-height);
+  padding: var(--uilib-cascade-select-padding-y) var(--uilib-cascade-select-padding-x);
+  border: 1px solid var(--uilib-cascade-select-border);
+  border-radius: var(--uilib-cascade-select-radius);
+  background: var(--uilib-cascade-select-bg);
+  color: inherit;
+  cursor: pointer;
+  transition: var(--uilib-cascade-select-transition);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__trigger:focus-visible {
+  outline: none;
+  border-color: var(--uilib-cascade-select-border-focus);
+  box-shadow: 0 0 0 0.1875rem
+    color-mix(in srgb, var(--uilib-cascade-select-border-focus) 22%, transparent);
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--open .ui-lib-cascade-select__trigger {
+  border-color: var(--uilib-cascade-select-border-focus);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__value {
+  min-height: 1.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__value--placeholder {
+  color: var(--uilib-cascade-select-placeholder);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__clear {
+  border: none;
+  background: transparent;
+  color: var(--uilib-cascade-select-placeholder);
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 999rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__clear:hover {
+  background: color-mix(in srgb, var(--uilib-color-primary-600) 12%, transparent);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__dropdown-icon {
+  color: var(--uilib-cascade-select-placeholder);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1rem;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__panel {
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 12;
+  min-width: max(100%, var(--uilib-cascade-select-panel-min-width));
+  border: 1px solid var(--uilib-cascade-select-panel-border);
+  border-radius: var(--uilib-cascade-select-radius);
+  background: var(--uilib-cascade-select-panel-bg);
+  box-shadow: var(--uilib-cascade-select-panel-shadow);
+  overflow: hidden;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__header,
+ui-lib-cascade-select .ui-lib-cascade-select__footer,
+ui-lib-cascade-select .ui-lib-cascade-select__loading {
+  padding: var(--uilib-cascade-select-option-padding);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--uilib-cascade-select-placeholder);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__loading::before {
+  content: '';
+  width: var(--uilib-cascade-select-loading-size);
+  height: var(--uilib-cascade-select-loading-size);
+  border: 0.125rem solid var(--uilib-cascade-select-placeholder);
+  border-top-color: transparent;
+  border-radius: 999rem;
+  animation: uilib-cascade-select-spin 0.8s linear infinite;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__columns {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  gap: var(--uilib-cascade-select-submenu-gap);
+  width: auto;
+  min-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior: contain;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__level {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: var(--uilib-cascade-select-panel-min-width);
+  max-height: var(--uilib-cascade-select-panel-max-height);
+  overflow: auto;
+  border-inline-end: 1px solid
+    color-mix(in srgb, var(--uilib-cascade-select-panel-border) 60%, transparent);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__level:last-child {
+  border-inline-end: none;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__option {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: var(--uilib-cascade-select-option-padding);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__option:hover {
+  background: var(--uilib-cascade-select-option-hover-bg);
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__option--active {
+  background: var(--uilib-cascade-select-option-hover-bg);
+  outline: 0.125rem solid
+    color-mix(in srgb, var(--uilib-cascade-select-border-focus) 35%, transparent);
+  outline-offset: -0.125rem;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__option--selected {
+  background: var(--uilib-cascade-select-option-selected-bg);
+  font-weight: 600;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__option--disabled {
+  opacity: var(--uilib-cascade-select-option-disabled-opacity);
+  cursor: not-allowed;
+}
+
+ui-lib-cascade-select .ui-lib-cascade-select__option-group-icon {
+  font-size: var(--uilib-cascade-select-submenu-icon-size);
+  color: var(--uilib-cascade-select-placeholder);
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--filled {
+  --uilib-cascade-select-bg: color-mix(
+    in srgb,
+    var(--uilib-input-bg, var(--uilib-surface)) 88%,
+    var(--uilib-input-border, var(--uilib-border))
+  );
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--invalid .ui-lib-cascade-select__trigger,
+ui-lib-cascade-select.ng-invalid.ng-touched .ui-lib-cascade-select__trigger,
+ui-lib-cascade-select.ng-invalid.ng-dirty .ui-lib-cascade-select__trigger {
+  border-color: var(--uilib-input-error, var(--uilib-color-danger-600));
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--disabled {
+  opacity: 0.62;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--disabled .ui-lib-cascade-select__trigger {
+  cursor: not-allowed;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--disabled .ui-lib-cascade-select__panel {
+  pointer-events: none;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--loading .ui-lib-cascade-select__trigger {
+  cursor: progress;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--fluid,
+ui-lib-cascade-select.ui-lib-cascade-select--fluid .ui-lib-cascade-select__trigger {
+  width: 100%;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--size-sm {
+  --uilib-cascade-select-padding-y-base: 0.35rem;
+  --uilib-cascade-select-padding-x-base: 0.5rem;
+  --uilib-cascade-select-min-height: 2.25rem;
+  --uilib-cascade-select-option-padding: 0.4rem 0.6rem;
+  font-size: 0.875rem;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--size-md {
+  --uilib-cascade-select-padding-y-base: 0.5rem;
+  --uilib-cascade-select-padding-x-base: 0.75rem;
+  --uilib-cascade-select-min-height: 2.75rem;
+  --uilib-cascade-select-option-padding: 0.55rem 0.75rem;
+  font-size: 1rem;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--size-lg {
+  --uilib-cascade-select-padding-y-base: 0.65rem;
+  --uilib-cascade-select-padding-x-base: 0.9rem;
+  --uilib-cascade-select-min-height: 3.25rem;
+  --uilib-cascade-select-option-padding: 0.65rem 0.9rem;
+  font-size: 1.125rem;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--material {
+  --uilib-cascade-select-radius: 0;
+  --uilib-cascade-select-border: transparent;
+  --uilib-cascade-select-border-focus: var(--uilib-color-primary-700);
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--material .ui-lib-cascade-select__trigger {
+  border: none;
+  border-bottom: 0.125rem solid var(--uilib-input-border, var(--uilib-border));
+  border-radius: 0;
+  padding-inline: 0;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--material .ui-lib-cascade-select__trigger:focus-visible,
+ui-lib-cascade-select.ui-lib-cascade-select--material.ui-lib-cascade-select--open
+  .ui-lib-cascade-select__trigger {
+  border-bottom-color: var(--uilib-cascade-select-border-focus);
+  box-shadow: none;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--bootstrap {
+  --uilib-cascade-select-radius: var(--uilib-shape-base, 0.375rem);
+  --uilib-cascade-select-panel-shadow: var(--uilib-shadow-sm, var(--uilib-shadow-md, none));
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--bootstrap .ui-lib-cascade-select__trigger {
+  border-width: 0.0625rem;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--minimal {
+  --uilib-cascade-select-bg: transparent;
+  --uilib-cascade-select-border: color-mix(in srgb, var(--uilib-border) 70%, transparent);
+  --uilib-cascade-select-panel-shadow: none;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--minimal .ui-lib-cascade-select__trigger {
+  border-style: dashed;
+}
+
+ui-lib-cascade-select.ui-lib-cascade-select--minimal .ui-lib-cascade-select__option:hover,
+ui-lib-cascade-select.ui-lib-cascade-select--minimal .ui-lib-cascade-select__option--active {
+  background: color-mix(in srgb, var(--uilib-color-primary-600) 6%, transparent);
+}
+
+@media (max-width: 48rem) {
+  ui-lib-cascade-select .ui-lib-cascade-select__panel {
+    min-width: 100%;
+  }
+
+  ui-lib-cascade-select .ui-lib-cascade-select__columns {
+    flex-direction: column;
+    max-height: 22rem;
+    overflow: auto;
+  }
+
+  ui-lib-cascade-select .ui-lib-cascade-select__level {
+    min-width: 100%;
+    max-height: none;
+    border-inline-end: none;
+    border-block-end: 1px solid
+      color-mix(in srgb, var(--uilib-cascade-select-panel-border) 60%, transparent);
+  }
+
+  ui-lib-cascade-select .ui-lib-cascade-select__level:last-child {
+    border-block-end: none;
+  }
+}
+
+@keyframes uilib-cascade-select-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

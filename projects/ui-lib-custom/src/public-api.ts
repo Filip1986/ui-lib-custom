@@ -56,6 +56,9 @@ export * from './lib/alert/alert';
 // AutoComplete
 export * from './lib/autocomplete/index';
 
+// CascadeSelect
+export * from './lib/cascade-select';
+
 // Dialog (backward compatibility re-export)
 export { DialogComponent } from './lib/dialog/dialog.component';
 export type { DialogPosition, DialogVariant } from './lib/dialog/dialog.types';

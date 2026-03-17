@@ -41,6 +41,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Input           | ✅ Bulletproof  | `ui-lib-custom/input`            | ❌ Missing         | Needs API + implementation docs                    |
 | Select          | ✅ Bulletproof  | `ui-lib-custom/select`           | ❌ Missing         | Needs API + implementation docs                    |
 | AutoComplete    | ✅ Complete     | `ui-lib-custom/autocomplete`     | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
+| CascadeSelect   | ✅ Complete     | `ui-lib-custom/cascade-select`   | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
 | Checkbox        | ✅ Bulletproof  | `ui-lib-custom/checkbox`         | ⚠️ API only       | Needs implementation doc                           |
 | SelectButton    | ✅ Bulletproof  | `ui-lib-custom/select-button`    | ✅ Complete        | Optional: consolidate supplemental API/Research    |
 | Icon            | ✅ Bulletproof  | `ui-lib-custom/icon`             | ⚠️ API only       | Needs implementation doc                           |
@@ -49,7 +50,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Alert           | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ Partial        |                                                    |
 | ThemeEditor     | ✅ Working      | `ui-lib-custom/theme`            | ✅ README          | Demo sidebar, not a consumer component             |
 
-**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, select-button, core, card, checkbox, select, autocomplete, icon, layout, theme, tokens  
+**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, select-button, core, card, checkbox, select, autocomplete, cascade-select, icon, layout, theme, tokens  
 **Secondary entry points pending:** icon-button, alert
 
 ---
@@ -191,122 +192,40 @@ These are the most common sources of mistakes. Verify every output against this 
 *(Paste agent handoff note here at the end of each session)*
 
 ```
-Date: 2026-03-16
-Changed: docs/architecture/DIALOG_TOKENS.md, AI_AGENT_CONTEXT.md
-State: Completed Dialog design token audit and specification; identified reusable global/component tokens, defined `--uilib-dialog-*` and shared `--uilib-overlay-*` defaults across Material/Bootstrap/Minimal, and documented fallback hierarchy plus global-vs-component token placement.
-Next step: Implement Phase 2 token plumbing in `design-tokens.ts`/theme CSS vars and scaffold `ui-lib-dialog` styles to consume the new token contract.
-```
-```
-Date: 2026-03-16
-Changed: docs/architecture/DIALOG_RESEARCH.md, AI_AGENT_CONTEXT.md
-State: Completed Dialog Phase 1 research and gap analysis; mapped PrimeNG dialog features to P0/P1/P2, documented missing overlay infrastructure (backdrop/scroll lock/focus trap/z-index/breakpoints), analyzed dependencies/conflicts, and captured SSR/CDK tradeoffs with mitigations.
-Next step: Start Phase 2 by scaffolding a minimal `ui-lib-dialog` with P0 visibility/modal/header-footer/escape/ARIA plus internal overlay foundation utilities.
-```
-```
-Date: 2026-03-13
-Changed: LIBRARY_CONVENTIONS.md, AI_AGENT_CONTEXT.md
-State: Reorganized conventions into Active Conventions vs Historical Migration Notes; split anti-patterns into active vs resolved; reordered context checks so active checks come first and historical checks are explicitly lower priority. Follow-up pass added consistent `[Historical]` prefixes for quick scanning.
-Next step: Spot-check docs that reference old checklist ordering and update links/wording if needed.
-```
-```
-Date: 2026-03-06
-Changed: docs/DOC_STATUS.md, docs/README.md, docs/architecture/archive/DOCUMENTATION_AUDIT.md
-State: Added living documentation status tracker, linked from docs index, archived the static audit.
-Next step: Review DOC_STATUS rows when docs change; no further action required.
-```
-```
-Date: 2026-03-16
-Changed: docs/architecture/DIALOG_API_DESIGN.md, AI_AGENT_CONTEXT.md
-State: Completed Dialog Phase 2.1 API and architecture design spec, including full signal input/output contract, content projection API, type definitions, host-first rendering strategy, internal module layout, and PrimeNG divergence rationale.
-Next step: Review and approve `DIALOG_API_DESIGN.md`, then scaffold `ui-lib-dialog` component/types/constants/animations with the documented API contract.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/dialog/*, projects/ui-lib-custom/dialog/ng-package.json, AI_AGENT_CONTEXT.md
-State: Scaffolded Dialog secondary entry point and source structure (component/types/constants/animations/spec/barrel) without implementation logic; verified `ng build ui-lib-custom` succeeds and emits `ui-lib-custom/dialog` artifacts in dist.
-Next step: Implement Dialog v1 behavior and template per `docs/architecture/DIALOG_API_DESIGN.md` (inputs/outputs, projection slots, modal/backdrop, Escape handling, and token-driven styles).
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/dialog/dialog.component.ts, projects/ui-lib-custom/src/lib/dialog/dialog.component.html, projects/ui-lib-custom/src/lib/dialog/dialog.component.scss, AI_AGENT_CONTEXT.md
-State: Implemented Dialog core behavior (signals API, backdrop/headless/default template rendering, Escape close, dismissable mask, scroll lock with SSR guards, position class mapping, responsive breakpoint matchMedia listeners, unique aria title ids, computed panel classes/styles) and verified `ng build ui-lib-custom` succeeds including `ui-lib-custom/dialog`.
-Next step: Align Dialog outputs naming with final API decision (`show/hide/maximize` vs `onShow/onHide/onMaximize`) and implement animation trigger wiring plus focused unit/a11y tests.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/core/a11y/focus-trap.ts, projects/ui-lib-custom/src/lib/core/a11y/focus-trap.spec.ts, projects/ui-lib-custom/src/lib/core/index.ts, projects/ui-lib-custom/src/lib/dialog/dialog.component.ts, projects/ui-lib-custom/src/lib/dialog/dialog.component.html, AI_AGENT_CONTEXT.md
-State: Implemented reusable core `FocusTrap` utility with SSR-safe activation/deactivation and focus restore; integrated trap lifecycle into Dialog (activate when `visible && modal`, deactivate on close/non-modal/destroy), added scoped Escape stopPropagation behavior, and exported FocusTrap from core barrel. Verified focused tests and full library build pass.
-Next step: Add dialog-specific keyboard/focus integration tests (including modal visibility transitions + Escape close) and wire dialog animation hooks for accurate show/hide timing.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/dialog/dialog-animations.ts, projects/ui-lib-custom/src/lib/dialog/dialog.component.ts, projects/ui-lib-custom/src/lib/dialog/dialog.component.html, docs/architecture/DIALOG_API_DESIGN.md, package.json, projects/ui-lib-custom/package.json, AI_AGENT_CONTEXT.md
-State: Implemented responsive breakpoint evaluation update (descending max-width match, SSR largest-breakpoint fallback, cleanup on close), added variant-aware Angular dialog/backdrop animation triggers with reduced-motion support, and wired panel animation done callbacks to `show`/`hide` lifecycle outputs. Added documentation note for `provideAnimations()`/`BrowserAnimationsModule` and updated Angular animations dependency metadata.
-Next step: Run `ng serve demo` for a manual visual pass of Material/Bootstrap/Minimal dialog motion profiles and then add dialog animation + breakpoint behavior assertions to `dialog.component.spec.ts`.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/dialog/dialog.component.scss, projects/ui-lib-custom/src/lib/themes/themes.scss, projects/ui-lib-custom/src/lib/styles/dark-theme.scss, AI_AGENT_CONTEXT.md
-State: Implemented Dialog variant styling (Material/Bootstrap/Minimal) using token-driven CSS, completed structural style pass for backdrop/panel/header/content/footer/maximized + position aliases, and added dialog dark-mode mixin integration through global dark-theme includes. Added shared dialog/backdrop token defaults to `themes.scss` for light/dark contexts.
-Next step: Run manual demo visual QA for all 9 positions and 3 variants in `ng serve demo`, then extend `dialog.component.spec.ts` with class/token assertions for variant and maximized states.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/dialog/dialog.component.spec.ts, AI_AGENT_CONTEXT.md
-State: Replaced the placeholder Dialog spec with a comprehensive 44-test suite covering creation/defaults, visibility and outputs, close paths, projection modes, 9 positions, maximize/drag behavior, accessibility attributes, and edge-case cleanup. Added robust Jest-safe stubs for `matchMedia`/pointer events and adapted modal assertions to avoid the current Angular `afterNextRender()` injection-context runtime limitation while still validating modal state and scroll-lock behavior. Verified with `npm.cmd test -- dialog.component.spec.ts` (all tests passing).
-Next step: Run the broader library test pass (`npm.cmd test`) to ensure no cross-suite regressions, then decide whether to address the underlying `afterNextRender()` modal runtime issue in `dialog.component.ts` or keep it as a known test-environment caveat.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/dialog/dialog.a11y.spec.ts, AI_AGENT_CONTEXT.md
-State: Added dedicated Dialog accessibility suite (`dialog.a11y.spec.ts`) with 20 passing tests covering axe scans, focus management, screen-reader attributes, keyboard interactions, and explicit rationale for the intentional `color-contrast` axe rule skip. Reused project a11y utilities (`checkA11y`, `SKIP_COLOR_CONTRAST_RULES`) and added Jest-safe `matchMedia` stubbing plus deterministic focus-trap activation in tests.
-Next step: Reconcile modal-path assertions with the runtime `afterNextRender()` injection-context limitation in Dialog so modal DOM-level a11y checks can run without test-side emulation.
-```
-```
-Date: 2026-03-16
-Changed: docs/reference/components/DIALOG.md, docs/README.md, AI_AGENT_CONTEXT.md
-State: Added complete consumer-facing Dialog API documentation with source-aligned inputs/outputs, projection slots, headless mode, all 9 positions, responsive breakpoints, maximizable/draggable/non-modal examples, accessibility guidance, design token table, and variant comparison. Updated top-level docs index to include Dialog component reference.
-Next step: Add Dialog entry to `docs/reference/components/README.md` quick-reference table for consistency with the top-level index.
-```
-```
-Date: 2026-03-16
-Changed: docs/implementation/DIALOG_IMPLEMENTATION.md, docs/architecture/DIALOG_RESEARCH.md, docs/architecture/DIALOG_API_DESIGN.md, AI_AGENT_CONTEXT.md
-State: Added maintainer-focused Dialog implementation documentation with explicit file-path mapping, lifecycle/data-flow notes, and rationale for overlay/focus/scroll/drag/breakpoint/animation decisions. Marked research and API design docs as design-phase artifacts and redirected readers to implementation doc as current source of truth.
-Next step: Optionally add a short link to `docs/implementation/DIALOG_IMPLEMENTATION.md` from `docs/README.md` and/or `docs/reference/components/README.md` for easier discoverability.
-```
-```
-Date: 2026-03-16
-Changed: docs/README.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
-State: Added discoverability links to `docs/implementation/DIALOG_IMPLEMENTATION.md` from both top-level docs index and component reference index, including a new Dialog entry in the component index quick-reference table.
-Next step: Optional consistency pass to add implementation links for other components where maintainer docs exist outside `docs/reference/components/`.
-```
-```
-Date: 2026-03-16
-Changed: projects/demo/src/app/pages/dialog/dialog.component.ts, projects/demo/src/app/pages/dialog/dialog.component.html, projects/demo/src/app/pages/dialog/dialog.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md
-State: Added a full Dialog demo page at route `/dialog` with 10 sections (basic, custom header/footer, position grid, maximizable, long content, non-modal, responsive, draggable, headless, variant switcher), all using `ui-lib-button` triggers with `aria-expanded` and `aria-controls`. Wired lazy-loaded route and sidebar navigation entry, then verified with `npm run build:demo` (success; existing unrelated warning: button SCSS budget over by 834 bytes).
-Next step: Run `npm run serve:demo` and do a manual visual pass for interaction polish (drag feel, maximized transitions, headless styling) across all 3 variants.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/public-api.ts, docs/DOC_STATUS.md, projects/demo/src/app/pages/dialog/dialog.component.ts, projects/demo/src/app/pages/dialog/dialog.component.html, projects/demo/src/app/pages/dialog/dialog.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md
-State: Completed Dialog v1 verification pass: library build succeeds and emits `dist/ui-lib-custom/dialog`; full Jest suite passes (including dialog unit + a11y tests); dialog lint passes; demo page shipped at `/dialog` with all required sections and accessible trigger wiring; docs status tracker updated; primary barrel now re-exports `DialogComponent` and Dialog types for backward compatibility. FocusTrap utility remains in `core/a11y` as reusable overlay infrastructure for future components.
-Next step: Run manual `serve:demo` visual QA checklist (positions, drag/maximize, responsive, variant polish) and track any UI refinements separately from this verification baseline.
-```
-```
-Date: 2026-03-16
-Changed: projects/ui-lib-custom/src/lib/dialog/dialog.component.ts, projects/ui-lib-custom/src/lib/dialog/dialog.component.html, projects/ui-lib-custom/src/lib/dialog/dialog.component.scss, projects/ui-lib-custom/src/lib/dialog/dialog-animations.ts, projects/ui-lib-custom/src/lib/dialog/dialog.component.spec.ts, projects/ui-lib-custom/src/lib/dialog/dialog.a11y.spec.ts, projects/ui-lib-custom/package.json, package.json, docs/architecture/DIALOG_API_DESIGN.md, docs/implementation/DIALOG_IMPLEMENTATION.md, docs/guides/INTEGRATION_EXAMPLE.md, AI_AGENT_CONTEXT.md
-State: Removed deprecated Angular animation API usage from Dialog and migrated to CSS-based motion with variant-aware host-bound motion variables (`dialogMotion`, `backdropMotion`). Removed `@angular/animations` imports from Dialog code/tests, dropped no-op animation test providers, and removed `@angular/animations` from root dependencies and library peerDependencies. Verified with `npm test -- dialog.component.spec.ts dialog.a11y.spec.ts`, `npm exec -- eslint projects/ui-lib-custom/src/lib/dialog/`, and `npm run build -- ui-lib-custom`.
-Next step: Run full library regression test pass (`npm test -- --watch=false`) and then do a manual demo visual check for Dialog motion polish across variants.
+Date: 2026-03-17
+Changed: projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss, AI_AGENT_CONTEXT.md
+State: Completed Prompt 5 CascadeSelect styling and tokenization pass. Added full `--uilib-cascade-select-*` CSS custom property surface, host/trigger/panel/option/submenu styling, size variants (`sm`/`md`/`lg`), visual variants (Material/Bootstrap/Minimal), and state treatments (`filled`, `invalid`, `disabled`, `loading`, `fluid`, `open`) with color-mix based overlays and responsive narrow-viewport submenu stacking.
+Next step: Run `ng serve demo` and perform visual QA for CascadeSelect interaction polish across variants/sizes/states, then tune spacing/contrast tokens if any UX issues appear.
 ```
 ```
 Date: 2026-03-17
-Changed: docs/reference/components/AUTOCOMPLETE_API.md, docs/reference/components/README.md, projects/demo/src/app/pages/autocomplete/autocomplete-demo.component.ts, projects/demo/src/app/pages/autocomplete/autocomplete-demo.component.html, projects/demo/src/app/pages/autocomplete/autocomplete-demo.component.scss, projects/demo/src/app/pages/autocomplete/autocomplete-demo.data.ts, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 7 docs + demo delivery for AutoComplete. Added full API reference with implementation-aligned inputs/outputs/template-slot directives/CSS vars and broad usage examples, built a dedicated demo page with 14 sections (basic, objects, dropdown, force selection, multiple, advanced chips, grouped, virtual scroll 10k data, templates, sizes, filled, states, forms, variants), added reusable demo datasets, wired lazy route `/autocomplete`, and added sidebar navigation entry.
-Next step: Run `ng serve demo` for manual UX verification of all sections (especially grouped + virtual interactions and template slot rendering), then capture screenshots for docs if needed.
+Changed: projects/ui-lib-custom/src/lib/cascade-select/cascade-select.spec.ts, projects/ui-lib-custom/src/lib/cascade-select/cascade-select.a11y.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Prompt 6 CascadeSelect testing stabilization. Unit and a11y suites are now passing for the CascadeSelect slice, including rendering, selection, keyboard navigation, CVA/forms, state handling, template slots, ARIA semantics, and axe checks. Also fixed a lingering lint warning in the unit spec by removing an unnecessary conditional expression in active-option text matching.
+Verification:
+- `npm.cmd exec -- eslint projects/ui-lib-custom/src/lib/cascade-select/`
+- `npm.cmd test -- --testPathPatterns="cascade-select"`
+Result: PASS (2 suites, 38 tests), no CascadeSelect ESLint warnings/errors.
+Next step: Optionally run full library test sweep and build (`npm.cmd test`, `ng.cmd build ui-lib-custom`) before commit to guard against cross-component regressions.
 ```
 ```
 Date: 2026-03-17
-Changed: projects/ui-lib-custom/autocomplete/ng-package.json, projects/ui-lib-custom/autocomplete/package.json, projects/ui-lib-custom/src/lib/autocomplete/index.ts, projects/ui-lib-custom/src/public-api.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 8 secondary entry point alignment and verification pass for AutoComplete. Confirmed minimal entry point folder (`ng-package.json` + `package.json`), updated autocomplete barrel to explicit `AutoComplete` alias export with typed API surface + template directives, added primary `public-api.ts` re-export, and verified no disallowed cross-entry relative imports in autocomplete sources. Build/test commands were executed (`ng build ui-lib-custom`, `npm test -- --include='**/autocomplete/*.spec.ts`) with no reported terminal errors in this environment.
-Next step: Run manual demo verification (`ng serve demo` -> `/autocomplete`) and accessibility QA checklist (screen reader + keyboard-only traversal + focus management) to close non-automated checks.
+Changed: docs/reference/components/CASCADESELECT_API.md, docs/reference/components/README.md, projects/demo/src/app/pages/cascade-select/cascade-select-demo.component.ts, projects/demo/src/app/pages/cascade-select/cascade-select-demo.component.html, projects/demo/src/app/pages/cascade-select/cascade-select-demo.component.scss, projects/demo/src/app/pages/cascade-select/cascade-select-demo.data.ts, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md
+State: Completed Prompt 7 CascadeSelect docs and demo integration. Added full API reference doc (inputs/outputs/slots/types/examples/forms/css vars/accessibility), created a new CascadeSelect demo page with 11 sections (basic, template, loading, clear, sizes, filled, fluid, states, template-driven form, reactive form, variants), added lazy route `/cascade-select`, and added sidebar navigation entry under Form.
+Verification:
+- `npm.cmd exec -- eslint projects/demo/src/app/pages/cascade-select/ projects/demo/src/app/app.routes.ts projects/demo/src/app/layout/sidebar/sidebar.component.ts`
+- `ng.cmd build demo`
+Result: PASS. ESLint clean for touched demo/router/sidebar files. Demo build succeeds and includes lazy chunk `cascade-select-demo-component`.
+Next step: Run `ng.cmd serve demo` and do a quick visual/interaction pass on `/cascade-select`, especially template slots and form validation messaging.
+```
+```
+Date: 2026-03-17
+Changed: projects/ui-lib-custom/src/lib/cascade-select/index.ts, projects/ui-lib-custom/src/lib/cascade-select/, projects/ui-lib-custom/cascade-select/ng-package.json, projects/ui-lib-custom/cascade-select/package.json, projects/ui-lib-custom/src/public-api.ts, AI_AGENT_CONTEXT.md
+State: Completed Prompt 8 entry-point verification and final QA pass for CascadeSelect. Confirmed secondary entry manifest wiring (`entryFile` -> `../src/lib/cascade-select/index.ts`), minimal entry package name, no `public-api.ts`, and no `src/` folder in entry root. Confirmed primary barrel re-export and added constants re-export in CascadeSelect `index.ts`.
+Verification:
+- `ng.cmd build ui-lib-custom`
+- `npm.cmd test -- --testPathPatterns="cascade-select"`
+- `npm.cmd exec -- eslint projects/ui-lib-custom/src/lib/cascade-select/`
+- `curl -I http://localhost:4300/` after `ng.cmd serve demo --no-open --port 4300`
+Result: PASS for build, targeted tests (2 suites/38 tests), and CascadeSelect lint. Demo dev server reachable (HTTP 200) on alternate port. Manual browser walkthrough for `/cascade-select` interaction/keyboard/form UX remains a human QA step.
+Next step: Perform manual in-browser checklist on `/cascade-select` (all sections rendering, keyboard traversal, form validation messaging) and then finalize commit/tag.
 ```
