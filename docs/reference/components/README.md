@@ -15,7 +15,7 @@ Individual component documentation with complete API references and implementati
 
 **Quick Links:**
 - [Live Demo](http://localhost:4200/badges)
-- [Source Code](../../projects/ui-lib-custom/src/lib/badge/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/badge/)
 
 ---
 
@@ -28,7 +28,7 @@ Individual component documentation with complete API references and implementati
 
 **Quick Links:**
 - [Live Demo](http://localhost:4200/accordion)
-- [Source Code](../../projects/ui-lib-custom/src/lib/accordion/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/accordion/)
 
 ---
 
@@ -41,7 +41,7 @@ Individual component documentation with complete API references and implementati
 
 **Quick Links:**
 - [Live Demo](http://localhost:4200/buttons)
-- [Source Code](../../projects/ui-lib-custom/src/lib/button/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/button/)
 
 ---
 
@@ -54,43 +54,42 @@ Individual component documentation with complete API references and implementati
 
 **Quick Links:**
 - [Live Demo](http://localhost:4200/cards)
-- [Source Code](../../projects/ui-lib-custom/src/lib/card/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/card/)
 
 ---
 
 ### Checkbox
 **Files:**
 - [CHECKBOX.md](CHECKBOX.md) - API reference and usage guide
-- _Implementation doc pending_
+- [CHECKBOX_IMPLEMENTATION.md](CHECKBOX_IMPLEMENTATION.md) - Implementation details and architecture
 
-**Status:** ⚠️ API only
+**Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/checkbox/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/checkbox/)
 
 ---
 
 ### Icon
 **Files:**
 - [ICON.md](ICON.md) - API reference and usage guide
-- _Implementation doc pending_
+- [ICON_IMPLEMENTATION.md](ICON_IMPLEMENTATION.md) - Implementation details and architecture
 
-**Status:** ⚠️ API only
+**Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/icon/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/icon/)
 
 ---
 
 ### Icon Button
 **Files:**
-- [ICON_BUTTON.md](ICON_BUTTON.md) - API reference and usage guide
-- _Implementation doc pending_
+- [ICON_BUTTON.md](ICON_BUTTON.md) - API reference and implementation notes
 
-**Status:** ⚠️ API only
+**Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/icon-button/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/icon-button/)
 
 ---
 
@@ -103,7 +102,7 @@ Individual component documentation with complete API references and implementati
 
 **Quick Links:**
 - [Live Demo](http://localhost:4200/inputs)
-- [Source Code](../../projects/ui-lib-custom/src/lib/input/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/input/)
 
 ---
 
@@ -114,7 +113,7 @@ Individual component documentation with complete API references and implementati
 **Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/select/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/select/)
 
 ---
 
@@ -127,7 +126,7 @@ Individual component documentation with complete API references and implementati
 
 **Quick Links:**
 - [Live Demo](http://localhost:4200/select-buttons)
-- [Source Code](../../projects/ui-lib-custom/src/lib/select-button/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/select-button/)
 
 ---
 
@@ -139,7 +138,7 @@ Individual component documentation with complete API references and implementati
 **Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/tabs/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/tabs/)
 
 ---
 
@@ -150,7 +149,7 @@ Individual component documentation with complete API references and implementati
 **Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/alert/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/alert/)
 
 ---
 
@@ -161,7 +160,7 @@ Individual component documentation with complete API references and implementati
 **Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/layout/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/layout/)
 
 ---
 
@@ -172,7 +171,7 @@ Individual component documentation with complete API references and implementati
 **Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/autocomplete/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/autocomplete/)
 
 ---
 
@@ -183,7 +182,7 @@ Individual component documentation with complete API references and implementati
 **Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/cascade-select/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/cascade-select/)
 
 ---
 
@@ -195,7 +194,7 @@ Individual component documentation with complete API references and implementati
 **Status:** ✅ Complete
 
 **Quick Links:**
-- [Source Code](../../projects/ui-lib-custom/src/lib/dialog/)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/dialog/)
 
 ---
 
@@ -238,9 +237,9 @@ Each component should have two documentation files:
 | Card | Content container | 3 | - | - | ✅ Complete |
 | Accordion | Expandable panels | 3 | - | 3 | ✅ Complete |
 | SelectButton | Segmented selection control | 3 | - | 3 | ✅ Complete |
-| Checkbox | Form control | 3 | - | 3 | ⚠️ API only |
-| Icon | Icon rendering | - | - | 6 | ⚠️ API only |
-| Icon Button | Icon-only button | 3 | 5 | 3 | ⚠️ API only |
+| Checkbox | Form control (binary + group modes) | 3 | - | 3 | ✅ Complete |
+| Icon | Icon rendering | - | - | 6 | ✅ Complete |
+| Icon Button | Icon-only button | 3 | 5 | 3 | ✅ Complete |
 | Input | Form control | 3 | - | - | ✅ Complete |
 | Select | Dropdown select | 3 | - | - | ✅ Complete |
 | Tabs | Navigation | 3 | - | - | ✅ Complete |

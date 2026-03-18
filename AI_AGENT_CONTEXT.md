@@ -42,7 +42,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Select          | ✅ Bulletproof  | `ui-lib-custom/select`           | ❌ Missing         | Needs API + implementation docs                    |
 | AutoComplete    | ✅ Complete     | `ui-lib-custom/autocomplete`     | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
 | CascadeSelect   | ✅ Complete     | `ui-lib-custom/cascade-select`   | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
-| Checkbox        | ✅ Bulletproof  | `ui-lib-custom/checkbox`         | ⚠️ API only       | Needs implementation doc                           |
+| Checkbox        | ✅ Bulletproof  | `ui-lib-custom/checkbox`         | ✅ Complete        | API + implementation docs added                    |
 | SelectButton    | ✅ Bulletproof  | `ui-lib-custom/select-button`    | ✅ Complete        | Optional: consolidate supplemental API/Research    |
 | Icon            | ✅ Bulletproof  | `ui-lib-custom/icon`             | ⚠️ API only       | Needs implementation doc                           |
 | IconButton      | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ API only       | Needs implementation doc                           |
@@ -154,6 +154,24 @@ These are the most common sources of mistakes. Verify every output against this 
    ```
 3. Add to `typesVersions` in `projects/ui-lib-custom/package.json`
 4. Do **not** re-export the secondary entry point from the primary barrel
+      ```
+      Date: 2026-03-18
+      Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+      State: Completed Phase 1 checkbox group/multi-value mode support. Added `value` and `binary` signal inputs, auto mode detection (`binary === true` or `value === null` -> binary mode), null-safe array normalization in group mode, and CVA toggle/write logic for boolean vs array models.
+      Verification:
+      - `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+      Result: PASS (1 suite, 22 tests) including new group-mode CVA tests for array add/remove and null/undefined model handling.
+      Next step: Implement remaining PrimeNG parity inputs/outputs/templates (readonly, trueValue/falseValue, onChange/onFocus/onBlur, custom icon template) and extend docs/spec coverage.
+      ```
+            ```
+            Date: 2026-03-18
+            Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.html, projects/ui-lib-custom/src/lib/checkbox/checkbox.scss, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+            State: Completed Phase 2 missing core input pass for Checkbox. Added signal inputs `inputId`, `name`, `required`, `readonly`, and `tabindex`; added host ARIA bindings (`aria-required`, `aria-readonly`); added hidden native checkbox for id/name/required wiring and label-for association; and enforced readonly as non-mutating while keeping keyboard/focus behavior.
+            Verification:
+            - `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+            Result: PASS (1 suite, 25 tests), including new tests for native input attributes, tabindex behavior, and readonly interaction guard.
+            Next step: Implement remaining PrimeNG checkbox parity items (trueValue/falseValue, onChange/onFocus/onBlur outputs, icon template support, and invalid/formControl bridging).
+            ```
 5. Update component inventory in this file
 
 ### Add a new demo page
@@ -192,6 +210,16 @@ These are the most common sources of mistakes. Verify every output against this 
 *(Paste agent handoff note here at the end of each session)*
 
 ```
+
+```
+Date: 2026-03-18
+Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Phase 3 enhanced binary value handling for Checkbox. Added signal inputs `trueValue` and `falseValue`, updated binary `writeValue` matching to compare incoming values against configured true/false inputs, and updated toggle emission payloads to emit configured true/false values instead of hardcoded booleans.
+Verification:
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+Result: PASS (1 suite, 27 tests), including new CVA coverage for custom `trueValue`/`falseValue` in both `writeValue` and `registerOnChange` flows.
+Next step: Implement remaining PrimeNG checkbox parity outputs/templates (onChange/onFocus/onBlur events, custom icon template, and invalid/formControl input bridging).
+```
 Date: 2026-03-17
 Changed: projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss, AI_AGENT_CONTEXT.md
 State: Completed Prompt 5 CascadeSelect styling and tokenization pass. Added full `--uilib-cascade-select-*` CSS custom property surface, host/trigger/panel/option/submenu styling, size variants (`sm`/`md`/`lg`), visual variants (Material/Bootstrap/Minimal), and state treatments (`filled`, `invalid`, `disabled`, `loading`, `fluid`, `open`) with color-mix based overlays and responsive narrow-viewport submenu stacking.
@@ -229,3 +257,124 @@ Verification:
 Result: PASS for build, targeted tests (2 suites/38 tests), and CascadeSelect lint. Demo dev server reachable (HTTP 200) on alternate port. Manual browser walkthrough for `/cascade-select` interaction/keyboard/form UX remains a human QA step.
 Next step: Perform manual in-browser checklist on `/cascade-select` (all sections rendering, keyboard traversal, form validation messaging) and then finalize commit/tag.
 ```
+
+```
+Date: 2026-03-18
+Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.types.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Phase 4 checkbox outputs pass. Added `onFocus` and `onBlur` outputs, and updated `onChange` output typing to `CheckboxChangeEvent` with `{ checked, originalEvent }` payload where checked is boolean in binary mode or array in group mode.
+Verification:
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+Result: PASS (1 suite, 31 tests), including new coverage for focus/blur outputs and typed onChange payloads in both binary and group modes.
+Next step: Continue remaining checkbox parity work (icon template slot, invalid/formControl parity details, and docs updates).
+```
+
+```
+Date: 2026-03-18
+Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.types.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.scss, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Phase 5 checkbox appearance support. Added `appearance` input (`'outlined' | 'filled'`) and filled-mode host class `checkbox--filled`, then implemented filled styling through `--uilib-checkbox-filled-bg` and `--uilib-checkbox-filled-border-color` with variant-specific overrides for material/bootstrap/minimal.
+Verification:
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+Result: PASS (1 suite, 33 tests), including new tests for outlined default and filled appearance class coverage across all variants.
+Next step: Implement remaining parity work (icon template support, invalid/formControl input bridging, and checkbox docs/demo updates).
+```
+
+```
+Date: 2026-03-18
+Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.html, projects/ui-lib-custom/src/lib/checkbox/checkbox.scss, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Phase 6 checkbox customization pass. Added signal inputs `checkboxIcon`, `autofocus`, and `inputClass`; wired custom class composition for native input and check icon; added custom icon override CSS to suppress default check glyph when a custom icon class is provided; and added `AfterViewInit` autofocus behavior for enabled checkboxes.
+Verification:
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+Result: PASS (1 suite, 36 tests), including new coverage for native input class passthrough, custom icon class application, and autofocus.
+Next step: Continue remaining parity work (custom icon template slot API and invalid/formControl input parity + docs/demo updates).
+```
+
+```
+Date: 2026-03-18
+Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.html, projects/ui-lib-custom/src/lib/checkbox/checkbox.scss, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Phase 7 hidden native input accessibility pass. The native `<input type="checkbox">` now owns required semantic attributes (`id`, `name`, `required`, `tabindex`, `aria-label`, `aria-labelledby`, `aria-checked`, `aria-describedby`, `disabled`, `readonly`, `value`), remains visually hidden with an sr-only pattern, and is no longer aria-hidden. The visual checkbox box is explicitly presentation-only.
+Verification:
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+Result: PASS (1 suite, 37 tests), including new checks for screen-reader accessibility of the native input and presentation-only visual box semantics.
+Next step: Implement remaining checkbox parity work (custom icon template slot and invalid/formControl input bridging), then update docs/demo API references.
+```
+
+```
+Date: 2026-03-18
+Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.ts, projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Phase 8 ControlValueAccessor hardening for Checkbox. Refactored write/toggle paths to use explicit binary/group model normalization helpers, kept null/undefined handling safe in both modes, and ensured CVA callback payload shape remains mode-correct (scalar in binary mode, cloned array in group mode).
+Verification:
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+Result: PASS (1 suite, 40 tests), including new coverage for binary undefined writeValue, group-mode non-array/undefined handling, and setDisabledState blocking toggles in group mode.
+Next step: Implement remaining checkbox parity work (custom icon template slot and invalid/formControl input bridging), then update docs/demo API references.
+```
+
+```
+Date: 2026-03-18
+Changed: projects/ui-lib-custom/src/lib/checkbox/checkbox.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Phase 9 Checkbox test expansion. Added coverage for template-driven shared-array group mode, dynamic `@for` group rendering, external `inputId` label association, required validation checks (template-driven and reactive), readonly focus preservation, indeterminate+group interaction, null/undefined model safety, and filled appearance across variants.
+Verification:
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'`
+Result: PASS (1 suite, 47 tests).
+Next step: Implement remaining parity feature work (custom icon template slot and invalid/formControl input bridging), then update checkbox docs/demo API references.
+```
+
+```
+Date: 2026-03-18
+Changed: projects/demo/src/app/pages/checkboxes/checkboxes.component.ts, projects/demo/src/app/pages/checkboxes/checkboxes.component.html, projects/demo/src/app/pages/checkboxes/checkboxes.component.scss, AI_AGENT_CONTEXT.md
+State: Completed Phase 10 checkbox demo expansion. Updated the demo page to showcase binary and indeterminate behavior, group mode with 4+ options, dynamic list-driven checkboxes, outlined vs filled appearance, all three visual variants, all sizes, disabled/readonly states, custom trueValue/falseValue, and both reactive + template-driven form integration with required validation messaging.
+Verification:
+- `ng.cmd build ui-lib-custom` (PASS)
+- `npm.cmd test -- --testPathPatterns='checkbox.spec.ts'` (PASS)
+Notes:
+- `ng.cmd test ui-lib-custom --watch=false` is not supported in this workspace (`Unknown argument: watch`).
+- `ng.cmd test ui-lib-custom` reports `Project target does not exist`; repository test entrypoint remains `npm.cmd test`.
+Next step: Optionally refine copy/layout polish in demo sections and update docs/reference checkbox API pages to mirror new examples.
+```
+
+```
+Date: 2026-03-18
+Changed: docs/reference/components/CHECKBOX.md, docs/reference/components/README.md, projects/demo/src/app/pages/checkboxes/checkboxes.component.ts, AI_AGENT_CONTEXT.md
+State: Completed follow-up docs and UX polish pass for Checkbox. Updated component reference docs to reflect the current API (binary/group modes, appearance, trueValue/falseValue, outputs, native input semantics, form integration), refreshed component index status line, and polished demo usage snippet wording to match current preferred patterns.
+Verification:
+- `get_errors` on `projects/demo/src/app/pages/checkboxes/checkboxes.component.ts`, `projects/demo/src/app/pages/checkboxes/checkboxes.component.html`, `projects/demo/src/app/pages/checkboxes/checkboxes.component.scss` (PASS)
+Notes:
+- Terminal command output is currently not being captured reliably in this session (`$` only), so command-level PASS/FAIL text could not be confirmed for additional runs.
+Next step: If desired, run full CI command set once terminal output capture is stable: `ng.cmd build ui-lib-custom`, `npm.cmd run build:demo`, and `npm.cmd test`.
+```
+
+```
+Date: 2026-03-18
+Changed: docs/reference/components/CHECKBOX.md, AI_AGENT_CONTEXT.md
+State: Added a compact migration guide to Checkbox docs for teams moving from boolean-only usage to explicit binary/group patterns. Included before/after snippets, model-shape expectations, null-safety behavior, and auto-mode compatibility note.
+Verification:
+- Documentation-only change; no runtime code paths modified.
+Next step: Optionally add a dedicated `CHECKBOX_IMPLEMENTATION.md` file to complete checkbox maintainer-level architecture docs.
+```
+
+```
+Date: 2026-03-18
+Changed: docs/reference/components/CHECKBOX_IMPLEMENTATION.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
+State: Added maintainer-focused Checkbox implementation documentation and updated docs index/status metadata. Checkbox is now documented with both API and implementation references.
+Verification:
+- Documentation-only changes; no runtime code paths modified.
+Next step: Optionally add similar implementation docs for Icon and IconButton to close remaining "API only" component gaps.
+```
+
+```
+Date: 2026-03-18
+Changed: docs/reference/components/ICON_IMPLEMENTATION.md, docs/reference/components/ICON_BUTTON.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
+State: Completed Icon and Icon Button documentation gap closure. Added dedicated Icon implementation notes doc, expanded Icon Button reference with implementation notes section, and updated component reference index/status entries to mark both components complete.
+Verification:
+- `get_errors` on modified docs files (no errors in new/edited Icon docs; existing unresolved markdown link warnings in components index are pre-existing)
+Next step: Optionally standardize source-code links in `docs/reference/components/README.md` to workspace-valid paths to remove markdown link resolution warnings.
+```
+
+```
+Date: 2026-03-18
+Changed: docs/reference/components/README.md, AI_AGENT_CONTEXT.md
+State: Standardized component `Source Code` links in docs index to workspace-valid relative paths (`../../../projects/...`) and cleared markdown resolution warnings for the file.
+Verification:
+- `get_errors` on `docs/reference/components/README.md` (PASS, no warnings)
+Next step: Optional docs consistency pass to ensure all reference markdown files use the same relative-link depth conventions.
+```
+

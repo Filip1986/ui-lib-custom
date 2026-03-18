@@ -1,5 +1,9 @@
 @use '../../shared/styles/doc-page.scss';
 
+.doc-header {
+  --uilib-checkbox-demo-gap: 1rem;
+}
+
 .doc-demo.stack {
   display: flex;
   flex-direction: column;
@@ -13,4 +17,112 @@
 textarea {
   width: 100%;
   min-height: 68px;
+}
+
+.control-grid {
+  display: grid;
+  gap: var(--uilib-checkbox-demo-gap, 1rem);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.toggles {
+  justify-content: center;
+}
+
+.toggles label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demo-section-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.demo-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dynamic-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.dynamic-controls input {
+  max-width: 260px;
+}
+
+.dynamic-option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.appearance-matrix {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.appearance-row {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 120px repeat(2, minmax(160px, 1fr));
+  align-items: center;
+}
+
+.size-row,
+.state-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.forms-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.form-card {
+  border: 1px solid var(--uilib-checkbox-demo-form-border, var(--uilib-border, #d8dee9));
+  border-radius: var(--uilib-checkbox-demo-form-radius, 0.75rem);
+  padding: 1rem;
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-error {
+  color: var(--uilib-checkbox-demo-form-error, var(--uilib-color-danger-600));
+  margin: 0;
 }

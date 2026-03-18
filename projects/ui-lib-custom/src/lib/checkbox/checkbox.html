@@ -1,5 +1,24 @@
-<div class="ui-lib-checkbox__box" aria-hidden="true">
-  <span class="ui-lib-checkbox__icon ui-lib-checkbox__icon--check"></span>
+<input
+  [class]="nativeInputClasses()"
+  type="checkbox"
+  [id]="getNativeInputId()"
+  [name]="name()"
+  [value]="nativeInputValue()"
+  [checked]="checked()"
+  [required]="required()"
+  [readOnly]="readonly()"
+  [disabled]="isDisabled()"
+  [attr.tabindex]="hostTabIndex()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledby()"
+  [attr.aria-checked]="ariaChecked()"
+  [attr.aria-describedby]="ariaDescribedby()"
+  (click)="onToggle($event)"
+  (focus)="onFocusIn($event)"
+  (blur)="onNativeBlur($event)"
+/>
+<div class="ui-lib-checkbox__box" role="presentation" aria-hidden="true">
+  <span [class]="checkIconClasses()"></span>
   <span class="ui-lib-checkbox__icon ui-lib-checkbox__icon--indeterminate"></span>
 </div>
 <div class="ui-lib-checkbox__content">
