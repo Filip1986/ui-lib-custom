@@ -955,3 +955,43 @@ export const SELECTBUTTON_TOKENS: Readonly<SelectButtonTokens> = {
 };
 
 export type SelectButtonTokenKey = keyof typeof SELECTBUTTON_TOKENS;
+
+// ============================================================================
+// COLOR PICKER TOKENS
+// ============================================================================
+
+export type ColorPickerTokens = {
+  triggerWidth: string;
+  triggerHeight: string;
+  triggerBorderRadius: string;
+  triggerBorderColor: string;
+  panelWidth: string;
+  panelPadding: string;
+  panelBg: string;
+  panelBorderColor: string;
+  panelBorderRadius: string;
+  panelShadow: string;
+  hueSliderWidth: string;
+  hueSliderHeight: string;
+  selectorSize: string;
+  transitionDuration: string;
+};
+
+export const COLORPICKER_TOKENS: Readonly<ColorPickerTokens> = {
+  triggerWidth: '2rem',
+  triggerHeight: '2rem',
+  triggerBorderRadius: BORDER_RADIUS.base,
+  triggerBorderColor: COLOR_NEUTRAL[300],
+  panelWidth: '196px',
+  panelPadding: SPACING_TOKENS[3],
+  panelBg: COLOR_NEUTRAL.white,
+  panelBorderColor: COLOR_NEUTRAL[200],
+  panelBorderRadius: BORDER_RADIUS.md,
+  panelShadow: SHADOWS['shadow-8']!,
+  hueSliderWidth: '18px',
+  hueSliderHeight: '11rem',
+  selectorSize: '12px',
+  transitionDuration: TRANSITION_DURATION.base,
+};
+
+export type ColorPickerTokenKey = keyof typeof COLORPICKER_TOKENS;

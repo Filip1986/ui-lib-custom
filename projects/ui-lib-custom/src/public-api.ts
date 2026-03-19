@@ -59,6 +59,9 @@ export * from './lib/autocomplete/index';
 // CascadeSelect
 export * from './lib/cascade-select';
 
+// ColorPicker
+export * from './lib/color-picker';
+
 // Dialog (backward compatibility re-export)
 export { DialogComponent } from './lib/dialog/dialog.component';
 export type { DialogPosition, DialogVariant } from './lib/dialog/dialog.types';

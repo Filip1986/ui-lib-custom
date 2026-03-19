@@ -216,6 +216,25 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-card-shadow-medium` | `none` | Shadow medium. |
 | `--uilib-card-shadow-high` | `none` | Shadow high. |
 
+## ColorPicker
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-colorpicker-trigger-width` | `2rem` | Trigger swatch width. |
+| `--uilib-colorpicker-trigger-height` | `2rem` | Trigger swatch height. |
+| `--uilib-colorpicker-trigger-border-radius` | `var(--uilib-input-radius, var(--uilib-shape-base, 4px))` | Trigger border radius. |
+| `--uilib-colorpicker-trigger-border-color` | `var(--uilib-input-border, var(--uilib-border, #d1d5db))` | Trigger border color. |
+| `--uilib-colorpicker-panel-width` | `196px` | Popup panel width. |
+| `--uilib-colorpicker-panel-padding` | `0.75rem` | Popup panel inner spacing. |
+| `--uilib-colorpicker-panel-bg` | `var(--uilib-surface, #fff)` | Popup panel background. |
+| `--uilib-colorpicker-panel-border-color` | `var(--uilib-border, #e5e7eb)` | Popup panel border color. |
+| `--uilib-colorpicker-panel-border-radius` | `var(--uilib-input-radius, var(--uilib-shape-base, 6px))` | Popup panel border radius. |
+| `--uilib-colorpicker-panel-shadow` | `0 4px 12px rgb(0 0 0 / 15%)` | Popup panel shadow. |
+| `--uilib-colorpicker-hue-slider-width` | `18px` | Hue slider width. |
+| `--uilib-colorpicker-hue-slider-height` | `11rem` | Hue slider height. |
+| `--uilib-colorpicker-selector-size` | `12px` | Selector indicator size. |
+| `--uilib-colorpicker-transition-duration` | `200ms` | Trigger/panel transition duration. |
+
 ## Checkbox
 
 | Variable | Default | Description |

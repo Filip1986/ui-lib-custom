@@ -173,6 +173,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/cascade-select',
         },
+        {
+          label: 'ColorPicker',
+          icon: 'pi pi-circle',
+          route: '/color-picker',
+        },
       ],
     },
   ]);

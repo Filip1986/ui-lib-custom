@@ -575,6 +575,35 @@ export class Button {
 
 ## Reference
 
+### Component Token Sets
+
+`design-tokens.ts` also exposes component-level token groups used to register default CSS variable values in theming services.
+
+#### ColorPicker
+
+```typescript
+import { COLORPICKER_TOKENS, type ColorPickerTokenKey } from 'ui-lib-custom/tokens';
+```
+
+| Token | Default |
+| --- | --- |
+| `triggerWidth` | `2rem` |
+| `triggerHeight` | `2rem` |
+| `triggerBorderRadius` | `0.25rem` |
+| `triggerBorderColor` | `#e0e0e0` |
+| `panelWidth` | `196px` |
+| `panelPadding` | `0.75rem` |
+| `panelBg` | `#ffffff` |
+| `panelBorderColor` | `#eeeeee` |
+| `panelBorderRadius` | `0.375rem` |
+| `panelShadow` | `rgba(0, 0, 0, 0.1) 0px 4px 12px` |
+| `hueSliderWidth` | `18px` |
+| `hueSliderHeight` | `11rem` |
+| `selectorSize` | `12px` |
+| `transitionDuration` | `200ms` |
+
+These tokens map to public CSS variables under the `--uilib-colorpicker-*` namespace.
+
 **Full Token Export:**
 ```typescript
 export * from './design-tokens';  // All tokens available

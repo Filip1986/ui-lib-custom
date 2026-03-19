@@ -1,0 +1,61 @@
+@if (!inline()) {
+  <button
+    #triggerButton
+    type="button"
+    class="ui-lib-colorpicker__trigger"
+    [attr.id]="triggerId()"
+    [style.background-color]="displayColor()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="'Choose color'"
+    [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+    [attr.aria-controls]="panelVisible() ? panelId() : null"
+    [attr.tabindex]="tabindex()"
+    (click)="onTriggerClick($event)"
+    (keydown)="onTriggerKeydown($event)"
+  ></button>
+}
+
+<input type="hidden" [id]="resolvedInputId()" [value]="displayColor()" [disabled]="isDisabled()" />
+
+@if (inline() || panelVisible()) {
+  <div
+    #panelElement
+    class="ui-lib-colorpicker__panel"
+    [attr.id]="panelId()"
+    [attr.data-placement]="panelPlacement()"
+    [attr.tabindex]="isDisabled() ? -1 : 0"
+    (click)="$event.stopPropagation()"
+    (keydown)="onPanelKeydown($event)"
+  >
+    <div
+      #colorAreaElement
+      class="ui-lib-colorpicker__color-area"
+      [style.background-color]="hueOnlyColor()"
+      [attr.tabindex]="isDisabled() ? -1 : 0"
+      [attr.aria-label]="'Saturation and brightness selector'"
+      (mousedown)="onColorAreaMouseDown($event)"
+      (touchstart)="onColorAreaTouchStart($event)"
+      (keydown)="onColorAreaKeydown($event)"
+    >
+      <div class="ui-lib-colorpicker__color-area-gradient"></div>
+      <div
+        class="ui-lib-colorpicker__selector"
+        [style.left.%]="selectorLeft()"
+        [style.top.%]="selectorTop()"
+      ></div>
+    </div>
+
+    <div
+      #hueElement
+      class="ui-lib-colorpicker__hue"
+      [attr.tabindex]="isDisabled() ? -1 : 0"
+      [attr.aria-label]="'Hue selector'"
+      (mousedown)="onHueMouseDown($event)"
+      (touchstart)="onHueTouchStart($event)"
+      (keydown)="onHueKeydown($event)"
+    >
+      <div class="ui-lib-colorpicker__hue-handle" [style.top.%]="hueHandleTop()"></div>
+    </div>
+  </div>
+}
+

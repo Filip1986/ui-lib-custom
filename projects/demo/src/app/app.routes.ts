@@ -152,6 +152,15 @@ export const routes: Routes = [
       ),
     title: 'CascadeSelect - UI Components Library',
   },
+  {
+    path: 'color-picker',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/color-picker/color-picker-demo.component').then(
+        (m: { ColorPickerDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ColorPickerDemoComponent
+      ),
+    title: 'ColorPicker - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

@@ -3,6 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import {
   BORDER_RADIUS,
+  COLORPICKER_TOKENS,
   SHADOWS,
   SELECTBUTTON_TOKENS,
   SHAPE_TOKENS,
@@ -614,6 +615,21 @@ export class ThemeConfigService {
     set('--uilib-select-button-minimal-border', SELECTBUTTON_TOKENS.minimal.border);
     set('--uilib-select-button-minimal-selected-bg', colors.surfaceAlt);
     set('--uilib-select-button-minimal-selected-fg', colors.text);
+
+    set('--uilib-colorpicker-trigger-width', COLORPICKER_TOKENS.triggerWidth);
+    set('--uilib-colorpicker-trigger-height', COLORPICKER_TOKENS.triggerHeight);
+    set('--uilib-colorpicker-trigger-border-radius', COLORPICKER_TOKENS.triggerBorderRadius);
+    set('--uilib-colorpicker-trigger-border-color', colors.border);
+    set('--uilib-colorpicker-panel-width', COLORPICKER_TOKENS.panelWidth);
+    set('--uilib-colorpicker-panel-padding', COLORPICKER_TOKENS.panelPadding);
+    set('--uilib-colorpicker-panel-bg', colors.surface);
+    set('--uilib-colorpicker-panel-border-color', colors.border);
+    set('--uilib-colorpicker-panel-border-radius', COLORPICKER_TOKENS.panelBorderRadius);
+    set('--uilib-colorpicker-panel-shadow', COLORPICKER_TOKENS.panelShadow);
+    set('--uilib-colorpicker-hue-slider-width', COLORPICKER_TOKENS.hueSliderWidth);
+    set('--uilib-colorpicker-hue-slider-height', COLORPICKER_TOKENS.hueSliderHeight);
+    set('--uilib-colorpicker-selector-size', COLORPICKER_TOKENS.selectorSize);
+    set('--uilib-colorpicker-transition-duration', COLORPICKER_TOKENS.transitionDuration);
 
     const iconSizes: Record<string, string> = icons?.sizes ?? this.defaultIconConfig.sizes;
     Object.entries(iconSizes).forEach(([key, value]: [string, string]): void =>

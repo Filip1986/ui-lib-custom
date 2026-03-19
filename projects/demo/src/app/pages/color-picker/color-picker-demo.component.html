@@ -1,0 +1,134 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>ColorPicker</h1>
+    <p class="doc-description">
+      Interactive color picking with popup and inline modes, format switching, forms integration,
+      and visual variants.
+    </p>
+  </div>
+
+  <app-doc-demo-viewport [autoHeight]="true">
+    <div class="examples">
+      <section id="basic" data-doc-anchor class="example-section">
+        <h3>a. Basic</h3>
+        <p class="section-text">
+          Simple popup picker with template-driven binding and displayed hex value.
+        </p>
+        <app-code-preview [code]="snippet('basic')">
+          <ui-lib-card>
+            <div class="row-inline">
+              <ui-lib-color-picker [(ngModel)]="basicHex" format="hex" />
+              <span class="value-text">Selected HEX {{ displayHexValue(basicHex) }}</span>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="inline" data-doc-anchor class="example-section">
+        <h3>b. Inline</h3>
+        <p class="section-text">Permanently visible picker panel embedded in content flow.</p>
+        <app-code-preview [code]="snippet('inline')">
+          <ui-lib-card>
+            <ui-lib-color-picker [inline]="true" [(ngModel)]="inlineHex" format="hex" />
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="formats" data-doc-anchor class="example-section">
+        <h3>c. Formats</h3>
+        <p class="section-text">Hex, RGB, and HSB model formats side by side.</p>
+        <app-code-preview [code]="snippet('formats')">
+          <ui-lib-card>
+            <div class="row-3">
+              <div class="format-column">
+                <ui-lib-color-picker [(ngModel)]="hexValue" format="hex" />
+                <span class="value-text">HEX {{ displayHexValue(hexValue) }}</span>
+              </div>
+              <div class="format-column">
+                <ui-lib-color-picker [(ngModel)]="rgbValue" format="rgb" />
+                <span class="value-text">{{ displayRgbValue(rgbValue) }}</span>
+              </div>
+              <div class="format-column">
+                <ui-lib-color-picker [(ngModel)]="hsbValue" format="hsb" />
+                <span class="value-text">{{ displayHsbValue(hsbValue) }}</span>
+              </div>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="template-driven" data-doc-anchor class="example-section">
+        <h3>d. Template Driven Form</h3>
+        <p class="section-text">Template-driven form submit flow with selected color output.</p>
+        <app-code-preview [code]="snippet('templateDriven')">
+          <ui-lib-card>
+            <form (ngSubmit)="submitTemplateDriven()" class="form-stack">
+              <ui-lib-color-picker
+                name="templateColor"
+                [(ngModel)]="templateDrivenValue"
+                format="hex"
+              />
+              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              @if (templateDrivenSubmittedValue !== null) {
+                <p class="value-text">Submitted: {{ displaySubmittedValue(templateDrivenSubmittedValue) }}</p>
+              }
+            </form>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="reactive" data-doc-anchor class="example-section">
+        <h3>e. Reactive Form</h3>
+        <p class="section-text">Reactive form control with submit output and validation trigger.</p>
+        <app-code-preview [code]="snippet('reactive')">
+          <ui-lib-card>
+            <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="form-stack">
+              <ui-lib-color-picker formControlName="color" format="hex" />
+              <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+              @if (reactiveSubmittedValue !== null) {
+                <p class="value-text">Submitted: {{ displaySubmittedValue(reactiveSubmittedValue) }}</p>
+              }
+            </form>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="disabled" data-doc-anchor class="example-section">
+        <h3>f. Disabled</h3>
+        <p class="section-text">Disabled picker demonstrating non-interactive state.</p>
+        <app-code-preview [code]="snippet('disabled')">
+          <ui-lib-card>
+            <div class="row-inline">
+              <ui-lib-color-picker [disabled]="true" [(ngModel)]="disabledValue" format="hex" />
+              <span class="value-text">Disabled value {{ displayHexValue(disabledValue) }}</span>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="variants" data-doc-anchor class="example-section">
+        <h3>g. Variants</h3>
+        <p class="section-text">Material, Bootstrap, and Minimal variants side by side.</p>
+        <app-code-preview [code]="snippet('variants')">
+          <ui-lib-card>
+            <div class="row-3">
+              <div class="variant-column">
+                <p class="variant-title">Material</p>
+                <ui-lib-color-picker variant="material" [(ngModel)]="variantValues.material" />
+              </div>
+              <div class="variant-column">
+                <p class="variant-title">Bootstrap</p>
+                <ui-lib-color-picker variant="bootstrap" [(ngModel)]="variantValues.bootstrap" />
+              </div>
+              <div class="variant-column">
+                <p class="variant-title">Minimal</p>
+                <ui-lib-color-picker variant="minimal" [(ngModel)]="variantValues.minimal" />
+              </div>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+    </div>
+  </app-doc-demo-viewport>
+</app-doc-page-layout>
+

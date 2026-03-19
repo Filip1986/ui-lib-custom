@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import {
   FormControl,
   FormGroup,
@@ -137,7 +137,7 @@ describe('UiLibAutoComplete', (): void => {
   }
 
   function cmpEl(): HTMLElement {
-    return hostEl().querySelector('ui-lib-autocomplete') as HTMLElement;
+    return hostEl();
   }
 
   function inputEl(): HTMLInputElement {
@@ -214,7 +214,8 @@ describe('UiLibAutoComplete', (): void => {
   });
 
   describe('Single Selection Mode', (): void => {
-    it('shows suggestions panel on typing', fakeAsync((): void => {
+    it('shows suggestions panel on typing', (): void => {
+      jest.useFakeTimers();
       setFlatSuggestions();
       fixture.componentRef.setInput('delay', 0);
       fixture.detectChanges();
@@ -222,13 +223,15 @@ describe('UiLibAutoComplete', (): void => {
       const input: HTMLInputElement = inputEl();
       input.value = 'a';
       input.dispatchEvent(new Event('input', { bubbles: true }));
-      tick(0);
+      jest.advanceTimersByTime(0);
       fixture.detectChanges();
 
       expect(hostEl().querySelector('.ui-autocomplete-panel')).toBeTruthy();
-    }));
+      jest.useRealTimers();
+    });
 
-    it('emits completeMethod with debounce and minLength', fakeAsync((): void => {
+    it('emits completeMethod with debounce and minLength', (): void => {
+      jest.useFakeTimers();
       const emitSpy = jest.spyOn(component.completeMethod, 'emit');
       fixture.componentRef.setInput('minLength', 2);
       fixture.componentRef.setInput('delay', 100);
@@ -237,16 +240,17 @@ describe('UiLibAutoComplete', (): void => {
       const input: HTMLInputElement = inputEl();
       input.value = 'a';
       input.dispatchEvent(new Event('input', { bubbles: true }));
-      tick(120);
+      jest.advanceTimersByTime(120);
       expect(emitSpy).toHaveBeenCalledTimes(0);
 
       input.value = 'ab';
       input.dispatchEvent(new Event('input', { bubbles: true }));
-      tick(99);
+      jest.advanceTimersByTime(99);
       expect(emitSpy).toHaveBeenCalledTimes(0);
-      tick(1);
+      jest.advanceTimersByTime(1);
       expect(emitSpy).toHaveBeenCalledTimes(1);
-    }));
+      jest.useRealTimers();
+    });
 
     it('selects option on click and closes panel', (): void => {
       const onChange = jest.fn<void, [unknown]>();
@@ -303,7 +307,8 @@ describe('UiLibAutoComplete', (): void => {
       expect(inputEl().value).toBe('');
     });
 
-    it('forceSelection clears non-matching input on blur', fakeAsync((): void => {
+    it('forceSelection clears non-matching input on blur', (): void => {
+      jest.useFakeTimers();
       fixture.componentRef.setInput('forceSelection', true);
       fixture.componentRef.setInput('autoClear', true);
       fixture.componentRef.setInput('suggestions', [{ label: 'Alpha', value: 'alpha' }]);
@@ -315,23 +320,26 @@ describe('UiLibAutoComplete', (): void => {
       input.value = 'Unknown';
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new FocusEvent('blur'));
-      tick(0);
+      jest.advanceTimersByTime(0);
       fixture.detectChanges();
 
       expect(input.value).toBe('');
-    }));
+      jest.useRealTimers();
+    });
 
-    it('completeOnFocus emits completion on focus', fakeAsync((): void => {
+    it('completeOnFocus emits completion on focus', (): void => {
+      jest.useFakeTimers();
       const emitSpy = jest.spyOn(component.completeMethod, 'emit');
       fixture.componentRef.setInput('completeOnFocus', true);
       fixture.componentRef.setInput('delay', 0);
       fixture.detectChanges();
 
       inputEl().dispatchEvent(new FocusEvent('focus'));
-      tick(0);
+      jest.advanceTimersByTime(0);
 
       expect(emitSpy).toHaveBeenCalledTimes(1);
-    }));
+      jest.useRealTimers();
+    });
   });
 
   describe('Multiple/Chips Mode', (): void => {
@@ -381,7 +389,8 @@ describe('UiLibAutoComplete', (): void => {
       expect(hostEl().querySelectorAll('.ui-autocomplete-chip').length).toBe(1);
     });
 
-    it('addOnBlur adds current query as chip', fakeAsync((): void => {
+    it('addOnBlur adds current query as chip', (): void => {
+      jest.useFakeTimers();
       fixture.componentRef.setInput('multiple', true);
       fixture.componentRef.setInput('addOnBlur', true);
       fixture.detectChanges();
@@ -390,11 +399,12 @@ describe('UiLibAutoComplete', (): void => {
       input.value = 'Alpha';
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new FocusEvent('blur'));
-      tick(0);
+      jest.advanceTimersByTime(0);
       fixture.detectChanges();
 
       expect(hostEl().querySelectorAll('.ui-autocomplete-chip').length).toBe(1);
-    }));
+      jest.useRealTimers();
+    });
 
     it('addOnTab adds current query as chip', (): void => {
       fixture.componentRef.setInput('multiple', true);
@@ -621,19 +631,32 @@ describe('UiLibAutoComplete', (): void => {
       expect(hostFixture.nativeElement.querySelector('.custom-header')).toBeTruthy();
       expect(hostFixture.nativeElement.querySelector('.custom-footer')).toBeTruthy();
 
+      ac.hidePanel();
+      hostFixture.detectChanges();
+
       hostFixture.componentInstance.group = true;
       hostFixture.componentInstance.options = [
         { label: 'Group 1', items: [{ label: 'One', value: 1 }] },
       ];
+      hostFixture.changeDetectorRef.markForCheck();
       hostFixture.detectChanges();
       ac.showPanel();
       hostFixture.detectChanges();
 
-      expect(hostFixture.nativeElement.querySelector('.custom-group')).toBeTruthy();
+      const groupPanel: HTMLElement = getRequiredItem(
+        Array.from(hostFixture.nativeElement.querySelectorAll('.ui-autocomplete-panel')),
+        0,
+        'template-slots group panel'
+      );
+      expect(groupPanel.querySelector('.custom-group')).toBeTruthy();
+
+      ac.hidePanel();
+      hostFixture.detectChanges();
 
       hostFixture.componentInstance.group = false;
       hostFixture.componentInstance.multiple = true;
       hostFixture.componentInstance.options = [{ label: 'Alpha', value: 'alpha' }];
+      hostFixture.changeDetectorRef.markForCheck();
       hostFixture.detectChanges();
       ac.writeValue(['alpha']);
       hostFixture.detectChanges();
@@ -641,6 +664,7 @@ describe('UiLibAutoComplete', (): void => {
       expect(hostFixture.nativeElement.querySelector('.custom-chip')).toBeTruthy();
 
       hostFixture.componentInstance.options = [];
+      hostFixture.changeDetectorRef.markForCheck();
       hostFixture.detectChanges();
       ac.showPanel();
       hostFixture.detectChanges();
