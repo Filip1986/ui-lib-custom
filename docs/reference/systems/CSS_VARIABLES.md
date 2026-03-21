@@ -235,6 +235,64 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-colorpicker-selector-size` | `12px` | Selector indicator size. |
 | `--uilib-colorpicker-transition-duration` | `200ms` | Trigger/panel transition duration. |
 
+## DatePicker
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-datepicker-input-bg` | `var(--uilib-input-bg, var(--uilib-surface, #ffffff))` | Input trigger background. |
+| `--uilib-datepicker-input-color` | `var(--uilib-input-text, var(--uilib-page-fg, #1f2933))` | Input trigger text color. |
+| `--uilib-datepicker-input-border-color` | `var(--uilib-input-border, var(--uilib-border, #d1d5db))` | Input border color. |
+| `--uilib-datepicker-input-border-color-hover` | `var(--uilib-datepicker-input-border-color, var(--uilib-input-border, var(--uilib-border, #d1d5db)))` | Input hover border color. |
+| `--uilib-datepicker-input-border-color-focus` | `var(--uilib-input-border-focus, var(--uilib-color-primary-600, #1e88e5))` | Input focus border color. |
+| `--uilib-datepicker-input-border-radius` | `var(--uilib-input-radius, var(--uilib-radius-md, 0.5rem))` | Input border radius. |
+| `--uilib-datepicker-input-padding-y` | `var(--uilib-space-2, 0.5rem)` | Input vertical padding. |
+| `--uilib-datepicker-input-padding-x` | `var(--uilib-space-3, 0.75rem)` | Input horizontal padding. |
+| `--uilib-datepicker-input-min-height` | `2.75rem` | Input minimum height. |
+| `--uilib-datepicker-filled-bg` | `var(--uilib-surface-alt, #f3f4f6)` | Filled input background. |
+| `--uilib-datepicker-invalid-border-color` | `var(--uilib-color-danger-600, #e53935)` | Invalid input border color. |
+| `--uilib-datepicker-focus-ring` | `0 0 0 3px color-mix(in srgb, var(--uilib-datepicker-input-border-color-focus, var(--uilib-color-primary-600, #1e88e5)) 24%, transparent)` | Shared focus ring. |
+| `--uilib-datepicker-panel-bg` | `var(--uilib-surface, #ffffff)` | Popup panel background. |
+| `--uilib-datepicker-panel-color` | `var(--uilib-page-fg, #1f2933)` | Popup panel text color. |
+| `--uilib-datepicker-panel-border-color` | `var(--uilib-border, #d1d5db)` | Popup panel border color. |
+| `--uilib-datepicker-panel-border-radius` | `var(--uilib-radius-lg, 0.75rem)` | Popup panel border radius. |
+| `--uilib-datepicker-panel-shadow` | `var(--uilib-shadow-lg, 0 12px 28px rgb(0 0 0 / 16%))` | Popup panel shadow. |
+| `--uilib-datepicker-panel-padding` | `var(--uilib-space-3, 0.75rem)` | Popup panel inner padding. |
+| `--uilib-datepicker-panel-max-height` | `28rem` | Popup panel max height. |
+| `--uilib-datepicker-z-index` | `var(--uilib-z-overlay, 20)` | Popup z-index. |
+| `--uilib-datepicker-day-cell-size` | `2.25rem` | Day cell size. |
+| `--uilib-datepicker-day-font-size` | `var(--uilib-font-size-sm, 0.875rem)` | Day cell font size. |
+| `--uilib-datepicker-day-border-radius` | `0.5rem` | Day cell border radius. |
+| `--uilib-datepicker-day-bg-hover` | `color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 12%, transparent)` | Day hover background. |
+| `--uilib-datepicker-day-bg-today` | `color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 16%, transparent)` | Today highlight background. |
+| `--uilib-datepicker-day-color-today` | `var(--uilib-color-primary-700, #1976d2)` | Today text/border color. |
+| `--uilib-datepicker-day-bg-selected` | `var(--uilib-color-primary-600, #1e88e5)` | Selected day background. |
+| `--uilib-datepicker-day-color-selected` | `var(--uilib-color-neutral-50, #fafafa)` | Selected day text color. |
+| `--uilib-datepicker-day-bg-range-between` | `color-mix(in srgb, var(--uilib-datepicker-day-bg-selected, #1e88e5) 22%, transparent)` | In-range band background. |
+| `--uilib-datepicker-day-color-disabled` | `color-mix(in srgb, var(--uilib-page-fg, #1f2933) 38%, transparent)` | Disabled day color. |
+| `--uilib-datepicker-day-color-other-month` | `var(--uilib-muted, #6b7280)` | Outside-month day color. |
+| `--uilib-datepicker-month-year-cell-min-height` | `2.5rem` | Month/year cell min height. |
+| `--uilib-datepicker-month-year-cell-radius` | `0.5rem` | Month/year cell border radius. |
+| `--uilib-datepicker-time-input-width` | `2.5rem` | Time spinner input width. |
+| `--uilib-datepicker-time-input-height` | `2rem` | Time spinner input height. |
+| `--uilib-datepicker-time-input-bg` | `var(--uilib-surface, #ffffff)` | Time spinner input background. |
+| `--uilib-datepicker-time-input-border-color` | `var(--uilib-border, #d1d5db)` | Time spinner input border color. |
+| `--uilib-datepicker-time-button-size` | `1.625rem` | Time spinner button size. |
+| `--uilib-datepicker-time-button-bg` | `var(--uilib-surface, #ffffff)` | Time spinner button background. |
+| `--uilib-datepicker-time-button-bg-hover` | `var(--uilib-datepicker-day-bg-hover, color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 12%, transparent))` | Time spinner button hover background. |
+| `--uilib-datepicker-time-separator-color` | `var(--uilib-muted, #6b7280)` | Time separator color. |
+| `--uilib-datepicker-time-ampm-min-width` | `2.75rem` | AM/PM toggle minimum width. |
+| `--uilib-datepicker-buttonbar-padding-top` | `var(--uilib-space-2, 0.5rem)` | Button bar top padding. |
+| `--uilib-datepicker-buttonbar-gap` | `var(--uilib-space-2, 0.5rem)` | Button bar item gap. |
+| `--uilib-datepicker-buttonbar-border-color` | `color-mix(in srgb, var(--uilib-datepicker-panel-border-color, #d1d5db) 65%, transparent)` | Button bar separator color. |
+| `--uilib-datepicker-transition-fast` | `var(--uilib-transition-fast, 150ms ease)` | Fast transition token. |
+| `--uilib-datepicker-transition-normal` | `var(--uilib-transition-normal, 200ms ease)` | Normal transition token. |
+| `--uilib-datepicker-panel-shadow-material` | `var(--uilib-shadow-xl, 0 20px 40px rgb(0 0 0 / 18%))` | Material panel elevation override. |
+| `--uilib-datepicker-panel-shadow-bootstrap` | `var(--uilib-shadow-md, 0 8px 20px rgb(0 0 0 / 12%))` | Bootstrap panel elevation override. |
+| `--uilib-datepicker-panel-shadow-minimal` | `none` | Minimal panel elevation override. |
+| `--uilib-datepicker-day-bg-selected-material` | `var(--uilib-color-primary-600, #1e88e5)` | Material selected-day background. |
+| `--uilib-datepicker-day-bg-selected-bootstrap` | `var(--uilib-color-primary-700, #0d6efd)` | Bootstrap selected-day background. |
+| `--uilib-datepicker-day-bg-selected-minimal` | `var(--uilib-color-help-600, #7e22ce)` | Minimal selected-day background. |
+
 ## Checkbox
 
 | Variable | Default | Description |

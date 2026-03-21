@@ -4,6 +4,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import {
   BORDER_RADIUS,
   COLORPICKER_TOKENS,
+  DATEPICKER_TOKENS,
   SHADOWS,
   SELECTBUTTON_TOKENS,
   SHAPE_TOKENS,
@@ -615,6 +616,132 @@ export class ThemeConfigService {
     set('--uilib-select-button-minimal-border', SELECTBUTTON_TOKENS.minimal.border);
     set('--uilib-select-button-minimal-selected-bg', colors.surfaceAlt);
     set('--uilib-select-button-minimal-selected-fg', colors.text);
+
+    set('--uilib-datepicker-input-bg', colors.surface);
+    set('--uilib-datepicker-input-color', textColor);
+    set('--uilib-datepicker-input-border-color', borderColor);
+    set('--uilib-datepicker-input-border-color-hover', borderColor);
+    set('--uilib-datepicker-input-border-color-focus', colors.primary);
+    set('--uilib-datepicker-input-border-radius', DATEPICKER_TOKENS.input.borderRadius);
+    set('--uilib-datepicker-input-padding-y', DATEPICKER_TOKENS.input.paddingY.md);
+    set('--uilib-datepicker-input-padding-x', DATEPICKER_TOKENS.input.paddingX.md);
+    set('--uilib-datepicker-input-min-height', DATEPICKER_TOKENS.input.minHeight.md);
+    set('--uilib-datepicker-filled-bg', colors.surfaceAlt);
+    set('--uilib-datepicker-invalid-border-color', colors.danger);
+    set(
+      '--uilib-datepicker-focus-ring',
+      `0 0 0 3px color-mix(in srgb, ${colors.primary} 24%, transparent)`
+    );
+
+    set('--uilib-datepicker-panel-bg', colors.surface);
+    set('--uilib-datepicker-panel-color', textColor);
+    set('--uilib-datepicker-panel-border-color', borderColor);
+    set('--uilib-datepicker-panel-border-radius', DATEPICKER_TOKENS.panel.borderRadius);
+    set('--uilib-datepicker-panel-shadow', DATEPICKER_TOKENS.panel.shadow);
+    set('--uilib-datepicker-panel-padding', DATEPICKER_TOKENS.panel.padding);
+    set('--uilib-datepicker-panel-max-height', DATEPICKER_TOKENS.panel.maxHeight);
+    set('--uilib-datepicker-z-index', DATEPICKER_TOKENS.panel.zIndex);
+
+    set('--uilib-datepicker-header-gap', DATEPICKER_TOKENS.navigation.gap);
+    set('--uilib-datepicker-title-gap', DATEPICKER_TOKENS.navigation.titleGap);
+    set('--uilib-datepicker-title-font-size', DATEPICKER_TOKENS.navigation.titleFontSize);
+    set('--uilib-datepicker-title-font-weight', DATEPICKER_TOKENS.navigation.titleFontWeight);
+    set('--uilib-datepicker-nav-button-size', DATEPICKER_TOKENS.navigation.buttonSize);
+    set('--uilib-datepicker-nav-button-radius', DATEPICKER_TOKENS.navigation.buttonRadius);
+    set('--uilib-datepicker-nav-button-bg', colors.surface);
+    set(
+      '--uilib-datepicker-nav-button-bg-hover',
+      `color-mix(in srgb, ${colors.primary} 10%, transparent)`
+    );
+    set('--uilib-datepicker-nav-button-border-color', borderColor);
+
+    set('--uilib-datepicker-day-cell-size', DATEPICKER_TOKENS.cell.daySize.md);
+    set('--uilib-datepicker-day-font-size', DATEPICKER_TOKENS.cell.dayFontSize.md);
+    set('--uilib-datepicker-day-font-weight', DATEPICKER_TOKENS.cell.dayFontWeight);
+    set('--uilib-datepicker-day-border-radius', DATEPICKER_TOKENS.cell.dayBorderRadius);
+    set('--uilib-datepicker-day-color', textColor);
+    set(
+      '--uilib-datepicker-day-bg-hover',
+      `color-mix(in srgb, ${colors.primary} 12%, transparent)`
+    );
+    set(
+      '--uilib-datepicker-day-bg-today',
+      `color-mix(in srgb, ${colors.primary} 16%, transparent)`
+    );
+    set('--uilib-datepicker-day-color-today', colors.primary);
+    set('--uilib-datepicker-day-bg-selected', colors.primary);
+    set('--uilib-datepicker-day-color-selected', '#fff');
+    set(
+      '--uilib-datepicker-day-bg-range-between',
+      `color-mix(in srgb, ${colors.primary} 22%, transparent)`
+    );
+    set(
+      '--uilib-datepicker-day-color-disabled',
+      `color-mix(in srgb, ${textColor} 38%, transparent)`
+    );
+    set('--uilib-datepicker-day-color-other-month', textSecondary);
+
+    set(
+      '--uilib-datepicker-month-year-cell-min-height',
+      DATEPICKER_TOKENS.cell.monthYearMinHeight.md
+    );
+    set('--uilib-datepicker-month-year-cell-font-size', DATEPICKER_TOKENS.cell.monthYearFontSize);
+    set('--uilib-datepicker-month-year-cell-radius', DATEPICKER_TOKENS.cell.monthYearBorderRadius);
+
+    set('--uilib-datepicker-time-gap', DATEPICKER_TOKENS.time.gap);
+    set('--uilib-datepicker-time-input-width', DATEPICKER_TOKENS.time.inputWidth.md);
+    set('--uilib-datepicker-time-input-height', DATEPICKER_TOKENS.time.inputHeight.md);
+    set('--uilib-datepicker-time-input-bg', colors.surface);
+    set('--uilib-datepicker-time-input-color', textColor);
+    set('--uilib-datepicker-time-input-border-color', borderColor);
+    set('--uilib-datepicker-time-input-border-radius', DATEPICKER_TOKENS.time.inputBorderRadius);
+    set('--uilib-datepicker-time-button-size', DATEPICKER_TOKENS.time.buttonSize);
+    set('--uilib-datepicker-time-button-bg', colors.surface);
+    set(
+      '--uilib-datepicker-time-button-bg-hover',
+      `color-mix(in srgb, ${colors.primary} 10%, transparent)`
+    );
+    set('--uilib-datepicker-time-button-border-color', borderColor);
+    set('--uilib-datepicker-time-separator-color', textSecondary);
+    set('--uilib-datepicker-time-ampm-min-width', DATEPICKER_TOKENS.time.ampmMinWidth);
+
+    set('--uilib-datepicker-buttonbar-padding-top', DATEPICKER_TOKENS.buttonBar.paddingTop);
+    set('--uilib-datepicker-buttonbar-gap', DATEPICKER_TOKENS.buttonBar.gap);
+    set(
+      '--uilib-datepicker-buttonbar-border-color',
+      `color-mix(in srgb, ${borderColor} 65%, transparent)`
+    );
+
+    set('--uilib-datepicker-transition-fast', 'var(--uilib-transition-fast, 150ms ease)');
+    set('--uilib-datepicker-transition-normal', 'var(--uilib-transition-normal, 200ms ease)');
+
+    set(
+      '--uilib-datepicker-panel-shadow-material',
+      DATEPICKER_TOKENS.variants.material.panelShadow
+    );
+    set(
+      '--uilib-datepicker-panel-shadow-bootstrap',
+      DATEPICKER_TOKENS.variants.bootstrap.panelShadow
+    );
+    set('--uilib-datepicker-panel-shadow-minimal', DATEPICKER_TOKENS.variants.minimal.panelShadow);
+    set(
+      '--uilib-datepicker-day-bg-selected-material',
+      DATEPICKER_TOKENS.variants.material.dayBgSelected
+    );
+    set(
+      '--uilib-datepicker-day-bg-selected-bootstrap',
+      DATEPICKER_TOKENS.variants.bootstrap.dayBgSelected
+    );
+    set(
+      '--uilib-datepicker-day-bg-selected-minimal',
+      DATEPICKER_TOKENS.variants.minimal.dayBgSelected
+    );
+    set('--uilib-datepicker-day-bg-hover-material', DATEPICKER_TOKENS.variants.material.dayBgHover);
+    set(
+      '--uilib-datepicker-day-bg-hover-bootstrap',
+      DATEPICKER_TOKENS.variants.bootstrap.dayBgHover
+    );
+    set('--uilib-datepicker-day-bg-hover-minimal', DATEPICKER_TOKENS.variants.minimal.dayBgHover);
 
     set('--uilib-colorpicker-trigger-width', COLORPICKER_TOKENS.triggerWidth);
     set('--uilib-colorpicker-trigger-height', COLORPICKER_TOKENS.triggerHeight);

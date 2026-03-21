@@ -198,6 +198,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### DatePicker
+**Files:**
+- [DATEPICKER.md](DATEPICKER.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/date-picker)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/date-picker/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -258,6 +270,7 @@ Each component should have two documentation files:
 | Layout | Stack/Inline/Grid/Container | - | - | - | ✅ Complete |
 | Alert | Status alerts | 3 | - | - | ✅ Complete |
 | Dialog | Overlay/modal dialog | 3 | - | - | ✅ Complete |
+| DatePicker | Date/time input and calendar panel | 3 | - | 3 | ✅ Complete |
 | AutoComplete | Typeahead suggestions + chips | 3 | - | 3 | ✅ Complete |
 | CascadeSelect | Hierarchical dropdown tree select | 3 | - | 3 | ✅ Complete |
 | ColorPicker | Visual color selection (hex/rgb/hsb) | 3 | - | - | ✅ Complete |

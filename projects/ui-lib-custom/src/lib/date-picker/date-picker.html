@@ -1,0 +1,433 @@
+<div class="ui-lib-datepicker__control">
+  @if (!inline()) {
+    <div class="ui-lib-datepicker__input-wrapper">
+      <input
+        #inputElement
+        class="ui-lib-datepicker__input"
+        type="text"
+        role="combobox"
+        [id]="resolvedInputId()"
+        [name]="name() || resolvedInputId()"
+        [value]="formattedValue()"
+        [placeholder]="placeholder()"
+        [disabled]="isDisabled()"
+        [attr.tabindex]="isDisabled() ? -1 : tabindex()"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+        [attr.aria-controls]="panelVisible() ? resolvedInputId() + '-panel' : null"
+        [attr.aria-haspopup]="'dialog'"
+        (focus)="onInputFocusEvent($event)"
+        (blur)="onInputBlurEvent($event)"
+        (keydown)="onInputKeydown($event)"
+        (input)="onInputChange($any($event.target).value)"
+      />
+
+      @if (showClear() && formattedValue() && !isDisabled()) {
+        <button
+          type="button"
+          class="ui-lib-datepicker__clear-button"
+          aria-label="Clear date"
+          (click)="clearValue($event)"
+        >
+          ×
+        </button>
+      }
+
+      @if (showIcon()) {
+        @if (iconDisplay() === 'button') {
+          <button
+            type="button"
+            class="ui-lib-datepicker__trigger"
+            [disabled]="isDisabled()"
+            [attr.aria-label]="'Open date picker'"
+            [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
+            [attr.aria-controls]="panelVisible() ? resolvedInputId() + '-panel' : null"
+            (click)="onTriggerClick($event)"
+          >
+            📅
+          </button>
+        } @else {
+          <span class="ui-lib-datepicker__input-icon" aria-hidden="true">📅</span>
+        }
+      }
+    </div>
+  }
+
+  @if (inline() || overlayVisible()) {
+    <div
+      #panelElement
+      class="ui-lib-datepicker__panel"
+      [attr.id]="resolvedInputId() + '-panel'"
+      role="dialog"
+      [attr.aria-modal]="inline() ? 'false' : 'true'"
+      [attr.aria-label]="ariaLabel() || 'Date picker'"
+      (keydown)="onPanelKeydown($event)"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="ui-lib-datepicker__calendar-layout">
+        @if (!timeOnly()) {
+          <div class="ui-lib-datepicker__header">
+            <button
+              type="button"
+              class="ui-lib-datepicker__prev-button"
+              [disabled]="isDisabled() || !canNavigatePrev()"
+              aria-label="Previous month"
+              (click)="navigateMonth(-1)"
+            >
+              ‹
+            </button>
+
+            <div class="ui-lib-datepicker__title">
+              @if (monthNavigator()) {
+                <select
+                  class="ui-lib-datepicker__month-select"
+                  [disabled]="isDisabled()"
+                  [value]="currentMonth()"
+                  (change)="onMonthNavigatorChange($event)"
+                >
+                  @for (monthOption of monthOptions(); track monthOption.month) {
+                    <option [value]="monthOption.month" [disabled]="monthOption.disabled">
+                      {{ locale().monthNames[monthOption.month] }}
+                    </option>
+                  }
+                </select>
+              } @else {
+                <button
+                  type="button"
+                  class="ui-lib-datepicker__month-label"
+                  [disabled]="isDisabled()"
+                  (click)="onMonthLabelClick()"
+                >
+                  {{ monthLabel() }}
+                </button>
+              }
+
+              @if (yearNavigator()) {
+                <select
+                  class="ui-lib-datepicker__year-select"
+                  [disabled]="isDisabled()"
+                  [value]="currentYear()"
+                  (change)="onYearNavigatorChange($event)"
+                >
+                  @for (yearValue of allowedYears(); track yearValue) {
+                    <option [value]="yearValue">{{ yearValue }}</option>
+                  }
+                </select>
+              } @else {
+                <button
+                  type="button"
+                  class="ui-lib-datepicker__year-label"
+                  [disabled]="isDisabled()"
+                  (click)="onYearLabelClick()"
+                >
+                  {{ yearLabel() }}
+                </button>
+              }
+            </div>
+
+            <button
+              type="button"
+              class="ui-lib-datepicker__next-button"
+              [disabled]="isDisabled() || !canNavigateNext()"
+              aria-label="Next month"
+              (click)="navigateMonth(1)"
+            >
+              ›
+            </button>
+          </div>
+
+          @switch (currentView()) {
+            @case ('date') {
+            <div class="ui-lib-datepicker__months" [attr.data-count]="numberOfMonths()">
+              @for (monthGrid of monthGridData(); let monthIndex = $index; track monthIndex) {
+                <div class="ui-lib-datepicker__month-panel">
+                  @if (numberOfMonths() > 1) {
+                    <div class="ui-lib-datepicker__month-panel-title">
+                      {{ getMonthLabelByIndex(monthIndex) }} {{ getYearLabelByIndex(monthIndex) }}
+                    </div>
+                  }
+
+                  <table class="ui-lib-datepicker__grid" role="grid" [attr.aria-label]="getMonthLabelByIndex(monthIndex) + ' ' + getYearLabelByIndex(monthIndex)">
+                    <thead>
+                      <tr role="row">
+                        @if (showWeek()) {
+                          <th class="ui-lib-datepicker__week-header" scope="col" role="columnheader">Wk</th>
+                        }
+                        @for (weekDayLabel of weekDayLabels(); track weekDayLabel + '-' + $index) {
+                          <th class="ui-lib-datepicker__week-day" scope="col" role="columnheader">{{ weekDayLabel }}</th>
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (week of getMonthWeeks(monthGrid); let weekIndex = $index; track weekIndex) {
+                        <tr role="row">
+                          @if (showWeek()) {
+                            <td class="ui-lib-datepicker__week-number" role="gridcell">{{ getWeekNumber(week) }}</td>
+                          }
+                          @for (dateMeta of week; track dateMeta.year + '-' + dateMeta.month + '-' + dateMeta.day + '-' + $index) {
+                            <td
+                              class="ui-lib-datepicker__day-cell"
+                              role="gridcell"
+                              [attr.aria-selected]="dateMeta.selected ? 'true' : 'false'"
+                              [attr.aria-disabled]="dateMeta.disabled ? 'true' : 'false'"
+                            >
+                              <button
+                                type="button"
+                                class="{{ getDateCellClasses(dateMeta) }}"
+                                [attr.id]="getDateCellId(monthIndex, dateMeta)"
+                                [attr.data-date-key]="dateMeta.year + '-' + dateMeta.month + '-' + dateMeta.day"
+                                [attr.aria-label]="getDateAriaLabel(dateMeta)"
+                                [attr.tabindex]="isDateFocused(dateMeta) ? 0 : -1"
+                                [disabled]="isDisabled() || dateMeta.disabled"
+                                (click)="onDateSelect($event, dateMeta)"
+                                (keydown)="onDateCellKeydown($event, dateMeta)"
+                                (mouseenter)="onDateHover(dateMeta)"
+                                (mouseleave)="onDateMouseLeave()"
+                              >
+                                @if (!dateMeta.otherMonth || showOtherMonths()) {
+                                  {{ dateMeta.day }}
+                                } @else {
+                                  <span class="ui-lib-datepicker__day-empty" aria-hidden="true">&nbsp;</span>
+                                }
+                              </button>
+                            </td>
+                          }
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              }
+            </div>
+            }
+
+            @case ('month') {
+            <div class="ui-lib-datepicker__month-grid" role="grid" aria-label="Month picker">
+              @for (monthOption of monthOptions(); let monthIndex = $index; track monthOption.month) {
+                <button
+                  type="button"
+                  class="ui-lib-datepicker__month-cell"
+                  [class.ui-lib-datepicker__month-cell--selected]="monthOption.selected"
+                  [class.ui-lib-datepicker__month-cell--disabled]="monthOption.disabled"
+                  [attr.aria-label]="locale().monthNames[monthOption.month]"
+                  [attr.aria-selected]="monthOption.selected ? 'true' : 'false'"
+                  [attr.aria-disabled]="monthOption.disabled ? 'true' : 'false'"
+                  [attr.data-month-index]="monthIndex"
+                  [attr.tabindex]="focusedMonthIndex() === monthIndex ? 0 : -1"
+                  [disabled]="isDisabled() || monthOption.disabled"
+                  (click)="onMonthSelect($event, monthIndex)"
+                  (keydown)="onMonthCellKeydown($event, monthIndex)"
+                >
+                  {{ monthOption.label }}
+                </button>
+              }
+            </div>
+            }
+
+            @case ('year') {
+            <div class="ui-lib-datepicker__year-header">
+              <button
+                type="button"
+                class="ui-lib-datepicker__prev-button"
+                [disabled]="isDisabled()"
+                aria-label="Previous decade"
+                (click)="navigateDecade(-1)"
+              >
+                ‹
+              </button>
+              <div class="ui-lib-datepicker__decade-label">
+                {{ currentDecadeStart() }} - {{ currentDecadeStart() + 11 }}
+              </div>
+              <button
+                type="button"
+                class="ui-lib-datepicker__next-button"
+                [disabled]="isDisabled()"
+                aria-label="Next decade"
+                (click)="navigateDecade(1)"
+              >
+                ›
+              </button>
+            </div>
+
+            <div class="ui-lib-datepicker__year-grid" role="grid" aria-label="Year picker">
+              @for (yearOption of yearOptions(); let yearIndex = $index; track yearOption.year) {
+                <button
+                  type="button"
+                  class="ui-lib-datepicker__year-cell"
+                  [class.ui-lib-datepicker__year-cell--selected]="yearOption.selected"
+                  [class.ui-lib-datepicker__year-cell--disabled]="yearOption.disabled"
+                  [attr.aria-label]="'' + yearOption.year"
+                  [attr.aria-selected]="yearOption.selected ? 'true' : 'false'"
+                  [attr.aria-disabled]="yearOption.disabled ? 'true' : 'false'"
+                  [attr.data-year-index]="yearIndex"
+                  [attr.tabindex]="focusedYearIndex() === yearIndex ? 0 : -1"
+                  [disabled]="isDisabled() || yearOption.disabled"
+                  (click)="onYearSelect($event, yearIndex)"
+                  (keydown)="onYearCellKeydown($event, yearIndex)"
+                >
+                  {{ yearOption.year }}
+                </button>
+              }
+            </div>
+            }
+          }
+        }
+
+        @if (showTime() || timeOnly()) {
+          <div class="ui-lib-datepicker__time-panel" role="group" aria-label="Time picker">
+            <div class="ui-lib-datepicker__time-group" role="group" aria-label="Hour">
+              <button
+                type="button"
+                class="ui-lib-datepicker__time-action"
+                [disabled]="isDisabled()"
+                aria-label="Increase hour"
+                (click)="incrementHour()"
+              >
+                ▲
+              </button>
+              <input
+                class="ui-lib-datepicker__time-input"
+                type="text"
+                inputmode="numeric"
+                role="spinbutton"
+                [disabled]="isDisabled()"
+                [value]="getHourInputValue()"
+                [attr.aria-valuemin]="getHourSpinMin()"
+                [attr.aria-valuemax]="getHourSpinMax()"
+                [attr.aria-valuenow]="getHourDisplayValue()"
+                [attr.aria-label]="'Hour'"
+                (input)="onTimeInputChange('hour', $any($event.target).value)"
+                (blur)="onTimeInputBlur('hour')"
+                (keydown)="onTimeInputKeydown($event, 'hour')"
+              />
+              <button
+                type="button"
+                class="ui-lib-datepicker__time-action"
+                [disabled]="isDisabled()"
+                aria-label="Decrease hour"
+                (click)="decrementHour()"
+              >
+                ▼
+              </button>
+            </div>
+
+            <span class="ui-lib-datepicker__time-separator" aria-hidden="true">:</span>
+
+            <div class="ui-lib-datepicker__time-group" role="group" aria-label="Minute">
+              <button
+                type="button"
+                class="ui-lib-datepicker__time-action"
+                [disabled]="isDisabled()"
+                aria-label="Increase minute"
+                (click)="incrementMinute()"
+              >
+                ▲
+              </button>
+              <input
+                class="ui-lib-datepicker__time-input"
+                type="text"
+                inputmode="numeric"
+                role="spinbutton"
+                [disabled]="isDisabled()"
+                [value]="getMinuteInputValue()"
+                [attr.aria-valuemin]="0"
+                [attr.aria-valuemax]="59"
+                [attr.aria-valuenow]="currentMinute()"
+                [attr.aria-label]="'Minute'"
+                (input)="onTimeInputChange('minute', $any($event.target).value)"
+                (blur)="onTimeInputBlur('minute')"
+                (keydown)="onTimeInputKeydown($event, 'minute')"
+              />
+              <button
+                type="button"
+                class="ui-lib-datepicker__time-action"
+                [disabled]="isDisabled()"
+                aria-label="Decrease minute"
+                (click)="decrementMinute()"
+              >
+                ▼
+              </button>
+            </div>
+
+            @if (showSeconds()) {
+              <span class="ui-lib-datepicker__time-separator" aria-hidden="true">:</span>
+
+              <div class="ui-lib-datepicker__time-group" role="group" aria-label="Second">
+                <button
+                  type="button"
+                  class="ui-lib-datepicker__time-action"
+                  [disabled]="isDisabled()"
+                  aria-label="Increase second"
+                  (click)="incrementSecond()"
+                >
+                  ▲
+                </button>
+                <input
+                  class="ui-lib-datepicker__time-input"
+                  type="text"
+                  inputmode="numeric"
+                  role="spinbutton"
+                  [disabled]="isDisabled()"
+                  [value]="getSecondInputValue()"
+                  [attr.aria-valuemin]="0"
+                  [attr.aria-valuemax]="59"
+                  [attr.aria-valuenow]="currentSecond()"
+                  [attr.aria-label]="'Second'"
+                  (input)="onTimeInputChange('second', $any($event.target).value)"
+                  (blur)="onTimeInputBlur('second')"
+                  (keydown)="onTimeInputKeydown($event, 'second')"
+                />
+                <button
+                  type="button"
+                  class="ui-lib-datepicker__time-action"
+                  [disabled]="isDisabled()"
+                  aria-label="Decrease second"
+                  (click)="decrementSecond()"
+                >
+                  ▼
+                </button>
+              </div>
+            }
+
+            @if (hourFormat() === '12') {
+              <button
+                type="button"
+                class="ui-lib-datepicker__ampm-toggle"
+                [disabled]="isDisabled()"
+                [attr.aria-label]="'Toggle AM/PM, current ' + currentAmPm()"
+                [attr.aria-pressed]="currentAmPm() === 'PM' ? 'true' : 'false'"
+                (click)="toggleAmPm()"
+              >
+                {{ currentAmPm() }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      @if (showButtonBar()) {
+        <div class="ui-lib-datepicker__button-bar">
+          <ng-content select="[datePickerButtonBar]"></ng-content>
+          <button
+            type="button"
+            class="ui-lib-datepicker__today-button"
+            [disabled]="isDisabled()"
+            (click)="onTodayButtonClick($event)"
+          >
+            {{ locale().today }}
+          </button>
+          <button
+            type="button"
+            class="ui-lib-datepicker__clear-button"
+            [disabled]="isDisabled()"
+            (click)="onClearButtonClick($event)"
+          >
+            {{ locale().clear }}
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>
+

@@ -37,6 +37,10 @@
     "npm": ">=9.0.0"
   },
   "exports": {
+    "./date-picker": {
+      "esm2022": "./esm2022/date-picker/index.mjs",
+      "esm": "./esm2022/date-picker/index.mjs"
+    },
     "./themes/themes.css": {
       "default": "./themes/themes.css"
     },
@@ -49,6 +53,9 @@
   },
   "typesVersions": {
     "*": {
+      "date-picker": [
+        "./date-picker/index.d.ts"
+      ],
       "testing": [
         "./testing/index.d.ts"
       ]

@@ -178,6 +178,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/color-picker',
         },
+        {
+          label: 'DatePicker',
+          icon: 'pi pi-circle',
+          route: '/date-picker',
+        },
       ],
     },
   ]);

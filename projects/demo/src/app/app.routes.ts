@@ -161,6 +161,14 @@ export const routes: Routes = [
       ),
     title: 'ColorPicker - UI Components Library',
   },
+  {
+    path: 'date-picker',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/date-picker/date-picker-demo.component').then(
+        (m: { DatePickerDemoComponent: Type<unknown> }): Type<unknown> => m.DatePickerDemoComponent
+      ),
+    title: 'DatePicker - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

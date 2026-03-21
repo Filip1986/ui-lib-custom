@@ -957,6 +957,232 @@ export const SELECTBUTTON_TOKENS: Readonly<SelectButtonTokens> = {
 export type SelectButtonTokenKey = keyof typeof SELECTBUTTON_TOKENS;
 
 // ============================================================================
+// DATE PICKER TOKENS
+// ============================================================================
+
+export type DatePickerVariant = 'material' | 'bootstrap' | 'minimal';
+export type DatePickerSize = 'sm' | 'md' | 'lg';
+
+export type DatePickerTokens = {
+  input: {
+    bg: string;
+    color: string;
+    borderColor: string;
+    borderColorHover: string;
+    borderColorFocus: string;
+    borderRadius: string;
+    paddingY: Record<DatePickerSize, string>;
+    paddingX: Record<DatePickerSize, string>;
+    minHeight: Record<DatePickerSize, string>;
+    filledBg: string;
+    invalidBorderColor: string;
+    focusRing: string;
+  };
+  panel: {
+    bg: string;
+    color: string;
+    borderColor: string;
+    borderRadius: string;
+    shadow: string;
+    padding: string;
+    maxHeight: string;
+    zIndex: string;
+  };
+  navigation: {
+    buttonSize: string;
+    buttonRadius: string;
+    buttonBg: string;
+    buttonBgHover: string;
+    buttonBorderColor: string;
+    titleFontSize: string;
+    titleFontWeight: string;
+    gap: string;
+    titleGap: string;
+  };
+  cell: {
+    daySize: Record<DatePickerSize, string>;
+    dayFontSize: Record<DatePickerSize, string>;
+    dayFontWeight: string;
+    dayBorderRadius: string;
+    dayColor: string;
+    dayBgHover: string;
+    dayBgToday: string;
+    dayColorToday: string;
+    dayBgSelected: string;
+    dayColorSelected: string;
+    dayBgRangeBetween: string;
+    dayColorDisabled: string;
+    dayColorOtherMonth: string;
+    monthYearMinHeight: Record<DatePickerSize, string>;
+    monthYearFontSize: string;
+    monthYearBorderRadius: string;
+  };
+  time: {
+    gap: string;
+    inputWidth: Record<DatePickerSize, string>;
+    inputHeight: Record<DatePickerSize, string>;
+    inputBg: string;
+    inputColor: string;
+    inputBorderColor: string;
+    inputBorderRadius: string;
+    buttonSize: string;
+    buttonBg: string;
+    buttonBgHover: string;
+    buttonBorderColor: string;
+    separatorColor: string;
+    ampmMinWidth: string;
+  };
+  buttonBar: {
+    paddingTop: string;
+    gap: string;
+    borderColor: string;
+  };
+  variants: Record<
+    DatePickerVariant,
+    {
+      panelShadow: string;
+      dayBgSelected: string;
+      dayBgHover: string;
+    }
+  >;
+  transition: {
+    fast: string;
+    normal: string;
+  };
+};
+
+export const DATEPICKER_TOKENS: Readonly<DatePickerTokens> = {
+  input: {
+    bg: COLOR_NEUTRAL.white,
+    color: COLOR_NEUTRAL[900],
+    borderColor: COLOR_NEUTRAL[300],
+    borderColorHover: COLOR_NEUTRAL[400],
+    borderColorFocus: COLOR_PRIMARY[600],
+    borderRadius: BORDER_RADIUS.lg,
+    paddingY: {
+      sm: SPACING_TOKENS[1],
+      md: SPACING_TOKENS[2],
+      lg: SPACING_TOKENS[3],
+    },
+    paddingX: {
+      sm: '0.625rem',
+      md: SPACING_TOKENS[3],
+      lg: '0.9rem',
+    },
+    minHeight: {
+      sm: '2.25rem',
+      md: '2.75rem',
+      lg: '3.125rem',
+    },
+    filledBg: COLOR_NEUTRAL[100],
+    invalidBorderColor: COLOR_DANGER[600],
+    focusRing: `0 0 0 3px color-mix(in srgb, ${COLOR_PRIMARY[600]} 24%, transparent)`,
+  },
+  panel: {
+    bg: COLOR_NEUTRAL.white,
+    color: COLOR_NEUTRAL[900],
+    borderColor: COLOR_NEUTRAL[300],
+    borderRadius: BORDER_RADIUS.xl,
+    shadow: SHADOWS['shadow-8']!,
+    padding: SPACING_TOKENS[3],
+    maxHeight: '28rem',
+    zIndex: `${Z_INDEX.popover}`,
+  },
+  navigation: {
+    buttonSize: '2rem',
+    buttonRadius: BORDER_RADIUS.md,
+    buttonBg: COLOR_NEUTRAL.white,
+    buttonBgHover: 'color-mix(in srgb, #000 4%, transparent)',
+    buttonBorderColor: COLOR_NEUTRAL[300],
+    titleFontSize: FONT_SIZES.sm,
+    titleFontWeight: `${FONT_WEIGHTS.semibold}`,
+    gap: SPACING_TOKENS[2],
+    titleGap: SPACING_TOKENS[1],
+  },
+  cell: {
+    daySize: {
+      sm: '1.875rem',
+      md: '2.25rem',
+      lg: '2.625rem',
+    },
+    dayFontSize: {
+      sm: FONT_SIZES.xs,
+      md: FONT_SIZES.sm,
+      lg: FONT_SIZES.base,
+    },
+    dayFontWeight: `${FONT_WEIGHTS.normal}`,
+    dayBorderRadius: BORDER_RADIUS.lg,
+    dayColor: COLOR_NEUTRAL[900],
+    dayBgHover: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 12%, transparent)`,
+    dayBgToday: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 16%, transparent)`,
+    dayColorToday: COLOR_PRIMARY[700],
+    dayBgSelected: COLOR_PRIMARY[600],
+    dayColorSelected: COLOR_NEUTRAL[50],
+    dayBgRangeBetween: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 22%, transparent)`,
+    dayColorDisabled: `color-mix(in srgb, ${COLOR_NEUTRAL[900]} 38%, transparent)`,
+    dayColorOtherMonth: COLOR_NEUTRAL[600],
+    monthYearMinHeight: {
+      sm: '2rem',
+      md: '2.5rem',
+      lg: '2.875rem',
+    },
+    monthYearFontSize: FONT_SIZES.sm,
+    monthYearBorderRadius: BORDER_RADIUS.lg,
+  },
+  time: {
+    gap: SPACING_TOKENS[2],
+    inputWidth: {
+      sm: '2.25rem',
+      md: '2.5rem',
+      lg: '2.875rem',
+    },
+    inputHeight: {
+      sm: '1.75rem',
+      md: '2rem',
+      lg: '2.25rem',
+    },
+    inputBg: COLOR_NEUTRAL.white,
+    inputColor: COLOR_NEUTRAL[900],
+    inputBorderColor: COLOR_NEUTRAL[300],
+    inputBorderRadius: BORDER_RADIUS.md,
+    buttonSize: '1.625rem',
+    buttonBg: COLOR_NEUTRAL.white,
+    buttonBgHover: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 10%, transparent)`,
+    buttonBorderColor: COLOR_NEUTRAL[300],
+    separatorColor: COLOR_NEUTRAL[600],
+    ampmMinWidth: '2.75rem',
+  },
+  buttonBar: {
+    paddingTop: SPACING_TOKENS[2],
+    gap: SPACING_TOKENS[2],
+    borderColor: `color-mix(in srgb, ${COLOR_NEUTRAL[300]} 65%, transparent)`,
+  },
+  variants: {
+    material: {
+      panelShadow: SHADOWS['shadow-40']!,
+      dayBgSelected: COLOR_PRIMARY[600],
+      dayBgHover: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 14%, transparent)`,
+    },
+    bootstrap: {
+      panelShadow: SHADOWS['shadow-20']!,
+      dayBgSelected: '#0d6efd',
+      dayBgHover: 'color-mix(in srgb, #0d6efd 10%, transparent)',
+    },
+    minimal: {
+      panelShadow: SHADOWS.none,
+      dayBgSelected: COLOR_HELP[600],
+      dayBgHover: 'color-mix(in srgb, currentColor 6%, transparent)',
+    },
+  },
+  transition: {
+    fast: TRANSITION_DURATION.fast,
+    normal: TRANSITION_DURATION.base,
+  },
+};
+
+export type DatePickerTokenKey = keyof typeof DATEPICKER_TOKENS;
+
+// ============================================================================
 // COLOR PICKER TOKENS
 // ============================================================================
 

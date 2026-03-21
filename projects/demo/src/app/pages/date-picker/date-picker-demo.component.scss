@@ -1,0 +1,58 @@
+@use '../../shared/styles/doc-page.scss';
+
+.examples {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.example-section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.row-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.stack-sm {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.variant-title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.value-text {
+  font-size: 0.9rem;
+  color: var(--uilib-page-fg);
+}
+
+.error-text {
+  font-size: 0.875rem;
+  color: var(--uilib-color-danger-600, #e53935);
+}
+
+@media (max-width: 960px) {
+  .row-2,
+  .row-3 {
+    grid-template-columns: 1fr;
+  }
+}

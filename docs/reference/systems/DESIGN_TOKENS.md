@@ -604,6 +604,48 @@ import { COLORPICKER_TOKENS, type ColorPickerTokenKey } from 'ui-lib-custom/toke
 
 These tokens map to public CSS variables under the `--uilib-colorpicker-*` namespace.
 
+#### DatePicker
+
+```typescript
+import { DATEPICKER_TOKENS, type DatePickerTokenKey } from 'ui-lib-custom/tokens';
+```
+
+| Token Path | Default |
+| --- | --- |
+| `input.bg` | `#ffffff` |
+| `input.color` | `#212121` |
+| `input.borderColor` | `#e0e0e0` |
+| `input.borderColorFocus` | `#1e88e5` |
+| `input.borderRadius` | `0.5rem` |
+| `input.paddingY.md` | `0.5rem` |
+| `input.paddingX.md` | `0.75rem` |
+| `input.minHeight.md` | `2.75rem` |
+| `input.filledBg` | `#f5f5f5` |
+| `panel.bg` | `#ffffff` |
+| `panel.borderColor` | `#e0e0e0` |
+| `panel.borderRadius` | `0.75rem` |
+| `panel.padding` | `0.75rem` |
+| `panel.maxHeight` | `28rem` |
+| `navigation.buttonSize` | `2rem` |
+| `navigation.titleFontSize` | `0.875rem` |
+| `cell.daySize.md` | `2.25rem` |
+| `cell.dayFontSize.md` | `0.875rem` |
+| `cell.dayBgHover` | `color-mix(in srgb, #1e88e5 12%, transparent)` |
+| `cell.dayBgToday` | `color-mix(in srgb, #1e88e5 16%, transparent)` |
+| `cell.dayBgSelected` | `#1e88e5` |
+| `cell.dayBgRangeBetween` | `color-mix(in srgb, #1e88e5 22%, transparent)` |
+| `cell.monthYearMinHeight.md` | `2.5rem` |
+| `time.inputWidth.md` | `2.5rem` |
+| `time.inputHeight.md` | `2rem` |
+| `time.buttonSize` | `1.625rem` |
+| `buttonBar.paddingTop` | `0.5rem` |
+| `buttonBar.gap` | `0.5rem` |
+| `variants.material.panelShadow` | `0 20px 40px 0 rgba(0, 0, 0, 0.3)` |
+| `variants.bootstrap.dayBgSelected` | `#0d6efd` |
+| `variants.minimal.dayBgSelected` | `#7e22ce` |
+
+DatePicker tokens map to public CSS variables under the `--uilib-datepicker-*` namespace and are consumed by `ThemeConfigService` during preset-to-CSS-variable mapping.
+
 **Full Token Export:**
 ```typescript
 export * from './design-tokens';  // All tokens available

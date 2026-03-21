@@ -1,0 +1,8 @@
+{
+  "ngPackage": {
+    "lib": {
+      "entryFile": "../src/lib/date-picker/index.ts"
+    }
+  }
+}
+
