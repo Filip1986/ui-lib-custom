@@ -24,7 +24,7 @@ Inputs used:
 | `onChange` with `{ value, originalEvent }` | Yes | Event-shape parity exists in `cascade-select` style outputs | P0 | Add typed `ColorPickerChangeEvent`. |
 | `onShow` / `onHide` (popup) | Yes | Pattern exists in `cascade-select` | P0 | Emit only in popup mode. |
 | Keyboard support (open/select/close/navigation) | Yes | Strong key handling patterns via `KEYBOARD_KEYS` and select-like components | P0 | Add 2D panel and hue-slider key semantics. |
-| `appendTo` overlay mounting | Yes | API placeholder exists in `autocomplete`; no real portal infra yet | P2 | Keep API parity input; defer true portal behavior until shared overlay infra lands. |
+| `appendTo` overlay mounting | Yes | Implemented in `autocomplete` (`appendTo='body'` default, `self`/selector/element supported) | P2 | Reuse autocomplete approach in v1 if needed; keep shared overlay infra extraction as follow-up. |
 | `showTransitionOptions` / `hideTransitionOptions` | Yes | No generic show/hide transition API for popup controls | P1 | Map to CSS variable-driven motion inputs; avoid Angular animation coupling. |
 | `inputId`, `tabindex`, `style`, `styleClass` | Yes | `inputId`/`tabindex` are common; style/styleClass not consistently exposed | P0 (`inputId`/`tabindex`), P1 (`style`/`styleClass`) | Align with existing component API style and host class patterns. |
 
@@ -48,7 +48,7 @@ Inputs used:
 | Shared overlay utility/service | Not present in `ui-lib-custom/core`; CDK overlay not used in library components | Popup logic would otherwise be copy-pasted again. |
 | Shared click-outside utility | Repeated `@HostListener('document:click')` implementations | Increased duplication and inconsistency risk. |
 | Public color conversion utility | `theme-editor.service.ts` has private hex/rgb/hsl helpers only | ColorPicker needs reusable, tested hex/rgb/hsb conversion API. |
-| Portal/`appendTo` mounting infra | `appendTo` is reserved in `autocomplete` docs, not implemented | PrimeNG parity for body portal positioning cannot be fully delivered in v1. |
+| Portal/`appendTo` mounting infra | Per-component behavior exists in `autocomplete`; shared core overlay utility is not yet present | Portal parity is feasible component-by-component, but shared infra is still needed to avoid duplication. |
 
 ## Existing Color Utility Inventory
 
@@ -77,7 +77,7 @@ Inputs used:
 
 | Item | Why deferred |
 | --- | --- |
-| Full portal mounting (`appendTo`) | Existing docs already defer this in other popup components pending overlay infrastructure. |
+| Full shared portal mounting (`appendTo`) utility | No centralized core overlay service yet; current popup components implement mount logic locally. |
 | Global overlay stack manager | Not required for first ColorPicker release; can align with future overlay initiative. |
 | Angular CDK Overlay dependency | Not currently used across library popup components; introducing now increases surface and migration complexity. |
 
@@ -107,8 +107,8 @@ Why:
 - Lowest-risk parity path and consistent behavior with current controls.
 
 Follow-up path:
-- Define a `core` overlay helper once at least two popup components require portal/collision management.
-- Implement `appendTo` as P2 with shared overlay utility instead of per-component hacks.
+- Define a `core` overlay helper once at least two popup components require shared portal/collision management.
+- Keep `appendTo` behavior implementation aligned across popup components while centralization is pending.
 
 ## 3) Utility placement: `core` vs `color-picker` entry point
 

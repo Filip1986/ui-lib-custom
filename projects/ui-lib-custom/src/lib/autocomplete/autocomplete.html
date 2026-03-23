@@ -27,7 +27,7 @@
   />
 </ng-template>
 
-<div class="ui-autocomplete-container">
+<div #containerElement class="ui-autocomplete-container">
   @if (multiple()) {
     <ul class="ui-autocomplete-chip-list" [attr.aria-disabled]="isDisabled() ? 'true' : null">
       @for (chip of selectedChips(); track chipTrackBy($index, chip)) {
@@ -98,6 +98,7 @@
 
 @if (panelVisible() && (loading() || visibleOptions().length > 0 || emptyTemplate())) {
   <div
+    #panelElement
     class="ui-autocomplete-panel"
     [id]="listboxId"
     [attr.role]="listboxRole"

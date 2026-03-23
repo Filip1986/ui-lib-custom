@@ -51,13 +51,20 @@ import { UiLibAutoComplete } from 'ui-lib-custom/autocomplete';
 | `scrollHeight` | `string` | `'200px'` | Panel max-height and virtual viewport height. |
 | `tabindex` | `number` | `0` | Input tabindex. |
 | `inputId` | `string` | `''` | Optional explicit input id. |
-| `appendTo` | `string \| HTMLElement \| undefined` | `undefined` | Reserved API for custom mount target handling. |
+| `appendTo` | `string \| HTMLElement \| undefined` | `'body'` | Panel mount target. Supports `'body'`, `'self'`, CSS selector, or `HTMLElement`. |
 | `disabled` | `boolean` | `false` | Disabled state. |
 | `invalid` | `boolean` | `false` | Invalid state styling and ARIA. |
 | `readonly` | `boolean` | `false` | Readonly input behavior. |
 | `loading` | `boolean` | `false` | Shows loading state/template in panel. |
 | `ariaLabel` | `string \| null` | `null` | Direct ARIA label for combobox/listbox context. |
 | `ariaLabelledBy` | `string \| null` | `null` | ARIA labelledby id reference(s). |
+
+### `appendTo` behavior
+
+- Default is `'body'` so the suggestions panel is mounted outside clipping containers (for example cards with `overflow: hidden`).
+- Use `'self'` (or an empty string) to keep the panel mounted in the component host.
+- You can also pass a CSS selector string (for example `'#overlay-root'`) or an `HTMLElement`.
+- If the selector does not resolve to an element, the panel falls back to host mounting.
 
 ## Outputs
 
@@ -105,6 +112,7 @@ Slots are provided through marker directives exported from `ui-lib-custom/autoco
 | `--uilib-autocomplete-panel-border` | `var(--uilib-autocomplete-border)` | Panel border color. |
 | `--uilib-autocomplete-panel-shadow` | `var(--uilib-select-dropdown-shadow, var(--uilib-shadow-md, none))` | Panel shadow. |
 | `--uilib-autocomplete-panel-max-height` | `260px` | Panel max-height fallback. |
+| `--uilib-autocomplete-panel-z-index` | `1000` | Panel stacking order. |
 | `--uilib-autocomplete-option-padding` | density-scaled | Option row spacing. |
 | `--uilib-autocomplete-option-hover-bg` | primary tint | Option hover/active background. |
 | `--uilib-autocomplete-option-selected-bg` | primary tint | Selected option background. |

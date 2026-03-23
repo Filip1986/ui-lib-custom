@@ -89,7 +89,12 @@ class ReactiveHostComponent {
     AutoCompleteEmptyDirective,
   ],
   template: `
-    <ui-lib-autocomplete [suggestions]="options" [multiple]="multiple" [group]="group">
+    <ui-lib-autocomplete
+      [suggestions]="options"
+      [multiple]="multiple"
+      [group]="group"
+      appendTo="self"
+    >
       <ng-template uiAutoCompleteItem let-option>
         <span class="custom-item">Item: {{ option.label || option }}</span>
       </ng-template>
@@ -129,6 +134,7 @@ describe('UiLibAutoComplete', (): void => {
 
     fixture = TestBed.createComponent(UiLibAutoComplete);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('appendTo', 'self');
     fixture.detectChanges();
   });
 
@@ -214,6 +220,61 @@ describe('UiLibAutoComplete', (): void => {
   });
 
   describe('Single Selection Mode', (): void => {
+    it('defaults appendTo to body', (): void => {
+      const defaultFixture: ComponentFixture<UiLibAutoComplete> =
+        TestBed.createComponent(UiLibAutoComplete);
+      const defaultComponent: UiLibAutoComplete = defaultFixture.componentInstance;
+
+      defaultFixture.componentRef.setInput('suggestions', [
+        { label: 'Alpha', value: 'alpha' },
+        { label: 'Beta', value: 'beta' },
+      ]);
+      defaultFixture.componentRef.setInput('optionLabel', 'label');
+      defaultFixture.componentRef.setInput('optionValue', 'value');
+      defaultFixture.detectChanges();
+
+      defaultComponent.showPanel();
+      defaultFixture.detectChanges();
+
+      const panel: HTMLElement | null = document.body.querySelector('.ui-autocomplete-panel');
+      expect(panel).toBeTruthy();
+      expect(panel?.parentElement).toBe(document.body);
+    });
+
+    it('mounts the suggestions panel on document body when appendTo is body', (): void => {
+      setFlatSuggestions();
+      fixture.componentRef.setInput('appendTo', 'body');
+
+      component.showPanel();
+      fixture.detectChanges();
+
+      const panel: HTMLElement | null = document.body.querySelector('.ui-autocomplete-panel');
+      expect(panel).toBeTruthy();
+      expect(panel?.parentElement).toBe(document.body);
+    });
+
+    it('keeps panel open for panel clicks and closes on outside clicks when appendTo is body', (): void => {
+      setFlatSuggestions();
+      fixture.componentRef.setInput('appendTo', 'body');
+
+      component.showPanel();
+      fixture.detectChanges();
+
+      const panel: HTMLElement = getRequiredItem(
+        Array.from(document.body.querySelectorAll('.ui-autocomplete-panel')),
+        0,
+        'body mounted panel'
+      );
+
+      panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      fixture.detectChanges();
+      expect(document.body.querySelector('.ui-autocomplete-panel')).toBeTruthy();
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      fixture.detectChanges();
+      expect(document.body.querySelector('.ui-autocomplete-panel')).toBeFalsy();
+    });
+
     it('shows suggestions panel on typing', (): void => {
       jest.useFakeTimers();
       setFlatSuggestions();

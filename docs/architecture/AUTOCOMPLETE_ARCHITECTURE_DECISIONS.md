@@ -17,7 +17,7 @@ Define implementation decisions for `ui-lib-autocomplete` that align with existi
 | Topic | Decision |
 | --- | --- |
 | CVA model | Single mode writes scalar (`unknown \| null`); multiple mode writes array (`unknown[]`). |
-| Panel positioning | Phase 1 uses Select-style anchored panel; extraction path to shared core overlay utility. |
+| Panel positioning | Default panel mounts to `document.body` via `appendTo='body'` and uses fixed-position anchoring to the control; `appendTo='self'` keeps host mounting. |
 | Debounce | Signal + timer-based debounce for `completeMethod` emissions (no RxJS hard dependency in v1). |
 | Keyboard nav | Reuse Select navigation semantics (`activeDescendant`, enabled-option traversal, Home/End). |
 | Chips | Token list rendered before input in multiple mode, removable via button and keyboard delete flow. |
@@ -43,14 +43,14 @@ Define implementation decisions for `ui-lib-autocomplete` that align with existi
 
 ### Decision
 
-- Start with local absolute-positioned panel anchored to control (same pattern as `Select`).
-- Expose `appendTo` API now, but keep robust body-level portal behavior as phase extension.
+- Default to body-mounted overlay panel (`appendTo='body'`) anchored to the control bounds.
+- Support `appendTo='self'`, CSS selector, and `HTMLElement` targets; unresolved selectors fall back to host mounting.
 
 ### Rationale
 
-- Fastest path to functional P0/P1 while preserving API compatibility.
-- Keeps implementation small and testable.
-- Leaves clear refactor path into `ui-lib-custom/core` overlay utilities.
+- Prevents clipping inside containers with `overflow: hidden` while preserving API flexibility.
+- Keeps behavior aligned with PrimeNG-style overlay expectations for autocomplete.
+- Still leaves a clear extraction path into shared `ui-lib-custom/core` overlay utilities.
 
 ### Deferred
 
@@ -151,6 +151,6 @@ Define implementation decisions for `ui-lib-autocomplete` that align with existi
 
 ## Open Decisions (Post-P0)
 
-- Whether to centralize overlay positioning before implementing `appendTo` body portal behavior.
+- Whether to centralize overlay positioning/z-index management now that `appendTo` body behavior is in place.
 - Grouped options + virtual scroll coexistence strategy (flattened model vs grouped viewport sections).
 - Whether to add optional loading icon template parity (`loadingIconTemplate`) in same release as `loaderTemplate`.

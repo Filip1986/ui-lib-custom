@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,8 +13,14 @@ import {
   input,
   output,
   signal,
+  type AfterViewChecked,
+  type InputSignal,
+  type OnDestroy,
+  type OutputEmitterRef,
+  type Signal,
+  type WritableSignal,
+  viewChild,
 } from '@angular/core';
-import type { InputSignal, OutputEmitterRef, Signal, WritableSignal } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
@@ -58,6 +64,11 @@ export type {
 } from './autocomplete.types';
 
 let autocompleteIdCounter: number = 0;
+const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
+  'ui-autocomplete-panel--material',
+  'ui-autocomplete-panel--bootstrap',
+  'ui-autocomplete-panel--minimal',
+];
 
 /**
  * PrimeNG-inspired autocomplete with single and multiple selection modes.
@@ -94,7 +105,7 @@ let autocompleteIdCounter: number = 0;
     '[class.ui-lib-autocomplete--has-value]': 'hasValue()',
   },
 })
-export class UiLibAutoComplete implements ControlValueAccessor {
+export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked, OnDestroy {
   public readonly suggestions: InputSignal<unknown[]> = input<unknown[]>([]);
   public readonly optionLabel: InputSignal<string | undefined> = input<string | undefined>(
     undefined
@@ -142,7 +153,7 @@ export class UiLibAutoComplete implements ControlValueAccessor {
   public readonly inputId: InputSignal<string> = input<string>('');
   public readonly appendTo: InputSignal<string | HTMLElement | undefined> = input<
     string | HTMLElement | undefined
-  >(undefined);
+  >('body');
 
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
@@ -215,6 +226,15 @@ export class UiLibAutoComplete implements ControlValueAccessor {
 
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly documentRef: Document = inject(DOCUMENT);
+  private readonly panelElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
+    'panelElement',
+    { read: ElementRef }
+  );
+  private readonly containerElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
+    'containerElement',
+    { read: ElementRef }
+  );
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -803,16 +823,50 @@ export class UiLibAutoComplete implements ControlValueAccessor {
     this.activeIndexState.set(-1);
   }
 
+  public ngAfterViewChecked(): void {
+    if (!this.panelVisible()) {
+      return;
+    }
+
+    this.syncPanelMount();
+  }
+
+  public ngOnDestroy(): void {
+    if (this.debounceTimer !== null) {
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = null;
+    }
+
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    if (panel?.isConnected) {
+      panel.remove();
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   public onDocumentClick(event: MouseEvent): void {
     if (!this.panelVisible()) {
       return;
     }
 
-    const clickedInside: boolean = this.hostElement.nativeElement.contains(event.target as Node);
-    if (!clickedInside) {
+    const targetNode: Node | null = event.target as Node | null;
+    const clickedInsideHost: boolean =
+      targetNode !== null && this.hostElement.nativeElement.contains(targetNode);
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    const clickedInsidePanel: boolean = targetNode !== null && panel?.contains(targetNode) === true;
+    if (!clickedInsideHost && !clickedInsidePanel) {
       this.hidePanel();
     }
+  }
+
+  @HostListener('window:resize')
+  public onWindowResize(): void {
+    this.positionMountedPanel();
+  }
+
+  @HostListener('window:scroll')
+  public onWindowScroll(): void {
+    this.positionMountedPanel();
   }
 
   private scheduleComplete(event: Event, ignoreMinLength: boolean): void {
@@ -1135,6 +1189,146 @@ export class UiLibAutoComplete implements ControlValueAccessor {
       viewport.scrollTop = nextTop;
       this.virtualScrollTop.set(nextTop);
     }
+  }
+
+  private syncPanelMount(): void {
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    if (!panel) {
+      return;
+    }
+
+    const mountTarget: HTMLElement | null = this.resolveAppendTarget();
+    if (!mountTarget) {
+      this.mountPanelToHost(panel);
+      return;
+    }
+
+    if (panel.parentElement !== mountTarget) {
+      mountTarget.appendChild(panel);
+    }
+
+    this.syncPanelClasses(panel, this.variant());
+    this.syncPanelCssVariables(panel);
+
+    panel.classList.add('ui-autocomplete-panel--overlay');
+    this.positionMountedPanel();
+  }
+
+  private mountPanelToHost(panel: HTMLElement): void {
+    const host: HTMLElement = this.hostElement.nativeElement;
+    if (panel.parentElement !== host) {
+      host.appendChild(panel);
+    }
+
+    panel.classList.remove('ui-autocomplete-panel--overlay');
+    this.clearPanelModeClasses(panel);
+    panel.style.removeProperty('position');
+    panel.style.removeProperty('top');
+    panel.style.removeProperty('left');
+    panel.style.removeProperty('width');
+    this.clearPanelCssVariables(panel);
+  }
+
+  private resolveAppendTarget(): HTMLElement | null {
+    const appendTarget: string | HTMLElement | undefined = this.appendTo();
+    if (appendTarget === undefined) {
+      return null;
+    }
+
+    if (appendTarget instanceof HTMLElement) {
+      return appendTarget;
+    }
+
+    const normalizedTarget: string = appendTarget.trim();
+    if (!normalizedTarget || normalizedTarget === 'self') {
+      return null;
+    }
+
+    if (normalizedTarget === 'body') {
+      return this.documentRef.body;
+    }
+
+    return this.documentRef.querySelector<HTMLElement>(normalizedTarget);
+  }
+
+  private positionMountedPanel(): void {
+    if (!this.panelVisible()) {
+      return;
+    }
+
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    const container: HTMLElement | null = this.containerElement()?.nativeElement ?? null;
+    if (!panel || !container || !panel.classList.contains('ui-autocomplete-panel--overlay')) {
+      return;
+    }
+
+    const rect: DOMRect = container.getBoundingClientRect();
+    const viewportWidth: number =
+      this.documentRef.defaultView?.innerWidth ?? this.documentRef.documentElement.clientWidth;
+    const viewportHeight: number =
+      this.documentRef.defaultView?.innerHeight ?? this.documentRef.documentElement.clientHeight;
+
+    const viewportPadding: number = 8;
+    const offset: number = 6;
+    const preferredWidth: number = Math.max(0, rect.width);
+    const maxWidth: number = Math.max(0, viewportWidth - viewportPadding * 2);
+    const panelWidth: number = Math.min(preferredWidth, maxWidth);
+    const maxHeight: number = this.parsePixelValue(this.scrollHeight(), 260);
+    const availableBelow: number = viewportHeight - rect.bottom - offset - viewportPadding;
+    const availableAbove: number = rect.top - offset - viewportPadding;
+    const useAbove: boolean =
+      availableBelow < Math.min(maxHeight, 180) && availableAbove > availableBelow;
+    const safeLeft: number = Math.min(
+      Math.max(viewportPadding, rect.left),
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+    );
+
+    panel.style.position = 'fixed';
+    panel.style.left = `${safeLeft}px`;
+    panel.style.width = `${panelWidth}px`;
+    panel.style.top = useAbove
+      ? `${Math.max(viewportPadding, rect.top - offset - maxHeight)}px`
+      : `${Math.min(viewportHeight - viewportPadding, rect.bottom + offset)}px`;
+  }
+
+  private syncPanelClasses(panel: HTMLElement, variant: AutoCompleteVariant): void {
+    this.clearPanelModeClasses(panel);
+    panel.classList.add(`ui-autocomplete-panel--${variant}`);
+  }
+
+  private syncPanelCssVariables(panel: HTMLElement): void {
+    const windowRef: Window | null = this.documentRef.defaultView;
+    if (!windowRef) {
+      return;
+    }
+
+    const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
+      this.hostElement.nativeElement
+    );
+    for (let index: number = 0; index < hostStyles.length; index += 1) {
+      const name: string = hostStyles.item(index);
+      if (!name.startsWith('--uilib-autocomplete-')) {
+        continue;
+      }
+
+      const value: string = hostStyles.getPropertyValue(name);
+      panel.style.setProperty(name, value);
+    }
+  }
+
+  private clearPanelCssVariables(panel: HTMLElement): void {
+    for (let index: number = panel.style.length - 1; index >= 0; index -= 1) {
+      const name: string = panel.style.item(index);
+      if (name.startsWith('--uilib-autocomplete-')) {
+        panel.style.removeProperty(name);
+      }
+    }
+  }
+
+  private clearPanelModeClasses(panel: HTMLElement): void {
+    AUTOCOMPLETE_PANEL_MODE_CLASSES.forEach((panelModeClass: string): void => {
+      panel.classList.remove(panelModeClass);
+    });
   }
 
   private parsePixelValue(value: string, fallback: number): number {

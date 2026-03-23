@@ -30,6 +30,7 @@ ui-lib-autocomplete.ui-lib-autocomplete {
     var(--uilib-shadow-md, none)
   );
   --uilib-autocomplete-panel-max-height: 260px;
+  --uilib-autocomplete-panel-z-index: 1000;
 
   --uilib-autocomplete-option-padding-y-base: 0.55rem;
   --uilib-autocomplete-option-padding-x-base: 0.75rem;
@@ -124,11 +125,12 @@ ui-lib-autocomplete .ui-autocomplete-input::placeholder {
   color: var(--uilib-autocomplete-placeholder);
 }
 
-ui-lib-autocomplete .ui-autocomplete-panel {
+ui-lib-autocomplete .ui-autocomplete-panel,
+.ui-autocomplete-panel {
   position: absolute;
   inset-inline: 0;
   top: calc(100% + 0.35rem);
-  z-index: 12;
+  z-index: var(--uilib-autocomplete-panel-z-index);
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -143,14 +145,25 @@ ui-lib-autocomplete .ui-autocomplete-panel {
   animation: uilib-autocomplete-panel-enter 0.14s ease;
 }
 
+ui-lib-autocomplete .ui-autocomplete-panel.ui-autocomplete-panel--overlay,
+.ui-autocomplete-panel.ui-autocomplete-panel--overlay {
+  inset-inline: auto;
+  top: auto;
+}
+
 ui-lib-autocomplete .ui-autocomplete-panel-header,
+.ui-autocomplete-panel-header,
 ui-lib-autocomplete .ui-autocomplete-panel-footer,
+.ui-autocomplete-panel-footer,
 ui-lib-autocomplete .ui-autocomplete-empty,
-ui-lib-autocomplete .ui-autocomplete-loading {
+.ui-autocomplete-empty,
+ui-lib-autocomplete .ui-autocomplete-loading,
+.ui-autocomplete-loading {
   padding: 0.55rem 0.75rem;
 }
 
-ui-lib-autocomplete .ui-autocomplete-option {
+ui-lib-autocomplete .ui-autocomplete-option,
+.ui-autocomplete-option {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -163,33 +176,39 @@ ui-lib-autocomplete .ui-autocomplete-option {
     transform 0.12s ease;
 }
 
-ui-lib-autocomplete .ui-autocomplete-option:hover {
+ui-lib-autocomplete .ui-autocomplete-option:hover,
+.ui-autocomplete-option:hover {
   background: var(--uilib-autocomplete-option-hover-bg);
 }
 
-ui-lib-autocomplete .ui-autocomplete-option--active {
+ui-lib-autocomplete .ui-autocomplete-option--active,
+.ui-autocomplete-option--active {
   background: var(--uilib-autocomplete-option-hover-bg);
   outline: 2px solid color-mix(in srgb, var(--uilib-autocomplete-border-focus) 35%, transparent);
   outline-offset: -2px;
 }
 
-ui-lib-autocomplete .ui-autocomplete-option--selected {
+ui-lib-autocomplete .ui-autocomplete-option--selected,
+.ui-autocomplete-option--selected {
   background: var(--uilib-autocomplete-option-selected-bg);
   color: var(--uilib-autocomplete-option-selected-text);
   font-weight: 600;
 }
 
-ui-lib-autocomplete .ui-autocomplete-option--disabled {
+ui-lib-autocomplete .ui-autocomplete-option--disabled,
+.ui-autocomplete-option--disabled {
   opacity: var(--uilib-autocomplete-option-disabled-opacity);
   cursor: not-allowed;
 }
 
-ui-lib-autocomplete .ui-autocomplete-option-group {
+ui-lib-autocomplete .ui-autocomplete-option-group,
+.ui-autocomplete-option-group {
   display: flex;
   flex-direction: column;
 }
 
-ui-lib-autocomplete .ui-autocomplete-option-group-label {
+ui-lib-autocomplete .ui-autocomplete-option-group-label,
+.ui-autocomplete-option-group-label {
   padding: 0.35rem 0.75rem;
   background: var(--uilib-autocomplete-group-label-bg);
   color: var(--uilib-autocomplete-group-label-text);
@@ -405,7 +424,8 @@ ui-lib-autocomplete.ui-lib-autocomplete--minimal.ui-lib-autocomplete--open
   box-shadow: none;
 }
 
-ui-lib-autocomplete.ui-lib-autocomplete--minimal .ui-autocomplete-panel {
+ui-lib-autocomplete.ui-lib-autocomplete--minimal .ui-autocomplete-panel,
+.ui-autocomplete-panel.ui-autocomplete-panel--minimal {
   border-inline: none;
   border-top: none;
 }
@@ -415,16 +435,19 @@ ui-lib-autocomplete.ui-lib-autocomplete--minimal .ui-autocomplete-chip {
   --uilib-autocomplete-chip-bg: color-mix(in srgb, var(--uilib-autocomplete-text) 10%, transparent);
 }
 
-ui-lib-autocomplete .ui-autocomplete-virtual-viewport {
+ui-lib-autocomplete .ui-autocomplete-virtual-viewport,
+.ui-autocomplete-virtual-viewport {
   overflow: auto;
 }
 
-ui-lib-autocomplete .ui-autocomplete-virtual-spacer {
+ui-lib-autocomplete .ui-autocomplete-virtual-spacer,
+.ui-autocomplete-virtual-spacer {
   position: relative;
   width: 100%;
 }
 
-ui-lib-autocomplete .ui-autocomplete-virtual-content {
+ui-lib-autocomplete .ui-autocomplete-virtual-content,
+.ui-autocomplete-virtual-content {
   position: absolute;
   inset-inline: 0;
   top: 0;
