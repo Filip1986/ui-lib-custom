@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,8 +13,16 @@ import {
   output,
   signal,
   TemplateRef,
+  viewChild,
 } from '@angular/core';
-import type { InputSignal, OutputEmitterRef, Signal, WritableSignal } from '@angular/core';
+import type {
+  AfterViewChecked,
+  InputSignal,
+  OnDestroy,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
@@ -52,6 +60,11 @@ export type {
 } from './cascade-select.types';
 
 let cascadeSelectIdCounter: number = 0;
+const CASCADE_SELECT_PANEL_MODE_CLASSES: readonly string[] = [
+  'ui-lib-cascade-select__panel--material',
+  'ui-lib-cascade-select__panel--bootstrap',
+  'ui-lib-cascade-select__panel--minimal',
+];
 
 /**
  * CascadeSelect component with hierarchical single-value selection.
@@ -86,7 +99,7 @@ let cascadeSelectIdCounter: number = 0;
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class UiLibCascadeSelect implements ControlValueAccessor {
+export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecked, OnDestroy {
   public readonly options: InputSignal<unknown[]> = input<unknown[]>([]);
   public readonly optionLabel: InputSignal<string> = input<string>('label');
   public readonly optionValue: InputSignal<string | undefined> = input<string | undefined>(
@@ -114,6 +127,9 @@ export class UiLibCascadeSelect implements ControlValueAccessor {
   public readonly filled: InputSignal<boolean> = input<boolean>(false);
   public readonly tabindex: InputSignal<number> = input<number>(0);
   public readonly inputId: InputSignal<string> = input<string>('');
+  public readonly appendTo: InputSignal<string | HTMLElement | undefined> = input<
+    string | HTMLElement | undefined
+  >('body');
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
@@ -177,6 +193,15 @@ export class UiLibCascadeSelect implements ControlValueAccessor {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly documentRef: Document = inject(DOCUMENT);
+  private readonly triggerElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
+    'triggerElement',
+    { read: ElementRef }
+  );
+  private readonly panelElement: Signal<ElementRef<HTMLElement> | undefined> = viewChild(
+    'panelElement',
+    { read: ElementRef }
+  );
 
   private readonly uniqueIdValue: string = `${CASCADE_SELECT_IDS.Prefix}-${++cascadeSelectIdCounter}`;
 
@@ -500,6 +525,21 @@ export class UiLibCascadeSelect implements ControlValueAccessor {
     return this.getOptionPathInLevel(this.options(), targetOption, 0, []);
   }
 
+  public ngAfterViewChecked(): void {
+    if (!this.panelVisible()) {
+      return;
+    }
+
+    this.syncPanelMount();
+  }
+
+  public ngOnDestroy(): void {
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    if (panel?.isConnected) {
+      panel.remove();
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   public onDocumentClick(event: MouseEvent): void {
     if (!this.panelVisible()) {
@@ -511,9 +551,22 @@ export class UiLibCascadeSelect implements ControlValueAccessor {
       return;
     }
 
-    if (!this.hostElement.nativeElement.contains(target)) {
+    const clickedInsideHost: boolean = this.hostElement.nativeElement.contains(target);
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    const clickedInsidePanel: boolean = panel?.contains(target) === true;
+    if (!clickedInsideHost && !clickedInsidePanel) {
       this.closePanel(event);
     }
+  }
+
+  @HostListener('window:resize')
+  public onWindowResize(): void {
+    this.positionMountedPanel();
+  }
+
+  @HostListener('window:scroll')
+  public onWindowScroll(): void {
+    this.positionMountedPanel();
   }
 
   @HostListener('focus', ['$event'])
@@ -909,5 +962,174 @@ export class UiLibCascadeSelect implements ControlValueAccessor {
     }
 
     return value as Record<string, unknown>;
+  }
+
+  private syncPanelMount(): void {
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    if (!panel) {
+      return;
+    }
+
+    const mountTarget: HTMLElement | null = this.resolveAppendTarget();
+    if (!mountTarget) {
+      this.mountPanelToHost(panel);
+      return;
+    }
+
+    if (panel.parentElement !== mountTarget) {
+      mountTarget.appendChild(panel);
+    }
+
+    this.syncPanelClasses(panel, this.effectiveVariant());
+    this.syncPanelCssVariables(panel);
+    panel.classList.add('ui-lib-cascade-select__panel--overlay');
+    this.positionMountedPanel();
+  }
+
+  private mountPanelToHost(panel: HTMLElement): void {
+    const host: HTMLElement = this.hostElement.nativeElement;
+    if (panel.parentElement !== host) {
+      host.appendChild(panel);
+    }
+
+    panel.classList.remove('ui-lib-cascade-select__panel--overlay');
+    this.clearPanelModeClasses(panel);
+    panel.style.removeProperty('position');
+    panel.style.removeProperty('top');
+    panel.style.removeProperty('left');
+    panel.style.removeProperty('width');
+    this.clearPanelCssVariables(panel);
+  }
+
+  private resolveAppendTarget(): HTMLElement | null {
+    const appendTarget: string | HTMLElement | undefined = this.appendTo();
+    if (appendTarget === undefined) {
+      return null;
+    }
+
+    if (appendTarget instanceof HTMLElement) {
+      return appendTarget;
+    }
+
+    const normalizedTarget: string = appendTarget.trim();
+    if (!normalizedTarget || normalizedTarget === 'self') {
+      return null;
+    }
+
+    if (normalizedTarget === 'body') {
+      return this.documentRef.body;
+    }
+
+    return this.documentRef.querySelector<HTMLElement>(normalizedTarget);
+  }
+
+  private positionMountedPanel(): void {
+    if (!this.panelVisible()) {
+      return;
+    }
+
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    const trigger: HTMLElement | null = this.triggerElement()?.nativeElement ?? null;
+    if (!panel || !trigger || !panel.classList.contains('ui-lib-cascade-select__panel--overlay')) {
+      return;
+    }
+
+    const rect: DOMRect = trigger.getBoundingClientRect();
+    const viewportWidth: number =
+      this.documentRef.defaultView?.innerWidth ?? this.documentRef.documentElement.clientWidth;
+    const viewportHeight: number =
+      this.documentRef.defaultView?.innerHeight ?? this.documentRef.documentElement.clientHeight;
+
+    const viewportPadding: number = 8;
+    const offset: number = 6;
+    const preferredWidth: number = Math.max(
+      rect.width,
+      this.parsePixelValue(
+        this.resolveCssVariableValue('--uilib-cascade-select-panel-min-width', '200'),
+        200
+      )
+    );
+    const maxWidth: number = Math.max(0, viewportWidth - viewportPadding * 2);
+    const panelWidth: number = Math.min(preferredWidth, maxWidth);
+    const maxHeight: number = this.parsePixelValue(
+      this.resolveCssVariableValue('--uilib-cascade-select-panel-max-height', '260'),
+      260
+    );
+    const availableBelow: number = viewportHeight - rect.bottom - offset - viewportPadding;
+    const availableAbove: number = rect.top - offset - viewportPadding;
+    const useAbove: boolean =
+      availableBelow < Math.min(maxHeight, 180) && availableAbove > availableBelow;
+    const safeLeft: number = Math.min(
+      Math.max(viewportPadding, rect.left),
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+    );
+
+    panel.style.position = 'fixed';
+    panel.style.left = `${safeLeft}px`;
+    panel.style.width = `${panelWidth}px`;
+    panel.style.top = useAbove
+      ? `${Math.max(viewportPadding, rect.top - offset - maxHeight)}px`
+      : `${Math.min(viewportHeight - viewportPadding, rect.bottom + offset)}px`;
+  }
+
+  private syncPanelClasses(panel: HTMLElement, variant: CascadeSelectVariant): void {
+    this.clearPanelModeClasses(panel);
+    panel.classList.add(`ui-lib-cascade-select__panel--${variant}`);
+  }
+
+  private syncPanelCssVariables(panel: HTMLElement): void {
+    const windowRef: Window | null = this.documentRef.defaultView;
+    if (!windowRef) {
+      return;
+    }
+
+    const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
+      this.hostElement.nativeElement
+    );
+    for (let index: number = 0; index < hostStyles.length; index += 1) {
+      const name: string = hostStyles.item(index);
+      if (!name.startsWith('--uilib-cascade-select-')) {
+        continue;
+      }
+
+      const value: string = hostStyles.getPropertyValue(name);
+      panel.style.setProperty(name, value);
+    }
+  }
+
+  private clearPanelCssVariables(panel: HTMLElement): void {
+    for (let index: number = panel.style.length - 1; index >= 0; index -= 1) {
+      const name: string = panel.style.item(index);
+      if (name.startsWith('--uilib-cascade-select-')) {
+        panel.style.removeProperty(name);
+      }
+    }
+  }
+
+  private clearPanelModeClasses(panel: HTMLElement): void {
+    CASCADE_SELECT_PANEL_MODE_CLASSES.forEach((panelModeClass: string): void => {
+      panel.classList.remove(panelModeClass);
+    });
+  }
+
+  private resolveCssVariableValue(variableName: string, fallback: string): string {
+    const windowRef: Window | null = this.documentRef.defaultView;
+    if (!windowRef) {
+      return fallback;
+    }
+
+    const rawValue: string = windowRef
+      .getComputedStyle(this.hostElement.nativeElement)
+      .getPropertyValue(variableName)
+      .trim();
+    return rawValue || fallback;
+  }
+
+  private parsePixelValue(value: string, fallback: number): number {
+    const parsed: number = Number.parseInt(value, 10);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      return parsed;
+    }
+    return fallback;
   }
 }

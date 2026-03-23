@@ -40,8 +40,16 @@ import { UiLibCascadeSelect } from 'ui-lib-custom/cascade-select';
 | `filled` | `boolean` | `false` | Enables filled style treatment. |
 | `tabindex` | `number` | `0` | Host tabindex when interactive. |
 | `inputId` | `string` | `''` | Optional trigger id override. |
+| `appendTo` | `string \| HTMLElement \| undefined` | `'body'` | Panel mount target. Supports `'body'`, `'self'`, CSS selector, or `HTMLElement`. |
 | `ariaLabel` | `string \| null` | `null` | Explicit ARIA label. |
 | `ariaLabelledBy` | `string \| null` | `null` | `aria-labelledby` id reference(s). |
+
+### `appendTo` behavior
+
+- Default is `'body'` so the panel can render outside clipping containers.
+- Use `'self'` (or an empty string) to keep panel mounting in the component host.
+- You can also provide a CSS selector string (for example `'#overlay-root'`) or an `HTMLElement`.
+- If the selector does not resolve to an element, panel mounting falls back to host.
 
 ## Outputs
 
@@ -221,6 +229,7 @@ countries = [
 | `--uilib-cascade-select-panel-shadow` | `var(--uilib-select-dropdown-shadow, var(--uilib-shadow-md, none))` |
 | `--uilib-cascade-select-panel-min-width` | `12.5rem` |
 | `--uilib-cascade-select-panel-max-height` | `16.25rem` |
+| `--uilib-cascade-select-panel-z-index` | `1000` |
 | `--uilib-cascade-select-option-padding` | `0.55rem 0.75rem` |
 | `--uilib-cascade-select-option-hover-bg` | `var(--uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600) 8%, transparent))` |
 | `--uilib-cascade-select-option-selected-bg` | `color-mix(in srgb, var(--uilib-color-primary-600) 14%, transparent)` |

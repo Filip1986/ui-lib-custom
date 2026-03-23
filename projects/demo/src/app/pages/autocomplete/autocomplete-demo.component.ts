@@ -45,7 +45,8 @@ type AutoCompleteDemoSnippetKey =
   | 'states'
   | 'reactive'
   | 'templateDriven'
-  | 'variants';
+  | 'variants'
+  | 'clipping';
 
 /**
  * Demo page for AutoComplete component features and patterns.
@@ -89,6 +90,7 @@ export class AutoCompleteDemoComponent {
     { id: 'disabled-invalid', label: 'Disabled & Invalid' },
     { id: 'forms', label: 'Forms' },
     { id: 'variants', label: 'Variants' },
+    { id: 'clipping', label: 'Clipping Container' },
   ];
 
   public readonly snippets: Record<AutoCompleteDemoSnippetKey, string> = {
@@ -205,6 +207,16 @@ export class AutoCompleteDemoComponent {
     variants: `<ui-lib-autocomplete variant="material" />
 <ui-lib-autocomplete variant="bootstrap" />
 <ui-lib-autocomplete variant="minimal" />`,
+    clipping: `<div class="clipping-card">
+  <ui-lib-autocomplete
+    [(ngModel)]="clippingValue"
+    [suggestions]="countrySuggestions"
+    optionLabel="name"
+    optionValue="code"
+    placeholder="Open inside clipped card"
+    (completeMethod)="onCountryComplete($event)"
+  />
+</div>`,
   };
 
   public basicSuggestions: string[] = [...AUTOCOMPLETE_BASIC_STRINGS];
@@ -232,6 +244,7 @@ export class AutoCompleteDemoComponent {
   public invalidValue: string | null = null;
 
   public templateModel: string | null = null;
+  public clippingValue: string | null = null;
 
   public readonly reactiveForm: FormGroup = new FormGroup({
     country: new FormControl<string | null>(null, { validators: [Validators.required] }),

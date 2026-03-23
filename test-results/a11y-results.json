@@ -11,7 +11,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 6
+      "actualWorkers": 2
     },
     "preserveOutput": "always",
     "projects": [
@@ -20,7 +20,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 6
+          "actualWorkers": 2
         },
         "id": "",
         "name": "",
@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "a11y.spec.ts",
-      "file": "a11y.spec.ts",
+      "title": "overlay-mounting.spec.ts",
+      "file": "overlay-mounting.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Accessibility",
-          "file": "a11y.spec.ts",
-          "line": 17,
+          "title": "Overlay Mounting Regressions",
+          "file": "overlay-mounting.spec.ts",
+          "line": 41,
           "column": 6,
           "specs": [
             {
-              "title": "home page should have no violations",
+              "title": "autocomplete clipping demo mounts panel outside overflow-hidden card",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1655,
+                      "duration": 449,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-03T12:54:53.429Z",
+                      "startTime": "2026-03-23T09:25:20.070Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "aa3ad05f8c0e05077efb-6081cbd40da782fca28e",
-              "file": "a11y.spec.ts",
-              "line": 18,
+              "id": "b68ecbefe8250107a6ed-ce27a47364a40bfbe7c2",
+              "file": "overlay-mounting.spec.ts",
+              "line": 42,
               "column": 7
             },
             {
-              "title": "buttons page should have no violations",
+              "title": "cascade-select clipping demo mounts panel outside overflow-hidden card",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 1681,
+                      "duration": 547,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-03T12:54:53.426Z",
+                      "startTime": "2026-03-23T09:25:20.075Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,165 +142,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "aa3ad05f8c0e05077efb-b6e02841affe816da8e7",
-              "file": "a11y.spec.ts",
-              "line": 29,
-              "column": 7
-            },
-            {
-              "title": "forms page should have no violations",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
-                      "status": "passed",
-                      "duration": 1651,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-03T12:54:53.437Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "aa3ad05f8c0e05077efb-062f04d9874e61b92e61",
-              "file": "a11y.spec.ts",
-              "line": 45,
-              "column": 7
-            },
-            {
-              "title": "select component should have no violations when open",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 3,
-                      "parallelIndex": 3,
-                      "status": "passed",
-                      "duration": 1498,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-03T12:54:53.431Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "aa3ad05f8c0e05077efb-eff1503663dd614eaf99",
-              "file": "a11y.spec.ts",
-              "line": 56,
-              "column": 7
-            },
-            {
-              "title": "tabs should be keyboard navigable",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
-                      "status": "passed",
-                      "duration": 1146,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-03T12:54:53.423Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "aa3ad05f8c0e05077efb-a33b80ed56d85a6dd50d",
-              "file": "a11y.spec.ts",
-              "line": 74,
-              "column": 7
-            },
-            {
-              "title": "modal focus trap should work",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [
-                    {
-                      "type": "skip",
-                      "description": "Dialog demo not available on this page.",
-                      "location": {
-                        "file": "D:\\Work\\Personal\\Github\\ui-lib-custom\\e2e\\a11y.spec.ts",
-                        "line": 94,
-                        "column": 10
-                      }
-                    }
-                  ],
-                  "expectedStatus": "skipped",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
-                      "status": "skipped",
-                      "duration": 1081,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-03T12:54:53.421Z",
-                      "annotations": [
-                        {
-                          "type": "skip",
-                          "description": "Dialog demo not available on this page.",
-                          "location": {
-                            "file": "D:\\Work\\Personal\\Github\\ui-lib-custom\\e2e\\a11y.spec.ts",
-                            "line": 94,
-                            "column": 10
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "aa3ad05f8c0e05077efb-2d73b051c192b1be61ab",
-              "file": "a11y.spec.ts",
-              "line": 89,
+              "id": "b68ecbefe8250107a6ed-f3fc97dbbcffaa9b6dd7",
+              "file": "overlay-mounting.spec.ts",
+              "line": 63,
               "column": 7
             }
           ]
@@ -310,10 +154,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-03T12:54:44.060Z",
-    "duration": 11785.081000000002,
-    "expected": 5,
-    "skipped": 1,
+    "startTime": "2026-03-23T09:25:18.829Z",
+    "duration": 1920.599,
+    "expected": 2,
+    "skipped": 0,
     "unexpected": 0,
     "flaky": 0
   }

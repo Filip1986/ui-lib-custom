@@ -20,7 +20,7 @@ This design follows:
 
 - **Selector:** `ui-lib-cascadeselect`
 - **Host is the trigger container:** trigger styling, ARIA combobox attributes, and state classes are host-driven.
-- **Panel rendering:** popup panel is rendered in-place (non-portal v1) and anchored to the trigger, consistent with Select v1 strategy.
+- **Panel rendering:** popup panel defaults to `appendTo='body'` overlay mounting with fixed positioning anchored to trigger bounds; `appendTo='self'` keeps host mounting.
 - **Host attributes/classes (design contract):**
   - `role="combobox"`
   - `aria-haspopup="tree"`
@@ -80,6 +80,7 @@ All inputs use `input()` from `@angular/core` with explicit `InputSignal<T>` ann
 | `filled` | `InputSignal<boolean>` | `false` | Enables filled style treatment. |
 | `tabindex` | `InputSignal<number>` | `0` | Host focus order index when interactive. |
 | `inputId` | `InputSignal<string>` | `''` | Optional id override for trigger control id generation. |
+| `appendTo` | `InputSignal<string \| HTMLElement \| undefined>` | `'body'` | Panel mount target (`'body'`, `'self'`, CSS selector, or `HTMLElement`). |
 | `ariaLabel` | `InputSignal<string \| null>` | `null` | Explicit aria-label for trigger. |
 | `ariaLabelledBy` | `InputSignal<string \| null>` | `null` | External label id linkage override. |
 
@@ -182,7 +183,7 @@ Keyboard handling reuses `KEYBOARD_KEYS` constants from `core`.
   - nested level containers use `role="group"`
   - options use `role="treeitem"`
 - Viewport-aware submenu direction (right/left) is internal behavior detail; no public API in v1.
-- `appendTo`/portal behavior is explicitly deferred (P2).
+- `appendTo` behavior is implemented (`'body'` default, host/selector/element targets); shared overlay utility extraction remains a follow-up.
 
 ## ARIA Contract (P0 baseline)
 
@@ -203,7 +204,7 @@ Keyboard handling reuses `KEYBOARD_KEYS` constants from `core`.
 | Filled mode API | Variant-style filled usage | `filled: boolean` input | Aligns with existing `ui-lib-autocomplete` convention. |
 | Size literals | Commonly `small`/`large` | `sm`/`md`/`lg` | Aligns with Select and shared core size literals. |
 | Template customization | `pTemplate` named templates | Directive-slot API (`uiCascadeSelect*`) | Consistent with library projection conventions and strong typing ergonomics. |
-| Panel portal target | `appendTo` available | Deferred (v1 in-place panel) | Keeps v1 architecture simple; avoids portal/SSR complexity. |
+| Panel portal target | `appendTo` available | Implemented with `'body'` default + `'self'`/selector/element targets | Prevents clipping while preserving an extraction path to shared overlay infrastructure. |
 
 ## Final API Signature Snapshot
 
@@ -226,6 +227,7 @@ public readonly fluid: InputSignal<boolean> = input<boolean>(false);
 public readonly filled: InputSignal<boolean> = input<boolean>(false);
 public readonly tabindex: InputSignal<number> = input<number>(0);
 public readonly inputId: InputSignal<string> = input<string>('');
+public readonly appendTo: InputSignal<string | HTMLElement | undefined> = input<string | HTMLElement | undefined>('body');
 public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
 public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 

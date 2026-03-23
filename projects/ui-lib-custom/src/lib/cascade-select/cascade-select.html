@@ -1,4 +1,9 @@
-<div class="ui-lib-cascade-select__trigger" [attr.id]="controlId()" (click)="togglePanel($event)">
+<div
+  #triggerElement
+  class="ui-lib-cascade-select__trigger"
+  [attr.id]="controlId()"
+  (click)="togglePanel($event)"
+>
   <div class="ui-lib-cascade-select__value" [class.ui-lib-cascade-select__value--placeholder]="!displayValue()">
     @if (hasValue()) {
       @if (valueTemplate()) {
@@ -36,7 +41,7 @@
 </div>
 
 @if (panelVisible()) {
-  <div class="ui-lib-cascade-select__panel" [attr.id]="panelId()" role="tree">
+  <div #panelElement class="ui-lib-cascade-select__panel" [attr.id]="panelId()" role="tree">
     @if (headerTemplate()) {
       <div class="ui-lib-cascade-select__header">
         <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>

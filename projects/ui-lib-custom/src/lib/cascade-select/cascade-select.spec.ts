@@ -93,6 +93,7 @@ function getRequiredItem<T>(items: T[], index: number, label: string): T {
       [variant]="variant"
       [size]="size"
       [invalid]="invalid"
+      appendTo="self"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
     />
@@ -129,6 +130,7 @@ class TestHostComponent {
         optionValue="code"
         optionGroupLabel="name"
         [optionGroupChildren]="optionGroupChildren"
+        appendTo="self"
         formControlName="city"
       />
     </form>
@@ -164,6 +166,7 @@ class ReactiveHostComponent {
       optionGroupLabel="name"
       [optionGroupChildren]="optionGroupChildren"
       [loading]="loading"
+      appendTo="self"
       [(ngModel)]="value"
       [ngModelOptions]="{ standalone: true }"
     >
@@ -217,6 +220,7 @@ describe('UiLibCascadeSelect unit', (): void => {
     fixture.componentRef.setInput('optionGroupLabel', 'name');
     fixture.componentRef.setInput('optionGroupChildren', ['states', 'cities']);
     fixture.componentRef.setInput('placeholder', 'Select city');
+    fixture.componentRef.setInput('appendTo', 'self');
     fixture.detectChanges();
   });
 
@@ -267,6 +271,47 @@ describe('UiLibCascadeSelect unit', (): void => {
     fixture.detectChanges();
 
     expect(panelEl()).toBeFalsy();
+  });
+
+  it('defaults appendTo to body', (): void => {
+    const defaultFixture: ComponentFixture<UiLibCascadeSelect> =
+      TestBed.createComponent(UiLibCascadeSelect);
+    const defaultComponent: UiLibCascadeSelect = defaultFixture.componentInstance;
+
+    defaultFixture.componentRef.setInput('options', COUNTRIES);
+    defaultFixture.componentRef.setInput('optionLabel', 'cname');
+    defaultFixture.componentRef.setInput('optionValue', 'code');
+    defaultFixture.componentRef.setInput('optionGroupLabel', 'name');
+    defaultFixture.componentRef.setInput('optionGroupChildren', ['states', 'cities']);
+    defaultFixture.detectChanges();
+
+    defaultComponent.openPanel(new MouseEvent('click'));
+    defaultFixture.detectChanges();
+
+    const panel: HTMLElement | null = document.body.querySelector('.ui-lib-cascade-select__panel');
+    expect(panel).toBeTruthy();
+    expect(panel?.parentElement).toBe(document.body);
+  });
+
+  it('keeps panel open for panel clicks and closes on outside clicks when appendTo is body', (): void => {
+    fixture.componentRef.setInput('appendTo', 'body');
+    fixture.detectChanges();
+
+    openPanelByClick();
+
+    const panel: HTMLElement = getRequiredItem(
+      Array.from(document.body.querySelectorAll('.ui-lib-cascade-select__panel')),
+      0,
+      'body mounted panel'
+    );
+
+    panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
+    expect(document.body.querySelector('.ui-lib-cascade-select__panel')).toBeTruthy();
+
+    document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    fixture.detectChanges();
+    expect(document.body.querySelector('.ui-lib-cascade-select__panel')).toBeFalsy();
   });
 
   it('renders hierarchical levels when expanding groups', (): void => {

@@ -41,7 +41,8 @@ type CascadeSelectDemoSnippetKey =
   | 'states'
   | 'forms'
   | 'reactive'
-  | 'variants';
+  | 'variants'
+  | 'clipping';
 
 type CascadeNode = CascadeCountry | CascadeState | CascadeCity;
 
@@ -86,6 +87,7 @@ export class CascadeSelectDemoComponent {
     { id: 'forms', label: 'Forms' },
     { id: 'reactive-forms', label: 'Reactive Forms' },
     { id: 'variants', label: 'Variants' },
+    { id: 'clipping', label: 'Clipping Container' },
   ];
 
   public readonly snippets: Record<CascadeSelectDemoSnippetKey, string> = {
@@ -164,6 +166,17 @@ export class CascadeSelectDemoComponent {
     variants: `<ui-lib-cascade-select variant="material" />
 <ui-lib-cascade-select variant="bootstrap" />
 <ui-lib-cascade-select variant="minimal" />`,
+    clipping: `<div class="clipping-card">
+  <ui-lib-cascade-select
+    [(ngModel)]="clippingCode"
+    [options]="countries"
+    optionGroupLabel="name"
+    [optionGroupChildren]="['states', 'cities']"
+    optionLabel="cname"
+    optionValue="code"
+    placeholder="Open inside clipped card"
+  />
+</div>`,
   };
 
   public readonly countries: CascadeCountry[] = CASCADE_SELECT_COUNTRIES;
@@ -194,6 +207,7 @@ export class CascadeSelectDemoComponent {
     bootstrap: null,
     minimal: null,
   };
+  public clippingCode: string | null = null;
 
   public loading: boolean = true;
 

@@ -55,6 +55,7 @@ const COUNTRIES: CountryNode[] = [
       [optionGroupChildren]="optionGroupChildren"
       [ariaLabel]="ariaLabel"
       [ariaLabelledBy]="ariaLabelledBy"
+      appendTo="self"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
     />

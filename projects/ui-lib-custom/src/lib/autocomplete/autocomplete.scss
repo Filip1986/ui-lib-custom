@@ -378,8 +378,8 @@ ui-lib-autocomplete.ui-lib-autocomplete--material .ui-autocomplete-container {
 }
 
 ui-lib-autocomplete.ui-lib-autocomplete--material .ui-autocomplete-container:focus-within,
-ui-lib-autocomplete.ui-lib-autocomplete--material.ui-lib-autocomplete--open
-  .ui-autocomplete-container {
+ui-lib-autocomplete.ui-lib-autocomplete--material.ui-lib-autocomplete--open,
+.ui-autocomplete-container {
   border-bottom-color: var(--uilib-autocomplete-border-focus);
   box-shadow: none;
 }
@@ -418,8 +418,8 @@ ui-lib-autocomplete.ui-lib-autocomplete--minimal .ui-autocomplete-container {
 }
 
 ui-lib-autocomplete.ui-lib-autocomplete--minimal .ui-autocomplete-container:focus-within,
-ui-lib-autocomplete.ui-lib-autocomplete--minimal.ui-lib-autocomplete--open
-  .ui-autocomplete-container {
+ui-lib-autocomplete.ui-lib-autocomplete--minimal.ui-lib-autocomplete--open,
+.ui-autocomplete-container {
   border-bottom-color: var(--uilib-autocomplete-border-focus);
   box-shadow: none;
 }

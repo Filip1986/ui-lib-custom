@@ -49,6 +49,21 @@
   font-size: 0.875rem;
 }
 
+.clipping-card {
+  max-width: 22rem;
+  max-height: 5.5rem;
+  padding: 0.75rem;
+  border: 1px dashed color-mix(in srgb, var(--uilib-border) 75%, transparent);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.clipping-note {
+  margin: 0.5rem 0 0;
+  color: var(--uilib-muted);
+  font-size: 0.8125rem;
+}
+
 @media (max-width: 960px) {
   .row-2,
   .row-3 {

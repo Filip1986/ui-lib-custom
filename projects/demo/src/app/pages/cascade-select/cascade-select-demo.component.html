@@ -311,6 +311,28 @@
 		  </ui-lib-card>
 		</app-code-preview>
 	  </section>
+
+	  <section id="clipping" data-doc-anchor class="example-section">
+		<h3>12. Clipping Container (Overflow Hidden)</h3>
+		<app-code-preview [code]="snippet('clipping')">
+		  <ui-lib-card>
+			<div class="clipping-card">
+			  <ui-lib-cascade-select
+				[(ngModel)]="clippingCode"
+				[options]="countries"
+				optionGroupLabel="name"
+				[optionGroupChildren]="['states', 'cities']"
+				optionLabel="cname"
+				optionValue="code"
+				placeholder="Open inside clipped card"
+			  />
+			  <p class="clipping-note">
+				Default behavior uses <code>appendTo='body'</code>, so the panel is not clipped by this container.
+			  </p>
+			</div>
+		  </ui-lib-card>
+		</app-code-preview>
+	  </section>
 	</div>
   </app-doc-demo-viewport>
 </app-doc-page-layout>
