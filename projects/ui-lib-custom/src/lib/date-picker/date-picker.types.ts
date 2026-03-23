@@ -7,6 +7,9 @@ export type DatePickerView = 'date' | 'month' | 'year';
 /** DatePicker size options. */
 export type DatePickerSize = 'sm' | 'md' | 'lg';
 
+/** DatePicker popup mount target. */
+export type DatePickerAppendTo = string | HTMLElement | undefined;
+
 /** DatePicker change value type used by events and CVA. */
 export type DatePickerValue = Date | Date[] | null;
 

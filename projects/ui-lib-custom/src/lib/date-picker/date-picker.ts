@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +14,14 @@ import {
   output,
   signal,
 } from '@angular/core';
-import type { InputSignal, OutputEmitterRef, Signal, WritableSignal } from '@angular/core';
+import type {
+  InputSignal,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+  AfterViewChecked,
+  OnDestroy,
+} from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
@@ -39,6 +46,7 @@ import {
 } from './date-utils';
 import type {
   DatePickerChangeEvent,
+  DatePickerAppendTo,
   DatePickerDateMeta,
   DatePickerLocale,
   DatePickerMonthChangeEvent,
@@ -49,6 +57,12 @@ import type {
   DatePickerView,
   DatePickerYearChangeEvent,
 } from './date-picker.types';
+
+const DATE_PICKER_PANEL_MODE_CLASSES: readonly string[] = [
+  'ui-lib-datepicker__panel--material',
+  'ui-lib-datepicker__panel--bootstrap',
+  'ui-lib-datepicker__panel--minimal',
+];
 
 @Component({
   selector: 'ui-lib-date-picker',
@@ -73,7 +87,7 @@ import type {
   },
 })
 // eslint-disable-next-line jsdoc/require-jsdoc
-export class DatePickerComponent implements ControlValueAccessor {
+export class DatePickerComponent implements ControlValueAccessor, AfterViewChecked, OnDestroy {
   public readonly selectionMode: InputSignal<DatePickerSelectionMode> =
     input<DatePickerSelectionMode>(DATE_PICKER_DEFAULTS.SelectionMode);
   public readonly dateFormat: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.DateFormat);
@@ -88,6 +102,9 @@ export class DatePickerComponent implements ControlValueAccessor {
   );
   public readonly inputId: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.InputId);
   public readonly name: InputSignal<string> = input<string>(DATE_PICKER_DEFAULTS.Name);
+  public readonly appendTo: InputSignal<DatePickerAppendTo> = input<DatePickerAppendTo>(
+    DATE_PICKER_DEFAULTS.AppendTo
+  );
 
   public readonly minDate: InputSignal<Date | null> = input<Date | null>(
     DATE_PICKER_DEFAULTS.MinDate
@@ -164,11 +181,15 @@ export class DatePickerComponent implements ControlValueAccessor {
   @ViewChild('inputElement', { static: false })
   public inputElement?: ElementRef<HTMLInputElement>;
 
+  @ViewChild('inputWrapperElement', { static: false })
+  public inputWrapperElement?: ElementRef<HTMLDivElement>;
+
   @ViewChild('panelElement', { static: false })
   public panelElement?: ElementRef<HTMLDivElement>;
 
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly documentRef: Document = inject(DOCUMENT);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
@@ -176,6 +197,7 @@ export class DatePickerComponent implements ControlValueAccessor {
 
   private onModelChange: (value: DatePickerValue) => void = (): void => {};
   private onModelTouched: () => void = (): void => {};
+  private skipNextFocusOpen: boolean = false;
 
   public readonly overlayVisible: WritableSignal<boolean> = signal<boolean>(false);
   public readonly currentMonth: WritableSignal<number> = signal<number>(new Date().getMonth());
@@ -460,6 +482,21 @@ export class DatePickerComponent implements ControlValueAccessor {
     });
   }
 
+  public ngAfterViewChecked(): void {
+    if (!this.overlayVisible() || this.inline()) {
+      return;
+    }
+
+    this.syncPanelMount();
+  }
+
+  public ngOnDestroy(): void {
+    const panel: HTMLDivElement | undefined = this.panelElement?.nativeElement;
+    if (panel?.isConnected) {
+      panel.remove();
+    }
+  }
+
   public writeValue(value: DatePickerValue): void {
     const normalizedValue: DatePickerValue = this.normalizeValueForMode(value);
     this.modelValue.set(normalizedValue);
@@ -510,6 +547,13 @@ export class DatePickerComponent implements ControlValueAccessor {
   public onInputFocusEvent(event: FocusEvent): void {
     this.focused.set(true);
     this.onFocus.emit(event);
+
+    if (this.skipNextFocusOpen) {
+      this.skipNextFocusOpen = false;
+      return;
+    }
+
+    this.showOverlay();
   }
 
   public onInputBlurEvent(event: FocusEvent): void {
@@ -539,6 +583,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     if (event.key === KEYBOARD_KEYS.Escape) {
       event.preventDefault();
       this.hideOverlay();
+      this.skipNextFocusOpen = true;
       this.inputElement?.nativeElement.focus();
     }
   }
@@ -1274,9 +1319,34 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     const target: Node | null = event.target as Node | null;
-    if (target && !this.hostElement.nativeElement.contains(target)) {
+    if (!target) {
+      return;
+    }
+
+    const clickedInsideHost: boolean = this.hostElement.nativeElement.contains(target);
+    const panel: HTMLDivElement | undefined = this.panelElement?.nativeElement;
+    const clickedInsidePanel: boolean = panel?.contains(target) === true;
+    if (!clickedInsideHost && !clickedInsidePanel) {
       this.hideOverlay();
     }
+  }
+
+  @HostListener('window:resize')
+  public onWindowResize(): void {
+    if (!this.overlayVisible() || this.inline()) {
+      return;
+    }
+
+    this.syncPanelMount();
+  }
+
+  @HostListener('window:scroll')
+  public onWindowScroll(): void {
+    if (!this.overlayVisible() || this.inline()) {
+      return;
+    }
+
+    this.syncPanelMount();
   }
 
   private syncNavigationFromValue(value: DatePickerValue): void {
@@ -1860,5 +1930,136 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
 
     return isDateBetween(date, min, max);
+  }
+
+  private syncPanelMount(): void {
+    const panel: HTMLDivElement | undefined = this.panelElement?.nativeElement;
+    if (!panel) {
+      return;
+    }
+
+    const mountTarget: HTMLElement | null = this.resolveAppendTarget();
+    if (!mountTarget) {
+      this.mountPanelToHost(panel);
+      return;
+    }
+
+    if (panel.parentElement !== mountTarget) {
+      mountTarget.appendChild(panel);
+    }
+
+    this.syncPanelClasses(panel, this.resolvedVariant());
+    this.syncPanelCssVariables(panel);
+    panel.classList.add('ui-lib-datepicker__panel--overlay');
+    this.positionMountedPanel(panel);
+  }
+
+  private mountPanelToHost(panel: HTMLDivElement): void {
+    const host: HTMLElement = this.hostElement.nativeElement;
+    if (panel.parentElement !== host) {
+      host.appendChild(panel);
+    }
+
+    panel.classList.remove('ui-lib-datepicker__panel--overlay');
+    this.clearPanelModeClasses(panel);
+    panel.style.removeProperty('position');
+    panel.style.removeProperty('top');
+    panel.style.removeProperty('left');
+    panel.style.removeProperty('width');
+    this.clearPanelCssVariables(panel);
+  }
+
+  private resolveAppendTarget(): HTMLElement | null {
+    const appendTarget: DatePickerAppendTo = this.appendTo();
+    if (appendTarget === undefined) {
+      return null;
+    }
+
+    if (typeof appendTarget !== 'string') {
+      return appendTarget;
+    }
+
+    const normalizedTarget: string = appendTarget.trim();
+    if (!normalizedTarget || normalizedTarget === 'self') {
+      return null;
+    }
+
+    if (normalizedTarget === 'body') {
+      return this.documentRef.body;
+    }
+
+    return this.documentRef.querySelector<HTMLElement>(normalizedTarget);
+  }
+
+  private positionMountedPanel(panel: HTMLDivElement): void {
+    const anchorElement: HTMLElement | undefined =
+      this.inputWrapperElement?.nativeElement ?? this.inputElement?.nativeElement;
+    if (!anchorElement) {
+      return;
+    }
+
+    const anchorRect: DOMRect = anchorElement.getBoundingClientRect();
+    const panelRect: DOMRect = panel.getBoundingClientRect();
+    const viewportPadding: number = 8;
+    const offset: number = 6;
+    const viewportWidth: number =
+      this.documentRef.defaultView?.innerWidth ?? this.documentRef.documentElement.clientWidth;
+    const viewportHeight: number =
+      this.documentRef.defaultView?.innerHeight ?? this.documentRef.documentElement.clientHeight;
+
+    const panelWidth: number = Math.max(anchorRect.width, panelRect.width);
+    const availableBelow: number = viewportHeight - anchorRect.bottom - offset - viewportPadding;
+    const availableAbove: number = anchorRect.top - offset - viewportPadding;
+    const useAbove: boolean = availableBelow < panelRect.height && availableAbove > availableBelow;
+    const safeLeft: number = Math.min(
+      Math.max(viewportPadding, anchorRect.left),
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+    );
+
+    panel.style.position = 'fixed';
+    panel.style.left = `${safeLeft}px`;
+    panel.style.width = `${panelWidth}px`;
+    panel.style.top = useAbove
+      ? `${Math.max(viewportPadding, anchorRect.top - offset - panelRect.height)}px`
+      : `${Math.min(viewportHeight - viewportPadding, anchorRect.bottom + offset)}px`;
+  }
+
+  private syncPanelClasses(panel: HTMLDivElement, variant: ThemeVariant): void {
+    this.clearPanelModeClasses(panel);
+    panel.classList.add(`ui-lib-datepicker__panel--${variant}`);
+  }
+
+  private clearPanelModeClasses(panel: HTMLDivElement): void {
+    DATE_PICKER_PANEL_MODE_CLASSES.forEach((panelModeClass: string): void => {
+      panel.classList.remove(panelModeClass);
+    });
+  }
+
+  private syncPanelCssVariables(panel: HTMLDivElement): void {
+    const windowRef: Window | null = this.documentRef.defaultView;
+    if (!windowRef) {
+      return;
+    }
+
+    const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
+      this.hostElement.nativeElement
+    );
+    for (let index: number = 0; index < hostStyles.length; index += 1) {
+      const name: string = hostStyles.item(index);
+      if (!name.startsWith('--uilib-datepicker-')) {
+        continue;
+      }
+
+      panel.style.setProperty(name, hostStyles.getPropertyValue(name));
+    }
+  }
+
+  private clearPanelCssVariables(panel: HTMLDivElement): void {
+    for (let index: number = panel.style.length - 1; index >= 0; index -= 1) {
+      const name: string = panel.style.item(index);
+      if (name.startsWith('--uilib-datepicker-')) {
+        panel.style.removeProperty(name);
+      }
+    }
   }
 }

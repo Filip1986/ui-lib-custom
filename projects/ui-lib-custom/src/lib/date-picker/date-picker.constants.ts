@@ -28,7 +28,7 @@ export const DATE_PICKER_DEFAULTS: {
   readonly Name: '';
   readonly Required: boolean;
   readonly TabIndex: 0;
-  readonly AppendTo: 'self';
+  readonly AppendTo: 'body';
   readonly MinDate: null;
   readonly MaxDate: null;
   readonly DisabledDates: null;
@@ -56,7 +56,7 @@ export const DATE_PICKER_DEFAULTS: {
   Name: '',
   Required: false,
   TabIndex: 0,
-  AppendTo: 'self',
+  AppendTo: 'body',
   MinDate: null,
   MaxDate: null,
   DisabledDates: null,

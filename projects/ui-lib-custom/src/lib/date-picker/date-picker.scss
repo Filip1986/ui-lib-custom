@@ -247,6 +247,11 @@
   padding: var(--uilib-datepicker-panel-padding, 0.75rem);
 }
 
+.ui-lib-datepicker__panel.ui-lib-datepicker__panel--overlay {
+  top: auto;
+  left: auto;
+}
+
 :host.ui-lib-datepicker.ui-lib-datepicker--inline .ui-lib-datepicker__panel {
   position: static;
   margin-top: var(--uilib-space-2, 0.5rem);

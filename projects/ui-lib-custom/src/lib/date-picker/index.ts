@@ -5,6 +5,7 @@ export type {
   DatePickerLocale,
   DatePickerMonthChangeEvent,
   DatePickerNavigationState,
+  DatePickerAppendTo,
   DatePickerSelectionMode,
   DatePickerSize,
   DatePickerValue,

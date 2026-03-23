@@ -101,6 +101,7 @@ describe('DatePickerComponent', (): void => {
   function createFixture(): ComponentFixture<DatePickerComponent> {
     const fixture: ComponentFixture<DatePickerComponent> =
       TestBed.createComponent(DatePickerComponent);
+    fixture.componentRef.setInput('appendTo', 'self');
     fixture.detectChanges();
     return fixture;
   }
@@ -196,6 +197,72 @@ describe('DatePickerComponent', (): void => {
   });
 
   describe('Popup lifecycle', (): void => {
+    it('defaults appendTo to body', (): void => {
+      const fixture: ComponentFixture<DatePickerComponent> =
+        TestBed.createComponent(DatePickerComponent);
+      fixture.detectChanges();
+
+      fixture.componentInstance.showOverlay();
+      fixture.detectChanges();
+
+      const panel: HTMLDivElement | null = document.body.querySelector(
+        '.ui-lib-datepicker__panel'
+      ) as HTMLDivElement | null;
+      expect(panel).toBeTruthy();
+      expect(panel?.parentElement).toBe(document.body);
+    });
+
+    it('keeps detached panel open for inside click and closes on outside click', (): void => {
+      const fixture: ComponentFixture<DatePickerComponent> = createFixture();
+      fixture.componentRef.setInput('appendTo', 'body');
+      fixture.detectChanges();
+
+      fixture.componentInstance.showOverlay();
+      fixture.detectChanges();
+
+      const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
+        document.body,
+        '.ui-lib-datepicker__panel'
+      );
+      panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.overlayVisible()).toBeTruthy();
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.overlayVisible()).toBeFalsy();
+    });
+
+    it('opens panel on input focus', (): void => {
+      const fixture: ComponentFixture<DatePickerComponent> = createFixture();
+      const input: HTMLInputElement = requiredElement<HTMLInputElement>(
+        hostElement(fixture),
+        '.ui-lib-datepicker__input'
+      );
+
+      input.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.overlayVisible()).toBeTruthy();
+    });
+
+    it('does not open panel on input focus when disabled', (): void => {
+      const fixture: ComponentFixture<DatePickerComponent> = createFixture();
+      fixture.componentRef.setInput('disabled', true);
+      fixture.detectChanges();
+
+      const input: HTMLInputElement = requiredElement<HTMLInputElement>(
+        hostElement(fixture),
+        '.ui-lib-datepicker__input'
+      );
+      input.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
+      fixture.detectChanges();
+
+      expect(fixture.componentInstance.overlayVisible()).toBeFalsy();
+    });
+
     it('opens panel on trigger button click and emits onShow', (): void => {
       const fixture: ComponentFixture<DatePickerComponent> = createFixture();
       fixture.componentRef.setInput('showIcon', true);
