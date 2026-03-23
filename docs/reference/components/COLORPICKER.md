@@ -28,7 +28,14 @@ import { ColorPicker } from 'ui-lib-custom';
 | `disabled` | `boolean` | `false` | Disables pointer and keyboard interaction. |
 | `inputId` | `string` | `''` | Hidden input id used for form/label integration. |
 | `tabindex` | `number` | `0` | Trigger tab order in popup mode. |
-| `appendTo` | `string \| HTMLElement` | `'body'` | Reserved API for future portal mounting. |
+| `appendTo` | `string \| HTMLElement \| undefined` | `'body'` | Panel mount target. Supports `'body'`, `'self'`, CSS selector, or `HTMLElement`. |
+
+### `appendTo` behavior
+
+- Default is `'body'` so popup panels render outside clipping containers.
+- Use `'self'` (or an empty string) to keep panel mounting in the component host.
+- You can also pass a CSS selector string (for example `'#overlay-root'`) or an `HTMLElement`.
+- If the selector does not resolve to an element, panel mounting falls back to host.
 
 ---
 
@@ -79,6 +86,7 @@ export interface ColorPickerChangeEvent {
 | `--uilib-colorpicker-panel-border-color` | `var(--uilib-border, #e5e7eb)` | Panel border color. |
 | `--uilib-colorpicker-panel-border-radius` | `var(--uilib-input-radius, var(--uilib-shape-base, 6px))` | Panel border radius. |
 | `--uilib-colorpicker-panel-shadow` | `0 4px 12px rgb(0 0 0 / 15%)` | Panel elevation shadow. |
+| `--uilib-colorpicker-panel-z-index` | `1000` | Panel stacking order. |
 | `--uilib-colorpicker-hue-slider-width` | `18px` | Hue slider width. |
 | `--uilib-colorpicker-hue-slider-height` | `11rem` | Hue slider height. |
 | `--uilib-colorpicker-selector-size` | `12px` | Saturation/brightness selector size. |

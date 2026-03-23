@@ -128,6 +128,21 @@
           </ui-lib-card>
         </app-code-preview>
       </section>
+
+      <section id="clipping" data-doc-anchor class="example-section">
+        <h3>h. Clipping Container (Overflow Hidden)</h3>
+        <p class="section-text">
+          Popup panel opens outside this clipped container using default <code>appendTo='body'</code>.
+        </p>
+        <app-code-preview [code]="snippet('clipping')">
+          <ui-lib-card>
+            <div class="clipping-card">
+              <ui-lib-color-picker [(ngModel)]="clippingValue" format="hex" />
+              <p class="value-text clipping-note">Selected {{ displayHexValue(clippingValue) }}</p>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
     </div>
   </app-doc-demo-viewport>
 </app-doc-page-layout>

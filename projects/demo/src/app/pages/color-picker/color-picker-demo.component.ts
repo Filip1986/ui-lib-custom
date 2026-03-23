@@ -23,7 +23,8 @@ type DemoSnippetKey =
   | 'templateDriven'
   | 'reactive'
   | 'disabled'
-  | 'variants';
+  | 'variants'
+  | 'clipping';
 
 /**
  * Demo page for ColorPicker component usage and forms integration.
@@ -55,6 +56,7 @@ export class ColorPickerDemoComponent {
     { id: 'reactive', label: 'Reactive Form' },
     { id: 'disabled', label: 'Disabled' },
     { id: 'variants', label: 'Variants' },
+    { id: 'clipping', label: 'Clipping Container' },
   ];
 
   public readonly snippets: Record<DemoSnippetKey, string> = {
@@ -76,6 +78,9 @@ export class ColorPickerDemoComponent {
     variants: `<ui-lib-color-picker variant="material" [(ngModel)]="variantValues.material" />
 <ui-lib-color-picker variant="bootstrap" [(ngModel)]="variantValues.bootstrap" />
 <ui-lib-color-picker variant="minimal" [(ngModel)]="variantValues.minimal" />`,
+    clipping: `<div class="clipping-card">
+  <ui-lib-color-picker [(ngModel)]="clippingValue" format="hex" />
+</div>`,
   };
 
   public basicHex: string = '6466f1';
@@ -107,6 +112,7 @@ export class ColorPickerDemoComponent {
     bootstrap: 'f97316',
     minimal: '14b8a6',
   };
+  public clippingValue: string = '6366f1';
 
   public snippet(key: DemoSnippetKey): string {
     return this.snippets[key];

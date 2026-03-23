@@ -79,4 +79,24 @@ test.describe('Overlay Mounting Regressions', (): void => {
 
     await expectPanelMountedOutsideClippingCard(page, panelSelector, clippingCardSelector);
   });
+
+  test('color-picker clipping demo mounts panel outside overflow-hidden card', async ({
+    page,
+  }: {
+    page: Page;
+  }): Promise<void> => {
+    await page.goto('/color-picker');
+
+    const clippingCardSelector: string = 'section#clipping .clipping-card';
+    const trigger: Locator = page.locator(
+      `${clippingCardSelector} ui-lib-color-picker .ui-lib-colorpicker__trigger`
+    );
+
+    await trigger.click();
+
+    const panelSelector: string = 'body > .ui-lib-colorpicker__panel';
+    await expect(page.locator(panelSelector).first()).toBeVisible();
+
+    await expectPanelMountedOutsideClippingCard(page, panelSelector, clippingCardSelector);
+  });
 });

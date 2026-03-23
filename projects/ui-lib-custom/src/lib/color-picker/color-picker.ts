@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +15,14 @@ import {
   output,
   signal,
 } from '@angular/core';
-import type { InputSignal, OutputEmitterRef, Signal, WritableSignal } from '@angular/core';
+import type {
+  AfterViewChecked,
+  InputSignal,
+  OnDestroy,
+  OutputEmitterRef,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
@@ -48,6 +55,11 @@ export type {
 } from './color-picker.types';
 
 let colorPickerIdCounter: number = 0;
+const COLOR_PICKER_PANEL_MODE_CLASSES: readonly string[] = [
+  'ui-lib-colorpicker__panel--material',
+  'ui-lib-colorpicker__panel--bootstrap',
+  'ui-lib-colorpicker__panel--minimal',
+];
 
 type DragTarget = 'color' | 'hue' | null;
 type PanelPlacement = 'below' | 'above';
@@ -82,7 +94,7 @@ type PanelPlacement = 'below' | 'above';
  * Color picker component supporting popup and inline modes with CVA integration.
  */
 // eslint-disable-next-line jsdoc/require-jsdoc
-export class ColorPicker implements ControlValueAccessor {
+export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDestroy {
   public readonly value: InputSignal<ColorPickerValue> = input<ColorPickerValue>(null);
   public readonly format: InputSignal<ColorFormat> = input<ColorFormat>(
     COLOR_PICKER_DEFAULTS.Format
@@ -128,6 +140,7 @@ export class ColorPicker implements ControlValueAccessor {
 
   private readonly hostElement: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly documentRef: Document = inject(DOCUMENT);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
@@ -235,7 +248,7 @@ export class ColorPicker implements ControlValueAccessor {
 
     this.panelVisible.set(true);
     this.onShow.emit();
-    requestAnimationFrame((): void => this.updatePanelPlacement());
+    requestAnimationFrame((): void => this.syncPanelMount());
   }
 
   public closePanel(): void {
@@ -416,6 +429,23 @@ export class ColorPicker implements ControlValueAccessor {
     }
   }
 
+  public ngAfterViewChecked(): void {
+    if (!this.panelVisible()) {
+      return;
+    }
+
+    this.syncPanelMount();
+  }
+
+  public ngOnDestroy(): void {
+    this.detachDragListeners();
+
+    const panel: HTMLDivElement | null = this.panelElement?.nativeElement ?? null;
+    if (panel?.isConnected) {
+      panel.remove();
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   public onDocumentClick(event: MouseEvent): void {
     if (this.inline() || !this.panelVisible()) {
@@ -427,7 +457,11 @@ export class ColorPicker implements ControlValueAccessor {
       return;
     }
 
-    if (!this.hostElement.nativeElement.contains(targetNode)) {
+    const clickedInsideHost: boolean = this.hostElement.nativeElement.contains(targetNode);
+    const panel: HTMLDivElement | null = this.panelElement?.nativeElement ?? null;
+    const clickedInsidePanel: boolean = panel?.contains(targetNode) === true;
+
+    if (!clickedInsideHost && !clickedInsidePanel) {
       this.closePanel();
     }
   }
@@ -435,7 +469,14 @@ export class ColorPicker implements ControlValueAccessor {
   @HostListener('window:resize')
   public onWindowResize(): void {
     if (this.panelVisible() && !this.inline()) {
-      this.updatePanelPlacement();
+      this.syncPanelMount();
+    }
+  }
+
+  @HostListener('window:scroll')
+  public onWindowScroll(): void {
+    if (this.panelVisible() && !this.inline()) {
+      this.syncPanelMount();
     }
   }
 
@@ -633,5 +674,141 @@ export class ColorPicker implements ControlValueAccessor {
   private handleDocumentPointerEnd(): void {
     this.dragTarget.set(null);
     this.detachDragListeners();
+  }
+
+  private syncPanelMount(): void {
+    const panel: HTMLDivElement | null = this.panelElement?.nativeElement ?? null;
+    if (!panel || this.inline()) {
+      if (panel) {
+        this.mountPanelToHost(panel);
+      }
+      return;
+    }
+
+    const mountTarget: HTMLElement | null = this.resolveAppendTarget();
+    if (!mountTarget) {
+      this.mountPanelToHost(panel);
+      this.updatePanelPlacement();
+      return;
+    }
+
+    if (panel.parentElement !== mountTarget) {
+      mountTarget.appendChild(panel);
+    }
+
+    this.syncPanelClasses(panel, this.resolvedVariant());
+    this.syncPanelCssVariables(panel);
+    panel.classList.add('ui-lib-colorpicker__panel--overlay');
+    this.positionMountedPanel(panel);
+  }
+
+  private mountPanelToHost(panel: HTMLDivElement): void {
+    const host: HTMLElement = this.hostElement.nativeElement;
+    if (panel.parentElement !== host) {
+      host.appendChild(panel);
+    }
+
+    panel.classList.remove('ui-lib-colorpicker__panel--overlay');
+    this.clearPanelModeClasses(panel);
+    panel.style.removeProperty('position');
+    panel.style.removeProperty('top');
+    panel.style.removeProperty('left');
+    panel.style.removeProperty('width');
+    this.clearPanelCssVariables(panel);
+  }
+
+  private resolveAppendTarget(): HTMLElement | null {
+    const appendTarget: ColorPickerAppendTo = this.appendTo();
+    if (appendTarget === undefined) {
+      return null;
+    }
+
+    if (typeof appendTarget !== 'string') {
+      return appendTarget;
+    }
+
+    const normalizedTarget: string = appendTarget.trim();
+    if (!normalizedTarget || normalizedTarget === 'self') {
+      return null;
+    }
+
+    if (normalizedTarget === 'body') {
+      return this.documentRef.body;
+    }
+
+    return this.documentRef.querySelector<HTMLElement>(normalizedTarget);
+  }
+
+  private positionMountedPanel(panel: HTMLDivElement): void {
+    const trigger: HTMLButtonElement | undefined = this.triggerButton?.nativeElement;
+    if (!trigger) {
+      return;
+    }
+
+    const triggerRect: DOMRect = trigger.getBoundingClientRect();
+    const panelRect: DOMRect = panel.getBoundingClientRect();
+    const viewportPadding: number = 8;
+    const offset: number = 8;
+    const viewportWidth: number =
+      this.documentRef.defaultView?.innerWidth ?? this.documentRef.documentElement.clientWidth;
+    const viewportHeight: number =
+      this.documentRef.defaultView?.innerHeight ?? this.documentRef.documentElement.clientHeight;
+
+    const panelWidth: number = Math.max(0, panelRect.width || triggerRect.width);
+    const availableBelow: number = viewportHeight - triggerRect.bottom - offset - viewportPadding;
+    const availableAbove: number = triggerRect.top - offset - viewportPadding;
+    const useAbove: boolean = availableBelow < panelRect.height && availableAbove > availableBelow;
+    const safeLeft: number = Math.min(
+      Math.max(viewportPadding, triggerRect.left),
+      Math.max(viewportPadding, viewportWidth - panelWidth - viewportPadding)
+    );
+
+    panel.style.position = 'fixed';
+    panel.style.left = `${safeLeft}px`;
+    panel.style.width = `${panelWidth}px`;
+    panel.style.top = useAbove
+      ? `${Math.max(viewportPadding, triggerRect.top - offset - panelRect.height)}px`
+      : `${Math.min(viewportHeight - viewportPadding, triggerRect.bottom + offset)}px`;
+
+    this.panelPlacement.set(useAbove ? 'above' : 'below');
+  }
+
+  private syncPanelClasses(panel: HTMLDivElement, variant: ColorPickerVariant): void {
+    this.clearPanelModeClasses(panel);
+    panel.classList.add(`ui-lib-colorpicker__panel--${variant}`);
+  }
+
+  private syncPanelCssVariables(panel: HTMLDivElement): void {
+    const windowRef: Window | null = this.documentRef.defaultView;
+    if (!windowRef) {
+      return;
+    }
+
+    const hostStyles: CSSStyleDeclaration = windowRef.getComputedStyle(
+      this.hostElement.nativeElement
+    );
+    for (let index: number = 0; index < hostStyles.length; index += 1) {
+      const name: string = hostStyles.item(index);
+      if (!name.startsWith('--uilib-colorpicker-')) {
+        continue;
+      }
+
+      panel.style.setProperty(name, hostStyles.getPropertyValue(name));
+    }
+  }
+
+  private clearPanelCssVariables(panel: HTMLDivElement): void {
+    for (let index: number = panel.style.length - 1; index >= 0; index -= 1) {
+      const name: string = panel.style.item(index);
+      if (name.startsWith('--uilib-colorpicker-')) {
+        panel.style.removeProperty(name);
+      }
+    }
+  }
+
+  private clearPanelModeClasses(panel: HTMLDivElement): void {
+    COLOR_PICKER_PANEL_MODE_CLASSES.forEach((panelModeClass: string): void => {
+      panel.classList.remove(panelModeClass);
+    });
   }
 }

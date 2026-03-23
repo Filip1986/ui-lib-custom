@@ -34,7 +34,7 @@ Source file: `projects/ui-lib-custom/src/lib/color-picker/color-picker.types.ts`
 | `disabled` | `InputSignal<boolean>` | `false` | Merged with CVA disabled state. |
 | `inputId` | `InputSignal<string>` | `''` | Hidden/native input id for forms and labels. |
 | `tabindex` | `InputSignal<number>` | `0` | Trigger focus order in popup mode. |
-| `appendTo` | `InputSignal<string | HTMLElement>` | `'body'` | Reserved for future portal mounting; v1 remains anchored in-place. |
+| `appendTo` | `InputSignal<string | HTMLElement | undefined>` | `'body'` | Panel mount target (`'body'`, `'self'`, CSS selector, or `HTMLElement`). |
 
 ### Outputs
 
@@ -99,10 +99,10 @@ Model flow:
    - Inline mode: value preview only.
    - Popup mode: trigger for open/close + current color indicator.
 
-5. **Popup panel behavior (v1)**
-   - Anchored, in-place panel (same family as `select` and `cascade-select`).
-   - Click-outside and Escape close behavior.
-   - `appendTo` accepted as API, but portal behavior deferred.
+5. **Popup panel behavior**
+   - Defaults to body-mounted overlay (`appendTo='body'`) with fixed positioning anchored to trigger bounds.
+   - Supports `'self'`, selector strings, and `HTMLElement` targets with host fallback if unresolved.
+   - Includes click-outside and Escape close behavior.
 
 ### Runtime state model
 
@@ -144,7 +144,6 @@ The component styling surface uses these variables:
 
 ## Deferred Items (Post-v1)
 
-- True `appendTo` portal mounting and collision-aware overlay positioning.
-- Shared overlay utility in `ui-lib-custom/core`.
+- Shared overlay utility in `ui-lib-custom/core` to consolidate duplicated mount/position logic.
 - Advanced transition option parity (`showTransitionOptions` / `hideTransitionOptions`) as configurable motion inputs.
 

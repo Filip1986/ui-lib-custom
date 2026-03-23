@@ -20,6 +20,7 @@ type ChangeEventPayload = { originalEvent: Event; value: ColorPickerValue };
       [inline]="inline()"
       [variant]="variant()"
       [disabled]="disabled()"
+      appendTo="self"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
     />
@@ -43,7 +44,12 @@ class NgModelHostComponent {
   imports: [ReactiveFormsModule, ColorPicker],
   template: `
     <form [formGroup]="form">
-      <ui-lib-color-picker [inline]="inline" [format]="format" formControlName="color" />
+      <ui-lib-color-picker
+        [inline]="inline"
+        [format]="format"
+        appendTo="self"
+        formControlName="color"
+      />
     </form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -101,6 +107,7 @@ describe('ColorPicker component', (): void => {
 
     fixture = TestBed.createComponent(ColorPicker);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('appendTo', 'self');
     fixture.detectChanges();
   });
 
@@ -114,6 +121,10 @@ describe('ColorPicker component', (): void => {
 
   function panelEl(): HTMLDivElement | null {
     return hostEl().querySelector('.ui-lib-colorpicker__panel') as HTMLDivElement | null;
+  }
+
+  function bodyPanelEl(): HTMLDivElement | null {
+    return document.body.querySelector('.ui-lib-colorpicker__panel') as HTMLDivElement | null;
   }
 
   function colorAreaEl(): HTMLDivElement {
@@ -180,6 +191,38 @@ describe('ColorPicker component', (): void => {
   });
 
   describe('popup behavior', (): void => {
+    it('defaults appendTo to body', (): void => {
+      const defaultFixture: ComponentFixture<ColorPicker> = TestBed.createComponent(ColorPicker);
+      const defaultComponent: ColorPicker = defaultFixture.componentInstance;
+      defaultFixture.detectChanges();
+
+      defaultComponent.openPanel();
+      defaultFixture.detectChanges();
+
+      const panel: HTMLDivElement | null = bodyPanelEl();
+      expect(panel).toBeTruthy();
+      expect(panel?.parentElement).toBe(document.body);
+    });
+
+    it('keeps detached panel open for inside click and closes on outside click', (): void => {
+      fixture.componentRef.setInput('appendTo', 'body');
+      fixture.detectChanges();
+      openPanel();
+
+      const panel: HTMLDivElement = requiredElement<HTMLDivElement>(
+        document.body,
+        '.ui-lib-colorpicker__panel'
+      );
+      panel.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      fixture.detectChanges();
+      expect(bodyPanelEl()).toBeTruthy();
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      fixture.detectChanges();
+      expect(bodyPanelEl()).toBeNull();
+      expect(component.panelVisible()).toBeFalsy();
+    });
+
     it('opens on trigger click and emits onShow', (): void => {
       const showSpy: jest.SpyInstance = jest.spyOn(component.onShow, 'emit');
 

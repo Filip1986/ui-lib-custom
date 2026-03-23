@@ -30,8 +30,8 @@ export interface HsbColor {
 /** Value type depends on format. */
 export type ColorPickerValue = string | RgbColor | HsbColor | null;
 
-/** Popup mount target for future appendTo support. */
-export type ColorPickerAppendTo = string | HTMLElement;
+/** Popup mount target (`'body'`, `'self'`, selector, or HTMLElement). */
+export type ColorPickerAppendTo = string | HTMLElement | undefined;
 
 /** Change event payload. */
 export interface ColorPickerChangeEvent {
