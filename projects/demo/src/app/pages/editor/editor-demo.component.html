@@ -1,0 +1,239 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Editor</h1>
+    <p class="doc-description">
+      Native rich-text editing with optional projected toolbar controls, forms integration, and
+      token-driven variants.
+    </p>
+  </div>
+
+  <app-doc-demo-viewport [autoHeight]="true">
+    <div class="examples">
+      <section id="basic" data-doc-anchor class="example-section">
+        <h3>a. Basic</h3>
+        <p class="section-text">Two-way binding with live HTML output.</p>
+        <app-code-preview [code]="snippet('basic')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <ui-lib-editor
+                [(ngModel)]="basicHtml"
+                placeholder="Write something with bold, lists, and links..."
+              ></ui-lib-editor>
+              <pre class="value-pre">{{ basicHtml }}</pre>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="readonly" data-doc-anchor class="example-section">
+        <h3>b. ReadOnly</h3>
+        <p class="section-text">Pre-populated editor content in readonly mode.</p>
+        <app-code-preview [code]="snippet('readonly')">
+          <ui-lib-card>
+            <ui-lib-editor [readonly]="true" [ngModel]="readonlyHtml"></ui-lib-editor>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="custom-toolbar" data-doc-anchor class="example-section">
+        <h3>c. Custom Toolbar</h3>
+        <p class="section-text">
+          Project your own toolbar and execute commands with a template reference variable.
+        </p>
+        <app-code-preview [code]="snippet('customToolbar')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <ui-lib-editor #editor [(ngModel)]="customToolbarHtml">
+                <div editorToolbar class="custom-toolbar">
+                  <select
+                    class="custom-toolbar-select"
+                    [value]="editor.toolbarState().blockFormat"
+                    aria-label="Heading level"
+                    (mousedown)="onToolbarMouseDown($event)"
+                    (change)="onCustomHeadingChange(editor, $event)"
+                  >
+                    <option value="p">Normal</option>
+                    <option value="h1">Heading 1</option>
+                    <option value="h2">Heading 2</option>
+                    <option value="h3">Heading 3</option>
+                  </select>
+
+                  <button
+                    type="button"
+                    class="custom-toolbar-button"
+                    aria-label="Bold"
+                    [attr.aria-pressed]="editor.toolbarState().bold"
+                    (mousedown)="onToolbarMouseDown($event)"
+                    (click)="editor.executeCommand('bold')"
+                  >
+                    B
+                  </button>
+
+                  <button
+                    type="button"
+                    class="custom-toolbar-button"
+                    aria-label="Italic"
+                    [attr.aria-pressed]="editor.toolbarState().italic"
+                    (mousedown)="onToolbarMouseDown($event)"
+                    (click)="editor.executeCommand('italic')"
+                  >
+                    I
+                  </button>
+
+                  <button
+                    type="button"
+                    class="custom-toolbar-button"
+                    aria-label="Underline"
+                    [attr.aria-pressed]="editor.toolbarState().underline"
+                    (mousedown)="onToolbarMouseDown($event)"
+                    (click)="editor.executeCommand('underline')"
+                  >
+                    U
+                  </button>
+                </div>
+              </ui-lib-editor>
+              <pre class="value-pre">{{ customToolbarHtml }}</pre>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="template-driven" data-doc-anchor class="example-section">
+        <h3>d. Template-Driven Form</h3>
+        <p class="section-text">Required validation, submit action, and form state.</p>
+        <app-code-preview [code]="snippet('templateDriven')">
+          <ui-lib-card>
+            <form #templateForm="ngForm" (ngSubmit)="submitTemplateDriven(templateForm)" class="stack-md">
+              <ui-lib-editor
+                name="templateContent"
+                required
+                [(ngModel)]="templateDrivenHtml"
+                placeholder="Required content..."
+              ></ui-lib-editor>
+              <div class="row-inline">
+                <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+                <span class="value-text">Valid: {{ templateForm.valid }}</span>
+                <span class="value-text">Touched: {{ templateForm.touched }}</span>
+              </div>
+              <pre class="value-pre">{{ templateDrivenSubmittedHtml ?? 'No submission yet' }}</pre>
+            </form>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="reactive" data-doc-anchor class="example-section">
+        <h3>e. Reactive Form</h3>
+        <p class="section-text">Reactive control binding with required validation.</p>
+        <app-code-preview [code]="snippet('reactive')">
+          <ui-lib-card>
+            <form [formGroup]="reactiveForm" (ngSubmit)="submitReactive()" class="stack-md">
+              <ui-lib-editor formControlName="content" placeholder="Required content..."></ui-lib-editor>
+              <div class="row-inline">
+                <ui-lib-button type="submit" color="primary">Submit</ui-lib-button>
+                <span class="value-text">Valid: {{ reactiveForm.valid }}</span>
+                <span class="value-text">Touched: {{ reactiveForm.touched }}</span>
+              </div>
+              <pre class="value-pre">{{ reactiveSubmittedHtml ?? 'No submission yet' }}</pre>
+            </form>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="variants" data-doc-anchor class="example-section">
+        <h3>f. Variants</h3>
+        <p class="section-text">Material, Bootstrap, and Minimal side by side.</p>
+        <app-code-preview [code]="snippet('variants')">
+          <ui-lib-card>
+            <div class="row-3">
+              <div class="variant-column">
+                <p class="variant-title">Material</p>
+                <ui-lib-editor variant="material" [(ngModel)]="variantValues.material"></ui-lib-editor>
+              </div>
+              <div class="variant-column">
+                <p class="variant-title">Bootstrap</p>
+                <ui-lib-editor variant="bootstrap" [(ngModel)]="variantValues.bootstrap"></ui-lib-editor>
+              </div>
+              <div class="variant-column">
+                <p class="variant-title">Minimal</p>
+                <ui-lib-editor variant="minimal" [(ngModel)]="variantValues.minimal"></ui-lib-editor>
+              </div>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="sizes" data-doc-anchor class="example-section">
+        <h3>g. Sizes</h3>
+        <p class="section-text">Small, medium, and large size options.</p>
+        <app-code-preview [code]="snippet('sizes')">
+          <ui-lib-card>
+            <div class="row-3">
+              <div class="variant-column">
+                <p class="variant-title">sm</p>
+                <ui-lib-editor size="sm" [(ngModel)]="sizeValues.sm"></ui-lib-editor>
+              </div>
+              <div class="variant-column">
+                <p class="variant-title">md</p>
+                <ui-lib-editor size="md" [(ngModel)]="sizeValues.md"></ui-lib-editor>
+              </div>
+              <div class="variant-column">
+                <p class="variant-title">lg</p>
+                <ui-lib-editor size="lg" [(ngModel)]="sizeValues.lg"></ui-lib-editor>
+              </div>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="filled" data-doc-anchor class="example-section">
+        <h3>h. Filled</h3>
+        <p class="section-text">Filled editor style useful on elevated backgrounds.</p>
+        <app-code-preview [code]="snippet('filled')">
+          <ui-lib-card>
+            <ui-lib-editor [filled]="true" [(ngModel)]="filledHtml"></ui-lib-editor>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="disabled" data-doc-anchor class="example-section">
+        <h3>i. Disabled</h3>
+        <p class="section-text">Non-interactive state with preloaded content.</p>
+        <app-code-preview [code]="snippet('disabled')">
+          <ui-lib-card>
+            <ui-lib-editor [disabled]="true" [ngModel]="disabledHtml"></ui-lib-editor>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="events" data-doc-anchor class="example-section">
+        <h3>j. Events</h3>
+        <p class="section-text">Visible event log for text and selection changes.</p>
+        <app-code-preview [code]="snippet('events')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <ui-lib-editor
+                [(ngModel)]="eventsHtml"
+                (textChange)="onTextChange($event)"
+                (selectionChange)="onSelectionChange($event)"
+              ></ui-lib-editor>
+              <div class="row-inline">
+                <ui-lib-button type="button" color="secondary" (click)="clearEventLog()"
+                  >Clear Log</ui-lib-button
+                >
+              </div>
+              <div class="event-log" aria-live="polite">
+                @if (eventLog.length === 0) {
+                  <p class="event-log-empty">No events yet.</p>
+                }
+                @for (entry of eventLog; track entry) {
+                  <div class="event-log-line">{{ entry }}</div>
+                }
+              </div>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+    </div>
+  </app-doc-demo-viewport>
+</app-doc-page-layout>
+

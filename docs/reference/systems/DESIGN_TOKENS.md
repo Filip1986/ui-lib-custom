@@ -604,6 +604,41 @@ import { COLORPICKER_TOKENS, type ColorPickerTokenKey } from 'ui-lib-custom/toke
 
 These tokens map to public CSS variables under the `--uilib-colorpicker-*` namespace.
 
+#### Editor
+
+```typescript
+import { EDITOR_TOKENS, type EditorTokenKey } from 'ui-lib-custom/tokens';
+```
+
+| Token | Default |
+| --- | --- |
+| `toolbarBg` | `#f5f5f5` |
+| `toolbarBorderColor` | `#e0e0e0` |
+| `toolbarItemColor` | `#212121` |
+| `toolbarItemHoverColor` | `#212121` |
+| `toolbarItemHoverBg` | `color-mix(in srgb, #000000 8%, transparent)` |
+| `toolbarItemActiveColor` | `#212121` |
+| `toolbarItemActiveBg` | `color-mix(in srgb, #000000 12%, transparent)` |
+| `toolbarSeparatorColor` | `#e0e0e0` |
+| `toolbarPadding` | `0.5rem` |
+| `toolbarGap` | `0.25rem` |
+| `toolbarBorderRadius` | `0.5rem` |
+| `contentBg` | `#ffffff` |
+| `contentBorderColor` | `#e0e0e0` |
+| `contentFontFamily` | `var(--uilib-font-ui, system-ui, sans-serif)` |
+| `contentFontSize` | `0.875rem` |
+| `contentLineHeight` | `1.5` |
+| `contentColor` | `#212121` |
+| `contentPadding` | `0.75rem 1rem` |
+| `contentMinHeight` | `150px` |
+| `placeholderColor` | `#9e9e9e` |
+| `borderRadius` | `0.5rem` |
+| `focusRingColor` | `color-mix(in srgb, #1e88e5 45%, transparent)` |
+| `focusRingWidth` | `2px` |
+| `disabledOpacity` | `0.6` |
+
+Editor tokens map to public CSS variables under the `--uilib-editor-*` namespace and are applied by `ThemeConfigService` during preset-to-CSS-variable mapping.
+
 #### DatePicker
 
 ```typescript

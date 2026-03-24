@@ -210,6 +210,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### Editor
+**Files:**
+- [EDITOR.md](EDITOR.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/editor)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/editor/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -274,6 +286,7 @@ Each component should have two documentation files:
 | AutoComplete | Typeahead suggestions + chips | 3 | - | 3 | ✅ Complete |
 | CascadeSelect | Hierarchical dropdown tree select | 3 | - | 3 | ✅ Complete |
 | ColorPicker | Visual color selection (hex/rgb/hsb) | 3 | - | - | ✅ Complete |
+| Editor | Native rich-text editing with toolbar | 3 | - | 3 | ✅ Complete |
 
 ---
 

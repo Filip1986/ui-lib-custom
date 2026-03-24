@@ -183,6 +183,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/date-picker',
         },
+        {
+          label: 'Editor',
+          icon: 'pi pi-circle',
+          route: '/editor',
+        },
       ],
     },
   ]);

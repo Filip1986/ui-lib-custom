@@ -1,4 +1,4 @@
-/*
+1; /*
  * Public API Surface of ui-lib-custom
  *
  * Most components with secondary entry points are consumed directly to avoid
@@ -61,6 +61,9 @@ export * from './lib/cascade-select';
 
 // ColorPicker
 export * from './lib/color-picker';
+
+// Editor
+export * from './lib/editor';
 
 // Dialog (backward compatibility re-export)
 export { DialogComponent } from './lib/dialog/dialog.component';

@@ -1183,6 +1183,66 @@ export const DATEPICKER_TOKENS: Readonly<DatePickerTokens> = {
 export type DatePickerTokenKey = keyof typeof DATEPICKER_TOKENS;
 
 // ============================================================================
+// EDITOR TOKENS
+// ============================================================================
+
+export type EditorTokens = {
+  toolbarBg: string;
+  toolbarBorderColor: string;
+  toolbarItemColor: string;
+  toolbarItemHoverColor: string;
+  toolbarItemHoverBg: string;
+  toolbarItemActiveColor: string;
+  toolbarItemActiveBg: string;
+  toolbarSeparatorColor: string;
+  toolbarPadding: string;
+  toolbarGap: string;
+  toolbarBorderRadius: string;
+  contentBg: string;
+  contentBorderColor: string;
+  contentFontFamily: string;
+  contentFontSize: string;
+  contentLineHeight: string;
+  contentColor: string;
+  contentPadding: string;
+  contentMinHeight: string;
+  placeholderColor: string;
+  borderRadius: string;
+  focusRingColor: string;
+  focusRingWidth: string;
+  disabledOpacity: string;
+};
+
+export const EDITOR_TOKENS: Readonly<EditorTokens> = {
+  toolbarBg: COLOR_NEUTRAL[100],
+  toolbarBorderColor: COLOR_NEUTRAL[300],
+  toolbarItemColor: COLOR_NEUTRAL[900],
+  toolbarItemHoverColor: COLOR_NEUTRAL[900],
+  toolbarItemHoverBg: `color-mix(in srgb, ${COLOR_NEUTRAL.black} 8%, transparent)`,
+  toolbarItemActiveColor: COLOR_NEUTRAL[900],
+  toolbarItemActiveBg: `color-mix(in srgb, ${COLOR_NEUTRAL.black} 12%, transparent)`,
+  toolbarSeparatorColor: COLOR_NEUTRAL[300],
+  toolbarPadding: SPACING_TOKENS[2],
+  toolbarGap: SPACING_TOKENS[1],
+  toolbarBorderRadius: BORDER_RADIUS.lg,
+  contentBg: COLOR_NEUTRAL.white,
+  contentBorderColor: COLOR_NEUTRAL[300],
+  contentFontFamily: 'var(--uilib-font-ui, system-ui, sans-serif)',
+  contentFontSize: FONT_SIZES.sm,
+  contentLineHeight: `${LINE_HEIGHTS.normal}`,
+  contentColor: COLOR_NEUTRAL[900],
+  contentPadding: `${SPACING_TOKENS[3]} ${SPACING_TOKENS[4]}`,
+  contentMinHeight: '150px',
+  placeholderColor: COLOR_NEUTRAL[500],
+  borderRadius: BORDER_RADIUS.lg,
+  focusRingColor: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 45%, transparent)`,
+  focusRingWidth: BORDER_WIDTH[2],
+  disabledOpacity: '0.6',
+};
+
+export type EditorTokenKey = keyof typeof EDITOR_TOKENS;
+
+// ============================================================================
 // COLOR PICKER TOKENS
 // ============================================================================
 

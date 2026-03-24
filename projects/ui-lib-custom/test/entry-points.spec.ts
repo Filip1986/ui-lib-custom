@@ -7,6 +7,7 @@ import type * as UiLibCheckbox from 'ui-lib-custom/checkbox';
 import type * as UiLibColorPicker from 'ui-lib-custom/color-picker';
 import type * as UiLibCore from 'ui-lib-custom/core';
 import type * as UiLibDatePicker from 'ui-lib-custom/date-picker';
+import type * as UiLibEditor from 'ui-lib-custom/editor';
 import type * as UiLibIcon from 'ui-lib-custom/icon';
 import type * as UiLibInput from 'ui-lib-custom/input';
 import type * as UiLibLayout from 'ui-lib-custom/layout';
@@ -61,6 +62,11 @@ describe('Secondary Entry Points', (): void => {
   it('should import from date-picker', async (): Promise<void> => {
     const mod: typeof UiLibDatePicker = await import('ui-lib-custom/date-picker');
     expect(mod.DatePickerComponent).toBeDefined();
+  });
+
+  it('should import from editor', async (): Promise<void> => {
+    const mod: typeof UiLibEditor = await import('ui-lib-custom/editor');
+    expect(mod.EditorComponent).toBeDefined();
   });
 
   it('should import from icon', async (): Promise<void> => {

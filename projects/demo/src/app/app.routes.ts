@@ -169,6 +169,14 @@ export const routes: Routes = [
       ),
     title: 'DatePicker - UI Components Library',
   },
+  {
+    path: 'editor',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/editor/editor-demo.component').then(
+        (m: { EditorDemoComponent: Type<unknown> }): Type<unknown> => m.EditorDemoComponent
+      ),
+    title: 'Editor - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

@@ -5,6 +5,7 @@ import {
   BORDER_RADIUS,
   COLORPICKER_TOKENS,
   DATEPICKER_TOKENS,
+  EDITOR_TOKENS,
   SHADOWS,
   SELECTBUTTON_TOKENS,
   SHAPE_TOKENS,
@@ -757,6 +758,42 @@ export class ThemeConfigService {
     set('--uilib-colorpicker-hue-slider-height', COLORPICKER_TOKENS.hueSliderHeight);
     set('--uilib-colorpicker-selector-size', COLORPICKER_TOKENS.selectorSize);
     set('--uilib-colorpicker-transition-duration', COLORPICKER_TOKENS.transitionDuration);
+
+    set('--uilib-editor-toolbar-bg', colors.surfaceAlt);
+    set('--uilib-editor-toolbar-border-color', borderColor);
+    set('--uilib-editor-toolbar-item-color', textColor);
+    set('--uilib-editor-toolbar-item-hover-color', EDITOR_TOKENS.toolbarItemHoverColor);
+    set('--uilib-editor-toolbar-item-hover-bg', `color-mix(in srgb, ${textColor} 8%, transparent)`);
+    set('--uilib-editor-toolbar-item-active-color', EDITOR_TOKENS.toolbarItemActiveColor);
+    set(
+      '--uilib-editor-toolbar-item-active-bg',
+      `color-mix(in srgb, ${textColor} 12%, transparent)`
+    );
+    set('--uilib-editor-toolbar-separator-color', borderColor);
+    set('--uilib-editor-toolbar-padding', EDITOR_TOKENS.toolbarPadding);
+    set('--uilib-editor-toolbar-gap', EDITOR_TOKENS.toolbarGap);
+    set('--uilib-editor-toolbar-border-radius', EDITOR_TOKENS.toolbarBorderRadius);
+
+    set('--uilib-editor-content-bg', colors.surface);
+    set('--uilib-editor-content-border-color', borderColor);
+    set('--uilib-editor-content-font-family', EDITOR_TOKENS.contentFontFamily);
+    set('--uilib-editor-content-font-size', EDITOR_TOKENS.contentFontSize);
+    set('--uilib-editor-content-line-height', EDITOR_TOKENS.contentLineHeight);
+    set('--uilib-editor-content-color', textColor);
+    set('--uilib-editor-content-padding', EDITOR_TOKENS.contentPadding);
+    set('--uilib-editor-content-min-height', EDITOR_TOKENS.contentMinHeight);
+
+    set(
+      '--uilib-editor-placeholder-color',
+      `color-mix(in srgb, ${textSecondary} 85%, transparent)`
+    );
+    set('--uilib-editor-border-radius', resolvedBorderRadius);
+    set(
+      '--uilib-editor-focus-ring-color',
+      `color-mix(in srgb, ${colors.primary} 45%, transparent)`
+    );
+    set('--uilib-editor-focus-ring-width', EDITOR_TOKENS.focusRingWidth);
+    set('--uilib-editor-disabled-opacity', EDITOR_TOKENS.disabledOpacity);
 
     const iconSizes: Record<string, string> = icons?.sizes ?? this.defaultIconConfig.sizes;
     Object.entries(iconSizes).forEach(([key, value]: [string, string]): void =>

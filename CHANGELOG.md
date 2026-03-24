@@ -21,12 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RTL support for Tabs component
 - New component docs for Select, Alert, and Layout primitives.
 - Comprehensive theming guide (`docs/guides/THEMING_GUIDE.md`).
+- New `Editor` component (`ui-lib-editor`) with native rich-text editing, toolbar command API, projected custom toolbar support (`[editorToolbar]`), forms integration, sanitization, and full demo/docs/test coverage.
+- New secondary entry point: `ui-lib-custom/editor`.
 
 ### Changed
 - All components now support dark mode.
 - ThemeConfigService now supports mode (`auto`/`light`/`dark`).
 - Documentation index updates for new component references.
 - Main README now includes theming and theme editor guidance.
+- Documentation/reference indexes now include direct `Editor` API links.
 
 ### Deprecated
 - 

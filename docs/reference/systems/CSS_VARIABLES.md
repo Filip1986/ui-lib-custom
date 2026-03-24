@@ -293,6 +293,35 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-datepicker-day-bg-selected-bootstrap` | `var(--uilib-color-primary-700, #0d6efd)` | Bootstrap selected-day background. |
 | `--uilib-datepicker-day-bg-selected-minimal` | `var(--uilib-color-help-600, #7e22ce)` | Minimal selected-day background. |
 
+## Editor
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-editor-toolbar-bg` | `var(--uilib-surface-alt, #f8fafc)` | Toolbar background. |
+| `--uilib-editor-toolbar-border-color` | `var(--uilib-border, #d1d5db)` | Toolbar and host border color. |
+| `--uilib-editor-toolbar-item-color` | `var(--uilib-page-fg, #111827)` | Toolbar item color. |
+| `--uilib-editor-toolbar-item-hover-color` | `var(--uilib-page-fg, #0f172a)` | Toolbar item hover color. |
+| `--uilib-editor-toolbar-item-hover-bg` | `color-mix(in srgb, #000000 8%, transparent)` | Toolbar item hover background. |
+| `--uilib-editor-toolbar-item-active-color` | `var(--uilib-page-fg, #0f172a)` | Toolbar active item color. |
+| `--uilib-editor-toolbar-item-active-bg` | `color-mix(in srgb, #000000 12%, transparent)` | Toolbar active item background. |
+| `--uilib-editor-toolbar-separator-color` | `#cbd5e1` | Toolbar separator color. |
+| `--uilib-editor-toolbar-padding` | `8px` | Toolbar padding. |
+| `--uilib-editor-toolbar-gap` | `4px` | Toolbar item gap. |
+| `--uilib-editor-toolbar-border-radius` | `8px` | Toolbar corner radius. |
+| `--uilib-editor-content-bg` | `var(--uilib-surface, #ffffff)` | Content background. |
+| `--uilib-editor-content-border-color` | `var(--uilib-border, #d1d5db)` | Content border color. |
+| `--uilib-editor-content-font-family` | `var(--uilib-font-ui, system-ui, sans-serif)` | Content font family. |
+| `--uilib-editor-content-font-size` | `14px` | Content font size. |
+| `--uilib-editor-content-line-height` | `1.6` | Content line height. |
+| `--uilib-editor-content-color` | `var(--uilib-page-fg, #111827)` | Content text color. |
+| `--uilib-editor-content-padding` | `12px 16px` | Content padding. |
+| `--uilib-editor-content-min-height` | `150px` | Content min height. |
+| `--uilib-editor-placeholder-color` | `#94a3b8` | Placeholder color for empty contenteditable state. |
+| `--uilib-editor-border-radius` | `8px` | Host border radius. |
+| `--uilib-editor-focus-ring-color` | `color-mix(in srgb, #2563eb 45%, transparent)` | Focus ring color. |
+| `--uilib-editor-focus-ring-width` | `2px` | Focus ring width. |
+| `--uilib-editor-disabled-opacity` | `0.6` | Disabled state opacity. |
+
 ## Checkbox
 
 | Variable | Default | Description |

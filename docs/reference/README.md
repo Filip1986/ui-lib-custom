@@ -33,6 +33,8 @@ Individual component documentation with complete API references, examples, and i
   - Form integration, options, and accessibility
 - **[Alert Component](components/ALERT.md)** - Alert/status banner reference
   - Dismissible alerts and theming
+- **[Editor Component](components/EDITOR.md)** - Native rich-text editor reference
+  - Toolbar APIs, forms integration, and custom toolbar projection
 - **[Layout Primitives](components/LAYOUT.md)** - Stack/Inline/Grid/Container reference
   - Layout APIs and usage examples
 
@@ -118,6 +120,7 @@ Start here for project overview and status:
 | Icon Button | [ICON_BUTTON.md](components/ICON_BUTTON.md) | - | ⚠️ API only |
 | Select | [SELECT.md](components/SELECT.md) | - | ✅ Complete |
 | Alert | [ALERT.md](components/ALERT.md) | - | ✅ Complete |
+| Editor | [EDITOR.md](components/EDITOR.md) | - | ✅ Complete |
 | Layout | [LAYOUT.md](components/LAYOUT.md) | - | ✅ Complete |
 
 ### Systems
