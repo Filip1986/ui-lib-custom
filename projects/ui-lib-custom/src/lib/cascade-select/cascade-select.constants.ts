@@ -22,6 +22,9 @@ export const CASCADE_SELECT_CLASSNAMES: {
   readonly Fluid: 'ui-lib-cascade-select--fluid';
   readonly Filled: 'ui-lib-cascade-select--filled';
   readonly Open: 'ui-lib-cascade-select--open';
+  readonly HasValue: 'ui-lib-cascade-select--has-value';
+  readonly InputWrapperFocus: 'uilib-inputwrapper-focus';
+  readonly InputWrapperFilled: 'uilib-inputwrapper-filled';
 } = {
   Root: 'ui-lib-cascade-select',
   Disabled: 'ui-lib-cascade-select--disabled',
@@ -30,4 +33,7 @@ export const CASCADE_SELECT_CLASSNAMES: {
   Fluid: 'ui-lib-cascade-select--fluid',
   Filled: 'ui-lib-cascade-select--filled',
   Open: 'ui-lib-cascade-select--open',
+  HasValue: 'ui-lib-cascade-select--has-value',
+  InputWrapperFocus: 'uilib-inputwrapper-focus',
+  InputWrapperFilled: 'uilib-inputwrapper-filled',
 } as const;

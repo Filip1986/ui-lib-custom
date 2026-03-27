@@ -188,6 +188,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/editor',
         },
+        {
+          label: 'FloatLabel',
+          icon: 'pi pi-circle',
+          route: '/float-label',
+        },
       ],
     },
   ]);

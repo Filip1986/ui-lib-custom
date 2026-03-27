@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive theming guide (`docs/guides/THEMING_GUIDE.md`).
 - New `Editor` component (`ui-lib-editor`) with native rich-text editing, toolbar command API, projected custom toolbar support (`[editorToolbar]`), forms integration, sanitization, and full demo/docs/test coverage.
 - New secondary entry point: `ui-lib-custom/editor`.
+- New `FloatLabel` component (`uilib-float-label`) with CSS-driven variants (`over`/`in`/`on`), native/wrapper state support, demo coverage, and API docs.
+- New secondary entry point: `ui-lib-custom/float-label`.
 
 ### Changed
 - All components now support dark mode.

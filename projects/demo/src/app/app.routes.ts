@@ -177,6 +177,14 @@ export const routes: Routes = [
       ),
     title: 'Editor - UI Components Library',
   },
+  {
+    path: 'float-label',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/float-label/float-label-demo').then(
+        (m: { FloatLabelDemoComponent: Type<unknown> }): Type<unknown> => m.FloatLabelDemoComponent
+      ),
+    title: 'FloatLabel - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

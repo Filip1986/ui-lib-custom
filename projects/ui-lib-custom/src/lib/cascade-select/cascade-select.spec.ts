@@ -358,6 +358,19 @@ describe('UiLibCascadeSelect unit', (): void => {
     expect(clearButton).toBeTruthy();
   });
 
+  it('applies generic wrapper focus and filled classes for FloatLabel integration', (): void => {
+    component.writeValue('SYD');
+    fixture.detectChanges();
+
+    expect(cmpEl().classList.contains('ui-lib-cascade-select--has-value')).toBeTruthy();
+    expect(cmpEl().classList.contains('uilib-inputwrapper-filled')).toBeTruthy();
+
+    component.openPanel(new MouseEvent('click'));
+    fixture.detectChanges();
+
+    expect(cmpEl().classList.contains('uilib-inputwrapper-focus')).toBeTruthy();
+  });
+
   it('selects leaf option, emits onChange, and closes panel', (): void => {
     const changeSpy: jest.SpiedFunction<typeof component.onChange.emit> = jest.spyOn(
       component.onChange,

@@ -58,6 +58,10 @@ describe('UiLibInput basics', (): void => {
     return fixture.nativeElement as HTMLElement;
   }
 
+  function componentHostEl(): HTMLElement {
+    return rootEl();
+  }
+
   function hostEl(): HTMLElement {
     return rootEl().querySelector('.ui-input') as HTMLElement;
   }
@@ -204,6 +208,18 @@ describe('UiLibInput basics', (): void => {
     fixture.detectChanges();
 
     expect(hostEl().classList.contains('ui-input-floating-active')).toBeTruthy();
+  });
+
+  it('applies uilib-filled host class when input has a value', (): void => {
+    expect(componentHostEl().classList.contains('uilib-filled')).toBeFalsy();
+
+    fixture.componentInstance.writeValue('Ada');
+    fixture.detectChanges();
+    expect(componentHostEl().classList.contains('uilib-filled')).toBeTruthy();
+
+    fixture.componentInstance.writeValue('');
+    fixture.detectChanges();
+    expect(componentHostEl().classList.contains('uilib-filled')).toBeFalsy();
   });
 
   it('focusInput focuses input when click is not on a button', (): void => {

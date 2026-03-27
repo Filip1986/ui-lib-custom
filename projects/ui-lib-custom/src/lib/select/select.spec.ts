@@ -251,6 +251,25 @@ describe('UiLibSelect basics', (): void => {
     expect(fixture.componentInstance).toBeTruthy();
     expect(hostWrapper().classList.contains('ui-lib-select')).toBeTruthy();
     expect(hostWrapper().classList.contains('ui-lib-select--material')).toBeTruthy();
+    expect(hostEl().classList.contains('uilib-inputwrapper-filled')).toBeFalsy();
+    expect(hostEl().classList.contains('uilib-inputwrapper-focus')).toBeFalsy();
+  });
+
+  it('applies open and filled wrapper classes on the host', (): void => {
+    fixture.componentRef.setInput('options', [{ label: 'Alpha', value: 'alpha' }]);
+    fixture.detectChanges();
+
+    fixture.componentInstance.writeValue('alpha');
+    fixture.detectChanges();
+
+    expect(hostEl().classList.contains('ui-lib-select--has-value')).toBeTruthy();
+    expect(hostEl().classList.contains('uilib-inputwrapper-filled')).toBeTruthy();
+
+    fixture.componentInstance.openPanel();
+    fixture.detectChanges();
+
+    expect(hostEl().classList.contains('ui-lib-select--open')).toBeTruthy();
+    expect(hostEl().classList.contains('uilib-inputwrapper-focus')).toBeTruthy();
   });
 
   it('applies each variant class', (): void => {

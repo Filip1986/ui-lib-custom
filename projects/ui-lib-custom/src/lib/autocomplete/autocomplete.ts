@@ -103,6 +103,8 @@ const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
     '[class.ui-lib-autocomplete--fluid]': 'fluid()',
     '[class.ui-lib-autocomplete--open]': 'panelVisible()',
     '[class.ui-lib-autocomplete--has-value]': 'hasValue()',
+    '[class.uilib-inputwrapper-focus]': 'panelVisible()',
+    '[class.uilib-inputwrapper-filled]': 'hasValue()',
   },
 })
 export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked, OnDestroy {

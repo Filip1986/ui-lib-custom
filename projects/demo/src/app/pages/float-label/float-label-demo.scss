@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.examples {
+  display: grid;
+  gap: 1rem;
+}
+
+.example-section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.section-text {
+  margin: 0;
+  color: var(--uilib-text-secondary-color, #6b7280);
+}
+
+.stack-md {
+  display: grid;
+  gap: 1rem;
+}
+
+.row-3 {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.variant-column {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.variant-title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--uilib-text-secondary-color, #6b7280);
+}
+
+.value-text {
+  font-size: 0.875rem;
+  color: var(--uilib-text-secondary-color, #6b7280);
+}
+
+.value-pre {
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--uilib-border-color, #d1d5db);
+  background: var(--uilib-surface-ground, #f9fafb);
+  font-size: 0.8125rem;
+  white-space: pre-wrap;
+}
+
+.demo-button {
+  justify-self: start;
+  border: 1px solid var(--uilib-border-color, #cbd5e1);
+  background: var(--uilib-surface-ground, #ffffff);
+  color: var(--uilib-text-color, #111827);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+
+textarea,
+input {
+  width: 100%;
+}

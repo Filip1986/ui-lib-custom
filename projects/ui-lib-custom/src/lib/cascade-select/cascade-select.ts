@@ -293,7 +293,15 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     if (this.loading()) classes.push(CASCADE_SELECT_CLASSNAMES.Loading);
     if (this.fluid()) classes.push(CASCADE_SELECT_CLASSNAMES.Fluid);
     if (this.filled()) classes.push(CASCADE_SELECT_CLASSNAMES.Filled);
-    if (this.panelVisible()) classes.push(CASCADE_SELECT_CLASSNAMES.Open);
+    if (this.panelVisible()) {
+      classes.push(CASCADE_SELECT_CLASSNAMES.Open, CASCADE_SELECT_CLASSNAMES.InputWrapperFocus);
+    }
+    if (this.hasValue()) {
+      classes.push(
+        CASCADE_SELECT_CLASSNAMES.HasValue,
+        CASCADE_SELECT_CLASSNAMES.InputWrapperFilled
+      );
+    }
 
     return classes.join(' ');
   });

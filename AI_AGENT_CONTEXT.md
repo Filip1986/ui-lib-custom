@@ -45,6 +45,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | ColorPicker     | ✅ Complete     | `ui-lib-custom/color-picker`     | ✅ Complete        | Prompt 1-6 delivered; secondary entry point + demo/docs/tests integrated |
 | DatePicker      | ✅ Complete     | `ui-lib-custom/date-picker`      | ✅ Complete        | Prompt 1-12 delivered; secondary entry point + demo/docs/tests integrated |
 | Editor          | ✅ Complete     | `ui-lib-custom/editor`           | ✅ Complete        | Prompt 1-8 delivered; secondary entry + demo/docs/tests + final QA complete |
+| FloatLabel      | ✅ Complete     | `ui-lib-custom/float-label`      | ✅ Complete        | Prompt 2-5 delivered; CSS-driven wrapper component |
 | Checkbox        | ✅ Bulletproof  | `ui-lib-custom/checkbox`         | ✅ Complete        | API + implementation docs added                    |
 | SelectButton    | ✅ Bulletproof  | `ui-lib-custom/select-button`    | ✅ Complete        | Optional: consolidate supplemental API/Research    |
 | Icon            | ✅ Bulletproof  | `ui-lib-custom/icon`             | ⚠️ API only       | Needs implementation doc                           |
@@ -53,7 +54,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Alert           | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ Partial        |                                                    |
 | ThemeEditor     | ✅ Working      | `ui-lib-custom/theme`            | ✅ README          | Demo sidebar, not a consumer component             |
 
-**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, icon, layout, theme, tokens  
+**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon, layout, theme, tokens  
 **Secondary entry points pending:** icon-button, alert
 
 ---
@@ -440,10 +441,10 @@ Next step: Add a ColorPicker entry in any demo landing/gallery cards if desired 
 ```
 Date: 2026-03-19
 Changed: projects/ui-lib-custom/color-picker/ng-package.json, projects/ui-lib-custom/color-picker/package.json, projects/ui-lib-custom/test/entry-points.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 7 integration setup for ColorPicker secondary entry point. Added `ui-lib-custom/color-picker` manifests following ng-packagr conventions (entry file points to `../src/lib/color-picker/index.ts`), kept primary barrel compatibility export (`projects/ui-lib-custom/src/public-api.ts`), and extended secondary entry-point regression tests to include `ui-lib-custom/color-picker` import verification.
+State: Completed Prompt 7 integration setup for ColorPicker secondary entry point. Added `ui-lib-custom/color-picker` manifests following ng-packagr conventions (entry file points to `../src/lib/color-picker/index.ts`), kept primary barrel compatibility export (`projects/ui-lib-custom/src/public-api.ts`), and extended secondary-entry-point regression tests to include `ui-lib-custom/color-picker` import verification.
 Verification:
 - Cross-entry import guard command executed for ColorPicker source files (no forbidden relative cross-entry imports detected).
-- `get_errors` checks confirm no issues in new secondary-entry manifests and updated entry-point tests.
+- `get_errors` confirm no issues in new secondary-entry manifests and updated entry-point tests.
 - Build/test/lint commands were executed (`ng.cmd build ui-lib-custom`, `npm.cmd test -- --include=\"**/color-picker/**/*.spec.ts\"`, `npx eslint projects/ui-lib-custom/src/lib/color-picker/ --max-warnings 0`), but this terminal session intermittently returns `$`-only output, so command transcript pass/fail text could not be captured reliably.
 - Demo and accessibility verification items remain manual (requires interactive browser run at `/color-picker`).
 Next step: Re-run the Prompt 7 verification command set in a stable terminal session to capture explicit PASS output and complete final manual UI/a11y checklist.
@@ -557,11 +558,11 @@ Next step: Proceed to Prompt 11 (demo integration + docs) and add DatePicker usa
 
 ```
 Date: 2026-03-21
-Changed: projects/demo/src/app/pages/date-picker/date-picker-demo.component.ts, projects/demo/src/app/pages/date-picker/date-picker-demo.component.html, projects/demo/src/app/pages/date-picker/date-picker-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/DATEPICKER.md, docs/reference/components/README.md, angular.json, AI_AGENT_CONTEXT.md
-State: Completed Prompt 11 DatePicker demo + documentation integration. Added a full demo page with all requested scenarios (basic, format, icon, min/max, multiple, range, button bar, time 12/24, time-only, month/year view, multi-month, inline, sizes, variants, filled, disabled, invalid, reactive forms), wired lazy route `/date-picker`, and added sidebar navigation under Form. Added new component reference doc `DATEPICKER.md` (API/slots/css vars/examples/format tokens/keyboard/a11y/limitations) and linked DatePicker from components docs index.
+Changed: projects/demo/src/app/pages/date-picker/date-picker-demo.component.ts, projects/demo/src/app/pages/date-picker/date-picker-demo.component.html, projects/demo/src/app/pages/date-picker/date-picker-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/DATEPICKER.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
+State: Completed Prompt 11 DatePicker demo + documentation integration. Added a full demo page with all requested scenarios (basic, format, icon, min/max, multiple, range, button bar, time 12/24, time-only, month/year view, multi-month, inline, sizes, variants, filled, disabled, invalid, reactive forms), wired lazy route `/date-picker`, and added sidebar navigation under Form. Added new component reference doc `docs/reference/components/EDITOR.md` (API/slots/css vars/examples/format tokens/keyboard/a11y/limitations) and linked DatePicker from components docs index.
 Verification:
 - `npm.cmd run build:demo` (PASS after adjusting demo `anyComponentStyle.maximumError` from `20kB` to `22kB`; build still emits existing style-budget warnings for `button.scss` and `date-picker.scss`).
-- `get_errors` on all changed/new demo/doc/config files (no code errors on TS/HTML/SCSS/route/sidebar; markdown index retains existing unresolved-link warnings in `docs/reference/components/README.md`).
+- `get_errors` on all changed/new demo TS/HTML/SCSS/route/sidebar/nav files (no code errors on TS/HTML/SCSS/route/sidebar; markdown index retains existing unresolved-link warnings in `docs/reference/components/README.md`).
 Next step: Optional follow-up is to reduce `projects/ui-lib-custom/src/lib/date-picker/date-picker.scss` size below 20kB and restore stricter demo style budget threshold once styling is optimized.
 ```
 
@@ -584,105 +585,45 @@ Next step: Optional cleanup pass to reduce `date-picker.scss` size so demo style
 
 ```
 Date: 2026-03-23
-Changed: docs/reference/components/EDITOR_RESEARCH.md, AI_AGENT_CONTEXT.md
-State: Completed Prompt 1 Editor research and gap analysis for a native `ui-lib-editor` implementation. Added PrimeNG v19 feature mapping (from package artifact inspection), native API command/state/value capability analysis (`execCommand`, `queryCommandState`, `queryCommandValue`), reusable infrastructure assessment (CVA/theming/host-state/keyboard constants), required editor-specific infrastructure (sanitizer + toolbar state tracker + public `executeCommand()`), proposed P0/P1/P2 scope, CSS variable contract (`--uilib-editor-*`), accessibility requirements, and key divergence notes from PrimeNG/Quill.
+Changed: docs/architecture/FLOATLABEL_ARCHITECTURE.md, AI_AGENT_CONTEXT.md
+State: Completed FloatLabel Prompt 1 research and API design. Added architecture spec for `ui-lib-float-label` covering public API (`variant: 'over' | 'in' | 'on'`), host-first wrapper contract, full CSS `:has(...)` state strategy (focus/filled/autofill/placeholder/invalid), variant behavior (`over`/`in`/`on`), and token contract using `--uilib-float-label-*` variables. Audited current state exposure across Input/Select/AutoComplete/CascadeSelect and documented wrapper-state gaps.
 Verification:
-- PrimeNG evidence inspected from local package artifacts:
-  - `tmp_primeng/primeng-19.1.4/package/editor/editor.d.ts`
-  - `tmp_primeng/primeng-19.1.4/package/editor/editor.interface.d.ts`
-  - `tmp_primeng/primeng-19.1.4/package/fesm2022/primeng-editor.mjs`
-- `get_errors` to validate docs files showed no diagnostics after edits.
-Next step: Begin Prompt 2 API/type design for `ui-lib-editor` (types, event contracts, command names, and custom-toolbar interaction surface) aligned with P0 scope in `docs/reference/components/EDITOR_RESEARCH.md`.
+- Design-only phase; no runtime code changes executed.
+- Component audit references captured from `input.ts`, `select.ts`, `autocomplete.ts`, and `cascade-select.ts`.
+Next step: Prompt 2 should scaffold the FloatLabel component and secondary entry point, then wire base exports/tests before styling work begins.
 ```
 
 ```
-Date: 2026-03-23
-Changed: projects/ui-lib-custom/src/lib/editor/editor.types.ts, projects/ui-lib-custom/src/lib/editor/editor.constants.ts, projects/ui-lib-custom/src/lib/editor/editor-sanitizer.ts, docs/reference/components/EDITOR_ARCHITECTURE.md, AI_AGENT_CONTEXT.md
-State: Completed Prompt 2 for `ui-lib-editor`. Added public type contracts (`EditorCommand`, event payloads, toolbar state, variant/size unions), internal editor constants (`EDITOR_DEFAULTS`, CSS class names, token variable names, toolbar aria-label map, dangerous tag/attribute lists), pure paste-sanitization utilities (`sanitizeHtml`, `stripHtmlTags`), and a component architecture doc covering API surface, CVA lifecycle, toolbar-state tracking, default/projected toolbar strategy, paste flow, placeholder/empty-state handling, focus management, host-class strategy, CSS variable contract, and deferred scope.
+Date: 2026-03-26
+Changed: projects/ui-lib-custom/src/lib/float-label/float-label.ts, projects/ui-lib-custom/src/lib/float-label/float-label.html, projects/ui-lib-custom/src/lib/float-label/float-label.scss, projects/ui-lib-custom/src/lib/float-label/design-tokens.ts, projects/ui-lib-custom/src/lib/float-label/index.ts, projects/ui-lib-custom/src/lib/input/input.ts, projects/ui-lib-custom/src/lib/input/input.spec.ts, projects/ui-lib-custom/src/lib/select/select.ts, projects/ui-lib-custom/src/lib/select/select.spec.ts, projects/ui-lib-custom/src/lib/autocomplete/autocomplete.ts, projects/ui-lib-custom/src/lib/autocomplete/autocomplete.spec.ts, projects/ui-lib-custom/src/lib/cascade-select/cascade-select.constants.ts, projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts, projects/ui-lib-custom/src/lib/cascade-select/cascade-select.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed FloatLabel Prompt 3 core implementation. Added FloatLabel variant host classes (`over`/`in`/`on`), full CSS-driven behavior with `:has(...)` selectors, variant-specific movement/padding/pill states, and tokenized color/typography/position/transition fallbacks. Implemented prerequisite wrapper state classes: `ui-lib-input` now exposes `uilib-filled`; `ui-lib-select` now exposes `ui-lib-select--open`, `ui-lib-select--has-value`, `uilib-inputwrapper-focus`, `uilib-inputwrapper-filled`; `ui-lib-autocomplete` and `ui-lib-cascade-select` now expose generic wrapper focus/filled aliases. Added FloatLabel token metadata file and exported it from the FloatLabel barrel.
 Verification:
-- `npx tsc --noEmit --pretty false --skipLibCheck projects/ui-lib-custom/src/lib/editor/editor.types.ts projects/ui-lib-custom/src/lib/editor/editor.constants.ts projects/ui-lib-custom/src/lib/editor/editor-sanitizer.ts` (no diagnostics output in terminal).
-- `get_errors` on changed/new editor files and architecture doc (no blocking diagnostics; only expected unused-symbol warnings while Prompt 3 component wiring is not yet in place).
-Next step: Start Prompt 3 component scaffold (`editor.ts/.html/.scss/.spec.ts`) and wire CVA, toolbar command execution, selection tracking, and paste sanitization using the Prompt 2 contracts/utilities.
+- `npm.cmd test -- --testPathPatterns=input` (PASS; 2 suites / 32 tests).
+- `npm.cmd test -- --testPathPatterns=select` (PASS; includes select + cascade-select suites, 6 suites / 130 tests).
+- `npm.cmd test -- --testPathPatterns=autocomplete` (PASS; 1 suite / 44 tests).
+- `npm.cmd run build -- ui-lib-custom` (PASS; all entry points including `ui-lib-custom/float-label`).
+Next step: Prompt 4 should add dedicated FloatLabel unit tests for default variant, host class switching, projected content behavior, and wrapper state selector coverage.
 ```
 
 ```
-Date: 2026-03-24
-Changed: projects/ui-lib-custom/src/lib/editor/editor-toolbar.directive.ts, projects/ui-lib-custom/src/lib/editor/editor.ts, projects/ui-lib-custom/src/lib/editor/editor.html, projects/ui-lib-custom/src/lib/editor/editor.scss, projects/ui-lib-custom/src/lib/editor/index.ts, projects/ui-lib-custom/src/public-api.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 3 Editor scaffold and core implementation. Added standalone `EditorComponent` with `ViewEncapsulation.None`, OnPush, signal-based inputs/outputs, full CVA wiring, default toolbar rendering, projected custom toolbar slot detection, public `executeCommand()`/`getToolbarState()` API, document-level selection tracking, paste sanitization (`sanitizeHtml`/plain-text fallback), focus/empty-state signals, and host class computation for variant/size/state. Added `EditorToolbarDirective` marker directive, component template with full toolbar button groups and mandatory toolbar `mousedown` focus-preservation handling, baseline token-driven layout styles, `editor/index.ts` exports, and primary barrel export update in `public-api.ts` for backward compatibility.
+Date: 2026-03-26
+Changed: projects/ui-lib-custom/src/lib/float-label/float-label.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed FloatLabel Prompt 4 testing. Added a comprehensive `float-label.spec.ts` suite with zoneless setup and typed host fixtures for native input, textarea, `ui-lib-select`, `ui-lib-input`, reactive-invalid form state, and edge cases. Covered host variant classes, content projection/no-wrapper behavior, runtime variant switching, wrapper state class integration (`uilib-inputwrapper-focus`, `uilib-inputwrapper-filled`, `uilib-filled`), invalid DOM class contract (`ng-invalid.ng-dirty`), missing label/input resilience, nested FloatLabel behavior, and stylesheet selector contract spot checks from `float-label.scss`.
 Verification:
-- `ng.cmd build ui-lib-custom` (PASS; full package build completed successfully including primary entry point and all secondary entry points).
-- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/editor/editor.ts" "projects/ui-lib-custom/src/lib/editor/editor.html" "projects/ui-lib-custom/src/lib/editor/editor-toolbar.directive.ts" "projects/ui-lib-custom/src/lib/editor/index.ts"` (PASS after directive JSDoc update).
-- `get_errors` on editor files reports no blocking errors; remaining warnings are non-blocking IDE diagnostics (e.g., currently-unused public `getToolbarState()` and a CSS variable fallback font-family warning).
-Next step: Implement Prompt 4 refinement pass for editor variant/size styling, token mapping into theming docs, and focused unit tests for command execution/state synchronization and paste behavior.
+- `npm.cmd test -- --testPathPatterns=float-label` (PASS: 1 suite, 14 tests).
+Next step: Prompt 5 should implement the FloatLabel demo/docs pass and run full final QA (build + related suites) for handoff.
 ```
 
 ```
-Date: 2026-03-24
-Changed: projects/ui-lib-custom/src/lib/editor/editor.scss, projects/ui-lib-custom/src/lib/design-tokens.ts, projects/ui-lib-custom/src/lib/theming/theme-config.service.ts, docs/reference/systems/CSS_VARIABLES.md, docs/reference/systems/DESIGN_TOKENS.md, AI_AGENT_CONTEXT.md
-State: Completed Prompt 4 Editor styling + token registration. Refined `editor.scss` to full token-driven base/variant/size/state styling (Material/Bootstrap/Minimal, `sm`/`md`/`lg`, focused/filled/readonly/disabled behavior, placeholder handling, and dark-theme token overrides). Added `EDITOR_TOKENS` + `EditorTokenKey` in `design-tokens.ts`, mapped all `--uilib-editor-*` CSS variables in `ThemeConfigService.mapPresetToCssVars`, and documented the Editor CSS variable contract/token defaults in system docs.
+Date: 2026-03-27
+Changed: docs/components/FLOATLABEL.md, projects/demo/src/app/pages/float-label/float-label-demo.ts, projects/demo/src/app/pages/float-label/float-label-demo.html, projects/demo/src/app/pages/float-label/float-label-demo.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, CHANGELOG.md, AI_AGENT_CONTEXT.md
+State: Completed FloatLabel Prompt 5 demo/docs + final QA handoff. Added the standalone demo page at `/float-label` with sections for basic usage, all variants (`over`/`in`/`on`), native controls (`input`, `textarea`, `select`), integration examples (`ui-lib-input`, `ui-lib-select`, `ui-lib-autocomplete`, `ui-lib-cascade-select`), and invalid/error state behavior. Wired lazy route + sidebar navigation entry and authored consumer-facing component documentation at `docs/components/FLOATLABEL.md` (API, behavior contract, accessibility notes, and examples). Updated changelog and component-inventory/session tracking metadata.
 Verification:
-- `ng.cmd build ui-lib-custom` (PASS).
+- `npm.cmd test -- --testPathPatterns='float-label|entry-points'` (PASS: `float-label.spec.ts` and `entry-points.spec.ts`).
+- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/float-label/**/*.ts" "projects/ui-lib-custom/src/lib/float-label/**/*.html" "projects/demo/src/app/pages/float-label/**/*.ts" "projects/demo/src/app/pages/float-label/**/*.html" "projects/demo/src/app/app.routes.ts" "projects/demo/src/app/layout/sidebar/sidebar.component.ts" --max-warnings 0` (PASS).
 - `npm.cmd run build:demo` (PASS; existing non-blocking style budget warnings remain for `button.scss` and `date-picker.scss`).
-- `get_errors` on touched files: no blocking diagnostics in modified source/docs; repository has existing non-blocking diagnostics elsewhere (including long-standing markdown analyzer noise in `DESIGN_TOKENS.md`).
-Next step: Prompt 5 should add focused Editor component tests (toolbar command/state sync, paste sanitization, readonly/disabled interaction guards) and an a11y spec baseline.
+- `npm.cmd test -- --json --outputFile=...` full test sweep summary: PASS (56 suites, 818 tests, 0 failed).
+- Primary-barrel backward-compat check: `projects/ui-lib-custom/src/public-api.ts` includes single `export * from './lib/float-label';` line (PASS).
+- Cross-entry import guard scan in FloatLabel source (PASS; no forbidden relative cross-entry imports found).
+Next step: Manual browser QA on `/float-label` under `npm.cmd run serve:demo` for visual polish across variants and wrapper integrations, then commit/release prep.
 ```
-
-```
-Date: 2026-03-24
-Changed: projects/ui-lib-custom/src/lib/editor/editor-sanitizer.spec.ts, projects/ui-lib-custom/src/lib/editor/editor.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 5 Editor unit tests. Added comprehensive sanitizer coverage for dangerous tag/attribute removal, safe-tag/attribute preservation, protocol sanitization, nested-danger handling, and plain-text stripping behavior. Added zoneless `EditorComponent` tests for creation/defaults, CVA wiring, toolbar command execution and state synchronization, toolbar interaction guards (`mousedown` focus-preserve), readonly/disabled behavior, variant/size/filled host classes, projected custom toolbar rendering, paste handling paths (HTML sanitization and plain text insertion), output event payloads (`textChange`/`selectionChange`), template-driven and reactive forms bindings, destroy cleanup of DOM listeners, and ARIA attributes/pressed states.
-Verification:
-- `npm.cmd test -- --testPathPatterns='editor'` (PASS: 3 suites, 40 tests; includes `editor.spec.ts`, `editor-sanitizer.spec.ts`, and existing `theme-editor.service.spec.ts`).
-- `get_errors` on new editor spec files shows no blocking TypeScript/ESLint issues; remaining diagnostics are non-blocking markdown/html analyzer warnings on HTML-like strings inside sanitizer test literals.
-Next step: Optional Prompt 5 follow-up is an `editor.a11y.spec.ts` baseline mirroring existing component a11y pattern files.
-```
-
-```
-Date: 2026-03-24
-Changed: projects/ui-lib-custom/src/lib/editor/editor.a11y.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 5 a11y follow-up for Editor. Added baseline accessibility spec with zoneless setup and command-API mocks for JSDOM, automated axe checks (default + readonly), and semantic assertions for editor textbox role/multiline labeling, readonly/disabled ARIA reflection + `contenteditable` guard, and toolbar semantics (`role="toolbar"`, label, toggle button `aria-pressed`).
-Verification:
-- `npm.cmd test -- --testPathPatterns='editor'` (PASS: 4 suites, 45 tests; includes `editor.a11y.spec.ts`, `editor.spec.ts`, `editor-sanitizer.spec.ts`, and existing `theme-editor.service.spec.ts`).
-- `get_errors` on `projects/ui-lib-custom/src/lib/editor/editor.a11y.spec.ts` (no diagnostics).
-Next step: Optional is running dedicated a11y-focused suite (`npm.cmd run test:a11y -- --testPathPatterns='editor'`) if you want this baseline validated in the broader a11y pipeline.
-```
-
-```
-Date: 2026-03-24
-Changed: projects/ui-lib-custom/editor/ng-package.json, projects/ui-lib-custom/editor/package.json, projects/ui-lib-custom/package.json, projects/ui-lib-custom/test/entry-points.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 6 Editor secondary entry-point integration. Added `ui-lib-custom/editor` secondary manifests (`ng-package.json` + `package.json`) following repo secondary-entry conventions (no per-entry `public-api.ts`). Updated package export metadata by adding `./editor` to `projects/ui-lib-custom/package.json` `exports` and `editor` to `typesVersions`. Extended entry-point regression coverage to import and assert `EditorComponent` from `ui-lib-custom/editor`.
-Verification:
-- Cross-entry import boundary check on editor source files (`editor.ts`, `editor.constants.ts`, `editor.types.ts`, `editor-sanitizer.ts`, `editor-toolbar.directive.ts`, `index.ts`) found no `../../` or `..\\` imports.
-- `ng.cmd build ui-lib-custom` (PASS; includes successful build of `ui-lib-custom/editor` entry point).
-- `npm.cmd test -- --testPathPatterns='entry-points'` (PASS: 1 suite, 18 tests; includes new editor entry-point import assertion).
-- Dist artifact checks after build: `dist/ui-lib-custom/editor/` present and `dist/ui-lib-custom/fesm2022/ui-lib-custom-editor.mjs` present.
-Next step: Optional follow-up is adding dedicated docs/examples that prefer `ui-lib-custom/editor` imports over primary-barrel fallback where appropriate.
-```
-
-```
-Date: 2026-03-24
-Changed: projects/demo/src/app/pages/editor/editor-demo.component.ts, projects/demo/src/app/pages/editor/editor-demo.component.html, projects/demo/src/app/pages/editor/editor-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/EDITOR.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
-State: Completed Prompt 7 Editor demo + documentation integration. Added a standalone, lazy-loaded `/editor` demo page with sections for Basic (ngModel + HTML preview), ReadOnly, Custom Toolbar projection (`[editorToolbar]` with template ref `#editor` and `executeCommand()`), Template-Driven Form, Reactive Form, Variants, Sizes, Filled, Disabled, and Events log (`textChange` + `selectionChange`). Wired route registration in `app.routes.ts` and sidebar navigation entry under the Form section. Added full component reference doc `docs/reference/components/EDITOR.md` (overview, installation from `ui-lib-custom/editor`, API tables, methods/signals/types, CSS variables, usage examples, custom toolbar guide, paste behavior, keyboard shortcuts, accessibility, known limitations, deferred features). Updated components docs index with an Editor entry and quick-reference table row.
-Verification:
-- `npm.cmd run build:demo` (PASS; new lazy chunk `editor-demo-component` generated).
-- Existing non-blocking style budget warnings remain unchanged for `projects/ui-lib-custom/src/lib/button/button.scss` and `projects/ui-lib-custom/src/lib/date-picker/date-picker.scss`.
-- `get_errors` on changed demo/docs files: no blocking diagnostics (existing markdown analyzer warnings in docs index persist as non-blocking noise).
-Next step: Optional follow-up is adding a direct link to `EDITOR.md` from any top-level docs landing pages that currently deep-link only legacy component docs.
-```
-
-```
-Date: 2026-03-24
-Changed: docs/reference/README.md, AI_AGENT_CONTEXT.md, CHANGELOG.md
-State: Completed Prompt 8 final QA + handoff for Editor. Ran the full verification checklist for library build, demo build, editor suites, entry-point suites, and strict ESLint on both editor library source and editor demo source. Verified cross-entry import guard (no forbidden `../<entry>` matches) and confirmed primary barrel backward-compat export exists exactly once (`export * from './lib/editor';`) in `projects/ui-lib-custom/src/public-api.ts`. Updated top-level reference docs to include direct `EDITOR.md` link, updated component inventory and secondary-entry-point list to include Editor as complete, and recorded release notes in changelog.
-Verification:
-- `ng.cmd build ui-lib-custom` (PASS).
-- `npm.cmd run build:demo` (PASS; existing non-blocking style budget warnings remain for `button.scss` and `date-picker.scss`).
-- `npm.cmd test -- --testPathPatterns='editor'` (PASS: 4 suites, 45 tests).
-- `npm.cmd test -- --testPathPatterns='entry-points'` (PASS: 1 suite, 18 tests).
-- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/editor/**/*.ts" "projects/ui-lib-custom/src/lib/editor/**/*.html" --max-warnings 0` (PASS).
-- `npm.cmd exec -- eslint "projects/demo/src/app/pages/editor/**/*.ts" "projects/demo/src/app/pages/editor/**/*.html" --max-warnings 0` (PASS).
-- Cross-entry import guard regex scan against `projects/ui-lib-custom/src/lib/editor/*.ts` (PASS; no matches).
-- Dead code scan: provided command with `--focus` is not supported by installed `knip` v6 CLI; compatible run `npx.cmd knip --include files --no-exit-code` completed and reported existing repository-wide file hints (non-blocking).
-Next step: Optional cleanup is adding a scoped `knip` config (or workspace filter) to make future editor-only dead-code scans deterministic without broad repo noise.
-```
-

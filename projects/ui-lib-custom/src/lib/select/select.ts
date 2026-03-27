@@ -61,6 +61,10 @@ let selectIdCounter: number = 0;
   ],
   host: {
     role: 'combobox',
+    '[class.ui-lib-select--open]': 'open()',
+    '[class.ui-lib-select--has-value]': 'hasValue()',
+    '[class.uilib-inputwrapper-focus]': 'open()',
+    '[class.uilib-inputwrapper-filled]': 'hasValue()',
     '[attr.aria-expanded]': 'open() ? "true" : "false"',
     '[attr.aria-haspopup]': '"listbox"',
     '[attr.aria-controls]': 'listboxId() || null',
@@ -169,6 +173,10 @@ export class UiLibSelect implements ControlValueAccessor {
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
     (): boolean => this.disabled() || this.cvaDisabled()
   );
+  public readonly hasValue: Signal<boolean> = computed<boolean>((): boolean => {
+    const values: SelectValue[] | null = this.internalValue();
+    return values !== null && values.length > 0;
+  });
 
   public readonly displayValue: Signal<string> = computed<string>((): string => {
     const values: SelectValue[] | null = this.internalValue();

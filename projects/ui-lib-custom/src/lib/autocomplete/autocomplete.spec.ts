@@ -217,6 +217,18 @@ describe('UiLibAutoComplete', (): void => {
       expect(cmpEl().classList.contains('ui-lib-autocomplete--filled')).toBeTruthy();
       expect(cmpEl().classList.contains('ui-lib-autocomplete--fluid')).toBeTruthy();
     });
+
+    it('applies generic wrapper focus and filled classes for FloatLabel integration', (): void => {
+      component.writeValue('alpha');
+      fixture.detectChanges();
+
+      expect(cmpEl().classList.contains('uilib-inputwrapper-filled')).toBeTruthy();
+
+      component.showPanel();
+      fixture.detectChanges();
+
+      expect(cmpEl().classList.contains('uilib-inputwrapper-focus')).toBeTruthy();
+    });
   });
 
   describe('Single Selection Mode', (): void => {

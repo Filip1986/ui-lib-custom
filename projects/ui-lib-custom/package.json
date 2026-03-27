@@ -37,6 +37,10 @@
     "npm": ">=9.0.0"
   },
   "exports": {
+    "./float-label": {
+      "esm2022": "./esm2022/float-label/index.mjs",
+      "esm": "./esm2022/float-label/index.mjs"
+    },
     "./editor": {
       "esm2022": "./esm2022/editor/index.mjs",
       "esm": "./esm2022/editor/index.mjs"
@@ -57,6 +61,9 @@
   },
   "typesVersions": {
     "*": {
+      "float-label": [
+        "./float-label/index.d.ts"
+      ],
       "editor": [
         "./editor/index.d.ts"
       ],

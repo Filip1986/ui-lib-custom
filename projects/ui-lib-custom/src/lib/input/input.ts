@@ -34,6 +34,9 @@ let inputIdCounter: number = 0;
   styleUrl: './input.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  host: {
+    '[class.uilib-filled]': 'isFilled()',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -107,6 +110,9 @@ export class UiLibInput implements ControlValueAccessor {
     if (mode === 'over') return false;
     return this.focused() || Boolean(this.value());
   });
+  public readonly isFilled: Signal<boolean> = computed<boolean>(
+    (): boolean => this.value().length > 0
+  );
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
     (): boolean => this.disabled() || this._disabled()
   );
