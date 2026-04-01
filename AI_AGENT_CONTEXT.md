@@ -46,6 +46,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | DatePicker      | ✅ Complete     | `ui-lib-custom/date-picker`      | ✅ Complete        | Prompt 1-12 delivered; secondary entry point + demo/docs/tests integrated |
 | Editor          | ✅ Complete     | `ui-lib-custom/editor`           | ✅ Complete        | Prompt 1-8 delivered; secondary entry + demo/docs/tests + final QA complete |
 | FloatLabel      | ✅ Complete     | `ui-lib-custom/float-label`      | ✅ Complete        | Prompt 2-5 delivered; CSS-driven wrapper component |
+| IconField       | ✅ Complete     | `ui-lib-custom/icon-field`       | ✅ Complete        | Prompt 1-5 delivered; secondary entry + demo/docs/tests integrated |
 | Checkbox        | ✅ Bulletproof  | `ui-lib-custom/checkbox`         | ✅ Complete        | API + implementation docs added                    |
 | SelectButton    | ✅ Bulletproof  | `ui-lib-custom/select-button`    | ✅ Complete        | Optional: consolidate supplemental API/Research    |
 | Icon            | ✅ Bulletproof  | `ui-lib-custom/icon`             | ⚠️ API only       | Needs implementation doc                           |
@@ -54,7 +55,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Alert           | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ Partial        |                                                    |
 | ThemeEditor     | ✅ Working      | `ui-lib-custom/theme`            | ✅ README          | Demo sidebar, not a consumer component             |
 
-**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon, layout, theme, tokens  
+**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon-field, icon, layout, theme, tokens  
 **Secondary entry points pending:** icon-button, alert
 
 ---
@@ -441,7 +442,7 @@ Next step: Add a ColorPicker entry in any demo landing/gallery cards if desired 
 ```
 Date: 2026-03-19
 Changed: projects/ui-lib-custom/color-picker/ng-package.json, projects/ui-lib-custom/color-picker/package.json, projects/ui-lib-custom/test/entry-points.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 7 integration setup for ColorPicker secondary entry point. Added `ui-lib-custom/color-picker` manifests following ng-packagr conventions (entry file points to `../src/lib/color-picker/index.ts`), kept primary barrel compatibility export (`projects/ui-lib-custom/src/public-api.ts`), and extended secondary-entry-point regression tests to include `ui-lib-custom/color-picker` import verification.
+State: Completed Prompt 7 integration setup for ColorPicker secondary entry point. Added `ui-lib-custom/color-picker` manifests following ng-packagr conventions (entry file points to `../src/lib/date-picker/index.ts`), kept primary barrel compatibility export (`projects/ui-lib-custom/src/public-api.ts`), and extended secondary-entry-point regression tests to include `ui-lib-custom/color-picker` import verification.
 Verification:
 - Cross-entry import guard command executed for ColorPicker source files (no forbidden relative cross-entry imports detected).
 - `get_errors` confirm no issues in new secondary-entry manifests and updated entry-point tests.
@@ -584,46 +585,69 @@ Next step: Optional cleanup pass to reduce `date-picker.scss` size so demo style
 ```
 
 ```
-Date: 2026-03-23
-Changed: docs/architecture/FLOATLABEL_ARCHITECTURE.md, AI_AGENT_CONTEXT.md
-State: Completed FloatLabel Prompt 1 research and API design. Added architecture spec for `ui-lib-float-label` covering public API (`variant: 'over' | 'in' | 'on'`), host-first wrapper contract, full CSS `:has(...)` state strategy (focus/filled/autofill/placeholder/invalid), variant behavior (`over`/`in`/`on`), and token contract using `--uilib-float-label-*` variables. Audited current state exposure across Input/Select/AutoComplete/CascadeSelect and documented wrapper-state gaps.
+Date: 2026-04-01
+Changed: docs/reference/components/ICONFIELD_ARCHITECTURE.md, AI_AGENT_CONTEXT.md
+State: Completed IconField/InputIcon research and API design documentation pass. Read required context files in order, inspected PrimeNG v21 source artifacts for IconField/InputIcon API and host behavior, and produced `ICONFIELD_ARCHITECTURE.md` with feature mapping, reusable-code assessment, component-pair architecture, public API contract, CSS token contract, integration notes, and PrimeNG divergence table for `uilib-icon-field`/`uilib-input-icon`.
 Verification:
-- Design-only phase; no runtime code changes executed.
-- Component audit references captured from `input.ts`, `select.ts`, `autocomplete.ts`, and `cascade-select.ts`.
-Next step: Prompt 2 should scaffold the FloatLabel component and secondary entry point, then wire base exports/tests before styling work begins.
+- `npm.cmd pack primeng@21 --pack-destination tmp_primeng`
+- `tar -xzf tmp_primeng/primeng-*.tgz -C tmp_primeng`
+- Evidence reviewed from `tmp_primeng/package/types/primeng-iconfield.d.ts`, `tmp_primeng/package/types/primeng-inputicon.d.ts`, `tmp_primeng/package/fesm2022/primeng-iconfield.mjs`, `tmp_primeng/package/fesm2022/primeng-inputicon.mjs`
+Result: Documentation-only update; no runtime code changes.
+Next step: Implement Prompt 2 scaffold for `uilib-icon-field` + `uilib-input-icon` (standalone + OnPush + ViewEncapsulation.None), then wire entry-point exports and focused unit tests.
 ```
 
 ```
-Date: 2026-03-26
-Changed: projects/ui-lib-custom/src/lib/float-label/float-label.ts, projects/ui-lib-custom/src/lib/float-label/float-label.html, projects/ui-lib-custom/src/lib/float-label/float-label.scss, projects/ui-lib-custom/src/lib/float-label/design-tokens.ts, projects/ui-lib-custom/src/lib/float-label/index.ts, projects/ui-lib-custom/src/lib/input/input.ts, projects/ui-lib-custom/src/lib/input/input.spec.ts, projects/ui-lib-custom/src/lib/select/select.ts, projects/ui-lib-custom/src/lib/select/select.spec.ts, projects/ui-lib-custom/src/lib/autocomplete/autocomplete.ts, projects/ui-lib-custom/src/lib/autocomplete/autocomplete.spec.ts, projects/ui-lib-custom/src/lib/cascade-select/cascade-select.constants.ts, projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts, projects/ui-lib-custom/src/lib/cascade-select/cascade-select.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed FloatLabel Prompt 3 core implementation. Added FloatLabel variant host classes (`over`/`in`/`on`), full CSS-driven behavior with `:has(...)` selectors, variant-specific movement/padding/pill states, and tokenized color/typography/position/transition fallbacks. Implemented prerequisite wrapper state classes: `ui-lib-input` now exposes `uilib-filled`; `ui-lib-select` now exposes `ui-lib-select--open`, `ui-lib-select--has-value`, `uilib-inputwrapper-focus`, `uilib-inputwrapper-filled`; `ui-lib-autocomplete` and `ui-lib-cascade-select` now expose generic wrapper focus/filled aliases. Added FloatLabel token metadata file and exported it from the FloatLabel barrel.
+Date: 2026-04-01
+Changed: projects/ui-lib-custom/src/lib/icon-field/icon-field.types.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.constants.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.html, projects/ui-lib-custom/src/lib/icon-field/input-icon.ts, projects/ui-lib-custom/src/lib/icon-field/input-icon.html, projects/ui-lib-custom/src/lib/icon-field/index.ts, projects/ui-lib-custom/icon-field/ng-package.json, projects/ui-lib-custom/icon-field/package.json, projects/ui-lib-custom/package.json, AI_AGENT_CONTEXT.md
+State: Completed Prompt 2 scaffold for IconField/InputIcon. Added `IconPosition` type, `as const` defaults/classes constants, standalone wrapper components (`uilib-icon-field`, `uilib-input-icon`) with signal inputs and separate templates, barrel exports, and a new `ui-lib-custom/icon-field` secondary entry point. Left primary barrel untouched as requested.
 Verification:
-- `npm.cmd test -- --testPathPatterns=input` (PASS; 2 suites / 32 tests).
-- `npm.cmd test -- --testPathPatterns=select` (PASS; includes select + cascade-select suites, 6 suites / 130 tests).
-- `npm.cmd test -- --testPathPatterns=autocomplete` (PASS; 1 suite / 44 tests).
-- `npm.cmd run build -- ui-lib-custom` (PASS; all entry points including `ui-lib-custom/float-label`).
-Next step: Prompt 4 should add dedicated FloatLabel unit tests for default variant, host class switching, projected content behavior, and wrapper state selector coverage.
+- `ng.cmd build ui-lib-custom` (PASS, including `ui-lib-custom/icon-field` entry build)
+- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/icon-field/**/*.{ts,html}"` (PASS)
+Next step: Implement Prompt 3 styling pass for `ui-lib-icon-field` / `ui-lib-input-icon` (positioning + input padding contract + FloatLabel-safe behavior) and add focused unit tests.
 ```
 
 ```
-Date: 2026-03-26
-Changed: projects/ui-lib-custom/src/lib/float-label/float-label.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed FloatLabel Prompt 4 testing. Added a comprehensive `float-label.spec.ts` suite with zoneless setup and typed host fixtures for native input, textarea, `ui-lib-select`, `ui-lib-input`, reactive-invalid form state, and edge cases. Covered host variant classes, content projection/no-wrapper behavior, runtime variant switching, wrapper state class integration (`uilib-inputwrapper-focus`, `uilib-inputwrapper-filled`, `uilib-filled`), invalid DOM class contract (`ng-invalid.ng-dirty`), missing label/input resilience, nested FloatLabel behavior, and stylesheet selector contract spot checks from `float-label.scss`.
+Date: 2026-04-01
+Changed: projects/ui-lib-custom/src/lib/icon-field/icon-field.ts, projects/ui-lib-custom/src/lib/icon-field/input-icon.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.scss, projects/ui-lib-custom/src/lib/icon-field/input-icon.scss, projects/ui-lib-custom/src/lib/design-tokens.ts, projects/ui-lib-custom/src/lib/theming/theme-config.service.ts, docs/reference/systems/CSS_VARIABLES.md, AI_AGENT_CONTEXT.md
+State: Completed Prompt 3 IconField styling/token integration. Added SCSS styling for icon positioning, side-aware input padding, size-aware overrides (`sm`/`lg`), minimal/bootstrap variant hooks, and FloatLabel left-icon offset compatibility. Wired component `styleUrl` metadata for both `IconField` and `InputIcon`. Added `ICON_FIELD_TOKENS` to design tokens, mapped `--uilib-icon-field-*` CSS variables in `ThemeConfigService`, and documented the Icon Field variables in `CSS_VARIABLES.md`.
 Verification:
-- `npm.cmd test -- --testPathPatterns=float-label` (PASS: 1 suite, 14 tests).
-Next step: Prompt 5 should implement the FloatLabel demo/docs pass and run full final QA (build + related suites) for handoff.
+- `ng.cmd build ui-lib-custom` (PASS, including `ui-lib-custom/icon-field`)
+- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/icon-field/**/*.{ts,html,scss}" "projects/ui-lib-custom/src/lib/design-tokens.ts" "projects/ui-lib-custom/src/lib/theming/theme-config.service.ts"` (PASS)
+Next step: Add focused unit tests for `IconField`/`InputIcon` class and template behavior (left/right host classes, `styleClass` rendering mode, and content projection fallback).
 ```
 
 ```
-Date: 2026-03-27
-Changed: docs/components/FLOATLABEL.md, projects/demo/src/app/pages/float-label/float-label-demo.ts, projects/demo/src/app/pages/float-label/float-label-demo.html, projects/demo/src/app/pages/float-label/float-label-demo.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, CHANGELOG.md, AI_AGENT_CONTEXT.md
-State: Completed FloatLabel Prompt 5 demo/docs + final QA handoff. Added the standalone demo page at `/float-label` with sections for basic usage, all variants (`over`/`in`/`on`), native controls (`input`, `textarea`, `select`), integration examples (`ui-lib-input`, `ui-lib-select`, `ui-lib-autocomplete`, `ui-lib-cascade-select`), and invalid/error state behavior. Wired lazy route + sidebar navigation entry and authored consumer-facing component documentation at `docs/components/FLOATLABEL.md` (API, behavior contract, accessibility notes, and examples). Updated changelog and component-inventory/session tracking metadata.
+Date: 2026-04-01
+Changed: projects/ui-lib-custom/src/lib/icon-field/icon-field.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed Prompt 4 IconField/InputIcon unit test pass. Finalized comprehensive host-based Jest coverage for default/right/left class behavior, signal-driven position switching, projection ordering, `styleClass` vs projection exclusivity in `uilib-input-icon`, custom SVG and `ui-lib-icon` content projection, FloatLabel integration, and multiple-icon rendering. Also fixed a TestBed lifecycle issue by resetting TestBed before reconfiguring dedicated left/right host modules.
 Verification:
-- `npm.cmd test -- --testPathPatterns='float-label|entry-points'` (PASS: `float-label.spec.ts` and `entry-points.spec.ts`).
-- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/float-label/**/*.ts" "projects/ui-lib-custom/src/lib/float-label/**/*.html" "projects/demo/src/app/pages/float-label/**/*.ts" "projects/demo/src/app/pages/float-label/**/*.html" "projects/demo/src/app/app.routes.ts" "projects/demo/src/app/layout/sidebar/sidebar.component.ts" --max-warnings 0` (PASS).
-- `npm.cmd run build:demo` (PASS; existing non-blocking style budget warnings remain for `button.scss` and `date-picker.scss`).
-- `npm.cmd test -- --json --outputFile=...` full test sweep summary: PASS (56 suites, 818 tests, 0 failed).
-- Primary-barrel backward-compat check: `projects/ui-lib-custom/src/public-api.ts` includes single `export * from './lib/float-label';` line (PASS).
-- Cross-entry import guard scan in FloatLabel source (PASS; no forbidden relative cross-entry imports found).
-Next step: Manual browser QA on `/float-label` under `npm.cmd run serve:demo` for visual polish across variants and wrapper integrations, then commit/release prep.
+- `npm.cmd test -- --testPathPatterns="icon-field"` (PASS: 1 suite, 12 tests)
+Next step: Optional follow-up is a broader regression run (`entry-points|float-label|icon-field`) before commit to confirm no cross-feature test interactions.
 ```
+
+```
+Date: 2026-04-01
+Changed: projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts, AI_AGENT_CONTEXT.md
+State: Stabilized a flaky DatePicker navigation/selection spec that queried fixed March-2026 day keys without anchoring the visible month/year. Updated the test `supports single, multiple toggle, and range swap behavior` to set `currentYear=2026` and `currentMonth=2` before date-button queries, matching the existing fixed-key assertions.
+Verification:
+- Attempted: `npm.cmd test -- --testPathPatterns="date-picker.spec.ts"`
+- Attempted fallback: `npm.cmd exec -- jest --runInBand --testPathPatterns="date-picker.spec.ts" --verbose`
+- Note: this session's terminal output capture intermittently returned `$` only, so explicit pass/fail transcript was not available from command output.
+- `get_errors` on `projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts` shows no errors; only pre-existing unused-method warnings in `MockThemeConfigService`.
+Next step: Re-run the same targeted Jest command in a stable-output terminal session to capture explicit PASS log for CI traceability.
+```
+
+```
+Date: 2026-04-01
+Changed: projects/demo/src/app/pages/icon-field/icon-field-demo.component.ts, projects/demo/src/app/pages/icon-field/icon-field-demo.component.html, projects/demo/src/app/pages/icon-field/icon-field-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/ICONFIELD.md, docs/reference/components/README.md, projects/ui-lib-custom/test/entry-points.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed IconField Prompt 5 demo/docs/final-QA integration. Added a standalone IconField demo page with sections for basic placement, projected template icons (SVG + `ui-lib-icon`), FloatLabel variants (`over`/`in`/`on`), size inheritance (`sm`/`md`/`lg`), and input-variant styling (material/bootstrap/minimal). Wired lazy route `/icon-field` and sidebar Form navigation. Added `ICONFIELD.md` component reference and updated component docs index. Extended secondary-entry import regression coverage for `ui-lib-custom/icon-field`.
+Verification:
+- `ng.cmd build ui-lib-custom`
+- `npm.cmd run build:demo`
+- `npm.cmd test -- --testPathPatterns="icon-field"`
+- `npm.cmd test -- --testPathPatterns="entry-points"`
+- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/icon-field/**/*.{ts,html}"`
+- `npm.cmd exec -- eslint "projects/demo/src/app/pages/icon-field/**/*.{ts,html}"`
+- `Select-String -Path "projects/ui-lib-custom/src/lib/icon-field/*.ts" -Pattern "from '\.\.\/" | Where-Object { $_.Line -notmatch "from '\.\.\/(icon-field|input-icon)" }`
+Next step: Optional visual QA on `/icon-field` under `npm.cmd run serve:demo` to tune spacing/typography polish before commit.
+````

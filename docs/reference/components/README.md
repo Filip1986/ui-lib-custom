@@ -222,6 +222,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### IconField
+**Files:**
+- [ICONFIELD.md](ICONFIELD.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/icon-field)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/icon-field/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -287,6 +299,7 @@ Each component should have two documentation files:
 | CascadeSelect | Hierarchical dropdown tree select | 3 | - | 3 | ✅ Complete |
 | ColorPicker | Visual color selection (hex/rgb/hsb) | 3 | - | - | ✅ Complete |
 | Editor | Native rich-text editing with toolbar | 3 | - | 3 | ✅ Complete |
+| IconField | Input icon layout wrapper and icon container | - | - | Inherits input sizes | ✅ Complete |
 
 ---
 

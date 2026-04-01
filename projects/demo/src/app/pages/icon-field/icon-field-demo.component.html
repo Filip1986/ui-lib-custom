@@ -1,0 +1,218 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>IconField</h1>
+    <p class="doc-description">
+      Input icon composition with leading/trailing placement, custom projected icon templates, and
+      FloatLabel compatibility.
+    </p>
+  </div>
+
+  <app-doc-demo-viewport [autoHeight]="true">
+    <div class="examples">
+      <section id="basic" data-doc-anchor class="example-section">
+        <h3>a. Basic</h3>
+        <p class="section-text">Left search icon and right spinner icon with native inputs.</p>
+        <app-code-preview [code]="snippet('basic')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <uilib-icon-field iconPosition="left">
+                <uilib-input-icon styleClass="pi pi-search" />
+                <input
+                  type="text"
+                  placeholder="Search"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="basicSearchValue"
+                />
+              </uilib-icon-field>
+
+              <uilib-icon-field iconPosition="right">
+                <uilib-input-icon styleClass="pi pi-spinner pi-spin" />
+                <input
+                  type="text"
+                  placeholder="Loading"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="basicLoadingValue"
+                />
+              </uilib-icon-field>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="template" data-doc-anchor class="example-section">
+        <h3>b. Template</h3>
+        <p class="section-text">Custom SVG and custom `ui-lib-icon` projection via `uilib-input-icon`.</p>
+        <app-code-preview [code]="snippet('template')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <uilib-icon-field iconPosition="left">
+                <uilib-input-icon>
+                  <svg class="demo-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                  </svg>
+                </uilib-input-icon>
+                <input
+                  type="text"
+                  placeholder="SVG icon"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="templateSvgValue"
+                />
+              </uilib-icon-field>
+
+              <uilib-icon-field iconPosition="right">
+                <uilib-input-icon>
+                  <ui-lib-icon name="search" />
+                </uilib-input-icon>
+                <ui-lib-input
+                  placeholder="ui-lib-icon child"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="templateUiLibIconValue"
+                />
+              </uilib-icon-field>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="float-label" data-doc-anchor class="example-section">
+        <h3>c. Float Label</h3>
+        <p class="section-text">`uilib-icon-field` usage inside all FloatLabel variants.</p>
+        <app-code-preview [code]="snippet('floatLabel')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <uilib-float-label variant="over">
+                <uilib-icon-field iconPosition="left">
+                  <uilib-input-icon styleClass="pi pi-envelope" />
+                  <input
+                    type="text"
+                    placeholder=" "
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="floatOverValue"
+                  />
+                </uilib-icon-field>
+                <label>Email (over)</label>
+              </uilib-float-label>
+
+              <uilib-float-label variant="in">
+                <uilib-icon-field iconPosition="left">
+                  <uilib-input-icon styleClass="pi pi-user" />
+                  <input
+                    type="text"
+                    placeholder=" "
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="floatInValue"
+                  />
+                </uilib-icon-field>
+                <label>Username (in)</label>
+              </uilib-float-label>
+
+              <uilib-float-label variant="on">
+                <uilib-icon-field iconPosition="left">
+                  <uilib-input-icon styleClass="pi pi-lock" />
+                  <input
+                    type="password"
+                    placeholder=" "
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="floatOnValue"
+                  />
+                </uilib-icon-field>
+                <label>Password (on)</label>
+              </uilib-float-label>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="sizes" data-doc-anchor class="example-section">
+        <h3>d. Sizes</h3>
+        <p class="section-text">Small, medium, and large input sizes with icon scaling.</p>
+        <app-code-preview [code]="snippet('sizes')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <uilib-icon-field iconPosition="left">
+                <uilib-input-icon styleClass="pi pi-search" />
+                <ui-lib-input
+                  size="sm"
+                  placeholder="Small"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="sizeSmallValue"
+                />
+              </uilib-icon-field>
+
+              <uilib-icon-field iconPosition="left">
+                <uilib-input-icon styleClass="pi pi-search" />
+                <ui-lib-input
+                  size="md"
+                  placeholder="Medium"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="sizeMediumValue"
+                />
+              </uilib-icon-field>
+
+              <uilib-icon-field iconPosition="left">
+                <uilib-input-icon styleClass="pi pi-search" />
+                <ui-lib-input
+                  size="lg"
+                  placeholder="Large"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="sizeLargeValue"
+                />
+              </uilib-icon-field>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <section id="variants" data-doc-anchor class="example-section">
+        <h3>e. Variants</h3>
+        <p class="section-text">Material, Bootstrap, and Minimal input variants side by side.</p>
+        <app-code-preview [code]="snippet('variants')">
+          <ui-lib-card>
+            <div class="row-3">
+              <div class="variant-column">
+                <p class="variant-title">Material</p>
+                <uilib-icon-field iconPosition="left">
+                  <uilib-input-icon styleClass="pi pi-search" />
+                  <ui-lib-input
+                    variant="material"
+                    placeholder="Material"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="variantMaterialValue"
+                  />
+                </uilib-icon-field>
+              </div>
+
+              <div class="variant-column">
+                <p class="variant-title">Bootstrap</p>
+                <uilib-icon-field iconPosition="left">
+                  <uilib-input-icon styleClass="pi pi-search" />
+                  <ui-lib-input
+                    variant="bootstrap"
+                    placeholder="Bootstrap"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="variantBootstrapValue"
+                  />
+                </uilib-icon-field>
+              </div>
+
+              <div class="variant-column">
+                <p class="variant-title">Minimal</p>
+                <uilib-icon-field iconPosition="left">
+                  <uilib-input-icon styleClass="pi pi-search" />
+                  <ui-lib-input
+                    variant="minimal"
+                    placeholder="Minimal"
+                    [ngModelOptions]="{ standalone: true }"
+                    [(ngModel)]="variantMinimalValue"
+                  />
+                </uilib-icon-field>
+              </div>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+    </div>
+  </app-doc-demo-viewport>
+</app-doc-page-layout>
+

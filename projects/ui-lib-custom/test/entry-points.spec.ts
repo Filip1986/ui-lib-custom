@@ -9,6 +9,7 @@ import type * as UiLibCore from 'ui-lib-custom/core';
 import type * as UiLibDatePicker from 'ui-lib-custom/date-picker';
 import type * as UiLibEditor from 'ui-lib-custom/editor';
 import type * as UiLibFloatLabel from 'ui-lib-custom/float-label';
+import type * as UiLibIconField from 'ui-lib-custom/icon-field';
 import type * as UiLibIcon from 'ui-lib-custom/icon';
 import type * as UiLibInput from 'ui-lib-custom/input';
 import type * as UiLibLayout from 'ui-lib-custom/layout';
@@ -73,6 +74,12 @@ describe('Secondary Entry Points', (): void => {
   it('should import from float-label', async (): Promise<void> => {
     const mod: typeof UiLibFloatLabel = await import('ui-lib-custom/float-label');
     expect(mod.FloatLabelComponent).toBeDefined();
+  });
+
+  it('should import from icon-field', async (): Promise<void> => {
+    const mod: typeof UiLibIconField = await import('ui-lib-custom/icon-field');
+    expect(mod.IconFieldComponent).toBeDefined();
+    expect(mod.InputIconComponent).toBeDefined();
   });
 
   it('should import from icon', async (): Promise<void> => {

@@ -1281,3 +1281,33 @@ export const COLORPICKER_TOKENS: Readonly<ColorPickerTokens> = {
 };
 
 export type ColorPickerTokenKey = keyof typeof COLORPICKER_TOKENS;
+
+// ============================================================================
+// ICON FIELD TOKENS
+// ============================================================================
+
+export type IconFieldTokens = {
+  iconColor: string;
+  iconColorBootstrap: string;
+  iconColorMinimal: string;
+  iconMargin: string;
+  iconMarginMinimal: string;
+  iconSize: string;
+  inputPaddingWithIcon: string;
+  inputPaddingWithIconSm: string;
+  inputPaddingWithIconLg: string;
+};
+
+export const ICON_FIELD_TOKENS: Readonly<IconFieldTokens> = {
+  iconColor: COLOR_NEUTRAL[600],
+  iconColorBootstrap: COLOR_NEUTRAL[500],
+  iconColorMinimal: COLOR_NEUTRAL[600],
+  iconMargin: SPACING_TOKENS[3],
+  iconMarginMinimal: SPACING_TOKENS[2],
+  iconSize: FONT_SIZES.base,
+  inputPaddingWithIcon: SPACING_TOKENS[10],
+  inputPaddingWithIconSm: SPACING_TOKENS[8],
+  inputPaddingWithIconLg: SPACING_TOKENS[12],
+};
+
+export type IconFieldTokenKey = keyof typeof ICON_FIELD_TOKENS;

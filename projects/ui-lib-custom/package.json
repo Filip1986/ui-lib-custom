@@ -37,6 +37,10 @@
     "npm": ">=9.0.0"
   },
   "exports": {
+    "./icon-field": {
+      "esm2022": "./esm2022/icon-field/index.mjs",
+      "esm": "./esm2022/icon-field/index.mjs"
+    },
     "./float-label": {
       "esm2022": "./esm2022/float-label/index.mjs",
       "esm": "./esm2022/float-label/index.mjs"
@@ -61,6 +65,9 @@
   },
   "typesVersions": {
     "*": {
+      "icon-field": [
+        "./icon-field/index.d.ts"
+      ],
       "float-label": [
         "./float-label/index.d.ts"
       ],

@@ -583,6 +583,8 @@ describe('DatePickerComponent', (): void => {
     it('supports single, multiple toggle, and range swap behavior', (): void => {
       const fixture: ComponentFixture<DatePickerComponent> = createFixture();
       fixture.componentRef.setInput('inline', true);
+      fixture.componentInstance.currentYear.set(2026);
+      fixture.componentInstance.currentMonth.set(2);
       fixture.detectChanges();
 
       dateButton(fixture, 2026, 2, 10).click();

@@ -185,6 +185,14 @@ export const routes: Routes = [
       ),
     title: 'FloatLabel - UI Components Library',
   },
+  {
+    path: 'icon-field',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/icon-field/icon-field-demo.component').then(
+        (m: { IconFieldDemoComponent: Type<unknown> }): Type<unknown> => m.IconFieldDemoComponent
+      ),
+    title: 'IconField - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

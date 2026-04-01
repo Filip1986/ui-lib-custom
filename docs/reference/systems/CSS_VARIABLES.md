@@ -356,6 +356,20 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-icon-size-xl` | `2rem` | Extra-large icon size. |
 | `--uilib-icon-size-2xl` | `2.5rem` | 2XL icon size. |
 
+## Icon Field
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-icon-field-icon-color` | `var(--uilib-muted, currentColor)` | Default icon color. |
+| `--uilib-icon-field-icon-color-bootstrap` | `var(--uilib-icon-field-icon-color)` | Bootstrap-specific icon color override. |
+| `--uilib-icon-field-icon-color-minimal` | `var(--uilib-icon-field-icon-color)` | Minimal-specific icon color override. |
+| `--uilib-icon-field-icon-margin` | `0.75rem` | Icon horizontal inset from input edge. |
+| `--uilib-icon-field-icon-margin-minimal` | `var(--uilib-icon-field-icon-margin)` | Minimal variant icon inset. |
+| `--uilib-icon-field-icon-size` | `1rem` | Base icon size. |
+| `--uilib-icon-field-input-padding-with-icon` | `2.5rem` | Input side padding when an icon is present. |
+| `--uilib-icon-field-input-padding-with-icon-sm` | `2rem` | Small-size input side padding with icon. |
+| `--uilib-icon-field-input-padding-with-icon-lg` | `3rem` | Large-size input side padding with icon. |
+
 ## Input
 
 | Variable | Default | Description |

@@ -6,6 +6,7 @@ import {
   COLORPICKER_TOKENS,
   DATEPICKER_TOKENS,
   EDITOR_TOKENS,
+  ICON_FIELD_TOKENS,
   SHADOWS,
   SELECTBUTTON_TOKENS,
   SHAPE_TOKENS,
@@ -758,6 +759,16 @@ export class ThemeConfigService {
     set('--uilib-colorpicker-hue-slider-height', COLORPICKER_TOKENS.hueSliderHeight);
     set('--uilib-colorpicker-selector-size', COLORPICKER_TOKENS.selectorSize);
     set('--uilib-colorpicker-transition-duration', COLORPICKER_TOKENS.transitionDuration);
+
+    set('--uilib-icon-field-icon-color', textSecondary);
+    set('--uilib-icon-field-icon-color-bootstrap', textSecondary);
+    set('--uilib-icon-field-icon-color-minimal', textSecondary);
+    set('--uilib-icon-field-icon-margin', ICON_FIELD_TOKENS.iconMargin);
+    set('--uilib-icon-field-icon-margin-minimal', ICON_FIELD_TOKENS.iconMarginMinimal);
+    set('--uilib-icon-field-icon-size', ICON_FIELD_TOKENS.iconSize);
+    set('--uilib-icon-field-input-padding-with-icon', ICON_FIELD_TOKENS.inputPaddingWithIcon);
+    set('--uilib-icon-field-input-padding-with-icon-sm', ICON_FIELD_TOKENS.inputPaddingWithIconSm);
+    set('--uilib-icon-field-input-padding-with-icon-lg', ICON_FIELD_TOKENS.inputPaddingWithIconLg);
 
     set('--uilib-editor-toolbar-bg', colors.surfaceAlt);
     set('--uilib-editor-toolbar-border-color', borderColor);

@@ -1,0 +1,104 @@
+.ui-lib-icon-field {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  min-width: 0;
+
+  > input,
+  > ui-lib-input,
+  > .ui-lib-input,
+  > .ui-lib-input--sm,
+  > .ui-lib-input--lg {
+    width: 100%;
+  }
+
+  > ui-lib-input {
+    display: block;
+  }
+}
+
+.ui-lib-icon-field--left .ui-lib-input-icon {
+  position: absolute;
+  left: var(--uilib-icon-field-icon-margin, 0.75rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ui-lib-icon-field--right .ui-lib-input-icon {
+  position: absolute;
+  right: var(--uilib-icon-field-icon-margin, 0.75rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ui-lib-input-icon {
+  color: var(--uilib-icon-field-icon-color, var(--uilib-muted, currentColor));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ui-lib-icon-field--left > input,
+.ui-lib-icon-field--left > ui-lib-input input,
+.ui-lib-icon-field--left > ui-lib-input .ui-input-field,
+.ui-lib-icon-field--left > .ui-lib-input,
+.ui-lib-icon-field--left > .ui-lib-input--sm,
+.ui-lib-icon-field--left > .ui-lib-input--lg {
+  padding-left: var(--uilib-icon-field-input-padding-with-icon, 2.5rem);
+}
+
+.ui-lib-icon-field--right > input,
+.ui-lib-icon-field--right > ui-lib-input input,
+.ui-lib-icon-field--right > ui-lib-input .ui-input-field,
+.ui-lib-icon-field--right > .ui-lib-input,
+.ui-lib-icon-field--right > .ui-lib-input--sm,
+.ui-lib-icon-field--right > .ui-lib-input--lg {
+  padding-right: var(--uilib-icon-field-input-padding-with-icon, 2.5rem);
+}
+
+.ui-lib-icon-field:has(.ui-input-size-sm),
+.ui-lib-icon-field:has(.ui-lib-input--sm),
+.ui-lib-icon-field:has([data-size='sm']) {
+  --uilib-icon-field-icon-size: 0.875rem;
+  --uilib-icon-field-input-padding-with-icon: var(
+    --uilib-icon-field-input-padding-with-icon-sm,
+    2rem
+  );
+}
+
+.ui-lib-icon-field:has(.ui-input-size-lg),
+.ui-lib-icon-field:has(.ui-lib-input--lg),
+.ui-lib-icon-field:has([data-size='lg']) {
+  --uilib-icon-field-icon-size: 1.25rem;
+  --uilib-icon-field-input-padding-with-icon: var(
+    --uilib-icon-field-input-padding-with-icon-lg,
+    3rem
+  );
+}
+
+.ui-lib-icon-field.ui-lib-icon-field--bootstrap .ui-lib-input-icon,
+.ui-lib-icon-field:has(.ui-input-bootstrap) .ui-lib-input-icon {
+  color: var(--uilib-icon-field-icon-color-bootstrap, var(--uilib-icon-field-icon-color));
+}
+
+.ui-lib-icon-field.ui-lib-icon-field--minimal .ui-lib-input-icon,
+.ui-lib-icon-field:has(.ui-input-minimal) .ui-lib-input-icon {
+  color: var(--uilib-icon-field-icon-color-minimal, var(--uilib-icon-field-icon-color));
+}
+
+.ui-lib-icon-field.ui-lib-icon-field--minimal.ui-lib-icon-field--left .ui-lib-input-icon,
+.ui-lib-icon-field.ui-lib-icon-field--left:has(.ui-input-minimal) .ui-lib-input-icon {
+  left: var(--uilib-icon-field-icon-margin-minimal, var(--uilib-icon-field-icon-margin, 0.75rem));
+}
+
+.ui-lib-icon-field.ui-lib-icon-field--minimal.ui-lib-icon-field--right .ui-lib-input-icon,
+.ui-lib-icon-field.ui-lib-icon-field--right:has(.ui-input-minimal) .ui-lib-input-icon {
+  right: var(--uilib-icon-field-icon-margin-minimal, var(--uilib-icon-field-icon-margin, 0.75rem));
+}
+
+uilib-float-label .ui-lib-icon-field {
+  position: relative;
+}
+
+uilib-float-label:has(.ui-lib-icon-field--left) {
+  --uilib-float-label-position-x: var(--uilib-icon-field-input-padding-with-icon, 2.5rem);
+}
