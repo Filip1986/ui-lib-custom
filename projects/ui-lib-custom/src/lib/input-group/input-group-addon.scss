@@ -1,0 +1,40 @@
+.ui-lib-input-group-addon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--uilib-input-group-addon-padding, 0.5rem 0.75rem);
+  background: var(--uilib-input-group-addon-background, var(--uilib-surface-100, #f3f4f6));
+  color: var(--uilib-input-group-addon-color, var(--uilib-text-muted-color, #6b7280));
+  border-block-start: 1px solid
+    var(--uilib-input-group-addon-border-color, var(--uilib-surface-border, #e5e7eb));
+  border-block-end: 1px solid
+    var(--uilib-input-group-addon-border-color, var(--uilib-surface-border, #e5e7eb));
+  min-width: var(--uilib-input-group-addon-min-width, 2.5rem);
+}
+
+.ui-lib-input-group-addon:first-child,
+.ui-lib-input-group-addon + .ui-lib-input-group-addon {
+  border-inline-start: 1px solid
+    var(--uilib-input-group-addon-border-color, var(--uilib-surface-border, #e5e7eb));
+}
+
+.ui-lib-input-group-addon:last-child {
+  border-inline-end: 1px solid
+    var(--uilib-input-group-addon-border-color, var(--uilib-surface-border, #e5e7eb));
+}
+
+.ui-lib-input-group-addon:has(ui-lib-button),
+.ui-lib-input-group-addon:has(.ui-lib-button) {
+  padding: 0;
+  overflow: hidden;
+}
+
+.ui-lib-input-group-addon > ui-lib-button {
+  display: inline-flex;
+  align-self: stretch;
+}
+
+.ui-lib-input-group-addon .ui-lib-button,
+.ui-lib-input-group-addon ui-lib-button button {
+  border-radius: 0;
+}

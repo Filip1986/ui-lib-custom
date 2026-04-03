@@ -12,6 +12,7 @@ import type * as UiLibFloatLabel from 'ui-lib-custom/float-label';
 import type * as UiLibIconField from 'ui-lib-custom/icon-field';
 import type * as UiLibIcon from 'ui-lib-custom/icon';
 import type * as UiLibInput from 'ui-lib-custom/input';
+import type * as UiLibInputGroup from 'ui-lib-custom/input-group';
 import type * as UiLibLayout from 'ui-lib-custom/layout';
 import type * as UiLibSelect from 'ui-lib-custom/select';
 import type * as UiLibSelectButton from 'ui-lib-custom/select-button';
@@ -90,6 +91,12 @@ describe('Secondary Entry Points', (): void => {
   it('should import from input', async (): Promise<void> => {
     const mod: typeof UiLibInput = await import('ui-lib-custom/input');
     expect(mod.UiLibInput).toBeDefined();
+  });
+
+  it('should import from input-group', async (): Promise<void> => {
+    const mod: typeof UiLibInputGroup = await import('ui-lib-custom/input-group');
+    expect(mod.InputGroupComponent).toBeDefined();
+    expect(mod.InputGroupAddonComponent).toBeDefined();
   });
 
   it('should import from layout', async (): Promise<void> => {

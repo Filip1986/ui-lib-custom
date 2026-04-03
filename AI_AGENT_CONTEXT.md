@@ -40,6 +40,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Dialog          | ✅ Complete     | `ui-lib-custom/dialog`           | ✅ Complete        | v1 shipped with demo/tests/docs; re-exported in primary barrel for backward compat |
 | Input           | ✅ Bulletproof  | `ui-lib-custom/input`            | ❌ Missing         | Needs API + implementation docs                    |
 | Select          | ✅ Bulletproof  | `ui-lib-custom/select`           | ❌ Missing         | Needs API + implementation docs                    |
+| InputGroup      | ✅ Complete     | `ui-lib-custom/input-group`      | ✅ Complete        | Pair: InputGroupComponent + InputGroupAddonComponent |
 | AutoComplete    | ✅ Complete     | `ui-lib-custom/autocomplete`     | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
 | CascadeSelect   | ✅ Complete     | `ui-lib-custom/cascade-select`   | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
 | ColorPicker     | ✅ Complete     | `ui-lib-custom/color-picker`     | ✅ Complete        | Prompt 1-6 delivered; secondary entry point + demo/docs/tests integrated |
@@ -55,7 +56,7 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Alert           | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ Partial        |                                                    |
 | ThemeEditor     | ✅ Working      | `ui-lib-custom/theme`            | ✅ README          | Demo sidebar, not a consumer component             |
 
-**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon-field, icon, layout, theme, tokens  
+**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, input-group, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon-field, icon, layout, theme, tokens  
 **Secondary entry points pending:** icon-button, alert
 
 ---
@@ -558,96 +559,71 @@ Next step: Proceed to Prompt 11 (demo integration + docs) and add DatePicker usa
 ```
 
 ```
-Date: 2026-03-21
-Changed: projects/demo/src/app/pages/date-picker/date-picker-demo.component.ts, projects/demo/src/app/pages/date-picker/date-picker-demo.component.html, projects/demo/src/app/pages/date-picker/date-picker-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/DATEPICKER.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
-State: Completed Prompt 11 DatePicker demo + documentation integration. Added a full demo page with all requested scenarios (basic, format, icon, min/max, multiple, range, button bar, time 12/24, time-only, month/year view, multi-month, inline, sizes, variants, filled, disabled, invalid, reactive forms), wired lazy route `/date-picker`, and added sidebar navigation under Form. Added new component reference doc `docs/reference/components/EDITOR.md` (API/slots/css vars/examples/format tokens/keyboard/a11y/limitations) and linked DatePicker from components docs index.
-Verification:
-- `npm.cmd run build:demo` (PASS after adjusting demo `anyComponentStyle.maximumError` from `20kB` to `22kB`; build still emits existing style-budget warnings for `button.scss` and `date-picker.scss`).
-- `get_errors` on all changed/new demo TS/HTML/SCSS/route/sidebar/nav files (no code errors on TS/HTML/SCSS/route/sidebar; markdown index retains existing unresolved-link warnings in `docs/reference/components/README.md`).
-Next step: Optional follow-up is to reduce `projects/ui-lib-custom/src/lib/date-picker/date-picker.scss` size below 20kB and restore stricter demo style budget threshold once styling is optimized.
-```
-
-```
-Date: 2026-03-21
-Changed: projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts, projects/ui-lib-custom/src/lib/date-picker/date-format.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 12 final QA pass for DatePicker. Verified library and demo builds, DatePicker-focused tests, entry-point tests, DatePicker/demo ESLint runs, cross-entry imports, public API surface constraints, and dead-code scan impact for DatePicker.
-Verification:
-- `ng.cmd build ui-lib-custom` (PASS).
-- `npm.cmd run build:demo` (PASS, warnings only for component-style warning threshold on `button.scss` and `date-picker.scss`; no build errors).
-- `npm.cmd test -- --testPathPatterns='date-picker'` (PASS: 3 suites, 87 tests).
-- `npm.cmd test -- --testPathPatterns='entry-points'` (PASS: 1 suite, 17 tests).
-- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/date-picker/**/*.{ts,html,scss}"` (PASS after fixes in `date-picker.spec.ts` and `date-format.ts`).
-- `npm.cmd exec -- eslint "projects/demo/src/app/pages/date-picker/**/*.{ts,html,scss}" "projects/demo/src/app/app.routes.ts" "projects/demo/src/app/layout/sidebar/sidebar.component.ts"` (PASS).
-- Cross-import check: no `../` cross-entry imports found in `projects/ui-lib-custom/src/lib/date-picker/*.ts`; cross-entry imports in `date-picker.ts` use package paths (`ui-lib-custom/core`, `ui-lib-custom/theme`).
-- Public API check: `projects/ui-lib-custom/src/public-api.ts` does not export DatePicker; `projects/ui-lib-custom/src/lib/date-picker/index.ts` exports only public component + public types.
-- Dead code check: `npx -y knip` run completed; existing repository-wide issues reported, but no new DatePicker unused exports/types detected.
-Next step: Optional cleanup pass to reduce `date-picker.scss` size so demo style-budget settings can be tightened again without warnings.
-```
-
-```
-Date: 2026-04-01
-Changed: docs/reference/components/ICONFIELD_ARCHITECTURE.md, AI_AGENT_CONTEXT.md
-State: Completed IconField/InputIcon research and API design documentation pass. Read required context files in order, inspected PrimeNG v21 source artifacts for IconField/InputIcon API and host behavior, and produced `ICONFIELD_ARCHITECTURE.md` with feature mapping, reusable-code assessment, component-pair architecture, public API contract, CSS token contract, integration notes, and PrimeNG divergence table for `uilib-icon-field`/`uilib-input-icon`.
+Date: 2026-04-03
+Changed: docs/architecture/INPUTGROUP_ARCHITECTURE.md, AI_AGENT_CONTEXT.md
+State: Completed InputGroup Prompt 1 research and API design documentation. Added `INPUTGROUP_ARCHITECTURE.md` with PrimeNG source evidence (`primeng-inputgroup`, `primeng-inputgroupaddon`, and `@primeuix/styles/inputgroup`), full CSS behavior inventory (layout, radius stitching, addon borders/padding, focus z-index, fluid handling), ui-lib interop host-class audit (Input/Select/AutoComplete/CascadeSelect/FloatLabel/IconField/Button), minimal API/host architecture for `uilib-input-group` + `uilib-input-group-addon`, token contract (`--uilib-input-group-*`), and PrimeNG divergence table.
 Verification:
 - `npm.cmd pack primeng@21 --pack-destination tmp_primeng`
-- `tar -xzf tmp_primeng/primeng-*.tgz -C tmp_primeng`
-- Evidence reviewed from `tmp_primeng/package/types/primeng-iconfield.d.ts`, `tmp_primeng/package/types/primeng-inputicon.d.ts`, `tmp_primeng/package/fesm2022/primeng-iconfield.mjs`, `tmp_primeng/package/fesm2022/primeng-inputicon.mjs`
-Result: Documentation-only update; no runtime code changes.
-Next step: Implement Prompt 2 scaffold for `uilib-icon-field` + `uilib-input-icon` (standalone + OnPush + ViewEncapsulation.None), then wire entry-point exports and focused unit tests.
+- `tar -xzf tmp_primeng/primeng-21.1.5.tgz -C tmp_primeng`
+- `npm.cmd pack @primeuix/styles --pack-destination tmp_primeng`
+- `tar -xzf tmp_primeng/primeuix-styles-2.0.3.tgz -C tmp_primeng/primeuix_styles`
+- Evidence reviewed from:
+  - `tmp_primeng/package/types/primeng-inputgroup.d.ts`
+  - `tmp_primeng/package/types/primeng-inputgroupaddon.d.ts`
+  - `tmp_primeng/package/fesm2022/primeng-inputgroup.mjs`
+  - `tmp_primeng/package/fesm2022/primeng-inputgroupaddon.mjs`
+  - `tmp_primeng/primeuix_styles/package/dist/inputgroup/index.mjs`
+Next step: Start InputGroup Prompt 2 implementation scaffolding (`input-group.ts/.html/.scss`, `input-group-addon.ts/.html/.scss`, `index.ts`) with standalone + OnPush + ViewEncapsulation.None and CSS-first behavior.
 ```
 
 ```
-Date: 2026-04-01
-Changed: projects/ui-lib-custom/src/lib/icon-field/icon-field.types.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.constants.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.html, projects/ui-lib-custom/src/lib/icon-field/input-icon.ts, projects/ui-lib-custom/src/lib/icon-field/input-icon.html, projects/ui-lib-custom/src/lib/icon-field/index.ts, projects/ui-lib-custom/icon-field/ng-package.json, projects/ui-lib-custom/icon-field/package.json, projects/ui-lib-custom/package.json, AI_AGENT_CONTEXT.md
-State: Completed Prompt 2 scaffold for IconField/InputIcon. Added `IconPosition` type, `as const` defaults/classes constants, standalone wrapper components (`uilib-icon-field`, `uilib-input-icon`) with signal inputs and separate templates, barrel exports, and a new `ui-lib-custom/icon-field` secondary entry point. Left primary barrel untouched as requested.
+Date: 2026-04-03
+Changed: projects/ui-lib-custom/src/lib/input-group/input-group.ts, projects/ui-lib-custom/src/lib/input-group/input-group.html, projects/ui-lib-custom/src/lib/input-group/input-group.scss, projects/ui-lib-custom/src/lib/input-group/input-group-addon.ts, projects/ui-lib-custom/src/lib/input-group/input-group-addon.html, projects/ui-lib-custom/src/lib/input-group/input-group-addon.scss, projects/ui-lib-custom/src/lib/input-group/input-group.constants.ts, projects/ui-lib-custom/src/lib/input-group/input-group.spec.ts, projects/ui-lib-custom/src/lib/input-group/index.ts, projects/ui-lib-custom/input-group/ng-package.json, projects/ui-lib-custom/input-group/package.json, projects/ui-lib-custom/package.json, projects/ui-lib-custom/test/entry-points.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed InputGroup Prompt 2 scaffold and secondary entry-point wiring. Added standalone OnPush + ViewEncapsulation.None wrapper components (`InputGroupComponent`, `InputGroupAddonComponent`) with minimal `<ng-content />` templates, placeholder SCSS files, class constants, index barrel exports, and a minimal spec shell. Added `projects/ui-lib-custom/input-group/` manifests (`ng-package.json`, `package.json`) and registered `./input-group` in library `exports` + `typesVersions`. Extended entry-point import regression tests with `ui-lib-custom/input-group` assertions.
 Verification:
-- `ng.cmd build ui-lib-custom` (PASS, including `ui-lib-custom/icon-field` entry build)
-- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/icon-field/**/*.{ts,html}"` (PASS)
-Next step: Implement Prompt 3 styling pass for `ui-lib-icon-field` / `ui-lib-input-icon` (positioning + input padding contract + FloatLabel-safe behavior) and add focused unit tests.
+- `ng.cmd build ui-lib-custom` (PASS)
+  - Includes built entry: `ui-lib-custom/input-group`
+  - Note: ng-packagr warns that `exports["./input-group"].types` and `default` can be overridden by manifest generation; build still completes successfully.
+- `npm.cmd test -- --testPathPatterns='entry-points.spec.ts'` (PASS: 1 suite, 21 tests)
+  - Confirms `import('ui-lib-custom/input-group')` resolves and exports both `InputGroupComponent` and `InputGroupAddonComponent`.
+- Dist artifact check:
+  - `dist/ui-lib-custom/input-group/package.json` exists
+  - `dist/ui-lib-custom/fesm2022/ui-lib-custom-input-group.mjs` exists
+Next step: Implement Prompt 3 InputGroup styling pass (layout, border-radius stitching, addon surface, focus z-index, fluid handling) using the token contract from `docs/architecture/INPUTGROUP_ARCHITECTURE.md`.
 ```
 
 ```
-Date: 2026-04-01
-Changed: projects/ui-lib-custom/src/lib/icon-field/icon-field.ts, projects/ui-lib-custom/src/lib/icon-field/input-icon.ts, projects/ui-lib-custom/src/lib/icon-field/icon-field.scss, projects/ui-lib-custom/src/lib/icon-field/input-icon.scss, projects/ui-lib-custom/src/lib/design-tokens.ts, projects/ui-lib-custom/src/lib/theming/theme-config.service.ts, docs/reference/systems/CSS_VARIABLES.md, AI_AGENT_CONTEXT.md
-State: Completed Prompt 3 IconField styling/token integration. Added SCSS styling for icon positioning, side-aware input padding, size-aware overrides (`sm`/`lg`), minimal/bootstrap variant hooks, and FloatLabel left-icon offset compatibility. Wired component `styleUrl` metadata for both `IconField` and `InputIcon`. Added `ICON_FIELD_TOKENS` to design tokens, mapped `--uilib-icon-field-*` CSS variables in `ThemeConfigService`, and documented the Icon Field variables in `CSS_VARIABLES.md`.
+Date: 2026-04-03
+Changed: projects/ui-lib-custom/src/lib/input-group/input-group.scss, projects/ui-lib-custom/src/lib/input-group/input-group-addon.scss, projects/ui-lib-custom/src/lib/input-group/design-tokens.ts, projects/ui-lib-custom/src/lib/input-group/index.ts, AI_AGENT_CONTEXT.md
+State: Completed InputGroup Prompt 3 core implementation and styling pass. Implemented CSS-only behavior for InputGroup and InputGroupAddon with tokenized fallbacks: base flex layout, control/wrapper stretch behavior, broad border-radius stripping across direct and wrapped form surfaces (`ui-lib-input`, `ui-lib-select`, `ui-lib-autocomplete`, `ui-lib-cascade-select`, `uilib-float-label`, `ui-lib-icon-field`, native inputs/textarea), first/last edge radius restoration, focus z-index layering, and fluid-width compatibility selector. Added `input-group/design-tokens.ts` documentation constant and exported it from the InputGroup barrel.
 Verification:
-- `ng.cmd build ui-lib-custom` (PASS, including `ui-lib-custom/icon-field`)
-- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/icon-field/**/*.{ts,html,scss}" "projects/ui-lib-custom/src/lib/design-tokens.ts" "projects/ui-lib-custom/src/lib/theming/theme-config.service.ts"` (PASS)
-Next step: Add focused unit tests for `IconField`/`InputIcon` class and template behavior (left/right host classes, `styleClass` rendering mode, and content projection fallback).
-```
-
-```
-Date: 2026-04-01
-Changed: projects/ui-lib-custom/src/lib/icon-field/icon-field.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed Prompt 4 IconField/InputIcon unit test pass. Finalized comprehensive host-based Jest coverage for default/right/left class behavior, signal-driven position switching, projection ordering, `styleClass` vs projection exclusivity in `uilib-input-icon`, custom SVG and `ui-lib-icon` content projection, FloatLabel integration, and multiple-icon rendering. Also fixed a TestBed lifecycle issue by resetting TestBed before reconfiguring dedicated left/right host modules.
-Verification:
-- `npm.cmd test -- --testPathPatterns="icon-field"` (PASS: 1 suite, 12 tests)
-Next step: Optional follow-up is a broader regression run (`entry-points|float-label|icon-field`) before commit to confirm no cross-feature test interactions.
-```
-
-```
-Date: 2026-04-01
-Changed: projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts, AI_AGENT_CONTEXT.md
-State: Stabilized a flaky DatePicker navigation/selection spec that queried fixed March-2026 day keys without anchoring the visible month/year. Updated the test `supports single, multiple toggle, and range swap behavior` to set `currentYear=2026` and `currentMonth=2` before date-button queries, matching the existing fixed-key assertions.
-Verification:
-- Attempted: `npm.cmd test -- --testPathPatterns="date-picker.spec.ts"`
-- Attempted fallback: `npm.cmd exec -- jest --runInBand --testPathPatterns="date-picker.spec.ts" --verbose`
-- Note: this session's terminal output capture intermittently returned `$` only, so explicit pass/fail transcript was not available from command output.
-- `get_errors` on `projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts` shows no errors; only pre-existing unused-method warnings in `MockThemeConfigService`.
-Next step: Re-run the same targeted Jest command in a stable-output terminal session to capture explicit PASS log for CI traceability.
-```
-
-```
-Date: 2026-04-01
-Changed: projects/demo/src/app/pages/icon-field/icon-field-demo.component.ts, projects/demo/src/app/pages/icon-field/icon-field-demo.component.html, projects/demo/src/app/pages/icon-field/icon-field-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/ICONFIELD.md, docs/reference/components/README.md, projects/ui-lib-custom/test/entry-points.spec.ts, AI_AGENT_CONTEXT.md
-State: Completed IconField Prompt 5 demo/docs/final-QA integration. Added a standalone IconField demo page with sections for basic placement, projected template icons (SVG + `ui-lib-icon`), FloatLabel variants (`over`/`in`/`on`), size inheritance (`sm`/`md`/`lg`), and input-variant styling (material/bootstrap/minimal). Wired lazy route `/icon-field` and sidebar Form navigation. Added `ICONFIELD.md` component reference and updated component docs index. Extended secondary-entry import regression coverage for `ui-lib-custom/icon-field`.
-Verification:
-- `ng.cmd build ui-lib-custom`
-- `npm.cmd run build:demo`
-- `npm.cmd test -- --testPathPatterns="icon-field"`
-- `npm.cmd test -- --testPathPatterns="entry-points"`
-- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/icon-field/**/*.{ts,html}"`
-- `npm.cmd exec -- eslint "projects/demo/src/app/pages/icon-field/**/*.{ts,html}"`
-- `Select-String -Path "projects/ui-lib-custom/src/lib/icon-field/*.ts" -Pattern "from '\.\.\/" | Where-Object { $_.Line -notmatch "from '\.\.\/(icon-field|input-icon)" }`
-Next step: Optional visual QA on `/icon-field` under `npm.cmd run serve:demo` to tune spacing/typography polish before commit.
+- `ng.cmd build ui-lib-custom` (PASS)
+  - Includes built entry: `ui-lib-custom/input-group`
+  - Note: existing ng-packagr warnings persist for `exports["./input-group"].types` and `default` override behavior.
+- `npm.cmd test -- --testPathPatterns='entry-points.spec.ts'` (PASS: 1 suite, 21 tests)
+  - Confirms `ui-lib-custom/input-group` import still resolves and exports `InputGroupComponent` + `InputGroupAddonComponent`.
+Next step: Add focused InputGroup unit coverage for structural class/host rendering and wrapper composition scenarios (addon+control ordering, FloatLabel/IconField nesting) before docs/demo integration.
 ````
+
+```
+Date: 2026-04-03
+Changed: projects/demo/src/app/pages/input-group/input-group-demo.component.ts, projects/demo/src/app/pages/input-group/input-group-demo.component.html, projects/demo/src/app/pages/input-group/input-group-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/INPUTGROUP.md, AI_AGENT_CONTEXT.md
+State: Completed InputGroup Prompt 5 demo and documentation integration. Added a new InputGroup demo page with six anchored sections (basic, multiple addons, button addon, checkbox composition, float-label variants, and sizes), each wrapped in `ui-lib-card` and `app-code-preview` snippets. Registered lazy route `/input-group` and sidebar Form navigation entry. Added `docs/reference/components/INPUTGROUP.md` with overview, import path, API tables (no-input wrappers), CSS token contract, usage snippets, integration notes, PrimeNG divergences, and accessibility notes.
+Verification:
+- `npm.cmd test -- --testPathPatterns='input-group.spec.ts' --runInBand`
+- `ng.cmd build ui-lib-custom`
+- `ng.cmd build demo`
+Next step: Optional follow-up is adding `INPUTGROUP.md` to `docs/reference/components/README.md` quick links for full reference index visibility.
+```
+
+```
+Date: 2026-04-03
+Changed: projects/demo/src/app/pages/input-group/input-group-demo.component.ts, projects/demo/src/app/pages/input-group/input-group-demo.component.html, projects/demo/src/app/pages/input-group/input-group-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, docs/reference/components/INPUTGROUP.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
+State: Finalized InputGroup Prompt 5 integration and verification. Fixed Angular template parsing by escaping literal `@` addon content as `&#64;` in the demo page. Added InputGroup docs index entry in component reference README so the new page is discoverable.
+Verification:
+- `npm.cmd test -- --testPathPatterns='input-group.spec.ts' --runInBand` (PASS: 1 suite, 11 tests)
+- `ng.cmd build ui-lib-custom` (PASS; existing non-blocking ng-packagr warning for `./input-group` export conditions remains)
+- `ng.cmd build demo` (PASS; existing non-blocking style budget warnings for button/date-picker remain)
+Next step: Optional manual browser QA on `/input-group` in demo (`npm.cmd run serve:demo`) to visually confirm spacing and border stitching across sections.
+```
+

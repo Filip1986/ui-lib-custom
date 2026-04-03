@@ -193,6 +193,14 @@ export const routes: Routes = [
       ),
     title: 'IconField - UI Components Library',
   },
+  {
+    path: 'input-group',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/input-group/input-group-demo.component').then(
+        (m: { InputGroupDemoComponent: Type<unknown> }): Type<unknown> => m.InputGroupDemoComponent
+      ),
+    title: 'InputGroup - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

@@ -194,6 +194,11 @@ export class SidebarComponent {
           route: '/float-label',
         },
         {
+          label: 'InputGroup',
+          icon: 'pi pi-circle',
+          route: '/input-group',
+        },
+        {
           label: 'IconField',
           icon: 'pi pi-circle',
           route: '/icon-field',

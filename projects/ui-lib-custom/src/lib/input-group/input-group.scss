@@ -1,0 +1,221 @@
+.ui-lib-input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+
+  > * {
+    position: relative;
+    margin: 0;
+  }
+
+  > ui-lib-input,
+  > ui-lib-select,
+  > ui-lib-autocomplete,
+  > ui-lib-cascade-select,
+  > uilib-float-label,
+  > .ui-lib-icon-field,
+  > input[type='text'],
+  > input[type='email'],
+  > input[type='password'],
+  > input[type='number'],
+  > input[type='search'],
+  > input[type='tel'],
+  > input[type='url'],
+  > textarea {
+    flex: 1 1 auto;
+    width: 1%;
+  }
+
+  > uilib-float-label,
+  > .ui-lib-icon-field {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+}
+
+.ui-lib-input-group > input,
+.ui-lib-input-group > textarea,
+.ui-lib-input-group > ui-lib-input .ui-input-field,
+.ui-lib-input-group > ui-lib-select .ui-lib-select__control,
+.ui-lib-input-group > ui-lib-autocomplete .ui-autocomplete-container,
+.ui-lib-input-group > ui-lib-cascade-select .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > uilib-float-label > input,
+.ui-lib-input-group > uilib-float-label > textarea,
+.ui-lib-input-group > uilib-float-label > ui-lib-input .ui-input-field,
+.ui-lib-input-group > uilib-float-label > ui-lib-select .ui-lib-select__control,
+.ui-lib-input-group > uilib-float-label > ui-lib-autocomplete .ui-autocomplete-container,
+.ui-lib-input-group > uilib-float-label > ui-lib-cascade-select .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > uilib-float-label > .ui-lib-icon-field > input,
+.ui-lib-input-group > uilib-float-label > .ui-lib-icon-field > textarea,
+.ui-lib-input-group > uilib-float-label > .ui-lib-icon-field > ui-lib-input .ui-input-field,
+.ui-lib-input-group
+  > uilib-float-label
+  > .ui-lib-icon-field
+  > ui-lib-select
+  .ui-lib-select__control,
+.ui-lib-input-group
+  > uilib-float-label
+  > .ui-lib-icon-field
+  > ui-lib-autocomplete
+  .ui-autocomplete-container,
+.ui-lib-input-group
+  > uilib-float-label
+  > .ui-lib-icon-field
+  > ui-lib-cascade-select
+  .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > .ui-lib-icon-field > input,
+.ui-lib-input-group > .ui-lib-icon-field > textarea,
+.ui-lib-input-group > .ui-lib-icon-field > ui-lib-input .ui-input-field,
+.ui-lib-input-group > .ui-lib-icon-field > ui-lib-select .ui-lib-select__control,
+.ui-lib-input-group > .ui-lib-icon-field > ui-lib-autocomplete .ui-autocomplete-container,
+.ui-lib-input-group > .ui-lib-icon-field > ui-lib-cascade-select .ui-lib-cascade-select__trigger {
+  border-radius: 0;
+  margin: 0;
+}
+
+.ui-lib-input-group > .ui-lib-input-group-addon:first-child,
+.ui-lib-input-group > input:first-child,
+.ui-lib-input-group > textarea:first-child,
+.ui-lib-input-group > ui-lib-input:first-child .ui-input-field,
+.ui-lib-input-group > ui-lib-select:first-child .ui-lib-select__control,
+.ui-lib-input-group > ui-lib-autocomplete:first-child .ui-autocomplete-container,
+.ui-lib-input-group > ui-lib-cascade-select:first-child .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > uilib-float-label:first-child > input,
+.ui-lib-input-group > uilib-float-label:first-child > textarea,
+.ui-lib-input-group > uilib-float-label:first-child > ui-lib-input .ui-input-field,
+.ui-lib-input-group > uilib-float-label:first-child > ui-lib-select .ui-lib-select__control,
+.ui-lib-input-group
+  > uilib-float-label:first-child
+  > ui-lib-autocomplete
+  .ui-autocomplete-container,
+.ui-lib-input-group
+  > uilib-float-label:first-child
+  > ui-lib-cascade-select
+  .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > uilib-float-label:first-child > .ui-lib-icon-field > input,
+.ui-lib-input-group > uilib-float-label:first-child > .ui-lib-icon-field > textarea,
+.ui-lib-input-group
+  > uilib-float-label:first-child
+  > .ui-lib-icon-field
+  > ui-lib-input
+  .ui-input-field,
+.ui-lib-input-group
+  > uilib-float-label:first-child
+  > .ui-lib-icon-field
+  > ui-lib-select
+  .ui-lib-select__control,
+.ui-lib-input-group
+  > uilib-float-label:first-child
+  > .ui-lib-icon-field
+  > ui-lib-autocomplete
+  .ui-autocomplete-container,
+.ui-lib-input-group
+  > uilib-float-label:first-child
+  > .ui-lib-icon-field
+  > ui-lib-cascade-select
+  .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > .ui-lib-icon-field:first-child > input,
+.ui-lib-input-group > .ui-lib-icon-field:first-child > textarea,
+.ui-lib-input-group > .ui-lib-icon-field:first-child > ui-lib-input .ui-input-field,
+.ui-lib-input-group > .ui-lib-icon-field:first-child > ui-lib-select .ui-lib-select__control,
+.ui-lib-input-group
+  > .ui-lib-icon-field:first-child
+  > ui-lib-autocomplete
+  .ui-autocomplete-container,
+.ui-lib-input-group
+  > .ui-lib-icon-field:first-child
+  > ui-lib-cascade-select
+  .ui-lib-cascade-select__trigger {
+  border-start-start-radius: var(
+    --uilib-input-group-addon-border-radius,
+    var(--uilib-border-radius, 6px)
+  );
+  border-end-start-radius: var(
+    --uilib-input-group-addon-border-radius,
+    var(--uilib-border-radius, 6px)
+  );
+}
+
+.ui-lib-input-group > .ui-lib-input-group-addon:last-child,
+.ui-lib-input-group > input:last-child,
+.ui-lib-input-group > textarea:last-child,
+.ui-lib-input-group > ui-lib-input:last-child .ui-input-field,
+.ui-lib-input-group > ui-lib-select:last-child .ui-lib-select__control,
+.ui-lib-input-group > ui-lib-autocomplete:last-child .ui-autocomplete-container,
+.ui-lib-input-group > ui-lib-cascade-select:last-child .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > uilib-float-label:last-child > input,
+.ui-lib-input-group > uilib-float-label:last-child > textarea,
+.ui-lib-input-group > uilib-float-label:last-child > ui-lib-input .ui-input-field,
+.ui-lib-input-group > uilib-float-label:last-child > ui-lib-select .ui-lib-select__control,
+.ui-lib-input-group > uilib-float-label:last-child > ui-lib-autocomplete .ui-autocomplete-container,
+.ui-lib-input-group
+  > uilib-float-label:last-child
+  > ui-lib-cascade-select
+  .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > uilib-float-label:last-child > .ui-lib-icon-field > input,
+.ui-lib-input-group > uilib-float-label:last-child > .ui-lib-icon-field > textarea,
+.ui-lib-input-group
+  > uilib-float-label:last-child
+  > .ui-lib-icon-field
+  > ui-lib-input
+  .ui-input-field,
+.ui-lib-input-group
+  > uilib-float-label:last-child
+  > .ui-lib-icon-field
+  > ui-lib-select
+  .ui-lib-select__control,
+.ui-lib-input-group
+  > uilib-float-label:last-child
+  > .ui-lib-icon-field
+  > ui-lib-autocomplete
+  .ui-autocomplete-container,
+.ui-lib-input-group
+  > uilib-float-label:last-child
+  > .ui-lib-icon-field
+  > ui-lib-cascade-select
+  .ui-lib-cascade-select__trigger,
+.ui-lib-input-group > .ui-lib-icon-field:last-child > input,
+.ui-lib-input-group > .ui-lib-icon-field:last-child > textarea,
+.ui-lib-input-group > .ui-lib-icon-field:last-child > ui-lib-input .ui-input-field,
+.ui-lib-input-group > .ui-lib-icon-field:last-child > ui-lib-select .ui-lib-select__control,
+.ui-lib-input-group
+  > .ui-lib-icon-field:last-child
+  > ui-lib-autocomplete
+  .ui-autocomplete-container,
+.ui-lib-input-group
+  > .ui-lib-icon-field:last-child
+  > ui-lib-cascade-select
+  .ui-lib-cascade-select__trigger {
+  border-start-end-radius: var(
+    --uilib-input-group-addon-border-radius,
+    var(--uilib-border-radius, 6px)
+  );
+  border-end-end-radius: var(
+    --uilib-input-group-addon-border-radius,
+    var(--uilib-border-radius, 6px)
+  );
+}
+
+.ui-lib-input-group > *:focus-within,
+.ui-lib-input-group > .uilib-inputwrapper-focus,
+.ui-lib-input-group > input:focus,
+.ui-lib-input-group > textarea:focus,
+.ui-lib-input-group > ui-lib-input .ui-input-field:focus-within,
+.ui-lib-input-group > ui-lib-select .ui-lib-select__control:focus-within,
+.ui-lib-input-group > ui-lib-autocomplete .ui-autocomplete-container:focus-within,
+.ui-lib-input-group > ui-lib-cascade-select .ui-lib-cascade-select__trigger:focus-within,
+.ui-lib-input-group > uilib-float-label:focus-within,
+.ui-lib-input-group > .ui-lib-icon-field:focus-within {
+  z-index: 1;
+}
+
+.ui-lib-input-group > uilib-float-label:has(input:focus) label,
+.ui-lib-input-group > uilib-float-label:has(textarea:focus) label,
+.ui-lib-input-group > uilib-float-label:has(.uilib-inputwrapper-focus) label {
+  z-index: 1;
+}
+
+.ui-lib-input-group:has(.uilib-fluid) {
+  width: 100%;
+}
