@@ -209,6 +209,11 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/input-mask',
         },
+        {
+          label: 'InputNumber',
+          icon: 'pi pi-circle',
+          route: '/input-number',
+        },
       ],
     },
   ]);

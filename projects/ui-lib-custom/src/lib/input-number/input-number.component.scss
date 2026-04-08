@@ -1,0 +1,324 @@
+uilib-input-number {
+  --uilib-input-number-gap: var(--uilib-space-2, 0.5rem);
+  --uilib-input-number-border-width: var(--uilib-border-width, 1px);
+  --uilib-input-number-border-style: solid;
+  --uilib-input-number-border-radius: var(--uilib-radius-md, 0.5rem);
+  --uilib-input-number-height-sm: var(--uilib-size-9, 2.25rem);
+  --uilib-input-number-height-md: var(--uilib-size-11, 2.75rem);
+  --uilib-input-number-height-lg: var(--uilib-size-12, 3.125rem);
+  --uilib-input-number-input-height: var(--uilib-input-number-height-md);
+  --uilib-input-number-padding-y-sm: var(--uilib-space-1, 0.25rem);
+  --uilib-input-number-padding-y-md: var(--uilib-space-2, 0.5rem);
+  --uilib-input-number-padding-y-lg: var(--uilib-space-3, 0.75rem);
+  --uilib-input-number-padding-x-sm: var(--uilib-space-2, 0.5rem);
+  --uilib-input-number-padding-x-md: var(--uilib-space-3, 0.75rem);
+  --uilib-input-number-padding-x-lg: var(--uilib-space-4, 1rem);
+  --uilib-input-number-padding-y: var(--uilib-input-number-padding-y-md);
+  --uilib-input-number-padding-x: var(--uilib-input-number-padding-x-md);
+  --uilib-input-number-font-family: var(--uilib-font-ui, system-ui, sans-serif);
+  --uilib-input-number-font-weight: var(--uilib-font-weight-400, 400);
+  --uilib-input-number-font-size-sm: var(--uilib-font-size-sm, 0.875rem);
+  --uilib-input-number-font-size-md: var(--uilib-font-size-md, 1rem);
+  --uilib-input-number-font-size-lg: var(--uilib-font-size-lg, 1.125rem);
+  --uilib-input-number-font-size: var(--uilib-input-number-font-size-md);
+  --uilib-input-number-bg: var(--uilib-input-bg, var(--uilib-surface, #ffffff));
+  --uilib-input-number-text: var(--uilib-input-text, var(--uilib-page-fg, #1f2933));
+  --uilib-input-number-border-color: var(--uilib-input-border, var(--uilib-border, #d1d5db));
+  --uilib-input-number-border-color-hover: var(
+    --uilib-input-border-hover,
+    var(--uilib-input-number-border-color)
+  );
+  --uilib-input-number-border-color-focus: var(
+    --uilib-input-border-focus,
+    var(--uilib-color-primary-600, #1e88e5)
+  );
+  --uilib-input-number-placeholder-color: var(
+    --uilib-input-placeholder,
+    var(--uilib-muted, #6b7280)
+  );
+  --uilib-input-number-prefix-color: var(--uilib-input-number-placeholder-color);
+  --uilib-input-number-suffix-color: var(--uilib-input-number-placeholder-color);
+  --uilib-input-number-button-bg: var(--uilib-surface-alt, var(--uilib-input-number-bg));
+  --uilib-input-number-button-text: var(--uilib-input-number-text);
+  --uilib-input-number-button-border-color: var(--uilib-input-number-border-color);
+  --uilib-input-number-button-hover-background: color-mix(
+    in srgb,
+    var(--uilib-color-primary-600, #1e88e5) 10%,
+    var(--uilib-input-number-button-bg)
+  );
+  --uilib-input-number-button-active-background: color-mix(
+    in srgb,
+    var(--uilib-color-primary-600, #1e88e5) 18%,
+    var(--uilib-input-number-button-bg)
+  );
+  --uilib-input-number-button-disabled-opacity: var(--uilib-disabled-opacity, 0.45);
+  --uilib-input-number-button-width-sm: var(--uilib-size-8, 2rem);
+  --uilib-input-number-button-width-md: var(--uilib-size-9, 2.25rem);
+  --uilib-input-number-button-width-lg: var(--uilib-size-10, 2.5rem);
+  --uilib-input-number-button-width: var(--uilib-input-number-button-width-md);
+  --uilib-input-number-clear-size: var(--uilib-font-size-base, 1rem);
+  --uilib-input-number-clear-color: var(--uilib-input-number-placeholder-color);
+  --uilib-input-number-clear-offset: var(--uilib-space-2, 0.5rem);
+  --uilib-input-number-focus-ring: 0 0 0 var(--uilib-focus-ring-width, 2px)
+    color-mix(in srgb, var(--uilib-input-number-border-color-focus) 28%, transparent);
+  --uilib-input-number-invalid-border-color: var(--uilib-color-danger-600, #e53935);
+  --uilib-input-number-disabled-opacity: var(--uilib-disabled-opacity, 0.6);
+  --uilib-input-number-filled-bg: var(--uilib-surface-alt, #f3f4f6);
+  --uilib-input-number-transition:
+    border-color var(--uilib-transition-fast, 150ms ease),
+    box-shadow var(--uilib-transition-fast, 150ms ease),
+    background-color var(--uilib-transition-fast, 150ms ease),
+    color var(--uilib-transition-fast, 150ms ease);
+
+  display: inline-flex;
+  align-items: stretch;
+  gap: var(--uilib-input-number-gap);
+  color: var(--uilib-input-number-text);
+  font-family: var(--uilib-input-number-font-family, var(--uilib-font-ui, system-ui, sans-serif));
+  font-size: var(--uilib-input-number-font-size);
+  font-weight: var(--uilib-input-number-font-weight);
+}
+
+uilib-input-number.uilib-input-number-fluid {
+  display: flex;
+  width: 100%;
+}
+
+uilib-input-number .uilib-input-number-input-wrapper {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  min-height: var(--uilib-input-number-input-height);
+  background: var(--uilib-input-number-bg);
+  border: var(--uilib-input-number-border-width) var(--uilib-input-number-border-style)
+    var(--uilib-input-number-border-color);
+  border-radius: var(--uilib-input-number-border-radius);
+  transition: var(--uilib-input-number-transition);
+}
+
+uilib-input-number .uilib-input-number-input-wrapper:hover {
+  border-color: var(--uilib-input-number-border-color-hover);
+}
+
+uilib-input-number.uilib-inputwrapper-focus .uilib-input-number-input-wrapper {
+  border-color: var(--uilib-input-number-border-color-focus);
+  box-shadow: var(--uilib-input-number-focus-ring);
+}
+
+uilib-input-number.uilib-input-number-filled .uilib-input-number-input-wrapper {
+  background: var(--uilib-input-number-filled-bg);
+}
+
+uilib-input-number .uilib-input-number-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: var(--uilib-input-number-input-height);
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding-block: var(--uilib-input-number-padding-y);
+  padding-inline: var(--uilib-input-number-padding-x);
+  padding-inline-end: calc(
+    var(--uilib-input-number-padding-x) + var(--uilib-input-number-button-width) +
+      var(--uilib-input-number-clear-offset)
+  );
+}
+
+uilib-input-number .uilib-input-number-input::placeholder {
+  color: var(--uilib-input-number-placeholder-color);
+}
+
+uilib-input-number .uilib-input-number-prefix,
+uilib-input-number .uilib-input-number-suffix {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  color: var(--uilib-input-number-prefix-color);
+  font: inherit;
+}
+
+uilib-input-number .uilib-input-number-prefix {
+  margin-inline-start: var(--uilib-input-number-padding-x);
+}
+
+uilib-input-number .uilib-input-number-suffix {
+  color: var(--uilib-input-number-suffix-color);
+  margin-inline-end: calc(
+    var(--uilib-input-number-padding-x) + var(--uilib-input-number-button-width)
+  );
+}
+
+uilib-input-number .uilib-input-number-clear {
+  position: absolute;
+  inset-inline-end: var(--uilib-input-number-clear-offset);
+  border: 0;
+  background: transparent;
+  color: var(--uilib-input-number-clear-color);
+  font-size: var(--uilib-input-number-clear-size);
+  inline-size: var(--uilib-input-number-button-width);
+  block-size: var(--uilib-input-number-button-width);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--uilib-input-number-transition);
+}
+
+uilib-input-number .uilib-input-number-button {
+  border: var(--uilib-input-number-border-width) var(--uilib-input-number-border-style)
+    var(--uilib-input-number-button-border-color);
+  background: var(--uilib-input-number-button-bg);
+  color: var(--uilib-input-number-button-text);
+  font: inherit;
+  inline-size: var(--uilib-input-number-button-width);
+  min-inline-size: var(--uilib-input-number-button-width);
+  min-block-size: var(--uilib-input-number-button-width);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--uilib-input-number-transition);
+}
+
+uilib-input-number .uilib-input-number-button:hover:not(:disabled) {
+  background: var(--uilib-input-number-button-hover-background);
+}
+
+uilib-input-number .uilib-input-number-button:active:not(:disabled) {
+  background: var(--uilib-input-number-button-active-background);
+}
+
+uilib-input-number .uilib-input-number-button:disabled {
+  cursor: not-allowed;
+  opacity: var(--uilib-input-number-button-disabled-opacity);
+}
+
+uilib-input-number.uilib-input-number-stacked .uilib-input-number-button-group {
+  display: flex;
+  flex-direction: column;
+  inline-size: var(--uilib-input-number-button-width);
+}
+
+uilib-input-number.uilib-input-number-stacked .uilib-input-number-button {
+  flex: 1 1 50%;
+  block-size: calc(var(--uilib-input-number-input-height) / 2);
+}
+
+uilib-input-number.uilib-input-number-horizontal {
+  display: grid;
+  grid-template-columns: var(--uilib-input-number-button-width) minmax(0, 1fr) var(
+      --uilib-input-number-button-width
+    );
+  gap: 0;
+}
+
+uilib-input-number.uilib-input-number-horizontal .uilib-input-number-input-wrapper {
+  border-radius: 0;
+}
+
+uilib-input-number.uilib-input-number-horizontal .uilib-input-number-button-down {
+  border-start-start-radius: var(--uilib-input-number-border-radius);
+  border-end-start-radius: var(--uilib-input-number-border-radius);
+  border-inline-end-width: 0;
+}
+
+uilib-input-number.uilib-input-number-horizontal .uilib-input-number-button-up {
+  border-start-end-radius: var(--uilib-input-number-border-radius);
+  border-end-end-radius: var(--uilib-input-number-border-radius);
+  border-inline-start-width: 0;
+}
+
+uilib-input-number.uilib-input-number-vertical {
+  flex-direction: column;
+  gap: 0;
+}
+
+uilib-input-number.uilib-input-number-vertical .uilib-input-number-button {
+  inline-size: 100%;
+}
+
+uilib-input-number.uilib-input-number-vertical .uilib-input-number-button-up {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+  border-block-end-width: 0;
+}
+
+uilib-input-number.uilib-input-number-vertical .uilib-input-number-input-wrapper {
+  border-radius: 0;
+}
+
+uilib-input-number.uilib-input-number-vertical .uilib-input-number-button-down {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  border-block-start-width: 0;
+}
+
+uilib-input-number.uilib-input-number-sm {
+  --uilib-input-number-padding-y: var(--uilib-input-number-padding-y-sm);
+  --uilib-input-number-padding-x: var(--uilib-input-number-padding-x-sm);
+  --uilib-input-number-font-size: var(--uilib-input-number-font-size-sm);
+  --uilib-input-number-input-height: var(--uilib-input-number-height-sm);
+  --uilib-input-number-button-width: var(--uilib-input-number-button-width-sm);
+}
+
+uilib-input-number.uilib-input-number-md {
+  --uilib-input-number-padding-y: var(--uilib-input-number-padding-y-md);
+  --uilib-input-number-padding-x: var(--uilib-input-number-padding-x-md);
+  --uilib-input-number-font-size: var(--uilib-input-number-font-size-md);
+  --uilib-input-number-input-height: var(--uilib-input-number-height-md);
+  --uilib-input-number-button-width: var(--uilib-input-number-button-width-md);
+}
+
+uilib-input-number.uilib-input-number-lg {
+  --uilib-input-number-padding-y: var(--uilib-input-number-padding-y-lg);
+  --uilib-input-number-padding-x: var(--uilib-input-number-padding-x-lg);
+  --uilib-input-number-font-size: var(--uilib-input-number-font-size-lg);
+  --uilib-input-number-input-height: var(--uilib-input-number-height-lg);
+  --uilib-input-number-button-width: var(--uilib-input-number-button-width-lg);
+}
+
+uilib-input-number.uilib-input-number-invalid .uilib-input-number-input-wrapper {
+  border-color: var(--uilib-input-number-invalid-border-color);
+}
+
+uilib-input-number.uilib-input-number-disabled {
+  opacity: var(--uilib-input-number-disabled-opacity);
+}
+
+uilib-input-number.uilib-variant-material {
+  --uilib-input-number-border-radius: var(--uilib-radius-lg, 0.75rem);
+  --uilib-input-number-button-bg: color-mix(
+    in srgb,
+    var(--uilib-color-primary-600, #1e88e5) 6%,
+    var(--uilib-input-number-bg)
+  );
+}
+
+uilib-input-number.uilib-variant-bootstrap {
+  --uilib-input-number-border-radius: var(--uilib-radius-sm, 0.25rem);
+  --uilib-input-number-button-bg: var(--uilib-surface-alt, #f3f4f6);
+  --uilib-input-number-button-border-color: var(--uilib-border, #d1d5db);
+}
+
+uilib-input-number.uilib-variant-minimal {
+  --uilib-input-number-border-width: 0;
+  --uilib-input-number-bg: transparent;
+  --uilib-input-number-filled-bg: color-mix(
+    in srgb,
+    var(--uilib-surface, #ffffff) 92%,
+    transparent
+  );
+  --uilib-input-number-button-bg: color-mix(
+    in srgb,
+    var(--uilib-color-primary-600, #1e88e5) 8%,
+    transparent
+  );
+}
+
+uilib-float-label uilib-input-number,
+.uilib-float-label uilib-input-number {
+  inline-size: 100%;
+}

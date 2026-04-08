@@ -13,6 +13,7 @@ import type * as UiLibIconField from 'ui-lib-custom/icon-field';
 import type * as UiLibIcon from 'ui-lib-custom/icon';
 import type * as UiLibInput from 'ui-lib-custom/input';
 import type * as UiLibInputGroup from 'ui-lib-custom/input-group';
+import type * as UiLibInputNumber from 'ui-lib-custom/input-number';
 import type * as UiLibLayout from 'ui-lib-custom/layout';
 import type * as UiLibSelect from 'ui-lib-custom/select';
 import type * as UiLibSelectButton from 'ui-lib-custom/select-button';
@@ -98,6 +99,12 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibInputGroup = await import('ui-lib-custom/input-group');
     expect(mod.InputGroupComponent).toBeDefined();
     expect(mod.InputGroupAddonComponent).toBeDefined();
+  });
+
+  it('should import from input-number', async (): Promise<void> => {
+    const mod: typeof UiLibInputNumber = await import('ui-lib-custom/input-number');
+    expect(mod.InputNumberComponent).toBeDefined();
+    expect(mod.NumberFormatService).toBeDefined();
   });
 
   it('should import from layout', async (): Promise<void> => {

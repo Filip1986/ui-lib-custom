@@ -1273,6 +1273,156 @@ export const INPUTMASK_TOKENS: Readonly<InputMaskTokens> = {
 export type InputMaskTokenKey = keyof typeof INPUTMASK_TOKENS;
 
 // ============================================================================
+// INPUT NUMBER TOKENS
+// ============================================================================
+
+export type InputNumberVariant = 'material' | 'bootstrap' | 'minimal';
+export type InputNumberSize = 'sm' | 'md' | 'lg';
+
+export type InputNumberTokens = {
+  layout: {
+    gap: string;
+    borderWidth: string;
+    borderRadius: string;
+    clearOffset: string;
+    buttonWidth: Record<InputNumberSize, string>;
+    inputHeight: Record<InputNumberSize, string>;
+    paddingY: Record<InputNumberSize, string>;
+    paddingX: Record<InputNumberSize, string>;
+  };
+  typography: {
+    fontFamily: string;
+    fontWeight: string;
+    fontSize: Record<InputNumberSize, string>;
+    clearSize: string;
+  };
+  colors: {
+    background: string;
+    text: string;
+    border: string;
+    borderHover: string;
+    borderFocus: string;
+    placeholder: string;
+    prefix: string;
+    suffix: string;
+    buttonBackground: string;
+    buttonText: string;
+    buttonBorder: string;
+    buttonHoverBackground: string;
+    buttonActiveBackground: string;
+    filledBackground: string;
+    clearColor: string;
+  };
+  states: {
+    focusRing: string;
+    invalidBorder: string;
+    disabledOpacity: string;
+    buttonDisabledOpacity: string;
+  };
+  variants: Record<
+    InputNumberVariant,
+    {
+      borderRadius: string;
+      borderWidth: string;
+      buttonBackground: string;
+      buttonBorder: string;
+      background: string;
+      filledBackground: string;
+    }
+  >;
+};
+
+export const INPUTNUMBER_TOKENS: Readonly<InputNumberTokens> = {
+  layout: {
+    gap: SPACING_TOKENS[2],
+    borderWidth: BORDER_WIDTH[1],
+    borderRadius: BORDER_RADIUS.lg,
+    clearOffset: SPACING_TOKENS[2],
+    buttonWidth: {
+      sm: '2rem',
+      md: '2.25rem',
+      lg: '2.5rem',
+    },
+    inputHeight: {
+      sm: '2.25rem',
+      md: '2.75rem',
+      lg: '3.125rem',
+    },
+    paddingY: {
+      sm: SPACING_TOKENS[1],
+      md: SPACING_TOKENS[2],
+      lg: SPACING_TOKENS[3],
+    },
+    paddingX: {
+      sm: SPACING_TOKENS[2],
+      md: SPACING_TOKENS[3],
+      lg: SPACING_TOKENS[4],
+    },
+  },
+  typography: {
+    fontFamily: 'var(--uilib-font-ui, inherit)',
+    fontWeight: `${FONT_WEIGHTS.normal}`,
+    fontSize: {
+      sm: FONT_SIZES.sm,
+      md: FONT_SIZES.base,
+      lg: FONT_SIZES.lg,
+    },
+    clearSize: FONT_SIZES.base,
+  },
+  colors: {
+    background: COLOR_NEUTRAL.white,
+    text: COLOR_NEUTRAL[900],
+    border: COLOR_NEUTRAL[300],
+    borderHover: COLOR_NEUTRAL[400],
+    borderFocus: COLOR_PRIMARY[600],
+    placeholder: COLOR_NEUTRAL[600],
+    prefix: COLOR_NEUTRAL[600],
+    suffix: COLOR_NEUTRAL[600],
+    buttonBackground: COLOR_NEUTRAL[100],
+    buttonText: COLOR_NEUTRAL[900],
+    buttonBorder: COLOR_NEUTRAL[300],
+    buttonHoverBackground: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 10%, ${COLOR_NEUTRAL[100]})`,
+    buttonActiveBackground: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 18%, ${COLOR_NEUTRAL[100]})`,
+    filledBackground: COLOR_NEUTRAL[100],
+    clearColor: COLOR_NEUTRAL[600],
+  },
+  states: {
+    focusRing: `0 0 0 ${BORDER_WIDTH[2]} color-mix(in srgb, ${COLOR_PRIMARY[600]} 28%, transparent)`,
+    invalidBorder: COLOR_DANGER[600],
+    disabledOpacity: '0.6',
+    buttonDisabledOpacity: '0.45',
+  },
+  variants: {
+    material: {
+      borderRadius: BORDER_RADIUS.xl,
+      borderWidth: BORDER_WIDTH[1],
+      buttonBackground: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 6%, ${COLOR_NEUTRAL.white})`,
+      buttonBorder: COLOR_NEUTRAL[300],
+      background: COLOR_NEUTRAL.white,
+      filledBackground: COLOR_NEUTRAL[100],
+    },
+    bootstrap: {
+      borderRadius: BORDER_RADIUS.sm,
+      borderWidth: BORDER_WIDTH[1],
+      buttonBackground: COLOR_NEUTRAL[100],
+      buttonBorder: COLOR_NEUTRAL[300],
+      background: COLOR_NEUTRAL.white,
+      filledBackground: COLOR_NEUTRAL[100],
+    },
+    minimal: {
+      borderRadius: BORDER_RADIUS.md,
+      borderWidth: BORDER_WIDTH[0],
+      buttonBackground: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 8%, transparent)`,
+      buttonBorder: 'transparent',
+      background: 'transparent',
+      filledBackground: `color-mix(in srgb, ${COLOR_NEUTRAL.white} 92%, transparent)`,
+    },
+  },
+};
+
+export type InputNumberTokenKey = keyof typeof INPUTNUMBER_TOKENS;
+
+// ============================================================================
 // EDITOR TOKENS
 // ============================================================================
 

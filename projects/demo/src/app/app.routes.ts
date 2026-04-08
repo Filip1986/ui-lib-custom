@@ -209,6 +209,15 @@ export const routes: Routes = [
       ),
     title: 'InputMask - UI Components Library',
   },
+  {
+    path: 'input-number',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/input-number/input-number-demo.component').then(
+        (m: { InputNumberDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.InputNumberDemoComponent
+      ),
+    title: 'InputNumber - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

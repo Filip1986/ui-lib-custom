@@ -1,0 +1,73 @@
+@use '../../shared/styles/doc-page.scss';
+
+.examples {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.example-section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.row-2,
+.row-3,
+.row-4 {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.row-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.row-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.row-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.field-label {
+  display: inline-block;
+  margin: 0 0 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--uilib-muted);
+}
+
+.form-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.error-text {
+  margin: 0;
+  color: var(--uilib-color-danger-600);
+  font-size: 0.875rem;
+}
+
+.submitted-text {
+  margin: 0;
+  color: var(--uilib-color-success-600);
+  font-size: 0.875rem;
+}
+
+.fluid-wrap {
+  width: 100%;
+  max-width: 34rem;
+}
+
+@media (max-width: 1200px) {
+  .row-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .row-2,
+  .row-3,
+  .row-4 {
+    grid-template-columns: 1fr;
+  }
+}

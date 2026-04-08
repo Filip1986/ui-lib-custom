@@ -27,6 +27,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ### Component/Docs Delta (Active Only)
 
 - `InputMask` -> ✅ complete (implementation/tests/demo/docs/entry-point verification done)
+- `InputNumber` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - Documentation gaps still tracked for: `Input`, `Select`, `Card`, `Layout`
 - Pending secondary entry points: `icon-button`, `alert`
 
@@ -47,33 +48,49 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 
 ```text
 Date: 2026-04-08
-Changed: projects/demo/src/app/layout/sidebar/sidebar.component.ts, projects/demo/src/app/layout/sidebar/sidebar.component.html, projects/demo/src/app/layout/sidebar/sidebar.component.scss, AGENTS.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md, AI_AGENT_CONTEXT.md
-State: Fixed sidebar submenu clipping, pinned `sidebar-tip` at bottom with content-only scrolling, added scroll-aware tip shadow, and split governance clearly (`AGENTS.md` = stable rules, `AI_AGENT_CONTEXT.md` = active context, archive for older notes).
+Changed: docs/reference/components/INPUTNUMBER.md, docs/reference/components/README.md, projects/ui-lib-custom/src/lib/input-number/input-number.component.ts, projects/demo/src/app/pages/input-number/input-number-demo.component.ts, projects/demo/src/app/pages/input-number/input-number-demo.component.html, projects/demo/src/app/pages/input-number/input-number-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: InputNumber: Prompt 8 complete. Fully implemented, tested, documented, and demoed. Next: Backlog follow-ups / v2 hardening only.
 Verification:
-- Sidebar behavior validated interactively in-session after iterative CSS/layout adjustments.
-Next step: Optional focused pass to keep AI context concise as new sessions are added.
+- Library build passed: `npx ng build ui-lib-custom`.
+- Tests passed: `npx jest input-number --coverage --runInBand --no-cache` (InputNumber coverage: 96.55% statements, 87.5% branches, 100% functions, 96.51% lines).
+- Lint passed: `npx eslint projects/ui-lib-custom/src/lib/input-number/`.
+- Demo serve command executed: `npx ng serve demo --no-open` (dev server compiled; existing local server remains on port 4200).
+- Route check passed: `curl -I http://localhost:4200/input-number` returned HTTP 200.
+Known issues / v2 considerations:
+- Pre-existing non-blocking watch items remain (Jest haste-map naming collision warning; demo SCSS budget warnings for `button` and `date-picker`).
+- Runtime/manual visual + SR announcement checks still recommended for full UX sign-off across all 17 InputNumber demo sections.
+Next step: Shift focus to queued backlog (`knip`, constants cleanup, overlay follow-ups) unless new InputNumber regressions appear.
 ```
 
 ```text
 Date: 2026-04-08
-Changed: projects/demo/src/app/pages/input-mask/input-mask-demo.component.ts, projects/demo/src/app/pages/input-mask/input-mask-demo.component.html, projects/demo/src/app/pages/input-mask/input-mask-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, projects/ui-lib-custom/src/lib/input-mask/input-mask.types.ts, projects/ui-lib-custom/test/entry-points.spec.ts, docs/reference/components/INPUTMASK.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
-State: Completed InputMask Prompt 7 (demo page) and Prompt 8 (final QA + docs). Added full InputMask demo page, wired route/sidebar, added docs, and verified entry-point coverage.
+Changed: projects/demo/src/app/pages/input-number/input-number-demo.component.ts, projects/demo/src/app/pages/input-number/input-number-demo.component.html, projects/demo/src/app/pages/input-number/input-number-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: InputNumber: Prompt 7 complete. Demo page with 17 scenarios. Next: Prompt 8 (documentation & final QA).
 Verification:
-- `npx ng build ui-lib-custom` (PASS)
-- `npx jest --testPathPatterns=input-mask` (PASS: 3 suites, 39 tests)
-- `npm run test:a11y -- --testPathPatterns=input-mask.a11y.spec.ts` (PASS: 1 suite, 2 tests)
-- `npm run build:demo` (PASS; pre-existing style budget warnings remain)
-Next step: Optional manual browser UX/a11y pass on `/input-mask` in demo.
+- Added `InputNumberDemoComponent` page with 17 sections covering numerals, formatting/locale/currency, prefix/suffix, spinner layouts, step/min-max, float-label, clear, sizes, states, filled, fluid, and reactive forms.
+- Added lazy route in `projects/demo/src/app/app.routes.ts` for `/input-number`.
+- Added sidebar form-navigation item in `projects/demo/src/app/layout/sidebar/sidebar.component.ts`.
+- Demo build passed: `npx ng build demo`.
+- Demo server route check responded with HTTP 200: `curl -I http://localhost:4200/input-number` (local server was already bound on port 4200).
+Next step: Prompt 8 documentation updates and final QA sweep.
 ```
 
 ```text
-Date: 2026-04-07
-Changed: projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts, AI_AGENT_CONTEXT.md
-State: Added InputMask accessibility-focused coverage for baseline axe compliance and disabled/readonly semantic reflection.
+Date: 2026-04-08
+Changed: projects/ui-lib-custom/input-number/ng-package.json, projects/ui-lib-custom/input-number/package.json, projects/ui-lib-custom/test/entry-points.spec.ts, projects/ui-lib-custom/src/lib/input-number/input-number.component.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: InputNumber: Prompt 6 complete. Secondary entry point `ui-lib-custom/input-number` wired and building. Next: Prompt 7 (demo page).
 Verification:
-- `npm run test:a11y -- --testPathPatterns=input-mask.a11y.spec.ts` (PASS: 1 suite, 2 tests)
-Next step: Continue with InputMask demo/docs integration and focused build/test verification.
+- Added secondary entry-point metadata files under `projects/ui-lib-custom/input-number/` (`ng-package.json`, `package.json`).
+- Updated entry-point import regression test in `projects/ui-lib-custom/test/entry-points.spec.ts` to include `ui-lib-custom/input-number`.
+- Verified `projects/ui-lib-custom/src/public-api.ts` does not re-export `input-number`.
+- Build command passed: `npx ng build ui-lib-custom` (includes `ui-lib-custom/input-number` entry point).
+- Targeted entry-point test passed: `npx jest projects/ui-lib-custom/test/entry-points.spec.ts --runInBand --no-cache`.
+Next step: Prompt 7 demo page integration for InputNumber.
 ```
+
+
+
+
 
 ---
 

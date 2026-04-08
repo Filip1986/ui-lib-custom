@@ -393,6 +393,57 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-input-padding-y` | `var(--uilib-input-padding-y-base, 1rem)` | Input vertical padding. |
 | `--uilib-input-min-height` | `var(--uilib-touch-size-min, 44px)` | Input min height. |
 
+## InputNumber
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-input-number-gap` | `var(--uilib-space-2, 0.5rem)` | Gap between input and spinner controls. |
+| `--uilib-input-number-border-width` | `var(--uilib-border-width, 1px)` | Wrapper border width. |
+| `--uilib-input-number-border-radius` | `var(--uilib-radius-md, 0.5rem)` | Wrapper border radius. |
+| `--uilib-input-number-bg` | `var(--uilib-input-bg, var(--uilib-surface, #ffffff))` | Input wrapper background. |
+| `--uilib-input-number-text` | `var(--uilib-input-text, var(--uilib-page-fg, #1f2933))` | Input text color. |
+| `--uilib-input-number-border-color` | `var(--uilib-input-border, var(--uilib-border, #d1d5db))` | Wrapper border color. |
+| `--uilib-input-number-border-color-hover` | `var(--uilib-input-border-hover, var(--uilib-input-number-border-color))` | Hover border color. |
+| `--uilib-input-number-border-color-focus` | `var(--uilib-input-border-focus, var(--uilib-color-primary-600, #1e88e5))` | Focus border color. |
+| `--uilib-input-number-focus-ring` | `0 0 0 var(--uilib-focus-ring-width, 2px) color-mix(in srgb, var(--uilib-input-number-border-color-focus) 28%, transparent)` | Focus ring shadow. |
+| `--uilib-input-number-placeholder-color` | `var(--uilib-input-placeholder, var(--uilib-muted, #6b7280))` | Placeholder color. |
+| `--uilib-input-number-prefix-color` | `var(--uilib-input-number-placeholder-color)` | Prefix text color. |
+| `--uilib-input-number-suffix-color` | `var(--uilib-input-number-placeholder-color)` | Suffix text color. |
+| `--uilib-input-number-filled-bg` | `var(--uilib-surface-alt, #f3f4f6)` | Filled mode background. |
+| `--uilib-input-number-invalid-border-color` | `var(--uilib-color-danger-600, #e53935)` | Invalid border color. |
+| `--uilib-input-number-disabled-opacity` | `var(--uilib-disabled-opacity, 0.6)` | Disabled host opacity. |
+| `--uilib-input-number-font-family` | `var(--uilib-font-ui, inherit)` | Font family. |
+| `--uilib-input-number-font-weight` | `var(--uilib-font-weight-400, 400)` | Font weight. |
+| `--uilib-input-number-font-size` | `var(--uilib-input-number-font-size-md)` | Active font size. |
+| `--uilib-input-number-font-size-sm` | `var(--uilib-font-size-sm, 0.875rem)` | Small size font. |
+| `--uilib-input-number-font-size-md` | `var(--uilib-font-size-md, 1rem)` | Medium size font. |
+| `--uilib-input-number-font-size-lg` | `var(--uilib-font-size-lg, 1.125rem)` | Large size font. |
+| `--uilib-input-number-input-height` | `var(--uilib-input-number-height-md)` | Active input height. |
+| `--uilib-input-number-height-sm` | `var(--uilib-size-9, 2.25rem)` | Small input height. |
+| `--uilib-input-number-height-md` | `var(--uilib-size-11, 2.75rem)` | Medium input height. |
+| `--uilib-input-number-height-lg` | `var(--uilib-size-12, 3.125rem)` | Large input height. |
+| `--uilib-input-number-padding-y` | `var(--uilib-input-number-padding-y-md)` | Active vertical padding. |
+| `--uilib-input-number-padding-x` | `var(--uilib-input-number-padding-x-md)` | Active horizontal padding. |
+| `--uilib-input-number-padding-y-sm` | `var(--uilib-space-1, 0.25rem)` | Small vertical padding. |
+| `--uilib-input-number-padding-y-md` | `var(--uilib-space-2, 0.5rem)` | Medium vertical padding. |
+| `--uilib-input-number-padding-y-lg` | `var(--uilib-space-3, 0.75rem)` | Large vertical padding. |
+| `--uilib-input-number-padding-x-sm` | `var(--uilib-space-2, 0.5rem)` | Small horizontal padding. |
+| `--uilib-input-number-padding-x-md` | `var(--uilib-space-3, 0.75rem)` | Medium horizontal padding. |
+| `--uilib-input-number-padding-x-lg` | `var(--uilib-space-4, 1rem)` | Large horizontal padding. |
+| `--uilib-input-number-button-width` | `var(--uilib-input-number-button-width-md)` | Active spinner button width. |
+| `--uilib-input-number-button-width-sm` | `var(--uilib-size-8, 2rem)` | Small spinner button width. |
+| `--uilib-input-number-button-width-md` | `var(--uilib-size-9, 2.25rem)` | Medium spinner button width. |
+| `--uilib-input-number-button-width-lg` | `var(--uilib-size-10, 2.5rem)` | Large spinner button width. |
+| `--uilib-input-number-button-bg` | `var(--uilib-surface-alt, var(--uilib-input-number-bg))` | Spinner button background. |
+| `--uilib-input-number-button-text` | `var(--uilib-input-number-text)` | Spinner button text color. |
+| `--uilib-input-number-button-border-color` | `var(--uilib-input-number-border-color)` | Spinner button border color. |
+| `--uilib-input-number-button-hover-background` | `color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 10%, var(--uilib-input-number-button-bg))` | Spinner hover background. |
+| `--uilib-input-number-button-active-background` | `color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 18%, var(--uilib-input-number-button-bg))` | Spinner active background. |
+| `--uilib-input-number-button-disabled-opacity` | `var(--uilib-disabled-opacity, 0.45)` | Spinner disabled opacity. |
+| `--uilib-input-number-clear-color` | `var(--uilib-input-number-placeholder-color)` | Clear button icon color. |
+| `--uilib-input-number-clear-size` | `var(--uilib-font-size-base, 1rem)` | Clear button icon size. |
+| `--uilib-input-number-clear-offset` | `var(--uilib-space-2, 0.5rem)` | Clear button offset from edge. |
+
 ## InputMask
 
 | Variable | Default | Description |
