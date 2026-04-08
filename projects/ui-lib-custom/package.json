@@ -42,10 +42,8 @@
       "esm": "./esm2022/icon-field/index.mjs"
     },
     "./input-group": {
-      "types": "./input-group/index.d.ts",
       "esm2022": "./esm2022/input-group/index.mjs",
-      "esm": "./esm2022/input-group/index.mjs",
-      "default": "./fesm2022/ui-lib-custom-input-group.mjs"
+      "esm": "./esm2022/input-group/index.mjs"
     },
     "./float-label": {
       "esm2022": "./esm2022/float-label/index.mjs",
@@ -58,6 +56,10 @@
     "./date-picker": {
       "esm2022": "./esm2022/date-picker/index.mjs",
       "esm": "./esm2022/date-picker/index.mjs"
+    },
+    "./input-mask": {
+      "esm2022": "./esm2022/input-mask/index.mjs",
+      "esm": "./esm2022/input-mask/index.mjs"
     },
     "./themes/themes.css": {
       "default": "./themes/themes.css"
@@ -85,6 +87,9 @@
       ],
       "date-picker": [
         "./date-picker/index.d.ts"
+      ],
+      "input-mask": [
+        "./input-mask/index.d.ts"
       ],
       "testing": [
         "./testing/index.d.ts"

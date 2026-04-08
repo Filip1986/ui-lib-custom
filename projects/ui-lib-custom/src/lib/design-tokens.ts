@@ -1183,6 +1183,96 @@ export const DATEPICKER_TOKENS: Readonly<DatePickerTokens> = {
 export type DatePickerTokenKey = keyof typeof DATEPICKER_TOKENS;
 
 // ============================================================================
+// INPUT MASK TOKENS
+// ============================================================================
+
+export type InputMaskVariant = 'material' | 'bootstrap' | 'minimal';
+export type InputMaskSize = 'sm' | 'md' | 'lg';
+
+export type InputMaskTokens = {
+  input: {
+    paddingY: Record<InputMaskSize, string>;
+    paddingX: Record<InputMaskSize, string>;
+    fontSize: Record<InputMaskSize, string>;
+    borderRadius: string;
+    borderColor: string;
+    bg: string;
+    textColor: string;
+    placeholderColor: string;
+    focusBorderColor: string;
+    focusRing: string;
+    invalidBorderColor: string;
+    filledBg: string;
+    disabledOpacity: string;
+  };
+  icon: {
+    color: string;
+    size: string;
+  };
+  variants: Record<
+    InputMaskVariant,
+    {
+      borderRadius: string;
+      borderWidth: string;
+      minimalBg: string;
+    }
+  >;
+};
+
+export const INPUTMASK_TOKENS: Readonly<InputMaskTokens> = {
+  input: {
+    paddingY: {
+      sm: SPACING_TOKENS[1],
+      md: SPACING_TOKENS[2],
+      lg: SPACING_TOKENS[3],
+    },
+    paddingX: {
+      sm: SPACING_TOKENS[2],
+      md: SPACING_TOKENS[3],
+      lg: SPACING_TOKENS[4],
+    },
+    fontSize: {
+      sm: FONT_SIZES.sm,
+      md: FONT_SIZES.base,
+      lg: FONT_SIZES.lg,
+    },
+    borderRadius: BORDER_RADIUS.lg,
+    borderColor: COLOR_NEUTRAL[300],
+    bg: COLOR_NEUTRAL.white,
+    textColor: COLOR_NEUTRAL[900],
+    placeholderColor: COLOR_NEUTRAL[600],
+    focusBorderColor: COLOR_PRIMARY[600],
+    focusRing: `0 0 0 0.1875rem color-mix(in srgb, ${COLOR_PRIMARY[600]} 28%, transparent)`,
+    invalidBorderColor: COLOR_DANGER[600],
+    filledBg: `color-mix(in srgb, ${COLOR_NEUTRAL.white} 84%, ${COLOR_NEUTRAL.black} 4%)`,
+    disabledOpacity: '0.6',
+  },
+  icon: {
+    color: COLOR_NEUTRAL[600],
+    size: FONT_SIZES.base,
+  },
+  variants: {
+    material: {
+      borderRadius: BORDER_RADIUS.none,
+      borderWidth: BORDER_WIDTH[2],
+      minimalBg: COLOR_NEUTRAL.white,
+    },
+    bootstrap: {
+      borderRadius: BORDER_RADIUS.lg,
+      borderWidth: BORDER_WIDTH[1],
+      minimalBg: COLOR_NEUTRAL.white,
+    },
+    minimal: {
+      borderRadius: BORDER_RADIUS.md,
+      borderWidth: BORDER_WIDTH[0],
+      minimalBg: `color-mix(in srgb, ${COLOR_NEUTRAL.white} 88%, ${COLOR_NEUTRAL.black} 3%)`,
+    },
+  },
+};
+
+export type InputMaskTokenKey = keyof typeof INPUTMASK_TOKENS;
+
+// ============================================================================
 // EDITOR TOKENS
 // ============================================================================
 

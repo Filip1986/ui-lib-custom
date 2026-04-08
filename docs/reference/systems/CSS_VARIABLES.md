@@ -393,6 +393,26 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-input-padding-y` | `var(--uilib-input-padding-y-base, 1rem)` | Input vertical padding. |
 | `--uilib-input-min-height` | `var(--uilib-touch-size-min, 44px)` | Input min height. |
 
+## InputMask
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-input-mask-padding-y` | `var(--uilib-space-2, 0.5rem)` | Vertical input padding. |
+| `--uilib-input-mask-padding-x` | `var(--uilib-space-3, 0.75rem)` | Horizontal input padding. |
+| `--uilib-input-mask-font-size` | `var(--uilib-font-size-base, 1rem)` | Input font size. |
+| `--uilib-input-mask-border-radius` | `var(--uilib-radius-md, 0.5rem)` | Input border radius. |
+| `--uilib-input-mask-border-color` | `var(--uilib-border, currentColor)` | Input border color. |
+| `--uilib-input-mask-bg` | `var(--uilib-surface, transparent)` | Input background. |
+| `--uilib-input-mask-text-color` | `var(--uilib-page-fg, currentColor)` | Input text color. |
+| `--uilib-input-mask-placeholder-color` | `var(--uilib-muted, currentColor)` | Placeholder text color. |
+| `--uilib-input-mask-focus-border-color` | `var(--uilib-color-primary-600, currentColor)` | Focus border color. |
+| `--uilib-input-mask-focus-ring` | `0 0 0 0.1875rem color-mix(in srgb, var(--uilib-input-mask-focus-border-color) 28%, transparent)` | Focus ring shadow. |
+| `--uilib-input-mask-invalid-border-color` | `var(--uilib-color-danger-600, currentColor)` | Invalid-state border color. |
+| `--uilib-input-mask-filled-bg` | `color-mix(in srgb, var(--uilib-input-mask-bg) 84%, var(--uilib-color-neutral-900, currentColor) 4%)` | Filled appearance background. |
+| `--uilib-input-mask-icon-color` | `var(--uilib-muted, currentColor)` | Clear icon color. |
+| `--uilib-input-mask-clear-icon-size` | `1rem` | Clear icon size. |
+| `--uilib-input-mask-disabled-opacity` | `0.6` | Disabled host opacity. |
+
 ## Login
 
 | Variable | Default | Description |

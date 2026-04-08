@@ -246,6 +246,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### InputMask
+**Files:**
+- [INPUTMASK.md](INPUTMASK.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/input-mask)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/input-mask/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -313,6 +325,7 @@ Each component should have two documentation files:
 | Editor | Native rich-text editing with toolbar | 3 | - | 3 | ✅ Complete |
 | IconField | Input icon layout wrapper and icon container | - | - | Inherits input sizes | ✅ Complete |
 | InputGroup | Grouped control/addon layout wrapper pair | - | - | Inherits projected control sizes | ✅ Complete |
+| InputMask | Structured masked input for fixed-format values | - | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 
 ---
 

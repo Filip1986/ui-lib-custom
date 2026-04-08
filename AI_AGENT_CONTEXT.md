@@ -55,8 +55,9 @@ project bootstrapping and live theme demonstrations during client meetings.
 | Layout (Stack/Inline/Grid/Container) | ✅ Bulletproof | `ui-lib-custom/layout` | ❌ Missing | Needs docs per primitive                   |
 | Alert           | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ Partial        |                                                    |
 | ThemeEditor     | ✅ Working      | `ui-lib-custom/theme`            | ✅ README          | Demo sidebar, not a consumer component             |
+| InputMask       | ✅ Complete     | `ui-lib-custom/input-mask`       | ✅ Complete      | Mask input component with customizable patterns    |
 
-**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, input-group, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon-field, icon, layout, theme, tokens  
+**Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, input-group, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon-field, icon, layout, theme, tokens, input-mask  
 **Secondary entry points pending:** icon-button, alert
 
 ---
@@ -603,7 +604,7 @@ Verification:
 - `npm.cmd test -- --testPathPatterns='entry-points.spec.ts'` (PASS: 1 suite, 21 tests)
   - Confirms `ui-lib-custom/input-group` import still resolves and exports `InputGroupComponent` + `InputGroupAddonComponent`.
 Next step: Add focused InputGroup unit coverage for structural class/host rendering and wrapper composition scenarios (addon+control ordering, FloatLabel/IconField nesting) before docs/demo integration.
-````
+```
 
 ```
 Date: 2026-04-03
@@ -627,3 +628,94 @@ Verification:
 Next step: Optional manual browser QA on `/input-group` in demo (`npm.cmd run serve:demo`) to visually confirm spacing and border stitching across sections.
 ```
 
+```
+Date: 2026-04-06
+Changed: docs/research/INPUTMASK_RESEARCH.md, AI_AGENT_CONTEXT.md
+State: Completed InputMask Prompt 1 research and gap analysis from local `primeng@19.1.4` package artifacts (`inputmask.d.ts`, `inputmask.interface.d.ts`, `primeng-inputmask.mjs`, `inputmaskstyle.d.ts`). Documented full PrimeNG InputMask feature inventory (inputs/defaults/outputs/CVA/mask engine/caret/Android handling/optional `?`/`unmask`/`autoClear`/`keepBuffer`/`slotChar`/clear icon/completion/filled/characterPattern), mapped intentional `ui-lib-custom` divergences (`size`, `filled` semantics, signal APIs, no PrimeTemplate/BaseComponent/style props), and captured reusable implementation patterns from existing Input/FloatLabel/IconField components.
+Verification:
+- `npm.cmd pack primeng@19 --pack-destination D:/Work/Personal/Github/ui-lib-custom/.tmp/primeng19`
+- PrimeNG artifact inspection files:
+  - `.tmp/primeng19/package/inputmask/inputmask.d.ts`
+  - `.tmp/primeng19/package/inputmask/inputmask.interface.d.ts`
+  - `.tmp/primeng19/package/fesm2022/primeng-inputmask.mjs`
+  - `.tmp/primeng19/package/inputmask/style/inputmaskstyle.d.ts`
+Next step: Start Prompt 2 for `ui-lib-custom/input-mask` API/type design and scaffold a standalone OnPush `ViewEncapsulation.None` component with signal inputs/model/outputs, then port the mask engine with explicit typed methods and caret-safe editing paths.
+```
+
+```
+Date: 2026-04-07
+Changed: projects/ui-lib-custom/src/lib/input-mask/input-mask.types.ts, projects/ui-lib-custom/src/lib/input-mask/mask-engine.ts, projects/ui-lib-custom/src/lib/input-mask/mask-engine.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed InputMask Prompt 2 foundations. Added typed InputMask contracts/defaults (`INPUT_MASK_DEFAULTS`, `InputMaskSize`, `MaskDefinitions`, `MaskTestEntry`, `Caret`, `InputMaskCompleteEvent`), implemented pure `MaskEngine` (mask parsing, optional `?` handling, placeholder/buffer model, `seekNext`/`seekPrev`, `shiftL`/`shiftR`, `clearBuffer`, `checkVal`, completion detection, unmasked extraction, reset), and added focused Jest coverage for parsing, optional segments, slot chars, shift behavior around literals, validation/completion, keepBuffer behavior, Cyrillic patterns, and edge masks.
+Verification:
+- `npm.cmd test -- --testPathPatterns='mask-engine.spec.ts'` (PASS: 1 suite, 11 tests)
+- `get_errors` on new files: no blocking errors; remaining diagnostics are non-blocking unused-symbol warnings expected before component integration.
+Next step: Start Prompt 3 component scaffold for `ui-lib-custom/input-mask` and wire DOM caret management/CVA events to `MaskEngine` while preserving `sm|md|lg`, `variant`, and `filled` conventions.
+```
+
+```
+Date: 2026-04-07
+Changed: projects/ui-lib-custom/input-mask/ng-package.json, projects/ui-lib-custom/input-mask/package.json, projects/ui-lib-custom/src/lib/input-mask/public-api.ts, projects/ui-lib-custom/src/lib/input-mask/index.ts, projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts, projects/ui-lib-custom/package.json, AI_AGENT_CONTEXT.md
+State: Completed InputMask Prompt 3 scaffold and secondary entry-point setup. Added `ui-lib-custom/input-mask` manifests pointing to `../src/lib/input-mask/public-api.ts`, created source public API exports (`InputMaskComponent`, InputMask types, `MaskEngine`), and scaffolded standalone `InputMaskComponent` with OnPush + `ViewEncapsulation.None`, CVA provider, signal input/output surface, required `viewChild` reference, host class bindings (including FloatLabel integration classes), inline template, and TODO stub handlers for Prompt 4 logic.
+Verification:
+- `npx ng build ui-lib-custom` (PASS)
+- Build includes new entry point: `ui-lib-custom/input-mask`
+- Note: ng-packagr reports existing non-blocking export-condition warnings for `./input-group` and `./input-mask` (`types`/`default` overridden by generated manifest).
+Next step: Implement Prompt 4 InputMask behavior by wiring caret management, key/input/paste flows, Android handling, blur autoClear logic, and CVA model updates against `MaskEngine`.
+```
+
+```
+Date: 2026-04-07
+Changed: projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts, AI_AGENT_CONTEXT.md
+State: Completed InputMask Prompt 4 core implementation. Replaced scaffold stubs with full mask-engine integration and event flow: reactive `MaskEngine` recreation via `effect()` on `mask/slotChar/characterPattern`, Android Chrome detection in `ngAfterViewInit`, CVA wiring (`writeValue`, `registerOnChange`, `registerOnTouched`, `setDisabledState`), caret helpers (`caret`, `writeBuffer`), model/filled synchronization (`updateModel`, `updateFilledState`), key handlers (Backspace/Delete/Escape/Enter + printable insert), input/paste normalization paths (standard + Android timing workaround), completion/clear/focus outputs, and FloatLabel state classes (`uilib-inputwrapper-filled`/`focus`).
+Verification:
+- `npm.cmd exec -- eslint "projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts" --max-warnings 0` (PASS)
+- `npx ng build ui-lib-custom` (PASS)
+- Note: build still reports pre-existing/non-blocking ng-packagr export-condition warnings for `./input-group` and `./input-mask` (`types`/`default` overridden by generated manifest).
+Next step: Add focused unit tests for InputMask component behavior (caret paths, delete/insert flows, CVA modes, blur autoClear, Android branch) and then integrate demo/docs updates.
+```
+
+```
+Date: 2026-04-07
+Changed: projects/ui-lib-custom/src/lib/input-mask/input-mask.component.scss, projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts, projects/ui-lib-custom/src/lib/design-tokens.ts, docs/reference/systems/CSS_VARIABLES.md, AI_AGENT_CONTEXT.md
+State: Completed InputMask Prompt 5 styling and tokenization pass. Added full `input-mask.component.scss` with tokenized host/input/size/filled/invalid/disabled/clear-icon styles, fluid layout support, FloatLabel-compatible wrapper states, and Material/Bootstrap/Minimal variant scopes using `.uilib-variant-*` selectors. Wired stylesheet via component `styleUrl`, registered centralized `INPUTMASK_TOKENS` + `InputMaskTokenKey` in `design-tokens.ts`, and documented the InputMask CSS variable contract in `CSS_VARIABLES.md`.
+Verification:
+- `npx ng build ui-lib-custom` (PASS)
+- Build includes `ui-lib-custom/input-mask` entry point with no export-condition manifest warnings after prior `package.json` cleanup.
+Next step: Implement Prompt 6 component tests (unit + a11y-focused behavior) for InputMask caret/editing/CVA/Android edge cases and clear-icon interactions.
+```
+
+```
+Date: 2026-04-07
+Changed: projects/ui-lib-custom/src/lib/input-mask/input-mask.component.spec.ts, AI_AGENT_CONTEXT.md
+State: Completed InputMask Prompt 6 component unit test coverage. Added comprehensive zoneless Jest spec coverage for rendering/host classes, mask formatting flows, caret/backspace/delete behavior, autoClear/keepBuffer/unmask modes, ngModel and reactive forms CVA integration, output events (`completed`, `focused`, `blurred`, `cleared`), clear-icon visibility/reset behavior, runtime mask switching, FloatLabel host-class integration, and standard input/paste normalization paths.
+Verification:
+- `npx jest --testPathPatterns=input-mask` (PASS: 2 suites, 37 tests)
+Next step: Add InputMask accessibility-focused specs (`input-mask.a11y.spec.ts`) and then proceed with demo/docs integration for the component.
+```
+
+```
+Date: 2026-04-07
+Changed: projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts, AI_AGENT_CONTEXT.md
+State: Added InputMask accessibility-focused coverage. Created `input-mask.a11y.spec.ts` with zoneless host scenarios validating baseline axe compliance for a labeled mask input and explicit native semantic reflection for disabled/readonly states.
+Verification:
+- `npm run test:a11y -- --testPathPatterns=input-mask.a11y.spec.ts` (PASS: 1 suite, 2 tests)
+- Note: Jest reports existing non-blocking haste-map naming collision warning for root `package.json` and `projects/ui-lib-custom/package.json`.
+Next step: Continue with InputMask demo/docs integration (component reference page + demo route/sections) and then run a focused build/test sweep.
+```
+
+```
+Date: 2026-04-08
+Changed: projects/demo/src/app/pages/input-mask/input-mask-demo.component.ts, projects/demo/src/app/pages/input-mask/input-mask-demo.component.html, projects/demo/src/app/pages/input-mask/input-mask-demo.component.scss, projects/demo/src/app/app.routes.ts, projects/demo/src/app/layout/sidebar/sidebar.component.ts, projects/ui-lib-custom/src/lib/input-mask/input-mask.types.ts, projects/ui-lib-custom/test/entry-points.spec.ts, docs/reference/components/INPUTMASK.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md
+State: Completed InputMask Prompt 7 (demo page) and Prompt 8 (final QA + docs). Added full InputMask demo page with 13 sections (basic, formats, optional, slot char, unmask, filled, FloatLabel, IftaLabel, sizes, fluid, disabled, invalid, reactive forms), wired lazy route `/input-mask`, added sidebar nav entry, created InputMask component reference doc, updated components docs index entry, and extended entry-point regression tests to assert `ui-lib-custom/input-mask` exports.
+Verification:
+- `npx ng build ui-lib-custom` (PASS; includes `ui-lib-custom/input-mask` entry)
+- `npx jest --testPathPatterns=input-mask` (PASS: 3 suites, 39 tests)
+- `npx jest --testPathPatterns=mask-engine` (PASS: 1 suite, 11 tests)
+- `npm run test:a11y -- --testPathPatterns=input-mask.a11y.spec.ts` (PASS: 1 suite, 2 tests)
+- `npm.cmd test -- --testPathPatterns='entry-points.spec.ts'` (PASS: 1 suite, 22 tests)
+- `npm.cmd exec -- eslint --no-warn-ignored "projects/ui-lib-custom/src/lib/input-mask/*.ts" "projects/demo/src/app/pages/input-mask/*.{ts,html}" "projects/demo/src/app/app.routes.ts" "projects/demo/src/app/layout/sidebar/sidebar.component.ts" --max-warnings 0` (PASS)
+- `npm run build:demo` (PASS; existing non-blocking style budget warnings for `button.scss` and `date-picker.scss` remain pre-existing)
+- `ng serve demo --no-open --port 4300` startup verification (PASS in watch mode; local URL printed)
+- Entry-point checks: `projects/ui-lib-custom/package.json` contains `./input-mask`; no cross-entry-point relative imports found in InputMask source files (only local test util import in `.a11y.spec.ts`).
+Next step: InputMask delivery is complete; optional next step is manual browser UX/a11y pass on `/input-mask` in demo.
+```

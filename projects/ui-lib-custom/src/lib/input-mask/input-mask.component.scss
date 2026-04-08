@@ -1,0 +1,137 @@
+uilib-input-mask {
+  --uilib-input-mask-padding-y: var(--uilib-space-2, 0.5rem);
+  --uilib-input-mask-padding-x: var(--uilib-space-3, 0.75rem);
+  --uilib-input-mask-font-size: var(--uilib-font-size-base, 1rem);
+  --uilib-input-mask-border-radius: var(--uilib-radius-md, 0.5rem);
+  --uilib-input-mask-border-color: var(--uilib-border, currentColor);
+  --uilib-input-mask-bg: var(--uilib-surface, transparent);
+  --uilib-input-mask-text-color: var(--uilib-page-fg, currentColor);
+  --uilib-input-mask-placeholder-color: var(--uilib-muted, currentColor);
+  --uilib-input-mask-focus-border-color: var(--uilib-color-primary-600, currentColor);
+  --uilib-input-mask-focus-ring: 0 0 0 0.1875rem
+    color-mix(in srgb, var(--uilib-input-mask-focus-border-color) 28%, transparent);
+  --uilib-input-mask-invalid-border-color: var(--uilib-color-danger-600, currentColor);
+  --uilib-input-mask-icon-color: var(--uilib-muted, currentColor);
+  --uilib-input-mask-filled-bg: color-mix(
+    in srgb,
+    var(--uilib-input-mask-bg) 84%,
+    var(--uilib-color-neutral-900, currentColor) 4%
+  );
+  --uilib-input-mask-disabled-opacity: 0.6;
+  --uilib-input-mask-clear-icon-size: 1rem;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+uilib-input-mask.uilib-input-mask-fluid {
+  display: flex;
+  width: 100%;
+}
+
+uilib-input-mask input {
+  appearance: none;
+  border: 0.0625rem solid var(--uilib-input-mask-border-color);
+  border-radius: var(--uilib-input-mask-border-radius);
+  background: var(--uilib-input-mask-bg);
+  color: var(--uilib-input-mask-text-color);
+  font-size: var(--uilib-input-mask-font-size);
+  line-height: var(--uilib-line-height-normal, 1.5);
+  width: 100%;
+  min-inline-size: 0;
+  padding: var(--uilib-input-mask-padding-y) var(--uilib-input-mask-padding-x);
+  transition:
+    border-color var(--uilib-transition-fast, 150ms ease),
+    box-shadow var(--uilib-transition-fast, 150ms ease),
+    background-color var(--uilib-transition-fast, 150ms ease);
+}
+
+uilib-input-mask input::placeholder {
+  color: var(--uilib-input-mask-placeholder-color);
+}
+
+uilib-input-mask input:focus-visible {
+  outline: none;
+  border-color: var(--uilib-input-mask-focus-border-color);
+  box-shadow: var(--uilib-input-mask-focus-ring);
+}
+
+uilib-input-mask.uilib-input-mask-sm {
+  --uilib-input-mask-padding-y: var(--uilib-space-1, 0.25rem);
+  --uilib-input-mask-padding-x: var(--uilib-space-2, 0.5rem);
+  --uilib-input-mask-font-size: var(--uilib-font-size-sm, 0.875rem);
+}
+
+uilib-input-mask.uilib-input-mask-lg {
+  --uilib-input-mask-padding-y: var(--uilib-space-3, 0.75rem);
+  --uilib-input-mask-padding-x: var(--uilib-space-4, 1rem);
+  --uilib-input-mask-font-size: var(--uilib-font-size-lg, 1.125rem);
+}
+
+uilib-input-mask.uilib-input-mask-filled input {
+  background: var(--uilib-input-mask-filled-bg);
+  border-color: transparent;
+}
+
+uilib-input-mask.uilib-input-mask-invalid input {
+  border-color: var(--uilib-input-mask-invalid-border-color);
+}
+
+uilib-input-mask .uilib-input-mask-clear-icon {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: var(--uilib-input-mask-padding-x);
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--uilib-input-mask-icon-color);
+  line-height: 1;
+  font-size: var(--uilib-input-mask-clear-icon-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+uilib-input-mask:has(.uilib-input-mask-clear-icon) input {
+  padding-inline-end: calc(
+    var(--uilib-input-mask-padding-x) * 2 + var(--uilib-input-mask-clear-icon-size)
+  );
+}
+
+uilib-input-mask.uilib-input-mask-disabled {
+  opacity: var(--uilib-input-mask-disabled-opacity);
+}
+
+uilib-input-mask.uilib-input-mask-disabled .uilib-input-mask-clear-icon {
+  pointer-events: none;
+}
+
+.uilib-variant-material uilib-input-mask input {
+  border-width: 0 0 0.125rem;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.uilib-variant-material uilib-input-mask.uilib-inputwrapper-focus::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 0.125rem;
+  background: var(--uilib-input-mask-focus-border-color);
+}
+
+.uilib-variant-bootstrap uilib-input-mask input {
+  border-width: 0.0625rem;
+  border-radius: var(--uilib-input-mask-border-radius);
+}
+
+.uilib-variant-minimal uilib-input-mask input {
+  border-color: transparent;
+  background: color-mix(
+    in srgb,
+    var(--uilib-input-mask-bg) 88%,
+    var(--uilib-color-neutral-900, currentColor) 3%
+  );
+  box-shadow: none;
+}

@@ -19,6 +19,7 @@ import type * as UiLibSelectButton from 'ui-lib-custom/select-button';
 import type * as UiLibTabs from 'ui-lib-custom/tabs';
 import type * as UiLibTheme from 'ui-lib-custom/theme';
 import type * as UiLibTokens from 'ui-lib-custom/tokens';
+import type * as UiLibInputMask from 'ui-lib-custom/input-mask';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -127,5 +128,11 @@ describe('Secondary Entry Points', (): void => {
   it('should import from tokens', async (): Promise<void> => {
     const mod: typeof UiLibTokens = await import('ui-lib-custom/tokens');
     expect(mod.SPACING_TOKENS).toBeDefined();
+  });
+
+  it('should import from input-mask', async (): Promise<void> => {
+    const mod: typeof UiLibInputMask = await import('ui-lib-custom/input-mask');
+    expect(mod.InputMaskComponent).toBeDefined();
+    expect(mod.MaskEngine).toBeDefined();
   });
 });

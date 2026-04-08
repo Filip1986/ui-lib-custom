@@ -201,6 +201,14 @@ export const routes: Routes = [
       ),
     title: 'InputGroup - UI Components Library',
   },
+  {
+    path: 'input-mask',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/input-mask/input-mask-demo.component').then(
+        (m: { InputMaskDemoComponent: Type<unknown> }): Type<unknown> => m.InputMaskDemoComponent
+      ),
+    title: 'InputMask - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];
