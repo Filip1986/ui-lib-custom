@@ -30,32 +30,32 @@ project bootstrapping and live theme demonstrations during client meetings.
 
 ## Component Inventory
 
-| Component       | Status         | Secondary Entry Point            | Doc Status        | Notes                                              |
-|-----------------|----------------|----------------------------------|-------------------|----------------------------------------------------|
-| Button          | ✅ Bulletproof  | `ui-lib-custom/button`           | ✅ Complete        |                                                    |
-| Card            | ✅ Bulletproof  | `ui-lib-custom/card`             | ⚠️ README only    | Needs API + implementation docs                    |
-| Badge           | ✅ Bulletproof  | `ui-lib-custom/badge`            | ✅ Complete        |                                                    |
-| Accordion       | ✅ Bulletproof  | `ui-lib-custom/accordion`        | ✅ Complete        |                                                    |
-| Tabs            | ✅ Bulletproof  | `ui-lib-custom/tabs`             | ✅ Complete        |                                                    |
-| Dialog          | ✅ Complete     | `ui-lib-custom/dialog`           | ✅ Complete        | v1 shipped with demo/tests/docs; re-exported in primary barrel for backward compat |
-| Input           | ✅ Bulletproof  | `ui-lib-custom/input`            | ❌ Missing         | Needs API + implementation docs                    |
-| Select          | ✅ Bulletproof  | `ui-lib-custom/select`           | ❌ Missing         | Needs API + implementation docs                    |
-| InputGroup      | ✅ Complete     | `ui-lib-custom/input-group`      | ✅ Complete        | Pair: InputGroupComponent + InputGroupAddonComponent |
-| AutoComplete    | ✅ Complete     | `ui-lib-custom/autocomplete`     | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
-| CascadeSelect   | ✅ Complete     | `ui-lib-custom/cascade-select`   | ✅ Complete        | Prompt 3-8 delivered; exported from secondary entry + primary API |
-| ColorPicker     | ✅ Complete     | `ui-lib-custom/color-picker`     | ✅ Complete        | Prompt 1-6 delivered; secondary entry point + demo/docs/tests integrated |
-| DatePicker      | ✅ Complete     | `ui-lib-custom/date-picker`      | ✅ Complete        | Prompt 1-12 delivered; secondary entry point + demo/docs/tests integrated |
-| Editor          | ✅ Complete     | `ui-lib-custom/editor`           | ✅ Complete        | Prompt 1-8 delivered; secondary entry + demo/docs/tests + final QA complete |
-| FloatLabel      | ✅ Complete     | `ui-lib-custom/float-label`      | ✅ Complete        | Prompt 2-5 delivered; CSS-driven wrapper component |
-| IconField       | ✅ Complete     | `ui-lib-custom/icon-field`       | ✅ Complete        | Prompt 1-5 delivered; secondary entry + demo/docs/tests integrated |
-| Checkbox        | ✅ Bulletproof  | `ui-lib-custom/checkbox`         | ✅ Complete        | API + implementation docs added                    |
-| SelectButton    | ✅ Bulletproof  | `ui-lib-custom/select-button`    | ✅ Complete        | Optional: consolidate supplemental API/Research    |
-| Icon            | ✅ Bulletproof  | `ui-lib-custom/icon`             | ⚠️ API only       | Needs implementation doc                           |
-| IconButton      | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ API only       | Needs implementation doc                           |
-| Layout (Stack/Inline/Grid/Container) | ✅ Bulletproof | `ui-lib-custom/layout` | ❌ Missing | Needs docs per primitive                   |
-| Alert           | ✅ Bulletproof  | *(pending entry point)*          | ⚠️ Partial        |                                                    |
-| ThemeEditor     | ✅ Working      | `ui-lib-custom/theme`            | ✅ README          | Demo sidebar, not a consumer component             |
-| InputMask       | ✅ Complete     | `ui-lib-custom/input-mask`       | ✅ Complete      | Mask input component with customizable patterns    |
+| Component                            | Status           | Secondary Entry Point            | Doc Status          | Notes                                                                              |
+|--------------------------------------|------------------|----------------------------------|---------------------|------------------------------------------------------------------------------------|
+| Button                               | ✅ Bulletproof    | `ui-lib-custom/button`           | ✅ Complete          |                                                                                    |
+| Card                                 | ✅ Bulletproof    | `ui-lib-custom/card`             | ⚠️ README only      | Needs API + implementation docs                                                    |
+| Badge                                | ✅ Bulletproof    | `ui-lib-custom/badge`            | ✅ Complete          |                                                                                    |
+| Accordion                            | ✅ Bulletproof    | `ui-lib-custom/accordion`        | ✅ Complete          |                                                                                    |
+| Tabs                                 | ✅ Bulletproof    | `ui-lib-custom/tabs`             | ✅ Complete          |                                                                                    |
+| Dialog                               | ✅ Complete       | `ui-lib-custom/dialog`           | ✅ Complete          | v1 shipped with demo/tests/docs; re-exported in primary barrel for backward compat |
+| Input                                | ✅ Bulletproof    | `ui-lib-custom/input`            | ❌ Missing           | Needs API + implementation docs                                                    |
+| Select                               | ✅ Bulletproof    | `ui-lib-custom/select`           | ❌ Missing           | Needs API + implementation docs                                                    |
+| InputGroup                           | ✅ Complete       | `ui-lib-custom/input-group`      | ✅ Complete          | Pair: InputGroupComponent + InputGroupAddonComponent                               |
+| AutoComplete                         | ✅ Complete       | `ui-lib-custom/autocomplete`     | ✅ Complete          | Prompt 3-8 delivered; exported from secondary entry + primary API                  |
+| CascadeSelect                        | ✅ Complete       | `ui-lib-custom/cascade-select`   | ✅ Complete          | Prompt 3-8 delivered; exported from secondary entry + primary API                  |
+| ColorPicker                          | ✅ Complete       | `ui-lib-custom/color-picker`     | ✅ Complete          | Prompt 1-6 delivered; secondary entry point + demo/docs/tests integrated           |
+| DatePicker                           | ✅ Complete       | `ui-lib-custom/date-picker`      | ✅ Complete          | Prompt 1-12 delivered; secondary entry point + demo/docs/tests integrated          |
+| Editor                               | ✅ Complete       | `ui-lib-custom/editor`           | ✅ Complete          | Prompt 1-8 delivered; secondary entry + demo/docs/tests + final QA complete        |
+| FloatLabel                           | ✅ Complete       | `ui-lib-custom/float-label`      | ✅ Complete          | Prompt 2-5 delivered; CSS-driven wrapper component                                 |
+| IconField                            | ✅ Complete       | `ui-lib-custom/icon-field`       | ✅ Complete          | Prompt 1-5 delivered; secondary entry + demo/docs/tests integrated                 |
+| Checkbox                             | ✅ Bulletproof    | `ui-lib-custom/checkbox`         | ✅ Complete          | API + implementation docs added                                                    |
+| SelectButton                         | ✅ Bulletproof    | `ui-lib-custom/select-button`    | ✅ Complete          | Optional: consolidate supplemental API/Research                                    |
+| Icon                                 | ✅ Bulletproof    | `ui-lib-custom/icon`             | ⚠️ API only         | Needs implementation doc                                                           |
+| IconButton                           | ✅ Bulletproof    | *(pending entry point)*          | ⚠️ API only         | Needs implementation doc                                                           |
+| Layout (Stack/Inline/Grid/Container) | ✅ Bulletproof    | `ui-lib-custom/layout`           | ❌ Missing           | Needs docs per primitive                                                           |
+| Alert                                | ✅ Bulletproof    | *(pending entry point)*          | ⚠️ Partial          |                                                                                    |
+| ThemeEditor                          | ✅ Working        | `ui-lib-custom/theme`            | ✅ README            | Demo sidebar, not a consumer component                                             |
+| InputMask                            | ✅ Complete       | `ui-lib-custom/input-mask`       | ✅ Complete          | Mask input component with customizable patterns                                    |
 
 **Secondary entry points implemented:** button, badge, accordion, tabs, dialog, input, input-group, select-button, core, card, checkbox, select, autocomplete, cascade-select, color-picker, date-picker, editor, float-label, icon-field, icon, layout, theme, tokens, input-mask  
 **Secondary entry points pending:** icon-button, alert
@@ -64,8 +64,8 @@ project bootstrapping and live theme demonstrations during client meetings.
 
 ## Critical File Map
 
-| What                              | Where                                                                  |
-|-----------------------------------|------------------------------------------------------------------------|
+| What                              | Where                                                                 |
+|-----------------------------------|-----------------------------------------------------------------------|
 | Component source                  | `projects/ui-lib-custom/src/lib/<component>/`                         |
 | Primary public API barrel         | `projects/ui-lib-custom/src/public-api.ts`                            |
 | Design tokens (source of truth)   | `projects/ui-lib-custom/src/lib/design-tokens.ts`                     |

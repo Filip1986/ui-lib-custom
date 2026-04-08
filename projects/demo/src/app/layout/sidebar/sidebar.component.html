@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <div class="sidebar-content">
+  <div class="sidebar-content" (scroll)="onSidebarScroll($event)">
     <nav class="sidebar-nav">
       <ul class="nav-list">
         @for (item of menuItems(); track item.label) {
@@ -51,7 +51,7 @@
       </ul>
     </nav>
   </div>
-  <div class="sidebar-tip">
+  <div class="sidebar-tip" [class.scrolled]="isContentScrolled()">
     <i class="pi pi-moon"></i>
     Toggle theme from the topbar.
   </div>

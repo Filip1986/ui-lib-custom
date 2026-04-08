@@ -24,6 +24,7 @@ export interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
+  public readonly isContentScrolled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly menuItems: WritableSignal<NavItem[]> = signal<NavItem[]>([
     {
       label: 'Getting Started',
@@ -211,6 +212,11 @@ export class SidebarComponent {
       ],
     },
   ]);
+
+  public onSidebarScroll(event: Event): void {
+    const scrollElement: HTMLElement | null = event.target as HTMLElement | null;
+    this.isContentScrolled.set((scrollElement?.scrollTop ?? 0) > 0);
+  }
 
   public toggleSection(item: NavItem): void {
     this.menuItems.update((items: NavItem[]): NavItem[] =>
