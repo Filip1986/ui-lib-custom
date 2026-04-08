@@ -198,10 +198,11 @@ npm run build-storybook
 4. [Integration Examples](guides/INTEGRATION_EXAMPLE.md) - Real-world examples
 
 **🚀 Contributor (Developing the Library)**
-1. [Architecture Documentation](architecture/ARCHITECTURE.md) - System design
-2. [Project Summary](reference/project/PROJECT_SUMMARY.md) - What's been built
-3. [Update Log](reference/project/UPDATE_LOG.md) - Version history and upgrades
-4. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Testing checklist
+1. [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for new components
+2. [Architecture Documentation](architecture/ARCHITECTURE.md) - System design
+3. [Project Summary](reference/project/PROJECT_SUMMARY.md) - What's been built
+4. [Update Log](reference/project/UPDATE_LOG.md) - Version history and upgrades
+5. [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) - Testing checklist
 
 **📦 Publisher (Distributing the Library)**
 1. [Publishing Guide](guides/PUBLISHING_GUIDE.md) - How to publish

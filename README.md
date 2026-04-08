@@ -43,6 +43,7 @@ import { Button } from 'ui-lib-custom';
 
 Quick links:
 
+- 🧭 [Component Creation Guide](COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for adding new components
 - 🚀 [Quick Start Guide](docs/getting-started/QUICK_START.md) - Get started in 5 minutes
 - 📘 [Integration Examples](docs/guides/INTEGRATION_EXAMPLE.md) - Real-world usage examples
 - 🏗️ [Architecture](docs/architecture/ARCHITECTURE.md) - System design and structure

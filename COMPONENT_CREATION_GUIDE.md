@@ -30,18 +30,20 @@ Determine which category it falls into, because each has different implementatio
 
 ### Research the PrimeNG reference
 
-Always inspect PrimeNG source via `npm pack`, never by scraping the website:
+Always inspect PrimeNG source via `npm pack`, never by scraping the website.
+Use your active workspace shell for commands.
 
-```powershell
-cd C:\temp
+```bash
+workdir="$(mktemp -d 2>/dev/null || mktemp -d -t primeng-pack)"
+cd "$workdir"
 npm pack primeng@19 --pack-destination .
 tar xzf primeng-19.*.tgz
 # Read the component's .d.ts for API surface
-Get-Content .\package\<component>\<component>.d.ts
+cat ./package/<component>/<component>.d.ts
 # Read the .mjs for implementation details
-Get-Content .\package\fesm2022\primeng-<component>.mjs
+cat ./package/fesm2022/primeng-<component>.mjs
 # Read interface files if they exist
-Get-Content .\package\<component>\<component>.interface.d.ts
+cat ./package/<component>/<component>.interface.d.ts
 ```
 
 Document what PrimeNG does, then note every divergence our conventions require (see Step 2).
@@ -106,16 +108,17 @@ projects/ui-lib-custom/
 │   ├── <component>.component.spec.ts
 │   └── <component>.types.ts        # (if the component has non-trivial types)
 ├── <component>/                    # ← secondary entry point folder
-│   ├── ng-package.json             # { "lib": { "entryFile": "../src/lib/<component>/index.ts" } }
-│   └── package.json                # { "name": "ui-lib-custom/<component>" }
+│   ├── ng-package.json             # points to ../src/lib/<component>/index.ts (or special-case source file)
+│   ├── package.json                # { "name": "ui-lib-custom/<component>" }
+│   └── public-api.ts               # thin re-export for path mappings
 ```
 
 **Hard rules:**
 
-- The secondary entry point folder contains **only** `ng-package.json` and `package.json` — no `public-api.ts`, no `src/` subfolder, no stale files.
-- The primary `public-api.ts` must **not** re-export anything already owned by a secondary entry point.
-- Cross-entry-point imports use package paths: `import { X } from 'ui-lib-custom/core'` — never `../core/`.
-- After creating the entry point, update `package.json` `exports` and `typesVersions` fields.
+- Keep secondary entry points consistent with workspace conventions: `ng-package.json`, `package.json`, and a thin `public-api.ts` re-export.
+- Use package-path imports across entry points: `import { X } from 'ui-lib-custom/core'` — never `../core/`.
+- Update `projects/ui-lib-custom/package.json` `exports` and `typesVersions` for each new secondary entry point.
+- Update `projects/ui-lib-custom/src/public-api.ts` only when explicit primary-barrel backward compatibility is intended.
 
 ---
 
@@ -126,11 +129,10 @@ projects/ui-lib-custom/
 All component tokens follow: `--uilib-<component>-<property>[-<state>]`
 
 Examples:
-```scss
---uilib-dialog-border-radius
---uilib-button-hover-background
---uilib-input-focus-border-color
-```
+
+- `--uilib-dialog-border-radius`
+- `--uilib-button-hover-background`
+- `--uilib-input-focus-border-color`
 
 ### Variant styling
 
@@ -226,12 +228,12 @@ When generating the multi-prompt sequence for the agent, follow this established
 
 After every prompt completes, the agent must:
 
-```powershell
+```bash
 # Build the library
 ng build ui-lib-custom
 
 # Run tests for the new component
-npx jest --testPathPattern="<component>" --no-cache
+npx jest --testPathPatterns="<component>" --no-cache
 
 # Serve the demo app to visually verify
 ng serve demo
@@ -261,12 +263,12 @@ Before marking a component as complete:
 - [ ] Angular block syntax (`@if`, `@for`, `@switch`) — no legacy directives
 - [ ] Self-closing tags for components without projected content
 - [ ] Cross-entry-point imports use package paths exclusively
-- [ ] Secondary entry point folder contains only `ng-package.json` + `package.json`
-- [ ] Primary `public-api.ts` does not re-export secondary entry point symbols
+- [ ] Secondary entry point folder has `ng-package.json`, `package.json`, and thin `public-api.ts`
+- [ ] Primary `public-api.ts` updated only when primary-barrel backward compatibility is intended
 - [ ] `package.json` `exports` and `typesVersions` updated
 - [ ] Unit tests pass with zoneless change detection
 - [ ] Accessibility: ARIA roles, keyboard nav, focus management documented and tested
 - [ ] `AI_AGENT_CONTEXT.md` component inventory updated
 - [ ] Demo page created and visually verified
 - [ ] `ng build ui-lib-custom` succeeds with zero warnings
-- [ ] PowerShell used for all terminal commands
+- [ ] Active workspace shell used for all terminal commands

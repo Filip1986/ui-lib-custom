@@ -139,6 +139,8 @@ Additional content...
 
 ## 🎨 Adding New Components
 
+Start here first: `COMPONENT_CREATION_GUIDE.md` (authoritative creation workflow and prompt structure).
+
 When adding a new component:
 
 1. **Create component folder** in `projects/ui-lib-custom/src/lib/`

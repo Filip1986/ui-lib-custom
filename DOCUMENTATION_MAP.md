@@ -83,9 +83,10 @@ docs/
 
 ### 🏗️ I want to create a new component
 
-1. [docs/reference/systems/DESIGN_TOKENS.md](docs/reference/systems/DESIGN_TOKENS.md) - Use design tokens
-2. [docs/reference/components/BADGE_IMPLEMENTATION.md](docs/reference/components/BADGE_IMPLEMENTATION.md) - See example implementation
-3. [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) - Follow architecture
+1. [COMPONENT_CREATION_GUIDE.md](COMPONENT_CREATION_GUIDE.md) - End-to-end component creation workflow
+2. [docs/reference/systems/DESIGN_TOKENS.md](docs/reference/systems/DESIGN_TOKENS.md) - Use design tokens
+3. [docs/reference/components/BADGE_IMPLEMENTATION.md](docs/reference/components/BADGE_IMPLEMENTATION.md) - See example implementation
+4. [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) - Follow architecture
 
 ### 📊 I want project information
 
@@ -188,9 +189,10 @@ docs/
 
 #### 🏗️ Contributor (building components)
 
-1. [Architecture](docs/architecture/ARCHITECTURE.md)
-2. [Design Tokens](docs/reference/systems/DESIGN_TOKENS.md)
-3. [Badge Implementation](docs/reference/components/BADGE_IMPLEMENTATION.md) (example)
+1. [COMPONENT_CREATION_GUIDE.md](COMPONENT_CREATION_GUIDE.md)
+2. [Architecture](docs/architecture/ARCHITECTURE.md)
+3. [Design Tokens](docs/reference/systems/DESIGN_TOKENS.md)
+4. [Badge Implementation](docs/reference/components/BADGE_IMPLEMENTATION.md) (example)
 
 #### 📦 Publisher (releasing the library)
 
