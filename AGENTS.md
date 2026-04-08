@@ -1,5 +1,12 @@
 # AGENTS Guide
 
+## Document Ownership
+- `AGENTS.md` is the stable source of truth for architecture, conventions, and workflows.
+- `AI_AGENT_CONTEXT.md` is the session-state document (active focus, inventory status, and recent handoffs).
+- Keep policy/rule changes in `AGENTS.md`; keep per-session execution notes in `AI_AGENT_CONTEXT.md`.
+- `AI_AGENT_CONTEXT.md` must retain only the newest 3 handoffs; move older ones to archive.
+- Historical handoffs should be moved to `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md` to keep active context concise.
+
 ## Big Picture
 - Monorepo-style Angular workspace with 3 projects in `angular.json`: library (`projects/ui-lib-custom`), demo app (`projects/demo`), and minimal app (`projects/minimal`).
 - Library architecture is secondary-entry-point first (tree-shaking), with primary barrel kept for backward compatibility (`projects/ui-lib-custom/src/public-api.ts`).
@@ -45,4 +52,3 @@
 - For new secondary entry points, add `<entry>/package.json`, `<entry>/public-api.ts`, and `<entry>/ng-package.json`, then update `projects/ui-lib-custom/package.json` exports + `typesVersions`.
 - Add/adjust entry-point import tests in `projects/ui-lib-custom/test/entry-points.spec.ts`.
 - If visual tokens change, sync docs under `docs/reference/systems/` (especially CSS variables docs).
-
