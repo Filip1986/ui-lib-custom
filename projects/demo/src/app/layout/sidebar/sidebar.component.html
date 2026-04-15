@@ -38,6 +38,9 @@
                           <i [class]="subItem.icon"></i>
                         }
                         <span>{{ subItem.label }}</span>
+                        @if (subItem.badge) {
+                          <span class="nav-item-badge">{{ subItem.badge }}</span>
+                        }
                       </a>
                     }
                   </li>
@@ -62,7 +65,7 @@
     </nav>
   </div>
   <div class="sidebar-tip" [class.scrolled]="isContentScrolled()">
-    <ui-lib-icon name="moon" size="sm"></ui-lib-icon>
+    <ui-lib-icon name="settings" size="sm"></ui-lib-icon>
     Toggle theme from the topbar.
   </div>
 </div>

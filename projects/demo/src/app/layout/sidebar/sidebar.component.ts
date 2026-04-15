@@ -7,6 +7,7 @@ import { Icon } from 'ui-lib-custom/icon';
 export interface NavItem {
   label: string;
   icon?: string;
+  badge?: string;
   route?: string;
   fragment?: string;
   items?: NavItem[];
@@ -150,6 +151,13 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/input-number',
           group: 'Form',
+        },
+        {
+          label: 'InputOtp',
+          icon: 'pi pi-circle',
+          route: '/input-otp',
+          group: 'Form',
+          badge: 'TODO',
         },
         {
           label: 'Select',

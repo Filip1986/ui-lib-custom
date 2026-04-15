@@ -218,6 +218,14 @@ export const routes: Routes = [
       ),
     title: 'InputNumber - UI Components Library',
   },
+  {
+    path: 'input-otp',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/input-otp/input-otp-demo.component').then(
+        (m: { InputOtpDemoComponent: Type<unknown> }): Type<unknown> => m.InputOtpDemoComponent
+      ),
+    title: 'InputOtp - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];
