@@ -170,12 +170,28 @@ export const routes: Routes = [
     title: 'DatePicker - UI Components Library',
   },
   {
+    path: 'divider',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/divider/divider-demo.component').then(
+        (m: { DividerDemoComponent: Type<unknown> }): Type<unknown> => m.DividerDemoComponent
+      ),
+    title: 'Divider - UI Components Library',
+  },
+  {
     path: 'editor',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/editor/editor-demo.component').then(
         (m: { EditorDemoComponent: Type<unknown> }): Type<unknown> => m.EditorDemoComponent
       ),
     title: 'Editor - UI Components Library',
+  },
+  {
+    path: 'fieldset',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/fieldset/fieldset-demo.component').then(
+        (m: { FieldsetDemoComponent: Type<unknown> }): Type<unknown> => m.FieldsetDemoComponent
+      ),
+    title: 'Fieldset - UI Components Library',
   },
   {
     path: 'float-label',
@@ -251,6 +267,14 @@ export const routes: Routes = [
     title: 'Listbox - UI Components Library',
   },
   {
+    path: 'panel',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/panel/panel-demo.component').then(
+        (m: { PanelDemoComponent: Type<unknown> }): Type<unknown> => m.PanelDemoComponent
+      ),
+    title: 'Panel - UI Components Library',
+  },
+  {
     path: 'password',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/password/password-demo.component').then(
@@ -317,6 +341,15 @@ export const routes: Routes = [
     title: 'PickList - UI Components Library',
   },
   {
+    path: 'scroll-panel',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/scroll-panel/scroll-panel-demo.component').then(
+        (m: { ScrollPanelDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ScrollPanelDemoComponent
+      ),
+    title: 'ScrollPanel - UI Components Library',
+  },
+  {
     path: 'scroller',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/scroller/scroller-demo.component').then(
@@ -350,6 +383,22 @@ export const routes: Routes = [
     title: 'SplitButton - UI Components Library',
   },
   {
+    path: 'splitter',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/splitter/splitter-demo.component').then(
+        (m: { SplitterDemoComponent: Type<unknown> }): Type<unknown> => m.SplitterDemoComponent
+      ),
+    title: 'Splitter - UI Components Library',
+  },
+  {
+    path: 'stepper',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/stepper/stepper-demo.component').then(
+        (m: { StepperDemoComponent: Type<unknown> }): Type<unknown> => m.StepperDemoComponent
+      ),
+    title: 'Stepper - UI Components Library',
+  },
+  {
     path: 'table',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/table/table-demo.component').then(
@@ -364,6 +413,14 @@ export const routes: Routes = [
         (m: { TimelineDemoComponent: Type<unknown> }): Type<unknown> => m.TimelineDemoComponent
       ),
     title: 'Timeline - UI Components Library',
+  },
+  {
+    path: 'toolbar',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/toolbar/toolbar-demo.component').then(
+        (m: { ToolbarDemoComponent: Type<unknown> }): Type<unknown> => m.ToolbarDemoComponent
+      ),
+    title: 'Toolbar - UI Components Library',
   },
   {
     path: 'tree',
