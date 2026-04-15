@@ -32,6 +32,14 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
   { path: 'buttons', component: ButtonsComponent, title: 'Buttons - UI Components Library' },
   { path: 'cards', component: CardsComponent, title: 'Cards - UI Components Library' },
+  {
+    path: 'chart',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/chart/chart-demo.component').then(
+        (m: { ChartDemoComponent: Type<unknown> }): Type<unknown> => m.ChartDemoComponent
+      ),
+    title: 'Chart - UI Components Library',
+  },
   { path: 'badges', component: BadgesComponent, title: 'Badges - UI Components Library' },
   { path: 'layouts', redirectTo: 'layouts/semantic-spacing', pathMatch: 'full' },
   {

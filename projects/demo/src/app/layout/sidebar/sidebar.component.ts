@@ -95,6 +95,13 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'Chart',
+          icon: 'pi pi-circle',
+          route: '/chart',
+          group: 'Chart',
+          badge: 'TODO',
+        },
+        {
           label: 'DataView',
           icon: 'pi pi-circle',
           route: '/data-view',
