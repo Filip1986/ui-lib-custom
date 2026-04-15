@@ -130,8 +130,11 @@
   .toggle-icon {
     position: absolute;
     right: 1.5rem;
-    font-size: 0.75rem;
-    transition: transform 0.2s;
+    color: var(--demo-sidebar-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
   }
 
   &:hover {

@@ -10,11 +10,11 @@
                   <i [class]="item.icon"></i>
                 }
                 <span>{{ item.label }}</span>
-                <i
-                  class="pi toggle-icon"
-                  [class.pi-chevron-down]="item.expanded"
-                  [class.pi-chevron-right]="!item.expanded"
-                ></i>
+                <ui-lib-icon
+                  class="toggle-icon"
+                  [name]="item.expanded ? 'chevron-down' : 'chevron-right'"
+                  size="sm"
+                ></ui-lib-icon>
               </div>
               <ul class="nav-submenu" [class.expanded]="item.expanded">
                 @for (subItem of item.items; track subItem.label + (subItem.route ?? '')) {
@@ -62,7 +62,7 @@
     </nav>
   </div>
   <div class="sidebar-tip" [class.scrolled]="isContentScrolled()">
-    <i class="pi pi-moon"></i>
+    <ui-lib-icon name="moon" size="sm"></ui-lib-icon>
     Toggle theme from the topbar.
   </div>
 </div>
