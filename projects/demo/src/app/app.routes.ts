@@ -408,6 +408,14 @@ export const routes: Routes = [
     title: 'Menu - UI Components Library',
   },
   {
+    path: 'message',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/message/message-demo.component').then(
+        (m: { MessageDemoComponent: Type<unknown> }): Type<unknown> => m.MessageDemoComponent
+      ),
+    title: 'Message - UI Components Library',
+  },
+  {
     path: 'menubar',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/menubar/menubar-demo.component').then(
@@ -537,6 +545,14 @@ export const routes: Routes = [
         (m: { ToolbarDemoComponent: Type<unknown> }): Type<unknown> => m.ToolbarDemoComponent
       ),
     title: 'Toolbar - UI Components Library',
+  },
+  {
+    path: 'toast',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/toast/toast-demo.component').then(
+        (m: { ToastDemoComponent: Type<unknown> }): Type<unknown> => m.ToastDemoComponent
+      ),
+    title: 'Toast - UI Components Library',
   },
   {
     path: 'tooltip',

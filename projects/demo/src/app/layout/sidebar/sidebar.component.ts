@@ -386,6 +386,13 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'Message',
+          icon: 'pi pi-circle',
+          route: '/message',
+          group: 'Messages',
+          badge: 'TODO',
+        },
+        {
           label: 'Menubar',
           icon: 'pi pi-circle',
           route: '/menubar',
@@ -411,6 +418,13 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/tiered-menu',
           group: 'Menu',
+          badge: 'TODO',
+        },
+        {
+          label: 'Toast',
+          icon: 'pi pi-circle',
+          route: '/toast',
+          group: 'Messages',
           badge: 'TODO',
         },
         {
