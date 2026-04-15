@@ -234,6 +234,14 @@ export const routes: Routes = [
       ),
     title: 'KeyFilter - UI Components Library',
   },
+  {
+    path: 'knob',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/knob/knob-demo.component').then(
+        (m: { KnobDemoComponent: Type<unknown> }): Type<unknown> => m.KnobDemoComponent
+      ),
+    title: 'Knob - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

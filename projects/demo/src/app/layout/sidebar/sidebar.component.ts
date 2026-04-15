@@ -167,6 +167,13 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'Knob',
+          icon: 'pi pi-circle',
+          route: '/knob',
+          group: 'Form',
+          badge: 'TODO',
+        },
+        {
           label: 'Select',
           icon: 'pi pi-circle',
           route: '/select',
