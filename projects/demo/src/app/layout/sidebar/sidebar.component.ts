@@ -55,6 +55,18 @@ export class SidebarComponent {
       expanded: true,
       items: this.buildGroupedSubmenuItems([
         {
+          label: 'Login Forms',
+          icon: 'pi pi-sign-in',
+          route: '/login',
+          group: 'Blocks',
+        },
+        {
+          label: 'Button',
+          icon: 'pi pi-circle',
+          route: '/buttons',
+          group: 'Button',
+        },
+        {
           label: 'Autocomplete',
           icon: 'pi pi-circle',
           route: '/autocomplete',
@@ -139,10 +151,22 @@ export class SidebarComponent {
           group: 'Form',
         },
         {
+          label: 'Icons',
+          icon: 'pi pi-circle',
+          route: '/icons',
+          group: 'Icon',
+        },
+        {
           label: 'Gallery',
           icon: 'pi pi-images',
           route: '/gallery',
           group: 'Media',
+        },
+        {
+          label: 'Sidebar Menu',
+          icon: 'pi pi-circle',
+          route: '/sidebar-menu',
+          group: 'Menu',
         },
         {
           label: 'Badge',
@@ -151,54 +175,39 @@ export class SidebarComponent {
           group: 'Misc',
         },
         {
-          label: 'Button',
-          icon: 'pi pi-circle',
-          route: '/buttons',
-        },
-        {
-          label: 'Card',
-          icon: 'pi pi-id-card',
-          route: '/cards',
-        },
-        {
           label: 'Shadows',
           icon: 'pi pi-circle',
           route: '/shadows',
-        },
-        {
-          label: 'Tabs',
-          icon: 'pi pi-circle',
-          route: '/tabs',
-        },
-        {
-          label: 'Login Forms',
-          icon: 'pi pi-sign-in',
-          route: '/login',
-        },
-        {
-          label: 'Sidebar Menu',
-          icon: 'pi pi-circle',
-          route: '/sidebar-menu',
-        },
-        {
-          label: 'Project Starter',
-          icon: 'pi pi-circle',
-          route: '/project-starter',
-        },
-        {
-          label: 'Icons',
-          icon: 'pi pi-circle',
-          route: '/icons',
-        },
-        {
-          label: 'Accordion',
-          icon: 'pi pi-circle',
-          route: '/accordion',
+          group: 'Misc',
         },
         {
           label: 'Dialog',
           icon: 'pi pi-circle',
           route: '/dialog',
+          group: 'Overlay',
+        },
+        {
+          label: 'Accordion',
+          icon: 'pi pi-circle',
+          route: '/accordion',
+          group: 'Panel',
+        },
+        {
+          label: 'Card',
+          icon: 'pi pi-id-card',
+          route: '/cards',
+          group: 'Panel',
+        },
+        {
+          label: 'Tabs',
+          icon: 'pi pi-circle',
+          route: '/tabs',
+          group: 'Panel',
+        },
+        {
+          label: 'Project Starter',
+          icon: 'pi pi-circle',
+          route: '/project-starter',
         },
       ]),
     },
@@ -230,23 +239,43 @@ export class SidebarComponent {
   }
 
   private buildGroupedSubmenuItems(items: NavItem[]): NavItem[] {
-    const groupedItems: NavItem[] = [];
-    let currentGroup: string | null = null;
+    const groupedItemsByName: Map<string, NavItem[]> = new Map<string, NavItem[]>();
+    const ungroupedItems: NavItem[] = [];
 
     items.forEach((item: NavItem): void => {
-      if (item.group && item.group !== currentGroup) {
-        groupedItems.push({ label: item.group, isGroupLabel: true });
-        currentGroup = item.group;
+      if (item.group) {
+        const currentGroupItems: NavItem[] = groupedItemsByName.get(item.group) ?? [];
+        currentGroupItems.push(item);
+        groupedItemsByName.set(item.group, currentGroupItems);
+        return;
       }
 
-      if (!item.group) {
-        currentGroup = null;
-      }
-
-      groupedItems.push(item);
+      ungroupedItems.push(item);
     });
 
-    return groupedItems;
+    const sortedGroupNames: string[] = Array.from(groupedItemsByName.keys()).sort(
+      (left: string, right: string): number => this.compareLabels(left, right)
+    );
+
+    const sortedGroupedItems: NavItem[] = sortedGroupNames.flatMap(
+      (groupName: string): NavItem[] => {
+        const groupItems: NavItem[] = [...(groupedItemsByName.get(groupName) ?? [])].sort(
+          (left: NavItem, right: NavItem): number => this.compareLabels(left.label, right.label)
+        );
+
+        return [{ label: groupName, isGroupLabel: true }, ...groupItems];
+      }
+    );
+
+    const sortedUngroupedItems: NavItem[] = [...ungroupedItems].sort(
+      (left: NavItem, right: NavItem): number => this.compareLabels(left.label, right.label)
+    );
+
+    return [...sortedGroupedItems, ...sortedUngroupedItems];
+  }
+
+  private compareLabels(left: string, right: string): number {
+    return left.localeCompare(right, undefined, { sensitivity: 'base' });
   }
 
   public toggleSection(item: NavItem): void {

@@ -1,0 +1,107 @@
+import { provideZonelessChangeDetection } from '@angular/core';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { beforeEach, describe, expect, it } from '@jest/globals';
+import type { NavItem } from './sidebar.component';
+import { SidebarComponent } from './sidebar.component';
+
+function compareLabels(left: string, right: string): number {
+  return left.localeCompare(right, undefined, { sensitivity: 'base' });
+}
+
+describe('SidebarComponent ordering', (): void => {
+  let fixture: ComponentFixture<SidebarComponent>;
+  let component: SidebarComponent;
+
+  beforeEach(async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [SidebarComponent],
+      providers: [provideZonelessChangeDetection(), provideRouter([])],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(SidebarComponent);
+    component = fixture.componentInstance;
+  });
+
+  function getComponentsItems(): NavItem[] {
+    const componentsMenu: NavItem | undefined = component
+      .menuItems()
+      .find((item: NavItem): boolean => item.label === 'Components');
+
+    expect(componentsMenu).toBeTruthy();
+    expect(componentsMenu?.items).toBeTruthy();
+
+    return componentsMenu?.items ?? [];
+  }
+
+  it('keeps group labels alphabetically ordered', (): void => {
+    const items: NavItem[] = getComponentsItems();
+    const actualGroupLabels: string[] = items
+      .filter((item: NavItem): boolean => item.isGroupLabel === true)
+      .map((item: NavItem): string => item.label);
+
+    const expectedGroupLabels: string[] = [...actualGroupLabels].sort(
+      (left: string, right: string): number => compareLabels(left, right)
+    );
+
+    expect(actualGroupLabels).toEqual(expectedGroupLabels);
+  });
+
+  it('keeps items alphabetically ordered inside each group', (): void => {
+    const items: NavItem[] = getComponentsItems();
+    const itemsByGroup: Map<string, string[]> = new Map<string, string[]>();
+
+    let activeGroup: string | null = null;
+
+    items.forEach((item: NavItem): void => {
+      if (item.isGroupLabel) {
+        activeGroup = item.label;
+        itemsByGroup.set(activeGroup, []);
+        return;
+      }
+
+      if (activeGroup && item.group === activeGroup) {
+        const labels: string[] = itemsByGroup.get(activeGroup) ?? [];
+        labels.push(item.label);
+        itemsByGroup.set(activeGroup, labels);
+        return;
+      }
+
+      activeGroup = null;
+    });
+
+    itemsByGroup.forEach((labels: string[], group: string): void => {
+      const expected: string[] = [...labels].sort((left: string, right: string): number =>
+        compareLabels(left, right)
+      );
+      expect(labels).toEqual(expected);
+      expect(labels.length).toBeGreaterThan(0);
+      expect(group.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('keeps trailing ungrouped items alphabetically ordered', (): void => {
+    const items: NavItem[] = getComponentsItems();
+    const firstUngroupedIndex: number = items.findIndex(
+      (item: NavItem): boolean => item.isGroupLabel !== true && !item.group
+    );
+
+    expect(firstUngroupedIndex).toBeGreaterThan(-1);
+
+    const trailingUngroupedItems: NavItem[] = items.slice(firstUngroupedIndex);
+    const trailingUngroupedLabels: string[] = trailingUngroupedItems.map(
+      (item: NavItem): string => item.label
+    );
+    const expectedTrailingLabels: string[] = [...trailingUngroupedLabels].sort(
+      (left: string, right: string): number => compareLabels(left, right)
+    );
+
+    expect(
+      trailingUngroupedItems.every(
+        (item: NavItem): boolean => item.isGroupLabel !== true && !item.group
+      )
+    ).toBe(true);
+    expect(trailingUngroupedLabels).toEqual(expectedTrailingLabels);
+  });
+});
