@@ -6,28 +6,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-tree-select-demo',
   standalone: true,
-  template: `
-    <section class="tree-select-demo" data-testid="tree-select-demo">
-      <h1>TreeSelect</h1>
-      <p>Coming soon.</p>
-    </section>
-  `,
-  styles: `
-    .tree-select-demo {
-      padding: 1.5rem;
-    }
-
-    .tree-select-demo h1 {
-      margin: 0 0 0.5rem;
-      font-size: 1.5rem;
-      color: var(--uilib-page-fg);
-    }
-
-    .tree-select-demo p {
-      margin: 0;
-      color: var(--uilib-muted);
-    }
-  `,
+  templateUrl: './tree-select-demo.component.html',
+  styleUrl: './tree-select-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeSelectDemoComponent {}

@@ -6,28 +6,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
-  template: `
-    <section class="divider-demo" data-testid="divider-demo">
-      <h1>Divider</h1>
-      <p>Coming soon.</p>
-    </section>
-  `,
-  styles: `
-    .divider-demo {
-      padding: 1.5rem;
-    }
-
-    .divider-demo h1 {
-      margin: 0 0 0.5rem;
-      font-size: 1.5rem;
-      color: var(--uilib-page-fg);
-    }
-
-    .divider-demo p {
-      margin: 0;
-      color: var(--uilib-muted);
-    }
-  `,
+  templateUrl: './divider-demo.component.html',
+  styleUrl: './divider-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DividerDemoComponent {}

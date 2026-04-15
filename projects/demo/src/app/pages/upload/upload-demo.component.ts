@@ -6,28 +6,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-upload-demo',
   standalone: true,
-  template: `
-    <section class="upload-demo" data-testid="upload-demo">
-      <h1>Upload</h1>
-      <p>Coming soon.</p>
-    </section>
-  `,
-  styles: `
-    .upload-demo {
-      padding: 1.5rem;
-    }
-
-    .upload-demo h1 {
-      margin: 0 0 0.5rem;
-      font-size: 1.5rem;
-      color: var(--uilib-page-fg);
-    }
-
-    .upload-demo p {
-      margin: 0;
-      color: var(--uilib-muted);
-    }
-  `,
+  templateUrl: './upload-demo.component.html',
+  styleUrl: './upload-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadDemoComponent {}

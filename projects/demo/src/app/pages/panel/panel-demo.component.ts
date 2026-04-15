@@ -6,28 +6,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-panel-demo',
   standalone: true,
-  template: `
-    <section class="panel-demo" data-testid="panel-demo">
-      <h1>Panel</h1>
-      <p>Coming soon.</p>
-    </section>
-  `,
-  styles: `
-    .panel-demo {
-      padding: 1.5rem;
-    }
-
-    .panel-demo h1 {
-      margin: 0 0 0.5rem;
-      font-size: 1.5rem;
-      color: var(--uilib-page-fg);
-    }
-
-    .panel-demo p {
-      margin: 0;
-      color: var(--uilib-muted);
-    }
-  `,
+  templateUrl: './panel-demo.component.html',
+  styleUrl: './panel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanelDemoComponent {}
