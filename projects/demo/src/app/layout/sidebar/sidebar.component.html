@@ -17,15 +17,11 @@
                 ></i>
               </div>
               <ul class="nav-submenu" [class.expanded]="item.expanded">
-                @for (subItem of item.items; track subItem.label + (subItem.route ?? ''); let subItemIndex = $index) {
+                @for (subItem of item.items; track subItem.label + (subItem.route ?? '')) {
                   <li
                     class="nav-subitem"
                     [class.nav-subitem-group-title]="subItem.isGroupLabel"
                     [class.nav-subitem-grouped]="!!subItem.group"
-                    [class.nav-subitem-grouped-last]="
-                      !!subItem.group &&
-                      (subItemIndex === item.items.length - 1 || item.items[subItemIndex + 1]?.isGroupLabel)
-                    "
                   >
                     @if (subItem.isGroupLabel) {
                       <div class="nav-group-title">
