@@ -226,6 +226,14 @@ export const routes: Routes = [
       ),
     title: 'InputOtp - UI Components Library',
   },
+  {
+    path: 'key-filter',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/key-filter/key-filter-demo.component').then(
+        (m: { KeyFilterDemoComponent: Type<unknown> }): Type<unknown> => m.KeyFilterDemoComponent
+      ),
+    title: 'KeyFilter - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];

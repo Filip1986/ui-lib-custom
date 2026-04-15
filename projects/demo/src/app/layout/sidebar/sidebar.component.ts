@@ -129,7 +129,7 @@ export class SidebarComponent {
           group: 'Form',
         },
         {
-          label: 'Input Text',
+          label: 'InputText',
           icon: 'pi pi-circle',
           route: '/input-text',
           group: 'Form',
@@ -160,13 +160,20 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'KeyFilter',
+          icon: 'pi pi-circle',
+          route: '/key-filter',
+          group: 'Form',
+          badge: 'TODO',
+        },
+        {
           label: 'Select',
           icon: 'pi pi-circle',
           route: '/select',
           group: 'Form',
         },
         {
-          label: 'Select Buttons',
+          label: 'SelectButton',
           icon: 'pi pi-circle',
           route: '/select-buttons',
           group: 'Form',
