@@ -9,7 +9,9 @@ export interface NavItem {
   route?: string;
   fragment?: string;
   items?: NavItem[];
+  group?: string;
   expanded?: boolean;
+  isGroupLabel?: boolean;
 }
 
 /**
@@ -51,7 +53,7 @@ export class SidebarComponent {
       label: 'Components',
       icon: 'pi pi-box',
       expanded: true,
-      items: [
+      items: this.buildGroupedSubmenuItems([
         {
           label: 'Gallery',
           icon: 'pi pi-images',
@@ -113,11 +115,90 @@ export class SidebarComponent {
           route: '/dialog',
         },
         {
+          label: 'Input Text',
+          icon: 'pi pi-circle',
+          route: '/input-text',
+          group: 'Form',
+        },
+        {
+          label: 'Select',
+          icon: 'pi pi-circle',
+          route: '/select',
+          group: 'Form',
+        },
+        {
+          label: 'Checkbox',
+          icon: 'pi pi-circle',
+          route: '/checkbox',
+          group: 'Form',
+        },
+        {
+          label: 'Select Buttons',
+          icon: 'pi pi-circle',
+          route: '/select-buttons',
+          group: 'Form',
+        },
+        {
           label: 'Autocomplete',
           icon: 'pi pi-circle',
           route: '/autocomplete',
+          group: 'Form',
         },
-      ],
+        {
+          label: 'CascadeSelect',
+          icon: 'pi pi-circle',
+          route: '/cascade-select',
+          group: 'Form',
+        },
+        {
+          label: 'ColorPicker',
+          icon: 'pi pi-circle',
+          route: '/color-picker',
+          group: 'Form',
+        },
+        {
+          label: 'DatePicker',
+          icon: 'pi pi-circle',
+          route: '/date-picker',
+          group: 'Form',
+        },
+        {
+          label: 'Editor',
+          icon: 'pi pi-circle',
+          route: '/editor',
+          group: 'Form',
+        },
+        {
+          label: 'FloatLabel',
+          icon: 'pi pi-circle',
+          route: '/float-label',
+          group: 'Form',
+        },
+        {
+          label: 'InputGroup',
+          icon: 'pi pi-circle',
+          route: '/input-group',
+          group: 'Form',
+        },
+        {
+          label: 'IconField',
+          icon: 'pi pi-circle',
+          route: '/icon-field',
+          group: 'Form',
+        },
+        {
+          label: 'InputMask',
+          icon: 'pi pi-circle',
+          route: '/input-mask',
+          group: 'Form',
+        },
+        {
+          label: 'InputNumber',
+          icon: 'pi pi-circle',
+          route: '/input-number',
+          group: 'Form',
+        },
+      ]),
     },
     {
       label: 'Theming',
@@ -139,88 +220,31 @@ export class SidebarComponent {
       icon: 'pi pi-universal-access',
       route: '/accessibility',
     },
-    {
-      label: 'Form',
-      icon: 'pi pi-check-square',
-      expanded: false,
-      items: [
-        {
-          label: 'Input Text',
-          icon: 'pi pi-circle',
-          route: '/input-text',
-        },
-        {
-          label: 'Select',
-          icon: 'pi pi-circle',
-          route: '/select',
-        },
-        {
-          label: 'Checkbox',
-          icon: 'pi pi-circle',
-          route: '/checkbox',
-        },
-        {
-          label: 'Select Buttons',
-          icon: 'pi pi-circle',
-          route: '/select-buttons',
-        },
-        {
-          label: 'Autocomplete',
-          icon: 'pi pi-circle',
-          route: '/autocomplete',
-        },
-        {
-          label: 'CascadeSelect',
-          icon: 'pi pi-circle',
-          route: '/cascade-select',
-        },
-        {
-          label: 'ColorPicker',
-          icon: 'pi pi-circle',
-          route: '/color-picker',
-        },
-        {
-          label: 'DatePicker',
-          icon: 'pi pi-circle',
-          route: '/date-picker',
-        },
-        {
-          label: 'Editor',
-          icon: 'pi pi-circle',
-          route: '/editor',
-        },
-        {
-          label: 'FloatLabel',
-          icon: 'pi pi-circle',
-          route: '/float-label',
-        },
-        {
-          label: 'InputGroup',
-          icon: 'pi pi-circle',
-          route: '/input-group',
-        },
-        {
-          label: 'IconField',
-          icon: 'pi pi-circle',
-          route: '/icon-field',
-        },
-        {
-          label: 'InputMask',
-          icon: 'pi pi-circle',
-          route: '/input-mask',
-        },
-        {
-          label: 'InputNumber',
-          icon: 'pi pi-circle',
-          route: '/input-number',
-        },
-      ],
-    },
   ]);
 
   public onSidebarScroll(event: Event): void {
     const scrollElement: HTMLElement | null = event.target as HTMLElement | null;
     this.isContentScrolled.set((scrollElement?.scrollTop ?? 0) > 0);
+  }
+
+  private buildGroupedSubmenuItems(items: NavItem[]): NavItem[] {
+    const groupedItems: NavItem[] = [];
+    let currentGroup: string | null = null;
+
+    items.forEach((item: NavItem): void => {
+      if (item.group && item.group !== currentGroup) {
+        groupedItems.push({ label: item.group, isGroupLabel: true });
+        currentGroup = item.group;
+      }
+
+      if (!item.group) {
+        currentGroup = null;
+      }
+
+      groupedItems.push(item);
+    });
+
+    return groupedItems;
   }
 
   public toggleSection(item: NavItem): void {

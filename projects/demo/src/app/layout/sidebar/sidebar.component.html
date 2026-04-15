@@ -17,19 +17,33 @@
                 ></i>
               </div>
               <ul class="nav-submenu" [class.expanded]="item.expanded">
-                @for (subItem of item.items; track subItem.label) {
-                  <li class="nav-subitem">
-                    <a
-                      [routerLink]="subItem.route"
-                      [fragment]="subItem.fragment ?? ''"
-                      routerLinkActive="active"
-                      class="nav-link"
-                    >
-                      @if (subItem.icon) {
-                        <i [class]="subItem.icon"></i>
-                      }
-                      <span>{{ subItem.label }}</span>
-                    </a>
+                @for (subItem of item.items; track subItem.label + (subItem.route ?? ''); let subItemIndex = $index) {
+                  <li
+                    class="nav-subitem"
+                    [class.nav-subitem-group-title]="subItem.isGroupLabel"
+                    [class.nav-subitem-grouped]="!!subItem.group"
+                    [class.nav-subitem-grouped-last]="
+                      !!subItem.group &&
+                      (subItemIndex === item.items.length - 1 || item.items[subItemIndex + 1]?.isGroupLabel)
+                    "
+                  >
+                    @if (subItem.isGroupLabel) {
+                      <div class="nav-group-title">
+                        {{ subItem.label }}
+                      </div>
+                    } @else {
+                      <a
+                        [routerLink]="subItem.route"
+                        [fragment]="subItem.fragment ?? ''"
+                        routerLinkActive="active"
+                        class="nav-link"
+                      >
+                        @if (subItem.icon) {
+                          <i [class]="subItem.icon"></i>
+                        }
+                        <span>{{ subItem.label }}</span>
+                      </a>
+                    }
                   </li>
                 }
               </ul>
