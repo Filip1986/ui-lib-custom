@@ -109,4 +109,42 @@ describe('SidebarComponent ordering', (): void => {
     ).toBe(true);
     expect(trailingUngroupedLabels).toEqual(expectedTrailingLabels);
   });
+
+  it('contains the expected Menu group placeholders', (): void => {
+    const items: NavItem[] = getComponentsItems();
+    const menuGroupStart: number = items.findIndex(
+      (item: NavItem): boolean => item.isGroupLabel === true && item.label === 'Menu'
+    );
+
+    expect(menuGroupStart).toBeGreaterThan(-1);
+
+    const menuLabels: string[] = [];
+
+    for (let index: number = menuGroupStart + 1; index < items.length; index += 1) {
+      const item: NavItem | undefined = items[index];
+      if (!item) {
+        break;
+      }
+
+      if (item.isGroupLabel) {
+        break;
+      }
+
+      if (item.group === 'Menu') {
+        menuLabels.push(item.label);
+      }
+    }
+
+    expect(menuLabels).toEqual([
+      'Breadcrumb',
+      'ContextMenu',
+      'Dock',
+      'MegaMenu',
+      'Menu',
+      'Menubar',
+      'PanelMenu',
+      'Sidebar Menu',
+      'TieredMenu',
+    ]);
+  });
 });

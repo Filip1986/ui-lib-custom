@@ -180,6 +180,23 @@ export const routes: Routes = [
     title: 'ConfirmPopup - UI Components Library',
   },
   {
+    path: 'breadcrumb',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/breadcrumb/breadcrumb-demo.component').then(
+        (m: { BreadcrumbDemoComponent: Type<unknown> }): Type<unknown> => m.BreadcrumbDemoComponent
+      ),
+    title: 'Breadcrumb - UI Components Library',
+  },
+  {
+    path: 'context-menu',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/context-menu/context-menu-demo.component').then(
+        (m: { ContextMenuDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ContextMenuDemoComponent
+      ),
+    title: 'ContextMenu - UI Components Library',
+  },
+  {
     path: 'date-picker',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/date-picker/date-picker-demo.component').then(
@@ -194,6 +211,14 @@ export const routes: Routes = [
         (m: { DividerDemoComponent: Type<unknown> }): Type<unknown> => m.DividerDemoComponent
       ),
     title: 'Divider - UI Components Library',
+  },
+  {
+    path: 'dock',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/dock/dock-demo.component').then(
+        (m: { DockDemoComponent: Type<unknown> }): Type<unknown> => m.DockDemoComponent
+      ),
+    title: 'Dock - UI Components Library',
   },
   {
     path: 'drawer',
@@ -359,6 +384,30 @@ export const routes: Routes = [
     title: 'OrderList - UI Components Library',
   },
   {
+    path: 'mega-menu',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/mega-menu/mega-menu-demo.component').then(
+        (m: { MegaMenuDemoComponent: Type<unknown> }): Type<unknown> => m.MegaMenuDemoComponent
+      ),
+    title: 'MegaMenu - UI Components Library',
+  },
+  {
+    path: 'menu',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/menu/menu-demo.component').then(
+        (m: { MenuDemoComponent: Type<unknown> }): Type<unknown> => m.MenuDemoComponent
+      ),
+    title: 'Menu - UI Components Library',
+  },
+  {
+    path: 'menubar',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/menubar/menubar-demo.component').then(
+        (m: { MenubarDemoComponent: Type<unknown> }): Type<unknown> => m.MenubarDemoComponent
+      ),
+    title: 'Menubar - UI Components Library',
+  },
+  {
     path: 'organization-chart',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/organization-chart/organization-chart-demo.component').then(
@@ -366,6 +415,14 @@ export const routes: Routes = [
           m.OrganizationChartDemoComponent
       ),
     title: 'OrganizationChart - UI Components Library',
+  },
+  {
+    path: 'panel-menu',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/panel-menu/panel-menu-demo.component').then(
+        (m: { PanelMenuDemoComponent: Type<unknown> }): Type<unknown> => m.PanelMenuDemoComponent
+      ),
+    title: 'PanelMenu - UI Components Library',
   },
   {
     path: 'paginator',
@@ -448,6 +505,14 @@ export const routes: Routes = [
         (m: { TableDemoComponent: Type<unknown> }): Type<unknown> => m.TableDemoComponent
       ),
     title: 'Table - UI Components Library',
+  },
+  {
+    path: 'tiered-menu',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/tiered-menu/tiered-menu-demo.component').then(
+        (m: { TieredMenuDemoComponent: Type<unknown> }): Type<unknown> => m.TieredMenuDemoComponent
+      ),
+    title: 'TieredMenu - UI Components Library',
   },
   {
     path: 'timeline',
