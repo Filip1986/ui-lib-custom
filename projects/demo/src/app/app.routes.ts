@@ -242,6 +242,81 @@ export const routes: Routes = [
       ),
     title: 'Knob - UI Components Library',
   },
+  {
+    path: 'listbox',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/listbox/listbox-demo.component').then(
+        (m: { ListboxDemoComponent: Type<unknown> }): Type<unknown> => m.ListboxDemoComponent
+      ),
+    title: 'Listbox - UI Components Library',
+  },
+  {
+    path: 'password',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/password/password-demo.component').then(
+        (m: { PasswordDemoComponent: Type<unknown> }): Type<unknown> => m.PasswordDemoComponent
+      ),
+    title: 'Password - UI Components Library',
+  },
+  {
+    path: 'radio-button',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/radio-button/radio-button-demo.component').then(
+        (m: { RadioButtonDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.RadioButtonDemoComponent
+      ),
+    title: 'RadioButton - UI Components Library',
+  },
+  {
+    path: 'rating',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/rating/rating-demo.component').then(
+        (m: { RatingDemoComponent: Type<unknown> }): Type<unknown> => m.RatingDemoComponent
+      ),
+    title: 'Rating - UI Components Library',
+  },
+  {
+    path: 'slider',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/slider/slider-demo.component').then(
+        (m: { SliderDemoComponent: Type<unknown> }): Type<unknown> => m.SliderDemoComponent
+      ),
+    title: 'Slider - UI Components Library',
+  },
+  {
+    path: 'textarea',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/textarea/textarea-demo.component').then(
+        (m: { TextareaDemoComponent: Type<unknown> }): Type<unknown> => m.TextareaDemoComponent
+      ),
+    title: 'Textarea - UI Components Library',
+  },
+  {
+    path: 'toggle-button',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/toggle-button/toggle-button-demo.component').then(
+        (m: { ToggleButtonDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ToggleButtonDemoComponent
+      ),
+    title: 'ToggleButton - UI Components Library',
+  },
+  {
+    path: 'toggle-switch',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/toggle-switch/toggle-switch-demo.component').then(
+        (m: { ToggleSwitchDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ToggleSwitchDemoComponent
+      ),
+    title: 'ToggleSwitch - UI Components Library',
+  },
+  {
+    path: 'tree-select',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/tree-select/tree-select-demo.component').then(
+        (m: { TreeSelectDemoComponent: Type<unknown> }): Type<unknown> => m.TreeSelectDemoComponent
+      ),
+    title: 'TreeSelect - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];
