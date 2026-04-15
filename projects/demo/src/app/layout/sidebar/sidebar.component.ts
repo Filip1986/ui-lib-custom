@@ -352,6 +352,27 @@ export class SidebarComponent {
           group: 'Media',
         },
         {
+          label: 'Carousel',
+          icon: 'pi pi-circle',
+          route: '/carousel',
+          group: 'Media',
+          badge: 'TODO',
+        },
+        {
+          label: 'Image',
+          icon: 'pi pi-circle',
+          route: '/image',
+          group: 'Media',
+          badge: 'TODO',
+        },
+        {
+          label: 'ImageCompare',
+          icon: 'pi pi-circle',
+          route: '/image-compare',
+          group: 'Media',
+          badge: 'TODO',
+        },
+        {
           label: 'Sidebar Menu',
           icon: 'pi pi-circle',
           route: '/sidebar-menu',

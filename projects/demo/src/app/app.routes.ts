@@ -161,6 +161,14 @@ export const routes: Routes = [
     title: 'CascadeSelect - UI Components Library',
   },
   {
+    path: 'carousel',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/carousel/carousel-demo.component').then(
+        (m: { CarouselDemoComponent: Type<unknown> }): Type<unknown> => m.CarouselDemoComponent
+      ),
+    title: 'Carousel - UI Components Library',
+  },
+  {
     path: 'color-picker',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/color-picker/color-picker-demo.component').then(
@@ -276,6 +284,23 @@ export const routes: Routes = [
         (m: { IconFieldDemoComponent: Type<unknown> }): Type<unknown> => m.IconFieldDemoComponent
       ),
     title: 'IconField - UI Components Library',
+  },
+  {
+    path: 'image',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/image/image-demo.component').then(
+        (m: { ImageDemoComponent: Type<unknown> }): Type<unknown> => m.ImageDemoComponent
+      ),
+    title: 'Image - UI Components Library',
+  },
+  {
+    path: 'image-compare',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/image-compare/image-compare-demo.component').then(
+        (m: { ImageCompareDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ImageCompareDemoComponent
+      ),
+    title: 'ImageCompare - UI Components Library',
   },
   {
     path: 'input-group',
