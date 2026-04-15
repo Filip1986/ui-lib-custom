@@ -6,6 +6,7 @@
   --demo-sidebar-hover-bg: var(--uilib-surface-alt);
   --demo-sidebar-accent: var(--uilib-color-primary-600);
   --demo-sidebar-accent-strong: var(--uilib-color-primary-700);
+  --demo-group-rail-offset: 3rem;
   --demo-scrollbar-track: var(--uilib-surface-alt);
   --demo-scrollbar-thumb: var(--uilib-border);
   --demo-scrollbar-thumb-hover: var(--uilib-color-primary-600);
@@ -166,12 +167,18 @@
   &::before {
     content: '';
     position: absolute;
-    left: 3rem;
+    left: var(--demo-group-rail-offset);
     top: 0;
     bottom: 0;
     width: 1px;
     background: var(--demo-sidebar-border);
     pointer-events: none;
+  }
+
+  .nav-link {
+    margin-left: var(--demo-group-rail-offset);
+    width: calc(100% - var(--demo-group-rail-offset));
+    padding-left: 0.75rem;
   }
 }
 
