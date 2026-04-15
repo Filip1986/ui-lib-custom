@@ -397,6 +397,13 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'Upload',
+          icon: 'pi pi-circle',
+          route: '/upload',
+          group: 'File',
+          badge: 'TODO',
+        },
+        {
           label: 'Popover',
           icon: 'pi pi-circle',
           route: '/popover',

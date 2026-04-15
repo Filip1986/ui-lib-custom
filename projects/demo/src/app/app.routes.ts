@@ -523,6 +523,14 @@ export const routes: Routes = [
       ),
     title: 'TreeSelect - UI Components Library',
   },
+  {
+    path: 'upload',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/upload/upload-demo.component').then(
+        (m: { UploadDemoComponent: Type<unknown> }): Type<unknown> => m.UploadDemoComponent
+      ),
+    title: 'Upload - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];
