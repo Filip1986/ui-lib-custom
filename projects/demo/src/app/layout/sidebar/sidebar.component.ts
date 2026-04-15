@@ -115,30 +115,6 @@ export class SidebarComponent {
           route: '/dialog',
         },
         {
-          label: 'Input Text',
-          icon: 'pi pi-circle',
-          route: '/input-text',
-          group: 'Form',
-        },
-        {
-          label: 'Select',
-          icon: 'pi pi-circle',
-          route: '/select',
-          group: 'Form',
-        },
-        {
-          label: 'Checkbox',
-          icon: 'pi pi-circle',
-          route: '/checkbox',
-          group: 'Form',
-        },
-        {
-          label: 'Select Buttons',
-          icon: 'pi pi-circle',
-          route: '/select-buttons',
-          group: 'Form',
-        },
-        {
           label: 'Autocomplete',
           icon: 'pi pi-circle',
           route: '/autocomplete',
@@ -148,6 +124,12 @@ export class SidebarComponent {
           label: 'CascadeSelect',
           icon: 'pi pi-circle',
           route: '/cascade-select',
+          group: 'Form',
+        },
+        {
+          label: 'Checkbox',
+          icon: 'pi pi-circle',
+          route: '/checkbox',
           group: 'Form',
         },
         {
@@ -175,15 +157,21 @@ export class SidebarComponent {
           group: 'Form',
         },
         {
-          label: 'InputGroup',
-          icon: 'pi pi-circle',
-          route: '/input-group',
-          group: 'Form',
-        },
-        {
           label: 'IconField',
           icon: 'pi pi-circle',
           route: '/icon-field',
+          group: 'Form',
+        },
+        {
+          label: 'Input Text',
+          icon: 'pi pi-circle',
+          route: '/input-text',
+          group: 'Form',
+        },
+        {
+          label: 'InputGroup',
+          icon: 'pi pi-circle',
+          route: '/input-group',
           group: 'Form',
         },
         {
@@ -196,6 +184,18 @@ export class SidebarComponent {
           label: 'InputNumber',
           icon: 'pi pi-circle',
           route: '/input-number',
+          group: 'Form',
+        },
+        {
+          label: 'Select',
+          icon: 'pi pi-circle',
+          route: '/select',
+          group: 'Form',
+        },
+        {
+          label: 'Select Buttons',
+          icon: 'pi pi-circle',
+          route: '/select-buttons',
           group: 'Form',
         },
       ]),

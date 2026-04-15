@@ -197,7 +197,7 @@ describe('InputGroupAddonComponent', (): void => {
     fixture.detectChanges();
 
     const addonElement: HTMLElement = getInputGroupAddonElement(fixture);
-    expect(addonElement.textContent?.trim()).toBe('USD');
+    expect(addonElement.textContent.trim()).toBe('USD');
   });
 
   it('applies host class', async (): Promise<void> => {

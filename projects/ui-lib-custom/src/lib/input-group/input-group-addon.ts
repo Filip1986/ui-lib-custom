@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { INPUT_GROUP_CLASSES } from './input-group.constants';
 
 /**
- *
+ * Inline addon container used inside InputGroup to render text, icons, or actions.
  */
 @Component({
   selector: 'uilib-input-group-addon',

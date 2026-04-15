@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { INPUT_GROUP_CLASSES } from './input-group.constants';
 
 /**
- *
+ * Wrapper container that composes inputs with optional addon elements.
  */
 @Component({
   selector: 'uilib-input-group',
