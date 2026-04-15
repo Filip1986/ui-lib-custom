@@ -55,66 +55,6 @@ export class SidebarComponent {
       expanded: true,
       items: this.buildGroupedSubmenuItems([
         {
-          label: 'Gallery',
-          icon: 'pi pi-images',
-          route: '/gallery',
-        },
-        {
-          label: 'Badge',
-          icon: 'pi pi-circle',
-          route: '/badges',
-        },
-        {
-          label: 'Button',
-          icon: 'pi pi-circle',
-          route: '/buttons',
-        },
-        {
-          label: 'Card',
-          icon: 'pi pi-id-card',
-          route: '/cards',
-        },
-        {
-          label: 'Shadows',
-          icon: 'pi pi-circle',
-          route: '/shadows',
-        },
-        {
-          label: 'Tabs',
-          icon: 'pi pi-circle',
-          route: '/tabs',
-        },
-        {
-          label: 'Login Forms',
-          icon: 'pi pi-sign-in',
-          route: '/login',
-        },
-        {
-          label: 'Sidebar Menu',
-          icon: 'pi pi-circle',
-          route: '/sidebar-menu',
-        },
-        {
-          label: 'Project Starter',
-          icon: 'pi pi-circle',
-          route: '/project-starter',
-        },
-        {
-          label: 'Icons',
-          icon: 'pi pi-circle',
-          route: '/icons',
-        },
-        {
-          label: 'Accordion',
-          icon: 'pi pi-circle',
-          route: '/accordion',
-        },
-        {
-          label: 'Dialog',
-          icon: 'pi pi-circle',
-          route: '/dialog',
-        },
-        {
           label: 'Autocomplete',
           icon: 'pi pi-circle',
           route: '/autocomplete',
@@ -197,6 +137,68 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/select-buttons',
           group: 'Form',
+        },
+        {
+          label: 'Gallery',
+          icon: 'pi pi-images',
+          route: '/gallery',
+          group: 'Media',
+        },
+        {
+          label: 'Badge',
+          icon: 'pi pi-circle',
+          route: '/badges',
+          group: 'Misc',
+        },
+        {
+          label: 'Button',
+          icon: 'pi pi-circle',
+          route: '/buttons',
+        },
+        {
+          label: 'Card',
+          icon: 'pi pi-id-card',
+          route: '/cards',
+        },
+        {
+          label: 'Shadows',
+          icon: 'pi pi-circle',
+          route: '/shadows',
+        },
+        {
+          label: 'Tabs',
+          icon: 'pi pi-circle',
+          route: '/tabs',
+        },
+        {
+          label: 'Login Forms',
+          icon: 'pi pi-sign-in',
+          route: '/login',
+        },
+        {
+          label: 'Sidebar Menu',
+          icon: 'pi pi-circle',
+          route: '/sidebar-menu',
+        },
+        {
+          label: 'Project Starter',
+          icon: 'pi pi-circle',
+          route: '/project-starter',
+        },
+        {
+          label: 'Icons',
+          icon: 'pi pi-circle',
+          route: '/icons',
+        },
+        {
+          label: 'Accordion',
+          icon: 'pi pi-circle',
+          route: '/accordion',
+        },
+        {
+          label: 'Dialog',
+          icon: 'pi pi-circle',
+          route: '/dialog',
         },
       ]),
     },
