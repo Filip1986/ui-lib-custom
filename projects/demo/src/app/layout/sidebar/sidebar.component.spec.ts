@@ -81,13 +81,18 @@ describe('SidebarComponent ordering', (): void => {
     });
   });
 
-  it('keeps trailing ungrouped items alphabetically ordered', (): void => {
+  it('keeps trailing ungrouped items alphabetically ordered when present', (): void => {
     const items: NavItem[] = getComponentsItems();
     const firstUngroupedIndex: number = items.findIndex(
       (item: NavItem): boolean => item.isGroupLabel !== true && !item.group
     );
 
-    expect(firstUngroupedIndex).toBeGreaterThan(-1);
+    if (firstUngroupedIndex < 0) {
+      expect(
+        items.every((item: NavItem): boolean => item.isGroupLabel === true || Boolean(item.group))
+      ).toBe(true);
+      return;
+    }
 
     const trailingUngroupedItems: NavItem[] = items.slice(firstUngroupedIndex);
     const trailingUngroupedLabels: string[] = trailingUngroupedItems.map(

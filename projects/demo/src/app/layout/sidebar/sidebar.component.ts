@@ -31,12 +31,24 @@ export class SidebarComponent {
     {
       label: 'Getting Started',
       icon: 'pi pi-home',
-      route: '/home',
+      expanded: false,
+      items: [
+        {
+          label: 'Home',
+          icon: 'pi pi-circle',
+          route: '/home',
+        },
+        {
+          label: 'Project Starter',
+          icon: 'pi pi-circle',
+          route: '/project-starter',
+        },
+      ],
     },
     {
       label: 'Layout',
       icon: 'pi pi-th-large',
-      expanded: true,
+      expanded: false,
       items: [
         { label: 'Semantic Spacing', icon: 'pi pi-circle', route: '/layouts/semantic-spacing' },
         { label: 'Stack', icon: 'pi pi-circle', route: '/layouts/stack' },
@@ -204,27 +216,29 @@ export class SidebarComponent {
           route: '/tabs',
           group: 'Panel',
         },
-        {
-          label: 'Project Starter',
-          icon: 'pi pi-circle',
-          route: '/project-starter',
-        },
       ]),
     },
     {
-      label: 'Theming',
+      label: 'Theme',
       icon: 'pi pi-palette',
-      route: '/themes',
-    },
-    {
-      label: 'Dark Mode',
-      icon: 'pi pi-moon',
-      route: '/dark-mode',
-    },
-    {
-      label: 'Scoped Theming',
-      icon: 'pi pi-sitemap',
-      route: '/scoped-theming',
+      expanded: false,
+      items: [
+        {
+          label: 'Theming',
+          icon: 'pi pi-palette',
+          route: '/themes',
+        },
+        {
+          label: 'Dark Mode',
+          icon: 'pi pi-moon',
+          route: '/dark-mode',
+        },
+        {
+          label: 'Scoped Theming',
+          icon: 'pi pi-sitemap',
+          route: '/scoped-theming',
+        },
+      ],
     },
     {
       label: 'Accessibility',
