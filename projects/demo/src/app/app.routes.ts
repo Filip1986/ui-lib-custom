@@ -276,12 +276,110 @@ export const routes: Routes = [
     title: 'Rating - UI Components Library',
   },
   {
+    path: 'data-view',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/data-view/data-view-demo.component').then(
+        (m: { DataViewDemoComponent: Type<unknown> }): Type<unknown> => m.DataViewDemoComponent
+      ),
+    title: 'DataView - UI Components Library',
+  },
+  {
+    path: 'order-list',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/order-list/order-list-demo.component').then(
+        (m: { OrderListDemoComponent: Type<unknown> }): Type<unknown> => m.OrderListDemoComponent
+      ),
+    title: 'OrderList - UI Components Library',
+  },
+  {
+    path: 'organization-chart',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/organization-chart/organization-chart-demo.component').then(
+        (m: { OrganizationChartDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.OrganizationChartDemoComponent
+      ),
+    title: 'OrganizationChart - UI Components Library',
+  },
+  {
+    path: 'paginator',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/paginator/paginator-demo.component').then(
+        (m: { PaginatorDemoComponent: Type<unknown> }): Type<unknown> => m.PaginatorDemoComponent
+      ),
+    title: 'Paginator - UI Components Library',
+  },
+  {
+    path: 'pick-list',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/pick-list/pick-list-demo.component').then(
+        (m: { PickListDemoComponent: Type<unknown> }): Type<unknown> => m.PickListDemoComponent
+      ),
+    title: 'PickList - UI Components Library',
+  },
+  {
+    path: 'scroller',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/scroller/scroller-demo.component').then(
+        (m: { ScrollerDemoComponent: Type<unknown> }): Type<unknown> => m.ScrollerDemoComponent
+      ),
+    title: 'Scroller - UI Components Library',
+  },
+  {
     path: 'slider',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/slider/slider-demo.component').then(
         (m: { SliderDemoComponent: Type<unknown> }): Type<unknown> => m.SliderDemoComponent
       ),
     title: 'Slider - UI Components Library',
+  },
+  {
+    path: 'speed-dial',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/speed-dial/speed-dial-demo.component').then(
+        (m: { SpeedDialDemoComponent: Type<unknown> }): Type<unknown> => m.SpeedDialDemoComponent
+      ),
+    title: 'SpeedDial - UI Components Library',
+  },
+  {
+    path: 'split-button',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/split-button/split-button-demo.component').then(
+        (m: { SplitButtonDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.SplitButtonDemoComponent
+      ),
+    title: 'SplitButton - UI Components Library',
+  },
+  {
+    path: 'table',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/table/table-demo.component').then(
+        (m: { TableDemoComponent: Type<unknown> }): Type<unknown> => m.TableDemoComponent
+      ),
+    title: 'Table - UI Components Library',
+  },
+  {
+    path: 'timeline',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/timeline/timeline-demo.component').then(
+        (m: { TimelineDemoComponent: Type<unknown> }): Type<unknown> => m.TimelineDemoComponent
+      ),
+    title: 'Timeline - UI Components Library',
+  },
+  {
+    path: 'tree',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/tree/tree-demo.component').then(
+        (m: { TreeDemoComponent: Type<unknown> }): Type<unknown> => m.TreeDemoComponent
+      ),
+    title: 'Tree - UI Components Library',
+  },
+  {
+    path: 'tree-table',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/tree-table/tree-table-demo.component').then(
+        (m: { TreeTableDemoComponent: Type<unknown> }): Type<unknown> => m.TreeTableDemoComponent
+      ),
+    title: 'TreeTable - UI Components Library',
   },
   {
     path: 'textarea',
