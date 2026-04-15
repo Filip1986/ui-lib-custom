@@ -162,6 +162,24 @@ export const routes: Routes = [
     title: 'ColorPicker - UI Components Library',
   },
   {
+    path: 'confirm-dialog',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/confirm-dialog/confirm-dialog-demo.component').then(
+        (m: { ConfirmDialogDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ConfirmDialogDemoComponent
+      ),
+    title: 'ConfirmDialog - UI Components Library',
+  },
+  {
+    path: 'confirm-popup',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/confirm-popup/confirm-popup-demo.component').then(
+        (m: { ConfirmPopupDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ConfirmPopupDemoComponent
+      ),
+    title: 'ConfirmPopup - UI Components Library',
+  },
+  {
     path: 'date-picker',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/date-picker/date-picker-demo.component').then(
@@ -176,6 +194,23 @@ export const routes: Routes = [
         (m: { DividerDemoComponent: Type<unknown> }): Type<unknown> => m.DividerDemoComponent
       ),
     title: 'Divider - UI Components Library',
+  },
+  {
+    path: 'drawer',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/drawer/drawer-demo.component').then(
+        (m: { DrawerDemoComponent: Type<unknown> }): Type<unknown> => m.DrawerDemoComponent
+      ),
+    title: 'Drawer - UI Components Library',
+  },
+  {
+    path: 'dynamic-dialog',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/dynamic-dialog/dynamic-dialog-demo.component').then(
+        (m: { DynamicDialogDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.DynamicDialogDemoComponent
+      ),
+    title: 'DynamicDialog - UI Components Library',
   },
   {
     path: 'editor',
@@ -281,6 +316,14 @@ export const routes: Routes = [
         (m: { PasswordDemoComponent: Type<unknown> }): Type<unknown> => m.PasswordDemoComponent
       ),
     title: 'Password - UI Components Library',
+  },
+  {
+    path: 'popover',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/popover/popover-demo.component').then(
+        (m: { PopoverDemoComponent: Type<unknown> }): Type<unknown> => m.PopoverDemoComponent
+      ),
+    title: 'Popover - UI Components Library',
   },
   {
     path: 'radio-button',
@@ -421,6 +464,14 @@ export const routes: Routes = [
         (m: { ToolbarDemoComponent: Type<unknown> }): Type<unknown> => m.ToolbarDemoComponent
       ),
     title: 'Toolbar - UI Components Library',
+  },
+  {
+    path: 'tooltip',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/tooltip/tooltip-demo.component').then(
+        (m: { TooltipDemoComponent: Type<unknown> }): Type<unknown> => m.TooltipDemoComponent
+      ),
+    title: 'Tooltip - UI Components Library',
   },
   {
     path: 'tree',
