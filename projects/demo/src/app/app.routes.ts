@@ -152,6 +152,47 @@ export const routes: Routes = [
     title: 'AutoComplete - UI Components Library',
   },
   {
+    path: 'animated-on-scroll',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/animated-on-scroll/animated-on-scroll-demo.component').then(
+        (m: { AnimatedOnScrollDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.AnimatedOnScrollDemoComponent
+      ),
+    title: 'AnimatedOnScroll - UI Components Library',
+  },
+  {
+    path: 'auto-focus',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/auto-focus/auto-focus-demo.component').then(
+        (m: { AutoFocusDemoComponent: Type<unknown> }): Type<unknown> => m.AutoFocusDemoComponent
+      ),
+    title: 'AutoFocus - UI Components Library',
+  },
+  {
+    path: 'avatar',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/avatar/avatar-demo.component').then(
+        (m: { AvatarDemoComponent: Type<unknown> }): Type<unknown> => m.AvatarDemoComponent
+      ),
+    title: 'Avatar - UI Components Library',
+  },
+  {
+    path: 'bind',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/bind/bind-demo.component').then(
+        (m: { BindDemoComponent: Type<unknown> }): Type<unknown> => m.BindDemoComponent
+      ),
+    title: 'Bind - UI Components Library',
+  },
+  {
+    path: 'block-ui',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/block-ui/block-ui-demo.component').then(
+        (m: { BlockUiDemoComponent: Type<unknown> }): Type<unknown> => m.BlockUiDemoComponent
+      ),
+    title: 'BlockUI - UI Components Library',
+  },
+  {
     path: 'cascade-select',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/cascade-select/cascade-select-demo.component').then(
@@ -211,6 +252,22 @@ export const routes: Routes = [
           m.ContextMenuDemoComponent
       ),
     title: 'ContextMenu - UI Components Library',
+  },
+  {
+    path: 'chip',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/chip/chip-demo.component').then(
+        (m: { ChipDemoComponent: Type<unknown> }): Type<unknown> => m.ChipDemoComponent
+      ),
+    title: 'Chip - UI Components Library',
+  },
+  {
+    path: 'class-names',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/class-names/class-names-demo.component').then(
+        (m: { ClassNamesDemoComponent: Type<unknown> }): Type<unknown> => m.ClassNamesDemoComponent
+      ),
+    title: 'ClassNames - UI Components Library',
   },
   {
     path: 'date-picker',
@@ -276,6 +333,22 @@ export const routes: Routes = [
         (m: { FloatLabelDemoComponent: Type<unknown> }): Type<unknown> => m.FloatLabelDemoComponent
       ),
     title: 'FloatLabel - UI Components Library',
+  },
+  {
+    path: 'focus-trap',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/focus-trap/focus-trap-demo.component').then(
+        (m: { FocusTrapDemoComponent: Type<unknown> }): Type<unknown> => m.FocusTrapDemoComponent
+      ),
+    title: 'FocusTrap - UI Components Library',
+  },
+  {
+    path: 'fluid',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/fluid/fluid-demo.component').then(
+        (m: { FluidDemoComponent: Type<unknown> }): Type<unknown> => m.FluidDemoComponent
+      ),
+    title: 'Fluid - UI Components Library',
   },
   {
     path: 'icon-field',
@@ -358,6 +431,14 @@ export const routes: Routes = [
         (m: { ListboxDemoComponent: Type<unknown> }): Type<unknown> => m.ListboxDemoComponent
       ),
     title: 'Listbox - UI Components Library',
+  },
+  {
+    path: 'inplace',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/inplace/inplace-demo.component').then(
+        (m: { InplaceDemoComponent: Type<unknown> }): Type<unknown> => m.InplaceDemoComponent
+      ),
+    title: 'Inplace - UI Components Library',
   },
   {
     path: 'panel',
@@ -458,6 +539,14 @@ export const routes: Routes = [
     title: 'OrganizationChart - UI Components Library',
   },
   {
+    path: 'meter-group',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/meter-group/meter-group-demo.component').then(
+        (m: { MeterGroupDemoComponent: Type<unknown> }): Type<unknown> => m.MeterGroupDemoComponent
+      ),
+    title: 'MeterGroup - UI Components Library',
+  },
+  {
     path: 'panel-menu',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/panel-menu/panel-menu-demo.component').then(
@@ -482,6 +571,24 @@ export const routes: Routes = [
     title: 'PickList - UI Components Library',
   },
   {
+    path: 'progress-bar',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/progress-bar/progress-bar-demo.component').then(
+        (m: { ProgressBarDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ProgressBarDemoComponent
+      ),
+    title: 'ProgressBar - UI Components Library',
+  },
+  {
+    path: 'progress-spinner',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/progress-spinner/progress-spinner-demo.component').then(
+        (m: { ProgressSpinnerDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.ProgressSpinnerDemoComponent
+      ),
+    title: 'ProgressSpinner - UI Components Library',
+  },
+  {
     path: 'scroll-panel',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/scroll-panel/scroll-panel-demo.component').then(
@@ -499,12 +606,36 @@ export const routes: Routes = [
     title: 'Scroller - UI Components Library',
   },
   {
+    path: 'ripple',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/ripple/ripple-demo.component').then(
+        (m: { RippleDemoComponent: Type<unknown> }): Type<unknown> => m.RippleDemoComponent
+      ),
+    title: 'Ripple - UI Components Library',
+  },
+  {
+    path: 'scroll-top',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/scroll-top/scroll-top-demo.component').then(
+        (m: { ScrollTopDemoComponent: Type<unknown> }): Type<unknown> => m.ScrollTopDemoComponent
+      ),
+    title: 'ScrollTop - UI Components Library',
+  },
+  {
     path: 'slider',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/slider/slider-demo.component').then(
         (m: { SliderDemoComponent: Type<unknown> }): Type<unknown> => m.SliderDemoComponent
       ),
     title: 'Slider - UI Components Library',
+  },
+  {
+    path: 'skeleton',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/skeleton/skeleton-demo.component').then(
+        (m: { SkeletonDemoComponent: Type<unknown> }): Type<unknown> => m.SkeletonDemoComponent
+      ),
+    title: 'Skeleton - UI Components Library',
   },
   {
     path: 'speed-dial',
@@ -538,6 +669,30 @@ export const routes: Routes = [
         (m: { StepperDemoComponent: Type<unknown> }): Type<unknown> => m.StepperDemoComponent
       ),
     title: 'Stepper - UI Components Library',
+  },
+  {
+    path: 'style-class',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/style-class/style-class-demo.component').then(
+        (m: { StyleClassDemoComponent: Type<unknown> }): Type<unknown> => m.StyleClassDemoComponent
+      ),
+    title: 'StyleClass - UI Components Library',
+  },
+  {
+    path: 'tag',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/tag/tag-demo.component').then(
+        (m: { TagDemoComponent: Type<unknown> }): Type<unknown> => m.TagDemoComponent
+      ),
+    title: 'Tag - UI Components Library',
+  },
+  {
+    path: 'terminal',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/terminal/terminal-demo.component').then(
+        (m: { TerminalDemoComponent: Type<unknown> }): Type<unknown> => m.TerminalDemoComponent
+      ),
+    title: 'Terminal - UI Components Library',
   },
   {
     path: 'table',
