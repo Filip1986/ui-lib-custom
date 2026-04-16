@@ -66,7 +66,7 @@ export class SidebarComponent {
     {
       label: 'Components',
       icon: 'pi pi-box',
-      expanded: true,
+      expanded: false,
       items: this.buildGroupedSubmenuItems([
         {
           label: 'Button',
@@ -769,7 +769,14 @@ export class SidebarComponent {
     {
       label: 'Accessibility',
       icon: 'pi pi-universal-access',
-      route: '/accessibility',
+      expanded: false,
+      items: [
+        {
+          label: 'Overview',
+          icon: 'pi pi-circle',
+          route: '/accessibility',
+        },
+      ],
     },
   ]);
 

@@ -193,4 +193,27 @@ describe('SidebarComponent ordering', (): void => {
       },
     ]);
   });
+
+  it('adds Accessibility as a collapsed top-level section', (): void => {
+    const accessibilityMenu: NavItem | undefined = getTopLevelMenu('Accessibility');
+
+    expect(accessibilityMenu).toBeTruthy();
+    expect(accessibilityMenu?.expanded).toBe(false);
+    expect(accessibilityMenu?.items).toEqual([
+      {
+        label: 'Overview',
+        icon: 'pi pi-circle',
+        route: '/accessibility',
+      },
+    ]);
+  });
+
+  it('keeps all expandable top-level menus collapsed by default', (): void => {
+    const expandableMenus: NavItem[] = component
+      .menuItems()
+      .filter((item: NavItem): boolean => Boolean(item.items));
+
+    expect(expandableMenus.length).toBeGreaterThan(0);
+    expect(expandableMenus.every((item: NavItem): boolean => item.expanded === false)).toBe(true);
+  });
 });
