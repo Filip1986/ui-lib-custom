@@ -202,6 +202,15 @@ export const routes: Routes = [
     title: 'BlockUI - UI Components Library',
   },
   {
+    path: 'bottom-sheet',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/bottom-sheet/bottom-sheet-demo.component').then(
+        (m: { BottomSheetDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.BottomSheetDemoComponent
+      ),
+    title: 'Bottom Sheet - UI Components Library',
+  },
+  {
     path: 'cascade-select',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/cascade-select/cascade-select-demo.component').then(

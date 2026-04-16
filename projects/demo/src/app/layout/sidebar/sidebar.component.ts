@@ -484,6 +484,13 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'Bottom Sheet',
+          icon: 'pi pi-circle',
+          route: '/bottom-sheet',
+          group: 'Overlay',
+          badge: 'TODO',
+        },
+        {
           label: 'Chip',
           icon: 'pi pi-circle',
           route: '/chip',
