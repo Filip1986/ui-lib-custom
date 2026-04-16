@@ -715,13 +715,14 @@ export class SidebarComponent {
       label: 'UI Blocks',
       icon: 'pi pi-clone',
       expanded: false,
-      items: [
+      items: this.buildGroupedSubmenuItems([
         {
           label: 'Login Forms',
           icon: 'pi pi-sign-in',
           route: '/login',
+          group: 'Authentication',
         },
-      ],
+      ]),
     },
     {
       label: 'Theme',

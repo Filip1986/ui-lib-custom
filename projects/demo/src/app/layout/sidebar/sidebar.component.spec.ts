@@ -160,16 +160,21 @@ describe('SidebarComponent ordering', (): void => {
     expect(labels).not.toContain('Login Forms');
   });
 
-  it('adds UI Blocks as a collapsed top-level section with Login Forms', (): void => {
+  it('adds UI Blocks as a collapsed top-level section with Authentication group', (): void => {
     const uiBlocksMenu: NavItem | undefined = getTopLevelMenu('UI Blocks');
 
     expect(uiBlocksMenu).toBeTruthy();
     expect(uiBlocksMenu?.expanded).toBe(false);
     expect(uiBlocksMenu?.items).toEqual([
       {
+        label: 'Authentication',
+        isGroupLabel: true,
+      },
+      {
         label: 'Login Forms',
         icon: 'pi pi-sign-in',
         route: '/login',
+        group: 'Authentication',
       },
     ]);
   });
