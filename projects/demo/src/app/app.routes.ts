@@ -103,6 +103,15 @@ export const routes: Routes = [
     component: ProjectStarterComponent,
     title: 'Project Starter - UI Components Library',
   },
+  {
+    path: 'templates/starter-template',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/starter-template/starter-template.component').then(
+        (m: { StarterTemplateComponent: Type<unknown> }): Type<unknown> =>
+          m.StarterTemplateComponent
+      ),
+    title: 'Starter Template - UI Components Library',
+  },
   { path: 'shadows', component: ShadowsComponent, title: 'Shadows - UI Components Library' },
   { path: 'tabs', component: TabsComponent, title: 'Tabs - UI Components Library' },
   {

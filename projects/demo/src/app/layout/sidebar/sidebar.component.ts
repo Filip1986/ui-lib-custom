@@ -725,6 +725,19 @@ export class SidebarComponent {
       ]),
     },
     {
+      label: 'Templates',
+      icon: 'pi pi-copy',
+      expanded: false,
+      items: [
+        {
+          label: 'Starter Template',
+          icon: 'pi pi-circle',
+          route: '/templates/starter-template',
+          badge: 'TODO',
+        },
+      ],
+    },
+    {
       label: 'Theme',
       icon: 'pi pi-palette',
       expanded: false,

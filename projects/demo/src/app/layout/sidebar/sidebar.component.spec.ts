@@ -178,4 +178,19 @@ describe('SidebarComponent ordering', (): void => {
       },
     ]);
   });
+
+  it('adds Templates as a collapsed top-level section', (): void => {
+    const templatesMenu: NavItem | undefined = getTopLevelMenu('Templates');
+
+    expect(templatesMenu).toBeTruthy();
+    expect(templatesMenu?.expanded).toBe(false);
+    expect(templatesMenu?.items).toEqual([
+      {
+        label: 'Starter Template',
+        icon: 'pi pi-circle',
+        route: '/templates/starter-template',
+        badge: 'TODO',
+      },
+    ]);
+  });
 });
