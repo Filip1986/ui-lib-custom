@@ -1423,6 +1423,38 @@ export const INPUTNUMBER_TOKENS: Readonly<InputNumberTokens> = {
 export type InputNumberTokenKey = keyof typeof INPUTNUMBER_TOKENS;
 
 // ============================================================================
+// SPEED DIAL TOKENS
+// ============================================================================
+
+export type SpeedDialSize = 'sm' | 'md' | 'lg';
+
+export type SpeedDialSizes = {
+  button: Record<SpeedDialSize, string>;
+  item: Record<SpeedDialSize, string>;
+};
+
+export type SpeedDialTokens = {
+  sizes: SpeedDialSizes;
+};
+
+export const SPEED_DIAL_TOKENS: Readonly<SpeedDialTokens> = {
+  sizes: {
+    button: {
+      sm: '2.5rem',
+      md: '3.25rem',
+      lg: '4rem',
+    },
+    item: {
+      sm: '2.25rem',
+      md: '2.75rem',
+      lg: '3.25rem',
+    },
+  },
+};
+
+export type SpeedDialTokenKey = keyof typeof SPEED_DIAL_TOKENS;
+
+// ============================================================================
 // EDITOR TOKENS
 // ============================================================================
 

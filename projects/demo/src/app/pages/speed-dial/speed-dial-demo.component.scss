@@ -1,14 +1,80 @@
-.speed-dial-demo {
-  padding: 1.5rem;
+@use '../../shared/styles/doc-page.scss';
+
+.examples {
+  display: grid;
+  gap: 1.25rem;
 }
 
-.speed-dial-demo h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.5rem;
-  color: var(--uilib-page-fg);
+.example-section {
+  display: grid;
+  gap: 0.75rem;
 }
 
-.speed-dial-demo p {
-  margin: 0;
+.action-log {
+  margin: 0.5rem 0 0;
   color: var(--uilib-muted);
+}
+
+.dial-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.dial-grid--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.dial-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dial-cell {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  min-height: 14rem;
+  position: relative;
+
+  h4 {
+    margin: 0;
+    text-transform: capitalize;
+    color: var(--uilib-muted);
+    font-size: 0.875rem;
+  }
+}
+
+.dial-cell--center {
+  min-height: 18rem;
+}
+
+.template-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.template-item__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  background: var(--uilib-primary);
+  color: var(--uilib-primary-contrast);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+@media (max-width: 1200px) {
+  .dial-grid--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .dial-grid--four {
+    grid-template-columns: 1fr;
+  }
 }

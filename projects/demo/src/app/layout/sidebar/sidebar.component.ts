@@ -79,7 +79,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/speed-dial',
           group: 'Button',
-          badge: 'TODO',
         },
         {
           label: 'SplitButton',

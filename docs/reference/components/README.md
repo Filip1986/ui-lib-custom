@@ -270,6 +270,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### SpeedDial
+**Files:**
+- [SPEEDDIAL.md](SPEEDDIAL.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/speed-dial)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/speed-dial/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -339,6 +351,7 @@ Each component should have two documentation files:
 | InputGroup | Grouped control/addon layout wrapper pair | - | - | Inherits projected control sizes | ✅ Complete |
 | InputMask | Structured masked input for fixed-format values | - | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | InputNumber | Locale-aware numeric input with formatting, spin controls, and forms support | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+| SpeedDial | Floating action menu with linear and radial layouts | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 
 ---
 

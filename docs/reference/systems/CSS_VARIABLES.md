@@ -550,6 +550,34 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-select-button-large-font-size` | `1.125rem` | Large font size. |
 | `--uilib-select-button-large-min-height` | `3rem` | Large min height. |
 
+## SpeedDial
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-speed-dial-button-size` | `var(--uilib-speed-dial-size-button-md, 3.25rem)` | Trigger button size. |
+| `--uilib-speed-dial-button-bg` | `var(--uilib-color-primary-600, #1e88e5)` | Trigger button background. |
+| `--uilib-speed-dial-button-color` | `var(--uilib-color-neutral-50, #fafafa)` | Trigger button foreground/icon color. |
+| `--uilib-speed-dial-button-shadow` | `var(--uilib-shadow-lg, none)` | Trigger button shadow. |
+| `--uilib-speed-dial-item-size` | `var(--uilib-speed-dial-size-item-md, 2.75rem)` | Action item size. |
+| `--uilib-speed-dial-item-bg` | `var(--uilib-color-primary-600, #1e88e5)` | Action item background. |
+| `--uilib-speed-dial-item-color` | `var(--uilib-color-neutral-50, #fafafa)` | Action item foreground/icon color. |
+| `--uilib-speed-dial-item-shadow` | `var(--uilib-shadow-md, none)` | Action item shadow. |
+| `--uilib-speed-dial-gap` | `var(--uilib-space-2, 0.5rem)` | Gap between trigger and list/actions in linear layouts. |
+| `--uilib-speed-dial-radius` | `var(--uilib-radius-full, 9999px)` | Shared trigger/item border radius. |
+| `--uilib-speed-dial-mask-bg` | `color-mix(in srgb, var(--uilib-overlay-backdrop-bg, var(--uilib-color-neutral-900, #212121)) 50%, transparent)` | Backdrop mask color. |
+| `--uilib-speed-dial-mask-z` | `var(--uilib-z-backdrop, 1040)` | Backdrop mask z-index. |
+| `--uilib-speed-dial-list-z` | `var(--uilib-z-overlay, 1060)` | Action list z-index. |
+| `--uilib-speed-dial-transition-duration` | `var(--uilib-transition-md, 200ms)` | Base transition duration. |
+| `--uilib-speed-dial-transition-easing` | `var(--uilib-transition-ease-out, ease-out)` | Base transition easing. |
+| `--uilib-speed-dial-rotate-open` | `45deg` | Trigger icon rotation angle when open (`--rotate` mode). |
+| `--uilib-speed-dial-focus-ring` | `0 0 0 var(--uilib-border-width-2, 2px) color-mix(in srgb, var(--uilib-color-primary-500, #2196f3) 30%, transparent)` | Focus ring for trigger/items. |
+| `--uilib-speed-dial-size-button-sm` | `2.5rem` | Small trigger button size token. |
+| `--uilib-speed-dial-size-button-md` | `3.25rem` | Medium trigger button size token. |
+| `--uilib-speed-dial-size-button-lg` | `4rem` | Large trigger button size token. |
+| `--uilib-speed-dial-size-item-sm` | `2.25rem` | Small action item size token. |
+| `--uilib-speed-dial-size-item-md` | `2.75rem` | Medium action item size token. |
+| `--uilib-speed-dial-size-item-lg` | `3.25rem` | Large action item size token. |
+
 ## Sidebar Menu
 
 | Variable | Default | Description |

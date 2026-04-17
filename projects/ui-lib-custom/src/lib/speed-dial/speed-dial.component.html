@@ -1,0 +1,80 @@
+<button
+  #triggerBtn
+  type="button"
+  class="ui-lib-speed-dial__button"
+  [attr.aria-expanded]="visible() ? 'true' : 'false'"
+  [attr.aria-haspopup]="'true'"
+  [attr.aria-controls]="listId"
+  [attr.aria-label]="triggerAriaLabel()"
+  [attr.aria-labelledby]="ariaLabelledBy()"
+  [attr.aria-disabled]="disabled() ? 'true' : null"
+  [disabled]="disabled()"
+  [tabindex]="tabindex()"
+  (click)="toggle($event)"
+  (keydown)="onButtonKeydown($event)"
+>
+  @if (buttonTemplate(); as projectedButtonTemplate) {
+    <ng-container
+      [ngTemplateOutlet]="projectedButtonTemplate"
+      [ngTemplateOutletContext]="{ $implicit: visible() }"
+    />
+  } @else {
+    @if (iconTemplate(); as projectedIconTemplate) {
+      <ng-container
+        [ngTemplateOutlet]="projectedIconTemplate"
+        [ngTemplateOutletContext]="{ $implicit: visible() }"
+      />
+    } @else {
+      <ui-lib-icon [name]="visible() && hideIcon() ? hideIcon()! : showIcon()" />
+    }
+  }
+</button>
+
+<ul
+  #listElement
+  class="ui-lib-speed-dial__list"
+  [id]="listId"
+  role="menu"
+  [hidden]="!visible()"
+  [attr.aria-hidden]="!visible()"
+>
+  @for (item of visibleItems(); track $index; let i = $index) {
+    <li role="none" class="ui-lib-speed-dial__item">
+      <button
+        #itemAction
+        type="button"
+        class="ui-lib-speed-dial__action"
+        role="menuitem"
+        [attr.id]="itemId(i)"
+        [attr.aria-label]="item.label ?? null"
+        [attr.aria-disabled]="item.disabled === true ? 'true' : null"
+        [attr.title]="item.tooltip ?? null"
+        [attr.tabindex]="visible() ? 0 : -1"
+        [disabled]="item.disabled === true"
+        [style.transform]="itemTransform()[i]"
+        [style.transition-delay]="itemTransitionDelay()[i]"
+        (click)="onItemClick($event, item, i)"
+        (keydown)="onItemKeydown($event, item, i)"
+      >
+        @if (itemTemplate(); as projectedItemTemplate) {
+          <ng-container
+            [ngTemplateOutlet]="projectedItemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: item, index: i }"
+          />
+        } @else {
+          @if (item.icon; as itemIcon) {
+            <ui-lib-icon [name]="itemIcon" />
+          }
+          @if (item.label; as itemLabel) {
+            <span class="ui-lib-speed-dial__label">{{ itemLabel }}</span>
+          }
+        }
+      </button>
+    </li>
+  }
+</ul>
+
+@if (mask() && visible()) {
+  <div class="ui-lib-speed-dial__mask" (click)="onMaskClick($event)" [attr.aria-hidden]="true"></div>
+}
+

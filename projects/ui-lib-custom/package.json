@@ -61,6 +61,12 @@
       "esm2022": "./esm2022/input-mask/index.mjs",
       "esm": "./esm2022/input-mask/index.mjs"
     },
+    "./speed-dial": {
+      "main": "./fesm2022/ui-lib-custom-speed-dial.mjs",
+      "module": "./fesm2022/ui-lib-custom-speed-dial.mjs",
+      "typings": "./speed-dial/index.d.ts",
+      "default": "./fesm2022/ui-lib-custom-speed-dial.mjs"
+    },
     "./themes/themes.css": {
       "default": "./themes/themes.css"
     },
@@ -90,6 +96,9 @@
       ],
       "input-mask": [
         "./input-mask/index.d.ts"
+      ],
+      "speed-dial": [
+        "./speed-dial/index.d.ts"
       ],
       "testing": [
         "./testing/index.d.ts"

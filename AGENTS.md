@@ -46,6 +46,7 @@
 - Playwright config runs against `http://localhost:4200` and stores results in `playwright-report/` + `test-results/a11y-results.json`.
 - `npm run test:a11y:e2e` runs only `e2e/a11y.spec.ts`; run `npx playwright test e2e/overlay-mounting.spec.ts` when debugging overlay mounting behavior.
 - Storybook commands already set `NODE_ENV` via `cross-env`; prefer `npm run storybook` / `npm run build-storybook`.
+- Windows shell note: if PowerShell blocks `npm.ps1`/`npx.ps1` (execution policy), run the `.cmd` shims (`npm.cmd`, `npx.cmd`) from `bash.exe` and record the outcome/workaround in the session handoff.
 
 ## When Adding/Changing Components
 - Start with `COMPONENT_CREATION_GUIDE.md` for the component creation workflow and prompt sequencing.
