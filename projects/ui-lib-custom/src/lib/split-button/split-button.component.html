@@ -1,0 +1,87 @@
+<div class="ui-lib-split-button__container">
+  <button
+    type="button"
+    class="ui-lib-split-button__default-button"
+    [disabled]="isMainButtonDisabled()"
+    [attr.tabindex]="tabindex()"
+    [attr.aria-label]="buttonAriaLabel() || label() || null"
+    (click)="onMainButtonClick($event)"
+    (keydown)="onMainButtonKeydown($event)"
+  >
+    @if (loading()) {
+      <ui-lib-icon [name]="loadingIcon()" class="ui-lib-split-button__loading-icon" size="sm" />
+    }
+
+    @if (!loading() && iconPosition() === 'left' && icon()) {
+      <ui-lib-icon [name]="icon()!" class="ui-lib-split-button__icon ui-lib-split-button__icon--start" size="sm" />
+    }
+
+    @if (contentTemplate()) {
+      <ng-container [ngTemplateOutlet]="contentTemplate()!" />
+    } @else {
+      <span class="ui-lib-split-button__label">{{ label() }}</span>
+    }
+
+    @if (!loading() && iconPosition() === 'right' && icon()) {
+      <ui-lib-icon [name]="icon()!" class="ui-lib-split-button__icon ui-lib-split-button__icon--end" size="sm" />
+    }
+  </button>
+
+  <button
+    #menuBtn
+    type="button"
+    class="ui-lib-split-button__menu-button"
+    [disabled]="isMenuButtonDisabled()"
+    [attr.tabindex]="tabindex()"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="isMenuOpen()"
+    [attr.aria-controls]="isMenuOpen() ? menuId() : null"
+    [attr.aria-label]="menuButtonAriaLabel() || 'More options'"
+    (click)="onMenuButtonClick($event)"
+    (keydown)="onMenuButtonKeydown($event)"
+  >
+    @if (dropdownIconTemplate()) {
+      <ng-container [ngTemplateOutlet]="dropdownIconTemplate()!" />
+    } @else {
+      <ui-lib-icon [name]="dropdownIcon()" size="sm" />
+    }
+  </button>
+</div>
+
+@if (isMenuOpen()) {
+  <ul
+    [id]="menuId()"
+    role="menu"
+    class="ui-lib-split-button__menu"
+    [attr.aria-label]="menuButtonAriaLabel() || 'Menu'"
+  >
+    @for (item of visibleItems(); track $index; let i = $index) {
+      @if (item.separator) {
+        <li role="separator" class="ui-lib-split-button__separator"></li>
+      } @else {
+        <li role="none">
+          <a
+            role="menuitem"
+            class="ui-lib-split-button__menu-item"
+            [class.ui-lib-split-button__menu-item--disabled]="item.disabled"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.aria-label]="item.label"
+            [attr.title]="item.tooltip ?? null"
+            [attr.tabindex]="item.disabled ? -1 : 0"
+            [attr.href]="item.url ?? null"
+            [attr.target]="item.url ? (item.target || '_self') : null"
+            [id]="itemId(i)"
+            [attr.data-menu-item-index]="i"
+            (click)="onItemClick($event, item, i)"
+            (keydown)="onItemKeydown($event, item, i)"
+          >
+            @if (item.icon) {
+              <ui-lib-icon [name]="item.icon" size="sm" class="ui-lib-split-button__menu-item-icon" />
+            }
+            <span class="ui-lib-split-button__menu-item-label">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    }
+  </ul>
+}

@@ -67,6 +67,12 @@
       "typings": "./speed-dial/index.d.ts",
       "default": "./fesm2022/ui-lib-custom-speed-dial.mjs"
     },
+    "./split-button": {
+      "main": "./fesm2022/ui-lib-custom-split-button.mjs",
+      "module": "./fesm2022/ui-lib-custom-split-button.mjs",
+      "typings": "./split-button/index.d.ts",
+      "default": "./fesm2022/ui-lib-custom-split-button.mjs"
+    },
     "./themes/themes.css": {
       "default": "./themes/themes.css"
     },
@@ -99,6 +105,9 @@
       ],
       "speed-dial": [
         "./speed-dial/index.d.ts"
+      ],
+      "split-button": [
+        "./split-button/index.d.ts"
       ],
       "testing": [
         "./testing/index.d.ts"

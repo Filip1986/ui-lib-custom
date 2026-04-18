@@ -17,6 +17,7 @@ import type * as UiLibInputNumber from 'ui-lib-custom/input-number';
 import type * as UiLibLayout from 'ui-lib-custom/layout';
 import type * as UiLibSelect from 'ui-lib-custom/select';
 import type * as UiLibSelectButton from 'ui-lib-custom/select-button';
+import type * as UiLibSplitButton from 'ui-lib-custom/split-button';
 import type * as UiLibSpeedDial from 'ui-lib-custom/speed-dial';
 import type * as UiLibTabs from 'ui-lib-custom/tabs';
 import type * as UiLibTheme from 'ui-lib-custom/theme';
@@ -121,6 +122,12 @@ describe('Secondary Entry Points', (): void => {
   it('should import from select-button', async (): Promise<void> => {
     const mod: typeof UiLibSelectButton = await import('ui-lib-custom/select-button');
     expect(mod.SelectButton).toBeDefined();
+  });
+
+  it('should import from split-button', async (): Promise<void> => {
+    const mod: typeof UiLibSplitButton = await import('ui-lib-custom/split-button');
+    expect(mod.SplitButtonComponent).toBeDefined();
+    expect(mod.SPLIT_BUTTON_DEFAULTS).toBeDefined();
   });
 
   it('should import from speed-dial', async (): Promise<void> => {

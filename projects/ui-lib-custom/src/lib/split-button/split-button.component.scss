@@ -1,0 +1,376 @@
+:host {
+  display: inline-flex;
+  position: relative;
+
+  --uilib-split-button-bg: var(
+    --uilib-button-secondary-bg,
+    var(--uilib-color-secondary-600, var(--uilib-color-neutral-600, currentColor))
+  );
+  --uilib-split-button-fg: var(
+    --uilib-button-secondary-fg,
+    var(--uilib-color-neutral-50, currentColor)
+  );
+  --uilib-split-button-border: var(--uilib-button-secondary-border, var(--uilib-split-button-bg));
+  --uilib-split-button-bg-hover: var(
+    --uilib-button-secondary-bg-hover,
+    var(--uilib-split-button-bg)
+  );
+  --uilib-split-button-fg-hover: var(--uilib-split-button-fg);
+  --uilib-split-button-emphasis: var(--uilib-split-button-border);
+  --uilib-split-button-radius: var(--uilib-button-radius, var(--uilib-shape-base, 0.375rem));
+  --uilib-split-button-padding: var(
+    --uilib-button-padding-medium,
+    var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem)
+  );
+  --uilib-split-button-font-size: var(
+    --uilib-button-font-size-medium,
+    var(--uilib-font-size-md, 1rem)
+  );
+  --uilib-split-button-shadow: var(--uilib-button-shadow, none);
+  --uilib-split-button-transition: var(
+    --uilib-button-transition,
+    all var(--uilib-transition-fast, 0.2s ease)
+  );
+  --uilib-split-button-focus-ring: var(
+    --uilib-button-focus-ring,
+    0 0 0 var(--uilib-border-width-2, 0.125rem)
+      color-mix(in srgb, var(--uilib-color-primary-500, currentColor) 30%, transparent)
+  );
+  --uilib-split-button-disabled-opacity: var(--uilib-button-disabled-opacity, 0.5);
+  --uilib-split-button-divider-color: color-mix(
+    in srgb,
+    var(--uilib-split-button-bg) 75%,
+    transparent
+  );
+  --uilib-split-button-menu-bg: var(--uilib-select-dropdown-bg, var(--uilib-surface, transparent));
+  --uilib-split-button-menu-shadow: var(
+    --uilib-select-dropdown-shadow,
+    var(--uilib-shadow-md, none)
+  );
+  --uilib-split-button-menu-radius: var(--uilib-split-button-radius);
+  --uilib-split-button-menu-z: var(--uilib-z-overlay, 1000);
+  --uilib-split-button-menu-item-padding: var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem);
+  --uilib-split-button-menu-item-hover-bg: var(
+    --uilib-select-option-hover,
+    color-mix(in srgb, var(--uilib-color-primary-600, currentColor) 8%, transparent)
+  );
+  --uilib-split-button-menu-item-disabled-opacity: 0.55;
+  --uilib-split-button-separator-color: color-mix(
+    in srgb,
+    var(--uilib-split-button-border) 55%,
+    transparent
+  );
+  --uilib-split-button-icon-size: var(--uilib-icon-size-sm, 1rem);
+}
+
+:host .ui-lib-split-button__container {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: var(--uilib-split-button-radius);
+}
+
+:host .ui-lib-split-button__default-button,
+:host .ui-lib-split-button__menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--uilib-space-2, 0.5rem);
+  border: var(--uilib-border-width-1, 0.0625rem) solid var(--uilib-split-button-border);
+  background: var(--uilib-split-button-bg);
+  color: var(--uilib-split-button-fg);
+  font-family: var(--uilib-font-ui, sans-serif);
+  font-weight: var(--uilib-font-weight-semibold, 600);
+  font-size: var(--uilib-split-button-font-size);
+  transition: var(--uilib-split-button-transition);
+  box-shadow: var(--uilib-split-button-shadow);
+  cursor: pointer;
+  outline: none;
+}
+
+:host .ui-lib-split-button__default-button {
+  border-radius: var(--uilib-split-button-radius) 0 0 var(--uilib-split-button-radius);
+  border-inline-end: var(--uilib-border-width-1, 0.0625rem) solid
+    var(--uilib-split-button-divider-color);
+  padding: var(--uilib-split-button-padding);
+}
+
+:host .ui-lib-split-button__menu-button {
+  border-radius: 0 var(--uilib-split-button-radius) var(--uilib-split-button-radius) 0;
+  padding: var(--uilib-split-button-padding);
+  min-inline-size: calc(var(--uilib-split-button-font-size) * 2.25);
+}
+
+:host .ui-lib-split-button__default-button:hover:not(:disabled),
+:host .ui-lib-split-button__menu-button:hover:not(:disabled) {
+  background: var(--uilib-split-button-bg-hover);
+  color: var(--uilib-split-button-fg-hover);
+}
+
+:host .ui-lib-split-button__default-button:active:not(:disabled),
+:host .ui-lib-split-button__menu-button:active:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--uilib-split-button-bg-hover) 86%,
+    var(--uilib-color-neutral-900) 14%
+  );
+}
+
+:host .ui-lib-split-button__default-button:focus-visible,
+:host .ui-lib-split-button__menu-button:focus-visible,
+:host .ui-lib-split-button__menu-item:focus-visible {
+  box-shadow: var(--uilib-split-button-focus-ring);
+}
+
+:host .ui-lib-split-button__icon,
+:host .ui-lib-split-button__loading-icon,
+:host .ui-lib-split-button__menu-item-icon {
+  inline-size: var(--uilib-split-button-icon-size);
+  block-size: var(--uilib-split-button-icon-size);
+  flex: 0 0 var(--uilib-split-button-icon-size);
+}
+
+:host .ui-lib-split-button__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  list-style: none;
+  margin: var(--uilib-space-1, 0.25rem) 0 0;
+  padding: var(--uilib-space-1, 0.25rem) 0;
+  border: var(--uilib-border-width-1, 0.0625rem) solid var(--uilib-split-button-border);
+  background: var(--uilib-split-button-menu-bg);
+  border-radius: var(--uilib-split-button-menu-radius);
+  box-shadow: var(--uilib-split-button-menu-shadow);
+  z-index: var(--uilib-split-button-menu-z);
+  animation: uilib-split-button-menu-enter var(--uilib-transition-fast, 0.2s ease) ease-out;
+}
+
+:host .ui-lib-split-button__menu-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--uilib-space-2, 0.5rem);
+  width: 100%;
+  text-decoration: none;
+  color: var(--uilib-page-fg, currentColor);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: var(--uilib-split-button-menu-item-padding);
+  transition: background-color var(--uilib-transition-fast, 0.2s ease);
+  cursor: pointer;
+}
+
+:host .ui-lib-split-button__menu-item:hover,
+:host .ui-lib-split-button__menu-item:active {
+  background: var(--uilib-split-button-menu-item-hover-bg);
+}
+
+:host .ui-lib-split-button__menu-item--disabled {
+  opacity: var(--uilib-split-button-menu-item-disabled-opacity);
+  pointer-events: none;
+}
+
+:host .ui-lib-split-button__separator {
+  block-size: var(--uilib-border-width-1, 0.0625rem);
+  margin: var(--uilib-space-1, 0.25rem) 0;
+  background: var(--uilib-split-button-separator-color);
+}
+
+:host .ui-lib-split-button__loading-icon {
+  animation: uilib-split-button-spin 0.8s linear infinite;
+}
+
+:host.ui-lib-split-button--primary {
+  --uilib-split-button-bg: var(--uilib-button-primary-bg);
+  --uilib-split-button-fg: var(--uilib-button-primary-fg);
+  --uilib-split-button-border: var(--uilib-button-primary-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-primary-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-primary-border);
+  --uilib-split-button-emphasis: var(--uilib-button-primary-border);
+}
+
+:host.ui-lib-split-button--secondary {
+  --uilib-split-button-bg: var(--uilib-button-secondary-bg);
+  --uilib-split-button-fg: var(--uilib-button-secondary-fg);
+  --uilib-split-button-border: var(--uilib-button-secondary-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-secondary-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-secondary-border);
+  --uilib-split-button-emphasis: var(--uilib-button-secondary-border);
+}
+
+:host.ui-lib-split-button--success {
+  --uilib-split-button-bg: var(--uilib-button-success-bg);
+  --uilib-split-button-fg: var(--uilib-button-success-fg);
+  --uilib-split-button-border: var(--uilib-button-success-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-success-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-success-border);
+  --uilib-split-button-emphasis: var(--uilib-button-success-border);
+}
+
+:host.ui-lib-split-button--info {
+  --uilib-split-button-bg: var(--uilib-button-info-bg);
+  --uilib-split-button-fg: var(--uilib-button-info-fg);
+  --uilib-split-button-border: var(--uilib-button-info-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-info-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-info-border);
+  --uilib-split-button-emphasis: var(--uilib-button-info-border);
+}
+
+:host.ui-lib-split-button--warning {
+  --uilib-split-button-bg: var(--uilib-button-warning-bg);
+  --uilib-split-button-fg: var(--uilib-button-warning-fg);
+  --uilib-split-button-border: var(--uilib-button-warning-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-warning-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-warning-border);
+  --uilib-split-button-emphasis: var(--uilib-button-warning-border);
+}
+
+:host.ui-lib-split-button--help {
+  --uilib-split-button-bg: var(--uilib-button-help-bg);
+  --uilib-split-button-fg: var(--uilib-button-help-fg);
+  --uilib-split-button-border: var(--uilib-button-help-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-help-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-help-border);
+  --uilib-split-button-emphasis: var(--uilib-button-help-border);
+}
+
+:host.ui-lib-split-button--danger {
+  --uilib-split-button-bg: var(--uilib-button-danger-bg);
+  --uilib-split-button-fg: var(--uilib-button-danger-fg);
+  --uilib-split-button-border: var(--uilib-button-danger-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-danger-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-danger-border);
+  --uilib-split-button-emphasis: var(--uilib-button-danger-border);
+}
+
+:host.ui-lib-split-button--contrast {
+  --uilib-split-button-bg: var(--uilib-button-contrast-bg);
+  --uilib-split-button-fg: var(--uilib-button-contrast-fg);
+  --uilib-split-button-border: var(--uilib-button-contrast-border);
+  --uilib-split-button-bg-hover: var(--uilib-button-contrast-bg-hover);
+  --uilib-split-button-divider-color: var(--uilib-button-contrast-border);
+  --uilib-split-button-emphasis: var(--uilib-button-contrast-border);
+}
+
+:host.ui-lib-split-button--raised {
+  --uilib-split-button-shadow: var(--uilib-button-shadow-raised, var(--uilib-button-shadow, none));
+}
+
+:host.ui-lib-split-button--rounded {
+  --uilib-split-button-radius: var(--uilib-button-radius-pill, var(--uilib-shape-pill, 999rem));
+}
+
+:host.ui-lib-split-button--text {
+  --uilib-split-button-bg: transparent;
+  --uilib-split-button-border: transparent;
+  --uilib-split-button-fg: var(--uilib-split-button-emphasis);
+  --uilib-split-button-fg-hover: var(--uilib-split-button-emphasis);
+  --uilib-split-button-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-split-button-emphasis) 10%,
+    transparent
+  );
+  --uilib-split-button-divider-color: color-mix(
+    in srgb,
+    var(--uilib-split-button-emphasis) 35%,
+    transparent
+  );
+  --uilib-split-button-shadow: none;
+}
+
+:host.ui-lib-split-button--outlined {
+  --uilib-split-button-bg: transparent;
+  --uilib-split-button-border: var(--uilib-split-button-emphasis);
+  --uilib-split-button-fg: var(--uilib-split-button-emphasis);
+  --uilib-split-button-fg-hover: var(--uilib-split-button-fg);
+  --uilib-split-button-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-split-button-emphasis) 12%,
+    transparent
+  );
+  --uilib-split-button-divider-color: var(--uilib-split-button-emphasis);
+}
+
+:host.ui-lib-split-button--sm {
+  --uilib-split-button-padding: var(
+    --uilib-button-padding-small,
+    var(--uilib-space-1, 0.25rem) var(--uilib-space-3, 0.75rem)
+  );
+  --uilib-split-button-font-size: var(
+    --uilib-button-font-size-small,
+    var(--uilib-font-size-sm, 0.875rem)
+  );
+  --uilib-split-button-icon-size: var(--uilib-icon-size-sm, 1rem);
+}
+
+:host.ui-lib-split-button--md {
+  --uilib-split-button-padding: var(
+    --uilib-button-padding-medium,
+    var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem)
+  );
+  --uilib-split-button-font-size: var(
+    --uilib-button-font-size-medium,
+    var(--uilib-font-size-md, 1rem)
+  );
+  --uilib-split-button-icon-size: var(--uilib-icon-size-sm, 1rem);
+}
+
+:host.ui-lib-split-button--lg {
+  --uilib-split-button-padding: var(
+    --uilib-button-padding-large,
+    var(--uilib-space-3, 0.75rem) var(--uilib-space-5, 1.25rem)
+  );
+  --uilib-split-button-font-size: var(
+    --uilib-button-font-size-large,
+    var(--uilib-font-size-lg, 1.125rem)
+  );
+  --uilib-split-button-icon-size: var(--uilib-icon-size-md, 1.25rem);
+}
+
+:host.ui-lib-split-button--material {
+  --uilib-split-button-radius: var(--uilib-button-radius, var(--uilib-shape-base, 0.5rem));
+}
+
+:host.ui-lib-split-button--bootstrap {
+  --uilib-split-button-radius: var(--uilib-shape-base, 0.375rem);
+}
+
+:host.ui-lib-split-button--bootstrap .ui-lib-split-button__default-button,
+:host.ui-lib-split-button--bootstrap .ui-lib-split-button__menu-button {
+  border-width: var(--uilib-border-width-1, 0.0625rem);
+}
+
+:host.ui-lib-split-button--minimal {
+  --uilib-split-button-radius: var(--uilib-shape-sharp, 0);
+  --uilib-split-button-shadow: none;
+}
+
+:host.ui-lib-split-button--minimal:not(.ui-lib-split-button--rounded) {
+  --uilib-split-button-radius: var(--uilib-shape-sharp, 0);
+}
+
+:host.ui-lib-split-button--loading .ui-lib-split-button__default-button {
+  cursor: wait;
+}
+
+:host.ui-lib-split-button--disabled {
+  opacity: var(--uilib-split-button-disabled-opacity);
+}
+
+@keyframes uilib-split-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes uilib-split-button-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--uilib-space-1, 0.25rem) * -1));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

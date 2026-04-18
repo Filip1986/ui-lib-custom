@@ -85,7 +85,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/split-button',
           group: 'Button',
-          badge: 'TODO',
         },
         {
           label: 'Chart',

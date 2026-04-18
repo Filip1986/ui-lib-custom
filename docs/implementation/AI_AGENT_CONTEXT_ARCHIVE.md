@@ -224,6 +224,94 @@ Terminal notes:
 Next step: Prompt 8 — add/expand SpeedDial unit tests for visibility, keyboard, mask/outside-click, focus return, and layout utility integration.
 ```
 
----
+```text
+Date: 2026-04-17
+Changed: projects/demo/src/app/pages/speed-dial/speed-dial-demo.component.ts, projects/demo/src/app/pages/speed-dial/speed-dial-demo.component.html, projects/demo/src/app/pages/speed-dial/speed-dial-demo.component.scss, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: SpeedDial: Prompt 9 complete. Demo page is now wired at `/speed-dial` with PrimeNG-aligned sections (Linear, Circle, Semi-Circle, Quarter-Circle, Tooltip, Mask, Template, Accessibility, API Reference), live examples, and code previews. Next: Prompt 10 (docs/reference updates) if queued.
+Verification:
+- Demo build passed: `npx.cmd ng build demo` (captured in `tmp/speed-dial-prompt9-build.log`, exit code `0` in `tmp/speed-dial-prompt9-build.exit`).
+- Route availability confirmed with HTTP 200 using a HEAD probe against a running local server (`node` http request) captured in `tmp/speed-dial-prompt9-curl.log` with exit code `0` in `tmp/speed-dial-prompt9-curl.exit`.
+Terminal notes:
+- Failed: direct `curl` output in-session returned empty output despite command execution, so status visibility was unreliable.
+- Worked: started demo server via `npx.cmd ng serve demo --port 4200 --host 127.0.0.1` (log in `tmp/speed-dial-prompt9-serve.log`) and verified route status with a Node HTTP HEAD request (`status:200`).
+Next step: Prompt 10 — update component reference docs and cross-link demo coverage notes.
+```
 
-When restoring full details for a historical task, use git history for `AI_AGENT_CONTEXT.md` around the relevant date.
+```text
+Date: 2026-04-17
+Changed: docs/reference/components/SPEEDDIAL.md, docs/reference/components/README.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: SpeedDial: Prompt 10 complete. Fully implemented, tested, documented, and demoed. Next: Backlog.
+Verification:
+- ng build ui-lib-custom: PASS (`npx.cmd ng build ui-lib-custom`; log `tmp/speed-dial-prompt10-build-lib.log`, exit `tmp/speed-dial-prompt10-build-lib.exit` = `0`).
+- speed-dial jest coverage: `speed-dial.component.ts` 91.17% statements, 84.09% branches, 100% functions, 91.04% lines (`npx.cmd jest speed-dial --coverage --runInBand --no-cache`; log `tmp/speed-dial-prompt10-jest.log`, exit `tmp/speed-dial-prompt10-jest.exit` = `0`).
+- eslint: clean (`npx.cmd eslint projects/ui-lib-custom/src/lib/speed-dial/`; log `tmp/speed-dial-prompt10-eslint.log`, exit `tmp/speed-dial-prompt10-eslint.exit` = `0`).
+- entry-points regression: PASS (`npx.cmd jest projects/ui-lib-custom/test/entry-points.spec.ts --runInBand --no-cache`; log `tmp/speed-dial-prompt10-entrypoints.log`, exit `tmp/speed-dial-prompt10-entrypoints.exit` = `0`).
+- demo build: PASS (`npx.cmd ng build demo`; log `tmp/speed-dial-prompt10-build-demo.log`, exit `tmp/speed-dial-prompt10-build-demo.exit` = `0`).
+Known issues / v2 considerations:
+- Tooltip currently falls back to `title` attribute; replace with `ui-lib-tooltip` when that component ships.
+- RTL-specific direction mirroring deferred.
+Next step: Resume queued backlog items.
+```
+
+```text
+Date: 2026-04-17
+Changed: SPLITBUTTON_RESEARCH.md, AI_AGENT_CONTEXT.md
+State: SplitButton: Prompt 1 complete. Research documented with API surface, DOM structure, severity integration, keyboard matrix, a11y contract, and divergence plan. Next: Prompt 2 (API design & types).
+Verification:
+- PrimeNG v19 SplitButton API reviewed from packed sources (splitbutton.d.ts, primeng-splitbutton.mjs, menuitem.d.ts).
+Next step: Prompt 2 — define SplitButton types, shared MenuItem interface, constants, and public input/output signatures.
+```
+
+```text
+Date: 2026-04-17
+Changed: projects/ui-lib-custom/src/lib/split-button/split-button.component.ts, projects/ui-lib-custom/src/lib/split-button/split-button.component.html, projects/ui-lib-custom/src/lib/split-button/split-button.component.scss, projects/ui-lib-custom/src/lib/split-button/split-button-templates.directive.ts, projects/ui-lib-custom/split-button/ng-package.json, projects/ui-lib-custom/split-button/package.json, projects/ui-lib-custom/src/lib/split-button/index.ts, projects/ui-lib-custom/package.json, projects/ui-lib-custom/test/entry-points.spec.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: SplitButton: Prompt 3 complete. Component scaffold, template marker directives, and `ui-lib-custom/split-button` secondary entry point are wired. Next: Prompt 4 (core behavior implementation).
+Verification:
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+- Entry-point regression test passed: `npx.cmd jest projects/ui-lib-custom/test/entry-points.spec.ts --runInBand --no-cache`.
+- Confirmed `projects/ui-lib-custom/src/public-api.ts` has no `split-button` re-export.
+Terminal notes:
+- Failed: first build failed due `TemplateRef` imported as type-only and then used as a value in `contentChild(..., { read: TemplateRef })`.
+- Worked: imported `TemplateRef` as a value, rebuilt successfully, and reran entry-point regression tests successfully from `bash.exe` using PowerShell + `npx.cmd`.
+- Warning: ng-packagr reports conflicting export condition for `./speed-dial` and now `./split-button` because `default` is present in `projects/ui-lib-custom/package.json` exports.
+Next step: Prompt 4 — implement SplitButton open/close state, item activation, keyboard navigation, and ARIA wiring.
+```
+
+```text
+Date: 2026-04-17
+Changed: projects/ui-lib-custom/src/lib/split-button/split-button.component.ts, projects/ui-lib-custom/src/lib/split-button/split-button.component.html, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: SplitButton: Prompt 4 complete. Core state logic is wired for variant/severity class resolution, main action click, and menu open/close toggle with ARIA linkage. Next: Prompt 5 (menu item rendering + panel population).
+Verification:
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+Terminal notes:
+- Failed: initial Prompt 4 diagnostics flagged `NgTemplateOutlet` unused because template still had scaffold markup.
+- Worked: updated template to block syntax with `ngTemplateOutlet` slots and reran build successfully from `bash.exe` via PowerShell + `npx.cmd`.
+- Warning: ng-packagr continues to warn about conflicting `default` export conditions for `./speed-dial` and `./split-button`.
+Next step: Prompt 5 — render menu items into the panel and wire item command events.
+```
+
+```text
+Date: 2026-04-17
+Changed: projects/ui-lib-custom/src/lib/split-button/split-button.component.ts, projects/ui-lib-custom/src/lib/split-button/split-button.component.html, AI_AGENT_CONTEXT.md
+State: SplitButton: Prompt 5 complete. Dropdown panel now renders visible model items, handles separators/disabled rows, dispatches item command events, supports URL/router navigation, closes on outside-click/Escape, and focuses the first actionable item on open. Next: Prompt 6 (full keyboard navigation).
+Verification:
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+Terminal notes:
+- Failed: none in-session.
+- Worked: built from `bash.exe` using `npx.cmd ng build ui-lib-custom`.
+- Warning: ng-packagr still reports conflicting `default` export conditions for `./speed-dial` and `./split-button` while writing package manifest.
+Next step: Prompt 6 — implement full menu keyboard navigation (Arrow/Home/End/Enter/Space/Tab) and active-item semantics.
+```
+
+```text
+Date: 2026-04-17
+Changed: projects/ui-lib-custom/src/lib/split-button/split-button.component.ts, projects/ui-lib-custom/src/lib/split-button/split-button.component.html, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: SplitButton: Prompt 6 complete. Full keyboard handling and ARIA wiring now cover main button passthrough, menu button toggle/open-first/open-last behavior, menu item roving focus keys, and programmatic focus return to the menu trigger on Escape/item activation. Next: Prompt 7 (styling).
+Verification:
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+Terminal notes:
+- Failed: none in-session.
+- Worked: built from `bash.exe` using `npx.cmd ng build ui-lib-custom`.
+- Warning: ng-packagr still reports conflicting `default` export conditions for `./speed-dial` and `./split-button` while writing package manifest.
+Next step: Prompt 7 — implement SplitButton visual styling and tokenized CSS variables for all variants/sizes/states.
+```

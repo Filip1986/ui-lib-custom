@@ -578,6 +578,32 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-speed-dial-size-item-md` | `2.75rem` | Medium action item size token. |
 | `--uilib-speed-dial-size-item-lg` | `3.25rem` | Large action item size token. |
 
+## SplitButton
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-split-button-bg` | `var(--uilib-button-secondary-bg, var(--uilib-color-secondary-600, var(--uilib-color-neutral-600, currentColor)))` | Shared background for both joined buttons. |
+| `--uilib-split-button-fg` | `var(--uilib-button-secondary-fg, var(--uilib-color-neutral-50, currentColor))` | Shared foreground color for both joined buttons. |
+| `--uilib-split-button-border` | `var(--uilib-button-secondary-border, var(--uilib-split-button-bg))` | Shared border color for both joined buttons and panel edge. |
+| `--uilib-split-button-bg-hover` | `var(--uilib-button-secondary-bg-hover, var(--uilib-split-button-bg))` | Hover/active background for joined buttons. |
+| `--uilib-split-button-fg-hover` | `var(--uilib-split-button-fg)` | Hover foreground for joined buttons. |
+| `--uilib-split-button-radius` | `var(--uilib-button-radius, var(--uilib-shape-base, 0.375rem))` | Outer radius for left and right button caps. |
+| `--uilib-split-button-padding` | `var(--uilib-button-padding-medium, var(--uilib-space-2, 0.5rem) var(--uilib-space-4, 1rem))` | Inner button padding. |
+| `--uilib-split-button-font-size` | `var(--uilib-button-font-size-medium, var(--uilib-font-size-md, 1rem))` | Inner button font size. |
+| `--uilib-split-button-shadow` | `var(--uilib-button-shadow, none)` | Base button shadow. |
+| `--uilib-split-button-transition` | `var(--uilib-button-transition, all var(--uilib-transition-fast, 0.2s ease))` | Transition applied to button visuals. |
+| `--uilib-split-button-focus-ring` | `var(--uilib-button-focus-ring, 0 0 0 var(--uilib-border-width-2, 0.125rem) color-mix(in srgb, var(--uilib-color-primary-500, currentColor) 30%, transparent))` | Focus-visible ring for action/menu buttons and menu rows. |
+| `--uilib-split-button-disabled-opacity` | `var(--uilib-button-disabled-opacity, 0.5)` | Host opacity when disabled state is active. |
+| `--uilib-split-button-divider-color` | `color-mix(in srgb, var(--uilib-split-button-bg) 75%, transparent)` | Visual seam color between main and menu button. |
+| `--uilib-split-button-menu-bg` | `var(--uilib-select-dropdown-bg, var(--uilib-surface, transparent))` | Dropdown panel background. |
+| `--uilib-split-button-menu-shadow` | `var(--uilib-select-dropdown-shadow, var(--uilib-shadow-md, none))` | Dropdown panel elevation. |
+| `--uilib-split-button-menu-radius` | `var(--uilib-split-button-radius)` | Dropdown panel corner radius. |
+| `--uilib-split-button-menu-z` | `var(--uilib-z-overlay, 1000)` | Dropdown panel stacking context. |
+| `--uilib-split-button-menu-item-padding` | `var(--uilib-space-2, 0.5rem) var(--uilib-space-3, 0.75rem)` | Menu item row padding. |
+| `--uilib-split-button-menu-item-hover-bg` | `var(--uilib-select-option-hover, color-mix(in srgb, var(--uilib-color-primary-600, currentColor) 8%, transparent))` | Menu item hover/active background. |
+| `--uilib-split-button-menu-item-disabled-opacity` | `0.55` | Menu item disabled opacity. |
+| `--uilib-split-button-separator-color` | `color-mix(in srgb, var(--uilib-split-button-border) 55%, transparent)` | Separator line color between item groups. |
+
 ## Sidebar Menu
 
 | Variable | Default | Description |

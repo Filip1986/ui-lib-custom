@@ -282,6 +282,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### SplitButton
+**Files:**
+- [SPLITBUTTON.md](SPLITBUTTON.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/split-button)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/split-button/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -352,6 +364,7 @@ Each component should have two documentation files:
 | InputMask | Structured masked input for fixed-format values | - | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | InputNumber | Locale-aware numeric input with formatting, spin controls, and forms support | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | SpeedDial | Floating action menu with linear and radial layouts | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+| SplitButton | Combined primary action button with attached command menu | 3 | 8 | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 
 ---
 

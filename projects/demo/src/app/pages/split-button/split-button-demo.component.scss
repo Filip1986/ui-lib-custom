@@ -1,14 +1,51 @@
-.split-button-demo {
-  padding: 1.5rem;
+@use '../../shared/styles/doc-page.scss';
+
+.examples {
+  display: grid;
+  gap: 1.25rem;
 }
 
-.split-button-demo h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.5rem;
-  color: var(--uilib-page-fg);
+.example-section {
+  display: grid;
+  gap: 0.75rem;
 }
 
-.split-button-demo p {
-  margin: 0;
+.action-log {
+  margin: 0.5rem 0 0;
   color: var(--uilib-muted);
+}
+
+.split-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.split-grid--severity {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.split-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.template-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .split-grid--severity {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .split-grid--three {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .split-grid--severity {
+    grid-template-columns: 1fr;
+  }
 }

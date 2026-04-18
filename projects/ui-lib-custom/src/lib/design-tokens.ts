@@ -1423,6 +1423,122 @@ export const INPUTNUMBER_TOKENS: Readonly<InputNumberTokens> = {
 export type InputNumberTokenKey = keyof typeof INPUTNUMBER_TOKENS;
 
 // ============================================================================
+// SPLIT BUTTON TOKENS
+// ============================================================================
+
+export type SplitButtonSize = 'sm' | 'md' | 'lg';
+export type SplitButtonSeverity =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'help'
+  | 'danger'
+  | 'contrast';
+
+export type SplitButtonStateToken = {
+  bg: string;
+  bgHover: string;
+  border: string;
+  fg: string;
+};
+
+export type SplitButtonTokens = {
+  sizes: Record<SplitButtonSize, { padding: string; fontSize: string }>;
+  states: Record<SplitButtonSeverity, SplitButtonStateToken>;
+  panel: {
+    background: string;
+    shadow: string;
+    radius: string;
+    zIndex: string;
+    itemPadding: string;
+    itemHoverBackground: string;
+    separatorColor: string;
+    disabledOpacity: string;
+  };
+};
+
+export const SPLIT_BUTTON_TOKENS: Readonly<SplitButtonTokens> = {
+  sizes: {
+    sm: {
+      padding: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[3]}`,
+      fontSize: FONT_SIZES.sm,
+    },
+    md: {
+      padding: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`,
+      fontSize: FONT_SIZES.base,
+    },
+    lg: {
+      padding: `${SPACING_TOKENS[3]} ${SPACING_TOKENS[5]}`,
+      fontSize: FONT_SIZES.lg,
+    },
+  },
+  states: {
+    primary: {
+      bg: COLOR_PRIMARY[600],
+      bgHover: COLOR_PRIMARY[700],
+      border: COLOR_PRIMARY[600],
+      fg: COLOR_NEUTRAL.white,
+    },
+    secondary: {
+      bg: COLOR_NEUTRAL[600],
+      bgHover: COLOR_NEUTRAL[700],
+      border: COLOR_NEUTRAL[600],
+      fg: COLOR_NEUTRAL.white,
+    },
+    success: {
+      bg: COLOR_SUCCESS[600],
+      bgHover: COLOR_SUCCESS[700],
+      border: COLOR_SUCCESS[600],
+      fg: COLOR_NEUTRAL.white,
+    },
+    info: {
+      bg: COLOR_INFO[700],
+      bgHover: COLOR_INFO[700],
+      border: COLOR_INFO[700],
+      fg: COLOR_NEUTRAL.white,
+    },
+    warning: {
+      bg: COLOR_WARNING[600],
+      bgHover: COLOR_WARNING[700],
+      border: COLOR_WARNING[600],
+      fg: COLOR_NEUTRAL.black,
+    },
+    help: {
+      bg: COLOR_HELP[600],
+      bgHover: COLOR_HELP[600],
+      border: COLOR_HELP[600],
+      fg: COLOR_NEUTRAL.white,
+    },
+    danger: {
+      bg: COLOR_DANGER[600],
+      bgHover: COLOR_DANGER[700],
+      border: COLOR_DANGER[600],
+      fg: COLOR_NEUTRAL.white,
+    },
+    contrast: {
+      bg: COLOR_NEUTRAL[900],
+      bgHover: COLOR_NEUTRAL[900],
+      border: COLOR_NEUTRAL[900],
+      fg: COLOR_NEUTRAL.white,
+    },
+  },
+  panel: {
+    background: COLOR_NEUTRAL.white,
+    shadow: SHADOWS['shadow-8']!,
+    radius: BORDER_RADIUS.md,
+    zIndex: `${Z_INDEX.dropdown}`,
+    itemPadding: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[3]}`,
+    itemHoverBackground: `color-mix(in srgb, ${COLOR_PRIMARY[600]} 8%, transparent)`,
+    separatorColor: `color-mix(in srgb, ${COLOR_NEUTRAL[300]} 65%, transparent)`,
+    disabledOpacity: '0.55',
+  },
+};
+
+export type SplitButtonTokenKey = keyof typeof SPLIT_BUTTON_TOKENS;
+
+// ============================================================================
 // SPEED DIAL TOKENS
 // ============================================================================
 
