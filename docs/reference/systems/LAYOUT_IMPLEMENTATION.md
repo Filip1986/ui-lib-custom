@@ -97,8 +97,10 @@ padding: SpacingToken = 4
 
 ## Supporting Files
 
-### Design Tokens (`tokens.ts`)
-**File:** `projects/ui-lib-custom/src/lib/layout/tokens.ts`
+### Design Tokens (re-exported from `ui-lib-custom/tokens`)
+**Files:**
+- `projects/ui-lib-custom/layout/src/public-api.ts` (layout entry-point re-exports)
+- `projects/ui-lib-custom/src/lib/design-tokens.ts` (token source of truth)
 
 **Exports:**
 - `SPACING_TOKENS`: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20 (rem-based)
@@ -117,7 +119,7 @@ export * from './lib/layout';
 ### Barrel Export
 **File:** `projects/ui-lib-custom/src/lib/layout/index.ts`
 
-Exports all layout primitives and tokens.
+Exports all layout primitives.
 
 ---
 
@@ -376,7 +378,7 @@ Potential additions to the layout system:
 ## Maintenance Notes
 
 ### Adding New Spacing Tokens
-Edit `projects/ui-lib-custom/src/lib/layout/tokens.ts`:
+Edit `projects/ui-lib-custom/src/lib/design-tokens.ts`:
 ```typescript
 export const SPACING_TOKENS = {
   // ... existing tokens
@@ -385,7 +387,7 @@ export const SPACING_TOKENS = {
 ```
 
 ### Adding New Container Sizes
-Edit same file:
+Edit the same token source file (`projects/ui-lib-custom/src/lib/design-tokens.ts`):
 ```typescript
 export const CONTAINER_MAX_WIDTHS = {
   // ... existing sizes

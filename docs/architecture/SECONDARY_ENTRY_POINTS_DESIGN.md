@@ -35,7 +35,7 @@ Notes and scope expectations:
 - `ui-lib-custom/accordion` exports `Accordion`, `AccordionPanel`, and `accordion.types`.
 - `ui-lib-custom/tabs` exports `Tabs`, `Tab`, `TabLabel`, `TabContent`, `TabPanel`, and `tabs.types`.
 - `ui-lib-custom/icon` exports `Icon`, `IconService`, `icon.types`, `icon.providers`, and `icon.semantics`.
-- `ui-lib-custom/layout` exports `Stack`, `Inline`, `Grid`, `Container`, and optionally re-exports `tokens`.
+- `ui-lib-custom/layout` exports `Stack`, `Inline`, `Grid`, `Container`, and re-exports selected layout token values/types from `ui-lib-custom/tokens`.
 - `ui-lib-custom/theme` exports `ThemeConfigService`, `theme-preset.interface`, and preset JSON if needed.
 - `ui-lib-custom/tokens` exports `design-tokens` only.
 - `ui-lib-custom/core` hosts shared types/utilities used by multiple entry points.

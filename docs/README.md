@@ -8,6 +8,7 @@ Welcome to the UI Components Library documentation! This documentation is organi
 docs/
 ├── getting-started/     # Start here if you're new
 ├── guides/              # How-to guides and examples
+├── research/            # Research notes and parity investigations
 ├── reference/           # API reference and technical details
 └── architecture/        # System design and architecture
 ```
@@ -172,6 +173,14 @@ npm run build-storybook
 
 ---
 
+## 🔬 Research
+
+Planning and parity research docs are consolidated under:
+
+- **[Research Index](research/README.md)**
+
+---
+
 ## 🎯 Quick Navigation
 
 ### By Task
@@ -218,6 +227,7 @@ This documentation is organized to scale with the project:
 - **Add new guides or tutorials** → `docs/guides/`
 - **Add API/reference docs** → `docs/reference/`
 - **Add architecture docs** → `docs/architecture/`
+- **Add research docs** → `docs/research/`
 
 Keep the main [README.md](../README.md) focused on API reference and usage examples.
 

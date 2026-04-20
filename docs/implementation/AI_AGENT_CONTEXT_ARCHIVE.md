@@ -42,8 +42,8 @@ Stable architecture/conventions/workflows are owned by `AGENTS.md`.
 
 ```text
 Date: 2026-04-08
-Changed: INPUTNUMBER_RESEARCH.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: InputNumber: Prompt 1 complete. Research doc at `INPUTNUMBER_RESEARCH.md`. Next: Prompt 2 (API design & NumberFormatService).
+Changed: docs/research/INPUTNUMBER_RESEARCH.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: InputNumber: Prompt 1 complete. Research doc at `docs/research/INPUTNUMBER_RESEARCH.md`. Next: Prompt 2 (API design & NumberFormatService).
 Verification:
 - PrimeNG v19 InputNumber API and implementation reviewed from packed sources (`inputnumber.d.ts`, `inputnumber.interface.d.ts`, `primeng-inputnumber.mjs`).
 Next step: Start Prompt 2 and define the `NumberFormatService` API plus `InputNumber` signal-based public types.
@@ -149,7 +149,7 @@ Next step: Shift focus to queued backlog (`knip`, constants cleanup, overlay fol
 
 ```text
 Date: 2026-04-16
-Changed: SPEEDDIAL_RESEARCH.md, AI_AGENT_CONTEXT.md
+Changed: docs/research/SPEEDDIAL_RESEARCH.md, AI_AGENT_CONTEXT.md
 State: SpeedDial: Prompt 1 complete. Research documented with API surface, layout formulas, a11y contract, and divergence plan. Next: Prompt 2 (API design & types).
 Verification:
 - PrimeNG v19 SpeedDial API reviewed from packed sources (speeddial.d.ts, primeng-speeddial.mjs).
@@ -269,7 +269,7 @@ Next step: Resume queued backlog items.
 
 ```text
 Date: 2026-04-17
-Changed: SPLITBUTTON_RESEARCH.md, AI_AGENT_CONTEXT.md
+Changed: docs/research/SPLITBUTTON_RESEARCH.md, AI_AGENT_CONTEXT.md
 State: SplitButton: Prompt 1 complete. Research documented with API surface, DOM structure, severity integration, keyboard matrix, a11y contract, and divergence plan. Next: Prompt 2 (API design & types).
 Verification:
 - PrimeNG v19 SplitButton API reviewed from packed sources (splitbutton.d.ts, primeng-splitbutton.mjs, menuitem.d.ts).

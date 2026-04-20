@@ -26,9 +26,14 @@ ui-lib-custom/
 │   │   ├── INTEGRATION_EXAMPLE.md     # Real-world examples
 │   │   └── PUBLISHING_GUIDE.md        # How to publish
 │   │
+│   ├── research/                       # 🔬 Research and parity analysis
+│   │   ├── README.md                  # Research index
+│   │   └── *_RESEARCH.md              # Feature research notes
+│   │
 │   ├── reference/                      # 📋 Technical reference
-│   │   ├── PROJECT_SUMMARY.md         # Project overview
-│   │   └── VERIFICATION_CHECKLIST.md  # QA checklist
+│   │   └── project/
+│   │       ├── PROJECT_SUMMARY.md     # Project overview
+│   │       └── VERIFICATION_CHECKLIST.md # QA checklist
 │   │
 │   └── architecture/                   # 🏗️ System design
 │       └── ARCHITECTURE.md             # Architecture docs
@@ -66,10 +71,10 @@ ui-lib-custom/
          │  • Quick navigation     │ ◄── Documentation hub
          └─────────────────────────┘
                        │
-         ┌─────────────┼──────────────┬──────────────┐
-         ▼             ▼              ▼              ▼
-    Getting        Guides        Reference      Architecture
-    Started
+    ┌──────────┬──────────┬──────────┬───────────┬──────────────┐
+    ▼          ▼          ▼          ▼           ▼
+ Getting     Guides    Research   Reference   Architecture
+ Started
 ```
 
 ### User Journeys
@@ -91,7 +96,7 @@ CONTRIBUTING.md
     ↓
 docs/architecture/ARCHITECTURE.md
     ↓
-docs/reference/PROJECT_SUMMARY.md
+docs/reference/project/PROJECT_SUMMARY.md
     ↓
 Making changes! 💪
 ```
@@ -100,7 +105,7 @@ Making changes! 💪
 ```
 docs/guides/PUBLISHING_GUIDE.md
     ↓
-docs/reference/VERIFICATION_CHECKLIST.md
+docs/reference/project/VERIFICATION_CHECKLIST.md
     ↓
 Published! 🚀
 ```
@@ -120,6 +125,9 @@ New documentation to add?
     │
     ├─ Is it API reference or technical specs?
     │  └─> docs/reference/
+    │
+    ├─ Is it research/parity analysis notes?
+    │  └─> docs/research/
     │
     ├─ Is it about system architecture?
     │  └─> docs/architecture/
@@ -168,7 +176,15 @@ New documentation to add?
   - Checklists
   - Technical details
 
-### 5. **docs/architecture/**
+### 5. **docs/research/**
+- **Purpose**: Capture implementation research and parity analysis
+- **Audience**: Contributors and maintainers
+- **Content**:
+  - Feature research docs (`*_RESEARCH.md`)
+  - Upstream parity notes
+  - API/behavior discovery before implementation
+
+### 6. **docs/architecture/**
 - **Purpose**: Explain system design and structure
 - **Audience**: Contributors and maintainers
 - **Content**:
@@ -210,7 +226,7 @@ New documentation to add?
 | `TEST_GUIDE.md` | `docs/getting-started/TEST_GUIDE.md` | Getting Started |
 | `INTEGRATION_EXAMPLE.md` | `docs/guides/INTEGRATION_EXAMPLE.md` | Guides |
 | `PUBLISHING_GUIDE.md` | `docs/guides/PUBLISHING_GUIDE.md` | Guides |
-| `PROJECT_SUMMARY.md` | `docs/reference/PROJECT_SUMMARY.md` | Reference |
+| `PROJECT_SUMMARY.md` | `docs/reference/project/PROJECT_SUMMARY.md` | Reference |
 | `VERIFICATION_CHECKLIST.md` | `docs/reference/project/VERIFICATION_CHECKLIST.md` | Reference |
 | `ARCHITECTURE.md` | `docs/architecture/ARCHITECTURE.md` | Architecture |
 | `DOCUMENTATION_INDEX.md` | ~~Removed~~ | Replaced by `docs/README.md` |

@@ -9,6 +9,9 @@ Quick reference guide to navigate the UI Components Library documentation.
 ```
 docs/
 ├── README.md                          # Main documentation index
+├── research/                          # Research notes and parity investigations
+│   ├── README.md                     # Research index
+│   └── ...
 ├── getting-started/                   # Quick start guides
 │   ├── QUICK_START.md                # 5-minute getting started
 │   ├── LAYOUT_QUICK_START.md         # Layout primitives guide
@@ -91,6 +94,10 @@ docs/
 ### 📊 I want project information
 
 → [docs/reference/project/PROJECT_SUMMARY.md](docs/reference/project/PROJECT_SUMMARY.md)
+
+### 🔬 I want implementation research notes
+
+→ [docs/research/README.md](docs/research/README.md)
 
 ### 📖 I want to publish the library
 
