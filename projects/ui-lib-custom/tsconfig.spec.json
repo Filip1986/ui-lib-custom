@@ -4,7 +4,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
-    "types": ["jasmine"],
+    "types": ["jest"],
     "baseUrl": "../../",
     "paths": {
       "ui-lib-custom": ["./projects/ui-lib-custom/src/public-api.ts", "./dist/ui-lib-custom"],

@@ -32,28 +32,6 @@ export const SPLIT_BUTTON_DEFAULTS: Readonly<{
   outlined: false,
 } as const;
 
-export const SPLIT_BUTTON_CLASSNAMES: Readonly<{
-  Host: 'ui-lib-split-button';
-  MainButton: 'ui-lib-split-button__main';
-  MenuButton: 'ui-lib-split-button__menu';
-  Panel: 'ui-lib-split-button__panel';
-  List: 'ui-lib-split-button__list';
-  Item: 'ui-lib-split-button__item';
-  Separator: 'ui-lib-split-button__separator';
-  ActiveItem: 'ui-lib-split-button__item--active';
-  DisabledItem: 'ui-lib-split-button__item--disabled';
-}> = {
-  Host: 'ui-lib-split-button',
-  MainButton: 'ui-lib-split-button__main',
-  MenuButton: 'ui-lib-split-button__menu',
-  Panel: 'ui-lib-split-button__panel',
-  List: 'ui-lib-split-button__list',
-  Item: 'ui-lib-split-button__item',
-  Separator: 'ui-lib-split-button__separator',
-  ActiveItem: 'ui-lib-split-button__item--active',
-  DisabledItem: 'ui-lib-split-button__item--disabled',
-} as const;
-
 export function splitButtonId(counter: number): string {
   return `ui-lib-split-button-${counter}`;
 }

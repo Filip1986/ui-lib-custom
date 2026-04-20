@@ -18,18 +18,6 @@ export type AccordionSize = 'sm' | 'md' | 'lg';
 export type AccordionExpandMode = 'single' | 'multiple';
 
 /**
- * State snapshot for a single accordion panel.
- */
-export interface AccordionPanelState {
-  /** Identifier for the panel, typically a string or numeric value. */
-  id: string | number;
-  /** Whether the panel is currently expanded. */
-  expanded: boolean;
-  /** Whether the panel is disabled. */
-  disabled: boolean;
-}
-
-/**
  * Event payload emitted when a panel expansion state changes.
  */
 export interface AccordionChangeEvent {

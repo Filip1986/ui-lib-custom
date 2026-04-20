@@ -19,6 +19,7 @@ export default [
       '**/out-tsc/**',
       '**/playwright-report/**',
       '**/test-results/**',
+      '**/tmp/**',
       '**/node_modules/**',
     ],
   },

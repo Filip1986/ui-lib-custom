@@ -1,6 +1,6 @@
 import type { SpeedDialDirection, SpeedDialType } from './speed-dial.types';
 
-export interface SpeedDialLayoutOptions {
+interface SpeedDialLayoutOptions {
   readonly type: SpeedDialType;
   readonly direction: SpeedDialDirection;
   readonly radius: number;

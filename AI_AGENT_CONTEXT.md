@@ -50,6 +50,23 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
 ```text
+Date: 2026-04-19
+Changed: knip.json, projects/ui-lib-custom/src/lib/core/shared/overlay-utils.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Backlog verification split-runs continued. Generated report artifacts were cleaned, overlay append-target typing/lint was hardened, and knip baseline noise was reduced for intentional wrappers/scaffolding. Next: triage remaining knip findings into targeted cleanup patches.
+Verification:
+- Git state checked before/after runs: `git --no-pager status --short`.
+- Generated report artifacts cleaned: restored `playwright-report/index.html` and `test-results/a11y-results.json`.
+- Targeted diagnostics clean: `get_errors` on overlay-related backlog files.
+- Overlay lint passed after typing fix: `npx.cmd eslint projects/ui-lib-custom/src/lib/core/shared/overlay-utils.ts --max-warnings 0` (exit `0`, log `tmp/backlog-overlay-eslint.log`).
+- Knip rerun captured: `npm.cmd run knip` (log `tmp/backlog-knip.log`, exit `tmp/backlog-knip.exit` = `1`) with unused-files count reduced from 45 to 2.
+Terminal notes:
+- Failed: none in-session.
+- Worked: all commands executed from `bash.exe` using `npm.cmd`/`npx.cmd` with log+exit capture in `tmp/`.
+- Warning: knip still reports residual backlog items (unused deps/devDeps, unlisted deps/binaries, unresolved imports, and unused exports/types).
+Next step: Address remaining knip items in batches (dependency/unresolved config, then export/type cleanup) while preserving entry-point and demo-only intentional files.
+```
+
+```text
 Date: 2026-04-18
 Changed: projects/ui-lib-custom/src/lib/split-button/split-button.component.spec.ts, docs/reference/components/SPLITBUTTON.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
 State: SplitButton: Prompt 9 complete. Demo/docs closeout and QA sweep finalized; SplitButton is fully implemented, tested, documented, and wired in demo navigation. Next: Backlog.
@@ -83,19 +100,6 @@ Terminal notes:
 Next step: Prompt 9 — if queued, wire SplitButton demo/docs and run targeted regression checks.
 ```
 
-```text
-Date: 2026-04-17
-Changed: projects/ui-lib-custom/src/lib/split-button/split-button.component.scss, projects/ui-lib-custom/src/lib/design-tokens.ts, docs/reference/systems/CSS_VARIABLES.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: SplitButton: Prompt 7 complete. Styling now covers joined button geometry, severity palettes, variant modifiers, size scaling, loading animation, and dropdown panel visuals using `--uilib-split-button-*` variables aligned with Button color mappings. Next: Prompt 8 (tests).
-Verification:
-- Library build passed: `npx.cmd ng build ui-lib-custom`.
-- SplitButton lint passed: `npx.cmd eslint projects/ui-lib-custom/src/lib/split-button/`.
-Terminal notes:
-- Failed: none in-session.
-- Worked: ran `npx.cmd ng build ui-lib-custom` and `npx.cmd eslint projects/ui-lib-custom/src/lib/split-button/` from `bash.exe`.
-- Warning: ng-packagr still reports conflicting `default` export conditions for `./speed-dial` and `./split-button` while writing package manifest.
-Next step: Prompt 8 — add unit tests for style-state host classes, menu rendering states, and keyboard/focus regressions.
-```
 
 
 

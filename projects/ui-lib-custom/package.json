@@ -64,14 +64,12 @@
     "./speed-dial": {
       "main": "./fesm2022/ui-lib-custom-speed-dial.mjs",
       "module": "./fesm2022/ui-lib-custom-speed-dial.mjs",
-      "typings": "./speed-dial/index.d.ts",
-      "default": "./fesm2022/ui-lib-custom-speed-dial.mjs"
+      "typings": "./speed-dial/index.d.ts"
     },
     "./split-button": {
       "main": "./fesm2022/ui-lib-custom-split-button.mjs",
       "module": "./fesm2022/ui-lib-custom-split-button.mjs",
-      "typings": "./split-button/index.d.ts",
-      "default": "./fesm2022/ui-lib-custom-split-button.mjs"
+      "typings": "./split-button/index.d.ts"
     },
     "./themes/themes.css": {
       "default": "./themes/themes.css"

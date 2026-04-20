@@ -1,9 +1,3 @@
-/** Design variant for the editor component. */
-export type EditorVariant = 'material' | 'bootstrap' | 'minimal';
-
-/** Shared editor size options. */
-export type EditorSize = 'sm' | 'md' | 'lg';
-
 /** Event emitted when the editor's content changes. */
 export interface EditorTextChangeEvent {
   /** Current value as HTML string. */

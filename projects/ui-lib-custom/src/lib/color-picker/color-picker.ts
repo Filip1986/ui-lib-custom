@@ -25,7 +25,12 @@ import type {
 } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import {
+  KEYBOARD_KEYS,
+  claimOverlayZIndex,
+  releaseOverlayZIndex,
+  resolveOverlayAppendTarget,
+} from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
   COLOR_PICKER_CLASSNAMES,
@@ -42,16 +47,6 @@ import type {
   ColorPickerValue,
   ColorPickerVariant,
   HsbColor,
-} from './color-picker.types';
-
-export type {
-  ColorFormat,
-  ColorPickerMode,
-  ColorPickerVariant,
-  RgbColor,
-  HsbColor,
-  ColorPickerValue,
-  ColorPickerChangeEvent,
 } from './color-picker.types';
 
 let colorPickerIdCounter: number = 0;
@@ -699,6 +694,7 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     this.syncPanelClasses(panel, this.resolvedVariant());
     this.syncPanelCssVariables(panel);
     panel.classList.add('ui-lib-colorpicker__panel--overlay');
+    claimOverlayZIndex(panel);
     this.positionMountedPanel(panel);
   }
 
@@ -714,29 +710,12 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     panel.style.removeProperty('top');
     panel.style.removeProperty('left');
     panel.style.removeProperty('width');
+    releaseOverlayZIndex(panel);
     this.clearPanelCssVariables(panel);
   }
 
   private resolveAppendTarget(): HTMLElement | null {
-    const appendTarget: ColorPickerAppendTo = this.appendTo();
-    if (appendTarget === undefined) {
-      return null;
-    }
-
-    if (typeof appendTarget !== 'string') {
-      return appendTarget;
-    }
-
-    const normalizedTarget: string = appendTarget.trim();
-    if (!normalizedTarget || normalizedTarget === 'self') {
-      return null;
-    }
-
-    if (normalizedTarget === 'body') {
-      return this.documentRef.body;
-    }
-
-    return this.documentRef.querySelector<HTMLElement>(normalizedTarget);
+    return resolveOverlayAppendTarget(this.appendTo(), this.documentRef);
   }
 
   private positionMountedPanel(panel: HTMLDivElement): void {

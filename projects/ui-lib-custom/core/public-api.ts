@@ -1,1 +1,1 @@
-export * from './shared-types';
+export * from '../src/lib/core/shared-types';

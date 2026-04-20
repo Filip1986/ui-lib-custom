@@ -50,6 +50,20 @@ Next step: Start Prompt 2 and define the `NumberFormatService` API plus `InputNu
 ```
 
 ```text
+Date: 2026-04-17
+Changed: projects/ui-lib-custom/src/lib/split-button/split-button.component.scss, projects/ui-lib-custom/src/lib/design-tokens.ts, docs/reference/systems/CSS_VARIABLES.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: SplitButton: Prompt 7 complete. Styling now covers joined button geometry, severity palettes, variant modifiers, size scaling, loading animation, and dropdown panel visuals using `--uilib-split-button-*` variables aligned with Button color mappings. Next: Prompt 8 (tests).
+Verification:
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+- SplitButton lint passed: `npx.cmd eslint projects/ui-lib-custom/src/lib/split-button/`.
+Terminal notes:
+- Failed: none in-session.
+- Worked: ran `npx.cmd ng build ui-lib-custom` and `npx.cmd eslint projects/ui-lib-custom/src/lib/split-button/` from `bash.exe`.
+- Warning: ng-packagr still reports conflicting `default` export conditions for `./speed-dial` and `./split-button` while writing package manifest.
+Next step: Prompt 8 — add unit tests for style-state host classes, menu rendering states, and keyboard/focus regressions.
+```
+
+```text
 Date: 2026-04-08
 Changed: projects/ui-lib-custom/src/lib/input-number/input-number.types.ts, projects/ui-lib-custom/src/lib/input-number/number-format.service.ts, projects/ui-lib-custom/src/lib/input-number/number-format.service.spec.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
 State: InputNumber: Prompt 2 complete. Types at `input-number.types.ts`, `NumberFormatService` at `number-format.service.ts` with passing tests. Next: Prompt 3 (component scaffold & CVA).

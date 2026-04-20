@@ -1,7 +1,7 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { axe } from 'jest-axe';
 
-export interface A11yTestOptions {
+interface A11yTestOptions {
   rules?: Record<string, { enabled: boolean }>;
   runOnly?: string[] | { type: 'tag'; values: string[] };
   exclude?: string[];
@@ -37,31 +37,6 @@ export async function checkA11y(
   expect(results.violations.length).toBe(0);
 }
 
-/**
- * Get axe results for custom assertions
- */
-export async function getA11yResults(
-  fixture: ComponentFixture<unknown>,
-  options: A11yTestOptions = {}
-): Promise<ReturnType<typeof axe>> {
-  fixture.detectChanges();
-  await fixture.whenStable();
-
-  const element: HTMLElement = fixture.nativeElement as HTMLElement;
-  const target: HTMLElement = options.exclude?.length
-    ? sanitizeA11yTarget(element, options.exclude)
-    : element;
-  const axeOptions: Parameters<typeof axe>[1] = {};
-  if (options.rules) {
-    axeOptions.rules = options.rules;
-  }
-  if (options.runOnly) {
-    axeOptions.runOnly = options.runOnly;
-  }
-
-  return axe(target, axeOptions);
-}
-
 function sanitizeA11yTarget(root: HTMLElement, excludeSelectors: string[]): HTMLElement {
   const clone: HTMLElement = root.cloneNode(true) as HTMLElement;
   excludeSelectors.forEach((selector: string): void => {
@@ -71,24 +46,3 @@ function sanitizeA11yTarget(root: HTMLElement, excludeSelectors: string[]): HTML
   });
   return clone;
 }
-
-/**
- * Common rule configurations
- */
-export type TagRunOnly = { type: 'tag'; values: string[] };
-
-type A11yRulesConfig = {
-  skipColorContrast: Record<string, { enabled: boolean }>;
-  criticalOnly: { runOnly: TagRunOnly };
-  ariaOnly: { runOnly: TagRunOnly };
-};
-
-export const A11Y_RULES: A11yRulesConfig = {
-  skipColorContrast: SKIP_COLOR_CONTRAST_RULES,
-  criticalOnly: {
-    runOnly: { type: 'tag', values: ['critical', 'serious'] },
-  },
-  ariaOnly: {
-    runOnly: { type: 'tag', values: ['aria'] },
-  },
-};

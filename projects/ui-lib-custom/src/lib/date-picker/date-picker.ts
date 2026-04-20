@@ -24,8 +24,13 @@ import type {
 } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
-import type { ThemeVariant } from 'ui-lib-custom/core';
+import {
+  KEYBOARD_KEYS,
+  claimOverlayZIndex,
+  releaseOverlayZIndex,
+  type ThemeVariant,
+  resolveOverlayAppendTarget,
+} from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
   DATE_PICKER_CSS_CLASSES,
@@ -1951,6 +1956,7 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     this.syncPanelClasses(panel, this.resolvedVariant());
     this.syncPanelCssVariables(panel);
     panel.classList.add('ui-lib-datepicker__panel--overlay');
+    claimOverlayZIndex(panel);
     this.positionMountedPanel(panel);
   }
 
@@ -1966,29 +1972,12 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     panel.style.removeProperty('top');
     panel.style.removeProperty('left');
     panel.style.removeProperty('width');
+    releaseOverlayZIndex(panel);
     this.clearPanelCssVariables(panel);
   }
 
   private resolveAppendTarget(): HTMLElement | null {
-    const appendTarget: DatePickerAppendTo = this.appendTo();
-    if (appendTarget === undefined) {
-      return null;
-    }
-
-    if (typeof appendTarget !== 'string') {
-      return appendTarget;
-    }
-
-    const normalizedTarget: string = appendTarget.trim();
-    if (!normalizedTarget || normalizedTarget === 'self') {
-      return null;
-    }
-
-    if (normalizedTarget === 'body') {
-      return this.documentRef.body;
-    }
-
-    return this.documentRef.querySelector<HTMLElement>(normalizedTarget);
+    return resolveOverlayAppendTarget(this.appendTo(), this.documentRef);
   }
 
   private positionMountedPanel(panel: HTMLDivElement): void {

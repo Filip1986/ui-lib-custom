@@ -46,58 +46,6 @@ export const EDITOR_CSS_CLASSES: {
   ToolbarSelect: 'ui-lib-editor-toolbar-select',
 } as const;
 
-export const EDITOR_TOKENS: {
-  readonly ToolbarBackground: '--uilib-editor-toolbar-bg';
-  readonly ToolbarBorderColor: '--uilib-editor-toolbar-border-color';
-  readonly ToolbarItemColor: '--uilib-editor-toolbar-item-color';
-  readonly ToolbarItemHoverColor: '--uilib-editor-toolbar-item-hover-color';
-  readonly ToolbarItemHoverBackground: '--uilib-editor-toolbar-item-hover-bg';
-  readonly ToolbarItemActiveColor: '--uilib-editor-toolbar-item-active-color';
-  readonly ToolbarItemActiveBackground: '--uilib-editor-toolbar-item-active-bg';
-  readonly ToolbarSeparatorColor: '--uilib-editor-toolbar-separator-color';
-  readonly ToolbarPadding: '--uilib-editor-toolbar-padding';
-  readonly ToolbarGap: '--uilib-editor-toolbar-gap';
-  readonly ToolbarBorderRadius: '--uilib-editor-toolbar-border-radius';
-  readonly ContentBackground: '--uilib-editor-content-bg';
-  readonly ContentBorderColor: '--uilib-editor-content-border-color';
-  readonly ContentFontFamily: '--uilib-editor-content-font-family';
-  readonly ContentFontSize: '--uilib-editor-content-font-size';
-  readonly ContentLineHeight: '--uilib-editor-content-line-height';
-  readonly ContentColor: '--uilib-editor-content-color';
-  readonly ContentPadding: '--uilib-editor-content-padding';
-  readonly ContentMinHeight: '--uilib-editor-content-min-height';
-  readonly PlaceholderColor: '--uilib-editor-placeholder-color';
-  readonly BorderRadius: '--uilib-editor-border-radius';
-  readonly FocusRingColor: '--uilib-editor-focus-ring-color';
-  readonly FocusRingWidth: '--uilib-editor-focus-ring-width';
-  readonly DisabledOpacity: '--uilib-editor-disabled-opacity';
-} = {
-  ToolbarBackground: '--uilib-editor-toolbar-bg',
-  ToolbarBorderColor: '--uilib-editor-toolbar-border-color',
-  ToolbarItemColor: '--uilib-editor-toolbar-item-color',
-  ToolbarItemHoverColor: '--uilib-editor-toolbar-item-hover-color',
-  ToolbarItemHoverBackground: '--uilib-editor-toolbar-item-hover-bg',
-  ToolbarItemActiveColor: '--uilib-editor-toolbar-item-active-color',
-  ToolbarItemActiveBackground: '--uilib-editor-toolbar-item-active-bg',
-  ToolbarSeparatorColor: '--uilib-editor-toolbar-separator-color',
-  ToolbarPadding: '--uilib-editor-toolbar-padding',
-  ToolbarGap: '--uilib-editor-toolbar-gap',
-  ToolbarBorderRadius: '--uilib-editor-toolbar-border-radius',
-  ContentBackground: '--uilib-editor-content-bg',
-  ContentBorderColor: '--uilib-editor-content-border-color',
-  ContentFontFamily: '--uilib-editor-content-font-family',
-  ContentFontSize: '--uilib-editor-content-font-size',
-  ContentLineHeight: '--uilib-editor-content-line-height',
-  ContentColor: '--uilib-editor-content-color',
-  ContentPadding: '--uilib-editor-content-padding',
-  ContentMinHeight: '--uilib-editor-content-min-height',
-  PlaceholderColor: '--uilib-editor-placeholder-color',
-  BorderRadius: '--uilib-editor-border-radius',
-  FocusRingColor: '--uilib-editor-focus-ring-color',
-  FocusRingWidth: '--uilib-editor-focus-ring-width',
-  DisabledOpacity: '--uilib-editor-disabled-opacity',
-} as const;
-
 export const EDITOR_TOOLBAR_ARIA_LABELS: {
   readonly heading: 'Heading level';
   readonly bold: 'Bold';

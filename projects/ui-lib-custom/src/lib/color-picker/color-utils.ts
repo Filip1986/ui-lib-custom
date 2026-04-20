@@ -7,7 +7,7 @@ export function clamp(value: number, min: number, max: number): number {
 }
 
 /** Returns true when the value is a valid RGB color object. */
-export function isRgbColor(value: unknown): value is RgbColor {
+function isRgbColor(value: unknown): value is RgbColor {
   if (!value || typeof value !== 'object') {
     return false;
   }
@@ -21,7 +21,7 @@ export function isRgbColor(value: unknown): value is RgbColor {
 }
 
 /** Returns true when the value is a valid HSB color object. */
-export function isHsbColor(value: unknown): value is HsbColor {
+function isHsbColor(value: unknown): value is HsbColor {
   if (!value || typeof value !== 'object') {
     return false;
   }

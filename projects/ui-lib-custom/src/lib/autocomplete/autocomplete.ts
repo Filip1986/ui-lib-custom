@@ -23,7 +23,12 @@ import {
 } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import {
+  KEYBOARD_KEYS,
+  claimOverlayZIndex,
+  releaseOverlayZIndex,
+  resolveOverlayAppendTarget,
+} from 'ui-lib-custom/core';
 import {
   AUTOCOMPLETE_EMPTY_TEXT,
   AUTOCOMPLETE_ID_PREFIX,
@@ -51,17 +56,6 @@ import {
   AutoCompleteRemoveTokenIconDirective,
   AutoCompleteSelectedItemDirective,
 } from './autocomplete.template-directives';
-
-export type {
-  AutoCompleteVariant,
-  AutoCompleteSize,
-  AutoCompleteDropdownMode,
-  AutoCompleteCompleteEvent,
-  AutoCompleteSelectEvent,
-  AutoCompleteUnselectEvent,
-  AutoCompleteDropdownClickEvent,
-  AutoCompleteOptionGroup,
-} from './autocomplete.types';
 
 let autocompleteIdCounter: number = 0;
 const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
@@ -1213,6 +1207,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     this.syncPanelCssVariables(panel);
 
     panel.classList.add('ui-autocomplete-panel--overlay');
+    claimOverlayZIndex(panel);
     this.positionMountedPanel();
   }
 
@@ -1228,29 +1223,12 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     panel.style.removeProperty('top');
     panel.style.removeProperty('left');
     panel.style.removeProperty('width');
+    releaseOverlayZIndex(panel);
     this.clearPanelCssVariables(panel);
   }
 
   private resolveAppendTarget(): HTMLElement | null {
-    const appendTarget: string | HTMLElement | undefined = this.appendTo();
-    if (appendTarget === undefined) {
-      return null;
-    }
-
-    if (appendTarget instanceof HTMLElement) {
-      return appendTarget;
-    }
-
-    const normalizedTarget: string = appendTarget.trim();
-    if (!normalizedTarget || normalizedTarget === 'self') {
-      return null;
-    }
-
-    if (normalizedTarget === 'body') {
-      return this.documentRef.body;
-    }
-
-    return this.documentRef.querySelector<HTMLElement>(normalizedTarget);
+    return resolveOverlayAppendTarget(this.appendTo(), this.documentRef);
   }
 
   private positionMountedPanel(): void {
