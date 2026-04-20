@@ -4,6 +4,7 @@ import type * as UiLibBadge from 'ui-lib-custom/badge';
 import type * as UiLibButton from 'ui-lib-custom/button';
 import type * as UiLibCard from 'ui-lib-custom/card';
 import type * as UiLibCheckbox from 'ui-lib-custom/checkbox';
+import type * as UiLibChart from 'ui-lib-custom/chart';
 import type * as UiLibColorPicker from 'ui-lib-custom/color-picker';
 import type * as UiLibCore from 'ui-lib-custom/core';
 import type * as UiLibDatePicker from 'ui-lib-custom/date-picker';
@@ -54,6 +55,12 @@ describe('Secondary Entry Points', (): void => {
   it('should import from checkbox', async (): Promise<void> => {
     const mod: typeof UiLibCheckbox = await import('ui-lib-custom/checkbox');
     expect(mod.Checkbox).toBeDefined();
+  });
+
+  it('should import from chart', async (): Promise<void> => {
+    const mod: typeof UiLibChart = await import('ui-lib-custom/chart');
+    expect(mod.ChartComponent).toBeDefined();
+    expect(mod.BarChartComponent).toBeDefined();
   });
 
   it('should import from color-picker', async (): Promise<void> => {

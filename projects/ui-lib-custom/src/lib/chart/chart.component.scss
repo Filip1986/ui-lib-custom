@@ -1,0 +1,121 @@
+.ui-lib-chart {
+  --uilib-chart-min-height-sm: 200px;
+  --uilib-chart-min-height-md: 300px;
+  --uilib-chart-min-height-lg: 400px;
+  --uilib-chart-min-height: var(--uilib-chart-min-height-md);
+
+  --uilib-chart-font-family: var(--uilib-font-family, inherit);
+  --uilib-chart-font-size: 12;
+  --uilib-chart-font-color: var(--uilib-text-color, #333333);
+  --uilib-chart-grid-color: var(--uilib-border-color, rgba(0, 0, 0, 0.1));
+  --uilib-chart-border-color: var(--uilib-border-color, rgba(0, 0, 0, 0.1));
+  --uilib-chart-background-color: transparent;
+  --uilib-chart-tooltip-background: var(--uilib-overlay-tooltip-bg, rgba(0, 0, 0, 0.8));
+  --uilib-chart-tooltip-font-color: var(--uilib-overlay-tooltip-fg, #ffffff);
+  --uilib-chart-legend-font-color: var(--uilib-text-color-secondary, #666666);
+  --uilib-chart-color-1: var(--uilib-color-primary-500, #4285f4);
+  --uilib-chart-color-2: var(--uilib-color-danger-500, #ea4335);
+  --uilib-chart-color-3: var(--uilib-color-warning-500, #fbbc04);
+  --uilib-chart-color-4: var(--uilib-color-success-500, #34a853);
+  --uilib-chart-color-5: var(--uilib-chart-accent-1, #ff6d01);
+  --uilib-chart-color-6: var(--uilib-chart-accent-2, #46bdc6);
+  --uilib-chart-color-7: var(--uilib-chart-accent-3, #7baaf7);
+  --uilib-chart-color-8: var(--uilib-chart-accent-4, #f07b72);
+
+  display: block;
+  position: relative;
+}
+
+.ui-lib-chart.ui-lib-chart--sm {
+  --uilib-chart-min-height: var(--uilib-chart-min-height-sm);
+}
+
+.ui-lib-chart.ui-lib-chart--md {
+  --uilib-chart-min-height: var(--uilib-chart-min-height-md);
+}
+
+.ui-lib-chart.ui-lib-chart--lg {
+  --uilib-chart-min-height: var(--uilib-chart-min-height-lg);
+}
+
+.ui-lib-chart .ui-lib-chart__container {
+  position: relative;
+  width: 100%;
+  min-height: var(--uilib-chart-min-height);
+}
+
+.ui-lib-chart .ui-lib-chart__container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100%;
+}
+
+.ui-lib-variant-material .ui-lib-chart {
+  --uilib-chart-font-family: var(--uilib-font-ui, 'Roboto', 'Helvetica Neue', Arial, sans-serif);
+  --uilib-chart-font-color: var(--uilib-color-neutral-800, #424242);
+  --uilib-chart-legend-font-color: var(--uilib-color-neutral-700, #616161);
+  --uilib-chart-grid-color: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-500, #9e9e9e) 20%,
+    transparent
+  );
+  --uilib-chart-border-color: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-500, #9e9e9e) 25%,
+    transparent
+  );
+  --uilib-chart-color-1: var(--uilib-color-primary-500, #2196f3);
+  --uilib-chart-color-2: var(--uilib-color-danger-500, #f44336);
+  --uilib-chart-color-3: var(--uilib-color-warning-500, #ff9800);
+  --uilib-chart-color-4: var(--uilib-color-success-500, #4caf50);
+  --uilib-chart-color-5: var(--uilib-color-info-500, #03a9f4);
+  --uilib-chart-color-6: var(--uilib-color-help-500, #9333ea);
+}
+
+.ui-lib-variant-bootstrap .ui-lib-chart {
+  --uilib-chart-font-family: var(
+    --uilib-font-ui,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif
+  );
+  --uilib-chart-font-color: var(--bs-body-color, #212529);
+  --uilib-chart-legend-font-color: var(--bs-secondary-color, #6c757d);
+  --uilib-chart-grid-color: color-mix(in srgb, var(--bs-border-color, #dee2e6) 85%, transparent);
+  --uilib-chart-border-color: var(--bs-border-color, #dee2e6);
+  --uilib-chart-color-1: var(--bs-primary, #0d6efd);
+  --uilib-chart-color-2: var(--bs-danger, #dc3545);
+  --uilib-chart-color-3: var(--bs-warning, #ffc107);
+  --uilib-chart-color-4: var(--bs-success, #198754);
+  --uilib-chart-color-5: var(--bs-info, #0dcaf0);
+  --uilib-chart-color-6: var(--bs-purple, #6f42c1);
+}
+
+.ui-lib-variant-minimal .ui-lib-chart {
+  --uilib-chart-font-family: var(--uilib-font-ui, inherit);
+  --uilib-chart-font-color: color-mix(in srgb, var(--uilib-page-fg, #111827) 84%, transparent);
+  --uilib-chart-legend-font-color: color-mix(
+    in srgb,
+    var(--uilib-page-fg, #111827) 70%,
+    transparent
+  );
+  --uilib-chart-grid-color: color-mix(in srgb, var(--uilib-page-fg, #111827) 12%, transparent);
+  --uilib-chart-border-color: color-mix(in srgb, var(--uilib-page-fg, #111827) 20%, transparent);
+  --uilib-chart-tooltip-background: color-mix(
+    in srgb,
+    var(--uilib-page-fg, #111827) 88%,
+    transparent
+  );
+  --uilib-chart-color-1: color-mix(in srgb, var(--uilib-page-fg, #111827) 92%, transparent);
+  --uilib-chart-color-2: color-mix(in srgb, var(--uilib-page-fg, #111827) 80%, transparent);
+  --uilib-chart-color-3: color-mix(in srgb, var(--uilib-page-fg, #111827) 68%, transparent);
+  --uilib-chart-color-4: color-mix(in srgb, var(--uilib-page-fg, #111827) 56%, transparent);
+  --uilib-chart-color-5: color-mix(in srgb, var(--uilib-page-fg, #111827) 44%, transparent);
+  --uilib-chart-color-6: color-mix(in srgb, var(--uilib-page-fg, #111827) 32%, transparent);
+  --uilib-chart-color-7: color-mix(in srgb, var(--uilib-page-fg, #111827) 24%, transparent);
+  --uilib-chart-color-8: color-mix(in srgb, var(--uilib-page-fg, #111827) 16%, transparent);
+}

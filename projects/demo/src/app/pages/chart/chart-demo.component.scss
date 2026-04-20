@@ -1,14 +1,46 @@
-.chart-demo {
-  padding: 1.5rem;
+@use '../../shared/styles/doc-page.scss';
+
+.examples {
+  display: grid;
+  gap: 1.25rem;
 }
 
-.chart-demo h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.5rem;
-  color: var(--uilib-page-fg);
+.example-section {
+  display: grid;
+  gap: 0.75rem;
 }
 
-.chart-demo p {
+.mini-heading {
   margin: 0;
   color: var(--uilib-muted);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.helper-text {
+  color: var(--uilib-muted);
+  font-size: 0.875rem;
+}
+
+.size-grid {
+  align-items: start;
+}
+
+.theme-bridge-surface {
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  background: var(--uilib-surface-100, rgba(0, 0, 0, 0.02));
+  border: 1px solid var(--uilib-surface-300, rgba(0, 0, 0, 0.08));
+}
+
+.selection-feedback {
+  margin: 0;
+  color: var(--uilib-muted);
+}
+
+@media (max-width: 1024px) {
+  .size-grid {
+    --uilib-grid-columns: 1;
+  }
 }

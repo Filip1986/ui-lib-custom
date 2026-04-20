@@ -26,7 +26,8 @@
   "homepage": "https://github.com/yourusername/ui-lib-custom#readme",
   "peerDependencies": {
     "@angular/common": "^21.0.0 || ^22.0.0",
-    "@angular/core": "^21.0.0 || ^22.0.0"
+    "@angular/core": "^21.0.0 || ^22.0.0",
+    "chart.js": "^4.5.1"
   },
   "dependencies": {
     "tslib": "^2.3.0"

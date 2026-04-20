@@ -1423,6 +1423,95 @@ export const INPUTNUMBER_TOKENS: Readonly<InputNumberTokens> = {
 export type InputNumberTokenKey = keyof typeof INPUTNUMBER_TOKENS;
 
 // ============================================================================
+// CHART TOKENS
+// ============================================================================
+
+export type ChartVariant = 'material' | 'bootstrap' | 'minimal';
+export type ChartSize = 'sm' | 'md' | 'lg';
+
+export type ChartTokens = {
+  size: {
+    minHeight: Record<ChartSize, string>;
+  };
+  typography: {
+    fontFamily: string;
+    fontSize: number;
+    fontColor: string;
+    legendFontColor: string;
+  };
+  surfaces: {
+    gridColor: string;
+    borderColor: string;
+    backgroundColor: string;
+    tooltipBackground: string;
+    tooltipFontColor: string;
+  };
+  palette: readonly [string, string, string, string, string, string, string, string];
+  variants: Record<
+    ChartVariant,
+    readonly [string, string, string, string, string, string, string, string]
+  >;
+};
+
+export const CHART_TOKENS: Readonly<ChartTokens> = {
+  size: {
+    minHeight: {
+      sm: '200px',
+      md: '300px',
+      lg: '400px',
+    },
+  },
+  typography: {
+    fontFamily: 'var(--uilib-font-family, inherit)',
+    fontSize: 12,
+    fontColor: SEMANTIC_COLORS.text,
+    legendFontColor: SEMANTIC_COLORS['text-secondary'],
+  },
+  surfaces: {
+    gridColor: `color-mix(in srgb, ${SEMANTIC_COLORS.border} 60%, transparent)`,
+    borderColor: `color-mix(in srgb, ${SEMANTIC_COLORS.border} 80%, transparent)`,
+    backgroundColor: 'transparent',
+    tooltipBackground: 'rgba(0, 0, 0, 0.8)',
+    tooltipFontColor: COLOR_NEUTRAL.white,
+  },
+  palette: ['#4285f4', '#ea4335', '#fbbc04', '#34a853', '#ff6d01', '#46bdc6', '#7baaf7', '#f07b72'],
+  variants: {
+    material: [
+      COLOR_PRIMARY[500],
+      COLOR_DANGER[500],
+      COLOR_WARNING[500],
+      COLOR_SUCCESS[500],
+      COLOR_INFO[500],
+      COLOR_HELP[500],
+      COLOR_PRIMARY[300],
+      COLOR_DANGER[300],
+    ],
+    bootstrap: [
+      '#0d6efd',
+      '#dc3545',
+      '#ffc107',
+      '#198754',
+      '#0dcaf0',
+      '#6f42c1',
+      '#6ea8fe',
+      '#f1aeb5',
+    ],
+    minimal: [
+      '#111827',
+      '#4b5563',
+      '#6b7280',
+      '#9ca3af',
+      '#d1d5db',
+      '#e5e7eb',
+      '#f3f4f6',
+      '#f9fafb',
+    ],
+  },
+};
+
+export type ChartTokenKey = keyof typeof CHART_TOKENS;
+
+// ============================================================================
 // SPLIT BUTTON TOKENS
 // ============================================================================
 

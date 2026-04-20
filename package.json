@@ -69,6 +69,7 @@
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
     "bundlesize": "^0.18.0",
+    "chart.js": "^4.5.1",
     "cross-env": "^7.0.3",
     "eslint": "^9.39.0",
     "eslint-plugin-jsdoc": "^62.7.1",

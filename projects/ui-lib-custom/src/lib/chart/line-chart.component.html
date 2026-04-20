@@ -1,0 +1,16 @@
+<ui-lib-chart
+  [type]="'line'"
+  [data]="data()"
+  [options]="options()"
+  [plugins]="plugins()"
+  [size]="size()"
+  [responsive]="responsive()"
+  [maintainAspectRatio]="maintainAspectRatio()"
+  [ariaLabel]="ariaLabel()"
+  [height]="height()"
+  [width]="width()"
+  (chartClick)="chartClick.emit($event)"
+  (chartHover)="chartHover.emit($event)"
+  (chartReady)="chartReady.emit($event)"
+/>
+

@@ -216,6 +216,32 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-card-shadow-medium` | `none` | Shadow medium. |
 | `--uilib-card-shadow-high` | `none` | Shadow high. |
 
+## Chart
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-chart-min-height-sm` | `200px` | Minimum container height for `sm` charts. |
+| `--uilib-chart-min-height-md` | `300px` | Minimum container height for `md` charts. |
+| `--uilib-chart-min-height-lg` | `400px` | Minimum container height for `lg` charts. |
+| `--uilib-chart-min-height` | `var(--uilib-chart-min-height-md)` | Active chart container minimum height. |
+| `--uilib-chart-font-family` | `var(--uilib-font-family, inherit)` | Font family forwarded to Chart.js defaults. |
+| `--uilib-chart-font-size` | `12` | Font size forwarded to Chart.js defaults. |
+| `--uilib-chart-font-color` | `var(--uilib-text-color, #333333)` | Base chart text color. |
+| `--uilib-chart-grid-color` | `var(--uilib-border-color, rgba(0, 0, 0, 0.1))` | Grid line color. |
+| `--uilib-chart-border-color` | `var(--uilib-border-color, rgba(0, 0, 0, 0.1))` | Axis/element border color. |
+| `--uilib-chart-background-color` | `transparent` | Dataset background fallback color. |
+| `--uilib-chart-tooltip-background` | `rgba(0, 0, 0, 0.8)` | Tooltip panel background color. |
+| `--uilib-chart-tooltip-font-color` | `#ffffff` | Tooltip text color. |
+| `--uilib-chart-legend-font-color` | `var(--uilib-text-color-secondary, #666666)` | Legend label text color. |
+| `--uilib-chart-color-1` | `var(--uilib-color-primary-500, #4285f4)` | Palette slot 1. |
+| `--uilib-chart-color-2` | `var(--uilib-color-danger-500, #ea4335)` | Palette slot 2. |
+| `--uilib-chart-color-3` | `var(--uilib-color-warning-500, #fbbc04)` | Palette slot 3. |
+| `--uilib-chart-color-4` | `var(--uilib-color-success-500, #34a853)` | Palette slot 4. |
+| `--uilib-chart-color-5` | `#ff6d01` | Palette slot 5. |
+| `--uilib-chart-color-6` | `#46bdc6` | Palette slot 6. |
+| `--uilib-chart-color-7` | `#7baaf7` | Palette slot 7. |
+| `--uilib-chart-color-8` | `#f07b72` | Palette slot 8. |
+
 ## ColorPicker
 
 | Variable | Default | Description |
