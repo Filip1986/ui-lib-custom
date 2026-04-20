@@ -246,7 +246,7 @@ describe('ChartThemeService', (): void => {
       expect(options.plugins?.tooltip?.backgroundColor).not.toBeUndefined();
       expect(scaleX?.grid?.color).not.toBeUndefined();
       expect(options.plugins?.legend?.labels?.font).not.toBeUndefined();
-      expect(options.elements?.line?.backgroundColor).not.toBeUndefined();
+      expect(options.elements?.line?.borderColor).not.toBeUndefined();
     });
   });
 

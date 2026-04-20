@@ -148,19 +148,15 @@ export class ChartThemeService {
       elements: {
         line: {
           borderColor: tokens.borderColor,
-          backgroundColor: tokens.backgroundColor,
         },
         bar: {
           borderColor: tokens.borderColor,
-          backgroundColor: tokens.backgroundColor,
         },
         arc: {
           borderColor: tokens.borderColor,
-          backgroundColor: tokens.backgroundColor,
         },
         point: {
           borderColor: tokens.borderColor,
-          backgroundColor: tokens.backgroundColor,
         },
       },
     };

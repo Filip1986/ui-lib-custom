@@ -138,20 +138,26 @@ export class ChartComponent {
       return;
     }
 
+    const themeTokens: ChartThemeTokens = this.chartThemeService.readThemeTokens(
+      this.hostElementRef.nativeElement
+    );
+    const resolvedData: ChartData<ChartType> = this.resolveChartData(chartData, themeTokens);
+    const mergedOptions: ChartOptions<ChartType> = this.resolveMergedOptions(themeTokens);
+
     const nextType: ChartType = this.type();
     if (!this.chartInstance) {
-      this.createChart(canvasElementRef.nativeElement, nextType, chartData);
+      this.createChart(canvasElementRef.nativeElement, nextType, resolvedData, mergedOptions);
       return;
     }
 
     if (this.renderedType !== nextType) {
       this.destroyChart();
-      this.createChart(canvasElementRef.nativeElement, nextType, chartData);
+      this.createChart(canvasElementRef.nativeElement, nextType, resolvedData, mergedOptions);
       return;
     }
 
-    this.chartInstance.data = chartData;
-    this.chartInstance.options = this.resolveMergedOptions();
+    this.chartInstance.data = resolvedData;
+    this.chartInstance.options = mergedOptions;
     this.chartInstance.config.plugins = this.plugins();
     this.chartInstance.update();
   }
@@ -159,12 +165,13 @@ export class ChartComponent {
   private createChart(
     canvasElement: HTMLCanvasElement,
     chartType: ChartType,
-    chartData: ChartData<ChartType>
+    chartData: ChartData<ChartType>,
+    chartOptions: ChartOptions<ChartType>
   ): void {
     this.chartInstance = new Chart<ChartType>(canvasElement, {
       type: chartType,
       data: chartData,
-      options: this.resolveMergedOptions(),
+      options: chartOptions,
       plugins: this.plugins(),
     });
 
@@ -172,10 +179,7 @@ export class ChartComponent {
     this.chartReady.emit(this.chartInstance);
   }
 
-  private resolveMergedOptions(): ChartOptions<ChartType> {
-    const themeTokens: ChartThemeTokens = this.chartThemeService.readThemeTokens(
-      this.hostElementRef.nativeElement
-    );
+  private resolveMergedOptions(themeTokens: ChartThemeTokens): ChartOptions<ChartType> {
     const themeOptions: Partial<ChartOptions<ChartType>> =
       this.chartThemeService.buildChartOptions(themeTokens);
 
@@ -201,6 +205,52 @@ export class ChartComponent {
     const consumerOptions: Partial<ChartOptions<ChartType>> = this.options() ?? {};
 
     return this.mergeOptions(this.mergeOptions(themeOptions, baseOptions), consumerOptions);
+  }
+
+  private resolveChartData(
+    chartData: ChartData<ChartType>,
+    themeTokens: ChartThemeTokens
+  ): ChartData<ChartType> {
+    const datasetEntries: readonly unknown[] = chartData.datasets as readonly unknown[];
+    if (datasetEntries.length === 0) {
+      return chartData;
+    }
+
+    const palette: string[] = this.chartThemeService.buildColorPalette(
+      themeTokens,
+      datasetEntries.length
+    );
+    const firstPaletteColor: string = palette[0] ?? themeTokens.borderColor;
+
+    const mappedDatasets: unknown[] = datasetEntries.map(
+      (dataset: unknown, index: number): unknown => {
+        if (!this.shouldApplyDatasetBackgroundColor(dataset)) {
+          return dataset;
+        }
+
+        const datasetRecord: Record<string, unknown> = dataset as Record<string, unknown>;
+        return {
+          ...datasetRecord,
+          backgroundColor: palette[index] ?? firstPaletteColor,
+        };
+      }
+    );
+
+    return {
+      ...chartData,
+      datasets: mappedDatasets as ChartData<ChartType>['datasets'],
+    } as ChartData<ChartType>;
+  }
+
+  private shouldApplyDatasetBackgroundColor(dataset: unknown): boolean {
+    if (!dataset || typeof dataset !== 'object') {
+      return false;
+    }
+
+    const datasetRecord: Record<string, unknown> = dataset as Record<string, unknown>;
+    return (
+      datasetRecord['backgroundColor'] === undefined || datasetRecord['backgroundColor'] === null
+    );
   }
 
   private emitChartInteraction(

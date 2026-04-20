@@ -332,6 +332,29 @@ describe('ChartComponent', (): void => {
     expect(config.options.scales?.['x']?.grid?.color).toBe('theme-grid');
   });
 
+  it('applies theme palette background color only when dataset backgroundColor is missing', (): void => {
+    jest
+      .spyOn(ChartThemeService.prototype, 'buildColorPalette')
+      .mockReturnValue(['#theme-1', '#theme-2']);
+
+    host.data.set({
+      labels: ['A'],
+      datasets: [
+        { label: 'Series A', data: [1] },
+        { label: 'Series B', data: [2], backgroundColor: '#consumer' },
+      ],
+    } as ChartData<ChartType>);
+    refreshFixture(fixture);
+
+    const config: ChartConstructorConfig = chartConfigs[0] as ChartConstructorConfig;
+    const datasets: unknown[] = config.data.datasets as unknown[];
+    const firstDataset: Record<string, unknown> = datasets[0] as Record<string, unknown>;
+    const secondDataset: Record<string, unknown> = datasets[1] as Record<string, unknown>;
+
+    expect(firstDataset['backgroundColor']).toBe('#theme-1');
+    expect(secondDataset['backgroundColor']).toBe('#consumer');
+  });
+
   it('emits chartClick when Chart.js onClick callback is invoked with active elements', (): void => {
     host.data.set(createBarData('Series A', [1]));
     refreshFixture(fixture);
