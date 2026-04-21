@@ -1,0 +1,154 @@
+<ng-template #paginatorTemplate>
+  <nav class="ui-lib-data-view__paginator" aria-label="Pagination">
+    <div class="ui-lib-data-view__paginator-start">
+      @if (paginatorLeftTemplate()) {
+        <ng-container [ngTemplateOutlet]="paginatorLeftTemplate()!" />
+      }
+    </div>
+
+    <div class="ui-lib-data-view__paginator-main">
+      <button
+        class="ui-lib-data-view__paginator-button"
+        type="button"
+        aria-label="Go to first page"
+        [disabled]="isFirstPage()"
+        (click)="onFirstPage()"
+      >
+        First
+      </button>
+      <button
+        class="ui-lib-data-view__paginator-button"
+        type="button"
+        aria-label="Go to previous page"
+        [disabled]="isFirstPage()"
+        (click)="onPreviousPage()"
+      >
+        Prev
+      </button>
+
+      <div class="ui-lib-data-view__paginator-pages">
+        @for (pageItem of pageNavigationItems(); track trackPageNavigationItem($index, pageItem)) {
+          @if (isPageNumber(pageItem)) {
+            <button
+              class="ui-lib-data-view__paginator-page"
+              type="button"
+              [attr.aria-label]="pageAriaLabel(pageNumber(pageItem))"
+              [attr.aria-current]="pageNumber(pageItem) === currentPage() ? 'page' : null"
+              [disabled]="pageNumber(pageItem) === currentPage()"
+              (click)="onPageChange(pageNumber(pageItem))"
+            >
+              {{ pageNumber(pageItem) + 1 }}
+            </button>
+          } @else {
+            <span class="ui-lib-data-view__paginator-ellipsis" aria-hidden="true">...</span>
+          }
+        }
+      </div>
+
+      <button
+        class="ui-lib-data-view__paginator-button"
+        type="button"
+        aria-label="Go to next page"
+        [disabled]="isLastPage()"
+        (click)="onNextPage()"
+      >
+        Next
+      </button>
+      <button
+        class="ui-lib-data-view__paginator-button"
+        type="button"
+        aria-label="Go to last page"
+        [disabled]="isLastPage()"
+        (click)="onLastPage()"
+      >
+        Last
+      </button>
+    </div>
+
+    <div class="ui-lib-data-view__paginator-end">
+      @if (rowsPerPageOptions()) {
+        <label class="ui-lib-data-view__rows-label">
+          Rows per page
+          <select
+            class="ui-lib-data-view__rows-select"
+            aria-label="Rows per page"
+            [value]="effectiveRows()"
+            (change)="onRowsPerPageSelectChange($event)"
+          >
+            @for (rowsOption of rowsPerPageOptions()!; track rowsOption) {
+              <option [value]="rowsOption">{{ rowsOption }}</option>
+            }
+          </select>
+        </label>
+      }
+
+      @if (showCurrentPageReport()) {
+        <span class="ui-lib-data-view__page-report">{{ pageReportText() }}</span>
+      }
+
+      @if (paginatorRightTemplate()) {
+        <ng-container [ngTemplateOutlet]="paginatorRightTemplate()!" />
+      }
+    </div>
+  </nav>
+</ng-template>
+
+@if (headerTemplate()) {
+  <div class="ui-lib-data-view__header">
+    <ng-container [ngTemplateOutlet]="headerTemplate()!" />
+  </div>
+}
+
+@if (showTopPaginator()) {
+  <ng-container [ngTemplateOutlet]="paginatorTemplate" />
+}
+
+@if (loading()) {
+  <div class="ui-lib-data-view__loading">
+    @if (loadingTemplate()) {
+      <ng-container [ngTemplateOutlet]="loadingTemplate()!" />
+    } @else {
+      <div class="ui-lib-data-view__loading-default">Loading...</div>
+    }
+  </div>
+}
+
+@if (!loading()) {
+  @if (isEmpty()) {
+    <div class="ui-lib-data-view__empty">
+      @if (emptyTemplate()) {
+        <ng-container [ngTemplateOutlet]="emptyTemplate()!" />
+      } @else {
+        <div class="ui-lib-data-view__empty-default">{{ emptyMessage() }}</div>
+      }
+    </div>
+  } @else {
+    <div
+      class="ui-lib-data-view__content"
+      [class.ui-lib-data-view__content--list]="layout() === 'list'"
+      [class.ui-lib-data-view__content--grid]="layout() === 'grid'"
+      [style.--uilib-data-view-grid-columns]="gridColumns()"
+      [style.--uilib-data-view-grid-gap]="gridGap()"
+      role="list"
+    >
+      @for (ctx of itemContexts(); track trackItem(ctx.index, ctx.$implicit)) {
+        <div class="ui-lib-data-view__item" role="listitem">
+          @if (activeTemplate()) {
+            <ng-container [ngTemplateOutlet]="activeTemplate()!" [ngTemplateOutletContext]="ctx" />
+          }
+        </div>
+      }
+    </div>
+  }
+}
+
+@if (showBottomPaginator()) {
+  <ng-container [ngTemplateOutlet]="paginatorTemplate" />
+}
+
+@if (footerTemplate()) {
+  <div class="ui-lib-data-view__footer">
+    <ng-container [ngTemplateOutlet]="footerTemplate()!" />
+  </div>
+}
+

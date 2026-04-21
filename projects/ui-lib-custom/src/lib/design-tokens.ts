@@ -1512,6 +1512,168 @@ export const CHART_TOKENS: Readonly<ChartTokens> = {
 export type ChartTokenKey = keyof typeof CHART_TOKENS;
 
 // ============================================================================
+// DATA VIEW TOKENS
+// ============================================================================
+
+export type DataViewVariant = 'material' | 'bootstrap' | 'minimal';
+export type DataViewSize = 'sm' | 'md' | 'lg';
+
+export type DataViewTokens = {
+  container: {
+    border: string;
+    borderRadius: string;
+    background: string;
+    textColor: string;
+  };
+  header: {
+    background: string;
+    padding: Record<DataViewSize, string>;
+    fontWeight: string;
+  };
+  footer: {
+    background: string;
+    padding: Record<DataViewSize, string>;
+  };
+  item: {
+    padding: Record<DataViewSize, string>;
+    border: string;
+    hoverBackground: string;
+  };
+  grid: {
+    columns: number;
+    gap: string;
+  };
+  paginator: {
+    padding: Record<DataViewSize, string>;
+    gap: string;
+    buttonSize: Record<DataViewSize, string>;
+    activeBackground: string;
+    activeColor: string;
+    hoverBackground: string;
+    disabledOpacity: string;
+    border: string;
+    borderRadius: string;
+  };
+  empty: {
+    padding: string;
+    color: string;
+  };
+  loading: {
+    minHeight: string;
+  };
+  typography: {
+    fontSize: Record<DataViewSize, string>;
+  };
+  variants: Record<
+    DataViewVariant,
+    {
+      border: string;
+      borderRadius: string;
+      shadow: string;
+      itemHoverBackground: string;
+      paginatorButtonBorder: string;
+    }
+  >;
+};
+
+export const DATAVIEW_TOKENS: Readonly<DataViewTokens> = {
+  container: {
+    border: `1px solid ${COLOR_NEUTRAL[300]}`,
+    borderRadius: BORDER_RADIUS.md,
+    background: COLOR_NEUTRAL.white,
+    textColor: COLOR_NEUTRAL[900],
+  },
+  header: {
+    background: COLOR_NEUTRAL[100],
+    padding: {
+      sm: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[3]}`,
+      md: `${SPACING_TOKENS[3]} ${SPACING_TOKENS[4]}`,
+      lg: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[5]}`,
+    },
+    fontWeight: `${FONT_WEIGHTS.semibold}`,
+  },
+  footer: {
+    background: COLOR_NEUTRAL[100],
+    padding: {
+      sm: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[3]}`,
+      md: `${SPACING_TOKENS[3]} ${SPACING_TOKENS[4]}`,
+      lg: `${SPACING_TOKENS[4]} ${SPACING_TOKENS[5]}`,
+    },
+  },
+  item: {
+    padding: {
+      sm: SPACING_TOKENS[3],
+      md: SPACING_TOKENS[4],
+      lg: SPACING_TOKENS[5],
+    },
+    border: `1px solid ${COLOR_NEUTRAL[300]}`,
+    hoverBackground: `color-mix(in srgb, ${COLOR_NEUTRAL.black} 4%, transparent)`,
+  },
+  grid: {
+    columns: 3,
+    gap: SPACING_TOKENS[4],
+  },
+  paginator: {
+    padding: {
+      sm: `${SPACING_TOKENS[1]} ${SPACING_TOKENS[3]}`,
+      md: `${SPACING_TOKENS[2]} ${SPACING_TOKENS[4]}`,
+      lg: `${SPACING_TOKENS[3]} ${SPACING_TOKENS[5]}`,
+    },
+    gap: SPACING_TOKENS[1],
+    buttonSize: {
+      sm: '1.75rem',
+      md: '2rem',
+      lg: '2.25rem',
+    },
+    activeBackground: COLOR_PRIMARY[500],
+    activeColor: COLOR_NEUTRAL.white,
+    hoverBackground: `color-mix(in srgb, ${COLOR_NEUTRAL.black} 4%, transparent)`,
+    disabledOpacity: '0.5',
+    border: `1px solid ${COLOR_NEUTRAL[300]}`,
+    borderRadius: BORDER_RADIUS.md,
+  },
+  empty: {
+    padding: SPACING_TOKENS[8],
+    color: COLOR_NEUTRAL[600],
+  },
+  loading: {
+    minHeight: '200px',
+  },
+  typography: {
+    fontSize: {
+      sm: FONT_SIZES.sm,
+      md: FONT_SIZES.base,
+      lg: FONT_SIZES.lg,
+    },
+  },
+  variants: {
+    material: {
+      border: `1px solid color-mix(in srgb, ${COLOR_NEUTRAL[300]} 70%, transparent)`,
+      borderRadius: BORDER_RADIUS.xl,
+      shadow: SHADOWS['shadow-2']!,
+      itemHoverBackground: `color-mix(in srgb, ${COLOR_NEUTRAL.black} 6%, transparent)`,
+      paginatorButtonBorder: `1px solid color-mix(in srgb, ${COLOR_NEUTRAL[300]} 65%, transparent)`,
+    },
+    bootstrap: {
+      border: '1px solid #ced4da',
+      borderRadius: BORDER_RADIUS.sm,
+      shadow: SHADOWS.none,
+      itemHoverBackground: 'rgba(0, 0, 0, 0.04)',
+      paginatorButtonBorder: '1px solid #ced4da',
+    },
+    minimal: {
+      border: '0',
+      borderRadius: BORDER_RADIUS.none,
+      shadow: SHADOWS.none,
+      itemHoverBackground: `color-mix(in srgb, ${COLOR_NEUTRAL.black} 3%, transparent)`,
+      paginatorButtonBorder: '1px solid color-mix(in srgb, #dee2e6 55%, transparent)',
+    },
+  },
+};
+
+export type DataViewTokenKey = keyof typeof DATAVIEW_TOKENS;
+
+// ============================================================================
 // SPLIT BUTTON TOKENS
 // ============================================================================
 

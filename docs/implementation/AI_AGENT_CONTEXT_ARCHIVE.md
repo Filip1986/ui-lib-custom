@@ -7,7 +7,7 @@ Stable architecture/conventions/workflows are owned by `AGENTS.md`.
 
 ## Archive Index
 
-- Range: 2026-03-17 through 2026-04-20
+- Range: 2026-03-17 through 2026-04-21
 - Coverage: CascadeSelect completion, Checkbox parity phases, DatePicker implementation, InputGroup integration, InputMask research, InputNumber prompts 1-8 rollovers, SpeedDial prompts 1-4 rollovers
 - Source: migrated from `AI_AGENT_CONTEXT.md` during context cleanup and retention rollovers on 2026-04-08
 
@@ -45,6 +45,9 @@ Stable architecture/conventions/workflows are owned by `AGENTS.md`.
 - Chart Prompt 1 handoff moved from `AI_AGENT_CONTEXT.md`.
 - Chart Prompt 2 handoff moved from `AI_AGENT_CONTEXT.md`.
 - Chart Prompt 3 handoff moved from `AI_AGENT_CONTEXT.md`.
+
+### 2026-04-21 (Retention rollovers)
+- DataView Prompt 6 handoff moved from `AI_AGENT_CONTEXT.md`.
 
 ### Archived InputNumber Handoffs (Chronological)
 
@@ -526,5 +529,159 @@ Terminal notes:
 - Worked: created the two timed-out files via `bash.exe` heredoc fallback, then reran diagnostics and verification commands with `npx.cmd`.
 - Warning: `get_errors` shows non-blocking schema path warnings for `projects/ui-lib-custom/chart/ng-package.json` (`$schema` path resolution in editor tooling).
 Next step: Prompt 9 demo page work, or first fix the pre-existing Chart compile diagnostics if a fully green `ng build ui-lib-custom` gate is required before demo integration.
+```
+
+```text
+Date: 2026-04-20
+Changed: projects/ui-lib-custom/src/lib/chart/chart.component.ts, projects/ui-lib-custom/src/lib/chart/bar-chart.component.ts, projects/ui-lib-custom/src/lib/chart/line-chart.component.ts, projects/ui-lib-custom/src/lib/chart/pie-chart.component.ts, projects/ui-lib-custom/src/lib/chart/doughnut-chart.component.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Chart: Prompt 8 follow-up compile fixes complete. `ui-lib-custom/chart` now builds cleanly with strict diagnostics and entry-point regression remains green. Next: Prompt 9 (demo page).
+Verification:
+- Replaced unsupported `ViewChildSignal` typings with `Signal<... | undefined>` across chart wrapper components and generic chart canvas query.
+- Refactored `ChartComponent.mergeOptions` scale merging to strict-safe record access using bracket notation for `x`/`y` scale keys and nested `ticks`/`grid`/`border` merges.
+- Switched chart wrapper `chart.js` imports to type-only where runtime values are not used.
+- Library build passed: `npx.cmd ng build ui-lib-custom` (includes `ui-lib-custom/chart` entry point).
+- Entry-point regression passed: `npx.cmd jest projects/ui-lib-custom/test/entry-points.spec.ts --runInBand --no-cache` (26/26).
+Terminal notes:
+- Failed: none in-session.
+- Worked: all verification commands executed from `bash.exe` using `npx.cmd`.
+- Warning: `get_errors` still reports non-blocking "unused method" warnings in some chart wrappers for public helper methods (`getChartInstance`, `refresh`); no build/test impact.
+Next step: Prompt 9 — wire chart demo page and route/navigation coverage.
+```
+
+```text
+Date: 2026-04-20
+Changed: projects/demo/src/app/pages/chart/chart-demo.component.ts, projects/demo/src/app/pages/chart/chart-demo.component.html, projects/demo/src/app/pages/chart/chart-demo.component.scss, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Chart: Prompt 9 complete. Demo page with 16-18 scenarios. Next: Prompt 10 (documentation & final QA).
+Verification:
+- Replaced chart demo placeholder with a full 18-section docs page covering wrappers, generic chart types, multi-dataset/stacked/mixed scenarios, size/dimension variants, dynamic updates, theme token bridge, click events, and custom options.
+- Ensured chart runtime registration is routed through `provideChartDefaults()` in the demo component constructor (no direct `Chart.register()` usage in demo code).
+- Confirmed route wiring for `path: 'chart'` already exists in `projects/demo/src/app/app.routes.ts` and load path remains correct (`./pages/chart/chart-demo.component`).
+- Removed `badge: 'TODO'` from the Chart item in `projects/demo/src/app/layout/sidebar/sidebar.component.ts`.
+- Demo build passed: `npx.cmd ng build demo`.
+- Route probe passed: `curl -I http://localhost:4200/chart` returned HTTP 200.
+Terminal notes:
+- Failed: none in-session.
+- Worked: build and route probe executed from `bash.exe` using `npx.cmd` and `curl`.
+- Warning: demo build still reports pre-existing SCSS budget warnings for `button.scss` and `date-picker.scss`.
+Next step: Prompt 10 - documentation updates and final QA sweep for chart component/demo parity.
+```
+
+```text
+Date: 2026-04-20
+Changed: docs/reference/components/CHART.md, docs/reference/components/README.md, projects/ui-lib-custom/src/lib/chart/chart-theme.service.spec.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Chart: Prompt 10 complete. Fully implemented, tested, documented, and demoed. Next: Backlog follow-ups / v2 features only.
+Verification:
+- Added new reference doc `docs/reference/components/CHART.md` covering overview, features, installation, usage, API tables, theming tokens, advanced usage, accessibility, and performance guidance.
+- Updated component index `docs/reference/components/README.md` with Chart section + quick reference row.
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+- Chart tests with coverage passed: `npx.cmd jest chart --coverage --runInBand --no-cache` (6/6 suites, 44/44 tests; `chart.component.ts` 97.89% statements, 90.62% branches, 100% functions, 97.87% lines).
+- Chart lint passed after strict typing fixes in `chart-theme.service.spec.ts`: `npx.cmd eslint projects/ui-lib-custom/src/lib/chart/`.
+- Entry-point test passed: `npx.cmd jest projects/ui-lib-custom/test/entry-points.spec.ts --runInBand --no-cache` (26/26).
+- Demo build passed: `npx.cmd ng build demo`.
+- Demo route probe passed: `curl -I http://localhost:4200/chart` returned HTTP 200.
+- Architecture checks verified:
+  - no cross-entry-point relative imports in chart source (`grep_search` for `from '../` returned none),
+  - primary `projects/ui-lib-custom/src/public-api.ts` does not re-export chart symbols,
+  - chart components use `ViewEncapsulation.None` + `ChangeDetectionStrategy.OnPush`,
+  - signal inputs/outputs only (no `@Input`/`@Output` decorators),
+  - no `enum` usage in chart source,
+  - chart CSS variables use `--uilib-chart-*` prefix consistently.
+Terminal notes:
+- Failed: initial QA lint command failed on `chart-theme.service.spec.ts` strict typing (`typedef`, `no-unsafe-member-access`); fixed in-session.
+- Worked: all verification commands executed from `bash.exe` using `npx.cmd` and `curl`.
+- Warning: `ng build demo` still reports pre-existing SCSS budget warnings for `button.scss` and `date-picker.scss`.
+Next step: Resume backlog batches (`knip` cleanup, constants extraction, overlay follow-ups) or chart v2 enhancements if prioritized.
+```
+
+```text
+Date: 2026-04-20
+Changed: docs/research/DATAVIEW_RESEARCH.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 1 complete. Research doc at `docs/research/DATAVIEW_RESEARCH.md`. Next: Prompt 2 (types, constants & template directives).
+Verification:
+- PrimeNG v19 DataView and paginator artifacts reviewed via `npm.cmd pack primeng@19 --silent` + extracted package inspection (`dataview.d.ts`, `dataview.interface.d.ts`, `primeng-dataview.mjs`, `paginator.d.ts`).
+- Documented API surface (inputs/defaults, outputs, template slots), paginator coupling, sorting behavior, layout switching, and loading/empty rendering in `docs/research/DATAVIEW_RESEARCH.md`.
+- Explicitly captured project divergences and value-add decisions (signal APIs, directive-based template slots, built-in pagination, external-only sort ownership, typed generic contexts).
+Terminal notes:
+- Failed: none in-session.
+- Worked: artifact inspection executed from `bash.exe` using `npm.cmd`, `tar`, `sed`, and `grep`.
+Next step: Prompt 2 - define `DataView` types/constants and implement template marker directives.
+```
+
+```text
+Date: 2026-04-20
+Changed: projects/ui-lib-custom/src/lib/data-view/data-view.types.ts, projects/ui-lib-custom/src/lib/data-view/data-view.constants.ts, projects/ui-lib-custom/src/lib/data-view/data-view.template-directives.ts, projects/ui-lib-custom/src/lib/data-view/index.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 2 complete. Types, constants, and 8 template directives defined. Next: Prompt 3 (component scaffold with core rendering & layout).
+Verification:
+- Added DataView type contracts with `as const` unions and event/template-context interfaces in `projects/ui-lib-custom/src/lib/data-view/data-view.types.ts`.
+- Added shared defaults/constants in `projects/ui-lib-custom/src/lib/data-view/data-view.constants.ts`.
+- Added 8 standalone template marker directives in `projects/ui-lib-custom/src/lib/data-view/data-view.template-directives.ts` following the AutoComplete projection pattern.
+- Added barrel exports in `projects/ui-lib-custom/src/lib/data-view/index.ts`.
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+Terminal notes:
+- Failed: none in-session.
+- Worked: file scaffolding and verification commands executed from `bash.exe` using `mkdir`, `npx.cmd`, and workspace tooling.
+Next step: Prompt 3 - scaffold `DataView` component with core rendering and layout switching.
+```
+
+```text
+Date: 2026-04-20
+Changed: projects/ui-lib-custom/src/lib/data-view/data-view.component.ts, projects/ui-lib-custom/src/lib/data-view/data-view.component.html, projects/ui-lib-custom/src/lib/data-view/data-view.component.scss, projects/ui-lib-custom/src/lib/data-view/index.ts, projects/ui-lib-custom/src/lib/data-view/data-view.types.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 3 complete. Core component with list/grid rendering, template projection, loading/empty states. Next: Prompt 4 (pagination & sorting).
+Verification:
+- Added standalone `DataViewComponent` scaffold in `projects/ui-lib-custom/src/lib/data-view/data-view.component.ts` with signal inputs/model, content template queries, computed rendering state, host class bindings, and `trackItem` tracking fallback logic.
+- Added template shell in `projects/ui-lib-custom/src/lib/data-view/data-view.component.html` with header/footer slots, loading and empty states, and list/grid item rendering via `@for` + `ngTemplateOutlet`.
+- Added Prompt 5 placeholder stylesheet in `projects/ui-lib-custom/src/lib/data-view/data-view.component.scss`.
+- Updated barrel exports in `projects/ui-lib-custom/src/lib/data-view/index.ts` to include `DataViewComponent`.
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+Terminal notes:
+- Failed: none in-session.
+- Worked: implementation and verification commands executed from `bash.exe` using `npx.cmd` and workspace editing tools.
+Next step: Prompt 4 - add built-in pagination and external sort signal wiring.
+```
+
+```text
+Date: 2026-04-20
+Changed: projects/ui-lib-custom/src/lib/data-view/data-view.component.ts, projects/ui-lib-custom/src/lib/data-view/data-view.component.html, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 4 complete. Built-in pagination (client-side + server-side) and sorting wiring. Next: Prompt 5 (styling) and Prompt 6 (tests) can run in parallel.
+Verification:
+- Extended `DataViewComponent` with pagination inputs (`paginator`, `rows`, `first`, `totalRecords`, `rowsPerPageOptions`, `paginatorPosition`, page report options), sorting inputs (`sortField`, `sortOrder`), outputs (`pageChange`, `sortChange`), and paginator side template slots.
+- Added pagination computed signals and behavior: effective total/rows, page count/current page, first/last state, page-report placeholder replacement, client-side slicing vs server-side passthrough, and first-index clamping when data/page bounds change.
+- Added inline pagination UI to `data-view.component.html` with top/bottom/both placement, ARIA-labeled first/prev/page/next/last controls, ellipsis gaps, rows-per-page selector, page report text, and left/right paginator template slots.
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+Terminal notes:
+- Failed: none in-session.
+- Worked: implementation and verification commands executed from `bash.exe` using `npx.cmd` and workspace editing tools.
+Next step: Prompt 5 styling and Prompt 6 tests can proceed in parallel.
+```
+
+```text
+Date: 2026-04-20
+Changed: projects/ui-lib-custom/src/lib/data-view/data-view.component.scss, projects/ui-lib-custom/src/lib/data-view/data-view.component.html, projects/ui-lib-custom/src/lib/design-tokens.ts, docs/reference/systems/CSS_VARIABLES.md, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 5 complete. Full SCSS styling with CSS variable tokens, variant overrides, and pagination UI styles. Next: Prompt 6 (tests) if not already running in parallel.
+Verification:
+- Implemented full DataView SCSS in `projects/ui-lib-custom/src/lib/data-view/data-view.component.scss` covering header/footer, list/grid rendering, loading/empty states, paginator controls, responsive size variants (`sm`/`md`/`lg`), and Material/Bootstrap/Minimal variant overrides.
+- Added paginator page-group class usage in `projects/ui-lib-custom/src/lib/data-view/data-view.component.html` to align template structure with styling hooks.
+- Registered DataView token definitions in `projects/ui-lib-custom/src/lib/design-tokens.ts` (`DataViewTokens`, `DATAVIEW_TOKENS`, `DataViewTokenKey`).
+- Added `## DataView` CSS variable reference section to `docs/reference/systems/CSS_VARIABLES.md`.
+- Library build passed: `npx.cmd ng build ui-lib-custom`.
+Terminal notes:
+- Failed: none in-session.
+- Worked: implementation and verification commands executed from `bash.exe` using `npx.cmd` and workspace editing tools.
+Next step: Prompt 6 - add unit tests for rendering, pagination behavior, and template-slot coverage.
+```
+
+```text
+Date: 2026-04-21
+Changed: projects/ui-lib-custom/src/lib/data-view/data-view.component.spec.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 6 complete. Component tests passing with >90% coverage. Next: Prompt 7 (secondary entry point) if not already done.
+Verification:
+- Refactored `DataView` host test setup to signal-backed bindings with `ChangeDetectionStrategy.OnPush` and `provideZonelessChangeDetection()` for reliable zoneless input updates.
+- Expanded/verified coverage across rendering, template projection, layout switching, client/server pagination, sorting, edge cases (including `null`/`undefined` value handling), and accessibility assertions.
+- Jest command passed: `npx.cmd jest data-view --coverage --runInBand --no-cache`.
+- Coverage (`projects/ui-lib-custom/src/lib/data-view/data-view.component.ts`): 95.06% statements, 80% branches, 100% functions, 94.93% lines.
+Terminal notes:
+- Failed: none in-session.
+- Worked: verification command executed from `bash.exe` using `npx.cmd`.
+Next step: Prompt 7 - wire/verify the `ui-lib-custom/data-view` secondary entry point if still pending.
 ```
 

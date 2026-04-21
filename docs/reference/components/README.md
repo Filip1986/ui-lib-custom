@@ -270,6 +270,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### DataView
+**Files:**
+- [DATAVIEW.md](DATAVIEW.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/data-view)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/data-view/)
+
+---
+
 ### Chart
 **Files:**
 - [CHART.md](CHART.md) - API reference and usage guide
@@ -375,6 +387,7 @@ Each component should have two documentation files:
 | InputGroup | Grouped control/addon layout wrapper pair | - | - | Inherits projected control sizes | ✅ Complete |
 | InputMask | Structured masked input for fixed-format values | - | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | InputNumber | Locale-aware numeric input with formatting, spin controls, and forms support | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+| DataView | Template-driven list/grid rendering with built-in paginator and external sort hooks | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | Chart | Typed Chart.js wrappers with generic + convenience components and theme token bridge | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | SpeedDial | Floating action menu with linear and radial layouts | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | SplitButton | Combined primary action button with attached command menu | 3 | 8 | 3 (`sm`/`md`/`lg`) | ✅ Complete |

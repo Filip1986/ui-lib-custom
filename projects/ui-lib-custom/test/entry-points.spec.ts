@@ -7,6 +7,7 @@ import type * as UiLibCheckbox from 'ui-lib-custom/checkbox';
 import type * as UiLibChart from 'ui-lib-custom/chart';
 import type * as UiLibColorPicker from 'ui-lib-custom/color-picker';
 import type * as UiLibCore from 'ui-lib-custom/core';
+import type * as UiLibDataView from 'ui-lib-custom/data-view';
 import type * as UiLibDatePicker from 'ui-lib-custom/date-picker';
 import type * as UiLibEditor from 'ui-lib-custom/editor';
 import type * as UiLibFloatLabel from 'ui-lib-custom/float-label';
@@ -71,6 +72,12 @@ describe('Secondary Entry Points', (): void => {
   it('should import from core', async (): Promise<void> => {
     const mod: typeof UiLibCore = await import('ui-lib-custom/core');
     expect(mod.ICON_SIZES).toBeDefined();
+  });
+
+  it('should import from data-view', async (): Promise<void> => {
+    const mod: typeof UiLibDataView = await import('ui-lib-custom/data-view');
+    expect(mod.DataViewComponent).toBeDefined();
+    expect(mod.DATA_VIEW_DEFAULT_ROWS_PER_PAGE).toBeDefined();
   });
 
   it('should import from date-picker', async (): Promise<void> => {

@@ -1,5 +1,459 @@
-<section class="data-view-demo" data-testid="data-view-demo">
-  <h1>DataView</h1>
-  <p>Coming soon.</p>
-</section>
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>DataView</h1>
+    <p class="doc-description">
+      DataView demos for list and grid rendering, client/server pagination, external sorting controls,
+      custom templates, loading/empty states, and theme-aware presentation.
+    </p>
+  </div>
+
+  <div class="examples">
+    <section id="basic-list" data-doc-anchor class="example-section">
+      <h3>1. Basic List</h3>
+      <app-code-preview [code]="snippet('basicList')">
+        <ui-lib-card>
+          <ui-lib-data-view [value]="shortProducts" [trackBy]="trackByProduct">
+            <ng-template uiDataViewListItem let-item>
+              <article class="demo-list-item">
+                <img class="demo-product-image" [src]="item.imageUrl" [alt]="item.name" loading="lazy" />
+                <div class="demo-list-content">
+                  <strong>{{ item.name }}</strong>
+                  <span>{{ item.category }} · SKU {{ item.sku }}</span>
+                  <p>{{ item.description }}</p>
+                </div>
+                <div class="demo-list-meta">
+                  <span class="price">{{ formatPrice(item.price) }}</span>
+                  <span [class]="inventoryClass(item.inventoryStatus)">{{ inventoryLabel(item.inventoryStatus) }}</span>
+                </div>
+              </article>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="basic-grid" data-doc-anchor class="example-section">
+      <h3>2. Basic Grid</h3>
+      <app-code-preview [code]="snippet('basicGrid')">
+        <ui-lib-card>
+          <ui-lib-data-view [value]="shortProducts" layout="grid" [gridColumns]="4" [trackBy]="trackByProduct">
+            <ng-template uiDataViewGridItem let-item>
+              <article class="demo-grid-item">
+                <img class="demo-product-image" [src]="item.imageUrl" [alt]="item.name" loading="lazy" />
+                <strong>{{ item.name }}</strong>
+                <span>{{ formatPrice(item.price) }}</span>
+              </article>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="layout-switching" data-doc-anchor class="example-section">
+      <h3>3. Layout Switching</h3>
+      <app-code-preview [code]="snippet('layoutSwitching')">
+        <ui-lib-card>
+          <ui-lib-stack [gap]="3">
+            <ui-lib-inline [gap]="2" align="center">
+              <strong>Choose layout:</strong>
+              <ui-lib-select-button [options]="layoutOptions" [(value)]="switchableLayout" />
+            </ui-lib-inline>
+
+            <ui-lib-data-view [value]="shortProducts" [(layout)]="switchableLayout" [gridColumns]="3">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">
+                  <div class="demo-list-content">
+                    <strong>{{ item.name }}</strong>
+                    <span>{{ item.category }}</span>
+                  </div>
+                  <span class="price">{{ formatPrice(item.price) }}</span>
+                </article>
+              </ng-template>
+              <ng-template uiDataViewGridItem let-item>
+                <article class="demo-grid-item">
+                  <strong>{{ item.name }}</strong>
+                  <span>{{ item.category }}</span>
+                  <span class="price">{{ formatPrice(item.price) }}</span>
+                </article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-stack>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="pagination-client" data-doc-anchor class="example-section">
+      <h3>4. Pagination (Client-Side)</h3>
+      <app-code-preview [code]="snippet('paginationClient')">
+        <ui-lib-card>
+          <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5">
+            <ng-template uiDataViewListItem let-item>
+              <article class="demo-list-item demo-list-item--compact">
+                <strong>{{ item.name }}</strong>
+                <span>{{ formatPrice(item.price) }}</span>
+              </article>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="rows-per-page" data-doc-anchor class="example-section">
+      <h3>5. Rows Per Page</h3>
+      <app-code-preview [code]="snippet('rowsPerPage')">
+        <ui-lib-card>
+          <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25]">
+            <ng-template uiDataViewListItem let-item>
+              <article class="demo-list-item demo-list-item--compact">
+                <strong>{{ item.name }}</strong>
+                <span>{{ item.inventoryCount }} units</span>
+              </article>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="pagination-position" data-doc-anchor class="example-section">
+      <h3>6. Pagination Position</h3>
+      <app-code-preview [code]="snippet('paginationPosition')">
+        <ui-lib-grid minColumnWidth="320px" [spacing]="4">
+          <ui-lib-card>
+            <h4 class="mini-heading">Top</h4>
+            <ui-lib-data-view [value]="shortProducts" [paginator]="true" [rows]="4" paginatorPosition="top">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">Bottom</h4>
+            <ui-lib-data-view [value]="shortProducts" [paginator]="true" [rows]="4" paginatorPosition="bottom">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">Both</h4>
+            <ui-lib-data-view [value]="shortProducts" [paginator]="true" [rows]="4" paginatorPosition="both">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+        </ui-lib-grid>
+      </app-code-preview>
+    </section>
+
+    <section id="custom-page-report" data-doc-anchor class="example-section">
+      <h3>7. Custom Page Report</h3>
+      <app-code-preview [code]="snippet('customPageReport')">
+        <ui-lib-card>
+          <ui-lib-data-view
+            [value]="products"
+            [paginator]="true"
+            [rows]="5"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Page {currentPage} of {totalPages} · showing {first}-{last} from {totalRecords}"
+          >
+            <ng-template uiDataViewListItem let-item>
+              <article class="demo-list-item demo-list-item--compact">
+                <strong>{{ item.name }}</strong>
+                <span>{{ item.category }}</span>
+              </article>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="server-side-pagination" data-doc-anchor class="example-section">
+      <h3>8. Server-Side Pagination</h3>
+      <p class="helper-text">
+        This mock keeps <code>totalRecords</code> fixed and swaps in a sliced page on
+        <code>pageChange</code> to emulate backend-driven pagination.
+      </p>
+      <app-code-preview [code]="snippet('serverSidePagination')">
+        <ui-lib-card>
+          <ui-lib-data-view
+            [value]="serverProducts"
+            [loading]="serverLoading"
+            [paginator]="true"
+            [rows]="serverRows"
+            [first]="serverFirst"
+            [totalRecords]="serverTotalRecords"
+            [rowsPerPageOptions]="[5, 10, 25]"
+            (pageChange)="onServerPageChange($event)"
+          >
+            <ng-template uiDataViewListItem let-item>
+              <article class="demo-list-item">
+                <div class="demo-list-content">
+                  <strong>{{ item.name }}</strong>
+                  <span>{{ item.sku }}</span>
+                </div>
+                <span class="price">{{ formatPrice(item.price) }}</span>
+              </article>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="sorting" data-doc-anchor class="example-section">
+      <h3>9. Sorting (External Controls)</h3>
+      <app-code-preview [code]="snippet('sorting')">
+        <ui-lib-card>
+          <ui-lib-stack [gap]="3">
+            <ui-lib-inline [gap]="2" align="center">
+              <strong>Sort by:</strong>
+              <ui-lib-select-button [options]="sortFieldOptions" [(value)]="sortField" />
+              <ui-lib-select-button [options]="sortOrderOptions" [(value)]="sortOrder" />
+            </ui-lib-inline>
+
+            <ui-lib-data-view [value]="sortedProducts()" [paginator]="true" [rows]="6" [trackBy]="trackByProduct">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">
+                  <div class="demo-list-content">
+                    <strong>{{ item.name }}</strong>
+                    <span>Rating {{ item.rating.toFixed(1) }}</span>
+                  </div>
+                  <span class="price">{{ formatPrice(item.price) }}</span>
+                </article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-stack>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="custom-templates" data-doc-anchor class="example-section">
+      <h3>10. Custom Templates</h3>
+      <app-code-preview [code]="snippet('customTemplates')">
+        <ui-lib-card>
+          <ui-lib-data-view
+            [value]="customTemplateProducts"
+            [(layout)]="customTemplateLayout"
+            [paginator]="true"
+            [rows]="6"
+            [gridColumns]="3"
+          >
+            <ng-template uiDataViewHeader>
+              <ui-lib-inline [gap]="2" align="center" justify="space-between" class="template-header">
+                <div>
+                  <strong>Featured Catalog</strong>
+                  <p class="helper-text">Toggle layout from inside projected header content.</p>
+                </div>
+                <ui-lib-select-button [options]="layoutOptions" [(value)]="customTemplateLayout" />
+              </ui-lib-inline>
+            </ng-template>
+
+            <ng-template uiDataViewListItem let-item>
+              <article class="demo-list-item">
+                <img class="demo-product-image" [src]="item.imageUrl" [alt]="item.name" loading="lazy" />
+                <div class="demo-list-content">
+                  <strong>{{ item.name }}</strong>
+                  <span>{{ item.description }}</span>
+                </div>
+                <div class="demo-list-meta">
+                  <span class="price">{{ formatPrice(item.price) }}</span>
+                  <span [class]="inventoryClass(item.inventoryStatus)">{{ inventoryLabel(item.inventoryStatus) }}</span>
+                </div>
+              </article>
+            </ng-template>
+
+            <ng-template uiDataViewGridItem let-item>
+              <article class="demo-grid-item">
+                <img class="demo-product-image" [src]="item.imageUrl" [alt]="item.name" loading="lazy" />
+                <strong>{{ item.name }}</strong>
+                <span>{{ item.category }}</span>
+                <ui-lib-inline [gap]="1" align="center" justify="space-between">
+                  <span class="price">{{ formatPrice(item.price) }}</span>
+                  <span [class]="inventoryClass(item.inventoryStatus)">{{ inventoryLabel(item.inventoryStatus) }}</span>
+                </ui-lib-inline>
+              </article>
+            </ng-template>
+
+            <ng-template uiDataViewFooter>
+              <p class="helper-text">Showing {{ customTemplateProducts.length }} featured products.</p>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="empty-state" data-doc-anchor class="example-section">
+      <h3>11. Empty State</h3>
+      <app-code-preview [code]="snippet('emptyState')">
+        <ui-lib-grid minColumnWidth="340px" [spacing]="4">
+          <ui-lib-card>
+            <h4 class="mini-heading">Default Empty Message</h4>
+            <ui-lib-data-view [value]="[]" emptyMessage="No inventory records found." />
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">Custom Empty Template</h4>
+            <ui-lib-data-view [value]="[]">
+              <ng-template uiDataViewEmpty>
+                <div class="empty-template">
+                  <strong>No products available</strong>
+                  <p class="helper-text">Try broadening your filter criteria.</p>
+                </div>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+        </ui-lib-grid>
+      </app-code-preview>
+    </section>
+
+    <section id="loading-state" data-doc-anchor class="example-section">
+      <h3>12. Loading State</h3>
+      <app-code-preview [code]="snippet('loadingState')">
+        <ui-lib-grid minColumnWidth="340px" [spacing]="4">
+          <ui-lib-card>
+            <h4 class="mini-heading">Default Loading</h4>
+            <ui-lib-data-view [value]="shortProducts" [loading]="true" />
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">Custom Loading Template</h4>
+            <ui-lib-data-view [value]="shortProducts" [loading]="true">
+              <ng-template uiDataViewLoading>
+                <div class="loading-template">Syncing catalog from warehouse API...</div>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+        </ui-lib-grid>
+      </app-code-preview>
+    </section>
+
+    <section id="sizes" data-doc-anchor class="example-section">
+      <h3>13. Sizes</h3>
+      <app-code-preview [code]="snippet('sizes')">
+        <ui-lib-grid minColumnWidth="280px" [spacing]="4" class="size-grid">
+          <ui-lib-card>
+            <h4 class="mini-heading">Small</h4>
+            <ui-lib-data-view [value]="miniProducts" size="sm">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">Medium</h4>
+            <ui-lib-data-view [value]="miniProducts" size="md">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">Large</h4>
+            <ui-lib-data-view [value]="miniProducts" size="lg">
+              <ng-template uiDataViewListItem let-item>
+                <article class="demo-list-item demo-list-item--compact">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+        </ui-lib-grid>
+      </app-code-preview>
+    </section>
+
+    <section id="grid-columns" data-doc-anchor class="example-section">
+      <h3>14. Grid Column Count</h3>
+      <app-code-preview [code]="snippet('gridColumns')">
+        <ui-lib-grid minColumnWidth="340px" [spacing]="4">
+          <ui-lib-card>
+            <h4 class="mini-heading">2 Columns</h4>
+            <ui-lib-data-view [value]="shortProducts" layout="grid" [gridColumns]="2" [paginator]="true" [rows]="4">
+              <ng-template uiDataViewGridItem let-item>
+                <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">3 Columns</h4>
+            <ui-lib-data-view [value]="shortProducts" layout="grid" [gridColumns]="3" [paginator]="true" [rows]="6">
+              <ng-template uiDataViewGridItem let-item>
+                <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card>
+            <h4 class="mini-heading">4 Columns</h4>
+            <ui-lib-data-view [value]="shortProducts" layout="grid" [gridColumns]="4" [paginator]="true" [rows]="8">
+              <ng-template uiDataViewGridItem let-item>
+                <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+        </ui-lib-grid>
+      </app-code-preview>
+    </section>
+
+    <section id="custom-paginator-slots" data-doc-anchor class="example-section">
+      <h3>15. Custom Paginator Slots</h3>
+      <app-code-preview [code]="snippet('customPaginatorSlots')">
+        <ui-lib-card>
+          <ui-lib-data-view [value]="products" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25]">
+            <ng-template uiDataViewPaginatorLeft>
+              <span class="helper-text">Catalog controls</span>
+            </ng-template>
+
+            <ng-template uiDataViewPaginatorRight>
+              <ui-lib-button color="secondary" size="sm">Export CSV</ui-lib-button>
+            </ng-template>
+
+            <ng-template uiDataViewListItem let-item>
+              <article class="demo-list-item demo-list-item--compact">
+                <strong>{{ item.name }}</strong>
+                <span>{{ item.sku }}</span>
+              </article>
+            </ng-template>
+          </ui-lib-data-view>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <section id="theme-integration" data-doc-anchor class="example-section">
+      <h3>16. Theme Integration</h3>
+      <app-code-preview [code]="snippet('themeIntegration')">
+        <ui-lib-grid minColumnWidth="320px" [spacing]="4" class="theme-grid">
+          <ui-lib-card class="theme-surface theme-surface--material">
+            <h4 class="mini-heading">Material Profile</h4>
+            <ui-lib-data-view [value]="miniProducts" layout="grid" [gridColumns]="2">
+              <ng-template uiDataViewGridItem let-item>
+                <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card class="theme-surface theme-surface--bootstrap">
+            <h4 class="mini-heading">Bootstrap Profile</h4>
+            <ui-lib-data-view [value]="miniProducts" layout="grid" [gridColumns]="2">
+              <ng-template uiDataViewGridItem let-item>
+                <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+
+          <ui-lib-card class="theme-surface theme-surface--minimal">
+            <h4 class="mini-heading">Minimal Profile</h4>
+            <ui-lib-data-view [value]="miniProducts" layout="grid" [gridColumns]="2">
+              <ng-template uiDataViewGridItem let-item>
+                <article class="demo-grid-item demo-grid-item--tight">{{ item.name }}</article>
+              </ng-template>
+            </ui-lib-data-view>
+          </ui-lib-card>
+        </ui-lib-grid>
+      </app-code-preview>
+    </section>
+  </div>
+</app-doc-page-layout>
 

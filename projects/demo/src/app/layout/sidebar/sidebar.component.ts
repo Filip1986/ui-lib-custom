@@ -97,7 +97,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/data-view',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'OrderList',

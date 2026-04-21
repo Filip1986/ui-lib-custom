@@ -1,0 +1,278 @@
+.ui-lib-data-view {
+  --uilib-data-view-border: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-data-view-border-radius: var(--uilib-border-radius, 6px);
+  --uilib-data-view-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-data-view-fg: var(--uilib-text-color, #1f2937);
+
+  --uilib-data-view-header-bg: var(--uilib-surface-color-alt, #f8f9fa);
+  --uilib-data-view-header-padding: 0.75rem 1rem;
+  --uilib-data-view-header-font-weight: 600;
+  --uilib-data-view-footer-bg: var(--uilib-surface-color-alt, #f8f9fa);
+  --uilib-data-view-footer-padding: 0.75rem 1rem;
+
+  --uilib-data-view-item-padding: 1rem;
+  --uilib-data-view-item-border: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-data-view-item-hover-bg: var(--uilib-hover-bg, rgba(0, 0, 0, 0.04));
+
+  --uilib-data-view-grid-columns: 3;
+  --uilib-data-view-grid-gap: 1rem;
+
+  --uilib-data-view-paginator-padding: 0.5rem 1rem;
+  --uilib-data-view-paginator-gap: 0.25rem;
+  --uilib-data-view-paginator-button-size: 2rem;
+  --uilib-data-view-paginator-active-bg: var(--uilib-primary-color, #3b82f6);
+  --uilib-data-view-paginator-active-fg: #ffffff;
+  --uilib-data-view-paginator-hover-bg: var(--uilib-hover-bg, rgba(0, 0, 0, 0.04));
+  --uilib-data-view-paginator-disabled-opacity: 0.5;
+  --uilib-data-view-paginator-border: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-data-view-paginator-button-radius: var(--uilib-border-radius, 6px);
+
+  --uilib-data-view-empty-padding: 2rem;
+  --uilib-data-view-empty-color: var(--uilib-text-color-secondary, #6b7280);
+  --uilib-data-view-loading-min-height: 200px;
+
+  --uilib-data-view-font-size: 1rem;
+
+  display: block;
+  border: var(--uilib-data-view-border);
+  border-radius: var(--uilib-data-view-border-radius);
+  background: var(--uilib-data-view-bg);
+  color: var(--uilib-data-view-fg);
+  font-size: var(--uilib-data-view-font-size);
+}
+
+.ui-lib-data-view__header {
+  padding: var(--uilib-data-view-header-padding);
+  background: var(--uilib-data-view-header-bg);
+  border-bottom: var(--uilib-data-view-item-border);
+  font-weight: var(--uilib-data-view-header-font-weight);
+}
+
+.ui-lib-data-view__footer {
+  padding: var(--uilib-data-view-footer-padding);
+  background: var(--uilib-data-view-footer-bg);
+  border-top: var(--uilib-data-view-item-border);
+}
+
+.ui-lib-data-view__content--list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-lib-data-view__content--list .ui-lib-data-view__item {
+  padding: var(--uilib-data-view-item-padding);
+  border-bottom: var(--uilib-data-view-item-border);
+}
+
+.ui-lib-data-view__content--list .ui-lib-data-view__item:last-child {
+  border-bottom: 0;
+}
+
+.ui-lib-data-view__content--grid {
+  display: grid;
+  grid-template-columns: repeat(var(--uilib-data-view-grid-columns, 3), 1fr);
+  gap: var(--uilib-data-view-grid-gap, 1rem);
+  padding: var(--uilib-data-view-item-padding);
+}
+
+.ui-lib-data-view__content--grid .ui-lib-data-view__item {
+  min-width: 0;
+  border: var(--uilib-data-view-item-border);
+  border-radius: var(--uilib-data-view-border-radius);
+  background: var(--uilib-data-view-bg);
+}
+
+.ui-lib-data-view__item {
+  transition: background-color var(--uilib-transition-fast, 150ms ease);
+}
+
+.ui-lib-data-view__item:hover {
+  background: var(--uilib-data-view-item-hover-bg);
+}
+
+.ui-lib-data-view__empty {
+  display: flex;
+  justify-content: center;
+}
+
+.ui-lib-data-view__empty-default {
+  padding: var(--uilib-data-view-empty-padding);
+  color: var(--uilib-data-view-empty-color);
+  text-align: center;
+}
+
+.ui-lib-data-view__loading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--uilib-data-view-loading-min-height);
+  padding: var(--uilib-data-view-item-padding);
+}
+
+.ui-lib-data-view__loading-default {
+  color: var(--uilib-data-view-empty-color);
+  animation: ui-lib-data-view-pulse 1.2s ease-in-out infinite;
+}
+
+.ui-lib-data-view__paginator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--uilib-data-view-paginator-gap);
+  padding: var(--uilib-data-view-paginator-padding);
+  border-top: var(--uilib-data-view-paginator-border);
+}
+
+.ui-lib-data-view__paginator-start,
+.ui-lib-data-view__paginator-main,
+.ui-lib-data-view__paginator-end,
+.ui-lib-data-view__paginator-pages {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-data-view-paginator-gap);
+}
+
+.ui-lib-data-view__paginator-main {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ui-lib-data-view__paginator-page,
+.ui-lib-data-view__paginator-button,
+.ui-lib-data-view__rows-select {
+  min-height: var(--uilib-data-view-paginator-button-size);
+  border: var(--uilib-data-view-item-border);
+  border-radius: var(--uilib-data-view-paginator-button-radius);
+  background: var(--uilib-data-view-bg);
+  color: inherit;
+  transition:
+    background-color var(--uilib-transition-fast, 150ms ease),
+    color var(--uilib-transition-fast, 150ms ease),
+    border-color var(--uilib-transition-fast, 150ms ease);
+}
+
+.ui-lib-data-view__paginator-page,
+.ui-lib-data-view__paginator-button {
+  min-width: var(--uilib-data-view-paginator-button-size);
+  padding: 0 0.625rem;
+  cursor: pointer;
+}
+
+.ui-lib-data-view__paginator-page:hover:not(:disabled),
+.ui-lib-data-view__paginator-button:hover:not(:disabled) {
+  background: var(--uilib-data-view-paginator-hover-bg);
+}
+
+.ui-lib-data-view__paginator-page[aria-current='page'] {
+  background: var(--uilib-data-view-paginator-active-bg);
+  border-color: var(--uilib-data-view-paginator-active-bg);
+  color: var(--uilib-data-view-paginator-active-fg);
+}
+
+.ui-lib-data-view__paginator-page:disabled,
+.ui-lib-data-view__paginator-button:disabled,
+.ui-lib-data-view__rows-select:disabled {
+  opacity: var(--uilib-data-view-paginator-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.ui-lib-data-view__rows-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--uilib-data-view-paginator-gap);
+  color: var(--uilib-data-view-empty-color);
+}
+
+.ui-lib-data-view__rows-select {
+  padding: 0 0.5rem;
+  min-width: 4rem;
+}
+
+.ui-lib-data-view__page-report {
+  color: var(--uilib-data-view-empty-color);
+}
+
+.ui-lib-data-view__paginator-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--uilib-data-view-paginator-button-size);
+  color: var(--uilib-data-view-empty-color);
+}
+
+.ui-lib-data-view--sm {
+  --uilib-data-view-header-padding: 0.5rem 0.75rem;
+  --uilib-data-view-footer-padding: 0.5rem 0.75rem;
+  --uilib-data-view-item-padding: 0.625rem;
+  --uilib-data-view-paginator-padding: 0.375rem 0.75rem;
+  --uilib-data-view-paginator-button-size: 1.75rem;
+  --uilib-data-view-font-size: 0.875rem;
+}
+
+.ui-lib-data-view--md {
+  --uilib-data-view-header-padding: 0.75rem 1rem;
+  --uilib-data-view-footer-padding: 0.75rem 1rem;
+  --uilib-data-view-item-padding: 1rem;
+  --uilib-data-view-paginator-padding: 0.5rem 1rem;
+  --uilib-data-view-paginator-button-size: 2rem;
+  --uilib-data-view-font-size: 1rem;
+}
+
+.ui-lib-data-view--lg {
+  --uilib-data-view-header-padding: 1rem 1.25rem;
+  --uilib-data-view-footer-padding: 1rem 1.25rem;
+  --uilib-data-view-item-padding: 1.25rem;
+  --uilib-data-view-paginator-padding: 0.75rem 1.25rem;
+  --uilib-data-view-paginator-button-size: 2.25rem;
+  --uilib-data-view-font-size: 1.125rem;
+}
+
+.ui-lib-variant-material .ui-lib-data-view {
+  --uilib-data-view-border-radius: 12px;
+  --uilib-data-view-border: 1px solid
+    color-mix(in srgb, var(--uilib-border-color, #dee2e6) 70%, transparent);
+  box-shadow: var(--uilib-shadow-2, 0 2px 6px rgba(0, 0, 0, 0.08));
+}
+
+.ui-lib-variant-material .ui-lib-data-view .ui-lib-data-view__item:hover {
+  background: color-mix(in srgb, var(--uilib-data-view-item-hover-bg) 75%, transparent);
+}
+
+.ui-lib-variant-bootstrap .ui-lib-data-view {
+  --uilib-data-view-border-radius: 6px;
+  --uilib-data-view-border: 1px solid var(--uilib-border-color, #ced4da);
+  --uilib-data-view-paginator-button-radius: 4px;
+}
+
+.ui-lib-variant-bootstrap .ui-lib-data-view .ui-lib-data-view__paginator-page,
+.ui-lib-variant-bootstrap .ui-lib-data-view .ui-lib-data-view__paginator-button {
+  border-color: var(--uilib-border-color, #ced4da);
+}
+
+.ui-lib-variant-minimal .ui-lib-data-view {
+  --uilib-data-view-border: 0;
+  --uilib-data-view-header-bg: transparent;
+  --uilib-data-view-footer-bg: transparent;
+  --uilib-data-view-item-border: 1px solid
+    color-mix(in srgb, var(--uilib-border-color, #dee2e6) 55%, transparent);
+  --uilib-data-view-paginator-border: 1px solid
+    color-mix(in srgb, var(--uilib-border-color, #dee2e6) 55%, transparent);
+  box-shadow: none;
+}
+
+.ui-lib-variant-minimal .ui-lib-data-view .ui-lib-data-view__paginator-page,
+.ui-lib-variant-minimal .ui-lib-data-view .ui-lib-data-view__paginator-button {
+  border-color: transparent;
+  background: transparent;
+}
+
+@keyframes ui-lib-data-view-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}

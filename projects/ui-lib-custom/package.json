@@ -58,6 +58,10 @@
       "esm2022": "./esm2022/date-picker/index.mjs",
       "esm": "./esm2022/date-picker/index.mjs"
     },
+    "./data-view": {
+      "esm2022": "./esm2022/data-view/index.mjs",
+      "esm": "./esm2022/data-view/index.mjs"
+    },
     "./input-mask": {
       "esm2022": "./esm2022/input-mask/index.mjs",
       "esm": "./esm2022/input-mask/index.mjs"
@@ -98,6 +102,9 @@
       ],
       "date-picker": [
         "./date-picker/index.d.ts"
+      ],
+      "data-view": [
+        "./data-view/index.d.ts"
       ],
       "input-mask": [
         "./input-mask/index.d.ts"

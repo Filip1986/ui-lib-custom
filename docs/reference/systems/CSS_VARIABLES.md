@@ -319,6 +319,38 @@ This document lists the public CSS custom properties for each component. Default
 | `--uilib-datepicker-day-bg-selected-bootstrap` | `var(--uilib-color-primary-700, #0d6efd)` | Bootstrap selected-day background. |
 | `--uilib-datepicker-day-bg-selected-minimal` | `var(--uilib-color-help-600, #7e22ce)` | Minimal selected-day background. |
 
+## DataView
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--uilib-data-view-border` | `1px solid var(--uilib-border-color, #dee2e6)` | Outer container border. |
+| `--uilib-data-view-border-radius` | `var(--uilib-border-radius, 6px)` | Container border radius. |
+| `--uilib-data-view-bg` | `var(--uilib-surface-color, #ffffff)` | Container background. |
+| `--uilib-data-view-fg` | `var(--uilib-text-color, #1f2937)` | Base text color. |
+| `--uilib-data-view-header-bg` | `var(--uilib-surface-color-alt, #f8f9fa)` | Header background. |
+| `--uilib-data-view-header-padding` | `0.75rem 1rem` | Header padding. |
+| `--uilib-data-view-header-font-weight` | `600` | Header font weight. |
+| `--uilib-data-view-footer-bg` | `var(--uilib-surface-color-alt, #f8f9fa)` | Footer background. |
+| `--uilib-data-view-footer-padding` | `0.75rem 1rem` | Footer padding. |
+| `--uilib-data-view-item-padding` | `1rem` | Item spacing in list/grid content. |
+| `--uilib-data-view-item-border` | `1px solid var(--uilib-border-color, #dee2e6)` | Item separator/border style. |
+| `--uilib-data-view-item-hover-bg` | `var(--uilib-hover-bg, rgba(0, 0, 0, 0.04))` | Item hover background. |
+| `--uilib-data-view-grid-columns` | `3` | Grid layout column count. |
+| `--uilib-data-view-grid-gap` | `1rem` | Grid layout gap. |
+| `--uilib-data-view-paginator-padding` | `0.5rem 1rem` | Paginator container padding. |
+| `--uilib-data-view-paginator-gap` | `0.25rem` | Spacing between paginator controls. |
+| `--uilib-data-view-paginator-button-size` | `2rem` | Paginator control minimum size. |
+| `--uilib-data-view-paginator-active-bg` | `var(--uilib-primary-color, #3b82f6)` | Active page button background. |
+| `--uilib-data-view-paginator-active-fg` | `#ffffff` | Active page button foreground. |
+| `--uilib-data-view-paginator-hover-bg` | `var(--uilib-hover-bg, rgba(0, 0, 0, 0.04))` | Hover background for paginator controls. |
+| `--uilib-data-view-paginator-disabled-opacity` | `0.5` | Disabled paginator control opacity. |
+| `--uilib-data-view-paginator-border` | `1px solid var(--uilib-border-color, #dee2e6)` | Paginator top border. |
+| `--uilib-data-view-paginator-button-radius` | `var(--uilib-border-radius, 6px)` | Paginator control radius. |
+| `--uilib-data-view-empty-padding` | `2rem` | Empty-state content padding. |
+| `--uilib-data-view-empty-color` | `var(--uilib-text-color-secondary, #6b7280)` | Empty/report muted text color. |
+| `--uilib-data-view-loading-min-height` | `200px` | Loading block minimum height. |
+| `--uilib-data-view-font-size` | `1rem` | Base font size. |
+
 ## Editor
 
 | Variable | Default | Description |
