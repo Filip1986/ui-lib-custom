@@ -10,8 +10,18 @@ module.exports = {
     '^ui-lib-custom/(.*)$': '<rootDir>/projects/ui-lib-custom/src/lib/$1',
   },
   testEnvironment: 'jsdom',
-  modulePathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/projects/.*/dist/'],
-  watchPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/projects/.*/dist/'],
+  modulePathIgnorePatterns: [
+    '<rootDir>/dist/',
+    '<rootDir>/projects/.*/dist/',
+    '<rootDir>/tmp/',
+    '<rootDir>/.angular/',
+  ],
+  watchPathIgnorePatterns: [
+    '<rootDir>/dist/',
+    '<rootDir>/projects/.*/dist/',
+    '<rootDir>/tmp/',
+    '<rootDir>/.angular/',
+  ],
   transform: {
     '^.+\\.(ts|js|html)$': [
       'jest-preset-angular',

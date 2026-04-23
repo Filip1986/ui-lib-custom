@@ -5,6 +5,8 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { LoginFactoryComponent } from './login-factory.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+const GOOGLE_ICON_SVG: string = '<svg></svg>';
+const GITHUB_ICON_SVG: string = '<svg></svg>';
 const MICROSOFT_ICON_SVG: string = '<svg></svg>';
 
 describe('LoginFactoryComponent', (): void => {
@@ -16,7 +18,11 @@ describe('LoginFactoryComponent', (): void => {
       imports: [LoginFactoryComponent, ReactiveFormsModule],
       providers: [
         provideZonelessChangeDetection(),
-        provideIcons({ microsoft: MICROSOFT_ICON_SVG }),
+        provideIcons({
+          google: GOOGLE_ICON_SVG,
+          github: GITHUB_ICON_SVG,
+          microsoft: MICROSOFT_ICON_SVG,
+        }),
       ],
     }).compileComponents();
 

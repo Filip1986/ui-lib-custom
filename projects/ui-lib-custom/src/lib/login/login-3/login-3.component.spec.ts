@@ -4,6 +4,8 @@ import { provideIcons } from '@ng-icons/core';
 import { Login3Component } from './login-3.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+const GOOGLE_ICON_SVG: string = '<svg></svg>';
+const GITHUB_ICON_SVG: string = '<svg></svg>';
 const MICROSOFT_ICON_SVG: string = '<svg></svg>';
 
 describe('Login3Component', (): void => {
@@ -13,7 +15,13 @@ describe('Login3Component', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Login3Component, ReactiveFormsModule],
-      providers: [provideIcons({ microsoft: MICROSOFT_ICON_SVG })],
+      providers: [
+        provideIcons({
+          google: GOOGLE_ICON_SVG,
+          github: GITHUB_ICON_SVG,
+          microsoft: MICROSOFT_ICON_SVG,
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Login3Component);

@@ -1,7 +1,12 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideIcons } from '@ng-icons/core';
 import { Login2Component } from 'ui-lib-custom';
 import { ReactiveFormsModule } from '@angular/forms';
+
+const GITHUB_ICON_SVG: string = '<svg></svg>';
+const GOOGLE_ICON_SVG: string = '<svg></svg>';
+const MICROSOFT_ICON_SVG: string = '<svg></svg>';
 
 describe('Login2Component', (): void => {
   let component: Login2Component;
@@ -10,6 +15,13 @@ describe('Login2Component', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Login2Component, ReactiveFormsModule],
+      providers: [
+        provideIcons({
+          google: GOOGLE_ICON_SVG,
+          github: GITHUB_ICON_SVG,
+          microsoft: MICROSOFT_ICON_SVG,
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Login2Component);

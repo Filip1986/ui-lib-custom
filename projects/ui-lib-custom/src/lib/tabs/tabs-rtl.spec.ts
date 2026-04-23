@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
 
@@ -39,6 +40,7 @@ describe('Tabs RTL Support', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [RtlTabsHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RtlTabsHostComponent);
@@ -95,6 +97,7 @@ describe('Tabs RTL scroll icons', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [RtlScrollableTabsHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RtlScrollableTabsHostComponent);

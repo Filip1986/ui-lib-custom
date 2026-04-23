@@ -3,6 +3,7 @@ import type { DebugElement } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { Tabs } from './tabs';
 import { Tab } from './tab';
 import type { TabsVariant } from './tabs.types';
@@ -181,6 +182,7 @@ describe('Tabs', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsHostComponent);
@@ -227,6 +229,7 @@ describe('Tabs per-tab lazy', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsLazyHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsLazyHostComponent);
@@ -280,6 +283,7 @@ describe('Scrollable Tabs', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsScrollableHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsScrollableHostComponent);
@@ -402,6 +406,7 @@ describe('Tab Menu Mode', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsNavigationHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsNavigationHostComponent);
@@ -452,6 +457,7 @@ describe('Per-Panel Lazy', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsPerTabOverrideHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsPerTabOverrideHostComponent);
@@ -492,6 +498,7 @@ describe('Tabs interactions', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TabsInteractionHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsInteractionHostComponent);

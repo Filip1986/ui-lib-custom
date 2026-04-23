@@ -22,11 +22,14 @@ const config: Config = {
     '^@demo/pages/(.*)$': '<rootDir>/projects/demo/src/app/pages/$1',
   },
   modulePathIgnorePatterns: [
+    '<rootDir>/tmp/',
+    '<rootDir>/.angular/',
     '<rootDir>/projects/ui-lib-custom/package.json',
     '<rootDir>/projects/ui-lib-custom/tokens/package.json',
     '<rootDir>/projects/ui-lib-custom/tokens/dist/',
     '<rootDir>/dist/ui-lib-custom/package.json',
   ],
+  watchPathIgnorePatterns: ['<rootDir>/tmp/', '<rootDir>/.angular/'],
   collectCoverageFrom: [
     '<rootDir>/projects/ui-lib-custom/src/lib/**/*.ts',
     '!<rootDir>/projects/ui-lib-custom/src/lib/**/index.ts',
