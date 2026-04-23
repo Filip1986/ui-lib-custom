@@ -3,6 +3,150 @@
 This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT_CONTEXT.md`.
 Keep `AI_AGENT_CONTEXT.md` focused on active state and recent handoffs.
 
+```text
+Date: 2026-04-22 — OrderList Prompt 5
+State: Filter input, filterQuery signal, displayItems computed (filter-aware), matchesFilter(), resolveProperty(), onFilterInput(), isEmptyDueToFilter computed, emptyContext updated, template filter section added.
+Build: ng build ui-lib-custom passed.
+```
+
+```text
+Date: 2026-04-22 — OrderList Prompt 4
+State: Core selection (toggle + metaKeySelection + shift-range) + moveUp/moveDown/moveTop/moveBottom (immutable arrays) + full template wired.
+Build: ng build ui-lib-custom passed.
+```
+
+```text
+Date: 2026-04-22 — OrderList Prompt 4
+State: Core selection (toggle + metaKeySelection + shift-range) + moveUp/moveDown/moveTop/moveBottom (immutable arrays) + full template wired.
+Build: ng build ui-lib-custom passed.
+```## Prompt 8 — Styling
+
+**Context**
+Full visual implementation for all three variants, three sizes, control buttons, list items, filter input, drag states, selection highlight, and striped rows.
+
+**References — read these first, in order**
+1. `AI_AGENT_CONTEXT.md`
+2. `LIBRARY_CONVENTIONS.md` ("Design Tokens", CSS variable naming)
+3. `docs/architecture/CSS_VARIABLES_AUDIT.md`
+4. `projects/ui-lib-custom/src/lib/design-tokens.ts`
+5. `projects/ui-lib-custom/src/lib/select/select.scss` (listbox-style item highlighting)
+6. `projects/ui-lib-custom/src/lib/button/button.scss` (control button styling reference)
+7. `projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss` (list panel styling)
+
+**Task**
+
+1. CSS variable system — declare all `--uilib-order-list-*` tokens:
+   - Layout: `--uilib-order-list-gap`, `--uilib-order-list-min-height`, `--uilib-order-list-max-height`.
+   - Surface: `--uilib-order-list-bg`, `--uilib-order-list-border`, `--uilib-order-list-radius`.
+   - Item: `--uilib-order-list-item-padding`, `--uilib-order-list-item-bg`, `--uilib-order-list-item-bg-hover`, `--uilib-order-list-item-bg-selected`, `--uilib-order-list-item-color`, `--uilib-order-list-item-color-selected`, `--uilib-order-list-item-border-bottom`.
+   - Drag: `--uilib-order-list-item-drag-opacity`, `--uilib-order-list-drop-indicator-color`.
+   - Striped: `--uilib-order-list-item-bg-striped`.
+   - Filter: `--uilib-order-list-filter-padding`, `--uilib-order-list-filter-border`.
+   - Header: `--uilib-order-list-header-bg`, `--uilib-order-list-header-padding`, `--uilib-order-list-header-font-weight`.
+   - Controls: `--uilib-order-list-control-size`, `--uilib-order-list-control-bg`, `--uilib-order-list-control-color`, `--uilib-order-list-control-bg-hover`, `--uilib-order-list-control-radius`, `--uilib-order-list-control-gap`.
+   - Focus: `--uilib-order-list-focus-ring`.
+   - Disabled: `--uilib-order-list-disabled-opacity`.
+   - Transition: `--uilib-order-list-transition`.
+
+2. Layout:
+   - `:host` with `display: flex;` — controls area + list area side by side (when `controlsPosition = 'left'`).
+   - `--controls-top` modifier: `flex-direction: column;` — controls above list.
+   - Controls area: vertical button group with gap.
+   - List container: scrollable area with `overflow-y: auto; max-height: var(--uilib-order-list-max-height)`.
+
+3. Selection highlight:
+   - Selected items get a highlighted bg + contrasting text via `--selected` CSS vars.
+   - Focus-visible ring on the focused item.
+
+4. Drag states:
+   - `.ui-lib-order-list__item--dragging`: reduced opacity.
+   - `.ui-lib-order-list__item--drop-before::before` / `--drop-after::after`: colored horizontal line indicator (pseudo-element).
+
+5. Striped rows:
+   - When `--striped` host class is present, odd items get `--uilib-order-list-item-bg-striped`.
+
+6. Variant blocks:
+   - Material: elevated border, rounded corners, prominent selection highlight.
+   - Bootstrap: border-based, medium radius, Bootstrap-style selection colors.
+   - Minimal: flat, no shadow, subtle selection.
+
+7. Size blocks:
+   - `--sm` / `--md` / `--lg` set item padding, font size, control button size, header font size.
+
+8. Update CSS variables doc.
+
+9. Verify: `npx ng build ui-lib-custom`, `npx eslint projects/ui-lib-custom/src/lib/order-list/`.
+
+**Constraints**
+
+- No raw hex or px — everything through tokens or CSS var fallbacks.
+- All variant differences via CSS variables, not hard-coded per variant.
+
+**Deliverables**
+
+- Fully populated `order-list.component.scss`.
+- Token additions to `design-tokens.ts` if needed.
+- Handoff note.
+
+---
+
+```text
+Date: 2026-04-22
+Changed: projects/ui-lib-custom/src/lib/order-list/order-list.types.ts (created), order-list.constants.ts (created), index.ts (created)
+State: OrderList Prompt 2 complete. Type surface, constants, and barrel scaffold in place.
+Next step: Prompt 3 — scaffold component files.
+```
+
+```text
+Date: 2026-04-21
+Changed: docs/reference/components/DATAVIEW.md, docs/reference/components/README.md, projects/ui-lib-custom/src/lib/data-view/data-view.component.spec.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 9 complete. Fully implemented, tested, documented, and demoed.
+Verification: Library build, tests, lint, entry-point test, demo build all passed.
+Next step: Shift to queued backlog items.
+```
+
+```text
+Date: 2026-04-22
+Changed: ORDERLIST_RESEARCH.md (created), AI_AGENT_CONTEXT.md
+State: OrderList Prompt 1 complete. Research doc produced. No component code written yet.
+Terminal notes: npm pack primeng@19 in /tmp/orderlist-research via bash.exe.
+Next step: Prompt 2 — type surface and constants.
+```
+
+```text
+Date: 2026-04-21
+Changed: projects/demo/src/app/pages/data-view/data-view-demo.data.ts, projects/demo/src/app/pages/data-view/data-view-demo.component.ts, projects/demo/src/app/pages/data-view/data-view-demo.component.html, projects/demo/src/app/pages/data-view/data-view-demo.component.scss, projects/demo/src/app/layout/sidebar/sidebar.component.ts, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 8 complete. Demo page with 14-16 scenarios. Next: Prompt 9 (documentation & final QA).
+Verification:
+- Replaced placeholder DataView demo page with 16 sections covering list/grid rendering, layout switching, client and server pagination flows, external sorting controls, custom templates, empty/loading states, size variants, grid columns, paginator slots, and themed wrappers.
+- Added realistic fictional catalog dataset in `projects/demo/src/app/pages/data-view/data-view-demo.data.ts` (72 products) for meaningful pagination and server-side simulation.
+- Removed `badge: 'TODO'` for DataView in sidebar navigation (`projects/demo/src/app/layout/sidebar/sidebar.component.ts`).
+- Confirmed `data-view` lazy route already exists in `projects/demo/src/app/app.routes.ts`; no route-path changes were required.
+- Demo build passed: `npx.cmd ng build demo`.
+- Route probe passed: `curl -I http://localhost:4200/data-view` returned HTTP 200.
+Terminal notes:
+- Failed: none in-session.
+- Worked: verification commands executed from `bash.exe` using `npx.cmd` and `curl`.
+Next step: Prompt 9 - update DataView docs and run final QA verification sweep.
+```
+
+```text
+Date: 2026-04-21
+Changed: projects/ui-lib-custom/data-view/ng-package.json, projects/ui-lib-custom/data-view/package.json, projects/ui-lib-custom/data-view/public-api.ts, projects/ui-lib-custom/test/entry-points.spec.ts, projects/ui-lib-custom/package.json, projects/ui-lib-custom/src/lib/data-view/data-view.component.ts, projects/ui-lib-custom/src/lib/data-view/data-view.component.html, AI_AGENT_CONTEXT.md, docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView: Prompt 7 complete. Secondary entry point `ui-lib-custom/data-view` wired and building. Next: Prompt 8 (demo page).
+Verification:
+- Added secondary entry-point files under `projects/ui-lib-custom/data-view/` (`ng-package.json`, `package.json`, `public-api.ts`) using the established thin re-export pattern.
+- Updated `projects/ui-lib-custom/test/entry-points.spec.ts` to include `ui-lib-custom/data-view` import regression coverage.
+- Updated `projects/ui-lib-custom/package.json` export map + `typesVersions` with `./data-view` typing paths.
+- Verified `projects/ui-lib-custom/src/public-api.ts` does not re-export DataView symbols.
+- Build passed: `npx.cmd ng build ui-lib-custom`.
+- Entry-point regression test passed: `npx.cmd jest projects/ui-lib-custom/test/entry-points.spec.ts --runInBand --no-cache`.
+Terminal notes:
+- Failed: initial build attempt surfaced strict template type errors in `data-view.component.html` for union paginator page items after enabling the secondary entry point build.
+- Worked: added `pageNumber(...)` helper in `data-view.component.ts`, updated paginator template bindings, then reran build and entry-point tests successfully from `bash.exe` using `npx.cmd`.
+Next step: Prompt 8 - build the DataView demo page and route/sidebar integration.
+```
+
 Stable architecture/conventions/workflows are owned by `AGENTS.md`.
 
 ## Archive Index

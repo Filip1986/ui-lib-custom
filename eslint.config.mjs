@@ -21,6 +21,7 @@ export default [
       '**/test-results/**',
       '**/tmp/**',
       '**/node_modules/**',
+      '**/.angular/**',
     ],
   },
   // TypeScript + Angular rules for source files.

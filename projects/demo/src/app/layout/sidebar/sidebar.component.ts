@@ -103,7 +103,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/order-list',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'OrganizationChart',

@@ -8,6 +8,7 @@ import type * as UiLibChart from 'ui-lib-custom/chart';
 import type * as UiLibColorPicker from 'ui-lib-custom/color-picker';
 import type * as UiLibCore from 'ui-lib-custom/core';
 import type * as UiLibDataView from 'ui-lib-custom/data-view';
+import type * as UiLibOrderList from 'ui-lib-custom/order-list';
 import type * as UiLibDatePicker from 'ui-lib-custom/date-picker';
 import type * as UiLibEditor from 'ui-lib-custom/editor';
 import type * as UiLibFloatLabel from 'ui-lib-custom/float-label';
@@ -169,5 +170,15 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibInputMask = await import('ui-lib-custom/input-mask');
     expect(mod.InputMaskComponent).toBeDefined();
     expect(mod.MaskEngine).toBeDefined();
+  });
+
+  it('should import from order-list', async (): Promise<void> => {
+    const mod: typeof UiLibOrderList = await import('ui-lib-custom/order-list');
+    expect(mod.OrderListComponent).toBeDefined();
+    expect(mod.OrderListItemDirective).toBeDefined();
+    expect(mod.OrderListHeaderDirective).toBeDefined();
+    expect(mod.OrderListEmptyDirective).toBeDefined();
+    expect(mod.OrderListFilterDirective).toBeDefined();
+    expect(mod.ORDER_LIST_DEFAULTS).toBeDefined();
   });
 });

@@ -1,0 +1,400 @@
+// =============================================================================
+// OrderList — CSS variable tokens (defaults)
+// All raw values use CSS var fallbacks referencing the global uilib system tokens.
+// Override any token on the host element to customise the component.
+// =============================================================================
+
+.ui-lib-order-list {
+  // Layout
+  --uilib-order-list-gap: 0.5rem;
+  --uilib-order-list-min-height: 10rem;
+  --uilib-order-list-max-height: 24rem;
+
+  // Surface
+  --uilib-order-list-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-order-list-border: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-order-list-radius: var(--uilib-border-radius, 6px);
+
+  // Item
+  --uilib-order-list-item-padding: 0.625rem 0.875rem;
+  --uilib-order-list-item-bg: transparent;
+  --uilib-order-list-item-bg-hover: var(--uilib-hover-bg, rgba(0, 0, 0, 0.04));
+  --uilib-order-list-item-bg-selected: var(--uilib-primary-color, #3b82f6);
+  --uilib-order-list-item-color: var(--uilib-text-color, #1f2937);
+  --uilib-order-list-item-color-selected: #ffffff;
+  --uilib-order-list-item-border-bottom: 1px solid var(--uilib-border-color, #dee2e6);
+
+  // Drag & drop
+  --uilib-order-list-item-drag-opacity: 0.4;
+  --uilib-order-list-drop-indicator-color: var(--uilib-primary-color, #3b82f6);
+  --uilib-order-list-drop-indicator-height: 2px;
+
+  // Striped
+  --uilib-order-list-item-bg-striped: var(--uilib-surface-color-alt, #f8f9fa);
+
+  // Filter
+  --uilib-order-list-filter-padding: 0.5rem 0.75rem;
+  --uilib-order-list-filter-border: var(--uilib-order-list-border);
+  --uilib-order-list-filter-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-order-list-filter-radius: var(--uilib-border-radius, 6px);
+
+  // Header
+  --uilib-order-list-header-bg: var(--uilib-surface-color-alt, #f8f9fa);
+  --uilib-order-list-header-padding: 0.625rem 0.875rem;
+  --uilib-order-list-header-font-weight: 600;
+  --uilib-order-list-header-border: var(--uilib-order-list-border);
+
+  // Controls
+  --uilib-order-list-control-size: 2rem;
+  --uilib-order-list-control-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-order-list-control-color: var(--uilib-text-color, #1f2937);
+  --uilib-order-list-control-bg-hover: var(--uilib-hover-bg, rgba(0, 0, 0, 0.06));
+  --uilib-order-list-control-radius: var(--uilib-border-radius, 6px);
+  --uilib-order-list-control-gap: 0.25rem;
+  --uilib-order-list-control-border: var(--uilib-order-list-border);
+
+  // Focus
+  --uilib-order-list-focus-ring: 0 0 0 2px var(--uilib-primary-color, #3b82f6);
+
+  // Disabled
+  --uilib-order-list-disabled-opacity: 0.5;
+
+  // Transition
+  --uilib-order-list-transition: background-color 0.15s ease, color 0.15s ease;
+
+  // ==========================================================================
+  // Host layout
+  // ==========================================================================
+  display: flex;
+  flex-direction: row;
+  gap: var(--uilib-order-list-gap);
+  font-size: var(--uilib-order-list-font-size, 0.875rem);
+  color: var(--uilib-order-list-item-color);
+}
+
+// Controls-top modifier — restack to column
+.ui-lib-order-list--controls-top {
+  flex-direction: column;
+}
+
+// Disabled host
+.ui-lib-order-list--disabled {
+  opacity: var(--uilib-order-list-disabled-opacity);
+  pointer-events: none;
+  user-select: none;
+}
+
+// =============================================================================
+// Controls area
+// =============================================================================
+
+.ui-lib-order-list__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-order-list-control-gap);
+  flex-shrink: 0;
+
+  // When controls-top, lay buttons out horizontally
+  .ui-lib-order-list--controls-top & {
+    flex-direction: row;
+  }
+}
+
+.ui-lib-order-list__control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-order-list-control-size);
+  height: var(--uilib-order-list-control-size);
+  padding: 0;
+  background: var(--uilib-order-list-control-bg);
+  color: var(--uilib-order-list-control-color);
+  border: var(--uilib-order-list-control-border);
+  border-radius: var(--uilib-order-list-control-radius);
+  cursor: pointer;
+  transition: var(--uilib-order-list-transition);
+  line-height: 1;
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-order-list-control-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--uilib-order-list-focus-ring);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  ui-lib-icon {
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// List container
+// =============================================================================
+
+.ui-lib-order-list__list-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  border: var(--uilib-order-list-border);
+  border-radius: var(--uilib-order-list-radius);
+  background: var(--uilib-order-list-bg);
+  overflow: hidden;
+}
+
+// =============================================================================
+// Header
+// =============================================================================
+
+.ui-lib-order-list__header {
+  padding: var(--uilib-order-list-header-padding);
+  background: var(--uilib-order-list-header-bg);
+  font-weight: var(--uilib-order-list-header-font-weight);
+  border-bottom: var(--uilib-order-list-header-border);
+}
+
+// =============================================================================
+// Filter
+// =============================================================================
+
+.ui-lib-order-list__filter {
+  padding: var(--uilib-order-list-filter-padding);
+  border-bottom: var(--uilib-order-list-filter-border);
+}
+
+.ui-lib-order-list__filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.375rem 0.625rem;
+  background: var(--uilib-order-list-filter-bg);
+  border: var(--uilib-order-list-control-border);
+  border-radius: var(--uilib-order-list-filter-radius);
+  font-size: inherit;
+  color: var(--uilib-order-list-item-color);
+  transition: var(--uilib-order-list-transition);
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--uilib-order-list-focus-ring);
+  }
+
+  &::placeholder {
+    color: var(--uilib-text-color-secondary, #6b7280);
+  }
+}
+
+// =============================================================================
+// Listbox
+// =============================================================================
+
+.ui-lib-order-list__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  min-height: var(--uilib-order-list-min-height);
+  max-height: var(--uilib-order-list-max-height);
+  flex: 1 1 auto;
+
+  &:focus {
+    outline: none;
+  }
+
+  // Striped rows — applied when host has --striped modifier
+  .ui-lib-order-list--striped & .ui-lib-order-list__item:nth-child(odd) {
+    background: var(--uilib-order-list-item-bg-striped);
+  }
+}
+
+// =============================================================================
+// List item
+// =============================================================================
+
+.ui-lib-order-list__item {
+  padding: var(--uilib-order-list-item-padding);
+  background: var(--uilib-order-list-item-bg);
+  color: var(--uilib-order-list-item-color);
+  border-bottom: var(--uilib-order-list-item-border-bottom);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--uilib-order-list-transition);
+  position: relative; // Required for drop-indicator pseudo-elements
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover:not(.ui-lib-order-list__item--selected) {
+    background: var(--uilib-order-list-item-bg-hover);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: inset var(--uilib-order-list-focus-ring);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset var(--uilib-order-list-focus-ring);
+  }
+}
+
+// Selected state
+.ui-lib-order-list__item--selected {
+  background: var(--uilib-order-list-item-bg-selected);
+  color: var(--uilib-order-list-item-color-selected);
+}
+
+// =============================================================================
+// Drag & drop visual states
+// =============================================================================
+
+.ui-lib-order-list__item--dragging {
+  opacity: var(--uilib-order-list-item-drag-opacity);
+}
+
+// Drop-before indicator — thin line above the hovered item
+.ui-lib-order-list__item--drop-before::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: var(--uilib-order-list-drop-indicator-height);
+  background: var(--uilib-order-list-drop-indicator-color);
+  pointer-events: none;
+  z-index: 1;
+}
+
+// Drop-after indicator — thin line below the hovered item
+.ui-lib-order-list__item--drop-after::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--uilib-order-list-drop-indicator-height);
+  background: var(--uilib-order-list-drop-indicator-color);
+  pointer-events: none;
+  z-index: 1;
+}
+
+// =============================================================================
+// Empty state
+// =============================================================================
+
+.ui-lib-order-list__empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--uilib-text-color-secondary, #6b7280);
+  list-style: none;
+}
+
+// =============================================================================
+// Size modifiers
+// =============================================================================
+
+.ui-lib-order-list--sm {
+  --uilib-order-list-font-size: 0.8125rem;
+  --uilib-order-list-item-padding: 0.375rem 0.625rem;
+  --uilib-order-list-control-size: 1.625rem;
+  --uilib-order-list-header-padding: 0.375rem 0.625rem;
+}
+
+.ui-lib-order-list--md {
+  --uilib-order-list-font-size: 0.875rem;
+  --uilib-order-list-item-padding: 0.625rem 0.875rem;
+  --uilib-order-list-control-size: 2rem;
+  --uilib-order-list-header-padding: 0.625rem 0.875rem;
+}
+
+.ui-lib-order-list--lg {
+  --uilib-order-list-font-size: 1rem;
+  --uilib-order-list-item-padding: 0.875rem 1.125rem;
+  --uilib-order-list-control-size: 2.25rem;
+  --uilib-order-list-header-padding: 0.875rem 1.125rem;
+}
+
+// =============================================================================
+// Variant: Material
+// =============================================================================
+
+.ui-lib-order-list--material {
+  --uilib-order-list-border: none;
+  --uilib-order-list-radius: 4px;
+  --uilib-order-list-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-order-list-item-bg-selected: var(--uilib-primary-color, #1976d2);
+  --uilib-order-list-item-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-primary-color, #1976d2) 8%,
+    transparent
+  );
+  --uilib-order-list-control-bg: transparent;
+  --uilib-order-list-control-border: none;
+  --uilib-order-list-control-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-text-color, #1f2937) 8%,
+    transparent
+  );
+  --uilib-order-list-control-radius: 50%;
+  --uilib-order-list-drop-indicator-color: var(--uilib-primary-color, #1976d2);
+  --uilib-order-list-focus-ring: 0 0 0 2px var(--uilib-primary-color, #1976d2);
+  --uilib-order-list-header-bg: var(--uilib-surface-color-alt, #f5f5f5);
+  --uilib-order-list-header-border: 1px solid rgba(0, 0, 0, 0.12);
+  --uilib-order-list-item-border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  .ui-lib-order-list__list-container {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+  }
+}
+
+// =============================================================================
+// Variant: Bootstrap
+// =============================================================================
+
+.ui-lib-order-list--bootstrap {
+  --uilib-order-list-border: 1px solid #dee2e6;
+  --uilib-order-list-radius: 0.375rem;
+  --uilib-order-list-bg: #ffffff;
+  --uilib-order-list-item-bg-selected: #0d6efd;
+  --uilib-order-list-item-bg-hover: rgba(13, 110, 253, 0.1);
+  --uilib-order-list-control-bg: #ffffff;
+  --uilib-order-list-control-border: 1px solid #dee2e6;
+  --uilib-order-list-control-bg-hover: #e9ecef;
+  --uilib-order-list-control-radius: 0.25rem;
+  --uilib-order-list-drop-indicator-color: #0d6efd;
+  --uilib-order-list-focus-ring: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  --uilib-order-list-header-bg: #f8f9fa;
+  --uilib-order-list-header-border: 1px solid #dee2e6;
+  --uilib-order-list-item-border-bottom: 1px solid #dee2e6;
+}
+
+// =============================================================================
+// Variant: Minimal
+// =============================================================================
+
+.ui-lib-order-list--minimal {
+  --uilib-order-list-border: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-order-list-radius: 4px;
+  --uilib-order-list-bg: transparent;
+  --uilib-order-list-item-bg-selected: var(--uilib-primary-color, #3b82f6);
+  --uilib-order-list-item-bg-hover: rgba(0, 0, 0, 0.03);
+  --uilib-order-list-control-bg: transparent;
+  --uilib-order-list-control-border: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-order-list-control-bg-hover: rgba(0, 0, 0, 0.05);
+  --uilib-order-list-control-radius: 4px;
+  --uilib-order-list-header-bg: transparent;
+  --uilib-order-list-header-border: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-order-list-item-border-bottom: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-order-list-focus-ring: 0 0 0 2px var(--uilib-primary-color, #3b82f6);
+}

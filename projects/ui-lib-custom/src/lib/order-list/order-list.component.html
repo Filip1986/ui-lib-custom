@@ -1,0 +1,135 @@
+<!-- Controls column / row -->
+<div class="ui-lib-order-list__controls">
+  <button
+    type="button"
+    class="ui-lib-order-list__control-btn"
+    [disabled]="isMoveUpDisabled()"
+    [attr.aria-label]="moveTopAriaLabel()"
+    (click)="moveTop()"
+  >
+    <ui-lib-icon name="arrow-up" />
+  </button>
+  <button
+    type="button"
+    class="ui-lib-order-list__control-btn"
+    [disabled]="isMoveUpDisabled()"
+    [attr.aria-label]="moveUpAriaLabel()"
+    (click)="moveUp()"
+  >
+    <ui-lib-icon name="chevron-up" />
+  </button>
+  <button
+    type="button"
+    class="ui-lib-order-list__control-btn"
+    [disabled]="isMoveDownDisabled()"
+    [attr.aria-label]="moveDownAriaLabel()"
+    (click)="moveDown()"
+  >
+    <ui-lib-icon name="chevron-down" />
+  </button>
+  <button
+    type="button"
+    class="ui-lib-order-list__control-btn"
+    [disabled]="isMoveDownDisabled()"
+    [attr.aria-label]="moveBottomAriaLabel()"
+    (click)="moveBottom()"
+  >
+    <ui-lib-icon name="arrow-down" />
+  </button>
+</div>
+
+<!-- List container -->
+<div class="ui-lib-order-list__list-container">
+
+  <!-- Header -->
+  @if (headerTemplate()) {
+    <div class="ui-lib-order-list__header">
+      <ng-container [ngTemplateOutlet]="headerTemplate()!" />
+    </div>
+  } @else if (header()) {
+    <div class="ui-lib-order-list__header">{{ header() }}</div>
+  }
+
+  <!-- Filter input -->
+  @if (filterBy()) {
+    <div class="ui-lib-order-list__filter">
+      @if (filterTemplate()) {
+        <ng-container [ngTemplateOutlet]="filterTemplate()!" />
+      } @else {
+        <input
+          type="text"
+          class="ui-lib-order-list__filter-input"
+          [placeholder]="filterPlaceholder()"
+          [value]="filterQuery()"
+          (input)="onFilterInput($event)"
+          [attr.aria-label]="filterPlaceholder()"
+          [disabled]="disabled() || null"
+        />
+      }
+    </div>
+  }
+
+  <!-- List -->
+  <ul
+    #listboxEl
+    role="listbox"
+    class="ui-lib-order-list__list"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    aria-multiselectable="true"
+    [attr.id]="componentId + '-list'"
+    tabindex="0"
+    (keydown)="onListKeydown($event)"
+    (dragleave)="onDragLeave($event)"
+  >
+    @if (displayItems().length === 0) {
+      @if (emptyTemplate()) {
+        <li class="ui-lib-order-list__empty">
+          <ng-container
+            [ngTemplateOutlet]="emptyTemplate()!"
+            [ngTemplateOutletContext]="emptyContext()"
+          />
+        </li>
+      } @else {
+        <li class="ui-lib-order-list__empty" aria-live="polite">
+          @if (isEmptyDueToFilter()) {
+            No items match the filter
+          } @else {
+            No items
+          }
+        </li>
+      }
+    } @else {
+      @for (item of displayItems(); track trackByFn($index, item)) {
+        <li
+          role="option"
+          class="ui-lib-order-list__item"
+          [class.ui-lib-order-list__item--selected]="isSelected(item)"
+          [class.ui-lib-order-list__item--dragging]="draggedIndex() === getValueIndex($index)"
+          [class.ui-lib-order-list__item--drop-before]="dragOverIndex() === $index && dragPosition() === 'before'"
+          [class.ui-lib-order-list__item--drop-after]="dragOverIndex() === $index && dragPosition() === 'after'"
+          [attr.aria-selected]="isSelected(item)"
+          [attr.id]="itemId($index)"
+          [tabindex]="focusedIndex() === $index ? 0 : -1"
+          [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
+          (click)="onItemClick($event, item, $index)"
+          (focus)="onItemFocus($event, $index)"
+          (dragstart)="onDragStart($event, $index)"
+          (dragover)="onDragOver($event, $index)"
+          (drop)="onDrop($event, $index)"
+          (dragend)="onDragEnd($event)"
+        >
+          @if (itemTemplate()) {
+            <ng-container
+              [ngTemplateOutlet]="itemTemplate()!"
+              [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isSelected(item) }"
+            />
+          } @else {
+            {{ resolveItemLabel(item) }}
+          }
+        </li>
+      }
+    }
+  </ul>
+</div>
+

@@ -318,6 +318,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### OrderList
+**Files:**
+- [ORDERLIST.md](ORDERLIST.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/order-list)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/order-list/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -391,6 +403,7 @@ Each component should have two documentation files:
 | Chart | Typed Chart.js wrappers with generic + convenience components and theme token bridge | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | SpeedDial | Floating action menu with linear and radial layouts | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | SplitButton | Combined primary action button with attached command menu | 3 | 8 | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+| OrderList | Reorderable list with button controls, filter, DnD, and full keyboard accessibility | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 
 ---
 

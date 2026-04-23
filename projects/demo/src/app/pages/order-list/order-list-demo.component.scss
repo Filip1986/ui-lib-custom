@@ -1,0 +1,92 @@
+.demo-ol-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.demo-ol-name {
+  font-weight: 500;
+}
+
+.demo-ol-price {
+  font-size: 0.85rem;
+  color: var(--uilib-color-text-secondary, #666);
+}
+
+.demo-ol-category {
+  font-size: 0.8rem;
+  color: var(--uilib-color-text-secondary, #666);
+  margin-left: auto;
+}
+
+.demo-ol-card-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.demo-ol-category-badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  background: var(--uilib-color-primary, #6366f1);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.demo-ol-stars {
+  color: #f59e0b;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.demo-ol-drag-hint {
+  font-size: 1.1rem;
+  color: var(--uilib-color-text-secondary, #999);
+  margin-right: 0.25rem;
+  user-select: none;
+}
+
+.demo-event-log {
+  font-size: 0.875rem;
+  color: var(--uilib-color-text-secondary, #666);
+
+  code {
+    background: var(--uilib-surface-b, #f4f4f4);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--uilib-color-border, #e5e7eb);
+  }
+
+  th {
+    font-weight: 600;
+    background: var(--uilib-surface-b, #f9fafb);
+  }
+
+  kbd {
+    background: var(--uilib-surface-b, #f3f4f6);
+    border: 1px solid var(--uilib-color-border, #d1d5db);
+    border-radius: 4px;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.8em;
+    font-family: inherit;
+  }
+}
