@@ -512,6 +512,51 @@ describe('Tabs interactions', (): void => {
     return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('ui-lib-tab-panel'));
   }
 
+  type TabsPrivateApi = {
+    detectRtlScrollAxis(list: HTMLElement): 'default' | 'negative' | 'reverse';
+    getNormalizedScrollPosition(
+      list: HTMLElement,
+      isRtl: boolean,
+      rtlAxis: 'default' | 'negative' | 'reverse',
+      max: number
+    ): number;
+    setNormalizedScrollPosition(
+      list: HTMLElement,
+      axis: 'horizontal' | 'vertical',
+      position: number,
+      isRtl: boolean,
+      rtlAxis: 'default' | 'negative' | 'reverse'
+    ): void;
+  };
+
+  function tabsPrivateApi(): TabsPrivateApi {
+    const tabs: Tabs = fixture.debugElement.query(By.directive(Tabs)).componentInstance as Tabs;
+    return tabs as unknown as TabsPrivateApi;
+  }
+
+  function createRtlAxisProbe(mode: 'default' | 'negative' | 'reverse'): HTMLElement {
+    const element: HTMLElement = document.createElement('div');
+    let currentValue: number = 0;
+
+    Object.defineProperty(element, 'scrollLeft', {
+      configurable: true,
+      get: (): number => currentValue,
+      set: (value: number): void => {
+        if (mode === 'negative') {
+          currentValue = value;
+          return;
+        }
+        if (mode === 'reverse') {
+          currentValue = value <= 0 ? 1 : 0;
+          return;
+        }
+        currentValue = Math.max(0, value);
+      },
+    });
+
+    return element;
+  }
+
   it('selects the first tab by default', (): void => {
     const buttons: HTMLButtonElement[] = tabButtons();
     const first: HTMLButtonElement = getRequiredItem(buttons, 0, 'tab button');
@@ -540,6 +585,93 @@ describe('Tabs interactions', (): void => {
     fixture.detectChanges();
 
     expect(second.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('handles Home, End, and ArrowLeft keyboard branches', (): void => {
+    const buttons: HTMLButtonElement[] = tabButtons();
+    const first: HTMLButtonElement = getRequiredItem(buttons, 0, 'tab button');
+    const second: HTMLButtonElement = getRequiredItem(buttons, 1, 'tab button');
+
+    second.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+    fixture.detectChanges();
+    expect(first.getAttribute('aria-selected')).toBe('true');
+
+    first.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+    fixture.detectChanges();
+    expect(document.activeElement).toBe(second);
+
+    second.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+    fixture.detectChanges();
+    expect(document.activeElement).toBe(first);
+  });
+
+  it('handles Enter and Space activation branches from keyboard', (): void => {
+    const buttons: HTMLButtonElement[] = tabButtons();
+    const first: HTMLButtonElement = getRequiredItem(buttons, 0, 'tab button');
+    const second: HTMLButtonElement = getRequiredItem(buttons, 1, 'tab button');
+
+    second.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    fixture.detectChanges();
+    expect(second.getAttribute('aria-selected')).toBe('true');
+
+    first.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+    fixture.detectChanges();
+    expect(first.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('covers RTL axis detection helper branches', (): void => {
+    const privateApi: TabsPrivateApi = tabsPrivateApi();
+
+    const negativeProbe: HTMLElement = createRtlAxisProbe('negative');
+    expect(privateApi.detectRtlScrollAxis(negativeProbe)).toBe('negative');
+
+    const reverseProbe: HTMLElement = createRtlAxisProbe('reverse');
+    expect(privateApi.detectRtlScrollAxis(reverseProbe)).toBe('reverse');
+
+    const defaultProbe: HTMLElement = createRtlAxisProbe('default');
+    expect(privateApi.detectRtlScrollAxis(defaultProbe)).toBe('default');
+  });
+
+  it('covers normalized scroll position helper branches', (): void => {
+    const privateApi: TabsPrivateApi = tabsPrivateApi();
+    const list: HTMLElement = document.createElement('div');
+    Object.defineProperty(list, 'scrollLeft', {
+      value: 40,
+      configurable: true,
+      writable: true,
+    });
+
+    expect(privateApi.getNormalizedScrollPosition(list, false, 'default', 120)).toBe(40);
+
+    list.scrollLeft = -25;
+    expect(privateApi.getNormalizedScrollPosition(list, true, 'negative', 120)).toBe(25);
+
+    list.scrollLeft = 30;
+    expect(privateApi.getNormalizedScrollPosition(list, true, 'reverse', 120)).toBe(90);
+
+    list.scrollLeft = 18;
+    expect(privateApi.getNormalizedScrollPosition(list, true, 'default', 120)).toBe(18);
+  });
+
+  it('covers normalized scroll setter branches', (): void => {
+    const privateApi: TabsPrivateApi = tabsPrivateApi();
+    const list: HTMLElement = document.createElement('div');
+    const scrollToSpy: jest.Mock = jest.fn();
+    (list as HTMLElement & { scrollTo: jest.Mock }).scrollTo = scrollToSpy;
+    Object.defineProperty(list, 'scrollWidth', { value: 300, configurable: true });
+    Object.defineProperty(list, 'clientWidth', { value: 100, configurable: true });
+
+    privateApi.setNormalizedScrollPosition(list, 'vertical', 15, false, 'default');
+    privateApi.setNormalizedScrollPosition(list, 'horizontal', 20, false, 'default');
+    privateApi.setNormalizedScrollPosition(list, 'horizontal', 25, true, 'negative');
+    privateApi.setNormalizedScrollPosition(list, 'horizontal', 35, true, 'reverse');
+    privateApi.setNormalizedScrollPosition(list, 'horizontal', 45, true, 'default');
+
+    expect(scrollToSpy).toHaveBeenNthCalledWith(1, { top: 15, behavior: 'smooth' });
+    expect(scrollToSpy).toHaveBeenNthCalledWith(2, { left: 20, behavior: 'smooth' });
+    expect(scrollToSpy).toHaveBeenNthCalledWith(3, { left: -25, behavior: 'smooth' });
+    expect(scrollToSpy).toHaveBeenNthCalledWith(4, { left: 165, behavior: 'smooth' });
+    expect(scrollToSpy).toHaveBeenNthCalledWith(5, { left: 45, behavior: 'smooth' });
   });
 
   it('does not select disabled tab', (): void => {
