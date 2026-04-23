@@ -35,6 +35,35 @@ const FRUITS: Fruit[] = [
   { id: 5, name: 'Elderberry' },
 ];
 
+function getFruit(index: number): Fruit {
+  const fruit: Fruit | undefined = FRUITS[index];
+  if (fruit === undefined) {
+    throw new Error(`Expected FRUITS[${index}] to exist`);
+  }
+  return fruit;
+}
+
+function getOrderListItemElement(
+  fixture: ComponentFixture<OrderListHostComponent>,
+  index: number
+): HTMLElement {
+  const itemElement: HTMLElement | undefined = rootEl(fixture).querySelectorAll<HTMLElement>(
+    '.ui-lib-order-list__item'
+  )[index];
+  if (itemElement === undefined) {
+    throw new Error(`Expected order-list item element at index ${index}`);
+  }
+  return itemElement;
+}
+
+function getValueFruit(component: OrderListComponent, index: number): Fruit {
+  const valueItem: unknown = component.value()[index];
+  if (valueItem === undefined) {
+    throw new Error(`Expected value item at index ${index}`);
+  }
+  return valueItem as Fruit;
+}
+
 // ---------------------------------------------------------------------------
 // Host component
 // ---------------------------------------------------------------------------
@@ -286,18 +315,25 @@ describe('OrderListComponent', (): void => {
       expect(component.isEmptyDueToFilter()).toBe(true);
     });
 
-    it('should emit filtered event on filter input', (): void => {
-      const filteredSpy: jest.SpyInstance = jest.spyOn(component.filtered, 'emit');
-      const inputEl: HTMLInputElement = rootEl(fixture).querySelector(
-        '.ui-lib-order-list__filter-input'
-      ) as HTMLInputElement;
-      inputEl.value = 'app';
-      inputEl.dispatchEvent(new Event('input'));
+    it('emptyContext should expose filter=true when list is empty due to filter', (): void => {
+      component.filterQuery.set('zzz');
       fixture.detectChanges();
-      expect(filteredSpy).toHaveBeenCalled();
-      const firstCall: unknown[] | undefined = (filteredSpy.mock.calls as unknown[][])[0];
+      expect(component.emptyContext()).toEqual({ filter: true });
+    });
+
+    it('onFilterInput should set query and emit filtered payload', (): void => {
+      const emitSpy: jest.SpyInstance = jest.spyOn(component.filtered, 'emit');
+      const inputElement: HTMLInputElement = document.createElement('input');
+      inputElement.value = 'berry';
+
+      component.onFilterInput({ target: inputElement } as unknown as Event);
+
+      expect(component.filterQuery()).toBe('berry');
+      expect(emitSpy).toHaveBeenCalled();
+      const firstCall: unknown[] | undefined = (emitSpy.mock.calls as unknown[][])[0];
       const firstArg: Record<string, unknown> = (firstCall?.[0] ?? {}) as Record<string, unknown>;
-      expect(firstArg['query']).toBe('app');
+      expect(firstArg['query']).toBe('berry');
+      expect(Array.isArray(firstArg['filteredItems'])).toBe(true);
     });
   });
 
@@ -331,10 +367,8 @@ describe('OrderListComponent', (): void => {
     });
 
     it('should toggle item into selection on click (toggle mode)', (): void => {
-      const items: NodeListOf<HTMLElement> = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-order-list__item'
-      );
-      items[0].click();
+      const firstItem: HTMLElement = getOrderListItemElement(fixture, 0);
+      firstItem.click();
       fixture.detectChanges();
       expect(component.selection()).toContain(FRUITS[0]);
     });
@@ -342,10 +376,8 @@ describe('OrderListComponent', (): void => {
     it('should toggle item out of selection on second click (toggle mode)', (): void => {
       component.selection.set([FRUITS[0]]);
       fixture.detectChanges();
-      const items: NodeListOf<HTMLElement> = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-order-list__item'
-      );
-      items[0].click();
+      const firstItem: HTMLElement = getOrderListItemElement(fixture, 0);
+      firstItem.click();
       fixture.detectChanges();
       expect(component.selection()).not.toContain(FRUITS[0]);
     });
@@ -354,9 +386,7 @@ describe('OrderListComponent', (): void => {
       host.metaKeySelection.set(true);
       fixture.detectChanges();
       const mouseEvent: MouseEvent = new MouseEvent('click', { ctrlKey: true, bubbles: true });
-      const itemEl: HTMLElement = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-order-list__item'
-      )[0];
+      const itemEl: HTMLElement = getOrderListItemElement(fixture, 0);
       itemEl.dispatchEvent(mouseEvent);
       fixture.detectChanges();
       expect(component.selection()).toContain(FRUITS[0]);
@@ -366,9 +396,7 @@ describe('OrderListComponent', (): void => {
       host.metaKeySelection.set(true);
       component.selection.set([FRUITS[1]]);
       fixture.detectChanges();
-      const itemEl: HTMLElement = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-order-list__item'
-      )[0];
+      const itemEl: HTMLElement = getOrderListItemElement(fixture, 0);
       itemEl.click();
       fixture.detectChanges();
       expect(component.selection()).toEqual([FRUITS[0]]);
@@ -376,9 +404,7 @@ describe('OrderListComponent', (): void => {
 
     it('should emit selectionChanged output', (): void => {
       const spy: jest.SpyInstance = jest.spyOn(component.selectionChanged, 'emit');
-      const itemEl: HTMLElement = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-order-list__item'
-      )[0];
+      const itemEl: HTMLElement = getOrderListItemElement(fixture, 0);
       itemEl.click();
       fixture.detectChanges();
       expect(spy).toHaveBeenCalled();
@@ -390,9 +416,7 @@ describe('OrderListComponent', (): void => {
     it('should not update selection when disabled', (): void => {
       host.disabled.set(true);
       fixture.detectChanges();
-      const itemEl: HTMLElement = rootEl(fixture).querySelectorAll<HTMLElement>(
-        '.ui-lib-order-list__item'
-      )[0];
+      const itemEl: HTMLElement = getOrderListItemElement(fixture, 0);
       itemEl.click();
       fixture.detectChanges();
       expect(component.selection()).toEqual([]);
@@ -401,9 +425,40 @@ describe('OrderListComponent', (): void => {
     it('isSelected() with trackBy should match by key', (): void => {
       host.trackBy.set('id');
       fixture.detectChanges();
-      const copy: Fruit = { ...FRUITS[0] }; // Different reference, same id
+      const copy: Fruit = { ...getFruit(0) }; // Different reference, same id
       component.selection.set([FRUITS[0]]);
       expect(component.isSelected(copy)).toBe(true);
+    });
+
+    it('should support shift range selection in metaKeySelection mode', (): void => {
+      host.metaKeySelection.set(true);
+      fixture.detectChanges();
+
+      const firstItem: HTMLElement = getOrderListItemElement(fixture, 0);
+      const fourthItem: HTMLElement = getOrderListItemElement(fixture, 3);
+
+      firstItem.click();
+      fixture.detectChanges();
+
+      fourthItem.dispatchEvent(new MouseEvent('click', { shiftKey: true, bubbles: true }));
+      fixture.detectChanges();
+
+      expect(component.selection()).toEqual([getFruit(0), getFruit(1), getFruit(2), getFruit(3)]);
+    });
+
+    it('should toggle off an item by trackBy key when selection holds a different reference', (): void => {
+      host.trackBy.set('id');
+      fixture.detectChanges();
+
+      const copiedFruit: Fruit = { ...getFruit(0) };
+      component.selection.set([copiedFruit]);
+      fixture.detectChanges();
+
+      const firstItem: HTMLElement = getOrderListItemElement(fixture, 0);
+      firstItem.click();
+      fixture.detectChanges();
+
+      expect(component.selection()).toEqual([]);
     });
   });
 
@@ -458,7 +513,7 @@ describe('OrderListComponent', (): void => {
       fixture.detectChanges();
       component.moveUp();
       fixture.detectChanges();
-      expect((component.value()[0] as Fruit).id).toBe(FRUITS[1].id);
+      expect(getValueFruit(component, 0).id).toBe(getFruit(1).id);
     });
 
     it('should not move when first item is selected', (): void => {
@@ -484,11 +539,11 @@ describe('OrderListComponent', (): void => {
       fixture.detectChanges();
       component.moveDown();
       fixture.detectChanges();
-      expect((component.value()[1] as Fruit).id).toBe(FRUITS[0].id);
+      expect(getValueFruit(component, 1).id).toBe(getFruit(0).id);
     });
 
     it('should not move when last item is selected', (): void => {
-      const last: Fruit = FRUITS[FRUITS.length - 1];
+      const last: Fruit = getFruit(FRUITS.length - 1);
       component.selection.set([last]);
       fixture.detectChanges();
       const originalOrder: unknown[] = [...component.value()];
@@ -503,7 +558,7 @@ describe('OrderListComponent', (): void => {
       fixture.detectChanges();
       component.moveTop();
       fixture.detectChanges();
-      expect((component.value()[0] as Fruit).id).toBe(FRUITS[3].id);
+      expect(getValueFruit(component, 0).id).toBe(getFruit(3).id);
     });
 
     it('should preserve relative order of multiple selected items', (): void => {
@@ -511,8 +566,8 @@ describe('OrderListComponent', (): void => {
       fixture.detectChanges();
       component.moveTop();
       fixture.detectChanges();
-      expect((component.value()[0] as Fruit).id).toBe(FRUITS[2].id);
-      expect((component.value()[1] as Fruit).id).toBe(FRUITS[4].id);
+      expect(getValueFruit(component, 0).id).toBe(getFruit(2).id);
+      expect(getValueFruit(component, 1).id).toBe(getFruit(4).id);
     });
   });
 
@@ -522,7 +577,7 @@ describe('OrderListComponent', (): void => {
       fixture.detectChanges();
       component.moveBottom();
       fixture.detectChanges();
-      expect((component.value()[component.value().length - 1] as Fruit).id).toBe(FRUITS[0].id);
+      expect(getValueFruit(component, component.value().length - 1).id).toBe(getFruit(0).id);
     });
 
     it('should preserve relative order of multiple selected items', (): void => {
@@ -531,8 +586,8 @@ describe('OrderListComponent', (): void => {
       component.moveBottom();
       fixture.detectChanges();
       const last: number = component.value().length - 1;
-      expect((component.value()[last - 1] as Fruit).id).toBe(FRUITS[0].id);
-      expect((component.value()[last] as Fruit).id).toBe(FRUITS[2].id);
+      expect(getValueFruit(component, last - 1).id).toBe(getFruit(0).id);
+      expect(getValueFruit(component, last).id).toBe(getFruit(2).id);
     });
   });
 
@@ -559,7 +614,7 @@ describe('OrderListComponent', (): void => {
       ).querySelectorAll<HTMLButtonElement>('.ui-lib-order-list__control-btn');
       buttons[1]?.click();
       fixture.detectChanges();
-      expect((component.value()[1] as Fruit).id).toBe(FRUITS[2].id);
+      expect(getValueFruit(component, 1).id).toBe(getFruit(2).id);
     });
   });
 
@@ -644,7 +699,7 @@ describe('OrderListComponent', (): void => {
       component.focusedIndex.set(1);
       fixture.detectChanges();
       dispatchKey('ArrowUp', { altKey: true });
-      expect((component.value()[0] as Fruit).id).toBe(FRUITS[1].id);
+      expect(getValueFruit(component, 0).id).toBe(getFruit(1).id);
     });
 
     it('Alt+ArrowDown should move selected items down', (): void => {
@@ -652,7 +707,7 @@ describe('OrderListComponent', (): void => {
       component.focusedIndex.set(0);
       fixture.detectChanges();
       dispatchKey('ArrowDown', { altKey: true });
-      expect((component.value()[1] as Fruit).id).toBe(FRUITS[0].id);
+      expect(getValueFruit(component, 1).id).toBe(getFruit(0).id);
     });
 
     it('Alt+Home should move selected items to top', (): void => {
@@ -660,7 +715,7 @@ describe('OrderListComponent', (): void => {
       component.focusedIndex.set(3);
       fixture.detectChanges();
       dispatchKey('Home', { altKey: true });
-      expect((component.value()[0] as Fruit).id).toBe(FRUITS[3].id);
+      expect(getValueFruit(component, 0).id).toBe(getFruit(3).id);
     });
 
     it('Alt+End should move selected items to bottom', (): void => {
@@ -668,7 +723,7 @@ describe('OrderListComponent', (): void => {
       component.focusedIndex.set(0);
       fixture.detectChanges();
       dispatchKey('End', { altKey: true });
-      expect((component.value()[component.value().length - 1] as Fruit).id).toBe(FRUITS[0].id);
+      expect(getValueFruit(component, component.value().length - 1).id).toBe(getFruit(0).id);
     });
 
     it('should not process keyboard events when disabled', (): void => {
@@ -734,6 +789,90 @@ describe('OrderListComponent', (): void => {
       expect(component.dragOverIndex()).toBeNull();
     });
 
+    it('onDragOver should set drag position to before when pointer is in top half', (): void => {
+      const dropEffectStore: { value: string } = { value: '' };
+      const dragTarget: HTMLElement = document.createElement('div');
+      dragTarget.getBoundingClientRect = (): DOMRect => ({ top: 100, height: 40 }) as DOMRect;
+      const event: DragEvent = fakeDragEvent('dragover', {
+        dataTransfer: {
+          get dropEffect(): string {
+            return dropEffectStore.value;
+          },
+          set dropEffect(value: string) {
+            dropEffectStore.value = value;
+          },
+        } as unknown as DataTransfer,
+        clientY: 105,
+        currentTarget: dragTarget,
+      });
+
+      component.onDragOver(event, 2);
+
+      expect(dropEffectStore.value).toBe('move');
+      expect(component.dragOverIndex()).toBe(2);
+      expect(component.dragPosition()).toBe('before');
+    });
+
+    it('onDragOver should set drag position to after when pointer is in bottom half', (): void => {
+      const dropEffectStore: { value: string } = { value: '' };
+      const dragTarget: HTMLElement = document.createElement('div');
+      dragTarget.getBoundingClientRect = (): DOMRect => ({ top: 100, height: 40 }) as DOMRect;
+      const event: DragEvent = fakeDragEvent('dragover', {
+        dataTransfer: {
+          get dropEffect(): string {
+            return dropEffectStore.value;
+          },
+          set dropEffect(value: string) {
+            dropEffectStore.value = value;
+          },
+        } as unknown as DataTransfer,
+        clientY: 130,
+        currentTarget: dragTarget,
+      });
+
+      component.onDragOver(event, 1);
+
+      expect(component.dragOverIndex()).toBe(1);
+      expect(component.dragPosition()).toBe('after');
+    });
+
+    it('onDragLeave should keep drag state when moving within the list', (): void => {
+      component.dragOverIndex.set(2);
+      component.dragPosition.set('after');
+
+      const childNode: Node = document.createElement('span');
+      const container: HTMLElement = document.createElement('div');
+      container.appendChild(childNode);
+
+      component.onDragLeave(
+        fakeDragEvent('dragleave', {
+          currentTarget: container as EventTarget,
+          relatedTarget: childNode,
+        })
+      );
+
+      expect(component.dragOverIndex()).toBe(2);
+      expect(component.dragPosition()).toBe('after');
+    });
+
+    it('onDragLeave should clear drag state when leaving the list element', (): void => {
+      component.dragOverIndex.set(2);
+      component.dragPosition.set('after');
+
+      const container: HTMLElement = document.createElement('div');
+      const outsideNode: Node = document.createElement('span');
+
+      component.onDragLeave(
+        fakeDragEvent('dragleave', {
+          currentTarget: container as EventTarget,
+          relatedTarget: outsideNode,
+        })
+      );
+
+      expect(component.dragOverIndex()).toBeNull();
+      expect(component.dragPosition()).toBeNull();
+    });
+
     it('onDrop should reorder items and emit', (): void => {
       const reorderSpy: jest.SpyInstance = jest.spyOn(component.reordered, 'emit');
       const dragDropSpy: jest.SpyInstance = jest.spyOn(component.dragDropped, 'emit');
@@ -742,7 +881,7 @@ describe('OrderListComponent', (): void => {
       component.dragPosition.set('after');
       component.onDrop(fakeDragEvent('drop'), 1); // drop after Banana → Apple moves to index 1
 
-      expect((component.value()[1] as Fruit).id).toBe(FRUITS[0].id);
+      expect(getValueFruit(component, 1).id).toBe(getFruit(0).id);
       expect(reorderSpy).toHaveBeenCalled();
       expect(dragDropSpy).toHaveBeenCalled();
     });
@@ -753,6 +892,18 @@ describe('OrderListComponent', (): void => {
       component.dragPosition.set('before');
       component.onDrop(fakeDragEvent('drop'), 1);
       expect(reorderSpy).not.toHaveBeenCalled();
+    });
+
+    it('onDrop should clear drag state and no-op when there is no drag source', (): void => {
+      component.dragOverIndex.set(1);
+      component.dragPosition.set('after');
+      component.draggedIndex.set(null);
+
+      component.onDrop(fakeDragEvent('drop'), 1);
+
+      expect(component.draggedIndex()).toBeNull();
+      expect(component.dragOverIndex()).toBeNull();
+      expect(component.dragPosition()).toBeNull();
     });
 
     it('should not start drag when disabled', (): void => {
@@ -773,14 +924,21 @@ describe('OrderListComponent', (): void => {
 
   describe('trackByFn()', (): void => {
     it('should return item itself when trackBy is null', (): void => {
-      const item: Fruit = FRUITS[0];
+      const item: Fruit = getFruit(0);
       expect(component.trackByFn(0, item)).toBe(item);
     });
 
     it('should return key value when trackBy is set', (): void => {
       host.trackBy.set('id');
       fixture.detectChanges();
-      expect(component.trackByFn(0, FRUITS[0])).toBe(FRUITS[0].id);
+      const firstFruit: Fruit = getFruit(0);
+      expect(component.trackByFn(0, firstFruit)).toBe(firstFruit.id);
+    });
+
+    it('should return undefined when nested trackBy path is unresolvable', (): void => {
+      host.trackBy.set('id.value');
+      fixture.detectChanges();
+      expect(component.trackByFn(0, getFruit(0))).toBeUndefined();
     });
   });
 
