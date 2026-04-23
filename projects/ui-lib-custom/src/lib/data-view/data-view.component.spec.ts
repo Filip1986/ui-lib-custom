@@ -460,6 +460,18 @@ describe('DataViewComponent', (): void => {
       expect(hostElement(fixture).querySelector('nav[aria-label="Pagination"]')).toBeTruthy();
     });
 
+    it('returns page index 0 and no navigation items when there are no records', (): void => {
+      const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
+      fixture.componentInstance.paginator.set(true);
+      fixture.componentInstance.value.set([]);
+      fixture.componentInstance.rows.set(2);
+      refreshFixture(fixture);
+
+      const component: DataViewComponent<DataViewItem> = dataViewComponent(fixture);
+      expect(component.currentPage()).toBe(0);
+      expect(component.pageNavigationItems()).toEqual([]);
+    });
+
     it('displays correct number of items per page', (): void => {
       const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
       fixture.componentInstance.paginator.set(true);
@@ -599,42 +611,62 @@ describe('DataViewComponent', (): void => {
       expect(hostElement(fixture).querySelectorAll('.list-item-name').length).toBe(4);
     });
 
-    it('resets to page 0 when data length decreases below current offset', (): void => {
+    it('normalizes invalid rows values to 1 when rows-per-page changes', (): void => {
       const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
       fixture.componentInstance.paginator.set(true);
       fixture.componentInstance.rows.set(2);
-      fixture.componentInstance.first.set(4);
       refreshFixture(fixture);
 
-      fixture.componentInstance.value.set([
-        { id: 1, name: 'Item 1' },
-        { id: 2, name: 'Item 2' },
-      ]);
+      const component: DataViewComponent<DataViewItem> = dataViewComponent(fixture);
+      component.onRowsPerPageChange(Number.NaN);
       refreshFixture(fixture);
 
-      expect(fixture.componentInstance.first()).toBe(0);
+      const pageEvent: DataViewPageEvent | undefined = fixture.componentInstance
+        .pageChanges()
+        .at(-1);
+      expect(pageEvent?.rows).toBe(1);
     });
 
-    it('emits pageChange with expected payload', (): void => {
+    it('clamps requested page to 0 when page count is zero', (): void => {
       const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
       fixture.componentInstance.paginator.set(true);
-      fixture.componentInstance.rows.set(2);
+      fixture.componentInstance.value.set([]);
       refreshFixture(fixture);
 
-      requiredElement<HTMLButtonElement>(
-        hostElement(fixture),
-        'button[aria-label="Go to next page"]'
-      ).click();
+      const component: DataViewComponent<DataViewItem> = dataViewComponent(fixture);
+      component.onPageChange(5);
       refreshFixture(fixture);
 
-      const events: DataViewPageEvent[] = fixture.componentInstance.pageChanges();
-      expect(events.length).toBe(1);
-      expect(events[0]).toEqual({
-        first: 2,
-        rows: 2,
-        page: 1,
-        pageCount: 3,
-      });
+      const pageEvent: DataViewPageEvent | undefined = fixture.componentInstance
+        .pageChanges()
+        .at(-1);
+      expect(pageEvent?.page).toBe(0);
+      expect(pageEvent?.pageCount).toBe(0);
+    });
+
+    it('renders left ellipsis for middle pages in long pagination ranges', (): void => {
+      const fixture: ComponentFixture<DataViewHostComponent> = createHostFixture();
+      fixture.componentInstance.paginator.set(true);
+      fixture.componentInstance.rows.set(1);
+      fixture.componentInstance.value.set(
+        Array.from(
+          { length: 12 },
+          (_unused: unknown, index: number): DataViewItem => ({
+            id: index + 1,
+            name: `Item ${index + 1}`,
+          })
+        )
+      );
+      fixture.componentInstance.first.set(6);
+      refreshFixture(fixture);
+
+      const ellipsisItems: HTMLElement[] = Array.from(
+        hostElement(fixture).querySelectorAll('.ui-lib-data-view__paginator-ellipsis')
+      ) as HTMLElement[];
+      expect(ellipsisItems.length).toBe(2);
+      expect(
+        ellipsisItems.every((item: HTMLElement): boolean => item.textContent.includes('...'))
+      ).toBe(true);
     });
   });
 
@@ -767,6 +799,20 @@ describe('DataViewComponent', (): void => {
       );
       refreshFixture(fixture);
       expect(component.trackItem(2, item)).toBe('2-Tracked');
+    });
+
+    it('clamps out-of-range first input back to page start', (): void => {
+      const componentFixture: ComponentFixture<DataViewComponent<DataViewItem>> =
+        TestBed.createComponent(DataViewComponent<DataViewItem>);
+      componentFixture.componentRef.setInput('value', [
+        { id: 1, name: 'Item 1' },
+        { id: 2, name: 'Item 2' },
+      ]);
+      componentFixture.componentRef.setInput('rows', 2);
+      componentFixture.componentRef.setInput('first', 99);
+      componentFixture.detectChanges();
+
+      expect(componentFixture.componentInstance.first()).toBe(0);
     });
   });
 
