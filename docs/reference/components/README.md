@@ -429,16 +429,3 @@ Each component should have two documentation files:
 
 ---
 
-## ✍️ Adding New Components
-
-When documenting a new component:
-
-1. Create `COMPONENT_NAME.md` with API reference
-2. Create `COMPONENT_NAME_IMPLEMENTATION.md` with implementation details
-3. Update this README with component entry
-4. Update [../README.md](../README.md) with links
-5. Update [../../README.md](../../README.md) if needed
-
----
-
-**← Back to:** [Reference Index](../README.md) | [Main Documentation](../../README.md)

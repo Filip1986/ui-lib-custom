@@ -33,6 +33,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `DataView` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `OrderList` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
 - `OrganizationChart` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
+- `Paginator` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
 - Documentation gaps still tracked for: `Input`, `Select`, `Card`, `Layout`
 - Pending secondary entry points: `icon-button`, `alert`
 

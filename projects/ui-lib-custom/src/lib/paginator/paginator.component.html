@@ -1,0 +1,136 @@
+@if (shouldShow()) {
+  <div class="uilib-paginator-content" [class]="styleClass()">
+
+    <!-- Left slot for custom content -->
+    <ng-content select="[paginatorLeft]" />
+
+    <!-- Current page report -->
+    @if (showCurrentPageReport()) {
+      <span class="uilib-paginator-current" aria-live="polite" aria-atomic="true">
+        {{ currentPageReport() }}
+      </span>
+    }
+
+    <!-- First page button -->
+    @if (showFirstLastIcon()) {
+      <button
+        type="button"
+        class="uilib-paginator-button uilib-paginator-first"
+        [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
+        [disabled]="isFirstPage() || isEmpty()"
+        aria-label="First page"
+        [attr.aria-disabled]="isFirstPage() || isEmpty()"
+        (click)="changePageToFirst($event)"
+      >
+        <!-- Double chevron left -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <polyline points="11 17 6 12 11 7" />
+          <polyline points="18 17 13 12 18 7" />
+        </svg>
+      </button>
+    }
+
+    <!-- Previous page button -->
+    <button
+      type="button"
+      class="uilib-paginator-button uilib-paginator-prev"
+      [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
+      [disabled]="isFirstPage() || isEmpty()"
+      aria-label="Previous page"
+      [attr.aria-disabled]="isFirstPage() || isEmpty()"
+      (click)="changePageToPrev($event)"
+    >
+      <!-- Chevron left -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+
+    <!-- Windowed page-link buttons -->
+    @if (showPageLinks()) {
+      <span class="uilib-paginator-pages" role="list">
+        @for (pageLink of pageLinks(); track pageLink) {
+          <button
+            type="button"
+            role="listitem"
+            class="uilib-paginator-button uilib-paginator-page"
+            [class.uilib-paginator-page--selected]="pageLink - 1 === currentPage()"
+            [attr.aria-label]="'Page ' + pageLink"
+            [attr.aria-current]="pageLink - 1 === currentPage() ? 'page' : null"
+            (click)="onPageLinkClick($event, pageLink)"
+          >
+            {{ pageLink }}
+          </button>
+        }
+      </span>
+    }
+
+    <!-- Next page button -->
+    <button
+      type="button"
+      class="uilib-paginator-button uilib-paginator-next"
+      [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
+      [disabled]="isLastPage() || isEmpty()"
+      aria-label="Next page"
+      [attr.aria-disabled]="isLastPage() || isEmpty()"
+      (click)="changePageToNext($event)"
+    >
+      <!-- Chevron right -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+
+    <!-- Last page button -->
+    @if (showFirstLastIcon()) {
+      <button
+        type="button"
+        class="uilib-paginator-button uilib-paginator-last"
+        [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
+        [disabled]="isLastPage() || isEmpty()"
+        aria-label="Last page"
+        [attr.aria-disabled]="isLastPage() || isEmpty()"
+        (click)="changePageToLast($event)"
+      >
+        <!-- Double chevron right -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <polyline points="13 17 18 12 13 7" />
+          <polyline points="6 17 11 12 6 7" />
+        </svg>
+      </button>
+    }
+
+    <!-- Jump-to-page input -->
+    @if (showJumpToPageInput()) {
+      <input
+        type="number"
+        class="uilib-paginator-jtp-input"
+        [min]="1"
+        [max]="pageCount()"
+        [disabled]="isEmpty()"
+        aria-label="Jump to page, press Enter to navigate"
+        placeholder="Page"
+        (keydown)="onJumpToPageKeydown($event)"
+      />
+    }
+
+    <!-- Rows-per-page select -->
+    @if (rowsPerPageOptions()) {
+      <select
+        class="uilib-paginator-rpp-select"
+        [value]="rows()"
+        [disabled]="isEmpty()"
+        aria-label="Rows per page"
+        (change)="onRowsPerPageChange($event)"
+      >
+        @for (option of rowsPerPageOptions()!; track option) {
+          <option [value]="option">{{ option }}</option>
+        }
+      </select>
+    }
+
+    <!-- Right slot for custom content -->
+    <ng-content select="[paginatorRight]" />
+
+  </div>
+}

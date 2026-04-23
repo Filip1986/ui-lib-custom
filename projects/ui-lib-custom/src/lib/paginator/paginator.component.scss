@@ -1,0 +1,283 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Paginator component styles
+// Selector: ui-lib-paginator
+// Variants: material | bootstrap | minimal
+// Sizes: sm | md | lg
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── CSS custom properties (component tokens) ──────────────────────────────────
+.ui-lib-paginator {
+  // Layout
+  --uilib-paginator-gap: 0.25rem;
+  --uilib-paginator-padding: 0.5rem;
+
+  // Button dimensions
+  --uilib-paginator-button-size: 2.25rem;
+  --uilib-paginator-button-font-size: 0.875rem;
+  --uilib-paginator-button-radius: 50%;
+
+  // Button colours (defaults — overridden per variant)
+  --uilib-paginator-button-bg: transparent;
+  --uilib-paginator-button-color: var(--uilib-color-text-primary, #374151);
+  --uilib-paginator-button-border: 1px solid transparent;
+  --uilib-paginator-button-bg-hover: var(--uilib-color-surface-hover, #f3f4f6);
+  --uilib-paginator-button-color-hover: var(--uilib-color-text-primary, #374151);
+  --uilib-paginator-button-bg-selected: var(--uilib-color-primary, #6366f1);
+  --uilib-paginator-button-color-selected: #ffffff;
+  --uilib-paginator-button-bg-disabled: transparent;
+  --uilib-paginator-button-color-disabled: var(--uilib-color-text-muted, #9ca3af);
+
+  // Icon size inside buttons
+  --uilib-paginator-icon-size: 1rem;
+
+  // Report text
+  --uilib-paginator-current-color: var(--uilib-color-text-secondary, #6b7280);
+  --uilib-paginator-current-font-size: 0.875rem;
+
+  // Jump-to-page input
+  --uilib-paginator-jtp-width: 4rem;
+  --uilib-paginator-jtp-height: var(--uilib-paginator-button-size);
+  --uilib-paginator-jtp-border: 1px solid var(--uilib-color-border, #d1d5db);
+  --uilib-paginator-jtp-radius: 0.375rem;
+  --uilib-paginator-jtp-font-size: 0.875rem;
+  --uilib-paginator-jtp-bg: var(--uilib-color-surface, #ffffff);
+  --uilib-paginator-jtp-color: var(--uilib-color-text-primary, #374151);
+
+  // Rows-per-page select
+  --uilib-paginator-rpp-height: var(--uilib-paginator-button-size);
+  --uilib-paginator-rpp-border: 1px solid var(--uilib-color-border, #d1d5db);
+  --uilib-paginator-rpp-radius: 0.375rem;
+  --uilib-paginator-rpp-font-size: 0.875rem;
+  --uilib-paginator-rpp-bg: var(--uilib-color-surface, #ffffff);
+  --uilib-paginator-rpp-color: var(--uilib-color-text-primary, #374151);
+  --uilib-paginator-rpp-padding: 0 0.625rem;
+
+  // Transition
+  --uilib-paginator-transition:
+    background-color 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+// ── Size: sm ──────────────────────────────────────────────────────────────────
+.ui-lib-paginator--sm {
+  --uilib-paginator-button-size: 1.75rem;
+  --uilib-paginator-button-font-size: 0.75rem;
+  --uilib-paginator-icon-size: 0.75rem;
+  --uilib-paginator-gap: 0.125rem;
+  --uilib-paginator-current-font-size: 0.75rem;
+  --uilib-paginator-jtp-width: 3.25rem;
+  --uilib-paginator-jtp-font-size: 0.75rem;
+  --uilib-paginator-rpp-font-size: 0.75rem;
+}
+
+// ── Size: lg ──────────────────────────────────────────────────────────────────
+.ui-lib-paginator--lg {
+  --uilib-paginator-button-size: 2.75rem;
+  --uilib-paginator-button-font-size: 1rem;
+  --uilib-paginator-icon-size: 1.25rem;
+  --uilib-paginator-gap: 0.375rem;
+  --uilib-paginator-current-font-size: 1rem;
+  --uilib-paginator-jtp-width: 4.75rem;
+  --uilib-paginator-jtp-font-size: 1rem;
+  --uilib-paginator-rpp-font-size: 1rem;
+}
+
+// ── Variant: Material ─────────────────────────────────────────────────────────
+.ui-lib-paginator--material {
+  --uilib-paginator-button-radius: 50%;
+  --uilib-paginator-button-bg-hover: rgba(99, 102, 241, 0.08);
+  --uilib-paginator-button-bg-selected: var(--uilib-color-primary, #6366f1);
+  --uilib-paginator-button-color-selected: #ffffff;
+}
+
+// ── Variant: Bootstrap ────────────────────────────────────────────────────────
+.ui-lib-paginator--bootstrap {
+  --uilib-paginator-button-radius: 0.375rem;
+  --uilib-paginator-button-border: 1px solid var(--uilib-color-border, #dee2e6);
+  --uilib-paginator-button-bg: var(--uilib-color-surface, #ffffff);
+  --uilib-paginator-button-bg-hover: var(--uilib-color-surface-hover, #e9ecef);
+  --uilib-paginator-button-bg-selected: var(--uilib-color-primary, #0d6efd);
+  --uilib-paginator-button-color-selected: #ffffff;
+  --uilib-paginator-gap: 0;
+
+  // Bootstrap-style flat row (no gap, shared borders)
+  .uilib-paginator-content {
+    border: 1px solid var(--uilib-color-border, #dee2e6);
+    border-radius: 0.375rem;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .uilib-paginator-button {
+    border-radius: 0;
+    border: none;
+    border-right: 1px solid var(--uilib-color-border, #dee2e6);
+
+    &:last-of-type {
+      border-right: none;
+    }
+  }
+
+  .uilib-paginator-pages {
+    display: contents;
+  }
+}
+
+// ── Variant: Minimal ──────────────────────────────────────────────────────────
+.ui-lib-paginator--minimal {
+  --uilib-paginator-button-radius: 0.25rem;
+  --uilib-paginator-button-bg-hover: var(--uilib-color-surface-hover, #f3f4f6);
+  --uilib-paginator-button-bg-selected: transparent;
+  --uilib-paginator-button-color-selected: var(--uilib-color-primary, #6366f1);
+
+  .uilib-paginator-page--selected {
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+.ui-lib-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uilib-paginator-content {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-paginator-gap);
+  padding: var(--uilib-paginator-padding);
+  flex-wrap: wrap;
+}
+
+.uilib-paginator-pages {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-paginator-gap);
+}
+
+// ── Base button ───────────────────────────────────────────────────────────────
+.uilib-paginator-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-paginator-button-size);
+  height: var(--uilib-paginator-button-size);
+  min-width: var(--uilib-paginator-button-size);
+  padding: 0;
+  border: var(--uilib-paginator-button-border);
+  border-radius: var(--uilib-paginator-button-radius);
+  background: var(--uilib-paginator-button-bg);
+  color: var(--uilib-paginator-button-color);
+  font-size: var(--uilib-paginator-button-font-size);
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--uilib-paginator-transition);
+  outline: none;
+
+  svg {
+    width: var(--uilib-paginator-icon-size);
+    height: var(--uilib-paginator-icon-size);
+    flex-shrink: 0;
+  }
+
+  // Hover (not disabled, not selected)
+  &:not(:disabled):not(.uilib-paginator-page--selected):hover {
+    background: var(--uilib-paginator-button-bg-hover);
+    color: var(--uilib-paginator-button-color-hover);
+  }
+
+  // Focus ring
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary, #6366f1);
+    outline-offset: 2px;
+  }
+
+  // Disabled state
+  &:disabled,
+  &.uilib-paginator-button--disabled {
+    background: var(--uilib-paginator-button-bg-disabled);
+    color: var(--uilib-paginator-button-color-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ── Selected page button ──────────────────────────────────────────────────────
+.uilib-paginator-page--selected {
+  background: var(--uilib-paginator-button-bg-selected) !important;
+  color: var(--uilib-paginator-button-color-selected) !important;
+  cursor: default;
+}
+
+// ── Current page report ───────────────────────────────────────────────────────
+.uilib-paginator-current {
+  color: var(--uilib-paginator-current-color);
+  font-size: var(--uilib-paginator-current-font-size);
+  white-space: nowrap;
+  padding: 0 0.5rem;
+}
+
+// ── Jump-to-page input ────────────────────────────────────────────────────────
+.uilib-paginator-jtp-input {
+  width: var(--uilib-paginator-jtp-width);
+  height: var(--uilib-paginator-jtp-height);
+  border: var(--uilib-paginator-jtp-border);
+  border-radius: var(--uilib-paginator-jtp-radius);
+  background: var(--uilib-paginator-jtp-bg);
+  color: var(--uilib-paginator-jtp-color);
+  font-size: var(--uilib-paginator-jtp-font-size);
+  font-family: inherit;
+  text-align: center;
+  outline: none;
+  transition: var(--uilib-paginator-transition);
+
+  // Hide number input spinners
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    appearance: textfield;
+  }
+
+  &:focus {
+    border-color: var(--uilib-color-primary, #6366f1);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ── Rows-per-page select ──────────────────────────────────────────────────────
+.uilib-paginator-rpp-select {
+  height: var(--uilib-paginator-rpp-height);
+  padding: var(--uilib-paginator-rpp-padding);
+  border: var(--uilib-paginator-rpp-border);
+  border-radius: var(--uilib-paginator-rpp-radius);
+  background: var(--uilib-paginator-rpp-bg);
+  color: var(--uilib-paginator-rpp-color);
+  font-size: var(--uilib-paginator-rpp-font-size);
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: var(--uilib-paginator-transition);
+
+  &:focus {
+    border-color: var(--uilib-color-primary, #6366f1);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

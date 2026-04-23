@@ -27,6 +27,7 @@ import type * as UiLibTheme from 'ui-lib-custom/theme';
 import type * as UiLibTokens from 'ui-lib-custom/tokens';
 import type * as UiLibInputMask from 'ui-lib-custom/input-mask';
 import type * as UiLibOrganizationChart from 'ui-lib-custom/organization-chart';
+import type * as UiLibPaginator from 'ui-lib-custom/paginator';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -187,5 +188,11 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibOrganizationChart = await import('ui-lib-custom/organization-chart');
     expect(mod.OrganizationChart).toBeDefined();
     expect(mod.OrgChartNodeTemplateDirective).toBeDefined();
+  });
+
+  it('should import from paginator', async (): Promise<void> => {
+    const mod: typeof UiLibPaginator = await import('ui-lib-custom/paginator');
+    expect(mod.PaginatorComponent).toBeDefined();
+    expect(mod.PAGINATOR_DEFAULTS).toBeDefined();
   });
 });

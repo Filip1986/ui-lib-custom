@@ -1,5 +1,162 @@
-<section class="paginator-demo" data-testid="paginator-demo">
+<section class="paginator-demo">
   <h1>Paginator</h1>
-  <p>Coming soon.</p>
-</section>
+  <p class="paginator-demo__intro">
+    Paginator provides page-based navigation for any list or data set.
+    It supports three visual variants, three sizes, optional first/last buttons,
+    a rows-per-page dropdown, a jump-to-page input, and content projection slots.
+  </p>
 
+  <!-- ── Variants ──────────────────────────────────────────────────────────── -->
+  <section class="paginator-demo__section">
+    <h2>Variants</h2>
+    <p>Three visual styles: <code>material</code> (default), <code>bootstrap</code>, and <code>minimal</code>.</p>
+
+    <div class="paginator-demo__group">
+      <label class="paginator-demo__label">Material</label>
+      <ui-lib-paginator
+        [totalRecords]="totalRecords()"
+        [rows]="rows()"
+        [(first)]="first"
+        variant="material"
+        (pageChange)="onPageChange($event)"
+      />
+    </div>
+
+    <div class="paginator-demo__group">
+      <label class="paginator-demo__label">Bootstrap</label>
+      <ui-lib-paginator
+        [totalRecords]="totalRecords()"
+        [rows]="rows()"
+        [(first)]="first"
+        variant="bootstrap"
+        (pageChange)="onPageChange($event)"
+      />
+    </div>
+
+    <div class="paginator-demo__group">
+      <label class="paginator-demo__label">Minimal</label>
+      <ui-lib-paginator
+        [totalRecords]="totalRecords()"
+        [rows]="rows()"
+        [(first)]="first"
+        variant="minimal"
+        (pageChange)="onPageChange($event)"
+      />
+    </div>
+  </section>
+
+  <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
+  <section class="paginator-demo__section">
+    <h2>Sizes</h2>
+    <p>Control button dimensions with the <code>size</code> input: <code>sm</code>, <code>md</code> (default), <code>lg</code>.</p>
+
+    <div class="paginator-demo__group">
+      <label class="paginator-demo__label">Small (sm)</label>
+      <ui-lib-paginator [totalRecords]="60" [rows]="10" size="sm" variant="material" />
+    </div>
+
+    <div class="paginator-demo__group">
+      <label class="paginator-demo__label">Medium (md)</label>
+      <ui-lib-paginator [totalRecords]="60" [rows]="10" size="md" variant="material" />
+    </div>
+
+    <div class="paginator-demo__group">
+      <label class="paginator-demo__label">Large (lg)</label>
+      <ui-lib-paginator [totalRecords]="60" [rows]="10" size="lg" variant="material" />
+    </div>
+  </section>
+
+  <!-- ── Current page report ────────────────────────────────────────────────── -->
+  <section class="paginator-demo__section">
+    <h2>Current Page Report</h2>
+    <p>
+      Enable <code>showCurrentPageReport</code> to display a summary.
+      Placeholders: <code>&#123;currentPage&#125;</code>, <code>&#123;totalPages&#125;</code>,
+      <code>&#123;first&#125;</code>, <code>&#123;last&#125;</code>,
+      <code>&#123;rows&#125;</code>, <code>&#123;totalRecords&#125;</code>.
+    </p>
+
+    <div class="paginator-demo__group">
+      <ui-lib-paginator
+        [totalRecords]="totalRecords()"
+        [rows]="rows()"
+        [(first)]="first"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+        variant="material"
+        (pageChange)="onPageChange($event)"
+      />
+    </div>
+  </section>
+
+  <!-- ── Rows per page ──────────────────────────────────────────────────────── -->
+  <section class="paginator-demo__section">
+    <h2>Rows Per Page</h2>
+    <p>Pass an array of numbers to <code>rowsPerPageOptions</code> to show a dropdown.</p>
+
+    <div class="paginator-demo__group">
+      <ui-lib-paginator
+        [totalRecords]="largeFirst() + largeRows() <= 500 ? 500 : 500"
+        [(first)]="largeFirst"
+        [(rows)]="largeRows"
+        [rowsPerPageOptions]="[10, 25, 50, 100]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first}–{last} of {totalRecords}"
+        variant="material"
+        (pageChange)="onLargePageChange($event)"
+      />
+    </div>
+  </section>
+
+  <!-- ── Jump to page ───────────────────────────────────────────────────────── -->
+  <section class="paginator-demo__section">
+    <h2>Jump To Page</h2>
+    <p>Enable <code>showJumpToPageInput</code> to show a numeric input. Type a page number and press <kbd>Enter</kbd>.</p>
+
+    <div class="paginator-demo__group">
+      <ui-lib-paginator
+        [totalRecords]="200"
+        [rows]="10"
+        variant="material"
+        [showJumpToPageInput]="true"
+      />
+    </div>
+  </section>
+
+  <!-- ── No first/last icons ────────────────────────────────────────────────── -->
+  <section class="paginator-demo__section">
+    <h2>Without First / Last Icons</h2>
+
+    <div class="paginator-demo__group">
+      <ui-lib-paginator
+        [totalRecords]="50"
+        [rows]="10"
+        [showFirstLastIcon]="false"
+        variant="material"
+      />
+    </div>
+  </section>
+
+  <!-- ── Page links off ──────────────────────────────────────────────────────── -->
+  <section class="paginator-demo__section">
+    <h2>Page Links Off (arrows only)</h2>
+
+    <div class="paginator-demo__group">
+      <ui-lib-paginator
+        [totalRecords]="50"
+        [rows]="10"
+        [showPageLinks]="false"
+        [showCurrentPageReport]="true"
+        variant="material"
+      />
+    </div>
+  </section>
+
+  <!-- ── Event output ───────────────────────────────────────────────────────── -->
+  @if (lastEvent()) {
+    <section class="paginator-demo__section">
+      <h2>Last pageChange Event</h2>
+      <pre class="paginator-demo__event-output">{{ lastEvent() | json }}</pre>
+    </section>
+  }
+</section>
