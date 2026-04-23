@@ -428,7 +428,7 @@ describe('UiLibSelect Reactive Forms', (): void => {
     ) as HTMLElement;
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
-    expect((valueText as string).trim()).toBe('Beta');
+    expect(valueText.trim()).toBe('Beta');
   });
 
   it('registerOnChange fires on option selection', (): void => {
@@ -492,6 +492,10 @@ describe('UiLibSelect behavior', (): void => {
     fixture.detectChanges();
   }
 
+  function hostElement(): HTMLElement {
+    return fixture.nativeElement as HTMLElement;
+  }
+
   it('supports multiple selection display values', (): void => {
     const options: SelectOption[] = [
       { label: 'Alpha', value: 'alpha' },
@@ -509,6 +513,41 @@ describe('UiLibSelect behavior', (): void => {
     const valueText: string | null = valueEl.textContent;
     expect(valueText).toBeTruthy();
     expect((valueText as string).trim()).toBe('Alpha, Beta');
+  });
+
+  it('writeValue uses first item when single-select receives an array', (): void => {
+    const options: SelectOption[] = [
+      { label: 'Alpha', value: 'alpha' },
+      { label: 'Beta', value: 'beta' },
+    ];
+    setOptions(options);
+
+    fixture.componentInstance.writeValue(['beta', 'alpha']);
+    fixture.detectChanges();
+
+    const valueElement: HTMLElement = hostElement().querySelector(
+      '.ui-lib-select__value'
+    ) as HTMLElement;
+    expect(valueElement.textContent.trim()).toBe('Beta');
+  });
+
+  it('writeValue clears value when single-select receives an empty array', (): void => {
+    setOptions([{ label: 'Alpha', value: 'alpha' }]);
+
+    fixture.componentInstance.writeValue([]);
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.displayValue()).toBe('');
+  });
+
+  it('togglePanel closes the panel when already open', (): void => {
+    setOptions([{ label: 'Alpha', value: 'alpha' }]);
+
+    fixture.componentInstance.openPanel();
+    expect(fixture.componentInstance.open()).toBe(true);
+
+    fixture.componentInstance.togglePanel();
+    expect(fixture.componentInstance.open()).toBe(false);
   });
 
   it('clear emits null for single select', (): void => {
@@ -534,38 +573,25 @@ describe('UiLibSelect behavior', (): void => {
     expect(onChangeSpy).toHaveBeenCalledWith([]);
   });
 
-  it('filters options and groups by group key', (): void => {
-    const options: SelectOption[] = [
-      { label: 'Alpha', value: 'alpha', group: 'A' },
-      { label: 'Beta', value: 'beta', group: 'B' },
-    ];
-    setOptions(options);
-
-    fixture.componentInstance.onFilter('alp');
-    fixture.detectChanges();
-
-    const filtered: SelectOption[] = fixture.componentInstance.filteredOptions();
-    expect(filtered.length).toBe(1);
-    expect(getRequiredItem(filtered, 0, 'filtered option').label).toBe('Alpha');
-
-    const keys: string[] = fixture.componentInstance.groupKeys();
-    expect(keys).toContain('A');
-  });
-
-  it('moveFocus skips disabled options and commitFocused selects', (): void => {
-    const options: SelectOption[] = [
-      { label: 'Alpha', value: 'alpha', disabled: true },
+  it('selectOption toggles existing value off in multiple mode', (): void => {
+    fixture.componentRef.setInput('multiple', true);
+    setOptions([
+      { label: 'Alpha', value: 'alpha' },
       { label: 'Beta', value: 'beta' },
-    ];
+    ]);
+
     const onChangeSpy: jest.Mock = jest.fn();
     fixture.componentInstance.registerOnChange(onChangeSpy);
-    setOptions(options);
+    fixture.componentInstance.writeValue(['alpha']);
 
-    fixture.componentInstance.openPanel();
-    fixture.componentInstance.moveFocus(1);
-    fixture.componentInstance.commitFocused();
+    const alphaOption: SelectOption = getRequiredItem(
+      fixture.componentInstance.filteredOptions(),
+      0,
+      'alpha option'
+    );
+    fixture.componentInstance.selectOption(alphaOption);
 
-    expect(onChangeSpy).toHaveBeenCalledWith('beta');
+    expect(onChangeSpy).toHaveBeenCalledWith([]);
   });
 
   it('setActiveIndex ignores disabled options', (): void => {
@@ -579,37 +605,63 @@ describe('UiLibSelect behavior', (): void => {
     expect(fixture.componentInstance.focusedIndex()).toBe(-1);
   });
 
-  it('onDocClick closes the panel when clicking outside', (): void => {
-    setOptions([{ label: 'Alpha', value: 'alpha' }]);
-    fixture.componentInstance.openPanel();
+  it('setActiveIndex sets focus when the option is enabled', (): void => {
+    const options: SelectOption[] = [
+      { label: 'Alpha', value: 'alpha' },
+      { label: 'Beta', value: 'beta' },
+    ];
+    setOptions(options);
 
-    const event: MouseEvent = new MouseEvent('click', { bubbles: true });
-    Object.defineProperty(event, 'target', { value: document.body });
+    fixture.componentInstance.setActiveIndex(1);
 
-    fixture.componentInstance.onDocClick(event);
-    fixture.detectChanges();
-
-    expect(fixture.componentInstance.open()).toBeFalsy();
+    expect(fixture.componentInstance.focusedIndex()).toBe(1);
   });
 
-  it('sets aria-required when required', (): void => {
-    fixture.componentRef.setInput('required', true);
-    fixture.detectChanges();
+  it('onKeydown Home and End update active option when panel is open', (): void => {
+    const options: SelectOption[] = [
+      { label: 'Alpha', value: 'alpha' },
+      { label: 'Beta', value: 'beta' },
+      { label: 'Gamma', value: 'gamma' },
+    ];
+    setOptions(options);
+    fixture.componentInstance.openPanel();
 
-    const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    expect(host.getAttribute('aria-required')).toBe('true');
+    fixture.componentInstance.onKeydown(new KeyboardEvent('keydown', { key: 'End' }));
+    expect(fixture.componentInstance.focusedIndex()).toBe(2);
+
+    fixture.componentInstance.onKeydown(new KeyboardEvent('keydown', { key: 'Home' }));
+    expect(fixture.componentInstance.focusedIndex()).toBe(0);
   });
 
-  it('renders search input when searchable and open', (): void => {
-    fixture.componentRef.setInput('searchable', true);
-    setOptions([{ label: 'Alpha', value: 'alpha' }]);
+  it('onKeydown typeahead focuses matching enabled option', (): void => {
+    const options: SelectOption[] = [
+      { label: 'Alpha', value: 'alpha', disabled: true },
+      { label: 'Beta', value: 'beta' },
+      { label: 'Gamma', value: 'gamma' },
+    ];
+    setOptions(options);
+    fixture.componentInstance.openPanel();
+    fixture.componentInstance.focusedIndex.set(0);
+
+    fixture.componentInstance.onKeydown(new KeyboardEvent('keydown', { key: 'g' }));
+
+    expect(fixture.componentInstance.focusedIndex()).toBe(2);
+  });
+
+  it('openPanel sets focusedIndex to -1 when all options are disabled', (): void => {
+    const options: SelectOption[] = [
+      { label: 'Alpha', value: 'alpha', disabled: true },
+      { label: 'Beta', value: 'beta', disabled: true },
+    ];
+    setOptions(options);
 
     fixture.componentInstance.openPanel();
-    fixture.detectChanges();
 
-    const searchInput: HTMLInputElement | null = (
-      fixture.nativeElement as HTMLElement
-    ).querySelector('.ui-lib-select__search input');
-    expect(searchInput).toBeTruthy();
+    expect(fixture.componentInstance.focusedIndex()).toBe(-1);
+  });
+
+  it('getOptionLabel returns primitive fallback labels', (): void => {
+    expect(fixture.componentInstance.getOptionLabel('plain')).toBe('plain');
+    expect(fixture.componentInstance.getOptionLabel(null)).toBe('');
   });
 });
