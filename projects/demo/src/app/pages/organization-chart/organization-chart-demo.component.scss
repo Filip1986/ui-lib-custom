@@ -1,14 +1,62 @@
-.organization-chart-demo {
-  padding: 1.5rem;
+.demo-event-log {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--uilib-surface-raised, #f8f9fa);
+  border-radius: var(--uilib-radius-md, 6px);
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &__entry {
+    color: var(--uilib-color-text-secondary, #6c757d);
+
+    &:first-child {
+      color: var(--uilib-color-text-primary, #212529);
+      font-weight: 500;
+    }
+  }
 }
 
-.organization-chart-demo h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.5rem;
-  color: var(--uilib-page-fg);
+.demo-selection-status {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--uilib-color-text-secondary, #6c757d);
 }
 
-.organization-chart-demo p {
-  margin: 0;
-  color: var(--uilib-muted);
+// Custom person-node template
+.demo-person-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  min-width: 9rem;
+
+  &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--uilib-color-primary, #6366f1);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  &__name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--uilib-color-text-primary, #212529);
+    text-align: center;
+  }
+
+  &__role {
+    font-size: 0.75rem;
+    color: var(--uilib-color-text-secondary, #6c757d);
+    text-align: center;
+  }
 }

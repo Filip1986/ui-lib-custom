@@ -330,6 +330,18 @@ Individual component documentation with complete API references and implementati
 
 ---
 
+### OrganizationChart
+**Files:**
+- [ORGANIZATIONCHART.md](ORGANIZATIONCHART.md) - API reference and usage guide
+
+**Status:** ✅ Complete
+
+**Quick Links:**
+- [Live Demo](http://localhost:4200/organization-chart)
+- [Source Code](../../../projects/ui-lib-custom/src/lib/organization-chart/)
+
+---
+
 ### Dialog
 **Files:**
 - [DIALOG.md](DIALOG.md) - API reference and usage guide
@@ -404,6 +416,7 @@ Each component should have two documentation files:
 | SpeedDial | Floating action menu with linear and radial layouts | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | SplitButton | Combined primary action button with attached command menu | 3 | 8 | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 | OrderList | Reorderable list with button controls, filter, DnD, and full keyboard accessibility | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+| OrganizationChart | Hierarchical tree chart with collapsible subtrees, selection, and custom node templates | 3 | - | - | ✅ Complete |
 
 ---
 

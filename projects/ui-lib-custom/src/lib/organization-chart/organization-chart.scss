@@ -1,0 +1,268 @@
+// ─── CSS variable defaults ───────────────────────────────────────────────────
+// All values fall back to global tokens; override per-instance via host styles.
+
+.ui-lib-organization-chart {
+  --uilib-org-chart-connector-color: var(--uilib-border, #d1d5db);
+  --uilib-org-chart-connector-width: 1px;
+  --uilib-org-chart-connector-height: 20px;
+  --uilib-org-chart-connector-radius: 3px;
+  --uilib-org-chart-gap: var(--uilib-space-4, 1rem);
+
+  --uilib-org-chart-node-bg: var(--uilib-surface, #ffffff);
+  --uilib-org-chart-node-border: 1px solid var(--uilib-border, #d1d5db);
+  --uilib-org-chart-node-border-radius: var(--uilib-shape-base, 6px);
+  --uilib-org-chart-node-padding: var(--uilib-space-3, 0.75rem) var(--uilib-space-4, 1rem);
+  --uilib-org-chart-node-min-width: 120px;
+  --uilib-org-chart-node-color: var(--uilib-text-primary, #111827);
+
+  --uilib-org-chart-node-hover-bg: var(--uilib-surface-100, #f9fafb);
+  --uilib-org-chart-node-selected-bg: var(--uilib-primary-50, #eff6ff);
+  --uilib-org-chart-node-selected-border: var(--uilib-primary-500, #3b82f6);
+  --uilib-org-chart-node-selected-color: var(--uilib-primary-700, #1d4ed8);
+
+  --uilib-org-chart-toggle-size: 1.25rem;
+  --uilib-org-chart-toggle-bg: var(--uilib-surface, #ffffff);
+  --uilib-org-chart-toggle-border: 1px solid var(--uilib-border, #d1d5db);
+  --uilib-org-chart-toggle-color: var(--uilib-text-secondary, #6b7280);
+  --uilib-org-chart-toggle-radius: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+
+  // ─── Root wrapper ─────────────────────────────────────────────────────────
+  .uilib-org-chart-root {
+    display: flex;
+    gap: var(--uilib-org-chart-gap);
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  // ─── Node wrapper (host of OrganizationChartNodeComponent) ───────────────
+  .uilib-org-chart-node-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // ─── Node cell ────────────────────────────────────────────────────────────
+  .uilib-org-chart-node-cell {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--uilib-org-chart-node-min-width);
+    padding: var(--uilib-org-chart-node-padding);
+    background: var(--uilib-org-chart-node-bg);
+    border: var(--uilib-org-chart-node-border);
+    border-radius: var(--uilib-org-chart-node-border-radius);
+    color: var(--uilib-org-chart-node-color);
+    text-align: center;
+    white-space: nowrap;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease;
+    outline: none;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px var(--uilib-primary-300, #93c5fd);
+    }
+
+    &--selectable {
+      cursor: pointer;
+
+      &:hover {
+        background: var(--uilib-org-chart-node-hover-bg);
+      }
+    }
+
+    &--selected {
+      background: var(--uilib-org-chart-node-selected-bg);
+      border-color: var(--uilib-org-chart-node-selected-border);
+      color: var(--uilib-org-chart-node-selected-color);
+    }
+  }
+
+  .uilib-org-chart-node-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  // ─── Toggle button ────────────────────────────────────────────────────────
+  .uilib-org-chart-toggle-btn {
+    position: absolute;
+    bottom: calc(var(--uilib-org-chart-toggle-size) / -2);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--uilib-org-chart-toggle-size);
+    height: var(--uilib-org-chart-toggle-size);
+    padding: 0;
+    background: var(--uilib-org-chart-toggle-bg);
+    border: var(--uilib-org-chart-toggle-border);
+    border-radius: var(--uilib-org-chart-toggle-radius);
+    color: var(--uilib-org-chart-toggle-color);
+    cursor: pointer;
+    font-size: 0.65rem;
+    line-height: 1;
+    z-index: 1;
+    outline: none;
+
+    &:hover {
+      background: var(--uilib-org-chart-node-hover-bg);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px var(--uilib-primary-300, #93c5fd);
+    }
+  }
+
+  .uilib-org-chart-toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    transform: rotate(0deg);
+
+    &--expanded {
+      transform: rotate(180deg);
+    }
+  }
+
+  // ─── Connectors ───────────────────────────────────────────────────────────
+
+  // Vertical line from node cell down to the horizontal children bar
+  .uilib-org-chart-connector-down {
+    width: var(--uilib-org-chart-connector-width);
+    height: var(--uilib-org-chart-connector-height);
+    background: var(--uilib-org-chart-connector-color);
+    margin-top: calc(var(--uilib-org-chart-toggle-size) / 2);
+  }
+
+  // Row that holds all child columns
+  .uilib-org-chart-children-row {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  // Each child column: contributes the horizontal bar segment + vertical drop
+  .uilib-org-chart-child-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--uilib-org-chart-gap);
+
+    // Horizontal bar drawn via top border
+    border-top: var(--uilib-org-chart-connector-width) solid var(--uilib-org-chart-connector-color);
+
+    // First child: no left border (bar starts at center)
+    &--first {
+      border-left: none;
+      padding-left: calc(
+        var(--uilib-org-chart-gap) / 2 + var(--uilib-org-chart-node-min-width) / 2
+      );
+    }
+
+    // Last child: no right border (bar ends at center)
+    &--last {
+      border-right: none;
+      padding-right: calc(
+        var(--uilib-org-chart-gap) / 2 + var(--uilib-org-chart-node-min-width) / 2
+      );
+    }
+
+    // Single child: no horizontal bar, just straight vertical drop
+    &--only {
+      border-top: none;
+      padding: 0;
+    }
+  }
+
+  // Vertical connector from horizontal bar down to child node
+  .uilib-org-chart-connector-up {
+    width: var(--uilib-org-chart-connector-width);
+    height: var(--uilib-org-chart-connector-height);
+    background: var(--uilib-org-chart-connector-color);
+  }
+
+  // ─── Variant: Material ────────────────────────────────────────────────────
+  &.ui-lib-organization-chart--variant-material {
+    --uilib-org-chart-node-border: none;
+
+    .uilib-org-chart-node-cell {
+      box-shadow:
+        0 1px 3px 0 rgb(0 0 0 / 0.1),
+        0 1px 2px -1px rgb(0 0 0 / 0.06);
+
+      &--selected {
+        box-shadow:
+          0 0 0 2px var(--uilib-primary-500, #3b82f6),
+          0 1px 3px 0 rgb(0 0 0 / 0.1);
+      }
+    }
+
+    .uilib-org-chart-toggle-btn {
+      box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    }
+  }
+
+  // ─── Variant: Bootstrap ───────────────────────────────────────────────────
+  &.ui-lib-organization-chart--variant-bootstrap {
+    --uilib-org-chart-node-border-radius: 0.375rem;
+    --uilib-org-chart-toggle-radius: 0.25rem;
+
+    .uilib-org-chart-node-cell {
+      border-width: 1px;
+
+      &--selected {
+        --uilib-org-chart-node-bg: var(--uilib-primary-500, #3b82f6);
+        --uilib-org-chart-node-color: #ffffff;
+        --uilib-org-chart-node-border: 1px solid var(--uilib-primary-600, #2563eb);
+      }
+    }
+  }
+
+  // ─── Variant: Minimal ─────────────────────────────────────────────────────
+  &.ui-lib-organization-chart--variant-minimal {
+    --uilib-org-chart-node-border: none;
+    --uilib-org-chart-node-bg: transparent;
+    --uilib-org-chart-connector-color: var(--uilib-border, #d1d5db);
+    --uilib-org-chart-node-border-radius: 0;
+
+    .uilib-org-chart-child-col {
+      border-top-style: dashed;
+    }
+
+    .uilib-org-chart-node-cell {
+      border-bottom: 2px solid transparent;
+
+      &--selected {
+        background: transparent;
+        border-bottom-color: var(--uilib-primary-500, #3b82f6);
+        color: var(--uilib-primary-700, #1d4ed8);
+      }
+
+      &--selectable:hover {
+        background: var(--uilib-surface-100, #f9fafb);
+        border-radius: var(--uilib-shape-base, 6px);
+      }
+    }
+
+    .uilib-org-chart-toggle-btn {
+      background: transparent;
+      border: none;
+    }
+  }
+}
+
+// ─── Reduced motion ──────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-organization-chart {
+    .uilib-org-chart-node-cell,
+    .uilib-org-chart-toggle-icon {
+      transition: none;
+    }
+  }
+}

@@ -1,5 +1,165 @@
-<section class="organization-chart-demo" data-testid="organization-chart-demo">
-  <h1>OrganizationChart</h1>
-  <p>Coming soon.</p>
-</section>
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>OrganizationChart</h1>
+    <p class="doc-description">
+      A hierarchical tree chart for visualising organisational structures.
+      Supports collapsible subtrees, single and multiple node selection,
+      custom node templates, and three design variants.
+    </p>
+  </div>
 
+  <div class="examples">
+
+    <!-- 1. Basic -->
+    <section id="basic" data-doc-anchor class="example-section">
+      <h3>1. Basic</h3>
+      <p class="example-description">
+        Pass an array of <code>OrganizationChartNode</code> objects to
+        <code>[value]</code>. Set <code>expanded: true</code> on any node to
+        show its children by default.
+      </p>
+      <app-code-preview [code]="snippet('basic')">
+        <ui-lib-card>
+          <ui-lib-organization-chart [value]="basicNodes()" />
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 2. Collapsible -->
+    <section id="collapsible" data-doc-anchor class="example-section">
+      <h3>2. Collapsible</h3>
+      <p class="example-description">
+        Add <code>[collapsible]="true"</code> to display a toggle button on
+        every node that has children. Clicking it fires
+        <code>(nodeExpand)</code> or <code>(nodeCollapse)</code>.
+      </p>
+      <app-code-preview [code]="snippet('collapsible')">
+        <ui-lib-card>
+          <ui-lib-organization-chart
+            [value]="collapsibleNodes()"
+            [collapsible]="true"
+            (nodeExpand)="onNodeExpand($event)"
+            (nodeCollapse)="onNodeCollapse($event)"
+          />
+          @if (eventLog().length > 0) {
+            <div class="demo-event-log">
+              @for (entry of eventLog(); track $index) {
+                <div class="demo-event-log__entry">{{ entry }}</div>
+              }
+            </div>
+          }
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 3. Single Selection -->
+    <section id="single-selection" data-doc-anchor class="example-section">
+      <h3>3. Single Selection</h3>
+      <p class="example-description">
+        Set <code>selectionMode="single"</code> and bind
+        <code>[(selection)]</code> to track the selected node. Clicking a
+        selected node deselects it.
+      </p>
+      <app-code-preview [code]="snippet('singleSelection')">
+        <ui-lib-card>
+          <ui-lib-organization-chart
+            [value]="singleNodes()"
+            selectionMode="single"
+            [selection]="singleSelection()"
+            (selectionChange)="singleSelection.set($any($event))"
+            (nodeSelect)="onNodeSelect($event)"
+            (nodeUnselect)="onNodeUnselect($event)"
+          />
+          <p class="demo-selection-status">
+            Selected: <strong>{{ formatSelection(singleSelection()) }}</strong>
+          </p>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 4. Multiple Selection -->
+    <section id="multiple-selection" data-doc-anchor class="example-section">
+      <h3>4. Multiple Selection</h3>
+      <p class="example-description">
+        Set <code>selectionMode="multiple"</code> to allow selecting several
+        nodes simultaneously. The <code>selection</code> binding holds an array.
+      </p>
+      <app-code-preview [code]="snippet('multipleSelection')">
+        <ui-lib-card>
+          <ui-lib-organization-chart
+            [value]="multipleNodes()"
+            selectionMode="multiple"
+            [selection]="multipleSelection()"
+            (selectionChange)="multipleSelection.set($any($event))"
+            (nodeSelect)="onNodeSelect($event)"
+            (nodeUnselect)="onNodeUnselect($event)"
+          />
+          <p class="demo-selection-status">
+            Selected: <strong>{{ formatSelection(multipleSelection()) }}</strong>
+          </p>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 5. Custom Template -->
+    <section id="custom-template" data-doc-anchor class="example-section">
+      <h3>5. Custom Template</h3>
+      <p class="example-description">
+        Project an <code>&lt;ng-template uiOrgChartNode let-node&gt;</code> to
+        replace the default label rendering. The context variable exposes the
+        full <code>OrganizationChartNode</code> including any <code>data</code>
+        you attach.
+      </p>
+      <app-code-preview [code]="snippet('customTemplate')">
+        <ui-lib-card>
+          <ui-lib-organization-chart [value]="customTemplateNodes()">
+            <ng-template uiOrgChartNode let-node>
+              <div class="demo-person-node">
+                <span class="demo-person-node__avatar">{{ initials(node.label) }}</span>
+                <strong class="demo-person-node__name">{{ node.label }}</strong>
+                <span class="demo-person-node__role">{{ node.data?.role }}</span>
+              </div>
+            </ng-template>
+          </ui-lib-organization-chart>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 6. Bootstrap Variant -->
+    <section id="bootstrap" data-doc-anchor class="example-section">
+      <h3>6. Bootstrap Variant</h3>
+      <p class="example-description">
+        Set <code>variant="bootstrap"</code> for a flat, border-based style
+        consistent with Bootstrap-themed applications.
+      </p>
+      <app-code-preview [code]="snippet('bootstrap')">
+        <ui-lib-card>
+          <ui-lib-organization-chart
+            [value]="bootstrapNodes()"
+            variant="bootstrap"
+            [collapsible]="true"
+          />
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 7. Minimal Variant -->
+    <section id="minimal" data-doc-anchor class="example-section">
+      <h3>7. Minimal Variant</h3>
+      <p class="example-description">
+        <code>variant="minimal"</code> removes all card chrome, using only
+        dashed connector lines for a lightweight look.
+      </p>
+      <app-code-preview [code]="snippet('minimal')">
+        <ui-lib-card>
+          <ui-lib-organization-chart
+            [value]="minimalNodes()"
+            variant="minimal"
+            [collapsible]="true"
+          />
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+  </div>
+</app-doc-page-layout>

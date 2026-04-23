@@ -1,0 +1,51 @@
+<div
+  class="uilib-org-chart-node-cell"
+  [class.uilib-org-chart-node-cell--selectable]="isSelectable()"
+  [class.uilib-org-chart-node-cell--selected]="isSelected()"
+  [class]="node().styleClass ?? ''"
+  role="treeitem"
+  [attr.aria-expanded]="hasChildren() ? isExpanded() : null"
+  [attr.aria-selected]="ctx.selectionMode() ? isSelected() : null"
+  [attr.tabindex]="tabIndex()"
+  (click)="onNodeClick($event)"
+  (keydown.enter)="onNodeKeydown($event)"
+  (keydown.space)="onNodeKeydown($event)"
+>
+  @if (resolvedTemplate(); as template) {
+    <ng-container *ngTemplateOutlet="template; context: nodeContext()" />
+  } @else {
+    <span class="uilib-org-chart-node-label">{{ node().label }}</span>
+  }
+
+  @if (ctx.collapsible() && hasChildren()) {
+    <button
+      class="uilib-org-chart-toggle-btn"
+      type="button"
+      [attr.aria-label]="isExpanded() ? 'Collapse' : 'Expand'"
+      (click)="onToggleClick($event)"
+      (keydown.enter)="onToggleKeydown($event)"
+      (keydown.space)="onToggleKeydown($event)"
+    >
+      <span class="uilib-org-chart-toggle-icon" [class.uilib-org-chart-toggle-icon--expanded]="isExpanded()">
+        ▾
+      </span>
+    </button>
+  }
+</div>
+
+@if (hasChildren() && isExpanded()) {
+  <div class="uilib-org-chart-connector-down"></div>
+  <div class="uilib-org-chart-children-row">
+    @for (child of node().children; track child.key; let isFirst = $first; let isLast = $last) {
+      <div
+        class="uilib-org-chart-child-col"
+        [class.uilib-org-chart-child-col--first]="isFirst"
+        [class.uilib-org-chart-child-col--last]="isLast"
+        [class.uilib-org-chart-child-col--only]="node().children!.length === 1"
+      >
+        <div class="uilib-org-chart-connector-up"></div>
+        <ui-lib-organization-chart-node [node]="child" [nodeIndex]="nodeIndex() + 1" />
+      </div>
+    }
+  </div>
+}

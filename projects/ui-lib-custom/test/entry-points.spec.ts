@@ -26,6 +26,7 @@ import type * as UiLibTabs from 'ui-lib-custom/tabs';
 import type * as UiLibTheme from 'ui-lib-custom/theme';
 import type * as UiLibTokens from 'ui-lib-custom/tokens';
 import type * as UiLibInputMask from 'ui-lib-custom/input-mask';
+import type * as UiLibOrganizationChart from 'ui-lib-custom/organization-chart';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -180,5 +181,11 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.OrderListEmptyDirective).toBeDefined();
     expect(mod.OrderListFilterDirective).toBeDefined();
     expect(mod.ORDER_LIST_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from organization-chart', async (): Promise<void> => {
+    const mod: typeof UiLibOrganizationChart = await import('ui-lib-custom/organization-chart');
+    expect(mod.OrganizationChart).toBeDefined();
+    expect(mod.OrgChartNodeTemplateDirective).toBeDefined();
   });
 });

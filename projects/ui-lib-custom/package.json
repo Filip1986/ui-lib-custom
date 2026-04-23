@@ -62,6 +62,10 @@
       "esm2022": "./esm2022/data-view/index.mjs",
       "esm": "./esm2022/data-view/index.mjs"
     },
+    "./organization-chart": {
+      "esm2022": "./esm2022/organization-chart/index.mjs",
+      "esm": "./esm2022/organization-chart/index.mjs"
+    },
     "./order-list": {
       "esm2022": "./esm2022/order-list/index.mjs",
       "esm": "./esm2022/order-list/index.mjs"
@@ -109,6 +113,9 @@
       ],
       "data-view": [
         "./data-view/index.d.ts"
+      ],
+      "organization-chart": [
+        "./organization-chart/index.d.ts"
       ],
       "order-list": [
         "./order-list/index.d.ts"

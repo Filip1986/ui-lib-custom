@@ -1,0 +1,5 @@
+<div class="uilib-org-chart-root">
+  @for (rootNode of value(); track rootNode.key) {
+    <ui-lib-organization-chart-node [node]="rootNode" [nodeIndex]="0" />
+  }
+</div>

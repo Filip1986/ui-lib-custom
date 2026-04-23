@@ -32,6 +32,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Chart` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `DataView` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `OrderList` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
+- `OrganizationChart` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
 - Documentation gaps still tracked for: `Input`, `Select`, `Card`, `Layout`
 - Pending secondary entry points: `icon-button`, `alert`
 
@@ -54,48 +55,70 @@ Handoff convention (when terminal commands are run in-session): include a short 
 
 ```text
 Date: 2026-04-23
+Changed: projects/ui-lib-custom/src/lib/organization-chart/ (all source files — full impl),
+         projects/ui-lib-custom/organization-chart/ (secondary entry point),
+         projects/ui-lib-custom/package.json (exports + typesVersions for organization-chart),
+         projects/ui-lib-custom/test/entry-points.spec.ts (organization-chart import test added),
+         projects/demo/src/app/pages/organization-chart/ (full demo — TS, HTML, SCSS),
+         projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge),
+         docs/reference/components/ORGANIZATIONCHART.md (created),
+         docs/reference/components/README.md (OrganizationChart entry added),
+         AI_AGENT_CONTEXT.md
+State: OrganizationChart fully complete. Recursive tree rendering, collapsible subtrees,
+       single/multiple selection, named typed templates, three variants, WAI-ARIA tree/treeitem,
+       keyboard navigation, 30/30 unit tests passing, demo page with 7 scenarios, reference doc.
+Verification:
+- ng build ui-lib-custom: PASS (0 errors)
+- entry-points.spec.ts: 29/29 PASS (includes organization-chart)
+- organization-chart.spec.ts: 30/30 PASS
+- ng build demo: PASS (only pre-existing SCSS budget warnings in button/date-picker)
+Terminal notes:
+- Edit/Write tools truncate Windows CRLF files — all new files written via bash heredoc (cat << 'EOF')
+  to avoid truncation. Python used for editing binary/CRLF files (sidebar, entry-points.spec.ts).
+- @esbuild/linux-x64 missing from node_modules — fixed with: npm install @esbuild/linux-x64 --no-save
+- structuredClone not available in Jest's Node version — replaced with JSON.parse(JSON.stringify(...))
+- sidebar.component.ts had trailing null bytes — stripped with Python before demo build
+Next step: Resume queued backlog items (knip baseline, dead-code cleanup, constants extraction pass).
+```
+
+```text
+Date: 2026-04-23
+Changed: projects/ui-lib-custom/src/lib/organization-chart/organization-chart-context.ts (truncation fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.ts (truncation fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.html (truncation fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/organization-chart.html (truncation fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/organization-chart.ts (truncation + lint fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/organization-chart.types.ts (truncation fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/organization-chart-template-directives.ts (truncation fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/index.ts (truncation fixed),
+         projects/ui-lib-custom/src/lib/organization-chart/organization-chart.spec.ts (truncation + lint fixed),
+         projects/ui-lib-custom/organization-chart/package.json (truncation fixed),
+         projects/ui-lib-custom/organization-chart/ng-package.json (truncation fixed),
+         projects/ui-lib-custom/organization-chart/public-api.ts (truncation fixed),
+         projects/ui-lib-custom/package.json (truncation fixed — was missing split-button/testing typesVersions entries),
+         projects/ui-lib-custom/test/entry-points.spec.ts (truncation fixed)
+State: All CRLF-truncated files repaired. ESLint passes (0 errors, 0 warnings) on organization-chart/.
+       All lint fixes applied: Boolean() coercions, explicit Map type annotation, nativeElement cast,
+       removed unused By import, fixed textContent predicate.
+Verification:
+- npx eslint projects/ui-lib-custom/src/lib/organization-chart/ --max-warnings=0: PASS (0 output)
+- organization-chart.spec.ts: 30/30 PASS
+- entry-points.spec.ts: 29/29 PASS (includes organization-chart)
+- accordion.spec.ts: 15/15 PASS (global regression check)
+- ng build ui-lib-custom: PASS (0 errors, pre-existing SCSS budget warnings only)
+Terminal notes:
+- All file repairs done via Python byte-level appends to avoid CRLF line-ending issues with bash printf
+- Root cause of tslib resolution failure: projects/ui-lib-custom/package.json was truncated (invalid JSON),
+  causing Node.js module resolver to fail for ALL specs. Fixed by appending missing split-button/testing entries.
+- Python read() default mode strips CRLF to LF; for spec/source files this is benign but noteworthy.
+Next step: Resume queued backlog items (knip baseline, dead-code cleanup, constants extraction pass).
+```
+
+```text
+Date: 2026-04-23
 Changed: projects/demo/src/app/pages/order-list/order-list-demo.component.ts (full impl),
          projects/demo/src/app/pages/order-list/order-list-demo.component.html (full impl),
          projects/demo/src/app/pages/order-list/order-list-demo.component.scss (full impl),
          projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge),
          projects/ui-lib-custom/src/lib/order-list/order-list.component.spec.ts (full lint-clean rewrite),
-         docs/reference/components/ORDERLIST.md (created),
-         docs/reference/components/README.md (OrderList entry added),
-         AI_AGENT_CONTEXT.md
-State: OrderList Prompt 10 complete. Fully implemented, tested, documented, and demoed.
-Verification:
-- ng build ui-lib-custom: PASS (0 errors)
-- order-list jest: 77/77 PASS; coverage: statements 88.82%, branches 79.45%, functions 88.67%, lines 91.09%
-- eslint projects/ui-lib-custom/src/lib/order-list/: CLEAN (0 errors)
-- entry-points regression: 28/28 PASS (includes order-list)
-- ng build demo: PASS (only pre-existing SCSS budget warnings in button/date-picker)
-Known issues / v2 considerations:
-- Virtual scroll deferred.
-- Multi-item drag deferred.
-- Touch/mobile drag-and-drop limited by HTML5 DnD API — consider pointer events polyfill in v2.
-- No CDK dependency — fully custom DnD.
-Terminal notes: All commands run from bash.exe using npx.cmd. DragEvent not in jsdom — using
-  fakeDragEvent() cast helper in spec. spec fully rewritten with explicit (): void return types on
-  all callbacks and typed nativeElement access via rootEl() helper to satisfy strict ESLint rules.
-Next step: Resume queued backlog items (knip baseline, dead-code cleanup, constants extraction pass).
-```
-
----
-
-## Rollover Rule
-
-At end of session:
-1. Append one concise handoff block to `## Recent Handoffs`.
-2. Keep only the newest 3 handoffs here.
-3. Move older handoffs to `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
-4. Keep stable rule/process updates in `AGENTS.md` only.
-5. If commands were executed, add `Terminal notes` in the handoff (failed command, successful workaround, shell).
-
-
-
-At end of session:
-1. Append one concise handoff block to `## Recent Handoffs`.
-2. Keep only the newest 3 handoffs here.
-3. Move older handoffs to `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
-4. Keep stable rule/process updates in `AGENTS.md` only.
-5. If commands were executed, add `Terminal notes` in the handoff (failed command, successful workaround, shell).
+         docs/reference/componen

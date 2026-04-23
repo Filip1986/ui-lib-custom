@@ -109,7 +109,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/organization-chart',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'Paginator',
