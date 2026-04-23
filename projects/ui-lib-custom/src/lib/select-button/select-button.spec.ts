@@ -684,6 +684,13 @@ describe('SelectButton keyboard behavior', (): void => {
     expect(fixture.componentInstance.focusedIndex()).toBe(1);
   });
 
+  it('moves focus backwards with ArrowLeft', (): void => {
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.focusedIndex()).toBe(1);
+  });
+
   it('moves focus to start/end with Home/End', (): void => {
     hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }));
     fixture.detectChanges();
@@ -711,6 +718,42 @@ describe('SelectButton keyboard behavior', (): void => {
     expect(fixture.componentInstance.tabIndexFor(0)).toBe(0);
     expect(fixture.componentInstance.tabIndexFor(1)).toBe(-1);
   });
+
+  it('ignores non-handled keys in keydown default branch', (): void => {
+    fixture.componentInstance.focusedIndex.set(1);
+    fixture.detectChanges();
+
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.focusedIndex()).toBe(1);
+  });
+
+  it('keeps focus unset when all options are disabled and ArrowRight is pressed', (): void => {
+    fixture.componentRef.setInput('options', [
+      { label: 'One', value: 'one', disabled: true },
+      { label: 'Two', value: 'two', disabled: true },
+    ]);
+    fixture.detectChanges();
+
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.focusedIndex()).toBe(-1);
+  });
+
+  it('keeps focus unset when all options are disabled and End is pressed', (): void => {
+    fixture.componentRef.setInput('options', [
+      { label: 'One', value: 'one', disabled: true },
+      { label: 'Two', value: 'two', disabled: true },
+    ]);
+    fixture.detectChanges();
+
+    hostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.focusedIndex()).toBe(-1);
+  });
 });
 
 describe('SelectButton resolvers', (): void => {
@@ -732,6 +775,16 @@ describe('SelectButton resolvers', (): void => {
     expect(label).toBe('Alpha');
   });
 
+  it('resolveLabel falls back to option.label when resolver field is missing', (): void => {
+    fixture.componentRef.setInput('optionLabel', 'name');
+    fixture.detectChanges();
+
+    const option: SelectButtonOption = { label: 'Visible Label', value: 'x' } as SelectButtonOption;
+    const label: string = fixture.componentInstance.resolveLabel(option);
+
+    expect(label).toBe('Visible Label');
+  });
+
   it('resolveValue falls back to label and option', (): void => {
     const option: SelectButtonOption = { label: 'Alpha' } as SelectButtonOption;
     fixture.detectChanges();
@@ -748,6 +801,14 @@ describe('SelectButton resolvers', (): void => {
     expect(track).toBe(2);
   });
 
+  it('isOptionDisabled falls back to option.disabled when resolver is empty', (): void => {
+    fixture.componentRef.setInput('optionDisabled', '');
+    fixture.detectChanges();
+
+    const option: SelectButtonOption = { label: 'Disabled', value: 'd', disabled: true };
+    expect(fixture.componentInstance.isOptionDisabled(option)).toBe(true);
+  });
+
   it('activeIndex uses selected value when available', (): void => {
     const options: SelectButtonOption[] = [
       { label: 'A', value: 'a' },
@@ -758,5 +819,16 @@ describe('SelectButton resolvers', (): void => {
     fixture.detectChanges();
 
     expect(fixture.componentInstance.activeIndex()).toBe(1);
+  });
+
+  it('activeIndex returns -1 when no enabled option exists and selected value is missing', (): void => {
+    fixture.componentRef.setInput('options', [
+      { label: 'A', value: 'a', disabled: true },
+      { label: 'B', value: 'b', disabled: true },
+    ]);
+    fixture.componentRef.setInput('value', 'missing');
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.activeIndex()).toBe(-1);
   });
 });
