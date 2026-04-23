@@ -829,6 +829,186 @@ describe('SpeedDialComponent', (): void => {
     expect(instance.focusedItemIndex()).toBe(0);
   });
 
+  it('keeps open state when document click target is not a Node', async (): Promise<void> => {
+    const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
+    fixture.componentInstance.visible = true;
+    await detectAndFlush(fixture);
+
+    const instance: SpeedDialComponent = getSpeedDialInstance(fixture);
+    instance.onDocumentClick({ target: {} } as unknown as MouseEvent);
+    await detectAndFlush(fixture);
+
+    expect(fixture.componentInstance.visible).toBe(true);
+  });
+
+  it('handles trigger Escape keydown path only when menu is visible', async (): Promise<void> => {
+    const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
+    const instance: SpeedDialComponent = getSpeedDialInstance(fixture);
+
+    const closedEscapeEvent: KeyboardEvent = new KeyboardEvent('keydown', {
+      key: KEYBOARD_KEYS.Escape,
+      cancelable: true,
+    });
+    instance.onButtonKeydown(closedEscapeEvent);
+    await detectAndFlush(fixture);
+    expect(instance.visible()).toBe(false);
+
+    instance.visible.set(true);
+    await detectAndFlush(fixture);
+    const openEscapeEvent: KeyboardEvent = new KeyboardEvent('keydown', {
+      key: KEYBOARD_KEYS.Escape,
+      cancelable: true,
+    });
+    instance.onButtonKeydown(openEscapeEvent);
+    await detectAndFlush(fixture);
+
+    expect(instance.visible()).toBe(false);
+  });
+
+  it('covers right-direction and fallback-direction arrow open rules', async (): Promise<void> => {
+    const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
+    fixture.componentInstance.model.set(createTestItems());
+    const instance: SpeedDialComponent = getSpeedDialInstance(fixture);
+
+    fixture.componentInstance.direction.set('right');
+    await detectAndFlush(fixture);
+    instance.onButtonKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+    );
+    await detectAndFlush(fixture);
+    expect(fixture.componentInstance.visible).toBe(true);
+
+    fixture.componentInstance.visible = false;
+    fixture.componentInstance.direction.set('diagonal' as unknown as SpeedDialDirection);
+    await detectAndFlush(fixture);
+
+    const blockedFallbackEvent: KeyboardEvent = new KeyboardEvent('keydown', {
+      key: KEYBOARD_KEYS.ArrowUp,
+      cancelable: true,
+    });
+    instance.onButtonKeydown(blockedFallbackEvent);
+    await detectAndFlush(fixture);
+    expect(fixture.componentInstance.visible).toBe(false);
+
+    instance.onButtonKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowRight, cancelable: true })
+    );
+    await detectAndFlush(fixture);
+    expect(fixture.componentInstance.visible).toBe(true);
+  });
+
+  it('covers move-focus guards for empty and disabled item collections', async (): Promise<void> => {
+    const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
+    const instance: SpeedDialComponent = getSpeedDialInstance(fixture);
+
+    fixture.componentInstance.visible = true;
+    fixture.componentInstance.model.set([]);
+    await detectAndFlush(fixture);
+    instance.onButtonKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+    );
+    await detectAndFlush(fixture);
+    expect(instance.focusedItemIndex()).toBe(-1);
+
+    fixture.componentInstance.model.set([
+      { label: 'Disabled A', disabled: true },
+      { label: 'Disabled B', disabled: true },
+    ]);
+    await detectAndFlush(fixture);
+
+    instance.focusedItemIndex.set(-1);
+    instance.onButtonKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+    );
+    await detectAndFlush(fixture);
+    expect(instance.focusedItemIndex()).toBe(-1);
+
+    instance.focusedItemIndex.set(0);
+    instance.onButtonKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowDown, cancelable: true })
+    );
+    await detectAndFlush(fixture);
+    expect(instance.focusedItemIndex()).toBe(0);
+
+    instance.onButtonKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.ArrowRight, cancelable: true })
+    );
+    await detectAndFlush(fixture);
+    expect(instance.focusedItemIndex()).toBe(0);
+
+    const firstDisabledItem: SpeedDialItem = { label: 'Disabled item', disabled: true };
+    instance.onItemKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.Home, cancelable: true }),
+      firstDisabledItem,
+      0
+    );
+    instance.onItemKeydown(
+      new KeyboardEvent('keydown', { key: KEYBOARD_KEYS.End, cancelable: true }),
+      firstDisabledItem,
+      0
+    );
+    await detectAndFlush(fixture);
+    expect(instance.focusedItemIndex()).toBe(0);
+  });
+
+  it('handles document click and escape host-listener paths with DOM events', async (): Promise<void> => {
+    const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
+    const instance: SpeedDialComponent = getSpeedDialInstance(fixture);
+
+    instance.visible.set(true);
+    await detectAndFlush(fixture);
+
+    const nonNodeTargetClickEvent: MouseEvent = new MouseEvent('click', { bubbles: true });
+    Object.defineProperty(nonNodeTargetClickEvent, 'target', { value: 'outside-target-string' });
+    instance.onDocumentClick(nonNodeTargetClickEvent);
+    await detectAndFlush(fixture);
+    expect(instance.visible()).toBe(true);
+
+    const outsideNodeClickEvent: MouseEvent = new MouseEvent('click', { bubbles: true });
+    Object.defineProperty(outsideNodeClickEvent, 'target', { value: document.body });
+    instance.onDocumentClick(outsideNodeClickEvent);
+    await detectAndFlush(fixture);
+    expect(instance.visible()).toBe(false);
+
+    instance.visible.set(true);
+    await detectAndFlush(fixture);
+    const escapeEvent: KeyboardEvent = new KeyboardEvent('keydown', {
+      key: KEYBOARD_KEYS.Escape,
+      bubbles: true,
+      cancelable: true,
+    });
+    instance.onDocumentEscape(escapeEvent);
+    await detectAndFlush(fixture);
+    expect(escapeEvent.defaultPrevented).toBe(true);
+    expect(instance.visible()).toBe(false);
+  });
+
+  it('covers delta fallbacks for direction-key mismatches', async (): Promise<void> => {
+    type SpeedDialPrivateApi = {
+      deltaFromKey(key: string): number | null;
+    };
+
+    const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
+    const instance: SpeedDialComponent = getSpeedDialInstance(fixture);
+    const privateApi: SpeedDialPrivateApi = instance as unknown as SpeedDialPrivateApi;
+
+    fixture.componentInstance.direction.set('right');
+    await detectAndFlush(fixture);
+    expect(privateApi.deltaFromKey(KEYBOARD_KEYS.ArrowUp)).toBeNull();
+
+    fixture.componentInstance.direction.set('left');
+    await detectAndFlush(fixture);
+    expect(privateApi.deltaFromKey(KEYBOARD_KEYS.ArrowUp)).toBeNull();
+
+    fixture.componentInstance.direction.set('down');
+    await detectAndFlush(fixture);
+    expect(privateApi.deltaFromKey(KEYBOARD_KEYS.ArrowRight)).toBeNull();
+
+    fixture.componentInstance.direction.set('diagonal' as unknown as SpeedDialDirection);
+    await detectAndFlush(fixture);
+    expect(privateApi.deltaFromKey('x')).toBeNull();
+  });
+
   it('trigger/list/items expose expected ARIA attributes', async (): Promise<void> => {
     const fixture: ComponentFixture<SpeedDialHostComponent> = createHost();
     fixture.componentInstance.model.set([{ label: 'First' }, { label: 'Second', disabled: true }]);
