@@ -108,6 +108,10 @@
     "./timeline": {
       "esm2022": "./esm2022/timeline/index.mjs",
       "esm": "./esm2022/timeline/index.mjs"
+    },
+    "./tree": {
+      "esm2022": "./esm2022/tree/index.mjs",
+      "esm": "./esm2022/tree/index.mjs"
     }
   },
   "typesVersions": {
@@ -159,6 +163,9 @@
       ],
       "timeline": [
         "./timeline/index.d.ts"
+      ],
+      "tree": [
+        "./tree/index.d.ts"
       ]
     }
   }

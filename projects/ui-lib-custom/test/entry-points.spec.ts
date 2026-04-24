@@ -32,6 +32,8 @@ import type * as UiLibPickList from 'ui-lib-custom/pick-list';
 import type * as UiLibTable from 'ui-lib-custom/table';
 import type * as UiLibTimeline from 'ui-lib-custom/timeline';
 
+import type * as UiLibTree from 'ui-lib-custom/tree';
+
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
     const lib: typeof UiLibCustom = await import('ui-lib-custom');
@@ -226,5 +228,12 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.TimelineMarkerDirective).toBeDefined();
     expect(mod.TimelineOppositeDirective).toBeDefined();
     expect(mod.TIMELINE_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from tree', async (): Promise<void> => {
+    const mod: typeof UiLibTree = await import('ui-lib-custom/tree');
+    expect(mod.Tree).toBeDefined();
+    expect(mod.TreeNodeTemplateDirective).toBeDefined();
+    expect(mod.TREE_CONTEXT).toBeDefined();
   });
 });

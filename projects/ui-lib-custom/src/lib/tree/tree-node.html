@@ -1,0 +1,72 @@
+<div
+  class="uilib-tree-node-row"
+  [class.uilib-tree-node-row--selected]="treeContext.isNodeSelected(node())"
+  [class.uilib-tree-node-row--selectable]="node().selectable !== false && treeContext.selectionMode() !== null && treeContext.selectionMode() !== 'checkbox'"
+  [class]="node().styleClass ?? ''"
+  [style.padding-inline-start.px]="depth() * 20"
+  role="treeitem"
+  [attr.aria-expanded]="hasChildren() ? treeContext.isNodeExpanded(node()) : null"
+  [attr.aria-selected]="treeContext.selectionMode() !== 'checkbox' ? treeContext.isNodeSelected(node()) : null"
+  tabindex="0"
+  (click)="treeContext.handleNodeClick($event, node())"
+  (keydown.enter)="treeContext.handleNodeClick($event, node())"
+  (keydown.space)="$event.preventDefault(); treeContext.handleNodeClick($event, node())"
+>
+  <!-- Expand/collapse toggle -->
+  @if (hasChildren()) {
+    <button
+      type="button"
+      class="uilib-tree-node-toggle"
+      [class.uilib-tree-node-toggle--expanded]="treeContext.isNodeExpanded(node())"
+      [attr.aria-label]="treeContext.isNodeExpanded(node()) ? 'Collapse' : 'Expand'"
+      tabindex="-1"
+      (click)="$event.stopPropagation(); treeContext.handleNodeToggle($event, node())"
+    >
+      <span class="uilib-tree-toggle-icon"></span>
+    </button>
+  } @else {
+    <span class="uilib-tree-node-leaf-spacer" aria-hidden="true"></span>
+  }
+
+  <!-- Checkbox (checkbox selection mode only) -->
+  @if (treeContext.selectionMode() === 'checkbox') {
+    <span
+      class="uilib-tree-node-checkbox"
+      [class.uilib-tree-node-checkbox--checked]="treeContext.isNodeSelected(node())"
+      [class.uilib-tree-node-checkbox--partial]="treeContext.isNodePartiallySelected(node())"
+      role="checkbox"
+      [attr.aria-checked]="treeContext.isNodePartiallySelected(node()) ? 'mixed' : treeContext.isNodeSelected(node())"
+      [attr.aria-label]="node().label ?? 'Node'"
+      tabindex="-1"
+      (click)="$event.stopPropagation(); treeContext.handleCheckboxToggle($event, node())"
+    ></span>
+  }
+
+  <!-- Node icon -->
+  @if (resolveNodeIcon()) {
+    <span class="uilib-tree-node-icon" [class]="resolveNodeIcon()" aria-hidden="true"></span>
+  }
+
+  <!-- Node content: custom template or default label -->
+  @if (treeContext.getTemplateForNode(node()); as nodeTemplate) {
+    <ng-container
+      [ngTemplateOutlet]="nodeTemplate"
+      [ngTemplateOutletContext]="{ $implicit: node() }"
+    />
+  } @else {
+    <span class="uilib-tree-node-label">{{ node().label }}</span>
+  }
+</div>
+
+<!-- Recursive children -->
+@if (hasChildren() && treeContext.isNodeExpanded(node())) {
+  <ul class="uilib-tree-children" role="group">
+    @for (child of node().children!; track child.key) {
+      @if (treeContext.isNodeFiltered(child)) {
+        <li role="none">
+          <ui-lib-tree-node [node]="child" [depth]="depth() + 1" />
+        </li>
+      }
+    }
+  </ul>
+}

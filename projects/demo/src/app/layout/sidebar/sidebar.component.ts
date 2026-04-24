@@ -140,14 +140,12 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/timeline',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'Tree',
           icon: 'pi pi-circle',
           route: '/tree',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'TreeTable',

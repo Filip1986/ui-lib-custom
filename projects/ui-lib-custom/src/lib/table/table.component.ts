@@ -930,6 +930,6 @@ export class TableComponent {
         return (current as Record<string, unknown>)[segment];
       }
       return undefined;
-    }, row);
+    }, row as unknown);
   }
 }

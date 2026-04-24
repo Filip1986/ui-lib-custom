@@ -1,0 +1,29 @@
+<!-- Filter input -->
+@if (filter()) {
+  <div class="uilib-tree-filter">
+    <input
+      type="text"
+      class="uilib-tree-filter-input"
+      [placeholder]="filterPlaceholder()"
+      [value]="filterText()"
+      aria-label="Filter tree"
+      (input)="onFilterInput($event)"
+    />
+    <span class="uilib-tree-filter-icon pi pi-search" aria-hidden="true"></span>
+  </div>
+}
+
+<!-- Root nodes -->
+<ul class="uilib-tree-root" role="tree">
+  @for (rootNode of value(); track rootNode.key) {
+    @if (isNodeFiltered(rootNode)) {
+      <li role="none">
+        <ui-lib-tree-node [node]="rootNode" [depth]="0" />
+      </li>
+    }
+  } @empty {
+    <li class="uilib-tree-empty" role="presentation">
+      <span class="uilib-tree-empty-message">No items to display</span>
+    </li>
+  }
+</ul>

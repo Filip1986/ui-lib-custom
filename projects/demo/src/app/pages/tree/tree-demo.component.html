@@ -1,0 +1,176 @@
+<div class="demo-page">
+  <header class="demo-header">
+    <h1 class="demo-title">Tree</h1>
+    <p class="demo-subtitle">
+      Hierarchical data display with expand/collapse, selection modes, filtering,
+      custom templates, and three design variants.
+    </p>
+  </header>
+
+  <!-- ── Basic Tree ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Basic Tree</h2>
+    <p class="demo-section-desc">
+      A read-only tree with no selection. Click the chevron to expand or collapse subtrees.
+    </p>
+    <div class="demo-card">
+      <ui-lib-tree [value]="fileSystemNodes" />
+    </div>
+  </section>
+
+  <!-- ── Single Selection ────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Single Selection</h2>
+    <p class="demo-section-desc">
+      Click a node to select it. Click the same node again to deselect.
+    </p>
+    <div class="demo-card">
+      <ui-lib-tree
+        [value]="fileSystemNodes"
+        selectionMode="single"
+        [(selection)]="singleSelection"
+      />
+      <p class="demo-selection-label">
+        Selected: <strong>{{ getSelectionLabel(singleSelection(), 'single') }}</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Multiple Selection ──────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Multiple Selection</h2>
+    <p class="demo-section-desc">
+      Click any number of nodes to build up a selection. Click again to deselect.
+    </p>
+    <div class="demo-card">
+      <ui-lib-tree
+        [value]="fileSystemNodes"
+        selectionMode="multiple"
+        [(selection)]="multipleSelection"
+      />
+      <p class="demo-selection-label">
+        Selected: <strong>{{ getSelectionLabel(multipleSelection(), 'multiple') }}</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Checkbox Selection ──────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Checkbox Selection</h2>
+    <p class="demo-section-desc">
+      Checking a parent cascades to all its descendants. A dash indicates a partially
+      selected parent.
+    </p>
+    <div class="demo-card">
+      <ui-lib-tree
+        [value]="fileSystemNodes"
+        selectionMode="checkbox"
+        [(selection)]="checkboxSelection"
+      />
+      <p class="demo-selection-label">
+        Selected: <strong>{{ getSelectionLabel(checkboxSelection(), 'multiple') }}</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Filter ──────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Filter</h2>
+    <p class="demo-section-desc">
+      Type into the search box to filter the tree. Lenient mode (default) shows
+      matching nodes and all their ancestors.
+    </p>
+    <div class="demo-card">
+      <ui-lib-tree
+        [value]="countryNodes"
+        [filter]="true"
+        filterPlaceholder="Search countries and cities..."
+      />
+    </div>
+  </section>
+
+  <!-- ── Custom Template ─────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Custom Node Template</h2>
+    <p class="demo-section-desc">
+      Use <code>ng-template uiTreeNode</code> with an optional <code>uiTreeNodeType</code>
+      to override rendering per node type. Unmatched nodes fall back to the default template.
+    </p>
+    <div class="demo-card">
+      <ui-lib-tree [value]="customTemplateNodes" selectionMode="single">
+        <ng-template uiTreeNode uiTreeNodeType="department" let-node>
+          <span class="demo-dept-node">
+            <i class="pi pi-building"></i>
+            <strong>{{ node.label }}</strong>
+          </span>
+        </ng-template>
+        <ng-template uiTreeNode uiTreeNodeType="tech" let-node>
+          <span class="demo-tech-node">
+            <i class="pi pi-code"></i>
+            {{ node.label }}
+          </span>
+        </ng-template>
+      </ui-lib-tree>
+    </div>
+  </section>
+
+  <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Sizes</h2>
+    <p class="demo-section-desc">
+      Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
+    </p>
+    <div class="demo-card demo-sizes-grid">
+      <div>
+        <p class="demo-size-label">Small</p>
+        <ui-lib-tree [value]="variantNodes" size="sm" selectionMode="single" />
+      </div>
+      <div>
+        <p class="demo-size-label">Medium (default)</p>
+        <ui-lib-tree [value]="variantNodes" size="md" selectionMode="single" />
+      </div>
+      <div>
+        <p class="demo-size-label">Large</p>
+        <ui-lib-tree [value]="variantNodes" size="lg" selectionMode="single" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Variants ────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Variants</h2>
+    <p class="demo-section-desc">
+      The three design variants — <code>material</code>, <code>bootstrap</code>,
+      and <code>minimal</code> — adapt to the active theme.
+    </p>
+    <div class="demo-card demo-variants-grid">
+      <div>
+        <p class="demo-variant-label">Material</p>
+        <ui-lib-tree
+          [value]="variantNodes"
+          variant="material"
+          selectionMode="single"
+          [(selection)]="variantSelection"
+        />
+      </div>
+      <div>
+        <p class="demo-variant-label">Bootstrap</p>
+        <ui-lib-tree
+          [value]="variantNodes"
+          variant="bootstrap"
+          selectionMode="single"
+          [(selection)]="variantSelection"
+        />
+      </div>
+      <div>
+        <p class="demo-variant-label">Minimal</p>
+        <ui-lib-tree
+          [value]="variantNodes"
+          variant="minimal"
+          selectionMode="single"
+          [(selection)]="variantSelection"
+        />
+      </div>
+    </div>
+  </section>
+</div>

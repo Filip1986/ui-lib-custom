@@ -832,8 +832,4 @@ Each component should have two documentation files:
 
 | SplitButton | Combined primary action button with attached command menu | 3 | 8 | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 
-| OrderList | Reorderable list with button controls, filter, DnD, and full keyboard accessibility | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
-
-| OrganizationChart | Hierarchical tree chart with collapsible subtrees, selection, and custom node templates | 3 | - | - | ✅ Complete |
-| PickList | Dual-list transfer component with reorder controls, filter, drag-and-drop, and full keyboard accessibility | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
-| Timeline | Chronological event display with vertical/horizontal layouts, three template slots, and alternate alignment | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+| OrderList | Reorderable list with 
