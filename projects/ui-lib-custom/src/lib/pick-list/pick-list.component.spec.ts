@@ -8,6 +8,7 @@ import {
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { PickListComponent } from './pick-list.component';
 import type {
   PickListMoveToTargetEvent,
@@ -164,7 +165,7 @@ function setup(
 } {
   TestBed.configureTestingModule({
     imports: [PickListHostComponent],
-    providers: [provideZonelessChangeDetection()],
+    providers: [provideZonelessChangeDetection(), provideUiLibIcons()],
   });
 
   const fixture: ComponentFixture<PickListHostComponent> =

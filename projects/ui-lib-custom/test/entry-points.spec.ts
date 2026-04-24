@@ -29,6 +29,7 @@ import type * as UiLibInputMask from 'ui-lib-custom/input-mask';
 import type * as UiLibOrganizationChart from 'ui-lib-custom/organization-chart';
 import type * as UiLibPaginator from 'ui-lib-custom/paginator';
 import type * as UiLibPickList from 'ui-lib-custom/pick-list';
+import type * as UiLibTable from 'ui-lib-custom/table';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -205,5 +206,15 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.PickListTargetHeaderDirective).toBeDefined();
     expect(mod.PickListEmptyDirective).toBeDefined();
     expect(mod.PICK_LIST_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from table', async (): Promise<void> => {
+    const mod: typeof UiLibTable = await import('ui-lib-custom/table');
+    expect(mod.TableComponent).toBeDefined();
+    expect(mod.TableColumnComponent).toBeDefined();
+    expect(mod.TableCaptionDirective).toBeDefined();
+    expect(mod.TableColumnBodyDirective).toBeDefined();
+    expect(mod.TableExpansionDirective).toBeDefined();
+    expect(mod.TABLE_DEFAULTS).toBeDefined();
   });
 });

@@ -82,6 +82,10 @@
       "esm2022": "./esm2022/input-mask/index.mjs",
       "esm": "./esm2022/input-mask/index.mjs"
     },
+    "./table": {
+      "esm2022": "./esm2022/table/index.mjs",
+      "esm": "./esm2022/table/index.mjs"
+    },
     "./speed-dial": {
       "main": "./fesm2022/ui-lib-custom-speed-dial.mjs",
       "module": "./fesm2022/ui-lib-custom-speed-dial.mjs",
@@ -142,6 +146,9 @@
       ],
       "split-button": [
         "./split-button/index.d.ts"
+      ],
+      "table": [
+        "./table/index.d.ts"
       ],
       "testing": [
         "./testing/index.d.ts"

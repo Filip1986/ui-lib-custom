@@ -134,7 +134,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/table',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'Timeline',

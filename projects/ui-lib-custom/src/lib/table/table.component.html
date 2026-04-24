@@ -1,0 +1,287 @@
+<div class="ui-lib-table__wrapper">
+
+  <!-- Caption slot -->
+  @if (captionTemplate()) {
+    <div class="ui-lib-table__caption">
+      <ng-container [ngTemplateOutlet]="captionTemplate()!" />
+    </div>
+  } @else if (caption()) {
+    <div class="ui-lib-table__caption">
+      <span>{{ caption() }}</span>
+    </div>
+  }
+
+  <!-- Scroll container -->
+  <div
+    class="ui-lib-table__scroll-container"
+    [style.max-height]="scrollable() ? scrollHeight() : null"
+  >
+
+    <table
+      class="ui-lib-table__table"
+      role="grid"
+      [attr.aria-label]="ariaLabel()"
+      [attr.aria-rowcount]="totalRecords()"
+    >
+
+      <!-- THEAD -->
+      <thead class="ui-lib-table__thead">
+        @if (headerTemplate()) {
+          <!-- Custom header template -->
+          <ng-container [ngTemplateOutlet]="headerTemplate()!" />
+        } @else {
+          <!-- Auto-generated header row -->
+          <tr class="ui-lib-table__header-row">
+            <!-- Row-expansion toggle column -->
+            @if (expansionTemplate()) {
+              <th class="ui-lib-table__th ui-lib-table__th--expander" scope="col" aria-label="Row expansion"></th>
+            }
+            <!-- Checkbox selection column -->
+            @if (selectionMode() === 'checkbox') {
+              <th class="ui-lib-table__th ui-lib-table__th--checkbox" scope="col">
+                <input
+                  type="checkbox"
+                  class="ui-lib-table__checkbox"
+                  [checked]="allRowsSelected()"
+                  [indeterminate]="someRowsSelected()"
+                  [disabled]="disabled()"
+                  (change)="onHeaderCheckboxChange($event)"
+                  aria-label="Select all rows"
+                />
+              </th>
+            }
+            <!-- Column headers -->
+            @for (column of columns(); track column.field()) {
+              <th
+                [class]="'ui-lib-table__th' +
+                  (column.sortable() ? ' ui-lib-table__th--sortable' : '') +
+                  (sortField() === (column.sortField() ?? column.field()) ? ' ui-lib-table__th--sorted' : '') +
+                  (column.frozen() ? ' ui-lib-table__th--frozen' : '') +
+                  (column.styleClass() ? ' ' + column.styleClass() : '')"
+                [style.width]="column.width()"
+                scope="col"
+                [attr.aria-sort]="column.sortable() ? ariaSortValue(column.sortField() ?? column.field()) : null"
+                (click)="column.sortable() ? onSortClick($event, column) : null"
+                (keydown.enter)="column.sortable() ? onSortClick($any($event), column) : null"
+                (keydown.space)="column.sortable() ? onSortClick($any($event), column) : null"
+                [attr.tabindex]="column.sortable() ? 0 : null"
+                [attr.role]="column.sortable() ? 'columnheader' : null"
+              >
+                @if (column.headerTemplate()) {
+                  <ng-container [ngTemplateOutlet]="column.headerTemplate()!" />
+                } @else {
+                  <span class="ui-lib-table__th-label">{{ column.header() }}</span>
+                }
+                @if (column.sortable()) {
+                  <span class="ui-lib-table__sort-icon" aria-hidden="true">
+                    @if (sortField() === (column.sortField() ?? column.field()) && sortOrder() === 1) {
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__sort-svg">
+                        <path d="M12 19V5M5 12l7-7 7 7"/>
+                      </svg>
+                    } @else if (sortField() === (column.sortField() ?? column.field()) && sortOrder() === -1) {
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__sort-svg">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                      </svg>
+                    } @else {
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__sort-svg ui-lib-table__sort-svg--inactive">
+                        <path d="M8 9l4-4 4 4M8 15l4 4 4-4"/>
+                      </svg>
+                    }
+                    @if (multiSortMode() && multiSortRank(column.sortField() ?? column.field()) !== null) {
+                      <span class="ui-lib-table__sort-badge">{{ multiSortRank(column.sortField() ?? column.field()) }}</span>
+                    }
+                  </span>
+                }
+              </th>
+            }
+          </tr>
+
+          <!-- Column filter row -->
+          @if (hasColumnFilters()) {
+            <tr class="ui-lib-table__filter-row">
+              @if (expansionTemplate()) {
+                <th class="ui-lib-table__th ui-lib-table__th--expander"></th>
+              }
+              @if (selectionMode() === 'checkbox') {
+                <th class="ui-lib-table__th ui-lib-table__th--checkbox"></th>
+              }
+              @for (column of columns(); track column.field()) {
+                <th class="ui-lib-table__th ui-lib-table__th--filter">
+                  @if (column.filterable()) {
+                    @if (column.filterTemplate()) {
+                      <ng-container [ngTemplateOutlet]="column.filterTemplate()!" />
+                    } @else {
+                      <input
+                        type="text"
+                        class="ui-lib-table__filter-input"
+                        [placeholder]="column.filterPlaceholder()"
+                        [disabled]="disabled()"
+                        (input)="onColumnFilterInput($event, column)"
+                        [attr.aria-label]="'Filter by ' + column.header()"
+                      />
+                    }
+                  }
+                </th>
+              }
+            </tr>
+          }
+        }
+      </thead>
+
+      <!-- TBODY -->
+      <tbody class="ui-lib-table__tbody">
+        @if (bodyTemplate()) {
+          <!-- Custom body template -->
+          <ng-container [ngTemplateOutlet]="bodyTemplate()!" />
+        } @else if (displayedRows().length === 0) {
+          <!-- Empty state -->
+          <tr class="ui-lib-table__empty-row">
+            <td
+              class="ui-lib-table__empty-cell"
+              [attr.colspan]="columns().length + (selectionMode() === 'checkbox' ? 1 : 0) + (expansionTemplate() ? 1 : 0)"
+            >
+              @if (emptyTemplate()) {
+                <ng-container
+                  [ngTemplateOutlet]="emptyTemplate()!"
+                  [ngTemplateOutletContext]="emptyContext()"
+                />
+              } @else {
+                <span class="ui-lib-table__empty-message">{{ emptyMessage() }}</span>
+              }
+            </td>
+          </tr>
+        } @else {
+          @for (row of displayedRows(); track trackRow($index, row); let rowIndex = $index) {
+            <!-- Data row -->
+            <tr
+              class="ui-lib-table__row"
+              [class.ui-lib-table__row--selected]="isRowSelected(row)"
+              [class.ui-lib-table__row--expanded]="isRowExpanded(row)"
+              [attr.aria-selected]="selectionMode() ? isRowSelected(row) : null"
+              [attr.aria-expanded]="expansionTemplate() ? isRowExpanded(row) : null"
+              [attr.tabindex]="selectionMode() && selectionMode() !== 'checkbox' ? 0 : null"
+              [attr.role]="selectionMode() ? 'row' : null"
+              (click)="onRowClick($event, row, rowIndex)"
+              (keydown.enter)="onRowClick($any($event), row, rowIndex)"
+              (keydown.space)="onRowClick($any($event), row, rowIndex)"
+            >
+              <!-- Expansion toggle -->
+              @if (expansionTemplate()) {
+                <td class="ui-lib-table__td ui-lib-table__td--expander">
+                  <button
+                    type="button"
+                    class="ui-lib-table__expander-btn"
+                    [class.ui-lib-table__expander-btn--expanded]="isRowExpanded(row)"
+                    (click)="onExpansionToggle($event, row, rowIndex)"
+                    [attr.aria-expanded]="isRowExpanded(row)"
+                    aria-label="Toggle row expansion"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__expander-icon">
+                      @if (isRowExpanded(row)) {
+                        <path d="M6 9l6 6 6-6"/>
+                      } @else {
+                        <path d="M9 6l6 6-6 6"/>
+                      }
+                    </svg>
+                  </button>
+                </td>
+              }
+
+              <!-- Row checkbox -->
+              @if (selectionMode() === 'checkbox') {
+                <td class="ui-lib-table__td ui-lib-table__td--checkbox">
+                  <input
+                    type="checkbox"
+                    class="ui-lib-table__checkbox"
+                    [checked]="isRowSelected(row)"
+                    [disabled]="disabled()"
+                    (change)="onRowCheckboxChange($event, row, rowIndex)"
+                    [attr.aria-label]="'Select row ' + (rowIndex + 1)"
+                  />
+                </td>
+              }
+
+              <!-- Data cells -->
+              @for (column of columns(); track column.field()) {
+                <td
+                  [class]="'ui-lib-table__td' +
+                  (column.frozen() ? ' ui-lib-table__td--frozen' : '') +
+                  (column.styleClass() ? ' ' + column.styleClass() : '')"
+                  [style.width]="column.width()"
+                >
+                  @if (column.bodyTemplate()) {
+                    <ng-container
+                      [ngTemplateOutlet]="column.bodyTemplate()!"
+                      [ngTemplateOutletContext]="cellContext(row, rowIndex)"
+                    />
+                  } @else {
+                    {{ resolveField(row, column.field()) }}
+                  }
+                </td>
+              }
+            </tr>
+
+            <!-- Expansion row -->
+            @if (expansionTemplate() && isRowExpanded(row)) {
+              <tr class="ui-lib-table__expansion-row">
+                <td
+                  class="ui-lib-table__expansion-cell"
+                  [attr.colspan]="columns().length + (selectionMode() === 'checkbox' ? 1 : 0) + 1"
+                >
+                  <ng-container
+                    [ngTemplateOutlet]="expansionTemplate()!"
+                    [ngTemplateOutletContext]="expansionContext(row, rowIndex)"
+                  />
+                </td>
+              </tr>
+            }
+          }
+        }
+      </tbody>
+
+      <!-- TFOOT -->
+      @if (hasFooter()) {
+        <tfoot class="ui-lib-table__tfoot">
+          @if (footerTemplate()) {
+            <ng-container [ngTemplateOutlet]="footerTemplate()!" />
+          } @else {
+            <tr class="ui-lib-table__footer-row">
+              @if (expansionTemplate()) {
+                <td class="ui-lib-table__td"></td>
+              }
+              @if (selectionMode() === 'checkbox') {
+                <td class="ui-lib-table__td"></td>
+              }
+              @for (column of columns(); track column.field()) {
+                <td class="ui-lib-table__td ui-lib-table__td--footer">
+                  @if (column.footerTemplate()) {
+                    <ng-container [ngTemplateOutlet]="column.footerTemplate()!" />
+                  } @else {
+                    {{ column.footer() }}
+                  }
+                </td>
+              }
+            </tr>
+          }
+        </tfoot>
+      }
+
+    </table>
+  </div>
+
+  <!-- Paginator -->
+  @if (paginator()) {
+    <ui-lib-paginator
+      class="ui-lib-table__paginator"
+      [totalRecords]="totalRecords()"
+      [(rows)]="rows"
+      [(first)]="first"
+      [rowsPerPageOptions]="rowsPerPageOptions()"
+      [currentPageReportTemplate]="currentPageReportTemplate()"
+      [showCurrentPageReport]="true"
+      [variant]="resolvedVariant()"
+      (pageChanged)="onPageChange($any($event))"
+    />
+  }
+
+</div>

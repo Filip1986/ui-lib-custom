@@ -1,0 +1,224 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1 class="demo-title">Table</h1>
+    <p class="demo-description">
+      The Table component displays tabular data with support for sorting, filtering,
+      selection, pagination, row expansion, and three visual variants.
+    </p>
+  </div>
+
+  <!-- Controls -->
+  <div class="demo-controls">
+    <div class="control-group">
+      <label class="control-label">Variant</label>
+      <div class="control-buttons">
+        @for (v of variants; track v) {
+          <button
+            class="control-btn"
+            [class.control-btn--active]="activeVariant() === v"
+            (click)="activeVariant.set(v)"
+          >{{ v }}</button>
+        }
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Selection</label>
+      <div class="control-buttons">
+        @for (mode of selectionModes; track mode.value) {
+          <button
+            class="control-btn"
+            [class.control-btn--active]="selectionMode() === mode.value"
+            (click)="selectionMode.set(mode.value)"
+          >{{ mode.label }}</button>
+        }
+      </div>
+    </div>
+    <div class="control-toggles">
+      <label class="toggle-label">
+        <input type="checkbox" [checked]="stripedRows()" (change)="stripedRows.set(!stripedRows())" />
+        Striped rows
+      </label>
+      <label class="toggle-label">
+        <input type="checkbox" [checked]="showGridlines()" (change)="showGridlines.set(!showGridlines())" />
+        Show gridlines
+      </label>
+      <label class="toggle-label">
+        <input type="checkbox" [checked]="rowHover()" (change)="rowHover.set(!rowHover())" />
+        Row hover
+      </label>
+      <label class="toggle-label">
+        <input type="checkbox" [checked]="paginatorEnabled()" (change)="paginatorEnabled.set(!paginatorEnabled())" />
+        Paginator
+      </label>
+    </div>
+  </div>
+
+  <!-- Global filter input -->
+  <div class="demo-section">
+    <input
+      type="text"
+      class="demo-search"
+      placeholder="Global search across all columns..."
+      [value]="globalFilterValue()"
+      (input)="globalFilterValue.set($any($event.target).value)"
+    />
+    @if (lastSortEvent() !== '—') {
+      <p class="demo-sort-info">Last sort: <strong>{{ lastSortEvent() }}</strong></p>
+    }
+  </div>
+
+  <!-- Main demo table -->
+  <ui-lib-table
+    [value]="products()"
+    dataKey="id"
+    [variant]="activeVariant()"
+    [selectionMode]="selectionMode()"
+    [(selection)]="selectedProducts"
+    [(globalFilter)]="globalFilterValue"
+    [globalFilterFields]="['name', 'category', 'status']"
+    [(expandedRowKeys)]="expandedRowKeys"
+    [paginator]="paginatorEnabled()"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 12]"
+    [stripedRows]="stripedRows()"
+    [showGridlines]="showGridlines()"
+    [rowHover]="rowHover()"
+    (sorted)="onSortChange($event)"
+    styleClass="demo-table"
+  >
+    <!-- Caption slot -->
+    <ng-template uiTableCaption>
+      <div class="table-caption-row">
+        <span class="table-caption-title">Product Inventory</span>
+        <span class="table-caption-count">{{ products().length }} products</span>
+      </div>
+    </ng-template>
+
+    <!-- Expansion template -->
+    <ng-template uiTableExpansion let-row>
+      <div class="expansion-detail">
+        <div class="expansion-grid">
+          <div class="expansion-item">
+            <span class="expansion-label">Product ID</span>
+            <span class="expansion-value">#{{ row.id }}</span>
+          </div>
+          <div class="expansion-item">
+            <span class="expansion-label">Category</span>
+            <span class="expansion-value">{{ row.category }}</span>
+          </div>
+          <div class="expansion-item">
+            <span class="expansion-label">Quantity in stock</span>
+            <span class="expansion-value">{{ row.quantity }}</span>
+          </div>
+          <div class="expansion-item">
+            <span class="expansion-label">Rating</span>
+            <span class="expansion-value expansion-stars">{{ stars(row.rating) }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Column: Name -->
+    <ui-lib-table-column field="name" header="Product" [sortable]="true" [filterable]="true" filterPlaceholder="Filter name...">
+      <ng-template uiTableColumnBody let-row>
+        <div class="product-name-cell">
+          <span class="product-name">{{ row.name }}</span>
+          <span class="product-category">{{ row.category }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-table-column>
+
+    <!-- Column: Price -->
+    <ui-lib-table-column field="price" header="Price" [sortable]="true" width="120px">
+      <ng-template uiTableColumnBody let-row>
+        <span class="price-cell">{{ formatPrice(row.price) }}</span>
+      </ng-template>
+    </ui-lib-table-column>
+
+    <!-- Column: Quantity -->
+    <ui-lib-table-column field="quantity" header="Qty" [sortable]="true" width="80px" />
+
+    <!-- Column: Status -->
+    <ui-lib-table-column field="status" header="Status" width="140px">
+      <ng-template uiTableColumnBody let-row>
+        <span class="status-badge" [class]="'status-badge--' + statusSeverity(row.status)">
+          {{ row.status }}
+        </span>
+      </ng-template>
+    </ui-lib-table-column>
+
+    <!-- Column: Rating -->
+    <ui-lib-table-column field="rating" header="Rating" [sortable]="true" width="110px">
+      <ng-template uiTableColumnBody let-row>
+        <span class="stars" title="{{ row.rating }}/5">{{ stars(row.rating) }}</span>
+      </ng-template>
+    </ui-lib-table-column>
+
+    <!-- Empty state -->
+    <ng-template uiTableEmpty let-ctx>
+      <div class="custom-empty">
+        @if (ctx.filtered) {
+          <span>No products match your search.</span>
+        } @else {
+          <span>No products available.</span>
+        }
+      </div>
+    </ng-template>
+  </ui-lib-table>
+
+  <!-- Selection readout -->
+  @if (selectionMode() && selectionMode() !== null) {
+    <div class="demo-selection-readout">
+      @if (selectionMode() === 'single') {
+        @if (selectedProducts()) {
+          <p>Selected: <strong>{{ $any(selectedProducts())?.name }}</strong></p>
+        } @else {
+          <p>No row selected.</p>
+        }
+      } @else {
+        <p>Selected <strong>{{ $any(selectedProducts())?.length ?? 0 }}</strong> product(s).</p>
+      }
+    </div>
+  }
+
+  <!-- --------------------------------------------------------- -->
+  <!-- Variant showcase (read-only) -->
+  <!-- --------------------------------------------------------- -->
+
+  <h2 class="demo-section-title">All Variants</h2>
+  @for (v of variants; track v) {
+    <div class="variant-block">
+      <h3 class="variant-label">{{ v }}</h3>
+      <ui-lib-table
+        [value]="products().slice(0, 4)"
+        dataKey="id"
+        [variant]="v"
+        [stripedRows]="true"
+      >
+        <ui-lib-table-column field="name"     header="Name"     [sortable]="true" />
+        <ui-lib-table-column field="price"    header="Price"    [sortable]="true" />
+        <ui-lib-table-column field="status"   header="Status"   />
+      </ui-lib-table>
+    </div>
+  }
+
+  <!-- --------------------------------------------------------- -->
+  <!-- Scrollable fixed-height table -->
+  <!-- --------------------------------------------------------- -->
+
+  <h2 class="demo-section-title">Scrollable Table</h2>
+  <ui-lib-table
+    [value]="products()"
+    dataKey="id"
+    [scrollable]="true"
+    scrollHeight="250px"
+    [variant]="activeVariant()"
+    [stripedRows]="true"
+  >
+    <ui-lib-table-column field="id"       header="#"        width="60px" />
+    <ui-lib-table-column field="name"     header="Name"     [sortable]="true" />
+    <ui-lib-table-column field="category" header="Category" [sortable]="true" />
+    <ui-lib-table-column field="price"    header="Price"    [sortable]="true" />
+    <ui-lib-table-column field="quantity" header="Qty" />
+  </ui-lib-table>
+</div>

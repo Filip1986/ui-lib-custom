@@ -110,6 +110,10 @@ npm run test:a11y:e2e              # Playwright a11y e2e (auto-starts demo)
 npm run test:a11y:all              # Full a11y pass + report
 npm run verify:tree-shaking        # Tree-shaking guard
 npm run storybook                  # Storybook (cross-env sets NODE_ENV)
+
+# Lint — run after every component creation or edit
+npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0
+npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 ```
 
 **Windows shell note:** If PowerShell blocks `.ps1` shims, run `.cmd` versions from `bash.exe` (`npx.cmd`, `npm.cmd`). Record any workarounds in the session handoff.
@@ -126,8 +130,8 @@ npm run storybook                  # Storybook (cross-env sets NODE_ENV)
 6. Update `projects/ui-lib-custom/package.json` `exports` + `typesVersions`.
 7. Add entry-point import test to `projects/ui-lib-custom/test/entry-points.spec.ts`.
 8. Update primary `public-api.ts` only if explicit primary-barrel backward compatibility is intended.
-9. After every prompt: run `ng build ui-lib-custom` and update `AI_AGENT_CONTEXT.md`.
-10. Final verification: build + tests + demo + lint + entry-point spec all green.
+9. After every prompt: **run ESLint first, then build** — `npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0`, then `ng build ui-lib-custom`, then update `AI_AGENT_CONTEXT.md`.
+10. Final verification: **lint** + build + tests + demo + entry-point spec all green.
 
 ### Per-component final checklist (before marking complete)
 
@@ -140,6 +144,7 @@ npm run storybook                  # Storybook (cross-env sets NODE_ENV)
 - Three variants: `material`, `bootstrap`, `minimal`
 - Size tokens: `sm` / `md` / `lg`
 - Secondary entry point wired and build passing
+- **`npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0` passes**
 - Unit tests with `provideZonelessChangeDetection()` pass
 - A11y: ARIA roles, keyboard nav, focus management
 - Demo page created and route verified

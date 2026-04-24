@@ -41,6 +41,7 @@ Run through this mentally before submitting any output.
 
 #### Active checks (enforce on every task)
 
+- [ ] **ESLint passes with zero errors and zero warnings** — run `npx eslint <changed-files> --max-warnings 0` before declaring any task complete. This is non-negotiable: a passing build with lint errors is not a passing build.
 - [ ] `ViewEncapsulation.None` present on every library component
 - [ ] All return types are explicit — no inference on class members, public APIs, or `computed()`
 - [ ] Cross-entry-point imports use package paths (`ui-lib-custom/theme`), not relative paths

@@ -226,25 +226,40 @@ When generating the multi-prompt sequence for the agent, follow this established
 
 ## Step 8 — Build & Verification
 
-After every prompt completes, the agent must:
+After every prompt completes, the agent must run **all four** of the following — in order — and fix any failures before proceeding:
 
 ```bash
-# Build the library
+# 1. Lint — must pass with zero errors AND zero warnings
+npx eslint projects/ui-lib-custom/src/lib/<component>/ projects/demo/src/app/pages/<component>/ --max-warnings 0
+
+# 2. Build the library
 ng build ui-lib-custom
 
-# Run tests for the new component
+# 3. Run tests for the new component
 npx jest --testPathPatterns="<component>" --no-cache
 
-# Serve the demo app to visually verify
+# 4. Serve the demo app to visually verify
 ng serve demo
 ```
+
+**Lint is mandatory.** A build that passes but has lint errors is not considered verified. Always fix lint errors before running the build — TypeScript type errors surface in both steps.
+
+### Common lint failures to watch for:
+
+- **`@typescript-eslint/typedef`** — every `const` variable in `.spec.ts` files needs an explicit type annotation. This is the most common source of bulk errors in test files.
+- **`@typescript-eslint/no-unsafe-assignment` / `no-unsafe-call` / `no-unsafe-member-access`** — `nativeElement` is typed `any` in Angular. Always cast: `(fixture.nativeElement as HTMLElement).querySelector<HTMLElement>(...)`. Use typed helper functions at the top of spec files to avoid repeating this pattern.
+- **`@typescript-eslint/explicit-function-return-type`** — every method, getter, arrow function in `.map()` / `.forEach()` / `.filter()` needs an explicit return type.
+- **`@typescript-eslint/consistent-type-imports`** — any import used only as a type must use `import type { ... }`.
+- **`@typescript-eslint/no-unused-vars`** — unused imports and variables. Allowed only when prefixed with `_`.
+- **`@typescript-eslint/no-unnecessary-condition`** — optional chains (`?.`) are flagged if the left side cannot be null per TypeScript. Do not add `?.` defensively; match what the types actually say.
+- **`jsdoc/require-description`** — JSDoc blocks must have a description. Either add one or remove the empty JSDoc block entirely.
 
 ### Common build failures to watch for:
 
 - **`Cannot destructure property 'pos'`** — cross-entry-point relative import. Fix: use package path.
 - **Source file ownership conflict** — primary `public-api.ts` re-exports something a secondary entry point owns. Fix: remove the re-export from primary.
 - **Missing export** — forgot to add to `index.ts` barrel. Fix: add it.
-- **Implicit return type** — ESLint will catch this. Fix: add explicit return types to every method and function.
+- **Implicit return type** — ESLint will also catch this. Fix: add explicit return types to every method and function.
 
 ---
 
@@ -270,5 +285,6 @@ Before marking a component as complete:
 - [ ] Accessibility: ARIA roles, keyboard nav, focus management documented and tested
 - [ ] `AI_AGENT_CONTEXT.md` component inventory updated
 - [ ] Demo page created and visually verified
+- [ ] **`npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0` passes** — zero errors, zero warnings
 - [ ] `ng build ui-lib-custom` succeeds with zero warnings
 - [ ] Active workspace shell used for all terminal commands

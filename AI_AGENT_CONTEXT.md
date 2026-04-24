@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** OrderList fully complete; resuming backlog
+- **Active focus:** Table fully complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
@@ -34,6 +34,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `OrderList` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
 - `OrganizationChart` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
 - `Paginator` -> ✅ complete (implementation/tests/demo/docs/entry-point/final QA complete)
+- `Table` -> ✅ complete (implementation/tests/demo/entry-point/final QA complete — docs pending)
 - Documentation gaps still tracked for: `Input`, `Select`, `Card`, `Layout`
 - Pending secondary entry points: `icon-button`, `alert`
 
@@ -55,6 +56,20 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
 ---
+
+Date: 2026-04-24
+Changed:
+  - projects/ui-lib-custom/src/lib/table/table.component.ts (removed unused selArray variable; stripped trailing null bytes)
+  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts (full rewrite: all 287 lint errors fixed — typed DOM queries via HTMLElement casts, typed helpers, DebugElement annotation, removed unused imports, fixed consistent-type-imports; 51/51 tests still pass)
+  - projects/demo/src/app/pages/table/table-demo.component.ts (repaired truncation; fixed empty JSDoc; exhaustive switch; lint clean)
+  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.html (restored from git HEAD after truncation)
+  - CLAUDE.md (lint step added to Key Commands and component checklist)
+  - COMPONENT_CREATION_GUIDE.md (Step 8 expanded with mandatory lint command, common lint failure patterns; Step 9 checklist item added)
+  - LIBRARY_CONVENTIONS.md (ESLint added as first active check in Code Quality Checklist)
+State: Table fully lint-clean (0 errors, 0 warnings, --max-warnings 0). Build passing. 51/51 tests. Lint now mandated in all docs.
+Verification: npx eslint projects/ui-lib-custom/src/lib/table/ projects/demo/src/app/pages/table/ --max-warnings 0 (CLEAN), npx jest --testPathPatterns=table (51/51), ng build ui-lib-custom (✔ all entry points).
+Terminal notes: Write/Edit tools produce trailing null bytes when editing large files — always strip with Python `data.rstrip(b'\x00')` after any Edit tool use on files >800 lines. git checkout HEAD -- <file> fails with "Operation not permitted" in sandbox; workaround: git show HEAD:<file> > /tmp/restore && cp /tmp/restore <file>.
+Next step: Write docs/reference/components/TABLE.md and update docs/reference/components/README.md, then begin knip baseline + dead-code cleanup.
 
 Date: 2026-04-24
 Changed:
