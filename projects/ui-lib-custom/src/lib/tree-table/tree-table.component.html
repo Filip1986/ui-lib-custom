@@ -1,0 +1,225 @@
+<!-- Global filter input -->
+@if (globalFilter()) {
+  <div class="uilib-tree-table-global-filter">
+    <input
+      type="text"
+      class="uilib-tree-table-filter-input"
+      [placeholder]="globalFilterPlaceholder()"
+      [value]="globalFilterText()"
+      aria-label="Filter table"
+      (input)="onGlobalFilterInput($event)"
+    />
+    <span class="uilib-tree-table-filter-icon pi pi-search" aria-hidden="true"></span>
+  </div>
+}
+
+<!-- Caption -->
+@if (caption()) {
+  <div class="uilib-tree-table-caption">{{ caption() }}</div>
+}
+
+<!-- Scroll wrapper -->
+<div
+  class="uilib-tree-table-scroll-wrapper"
+  [class.uilib-tree-table-scroll-wrapper--active]="scrollable()"
+  [style.max-height]="scrollable() ? scrollHeight() : null"
+>
+  <table
+    class="uilib-tree-table-table"
+    role="treegrid"
+    [attr.aria-label]="caption() || 'Tree table'"
+  >
+    <!-- Column width hints -->
+    <colgroup>
+      @if (selectionMode() === 'checkbox') {
+        <col class="uilib-tree-table-col-selection" />
+      }
+      @for (column of columns(); track column.field()) {
+        <col [style.width]="column.width() ?? null" />
+      }
+    </colgroup>
+
+    <!-- Header -->
+    <thead class="uilib-tree-table-thead">
+      <tr>
+        @if (selectionMode() === 'checkbox') {
+          <th
+            scope="col"
+            class="uilib-tree-table-th uilib-tree-table-th-selection"
+            aria-label="Select all rows"
+          >
+            <span
+              class="uilib-tree-table-checkbox"
+              [class.uilib-tree-table-checkbox--checked]="isAllSelected()"
+              [class.uilib-tree-table-checkbox--partial]="isSomeSelected()"
+              role="checkbox"
+              [attr.aria-checked]="isSomeSelected() ? 'mixed' : isAllSelected()"
+              tabindex="0"
+              (click)="handleSelectAll($event)"
+              (keydown.enter)="handleSelectAll($event)"
+              (keydown.space)="$event.preventDefault(); handleSelectAll($event)"
+            ></span>
+          </th>
+        }
+        @for (column of columns(); track column.field()) {
+          <th
+            scope="col"
+            class="uilib-tree-table-th"
+            [class.uilib-tree-table-th-sortable]="column.sortable()"
+            [class.uilib-tree-table-th-sorted]="sortField() === column.field() && sortOrder() !== 0"
+            [class.uilib-tree-table-th-frozen]="column.frozen()"
+            [class]="column.styleClass() ?? ''"
+            [attr.aria-sort]="
+              column.sortable()
+                ? (sortField() === column.field()
+                    ? (sortOrder() === 1 ? 'ascending' : 'descending')
+                    : 'none')
+                : null
+            "
+            (click)="column.sortable() ? handleSort(column.field()) : null"
+            (keydown.enter)="column.sortable() ? handleSort(column.field()) : null"
+            [attr.tabindex]="column.sortable() ? '0' : null"
+          >
+            @if (column.headerTemplate(); as headerTpl) {
+              <ng-container [ngTemplateOutlet]="headerTpl" />
+            } @else {
+              <span class="uilib-tree-table-th-content">{{ column.header() }}</span>
+              @if (column.sortable()) {
+                <span
+                  class="uilib-tree-table-sort-icon"
+                  [class]="getSortIconClass(column.field())"
+                  aria-hidden="true"
+                ></span>
+              }
+            }
+          </th>
+        }
+      </tr>
+    </thead>
+
+    <!-- Body -->
+    <tbody class="uilib-tree-table-tbody">
+      @for (flatNode of flatVisibleNodes(); track flatNode.node.key) {
+        <tr
+          class="uilib-tree-table-row"
+          [class.uilib-tree-table-row--selected]="isSelected(flatNode.node)"
+          [class.uilib-tree-table-row--selectable]="
+            selectionMode() !== null &&
+            selectionMode() !== 'checkbox' &&
+            flatNode.node.selectable !== false
+          "
+          [class]="flatNode.node.styleClass ?? ''"
+          [attr.aria-selected]="
+            selectionMode() && selectionMode() !== 'checkbox'
+              ? isSelected(flatNode.node)
+              : null
+          "
+          [attr.aria-expanded]="
+            hasChildren(flatNode.node) ? isExpanded(flatNode.node) : null
+          "
+          [attr.aria-level]="flatNode.depth + 1"
+          role="row"
+          tabindex="0"
+          (click)="handleRowClick($event, flatNode.node)"
+          (keydown.enter)="handleRowClick($event, flatNode.node)"
+          (keydown.space)="$event.preventDefault(); handleRowClick($event, flatNode.node)"
+        >
+          <!-- Checkbox column -->
+          @if (selectionMode() === 'checkbox') {
+            <td class="uilib-tree-table-td uilib-tree-table-td-selection">
+              <span
+                class="uilib-tree-table-checkbox"
+                [class.uilib-tree-table-checkbox--checked]="isSelected(flatNode.node)"
+                [class.uilib-tree-table-checkbox--partial]="isPartiallySelected(flatNode.node)"
+                role="checkbox"
+                [attr.aria-checked]="
+                  isPartiallySelected(flatNode.node)
+                    ? 'mixed'
+                    : isSelected(flatNode.node)
+                "
+                tabindex="-1"
+                (click)="handleCheckboxToggle($event, flatNode.node)"
+              ></span>
+            </td>
+          }
+
+          <!-- Data columns -->
+          @for (column of columns(); track column.field(); let colIndex = $index) {
+            <td
+              class="uilib-tree-table-td"
+              [class.uilib-tree-table-td-frozen]="column.frozen()"
+              [class]="column.styleClass() ?? ''"
+            >
+              <!-- Expander cell: indent + toggle button -->
+              @if (colIndex === expanderColumnIndex()) {
+                <span
+                  class="uilib-tree-table-indent"
+                  [style.width.rem]="flatNode.depth * 1.5"
+                  aria-hidden="true"
+                ></span>
+                @if (hasChildren(flatNode.node)) {
+                  <button
+                    type="button"
+                    class="uilib-tree-table-toggle"
+                    [class.uilib-tree-table-toggle--expanded]="isExpanded(flatNode.node)"
+                    [attr.aria-label]="isExpanded(flatNode.node) ? 'Collapse row' : 'Expand row'"
+                    tabindex="-1"
+                    (click)="handleToggle($event, flatNode.node)"
+                  >
+                    <span class="uilib-tree-table-toggle-icon" aria-hidden="true"></span>
+                  </button>
+                } @else {
+                  <span class="uilib-tree-table-leaf-spacer" aria-hidden="true"></span>
+                }
+              }
+
+              <!-- Cell content: custom template or resolved value -->
+              @if (column.bodyTemplate(); as bodyTpl) {
+                <ng-container
+                  [ngTemplateOutlet]="bodyTpl"
+                  [ngTemplateOutletContext]="{
+                    $implicit: flatNode.node,
+                    rowData: flatNode.node.data
+                  }"
+                />
+              } @else {
+                {{ getCellValue(flatNode.node, column.field()) }}
+              }
+            </td>
+          }
+        </tr>
+      } @empty {
+        <tr class="uilib-tree-table-row-empty">
+          <td
+            class="uilib-tree-table-empty-message"
+            [attr.colspan]="
+              columns().length + (selectionMode() === 'checkbox' ? 1 : 0)
+            "
+          >
+            No records found
+          </td>
+        </tr>
+      }
+    </tbody>
+
+    <!-- Footer -->
+    @if (hasFooter()) {
+      <tfoot class="uilib-tree-table-tfoot">
+        <tr>
+          @if (selectionMode() === 'checkbox') {
+            <td class="uilib-tree-table-td uilib-tree-table-td-selection"></td>
+          }
+          @for (column of columns(); track column.field()) {
+            <td class="uilib-tree-table-td-footer" [class]="column.styleClass() ?? ''">
+              @if (column.footerTemplate(); as footerTpl) {
+                <ng-container [ngTemplateOutlet]="footerTpl" />
+              } @else {
+                {{ column.footer() }}
+              }
+            </td>
+          }
+        </tr>
+      </tfoot>
+    }
+  </table>
+</div>

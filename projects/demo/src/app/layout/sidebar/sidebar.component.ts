@@ -152,7 +152,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/tree-table',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'Autocomplete',

@@ -33,6 +33,7 @@ import type * as UiLibTable from 'ui-lib-custom/table';
 import type * as UiLibTimeline from 'ui-lib-custom/timeline';
 
 import type * as UiLibTree from 'ui-lib-custom/tree';
+import type * as UiLibTreeTable from 'ui-lib-custom/tree-table';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -235,5 +236,13 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.Tree).toBeDefined();
     expect(mod.TreeNodeTemplateDirective).toBeDefined();
     expect(mod.TREE_CONTEXT).toBeDefined();
+  });
+
+  it('should import from tree-table', async (): Promise<void> => {
+    const mod: typeof UiLibTreeTable = await import('ui-lib-custom/tree-table');
+    expect(mod.TreeTableComponent).toBeDefined();
+    expect(mod.TreeTableColumnComponent).toBeDefined();
+    expect(mod.TreeTableColumnBodyDirective).toBeDefined();
+    expect(mod.TREE_TABLE_DEFAULTS).toBeDefined();
   });
 });

@@ -112,6 +112,10 @@
     "./tree": {
       "esm2022": "./esm2022/tree/index.mjs",
       "esm": "./esm2022/tree/index.mjs"
+    },
+    "./tree-table": {
+      "esm2022": "./esm2022/tree-table/index.mjs",
+      "esm": "./esm2022/tree-table/index.mjs"
     }
   },
   "typesVersions": {
@@ -166,6 +170,9 @@
       ],
       "tree": [
         "./tree/index.d.ts"
+      ],
+      "tree-table": [
+        "./tree-table/index.d.ts"
       ]
     }
   }

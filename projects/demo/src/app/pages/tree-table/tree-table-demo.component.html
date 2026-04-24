@@ -1,0 +1,270 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1>TreeTable</h1>
+    <p class="demo-description">
+      Hierarchical data displayed as an expandable table. Supports sorting, global filter,
+      single / multiple / checkbox selection, custom cell templates, and all three design variants.
+    </p>
+  </div>
+
+  <!-- ─── Variant switcher ────────────────────────────────────────────────── -->
+  <div class="demo-controls">
+    <div class="demo-control-group">
+      <span class="demo-control-label">Variant</span>
+      <div class="demo-button-group">
+        @for (v of ['material', 'bootstrap', 'minimal']; track v) {
+          <button
+            type="button"
+            class="demo-btn"
+            [class.demo-btn--active]="activeVariant() === v"
+            (click)="setVariant($any(v))"
+          >{{ v }}</button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCENARIO 1 — Basic file system tree table
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Basic — File System</h2>
+    <p class="demo-section-description">
+      A three-level file-system tree. The <code>name</code> column is the expander column.
+      Click the toggle arrows to expand or collapse folders.
+    </p>
+
+    <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
+      <ui-lib-tree-table-column field="name"  header="Name"  [expander]="true" width="40%" />
+      <ui-lib-tree-table-column field="size"  header="Size"  width="15%" />
+      <ui-lib-tree-table-column field="type"  header="Type"  width="20%" />
+      <ui-lib-tree-table-column field="date"  header="Modified" />
+    </ui-lib-tree-table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCENARIO 2 — Sorting
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Sorting</h2>
+    <p class="demo-section-description">
+      Click any sortable column header to cycle: unsorted → ascending → descending → unsorted.
+      Sorting is applied within each group of siblings independently.
+    </p>
+
+    <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
+      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" [sortable]="true" width="40%" />
+      <ui-lib-tree-table-column field="size" header="Size" [sortable]="true" width="15%" />
+      <ui-lib-tree-table-column field="type" header="Type" [sortable]="true" width="20%" />
+      <ui-lib-tree-table-column field="date" header="Modified" [sortable]="true" />
+    </ui-lib-tree-table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCENARIO 3 — Global filter
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Global Filter</h2>
+    <p class="demo-section-description">
+      Type in the search box to filter rows. Parent nodes remain visible when any of
+      their descendants match the search text.
+    </p>
+
+    <ui-lib-tree-table
+      [value]="fileSystemNodes"
+      [variant]="activeVariant()"
+      [globalFilter]="true"
+      globalFilterPlaceholder="Search files and folders..."
+    >
+      <ui-lib-tree-table-column field="name"  header="Name"  [expander]="true" width="40%" />
+      <ui-lib-tree-table-column field="size"  header="Size"  width="15%" />
+      <ui-lib-tree-table-column field="type"  header="Type"  width="20%" />
+      <ui-lib-tree-table-column field="date"  header="Modified" />
+    </ui-lib-tree-table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCENARIO 4 — Selection modes
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Selection Modes</h2>
+    <p class="demo-section-description">
+      Switch between single, multiple, and checkbox selection. Checkbox mode cascades
+      selection to all descendant rows and shows a "partial" state on parents.
+    </p>
+
+    <div class="demo-controls demo-controls--inline">
+      <div class="demo-control-group">
+        <span class="demo-control-label">Mode</span>
+        <div class="demo-button-group">
+          @for (m of ['single', 'multiple', 'checkbox', null]; track m) {
+            <button
+              type="button"
+              class="demo-btn demo-btn--sm"
+              [class.demo-btn--active]="selectionMode() === m"
+              (click)="setSelectionMode($any(m))"
+            >{{ m ?? 'none' }}</button>
+          }
+        </div>
+      </div>
+      <div class="demo-selection-info">
+        <span class="demo-selection-label">Selected:</span>
+        <code>{{ getSelectionLabel() }}</code>
+      </div>
+    </div>
+
+    @if (selectionMode() === 'single') {
+      <ui-lib-tree-table
+        [value]="fileSystemNodes"
+        [variant]="activeVariant()"
+        selectionMode="single"
+        [(selection)]="singleSelection"
+      >
+        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="size" header="Size" width="15%" />
+        <ui-lib-tree-table-column field="type" header="Type" />
+      </ui-lib-tree-table>
+    }
+
+    @if (selectionMode() === 'multiple') {
+      <ui-lib-tree-table
+        [value]="fileSystemNodes"
+        [variant]="activeVariant()"
+        selectionMode="multiple"
+        [(selection)]="multipleSelection"
+      >
+        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="size" header="Size" width="15%" />
+        <ui-lib-tree-table-column field="type" header="Type" />
+      </ui-lib-tree-table>
+    }
+
+    @if (selectionMode() === 'checkbox') {
+      <ui-lib-tree-table
+        [value]="fileSystemNodes"
+        [variant]="activeVariant()"
+        selectionMode="checkbox"
+        [(selection)]="checkboxSelection"
+      >
+        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="size" header="Size" width="15%" />
+        <ui-lib-tree-table-column field="type" header="Type" />
+      </ui-lib-tree-table>
+    }
+
+    @if (selectionMode() === null) {
+      <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
+        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="size" header="Size" width="15%" />
+        <ui-lib-tree-table-column field="type" header="Type" />
+      </ui-lib-tree-table>
+    }
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCENARIO 5 — Custom cell templates
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Custom Cell Templates</h2>
+    <p class="demo-section-description">
+      Use <code>[uiTreeTableColumnBody]</code> to inject custom HTML into any cell.
+      The template receives the full <code>TreeTableNode</code> as <code>$implicit</code>.
+    </p>
+
+    <ui-lib-tree-table [value]="fileSystemNodes" [variant]="activeVariant()">
+      <!-- Name column with icon -->
+      <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="45%">
+        <ng-template uiTreeTableColumnBody let-node>
+          <span
+            class="demo-file-icon"
+            [class]="getTypeIconClass(node.data?.['type'])"
+            aria-hidden="true"
+          ></span>
+          <span>{{ node.data?.['name'] }}</span>
+        </ng-template>
+      </ui-lib-tree-table-column>
+
+      <!-- Size with badge styling -->
+      <ui-lib-tree-table-column field="size" header="Size" width="15%">
+        <ng-template uiTreeTableColumnBody let-node>
+          @if (node.data?.['size'] !== '--') {
+            <span class="demo-size-badge">{{ node.data?.['size'] }}</span>
+          }
+        </ng-template>
+      </ui-lib-tree-table-column>
+
+      <!-- Type with color-coded tag -->
+      <ui-lib-tree-table-column field="type" header="Type">
+        <ng-template uiTreeTableColumnBody let-node>
+          <span
+            class="demo-type-tag"
+            [class]="'demo-type-tag--' + (node.data?.['type'] === 'Folder' ? 'folder' : 'file')"
+          >{{ node.data?.['type'] }}</span>
+        </ng-template>
+      </ui-lib-tree-table-column>
+
+      <ui-lib-tree-table-column field="date" header="Modified" />
+    </ui-lib-tree-table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCENARIO 6 — Organisation data + all features combined
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Organisation Data — All Features</h2>
+    <p class="demo-section-description">
+      Sorting, global filter, and checkbox selection combined. Uses a different
+      data shape to demonstrate field flexibility.
+    </p>
+
+    <ui-lib-tree-table
+      [value]="orgNodes"
+      [variant]="activeVariant()"
+      selectionMode="checkbox"
+      [globalFilter]="true"
+      globalFilterPlaceholder="Search departments..."
+    >
+      <ui-lib-tree-table-column
+        field="department"
+        header="Department"
+        [expander]="true"
+        [sortable]="true"
+        width="35%"
+      />
+      <ui-lib-tree-table-column
+        field="headcount"
+        header="Headcount"
+        [sortable]="true"
+        width="15%"
+      />
+      <ui-lib-tree-table-column
+        field="budget"
+        header="Budget"
+        [sortable]="true"
+        width="20%"
+      />
+      <ui-lib-tree-table-column field="location" header="Location" />
+    </ui-lib-tree-table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCENARIO 7 — Sizes
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Sizes</h2>
+    <p class="demo-section-description">Three density levels: sm, md (default), and lg.</p>
+
+    @for (size of ['sm', 'md', 'lg']; track size) {
+      <h3 class="demo-subsection-title">{{ size }}</h3>
+      <ui-lib-tree-table
+        [value]="fileSystemNodes"
+        [variant]="activeVariant()"
+        [size]="$any(size)"
+      >
+        <ui-lib-tree-table-column field="name" header="Name" [expander]="true" width="40%" />
+        <ui-lib-tree-table-column field="size" header="Size" width="15%" />
+        <ui-lib-tree-table-column field="type" header="Type" />
+      </ui-lib-tree-table>
+    }
+  </section>
+</div>

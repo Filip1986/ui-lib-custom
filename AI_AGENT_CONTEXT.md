@@ -27,6 +27,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ### Component/Docs Delta (Active Only)
 
 - `Tree` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
+- `TreeTable` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `Table` -> ✅ complete (implementation/tests/demo/docs/entry-point verification done)
 - `Timeline` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `InputNumber` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
@@ -56,6 +57,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
+
+---
+
+Date: 2026-04-25
+Changed:
+  - projects/ui-lib-custom/src/lib/tree-table/ (all 8 files: types, constants, template-directives,
+    column component, main component ts/html/scss, spec, index.ts)
+  - projects/ui-lib-custom/tree-table/ (ng-package.json, package.json, public-api.ts -- secondary entry point)
+  - projects/ui-lib-custom/package.json (exports + typesVersions for tree-table; also repaired truncation)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (tree-table import test added)
+  - projects/ui-lib-custom/src/lib/tree/tree.ts (stripped 201 pre-existing null bytes)
+  - projects/ui-lib-custom/src/lib/tree/tree-context.ts (repaired pre-existing truncation -- missing ");")
+  - projects/demo/src/app/pages/tree-table/ (replaced placeholder with full demo -- 7 scenarios)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: TODO for TreeTable)
+  - AI_AGENT_CONTEXT.md (TreeTable marked complete)
+State: TreeTable fully complete. Hierarchical table with flat-list rendering via computed flatVisibleNodes(),
+  single/multiple/checkbox selection with cascade, global filter with lenient ancestor-visibility,
+  per-sibling-group sorting (asc/desc/none cycle), custom cell templates via uiTreeTableColumnBody,
+  expander column with depth indentation, three variants (material/bootstrap/minimal), three sizes (sm/md/lg),
+  select-all header checkbox, WAI-ARIA treegrid/row/aria-level/aria-expanded, 41/41 unit tests passing,
+  demo page with 7 scenarios, entry-point wired and build clean.
+Verification: npx eslint projects/ui-lib-custom/src/lib/tree-table/ projects/demo/src/app/pages/tree-table/ --max-warnings 0 (CLEAN),
+  ng build ui-lib-custom (all 35+ entry points including tree-table),
+  npx jest --testPathPatterns=tree-table (41/41 PASS),
+  npx jest --testPathPatterns=entry-points (35/35 PASS).
+Terminal notes: All file writes via Python open(..., w, newline=LF). Edit tool truncated package.json at line 167
+  -- repaired by full Python rewrite. tree.ts had 201 pre-existing null bytes (stripped). tree-context.ts had
+  pre-existing truncation (closing "); missing). TemplateRef must be a value import (not import type) when used
+  as contentChild({ read: TemplateRef }) runtime argument.
+Next step: Write docs/reference/components/TREE_TABLE.md, then begin knip baseline + dead-code cleanup.
+
 
 ---
 
