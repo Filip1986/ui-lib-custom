@@ -1,14 +1,139 @@
 .timeline-demo {
-  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
 }
-
-.timeline-demo h1 {
+.timeline-demo__header {
+  margin-bottom: 2.5rem;
+}
+.timeline-demo__title {
+  font-size: 2rem;
+  font-weight: 700;
   margin: 0 0 0.5rem;
-  font-size: 1.5rem;
-  color: var(--uilib-page-fg);
+  color: var(--uilib-text-color, #1f2937);
 }
-
-.timeline-demo p {
+.timeline-demo__subtitle {
+  color: var(--uilib-text-color-secondary, #6b7280);
   margin: 0;
-  color: var(--uilib-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.timeline-demo__section {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--uilib-border-color, #e5e7eb);
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.timeline-demo__section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--uilib-text-color, #1f2937);
+}
+.timeline-demo__section-desc {
+  color: var(--uilib-text-color-secondary, #6b7280);
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  code {
+    background: var(--uilib-surface-color-alt, #f3f4f6);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.85em;
+    color: var(--uilib-primary-color, #3b82f6);
+  }
+}
+// ---------------------------------------------------------------------------
+// Event card
+// ---------------------------------------------------------------------------
+.timeline-demo__card {
+  background: var(--uilib-surface-color, #ffffff);
+  border: 1px solid var(--uilib-border-color, #e5e7eb);
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  margin-bottom: 0.25rem;
+}
+.timeline-demo__card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--uilib-text-color, #1f2937);
+}
+.timeline-demo__card-body {
+  font-size: 0.875rem;
+  color: var(--uilib-text-color-secondary, #6b7280);
+  margin: 0;
+}
+// ---------------------------------------------------------------------------
+// Date label
+// ---------------------------------------------------------------------------
+.timeline-demo__date {
+  font-size: 0.8125rem;
+  color: var(--uilib-text-color-secondary, #6b7280);
+  white-space: nowrap;
+}
+// ---------------------------------------------------------------------------
+// Severity badges (custom markers)
+// ---------------------------------------------------------------------------
+.timeline-demo__badge {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  &--success {
+    background: #22c55e;
+  }
+  &--info {
+    background: #3b82f6;
+  }
+  &--warning {
+    background: #f59e0b;
+  }
+  &--danger {
+    background: #ef4444;
+  }
+}
+.timeline-demo__marker-dot {
+  display: block;
+  width: var(--uilib-timeline-marker-size, 1.25rem);
+  height: var(--uilib-timeline-marker-size, 1.25rem);
+  border-radius: 50%;
+}
+// ---------------------------------------------------------------------------
+// Horizontal step labels
+// ---------------------------------------------------------------------------
+.timeline-demo__step-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--uilib-text-color, #1f2937);
+  text-align: center;
+}
+.timeline-demo__horizontal {
+  width: 100%;
+}
+// ---------------------------------------------------------------------------
+// Variant grid
+// ---------------------------------------------------------------------------
+.timeline-demo__variant-grid,
+.timeline-demo__size-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+.timeline-demo__variant-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 0 0 0.75rem;
+  color: var(--uilib-text-color-secondary, #6b7280);
+}
+.timeline-demo__mini-event {
+  font-size: 0.875rem;
+  margin: 0 0 0.5rem;
+  color: var(--uilib-text-color, #1f2937);
 }

@@ -104,6 +104,10 @@
     },
     "./styles/*": {
       "default": "./styles/*"
+    },
+    "./timeline": {
+      "esm2022": "./esm2022/timeline/index.mjs",
+      "esm": "./esm2022/timeline/index.mjs"
     }
   },
   "typesVersions": {
@@ -152,6 +156,9 @@
       ],
       "testing": [
         "./testing/index.d.ts"
+      ],
+      "timeline": [
+        "./timeline/index.d.ts"
       ]
     }
   }

@@ -30,6 +30,7 @@ import type * as UiLibOrganizationChart from 'ui-lib-custom/organization-chart';
 import type * as UiLibPaginator from 'ui-lib-custom/paginator';
 import type * as UiLibPickList from 'ui-lib-custom/pick-list';
 import type * as UiLibTable from 'ui-lib-custom/table';
+import type * as UiLibTimeline from 'ui-lib-custom/timeline';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -216,5 +217,14 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.TableColumnBodyDirective).toBeDefined();
     expect(mod.TableExpansionDirective).toBeDefined();
     expect(mod.TABLE_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from timeline', async (): Promise<void> => {
+    const mod: typeof UiLibTimeline = await import('ui-lib-custom/timeline');
+    expect(mod.TimelineComponent).toBeDefined();
+    expect(mod.TimelineContentDirective).toBeDefined();
+    expect(mod.TimelineMarkerDirective).toBeDefined();
+    expect(mod.TimelineOppositeDirective).toBeDefined();
+    expect(mod.TIMELINE_DEFAULTS).toBeDefined();
   });
 });

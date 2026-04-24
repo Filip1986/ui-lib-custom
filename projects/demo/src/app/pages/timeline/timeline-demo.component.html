@@ -1,5 +1,175 @@
 <section class="timeline-demo" data-testid="timeline-demo">
-  <h1>Timeline</h1>
-  <p>Coming soon.</p>
+  <header class="timeline-demo__header">
+    <h1 class="timeline-demo__title">Timeline</h1>
+    <p class="timeline-demo__subtitle">
+      A data-display component for rendering a series of events along a vertical or horizontal axis.
+      Supports custom marker, content, and opposite-side templates.
+    </p>
+  </header>
+  <!-- =========================================================== -->
+  <!-- 1. Basic Vertical (left-align, default dot markers)          -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Basic Vertical</h2>
+    <p class="timeline-demo__section-desc">
+      Default orientation with left alignment. Event body is shown via
+      <code>[uiTimelineContent]</code>.
+    </p>
+    <ui-lib-timeline [value]="basicEvents" layout="vertical" align="left" variant="material">
+      <ng-template uiTimelineContent let-event>
+        <div class="timeline-demo__card">
+          <h3 class="timeline-demo__card-title">{{ event.status }}</h3>
+          <p class="timeline-demo__card-body">{{ event.description }}</p>
+        </div>
+      </ng-template>
+    </ui-lib-timeline>
+  </section>
+  <!-- =========================================================== -->
+  <!-- 2. Opposite Content (date on one side, body on the other)   -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Opposite Content</h2>
+    <p class="timeline-demo__section-desc">
+      Use <code>[uiTimelineOpposite]</code> to show a timestamp on the left and the event
+      body on the right.
+    </p>
+    <ui-lib-timeline [value]="basicEvents" layout="vertical" align="left" variant="bootstrap">
+      <ng-template uiTimelineOpposite let-event>
+        <span class="timeline-demo__date">{{ event.date }}</span>
+      </ng-template>
+      <ng-template uiTimelineContent let-event>
+        <div class="timeline-demo__card">
+          <h3 class="timeline-demo__card-title">{{ event.status }}</h3>
+          <p class="timeline-demo__card-body">{{ event.description }}</p>
+        </div>
+      </ng-template>
+    </ui-lib-timeline>
+  </section>
+  <!-- =========================================================== -->
+  <!-- 3. Alternate Alignment                                       -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Alternate Alignment</h2>
+    <p class="timeline-demo__section-desc">
+      Even and odd events alternate sides via <code>align="alternate"</code>.
+    </p>
+    <ui-lib-timeline [value]="basicEvents" layout="vertical" align="alternate" variant="material">
+      <ng-template uiTimelineOpposite let-event>
+        <span class="timeline-demo__date">{{ event.date }}</span>
+      </ng-template>
+      <ng-template uiTimelineContent let-event>
+        <div class="timeline-demo__card">
+          <h3 class="timeline-demo__card-title">{{ event.status }}</h3>
+          <p class="timeline-demo__card-body">{{ event.description }}</p>
+        </div>
+      </ng-template>
+    </ui-lib-timeline>
+  </section>
+  <!-- =========================================================== -->
+  <!-- 4. Custom Markers                                            -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Custom Markers</h2>
+    <p class="timeline-demo__section-desc">
+      Replace the default dot with a severity badge via <code>[uiTimelineMarker]</code>.
+    </p>
+    <ui-lib-timeline [value]="basicEvents" layout="vertical" align="left" variant="minimal">
+      <ng-template uiTimelineMarker let-event>
+        <span [class]="severityClass(event.severity)" class="timeline-demo__marker-dot"></span>
+      </ng-template>
+      <ng-template uiTimelineOpposite let-event>
+        <span class="timeline-demo__date">{{ event.date }}</span>
+      </ng-template>
+      <ng-template uiTimelineContent let-event>
+        <div class="timeline-demo__card">
+          <h3 class="timeline-demo__card-title">{{ event.status }}</h3>
+          <p class="timeline-demo__card-body">{{ event.description }}</p>
+        </div>
+      </ng-template>
+    </ui-lib-timeline>
+  </section>
+  <!-- =========================================================== -->
+  <!-- 5. Horizontal Layout                                         -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Horizontal Layout</h2>
+    <p class="timeline-demo__section-desc">
+      Use <code>layout="horizontal"</code> with <code>align="top"</code>.
+    </p>
+    <ui-lib-timeline
+      [value]="orderSteps"
+      layout="horizontal"
+      align="top"
+      variant="material"
+      styleClass="timeline-demo__horizontal"
+    >
+      <ng-template uiTimelineOpposite let-step>
+        <span class="timeline-demo__date">{{ step.date }}</span>
+      </ng-template>
+      <ng-template uiTimelineContent let-step>
+        <span class="timeline-demo__step-label">{{ step.label }}</span>
+      </ng-template>
+    </ui-lib-timeline>
+  </section>
+  <!-- =========================================================== -->
+  <!-- 6. Three Variants Side-by-Side                              -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Variants</h2>
+    <p class="timeline-demo__section-desc">
+      Material, Bootstrap, and Minimal variants rendered side by side.
+    </p>
+    <div class="timeline-demo__variant-grid">
+      @for (variant of variantOptions; track variant) {
+        <div class="timeline-demo__variant-col">
+          <h3 class="timeline-demo__variant-label">{{ variant }}</h3>
+          <ui-lib-timeline [value]="basicEvents" layout="vertical" align="left" [variant]="variant">
+            <ng-template uiTimelineContent let-event>
+              <p class="timeline-demo__mini-event">{{ event.status }}</p>
+            </ng-template>
+          </ui-lib-timeline>
+        </div>
+      }
+    </div>
+  </section>
+  <!-- =========================================================== -->
+  <!-- 7. Sizes                                                     -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Sizes</h2>
+    <p class="timeline-demo__section-desc">
+      <code>sm</code>, <code>md</code>, and <code>lg</code> density sizes.
+    </p>
+    <div class="timeline-demo__size-grid">
+      @for (size of sizeOptions; track size) {
+        <div class="timeline-demo__size-col">
+          <h3 class="timeline-demo__variant-label">{{ size }}</h3>
+          <ui-lib-timeline [value]="basicEvents" layout="vertical" align="left" variant="material" [size]="size">
+            <ng-template uiTimelineContent let-event>
+              <p class="timeline-demo__mini-event">{{ event.status }}</p>
+            </ng-template>
+          </ui-lib-timeline>
+        </div>
+      }
+    </div>
+  </section>
+  <!-- =========================================================== -->
+  <!-- 8. Right Alignment                                           -->
+  <!-- =========================================================== -->
+  <section class="timeline-demo__section">
+    <h2 class="timeline-demo__section-title">Right Alignment</h2>
+    <p class="timeline-demo__section-desc">
+      Use <code>align="right"</code> to render event content on the left.
+    </p>
+    <ui-lib-timeline [value]="basicEvents" layout="vertical" align="right" variant="bootstrap">
+      <ng-template uiTimelineOpposite let-event>
+        <span class="timeline-demo__date">{{ event.date }}</span>
+      </ng-template>
+      <ng-template uiTimelineContent let-event>
+        <div class="timeline-demo__card">
+          <h3 class="timeline-demo__card-title">{{ event.status }}</h3>
+        </div>
+      </ng-template>
+    </ui-lib-timeline>
+  </section>
 </section>
-

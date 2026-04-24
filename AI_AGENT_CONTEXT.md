@@ -26,7 +26,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
-- `InputMask` -> ✅ complete (implementation/tests/demo/docs/entry-point verification done)
+- `Table` -> ✅ complete (implementation/tests/demo/docs/entry-point verification done)
+- `Timeline` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `InputNumber` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `SplitButton` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `Chart` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
@@ -58,6 +59,28 @@ Handoff convention (when terminal commands are run in-session): include a short 
 ---
 
 Date: 2026-04-24
+Changed:
+  - projects/ui-lib-custom/src/lib/timeline/ (all 8 files: types, constants, directives, component ts/html/scss, spec, index)
+  - projects/ui-lib-custom/timeline/ (ng-package.json, package.json, public-api.ts — secondary entry point)
+  - projects/ui-lib-custom/package.json (exports + typesVersions for timeline)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (timeline import test added)
+  - projects/demo/src/app/pages/timeline/ (full demo — TS, HTML, SCSS — 8 scenarios)
+  - docs/reference/components/TIMELINE.md (new)
+  - docs/reference/components/README.md (Timeline row added)
+  - AI_AGENT_CONTEXT.md (Timeline marked complete)
+State: Timeline fully complete. Vertical/horizontal layouts, left/right/alternate/top/bottom alignment,
+  three template slots (marker/content/opposite), three variants (material/bootstrap/minimal),
+  three sizes (sm/md/lg), ThemeConfigService variant fallback, WAI-ARIA list/listitem roles,
+  connector suppression on first/last events, 31/31 unit tests passing, demo page with 8 scenarios,
+  reference doc at docs/reference/components/TIMELINE.md.
+Verification: npx eslint projects/ui-lib-custom/src/lib/timeline/ --max-warnings 0 (CLEAN),
+  npx eslint projects/demo/src/app/pages/timeline/ --max-warnings 0 (CLEAN),
+  npx jest --testPathPatterns=timeline (31/31 PASS),
+  npx jest --testPathPatterns=entry-points (33/33 PASS),
+  ng build ui-lib-custom (✔ all entry points including timeline),
+  ng build demo --configuration=development (success).
+Terminal notes: python3 not available — use python. All file writes done via python open(..., 'w', newline='\\n') to avoid CRLF issues.
+Next step: Write docs/reference/components/TABLE.md, then begin knip baseline + dead-code cleanup pass.
 Changed:
   - projects/ui-lib-custom/src/lib/table/table.component.ts (removed unused selArray variable; stripped trailing null bytes)
   - projects/ui-lib-custom/src/lib/table/table.component.spec.ts (full rewrite: all 287 lint errors fixed — typed DOM queries via HTMLElement casts, typed helpers, DebugElement annotation, removed unused imports, fixed consistent-type-imports; 51/51 tests still pass)

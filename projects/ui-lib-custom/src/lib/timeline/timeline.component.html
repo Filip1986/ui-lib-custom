@@ -1,0 +1,42 @@
+@for (context of itemContexts(); track context.index) {
+  <div
+    class="ui-lib-timeline__event"
+    role="listitem"
+    [attr.aria-label]="eventAriaLabel(context.index)"
+  >
+    <div class="ui-lib-timeline__opposite">
+      @if (oppositeTemplate()) {
+        <ng-container
+          [ngTemplateOutlet]="oppositeTemplate()!"
+          [ngTemplateOutletContext]="context"
+        />
+      }
+    </div>
+    <div class="ui-lib-timeline__separator">
+      @if (!context.first) {
+        <span class="ui-lib-timeline__connector ui-lib-timeline__connector--before"></span>
+      }
+      <div class="ui-lib-timeline__marker" aria-hidden="true">
+        @if (markerTemplate()) {
+          <ng-container
+            [ngTemplateOutlet]="markerTemplate()!"
+            [ngTemplateOutletContext]="context"
+          />
+        } @else {
+          <span class="ui-lib-timeline__dot"></span>
+        }
+      </div>
+      @if (!context.last) {
+        <span class="ui-lib-timeline__connector ui-lib-timeline__connector--after"></span>
+      }
+    </div>
+    <div class="ui-lib-timeline__content">
+      @if (contentTemplate()) {
+        <ng-container
+          [ngTemplateOutlet]="contentTemplate()!"
+          [ngTemplateOutletContext]="context"
+        />
+      }
+    </div>
+  </div>
+}

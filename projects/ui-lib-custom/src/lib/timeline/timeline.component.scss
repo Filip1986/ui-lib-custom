@@ -1,0 +1,260 @@
+// =============================================================================
+// Timeline Component
+// CSS custom property tokens follow the --uilib-timeline-{property}[-{state}]
+// naming convention.
+// =============================================================================
+.ui-lib-timeline {
+  // ---------------------------------------------------------------------------
+  // Component tokens (overridable per variant/size)
+  // ---------------------------------------------------------------------------
+  --uilib-timeline-connector-color: var(--uilib-border-color, #dee2e6);
+  --uilib-timeline-connector-width: 2px;
+  --uilib-timeline-marker-size: 1.25rem;
+  --uilib-timeline-marker-bg: var(--uilib-primary-color, #3b82f6);
+  --uilib-timeline-marker-border-color: var(--uilib-primary-color, #3b82f6);
+  --uilib-timeline-marker-border-width: 2px;
+  --uilib-timeline-event-gap: 0;
+  --uilib-timeline-content-gap: 1rem;
+  --uilib-timeline-opposite-gap: 1rem;
+  --uilib-timeline-opposite-min-width: 6rem;
+  --uilib-timeline-font-size: 1rem;
+  --uilib-timeline-color: var(--uilib-text-color, #1f2937);
+  display: flex;
+  color: var(--uilib-timeline-color);
+  font-size: var(--uilib-timeline-font-size);
+}
+// =============================================================================
+// Event row
+// =============================================================================
+.ui-lib-timeline__event {
+  display: contents;
+}
+// =============================================================================
+// Layout: Vertical (default)
+// =============================================================================
+.ui-lib-timeline--vertical {
+  flex-direction: column;
+  .ui-lib-timeline__event {
+    display: grid;
+    // columns: [opposite] [separator] [content]
+    grid-template-columns: var(--uilib-timeline-opposite-min-width) auto 1fr;
+    grid-template-areas: 'opposite separator content';
+    gap: var(--uilib-timeline-event-gap);
+  }
+  .ui-lib-timeline__opposite {
+    grid-area: opposite;
+    padding-right: var(--uilib-timeline-opposite-gap);
+    text-align: right;
+    align-self: flex-start;
+    padding-top: calc((var(--uilib-timeline-marker-size) - 1em) / 2);
+  }
+  .ui-lib-timeline__separator {
+    grid-area: separator;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ui-lib-timeline__content {
+    grid-area: content;
+    padding-left: var(--uilib-timeline-content-gap);
+    padding-bottom: 1.5rem;
+    align-self: flex-start;
+    padding-top: calc((var(--uilib-timeline-marker-size) - 1em) / 2);
+  }
+  .ui-lib-timeline__connector {
+    display: block;
+    width: var(--uilib-timeline-connector-width);
+    flex: 1;
+    background-color: var(--uilib-timeline-connector-color);
+  }
+  .ui-lib-timeline__connector--before {
+    min-height: 0.5rem;
+  }
+  .ui-lib-timeline__connector--after {
+    min-height: 0.5rem;
+  }
+}
+// ---------------------------------------------------------------------------
+// Vertical: right alignment — swap opposite and content columns
+// ---------------------------------------------------------------------------
+.ui-lib-timeline--vertical.ui-lib-timeline--align-right {
+  .ui-lib-timeline__event {
+    grid-template-columns: 1fr auto var(--uilib-timeline-opposite-min-width);
+    grid-template-areas: 'content separator opposite';
+  }
+  .ui-lib-timeline__opposite {
+    text-align: left;
+    padding-right: 0;
+    padding-left: var(--uilib-timeline-opposite-gap);
+  }
+  .ui-lib-timeline__content {
+    padding-left: 0;
+    padding-right: var(--uilib-timeline-content-gap);
+    text-align: right;
+  }
+}
+// ---------------------------------------------------------------------------
+// Vertical: alternate alignment — even/odd events swap sides
+// ---------------------------------------------------------------------------
+.ui-lib-timeline--vertical.ui-lib-timeline--align-alternate {
+  .ui-lib-timeline__event:nth-child(odd) {
+    grid-template-columns: 1fr auto var(--uilib-timeline-opposite-min-width);
+    grid-template-areas: 'content separator opposite';
+    .ui-lib-timeline__opposite {
+      text-align: left;
+      padding-right: 0;
+      padding-left: var(--uilib-timeline-opposite-gap);
+    }
+    .ui-lib-timeline__content {
+      padding-left: 0;
+      padding-right: var(--uilib-timeline-content-gap);
+      text-align: right;
+    }
+  }
+}
+// =============================================================================
+// Layout: Horizontal
+// =============================================================================
+.ui-lib-timeline--horizontal {
+  flex-direction: row;
+  .ui-lib-timeline__event {
+    display: grid;
+    flex: 1;
+    // rows: [opposite] [separator] [content]
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'opposite'
+      'separator'
+      'content';
+  }
+  .ui-lib-timeline__opposite {
+    grid-area: opposite;
+    text-align: center;
+    padding-bottom: var(--uilib-timeline-opposite-gap);
+  }
+  .ui-lib-timeline__separator {
+    grid-area: separator;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .ui-lib-timeline__content {
+    grid-area: content;
+    text-align: center;
+    padding-top: var(--uilib-timeline-content-gap);
+  }
+  .ui-lib-timeline__connector {
+    display: block;
+    height: var(--uilib-timeline-connector-width);
+    flex: 1;
+    background-color: var(--uilib-timeline-connector-color);
+  }
+}
+// ---------------------------------------------------------------------------
+// Horizontal: bottom alignment — swap opposite and content rows
+// ---------------------------------------------------------------------------
+.ui-lib-timeline--horizontal.ui-lib-timeline--align-bottom {
+  .ui-lib-timeline__event {
+    grid-template-rows: 1fr auto auto;
+    grid-template-areas:
+      'content'
+      'separator'
+      'opposite';
+  }
+  .ui-lib-timeline__opposite {
+    padding-bottom: 0;
+    padding-top: var(--uilib-timeline-opposite-gap);
+  }
+  .ui-lib-timeline__content {
+    padding-top: 0;
+    padding-bottom: var(--uilib-timeline-content-gap);
+    align-self: flex-end;
+  }
+}
+// =============================================================================
+// Marker (dot)
+// =============================================================================
+.ui-lib-timeline__marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--uilib-timeline-marker-size);
+  height: var(--uilib-timeline-marker-size);
+  z-index: 1;
+}
+.ui-lib-timeline__dot {
+  display: block;
+  width: var(--uilib-timeline-marker-size);
+  height: var(--uilib-timeline-marker-size);
+  border-radius: 50%;
+  background-color: var(--uilib-timeline-marker-bg);
+  border: var(--uilib-timeline-marker-border-width) solid var(--uilib-timeline-marker-border-color);
+  box-sizing: border-box;
+  transition: transform var(--uilib-transition-fast, 150ms ease);
+}
+// =============================================================================
+// Size variants
+// =============================================================================
+.ui-lib-timeline--sm {
+  --uilib-timeline-marker-size: 0.875rem;
+  --uilib-timeline-content-gap: 0.625rem;
+  --uilib-timeline-opposite-gap: 0.625rem;
+  --uilib-timeline-opposite-min-width: 4.5rem;
+  --uilib-timeline-font-size: 0.875rem;
+}
+.ui-lib-timeline--md {
+  --uilib-timeline-marker-size: 1.25rem;
+  --uilib-timeline-content-gap: 1rem;
+  --uilib-timeline-opposite-gap: 1rem;
+  --uilib-timeline-opposite-min-width: 6rem;
+  --uilib-timeline-font-size: 1rem;
+}
+.ui-lib-timeline--lg {
+  --uilib-timeline-marker-size: 1.625rem;
+  --uilib-timeline-content-gap: 1.25rem;
+  --uilib-timeline-opposite-gap: 1.25rem;
+  --uilib-timeline-opposite-min-width: 8rem;
+  --uilib-timeline-font-size: 1.125rem;
+}
+// =============================================================================
+// Visual variant: Material
+// =============================================================================
+.ui-lib-timeline--material {
+  --uilib-timeline-connector-color: color-mix(
+    in srgb,
+    var(--uilib-primary-color, #3b82f6) 30%,
+    var(--uilib-border-color, #dee2e6)
+  );
+  --uilib-timeline-connector-width: 2px;
+  --uilib-timeline-marker-bg: var(--uilib-primary-color, #3b82f6);
+  --uilib-timeline-marker-border-color: var(--uilib-primary-color, #3b82f6);
+  .ui-lib-timeline__dot:hover {
+    transform: scale(1.15);
+  }
+}
+// =============================================================================
+// Visual variant: Bootstrap
+// =============================================================================
+.ui-lib-timeline--bootstrap {
+  --uilib-timeline-connector-color: var(--uilib-border-color, #ced4da);
+  --uilib-timeline-connector-width: 1px;
+  --uilib-timeline-marker-bg: #ffffff;
+  --uilib-timeline-marker-border-color: var(--uilib-primary-color, #0d6efd);
+  --uilib-timeline-marker-border-width: 2px;
+}
+// =============================================================================
+// Visual variant: Minimal
+// =============================================================================
+.ui-lib-timeline--minimal {
+  --uilib-timeline-connector-color: color-mix(
+    in srgb,
+    var(--uilib-border-color, #dee2e6) 55%,
+    transparent
+  );
+  --uilib-timeline-connector-width: 1px;
+  --uilib-timeline-marker-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-timeline-marker-border-color: var(--uilib-border-color, #dee2e6);
+  --uilib-timeline-marker-border-width: 1px;
+}
