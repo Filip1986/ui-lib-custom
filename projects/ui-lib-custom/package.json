@@ -74,6 +74,10 @@
       "esm2022": "./esm2022/order-list/index.mjs",
       "esm": "./esm2022/order-list/index.mjs"
     },
+    "./pick-list": {
+      "esm2022": "./esm2022/pick-list/index.mjs",
+      "esm": "./esm2022/pick-list/index.mjs"
+    },
     "./input-mask": {
       "esm2022": "./esm2022/input-mask/index.mjs",
       "esm": "./esm2022/input-mask/index.mjs"
@@ -126,6 +130,9 @@
       ],
       "order-list": [
         "./order-list/index.d.ts"
+      ],
+      "pick-list": [
+        "./pick-list/index.d.ts"
       ],
       "input-mask": [
         "./input-mask/index.d.ts"

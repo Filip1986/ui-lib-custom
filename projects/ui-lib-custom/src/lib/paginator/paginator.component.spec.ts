@@ -66,9 +66,21 @@ function queryRequired(
   fixture: ComponentFixture<TestHostComponent>,
   selector: string
 ): DebugElement {
-  const debugElement: DebugElement = fixture.debugElement.query(By.css(selector));
-  return debugElement;
+  return fixture.debugElement.query(By.css(selector));
 }
+
+function getPageButtonAtIndex(
+  fixture: ComponentFixture<TestHostComponent>,
+  index: number
+): HTMLButtonElement {
+  const buttons: HTMLButtonElement[] = getPageButtons(fixture);
+  const button: HTMLButtonElement | undefined = buttons[index];
+  if (button === undefined) {
+    throw new Error(`Expected page button at index ${index}`);
+  }
+  return button;
+}
+
 function getPageButtons(fixture: ComponentFixture<TestHostComponent>): HTMLButtonElement[] {
   const pageButtonDebugElements: DebugElement[] = fixture.debugElement.queryAll(
     By.css('.uilib-paginator-page')
@@ -106,14 +118,15 @@ describe('PaginatorComponent', (): void => {
     expect(content).toBeTruthy();
   });
   it('should render 5 page-link buttons for 100 records / 10 rows', (): void => {
-    const buttons: HTMLButtonElement[] = getPageButtons(fixture);
-    expect(buttons.length).toBe(5);
-    expect(getTrimmedTextContent(buttons[0])).toBe('1');
+    const firstButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 0);
+    expect(getPageButtons(fixture).length).toBe(5);
+    expect(getTrimmedTextContent(firstButton)).toBe('1');
   });
+
   it('should mark the first page button as selected on load', (): void => {
-    const buttons: HTMLButtonElement[] = getPageButtons(fixture);
-    expect(buttons[0].classList).toContain('uilib-paginator-page--selected');
-    expect(buttons[0].getAttribute('aria-current')).toBe('page');
+    const firstButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 0);
+    expect(firstButton.classList).toContain('uilib-paginator-page--selected');
+    expect(firstButton.getAttribute('aria-current')).toBe('page');
   });
   it('should render first and last buttons by default', (): void => {
     const first: DebugElement | null = fixture.debugElement.query(By.css('.uilib-paginator-first'));
@@ -171,10 +184,12 @@ describe('PaginatorComponent', (): void => {
     expect(paginatorElement.classList).toContain('ui-lib-paginator--lg');
   });
   it('should navigate to page 2 when the second page button is clicked', (): void => {
-    getPageButtons(fixture)[1].click();
+    const secondButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 1);
+    secondButton.click();
     fixture.detectChanges();
-    const updatedButtons: HTMLButtonElement[] = getPageButtons(fixture);
-    expect(updatedButtons[1].classList).toContain('uilib-paginator-page--selected');
+
+    const updatedSecondButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 1);
+    expect(updatedSecondButton.classList).toContain('uilib-paginator-page--selected');
     expect(host.lastEvent()?.page).toBe(1);
     expect(host.lastEvent()?.first).toBe(10);
   });
@@ -184,7 +199,8 @@ describe('PaginatorComponent', (): void => {
     expect(host.lastEvent()?.page).toBe(1);
   });
   it('should navigate to previous page on prev button click', (): void => {
-    getPageButtons(fixture)[1].click();
+    const secondButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 1);
+    secondButton.click();
     fixture.detectChanges();
     host.lastEvent.set(null);
     getNavButton(fixture, '.uilib-paginator-prev').click();
@@ -219,7 +235,8 @@ describe('PaginatorComponent', (): void => {
     expect(lastButton.disabled).toBe(true);
   });
   it('should emit correct pageChange payload', (): void => {
-    getPageButtons(fixture)[2].click();
+    const thirdButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 2);
+    thirdButton.click();
     fixture.detectChanges();
     expect(host.lastEvent()).toEqual({
       page: 2,
@@ -364,9 +381,10 @@ describe('PaginatorComponent', (): void => {
     expect(paginatorElement.getAttribute('aria-label')).toBe('Pagination');
   });
   it('should mark the selected page with aria-current="page"', (): void => {
-    const buttons: HTMLButtonElement[] = getPageButtons(fixture);
-    expect(buttons[0].getAttribute('aria-current')).toBe('page');
-    expect(buttons[1].getAttribute('aria-current')).toBeNull();
+    const firstButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 0);
+    const secondButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 1);
+    expect(firstButton.getAttribute('aria-current')).toBe('page');
+    expect(secondButton.getAttribute('aria-current')).toBeNull();
   });
   it('should have aria-label on nav buttons', (): void => {
     const previousButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-prev');
@@ -375,9 +393,10 @@ describe('PaginatorComponent', (): void => {
     expect(nextButton.getAttribute('aria-label')).toBe('Next page');
   });
   it('should have numbered aria-label on page-link buttons', (): void => {
-    const buttons: HTMLButtonElement[] = getPageButtons(fixture);
-    expect(buttons[0].getAttribute('aria-label')).toBe('Page 1');
-    expect(buttons[4].getAttribute('aria-label')).toBe('Page 5');
+    const firstButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 0);
+    const fifthButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 4);
+    expect(firstButton.getAttribute('aria-label')).toBe('Page 1');
+    expect(fifthButton.getAttribute('aria-label')).toBe('Page 5');
   });
   it('should export PAGINATOR_DEFAULTS with expected keys', (): void => {
     expect(PAGINATOR_DEFAULTS.ROWS).toBe(10);

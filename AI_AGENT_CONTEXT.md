@@ -54,6 +54,29 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
+---
+
+Date: 2026-04-24
+Changed:
+  - projects/ui-lib-custom/src/lib/pick-list/ (all 7 files: types, constants, directives, component ts/html/scss, spec, index)
+  - projects/ui-lib-custom/pick-list/ (ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (exports + typesVersions for pick-list)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (pick-list import test)
+  - projects/demo/src/app/pages/pick-list/ (pick-list-demo.component ts/html/scss — new)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' for PickList)
+  - docs/reference/components/PICKLIST.md (new)
+  - docs/reference/components/README.md (added PickList row)
+  - projects/demo/src/app/pages/paginator/paginator-demo.component.html (repaired truncation)
+  - projects/demo/src/app/pages/organization-chart/organization-chart-demo.component.html (repaired truncation)
+  - projects/demo/src/app/pages/organization-chart/organization-chart-demo.component.ts (repaired truncation)
+  - projects/ui-lib-custom/paginator/package.json (repaired missing closing brace)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (stripped trailing null bytes)
+State: PickList fully complete — source, entry point, tests (52/52 passing), demo page, docs.
+  Multiple pre-existing truncated files also repaired as collateral.
+Verification: npx jest --testPathPatterns=pick-list (52/52), npx jest --testPathPatterns=entry-points (31/31), ng build demo --configuration=development (success, 1 pre-existing warning).
+Terminal notes: Edit/Write tools produce CRLF corruption and trailing null bytes — all file writes done via Python open(..., 'w'/'wb'). npx.cmd not available in bash sandbox; use npx directly.
+Next step: Run full test suite (npm test) to confirm no regressions, then knip baseline + dead-code cleanup pass.
+
 ```text
 Date: 2026-04-23
 Changed: projects/ui-lib-custom/src/lib/organization-chart/ (all source files — full impl),
@@ -121,5 +144,4 @@ Changed: projects/demo/src/app/pages/order-list/order-list-demo.component.ts (fu
          projects/demo/src/app/pages/order-list/order-list-demo.component.html (full impl),
          projects/demo/src/app/pages/order-list/order-list-demo.component.scss (full impl),
          projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge),
-         projects/ui-lib-custom/src/lib/order-list/order-list.component.spec.ts (full lint-clean rewrite),
-         docs/reference/componen
+         project

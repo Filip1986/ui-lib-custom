@@ -1,5 +1,5 @@
 {
-  "name": "ui-lib-custom/paginator",
+  "name": "ui-lib-custom/pick-list",
   "sideEffects": false,
   "ngPackage": {}
 }

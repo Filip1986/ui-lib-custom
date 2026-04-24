@@ -1,0 +1,474 @@
+// =============================================================================
+// PickList — CSS variable tokens (defaults)
+// All raw values use CSS var fallbacks referencing the global uilib system tokens.
+// Override any token on the host element to customise the component.
+// =============================================================================
+
+.ui-lib-pick-list {
+  // Layout
+  --uilib-pick-list-gap: 0.5rem;
+  --uilib-pick-list-min-height: 10rem;
+  --uilib-pick-list-max-height: 24rem;
+
+  // Surface
+  --uilib-pick-list-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-pick-list-border: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-pick-list-radius: var(--uilib-border-radius, 6px);
+
+  // Item
+  --uilib-pick-list-item-padding: 0.625rem 0.875rem;
+  --uilib-pick-list-item-bg: transparent;
+  --uilib-pick-list-item-bg-hover: var(--uilib-hover-bg, rgba(0, 0, 0, 0.04));
+  --uilib-pick-list-item-bg-selected: var(--uilib-primary-color, #3b82f6);
+  --uilib-pick-list-item-color: var(--uilib-text-color, #1f2937);
+  --uilib-pick-list-item-color-selected: #ffffff;
+  --uilib-pick-list-item-border-bottom: 1px solid var(--uilib-border-color, #dee2e6);
+
+  // Drag & drop
+  --uilib-pick-list-item-drag-opacity: 0.4;
+  --uilib-pick-list-drop-indicator-color: var(--uilib-primary-color, #3b82f6);
+  --uilib-pick-list-drop-indicator-height: 2px;
+
+  // Striped
+  --uilib-pick-list-item-bg-striped: var(--uilib-surface-color-alt, #f8f9fa);
+
+  // Filter
+  --uilib-pick-list-filter-padding: 0.5rem 0.75rem;
+  --uilib-pick-list-filter-border: var(--uilib-pick-list-border);
+  --uilib-pick-list-filter-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-pick-list-filter-radius: var(--uilib-border-radius, 6px);
+
+  // Header
+  --uilib-pick-list-header-bg: var(--uilib-surface-color-alt, #f8f9fa);
+  --uilib-pick-list-header-padding: 0.625rem 0.875rem;
+  --uilib-pick-list-header-font-weight: 600;
+  --uilib-pick-list-header-border: var(--uilib-pick-list-border);
+
+  // Reorder controls
+  --uilib-pick-list-control-size: 2rem;
+  --uilib-pick-list-control-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-pick-list-control-color: var(--uilib-text-color, #1f2937);
+  --uilib-pick-list-control-bg-hover: var(--uilib-hover-bg, rgba(0, 0, 0, 0.06));
+  --uilib-pick-list-control-radius: var(--uilib-border-radius, 6px);
+  --uilib-pick-list-control-gap: 0.25rem;
+  --uilib-pick-list-control-border: var(--uilib-pick-list-border);
+
+  // Transfer controls
+  --uilib-pick-list-transfer-size: 2.25rem;
+  --uilib-pick-list-transfer-bg: var(--uilib-primary-color, #3b82f6);
+  --uilib-pick-list-transfer-color: #ffffff;
+  --uilib-pick-list-transfer-bg-hover: var(--uilib-primary-color-dark, #2563eb);
+  --uilib-pick-list-transfer-radius: var(--uilib-border-radius, 6px);
+  --uilib-pick-list-transfer-gap: 0.375rem;
+
+  // Focus
+  --uilib-pick-list-focus-ring: 0 0 0 2px var(--uilib-primary-color, #3b82f6);
+
+  // Disabled
+  --uilib-pick-list-disabled-opacity: 0.5;
+
+  // Transition
+  --uilib-pick-list-transition: background-color 0.15s ease, color 0.15s ease;
+
+  // ==========================================================================
+  // Host layout — three-column: source | transfer | target
+  // ==========================================================================
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--uilib-pick-list-gap);
+  font-size: var(--uilib-pick-list-font-size, 0.875rem);
+  color: var(--uilib-pick-list-item-color);
+}
+
+// Disabled host
+.ui-lib-pick-list--disabled {
+  opacity: var(--uilib-pick-list-disabled-opacity);
+  pointer-events: none;
+  user-select: none;
+}
+
+// =============================================================================
+// Panel — source or target
+// Each panel is: [controls (optional)] [list-container]
+// =============================================================================
+
+.ui-lib-pick-list__panel {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: var(--uilib-pick-list-gap);
+}
+
+// =============================================================================
+// Reorder controls area (shared by source and target panels)
+// =============================================================================
+
+.ui-lib-pick-list__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-pick-list-control-gap);
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding-top: 0; // aligns with list top after header renders
+}
+
+.ui-lib-pick-list__control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-pick-list-control-size);
+  height: var(--uilib-pick-list-control-size);
+  padding: 0;
+  background: var(--uilib-pick-list-control-bg);
+  color: var(--uilib-pick-list-control-color);
+  border: var(--uilib-pick-list-control-border);
+  border-radius: var(--uilib-pick-list-control-radius);
+  cursor: pointer;
+  transition: var(--uilib-pick-list-transition);
+  line-height: 1;
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-pick-list-control-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--uilib-pick-list-focus-ring);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  ui-lib-icon {
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// List container
+// =============================================================================
+
+.ui-lib-pick-list__list-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  border: var(--uilib-pick-list-border);
+  border-radius: var(--uilib-pick-list-radius);
+  background: var(--uilib-pick-list-bg);
+  overflow: hidden;
+}
+
+// =============================================================================
+// Header
+// =============================================================================
+
+.ui-lib-pick-list__header {
+  padding: var(--uilib-pick-list-header-padding);
+  background: var(--uilib-pick-list-header-bg);
+  font-weight: var(--uilib-pick-list-header-font-weight);
+  border-bottom: var(--uilib-pick-list-header-border);
+}
+
+// =============================================================================
+// Filter
+// =============================================================================
+
+.ui-lib-pick-list__filter {
+  padding: var(--uilib-pick-list-filter-padding);
+  border-bottom: var(--uilib-pick-list-filter-border);
+}
+
+.ui-lib-pick-list__filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.375rem 0.625rem;
+  background: var(--uilib-pick-list-filter-bg);
+  border: var(--uilib-pick-list-control-border);
+  border-radius: var(--uilib-pick-list-filter-radius);
+  font-size: inherit;
+  color: var(--uilib-pick-list-item-color);
+  transition: var(--uilib-pick-list-transition);
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--uilib-pick-list-focus-ring);
+  }
+
+  &::placeholder {
+    color: var(--uilib-text-color-secondary, #6b7280);
+  }
+}
+
+// =============================================================================
+// Listbox
+// =============================================================================
+
+.ui-lib-pick-list__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  min-height: var(--uilib-pick-list-min-height);
+  max-height: var(--uilib-pick-list-max-height);
+  flex: 1 1 auto;
+
+  &:focus {
+    outline: none;
+  }
+
+  // Striped rows
+  .ui-lib-pick-list--striped & .ui-lib-pick-list__item:nth-child(odd) {
+    background: var(--uilib-pick-list-item-bg-striped);
+  }
+}
+
+// =============================================================================
+// List item
+// =============================================================================
+
+.ui-lib-pick-list__item {
+  padding: var(--uilib-pick-list-item-padding);
+  background: var(--uilib-pick-list-item-bg);
+  color: var(--uilib-pick-list-item-color);
+  border-bottom: var(--uilib-pick-list-item-border-bottom);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--uilib-pick-list-transition);
+  position: relative; // Required for drop-indicator pseudo-elements
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover:not(.ui-lib-pick-list__item--selected) {
+    background: var(--uilib-pick-list-item-bg-hover);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset var(--uilib-pick-list-focus-ring);
+  }
+}
+
+// Selected state
+.ui-lib-pick-list__item--selected {
+  background: var(--uilib-pick-list-item-bg-selected);
+  color: var(--uilib-pick-list-item-color-selected);
+}
+
+// Drag states
+.ui-lib-pick-list__item--dragging {
+  opacity: var(--uilib-pick-list-item-drag-opacity);
+}
+
+.ui-lib-pick-list__item--drop-before::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: var(--uilib-pick-list-drop-indicator-height);
+  background: var(--uilib-pick-list-drop-indicator-color);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ui-lib-pick-list__item--drop-after::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--uilib-pick-list-drop-indicator-height);
+  background: var(--uilib-pick-list-drop-indicator-color);
+  pointer-events: none;
+  z-index: 1;
+}
+
+// =============================================================================
+// Empty state
+// =============================================================================
+
+.ui-lib-pick-list__empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--uilib-text-color-secondary, #6b7280);
+  list-style: none;
+}
+
+// =============================================================================
+// Transfer controls — center column
+// =============================================================================
+
+.ui-lib-pick-list__transfer-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--uilib-pick-list-transfer-gap);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.ui-lib-pick-list__transfer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-pick-list-transfer-size);
+  height: var(--uilib-pick-list-transfer-size);
+  padding: 0;
+  background: var(--uilib-pick-list-transfer-bg);
+  color: var(--uilib-pick-list-transfer-color);
+  border: none;
+  border-radius: var(--uilib-pick-list-transfer-radius);
+  cursor: pointer;
+  transition: var(--uilib-pick-list-transition);
+  line-height: 1;
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-pick-list-transfer-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--uilib-pick-list-focus-ring);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  ui-lib-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// Size modifiers
+// =============================================================================
+
+.ui-lib-pick-list--sm {
+  --uilib-pick-list-font-size: 0.8125rem;
+  --uilib-pick-list-item-padding: 0.375rem 0.625rem;
+  --uilib-pick-list-control-size: 1.625rem;
+  --uilib-pick-list-header-padding: 0.375rem 0.625rem;
+  --uilib-pick-list-transfer-size: 1.875rem;
+}
+
+.ui-lib-pick-list--md {
+  --uilib-pick-list-font-size: 0.875rem;
+  --uilib-pick-list-item-padding: 0.625rem 0.875rem;
+  --uilib-pick-list-control-size: 2rem;
+  --uilib-pick-list-header-padding: 0.625rem 0.875rem;
+  --uilib-pick-list-transfer-size: 2.25rem;
+}
+
+.ui-lib-pick-list--lg {
+  --uilib-pick-list-font-size: 1rem;
+  --uilib-pick-list-item-padding: 0.875rem 1.125rem;
+  --uilib-pick-list-control-size: 2.25rem;
+  --uilib-pick-list-header-padding: 0.875rem 1.125rem;
+  --uilib-pick-list-transfer-size: 2.625rem;
+}
+
+// =============================================================================
+// Variant: Material
+// =============================================================================
+
+.ui-lib-pick-list--material {
+  --uilib-pick-list-border: none;
+  --uilib-pick-list-radius: 4px;
+  --uilib-pick-list-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-pick-list-item-bg-selected: var(--uilib-primary-color, #1976d2);
+  --uilib-pick-list-item-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-primary-color, #1976d2) 8%,
+    transparent
+  );
+  --uilib-pick-list-control-bg: transparent;
+  --uilib-pick-list-control-border: none;
+  --uilib-pick-list-control-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-text-color, #1f2937) 8%,
+    transparent
+  );
+  --uilib-pick-list-control-radius: 50%;
+  --uilib-pick-list-transfer-bg: var(--uilib-primary-color, #1976d2);
+  --uilib-pick-list-transfer-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-primary-color, #1976d2) 85%,
+    #000000
+  );
+  --uilib-pick-list-transfer-radius: 50%;
+  --uilib-pick-list-drop-indicator-color: var(--uilib-primary-color, #1976d2);
+  --uilib-pick-list-focus-ring: 0 0 0 2px var(--uilib-primary-color, #1976d2);
+  --uilib-pick-list-header-bg: var(--uilib-surface-color-alt, #f5f5f5);
+  --uilib-pick-list-header-border: 1px solid rgba(0, 0, 0, 0.12);
+  --uilib-pick-list-item-border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  .ui-lib-pick-list__list-container {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+  }
+}
+
+// =============================================================================
+// Variant: Bootstrap
+// =============================================================================
+
+.ui-lib-pick-list--bootstrap {
+  --uilib-pick-list-border: 1px solid #dee2e6;
+  --uilib-pick-list-radius: 0.375rem;
+  --uilib-pick-list-bg: #ffffff;
+  --uilib-pick-list-item-bg-selected: #0d6efd;
+  --uilib-pick-list-item-bg-hover: rgba(13, 110, 253, 0.1);
+  --uilib-pick-list-control-bg: #ffffff;
+  --uilib-pick-list-control-border: 1px solid #dee2e6;
+  --uilib-pick-list-control-bg-hover: #e9ecef;
+  --uilib-pick-list-control-radius: 0.25rem;
+  --uilib-pick-list-transfer-bg: #0d6efd;
+  --uilib-pick-list-transfer-bg-hover: #0b5ed7;
+  --uilib-pick-list-transfer-radius: 0.25rem;
+  --uilib-pick-list-drop-indicator-color: #0d6efd;
+  --uilib-pick-list-focus-ring: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  --uilib-pick-list-header-bg: #f8f9fa;
+  --uilib-pick-list-header-border: 1px solid #dee2e6;
+  --uilib-pick-list-item-border-bottom: 1px solid #dee2e6;
+}
+
+// =============================================================================
+// Variant: Minimal
+// =============================================================================
+
+.ui-lib-pick-list--minimal {
+  --uilib-pick-list-border: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-pick-list-radius: 4px;
+  --uilib-pick-list-bg: transparent;
+  --uilib-pick-list-item-bg-selected: var(--uilib-primary-color, #3b82f6);
+  --uilib-pick-list-item-bg-hover: rgba(0, 0, 0, 0.03);
+  --uilib-pick-list-control-bg: transparent;
+  --uilib-pick-list-control-border: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-pick-list-control-bg-hover: rgba(0, 0, 0, 0.05);
+  --uilib-pick-list-control-radius: 4px;
+  --uilib-pick-list-transfer-bg: var(--uilib-primary-color, #3b82f6);
+  --uilib-pick-list-transfer-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-primary-color, #3b82f6) 85%,
+    #000000
+  );
+  --uilib-pick-list-transfer-radius: 4px;
+  --uilib-pick-list-header-bg: transparent;
+  --uilib-pick-list-header-border: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-pick-list-item-border-bottom: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-pick-list-focus-ring: 0 0 0 2px var(--uilib-primary-color, #3b82f6);
+}

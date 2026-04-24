@@ -1,5 +1,226 @@
-<section class="pick-list-demo" data-testid="pick-list-demo">
-  <h1>PickList</h1>
-  <p>Coming soon.</p>
-</section>
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>PickList</h1>
+    <p class="doc-description">
+      Transfers items between a source list and a target list with reorder controls,
+      optional filter inputs, drag-and-drop support, and full keyboard accessibility.
+    </p>
+  </div>
 
+  <div class="examples">
+
+    <!-- 1. Basic -->
+    <section id="basic" data-doc-anchor class="example-section">
+      <h3>1. Basic</h3>
+      <p class="example-description">
+        Use <code>[(source)]</code> and <code>[(target)]</code> two-way bindings to let the component
+        manage transfers. <code>trackBy</code> identifies items by a property key.
+      </p>
+      <app-code-preview [code]="snippet('basic')">
+        <ui-lib-card>
+          <ui-lib-pick-list
+            [source]="basicSource()"
+            (sourceChange)="basicSource.set($any($event))"
+            [target]="basicTarget()"
+            (targetChange)="basicTarget.set($any($event))"
+            trackBy="name"
+            sourceHeader="Available"
+            targetHeader="Selected"
+          />
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 2. Filter -->
+    <section id="filter" data-doc-anchor class="example-section">
+      <h3>2. Filter</h3>
+      <p class="example-description">
+        Set <code>filterBy</code> to show independent filter inputs above each list.
+        Filtering never mutates the underlying arrays.
+      </p>
+      <app-code-preview [code]="snippet('filter')">
+        <ui-lib-card>
+          <ui-lib-pick-list
+            [source]="filterSource()"
+            (sourceChange)="filterSource.set($any($event))"
+            [target]="filterTarget()"
+            (targetChange)="filterTarget.set($any($event))"
+            trackBy="name"
+            filterBy="name"
+            sourceFilterPlaceholder="Search available…"
+            targetFilterPlaceholder="Search selected…"
+          />
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 3. Custom Templates -->
+    <section id="templates" data-doc-anchor class="example-section">
+      <h3>3. Custom Templates</h3>
+      <p class="example-description">
+        Supply <code>uiPickListSourceHeader</code>, <code>uiPickListTargetHeader</code>,
+        <code>uiPickListItem</code>, and <code>uiPickListEmpty</code> directives for fully
+        custom rendering. The item template receives <code>let-item</code> as its implicit context.
+      </p>
+      <app-code-preview [code]="snippet('templates')">
+        <ui-lib-card>
+          <ui-lib-pick-list
+            [source]="templateSource()"
+            (sourceChange)="templateSource.set($any($event))"
+            [target]="templateTarget()"
+            (targetChange)="templateTarget.set($any($event))"
+            trackBy="code"
+          >
+            <ng-template uiPickListSourceHeader>
+              <span>Available countries ({{ templateSource().length }})</span>
+            </ng-template>
+            <ng-template uiPickListTargetHeader>
+              <span>Selected countries ({{ templateTarget().length }})</span>
+            </ng-template>
+            <ng-template uiPickListItem let-country>
+              <div class="demo-pl-row">
+                <span class="demo-pl-code">{{ country.code }}</span>
+                <span class="demo-pl-name">{{ country.name }}</span>
+                <span class="demo-pl-region">{{ country.region }}</span>
+              </div>
+            </ng-template>
+            <ng-template uiPickListEmpty>
+              <span>No items here.</span>
+            </ng-template>
+          </ui-lib-pick-list>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 4. Drag & Drop -->
+    <section id="drag-drop" data-doc-anchor class="example-section">
+      <h3>4. Drag &amp; Drop</h3>
+      <p class="example-description">
+        Enable <code>[dragDrop]="true"</code> to allow dragging items within a list to reorder
+        them, or dragging between lists to transfer them. A drop indicator line shows the
+        insertion point.
+      </p>
+      <app-code-preview [code]="snippet('dragDrop')">
+        <ui-lib-card>
+          <ui-lib-stack [gap]="3">
+            <ui-lib-pick-list
+              [source]="dragSource()"
+              (sourceChange)="dragSource.set($any($event))"
+              [target]="dragTarget()"
+              (targetChange)="dragTarget.set($any($event))"
+              trackBy="code"
+              [dragDrop]="true"
+              sourceHeader="Source"
+              targetHeader="Target"
+              (movedToTarget)="onMoveToTarget($event)"
+              (movedToSource)="onMoveToSource($event)"
+              (reordered)="onReorder($event)"
+            />
+            <p class="demo-event-log">Last action: <code>{{ lastEventLog() }}</code></p>
+          </ui-lib-stack>
+        </ui-lib-card>
+      </app-code-preview>
+    </section>
+
+    <!-- 5. Accessibility -->
+    <section id="accessibility" data-doc-anchor class="example-section">
+      <h3>5. Accessibility</h3>
+      <ui-lib-card>
+        <ui-lib-stack [gap]="4">
+          <div>
+            <h4>Keyboard shortcuts</h4>
+            <table class="doc-table">
+              <thead><tr><th>Key</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr><td><kbd>Arrow Down / Up</kbd></td><td>Navigate items in the focused list.</td></tr>
+                <tr><td><kbd>Space</kbd> / <kbd>Enter</kbd></td><td>Toggle selection of focused item.</td></tr>
+                <tr><td><kbd>Ctrl+A</kbd></td><td>Select all visible items in the focused list.</td></tr>
+                <tr><td><kbd>Escape</kbd></td><td>Clear selection in the focused list.</td></tr>
+                <tr><td><kbd>Ctrl+→</kbd></td><td>Transfer selected source items to target.</td></tr>
+                <tr><td><kbd>Ctrl+←</kbd></td><td>Return selected target items to source.</td></tr>
+                <tr><td><kbd>Ctrl+↑</kbd></td><td>Move selected items up within their list.</td></tr>
+                <tr><td><kbd>Ctrl+↓</kbd></td><td>Move selected items down within their list.</td></tr>
+                <tr><td><kbd>Ctrl+Home</kbd></td><td>Move selected items to top of list.</td></tr>
+                <tr><td><kbd>Ctrl+End</kbd></td><td>Move selected items to bottom of list.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4>ARIA</h4>
+            <ul>
+              <li>Each list: <code>role="listbox"</code>, <code>aria-multiselectable="true"</code>.</li>
+              <li>Each item: <code>role="option"</code>, <code>aria-selected</code>.</li>
+              <li>Transfer and reorder buttons carry descriptive <code>aria-label</code>s.</li>
+              <li>All transfers and reorders are announced via <code>LiveAnnouncerService</code>.</li>
+              <li>Provide a label with <code>[sourceAriaLabel]</code> / <code>[targetAriaLabel]</code>.</li>
+            </ul>
+          </div>
+        </ui-lib-stack>
+      </ui-lib-card>
+    </section>
+
+    <!-- 6. API Reference -->
+    <section id="api" data-doc-anchor class="example-section">
+      <h3>6. API Reference</h3>
+      <ui-lib-card>
+        <ui-lib-stack [gap]="4">
+          <div>
+            <h4>Inputs</h4>
+            <table class="doc-table">
+              <thead><tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>source</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Source list items — two-way via <code>[(source)]</code>.</td></tr>
+                <tr><td><code>target</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Target list items — two-way via <code>[(target)]</code>.</td></tr>
+                <tr><td><code>sourceSelection</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Selected source items — two-way.</td></tr>
+                <tr><td><code>targetSelection</code></td><td><code>unknown[]</code></td><td><code>[]</code></td><td>Selected target items — two-way.</td></tr>
+                <tr><td><code>sourceHeader</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Static source list header text.</td></tr>
+                <tr><td><code>targetHeader</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Static target list header text.</td></tr>
+                <tr><td><code>filterBy</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Dot-notation property for filtering. Shows filter inputs when set.</td></tr>
+                <tr><td><code>sourceFilterPlaceholder</code></td><td><code>string</code></td><td><code>'Filter'</code></td><td>Placeholder for the source filter input.</td></tr>
+                <tr><td><code>targetFilterPlaceholder</code></td><td><code>string</code></td><td><code>'Filter'</code></td><td>Placeholder for the target filter input.</td></tr>
+                <tr><td><code>filterMatchMode</code></td><td><code>'contains' | 'startsWith' | 'endsWith' | 'equals'</code></td><td><code>'contains'</code></td><td>Matching strategy.</td></tr>
+                <tr><td><code>showSourceControls</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show reorder controls next to source list.</td></tr>
+                <tr><td><code>showTargetControls</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show reorder controls next to target list.</td></tr>
+                <tr><td><code>dragDrop</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Enables drag-and-drop reorder and transfer.</td></tr>
+                <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disables all interaction.</td></tr>
+                <tr><td><code>metaKeySelection</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Requires Ctrl/Meta held for multi-select.</td></tr>
+                <tr><td><code>stripedRows</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Alternating row background.</td></tr>
+                <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Theme variant override.</td></tr>
+                <tr><td><code>size</code></td><td><code>'sm' | 'md' | 'lg'</code></td><td><code>'md'</code></td><td>Size scale.</td></tr>
+                <tr><td><code>trackBy</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Property path for item identity.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4>Outputs</h4>
+            <table class="doc-table">
+              <thead><tr><th>Output</th><th>Payload</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>movedToTarget</code></td><td><code>PickListMoveToTargetEvent</code></td><td>After selected source items transferred to target.</td></tr>
+                <tr><td><code>movedAllToTarget</code></td><td><code>PickListMoveAllToTargetEvent</code></td><td>After all source items transferred.</td></tr>
+                <tr><td><code>movedToSource</code></td><td><code>PickListMoveToSourceEvent</code></td><td>After selected target items returned to source.</td></tr>
+                <tr><td><code>movedAllToSource</code></td><td><code>PickListMoveAllToSourceEvent</code></td><td>After all target items returned.</td></tr>
+                <tr><td><code>sourceSelectionChanged</code></td><td><code>PickListSelectionChangeEvent</code></td><td>When source selection changes.</td></tr>
+                <tr><td><code>targetSelectionChanged</code></td><td><code>PickListSelectionChangeEvent</code></td><td>When target selection changes.</td></tr>
+                <tr><td><code>reordered</code></td><td><code>PickListReorderEvent</code></td><td>After a reorder within either list.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4>Template Slots</h4>
+            <table class="doc-table">
+              <thead><tr><th>Directive</th><th>Context</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>uiPickListItem</code></td><td><code>$implicit: T</code></td><td>Custom item row for both lists.</td></tr>
+                <tr><td><code>uiPickListSourceHeader</code></td><td>—</td><td>Custom source list header.</td></tr>
+                <tr><td><code>uiPickListTargetHeader</code></td><td>—</td><td>Custom target list header.</td></tr>
+                <tr><td><code>uiPickListEmpty</code></td><td>—</td><td>Empty state for either list.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </ui-lib-stack>
+      </ui-lib-card>
+    </section>
+
+  </div>
+</app-doc-page-layout>

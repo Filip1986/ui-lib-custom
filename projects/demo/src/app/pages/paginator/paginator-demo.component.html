@@ -154,9 +154,9 @@
 
   <!-- ── Event output ───────────────────────────────────────────────────────── -->
   @if (lastEvent()) {
-    <section class="paginator-demo__section">
-      <h2>Last pageChange Event</h2>
-      <pre class="paginator-demo__event-output">{{ lastEvent() | json }}</pre>
+    <section class="paginator-demo__event">
+      <strong>Last event:</strong> <code>{{ lastEvent() }}</code>
     </section>
   }
+
 </section>

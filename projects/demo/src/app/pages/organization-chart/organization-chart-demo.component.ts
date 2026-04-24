@@ -227,6 +227,6 @@ export class OrganizationChartDemoComponent {
   }
 
   private appendLog(message: string): void {
-    this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 5));
+    this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 10));
   }
 }

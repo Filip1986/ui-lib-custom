@@ -253,12 +253,12 @@ export class PaginatorComponent {
 
   /** Handle Enter key on the jump-to-page input. */
   public onJumpToPageKeydown(event: KeyboardEvent): void {
-    if (event.key !== 'Enter') {
-      return;
-    }
+    if (event.key !== 'Enter') return;
     const inputElement: HTMLInputElement = event.target as HTMLInputElement;
-    const targetPage: number = Number(inputElement.value) - 1; // input is 1-based
-    this.changePage(targetPage);
-    inputElement.value = '';
+    const page: number = Number(inputElement.value) - 1;
+    if (!isNaN(page) && page >= 0 && page < this.pageCount()) {
+      this.changePage(page);
+      inputElement.value = '';
+    }
   }
 }

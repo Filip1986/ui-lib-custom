@@ -1,0 +1,319 @@
+<!-- =========================================================================
+  Source panel — reorder controls + list container
+========================================================================== -->
+<div class="ui-lib-pick-list__panel ui-lib-pick-list__panel--source">
+
+  <!-- Source reorder controls -->
+  @if (showSourceControls()) {
+    <div class="ui-lib-pick-list__controls">
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isSourceMoveUpDisabled()"
+        [attr.aria-label]="sourceMoveTopAriaLabel()"
+        (click)="moveSourceTop()"
+      >
+        <ui-lib-icon name="arrow-up" />
+      </button>
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isSourceMoveUpDisabled()"
+        [attr.aria-label]="sourceMoveUpAriaLabel()"
+        (click)="moveSourceUp()"
+      >
+        <ui-lib-icon name="chevron-up" />
+      </button>
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isSourceMoveDownDisabled()"
+        [attr.aria-label]="sourceMoveDownAriaLabel()"
+        (click)="moveSourceDown()"
+      >
+        <ui-lib-icon name="chevron-down" />
+      </button>
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isSourceMoveDownDisabled()"
+        [attr.aria-label]="sourceMoveBottomAriaLabel()"
+        (click)="moveSourceBottom()"
+      >
+        <ui-lib-icon name="arrow-down" />
+      </button>
+    </div>
+  }
+
+  <!-- Source list container -->
+  <div class="ui-lib-pick-list__list-container">
+
+    <!-- Source header -->
+    @if (sourceHeaderTemplate()) {
+      <div class="ui-lib-pick-list__header">
+        <ng-container [ngTemplateOutlet]="sourceHeaderTemplate()!" />
+      </div>
+    } @else if (sourceHeader()) {
+      <div class="ui-lib-pick-list__header">{{ sourceHeader() }}</div>
+    }
+
+    <!-- Source filter -->
+    @if (filterBy()) {
+      <div class="ui-lib-pick-list__filter">
+        <input
+          type="text"
+          class="ui-lib-pick-list__filter-input"
+          [placeholder]="sourceFilterPlaceholder()"
+          [value]="sourceFilterQuery()"
+          (input)="onSourceFilterInput($event)"
+          [attr.aria-label]="sourceFilterPlaceholder()"
+          [disabled]="disabled() || null"
+        />
+      </div>
+    }
+
+    <!-- Source listbox -->
+    <ul
+      #sourceListEl
+      role="listbox"
+      class="ui-lib-pick-list__list"
+      [attr.aria-label]="sourceAriaLabel() ?? 'Source list'"
+      aria-multiselectable="true"
+      [attr.id]="componentId + '-source-list'"
+      tabindex="0"
+      (keydown)="onSourceListKeydown($event)"
+      (dragleave)="onListDragLeave($event, 'source')"
+    >
+      @if (displaySourceItems().length === 0) {
+        @if (emptyTemplate()) {
+          <li class="ui-lib-pick-list__empty">
+            <ng-container
+              [ngTemplateOutlet]="emptyTemplate()!"
+              [ngTemplateOutletContext]="sourceEmptyContext()"
+            />
+          </li>
+        } @else {
+          <li class="ui-lib-pick-list__empty" aria-live="polite">
+            @if (isSourceEmptyDueToFilter()) {
+              No items match the filter
+            } @else {
+              No items
+            }
+          </li>
+        }
+      } @else {
+        @for (item of displaySourceItems(); track trackByFn($index, item)) {
+          <li
+            role="option"
+            class="ui-lib-pick-list__item"
+            [class.ui-lib-pick-list__item--selected]="isSourceSelected(item)"
+            [class.ui-lib-pick-list__item--dragging]="dragOriginList() === 'source' && draggedValueIndex() === getValueIndex('source', $index)"
+            [class.ui-lib-pick-list__item--drop-before]="dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'before'"
+            [class.ui-lib-pick-list__item--drop-after]="dragOverList() === 'source' && dragOverIndex() === $index && dragPosition() === 'after'"
+            [attr.aria-selected]="isSourceSelected(item)"
+            [attr.id]="itemId('source', $index)"
+            [tabindex]="sourceFocusedIndex() === $index ? 0 : -1"
+            [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
+            (click)="onSourceItemClick($event, item, $index)"
+            (focus)="onSourceItemFocus($event, $index)"
+            (dragstart)="onDragStart($event, 'source', $index)"
+            (dragover)="onDragOver($event, 'source', $index)"
+            (drop)="onDrop($event, 'source', $index)"
+            (dragend)="onDragEnd($event)"
+          >
+            @if (itemTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isSourceSelected(item) }"
+              />
+            } @else {
+              {{ resolveItemLabel(item) }}
+            }
+          </li>
+        }
+      }
+    </ul>
+
+  </div>
+</div>
+
+<!-- =========================================================================
+  Transfer controls — move items between lists
+========================================================================== -->
+<div class="ui-lib-pick-list__transfer-controls">
+  <button
+    type="button"
+    class="ui-lib-pick-list__transfer-btn"
+    [disabled]="isMoveAllToTargetDisabled()"
+    [attr.aria-label]="moveAllToTargetAriaLabel()"
+    (click)="moveAllToTarget()"
+  >
+    <ui-lib-icon name="chevrons-right" />
+  </button>
+  <button
+    type="button"
+    class="ui-lib-pick-list__transfer-btn"
+    [disabled]="isMoveToTargetDisabled()"
+    [attr.aria-label]="moveToTargetAriaLabel()"
+    (click)="moveToTarget()"
+  >
+    <ui-lib-icon name="chevron-right" />
+  </button>
+  <button
+    type="button"
+    class="ui-lib-pick-list__transfer-btn"
+    [disabled]="isMoveToSourceDisabled()"
+    [attr.aria-label]="moveToSourceAriaLabel()"
+    (click)="moveToSource()"
+  >
+    <ui-lib-icon name="chevron-left" />
+  </button>
+  <button
+    type="button"
+    class="ui-lib-pick-list__transfer-btn"
+    [disabled]="isMoveAllToSourceDisabled()"
+    [attr.aria-label]="moveAllToSourceAriaLabel()"
+    (click)="moveAllToSource()"
+  >
+    <ui-lib-icon name="chevrons-left" />
+  </button>
+</div>
+
+<!-- =========================================================================
+  Target panel — list container + reorder controls
+========================================================================== -->
+<div class="ui-lib-pick-list__panel ui-lib-pick-list__panel--target">
+
+  <!-- Target reorder controls -->
+  @if (showTargetControls()) {
+    <div class="ui-lib-pick-list__controls">
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isTargetMoveUpDisabled()"
+        [attr.aria-label]="targetMoveTopAriaLabel()"
+        (click)="moveTargetTop()"
+      >
+        <ui-lib-icon name="arrow-up" />
+      </button>
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isTargetMoveUpDisabled()"
+        [attr.aria-label]="targetMoveUpAriaLabel()"
+        (click)="moveTargetUp()"
+      >
+        <ui-lib-icon name="chevron-up" />
+      </button>
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isTargetMoveDownDisabled()"
+        [attr.aria-label]="targetMoveDownAriaLabel()"
+        (click)="moveTargetDown()"
+      >
+        <ui-lib-icon name="chevron-down" />
+      </button>
+      <button
+        type="button"
+        class="ui-lib-pick-list__control-btn"
+        [disabled]="isTargetMoveDownDisabled()"
+        [attr.aria-label]="targetMoveBottomAriaLabel()"
+        (click)="moveTargetBottom()"
+      >
+        <ui-lib-icon name="arrow-down" />
+      </button>
+    </div>
+  }
+
+  <!-- Target list container -->
+  <div class="ui-lib-pick-list__list-container">
+
+    <!-- Target header -->
+    @if (targetHeaderTemplate()) {
+      <div class="ui-lib-pick-list__header">
+        <ng-container [ngTemplateOutlet]="targetHeaderTemplate()!" />
+      </div>
+    } @else if (targetHeader()) {
+      <div class="ui-lib-pick-list__header">{{ targetHeader() }}</div>
+    }
+
+    <!-- Target filter -->
+    @if (filterBy()) {
+      <div class="ui-lib-pick-list__filter">
+        <input
+          type="text"
+          class="ui-lib-pick-list__filter-input"
+          [placeholder]="targetFilterPlaceholder()"
+          [value]="targetFilterQuery()"
+          (input)="onTargetFilterInput($event)"
+          [attr.aria-label]="targetFilterPlaceholder()"
+          [disabled]="disabled() || null"
+        />
+      </div>
+    }
+
+    <!-- Target listbox -->
+    <ul
+      #targetListEl
+      role="listbox"
+      class="ui-lib-pick-list__list"
+      [attr.aria-label]="targetAriaLabel() ?? 'Target list'"
+      aria-multiselectable="true"
+      [attr.id]="componentId + '-target-list'"
+      tabindex="0"
+      (keydown)="onTargetListKeydown($event)"
+      (dragleave)="onListDragLeave($event, 'target')"
+    >
+      @if (displayTargetItems().length === 0) {
+        @if (emptyTemplate()) {
+          <li class="ui-lib-pick-list__empty">
+            <ng-container
+              [ngTemplateOutlet]="emptyTemplate()!"
+              [ngTemplateOutletContext]="targetEmptyContext()"
+            />
+          </li>
+        } @else {
+          <li class="ui-lib-pick-list__empty" aria-live="polite">
+            @if (isTargetEmptyDueToFilter()) {
+              No items match the filter
+            } @else {
+              No items
+            }
+          </li>
+        }
+      } @else {
+        @for (item of displayTargetItems(); track trackByFn($index, item)) {
+          <li
+            role="option"
+            class="ui-lib-pick-list__item"
+            [class.ui-lib-pick-list__item--selected]="isTargetSelected(item)"
+            [class.ui-lib-pick-list__item--dragging]="dragOriginList() === 'target' && draggedValueIndex() === getValueIndex('target', $index)"
+            [class.ui-lib-pick-list__item--drop-before]="dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'before'"
+            [class.ui-lib-pick-list__item--drop-after]="dragOverList() === 'target' && dragOverIndex() === $index && dragPosition() === 'after'"
+            [attr.aria-selected]="isTargetSelected(item)"
+            [attr.id]="itemId('target', $index)"
+            [tabindex]="targetFocusedIndex() === $index ? 0 : -1"
+            [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
+            (click)="onTargetItemClick($event, item, $index)"
+            (focus)="onTargetItemFocus($event, $index)"
+            (dragstart)="onDragStart($event, 'target', $index)"
+            (dragover)="onDragOver($event, 'target', $index)"
+            (drop)="onDrop($event, 'target', $index)"
+            (dragend)="onDragEnd($event)"
+          >
+            @if (itemTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isTargetSelected(item) }"
+              />
+            } @else {
+              {{ resolveItemLabel(item) }}
+            }
+          </li>
+        }
+      }
+    </ul>
+
+  </div>
+</div>

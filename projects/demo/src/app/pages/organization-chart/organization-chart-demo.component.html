@@ -161,5 +161,62 @@
       </app-code-preview>
     </section>
 
+    <!-- 8. Accessibility -->
+    <section id="accessibility" data-doc-anchor class="example-section">
+      <h3>8. Accessibility</h3>
+      <ui-lib-card>
+        <ul>
+          <li>Each node is a <code>button</code> fully keyboard-focusable and activatable.</li>
+          <li>Collapsed subtrees are hidden with <code>aria-hidden="true"</code>.</li>
+          <li>Expand/collapse state is announced via <code>LiveAnnouncerService</code>.</li>
+          <li>Selection uses <code>aria-selected</code> on node buttons.</li>
+          <li>Provide a label with <code>[ariaLabel]</code> on the component.</li>
+        </ul>
+      </ui-lib-card>
+    </section>
+
+    <!-- 9. API Reference -->
+    <section id="api" data-doc-anchor class="example-section">
+      <h3>9. API Reference</h3>
+      <ui-lib-card>
+        <div class="doc-stack">
+          <div>
+            <h4>Inputs</h4>
+            <table class="doc-table">
+              <thead><tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>value</code></td><td><code>OrganizationChartNode[]</code></td><td><code>[]</code></td><td>Root nodes of the chart.</td></tr>
+                <tr><td><code>selection</code></td><td><code>OrganizationChartNode | OrganizationChartNode[] | null</code></td><td><code>null</code></td><td>Selected node(s).</td></tr>
+                <tr><td><code>selectionMode</code></td><td><code>'single' | 'multiple' | null</code></td><td><code>null</code></td><td>Selection mode.</td></tr>
+                <tr><td><code>collapsible</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Enables expand/collapse on nodes with children.</td></tr>
+                <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Theme variant override.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4>Outputs</h4>
+            <table class="doc-table">
+              <thead><tr><th>Output</th><th>Payload</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>nodeSelect</code></td><td><code>OrganizationChartNodeSelectEvent</code></td><td>When a node is selected.</td></tr>
+                <tr><td><code>nodeUnselect</code></td><td><code>OrganizationChartNodeUnselectEvent</code></td><td>When a node is deselected.</td></tr>
+                <tr><td><code>nodeExpand</code></td><td><code>OrganizationChartNodeExpandEvent</code></td><td>When a node is expanded.</td></tr>
+                <tr><td><code>nodeCollapse</code></td><td><code>OrganizationChartNodeCollapseEvent</code></td><td>When a node is collapsed.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4>Template Slots</h4>
+            <table class="doc-table">
+              <thead><tr><th>Directive</th><th>Context</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td><code>uiOrgChartNode</code></td><td><code>$implicit: OrganizationChartNode</code></td><td>Custom node content.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ui-lib-card>
+    </section>
+
   </div>
 </app-doc-page-layout>

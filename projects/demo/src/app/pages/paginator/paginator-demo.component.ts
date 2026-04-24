@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { JsonPipe } from '@angular/common';
 import type { WritableSignal } from '@angular/core';
 import { PaginatorComponent } from 'ui-lib-custom/paginator';
 import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
@@ -11,7 +10,7 @@ import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
 @Component({
   selector: 'app-paginator-demo',
   standalone: true,
-  imports: [PaginatorComponent, JsonPipe],
+  imports: [PaginatorComponent],
   templateUrl: './paginator-demo.component.html',
   styleUrl: './paginator-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

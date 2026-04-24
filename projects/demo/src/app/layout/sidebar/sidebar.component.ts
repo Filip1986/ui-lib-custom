@@ -115,14 +115,12 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/paginator',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'PickList',
           icon: 'pi pi-circle',
           route: '/pick-list',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'Scroller',
