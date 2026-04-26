@@ -127,7 +127,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/scroller',
           group: 'Data',
-          badge: 'TODO',
         },
         {
           label: 'Table',

@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Upload` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `VirtualScroller` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
 - `Tree` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `TreeTable` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
@@ -61,6 +62,31 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
 ---
+
+Date: 2026-04-26
+Changed:
+  - projects/ui-lib-custom/src/lib/upload/ (new — types, constants, directives, component TS/HTML/SCSS, spec, index.ts)
+  - projects/ui-lib-custom/upload/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (added upload to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added upload import test)
+  - projects/demo/src/app/pages/upload/ (new demo — TS/HTML/SCSS, 8 scenarios)
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts (restored truncated closing brace)
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.ts (stripped 26 null bytes from EOF)
+State: Upload component fully complete. Drag-and-drop file selection, multi-file support, image
+  thumbnails, file validation (size/type/limit), customUpload mode, auto mode, three variants
+  (material/bootstrap/minimal), three sizes (sm/md/lg), four template slots (header/content/empty/file),
+  WAI-ARIA roles/labels throughout. 36/36 unit tests passing. 37/37 entry-point tests passing.
+  ESLint clean on all lib and demo files. Library build clean (upload entry point).
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/upload/ projects/demo/src/app/pages/upload/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom — ui-lib-custom/upload ✔ Built,
+  npx jest --testPathPatterns=upload (36/36 PASS),
+  npx jest --testPathPatterns=entry-points (37/37 PASS).
+Terminal notes: Several files were truncated by the Write tool during creation (component TS, constants,
+  spec, demo TS, package.json, entry-points spec). All repaired via Python open(..., w, newline=LF)
+  appends. data-view.component.ts had a pre-existing truncation (missing closing braces on
+  createPageNavigationItems). tree-table.component.ts had 26 null bytes at EOF. Both fixed in-session.
+Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
 
 Date: 2026-04-25
 Changed:

@@ -1,0 +1,562 @@
+// =============================================================================
+// Upload component — CSS custom properties + base styles
+// =============================================================================
+
+.ui-lib-upload {
+  // ── Component tokens ───────────────────────────────────────────────────────
+  --uilib-upload-border-color: var(--uilib-border-color, #dee2e6);
+  --uilib-upload-border: 1px solid var(--uilib-upload-border-color);
+  --uilib-upload-border-radius: var(--uilib-border-radius, 6px);
+  --uilib-upload-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-upload-fg: var(--uilib-text-color, #1f2937);
+  --uilib-upload-secondary-fg: var(--uilib-text-color-secondary, #6b7280);
+  --uilib-upload-transition: var(--uilib-transition-base, all 0.2s ease);
+
+  // Header
+  --uilib-upload-header-bg: var(--uilib-surface-color-alt, #f8f9fa);
+  --uilib-upload-header-padding: 0.75rem 1rem;
+  --uilib-upload-toolbar-gap: 0.5rem;
+
+  // Drop zone
+  --uilib-upload-content-padding: 1.5rem;
+  --uilib-upload-drop-zone-min-height: 200px;
+  --uilib-upload-drop-zone-border: 2px dashed var(--uilib-upload-border-color);
+  --uilib-upload-drop-zone-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-upload-drop-zone-drag-border-color: var(--uilib-primary-color, #3b82f6);
+  --uilib-upload-drop-zone-drag-bg: rgba(59, 130, 246, 0.04);
+
+  // Empty state
+  --uilib-upload-empty-gap: 0.5rem;
+  --uilib-upload-empty-icon-color: var(--uilib-text-color-secondary, #9ca3af);
+  --uilib-upload-empty-text-color: var(--uilib-text-color-secondary, #6b7280);
+  --uilib-upload-empty-hint-color: var(--uilib-text-color-secondary, #9ca3af);
+  --uilib-upload-empty-link-color: var(--uilib-primary-color, #3b82f6);
+
+  // File list
+  --uilib-upload-file-list-gap: 0.5rem;
+  --uilib-upload-file-item-padding: 0.625rem 0.875rem;
+  --uilib-upload-file-item-bg: var(--uilib-surface-color-alt, #f9fafb);
+  --uilib-upload-file-item-border: 1px solid var(--uilib-border-color, #e5e7eb);
+  --uilib-upload-file-item-radius: var(--uilib-border-radius, 6px);
+  --uilib-upload-file-item-gap: 0.75rem;
+  --uilib-upload-file-icon-color: var(--uilib-text-color-secondary, #6b7280);
+  --uilib-upload-file-name-color: var(--uilib-text-color, #1f2937);
+  --uilib-upload-file-size-color: var(--uilib-text-color-secondary, #6b7280);
+  --uilib-upload-file-remove-color: var(--uilib-text-color-secondary, #9ca3af);
+  --uilib-upload-file-remove-hover-color: var(--uilib-danger-color, #ef4444);
+  --uilib-upload-file-preview-radius: 4px;
+  --uilib-upload-file-preview-size: 3rem;
+
+  // Buttons
+  --uilib-upload-btn-padding: 0.5rem 1rem;
+  --uilib-upload-btn-font-size: 0.875rem;
+  --uilib-upload-btn-font-weight: 500;
+  --uilib-upload-btn-radius: var(--uilib-border-radius, 6px);
+  --uilib-upload-btn-gap: 0.375rem;
+  --uilib-upload-btn-disabled-opacity: 0.5;
+
+  --uilib-upload-btn-choose-bg: var(--uilib-primary-color, #3b82f6);
+  --uilib-upload-btn-choose-fg: #ffffff;
+  --uilib-upload-btn-choose-hover-bg: var(--uilib-primary-color-dark, #2563eb);
+
+  --uilib-upload-btn-upload-bg: var(--uilib-success-color, #22c55e);
+  --uilib-upload-btn-upload-fg: #ffffff;
+  --uilib-upload-btn-upload-hover-bg: var(--uilib-success-color-dark, #16a34a);
+
+  --uilib-upload-btn-cancel-bg: var(--uilib-danger-color, #ef4444);
+  --uilib-upload-btn-cancel-fg: #ffffff;
+  --uilib-upload-btn-cancel-hover-bg: var(--uilib-danger-color-dark, #dc2626);
+
+  // Validation messages
+  --uilib-upload-messages-bg: #fef2f2;
+  --uilib-upload-messages-border: 1px solid #fecaca;
+  --uilib-upload-messages-fg: #b91c1c;
+  --uilib-upload-messages-padding: 0.75rem 1rem;
+  --uilib-upload-messages-radius: var(--uilib-border-radius, 6px);
+  --uilib-upload-messages-close-color: #b91c1c;
+
+  // Size — sm
+  &.ui-lib-upload--sm {
+    --uilib-upload-btn-font-size: 0.75rem;
+    --uilib-upload-btn-padding: 0.375rem 0.75rem;
+    --uilib-upload-content-padding: 1rem;
+    --uilib-upload-drop-zone-min-height: 150px;
+    --uilib-upload-file-item-padding: 0.5rem 0.75rem;
+    --uilib-upload-file-preview-size: 2rem;
+  }
+
+  // Size — lg
+  &.ui-lib-upload--lg {
+    --uilib-upload-btn-font-size: 1rem;
+    --uilib-upload-btn-padding: 0.625rem 1.375rem;
+    --uilib-upload-content-padding: 2rem;
+    --uilib-upload-drop-zone-min-height: 280px;
+    --uilib-upload-file-item-padding: 0.875rem 1.125rem;
+    --uilib-upload-file-preview-size: 4rem;
+  }
+
+  // ── Base layout ────────────────────────────────────────────────────────────
+  display: block;
+  border: var(--uilib-upload-border);
+  border-radius: var(--uilib-upload-border-radius);
+  background: var(--uilib-upload-bg);
+  color: var(--uilib-upload-fg);
+  font-family: var(--uilib-font-body, inherit);
+  overflow: hidden;
+}
+
+// ── Container ────────────────────────────────────────────────────────────────
+
+.ui-lib-upload__container {
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Hidden file input ─────────────────────────────────────────────────────────
+
+.ui-lib-upload__input {
+  display: none;
+}
+
+// ── Header / toolbar ─────────────────────────────────────────────────────────
+
+.ui-lib-upload__header {
+  padding: var(--uilib-upload-header-padding);
+  background: var(--uilib-upload-header-bg);
+  border-bottom: var(--uilib-upload-border);
+}
+
+.ui-lib-upload__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--uilib-upload-toolbar-gap);
+}
+
+// ── Buttons ──────────────────────────────────────────────────────────────────
+
+.ui-lib-upload__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--uilib-upload-btn-gap);
+  padding: var(--uilib-upload-btn-padding);
+  font-size: var(--uilib-upload-btn-font-size);
+  font-weight: var(--uilib-upload-btn-font-weight);
+  font-family: inherit;
+  line-height: 1;
+  border: none;
+  border-radius: var(--uilib-upload-btn-radius);
+  cursor: pointer;
+  transition: var(--uilib-upload-transition);
+  white-space: nowrap;
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-primary-color, #3b82f6);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: var(--uilib-upload-btn-disabled-opacity);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.ui-lib-upload__btn--choose {
+  background: var(--uilib-upload-btn-choose-bg);
+  color: var(--uilib-upload-btn-choose-fg);
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-upload-btn-choose-hover-bg);
+  }
+}
+
+.ui-lib-upload__btn--upload {
+  background: var(--uilib-upload-btn-upload-bg);
+  color: var(--uilib-upload-btn-upload-fg);
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-upload-btn-upload-hover-bg);
+  }
+}
+
+.ui-lib-upload__btn--cancel {
+  background: var(--uilib-upload-btn-cancel-bg);
+  color: var(--uilib-upload-btn-cancel-fg);
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-upload-btn-cancel-hover-bg);
+  }
+}
+
+.ui-lib-upload__btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+// ── Drop zone / content area ──────────────────────────────────────────────────
+
+.ui-lib-upload__content {
+  padding: var(--uilib-upload-content-padding);
+  min-height: var(--uilib-upload-drop-zone-min-height);
+  border: var(--uilib-upload-drop-zone-border);
+  border-radius: var(--uilib-upload-border-radius);
+  margin: 0.75rem;
+  background: var(--uilib-upload-drop-zone-bg);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+// Drag-over state (applied to the host)
+.ui-lib-upload--drag-over .ui-lib-upload__content {
+  border-color: var(--uilib-upload-drop-zone-drag-border-color);
+  background: var(--uilib-upload-drop-zone-drag-bg);
+}
+
+// ── Empty state ───────────────────────────────────────────────────────────────
+
+.ui-lib-upload__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--uilib-upload-empty-gap);
+  flex: 1;
+  text-align: center;
+  padding: 1rem;
+}
+
+.ui-lib-upload__empty-icon {
+  display: flex;
+  color: var(--uilib-upload-empty-icon-color);
+}
+
+.ui-lib-upload__empty-message {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--uilib-upload-empty-text-color);
+}
+
+.ui-lib-upload__empty-hint {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--uilib-upload-empty-hint-color);
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.ui-lib-upload__empty-choose-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.8125rem;
+  color: var(--uilib-upload-empty-link-color);
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-primary-color, #3b82f6);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ── File list ─────────────────────────────────────────────────────────────────
+
+.ui-lib-upload__file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-upload-file-list-gap);
+  width: 100%;
+}
+
+.ui-lib-upload__file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--uilib-upload-file-item-gap);
+  padding: var(--uilib-upload-file-item-padding);
+  background: var(--uilib-upload-file-item-bg);
+  border: var(--uilib-upload-file-item-border);
+  border-radius: var(--uilib-upload-file-item-radius);
+  min-width: 0;
+}
+
+.ui-lib-upload__file-info {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-upload-file-item-gap);
+  min-width: 0;
+  flex: 1;
+}
+
+.ui-lib-upload__file-preview {
+  width: var(--uilib-upload-file-preview-size);
+  height: var(--uilib-upload-file-preview-size);
+  object-fit: cover;
+  border-radius: var(--uilib-upload-file-preview-radius);
+  flex-shrink: 0;
+}
+
+.ui-lib-upload__file-icon {
+  display: flex;
+  color: var(--uilib-upload-file-icon-color);
+  flex-shrink: 0;
+}
+
+.ui-lib-upload__file-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.ui-lib-upload__file-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--uilib-upload-file-name-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui-lib-upload__file-size {
+  font-size: 0.75rem;
+  color: var(--uilib-upload-file-size-color);
+}
+
+.ui-lib-upload__file-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--uilib-upload-file-remove-color);
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    color: var(--uilib-upload-file-remove-hover-color);
+    background: rgba(239, 68, 68, 0.08);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-danger-color, #ef4444);
+    outline-offset: 2px;
+  }
+}
+
+// ── Validation messages ────────────────────────────────────────────────────────
+
+.ui-lib-upload__messages {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0 0.75rem 0.75rem;
+  padding: var(--uilib-upload-messages-padding);
+  background: var(--uilib-upload-messages-bg);
+  border: var(--uilib-upload-messages-border);
+  border-radius: var(--uilib-upload-messages-radius);
+  color: var(--uilib-upload-messages-fg);
+}
+
+.ui-lib-upload__messages-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.ui-lib-upload__message {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.ui-lib-upload__message-summary {
+  font-weight: 600;
+}
+
+.ui-lib-upload__messages-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--uilib-upload-messages-close-color);
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-danger-color, #ef4444);
+    outline-offset: 2px;
+  }
+}
+
+// =============================================================================
+// Variant — Material
+// =============================================================================
+
+.ui-lib-upload.ui-lib-upload--material {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+
+  .ui-lib-upload__btn {
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    }
+  }
+
+  .ui-lib-upload__content {
+    border-style: dashed;
+  }
+
+  .ui-lib-upload__file-item {
+    border-radius: 4px;
+  }
+}
+
+// =============================================================================
+// Variant — Bootstrap
+// =============================================================================
+
+.ui-lib-upload.ui-lib-upload--bootstrap {
+  --uilib-upload-btn-choose-bg: #0d6efd;
+  --uilib-upload-btn-choose-hover-bg: #0b5ed7;
+  --uilib-upload-btn-upload-bg: #198754;
+  --uilib-upload-btn-upload-hover-bg: #146c43;
+  --uilib-upload-btn-cancel-bg: #dc3545;
+  --uilib-upload-btn-cancel-hover-bg: #b02a37;
+  --uilib-upload-drop-zone-drag-border-color: #0d6efd;
+  --uilib-upload-drop-zone-drag-bg: rgba(13, 110, 253, 0.04);
+  --uilib-upload-empty-link-color: #0d6efd;
+
+  .ui-lib-upload__btn {
+    border-radius: 0.375rem;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+  }
+
+  .ui-lib-upload__btn--upload:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+  }
+
+  .ui-lib-upload__btn--cancel:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+  }
+
+  .ui-lib-upload__file-item {
+    border-radius: 0.375rem;
+  }
+}
+
+// =============================================================================
+// Variant — Minimal
+// =============================================================================
+
+.ui-lib-upload.ui-lib-upload--minimal {
+  --uilib-upload-header-bg: transparent;
+  border: 1px solid var(--uilib-border-color, #e5e7eb);
+  box-shadow: none;
+
+  .ui-lib-upload__btn {
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+      box-shadow: none;
+    }
+
+    &:hover:not(:disabled) {
+      opacity: 0.8;
+      box-shadow: none;
+    }
+  }
+
+  .ui-lib-upload__btn--choose {
+    color: var(--uilib-primary-color, #3b82f6);
+  }
+
+  .ui-lib-upload__btn--upload {
+    color: var(--uilib-success-color, #22c55e);
+  }
+
+  .ui-lib-upload__btn--cancel {
+    color: var(--uilib-danger-color, #ef4444);
+  }
+
+  .ui-lib-upload__content {
+    border-style: dashed;
+    background: transparent;
+  }
+
+  .ui-lib-upload__file-item {
+    background: transparent;
+    border-radius: 4px;
+  }
+}
+
+// =============================================================================
+// Disabled state (host modifier)
+// =============================================================================
+
+.ui-lib-upload.ui-lib-upload--disabled {
+  .ui-lib-upload__content {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,197 @@
+<div class="upload-demo">
+  <header class="upload-demo__header">
+    <h1 class="upload-demo__title">Upload</h1>
+    <p class="upload-demo__subtitle">
+      Advanced file uploader with drag-and-drop, image previews, validation, and custom upload mode.
+    </p>
+
+    <!-- Variant switcher -->
+    <div class="upload-demo__variant-switcher" role="group" aria-label="Select variant">
+      @for (variant of variants; track variant) {
+        <button
+          type="button"
+          class="upload-demo__variant-btn"
+          [class.upload-demo__variant-btn--active]="activeVariant() === variant"
+          (click)="setVariant(variant)"
+        >
+          {{ variant }}
+        </button>
+      }
+    </div>
+  </header>
+
+  <!-- ── Section 1: Basic single-file upload ─────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Basic</h2>
+    <p class="upload-demo__section-desc">Single-file upload with default settings.</p>
+
+    <ui-lib-upload
+      [variant]="activeVariant()"
+      (fileSelect)="onFileSelect($event)"
+      (fileRemove)="onFileRemove($event)"
+      (uploadClear)="onUploadClear()"
+    />
+  </section>
+
+  <!-- ── Section 2: Multi-file upload ────────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Multiple Files</h2>
+    <p class="upload-demo__section-desc">Accepts up to 5 files, max 5 MB each.</p>
+
+    <ui-lib-upload
+      [variant]="activeVariant()"
+      [multiple]="true"
+      [fileLimit]="5"
+      [maxFileSize]="5242880"
+      (fileSelect)="onFileSelect($event)"
+      (fileRemove)="onFileRemove($event)"
+      (uploadClear)="onUploadClear()"
+    />
+  </section>
+
+  <!-- ── Section 3: Image-only upload ────────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Image Only</h2>
+    <p class="upload-demo__section-desc">
+      Restricts selection to image files. Thumbnails are shown for previews.
+    </p>
+
+    <ui-lib-upload
+      [variant]="activeVariant()"
+      [multiple]="true"
+      accept="image/*"
+      [previewWidth]="60"
+      (fileSelect)="onFileSelect($event)"
+      (fileRemove)="onFileRemove($event)"
+    >
+      <ng-template uiUploadEmpty>
+        <div class="upload-demo__custom-empty">
+          <span class="upload-demo__custom-empty-icon" aria-hidden="true">🖼</span>
+          <p>Drop images here or click to browse</p>
+          <small>JPG, PNG, GIF, WebP supported</small>
+        </div>
+      </ng-template>
+    </ui-lib-upload>
+  </section>
+
+  <!-- ── Section 4: Custom upload handler ────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Custom Upload Handler</h2>
+    <p class="upload-demo__section-desc">
+      Set <code>customUpload="true"</code> and listen to <code>(uploadHandler)</code>
+      to control the HTTP transport yourself.
+    </p>
+
+    <div class="upload-demo__two-col">
+      <ui-lib-upload
+        [variant]="activeVariant()"
+        [multiple]="true"
+        [customUpload]="true"
+        (uploadHandler)="onCustomUpload($event)"
+        (fileSelect)="onFileSelect($event)"
+        (fileRemove)="onFileRemove($event)"
+      />
+
+      <div class="upload-demo__log-panel">
+        <h3 class="upload-demo__log-title">Upload events</h3>
+        @if (customUploadLog().length === 0) {
+          <p class="upload-demo__log-empty">No events yet.</p>
+        } @else {
+          <ul class="upload-demo__log-list">
+            @for (entry of customUploadLog(); track entry.timestamp) {
+              <li class="upload-demo__log-entry">
+                <span class="upload-demo__log-time">{{ entry.timestamp }}</span>
+                <span class="upload-demo__log-msg">{{ entry.message }}</span>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 5: Auto upload ───────────────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Auto Upload</h2>
+    <p class="upload-demo__section-desc">
+      Set <code>auto="true"</code> together with <code>customUpload="true"</code>
+      to trigger the upload immediately after file selection.
+      The Upload and Cancel buttons are hidden since they are not needed.
+    </p>
+
+    <ui-lib-upload
+      [variant]="activeVariant()"
+      [multiple]="true"
+      [auto]="true"
+      [customUpload]="true"
+      [showUploadButton]="false"
+      [showCancelButton]="false"
+      (uploadHandler)="onCustomUpload($event)"
+      (fileSelect)="onFileSelect($event)"
+    />
+  </section>
+
+  <!-- ── Section 6: Sizes ─────────────────────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Sizes</h2>
+    <div class="upload-demo__size-grid">
+      @for (size of ['sm', 'md', 'lg']; track size) {
+        <div>
+          <p class="upload-demo__size-label">{{ size }}</p>
+          <ui-lib-upload [variant]="activeVariant()" [size]="$any(size)" />
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ── Section 7: Custom file template ─────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Custom File Template</h2>
+    <p class="upload-demo__section-desc">
+      Use the <code>uiUploadFile</code> directive to render each queued file
+      with a completely custom template.
+    </p>
+
+    <ui-lib-upload
+      [variant]="activeVariant()"
+      [multiple]="true"
+    >
+      <ng-template uiUploadFile let-item let-index="index">
+        <div class="upload-demo__custom-file">
+          <span class="upload-demo__custom-file-index">{{ index + 1 }}</span>
+          <span class="upload-demo__custom-file-name">{{ item.file.name }}</span>
+          <span class="upload-demo__custom-file-type">{{ item.file.type || 'unknown' }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-upload>
+  </section>
+
+  <!-- ── Section 8: Disabled ─────────────────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Disabled</h2>
+
+    <ui-lib-upload
+      [variant]="activeVariant()"
+      [disabled]="true"
+    />
+  </section>
+
+  <!-- ── Event log ──────────────────────────────────────────────────────────── -->
+  <section class="upload-demo__section">
+    <h2 class="upload-demo__section-title">Event Log</h2>
+    <div class="upload-demo__log-panel upload-demo__log-panel--full">
+      @if (eventLog().length === 0) {
+        <p class="upload-demo__log-empty">Interact with the components above to see events.</p>
+      } @else {
+        <ul class="upload-demo__log-list">
+          @for (entry of eventLog(); track entry.timestamp) {
+            <li class="upload-demo__log-entry">
+              <span class="upload-demo__log-time">{{ entry.timestamp }}</span>
+              <span class="upload-demo__log-msg">{{ entry.message }}</span>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </section>
+</div>

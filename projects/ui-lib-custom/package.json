@@ -120,6 +120,10 @@
     "./virtual-scroller": {
       "types": "./virtual-scroller/index.d.ts",
       "default": "./fesm2022/ui-lib-custom-virtual-scroller.mjs"
+    },
+    "./upload": {
+      "esm2022": "./esm2022/upload/index.mjs",
+      "esm": "./esm2022/upload/index.mjs"
     }
   },
   "typesVersions": {
@@ -180,6 +184,9 @@
       ],
       "virtual-scroller": [
         "./virtual-scroller/index.d.ts"
+      ],
+      "upload": [
+        "./upload/index.d.ts"
       ]
     }
   }

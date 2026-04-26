@@ -35,6 +35,7 @@ import type * as UiLibTimeline from 'ui-lib-custom/timeline';
 import type * as UiLibTree from 'ui-lib-custom/tree';
 import type * as UiLibTreeTable from 'ui-lib-custom/tree-table';
 import type * as UiLibVirtualScroller from 'ui-lib-custom/virtual-scroller';
+import type * as UiLibUpload from 'ui-lib-custom/upload';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -254,5 +255,15 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.ScrollerContentDirective).toBeDefined();
     expect(mod.ScrollerLoaderDirective).toBeDefined();
     expect(mod.ScrollerLoaderIconDirective).toBeDefined();
+  });
+
+  it('should import from upload', async (): Promise<void> => {
+    const mod: typeof UiLibUpload = await import('ui-lib-custom/upload');
+    expect(mod.UploadComponent).toBeDefined();
+    expect(mod.UploadHeaderDirective).toBeDefined();
+    expect(mod.UploadContentDirective).toBeDefined();
+    expect(mod.UploadEmptyDirective).toBeDefined();
+    expect(mod.UploadFileDirective).toBeDefined();
+    expect(mod.UPLOAD_DEFAULT_CHOOSE_LABEL).toBeDefined();
   });
 });
