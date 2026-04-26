@@ -1,0 +1,88 @@
+@if (!disabled()) {
+  <div
+    #scrollerEl
+    [attr.id]="id()"
+    [attr.tabindex]="tabIndex()"
+    class="uilib-scroller-viewport"
+    role="log"
+    aria-live="off"
+    [attr.aria-label]="'Virtual scroller'"
+  >
+    @if (contentTpl()) {
+      <!-- User-supplied full content template — receives the loaded items slice and options object. -->
+      <ng-container
+        [ngTemplateOutlet]="contentTpl()!"
+        [ngTemplateOutletContext]="{ $implicit: loadedItems(), options: getContentOptions() }"
+      />
+    } @else {
+      <!-- Built-in content: absolutely-positioned, CSS-transformed item container. -->
+      <div
+        #contentEl
+        class="uilib-scroller-content"
+        [style]="contentStyle()"
+        [class.uilib-scroller-loading]="internalLoading()"
+      >
+        @for (item of loadedRows(); track trackItem($index, item)) {
+          @if (itemTpl()) {
+            <ng-container
+              [ngTemplateOutlet]="itemTpl()!"
+              [ngTemplateOutletContext]="{ $implicit: item, options: getItemOptions($index) }"
+            />
+          } @else {
+            <!-- Fallback when no item template is provided. -->
+            <div class="uilib-scroller-item-placeholder"></div>
+          }
+        }
+      </div>
+    }
+
+    <!-- Spacer: an invisible 1×1 element scaled to the full virtual height/width. -->
+    @if (showSpacer()) {
+      <div
+        class="uilib-scroller-spacer"
+        [style]="spacerStyle()"
+        aria-hidden="true"
+      ></div>
+    }
+
+    <!-- Loading overlay: shown when internalLoading is true and showLoader is enabled. -->
+    @if (!loaderDisabled() && showLoader() && internalLoading()) {
+      <div
+        class="uilib-scroller-loader"
+        [class.uilib-scroller-loader-mask]="!loaderTpl()"
+        role="status"
+        aria-label="Loading"
+      >
+        @if (loaderTpl()) {
+          @for (loaderItem of loaderArr(); track $index) {
+            <ng-container
+              [ngTemplateOutlet]="loaderTpl()!"
+              [ngTemplateOutletContext]="{
+                options: getLoaderOptions($index, isBoth() ? { numCols: $index } : undefined)
+              }"
+            />
+          }
+        } @else if (loaderIconTpl()) {
+          <ng-container
+            [ngTemplateOutlet]="loaderIconTpl()!"
+            [ngTemplateOutletContext]="{ options: { styleClass: 'uilib-scroller-loading-icon' } }"
+          />
+        } @else {
+          <span class="uilib-scroller-loading-icon" aria-hidden="true"></span>
+        }
+      </div>
+    }
+  </div>
+} @else {
+  <!-- Disabled mode: bypass virtualization and render all items directly. -->
+  <ng-content />
+  @if (contentTpl()) {
+    <ng-container
+      [ngTemplateOutlet]="contentTpl()!"
+      [ngTemplateOutletContext]="{
+        $implicit: items(),
+        options: { rows: items(), columns: loadedColumns() }
+      }"
+    />
+  }
+}

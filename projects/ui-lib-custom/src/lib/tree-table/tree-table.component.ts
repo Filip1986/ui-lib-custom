@@ -53,7 +53,7 @@ import type {
 @Component({
   selector: 'ui-lib-tree-table',
   standalone: true,
-  imports: [NgTemplateOutlet, TreeTableColumnComponent],
+  imports: [NgTemplateOutlet],
   templateUrl: './tree-table.component.html',
   styleUrl: './tree-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

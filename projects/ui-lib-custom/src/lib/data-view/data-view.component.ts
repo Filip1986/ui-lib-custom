@@ -39,6 +39,7 @@ import {
   DataViewPaginatorLeftDirective,
   DataViewPaginatorRightDirective,
 } from './data-view.template-directives';
+import { DATA_VIEW_DEFAULT_ROWS_PER_PAGE } from './data-view.constants';
 
 type DataViewPaginatorPosition = 'top' | 'bottom' | 'both';
 type DataViewPageNavigationItem = number | 'ellipsis-left' | 'ellipsis-right';
@@ -80,7 +81,7 @@ export class DataViewComponent<T> {
   public readonly dataKey: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaLabel: InputSignal<string> = input<string>('Data list');
   public readonly paginator: InputSignal<boolean> = input<boolean>(false);
-  public readonly rows: InputSignal<number> = input<number>(10);
+  public readonly rows: InputSignal<number> = input<number>(DATA_VIEW_DEFAULT_ROWS_PER_PAGE);
   public readonly first: ModelSignal<number> = model<number>(0);
   public readonly totalRecords: InputSignal<number | null> = input<number | null>(null);
   public readonly rowsPerPageOptions: InputSignal<number[] | null> = input<number[] | null>(null);
@@ -125,7 +126,9 @@ export class DataViewComponent<T> {
     { read: TemplateRef }
   );
 
-  private readonly internalRows: WritableSignal<number> = signal<number>(10);
+  private readonly internalRows: WritableSignal<number> = signal<number>(
+    DATA_VIEW_DEFAULT_ROWS_PER_PAGE
+  );
 
   constructor() {
     effect((): void => {

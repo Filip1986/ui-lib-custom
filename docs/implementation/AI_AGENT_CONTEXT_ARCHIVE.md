@@ -829,3 +829,49 @@ Terminal notes:
 Next step: Prompt 7 - wire/verify the `ui-lib-custom/data-view` secondary entry point if still pending.
 ```
 
+
+
+---
+
+Date: 2026-04-24
+Changed:
+  - projects/ui-lib-custom/src/lib/timeline/ (all 8 files: types, constants, directives, component ts/html/scss, spec, index)
+  - projects/ui-lib-custom/timeline/ (ng-package.json, package.json, public-api.ts -- secondary entry point)
+  - projects/ui-lib-custom/package.json (exports + typesVersions for timeline)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (timeline import test added)
+  - projects/demo/src/app/pages/timeline/ (full demo -- TS, HTML, SCSS -- 8 scenarios)
+  - docs/reference/components/TIMELINE.md (new)
+  - docs/reference/components/README.md (Timeline row added)
+  - AI_AGENT_CONTEXT.md (Timeline marked complete)
+  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts (full rewrite: all 287 lint errors fixed)
+  - projects/demo/src/app/pages/table/table-demo.component.ts (repaired truncation; lint clean)
+  - CLAUDE.md (lint step added to Key Commands and component checklist)
+  - COMPONENT_CREATION_GUIDE.md (Step 8 expanded with mandatory lint command)
+  - LIBRARY_CONVENTIONS.md (ESLint added as first active check in Code Quality Checklist)
+State: Timeline and Table both lint-clean. 51/51 table tests, 31/31 timeline tests. Build passing.
+Verification: npx eslint projects/ui-lib-custom/src/lib/timeline/ --max-warnings 0 (CLEAN),
+  npx eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (CLEAN),
+  npx jest --testPathPatterns=timeline (31/31), npx jest --testPathPatterns=table (51/51),
+  npx jest --testPathPatterns=entry-points (33/33 PASS), ng build ui-lib-custom (all entry points).
+Terminal notes: python3 not available -- use python. All file writes done via python open(..., w, newline=LF).
+  Write/Edit tools produce trailing null bytes on files >800 lines -- strip with Python data.rstrip(b'\x00').
+Next step: Write docs/reference/components/TABLE.md, then begin knip baseline + dead-code cleanup.
+
+---
+
+Date: 2026-04-24
+Changed:
+  - projects/ui-lib-custom/src/lib/pick-list/ (all 7 files: types, constants, directives, component ts/html/scss, spec, index)
+  - projects/ui-lib-custom/pick-list/ (ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (exports + typesVersions for pick-list)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (pick-list import test)
+  - projects/demo/src/app/pages/pick-list/ (pick-list-demo.component ts/html/scss -- new)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: TODO for PickList)
+  - docs/reference/components/PICKLIST.md (new)
+  - docs/reference/components/README.md (added PickList row)
+State: PickList fully complete -- source, entry point, tests (52/52 passing), demo page, docs.
+  Multiple pre-existing truncated files also repaired as collateral.
+Verification: npx jest --testPathPatterns=pick-list (52/52), npx jest --testPathPatterns=entry-points (31/31),
+  ng build demo --configuration=development (success, 1 pre-existing warning).
+Terminal notes: Edit/Write tools produce CRLF corruption and trailing null bytes -- all file writes done via Python.
+Next step: Run full test suite (npm test) to confirm no regressions, then knip baseline + dead-code cleanup pass.

@@ -1,0 +1,158 @@
+// =============================================================================
+// VirtualScroller — component styles
+// Pattern: --uilib-scroller-{property}[-{state}]
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Design tokens (CSS variable fallbacks)
+// -----------------------------------------------------------------------------
+
+:host {
+  --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.7);
+  --uilib-scroller-loading-icon-size: 2rem;
+  --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #6366f1);
+  --uilib-scroller-item-border-color: var(--uilib-color-border, #e5e7eb);
+
+  display: block;
+}
+
+// -----------------------------------------------------------------------------
+// Viewport — the actual scrollable container
+// -----------------------------------------------------------------------------
+
+.uilib-scroller-viewport {
+  position: relative;
+  overflow: auto;
+  // contain: strict improves scroll performance by limiting paint/layout scope
+  contain: strict;
+  // GPU-accelerated scroll layer
+  transform: translateZ(0);
+  will-change: scroll-position;
+  outline: 0 none;
+}
+
+// -----------------------------------------------------------------------------
+// Content — absolutely positioned, translated as the user scrolls
+// -----------------------------------------------------------------------------
+
+.uilib-scroller-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  will-change: transform;
+}
+
+// -----------------------------------------------------------------------------
+// Spacer — invisible element that gives the viewport its full virtual height
+// -----------------------------------------------------------------------------
+
+.uilib-scroller-spacer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 1px;
+  // Scale origin at top-left so the inline style height/width sets virtual size
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+// -----------------------------------------------------------------------------
+// Loader overlay
+// -----------------------------------------------------------------------------
+
+.uilib-scroller-loader {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--uilib-scroller-loader-bg);
+}
+
+.uilib-scroller-loader-mask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Default spinner icon (shown when no loader/loaderIcon template is provided)
+.uilib-scroller-loading-icon {
+  display: inline-block;
+  width: var(--uilib-scroller-loading-icon-size);
+  height: var(--uilib-scroller-loading-icon-size);
+  border: 3px solid transparent;
+  border-top-color: var(--uilib-scroller-loading-icon-color);
+  border-radius: 50%;
+  animation: uilib-scroller-spin 0.75s linear infinite;
+}
+
+@keyframes uilib-scroller-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Orientation modifiers
+// -----------------------------------------------------------------------------
+
+// Horizontal: content is laid out as a flex row
+:host.uilib-scroller-horizontal {
+  .uilib-scroller-content {
+    display: flex;
+  }
+}
+
+// Both: 2-D scrolling — content remains block (rows handle columns internally)
+:host.uilib-scroller-both {
+  .uilib-scroller-viewport {
+    overflow: scroll;
+  }
+}
+
+// Inline: content is in normal flow rather than absolutely positioned
+:host.uilib-scroller-inline {
+  .uilib-scroller-content {
+    position: static;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variant: material
+// -----------------------------------------------------------------------------
+
+:host.uilib-variant-material {
+  --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.8);
+  --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #6366f1);
+
+  .uilib-scroller-viewport {
+    border-radius: var(--uilib-radius-md, 4px);
+    box-shadow: var(--uilib-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.12));
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variant: bootstrap
+// -----------------------------------------------------------------------------
+
+:host.uilib-variant-bootstrap {
+  --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.75);
+  --uilib-scroller-loading-icon-color: var(--uilib-color-primary, #0d6efd);
+
+  .uilib-scroller-viewport {
+    border: 1px solid var(--uilib-scroller-item-border-color);
+    border-radius: var(--uilib-radius-sm, 4px);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variant: minimal
+// -----------------------------------------------------------------------------
+
+:host.uilib-variant-minimal {
+  --uilib-scroller-loader-bg: rgba(255, 255, 255, 0.6);
+  --uilib-scroller-loading-icon-color: var(--uilib-color-text-muted, #6b7280);
+}

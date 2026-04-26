@@ -1,0 +1,5 @@
+{
+  "lib": {
+    "entryFile": "../src/lib/virtual-scroller/index.ts"
+  }
+}

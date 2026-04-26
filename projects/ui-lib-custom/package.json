@@ -116,6 +116,10 @@
     "./tree-table": {
       "esm2022": "./esm2022/tree-table/index.mjs",
       "esm": "./esm2022/tree-table/index.mjs"
+    },
+    "./virtual-scroller": {
+      "types": "./virtual-scroller/index.d.ts",
+      "default": "./fesm2022/ui-lib-custom-virtual-scroller.mjs"
     }
   },
   "typesVersions": {
@@ -173,6 +177,9 @@
       ],
       "tree-table": [
         "./tree-table/index.d.ts"
+      ],
+      "virtual-scroller": [
+        "./virtual-scroller/index.d.ts"
       ]
     }
   }

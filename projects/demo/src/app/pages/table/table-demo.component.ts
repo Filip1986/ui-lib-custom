@@ -11,7 +11,7 @@ import {
 } from 'ui-lib-custom/table';
 import type { TableSelectionMode, TableSortEvent, TableVariant } from 'ui-lib-custom/table';
 
-export interface Product {
+interface Product {
   id: number;
   name: string;
   category: string;

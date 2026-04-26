@@ -832,4 +832,20 @@ Each component should have two documentation files:
 
 | SplitButton | Combined primary action button with attached command menu | 3 | 8 | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 
-| OrderList | Reorderable list with 
+| OrderList | Reorderable single-list reordering with drag-and-drop and button controls | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+
+| OrganizationChart | Hierarchical org/tree chart with custom node templates | 3 | - | - | ✅ Complete |
+
+| Paginator | Standalone page navigation with configurable rows-per-page | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+
+| PickList | Dual-list transfer control with drag-and-drop | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+
+| Timeline | Vertical/horizontal event timeline with custom content templates | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+
+| Table | Feature-rich data table with sorting, filtering, pagination, and selection | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+
+| Tree | Hierarchical data display with selection, filtering, and custom node templates | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+
+| TreeTable | Hierarchical table with expand/collapse, sorting, filtering, and selection | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+
+| VirtualScroller | High-performance virtual scrolling container with lazy loading and custom templates | 3 | - | - | ✅ Complete |

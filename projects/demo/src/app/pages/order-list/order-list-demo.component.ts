@@ -19,7 +19,7 @@ import type {
 // Demo data model
 // ---------------------------------------------------------------------------
 
-export interface DemoProduct {
+interface DemoProduct {
   id: number;
   name: string;
   category: string;

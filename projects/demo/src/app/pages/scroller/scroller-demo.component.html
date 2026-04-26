@@ -1,5 +1,191 @@
-<section class="scroller-demo" data-testid="scroller-demo">
-  <h1>Scroller</h1>
-  <p>Coming soon.</p>
-</section>
+<section class="scroller-demo">
+  <h1>Virtual Scroller</h1>
+  <p class="scroller-demo__intro">
+    Renders only the items currently visible in the viewport plus a configurable tolerance buffer,
+    keeping large lists performant without changing the external API.
+  </p>
 
+  <!-- ======================================================================
+       Scenario 1 – Vertical list  (10 000 items)
+       ====================================================================== -->
+  <div class="scroller-demo__section">
+    <h2>Vertical (10 000 items)</h2>
+    <p>Default orientation — list scrolls downward. Each item is 64 px tall.</p>
+    <ui-lib-virtual-scroller
+      [items]="verticalItems"
+      [itemSize]="64"
+      scrollHeight="400px"
+    >
+      <ng-template uiScrollerItem let-item>
+        <div class="scroller-demo__item scroller-demo__item--vertical">
+          <span class="scroller-demo__item-dot" [style.background]="item.color"></span>
+          <div>
+            <div class="scroller-demo__item-label">{{ item.label }}</div>
+            <div class="scroller-demo__item-desc">{{ item.description }}</div>
+          </div>
+        </div>
+      </ng-template>
+    </ui-lib-virtual-scroller>
+  </div>
+
+  <!-- ======================================================================
+       Scenario 2 – Horizontal list  (1 000 items)
+       ====================================================================== -->
+  <div class="scroller-demo__section">
+    <h2>Horizontal (1 000 items)</h2>
+    <p>Orientation set to <code>horizontal</code>. Each item is 120 px wide.</p>
+    <ui-lib-virtual-scroller
+      [items]="horizontalItems"
+      [itemSize]="120"
+      orientation="horizontal"
+      scrollWidth="100%"
+      scrollHeight="120px"
+    >
+      <ng-template uiScrollerItem let-item>
+        <div class="scroller-demo__item scroller-demo__item--horizontal" [style.border-top-color]="item.color">
+          <span class="scroller-demo__item-label">{{ item.label }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-virtual-scroller>
+  </div>
+
+  <!-- ======================================================================
+       Scenario 3 – Lazy loading
+       ====================================================================== -->
+  <div class="scroller-demo__section">
+    <h2>Lazy Loading</h2>
+    <p>
+      Items are fetched in pages as the user scrolls.
+      <code>(lazyLoad)</code> fires with the required <code>first</code> / <code>last</code> index window.
+    </p>
+    <ui-lib-virtual-scroller
+      [items]="lazyItems()"
+      [itemSize]="50"
+      scrollHeight="400px"
+      [lazy]="true"
+      [loading]="lazyLoading()"
+      [totalRecords]="lazyTotalCount"
+      [showLoader]="true"
+      (lazyLoad)="onLazyLoad($event)"
+    >
+      <ng-template uiScrollerItem let-item>
+        @if (item) {
+          <div class="scroller-demo__item scroller-demo__item--lazy">
+            <span class="scroller-demo__item-id">#{{ item.id }}</span>
+            <span class="scroller-demo__item-label">{{ item.label }}</span>
+          </div>
+        } @else {
+          <div class="scroller-demo__item scroller-demo__item--lazy scroller-demo__item--skeleton">
+            <span class="scroller-demo__skeleton scroller-demo__skeleton--sm"></span>
+            <span class="scroller-demo__skeleton scroller-demo__skeleton--lg"></span>
+          </div>
+        }
+      </ng-template>
+    </ui-lib-virtual-scroller>
+  </div>
+
+  <!-- ======================================================================
+       Scenario 4 – Custom skeleton loader
+       ====================================================================== -->
+  <div class="scroller-demo__section">
+    <h2>Custom Loader Template</h2>
+    <p>
+      Pass a <code>uiScrollerLoader</code> template to replace the default spinner with
+      any content — here a card skeleton.
+    </p>
+    <div class="scroller-demo__actions">
+      <button class="scroller-demo__btn" (click)="loadSkeletonData()">Reload</button>
+    </div>
+    <ui-lib-virtual-scroller
+      [items]="skeletonItems()"
+      [itemSize]="72"
+      scrollHeight="400px"
+      [loading]="skeletonLoading()"
+      [showLoader]="true"
+      [loaderDisabled]="false"
+      [numToleratedItems]="5"
+    >
+      <ng-template uiScrollerItem let-item>
+        <div class="scroller-demo__item scroller-demo__item--card">
+          <span class="scroller-demo__item-dot" [style.background]="item.color"></span>
+          <div>
+            <div class="scroller-demo__item-label">{{ item.label }}</div>
+            <div class="scroller-demo__item-desc">{{ item.description }}</div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template uiScrollerLoader>
+        <div class="scroller-demo__item scroller-demo__item--card">
+          <span class="scroller-demo__skeleton scroller-demo__skeleton--dot"></span>
+          <div class="scroller-demo__skeleton-lines">
+            <span class="scroller-demo__skeleton scroller-demo__skeleton--title"></span>
+            <span class="scroller-demo__skeleton scroller-demo__skeleton--sub"></span>
+          </div>
+        </div>
+      </ng-template>
+    </ui-lib-virtual-scroller>
+  </div>
+
+  <!-- ======================================================================
+       Scenario 5 – Disabled (bypass virtualization)
+       ====================================================================== -->
+  <div class="scroller-demo__section">
+    <h2>Disabled Mode</h2>
+    <p>
+      When <code>[disabled]="true"</code> all items are rendered without virtualization —
+      useful for small lists or print/export paths.
+    </p>
+    <div class="scroller-demo__actions">
+      <label class="scroller-demo__toggle">
+        <input
+          type="checkbox"
+          [checked]="!virtualizationDisabled()"
+          (change)="virtualizationDisabled.set(!virtualizationDisabled())"
+        />
+        Enable virtualization
+      </label>
+    </div>
+    <ui-lib-virtual-scroller
+      [items]="disabledItems"
+      [itemSize]="48"
+      scrollHeight="300px"
+      [disabled]="virtualizationDisabled()"
+    >
+      <ng-template uiScrollerItem let-item>
+        <div class="scroller-demo__item scroller-demo__item--compact">
+          <span class="scroller-demo__item-dot" [style.background]="item.color"></span>
+          <span class="scroller-demo__item-label">{{ item.label }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-virtual-scroller>
+  </div>
+
+  <!-- ======================================================================
+       Scenario 6 – Large uniform items  (5 000 items)
+       ====================================================================== -->
+  <div class="scroller-demo__section">
+    <h2>Large Items (5 000 items)</h2>
+    <p>Each item is 96 px — demonstrates the buffer tolerance with taller rows.</p>
+    <ui-lib-virtual-scroller
+      [items]="largeItems"
+      [itemSize]="96"
+      scrollHeight="480px"
+    >
+      <ng-template uiScrollerItem let-item>
+        <div class="scroller-demo__item scroller-demo__item--large" [style.border-left-color]="item.color">
+          <div class="scroller-demo__item-label">{{ item.label }}</div>
+          <div class="scroller-demo__item-desc">{{ item.description }}</div>
+          <div class="scroller-demo__item-id">id: {{ item.id }}</div>
+        </div>
+      </ng-template>
+    </ui-lib-virtual-scroller>
+  </div>
+
+  <!-- ======================================================================
+       Usage example
+       ====================================================================== -->
+  <div class="scroller-demo__section scroller-demo__section--code">
+    <h2>Basic Usage</h2>
+    <pre class="scroller-demo__code"><code>{{ demoCode() }}</code></pre>
+  </div>
+</section>

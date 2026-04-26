@@ -2,10 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { TreeTableComponent } from 'ui-lib-custom/tree-table';
 import { TreeTableColumnComponent } from 'ui-lib-custom/tree-table';
-import {
-  TreeTableColumnBodyDirective,
-  TreeTableColumnHeaderDirective,
-} from 'ui-lib-custom/tree-table';
+import { TreeTableColumnBodyDirective } from 'ui-lib-custom/tree-table';
 import type {
   TreeTableNode,
   TreeTableSelectionMode,
@@ -20,12 +17,7 @@ import type {
 @Component({
   selector: 'app-tree-table-demo',
   standalone: true,
-  imports: [
-    TreeTableComponent,
-    TreeTableColumnComponent,
-    TreeTableColumnBodyDirective,
-    TreeTableColumnHeaderDirective,
-  ],
+  imports: [TreeTableComponent, TreeTableColumnComponent, TreeTableColumnBodyDirective],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

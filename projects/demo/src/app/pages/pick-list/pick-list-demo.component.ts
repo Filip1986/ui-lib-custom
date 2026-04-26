@@ -22,7 +22,7 @@ import type {
 // Demo data model
 // ---------------------------------------------------------------------------
 
-export interface DemoCountry {
+interface DemoCountry {
   code: string;
   name: string;
   region: string;
