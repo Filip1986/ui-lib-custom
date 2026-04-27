@@ -4,204 +4,70 @@
   "description": "A flexible Angular UI component library with multiple design variants.",
   "author": "Luca Filip <filip.luca.work@gmail.com>",
   "license": "MIT",
-  "keywords": [
-    "angular",
-    "components",
-    "ui",
-    "ui-library",
-    "material-design",
-    "bootstrap",
-    "button",
-    "card",
-    "angular-components",
-    "typescript"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/ui-lib-custom.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yourusername/ui-lib-custom/issues"
-  },
+  "keywords": ["angular","components","ui","ui-library","material-design","bootstrap","button","card","angular-components","typescript"],
+  "repository": {"type":"git","url":"https://github.com/yourusername/ui-lib-custom.git"},
+  "bugs": {"url":"https://github.com/yourusername/ui-lib-custom/issues"},
   "homepage": "https://github.com/yourusername/ui-lib-custom#readme",
   "peerDependencies": {
     "@angular/common": "^21.0.0 || ^22.0.0",
     "@angular/core": "^21.0.0 || ^22.0.0",
     "chart.js": "^4.5.1"
   },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
+  "dependencies": {"tslib": "^2.3.0"},
   "sideEffects": false,
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
+  "engines": {"node": ">=18.0.0", "npm": ">=9.0.0"},
   "exports": {
-    "./icon-field": {
-      "esm2022": "./esm2022/icon-field/index.mjs",
-      "esm": "./esm2022/icon-field/index.mjs"
-    },
-    "./input-group": {
-      "esm2022": "./esm2022/input-group/index.mjs",
-      "esm": "./esm2022/input-group/index.mjs"
-    },
-    "./float-label": {
-      "esm2022": "./esm2022/float-label/index.mjs",
-      "esm": "./esm2022/float-label/index.mjs"
-    },
-    "./editor": {
-      "esm2022": "./esm2022/editor/index.mjs",
-      "esm": "./esm2022/editor/index.mjs"
-    },
-    "./date-picker": {
-      "esm2022": "./esm2022/date-picker/index.mjs",
-      "esm": "./esm2022/date-picker/index.mjs"
-    },
-    "./data-view": {
-      "esm2022": "./esm2022/data-view/index.mjs",
-      "esm": "./esm2022/data-view/index.mjs"
-    },
-    "./organization-chart": {
-      "esm2022": "./esm2022/organization-chart/index.mjs",
-      "esm": "./esm2022/organization-chart/index.mjs"
-    },
-    "./paginator": {
-      "esm2022": "./esm2022/paginator/index.mjs",
-      "esm": "./esm2022/paginator/index.mjs"
-    },
-    "./order-list": {
-      "esm2022": "./esm2022/order-list/index.mjs",
-      "esm": "./esm2022/order-list/index.mjs"
-    },
-    "./pick-list": {
-      "esm2022": "./esm2022/pick-list/index.mjs",
-      "esm": "./esm2022/pick-list/index.mjs"
-    },
-    "./input-mask": {
-      "esm2022": "./esm2022/input-mask/index.mjs",
-      "esm": "./esm2022/input-mask/index.mjs"
-    },
-    "./table": {
-      "esm2022": "./esm2022/table/index.mjs",
-      "esm": "./esm2022/table/index.mjs"
-    },
-    "./speed-dial": {
-      "main": "./fesm2022/ui-lib-custom-speed-dial.mjs",
-      "module": "./fesm2022/ui-lib-custom-speed-dial.mjs",
-      "typings": "./speed-dial/index.d.ts"
-    },
-    "./split-button": {
-      "main": "./fesm2022/ui-lib-custom-split-button.mjs",
-      "module": "./fesm2022/ui-lib-custom-split-button.mjs",
-      "typings": "./split-button/index.d.ts"
-    },
-    "./themes/themes.css": {
-      "default": "./themes/themes.css"
-    },
-    "./themes/themes.scss": {
-      "default": "./themes/themes.scss"
-    },
-    "./styles/*": {
-      "default": "./styles/*"
-    },
-    "./timeline": {
-      "esm2022": "./esm2022/timeline/index.mjs",
-      "esm": "./esm2022/timeline/index.mjs"
-    },
-    "./tree": {
-      "esm2022": "./esm2022/tree/index.mjs",
-      "esm": "./esm2022/tree/index.mjs"
-    },
-    "./tree-table": {
-      "esm2022": "./esm2022/tree-table/index.mjs",
-      "esm": "./esm2022/tree-table/index.mjs"
-    },
-    "./virtual-scroller": {
-      "esm2022": "./esm2022/virtual-scroller/index.mjs",
-      "esm": "./esm2022/virtual-scroller/index.mjs"
-    },
-    "./upload": {
-      "esm2022": "./esm2022/upload/index.mjs",
-      "esm": "./esm2022/upload/index.mjs"
-    },
-    "./carousel": {
-      "esm2022": "./esm2022/carousel/index.mjs",
-      "esm": "./esm2022/carousel/index.mjs"
-    },
-    "./input-otp": {
-      "esm2022": "./esm2022/input-otp/index.mjs",
-      "esm": "./esm2022/input-otp/index.mjs"
-    }
+    "./icon-field": {"esm2022": "./esm2022/icon-field/index.mjs","esm": "./esm2022/icon-field/index.mjs"},
+    "./input-group": {"esm2022": "./esm2022/input-group/index.mjs","esm": "./esm2022/input-group/index.mjs"},
+    "./float-label": {"esm2022": "./esm2022/float-label/index.mjs","esm": "./esm2022/float-label/index.mjs"},
+    "./editor": {"esm2022": "./esm2022/editor/index.mjs","esm": "./esm2022/editor/index.mjs"},
+    "./date-picker": {"esm2022": "./esm2022/date-picker/index.mjs","esm": "./esm2022/date-picker/index.mjs"},
+    "./data-view": {"esm2022": "./esm2022/data-view/index.mjs","esm": "./esm2022/data-view/index.mjs"},
+    "./organization-chart": {"esm2022": "./esm2022/organization-chart/index.mjs","esm": "./esm2022/organization-chart/index.mjs"},
+    "./paginator": {"esm2022": "./esm2022/paginator/index.mjs","esm": "./esm2022/paginator/index.mjs"},
+    "./order-list": {"esm2022": "./esm2022/order-list/index.mjs","esm": "./esm2022/order-list/index.mjs"},
+    "./pick-list": {"esm2022": "./esm2022/pick-list/index.mjs","esm": "./esm2022/pick-list/index.mjs"},
+    "./input-mask": {"esm2022": "./esm2022/input-mask/index.mjs","esm": "./esm2022/input-mask/index.mjs"},
+    "./table": {"esm2022": "./esm2022/table/index.mjs","esm": "./esm2022/table/index.mjs"},
+    "./speed-dial": {"main": "./fesm2022/ui-lib-custom-speed-dial.mjs","module": "./fesm2022/ui-lib-custom-speed-dial.mjs","typings": "./speed-dial/index.d.ts"},
+    "./split-button": {"main": "./fesm2022/ui-lib-custom-split-button.mjs","module": "./fesm2022/ui-lib-custom-split-button.mjs","typings": "./split-button/index.d.ts"},
+    "./themes/themes.css": {"default": "./themes/themes.css"},
+    "./themes/themes.scss": {"default": "./themes/themes.scss"},
+    "./styles/*": {"default": "./styles/*"},
+    "./timeline": {"esm2022": "./esm2022/timeline/index.mjs","esm": "./esm2022/timeline/index.mjs"},
+    "./tree": {"esm2022": "./esm2022/tree/index.mjs","esm": "./esm2022/tree/index.mjs"},
+    "./tree-table": {"esm2022": "./esm2022/tree-table/index.mjs","esm": "./esm2022/tree-table/index.mjs"},
+    "./virtual-scroller": {"esm2022": "./esm2022/virtual-scroller/index.mjs","esm": "./esm2022/virtual-scroller/index.mjs"},
+    "./upload": {"esm2022": "./esm2022/upload/index.mjs","esm": "./esm2022/upload/index.mjs"},
+    "./carousel": {"esm2022": "./esm2022/carousel/index.mjs","esm": "./esm2022/carousel/index.mjs"},
+    "./input-otp": {"esm2022": "./esm2022/input-otp/index.mjs","esm": "./esm2022/input-otp/index.mjs"},
+    "./key-filter": {"esm2022": "./esm2022/key-filter/index.mjs","esm": "./esm2022/key-filter/index.mjs"}
   },
   "typesVersions": {
     "*": {
-      "icon-field": [
-        "./icon-field/index.d.ts"
-      ],
-      "input-group": [
-        "./input-group/index.d.ts"
-      ],
-      "float-label": [
-        "./float-label/index.d.ts"
-      ],
-      "editor": [
-        "./editor/index.d.ts"
-      ],
-      "date-picker": [
-        "./date-picker/index.d.ts"
-      ],
-      "data-view": [
-        "./data-view/index.d.ts"
-      ],
-      "organization-chart": [
-        "./organization-chart/index.d.ts"
-      ],
-      "paginator": [
-        "./paginator/index.d.ts"
-      ],
-      "order-list": [
-        "./order-list/index.d.ts"
-      ],
-      "pick-list": [
-        "./pick-list/index.d.ts"
-      ],
-      "input-mask": [
-        "./input-mask/index.d.ts"
-      ],
-      "speed-dial": [
-        "./speed-dial/index.d.ts"
-      ],
-      "split-button": [
-        "./split-button/index.d.ts"
-      ],
-      "table": [
-        "./table/index.d.ts"
-      ],
-      "testing": [
-        "./testing/index.d.ts"
-      ],
-      "timeline": [
-        "./timeline/index.d.ts"
-      ],
-      "tree": [
-        "./tree/index.d.ts"
-      ],
-      "tree-table": [
-        "./tree-table/index.d.ts"
-      ],
-      "virtual-scroller": [
-        "./virtual-scroller/index.d.ts"
-      ],
-      "upload": [
-        "./upload/index.d.ts"
-      ],
-      "carousel": [
-        "./carousel/index.d.ts"
-      ],
-      "input-otp": [
-        "./input-otp/index.d.ts"
-      ]
+      "icon-field": ["./icon-field/index.d.ts"],
+      "input-group": ["./input-group/index.d.ts"],
+      "float-label": ["./float-label/index.d.ts"],
+      "editor": ["./editor/index.d.ts"],
+      "date-picker": ["./date-picker/index.d.ts"],
+      "data-view": ["./data-view/index.d.ts"],
+      "organization-chart": ["./organization-chart/index.d.ts"],
+      "paginator": ["./paginator/index.d.ts"],
+      "order-list": ["./order-list/index.d.ts"],
+      "pick-list": ["./pick-list/index.d.ts"],
+      "input-mask": ["./input-mask/index.d.ts"],
+      "speed-dial": ["./speed-dial/index.d.ts"],
+      "split-button": ["./split-button/index.d.ts"],
+      "table": ["./table/index.d.ts"],
+      "testing": ["./testing/index.d.ts"],
+      "timeline": ["./timeline/index.d.ts"],
+      "tree": ["./tree/index.d.ts"],
+      "tree-table": ["./tree-table/index.d.ts"],
+      "virtual-scroller": ["./virtual-scroller/index.d.ts"],
+      "upload": ["./upload/index.d.ts"],
+      "carousel": ["./carousel/index.d.ts"],
+      "input-otp": ["./input-otp/index.d.ts"],
+      "key-filter": ["./key-filter/index.d.ts"]
     }
   }
 }

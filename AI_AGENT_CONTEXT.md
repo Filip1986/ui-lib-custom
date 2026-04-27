@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `KeyFilter` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `InputOtp` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
 - `Carousel` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `Upload` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
@@ -122,4 +123,31 @@ Terminal notes: File corruption (null bytes + mid-file truncation) is a recurrin
   (WritableSignals set once in ngAfterContentInit don't react to later input changes).
 Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
 
+---
+
+Date: 2026-04-27 [key-filter session]
+Changed:
+  - projects/ui-lib-custom/src/lib/key-filter/ (new — key-filter.types.ts, key-filter.directive.ts, key-filter.directive.spec.ts, index.ts, public-api.ts)
+  - projects/ui-lib-custom/key-filter/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (added key-filter to exports + typesVersions; also repaired on-disk JSON truncation that was silently corrupting unrs-resolver)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added key-filter import test)
+  - projects/demo/src/app/pages/key-filter/ (full demo — TS/HTML/SCSS, 10 scenarios: all presets + custom RegExp + bypass toggle)
+  - projects/ui-lib-custom/src/lib/input-otp/input-otp.component.ts (repaired: closing braces truncated)
+  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.ts (repaired: trailing null bytes stripped)
+  - jest.config.ts + tsconfig.jest.json (reverted to original state after debugging; root cause was corrupted package.json, not Jest config)
+State: KeyFilter directive fully complete. Attribute directive with 9 built-in presets (pint/int/pnum/num/
+  hex/alpha/alphanum/money/email), custom RegExp support, paste + drag-and-drop filtering with automatic
+  character stripping, modifier-key pass-through, and runtime bypass toggle. 28/28 unit tests passing.
+  40/40 entry-point tests passing. ESLint clean on lib and demo. Library build zero errors.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/key-filter/ projects/demo/src/app/pages/key-filter/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom — all entry points ✔ Built (zero errors),
+  npx jest --testPathPatterns="key-filter|entry-points" --no-cache (68/68 PASS).
+Terminal notes: projects/ui-lib-custom/package.json was truncated on disk (203 lines, cut mid-string)
+  — this caused unrs-resolver (Jest 30 Rust resolver) to fail with JSONError on ALL module resolution,
+  masking itself as tslib/Angular/relative-import errors. Fix: rewrite the file via Python. Jest config
+  was modified during diagnosis but ultimately reverted; original config works once package.json is valid.
+  Spec file required eslint-disable on debugEl.nativeElement/.injector (typed as any by Angular) and
+  explicit (): void return types on all describe() and it() callbacks.
+Next step: Overlay follow-ups (appendTo / z-index manager), then knip baseline + dead-code cleanup.
 

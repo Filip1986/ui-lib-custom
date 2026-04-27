@@ -1,14 +1,46 @@
-.key-filter-demo {
-  padding: 1.5rem;
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-spacing-6);
+}
 
-  h1 {
-    margin: 0 0 0.5rem;
-    font-size: 1.5rem;
-    color: var(--uilib-page-fg);
-  }
+.example-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-spacing-3);
+}
 
-  p {
-    margin: 0;
-    color: var(--uilib-muted);
+.section-text {
+  color: var(--uilib-color-text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.demo-input {
+  width: 100%;
+  padding: var(--uilib-spacing-2) var(--uilib-spacing-3);
+  border: 1px solid var(--uilib-color-border);
+  border-radius: var(--uilib-radius-md);
+  font-size: 1rem;
+  background: var(--uilib-surface-card);
+  color: var(--uilib-color-text-primary);
+  outline-offset: 2px;
+
+  &:focus {
+    outline: 2px solid var(--uilib-color-primary);
   }
+}
+
+.stack-sm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-spacing-3);
+}
+
+.inline-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-spacing-2);
+  cursor: pointer;
+  font-size: 0.9rem;
 }

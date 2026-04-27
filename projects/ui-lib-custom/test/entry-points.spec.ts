@@ -38,6 +38,7 @@ import type * as UiLibVirtualScroller from 'ui-lib-custom/virtual-scroller';
 import type * as UiLibUpload from 'ui-lib-custom/upload';
 import type * as UiLibCarousel from 'ui-lib-custom/carousel';
 import type * as UiLibInputOtp from 'ui-lib-custom/input-otp';
+import type * as UiLibKeyFilter from 'ui-lib-custom/key-filter';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -280,5 +281,12 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibInputOtp = await import('ui-lib-custom/input-otp');
     expect(mod.InputOtpComponent).toBeDefined();
     expect(mod.INPUT_OTP_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from key-filter', async (): Promise<void> => {
+    const mod: typeof UiLibKeyFilter = await import('ui-lib-custom/key-filter');
+    expect(mod.KeyFilterDirective).toBeDefined();
+    expect(mod.KEY_FILTER_PRESET_PATTERNS).toBeDefined();
+    expect(mod.KEY_FILTER_DEFAULTS).toBeDefined();
   });
 });
