@@ -109,14 +109,40 @@ describe('ButtonGroup', (): void => {
   });
 
   describe('size inheritance', (): void => {
-    it('applies small size class hook', (): void => {
+    it('applies small size class hook for alias "small"', (): void => {
       fixture.componentInstance.size.set('small');
       fixture.detectChanges();
       expect(getGroup().classList.contains('ui-lib-button-group--size-small')).toBeTruthy();
     });
 
-    it('applies large size class hook', (): void => {
+    it('applies small size class hook for short alias "sm"', (): void => {
+      fixture.componentInstance.size.set('sm');
+      fixture.detectChanges();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-small')).toBeTruthy();
+    });
+
+    it('applies NO size class for default "md"', (): void => {
+      fixture.componentInstance.size.set('md');
+      fixture.detectChanges();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-small')).toBeFalsy();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-large')).toBeFalsy();
+    });
+
+    it('applies NO size class for alias "medium"', (): void => {
+      fixture.componentInstance.size.set('medium');
+      fixture.detectChanges();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-small')).toBeFalsy();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-large')).toBeFalsy();
+    });
+
+    it('applies large size class hook for alias "large"', (): void => {
       fixture.componentInstance.size.set('large');
+      fixture.detectChanges();
+      expect(getGroup().classList.contains('ui-lib-button-group--size-large')).toBeTruthy();
+    });
+
+    it('applies large size class hook for short alias "lg"', (): void => {
+      fixture.componentInstance.size.set('lg');
       fixture.detectChanges();
       expect(getGroup().classList.contains('ui-lib-button-group--size-large')).toBeTruthy();
     });
