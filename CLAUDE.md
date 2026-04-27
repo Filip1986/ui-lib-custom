@@ -110,11 +110,16 @@ npm run test:a11y:e2e              # Playwright a11y e2e (auto-starts demo)
 npm run test:a11y:all              # Full a11y pass + report
 npm run verify:tree-shaking        # Tree-shaking guard
 npm run storybook                  # Storybook (cross-env sets NODE_ENV)
+npm run typecheck                  # TypeScript type-check all projects (no emit)
 
 # Lint — run after every component creation or edit
 npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0
 npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 ```
+
+**Git hooks (via Husky):**
+- **pre-commit** — runs `lint-staged` (ESLint + Prettier on staged `.ts`/`.scss` files)
+- **pre-push** — runs `npm run typecheck` (full TS type-check across all five tsconfigs)
 
 **Windows shell note:** If PowerShell blocks `.ps1` shims, run `.cmd` versions from `bash.exe` (`npx.cmd`, `npm.cmd`). Record any workarounds in the session handoff.
 

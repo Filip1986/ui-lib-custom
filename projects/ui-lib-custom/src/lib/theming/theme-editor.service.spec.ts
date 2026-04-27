@@ -59,7 +59,7 @@ describe('ThemeEditorService', (): void => {
     service.applyColorChange('primary', '#ff0000');
 
     const pending: Record<string, string> = service.pendingColors();
-    expect(pending.primary).toBe('#ff0000');
+    expect(pending['primary']).toBe('#ff0000');
     expect(service.hasUnsavedChanges()).toBe(true);
   });
 

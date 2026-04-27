@@ -292,7 +292,7 @@ describe('TableComponent', (): void => {
     });
 
     it('should sort ascending on first header click', (): void => {
-      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0];
+      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0]!;
       nameHeader.click();
       detectChanges(fixture);
       expect(component.sortField()).toBe('name');
@@ -300,7 +300,7 @@ describe('TableComponent', (): void => {
     });
 
     it('should sort descending on second click of same column', (): void => {
-      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0];
+      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0]!;
       nameHeader.click();
       detectChanges(fixture);
       nameHeader.click();
@@ -309,7 +309,7 @@ describe('TableComponent', (): void => {
     });
 
     it('should clear sort on third click of same column', (): void => {
-      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0];
+      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0]!;
       nameHeader.click();
       nameHeader.click();
       nameHeader.click();
@@ -323,7 +323,7 @@ describe('TableComponent', (): void => {
       component.sorted.subscribe((event: unknown): void => {
         emitted.push(event);
       });
-      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0];
+      const nameHeader: HTMLElement = queryAll(fixture, '.ui-lib-table__th--sortable')[0]!;
       nameHeader.click();
       detectChanges(fixture);
       expect(emitted.length).toBe(1);

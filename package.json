@@ -31,7 +31,8 @@
     "verify:tree-shaking": "node scripts/verify-tree-shaking.js",
     "verify:tree-shaking:dry": "node scripts/verify-tree-shaking.js --dry-run",
     "knip": "knip --config knip.json --reporter compact",
-    "knip:strict": "knip --config knip.json --reporter compact --strict"
+    "knip:strict": "knip --config knip.json --reporter compact --strict",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p projects/ui-lib-custom/tsconfig.lib.json && tsc --noEmit -p projects/ui-lib-custom/tsconfig.spec.json && tsc --noEmit -p projects/demo/tsconfig.app.json && tsc --noEmit -p projects/demo/tsconfig.spec.json"
   },
   "private": true,
   "dependencies": {

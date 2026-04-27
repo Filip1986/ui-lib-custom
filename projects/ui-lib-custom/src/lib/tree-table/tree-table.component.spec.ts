@@ -143,9 +143,9 @@ describe('TreeTableComponent', (): void => {
     it('should render column headers', (): void => {
       const headers: HTMLElement[] = queryAllEl<HTMLElement>(fixture, '.uilib-tree-table-th');
       expect(headers.length).toBe(3);
-      expect(headers[0].textContent.trim()).toContain('Name');
-      expect(headers[1].textContent.trim()).toContain('Size');
-      expect(headers[2].textContent.trim()).toContain('Type');
+      expect(headers[0]!.textContent!.trim()).toContain('Name');
+      expect(headers[1]!.textContent!.trim()).toContain('Size');
+      expect(headers[2]!.textContent!.trim()).toContain('Type');
     });
 
     it('should render root + expanded children only', (): void => {
@@ -419,7 +419,7 @@ describe('TreeTableComponent', (): void => {
       (checkboxes[0] as HTMLElement).click();
       fixture.detectChanges();
 
-      const component: TreeTableComponent = fixture.debugElement.children[0]
+      const component: TreeTableComponent = fixture.debugElement.children[0]!
         .componentInstance as TreeTableComponent;
       const selected: TreeTableNode[] = component.selection() as TreeTableNode[];
       expect(selected.length).toBeGreaterThanOrEqual(1);
@@ -433,7 +433,7 @@ describe('TreeTableComponent', (): void => {
       headerCheckbox.click();
       fixture.detectChanges();
 
-      const component: TreeTableComponent = fixture.debugElement.children[0]
+      const component: TreeTableComponent = fixture.debugElement.children[0]!
         .componentInstance as TreeTableComponent;
       expect(component.isAllSelected()).toBe(true);
     });
@@ -467,7 +467,7 @@ describe('TreeTableComponent', (): void => {
     });
 
     it('should cycle sort order none → asc → desc → none', (): void => {
-      const component: TreeTableComponent = fixture.debugElement.children[0]
+      const component: TreeTableComponent = fixture.debugElement.children[0]!
         .componentInstance as TreeTableComponent;
       const header: HTMLElement = queryEl<HTMLElement>(fixture, '.uilib-tree-table-th-sortable');
 
@@ -542,7 +542,7 @@ describe('TreeTableComponent', (): void => {
       const fixture: ComponentFixture<BasicHostComponent> =
         TestBed.createComponent(BasicHostComponent);
       fixture.detectChanges();
-      component = fixture.debugElement.children[0].componentInstance as TreeTableComponent;
+      component = fixture.debugElement.children[0]!.componentInstance as TreeTableComponent;
     });
 
     it('should return field value', (): void => {

@@ -230,7 +230,7 @@ describe('PickListComponent', (): void => {
       fixture.detectChanges();
       const items: NodeListOf<HTMLElement> = getSourceItems(fixture);
       expect(items.length).toBe(SOURCE_COUNTRIES.length);
-      expect(items[0].textContent.trim()).toBe('Germany');
+      expect(items[0]!.textContent!.trim()).toBe('Germany');
     });
 
     it('should render target items', (): void => {
@@ -239,7 +239,7 @@ describe('PickListComponent', (): void => {
       fixture.detectChanges();
       const items: NodeListOf<HTMLElement> = getTargetItems(fixture);
       expect(items.length).toBe(TARGET_COUNTRIES.length);
-      expect(items[0].textContent.trim()).toBe('United States');
+      expect(items[0]!.textContent!.trim()).toBe('United States');
     });
 
     it('should render empty state when source is empty', (): void => {
@@ -262,8 +262,8 @@ describe('PickListComponent', (): void => {
         '.ui-lib-pick-list__header'
       );
       expect(headers.length).toBe(2);
-      expect(headers[0].textContent.trim()).toBe('Available');
-      expect(headers[1].textContent.trim()).toBe('Selected');
+      expect(headers[0]!.textContent!.trim()).toBe('Available');
+      expect(headers[1]!.textContent!.trim()).toBe('Selected');
     });
 
     it('should render filter inputs when filterBy is set', (): void => {

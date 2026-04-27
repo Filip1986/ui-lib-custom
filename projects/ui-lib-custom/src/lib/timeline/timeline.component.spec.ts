@@ -224,7 +224,7 @@ describe('TimelineComponent', (): void => {
       fixture.detectChanges();
       const contentTexts: HTMLElement[] = queryAll('.content-text');
       expect(contentTexts.length).toBe(SAMPLE_EVENTS.length);
-      expect(contentTexts[0].textContent!.trim()).toBe(SAMPLE_EVENTS[0].title);
+      expect(contentTexts[0]!.textContent!.trim()).toBe(SAMPLE_EVENTS[0]!.title);
     });
   });
   // -------------------------------------------------------------------------
@@ -236,7 +236,7 @@ describe('TimelineComponent', (): void => {
       fixture.detectChanges();
       const oppositeTexts: HTMLElement[] = queryAll('.opposite-text');
       expect(oppositeTexts.length).toBe(SAMPLE_EVENTS.length);
-      expect(oppositeTexts[0].textContent!.trim()).toBe(SAMPLE_EVENTS[0].date);
+      expect(oppositeTexts[0]!.textContent!.trim()).toBe(SAMPLE_EVENTS[0]!.date);
     });
   });
   // -------------------------------------------------------------------------
@@ -248,7 +248,7 @@ describe('TimelineComponent', (): void => {
       fixture.detectChanges();
       const contentTexts: HTMLElement[] = queryAll('.content-text');
       SAMPLE_EVENTS.forEach((event: TimelineEvent, index: number): void => {
-        expect(contentTexts[index].textContent!.trim()).toBe(event.title);
+        expect(contentTexts[index]!.textContent!.trim()).toBe(event.title);
       });
     });
   });
@@ -266,7 +266,7 @@ describe('TimelineComponent', (): void => {
     });
     it('should not render an after-connector on the last event', (): void => {
       const allEvents: HTMLElement[] = queryAll('.ui-lib-timeline__event');
-      const lastEvent: HTMLElement = allEvents[allEvents.length - 1];
+      const lastEvent: HTMLElement = allEvents[allEvents.length - 1]!;
       const afterConnector: HTMLElement | null = lastEvent.querySelector(
         '.ui-lib-timeline__connector--after'
       );
@@ -274,7 +274,7 @@ describe('TimelineComponent', (): void => {
     });
     it('should render connectors on middle events', (): void => {
       const allEvents: HTMLElement[] = queryAll('.ui-lib-timeline__event');
-      const middleEvent: HTMLElement = allEvents[1];
+      const middleEvent: HTMLElement = allEvents[1]!;
       const beforeConnector: HTMLElement | null = middleEvent.querySelector(
         '.ui-lib-timeline__connector--before'
       );

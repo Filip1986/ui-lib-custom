@@ -161,14 +161,14 @@ describe('OrganizationChart', (): void => {
         fixture.nativeElement as HTMLElement
       ).querySelectorAll('.custom-label');
       expect(customLabels.length).toBeGreaterThan(0);
-      expect(customLabels[0].textContent).toContain('custom:');
+      expect(customLabels[0]!.textContent).toContain('custom:');
     });
 
     it('applies variant host class', async (): Promise<void> => {
       const fixture: ComponentFixture<TestHostComponent> = await setup();
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
         'ui-lib-organization-chart'
-      );
+      )!;
       expect(host.classList).toContain('ui-lib-organization-chart--variant-material');
     });
 
@@ -179,7 +179,7 @@ describe('OrganizationChart', (): void => {
       await fixture.whenStable();
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
         'ui-lib-organization-chart'
-      );
+      )!;
       expect(host.classList).toContain('ui-lib-organization-chart--variant-bootstrap');
     });
 
@@ -199,7 +199,7 @@ describe('OrganizationChart', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = await setup();
       const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
         'ui-lib-organization-chart'
-      );
+      )!;
       expect(host.getAttribute('role')).toBe('tree');
     });
 

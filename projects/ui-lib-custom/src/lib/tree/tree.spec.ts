@@ -248,7 +248,7 @@ describe('Tree', (): void => {
       fixture.detectChanges();
 
       expect(host.expandEvents.length).toBe(1);
-      expect(host.expandEvents[0].node.key).toBe('pics');
+      expect(host.expandEvents[0]!.node.key).toBe('pics');
     });
 
     it('should collapse an expanded node on toggle click', (): void => {
@@ -278,7 +278,7 @@ describe('Tree', (): void => {
       fixture.detectChanges();
 
       expect(host.collapseEvents.length).toBe(1);
-      expect(host.collapseEvents[0].node.key).toBe('docs');
+      expect(host.collapseEvents[0]!.node.key).toBe('docs');
     });
   });
 
@@ -299,7 +299,7 @@ describe('Tree', (): void => {
       fixture.detectChanges();
 
       expect(host.selectEvents.length).toBe(1);
-      expect(host.selectEvents[0].node.key).toBe('work');
+      expect(host.selectEvents[0]!.node.key).toBe('work');
     });
 
     it('should apply selected class to clicked node', (): void => {
@@ -476,7 +476,7 @@ describe('Tree', (): void => {
       fixture.detectChanges();
 
       expect(host.selectEvents.length).toBe(1);
-      expect(host.selectEvents[0].node.key).toBe('file1');
+      expect(host.selectEvents[0]!.node.key).toBe('file1');
     });
   });
 
@@ -594,7 +594,7 @@ describe('Tree', (): void => {
 
       const customLabels: HTMLElement[] = queryAllEl(fixture, '.custom-label');
       expect(customLabels.length).toBeGreaterThan(0);
-      expect(customLabels[0].textContent).toContain('custom:');
+      expect(customLabels[0]!.textContent).toContain('custom:');
     });
 
     it('should fall back to default label when no template is provided', (): void => {

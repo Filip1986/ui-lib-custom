@@ -3,12 +3,14 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { UploadComponent } from './upload.component';
-import {
-  UploadEmptyDirective,
-  UploadFileDirective,
-  UploadHeaderDirective,
-} from './upload.template-directives';
-import type { UploadHandlerEvent, UploadRemoveEvent, UploadSelectEvent } from './upload.types';
+import { UploadEmptyDirective, UploadHeaderDirective } from './upload.template-directives';
+import type {
+  UploadHandlerEvent,
+  UploadRemoveEvent,
+  UploadSelectEvent,
+  UploadSize,
+  UploadVariant,
+} from './upload.types';
 
 // ─── Typed query helpers ──────────────────────────────────────────────────────
 
@@ -71,8 +73,8 @@ class DefaultHostComponent {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ConfigurableHostComponent {
-  public variant: string = 'material';
-  public size: string = 'md';
+  public variant: UploadVariant = 'material';
+  public size: UploadSize = 'md';
   public multiple: boolean = false;
   public accept: string = '';
   public disabled: boolean = false;
@@ -113,7 +115,7 @@ class ConfigurableHostComponent {
 
 @Component({
   standalone: true,
-  imports: [UploadComponent, UploadHeaderDirective, UploadEmptyDirective, UploadFileDirective],
+  imports: [UploadComponent, UploadHeaderDirective, UploadEmptyDirective],
   template: `
     <ui-lib-upload>
       <ng-template uiUploadHeader>
@@ -397,7 +399,7 @@ describe('UploadComponent', (): void => {
 
       const hostInstance: ConfigurableHostComponent = fixture.componentInstance;
       expect(hostInstance.lastSelectEvent).not.toBeNull();
-      expect(hostInstance.lastSelectEvent?.files[0].name).toBe('report.xlsx');
+      expect(hostInstance.lastSelectEvent?.files[0]!.name).toBe('report.xlsx');
     });
   });
 
@@ -566,7 +568,7 @@ describe('UploadComponent', (): void => {
       componentInstance.onUpload();
       fixture.detectChanges();
 
-      expect(fixture.componentInstance.lastHandlerEvent?.files[0].name).toBe('upload.csv');
+      expect(fixture.componentInstance.lastHandlerEvent?.files[0]!.name).toBe('upload.csv');
     });
   });
 

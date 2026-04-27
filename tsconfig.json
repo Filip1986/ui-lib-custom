@@ -42,21 +42,6 @@
     "typeCheckHostBindings": true,
     "strictTemplates": true
   },
-  "files": [],
   "include": ["projects/ui-lib-custom/src/lib/**/*.stories.ts"],
-  "exclude": [".storybook/main.ts"],
-  "references": [
-    {
-      "path": "./projects/ui-lib-custom/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/ui-lib-custom/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/demo/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/demo/tsconfig.spec.json"
-    }
-  ]
+  "exclude": [".storybook/main.ts"]
 }

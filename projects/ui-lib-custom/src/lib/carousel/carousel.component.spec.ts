@@ -368,7 +368,7 @@ describe('CarouselComponent', (): void => {
         '.uilib-carousel-indicator-button'
       );
       expect(dotButtons.length).toBeGreaterThan(2);
-      dotButtons[2].click();
+      dotButtons[2]!.click();
       fixture.detectChanges();
       expect(carousel.currentPage()).toBe(2);
     });
@@ -617,8 +617,8 @@ describe('CarouselComponent', (): void => {
         fixture,
         '.uilib-carousel-indicator-button'
       );
-      expect(dotButtons[0].getAttribute('aria-selected')).toBe('true');
-      expect(dotButtons[1].getAttribute('aria-selected')).toBe('false');
+      expect(dotButtons[0]!.getAttribute('aria-selected')).toBe('true');
+      expect(dotButtons[1]!.getAttribute('aria-selected')).toBe('false');
     });
 
     it('should apply aria-roledescription="slide" to each item', async (): Promise<void> => {

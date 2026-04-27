@@ -39,6 +39,12 @@
 - Full a11y pass + report JSON/HTML: `npm run test:a11y:all` then `npm run test:a11y:report`
 - Tree-shaking guard (modifies minimal app temporarily): `npm run verify:tree-shaking`
 - Tree-shaking dry run (no file overwrite): `npm run verify:tree-shaking:dry`
+- **TypeScript type-check all projects**: `npm run typecheck` (checks lib source, lib tests, demo app, demo tests, and stories — no emit)
+
+## Git Hooks (Husky)
+- **pre-commit** — runs `lint-staged`: ESLint + Prettier on staged `.ts`/`.scss` files only (fast).
+- **pre-push** — runs `npm run typecheck`: full TS type-check across all five tsconfigs before any push. Blocks push if there are TS errors.
+- To bypass hooks in an emergency: `git push --no-verify` (use sparingly; always fix errors before merging).
 
 ## Debugging + Integration Notes
 - Jest is zoneless (`setup-jest.ts`) and includes `matchMedia` polyfill; failures around media queries usually indicate missing test setup.
