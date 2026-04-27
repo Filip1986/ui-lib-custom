@@ -395,6 +395,19 @@ export class UploadComponent implements OnDestroy {
     this.validationMessages.set([]);
   }
 
+  /**
+   * Programmatically adds files to the queue, applying the same validation
+   * and limit logic as a native file-picker or drag-and-drop selection.
+   * Useful for testing and for consumers that obtain `File` objects externally.
+   */
+  public addFiles(files: File[]): void {
+    if (files.length === 0) {
+      return;
+    }
+    // Synthesise a minimal Event so processFiles has an originalEvent to emit.
+    this.processFiles(files, new Event('addFiles'));
+  }
+
   // ─── Private helpers ───────────────────────────────────────────────────────
 
   private processFiles(newFiles: File[], originalEvent: Event): void {

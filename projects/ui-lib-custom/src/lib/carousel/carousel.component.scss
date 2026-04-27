@@ -1,0 +1,284 @@
+// ─── Carousel CSS Variables ────────────────────────────────────────────────────
+// All tokens follow --uilib-carousel-{property}[-{variant}][-{state}]
+
+.uilib-carousel {
+  // Layout
+  --uilib-carousel-gap: var(--uilib-spacing-4, 1rem);
+  --uilib-carousel-content-gap: var(--uilib-spacing-2, 0.5rem);
+
+  // Nav buttons
+  --uilib-carousel-nav-button-size: 2.5rem;
+  --uilib-carousel-nav-button-bg: var(--uilib-surface-100, #f5f5f5);
+  --uilib-carousel-nav-button-bg-hover: var(--uilib-surface-200, #e8e8e8);
+  --uilib-carousel-nav-button-color: var(--uilib-color-text-primary, #1a1a1a);
+  --uilib-carousel-nav-button-border: 1px solid transparent;
+  --uilib-carousel-nav-button-radius: 50%;
+  --uilib-carousel-nav-button-shadow: none;
+  --uilib-carousel-nav-icon-size: 1.25rem;
+
+  // Indicators
+  --uilib-carousel-indicator-width: 2rem;
+  --uilib-carousel-indicator-height: 0.5rem;
+  --uilib-carousel-indicator-radius: 0.25rem;
+  --uilib-carousel-indicator-bg: var(--uilib-surface-300, #d0d0d0);
+  --uilib-carousel-indicator-bg-hover: var(--uilib-surface-400, #b0b0b0);
+  --uilib-carousel-indicator-bg-active: var(--uilib-color-primary, #1976d2);
+  --uilib-carousel-indicator-gap: var(--uilib-spacing-1, 0.25rem);
+  --uilib-carousel-indicator-padding: var(--uilib-spacing-3, 0.75rem) 0;
+  --uilib-carousel-indicator-focus-ring: 0 0 0 2px var(--uilib-color-primary, #1976d2);
+
+  // Transition
+  --uilib-carousel-transition: 500ms ease;
+}
+
+// ─── Root layout ──────────────────────────────────────────────────────────────
+
+.uilib-carousel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+// ─── Content container ────────────────────────────────────────────────────────
+
+.uilib-carousel-content-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.uilib-carousel-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--uilib-carousel-content-gap);
+}
+
+// ─── Viewport ─────────────────────────────────────────────────────────────────
+
+.uilib-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+}
+
+.uilib-carousel-item-list {
+  display: flex;
+  flex-direction: row;
+  will-change: transform;
+}
+
+.uilib-carousel-item {
+  // flex-basis is set dynamically via the injected <style> element
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 0 calc(var(--uilib-carousel-gap) / 2);
+}
+
+.uilib-carousel-item:first-child {
+  padding-left: 0;
+}
+
+.uilib-carousel-item:last-child {
+  padding-right: 0;
+}
+
+// ─── Vertical layout overrides ────────────────────────────────────────────────
+
+.uilib-carousel-vertical {
+  .uilib-carousel-content {
+    flex-direction: column;
+  }
+
+  .uilib-carousel-item-list {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .uilib-carousel-item {
+    padding: calc(var(--uilib-carousel-gap) / 2) 0;
+  }
+
+  .uilib-carousel-item:first-child {
+    padding-top: 0;
+  }
+
+  .uilib-carousel-item:last-child {
+    padding-bottom: 0;
+  }
+}
+
+// ─── Nav buttons ──────────────────────────────────────────────────────────────
+
+.uilib-carousel-prev-button,
+.uilib-carousel-next-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--uilib-carousel-nav-button-size);
+  height: var(--uilib-carousel-nav-button-size);
+  background: var(--uilib-carousel-nav-button-bg);
+  color: var(--uilib-carousel-nav-button-color);
+  border: var(--uilib-carousel-nav-button-border);
+  border-radius: var(--uilib-carousel-nav-button-radius);
+  box-shadow: var(--uilib-carousel-nav-button-shadow);
+  cursor: pointer;
+  transition:
+    background var(--uilib-carousel-transition),
+    color var(--uilib-carousel-transition),
+    box-shadow var(--uilib-carousel-transition);
+  outline: none;
+  padding: 0;
+  user-select: none;
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-carousel-nav-button-bg-hover);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--uilib-carousel-indicator-focus-ring);
+  }
+
+  &:disabled,
+  &.uilib-carousel-nav-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.uilib-carousel-nav-icon {
+  width: var(--uilib-carousel-nav-icon-size);
+  height: var(--uilib-carousel-nav-icon-size);
+  display: block;
+}
+
+// ─── Indicators ───────────────────────────────────────────────────────────────
+
+.uilib-carousel-indicator-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--uilib-carousel-indicator-gap);
+  padding: var(--uilib-carousel-indicator-padding);
+  margin: 0;
+  list-style: none;
+}
+
+.uilib-carousel-indicator-button {
+  display: block;
+  width: var(--uilib-carousel-indicator-width);
+  height: var(--uilib-carousel-indicator-height);
+  border: none;
+  border-radius: var(--uilib-carousel-indicator-radius);
+  background: var(--uilib-carousel-indicator-bg);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition:
+    background var(--uilib-carousel-transition),
+    width var(--uilib-carousel-transition);
+  outline: none;
+
+  &:hover {
+    background: var(--uilib-carousel-indicator-bg-hover);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--uilib-carousel-indicator-focus-ring);
+  }
+}
+
+.uilib-carousel-indicator-active .uilib-carousel-indicator-button {
+  background: var(--uilib-carousel-indicator-bg-active);
+  width: calc(var(--uilib-carousel-indicator-width) * 1.5);
+}
+
+// ─── Header / Footer ──────────────────────────────────────────────────────────
+
+.uilib-carousel-header {
+  margin-bottom: var(--uilib-spacing-3, 0.75rem);
+}
+
+.uilib-carousel-footer {
+  margin-top: var(--uilib-spacing-3, 0.75rem);
+}
+
+// ─── Size tokens ──────────────────────────────────────────────────────────────
+
+.uilib-carousel-sm {
+  --uilib-carousel-nav-button-size: 2rem;
+  --uilib-carousel-nav-icon-size: 1rem;
+  --uilib-carousel-indicator-width: 1.5rem;
+  --uilib-carousel-indicator-height: 0.375rem;
+}
+
+.uilib-carousel-lg {
+  --uilib-carousel-nav-button-size: 3rem;
+  --uilib-carousel-nav-icon-size: 1.5rem;
+  --uilib-carousel-indicator-width: 2.5rem;
+  --uilib-carousel-indicator-height: 0.625rem;
+}
+
+// ─── Material variant ─────────────────────────────────────────────────────────
+
+.uilib-carousel-variant-material {
+  --uilib-carousel-nav-button-bg: transparent;
+  --uilib-carousel-nav-button-bg-hover: rgba(0, 0, 0, 0.06);
+  --uilib-carousel-nav-button-shadow: var(--uilib-shadow-2, 0 2px 4px rgba(0, 0, 0, 0.15));
+  --uilib-carousel-nav-button-radius: 50%;
+  --uilib-carousel-nav-button-border: 1px solid transparent;
+  --uilib-carousel-indicator-bg-active: var(--uilib-color-primary, #1976d2);
+  --uilib-carousel-indicator-radius: 0.5rem;
+
+  .uilib-carousel-prev-button,
+  .uilib-carousel-next-button {
+    box-shadow: var(--uilib-carousel-nav-button-shadow);
+  }
+}
+
+// ─── Bootstrap variant ────────────────────────────────────────────────────────
+
+.uilib-carousel-variant-bootstrap {
+  --uilib-carousel-nav-button-bg: rgba(255, 255, 255, 0.85);
+  --uilib-carousel-nav-button-bg-hover: rgba(255, 255, 255, 1);
+  --uilib-carousel-nav-button-border: 1px solid var(--uilib-surface-300, #d0d0d0);
+  --uilib-carousel-nav-button-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-carousel-indicator-bg-active: var(--uilib-color-primary, #0d6efd);
+  --uilib-carousel-indicator-radius: 0.125rem;
+  --uilib-carousel-indicator-width: 1.5rem;
+  --uilib-carousel-indicator-height: 0.25rem;
+
+  .uilib-carousel-indicator-active .uilib-carousel-indicator-button {
+    width: var(--uilib-carousel-indicator-width);
+  }
+}
+
+// ─── Minimal variant ──────────────────────────────────────────────────────────
+
+.uilib-carousel-variant-minimal {
+  --uilib-carousel-nav-button-bg: transparent;
+  --uilib-carousel-nav-button-bg-hover: transparent;
+  --uilib-carousel-nav-button-border: none;
+  --uilib-carousel-nav-button-shadow: none;
+  --uilib-carousel-indicator-bg: var(--uilib-surface-200, #e0e0e0);
+  --uilib-carousel-indicator-bg-active: var(--uilib-color-text-primary, #1a1a1a);
+  --uilib-carousel-indicator-radius: 0;
+  --uilib-carousel-indicator-width: 1rem;
+  --uilib-carousel-indicator-height: 0.25rem;
+
+  .uilib-carousel-prev-button,
+  .uilib-carousel-next-button {
+    opacity: 0.6;
+
+    &:hover:not(:disabled) {
+      opacity: 1;
+    }
+  }
+
+  .uilib-carousel-indicator-active .uilib-carousel-indicator-button {
+    width: var(--uilib-carousel-indicator-width);
+  }
+}

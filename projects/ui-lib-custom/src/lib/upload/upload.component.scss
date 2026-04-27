@@ -558,5 +558,13 @@
   .ui-lib-upload__content {
     opacity: 0.6;
     cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .ui-lib-upload__choose-button,
+  .ui-lib-upload__upload-button,
+  .ui-lib-upload__cancel-button {
+    opacity: 0.5;
+    pointer-events: none;
   }
 }

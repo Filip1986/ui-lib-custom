@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Carousel` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `Upload` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `VirtualScroller` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
 - `Tree` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
@@ -63,6 +64,37 @@ Handoff convention (when terminal commands are run in-session): include a short 
 
 ---
 
+Date: 2026-04-27
+Changed:
+  - projects/ui-lib-custom/src/lib/carousel/ (new — types, constants, component TS/HTML/SCSS, spec, index.ts)
+  - projects/ui-lib-custom/carousel/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (added carousel to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added carousel import test + repaired upload truncation)
+  - projects/demo/src/app/pages/carousel/ (new demo — TS/HTML/SCSS, 9 scenarios)
+  - projects/ui-lib-custom/src/lib/carousel/carousel.component.ts (refactored activeNumVisible/activeNumScroll
+    from WritableSignal to computed(responsiveOverride ?? input), added effect() for reactive circular clones,
+    injected ChangeDetectorRef, removed duplicate private methods caused by file truncation repair)
+  - projects/ui-lib-custom/src/lib/carousel/carousel.component.spec.ts (rewritten ConfigurableHostComponent
+    to use WritableSignal properties so OnPush + zoneless CD picks up changes via .set())
+  - upload.component.scss / upload.component.ts / upload.component.spec.ts (repaired pre-existing truncations)
+  - virtual-scroller.component.scss / .ts / .spec.ts (repaired pre-existing truncations + null bytes)
+State: Carousel component fully complete. Content-slider with numVisible/numScroll pagination, circular
+  wrap-around, autoplay, touch/swipe, responsive breakpoints, keyboard-navigable indicator dots,
+  three variants (material/bootstrap/minimal), three sizes, five content template slots. 44/44 unit
+  tests passing. 38/38 entry-point tests passing. ESLint clean on all lib and demo files. Library build clean.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/carousel/ projects/demo/src/app/pages/carousel/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom — ui-lib-custom/carousel ✔ Built,
+  npx jest --testPathPatterns=carousel --no-cache (44/44 PASS),
+  npx jest --testPathPatterns=entry-points --no-cache (38/38 PASS).
+Terminal notes: File corruption (null bytes + mid-file truncation) is a recurring issue when the Write tool
+  creates large files. Mitigation: always strip nulls via Python after every write; repair truncations with
+  Python append rather than re-writing. The Edit tool sometimes silently fails on truncated files — verify
+  with bash `tail` or `wc -l` before proceeding. activeNumVisible/activeNumScroll had to be refactored
+  from WritableSignal to computed signals so that numVisible/numScroll input changes propagate reactively
+  (WritableSignals set once in ngAfterContentInit don't react to later input changes).
+Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
+
 Date: 2026-04-26
 Changed:
   - projects/ui-lib-custom/src/lib/upload/ (new — types, constants, directives, component TS/HTML/SCSS, spec, index.ts)
@@ -88,73 +120,4 @@ Terminal notes: Several files were truncated by the Write tool during creation (
   createPageNavigationItems). tree-table.component.ts had 26 null bytes at EOF. Both fixed in-session.
 Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
 
-Date: 2026-04-25
-Changed:
-  - projects/ui-lib-custom/src/lib/data-view/data-view.constants.ts (removed dead DATA_VIEW_DEFAULT_ROWS_PER_PAGE_OPTIONS and DATA_VIEW_CSS_CLASS_PREFIX; kept DATA_VIEW_DEFAULT_ROWS_PER_PAGE)
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts (wired DATA_VIEW_DEFAULT_ROWS_PER_PAGE as default for rows input and internalRows signal)
-  - projects/ui-lib-custom/src/lib/timeline/timeline.constants.ts (removed dead TIMELINE_CSS_CLASS_PREFIX)
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.ts (repaired two truncation issues: restored missing isTouchDevice() and isElementVisible() methods; completed trackItem() body; fixed viewChild declarations to use { read: ElementRef } + ElementRef as value import to resolve no-unsafe-call lint errors)
-State: knip fully clean (0 findings). Constants extraction pass complete across all 19 constants files.
-  All three lint issues on virtual-scroller component resolved. 132/132 tests passing across
-  virtual-scroller, entry-points, data-view, timeline suites.
-Verification: npx knip --reporter compact (0 findings),
-  npx eslint projects/ui-lib-custom/src/lib/virtual-scroller/ --max-warnings 0 (CLEAN),
-  npx jest --testPathPatterns="virtual-scroller|entry-points|data-view|timeline" (132/132 PASS).
-Terminal notes: All file edits via Python open(..., w, newline=LF). virtual-scroller.component.ts had
-  two layers of truncation: trackItem() was cut at end (repaired by appending closing body), AND
-  isTouchDevice()/isElementVisible() methods were missing entirely (restored as private helpers before
-  onWindowResize()). The no-unsafe-call errors on Signal<ElementRef<...>> resolved by switching
-  viewChild calls to { read: ElementRef } pattern (matches cascade-select convention).
-Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
-
-
-Date: 2026-04-25
-Changed:
-  - projects/ui-lib-custom/src/lib/order-list/order-list.constants.ts (removed dead ORDER_LIST_CLASSNAMES, ORDER_LIST_ARIA_LABELS, orderListId)
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.constants.ts (removed dead TREE_TABLE_HOST_CLASS, TREE_TABLE_VARIANT_PREFIX, TREE_TABLE_SIZE_PREFIX)
-  - projects/demo/src/app/pages/order-list/order-list-demo.component.ts (removed spurious export from DemoProduct interface)
-  - projects/demo/src/app/pages/pick-list/pick-list-demo.component.ts (removed spurious export from DemoCountry interface)
-  - projects/demo/src/app/pages/table/table-demo.component.ts (removed spurious export from Product interface)
-  - docs/reference/components/VIRTUAL_SCROLLER.md (new -- full API reference doc)
-  - docs/reference/components/README.md (repaired truncation; added rows for OrderList through VirtualScroller)
-State: knip baseline established and fully clean (0 findings). All 5 dead-export issues resolved by
-  deletion (unused internal constants) or export removal (demo-local interfaces). ESLint clean on all
-  touched files. 230/230 tests passing across order-list, pick-list, table, tree-table suites.
-  VirtualScroller reference doc complete.
-Verification: npx knip --reporter compact (0 findings),
-  npx eslint (all 5 changed files, --max-warnings 0, CLEAN),
-  npx jest --testPathPatterns="order-list|pick-list|table|tree-table" (230/230 PASS).
-Terminal notes: All file edits via Python open(..., w, newline=LF). npx.cmd not available -- use npx directly.
-Next step: Constants extraction pass (audit remaining constants.ts files for internal-only exports), then overlay follow-ups (appendTo / z-index manager).
-
-
-Date: 2026-04-25
-Changed:
-  - projects/ui-lib-custom/src/lib/virtual-scroller/ (all 7 files: types, directives,
-    component ts/html/scss, spec, index.ts)
-  - projects/ui-lib-custom/virtual-scroller/ (ng-package.json, package.json, public-api.ts -- secondary entry point)
-  - projects/ui-lib-custom/package.json (exports + typesVersions for virtual-scroller)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (virtual-scroller import test added)
-  - projects/demo/src/app/pages/scroller/ (full demo -- TS, HTML, SCSS -- 6 scenarios)
-  - AI_AGENT_CONTEXT.md (VirtualScroller marked complete)
-State: VirtualScroller fully complete. Viewport-based virtual scrolling algorithm ported from PrimeNG,
-  vertical/horizontal/both orientations, lazy loading with lazyLoad output, external loading state,
-  custom item/content/loader/loaderIcon templates via content directives (uiScrollerItem,
-  uiScrollerContent, uiScrollerLoader, uiScrollerLoaderIcon), numToleratedItems buffer, showSpacer,
-  inline mode, disabled mode (bypasses virtualization), CSS-transform positioning, NgZone-outside
-  scroll listener, rangeVersion trick to bridge mutable scroll math with signal-driven template,
-  three variants (material/bootstrap/minimal), WAI-ARIA role="log"/aria-live="off", tabindex support,
-  21/21 unit tests passing, 6-scenario demo (vertical 10k, horizontal 1k, lazy, skeleton loader,
-  disabled, large items 5k), entry-point wired and 36/36 entry-point tests passing.
-Verification: npx eslint projects/ui-lib-custom/src/lib/virtual-scroller/ --max-warnings 0 (CLEAN),
-  npx eslint projects/demo/src/app/pages/scroller/ --max-warnings 0 (CLEAN),
-  npx jest --testPathPatterns=virtual-scroller (21/21 PASS),
-  npx jest --testPathPatterns=entry-points (36/36 PASS).
-Terminal notes: All file writes via Python open(..., w, newline=LF). ESLint required two full
-  component rewrites (246 errors on first pass): all `const` variables need explicit type annotations
-  (@typescript-eslint/typedef), lifecycle methods need `public` modifier, all inputs/outputs need
-  explicit `InputSignal<T>` / `OutputEmitterRef<T>` type annotations, type-only imports must use
-  `import type`. Promise.resolve().then() calls need `void` prefix. TS5076 build error on `||` + `??`
-  mix fixed by adding explicit parentheses. npx.cmd not available in bash -- use npx directly.
-Next step: Begin knip baseline + dead-code cleanup pass.
 

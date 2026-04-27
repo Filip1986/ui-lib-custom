@@ -1281,6 +1281,11 @@ export class VirtualScrollerComponent
     };
   }
 
+  /** @internal Track-by function for the item @for loop — uses the item index. */
+  protected trackItem(index: number, _item: unknown): number {
+    return index;
+  }
+
   /** @internal Builds the full options context object for the content template. */
   protected getContentOptions(): VirtualScrollerContentOptions {
     return {
@@ -1294,23 +1299,12 @@ export class VirtualScrollerComponent
       vertical: this.isVertical(),
       horizontal: this.isHorizontal(),
       both: this.isBoth(),
-      getItemOptions: (index: number): VirtualScrollerItemOptions => this.getItemOptions(index),
+      getItemOptions: (itemIndex: number): VirtualScrollerItemOptions =>
+        this.getItemOptions(itemIndex),
       getLoaderOptions: (
-        index: number,
-        extra?: { numCols?: number }
-      ): VirtualScrollerLoaderOptions => this.getLoaderOptions(index, extra),
+        loaderIndex: number,
+        extra?: Record<string, unknown>
+      ): VirtualScrollerLoaderOptions => this.getLoaderOptions(loaderIndex, extra),
     };
-  }
-
-  /** @internal TrackBy for the @for item loop. */
-  protected trackItem(localIndex: number, item: unknown): unknown {
-    const fn: ((index: number, item: unknown) => unknown) | undefined = this.trackByFn();
-    if (fn) {
-      const absoluteIndex: number = this.isBoth()
-        ? (this.first as { rows: number; cols: number }).rows + localIndex
-        : (this.first as number) + localIndex;
-      return fn(absoluteIndex, item);
-    }
-    return item;
   }
 }

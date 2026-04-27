@@ -1,5 +1,222 @@
 <section class="carousel-demo" data-testid="carousel-demo">
   <h1>Carousel</h1>
-  <p>Coming soon.</p>
-</section>
+  <p class="carousel-demo__description">
+    A content slider with support for multiple visible items, responsive breakpoints,
+    autoplay, circular mode, touch/swipe navigation, and three design variants.
+  </p>
 
+  <!-- ─── Basic (1 visible) ──────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Basic</h2>
+    <p>Default configuration — one slide visible at a time, Material variant.</p>
+    <ui-lib-carousel [value]="slides">
+      <ng-template #carouselItem let-slide>
+        <div class="demo-slide demo-slide--basic">
+          <span>{{ slide }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Multiple visible items ─────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Multiple Items Visible</h2>
+    <p>3 products visible, scroll 1 at a time.</p>
+    <ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1">
+      <ng-template #carouselItem let-product>
+        <div class="demo-product-card">
+          <div class="demo-product-card__image">{{ product.image }}</div>
+          <div class="demo-product-card__body">
+            <h4>{{ product.name }}</h4>
+            <span class="demo-product-card__category">{{ product.category }}</span>
+            <strong class="demo-product-card__price">\${{ product.price }}</strong>
+          </div>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Circular + Autoplay ────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Circular &amp; Autoplay</h2>
+    <p>Wraps from last item back to first; auto-advances every 3 seconds.</p>
+    <ui-lib-carousel
+      [value]="products"
+      [numVisible]="3"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]="3000"
+    >
+      <ng-template #carouselItem let-product>
+        <div class="demo-product-card">
+          <div class="demo-product-card__image">{{ product.image }}</div>
+          <div class="demo-product-card__body">
+            <h4>{{ product.name }}</h4>
+            <span class="demo-product-card__category">{{ product.category }}</span>
+            <strong class="demo-product-card__price">\${{ product.price }}</strong>
+          </div>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Responsive ─────────────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Responsive</h2>
+    <p>Resize the window: 3 items above 1400 px, 2 from 1024 px, 1 below 640 px.</p>
+    <ui-lib-carousel
+      [value]="products"
+      [numVisible]="4"
+      [numScroll]="2"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template #carouselItem let-product>
+        <div class="demo-product-card">
+          <div class="demo-product-card__image">{{ product.image }}</div>
+          <div class="demo-product-card__body">
+            <h4>{{ product.name }}</h4>
+            <strong class="demo-product-card__price">\${{ product.price }}</strong>
+          </div>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Vertical ───────────────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Vertical</h2>
+    <p>Slides vertically with 3 items visible.</p>
+    <ui-lib-carousel
+      [value]="slides"
+      orientation="vertical"
+      verticalViewportHeight="280px"
+      [numVisible]="3"
+      [numScroll]="1"
+    >
+      <ng-template #carouselItem let-slide>
+        <div class="demo-slide demo-slide--vertical">
+          <span>{{ slide }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Header / Footer templates ─────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Header &amp; Footer Templates</h2>
+    <p>Custom header and footer slots via <code>#carouselHeader</code> and <code>#carouselFooter</code>.</p>
+    <ui-lib-carousel [value]="products" [numVisible]="3" [numScroll]="1">
+      <ng-template #carouselHeader>
+        <div class="demo-header">
+          <h3>Featured Products</h3>
+          <span class="demo-header__subtitle">Scroll to explore</span>
+        </div>
+      </ng-template>
+      <ng-template #carouselItem let-product>
+        <div class="demo-product-card">
+          <div class="demo-product-card__image">{{ product.image }}</div>
+          <div class="demo-product-card__body">
+            <h4>{{ product.name }}</h4>
+            <strong class="demo-product-card__price">\${{ product.price }}</strong>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #carouselFooter>
+        <p class="demo-footer">{{ products.length }} products available</p>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Page change event ───────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Page Change Event</h2>
+    <p>Navigate to see the emitted page index update below.</p>
+    <p class="demo-event-display">Current page: <strong>{{ lastPage }}</strong></p>
+    <ui-lib-carousel [value]="slides" (pageChange)="onPageChange($event)">
+      <ng-template #carouselItem let-slide>
+        <div class="demo-slide demo-slide--basic">
+          <span>{{ slide }}</span>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Bootstrap variant ─────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Bootstrap Variant</h2>
+    <ui-lib-carousel [value]="products" variant="bootstrap" [numVisible]="3" [numScroll]="1">
+      <ng-template #carouselItem let-product>
+        <div class="demo-product-card demo-product-card--bootstrap">
+          <div class="demo-product-card__image">{{ product.image }}</div>
+          <div class="demo-product-card__body">
+            <h4>{{ product.name }}</h4>
+            <strong class="demo-product-card__price">\${{ product.price }}</strong>
+          </div>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Minimal variant ───────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Minimal Variant</h2>
+    <ui-lib-carousel [value]="products" variant="minimal" [numVisible]="3" [numScroll]="1">
+      <ng-template #carouselItem let-product>
+        <div class="demo-product-card demo-product-card--minimal">
+          <div class="demo-product-card__image">{{ product.image }}</div>
+          <div class="demo-product-card__body">
+            <h4>{{ product.name }}</h4>
+            <strong class="demo-product-card__price">\${{ product.price }}</strong>
+          </div>
+        </div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+
+  <!-- ─── Sizes ─────────────────────────────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Sizes</h2>
+    <div class="demo-size-row">
+      <div>
+        <p><code>sm</code></p>
+        <ui-lib-carousel [value]="slides" size="sm">
+          <ng-template #carouselItem let-slide>
+            <div class="demo-slide demo-slide--sm"><span>{{ slide }}</span></div>
+          </ng-template>
+        </ui-lib-carousel>
+      </div>
+      <div>
+        <p><code>md</code> (default)</p>
+        <ui-lib-carousel [value]="slides" size="md">
+          <ng-template #carouselItem let-slide>
+            <div class="demo-slide demo-slide--basic"><span>{{ slide }}</span></div>
+          </ng-template>
+        </ui-lib-carousel>
+      </div>
+      <div>
+        <p><code>lg</code></p>
+        <ui-lib-carousel [value]="slides" size="lg">
+          <ng-template #carouselItem let-slide>
+            <div class="demo-slide demo-slide--lg"><span>{{ slide }}</span></div>
+          </ng-template>
+        </ui-lib-carousel>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── No navigators / no indicators ─────────────────────────────────── -->
+  <div class="carousel-demo__section">
+    <h2>Hidden Navigators &amp; Indicators</h2>
+    <p>Navigation buttons and indicator dots are both hidden. Swipe on touch devices.</p>
+    <ui-lib-carousel
+      [value]="slides"
+      [showNavigators]="false"
+      [showIndicators]="false"
+      [circular]="true"
+    >
+      <ng-template #carouselItem let-slide>
+        <div class="demo-slide demo-slide--basic"><span>{{ slide }}</span></div>
+      </ng-template>
+    </ui-lib-carousel>
+  </div>
+</section>

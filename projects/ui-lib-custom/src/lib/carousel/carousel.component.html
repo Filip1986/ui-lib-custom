@@ -1,0 +1,177 @@
+<div [attr.id]="componentId" [class]="styleClass()">
+  <!-- Header -->
+  @if (headerTemplate()) {
+    <div class="uilib-carousel-header">
+      <ng-container [ngTemplateOutlet]="headerTemplate()!" />
+    </div>
+  }
+
+  <!-- Content area: prev button + viewport + next button -->
+  <div class="uilib-carousel-content-container">
+    <div
+      class="uilib-carousel-content"
+      [attr.aria-live]="autoplayInterval() > 0 ? 'polite' : 'off'"
+    >
+      <!-- Previous button -->
+      @if (showNavigators()) {
+        <button
+          type="button"
+          class="uilib-carousel-prev-button"
+          [class.uilib-carousel-nav-disabled]="isBackwardDisabled()"
+          [disabled]="isBackwardDisabled()"
+          [attr.aria-label]="prevAriaLabel()"
+          (click)="navigateBackward($event)"
+        >
+          @if (prevIconTemplate()) {
+            <ng-container [ngTemplateOutlet]="prevIconTemplate()!" />
+          } @else {
+            @if (isVertical()) {
+              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="18 15 12 9 6 15" />
+              </svg>
+            } @else {
+              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            }
+          }
+        </button>
+      }
+
+      <!-- Viewport -->
+      <div
+        class="uilib-carousel-viewport"
+        [ngStyle]="viewportStyle()"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd($event)"
+      >
+        <div
+          #itemsContainer
+          class="uilib-carousel-item-list"
+          (transitionend)="onTransitionEnd()"
+        >
+          <!-- Cloned items at start (for circular wrap-around) -->
+          @for (item of clonedItemsForStarting; track $index) {
+            <div
+              class="uilib-carousel-item uilib-carousel-item-clone"
+              [class.uilib-carousel-item-active]="totalShiftedItems() * -1 === value().length"
+              [class.uilib-carousel-item-start]="$index === 0"
+              [class.uilib-carousel-item-end]="$index === clonedItemsForStarting.length - 1"
+              [attr.aria-hidden]="true"
+              [attr.aria-roledescription]="'slide'"
+            >
+              @if (itemTemplate()) {
+                <ng-container
+                  [ngTemplateOutlet]="itemTemplate()!"
+                  [ngTemplateOutletContext]="{ $implicit: item }"
+                />
+              }
+            </div>
+          }
+
+          <!-- Real items -->
+          @for (item of value(); track $index) {
+            <div
+              class="uilib-carousel-item"
+              [class.uilib-carousel-item-active]="isItemActive($index)"
+              [class.uilib-carousel-item-start]="isItemFirst($index)"
+              [class.uilib-carousel-item-end]="isItemLast($index)"
+              [attr.aria-hidden]="!isItemActive($index)"
+              [attr.aria-label]="ariaSlideNumber($index)"
+              [attr.aria-roledescription]="'slide'"
+            >
+              @if (itemTemplate()) {
+                <ng-container
+                  [ngTemplateOutlet]="itemTemplate()!"
+                  [ngTemplateOutletContext]="{ $implicit: item }"
+                />
+              }
+            </div>
+          }
+
+          <!-- Cloned items at end (for circular wrap-around) -->
+          @for (item of clonedItemsForFinishing; track $index) {
+            <div
+              class="uilib-carousel-item uilib-carousel-item-clone"
+              [class.uilib-carousel-item-active]="totalShiftedItems() === 0"
+              [class.uilib-carousel-item-start]="$index === 0"
+              [class.uilib-carousel-item-end]="$index === clonedItemsForFinishing.length - 1"
+              [attr.aria-hidden]="true"
+              [attr.aria-roledescription]="'slide'"
+            >
+              @if (itemTemplate()) {
+                <ng-container
+                  [ngTemplateOutlet]="itemTemplate()!"
+                  [ngTemplateOutletContext]="{ $implicit: item }"
+                />
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Next button -->
+      @if (showNavigators()) {
+        <button
+          type="button"
+          class="uilib-carousel-next-button"
+          [class.uilib-carousel-nav-disabled]="isForwardDisabled()"
+          [disabled]="isForwardDisabled()"
+          [attr.aria-label]="nextAriaLabel()"
+          (click)="navigateForward($event)"
+        >
+          @if (nextIconTemplate()) {
+            <ng-container [ngTemplateOutlet]="nextIconTemplate()!" />
+          } @else {
+            @if (isVertical()) {
+              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            } @else {
+              <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            }
+          }
+        </button>
+      }
+    </div>
+
+    <!-- Indicators -->
+    @if (showIndicators() && totalDots() > 1) {
+      <ol
+        #indicatorContainer
+        class="uilib-carousel-indicator-list"
+        role="tablist"
+        aria-label="Carousel pages"
+        (keydown)="onIndicatorKeydown($event)"
+      >
+        @for (dot of dotsArray(); track dot) {
+          <li
+            class="uilib-carousel-indicator"
+            [class.uilib-carousel-indicator-active]="currentPage() === dot"
+            role="presentation"
+          >
+            <button
+              type="button"
+              class="uilib-carousel-indicator-button"
+              role="tab"
+              [attr.tabindex]="currentPage() === dot ? 0 : -1"
+              [attr.aria-label]="ariaPageLabel(dot)"
+              [attr.aria-selected]="currentPage() === dot"
+              (click)="navigateToPage($event, dot)"
+            ></button>
+          </li>
+        }
+      </ol>
+    }
+  </div>
+
+  <!-- Footer -->
+  @if (footerTemplate()) {
+    <div class="uilib-carousel-footer">
+      <ng-container [ngTemplateOutlet]="footerTemplate()!" />
+    </div>
+  }
+</div>

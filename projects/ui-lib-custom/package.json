@@ -124,6 +124,10 @@
     "./upload": {
       "esm2022": "./esm2022/upload/index.mjs",
       "esm": "./esm2022/upload/index.mjs"
+    },
+    "./carousel": {
+      "esm2022": "./esm2022/carousel/index.mjs",
+      "esm": "./esm2022/carousel/index.mjs"
     }
   },
   "typesVersions": {
@@ -187,6 +191,9 @@
       ],
       "upload": [
         "./upload/index.d.ts"
+      ],
+      "carousel": [
+        "./carousel/index.d.ts"
       ]
     }
   }
