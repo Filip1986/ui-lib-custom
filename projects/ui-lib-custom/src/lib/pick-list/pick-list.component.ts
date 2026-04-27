@@ -504,7 +504,11 @@ export class PickListComponent {
    */
   public trackByFn(_index: number, item: unknown): unknown {
     const key: string | null = this.trackBy();
-    return key ? this.resolveKey(item, key) : item;
+    if (!key) {
+      return item;
+    }
+    const resolved: unknown = this.resolveKey(item, key);
+    return resolved !== undefined ? resolved : _index;
   }
 
   /**

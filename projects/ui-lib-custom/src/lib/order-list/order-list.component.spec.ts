@@ -942,10 +942,10 @@ describe('OrderListComponent', (): void => {
       expect(component.trackByFn(0, firstFruit)).toBe(firstFruit.id);
     });
 
-    it('should return undefined when nested trackBy path is unresolvable', (): void => {
+    it('should return index when nested trackBy path is unresolvable', (): void => {
       host.trackBy.set('id.value');
       fixture.detectChanges();
-      expect(component.trackByFn(0, getFruit(0))).toBeUndefined();
+      expect(component.trackByFn(0, getFruit(0))).toBe(0);
     });
   });
 

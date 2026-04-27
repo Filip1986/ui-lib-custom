@@ -49,7 +49,7 @@
     <!-- Windowed page-link buttons -->
     @if (showPageLinks()) {
       <span class="uilib-paginator-pages" role="list">
-        @for (pageLink of pageLinks(); track pageLink) {
+        @for (pageLink of pageLinks(); track $index) {
           <button
             type="button"
             role="listitem"
