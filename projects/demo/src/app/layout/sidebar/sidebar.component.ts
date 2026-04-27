@@ -620,7 +620,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/upload',
           group: 'File',
-          badge: 'TODO',
         },
         {
           label: 'Popover',
