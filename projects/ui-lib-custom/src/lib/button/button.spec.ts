@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideAudioWaveform } from '@ng-icons/lucide';
+import { bootstrapArrowRepeat } from '@ng-icons/bootstrap-icons';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { By } from '@angular/platform-browser';
 
 import { Button } from './button';
@@ -59,7 +61,7 @@ describe('Button', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Button, Icon, Badge],
-      providers: [provideIcons({ lucideAudioWaveform })],
+      providers: [provideIcons({ lucideAudioWaveform, bootstrapArrowRepeat })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Button);
@@ -500,6 +502,7 @@ describe('Button interactions', (): void => {
   ): Promise<ComponentFixture<ButtonClickHostComponent>> {
     await TestBed.configureTestingModule({
       imports: [ButtonClickHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     const fixture: ComponentFixture<ButtonClickHostComponent> =
@@ -578,6 +581,7 @@ describe('Button variant', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ButtonVariantHostComponent],
+      providers: [provideUiLibIcons()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonVariantHostComponent);

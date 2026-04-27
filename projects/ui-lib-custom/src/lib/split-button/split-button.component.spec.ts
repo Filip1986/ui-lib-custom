@@ -10,6 +10,9 @@ import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { provideIcons } from '@ng-icons/core';
+import { lucidePencil, lucideTrash } from '@ng-icons/lucide';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { SplitButtonComponent } from './split-button.component';
 import type {
   SplitButtonClickEvent,
@@ -113,7 +116,12 @@ describe('SplitButtonComponent', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [SplitButtonHostComponent],
-      providers: [provideZonelessChangeDetection(), provideRouter([])],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideRouter([]),
+        provideUiLibIcons(),
+        provideIcons({ pencil: lucidePencil, trash: lucideTrash }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SplitButtonHostComponent);

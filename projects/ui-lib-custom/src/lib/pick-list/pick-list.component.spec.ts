@@ -8,6 +8,13 @@ import {
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideIcons } from '@ng-icons/core';
+import {
+  lucideArrowUp,
+  lucideArrowDown,
+  lucideChevronsLeft,
+  lucideChevronsRight,
+} from '@ng-icons/lucide';
 import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { PickListComponent } from './pick-list.component';
 import type {
@@ -165,7 +172,16 @@ function setup(
 } {
   TestBed.configureTestingModule({
     imports: [PickListHostComponent],
-    providers: [provideZonelessChangeDetection(), provideUiLibIcons()],
+    providers: [
+      provideZonelessChangeDetection(),
+      provideUiLibIcons(),
+      provideIcons({
+        arrowUp: lucideArrowUp,
+        arrowDown: lucideArrowDown,
+        chevronsLeft: lucideChevronsLeft,
+        chevronsRight: lucideChevronsRight,
+      }),
+    ],
   });
 
   const fixture: ComponentFixture<PickListHostComponent> =

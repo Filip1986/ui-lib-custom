@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from 
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
+import { lucideMinus, lucidePlus } from '@ng-icons/lucide';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { Accordion } from './accordion';
 import { AccordionPanel } from './accordion-panel';
 import type {
@@ -74,7 +77,11 @@ describe('Accordion', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [TestHostComponent],
-      providers: [provideZonelessChangeDetection()],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideUiLibIcons(),
+        provideIcons({ minus: lucideMinus, plus: lucidePlus }),
+      ],
     }).compileComponents();
   });
 

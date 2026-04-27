@@ -4,6 +4,9 @@ import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { provideZonelessChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { provideIcons } from '@ng-icons/core';
+import { lucideMinus, lucidePlus } from '@ng-icons/lucide';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { Icon } from 'ui-lib-custom/icon';
 import { AccordionPanel, AccordionHeader, AccordionToggleIcon } from './accordion-panel';
 import { ACCORDION_PANEL_STATES } from './accordion.constants';
@@ -66,7 +69,11 @@ describe('AccordionPanel', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [PanelHostComponent],
-      providers: [provideZonelessChangeDetection()],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideUiLibIcons(),
+        provideIcons({ minus: lucideMinus, plus: lucidePlus }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PanelHostComponent);
@@ -288,7 +295,11 @@ describe('AccordionPanel - Toggle Icon Template', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [PanelTemplateHostComponent],
-      providers: [provideZonelessChangeDetection()],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideUiLibIcons(),
+        provideIcons({ minus: lucideMinus, plus: lucidePlus }),
+      ],
     }).compileComponents();
 
     templateFixture = TestBed.createComponent(PanelTemplateHostComponent);

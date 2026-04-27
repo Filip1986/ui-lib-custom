@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemeVariant, ThemeScopeInput } from 'ui-lib-custom/theme';
+import { provideUiLibIcons } from 'ui-lib-custom/icon';
 
 import { Card } from './card';
 import type { CardElevation, CardVariant } from './card';
@@ -104,7 +105,10 @@ describe('Card', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [CardHost],
-      providers: [{ provide: ThemeConfigService, useClass: MockThemeConfigService }],
+      providers: [
+        provideUiLibIcons(),
+        { provide: ThemeConfigService, useClass: MockThemeConfigService },
+      ],
     }).compileComponents();
   });
 
@@ -208,7 +212,10 @@ describe('Card theme and header features', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [CardThemeHost],
-      providers: [{ provide: ThemeConfigService, useClass: MockThemeConfigService }],
+      providers: [
+        provideUiLibIcons(),
+        { provide: ThemeConfigService, useClass: MockThemeConfigService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardThemeHost);
@@ -314,7 +321,10 @@ describe('Card clickable behavior', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [ClickableCardHost],
-      providers: [{ provide: ThemeConfigService, useClass: MockThemeConfigService }],
+      providers: [
+        provideUiLibIcons(),
+        { provide: ThemeConfigService, useClass: MockThemeConfigService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ClickableCardHost);
