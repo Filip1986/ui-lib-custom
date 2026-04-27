@@ -128,6 +128,10 @@
     "./carousel": {
       "esm2022": "./esm2022/carousel/index.mjs",
       "esm": "./esm2022/carousel/index.mjs"
+    },
+    "./input-otp": {
+      "esm2022": "./esm2022/input-otp/index.mjs",
+      "esm": "./esm2022/input-otp/index.mjs"
     }
   },
   "typesVersions": {
@@ -194,6 +198,9 @@
       ],
       "carousel": [
         "./carousel/index.d.ts"
+      ],
+      "input-otp": [
+        "./input-otp/index.d.ts"
       ]
     }
   }

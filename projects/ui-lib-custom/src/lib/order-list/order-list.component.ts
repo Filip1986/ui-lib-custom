@@ -989,7 +989,9 @@ export class OrderListComponent {
     const set: Set<number> = new Set<number>();
     for (const selectedItem of sel) {
       const index: number = this.indexOf(selectedItem, items);
-      if (index !== -1) set.add(index);
+      if (index !== -1) {
+        set.add(index);
+      }
     }
     return set;
   }

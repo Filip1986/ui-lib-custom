@@ -37,6 +37,7 @@ import type * as UiLibTreeTable from 'ui-lib-custom/tree-table';
 import type * as UiLibVirtualScroller from 'ui-lib-custom/virtual-scroller';
 import type * as UiLibUpload from 'ui-lib-custom/upload';
 import type * as UiLibCarousel from 'ui-lib-custom/carousel';
+import type * as UiLibInputOtp from 'ui-lib-custom/input-otp';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -273,5 +274,11 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.CarouselComponent).toBeDefined();
     expect(mod.CAROUSEL_DEFAULT_NUM_VISIBLE).toBeDefined();
     expect(mod.CAROUSEL_DEFAULT_NUM_SCROLL).toBeDefined();
+  });
+
+  it('should import from input-otp', async (): Promise<void> => {
+    const mod: typeof UiLibInputOtp = await import('ui-lib-custom/input-otp');
+    expect(mod.InputOtpComponent).toBeDefined();
+    expect(mod.INPUT_OTP_DEFAULTS).toBeDefined();
   });
 });

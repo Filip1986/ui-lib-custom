@@ -1,0 +1,172 @@
+// ---------------------------------------------------------------------------
+// InputOtp — CSS custom properties (component tokens)
+// ---------------------------------------------------------------------------
+
+uilib-input-otp {
+  // Sizing
+  --uilib-input-otp-cell-width: 2.5rem;
+  --uilib-input-otp-cell-height: 2.5rem;
+  --uilib-input-otp-gap: var(--uilib-space-2, 0.5rem);
+  --uilib-input-otp-font-size: var(--uilib-font-size-base, 1rem);
+  --uilib-input-otp-font-weight: 500;
+  --uilib-input-otp-border-radius: var(--uilib-radius-md, 0.5rem);
+
+  // Colors
+  --uilib-input-otp-border-color: var(--uilib-border, currentColor);
+  --uilib-input-otp-bg: var(--uilib-surface, transparent);
+  --uilib-input-otp-text-color: var(--uilib-page-fg, currentColor);
+  --uilib-input-otp-placeholder-color: var(--uilib-muted, currentColor);
+  --uilib-input-otp-focus-border-color: var(--uilib-color-primary-600, currentColor);
+  --uilib-input-otp-focus-ring: 0 0 0 0.1875rem
+    color-mix(in srgb, var(--uilib-input-otp-focus-border-color) 28%, transparent);
+  --uilib-input-otp-invalid-border-color: var(--uilib-color-danger-600, currentColor);
+  --uilib-input-otp-filled-bg: color-mix(
+    in srgb,
+    var(--uilib-input-otp-bg) 84%,
+    var(--uilib-color-neutral-900, currentColor) 4%
+  );
+  --uilib-input-otp-disabled-opacity: 0.6;
+
+  // Layout
+  display: inline-flex;
+  align-items: center;
+  gap: var(--uilib-input-otp-gap);
+}
+
+// ---------------------------------------------------------------------------
+// Cell (individual input)
+// ---------------------------------------------------------------------------
+
+uilib-input-otp .uilib-input-otp-cell {
+  appearance: none;
+  width: var(--uilib-input-otp-cell-width);
+  height: var(--uilib-input-otp-cell-height);
+  padding: 0;
+  border: 0.0625rem solid var(--uilib-input-otp-border-color);
+  border-radius: var(--uilib-input-otp-border-radius);
+  background: var(--uilib-input-otp-bg);
+  color: var(--uilib-input-otp-text-color);
+  font-size: var(--uilib-input-otp-font-size);
+  font-weight: var(--uilib-input-otp-font-weight);
+  text-align: center;
+  line-height: var(--uilib-input-otp-cell-height);
+  cursor: text;
+  transition:
+    border-color var(--uilib-transition-fast, 150ms ease),
+    box-shadow var(--uilib-transition-fast, 150ms ease),
+    background-color var(--uilib-transition-fast, 150ms ease);
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--uilib-input-otp-focus-border-color);
+    box-shadow: var(--uilib-input-otp-focus-ring);
+  }
+
+  &::placeholder {
+    color: var(--uilib-input-otp-placeholder-color);
+  }
+
+  // Remove browser number spinners
+  &[type='number'] {
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Size variants
+// ---------------------------------------------------------------------------
+
+uilib-input-otp.uilib-input-otp-sm {
+  --uilib-input-otp-cell-width: 1.875rem;
+  --uilib-input-otp-cell-height: 1.875rem;
+  --uilib-input-otp-font-size: var(--uilib-font-size-sm, 0.875rem);
+  --uilib-input-otp-gap: var(--uilib-space-1, 0.25rem);
+}
+
+uilib-input-otp.uilib-input-otp-lg {
+  --uilib-input-otp-cell-width: 3.25rem;
+  --uilib-input-otp-cell-height: 3.25rem;
+  --uilib-input-otp-font-size: var(--uilib-font-size-lg, 1.125rem);
+  --uilib-input-otp-gap: var(--uilib-space-3, 0.75rem);
+}
+
+// ---------------------------------------------------------------------------
+// Filled appearance
+// ---------------------------------------------------------------------------
+
+uilib-input-otp.uilib-input-otp-filled .uilib-input-otp-cell {
+  background: var(--uilib-input-otp-filled-bg);
+  border-color: transparent;
+}
+
+// ---------------------------------------------------------------------------
+// Invalid state
+// ---------------------------------------------------------------------------
+
+uilib-input-otp.uilib-input-otp-invalid .uilib-input-otp-cell {
+  border-color: var(--uilib-input-otp-invalid-border-color);
+}
+
+// ---------------------------------------------------------------------------
+// Disabled state
+// ---------------------------------------------------------------------------
+
+uilib-input-otp.uilib-input-otp-disabled {
+  opacity: var(--uilib-input-otp-disabled-opacity);
+
+  .uilib-input-otp-cell {
+    cursor: not-allowed;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Read-only state
+// ---------------------------------------------------------------------------
+
+uilib-input-otp.uilib-input-otp-readonly .uilib-input-otp-cell {
+  cursor: default;
+}
+
+// ---------------------------------------------------------------------------
+// Design-variant overrides
+// ---------------------------------------------------------------------------
+
+// — Material —
+.uilib-variant-material uilib-input-otp .uilib-input-otp-cell {
+  border-width: 0 0 0.125rem;
+  border-radius: 0;
+  box-shadow: none;
+
+  &:focus-visible {
+    box-shadow: none;
+    border-color: var(--uilib-input-otp-focus-border-color);
+  }
+}
+
+// — Bootstrap —
+.uilib-variant-bootstrap uilib-input-otp .uilib-input-otp-cell {
+  border-width: 0.0625rem;
+  border-radius: var(--uilib-input-otp-border-radius);
+}
+
+// — Minimal —
+.uilib-variant-minimal uilib-input-otp .uilib-input-otp-cell {
+  border-color: transparent;
+  background: color-mix(
+    in srgb,
+    var(--uilib-input-otp-bg) 88%,
+    var(--uilib-color-neutral-900, currentColor) 3%
+  );
+  box-shadow: none;
+
+  &:focus-visible {
+    background: var(--uilib-input-otp-bg);
+    border-color: var(--uilib-input-otp-focus-border-color);
+  }
+}

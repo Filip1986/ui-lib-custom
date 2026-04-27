@@ -1,0 +1,21 @@
+@for (index of cellIndices(); track index) {
+  <input
+    #cellInput
+    [type]="inputType()"
+    [inputMode]="inputMode()"
+    [value]="getToken(index)"
+    [disabled]="isControlDisabled()"
+    [readOnly]="readonly()"
+    [tabindex]="tabindex()"
+    [attr.aria-label]="'OTP digit ' + (index + 1) + ' of ' + length()"
+    [attr.autocomplete]="index === 0 ? 'one-time-code' : 'off'"
+    [attr.maxlength]="index === 0 ? length() : 1"
+    [class]="styleClass()"
+    class="uilib-input-otp-cell"
+    (input)="onCellInput($event, index)"
+    (keydown)="onCellKeydown($event, index)"
+    (focus)="onCellFocus($event)"
+    (blur)="onCellBlur($event)"
+    (paste)="onCellPaste($event)"
+  />
+}

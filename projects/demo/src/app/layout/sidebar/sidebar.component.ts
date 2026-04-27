@@ -229,7 +229,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/input-otp',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'KeyFilter',

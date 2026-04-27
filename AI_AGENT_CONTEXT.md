@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `InputOtp` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
 - `Carousel` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `Upload` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `VirtualScroller` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
@@ -66,6 +67,32 @@ Handoff convention (when terminal commands are run in-session): include a short 
 
 Date: 2026-04-27
 Changed:
+  - projects/ui-lib-custom/src/lib/input-otp/ (new — types, component TS/HTML/SCSS, spec, index.ts, public-api.ts)
+  - projects/ui-lib-custom/input-otp/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (added input-otp to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added input-otp import test; repaired truncation via Python)
+  - projects/demo/src/app/pages/input-otp/ (full demo — TS/HTML/SCSS, 9 scenarios)
+  - projects/ui-lib-custom/src/lib/upload/upload.component.ts (repaired: revokeAllObjectUrls + clearAllFiles methods missing)
+  - projects/ui-lib-custom/src/lib/order-list/order-list.component.ts (repaired: buildSelectionSet truncated)
+  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.ts (repaired: findIndex callback truncated)
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.ts (repaired: getContentOptions truncated)
+State: InputOtp component fully complete. N-cell OTP entry, CVA (ngModel + reactive forms), keyboard
+  navigation (arrows/backspace/delete), paste distribution, mask mode, integerOnly, three size tokens,
+  filled/disabled/invalid/readonly states, three CSS-variable variants. 36/36 unit tests passing.
+  39/39 entry-point tests passing. ESLint clean on all lib and demo files. Library build clean.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/input-otp/ projects/demo/src/app/pages/input-otp/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom — all entry points ✔ Built (zero errors),
+  npx jest --testPathPatterns="input-otp|entry-points" (75/75 PASS).
+Terminal notes: Backtick chars in Python -c strings are eaten by bash (bash tries to execute them as
+  command substitution). Mitigation: always write Python scripts to a .py file in outputs/, then run
+  with python3 <file>. Four pre-existing truncated files found and repaired during build; see Changed list.
+Next step: Overlay follow-ups (appendTo / z-index manager), then knip baseline + dead-code cleanup.
+
+---
+
+Date: 2026-04-27 [carousel session]
+Changed:
   - projects/ui-lib-custom/src/lib/carousel/ (new — types, constants, component TS/HTML/SCSS, spec, index.ts)
   - projects/ui-lib-custom/carousel/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
   - projects/ui-lib-custom/package.json (added carousel to exports + typesVersions)
@@ -93,31 +120,6 @@ Terminal notes: File corruption (null bytes + mid-file truncation) is a recurrin
   with bash `tail` or `wc -l` before proceeding. activeNumVisible/activeNumScroll had to be refactored
   from WritableSignal to computed signals so that numVisible/numScroll input changes propagate reactively
   (WritableSignals set once in ngAfterContentInit don't react to later input changes).
-Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
-
-Date: 2026-04-26
-Changed:
-  - projects/ui-lib-custom/src/lib/upload/ (new — types, constants, directives, component TS/HTML/SCSS, spec, index.ts)
-  - projects/ui-lib-custom/upload/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (added upload to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (added upload import test)
-  - projects/demo/src/app/pages/upload/ (new demo — TS/HTML/SCSS, 8 scenarios)
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts (restored truncated closing brace)
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.ts (stripped 26 null bytes from EOF)
-State: Upload component fully complete. Drag-and-drop file selection, multi-file support, image
-  thumbnails, file validation (size/type/limit), customUpload mode, auto mode, three variants
-  (material/bootstrap/minimal), three sizes (sm/md/lg), four template slots (header/content/empty/file),
-  WAI-ARIA roles/labels throughout. 36/36 unit tests passing. 37/37 entry-point tests passing.
-  ESLint clean on all lib and demo files. Library build clean (upload entry point).
-Verification:
-  npx eslint projects/ui-lib-custom/src/lib/upload/ projects/demo/src/app/pages/upload/ --max-warnings 0 (CLEAN),
-  npx ng build ui-lib-custom — ui-lib-custom/upload ✔ Built,
-  npx jest --testPathPatterns=upload (36/36 PASS),
-  npx jest --testPathPatterns=entry-points (37/37 PASS).
-Terminal notes: Several files were truncated by the Write tool during creation (component TS, constants,
-  spec, demo TS, package.json, entry-points spec). All repaired via Python open(..., w, newline=LF)
-  appends. data-view.component.ts had a pre-existing truncation (missing closing braces on
-  createPageNavigationItems). tree-table.component.ts had 26 null bytes at EOF. Both fixed in-session.
 Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
 
 

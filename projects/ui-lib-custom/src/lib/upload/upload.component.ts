@@ -509,6 +509,22 @@ export class UploadComponent implements OnDestroy {
     return null;
   }
 
+  /** Revokes all object URLs created for image previews to free memory. */
+  private revokeAllObjectUrls(): void {
+    for (const item of this.internalFiles()) {
+      if (item.objectUrl !== null) {
+        URL.revokeObjectURL(item.objectUrl);
+      }
+    }
+  }
+
+  /** Clears the internal file list and resets validation messages. */
+  private clearAllFiles(): void {
+    this.revokeAllObjectUrls();
+    this.internalFiles.set([]);
+    this.validationMessages.set([]);
+  }
+
   /**
    * Returns `true` when `file` matches at least one pattern in the
    * comma-separated `accept` string.
@@ -525,21 +541,5 @@ export class UploadComponent implements OnDestroy {
       }
       return file.type === pattern;
     });
-  }
-
-  /** Clears the queue and revokes all blob URLs. */
-  private clearAllFiles(): void {
-    this.revokeAllObjectUrls();
-    this.internalFiles.set([]);
-    this.validationMessages.set([]);
-  }
-
-  /** Revokes every active blob URL to release browser memory. */
-  private revokeAllObjectUrls(): void {
-    for (const item of this.internalFiles()) {
-      if (item.objectUrl !== null) {
-        URL.revokeObjectURL(item.objectUrl);
-      }
-    }
   }
 }

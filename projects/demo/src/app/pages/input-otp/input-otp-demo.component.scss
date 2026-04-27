@@ -1,14 +1,42 @@
-.input-otp-demo {
-  padding: 1.5rem;
+@use '../../shared/styles/doc-page.scss';
 
-  h1 {
-    margin: 0 0 0.5rem;
-    font-size: 1.5rem;
-    color: var(--uilib-page-fg);
-  }
+.examples {
+  display: grid;
+  gap: 1.25rem;
+}
 
-  p {
-    margin: 0;
-    color: var(--uilib-muted);
-  }
+.example-section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.section-text {
+  margin: 0;
+  color: var(--uilib-muted);
+  font-size: 0.9375rem;
+}
+
+.value-text {
+  color: var(--uilib-muted);
+  font-size: 0.875rem;
+}
+
+.error-text {
+  color: var(--uilib-color-danger-600, var(--uilib-danger));
+  font-size: 0.875rem;
+}
+
+.stack-xs {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.stack-sm {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.stack-md {
+  display: grid;
+  gap: 0.875rem;
 }
