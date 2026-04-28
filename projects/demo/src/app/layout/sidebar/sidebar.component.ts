@@ -247,7 +247,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/listbox',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'Password',
