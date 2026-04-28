@@ -259,7 +259,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/radio-button',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'Rating',

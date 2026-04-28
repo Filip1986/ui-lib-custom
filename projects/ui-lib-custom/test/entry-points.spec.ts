@@ -42,6 +42,7 @@ import type * as UiLibKeyFilter from 'ui-lib-custom/key-filter';
 import type * as UiLibKnob from 'ui-lib-custom/knob';
 import type * as UiLibListbox from 'ui-lib-custom/listbox';
 import type * as UiLibPassword from 'ui-lib-custom/password';
+import type * as UiLibRadioButton from 'ui-lib-custom/radio-button';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -311,5 +312,10 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibPassword = await import('ui-lib-custom/password');
     expect(mod.PasswordComponent).toBeDefined();
     expect(mod.PASSWORD_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from radio-button', async (): Promise<void> => {
+    const mod: typeof UiLibRadioButton = await import('ui-lib-custom/radio-button');
+    expect(mod.RadioButton).toBeDefined();
   });
 });

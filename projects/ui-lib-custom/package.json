@@ -150,6 +150,10 @@
       "esm2022": "./esm2022/password/index.mjs",
       "esm": "./esm2022/password/index.mjs",
       "default": "./fesm2022/password/index.mjs"
+    },
+    "./radio-button": {
+      "esm2022": "./esm2022/radio-button/index.mjs",
+      "esm": "./esm2022/radio-button/index.mjs"
     }
   },
   "typesVersions": {
@@ -231,6 +235,9 @@
       ],
       "password": [
         "password/index.d.ts"
+      ],
+      "radio-button": [
+        "./radio-button/index.d.ts"
       ]
     }
   }

@@ -1,0 +1,36 @@
+<!-- Visually-hidden native radio input: provides keyboard access and form integration -->
+<input
+  class="ui-lib-radio-button__native-input"
+  type="radio"
+  [id]="getNativeInputId()"
+  [name]="name()"
+  [checked]="isChecked()"
+  [required]="required()"
+  [disabled]="isDisabled()"
+  [attr.tabindex]="hostTabIndex()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledbyResolved()"
+  (click)="onSelect($event)"
+  (focus)="onFocusIn($event)"
+  (blur)="onNativeBlur($event)"
+/>
+
+<!-- Custom visual circle indicator -->
+<div class="ui-lib-radio-button__box" role="presentation" aria-hidden="true">
+  <span class="ui-lib-radio-button__icon"></span>
+</div>
+
+<!-- Optional label -->
+@if (label()) {
+  <label
+    [for]="getNativeInputId()"
+    [id]="getLabelElementId()"
+    class="ui-lib-radio-button__label"
+  >
+    {{ label() }}
+  </label>
+}
+
+<!-- Projected content (alternative to label input) -->
+<ng-content />
+

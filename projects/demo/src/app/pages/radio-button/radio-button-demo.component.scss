@@ -1,14 +1,40 @@
 .radio-button-demo {
-  padding: 1.5rem;
+  padding: 2rem;
+  max-width: 800px;
 }
 
 .radio-button-demo h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.5rem;
-  color: var(--uilib-page-fg);
+  margin-bottom: 0.5rem;
 }
 
-.radio-button-demo p {
-  margin: 0;
-  color: var(--uilib-muted);
+.radio-button-demo h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.radio-button-demo h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--uilib-color-neutral-600, #6b7280);
+}
+
+.demo-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.demo-group--vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.demo-hint {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--uilib-color-neutral-600, #6b7280);
 }

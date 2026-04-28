@@ -1,5 +1,103 @@
 <section class="radio-button-demo" data-testid="radio-button-demo">
   <h1>RadioButton</h1>
-  <p>Coming soon.</p>
+  <p>A radio button allows a user to select one option from a group.</p>
+
+  <!-- ── Basic ──────────────────────────────────────────────────────────── -->
+  <h2>Basic</h2>
+  <div class="demo-group">
+    @for (city of cities; track city.value) {
+      <ui-lib-radio-button
+        name="city"
+        [value]="city.value"
+        [label]="city.label"
+        [(ngModel)]="selectedCity"
+        (change)="onCityChange($event)"
+      />
+    }
+  </div>
+  <p class="demo-hint">Selected: <strong>{{ selectedCity || 'none' }}</strong></p>
+
+  <!-- ── Variants ───────────────────────────────────────────────────────── -->
+  <h2>Variants</h2>
+
+  <h3>Material</h3>
+  <div class="demo-group">
+    <ui-lib-radio-button name="variant-material" value="a" label="Option A" variant="material" [(ngModel)]="variantMaterialValue" />
+    <ui-lib-radio-button name="variant-material" value="b" label="Option B" variant="material" [(ngModel)]="variantMaterialValue" />
+    <ui-lib-radio-button name="variant-material" value="c" label="Option C (pre-selected)" variant="material" [(ngModel)]="variantMaterialValue" />
+  </div>
+
+  <h3>Bootstrap</h3>
+  <div class="demo-group">
+    <ui-lib-radio-button name="variant-bootstrap" value="a" label="Option A" variant="bootstrap" [(ngModel)]="variantBootstrapValue" />
+    <ui-lib-radio-button name="variant-bootstrap" value="b" label="Option B" variant="bootstrap" [(ngModel)]="variantBootstrapValue" />
+    <ui-lib-radio-button name="variant-bootstrap" value="c" label="Option C (pre-selected)" variant="bootstrap" [(ngModel)]="variantBootstrapValue" />
+  </div>
+
+  <h3>Minimal</h3>
+  <div class="demo-group">
+    <ui-lib-radio-button name="variant-minimal" value="a" label="Option A" variant="minimal" [(ngModel)]="variantMinimalValue" />
+    <ui-lib-radio-button name="variant-minimal" value="b" label="Option B" variant="minimal" [(ngModel)]="variantMinimalValue" />
+    <ui-lib-radio-button name="variant-minimal" value="c" label="Option C (pre-selected)" variant="minimal" [(ngModel)]="variantMinimalValue" />
+  </div>
+
+  <!-- ── Sizes ──────────────────────────────────────────────────────────── -->
+  <h2>Sizes</h2>
+  <div class="demo-group demo-group--vertical">
+    <ui-lib-radio-button name="size-demo" value="sm" label="Small (sm)" size="sm" />
+    <ui-lib-radio-button name="size-demo" value="md" label="Medium (md)" size="md" />
+    <ui-lib-radio-button name="size-demo" value="lg" label="Large (lg)" size="lg" />
+  </div>
+
+  <!-- ── Filled appearance ──────────────────────────────────────────────── -->
+  <h2>Filled Appearance</h2>
+  <div class="demo-group">
+    @for (option of [{label: 'One', value: 'one'}, {label: 'Two', value: 'two'}, {label: 'Three', value: 'three'}]; track option.value) {
+      <ui-lib-radio-button
+        name="filled-demo"
+        [value]="option.value"
+        [label]="option.label"
+        appearance="filled"
+        [(ngModel)]="filledValue"
+      />
+    }
+  </div>
+
+  <!-- ── Disabled ───────────────────────────────────────────────────────── -->
+  <h2>Disabled</h2>
+  <div class="demo-group">
+    <ui-lib-radio-button name="disabled-demo" value="option-a" label="Option A (disabled unchecked)" [disabled]="true" />
+    <ui-lib-radio-button name="disabled-demo" value="option-b" label="Option B (disabled checked)" [disabled]="true" [(ngModel)]="disabledValue" />
+  </div>
+
+  <!-- ── ngModel ────────────────────────────────────────────────────────── -->
+  <h2>With ngModel</h2>
+  <div class="demo-group">
+    @for (fruit of fruits; track fruit.value) {
+      <ui-lib-radio-button
+        name="fruit"
+        [value]="fruit.value"
+        [label]="fruit.label"
+        [(ngModel)]="selectedFruit"
+      />
+    }
+  </div>
+  <p class="demo-hint">Selected fruit: <strong>{{ selectedFruit }}</strong></p>
+
+  <!-- ── Reactive Forms ─────────────────────────────────────────────────── -->
+  <h2>Reactive Forms</h2>
+  <form [formGroup]="planForm">
+    <div class="demo-group demo-group--vertical">
+      @for (plan of plans; track plan.value) {
+        <ui-lib-radio-button
+          name="plan"
+          [value]="plan.value"
+          [label]="plan.label"
+          formControlName="plan"
+        />
+      }
+    </div>
+  </form>
+  <p class="demo-hint">Form value: <strong>{{ planForm.value | json }}</strong></p>
 </section>
 
