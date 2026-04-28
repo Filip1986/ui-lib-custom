@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Knob` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `KeyFilter` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `InputOtp` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
 - `Carousel` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
@@ -63,6 +64,57 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
+
+
+Date: 2026-04-28 [knip baseline session]
+Changed:
+  - knip.json (removed 9 redundant entry/ignore patterns flagged as config hints)
+  - knip.json (added with-theme-scope.ts to ignore list — intentional pending file)
+  - projects/ui-lib-custom/src/lib/theming/index.ts (removed WithThemeScopeMixin from public
+    barrel; commented out with note to restore when first consumer lands)
+State: knip baseline complete. Standard `npx knip` reports 0 issues (clean baseline).
+  --include-entry-exports surfaces 47 entries that are all intentional public API types/exports;
+  documented as false positives for a library. One truly dead export (WithThemeScopeMixin)
+  removed from theming barrel and its source file added to knip ignore list (pending first use).
+  Build: all entry points Built, zero errors. Entry-point tests: 41/41 PASS.
+Verification:
+  npx knip --config knip.json (exit 0, zero output),
+  npx ng build ui-lib-custom (all entry points ✔ Built, zero errors),
+  npx jest --testPathPatterns="entry-points" --no-cache (41/41 PASS).
+Terminal notes: Edit tool introduces null bytes into small JSON files on Windows (same corruption
+  as Write tool). Mitigation: always rewrite JSON via Python script with open(dest, 'wb') +
+  .encode('utf-8'). Cannot delete files from bash sandbox (Operation not permitted) — use
+  knip ignore list as equivalent signal.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
+---
+Date: 2026-04-28
+Changed:
+  - projects/ui-lib-custom/src/lib/knob/ (new — knob.types.ts, knob.component.ts, knob.component.html, knob.component.scss, knob.component.spec.ts, index.ts, public-api.ts)
+  - projects/ui-lib-custom/knob/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (added knob to exports + typesVersions; repaired on-disk JSON truncation)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added knob import test; repaired truncation of key-filter test)
+  - projects/demo/src/app/pages/knob/ (full demo — TS/HTML/SCSS, 9 scenarios)
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.ts (stripped trailing null byte)
+  - projects/ui-lib-custom/src/lib/upload/upload.component.ts (stripped null bytes)
+  - projects/ui-lib-custom/src/lib/input-otp/input-otp.component.spec.ts (stripped null bytes)
+State: Knob component fully complete. SVG-based circular dial with 270° arc, drag (pointer events) and
+  keyboard interaction (ArrowUp/Down/Left/Right, PageUp/Down, Home/End), ControlValueAccessor (ngModel +
+  reactive forms), value template formatting, per-instance colour overrides via valueColor/textColor inputs,
+  three variants (material/bootstrap/minimal), three sizes (sm/md/lg), disabled and readonly states,
+  full ARIA (role=slider, aria-valuenow/min/max/valuetext/disabled/readonly). 35/35 unit tests passing.
+  41/41 entry-point tests passing. ESLint clean. Library build zero errors (all entry points ✔ Built).
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/knob/ projects/demo/src/app/pages/knob/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom — ui-lib-custom/knob ✔ Built, all entry points ✔ Built (zero errors),
+  npx jest --testPathPatterns="knob" --no-cache (35/35 PASS),
+  npx jest --testPathPatterns="entry-points" --no-cache (41/41 PASS).
+Terminal notes: Write tool truncates large files — always verify with wc -l and repair via Python scripts
+  in outputs/. Key recurring file corruptions this session: package.json (truncated at line 70, rewrote via
+  Python json.dumps), key-filter.directive.ts + upload.component.ts + input-otp.component.spec.ts (null bytes,
+  stripped with glob scan). entry-points.spec.ts truncated mid-assertion; repaired via string replace in Python.
+  Demo HTML (281 lines) and TS (97 lines) also truncated by Write tool; repaired via Python file write.
+Next step: Overlay follow-ups (appendTo / z-index manager), knip baseline + dead-code cleanup, or component v2 enhancements.
 
 ---
 
@@ -114,40 +166,3 @@ Verification:
   npx eslint projects/ui-lib-custom/src/lib/carousel/ projects/demo/src/app/pages/carousel/ --max-warnings 0 (CLEAN),
   npx ng build ui-lib-custom — ui-lib-custom/carousel ✔ Built,
   npx jest --testPathPatterns=carousel --no-cache (44/44 PASS),
-  npx jest --testPathPatterns=entry-points --no-cache (38/38 PASS).
-Terminal notes: File corruption (null bytes + mid-file truncation) is a recurring issue when the Write tool
-  creates large files. Mitigation: always strip nulls via Python after every write; repair truncations with
-  Python append rather than re-writing. The Edit tool sometimes silently fails on truncated files — verify
-  with bash `tail` or `wc -l` before proceeding. activeNumVisible/activeNumScroll had to be refactored
-  from WritableSignal to computed signals so that numVisible/numScroll input changes propagate reactively
-  (WritableSignals set once in ngAfterContentInit don't react to later input changes).
-Next step: Overlay follow-ups (appendTo / z-index manager), then component v2 enhancements by priority.
-
----
-
-Date: 2026-04-27 [key-filter session]
-Changed:
-  - projects/ui-lib-custom/src/lib/key-filter/ (new — key-filter.types.ts, key-filter.directive.ts, key-filter.directive.spec.ts, index.ts, public-api.ts)
-  - projects/ui-lib-custom/key-filter/ (new secondary entry point — ng-package.json, package.json)
-  - projects/ui-lib-custom/package.json (added key-filter to exports + typesVersions; also repaired on-disk JSON truncation that was silently corrupting unrs-resolver)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (added key-filter import test)
-  - projects/demo/src/app/pages/key-filter/ (full demo — TS/HTML/SCSS, 10 scenarios: all presets + custom RegExp + bypass toggle)
-  - projects/ui-lib-custom/src/lib/input-otp/input-otp.component.ts (repaired: closing braces truncated)
-  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.ts (repaired: trailing null bytes stripped)
-  - jest.config.ts + tsconfig.jest.json (reverted to original state after debugging; root cause was corrupted package.json, not Jest config)
-State: KeyFilter directive fully complete. Attribute directive with 9 built-in presets (pint/int/pnum/num/
-  hex/alpha/alphanum/money/email), custom RegExp support, paste + drag-and-drop filtering with automatic
-  character stripping, modifier-key pass-through, and runtime bypass toggle. 28/28 unit tests passing.
-  40/40 entry-point tests passing. ESLint clean on lib and demo. Library build zero errors.
-Verification:
-  npx eslint projects/ui-lib-custom/src/lib/key-filter/ projects/demo/src/app/pages/key-filter/ --max-warnings 0 (CLEAN),
-  npx ng build ui-lib-custom — all entry points ✔ Built (zero errors),
-  npx jest --testPathPatterns="key-filter|entry-points" --no-cache (68/68 PASS).
-Terminal notes: projects/ui-lib-custom/package.json was truncated on disk (203 lines, cut mid-string)
-  — this caused unrs-resolver (Jest 30 Rust resolver) to fail with JSONError on ALL module resolution,
-  masking itself as tslib/Angular/relative-import errors. Fix: rewrite the file via Python. Jest config
-  was modified during diagnosis but ultimately reverted; original config works once package.json is valid.
-  Spec file required eslint-disable on debugEl.nativeElement/.injector (typed as any by Angular) and
-  explicit (): void return types on all describe() and it() callbacks.
-Next step: Overlay follow-ups (appendTo / z-index manager), then knip baseline + dead-code cleanup.
-

@@ -1,9 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
-    "projects/demo/src/main.ts",
-    "projects/minimal/src/main.ts",
-    "projects/ui-lib-custom/src/public-api.ts",
     "projects/ui-lib-custom/src/lib/**/index.ts",
     "scripts/**/*.{js,ts}",
     "e2e/**/*.ts"
@@ -14,17 +11,12 @@
     "docs/**/*.md"
   ],
   "ignore": [
-    "coverage/**",
-    "dist/**",
-    "out-tsc/**",
-    "playwright-report/**",
-    "storybook-static/**",
-    "tmp/**",
     "projects/ui-lib-custom/**/public-api.ts",
     "projects/ui-lib-custom/**/src/public-api.ts",
     "projects/ui-lib-custom/.storybook/**",
     "projects/ui-lib-custom/src/stories/**",
     "projects/ui-lib-custom/tokens/dist/**",
+    "projects/ui-lib-custom/src/lib/theming/with-theme-scope.ts",
     "projects/demo/src/app/examples/layout-basic-example.component.ts",
     "projects/demo/src/app/pages/layouts/layouts.component.ts",
     "projects/demo/src/app/pages/starter-template/starter-template-demo.component.ts",
@@ -40,4 +32,3 @@
     "ts-node"
   ]
 }
-

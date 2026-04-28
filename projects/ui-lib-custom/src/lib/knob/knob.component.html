@@ -1,0 +1,49 @@
+<svg
+  class="uilib-knob-svg"
+  viewBox="0 0 100 100"
+  role="slider"
+  [id]="inputId()"
+  [attr.aria-label]="ariaLabel() || null"
+  [attr.aria-valuemin]="min()"
+  [attr.aria-valuemax]="max()"
+  [attr.aria-valuenow]="clampedValue()"
+  [attr.aria-valuetext]="formattedValue()"
+  [attr.aria-disabled]="isControlDisabled() ? true : null"
+  [attr.aria-readonly]="readonly() ? true : null"
+  [attr.tabindex]="effectiveTabindex()"
+  (focus)="onFocusEvent($event)"
+  (blur)="onBlurEvent($event)"
+  (keydown)="onKeyDown($event)"
+  (pointerdown)="onPointerDown($event)"
+>
+  <!-- Track: full 270° background arc -->
+  <path
+    class="uilib-knob-track"
+    [attr.d]="trackPath()"
+    fill="none"
+    [attr.stroke-width]="strokeWidth()"
+    stroke-linecap="round"
+  />
+
+  <!-- Range: partial arc representing the current value -->
+  @if (normalizedValue() > 0) {
+    <path
+      class="uilib-knob-range"
+      [attr.d]="rangePath()"
+      fill="none"
+      [attr.stroke-width]="strokeWidth()"
+      stroke-linecap="round"
+    />
+  }
+
+  <!-- Value label rendered in the centre of the dial -->
+  @if (showValue()) {
+    <text
+      class="uilib-knob-value-label"
+      x="50"
+      y="50"
+      text-anchor="middle"
+      dominant-baseline="central"
+    >{{ formattedValue() }}</text>
+  }
+</svg>

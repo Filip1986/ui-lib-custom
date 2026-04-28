@@ -1,0 +1,168 @@
+// ---------------------------------------------------------------------------
+// Knob component styles
+// CSS variable naming: --uilib-knob-{property}[-{variant}][-{state}]
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Default (material) tokens
+// ---------------------------------------------------------------------------
+:root {
+  --uilib-knob-track-color: #e0e0e0;
+  --uilib-knob-range-color: #6366f1;
+  --uilib-knob-text-color: #1f2937;
+  --uilib-knob-text-size: 1.25rem;
+  --uilib-knob-text-weight: 600;
+
+  // Size tokens
+  --uilib-knob-size-sm: 80px;
+  --uilib-knob-size-md: 120px;
+  --uilib-knob-size-lg: 160px;
+
+  // Focus ring
+  --uilib-knob-focus-ring-color: rgba(99, 102, 241, 0.35);
+  --uilib-knob-focus-ring-width: 3px;
+
+  // Disabled opacity
+  --uilib-knob-disabled-opacity: 0.5;
+
+  // Transition
+  --uilib-knob-transition-duration: 0.15s;
+}
+
+// ---------------------------------------------------------------------------
+// Dark mode overrides
+// ---------------------------------------------------------------------------
+[data-theme='dark'] {
+  --uilib-knob-track-color: #374151;
+  --uilib-knob-range-color: #818cf8;
+  --uilib-knob-text-color: #f9fafb;
+}
+
+// ---------------------------------------------------------------------------
+// Host element
+// ---------------------------------------------------------------------------
+.uilib-knob {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+
+  // Size variants applied via host classes
+  &.uilib-knob-sm {
+    width: var(--uilib-knob-size-sm);
+    height: var(--uilib-knob-size-sm);
+  }
+
+  &.uilib-knob-md {
+    width: var(--uilib-knob-size-md);
+    height: var(--uilib-knob-size-md);
+  }
+
+  &.uilib-knob-lg {
+    width: var(--uilib-knob-size-lg);
+    height: var(--uilib-knob-size-lg);
+  }
+
+  // Disabled state
+  &.uilib-knob-disabled {
+    opacity: var(--uilib-knob-disabled-opacity);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // Readonly — still interactive (keyboard/focus) but visually muted cursor
+  &.uilib-knob-readonly {
+    cursor: default;
+  }
+
+  // Focus ring via outline on the SVG child
+  &.uilib-knob-focused .uilib-knob-svg {
+    outline: var(--uilib-knob-focus-ring-width) solid var(--uilib-knob-focus-ring-color);
+    outline-offset: 2px;
+    border-radius: 50%;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// SVG element
+// ---------------------------------------------------------------------------
+.uilib-knob-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  outline: none; // Focus ring is handled on the host via .uilib-knob-focused
+}
+
+// ---------------------------------------------------------------------------
+// Track arc (background)
+// ---------------------------------------------------------------------------
+.uilib-knob-track {
+  stroke: var(--uilib-knob-track-color);
+  transition: stroke var(--uilib-knob-transition-duration) ease;
+}
+
+// ---------------------------------------------------------------------------
+// Range arc (value indicator)
+// ---------------------------------------------------------------------------
+.uilib-knob-range {
+  // Allow per-instance colour overrides via CSS variable set on the host
+  stroke: var(--uilib-knob-range-color-override, var(--uilib-knob-range-color));
+  transition: stroke var(--uilib-knob-transition-duration) ease;
+}
+
+// ---------------------------------------------------------------------------
+// Value label
+// ---------------------------------------------------------------------------
+.uilib-knob-value-label {
+  fill: var(--uilib-knob-text-color-override, var(--uilib-knob-text-color));
+  font-size: var(--uilib-knob-text-size);
+  font-weight: var(--uilib-knob-text-weight);
+  font-family: var(--uilib-font-ui, inherit);
+  pointer-events: none;
+  transition: fill var(--uilib-knob-transition-duration) ease;
+}
+
+// ---------------------------------------------------------------------------
+// Variant: Bootstrap
+// ---------------------------------------------------------------------------
+.uilib-variant-bootstrap {
+  --uilib-knob-range-color: #0d6efd;
+  --uilib-knob-track-color: #dee2e6;
+  --uilib-knob-text-color: #212529;
+  --uilib-knob-focus-ring-color: rgba(13, 110, 253, 0.35);
+
+  &.uilib-knob-focused .uilib-knob-svg {
+    outline-color: var(--uilib-knob-focus-ring-color);
+  }
+
+  [data-theme='dark'] & {
+    --uilib-knob-range-color: #6ea8fe;
+    --uilib-knob-track-color: #495057;
+    --uilib-knob-text-color: #f8f9fa;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Variant: Minimal
+// ---------------------------------------------------------------------------
+.uilib-variant-minimal {
+  --uilib-knob-range-color: #111827;
+  --uilib-knob-track-color: #e5e7eb;
+  --uilib-knob-text-color: #111827;
+  --uilib-knob-focus-ring-color: rgba(17, 24, 39, 0.25);
+  --uilib-knob-text-weight: 500;
+
+  &.uilib-knob-focused .uilib-knob-svg {
+    outline-color: var(--uilib-knob-focus-ring-color);
+  }
+
+  [data-theme='dark'] & {
+    --uilib-knob-range-color: #e5e7eb;
+    --uilib-knob-track-color: #374151;
+    --uilib-knob-text-color: #f9fafb;
+  }
+}
