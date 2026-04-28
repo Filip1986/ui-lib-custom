@@ -2,8 +2,11 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
+  afterNextRender,
   computed,
+  contentChild,
   forwardRef,
   inject,
   input,
@@ -14,14 +17,15 @@ import {
   type ModelSignal,
   type OutputEmitterRef,
   type Signal,
+  type TemplateRef,
   type WritableSignal,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import type { RatingVariant, RatingSize, RatingChangeEvent } from './rating.types';
+import type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
 
-export type { RatingVariant, RatingSize, RatingChangeEvent } from './rating.types';
+export type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
 
 let ratingIdCounter: number = 0;
 
@@ -54,6 +58,8 @@ let ratingIdCounter: number = 0;
   },
 })
 export class Rating implements ControlValueAccessor {
+  // ── Inputs ────────────────────────────────────────────────────────────────
+
   /** Number of star icons to render. */
   public readonly stars: InputSignal<number> = input<number>(5);
   /** When true, a cancel button is shown to clear the current value. */
@@ -62,14 +68,26 @@ export class Rating implements ControlValueAccessor {
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   /** Makes the component read-only: visible but not interactive. */
   public readonly readonly: InputSignal<boolean> = input<boolean>(false);
+  /** When true, the first focusable star receives focus after the first render. */
+  public readonly autofocus: InputSignal<boolean> = input<boolean>(false);
   /** Accessible label for the radiogroup element. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Rating');
   /** Explicit aria-labelledby override; overrides ariaLabel when set. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   /** Custom CSS class appended to a filled star icon. */
   public readonly iconOnClass: InputSignal<string | null> = input<string | null>(null);
+  /** Inline styles applied to a filled star icon element. */
+  public readonly iconOnStyle: InputSignal<Record<string, string> | null> = input<Record<
+    string,
+    string
+  > | null>(null);
   /** Custom CSS class appended to an empty star icon. */
   public readonly iconOffClass: InputSignal<string | null> = input<string | null>(null);
+  /** Inline styles applied to an empty star icon element. */
+  public readonly iconOffStyle: InputSignal<Record<string, string> | null> = input<Record<
+    string,
+    string
+  > | null>(null);
   /** Custom CSS class appended to the cancel icon. */
   public readonly iconCancelClass: InputSignal<string | null> = input<string | null>(null);
   /** Design-system variant; falls back to ThemeConfigService when null. */
@@ -77,11 +95,51 @@ export class Rating implements ControlValueAccessor {
   /** Size token: sm | md | lg. */
   public readonly size: InputSignal<RatingSize> = input<RatingSize>('md');
 
+  // ── Model ─────────────────────────────────────────────────────────────────
+
   /** Current rating value. Supports two-way binding via [(value)]. */
   public readonly value: ModelSignal<number | null> = model<number | null>(null);
 
+  // ── Outputs ───────────────────────────────────────────────────────────────
+
   /** Emitted whenever the rating value changes (including clears). */
   public readonly change: OutputEmitterRef<RatingChangeEvent> = output<RatingChangeEvent>();
+  /**
+   * Emitted when a star is selected. The value is always a positive integer.
+   * Use `cleared` to detect when the rating is cleared.
+   */
+  public readonly rate: OutputEmitterRef<RatingRateEvent> = output<RatingRateEvent>();
+  /** Emitted when the rating is cleared (cancel button, toggle-deselect, or Delete key). */
+  public readonly cleared: OutputEmitterRef<Event> = output<Event>();
+  /** Emitted when any star receives focus. */
+  public readonly focus: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+  /** Emitted when any star loses focus. */
+  public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
+
+  // ── Content children (custom icon templates) ──────────────────────────────
+
+  /**
+   * Custom template rendered instead of the default filled star.
+   * Usage: `<ng-template #onicon>❤️</ng-template>`
+   */
+  public readonly onIconTemplate: Signal<TemplateRef<unknown> | undefined> =
+    contentChild<TemplateRef<unknown>>('onicon');
+
+  /**
+   * Custom template rendered instead of the default empty star.
+   * Usage: `<ng-template #officon>🤍</ng-template>`
+   */
+  public readonly offIconTemplate: Signal<TemplateRef<unknown> | undefined> =
+    contentChild<TemplateRef<unknown>>('officon');
+
+  /**
+   * Custom template rendered inside the cancel button instead of the default ✕ glyph.
+   * Usage: `<ng-template #cancelicon>🗑</ng-template>`
+   */
+  public readonly cancelIconTemplate: Signal<TemplateRef<unknown> | undefined> =
+    contentChild<TemplateRef<unknown>>('cancelicon');
+
+  // ── Private state ─────────────────────────────────────────────────────────
 
   /** Disabled state propagated by a parent form control. */
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
@@ -94,10 +152,17 @@ export class Rating implements ControlValueAccessor {
   private onCvaChange: (value: number | null) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};
 
+  // ── Dependencies ─────────────────────────────────────────────────────────
+
   /** Unique id prefix used for accessibility identifiers on this instance. */
   public readonly controlId: string = `ui-lib-rating-${++ratingIdCounter}`;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly elementRef: ElementRef<HTMLElement> = inject(
+    ElementRef
+  ) as ElementRef<HTMLElement>;
+
+  // ── Computed ──────────────────────────────────────────────────────────────
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<RatingVariant> = computed<RatingVariant>(
@@ -112,6 +177,14 @@ export class Rating implements ControlValueAccessor {
   /** Array of star positions [1 … stars]. */
   public readonly starsArray: Signal<number[]> = computed<number[]>((): number[] =>
     Array.from({ length: this.stars() }, (_element: unknown, index: number): number => index + 1)
+  );
+
+  /** True when at least one custom icon template has been projected. */
+  public readonly isCustomIcon: Signal<boolean> = computed<boolean>(
+    (): boolean =>
+      this.onIconTemplate() !== undefined ||
+      this.offIconTemplate() !== undefined ||
+      this.cancelIconTemplate() !== undefined
   );
 
   /** Host CSS classes derived from current variant, size, and state. */
@@ -132,6 +205,18 @@ export class Rating implements ControlValueAccessor {
 
     return classes.join(' ');
   });
+
+  // ── Constructor ───────────────────────────────────────────────────────────
+
+  constructor() {
+    afterNextRender((): void => {
+      if (this.autofocus() && !this.isDisabled()) {
+        const firstStar: HTMLElement | null =
+          this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-rating__star');
+        firstStar?.focus();
+      }
+    });
+  }
 
   // ── Public helpers used in the template ──────────────────────────────────
 
@@ -190,6 +275,14 @@ export class Rating implements ControlValueAccessor {
     return customClass ? `${baseClass} ${customClass}` : baseClass;
   }
 
+  /**
+   * Inline styles for the star icon element.
+   * Returns the on-style when the star is active, the off-style otherwise.
+   */
+  public getStarIconStyle(star: number): Record<string, string> | null {
+    return this.isStarActive(star) ? this.iconOnStyle() : this.iconOffStyle();
+  }
+
   /** CSS classes for the cancel icon element, merging the custom icon class when provided. */
   public getCancelIconClass(): string {
     const baseClass: string = 'ui-lib-rating__cancel-icon';
@@ -197,9 +290,24 @@ export class Rating implements ControlValueAccessor {
     return customClass ? `${baseClass} ${customClass}` : baseClass;
   }
 
+  /**
+   * Returns the appropriate custom icon template for a star position, or null if
+   * no custom template was provided for that state.
+   * Returns the on-template for active stars, the off-template for inactive ones.
+   */
+  public getIconTemplate(star: number): TemplateRef<unknown> | null {
+    const template: TemplateRef<unknown> | undefined = this.isStarActive(star)
+      ? this.onIconTemplate()
+      : this.offIconTemplate();
+    return template ?? null;
+  }
+
   // ── Event handlers ────────────────────────────────────────────────────────
 
-  /** Handles clicks on a star element. */
+  /**
+   * Handles clicks on a star element.
+   * Clicking the already-selected star toggles the rating off (deselects).
+   */
   public onStarClick(star: number, event: Event): void {
     event.preventDefault();
 
@@ -207,7 +315,11 @@ export class Rating implements ControlValueAccessor {
       return;
     }
 
-    this.applyRating(star, event);
+    if (star === this.value()) {
+      this.clearRating(event);
+    } else {
+      this.applyRating(star, event);
+    }
   }
 
   /** Handles clicks on the cancel/clear button. */
@@ -233,6 +345,21 @@ export class Rating implements ControlValueAccessor {
   /** Clears the hover-preview when the pointer leaves a star. */
   public onStarLeave(): void {
     this.hoverValue.set(null);
+  }
+
+  /** Emits the `focus` output when a star receives keyboard/pointer focus. */
+  public onStarFocus(event: FocusEvent): void {
+    if (this.isDisabled() || this.readonly()) {
+      return;
+    }
+
+    this.focus.emit(event);
+  }
+
+  /** Emits the `blur` output when a star loses focus; marks the control as touched. */
+  public onStarBlur(event: FocusEvent): void {
+    this.onCvaTouched();
+    this.blur.emit(event);
   }
 
   /**
@@ -318,6 +445,7 @@ export class Rating implements ControlValueAccessor {
     this.onCvaChange(star);
     this.onCvaTouched();
     this.change.emit({ value: star, originalEvent: event });
+    this.rate.emit({ value: star, originalEvent: event });
   }
 
   private clearRating(event: Event): void {
@@ -325,5 +453,6 @@ export class Rating implements ControlValueAccessor {
     this.onCvaChange(null);
     this.onCvaTouched();
     this.change.emit({ value: null, originalEvent: event });
+    this.cleared.emit(event);
   }
 }

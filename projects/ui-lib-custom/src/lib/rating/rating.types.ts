@@ -11,3 +11,22 @@ export interface RatingChangeEvent {
   /** The original DOM event that triggered the change. */
   originalEvent: Event;
 }
+
+/** Payload emitted by the `rate` output when a star is explicitly selected (not when cleared). */
+export interface RatingRateEvent {
+  /** The new rating value (always a positive integer). */
+  value: number;
+  /** The original DOM event that triggered the selection. */
+  originalEvent: Event;
+}
+
+/**
+ * Payload emitted by the `onRate` output when a star is selected.
+ * Unlike {@link RatingChangeEvent}, the value here is always non-null.
+ */
+export interface RatingRateEvent {
+  /** The selected star value (always ≥ 1). */
+  value: number;
+  /** The original DOM event that triggered the change. */
+  originalEvent: Event;
+}

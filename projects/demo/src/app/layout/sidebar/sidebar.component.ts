@@ -265,7 +265,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/rating',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'Select',

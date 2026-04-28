@@ -323,5 +323,8 @@ describe('Secondary Entry Points', (): void => {
   it('should import from rating', async (): Promise<void> => {
     const mod: typeof UiLibRating = await import('ui-lib-custom/rating');
     expect(mod.Rating).toBeDefined();
+    // RatingRateEvent is a type-only export — verify the module resolves without error
+    const _typeCheck: typeof mod = mod;
+    void _typeCheck;
   });
 });

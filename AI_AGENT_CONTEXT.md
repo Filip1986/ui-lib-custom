@@ -68,6 +68,41 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
+Date: 2026-04-28 [rating PrimeNG parity session]
+Changed:
+  - projects/ui-lib-custom/src/lib/rating/rating.ts (added autofocus, iconOnStyle/iconOffStyle inputs;
+    rate/cleared/focus/blur outputs; onIconTemplate/offIconTemplate/cancelIconTemplate contentChild
+    queries; toggle-deselect behavior; ElementRef inject for autofocus; afterNextRender autofocus impl)
+  - projects/ui-lib-custom/src/lib/rating/rating.html (focus/blur handlers, ngStyle on icons,
+    custom ng-template conditional rendering for on/off/cancel icons)
+  - projects/ui-lib-custom/src/lib/rating/rating.types.ts (added RatingRateEvent interface)
+  - projects/ui-lib-custom/src/lib/rating/index.ts (re-exported RatingRateEvent)
+  - projects/ui-lib-custom/src/lib/rating/rating.spec.ts (added toggle-deselect, rate/cleared/
+    focus/blur output tests, iconOnStyle/iconOffStyle tests; 52/52 total)
+  - projects/demo/src/app/pages/rating/rating-demo.component.ts (events section, custom templates,
+    inline icon styles)
+  - projects/demo/src/app/pages/rating/rating-demo.component.html (3 new demo sections)
+  - projects/demo/src/app/pages/rating/rating-demo.component.scss (demo-event-log styles)
+  - Multiple files restored from git HEAD after sandbox corruption during session
+State: Rating component fully PrimeNG v19 feature-parity. All 7 gaps closed. 52/52 tests.
+  45/45 entry-point tests. ESLint clean. Library build zero errors. Demo build clean.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/rating/ projects/demo/src/app/pages/rating/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom (49 entry points, zero errors),
+  npx jest --testPathPatterns="rating" --no-cache (52/52 PASS),
+  npx jest --testPathPatterns="entry-points" --no-cache (45/45 PASS),
+  npx ng build demo --output-path /tmp/demo-build (Application bundle generation complete).
+Terminal notes: Write tool corrupts files containing long lines with multi-byte UTF-8 chars
+  (box-drawing U+2500). Fix: write such files via Python open(dest,'wb').write(content.encode('utf-8')).
+  Several files (package.json, password.scss, sidebar.ts, listbox-demo.ts, radio-button-demo.ts,
+  upload-demo.html, radio-button-demo.scss, rating-demo.scss) restored via
+  git show HEAD:file > /tmp/x && python3 shutil.copy(). Shell: bash in sandbox.
+  dist/demo folder is Windows-owned and cannot be deleted from sandbox — use --output-path /tmp/X
+  to verify demo compilation.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
+---
+
 Date: 2026-04-28 [rating session]
 Changed:
   - docs/reference/components/RATING.md (new — full API + usage + theming + a11y + keyboard docs)
@@ -116,36 +151,5 @@ Terminal notes: [checked]="true" in demo HTML caused NG8002 compile error — fi
   JSON files written via Node.js fs.writeFileSync (Python not available on PATH). Shell: bash.exe.
 Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
 
----
-Date: 2026-04-28 [listbox session]
-Changed:
-  - projects/ui-lib-custom/src/lib/listbox/ (new — listbox.types.ts, listbox.constants.ts,
-    listbox.component.ts, listbox.component.html, listbox.component.scss,
-    listbox.component.spec.ts, index.ts, public-api.ts)
-  - projects/ui-lib-custom/listbox/ (new secondary entry point — ng-package.json, package.json)
-  - projects/ui-lib-custom/package.json (added listbox to exports + typesVersions via Python)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (added listbox import test)
-  - projects/demo/src/app/pages/listbox/ (full demo — TS/HTML/SCSS, 9 scenarios)
-  - docs/reference/components/LISTBOX.md (new — full API + theming + a11y + keyboard docs)
-  - projects/ui-lib-custom/src/lib/knob/knob.component.ts (repaired pre-existing truncation:
-    missing onModelTouched body and class closing brace)
-State: Listbox component fully complete. Scrollable option list with single and multiple
-  selection, inline filtering (contains/startsWith/endsWith/equals), option groups, checkbox
-  mode, toggle-all, striped rows, ControlValueAccessor (ngModel + reactive forms), disabled /
-  readonly states, full ARIA (role=listbox, role=option, aria-multiselectable,
-  aria-activedescendant, aria-posinset, aria-setsize), keyboard nav (ArrowUp/Down/Home/End/
-  Enter/Space), three variants (material/bootstrap/minimal), three sizes (sm/md/lg),
-  custom item/group/empty template slots. 55/55 unit tests passing. 42/42 entry-point tests
-  passing. ESLint clean on all lib and demo files. Library build zero errors.
-Verification:
-  npx eslint projects/ui-lib-custom/src/lib/listbox/ projects/demo/src/app/pages/listbox/ --max-warnings 0 (CLEAN),
-  npx ng build ui-lib-custom — ui-lib-custom/listbox ✔ Built, all entry points ✔ Built (zero errors),
-  npx jest --testPathPatterns="listbox" --no-cache (55/55 PASS),
-  npx jest --testPathPatterns="entry-points" --no-cache (42/42 PASS).
-Terminal notes: Write tool truncates large .ts files — listbox.component.ts and
-  listbox.constants.ts both needed Python repair after initial Write. Always write large files
-  (>300 lines) via Python script with open(dest, 'wb') + .encode('utf-8'). Knob pre-existing
-  truncation (onModelTouched + class closing brace) repaired as collateral.
-Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
 
 

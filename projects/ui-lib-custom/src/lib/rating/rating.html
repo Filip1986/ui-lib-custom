@@ -10,7 +10,11 @@
     (keydown.enter)="onCancelClick($event)"
     (keydown.space)="onCancelClick($event)"
   >
-    <span [class]="getCancelIconClass()" aria-hidden="true"></span>
+    @if (cancelIconTemplate(); as cancelTpl) {
+      <ng-container [ngTemplateOutlet]="cancelTpl" />
+    } @else {
+      <span [class]="getCancelIconClass()" aria-hidden="true"></span>
+    }
   </span>
 }
 
@@ -28,8 +32,17 @@
     (click)="onStarClick(star, $event)"
     (mouseenter)="onStarHover(star)"
     (mouseleave)="onStarLeave()"
+    (focus)="onStarFocus($event)"
+    (blur)="onStarBlur($event)"
   >
-    <span [class]="getStarIconClass(star)" aria-hidden="true"></span>
+    @if (getIconTemplate(star); as iconTpl) {
+      <ng-container [ngTemplateOutlet]="iconTpl" />
+    } @else {
+      <span
+        [class]="getStarIconClass(star)"
+        [ngStyle]="getStarIconStyle(star)"
+        aria-hidden="true"
+      ></span>
+    }
   </span>
 }
-

@@ -75,6 +75,50 @@
     <ui-lib-rating [disabled]="true" [(ngModel)]="disabledRating" />
   </div>
 
+  <!-- ── Events (onRate / onCancel / onFocus / onBlur) ─────────────────── -->
+  <h2>Events</h2>
+  <p class="demo-hint">Interact with the component to see individual events fired.</p>
+  <div class="demo-row">
+    <ui-lib-rating
+      [(ngModel)]="eventsRating"
+      (rate)="onRateEvent($event)"
+      (cleared)="onCancelEvent()"
+      (focus)="onFocusEvent()"
+      (blur)="onBlurEvent()"
+    />
+  </div>
+  <ul class="demo-event-log">
+    @for (entry of eventLog; track entry) {
+      <li>{{ entry }}</li>
+    } @empty {
+      <li class="demo-hint">No events yet — click a star or use Tab/keyboard.</li>
+    }
+  </ul>
+
+  <!-- ── Custom Icon Templates ──────────────────────────────────────────── -->
+  <h2>Custom Icon Templates</h2>
+  <p class="demo-hint">Project <code>#onicon</code> and <code>#officon</code> ng-templates to replace the default star glyph.</p>
+  <div class="demo-row">
+    <ui-lib-rating [(ngModel)]="customTemplateRating" [cancel]="false">
+      <ng-template #onicon>❤️</ng-template>
+      <ng-template #officon>🤍</ng-template>
+    </ui-lib-rating>
+  </div>
+  <p class="demo-hint">Value: <strong>{{ customTemplateRating ?? 'none' }}</strong></p>
+
+  <!-- ── Inline Icon Styles ────────────────────────────────────────────── -->
+  <h2>Inline Icon Styles</h2>
+  <p class="demo-hint">Use <code>[iconOnStyle]</code> and <code>[iconOffStyle]</code> to apply arbitrary CSS to each icon element.</p>
+  <div class="demo-row">
+    <ui-lib-rating
+      [(ngModel)]="styledRating"
+      [cancel]="false"
+      [iconOnStyle]="iconOnStyle"
+      [iconOffStyle]="iconOffStyle"
+    />
+  </div>
+  <p class="demo-hint">Value: <strong>{{ styledRating ?? 'none' }}</strong></p>
+
   <!-- ── Reactive Forms ─────────────────────────────────────────────────── -->
   <h2>Reactive Forms</h2>
   <form [formGroup]="reviewForm">

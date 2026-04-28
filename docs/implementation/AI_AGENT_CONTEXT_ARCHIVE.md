@@ -900,3 +900,26 @@ Verification: npx jest --testPathPatterns=pick-list (52/52), npx jest --testPath
   ng build demo --configuration=development (success, 1 pre-existing warning).
 Terminal notes: Edit/Write tools produce CRLF corruption and trailing null bytes -- all file writes done via Python.
 Next step: Run full test suite (npm test) to confirm no regressions, then knip baseline + dead-code cleanup pass.
+
+---
+Date: 2026-04-28 [listbox session]
+Changed:
+  - projects/ui-lib-custom/src/lib/listbox/ (new — listbox.types.ts, listbox.constants.ts,
+    listbox.component.ts, listbox.component.html, listbox.component.scss,
+    listbox.component.spec.ts, index.ts, public-api.ts)
+  - projects/ui-lib-custom/listbox/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (added listbox to exports + typesVersions via Python)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added listbox import test)
+  - projects/demo/src/app/pages/listbox/ (full demo — TS/HTML/SCSS, 9 scenarios)
+  - docs/reference/components/LISTBOX.md (new — full API + theming + a11y + keyboard docs)
+  - projects/ui-lib-custom/src/lib/knob/knob.component.ts (repaired pre-existing truncation)
+State: Listbox fully complete. Single/multiple selection, inline filtering, option groups,
+  checkbox mode, toggle-all, CVA, full ARIA, keyboard nav, three variants/sizes. 55/55 tests,
+  42/42 entry-point tests. ESLint clean. Library build zero errors.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/listbox/ projects/demo/src/app/pages/listbox/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom (all entry points, zero errors),
+  npx jest --testPathPatterns="listbox" --no-cache (55/55 PASS),
+  npx jest --testPathPatterns="entry-points" --no-cache (42/42 PASS).
+Terminal notes: Write tool truncates large .ts files — always write files >300 lines via Python.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.

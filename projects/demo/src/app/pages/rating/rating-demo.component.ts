@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { Rating } from 'ui-lib-custom/rating';
-import type { RatingChangeEvent } from 'ui-lib-custom/rating';
+import type { RatingChangeEvent, RatingRateEvent } from 'ui-lib-custom/rating';
 
 /**
  * Demo page for the Rating component.
@@ -16,26 +16,38 @@ import type { RatingChangeEvent } from 'ui-lib-custom/rating';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RatingDemoComponent {
-  // ── Basic ──────────────────────────────────────────────────────────────────
+  // ── Basic ──────────────────────────────────────────────
   public basicRating: number | null = null;
   public lastEvent: RatingChangeEvent | null = null;
 
-  // ── Pre-selected ───────────────────────────────────────────────────────────
+  // ── Pre-selected ──────────────────────────────────────────
   public preselectedRating: number | null = 3;
 
-  // ── No cancel ─────────────────────────────────────────────────────────────
+  // ── No cancel ─────────────────────────────────────────────
   public noCancelRating: number | null = 2;
 
-  // ── Readonly ───────────────────────────────────────────────────────────────
+  // ── Readonly ───────────────────────────────────────────────
   public readonlyRating: number | null = 4;
 
-  // ── Disabled ───────────────────────────────────────────────────────────────
+  // ── Disabled ───────────────────────────────────────────────
   public disabledRating: number | null = 2;
 
-  // ── Star count ────────────────────────────────────────────────────────────
+  // ── Star count ────────────────────────────────────────────
   public tenStarRating: number | null = 7;
 
-  // ── Reactive form ─────────────────────────────────────────────────────────
+  // ── Events (rate / cleared / focus / blur) ────────────────────
+  public eventsRating: number | null = null;
+  public eventLog: string[] = [];
+
+  // ── Custom icon templates ─────────────────────────────
+  public customTemplateRating: number | null = 3;
+
+  // ── Inline styles ──────────────────────────────────────
+  public styledRating: number | null = 3;
+  public readonly iconOnStyle: Record<string, string> = { color: '#e91e63', fontSize: '2rem' };
+  public readonly iconOffStyle: Record<string, string> = { color: '#f8bbd0', fontSize: '2rem' };
+
+  // ── Reactive form ─────────────────────────────────────
   public readonly reviewForm: FormGroup = new FormGroup({
     quality: new FormControl<number | null>(null),
     support: new FormControl<number | null>(3),
@@ -43,5 +55,21 @@ export class RatingDemoComponent {
 
   public onRatingChange(event: RatingChangeEvent): void {
     this.lastEvent = event;
+  }
+
+  public onRateEvent(event: RatingRateEvent): void {
+    this.eventLog = [`rate: value=${event.value}`, ...this.eventLog].slice(0, 5);
+  }
+
+  public onCancelEvent(): void {
+    this.eventLog = ['cleared: rating cleared', ...this.eventLog].slice(0, 5);
+  }
+
+  public onFocusEvent(): void {
+    this.eventLog = ['focus: star focused', ...this.eventLog].slice(0, 5);
+  }
+
+  public onBlurEvent(): void {
+    this.eventLog = ['blur: star blurred', ...this.eventLog].slice(0, 5);
   }
 }

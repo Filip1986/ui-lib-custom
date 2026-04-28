@@ -11,7 +11,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Rating } from './rating';
 import { SHARED_SIZE_OPTIONS, SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
-import type { RatingChangeEvent, RatingSize, RatingVariant } from './rating';
+import type { RatingChangeEvent, RatingRateEvent, RatingSize, RatingVariant } from './rating';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -53,7 +53,13 @@ function getRatingInstance(fixture: ComponentFixture<unknown>): Rating {
       [variant]="variant()"
       [size]="size()"
       [(value)]="ratingValue"
+      [iconOnStyle]="iconOnStyle()"
+      [iconOffStyle]="iconOffStyle()"
       (change)="handleChange($event)"
+      (rate)="handleRate($event)"
+      (cleared)="handleCancel($event)"
+      (focus)="handleFocus($event)"
+      (blur)="handleBlur($event)"
     />
   `,
 })
@@ -66,12 +72,47 @@ class HostComponent {
   public readonly variant: WritableSignal<RatingVariant> = signal<RatingVariant>('material');
   public readonly size: WritableSignal<RatingSize> = signal<RatingSize>('md');
 
+  public readonly iconOnStyle: WritableSignal<Record<string, string> | null> = signal<Record<
+    string,
+    string
+  > | null>(null);
+  public readonly iconOffStyle: WritableSignal<Record<string, string> | null> = signal<Record<
+    string,
+    string
+  > | null>(null);
+
   public ratingValue: number | null = null;
   public readonly lastChange: WritableSignal<RatingChangeEvent | null> =
     signal<RatingChangeEvent | null>(null);
+  public readonly lastRate: WritableSignal<RatingRateEvent | null> = signal<RatingRateEvent | null>(
+    null
+  );
+  public readonly lastCancelEvent: WritableSignal<Event | null> = signal<Event | null>(null);
+  public readonly lastFocusEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
+    null
+  );
+  public readonly lastBlurEvent: WritableSignal<FocusEvent | null> = signal<FocusEvent | null>(
+    null
+  );
 
   public handleChange(event: RatingChangeEvent): void {
     this.lastChange.set(event);
+  }
+
+  public handleRate(event: RatingRateEvent): void {
+    this.lastRate.set(event);
+  }
+
+  public handleCancel(event: Event): void {
+    this.lastCancelEvent.set(event);
+  }
+
+  public handleFocus(event: FocusEvent): void {
+    this.lastFocusEvent.set(event);
+  }
+
+  public handleBlur(event: FocusEvent): void {
+    this.lastBlurEvent.set(event);
   }
 }
 
@@ -427,6 +468,137 @@ describe('Rating', (): void => {
     for (const star of getStars(fixture)) {
       expect(star.classList.contains('ui-lib-rating__star--on')).toBe(false);
     }
+  });
+
+  // ── Toggle-deselect ───────────────────────────────────────────────────────
+
+  it('clicking the already-selected star deselects it', (): void => {
+    const rating: Rating = getRatingInstance(fixture);
+    rating.writeValue(3);
+    fixture.detectChanges();
+
+    const stars: HTMLElement[] = getStars(fixture);
+    stars[2]?.click(); // star 3 is selected — click again
+    fixture.detectChanges();
+
+    expect(host.ratingValue).toBeNull();
+  });
+
+  it('toggle-deselect emits change with null', (): void => {
+    const rating: Rating = getRatingInstance(fixture);
+    rating.writeValue(2);
+    fixture.detectChanges();
+
+    getStars(fixture)[1]?.click(); // star 2 is selected — click again
+    fixture.detectChanges();
+
+    expect(host.lastChange()?.value).toBeNull();
+  });
+
+  it('toggle-deselect emits onCancel', (): void => {
+    const rating: Rating = getRatingInstance(fixture);
+    rating.writeValue(4);
+    fixture.detectChanges();
+
+    getStars(fixture)[3]?.click(); // star 4
+    fixture.detectChanges();
+
+    expect(host.lastCancelEvent()).toBeInstanceOf(MouseEvent);
+  });
+
+  // ── onRate / onCancel outputs ─────────────────────────────────────────────
+
+  it('emits onRate with the correct value when a star is selected', (): void => {
+    getStars(fixture)[2]?.click(); // star 3
+    fixture.detectChanges();
+
+    expect(host.lastRate()?.value).toBe(3);
+    expect(host.lastRate()?.originalEvent).toBeInstanceOf(MouseEvent);
+  });
+
+  it('does not emit onRate when cancel button is clicked', (): void => {
+    const rating: Rating = getRatingInstance(fixture);
+    rating.writeValue(3);
+    fixture.detectChanges();
+
+    getCancelButton(fixture)?.click();
+    fixture.detectChanges();
+
+    expect(host.lastRate()).toBeNull();
+  });
+
+  it('emits onCancel when the cancel button is clicked', (): void => {
+    const rating: Rating = getRatingInstance(fixture);
+    rating.writeValue(3);
+    fixture.detectChanges();
+
+    getCancelButton(fixture)?.click();
+    fixture.detectChanges();
+
+    expect(host.lastCancelEvent()).toBeInstanceOf(MouseEvent);
+  });
+
+  it('does not emit onCancel when a new star is selected', (): void => {
+    getStars(fixture)[0]?.click(); // star 1 — fresh selection
+    fixture.detectChanges();
+
+    expect(host.lastCancelEvent()).toBeNull();
+  });
+
+  // ── onFocus / onBlur outputs ──────────────────────────────────────────────
+
+  it('emits onFocus when a star receives focus', (): void => {
+    const rating: Rating = getRatingInstance(fixture);
+    const focusEvent: FocusEvent = new FocusEvent('focus');
+    rating.onStarFocus(focusEvent);
+
+    expect(host.lastFocusEvent()).toBe(focusEvent);
+  });
+
+  it('does not emit onFocus when disabled', (): void => {
+    host.disabled.set(true);
+    fixture.detectChanges();
+
+    const rating: Rating = getRatingInstance(fixture);
+    rating.onStarFocus(new FocusEvent('focus'));
+
+    expect(host.lastFocusEvent()).toBeNull();
+  });
+
+  it('emits onBlur when a star loses focus', (): void => {
+    const rating: Rating = getRatingInstance(fixture);
+    const blurEvent: FocusEvent = new FocusEvent('blur');
+    rating.onStarBlur(blurEvent);
+
+    expect(host.lastBlurEvent()).toBe(blurEvent);
+  });
+
+  // ── iconOnStyle / iconOffStyle ─────────────────────────────────────────────
+
+  it('applies iconOnStyle to active star icons', (): void => {
+    host.iconOnStyle.set({ color: 'red' });
+    const rating: Rating = getRatingInstance(fixture);
+    rating.writeValue(3);
+    fixture.detectChanges();
+
+    // star 1 is active (index 0) — check its icon span has inline style
+    const activeIconEl: HTMLElement | null = (
+      fixture.nativeElement as HTMLElement
+    ).querySelector<HTMLElement>('.ui-lib-rating__star--on .ui-lib-rating__star-icon');
+    expect(activeIconEl?.style.color).toBe('red');
+  });
+
+  it('applies iconOffStyle to inactive star icons', (): void => {
+    host.iconOffStyle.set({ opacity: '0.3' });
+    const rating: Rating = getRatingInstance(fixture);
+    rating.writeValue(1);
+    fixture.detectChanges();
+
+    // star 5 is inactive (index 4)
+    const stars: HTMLElement[] = getStars(fixture);
+    const inactiveIconEl: HTMLElement | undefined =
+      stars[4]?.querySelector<HTMLElement>('.ui-lib-rating__star-icon') ?? undefined;
+    expect(inactiveIconEl?.style.opacity).toBe('0.3');
   });
 });
 
