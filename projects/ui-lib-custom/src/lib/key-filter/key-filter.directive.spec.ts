@@ -3,7 +3,7 @@ import type { WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import type { DebugElement } from '@angular/platform-browser';
+import type { DebugElement } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { KeyFilterDirective } from './key-filter.directive';
 import { KEY_FILTER_PRESET_PATTERNS, KEY_FILTER_DEFAULTS } from './key-filter.types';
@@ -62,9 +62,9 @@ function setup(): {
   fixture.detectChanges();
   const host: KeyFilterHostComponent = fixture.componentInstance;
   const debugEl: DebugElement = fixture.debugElement.query(By.directive(KeyFilterDirective));
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
   const inputEl: HTMLInputElement = debugEl.nativeElement as HTMLInputElement;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
   const directive: KeyFilterDirective = debugEl.injector.get(KeyFilterDirective);
   return { host, inputEl, directive };
 }
