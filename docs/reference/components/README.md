@@ -849,3 +849,6 @@ Each component should have two documentation files:
 | TreeTable | Hierarchical table with expand/collapse, sorting, filtering, and selection | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
 
 | VirtualScroller | High-performance virtual scrolling container with lazy loading and custom templates | 3 | - | - | ✅ Complete |
+
+| Rating | Star-rating control with hover preview and form integration | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
+

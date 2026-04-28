@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Rating` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `Listbox` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `RadioButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Knob` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -66,6 +67,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
+
+Date: 2026-04-28 [rating session]
+Changed:
+  - docs/reference/components/RATING.md (new — full API + usage + theming + a11y + keyboard docs)
+  - docs/reference/components/README.md (added Rating entry to component list and quick-reference table)
+  - AI_AGENT_CONTEXT.md (marked Rating complete)
+State: Rating component fully complete. Signal-based star-rating with hover preview, roving tabindex,
+  ControlValueAccessor (ngModel + reactive forms), cancel/clear button, three variants
+  (material/bootstrap/minimal), three sizes (sm/md/lg), full ARIA (role=radiogroup, role=radio,
+  aria-checked, aria-posinset, aria-setsize), keyboard nav (ArrowRight/Left/Up/Down, Delete,
+  digit keys). 40/40 unit tests passing. 45/45 entry-point tests passing. ESLint clean. Library
+  build zero errors. Demo build clean (pre-existing button/date-picker SCSS budget warnings).
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/rating/ projects/demo/src/app/pages/rating/ --max-warnings 0 (CLEAN),
+  npx.cmd ng build ui-lib-custom — all entry points ✔ Built (zero errors),
+  npx.cmd jest --testPathPatterns="rating" --no-cache (40/40 PASS),
+  npx.cmd jest --testPathPatterns="entry-points" --no-cache (45/45 PASS),
+  npx.cmd ng build demo (Application bundle generation complete, zero new errors).
+Terminal notes: No issues. Shell: bash.exe.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
+---
 
 Date: 2026-04-28 [radio-button session]
 Changed:
@@ -125,25 +148,4 @@ Terminal notes: Write tool truncates large .ts files — listbox.component.ts an
   truncation (onModelTouched + class closing brace) repaired as collateral.
 Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
 
----
-Date: 2026-04-28 [knip baseline session]
-Changed:
-  - knip.json (removed 9 redundant entry/ignore patterns flagged as config hints)
-  - knip.json (added with-theme-scope.ts to ignore list — intentional pending file)
-  - projects/ui-lib-custom/src/lib/theming/index.ts (removed WithThemeScopeMixin from public
-    barrel; commented out with note to restore when first consumer lands)
-State: knip baseline complete. Standard `npx knip` reports 0 issues (clean baseline).
-  --include-entry-exports surfaces 47 entries that are all intentional public API types/exports;
-  documented as false positives for a library. One truly dead export (WithThemeScopeMixin)
-  removed from theming barrel and its source file added to knip ignore list (pending first use).
-  Build: all entry points Built, zero errors. Entry-point tests: 41/41 PASS.
-Verification:
-  npx knip --config knip.json (exit 0, zero output),
-  npx ng build ui-lib-custom (all entry points ✔ Built, zero errors),
-  npx jest --testPathPatterns="entry-points" --no-cache (41/41 PASS).
-Terminal notes: Edit tool introduces null bytes into small JSON files on Windows (same corruption
-  as Write tool). Mitigation: always rewrite JSON via Python script with open(dest, 'wb') +
-  .encode('utf-8'). Cannot delete files from bash sandbox (Operation not permitted) — use
-  knip ignore list as equivalent signal.
-Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
 

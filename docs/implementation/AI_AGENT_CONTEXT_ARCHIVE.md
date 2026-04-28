@@ -1,6 +1,31 @@
 # AI Agent Context Archive
 
 This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT_CONTEXT.md`.
+
+---
+
+Date: 2026-04-28 [knip baseline session]
+Changed:
+  - knip.json (removed 9 redundant entry/ignore patterns flagged as config hints)
+  - knip.json (added with-theme-scope.ts to ignore list — intentional pending file)
+  - projects/ui-lib-custom/src/lib/theming/index.ts (removed WithThemeScopeMixin from public
+    barrel; commented out with note to restore when first consumer lands)
+State: knip baseline complete. Standard `npx knip` reports 0 issues (clean baseline).
+  --include-entry-exports surfaces 47 entries that are all intentional public API types/exports;
+  documented as false positives for a library. One truly dead export (WithThemeScopeMixin)
+  removed from theming barrel and its source file added to knip ignore list (pending first use).
+  Build: all entry points Built, zero errors. Entry-point tests: 41/41 PASS.
+Verification:
+  npx knip --config knip.json (exit 0, zero output),
+  npx ng build ui-lib-custom (all entry points ✔ Built, zero errors),
+  npx jest --testPathPatterns="entry-points" --no-cache (41/41 PASS).
+Terminal notes: Edit tool introduces null bytes into small JSON files on Windows (same corruption
+  as Write tool). Mitigation: always rewrite JSON via Python script with open(dest, 'wb') +
+  .encode('utf-8'). Cannot delete files from bash sandbox (Operation not permitted) — use
+  knip ignore list as equivalent signal.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
+---
 Keep `AI_AGENT_CONTEXT.md` focused on active state and recent handoffs.
 
 ```text

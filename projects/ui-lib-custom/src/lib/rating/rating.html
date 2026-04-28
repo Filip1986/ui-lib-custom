@@ -1,0 +1,35 @@
+<!-- Cancel / clear button — visible when cancel input is true -->
+@if (cancel()) {
+  <span
+    class="ui-lib-rating__cancel"
+    role="button"
+    [attr.tabindex]="getCancelTabIndex()"
+    [attr.aria-label]="'Clear rating'"
+    [attr.aria-disabled]="isDisabled() ? 'true' : null"
+    (click)="onCancelClick($event)"
+    (keydown.enter)="onCancelClick($event)"
+    (keydown.space)="onCancelClick($event)"
+  >
+    <span [class]="getCancelIconClass()" aria-hidden="true"></span>
+  </span>
+}
+
+<!-- Star icons -->
+@for (star of starsArray(); track star) {
+  <span
+    [class]="'ui-lib-rating__star' + (isStarActive(star) ? ' ui-lib-rating__star--on' : '')"
+    role="radio"
+    [attr.aria-checked]="isStarChecked(star) ? 'true' : 'false'"
+    [attr.aria-label]="getStarAriaLabel(star)"
+    [attr.aria-posinset]="star"
+    [attr.aria-setsize]="stars()"
+    [attr.tabindex]="getStarTabIndex(star)"
+    [attr.aria-disabled]="isDisabled() ? 'true' : null"
+    (click)="onStarClick(star, $event)"
+    (mouseenter)="onStarHover(star)"
+    (mouseleave)="onStarLeave()"
+  >
+    <span [class]="getStarIconClass(star)" aria-hidden="true"></span>
+  </span>
+}
+

@@ -152,6 +152,10 @@
     "./radio-button": {
       "esm2022": "./esm2022/radio-button/index.mjs",
       "esm": "./esm2022/radio-button/index.mjs"
+    },
+    "./rating": {
+      "esm2022": "./esm2022/rating/index.mjs",
+      "esm": "./esm2022/rating/index.mjs"
     }
   },
   "typesVersions": {
@@ -236,6 +240,9 @@
       ],
       "radio-button": [
         "./radio-button/index.d.ts"
+      ],
+      "rating": [
+        "./rating/index.d.ts"
       ]
     }
   }

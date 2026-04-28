@@ -43,6 +43,7 @@ import type * as UiLibKnob from 'ui-lib-custom/knob';
 import type * as UiLibListbox from 'ui-lib-custom/listbox';
 import type * as UiLibPassword from 'ui-lib-custom/password';
 import type * as UiLibRadioButton from 'ui-lib-custom/radio-button';
+import type * as UiLibRating from 'ui-lib-custom/rating';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -317,5 +318,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from radio-button', async (): Promise<void> => {
     const mod: typeof UiLibRadioButton = await import('ui-lib-custom/radio-button');
     expect(mod.RadioButton).toBeDefined();
+  });
+
+  it('should import from rating', async (): Promise<void> => {
+    const mod: typeof UiLibRating = await import('ui-lib-custom/rating');
+    expect(mod.Rating).toBeDefined();
   });
 });

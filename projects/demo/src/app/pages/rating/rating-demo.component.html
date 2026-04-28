@@ -1,5 +1,94 @@
 <section class="rating-demo" data-testid="rating-demo">
   <h1>Rating</h1>
-  <p>Coming soon.</p>
+  <p>A rating component allows users to select a star value via click or keyboard.</p>
+
+  <!-- ── Basic ──────────────────────────────────────────────────────────── -->
+  <h2>Basic</h2>
+  <div class="demo-row">
+    <ui-lib-rating [(ngModel)]="basicRating" (change)="onRatingChange($event)" />
+  </div>
+  <p class="demo-hint">Value: <strong>{{ basicRating ?? 'none' }}</strong></p>
+
+  <!-- ── Pre-selected ───────────────────────────────────────────────────── -->
+  <h2>Pre-selected Value</h2>
+  <div class="demo-row">
+    <ui-lib-rating [(ngModel)]="preselectedRating" />
+  </div>
+  <p class="demo-hint">Value: <strong>{{ preselectedRating }}</strong></p>
+
+  <!-- ── No Cancel Button ───────────────────────────────────────────────── -->
+  <h2>No Cancel Button</h2>
+  <div class="demo-row">
+    <ui-lib-rating [(ngModel)]="noCancelRating" [cancel]="false" />
+  </div>
+
+  <!-- ── Variants ───────────────────────────────────────────────────────── -->
+  <h2>Variants</h2>
+  <div class="demo-column">
+    <div class="demo-label-row">
+      <span class="demo-label">Material</span>
+      <ui-lib-rating variant="material" [ngModel]="4" [cancel]="false" [readonly]="true" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">Bootstrap</span>
+      <ui-lib-rating variant="bootstrap" [ngModel]="4" [cancel]="false" [readonly]="true" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">Minimal</span>
+      <ui-lib-rating variant="minimal" [ngModel]="4" [cancel]="false" [readonly]="true" />
+    </div>
+  </div>
+
+  <!-- ── Sizes ──────────────────────────────────────────────────────────── -->
+  <h2>Sizes</h2>
+  <div class="demo-column">
+    <div class="demo-label-row">
+      <span class="demo-label">sm</span>
+      <ui-lib-rating size="sm" [ngModel]="3" [cancel]="false" [readonly]="true" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">md</span>
+      <ui-lib-rating size="md" [ngModel]="3" [cancel]="false" [readonly]="true" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">lg</span>
+      <ui-lib-rating size="lg" [ngModel]="3" [cancel]="false" [readonly]="true" />
+    </div>
+  </div>
+
+  <!-- ── Custom Star Count ──────────────────────────────────────────────── -->
+  <h2>Custom Star Count (10 stars)</h2>
+  <div class="demo-row">
+    <ui-lib-rating [stars]="10" [(ngModel)]="tenStarRating" />
+  </div>
+  <p class="demo-hint">Value: <strong>{{ tenStarRating }}</strong></p>
+
+  <!-- ── Readonly ───────────────────────────────────────────────────────── -->
+  <h2>Readonly</h2>
+  <div class="demo-row">
+    <ui-lib-rating [readonly]="true" [(ngModel)]="readonlyRating" />
+  </div>
+
+  <!-- ── Disabled ───────────────────────────────────────────────────────── -->
+  <h2>Disabled</h2>
+  <div class="demo-row">
+    <ui-lib-rating [disabled]="true" [(ngModel)]="disabledRating" />
+  </div>
+
+  <!-- ── Reactive Forms ─────────────────────────────────────────────────── -->
+  <h2>Reactive Forms</h2>
+  <form [formGroup]="reviewForm">
+    <div class="demo-column">
+      <div class="demo-label-row">
+        <span class="demo-label">Quality</span>
+        <ui-lib-rating formControlName="quality" />
+      </div>
+      <div class="demo-label-row">
+        <span class="demo-label">Support</span>
+        <ui-lib-rating formControlName="support" />
+      </div>
+    </div>
+  </form>
+  <p class="demo-hint">Form value: <strong>{{ reviewForm.value | json }}</strong></p>
 </section>
 
