@@ -66,13 +66,7 @@ import {
 @Component({
   selector: 'ui-lib-upload',
   standalone: true,
-  imports: [
-    CommonModule,
-    UploadHeaderDirective,
-    UploadContentDirective,
-    UploadEmptyDirective,
-    UploadFileDirective,
-  ],
+  imports: [CommonModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

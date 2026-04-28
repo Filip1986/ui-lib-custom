@@ -235,7 +235,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/key-filter',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'Knob',
