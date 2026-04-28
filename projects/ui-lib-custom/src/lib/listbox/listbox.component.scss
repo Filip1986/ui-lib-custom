@@ -1,0 +1,434 @@
+// =============================================================================
+// Listbox — CSS variable tokens (defaults)
+// All raw values use CSS var fallbacks referencing the global uilib system tokens.
+// Override any token on the host element to customise the component.
+// =============================================================================
+
+.ui-lib-listbox {
+  // Layout
+  --uilib-listbox-width: 100%;
+
+  // Surface
+  --uilib-listbox-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-listbox-border: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-listbox-border-radius: var(--uilib-border-radius, 6px);
+  --uilib-listbox-shadow: none;
+
+  // Filter input
+  --uilib-listbox-filter-padding: 0.5rem 0.75rem;
+  --uilib-listbox-filter-border-bottom: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-listbox-filter-bg: var(--uilib-surface-color, #ffffff);
+  --uilib-listbox-filter-icon-color: var(--uilib-text-muted-color, #6c757d);
+  --uilib-listbox-filter-input-color: var(--uilib-text-color, #1f2937);
+  --uilib-listbox-filter-input-placeholder-color: var(--uilib-text-muted-color, #9ca3af);
+  --uilib-listbox-filter-focus-ring: 0 0 0 2px var(--uilib-primary-color, #3b82f6);
+
+  // Header (toggle-all)
+  --uilib-listbox-header-bg: var(--uilib-surface-color-alt, #f8f9fa);
+  --uilib-listbox-header-padding: 0.5rem 0.75rem;
+  --uilib-listbox-header-border-bottom: 1px solid var(--uilib-border-color, #dee2e6);
+
+  // List
+  --uilib-listbox-list-padding: 0.25rem 0;
+
+  // Option item
+  --uilib-listbox-item-padding-sm: 0.375rem 0.625rem;
+  --uilib-listbox-item-padding-md: 0.5rem 0.875rem;
+  --uilib-listbox-item-padding-lg: 0.75rem 1rem;
+  --uilib-listbox-item-padding: var(--uilib-listbox-item-padding-md);
+  --uilib-listbox-item-color: var(--uilib-text-color, #1f2937);
+  --uilib-listbox-item-bg: transparent;
+  --uilib-listbox-item-bg-hover: var(--uilib-hover-bg, rgba(0, 0, 0, 0.04));
+  --uilib-listbox-item-bg-selected: var(--uilib-primary-color, #3b82f6);
+  --uilib-listbox-item-color-selected: #ffffff;
+  --uilib-listbox-item-bg-focused: var(--uilib-hover-bg, rgba(0, 0, 0, 0.06));
+  --uilib-listbox-item-font-size-sm: 0.8125rem;
+  --uilib-listbox-item-font-size-md: 0.875rem;
+  --uilib-listbox-item-font-size-lg: 1rem;
+  --uilib-listbox-item-font-size: var(--uilib-listbox-item-font-size-md);
+  --uilib-listbox-item-border-radius: 0;
+  --uilib-listbox-item-gap: 0.5rem;
+
+  // Striped rows
+  --uilib-listbox-item-bg-striped: var(--uilib-surface-color-alt, #f8f9fa);
+
+  // Disabled item
+  --uilib-listbox-item-color-disabled: var(--uilib-text-muted-color, #9ca3af);
+  --uilib-listbox-item-cursor-disabled: not-allowed;
+
+  // Group header
+  --uilib-listbox-group-padding: 0.375rem 0.75rem;
+  --uilib-listbox-group-font-size: 0.75rem;
+  --uilib-listbox-group-font-weight: 600;
+  --uilib-listbox-group-color: var(--uilib-text-muted-color, #6c757d);
+  --uilib-listbox-group-text-transform: uppercase;
+  --uilib-listbox-group-letter-spacing: 0.05em;
+
+  // Checkbox (in multiple + checkbox mode)
+  --uilib-listbox-checkbox-size: 1rem;
+  --uilib-listbox-checkbox-border: 2px solid var(--uilib-border-color, #ced4da);
+  --uilib-listbox-checkbox-border-radius: 3px;
+  --uilib-listbox-checkbox-bg-checked: var(--uilib-primary-color, #3b82f6);
+  --uilib-listbox-checkbox-border-checked: 2px solid var(--uilib-primary-color, #3b82f6);
+  --uilib-listbox-checkbox-color-checked: #ffffff;
+
+  // Focus ring on list container
+  --uilib-listbox-focus-ring: 0 0 0 2px var(--uilib-primary-color, #3b82f6);
+
+  // Disabled host
+  --uilib-listbox-disabled-opacity: 0.5;
+
+  // Empty state
+  --uilib-listbox-empty-padding: 1rem;
+  --uilib-listbox-empty-color: var(--uilib-text-muted-color, #6c757d);
+  --uilib-listbox-empty-font-size: 0.875rem;
+
+  // Transition
+  --uilib-listbox-transition: background-color 0.15s ease, color 0.15s ease;
+
+  // ==========================================================================
+  // Host layout
+  // ==========================================================================
+  display: block;
+  width: var(--uilib-listbox-width);
+  font-family: var(--uilib-font-body, inherit);
+  font-size: var(--uilib-listbox-item-font-size);
+}
+
+// =============================================================================
+// Size modifiers (adjust padding + font-size)
+// =============================================================================
+
+.ui-lib-listbox--size-sm {
+  --uilib-listbox-item-padding: var(--uilib-listbox-item-padding-sm);
+  --uilib-listbox-item-font-size: var(--uilib-listbox-item-font-size-sm);
+}
+
+.ui-lib-listbox--size-lg {
+  --uilib-listbox-item-padding: var(--uilib-listbox-item-padding-lg);
+  --uilib-listbox-item-font-size: var(--uilib-listbox-item-font-size-lg);
+}
+
+// =============================================================================
+// Disabled host
+// =============================================================================
+
+.ui-lib-listbox--disabled {
+  opacity: var(--uilib-listbox-disabled-opacity);
+  pointer-events: none;
+  user-select: none;
+}
+
+// =============================================================================
+// Wrapper
+// =============================================================================
+
+.ui-lib-listbox__wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--uilib-listbox-border);
+  border-radius: var(--uilib-listbox-border-radius);
+  background: var(--uilib-listbox-bg);
+  box-shadow: var(--uilib-listbox-shadow);
+}
+
+// =============================================================================
+// Filter container
+// =============================================================================
+
+.ui-lib-listbox__filter-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--uilib-listbox-filter-padding);
+  border-bottom: var(--uilib-listbox-filter-border-bottom);
+  background: var(--uilib-listbox-filter-bg);
+}
+
+.ui-lib-listbox__filter-icon {
+  display: flex;
+  align-items: center;
+  color: var(--uilib-listbox-filter-icon-color);
+  flex-shrink: 0;
+}
+
+.ui-lib-listbox__filter-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--uilib-listbox-item-font-size);
+  font-family: inherit;
+  color: var(--uilib-listbox-filter-input-color);
+  min-width: 0;
+
+  &::placeholder {
+    color: var(--uilib-listbox-filter-input-placeholder-color);
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// =============================================================================
+// Header (toggle-all)
+// =============================================================================
+
+.ui-lib-listbox__header {
+  padding: var(--uilib-listbox-header-padding);
+  border-bottom: var(--uilib-listbox-header-border-bottom);
+  background: var(--uilib-listbox-header-bg);
+}
+
+.ui-lib-listbox__toggle-all {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ui-lib-listbox__toggle-all-label {
+  font-size: var(--uilib-listbox-item-font-size);
+  font-weight: 500;
+  color: var(--uilib-listbox-item-color);
+}
+
+// =============================================================================
+// Scrollable list container
+// =============================================================================
+
+.ui-lib-listbox__list-container {
+  overflow-y: auto;
+  outline: none;
+  flex: 1;
+
+  &:focus {
+    outline: none;
+    box-shadow: var(--uilib-listbox-focus-ring);
+  }
+}
+
+.ui-lib-listbox__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--uilib-listbox-list-padding);
+}
+
+// =============================================================================
+// Group header row
+// =============================================================================
+
+.ui-lib-listbox__group-header {
+  padding: var(--uilib-listbox-group-padding);
+  font-size: var(--uilib-listbox-group-font-size);
+  font-weight: var(--uilib-listbox-group-font-weight);
+  color: var(--uilib-listbox-group-color);
+  text-transform: var(--uilib-listbox-group-text-transform);
+  letter-spacing: var(--uilib-listbox-group-letter-spacing);
+  user-select: none;
+}
+
+// =============================================================================
+// Option row
+// =============================================================================
+
+.ui-lib-listbox__item {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-listbox-item-gap);
+  padding: var(--uilib-listbox-item-padding);
+  cursor: pointer;
+  transition: var(--uilib-listbox-transition);
+  color: var(--uilib-listbox-item-color);
+  background: var(--uilib-listbox-item-bg);
+  border-radius: var(--uilib-listbox-item-border-radius);
+  user-select: none;
+  word-break: break-word;
+
+  &:hover {
+    background: var(--uilib-listbox-item-bg-hover);
+  }
+
+  // Selected state
+  &.ui-lib-listbox__item--selected {
+    background: var(--uilib-listbox-item-bg-selected);
+    color: var(--uilib-listbox-item-color-selected);
+
+    // When checkbox mode is on, reset the background so only the checkbox shows selection
+    .ui-lib-listbox--multiple & {
+      background: var(--uilib-listbox-item-bg-selected);
+      color: var(--uilib-listbox-item-color-selected);
+    }
+  }
+
+  // Keyboard-focused state
+  &.ui-lib-listbox__item--focused:not(.ui-lib-listbox__item--selected) {
+    background: var(--uilib-listbox-item-bg-focused);
+    outline: 2px solid var(--uilib-primary-color, #3b82f6);
+    outline-offset: -2px;
+  }
+
+  // Disabled state
+  &.ui-lib-listbox__item--disabled {
+    color: var(--uilib-listbox-item-color-disabled);
+    cursor: var(--uilib-listbox-item-cursor-disabled);
+    pointer-events: none;
+  }
+}
+
+// Striped rows (even option items)
+.ui-lib-listbox--striped {
+  .ui-lib-listbox__item:nth-child(even of .ui-lib-listbox__item) {
+    background: var(--uilib-listbox-item-bg-striped);
+
+    &:hover {
+      background: var(--uilib-listbox-item-bg-hover);
+    }
+
+    &.ui-lib-listbox__item--selected {
+      background: var(--uilib-listbox-item-bg-selected);
+    }
+  }
+}
+
+.ui-lib-listbox__item-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// =============================================================================
+// Checkbox (multiple + checkbox mode)
+// =============================================================================
+
+.ui-lib-listbox__checkbox-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ui-lib-listbox__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-listbox-checkbox-size);
+  height: var(--uilib-listbox-checkbox-size);
+  border: var(--uilib-listbox-checkbox-border);
+  border-radius: var(--uilib-listbox-checkbox-border-radius);
+  background: transparent;
+  transition: var(--uilib-listbox-transition);
+  flex-shrink: 0;
+
+  &--checked {
+    background: var(--uilib-listbox-checkbox-bg-checked);
+    border: var(--uilib-listbox-checkbox-border-checked);
+    color: var(--uilib-listbox-checkbox-color-checked);
+  }
+
+  // Native checkbox inside toggle-all header
+  &[type='checkbox'] {
+    width: var(--uilib-listbox-checkbox-size);
+    height: var(--uilib-listbox-checkbox-size);
+    cursor: pointer;
+    accent-color: var(--uilib-primary-color, #3b82f6);
+  }
+}
+
+// =============================================================================
+// Empty state
+// =============================================================================
+
+.ui-lib-listbox__empty {
+  padding: var(--uilib-listbox-empty-padding);
+  text-align: center;
+  color: var(--uilib-listbox-empty-color);
+  font-size: var(--uilib-listbox-empty-font-size);
+}
+
+// =============================================================================
+// Variant: Material
+// =============================================================================
+
+.ui-lib-listbox--material {
+  --uilib-listbox-border-radius: 4px;
+  --uilib-listbox-item-padding-md: 0.625rem 1rem;
+  --uilib-listbox-item-padding-sm: 0.375rem 0.75rem;
+  --uilib-listbox-item-padding-lg: 0.875rem 1.25rem;
+  --uilib-listbox-item-border-radius: 0;
+  --uilib-listbox-item-bg-selected: var(--uilib-primary-color, #1976d2);
+  --uilib-listbox-item-bg-focused: rgba(25, 118, 210, 0.08);
+  --uilib-listbox-item-bg-hover: rgba(0, 0, 0, 0.04);
+  --uilib-listbox-focus-ring: 0 0 0 2px rgba(25, 118, 210, 0.4);
+  --uilib-listbox-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --uilib-listbox-border: 1px solid rgba(0, 0, 0, 0.12);
+  --uilib-listbox-group-color: rgba(0, 0, 0, 0.54);
+}
+
+// =============================================================================
+// Variant: Bootstrap
+// =============================================================================
+
+.ui-lib-listbox--bootstrap {
+  --uilib-listbox-border-radius: 0.375rem;
+  --uilib-listbox-border: 1px solid #ced4da;
+  --uilib-listbox-item-padding-md: 0.5rem 1rem;
+  --uilib-listbox-item-padding-sm: 0.25rem 0.75rem;
+  --uilib-listbox-item-padding-lg: 0.75rem 1.25rem;
+  --uilib-listbox-item-border-radius: 0;
+  --uilib-listbox-item-bg-selected: #0d6efd;
+  --uilib-listbox-item-bg-focused: rgba(13, 110, 253, 0.1);
+  --uilib-listbox-item-bg-hover: rgba(0, 0, 0, 0.05);
+  --uilib-listbox-focus-ring: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  --uilib-listbox-header-bg: #f8f9fa;
+  --uilib-listbox-filter-input-placeholder-color: #6c757d;
+  --uilib-listbox-checkbox-bg-checked: #0d6efd;
+  --uilib-listbox-checkbox-border-checked: 2px solid #0d6efd;
+  --uilib-listbox-item-bg-striped: rgba(0, 0, 0, 0.03);
+}
+
+// =============================================================================
+// Variant: Minimal
+// =============================================================================
+
+.ui-lib-listbox--minimal {
+  --uilib-listbox-border-radius: 0;
+  --uilib-listbox-border: none;
+  --uilib-listbox-shadow: none;
+  --uilib-listbox-header-bg: transparent;
+  --uilib-listbox-header-border-bottom: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-listbox-filter-border-bottom: 1px solid var(--uilib-border-color, #dee2e6);
+  --uilib-listbox-filter-bg: transparent;
+  --uilib-listbox-item-bg-selected: transparent;
+  --uilib-listbox-item-color-selected: var(--uilib-primary-color, #3b82f6);
+  --uilib-listbox-item-bg-hover: transparent;
+  --uilib-listbox-item-bg-focused: transparent;
+  --uilib-listbox-item-border-radius: 0;
+  --uilib-listbox-focus-ring: none;
+  --uilib-listbox-bg: transparent;
+
+  .ui-lib-listbox__wrapper {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .ui-lib-listbox__item--selected {
+    font-weight: 600;
+    color: var(--uilib-primary-color, #3b82f6);
+    background: transparent;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .ui-lib-listbox__item--focused:not(.ui-lib-listbox__item--selected) {
+    background: transparent;
+    text-decoration: underline;
+    outline: none;
+  }
+}

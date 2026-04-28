@@ -1,0 +1,71 @@
+.demo-card {
+  width: 100%;
+}
+
+.demo-card--two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.demo-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demo-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--uilib-text-muted-color, #6c757d);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.demo-value {
+  font-size: 0.8125rem;
+  color: var(--uilib-text-muted-color, #6c757d);
+  margin: 0;
+
+  code {
+    font-family: var(--uilib-font-mono, monospace);
+    color: var(--uilib-primary-color, #3b82f6);
+    word-break: break-all;
+  }
+}
+
+.demo-form {
+  display: contents;
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.example-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+.section-text {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--uilib-text-muted-color, #6c757d);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .demo-card--two-col {
+    grid-template-columns: 1fr;
+  }
+}

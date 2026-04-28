@@ -40,6 +40,7 @@ import type * as UiLibCarousel from 'ui-lib-custom/carousel';
 import type * as UiLibInputOtp from 'ui-lib-custom/input-otp';
 import type * as UiLibKeyFilter from 'ui-lib-custom/key-filter';
 import type * as UiLibKnob from 'ui-lib-custom/knob';
+import type * as UiLibListbox from 'ui-lib-custom/listbox';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -296,5 +297,12 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.KnobComponent).toBeDefined();
     expect(mod.KNOB_DEFAULTS).toBeDefined();
     expect(mod.KNOB_SVG).toBeDefined();
+  });
+
+  it('should import from listbox', async (): Promise<void> => {
+    const mod: typeof UiLibListbox = await import('ui-lib-custom/listbox');
+    expect(mod.ListboxComponent).toBeDefined();
+    expect(mod.LISTBOX_DEFAULTS).toBeDefined();
+    expect(mod.LISTBOX_ROLE).toBeDefined();
   });
 });

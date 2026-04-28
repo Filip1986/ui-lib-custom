@@ -1,0 +1,268 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Listbox</h1>
+    <p class="doc-description">
+      A scrollable list of options with single or multiple selection, inline
+      filtering, option groups, checkbox mode, and full keyboard navigation.
+      Implements <code>ControlValueAccessor</code> for seamless
+      <code>ngModel</code> and reactive-form integration.
+    </p>
+  </div>
+
+  <app-doc-demo-viewport [autoHeight]="true">
+    <div class="examples">
+
+      <!-- a. Basic -->
+      <section id="basic" data-doc-anchor class="example-section">
+        <h3>a. Basic</h3>
+        <p class="section-text">
+          Single-select listbox bound with <code>ngModel</code>.
+          Click an option to select it; click the same option again to deselect.
+        </p>
+        <app-code-preview [code]="snippet('basic')">
+          <ui-lib-card class="demo-card">
+            <div class="demo-row">
+              <ui-lib-listbox
+                [options]="cities"
+                ariaLabel="Select a city"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="basicValue"
+                (selectionChange)="onSelectionChange($event)"
+              />
+              <p class="demo-value">Selected: <code>{{ basicValue | json }}</code></p>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- b. Multiple Selection -->
+      <section id="multiple" data-doc-anchor class="example-section">
+        <h3>b. Multiple Selection</h3>
+        <p class="section-text">
+          Enable <code>[multiple]="true"</code> to let users pick several items.
+          Each click toggles individual selection.
+        </p>
+        <app-code-preview [code]="snippet('multiple')">
+          <ui-lib-card class="demo-card">
+            <div class="demo-row">
+              <ui-lib-listbox
+                [options]="cities"
+                [multiple]="true"
+                ariaLabel="Select cities"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="multipleValue"
+              />
+              <p class="demo-value">Selected: <code>{{ multipleValue | json }}</code></p>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- c. Filter -->
+      <section id="filter" data-doc-anchor class="example-section">
+        <h3>c. Filter</h3>
+        <p class="section-text">
+          Add <code>[filter]="true"</code> to show a search input above the list.
+          Options are narrowed in real-time using the <code>contains</code>
+          strategy by default.
+        </p>
+        <app-code-preview [code]="snippet('filter')">
+          <ui-lib-card class="demo-card">
+            <div class="demo-row">
+              <ui-lib-listbox
+                [options]="cities"
+                [filter]="true"
+                filterPlaceholder="Search cities..."
+                ariaLabel="Select a city"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="filterValue"
+              />
+              <p class="demo-value">Selected: <code>{{ filterValue | json }}</code></p>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- d. Filter Match Modes -->
+      <section id="filter-match-modes" data-doc-anchor class="example-section">
+        <h3>d. Filter Match Modes</h3>
+        <p class="section-text">
+          Control matching strategy with <code>filterMatchMode</code>:
+          <code>contains</code> (default), <code>startsWith</code>,
+          <code>endsWith</code>, or <code>equals</code>.
+        </p>
+        <app-code-preview [code]="snippet('filter-match-modes')">
+          <ui-lib-card class="demo-card demo-card--two-col">
+            <div class="demo-row">
+              <span class="demo-label">startsWith</span>
+              <ui-lib-listbox
+                [options]="cities"
+                [filter]="true"
+                filterMatchMode="startsWith"
+                filterPlaceholder="e.g. Ber..."
+                ariaLabel="startsWith filter"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="filterMatchModeValue"
+              />
+            </div>
+            <div class="demo-row">
+              <span class="demo-label">endsWith</span>
+              <ui-lib-listbox
+                [options]="cities"
+                [filter]="true"
+                filterMatchMode="endsWith"
+                filterPlaceholder="e.g. ...in"
+                ariaLabel="endsWith filter"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="filterMatchModeValue"
+              />
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- e. Option Groups -->
+      <section id="groups" data-doc-anchor class="example-section">
+        <h3>e. Option Groups</h3>
+        <p class="section-text">
+          Pass a nested array and set <code>[group]="true"</code>.
+          Use <code>optionGroupLabel</code> and <code>optionGroupChildren</code>
+          to map your data shape.
+        </p>
+        <app-code-preview [code]="snippet('groups')">
+          <ui-lib-card class="demo-card">
+            <div class="demo-row">
+              <ui-lib-listbox
+                [options]="groupedCities"
+                [group]="true"
+                optionGroupLabel="label"
+                optionGroupChildren="items"
+                scrollHeight="300px"
+                ariaLabel="Select a city"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="groupValue"
+              />
+              <p class="demo-value">Selected: <code>{{ groupValue | json }}</code></p>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- f. Checkbox Mode -->
+      <section id="checkbox" data-doc-anchor class="example-section">
+        <h3>f. Checkbox Mode</h3>
+        <p class="section-text">
+          Combine <code>[multiple]="true"</code> and <code>[checkbox]="true"</code>
+          to render a checkbox beside each option for visual multi-select affordance.
+        </p>
+        <app-code-preview [code]="snippet('checkbox')">
+          <ui-lib-card class="demo-card">
+            <div class="demo-row">
+              <ui-lib-listbox
+                [options]="cities"
+                [multiple]="true"
+                [checkbox]="true"
+                ariaLabel="Select cities"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="checkboxValue"
+              />
+              <p class="demo-value">Selected: <code>{{ checkboxValue | json }}</code></p>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- g. Toggle All -->
+      <section id="toggle-all" data-doc-anchor class="example-section">
+        <h3>g. Toggle All</h3>
+        <p class="section-text">
+          Add <code>[showToggleAll]="true"</code> in multiple + checkbox mode to
+          show a header checkbox that selects or deselects all non-disabled options.
+        </p>
+        <app-code-preview [code]="snippet('toggle-all')">
+          <ui-lib-card class="demo-card">
+            <div class="demo-row">
+              <ui-lib-listbox
+                [options]="cities"
+                [multiple]="true"
+                [checkbox]="true"
+                [showToggleAll]="true"
+                ariaLabel="Select cities"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="toggleAllValue"
+              />
+              <p class="demo-value">
+                Selected ({{ toggleAllValue.length }}):
+                <code>{{ toggleAllValue | json }}</code>
+              </p>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- h. Disabled -->
+      <section id="disabled" data-doc-anchor class="example-section">
+        <h3>h. Disabled</h3>
+        <p class="section-text">
+          <code>[disabled]="true"</code> prevents all interaction. Individual options
+          can also be disabled via an <code>disabled: true</code> field on the option object.
+        </p>
+        <app-code-preview [code]="snippet('disabled')">
+          <ui-lib-card class="demo-card demo-card--two-col">
+            <div class="demo-row">
+              <span class="demo-label">Component disabled</span>
+              <ui-lib-listbox
+                [options]="cities"
+                [disabled]="true"
+                ariaLabel="Disabled listbox"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="disabledValue"
+              />
+            </div>
+            <div class="demo-row">
+              <span class="demo-label">Individual options disabled</span>
+              <ui-lib-listbox
+                [options]="disabledCities"
+                ariaLabel="Options with some disabled"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="disabledValue"
+              />
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- i. Reactive Forms -->
+      <section id="reactive" data-doc-anchor class="example-section">
+        <h3>i. Reactive Forms</h3>
+        <p class="section-text">
+          Use <code>formControlName</code> for reactive-form integration.
+          <code>form.disable()</code> propagates the disabled state automatically
+          via <code>setDisabledState</code>.
+        </p>
+        <app-code-preview [code]="snippet('reactive')">
+          <ui-lib-card class="demo-card demo-card--two-col">
+            <form [formGroup]="form" class="demo-form">
+              <div class="demo-row">
+                <span class="demo-label">Single (formControlName="city")</span>
+                <ui-lib-listbox [options]="cities" formControlName="city" />
+                <p class="demo-value">Value: <code>{{ cityControl.value | json }}</code></p>
+              </div>
+              <div class="demo-row">
+                <span class="demo-label">Multiple (formControlName="cities")</span>
+                <ui-lib-listbox
+                  [options]="cities"
+                  [multiple]="true"
+                  [checkbox]="true"
+                  formControlName="cities"
+                />
+                <p class="demo-value">Value: <code>{{ citiesControl.value | json }}</code></p>
+              </div>
+            </form>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+    </div>
+  </app-doc-demo-viewport>
+</app-doc-page-layout>

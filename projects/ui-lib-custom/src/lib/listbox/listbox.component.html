@@ -1,0 +1,135 @@
+<div class="ui-lib-listbox__wrapper">
+  <!-- Filter input -->
+  @if (filter()) {
+    <div class="ui-lib-listbox__filter-container">
+      <span class="ui-lib-listbox__filter-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+          <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+        </svg>
+      </span>
+      <input
+        #filterInput
+        class="ui-lib-listbox__filter-input"
+        type="text"
+        role="searchbox"
+        [value]="filterValue()"
+        [placeholder]="filterPlaceholder()"
+        [disabled]="isDisabled()"
+        [attr.aria-label]="'Filter options'"
+        (input)="onFilterInput($event)"
+        autocomplete="off"
+      />
+    </div>
+  }
+
+  <!-- Toggle-all header (multiple + showToggleAll) -->
+  @if (multiple() && showToggleAll()) {
+    <div class="ui-lib-listbox__header">
+      <label class="ui-lib-listbox__toggle-all">
+        <input
+          type="checkbox"
+          class="ui-lib-listbox__checkbox"
+          [checked]="allSelected()"
+          [disabled]="isDisabled()"
+          (change)="toggleAll($event)"
+          aria-label="Select all options"
+        />
+        <span class="ui-lib-listbox__toggle-all-label">Select all</span>
+      </label>
+    </div>
+  }
+
+  <!-- Scrollable list -->
+  <div
+    #listElement
+    class="ui-lib-listbox__list-container"
+    [style.max-height]="scrollHeight()"
+    [attr.id]="listboxElementId()"
+    [attr.role]="'listbox'"
+    [attr.aria-multiselectable]="multiple() ? 'true' : 'false'"
+    [attr.aria-label]="ariaLabel() || null"
+    [attr.aria-labelledby]="ariaLabelledBy() || null"
+    [attr.aria-activedescendant]="activeDescendantId()"
+    [attr.aria-disabled]="isDisabled() ? 'true' : null"
+    [attr.aria-readonly]="readonly() ? 'true' : null"
+    [attr.tabindex]="isDisabled() ? -1 : 0"
+    (keydown)="onListKeydown($event)"
+    (focus)="onListFocus()"
+    (blur)="onListBlur()"
+  >
+    @if (isEmpty()) {
+      <div class="ui-lib-listbox__empty">
+        @if (isFiltered()) {
+          @if (emptyFilterTemplate) {
+            <ng-container [ngTemplateOutlet]="emptyFilterTemplate" />
+          } @else {
+            {{ emptyFilterMessage() }}
+          }
+        } @else {
+          @if (emptyTemplate) {
+            <ng-container [ngTemplateOutlet]="emptyTemplate" />
+          } @else {
+            {{ emptyMessage() }}
+          }
+        }
+      </div>
+    } @else {
+      <ul class="ui-lib-listbox__list" role="presentation">
+        @for (item of flatItems(); track $index) {
+          @if (item.type === 'group') {
+            <!-- Group header -->
+            <li class="ui-lib-listbox__group-header" role="presentation" aria-hidden="true">
+              @if (groupTemplate) {
+                <ng-container
+                  [ngTemplateOutlet]="groupTemplate"
+                  [ngTemplateOutletContext]="{ $implicit: item, label: item.label }"
+                />
+              } @else {
+                {{ item.label }}
+              }
+            </li>
+          } @else {
+            <!-- Option row -->
+            <li
+              class="ui-lib-listbox__item"
+              [class.ui-lib-listbox__item--selected]="isSelected(item.value)"
+              [class.ui-lib-listbox__item--focused]="focusedOptionIndex() === item.optionIndex"
+              [class.ui-lib-listbox__item--disabled]="item.disabled"
+              [attr.id]="optionId(item.optionIndex)"
+              [attr.role]="'option'"
+              [attr.aria-selected]="isSelected(item.value) ? 'true' : 'false'"
+              [attr.aria-disabled]="item.disabled ? 'true' : null"
+              [attr.aria-setsize]="optionRows().length"
+              [attr.aria-posinset]="item.optionIndex + 1"
+              (click)="selectOption($event, item)"
+            >
+              @if (multiple() && checkbox()) {
+                <span class="ui-lib-listbox__checkbox-wrap" aria-hidden="true">
+                  <span
+                    class="ui-lib-listbox__checkbox"
+                    [class.ui-lib-listbox__checkbox--checked]="isSelected(item.value)"
+                  >
+                    @if (isSelected(item.value)) {
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor" width="10" height="10">
+                        <path fill-rule="evenodd" d="M10.28 1.78a.75.75 0 0 0-1.06 0L5.25 5.72 2.78 3.25a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd"/>
+                      </svg>
+                    }
+                  </span>
+                </span>
+              }
+
+              @if (itemTemplate) {
+                <ng-container
+                  [ngTemplateOutlet]="itemTemplate"
+                  [ngTemplateOutletContext]="{ $implicit: item, selected: isSelected(item.value) }"
+                />
+              } @else {
+                <span class="ui-lib-listbox__item-label">{{ item.label }}</span>
+              }
+            </li>
+          }
+        }
+      </ul>
+    }
+  </div>
+</div>

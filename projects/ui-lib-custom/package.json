@@ -140,6 +140,10 @@
     "./knob": {
       "esm2022": "./esm2022/knob/index.mjs",
       "esm": "./esm2022/knob/index.mjs"
+    },
+    "./listbox": {
+      "types": "./listbox/index.d.ts",
+      "default": "./fesm2022/ui-lib-custom-listbox.mjs"
     }
   },
   "typesVersions": {
@@ -215,6 +219,9 @@
       ],
       "knob": [
         "./knob/index.d.ts"
+      ],
+      "listbox": [
+        "./listbox/index.d.ts"
       ]
     }
   }

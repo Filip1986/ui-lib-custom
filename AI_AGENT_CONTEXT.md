@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Listbox` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `Knob` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `KeyFilter` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `InputOtp` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
@@ -66,6 +67,38 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
 
+Date: 2026-04-28 [listbox session]
+Changed:
+  - projects/ui-lib-custom/src/lib/listbox/ (new — listbox.types.ts, listbox.constants.ts,
+    listbox.component.ts, listbox.component.html, listbox.component.scss,
+    listbox.component.spec.ts, index.ts, public-api.ts)
+  - projects/ui-lib-custom/listbox/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (added listbox to exports + typesVersions via Python)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added listbox import test)
+  - projects/demo/src/app/pages/listbox/ (full demo — TS/HTML/SCSS, 9 scenarios)
+  - docs/reference/components/LISTBOX.md (new — full API + theming + a11y + keyboard docs)
+  - projects/ui-lib-custom/src/lib/knob/knob.component.ts (repaired pre-existing truncation:
+    missing onModelTouched body and class closing brace)
+State: Listbox component fully complete. Scrollable option list with single and multiple
+  selection, inline filtering (contains/startsWith/endsWith/equals), option groups, checkbox
+  mode, toggle-all, striped rows, ControlValueAccessor (ngModel + reactive forms), disabled /
+  readonly states, full ARIA (role=listbox, role=option, aria-multiselectable,
+  aria-activedescendant, aria-posinset, aria-setsize), keyboard nav (ArrowUp/Down/Home/End/
+  Enter/Space), three variants (material/bootstrap/minimal), three sizes (sm/md/lg),
+  custom item/group/empty template slots. 55/55 unit tests passing. 42/42 entry-point tests
+  passing. ESLint clean on all lib and demo files. Library build zero errors.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/listbox/ projects/demo/src/app/pages/listbox/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom — ui-lib-custom/listbox ✔ Built, all entry points ✔ Built (zero errors),
+  npx jest --testPathPatterns="listbox" --no-cache (55/55 PASS),
+  npx jest --testPathPatterns="entry-points" --no-cache (42/42 PASS).
+Terminal notes: Write tool truncates large .ts files — listbox.component.ts and
+  listbox.constants.ts both needed Python repair after initial Write. Always write large files
+  (>300 lines) via Python script with open(dest, 'wb') + .encode('utf-8'). Knob pre-existing
+  truncation (onModelTouched + class closing brace) repaired as collateral.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
+---
 Date: 2026-04-28 [knip baseline session]
 Changed:
   - knip.json (removed 9 redundant entry/ignore patterns flagged as config hints)
