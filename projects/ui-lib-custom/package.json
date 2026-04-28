@@ -142,14 +142,12 @@
       "esm": "./esm2022/knob/index.mjs"
     },
     "./listbox": {
-      "types": "./listbox/index.d.ts",
-      "default": "./fesm2022/ui-lib-custom-listbox.mjs"
+      "esm2022": "./esm2022/listbox/index.mjs",
+      "esm": "./esm2022/listbox/index.mjs"
     },
     "./password": {
-      "types": "./password/index.d.ts",
       "esm2022": "./esm2022/password/index.mjs",
-      "esm": "./esm2022/password/index.mjs",
-      "default": "./fesm2022/password/index.mjs"
+      "esm": "./esm2022/password/index.mjs"
     },
     "./radio-button": {
       "esm2022": "./esm2022/radio-button/index.mjs",
