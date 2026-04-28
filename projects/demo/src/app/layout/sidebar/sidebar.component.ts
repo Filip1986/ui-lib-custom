@@ -253,7 +253,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/password',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'RadioButton',

@@ -41,6 +41,7 @@ import type * as UiLibInputOtp from 'ui-lib-custom/input-otp';
 import type * as UiLibKeyFilter from 'ui-lib-custom/key-filter';
 import type * as UiLibKnob from 'ui-lib-custom/knob';
 import type * as UiLibListbox from 'ui-lib-custom/listbox';
+import type * as UiLibPassword from 'ui-lib-custom/password';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -304,5 +305,11 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.ListboxComponent).toBeDefined();
     expect(mod.LISTBOX_DEFAULTS).toBeDefined();
     expect(mod.LISTBOX_ROLE).toBeDefined();
+  });
+
+  it('should import from password', async (): Promise<void> => {
+    const mod: typeof UiLibPassword = await import('ui-lib-custom/password');
+    expect(mod.PasswordComponent).toBeDefined();
+    expect(mod.PASSWORD_DEFAULTS).toBeDefined();
   });
 });

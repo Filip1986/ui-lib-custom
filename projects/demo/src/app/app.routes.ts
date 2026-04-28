@@ -451,6 +451,14 @@ export const routes: Routes = [
     title: 'Listbox - UI Components Library',
   },
   {
+    path: 'password',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/password/password-demo.component').then(
+        (m: { PasswordDemoComponent: Type<unknown> }): Type<unknown> => m.PasswordDemoComponent
+      ),
+    title: 'Password - UI Components Library',
+  },
+  {
     path: 'inplace',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/inplace/inplace-demo.component').then(
