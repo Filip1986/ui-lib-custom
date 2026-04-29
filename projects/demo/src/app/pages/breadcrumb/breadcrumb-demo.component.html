@@ -1,0 +1,229 @@
+<section class="breadcrumb-demo" data-testid="breadcrumb-demo">
+  <h1>Breadcrumb</h1>
+  <p>
+    A breadcrumb displays a hierarchical navigation trail, helping users understand where they are
+    in an application and navigate back to parent sections.
+  </p>
+
+  <!-- ── Basic ─────────────────────────────────────────────────────────── -->
+  <h2>Basic</h2>
+  <p class="demo-hint">A simple breadcrumb with external URL links.</p>
+  <div class="demo-row">
+    <ui-lib-breadcrumb [items]="basicItems" />
+  </div>
+
+  <!-- ── With Home ─────────────────────────────────────────────────────── -->
+  <h2>With Home</h2>
+  <p class="demo-hint">Use the <code>home</code> input to pin a home item at the start.</p>
+  <div class="demo-row">
+    <ui-lib-breadcrumb [home]="homeItem" [items]="homeItems" />
+  </div>
+
+  <!-- ── RouterLink ────────────────────────────────────────────────────── -->
+  <h2>RouterLink</h2>
+  <p class="demo-hint">Use <code>routerLink</code> to navigate within the Angular application.</p>
+  <div class="demo-row">
+    <ui-lib-breadcrumb [items]="routerItems" />
+  </div>
+
+  <!-- ── Custom Separator ──────────────────────────────────────────────── -->
+  <h2>Custom Separator</h2>
+  <p class="demo-hint">
+    Project a <code>#separator</code> template to override the default separator glyph.
+  </p>
+  <div class="demo-row">
+    <ui-lib-breadcrumb [items]="separatorItems">
+      <ng-template #separator>›</ng-template>
+    </ui-lib-breadcrumb>
+  </div>
+
+  <!-- ── Variants ──────────────────────────────────────────────────────── -->
+  <h2>Variants</h2>
+  <div class="demo-column">
+    <div class="demo-label-row">
+      <span class="demo-label">Material</span>
+      <ui-lib-breadcrumb variant="material" [items]="variantItems" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">Bootstrap</span>
+      <ui-lib-breadcrumb variant="bootstrap" [items]="variantItems" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">Minimal</span>
+      <ui-lib-breadcrumb variant="minimal" [items]="variantItems" />
+    </div>
+  </div>
+
+  <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+  <h2>Sizes</h2>
+  <div class="demo-column">
+    <div class="demo-label-row">
+      <span class="demo-label">sm</span>
+      <ui-lib-breadcrumb size="sm" [items]="sizeItems" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">md</span>
+      <ui-lib-breadcrumb size="md" [items]="sizeItems" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">lg</span>
+      <ui-lib-breadcrumb size="lg" [items]="sizeItems" />
+    </div>
+  </div>
+
+  <!-- ── Command ───────────────────────────────────────────────────────── -->
+  <h2>Command Callback</h2>
+  <p class="demo-hint">
+    Items with a <code>command</code> callback render as buttons and emit both the
+    <code>itemClick</code> output and call the callback.
+  </p>
+  <div class="demo-row">
+    <ui-lib-breadcrumb [items]="commandItems" (itemClick)="onItemClick($event)" />
+  </div>
+  @if (eventLog().length > 0) {
+    <div class="demo-event-log" aria-live="polite">
+      @for (entry of eventLog(); track $index) {
+        <p>{{ entry }}</p>
+      }
+    </div>
+  }
+
+  <!-- ── Disabled Item ─────────────────────────────────────────────────── -->
+  <h2>Disabled Item</h2>
+  <p class="demo-hint">
+    Set <code>disabled: true</code> on any item to make it non-interactive and visually muted.
+  </p>
+  <div class="demo-row">
+    <ui-lib-breadcrumb [items]="disabledItems" />
+  </div>
+
+  <!-- ── Long Path ─────────────────────────────────────────────────────── -->
+  <h2>Long Breadcrumb (wrapping)</h2>
+  <p class="demo-hint">Breadcrumbs wrap naturally on narrow viewports.</p>
+  <div class="demo-row">
+    <ui-lib-breadcrumb [items]="longItems" />
+  </div>
+
+  <!-- ── API Table ─────────────────────────────────────────────────────── -->
+  <h2>API</h2>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Input</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>items</code></td>
+        <td><code>BreadcrumbItem[]</code></td>
+        <td><code>[]</code></td>
+        <td>The navigation items to display.</td>
+      </tr>
+      <tr>
+        <td><code>home</code></td>
+        <td><code>BreadcrumbItem | null</code></td>
+        <td><code>null</code></td>
+        <td>Optional home item prepended before <code>items</code>.</td>
+      </tr>
+      <tr>
+        <td><code>variant</code></td>
+        <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+        <td><code>null</code></td>
+        <td>Design-system variant; falls back to ThemeConfigService when null.</td>
+      </tr>
+      <tr>
+        <td><code>size</code></td>
+        <td><code>'sm' | 'md' | 'lg'</code></td>
+        <td><code>'md'</code></td>
+        <td>Size token controlling font size and spacing.</td>
+      </tr>
+      <tr>
+        <td><code>styleClass</code></td>
+        <td><code>string | null</code></td>
+        <td><code>null</code></td>
+        <td>Extra CSS class appended to host.</td>
+      </tr>
+      <tr>
+        <td><code>ariaLabel</code></td>
+        <td><code>string</code></td>
+        <td><code>'Breadcrumb'</code></td>
+        <td>Accessible label for the <code>&lt;nav&gt;</code> landmark.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Outputs</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Output</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>itemClick</code></td>
+        <td><code>BreadcrumbItemClickEvent</code></td>
+        <td>Emitted when any breadcrumb item is clicked or activated via keyboard.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>BreadcrumbItem interface</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>label</code></td>
+        <td><code>string?</code></td>
+        <td>Display text for the item.</td>
+      </tr>
+      <tr>
+        <td><code>url</code></td>
+        <td><code>string?</code></td>
+        <td>External href URL.</td>
+      </tr>
+      <tr>
+        <td><code>routerLink</code></td>
+        <td><code>string | string[]</code></td>
+        <td>Angular RouterLink for in-app navigation.</td>
+      </tr>
+      <tr>
+        <td><code>icon</code></td>
+        <td><code>string?</code></td>
+        <td>Icon class name rendered before the label.</td>
+      </tr>
+      <tr>
+        <td><code>target</code></td>
+        <td><code>string?</code></td>
+        <td>Anchor target (e.g. <code>_blank</code>).</td>
+      </tr>
+      <tr>
+        <td><code>disabled</code></td>
+        <td><code>boolean?</code></td>
+        <td>When true, the item is non-interactive.</td>
+      </tr>
+      <tr>
+        <td><code>styleClass</code></td>
+        <td><code>string?</code></td>
+        <td>Extra CSS class on the item.</td>
+      </tr>
+      <tr>
+        <td><code>command</code></td>
+        <td><code>(event: BreadcrumbItemClickEvent) => void</code></td>
+        <td>Callback invoked when the item is activated.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+

@@ -188,6 +188,10 @@
     "./image-compare": {
       "esm2022": "./esm2022/image-compare/index.mjs",
       "esm": "./esm2022/image-compare/index.mjs"
+    },
+    "./breadcrumb": {
+      "esm2022": "./esm2022/breadcrumb/index.mjs",
+      "esm": "./esm2022/breadcrumb/index.mjs"
     }
   },
   "typesVersions": {
@@ -299,6 +303,9 @@
       ],
       "image-compare": [
         "./image-compare/index.d.ts"
+      ],
+      "breadcrumb": [
+        "./breadcrumb/index.d.ts"
       ]
     }
   }

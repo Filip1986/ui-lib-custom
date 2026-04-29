@@ -1,0 +1,87 @@
+<ol class="ui-lib-breadcrumb__list">
+  @for (item of allItems(); track $index) {
+    <li
+      class="ui-lib-breadcrumb__item"
+      [class.ui-lib-breadcrumb__item--active]="isLastItem($index)"
+      [class]="item.styleClass ? 'ui-lib-breadcrumb__item ' + item.styleClass : 'ui-lib-breadcrumb__item'"
+    >
+      <!-- Anchor with routerLink -->
+      @if (item.routerLink && isClickable(item) && !isLastItem($index)) {
+        <a
+          class="ui-lib-breadcrumb__link"
+          [routerLink]="item.routerLink"
+          [attr.target]="item.target ?? null"
+          (click)="onItemClick($event, item)"
+        >
+          @if (item.icon) {
+            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+          }
+          @if (item.label) {
+            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          }
+        </a>
+      }
+
+      <!-- Anchor with external url -->
+      @else if (item.url && isClickable(item) && !isLastItem($index)) {
+        <a
+          class="ui-lib-breadcrumb__link"
+          [href]="item.url"
+          [attr.target]="item.target ?? null"
+          (click)="onItemClick($event, item)"
+        >
+          @if (item.icon) {
+            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+          }
+          @if (item.label) {
+            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          }
+        </a>
+      }
+
+      <!-- Button for command-only items (no url / routerLink) -->
+      @else if (item.command && isClickable(item) && !isLastItem($index)) {
+        <button
+          type="button"
+          class="ui-lib-breadcrumb__link ui-lib-breadcrumb__link--button"
+          [attr.aria-disabled]="item.disabled ? 'true' : null"
+          (click)="onItemClick($event, item)"
+          (keydown)="onItemKeyDown($event, item)"
+        >
+          @if (item.icon) {
+            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+          }
+          @if (item.label) {
+            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          }
+        </button>
+      }
+
+      <!-- Static / disabled / active (last) item -->
+      @else {
+        <span
+          class="ui-lib-breadcrumb__current"
+          [attr.aria-current]="isLastItem($index) ? 'page' : null"
+          [attr.aria-disabled]="item.disabled ? 'true' : null"
+        >
+          @if (item.icon) {
+            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+          }
+          @if (item.label) {
+            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          }
+        </span>
+      }
+
+      <!-- Separator (hidden from screen readers) -->
+      @if (!isLastItem($index)) {
+        <span class="ui-lib-breadcrumb__separator" aria-hidden="true">
+          @if (separatorTemplate(); as sepTpl) {
+            <ng-container [ngTemplateOutlet]="sepTpl" />
+          }
+        </span>
+      }
+    </li>
+  }
+</ol>
+

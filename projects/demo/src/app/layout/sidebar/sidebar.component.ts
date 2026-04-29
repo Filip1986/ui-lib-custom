@@ -364,7 +364,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/breadcrumb',
           group: 'Menu',
-          badge: 'TODO',
         },
         {
           label: 'ContextMenu',

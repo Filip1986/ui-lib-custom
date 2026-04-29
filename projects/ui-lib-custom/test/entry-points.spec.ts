@@ -52,6 +52,7 @@ import type * as UiLibTreeSelect from 'ui-lib-custom/tree-select';
 import type * as UiLibGalleria from 'ui-lib-custom/galleria';
 import type * as UiLibImage from 'ui-lib-custom/image';
 import type * as UiLibImageCompare from 'ui-lib-custom/image-compare';
+import type * as UiLibBreadcrumb from 'ui-lib-custom/breadcrumb';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -383,5 +384,11 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.ImageCompareComponent).toBeDefined();
     expect(mod.ImageCompare).toBeDefined();
     expect(mod.IMAGE_COMPARE_DEFAULT_VALUE).toBeDefined();
+  });
+
+  it('should import from breadcrumb', async (): Promise<void> => {
+    const mod: typeof UiLibBreadcrumb = await import('ui-lib-custom/breadcrumb');
+    expect(mod.Breadcrumb).toBeDefined();
+    expect(mod.BREADCRUMB_DEFAULT_ARIA_LABEL).toBeDefined();
   });
 });
