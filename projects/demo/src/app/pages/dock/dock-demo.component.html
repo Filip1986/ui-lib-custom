@@ -1,0 +1,420 @@
+<div class="demo-page">
+  <div class="demo-page__header">
+    <h1 class="demo-page__title">Dock</h1>
+    <p class="demo-page__description">
+      A macOS-style icon bar with a hover magnification effect. Items scale up smoothly when
+      hovered, with neighbouring items receiving a proportional cascade. Supports four positions
+      (bottom, top, left, right), three design variants, and three size tokens.
+    </p>
+  </div>
+
+  <!-- ── Basic ──────────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
+      Default dock positioned at the bottom with the material variant and magnification enabled.
+      Hover over items to see the magnification effect; click to trigger the command.
+    </p>
+    <div class="demo-section__preview demo-section__preview--centered">
+      <ui-lib-dock
+        [items]="osItems"
+        position="bottom"
+        variant="material"
+        size="md"
+      />
+    </div>
+    <div class="demo-section__code">
+      <pre><code>&#123;&#125; osItems: DockItem[] = [
+  &#123; label: 'Finder', icon: 'pi pi-folder', command: handler &#125;,
+  &#123; label: 'Terminal', icon: 'pi pi-code', command: handler &#125;,
+  // ...
+];
+
+&lt;ui-lib-dock [items]="osItems" position="bottom" variant="material" /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Variants ───────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
+      Three design variants are available: <code>material</code> (frosted glass),
+      <code>bootstrap</code> (solid background), and <code>minimal</code> (no background or border).
+    </p>
+
+    @for (v of variants; track v) {
+      <div class="demo-section__variant-row">
+        <span class="demo-section__variant-label">{{ v }}</span>
+        <ui-lib-dock
+          [items]="osItems"
+          position="bottom"
+          [variant]="v"
+          size="md"
+        />
+      </div>
+    }
+
+    <div class="demo-section__code">
+      <pre><code>&lt;ui-lib-dock [items]="items" variant="material" /&gt;
+&lt;ui-lib-dock [items]="items" variant="bootstrap" /&gt;
+&lt;ui-lib-dock [items]="items" variant="minimal" /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Sizes ──────────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">
+      The <code>size</code> input controls icon and item dimensions via design tokens.
+    </p>
+
+    @for (s of sizes; track s) {
+      <div class="demo-section__variant-row">
+        <span class="demo-section__variant-label">{{ s }}</span>
+        <ui-lib-dock
+          [items]="osItems"
+          position="bottom"
+          variant="material"
+          [size]="s"
+        />
+      </div>
+    }
+
+    <div class="demo-section__code">
+      <pre><code>&lt;ui-lib-dock [items]="items" size="sm" /&gt;
+&lt;ui-lib-dock [items]="items" size="md" /&gt;
+&lt;ui-lib-dock [items]="items" size="lg" /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Positions ──────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Positions</h2>
+    <p class="demo-section__description">
+      The dock can be anchored to any edge of its container. For vertical positions
+      (<code>left</code>, <code>right</code>), the list is rendered as a column.
+    </p>
+
+    <div class="demo-positions-grid">
+      @for (p of positions; track p) {
+        <div class="demo-position-cell">
+          <span class="demo-section__variant-label">{{ p }}</span>
+          <ui-lib-dock
+            [items]="osItems.slice(0, 5)"
+            [position]="p"
+            variant="material"
+            size="sm"
+          />
+        </div>
+      }
+    </div>
+
+    <div class="demo-section__code">
+      <pre><code>&lt;ui-lib-dock [items]="items" position="bottom" /&gt;
+&lt;ui-lib-dock [items]="items" position="top" /&gt;
+&lt;ui-lib-dock [items]="items" position="left" /&gt;
+&lt;ui-lib-dock [items]="items" position="right" /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── No magnification ───────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">No Magnification</h2>
+    <p class="demo-section__description">
+      Set <code>[magnification]="false"</code> to render a static dock without the scale
+      animation — useful in compact layouts or for users who prefer reduced motion.
+    </p>
+    <div class="demo-section__preview demo-section__preview--centered">
+      <ui-lib-dock
+        [items]="osItems"
+        position="bottom"
+        variant="material"
+        [magnification]="false"
+      />
+    </div>
+    <div class="demo-section__code">
+      <pre><code>&lt;ui-lib-dock [items]="items" [magnification]="false" /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Disabled items ─────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Disabled Items</h2>
+    <p class="demo-section__description">
+      Individual items can be disabled by setting <code>disabled: true</code>. Disabled items
+      are styled with reduced opacity, are not interactive, and are announced to screen readers
+      via <code>aria-disabled</code>.
+    </p>
+    <div class="demo-section__preview demo-section__preview--centered">
+      <ui-lib-dock
+        [items]="itemsWithDisabled"
+        position="bottom"
+        variant="material"
+      />
+    </div>
+    <div class="demo-section__code">
+      <pre><code>const items: DockItem[] = [
+  &#123; label: 'Home', icon: 'pi pi-home', command: handler &#125;,
+  &#123; label: 'Search', icon: 'pi pi-search', disabled: true &#125;,
+  // ...
+];</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Link items ─────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Link Items</h2>
+    <p class="demo-section__description">
+      Items with a <code>url</code> render as <code>&lt;a href&gt;</code> anchors.
+      Items with <code>routerLink</code> use Angular's router. Items with only a
+      <code>command</code> render as <code>&lt;button&gt;</code> elements.
+    </p>
+    <div class="demo-section__preview demo-section__preview--centered">
+      <ui-lib-dock
+        [items]="linkItems"
+        position="bottom"
+        variant="material"
+      />
+    </div>
+    <div class="demo-section__code">
+      <pre><code>// Anchor with external URL
+&#123; label: 'Anthropic', icon: 'pi pi-external-link', url: 'https://anthropic.com', target: '_blank' &#125;
+
+// Angular RouterLink
+&#123; label: 'Home', icon: 'pi pi-home', routerLink: '/' &#125;
+
+// Button with command
+&#123; label: 'Settings', icon: 'pi pi-cog', command: handler &#125;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Interactive playground ────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Interactive Playground</h2>
+    <p class="demo-section__description">
+      Adjust variant, size, position, and magnification settings below to explore combinations.
+    </p>
+
+    <div class="demo-playground">
+      <!-- Controls -->
+      <div class="demo-playground__controls">
+        <div class="demo-playground__control-group">
+          <label class="demo-playground__label">Variant</label>
+          <div class="demo-playground__buttons">
+            @for (v of variants; track v) {
+              <button
+                type="button"
+                class="demo-playground__btn"
+                [class.demo-playground__btn--active]="variant() === v"
+                (click)="setVariant(v)"
+              >{{ v }}</button>
+            }
+          </div>
+        </div>
+
+        <div class="demo-playground__control-group">
+          <label class="demo-playground__label">Size</label>
+          <div class="demo-playground__buttons">
+            @for (s of sizes; track s) {
+              <button
+                type="button"
+                class="demo-playground__btn"
+                [class.demo-playground__btn--active]="size() === s"
+                (click)="setSize(s)"
+              >{{ s }}</button>
+            }
+          </div>
+        </div>
+
+        <div class="demo-playground__control-group">
+          <label class="demo-playground__label">Position</label>
+          <div class="demo-playground__buttons">
+            @for (p of positions; track p) {
+              <button
+                type="button"
+                class="demo-playground__btn"
+                [class.demo-playground__btn--active]="position() === p"
+                (click)="setPosition(p)"
+              >{{ p }}</button>
+            }
+          </div>
+        </div>
+
+        <div class="demo-playground__control-group">
+          <label class="demo-playground__label">Magnification</label>
+          <div class="demo-playground__buttons">
+            <button
+              type="button"
+              class="demo-playground__btn"
+              [class.demo-playground__btn--active]="magnification()"
+              (click)="magnification.set(true)"
+            >On</button>
+            <button
+              type="button"
+              class="demo-playground__btn"
+              [class.demo-playground__btn--active]="!magnification()"
+              (click)="magnification.set(false)"
+            >Off</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live preview -->
+      <div class="demo-playground__preview">
+        <ui-lib-dock
+          [items]="osItems"
+          [variant]="variant()"
+          [size]="size()"
+          [position]="position()"
+          [magnification]="magnification()"
+          [magnificationLevel]="magnificationLevel()"
+          (itemClick)="onItemClick($event)"
+        />
+      </div>
+
+      @if (lastEvent()) {
+        <div class="demo-playground__event">
+          <span class="demo-playground__event-label">Last event:</span>
+          {{ lastEvent() }}
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ── API ────────────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 class="demo-section__subtitle">Dock Inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>items</code></td>
+          <td><code>DockItem[]</code></td>
+          <td><code>[]</code></td>
+          <td>Array of items to display in the dock.</td>
+        </tr>
+        <tr>
+          <td><code>position</code></td>
+          <td><code>'bottom' | 'top' | 'left' | 'right'</code></td>
+          <td><code>'bottom'</code></td>
+          <td>Edge of the container where the dock is anchored.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design-system variant. Falls back to ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Controls item and icon dimensions via design tokens.</td>
+        </tr>
+        <tr>
+          <td><code>magnification</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Whether the hover magnification effect is enabled.</td>
+        </tr>
+        <tr>
+          <td><code>magnificationLevel</code></td>
+          <td><code>number</code></td>
+          <td><code>1.5</code></td>
+          <td>Maximum scale factor applied to the directly hovered item. Values 1.2–2.5 work well.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS class appended to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-section__subtitle">Dock Outputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>itemClick</code></td>
+          <td><code>DockItemCommandEvent</code></td>
+          <td>Emitted when any enabled item is clicked or activated via keyboard.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-section__subtitle">DockItem Interface</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string</code></td>
+          <td>Accessible label and tooltip text shown on hover.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string</code></td>
+          <td>Icon class(es) applied to the icon element (e.g. <code>'pi pi-home'</code>).</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td>When true, the item is non-interactive and styled as disabled.</td>
+        </tr>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean</code></td>
+          <td>When explicitly false, the item is excluded from the rendered list.</td>
+        </tr>
+        <tr>
+          <td><code>command</code></td>
+          <td><code>(event: DockItemCommandEvent) =&gt; void</code></td>
+          <td>Callback invoked when the item is activated. Renders as a button.</td>
+        </tr>
+        <tr>
+          <td><code>url</code></td>
+          <td><code>string</code></td>
+          <td>External URL. Renders as an <code>&lt;a href&gt;</code> element.</td>
+        </tr>
+        <tr>
+          <td><code>routerLink</code></td>
+          <td><code>string | string[]</code></td>
+          <td>Angular Router link. Renders as a <code>[routerLink]</code> anchor.</td>
+        </tr>
+        <tr>
+          <td><code>target</code></td>
+          <td><code>string</code></td>
+          <td>Anchor <code>target</code> attribute (e.g. <code>'_blank'</code>).</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string</code></td>
+          <td>Extra CSS class added to the item list element.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

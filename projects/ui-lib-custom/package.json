@@ -196,6 +196,10 @@
     "./context-menu": {
       "esm2022": "./esm2022/context-menu/index.mjs",
       "esm": "./esm2022/context-menu/index.mjs"
+    },
+    "./dock": {
+      "esm2022": "./esm2022/dock/index.mjs",
+      "esm": "./esm2022/dock/index.mjs"
     }
   },
   "typesVersions": {
@@ -313,6 +317,9 @@
       ],
       "context-menu": [
         "./context-menu/index.d.ts"
+      ],
+      "dock": [
+        "./dock/index.d.ts"
       ]
     }
   }

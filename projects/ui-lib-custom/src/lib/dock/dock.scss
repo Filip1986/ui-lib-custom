@@ -1,0 +1,353 @@
+// ---------------------------------------------------------------------------
+// Dock component styles
+// ---------------------------------------------------------------------------
+// CSS variable naming: --uilib-dock-{property}[-{variant}][-{state}]
+// ---------------------------------------------------------------------------
+
+ui-lib-dock {
+  // ── Component tokens ───────────────────────────────────────────────────────
+
+  --uilib-dock-item-size-sm: 2.5rem;
+  --uilib-dock-item-size-md: 3.5rem;
+  --uilib-dock-item-size-lg: 4.5rem;
+
+  --uilib-dock-icon-size-sm: 1.25rem;
+  --uilib-dock-icon-size-md: 1.75rem;
+  --uilib-dock-icon-size-lg: 2.25rem;
+
+  --uilib-dock-gap: var(--uilib-spacing-2, 0.5rem);
+  --uilib-dock-padding: var(--uilib-spacing-3, 0.75rem);
+  --uilib-dock-radius: var(--uilib-radius-xl, 1.25rem);
+
+  --uilib-dock-bg: rgba(255, 255, 255, 0.7);
+  --uilib-dock-border-color: rgba(0, 0, 0, 0.08);
+  --uilib-dock-shadow: var(--uilib-shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.12));
+
+  --uilib-dock-item-bg: transparent;
+  --uilib-dock-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
+  --uilib-dock-item-radius: var(--uilib-radius-lg, 0.75rem);
+  --uilib-dock-item-color: var(--uilib-color-neutral-700, #374151);
+  --uilib-dock-item-color-hover: var(--uilib-color-neutral-900, #111827);
+  --uilib-dock-item-color-disabled: var(--uilib-color-neutral-300, #d1d5db);
+  --uilib-dock-item-transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.12s ease;
+
+  --uilib-dock-tooltip-bg: var(--uilib-color-neutral-900, #111827);
+  --uilib-dock-tooltip-color: #ffffff;
+  --uilib-dock-tooltip-font-size: 0.75rem;
+  --uilib-dock-tooltip-padding: 0.25rem 0.625rem;
+  --uilib-dock-tooltip-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-dock-tooltip-shadow: var(--uilib-shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.15));
+
+  // ── Item size (driven by size token) ──────────────────────────────────────
+  --uilib-dock-item-size: var(--uilib-dock-item-size-md);
+  --uilib-dock-icon-size: var(--uilib-dock-icon-size-md);
+
+  display: block;
+  position: relative;
+}
+
+// ── Size modifiers ────────────────────────────────────────────────────────────
+
+ui-lib-dock.ui-lib-dock--size-sm {
+  --uilib-dock-item-size: var(--uilib-dock-item-size-sm);
+  --uilib-dock-icon-size: var(--uilib-dock-icon-size-sm);
+}
+
+ui-lib-dock.ui-lib-dock--size-lg {
+  --uilib-dock-item-size: var(--uilib-dock-item-size-lg);
+  --uilib-dock-icon-size: var(--uilib-dock-icon-size-lg);
+}
+
+// ── Container ─────────────────────────────────────────────────────────────────
+
+ui-lib-dock .ui-lib-dock__container {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+// ── List ──────────────────────────────────────────────────────────────────────
+
+ui-lib-dock .ui-lib-dock__list {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--uilib-dock-gap);
+  list-style: none;
+  margin: 0;
+  padding: var(--uilib-dock-padding);
+  background: var(--uilib-dock-bg);
+  border: 1px solid var(--uilib-dock-border-color);
+  border-radius: var(--uilib-dock-radius);
+  box-shadow: var(--uilib-dock-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+// ── Item ──────────────────────────────────────────────────────────────────────
+
+ui-lib-dock .ui-lib-dock__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // transform-origin at bottom so items grow upward from the bar
+  transform-origin: bottom center;
+  transition: var(--uilib-dock-item-transition);
+  will-change: transform;
+}
+
+// ── Item link / button / static span ──────────────────────────────────────────
+
+ui-lib-dock .ui-lib-dock__item-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-dock-item-size);
+  height: var(--uilib-dock-item-size);
+  border-radius: var(--uilib-dock-item-radius);
+  background: var(--uilib-dock-item-bg);
+  color: var(--uilib-dock-item-color);
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background-color 0.12s ease;
+}
+
+ui-lib-dock .ui-lib-dock__item-link:hover,
+ui-lib-dock .ui-lib-dock__item-link:focus-visible {
+  background: var(--uilib-dock-item-bg-hover);
+  color: var(--uilib-dock-item-color-hover);
+}
+
+ui-lib-dock .ui-lib-dock__item-link:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 40%, transparent);
+}
+
+ui-lib-dock .ui-lib-dock__item-link--static {
+  cursor: default;
+}
+
+// ── Disabled state ────────────────────────────────────────────────────────────
+
+ui-lib-dock .ui-lib-dock__item--disabled .ui-lib-dock__item-link {
+  color: var(--uilib-dock-item-color-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// ── Icon ──────────────────────────────────────────────────────────────────────
+
+ui-lib-dock .ui-lib-dock__item-icon {
+  font-size: var(--uilib-dock-icon-size);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+
+ui-lib-dock .ui-lib-dock__tooltip {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: var(--uilib-dock-tooltip-bg);
+  color: var(--uilib-dock-tooltip-color);
+  font-size: var(--uilib-dock-tooltip-font-size);
+  padding: var(--uilib-dock-tooltip-padding);
+  border-radius: var(--uilib-dock-tooltip-radius);
+  box-shadow: var(--uilib-dock-tooltip-shadow);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.85;
+  transition:
+    opacity 0.12s ease,
+    scale 0.12s ease;
+  z-index: 10;
+}
+
+ui-lib-dock .ui-lib-dock__item:hover .ui-lib-dock__tooltip {
+  opacity: 1;
+  scale: 1;
+}
+
+// ── Position variants ─────────────────────────────────────────────────────────
+
+// bottom (default): items grow upward, tooltip above
+ui-lib-dock.ui-lib-dock--position-bottom {
+  .ui-lib-dock__container {
+    align-items: flex-end;
+  }
+
+  .ui-lib-dock__list {
+    align-items: flex-end;
+  }
+
+  .ui-lib-dock__item {
+    transform-origin: bottom center;
+  }
+
+  .ui-lib-dock__tooltip {
+    bottom: calc(100% + 0.5rem);
+    top: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+// top: items grow downward, tooltip below
+ui-lib-dock.ui-lib-dock--position-top {
+  .ui-lib-dock__container {
+    align-items: flex-start;
+  }
+
+  .ui-lib-dock__list {
+    align-items: flex-start;
+  }
+
+  .ui-lib-dock__item {
+    transform-origin: top center;
+    flex-direction: column-reverse;
+  }
+
+  .ui-lib-dock__tooltip {
+    top: calc(100% + 0.5rem);
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
+// left: vertical layout, items grow rightward, tooltip to the right
+ui-lib-dock.ui-lib-dock--position-left {
+  .ui-lib-dock__container {
+    align-items: flex-start;
+  }
+
+  .ui-lib-dock__list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ui-lib-dock__item {
+    transform-origin: center left;
+    flex-direction: row;
+  }
+
+  .ui-lib-dock__tooltip {
+    left: calc(100% + 0.5rem);
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    transform: translateY(-50%);
+  }
+}
+
+// right: vertical layout, items grow leftward, tooltip to the left
+ui-lib-dock.ui-lib-dock--position-right {
+  .ui-lib-dock__container {
+    align-items: flex-end;
+  }
+
+  .ui-lib-dock__list {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .ui-lib-dock__item {
+    transform-origin: center right;
+    flex-direction: row-reverse;
+  }
+
+  .ui-lib-dock__tooltip {
+    right: calc(100% + 0.5rem);
+    top: 50%;
+    bottom: auto;
+    left: auto;
+    transform: translateY(-50%);
+  }
+}
+
+// ── Variant: material ─────────────────────────────────────────────────────────
+
+ui-lib-dock.ui-lib-dock--variant-material {
+  --uilib-dock-bg: rgba(255, 255, 255, 0.85);
+  --uilib-dock-border-color: rgba(0, 0, 0, 0.06);
+  --uilib-dock-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
+  --uilib-dock-radius: var(--uilib-radius-xl, 1.25rem);
+  --uilib-dock-item-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-dock-item-bg-hover: var(--uilib-color-primary-50, #eff6ff);
+  --uilib-dock-item-color-hover: var(--uilib-color-primary-700, #1d4ed8);
+}
+
+// ── Variant: bootstrap ────────────────────────────────────────────────────────
+
+ui-lib-dock.ui-lib-dock--variant-bootstrap {
+  --uilib-dock-bg: var(--uilib-color-neutral-100, #f3f4f6);
+  --uilib-dock-border-color: var(--uilib-color-neutral-300, #d1d5db);
+  --uilib-dock-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --uilib-dock-radius: var(--uilib-radius-lg, 0.75rem);
+  --uilib-dock-item-radius: var(--uilib-radius-sm, 0.25rem);
+  --uilib-dock-item-bg-hover: var(--uilib-color-neutral-200, #e5e7eb);
+  --uilib-dock-item-color-hover: var(--uilib-color-neutral-900, #111827);
+
+  .ui-lib-dock__list {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+// ── Variant: minimal ──────────────────────────────────────────────────────────
+
+ui-lib-dock.ui-lib-dock--variant-minimal {
+  --uilib-dock-bg: transparent;
+  --uilib-dock-border-color: transparent;
+  --uilib-dock-shadow: none;
+  --uilib-dock-item-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-dock-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
+
+  .ui-lib-dock__list {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+}
+
+// ── No-magnification modifier ─────────────────────────────────────────────────
+
+ui-lib-dock.ui-lib-dock--no-magnification .ui-lib-dock__item {
+  transition: background-color 0.12s ease;
+}
+
+// ── Dark mode ─────────────────────────────────────────────────────────────────
+
+[data-theme='dark'] ui-lib-dock,
+ui-lib-dock[data-theme='dark'] {
+  --uilib-dock-bg: rgba(30, 30, 30, 0.75);
+  --uilib-dock-border-color: rgba(255, 255, 255, 0.08);
+  --uilib-dock-item-bg-hover: rgba(255, 255, 255, 0.08);
+  --uilib-dock-item-color: var(--uilib-color-neutral-200, #e5e7eb);
+  --uilib-dock-item-color-hover: #ffffff;
+  --uilib-dock-tooltip-bg: var(--uilib-color-neutral-100, #f3f4f6);
+  --uilib-dock-tooltip-color: var(--uilib-color-neutral-900, #111827);
+}
+
+[data-theme='dark'] ui-lib-dock.ui-lib-dock--variant-bootstrap,
+ui-lib-dock.ui-lib-dock--variant-bootstrap[data-theme='dark'] {
+  --uilib-dock-bg: var(--uilib-color-neutral-800, #1f2937);
+  --uilib-dock-border-color: var(--uilib-color-neutral-700, #374151);
+  --uilib-dock-item-bg-hover: var(--uilib-color-neutral-700, #374151);
+}

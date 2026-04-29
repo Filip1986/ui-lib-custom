@@ -376,7 +376,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/dock',
           group: 'Menu',
-          badge: 'TODO',
         },
         {
           label: 'Menu',

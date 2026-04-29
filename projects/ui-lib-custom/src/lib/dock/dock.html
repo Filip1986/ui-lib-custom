@@ -1,0 +1,81 @@
+<nav class="ui-lib-dock__container" [attr.aria-label]="'Dock'">
+  <ul class="ui-lib-dock__list" role="list">
+    @for (item of visibleItems(); track $index) {
+      <li
+        class="ui-lib-dock__item"
+        [class.ui-lib-dock__item--disabled]="item.disabled"
+        [class]="item.styleClass ? 'ui-lib-dock__item ' + item.styleClass : 'ui-lib-dock__item'"
+        [style.transform]="itemScale($index)"
+        (mouseenter)="onItemMouseEnter($index)"
+        (mouseleave)="onItemMouseLeave()"
+      >
+        <!-- Anchor with routerLink -->
+        @if (item.routerLink && isClickable(item)) {
+          <a
+            class="ui-lib-dock__item-link"
+            [routerLink]="item.routerLink"
+            [attr.target]="item.target ?? null"
+            [attr.aria-label]="item.label ?? null"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            (click)="onItemClick($event, item)"
+          >
+            @if (item.icon) {
+              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+          </a>
+        }
+
+        <!-- Anchor with external URL -->
+        @else if (item.url && isClickable(item)) {
+          <a
+            class="ui-lib-dock__item-link"
+            [href]="item.url"
+            [attr.target]="item.target ?? null"
+            [attr.aria-label]="item.label ?? null"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            (click)="onItemClick($event, item)"
+          >
+            @if (item.icon) {
+              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+          </a>
+        }
+
+        <!-- Button for command-only items -->
+        @else if (item.command && isClickable(item)) {
+          <button
+            type="button"
+            class="ui-lib-dock__item-link"
+            [attr.aria-label]="item.label ?? null"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [disabled]="item.disabled ? true : null"
+            (click)="onItemClick($event, item)"
+            (keydown)="onItemKeyDown($event, item)"
+          >
+            @if (item.icon) {
+              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+          </button>
+        }
+
+        <!-- Static (no interaction) item -->
+        @else {
+          <span
+            class="ui-lib-dock__item-link ui-lib-dock__item-link--static"
+            [attr.aria-label]="item.label ?? null"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+          >
+            @if (item.icon) {
+              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+          </span>
+        }
+
+        <!-- Tooltip label -->
+        @if (item.label) {
+          <div class="ui-lib-dock__tooltip" aria-hidden="true">{{ item.label }}</div>
+        }
+      </li>
+    }
+  </ul>
+</nav>
