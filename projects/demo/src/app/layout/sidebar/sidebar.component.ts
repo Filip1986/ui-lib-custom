@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  Injector,
+  signal,
+} from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
@@ -31,6 +39,9 @@ export interface NavItem {
 })
 export class SidebarComponent {
   private readonly router: Router = inject(Router);
+  private readonly elementRef: ElementRef<HTMLElement> =
+    inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector: Injector = inject(Injector);
 
   public readonly isContentScrolled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly menuItems: WritableSignal<NavItem[]> = signal<NavItem[]>([
@@ -764,6 +775,7 @@ export class SidebarComponent {
   constructor() {
     // Expand the section that contains the active route on initial load (including page refresh).
     this.expandActiveSection(this.router.url);
+    this.scrollToActiveItem();
 
     // Re-expand on every subsequent navigation so the correct section stays open.
     this.router.events
@@ -773,6 +785,7 @@ export class SidebarComponent {
       )
       .subscribe((event: NavigationEnd): void => {
         this.expandActiveSection(event.urlAfterRedirects);
+        this.scrollToActiveItem();
       });
   }
 
@@ -800,6 +813,46 @@ export class SidebarComponent {
 
         return item;
       })
+    );
+  }
+
+  /**
+   * After the next render (so the DOM reflects the newly-expanded section),
+   * scroll the sidebar content container so the active link is fully in view.
+   */
+  private scrollToActiveItem(): void {
+    afterNextRender(
+      (): void => {
+        const sidebarContent: HTMLElement | null =
+          this.elementRef.nativeElement.querySelector<HTMLElement>('.sidebar-content');
+        const activeLink: HTMLElement | null =
+          this.elementRef.nativeElement.querySelector<HTMLElement>('.nav-link.active');
+
+        if (!sidebarContent || !activeLink) {
+          return;
+        }
+
+        // Compute the active link's top/bottom relative to the scroll container.
+        const containerRect: DOMRect = sidebarContent.getBoundingClientRect();
+        const linkRect: DOMRect = activeLink.getBoundingClientRect();
+
+        const linkRelativeTop: number = linkRect.top - containerRect.top + sidebarContent.scrollTop;
+        const linkRelativeBottom: number = linkRelativeTop + linkRect.height;
+
+        const visibleTop: number = sidebarContent.scrollTop;
+        const visibleBottom: number = visibleTop + sidebarContent.clientHeight;
+
+        const padding: number = 8;
+
+        if (linkRelativeTop < visibleTop) {
+          // Link is above the visible area — scroll up to reveal it.
+          sidebarContent.scrollTop = linkRelativeTop - padding;
+        } else if (linkRelativeBottom > visibleBottom) {
+          // Link is below the visible area — scroll down to reveal it.
+          sidebarContent.scrollTop = linkRelativeBottom - sidebarContent.clientHeight + padding;
+        }
+      },
+      { injector: this.injector }
     );
   }
 
