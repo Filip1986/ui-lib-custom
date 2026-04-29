@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs/operators';
 import { Icon } from 'ui-lib-custom/icon';
 
 export interface NavItem {
@@ -28,6 +30,8 @@ export interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
+  private readonly router: Router = inject(Router);
+
   public readonly isContentScrolled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly menuItems: WritableSignal<NavItem[]> = signal<NavItem[]>([
     {
@@ -755,6 +759,48 @@ export class SidebarComponent {
   public onSidebarScroll(event: Event): void {
     const scrollElement: HTMLElement | null = event.target as HTMLElement | null;
     this.isContentScrolled.set((scrollElement?.scrollTop ?? 0) > 0);
+  }
+
+  constructor() {
+    // Expand the section that contains the active route on initial load (including page refresh).
+    this.expandActiveSection(this.router.url);
+
+    // Re-expand on every subsequent navigation so the correct section stays open.
+    this.router.events
+      .pipe(
+        filter((event: object): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
+      .subscribe((event: NavigationEnd): void => {
+        this.expandActiveSection(event.urlAfterRedirects);
+      });
+  }
+
+  /**
+   * Expand any top-level menu section whose sub-items contain a route matching
+   * the given URL path. Already-expanded sections are left untouched.
+   */
+  private expandActiveSection(url: string): void {
+    // Strip query-string and fragment so plain route comparison works.
+    const urlPath: string = (url.split('?')[0] ?? '').split('#')[0] ?? '';
+
+    this.menuItems.update((items: NavItem[]): NavItem[] =>
+      items.map((item: NavItem): NavItem => {
+        if (!item.items) {
+          return item;
+        }
+
+        const hasActiveChild: boolean = item.items.some(
+          (sub: NavItem): boolean => Boolean(sub.route) && sub.route === urlPath
+        );
+
+        if (hasActiveChild && !item.expanded) {
+          return { ...item, expanded: true };
+        }
+
+        return item;
+      })
+    );
   }
 
   private buildGroupedSubmenuItems(items: NavItem[]): NavItem[] {
