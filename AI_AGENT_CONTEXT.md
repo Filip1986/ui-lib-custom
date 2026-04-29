@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Textarea` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Galleria` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -68,6 +69,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-29 [image session]
+Changed:
+  - projects/ui-lib-custom/src/lib/image/ (new — types, constants, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/image/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (image added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (image import test added)
+  - projects/demo/src/app/pages/image/ (full demo — TS/HTML/SCSS, 9 sections + API table)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Image)
+  - AI_AGENT_CONTEXT.md (marked Image complete)
+State: Image component fully complete. PrimeNG-inspired image display component with optional
+  preview overlay (lightbox). Hover indicator (eye icon by default) reveals on hover when
+  preview=true. Preview overlay features toolbar with zoom-in/zoom-out (clamped 0.1–5),
+  rotate-left/rotate-right (90° steps), and close button. Backdrop click and Escape key close
+  the overlay. Error state with fallback src (errorSrc) or custom #imageError template.
+  Custom #imageIndicator template slot. Two-way [(previewVisible)] binding. Three variants
+  (material/bootstrap/minimal), three sizes (sm/md/lg), signal inputs/model outputs throughout,
+  ViewEncapsulation.None + OnPush, ThemeConfigService variant inheritance.
+  30/30 unit tests passing. 52/52 entry-point tests passing. ESLint clean. Build zero errors.
+  Demo build zero errors (only pre-existing budget warnings in button/date-picker).
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/image/ projects/demo/src/app/pages/image/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — all entry points ✔ Built (including ui-lib-custom/image, zero errors),
+  npm run build:demo — DEMO BUILD EXIT:0 (zero errors),
+  npm test -- --testPathPatterns=src/lib/image/image.spec --no-coverage (30/30 PASS),
+  npm test -- --testPathPatterns=entry-points --no-coverage (52/52 PASS).
+Terminal notes: .bin/ shim files fail in bash with SyntaxError — use npm scripts or
+  node ./node_modules/eslint/bin/eslint.js directly. Background terminal output
+  requires get_terminal_output polling. Shell: bash.exe.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Date: 2026-04-29 [galleria session]
 Changed:

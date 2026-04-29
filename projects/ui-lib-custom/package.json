@@ -180,6 +180,10 @@
     "./galleria": {
       "esm2022": "./esm2022/galleria/index.mjs",
       "esm": "./esm2022/galleria/index.mjs"
+    },
+    "./image": {
+      "esm2022": "./esm2022/image/index.mjs",
+      "esm": "./esm2022/image/index.mjs"
     }
   },
   "typesVersions": {
@@ -285,6 +289,9 @@
       ],
       "galleria": [
         "./galleria/index.d.ts"
+      ],
+      "image": [
+        "./image/index.d.ts"
       ]
     }
   }

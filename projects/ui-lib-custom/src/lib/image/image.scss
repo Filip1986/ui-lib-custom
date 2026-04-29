@@ -1,0 +1,229 @@
+// ─── Image CSS variables ──────────────────────────────────────────────────────
+ui-lib-image {
+  --uilib-image-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-image-indicator-bg: rgba(0, 0, 0, 0.5);
+  --uilib-image-indicator-bg-hover: rgba(0, 0, 0, 0.7);
+  --uilib-image-indicator-color: #ffffff;
+  --uilib-image-indicator-icon-size-sm: 1rem;
+  --uilib-image-indicator-icon-size-md: 1.25rem;
+  --uilib-image-indicator-icon-size-lg: 1.5rem;
+  --uilib-image-mask-bg: rgba(0, 0, 0, 0.9);
+  --uilib-image-toolbar-bg: rgba(0, 0, 0, 0.5);
+  --uilib-image-toolbar-btn-bg: transparent;
+  --uilib-image-toolbar-btn-bg-hover: rgba(255, 255, 255, 0.15);
+  --uilib-image-toolbar-btn-color: #ffffff;
+  --uilib-image-toolbar-btn-color-disabled: rgba(255, 255, 255, 0.35);
+  --uilib-image-toolbar-btn-size: 2.5rem;
+  --uilib-image-toolbar-btn-icon-size: 1.25rem;
+  --uilib-image-toolbar-gap: 0.25rem;
+  --uilib-image-toolbar-padding: 0.5rem;
+  --uilib-image-error-bg: var(--uilib-surface, #f3f4f6);
+  --uilib-image-error-color: var(--uilib-color-muted, #9ca3af);
+  --uilib-image-error-icon-size: 3rem;
+  --uilib-image-preview-transition: transform 0.2s ease;
+}
+// ─── Host ─────────────────────────────────────────────────────────────────────
+.ui-lib-image {
+  display: inline-block;
+  position: relative;
+}
+// ─── Image wrapper ────────────────────────────────────────────────────────────
+.uilib-image__wrapper {
+  display: inline-block;
+  position: relative;
+  line-height: 0;
+  &--previewable {
+    cursor: pointer;
+  }
+}
+// ─── Image element ────────────────────────────────────────────────────────────
+.uilib-image__img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--uilib-image-radius);
+  .ui-lib-image--size-sm & {
+    border-radius: calc(var(--uilib-image-radius) * 0.75);
+  }
+  .ui-lib-image--size-lg & {
+    border-radius: calc(var(--uilib-image-radius) * 1.25);
+  }
+}
+// ─── Error placeholder ────────────────────────────────────────────────────────
+.uilib-image__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--uilib-image-error-bg);
+  color: var(--uilib-image-error-color);
+  border-radius: var(--uilib-image-radius);
+  min-width: 4rem;
+  min-height: 4rem;
+  padding: 1rem;
+}
+.uilib-image__error-icon {
+  width: var(--uilib-image-error-icon-size);
+  height: var(--uilib-image-error-icon-size);
+}
+// ─── Preview indicator button ─────────────────────────────────────────────────
+.uilib-image__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  background-color: var(--uilib-image-indicator-bg);
+  color: var(--uilib-image-indicator-color);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--uilib-image-radius);
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease;
+  &--visible {
+    opacity: 1;
+  }
+  &:hover {
+    background-color: var(--uilib-image-indicator-bg-hover);
+  }
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--uilib-color-primary, #6366f1);
+    outline-offset: 2px;
+  }
+}
+.uilib-image__indicator-icon {
+  .ui-lib-image--size-sm & {
+    width: var(--uilib-image-indicator-icon-size-sm);
+    height: var(--uilib-image-indicator-icon-size-sm);
+  }
+  .ui-lib-image--size-md & {
+    width: var(--uilib-image-indicator-icon-size-md);
+    height: var(--uilib-image-indicator-icon-size-md);
+  }
+  .ui-lib-image--size-lg & {
+    width: var(--uilib-image-indicator-icon-size-lg);
+    height: var(--uilib-image-indicator-icon-size-lg);
+  }
+}
+// ─── Preview overlay mask ─────────────────────────────────────────────────────
+.uilib-image__mask {
+  position: fixed;
+  inset: 0;
+  z-index: var(--uilib-z-overlay, 1100);
+  background-color: var(--uilib-image-mask-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+// ─── Toolbar ──────────────────────────────────────────────────────────────────
+.uilib-image__toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--uilib-image-toolbar-gap);
+  padding: var(--uilib-image-toolbar-padding);
+  background-color: var(--uilib-image-toolbar-bg);
+  z-index: 1;
+}
+.uilib-image__toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-image-toolbar-btn-size);
+  height: var(--uilib-image-toolbar-btn-size);
+  padding: 0;
+  background-color: var(--uilib-image-toolbar-btn-bg);
+  color: var(--uilib-image-toolbar-btn-color);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  svg {
+    width: var(--uilib-image-toolbar-btn-icon-size);
+    height: var(--uilib-image-toolbar-btn-icon-size);
+  }
+  &:hover:not(:disabled) {
+    background-color: var(--uilib-image-toolbar-btn-bg-hover);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary, #6366f1);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    color: var(--uilib-image-toolbar-btn-color-disabled);
+    cursor: not-allowed;
+  }
+  &--close {
+    margin-left: auto;
+  }
+}
+// ─── Preview container and image ──────────────────────────────────────────────
+.uilib-image__preview-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  padding: 4rem 1rem 1rem;
+  overflow: hidden;
+}
+.uilib-image__preview-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  transition: var(--uilib-image-preview-transition);
+  transform-origin: center center;
+}
+// ─── Variant: material ────────────────────────────────────────────────────────
+.ui-lib-image--variant-material {
+  .uilib-image__img {
+    box-shadow: var(--uilib-shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.12));
+  }
+  .uilib-image__toolbar {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+// ─── Variant: bootstrap ───────────────────────────────────────────────────────
+.ui-lib-image--variant-bootstrap {
+  .uilib-image__img {
+    border-radius: var(--uilib-radius-sm, 4px);
+    border: 1px solid var(--uilib-color-border, #dee2e6);
+  }
+  .uilib-image__indicator {
+    border-radius: var(--uilib-radius-sm, 4px);
+  }
+  .uilib-image__toolbar-btn {
+    border-radius: var(--uilib-radius-sm, 4px);
+  }
+}
+// ─── Variant: minimal ─────────────────────────────────────────────────────────
+.ui-lib-image--variant-minimal {
+  .uilib-image__img {
+    border-radius: 0;
+  }
+  .uilib-image__indicator {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.55);
+    }
+  }
+  .uilib-image__toolbar-btn {
+    border-radius: 0;
+  }
+}
+// ─── Dark mode ────────────────────────────────────────────────────────────────
+@media (prefers-color-scheme: dark) {
+  ui-lib-image {
+    --uilib-image-error-bg: rgba(255, 255, 255, 0.08);
+    --uilib-image-error-color: rgba(255, 255, 255, 0.4);
+  }
+}

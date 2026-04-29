@@ -331,7 +331,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/image',
           group: 'Media',
-          badge: 'TODO',
         },
         {
           label: 'ImageCompare',
