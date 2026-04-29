@@ -1,0 +1,239 @@
+<app-doc-page-layout [sections]="sections">
+  <div class="doc-header" docHeader>
+    <h1>Textarea</h1>
+    <p class="doc-description">
+      Multi-line text input with optional auto-resize, character counter, floating-label support,
+      three design variants, three sizes, and full Angular forms integration.
+    </p>
+  </div>
+
+  <app-doc-demo-viewport [autoHeight]="true">
+    <div class="examples">
+
+      <!-- Basic -->
+      <section id="basic" data-doc-anchor class="example-section">
+        <h3>a. Basic</h3>
+        <p class="section-text">A simple labeled textarea bound with <code>ngModel</code>.</p>
+        <app-code-preview [code]="snippet('basic')">
+          <ui-lib-card>
+            <div class="stack-sm">
+              <ui-lib-textarea
+                label="Description"
+                placeholder="Enter a description..."
+                [rows]="3"
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="basicValue"
+              />
+              <span class="value-text">Value: "{{ basicValue }}"</span>
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Auto Resize -->
+      <section id="auto-resize" data-doc-anchor class="example-section">
+        <h3>b. Auto Resize</h3>
+        <p class="section-text">
+          When <code>autoResize</code> is true the textarea grows in height automatically to fit
+          its content.
+        </p>
+        <app-code-preview [code]="snippet('autoResize')">
+          <ui-lib-card>
+            <ui-lib-textarea
+              label="Notes"
+              placeholder="Type here — the textarea will grow..."
+              [autoResize]="true"
+              [rows]="3"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="autoResizeValue"
+            />
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Counter -->
+      <section id="counter" data-doc-anchor class="example-section">
+        <h3>c. Counter</h3>
+        <p class="section-text">Display a live character count below the textarea.</p>
+        <app-code-preview [code]="snippet('counter')">
+          <ui-lib-card>
+            <ui-lib-textarea
+              label="Bio"
+              placeholder="Tell us about yourself..."
+              [showCounter]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="counterValue"
+            />
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Max Length -->
+      <section id="max-length" data-doc-anchor class="example-section">
+        <h3>d. Max Length</h3>
+        <p class="section-text">
+          Combine <code>maxLength</code> with <code>showCounter</code> to display a count / limit indicator.
+        </p>
+        <app-code-preview [code]="snippet('maxLength')">
+          <ui-lib-card>
+            <ui-lib-textarea
+              label="Tweet"
+              placeholder="What's happening?"
+              [showCounter]="true"
+              [maxLength]="280"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="maxLengthValue"
+            />
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Sizes -->
+      <section id="sizes" data-doc-anchor class="example-section">
+        <h3>e. Sizes</h3>
+        <p class="section-text">Three size tokens: sm, md, lg.</p>
+        <app-code-preview [code]="snippet('sizes')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <ui-lib-textarea
+                label="Small"
+                size="sm"
+                placeholder="Small (sm)..."
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizeSm"
+              />
+              <ui-lib-textarea
+                label="Medium"
+                size="md"
+                placeholder="Medium (md)..."
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizeMd"
+              />
+              <ui-lib-textarea
+                label="Large"
+                size="lg"
+                placeholder="Large (lg)..."
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="sizeLg"
+              />
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Variants -->
+      <section id="variants" data-doc-anchor class="example-section">
+        <h3>f. Variants</h3>
+        <p class="section-text">Three design variants: material, bootstrap, minimal.</p>
+        <app-code-preview [code]="snippet('variants')">
+          <ui-lib-card>
+            <div class="stack-md">
+              <ui-lib-textarea
+                label="Material"
+                variant="material"
+                placeholder="Material variant..."
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="variantMaterial"
+              />
+              <ui-lib-textarea
+                label="Bootstrap"
+                variant="bootstrap"
+                placeholder="Bootstrap variant..."
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="variantBootstrap"
+              />
+              <ui-lib-textarea
+                label="Minimal"
+                variant="minimal"
+                placeholder="Minimal variant..."
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="variantMinimal"
+              />
+            </div>
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Disabled -->
+      <section id="disabled" data-doc-anchor class="example-section">
+        <h3>g. Disabled</h3>
+        <p class="section-text">The textarea is non-interactive and visually dimmed.</p>
+        <app-code-preview [code]="snippet('disabled')">
+          <ui-lib-card>
+            <ui-lib-textarea
+              label="Comments"
+              [disabled]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="disabledValue"
+            />
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Readonly -->
+      <section id="readonly" data-doc-anchor class="example-section">
+        <h3>h. Read-only</h3>
+        <p class="section-text">Focusable but not editable — content can be selected and copied.</p>
+        <app-code-preview [code]="snippet('readonly')">
+          <ui-lib-card>
+            <ui-lib-textarea
+              label="Terms"
+              [readonly]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="readonlyValue"
+            />
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Invalid -->
+      <section id="invalid" data-doc-anchor class="example-section">
+        <h3>i. Invalid</h3>
+        <p class="section-text">Pass an <code>error</code> string to show a validation message.</p>
+        <app-code-preview [code]="snippet('invalid')">
+          <ui-lib-card>
+            <ui-lib-textarea
+              label="Address"
+              error="This field is required"
+              [required]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="invalidValue"
+            />
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+      <!-- Reactive Forms -->
+      <section id="reactive-forms" data-doc-anchor class="example-section">
+        <h3>j. Reactive Forms</h3>
+        <p class="section-text">
+          Full integration with Angular reactive forms including validation state and error display.
+        </p>
+        <app-code-preview [code]="snippet('reactive')">
+          <ui-lib-card>
+            <form class="stack-md" [formGroup]="form" (ngSubmit)="submitForm()">
+              <ui-lib-textarea
+                label="Feedback"
+                placeholder="Share your thoughts..."
+                [showCounter]="true"
+                [maxLength]="500"
+                [required]="true"
+                [error]="form.controls.feedback.invalid && form.controls.feedback.touched
+                  ? 'Feedback is required'
+                  : null"
+                formControlName="feedback"
+              />
+              <div class="form-actions">
+                <ui-lib-button type="submit">Submit</ui-lib-button>
+              </div>
+            </form>
+            @if (reactiveSubmittedValue) {
+              <p class="value-text">Submitted: "{{ reactiveSubmittedValue }}"</p>
+            }
+          </ui-lib-card>
+        </app-code-preview>
+      </section>
+
+    </div>
+  </app-doc-demo-viewport>
+</app-doc-page-layout>

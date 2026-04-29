@@ -160,6 +160,14 @@
     "./slider": {
       "esm2022": "./esm2022/slider/index.mjs",
       "esm": "./esm2022/slider/index.mjs"
+    },
+    "./textarea": {
+      "esm2022": "./esm2022/textarea/index.mjs",
+      "esm": "./esm2022/textarea/index.mjs"
+    },
+    "./toggle-button": {
+      "esm2022": "./esm2022/toggle-button/index.mjs",
+      "esm": "./esm2022/toggle-button/index.mjs"
     }
   },
   "typesVersions": {
@@ -250,6 +258,12 @@
       ],
       "slider": [
         "./slider/index.d.ts"
+      ],
+      "textarea": [
+        "./textarea/index.d.ts"
+      ],
+      "toggle-button": [
+        "./toggle-button/index.d.ts"
       ]
     }
   }

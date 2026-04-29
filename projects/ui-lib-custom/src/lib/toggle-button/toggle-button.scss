@@ -1,0 +1,241 @@
+// ============================================================
+// ToggleButton component styles
+// CSS custom properties follow the pattern:
+//   --uilib-toggle-button-{property}[-{state}]
+// ============================================================
+
+ui-lib-toggle-button {
+  // --- Size tokens ------------------------------------------------
+  --uilib-toggle-button-height-sm: 2rem;
+  --uilib-toggle-button-height-md: 2.5rem;
+  --uilib-toggle-button-height-lg: 3rem;
+  --uilib-toggle-button-font-size-sm: 0.8125rem;
+  --uilib-toggle-button-font-size-md: 0.875rem;
+  --uilib-toggle-button-font-size-lg: 1rem;
+  --uilib-toggle-button-padding-x-sm: 0.75rem;
+  --uilib-toggle-button-padding-x-md: 1rem;
+  --uilib-toggle-button-padding-x-lg: 1.25rem;
+  --uilib-toggle-button-gap: 0.5rem;
+
+  // --- Shape tokens -----------------------------------------------
+  --uilib-toggle-button-radius: var(--uilib-radius-base, 6px);
+
+  // --- Transition -------------------------------------------------
+  --uilib-toggle-button-transition:
+    background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+  // --- Typography -------------------------------------------------
+  --uilib-toggle-button-font: var(--uilib-font-ui, inherit);
+
+  // --- Off-state colours ------------------------------------------
+  --uilib-toggle-button-bg: transparent;
+  --uilib-toggle-button-border: var(--uilib-color-neutral-300, #d1d5db);
+  --uilib-toggle-button-color: var(--uilib-color-neutral-700, #374151);
+  --uilib-toggle-button-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-200, #e5e7eb) 80%,
+    transparent
+  );
+  --uilib-toggle-button-border-hover: var(--uilib-color-neutral-400, #9ca3af);
+  --uilib-toggle-button-bg-active: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-300, #d1d5db) 60%,
+    transparent
+  );
+
+  // --- On-state colours -------------------------------------------
+  --uilib-toggle-button-checked-bg: var(--uilib-color-primary-500, #6366f1);
+  --uilib-toggle-button-checked-border: var(--uilib-color-primary-500, #6366f1);
+  --uilib-toggle-button-checked-color: var(--uilib-color-neutral-50, #f9fafb);
+  --uilib-toggle-button-checked-bg-hover: var(--uilib-color-primary-600, #4f46e5);
+  --uilib-toggle-button-checked-bg-active: var(--uilib-color-primary-700, #4338ca);
+
+  // --- Focus ring -------------------------------------------------
+  --uilib-toggle-button-focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 35%, transparent);
+
+  display: inline-flex;
+  position: relative;
+  font-family: var(--uilib-toggle-button-font), sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+
+// ----------------------------------------------------------------
+// Disabled host
+// ----------------------------------------------------------------
+ui-lib-toggle-button.ui-lib-toggle-button--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// ----------------------------------------------------------------
+// Inner <button> element
+// ----------------------------------------------------------------
+ui-lib-toggle-button .ui-lib-toggle-button__inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--uilib-toggle-button-gap);
+  padding-inline: var(--uilib-toggle-button-padding-x, var(--uilib-toggle-button-padding-x-md));
+  height: var(--uilib-toggle-button-height, var(--uilib-toggle-button-height-md));
+  font-size: var(--uilib-toggle-button-font-size, var(--uilib-toggle-button-font-size-md));
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1;
+  border: 1px solid var(--uilib-toggle-button-border);
+  border-radius: var(--uilib-toggle-button-radius);
+  background-color: var(--uilib-toggle-button-bg);
+  color: var(--uilib-toggle-button-color);
+  cursor: inherit;
+  transition: var(--uilib-toggle-button-transition);
+  white-space: nowrap;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+ui-lib-toggle-button:not(.ui-lib-toggle-button--disabled) .ui-lib-toggle-button__inner:hover {
+  background-color: var(--uilib-toggle-button-bg-hover);
+  border-color: var(--uilib-toggle-button-border-hover);
+}
+
+ui-lib-toggle-button:not(.ui-lib-toggle-button--disabled) .ui-lib-toggle-button__inner:active {
+  background-color: var(--uilib-toggle-button-bg-active);
+}
+
+ui-lib-toggle-button .ui-lib-toggle-button__inner:focus-visible {
+  box-shadow: var(--uilib-toggle-button-focus-ring);
+}
+
+// ----------------------------------------------------------------
+// Checked (on) state
+// ----------------------------------------------------------------
+ui-lib-toggle-button.ui-lib-toggle-button--checked .ui-lib-toggle-button__inner {
+  background-color: var(--uilib-toggle-button-checked-bg);
+  border-color: var(--uilib-toggle-button-checked-border);
+  color: var(--uilib-toggle-button-checked-color);
+}
+
+ui-lib-toggle-button.ui-lib-toggle-button--checked:not(.ui-lib-toggle-button--disabled)
+  .ui-lib-toggle-button__inner:hover {
+  background-color: var(--uilib-toggle-button-checked-bg-hover);
+  border-color: var(--uilib-toggle-button-checked-bg-hover);
+}
+
+ui-lib-toggle-button.ui-lib-toggle-button--checked:not(.ui-lib-toggle-button--disabled)
+  .ui-lib-toggle-button__inner:active {
+  background-color: var(--uilib-toggle-button-checked-bg-active);
+}
+
+// ----------------------------------------------------------------
+// Label and icon
+// ----------------------------------------------------------------
+ui-lib-toggle-button .ui-lib-toggle-button__label {
+  line-height: 1;
+}
+
+ui-lib-toggle-button .ui-lib-toggle-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+// ----------------------------------------------------------------
+// Size variants
+// ----------------------------------------------------------------
+ui-lib-toggle-button.ui-lib-toggle-button--size-sm .ui-lib-toggle-button__inner {
+  --uilib-toggle-button-padding-x: var(--uilib-toggle-button-padding-x-sm);
+  --uilib-toggle-button-height: var(--uilib-toggle-button-height-sm);
+  --uilib-toggle-button-font-size: var(--uilib-toggle-button-font-size-sm);
+}
+
+ui-lib-toggle-button.ui-lib-toggle-button--size-lg .ui-lib-toggle-button__inner {
+  --uilib-toggle-button-padding-x: var(--uilib-toggle-button-padding-x-lg);
+  --uilib-toggle-button-height: var(--uilib-toggle-button-height-lg);
+  --uilib-toggle-button-font-size: var(--uilib-toggle-button-font-size-lg);
+}
+
+// ----------------------------------------------------------------
+// Design variants
+// ----------------------------------------------------------------
+
+// Material: standard radius, subtle elevation on checked state
+ui-lib-toggle-button.ui-lib-toggle-button--variant-material {
+  --uilib-toggle-button-radius: var(--uilib-radius-base, 6px);
+}
+
+ui-lib-toggle-button.ui-lib-toggle-button--variant-material.ui-lib-toggle-button--checked
+  .ui-lib-toggle-button__inner {
+  box-shadow: 0 1px 3px 0
+    color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 40%, transparent);
+}
+
+// Bootstrap: tighter radius, classic pill-free look
+ui-lib-toggle-button.ui-lib-toggle-button--variant-bootstrap {
+  --uilib-toggle-button-radius: calc(var(--uilib-radius-base, 6px) * 0.5);
+}
+
+// Minimal: pill shape, no hard border — uses translucent fills instead
+ui-lib-toggle-button.ui-lib-toggle-button--variant-minimal {
+  --uilib-toggle-button-radius: 9999px;
+  --uilib-toggle-button-border: transparent;
+  --uilib-toggle-button-bg: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-300, #d1d5db) 40%,
+    transparent
+  );
+  --uilib-toggle-button-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-400, #9ca3af) 35%,
+    transparent
+  );
+  --uilib-toggle-button-bg-active: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-400, #9ca3af) 50%,
+    transparent
+  );
+  --uilib-toggle-button-checked-bg: color-mix(
+    in srgb,
+    var(--uilib-color-primary-500, #6366f1) 88%,
+    transparent
+  );
+  --uilib-toggle-button-checked-border: transparent;
+  --uilib-toggle-button-checked-bg-hover: var(--uilib-color-primary-600, #4f46e5);
+  --uilib-toggle-button-checked-bg-active: var(--uilib-color-primary-700, #4338ca);
+}
+
+// ----------------------------------------------------------------
+// Dark mode
+// ----------------------------------------------------------------
+@mixin toggle-button-dark {
+  --uilib-toggle-button-border: var(--uilib-border-dark, rgba(255, 255, 255, 0.15));
+  --uilib-toggle-button-color: var(--uilib-text-dark, #f0f4ff);
+  --uilib-toggle-button-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-color-neutral-700, #374151) 60%,
+    transparent
+  );
+  --uilib-toggle-button-checked-bg: var(--uilib-color-primary-dark, #818cf8);
+  --uilib-toggle-button-checked-border: var(--uilib-color-primary-dark, #818cf8);
+  --uilib-toggle-button-checked-color: #0b1220;
+  --uilib-toggle-button-checked-bg-hover: color-mix(
+    in srgb,
+    var(--uilib-color-primary-dark, #818cf8) 85%,
+    white
+  );
+  --uilib-toggle-button-checked-bg-active: color-mix(
+    in srgb,
+    var(--uilib-color-primary-dark, #818cf8) 70%,
+    white
+  );
+  --uilib-toggle-button-focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--uilib-color-primary-dark, #818cf8) 35%, transparent);
+}
+
+[data-theme='dark'] ui-lib-toggle-button,
+.dark ui-lib-toggle-button {
+  @include toggle-button-dark;
+}

@@ -289,21 +289,18 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/slider',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'Textarea',
           icon: 'pi pi-circle',
           route: '/textarea',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'ToggleButton',
           icon: 'pi pi-circle',
           route: '/toggle-button',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'ToggleSwitch',

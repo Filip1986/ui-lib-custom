@@ -45,6 +45,8 @@ import type * as UiLibPassword from 'ui-lib-custom/password';
 import type * as UiLibRadioButton from 'ui-lib-custom/radio-button';
 import type * as UiLibRating from 'ui-lib-custom/rating';
 import type * as UiLibSlider from 'ui-lib-custom/slider';
+import type * as UiLibTextarea from 'ui-lib-custom/textarea';
+import type * as UiLibToggleButton from 'ui-lib-custom/toggle-button';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -333,5 +335,16 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibSlider = await import('ui-lib-custom/slider');
     expect(mod.Slider).toBeDefined();
     expect(mod.SLIDER_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from toggle-button', async (): Promise<void> => {
+    const mod: typeof UiLibToggleButton = await import('ui-lib-custom/toggle-button');
+    expect(mod.ToggleButton).toBeDefined();
+  });
+
+  it('should import from textarea', async (): Promise<void> => {
+    const mod: typeof UiLibTextarea = await import('ui-lib-custom/textarea');
+    expect(mod.UiLibTextarea).toBeDefined();
+    expect(mod.TEXTAREA_DEFAULTS).toBeDefined();
   });
 });

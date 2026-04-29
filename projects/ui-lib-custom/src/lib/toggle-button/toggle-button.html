@@ -1,0 +1,31 @@
+<button
+  class="ui-lib-toggle-button__inner"
+  type="button"
+  role="switch"
+  [attr.id]="buttonId()"
+  [attr.aria-checked]="checked()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledBy()"
+  [attr.tabindex]="effectiveTabindex()"
+  [attr.disabled]="isDisabled() ? '' : null"
+  (click)="onToggle($event)"
+  (keydown)="onKeyDown($event)"
+  (focus)="onFocus($event)"
+  (blur)="onBlurInternal($event)"
+>
+  @if (iconLeftClass()) {
+    <ui-lib-icon
+      class="ui-lib-toggle-button__icon ui-lib-toggle-button__icon--left"
+      [name]="iconLeftClass()!"
+      [variant]="effectiveVariant()"
+    />
+  }
+  <span class="ui-lib-toggle-button__label">{{ activeLabel() }}</span>
+  @if (iconRightClass()) {
+    <ui-lib-icon
+      class="ui-lib-toggle-button__icon ui-lib-toggle-button__icon--right"
+      [name]="iconRightClass()!"
+      [variant]="effectiveVariant()"
+    />
+  }
+</button>

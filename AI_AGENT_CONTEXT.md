@@ -26,6 +26,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Textarea` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Rating` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `Listbox` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `RadioButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -68,6 +70,52 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
+Date: 2026-04-29 [toggle-button session]
+Changed:
+  - projects/ui-lib-custom/src/lib/toggle-button/ (new -- types, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/toggle-button/ (new secondary entry point)
+  - projects/ui-lib-custom/package.json (toggle-button added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (toggle-button import test added)
+  - projects/demo/src/app/pages/toggle-button/ (full demo -- TS/HTML/SCSS, 9 sections)
+  - AI_AGENT_CONTEXT.md (marked ToggleButton complete)
+State: ToggleButton component fully complete. CVA (ngModel + reactive forms), model() two-way
+  binding, onLabel/offLabel, onIcon/offIcon with ui-lib-icon, iconPos (left/right),
+  allowEmpty, autofocus, ariaLabel/ariaLabelledBy, three variants (material/bootstrap/minimal),
+  three sizes (sm/md/lg), disabled, role=switch + aria-checked, keyboard (Enter/Space),
+  live announcements via LiveAnnouncerService, dark mode SCSS.
+  36/36 unit tests passing. 48/48 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/toggle-button/ projects/demo/src/app/pages/toggle-button/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom (toggle-button Built, zero errors),
+  npx jest --testPathPatterns="toggle-button" --no-cache (36/36 PASS),
+  npx jest --testPathPatterns="entry-points" --no-cache (48/48 PASS).
+Terminal notes: getHost() helper in spec must query querySelector('ui-lib-toggle-button') not
+  use fixture.nativeElement directly (which is the wrapper host). ngModel init test needs
+  double detectChanges/whenStable cycle in zoneless mode.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
+
+Date: 2026-04-29 [textarea session]
+Changed:
+  - projects/ui-lib-custom/src/lib/textarea/ (new -- types, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/textarea/ (new secondary entry point)
+  - projects/ui-lib-custom/package.json (textarea added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (textarea import test added)
+  - projects/demo/src/app/pages/textarea/ (full demo -- TS/HTML/SCSS, 10 sections)
+  - AI_AGENT_CONTEXT.md (marked Textarea complete)
+State: Textarea component fully complete. CVA (ngModel + reactive forms), auto-resize,
+  char counter, maxLength, three variants (material/bootstrap/minimal), three sizes
+  (sm/md/lg), disabled/readonly/required, ARIA labels/roles, focus/blur outputs.
+  39/39 unit tests passing. 47/47 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/textarea/ ... --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom (all entry points Built, zero errors),
+  npx jest --testPathPatterns="textarea" --no-cache (39/39 PASS),
+  npx jest --testPathPatterns="entry-points" --no-cache (47/47 PASS).
+Terminal notes: Edit/Write tools truncate files -- always use Python open(path,"w") for
+  file writes. package.json, entry-points.spec.ts, and rating files restored from git
+  via Python subprocess. Shell: bash in sandbox.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo/z-index manager).
+
 Date: 2026-04-29 [slider completion session]
 Changed:
   - projects/ui-lib-custom/src/lib/slider/slider.ts (moved ElementRef to import type block)
@@ -86,40 +134,6 @@ Verification:
   npx.cmd jest --testPathPatterns="entry-points" --no-cache (46/46 PASS).
 Terminal notes: No issues. Shell: bash.exe.
 Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
-
-Date: 2026-04-28 [rating PrimeNG parity session]
-Changed:
-  - projects/ui-lib-custom/src/lib/rating/rating.ts (added autofocus, iconOnStyle/iconOffStyle inputs;
-    rate/cleared/focus/blur outputs; onIconTemplate/offIconTemplate/cancelIconTemplate contentChild
-    queries; toggle-deselect behavior; ElementRef inject for autofocus; afterNextRender autofocus impl)
-  - projects/ui-lib-custom/src/lib/rating/rating.html (focus/blur handlers, ngStyle on icons,
-    custom ng-template conditional rendering for on/off/cancel icons)
-  - projects/ui-lib-custom/src/lib/rating/rating.types.ts (added RatingRateEvent interface)
-  - projects/ui-lib-custom/src/lib/rating/index.ts (re-exported RatingRateEvent)
-  - projects/ui-lib-custom/src/lib/rating/rating.spec.ts (added toggle-deselect, rate/cleared/
-    focus/blur output tests, iconOnStyle/iconOffStyle tests; 52/52 total)
-  - projects/demo/src/app/pages/rating/rating-demo.component.ts (events section, custom templates,
-    inline icon styles)
-  - projects/demo/src/app/pages/rating/rating-demo.component.html (3 new demo sections)
-  - projects/demo/src/app/pages/rating/rating-demo.component.scss (demo-event-log styles)
-  - Multiple files restored from git HEAD after sandbox corruption during session
-State: Rating component fully PrimeNG v19 feature-parity. All 7 gaps closed. 52/52 tests.
-  45/45 entry-point tests. ESLint clean. Library build zero errors. Demo build clean.
-Verification:
-  npx eslint projects/ui-lib-custom/src/lib/rating/ projects/demo/src/app/pages/rating/ --max-warnings 0 (CLEAN),
-  npx ng build ui-lib-custom (49 entry points, zero errors),
-  npx jest --testPathPatterns="rating" --no-cache (52/52 PASS),
-  npx jest --testPathPatterns="entry-points" --no-cache (45/45 PASS),
-  npx ng build demo --output-path /tmp/demo-build (Application bundle generation complete).
-Terminal notes: Write tool corrupts files containing long lines with multi-byte UTF-8 chars
-  (box-drawing U+2500). Fix: write such files via Python open(dest,'wb').write(content.encode('utf-8')).
-  Several files (package.json, password.scss, sidebar.ts, listbox-demo.ts, radio-button-demo.ts,
-  upload-demo.html, radio-button-demo.scss, rating-demo.scss) restored via
-  git show HEAD:file > /tmp/x && python3 shutil.copy(). Shell: bash in sandbox.
-  dist/demo folder is Windows-owned and cannot be deleted from sandbox — use --output-path /tmp/X
-  to verify demo compilation.
-Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
-
 ---
 
 Date: 2026-04-28 [rating session]
@@ -143,32 +157,5 @@ Terminal notes: No issues. Shell: bash.exe.
 Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
 
 ---
-
-Date: 2026-04-28 [radio-button session]
-Changed:
-  - projects/ui-lib-custom/src/lib/radio-button/ (new — radio-button.types.ts, radio-button.ts,
-    radio-button.html, radio-button.scss, radio-button.spec.ts, index.ts)
-  - projects/ui-lib-custom/radio-button/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (added radio-button to exports + typesVersions via Node.js)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (added radio-button import test)
-  - projects/demo/src/app/pages/radio-button/ (full demo replacing placeholder — TS/HTML/SCSS, 7 scenarios)
-State: RadioButton component fully complete. Native-radio CVA with group-value semantics (writeValue
-  receives group selection, isChecked = modelValue === value), disabled/readonly states, autofocus,
-  three variants (material/bootstrap/minimal), three sizes (sm/md/lg), outlined/filled appearances,
-  full ARIA (aria-label, aria-labelledby, required, tabindex), keyboard nav via native type=radio,
-  focus/blur outputs, change output with value + originalEvent. 39/39 unit tests passing (including
-  ngModel and reactive forms suites). 44/44 entry-point tests passing. ESLint clean. Library build
-  zero errors. Demo build clean (pre-existing button/date-picker SCSS budget warnings not new).
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/radio-button/ projects/demo/src/app/pages/radio-button/ --max-warnings 0 (CLEAN),
-  npx.cmd ng build ui-lib-custom — ui-lib-custom/radio-button ✔ Built, all entry points ✔ Built (zero errors),
-  npx.cmd jest --testPathPatterns="radio-button" --no-cache (39/39 PASS),
-  npx.cmd jest --testPathPatterns="entry-points" --no-cache (44/44 PASS),
-  npx.cmd ng build demo (Application bundle generation complete, zero new errors).
-Terminal notes: [checked]="true" in demo HTML caused NG8002 compile error — fixed by using [(ngModel)]
-  with pre-initialised variantMaterialValue/variantBootstrapValue/variantMinimalValue = 'c' properties.
-  JSON files written via Node.js fs.writeFileSync (Python not available on PATH). Shell: bash.exe.
-Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
-
 
 

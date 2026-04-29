@@ -1,0 +1,242 @@
+// =============================================================================
+// ui-lib-textarea
+// =============================================================================
+// CSS variable naming: --uilib-textarea-{property}[-{state}]
+// All raw values must be routed through design tokens / CSS variables.
+// =============================================================================
+
+ui-lib-textarea {
+  display: block;
+
+  // ---------------------------------------------------------------------------
+  // Component-level CSS variables (consumer overrideable)
+  // ---------------------------------------------------------------------------
+  --uilib-textarea-bg: var(--uilib-surface);
+  --uilib-textarea-border: var(--uilib-border);
+  --uilib-textarea-border-focus: var(--uilib-color-primary-600);
+  --uilib-textarea-border-error: var(--uilib-color-danger-600);
+  --uilib-textarea-text: var(--uilib-page-fg);
+  --uilib-textarea-placeholder: var(--uilib-muted);
+  --uilib-textarea-label-color: var(--uilib-page-fg);
+  --uilib-textarea-required-color: var(--uilib-color-danger-600);
+  --uilib-textarea-error-color: var(--uilib-color-danger-600);
+  --uilib-textarea-counter-color: var(--uilib-muted);
+  --uilib-textarea-radius: var(--uilib-shape-base, 6px);
+  --uilib-textarea-disabled-opacity: 0.6;
+
+  // Size — md defaults (overridden per size modifier below)
+  --uilib-textarea-padding-x: 0.75rem;
+  --uilib-textarea-padding-y: 0.5rem;
+  --uilib-textarea-font-size: 1rem;
+}
+
+// ---------------------------------------------------------------------------
+// Layout
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea .ui-lib-textarea__wrapper {
+  display: grid;
+  gap: 0.35rem;
+}
+
+// ---------------------------------------------------------------------------
+// Label
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea .ui-lib-textarea__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+  color: var(--uilib-textarea-label-color);
+  font-size: var(--uilib-textarea-font-size);
+  cursor: default;
+}
+
+ui-lib-textarea .ui-lib-textarea__required {
+  color: var(--uilib-textarea-required-color);
+}
+
+// ---------------------------------------------------------------------------
+// Field wrapper
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea .ui-lib-textarea__field {
+  position: relative;
+  background: var(--uilib-textarea-bg);
+  border: 1px solid var(--uilib-textarea-border);
+  border-radius: var(--uilib-textarea-radius);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:focus-within {
+    border-color: var(--uilib-textarea-border-focus);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-textarea-border-focus) 25%, transparent);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Native textarea control
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea .ui-lib-textarea__control {
+  display: block;
+  width: 100%;
+  padding: var(--uilib-textarea-padding-y) var(--uilib-textarea-padding-x);
+  font: inherit;
+  font-size: var(--uilib-textarea-font-size);
+  color: var(--uilib-textarea-text);
+  background: transparent;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: var(--uilib-textarea-radius);
+  min-height: calc(var(--uilib-textarea-font-size) * 1.5 * 3 + var(--uilib-textarea-padding-y) * 2);
+  line-height: 1.5;
+
+  &::placeholder {
+    color: var(--uilib-textarea-placeholder);
+  }
+
+  // Disable the browser resize handle when auto-resize is active (applied via [style.resize] binding)
+  // The binding handles this; this just ensures the field clip doesn't show the handle peeking.
+  overflow: hidden;
+}
+
+// Expose overflow when resize is enabled (user may drag to reveal scrollbar intentionally)
+ui-lib-textarea:not(.ui-lib-textarea--disabled) .ui-lib-textarea__control {
+  overflow: auto;
+}
+
+// ---------------------------------------------------------------------------
+// Meta row (error + counter)
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea .ui-lib-textarea__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-height: 1.25rem;
+  font-size: calc(var(--uilib-textarea-font-size) * 0.875);
+}
+
+ui-lib-textarea .ui-lib-textarea__error {
+  color: var(--uilib-textarea-error-color);
+  flex: 1;
+}
+
+ui-lib-textarea .ui-lib-textarea__counter {
+  color: var(--uilib-textarea-counter-color);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+// ---------------------------------------------------------------------------
+// Error state — border
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea.ui-lib-textarea--error .ui-lib-textarea__field {
+  border-color: var(--uilib-textarea-border-error);
+
+  &:focus-within {
+    border-color: var(--uilib-textarea-border-error);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-textarea-border-error) 25%, transparent);
+  }
+}
+
+// Angular form validation states
+ui-lib-textarea.ng-touched .ui-lib-textarea__field,
+ui-lib-textarea.ng-dirty .ui-lib-textarea__field {
+  border-color: var(--uilib-textarea-border-focus);
+}
+
+ui-lib-textarea.ng-invalid.ng-touched .ui-lib-textarea__field,
+ui-lib-textarea.ng-invalid.ng-dirty .ui-lib-textarea__field {
+  border-color: var(--uilib-textarea-border-error);
+}
+
+// ---------------------------------------------------------------------------
+// Disabled state
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea.ui-lib-textarea--disabled {
+  opacity: var(--uilib-textarea-disabled-opacity);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+// ---------------------------------------------------------------------------
+// Size modifiers
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea.ui-lib-textarea--size-sm {
+  --uilib-textarea-padding-x: 0.5rem;
+  --uilib-textarea-padding-y: 0.35rem;
+  --uilib-textarea-font-size: 0.875rem;
+}
+
+ui-lib-textarea.ui-lib-textarea--size-md {
+  --uilib-textarea-padding-x: 0.75rem;
+  --uilib-textarea-padding-y: 0.5rem;
+  --uilib-textarea-font-size: 1rem;
+}
+
+ui-lib-textarea.ui-lib-textarea--size-lg {
+  --uilib-textarea-padding-x: 0.9rem;
+  --uilib-textarea-padding-y: 0.65rem;
+  --uilib-textarea-font-size: 1.125rem;
+}
+
+// ---------------------------------------------------------------------------
+// Variant — bootstrap
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea.ui-lib-textarea--variant-bootstrap .ui-lib-textarea__field {
+  border-radius: var(--uilib-textarea-radius);
+  border-width: 1px;
+}
+
+// ---------------------------------------------------------------------------
+// Variant — minimal
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea.ui-lib-textarea--variant-minimal .ui-lib-textarea__field {
+  background: transparent;
+  border-color: var(--uilib-textarea-border);
+  border-radius: 0;
+  border-width: 0 0 1px 0;
+  box-shadow: none;
+
+  &:focus-within {
+    box-shadow: none;
+    border-color: var(--uilib-textarea-border-focus);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Variant — material
+// ---------------------------------------------------------------------------
+
+ui-lib-textarea.ui-lib-textarea--variant-material .ui-lib-textarea__field {
+  border-radius: var(--uilib-textarea-radius);
+  background: color-mix(in srgb, var(--uilib-textarea-bg) 80%, var(--uilib-muted) 20%);
+
+  &:focus-within {
+    background: var(--uilib-textarea-bg);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Dark mode support
+// ---------------------------------------------------------------------------
+
+[data-theme='dark'] ui-lib-textarea {
+  --uilib-textarea-bg: var(--uilib-surface-dark-1, #1e1e2e);
+  --uilib-textarea-border: var(--uilib-border-dark, #3a3a5c);
+  --uilib-textarea-text: var(--uilib-text-dark-primary, #e0e0ff);
+  --uilib-textarea-placeholder: var(--uilib-text-dark-secondary, #8888aa);
+  --uilib-textarea-label-color: var(--uilib-text-dark-primary, #e0e0ff);
+  --uilib-textarea-counter-color: var(--uilib-text-dark-secondary, #8888aa);
+}

@@ -1,0 +1,58 @@
+<div class="ui-lib-textarea__wrapper">
+  @if (label()) {
+    <label class="ui-lib-textarea__label" [attr.for]="controlId()">
+      {{ label() }}
+      @if (required()) {
+        <span class="ui-lib-textarea__required" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+
+  <div class="ui-lib-textarea__field">
+    <textarea
+      #textareaRef
+      class="ui-lib-textarea__control"
+      [id]="controlId()"
+      [name]="name() ?? controlId()"
+      [placeholder]="placeholder()"
+      [rows]="rows()"
+      [attr.cols]="cols() ?? null"
+      [attr.maxlength]="maxLength() ?? null"
+      [attr.aria-label]="label() ? null : placeholder() || null"
+      [attr.aria-invalid]="error() ? 'true' : null"
+      [attr.aria-required]="required() ? 'true' : null"
+      [attr.aria-describedby]="describedById()"
+      [attr.aria-readonly]="readonly() ? 'true' : null"
+      [disabled]="isDisabled()"
+      [readOnly]="readonly()"
+      [required]="required() || null"
+      [style.resize]="nativeResize()"
+      [value]="value()"
+      (input)="handleInput($event)"
+      (focus)="handleFocus($event)"
+      (blur)="handleBlur($event)"
+    ></textarea>
+  </div>
+
+  <div class="ui-lib-textarea__meta">
+    @if (error()) {
+      <div
+        class="ui-lib-textarea__error"
+        [id]="describedById()"
+        role="alert"
+      >
+        {{ error() }}
+      </div>
+    }
+
+    @if (showCounter()) {
+      <span class="ui-lib-textarea__counter" aria-live="polite">
+        @if (maxLength()) {
+          {{ currentLength() }} / {{ maxLength() }}
+        } @else {
+          {{ currentLength() }}
+        }
+      </span>
+    }
+  </div>
+</div>
