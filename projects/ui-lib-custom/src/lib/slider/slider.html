@@ -1,0 +1,66 @@
+<div
+  class="ui-lib-slider__track-container"
+  (pointerdown)="onTrackPointerDown($event)"
+>
+  <div class="ui-lib-slider__track" #trackRef>
+    <div class="ui-lib-slider__fill" [style]="fillStyle()"></div>
+
+    @if (!range()) {
+      <div
+        class="ui-lib-slider__handle"
+        role="slider"
+        [attr.aria-valuemin]="min()"
+        [attr.aria-valuemax]="max()"
+        [attr.aria-valuenow]="singleValue()"
+        [attr.aria-orientation]="orientation()"
+        [attr.aria-label]="ariaLabel()"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [attr.aria-disabled]="isDisabled() ? 'true' : null"
+        [attr.tabindex]="effectiveTabindex()"
+        [style]="handleStyle()"
+        (pointerdown)="onHandlePointerDown($event, 'single')"
+        (keydown)="onKeyDown($event, 'single')"
+        (focus)="onFocusEvent($event)"
+        (blur)="onBlurEvent($event)"
+      ></div>
+    }
+
+    @if (range()) {
+      <div
+        class="ui-lib-slider__handle ui-lib-slider__handle--start"
+        role="slider"
+        [attr.aria-valuemin]="min()"
+        [attr.aria-valuemax]="rangeEndValue()"
+        [attr.aria-valuenow]="rangeStartValue()"
+        [attr.aria-orientation]="orientation()"
+        [attr.aria-label]="ariaLabel() ?? 'Minimum value'"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [attr.aria-disabled]="isDisabled() ? 'true' : null"
+        [attr.tabindex]="effectiveTabindex()"
+        [style]="startHandleStyle()"
+        (pointerdown)="onHandlePointerDown($event, 'start')"
+        (keydown)="onKeyDown($event, 'start')"
+        (focus)="onFocusEvent($event)"
+        (blur)="onBlurEvent($event)"
+      ></div>
+      <div
+        class="ui-lib-slider__handle ui-lib-slider__handle--end"
+        role="slider"
+        [attr.aria-valuemin]="rangeStartValue()"
+        [attr.aria-valuemax]="max()"
+        [attr.aria-valuenow]="rangeEndValue()"
+        [attr.aria-orientation]="orientation()"
+        [attr.aria-label]="ariaLabel() ?? 'Maximum value'"
+        [attr.aria-labelledby]="ariaLabelledBy()"
+        [attr.aria-disabled]="isDisabled() ? 'true' : null"
+        [attr.tabindex]="effectiveTabindex()"
+        [style]="endHandleStyle()"
+        (pointerdown)="onHandlePointerDown($event, 'end')"
+        (keydown)="onKeyDown($event, 'end')"
+        (focus)="onFocusEvent($event)"
+        (blur)="onBlurEvent($event)"
+      ></div>
+    }
+  </div>
+</div>
+

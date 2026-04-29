@@ -44,6 +44,7 @@ import type * as UiLibListbox from 'ui-lib-custom/listbox';
 import type * as UiLibPassword from 'ui-lib-custom/password';
 import type * as UiLibRadioButton from 'ui-lib-custom/radio-button';
 import type * as UiLibRating from 'ui-lib-custom/rating';
+import type * as UiLibSlider from 'ui-lib-custom/slider';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -326,5 +327,11 @@ describe('Secondary Entry Points', (): void => {
     // RatingRateEvent is a type-only export — verify the module resolves without error
     const _typeCheck: typeof mod = mod;
     void _typeCheck;
+  });
+
+  it('should import from slider', async (): Promise<void> => {
+    const mod: typeof UiLibSlider = await import('ui-lib-custom/slider');
+    expect(mod.Slider).toBeDefined();
+    expect(mod.SLIDER_DEFAULTS).toBeDefined();
   });
 });

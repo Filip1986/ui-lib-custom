@@ -1,0 +1,257 @@
+// ---------------------------------------------------------------------------
+// Slider component styles
+// CSS variable naming: --uilib-slider-{property}[-{variant}][-{state}]
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Default (material) tokens
+// ---------------------------------------------------------------------------
+:root {
+  // Track
+  --uilib-slider-track-color: #e0e0e0;
+  --uilib-slider-track-border-radius: 2px;
+
+  // Fill bar
+  --uilib-slider-fill-color: #6366f1;
+  --uilib-slider-fill-transition:
+    width 0.15s ease, left 0.15s ease, height 0.15s ease, bottom 0.15s ease;
+
+  // Handle
+  --uilib-slider-handle-bg: #ffffff;
+  --uilib-slider-handle-border: 2px solid #6366f1;
+  --uilib-slider-handle-border-radius: 50%;
+  --uilib-slider-handle-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  --uilib-slider-handle-hover-scale: 1.15;
+
+  // Focus ring
+  --uilib-slider-focus-ring-color: rgba(99, 102, 241, 0.35);
+  --uilib-slider-focus-ring-width: 3px;
+
+  // Disabled
+  --uilib-slider-disabled-opacity: 0.5;
+
+  // Vertical slider height
+  --uilib-slider-vertical-height: 200px;
+
+  // Size tokens — track thickness
+  --uilib-slider-track-height-sm: 2px;
+  --uilib-slider-track-height-md: 4px;
+  --uilib-slider-track-height-lg: 6px;
+
+  // Size tokens — handle diameter
+  --uilib-slider-handle-size-sm: 14px;
+  --uilib-slider-handle-size-md: 20px;
+  --uilib-slider-handle-size-lg: 28px;
+}
+
+// ---------------------------------------------------------------------------
+// Dark mode token overrides
+// ---------------------------------------------------------------------------
+[data-theme='dark'] {
+  --uilib-slider-track-color: #374151;
+  --uilib-slider-fill-color: #818cf8;
+  --uilib-slider-handle-bg: #1f2937;
+  --uilib-slider-handle-border: 2px solid #818cf8;
+  --uilib-slider-focus-ring-color: rgba(129, 140, 248, 0.4);
+}
+
+// ---------------------------------------------------------------------------
+// Host element
+// ---------------------------------------------------------------------------
+.ui-lib-slider {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+
+  // ── Disabled state ────────────────────────────────────────────────────────
+  &--disabled {
+    opacity: var(--uilib-slider-disabled-opacity);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // ── Read-only state ───────────────────────────────────────────────────────
+  &--readonly {
+    cursor: default;
+
+    .ui-lib-slider__handle {
+      cursor: default;
+    }
+  }
+
+  // ── Track container ───────────────────────────────────────────────────────
+  &__track-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px 0;
+    box-sizing: border-box;
+  }
+
+  // ── Track ─────────────────────────────────────────────────────────────────
+  &__track {
+    position: relative;
+    background: var(--uilib-slider-track-color);
+    border-radius: var(--uilib-slider-track-border-radius);
+    width: 100%;
+    height: var(--uilib-slider-track-height-md);
+    flex-shrink: 0;
+  }
+
+  // ── Fill bar ──────────────────────────────────────────────────────────────
+  &__fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: var(--uilib-slider-fill-color);
+    border-radius: var(--uilib-slider-track-border-radius);
+    pointer-events: none;
+  }
+
+  // ── Handle ────────────────────────────────────────────────────────────────
+  &__handle {
+    position: absolute;
+    top: 50%;
+    width: var(--uilib-slider-handle-size-md);
+    height: var(--uilib-slider-handle-size-md);
+    background: var(--uilib-slider-handle-bg);
+    border: var(--uilib-slider-handle-border);
+    border-radius: var(--uilib-slider-handle-border-radius);
+    box-shadow: var(--uilib-slider-handle-shadow);
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    outline: none;
+    transition:
+      transform 0.1s ease,
+      box-shadow 0.1s ease;
+    z-index: 1;
+    box-sizing: border-box;
+
+    &:hover {
+      transform: translate(-50%, -50%) scale(var(--uilib-slider-handle-hover-scale));
+    }
+
+    &:focus-visible {
+      box-shadow:
+        0 0 0 var(--uilib-slider-focus-ring-width) var(--uilib-slider-focus-ring-color),
+        var(--uilib-slider-handle-shadow);
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  // ── Size modifiers ────────────────────────────────────────────────────────
+  &--size-sm {
+    .ui-lib-slider__track {
+      height: var(--uilib-slider-track-height-sm);
+    }
+
+    .ui-lib-slider__handle {
+      width: var(--uilib-slider-handle-size-sm);
+      height: var(--uilib-slider-handle-size-sm);
+    }
+  }
+
+  &--size-md {
+    .ui-lib-slider__track {
+      height: var(--uilib-slider-track-height-md);
+    }
+
+    .ui-lib-slider__handle {
+      width: var(--uilib-slider-handle-size-md);
+      height: var(--uilib-slider-handle-size-md);
+    }
+  }
+
+  &--size-lg {
+    .ui-lib-slider__track {
+      height: var(--uilib-slider-track-height-lg);
+    }
+
+    .ui-lib-slider__handle {
+      width: var(--uilib-slider-handle-size-lg);
+      height: var(--uilib-slider-handle-size-lg);
+    }
+  }
+
+  // ── Vertical orientation ──────────────────────────────────────────────────
+  &--vertical {
+    display: inline-flex;
+
+    .ui-lib-slider__track-container {
+      flex-direction: column;
+      align-items: center;
+      width: auto;
+      height: var(--uilib-slider-vertical-height);
+      padding: 0 12px;
+    }
+
+    .ui-lib-slider__track {
+      width: var(--uilib-slider-track-height-md);
+      height: 100%;
+    }
+
+    .ui-lib-slider__fill {
+      top: auto;
+      left: 0;
+      right: 0;
+    }
+
+    .ui-lib-slider__handle {
+      left: 50%;
+      top: auto;
+      transform: translate(-50%, 50%);
+      cursor: ns-resize;
+
+      &:hover {
+        transform: translate(-50%, 50%) scale(var(--uilib-slider-handle-hover-scale));
+      }
+    }
+
+    // Vertical size overrides for track width
+    &.ui-lib-slider--size-sm .ui-lib-slider__track {
+      width: var(--uilib-slider-track-height-sm);
+    }
+
+    &.ui-lib-slider--size-lg .ui-lib-slider__track {
+      width: var(--uilib-slider-track-height-lg);
+    }
+  }
+
+  // ── Animate modifier ──────────────────────────────────────────────────────
+  &--animate {
+    .ui-lib-slider__fill {
+      transition: var(--uilib-slider-fill-transition);
+    }
+
+    .ui-lib-slider__handle {
+      transition:
+        left 0.15s ease,
+        bottom 0.15s ease,
+        transform 0.1s ease,
+        box-shadow 0.1s ease;
+    }
+  }
+
+  // ── Bootstrap variant ─────────────────────────────────────────────────────
+  &--variant-bootstrap {
+    --uilib-slider-fill-color: #0d6efd;
+    --uilib-slider-track-color: #dee2e6;
+    --uilib-slider-handle-border: 2px solid #0d6efd;
+    --uilib-slider-handle-border-radius: 4px;
+    --uilib-slider-focus-ring-color: rgba(13, 110, 253, 0.35);
+  }
+
+  // ── Minimal variant ───────────────────────────────────────────────────────
+  &--variant-minimal {
+    --uilib-slider-fill-color: #111827;
+    --uilib-slider-track-color: #e5e7eb;
+    --uilib-slider-handle-border: 2px solid #111827;
+    --uilib-slider-handle-shadow: none;
+    --uilib-slider-focus-ring-color: rgba(17, 24, 39, 0.25);
+  }
+}

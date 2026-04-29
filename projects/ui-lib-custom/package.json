@@ -156,6 +156,10 @@
     "./rating": {
       "esm2022": "./esm2022/rating/index.mjs",
       "esm": "./esm2022/rating/index.mjs"
+    },
+    "./slider": {
+      "esm2022": "./esm2022/slider/index.mjs",
+      "esm": "./esm2022/slider/index.mjs"
     }
   },
   "typesVersions": {
@@ -243,6 +247,9 @@
       ],
       "rating": [
         "./rating/index.d.ts"
+      ],
+      "slider": [
+        "./slider/index.d.ts"
       ]
     }
   }

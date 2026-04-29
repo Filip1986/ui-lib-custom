@@ -68,6 +68,25 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
+Date: 2026-04-29 [slider completion session]
+Changed:
+  - projects/ui-lib-custom/src/lib/slider/slider.ts (moved ElementRef to import type block)
+  - projects/ui-lib-custom/src/lib/slider/slider.spec.ts (removed unused getDebugEl + By imports;
+    fixed a11y beforeEach with double detectChanges cycle; fixed CVA test with
+    changeDetectorRef.markForCheck() + double detectChanges)
+  - docs/reference/components/SLIDER.md (new — full API + usage + theming + a11y + keyboard docs)
+  - docs/reference/components/README.md (added Slider section and quick-reference table row)
+  - AI_AGENT_CONTEXT.md (marked Slider complete)
+State: Slider component fully complete. All 44 unit tests passing. 46/46 entry-point tests passing.
+  ESLint clean. Library build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/slider/ projects/demo/src/app/pages/slider/ --max-warnings 0 (CLEAN),
+  npx.cmd ng build ui-lib-custom (zero errors),
+  npx.cmd jest --testPathPatterns="slider" --no-cache (44/44 PASS),
+  npx.cmd jest --testPathPatterns="entry-points" --no-cache (46/46 PASS).
+Terminal notes: No issues. Shell: bash.exe.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
 Date: 2026-04-28 [rating PrimeNG parity session]
 Changed:
   - projects/ui-lib-custom/src/lib/rating/rating.ts (added autofocus, iconOnStyle/iconOffStyle inputs;
