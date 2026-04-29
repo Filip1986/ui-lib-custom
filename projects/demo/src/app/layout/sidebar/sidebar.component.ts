@@ -325,7 +325,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/carousel',
           group: 'Media',
-          badge: 'TODO',
         },
         {
           label: 'Image',
