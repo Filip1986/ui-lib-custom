@@ -1,0 +1,103 @@
+@if (isVisible()) {
+  <div
+    #panelRef
+    class="ui-lib-context-menu__panel"
+    [class.ui-lib-context-menu__panel--positioned]="isPositioned()"
+    [style.left.px]="menuX()"
+    [style.top.px]="menuY()"
+    role="menu"
+    [attr.aria-label]="ariaLabel()"
+  >
+    <ul class="ui-lib-context-menu__list" role="presentation">
+      @for (item of visibleItems(); track $index) {
+        @if (item.separator) {
+          <li
+            class="ui-lib-context-menu__separator"
+            role="separator"
+            aria-hidden="true"
+          ></li>
+        } @else {
+          <li
+            class="ui-lib-context-menu__item"
+            [class.ui-lib-context-menu__item--has-submenu]="item.items?.length"
+            [class.ui-lib-context-menu__item--active]="activeSubmenuIndex() === $index"
+            [class.ui-lib-context-menu__item--disabled]="item.disabled"
+            role="none"
+            (mouseenter)="onItemMouseEnter(item, $index)"
+          >
+            <a
+              class="ui-lib-context-menu__link"
+              [class]="
+                item.styleClass
+                  ? 'ui-lib-context-menu__link ' + item.styleClass
+                  : 'ui-lib-context-menu__link'
+              "
+              role="menuitem"
+              [attr.aria-disabled]="item.disabled ? 'true' : null"
+              [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
+              [attr.aria-expanded]="
+                item.items?.length ? (activeSubmenuIndex() === $index ? 'true' : 'false') : null
+              "
+              [attr.tabindex]="item.disabled ? '-1' : '0'"
+              (click)="onItemActivate($event, item, $index)"
+              (keydown)="onItemKeyDown($event, item, $index)"
+            >
+              @if (item.icon) {
+                <span
+                  class="ui-lib-context-menu__item-icon {{ item.icon }}"
+                  aria-hidden="true"
+                ></span>
+              }
+              @if (item.label) {
+                <span class="ui-lib-context-menu__item-label">{{ item.label }}</span>
+              }
+              @if (item.items?.length) {
+                <span class="ui-lib-context-menu__submenu-icon" aria-hidden="true">›</span>
+              }
+            </a>
+
+            @if (item.items?.length && activeSubmenuIndex() === $index) {
+              <ul class="ui-lib-context-menu__submenu" role="menu">
+                @for (subItem of getVisibleSubItems(item); track $index) {
+                  @if (subItem.separator) {
+                    <li
+                      class="ui-lib-context-menu__separator"
+                      role="separator"
+                      aria-hidden="true"
+                    ></li>
+                  } @else {
+                    <li
+                      class="ui-lib-context-menu__item"
+                      [class.ui-lib-context-menu__item--disabled]="subItem.disabled"
+                      role="none"
+                    >
+                      <a
+                        class="ui-lib-context-menu__link"
+                        role="menuitem"
+                        [attr.aria-disabled]="subItem.disabled ? 'true' : null"
+                        [attr.tabindex]="subItem.disabled ? '-1' : '0'"
+                        (click)="onSubItemActivate($event, subItem)"
+                        (keydown)="onSubItemKeyDown($event, subItem)"
+                      >
+                        @if (subItem.icon) {
+                          <span
+                            class="ui-lib-context-menu__item-icon {{ subItem.icon }}"
+                            aria-hidden="true"
+                          ></span>
+                        }
+                        @if (subItem.label) {
+                          <span class="ui-lib-context-menu__item-label">{{ subItem.label }}</span>
+                        }
+                      </a>
+                    </li>
+                  }
+                }
+              </ul>
+            }
+          </li>
+        }
+      }
+    </ul>
+  </div>
+}
+

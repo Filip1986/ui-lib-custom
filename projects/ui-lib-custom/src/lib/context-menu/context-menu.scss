@@ -1,0 +1,253 @@
+// ---------------------------------------------------------------------------
+// ContextMenu component styles
+// ---------------------------------------------------------------------------
+// CSS variable naming: --uilib-context-menu-{property}[-{variant}][-{state}]
+// ---------------------------------------------------------------------------
+
+ui-lib-context-menu {
+  // ── Component tokens ─────────────────────────────────────────────────────
+
+  --uilib-context-menu-bg: var(--uilib-surface-overlay, #ffffff);
+  --uilib-context-menu-border: 1px solid var(--uilib-color-neutral-200, #e5e7eb);
+  --uilib-context-menu-shadow: var(
+    --uilib-shadow-md,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1)
+  );
+  --uilib-context-menu-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-context-menu-z-index: var(--uilib-z-overlay, 1000);
+  --uilib-context-menu-min-width: 10rem;
+  --uilib-context-menu-padding: var(--uilib-spacing-1, 0.25rem);
+
+  --uilib-context-menu-font-size: var(--uilib-font-size-md, 0.875rem);
+  --uilib-context-menu-font-size-sm: var(--uilib-font-size-sm, 0.75rem);
+  --uilib-context-menu-font-size-md: var(--uilib-font-size-md, 0.875rem);
+  --uilib-context-menu-font-size-lg: var(--uilib-font-size-lg, 1rem);
+
+  --uilib-context-menu-item-padding-y: var(--uilib-spacing-2, 0.5rem);
+  --uilib-context-menu-item-padding-x: var(--uilib-spacing-3, 0.75rem);
+  --uilib-context-menu-item-padding-y-sm: var(--uilib-spacing-1, 0.25rem);
+  --uilib-context-menu-item-padding-y-lg: var(--uilib-spacing-3, 0.75rem);
+
+  --uilib-context-menu-item-color: var(--uilib-color-neutral-800, #1f2937);
+  --uilib-context-menu-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
+  --uilib-context-menu-item-color-hover: var(--uilib-color-neutral-900, #111827);
+  --uilib-context-menu-item-color-disabled: var(--uilib-color-neutral-400, #9ca3af);
+  --uilib-context-menu-item-bg-active: var(--uilib-color-primary-50, #eff6ff);
+  --uilib-context-menu-item-color-active: var(--uilib-color-primary-600, #2563eb);
+
+  --uilib-context-menu-icon-size: 1em;
+  --uilib-context-menu-icon-gap: var(--uilib-spacing-2, 0.5rem);
+
+  --uilib-context-menu-separator-color: var(--uilib-color-neutral-200, #e5e7eb);
+  --uilib-context-menu-separator-my: var(--uilib-spacing-1, 0.25rem);
+
+  --uilib-context-menu-submenu-offset: 2px;
+  --uilib-context-menu-focus-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 35%, transparent);
+
+  // ── Host positioning ──────────────────────────────────────────────────────
+  // Host is a zero-size anchor; the panel uses fixed positioning
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+  z-index: var(--uilib-context-menu-z-index);
+}
+
+// ── Panel ──────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__panel {
+  position: fixed;
+  z-index: var(--uilib-context-menu-z-index);
+  min-width: var(--uilib-context-menu-min-width);
+  background: var(--uilib-context-menu-bg);
+  border: var(--uilib-context-menu-border);
+  border-radius: var(--uilib-context-menu-radius);
+  box-shadow: var(--uilib-context-menu-shadow);
+  padding: var(--uilib-context-menu-padding) 0;
+  pointer-events: auto;
+  font-size: var(--uilib-context-menu-font-size);
+  outline: none;
+
+  // Hidden until position is adjusted (prevents 1-frame flash at wrong location)
+  opacity: 0;
+  transition: opacity 0.05s ease;
+}
+
+ui-lib-context-menu .ui-lib-context-menu__panel--positioned {
+  opacity: 1;
+}
+
+// ── List ────────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// ── Item ────────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__item {
+  position: relative;
+}
+
+// ── Link ────────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__link {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-context-menu-icon-gap);
+  padding: var(--uilib-context-menu-item-padding-y) var(--uilib-context-menu-item-padding-x);
+  color: var(--uilib-context-menu-item-color);
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
+  white-space: nowrap;
+}
+
+ui-lib-context-menu .ui-lib-context-menu__link:hover,
+ui-lib-context-menu .ui-lib-context-menu__item--active > .ui-lib-context-menu__link {
+  background-color: var(--uilib-context-menu-item-bg-hover);
+  color: var(--uilib-context-menu-item-color-hover);
+}
+
+ui-lib-context-menu .ui-lib-context-menu__link:focus-visible {
+  outline: none;
+  box-shadow: var(--uilib-context-menu-focus-shadow);
+  background-color: var(--uilib-context-menu-item-bg-hover);
+  color: var(--uilib-context-menu-item-color-hover);
+}
+
+ui-lib-context-menu .ui-lib-context-menu__link[aria-disabled='true'] {
+  color: var(--uilib-context-menu-item-color-disabled);
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
+
+// ── Icon ────────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--uilib-context-menu-icon-size);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+// ── Label ────────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__item-label {
+  flex: 1;
+}
+
+// ── Submenu chevron ──────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__submenu-icon {
+  margin-left: auto;
+  padding-left: var(--uilib-spacing-3, 0.75rem);
+  font-size: 1em;
+  opacity: 0.6;
+  line-height: 1;
+}
+
+// ── Separator ────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__separator {
+  height: 1px;
+  background-color: var(--uilib-context-menu-separator-color);
+  margin: var(--uilib-context-menu-separator-my) 0;
+}
+
+// ── Submenu panel ────────────────────────────────────────────────────────────
+
+ui-lib-context-menu .ui-lib-context-menu__submenu {
+  position: absolute;
+  left: 100%;
+  top: calc(-1 * var(--uilib-context-menu-padding));
+  min-width: var(--uilib-context-menu-min-width);
+  background: var(--uilib-context-menu-bg);
+  border: var(--uilib-context-menu-border);
+  border-radius: var(--uilib-context-menu-radius);
+  box-shadow: var(--uilib-context-menu-shadow);
+  padding: var(--uilib-context-menu-padding) 0;
+  list-style: none;
+  margin: 0;
+  z-index: 1;
+}
+
+// ── Sizes ─────────────────────────────────────────────────────────────────────
+
+ui-lib-context-menu.ui-lib-context-menu--size-sm {
+  --uilib-context-menu-font-size: var(--uilib-context-menu-font-size-sm);
+  --uilib-context-menu-item-padding-y: var(--uilib-context-menu-item-padding-y-sm);
+  --uilib-context-menu-item-padding-x: var(--uilib-spacing-2, 0.5rem);
+}
+
+ui-lib-context-menu.ui-lib-context-menu--size-lg {
+  --uilib-context-menu-font-size: var(--uilib-context-menu-font-size-lg);
+  --uilib-context-menu-item-padding-y: var(--uilib-context-menu-item-padding-y-lg);
+  --uilib-context-menu-item-padding-x: var(--uilib-spacing-4, 1rem);
+}
+
+// ── Variant: material ─────────────────────────────────────────────────────────
+
+ui-lib-context-menu.ui-lib-context-menu--variant-material {
+  --uilib-context-menu-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
+  --uilib-context-menu-item-color-hover: var(--uilib-color-primary-700, #1d4ed8);
+  --uilib-context-menu-focus-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 35%, transparent);
+}
+
+ui-lib-context-menu.ui-lib-context-menu--variant-material .ui-lib-context-menu__panel {
+  border-color: transparent;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+// ── Variant: bootstrap ────────────────────────────────────────────────────────
+
+ui-lib-context-menu.ui-lib-context-menu--variant-bootstrap {
+  --uilib-context-menu-bg: var(--uilib-surface-overlay, #ffffff);
+  --uilib-context-menu-border: 1px solid rgba(0, 0, 0, 0.175);
+  --uilib-context-menu-radius: 0.375rem;
+  --uilib-context-menu-item-bg-hover: var(--uilib-color-neutral-100, #f3f4f6);
+  --uilib-context-menu-item-color-hover: var(--uilib-color-neutral-900, #111827);
+  --uilib-context-menu-focus-shadow: 0 0 0 0.25rem
+    color-mix(in srgb, var(--uilib-color-primary-500, #3b82f6) 25%, transparent);
+}
+
+ui-lib-context-menu.ui-lib-context-menu--variant-bootstrap .ui-lib-context-menu__panel {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+// ── Variant: minimal ──────────────────────────────────────────────────────────
+
+ui-lib-context-menu.ui-lib-context-menu--variant-minimal {
+  --uilib-context-menu-bg: var(--uilib-surface-overlay, #ffffff);
+  --uilib-context-menu-border: 1px solid var(--uilib-color-neutral-300, #d1d5db);
+  --uilib-context-menu-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --uilib-context-menu-radius: var(--uilib-radius-sm, 0.25rem);
+  --uilib-context-menu-item-bg-hover: var(--uilib-color-neutral-50, #f9fafb);
+  --uilib-context-menu-item-color-hover: var(--uilib-color-neutral-900, #111827);
+  --uilib-context-menu-focus-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--uilib-color-neutral-700, #374151) 25%, transparent);
+}
+
+ui-lib-context-menu.ui-lib-context-menu--variant-minimal .ui-lib-context-menu__link {
+  border-radius: 0;
+}

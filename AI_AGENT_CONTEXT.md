@@ -27,6 +27,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ### Component/Docs Delta (Active Only)
 
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ImageCompare` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -73,6 +74,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-04-29 [context-menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/context-menu/ (new — types, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/context-menu/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (context-menu added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (context-menu import test added)
+  - projects/demo/src/app/pages/context-menu/ (full demo replacing placeholder — TS/HTML/SCSS, 8 sections + API tables)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from ContextMenu)
+  - AI_AGENT_CONTEXT.md (marked ContextMenu complete)
+State: ContextMenu component fully complete. PrimeNG-inspired context menu overlay component.
+  Right-click trigger (via show(event)/toggle(event)) or global document listener (global=true),
+  floating panel with fixed positioning + viewport overflow adjustment, menu items with label/icon/
+  disabled/separator/visible/styleClass/items(submenu)/command, one level of nested submenus opened
+  by hover (mouseenter) or keyboard (ArrowRight), keyboard navigation (ArrowUp/Down/Left/Right/Enter/
+  Space/Escape/Home/End), click-outside-to-close, isPositioned flag prevents 1-frame opacity flash,
+  three variants (material/bootstrap/minimal), three sizes (sm/md/lg), signal inputs/outputs,
+  ViewEncapsulation.None + OnPush + standalone, ThemeConfigService variant inheritance.
+  afterNextRender uses { injector } option to work inside effect() callbacks (test-safe).
+  55/55 unit tests passing. 55/55 entry-point tests passing. ESLint clean. Build zero errors.
+  Demo build zero errors (only pre-existing budget warnings in button/date-picker).
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/context-menu/ projects/demo/src/app/pages/context-menu/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/context-menu ✔ Built (zero errors),
+  npm test -- --testPathPatterns=context-menu --no-coverage (55/55 PASS),
+  npm test -- --testPathPatterns=entry-points --no-coverage (55/55 PASS),
+  npm run build:demo — EXIT:0 (zero errors, pre-existing budget warnings only).
+Terminal notes: afterNextRender() inside effect() requires { injector: this.injector } option —
+  without it throws NG0203 in test environment; inject(Injector) added to dependencies.
+  Unescaped { in demo HTML (e.g. code examples) must use &#123; / &#125; HTML entities. Shell: bash.exe.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
+
 Date: 2026-04-29 [breadcrumb session]
 Changed:
   - projects/ui-lib-custom/src/lib/breadcrumb/ (new — types, component, template, SCSS, spec, barrel)
@@ -99,35 +131,6 @@ Verification:
 Terminal notes: jest.fn() requires explicit jest.Mock type; jest.spyOn requires jest.SpiedFunction<typeof ...>;
   optional chain on textContent needed (string | null) but linter warned — fixed with (x as string).trim() cast.
   Shell: bash.exe.
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
-
-Date: 2026-04-29 [image-compare session]
-Changed:
-  - projects/ui-lib-custom/src/lib/image-compare/ (new — types, constants, component, template, SCSS, spec, barrel)
-  - projects/ui-lib-custom/image-compare/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (image-compare added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (image-compare import test added)
-  - projects/demo/src/app/pages/image-compare/ (full demo — TS/HTML/SCSS, 7 sections + API table)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from ImageCompare)
-  - AI_AGENT_CONTEXT.md (marked ImageCompare complete)
-State: ImageCompare component fully complete. PrimeNG-inspired before/after image comparison slider.
-  Two images (leftImage/rightImage) overlaid on a container; the right image is clipped via
-  clip-path:inset to reveal only the portion past the divider position. Draggable handle (pointer
-  capture for smooth tracking), click-anywhere-to-reposition, full keyboard navigation
-  (ArrowLeft/Right ±1%, PageUp/Down ±10%, Home=0%, End=100%), two-way [(value)] binding (0–100),
-  slideStart/slideEnd outputs, disabled state, three variants (material/bootstrap/minimal),
-  three sizes (sm/md/lg), signal inputs/model outputs throughout, ViewEncapsulation.None + OnPush,
-  ThemeConfigService variant inheritance.
-  37/37 unit tests passing. 53/53 entry-point tests passing. ESLint clean. Build zero errors.
-  Demo build zero errors (only pre-existing budget warnings in button/date-picker).
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/image-compare/ projects/demo/src/app/pages/image-compare/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/image-compare ✔ Built (zero errors),
-  npm test -- --testPathPatterns=image-compare --no-coverage (37/37 PASS),
-  npm test -- --testPathPatterns=entry-points --no-coverage (53/53 PASS),
-  npm run build:demo — EXIT:0 (zero errors, pre-existing budget warnings only).
-Terminal notes: PointerEvent not defined in JSDOM — used stub object with setPointerCapture mock
-  and called component method directly instead of dispatching DOM event. Shell: bash.exe.
 Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Date: 2026-04-29 [image-compare session]

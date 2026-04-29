@@ -1,0 +1,328 @@
+<section class="context-menu-demo" data-testid="context-menu-demo">
+  <h1>ContextMenu</h1>
+  <p>
+    A floating overlay menu displayed on right-click (or programmatically via
+    <code>show(event)</code>). Supports nested submenus, separators, disabled items, icons, keyboard
+    navigation, and three design variants.
+  </p>
+
+  <!-- ── Basic ─────────────────────────────────────────────────────────── -->
+  <h2>Basic</h2>
+  <p class="demo-hint">Right-click the box below to open the menu.</p>
+  <div class="demo-target" (contextmenu)="basicMenu.show($event)">Right-click here</div>
+  <ui-lib-context-menu #basicMenu [model]="basicItems" />
+
+  <!-- ── Separator ─────────────────────────────────────────────────────── -->
+  <h2>With Separator</h2>
+  <p class="demo-hint">
+    Add a <code>&#123; separator: true &#125;</code> item to insert a horizontal divider line.
+  </p>
+  <div class="demo-target" (contextmenu)="sepMenu.show($event)">Right-click here</div>
+  <ui-lib-context-menu #sepMenu [model]="separatorItems" />
+
+  <!-- ── Disabled ──────────────────────────────────────────────────────── -->
+  <h2>Disabled Items</h2>
+  <p class="demo-hint">
+    Set <code>disabled: true</code> on any item to make it non-interactive and visually muted.
+  </p>
+  <div class="demo-target" (contextmenu)="disabledMenu.show($event)">Right-click here</div>
+  <ui-lib-context-menu #disabledMenu [model]="disabledItems" />
+
+  <!-- ── Submenu ───────────────────────────────────────────────────────── -->
+  <h2>Nested Submenu</h2>
+  <p class="demo-hint">
+    Provide an <code>items</code> array on any item to create a submenu.
+    Hover or press <kbd>→</kbd> to expand it.
+  </p>
+  <div class="demo-target" (contextmenu)="submenuMenu.show($event)">Right-click here</div>
+  <ui-lib-context-menu #submenuMenu [model]="submenuItems" />
+
+  <!-- ── Image target ──────────────────────────────────────────────────── -->
+  <h2>Image Target</h2>
+  <p class="demo-hint">Attach the context menu to any element — here an image placeholder.</p>
+  <div
+    class="demo-image-target"
+    role="img"
+    aria-label="Sample image placeholder"
+    (contextmenu)="imageMenu.show($event)"
+  >
+    🖼 Right-click this image
+  </div>
+  <ui-lib-context-menu #imageMenu [model]="imageItems" />
+
+  <!-- ── Command callbacks ─────────────────────────────────────────────── -->
+  <h2>Command Callback &amp; itemClick Output</h2>
+  <p class="demo-hint">
+    Use the <code>command</code> callback on each item or listen to the <code>itemClick</code>
+    output on the component.
+  </p>
+  <div
+    class="demo-target"
+    (contextmenu)="eventMenu.show($event)"
+  >
+    Right-click here
+  </div>
+  <ui-lib-context-menu #eventMenu [model]="eventItems" (itemClick)="onItemClick($event)" />
+  @if (eventLog().length > 0) {
+    <div class="demo-event-log" aria-live="polite">
+      @for (entry of eventLog(); track $index) {
+        <p>{{ entry }}</p>
+      }
+    </div>
+  }
+
+  <!-- ── Variants ──────────────────────────────────────────────────────── -->
+  <h2>Variants</h2>
+  <div class="demo-column">
+    <div class="demo-label-row">
+      <span class="demo-label">Material</span>
+      <div class="demo-target demo-target--sm" (contextmenu)="materialMenu.show($event)">
+        Right-click
+      </div>
+      <ui-lib-context-menu #materialMenu [model]="basicItems" variant="material" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">Bootstrap</span>
+      <div class="demo-target demo-target--sm" (contextmenu)="bootstrapMenu.show($event)">
+        Right-click
+      </div>
+      <ui-lib-context-menu #bootstrapMenu [model]="basicItems" variant="bootstrap" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">Minimal</span>
+      <div class="demo-target demo-target--sm" (contextmenu)="minimalMenu.show($event)">
+        Right-click
+      </div>
+      <ui-lib-context-menu #minimalMenu [model]="basicItems" variant="minimal" />
+    </div>
+  </div>
+
+  <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+  <h2>Sizes</h2>
+  <div class="demo-column">
+    <div class="demo-label-row">
+      <span class="demo-label">sm</span>
+      <div class="demo-target demo-target--sm" (contextmenu)="smMenu.show($event)">
+        Right-click
+      </div>
+      <ui-lib-context-menu #smMenu [model]="sizeItems" size="sm" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">md</span>
+      <div class="demo-target demo-target--sm" (contextmenu)="mdMenu.show($event)">
+        Right-click
+      </div>
+      <ui-lib-context-menu #mdMenu [model]="sizeItems" size="md" />
+    </div>
+    <div class="demo-label-row">
+      <span class="demo-label">lg</span>
+      <div class="demo-target demo-target--sm" (contextmenu)="lgMenu.show($event)">
+        Right-click
+      </div>
+      <ui-lib-context-menu #lgMenu [model]="sizeItems" size="lg" />
+    </div>
+  </div>
+
+  <!-- ── API Table ─────────────────────────────────────────────────────── -->
+  <h2>API</h2>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Input</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>model</code></td>
+        <td><code>ContextMenuItem[]</code></td>
+        <td><code>[]</code></td>
+        <td>Array of menu items to display.</td>
+      </tr>
+      <tr>
+        <td><code>global</code></td>
+        <td><code>boolean</code></td>
+        <td><code>false</code></td>
+        <td>
+          When true, listens to <code>contextmenu</code> events on the entire document automatically.
+        </td>
+      </tr>
+      <tr>
+        <td><code>variant</code></td>
+        <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+        <td><code>null</code></td>
+        <td>Design-system variant; falls back to ThemeConfigService when null.</td>
+      </tr>
+      <tr>
+        <td><code>size</code></td>
+        <td><code>'sm' | 'md' | 'lg'</code></td>
+        <td><code>'md'</code></td>
+        <td>Controls font size and item padding.</td>
+      </tr>
+      <tr>
+        <td><code>styleClass</code></td>
+        <td><code>string | null</code></td>
+        <td><code>null</code></td>
+        <td>Extra CSS class appended to the host element.</td>
+      </tr>
+      <tr>
+        <td><code>ariaLabel</code></td>
+        <td><code>string</code></td>
+        <td><code>'Context Menu'</code></td>
+        <td>Accessible label applied to the menu panel (<code>aria-label</code>).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Outputs</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Output</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>itemClick</code></td>
+        <td><code>ContextMenuItemCommandEvent</code></td>
+        <td>Emitted when a non-disabled leaf item is activated.</td>
+      </tr>
+      <tr>
+        <td><code>menuShow</code></td>
+        <td><code>MouseEvent</code></td>
+        <td>Emitted when the menu becomes visible.</td>
+      </tr>
+      <tr>
+        <td><code>menuHide</code></td>
+        <td><code>void</code></td>
+        <td>Emitted when the menu is hidden.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Public Methods</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Signature</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>show</code></td>
+        <td><code>(event: MouseEvent): void</code></td>
+        <td>
+          Opens the menu at the cursor position. Calls
+          <code>event.preventDefault()</code> to suppress the native context menu.
+        </td>
+      </tr>
+      <tr>
+        <td><code>hide</code></td>
+        <td><code>(): void</code></td>
+        <td>Hides the menu. No-op when already hidden.</td>
+      </tr>
+      <tr>
+        <td><code>toggle</code></td>
+        <td><code>(event: MouseEvent): void</code></td>
+        <td>Toggles visibility at the cursor position.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>ContextMenuItem interface</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>label</code></td>
+        <td><code>string?</code></td>
+        <td>Display text for the item.</td>
+      </tr>
+      <tr>
+        <td><code>icon</code></td>
+        <td><code>string?</code></td>
+        <td>Icon class name rendered before the label.</td>
+      </tr>
+      <tr>
+        <td><code>disabled</code></td>
+        <td><code>boolean?</code></td>
+        <td>When true, the item is non-interactive.</td>
+      </tr>
+      <tr>
+        <td><code>separator</code></td>
+        <td><code>boolean?</code></td>
+        <td>When true, renders a visual separator instead of a menu item.</td>
+      </tr>
+      <tr>
+        <td><code>visible</code></td>
+        <td><code>boolean?</code></td>
+        <td>When explicitly false, the item is excluded from the rendered list.</td>
+      </tr>
+      <tr>
+        <td><code>styleClass</code></td>
+        <td><code>string?</code></td>
+        <td>Extra CSS class on the item element.</td>
+      </tr>
+      <tr>
+        <td><code>items</code></td>
+        <td><code>ContextMenuItem[]?</code></td>
+        <td>Nested items displayed as a submenu.</td>
+      </tr>
+      <tr>
+        <td><code>command</code></td>
+        <td><code>(event: ContextMenuItemCommandEvent) => void</code></td>
+        <td>Callback invoked when the item is activated.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Keyboard Navigation ───────────────────────────────────────────── -->
+  <h2>Keyboard Navigation</h2>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Behaviour</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><kbd>↓</kbd> / <kbd>↑</kbd></td>
+        <td>Move focus to the next / previous enabled menu item (skips separators and disabled).</td>
+      </tr>
+      <tr>
+        <td><kbd>→</kbd></td>
+        <td>Open the submenu of the focused item and move focus to its first item.</td>
+      </tr>
+      <tr>
+        <td><kbd>←</kbd></td>
+        <td>Close the current submenu and return focus to the parent item.</td>
+      </tr>
+      <tr>
+        <td><kbd>Enter</kbd> / <kbd>Space</kbd></td>
+        <td>Activate the focused item.</td>
+      </tr>
+      <tr>
+        <td><kbd>Escape</kbd></td>
+        <td>Close the menu (or close just the submenu from within a submenu).</td>
+      </tr>
+      <tr>
+        <td><kbd>Home</kbd> / <kbd>End</kbd></td>
+        <td>Jump to the first / last item in the top-level menu.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+

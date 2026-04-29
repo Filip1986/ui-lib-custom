@@ -192,6 +192,10 @@
     "./breadcrumb": {
       "esm2022": "./esm2022/breadcrumb/index.mjs",
       "esm": "./esm2022/breadcrumb/index.mjs"
+    },
+    "./context-menu": {
+      "esm2022": "./esm2022/context-menu/index.mjs",
+      "esm": "./esm2022/context-menu/index.mjs"
     }
   },
   "typesVersions": {
@@ -306,6 +310,9 @@
       ],
       "breadcrumb": [
         "./breadcrumb/index.d.ts"
+      ],
+      "context-menu": [
+        "./context-menu/index.d.ts"
       ]
     }
   }
