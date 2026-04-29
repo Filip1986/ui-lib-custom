@@ -1,0 +1,63 @@
+<!-- ─── Container ──────────────────────────────────────────────────────────────── -->
+<div
+  #compareContainer
+  class="uilib-image-compare__container"
+  (pointerdown)="onContainerPointerDown($event)"
+>
+  <!-- ── Left image (always full-width, anchored to the left) ─────────────────── -->
+  <img
+    class="uilib-image-compare__img uilib-image-compare__img--left"
+    [src]="leftImage()"
+    [attr.alt]="leftAlt()"
+    draggable="false"
+  />
+
+  <!-- ── Right image (clipped to reveal only the right portion) ───────────────── -->
+  <img
+    class="uilib-image-compare__img uilib-image-compare__img--right"
+    [src]="rightImage()"
+    [attr.alt]="rightAlt()"
+    [style.clip-path]="rightClipPath()"
+    draggable="false"
+  />
+
+  <!-- ── Divider line ─────────────────────────────────────────────────────────── -->
+  <div
+    class="uilib-image-compare__divider"
+    [style.left]="handlePosition()"
+    aria-hidden="true"
+  ></div>
+
+  <!-- ── Draggable handle ─────────────────────────────────────────────────────── -->
+  <div
+    class="uilib-image-compare__handle"
+    [style.left]="handlePosition()"
+    role="slider"
+    tabindex="0"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-valuenow]="clampedValue()"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-disabled]="disabled() ? 'true' : null"
+    (pointerdown)="onHandlePointerDown($event)"
+    (keydown)="onHandleKeyDown($event)"
+    (focus)="onHandleFocus()"
+    (blur)="onHandleBlur()"
+  >
+    <!-- Handle knob icon -->
+    <svg
+      class="uilib-image-compare__handle-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="9 18 15 12 9 6" />
+      <polyline points="15 6 9 12 15 18" transform="translate(-6,0)" />
+    </svg>
+  </div>
+</div>
+

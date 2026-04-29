@@ -1,0 +1,191 @@
+// ─── ImageCompare CSS variables ───────────────────────────────────────────────
+ui-lib-image-compare {
+  --uilib-image-compare-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-image-compare-divider-width: 2px;
+  --uilib-image-compare-divider-color: #ffffff;
+  --uilib-image-compare-handle-size-sm: 2rem;
+  --uilib-image-compare-handle-size-md: 2.75rem;
+  --uilib-image-compare-handle-size-lg: 3.5rem;
+  --uilib-image-compare-handle-bg: #ffffff;
+  --uilib-image-compare-handle-color: #374151;
+  --uilib-image-compare-handle-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --uilib-image-compare-handle-icon-size-sm: 0.875rem;
+  --uilib-image-compare-handle-icon-size-md: 1.125rem;
+  --uilib-image-compare-handle-icon-size-lg: 1.375rem;
+  --uilib-image-compare-focus-ring: 0 0 0 3px rgba(99, 102, 241, 0.45);
+}
+
+// ─── Host ─────────────────────────────────────────────────────────────────────
+.ui-lib-image-compare {
+  display: block;
+}
+
+// ─── Container ────────────────────────────────────────────────────────────────
+.uilib-image-compare__container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--uilib-image-compare-radius);
+  line-height: 0;
+  user-select: none;
+
+  .ui-lib-image-compare--disabled & {
+    cursor: not-allowed;
+  }
+
+  .ui-lib-image-compare--dragging & {
+    cursor: ew-resize;
+  }
+}
+
+// ─── Images ───────────────────────────────────────────────────────────────────
+.uilib-image-compare__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+
+  &--left {
+    position: relative;
+    z-index: 0;
+  }
+
+  &--right {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+}
+
+// ─── Divider line ─────────────────────────────────────────────────────────────
+.uilib-image-compare__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: var(--uilib-image-compare-divider-width);
+  background-color: var(--uilib-image-compare-divider-color);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+// ─── Handle ───────────────────────────────────────────────────────────────────
+.uilib-image-compare__handle {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--uilib-image-compare-handle-bg);
+  color: var(--uilib-image-compare-handle-color);
+  box-shadow: var(--uilib-image-compare-handle-shadow);
+  cursor: ew-resize;
+  touch-action: none;
+  transition: box-shadow 0.15s ease;
+
+  .ui-lib-image-compare--size-sm & {
+    width: var(--uilib-image-compare-handle-size-sm);
+    height: var(--uilib-image-compare-handle-size-sm);
+  }
+
+  .ui-lib-image-compare--size-md & {
+    width: var(--uilib-image-compare-handle-size-md);
+    height: var(--uilib-image-compare-handle-size-md);
+  }
+
+  .ui-lib-image-compare--size-lg & {
+    width: var(--uilib-image-compare-handle-size-lg);
+    height: var(--uilib-image-compare-handle-size-lg);
+  }
+
+  .ui-lib-image-compare--disabled & {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover:not(.ui-lib-image-compare--disabled &) {
+    box-shadow:
+      var(--uilib-image-compare-handle-shadow),
+      0 0 0 4px rgba(255, 255, 255, 0.3);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--uilib-image-compare-focus-ring);
+  }
+
+  .ui-lib-image-compare--focused & {
+    box-shadow: var(--uilib-image-compare-focus-ring);
+  }
+}
+
+// ─── Handle icon ──────────────────────────────────────────────────────────────
+.uilib-image-compare__handle-icon {
+  flex-shrink: 0;
+
+  .ui-lib-image-compare--size-sm & {
+    width: var(--uilib-image-compare-handle-icon-size-sm);
+    height: var(--uilib-image-compare-handle-icon-size-sm);
+  }
+
+  .ui-lib-image-compare--size-md & {
+    width: var(--uilib-image-compare-handle-icon-size-md);
+    height: var(--uilib-image-compare-handle-icon-size-md);
+  }
+
+  .ui-lib-image-compare--size-lg & {
+    width: var(--uilib-image-compare-handle-icon-size-lg);
+    height: var(--uilib-image-compare-handle-icon-size-lg);
+  }
+}
+
+// ─── Variant: material ────────────────────────────────────────────────────────
+.ui-lib-image-compare--variant-material {
+  .uilib-image-compare__container {
+    box-shadow: var(--uilib-shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+  }
+
+  .uilib-image-compare__handle {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// ─── Variant: bootstrap ───────────────────────────────────────────────────────
+.ui-lib-image-compare--variant-bootstrap {
+  .uilib-image-compare__container {
+    border-radius: var(--uilib-radius-sm, 4px);
+    border: 1px solid var(--uilib-color-border, #dee2e6);
+  }
+
+  .uilib-image-compare__handle {
+    border-radius: var(--uilib-radius-sm, 4px);
+  }
+}
+
+// ─── Variant: minimal ─────────────────────────────────────────────────────────
+.ui-lib-image-compare--variant-minimal {
+  .uilib-image-compare__container {
+    border-radius: 0;
+  }
+
+  .uilib-image-compare__handle {
+    border-radius: 0;
+  }
+
+  .uilib-image-compare__divider-color {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+// ─── Dark mode ────────────────────────────────────────────────────────────────
+@media (prefers-color-scheme: dark) {
+  ui-lib-image-compare {
+    --uilib-image-compare-handle-bg: #1f2937;
+    --uilib-image-compare-handle-color: #f9fafb;
+    --uilib-image-compare-handle-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+}

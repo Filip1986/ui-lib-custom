@@ -51,6 +51,7 @@ import type * as UiLibToggleSwitch from 'ui-lib-custom/toggle-switch';
 import type * as UiLibTreeSelect from 'ui-lib-custom/tree-select';
 import type * as UiLibGalleria from 'ui-lib-custom/galleria';
 import type * as UiLibImage from 'ui-lib-custom/image';
+import type * as UiLibImageCompare from 'ui-lib-custom/image-compare';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -375,5 +376,12 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.ImageComponent).toBeDefined();
     expect(mod.Image).toBeDefined();
     expect(mod.IMAGE_ZOOM_MAX).toBeDefined();
+  });
+
+  it('should import from image-compare', async (): Promise<void> => {
+    const mod: typeof UiLibImageCompare = await import('ui-lib-custom/image-compare');
+    expect(mod.ImageCompareComponent).toBeDefined();
+    expect(mod.ImageCompare).toBeDefined();
+    expect(mod.IMAGE_COMPARE_DEFAULT_VALUE).toBeDefined();
   });
 });

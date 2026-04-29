@@ -184,6 +184,10 @@
     "./image": {
       "esm2022": "./esm2022/image/index.mjs",
       "esm": "./esm2022/image/index.mjs"
+    },
+    "./image-compare": {
+      "esm2022": "./esm2022/image-compare/index.mjs",
+      "esm": "./esm2022/image-compare/index.mjs"
     }
   },
   "typesVersions": {
@@ -292,6 +296,9 @@
       ],
       "image": [
         "./image/index.d.ts"
+      ],
+      "image-compare": [
+        "./image-compare/index.d.ts"
       ]
     }
   }

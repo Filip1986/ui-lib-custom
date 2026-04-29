@@ -27,6 +27,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ### Component/Docs Delta (Active Only)
 
 - `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ImageCompare` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Textarea` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Galleria` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -69,6 +70,35 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-29 [image-compare session]
+Changed:
+  - projects/ui-lib-custom/src/lib/image-compare/ (new — types, constants, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/image-compare/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (image-compare added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (image-compare import test added)
+  - projects/demo/src/app/pages/image-compare/ (full demo — TS/HTML/SCSS, 7 sections + API table)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from ImageCompare)
+  - AI_AGENT_CONTEXT.md (marked ImageCompare complete)
+State: ImageCompare component fully complete. PrimeNG-inspired before/after image comparison slider.
+  Two images (leftImage/rightImage) overlaid on a container; the right image is clipped via
+  clip-path:inset to reveal only the portion past the divider position. Draggable handle (pointer
+  capture for smooth tracking), click-anywhere-to-reposition, full keyboard navigation
+  (ArrowLeft/Right ±1%, PageUp/Down ±10%, Home=0%, End=100%), two-way [(value)] binding (0–100),
+  slideStart/slideEnd outputs, disabled state, three variants (material/bootstrap/minimal),
+  three sizes (sm/md/lg), signal inputs/model outputs throughout, ViewEncapsulation.None + OnPush,
+  ThemeConfigService variant inheritance.
+  37/37 unit tests passing. 53/53 entry-point tests passing. ESLint clean. Build zero errors.
+  Demo build zero errors (only pre-existing budget warnings in button/date-picker).
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/image-compare/ projects/demo/src/app/pages/image-compare/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/image-compare ✔ Built (zero errors),
+  npm test -- --testPathPatterns=image-compare --no-coverage (37/37 PASS),
+  npm test -- --testPathPatterns=entry-points --no-coverage (53/53 PASS),
+  npm run build:demo — EXIT:0 (zero errors, pre-existing budget warnings only).
+Terminal notes: PointerEvent not defined in JSDOM — used stub object with setPointerCapture mock
+  and called component method directly instead of dispatching DOM event. Shell: bash.exe.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Date: 2026-04-29 [image session]
 Changed:
@@ -135,82 +165,3 @@ Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
-Date: 2026-04-29 [tree-select session]
-Changed:
-  - projects/ui-lib-custom/src/lib/tree-select/ (new — types, constants, component, template, SCSS, spec, barrel)
-  - projects/ui-lib-custom/tree-select/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (tree-select added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (tree-select import test added)
-  - projects/demo/src/app/pages/tree-select/ (full demo — TS/HTML/SCSS, 11 sections)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from TreeSelect)
-  - AI_AGENT_CONTEXT.md (marked TreeSelect complete)
-State: TreeSelect component fully complete. Combobox-style overlay wrapping the existing Tree
-  component. Supports single, multiple, and checkbox selection modes. CVA (ngModel + reactive
-  forms), model() two-way binding for selection + panelVisible, three variants
-  (material/bootstrap/minimal), three sizes (sm/md/lg), disabled/loading states, filter input
-  passthrough, showClear button, full ARIA (role=combobox, aria-expanded, aria-haspopup="tree",
-  aria-controls, aria-label/labelledby, aria-invalid, aria-disabled, aria-required), keyboard
-  nav (Enter/Space opens, Escape closes, Tab closes).
-  41/41 unit tests passing. 50/50 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/tree-select/ projects/demo/src/app/pages/tree-select/ --max-warnings 0 (CLEAN),
-  npm run build — all entry points ✔ Built ui-lib-custom/tree-select (zero errors),
-  npx.cmd jest --testPathPatterns="tree-select" --no-coverage (41/41 PASS),
-  npx.cmd jest --testPathPatterns="entry-points" --no-coverage (50/50 PASS).
-Terminal notes: No issues. Shell: bash.exe.
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
-
-Date: 2026-04-29 [toggle-button session]
-Changed:
-  - projects/ui-lib-custom/src/lib/toggle-button/ (new -- types, component, template, SCSS, spec, barrel)
-  - projects/ui-lib-custom/toggle-button/ (new secondary entry point)
-  - projects/ui-lib-custom/package.json (toggle-button added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (toggle-button import test added)
-  - projects/demo/src/app/pages/toggle-button/ (full demo -- TS/HTML/SCSS, 9 sections)
-  - AI_AGENT_CONTEXT.md (marked ToggleButton complete)
-State: ToggleButton component fully complete. CVA (ngModel + reactive forms), model() two-way
-  binding, onLabel/offLabel, onIcon/offIcon with ui-lib-icon, iconPos (left/right),
-  allowEmpty, autofocus, ariaLabel/ariaLabelledBy, three variants (material/bootstrap/minimal),
-  three sizes (sm/md/lg), disabled, role=switch + aria-checked, keyboard (Enter/Space),
-  live announcements via LiveAnnouncerService, dark mode SCSS.
-  36/36 unit tests passing. 48/48 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  npx eslint projects/ui-lib-custom/src/lib/toggle-button/ projects/demo/src/app/pages/toggle-button/ --max-warnings 0 (CLEAN),
-  npx ng build ui-lib-custom (toggle-button Built, zero errors),
-  npx jest --testPathPatterns="toggle-button" --no-cache (36/36 PASS),
-  npx jest --testPathPatterns="entry-points" --no-cache (48/48 PASS).
-Terminal notes: getHost() helper in spec must query querySelector('ui-lib-toggle-button') not
-  use fixture.nativeElement directly (which is the wrapper host). ngModel init test needs
-  double detectChanges/whenStable cycle in zoneless mode.
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
-
-Date: 2026-04-29 [textarea session]
-Changed:
-  - projects/ui-lib-custom/src/lib/textarea/ (new -- types, component, template, SCSS, spec, barrel)
-  - projects/ui-lib-custom/textarea/ (new secondary entry point)
-  - projects/ui-lib-custom/package.json (textarea added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (textarea import test added)
-  - projects/demo/src/app/pages/textarea/ (full demo -- TS/HTML/SCSS, 10 sections)
-  - AI_AGENT_CONTEXT.md (marked Textarea complete)
-State: Textarea component fully complete. CVA (ngModel + reactive forms), auto-resize,
-  char counter, maxLength, three variants (material/bootstrap/minimal), three sizes
-  (sm/md/lg), disabled/readonly/required, ARIA labels/roles, focus/blur outputs.
-  39/39 unit tests passing. 47/47 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  npx eslint projects/ui-lib-custom/src/lib/textarea/ ... --max-warnings 0 (CLEAN),
-  npx ng build ui-lib-custom (all entry points Built, zero errors),
-  npx jest --testPathPatterns="textarea" --no-cache (39/39 PASS),
-  npx jest --testPathPatterns="entry-points" --no-cache (47/47 PASS).
-Terminal notes: Edit/Write tools truncate files -- always use Python open(path,"w") for
-  file writes. package.json, entry-points.spec.ts, and rating files restored from git
-  via Python subprocess. Shell: bash in sandbox.
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo/z-index manager).
-
-Date: 2026-04-29 [slider completion session]
-Changed:
-  - projects/ui-lib-custom/src/lib/slider/slider.ts (moved ElementRef to import type block)
-  - projects/ui-lib-custom/src/lib/slider/slider.spec.ts (removed unused getDebugEl + By imports;
-    fixed a11y beforeEach with double detectChanges cycle; fixed CVA test with
-    changeDetectorRef.markForCheck() + double detectChanges)
-  - docs/reference/components/SLIDER.md (new — full API + usage + theming + a11y + keyboard docs)
-  - docs/reference/components/README.md (added Slider section and quick-reference
