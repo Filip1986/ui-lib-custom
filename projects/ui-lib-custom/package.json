@@ -168,6 +168,10 @@
     "./toggle-button": {
       "esm2022": "./esm2022/toggle-button/index.mjs",
       "esm": "./esm2022/toggle-button/index.mjs"
+    },
+    "./toggle-switch": {
+      "esm2022": "./esm2022/toggle-switch/index.mjs",
+      "esm": "./esm2022/toggle-switch/index.mjs"
     }
   },
   "typesVersions": {
@@ -264,6 +268,9 @@
       ],
       "toggle-button": [
         "./toggle-button/index.d.ts"
+      ],
+      "toggle-switch": [
+        "./toggle-switch/index.d.ts"
       ]
     }
   }

@@ -47,6 +47,7 @@ import type * as UiLibRating from 'ui-lib-custom/rating';
 import type * as UiLibSlider from 'ui-lib-custom/slider';
 import type * as UiLibTextarea from 'ui-lib-custom/textarea';
 import type * as UiLibToggleButton from 'ui-lib-custom/toggle-button';
+import type * as UiLibToggleSwitch from 'ui-lib-custom/toggle-switch';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -340,6 +341,11 @@ describe('Secondary Entry Points', (): void => {
   it('should import from toggle-button', async (): Promise<void> => {
     const mod: typeof UiLibToggleButton = await import('ui-lib-custom/toggle-button');
     expect(mod.ToggleButton).toBeDefined();
+  });
+
+  it('should import from toggle-switch', async (): Promise<void> => {
+    const mod: typeof UiLibToggleSwitch = await import('ui-lib-custom/toggle-switch');
+    expect(mod.ToggleSwitch).toBeDefined();
   });
 
   it('should import from textarea', async (): Promise<void> => {

@@ -38,6 +38,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Upload` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `VirtualScroller` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
 - `Tree` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
+- `ToggleSwitch` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `TreeTable` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
 - `Table` -> ✅ complete (implementation/tests/demo/docs/entry-point verification done)
 - `Timeline` -> ✅ complete (implementation/tests/entry-point/demo/docs/final QA complete)
@@ -153,6 +154,30 @@ Verification:
   npx.cmd jest --testPathPatterns="rating" --no-cache (40/40 PASS),
   npx.cmd jest --testPathPatterns="entry-points" --no-cache (45/45 PASS),
   npx.cmd ng build demo (Application bundle generation complete, zero new errors).
+Terminal notes: No issues. Shell: bash.exe.
+Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
+---
+
+Date: 2026-04-29 [toggle-switch session]
+Changed:
+  - projects/ui-lib-custom/src/lib/toggle-switch/ (new — toggle-switch.ts, .html, .scss, .types.ts, index.ts, .spec.ts)
+  - projects/ui-lib-custom/toggle-switch/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (added toggle-switch to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (added toggle-switch import test)
+  - projects/demo/src/app/pages/toggle-switch/ (replaced placeholder — full demo with variants/sizes/disabled/readonly/ngModel/reactive forms/playground)
+  - AI_AGENT_CONTEXT.md (added ToggleSwitch to inventory)
+State: ToggleSwitch fully complete. Sliding pill-switch with ControlValueAccessor (ngModel + reactive
+  forms), ModelSignal two-way binding, three variants (material/bootstrap/minimal), three sizes
+  (sm/md/lg), disabled/readonly states, full ARIA (role=switch, aria-checked, aria-labelledby),
+  keyboard nav (Space key). 37/37 unit tests passing. 49/49 entry-point tests passing. ESLint clean.
+  Library build zero warnings. Fixed native change-event bubbling issue by adding onNativeChange()
+  handler that calls stopPropagation() on the inner input.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/toggle-switch/ projects/demo/src/app/pages/toggle-switch/ --max-warnings 0 (CLEAN),
+  npm run build — all entry points ✔ Built ui-lib-custom/toggle-switch (zero errors/warnings),
+  npx.cmd jest --testPathPatterns="toggle-switch" --no-coverage (37/37 PASS),
+  npx.cmd jest --testPathPatterns="entry-points" --no-coverage (49/49 PASS).
 Terminal notes: No issues. Shell: bash.exe.
 Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
 

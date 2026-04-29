@@ -1,0 +1,160 @@
+<div class="toggle-switch-demo">
+  <h1 class="demo-title">ToggleSwitch</h1>
+  <p class="demo-subtitle">A sliding pill switch for toggling boolean values. Supports ngModel, reactive forms, three design variants, and full keyboard &amp; ARIA accessibility.</p>
+
+  <!-- ── Basic ──────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <ui-lib-card>
+      <div class="demo-row">
+        <ui-lib-toggle-switch label="Off by default" [(checked)]="basicChecked" />
+        <span class="demo-state">{{ basicChecked ? 'ON' : 'OFF' }}</span>
+      </div>
+      <div class="demo-row">
+        <ui-lib-toggle-switch label="On by default" [(checked)]="preChecked" />
+        <span class="demo-state">{{ preChecked ? 'ON' : 'OFF' }}</span>
+      </div>
+      <div class="demo-row">
+        <ui-lib-toggle-switch ariaLabel="No visible label" [(checked)]="basicChecked" />
+        <span class="demo-hint">(no visible label — uses aria-label)</span>
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Variants ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <ui-lib-card>
+      <div class="demo-variants-grid">
+        @for (variant of variants; track variant) {
+          <div class="demo-variant-row">
+            <span class="demo-variant-label">{{ variant }}</span>
+            <ui-lib-toggle-switch
+              [variant]="variant"
+              label="Toggle"
+              [checked]="true"
+            />
+            <ui-lib-toggle-switch
+              [variant]="variant"
+              label="Toggle"
+              [checked]="false"
+            />
+          </div>
+        }
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Sizes</h2>
+    <ui-lib-card>
+      <div class="demo-sizes-row">
+        @for (size of sizes; track size) {
+          <div class="demo-size-item">
+            <ui-lib-toggle-switch [size]="size" [label]="size" [checked]="true" />
+          </div>
+        }
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Disabled &amp; Readonly ─────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Disabled &amp; Readonly</h2>
+    <ui-lib-card>
+      <div class="demo-row">
+        <ui-lib-toggle-switch label="Disabled (off)" [disabled]="true" />
+        <ui-lib-toggle-switch label="Disabled (on)" [disabled]="true" [checked]="true" />
+      </div>
+      <div class="demo-row">
+        <ui-lib-toggle-switch label="Readonly (off)" [readonly]="true" />
+        <ui-lib-toggle-switch label="Readonly (on)" [readonly]="true" [checked]="true" />
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── ngModel ───────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Two-way binding (ngModel)</h2>
+    <ui-lib-card>
+      <div class="demo-row">
+        <ui-lib-toggle-switch label="Sync with ngModel" [(ngModel)]="ngModelValue" />
+        <span class="demo-state">ngModel value: {{ ngModelValue }}</span>
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Reactive forms ────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Reactive Forms</h2>
+    <ui-lib-card>
+      <div class="demo-row">
+        <ui-lib-toggle-switch label="Notifications" [formControl]="notificationsControl" />
+        <span class="demo-state">Status: {{ reactiveFormText() }}</span>
+      </div>
+      <div class="demo-row">
+        <ui-lib-toggle-switch label="Disabled via FormControl" [formControl]="disabledControl" />
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Playground ────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Playground</h2>
+    <ui-lib-card>
+      <div class="demo-playground">
+        <div class="demo-playground__controls">
+          <div class="demo-control-group">
+            <label class="demo-control-label">Variant</label>
+            <div class="demo-control-buttons">
+              @for (v of variants; track v) {
+                <button
+                  type="button"
+                  class="demo-pill-btn"
+                  [class.demo-pill-btn--active]="playgroundVariant() === v"
+                  (click)="setPlaygroundVariant(v)"
+                >{{ v }}</button>
+              }
+            </div>
+          </div>
+
+          <div class="demo-control-group">
+            <label class="demo-control-label">Size</label>
+            <div class="demo-control-buttons">
+              @for (s of sizes; track s) {
+                <button
+                  type="button"
+                  class="demo-pill-btn"
+                  [class.demo-pill-btn--active]="playgroundSize() === s"
+                  (click)="setPlaygroundSize(s)"
+                >{{ s }}</button>
+              }
+            </div>
+          </div>
+
+          <div class="demo-control-group">
+            <label class="demo-control-label">States</label>
+            <div class="demo-control-toggles">
+              <ui-lib-toggle-switch label="Disabled" [(checked)]="playgroundDisabled" size="sm" />
+              <ui-lib-toggle-switch label="Readonly" [(checked)]="playgroundReadonly" size="sm" />
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-playground__preview">
+          <ui-lib-toggle-switch
+            [variant]="playgroundVariant()"
+            [size]="playgroundSize()"
+            [disabled]="playgroundDisabled()"
+            [readonly]="playgroundReadonly()"
+            [label]="playgroundLabel()"
+            [(checked)]="playgroundChecked"
+          />
+          <span class="demo-state">{{ playgroundChecked ? 'ON' : 'OFF' }}</span>
+        </div>
+      </div>
+    </ui-lib-card>
+  </section>
+</div>
+

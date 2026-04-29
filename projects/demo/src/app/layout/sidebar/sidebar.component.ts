@@ -307,7 +307,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/toggle-switch',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'TreeSelect',

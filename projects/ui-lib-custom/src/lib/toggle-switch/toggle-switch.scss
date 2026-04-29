@@ -1,0 +1,233 @@
+// ──────────────────────────────────────────────────────────────────────
+// ToggleSwitch component styles
+// Convention: --uilib-toggle-switch-{property}[-{variant}][-{state}]
+// ──────────────────────────────────────────────────────────────────────
+
+ui-lib-toggle-switch {
+  // ── Design tokens (overridable per instance) ──────────────────────
+  --uilib-toggle-switch-track-width: 2.75rem;
+  --uilib-toggle-switch-track-height: 1.5rem;
+  --uilib-toggle-switch-thumb-size: 1.125rem;
+  --uilib-toggle-switch-thumb-offset: 0.1875rem;
+
+  --uilib-toggle-switch-track-bg: var(--uilib-color-neutral-300, #cbd5e1);
+  --uilib-toggle-switch-track-bg-checked: var(--uilib-color-primary-500, #6366f1);
+  --uilib-toggle-switch-track-bg-hover: var(--uilib-color-neutral-400, #94a3b8);
+  --uilib-toggle-switch-track-bg-checked-hover: var(--uilib-color-primary-600, #4f46e5);
+  --uilib-toggle-switch-track-border-color: transparent;
+  --uilib-toggle-switch-track-border-radius: var(--uilib-radius-full, 9999px);
+
+  --uilib-toggle-switch-thumb-bg: var(--uilib-color-neutral-50, #f8fafc);
+  --uilib-toggle-switch-thumb-bg-checked: var(--uilib-color-neutral-50, #f8fafc);
+  --uilib-toggle-switch-thumb-shadow: 0 1px 3px rgb(0 0 0 / 25%);
+
+  --uilib-toggle-switch-focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--uilib-color-primary-500, #6366f1) 30%, transparent);
+
+  --uilib-toggle-switch-gap: var(--uilib-space-3, 0.75rem);
+  --uilib-toggle-switch-font: var(--uilib-font-ui, inherit);
+  --uilib-toggle-switch-transition-duration: var(--uilib-transition-base, 0.2s);
+
+  // ── Host layout ───────────────────────────────────────────────────
+  display: inline-flex;
+  align-items: center;
+  gap: var(--uilib-toggle-switch-gap);
+  cursor: pointer;
+  font-family: var(--uilib-toggle-switch-font), sans-serif;
+  color: inherit;
+  outline: none;
+  user-select: none;
+}
+
+// ── Visually hidden native input (accessible) ─────────────────────────
+ui-lib-toggle-switch .ui-lib-toggle-switch__native-input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+// ── Track ──────────────────────────────────────────────────────────────
+ui-lib-toggle-switch .ui-lib-toggle-switch__track {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+  width: var(--uilib-toggle-switch-track-width);
+  height: var(--uilib-toggle-switch-track-height);
+  border-radius: var(--uilib-toggle-switch-track-border-radius);
+  border: 1px solid var(--uilib-toggle-switch-track-border-color);
+  background-color: var(--uilib-toggle-switch-track-bg);
+  transition:
+    background-color var(--uilib-toggle-switch-transition-duration) ease,
+    border-color var(--uilib-toggle-switch-transition-duration) ease,
+    box-shadow var(--uilib-toggle-switch-transition-duration) ease;
+}
+
+// ── Thumb ──────────────────────────────────────────────────────────────
+ui-lib-toggle-switch .ui-lib-toggle-switch__thumb {
+  position: absolute;
+  inset-inline-start: var(--uilib-toggle-switch-thumb-offset);
+  width: var(--uilib-toggle-switch-thumb-size);
+  height: var(--uilib-toggle-switch-thumb-size);
+  border-radius: 50%;
+  background-color: var(--uilib-toggle-switch-thumb-bg);
+  box-shadow: var(--uilib-toggle-switch-thumb-shadow);
+  transition: inset-inline-start var(--uilib-toggle-switch-transition-duration) ease;
+}
+
+// ── Checked state ──────────────────────────────────────────────────────
+ui-lib-toggle-switch.ui-lib-toggle-switch--checked .ui-lib-toggle-switch__track {
+  background-color: var(--uilib-toggle-switch-track-bg-checked);
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--checked .ui-lib-toggle-switch__thumb {
+  background-color: var(--uilib-toggle-switch-thumb-bg-checked);
+  inset-inline-start: calc(
+    var(--uilib-toggle-switch-track-width) - var(--uilib-toggle-switch-thumb-size) - var(
+        --uilib-toggle-switch-thumb-offset
+      )
+  );
+}
+
+// ── Hover (non-disabled) ───────────────────────────────────────────────
+ui-lib-toggle-switch:not(.ui-lib-toggle-switch--disabled):hover .ui-lib-toggle-switch__track {
+  background-color: var(--uilib-toggle-switch-track-bg-hover);
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--checked:not(.ui-lib-toggle-switch--disabled):hover
+  .ui-lib-toggle-switch__track {
+  background-color: var(--uilib-toggle-switch-track-bg-checked-hover);
+}
+
+// ── Focus ring ─────────────────────────────────────────────────────────
+ui-lib-toggle-switch:focus-within .ui-lib-toggle-switch__track {
+  box-shadow: var(--uilib-toggle-switch-focus-ring);
+}
+
+// ── Label ──────────────────────────────────────────────────────────────
+ui-lib-toggle-switch .ui-lib-toggle-switch__label {
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  color: inherit;
+}
+
+// ── Disabled state ─────────────────────────────────────────────────────
+ui-lib-toggle-switch.ui-lib-toggle-switch--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--disabled .ui-lib-toggle-switch__label {
+  cursor: not-allowed;
+}
+
+// ── Readonly state ─────────────────────────────────────────────────────
+ui-lib-toggle-switch.ui-lib-toggle-switch--readonly {
+  cursor: default;
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--readonly .ui-lib-toggle-switch__label {
+  cursor: default;
+}
+
+// ── Sizes ──────────────────────────────────────────────────────────────
+ui-lib-toggle-switch.ui-lib-toggle-switch--size-sm {
+  --uilib-toggle-switch-track-width: 2.25rem;
+  --uilib-toggle-switch-track-height: 1.25rem;
+  --uilib-toggle-switch-thumb-size: 0.875rem;
+  --uilib-toggle-switch-thumb-offset: 0.1875rem;
+
+  font-size: 0.875rem;
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--size-lg {
+  --uilib-toggle-switch-track-width: 3.5rem;
+  --uilib-toggle-switch-track-height: 1.875rem;
+  --uilib-toggle-switch-thumb-size: 1.375rem;
+  --uilib-toggle-switch-thumb-offset: 0.25rem;
+
+  font-size: 1.0625rem;
+}
+
+// ── Variant: material ──────────────────────────────────────────────────
+ui-lib-toggle-switch.ui-lib-toggle-switch--variant-material .ui-lib-toggle-switch__track {
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 15%);
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--variant-material .ui-lib-toggle-switch__thumb {
+  box-shadow:
+    var(--uilib-toggle-switch-thumb-shadow),
+    0 0 0 1px rgb(0 0 0 / 5%);
+}
+
+// ── Variant: bootstrap ─────────────────────────────────────────────────
+ui-lib-toggle-switch.ui-lib-toggle-switch--variant-bootstrap {
+  --uilib-toggle-switch-track-border-radius: var(--uilib-shape-base, 6px);
+  --uilib-toggle-switch-thumb-bg: #fff;
+  --uilib-toggle-switch-thumb-bg-checked: #fff;
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--variant-bootstrap .ui-lib-toggle-switch__thumb {
+  border-radius: calc(var(--uilib-shape-base, 6px) * 0.66);
+  box-shadow: none;
+}
+
+// ── Variant: minimal ───────────────────────────────────────────────────
+ui-lib-toggle-switch.ui-lib-toggle-switch--variant-minimal {
+  --uilib-toggle-switch-track-bg: color-mix(in srgb, currentColor 15%, transparent);
+  --uilib-toggle-switch-track-bg-checked: color-mix(
+    in srgb,
+    var(--uilib-color-primary-500, #6366f1) 80%,
+    transparent
+  );
+  --uilib-toggle-switch-track-bg-hover: color-mix(in srgb, currentColor 25%, transparent);
+  --uilib-toggle-switch-track-bg-checked-hover: color-mix(
+    in srgb,
+    var(--uilib-color-primary-600, #4f46e5) 85%,
+    transparent
+  );
+  --uilib-toggle-switch-thumb-shadow: none;
+}
+
+ui-lib-toggle-switch.ui-lib-toggle-switch--variant-minimal .ui-lib-toggle-switch__thumb {
+  box-shadow: none;
+}
+
+// ── Angular forms state classes ────────────────────────────────────────
+ui-lib-toggle-switch.ng-touched .ui-lib-toggle-switch__track {
+  border-color: var(--uilib-toggle-switch-track-border-touched, transparent);
+}
+
+ui-lib-toggle-switch.ng-invalid.ng-touched .ui-lib-toggle-switch__track,
+ui-lib-toggle-switch.ng-invalid.ng-dirty .ui-lib-toggle-switch__track {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-color-danger-600, #dc2626) 30%, transparent);
+}
+
+// ── Dark mode ──────────────────────────────────────────────────────────
+@mixin toggle-switch-dark-theme {
+  --uilib-toggle-switch-track-bg: var(--uilib-color-neutral-600, #475569);
+  --uilib-toggle-switch-track-bg-hover: var(--uilib-color-neutral-500, #64748b);
+  --uilib-toggle-switch-track-bg-checked: var(--uilib-color-primary-dark, #818cf8);
+  --uilib-toggle-switch-track-bg-checked-hover: color-mix(
+    in srgb,
+    var(--uilib-color-primary-dark, #818cf8) 80%,
+    white
+  );
+  --uilib-toggle-switch-thumb-bg: var(--uilib-color-neutral-100, #f1f5f9);
+  --uilib-toggle-switch-thumb-bg-checked: var(--uilib-color-neutral-50, #f8fafc);
+  --uilib-toggle-switch-focus-ring: 0 0 0 3px
+    color-mix(in srgb, var(--uilib-color-primary-dark, #818cf8) 35%, transparent);
+}
+
+[data-theme='dark'] ui-lib-toggle-switch {
+  @include toggle-switch-dark-theme;
+}
