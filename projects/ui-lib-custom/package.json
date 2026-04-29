@@ -172,6 +172,10 @@
     "./toggle-switch": {
       "esm2022": "./esm2022/toggle-switch/index.mjs",
       "esm": "./esm2022/toggle-switch/index.mjs"
+    },
+    "./tree-select": {
+      "esm2022": "./esm2022/tree-select/index.mjs",
+      "esm": "./esm2022/tree-select/index.mjs"
     }
   },
   "typesVersions": {
@@ -271,6 +275,9 @@
       ],
       "toggle-switch": [
         "./toggle-switch/index.d.ts"
+      ],
+      "tree-select": [
+        "./tree-select/index.d.ts"
       ]
     }
   }

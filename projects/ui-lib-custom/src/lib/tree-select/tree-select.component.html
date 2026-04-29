@@ -1,0 +1,74 @@
+<div
+  class="ui-lib-tree-select__trigger"
+  (click)="togglePanel($event)"
+  [attr.aria-owns]="panelId"
+>
+  <!-- Value / placeholder display -->
+  <span
+    class="ui-lib-tree-select__value"
+    [class.ui-lib-tree-select__placeholder]="!hasValue()"
+  >
+    @if (hasValue()) {
+      {{ displayLabel() }}
+    } @else {
+      {{ placeholder() }}
+    }
+  </span>
+
+  <!-- Actions: clear, loading spinner, chevron -->
+  <span class="ui-lib-tree-select__actions">
+    @if (loading()) {
+      <span class="ui-lib-tree-select__spinner" aria-hidden="true"></span>
+    }
+
+    @if (showClear() && hasValue() && !isDisabled()) {
+      <button
+        type="button"
+        class="ui-lib-tree-select__clear"
+        (click)="clearSelection($event)"
+        aria-label="Clear selection"
+        tabindex="-1"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    }
+
+    <span
+      class="ui-lib-tree-select__chevron"
+      [class.ui-lib-tree-select__chevron--open]="panelVisible()"
+      aria-hidden="true"
+    >▾</span>
+  </span>
+</div>
+
+<!-- Dropdown panel -->
+@if (panelVisible()) {
+  <div
+    class="ui-lib-tree-select__panel"
+    [id]="panelId"
+    role="dialog"
+    [attr.aria-label]="ariaLabel() || placeholder()"
+  >
+    <!-- Tree component -->
+    @if (nodes().length > 0) {
+      <ui-lib-tree
+        [value]="nodes()"
+        [selectionMode]="selectionMode()"
+        [variant]="variant()"
+        [size]="size()"
+        [filter]="filter()"
+        [filterPlaceholder]="filterPlaceholder()"
+        [(selection)]="selection"
+        (nodeSelect)="handleNodeSelect($event)"
+        (nodeUnselect)="handleNodeUnselect($event)"
+        (nodeExpand)="handleNodeExpand($event)"
+        (nodeCollapse)="handleNodeCollapse($event)"
+      />
+    } @else {
+      <div class="ui-lib-tree-select__empty">
+        <span>{{ emptyMessage() }}</span>
+      </div>
+    }
+  </div>
+}
+

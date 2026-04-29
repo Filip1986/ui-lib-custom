@@ -1,0 +1,236 @@
+<app-doc-page-layout
+  componentName="TreeSelect"
+  description="TreeSelect renders a hierarchical tree structure inside a dropdown overlay, supporting single, multiple, and checkbox node selection."
+  [sections]="sections"
+>
+
+  <!-- ─── Basic ─────────────────────────────────────────────────────────── -->
+  <section id="basic">
+    <app-doc-demo-viewport label="Basic — Single Selection">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          selectionMode="single"
+          placeholder="Select a file..."
+          [(selection)]="singleSelection"
+          style="max-width: 320px"
+        />
+        @if (singleSelection()) {
+          <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--uilib-muted)">
+            Selected: <strong>{{ singleSelection()?.label }}</strong>
+          </p>
+        }
+      </div>
+      <app-code-preview [code]="snippet('basic')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Multiple ──────────────────────────────────────────────────────── -->
+  <section id="multiple">
+    <app-doc-demo-viewport label="Multiple Selection">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          selectionMode="multiple"
+          placeholder="Select files..."
+          [(selection)]="multipleSelection"
+          style="max-width: 320px"
+        />
+        @if (multipleSelection().length > 0) {
+          <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--uilib-muted)">
+            Selected: <strong>{{ multipleSelection().length }} item(s)</strong>
+          </p>
+        }
+      </div>
+      <app-code-preview [code]="snippet('multiple')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Checkbox ──────────────────────────────────────────────────────── -->
+  <section id="checkbox">
+    <app-doc-demo-viewport label="Checkbox Selection">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          selectionMode="checkbox"
+          placeholder="Select items..."
+          [(selection)]="checkboxSelection"
+          style="max-width: 320px"
+        />
+        @if (checkboxSelection().length > 0) {
+          <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--uilib-muted)">
+            Checked: <strong>{{ checkboxSelection().length }} item(s)</strong>
+          </p>
+        }
+      </div>
+      <app-code-preview [code]="snippet('checkbox')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Filter ────────────────────────────────────────────────────────── -->
+  <section id="filter">
+    <app-doc-demo-viewport label="With Filter">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          selectionMode="single"
+          [filter]="true"
+          filterPlaceholder="Search files..."
+          placeholder="Select a file..."
+          [(selection)]="singleSelection"
+          style="max-width: 320px"
+        />
+      </div>
+      <app-code-preview [code]="snippet('filter')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Sizes ─────────────────────────────────────────────────────────── -->
+  <section id="sizes">
+    <app-doc-demo-viewport label="Sizes">
+      <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          size="sm"
+          placeholder="Small"
+          [(selection)]="sizeSmSelection"
+        />
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          size="md"
+          placeholder="Medium (default)"
+          [(selection)]="sizeMdSelection"
+        />
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          size="lg"
+          placeholder="Large"
+          [(selection)]="sizeLgSelection"
+        />
+      </div>
+      <app-code-preview [code]="snippet('sizes')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Variants ──────────────────────────────────────────────────────── -->
+  <section id="variants">
+    <app-doc-demo-viewport label="Variants">
+      <div demo style="display: flex; flex-direction: column; gap: 1rem; max-width: 320px">
+        <label style="font-size: 0.75rem; color: var(--uilib-muted)">Material</label>
+        <ui-lib-tree-select
+          [nodes]="variantNodes"
+          variant="material"
+          placeholder="Material variant"
+          [(selection)]="variantSelections['material']"
+        />
+        <label style="font-size: 0.75rem; color: var(--uilib-muted)">Bootstrap</label>
+        <ui-lib-tree-select
+          [nodes]="variantNodes"
+          variant="bootstrap"
+          placeholder="Bootstrap variant"
+          [(selection)]="variantSelections['bootstrap']"
+        />
+        <label style="font-size: 0.75rem; color: var(--uilib-muted)">Minimal</label>
+        <ui-lib-tree-select
+          [nodes]="variantNodes"
+          variant="minimal"
+          placeholder="Minimal variant"
+          [(selection)]="variantSelections['minimal']"
+        />
+      </div>
+      <app-code-preview [code]="snippet('variants')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Show Clear ────────────────────────────────────────────────────── -->
+  <section id="show-clear">
+    <app-doc-demo-viewport label="Show Clear Button">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          selectionMode="single"
+          [showClear]="true"
+          placeholder="Select a file (clearable)..."
+          [(selection)]="clearableSelection"
+          style="max-width: 320px"
+        />
+      </div>
+      <app-code-preview [code]="snippet('showClear')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Disabled ──────────────────────────────────────────────────────── -->
+  <section id="disabled">
+    <app-doc-demo-viewport label="Disabled">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          [disabled]="true"
+          placeholder="Disabled TreeSelect"
+          style="max-width: 320px"
+        />
+      </div>
+      <app-code-preview [code]="snippet('disabled')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Loading ───────────────────────────────────────────────────────── -->
+  <section id="loading">
+    <app-doc-demo-viewport label="Loading State">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          [loading]="true"
+          placeholder="Loading..."
+          style="max-width: 320px"
+        />
+      </div>
+      <app-code-preview [code]="snippet('loading')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── ngModel ───────────────────────────────────────────────────────── -->
+  <section id="ngModel">
+    <app-doc-demo-viewport label="ngModel Binding">
+      <div demo>
+        <ui-lib-tree-select
+          [nodes]="nodes"
+          selectionMode="single"
+          placeholder="Select a file..."
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="ngModelValue"
+          style="max-width: 320px"
+        />
+        <pre style="margin-top: 0.5rem; font-size: 0.75rem">{{ ngModelValue | json }}</pre>
+      </div>
+      <app-code-preview [code]="snippet('ngModel')" />
+    </app-doc-demo-viewport>
+  </section>
+
+  <!-- ─── Reactive Forms ────────────────────────────────────────────────── -->
+  <section id="reactive">
+    <app-doc-demo-viewport label="Reactive Forms">
+      <div demo>
+        <form [formGroup]="reactiveForm" style="display: flex; flex-direction: column; gap: 1rem">
+          <ui-lib-tree-select
+            [nodes]="nodes"
+            formControlName="selectedNode"
+            placeholder="Select a file..."
+            style="max-width: 320px"
+          />
+          <ui-lib-tree-select
+            [nodes]="nodes"
+            selectionMode="multiple"
+            formControlName="multipleNodes"
+            placeholder="Select multiple files..."
+            style="max-width: 320px"
+          />
+          <pre style="font-size: 0.75rem">{{ reactiveForm.value | json }}</pre>
+        </form>
+      </div>
+      <app-code-preview [code]="snippet('reactive')" />
+    </app-doc-demo-viewport>
+  </section>
+
+</app-doc-page-layout>
+

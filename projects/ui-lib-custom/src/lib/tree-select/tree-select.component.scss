@@ -1,0 +1,229 @@
+// ─── Host ─────────────────────────────────────────────────────────────────
+
+ui-lib-tree-select {
+  --uilib-tree-select-trigger-min-height-sm: 32px;
+  --uilib-tree-select-trigger-min-height-md: 40px;
+  --uilib-tree-select-trigger-min-height-lg: 48px;
+  --uilib-tree-select-panel-max-height: 320px;
+  --uilib-tree-select-panel-z-index: var(--uilib-z-overlay, 100);
+
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  color: var(--uilib-page-fg);
+  font-size: 1rem;
+  width: 100%;
+}
+
+// ─── Trigger ────────────────────────────────────────────────────────────────
+
+ui-lib-tree-select .ui-lib-tree-select__trigger {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--uilib-tree-select-trigger-bg, var(--uilib-surface));
+  border: 1px solid var(--uilib-tree-select-trigger-border, var(--uilib-border));
+  border-radius: var(--uilib-tree-select-trigger-radius, var(--uilib-shape-base, 6px));
+  padding: var(--uilib-tree-select-trigger-padding-y, 0.55rem)
+    var(--uilib-tree-select-trigger-padding-x, 0.75rem);
+  min-height: var(--uilib-tree-select-trigger-min-height-md);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+ui-lib-tree-select .ui-lib-tree-select__trigger:focus-visible {
+  outline: 2px solid var(--uilib-color-primary-500);
+  outline-offset: 2px;
+}
+
+// ─── Value ──────────────────────────────────────────────────────────────────
+
+ui-lib-tree-select .ui-lib-tree-select__value {
+  min-height: 1.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+ui-lib-tree-select .ui-lib-tree-select__placeholder {
+  color: var(--uilib-tree-select-placeholder-color, var(--uilib-muted));
+}
+
+// ─── Actions ────────────────────────────────────────────────────────────────
+
+ui-lib-tree-select .ui-lib-tree-select__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+ui-lib-tree-select .ui-lib-tree-select__clear {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--uilib-tree-select-placeholder-color, var(--uilib-muted));
+  line-height: 1;
+  padding: 0 0.25rem;
+  font-size: 1.1em;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover {
+    color: var(--uilib-page-fg);
+  }
+}
+
+ui-lib-tree-select .ui-lib-tree-select__chevron {
+  font-size: 0.8rem;
+  color: var(--uilib-tree-select-placeholder-color, var(--uilib-muted));
+  transition: transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+ui-lib-tree-select .ui-lib-tree-select__chevron--open {
+  transform: rotate(180deg);
+}
+
+// ─── Spinner ────────────────────────────────────────────────────────────────
+
+ui-lib-tree-select .ui-lib-tree-select__spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid var(--uilib-muted);
+  border-top-color: transparent;
+  animation: uilib-tree-select-spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes uilib-tree-select-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ─── Panel ──────────────────────────────────────────────────────────────────
+
+ui-lib-tree-select .ui-lib-tree-select__panel {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(100% + 4px);
+  background: var(--uilib-tree-select-panel-bg, var(--uilib-surface));
+  border: 1px solid var(--uilib-tree-select-panel-border, var(--uilib-border));
+  border-radius: var(--uilib-tree-select-panel-radius, var(--uilib-shape-base, 6px));
+  box-shadow: var(--uilib-tree-select-panel-shadow, var(--uilib-shadow-md, none));
+  max-height: var(--uilib-tree-select-panel-max-height);
+  overflow-y: auto;
+  z-index: var(--uilib-tree-select-panel-z-index);
+  padding: 0.5rem;
+  animation: uilib-tree-select-panel-enter 0.15s ease;
+}
+
+@keyframes uilib-tree-select-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Empty state ────────────────────────────────────────────────────────────
+
+ui-lib-tree-select .ui-lib-tree-select__empty {
+  padding: 0.75rem;
+  text-align: center;
+  color: var(--uilib-muted);
+}
+
+// ─── Size modifiers ─────────────────────────────────────────────────────────
+
+ui-lib-tree-select.ui-lib-tree-select--size-sm .ui-lib-tree-select__trigger {
+  --uilib-tree-select-trigger-padding-y: 0.35rem;
+  --uilib-tree-select-trigger-padding-x: 0.5rem;
+  min-height: var(--uilib-tree-select-trigger-min-height-sm);
+  font-size: 0.875rem;
+}
+
+ui-lib-tree-select.ui-lib-tree-select--size-lg .ui-lib-tree-select__trigger {
+  --uilib-tree-select-trigger-padding-y: 0.65rem;
+  --uilib-tree-select-trigger-padding-x: 0.9rem;
+  min-height: var(--uilib-tree-select-trigger-min-height-lg);
+  font-size: 1.125rem;
+}
+
+// ─── State modifiers ────────────────────────────────────────────────────────
+
+ui-lib-tree-select.ui-lib-tree-select--disabled .ui-lib-tree-select__trigger {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+ui-lib-tree-select.ui-lib-tree-select--invalid .ui-lib-tree-select__trigger {
+  border-color: var(--uilib-color-danger-600);
+}
+
+ui-lib-tree-select.ui-lib-tree-select--open .ui-lib-tree-select__trigger {
+  border-color: var(--uilib-color-primary-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-color-primary-500) 20%, transparent);
+}
+
+// ─── Angular form state ──────────────────────────────────────────────────────
+
+ui-lib-tree-select.ng-touched .ui-lib-tree-select__trigger {
+  border-color: var(--uilib-color-primary-600);
+}
+
+ui-lib-tree-select.ng-invalid.ng-touched .ui-lib-tree-select__trigger,
+ui-lib-tree-select.ng-invalid.ng-dirty .ui-lib-tree-select__trigger {
+  border-color: var(--uilib-color-danger-600);
+}
+
+// ─── Variant: material ──────────────────────────────────────────────────────
+
+ui-lib-tree-select.ui-lib-tree-select--variant-material .ui-lib-tree-select__trigger {
+  --uilib-tree-select-trigger-radius: var(--uilib-radius-md, 4px);
+  border-width: 0;
+  border-bottom-width: 2px;
+  border-radius: var(--uilib-tree-select-trigger-radius) var(--uilib-tree-select-trigger-radius) 0 0;
+  background: color-mix(in srgb, var(--uilib-color-primary-600) 6%, transparent);
+}
+
+ui-lib-tree-select.ui-lib-tree-select--variant-material .ui-lib-tree-select__panel {
+  --uilib-tree-select-panel-radius: var(--uilib-radius-md, 4px);
+  box-shadow: var(--uilib-shadow-lg, 0 4px 16px rgba(0 0 0 / 0.18));
+}
+
+// ─── Variant: bootstrap ─────────────────────────────────────────────────────
+
+ui-lib-tree-select.ui-lib-tree-select--variant-bootstrap .ui-lib-tree-select__trigger {
+  --uilib-tree-select-trigger-radius: var(--uilib-radius-sm, 4px);
+  border-width: 1px;
+}
+
+ui-lib-tree-select.ui-lib-tree-select--variant-bootstrap.ui-lib-tree-select--open
+  .ui-lib-tree-select__trigger {
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--uilib-color-primary-500) 25%, transparent);
+}
+
+// ─── Variant: minimal ───────────────────────────────────────────────────────
+
+ui-lib-tree-select.ui-lib-tree-select--variant-minimal .ui-lib-tree-select__trigger {
+  --uilib-tree-select-trigger-radius: var(--uilib-radius-sm, 2px);
+  background: transparent;
+  border-color: var(--uilib-border);
+}
+
+ui-lib-tree-select.ui-lib-tree-select--variant-minimal .ui-lib-tree-select__panel {
+  box-shadow: none;
+  border-color: var(--uilib-border);
+}

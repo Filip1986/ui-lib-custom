@@ -313,7 +313,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/tree-select',
           group: 'Form',
-          badge: 'TODO',
         },
         {
           label: 'Gallery',

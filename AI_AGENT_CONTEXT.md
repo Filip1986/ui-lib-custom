@@ -28,6 +28,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Textarea` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `TreeSelect` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Rating` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `Listbox` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `RadioButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -70,6 +71,31 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
+
+Date: 2026-04-29 [tree-select session]
+Changed:
+  - projects/ui-lib-custom/src/lib/tree-select/ (new — types, constants, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/tree-select/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (tree-select added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (tree-select import test added)
+  - projects/demo/src/app/pages/tree-select/ (full demo — TS/HTML/SCSS, 11 sections)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from TreeSelect)
+  - AI_AGENT_CONTEXT.md (marked TreeSelect complete)
+State: TreeSelect component fully complete. Combobox-style overlay wrapping the existing Tree
+  component. Supports single, multiple, and checkbox selection modes. CVA (ngModel + reactive
+  forms), model() two-way binding for selection + panelVisible, three variants
+  (material/bootstrap/minimal), three sizes (sm/md/lg), disabled/loading states, filter input
+  passthrough, showClear button, full ARIA (role=combobox, aria-expanded, aria-haspopup="tree",
+  aria-controls, aria-label/labelledby, aria-invalid, aria-disabled, aria-required), keyboard
+  nav (Enter/Space opens, Escape closes, Tab closes).
+  41/41 unit tests passing. 50/50 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/tree-select/ projects/demo/src/app/pages/tree-select/ --max-warnings 0 (CLEAN),
+  npm run build — all entry points ✔ Built ui-lib-custom/tree-select (zero errors),
+  npx.cmd jest --testPathPatterns="tree-select" --no-coverage (41/41 PASS),
+  npx.cmd jest --testPathPatterns="entry-points" --no-coverage (50/50 PASS).
+Terminal notes: No issues. Shell: bash.exe.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Date: 2026-04-29 [toggle-button session]
 Changed:
