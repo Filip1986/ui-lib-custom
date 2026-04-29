@@ -1,148 +1,136 @@
-import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import type { ParamMap } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ThemeConfigService, ThemePresetService } from 'ui-lib-custom/theme';
-import type { ThemePreset, ThemeVariant } from 'ui-lib-custom/theme';
-import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
-import { Badge } from 'ui-lib-custom/badge';
-import { UiLibInput } from 'ui-lib-custom/input';
-import { UiLibSelect } from 'ui-lib-custom/select';
-import { Checkbox } from 'ui-lib-custom/checkbox';
-import { Tabs, Tab } from 'ui-lib-custom/tabs';
-import { Accordion, AccordionPanel } from 'ui-lib-custom/accordion';
-import { ThemeEditorComponent } from '../../shared/theme-editor/theme-editor.component';
+import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { GalleriaComponent } from 'ui-lib-custom/galleria';
+import type {
+  GalleriaSize,
+  GalleriaThumbnailsPosition,
+  GalleriaVariant,
+} from 'ui-lib-custom/galleria';
+
+interface GalleriaImage {
+  src: string;
+  thumbnailSrc: string;
+  alt: string;
+  title: string;
+  description: string;
+}
+
+const DEMO_IMAGES: GalleriaImage[] = [
+  {
+    src: 'https://picsum.photos/seed/galleria1/800/500',
+    thumbnailSrc: 'https://picsum.photos/seed/galleria1/120/80',
+    alt: 'Mountain landscape at sunrise',
+    title: 'Mountain Sunrise',
+    description: 'A breathtaking view of mountain peaks bathed in early morning light.',
+  },
+  {
+    src: 'https://picsum.photos/seed/galleria2/800/500',
+    thumbnailSrc: 'https://picsum.photos/seed/galleria2/120/80',
+    alt: 'Ocean waves at golden hour',
+    title: 'Golden Hour Waves',
+    description: 'Calm ocean waves reflecting the warm tones of a late-afternoon sun.',
+  },
+  {
+    src: 'https://picsum.photos/seed/galleria3/800/500',
+    thumbnailSrc: 'https://picsum.photos/seed/galleria3/120/80',
+    alt: 'Dense forest path in autumn',
+    title: 'Autumn Forest',
+    description: 'A winding path through a forest ablaze with autumn colours.',
+  },
+  {
+    src: 'https://picsum.photos/seed/galleria4/800/500',
+    thumbnailSrc: 'https://picsum.photos/seed/galleria4/120/80',
+    alt: 'City skyline at night',
+    title: 'City Lights',
+    description: 'A modern skyline reflected in still water after dark.',
+  },
+  {
+    src: 'https://picsum.photos/seed/galleria5/800/500',
+    thumbnailSrc: 'https://picsum.photos/seed/galleria5/120/80',
+    alt: 'Desert dunes under a clear blue sky',
+    title: 'Desert Dunes',
+    description: 'Sweeping sand dunes stretching to the horizon under a cloudless sky.',
+  },
+  {
+    src: 'https://picsum.photos/seed/galleria6/800/500',
+    thumbnailSrc: 'https://picsum.photos/seed/galleria6/120/80',
+    alt: 'Snowy village in winter',
+    title: 'Winter Village',
+    description: 'A quiet village dusted with fresh snow on a crisp winter morning.',
+  },
+];
 
 /**
- * Demo gallery page highlighting multiple components.
+ * Demo page for the Galleria component — showcases all major API surfaces:
+ * basic usage, thumbnails positions, indicators, fullscreen, autoplay, and variants.
  */
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [
-    CommonModule,
-    Card,
-    Button,
-    Badge,
-    UiLibInput,
-    UiLibSelect,
-    Checkbox,
-    Tabs,
-    Tab,
-    Accordion,
-    AccordionPanel,
-    ThemeEditorComponent,
-  ],
+  imports: [GalleriaComponent, FormsModule],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent {
-  private readonly route: ActivatedRoute = inject(ActivatedRoute);
-  private readonly presetService: ThemePresetService = inject(ThemePresetService);
-  private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
-  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  public readonly images: GalleriaImage[] = DEMO_IMAGES;
 
-  public readonly presentMode: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly shareNotice: WritableSignal<string> = signal<string>('');
-  public readonly variant: Signal<ThemeVariant> = computed<ThemeVariant>(
-    (): ThemeVariant => this.themeConfig.variant()
-  );
+  // Basic demo state
+  public readonly basicActiveIndex: WritableSignal<number> = signal<number>(0);
 
-  public readonly sizes: readonly ['sm', 'md', 'lg'] = ['sm', 'md', 'lg'];
-  public readonly variants: ThemeVariant[] = ['material', 'bootstrap', 'minimal'];
-  public readonly severities: readonly [
-    'primary',
-    'secondary',
-    'success',
-    'danger',
-    'warning',
-    'info',
-  ] = ['primary', 'secondary', 'success', 'danger', 'warning', 'info'];
+  // Indicators demo state
+  public readonly indicatorsActiveIndex: WritableSignal<number> = signal<number>(0);
 
-  public readonly roles: { label: string; value: string }[] = [
-    { label: 'Designer', value: 'designer' },
-    { label: 'Engineer', value: 'engineer' },
-    { label: 'Manager', value: 'manager' },
+  // Position demo
+  public readonly positionActiveIndex: WritableSignal<number> = signal<number>(0);
+  public readonly thumbnailsPosition: WritableSignal<GalleriaThumbnailsPosition> =
+    signal<GalleriaThumbnailsPosition>('bottom');
+
+  // No thumbnails + indicators
+  public readonly noThumbActiveIndex: WritableSignal<number> = signal<number>(0);
+
+  // Fullscreen demo
+  public readonly fullscreenActiveIndex: WritableSignal<number> = signal<number>(0);
+  public readonly fullscreenVisible: WritableSignal<boolean> = signal<boolean>(false);
+
+  // Autoplay demo
+  public readonly autoplayActiveIndex: WritableSignal<number> = signal<number>(0);
+
+  // Variants demo
+  public readonly variantActiveIndex: WritableSignal<number> = signal<number>(0);
+  public readonly selectedVariant: WritableSignal<GalleriaVariant> =
+    signal<GalleriaVariant>('material');
+
+  // Size demo
+  public readonly sizeActiveIndex: WritableSignal<number> = signal<number>(0);
+  public readonly selectedSize: WritableSignal<GalleriaSize> = signal<GalleriaSize>('md');
+
+  // Playground state
+  public readonly playgroundActiveIndex: WritableSignal<number> = signal<number>(0);
+  public readonly playgroundVisible: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly playgroundVariant: WritableSignal<GalleriaVariant> =
+    signal<GalleriaVariant>('material');
+  public readonly playgroundSize: WritableSignal<GalleriaSize> = signal<GalleriaSize>('md');
+  public readonly playgroundPosition: WritableSignal<GalleriaThumbnailsPosition> =
+    signal<GalleriaThumbnailsPosition>('bottom');
+  public readonly playgroundShowThumbnails: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly playgroundShowIndicators: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly playgroundShowNavigators: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly playgroundCircular: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly playgroundAutoPlay: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly playgroundFullScreen: WritableSignal<boolean> = signal<boolean>(false);
+
+  public readonly positionOptions: GalleriaThumbnailsPosition[] = [
+    'bottom',
+    'top',
+    'left',
+    'right',
   ];
+  public readonly variantOptions: GalleriaVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly sizeOptions: GalleriaSize[] = ['sm', 'md', 'lg'];
 
-  constructor() {
-    this.route.queryParamMap
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((params: ParamMap): void => {
-        const encoded: string | null = params.get('theme');
-        if (!encoded) {
-          return;
-        }
-        const preset: ThemePreset | null = this.decodePreset(encoded);
-        if (!preset) {
-          return;
-        }
-        this.presetService.applyPreset(preset);
-        this.themeConfig.setVariant(preset.variant);
-        this.themeConfig.setShape(preset.shape);
-        this.themeConfig.setDensity(preset.density);
-        this.themeConfig.setMode(preset.darkMode);
-      });
-  }
-
-  public togglePresentMode(): void {
-    this.presentMode.update((value: boolean): boolean => !value);
-  }
-
-  public async copyShareLink(): Promise<void> {
-    const url: string = this.buildShareUrl();
-    try {
-      await navigator.clipboard.writeText(url);
-    } catch {
-      const textarea: HTMLTextAreaElement = document.createElement('textarea');
-      textarea.value = url;
-      textarea.style.position = 'fixed';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    }
-    this.shareNotice.set('Link copied');
-    setTimeout((): void => this.shareNotice.set(''), 1500);
-  }
-
-  private buildShareUrl(): string {
-    const preset: ThemePreset = this.presetService.captureCurrentTheme('shared');
-    const json: string = JSON.stringify(preset);
-    const encoded: string = this.base64Encode(json);
-    const url: URL = new URL(window.location.href);
-    url.searchParams.set('theme', encoded);
-    return url.toString();
-  }
-
-  private base64Encode(value: string): string {
-    const encoded: string = encodeURIComponent(value);
-    return btoa(unescape(encoded));
-  }
-
-  private decodePreset(encoded: string): ThemePreset | null {
-    try {
-      const json: string = this.base64Decode(encoded);
-      return this.presetService.importFromJson(json);
-    } catch {
-      return null;
-    }
-  }
-
-  private base64Decode(value: string): string {
-    const normalized: string = value.replace(/\s/g, '');
-    const decoded: string = atob(normalized);
-    return decodeURIComponent(escape(decoded));
+  public onPositionChange(position: GalleriaThumbnailsPosition): void {
+    this.thumbnailsPosition.set(position);
+    this.positionActiveIndex.set(0);
   }
 }

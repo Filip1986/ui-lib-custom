@@ -1,165 +1,467 @@
-<div class="gallery-page" [class.present-mode]="presentMode()">
-  <div class="gallery-topbar">
-    <div class="gallery-title">
-      <h1>Component Gallery</h1>
-      <p class="gallery-subtitle">Live preview for client demos</p>
+<div class="demo-page">
+  <header class="demo-header">
+    <h1 class="demo-title">Galleria</h1>
+    <p class="demo-subtitle">
+      A media gallery component with thumbnail navigation, dot indicators,
+      multiple layout positions, fullscreen mode, and autoplay support.
+    </p>
+  </header>
+
+  <!-- ─── Basic ──────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Basic</h2>
+    <p class="demo-section-description">
+      A gallery with item and thumbnail templates. Navigation arrows and a
+      scrollable thumbnail strip are shown by default.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="basicActiveIndex"
+        [numVisible]="5"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img
+            class="demo-gallery-img"
+            [src]="image.src"
+            [alt]="image.alt"
+          />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img
+            class="demo-gallery-thumb"
+            [src]="image.thumbnailSrc"
+            [alt]="image.alt"
+          />
+        </ng-template>
+      </ui-lib-galleria>
     </div>
-    <div class="gallery-actions">
-      @if (shareNotice()) {
-        <span class="share-notice">{{ shareNotice() }}</span>
-      }
-      <ui-lib-button size="sm" appearance="outline" (click)="copyShareLink()">
-        Share link
-      </ui-lib-button>
-      <ui-lib-button size="sm" appearance="outline" (click)="togglePresentMode()">
-        {{ presentMode() ? 'Exit Present Mode' : 'Present Mode' }}
-      </ui-lib-button>
-    </div>
-  </div>
+  </section>
 
-  <div class="gallery-layout">
-    <div class="gallery-preview">
-      <section class="gallery-section">
-        <div class="section-heading">
-          <h2>Buttons</h2>
-          <p>All severities, sizes, and variants</p>
-        </div>
-        <div class="button-grid">
-          @for (variant of variants; track variant) {
-            <div class="button-group">
-              <h3>{{ variant | titlecase }}</h3>
-              @for (size of sizes; track size) {
-                <div class="button-row">
-                  <span class="button-size">{{ size.toUpperCase() }}</span>
-                  <div class="button-row-grid">
-                    @for (severity of severities; track severity) {
-                      <ui-lib-button [variant]="variant" [size]="size" [color]="severity">
-                        {{ severity | titlecase }}
-                      </ui-lib-button>
-                    }
-                  </div>
-                </div>
-              }
-            </div>
-          }
-        </div>
-      </section>
+  <!-- ─── With caption ────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">With Caption</h2>
+    <p class="demo-section-description">
+      Use the <code>#galleriaCaption</code> template slot to overlay a caption
+      on the active item.
+    </p>
 
-      <section class="gallery-section">
-        <div class="section-heading">
-          <h2>Form Controls</h2>
-          <p>Mock registration form</p>
-        </div>
-        <div class="form-card">
-          <ui-lib-input label="Full Name" placeholder="Jane Doe" />
-          <ui-lib-input label="Email" type="email" placeholder="jane@company.com" />
-          <ui-lib-select label="Role" [options]="roles" placeholder="Select role" />
-          <ui-lib-checkbox label="I agree to the terms" />
-          <ui-lib-button appearance="solid" color="primary">Submit</ui-lib-button>
-        </div>
-      </section>
-
-      <section class="gallery-section">
-        <div class="section-heading">
-          <h2>Cards</h2>
-          <p>Elevated, outlined, and flat styles</p>
-        </div>
-        <div class="card-grid">
-          <ui-lib-card variant="material">
-            <div class="card-body">
-              <div class="avatar">JD</div>
-              <h3>Elevated Card</h3>
-              <p>Modern card with elevated shadow and crisp layout.</p>
-              <div class="card-actions">
-                <ui-lib-button size="sm">Details</ui-lib-button>
-                <ui-lib-button size="sm" appearance="outline">Share</ui-lib-button>
-              </div>
-            </div>
-          </ui-lib-card>
-
-          <ui-lib-card variant="bootstrap">
-            <div class="card-body">
-              <div class="avatar">AC</div>
-              <h3>Outlined Card</h3>
-              <p>Clear structure with border emphasis for dashboards.</p>
-              <div class="card-actions">
-                <ui-lib-button size="sm">Details</ui-lib-button>
-                <ui-lib-button size="sm" appearance="outline">Share</ui-lib-button>
-              </div>
-            </div>
-          </ui-lib-card>
-
-          <ui-lib-card variant="minimal">
-            <div class="card-body">
-              <div class="avatar">MP</div>
-              <h3>Flat Card</h3>
-              <p>Lightweight card for minimal layouts and content.</p>
-              <div class="card-actions">
-                <ui-lib-button size="sm">Details</ui-lib-button>
-                <ui-lib-button size="sm" appearance="outline">Share</ui-lib-button>
-              </div>
-            </div>
-          </ui-lib-card>
-        </div>
-      </section>
-
-      <section class="gallery-section">
-        <div class="section-heading">
-          <h2>Data Display</h2>
-          <p>Badges, tabs, and accordion content</p>
-        </div>
-        <div class="data-grid">
-          <div class="badge-group">
-            @for (severity of severities; track severity) {
-              <ui-lib-badge [color]="severity">{{ severity | titlecase }}</ui-lib-badge>
-            }
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [numVisible]="5"
+        variant="material"
+        [showThumbnails]="true"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaCaption let-image>
+          <div class="demo-caption">
+            <h4 class="demo-caption__title">{{ image.title }}</h4>
+            <p class="demo-caption__desc">{{ image.description }}</p>
           </div>
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
 
-          <ui-lib-tabs>
-            <ui-lib-tab label="Overview">
-              <p>Project status, milestones, and highlights.</p>
-            </ui-lib-tab>
-            <ui-lib-tab label="Team">
-              <p>Team members, assignments, and roles.</p>
-            </ui-lib-tab>
-            <ui-lib-tab label="Timeline">
-              <p>Upcoming dates and delivery checkpoints.</p>
-            </ui-lib-tab>
-          </ui-lib-tabs>
+  <!-- ─── Indicators ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Indicators</h2>
+    <p class="demo-section-description">
+      Replace the thumbnail strip with dot indicators by enabling
+      <code>showIndicators</code> and setting <code>showThumbnails</code> to
+      false.
+    </p>
 
-          <ui-lib-accordion>
-            <ui-lib-accordion-panel header="What’s new">
-              <p>Feature updates and release notes for this sprint.</p>
-            </ui-lib-accordion-panel>
-            <ui-lib-accordion-panel header="Performance">
-              <p>Latest build metrics and SLA performance.</p>
-            </ui-lib-accordion-panel>
-            <ui-lib-accordion-panel header="Support">
-              <p>Help resources and customer success contacts.</p>
-            </ui-lib-accordion-panel>
-          </ui-lib-accordion>
-        </div>
-      </section>
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="indicatorsActiveIndex"
+        [showThumbnails]="false"
+        [showIndicators]="true"
+        [circular]="true"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
 
-      <section class="gallery-section">
-        <div class="section-heading">
-          <h2>Typography</h2>
-          <p>Live font preview</p>
-        </div>
-        <div class="type-sample">
-          <h1>Heading 1 — Product Name</h1>
-          <h2>Heading 2 — Section Title</h2>
-          <h3>Heading 3 — Subsection</h3>
-          <h4>Heading 4 — Detail Heading</h4>
-          <p>Body text showcases readability and rhythm for long-form content and product copy.</p>
-          <p class="caption">Caption text for hints and metadata.</p>
-          <pre class="monospace">const theme = 'custom';</pre>
-        </div>
-      </section>
+  <!-- ─── Thumbnail position ──────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Thumbnail Position</h2>
+    <p class="demo-section-description">
+      The thumbnail strip can be positioned on any side using
+      <code>thumbnailsPosition</code>: bottom (default), top, left, or right.
+    </p>
+
+    <div class="demo-controls demo-controls--row">
+      @for (pos of positionOptions; track pos) {
+        <button
+          class="demo-chip"
+          [class.demo-chip--active]="thumbnailsPosition() === pos"
+          (click)="onPositionChange(pos)"
+        >
+          {{ pos }}
+        </button>
+      }
     </div>
 
-    <div class="gallery-editor" [class.is-hidden]="presentMode()">
-      <app-theme-editor [embedded]="true" [showFab]="false" />
+    <div
+      class="demo-block demo-block--gallery"
+      [class.demo-block--gallery-tall]="thumbnailsPosition() === 'left' || thumbnailsPosition() === 'right'"
+    >
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="positionActiveIndex"
+        [numVisible]="4"
+        [thumbnailsPosition]="thumbnailsPosition()"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
     </div>
-  </div>
+  </section>
+
+  <!-- ─── No thumbnails + indicators on item ──────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Indicators on Item</h2>
+    <p class="demo-section-description">
+      Set <code>showThumbnails="false"</code>, <code>showIndicators="true"</code>,
+      and <code>showIndicatorsOnItem="true"</code> to overlay dots directly on
+      the image.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="noThumbActiveIndex"
+        [showThumbnails]="false"
+        [showIndicators]="true"
+        [showIndicatorsOnItem]="true"
+        [circular]="true"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
+
+  <!-- ─── Fullscreen ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Fullscreen</h2>
+    <p class="demo-section-description">
+      Enable <code>fullScreen</code> to show a maximize button. Clicking it opens
+      the gallery in a full-screen overlay. The <code>visible</code> two-way
+      binding controls open/close state.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="fullscreenActiveIndex"
+        [(visible)]="fullscreenVisible"
+        [fullScreen]="true"
+        [numVisible]="5"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaCaption let-image>
+          <div class="demo-caption">
+            <h4 class="demo-caption__title">{{ image.title }}</h4>
+          </div>
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
+
+  <!-- ─── Circular + Autoplay ─────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Circular &amp; Autoplay</h2>
+    <p class="demo-section-description">
+      With <code>circular="true"</code> navigation wraps around. Adding
+      <code>autoPlay="true"</code> advances the gallery automatically every
+      3 seconds.
+    </p>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="autoplayActiveIndex"
+        [circular]="true"
+        [autoPlay]="true"
+        [transitionInterval]="3000"
+        [numVisible]="5"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
+
+  <!-- ─── Variants ────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Variants</h2>
+    <p class="demo-section-description">
+      Three design variants are available: <code>material</code>,
+      <code>bootstrap</code>, and <code>minimal</code>.
+    </p>
+
+    <div class="demo-controls demo-controls--row">
+      @for (v of variantOptions; track v) {
+        <button
+          class="demo-chip"
+          [class.demo-chip--active]="selectedVariant() === v"
+          (click)="selectedVariant.set(v)"
+        >
+          {{ v }}
+        </button>
+      }
+    </div>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="variantActiveIndex"
+        [numVisible]="5"
+        [variant]="selectedVariant()"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
+
+  <!-- ─── Sizes ───────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Sizes</h2>
+    <p class="demo-section-description">
+      The <code>size</code> input (<code>sm</code> / <code>md</code> /
+      <code>lg</code>) controls the thumbnail strip sizing.
+    </p>
+
+    <div class="demo-controls demo-controls--row">
+      @for (s of sizeOptions; track s) {
+        <button
+          class="demo-chip"
+          [class.demo-chip--active]="selectedSize() === s"
+          (click)="selectedSize.set(s)"
+        >
+          {{ s }}
+        </button>
+      }
+    </div>
+
+    <div class="demo-block demo-block--gallery">
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="sizeActiveIndex"
+        [numVisible]="5"
+        [size]="selectedSize()"
+        variant="material"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
+
+  <!-- ─── Playground ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">Playground</h2>
+    <p class="demo-section-description">
+      Combine all options to explore the Galleria API interactively.
+    </p>
+
+    <div class="demo-controls demo-controls--grid">
+      <label class="demo-control-label">
+        Variant
+        <select class="demo-select" [ngModel]="playgroundVariant()" (ngModelChange)="playgroundVariant.set($event)">
+          @for (v of variantOptions; track v) {
+            <option [value]="v">{{ v }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="demo-control-label">
+        Size
+        <select class="demo-select" [ngModel]="playgroundSize()" (ngModelChange)="playgroundSize.set($event)">
+          @for (s of sizeOptions; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="demo-control-label">
+        Thumbnail position
+        <select class="demo-select" [ngModel]="playgroundPosition()" (ngModelChange)="playgroundPosition.set($event)">
+          @for (pos of positionOptions; track pos) {
+            <option [value]="pos">{{ pos }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundShowThumbnails()" (ngModelChange)="playgroundShowThumbnails.set($event)" />
+        Show Thumbnails
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundShowIndicators()" (ngModelChange)="playgroundShowIndicators.set($event)" />
+        Show Indicators
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundShowNavigators()" (ngModelChange)="playgroundShowNavigators.set($event)" />
+        Show Navigators
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundCircular()" (ngModelChange)="playgroundCircular.set($event)" />
+        Circular
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundAutoPlay()" (ngModelChange)="playgroundAutoPlay.set($event)" />
+        AutoPlay
+      </label>
+
+      <label class="demo-checkbox-label">
+        <input type="checkbox" [ngModel]="playgroundFullScreen()" (ngModelChange)="playgroundFullScreen.set($event)" />
+        Full Screen
+      </label>
+    </div>
+
+    <div
+      class="demo-block demo-block--gallery"
+      [class.demo-block--gallery-tall]="playgroundPosition() === 'left' || playgroundPosition() === 'right'"
+    >
+      <ui-lib-galleria
+        [value]="images"
+        [(activeIndex)]="playgroundActiveIndex"
+        [(visible)]="playgroundVisible"
+        [numVisible]="5"
+        [variant]="playgroundVariant()"
+        [size]="playgroundSize()"
+        [thumbnailsPosition]="playgroundPosition()"
+        [showThumbnails]="playgroundShowThumbnails()"
+        [showIndicators]="playgroundShowIndicators()"
+        [showItemNavigators]="playgroundShowNavigators()"
+        [circular]="playgroundCircular()"
+        [autoPlay]="playgroundAutoPlay()"
+        [fullScreen]="playgroundFullScreen()"
+      >
+        <ng-template #galleriaItem let-image>
+          <img class="demo-gallery-img" [src]="image.src" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaThumbnail let-image>
+          <img class="demo-gallery-thumb" [src]="image.thumbnailSrc" [alt]="image.alt" />
+        </ng-template>
+        <ng-template #galleriaCaption let-image>
+          <div class="demo-caption">
+            <h4 class="demo-caption__title">{{ image.title }}</h4>
+          </div>
+        </ng-template>
+      </ui-lib-galleria>
+    </div>
+  </section>
+
+  <!-- ─── API table ────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section-title">API</h2>
+
+    <h3 class="demo-sub-title">Inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>value</td><td>unknown[]</td><td>[]</td><td>Array of data items to display.</td></tr>
+        <tr><td>activeIndex</td><td>number (model)</td><td>0</td><td>Active item index — two-way bindable.</td></tr>
+        <tr><td>visible</td><td>boolean (model)</td><td>false</td><td>Fullscreen overlay open state — two-way bindable.</td></tr>
+        <tr><td>numVisible</td><td>number</td><td>3</td><td>Number of thumbnails visible in the strip.</td></tr>
+        <tr><td>numScroll</td><td>number</td><td>1</td><td>Thumbnails scrolled per navigator click.</td></tr>
+        <tr><td>thumbnailsPosition</td><td>'bottom' | 'top' | 'left' | 'right'</td><td>'bottom'</td><td>Position of the thumbnail strip.</td></tr>
+        <tr><td>indicatorsPosition</td><td>'bottom' | 'top' | 'left' | 'right'</td><td>'bottom'</td><td>Position of the indicator dots.</td></tr>
+        <tr><td>showThumbnails</td><td>boolean</td><td>true</td><td>Render the thumbnail strip.</td></tr>
+        <tr><td>showIndicators</td><td>boolean</td><td>false</td><td>Render dot indicators.</td></tr>
+        <tr><td>showIndicatorsOnItem</td><td>boolean</td><td>false</td><td>Overlay dot indicators on the active item.</td></tr>
+        <tr><td>showItemNavigators</td><td>boolean</td><td>true</td><td>Always show prev/next arrows on the item.</td></tr>
+        <tr><td>showItemNavigatorsOnHover</td><td>boolean</td><td>false</td><td>Show prev/next arrows only on hover.</td></tr>
+        <tr><td>showThumbnailNavigators</td><td>boolean</td><td>true</td><td>Show scroll arrows on the thumbnail strip.</td></tr>
+        <tr><td>circular</td><td>boolean</td><td>false</td><td>Wrap navigation around the item list.</td></tr>
+        <tr><td>autoPlay</td><td>boolean</td><td>false</td><td>Automatically advance to the next item.</td></tr>
+        <tr><td>transitionInterval</td><td>number</td><td>4000</td><td>Autoplay interval in milliseconds.</td></tr>
+        <tr><td>fullScreen</td><td>boolean</td><td>false</td><td>Enable the fullscreen toggle button.</td></tr>
+        <tr><td>variant</td><td>'material' | 'bootstrap' | 'minimal' | null</td><td>null</td><td>Design variant; inherits theme default when null.</td></tr>
+        <tr><td>size</td><td>'sm' | 'md' | 'lg'</td><td>'md'</td><td>Controls thumbnail size token.</td></tr>
+        <tr><td>styleClass</td><td>string | null</td><td>null</td><td>Extra CSS class applied to the host.</td></tr>
+        <tr><td>containerStyle</td><td>Record&lt;string, string&gt; | null</td><td>null</td><td>Inline styles for the gallery container.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-sub-title">Outputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr><th>Name</th><th>Payload</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>activeIndexChange</td><td>number</td><td>Emitted when the active index changes.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-sub-title">Template Slots (ng-template)</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr><th>Reference</th><th>Context</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>#galleriaItem</td><td>let-item ($implicit)</td><td>Renders the main active item.</td></tr>
+        <tr><td>#galleriaThumbnail</td><td>let-item ($implicit)</td><td>Renders each thumbnail.</td></tr>
+        <tr><td>#galleriaCaption</td><td>let-item ($implicit)</td><td>Caption overlay on the active item.</td></tr>
+        <tr><td>#galleriaHeader</td><td>—</td><td>Content rendered above the gallery.</td></tr>
+        <tr><td>#galleriaFooter</td><td>—</td><td>Content rendered below the gallery.</td></tr>
+        <tr><td>#galleriaIndicator</td><td>let-index, let-active="active"</td><td>Custom indicator button content.</td></tr>
+      </tbody>
+    </table>
+  </section>
 </div>

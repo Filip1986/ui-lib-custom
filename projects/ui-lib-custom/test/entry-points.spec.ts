@@ -49,6 +49,7 @@ import type * as UiLibTextarea from 'ui-lib-custom/textarea';
 import type * as UiLibToggleButton from 'ui-lib-custom/toggle-button';
 import type * as UiLibToggleSwitch from 'ui-lib-custom/toggle-switch';
 import type * as UiLibTreeSelect from 'ui-lib-custom/tree-select';
+import type * as UiLibGalleria from 'ui-lib-custom/galleria';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -359,5 +360,12 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibTreeSelect = await import('ui-lib-custom/tree-select');
     expect(mod.TreeSelect).toBeDefined();
     expect(mod.TREE_SELECT_DEFAULTS).toBeDefined();
+  });
+
+  it('should import from galleria', async (): Promise<void> => {
+    const mod: typeof UiLibGalleria = await import('ui-lib-custom/galleria');
+    expect(mod.GalleriaComponent).toBeDefined();
+    expect(mod.Galleria).toBeDefined();
+    expect(mod.GALLERIA_DEFAULT_NUM_VISIBLE).toBeDefined();
   });
 });

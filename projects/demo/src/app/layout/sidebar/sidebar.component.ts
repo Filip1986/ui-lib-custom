@@ -315,7 +315,7 @@ export class SidebarComponent {
           group: 'Form',
         },
         {
-          label: 'Gallery',
+          label: 'Galleria',
           icon: 'pi pi-images',
           route: '/gallery',
           group: 'Media',

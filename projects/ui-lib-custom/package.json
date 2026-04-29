@@ -176,6 +176,10 @@
     "./tree-select": {
       "esm2022": "./esm2022/tree-select/index.mjs",
       "esm": "./esm2022/tree-select/index.mjs"
+    },
+    "./galleria": {
+      "esm2022": "./esm2022/galleria/index.mjs",
+      "esm": "./esm2022/galleria/index.mjs"
     }
   },
   "typesVersions": {
@@ -278,6 +282,9 @@
       ],
       "tree-select": [
         "./tree-select/index.d.ts"
+      ],
+      "galleria": [
+        "./galleria/index.d.ts"
       ]
     }
   }

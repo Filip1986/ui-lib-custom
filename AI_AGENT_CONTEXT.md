@@ -28,6 +28,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Textarea` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Galleria` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `TreeSelect` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Rating` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `Listbox` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
@@ -67,6 +68,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-29 [galleria session]
+Changed:
+  - projects/ui-lib-custom/src/lib/galleria/ (new — types, constants, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/galleria/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (galleria added to exports + typesVersions; also restored truncated file from prior session)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (galleria import test added)
+  - projects/demo/src/app/pages/gallery/ (new full demo — TS/HTML/SCSS, 9 sections + API table)
+  - projects/demo/src/app/app.routes.ts (converted eager GalleryComponent route to lazy loadComponent)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (renamed Gallery → Galleria in Media group)
+  - projects/ui-lib-custom/src/lib/textarea/textarea.scss (null-byte corruption from prior session removed)
+  - projects/ui-lib-custom/src/lib/textarea/index.ts (truncation from prior session restored from git)
+  - projects/ui-lib-custom/src/lib/toggle-button/toggle-button.ts/.spec.ts/.scss (null-byte/truncation fixed)
+  - projects/demo/src/app/pages/toggle-switch/* and tree-select/* (zero-byte files restored from git)
+State: Galleria component fully complete. PrimeNG-inspired image/media gallery with item template,
+  thumbnail strip (bottom/top/left/right positioning), dot indicators (standalone and on-item overlay),
+  prev/next navigation arrows (always-on and hover-reveal modes), circular navigation, autoplay via
+  NgZone.runOutsideAngular, fullscreen overlay mode (visible ModelSignal), thumbnail strip scroll
+  navigation, caption overlay slot, header/footer slots, custom indicator slot, three variants
+  (material/bootstrap/minimal), three sizes (sm/md/lg), signal inputs/model outputs throughout,
+  ViewEncapsulation.None + OnPush, ThemeConfigService variant inheritance.
+  39/39 unit tests passing. 51/51 entry-point tests passing. ESLint clean. Build zero errors.
+  Also restored several files corrupted by null-byte/truncation from a prior session.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/galleria/ projects/demo/src/app/pages/gallery/ --max-warnings 0 (CLEAN),
+  npx ng build ui-lib-custom — all entry points ✔ Built (zero errors, incl. ui-lib-custom/galleria),
+  npx jest --testPathPatterns="galleria" --no-coverage (39/39 PASS),
+  npx jest --testPathPatterns="entry-points" --no-coverage (51/51 PASS).
+Terminal notes: .git/index.lock stale lock from prior session blocked git status — worked around
+  using git show HEAD:<file> directly for each corrupt file. Shell: bash in sandbox.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Older handoffs are archived in `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`.
 
@@ -150,63 +182,4 @@ Changed:
     fixed a11y beforeEach with double detectChanges cycle; fixed CVA test with
     changeDetectorRef.markForCheck() + double detectChanges)
   - docs/reference/components/SLIDER.md (new — full API + usage + theming + a11y + keyboard docs)
-  - docs/reference/components/README.md (added Slider section and quick-reference table row)
-  - AI_AGENT_CONTEXT.md (marked Slider complete)
-State: Slider component fully complete. All 44 unit tests passing. 46/46 entry-point tests passing.
-  ESLint clean. Library build zero errors.
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/slider/ projects/demo/src/app/pages/slider/ --max-warnings 0 (CLEAN),
-  npx.cmd ng build ui-lib-custom (zero errors),
-  npx.cmd jest --testPathPatterns="slider" --no-cache (44/44 PASS),
-  npx.cmd jest --testPathPatterns="entry-points" --no-cache (46/46 PASS).
-Terminal notes: No issues. Shell: bash.exe.
-Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
----
-
-Date: 2026-04-28 [rating session]
-Changed:
-  - docs/reference/components/RATING.md (new — full API + usage + theming + a11y + keyboard docs)
-  - docs/reference/components/README.md (added Rating entry to component list and quick-reference table)
-  - AI_AGENT_CONTEXT.md (marked Rating complete)
-State: Rating component fully complete. Signal-based star-rating with hover preview, roving tabindex,
-  ControlValueAccessor (ngModel + reactive forms), cancel/clear button, three variants
-  (material/bootstrap/minimal), three sizes (sm/md/lg), full ARIA (role=radiogroup, role=radio,
-  aria-checked, aria-posinset, aria-setsize), keyboard nav (ArrowRight/Left/Up/Down, Delete,
-  digit keys). 40/40 unit tests passing. 45/45 entry-point tests passing. ESLint clean. Library
-  build zero errors. Demo build clean (pre-existing button/date-picker SCSS budget warnings).
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/rating/ projects/demo/src/app/pages/rating/ --max-warnings 0 (CLEAN),
-  npx.cmd ng build ui-lib-custom — all entry points ✔ Built (zero errors),
-  npx.cmd jest --testPathPatterns="rating" --no-cache (40/40 PASS),
-  npx.cmd jest --testPathPatterns="entry-points" --no-cache (45/45 PASS),
-  npx.cmd ng build demo (Application bundle generation complete, zero new errors).
-Terminal notes: No issues. Shell: bash.exe.
-Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
-
----
-
-Date: 2026-04-29 [toggle-switch session]
-Changed:
-  - projects/ui-lib-custom/src/lib/toggle-switch/ (new — toggle-switch.ts, .html, .scss, .types.ts, index.ts, .spec.ts)
-  - projects/ui-lib-custom/toggle-switch/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (added toggle-switch to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (added toggle-switch import test)
-  - projects/demo/src/app/pages/toggle-switch/ (replaced placeholder — full demo with variants/sizes/disabled/readonly/ngModel/reactive forms/playground)
-  - AI_AGENT_CONTEXT.md (added ToggleSwitch to inventory)
-State: ToggleSwitch fully complete. Sliding pill-switch with ControlValueAccessor (ngModel + reactive
-  forms), ModelSignal two-way binding, three variants (material/bootstrap/minimal), three sizes
-  (sm/md/lg), disabled/readonly states, full ARIA (role=switch, aria-checked, aria-labelledby),
-  keyboard nav (Space key). 37/37 unit tests passing. 49/49 entry-point tests passing. ESLint clean.
-  Library build zero warnings. Fixed native change-event bubbling issue by adding onNativeChange()
-  handler that calls stopPropagation() on the inner input.
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/toggle-switch/ projects/demo/src/app/pages/toggle-switch/ --max-warnings 0 (CLEAN),
-  npm run build — all entry points ✔ Built ui-lib-custom/toggle-switch (zero errors/warnings),
-  npx.cmd jest --testPathPatterns="toggle-switch" --no-coverage (37/37 PASS),
-  npx.cmd jest --testPathPatterns="entry-points" --no-coverage (49/49 PASS).
-Terminal notes: No issues. Shell: bash.exe.
-Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
-
----
-
-
+  - docs/reference/components/README.md (added Slider section and quick-reference

@@ -1,0 +1,502 @@
+// ─── Galleria CSS variables ───────────────────────────────────────────────────
+
+ui-lib-galleria {
+  // Layout
+  --uilib-galleria-gap: 0.5rem;
+  --uilib-galleria-item-bg: var(--uilib-surface, #1a1a2e);
+
+  // Thumbnail strip
+  --uilib-galleria-thumbnail-item-border: 2px solid transparent;
+  --uilib-galleria-thumbnail-item-border-active: 2px solid var(--uilib-color-primary, #6366f1);
+  --uilib-galleria-thumbnail-item-opacity-inactive: 0.6;
+  --uilib-galleria-thumbnail-gap: 0.25rem;
+  --uilib-galleria-thumbnail-size-sm: 3rem;
+  --uilib-galleria-thumbnail-size-md: 4rem;
+  --uilib-galleria-thumbnail-size-lg: 5.5rem;
+
+  // Nav arrows
+  --uilib-galleria-nav-bg: rgba(0, 0, 0, 0.45);
+  --uilib-galleria-nav-bg-hover: rgba(0, 0, 0, 0.7);
+  --uilib-galleria-nav-color: #ffffff;
+  --uilib-galleria-nav-size: 2.5rem;
+  --uilib-galleria-nav-radius: 50%;
+  --uilib-galleria-nav-offset: 0.5rem;
+
+  // Thumbnail nav arrows
+  --uilib-galleria-thumbnail-nav-bg: rgba(0, 0, 0, 0.3);
+  --uilib-galleria-thumbnail-nav-bg-hover: rgba(0, 0, 0, 0.6);
+  --uilib-galleria-thumbnail-nav-color: #ffffff;
+  --uilib-galleria-thumbnail-nav-size: 2rem;
+
+  // Caption
+  --uilib-galleria-caption-bg: rgba(0, 0, 0, 0.5);
+  --uilib-galleria-caption-color: #ffffff;
+  --uilib-galleria-caption-padding: 0.75rem 1rem;
+
+  // Indicators
+  --uilib-galleria-indicator-dot-size: 0.625rem;
+  --uilib-galleria-indicator-dot-bg: rgba(255, 255, 255, 0.5);
+  --uilib-galleria-indicator-dot-bg-active: #ffffff;
+  --uilib-galleria-indicator-gap: 0.375rem;
+  --uilib-galleria-indicator-padding: 0.5rem;
+
+  // Fullscreen
+  --uilib-galleria-mask-bg: rgba(0, 0, 0, 0.9);
+  --uilib-galleria-close-btn-bg: rgba(0, 0, 0, 0.5);
+  --uilib-galleria-close-btn-bg-hover: rgba(0, 0, 0, 0.8);
+  --uilib-galleria-close-btn-color: #ffffff;
+  --uilib-galleria-close-btn-size: 2.5rem;
+  --uilib-galleria-fullscreen-btn-bg: rgba(0, 0, 0, 0.4);
+  --uilib-galleria-fullscreen-btn-bg-hover: rgba(0, 0, 0, 0.7);
+  --uilib-galleria-fullscreen-btn-color: #ffffff;
+  --uilib-galleria-fullscreen-btn-size: 2rem;
+}
+
+// ─── Base host ───────────────────────────────────────────────────────────────
+
+.ui-lib-galleria {
+  display: block;
+  position: relative;
+}
+
+// ─── Container ───────────────────────────────────────────────────────────────
+
+.uilib-galleria__container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+// ─── Content layout ──────────────────────────────────────────────────────────
+
+.uilib-galleria__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-galleria-gap);
+  flex: 1;
+
+  &--vertical {
+    flex-direction: row;
+  }
+}
+
+// ─── Header / Footer ─────────────────────────────────────────────────────────
+
+.uilib-galleria__header,
+.uilib-galleria__footer {
+  padding: 0.5rem;
+}
+
+// ─── Item wrapper ─────────────────────────────────────────────────────────────
+
+.uilib-galleria__item-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--uilib-galleria-item-bg);
+
+  &:hover .uilib-galleria__item-nav {
+    opacity: 1;
+  }
+}
+
+// ─── Active item ─────────────────────────────────────────────────────────────
+
+.uilib-galleria__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+// ─── Item navigation arrows ──────────────────────────────────────────────────
+
+.uilib-galleria__item-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-galleria-nav-size);
+  height: var(--uilib-galleria-nav-size);
+  border-radius: var(--uilib-galleria-nav-radius);
+  background: var(--uilib-galleria-nav-bg);
+  color: var(--uilib-galleria-nav-color);
+  border: none;
+  cursor: pointer;
+  transition: background var(--uilib-transition-base, 0.2s ease);
+  opacity: 0.85;
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-galleria-nav-bg-hover);
+    opacity: 1;
+  }
+
+  &--prev {
+    left: var(--uilib-galleria-nav-offset);
+  }
+
+  &--next {
+    right: var(--uilib-galleria-nav-offset);
+  }
+
+  &--disabled,
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+// When showItemNavigators is false, hide via opacity and reveal on hover (handled by CSS)
+.ui-lib-galleria--show-nav-on-hover .uilib-galleria__item-nav {
+  opacity: 0;
+  transition: opacity var(--uilib-transition-base, 0.2s ease);
+}
+
+// ─── Caption overlay ─────────────────────────────────────────────────────────
+
+.uilib-galleria__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--uilib-galleria-caption-bg);
+  color: var(--uilib-galleria-caption-color);
+  padding: var(--uilib-galleria-caption-padding);
+}
+
+// ─── Indicators ──────────────────────────────────────────────────────────────
+
+.uilib-galleria__indicators {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--uilib-galleria-indicator-gap);
+  padding: var(--uilib-galleria-indicator-padding);
+
+  &--on-item {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    padding: 0.4rem;
+  }
+
+  &--top {
+    order: -1;
+  }
+}
+
+.uilib-galleria__indicator-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform var(--uilib-transition-base, 0.15s ease);
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  &--active .uilib-galleria__indicator-dot {
+    background: var(--uilib-galleria-indicator-dot-bg-active);
+    transform: scale(1.25);
+  }
+}
+
+.uilib-galleria__indicator-dot {
+  display: block;
+  width: var(--uilib-galleria-indicator-dot-size);
+  height: var(--uilib-galleria-indicator-dot-size);
+  border-radius: 50%;
+  background: var(--uilib-galleria-indicator-dot-bg);
+  transition:
+    background var(--uilib-transition-base, 0.2s ease),
+    transform var(--uilib-transition-base, 0.2s ease);
+}
+
+// ─── Thumbnail wrapper ───────────────────────────────────────────────────────
+
+.uilib-galleria__thumbnail-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+
+  &--vertical {
+    flex-direction: column;
+  }
+}
+
+.uilib-galleria__thumbnail-items {
+  display: flex;
+  flex-direction: row;
+  gap: var(--uilib-galleria-thumbnail-gap);
+  overflow: hidden;
+  flex: 1;
+
+  &--vertical {
+    flex-direction: column;
+  }
+}
+
+.uilib-galleria__thumbnail-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: var(--uilib-galleria-thumbnail-item-border);
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: var(--uilib-galleria-thumbnail-item-opacity-inactive);
+  transition:
+    border-color var(--uilib-transition-base, 0.2s ease),
+    opacity var(--uilib-transition-base, 0.2s ease);
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--uilib-color-primary, #6366f1);
+    outline-offset: 2px;
+  }
+
+  &--active {
+    border: var(--uilib-galleria-thumbnail-item-border-active);
+    opacity: 1;
+  }
+
+  img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.uilib-galleria__thumbnail-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-galleria-thumbnail-size-md);
+  height: var(--uilib-galleria-thumbnail-size-md);
+  font-size: 0.75rem;
+  color: var(--uilib-page-text-muted, #9ca3af);
+}
+
+// ─── Size variants — thumbnail size ──────────────────────────────────────────
+
+.ui-lib-galleria--size-sm .uilib-galleria__thumbnail-index {
+  width: var(--uilib-galleria-thumbnail-size-sm);
+  height: var(--uilib-galleria-thumbnail-size-sm);
+}
+
+.ui-lib-galleria--size-lg .uilib-galleria__thumbnail-index {
+  width: var(--uilib-galleria-thumbnail-size-lg);
+  height: var(--uilib-galleria-thumbnail-size-lg);
+}
+
+// ─── Thumbnail navigation arrows ────────────────────────────────────────────
+
+.uilib-galleria__thumbnail-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-galleria-thumbnail-nav-size);
+  height: var(--uilib-galleria-thumbnail-nav-size);
+  border-radius: 50%;
+  background: var(--uilib-galleria-thumbnail-nav-bg);
+  color: var(--uilib-galleria-thumbnail-nav-color);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--uilib-transition-base, 0.2s ease);
+
+  &:hover:not(:disabled) {
+    background: var(--uilib-galleria-thumbnail-nav-bg-hover);
+  }
+
+  &--disabled,
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+// ─── SVG icon helpers ────────────────────────────────────────────────────────
+
+.uilib-galleria__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  &--sm {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// ─── Fullscreen open button ───────────────────────────────────────────────────
+
+.uilib-galleria__fullscreen-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-galleria-fullscreen-btn-size);
+  height: var(--uilib-galleria-fullscreen-btn-size);
+  border-radius: 50%;
+  background: var(--uilib-galleria-fullscreen-btn-bg);
+  color: var(--uilib-galleria-fullscreen-btn-color);
+  border: none;
+  cursor: pointer;
+  transition: background var(--uilib-transition-base, 0.2s ease);
+  opacity: 0.8;
+
+  &:hover {
+    background: var(--uilib-galleria-fullscreen-btn-bg-hover);
+    opacity: 1;
+  }
+}
+
+// ─── Fullscreen mask + container ─────────────────────────────────────────────
+
+.uilib-galleria__mask {
+  position: fixed;
+  inset: 0;
+  z-index: var(--uilib-z-overlay, 1100);
+  background: var(--uilib-galleria-mask-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uilib-galleria__fullscreen-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .uilib-galleria__item-wrapper {
+    flex: 1;
+    background: transparent;
+  }
+}
+
+.uilib-galleria__close-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-galleria-close-btn-size);
+  height: var(--uilib-galleria-close-btn-size);
+  border-radius: 50%;
+  background: var(--uilib-galleria-close-btn-bg);
+  color: var(--uilib-galleria-close-btn-color);
+  border: none;
+  cursor: pointer;
+  transition: background var(--uilib-transition-base, 0.2s ease);
+
+  &:hover {
+    background: var(--uilib-galleria-close-btn-bg-hover);
+  }
+}
+
+// ─── Variant: Material ───────────────────────────────────────────────────────
+
+.ui-lib-galleria--variant-material {
+  --uilib-galleria-thumbnail-item-border-active: 2px solid var(--uilib-color-primary, #6366f1);
+  --uilib-galleria-nav-bg: rgba(0, 0, 0, 0.4);
+  --uilib-galleria-indicator-dot-bg-active: var(--uilib-color-primary, #6366f1);
+
+  .uilib-galleria__item-nav {
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .uilib-galleria__thumbnail-item--active {
+    box-shadow: 0 0 0 2px var(--uilib-color-primary, #6366f1);
+  }
+}
+
+// ─── Variant: Bootstrap ──────────────────────────────────────────────────────
+
+.ui-lib-galleria--variant-bootstrap {
+  --uilib-galleria-thumbnail-item-border-active: 2px solid var(--uilib-color-primary, #0d6efd);
+  --uilib-galleria-nav-bg: rgba(255, 255, 255, 0.15);
+  --uilib-galleria-indicator-dot-bg-active: var(--uilib-color-primary, #0d6efd);
+
+  .uilib-galleria__item-nav {
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .uilib-galleria__item-nav--prev {
+    left: 0;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .uilib-galleria__item-nav--next {
+    right: 0;
+    border-radius: 2px 0 0 2px;
+  }
+}
+
+// ─── Variant: Minimal ────────────────────────────────────────────────────────
+
+.ui-lib-galleria--variant-minimal {
+  --uilib-galleria-nav-bg: transparent;
+  --uilib-galleria-nav-bg-hover: rgba(0, 0, 0, 0.15);
+  --uilib-galleria-nav-color: currentColor;
+  --uilib-galleria-thumbnail-item-border-active: 2px solid currentColor;
+  --uilib-galleria-indicator-dot-bg: rgba(0, 0, 0, 0.25);
+  --uilib-galleria-indicator-dot-bg-active: currentColor;
+
+  .uilib-galleria__item-nav {
+    color: currentColor;
+    border-radius: 2px;
+  }
+}
+
+// ─── Dark mode ───────────────────────────────────────────────────────────────
+
+[data-theme='dark'] {
+  ui-lib-galleria {
+    --uilib-galleria-item-bg: #0f0f1a;
+    --uilib-galleria-thumbnail-item-opacity-inactive: 0.5;
+    --uilib-galleria-caption-bg: rgba(0, 0, 0, 0.7);
+  }
+}

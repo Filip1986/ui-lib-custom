@@ -26,7 +26,6 @@ import { SelectButtonsComponent } from './pages/select-buttons/select-buttons.co
 import { DarkModeComponent } from './pages/dark-mode/dark-mode.component';
 import { ScopedThemingComponent } from './pages/scoped-theming/scoped-theming.component';
 import { AccessibilityComponent } from './pages/accessibility/accessibility.component';
-import { GalleryComponent } from './pages/gallery/gallery.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home - UI Components Library' },
@@ -142,7 +141,14 @@ export const routes: Routes = [
     title: 'Scoped Theming - UI Library',
   },
   { path: 'accessibility', component: AccessibilityComponent, title: 'Accessibility - UI Library' },
-  { path: 'gallery', component: GalleryComponent, title: 'Gallery - UI Library' },
+  {
+    path: 'gallery',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/gallery/gallery.component').then(
+        (m: { GalleryComponent: Type<unknown> }): Type<unknown> => m.GalleryComponent
+      ),
+    title: 'Galleria - UI Components Library',
+  },
   {
     path: 'dialog',
     loadComponent: (): Promise<Type<unknown>> =>
