@@ -31,6 +31,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Dock` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Menu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `MegaMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Menubar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ImageCompare` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -76,6 +77,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-30 [menubar session]
+Changed:
+  - projects/ui-lib-custom/src/lib/menubar/ (new — menubar.types.ts, menubar-submenu.ts, menubar-submenu.html, menubar-submenu.scss, menubar.ts, menubar.html, menubar.scss, menubar.spec.ts, index.ts)
+  - projects/ui-lib-custom/menubar/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (menubar added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (menubar import test added)
+  - projects/demo/src/app/pages/menubar/ (new demo page — TS/HTML/SCSS, 8 sections + API tables)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Menubar)
+  - AI_AGENT_CONTEXT.md (marked Menubar complete)
+State: Menubar component fully complete. PrimeNG-inspired horizontal navigation bar with:
+  - Horizontal root-level items (role="menubar") with click-to-open single-column dropdown panels
+  - Recursive nested submenus opening to the right (via internal MenubarSubComponent that imports itself)
+  - Start/end content projection ([menubarStart] / [menubarEnd] attribute selectors)
+  - Mobile responsive: hamburger toggle button, inline dropdowns on mobile
+  - Three variants (material/bootstrap/minimal), three sizes (sm/md/lg)
+  - Signal inputs/outputs, ViewEncapsulation.None + OnPush + standalone
+  - ThemeConfigService variant inheritance
+  - Keyboard navigation (Enter/Space open, ArrowDown focus first item, Escape close, ArrowRight open nested, ArrowLeft/Escape close nested, ArrowUp/Down navigate within submenu)
+  - Disabled items, separators, URL/target anchor items, command callbacks, itemClick output
+  - Click-outside and global Escape listener
+  - Dark mode tokens
+  - 42 unit tests passing. 59/59 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/menubar/ projects/demo/src/app/pages/menubar/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/menubar ✔ Built (zero errors, all entry points green),
+  npx jest --testPathPatterns=menubar --no-coverage (42/42 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (59/59 PASS).
+Terminal notes: Shell bash.exe on Windows. Used Python scripts to write files due to bash history expansion
+  issues with exclamation marks in inline Python heredocs. All files written via python tmp/create_*.py scripts.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Date: 2026-04-30 [mega-menu completion session]
 Changed:

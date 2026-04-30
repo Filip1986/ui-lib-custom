@@ -1,0 +1,529 @@
+// =============================================================================
+// Menubar Component
+// =============================================================================
+// CSS variable pattern: --uilib-menubar-{property}[-{variant}][-{state}]
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Design tokens (defaults — overridden per variant below)
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar {
+  // Bar background & border
+  --uilib-menubar-bar-bg: var(--uilib-surface-100, #f8f9fa);
+  --uilib-menubar-bar-border: 1px solid var(--uilib-color-border, #dee2e6);
+  --uilib-menubar-bar-border-radius: var(--uilib-radius-md, 4px);
+  --uilib-menubar-bar-padding: 0.25rem;
+
+  // Root-level link
+  --uilib-menubar-root-link-padding: 0.625rem 1rem;
+  --uilib-menubar-root-link-gap: 0.375rem;
+  --uilib-menubar-root-link-color: var(--uilib-color-text-primary, #212529);
+  --uilib-menubar-root-link-color-hover: var(--uilib-color-primary, #007bff);
+  --uilib-menubar-root-link-color-active: var(--uilib-color-primary, #007bff);
+  --uilib-menubar-root-link-bg-hover: var(--uilib-surface-200, #e9ecef);
+  --uilib-menubar-root-link-bg-active: var(--uilib-surface-200, #e9ecef);
+  --uilib-menubar-root-link-border-radius: var(--uilib-radius-sm, 3px);
+  --uilib-menubar-root-link-font-size-sm: 0.8125rem;
+  --uilib-menubar-root-link-font-size-md: 0.9375rem;
+  --uilib-menubar-root-link-font-size-lg: 1.0625rem;
+  --uilib-menubar-root-link-font-weight: 500;
+
+  // Dropdown panel
+  --uilib-menubar-panel-bg: var(--uilib-surface-0, #ffffff);
+  --uilib-menubar-panel-border: 1px solid var(--uilib-color-border, #dee2e6);
+  --uilib-menubar-panel-border-radius: var(--uilib-radius-md, 4px);
+  --uilib-menubar-panel-shadow: var(--uilib-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.12));
+  --uilib-menubar-panel-min-width: 12rem;
+  --uilib-menubar-panel-padding: 0.25rem;
+
+  // Sub-item link
+  --uilib-menubar-sub-link-padding: 0.5rem 0.875rem;
+  --uilib-menubar-sub-link-gap: 0.5rem;
+  --uilib-menubar-sub-link-color: var(--uilib-color-text-primary, #212529);
+  --uilib-menubar-sub-link-color-hover: var(--uilib-color-primary, #007bff);
+  --uilib-menubar-sub-link-bg-hover: var(--uilib-surface-100, #f8f9fa);
+  --uilib-menubar-sub-link-border-radius: var(--uilib-radius-sm, 3px);
+  --uilib-menubar-sub-link-font-size: 0.875rem;
+  --uilib-menubar-sub-link-disabled-opacity: 0.5;
+
+  // Caret indicator
+  --uilib-menubar-caret-size: 0.25rem;
+  --uilib-menubar-caret-color: currentColor;
+  --uilib-menubar-sub-caret-color: var(--uilib-color-text-secondary, #6c757d);
+
+  // Separator
+  --uilib-menubar-separator-color: var(--uilib-color-border, #dee2e6);
+  --uilib-menubar-separator-margin: 0.25rem 0;
+
+  // Mobile toggle
+  --uilib-menubar-toggle-color: var(--uilib-color-text-primary, #212529);
+  --uilib-menubar-toggle-bar-width: 1.25rem;
+  --uilib-menubar-toggle-bar-height: 2px;
+  --uilib-menubar-toggle-bar-gap: 4px;
+
+  // Transition
+  --uilib-menubar-transition: var(--uilib-transition-fast, 150ms ease);
+}
+
+// -----------------------------------------------------------------------------
+// Bar layout
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar {
+  display: block;
+  position: relative;
+}
+
+.ui-lib-menubar__nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--uilib-menubar-bar-bg);
+  border: var(--uilib-menubar-bar-border);
+  border-radius: var(--uilib-menubar-bar-border-radius);
+  padding: var(--uilib-menubar-bar-padding);
+}
+
+.ui-lib-menubar__start,
+.ui-lib-menubar__end {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ui-lib-menubar__start:empty,
+.ui-lib-menubar__end:empty {
+  display: none;
+}
+
+// Root list — horizontal row
+.ui-lib-menubar__root-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.125rem;
+  flex: 1 1 auto;
+}
+
+// Root separator (vertical divider between root items)
+.ui-lib-menubar__root-separator {
+  width: 1px;
+  height: 1.25rem;
+  background-color: var(--uilib-menubar-separator-color);
+  margin: 0 0.25rem;
+}
+
+// Root item
+.ui-lib-menubar__root-item {
+  position: relative;
+  list-style: none;
+}
+
+// -----------------------------------------------------------------------------
+// Root link
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar__root-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--uilib-menubar-root-link-gap);
+  padding: var(--uilib-menubar-root-link-padding);
+  border-radius: var(--uilib-menubar-root-link-border-radius);
+  color: var(--uilib-menubar-root-link-color);
+  font-size: var(--uilib-menubar-root-link-font-size-md);
+  font-weight: var(--uilib-menubar-root-link-font-weight);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  transition:
+    color var(--uilib-menubar-transition),
+    background-color var(--uilib-menubar-transition);
+
+  &:hover {
+    color: var(--uilib-menubar-root-link-color-hover);
+    background-color: var(--uilib-menubar-root-link-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary, #007bff);
+    outline-offset: 2px;
+  }
+}
+
+.ui-lib-menubar__root-item--active > .ui-lib-menubar__root-link {
+  color: var(--uilib-menubar-root-link-color-active);
+  background-color: var(--uilib-menubar-root-link-bg-active);
+}
+
+.ui-lib-menubar__root-item--disabled > .ui-lib-menubar__root-link {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+// Root caret — down-pointing triangle
+.ui-lib-menubar__root-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: var(--uilib-menubar-caret-size) solid transparent;
+  border-right: var(--uilib-menubar-caret-size) solid transparent;
+  border-top: var(--uilib-menubar-caret-size) solid var(--uilib-menubar-caret-color);
+  margin-left: 0.125rem;
+  transition: transform var(--uilib-menubar-transition);
+}
+
+.ui-lib-menubar__root-item--active > .ui-lib-menubar__root-link .ui-lib-menubar__root-caret {
+  transform: rotate(180deg);
+}
+
+.ui-lib-menubar__root-icon {
+  flex-shrink: 0;
+  font-size: 1em;
+}
+
+// -----------------------------------------------------------------------------
+// Dropdown panel
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar__panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: var(--uilib-z-overlay, 1000);
+  background: var(--uilib-menubar-panel-bg);
+  border: var(--uilib-menubar-panel-border);
+  border-radius: var(--uilib-menubar-panel-border-radius);
+  box-shadow: var(--uilib-menubar-panel-shadow);
+  min-width: var(--uilib-menubar-panel-min-width);
+  padding: var(--uilib-menubar-panel-padding);
+  animation: uilib-menubar-panel-appear var(--uilib-menubar-transition);
+
+  // Nested panels open to the right of the parent sub-item
+  &.ui-lib-menubar__panel--nested {
+    top: -4px;
+    left: calc(100% + 4px);
+  }
+}
+
+@keyframes uilib-menubar-panel-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Submenu list and items
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar__sub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-lib-menubar__sub-item {
+  display: block;
+  position: relative;
+}
+
+.ui-lib-menubar__sub-link {
+  display: flex;
+  align-items: center;
+  gap: var(--uilib-menubar-sub-link-gap);
+  padding: var(--uilib-menubar-sub-link-padding);
+  border-radius: var(--uilib-menubar-sub-link-border-radius);
+  color: var(--uilib-menubar-sub-link-color);
+  font-size: var(--uilib-menubar-sub-link-font-size);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  transition:
+    color var(--uilib-menubar-transition),
+    background-color var(--uilib-menubar-transition);
+
+  &:hover {
+    color: var(--uilib-menubar-sub-link-color-hover);
+    background-color: var(--uilib-menubar-sub-link-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary, #007bff);
+    outline-offset: 2px;
+  }
+
+  &[aria-disabled='true'] {
+    opacity: var(--uilib-menubar-sub-link-disabled-opacity);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+.ui-lib-menubar__sub-icon {
+  flex-shrink: 0;
+  font-size: 1em;
+}
+
+// Sub-item caret — right-pointing triangle for nested sub-menus
+.ui-lib-menubar__sub-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: var(--uilib-menubar-caret-size) solid transparent;
+  border-bottom: var(--uilib-menubar-caret-size) solid transparent;
+  border-left: var(--uilib-menubar-caret-size) solid var(--uilib-menubar-sub-caret-color);
+  margin-left: auto;
+}
+
+// Separator line inside a submenu
+.ui-lib-menubar__sub-separator {
+  height: 1px;
+  background-color: var(--uilib-menubar-separator-color);
+  margin: var(--uilib-menubar-separator-margin);
+}
+
+// Active state when sub-sub-panel is open
+.ui-lib-menubar__sub-item--active > .ui-lib-menubar__sub-link {
+  color: var(--uilib-menubar-sub-link-color-hover);
+  background-color: var(--uilib-menubar-sub-link-bg-hover);
+}
+
+// -----------------------------------------------------------------------------
+// Mobile toggle button
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--uilib-menubar-toggle-bar-gap);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: auto;
+  color: var(--uilib-menubar-toggle-color);
+}
+
+.ui-lib-menubar__toggle-bar {
+  display: block;
+  width: var(--uilib-menubar-toggle-bar-width);
+  height: var(--uilib-menubar-toggle-bar-height);
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+// -----------------------------------------------------------------------------
+// Size tokens
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar--size-sm {
+  .ui-lib-menubar__root-link {
+    font-size: var(--uilib-menubar-root-link-font-size-sm);
+    padding: 0.4rem 0.75rem;
+  }
+
+  .ui-lib-menubar__sub-link {
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+.ui-lib-menubar--size-lg {
+  .ui-lib-menubar__root-link {
+    font-size: var(--uilib-menubar-root-link-font-size-lg);
+    padding: 0.75rem 1.25rem;
+  }
+
+  .ui-lib-menubar__sub-link {
+    font-size: 1rem;
+    padding: 0.625rem 1rem;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variant: Material
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar--variant-material {
+  --uilib-menubar-bar-bg: var(--uilib-surface-0, #ffffff);
+  --uilib-menubar-bar-border: none;
+  --uilib-menubar-bar-border-radius: 0;
+  --uilib-menubar-root-link-color: var(--uilib-color-text-primary, #212121);
+  --uilib-menubar-root-link-color-hover: var(--uilib-color-primary, #1976d2);
+  --uilib-menubar-root-link-color-active: var(--uilib-color-primary, #1976d2);
+  --uilib-menubar-root-link-bg-hover: rgba(25, 118, 210, 0.06);
+  --uilib-menubar-root-link-bg-active: rgba(25, 118, 210, 0.1);
+  --uilib-menubar-root-link-font-weight: 500;
+  --uilib-menubar-panel-border: none;
+  --uilib-menubar-panel-shadow: var(--uilib-shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.16));
+
+  .ui-lib-menubar__nav {
+    border-bottom: 2px solid var(--uilib-color-border, #e0e0e0);
+  }
+
+  .ui-lib-menubar__root-item--active > .ui-lib-menubar__root-link {
+    color: var(--uilib-color-primary, #1976d2);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -0.375rem;
+      left: 0.75rem;
+      right: 0.75rem;
+      height: 2px;
+      background-color: var(--uilib-color-primary, #1976d2);
+      border-radius: 1px;
+    }
+  }
+
+  .ui-lib-menubar__sub-link:hover {
+    color: var(--uilib-color-primary, #1976d2);
+    background-color: rgba(25, 118, 210, 0.06);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variant: Bootstrap
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar--variant-bootstrap {
+  --uilib-menubar-bar-bg: #212529;
+  --uilib-menubar-bar-border: none;
+  --uilib-menubar-bar-border-radius: var(--uilib-radius-sm, 4px);
+  --uilib-menubar-root-link-color: rgba(255, 255, 255, 0.75);
+  --uilib-menubar-root-link-color-hover: #ffffff;
+  --uilib-menubar-root-link-color-active: #ffffff;
+  --uilib-menubar-root-link-bg-hover: rgba(255, 255, 255, 0.1);
+  --uilib-menubar-root-link-bg-active: rgba(255, 255, 255, 0.15);
+  --uilib-menubar-root-link-font-weight: 400;
+  --uilib-menubar-toggle-color: rgba(255, 255, 255, 0.75);
+
+  .ui-lib-menubar__root-link:focus-visible {
+    outline-color: #ffffff;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Variant: Minimal
+// -----------------------------------------------------------------------------
+
+.ui-lib-menubar--variant-minimal {
+  --uilib-menubar-bar-bg: transparent;
+  --uilib-menubar-bar-border: none;
+  --uilib-menubar-bar-border-radius: 0;
+  --uilib-menubar-root-link-color: var(--uilib-color-text-primary, #212529);
+  --uilib-menubar-root-link-color-hover: var(--uilib-color-primary, #007bff);
+  --uilib-menubar-root-link-color-active: var(--uilib-color-primary, #007bff);
+  --uilib-menubar-root-link-bg-hover: transparent;
+  --uilib-menubar-root-link-bg-active: transparent;
+  --uilib-menubar-root-link-font-weight: 400;
+  --uilib-menubar-panel-border: 1px solid var(--uilib-color-border, #dee2e6);
+  --uilib-menubar-panel-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  .ui-lib-menubar__root-link {
+    padding: 0.375rem 0.5rem;
+  }
+
+  .ui-lib-menubar__root-item--active > .ui-lib-menubar__root-link {
+    text-decoration: underline;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Mobile / responsive
+// -----------------------------------------------------------------------------
+
+@media (max-width: 768px) {
+  .ui-lib-menubar__toggle {
+    display: flex;
+  }
+
+  .ui-lib-menubar__root-list {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+
+    &.ui-lib-menubar__root-list--open {
+      display: flex;
+    }
+  }
+
+  .ui-lib-menubar__nav {
+    flex-wrap: wrap;
+  }
+
+  .ui-lib-menubar__start {
+    flex: 1 1 auto;
+  }
+
+  // On mobile, dropdowns expand inline (position: static)
+  .ui-lib-menubar__panel {
+    position: static;
+    box-shadow: none;
+    border-radius: 0;
+    animation: none;
+    border-left: 3px solid var(--uilib-color-primary, #007bff);
+    padding-left: 0.75rem;
+
+    &.ui-lib-menubar__panel--nested {
+      left: auto;
+      top: auto;
+    }
+  }
+
+  .ui-lib-menubar__root-link {
+    width: 100%;
+  }
+
+  .ui-lib-menubar__sub-link {
+    width: 100%;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Dark mode
+// -----------------------------------------------------------------------------
+
+[data-theme='dark'] {
+  .ui-lib-menubar {
+    --uilib-menubar-bar-bg: var(--uilib-surface-800, #1e1e2e);
+    --uilib-menubar-bar-border: 1px solid var(--uilib-color-border, #383850);
+    --uilib-menubar-root-link-color: var(--uilib-color-text-primary, #cdd6f4);
+    --uilib-menubar-root-link-color-hover: var(--uilib-color-primary-light, #89b4fa);
+    --uilib-menubar-root-link-color-active: var(--uilib-color-primary-light, #89b4fa);
+    --uilib-menubar-root-link-bg-hover: rgba(137, 180, 250, 0.08);
+    --uilib-menubar-root-link-bg-active: rgba(137, 180, 250, 0.12);
+    --uilib-menubar-panel-bg: var(--uilib-surface-900, #181825);
+    --uilib-menubar-panel-border: 1px solid var(--uilib-color-border, #383850);
+    --uilib-menubar-sub-link-color: var(--uilib-color-text-primary, #cdd6f4);
+    --uilib-menubar-sub-link-color-hover: var(--uilib-color-primary-light, #89b4fa);
+    --uilib-menubar-sub-link-bg-hover: rgba(137, 180, 250, 0.08);
+    --uilib-menubar-separator-color: var(--uilib-color-border, #383850);
+    --uilib-menubar-toggle-color: var(--uilib-color-text-primary, #cdd6f4);
+  }
+
+  .ui-lib-menubar--variant-bootstrap {
+    --uilib-menubar-bar-bg: #0d1117;
+  }
+}

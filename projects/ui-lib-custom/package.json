@@ -208,6 +208,10 @@
     "./mega-menu": {
       "esm2022": "./esm2022/mega-menu/index.mjs",
       "esm": "./esm2022/mega-menu/index.mjs"
+    },
+    "./menubar": {
+      "esm2022": "./esm2022/menubar/index.mjs",
+      "esm": "./esm2022/menubar/index.mjs"
     }
   },
   "typesVersions": {
@@ -334,6 +338,9 @@
       ],
       "mega-menu": [
         "./mega-menu/index.d.ts"
+      ],
+      "menubar": [
+        "./menubar/index.d.ts"
       ]
     }
   }

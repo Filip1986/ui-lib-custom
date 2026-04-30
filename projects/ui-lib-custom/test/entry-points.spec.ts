@@ -57,6 +57,7 @@ import type * as UiLibContextMenu from 'ui-lib-custom/context-menu';
 import type * as UiLibDock from 'ui-lib-custom/dock';
 import type * as UiLibMenu from 'ui-lib-custom/menu';
 import type * as UiLibMegaMenu from 'ui-lib-custom/mega-menu';
+import type * as UiLibMenubar from 'ui-lib-custom/menubar';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -419,5 +420,11 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibMegaMenu = await import('ui-lib-custom/mega-menu');
     expect(mod.MegaMenu).toBeDefined();
     expect(mod.MEGA_MENU_DEFAULT_ARIA_LABEL).toBeDefined();
+  });
+
+  it('should import from menubar', async (): Promise<void> => {
+    const mod: typeof UiLibMenubar = await import('ui-lib-custom/menubar');
+    expect(mod.Menubar).toBeDefined();
+    expect(mod.MENUBAR_DEFAULT_ARIA_LABEL).toBeDefined();
   });
 });

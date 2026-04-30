@@ -395,7 +395,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/menubar',
           group: 'Menu',
-          badge: 'TODO',
         },
         {
           label: 'MegaMenu',
