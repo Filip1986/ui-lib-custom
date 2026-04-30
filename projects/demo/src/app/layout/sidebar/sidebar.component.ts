@@ -402,7 +402,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/mega-menu',
           group: 'Menu',
-          badge: 'TODO',
         },
         {
           label: 'PanelMenu',

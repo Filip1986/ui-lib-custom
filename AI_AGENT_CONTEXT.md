@@ -30,6 +30,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Dock` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Menu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `MegaMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ImageCompare` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -75,6 +76,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-30 [mega-menu completion session]
+Changed:
+  - projects/demo/src/app/pages/mega-menu/mega-menu-demo.component.html (fixed ESLint parse error — replaced {{ '...' }} code-block interpolations with escaped HTML entities &#123;/&#125;/&lt;/&gt;)
+State: MegaMenu component fully complete. PrimeNG-inspired mega-menu component with
+  horizontal/vertical orientations, multi-column dropdown panels, three variants
+  (material/bootstrap/minimal), three sizes (sm/md/lg), signal inputs/outputs,
+  ViewEncapsulation.None + OnPush + standalone, ThemeConfigService variant inheritance,
+  keyboard navigation (Enter/Space open, Escape/Tab close, ArrowDown focuses first sub-item),
+  disabled items, separators, URL/target anchor items, command callbacks, itemClick output,
+  click-outside and global Escape listener, dark mode tokens.
+  51 unit tests passing. 58/58 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/mega-menu/ projects/demo/src/app/pages/mega-menu/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/mega-menu ✔ Built (zero errors, all entry points green),
+  npx jest --testPathPatterns=mega-menu --no-coverage (51/51 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (58/58 PASS).
+Terminal notes: Shell bash.exe on Windows. The previous agent had left one ESLint parse error
+  in mega-menu-demo.component.html (line 22, "Unexpected closing block") caused by `{{ '...' }}`
+  interpolation in <pre><code> blocks — the Angular ESLint parser misread `}}` as block-closing
+  syntax. Fixed by replacing all five code-display interpolations with escaped HTML entities.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Date: 2026-04-30 [menu session]
 Changed:
@@ -129,36 +152,6 @@ Terminal notes: Linux/Windows mount sync lag continued — galleria.ts had NUL b
   Shell: bash (Linux sandbox).
 Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
-Date: 2026-04-29 [dock session]
-Changed:
-  - projects/ui-lib-custom/src/lib/dock/ (new — dock.types.ts, dock.ts, dock.html, dock.scss, dock.spec.ts, index.ts)
-  - projects/ui-lib-custom/dock/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (dock added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (dock import test added)
-  - projects/demo/src/app/pages/dock/ (full demo replacing placeholder — TS/HTML/SCSS, 8 sections + API tables)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Dock)
-  - AI_AGENT_CONTEXT.md (marked Dock complete)
-State: Dock component fully complete. macOS-style icon bar with hover magnification effect.
-  Items scale up on hover (hovered item at magnificationLevel, up to DOCK_MAGNIFICATION_SPREAD=2
-  neighbours cascade proportionally). Four positions (bottom/top/left/right), three variants
-  (material/bootstrap/minimal), three sizes (sm/md/lg), magnification toggle, configurable
-  magnificationLevel, item types: command (button), url (anchor), routerLink (router anchor),
-  static. Disabled items, visible filtering, tooltip on hover, dark mode tokens.
-  Signal inputs/outputs, ViewEncapsulation.None + OnPush + standalone, ThemeConfigService
-  variant inheritance. 45/45 unit tests passing. 56/56 entry-point tests passing. ESLint clean.
-  Library build zero errors. Demo build skipped (EPERM on Linux mount for dist/demo cleanup —
-  pre-existing Windows/Linux mount limitation, not caused by this component).
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/dock/ projects/demo/src/app/pages/dock/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/dock ✔ Built (zero errors, all 22 entry points green),
-  npm test -- --testPathPatterns=dock --no-coverage (45/45 PASS),
-  npm test -- --testPathPatterns=entry-points --no-coverage (56/56 PASS).
-Terminal notes: Linux/Windows filesystem mount has sync lag — files written via Cowork file tools
-  appear truncated in bash immediately after write. Workaround: use bash `cat >` or Python writes
-  for any file that needs to be read back in the same bash session. package.json rewritten via
-  Python json.dump to ensure complete content reaches the Linux mount. Spec and entry-points.spec.ts
-  closing braces appended via bash after detecting truncation. Shell: bash.exe.
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
 
