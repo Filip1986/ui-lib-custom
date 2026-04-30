@@ -1,0 +1,117 @@
+<ul
+  class="ui-lib-panel-menu__sub-list"
+  [style.--pm-depth]="depth()"
+  role="group"
+>
+  @for (item of visibleItems(); track item) {
+    @if (item.separator) {
+      <!-- Separator -->
+      <li
+        class="ui-lib-panel-menu__sub-separator"
+        role="separator"
+        aria-hidden="true"
+      ></li>
+    } @else if (item.items && item.items.length > 0) {
+      <!-- Expandable sub-group -->
+      <li
+        class="ui-lib-panel-menu__sub-item ui-lib-panel-menu__sub-item--has-children"
+        [class.ui-lib-panel-menu__sub-item--disabled]="item.disabled"
+        [class.ui-lib-panel-menu__sub-item--expanded]="isItemExpanded($index)"
+        role="none"
+      >
+        <button
+          type="button"
+          class="ui-lib-panel-menu__sub-header"
+          [class.ui-lib-panel-menu__sub-header--expanded]="isItemExpanded($index)"
+          [attr.aria-expanded]="isItemExpanded($index)"
+          [attr.aria-disabled]="item.disabled ? 'true' : null"
+          [disabled]="item.disabled ? true : null"
+          (click)="onToggle($event, item, $index)"
+          (keydown)="onItemKeyDown($event, item, $index, true)"
+        >
+          @if (item.icon) {
+            <span
+              class="ui-lib-panel-menu__sub-icon {{ item.icon }}"
+              aria-hidden="true"
+            ></span>
+          }
+          <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>
+          <span
+            class="ui-lib-panel-menu__sub-toggle"
+            aria-hidden="true"
+          ></span>
+        </button>
+
+        <!-- Nested sub-list (always in DOM, CSS controls visibility for animation) -->
+        <div
+          class="ui-lib-panel-menu__sub-content"
+          [class.ui-lib-panel-menu__sub-content--visible]="isItemExpanded($index)"
+          [attr.aria-hidden]="!isItemExpanded($index) ? 'true' : null"
+        >
+          <div class="ui-lib-panel-menu__sub-content-inner">
+            <ui-lib-panel-menu-sub
+              [items]="item.items"
+              [parentKey]="getItemKey($index)"
+              [depth]="depth() + 1"
+            />
+          </div>
+        </div>
+      </li>
+    } @else {
+      <!-- Leaf item -->
+      <li
+        class="ui-lib-panel-menu__sub-item"
+        [class.ui-lib-panel-menu__sub-item--disabled]="item.disabled"
+        role="none"
+      >
+        @if (item.url) {
+          <a
+            class="ui-lib-panel-menu__sub-link"
+            [class]="item.styleClass
+              ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
+              : 'ui-lib-panel-menu__sub-link'"
+            role="menuitem"
+            [href]="item.url"
+            [attr.target]="item.target || null"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.tabindex]="item.disabled ? '-1' : '0'"
+            (click)="onActivate($event, item)"
+            (keydown)="onItemKeyDown($event, item, $index, false)"
+          >
+            @if (item.icon) {
+              <span
+                class="ui-lib-panel-menu__sub-icon {{ item.icon }}"
+                aria-hidden="true"
+              ></span>
+            }
+            @if (item.label) {
+              <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>
+            }
+          </a>
+        } @else {
+          <a
+            class="ui-lib-panel-menu__sub-link"
+            [class]="item.styleClass
+              ? 'ui-lib-panel-menu__sub-link ' + item.styleClass
+              : 'ui-lib-panel-menu__sub-link'"
+            role="menuitem"
+            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.tabindex]="item.disabled ? '-1' : '0'"
+            (click)="onActivate($event, item)"
+            (keydown)="onItemKeyDown($event, item, $index, false)"
+          >
+            @if (item.icon) {
+              <span
+                class="ui-lib-panel-menu__sub-icon {{ item.icon }}"
+                aria-hidden="true"
+              ></span>
+            }
+            @if (item.label) {
+              <span class="ui-lib-panel-menu__sub-label">{{ item.label }}</span>
+            }
+          </a>
+        }
+      </li>
+    }
+  }
+</ul>

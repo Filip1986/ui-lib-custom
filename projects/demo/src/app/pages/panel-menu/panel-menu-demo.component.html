@@ -1,0 +1,331 @@
+<div class="demo-page">
+  <div class="demo-header">
+    <h1>PanelMenu</h1>
+    <p class="demo-description">
+      An accordion-style, hierarchical navigation menu driven by a data model.
+      Root items act as collapsible panels; leaf items are directly activatable.
+    </p>
+  </div>
+
+  <!-- ── Basic ──────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Basic</h2>
+    <p>Panel headers expand on click to reveal their child items.</p>
+    <div class="demo-example">
+      <div style="max-width: 18rem;">
+        <ui-lib-panel-menu [model]="basicModel" />
+      </div>
+    </div>
+    <div class="demo-code">
+<pre><code>&lt;ui-lib-panel-menu [model]=&quot;items&quot; /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Initially Expanded ─────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Initially Expanded</h2>
+    <p>
+      Set <code>expanded: true</code> on a root item to have it open on first render.
+    </p>
+    <div class="demo-example">
+      <div style="max-width: 18rem;">
+        <ui-lib-panel-menu [model]="expandedModel" />
+      </div>
+    </div>
+    <div class="demo-code">
+<pre><code>items = [
+  &#123; label: 'File', expanded: true, items: [...] &#125;,
+  &#123; label: 'Edit', items: [...] &#125;,
+]</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Multiple Mode ──────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Multiple Mode</h2>
+    <p>
+      By default only one panel can be open at a time. Set
+      <code>[multiple]="true"</code> to allow multiple expanded panels simultaneously.
+    </p>
+    <div class="demo-example">
+      <div style="max-width: 18rem;">
+        <ui-lib-panel-menu [model]="multipleModel" [multiple]="true" />
+      </div>
+    </div>
+    <div class="demo-code">
+<pre><code>&lt;ui-lib-panel-menu [model]=&quot;items&quot; [multiple]=&quot;true&quot; /&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Nested Sub-Items ───────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Nested Sub-Items</h2>
+    <p>
+      Items within a panel can also have their own <code>items</code> array,
+      creating deeply nested collapsible groups.
+    </p>
+    <div class="demo-example">
+      <div style="max-width: 18rem;">
+        <ui-lib-panel-menu [model]="nestedModel" [multiple]="true" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Disabled Items ─────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Disabled Items</h2>
+    <p>
+      Set <code>disabled: true</code> on any item — root panels or leaf items —
+      to prevent interaction.
+    </p>
+    <div class="demo-example">
+      <div style="max-width: 18rem;">
+        <ui-lib-panel-menu [model]="disabledModel" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── URL Items ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>URL Items</h2>
+    <p>
+      Provide <code>url</code> on a leaf item to render it as an anchor tag.
+      Use <code>target</code> for link targeting.
+    </p>
+    <div class="demo-example">
+      <div style="max-width: 18rem;">
+        <ui-lib-panel-menu [model]="urlModel" />
+      </div>
+    </div>
+    <div class="demo-code">
+<pre><code>&#123; label: 'Angular Docs', url: 'https://angular.dev', target: '_blank' &#125;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Variants ───────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Variants</h2>
+    <p>
+      Supports three design-system variants: <code>material</code>,
+      <code>bootstrap</code>, and <code>minimal</code>.
+      Falls back to the global <code>ThemeConfigService</code> variant when not set.
+    </p>
+    <div class="demo-example demo-example--grid">
+      <div>
+        <p class="demo-label">material</p>
+        <ui-lib-panel-menu [model]="variantModel" variant="material" />
+      </div>
+      <div>
+        <p class="demo-label">bootstrap</p>
+        <ui-lib-panel-menu [model]="variantModel" variant="bootstrap" />
+      </div>
+      <div>
+        <p class="demo-label">minimal</p>
+        <ui-lib-panel-menu [model]="variantModel" variant="minimal" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Sizes ──────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Sizes</h2>
+    <p>Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.</p>
+    <div class="demo-example demo-example--grid">
+      <div>
+        <p class="demo-label">sm</p>
+        <ui-lib-panel-menu [model]="sizeModel" size="sm" />
+      </div>
+      <div>
+        <p class="demo-label">md</p>
+        <ui-lib-panel-menu [model]="sizeModel" size="md" />
+      </div>
+      <div>
+        <p class="demo-label">lg</p>
+        <ui-lib-panel-menu [model]="sizeModel" size="lg" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Events ─────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2>Events</h2>
+    <p>
+      <code>(itemClick)</code> fires when a leaf item is activated.
+      <code>(panelToggle)</code> fires when a root panel expands or collapses.
+    </p>
+    <div class="demo-example">
+      <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start;">
+        <div style="min-width: 16rem;">
+          <ui-lib-panel-menu
+            [model]="commandModel"
+            (itemClick)="onItemClick($event)"
+            (panelToggle)="onPanelToggle($event)"
+          />
+        </div>
+        <div class="event-log">
+          <p class="demo-label">Event log</p>
+          @if (eventLog().length === 0) {
+            <p class="event-log__empty">Interact with the menu…</p>
+          } @else {
+            @for (entry of eventLog(); track entry) {
+              <div class="event-log__entry">{{ entry }}</div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+    <div class="demo-code">
+<pre><code>&lt;ui-lib-panel-menu
+  [model]=&quot;items&quot;
+  (itemClick)=&quot;onItemClick($event)&quot;
+  (panelToggle)=&quot;onPanelToggle($event)&quot;
+/&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── API ────────────────────────────────────────────────────────────── -->
+  <section class="demo-section demo-section--api">
+    <h2>API</h2>
+
+    <h3>PanelMenu Inputs</h3>
+    <table class="api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>model</code></td>
+          <td><code>PanelMenuItem[]</code></td>
+          <td><code>[]</code></td>
+          <td>Array of root-level menu items.</td>
+        </tr>
+        <tr>
+          <td><code>multiple</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Allow multiple root panels open at once.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant. Falls back to ThemeConfigService.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size token.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS class on the host element.</td>
+        </tr>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'Panel Menu'</code></td>
+          <td>Accessible label for the root container.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>PanelMenu Outputs</h3>
+    <table class="api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>(itemClick)</code></td>
+          <td><code>PanelMenuCommandEvent</code></td>
+          <td>Emitted when a leaf item is activated.</td>
+        </tr>
+        <tr>
+          <td><code>(panelToggle)</code></td>
+          <td><code>PanelMenuPanelToggleEvent</code></td>
+          <td>Emitted when a root panel expands or collapses.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>PanelMenuItem Interface</h3>
+    <table class="api-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string</code></td>
+          <td>Display text.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string</code></td>
+          <td>Icon CSS class rendered before the label.</td>
+        </tr>
+        <tr>
+          <td><code>expanded</code></td>
+          <td><code>boolean</code></td>
+          <td>Initial expansion state (root items only).</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td>Prevents interaction.</td>
+        </tr>
+        <tr>
+          <td><code>separator</code></td>
+          <td><code>boolean</code></td>
+          <td>Renders a visual divider.</td>
+        </tr>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean</code></td>
+          <td>Hides the item when <code>false</code>.</td>
+        </tr>
+        <tr>
+          <td><code>items</code></td>
+          <td><code>PanelMenuItem[]</code></td>
+          <td>Child items — makes this item a collapsible group.</td>
+        </tr>
+        <tr>
+          <td><code>command</code></td>
+          <td><code>(event) =&gt; void</code></td>
+          <td>Callback invoked when a leaf item is activated.</td>
+        </tr>
+        <tr>
+          <td><code>url</code></td>
+          <td><code>string</code></td>
+          <td>Renders the item as an anchor link.</td>
+        </tr>
+        <tr>
+          <td><code>target</code></td>
+          <td><code>string</code></td>
+          <td>Link target attribute (e.g. <code>'_blank'</code>).</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string</code></td>
+          <td>Extra CSS class on the item element.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

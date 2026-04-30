@@ -407,7 +407,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/panel-menu',
           group: 'Menu',
-          badge: 'TODO',
         },
         {
           label: 'TieredMenu',

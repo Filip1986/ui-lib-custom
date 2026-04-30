@@ -32,6 +32,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Menu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `MegaMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Menubar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `PanelMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ImageCompare` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -77,6 +78,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-30 [panel-menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/panel-menu/ (new — panel-menu.types.ts, panel-menu-context.ts, panel-menu-sub.ts, panel-menu-sub.html, panel-menu.ts, panel-menu.html, panel-menu.scss, panel-menu.spec.ts, index.ts)
+  - projects/ui-lib-custom/panel-menu/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (panel-menu added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (panel-menu import test added)
+  - projects/demo/src/app/pages/panel-menu/ (full demo replacing placeholder — TS/HTML/SCSS, 8 sections + API tables)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from PanelMenu)
+  - AI_AGENT_CONTEXT.md (marked PanelMenu complete)
+State: PanelMenu component fully complete. PrimeNG-inspired accordion-style hierarchical navigation menu with:
+  - Data-driven model array (PanelMenuItem[]) at root level
+  - Root items with children render as collapsible panels with CSS grid height animation
+  - Recursive sub-items via internal PanelMenuSubComponent (self-referential imports)
+  - Arbitrarily deep nesting with indentation via --pm-depth CSS variable
+  - single mode (multiple=false, default) collapses siblings when expanding
+  - multiple mode allows arbitrary number of open panels simultaneously
+  - item.expanded=true initializes panel as open on first render
+  - Leaf items (no children) are directly activatable — emit itemClick + invoke command
+  - URL leaf items render as anchor tags with href/target
+  - Disabled items and root panels
+  - Separator items at root and sub levels
+  - visible=false hides items from rendering
+  - PanelMenuContext injection token for prop-drilling-free recursive communication
+  - Three variants (material/bootstrap/minimal), three sizes (sm/md/lg)
+  - Signal inputs/outputs, ViewEncapsulation.None + OnPush + standalone
+  - ThemeConfigService variant inheritance
+  - Keyboard navigation (Enter/Space toggle/activate, ArrowUp/Down navigate headers, Home/End)
+  - panelToggle output for root panel expand/collapse events
+  - Dark mode tokens
+  - 25 unit tests passing. 60/60 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/panel-menu/ projects/demo/src/app/pages/panel-menu/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/panel-menu ✔ Built (zero errors, all entry points green),
+  npx jest --testPathPatterns=panel-menu --no-coverage (25/25 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (60/60 PASS).
+Terminal notes: Shell bash.exe on Windows. Used Python scripts to write files due to encoding issues.
+  panel-menu-context.ts was initially written with wrong encoding, corrected via Python with utf-8.
+Next step: knip baseline + dead-code cleanup, or TieredMenu component.
 
 Date: 2026-04-30 [menubar session]
 Changed:

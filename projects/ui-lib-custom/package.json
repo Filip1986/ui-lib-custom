@@ -212,6 +212,10 @@
     "./menubar": {
       "esm2022": "./esm2022/menubar/index.mjs",
       "esm": "./esm2022/menubar/index.mjs"
+    },
+    "./panel-menu": {
+      "esm2022": "./esm2022/panel-menu/index.mjs",
+      "esm": "./esm2022/panel-menu/index.mjs"
     }
   },
   "typesVersions": {
@@ -341,6 +345,9 @@
       ],
       "menubar": [
         "./menubar/index.d.ts"
+      ],
+      "panel-menu": [
+        "./panel-menu/index.d.ts"
       ]
     }
   }

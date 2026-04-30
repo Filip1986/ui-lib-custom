@@ -1,0 +1,71 @@
+<div
+  class="ui-lib-panel-menu__container"
+  role="menu"
+  aria-orientation="vertical"
+  [attr.aria-label]="ariaLabel()"
+>
+  @for (item of visibleRootItems(); track item) {
+    @if (item.separator) {
+      <!-- Separator between root panels -->
+      <div
+        class="ui-lib-panel-menu__separator"
+        role="separator"
+        aria-hidden="true"
+      ></div>
+    } @else {
+      <!-- Root panel -->
+      <div
+        class="ui-lib-panel-menu__panel"
+        [class.ui-lib-panel-menu__panel--expanded]="isItemExpanded(getRootKey($index))"
+        [class.ui-lib-panel-menu__panel--disabled]="item.disabled"
+        role="none"
+      >
+        <!-- Panel header button -->
+        <button
+          type="button"
+          class="ui-lib-panel-menu__header"
+          [class.ui-lib-panel-menu__header--expanded]="isItemExpanded(getRootKey($index))"
+          [class.ui-lib-panel-menu__header--has-children]="item.items && item.items.length > 0"
+          [attr.aria-expanded]="(item.items && item.items.length > 0) ? isItemExpanded(getRootKey($index)) : null"
+          [attr.aria-haspopup]="(item.items && item.items.length > 0) ? 'menu' : null"
+          [attr.aria-disabled]="item.disabled ? 'true' : null"
+          [disabled]="item.disabled ? true : null"
+          role="menuitem"
+          (click)="onRootItemClick($event, item, $index)"
+          (keydown)="onRootItemKeyDown($event, item, $index)"
+        >
+          @if (item.icon) {
+            <span
+              class="ui-lib-panel-menu__header-icon {{ item.icon }}"
+              aria-hidden="true"
+            ></span>
+          }
+          <span class="ui-lib-panel-menu__header-label">{{ item.label }}</span>
+          @if (item.items && item.items.length > 0) {
+            <span
+              class="ui-lib-panel-menu__header-toggle"
+              aria-hidden="true"
+            ></span>
+          }
+        </button>
+
+        <!-- Panel content (always in DOM; CSS grid drives animation) -->
+        @if (item.items && item.items.length > 0) {
+          <div
+            class="ui-lib-panel-menu__content"
+            [class.ui-lib-panel-menu__content--visible]="isItemExpanded(getRootKey($index))"
+            [attr.aria-hidden]="!isItemExpanded(getRootKey($index)) ? 'true' : null"
+          >
+            <div class="ui-lib-panel-menu__content-inner">
+              <ui-lib-panel-menu-sub
+                [items]="item.items"
+                [parentKey]="getRootKey($index)"
+                [depth]="1"
+              />
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>
