@@ -1,0 +1,150 @@
+@if (isPanelRendered()) {
+  <div
+    #panelRef
+    class="ui-lib-menu__panel"
+    [class.ui-lib-menu__panel--popup]="popup()"
+    [class.ui-lib-menu__panel--positioned]="!popup() || isPositioned()"
+    [style.left.px]="popup() ? menuX() : null"
+    [style.top.px]="popup() ? menuY() : null"
+    role="menu"
+    [attr.aria-label]="ariaLabel()"
+  >
+    <ul class="ui-lib-menu__list" role="presentation">
+      @for (item of visibleItems(); track $index) {
+        @if (item.separator) {
+          <li
+            class="ui-lib-menu__separator"
+            role="separator"
+            aria-hidden="true"
+          ></li>
+        } @else if (item.items?.length) {
+          <!-- Group header with labelled child items -->
+          <li class="ui-lib-menu__item-group" role="presentation">
+            @if (item.label) {
+              <div
+                class="ui-lib-menu__group-label"
+                aria-hidden="true"
+              >{{ item.label }}</div>
+            }
+            <ul
+              class="ui-lib-menu__group-list"
+              role="group"
+              [attr.aria-label]="item.label || null"
+            >
+              @for (groupItem of getVisibleGroupItems(item); track $index) {
+                @if (groupItem.separator) {
+                  <li
+                    class="ui-lib-menu__separator"
+                    role="separator"
+                    aria-hidden="true"
+                  ></li>
+                } @else {
+                  <li
+                    class="ui-lib-menu__item"
+                    [class.ui-lib-menu__item--disabled]="groupItem.disabled"
+                    role="none"
+                  >
+                    @if (groupItem.url) {
+                      <a
+                        class="ui-lib-menu__link"
+                        [class]="groupItem.styleClass
+                          ? 'ui-lib-menu__link ' + groupItem.styleClass
+                          : 'ui-lib-menu__link'"
+                        role="menuitem"
+                        [href]="groupItem.url"
+                        [attr.target]="groupItem.target || null"
+                        [attr.aria-disabled]="groupItem.disabled ? 'true' : null"
+                        [attr.tabindex]="groupItem.disabled ? '-1' : '0'"
+                        (click)="onItemActivate($event, groupItem)"
+                        (keydown)="onItemKeyDown($event, groupItem)"
+                        (focus)="onItemFocus(groupItem)"
+                      >
+                        @if (groupItem.icon) {
+                          <span class="ui-lib-menu__item-icon {{ groupItem.icon }}" aria-hidden="true"></span>
+                        }
+                        @if (groupItem.label) {
+                          <span class="ui-lib-menu__item-label">{{ groupItem.label }}</span>
+                        }
+                      </a>
+                    } @else {
+                      <a
+                        class="ui-lib-menu__link"
+                        [class]="groupItem.styleClass
+                          ? 'ui-lib-menu__link ' + groupItem.styleClass
+                          : 'ui-lib-menu__link'"
+                        role="menuitem"
+                        [attr.aria-disabled]="groupItem.disabled ? 'true' : null"
+                        [attr.tabindex]="groupItem.disabled ? '-1' : '0'"
+                        (click)="onItemActivate($event, groupItem)"
+                        (keydown)="onItemKeyDown($event, groupItem)"
+                        (focus)="onItemFocus(groupItem)"
+                      >
+                        @if (groupItem.icon) {
+                          <span class="ui-lib-menu__item-icon {{ groupItem.icon }}" aria-hidden="true"></span>
+                        }
+                        @if (groupItem.label) {
+                          <span class="ui-lib-menu__item-label">{{ groupItem.label }}</span>
+                        }
+                      </a>
+                    }
+                  </li>
+                }
+              }
+            </ul>
+          </li>
+        } @else {
+          <!-- Direct (ungrouped) item -->
+          <li
+            class="ui-lib-menu__item"
+            [class.ui-lib-menu__item--disabled]="item.disabled"
+            role="none"
+          >
+            @if (item.url) {
+              <a
+                class="ui-lib-menu__link"
+                [class]="item.styleClass
+                  ? 'ui-lib-menu__link ' + item.styleClass
+                  : 'ui-lib-menu__link'"
+                role="menuitem"
+                [href]="item.url"
+                [attr.target]="item.target || null"
+                [attr.aria-disabled]="item.disabled ? 'true' : null"
+                [attr.tabindex]="item.disabled ? '-1' : '0'"
+                (click)="onItemActivate($event, item)"
+                (keydown)="onItemKeyDown($event, item)"
+                (focus)="onItemFocus(item)"
+              >
+                @if (item.icon) {
+                  <span class="ui-lib-menu__item-icon {{ item.icon }}" aria-hidden="true"></span>
+                }
+                @if (item.label) {
+                  <span class="ui-lib-menu__item-label">{{ item.label }}</span>
+                }
+              </a>
+            } @else {
+              <a
+                class="ui-lib-menu__link"
+                [class]="item.styleClass
+                  ? 'ui-lib-menu__link ' + item.styleClass
+                  : 'ui-lib-menu__link'"
+                role="menuitem"
+                [attr.aria-disabled]="item.disabled ? 'true' : null"
+                [attr.tabindex]="item.disabled ? '-1' : '0'"
+                (click)="onItemActivate($event, item)"
+                (keydown)="onItemKeyDown($event, item)"
+                (focus)="onItemFocus(item)"
+              >
+                @if (item.icon) {
+                  <span class="ui-lib-menu__item-icon {{ item.icon }}" aria-hidden="true"></span>
+                }
+                @if (item.label) {
+                  <span class="ui-lib-menu__item-label">{{ item.label }}</span>
+                }
+              </a>
+            }
+          </li>
+        }
+      }
+    </ul>
+  </div>
+}

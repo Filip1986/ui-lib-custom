@@ -145,11 +145,18 @@ ui-lib-dock .ui-lib-dock__item--disabled .ui-lib-dock__item-link {
 // ── Icon ──────────────────────────────────────────────────────────────────────
 
 ui-lib-dock .ui-lib-dock__item-icon {
-  font-size: var(--uilib-dock-icon-size);
-  line-height: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
+  pointer-events: none;
+
+  // NgIcon sets width/height directly on the SVG element; override via CSS
+  // so the dock's own size token controls icon dimensions across all sizes.
+  svg {
+    width: var(--uilib-dock-icon-size);
+    height: var(--uilib-dock-icon-size);
+  }
 }
 
 // ── Tooltip ───────────────────────────────────────────────────────────────────

@@ -4,6 +4,21 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-04-29 [context-menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/context-menu/ (new — types, component, template, SCSS, spec, barrel)
+  - projects/ui-lib-custom/context-menu/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (context-menu added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (context-menu import test added)
+  - projects/demo/src/app/pages/context-menu/ (full demo replacing placeholder — TS/HTML/SCSS, 8 sections + API tables)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from ContextMenu)
+State: ContextMenu fully complete. Right-click trigger via show(event)/toggle(event) or global=true,
+  floating panel + viewport overflow correction, nested submenus, keyboard nav, three variants/sizes.
+  55/55 unit tests. 55/55 entry-points. ESLint clean. Build zero errors. Demo build clean.
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
+
+---
+
 Date: 2026-04-28 [knip baseline session]
 Changed:
   - knip.json (removed 9 redundant entry/ignore patterns flagged as config hints)

@@ -8,6 +8,8 @@ import {
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
+import { lucideAlertCircle } from '@ng-icons/lucide';
 import { Dock, DOCK_DEFAULT_MAGNIFICATION_LEVEL, DOCK_MAGNIFICATION_SPREAD } from './dock';
 import type {
   DockItem,
@@ -46,20 +48,26 @@ function getDockInstance(fixture: ComponentFixture<unknown>): Dock {
 const SAMPLE_ITEMS: DockItem[] = [
   {
     label: 'Home',
-    icon: 'pi pi-home',
+    icon: 'lucideAlertCircle',
     command: jest.fn() as (event: DockItemCommandEvent) => void,
   },
   {
     label: 'Search',
-    icon: 'pi pi-search',
+    icon: 'lucideAlertCircle',
     command: jest.fn() as (event: DockItemCommandEvent) => void,
   },
   {
     label: 'Settings',
-    icon: 'pi pi-cog',
+    icon: 'lucideAlertCircle',
     command: jest.fn() as (event: DockItemCommandEvent) => void,
   },
 ];
+
+// ── Shared test providers ─────────────────────────────────────────────────────
+
+function dockTestProviders(): unknown[] {
+  return [provideZonelessChangeDetection(), provideRouter([]), provideIcons({ lucideAlertCircle })];
+}
 
 // ── Host component ────────────────────────────────────────────────────────────
 
@@ -108,7 +116,7 @@ describe('Dock', (): void => {
     it('should create the component', async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       const fixture: ComponentFixture<HostComponent> = TestBed.createComponent(HostComponent);
@@ -121,7 +129,7 @@ describe('Dock', (): void => {
     it('should render a nav container', async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       const fixture: ComponentFixture<HostComponent> = TestBed.createComponent(HostComponent);
@@ -155,7 +163,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -234,7 +242,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -251,13 +259,13 @@ describe('Dock', (): void => {
       host.items.set([
         {
           label: 'Home',
-          icon: 'pi pi-home',
+          icon: 'lucideAlertCircle',
           command: jest.fn() as (event: DockItemCommandEvent) => void,
         },
-        { label: 'Hidden', icon: 'pi pi-eye-slash', visible: false },
+        { label: 'Hidden', icon: 'lucideAlertCircle', visible: false },
         {
           label: 'Settings',
-          icon: 'pi pi-cog',
+          icon: 'lucideAlertCircle',
           command: jest.fn() as (event: DockItemCommandEvent) => void,
         },
       ]);
@@ -279,7 +287,7 @@ describe('Dock', (): void => {
 
     it('should not render tooltip for item without label', (): void => {
       host.items.set([
-        { icon: 'pi pi-home', command: jest.fn() as (event: DockItemCommandEvent) => void },
+        { icon: 'lucideAlertCircle', command: jest.fn() as (event: DockItemCommandEvent) => void },
       ]);
       fixture.detectChanges();
 
@@ -303,7 +311,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -358,7 +366,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -414,7 +422,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -443,7 +451,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -501,7 +509,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -569,7 +577,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -578,7 +586,7 @@ describe('Dock', (): void => {
     });
 
     it('should apply disabled class to disabled items', (): void => {
-      host.items.set([{ label: 'Home', icon: 'pi pi-home', disabled: true }]);
+      host.items.set([{ label: 'Home', icon: 'lucideAlertCircle', disabled: true }]);
       fixture.detectChanges();
 
       const items: HTMLElement[] = getListItems(fixture);
@@ -595,7 +603,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);
@@ -626,7 +634,7 @@ describe('Dock', (): void => {
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
         imports: [HostComponent],
-        providers: [provideZonelessChangeDetection(), provideRouter([])],
+        providers: dockTestProviders(),
       }).compileComponents();
 
       fixture = TestBed.createComponent(HostComponent);

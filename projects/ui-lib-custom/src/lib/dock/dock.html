@@ -20,7 +20,7 @@
             (click)="onItemClick($event, item)"
           >
             @if (item.icon) {
-              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
             }
           </a>
         }
@@ -36,7 +36,7 @@
             (click)="onItemClick($event, item)"
           >
             @if (item.icon) {
-              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
             }
           </a>
         }
@@ -53,7 +53,7 @@
             (keydown)="onItemKeyDown($event, item)"
           >
             @if (item.icon) {
-              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
             }
           </button>
         }
@@ -66,7 +66,7 @@
             [attr.aria-disabled]="item.disabled ? 'true' : null"
           >
             @if (item.icon) {
-              <span class="ui-lib-dock__item-icon {{ item.icon }}" aria-hidden="true"></span>
+              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
             }
           </span>
         }

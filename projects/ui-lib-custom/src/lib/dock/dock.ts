@@ -14,6 +14,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Icon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type {
   DockItem,
@@ -54,7 +55,7 @@ export const DOCK_MAGNIFICATION_SPREAD: number = 2;
 @Component({
   selector: 'ui-lib-dock',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, Icon],
   templateUrl: './dock.html',
   styleUrl: './dock.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

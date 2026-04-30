@@ -42,56 +42,56 @@ export class DockDemoComponent {
   public readonly osItems: DockItem[] = [
     {
       label: 'Finder',
-      icon: 'pi pi-folder',
+      icon: 'bootstrapList',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Terminal',
-      icon: 'pi pi-code',
+      icon: 'bootstrapPencil',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Browser',
-      icon: 'pi pi-globe',
+      icon: 'bootstrapShare',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Mail',
-      icon: 'pi pi-envelope',
+      icon: 'bootstrapEnvelope',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Music',
-      icon: 'pi pi-headphones',
+      icon: 'bootstrapStar',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Photos',
-      icon: 'pi pi-images',
+      icon: 'bootstrapHeart',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Settings',
-      icon: 'pi pi-cog',
+      icon: 'bootstrapGear',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Trash',
-      icon: 'pi pi-trash',
+      icon: 'bootstrapTrash',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
@@ -102,31 +102,31 @@ export class DockDemoComponent {
   public readonly itemsWithDisabled: DockItem[] = [
     {
       label: 'Home',
-      icon: 'pi pi-home',
+      icon: 'bootstrapHouse',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Search (unavailable)',
-      icon: 'pi pi-search',
+      icon: 'bootstrapSearch',
       disabled: true,
     },
     {
       label: 'Star',
-      icon: 'pi pi-star',
+      icon: 'bootstrapStar',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
     },
     {
       label: 'Bell (unavailable)',
-      icon: 'pi pi-bell',
+      icon: 'bootstrapBell',
       disabled: true,
     },
     {
       label: 'User',
-      icon: 'pi pi-user',
+      icon: 'bootstrapPerson',
       command: (event: DockItemCommandEvent): void => {
         this.lastEvent.set(`Clicked: ${event.item.label ?? ''}`);
       },
@@ -137,19 +137,19 @@ export class DockDemoComponent {
   public readonly linkItems: DockItem[] = [
     {
       label: 'Anthropic',
-      icon: 'pi pi-external-link',
+      icon: 'bootstrapArrowRight',
       url: 'https://anthropic.com',
       target: '_blank',
     },
     {
       label: 'Angular',
-      icon: 'pi pi-code',
+      icon: 'bootstrapPencil',
       url: 'https://angular.dev',
       target: '_blank',
     },
     {
       label: 'Home',
-      icon: 'pi pi-home',
+      icon: 'bootstrapHouse',
       routerLink: '/',
     },
   ];

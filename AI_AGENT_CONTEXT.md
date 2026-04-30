@@ -29,6 +29,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Dock` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Menu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ImageCompare` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -75,6 +76,59 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-04-30 [menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/menu/ (new — menu.types.ts, menu.ts, menu.html, menu.scss, menu.spec.ts, index.ts)
+  - projects/ui-lib-custom/menu/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (menu added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (menu import test added)
+  - projects/demo/src/app/pages/menu/ (full demo replacing placeholder — TS/HTML/SCSS, 9 sections + API tables)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Menu)
+  - AI_AGENT_CONTEXT.md (marked Menu complete)
+State: Menu component fully complete. PrimeNG-inspired menu component supporting both static (inline)
+  and popup modes. Static: panel always rendered in the DOM flow. Popup: toggle(event)/show(event)/hide()
+  API, anchored to trigger element bounding rect, viewport overflow correction. Items: flat leaf items,
+  labelled groups (top-level item with `items` array becomes group header), separators, disabled items,
+  url/target anchor items, icon support, styleClass escape hatch, command callbacks + itemClick output.
+  Keyboard nav: ArrowUp/Down, Home/End, Enter/Space (activate), Escape (close popup). Three variants
+  (material/bootstrap/minimal), three sizes (sm/md/lg). Signal inputs/outputs, ViewEncapsulation.None
+  + OnPush + standalone, ThemeConfigService variant inheritance. Dark mode tokens.
+  65 unit tests passing (menu spec). 57/57 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/menu/ projects/demo/src/app/pages/menu/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/menu ✔ Built (zero errors, all entry points green),
+  npx jest --testPathPatterns=menu --no-coverage (65 tests PASS — menu.spec + context-menu + sidebar-menu suites),
+  npx jest --testPathPatterns=entry-points --no-coverage (57/57 PASS).
+Terminal notes: Linux/Windows mount sync lag continued — package.json truncated again (fixed via
+  Python json.dump), entry-points.spec.ts truncated (appended missing closing via Python string replace),
+  menu.spec.ts truncated multiple times (full file rewritten via Python heredoc). Shell: bash (Linux sandbox).
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
+
+Date: 2026-04-30 [dock icon fix session]
+Changed:
+  - projects/ui-lib-custom/src/lib/dock/dock.ts (added `Icon` to component imports)
+  - projects/ui-lib-custom/src/lib/dock/dock.html (replaced <span class="pi pi-*"> with <ui-lib-icon>)
+  - projects/ui-lib-custom/src/lib/dock/dock.scss (.ui-lib-dock__item-icon now sizes SVG via CSS var)
+  - projects/ui-lib-custom/src/lib/dock/dock.types.ts (updated `icon` JSDoc for ui-lib-icon names)
+  - projects/demo/src/app/pages/dock/dock-demo.component.ts (pi pi-* → bootstrapHouse/bootstrapGear/etc.)
+State: Dock icons now render correctly. Root cause: demo used PrimeIcons CSS class strings (pi pi-*)
+  but the demo app loads @ng-icons/core via provideUiLibIcons() — PrimeIcons font is not registered.
+  Fix: dock template now renders <ui-lib-icon [name]="item.icon"> instead of <span class="{{ item.icon }}">.
+  SCSS targets ui-lib-dock .ui-lib-dock__item-icon svg { width/height: var(--uilib-dock-icon-size) }
+  to override NgIcon's inline SVG sizing. Demo items updated to use registered bootstrap icon names
+  (bootstrapHouse, bootstrapGear, bootstrapTrash, bootstrapEnvelope, bootstrapBell, etc.).
+  DockItem.icon JSDoc updated to describe ui-lib-icon name format.
+  45/45 unit tests passing. ESLint clean. Library build zero errors.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/dock/ projects/demo/src/app/pages/dock/ --max-warnings 0 (CLEAN),
+  npm run build — ui-lib-custom/dock ✔ Built (zero errors, all entry points green),
+  npx jest --testPathPatterns=dock (45/45 PASS).
+Terminal notes: Linux/Windows mount sync lag continued — galleria.ts had NUL bytes padding (stripped
+  with Python rstrip b'\x00'), package.json truncated again (rewritten via Python json.dump),
+  dock.scss truncated (rewritten via bash heredoc). All mount corrections applied before build.
+  Shell: bash (Linux sandbox).
+Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
+
 Date: 2026-04-29 [dock session]
 Changed:
   - projects/ui-lib-custom/src/lib/dock/ (new — dock.types.ts, dock.ts, dock.html, dock.scss, dock.spec.ts, index.ts)
@@ -104,65 +158,6 @@ Terminal notes: Linux/Windows filesystem mount has sync lag — files written vi
   for any file that needs to be read back in the same bash session. package.json rewritten via
   Python json.dump to ensure complete content reaches the Linux mount. Spec and entry-points.spec.ts
   closing braces appended via bash after detecting truncation. Shell: bash.exe.
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
-
-Date: 2026-04-29 [context-menu session]
-Changed:
-  - projects/ui-lib-custom/src/lib/context-menu/ (new — types, component, template, SCSS, spec, barrel)
-  - projects/ui-lib-custom/context-menu/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (context-menu added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (context-menu import test added)
-  - projects/demo/src/app/pages/context-menu/ (full demo replacing placeholder — TS/HTML/SCSS, 8 sections + API tables)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from ContextMenu)
-  - AI_AGENT_CONTEXT.md (marked ContextMenu complete)
-State: ContextMenu component fully complete. PrimeNG-inspired context menu overlay component.
-  Right-click trigger (via show(event)/toggle(event)) or global document listener (global=true),
-  floating panel with fixed positioning + viewport overflow adjustment, menu items with label/icon/
-  disabled/separator/visible/styleClass/items(submenu)/command, one level of nested submenus opened
-  by hover (mouseenter) or keyboard (ArrowRight), keyboard navigation (ArrowUp/Down/Left/Right/Enter/
-  Space/Escape/Home/End), click-outside-to-close, isPositioned flag prevents 1-frame opacity flash,
-  three variants (material/bootstrap/minimal), three sizes (sm/md/lg), signal inputs/outputs,
-  ViewEncapsulation.None + OnPush + standalone, ThemeConfigService variant inheritance.
-  afterNextRender uses { injector } option to work inside effect() callbacks (test-safe).
-  55/55 unit tests passing. 55/55 entry-point tests passing. ESLint clean. Build zero errors.
-  Demo build zero errors (only pre-existing budget warnings in button/date-picker).
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/context-menu/ projects/demo/src/app/pages/context-menu/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/context-menu ✔ Built (zero errors),
-  npm test -- --testPathPatterns=context-menu --no-coverage (55/55 PASS),
-  npm test -- --testPathPatterns=entry-points --no-coverage (55/55 PASS),
-  npm run build:demo — EXIT:0 (zero errors, pre-existing budget warnings only).
-Terminal notes: afterNextRender() inside effect() requires { injector: this.injector } option —
-  without it throws NG0203 in test environment; inject(Injector) added to dependencies.
-  Unescaped { in demo HTML (e.g. code examples) must use &#123; / &#125; HTML entities. Shell: bash.exe.
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
-
-Date: 2026-04-29 [breadcrumb session]
-Changed:
-  - projects/ui-lib-custom/src/lib/breadcrumb/ (new — types, component, template, SCSS, spec, barrel)
-  - projects/ui-lib-custom/breadcrumb/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (breadcrumb added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (breadcrumb import test added)
-  - projects/demo/src/app/pages/breadcrumb/ (full demo — TS/HTML/SCSS, 8 sections + API table)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Breadcrumb)
-  - AI_AGENT_CONTEXT.md (marked Breadcrumb complete)
-State: Breadcrumb component fully complete. PrimeNG-inspired breadcrumb navigation component.
-  URL-based anchors, Angular RouterLink support, command callbacks (render as <button>),
-  disabled items, home item, custom separator template (#separator), three variants
-  (material/bootstrap/minimal), three sizes (sm/md/lg), ARIA nav landmark with aria-label,
-  aria-current="page" on active (last) item, signal inputs/outputs throughout,
-  ViewEncapsulation.None + OnPush, ThemeConfigService variant inheritance.
-  37/37 unit tests passing. 54/54 entry-point tests passing. ESLint clean. Build zero errors.
-  Demo build zero errors (only pre-existing budget warnings in button/date-picker).
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/breadcrumb/ projects/demo/src/app/pages/breadcrumb/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/breadcrumb ✔ Built (zero errors),
-  npm test -- --testPathPatterns=breadcrumb --no-coverage (37/37 PASS),
-  npm test -- --testPathPatterns=entry-points --no-coverage (54/54 PASS),
-  npm run build:demo — EXIT:0 (zero errors, pre-existing budget warnings only).
-Terminal notes: jest.fn() requires explicit jest.Mock type; jest.spyOn requires jest.SpiedFunction<typeof ...>;
-  optional chain on textContent needed (string | null) but linter warned — fixed with (x as string).trim() cast.
-  Shell: bash.exe.
 Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
 
 Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.

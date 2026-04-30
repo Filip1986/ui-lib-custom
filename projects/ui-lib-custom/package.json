@@ -200,6 +200,10 @@
     "./dock": {
       "esm2022": "./esm2022/dock/index.mjs",
       "esm": "./esm2022/dock/index.mjs"
+    },
+    "./menu": {
+      "esm2022": "./esm2022/menu/index.mjs",
+      "esm": "./esm2022/menu/index.mjs"
     }
   },
   "typesVersions": {
@@ -320,6 +324,9 @@
       ],
       "dock": [
         "./dock/index.d.ts"
+      ],
+      "menu": [
+        "./menu/index.d.ts"
       ]
     }
   }

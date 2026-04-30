@@ -55,6 +55,7 @@ import type * as UiLibImageCompare from 'ui-lib-custom/image-compare';
 import type * as UiLibBreadcrumb from 'ui-lib-custom/breadcrumb';
 import type * as UiLibContextMenu from 'ui-lib-custom/context-menu';
 import type * as UiLibDock from 'ui-lib-custom/dock';
+import type * as UiLibMenu from 'ui-lib-custom/menu';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -405,5 +406,11 @@ describe('Secondary Entry Points', (): void => {
     expect(mod.Dock).toBeDefined();
     expect(mod.DOCK_DEFAULT_MAGNIFICATION_LEVEL).toBeDefined();
     expect(mod.DOCK_MAGNIFICATION_SPREAD).toBeDefined();
+  });
+
+  it('should import from menu', async (): Promise<void> => {
+    const mod: typeof UiLibMenu = await import('ui-lib-custom/menu');
+    expect(mod.Menu).toBeDefined();
+    expect(mod.MENU_DEFAULT_ARIA_LABEL).toBeDefined();
   });
 });

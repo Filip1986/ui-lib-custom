@@ -11,7 +11,11 @@ export type DockPosition = 'bottom' | 'top' | 'left' | 'right';
 export interface DockItem {
   /** Accessible label and tooltip text for the item. */
   label?: string;
-  /** Icon class(es) rendered as the item visual (e.g. 'pi pi-home'). */
+  /**
+   * Icon name passed to `<ui-lib-icon>`.
+   * Accepts semantic names (e.g. `'home'`, `'settings'`, `'mail'`) or explicit
+   * `@ng-icons` names (e.g. `'bootstrapHouse'`, `'lucideSearch'`).
+   */
   icon?: string;
   /** When true, the item cannot be interacted with. */
   disabled?: boolean;

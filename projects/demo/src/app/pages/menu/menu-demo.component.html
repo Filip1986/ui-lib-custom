@@ -1,0 +1,340 @@
+<section class="menu-demo" data-testid="menu-demo">
+  <h1>Menu</h1>
+  <p>
+    A flexible navigation panel that supports both static (inline) and popup modes.
+    Items can be organised into labelled groups, separated by dividers, and decorated
+    with icons. Popup menus can be triggered by any element via <code>toggle(event)</code>.
+  </p>
+
+  <!-- ── Basic (static) ───────────────────────────────────────────────── -->
+  <h2>Basic</h2>
+  <p class="demo-hint">
+    In static mode the panel is always visible. Add items via the
+    <code>model</code> input.
+  </p>
+  <div class="demo-inline">
+    <ui-lib-menu [model]="basicItems" />
+  </div>
+
+  <!-- ── With Separator ───────────────────────────────────────────────── -->
+  <h2>With Separator</h2>
+  <p class="demo-hint">
+    Add <code>&#123; separator: true &#125;</code> to insert a horizontal
+    divider between groups of related items.
+  </p>
+  <div class="demo-inline">
+    <ui-lib-menu [model]="separatorItems" />
+  </div>
+
+  <!-- ── Disabled Items ───────────────────────────────────────────────── -->
+  <h2>Disabled Items</h2>
+  <p class="demo-hint">
+    Set <code>disabled: true</code> on any item to make it non-interactive
+    and visually muted. Disabled items receive <code>aria-disabled="true"</code>
+    and are excluded from keyboard navigation.
+  </p>
+  <div class="demo-inline">
+    <ui-lib-menu [model]="disabledItems" />
+  </div>
+
+  <!-- ── Grouped ──────────────────────────────────────────────────────── -->
+  <h2>Grouped Items</h2>
+  <p class="demo-hint">
+    Provide an <code>items</code> array on a top-level entry to create a
+    labelled group. The parent's <code>label</code> becomes the group header.
+  </p>
+  <div class="demo-inline">
+    <ui-lib-menu [model]="groupedItems" />
+  </div>
+
+  <!-- ── Popup mode ───────────────────────────────────────────────────── -->
+  <h2>Popup Mode</h2>
+  <p class="demo-hint">
+    Set <code>[popup]="true"</code> and call <code>menu.toggle($event)</code>
+    on the trigger element. The panel floats near the trigger and closes on
+    outside click or <kbd>Escape</kbd>.
+  </p>
+  <div class="demo-row">
+    <ui-lib-button
+      label="Options"
+      icon="pi pi-ellipsis-v"
+      iconPosition="right"
+      (click)="popupMenu.toggle($event)"
+    />
+    <ui-lib-menu #popupMenu [model]="popupItems" [popup]="true" />
+  </div>
+
+  <!-- ── Popup with grouped items ─────────────────────────────────────── -->
+  <h2>Popup with Grouped Items</h2>
+  <p class="demo-hint">
+    Grouped items work in popup mode too — the groups are rendered inline
+    within the floating panel.
+  </p>
+  <div class="demo-row">
+    <ui-lib-button
+      label="File Menu"
+      icon="pi pi-bars"
+      (click)="popupGroupedMenu.toggle($event)"
+    />
+    <ui-lib-menu #popupGroupedMenu [model]="popupGroupedItems" [popup]="true" />
+  </div>
+
+  <!-- ── Command callback & itemClick ─────────────────────────────────── -->
+  <h2>Command Callback &amp; itemClick Output</h2>
+  <p class="demo-hint">
+    Use the <code>command</code> callback on individual items or listen to
+    the <code>itemClick</code> output on the component to react to activations.
+  </p>
+  <div class="demo-inline">
+    <ui-lib-menu [model]="commandItems" (itemClick)="onItemClick($event)" />
+  </div>
+  @if (eventLog().length > 0) {
+    <div class="demo-event-log" aria-live="polite">
+      @for (entry of eventLog(); track $index) {
+        <p>{{ entry }}</p>
+      }
+    </div>
+  }
+
+  <!-- ── URL items ─────────────────────────────────────────────────────── -->
+  <h2>URL Items</h2>
+  <p class="demo-hint">
+    Set <code>url</code> on an item to render it as a native <code>&lt;a&gt;</code>
+    link. Combine with <code>target="_blank"</code> to open in a new tab.
+  </p>
+  <div class="demo-inline">
+    <ui-lib-menu [model]="urlItems" />
+  </div>
+
+  <!-- ── Variants ─────────────────────────────────────────────────────── -->
+  <h2>Variants</h2>
+  <p class="demo-hint">
+    Three design-system variants: <code>material</code> (default),
+    <code>bootstrap</code>, and <code>minimal</code>.
+  </p>
+  <div class="demo-variants">
+    <div class="demo-variant-col">
+      <p class="demo-label">Material</p>
+      <ui-lib-menu [model]="variantItems" variant="material" />
+    </div>
+    <div class="demo-variant-col">
+      <p class="demo-label">Bootstrap</p>
+      <ui-lib-menu [model]="variantItems" variant="bootstrap" />
+    </div>
+    <div class="demo-variant-col">
+      <p class="demo-label">Minimal</p>
+      <ui-lib-menu [model]="variantItems" variant="minimal" />
+    </div>
+  </div>
+
+  <!-- ── Sizes ────────────────────────────────────────────────────────── -->
+  <h2>Sizes</h2>
+  <p class="demo-hint">
+    Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
+  </p>
+  <div class="demo-sizes">
+    <div class="demo-size-col">
+      <p class="demo-label">Small</p>
+      <ui-lib-menu [model]="sizeItems" size="sm" />
+    </div>
+    <div class="demo-size-col">
+      <p class="demo-label">Medium</p>
+      <ui-lib-menu [model]="sizeItems" size="md" />
+    </div>
+    <div class="demo-size-col">
+      <p class="demo-label">Large</p>
+      <ui-lib-menu [model]="sizeItems" size="lg" />
+    </div>
+  </div>
+
+  <!-- ── API Reference ─────────────────────────────────────────────────── -->
+  <h2>API Reference</h2>
+
+  <h3>Menu Inputs</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>model</code></td>
+        <td><code>MenuItem[]</code></td>
+        <td><code>[]</code></td>
+        <td>Items to render. Top-level items with <code>items</code> act as group headers.</td>
+      </tr>
+      <tr>
+        <td><code>popup</code></td>
+        <td><code>boolean</code></td>
+        <td><code>false</code></td>
+        <td>When true, the panel is hidden and shown as a floating popup via <code>toggle()</code>.</td>
+      </tr>
+      <tr>
+        <td><code>variant</code></td>
+        <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+        <td><code>null</code></td>
+        <td>Design variant. Falls back to <code>ThemeConfigService</code> when null.</td>
+      </tr>
+      <tr>
+        <td><code>size</code></td>
+        <td><code>'sm' | 'md' | 'lg'</code></td>
+        <td><code>'md'</code></td>
+        <td>Controls item padding and font size.</td>
+      </tr>
+      <tr>
+        <td><code>styleClass</code></td>
+        <td><code>string | null</code></td>
+        <td><code>null</code></td>
+        <td>Extra CSS class applied to the host element.</td>
+      </tr>
+      <tr>
+        <td><code>ariaLabel</code></td>
+        <td><code>string</code></td>
+        <td><code>'Menu'</code></td>
+        <td>Accessible label for the menu panel.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Menu Outputs</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Payload</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>itemClick</code></td>
+        <td><code>MenuItemCommandEvent</code></td>
+        <td>Emitted when a non-disabled leaf item is activated (click or keyboard).</td>
+      </tr>
+      <tr>
+        <td><code>menuShow</code></td>
+        <td><code>MouseEvent</code></td>
+        <td>Emitted when the popup panel becomes visible.</td>
+      </tr>
+      <tr>
+        <td><code>menuHide</code></td>
+        <td><code>void</code></td>
+        <td>Emitted when the popup panel is hidden.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Menu Methods</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Signature</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>toggle</code></td>
+        <td><code>(event: MouseEvent): void</code></td>
+        <td>Toggles the popup open/closed. No-op in static mode.</td>
+      </tr>
+      <tr>
+        <td><code>show</code></td>
+        <td><code>(event: MouseEvent): void</code></td>
+        <td>Shows the popup anchored to the trigger element. No-op in static mode.</td>
+      </tr>
+      <tr>
+        <td><code>hide</code></td>
+        <td><code>(): void</code></td>
+        <td>Hides the popup. No-op in static mode or when already hidden.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>MenuItem Interface</h3>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>label</code></td>
+        <td><code>string</code></td>
+        <td>Display text for the item or group header.</td>
+      </tr>
+      <tr>
+        <td><code>icon</code></td>
+        <td><code>string</code></td>
+        <td>Icon class rendered before the label.</td>
+      </tr>
+      <tr>
+        <td><code>disabled</code></td>
+        <td><code>boolean</code></td>
+        <td>When true, the item is non-interactive.</td>
+      </tr>
+      <tr>
+        <td><code>separator</code></td>
+        <td><code>boolean</code></td>
+        <td>When true, renders a horizontal divider line.</td>
+      </tr>
+      <tr>
+        <td><code>visible</code></td>
+        <td><code>boolean</code></td>
+        <td>When <code>false</code>, the item is hidden from the list.</td>
+      </tr>
+      <tr>
+        <td><code>items</code></td>
+        <td><code>MenuItem[]</code></td>
+        <td>Child items. Makes the parent a group header.</td>
+      </tr>
+      <tr>
+        <td><code>url</code></td>
+        <td><code>string</code></td>
+        <td>When set, the item renders as a native anchor link.</td>
+      </tr>
+      <tr>
+        <td><code>target</code></td>
+        <td><code>string</code></td>
+        <td>Anchor <code>target</code> attribute for <code>url</code> items.</td>
+      </tr>
+      <tr>
+        <td><code>styleClass</code></td>
+        <td><code>string</code></td>
+        <td>Extra CSS class added to the item element.</td>
+      </tr>
+      <tr>
+        <td><code>command</code></td>
+        <td><code>(event: MenuItemCommandEvent) =&gt; void</code></td>
+        <td>Callback invoked when the item is activated.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Keyboard Navigation ────────────────────────────────────────────── -->
+  <h2>Keyboard Navigation</h2>
+  <table class="api-table">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Move focus to previous / next item.</td></tr>
+      <tr><td><kbd>Home</kbd></td><td>Move focus to the first item.</td></tr>
+      <tr><td><kbd>End</kbd></td><td>Move focus to the last item.</td></tr>
+      <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td>Activate the focused item.</td></tr>
+      <tr><td><kbd>Escape</kbd></td><td>Close the popup menu (popup mode only).</td></tr>
+      <tr><td><kbd>Tab</kbd></td><td>Move focus to the next focusable element outside the menu.</td></tr>
+    </tbody>
+  </table>
+</section>
