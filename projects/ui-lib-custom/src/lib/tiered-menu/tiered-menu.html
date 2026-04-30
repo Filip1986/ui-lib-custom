@@ -1,0 +1,16 @@
+@if (shouldRenderPanel()) {
+  <div
+    #panelRef
+    class="ui-lib-tiered-menu__panel"
+    [class.ui-lib-tiered-menu__panel--popup]="popup()"
+    [class.ui-lib-tiered-menu__panel--positioned]="isPositioned()"
+    [style.left.px]="popup() ? panelX() : null"
+    [style.top.px]="popup() ? panelY() : null"
+  >
+    <ui-lib-tiered-menu-sub
+      [items]="model()"
+      [level]="0"
+      (itemActivated)="onItemActivated($event)"
+    />
+  </div>
+}

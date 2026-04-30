@@ -1,0 +1,152 @@
+// ============================================================
+// TieredMenu host and panel styles
+// Token pattern: --uilib-tiered-menu-{property}[-{state}]
+// ============================================================
+
+// ── Host ──────────────────────────────────────────────────────────────────────
+
+.ui-lib-tiered-menu {
+  display: block;
+  position: relative;
+
+  // Inline mode: no special positioning needed
+  &--inline {
+    .ui-lib-tiered-menu__panel {
+      position: relative;
+    }
+  }
+
+  // Popup mode: panel is position:fixed
+  &--popup {
+    position: static;
+
+    .ui-lib-tiered-menu__panel--popup {
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+
+      &.ui-lib-tiered-menu__panel--positioned {
+        opacity: 1;
+        pointer-events: auto;
+        animation: uilib-tiered-menu-in var(--uilib-transition-fast, 0.15s ease) both;
+      }
+    }
+  }
+}
+
+// ── Root Panel ────────────────────────────────────────────────────────────────
+
+.ui-lib-tiered-menu__panel {
+  background: var(--uilib-tiered-menu-panel-bg, var(--uilib-surface, #fff));
+  border: 1px solid var(--uilib-tiered-menu-panel-border, var(--uilib-color-border, #e5e7eb));
+  border-radius: var(--uilib-tiered-menu-panel-radius, 0.375rem);
+  box-shadow: var(
+    --uilib-tiered-menu-panel-shadow,
+    var(--uilib-shadow-md, 0 4px 12px rgba(0, 0, 0, 0.12))
+  );
+  z-index: var(--uilib-z-overlay, 1000);
+  min-width: var(--uilib-tiered-menu-min-width, 12rem);
+  overflow: visible;
+
+  // Root list rendered directly inside the panel has no extra padding
+  > ui-lib-tiered-menu-sub > .ui-lib-tiered-menu__list {
+    padding: var(--uilib-tiered-menu-list-padding, 0.25rem 0);
+  }
+}
+
+@keyframes uilib-tiered-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Size tokens ───────────────────────────────────────────────────────────────
+
+.ui-lib-tiered-menu--size-sm {
+  --uilib-tiered-menu-font-size: 0.8125rem;
+  --uilib-tiered-menu-item-padding: 0.3125rem 0.75rem;
+  --uilib-tiered-menu-icon-size: 0.875rem;
+  --uilib-tiered-menu-min-width: 10rem;
+}
+
+.ui-lib-tiered-menu--size-md {
+  --uilib-tiered-menu-font-size: 0.875rem;
+  --uilib-tiered-menu-item-padding: 0.5rem 0.875rem;
+  --uilib-tiered-menu-icon-size: 1rem;
+  --uilib-tiered-menu-min-width: 12rem;
+}
+
+.ui-lib-tiered-menu--size-lg {
+  --uilib-tiered-menu-font-size: 1rem;
+  --uilib-tiered-menu-item-padding: 0.625rem 1rem;
+  --uilib-tiered-menu-icon-size: 1.125rem;
+  --uilib-tiered-menu-min-width: 14rem;
+}
+
+// ── Variant: Material ─────────────────────────────────────────────────────────
+
+.ui-lib-tiered-menu--variant-material {
+  --uilib-tiered-menu-panel-bg: var(--uilib-surface, #fff);
+  --uilib-tiered-menu-panel-border: transparent;
+  --uilib-tiered-menu-panel-radius: 0.25rem;
+  --uilib-tiered-menu-panel-shadow: var(--uilib-shadow-lg, 0 8px 24px rgba(0, 0, 0, 0.18));
+  --uilib-tiered-menu-item-color: var(--uilib-color-text, #1f2937);
+  --uilib-tiered-menu-item-color-hover: var(--uilib-color-primary, #6366f1);
+  --uilib-tiered-menu-item-bg-hover: var(--uilib-surface-hover, #f3f4f6);
+  --uilib-tiered-menu-item-radius: 0;
+  --uilib-tiered-menu-separator-color: var(--uilib-color-border, #e5e7eb);
+  --uilib-tiered-menu-focus-ring: var(--uilib-color-primary, #6366f1);
+
+  .ui-lib-tiered-menu__link {
+    border-radius: 0;
+  }
+}
+
+// ── Variant: Bootstrap ────────────────────────────────────────────────────────
+
+.ui-lib-tiered-menu--variant-bootstrap {
+  --uilib-tiered-menu-panel-bg: var(--uilib-surface, #fff);
+  --uilib-tiered-menu-panel-border: var(--uilib-color-border, #dee2e6);
+  --uilib-tiered-menu-panel-radius: 0.375rem;
+  --uilib-tiered-menu-panel-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --uilib-tiered-menu-item-color: var(--uilib-color-text, #212529);
+  --uilib-tiered-menu-item-color-hover: var(--uilib-color-text, #212529);
+  --uilib-tiered-menu-item-bg-hover: var(--uilib-surface-hover, #f8f9fa);
+  --uilib-tiered-menu-item-radius: 0.25rem;
+  --uilib-tiered-menu-separator-color: var(--uilib-color-border, #dee2e6);
+  --uilib-tiered-menu-focus-ring: #0d6efd;
+}
+
+// ── Variant: Minimal ──────────────────────────────────────────────────────────
+
+.ui-lib-tiered-menu--variant-minimal {
+  --uilib-tiered-menu-panel-bg: var(--uilib-surface, #fff);
+  --uilib-tiered-menu-panel-border: var(--uilib-color-border, #e5e7eb);
+  --uilib-tiered-menu-panel-radius: 0.375rem;
+  --uilib-tiered-menu-panel-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --uilib-tiered-menu-item-color: var(--uilib-color-text, #374151);
+  --uilib-tiered-menu-item-color-hover: var(--uilib-color-primary, #6366f1);
+  --uilib-tiered-menu-item-bg-hover: transparent;
+  --uilib-tiered-menu-item-radius: 0.25rem;
+  --uilib-tiered-menu-separator-color: var(--uilib-color-border, #e5e7eb);
+  --uilib-tiered-menu-focus-ring: var(--uilib-color-primary, #6366f1);
+
+  .ui-lib-tiered-menu__link:hover {
+    text-decoration: underline;
+  }
+}
+
+// ── Dark mode overrides ───────────────────────────────────────────────────────
+
+[data-theme='dark'] {
+  --uilib-tiered-menu-panel-bg: var(--uilib-surface, #1f2937);
+  --uilib-tiered-menu-panel-border: var(--uilib-color-border, #374151);
+  --uilib-tiered-menu-item-color: var(--uilib-color-text, #f9fafb);
+  --uilib-tiered-menu-item-bg-hover: var(--uilib-surface-hover, #374151);
+  --uilib-tiered-menu-separator-color: var(--uilib-color-border, #374151);
+}

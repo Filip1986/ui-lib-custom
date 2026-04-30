@@ -413,7 +413,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/tiered-menu',
           group: 'Menu',
-          badge: 'TODO',
         },
         {
           label: 'Toast',

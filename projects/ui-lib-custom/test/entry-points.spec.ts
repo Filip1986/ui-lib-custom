@@ -59,6 +59,7 @@ import type * as UiLibMenu from 'ui-lib-custom/menu';
 import type * as UiLibMegaMenu from 'ui-lib-custom/mega-menu';
 import type * as UiLibMenubar from 'ui-lib-custom/menubar';
 import type * as UiLibPanelMenu from 'ui-lib-custom/panel-menu';
+import type * as UiLibTieredMenu from 'ui-lib-custom/tiered-menu';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -433,5 +434,11 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibPanelMenu = await import('ui-lib-custom/panel-menu');
     expect(mod.PanelMenu).toBeDefined();
     expect(mod.PANEL_MENU_DEFAULT_ARIA_LABEL).toBeDefined();
+  });
+
+  it('should import from tiered-menu', async (): Promise<void> => {
+    const mod: typeof UiLibTieredMenu = await import('ui-lib-custom/tiered-menu');
+    expect(mod.TieredMenu).toBeDefined();
+    expect(mod.TIERED_MENU_DEFAULT_ARIA_LABEL).toBeDefined();
   });
 });

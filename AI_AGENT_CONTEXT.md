@@ -33,6 +33,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `MegaMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Menubar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `PanelMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `TieredMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Image` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ImageCompare` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ToggleButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -78,6 +79,43 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-30 [tiered-menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/tiered-menu/ (new — tiered-menu.types.ts, tiered-menu-sub.ts, tiered-menu-sub.html, tiered-menu-sub.scss, tiered-menu.ts, tiered-menu.html, tiered-menu.scss, tiered-menu.spec.ts, index.ts)
+  - projects/ui-lib-custom/tiered-menu/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (tiered-menu added to exports + typesVersions; pre-existing NUL-byte truncation fixed)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (tiered-menu import test added; file was truncated — repaired and completed)
+  - projects/demo/src/app/pages/tiered-menu/ (full demo replacing placeholder — TS/HTML/SCSS, 7 sections + API + keyboard tables)
+  - AI_AGENT_CONTEXT.md (marked TieredMenu complete)
+State: TieredMenu component fully complete. PrimeNG-inspired hierarchical flyout menu with:
+  - Arbitrarily deep recursive nesting via internal TieredMenuSubComponent (self-referential imports)
+  - Inline mode (always rendered in flow) and popup mode (floating overlay, anchored to trigger element)
+  - toggle(event) / show(event) / hide() public API for popup mode
+  - Viewport overflow correction for popup positioning
+  - Items: leaf items, items-with-children (flyout arrow + sub-panel on hover/keyboard), separators,
+    disabled items, url/target anchor items, visible=false, styleClass, command callbacks
+  - Three variants (material/bootstrap/minimal), three sizes (sm/md/lg)
+  - Signal inputs/outputs, ViewEncapsulation.None + OnPush + standalone
+  - ThemeConfigService variant inheritance
+  - Keyboard navigation (ArrowDown/Up navigate list, ArrowRight open flyout, ArrowLeft/Escape close flyout,
+    Enter/Space activate, Home/End jump to first/last, Escape closes popup)
+  - itemClick, menuShow, menuHide outputs
+  - Dark mode tokens
+  - 25 unit tests passing (all host components use WritableSignal for proper OnPush + zoneless propagation)
+  - 61/61 entry-point tests passing. ESLint clean. Build zero errors.
+  - Also fixed pre-existing NUL bytes in mega-menu.ts, mega-menu.spec.ts, mega-menu/index.ts, menu.ts
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/tiered-menu/ projects/demo/src/app/pages/tiered-menu/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/tiered-menu ✔ Built (zero errors, all 61+ entry points green),
+  npx jest --testPathPatterns=tiered-menu --no-coverage (25/25 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (61/61 PASS).
+Terminal notes: Shell bash (Linux sandbox). Used Python scripts for all file writes to avoid encoding issues.
+  package.json was truncated (pre-existing) — fully rewritten via Python.
+  entry-points.spec.ts was truncated — repaired by appending missing it() blocks via Python.
+  NUL bytes found in mega-menu.ts, mega-menu.spec.ts, mega-menu/index.ts, menu.ts — stripped with Python.
+Next step: knip baseline + dead-code cleanup, or constants extraction pass.
+
 
 Date: 2026-04-30 [panel-menu session]
 Changed:
@@ -177,53 +215,4 @@ Changed:
   - projects/ui-lib-custom/menu/ (new secondary entry point — ng-package.json, package.json)
   - projects/ui-lib-custom/package.json (menu added to exports + typesVersions)
   - projects/ui-lib-custom/test/entry-points.spec.ts (menu import test added)
-  - projects/demo/src/app/pages/menu/ (full demo replacing placeholder — TS/HTML/SCSS, 9 sections + API tables)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Menu)
-  - AI_AGENT_CONTEXT.md (marked Menu complete)
-State: Menu component fully complete. PrimeNG-inspired menu component supporting both static (inline)
-  and popup modes. Static: panel always rendered in the DOM flow. Popup: toggle(event)/show(event)/hide()
-  API, anchored to trigger element bounding rect, viewport overflow correction. Items: flat leaf items,
-  labelled groups (top-level item with `items` array becomes group header), separators, disabled items,
-  url/target anchor items, icon support, styleClass escape hatch, command callbacks + itemClick output.
-  Keyboard nav: ArrowUp/Down, Home/End, Enter/Space (activate), Escape (close popup). Three variants
-  (material/bootstrap/minimal), three sizes (sm/md/lg). Signal inputs/outputs, ViewEncapsulation.None
-  + OnPush + standalone, ThemeConfigService variant inheritance. Dark mode tokens.
-  65 unit tests passing (menu spec). 57/57 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/menu/ projects/demo/src/app/pages/menu/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/menu ✔ Built (zero errors, all entry points green),
-  npx jest --testPathPatterns=menu --no-coverage (65 tests PASS — menu.spec + context-menu + sidebar-menu suites),
-  npx jest --testPathPatterns=entry-points --no-coverage (57/57 PASS).
-Terminal notes: Linux/Windows mount sync lag continued — package.json truncated again (fixed via
-  Python json.dump), entry-points.spec.ts truncated (appended missing closing via Python string replace),
-  menu.spec.ts truncated multiple times (full file rewritten via Python heredoc). Shell: bash (Linux sandbox).
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
-
-Date: 2026-04-30 [dock icon fix session]
-Changed:
-  - projects/ui-lib-custom/src/lib/dock/dock.ts (added `Icon` to component imports)
-  - projects/ui-lib-custom/src/lib/dock/dock.html (replaced <span class="pi pi-*"> with <ui-lib-icon>)
-  - projects/ui-lib-custom/src/lib/dock/dock.scss (.ui-lib-dock__item-icon now sizes SVG via CSS var)
-  - projects/ui-lib-custom/src/lib/dock/dock.types.ts (updated `icon` JSDoc for ui-lib-icon names)
-  - projects/demo/src/app/pages/dock/dock-demo.component.ts (pi pi-* → bootstrapHouse/bootstrapGear/etc.)
-State: Dock icons now render correctly. Root cause: demo used PrimeIcons CSS class strings (pi pi-*)
-  but the demo app loads @ng-icons/core via provideUiLibIcons() — PrimeIcons font is not registered.
-  Fix: dock template now renders <ui-lib-icon [name]="item.icon"> instead of <span class="{{ item.icon }}">.
-  SCSS targets ui-lib-dock .ui-lib-dock__item-icon svg { width/height: var(--uilib-dock-icon-size) }
-  to override NgIcon's inline SVG sizing. Demo items updated to use registered bootstrap icon names
-  (bootstrapHouse, bootstrapGear, bootstrapTrash, bootstrapEnvelope, bootstrapBell, etc.).
-  DockItem.icon JSDoc updated to describe ui-lib-icon name format.
-  45/45 unit tests passing. ESLint clean. Library build zero errors.
-Verification:
-  npx eslint projects/ui-lib-custom/src/lib/dock/ projects/demo/src/app/pages/dock/ --max-warnings 0 (CLEAN),
-  npm run build — ui-lib-custom/dock ✔ Built (zero errors, all entry points green),
-  npx jest --testPathPatterns=dock (45/45 PASS).
-Terminal notes: Linux/Windows mount sync lag continued — galleria.ts had NUL bytes padding (stripped
-  with Python rstrip b'\x00'), package.json truncated again (rewritten via Python json.dump),
-  dock.scss truncated (rewritten via bash heredoc). All mount corrections applied before build.
-  Shell: bash (Linux sandbox).
-Next step: knip baseline + dead-code cleanup, or overlay follow-ups (appendTo / z-index manager).
-
-
-Handoff convention (when terminal commands are run in-session): include a short `Terminal notes:` subsection with failed command(s), successful workaround(s), and shell used.
-
+  - projects/demo

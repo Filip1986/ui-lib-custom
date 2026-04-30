@@ -1,0 +1,169 @@
+.demo-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  font-family: var(--uilib-font-ui, system-ui, sans-serif);
+}
+
+.demo-page__header {
+  margin-bottom: 2.5rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--uilib-color-text, #111827);
+  }
+}
+
+.demo-page__subtitle {
+  color: var(--uilib-color-text-muted, #6b7280);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.demo-section {
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--uilib-color-text, #111827);
+    border-bottom: 1px solid var(--uilib-color-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.5rem;
+    color: var(--uilib-color-text, #374151);
+  }
+
+  p {
+    color: var(--uilib-color-text-muted, #6b7280);
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+  }
+
+  code {
+    background: var(--uilib-surface-hover, #f3f4f6);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.85em;
+    font-family: var(--uilib-font-mono, monospace);
+  }
+
+  &--api {
+    overflow-x: auto;
+  }
+}
+
+.demo-preview {
+  background: var(--uilib-surface, #fff);
+  border: 1px solid var(--uilib-color-border, #e5e7eb);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  &--narrow {
+    max-width: 280px;
+  }
+}
+
+.demo-trigger-btn {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--uilib-color-border, #d1d5db);
+  border-radius: 0.375rem;
+  background: var(--uilib-surface, #fff);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: inherit;
+
+  &:hover {
+    background: var(--uilib-surface-hover, #f3f4f6);
+  }
+}
+
+.demo-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.demo-control-btn {
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--uilib-color-border, #d1d5db);
+  border-radius: 0.375rem;
+  background: var(--uilib-surface, #fff);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-family: inherit;
+
+  &--active {
+    background: var(--uilib-color-primary, #6366f1);
+    color: #fff;
+    border-color: var(--uilib-color-primary, #6366f1);
+  }
+
+  &:hover:not(.demo-control-btn--active) {
+    background: var(--uilib-surface-hover, #f3f4f6);
+  }
+}
+
+.demo-event-log {
+  font-size: 0.8125rem;
+  color: var(--uilib-color-primary, #6366f1);
+  background: var(--uilib-surface-hover, #f3f4f6);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.demo-code {
+  background: var(--uilib-surface-hover, #f8fafc);
+  border: 1px solid var(--uilib-color-border, #e5e7eb);
+  border-radius: 0.375rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.8125rem;
+  font-family: var(--uilib-font-mono, 'Fira Code', monospace);
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.demo-api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+
+  th,
+  td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--uilib-color-border, #e5e7eb);
+  }
+
+  th {
+    font-weight: 600;
+    background: var(--uilib-surface-hover, #f9fafb);
+    color: var(--uilib-color-text, #111827);
+  }
+
+  td:first-child {
+    font-family: var(--uilib-font-mono, monospace);
+    font-size: 0.8em;
+    color: var(--uilib-color-primary, #6366f1);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
