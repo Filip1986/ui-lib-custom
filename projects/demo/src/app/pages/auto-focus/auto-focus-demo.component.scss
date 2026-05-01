@@ -1,14 +1,197 @@
 .auto-focus-demo {
-  padding: 1.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  font-family: var(--uilib-font-family, system-ui, sans-serif);
+  color: var(--uilib-page-text, #1e293b);
+}
 
-  h1 {
-    margin: 0 0 0.5rem;
-    font-size: 1.5rem;
-    color: var(--uilib-page-fg);
+// ── Hero ──────────────────────────────────────────────────────────────────
+.af-hero {
+  margin-bottom: 3rem;
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: var(--uilib-page-text, #0f172a);
   }
 
-  p {
-    margin: 0;
-    color: var(--uilib-muted);
+  &__lead {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--uilib-page-text-muted, #475569);
+    max-width: 640px;
+    margin: 0 0 1rem;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+.af-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--uilib-surface-b, #f1f5f9);
+  color: var(--uilib-page-text, #334155);
+  border: 1px solid var(--uilib-surface-border, #e2e8f0);
+}
+
+// ── Sections ──────────────────────────────────────────────────────────────
+.af-section {
+  margin-bottom: 3rem;
+
+  &__title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--uilib-page-text, #0f172a);
+  }
+
+  &__desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--uilib-page-text-muted, #475569);
+    margin: 0 0 1.25rem;
+  }
+}
+
+.af-sub-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--uilib-page-text, #0f172a);
+}
+
+// ── Demo card ─────────────────────────────────────────────────────────────
+.af-demo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--uilib-surface-a, #ffffff);
+  border: 1px solid var(--uilib-surface-border, #e2e8f0);
+  margin-bottom: 1rem;
+}
+
+.af-conditional {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+// ── Form elements ─────────────────────────────────────────────────────────
+.af-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--uilib-page-text, #334155);
+}
+
+.af-input {
+  width: 100%;
+  max-width: 360px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--uilib-surface-border, #cbd5e1);
+  font-size: 0.95rem;
+  color: var(--uilib-page-text, #1e293b);
+  background: var(--uilib-surface-a, #ffffff);
+  outline: none;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: var(--uilib-color-primary, #6366f1);
+    box-shadow: 0 0 0 3px rgb(99 102 241 / 20%);
+  }
+
+  &::placeholder {
+    color: var(--uilib-page-text-muted, #94a3b8);
+  }
+}
+
+.af-btn {
+  align-self: flex-start;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--uilib-color-primary, #6366f1);
+  background: var(--uilib-color-primary, #6366f1);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
+
+  &:hover {
+    background: var(--uilib-color-primary-dark, #4f46e5);
+    border-color: var(--uilib-color-primary-dark, #4f46e5);
+  }
+}
+
+// ── Code blocks ───────────────────────────────────────────────────────────
+.af-code {
+  background: var(--uilib-surface-b, #f8fafc);
+  border: 1px solid var(--uilib-surface-border, #e2e8f0);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  margin: 0;
+
+  code {
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    color: var(--uilib-page-text, #334155);
+    white-space: pre;
+  }
+}
+
+// ── API table ─────────────────────────────────────────────────────────────
+.af-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+
+  th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    background: var(--uilib-surface-b, #f1f5f9);
+    color: var(--uilib-page-text-muted, #475569);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--uilib-surface-border, #e2e8f0);
+  }
+
+  td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--uilib-surface-border, #e2e8f0);
+    color: var(--uilib-page-text, #334155);
+    line-height: 1.5;
+
+    code {
+      font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.8rem;
+      background: var(--uilib-surface-b, #f1f5f9);
+      padding: 0.1rem 0.35rem;
+      border-radius: 0.25rem;
+      color: var(--uilib-color-primary, #6366f1);
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
   }
 }

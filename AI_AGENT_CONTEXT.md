@@ -27,6 +27,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ### Component/Docs Delta (Active Only)
 
 - `Toast` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -80,6 +82,32 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-01 [AutoFocus directive]
+Changed:
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.ts (new directive)
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.spec.ts (7 unit tests)
+  - projects/ui-lib-custom/src/lib/auto-focus/index.ts (barrel)
+  - projects/ui-lib-custom/auto-focus/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/auto-focus/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (auto-focus added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (auto-focus import test added)
+  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.html (full demo — hero + 3 sections + API table)
+  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from AutoFocus entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: AutoFocus directive fully complete. PrimeNG-inspired [uiLibAutoFocus] directive that programmatically
+  focuses the host element after ngAfterViewInit (via setTimeout for deferred compatibility). Single boolean
+  `autofocus` input (default true). Host class `ui-lib-autofocus`. Signal input. ViewEncapsulation.None not
+  needed (directive, no template/styles). Secondary entry point wired and built.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/auto-focus/ projects/demo/src/app/pages/auto-focus/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx jest --testPathPatterns=auto-focus --no-coverage (7/7 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (65/65 PASS),
+  npx ng build ui-lib-custom — ui-lib-custom/auto-focus Built, zero errors.
+Terminal notes: HTML template `{` chars in <pre> blocks must use &#123;/&#125; HTML entities to avoid Angular block-syntax parser errors. `@` in code examples must use &#64;.
+Next step: knip baseline + dead-code cleanup, or constants extraction pass.
 
 Date: 2026-05-01 [animate-on-scroll demo rebuild + toast/scss repairs]
 Changed:

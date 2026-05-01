@@ -232,6 +232,10 @@
     "./animate-on-scroll": {
       "esm2022": "./esm2022/animate-on-scroll/index.mjs",
       "esm": "./esm2022/animate-on-scroll/index.mjs"
+    },
+    "./auto-focus": {
+      "esm2022": "./esm2022/auto-focus/index.mjs",
+      "esm": "./esm2022/auto-focus/index.mjs"
     }
   },
   "typesVersions": {
@@ -376,6 +380,9 @@
       ],
       "animate-on-scroll": [
         "./animate-on-scroll/index.d.ts"
+      ],
+      "auto-focus": [
+        "./auto-focus/index.d.ts"
       ]
     }
   }

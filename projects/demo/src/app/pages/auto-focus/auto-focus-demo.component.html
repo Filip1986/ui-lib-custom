@@ -1,5 +1,125 @@
 <section class="auto-focus-demo" data-testid="auto-focus-demo">
-  <h1>AutoFocus</h1>
-  <p>Coming soon.</p>
+
+  <!-- Hero -->
+  <div class="af-hero">
+    <h1 class="af-hero__title">AutoFocus</h1>
+    <p class="af-hero__lead">
+      A lightweight directive that programmatically focuses the host element after
+      view initialization — a reliable, Angular-first alternative to the native
+      <code>autofocus</code> attribute.
+    </p>
+    <div class="af-hero__tags">
+      <span class="af-tag">Directive</span>
+      <span class="af-tag">Misc</span>
+      <span class="af-tag">A11y</span>
+    </div>
+  </div>
+
+  <!-- ── Section 1: Basic usage ── -->
+  <div class="af-section">
+    <h2 class="af-section__title">Basic Usage</h2>
+    <p class="af-section__desc">
+      Add <code>uiLibAutoFocus</code> to any focusable element. Focus is applied
+      automatically after the view initializes.
+    </p>
+    <div class="af-demo-card">
+      <label class="af-label" for="basic-input">Name</label>
+      <input
+        id="basic-input"
+        class="af-input"
+        type="text"
+        placeholder="This input is focused on load"
+        uiLibAutoFocus
+      />
+    </div>
+    <pre class="af-code"><code>&lt;input uiLibAutoFocus /&gt;</code></pre>
+  </div>
+
+  <!-- ── Section 2: Conditional focus ── -->
+  <div class="af-section">
+    <h2 class="af-section__title">Conditional Focus</h2>
+    <p class="af-section__desc">
+      Bind the <code>autofocus</code> input to control whether focus is applied.
+      Useful when rendering inputs inside dialogs, drawers, or dynamic forms.
+    </p>
+    <div class="af-demo-card">
+      <button class="af-btn" type="button" (click)="toggleConditional()">
+        @if (showConditional()) { Hide input } @else { Show input }
+      </button>
+
+      @if (showConditional()) {
+        <div class="af-conditional">
+          <label class="af-label" for="conditional-input">Search</label>
+          <input
+            id="conditional-input"
+            class="af-input"
+            type="search"
+            placeholder="Focused as soon as it appears"
+            uiLibAutoFocus
+          />
+        </div>
+      }
+    </div>
+    <pre class="af-code"><code>&#64;if (show) &#123;
+  &lt;input uiLibAutoFocus /&gt;
+&#125;</code></pre>
+  </div>
+
+  <!-- ── Section 3: Disable autofocus ── -->
+  <div class="af-section">
+    <h2 class="af-section__title">Disable Autofocus</h2>
+    <p class="af-section__desc">
+      Set <code>[autofocus]="false"</code> to prevent focus from being applied —
+      for example when the feature is toggled off by the user.
+    </p>
+    <div class="af-demo-card">
+      <button class="af-btn" type="button" (click)="toggleFocus()">
+        Focus enabled: {{ enableFocus() }}
+      </button>
+      <label class="af-label" for="toggle-input">Email</label>
+      <input
+        id="toggle-input"
+        class="af-input"
+        type="email"
+        placeholder="Reload or toggle to see the effect"
+        uiLibAutoFocus
+        [autofocus]="enableFocus()"
+      />
+    </div>
+    <pre class="af-code"><code>&lt;input uiLibAutoFocus [autofocus]="isEnabled" /&gt;</code></pre>
+  </div>
+
+  <!-- ── Section 4: API ── -->
+  <div class="af-section">
+    <h2 class="af-section__title">API</h2>
+
+    <h3 class="af-sub-title">Directive selector</h3>
+    <pre class="af-code"><code>import {{ '{' }} AutoFocus {{ '}' }} from 'ui-lib-custom/auto-focus';</code></pre>
+    <pre class="af-code"><code>[uiLibAutoFocus]</code></pre>
+
+    <h3 class="af-sub-title">Inputs</h3>
+    <table class="af-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>autofocus</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>
+            When <code>true</code>, the host element is focused after view
+            initialization. Set to <code>false</code> to skip focus.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 

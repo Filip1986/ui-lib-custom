@@ -390,12 +390,6 @@ export class SidebarComponent {
           group: 'Messages',
         },
         {
-          label: 'Toast',
-          icon: 'pi pi-circle',
-          route: '/toast',
-          group: 'Messages',
-        },
-        {
           label: 'Menubar',
           icon: 'pi pi-circle',
           route: '/menubar',
@@ -424,7 +418,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/toast',
           group: 'Messages',
-          badge: 'TODO',
         },
         {
           label: 'AnimatedOnScroll',
@@ -437,7 +430,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/auto-focus',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Avatar',

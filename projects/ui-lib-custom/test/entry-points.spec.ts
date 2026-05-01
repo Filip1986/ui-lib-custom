@@ -63,6 +63,7 @@ import type * as UiLibTieredMenu from 'ui-lib-custom/tiered-menu';
 import type * as UiLibMessage from 'ui-lib-custom/message';
 import type * as UiLibToast from 'ui-lib-custom/toast';
 import type * as UiLibAnimateOnScroll from 'ui-lib-custom/animate-on-scroll';
+import type * as UiLibAutoFocus from 'ui-lib-custom/auto-focus';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -460,5 +461,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from animate-on-scroll', async (): Promise<void> => {
     const mod: typeof UiLibAnimateOnScroll = await import('ui-lib-custom/animate-on-scroll');
     expect(mod.AnimateOnScroll).toBeDefined();
+  });
+
+  it('should import from auto-focus', async (): Promise<void> => {
+    const mod: typeof UiLibAutoFocus = await import('ui-lib-custom/auto-focus');
+    expect(mod.AutoFocus).toBeDefined();
   });
 });
