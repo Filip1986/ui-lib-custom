@@ -30,6 +30,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Bind` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -83,6 +84,32 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-02 [Bind directive]
+Changed:
+  - projects/ui-lib-custom/src/lib/bind/bind.ts (new directive)
+  - projects/ui-lib-custom/src/lib/bind/bind.spec.ts (11 unit tests)
+  - projects/ui-lib-custom/src/lib/bind/index.ts (barrel)
+  - projects/ui-lib-custom/bind/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/bind/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (bind added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (bind import test added)
+  - projects/demo/src/app/pages/bind/bind-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/bind/bind-demo.component.html (full demo — hero + 3 sections + API table)
+  - projects/demo/src/app/pages/bind/bind-demo.component.scss (demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Bind entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Bind directive fully complete. PrimeNG-inspired [uiLibBind] directive that applies a
+  Record<string, unknown> as DOM properties on the host element via Renderer2.setProperty.
+  Signal input `uiLibBind` (default {}). Tracks previousKeys to reset removed properties to null.
+  Host class `ui-lib-bind`. Effect-based reactivity (no ngOnChanges). Secondary entry point wired and built.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/bind/ projects/demo/src/app/pages/bind/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx jest --testPathPatterns=bind --no-coverage (11/11 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (67/67 PASS),
+  npx ng build ui-lib-custom — ui-lib-custom/bind Built, zero errors.
+Terminal notes: Python used for all file writes (bash heredoc expansion issues). Constructor must NOT have `public` modifier (eslint rule). JSDOM coerces setProperty(el, 'title', null) to string "null" — test fixed to assert `not.toBe('Was Here')` instead of `toBeFalsy()`.
+Next step: knip baseline + dead-code cleanup, or constants extraction pass.
 
 Date: 2026-05-01 [Avatar component]
 Changed:
@@ -148,22 +175,5 @@ Verification:
   npx ng build ui-lib-custom — ui-lib-custom/auto-focus Built, zero errors.
 Terminal notes: HTML template `{` chars in <pre> blocks must use &#123;/&#125; HTML entities to avoid Angular block-syntax parser errors. `@` in code examples must use &#64;.
 Next step: knip baseline + dead-code cleanup, or constants extraction pass.
-
-Date: 2026-05-01 [animate-on-scroll demo rebuild + toast/scss repairs]
-Changed:
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss (added --uilib-animate-on-scroll-delay CSS variable support to every preset transition)
-  - projects/demo/src/styles.scss (added @use of animate-on-scroll.scss so preset classes are globally available)
-  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.html (full rewrite — hero + 7 scrollable sections: fade-in, slide-up, slide-down, slide-left/right, zoom-in/out, stagger, repeat mode, API table)
-  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.scss (full rewrite — hero, section, card, zoom-card, stagger-row, code-hint, API table styles)
-  - projects/ui-lib-custom/src/lib/toast/toast.scss (repaired truncation at line 349 — completed minimal dark-mode closing block)
-  - projects/ui-lib-custom/src/lib/toast/toast.ts (stripped null bytes)
-  - projects/ui-lib-custom/src/lib/toast/toast.service.ts (stripped null bytes)
-  - AI_AGENT_CONTEXT.md (updated)
-State: Demo fully working. Preset classes actually animate on scroll (SCSS now imported globally). Stagger via --uilib-animate-on-scroll-delay inline style. Toast null-byte corruption fixed. Build now exits 0 with zero errors across all 64+ entry points.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/demo/src/app/pages/animated-on-scroll/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx ng build ui-lib-custom — all entry points Built, zero errors, exit 0,
-  npx jest --testPathPatterns=animate-on-scroll --no-coverage (14/14 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (64/64 PASS).
 Terminal notes: Write tool truncates large HTML files on the Linux mount; used Python open() to write the full demo HTML. Toast scss/ts/service.ts had pre-existing null bytes — stripped with Python binary mode.
 Next step: knip baseline + dead-code cleanup, or constants extraction pass.

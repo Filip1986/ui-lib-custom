@@ -1,5 +1,149 @@
 <section class="bind-demo" data-testid="bind-demo">
-  <h1>Bind</h1>
-  <p>Coming soon.</p>
+  <!-- Hero -->
+  <div class="bd-hero">
+    <h1 class="bd-hero__title">Bind</h1>
+    <p class="bd-hero__lead">
+      A utility directive that applies a dynamic record of key-value pairs as
+      DOM properties on the host element — the Angular-first equivalent of
+      PrimeNG&#39;s <code>pBind</code>.
+    </p>
+    <div class="bd-hero__tags">
+      <span class="bd-tag">Directive</span>
+      <span class="bd-tag">Misc</span>
+    </div>
+  </div>
+  <!-- Section 1: Basic usage -->
+  <div class="bd-section">
+    <h2 class="bd-section__title">Basic Usage</h2>
+    <p class="bd-section__desc">
+      Pass any object literal to <code>[uiLibBind]</code>. Each key is set as
+      a DOM property on the host element. Using <code>id</code>,
+      <code>title</code>, or custom <code>data-*</code> attributes all work out
+      of the box.
+    </p>
+    <div class="bd-demo-card">
+      <div
+        class="bd-target"
+        [uiLibBind]="{ id: 'static-box', title: 'Static tooltip from uiLibBind', tabIndex: 0 }"
+      >
+        Hover me — tooltip set via <code>uiLibBind</code>
+      </div>
+    </div>
+    <pre class="bd-code"><code>&lt;div [uiLibBind]="&#123; id: 'my-box', title: 'Tooltip text', tabIndex: 0 &#125;"&gt;
+  Content
+&lt;/div&gt;</code></pre>
+  </div>
+  <!-- Section 2: Interactive playground -->
+  <div class="bd-section">
+    <h2 class="bd-section__title">Interactive Playground</h2>
+    <p class="bd-section__desc">
+      The binding object reacts to signals. Change the id preset, cycle the
+      tooltip, or toggle <code>tabIndex</code> to see the DOM update live.
+    </p>
+    <div class="bd-demo-card">
+      <div class="bd-controls">
+        <div class="bd-control-group">
+          <span class="bd-control-label">id preset</span>
+          <div class="bd-btn-row">
+            @for (preset of idPresets; track preset) {
+              <button
+                class="bd-btn"
+                [class.bd-btn--active]="activeIdPreset() === preset"
+                type="button"
+                (click)="setPreset(preset)"
+              >
+                {{ preset }}
+              </button>
+            }
+          </div>
+        </div>
+        <div class="bd-control-group">
+          <span class="bd-control-label">title (tooltip)</span>
+          <button class="bd-btn" type="button" (click)="cycleTooltip()">
+            Cycle: &ldquo;{{ tooltipLabel() }}&rdquo;
+          </button>
+        </div>
+        <div class="bd-control-group">
+          <span class="bd-control-label">tabIndex</span>
+          <button
+            class="bd-btn"
+            [class.bd-btn--active]="includeTabIndex()"
+            type="button"
+            (click)="toggleTabIndex()"
+          >
+            @if (includeTabIndex()) { Included } @else { Excluded }
+          </button>
+        </div>
+      </div>
+      <div
+        class="bd-target bd-target--live"
+        [uiLibBind]="liveBindings()"
+      >
+        Dynamic element — hover for tooltip
+      </div>
+      <div class="bd-live-preview">
+        <span class="bd-live-label">Active binding:</span>
+        <code class="bd-live-code">{{ liveBindings() | json }}</code>
+      </div>
+    </div>
+  </div>
+  <!-- Section 3: Boolean and numeric properties -->
+  <div class="bd-section">
+    <h2 class="bd-section__title">Boolean &amp; Numeric Properties</h2>
+    <p class="bd-section__desc">
+      <code>uiLibBind</code> uses <code>Renderer2.setProperty</code> under the
+      hood, so boolean and numeric DOM properties work exactly as expected.
+    </p>
+    <div class="bd-demo-card">
+      <div class="bd-prop-row">
+        <div
+          class="bd-target"
+          [uiLibBind]="{ hidden: false, tabIndex: 2, title: 'tabIndex is 2' }"
+        >
+          tabIndex = 2 (try Tab)
+        </div>
+        <div
+          class="bd-target bd-target--muted"
+          [uiLibBind]="{ hidden: false, tabIndex: -1, title: 'tabIndex is -1' }"
+        >
+          tabIndex = -1 (not reachable by Tab)
+        </div>
+      </div>
+    </div>
+    <pre class="bd-code"><code>&lt;!-- numeric property --&gt;
+&lt;div [uiLibBind]="&#123; tabIndex: 2 &#125;"&gt;Focusable&lt;/div&gt;
+&lt;!-- boolean property --&gt;
+&lt;div [uiLibBind]="&#123; hidden: true &#125;"&gt;Hidden&lt;/div&gt;</code></pre>
+  </div>
+  <!-- Section 4: API table -->
+  <div class="bd-section">
+    <h2 class="bd-section__title">API</h2>
+    <h3 class="bd-sub-title">Selector</h3>
+    <pre class="bd-code"><code>[uiLibBind]</code></pre>
+    <h3 class="bd-sub-title">Inputs</h3>
+    <table class="bd-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>uiLibBind</code></td>
+          <td><code>Record&lt;string, unknown&gt;</code></td>
+          <td><code>&#123;&#125;</code></td>
+          <td>
+            An object whose enumerable own properties are set as DOM properties
+            on the host element. Properties removed between updates are reset to
+            <code>null</code>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="bd-sub-title">Host class</h3>
+    <pre class="bd-code"><code>ui-lib-bind</code></pre>
+  </div>
 </section>
-

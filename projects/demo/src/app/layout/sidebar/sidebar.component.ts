@@ -448,7 +448,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/bind',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'BlockUI',

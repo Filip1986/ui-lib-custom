@@ -240,6 +240,10 @@
     "./avatar": {
       "esm2022": "./esm2022/avatar/index.mjs",
       "esm": "./esm2022/avatar/index.mjs"
+    },
+    "./bind": {
+      "esm2022": "./esm2022/bind/index.mjs",
+      "esm": "./esm2022/bind/index.mjs"
     }
   },
   "typesVersions": {
@@ -390,6 +394,9 @@
       ],
       "avatar": [
         "./avatar/index.d.ts"
+      ],
+      "bind": [
+        "./bind/index.d.ts"
       ]
     }
   }
