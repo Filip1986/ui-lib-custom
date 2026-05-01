@@ -1,5 +1,433 @@
-<section class="animated-on-scroll-demo" data-testid="animated-on-scroll-demo">
-  <h1>AnimatedOnScroll</h1>
-  <p>Coming soon.</p>
-</section>
+<section class="aos-demo" data-testid="animated-on-scroll-demo">
 
+  <!-- HERO -->
+  <div class="aos-hero">
+    <div class="aos-hero__badge">Directive</div>
+    <h1 class="aos-hero__title">AnimateOnScroll</h1>
+    <p class="aos-hero__lead">
+      Trigger smooth CSS transitions as elements enter the viewport &mdash; powered
+      entirely by the native <code>IntersectionObserver</code> API with no
+      external animation libraries required.
+    </p>
+    <div class="aos-hero__chips">
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 0ms">
+        <i class="pi pi-bolt"></i> Native API
+      </span>
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 80ms">
+        <i class="pi pi-check"></i> Zero dependencies
+      </span>
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 160ms">
+        <i class="pi pi-palette"></i> CSS-variable theming
+      </span>
+      <span class="aos-chip uilib-aos-fade-in"
+            uiLibAnimateOnScroll enterClass="uilib-aos-active"
+            [threshold]="0"
+            style="--uilib-animate-on-scroll-delay: 240ms">
+        <i class="pi pi-refresh"></i> Enter &amp; leave events
+      </span>
+    </div>
+    <p class="aos-hero__scroll-hint">
+      <i class="pi pi-arrow-down"></i> Scroll to see the animations in action
+    </p>
+  </div>
+
+  <!-- FADE IN -->
+  <div class="aos-section">
+    <div class="aos-section__header uilib-aos-fade-in"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Preset</span>
+      <h2 class="aos-section__title">Fade In</h2>
+      <p class="aos-section__desc">
+        Elements fade from fully transparent to fully opaque as they enter the
+        viewport. Use <code>class="uilib-aos-fade-in"</code> with
+        <code>enterClass="uilib-aos-active"</code>.
+      </p>
+    </div>
+    <div class="aos-grid aos-grid--3">
+      <div class="aos-card uilib-aos-fade-in"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 0ms">
+        <div class="aos-card__icon aos-card__icon--violet"><i class="pi pi-star"></i></div>
+        <h3 class="aos-card__title">Quality</h3>
+        <p class="aos-card__text">Hand-crafted components designed for consistency and reliability.</p>
+      </div>
+      <div class="aos-card uilib-aos-fade-in"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 120ms">
+        <div class="aos-card__icon aos-card__icon--teal"><i class="pi pi-shield"></i></div>
+        <h3 class="aos-card__title">Accessible</h3>
+        <p class="aos-card__text">ARIA roles, keyboard navigation, and focus management built in.</p>
+      </div>
+      <div class="aos-card uilib-aos-fade-in"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 240ms">
+        <div class="aos-card__icon aos-card__icon--amber"><i class="pi pi-code"></i></div>
+        <h3 class="aos-card__title">Developer friendly</h3>
+        <p class="aos-card__text">Signal-based inputs, explicit types, and zero-config defaults.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE UP -->
+  <div class="aos-section aos-section--alt">
+    <div class="aos-section__header uilib-aos-slide-right"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Preset</span>
+      <h2 class="aos-section__title">Slide Up</h2>
+      <p class="aos-section__desc">
+        Elements rise from slightly below their final position while fading in.
+        Ideal for stacked content lists and feature grids.
+      </p>
+    </div>
+    <div class="aos-grid aos-grid--3">
+      <div class="aos-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 0ms">
+        <div class="aos-card__icon aos-card__icon--violet"><i class="pi pi-box"></i></div>
+        <h3 class="aos-card__title">Tree-shakable</h3>
+        <p class="aos-card__text">Secondary entry points keep bundle sizes minimal.</p>
+      </div>
+      <div class="aos-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 120ms">
+        <div class="aos-card__icon aos-card__icon--teal"><i class="pi pi-moon"></i></div>
+        <h3 class="aos-card__title">Dark mode</h3>
+        <p class="aos-card__text">Full dark mode support via CSS custom properties.</p>
+      </div>
+      <div class="aos-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 240ms">
+        <div class="aos-card__icon aos-card__icon--amber"><i class="pi pi-sync"></i></div>
+        <h3 class="aos-card__title">Reactive</h3>
+        <p class="aos-card__text">Signal inputs update the observer options without recreating.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE DOWN -->
+  <div class="aos-section">
+    <div class="aos-section__header uilib-aos-slide-left"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Preset</span>
+      <h2 class="aos-section__title">Slide Down</h2>
+      <p class="aos-section__desc">
+        Elements drop from above their final position. Good for nav menus,
+        banners, or header-adjacent content.
+      </p>
+    </div>
+    <div class="aos-grid aos-grid--3">
+      <div class="aos-card uilib-aos-slide-down"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 0ms">
+        <div class="aos-card__icon aos-card__icon--rose"><i class="pi pi-bell"></i></div>
+        <h3 class="aos-card__title">Notifications</h3>
+        <p class="aos-card__text">Deliver contextual messages without interrupting the flow.</p>
+      </div>
+      <div class="aos-card uilib-aos-slide-down"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 120ms">
+        <div class="aos-card__icon aos-card__icon--violet"><i class="pi pi-calendar"></i></div>
+        <h3 class="aos-card__title">Date Picker</h3>
+        <p class="aos-card__text">Rich date selection with keyboard navigation and locale support.</p>
+      </div>
+      <div class="aos-card uilib-aos-slide-down"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 240ms">
+        <div class="aos-card__icon aos-card__icon--teal"><i class="pi pi-filter"></i></div>
+        <h3 class="aos-card__title">Filtering</h3>
+        <p class="aos-card__text">Built-in filtering for data tables, listboxes, and tree views.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE LEFT / RIGHT — alternating layout -->
+  <div class="aos-section aos-section--alt">
+    <div class="aos-section__header uilib-aos-fade-in"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Preset</span>
+      <h2 class="aos-section__title">Slide Left &amp; Right</h2>
+      <p class="aos-section__desc">
+        Alternate direction for each row to create a dynamic timeline-style
+        reveal. Left slides in from the left; right slides in from the right.
+      </p>
+    </div>
+    <div class="aos-split-list">
+      <div class="aos-split-item">
+        <div class="aos-split-item__content uilib-aos-slide-left"
+             uiLibAnimateOnScroll enterClass="uilib-aos-active">
+          <div class="aos-card aos-card--wide">
+            <div class="aos-card__icon aos-card__icon--violet"><i class="pi pi-table"></i></div>
+            <div>
+              <h3 class="aos-card__title">Data Table</h3>
+              <p class="aos-card__text">Sortable, filterable, paginated table with virtual scroll for millions of rows.</p>
+            </div>
+          </div>
+        </div>
+        <div class="aos-split-item__spacer"></div>
+      </div>
+      <div class="aos-split-item">
+        <div class="aos-split-item__spacer"></div>
+        <div class="aos-split-item__content uilib-aos-slide-right"
+             uiLibAnimateOnScroll enterClass="uilib-aos-active">
+          <div class="aos-card aos-card--wide">
+            <div class="aos-card__icon aos-card__icon--teal"><i class="pi pi-sitemap"></i></div>
+            <div>
+              <h3 class="aos-card__title">Tree</h3>
+              <p class="aos-card__text">Hierarchical data viewer with lazy-load, drag and drop, and checkbox selection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="aos-split-item">
+        <div class="aos-split-item__content uilib-aos-slide-left"
+             uiLibAnimateOnScroll enterClass="uilib-aos-active">
+          <div class="aos-card aos-card--wide">
+            <div class="aos-card__icon aos-card__icon--amber"><i class="pi pi-chart-bar"></i></div>
+            <div>
+              <h3 class="aos-card__title">Chart</h3>
+              <p class="aos-card__text">Responsive charts powered by Chart.js with full theme integration.</p>
+            </div>
+          </div>
+        </div>
+        <div class="aos-split-item__spacer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZOOM IN / ZOOM OUT -->
+  <div class="aos-section">
+    <div class="aos-section__header uilib-aos-slide-up"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Preset</span>
+      <h2 class="aos-section__title">Zoom In &amp; Zoom Out</h2>
+      <p class="aos-section__desc">
+        Elements scale from slightly smaller (zoom in) or slightly larger
+        (zoom out) to their natural size while fading in.
+      </p>
+    </div>
+    <div class="aos-grid aos-grid--2">
+      <div class="aos-zoom-card uilib-aos-zoom-in"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 0ms">
+        <i class="pi pi-search-plus aos-zoom-card__icon"></i>
+        <h3 class="aos-zoom-card__title">Zoom In</h3>
+        <p class="aos-zoom-card__sub"><code>uilib-aos-zoom-in</code></p>
+        <p class="aos-zoom-card__text">Scales up from 85% to 100%</p>
+      </div>
+      <div class="aos-zoom-card uilib-aos-zoom-out"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 150ms">
+        <i class="pi pi-search-minus aos-zoom-card__icon"></i>
+        <h3 class="aos-zoom-card__title">Zoom Out</h3>
+        <p class="aos-zoom-card__sub"><code>uilib-aos-zoom-out</code></p>
+        <p class="aos-zoom-card__text">Scales down from 115% to 100%</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGGER — CSS variable delay -->
+  <div class="aos-section aos-section--alt">
+    <div class="aos-section__header uilib-aos-fade-in"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Technique</span>
+      <h2 class="aos-section__title">Stagger Effect</h2>
+      <p class="aos-section__desc">
+        Override <code>--uilib-animate-on-scroll-delay</code> on each element
+        with an increasing value. All elements share the same directive and
+        preset &mdash; only the CSS variable changes.
+      </p>
+    </div>
+    <div class="aos-stagger-row">
+      <div class="aos-stagger-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 0ms">
+        <span class="aos-stagger-card__num">01</span>
+        <span class="aos-stagger-card__delay">0 ms</span>
+      </div>
+      <div class="aos-stagger-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 100ms">
+        <span class="aos-stagger-card__num">02</span>
+        <span class="aos-stagger-card__delay">100 ms</span>
+      </div>
+      <div class="aos-stagger-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 200ms">
+        <span class="aos-stagger-card__num">03</span>
+        <span class="aos-stagger-card__delay">200 ms</span>
+      </div>
+      <div class="aos-stagger-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 300ms">
+        <span class="aos-stagger-card__num">04</span>
+        <span class="aos-stagger-card__delay">300 ms</span>
+      </div>
+      <div class="aos-stagger-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 400ms">
+        <span class="aos-stagger-card__num">05</span>
+        <span class="aos-stagger-card__delay">400 ms</span>
+      </div>
+      <div class="aos-stagger-card uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active"
+           style="--uilib-animate-on-scroll-delay: 500ms">
+        <span class="aos-stagger-card__num">06</span>
+        <span class="aos-stagger-card__delay">500 ms</span>
+      </div>
+    </div>
+    <div class="aos-code-hint">
+      <pre><code>&lt;div class="uilib-aos-slide-up"
+     uiLibAnimateOnScroll enterClass="uilib-aos-active"
+     style="--uilib-animate-on-scroll-delay: 300ms"&gt;</code></pre>
+    </div>
+  </div>
+
+  <!-- REPEAT MODE -->
+  <div class="aos-section">
+    <div class="aos-section__header uilib-aos-slide-right"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Technique</span>
+      <h2 class="aos-section__title">Repeat on Scroll</h2>
+      <p class="aos-section__desc">
+        Set <code>[once]="false"</code> to re-animate every time the element
+        enters the viewport. Scroll these cards out of view and back again.
+      </p>
+    </div>
+    <div class="aos-grid aos-grid--3">
+      <div class="aos-card aos-card--repeat uilib-aos-zoom-in"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active" [once]="false"
+           style="--uilib-animate-on-scroll-delay: 0ms">
+        <div class="aos-card__repeat-badge">&#8635; repeats</div>
+        <div class="aos-card__icon aos-card__icon--violet"><i class="pi pi-refresh"></i></div>
+        <h3 class="aos-card__title">Zoom In</h3>
+        <p class="aos-card__text">Animates every time it enters the viewport.</p>
+      </div>
+      <div class="aos-card aos-card--repeat uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active" [once]="false"
+           style="--uilib-animate-on-scroll-delay: 100ms">
+        <div class="aos-card__repeat-badge">&#8635; repeats</div>
+        <div class="aos-card__icon aos-card__icon--teal"><i class="pi pi-refresh"></i></div>
+        <h3 class="aos-card__title">Slide Up</h3>
+        <p class="aos-card__text">Animates every time it enters the viewport.</p>
+      </div>
+      <div class="aos-card aos-card--repeat uilib-aos-fade-in"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active" [once]="false"
+           style="--uilib-animate-on-scroll-delay: 200ms">
+        <div class="aos-card__repeat-badge">&#8635; repeats</div>
+        <div class="aos-card__icon aos-card__icon--amber"><i class="pi pi-refresh"></i></div>
+        <h3 class="aos-card__title">Fade In</h3>
+        <p class="aos-card__text">Animates every time it enters the viewport.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- API REFERENCE -->
+  <div class="aos-section aos-section--alt aos-section--last">
+    <div class="aos-section__header uilib-aos-fade-in"
+         uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <span class="aos-section__tag">Reference</span>
+      <h2 class="aos-section__title">API</h2>
+      <p class="aos-section__desc">
+        Apply the directive with the <code>uiLibAnimateOnScroll</code>
+        attribute selector. Import preset classes in your
+        <code>styles.scss</code>:
+        <code>@use 'path/to/animate-on-scroll.scss';</code>
+      </p>
+    </div>
+    <table class="aos-table uilib-aos-slide-up"
+           uiLibAnimateOnScroll enterClass="uilib-aos-active">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>enterClass</code></td>
+          <td>input&lt;string&gt;</td>
+          <td><code>''</code></td>
+          <td>Space-separated CSS class(es) added when the element enters the viewport.</td>
+        </tr>
+        <tr>
+          <td><code>leaveClass</code></td>
+          <td>input&lt;string&gt;</td>
+          <td><code>''</code></td>
+          <td>Space-separated CSS class(es) added when the element leaves the viewport (<code>once</code> must be false).</td>
+        </tr>
+        <tr>
+          <td><code>threshold</code></td>
+          <td>input&lt;number&gt;</td>
+          <td><code>0.1</code></td>
+          <td>Ratio of element visibility required to trigger (0&ndash;1).</td>
+        </tr>
+        <tr>
+          <td><code>rootMargin</code></td>
+          <td>input&lt;string&gt;</td>
+          <td><code>'0px'</code></td>
+          <td>IntersectionObserver root margin (e.g. <code>'-50px 0px'</code>).</td>
+        </tr>
+        <tr>
+          <td><code>once</code></td>
+          <td>input&lt;boolean&gt;</td>
+          <td><code>true</code></td>
+          <td>Unobserves the element after the first enter event.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td>input&lt;boolean&gt;</td>
+          <td><code>false</code></td>
+          <td>Skips observer setup entirely when true.</td>
+        </tr>
+        <tr>
+          <td><code>(enter)</code></td>
+          <td>output&lt;void&gt;</td>
+          <td>&mdash;</td>
+          <td>Emitted each time the element enters the viewport.</td>
+        </tr>
+        <tr>
+          <td><code>(leave)</code></td>
+          <td>output&lt;void&gt;</td>
+          <td>&mdash;</td>
+          <td>Emitted each time the element leaves the viewport (<code>once</code> must be false).</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-animate-on-scroll-duration</code></td>
+          <td>CSS var</td>
+          <td><code>600ms</code></td>
+          <td>Transition duration for all built-in presets.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-animate-on-scroll-easing</code></td>
+          <td>CSS var</td>
+          <td><code>cubic-bezier(0.4,0,0.2,1)</code></td>
+          <td>Easing function for all built-in presets.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-animate-on-scroll-delay</code></td>
+          <td>CSS var</td>
+          <td><code>0ms</code></td>
+          <td>Per-element delay &mdash; set inline for stagger effects.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-animate-on-scroll-distance</code></td>
+          <td>CSS var</td>
+          <td><code>30px</code></td>
+          <td>Translation distance used by slide-* presets.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>

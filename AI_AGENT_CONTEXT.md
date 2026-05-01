@@ -81,6 +81,46 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-01 [animate-on-scroll demo rebuild + toast/scss repairs]
+Changed:
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss (added --uilib-animate-on-scroll-delay CSS variable support to every preset transition)
+  - projects/demo/src/styles.scss (added @use of animate-on-scroll.scss so preset classes are globally available)
+  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.html (full rewrite — hero + 7 scrollable sections: fade-in, slide-up, slide-down, slide-left/right, zoom-in/out, stagger, repeat mode, API table)
+  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.scss (full rewrite — hero, section, card, zoom-card, stagger-row, code-hint, API table styles)
+  - projects/ui-lib-custom/src/lib/toast/toast.scss (repaired truncation at line 349 — completed minimal dark-mode closing block)
+  - projects/ui-lib-custom/src/lib/toast/toast.ts (stripped null bytes)
+  - projects/ui-lib-custom/src/lib/toast/toast.service.ts (stripped null bytes)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Demo fully working. Preset classes actually animate on scroll (SCSS now imported globally). Stagger via --uilib-animate-on-scroll-delay inline style. Toast null-byte corruption fixed. Build now exits 0 with zero errors across all 64+ entry points.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/demo/src/app/pages/animated-on-scroll/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx ng build ui-lib-custom — all entry points Built, zero errors, exit 0,
+  npx jest --testPathPatterns=animate-on-scroll --no-coverage (14/14 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (64/64 PASS).
+Terminal notes: Write tool truncates large HTML files on the Linux mount; used Python open() to write the full demo HTML. Toast scss/ts/service.ts had pre-existing null bytes — stripped with Python binary mode.
+Next step: knip baseline + dead-code cleanup, or constants extraction pass.
+
+Date: 2026-05-01 [animate-on-scroll initial]
+Changed:
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/ (new — animate-on-scroll.ts, animate-on-scroll.scss, animate-on-scroll.spec.ts, index.ts)
+  - projects/ui-lib-custom/animate-on-scroll/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (animate-on-scroll added to exports + typesVersions; pre-existing truncation repaired via Python)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (animate-on-scroll import test added; pre-existing truncation repaired via Python)
+  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.ts (full demo replacing placeholder)
+  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.html (5 sections: fade, presets, repeat, threshold, API table)
+  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.scss (demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from AnimatedOnScroll entry)
+  - AI_AGENT_CONTEXT.md (marked AnimateOnScroll complete)
+State: AnimateOnScroll directive fully complete. 14 unit tests passing. 64/64 entry-point tests passing. ESLint clean. animate-on-scroll entry point built successfully. Pre-existing toast.scss truncation (line 349) caused build exit code 1 — not introduced by this session.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/animate-on-scroll/ projects/demo/src/app/pages/animated-on-scroll/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx ng build ui-lib-custom — ui-lib-custom/animate-on-scroll Built (exit 1 due to pre-existing toast.scss truncation, not this session),
+  npx jest --testPathPatterns=animate-on-scroll --no-coverage (14/14 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (64/64 PASS).
+Terminal notes: Edit tool causes file truncations on the Linux side of the Samba mount; used Python open() for all file writes (package.json, entry-points.spec.ts). RegExp literal in directive written with Python escape to avoid heredoc truncation.
+Next step: Fix pre-existing toast.scss truncation, then knip baseline + dead-code cleanup.
+
+
 Date: 2026-05-01 [toast session]
 Changed:
   - projects/ui-lib-custom/src/lib/toast/ (new — toast.types.ts, toast.service.ts, toast.ts, toast.html, toast.scss, toast.spec.ts, index.ts)
@@ -112,41 +152,4 @@ Terminal notes: Edit tool caused file truncations throughout session; used Pytho
   entry-points.spec.ts, package.json (full rewrite via json.dump), and toast.spec.ts (null byte strip + append).
   ESLint fixes: constructor() not public constructor() (explicit-member-accessibility rule);
   requireElement() helper used in tests to avoid no-unnecessary-condition on optional chaining.
-Next step: knip baseline + dead-code cleanup, or constants extraction pass.
-
-Date: 2026-04-30 [message session]
-Changed:
-  - projects/ui-lib-custom/src/lib/message/ (new — message.types.ts, message.ts, message.html, message.scss, message.spec.ts, index.ts)
-  - projects/ui-lib-custom/message/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (message added to exports + typesVersions; pre-existing truncation fixed)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (message import test added; pre-existing truncation fixed)
-  - projects/demo/src/app/pages/message/ (full demo replacing placeholder — TS/HTML/SCSS)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Message)
-  - projects/ui-lib-custom/src/lib/tiered-menu/ (pre-existing truncations repaired: tiered-menu-sub.scss, .scss, .ts, tiered-menu.ts)
-  - AI_AGENT_CONTEXT.md (marked Message complete)
-State: Message component fully complete. 26 unit tests passing. 62/62 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/message/ projects/demo/src/app/pages/message/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/message Built (zero errors, all entry points green),
-  npx jest --testPathPatterns=message --no-coverage (26/26 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (62/62 PASS).
-Terminal notes: Edit tool caused file truncations; used Python to repair all affected files. Cross-entry-point import bug fixed: ../icon -> ui-lib-custom/icon.
-Next step: knip baseline + dead-code cleanup, or constants extraction pass.
-
-Date: 2026-04-30 [tiered-menu session]
-Changed:
-  - projects/ui-lib-custom/src/lib/tiered-menu/ (new — tiered-menu.types.ts, tiered-menu-sub.ts, tiered-menu-sub.html, tiered-menu-sub.scss, tiered-menu.ts, tiered-menu.html, tiered-menu.scss, tiered-menu.spec.ts, index.ts)
-  - projects/ui-lib-custom/tiered-menu/ (new secondary entry point — ng-package.json, package.json)
-  - projects/ui-lib-custom/package.json (tiered-menu added to exports + typesVersions; pre-existing NUL-byte truncation fixed)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (tiered-menu import test added; file was truncated — repaired and completed)
-  - projects/demo/src/app/pages/tiered-menu/ (full demo replacing placeholder — TS/HTML/SCSS, 7 sections + API + keyboard tables)
-  - AI_AGENT_CONTEXT.md (marked TieredMenu complete)
-State: TieredMenu component fully complete. 25 unit tests passing. 61/61 entry-point tests passing. ESLint clean. Build zero errors.
-  Also fixed pre-existing NUL bytes in mega-menu.ts, mega-menu.spec.ts, mega-menu/index.ts, menu.ts.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/tiered-menu/ projects/demo/src/app/pages/tiered-menu/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/tiered-menu Built (zero errors, all 61+ entry points green),
-  npx jest --testPathPatterns=tiered-menu --no-coverage (25/25 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (61/61 PASS).
-Terminal notes: Shell bash (Linux sandbox). Used Python scripts for all file writes to avoid encoding issues. package.json was truncated — fully rewritten via Python. entry-points.spec.ts was truncated — repaired by appending missing it() blocks.
 Next step: knip baseline + dead-code cleanup, or constants extraction pass.

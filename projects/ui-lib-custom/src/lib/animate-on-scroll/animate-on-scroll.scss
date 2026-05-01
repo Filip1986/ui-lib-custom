@@ -1,0 +1,142 @@
+/**
+ * AnimateOnScroll built-in animation preset classes.
+ *
+ * Import this file in your application's `styles.scss` to use the built-in
+ * presets. These styles are NOT automatically included when importing the
+ * directive — they must be explicitly imported.
+ *
+ * Usage in styles.scss:
+ * ```scss
+ * @use 'ui-lib-custom/animate-on-scroll/styles';
+ * // or with a direct path:
+ * @import 'path/to/node_modules/ui-lib-custom/...';
+ * ```
+ *
+ * Usage in template:
+ * ```html
+ * <div class="uilib-aos-slide-up"
+ *      uiLibAnimateOnScroll
+ *      enterClass="uilib-aos-active">
+ *   Animated content
+ * </div>
+ * ```
+ *
+ * Each preset class sets the element to its "before animation" state (hidden
+ * or offset). Adding `uilib-aos-active` via the `enterClass` input triggers
+ * the transition to the visible final state.
+ */
+
+:root {
+  --uilib-animate-on-scroll-duration: 600ms;
+  --uilib-animate-on-scroll-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --uilib-animate-on-scroll-distance: 30px;
+  /** Per-element stagger delay — override on individual elements for stagger effects. */
+  --uilib-animate-on-scroll-delay: 0ms;
+}
+
+// ---------------------------------------------------------------------------
+// Active state — applied by enterClass input
+// ---------------------------------------------------------------------------
+
+/**
+ * Active state applied by the directive via enterClass input.
+ * Overrides the preset's hidden/offset starting state to trigger the transition.
+ */
+.uilib-aos-active {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+// ---------------------------------------------------------------------------
+// Preset classes — define the "before animation" starting state
+// ---------------------------------------------------------------------------
+
+/**
+ * Fade in from transparent.
+ */
+.uilib-aos-fade-in {
+  opacity: 0;
+  transition:
+    opacity var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms),
+    transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms);
+}
+
+/**
+ * Slide up from below.
+ */
+.uilib-aos-slide-up {
+  opacity: 0;
+  transform: translateY(var(--uilib-animate-on-scroll-distance));
+  transition:
+    opacity var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms),
+    transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms);
+}
+
+/**
+ * Slide down from above.
+ */
+.uilib-aos-slide-down {
+  opacity: 0;
+  transform: translateY(calc(-1 * var(--uilib-animate-on-scroll-distance)));
+  transition:
+    opacity var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms),
+    transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms);
+}
+
+/**
+ * Slide in from the left.
+ */
+.uilib-aos-slide-left {
+  opacity: 0;
+  transform: translateX(calc(-1 * var(--uilib-animate-on-scroll-distance)));
+  transition:
+    opacity var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms),
+    transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms);
+}
+
+/**
+ * Slide in from the right.
+ */
+.uilib-aos-slide-right {
+  opacity: 0;
+  transform: translateX(var(--uilib-animate-on-scroll-distance));
+  transition:
+    opacity var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms),
+    transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms);
+}
+
+/**
+ * Zoom in from slightly smaller scale.
+ */
+.uilib-aos-zoom-in {
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms),
+    transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms);
+}
+
+/**
+ * Zoom out from slightly larger scale.
+ */
+.uilib-aos-zoom-out {
+  opacity: 0;
+  transform: scale(1.15);
+  transition:
+    opacity var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms),
+    transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
+      var(--uilib-animate-on-scroll-delay, 0ms);
+}

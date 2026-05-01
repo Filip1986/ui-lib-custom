@@ -431,7 +431,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/animated-on-scroll',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'AutoFocus',

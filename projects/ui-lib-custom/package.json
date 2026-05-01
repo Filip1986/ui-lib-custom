@@ -228,6 +228,10 @@
     "./toast": {
       "esm2022": "./esm2022/toast/index.mjs",
       "esm": "./esm2022/toast/index.mjs"
+    },
+    "./animate-on-scroll": {
+      "esm2022": "./esm2022/animate-on-scroll/index.mjs",
+      "esm": "./esm2022/animate-on-scroll/index.mjs"
     }
   },
   "typesVersions": {
@@ -369,6 +373,9 @@
       ],
       "toast": [
         "./toast/index.d.ts"
+      ],
+      "animate-on-scroll": [
+        "./animate-on-scroll/index.d.ts"
       ]
     }
   }

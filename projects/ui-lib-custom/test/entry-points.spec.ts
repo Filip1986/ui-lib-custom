@@ -62,6 +62,7 @@ import type * as UiLibPanelMenu from 'ui-lib-custom/panel-menu';
 import type * as UiLibTieredMenu from 'ui-lib-custom/tiered-menu';
 import type * as UiLibMessage from 'ui-lib-custom/message';
 import type * as UiLibToast from 'ui-lib-custom/toast';
+import type * as UiLibAnimateOnScroll from 'ui-lib-custom/animate-on-scroll';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -341,7 +342,7 @@ describe('Secondary Entry Points', (): void => {
   it('should import from rating', async (): Promise<void> => {
     const mod: typeof UiLibRating = await import('ui-lib-custom/rating');
     expect(mod.Rating).toBeDefined();
-    // RatingRateEvent is a type-only export — verify the module resolves without error
+    // RatingRateEvent is a type-only export -- verify the module resolves without error
     const _typeCheck: typeof mod = mod;
     void _typeCheck;
   });
@@ -454,5 +455,10 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibToast = await import('ui-lib-custom/toast');
     expect(mod.Toast).toBeDefined();
     expect(mod.ToastService).toBeDefined();
+  });
+
+  it('should import from animate-on-scroll', async (): Promise<void> => {
+    const mod: typeof UiLibAnimateOnScroll = await import('ui-lib-custom/animate-on-scroll');
+    expect(mod.AnimateOnScroll).toBeDefined();
   });
 });
