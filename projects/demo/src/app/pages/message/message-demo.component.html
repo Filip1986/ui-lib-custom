@@ -1,5 +1,292 @@
-<section class="message-demo" data-testid="message-demo">
-  <h1>Message</h1>
-  <p>Coming soon.</p>
-</section>
+<div class="message-demo">
+  <header class="message-demo__header">
+    <h1 class="message-demo__title">Message</h1>
+    <p class="message-demo__subtitle">
+      Inline severity-based messages for contextual feedback. Supports six severity levels,
+      three design variants, three sizes, and an optional close action.
+    </p>
+  </header>
 
+  <!-- ─── Playground ─────────────────────────────────────────────── -->
+  <section class="message-demo__section">
+    <h2 class="message-demo__section-title">Playground</h2>
+    <div class="message-demo__controls">
+      <label class="message-demo__control-label">
+        Severity
+        <select
+          class="message-demo__select"
+          [value]="playgroundSeverity()"
+          (change)="playgroundSeverity.set($any($event.target).value); resetPlayground()"
+        >
+          @for (severity of severities; track severity) {
+            <option [value]="severity">{{ severity }}</option>
+          }
+        </select>
+      </label>
+      <label class="message-demo__control-label">
+        Variant
+        <select
+          class="message-demo__select"
+          [value]="playgroundVariant()"
+          (change)="playgroundVariant.set($any($event.target).value); resetPlayground()"
+        >
+          @for (variant of variants; track variant) {
+            <option [value]="variant">{{ variant }}</option>
+          }
+        </select>
+      </label>
+      <label class="message-demo__control-label">
+        Size
+        <select
+          class="message-demo__select"
+          [value]="playgroundSize()"
+          (change)="playgroundSize.set($any($event.target).value)"
+        >
+          @for (size of sizes; track size) {
+            <option [value]="size">{{ size }}</option>
+          }
+        </select>
+      </label>
+      <label class="message-demo__control-label message-demo__control-label--inline">
+        <input
+          type="checkbox"
+          [checked]="playgroundClosable()"
+          (change)="playgroundClosable.set($any($event.target).checked); resetPlayground()"
+        />
+        Closable
+      </label>
+    </div>
+    <div class="message-demo__preview">
+      @if (playgroundClosed()) {
+        <div class="message-demo__dismissed">
+          Message dismissed.
+          <button class="message-demo__reset-btn" type="button" (click)="resetPlayground()">
+            Show again
+          </button>
+        </div>
+      } @else {
+        <ui-lib-message
+          [severity]="playgroundSeverity()"
+          [variant]="playgroundVariant()"
+          [size]="playgroundSize()"
+          [text]="playgroundText()"
+          [closable]="playgroundClosable()"
+          (close)="onPlaygroundClose()"
+        />
+      }
+    </div>
+  </section>
+
+  <!-- ─── Severities ─────────────────────────────────────────────── -->
+  <section class="message-demo__section">
+    <h2 class="message-demo__section-title">Severities</h2>
+    <p class="message-demo__section-desc">
+      Six severity levels, each with a colour palette and a default icon.
+    </p>
+    <div class="message-demo__stack">
+      <ui-lib-message
+        severity="success"
+        text="Your changes have been saved successfully."
+      />
+      <ui-lib-message
+        severity="info"
+        text="Your subscription renews in 7 days."
+      />
+      <ui-lib-message
+        severity="warn"
+        text="Unsaved changes will be lost if you navigate away."
+      />
+      <ui-lib-message
+        severity="error"
+        text="Unable to connect to the server. Please try again."
+      />
+      <ui-lib-message
+        severity="secondary"
+        text="This feature is available on the Pro plan."
+      />
+      <ui-lib-message
+        severity="contrast"
+        text="Maintenance window scheduled for Sunday at 02:00 UTC."
+      />
+    </div>
+  </section>
+
+  <!-- ─── Variants ───────────────────────────────────────────────── -->
+  <section class="message-demo__section">
+    <h2 class="message-demo__section-title">Variants</h2>
+    <p class="message-demo__section-desc">
+      Three design variants — material (elevated), bootstrap (filled), and minimal (accent border).
+    </p>
+    @for (variant of variants; track variant) {
+      <div class="message-demo__variant-group">
+        <h3 class="message-demo__variant-label">{{ variant }}</h3>
+        <div class="message-demo__stack">
+          <ui-lib-message
+            severity="success"
+            [variant]="variant"
+            text="Operation completed successfully."
+          />
+          <ui-lib-message
+            severity="info"
+            [variant]="variant"
+            text="Here is some useful information."
+          />
+          <ui-lib-message
+            severity="warn"
+            [variant]="variant"
+            text="Please review before continuing."
+          />
+          <ui-lib-message
+            severity="error"
+            [variant]="variant"
+            text="Something went wrong. Please try again."
+          />
+        </div>
+      </div>
+    }
+  </section>
+
+  <!-- ─── Sizes ───────────────────────────────────────────────────── -->
+  <section class="message-demo__section">
+    <h2 class="message-demo__section-title">Sizes</h2>
+    <p class="message-demo__section-desc">Three size tokens: sm, md (default), lg.</p>
+    <div class="message-demo__stack">
+      <ui-lib-message
+        severity="info"
+        size="sm"
+        text="Small — compact for tight layouts."
+      />
+      <ui-lib-message
+        severity="info"
+        size="md"
+        text="Medium — default, balanced for most contexts."
+      />
+      <ui-lib-message
+        severity="info"
+        size="lg"
+        text="Large — prominent for top-of-page notices."
+      />
+    </div>
+  </section>
+
+  <!-- ─── Closable ───────────────────────────────────────────────── -->
+  <section class="message-demo__section">
+    <h2 class="message-demo__section-title">Closable</h2>
+    <p class="message-demo__section-desc">
+      Set <code>closable</code> to show a close button and listen to the <code>close</code> output.
+    </p>
+    <div class="message-demo__stack">
+      @for (severity of severities; track severity) {
+        @if (!isSeverityClosed(severity)) {
+          <ui-lib-message
+            [severity]="severity"
+            [closable]="true"
+            [text]="'This is a ' + severity + ' message. Click to dismiss.'"
+            (close)="dismissSeverity(severity)"
+          />
+        }
+      }
+      @if (closedSeverities().size > 0) {
+        <button class="message-demo__reset-btn" type="button" (click)="resetClosable()">
+          Restore dismissed messages
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- ─── Content projection ─────────────────────────────────────── -->
+  <section class="message-demo__section">
+    <h2 class="message-demo__section-title">Content Projection</h2>
+    <p class="message-demo__section-desc">
+      Rich content can be projected as children instead of using the <code>text</code> input.
+    </p>
+    <div class="message-demo__stack">
+      <ui-lib-message severity="warn">
+        <strong>Action required:</strong> Your payment method expires in 3 days.
+        <a href="#" class="message-demo__link">Update billing</a>
+      </ui-lib-message>
+      <ui-lib-message severity="info" [closable]="true">
+        <strong>Tip:</strong> Use keyboard shortcut <kbd>Ctrl + S</kbd> to save your work.
+      </ui-lib-message>
+    </div>
+  </section>
+
+  <!-- ─── API Reference ──────────────────────────────────────────── -->
+  <section class="message-demo__section">
+    <h2 class="message-demo__section-title">API Reference</h2>
+
+    <h3 class="message-demo__api-subtitle">Inputs</h3>
+    <table class="message-demo__table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>severity</code></td>
+          <td><code>'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast'</code></td>
+          <td><code>'info'</code></td>
+          <td>Controls the colour palette and default icon.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code> (falls back to global theme)</td>
+          <td>Design variant. When null, inherits the ThemeConfigService variant.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size of the message.</td>
+        </tr>
+        <tr>
+          <td><code>text</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Optional text content. Can be combined with content projection.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code> (uses severity default)</td>
+          <td>Custom icon name to override the severity-driven icon.</td>
+        </tr>
+        <tr>
+          <td><code>closable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Shows a close button when true.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS class(es) appended to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="message-demo__api-subtitle">Outputs</h3>
+    <table class="message-demo__table">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Payload</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>close</code></td>
+          <td><code>void</code></td>
+          <td>Emitted when the close button is clicked.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

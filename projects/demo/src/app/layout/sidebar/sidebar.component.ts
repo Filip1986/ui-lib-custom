@@ -388,7 +388,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/message',
           group: 'Messages',
-          badge: 'TODO',
         },
         {
           label: 'Menubar',

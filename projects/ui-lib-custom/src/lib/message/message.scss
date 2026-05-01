@@ -1,0 +1,241 @@
+// ─── Message component ────────────────────────────────────────────────────────
+// Inline severity-based message with icon, text content, and optional close button.
+// Three variants: material, bootstrap, minimal.
+// Severity palette: success, info, warn, error, secondary, contrast.
+
+// ─── Design tokens ────────────────────────────────────────────────────────────
+ui-lib-message {
+  // Sizing
+  --uilib-message-padding-sm: 0.375rem 0.625rem;
+  --uilib-message-padding-md: 0.625rem 0.875rem;
+  --uilib-message-padding-lg: 0.875rem 1.125rem;
+  --uilib-message-font-size-sm: 0.8125rem;
+  --uilib-message-font-size-md: 0.875rem;
+  --uilib-message-font-size-lg: 1rem;
+  --uilib-message-gap-sm: 0.375rem;
+  --uilib-message-gap-md: 0.5rem;
+  --uilib-message-gap-lg: 0.625rem;
+  --uilib-message-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-message-border-width: 1px;
+
+  // Colour defaults — overridden per-severity below
+  --uilib-message-bg: transparent;
+  --uilib-message-fg: inherit;
+  --uilib-message-border-color: transparent;
+  --uilib-message-icon-color: currentColor;
+  --uilib-message-close-color: currentColor;
+
+  // Layout
+  display: flex;
+  align-items: flex-start;
+  gap: var(--uilib-message-gap-md);
+  padding: var(--uilib-message-padding-md);
+  border-radius: var(--uilib-message-radius);
+  border: var(--uilib-message-border-width) solid var(--uilib-message-border-color);
+  background-color: var(--uilib-message-bg);
+  color: var(--uilib-message-fg);
+  font-size: var(--uilib-message-font-size-md);
+  line-height: 1.5;
+}
+
+// ─── Size modifiers ───────────────────────────────────────────────────────────
+ui-lib-message.ui-lib-message--sm {
+  gap: var(--uilib-message-gap-sm);
+  padding: var(--uilib-message-padding-sm);
+  font-size: var(--uilib-message-font-size-sm);
+}
+
+ui-lib-message.ui-lib-message--lg {
+  gap: var(--uilib-message-gap-lg);
+  padding: var(--uilib-message-padding-lg);
+  font-size: var(--uilib-message-font-size-lg);
+}
+
+// ─── Content layout ───────────────────────────────────────────────────────────
+ui-lib-message .ui-lib-message__icon {
+  flex-shrink: 0;
+  margin-top: 0.1em; // Optical alignment with first line of text
+  color: var(--uilib-message-icon-color);
+}
+
+ui-lib-message .ui-lib-message__content {
+  flex: 1;
+  min-width: 0;
+}
+
+ui-lib-message .ui-lib-message__close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--uilib-message-close-color);
+  opacity: 0.7;
+  border-radius: var(--uilib-radius-sm, 0.25rem);
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    opacity: 1;
+  }
+}
+
+// ─── Severity palettes ────────────────────────────────────────────────────────
+
+// -- success --
+ui-lib-message.ui-lib-message--success {
+  --uilib-message-bg: var(--uilib-color-success-50, #f0fdf4);
+  --uilib-message-fg: var(--uilib-color-success-800, #166534);
+  --uilib-message-border-color: var(--uilib-color-success-200, #bbf7d0);
+  --uilib-message-icon-color: var(--uilib-color-success-600, #16a34a);
+  --uilib-message-close-color: var(--uilib-color-success-700, #15803d);
+}
+
+// -- info --
+ui-lib-message.ui-lib-message--info {
+  --uilib-message-bg: var(--uilib-color-info-50, #eff6ff);
+  --uilib-message-fg: var(--uilib-color-info-800, #1e40af);
+  --uilib-message-border-color: var(--uilib-color-info-200, #bfdbfe);
+  --uilib-message-icon-color: var(--uilib-color-info-600, #2563eb);
+  --uilib-message-close-color: var(--uilib-color-info-700, #1d4ed8);
+}
+
+// -- warn --
+ui-lib-message.ui-lib-message--warn {
+  --uilib-message-bg: var(--uilib-color-warning-50, #fffbeb);
+  --uilib-message-fg: var(--uilib-color-warning-800, #92400e);
+  --uilib-message-border-color: var(--uilib-color-warning-200, #fde68a);
+  --uilib-message-icon-color: var(--uilib-color-warning-600, #d97706);
+  --uilib-message-close-color: var(--uilib-color-warning-700, #b45309);
+}
+
+// -- error --
+ui-lib-message.ui-lib-message--error {
+  --uilib-message-bg: var(--uilib-color-error-50, #fef2f2);
+  --uilib-message-fg: var(--uilib-color-error-800, #991b1b);
+  --uilib-message-border-color: var(--uilib-color-error-200, #fecaca);
+  --uilib-message-icon-color: var(--uilib-color-error-600, #dc2626);
+  --uilib-message-close-color: var(--uilib-color-error-700, #b91c1c);
+}
+
+// -- secondary --
+ui-lib-message.ui-lib-message--secondary {
+  --uilib-message-bg: var(--uilib-color-neutral-100, #f5f5f5);
+  --uilib-message-fg: var(--uilib-color-neutral-700, #404040);
+  --uilib-message-border-color: var(--uilib-color-neutral-300, #d4d4d4);
+  --uilib-message-icon-color: var(--uilib-color-neutral-500, #737373);
+  --uilib-message-close-color: var(--uilib-color-neutral-600, #525252);
+}
+
+// -- contrast --
+ui-lib-message.ui-lib-message--contrast {
+  --uilib-message-bg: var(--uilib-color-neutral-900, #171717);
+  --uilib-message-fg: var(--uilib-color-neutral-50, #fafafa);
+  --uilib-message-border-color: var(--uilib-color-neutral-700, #404040);
+  --uilib-message-icon-color: var(--uilib-color-neutral-300, #d4d4d4);
+  --uilib-message-close-color: var(--uilib-color-neutral-200, #e5e5e5);
+}
+
+// ─── Variant overrides ────────────────────────────────────────────────────────
+
+// Material — elevated surface, no border
+ui-lib-message.ui-lib-message--material {
+  --uilib-message-border-color: transparent;
+  box-shadow: var(--uilib-shadow-sm, 0 1px 3px rgb(0 0 0 / 0.12));
+}
+
+// Bootstrap — filled background, visible border (default look already matches)
+ui-lib-message.ui-lib-message--bootstrap {
+  font-weight: 400;
+}
+
+// Minimal — transparent background, only a left accent border
+ui-lib-message.ui-lib-message--minimal {
+  --uilib-message-bg: transparent;
+  border-color: transparent;
+  border-left-width: 3px;
+  border-left-style: solid;
+  border-radius: 0;
+  padding-left: calc(var(--uilib-message-gap-md) + 0.5rem);
+}
+
+ui-lib-message.ui-lib-message--minimal.ui-lib-message--success {
+  border-left-color: var(--uilib-color-success-500, #22c55e);
+}
+
+ui-lib-message.ui-lib-message--minimal.ui-lib-message--info {
+  border-left-color: var(--uilib-color-info-500, #3b82f6);
+}
+
+ui-lib-message.ui-lib-message--minimal.ui-lib-message--warn {
+  border-left-color: var(--uilib-color-warning-500, #f59e0b);
+}
+
+ui-lib-message.ui-lib-message--minimal.ui-lib-message--error {
+  border-left-color: var(--uilib-color-error-500, #ef4444);
+}
+
+ui-lib-message.ui-lib-message--minimal.ui-lib-message--secondary {
+  border-left-color: var(--uilib-color-neutral-400, #a3a3a3);
+}
+
+ui-lib-message.ui-lib-message--minimal.ui-lib-message--contrast {
+  border-left-color: var(--uilib-color-neutral-800, #262626);
+}
+
+// ─── Dark mode ────────────────────────────────────────────────────────────────
+[data-theme='dark'] ui-lib-message.ui-lib-message--success {
+  --uilib-message-bg: color-mix(in srgb, var(--uilib-color-success-900, #14532d) 60%, transparent);
+  --uilib-message-fg: var(--uilib-color-success-200, #bbf7d0);
+  --uilib-message-border-color: var(--uilib-color-success-700, #15803d);
+  --uilib-message-icon-color: var(--uilib-color-success-400, #4ade80);
+  --uilib-message-close-color: var(--uilib-color-success-300, #86efac);
+}
+
+[data-theme='dark'] ui-lib-message.ui-lib-message--info {
+  --uilib-message-bg: color-mix(in srgb, var(--uilib-color-info-900, #1e3a5f) 60%, transparent);
+  --uilib-message-fg: var(--uilib-color-info-200, #bfdbfe);
+  --uilib-message-border-color: var(--uilib-color-info-700, #1d4ed8);
+  --uilib-message-icon-color: var(--uilib-color-info-400, #60a5fa);
+  --uilib-message-close-color: var(--uilib-color-info-300, #93c5fd);
+}
+
+[data-theme='dark'] ui-lib-message.ui-lib-message--warn {
+  --uilib-message-bg: color-mix(in srgb, var(--uilib-color-warning-900, #451a03) 60%, transparent);
+  --uilib-message-fg: var(--uilib-color-warning-200, #fde68a);
+  --uilib-message-border-color: var(--uilib-color-warning-700, #b45309);
+  --uilib-message-icon-color: var(--uilib-color-warning-400, #fbbf24);
+  --uilib-message-close-color: var(--uilib-color-warning-300, #fcd34d);
+}
+
+[data-theme='dark'] ui-lib-message.ui-lib-message--error {
+  --uilib-message-bg: color-mix(in srgb, var(--uilib-color-error-900, #450a0a) 60%, transparent);
+  --uilib-message-fg: var(--uilib-color-error-200, #fecaca);
+  --uilib-message-border-color: var(--uilib-color-error-700, #b91c1c);
+  --uilib-message-icon-color: var(--uilib-color-error-400, #f87171);
+  --uilib-message-close-color: var(--uilib-color-error-300, #fca5a5);
+}
+
+[data-theme='dark'] ui-lib-message.ui-lib-message--secondary {
+  --uilib-message-bg: var(--uilib-color-neutral-800, #262626);
+  --uilib-message-fg: var(--uilib-color-neutral-200, #e5e5e5);
+  --uilib-message-border-color: var(--uilib-color-neutral-600, #525252);
+  --uilib-message-icon-color: var(--uilib-color-neutral-400, #a3a3a3);
+  --uilib-message-close-color: var(--uilib-color-neutral-300, #d4d4d4);
+}
+
+[data-theme='dark'] ui-lib-message.ui-lib-message--contrast {
+  --uilib-message-bg: var(--uilib-color-neutral-50, #fafafa);
+  --uilib-message-fg: var(--uilib-color-neutral-900, #171717);
+  --uilib-message-border-color: var(--uilib-color-neutral-200, #e5e5e5);
+  --uilib-message-icon-color: var(--uilib-color-neutral-700, #404040);
+  --uilib-message-close-color: var(--uilib-color-neutral-600, #525252);
+}

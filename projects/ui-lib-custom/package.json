@@ -83,7 +83,8 @@
     "./mega-menu": { "esm2022": "./esm2022/mega-menu/index.mjs", "esm": "./esm2022/mega-menu/index.mjs" },
     "./menubar": { "esm2022": "./esm2022/menubar/index.mjs", "esm": "./esm2022/menubar/index.mjs" },
     "./panel-menu": { "esm2022": "./esm2022/panel-menu/index.mjs", "esm": "./esm2022/panel-menu/index.mjs" },
-    "./tiered-menu": { "esm2022": "./esm2022/tiered-menu/index.mjs", "esm": "./esm2022/tiered-menu/index.mjs" }
+    "./tiered-menu": { "esm2022": "./esm2022/tiered-menu/index.mjs", "esm": "./esm2022/tiered-menu/index.mjs" },
+    "./message": { "esm2022": "./esm2022/message/index.mjs", "esm": "./esm2022/message/index.mjs" }
   },
   "typesVersions": {
     "*": {
@@ -130,7 +131,8 @@
       "mega-menu": ["./mega-menu/index.d.ts"],
       "menubar": ["./menubar/index.d.ts"],
       "panel-menu": ["./panel-menu/index.d.ts"],
-      "tiered-menu": ["./tiered-menu/index.d.ts"]
+      "tiered-menu": ["./tiered-menu/index.d.ts"],
+      "message": ["./message/index.d.ts"]
     }
   }
 }

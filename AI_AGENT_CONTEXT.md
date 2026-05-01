@@ -42,8 +42,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `TreeSelect` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Rating` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
 - `Listbox` -> ✅ complete (implementation/tests/entry-point/demo/docs/ESLint/build all green)
-- `RadioButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)t
-- 
+- `RadioButton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Knob` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `KeyFilter` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `InputOtp` -> ✅ complete (implementation/tests/entry-point/demo/final QA complete)
@@ -79,6 +79,44 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-04-30 [message session]
+Changed:
+  - projects/ui-lib-custom/src/lib/message/ (new — message.types.ts, message.ts, message.html, message.scss, message.spec.ts, index.ts)
+  - projects/ui-lib-custom/message/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
+  - projects/ui-lib-custom/package.json (message added to exports + typesVersions; pre-existing truncation fixed)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (message import test added; pre-existing truncation fixed)
+  - projects/demo/src/app/pages/message/ (full demo replacing placeholder — TS/HTML/SCSS)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Message)
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu-sub.scss (pre-existing truncation repaired)
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu.scss (pre-existing truncation repaired)
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu-sub.ts (pre-existing NUL bytes stripped)
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu.ts (pre-existing truncation repaired)
+  - AI_AGENT_CONTEXT.md (marked Message complete)
+State: Message component fully complete. PrimeNG-inspired inline severity-based message with:
+  - Six severity levels (success, info, warn, error, secondary, contrast) each with colour palette + default icon
+  - Three design variants (material: elevated/no-border, bootstrap: filled+border, minimal: transparent + left accent border)
+  - Three sizes (sm, md, lg)
+  - text input for programmatic content; ng-content for rich projection (both usable simultaneously)
+  - icon input to override the default severity icon
+  - closable input + close output (button with aria-label)
+  - styleClass escape-hatch input
+  - role="status" + aria-live="polite" on host
+  - Dark mode tokens for all six severities
+  - Signal inputs/outputs, ViewEncapsulation.None + OnPush + standalone
+  - ThemeConfigService variant inheritance
+  - Secondary entry point wired (ui-lib-custom/message)
+  - 26 unit tests passing. 62/62 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/message/ projects/demo/src/app/pages/message/ --max-warnings 0 (CLEAN, EXIT:0),
+  npm run build — ui-lib-custom/message Built (zero errors, all entry points green),
+  npx jest --testPathPatterns=message --no-coverage (26/26 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (62/62 PASS).
+Terminal notes: Edit tool caused file truncations; used Python to repair all affected files.
+  Cross-entry-point import bug fixed: ../icon -> ui-lib-custom/icon.
+  Pre-existing truncations in tiered-menu-sub.scss, tiered-menu.scss, tiered-menu-sub.ts,
+  tiered-menu.ts also repaired during this session.
+Next step: knip baseline + dead-code cleanup, or constants extraction pass.
 
 Date: 2026-04-30 [tiered-menu session]
 Changed:

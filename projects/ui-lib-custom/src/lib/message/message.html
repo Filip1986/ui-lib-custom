@@ -1,0 +1,27 @@
+<ui-lib-icon
+  class="ui-lib-message__icon"
+  [name]="resolvedIcon()"
+  [variant]="effectiveVariant()"
+  aria-hidden="true"
+/>
+<span class="ui-lib-message__content">
+  @if (text()) {
+    {{ text() }}
+  }
+  <ng-content />
+</span>
+@if (closable()) {
+  <button
+    type="button"
+    class="ui-lib-message__close"
+    aria-label="Close message"
+    (click)="onClose()"
+  >
+    <ui-lib-icon
+      name="close"
+      [variant]="effectiveVariant()"
+      size="sm"
+      aria-hidden="true"
+    />
+  </button>
+}
