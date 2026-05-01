@@ -938,3 +938,50 @@ Verification:
   npx jest --testPathPatterns="entry-points" --no-cache (42/42 PASS).
 Terminal notes: Write tool truncates large .ts files — always write files >300 lines via Python.
 Next step: Overlay follow-ups (appendTo / z-index manager), or component v2 enhancements.
+
+Date: 2026-04-30 [panel-menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/panel-menu/ (new — panel-menu.types.ts, panel-menu-context.ts, panel-menu-sub.ts, panel-menu-sub.html, panel-menu.ts, panel-menu.html, panel-menu.scss, panel-menu.spec.ts, index.ts)
+  - projects/ui-lib-custom/panel-menu/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (panel-menu added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (panel-menu import test added)
+  - projects/demo/src/app/pages/panel-menu/ (full demo replacing placeholder — TS/HTML/SCSS, 8 sections + API tables)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from PanelMenu)
+  - AI_AGENT_CONTEXT.md (marked PanelMenu complete)
+State: PanelMenu component fully complete. 25 unit tests passing. 60/60 entry-point tests passing. ESLint clean. Build zero errors.
+Verification: ESLint clean, npm run build green, 25/25 PASS, 60/60 PASS.
+Next step: TieredMenu or knip baseline.
+
+Date: 2026-04-30 [menubar session]
+Changed:
+  - projects/ui-lib-custom/src/lib/menubar/ (new — menubar.types.ts, menubar-submenu.ts, menubar-submenu.html, menubar-submenu.scss, menubar.ts, menubar.html, menubar.scss, menubar.spec.ts, index.ts)
+  - projects/ui-lib-custom/menubar/ (new secondary entry point — ng-package.json, package.json)
+  - projects/ui-lib-custom/package.json (menubar added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (menubar import test added)
+  - projects/demo/src/app/pages/menubar/ (new demo page — TS/HTML/SCSS, 8 sections + API tables)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed TODO badge from Menubar)
+State: Menubar component fully complete. 42 unit tests passing. 59/59 entry-point tests passing. ESLint clean. Build zero errors.
+Verification: ESLint clean, npm run build green, 42/42 PASS, 59/59 PASS.
+Next step: knip baseline or overlay follow-ups.
+
+Date: 2026-04-30 [mega-menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/mega-menu/ (new — full implementation)
+  - projects/ui-lib-custom/mega-menu/ (new secondary entry point)
+  - projects/ui-lib-custom/package.json (mega-menu added)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (mega-menu import test added)
+  - projects/demo/src/app/pages/mega-menu/ (new demo page)
+  - projects/demo/src/app/pages/mega-menu/mega-menu-demo.component.html (ESLint parse error fixed)
+State: MegaMenu fully complete. 51 unit tests passing. 58/58 entry-point tests passing. ESLint clean. Build zero errors.
+Verification: ESLint clean, npm run build green, 51/51 PASS, 58/58 PASS.
+Next step: knip baseline or overlay follow-ups.
+
+Date: 2026-04-30 [menu session]
+Changed:
+  - projects/ui-lib-custom/src/lib/menu/ (new — full implementation)
+  - projects/ui-lib-custom/menu/ (new secondary entry point)
+  - projects/ui-lib-custom/package.json (menu added)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (menu import test added)
+  - projects/demo/src/app/pages/menu/ (new demo page)
+State: Menu component fully complete. Entry-point tests passing. ESLint clean. Build zero errors.
+Next step: MegaMenu or Menubar.

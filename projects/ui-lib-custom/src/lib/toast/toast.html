@@ -1,0 +1,38 @@
+@for (message of visibleMessages(); track message.id) {
+  <div
+    class="ui-lib-toast__item"
+    [class]="itemClass(message)"
+    role="alert"
+    [attr.aria-live]="message.severity === 'error' ? 'assertive' : 'polite'"
+  >
+    <ui-lib-icon
+      class="ui-lib-toast__icon"
+      [name]="resolvedIcon(message)"
+      [variant]="effectiveVariant()"
+      aria-hidden="true"
+    />
+    <div class="ui-lib-toast__content">
+      @if (message.summary) {
+        <div class="ui-lib-toast__summary">{{ message.summary }}</div>
+      }
+      @if (message.detail) {
+        <div class="ui-lib-toast__detail">{{ message.detail }}</div>
+      }
+    </div>
+    @if (message.closable !== false) {
+      <button
+        type="button"
+        class="ui-lib-toast__close"
+        aria-label="Dismiss notification"
+        (click)="dismiss(message.id ?? '')"
+      >
+        <ui-lib-icon
+          name="close"
+          [variant]="effectiveVariant()"
+          size="sm"
+          aria-hidden="true"
+        />
+      </button>
+    }
+  </div>
+}

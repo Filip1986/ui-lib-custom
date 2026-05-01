@@ -8,7 +8,14 @@ import {
   bootstrapCheckCircle,
   bootstrapExclamationOctagon,
   bootstrapExclamationTriangle,
+  bootstrapX,
 } from '@ng-icons/bootstrap-icons';
+import {
+  lucideBadgeInfo,
+  lucideBadgeCheck,
+  lucideAlertTriangle,
+  lucideBadgeX,
+} from '@ng-icons/lucide';
 import { provideIcons } from '@ng-icons/core';
 import { Message } from './message';
 import type { MessageSeverity, MessageVariant, MessageSize } from './message';
@@ -108,6 +115,11 @@ describe('Message', (): void => {
           bootstrapCheckCircle,
           bootstrapExclamationOctagon,
           bootstrapExclamationTriangle,
+          bootstrapX,
+          lucideBadgeInfo,
+          lucideBadgeCheck,
+          lucideAlertTriangle,
+          lucideBadgeX,
         }),
       ],
     }).compileComponents();

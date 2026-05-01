@@ -390,6 +390,12 @@ export class SidebarComponent {
           group: 'Messages',
         },
         {
+          label: 'Toast',
+          icon: 'pi pi-circle',
+          route: '/toast',
+          group: 'Messages',
+        },
+        {
           label: 'Menubar',
           icon: 'pi pi-circle',
           route: '/menubar',

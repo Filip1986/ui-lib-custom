@@ -1,0 +1,280 @@
+<!-- Toast containers — one per position used in the demo -->
+<ui-lib-toast [position]="selectedPosition" [variant]="selectedVariant" />
+<ui-lib-toast position="bottom-left" key="secondary" />
+
+<div class="toast-demo">
+  <!-- ─── Header ─────────────────────────────────────────────────────────────── -->
+  <header class="toast-demo__header">
+    <h1 class="toast-demo__title">Toast</h1>
+    <p class="toast-demo__description">
+      The Toast component provides a lightweight notification overlay driven by an
+      injectable <code>ToastService</code>. Place one <code>&lt;ui-lib-toast /&gt;</code>
+      in your app shell and call <code>toastService.add()</code> from anywhere in
+      the application.
+    </p>
+  </header>
+
+  <!-- ─── Section: Severities ───────────────────────────────────────────────── -->
+  <section class="toast-demo__section">
+    <h2 class="toast-demo__section-title">Severities</h2>
+    <p class="toast-demo__section-desc">
+      Four severity levels map to distinct colour palettes and icons.
+    </p>
+    <div class="toast-demo__row">
+      <ui-lib-button label="Success" severity="success" (click)="showSuccess()" />
+      <ui-lib-button label="Info" severity="info" (click)="showInfo()" />
+      <ui-lib-button label="Warning" severity="warn" (click)="showWarn()" />
+      <ui-lib-button label="Error" severity="danger" (click)="showError()" />
+    </div>
+  </section>
+
+  <!-- ─── Section: Multiple ─────────────────────────────────────────────────── -->
+  <section class="toast-demo__section">
+    <h2 class="toast-demo__section-title">Multiple Toasts</h2>
+    <p class="toast-demo__section-desc">
+      Multiple toasts can be displayed simultaneously and stack in the container.
+    </p>
+    <div class="toast-demo__row">
+      <ui-lib-button label="Show multiple" (click)="showMultiple()" />
+      <ui-lib-button label="Clear all" (click)="clearAll()" />
+    </div>
+  </section>
+
+  <!-- ─── Section: Sticky & Closable ───────────────────────────────────────── -->
+  <section class="toast-demo__section">
+    <h2 class="toast-demo__section-title">Sticky &amp; Non-Closable</h2>
+    <p class="toast-demo__section-desc">
+      Set <code>sticky: true</code> to prevent auto-dismissal. Set
+      <code>closable: false</code> to hide the close button.
+    </p>
+    <div class="toast-demo__row">
+      <ui-lib-button label="Sticky" severity="warn" (click)="showSticky()" />
+      <ui-lib-button label="No close button" (click)="showNonClosable()" />
+    </div>
+  </section>
+
+  <!-- ─── Section: Life duration ───────────────────────────────────────────── -->
+  <section class="toast-demo__section">
+    <h2 class="toast-demo__section-title">Auto-dismiss Duration</h2>
+    <p class="toast-demo__section-desc">
+      Control how long a toast stays visible with the <code>life</code> property
+      (milliseconds). Per-message <code>life</code> overrides the container default.
+    </p>
+    <div class="toast-demo__row">
+      <ui-lib-button label="1.5 s (quick)" (click)="showShortLife()" />
+      <ui-lib-button label="8 s (long)" (click)="showLongLife()" />
+    </div>
+  </section>
+
+  <!-- ─── Section: Position & Variant picker ───────────────────────────────── -->
+  <section class="toast-demo__section">
+    <h2 class="toast-demo__section-title">Position &amp; Variant</h2>
+    <p class="toast-demo__section-desc">
+      Choose a position and design variant, then trigger a toast to see it in action.
+    </p>
+
+    <div class="toast-demo__pickers">
+      <div class="toast-demo__picker-group">
+        <span class="toast-demo__picker-label">Position</span>
+        <div class="toast-demo__chip-row">
+          @for (pos of positions; track pos) {
+            <button
+              type="button"
+              class="toast-demo__chip"
+              [class.toast-demo__chip--active]="selectedPosition === pos"
+              (click)="selectedPosition = pos"
+            >{{ pos }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="toast-demo__picker-group">
+        <span class="toast-demo__picker-label">Variant</span>
+        <div class="toast-demo__chip-row">
+          @for (v of variants; track v) {
+            <button
+              type="button"
+              class="toast-demo__chip"
+              [class.toast-demo__chip--active]="selectedVariant === v"
+              (click)="selectedVariant = v"
+            >{{ v }}</button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-demo__row">
+      <ui-lib-button label="Success" severity="success" (click)="showPositioned('success')" />
+      <ui-lib-button label="Info" severity="info" (click)="showPositioned('info')" />
+      <ui-lib-button label="Warning" severity="warn" (click)="showPositioned('warn')" />
+      <ui-lib-button label="Error" severity="danger" (click)="showPositioned('error')" />
+    </div>
+  </section>
+
+  <!-- ─── Section: Keyed containers ────────────────────────────────────────── -->
+  <section class="toast-demo__section">
+    <h2 class="toast-demo__section-title">Keyed Containers</h2>
+    <p class="toast-demo__section-desc">
+      Use the <code>key</code> input on both the container and the message to route
+      toasts to a specific container. Useful for displaying toasts in different
+      screen regions simultaneously.
+    </p>
+    <div class="toast-demo__row">
+      <ui-lib-button
+        label="Send to secondary container (bottom-left)"
+        (click)="showKeyed()"
+      />
+    </div>
+  </section>
+
+  <!-- ─── Section: API ─────────────────────────────────────────────────────── -->
+  <section class="toast-demo__section">
+    <h2 class="toast-demo__section-title">Toast API</h2>
+
+    <h3 class="toast-demo__api-subtitle">Toast container inputs</h3>
+    <table class="toast-demo__api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>position</code></td>
+          <td><code>ToastPosition</code></td>
+          <td><code>'top-right'</code></td>
+          <td>Screen position of the toast container.</td>
+        </tr>
+        <tr>
+          <td><code>life</code></td>
+          <td><code>number</code></td>
+          <td><code>3000</code></td>
+          <td>Default auto-dismiss duration (ms) for all messages.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>ToastVariant | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant. Falls back to ThemeConfigService global variant.</td>
+        </tr>
+        <tr>
+          <td><code>key</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Only renders messages whose key matches this value.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS class(es) applied to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="toast-demo__api-subtitle">ToastMessage interface</h3>
+    <table class="toast-demo__api-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>id</code></td>
+          <td><code>string</code></td>
+          <td>auto</td>
+          <td>Unique identifier — auto-generated if omitted.</td>
+        </tr>
+        <tr>
+          <td><code>key</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Routes the message to the matching container key.</td>
+        </tr>
+        <tr>
+          <td><code>severity</code></td>
+          <td><code>ToastSeverity</code></td>
+          <td><code>'info'</code></td>
+          <td>Controls colour palette and default icon.</td>
+        </tr>
+        <tr>
+          <td><code>summary</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Bold headline of the notification.</td>
+        </tr>
+        <tr>
+          <td><code>detail</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Body text of the notification.</td>
+        </tr>
+        <tr>
+          <td><code>life</code></td>
+          <td><code>number</code></td>
+          <td>container <code>life</code></td>
+          <td>Per-message auto-dismiss duration (ms).</td>
+        </tr>
+        <tr>
+          <td><code>sticky</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When true, the toast never auto-dismisses.</td>
+        </tr>
+        <tr>
+          <td><code>closable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>When false, the close button is hidden.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string</code></td>
+          <td>severity default</td>
+          <td>Custom icon name overriding the severity default.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string</code></td>
+          <td>—</td>
+          <td>Extra CSS class(es) on the item element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="toast-demo__api-subtitle">ToastService methods</h3>
+    <table class="toast-demo__api-table">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Signature</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>add</code></td>
+          <td><code>(message: ToastMessage) =&gt; void</code></td>
+          <td>Enqueue a new toast notification.</td>
+        </tr>
+        <tr>
+          <td><code>remove</code></td>
+          <td><code>(id: string) =&gt; void</code></td>
+          <td>Remove a toast by its ID.</td>
+        </tr>
+        <tr>
+          <td><code>clear</code></td>
+          <td><code>(key?: string) =&gt; void</code></td>
+          <td>Clear all messages, or only those matching a key.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
