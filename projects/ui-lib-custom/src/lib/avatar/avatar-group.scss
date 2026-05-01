@@ -1,0 +1,12 @@
+ui-lib-avatar-group {
+  display: inline-flex;
+  flex-direction: row;
+}
+.ui-lib-avatar-group {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ui-lib-avatar-group ui-lib-avatar + ui-lib-avatar {
+  margin-left: var(--uilib-avatar-group-overlap, -0.75rem);
+}

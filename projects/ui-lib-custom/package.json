@@ -236,6 +236,10 @@
     "./auto-focus": {
       "esm2022": "./esm2022/auto-focus/index.mjs",
       "esm": "./esm2022/auto-focus/index.mjs"
+    },
+    "./avatar": {
+      "esm2022": "./esm2022/avatar/index.mjs",
+      "esm": "./esm2022/avatar/index.mjs"
     }
   },
   "typesVersions": {
@@ -383,6 +387,9 @@
       ],
       "auto-focus": [
         "./auto-focus/index.d.ts"
+      ],
+      "avatar": [
+        "./avatar/index.d.ts"
       ]
     }
   }

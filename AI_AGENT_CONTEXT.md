@@ -28,6 +28,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `Toast` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -83,6 +84,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-01 [Avatar component]
+Changed:
+  - projects/ui-lib-custom/src/lib/avatar/avatar.types.ts (new)
+  - projects/ui-lib-custom/src/lib/avatar/avatar.ts (new component + re-export types)
+  - projects/ui-lib-custom/src/lib/avatar/avatar.html (new template)
+  - projects/ui-lib-custom/src/lib/avatar/avatar.scss (new styles)
+  - projects/ui-lib-custom/src/lib/avatar/avatar-group.ts (new AvatarGroup component)
+  - projects/ui-lib-custom/src/lib/avatar/avatar-group.html (new template)
+  - projects/ui-lib-custom/src/lib/avatar/avatar-group.scss (new styles)
+  - projects/ui-lib-custom/src/lib/avatar/avatar.spec.ts (19 unit tests)
+  - projects/ui-lib-custom/src/lib/avatar/index.ts (barrel)
+  - projects/ui-lib-custom/avatar/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/avatar/package.json (secondary entry point)
+  - projects/ui-lib-custom/avatar/public-api.ts (secondary entry point)
+  - projects/ui-lib-custom/package.json (avatar added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (avatar import test added)
+  - projects/demo/src/app/pages/avatar/avatar-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/avatar/avatar-demo.component.html (full demo -- 8 sections)
+  - projects/demo/src/app/pages/avatar/avatar-demo.component.scss (demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: TODO from Avatar entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Avatar component fully complete. PrimeNG-inspired Avatar + AvatarGroup components:
+  - Avatar: image/label/icon display modes with priority (image > label > icon > ng-content)
+  - Three shapes: circle (default) / square
+  - Three sizes: sm / md / lg
+  - Three variants: material / bootstrap / minimal (inherits ThemeConfigService)
+  - ARIA: role=img on Avatar, role=group on AvatarGroup, auto-resolved aria-label
+  - CSS vars: --uilib-avatar-* prefix throughout
+  - AvatarGroup: stacks avatars with CSS negative-margin overlap
+  - Signal inputs, ViewEncapsulation.None + OnPush + standalone on both
+  - 19 unit tests passing. 66/66 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/avatar/ projects/demo/src/app/pages/avatar/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx jest --testPathPatterns=avatar --no-coverage (19/19 PASS),
+  npx jest --testPathPatterns=entry-points --no-coverage (66/66 PASS),
+  npx ng build ui-lib-custom -- ui-lib-custom/avatar Built, zero errors.
+Terminal notes: Python used for all file writes (bash heredoc expansion issues with ! and backticks).
+Next step: knip baseline + dead-code cleanup, or constants extraction pass.
+
 Date: 2026-05-01 [AutoFocus directive]
 Changed:
   - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.ts (new directive)
@@ -126,58 +166,4 @@ Verification:
   npx jest --testPathPatterns=animate-on-scroll --no-coverage (14/14 PASS),
   npx jest --testPathPatterns=entry-points --no-coverage (64/64 PASS).
 Terminal notes: Write tool truncates large HTML files on the Linux mount; used Python open() to write the full demo HTML. Toast scss/ts/service.ts had pre-existing null bytes — stripped with Python binary mode.
-Next step: knip baseline + dead-code cleanup, or constants extraction pass.
-
-Date: 2026-05-01 [animate-on-scroll initial]
-Changed:
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/ (new — animate-on-scroll.ts, animate-on-scroll.scss, animate-on-scroll.spec.ts, index.ts)
-  - projects/ui-lib-custom/animate-on-scroll/ (new secondary entry point — ng-package.json, package.json)
-  - projects/ui-lib-custom/package.json (animate-on-scroll added to exports + typesVersions; pre-existing truncation repaired via Python)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (animate-on-scroll import test added; pre-existing truncation repaired via Python)
-  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.ts (full demo replacing placeholder)
-  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.html (5 sections: fade, presets, repeat, threshold, API table)
-  - projects/demo/src/app/pages/animated-on-scroll/animated-on-scroll-demo.component.scss (demo styles)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from AnimatedOnScroll entry)
-  - AI_AGENT_CONTEXT.md (marked AnimateOnScroll complete)
-State: AnimateOnScroll directive fully complete. 14 unit tests passing. 64/64 entry-point tests passing. ESLint clean. animate-on-scroll entry point built successfully. Pre-existing toast.scss truncation (line 349) caused build exit code 1 — not introduced by this session.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/animate-on-scroll/ projects/demo/src/app/pages/animated-on-scroll/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx ng build ui-lib-custom — ui-lib-custom/animate-on-scroll Built (exit 1 due to pre-existing toast.scss truncation, not this session),
-  npx jest --testPathPatterns=animate-on-scroll --no-coverage (14/14 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (64/64 PASS).
-Terminal notes: Edit tool causes file truncations on the Linux side of the Samba mount; used Python open() for all file writes (package.json, entry-points.spec.ts). RegExp literal in directive written with Python escape to avoid heredoc truncation.
-Next step: Fix pre-existing toast.scss truncation, then knip baseline + dead-code cleanup.
-
-
-Date: 2026-05-01 [toast session]
-Changed:
-  - projects/ui-lib-custom/src/lib/toast/ (new — toast.types.ts, toast.service.ts, toast.ts, toast.html, toast.scss, toast.spec.ts, index.ts)
-  - projects/ui-lib-custom/toast/ (new secondary entry point — ng-package.json, package.json, public-api.ts)
-  - projects/ui-lib-custom/package.json (toast added to exports + typesVersions; pre-existing truncation repaired)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (toast import test added; pre-existing truncation repaired)
-  - projects/demo/src/app/pages/toast/ (full demo replacing placeholder — TS/HTML/SCSS)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (Toast added alongside Message in Messages group)
-  - AI_AGENT_CONTEXT.md (marked Toast complete)
-State: Toast component fully complete. PrimeNG-inspired fixed-position notification overlay driven by injectable ToastService:
-  - ToastService (providedIn root): WritableSignal<ToastMessage[]> queue; add()/remove()/clear() API; auto-generated IDs
-  - 6 positions: top-right/left/center, bottom-right/left/center
-  - Severity levels: success, info, warn, error (each with default icon via SEVERITY_ICON_MAP)
-  - Auto-dismiss timers managed reactively in effect(); sticky messages exempt
-  - Exit animation via closingIds WritableSignal<Set<string>> + CSS @keyframes (300ms)
-  - key input for multi-container routing
-  - Three variants (material/bootstrap/minimal), custom icons, styleClass escape-hatch
-  - Signal inputs/outputs, ViewEncapsulation.None + OnPush + standalone
-  - ThemeConfigService variant inheritance
-  - ARIA: role=region, aria-label=Notifications, aria-live=polite, aria-atomic=false
-  - Dark mode tokens for all 4 severities + material/minimal variants
-  - 31 unit tests passing. 63/63 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/toast/ projects/demo/src/app/pages/toast/ --max-warnings 0 (CLEAN, EXIT:0),
-  npm run build — ui-lib-custom/toast Built (zero errors, all entry points green),
-  npx jest --testPathPatterns=toast --no-coverage (31/31 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (63/63 PASS).
-Terminal notes: Edit tool caused file truncations throughout session; used Python binary-mode appends to repair
-  entry-points.spec.ts, package.json (full rewrite via json.dump), and toast.spec.ts (null byte strip + append).
-  ESLint fixes: constructor() not public constructor() (explicit-member-accessibility rule);
-  requireElement() helper used in tests to avoid no-unnecessary-condition on optional chaining.
 Next step: knip baseline + dead-code cleanup, or constants extraction pass.

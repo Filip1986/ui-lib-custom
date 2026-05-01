@@ -1,0 +1,14 @@
+@if (showImage()) {
+  <img
+    class="ui-lib-avatar__image"
+    [src]="image()"
+    [alt]="imageAlt()"
+    aria-hidden="true"
+  />
+} @else if (showLabel()) {
+  <span class="ui-lib-avatar__label" aria-hidden="true">{{ label() }}</span>
+} @else if (showIcon()) {
+  <span class="ui-lib-avatar__icon" [class]="icon()!" aria-hidden="true"></span>
+} @else {
+  <ng-content />
+}

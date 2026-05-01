@@ -64,6 +64,7 @@ import type * as UiLibMessage from 'ui-lib-custom/message';
 import type * as UiLibToast from 'ui-lib-custom/toast';
 import type * as UiLibAnimateOnScroll from 'ui-lib-custom/animate-on-scroll';
 import type * as UiLibAutoFocus from 'ui-lib-custom/auto-focus';
+import type * as UiLibAvatar from 'ui-lib-custom/avatar';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -466,5 +467,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from auto-focus', async (): Promise<void> => {
     const mod: typeof UiLibAutoFocus = await import('ui-lib-custom/auto-focus');
     expect(mod.AutoFocus).toBeDefined();
+  });
+  it('should import from avatar', async (): Promise<void> => {
+    const mod: typeof UiLibAvatar = await import('ui-lib-custom/avatar');
+    expect(mod.Avatar).toBeDefined();
+    expect(mod.AvatarGroup).toBeDefined();
   });
 });

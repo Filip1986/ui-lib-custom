@@ -436,7 +436,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/avatar',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Badge',

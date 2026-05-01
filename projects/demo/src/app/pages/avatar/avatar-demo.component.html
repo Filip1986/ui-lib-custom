@@ -1,5 +1,295 @@
 <section class="avatar-demo" data-testid="avatar-demo">
-  <h1>Avatar</h1>
-  <p>Coming soon.</p>
+  <!-- Hero -->
+  <div class="av-hero">
+    <h1 class="av-hero__title">Avatar</h1>
+    <p class="av-hero__lead">
+      Represents a person or entity with an image, initials, or icon.
+      Supports three shapes, three sizes, and three theme variants.
+      Group multiple avatars with <code>AvatarGroup</code> for a stacked appearance.
+    </p>
+    <div class="av-hero__tags">
+      <span class="av-tag">Component</span>
+      <span class="av-tag">Misc</span>
+      <span class="av-tag">A11y</span>
+    </div>
+  </div>
+  <!-- Section 1: Image avatars -->
+  <div class="av-section">
+    <h2 class="av-section__title">Image</h2>
+    <p class="av-section__desc">
+      Provide an <code>image</code> URL to display a photo. Use <code>imageAlt</code>
+      to set the accessible description.
+    </p>
+    <div class="av-row">
+      <ui-lib-avatar
+        image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+        imageAlt="Amy Elsner"
+        size="sm"
+      />
+      <ui-lib-avatar
+        image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
+        imageAlt="Asiya Javayant"
+        size="md"
+      />
+      <ui-lib-avatar
+        image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
+        imageAlt="Onyama Limba"
+        size="lg"
+      />
+    </div>
+    <pre class="av-code"><code>&lt;ui-lib-avatar image="/photo.jpg" imageAlt="Jane Doe" size="md" /&gt;</code></pre>
+  </div>
+  <!-- Section 2: Label avatars -->
+  <div class="av-section">
+    <h2 class="av-section__title">Label (Initials)</h2>
+    <p class="av-section__desc">
+      When no image is available, set <code>label</code> to display initials or a short text.
+    </p>
+    <div class="av-row">
+      <ui-lib-avatar label="JD" size="sm" />
+      <ui-lib-avatar label="AB" size="md" />
+      <ui-lib-avatar label="XY" size="lg" />
+    </div>
+    <pre class="av-code"><code>&lt;ui-lib-avatar label="JD" size="md" /&gt;</code></pre>
+  </div>
+  <!-- Section 3: Icon avatars -->
+  <div class="av-section">
+    <h2 class="av-section__title">Icon</h2>
+    <p class="av-section__desc">
+      Set <code>icon</code> to a PrimeIcons class string to render an icon inside the avatar.
+    </p>
+    <div class="av-row">
+      <ui-lib-avatar icon="pi pi-user" size="sm" />
+      <ui-lib-avatar icon="pi pi-user" size="md" />
+      <ui-lib-avatar icon="pi pi-user" size="lg" />
+    </div>
+    <pre class="av-code"><code>&lt;ui-lib-avatar icon="pi pi-user" size="md" /&gt;</code></pre>
+  </div>
+  <!-- Section 4: Shapes -->
+  <div class="av-section">
+    <h2 class="av-section__title">Shapes</h2>
+    <p class="av-section__desc">
+      Use <code>shape="circle"</code> (default) or <code>shape="square"</code>.
+    </p>
+    <div class="av-row">
+      <div class="av-shape-group">
+        <ui-lib-avatar label="CI" shape="circle" />
+        <span class="av-shape-label">circle</span>
+      </div>
+      <div class="av-shape-group">
+        <ui-lib-avatar label="SQ" shape="square" />
+        <span class="av-shape-label">square</span>
+      </div>
+      <div class="av-shape-group">
+        <ui-lib-avatar
+          image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+          imageAlt="Amy"
+          shape="circle"
+        />
+        <span class="av-shape-label">circle</span>
+      </div>
+      <div class="av-shape-group">
+        <ui-lib-avatar
+          image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+          imageAlt="Amy"
+          shape="square"
+        />
+        <span class="av-shape-label">square</span>
+      </div>
+    </div>
+    <pre class="av-code"><code>&lt;ui-lib-avatar label="JD" shape="square" /&gt;</code></pre>
+  </div>
+  <!-- Section 5: Variants -->
+  <div class="av-section">
+    <h2 class="av-section__title">Variants</h2>
+    <p class="av-section__desc">
+      Three visual variants match the global theme: <code>material</code>, <code>bootstrap</code>,
+      and <code>minimal</code>.
+    </p>
+    <div class="av-row">
+      @for (variant of variants; track variant) {
+        <div class="av-shape-group">
+          <ui-lib-avatar label="VT" [variant]="variant" />
+          <span class="av-shape-label">{{ variant }}</span>
+        </div>
+      }
+    </div>
+    <pre class="av-code"><code>&lt;ui-lib-avatar label="VT" variant="material" /&gt;</code></pre>
+  </div>
+  <!-- Section 6: AvatarGroup -->
+  <div class="av-section">
+    <h2 class="av-section__title">Avatar Group</h2>
+    <p class="av-section__desc">
+      Wrap multiple avatars in <code>ui-lib-avatar-group</code> to stack them with overlap.
+      Set <code>ariaLabel</code> on the group for accessibility.
+    </p>
+    <div class="av-row">
+      <ui-lib-avatar-group ariaLabel="Project team">
+        <ui-lib-avatar
+          image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+          imageAlt="Amy Elsner"
+        />
+        <ui-lib-avatar
+          image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
+          imageAlt="Asiya Javayant"
+        />
+        <ui-lib-avatar
+          image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
+          imageAlt="Onyama Limba"
+        />
+        <ui-lib-avatar label="+5" variant="minimal" />
+      </ui-lib-avatar-group>
+    </div>
+    <pre class="av-code"><code>&lt;ui-lib-avatar-group ariaLabel="Project team"&gt;
+  &lt;ui-lib-avatar image="/amy.jpg" imageAlt="Amy" /&gt;
+  &lt;ui-lib-avatar image="/bob.jpg" imageAlt="Bob" /&gt;
+  &lt;ui-lib-avatar label="+3" /&gt;
+&lt;/ui-lib-avatar-group&gt;</code></pre>
+  </div>
+  <!-- Section 7: Playground -->
+  <div class="av-section">
+    <h2 class="av-section__title">Playground</h2>
+    <p class="av-section__desc">Combine options to preview the result live.</p>
+    <div class="av-playground">
+      <div class="av-playground__preview">
+        <ui-lib-avatar
+          label="PG"
+          [size]="playgroundSize()"
+          [shape]="playgroundShape()"
+          [variant]="playgroundVariant()"
+        />
+      </div>
+      <div class="av-playground__controls">
+        <div class="av-control-group">
+          <label class="av-control-label">Size</label>
+          <div class="av-btn-row">
+            @for (size of sizes; track size) {
+              <button
+                class="av-btn"
+                [class.av-btn--active]="playgroundSize() === size"
+                type="button"
+                (click)="setSize(size)"
+              >{{ size }}</button>
+            }
+          </div>
+        </div>
+        <div class="av-control-group">
+          <label class="av-control-label">Shape</label>
+          <div class="av-btn-row">
+            @for (shape of shapes; track shape) {
+              <button
+                class="av-btn"
+                [class.av-btn--active]="playgroundShape() === shape"
+                type="button"
+                (click)="setShape(shape)"
+              >{{ shape }}</button>
+            }
+          </div>
+        </div>
+        <div class="av-control-group">
+          <label class="av-control-label">Variant</label>
+          <div class="av-btn-row">
+            @for (variant of variants; track variant) {
+              <button
+                class="av-btn"
+                [class.av-btn--active]="playgroundVariant() === variant"
+                type="button"
+                (click)="setVariant(variant)"
+              >{{ variant }}</button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Section 8: API Reference -->
+  <div class="av-section">
+    <h2 class="av-section__title">API Reference</h2>
+    <h3 class="av-subsection">Avatar Inputs</h3>
+    <table class="av-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>image</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>URL of the image to display.</td>
+        </tr>
+        <tr>
+          <td><code>imageAlt</code></td>
+          <td><code>string</code></td>
+          <td><code>'Avatar'</code></td>
+          <td>Alt text for the image (used as aria-label).</td>
+        </tr>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Initials or short text shown when no image is set.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>CSS class string for an icon (e.g. <code>pi pi-user</code>).</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size of the avatar.</td>
+        </tr>
+        <tr>
+          <td><code>shape</code></td>
+          <td><code>'circle' | 'square'</code></td>
+          <td><code>'circle'</code></td>
+          <td>Shape of the avatar.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Visual variant. Inherits global theme when null.</td>
+        </tr>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Overrides the auto-resolved accessible label.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS classes to append to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 class="av-subsection">AvatarGroup Inputs</h3>
+    <table class="av-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Accessible label for the group (role="group").</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
-
