@@ -31,10 +31,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1
       - name: Unit tests
-        run: npm run ng -- test --project ui-lib-custom --watch=false --browsers=ChromeHeadless
+        run: npm test
 
   lint:
     runs-on: ubuntu-latest
@@ -59,6 +57,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Install compodoc (required by Storybook Angular)
+        run: npm install --no-save @compodoc/compodoc
       - name: Build Storybook
         run: npm run build-storybook
 

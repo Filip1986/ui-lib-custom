@@ -1,0 +1,11 @@
+<ng-content />
+<div
+  class="ui-lib-block-ui__mask"
+  [class.ui-lib-block-ui__mask--visible]="blocked()"
+  [style.z-index]="maskZIndex()"
+  [attr.aria-hidden]="!blocked()"
+  role="status"
+  aria-live="polite"
+>
+  <ng-content select="[blockTemplate]" />
+</div>

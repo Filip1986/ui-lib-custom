@@ -31,6 +31,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Bind` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `BlockUI` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -84,6 +85,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-04 [BlockUI component]
+Changed:
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.types.ts (new)
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts (new component)
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html (new template)
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss (new styles)
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts (18 unit tests)
+  - projects/ui-lib-custom/src/lib/block-ui/index.ts (barrel)
+  - projects/ui-lib-custom/block-ui/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/block-ui/package.json (secondary entry point)
+  - projects/ui-lib-custom/block-ui/public-api.ts (secondary entry point)
+  - projects/ui-lib-custom/package.json (block-ui added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (block-ui import test added)
+  - projects/demo/src/app/pages/block-ui/block-ui-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/block-ui/block-ui-demo.component.html (full demo — hero + 4 sections + API table)
+  - projects/demo/src/app/pages/block-ui/block-ui-demo.component.scss (demo styles)
+  - jest.config.ts (fixed Windows-incompatible modulePathIgnorePatterns with separator-agnostic regexes)
+  - AI_AGENT_CONTEXT.md (updated)
+State: BlockUI component fully complete. PrimeNG-inspired component that overlays a semi-transparent
+  mask over wrapped content to block interaction. Uses model() for two-way blocked binding.
+  Always renders mask div (CSS-toggled visibility) so ng-content projection into blockTemplate slot works.
+  Three variants: material (blur backdrop), bootstrap (darker), minimal (lightest blur).
+  Signal inputs/model, ViewEncapsulation.None + OnPush + standalone. 18 unit tests using WritableSignal
+  test host (required for zoneless OnPush). Secondary entry point wired and built.
+  Also fixed pre-existing jest.config.ts Windows path-separator bug in modulePathIgnorePatterns —
+  all patterns now use [/\\\\] separator-agnostic regex instead of hard-coded forward slashes.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/block-ui/ projects/demo/src/app/pages/block-ui/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/block-ui Built, zero errors,
+  npx.cmd jest --testPathPatterns=block-ui --no-coverage (18/18 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (68/68 PASS).
+Terminal notes: Test host must use WritableSignal (not plain properties) for signal model() inputs
+  to toggle reactively with zoneless OnPush. modulePathIgnorePatterns uses <rootDir>-prefixed paths
+  that break on Windows because <rootDir> resolves with backslashes while the rest uses forward slashes.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-02 [Bind directive]
 Changed:

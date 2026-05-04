@@ -1,0 +1,72 @@
+ui-lib-block-ui {
+  /* Mask background tokens */
+  --uilib-block-ui-mask-bg: rgba(0, 0, 0, 0.4);
+  --uilib-block-ui-mask-bg-material: rgba(0, 0, 0, 0.3);
+  --uilib-block-ui-mask-bg-bootstrap: rgba(0, 0, 0, 0.5);
+  --uilib-block-ui-mask-bg-minimal: rgba(0, 0, 0, 0.15);
+  /* Animation */
+  --uilib-block-ui-transition-duration: 0.2s;
+  --uilib-block-ui-transition: opacity var(--uilib-block-ui-transition-duration) ease;
+  /* Z-index */
+  --uilib-block-ui-z-index: var(--uilib-z-overlay, 100);
+
+  display: block;
+  position: relative;
+}
+
+.ui-lib-block-ui {
+  display: block;
+  position: relative;
+}
+
+/* ── Mask ───────────────────────────────────────────────────────── */
+.ui-lib-block-ui__mask {
+  position: absolute;
+  inset: 0;
+  background-color: var(--uilib-block-ui-mask-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--uilib-block-ui-transition);
+  z-index: var(--uilib-block-ui-z-index);
+  border-radius: inherit;
+}
+
+.ui-lib-block-ui__mask--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Variant: material ──────────────────────────────────────────── */
+.ui-lib-block-ui--variant-material .ui-lib-block-ui__mask {
+  --uilib-block-ui-mask-bg: var(--uilib-block-ui-mask-bg-material);
+  backdrop-filter: blur(2px);
+}
+
+/* ── Variant: bootstrap ─────────────────────────────────────────── */
+.ui-lib-block-ui--variant-bootstrap .ui-lib-block-ui__mask {
+  --uilib-block-ui-mask-bg: var(--uilib-block-ui-mask-bg-bootstrap);
+}
+
+/* ── Variant: minimal ───────────────────────────────────────────── */
+.ui-lib-block-ui--variant-minimal .ui-lib-block-ui__mask {
+  --uilib-block-ui-mask-bg: var(--uilib-block-ui-mask-bg-minimal);
+  backdrop-filter: blur(1px);
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────── */
+[data-theme='dark'] {
+  .ui-lib-block-ui--variant-material .ui-lib-block-ui__mask {
+    --uilib-block-ui-mask-bg-material: rgba(0, 0, 0, 0.5);
+  }
+
+  .ui-lib-block-ui--variant-bootstrap .ui-lib-block-ui__mask {
+    --uilib-block-ui-mask-bg-bootstrap: rgba(0, 0, 0, 0.65);
+  }
+
+  .ui-lib-block-ui--variant-minimal .ui-lib-block-ui__mask {
+    --uilib-block-ui-mask-bg-minimal: rgba(0, 0, 0, 0.3);
+  }
+}

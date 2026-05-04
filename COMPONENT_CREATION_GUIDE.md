@@ -173,6 +173,25 @@ Do not skip this. Research the correct ARIA pattern before implementation; do no
 - Test host components must use `provideZonelessChangeDetection()` and `ChangeDetectionStrategy.OnPush`
 - Reference existing test files for patterns — do **not** reference `AI_TEST_GUARD.md` (it does not exist); use `jest.config.ts` and existing `.spec.ts` files as the source of truth
 
+**Test host properties must be `WritableSignal`, not plain properties.**
+With zoneless OnPush, setting a plain property on the test host and calling `fixture.detectChanges()` does *not* propagate the change to a child component's `input()` or `model()` signal. Always declare test host properties as `WritableSignal` and update them via `.set()`:
+
+```typescript
+// ❌ Does not work with zoneless OnPush — signal input never updates
+class TestHostComponent {
+  public blocked: boolean = false;
+}
+// fixture.componentInstance.blocked = true; ← change is invisible to the child
+
+// ✅ Correct — WritableSignal drives the template binding reactively
+class TestHostComponent {
+  public readonly blocked: WritableSignal<boolean> = signal<boolean>(false);
+}
+// fixture.componentInstance.blocked.set(true); ← change propagates correctly
+```
+
+Pass initial values via the signal in a typed `BootstrapOptions` interface rather than using `Object.assign(fixture.componentInstance, initial)`, which silently breaks once properties become signals.
+
 ### What to test
 
 - **Rendering:** default state, each variant, each size

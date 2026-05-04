@@ -102,6 +102,7 @@ This is mandatory. It closes the loop between sessions and eliminates re-explana
 - Barrel exports stay tree-shakable; keep `sideEffects: false` and avoid global side effects.
 - Templates should use Angular 21 block syntax (`@if/@else`, `@for` with `track`, `@switch`) for consistency in all new or touched code. Migration rationale is documented in `Historical Migration Notes`.
 - **HTML Special Characters**: Always escape special characters in templates that could be interpreted by Angular. Use `&#123;` for `{` and `&#125;` for `}` when displaying literal braces (e.g., in code examples or documentation). Alternatively, use `{{ '{' }}` and `{{ '}' }}` for interpolation-safe output.
+- **`ng-content` inside `@if` does not work for conditional slots.** Angular resolves content projection statically — the projected nodes are always instantiated by the parent, regardless of whether the `<ng-content>` tag is inside a conditional block. If you need a projection slot that is only *visible* sometimes (e.g. an overlay mask with optional custom content), always render the container element and toggle its visibility via a CSS class (`opacity: 0; pointer-events: none` ↔ visible). See `BlockUI` (`ui-lib-custom/block-ui`) for the established pattern.
 - **Self-Closing Tags**: Use Angular's self-closing tag syntax whenever possible for cleaner, more concise templates. Prefer `<ui-lib-button />` over `<ui-lib-button></ui-lib-button>`. This applies to all components without projected content.
 - **Explicit Typing**: Always provide explicit type annotations for return types, variables, and function parameters. Never rely on type inference for public APIs, class members, or any non-trivial expressions.
 
@@ -362,6 +363,7 @@ All CSS custom properties MUST follow this pattern:
   - `npm run test:watch`
   - `npm run test:coverage`
 - Run `npm test` in CI; add visual/diff tests later for theme regressions.
+- **`jest.config.ts` `modulePathIgnorePatterns` must use separator-agnostic regexes on Windows.** Patterns prefixed with `<rootDir>/...` (forward slashes) fail to match on Windows because `<rootDir>` is replaced with a backslash path, producing mixed-separator strings that no regex matches. Always write path patterns using `[/\\\\]` to match either separator. The current `jest.config.ts` already does this; maintain the same style when adding new patterns.
 
 ## Packaging & Releases
 
