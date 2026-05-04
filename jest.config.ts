@@ -24,10 +24,12 @@ const config: Config = {
   modulePathIgnorePatterns: [
     '<rootDir>/tmp/',
     '<rootDir>/.angular/',
-    '<rootDir>/projects/ui-lib-custom/package.json',
-    '<rootDir>/projects/ui-lib-custom/tokens/package.json',
-    '<rootDir>/projects/ui-lib-custom/tokens/dist/',
-    '<rootDir>/dist/ui-lib-custom/package.json',
+    // Separator-agnostic patterns — required on Windows where paths use backslashes
+    // but <rootDir>-prefixed patterns resolve with mixed separators and fail to match.
+    'projects[/\\\\]ui-lib-custom[/\\\\]package\\.json$',
+    'ui-lib-custom[/\\\\]tokens[/\\\\]package\\.json',
+    'ui-lib-custom[/\\\\]tokens[/\\\\]dist',
+    '[/\\\\]dist[/\\\\]ui-lib-custom[/\\\\]package\\.json',
   ],
   watchPathIgnorePatterns: ['<rootDir>/tmp/', '<rootDir>/.angular/'],
   collectCoverageFrom: [

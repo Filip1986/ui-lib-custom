@@ -244,6 +244,10 @@
     "./bind": {
       "esm2022": "./esm2022/bind/index.mjs",
       "esm": "./esm2022/bind/index.mjs"
+    },
+    "./block-ui": {
+      "esm2022": "./esm2022/block-ui/index.mjs",
+      "esm": "./esm2022/block-ui/index.mjs"
     }
   },
   "typesVersions": {
@@ -397,6 +401,9 @@
       ],
       "bind": [
         "./bind/index.d.ts"
+      ],
+      "block-ui": [
+        "./block-ui/index.d.ts"
       ]
     }
   }

@@ -1,5 +1,192 @@
 <section class="block-ui-demo" data-testid="block-ui-demo">
-  <h1>BlockUI</h1>
-  <p>Coming soon.</p>
-</section>
 
+  <!-- Hero -->
+  <div class="bud-hero">
+    <h1 class="bud-hero__title">BlockUI</h1>
+    <p class="bud-hero__lead">
+      Overlay a mask over any section to prevent user interaction — useful for loading states,
+      disabled form sections, and confirmation flows. Wrap content in
+      <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[blocked]</code> to toggle the mask.
+    </p>
+    <div class="bud-hero__tags">
+      <span class="bud-tag">Misc</span>
+      <span class="bud-tag">Overlay</span>
+    </div>
+  </div>
+
+  <!-- Section 1: Basic usage -->
+  <div class="bud-section">
+    <h2 class="bud-section__title">Basic Usage</h2>
+    <p class="bud-section__desc">
+      Toggle <code>blocked</code> to overlay a semi-transparent mask on the wrapped content.
+      The content underneath remains in the DOM but pointer events are disabled.
+    </p>
+    <div class="bud-demo-card">
+      <ui-lib-button
+        label="Toggle Block"
+        (clicked)="toggleBasic()"
+      />
+      <div class="bud-spacer"></div>
+      <ui-lib-block-ui [blocked]="basicBlocked()" styleClass="bud-target">
+        <div class="bud-panel">
+          <h3>Panel Content</h3>
+          <p>This content is blocked when the mask is active. You cannot interact with the button below while blocked.</p>
+          <ui-lib-button label="Blocked Button" severity="secondary" />
+        </div>
+      </ui-lib-block-ui>
+    </div>
+    <pre class="bud-code"><code>&lt;ui-lib-block-ui [(blocked)]="isBlocked"&gt;
+  &lt;!-- your content --&gt;
+&lt;/ui-lib-block-ui&gt;</code></pre>
+  </div>
+
+  <!-- Section 2: Custom mask content -->
+  <div class="bud-section">
+    <h2 class="bud-section__title">Custom Mask Content</h2>
+    <p class="bud-section__desc">
+      Project content into the mask using the <code>blockTemplate</code> attribute selector.
+      This is ideal for spinners, progress indicators, or status messages.
+    </p>
+    <div class="bud-demo-card">
+      <ui-lib-button
+        label="Toggle Block"
+        (clicked)="toggleSpinner()"
+      />
+      <div class="bud-spacer"></div>
+      <ui-lib-block-ui [blocked]="spinnerBlocked()" styleClass="bud-target">
+        <div class="bud-panel">
+          <h3>Form Section</h3>
+          <p>Submitting this form will block the section while processing.</p>
+          <ui-lib-button label="Submit" severity="secondary" />
+        </div>
+        <div blockTemplate class="bud-spinner-content">
+          <div class="bud-spinner" role="img" aria-label="Loading"></div>
+          <span class="bud-spinner-label">Processing…</span>
+        </div>
+      </ui-lib-block-ui>
+    </div>
+    <pre class="bud-code"><code>&lt;ui-lib-block-ui [blocked]="isBlocked"&gt;
+  &lt;!-- protected content --&gt;
+  &lt;div blockTemplate&gt;
+    &lt;!-- custom mask content, e.g. a spinner --&gt;
+  &lt;/div&gt;
+&lt;/ui-lib-block-ui&gt;</code></pre>
+  </div>
+
+  <!-- Section 3: Variants -->
+  <div class="bud-section">
+    <h2 class="bud-section__title">Variants</h2>
+    <p class="bud-section__desc">
+      Three visual variants adjust the mask opacity and backdrop treatment to match your design system.
+    </p>
+    <div class="bud-variant-grid">
+
+      <!-- material -->
+      <div class="bud-variant-cell">
+        <span class="bud-variant-label">material</span>
+        <ui-lib-button size="sm" label="Toggle" (clicked)="toggleMaterial()" />
+        <ui-lib-block-ui
+          variant="material"
+          [blocked]="materialBlocked()"
+          styleClass="bud-target bud-target--sm"
+        >
+          <div class="bud-mini-panel">Material-style content</div>
+          <span blockTemplate class="bud-mask-label">Blocked</span>
+        </ui-lib-block-ui>
+      </div>
+
+      <!-- bootstrap -->
+      <div class="bud-variant-cell">
+        <span class="bud-variant-label">bootstrap</span>
+        <ui-lib-button size="sm" label="Toggle" (clicked)="toggleBootstrap()" />
+        <ui-lib-block-ui
+          variant="bootstrap"
+          [blocked]="bootstrapBlocked()"
+          styleClass="bud-target bud-target--sm"
+        >
+          <div class="bud-mini-panel">Bootstrap-style content</div>
+          <span blockTemplate class="bud-mask-label">Blocked</span>
+        </ui-lib-block-ui>
+      </div>
+
+      <!-- minimal -->
+      <div class="bud-variant-cell">
+        <span class="bud-variant-label">minimal</span>
+        <ui-lib-button size="sm" label="Toggle" (clicked)="toggleMinimal()" />
+        <ui-lib-block-ui
+          variant="minimal"
+          [blocked]="minimalBlocked()"
+          styleClass="bud-target bud-target--sm"
+        >
+          <div class="bud-mini-panel">Minimal-style content</div>
+          <span blockTemplate class="bud-mask-label">Blocked</span>
+        </ui-lib-block-ui>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 4: API Reference -->
+  <div class="bud-section">
+    <h2 class="bud-section__title">API Reference</h2>
+    <div class="bud-api-table-wrap">
+      <table class="bud-api-table">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>blocked</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Whether the content is blocked. Supports two-way binding via <code>[(blocked)]</code>.</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+            <td><code>null</code></td>
+            <td>Visual variant. Inherits from <code>ThemeConfigService</code> when not set.</td>
+          </tr>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Additional CSS classes applied to the host element.</td>
+          </tr>
+          <tr>
+            <td><code>baseZIndex</code></td>
+            <td><code>number</code></td>
+            <td><code>0</code></td>
+            <td>Base z-index for the mask layer. Uses the CSS variable default when 0.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bud-api-table-wrap">
+      <table class="bud-api-table">
+        <thead>
+          <tr>
+            <th>Content Slot</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>default</code></td>
+            <td>The content to be protected by the block mask.</td>
+          </tr>
+          <tr>
+            <td><code>blockTemplate</code></td>
+            <td>Content projected into the mask overlay (e.g. a spinner or message).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
