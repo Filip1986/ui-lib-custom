@@ -22,16 +22,13 @@
       The content underneath remains in the DOM but pointer events are disabled.
     </p>
     <div class="bud-demo-card">
-      <ui-lib-button
-        label="Toggle Block"
-        (clicked)="toggleBasic()"
-      />
+      <ui-lib-button (click)="toggleBasic()">Toggle Block</ui-lib-button>
       <div class="bud-spacer"></div>
       <ui-lib-block-ui [blocked]="basicBlocked()" styleClass="bud-target">
         <div class="bud-panel">
           <h3>Panel Content</h3>
           <p>This content is blocked when the mask is active. You cannot interact with the button below while blocked.</p>
-          <ui-lib-button label="Blocked Button" severity="secondary" />
+          <ui-lib-button severity="secondary">Blocked Button</ui-lib-button>
         </div>
       </ui-lib-block-ui>
     </div>
@@ -48,16 +45,13 @@
       This is ideal for spinners, progress indicators, or status messages.
     </p>
     <div class="bud-demo-card">
-      <ui-lib-button
-        label="Toggle Block"
-        (clicked)="toggleSpinner()"
-      />
+      <ui-lib-button (click)="toggleSpinner()">Toggle Block</ui-lib-button>
       <div class="bud-spacer"></div>
       <ui-lib-block-ui [blocked]="spinnerBlocked()" styleClass="bud-target">
         <div class="bud-panel">
           <h3>Form Section</h3>
           <p>Submitting this form will block the section while processing.</p>
-          <ui-lib-button label="Submit" severity="secondary" />
+          <ui-lib-button severity="secondary">Submit</ui-lib-button>
         </div>
         <div blockTemplate class="bud-spinner-content">
           <div class="bud-spinner" role="img" aria-label="Loading"></div>
@@ -84,7 +78,7 @@
       <!-- material -->
       <div class="bud-variant-cell">
         <span class="bud-variant-label">material</span>
-        <ui-lib-button size="sm" label="Toggle" (clicked)="toggleMaterial()" />
+        <ui-lib-button size="sm" (click)="toggleMaterial()">Toggle</ui-lib-button>
         <ui-lib-block-ui
           variant="material"
           [blocked]="materialBlocked()"
@@ -98,7 +92,7 @@
       <!-- bootstrap -->
       <div class="bud-variant-cell">
         <span class="bud-variant-label">bootstrap</span>
-        <ui-lib-button size="sm" label="Toggle" (clicked)="toggleBootstrap()" />
+        <ui-lib-button size="sm" (click)="toggleBootstrap()">Toggle</ui-lib-button>
         <ui-lib-block-ui
           variant="bootstrap"
           [blocked]="bootstrapBlocked()"
@@ -112,7 +106,7 @@
       <!-- minimal -->
       <div class="bud-variant-cell">
         <span class="bud-variant-label">minimal</span>
-        <ui-lib-button size="sm" label="Toggle" (clicked)="toggleMinimal()" />
+        <ui-lib-button size="sm" (click)="toggleMinimal()">Toggle</ui-lib-button>
         <ui-lib-block-ui
           variant="minimal"
           [blocked]="minimalBlocked()"
