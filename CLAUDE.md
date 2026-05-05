@@ -27,6 +27,8 @@ At the start of every session, read these files in order:
 
 Do not skip step 1. It tells you exactly what is in-flight and what is next.
 
+**Before using any `ui-lib-*` component in a demo or other component, read its `README.md` at `projects/ui-lib-custom/src/lib/<component>/README.md`.** This is the authoritative, co-located API contract — check it for the exact inputs, outputs, and content projection pattern before writing any template code. Never assume PrimeNG conventions apply.
+
 ---
 
 ## Non-Negotiable Conventions
@@ -136,7 +138,8 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 7. Add entry-point import test to `projects/ui-lib-custom/test/entry-points.spec.ts`.
 8. Update primary `public-api.ts` only if explicit primary-barrel backward compatibility is intended.
 9. After every prompt: **run ESLint first, then build** — `npx eslint projects/ui-lib-custom/src/lib/<component>/ --max-warnings 0`, then `ng build ui-lib-custom`, then update `AI_AGENT_CONTEXT.md`.
-10. Final verification: **lint** + build + tests + demo + entry-point spec all green.
+10. Write `projects/ui-lib-custom/src/lib/<component>/README.md` — document selector, package path, content projection, all inputs/outputs, and a minimal usage example. This is mandatory before marking the component complete.
+11. Final verification: **lint** + build + tests + demo + entry-point spec all green.
 
 ### Per-component final checklist (before marking complete)
 
@@ -153,6 +156,7 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 - Unit tests with `provideZonelessChangeDetection()` pass
 - A11y: ARIA roles, keyboard nav, focus management
 - Demo page created and route verified
+- `README.md` written in `projects/ui-lib-custom/src/lib/<component>/` with accurate inputs, outputs, projection, and usage example
 - `AI_AGENT_CONTEXT.md` inventory updated
 - `ng build ui-lib-custom` zero warnings
 
