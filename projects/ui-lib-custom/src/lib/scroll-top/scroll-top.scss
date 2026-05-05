@@ -1,0 +1,165 @@
+// ------------------------------------------------------------------
+// ScrollTop component
+// Pattern: --uilib-scroll-top-{property}[-{variant}][-{state}]
+// ------------------------------------------------------------------
+
+// ---- Base tokens (default / material) ----------------------------
+ui-lib-scroll-top {
+  --uilib-scroll-top-size: 3rem;
+  --uilib-scroll-top-bg: var(--uilib-color-primary, #6366f1);
+  --uilib-scroll-top-color: #ffffff;
+  --uilib-scroll-top-border: none;
+  --uilib-scroll-top-border-radius: 50%;
+  --uilib-scroll-top-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --uilib-scroll-top-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.28);
+  --uilib-scroll-top-icon-size: 1.25rem;
+  --uilib-scroll-top-bottom: 2rem;
+  --uilib-scroll-top-right: 2rem;
+  --uilib-scroll-top-z-index: var(--uilib-z-overlay, 1000);
+  --uilib-scroll-top-transition: opacity 0.3s ease, transform 0.3s ease;
+  --uilib-scroll-top-bg-hover: var(--uilib-color-primary-dark, #4f46e5);
+
+  // sm
+  --uilib-scroll-top-size-sm: 2.25rem;
+  --uilib-scroll-top-icon-size-sm: 1rem;
+
+  // lg
+  --uilib-scroll-top-size-lg: 3.75rem;
+  --uilib-scroll-top-icon-size-lg: 1.5rem;
+}
+
+// ---- Host element ------------------------------------------------
+.ui-lib-scroll-top {
+  // Default: fixed to the viewport (window target)
+  position: fixed;
+  bottom: var(--uilib-scroll-top-bottom);
+  right: var(--uilib-scroll-top-right);
+  z-index: var(--uilib-scroll-top-z-index);
+
+  // Hidden by default — opacity + transform for smooth reveal
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem);
+  transition: var(--uilib-scroll-top-transition);
+
+  // Prevent the block-level host from interfering with surrounding layout
+  display: block;
+  width: var(--uilib-scroll-top-size);
+  height: var(--uilib-scroll-top-size);
+
+  // ---- Visible state -----------------------------------------------
+  &--visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  // ---- Target: parent (absolute inside scrollable container) -------
+  &--target-parent {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  // ---- Button (the visual, clickable element) ----------------------
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: var(--uilib-scroll-top-border);
+    border-radius: var(--uilib-scroll-top-border-radius);
+    background: var(--uilib-scroll-top-bg);
+    color: var(--uilib-scroll-top-color);
+    box-shadow: var(--uilib-scroll-top-shadow);
+    cursor: pointer;
+    font-size: var(--uilib-scroll-top-icon-size);
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.15s ease;
+    outline: none;
+
+    &:hover {
+      background: var(--uilib-scroll-top-bg-hover);
+      box-shadow: var(--uilib-scroll-top-shadow-hover);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--uilib-color-primary, #6366f1);
+      outline-offset: 3px;
+    }
+
+    &:active {
+      transform: scale(0.94);
+    }
+
+    span {
+      pointer-events: none;
+      line-height: 1;
+    }
+  }
+
+  // ---- Sizes -------------------------------------------------------
+  &--size-sm {
+    width: var(--uilib-scroll-top-size-sm);
+    height: var(--uilib-scroll-top-size-sm);
+
+    .ui-lib-scroll-top__button {
+      font-size: var(--uilib-scroll-top-icon-size-sm);
+    }
+  }
+
+  &--size-lg {
+    width: var(--uilib-scroll-top-size-lg);
+    height: var(--uilib-scroll-top-size-lg);
+
+    .ui-lib-scroll-top__button {
+      font-size: var(--uilib-scroll-top-icon-size-lg);
+    }
+  }
+
+  // ---- Variant: material -------------------------------------------
+  &--variant-material {
+    --uilib-scroll-top-bg: var(--uilib-color-primary, #6366f1);
+    --uilib-scroll-top-bg-hover: var(--uilib-color-primary-dark, #4f46e5);
+    --uilib-scroll-top-color: #ffffff;
+    --uilib-scroll-top-border: none;
+    --uilib-scroll-top-border-radius: 50%;
+    --uilib-scroll-top-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    --uilib-scroll-top-shadow-hover: 0 6px 18px rgba(99, 102, 241, 0.45);
+  }
+
+  // ---- Variant: bootstrap ------------------------------------------
+  &--variant-bootstrap {
+    --uilib-scroll-top-bg: var(--uilib-color-primary, #0d6efd);
+    --uilib-scroll-top-bg-hover: #0b5ed7;
+    --uilib-scroll-top-color: #ffffff;
+    --uilib-scroll-top-border: 1px solid transparent;
+    --uilib-scroll-top-border-radius: var(--uilib-radius-sm, 0.375rem);
+    --uilib-scroll-top-shadow: 0 2px 6px rgba(13, 110, 253, 0.25);
+    --uilib-scroll-top-shadow-hover: 0 4px 10px rgba(13, 110, 253, 0.35);
+  }
+
+  // ---- Variant: minimal --------------------------------------------
+  &--variant-minimal {
+    --uilib-scroll-top-bg: var(--uilib-surface-100, #f3f4f6);
+    --uilib-scroll-top-bg-hover: var(--uilib-surface-200, #e5e7eb);
+    --uilib-scroll-top-color: var(--uilib-color-text, #374151);
+    --uilib-scroll-top-border: 1px solid var(--uilib-surface-300, #d1d5db);
+    --uilib-scroll-top-border-radius: var(--uilib-radius-sm, 0.375rem);
+    --uilib-scroll-top-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    --uilib-scroll-top-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  // Dark mode adjustments for minimal variant
+  [data-theme='dark'] &--variant-minimal,
+  &--variant-minimal[data-theme='dark'] {
+    --uilib-scroll-top-bg: var(--uilib-surface-800, #1f2937);
+    --uilib-scroll-top-bg-hover: var(--uilib-surface-700, #374151);
+    --uilib-scroll-top-color: var(--uilib-color-text, #f9fafb);
+    --uilib-scroll-top-border: 1px solid var(--uilib-surface-600, #4b5563);
+  }
+}

@@ -280,6 +280,10 @@
     "./ripple": {
       "esm2022": "./esm2022/ripple/index.mjs",
       "esm": "./esm2022/ripple/index.mjs"
+    },
+    "./scroll-top": {
+      "esm2022": "./esm2022/scroll-top/index.mjs",
+      "esm": "./esm2022/scroll-top/index.mjs"
     }
   },
   "typesVersions": {
@@ -460,6 +464,9 @@
       ],
       "ripple": [
         "./ripple/index.d.ts"
+      ],
+      "scroll-top": [
+        "./scroll-top/index.d.ts"
       ]
     }
   }

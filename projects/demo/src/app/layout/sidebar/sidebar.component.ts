@@ -522,7 +522,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/scroll-top',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Skeleton',

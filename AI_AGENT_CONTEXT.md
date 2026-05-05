@@ -27,6 +27,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ### Component/Docs Delta (Active Only)
 
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `FocusTrap` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Inplace` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -93,6 +94,48 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [ScrollTop component]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.types.ts (new — ScrollTopVariant/Size/Target/Behavior types)
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts (new component)
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html (new template — button + icon span)
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss (new — 3 variants + 3 sizes + window/parent positioning + visibility transition)
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts (19 unit tests)
+  - projects/ui-lib-custom/src/lib/scroll-top/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/scroll-top/README.md (API docs)
+  - projects/ui-lib-custom/scroll-top/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/scroll-top/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (scroll-top added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (scroll-top import test added)
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html (hero + 7 sections + API table)
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ScrollTop entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: ScrollTop component fully complete. PrimeNG-inspired floating "back to top" button.
+  Selector: ui-lib-scroll-top. Inputs: threshold (number, 400px), target ('window'|'parent'),
+  icon (string, 'pi pi-arrow-up'), behavior ('smooth'|'auto'), buttonAriaLabel (string),
+  size (sm/md/lg), variant (material/bootstrap/minimal|null), styleClass (string|null).
+  Public writable signal: isVisible (WritableSignal<boolean>).
+  target='window': button is position:fixed, responds to window scroll events.
+  target='parent': button is position:absolute inside parent, responds to parent scroll events.
+  Visibility controlled via --visible class on host (opacity + transform CSS transition for smooth reveal).
+  Scroll listener registered runOutsideAngular; signal write triggers OnPush CD automatically.
+  SSR safe: uses PLATFORM_ID + isPlatformBrowser. DestroyRef tears down listener on destroy.
+  Three variants: material (circular pill + primary colour shadow), bootstrap (square corners + blue shadow),
+  minimal (muted surface + border). Button focus-visible outline, active scale(0.94) press feedback.
+  Signal inputs, ViewEncapsulation.None + OnPush + standalone. 19 unit tests passing.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/scroll-top/ projects/demo/src/app/pages/scroll-top/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/scroll-top Built, zero errors,
+  npx.cmd jest --testPathPatterns=scroll-top --no-coverage (19/19 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (77/77 PASS).
+Terminal notes:
+  Object.defineProperty(window, 'scrollY', { configurable: true, get: () => mockScrollY }) works
+  reliably in JSDOM for mocking the scroll position. Restore with original descriptor in afterEach.
+  Signal writes from runOutsideAngular context correctly trigger OnPush change detection in zoneless Jest tests.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [Ripple directive]
 Changed:
