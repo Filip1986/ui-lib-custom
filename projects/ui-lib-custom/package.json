@@ -276,6 +276,10 @@
     "./progress-spinner": {
       "esm2022": "./esm2022/progress-spinner/index.mjs",
       "esm": "./esm2022/progress-spinner/index.mjs"
+    },
+    "./ripple": {
+      "esm2022": "./esm2022/ripple/index.mjs",
+      "esm": "./esm2022/ripple/index.mjs"
     }
   },
   "typesVersions": {
@@ -453,6 +457,9 @@
       ],
       "progress-spinner": [
         "./progress-spinner/index.d.ts"
+      ],
+      "ripple": [
+        "./ripple/index.d.ts"
       ]
     }
   }

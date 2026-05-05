@@ -516,7 +516,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/ripple',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'ScrollTop',

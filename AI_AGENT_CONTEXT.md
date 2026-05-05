@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `FocusTrap` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Inplace` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -92,6 +93,49 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [Ripple directive]
+Changed:
+  - projects/ui-lib-custom/src/lib/ripple/ripple.ts (new directive)
+  - projects/ui-lib-custom/src/lib/ripple/ripple.scss (new — host + wave keyframe animation + CSS variables)
+  - projects/ui-lib-custom/src/lib/ripple/ripple.spec.ts (17 unit tests)
+  - projects/ui-lib-custom/src/lib/ripple/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/ripple/README.md (API docs)
+  - projects/ui-lib-custom/ripple/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/ripple/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (ripple added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (ripple import test added)
+  - projects/demo/src/app/pages/ripple/ripple-demo.component.ts (full demo — was placeholder)
+  - projects/demo/src/app/pages/ripple/ripple-demo.component.html (hero + 5 sections + API tables)
+  - projects/demo/src/app/pages/ripple/ripple-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Ripple entry)
+  - projects/demo/src/styles.scss (added @use for ripple.scss)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Ripple directive fully complete. PrimeNG-inspired ripple wave directive.
+  Selector [uiLibRipple]. Inputs: disabled (boolean, default false), rippleColor (string, inline
+  override for --uilib-ripple-color), rippleDuration (string, inline override for --uilib-ripple-duration).
+  On click, appends a .ui-lib-ripple-wave <span> sized to max(width, height) of host, positioned at the
+  pointer, animated via keyframes (scale 0→3 + opacity 0.7→0) then removed on animationend.
+  Host gets position:relative + overflow:hidden via .ui-lib-ripple class (applied via SCSS imported globally).
+  Click listener registered runOutsideAngular; disabled checked reactively in handler.
+  CSS vars: --uilib-ripple-color (rgba(255,255,255,0.35)), --uilib-ripple-duration (600ms), --uilib-ripple-easing.
+  Signal inputs, standalone directive. No ViewEncapsulation (directives don't support it).
+  Note: test host must use WritableSignal for reactive input updates in OnPush+zoneless tests.
+  JSDOM does not support CSS custom properties via style.setProperty/getPropertyValue — test signal
+  values directly via directive injector instead.
+  17 unit tests passing. 76/76 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/ripple/ projects/demo/src/app/pages/ripple/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/ripple Built, zero errors,
+  npx.cmd jest --testPathPatterns=ripple --no-coverage (17/17 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (76/76 PASS).
+Terminal notes:
+  1. With OnPush + zoneless, plain property mutations on host component don't trigger signal input updates.
+     Test hosts must use WritableSignal properties so signal.set() triggers reactive change propagation.
+  2. JSDOM does not support CSS custom property set/get via CSSStyleDeclaration.setProperty/getPropertyValue.
+     Test at the Angular signal level (directive.rippleColor()) rather than DOM side-effects.
+  3. Directive scss must be imported in demo/src/styles.scss (not via styleUrl — that's components only).
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [ProgressSpinner component]
 Changed:
