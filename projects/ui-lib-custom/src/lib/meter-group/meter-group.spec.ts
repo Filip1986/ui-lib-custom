@@ -115,16 +115,16 @@ describe('MeterGroup', (): void => {
 
   it('should set background-color on each segment', (): void => {
     const { fixture } = setup();
-    const segments: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
-    expect(segments[0].style.backgroundColor).toBeTruthy();
-    expect(segments[1].style.backgroundColor).toBeTruthy();
+    const [first, second]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.style.backgroundColor).toBeTruthy();
+    expect(second!.style.backgroundColor).toBeTruthy();
   });
 
   it('should set correct width as percentage for horizontal segments', (): void => {
     const { fixture } = setup();
-    const segments: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
-    expect(segments[0].style.width).toBe('20%');
-    expect(segments[1].style.width).toBe('30%');
+    const [first, second]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.style.width).toBe('20%');
+    expect(second!.style.width).toBe('30%');
   });
 
   it('should set role="meter" on each segment', (): void => {
@@ -137,16 +137,16 @@ describe('MeterGroup', (): void => {
 
   it('should set aria-valuenow/min/max on each segment', (): void => {
     const { fixture } = setup();
-    const segments: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
-    expect(segments[0].getAttribute('aria-valuenow')).toBe('20');
-    expect(segments[0].getAttribute('aria-valuemin')).toBe('0');
-    expect(segments[0].getAttribute('aria-valuemax')).toBe('100');
+    const [first]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.getAttribute('aria-valuenow')).toBe('20');
+    expect(first!.getAttribute('aria-valuemin')).toBe('0');
+    expect(first!.getAttribute('aria-valuemax')).toBe('100');
   });
 
   it('should set aria-label on each segment', (): void => {
     const { fixture } = setup();
-    const segments: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
-    expect(segments[0].getAttribute('aria-label')).toContain('Apps');
+    const [first]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.getAttribute('aria-label')).toContain('Apps');
   });
 
   it('should render legend labels when showLabels is true', (): void => {
@@ -166,9 +166,12 @@ describe('MeterGroup', (): void => {
 
   it('should show label text and value in legend', (): void => {
     const { fixture } = setup();
-    const labelTexts: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__label-text');
-    expect(labelTexts[0].textContent!.trim()).toBe('Apps');
-    expect(labelTexts[1].textContent!.trim()).toBe('Media');
+    const [firstLabel, secondLabel]: HTMLElement[] = queryAll(
+      fixture,
+      '.ui-lib-meter-group__label-text'
+    );
+    expect(firstLabel!.textContent!.trim()).toBe('Apps');
+    expect(secondLabel!.textContent!.trim()).toBe('Media');
   });
 
   it('should apply variant class when variant is set', async (): Promise<void> => {
@@ -203,8 +206,8 @@ describe('MeterGroup', (): void => {
     host.orientation.set('vertical');
     fixture.detectChanges();
     await fixture.whenStable();
-    const segments: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
-    expect(segments[0].style.height).toBe('20%');
+    const [first]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.style.height).toBe('20%');
   });
 
   it('should apply label-position class', (): void => {
@@ -236,8 +239,8 @@ describe('MeterGroup', (): void => {
     host.max.set(200);
     fixture.detectChanges();
     await fixture.whenStable();
-    const segments: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
-    expect(segments[0].style.width).toBe('10%');
+    const [first]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.style.width).toBe('10%');
   });
 
   it('should render no segments when values is empty', async (): Promise<void> => {
@@ -254,8 +257,8 @@ describe('MeterGroup', (): void => {
     host.values.set([{ label: 'Over', value: 150, color: '#f00' }]);
     fixture.detectChanges();
     await fixture.whenStable();
-    const segments: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
-    expect(segments[0].style.width).toBe('100%');
+    const [first]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.style.width).toBe('100%');
   });
 
   it('should show segment icon in legend when icon is set', async (): Promise<void> => {
