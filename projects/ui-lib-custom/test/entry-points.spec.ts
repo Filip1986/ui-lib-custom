@@ -73,6 +73,7 @@ import type * as UiLibFocusTrap from 'ui-lib-custom/focus-trap';
 import type * as UiLibFluid from 'ui-lib-custom/fluid';
 import type * as UiLibInplace from 'ui-lib-custom/inplace';
 import type * as UiLibMeterGroup from 'ui-lib-custom/meter-group';
+import type * as UiLibProgressBar from 'ui-lib-custom/progress-bar';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -522,5 +523,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from meter-group', async (): Promise<void> => {
     const mod: typeof UiLibMeterGroup = await import('ui-lib-custom/meter-group');
     expect(mod.MeterGroup).toBeDefined();
+  });
+
+  it('should import from progress-bar', async (): Promise<void> => {
+    const mod: typeof UiLibProgressBar = await import('ui-lib-custom/progress-bar');
+    expect(mod.ProgressBar).toBeDefined();
   });
 });

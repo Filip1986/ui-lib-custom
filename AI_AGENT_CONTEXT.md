@@ -92,6 +92,44 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-05 [ProgressBar component]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.types.ts (new — ProgressBarVariant, ProgressBarSize, ProgressBarMode types)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.ts (new component)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.html (new template — fill div + label, indeterminate via CSS animation)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.scss (new — 3 variants + 3 sizes + indeterminate keyframe + --uilib-progress-bar-* tokens)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.spec.ts (24 unit tests)
+  - projects/ui-lib-custom/src/lib/progress-bar/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/progress-bar/README.md (API docs)
+  - projects/ui-lib-custom/progress-bar/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/progress-bar/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (progress-bar added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (progress-bar import test added)
+  - projects/demo/src/app/pages/progress-bar/progress-bar-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/progress-bar/progress-bar-demo.component.html (hero + 8 sections + API table)
+  - projects/demo/src/app/pages/progress-bar/progress-bar-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ProgressBar entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: ProgressBar component fully complete. PrimeNG-inspired horizontal progress bar.
+  Inputs: value (0-100, clamped), mode (determinate/indeterminate), showValue, label,
+  size (sm/md/lg), variant (material/bootstrap/minimal), color, styleClass.
+  Determinate: fill width = clamped%, label shows percentage or custom text.
+  Indeterminate: CSS keyframe animation (uilib-progress-bar-indeterminate) oscillates the fill.
+  ARIA: role="progressbar" on host, aria-valuenow (determinate only), aria-valuemin/max,
+  aria-busy="true" + aria-label="Loading" (indeterminate only).
+  Three variants: material (pill/radius-full + inset shadow), bootstrap (radius-sm, square fill),
+  minimal (2px radius, flat track).
+  Signal inputs, ViewEncapsulation.None + OnPush + standalone.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/progress-bar/ projects/demo/src/app/pages/progress-bar/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/progress-bar Built, zero errors,
+  npx.cmd jest --testPathPatterns=progress-bar --no-coverage (24/24 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (75/75 PASS).
+Terminal notes: fixture.debugElement.query() is typed DebugElement (non-nullable) in Angular types
+  even though it returns null at runtime — cast to DebugElement | null to avoid no-unnecessary-condition
+  lint warning when doing a null check.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
+
 Date: 2026-05-05 [MeterGroup component]
 Changed:
   - projects/ui-lib-custom/src/lib/meter-group/meter-group.types.ts (new — MeterItem, MeterSegment, variant/size/orientation/labelPosition types)
