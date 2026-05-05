@@ -6,7 +6,7 @@ import {
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import type { WritableSignal, DebugElement } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -139,7 +139,7 @@ describe('Terminal', (): void => {
 
   it('should not render welcome message when empty', (): void => {
     const { fixture } = setup();
-    const welcome: HTMLElement | null = fixture.debugElement.query(
+    const welcome: DebugElement | null = fixture.debugElement.query(
       By.css('.ui-lib-terminal__welcome')
     );
     expect(welcome).toBeNull();
@@ -230,7 +230,7 @@ describe('Terminal', (): void => {
     service.submitCommand('date');
     fixture.detectChanges();
     await fixture.whenStable();
-    const response: HTMLElement | null = fixture.debugElement.query(
+    const response: DebugElement | null = fixture.debugElement.query(
       By.css('.ui-lib-terminal__response')
     );
     expect(response).toBeNull();

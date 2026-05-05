@@ -26,6 +26,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Divider` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
 - `Terminal` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Tag` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -562,6 +564,38 @@ Verification:
 Terminal notes: Test host must use WritableSignal (not plain properties) for signal model() inputs
   to toggle reactively with zoneless OnPush. modulePathIgnorePatterns uses <rootDir>-prefixed paths
   that break on Windows because <rootDir> resolves with backslashes while the rest uses forward slashes.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
+
+---
+
+Date: 2026-05-05
+Changed:
+  - projects/ui-lib-custom/src/lib/divider/divider.types.ts (new — DividerOrientation, DividerType, DividerAlign, DividerVariant)
+  - projects/ui-lib-custom/src/lib/divider/divider.ts (new — Divider component, signal inputs, ViewEncapsulation.None + OnPush + standalone)
+  - projects/ui-lib-custom/src/lib/divider/divider.html (new — template with content projection into .ui-lib-divider__content)
+  - projects/ui-lib-custom/src/lib/divider/divider.scss (new — horizontal/vertical/alignment/type/variant/dark-mode styles using CSS vars)
+  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts (new — 19 unit tests)
+  - projects/ui-lib-custom/src/lib/divider/index.ts (new — barrel)
+  - projects/ui-lib-custom/src/lib/divider/README.md (new — API contract)
+  - projects/ui-lib-custom/divider/ng-package.json (new — secondary entry point)
+  - projects/ui-lib-custom/divider/package.json (new — secondary entry point)
+  - projects/ui-lib-custom/package.json (divider added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (divider import test added)
+  - projects/demo/src/app/pages/divider/divider-demo.component.ts (full demo replacing placeholder)
+  - projects/demo/src/app/pages/divider/divider-demo.component.html (full demo — hero + 8 sections + playground + API table)
+  - projects/demo/src/app/pages/divider/divider-demo.component.scss (demo styles)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Divider component fully complete. PrimeNG-inspired separator with horizontal/vertical orientation,
+  solid/dashed/dotted line types, left/center/right/top/bottom content alignment, optional projected
+  content (label/icon) in the middle, three design variants (material/bootstrap/minimal), dark mode
+  adjustments, role="separator" + aria-orientation. Secondary entry point wired. 19/19 tests pass,
+  81/81 entry-points pass, library builds zero warnings.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/divider/ projects/demo/src/app/pages/divider/ --max-warnings 0 (CLEAN),
+  ng build ui-lib-custom — ui-lib-custom/divider Built, zero errors/warnings,
+  npx jest "divider.spec.ts" --no-coverage (19/19 PASS),
+  npx jest "entry-points.spec.ts" --no-coverage (81/81 PASS, divider test included).
+Terminal notes: No issues. All commands ran cleanly in PowerShell.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 

@@ -1,5 +1,316 @@
-<section class="divider-demo" data-testid="divider-demo">
-  <h1>Divider</h1>
-  <p>Coming soon.</p>
+<section class="demo-page" data-testid="divider-demo">
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">Divider</h1>
+    <p class="demo-hero__desc">
+      A visual separator that divides content horizontally or vertically.
+      Supports solid, dashed, and dotted lines, optional projected label content,
+      flexible alignment, and three design variants.
+    </p>
+    <div class="demo-hero__preview">
+      <p>Above the divider</p>
+      <ui-lib-divider />
+      <p>Below the divider</p>
+    </div>
+  </div>
+
+  <!-- Section 1: Basic -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__desc">
+      A plain horizontal divider with no content.
+    </p>
+    <p>Content above</p>
+    <ui-lib-divider />
+    <p>Content below</p>
+  </div>
+
+  <!-- Section 2: With Label -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">With Label</h2>
+    <p class="demo-section__desc">
+      Project text or other elements into the divider using content projection.
+    </p>
+    <p>Sign in with email</p>
+    <ui-lib-divider>OR</ui-lib-divider>
+    <p>Sign in with SSO</p>
+  </div>
+
+  <!-- Section 3: Alignment -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Alignment</h2>
+    <p class="demo-section__desc">
+      Use the <code>align</code> input to position the label at
+      <code>left</code>, <code>center</code> (default), or <code>right</code>.
+    </p>
+    @for (align of horizontalAligns; track align) {
+      <div class="demo-align-row">
+        <ui-lib-divider [align]="align">{{ align }}</ui-lib-divider>
+      </div>
+    }
+  </div>
+
+  <!-- Section 4: Line Types -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Line Types</h2>
+    <p class="demo-section__desc">
+      Three line styles are available via the <code>type</code> input:
+      <code>solid</code> (default), <code>dashed</code>, and <code>dotted</code>.
+    </p>
+    @for (type of types; track type) {
+      <div class="demo-type-row">
+        <ui-lib-divider [type]="type">{{ type }}</ui-lib-divider>
+      </div>
+    }
+  </div>
+
+  <!-- Section 5: Vertical -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Vertical</h2>
+    <p class="demo-section__desc">
+      Set <code>orientation="vertical"</code> to render a vertical separator.
+      Use inside a flex container; the divider stretches to fill the available height.
+    </p>
+    <div class="demo-vertical-row">
+      <div class="demo-vertical-panel">
+        <p>Left Panel</p>
+        <p>Some content here</p>
+      </div>
+      <ui-lib-divider orientation="vertical" />
+      <div class="demo-vertical-panel">
+        <p>Right Panel</p>
+        <p>More content here</p>
+      </div>
+    </div>
+    <div class="demo-vertical-row" style="margin-top: 1.5rem">
+      <div class="demo-vertical-panel">Panel A</div>
+      <ui-lib-divider orientation="vertical">OR</ui-lib-divider>
+      <div class="demo-vertical-panel">Panel B</div>
+    </div>
+  </div>
+
+  <!-- Section 6: Vertical Alignment -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Vertical Alignment</h2>
+    <p class="demo-section__desc">
+      For vertical dividers, use <code>align="top"</code>, <code>align="center"</code>,
+      or <code>align="bottom"</code>.
+    </p>
+    <div class="demo-vertical-row">
+      @for (align of verticalAligns; track align) {
+        <div class="demo-vertical-align-item">
+          <ui-lib-divider orientation="vertical" [align]="align">{{ align }}</ui-lib-divider>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Section 7: Design Variants -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__desc">
+      Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
+    </p>
+    @for (variant of variants; track variant) {
+      <div class="demo-variant-group">
+        <h3 class="demo-variant-group__label">{{ variant }}</h3>
+        <ui-lib-divider [variant]="variant">{{ variant }}</ui-lib-divider>
+        <ui-lib-divider [variant]="variant" type="dashed" />
+      </div>
+    }
+  </div>
+
+  <!-- Section 8: Interactive Playground -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Playground</h2>
+    <p class="demo-section__desc">Customise the divider using the controls below.</p>
+
+    <div class="demo-playground">
+      <div class="demo-playground__preview">
+        @if (playgroundOrientation() === 'horizontal') {
+          <div class="demo-playground__h-wrap">
+            <p>Content above</p>
+            @if (playgroundHasContent()) {
+              <ui-lib-divider
+                [orientation]="playgroundOrientation()"
+                [type]="playgroundType()"
+                [align]="playgroundAlign()"
+                [variant]="playgroundVariant()"
+              >Label</ui-lib-divider>
+            } @else {
+              <ui-lib-divider
+                [orientation]="playgroundOrientation()"
+                [type]="playgroundType()"
+                [align]="playgroundAlign()"
+                [variant]="playgroundVariant()"
+              />
+            }
+            <p>Content below</p>
+          </div>
+        } @else {
+          <div class="demo-playground__v-wrap">
+            <div class="demo-playground__v-panel">Left</div>
+            @if (playgroundHasContent()) {
+              <ui-lib-divider
+                [orientation]="playgroundOrientation()"
+                [type]="playgroundType()"
+                [align]="playgroundAlign()"
+                [variant]="playgroundVariant()"
+              >OR</ui-lib-divider>
+            } @else {
+              <ui-lib-divider
+                [orientation]="playgroundOrientation()"
+                [type]="playgroundType()"
+                [align]="playgroundAlign()"
+                [variant]="playgroundVariant()"
+              />
+            }
+            <div class="demo-playground__v-panel">Right</div>
+          </div>
+        }
+      </div>
+
+      <div class="demo-playground__controls">
+        <!-- Orientation -->
+        <div class="demo-control">
+          <span class="demo-control__label">Orientation</span>
+          <div class="demo-control__buttons">
+            <button
+              type="button"
+              class="demo-btn"
+              [class.demo-btn--active]="playgroundOrientation() === 'horizontal'"
+              (click)="setOrientation('horizontal')"
+            >horizontal</button>
+            <button
+              type="button"
+              class="demo-btn"
+              [class.demo-btn--active]="playgroundOrientation() === 'vertical'"
+              (click)="setOrientation('vertical')"
+            >vertical</button>
+          </div>
+        </div>
+
+        <!-- Type -->
+        <div class="demo-control">
+          <span class="demo-control__label">Type</span>
+          <div class="demo-control__buttons">
+            @for (type of types; track type) {
+              <button
+                type="button"
+                class="demo-btn"
+                [class.demo-btn--active]="playgroundType() === type"
+                (click)="setType(type)"
+              >{{ type }}</button>
+            }
+          </div>
+        </div>
+
+        <!-- Align -->
+        <div class="demo-control">
+          <span class="demo-control__label">Align</span>
+          <div class="demo-control__buttons">
+            @if (playgroundOrientation() === 'horizontal') {
+              @for (align of horizontalAligns; track align) {
+                <button
+                  type="button"
+                  class="demo-btn"
+                  [class.demo-btn--active]="playgroundAlign() === align"
+                  (click)="setAlign(align)"
+                >{{ align }}</button>
+              }
+            } @else {
+              @for (align of verticalAligns; track align) {
+                <button
+                  type="button"
+                  class="demo-btn"
+                  [class.demo-btn--active]="playgroundAlign() === align"
+                  (click)="setAlign(align)"
+                >{{ align }}</button>
+              }
+            }
+          </div>
+        </div>
+
+        <!-- Variant -->
+        <div class="demo-control">
+          <span class="demo-control__label">Variant</span>
+          <div class="demo-control__buttons">
+            @for (variant of variants; track variant) {
+              <button
+                type="button"
+                class="demo-btn"
+                [class.demo-btn--active]="playgroundVariant() === variant"
+                (click)="setVariant(variant)"
+              >{{ variant }}</button>
+            }
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="demo-control">
+          <span class="demo-control__label">Label</span>
+          <button
+            type="button"
+            class="demo-btn"
+            [class.demo-btn--active]="playgroundHasContent()"
+            (click)="toggleContent()"
+          >{{ playgroundHasContent() ? 'On' : 'Off' }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Table -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>orientation</code></td>
+          <td><code>'horizontal' | 'vertical'</code></td>
+          <td><code>'horizontal'</code></td>
+          <td>Direction of the divider line.</td>
+        </tr>
+        <tr>
+          <td><code>type</code></td>
+          <td><code>'solid' | 'dashed' | 'dotted'</code></td>
+          <td><code>'solid'</code></td>
+          <td>Visual style of the divider line.</td>
+        </tr>
+        <tr>
+          <td><code>align</code></td>
+          <td><code>'left' | 'center' | 'right' | 'top' | 'bottom' | null</code></td>
+          <td><code>null</code> (resolves to <code>'center'</code>)</td>
+          <td>
+            Position of the projected content along the divider.
+            Horizontal dividers support <code>left</code> / <code>center</code> / <code>right</code>;
+            vertical dividers support <code>top</code> / <code>center</code> / <code>bottom</code>.
+          </td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant; inherits from ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes added to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 
