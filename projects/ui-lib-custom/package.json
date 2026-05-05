@@ -272,6 +272,10 @@
     "./meter-group": {
       "esm2022": "./esm2022/meter-group/index.mjs",
       "esm": "./esm2022/meter-group/index.mjs"
+    },
+    "./progress-spinner": {
+      "esm2022": "./esm2022/progress-spinner/index.mjs",
+      "esm": "./esm2022/progress-spinner/index.mjs"
     }
   },
   "typesVersions": {
@@ -446,6 +450,9 @@
       ],
       "meter-group": [
         "./meter-group/index.d.ts"
+      ],
+      "progress-spinner": [
+        "./progress-spinner/index.d.ts"
       ]
     }
   }

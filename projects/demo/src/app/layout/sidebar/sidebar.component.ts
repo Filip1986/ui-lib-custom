@@ -510,7 +510,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/progress-spinner',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Ripple',

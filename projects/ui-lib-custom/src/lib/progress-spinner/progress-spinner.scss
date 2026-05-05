@@ -1,0 +1,138 @@
+// =============================================================================
+// ProgressSpinner — Animated circular loading indicator
+// CSS variable naming: --uilib-progress-spinner-{property}[-{modifier}]
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Keyframe animations
+// ---------------------------------------------------------------------------
+
+@keyframes ui-lib-progress-spinner-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ui-lib-progress-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes ui-lib-progress-spinner-color-material {
+  0%,
+  100% {
+    stroke: var(--uilib-progress-spinner-color-a, #ef5350);
+  }
+
+  40% {
+    stroke: var(--uilib-progress-spinner-color-b, #42a5f5);
+  }
+
+  66% {
+    stroke: var(--uilib-progress-spinner-color-c, #66bb6a);
+  }
+
+  80%,
+  90% {
+    stroke: var(--uilib-progress-spinner-color-d, #ffa726);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Size tokens
+// ---------------------------------------------------------------------------
+
+:root {
+  --uilib-progress-spinner-size-sm: 32px;
+  --uilib-progress-spinner-size-md: 56px;
+  --uilib-progress-spinner-size-lg: 96px;
+}
+
+// ---------------------------------------------------------------------------
+// Host element
+// ---------------------------------------------------------------------------
+
+.ui-lib-progress-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // Size modifiers
+  &--size-sm {
+    width: var(--uilib-progress-spinner-size-sm);
+    height: var(--uilib-progress-spinner-size-sm);
+  }
+
+  &--size-md {
+    width: var(--uilib-progress-spinner-size-md);
+    height: var(--uilib-progress-spinner-size-md);
+  }
+
+  &--size-lg {
+    width: var(--uilib-progress-spinner-size-lg);
+    height: var(--uilib-progress-spinner-size-lg);
+  }
+
+  // SVG
+  &__svg {
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+    animation: ui-lib-progress-spinner-rotate 2s linear infinite;
+    // animation-duration is overridden via inline [style.animation-duration]
+  }
+
+  // Circle arc
+  &__circle {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: ui-lib-progress-spinner-dash 1.5s ease-in-out infinite;
+    // animation-duration is overridden via inline [style.animation-duration]
+  }
+
+  // ---------------------------------------------------------------------------
+  // Variant: material — colour-cycling arc, rounded, shadow
+  // ---------------------------------------------------------------------------
+
+  &--variant-material {
+    .ui-lib-progress-spinner__circle {
+      animation:
+        ui-lib-progress-spinner-dash 1.5s ease-in-out infinite,
+        ui-lib-progress-spinner-color-material 6s ease-in-out infinite;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Variant: bootstrap — solid primary blue arc, square cap
+  // ---------------------------------------------------------------------------
+
+  &--variant-bootstrap {
+    .ui-lib-progress-spinner__circle {
+      stroke: var(--uilib-progress-spinner-color-bootstrap, #0d6efd);
+      stroke-linecap: square;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Variant: minimal — muted grey arc, flat
+  // ---------------------------------------------------------------------------
+
+  &--variant-minimal {
+    .ui-lib-progress-spinner__circle {
+      stroke: var(--uilib-progress-spinner-color-minimal, #9ca3af);
+    }
+  }
+}

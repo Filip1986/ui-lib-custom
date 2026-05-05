@@ -30,6 +30,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Inplace` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `MeterGroup` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ProgressSpinner` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -91,6 +92,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [ProgressSpinner component]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.types.ts (new — types + PROGRESS_SPINNER_DEFAULTS)
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts (new component)
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html (new template — SVG circle with animated stroke-dashoffset)
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss (new — 3 variants + 3 sizes + keyframe animations)
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.spec.ts (19 unit tests)
+  - projects/ui-lib-custom/src/lib/progress-spinner/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/progress-spinner/README.md (API docs)
+  - projects/ui-lib-custom/progress-spinner/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/progress-spinner/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (progress-spinner added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (progress-spinner import test added)
+  - projects/demo/src/app/pages/progress-spinner/progress-spinner-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/progress-spinner/progress-spinner-demo.component.html (hero + 7 sections + API table)
+  - projects/demo/src/app/pages/progress-spinner/progress-spinner-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ProgressSpinner entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: ProgressSpinner component fully complete. PrimeNG-inspired animated circular indeterminate loading indicator.
+  Inputs: strokeWidth, fill, animationDuration, size (sm/md/lg), variant (material/bootstrap/minimal), styleClass, ariaLabel.
+  SVG viewBox="25 25 50 50" with animated circle stroke-dashoffset (arc-chase effect) + rotating SVG.
+  material: colour-cycling keyframe animation (red/blue/green/orange), bootstrap: solid primary blue, minimal: muted grey.
+  role="status" + aria-busy="true" + aria-label on host for accessibility.
+  Signal inputs, ViewEncapsulation.None + OnPush + standalone.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/progress-spinner/ projects/demo/src/app/pages/progress-spinner/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/progress-spinner Built, zero errors,
+  npx.cmd jest --testPathPatterns=progress-spinner --no-coverage (19/19 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (75/75 PASS).
+Terminal notes: None — straightforward build. No Windows workarounds needed.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [MeterGroup component]
 Changed:
