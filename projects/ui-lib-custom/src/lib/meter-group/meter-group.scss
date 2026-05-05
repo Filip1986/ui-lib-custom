@@ -1,0 +1,205 @@
+// ------------------------------------------------------------------
+// MeterGroup component
+// Pattern: --uilib-meter-group-{property}[-{variant}][-{state}]
+// ------------------------------------------------------------------
+
+// ---- Base tokens (default / material) ----------------------------
+ui-lib-meter-group {
+  --uilib-meter-group-height: 1rem;
+  --uilib-meter-group-height-sm: 0.625rem;
+  --uilib-meter-group-height-lg: 1.375rem;
+  --uilib-meter-group-width-vertical: 1rem;
+  --uilib-meter-group-width-vertical-sm: 0.625rem;
+  --uilib-meter-group-width-vertical-lg: 1.375rem;
+  --uilib-meter-group-height-vertical: 12rem;
+  --uilib-meter-group-border-radius: var(--uilib-radius-full, 9999px);
+  --uilib-meter-group-segment-gap: 2px;
+  --uilib-meter-group-bg: var(--uilib-surface-200, #e5e7eb);
+  --uilib-meter-group-label-gap: 0.75rem;
+  --uilib-meter-group-label-item-gap: 0.375rem;
+  --uilib-meter-group-label-font-size: 0.875rem;
+  --uilib-meter-group-label-color: var(--uilib-color-text, #374151);
+  --uilib-meter-group-label-value-color: var(--uilib-surface-500, #6b7280);
+  --uilib-meter-group-swatch-size: 0.75rem;
+  --uilib-meter-group-swatch-border-radius: var(--uilib-radius-sm, 0.25rem);
+  --uilib-meter-group-transition: width 0.4s ease, height 0.4s ease;
+}
+
+// ---- Host element ------------------------------------------------
+.ui-lib-meter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uilib-meter-group-label-gap);
+  width: 100%;
+  font-family: var(--uilib-font-ui, inherit);
+
+  // ---- Meter bar container -----------------------------------------
+  &__meters {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    border-radius: var(--uilib-meter-group-border-radius);
+    background-color: var(--uilib-meter-group-bg);
+    height: var(--uilib-meter-group-height);
+    width: 100%;
+    gap: var(--uilib-meter-group-segment-gap);
+  }
+
+  // ---- Individual segment ------------------------------------------
+  &__meter {
+    transition: var(--uilib-meter-group-transition);
+    height: 100%;
+    min-width: 0;
+    flex-shrink: 0;
+
+    &:first-child {
+      border-radius: var(--uilib-meter-group-border-radius) 0 0
+        var(--uilib-meter-group-border-radius);
+    }
+
+    &:last-child {
+      border-radius: 0 var(--uilib-meter-group-border-radius) var(--uilib-meter-group-border-radius)
+        0;
+    }
+
+    &:only-child {
+      border-radius: var(--uilib-meter-group-border-radius);
+    }
+  }
+
+  // ---- Legend (labels) --------------------------------------------
+  &__labels {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__label-item {
+    display: flex;
+    align-items: center;
+    gap: var(--uilib-meter-group-label-item-gap);
+    font-size: var(--uilib-meter-group-label-font-size);
+    color: var(--uilib-meter-group-label-color);
+  }
+
+  &__label-swatch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--uilib-meter-group-swatch-size);
+    height: var(--uilib-meter-group-swatch-size);
+    border-radius: var(--uilib-meter-group-swatch-border-radius);
+    font-size: 0.55rem;
+    color: #fff;
+  }
+
+  &__label-text {
+    color: var(--uilib-meter-group-label-color);
+  }
+
+  &__label-value {
+    color: var(--uilib-meter-group-label-value-color);
+    font-variant-numeric: tabular-nums;
+  }
+
+  // ---- Size: sm ---------------------------------------------------
+  &--size-sm {
+    --uilib-meter-group-height: var(--uilib-meter-group-height-sm);
+    --uilib-meter-group-width-vertical: var(--uilib-meter-group-width-vertical-sm);
+    --uilib-meter-group-label-font-size: 0.75rem;
+    --uilib-meter-group-swatch-size: 0.625rem;
+  }
+
+  // ---- Size: lg ---------------------------------------------------
+  &--size-lg {
+    --uilib-meter-group-height: var(--uilib-meter-group-height-lg);
+    --uilib-meter-group-width-vertical: var(--uilib-meter-group-width-vertical-lg);
+    --uilib-meter-group-label-font-size: 0.9375rem;
+    --uilib-meter-group-swatch-size: 0.875rem;
+  }
+
+  // ---- Orientation: vertical --------------------------------------
+  &--orientation-vertical {
+    flex-direction: row;
+    align-items: flex-end;
+    width: auto;
+
+    .ui-lib-meter-group__meters {
+      flex-direction: column-reverse;
+      width: var(--uilib-meter-group-width-vertical);
+      height: var(--uilib-meter-group-height-vertical);
+    }
+
+    .ui-lib-meter-group__meter {
+      width: 100%;
+      height: auto;
+      flex-shrink: 0;
+
+      &:first-child {
+        border-radius: 0 0 var(--uilib-meter-group-border-radius)
+          var(--uilib-meter-group-border-radius);
+      }
+
+      &:last-child {
+        border-radius: var(--uilib-meter-group-border-radius) var(--uilib-meter-group-border-radius)
+          0 0;
+      }
+
+      &:only-child {
+        border-radius: var(--uilib-meter-group-border-radius);
+      }
+    }
+
+    .ui-lib-meter-group__labels {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    &.ui-lib-meter-group--label-start {
+      flex-direction: row-reverse;
+    }
+  }
+
+  // ---- Label position: start (horizontal = above) -----------------
+  &--orientation-horizontal {
+    &.ui-lib-meter-group--label-start {
+      flex-direction: column-reverse;
+    }
+  }
+
+  // ---- Variant: material -------------------------------------------
+  &--variant-material {
+    --uilib-meter-group-border-radius: var(--uilib-radius-full, 9999px);
+    --uilib-meter-group-swatch-border-radius: var(--uilib-radius-sm, 0.25rem);
+    --uilib-meter-group-bg: var(--uilib-surface-200, #e5e7eb);
+  }
+
+  // ---- Variant: bootstrap ------------------------------------------
+  &--variant-bootstrap {
+    --uilib-meter-group-border-radius: var(--uilib-radius-sm, 0.375rem);
+    --uilib-meter-group-swatch-border-radius: 2px;
+    --uilib-meter-group-bg: var(--uilib-surface-200, #e9ecef);
+    --uilib-meter-group-segment-gap: 0px;
+  }
+
+  // ---- Variant: minimal --------------------------------------------
+  &--variant-minimal {
+    --uilib-meter-group-border-radius: 2px;
+    --uilib-meter-group-swatch-border-radius: 2px;
+    --uilib-meter-group-bg: var(--uilib-surface-100, #f3f4f6);
+    --uilib-meter-group-segment-gap: 1px;
+  }
+
+  // ---- Dark mode --------------------------------------------------
+  [data-theme='dark'] &,
+  &[data-theme='dark'] {
+    --uilib-meter-group-bg: var(--uilib-surface-700, #374151);
+    --uilib-meter-group-label-color: var(--uilib-color-text, #f9fafb);
+    --uilib-meter-group-label-value-color: var(--uilib-surface-400, #9ca3af);
+  }
+}

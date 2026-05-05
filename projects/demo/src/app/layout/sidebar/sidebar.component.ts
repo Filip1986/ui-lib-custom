@@ -497,7 +497,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/meter-group',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'ProgressBar',
