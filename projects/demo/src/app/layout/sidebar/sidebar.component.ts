@@ -474,7 +474,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/class-names',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'FocusTrap',

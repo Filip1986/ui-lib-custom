@@ -252,6 +252,10 @@
     "./chip": {
       "esm2022": "./esm2022/chip/index.mjs",
       "esm": "./esm2022/chip/index.mjs"
+    },
+    "./class-names": {
+      "esm2022": "./esm2022/class-names/index.mjs",
+      "esm": "./esm2022/class-names/index.mjs"
     }
   },
   "typesVersions": {
@@ -411,6 +415,9 @@
       ],
       "chip": [
         "./chip/index.d.ts"
+      ],
+      "class-names": [
+        "./class-names/index.d.ts"
       ]
     }
   }
