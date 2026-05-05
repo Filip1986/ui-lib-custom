@@ -20,16 +20,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Toast component complete; resuming backlog
+- **Active focus:** Tag component complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
+- `Divider` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
+- `Terminal` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
+- `Tag` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
+- `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `StyleClass` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `FocusTrap` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Inplace` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `MeterGroup` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ProgressSpinner` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -92,6 +102,60 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-05 [Terminal component]
+Changed:
+  - projects/ui-lib-custom/src/lib/terminal/terminal.types.ts (new — TerminalVariant/HistoryItem/Command types)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.service.ts (new — TerminalService with history/command signals)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.ts (new component — ViewEncapsulation.None/OnPush/standalone)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.html (new template — scrollable history + input row)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.scss (new — 3 variants + CSS variables)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.spec.ts (23 unit tests — Terminal + TerminalService)
+  - projects/ui-lib-custom/src/lib/terminal/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/terminal/README.md (API docs)
+  - projects/ui-lib-custom/terminal/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/terminal/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (terminal added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (terminal import test added)
+  - projects/demo/src/app/pages/terminal/terminal-demo.component.ts (full demo with command handler)
+  - projects/demo/src/app/pages/terminal/terminal-demo.component.html (3 variant showcase + interactive terminal)
+  - projects/demo/src/app/pages/terminal/terminal-demo.component.scss (demo page styles)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Terminal component fully complete. PrimeNG-inspired interactive CLI component.
+  Selector: ui-lib-terminal. Inputs: welcomeMessage (string, default ''), prompt (string, default '$'),
+  variant (material/bootstrap/minimal|null). No outputs — all interaction via TerminalService.
+  TerminalService: submitCommand() called internally by component; consumers watch command signal
+  via effect() and call sendResponse(). Arrow-key command history navigation included.
+  23 tests pass. Entry-point import test passes. Build zero warnings.
+Verification: ESLint 0 warnings, ng build ui-lib-custom ✅, jest terminal ✅ (23/23), jest entry-points ✅ (80/80)
+Terminal notes: None
+Next step: knip baseline + dead-code cleanup, or pick next component from backlog
+
+Date: 2026-05-05 [Tag component]
+Changed:
+  - projects/ui-lib-custom/src/lib/tag/tag.types.ts (new — TagVariant/Size/Severity types)
+  - projects/ui-lib-custom/src/lib/tag/tag.ts (new component)
+  - projects/ui-lib-custom/src/lib/tag/tag.html (new template — icon span + value span + ng-content)
+  - projects/ui-lib-custom/src/lib/tag/tag.scss (new — 3 variants + 3 sizes + 7 severity palettes + dark mode)
+  - projects/ui-lib-custom/src/lib/tag/tag.spec.ts (20 unit tests)
+  - projects/ui-lib-custom/src/lib/tag/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/tag/README.md (API docs)
+  - projects/ui-lib-custom/tag/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/tag/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (tag added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (tag import test added)
+  - projects/demo/src/app/pages/tag/tag-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/tag/tag-demo.component.html (hero + 6 sections + API table)
+  - projects/demo/src/app/pages/tag/tag-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Tag entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Tag component fully complete.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/tag/ projects/demo/src/app/pages/tag/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/tag Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/tag --no-coverage (20/20 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (79/79 PASS).
+Next step: knip baseline + dead-code cleanup, or next component from queue.
+
 Date: 2026-05-05 [ProgressBar component]
 Changed:
   - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.types.ts (new — ProgressBarVariant, ProgressBarSize, ProgressBarMode types)
@@ -111,23 +175,12 @@ Changed:
   - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ProgressBar entry)
   - AI_AGENT_CONTEXT.md (updated)
 State: ProgressBar component fully complete. PrimeNG-inspired horizontal progress bar.
-  Inputs: value (0-100, clamped), mode (determinate/indeterminate), showValue, label,
-  size (sm/md/lg), variant (material/bootstrap/minimal), color, styleClass.
-  Determinate: fill width = clamped%, label shows percentage or custom text.
-  Indeterminate: CSS keyframe animation (uilib-progress-bar-indeterminate) oscillates the fill.
-  ARIA: role="progressbar" on host, aria-valuenow (determinate only), aria-valuemin/max,
-  aria-busy="true" + aria-label="Loading" (indeterminate only).
-  Three variants: material (pill/radius-full + inset shadow), bootstrap (radius-sm, square fill),
-  minimal (2px radius, flat track).
   Signal inputs, ViewEncapsulation.None + OnPush + standalone.
 Verification:
   npx.cmd eslint projects/ui-lib-custom/src/lib/progress-bar/ projects/demo/src/app/pages/progress-bar/ --max-warnings 0 (CLEAN, EXIT:0),
   npx.cmd ng build ui-lib-custom — ui-lib-custom/progress-bar Built, zero errors,
   npx.cmd jest --testPathPatterns=progress-bar --no-coverage (24/24 PASS),
   npx.cmd jest --testPathPatterns=entry-points --no-coverage (75/75 PASS).
-Terminal notes: fixture.debugElement.query() is typed DebugElement (non-nullable) in Angular types
-  even though it returns null at runtime — cast to DebugElement | null to avoid no-unnecessary-condition
-  lint warning when doing a null check.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [MeterGroup component]
@@ -362,6 +415,38 @@ Verification:
 Terminal notes: Test host must use WritableSignal (not plain properties) for signal model() inputs
   to toggle reactively with zoneless OnPush. modulePathIgnorePatterns uses <rootDir>-prefixed paths
   that break on Windows because <rootDir> resolves with backslashes while the rest uses forward slashes.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
+
+---
+
+Date: 2026-05-05
+Changed:
+  - projects/ui-lib-custom/src/lib/divider/divider.types.ts (new — DividerOrientation, DividerType, DividerAlign, DividerVariant)
+  - projects/ui-lib-custom/src/lib/divider/divider.ts (new — Divider component, signal inputs, ViewEncapsulation.None + OnPush + standalone)
+  - projects/ui-lib-custom/src/lib/divider/divider.html (new — template with content projection into .ui-lib-divider__content)
+  - projects/ui-lib-custom/src/lib/divider/divider.scss (new — horizontal/vertical/alignment/type/variant/dark-mode styles using CSS vars)
+  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts (new — 19 unit tests)
+  - projects/ui-lib-custom/src/lib/divider/index.ts (new — barrel)
+  - projects/ui-lib-custom/src/lib/divider/README.md (new — API contract)
+  - projects/ui-lib-custom/divider/ng-package.json (new — secondary entry point)
+  - projects/ui-lib-custom/divider/package.json (new — secondary entry point)
+  - projects/ui-lib-custom/package.json (divider added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (divider import test added)
+  - projects/demo/src/app/pages/divider/divider-demo.component.ts (full demo replacing placeholder)
+  - projects/demo/src/app/pages/divider/divider-demo.component.html (full demo — hero + 8 sections + playground + API table)
+  - projects/demo/src/app/pages/divider/divider-demo.component.scss (demo styles)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Divider component fully complete. PrimeNG-inspired separator with horizontal/vertical orientation,
+  solid/dashed/dotted line types, left/center/right/top/bottom content alignment, optional projected
+  content (label/icon) in the middle, three design variants (material/bootstrap/minimal), dark mode
+  adjustments, role="separator" + aria-orientation. Secondary entry point wired. 19/19 tests pass,
+  81/81 entry-points pass, library builds zero warnings.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/divider/ projects/demo/src/app/pages/divider/ --max-warnings 0 (CLEAN),
+  ng build ui-lib-custom — ui-lib-custom/divider Built, zero errors/warnings,
+  npx jest "divider.spec.ts" --no-coverage (19/19 PASS),
+  npx jest "entry-points.spec.ts" --no-coverage (81/81 PASS, divider test included).
+Terminal notes: No issues. All commands ran cleanly in PowerShell.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 

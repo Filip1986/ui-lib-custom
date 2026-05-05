@@ -509,21 +509,18 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/progress-spinner',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Ripple',
           icon: 'pi pi-circle',
           route: '/ripple',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'ScrollTop',
           icon: 'pi pi-circle',
           route: '/scroll-top',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Skeleton',
@@ -543,14 +540,12 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/style-class',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Tag',
           icon: 'pi pi-circle',
           route: '/tag',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Terminal',

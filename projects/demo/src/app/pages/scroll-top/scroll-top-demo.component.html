@@ -1,5 +1,252 @@
 <section class="scroll-top-demo" data-testid="scroll-top-demo">
-  <h1>ScrollTop</h1>
-  <p>Coming soon.</p>
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">ScrollTop</h1>
+    <p class="demo-hero__description">
+      A floating button that appears once the page is scrolled past a configurable threshold.
+      Clicking it smoothly returns the user to the top of the page or a scrollable container.
+    </p>
+    <code class="demo-hero__import">import &#123; ScrollTop &#125; from 'ui-lib-custom/scroll-top';</code>
+  </div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Section 1: Basic usage (window target)                              -->
+  <!-- ------------------------------------------------------------------ -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Basic Usage</h2>
+    <p class="demo-section__description">
+      Scroll down this page to see the button appear in the bottom-right corner.
+      The default threshold is <code>400px</code> and the default target is the window.
+    </p>
+    <div class="demo-section__preview">
+      <p class="demo-hint">⬇ Scroll down the page to reveal the ScrollTop button.</p>
+      <code class="demo-code">&lt;ui-lib-scroll-top /&gt;</code>
+    </div>
+    <!-- Live instance — fixed to the viewport -->
+    <ui-lib-scroll-top />
+  </div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Section 2: Custom threshold                                          -->
+  <!-- ------------------------------------------------------------------ -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Custom Threshold</h2>
+    <p class="demo-section__description">
+      Control how far the user must scroll before the button appears using the
+      <code>threshold</code> input (pixels, default: 400).
+    </p>
+    <div class="demo-section__preview demo-section__preview--code">
+      <pre class="demo-code-block"><code>&lt;ui-lib-scroll-top [threshold]="200" /&gt;</code></pre>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Section 3: Parent container target                                  -->
+  <!-- ------------------------------------------------------------------ -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Parent Container Target</h2>
+    <p class="demo-section__description">
+      Set <code>target="parent"</code> to watch a scrollable parent element instead of the window.
+      The button is positioned <code>absolute</code> inside the container.
+      The parent must have <code>position: relative</code> and <code>overflow-y: auto</code>.
+    </p>
+    <div class="demo-section__preview">
+      <div class="demo-scrollable-container">
+        <ui-lib-scroll-top target="parent" [threshold]="100" />
+        @for (item of dummyItems; track item) {
+          <div class="demo-scrollable-item">Item {{ item }}</div>
+        }
+      </div>
+    </div>
+    <div class="demo-section__code">
+      <pre class="demo-code-block"><code>&lt;div style="height: 300px; overflow-y: auto; position: relative;"&gt;
+  &lt;ui-lib-scroll-top target="parent" [threshold]="100" /&gt;
+  &lt;!-- scrollable content --&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Section 4: Variants                                                  -->
+  <!-- ------------------------------------------------------------------ -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
+      Three design variants: <code>material</code> (default — pill, primary colour + shadow),
+      <code>bootstrap</code> (square corners, Bootstrap blue), and
+      <code>minimal</code> (muted surface + border).
+    </p>
+    <div class="demo-section__preview demo-section__preview--row">
+      <div class="demo-variant-wrapper">
+        <span class="demo-variant-label">material</span>
+        <div class="demo-forced-visible">
+          <ui-lib-scroll-top variant="material" styleClass="demo-static" />
+        </div>
+      </div>
+      <div class="demo-variant-wrapper">
+        <span class="demo-variant-label">bootstrap</span>
+        <div class="demo-forced-visible">
+          <ui-lib-scroll-top variant="bootstrap" styleClass="demo-static" />
+        </div>
+      </div>
+      <div class="demo-variant-wrapper">
+        <span class="demo-variant-label">minimal</span>
+        <div class="demo-forced-visible">
+          <ui-lib-scroll-top variant="minimal" styleClass="demo-static" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Section 5: Sizes                                                     -->
+  <!-- ------------------------------------------------------------------ -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">
+      Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
+    </p>
+    <div class="demo-section__preview demo-section__preview--row demo-section__preview--center">
+      <div class="demo-variant-wrapper">
+        <span class="demo-variant-label">sm</span>
+        <div class="demo-forced-visible">
+          <ui-lib-scroll-top size="sm" styleClass="demo-static" />
+        </div>
+      </div>
+      <div class="demo-variant-wrapper">
+        <span class="demo-variant-label">md</span>
+        <div class="demo-forced-visible">
+          <ui-lib-scroll-top size="md" styleClass="demo-static" />
+        </div>
+      </div>
+      <div class="demo-variant-wrapper">
+        <span class="demo-variant-label">lg</span>
+        <div class="demo-forced-visible">
+          <ui-lib-scroll-top size="lg" styleClass="demo-static" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Section 6: Custom icon                                               -->
+  <!-- ------------------------------------------------------------------ -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Custom Icon</h2>
+    <p class="demo-section__description">
+      Use the <code>icon</code> input to supply any PrimeIcons class string.
+      The default is <code>pi pi-arrow-up</code>.
+    </p>
+    <div class="demo-section__preview demo-section__preview--row">
+      <div class="demo-forced-visible">
+        <ui-lib-scroll-top icon="pi pi-chevron-up" styleClass="demo-static" />
+      </div>
+      <div class="demo-forced-visible">
+        <ui-lib-scroll-top icon="pi pi-home" styleClass="demo-static" />
+      </div>
+      <div class="demo-forced-visible">
+        <ui-lib-scroll-top icon="pi pi-angle-double-up" styleClass="demo-static" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Section 7: API table                                                 -->
+  <!-- ------------------------------------------------------------------ -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>threshold</code></td>
+          <td><code>number</code></td>
+          <td><code>400</code></td>
+          <td>Scroll distance (px) before the button becomes visible.</td>
+        </tr>
+        <tr>
+          <td><code>target</code></td>
+          <td><code>'window' | 'parent'</code></td>
+          <td><code>'window'</code></td>
+          <td>Scroll target: the global window or the immediate parent element.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string</code></td>
+          <td><code>'pi pi-arrow-up'</code></td>
+          <td>CSS class(es) for the icon inside the button.</td>
+        </tr>
+        <tr>
+          <td><code>behavior</code></td>
+          <td><code>'smooth' | 'auto'</code></td>
+          <td><code>'smooth'</code></td>
+          <td>Native scroll-behavior applied when scrolling to top.</td>
+        </tr>
+        <tr>
+          <td><code>buttonAriaLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'Back to top'</code></td>
+          <td>Accessible label for the button element.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Button size.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Visual variant. Falls back to global ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes added to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-section__subtitle">Public properties</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>isVisible</code></td>
+          <td><code>WritableSignal&lt;boolean&gt;</code></td>
+          <td>Whether the button is currently visible. You can set this manually.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Filler content so there is something to scroll past -->
+  <div class="demo-scroll-filler" aria-hidden="true">
+    @for (item of fillerItems; track item) {
+      <div class="demo-filler-block">
+        <strong>Section {{ item }}</strong>
+        <p>
+          Scroll down to see the back-to-top button appear. This filler content exists only to
+          provide enough height to make the page scrollable in the demo.
+        </p>
+      </div>
+    }
+  </div>
 </section>
 

@@ -1,14 +1,395 @@
 .style-class-demo {
-  padding: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
 
-  h1 {
+// ---------------------------------------------------------------------------
+// Hero
+// ---------------------------------------------------------------------------
+
+.demo-hero {
+  margin-bottom: 3rem;
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+
+  &__description {
+    font-size: 1.05rem;
+    color: var(--uilib-color-text-secondary, #555);
+    margin: 0 0 1rem;
+    max-width: 640px;
+  }
+
+  &__badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  &--directive {
+    background: #e0edff;
+    color: #1a56db;
+  }
+
+  &--package {
+    background: #f0fdf4;
+    color: #166534;
+    font-family: monospace;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Sections
+// ---------------------------------------------------------------------------
+
+.demo-section {
+  margin-bottom: 3rem;
+
+  &__title {
+    font-size: 1.4rem;
+    font-weight: 600;
     margin: 0 0 0.5rem;
-    font-size: 1.5rem;
-    color: var(--uilib-page-fg);
+    border-bottom: 2px solid var(--uilib-color-border, #e2e8f0);
+    padding-bottom: 0.5rem;
+  }
+
+  &__subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  &__description {
+    font-size: 0.95rem;
+    color: var(--uilib-color-text-secondary, #555);
+    margin: 0 0 1.25rem;
+
+    code {
+      background: #f1f5f9;
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Demo card
+// ---------------------------------------------------------------------------
+
+.demo-card {
+  border: 1px solid var(--uilib-color-border, #e2e8f0);
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__preview {
+    padding: 1.5rem;
+    background: var(--uilib-surface-ground, #f8fafc);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__code {
+    border-top: 1px solid var(--uilib-color-border, #e2e8f0);
+    background: #1e293b;
+
+    pre {
+      margin: 0;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+
+      code {
+        font-family: 'Fira Code', 'Cascadia Code', monospace;
+        font-size: 0.82rem;
+        color: #e2e8f0;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Demo button
+// ---------------------------------------------------------------------------
+
+.sc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: var(--uilib-color-primary, #4f46e5);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    transform 0.1s;
+  align-self: flex-start;
+
+  &:hover {
+    background: var(--uilib-color-primary-hover, #4338ca);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &--sm {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.82rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Demo panel (target element)
+// ---------------------------------------------------------------------------
+
+.sc-panel {
+  border: 1px solid var(--uilib-color-border, #e2e8f0);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  display: none;
+
+  &--open {
+    display: block;
   }
 
   p {
-    margin: 0;
-    color: var(--uilib-muted);
+    margin: 0 0 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    code {
+      background: #f1f5f9;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      font-size: 0.88em;
+    }
+  }
+
+  strong {
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  // Fade panel variant — always in DOM; visibility controlled by animation classes
+  &--fade {
+    display: block;
+  }
+
+  // Slide panel variant — always in DOM; visibility controlled by animation classes
+  &--slide {
+    display: block;
+    overflow: hidden;
+  }
+
+  // Remote panel variant — starts hidden
+  &--remote {
+    display: none;
+
+    &.sc-panel--open {
+      display: block;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Fade animation classes
+// ---------------------------------------------------------------------------
+
+@keyframes sc-fade-in-anim {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-fade-out-anim {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.sc-fade--hidden {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sc-fade-in {
+  visibility: visible;
+  pointer-events: auto;
+  animation: sc-fade-in-anim 200ms ease forwards;
+}
+
+.sc-fade-out {
+  animation: sc-fade-out-anim 200ms ease forwards;
+}
+
+// ---------------------------------------------------------------------------
+// Slide animation classes
+// ---------------------------------------------------------------------------
+
+@keyframes sc-slide-down-anim {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 200px;
+    opacity: 1;
+  }
+}
+
+@keyframes sc-slide-up-anim {
+  from {
+    max-height: 200px;
+    opacity: 1;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+  }
+}
+
+.sc-slide--hidden {
+  display: none;
+}
+
+.sc-slide--open {
+  display: block;
+}
+
+.sc-slide-down {
+  display: block;
+  animation: sc-slide-down-anim 250ms ease forwards;
+}
+
+.sc-slide-up {
+  animation: sc-slide-up-anim 250ms ease forwards;
+}
+
+// ---------------------------------------------------------------------------
+// Special selectors demo
+// ---------------------------------------------------------------------------
+
+.sc-selectors-demo {
+  gap: 0.75rem;
+}
+
+.sc-selector-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sc-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border: 2px solid transparent;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+
+  &--prev {
+    background: #fef9c3;
+    color: #713f12;
+
+    &.sc-badge--active {
+      border-color: #ca8a04;
+      background: #fef08a;
+    }
+  }
+
+  &--parent {
+    background: #f0fdf4;
+    color: #166534;
+  }
+}
+
+.sc-parent-wrapper {
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 0.5rem;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+
+  &.sc-parent--active {
+    border-color: #16a34a;
+    background: #dcfce7;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// API table
+// ---------------------------------------------------------------------------
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+
+  th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    background: #f1f5f9;
+    border-bottom: 2px solid var(--uilib-color-border, #e2e8f0);
+    font-weight: 600;
+    color: #374151;
+  }
+
+  td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--uilib-color-border, #e2e8f0);
+    color: #374151;
+    vertical-align: top;
+
+    code {
+      background: #f1f5f9;
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+      font-family: monospace;
+    }
+
+    em {
+      color: #6b7280;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
   }
 }

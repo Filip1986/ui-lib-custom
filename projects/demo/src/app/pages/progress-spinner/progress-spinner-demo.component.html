@@ -1,5 +1,317 @@
 <section class="progress-spinner-demo" data-testid="progress-spinner-demo">
-  <h1>ProgressSpinner</h1>
-  <p>Coming soon.</p>
+
+  <!-- Hero -->
+  <div class="ps-hero">
+    <h1 class="ps-hero__title">ProgressSpinner</h1>
+    <p class="ps-hero__lead">
+      An animated circular spinner that signals an indeterminate loading state.
+      Uses a CSS <code>stroke-dashoffset</code> animation on an SVG circle combined with a
+      continuous rotation to produce the characteristic "arc chase" effect.
+      Three design variants, three sizes, and full CSS-variable theming.
+    </p>
+    <div class="ps-hero__tags">
+      <span class="ps-tag">Component</span>
+      <span class="ps-tag">Misc</span>
+      <span class="ps-tag">A11y</span>
+    </div>
+  </div>
+
+  <!-- Section 1: Basic -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">Basic</h2>
+    <p class="ps-section__desc">
+      Drop in <code>&lt;ui-lib-progress-spinner /&gt;</code> with no inputs for a default
+      medium-sized, theme-variant spinner.
+    </p>
+    <div class="ps-row">
+      <ui-lib-progress-spinner />
+    </div>
+    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner /&gt;</code></pre>
+  </div>
+
+  <!-- Section 2: Sizes -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">Sizes</h2>
+    <p class="ps-section__desc">
+      The <code>size</code> input accepts <code>'sm'</code>, <code>'md'</code>, or
+      <code>'lg'</code>.
+    </p>
+    <div class="ps-row ps-row--align-center">
+      <ui-lib-progress-spinner size="sm" />
+      <ui-lib-progress-spinner size="md" />
+      <ui-lib-progress-spinner size="lg" />
+    </div>
+    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner size="sm" /&gt;
+&lt;ui-lib-progress-spinner size="md" /&gt;
+&lt;ui-lib-progress-spinner size="lg" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 3: Variants -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">Variants</h2>
+    <p class="ps-section__desc">
+      Override the global theme variant with the <code>variant</code> input.
+      <code>'material'</code> cycles through multiple colours,
+      <code>'bootstrap'</code> uses a solid primary blue, and
+      <code>'minimal'</code> uses a muted grey.
+    </p>
+    <div class="ps-row ps-row--gap-lg">
+      <div class="ps-variant-card">
+        <ui-lib-progress-spinner variant="material" size="lg" />
+        <span class="ps-variant-card__label">material</span>
+      </div>
+      <div class="ps-variant-card">
+        <ui-lib-progress-spinner variant="bootstrap" size="lg" />
+        <span class="ps-variant-card__label">bootstrap</span>
+      </div>
+      <div class="ps-variant-card">
+        <ui-lib-progress-spinner variant="minimal" size="lg" />
+        <span class="ps-variant-card__label">minimal</span>
+      </div>
+    </div>
+    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner variant="material" /&gt;
+&lt;ui-lib-progress-spinner variant="bootstrap" /&gt;
+&lt;ui-lib-progress-spinner variant="minimal" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 4: Custom animation speed -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">Animation Duration</h2>
+    <p class="ps-section__desc">
+      Control the rotation speed with <code>animationDuration</code>.
+      Accepts any CSS <code>&lt;time&gt;</code> value.
+    </p>
+    <div class="ps-row ps-row--align-center">
+      <div class="ps-labeled">
+        <ui-lib-progress-spinner animationDuration="4s" ariaLabel="Slow spinner" />
+        <span>Slow (4s)</span>
+      </div>
+      <div class="ps-labeled">
+        <ui-lib-progress-spinner animationDuration="2s" ariaLabel="Normal spinner" />
+        <span>Normal (2s)</span>
+      </div>
+      <div class="ps-labeled">
+        <ui-lib-progress-spinner animationDuration="750ms" ariaLabel="Fast spinner" />
+        <span>Fast (750ms)</span>
+      </div>
+    </div>
+    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner animationDuration="4s" /&gt;
+&lt;ui-lib-progress-spinner animationDuration="2s" /&gt;
+&lt;ui-lib-progress-spinner animationDuration="750ms" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 5: Custom stroke width and fill -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">Stroke Width &amp; Fill</h2>
+    <p class="ps-section__desc">
+      <code>strokeWidth</code> controls the arc thickness (SVG units).
+      <code>fill</code> sets the interior fill colour of the circle.
+    </p>
+    <div class="ps-row ps-row--align-center">
+      <ui-lib-progress-spinner strokeWidth="1" variant="bootstrap" size="lg" ariaLabel="Thin spinner" />
+      <ui-lib-progress-spinner strokeWidth="4" variant="bootstrap" size="lg" ariaLabel="Thick spinner" />
+      <ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" variant="bootstrap" size="lg" ariaLabel="Filled spinner" />
+    </div>
+    <pre class="ps-code"><code>&lt;ui-lib-progress-spinner strokeWidth="1" /&gt;
+&lt;ui-lib-progress-spinner strokeWidth="4" /&gt;
+&lt;ui-lib-progress-spinner strokeWidth="6" fill="#e0e7ff" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 6: Loading overlay pattern -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">Loading Overlay Pattern</h2>
+    <p class="ps-section__desc">
+      Combine <code>ProgressSpinner</code> with a semi-transparent overlay to block content
+      during async operations.
+    </p>
+    <div class="ps-overlay-example">
+      <div class="ps-overlay-example__content">
+        <p>Content that is loading…</p>
+        <p>More content here.</p>
+      </div>
+      <div class="ps-overlay-example__mask" aria-hidden="true">
+        <ui-lib-progress-spinner size="lg" variant="material" />
+      </div>
+    </div>
+    <pre class="ps-code"><code>&lt;div class="loading-wrapper"&gt;
+  &lt;div class="content"&gt;…&lt;/div&gt;
+  &lt;div class="overlay"&gt;
+    &lt;ui-lib-progress-spinner size="lg" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <!-- Section 7: Interactive playground -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">Playground</h2>
+    <p class="ps-section__desc">Adjust the controls to explore available combinations.</p>
+
+    <div class="ps-playground">
+      <div class="ps-playground__preview">
+        <ui-lib-progress-spinner
+          [size]="interactiveSize()"
+          [variant]="interactiveVariant()"
+          [animationDuration]="interactiveDuration()"
+          [strokeWidth]="interactiveStrokeWidth()"
+        />
+      </div>
+
+      <div class="ps-playground__controls">
+        <!-- Size -->
+        <div class="ps-control">
+          <span class="ps-control__label">size</span>
+          <div class="ps-control__buttons">
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveSize() === 'sm'"
+              (click)="setSize('sm')"
+            >sm</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveSize() === 'md'"
+              (click)="setSize('md')"
+            >md</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveSize() === 'lg'"
+              (click)="setSize('lg')"
+            >lg</button>
+          </div>
+        </div>
+
+        <!-- Variant -->
+        <div class="ps-control">
+          <span class="ps-control__label">variant</span>
+          <div class="ps-control__buttons">
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveVariant() === 'material'"
+              (click)="setVariant('material')"
+            >material</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveVariant() === 'bootstrap'"
+              (click)="setVariant('bootstrap')"
+            >bootstrap</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveVariant() === 'minimal'"
+              (click)="setVariant('minimal')"
+            >minimal</button>
+          </div>
+        </div>
+
+        <!-- Animation duration -->
+        <div class="ps-control">
+          <span class="ps-control__label">animationDuration</span>
+          <div class="ps-control__buttons">
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveDuration() === '4s'"
+              (click)="setDuration('4s')"
+            >4s</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveDuration() === '2s'"
+              (click)="setDuration('2s')"
+            >2s</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveDuration() === '750ms'"
+              (click)="setDuration('750ms')"
+            >750ms</button>
+          </div>
+        </div>
+
+        <!-- Stroke width -->
+        <div class="ps-control">
+          <span class="ps-control__label">strokeWidth</span>
+          <div class="ps-control__buttons">
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveStrokeWidth() === '1'"
+              (click)="setStrokeWidth('1')"
+            >1</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveStrokeWidth() === '2'"
+              (click)="setStrokeWidth('2')"
+            >2</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveStrokeWidth() === '4'"
+              (click)="setStrokeWidth('4')"
+            >4</button>
+            <button
+              class="ps-btn"
+              [class.ps-btn--active]="interactiveStrokeWidth() === '6'"
+              (click)="setStrokeWidth('6')"
+            >6</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 8: API table -->
+  <div class="ps-section">
+    <h2 class="ps-section__title">API</h2>
+    <h3 class="ps-section__subtitle">Inputs</h3>
+    <table class="ps-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>strokeWidth</code></td>
+          <td><code>string</code></td>
+          <td><code>'2'</code></td>
+          <td>SVG stroke-width of the circle arc.</td>
+        </tr>
+        <tr>
+          <td><code>fill</code></td>
+          <td><code>string</code></td>
+          <td><code>'none'</code></td>
+          <td>SVG fill colour of the circle interior.</td>
+        </tr>
+        <tr>
+          <td><code>animationDuration</code></td>
+          <td><code>string</code></td>
+          <td><code>'2s'</code></td>
+          <td>Duration of one rotation/dash cycle. Accepts any CSS &lt;time&gt;.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size token controlling the overall diameter.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant. Falls back to global theme when <code>null</code>.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS class(es) applied to the host element.</td>
+        </tr>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'Loading...'</code></td>
+          <td>Screen-reader accessible label.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 

@@ -1,0 +1,31 @@
+<div class="ui-lib-terminal__content" #terminalContent (click)="focusInput()">
+  @if (welcomeMessage()) {
+    <div class="ui-lib-terminal__welcome">{{ welcomeMessage() }}</div>
+  }
+  @for (item of history(); track $index) {
+    <div class="ui-lib-terminal__history-item">
+      <div class="ui-lib-terminal__command-row">
+        <span class="ui-lib-terminal__prompt" aria-hidden="true">{{ prompt() }}</span>
+        <span class="ui-lib-terminal__command-text">{{ item.command }}</span>
+      </div>
+      @if (item.response !== null) {
+        <div class="ui-lib-terminal__response" aria-live="polite">{{ item.response }}</div>
+      }
+    </div>
+  }
+  <div class="ui-lib-terminal__input-row">
+    <span class="ui-lib-terminal__prompt" aria-hidden="true">{{ prompt() }}</span>
+    <input
+      #commandInput
+      class="ui-lib-terminal__input"
+      type="text"
+      [value]="currentCommand()"
+      (input)="onInputChange($event)"
+      (keydown)="handleKeydown($event)"
+      autocomplete="off"
+      spellcheck="false"
+      aria-label="Terminal command input"
+      aria-autocomplete="none"
+    />
+  </div>
+</div>

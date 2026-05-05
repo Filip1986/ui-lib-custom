@@ -74,6 +74,13 @@ import type * as UiLibFluid from 'ui-lib-custom/fluid';
 import type * as UiLibInplace from 'ui-lib-custom/inplace';
 import type * as UiLibMeterGroup from 'ui-lib-custom/meter-group';
 import type * as UiLibProgressBar from 'ui-lib-custom/progress-bar';
+import type * as UiLibProgressSpinner from 'ui-lib-custom/progress-spinner';
+import type * as UiLibRipple from 'ui-lib-custom/ripple';
+import type * as UiLibScrollTop from 'ui-lib-custom/scroll-top';
+import type * as UiLibStyleClass from 'ui-lib-custom/style-class';
+import type * as UiLibDivider from 'ui-lib-custom/divider';
+import type * as UiLibTag from 'ui-lib-custom/tag';
+import type * as UiLibTerminal from 'ui-lib-custom/terminal';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -528,5 +535,41 @@ describe('Secondary Entry Points', (): void => {
   it('should import from progress-bar', async (): Promise<void> => {
     const mod: typeof UiLibProgressBar = await import('ui-lib-custom/progress-bar');
     expect(mod.ProgressBar).toBeDefined();
+  });
+
+  it('should import from progress-spinner', async (): Promise<void> => {
+    const mod: typeof UiLibProgressSpinner = await import('ui-lib-custom/progress-spinner');
+    expect(mod.ProgressSpinner).toBeDefined();
+  });
+
+  it('should import from ripple', async (): Promise<void> => {
+    const mod: typeof UiLibRipple = await import('ui-lib-custom/ripple');
+    expect(mod.Ripple).toBeDefined();
+  });
+
+  it('should import from scroll-top', async (): Promise<void> => {
+    const mod: typeof UiLibScrollTop = await import('ui-lib-custom/scroll-top');
+    expect(mod.ScrollTop).toBeDefined();
+  });
+
+  it('should import from style-class', async (): Promise<void> => {
+    const mod: typeof UiLibStyleClass = await import('ui-lib-custom/style-class');
+    expect(mod.StyleClass).toBeDefined();
+  });
+
+  it('should import from divider', async (): Promise<void> => {
+    const mod: typeof UiLibDivider = await import('ui-lib-custom/divider');
+    expect(mod.Divider).toBeDefined();
+  });
+
+  it('should import from tag', async (): Promise<void> => {
+    const mod: typeof UiLibTag = await import('ui-lib-custom/tag');
+    expect(mod.Tag).toBeDefined();
+  });
+
+  it('should import from terminal', async (): Promise<void> => {
+    const mod: typeof UiLibTerminal = await import('ui-lib-custom/terminal');
+    expect(mod.Terminal).toBeDefined();
+    expect(mod.TerminalService).toBeDefined();
   });
 });

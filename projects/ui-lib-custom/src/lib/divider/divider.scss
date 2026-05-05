@@ -1,0 +1,193 @@
+// -------------------------------------------------------------------------
+// Divider component
+// Pattern: --uilib-divider-{property}[-{variant}][-{state}]
+// -------------------------------------------------------------------------
+
+// ---- Design tokens ------------------------------------------------------
+ui-lib-divider {
+  // Line colour and thickness
+  --uilib-divider-color: var(--uilib-surface-300, #d1d5db);
+  --uilib-divider-thickness: 1px;
+
+  // Border style token (driven by --type modifier)
+  --uilib-divider-border-style: solid;
+
+  // Spacing around the divider block
+  --uilib-divider-margin-h: var(--uilib-spacing-4, 1rem); // horizontal margin (vertical divider)
+  --uilib-divider-margin-v: var(--uilib-spacing-4, 1rem); // vertical margin (horizontal divider)
+
+  // Content area
+  --uilib-divider-content-padding: 0.5rem;
+  --uilib-divider-content-font-size: 0.875rem;
+  --uilib-divider-content-font-weight: 400;
+  --uilib-divider-content-color: var(--uilib-color-text, #374151);
+  --uilib-divider-content-font-family: var(--uilib-font-ui, inherit);
+
+  // Vertical divider min height
+  --uilib-divider-vertical-min-height: 5rem;
+}
+
+// ---- Base host ----------------------------------------------------------
+.ui-lib-divider {
+  box-sizing: border-box;
+
+  // ---- Pseudo-element shared base (hidden by default, shown per orientation) ----
+  &::before,
+  &::after {
+    content: '';
+    display: none; // revealed per orientation
+    flex: 1;
+  }
+
+  // ---- Content div --------------------------------------------------------
+  &__content {
+    font-family: var(--uilib-divider-content-font-family);
+    font-size: var(--uilib-divider-content-font-size);
+    font-weight: var(--uilib-divider-content-font-weight);
+    color: var(--uilib-divider-content-color);
+    flex-shrink: 0;
+
+    // Hide the wrapper when no content is projected so the line renders seamlessly
+    &:empty {
+      display: none;
+    }
+  }
+
+  // =========================================================================
+  // Horizontal orientation
+  // =========================================================================
+  &--horizontal {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: var(--uilib-divider-margin-v) 0;
+
+    &::before,
+    &::after {
+      display: block;
+      height: 0;
+      border-top: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
+        var(--uilib-divider-color);
+    }
+
+    .ui-lib-divider__content {
+      display: flex;
+      align-items: center;
+      padding: 0 var(--uilib-divider-content-padding);
+    }
+  }
+
+  // =========================================================================
+  // Vertical orientation
+  // =========================================================================
+  &--vertical {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    min-height: var(--uilib-divider-vertical-min-height);
+    margin: 0 var(--uilib-divider-margin-h);
+
+    &::before,
+    &::after {
+      display: block;
+      width: 0;
+      border-left: var(--uilib-divider-thickness) var(--uilib-divider-border-style)
+        var(--uilib-divider-color);
+    }
+
+    .ui-lib-divider__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--uilib-divider-content-padding) 0;
+    }
+  }
+
+  // =========================================================================
+  // Line type modifiers (set border style via token)
+  // =========================================================================
+  &--type-solid {
+    --uilib-divider-border-style: solid;
+  }
+  &--type-dashed {
+    --uilib-divider-border-style: dashed;
+  }
+  &--type-dotted {
+    --uilib-divider-border-style: dotted;
+  }
+
+  // =========================================================================
+  // Alignment — horizontal
+  // =========================================================================
+  &--horizontal {
+    // left: hide the before line so content sits at the start
+    &.ui-lib-divider--align-left::before {
+      display: none;
+    }
+    // right: hide the after line so content sits at the end
+    &.ui-lib-divider--align-right::after {
+      display: none;
+    }
+    // center is the default (both lines shown)
+  }
+
+  // =========================================================================
+  // Alignment — vertical
+  // =========================================================================
+  &--vertical {
+    // top: hide the before segment so content sits at the top
+    &.ui-lib-divider--align-top::before {
+      display: none;
+    }
+    // bottom: hide the after segment so content sits at the bottom
+    &.ui-lib-divider--align-bottom::after {
+      display: none;
+    }
+    // center is the default (both segments shown)
+  }
+
+  // =========================================================================
+  // Variant: material
+  // =========================================================================
+  &--variant-material {
+    --uilib-divider-color: var(--uilib-surface-300, #d1d5db);
+    --uilib-divider-content-font-weight: 500;
+  }
+
+  // =========================================================================
+  // Variant: bootstrap
+  // =========================================================================
+  &--variant-bootstrap {
+    --uilib-divider-color: rgba(0, 0, 0, 0.15);
+    --uilib-divider-content-font-weight: 400;
+  }
+
+  // =========================================================================
+  // Variant: minimal
+  // =========================================================================
+  &--variant-minimal {
+    --uilib-divider-color: var(--uilib-surface-200, #e5e7eb);
+    --uilib-divider-thickness: 1px;
+    --uilib-divider-content-font-size: 0.8125rem;
+    --uilib-divider-content-color: var(--uilib-surface-500, #6b7280);
+  }
+
+  // =========================================================================
+  // Dark-mode adjustments
+  // =========================================================================
+  [data-theme='dark'] &,
+  &[data-theme='dark'] {
+    --uilib-divider-color: var(--uilib-surface-600, #4b5563);
+    --uilib-divider-content-color: var(--uilib-surface-300, #d1d5db);
+
+    &.ui-lib-divider--variant-bootstrap {
+      --uilib-divider-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &.ui-lib-divider--variant-minimal {
+      --uilib-divider-color: var(--uilib-surface-700, #374151);
+      --uilib-divider-content-color: var(--uilib-surface-400, #9ca3af);
+    }
+  }
+}

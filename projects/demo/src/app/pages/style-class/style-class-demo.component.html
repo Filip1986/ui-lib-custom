@@ -1,5 +1,303 @@
 <section class="style-class-demo" data-testid="style-class-demo">
-  <h1>StyleClass</h1>
-  <p>Coming soon.</p>
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">StyleClass</h1>
+    <p class="demo-hero__description">
+      A directive that manages CSS class enter/leave transitions on a target element.
+      Useful for animated show/hide panels, menus, and overlays — all driven by CSS,
+      zero JavaScript animation libraries required.
+    </p>
+    <div class="demo-hero__badges">
+      <span class="badge badge--directive">Directive</span>
+      <span class="badge badge--package">ui-lib-custom/style-class</span>
+    </div>
+  </div>
+
+  <!-- Section 1: Toggle Mode -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Toggle Mode</h2>
+    <p class="demo-section__description">
+      Set <code>toggleClass</code> to add and remove a single CSS class on each click.
+      This is the simplest usage — no transitions, just a class toggle.
+    </p>
+
+    <div class="demo-card">
+      <div class="demo-card__preview">
+        <button
+          class="sc-btn"
+          [uiLibStyleClass]="'@next'"
+          toggleClass="sc-panel--open"
+        >
+          Toggle Panel
+        </button>
+        <div class="sc-panel">
+          <p>This panel is shown/hidden via a CSS class toggle.</p>
+          <p>No JavaScript animation — just CSS.</p>
+        </div>
+      </div>
+
+      <div class="demo-card__code">
+        <pre><code>&#x3C;button
+  [uiLibStyleClass]="'@next'"
+  toggleClass="sc-panel--open"
+&#x3E;
+  Toggle Panel
+&#x3C;/button&#x3E;
+&#x3C;div class="sc-panel"&#x3E;...&#x3C;/div&#x3E;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Fade Animation -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Fade Animation</h2>
+    <p class="demo-section__description">
+      Use <code>enterActiveClass</code> / <code>leaveActiveClass</code> with CSS keyframe
+      animations for smooth enter and leave transitions.
+    </p>
+
+    <div class="demo-card">
+      <div class="demo-card__preview">
+        <button
+          class="sc-btn"
+          [uiLibStyleClass]="'@next'"
+          enterFromClass="sc-fade--hidden"
+          enterActiveClass="sc-fade-in"
+          leaveActiveClass="sc-fade-out"
+          leaveToClass="sc-fade--hidden"
+          [hideOnOutsideClick]="true"
+        >
+          Show Panel (click outside to hide)
+        </button>
+        <div class="sc-panel sc-panel--fade sc-fade--hidden">
+          <strong>Fade Panel</strong>
+          <p>Click outside to close this panel.</p>
+        </div>
+      </div>
+
+      <div class="demo-card__code">
+        <pre><code>&#x3C;button
+  [uiLibStyleClass]="'@next'"
+  enterFromClass="hidden"
+  enterActiveClass="fade-in"
+  leaveActiveClass="fade-out"
+  leaveToClass="hidden"
+  [hideOnOutsideClick]="true"
+&#x3E;Show Panel&#x3C;/button&#x3E;
+&#x3C;div class="hidden"&#x3E;...&#x3C;/div&#x3E;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Slide Animation -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Slide Animation</h2>
+    <p class="demo-section__description">
+      Use the full <code>enterDoneClass</code> / <code>leaveDoneClass</code> lifecycle
+      to control the final state independently from the active animation class.
+    </p>
+
+    <div class="demo-card">
+      <div class="demo-card__preview">
+        <button
+          class="sc-btn"
+          [uiLibStyleClass]="'@next'"
+          enterFromClass="sc-slide--hidden"
+          enterActiveClass="sc-slide-down"
+          enterDoneClass="sc-slide--open"
+          leaveActiveClass="sc-slide-up"
+          leaveDoneClass="sc-slide--hidden"
+        >
+          Toggle Slide
+        </button>
+        <div class="sc-panel sc-panel--slide sc-slide--hidden">
+          <strong>Slide Panel</strong>
+          <p>This panel slides in/out using enterDoneClass and leaveDoneClass.</p>
+        </div>
+      </div>
+
+      <div class="demo-card__code">
+        <pre><code>&#x3C;button
+  [uiLibStyleClass]="'@next'"
+  enterFromClass="slide-hidden"
+  enterActiveClass="slide-down"
+  enterDoneClass="slide-open"
+  leaveActiveClass="slide-up"
+  leaveDoneClass="slide-hidden"
+&#x3E;Toggle Slide&#x3C;/button&#x3E;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Special Selectors -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Special Selectors</h2>
+    <p class="demo-section__description">
+      Use <code>@parent</code>, <code>@prev</code>, and <code>@grandparent</code>
+      to target elements relative to the trigger without needing CSS IDs.
+    </p>
+
+    <div class="demo-card">
+      <div class="demo-card__preview sc-selectors-demo">
+
+        <!-- @prev -->
+        <div class="sc-selector-row">
+          <div class="sc-badge sc-badge--prev">@prev target</div>
+          <button
+            class="sc-btn sc-btn--sm"
+            [uiLibStyleClass]="'@prev'"
+            toggleClass="sc-badge--active"
+          >
+            Toggle @prev
+          </button>
+        </div>
+
+        <!-- @parent -->
+        <div class="sc-selector-row sc-parent-wrapper">
+          <span class="sc-badge sc-badge--parent">@parent wrapper</span>
+          <button
+            class="sc-btn sc-btn--sm"
+            [uiLibStyleClass]="'@parent'"
+            toggleClass="sc-parent--active"
+          >
+            Toggle @parent
+          </button>
+        </div>
+
+      </div>
+
+      <div class="demo-card__code">
+        <pre><code>&#x3C;!-- @prev --&#x3E;
+&#x3C;div class="target"&#x3E;Prev target&#x3C;/div&#x3E;
+&#x3C;button [uiLibStyleClass]="'@prev'"
+        toggleClass="is-active"&#x3E;Toggle&#x3C;/button&#x3E;
+
+&#x3C;!-- @parent --&#x3E;
+&#x3C;div class="parent"&#x3E;
+  &#x3C;button [uiLibStyleClass]="'@parent'"
+          toggleClass="is-active"&#x3E;Toggle&#x3C;/button&#x3E;
+&#x3C;/div&#x3E;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: CSS Selector -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">CSS Selector</h2>
+    <p class="demo-section__description">
+      Pass any CSS selector to target a specific element elsewhere in the page.
+    </p>
+
+    <div class="demo-card">
+      <div class="demo-card__preview">
+        <button
+          class="sc-btn"
+          [uiLibStyleClass]="'#sc-remote-panel'"
+          toggleClass="sc-panel--open"
+        >
+          Toggle Remote Panel
+        </button>
+        <div id="sc-remote-panel" class="sc-panel sc-panel--remote">
+          <p>This panel is targeted by <code>#sc-remote-panel</code> CSS selector.</p>
+        </div>
+      </div>
+
+      <div class="demo-card__code">
+        <pre><code>&#x3C;button
+  [uiLibStyleClass]="'#my-panel'"
+  toggleClass="is-open"
+&#x3E;Toggle&#x3C;/button&#x3E;
+
+&#x3C;div id="my-panel"&#x3E;...&#x3C;/div&#x3E;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Table -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 class="demo-section__subtitle">Inputs</h3>
+    <table class="api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>uiLibStyleClass</code></td>
+          <td><code>string</code></td>
+          <td><em>required</em></td>
+          <td>Target selector: <code>@next</code>, <code>@prev</code>, <code>@parent</code>, <code>@grandparent</code>, or a CSS selector.</td>
+        </tr>
+        <tr>
+          <td><code>toggleClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Single class to toggle. When set, bypasses the full enter/leave lifecycle.</td>
+        </tr>
+        <tr>
+          <td><code>enterFromClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) applied at the start of enter.</td>
+        </tr>
+        <tr>
+          <td><code>enterActiveClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) applied during enter (e.g. animation class).</td>
+        </tr>
+        <tr>
+          <td><code>enterToClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) applied at end of enter transition.</td>
+        </tr>
+        <tr>
+          <td><code>enterDoneClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) kept after enter completes.</td>
+        </tr>
+        <tr>
+          <td><code>leaveFromClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) applied at the start of leave.</td>
+        </tr>
+        <tr>
+          <td><code>leaveActiveClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) applied during leave (e.g. animation class).</td>
+        </tr>
+        <tr>
+          <td><code>leaveToClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) applied at end of leave transition.</td>
+        </tr>
+        <tr>
+          <td><code>leaveDoneClass</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Class(es) kept after leave completes.</td>
+        </tr>
+        <tr>
+          <td><code>hideOnOutsideClick</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When <code>true</code>, clicking outside the target triggers leave / toggles off.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 

@@ -1,14 +1,187 @@
-.tag-demo {
-  padding: 1.5rem;
+.demo-page {
+  max-width: 900px;
+  padding: 2rem;
+}
 
-  h1 {
+// ---- Hero --------------------------------------------------------
+.demo-hero {
+  margin-bottom: 2.5rem;
+
+  &__title {
     margin: 0 0 0.5rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
     color: var(--uilib-page-fg);
   }
 
-  p {
-    margin: 0;
+  &__desc {
+    margin: 0 0 1rem;
+    font-size: 1rem;
     color: var(--uilib-muted);
+    line-height: 1.6;
+    max-width: 640px;
+  }
+
+  &__preview {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+// ---- Sections ----------------------------------------------------
+.demo-section {
+  margin-bottom: 2.5rem;
+
+  &__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--uilib-page-fg);
+  }
+
+  &__desc {
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+    color: var(--uilib-muted);
+    line-height: 1.5;
+
+    code {
+      font-size: 0.85em;
+      padding: 0.1em 0.3em;
+      border-radius: 0.2em;
+      background: var(--uilib-surface-100, #f3f4f6);
+    }
+  }
+}
+
+// ---- Tag rows ----------------------------------------------------
+.demo-row {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+
+  &--align-center {
+    align-items: center;
+  }
+}
+
+// ---- Variant groups ----------------------------------------------
+.demo-variant-group {
+  margin-bottom: 1.25rem;
+
+  &__label {
+    margin: 0 0 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--uilib-muted);
+  }
+}
+
+// ---- Playground --------------------------------------------------
+.demo-playground {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 1.5rem;
+  border: 1px solid var(--uilib-surface-300, #d1d5db);
+  border-radius: 0.5rem;
+  background: var(--uilib-surface-50, #f9fafb);
+
+  &__preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 160px;
+    min-height: 80px;
+    padding: 1rem;
+    border: 1px dashed var(--uilib-surface-300, #d1d5db);
+    border-radius: 0.375rem;
+    background: var(--uilib-surface-0, #ffffff);
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+  }
+}
+
+.demo-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+
+  &__label {
+    width: 5.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--uilib-muted);
+    flex-shrink: 0;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+}
+
+.demo-btn {
+  padding: 0.25rem 0.625rem;
+  font-size: 0.8rem;
+  border: 1px solid var(--uilib-surface-300, #d1d5db);
+  border-radius: 0.25rem;
+  background: var(--uilib-surface-0, #ffffff);
+  color: var(--uilib-page-fg);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: var(--uilib-surface-100, #f3f4f6);
+  }
+
+  &--active {
+    background: var(--uilib-color-primary, #6366f1);
+    border-color: var(--uilib-color-primary, #6366f1);
+    color: #ffffff;
+  }
+}
+
+// ---- API table ---------------------------------------------------
+.demo-api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--uilib-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  code {
+    font-size: 0.8em;
+    padding: 0.1em 0.3em;
+    border-radius: 0.2em;
+    background: var(--uilib-surface-100, #f3f4f6);
   }
 }
