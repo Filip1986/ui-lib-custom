@@ -76,6 +76,7 @@ import type * as UiLibMeterGroup from 'ui-lib-custom/meter-group';
 import type * as UiLibProgressSpinner from 'ui-lib-custom/progress-spinner';
 import type * as UiLibRipple from 'ui-lib-custom/ripple';
 import type * as UiLibScrollTop from 'ui-lib-custom/scroll-top';
+import type * as UiLibStyleClass from 'ui-lib-custom/style-class';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -540,5 +541,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from scroll-top', async (): Promise<void> => {
     const mod: typeof UiLibScrollTop = await import('ui-lib-custom/scroll-top');
     expect(mod.ScrollTop).toBeDefined();
+  });
+
+  it('should import from style-class', async (): Promise<void> => {
+    const mod: typeof UiLibStyleClass = await import('ui-lib-custom/style-class');
+    expect(mod.StyleClass).toBeDefined();
   });
 });

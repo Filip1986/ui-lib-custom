@@ -28,6 +28,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `StyleClass` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `FocusTrap` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Inplace` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -94,6 +95,54 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [StyleClass directive]
+Changed:
+  - projects/ui-lib-custom/src/lib/style-class/style-class.ts (new directive)
+  - projects/ui-lib-custom/src/lib/style-class/style-class.spec.ts (16 unit tests)
+  - projects/ui-lib-custom/src/lib/style-class/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/style-class/README.md (API docs)
+  - projects/ui-lib-custom/style-class/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/style-class/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (style-class added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (style-class import test added)
+  - projects/demo/src/app/pages/style-class/style-class-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/style-class/style-class-demo.component.html (hero + 5 sections + API table)
+  - projects/demo/src/app/pages/style-class/style-class-demo.component.scss (full demo styles with fade/slide animations)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from StyleClass entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: StyleClass directive fully complete. PrimeNG-inspired utility directive for CSS class-based
+  enter/leave transitions on a target element.
+  Selector: [uiLibStyleClass]. Required input: uiLibStyleClass (target selector string).
+  Special selectors: @next, @prev, @parent, @grandparent (relative to host); any CSS selector resolves
+  via document.querySelector.
+  Inputs: toggleClass, enterFromClass, enterActiveClass, enterToClass, enterDoneClass,
+          leaveFromClass, leaveActiveClass, leaveToClass, leaveDoneClass, hideOnOutsideClick.
+  Two modes: toggleClass mode (single class toggle per click) and full transition lifecycle mode
+  (enterFrom → rAF → enterActive+enterTo → transitionend/animationend → enterDone).
+  500 ms setTimeout fallback ensures directive works when no CSS transition is defined (e.g. in tests).
+  hideOnOutsideClick binds a capture-phase document click listener that triggers leave/toggle-off when
+  click target is outside both the trigger and the resolved target element.
+  Registers click listener runOutsideAngular (no zone-triggered CD). SSR-safe via isPlatformBrowser.
+  DestroyRef cleans up all listeners on destroy. Signal inputs, standalone directive.
+  Demo: 5 sections (toggle mode, fade animation, slide animation, special selectors, CSS selector) + API table.
+  16 unit tests passing. 78/78 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/style-class/ projects/demo/src/app/pages/style-class/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/style-class Built, zero errors,
+  npx.cmd jest --testPathPatterns=style-class --no-coverage (16/16 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (78/78 PASS).
+Terminal notes:
+  1. Signal inputs on directive require fixture.detectChanges() after host.signalField.set(...)
+     to propagate new values from parent template bindings to the directive — without this the
+     directive still reads the stale initial value from its input() signal.
+  2. jest.advanceTimersByTime(600) flushes both rAF (~16 ms) + 500 ms timeout in a single call,
+     verifying the full enter/leave cycle completes.
+  3. jest.advanceTimersByTime(20) flushes only rAF — useful for testing intermediate state after
+     rAF (enterActive added) before the 500 ms fallback fires.
+  4. Dispatching new Event('transitionend') on the target after advanceTimersByTime(20) tests the
+     explicit transitionend path (fires before the 500 ms timeout).
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [ScrollTop component]
 Changed:

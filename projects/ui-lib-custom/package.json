@@ -284,6 +284,10 @@
     "./scroll-top": {
       "esm2022": "./esm2022/scroll-top/index.mjs",
       "esm": "./esm2022/scroll-top/index.mjs"
+    },
+    "./style-class": {
+      "esm2022": "./esm2022/style-class/index.mjs",
+      "esm": "./esm2022/style-class/index.mjs"
     }
   },
   "typesVersions": {
@@ -467,6 +471,9 @@
       ],
       "scroll-top": [
         "./scroll-top/index.d.ts"
+      ],
+      "style-class": [
+        "./style-class/index.d.ts"
       ]
     }
   }
