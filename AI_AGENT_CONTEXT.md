@@ -32,6 +32,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Bind` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `BlockUI` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Chip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -85,6 +86,40 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [Chip component]
+Changed:
+  - projects/ui-lib-custom/src/lib/chip/chip.types.ts (new)
+  - projects/ui-lib-custom/src/lib/chip/chip.ts (new component)
+  - projects/ui-lib-custom/src/lib/chip/chip.html (new template)
+  - projects/ui-lib-custom/src/lib/chip/chip.scss (new styles)
+  - projects/ui-lib-custom/src/lib/chip/chip.spec.ts (19 unit tests)
+  - projects/ui-lib-custom/src/lib/chip/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/chip/README.md (API docs)
+  - projects/ui-lib-custom/chip/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/chip/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (chip added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (chip import test added)
+  - projects/demo/src/app/pages/chip/chip-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/chip/chip-demo.component.html (full demo — hero + 8 sections + API table)
+  - projects/demo/src/app/pages/chip/chip-demo.component.scss (demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Chip entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Chip component fully complete. PrimeNG-inspired compact tag/badge component.
+  Supports label, icon (leading, hidden when image is set), image (circular thumbnail),
+  and a removable close button that emits a `removed` output (MouseEvent).
+  Three sizes: sm / md / lg. Three variants: material (pill + shadow), bootstrap (square corners),
+  minimal (muted surface + border). Signal inputs/outputs, ViewEncapsulation.None + OnPush + standalone.
+  Note: output named `removed` (not `onRemove`) to satisfy @angular-eslint/no-output-on-prefix rule.
+  19 unit tests passing. 69/69 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/chip/ projects/demo/src/app/pages/chip/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/chip Built, zero errors,
+  npx.cmd jest --testPathPatterns=chip --no-coverage (19/19 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (69/69 PASS).
+Terminal notes: Angular ESLint rejects outputs prefixed with "on" — use `removed` not `onRemove`.
+  `textContent!.trim()` (non-null assertion) required in specs; `?.` and `?? ''` both trigger ESLint warnings.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-04 [BlockUI component]
 Changed:
@@ -148,69 +183,3 @@ Verification:
 Terminal notes: Python used for all file writes (bash heredoc expansion issues). Constructor must NOT have `public` modifier (eslint rule). JSDOM coerces setProperty(el, 'title', null) to string "null" — test fixed to assert `not.toBe('Was Here')` instead of `toBeFalsy()`.
 Next step: knip baseline + dead-code cleanup, or constants extraction pass.
 
-Date: 2026-05-01 [Avatar component]
-Changed:
-  - projects/ui-lib-custom/src/lib/avatar/avatar.types.ts (new)
-  - projects/ui-lib-custom/src/lib/avatar/avatar.ts (new component + re-export types)
-  - projects/ui-lib-custom/src/lib/avatar/avatar.html (new template)
-  - projects/ui-lib-custom/src/lib/avatar/avatar.scss (new styles)
-  - projects/ui-lib-custom/src/lib/avatar/avatar-group.ts (new AvatarGroup component)
-  - projects/ui-lib-custom/src/lib/avatar/avatar-group.html (new template)
-  - projects/ui-lib-custom/src/lib/avatar/avatar-group.scss (new styles)
-  - projects/ui-lib-custom/src/lib/avatar/avatar.spec.ts (19 unit tests)
-  - projects/ui-lib-custom/src/lib/avatar/index.ts (barrel)
-  - projects/ui-lib-custom/avatar/ng-package.json (secondary entry point)
-  - projects/ui-lib-custom/avatar/package.json (secondary entry point)
-  - projects/ui-lib-custom/avatar/public-api.ts (secondary entry point)
-  - projects/ui-lib-custom/package.json (avatar added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (avatar import test added)
-  - projects/demo/src/app/pages/avatar/avatar-demo.component.ts (full demo)
-  - projects/demo/src/app/pages/avatar/avatar-demo.component.html (full demo -- 8 sections)
-  - projects/demo/src/app/pages/avatar/avatar-demo.component.scss (demo styles)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: TODO from Avatar entry)
-  - AI_AGENT_CONTEXT.md (updated)
-State: Avatar component fully complete. PrimeNG-inspired Avatar + AvatarGroup components:
-  - Avatar: image/label/icon display modes with priority (image > label > icon > ng-content)
-  - Three shapes: circle (default) / square
-  - Three sizes: sm / md / lg
-  - Three variants: material / bootstrap / minimal (inherits ThemeConfigService)
-  - ARIA: role=img on Avatar, role=group on AvatarGroup, auto-resolved aria-label
-  - CSS vars: --uilib-avatar-* prefix throughout
-  - AvatarGroup: stacks avatars with CSS negative-margin overlap
-  - Signal inputs, ViewEncapsulation.None + OnPush + standalone on both
-  - 19 unit tests passing. 66/66 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/avatar/ projects/demo/src/app/pages/avatar/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx jest --testPathPatterns=avatar --no-coverage (19/19 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (66/66 PASS),
-  npx ng build ui-lib-custom -- ui-lib-custom/avatar Built, zero errors.
-Terminal notes: Python used for all file writes (bash heredoc expansion issues with ! and backticks).
-Next step: knip baseline + dead-code cleanup, or constants extraction pass.
-
-Date: 2026-05-01 [AutoFocus directive]
-Changed:
-  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.ts (new directive)
-  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.spec.ts (7 unit tests)
-  - projects/ui-lib-custom/src/lib/auto-focus/index.ts (barrel)
-  - projects/ui-lib-custom/auto-focus/ng-package.json (secondary entry point)
-  - projects/ui-lib-custom/auto-focus/package.json (secondary entry point)
-  - projects/ui-lib-custom/package.json (auto-focus added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (auto-focus import test added)
-  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.ts (full demo)
-  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.html (full demo — hero + 3 sections + API table)
-  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.scss (full demo styles)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from AutoFocus entry)
-  - AI_AGENT_CONTEXT.md (updated)
-State: AutoFocus directive fully complete. PrimeNG-inspired [uiLibAutoFocus] directive that programmatically
-  focuses the host element after ngAfterViewInit (via setTimeout for deferred compatibility). Single boolean
-  `autofocus` input (default true). Host class `ui-lib-autofocus`. Signal input. ViewEncapsulation.None not
-  needed (directive, no template/styles). Secondary entry point wired and built.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/auto-focus/ projects/demo/src/app/pages/auto-focus/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx jest --testPathPatterns=auto-focus --no-coverage (7/7 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (65/65 PASS),
-  npx ng build ui-lib-custom — ui-lib-custom/auto-focus Built, zero errors.
-Terminal notes: HTML template `{` chars in <pre> blocks must use &#123;/&#125; HTML entities to avoid Angular block-syntax parser errors. `@` in code examples must use &#64;.
-Next step: knip baseline + dead-code cleanup, or constants extraction pass.
-Terminal notes: Write tool truncates large HTML files on the Linux mount; used Python open() to write the full demo HTML. Toast scss/ts/service.ts had pre-existing null bytes — stripped with Python binary mode.
-Next step: knip baseline + dead-code cleanup, or constants extraction pass.

@@ -1,5 +1,285 @@
 <section class="chip-demo" data-testid="chip-demo">
-  <h1>Chip</h1>
-  <p>Coming soon.</p>
-</section>
 
+  <!-- Hero -->
+  <div class="chip-hero">
+    <h1 class="chip-hero__title">Chip</h1>
+    <p class="chip-hero__lead">
+      Compact element representing an attribute, tag, or dismissible item.
+      Supports an optional icon or image, three sizes, and three design variants.
+      Use the <code>removable</code> input to add a dismiss button that emits
+      an <code>onRemove</code> event.
+    </p>
+    <div class="chip-hero__tags">
+      <span class="chip-tag">Component</span>
+      <span class="chip-tag">Misc</span>
+      <span class="chip-tag">A11y</span>
+    </div>
+  </div>
+
+  <!-- Section 1: Basic -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">Basic</h2>
+    <p class="chip-section__desc">
+      Set the <code>label</code> input to display a simple text chip.
+    </p>
+    <div class="chip-row">
+      <ui-lib-chip label="Action" />
+      <ui-lib-chip label="Comedy" />
+      <ui-lib-chip label="Mystery" />
+      <ui-lib-chip label="Thriller" />
+    </div>
+    <pre class="chip-code"><code>&lt;ui-lib-chip label="Action" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 2: Icon -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">Icon</h2>
+    <p class="chip-section__desc">
+      Add an <code>icon</code> (a PrimeIcons CSS class) to decorate the chip.
+    </p>
+    <div class="chip-row">
+      <ui-lib-chip label="Angular" icon="pi pi-bolt" />
+      <ui-lib-chip label="Verified" icon="pi pi-check-circle" />
+      <ui-lib-chip label="Starred" icon="pi pi-star" />
+    </div>
+    <pre class="chip-code"><code>&lt;ui-lib-chip label="Angular" icon="pi pi-bolt" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 3: Image -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">Image</h2>
+    <p class="chip-section__desc">
+      Provide an <code>image</code> URL to render a circular thumbnail.
+      The <code>imageAlt</code> input sets its accessible description.
+    </p>
+    <div class="chip-row">
+      <ui-lib-chip
+        label="Amy"
+        image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
+        imageAlt="Amy Elsner"
+      />
+      <ui-lib-chip
+        label="Asiya"
+        image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
+        imageAlt="Asiya Javayant"
+      />
+      <ui-lib-chip
+        label="Onyama"
+        image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
+        imageAlt="Onyama Limba"
+      />
+    </div>
+    <pre class="chip-code"><code>&lt;ui-lib-chip label="Amy" image="/assets/amy.png" imageAlt="Amy Elsner" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 4: Removable -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">Removable</h2>
+    <p class="chip-section__desc">
+      Set <code>[removable]="true"</code> to display a close button.
+      Clicking it emits the <code>(onRemove)</code> event — the chip itself
+      does not disappear automatically; you control visibility in the parent.
+    </p>
+    <div class="chip-row">
+      @for (chip of activeChips(); track chip) {
+        <ui-lib-chip
+          [label]="chip"
+          [removable]="true"
+          (removed)="removeChip(chip)"
+        />
+      }
+      @if (activeChips().length === 0) {
+        <span class="chip-empty">All chips removed.</span>
+      }
+    </div>
+    @if (removedChips().length > 0) {
+      <p class="chip-section__desc chip-removed-log">
+        Removed: {{ removedChips().join(', ') }}
+        <button class="chip-reset-btn" (click)="resetChips()">Reset</button>
+      </p>
+    }
+    <pre class="chip-code"><code>&lt;ui-lib-chip label="Angular" [removable]="true" (onRemove)="onRemove()" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 5: Sizes -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">Sizes</h2>
+    <p class="chip-section__desc">
+      Three sizes available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
+    </p>
+    <div class="chip-row chip-row--align-center">
+      @for (size of sizes; track size) {
+        <ui-lib-chip [label]="size" [size]="size" icon="pi pi-tag" />
+      }
+    </div>
+    <pre class="chip-code"><code>&lt;ui-lib-chip label="sm" size="sm" /&gt;
+&lt;ui-lib-chip label="md" size="md" /&gt;
+&lt;ui-lib-chip label="lg" size="lg" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 6: Variants -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">Variants</h2>
+    <p class="chip-section__desc">
+      Three design variants: <code>material</code> (elevated, pill-shaped),
+      <code>bootstrap</code> (badge-like, square corners), and
+      <code>minimal</code> (muted surface with border).
+    </p>
+    @for (variant of variants; track variant) {
+      <div class="chip-variant-row">
+        <span class="chip-variant-label">{{ variant }}</span>
+        <div class="chip-row">
+          <ui-lib-chip label="Label only" [variant]="variant" />
+          <ui-lib-chip label="With icon" icon="pi pi-star" [variant]="variant" />
+          <ui-lib-chip label="Removable" [removable]="true" [variant]="variant" />
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Section 7: Playground -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">Playground</h2>
+    <p class="chip-section__desc">
+      Customise the chip using the controls below.
+    </p>
+    <div class="chip-playground">
+      <div class="chip-playground__preview">
+        <ui-lib-chip
+          [label]="playgroundLabel()"
+          [icon]="playgroundIcon()"
+          [size]="playgroundSize()"
+          [variant]="playgroundVariant()"
+          [removable]="playgroundRemovable()"
+        />
+      </div>
+      <div class="chip-playground__controls">
+        <div class="chip-control">
+          <span class="chip-control__label">Size</span>
+          <div class="chip-control__options">
+            @for (size of sizes; track size) {
+              <button
+                class="chip-control__btn"
+                [class.chip-control__btn--active]="playgroundSize() === size"
+                (click)="setSize(size)"
+              >
+                {{ size }}
+              </button>
+            }
+          </div>
+        </div>
+        <div class="chip-control">
+          <span class="chip-control__label">Variant</span>
+          <div class="chip-control__options">
+            @for (variant of variants; track variant) {
+              <button
+                class="chip-control__btn"
+                [class.chip-control__btn--active]="playgroundVariant() === variant"
+                (click)="setVariant(variant)"
+              >
+                {{ variant }}
+              </button>
+            }
+          </div>
+        </div>
+        <div class="chip-control">
+          <span class="chip-control__label">Options</span>
+          <div class="chip-control__options">
+            <button
+              class="chip-control__btn"
+              [class.chip-control__btn--active]="playgroundRemovable()"
+              (click)="toggleRemovable()"
+            >
+              removable
+            </button>
+            <button
+              class="chip-control__btn"
+              [class.chip-control__btn--active]="playgroundIcon() !== null"
+              (click)="toggleIcon()"
+            >
+              icon
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 8: API -->
+  <div class="chip-section">
+    <h2 class="chip-section__title">API</h2>
+    <table class="chip-api-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Text displayed inside the chip.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>CSS class for a leading icon (e.g. <code>"pi pi-user"</code>). Ignored when image is set.</td>
+        </tr>
+        <tr>
+          <td><code>image</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>URL of a circular thumbnail image to display at the start of the chip.</td>
+        </tr>
+        <tr>
+          <td><code>imageAlt</code></td>
+          <td><code>string</code></td>
+          <td><code>"Chip"</code></td>
+          <td>Accessible alt text for the chip image.</td>
+        </tr>
+        <tr>
+          <td><code>removable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When true, renders a close button.</td>
+        </tr>
+        <tr>
+          <td><code>removeIcon</code></td>
+          <td><code>string</code></td>
+          <td><code>"pi pi-times"</code></td>
+          <td>CSS class for the remove button icon.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>"sm" | "md" | "lg"</code></td>
+          <td><code>"md"</code></td>
+          <td>Size of the chip.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>"material" | "bootstrap" | "minimal" | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant. Inherits from <code>ThemeConfigService</code> when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes applied to the host element.</td>
+        </tr>
+        <tr>
+          <td><code>(removed)</code></td>
+          <td><code>OutputEmitterRef&lt;MouseEvent&gt;</code></td>
+          <td>—</td>
+          <td>Emitted when the remove button is clicked.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
