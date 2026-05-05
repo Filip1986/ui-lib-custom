@@ -1,5 +1,244 @@
-<section class="tag-demo" data-testid="tag-demo">
-  <h1>Tag</h1>
-  <p>Coming soon.</p>
+<section class="demo-page" data-testid="tag-demo">
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">Tag</h1>
+    <p class="demo-hero__desc">
+      A compact label that communicates status, category, or classification at a glance.
+      Supports seven severity colours, three sizes, three design variants, and optional icons.
+    </p>
+    <div class="demo-hero__preview">
+      <ui-lib-tag value="New" severity="primary" />
+      <ui-lib-tag value="Success" severity="success" />
+      <ui-lib-tag value="Warning" severity="warn" />
+      <ui-lib-tag value="Danger" severity="danger" />
+      <ui-lib-tag value="Info" severity="info" icon="pi pi-info-circle" />
+    </div>
+  </div>
+
+  <!-- Section 1: Severity -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Severity</h2>
+    <p class="demo-section__desc">
+      Use the <code>severity</code> input to communicate meaning through colour.
+    </p>
+    <div class="demo-row">
+      @for (severity of severities; track severity) {
+        <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" />
+      }
+    </div>
+  </div>
+
+  <!-- Section 2: Sizes -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__desc">
+      Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
+    </p>
+    <div class="demo-row demo-row--align-center">
+      <ui-lib-tag value="Small" size="sm" severity="primary" />
+      <ui-lib-tag value="Medium" size="md" severity="primary" />
+      <ui-lib-tag value="Large" size="lg" severity="primary" />
+    </div>
+  </div>
+
+  <!-- Section 3: Rounded -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Rounded</h2>
+    <p class="demo-section__desc">
+      Set <code>[rounded]="true"</code> to apply fully rounded (pill) corners.
+    </p>
+    <div class="demo-row">
+      @for (severity of severities; track severity) {
+        <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" [rounded]="true" />
+      }
+    </div>
+  </div>
+
+  <!-- Section 4: With Icons -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">With Icons</h2>
+    <p class="demo-section__desc">
+      Provide a PrimeIcons class via the <code>icon</code> input to render a leading icon.
+    </p>
+    <div class="demo-row">
+      <ui-lib-tag value="Primary" icon="pi pi-tag" severity="primary" />
+      <ui-lib-tag value="Success" icon="pi pi-check-circle" severity="success" />
+      <ui-lib-tag value="Warning" icon="pi pi-exclamation-triangle" severity="warn" />
+      <ui-lib-tag value="Danger" icon="pi pi-times-circle" severity="danger" />
+      <ui-lib-tag value="Info" icon="pi pi-info-circle" severity="info" />
+      <ui-lib-tag value="Rounded" icon="pi pi-star" severity="secondary" [rounded]="true" />
+    </div>
+  </div>
+
+  <!-- Section 5: Design Variants -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__desc">
+      Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
+    </p>
+    @for (variant of variants; track variant) {
+      <div class="demo-variant-group">
+        <h3 class="demo-variant-group__label">{{ variant }}</h3>
+        <div class="demo-row">
+          @for (severity of severities; track severity) {
+            <ui-lib-tag
+              [value]="severityLabels[severity]"
+              [severity]="severity"
+              [variant]="variant"
+            />
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Section 6: Interactive Playground -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Playground</h2>
+    <p class="demo-section__desc">Customise the tag using the controls below.</p>
+
+    <div class="demo-playground">
+      <div class="demo-playground__preview">
+        <ui-lib-tag
+          [value]="playgroundValue()"
+          [severity]="playgroundSeverity()"
+          [size]="playgroundSize()"
+          [variant]="playgroundVariant()"
+          [rounded]="playgroundRounded()"
+          [icon]="playgroundIcon()"
+        />
+      </div>
+
+      <div class="demo-playground__controls">
+        <!-- Severity -->
+        <div class="demo-control">
+          <span class="demo-control__label">Severity</span>
+          <div class="demo-control__buttons">
+            @for (severity of severities; track severity) {
+              <button
+                type="button"
+                class="demo-btn"
+                [class.demo-btn--active]="playgroundSeverity() === severity"
+                (click)="setSeverity(severity)"
+              >{{ severityLabels[severity] }}</button>
+            }
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div class="demo-control">
+          <span class="demo-control__label">Size</span>
+          <div class="demo-control__buttons">
+            @for (size of sizes; track size) {
+              <button
+                type="button"
+                class="demo-btn"
+                [class.demo-btn--active]="playgroundSize() === size"
+                (click)="setSize(size)"
+              >{{ size }}</button>
+            }
+          </div>
+        </div>
+
+        <!-- Variant -->
+        <div class="demo-control">
+          <span class="demo-control__label">Variant</span>
+          <div class="demo-control__buttons">
+            @for (variant of variants; track variant) {
+              <button
+                type="button"
+                class="demo-btn"
+                [class.demo-btn--active]="playgroundVariant() === variant"
+                (click)="setVariant(variant)"
+              >{{ variant }}</button>
+            }
+          </div>
+        </div>
+
+        <!-- Rounded -->
+        <div class="demo-control">
+          <span class="demo-control__label">Rounded</span>
+          <button
+            type="button"
+            class="demo-btn"
+            [class.demo-btn--active]="playgroundRounded()"
+            (click)="toggleRounded()"
+          >{{ playgroundRounded() ? 'On' : 'Off' }}</button>
+        </div>
+
+        <!-- Icon -->
+        <div class="demo-control">
+          <span class="demo-control__label">Icon</span>
+          <button
+            type="button"
+            class="demo-btn"
+            [class.demo-btn--active]="playgroundIcon() !== null"
+            (click)="toggleIcon()"
+          >{{ playgroundIcon() ? 'On' : 'Off' }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Table -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>value</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Text label rendered inside the tag.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>PrimeIcons CSS class for a leading icon.</td>
+        </tr>
+        <tr>
+          <td><code>severity</code></td>
+          <td><code>'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast'</code></td>
+          <td><code>'primary'</code></td>
+          <td>Colour palette for the tag.</td>
+        </tr>
+        <tr>
+          <td><code>rounded</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When true, applies fully rounded (pill) corners.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size of the tag.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant; inherits from ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes added to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 

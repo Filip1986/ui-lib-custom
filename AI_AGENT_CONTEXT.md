@@ -20,11 +20,13 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Toast component complete; resuming backlog
+- **Active focus:** Tag component complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
+
+- `Tag` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -95,6 +97,43 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [Tag component]
+Changed:
+  - projects/ui-lib-custom/src/lib/tag/tag.types.ts (new — TagVariant/Size/Severity types)
+  - projects/ui-lib-custom/src/lib/tag/tag.ts (new component)
+  - projects/ui-lib-custom/src/lib/tag/tag.html (new template — icon span + value span + ng-content)
+  - projects/ui-lib-custom/src/lib/tag/tag.scss (new — 3 variants + 3 sizes + 7 severity palettes + dark mode)
+  - projects/ui-lib-custom/src/lib/tag/tag.spec.ts (20 unit tests)
+  - projects/ui-lib-custom/src/lib/tag/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/tag/README.md (API docs)
+  - projects/ui-lib-custom/tag/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/tag/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (tag added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (tag import test added)
+  - projects/demo/src/app/pages/tag/tag-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/tag/tag-demo.component.html (hero + 6 sections + API table)
+  - projects/demo/src/app/pages/tag/tag-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Tag entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Tag component fully complete. PrimeNG-inspired compact label for status/severity/classification.
+  Selector: ui-lib-tag. Inputs: value (string|null), icon (string|null), severity (primary/secondary/
+  success/info/warn/danger/contrast, default primary), rounded (boolean, default false),
+  size (sm/md/lg, default md), variant (material/bootstrap/minimal|null), styleClass (string|null).
+  No outputs. ng-content projection supported for custom content.
+  Seven severity palettes: primary (indigo), secondary (grey), success (green), info (blue),
+  warn (amber), danger (red), contrast (dark). Minimal variant uses light tinted backgrounds with
+  coloured text instead of solid fills. Dark mode tokens provided for minimal variant.
+  Bootstrap variant uses classic Bootstrap 5 colours with adjusted info/warn text for contrast.
+  role="status" + aria-label on host. Icons marked aria-hidden="true".
+  Signal inputs, ViewEncapsulation.None + OnPush + standalone.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/tag/ projects/demo/src/app/pages/tag/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/tag Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/tag --no-coverage (20/20 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (79/79 PASS).
+Terminal notes: None — straightforward build. No Windows workarounds needed.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [StyleClass directive]
 Changed:

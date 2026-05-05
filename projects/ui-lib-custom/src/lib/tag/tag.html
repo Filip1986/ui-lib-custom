@@ -1,0 +1,8 @@
+@if (showIcon()) {
+  <span class="ui-lib-tag__icon" [class]="icon()!" aria-hidden="true"></span>
+}
+@if (value()) {
+  <span class="ui-lib-tag__value">{{ value() }}</span>
+}
+<ng-content />
+

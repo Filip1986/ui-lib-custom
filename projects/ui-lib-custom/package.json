@@ -288,6 +288,10 @@
     "./style-class": {
       "esm2022": "./esm2022/style-class/index.mjs",
       "esm": "./esm2022/style-class/index.mjs"
+    },
+    "./tag": {
+      "esm2022": "./esm2022/tag/index.mjs",
+      "esm": "./esm2022/tag/index.mjs"
     }
   },
   "typesVersions": {
@@ -474,6 +478,9 @@
       ],
       "style-class": [
         "./style-class/index.d.ts"
+      ],
+      "tag": [
+        "./tag/index.d.ts"
       ]
     }
   }

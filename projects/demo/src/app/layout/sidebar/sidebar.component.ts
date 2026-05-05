@@ -547,7 +547,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/tag',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Terminal',
