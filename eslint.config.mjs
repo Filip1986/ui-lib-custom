@@ -22,6 +22,7 @@ export default [
       '**/tmp/**',
       '**/node_modules/**',
       '**/.angular/**',
+      '.claude/**',
     ],
   },
   // TypeScript + Angular rules for source files.
