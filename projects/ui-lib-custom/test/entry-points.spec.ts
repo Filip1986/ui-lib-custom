@@ -78,6 +78,7 @@ import type * as UiLibRipple from 'ui-lib-custom/ripple';
 import type * as UiLibScrollTop from 'ui-lib-custom/scroll-top';
 import type * as UiLibStyleClass from 'ui-lib-custom/style-class';
 import type * as UiLibTag from 'ui-lib-custom/tag';
+import type * as UiLibTerminal from 'ui-lib-custom/terminal';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -552,5 +553,11 @@ describe('Secondary Entry Points', (): void => {
   it('should import from tag', async (): Promise<void> => {
     const mod: typeof UiLibTag = await import('ui-lib-custom/tag');
     expect(mod.Tag).toBeDefined();
+  });
+
+  it('should import from terminal', async (): Promise<void> => {
+    const mod: typeof UiLibTerminal = await import('ui-lib-custom/terminal');
+    expect(mod.Terminal).toBeDefined();
+    expect(mod.TerminalService).toBeDefined();
   });
 });

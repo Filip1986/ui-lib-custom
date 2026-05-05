@@ -1,5 +1,45 @@
 <section class="terminal-demo" data-testid="terminal-demo">
   <h1>Terminal</h1>
-  <p>Coming soon.</p>
-</section>
+  <p>
+    An interactive command-line interface component. Type <code>help</code> to see available
+    commands. Use <strong>↑ / ↓</strong> arrow keys to navigate command history.
+  </p>
 
+  <div class="terminal-demo__variants">
+    <h2>Variants</h2>
+
+    <h3>Material (default)</h3>
+    <ui-lib-terminal
+      welcomeMessage="Welcome to the ui-lib-custom terminal. Type 'help' to get started."
+      prompt="$"
+      variant="material"
+    />
+
+    <h3>Bootstrap</h3>
+    <ui-lib-terminal
+      welcomeMessage="Bootstrap terminal. Type 'help' for commands."
+      prompt=">"
+      variant="bootstrap"
+    />
+
+    <h3>Minimal</h3>
+    <ui-lib-terminal
+      welcomeMessage="Minimal terminal. Type 'help' for commands."
+      prompt="~"
+      variant="minimal"
+    />
+  </div>
+
+  <div class="terminal-demo__interactive">
+    <h2>Interactive (variant switcher)</h2>
+    <p>
+      Type <code>variant material</code>, <code>variant bootstrap</code>, or
+      <code>variant minimal</code> to switch the design variant at runtime.
+    </p>
+    <ui-lib-terminal
+      welcomeMessage="Interactive demo — type 'help' to see all commands."
+      prompt="❯"
+      [variant]="activeVariant()"
+    />
+  </div>
+</section>

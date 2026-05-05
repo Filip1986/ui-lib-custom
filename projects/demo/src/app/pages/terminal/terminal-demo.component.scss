@@ -1,5 +1,6 @@
 .terminal-demo {
-  padding: 1.5rem;
+  max-width: 900px;
+  padding: 2rem;
 
   h1 {
     margin: 0 0 0.5rem;
@@ -7,8 +8,32 @@
     color: var(--uilib-page-fg);
   }
 
+  h2 {
+    margin: 2rem 0 1rem;
+  }
+
+  h3 {
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--uilib-color-text, #374151);
+  }
+
   p {
     margin: 0;
     color: var(--uilib-muted);
+  }
+
+  code {
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.07);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+
+  &__variants,
+  &__interactive {
+    margin-bottom: 3rem;
   }
 }

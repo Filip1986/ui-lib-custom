@@ -292,6 +292,10 @@
     "./tag": {
       "esm2022": "./esm2022/tag/index.mjs",
       "esm": "./esm2022/tag/index.mjs"
+    },
+    "./terminal": {
+      "esm2022": "./esm2022/terminal/index.mjs",
+      "esm": "./esm2022/terminal/index.mjs"
     }
   },
   "typesVersions": {
@@ -481,6 +485,9 @@
       ],
       "tag": [
         "./tag/index.d.ts"
+      ],
+      "terminal": [
+        "./terminal/index.d.ts"
       ]
     }
   }

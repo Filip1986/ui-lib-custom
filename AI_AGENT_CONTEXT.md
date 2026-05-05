@@ -26,6 +26,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Terminal` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
 - `Tag` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -97,6 +99,34 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [Terminal component]
+Changed:
+  - projects/ui-lib-custom/src/lib/terminal/terminal.types.ts (new — TerminalVariant/HistoryItem/Command types)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.service.ts (new — TerminalService with history/command signals)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.ts (new component — ViewEncapsulation.None/OnPush/standalone)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.html (new template — scrollable history + input row)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.scss (new — 3 variants + CSS variables)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.spec.ts (23 unit tests — Terminal + TerminalService)
+  - projects/ui-lib-custom/src/lib/terminal/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/terminal/README.md (API docs)
+  - projects/ui-lib-custom/terminal/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/terminal/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (terminal added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (terminal import test added)
+  - projects/demo/src/app/pages/terminal/terminal-demo.component.ts (full demo with command handler)
+  - projects/demo/src/app/pages/terminal/terminal-demo.component.html (3 variant showcase + interactive terminal)
+  - projects/demo/src/app/pages/terminal/terminal-demo.component.scss (demo page styles)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Terminal component fully complete. PrimeNG-inspired interactive CLI component.
+  Selector: ui-lib-terminal. Inputs: welcomeMessage (string, default ''), prompt (string, default '$'),
+  variant (material/bootstrap/minimal|null). No outputs — all interaction via TerminalService.
+  TerminalService: submitCommand() called internally by component; consumers watch command signal
+  via effect() and call sendResponse(). Arrow-key command history navigation included.
+  23 tests pass. Entry-point import test passes. Build zero warnings.
+Verification: ESLint 0 warnings, ng build ui-lib-custom ✅, jest terminal ✅ (23/23), jest entry-points ✅ (80/80)
+Terminal notes: None
+Next step: knip baseline + dead-code cleanup, or pick next component from backlog
 
 Date: 2026-05-05 [Tag component]
 Changed:
