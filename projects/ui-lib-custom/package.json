@@ -304,6 +304,10 @@
     "./terminal": {
       "esm2022": "./esm2022/terminal/index.mjs",
       "esm": "./esm2022/terminal/index.mjs"
+    },
+    "./skeleton": {
+      "esm2022": "./esm2022/skeleton/index.mjs",
+      "esm": "./esm2022/skeleton/index.mjs"
     }
   },
   "typesVersions": {
@@ -502,6 +506,9 @@
       ],
       "terminal": [
         "./terminal/index.d.ts"
+      ],
+      "skeleton": [
+        "./skeleton/index.d.ts"
       ]
     }
   }

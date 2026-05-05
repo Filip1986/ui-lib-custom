@@ -1,5 +1,206 @@
-<section class="skeleton-demo" data-testid="skeleton-demo">
-  <h1>Skeleton</h1>
-  <p>Coming soon.</p>
-</section>
+<section class="skeleton-demo">
 
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-title">Skeleton</h1>
+    <p class="demo-subtitle">
+      Content placeholder displayed while real content is loading. Combine shapes to mock realistic page layouts.
+    </p>
+  </div>
+
+  <!-- Basic shapes -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Shapes</h2>
+    <p class="demo-section__desc">Use <code>shape="rectangle"</code> (default) or <code>shape="circle"</code>.</p>
+    <div class="demo-card">
+      <div class="shapes-row">
+        <ui-lib-skeleton width="100%" height="2rem" />
+        <ui-lib-skeleton width="100%" height="2rem" />
+        <ui-lib-skeleton width="60%" height="2rem" />
+        <div class="shapes-inline">
+          <ui-lib-skeleton shape="circle" size="4rem" />
+          <ui-lib-skeleton shape="circle" size="4rem" />
+          <ui-lib-skeleton shape="circle" size="4rem" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card placeholder layout -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Card Placeholder</h2>
+    <p class="demo-section__desc">Combine rectangle and circle skeletons to simulate a card layout.</p>
+    <div class="demo-card">
+      <div class="card-placeholder">
+        <ui-lib-skeleton width="100%" height="10rem" styleClass="card-placeholder__image" />
+        <div class="card-placeholder__body">
+          <div class="card-placeholder__header">
+            <ui-lib-skeleton shape="circle" size="3rem" />
+            <div class="card-placeholder__meta">
+              <ui-lib-skeleton width="8rem" height="1rem" />
+              <ui-lib-skeleton width="5rem" height="0.75rem" />
+            </div>
+          </div>
+          <ui-lib-skeleton width="100%" height="1rem" />
+          <ui-lib-skeleton width="100%" height="1rem" />
+          <ui-lib-skeleton width="75%" height="1rem" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- List placeholder -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">List Placeholder</h2>
+    <p class="demo-section__desc">Repeat a row pattern to mock a list of items.</p>
+    <div class="demo-card">
+      <div class="list-placeholder">
+        @for (item of [1, 2, 3, 4]; track item) {
+          <div class="list-placeholder__row">
+            <ui-lib-skeleton shape="circle" size="2.5rem" />
+            <div class="list-placeholder__lines">
+              <ui-lib-skeleton width="12rem" height="0.875rem" />
+              <ui-lib-skeleton width="8rem" height="0.75rem" />
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- All three variants -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__desc">Three design variants: <code>material</code>, <code>bootstrap</code>, <code>minimal</code>.</p>
+    <div class="variants-grid">
+      @for (variant of variants; track variant) {
+        <div class="demo-card">
+          <p class="variant-label">{{ variant }}</p>
+          <ui-lib-skeleton [variant]="variant" width="100%" height="1.5rem" />
+          <ui-lib-skeleton [variant]="variant" width="80%" height="1rem" />
+          <ui-lib-skeleton [variant]="variant" width="60%" height="1rem" />
+          <div class="variant-circles">
+            <ui-lib-skeleton [variant]="variant" shape="circle" size="3rem" />
+            <ui-lib-skeleton [variant]="variant" shape="circle" size="3rem" />
+            <ui-lib-skeleton [variant]="variant" shape="circle" size="3rem" />
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Animation control -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Animation</h2>
+    <p class="demo-section__desc">Use <code>animation="wave"</code> (default) or <code>animation="none"</code> to disable the shimmer.</p>
+    <div class="demo-card demo-card--row">
+      <div class="animation-col">
+        <p class="demo-label">wave (default)</p>
+        <ui-lib-skeleton width="100%" height="1.5rem" animation="wave" />
+        <ui-lib-skeleton width="80%" height="1rem" animation="wave" />
+      </div>
+      <div class="animation-col">
+        <p class="demo-label">none</p>
+        <ui-lib-skeleton width="100%" height="1.5rem" animation="none" />
+        <ui-lib-skeleton width="80%" height="1rem" animation="none" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom sizes -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Custom Sizes</h2>
+    <p class="demo-section__desc">Width, height, and size accept any CSS dimension. The <code>size</code> shorthand sets both dimensions at once.</p>
+    <div class="demo-card">
+      <div class="sizes-row">
+        <ui-lib-skeleton width="4rem" height="4rem" />
+        <ui-lib-skeleton width="8rem" height="4rem" />
+        <ui-lib-skeleton width="12rem" height="4rem" />
+        <ui-lib-skeleton shape="circle" size="2rem" />
+        <ui-lib-skeleton shape="circle" size="4rem" />
+        <ui-lib-skeleton shape="circle" size="6rem" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom border radius -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Custom Border Radius</h2>
+    <p class="demo-section__desc">Override the default radius with the <code>borderRadius</code> input.</p>
+    <div class="demo-card">
+      <div class="shapes-row">
+        <ui-lib-skeleton width="100%" height="2rem" borderRadius="0" />
+        <ui-lib-skeleton width="100%" height="2rem" borderRadius="0.5rem" />
+        <ui-lib-skeleton width="100%" height="2rem" borderRadius="9999px" />
+      </div>
+    </div>
+  </div>
+
+  <!-- API Table -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+    <div class="api-table-wrapper">
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>shape</code></td>
+            <td><code>'rectangle' | 'circle'</code></td>
+            <td><code>'rectangle'</code></td>
+            <td>Shape of the placeholder.</td>
+          </tr>
+          <tr>
+            <td><code>width</code></td>
+            <td><code>string</code></td>
+            <td><code>'100%'</code></td>
+            <td>CSS width value. Overridden by <code>size</code>.</td>
+          </tr>
+          <tr>
+            <td><code>height</code></td>
+            <td><code>string</code></td>
+            <td><code>'1rem'</code></td>
+            <td>CSS height value. Overridden by <code>size</code>.</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Sets both width and height. Useful for circles.</td>
+          </tr>
+          <tr>
+            <td><code>borderRadius</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Custom border-radius, overrides shape default.</td>
+          </tr>
+          <tr>
+            <td><code>animation</code></td>
+            <td><code>'wave' | 'none'</code></td>
+            <td><code>'wave'</code></td>
+            <td>Shimmer animation type.</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+            <td><code>null</code></td>
+            <td>Design variant. Falls back to ThemeConfigService.</td>
+          </tr>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Additional CSS classes on the host element.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>

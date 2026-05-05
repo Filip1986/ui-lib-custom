@@ -32,6 +32,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `Tag` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
+- `Skeleton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `StyleClass` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -101,6 +103,39 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-06 [Skeleton component]
+Changed:
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.types.ts (new — SkeletonShape/SkeletonAnimation/SkeletonVariant types)
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.ts (new component — ViewEncapsulation.None/OnPush/standalone)
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.html (new template — shimmer span)
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.scss (new — 3 variants + wave keyframe + CSS variables)
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.spec.ts (20 unit tests)
+  - projects/ui-lib-custom/src/lib/skeleton/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/skeleton/README.md (API docs)
+  - projects/ui-lib-custom/skeleton/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/skeleton/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (skeleton added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (skeleton import test added)
+  - projects/demo/src/app/pages/skeleton/skeleton-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/skeleton/skeleton-demo.component.html (hero + 7 sections + API table)
+  - projects/demo/src/app/pages/skeleton/skeleton-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Skeleton entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Skeleton component fully complete. PrimeNG-inspired content placeholder.
+  Selector: ui-lib-skeleton. Inputs: shape (rectangle/circle), width, height, size, borderRadius,
+  animation (wave/none), variant (material/bootstrap/minimal|null), styleClass.
+  Host-driven: dimensions and borderRadius applied via host style bindings. aria-hidden="true".
+  Wave animation uses a ::after-like shimmer span with CSS gradient sweep keyframe.
+  Three variants: material (rounded, indigo shimmer), bootstrap (square corners), minimal (flat, 2px).
+  20 tests pass. Entry-point import test passes. Build zero warnings.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/skeleton/ projects/demo/src/app/pages/skeleton/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/skeleton Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/skeleton --no-coverage (20/20 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (83/83 PASS).
+Terminal notes: None.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [Terminal component]
 Changed:

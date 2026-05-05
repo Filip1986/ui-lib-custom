@@ -1,0 +1,96 @@
+// ------------------------------------------------------------------
+// Skeleton component
+// Pattern: --uilib-skeleton-{property}[-{variant}][-{state}]
+// ------------------------------------------------------------------
+
+// ---- Base tokens (default / material) ----------------------------
+ui-lib-skeleton {
+  --uilib-skeleton-bg: var(--uilib-surface-200, #e5e7eb);
+  --uilib-skeleton-shimmer-color: var(--uilib-surface-50, #f9fafb);
+  --uilib-skeleton-border-radius: var(--uilib-radius-md, 0.375rem);
+  --uilib-skeleton-animation-duration: 1.5s;
+}
+
+// ---- Host element ------------------------------------------------
+.ui-lib-skeleton {
+  display: block;
+  background-color: var(--uilib-skeleton-bg);
+  border-radius: var(--uilib-skeleton-border-radius);
+  position: relative;
+  overflow: hidden;
+
+  // ---- Shimmer inner element -------------------------------------
+  &__shimmer {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  // ---- Wave animation --------------------------------------------
+  &--wave {
+    .ui-lib-skeleton__shimmer {
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--uilib-skeleton-shimmer-color) 40%,
+        var(--uilib-skeleton-shimmer-color) 60%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: uilib-skeleton-wave var(--uilib-skeleton-animation-duration) infinite ease-in-out;
+    }
+  }
+
+  // ---- Shape: circle ---------------------------------------------
+  &--shape-circle {
+    --uilib-skeleton-border-radius: 50%;
+    border-radius: 50%;
+  }
+
+  // ---- Variant: material -----------------------------------------
+  &--variant-material {
+    --uilib-skeleton-bg: var(--uilib-surface-200, #e5e7eb);
+    --uilib-skeleton-shimmer-color: var(--uilib-surface-50, #f9fafb);
+  }
+
+  // ---- Variant: bootstrap ----------------------------------------
+  &--variant-bootstrap {
+    --uilib-skeleton-bg: #e9ecef;
+    --uilib-skeleton-shimmer-color: #f8f9fa;
+    --uilib-skeleton-border-radius: var(--uilib-radius-sm, 0.25rem);
+
+    &.ui-lib-skeleton--shape-circle {
+      border-radius: 50%;
+    }
+  }
+
+  // ---- Variant: minimal ------------------------------------------
+  &--variant-minimal {
+    --uilib-skeleton-bg: var(--uilib-surface-100, #f3f4f6);
+    --uilib-skeleton-shimmer-color: #fff;
+    --uilib-skeleton-border-radius: 2px;
+
+    &.ui-lib-skeleton--shape-circle {
+      border-radius: 50%;
+    }
+  }
+
+  // ---- Dark mode -------------------------------------------------
+  [data-theme='dark'] &,
+  &[data-theme='dark'] {
+    --uilib-skeleton-bg: var(--uilib-surface-700, #374151);
+    --uilib-skeleton-shimmer-color: var(--uilib-surface-600, #4b5563);
+  }
+}
+
+// ---- Keyframe: shimmer wave sweep --------------------------------
+@keyframes uilib-skeleton-wave {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

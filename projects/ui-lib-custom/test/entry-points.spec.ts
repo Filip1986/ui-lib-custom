@@ -81,6 +81,7 @@ import type * as UiLibStyleClass from 'ui-lib-custom/style-class';
 import type * as UiLibDivider from 'ui-lib-custom/divider';
 import type * as UiLibTag from 'ui-lib-custom/tag';
 import type * as UiLibTerminal from 'ui-lib-custom/terminal';
+import type * as UiLibSkeleton from 'ui-lib-custom/skeleton';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -571,5 +572,10 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibTerminal = await import('ui-lib-custom/terminal');
     expect(mod.Terminal).toBeDefined();
     expect(mod.TerminalService).toBeDefined();
+  });
+
+  it('should import from skeleton', async (): Promise<void> => {
+    const mod: typeof UiLibSkeleton = await import('ui-lib-custom/skeleton');
+    expect(mod.Skeleton).toBeDefined();
   });
 });
