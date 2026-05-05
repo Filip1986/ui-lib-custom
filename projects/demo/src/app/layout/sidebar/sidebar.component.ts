@@ -468,7 +468,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/chip',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'ClassNames',
