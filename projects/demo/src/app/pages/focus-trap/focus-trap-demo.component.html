@@ -1,5 +1,236 @@
 <section class="focus-trap-demo" data-testid="focus-trap-demo">
-  <h1>FocusTrap</h1>
-  <p>Coming soon.</p>
+
+  <!-- Hero -->
+  <div class="ft-hero">
+    <h1 class="ft-hero__title">FocusTrap</h1>
+    <p class="ft-hero__lead">
+      A directive that constrains keyboard focus within a container element.
+      Tab and Shift+Tab cycle only among the focusable descendants of the host,
+      preventing focus from escaping — essential for accessible modals, dialogs,
+      and side panels.
+    </p>
+    <div class="ft-hero__tags">
+      <span class="ft-tag">Directive</span>
+      <span class="ft-tag">Misc</span>
+      <span class="ft-tag">A11y</span>
+    </div>
+  </div>
+
+  <!-- ── Section 1: Basic usage ── -->
+  <div class="ft-section">
+    <h2 class="ft-section__title">Basic Usage</h2>
+    <p class="ft-section__desc">
+      Add <code>uiLibFocusTrap</code> to any container. Tab navigation is
+      constrained to focusable descendants of that element. Focus moves to the
+      first focusable child on activation.
+    </p>
+    <div class="ft-demo-card">
+      <p class="ft-hint">Tab between the fields — focus will not leave this box.</p>
+      <div class="ft-trap-region" [uiLibFocusTrap]="true">
+        <div class="ft-field-row">
+          <label class="ft-label" for="basic-name">Name</label>
+          <input id="basic-name" class="ft-input" type="text" placeholder="Enter your name" />
+        </div>
+        <div class="ft-field-row">
+          <label class="ft-label" for="basic-email">Email</label>
+          <input id="basic-email" class="ft-input" type="email" placeholder="Enter your email" />
+        </div>
+        <div class="ft-field-row">
+          <button class="ft-btn ft-btn--primary" type="button">Submit</button>
+          <button class="ft-btn ft-btn--ghost" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <pre class="ft-code"><code>&lt;div uiLibFocusTrap&gt;
+  &lt;input type="text" /&gt;
+  &lt;button&gt;Submit&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <!-- ── Section 2: Toggle on/off ── -->
+  <div class="ft-section">
+    <h2 class="ft-section__title">Toggle Trap</h2>
+    <p class="ft-section__desc">
+      Bind <code>[uiLibFocusTrap]</code> to a boolean signal to enable or disable
+      the trap at runtime. When disabled, Tab behaves normally and focus is restored
+      to the previously focused element.
+    </p>
+    <div class="ft-demo-card">
+      <div class="ft-toggle-row">
+        <span class="ft-status-label">
+          Trap:
+          <strong [class.ft-status--active]="isTrapEnabled()" [class.ft-status--inactive]="!isTrapEnabled()">
+            {{ isTrapEnabled() ? 'Active' : 'Inactive' }}
+          </strong>
+        </span>
+        <button class="ft-btn ft-btn--outline" type="button" (click)="toggleTrap()">
+          {{ isTrapEnabled() ? 'Disable trap' : 'Enable trap' }}
+        </button>
+      </div>
+      <div class="ft-trap-region" [uiLibFocusTrap]="isTrapEnabled()">
+        <div class="ft-field-row">
+          <label class="ft-label" for="toggle-name">Username</label>
+          <input id="toggle-name" class="ft-input" type="text" placeholder="Username" />
+        </div>
+        <div class="ft-field-row">
+          <label class="ft-label" for="toggle-pass">Password</label>
+          <input id="toggle-pass" class="ft-input" type="password" placeholder="Password" />
+        </div>
+        <div class="ft-field-row">
+          <button class="ft-btn ft-btn--primary" type="button">Log in</button>
+        </div>
+      </div>
+    </div>
+    <pre class="ft-code"><code>&lt;div [uiLibFocusTrap]="isActive"&gt;
+  &lt;input type="text" /&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <!-- ── Section 3: Modal overlay pattern ── -->
+  <div class="ft-section">
+    <h2 class="ft-section__title">Modal Overlay Pattern</h2>
+    <p class="ft-section__desc">
+      The most common use case: wrapping a modal dialog so that keyboard users
+      cannot interact with background content. When the modal closes, focus
+      returns to the trigger button automatically.
+    </p>
+    <div class="ft-demo-card">
+      <button
+        id="open-modal-btn"
+        class="ft-btn ft-btn--primary"
+        type="button"
+        (click)="openModal()"
+      >
+        Open Modal
+      </button>
+    </div>
+    <pre class="ft-code"><code>&#64;if (isModalOpen) &#123;
+  &lt;div class="modal" role="dialog" aria-modal="true" [uiLibFocusTrap]="true"&gt;
+    &lt;h2&gt;Dialog title&lt;/h2&gt;
+    &lt;button (click)="closeModal()"&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&#125;</code></pre>
+  </div>
+
+  <!-- ── Section 4: API ── -->
+  <div class="ft-section">
+    <h2 class="ft-section__title">API</h2>
+
+    <h3 class="ft-sub-title">Import</h3>
+    <pre class="ft-code"><code>import {{ '{' }} FocusTrapDirective {{ '}' }} from 'ui-lib-custom/focus-trap';</code></pre>
+
+    <h3 class="ft-sub-title">Selector</h3>
+    <pre class="ft-code"><code>[uiLibFocusTrap]</code></pre>
+
+    <h3 class="ft-sub-title">Inputs</h3>
+    <table class="ft-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>uiLibFocusTrap</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>
+            When <code>true</code>, keyboard focus is trapped within the host
+            element. Set to <code>false</code> to release the trap at runtime.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="ft-sub-title">Keyboard behavior</h3>
+    <table class="ft-table">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Behavior</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Tab</code></td>
+          <td>Move focus to the next focusable descendant; wraps to first from last.</td>
+        </tr>
+        <tr>
+          <td><code>Shift + Tab</code></td>
+          <td>Move focus to the previous focusable descendant; wraps to last from first.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="ft-sub-title">Accessible elements included</h3>
+    <p class="ft-section__desc">
+      The trap cycles through: <code>a[href]</code>, <code>button</code>,
+      <code>input</code>, <code>select</code>, <code>textarea</code>,
+      elements with a non-negative <code>tabindex</code>, and
+      <code>[contenteditable="true"]</code>. Disabled and
+      <code>aria-hidden</code> elements are excluded.
+    </p>
+  </div>
+
 </section>
 
+<!-- ── Modal overlay ── -->
+@if (isModalOpen()) {
+  <div class="ft-modal-backdrop" (click)="closeModal()">
+    <div
+      class="ft-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      [uiLibFocusTrap]="true"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="ft-modal__header">
+        <h2 id="modal-title" class="ft-modal__title">Contact Form</h2>
+        <button
+          class="ft-modal__close"
+          type="button"
+          aria-label="Close dialog"
+          (click)="closeModal()"
+        >
+          ×
+        </button>
+      </div>
+      <div class="ft-modal__body">
+        <p class="ft-hint">
+          Tab between the fields below. Focus cannot leave this modal
+          until you close it.
+        </p>
+        <div class="ft-field-row">
+          <label class="ft-label" for="modal-name">Name</label>
+          <input
+            id="modal-name"
+            class="ft-input"
+            type="text"
+            [value]="formName()"
+            (input)="onFormNameChange($event)"
+            placeholder="Your name"
+          />
+        </div>
+        <div class="ft-field-row">
+          <label class="ft-label" for="modal-email">Email</label>
+          <input
+            id="modal-email"
+            class="ft-input"
+            type="email"
+            [value]="formEmail()"
+            (input)="onFormEmailChange($event)"
+            placeholder="Your email"
+          />
+        </div>
+      </div>
+      <div class="ft-modal__footer">
+        <button class="ft-btn ft-btn--ghost" type="button" (click)="closeModal()">Cancel</button>
+        <button class="ft-btn ft-btn--primary" type="button" (click)="closeModal()">Send</button>
+      </div>
+    </div>
+  </div>
+}
