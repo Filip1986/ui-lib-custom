@@ -34,6 +34,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `BlockUI` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Chip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ClassNames` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `FocusTrap` -> ✅ complete (directive implementation/tests/entry-point/demo/ESLint/build all green)
 - `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -87,6 +88,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [FocusTrap directive]
+Changed:
+  - projects/ui-lib-custom/src/lib/focus-trap/focus-trap.ts (new Angular directive)
+  - projects/ui-lib-custom/src/lib/focus-trap/focus-trap.spec.ts (9 unit tests)
+  - projects/ui-lib-custom/src/lib/focus-trap/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/focus-trap/README.md (API docs)
+  - projects/ui-lib-custom/focus-trap/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/focus-trap/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (focus-trap added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (focus-trap import test added)
+  - projects/demo/src/app/pages/focus-trap/focus-trap-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/focus-trap/focus-trap-demo.component.html (hero + 4 sections + API tables)
+  - projects/demo/src/app/pages/focus-trap/focus-trap-demo.component.scss (demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from FocusTrap entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: FocusTrap directive fully complete. Angular wrapper around the existing FocusTrap class in core.
+  Selector [uiLibFocusTrap]. Single boolean input with booleanAttribute transform so attribute
+  presence (<div uiLibFocusTrap>) is equivalent to [uiLibFocusTrap]="true". Uses effect() to
+  activate/deactivate reactively. ngOnDestroy releases the trap and restores prior focus.
+  Demo has: basic usage (static trap), toggle on/off, modal overlay pattern, full API tables.
+  9 unit tests passing. 71/71 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/focus-trap/ projects/demo/src/app/pages/focus-trap/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/focus-trap Built, zero errors,
+  npx.cmd jest --testPathPatterns="src/lib/focus-trap" --no-coverage (9/9 PASS),
+  npx.cmd jest --testPathPatterns="entry-points" --no-coverage (71/71 PASS).
+Terminal notes: Signal inputs receive "" (empty string) when used as plain attributes (<div uiLibFocusTrap>).
+  Must use booleanAttribute transform: input<boolean, boolean | string>(true, { transform: booleanAttribute })
+  so attribute presence maps to true. effect() in zoneless tests requires TestBed.flushEffects() after
+  fixture.detectChanges() — a detectAndFlush() helper keeps this consistent.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [ClassNames utility]
 Changed:
@@ -187,29 +220,4 @@ Terminal notes: Test host must use WritableSignal (not plain properties) for sig
   that break on Windows because <rootDir> resolves with backslashes while the rest uses forward slashes.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 
-Date: 2026-05-02 [Bind directive]
-Changed:
-  - projects/ui-lib-custom/src/lib/bind/bind.ts (new directive)
-  - projects/ui-lib-custom/src/lib/bind/bind.spec.ts (11 unit tests)
-  - projects/ui-lib-custom/src/lib/bind/index.ts (barrel)
-  - projects/ui-lib-custom/bind/ng-package.json (secondary entry point)
-  - projects/ui-lib-custom/bind/package.json (secondary entry point)
-  - projects/ui-lib-custom/package.json (bind added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (bind import test added)
-  - projects/demo/src/app/pages/bind/bind-demo.component.ts (full demo)
-  - projects/demo/src/app/pages/bind/bind-demo.component.html (full demo — hero + 3 sections + API table)
-  - projects/demo/src/app/pages/bind/bind-demo.component.scss (demo styles)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Bind entry)
-  - AI_AGENT_CONTEXT.md (updated)
-State: Bind directive fully complete. PrimeNG-inspired [uiLibBind] directive that applies a
-  Record<string, unknown> as DOM properties on the host element via Renderer2.setProperty.
-  Signal input `uiLibBind` (default {}). Tracks previousKeys to reset removed properties to null.
-  Host class `ui-lib-bind`. Effect-based reactivity (no ngOnChanges). Secondary entry point wired and built.
-Verification:
-  node ./node_modules/eslint/bin/eslint.js projects/ui-lib-custom/src/lib/bind/ projects/demo/src/app/pages/bind/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx jest --testPathPatterns=bind --no-coverage (11/11 PASS),
-  npx jest --testPathPatterns=entry-points --no-coverage (67/67 PASS),
-  npx ng build ui-lib-custom — ui-lib-custom/bind Built, zero errors.
-Terminal notes: Python used for all file writes (bash heredoc expansion issues). Constructor must NOT have `public` modifier (eslint rule). JSDOM coerces setProperty(el, 'title', null) to string "null" — test fixed to assert `not.toBe('Was Here')` instead of `toBeFalsy()`.
-Next step: knip baseline + dead-code cleanup, or constants extraction pass.
 

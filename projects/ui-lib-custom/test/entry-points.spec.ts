@@ -69,6 +69,7 @@ import type * as UiLibBind from 'ui-lib-custom/bind';
 import type * as UiLibBlockUI from 'ui-lib-custom/block-ui';
 import type * as UiLibChip from 'ui-lib-custom/chip';
 import type * as UiLibClassNames from 'ui-lib-custom/class-names';
+import type * as UiLibFocusTrap from 'ui-lib-custom/focus-trap';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -497,5 +498,10 @@ describe('Secondary Entry Points', (): void => {
     const mod: typeof UiLibClassNames = await import('ui-lib-custom/class-names');
     expect(mod.classNames).toBeDefined();
     expect(mod.ClassNamesPipe).toBeDefined();
+  });
+
+  it('should import from focus-trap', async (): Promise<void> => {
+    const mod: typeof UiLibFocusTrap = await import('ui-lib-custom/focus-trap');
+    expect(mod.FocusTrapDirective).toBeDefined();
   });
 });

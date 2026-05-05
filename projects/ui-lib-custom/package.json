@@ -256,6 +256,10 @@
     "./class-names": {
       "esm2022": "./esm2022/class-names/index.mjs",
       "esm": "./esm2022/class-names/index.mjs"
+    },
+    "./focus-trap": {
+      "esm2022": "./esm2022/focus-trap/index.mjs",
+      "esm": "./esm2022/focus-trap/index.mjs"
     }
   },
   "typesVersions": {
@@ -418,6 +422,9 @@
       ],
       "class-names": [
         "./class-names/index.d.ts"
+      ],
+      "focus-trap": [
+        "./focus-trap/index.d.ts"
       ]
     }
   }

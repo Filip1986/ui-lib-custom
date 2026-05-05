@@ -480,7 +480,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/focus-trap',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Fluid',
