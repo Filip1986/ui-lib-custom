@@ -29,6 +29,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `FocusTrap` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Inplace` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `MeterGroup` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -90,6 +91,41 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [MeterGroup component]
+Changed:
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.types.ts (new — MeterItem, MeterSegment, variant/size/orientation/labelPosition types)
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts (new component)
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html (new template — meters bar + start/end legend)
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss (new — 3 variants + 3 sizes + horizontal/vertical + --uilib-meter-group-* tokens)
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts (24 unit tests)
+  - projects/ui-lib-custom/src/lib/meter-group/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/meter-group/README.md (API docs)
+  - projects/ui-lib-custom/meter-group/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/meter-group/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (meter-group added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (meter-group import test added)
+  - projects/demo/src/app/pages/meter-group/meter-group-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/meter-group/meter-group-demo.component.html (hero + 7 sections + API tables)
+  - projects/demo/src/app/pages/meter-group/meter-group-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from MeterGroup entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: MeterGroup component fully complete. PrimeNG-inspired segmented meter bar.
+  Inputs: values (MeterItem[]), min, max, orientation (horizontal/vertical), showLabels,
+  labelPosition (start/end), size (sm/md/lg), variant (material/bootstrap/minimal), styleClass.
+  Segments computed with clamped percentage. Legend is a <ul> with swatch + label + value.
+  role="group" on meter container, role="meter" + aria-valuenow/min/max on each segment.
+  Three variants: material (pill), bootstrap (square, no gap), minimal (flat, 2px radius).
+  Note: SCSS compound BEM modifier selector &--foo&--bar is invalid — must nest as &--foo { &.parent--bar { ... } }.
+  Signal inputs, ViewEncapsulation.None + OnPush + standalone.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/meter-group/ projects/demo/src/app/pages/meter-group/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/meter-group Built, zero errors,
+  npx.cmd jest --testPathPatterns=meter-group --no-coverage (24/24 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (74/74 PASS).
+Terminal notes: SCSS compound modifier selectors like &--foo&--bar fail with "& may only be used at
+  beginning of a compound selector". Fix: nest as &--foo { &.full-class-name--bar { ... } }.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [Inplace component]
 Changed:

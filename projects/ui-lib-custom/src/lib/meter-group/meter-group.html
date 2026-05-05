@@ -1,0 +1,62 @@
+<!-- Legend at start (above for horizontal, left for vertical) -->
+@if (showLabels() && labelPosition() === 'start') {
+  <ul class="ui-lib-meter-group__labels" aria-label="Legend">
+    @for (segment of meterSegments(); track segment.label) {
+      <li class="ui-lib-meter-group__label-item">
+        <span
+          class="ui-lib-meter-group__label-swatch"
+          [style.background-color]="segment.color"
+          aria-hidden="true"
+        >
+          @if (segment.icon) {
+            <span [class]="segment.icon" aria-hidden="true"></span>
+          }
+        </span>
+        <span class="ui-lib-meter-group__label-text">{{ segment.label }}</span>
+        <span class="ui-lib-meter-group__label-value">{{ segment.value }}</span>
+      </li>
+    }
+  </ul>
+}
+
+<!-- Meter bar -->
+<div
+  class="ui-lib-meter-group__meters"
+  role="group"
+  aria-label="Meter group"
+>
+  @for (segment of meterSegments(); track segment.label) {
+    <div
+      class="ui-lib-meter-group__meter"
+      role="meter"
+      [attr.aria-valuenow]="segment.value"
+      [attr.aria-valuemin]="min()"
+      [attr.aria-valuemax]="max()"
+      [attr.aria-label]="segment.label + ': ' + segment.value"
+      [style.background-color]="segment.color"
+      [style.width]="orientation() === 'horizontal' ? segment.percentage + '%' : '100%'"
+      [style.height]="orientation() === 'vertical' ? segment.percentage + '%' : '100%'"
+    ></div>
+  }
+</div>
+
+<!-- Legend at end (below for horizontal, right for vertical) -->
+@if (showLabels() && labelPosition() === 'end') {
+  <ul class="ui-lib-meter-group__labels" aria-label="Legend">
+    @for (segment of meterSegments(); track segment.label) {
+      <li class="ui-lib-meter-group__label-item">
+        <span
+          class="ui-lib-meter-group__label-swatch"
+          [style.background-color]="segment.color"
+          aria-hidden="true"
+        >
+          @if (segment.icon) {
+            <span [class]="segment.icon" aria-hidden="true"></span>
+          }
+        </span>
+        <span class="ui-lib-meter-group__label-text">{{ segment.label }}</span>
+        <span class="ui-lib-meter-group__label-value">{{ segment.value }}</span>
+      </li>
+    }
+  </ul>
+}

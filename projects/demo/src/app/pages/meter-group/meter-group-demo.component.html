@@ -1,5 +1,301 @@
-<section class="meter-group-demo" data-testid="meter-group-demo">
-  <h1>MeterGroup</h1>
-  <p>Coming soon.</p>
-</section>
+<section class="meter-group-demo">
+  <!-- ---- Hero --------------------------------------------------------- -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">MeterGroup</h1>
+    <p class="demo-hero__subtitle">
+      Visualise multiple proportional values as a single segmented bar — ideal for storage,
+      resource usage, and survey breakdowns.
+    </p>
+    <p class="demo-hero__import">
+      <code>import &#123; MeterGroup &#125; from 'ui-lib-custom/meter-group'</code>
+    </p>
+  </div>
 
+  <!-- ---- Basic -------------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
+      Pass an array of <code>MeterItem</code> objects via <code>[values]</code>.
+      Each item needs a <code>label</code>, a numeric <code>value</code>, and a CSS
+      <code>color</code>.  The legend is rendered below the bar by default.
+    </p>
+    <div class="demo-section__preview">
+      <ui-lib-meter-group [values]="basicItems" />
+    </div>
+    <pre class="demo-code"><code>storageItems: MeterItem[] = [
+  &#123; label: 'Apps',     value: 16, color: '#34d399' &#125;,
+  &#123; label: 'Messages', value: 8,  color: '#818cf8' &#125;,
+  &#123; label: 'Media',    value: 24, color: '#fb923c' &#125;,
+  &#123; label: 'System',   value: 10, color: '#f87171' &#125;,
+];
+
+&lt;ui-lib-meter-group [values]="storageItems" /&gt;</code></pre>
+  </div>
+
+  <!-- ---- Label position ----------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Label position</h2>
+    <p class="demo-section__description">
+      Use <code>labelPosition="start"</code> to move the legend above (horizontal) or to the
+      left (vertical) of the bar.  Icons can be added via the optional <code>icon</code> field on
+      each item (any PrimeIcons class string).
+    </p>
+    <div class="demo-section__preview demo-section__preview--column">
+      <div class="demo-subsection">
+        <p class="demo-subsection__label">labelPosition="start"</p>
+        <ui-lib-meter-group [values]="storageItems" labelPosition="start" />
+      </div>
+      <div class="demo-subsection">
+        <p class="demo-subsection__label">labelPosition="end" (default)</p>
+        <ui-lib-meter-group [values]="storageItems" labelPosition="end" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- Sizes -------------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">
+      Three bar thicknesses: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
+    </p>
+    <div class="demo-section__preview demo-section__preview--column">
+      @for (size of ['sm', 'md', 'lg']; track size) {
+        <div class="demo-subsection">
+          <p class="demo-subsection__label">size="{{ size }}"</p>
+          <ui-lib-meter-group [values]="variantItems" [size]="$any(size)" [showLabels]="false" />
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- ---- Variants ----------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
+      Three design variants — <code>material</code> (pill-shaped, soft), <code>bootstrap</code>
+      (squared corners, no gap), and <code>minimal</code> (flat, almost square).
+    </p>
+    <div class="demo-section__preview demo-section__preview--column">
+      @for (variant of ['material', 'bootstrap', 'minimal']; track variant) {
+        <div class="demo-subsection">
+          <p class="demo-subsection__label">variant="{{ variant }}"</p>
+          <ui-lib-meter-group [values]="variantItems" [variant]="$any(variant)" [showLabels]="false" />
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- ---- Vertical orientation ----------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Vertical orientation</h2>
+    <p class="demo-section__description">
+      Set <code>orientation="vertical"</code> to stack segments vertically.
+      The legend is placed to the right by default (<code>labelPosition="end"</code>).
+    </p>
+    <div class="demo-section__preview demo-section__preview--row">
+      <div class="demo-subsection">
+        <p class="demo-subsection__label">Legend end (right)</p>
+        <ui-lib-meter-group [values]="cpuItems" orientation="vertical" labelPosition="end" />
+      </div>
+      <div class="demo-subsection">
+        <p class="demo-subsection__label">Legend start (left)</p>
+        <ui-lib-meter-group [values]="cpuItems" orientation="vertical" labelPosition="start" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- No labels ---------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">No legend</h2>
+    <p class="demo-section__description">
+      Set <code>[showLabels]="false"</code> to render the bar without a legend — useful as an
+      inline indicator.
+    </p>
+    <div class="demo-section__preview">
+      <ui-lib-meter-group [values]="basicItems" [showLabels]="false" />
+    </div>
+  </div>
+
+  <!-- ---- Interactive -------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Interactive</h2>
+    <p class="demo-section__description">
+      Explore all combinations of orientation, label position, size, and variant.
+    </p>
+
+    <div class="demo-controls">
+      <div class="demo-control">
+        <label class="demo-control__label">Orientation</label>
+        <div class="demo-control__buttons">
+          @for (option of ['horizontal', 'vertical']; track option) {
+            <button
+              class="demo-control__btn"
+              [class.demo-control__btn--active]="interactiveOrientation() === option"
+              (click)="setOrientation($any(option))"
+            >{{ option }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="demo-control">
+        <label class="demo-control__label">Label Position</label>
+        <div class="demo-control__buttons">
+          @for (option of ['start', 'end']; track option) {
+            <button
+              class="demo-control__btn"
+              [class.demo-control__btn--active]="interactiveLabelPosition() === option"
+              (click)="setLabelPosition($any(option))"
+            >{{ option }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="demo-control">
+        <label class="demo-control__label">Size</label>
+        <div class="demo-control__buttons">
+          @for (option of ['sm', 'md', 'lg']; track option) {
+            <button
+              class="demo-control__btn"
+              [class.demo-control__btn--active]="interactiveSize() === option"
+              (click)="setSize($any(option))"
+            >{{ option }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="demo-control">
+        <label class="demo-control__label">Variant</label>
+        <div class="demo-control__buttons">
+          @for (option of ['material', 'bootstrap', 'minimal']; track option) {
+            <button
+              class="demo-control__btn"
+              [class.demo-control__btn--active]="interactiveVariant() === option"
+              (click)="setVariant($any(option))"
+            >{{ option }}</button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section__preview">
+      <ui-lib-meter-group
+        [values]="interactiveItems()"
+        [orientation]="interactiveOrientation()"
+        [labelPosition]="interactiveLabelPosition()"
+        [size]="interactiveSize()"
+        [variant]="interactiveVariant()"
+      />
+    </div>
+  </div>
+
+  <!-- ---- API table ---------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 class="demo-section__subtitle">MeterGroup inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>values</code></td>
+          <td><code>MeterItem[]</code></td>
+          <td><code>[]</code></td>
+          <td>Array of meter segments to render.</td>
+        </tr>
+        <tr>
+          <td><code>min</code></td>
+          <td><code>number</code></td>
+          <td><code>0</code></td>
+          <td>Minimum value of the range.</td>
+        </tr>
+        <tr>
+          <td><code>max</code></td>
+          <td><code>number</code></td>
+          <td><code>100</code></td>
+          <td>Maximum value of the range.</td>
+        </tr>
+        <tr>
+          <td><code>orientation</code></td>
+          <td><code>'horizontal' | 'vertical'</code></td>
+          <td><code>'horizontal'</code></td>
+          <td>Bar direction.</td>
+        </tr>
+        <tr>
+          <td><code>showLabels</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Show or hide the legend.</td>
+        </tr>
+        <tr>
+          <td><code>labelPosition</code></td>
+          <td><code>'start' | 'end'</code></td>
+          <td><code>'end'</code></td>
+          <td>Legend placement — start is above/left, end is below/right.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Bar thickness size token.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Visual design variant; falls back to ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS classes appended to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-section__subtitle">MeterItem</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string</code></td>
+          <td>Yes</td>
+          <td>Display label shown in the legend and as aria-label.</td>
+        </tr>
+        <tr>
+          <td><code>value</code></td>
+          <td><code>number</code></td>
+          <td>Yes</td>
+          <td>Numeric value measured against min/max.</td>
+        </tr>
+        <tr>
+          <td><code>color</code></td>
+          <td><code>string</code></td>
+          <td>Yes</td>
+          <td>CSS color string for the segment fill.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string</code></td>
+          <td>No</td>
+          <td>Optional PrimeIcons class shown inside the legend swatch.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
