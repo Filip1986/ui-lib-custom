@@ -24,6 +24,7 @@ const config: Config = {
   modulePathIgnorePatterns: [
     '<rootDir>/tmp/',
     '<rootDir>/.angular/',
+    '<rootDir>/.claude/',
     // Separator-agnostic patterns — required on Windows where paths use backslashes
     // but <rootDir>-prefixed patterns resolve with mixed separators and fail to match.
     'projects[/\\\\]ui-lib-custom[/\\\\]package\\.json$',
@@ -31,7 +32,7 @@ const config: Config = {
     'ui-lib-custom[/\\\\]tokens[/\\\\]dist',
     '[/\\\\]dist[/\\\\]ui-lib-custom[/\\\\]package\\.json',
   ],
-  watchPathIgnorePatterns: ['<rootDir>/tmp/', '<rootDir>/.angular/'],
+  watchPathIgnorePatterns: ['<rootDir>/tmp/', '<rootDir>/.angular/', '<rootDir>/.claude/'],
   collectCoverageFrom: [
     '<rootDir>/projects/ui-lib-custom/src/lib/**/*.ts',
     '!<rootDir>/projects/ui-lib-custom/src/lib/**/index.ts',
@@ -43,7 +44,7 @@ const config: Config = {
   ],
   coverageReporters: ['text', 'lcov'],
   testMatch: ['**/*.spec.ts'],
-  testPathIgnorePatterns: ['<rootDir>/e2e/'],
+  testPathIgnorePatterns: ['<rootDir>/e2e/', '<rootDir>/.claude/'],
 };
 
 export default config;
