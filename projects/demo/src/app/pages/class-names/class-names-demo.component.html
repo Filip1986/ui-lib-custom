@@ -1,5 +1,180 @@
-<section class="class-names-demo" data-testid="class-names-demo">
-  <h1>ClassNames</h1>
-  <p>Coming soon.</p>
-</section>
+<section class="class-names-demo">
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">ClassNames</h1>
+    <p class="demo-hero__lead">
+      A utility function and Angular pipe for composing CSS class strings from strings, conditional
+      objects, and arrays — similar to the popular
+      <code>classnames</code> npm package and PrimeNG's <code>classNames</code> utility.
+    </p>
+  </div>
 
+  <!-- Section: Function usage -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Function Usage</h2>
+    <p class="demo-section__desc">
+      Import <code>classNames</code> and call it from TypeScript. Strings, objects
+      (keys with truthy values included), arrays, and falsy values (ignored) are all accepted.
+    </p>
+
+    <div class="demo-card">
+      <pre class="demo-code"><code>import &#123; classNames &#125; from 'ui-lib-custom/class-names';
+
+// Strings
+classNames('foo', 'bar')
+// → 'foo bar'
+
+// Conditional via boolean expression
+classNames('btn', isActive &amp;&amp; 'btn--active')
+// → 'btn btn--active'  (when isActive = true)
+
+// Object: keys with truthy values included
+classNames(&#123; active: true, disabled: false &#125;)
+// → 'active'
+
+// Array: recursively flattened
+classNames(['base', &#123; highlight: true &#125;])
+// → 'base highlight'
+
+// Falsy values are silently ignored
+classNames('btn', null, undefined, false, 'icon')
+// → 'btn icon'</code></pre>
+    </div>
+  </div>
+
+  <!-- Section: Pipe usage -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Pipe Usage</h2>
+    <p class="demo-section__desc">
+      Import <code>ClassNamesPipe</code> into your standalone component and use
+      <code>classNames</code> as a template pipe. Pass additional arguments after the colon.
+    </p>
+
+    <div class="demo-card">
+      <pre class="demo-code"><code>import &#123; ClassNamesPipe &#125; from 'ui-lib-custom/class-names';
+
+@Component(&#123;
+  imports: [ClassNamesPipe],
+  template: `
+    &lt;!-- Object syntax --&gt;
+    &lt;div [class]="&#123; active: isActive, hidden: isHidden &#125; | classNames"&gt;&lt;/div&gt;
+
+    &lt;!-- String with extra object arg --&gt;
+    &lt;div [class]="'btn' | classNames:&#123; 'btn--lg': isLarge &#125;"&gt;&lt;/div&gt;
+
+    &lt;!-- Array flattening --&gt;
+    &lt;div [class]="['base', isActive &amp;&amp; 'active'] | classNames"&gt;&lt;/div&gt;
+  `,
+&#125;)</code></pre>
+    </div>
+  </div>
+
+  <!-- Section: Interactive playground -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Interactive Playground</h2>
+    <p class="demo-section__desc">
+      Toggle the flags below and watch the resolved class string update in real time.
+    </p>
+
+    <div class="demo-card demo-playground">
+      <div class="demo-playground__controls">
+        <button
+          class="demo-toggle"
+          [class.demo-toggle--on]="isActive()"
+          (click)="toggleActive()"
+          type="button"
+        >
+          active: {{ isActive() }}
+        </button>
+        <button
+          class="demo-toggle"
+          [class.demo-toggle--on]="isDisabled()"
+          (click)="toggleDisabled()"
+          type="button"
+        >
+          disabled: {{ isDisabled() }}
+        </button>
+        <button
+          class="demo-toggle"
+          [class.demo-toggle--on]="isHighlighted()"
+          (click)="toggleHighlighted()"
+          type="button"
+        >
+          highlighted: {{ isHighlighted() }}
+        </button>
+      </div>
+
+      <div class="demo-playground__result">
+        <span class="demo-label">classNames() result:</span>
+        <code class="demo-output">{{ computedClasses() }}</code>
+      </div>
+
+      <div class="demo-playground__result">
+        <span class="demo-label">pipe result:</span>
+        <code class="demo-output">{{
+          { 'demo-box': true, 'demo-box--active': isActive(), 'demo-box--disabled': isDisabled(), 'demo-box--highlighted': isHighlighted() } | classNames
+        }}</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section: API reference -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API Reference</h2>
+
+    <h3 class="demo-subsection-title">classNames(...values)</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Parameter</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>...values</code></td>
+          <td><code>ClassNameValue[]</code></td>
+          <td>
+            One or more values. Strings are included as-is. Object keys with truthy values are
+            included. Arrays are recursively processed. Falsy primitives are ignored.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-subsection-title" style="margin-top: 1.5rem;">ClassNamesPipe</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Argument</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>value</code> (primary)</td>
+          <td><code>ClassNameValue</code></td>
+          <td>The primary value passed before the pipe symbol.</td>
+        </tr>
+        <tr>
+          <td><code>...additional</code></td>
+          <td><code>ClassNameValue[]</code></td>
+          <td>Optional extra values passed as pipe arguments after <code>:</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-subsection-title" style="margin-top: 1.5rem;">ClassNameValue type</h3>
+    <div class="demo-card">
+      <pre class="demo-code"><code>type ClassNameValue =
+  | string
+  | null
+  | undefined
+  | false
+  | Record&lt;string, boolean | null | undefined | false&gt;
+  | ClassNameValue[];</code></pre>
+    </div>
+  </div>
+</section>

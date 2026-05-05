@@ -33,6 +33,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Bind` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `BlockUI` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Chip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ClassNames` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Message` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Breadcrumb` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ContextMenu` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -86,6 +87,35 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [ClassNames utility]
+Changed:
+  - projects/ui-lib-custom/src/lib/class-names/class-names.ts (new — classNames function + ClassNamesPipe)
+  - projects/ui-lib-custom/src/lib/class-names/class-names.spec.ts (27 unit tests)
+  - projects/ui-lib-custom/src/lib/class-names/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/class-names/README.md (API docs)
+  - projects/ui-lib-custom/class-names/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/class-names/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (class-names added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (class-names import test added)
+  - projects/demo/src/app/pages/class-names/class-names-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/class-names/class-names-demo.component.html (hero + 3 sections + API table)
+  - projects/demo/src/app/pages/class-names/class-names-demo.component.scss (demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ClassNames entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: ClassNames fully complete. Pure utility — no component/template/styles in the library.
+  Exports `classNames()` function and standalone `ClassNamesPipe` (pipe name: classNames).
+  ClassNameValue type accepts: string, null, undefined, false, Record<string, boolean>, and nested arrays.
+  27 unit tests (function + pipe). 70/70 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/class-names/ projects/demo/src/app/pages/class-names/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/class-names Built, zero errors,
+  npx.cmd jest --testPathPatterns=class-names --no-coverage (27/27 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (70/70 PASS).
+Terminal notes: `const isActive: boolean = true` is narrowed by TypeScript, causing
+  @typescript-eslint/no-unnecessary-condition on `isActive && expr` in tests. Use Math.random() > -1
+  to produce a runtime-unknown boolean that prevents the narrowing.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [Chip component]
 Changed:
