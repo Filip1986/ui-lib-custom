@@ -28,6 +28,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `FocusTrap` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Inplace` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -89,6 +90,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [Inplace component]
+Changed:
+  - projects/ui-lib-custom/src/lib/inplace/inplace.types.ts (new — InplaceVariant type)
+  - projects/ui-lib-custom/src/lib/inplace/inplace.ts (new component)
+  - projects/ui-lib-custom/src/lib/inplace/inplace.html (new template — CSS-toggle display/content slots)
+  - projects/ui-lib-custom/src/lib/inplace/inplace.scss (new — 3 variants + --uilib-inplace-* tokens)
+  - projects/ui-lib-custom/src/lib/inplace/inplace.spec.ts (21 unit tests)
+  - projects/ui-lib-custom/src/lib/inplace/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/inplace/README.md (API docs)
+  - projects/ui-lib-custom/inplace/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/inplace/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (inplace added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (inplace import test added)
+  - projects/demo/src/app/pages/inplace/inplace-demo.component.ts (full demo — was placeholder)
+  - projects/demo/src/app/pages/inplace/inplace-demo.component.html (hero + 6 sections + API table)
+  - projects/demo/src/app/pages/inplace/inplace-demo.component.scss (full demo styles)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Inplace component fully complete. PrimeNG-inspired inline editing component.
+  Uses CSS-toggle pattern (both slots always in DOM, hidden by --hidden modifier class) to preserve
+  ng-content projection. Attribute slot selectors: [inplaceDisplay] / [inplaceContent].
+  model() for two-way active binding. Outputs: activated / deactivated. Three variants:
+  material (indigo hover + dashed border), bootstrap (squarer corners), minimal (grey hover).
+  Signal inputs/model, ViewEncapsulation.None + OnPush + standalone.
+  Note: test host uses `activeState` (not `active`) as the WritableSignal name to avoid Angular
+  template compiler confusing the host property with the child component's [active] input binding.
+  21 unit tests passing. 73/73 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/inplace/ projects/demo/src/app/pages/inplace/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/inplace Built, zero errors,
+  npx.cmd jest --testPathPatterns src/lib/inplace --no-coverage (21/21 PASS),
+  npx.cmd jest --testPathPatterns entry-points --no-coverage (73/73 PASS).
+Terminal notes: When test host has a WritableSignal named same as the child component input (e.g.
+  `active`), Angular template compiler produces "ctx.active is not a function" at runtime.
+  Rename the host signal (e.g. `activeState`) and use explicit [active]="activeState()" (activeChange)="activeState.set($event)" syntax.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [Fluid component + directive]
 Changed:

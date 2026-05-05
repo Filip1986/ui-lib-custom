@@ -1,0 +1,32 @@
+<!-- Display slot: always in DOM, hidden via CSS class when active -->
+<div
+  class="ui-lib-inplace__display"
+  [class.ui-lib-inplace__display--hidden]="active()"
+  role="button"
+  [attr.tabindex]="disabled() ? null : 0"
+  [attr.aria-disabled]="disabled() || null"
+  aria-label="Click to edit"
+  (click)="onDisplayClick()"
+  (keydown)="onDisplayKeydown($event)"
+>
+  <ng-content select="[inplaceDisplay]" />
+</div>
+
+<!-- Content slot: always in DOM, hidden via CSS class when inactive -->
+<div
+  class="ui-lib-inplace__content"
+  [class.ui-lib-inplace__content--hidden]="!active()"
+>
+  <ng-content select="[inplaceContent]" />
+  @if (closable()) {
+    <button
+      type="button"
+      class="ui-lib-inplace__close-button"
+      aria-label="Close editor"
+      (click)="deactivate()"
+    >
+      <span [class]="closeIcon()" aria-hidden="true"></span>
+    </button>
+  }
+</div>
+

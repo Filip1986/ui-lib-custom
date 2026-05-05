@@ -264,6 +264,10 @@
     "./fluid": {
       "esm2022": "./esm2022/fluid/index.mjs",
       "esm": "./esm2022/fluid/index.mjs"
+    },
+    "./inplace": {
+      "esm2022": "./esm2022/inplace/index.mjs",
+      "esm": "./esm2022/inplace/index.mjs"
     }
   },
   "typesVersions": {
@@ -432,6 +436,9 @@
       ],
       "fluid": [
         "./fluid/index.d.ts"
+      ],
+      "inplace": [
+        "./inplace/index.d.ts"
       ]
     }
   }

@@ -454,7 +454,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/block-ui',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'Bottom Sheet',
@@ -492,7 +491,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/inplace',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'MeterGroup',

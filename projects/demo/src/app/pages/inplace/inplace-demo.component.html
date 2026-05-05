@@ -1,5 +1,255 @@
-<section class="inplace-demo" data-testid="inplace-demo">
-  <h1>Inplace</h1>
-  <p>Coming soon.</p>
+<section class="inplace-demo">
+  <!-- ---- Hero --------------------------------------------------------- -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">Inplace</h1>
+    <p class="demo-hero__subtitle">
+      Inline editing — switch between a read-only display and an editable content slot on click.
+    </p>
+    <p class="demo-hero__import">
+      <code>import &#123; Inplace &#125; from 'ui-lib-custom/inplace'</code>
+    </p>
+  </div>
+
+  <!-- ---- Basic -------------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
+      Click the display slot to switch to edit mode. The <code>[(active)]</code> model binding
+      exposes the current state for two-way control.
+    </p>
+    <div class="demo-section__preview">
+      <div class="demo-field">
+        <label class="demo-field__label">Name</label>
+        <ui-lib-inplace [(active)]="basicActive">
+          <span inplaceDisplay class="inplace-demo__display-text">{{ basicText() }}</span>
+          <input
+            inplaceContent
+            class="inplace-demo__input"
+            type="text"
+            [value]="basicText()"
+            (input)="basicText.set($any($event.target).value)"
+            (blur)="basicActive.set(false)"
+          />
+        </ui-lib-inplace>
+        <p class="demo-field__note">Active: <code>{{ basicActive() }}</code></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- Closable ----------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Closable</h2>
+    <p class="demo-section__description">
+      Set <code>[closable]="true"</code> to render a close button inside the content slot that
+      deactivates the editor without requiring a custom blur handler.
+    </p>
+    <div class="demo-section__preview">
+      <div class="demo-field">
+        <label class="demo-field__label">Version</label>
+        <ui-lib-inplace [(active)]="closableActive" [closable]="true">
+          <span inplaceDisplay class="inplace-demo__display-text">{{ closableText }}</span>
+          <input
+            inplaceContent
+            class="inplace-demo__input"
+            type="text"
+            [value]="closableText"
+            (input)="closableText = $any($event.target).value"
+          />
+        </ui-lib-inplace>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- Rich content ------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Rich Content</h2>
+    <p class="demo-section__description">
+      Any content can be projected into the <code>inplaceDisplay</code> and
+      <code>inplaceContent</code> slots — icons, badges, images, or entire form groups.
+    </p>
+    <div class="demo-section__preview">
+      <ui-lib-inplace [(active)]="imageActive" [closable]="true">
+        <span inplaceDisplay class="inplace-demo__rich-display">
+          <span class="pi pi-user inplace-demo__icon" aria-hidden="true"></span>
+          <span>John Doe — click to edit profile</span>
+        </span>
+        <div inplaceContent class="inplace-demo__rich-content">
+          <input class="inplace-demo__input" type="text" placeholder="First name" />
+          <input class="inplace-demo__input" type="text" placeholder="Last name" />
+        </div>
+      </ui-lib-inplace>
+    </div>
+  </div>
+
+  <!-- ---- Disabled ----------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Disabled</h2>
+    <p class="demo-section__description">
+      Set <code>[disabled]="true"</code> to prevent the display slot from activating.
+    </p>
+    <div class="demo-section__preview">
+      <ui-lib-inplace [disabled]="true">
+        <span inplaceDisplay class="inplace-demo__display-text inplace-demo__display-text--muted">
+          {{ disabledText }}
+        </span>
+        <input inplaceContent class="inplace-demo__input" type="text" />
+      </ui-lib-inplace>
+    </div>
+  </div>
+
+  <!-- ---- Variants ----------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
+      Three built-in variants — <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code> — adjust hover states, borders, and close-button styling.
+    </p>
+    <div class="demo-section__preview demo-section__preview--row">
+      @for (variant of variants; track variant) {
+        <div class="demo-variant-cell">
+          <p class="demo-variant-cell__label">{{ variant }}</p>
+          <ui-lib-inplace
+            [variant]="variant"
+            [closable]="true"
+            [active]="variantActives()[variant]"
+            (activated)="setVariantActive(variant, true); onActivated(variant)"
+            (deactivated)="setVariantActive(variant, false); onDeactivated(variant)"
+          >
+            <span inplaceDisplay class="inplace-demo__display-text">
+              Click to edit ({{ variant }})
+            </span>
+            <input
+              inplaceContent
+              class="inplace-demo__input"
+              type="text"
+              [placeholder]="variant + ' variant'"
+            />
+          </ui-lib-inplace>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- ---- Event log ---------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Events</h2>
+    <p class="demo-section__description">
+      Toggle the variant examples above to see <code>(activated)</code> and
+      <code>(deactivated)</code> events captured here.
+    </p>
+    <div class="demo-section__preview">
+      <div class="inplace-demo__event-log">
+        @if (eventLog().length === 0) {
+          <p class="inplace-demo__event-log-empty">No events yet — interact with the variants above.</p>
+        }
+        @for (entry of eventLog(); track entry) {
+          <p class="inplace-demo__event-log-entry">{{ entry }}</p>
+        }
+      </div>
+      @if (eventLog().length > 0) {
+        <button type="button" class="inplace-demo__clear-button" (click)="clearLog()">
+          Clear log
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- ---- API ---------------------------------------------------------- -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 class="demo-table__heading">Inputs</h3>
+    <table class="demo-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>active</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Two-way bindable; controls whether the editor is shown.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Prevents activation when set to true.</td>
+        </tr>
+        <tr>
+          <td><code>closable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Renders a close button inside the content slot.</td>
+        </tr>
+        <tr>
+          <td><code>closeIcon</code></td>
+          <td><code>string</code></td>
+          <td><code>'pi pi-times'</code></td>
+          <td>CSS class for the close button icon.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Visual variant; falls back to global ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS classes added to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-table__heading">Outputs</h3>
+    <table class="demo-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>(activated)</code></td>
+          <td><code>void</code></td>
+          <td>Emitted when the component transitions to the active (editing) state.</td>
+        </tr>
+        <tr>
+          <td><code>(deactivated)</code></td>
+          <td><code>void</code></td>
+          <td>Emitted when the component transitions back to the display (inactive) state.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-table__heading">Content Projection</h3>
+    <table class="demo-table">
+      <thead>
+        <tr>
+          <th>Slot selector</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>[inplaceDisplay]</code></td>
+          <td>Shown when the component is inactive. Click activates the editor.</td>
+        </tr>
+        <tr>
+          <td><code>[inplaceContent]</code></td>
+          <td>Shown when the component is active. Any element or component can be projected here.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 

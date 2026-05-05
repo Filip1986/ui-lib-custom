@@ -1,14 +1,221 @@
 .inplace-demo {
   padding: 1.5rem;
+  max-width: 900px;
 
-  h1 {
-    margin: 0 0 0.5rem;
-    font-size: 1.5rem;
+  // ---- Shared demo primitives ----------------------------------------
+  .demo-hero {
+    margin-bottom: 2rem;
+
+    &__title {
+      margin: 0 0 0.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--uilib-page-fg);
+    }
+
+    &__subtitle {
+      margin: 0 0 0.5rem;
+      color: var(--uilib-color-text-muted, #6b7280);
+    }
+
+    &__import {
+      margin: 0;
+
+      code {
+        background: var(--uilib-surface-100, #f3f4f6);
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .demo-section {
+    margin-bottom: 2.5rem;
+
+    &__title {
+      margin: 0 0 0.375rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--uilib-page-fg);
+    }
+
+    &__description {
+      margin: 0 0 1rem;
+      color: var(--uilib-color-text-muted, #6b7280);
+      font-size: 0.9rem;
+
+      code {
+        background: var(--uilib-surface-100, #f3f4f6);
+        padding: 0.1rem 0.35rem;
+        border-radius: 0.25rem;
+        font-size: 0.85em;
+      }
+    }
+
+    &__preview {
+      padding: 1.5rem;
+      border: 1px solid var(--uilib-surface-200, #e5e7eb);
+      border-radius: 0.5rem;
+      background: var(--uilib-surface-0, #ffffff);
+
+      &--row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+    }
+  }
+
+  .demo-field {
+    &__label {
+      display: block;
+      margin-bottom: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--uilib-page-fg);
+    }
+
+    &__note {
+      margin: 0.5rem 0 0;
+      font-size: 0.8rem;
+      color: var(--uilib-color-text-muted, #6b7280);
+
+      code {
+        background: var(--uilib-surface-100, #f3f4f6);
+        padding: 0.1rem 0.3rem;
+        border-radius: 0.2rem;
+      }
+    }
+  }
+
+  .demo-variant-cell {
+    &__label {
+      margin: 0 0 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--uilib-color-text-muted, #6b7280);
+    }
+  }
+
+  .demo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+
+    th,
+    td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--uilib-surface-200, #e5e7eb);
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--uilib-surface-50, #f9fafb);
+    }
+
+    code {
+      background: var(--uilib-surface-100, #f3f4f6);
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.2rem;
+      font-size: 0.85em;
+    }
+
+    &__heading {
+      margin: 1.5rem 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--uilib-page-fg);
+    }
+  }
+
+  // ---- Component-specific demo styles ---------------------------------
+  &__display-text {
+    font-size: 0.9375rem;
+    color: var(--uilib-page-fg);
+
+    &--muted {
+      color: var(--uilib-color-text-muted, #9ca3af);
+      font-style: italic;
+    }
+  }
+
+  &__input {
+    height: 2rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--uilib-surface-300, #d1d5db);
+    border-radius: 0.375rem;
+    font-size: 0.9375rem;
+    font-family: inherit;
+    color: var(--uilib-page-fg);
+    background: var(--uilib-surface-0, #ffffff);
+    outline: none;
+
+    &:focus {
+      border-color: var(--uilib-color-primary, #6366f1);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+  }
+
+  &__rich-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
     color: var(--uilib-page-fg);
   }
 
-  p {
+  &__icon {
+    font-size: 1rem;
+    color: var(--uilib-color-primary, #6366f1);
+  }
+
+  &__rich-content {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  &__event-log {
+    min-height: 4rem;
+    padding: 0.75rem 1rem;
+    background: var(--uilib-surface-50, #f9fafb);
+    border-radius: 0.375rem;
+    border: 1px solid var(--uilib-surface-200, #e5e7eb);
+    font-family: monospace;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__event-log-empty {
     margin: 0;
-    color: var(--uilib-muted);
+    color: var(--uilib-color-text-muted, #9ca3af);
+    font-family: inherit;
+  }
+
+  &__event-log-entry {
+    margin: 0 0 0.25rem;
+    color: var(--uilib-page-fg);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__clear-button {
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--uilib-surface-300, #d1d5db);
+    border-radius: 0.375rem;
+    background: var(--uilib-surface-0, #ffffff);
+    font-size: 0.875rem;
+    cursor: pointer;
+    color: var(--uilib-page-fg);
+
+    &:hover {
+      background: var(--uilib-surface-100, #f3f4f6);
+    }
   }
 }

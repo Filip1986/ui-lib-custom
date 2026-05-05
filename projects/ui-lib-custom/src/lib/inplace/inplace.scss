@@ -1,0 +1,143 @@
+// ------------------------------------------------------------------
+// Inplace component
+// Pattern: --uilib-inplace-{property}[-{variant}][-{state}]
+// ------------------------------------------------------------------
+
+// ---- Base tokens (default / material) ----------------------------
+ui-lib-inplace {
+  --uilib-inplace-display-cursor: pointer;
+  --uilib-inplace-display-padding: 0.25rem 0.375rem;
+  --uilib-inplace-display-border-radius: var(--uilib-radius-sm, 0.375rem);
+  --uilib-inplace-display-bg-hover: rgba(0, 0, 0, 0.04);
+  --uilib-inplace-display-transition: background-color 0.15s ease;
+  --uilib-inplace-display-border: 1px dashed transparent;
+  --uilib-inplace-display-border-hover: 1px dashed var(--uilib-color-primary, #6366f1);
+  --uilib-inplace-content-gap: 0.5rem;
+  --uilib-inplace-close-button-size: 1.75rem;
+  --uilib-inplace-close-button-bg: transparent;
+  --uilib-inplace-close-button-color: var(--uilib-color-text, #374151);
+  --uilib-inplace-close-button-bg-hover: rgba(0, 0, 0, 0.08);
+  --uilib-inplace-close-button-border-radius: var(--uilib-radius-full, 9999px);
+  --uilib-inplace-disabled-opacity: 0.5;
+}
+
+// ---- Host element ------------------------------------------------
+.ui-lib-inplace {
+  display: inline-block;
+  font-family: var(--uilib-font-ui, inherit);
+  font-size: inherit;
+  color: inherit;
+
+  // ---- Display slot ------------------------------------------------
+  &__display {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--uilib-inplace-display-padding);
+    border-radius: var(--uilib-inplace-display-border-radius);
+    border: var(--uilib-inplace-display-border);
+    cursor: var(--uilib-inplace-display-cursor);
+    transition: var(--uilib-inplace-display-transition);
+    user-select: none;
+    line-height: inherit;
+
+    &:hover {
+      background: var(--uilib-inplace-display-bg-hover);
+      border: var(--uilib-inplace-display-border-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-color-primary, #6366f1);
+      outline-offset: 2px;
+    }
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  // ---- Content slot ------------------------------------------------
+  &__content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--uilib-inplace-content-gap);
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  // ---- Close button ------------------------------------------------
+  &__close-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--uilib-inplace-close-button-size);
+    height: var(--uilib-inplace-close-button-size);
+    padding: 0;
+    border: none;
+    border-radius: var(--uilib-inplace-close-button-border-radius);
+    background: var(--uilib-inplace-close-button-bg);
+    color: var(--uilib-inplace-close-button-color);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background: var(--uilib-inplace-close-button-bg-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-color-primary, #6366f1);
+      outline-offset: 1px;
+    }
+
+    span {
+      font-size: 0.7em;
+      pointer-events: none;
+    }
+  }
+
+  // ---- Disabled state ----------------------------------------------
+  &--disabled {
+    .ui-lib-inplace__display {
+      cursor: not-allowed;
+      opacity: var(--uilib-inplace-disabled-opacity);
+      pointer-events: none;
+    }
+  }
+
+  // ---- Variant: material -------------------------------------------
+  &--variant-material {
+    --uilib-inplace-display-bg-hover: rgba(99, 102, 241, 0.06);
+    --uilib-inplace-display-border-hover: 1px dashed var(--uilib-color-primary, #6366f1);
+    --uilib-inplace-close-button-color: var(--uilib-color-primary, #6366f1);
+    --uilib-inplace-close-button-bg-hover: rgba(99, 102, 241, 0.1);
+  }
+
+  // ---- Variant: bootstrap ------------------------------------------
+  &--variant-bootstrap {
+    --uilib-inplace-display-border-radius: var(--uilib-radius-xs, 0.25rem);
+    --uilib-inplace-display-bg-hover: rgba(13, 110, 253, 0.06);
+    --uilib-inplace-display-border-hover: 1px dashed var(--uilib-color-primary, #0d6efd);
+    --uilib-inplace-close-button-color: var(--uilib-color-text, #212529);
+    --uilib-inplace-close-button-border-radius: var(--uilib-radius-xs, 0.25rem);
+    --uilib-inplace-close-button-bg-hover: rgba(0, 0, 0, 0.1);
+  }
+
+  // ---- Variant: minimal --------------------------------------------
+  &--variant-minimal {
+    --uilib-inplace-display-bg-hover: var(--uilib-surface-100, #f3f4f6);
+    --uilib-inplace-display-border-hover: 1px dashed var(--uilib-surface-400, #9ca3af);
+    --uilib-inplace-close-button-color: var(--uilib-color-text, #374151);
+    --uilib-inplace-close-button-bg-hover: var(--uilib-surface-200, #e5e7eb);
+  }
+
+  // Dark-mode adjustments for minimal variant
+  [data-theme='dark'] &--variant-minimal,
+  &--variant-minimal[data-theme='dark'] {
+    --uilib-inplace-display-bg-hover: var(--uilib-surface-700, #374151);
+    --uilib-inplace-display-border-hover: 1px dashed var(--uilib-surface-500, #6b7280);
+    --uilib-inplace-close-button-color: var(--uilib-color-text, #f9fafb);
+    --uilib-inplace-close-button-bg-hover: var(--uilib-surface-600, #4b5563);
+  }
+}
