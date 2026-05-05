@@ -1,0 +1,143 @@
+// ─── Fluid container ────────────────────────────────────────────────────────
+//
+// The .ui-lib-fluid class (applied by both <ui-lib-fluid> and [uiLibFluid])
+// makes all descendant form controls stretch to 100 % of the available width.
+//
+// CSS variable convention: --uilib-fluid-*
+// ─────────────────────────────────────────────────────────────────────────────
+
+.ui-lib-fluid {
+  display: block;
+  width: 100%;
+
+  // ── Native form elements ──────────────────────────────────────────────────
+  input,
+  textarea,
+  select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  // Standalone native buttons (e.g. <button type="submit">)
+  // Exclude small utility buttons such as remove / clear / toggle icons.
+  button:not(.ui-lib-chip__remove-button):not(.ui-lib-input__toggle):not([class*='__icon']) {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  // ── Library component host elements ──────────────────────────────────────
+  //
+  // Each ui-lib-* component uses ViewEncapsulation.None and binds its classes
+  // onto the host element, so targeting the host CSS class is safe and tree-
+  // shake-friendly.
+
+  // Buttons
+  ui-lib-button,
+  .ui-lib-button {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  // Text inputs
+  ui-lib-input,
+  .ui-lib-input {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Textarea
+  ui-lib-textarea,
+  .ui-lib-textarea {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Select / Listbox / TreeSelect
+  ui-lib-select,
+  .ui-lib-select,
+  ui-lib-listbox,
+  .ui-lib-listbox,
+  ui-lib-tree-select,
+  .ui-lib-tree-select {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Date-picker / Color-picker
+  ui-lib-date-picker,
+  .ui-lib-date-picker,
+  ui-lib-color-picker,
+  .ui-lib-color-picker {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Password
+  ui-lib-password,
+  .ui-lib-password {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Input-group / Icon-field wrappers (should also stretch)
+  ui-lib-input-group,
+  .ui-lib-input-group,
+  ui-lib-icon-field,
+  .ui-lib-icon-field {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Float-label wrapper
+  ui-lib-float-label,
+  .ui-lib-float-label {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Input-number / Input-mask / Input-otp
+  ui-lib-input-number,
+  .ui-lib-input-number,
+  ui-lib-input-mask,
+  .ui-lib-input-mask {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  // Toggle-button / Select-button
+  ui-lib-toggle-button,
+  .ui-lib-toggle-button,
+  ui-lib-select-button,
+  .ui-lib-select-button {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  // Split-button
+  ui-lib-split-button,
+  .ui-lib-split-button {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  // Cascading-select / Autocomplete
+  ui-lib-cascade-select,
+  .ui-lib-cascade-select,
+  ui-lib-autocomplete,
+  .ui-lib-autocomplete {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+}

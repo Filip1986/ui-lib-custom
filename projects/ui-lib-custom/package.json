@@ -260,6 +260,10 @@
     "./focus-trap": {
       "esm2022": "./esm2022/focus-trap/index.mjs",
       "esm": "./esm2022/focus-trap/index.mjs"
+    },
+    "./fluid": {
+      "esm2022": "./esm2022/fluid/index.mjs",
+      "esm": "./esm2022/fluid/index.mjs"
     }
   },
   "typesVersions": {
@@ -425,6 +429,9 @@
       ],
       "focus-trap": [
         "./focus-trap/index.d.ts"
+      ],
+      "fluid": [
+        "./fluid/index.d.ts"
       ]
     }
   }

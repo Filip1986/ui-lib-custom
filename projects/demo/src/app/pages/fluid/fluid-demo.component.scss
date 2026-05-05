@@ -1,14 +1,176 @@
 .fluid-demo {
   padding: 1.5rem;
+  max-width: 860px;
 
-  h1 {
-    margin: 0 0 0.5rem;
-    font-size: 1.5rem;
+  // ── hero ──────────────────────────────────────────────────────────
+  .fd-hero {
+    margin-bottom: 2.5rem;
+
+    &__title {
+      margin: 0 0 0.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--uilib-page-fg);
+    }
+
+    &__lead {
+      margin: 0 0 1rem;
+      font-size: 1rem;
+      color: var(--uilib-muted);
+      line-height: 1.6;
+    }
+
+    &__tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .fd-tag {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--uilib-surface-alt, #f1f3f5);
+    color: var(--uilib-muted);
+  }
+
+  // ── sections ──────────────────────────────────────────────────────
+  .fd-section {
+    margin-bottom: 2.5rem;
+
+    &__title {
+      margin: 0 0 0.35rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--uilib-page-fg);
+    }
+
+    &__desc {
+      margin: 0 0 1rem;
+      font-size: 0.9rem;
+      color: var(--uilib-muted);
+      line-height: 1.6;
+    }
+  }
+
+  // ── demo card ─────────────────────────────────────────────────────
+  .fd-demo-card {
+    background: var(--uilib-surface-alt, #f8f9fa);
+    border: 1px solid var(--uilib-surface-border, #dee2e6);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  // ── form helpers ──────────────────────────────────────────────────
+  .fd-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .fd-label {
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--uilib-page-fg);
   }
 
-  p {
-    margin: 0;
-    color: var(--uilib-muted);
+  .fd-input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--uilib-surface-border, #ced4da);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: var(--uilib-surface, #fff);
+    color: var(--uilib-page-fg);
+    outline: none;
+    transition: border-color 0.15s;
+
+    &:focus {
+      border-color: var(--uilib-color-primary, #6366f1);
+    }
+  }
+
+  .fd-btn {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &--primary {
+      background: var(--uilib-color-primary, #6366f1);
+      color: #fff;
+    }
+
+    &--secondary {
+      background: var(--uilib-surface-alt, #e9ecef);
+      color: var(--uilib-page-fg);
+    }
+  }
+
+  // toggle state badge
+  .fd-status {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    &--on {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    &--off {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+  }
+
+  // ── API table ─────────────────────────────────────────────────────
+  .fd-table-wrap {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+
+  .fd-api-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid var(--uilib-surface-border, #dee2e6);
+      color: var(--uilib-page-fg);
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--uilib-surface-alt, #f8f9fa);
+    }
+
+    code {
+      font-family: monospace;
+      font-size: 0.85em;
+      background: var(--uilib-surface-alt, #f1f3f5);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+    }
   }
 }

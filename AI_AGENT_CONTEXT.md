@@ -26,7 +26,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
-- `Toast` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `FocusTrap` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Fluid` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AnimateOnScroll` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Avatar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `AutoFocus` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -88,6 +89,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-05 [Fluid component + directive]
+Changed:
+  - projects/ui-lib-custom/src/lib/fluid/fluid.ts (new — Fluid component + FluidDirective)
+  - projects/ui-lib-custom/src/lib/fluid/fluid.html (new template — <ng-content />)
+  - projects/ui-lib-custom/src/lib/fluid/fluid.scss (new — .ui-lib-fluid cascade rules)
+  - projects/ui-lib-custom/src/lib/fluid/fluid.spec.ts (8 unit tests)
+  - projects/ui-lib-custom/src/lib/fluid/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/fluid/README.md (API docs)
+  - projects/ui-lib-custom/fluid/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/fluid/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (fluid added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (fluid import test added)
+  - projects/demo/src/app/pages/fluid/fluid-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/fluid/fluid-demo.component.html (hero + 4 sections + API tables)
+  - projects/demo/src/app/pages/fluid/fluid-demo.component.scss (demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Fluid entry)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Fluid component fully complete. Exports Fluid (component, selector ui-lib-fluid) and
+  FluidDirective (directive, selector [uiLibFluid]). Both apply the .ui-lib-fluid CSS class
+  which cascades width:100%/box-sizing:border-box onto native form elements and all ui-lib-*
+  component hosts. FluidDirective uses booleanAttribute transform so attribute-only usage
+  (<div uiLibFluid>) works. Fluid component has a styleClass input. Demo has 4 sections:
+  component usage, directive usage, conditional fluid toggle, attribute shorthand + API tables.
+  8 unit tests passing. 72/72 entry-point tests passing. ESLint clean. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/fluid/ projects/demo/src/app/pages/fluid/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/fluid Built, zero errors,
+  npx.cmd jest --testPathPatterns="src/lib/fluid" --no-coverage (8/8 PASS),
+  npx.cmd jest --testPathPatterns="entry-points" --no-coverage (72/72 PASS).
+Terminal notes: None — straightforward build. No Windows workarounds needed.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [FocusTrap directive]
 Changed:

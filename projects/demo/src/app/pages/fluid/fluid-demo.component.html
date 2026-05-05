@@ -1,5 +1,220 @@
 <section class="fluid-demo" data-testid="fluid-demo">
-  <h1>Fluid</h1>
-  <p>Coming soon.</p>
+
+  <!-- Hero -->
+  <div class="fd-hero">
+    <h1 class="fd-hero__title">Fluid</h1>
+    <p class="fd-hero__lead">
+      A layout wrapper that stretches all descendant form controls — inputs, textareas,
+      selects, and buttons — to 100&nbsp;% of the available width.
+      Available as both a component (<code>&lt;ui-lib-fluid&gt;</code>) and an
+      attribute directive (<code>[uiLibFluid]</code>) for zero-wrapper usage.
+    </p>
+    <div class="fd-hero__tags">
+      <span class="fd-tag">Component</span>
+      <span class="fd-tag">Directive</span>
+      <span class="fd-tag">Layout</span>
+      <span class="fd-tag">Misc</span>
+    </div>
+  </div>
+
+  <!-- ── Section 1: Component usage ── -->
+  <div class="fd-section">
+    <h2 class="fd-section__title">Using the Component</h2>
+    <p class="fd-section__desc">
+      Wrap any form or container with <code>&lt;ui-lib-fluid&gt;</code>.
+      All child inputs, textareas, and buttons grow to fill the full width.
+    </p>
+    <div class="fd-demo-card">
+      <ui-lib-fluid>
+        <div class="fd-field">
+          <label class="fd-label" for="c-name">Full Name</label>
+          <input
+            id="c-name"
+            class="fd-input"
+            type="text"
+            placeholder="Enter your name"
+            [value]="name()"
+            (input)="onNameChange($event)"
+          />
+        </div>
+        <div class="fd-field">
+          <label class="fd-label" for="c-email">Email Address</label>
+          <input
+            id="c-email"
+            class="fd-input"
+            type="email"
+            placeholder="Enter your email"
+            [value]="email()"
+            (input)="onEmailChange($event)"
+          />
+        </div>
+        <div class="fd-field">
+          <label class="fd-label" for="c-bio">Bio</label>
+          <textarea
+            id="c-bio"
+            class="fd-input"
+            rows="3"
+            placeholder="Tell us about yourself"
+          ></textarea>
+        </div>
+        <button class="fd-btn fd-btn--primary" type="button">Submit</button>
+      </ui-lib-fluid>
+    </div>
+  </div>
+
+  <!-- ── Section 2: Directive usage ── -->
+  <div class="fd-section">
+    <h2 class="fd-section__title">Using the Directive</h2>
+    <p class="fd-section__desc">
+      Apply <code>uiLibFluid</code> as an attribute on any existing element to avoid
+      adding an extra wrapper to the DOM. The directive adds the same
+      <code>ui-lib-fluid</code> CSS class to the host.
+    </p>
+    <div class="fd-demo-card">
+      <form uiLibFluid>
+        <div class="fd-field">
+          <label class="fd-label" for="d-username">Username</label>
+          <input
+            id="d-username"
+            class="fd-input"
+            type="text"
+            placeholder="Choose a username"
+          />
+        </div>
+        <div class="fd-field">
+          <label class="fd-label" for="d-password">Password</label>
+          <input
+            id="d-password"
+            class="fd-input"
+            type="password"
+            placeholder="Choose a password"
+          />
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="fd-btn fd-btn--primary" type="submit">Sign Up</button>
+          <button class="fd-btn fd-btn--secondary" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Section 3: Conditional fluid via binding ── -->
+  <div class="fd-section">
+    <h2 class="fd-section__title">Conditional Fluid</h2>
+    <p class="fd-section__desc">
+      Bind <code>[uiLibFluid]="expression"</code> to toggle the fluid layout
+      at runtime. When <code>false</code>, inputs and buttons revert to their natural
+      intrinsic sizes.
+    </p>
+    <div class="fd-demo-card">
+      <span
+        class="fd-status"
+        [class.fd-status--on]="isFluid()"
+        [class.fd-status--off]="!isFluid()"
+      >
+        Fluid: {{ isFluid() ? 'ON' : 'OFF' }}
+      </span>
+      <div [uiLibFluid]="isFluid()">
+        <div class="fd-field">
+          <label class="fd-label" for="t-search">Search</label>
+          <input
+            id="t-search"
+            class="fd-input"
+            type="search"
+            placeholder="Search for something…"
+          />
+        </div>
+        <button class="fd-btn fd-btn--primary" type="button">Search</button>
+      </div>
+      <div style="margin-top: 1rem;">
+        <button class="fd-btn fd-btn--secondary" type="button" (click)="toggleFluid()">
+          Toggle Fluid
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Section 4: Attribute-only shorthand ── -->
+  <div class="fd-section">
+    <h2 class="fd-section__title">Attribute Shorthand</h2>
+    <p class="fd-section__desc">
+      The directive supports attribute-only usage — just add <code>uiLibFluid</code>
+      without a binding. It defaults to <code>true</code> through Angular's
+      <code>booleanAttribute</code> transform.
+    </p>
+    <div class="fd-demo-card">
+      <div uiLibFluid>
+        <div class="fd-field">
+          <label class="fd-label" for="a-topic">Topic</label>
+          <input
+            id="a-topic"
+            class="fd-input"
+            type="text"
+            placeholder="Enter a topic"
+          />
+        </div>
+        <button class="fd-btn fd-btn--primary" type="button">Go</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Section 5: API reference ── -->
+  <div class="fd-section">
+    <h2 class="fd-section__title">API Reference</h2>
+
+    <h3 class="fd-section__title" style="font-size: 1rem; margin-top: 1rem;">
+      &lt;ui-lib-fluid&gt; — Component
+    </h3>
+    <p class="fd-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
+    <div class="fd-table-wrap">
+      <table class="fd-api-table">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Additional CSS classes appended to the host element.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="fd-section__title" style="font-size: 1rem; margin-top: 1.5rem;">
+      [uiLibFluid] — Directive
+    </h3>
+    <p class="fd-section__desc">Package: <code>ui-lib-custom/fluid</code></p>
+    <div class="fd-table-wrap">
+      <table class="fd-api-table">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>uiLibFluid</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>
+              When <code>true</code> the <code>ui-lib-fluid</code> class is applied to the
+              host. Supports attribute-only usage (<code>&lt;div uiLibFluid&gt;</code>).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </section>
 
