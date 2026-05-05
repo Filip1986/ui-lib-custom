@@ -1,0 +1,125 @@
+// ------------------------------------------------------------------
+// ProgressBar component
+// Pattern: --uilib-progress-bar-{property}[-{variant}][-{state}]
+// ------------------------------------------------------------------
+
+// ---- Base tokens (default / material) ----------------------------
+ui-lib-progress-bar {
+  --uilib-progress-bar-height: 1.25rem;
+  --uilib-progress-bar-height-sm: 0.625rem;
+  --uilib-progress-bar-height-lg: 1.75rem;
+  --uilib-progress-bar-border-radius: var(--uilib-radius-full, 9999px);
+  --uilib-progress-bar-track-bg: var(--uilib-surface-200, #e5e7eb);
+  --uilib-progress-bar-fill-bg: var(--uilib-color-primary, #6366f1);
+  --uilib-progress-bar-label-color: #fff;
+  --uilib-progress-bar-label-font-size: 0.75rem;
+  --uilib-progress-bar-transition: width 0.4s ease;
+}
+
+// ---- Host element ------------------------------------------------
+.ui-lib-progress-bar {
+  display: block;
+  background-color: var(--uilib-progress-bar-track-bg);
+  border-radius: var(--uilib-progress-bar-border-radius);
+  height: var(--uilib-progress-bar-height);
+  width: 100%;
+  overflow: hidden;
+  font-family: var(--uilib-font-ui, inherit);
+  position: relative;
+
+  // ---- Fill bar ---------------------------------------------------
+  &__fill {
+    height: 100%;
+    background-color: var(--uilib-progress-bar-fill-bg);
+    border-radius: var(--uilib-progress-bar-border-radius);
+    transition: var(--uilib-progress-bar-transition);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  // ---- Percentage label -------------------------------------------
+  &__label {
+    font-size: var(--uilib-progress-bar-label-font-size);
+    color: var(--uilib-progress-bar-label-color);
+    font-weight: 600;
+    white-space: nowrap;
+    line-height: 1;
+    padding: 0 0.5rem;
+  }
+
+  // ---- Size: sm ---------------------------------------------------
+  &--size-sm {
+    --uilib-progress-bar-height: var(--uilib-progress-bar-height-sm);
+    --uilib-progress-bar-label-font-size: 0.625rem;
+  }
+
+  // ---- Size: lg ---------------------------------------------------
+  &--size-lg {
+    --uilib-progress-bar-height: var(--uilib-progress-bar-height-lg);
+    --uilib-progress-bar-label-font-size: 0.875rem;
+  }
+
+  // ---- Indeterminate animation -------------------------------------
+  &--indeterminate {
+    .ui-lib-progress-bar__fill {
+      width: 30%;
+      animation: uilib-progress-bar-indeterminate 1.6s infinite ease-in-out;
+    }
+  }
+
+  // ---- Variant: material ------------------------------------------
+  &--variant-material {
+    --uilib-progress-bar-border-radius: var(--uilib-radius-full, 9999px);
+    --uilib-progress-bar-track-bg: var(--uilib-surface-200, #e5e7eb);
+    --uilib-progress-bar-fill-bg: var(--uilib-color-primary, #6366f1);
+
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 10%);
+  }
+
+  // ---- Variant: bootstrap -----------------------------------------
+  &--variant-bootstrap {
+    --uilib-progress-bar-border-radius: var(--uilib-radius-sm, 0.375rem);
+    --uilib-progress-bar-track-bg: var(--uilib-surface-200, #e9ecef);
+    --uilib-progress-bar-fill-bg: var(--uilib-color-primary, #0d6efd);
+
+    .ui-lib-progress-bar__fill {
+      border-radius: var(--uilib-radius-sm, 0.375rem);
+    }
+  }
+
+  // ---- Variant: minimal -------------------------------------------
+  &--variant-minimal {
+    --uilib-progress-bar-border-radius: 2px;
+    --uilib-progress-bar-track-bg: var(--uilib-surface-100, #f3f4f6);
+    --uilib-progress-bar-fill-bg: var(--uilib-color-primary, #6366f1);
+
+    .ui-lib-progress-bar__fill {
+      border-radius: 2px;
+    }
+  }
+
+  // ---- Dark mode --------------------------------------------------
+  [data-theme='dark'] &,
+  &[data-theme='dark'] {
+    --uilib-progress-bar-track-bg: var(--uilib-surface-700, #374151);
+    --uilib-progress-bar-label-color: #f9fafb;
+  }
+}
+
+// ---- Keyframe: indeterminate oscillation -------------------------
+@keyframes uilib-progress-bar-indeterminate {
+  0% {
+    margin-left: -35%;
+  }
+
+  60% {
+    margin-left: 110%;
+  }
+
+  100% {
+    margin-left: 110%;
+  }
+}

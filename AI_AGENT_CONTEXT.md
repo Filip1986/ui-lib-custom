@@ -148,188 +148,39 @@ Changed:
   - projects/demo/src/app/pages/tag/tag-demo.component.scss (full demo styles)
   - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Tag entry)
   - AI_AGENT_CONTEXT.md (updated)
-State: Tag component fully complete. PrimeNG-inspired compact label for status/severity/classification.
-  Selector: ui-lib-tag. Inputs: value (string|null), icon (string|null), severity (primary/secondary/
-  success/info/warn/danger/contrast, default primary), rounded (boolean, default false),
-  size (sm/md/lg, default md), variant (material/bootstrap/minimal|null), styleClass (string|null).
-  No outputs. ng-content projection supported for custom content.
-  Seven severity palettes: primary (indigo), secondary (grey), success (green), info (blue),
-  warn (amber), danger (red), contrast (dark). Minimal variant uses light tinted backgrounds with
-  coloured text instead of solid fills. Dark mode tokens provided for minimal variant.
-  Bootstrap variant uses classic Bootstrap 5 colours with adjusted info/warn text for contrast.
-  role="status" + aria-label on host. Icons marked aria-hidden="true".
-  Signal inputs, ViewEncapsulation.None + OnPush + standalone.
+State: Tag component fully complete.
 Verification:
   npx.cmd eslint projects/ui-lib-custom/src/lib/tag/ projects/demo/src/app/pages/tag/ --max-warnings 0 (CLEAN, EXIT:0),
   npx.cmd ng build ui-lib-custom — ui-lib-custom/tag Built, zero errors,
   npx.cmd jest --testPathPatterns=src/lib/tag --no-coverage (20/20 PASS),
   npx.cmd jest --testPathPatterns=entry-points --no-coverage (79/79 PASS).
-Terminal notes: None — straightforward build. No Windows workarounds needed.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 
-Date: 2026-05-05 [StyleClass directive]
+Date: 2026-05-05 [ProgressBar component]
 Changed:
-  - projects/ui-lib-custom/src/lib/style-class/style-class.ts (new directive)
-  - projects/ui-lib-custom/src/lib/style-class/style-class.spec.ts (16 unit tests)
-  - projects/ui-lib-custom/src/lib/style-class/index.ts (barrel)
-  - projects/ui-lib-custom/src/lib/style-class/README.md (API docs)
-  - projects/ui-lib-custom/style-class/ng-package.json (secondary entry point)
-  - projects/ui-lib-custom/style-class/package.json (secondary entry point)
-  - projects/ui-lib-custom/package.json (style-class added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (style-class import test added)
-  - projects/demo/src/app/pages/style-class/style-class-demo.component.ts (full demo)
-  - projects/demo/src/app/pages/style-class/style-class-demo.component.html (hero + 5 sections + API table)
-  - projects/demo/src/app/pages/style-class/style-class-demo.component.scss (full demo styles with fade/slide animations)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from StyleClass entry)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.types.ts (new — ProgressBarVariant, ProgressBarSize, ProgressBarMode types)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.ts (new component)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.html (new template — fill div + label, indeterminate via CSS animation)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.scss (new — 3 variants + 3 sizes + indeterminate keyframe + --uilib-progress-bar-* tokens)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.spec.ts (24 unit tests)
+  - projects/ui-lib-custom/src/lib/progress-bar/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/progress-bar/README.md (API docs)
+  - projects/ui-lib-custom/progress-bar/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/progress-bar/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (progress-bar added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (progress-bar import test added)
+  - projects/demo/src/app/pages/progress-bar/progress-bar-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/progress-bar/progress-bar-demo.component.html (hero + 8 sections + API table)
+  - projects/demo/src/app/pages/progress-bar/progress-bar-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ProgressBar entry)
   - AI_AGENT_CONTEXT.md (updated)
-State: StyleClass directive fully complete. PrimeNG-inspired utility directive for CSS class-based
-  enter/leave transitions on a target element.
-  Selector: [uiLibStyleClass]. Required input: uiLibStyleClass (target selector string).
-  Special selectors: @next, @prev, @parent, @grandparent (relative to host); any CSS selector resolves
-  via document.querySelector.
-  Inputs: toggleClass, enterFromClass, enterActiveClass, enterToClass, enterDoneClass,
-          leaveFromClass, leaveActiveClass, leaveToClass, leaveDoneClass, hideOnOutsideClick.
-  Two modes: toggleClass mode (single class toggle per click) and full transition lifecycle mode
-  (enterFrom → rAF → enterActive+enterTo → transitionend/animationend → enterDone).
-  500 ms setTimeout fallback ensures directive works when no CSS transition is defined (e.g. in tests).
-  hideOnOutsideClick binds a capture-phase document click listener that triggers leave/toggle-off when
-  click target is outside both the trigger and the resolved target element.
-  Registers click listener runOutsideAngular (no zone-triggered CD). SSR-safe via isPlatformBrowser.
-  DestroyRef cleans up all listeners on destroy. Signal inputs, standalone directive.
-  Demo: 5 sections (toggle mode, fade animation, slide animation, special selectors, CSS selector) + API table.
-  16 unit tests passing. 78/78 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/style-class/ projects/demo/src/app/pages/style-class/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx.cmd ng build ui-lib-custom — ui-lib-custom/style-class Built, zero errors,
-  npx.cmd jest --testPathPatterns=style-class --no-coverage (16/16 PASS),
-  npx.cmd jest --testPathPatterns=entry-points --no-coverage (78/78 PASS).
-Terminal notes:
-  1. Signal inputs on directive require fixture.detectChanges() after host.signalField.set(...)
-     to propagate new values from parent template bindings to the directive — without this the
-     directive still reads the stale initial value from its input() signal.
-  2. jest.advanceTimersByTime(600) flushes both rAF (~16 ms) + 500 ms timeout in a single call,
-     verifying the full enter/leave cycle completes.
-  3. jest.advanceTimersByTime(20) flushes only rAF — useful for testing intermediate state after
-     rAF (enterActive added) before the 500 ms fallback fires.
-  4. Dispatching new Event('transitionend') on the target after advanceTimersByTime(20) tests the
-     explicit transitionend path (fires before the 500 ms timeout).
-Next step: knip baseline + dead-code cleanup, or next component from queue.
-
-Date: 2026-05-05 [ScrollTop component]
-Changed:
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.types.ts (new — ScrollTopVariant/Size/Target/Behavior types)
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts (new component)
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html (new template — button + icon span)
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss (new — 3 variants + 3 sizes + window/parent positioning + visibility transition)
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts (19 unit tests)
-  - projects/ui-lib-custom/src/lib/scroll-top/index.ts (barrel)
-  - projects/ui-lib-custom/src/lib/scroll-top/README.md (API docs)
-  - projects/ui-lib-custom/scroll-top/ng-package.json (secondary entry point)
-  - projects/ui-lib-custom/scroll-top/package.json (secondary entry point)
-  - projects/ui-lib-custom/package.json (scroll-top added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (scroll-top import test added)
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.ts (full demo)
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html (hero + 7 sections + API table)
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.scss (full demo styles)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ScrollTop entry)
-  - AI_AGENT_CONTEXT.md (updated)
-State: ScrollTop component fully complete. PrimeNG-inspired floating "back to top" button.
-  Selector: ui-lib-scroll-top. Inputs: threshold (number, 400px), target ('window'|'parent'),
-  icon (string, 'pi pi-arrow-up'), behavior ('smooth'|'auto'), buttonAriaLabel (string),
-  size (sm/md/lg), variant (material/bootstrap/minimal|null), styleClass (string|null).
-  Public writable signal: isVisible (WritableSignal<boolean>).
-  target='window': button is position:fixed, responds to window scroll events.
-  target='parent': button is position:absolute inside parent, responds to parent scroll events.
-  Visibility controlled via --visible class on host (opacity + transform CSS transition for smooth reveal).
-  Scroll listener registered runOutsideAngular; signal write triggers OnPush CD automatically.
-  SSR safe: uses PLATFORM_ID + isPlatformBrowser. DestroyRef tears down listener on destroy.
-  Three variants: material (circular pill + primary colour shadow), bootstrap (square corners + blue shadow),
-  minimal (muted surface + border). Button focus-visible outline, active scale(0.94) press feedback.
-  Signal inputs, ViewEncapsulation.None + OnPush + standalone. 19 unit tests passing.
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/scroll-top/ projects/demo/src/app/pages/scroll-top/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx.cmd ng build ui-lib-custom — ui-lib-custom/scroll-top Built, zero errors,
-  npx.cmd jest --testPathPatterns=scroll-top --no-coverage (19/19 PASS),
-  npx.cmd jest --testPathPatterns=entry-points --no-coverage (77/77 PASS).
-Terminal notes:
-  Object.defineProperty(window, 'scrollY', { configurable: true, get: () => mockScrollY }) works
-  reliably in JSDOM for mocking the scroll position. Restore with original descriptor in afterEach.
-  Signal writes from runOutsideAngular context correctly trigger OnPush change detection in zoneless Jest tests.
-Next step: knip baseline + dead-code cleanup, or next component from queue.
-
-Date: 2026-05-05 [Ripple directive]
-Changed:
-  - projects/ui-lib-custom/src/lib/ripple/ripple.ts (new directive)
-  - projects/ui-lib-custom/src/lib/ripple/ripple.scss (new — host + wave keyframe animation + CSS variables)
-  - projects/ui-lib-custom/src/lib/ripple/ripple.spec.ts (17 unit tests)
-  - projects/ui-lib-custom/src/lib/ripple/index.ts (barrel)
-  - projects/ui-lib-custom/src/lib/ripple/README.md (API docs)
-  - projects/ui-lib-custom/ripple/ng-package.json (secondary entry point)
-  - projects/ui-lib-custom/ripple/package.json (secondary entry point)
-  - projects/ui-lib-custom/package.json (ripple added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (ripple import test added)
-  - projects/demo/src/app/pages/ripple/ripple-demo.component.ts (full demo — was placeholder)
-  - projects/demo/src/app/pages/ripple/ripple-demo.component.html (hero + 5 sections + API tables)
-  - projects/demo/src/app/pages/ripple/ripple-demo.component.scss (full demo styles)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from Ripple entry)
-  - projects/demo/src/styles.scss (added @use for ripple.scss)
-  - AI_AGENT_CONTEXT.md (updated)
-State: Ripple directive fully complete. PrimeNG-inspired ripple wave directive.
-  Selector [uiLibRipple]. Inputs: disabled (boolean, default false), rippleColor (string, inline
-  override for --uilib-ripple-color), rippleDuration (string, inline override for --uilib-ripple-duration).
-  On click, appends a .ui-lib-ripple-wave <span> sized to max(width, height) of host, positioned at the
-  pointer, animated via keyframes (scale 0→3 + opacity 0.7→0) then removed on animationend.
-  Host gets position:relative + overflow:hidden via .ui-lib-ripple class (applied via SCSS imported globally).
-  Click listener registered runOutsideAngular; disabled checked reactively in handler.
-  CSS vars: --uilib-ripple-color (rgba(255,255,255,0.35)), --uilib-ripple-duration (600ms), --uilib-ripple-easing.
-  Signal inputs, standalone directive. No ViewEncapsulation (directives don't support it).
-  Note: test host must use WritableSignal for reactive input updates in OnPush+zoneless tests.
-  JSDOM does not support CSS custom properties via style.setProperty/getPropertyValue — test signal
-  values directly via directive injector instead.
-  17 unit tests passing. 76/76 entry-point tests passing. ESLint clean. Build zero errors.
-Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/ripple/ projects/demo/src/app/pages/ripple/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx.cmd ng build ui-lib-custom — ui-lib-custom/ripple Built, zero errors,
-  npx.cmd jest --testPathPatterns=ripple --no-coverage (17/17 PASS),
-  npx.cmd jest --testPathPatterns=entry-points --no-coverage (76/76 PASS).
-Terminal notes:
-  1. With OnPush + zoneless, plain property mutations on host component don't trigger signal input updates.
-     Test hosts must use WritableSignal properties so signal.set() triggers reactive change propagation.
-  2. JSDOM does not support CSS custom property set/get via CSSStyleDeclaration.setProperty/getPropertyValue.
-     Test at the Angular signal level (directive.rippleColor()) rather than DOM side-effects.
-  3. Directive scss must be imported in demo/src/styles.scss (not via styleUrl — that's components only).
-Next step: knip baseline + dead-code cleanup, or next component from queue.
-
-Date: 2026-05-05 [ProgressSpinner component]
-Changed:
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.types.ts (new — types + PROGRESS_SPINNER_DEFAULTS)
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts (new component)
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html (new template — SVG circle with animated stroke-dashoffset)
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss (new — 3 variants + 3 sizes + keyframe animations)
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.spec.ts (19 unit tests)
-  - projects/ui-lib-custom/src/lib/progress-spinner/index.ts (barrel)
-  - projects/ui-lib-custom/src/lib/progress-spinner/README.md (API docs)
-  - projects/ui-lib-custom/progress-spinner/ng-package.json (secondary entry point)
-  - projects/ui-lib-custom/progress-spinner/package.json (secondary entry point)
-  - projects/ui-lib-custom/package.json (progress-spinner added to exports + typesVersions)
-  - projects/ui-lib-custom/test/entry-points.spec.ts (progress-spinner import test added)
-  - projects/demo/src/app/pages/progress-spinner/progress-spinner-demo.component.ts (full demo)
-  - projects/demo/src/app/pages/progress-spinner/progress-spinner-demo.component.html (hero + 7 sections + API table)
-  - projects/demo/src/app/pages/progress-spinner/progress-spinner-demo.component.scss (full demo styles)
-  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge: 'TODO' from ProgressSpinner entry)
-  - AI_AGENT_CONTEXT.md (updated)
-State: ProgressSpinner component fully complete. PrimeNG-inspired animated circular indeterminate loading indicator.
-  Inputs: strokeWidth, fill, animationDuration, size (sm/md/lg), variant (material/bootstrap/minimal), styleClass, ariaLabel.
-  SVG viewBox="25 25 50 50" with animated circle stroke-dashoffset (arc-chase effect) + rotating SVG.
-  material: colour-cycling keyframe animation (red/blue/green/orange), bootstrap: solid primary blue, minimal: muted grey.
-  role="status" + aria-busy="true" + aria-label on host for accessibility.
+State: ProgressBar component fully complete. PrimeNG-inspired horizontal progress bar.
   Signal inputs, ViewEncapsulation.None + OnPush + standalone.
 Verification:
-  npx.cmd eslint projects/ui-lib-custom/src/lib/progress-spinner/ projects/demo/src/app/pages/progress-spinner/ --max-warnings 0 (CLEAN, EXIT:0),
-  npx.cmd ng build ui-lib-custom — ui-lib-custom/progress-spinner Built, zero errors,
-  npx.cmd jest --testPathPatterns=progress-spinner --no-coverage (19/19 PASS),
+  npx.cmd eslint projects/ui-lib-custom/src/lib/progress-bar/ projects/demo/src/app/pages/progress-bar/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/progress-bar Built, zero errors,
+  npx.cmd jest --testPathPatterns=progress-bar --no-coverage (24/24 PASS),
   npx.cmd jest --testPathPatterns=entry-points --no-coverage (75/75 PASS).
-Terminal notes: None — straightforward build. No Windows workarounds needed.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-05 [MeterGroup component]

@@ -273,6 +273,10 @@
       "esm2022": "./esm2022/meter-group/index.mjs",
       "esm": "./esm2022/meter-group/index.mjs"
     },
+    "./progress-bar": {
+      "esm2022": "./esm2022/progress-bar/index.mjs",
+      "esm": "./esm2022/progress-bar/index.mjs"
+    },
     "./progress-spinner": {
       "esm2022": "./esm2022/progress-spinner/index.mjs",
       "esm": "./esm2022/progress-spinner/index.mjs"
@@ -474,6 +478,9 @@
       ],
       "meter-group": [
         "./meter-group/index.d.ts"
+      ],
+      "progress-bar": [
+        "./progress-bar/index.d.ts"
       ],
       "progress-spinner": [
         "./progress-spinner/index.d.ts"

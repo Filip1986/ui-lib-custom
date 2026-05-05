@@ -1,0 +1,9 @@
+<div
+  class="ui-lib-progress-bar__fill"
+  [style.width]="mode() === 'determinate' ? clampedValue() + '%' : null"
+  [style.background-color]="color()"
+>
+  @if (mode() === 'determinate' && showValue()) {
+    <span class="ui-lib-progress-bar__label">{{ displayLabel() }}</span>
+  }
+</div>

@@ -503,7 +503,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/progress-bar',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'ProgressSpinner',
