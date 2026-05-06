@@ -564,7 +564,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/confirm-dialog',
           group: 'Overlay',
-          badge: 'TODO',
         },
         {
           label: 'ConfirmPopup',
