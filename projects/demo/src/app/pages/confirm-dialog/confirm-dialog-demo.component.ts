@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { ConfirmDialog, ConfirmationService } from 'ui-lib-custom/confirm-dialog';
@@ -12,7 +13,7 @@ import type {
 @Component({
   selector: 'app-confirm-dialog-demo',
   standalone: true,
-  imports: [ConfirmDialog],
+  imports: [ConfirmDialog, TitleCasePipe],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
