@@ -1,0 +1,200 @@
+/* ── Global scroll-lock ─────────────────────────────────────────── */
+body.ui-lib-bottom-sheet-scroll-lock {
+  overflow: hidden;
+}
+
+/* ── Host tokens and base ───────────────────────────────────────── */
+ui-lib-bottom-sheet {
+  /* Panel background */
+  --uilib-bottom-sheet-panel-bg: var(--uilib-surface, #ffffff);
+  /* Shadow above the panel */
+  --uilib-bottom-sheet-panel-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
+  /* Top border radius */
+  --uilib-bottom-sheet-border-radius: 16px;
+  /* Backdrop color */
+  --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.48);
+  /* Z-index layer */
+  --uilib-bottom-sheet-z-index: var(--uilib-z-overlay, 1000);
+  /* Animation */
+  --uilib-bottom-sheet-transition-duration: 0.32s;
+  --uilib-bottom-sheet-transition-easing: cubic-bezier(0.32, 0.72, 0, 1);
+  /* Panel padding */
+  --uilib-bottom-sheet-padding: var(--uilib-spacing-5, 1.25rem);
+  /* Header */
+  --uilib-bottom-sheet-header-bg: transparent;
+  --uilib-bottom-sheet-header-border: 1px solid
+    var(--uilib-color-surface-border, rgba(0, 0, 0, 0.1));
+  --uilib-bottom-sheet-title-color: var(--uilib-color-text-primary, #1a1a1a);
+  --uilib-bottom-sheet-title-font-size: 1rem;
+  --uilib-bottom-sheet-title-font-weight: 600;
+  /* Close button */
+  --uilib-bottom-sheet-close-color: var(--uilib-color-text-secondary, #6b7280);
+  --uilib-bottom-sheet-close-hover-bg: var(--uilib-color-surface-hover, rgba(0, 0, 0, 0.06));
+  --uilib-bottom-sheet-close-size: 2rem;
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--uilib-bottom-sheet-z-index);
+  /* pointer-events off when closed so click-through works */
+  pointer-events: none;
+
+  &.ui-lib-bottom-sheet--open {
+    pointer-events: auto;
+  }
+}
+
+/* ── Backdrop ───────────────────────────────────────────────────── */
+.ui-lib-bottom-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: var(--uilib-bottom-sheet-backdrop-bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--uilib-bottom-sheet-transition-duration) ease;
+}
+
+.ui-lib-bottom-sheet__backdrop--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Panel ──────────────────────────────────────────────────────── */
+.ui-lib-bottom-sheet__panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--uilib-bottom-sheet-panel-bg);
+  border-radius: var(--uilib-bottom-sheet-border-radius) var(--uilib-bottom-sheet-border-radius) 0 0;
+  box-shadow: var(--uilib-bottom-sheet-panel-shadow);
+  transform: translateY(100%);
+  transition: transform var(--uilib-bottom-sheet-transition-duration)
+    var(--uilib-bottom-sheet-transition-easing);
+  /* Remove default focus outline — we rely on visible focus within content */
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.ui-lib-bottom-sheet__panel--open {
+  transform: translateY(0);
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+.ui-lib-bottom-sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--uilib-bottom-sheet-padding);
+  padding-bottom: calc(var(--uilib-bottom-sheet-padding) * 0.75);
+  background-color: var(--uilib-bottom-sheet-header-bg);
+  border-bottom: var(--uilib-bottom-sheet-header-border);
+  flex-shrink: 0;
+}
+
+.ui-lib-bottom-sheet__title {
+  font-size: var(--uilib-bottom-sheet-title-font-size);
+  font-weight: var(--uilib-bottom-sheet-title-font-weight);
+  color: var(--uilib-bottom-sheet-title-color);
+  line-height: 1.4;
+}
+
+.ui-lib-bottom-sheet__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--uilib-bottom-sheet-close-size);
+  height: var(--uilib-bottom-sheet-close-size);
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  color: var(--uilib-bottom-sheet-close-color);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: var(--uilib-bottom-sheet-close-hover-bg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary, #6366f1);
+    outline-offset: 2px;
+  }
+}
+
+/* ── Content ────────────────────────────────────────────────────── */
+.ui-lib-bottom-sheet__content {
+  padding: var(--uilib-bottom-sheet-padding);
+  overflow-y: auto;
+  flex: 1 1 auto;
+  overscroll-behavior: contain;
+}
+
+/* ── Footer — only rendered when [bottomSheetFooter] is projected ─ */
+.ui-lib-bottom-sheet__footer {
+  flex-shrink: 0;
+
+  &:empty {
+    display: none;
+  }
+}
+
+/* ── Variant: material ──────────────────────────────────────────── */
+.ui-lib-bottom-sheet--variant-material {
+  --uilib-bottom-sheet-border-radius: 20px;
+  --uilib-bottom-sheet-panel-shadow:
+    0 -4px 32px rgba(0, 0, 0, 0.14), 0 -1px 8px rgba(0, 0, 0, 0.08);
+  --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.42);
+
+  .ui-lib-bottom-sheet__close {
+    --uilib-bottom-sheet-close-color: var(--uilib-color-primary, #6366f1);
+
+    &:hover {
+      --uilib-bottom-sheet-close-hover-bg: rgba(99, 102, 241, 0.08);
+    }
+  }
+}
+
+/* ── Variant: bootstrap ─────────────────────────────────────────── */
+.ui-lib-bottom-sheet--variant-bootstrap {
+  --uilib-bottom-sheet-border-radius: 4px;
+  --uilib-bottom-sheet-panel-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+  --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.5);
+
+  .ui-lib-bottom-sheet__header {
+    --uilib-bottom-sheet-header-border: 1px solid #dee2e6;
+  }
+}
+
+/* ── Variant: minimal ───────────────────────────────────────────── */
+.ui-lib-bottom-sheet--variant-minimal {
+  --uilib-bottom-sheet-border-radius: 12px;
+  --uilib-bottom-sheet-panel-shadow: 0 -2px 16px rgba(0, 0, 0, 0.1);
+  --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.32);
+
+  .ui-lib-bottom-sheet__header {
+    --uilib-bottom-sheet-header-border: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────── */
+[data-theme='dark'] {
+  .ui-lib-bottom-sheet--variant-material {
+    --uilib-bottom-sheet-panel-shadow:
+      0 -4px 32px rgba(0, 0, 0, 0.4), 0 -1px 8px rgba(0, 0, 0, 0.24);
+    --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.6);
+  }
+
+  .ui-lib-bottom-sheet--variant-bootstrap {
+    --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.65);
+  }
+
+  .ui-lib-bottom-sheet--variant-minimal {
+    --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.48);
+  }
+}

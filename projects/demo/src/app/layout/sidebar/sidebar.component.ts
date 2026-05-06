@@ -554,6 +554,12 @@ export class SidebarComponent {
           badge: 'TODO',
         },
         {
+          label: 'BottomSheet',
+          icon: 'pi pi-circle',
+          route: '/bottom-sheet',
+          group: 'Overlay',
+        },
+        {
           label: 'ConfirmDialog',
           icon: 'pi pi-circle',
           route: '/confirm-dialog',

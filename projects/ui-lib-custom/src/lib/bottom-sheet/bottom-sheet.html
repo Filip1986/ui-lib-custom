@@ -1,0 +1,41 @@
+<!-- Backdrop — always in DOM, visibility toggled via CSS class -->
+<div
+  class="ui-lib-bottom-sheet__backdrop"
+  [class.ui-lib-bottom-sheet__backdrop--visible]="showBackdrop() && visible()"
+  aria-hidden="true"
+  (click)="onBackdropClick()"
+></div>
+
+<!-- Panel — always in DOM so ng-content projection is preserved -->
+<div
+  class="ui-lib-bottom-sheet__panel"
+  [class.ui-lib-bottom-sheet__panel--open]="visible()"
+  role="dialog"
+  [attr.aria-modal]="visible() ? 'true' : null"
+  [attr.aria-hidden]="!visible()"
+  [attr.aria-label]="header() || null"
+  tabindex="-1"
+  (keydown.escape)="onEscapeKey()"
+>
+  @if (header()) {
+    <div class="ui-lib-bottom-sheet__header">
+      <span class="ui-lib-bottom-sheet__title">{{ header() }}</span>
+      <button
+        type="button"
+        class="ui-lib-bottom-sheet__close"
+        aria-label="Close"
+        (click)="close()"
+      >
+        <span class="pi pi-times" aria-hidden="true"></span>
+      </button>
+    </div>
+  }
+
+  <div class="ui-lib-bottom-sheet__content">
+    <ng-content />
+  </div>
+
+  <div class="ui-lib-bottom-sheet__footer">
+    <ng-content select="[bottomSheetFooter]" />
+  </div>
+</div>
