@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Tag component complete; resuming backlog
+- **Active focus:** BottomSheet component complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
@@ -33,6 +33,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Tag` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Skeleton` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
+- `BottomSheet` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -103,6 +105,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-06 [BottomSheet component]
+Changed:
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.types.ts (new — BottomSheetVariant type)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts (new component — ViewEncapsulation.None/OnPush/standalone/OnDestroy)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html (new template — backdrop + panel with header/content/footer slots)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss (new — 3 variants + slide animation + scroll-lock global + CSS variables)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.spec.ts (27 unit tests)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md (API docs)
+  - projects/ui-lib-custom/bottom-sheet/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/bottom-sheet/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (bottom-sheet added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (bottom-sheet import test added)
+  - projects/demo/src/app/pages/bottom-sheet/bottom-sheet-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/bottom-sheet/bottom-sheet-demo.component.html (hero + 5 sections + API tables)
+  - projects/demo/src/app/pages/bottom-sheet/bottom-sheet-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (added BottomSheet to Overlay group)
+  - AI_AGENT_CONTEXT.md (updated)
+State: BottomSheet component fully complete. Angular Material-inspired slide-up overlay panel.
+  Selector: ui-lib-bottom-sheet. model() visible for two-way binding. Inputs: header (string),
+  variant (material/bootstrap/minimal|null), showBackdrop, closeOnBackdrop, closeOnEscape, styleClass.
+  Outputs: shown, hidden. Content projection: default slot (scrollable body) + [bottomSheetFooter] slot.
+  Host: position:fixed; inset:0; pointer-events:none when closed, auto when open.
+  Backdrop: CSS opacity transition. Panel: CSS translateY(100%→0) cubic-bezier animation.
+  Scroll-lock: body.ui-lib-bottom-sheet-scroll-lock { overflow: hidden } via effect + ngOnDestroy.
+  Focus: programmatic focus to panel on open via afterNextRender + ElementRef.
+  Three variants: material (20px radius, elevation, indigo close), bootstrap (4px, flat shadow), minimal (12px, subtle).
+  27 tests pass. 84/84 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/bottom-sheet/ projects/demo/src/app/pages/bottom-sheet/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/bottom-sheet Built, zero errors,
+  npx.cmd jest --testPathPatterns=bottom-sheet --no-coverage (27/27 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (84/84 PASS).
+Terminal notes: constructor must NOT have explicit 'public' modifier (explicit-member-accessibility rule). OnDestroy must be imported as type import (consistent-type-imports rule).
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-06 [Skeleton component]
 Changed:

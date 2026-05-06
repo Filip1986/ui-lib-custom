@@ -308,6 +308,10 @@
     "./skeleton": {
       "esm2022": "./esm2022/skeleton/index.mjs",
       "esm": "./esm2022/skeleton/index.mjs"
+    },
+    "./bottom-sheet": {
+      "esm2022": "./esm2022/bottom-sheet/index.mjs",
+      "esm": "./esm2022/bottom-sheet/index.mjs"
     }
   },
   "typesVersions": {
@@ -509,6 +513,9 @@
       ],
       "skeleton": [
         "./skeleton/index.d.ts"
+      ],
+      "bottom-sheet": [
+        "./bottom-sheet/index.d.ts"
       ]
     }
   }

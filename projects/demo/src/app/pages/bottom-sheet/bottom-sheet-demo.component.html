@@ -1,5 +1,247 @@
-<section class="bottom-sheet-demo" data-testid="bottom-sheet-demo">
-  <h1>Bottom Sheet</h1>
-  <p>Coming soon.</p>
+<section class="bottom-sheet-demo">
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-title">BottomSheet</h1>
+    <p class="demo-subtitle">
+      A slide-up overlay panel anchored to the bottom of the viewport. Ideal for contextual actions,
+      share menus, and quick forms on mobile and desktop.
+    </p>
+  </div>
+
+  <!-- Basic -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__desc">
+      Bind <code>[(visible)]</code> to control the sheet. Click the backdrop or press
+      <kbd>Escape</kbd> to dismiss.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" type="button" (click)="basicOpen.set(true)">
+        Open Sheet
+      </button>
+    </div>
+    <div class="demo-code">
+      <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen"&#62;
+  &#60;p&#62;Sheet content goes here.&#60;/p&#62;
+&#60;/ui-lib-bottom-sheet&#62;</code></pre>
+    </div>
+  </div>
+
+  <!-- With header -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">With Header</h2>
+    <p class="demo-section__desc">
+      Pass <code>header</code> to render a title bar with a close button.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" type="button" (click)="headerOpen.set(true)">
+        Open with Header
+      </button>
+    </div>
+    <div class="demo-code">
+      <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen" header="Share"&#62;
+  &#60;p&#62;Choose where to share.&#60;/p&#62;
+&#60;/ui-lib-bottom-sheet&#62;</code></pre>
+    </div>
+  </div>
+
+  <!-- With footer slot -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Footer Slot</h2>
+    <p class="demo-section__desc">
+      Project an element with the <code>[bottomSheetFooter]</code> attribute for a sticky action
+      area pinned to the bottom of the panel.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" type="button" (click)="footerOpen.set(true)">
+        Open with Footer
+      </button>
+    </div>
+    <div class="demo-code">
+      <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen" header="Confirm"&#62;
+  &#60;p&#62;Are you sure you want to proceed?&#60;/p&#62;
+  &#60;div bottomSheetFooter&#62;
+    &#60;button (click)="isOpen.set(false)"&#62;Cancel&#60;/button&#62;
+    &#60;button (click)="confirm()"&#62;Confirm&#60;/button&#62;
+  &#60;/div&#62;
+&#60;/ui-lib-bottom-sheet&#62;</code></pre>
+    </div>
+  </div>
+
+  <!-- No backdrop close -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Disable Backdrop Dismiss</h2>
+    <p class="demo-section__desc">
+      Set <code>[closeOnBackdrop]="false"</code> to prevent clicking the backdrop from closing the sheet.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" type="button" (click)="noBackdropOpen.set(true)">
+        Open (backdrop locked)
+      </button>
+    </div>
+  </div>
+
+  <!-- Variants -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__desc">
+      Three design variants adapt the panel shape and shadow to your chosen design system:
+      <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
+    </p>
+    <div class="demo-card demo-card--row">
+      @for (variant of variants; track variant) {
+        <button
+          class="demo-btn"
+          type="button"
+          (click)="openVariant(variant)"
+        >
+          {{ variant }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- API table -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 class="demo-api__subtitle">Inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>model&lt;boolean&gt;</code></td>
+          <td><code>false</code></td>
+          <td>Controls open/close state. Supports two-way binding via <code>[(visible)]</code>.</td>
+        </tr>
+        <tr>
+          <td><code>header</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Optional header text. When set, renders a title bar with a close button.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Visual variant. Inherits from <code>ThemeConfigService</code> when null.</td>
+        </tr>
+        <tr>
+          <td><code>showBackdrop</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Whether to show the semi-transparent backdrop behind the panel.</td>
+        </tr>
+        <tr>
+          <td><code>closeOnBackdrop</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Whether clicking the backdrop closes the sheet.</td>
+        </tr>
+        <tr>
+          <td><code>closeOnEscape</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Whether pressing Escape closes the sheet.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes applied to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-api__subtitle">Outputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>shown</code></td>
+          <td><code>void</code></td>
+          <td>Emits when the sheet transitions to open.</td>
+        </tr>
+        <tr>
+          <td><code>hidden</code></td>
+          <td><code>void</code></td>
+          <td>Emits when the sheet transitions to closed.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-api__subtitle">Content Projection</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Selector</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>(default)</code></td>
+          <td>Main body content rendered inside a scrollable content area.</td>
+        </tr>
+        <tr>
+          <td><code>[bottomSheetFooter]</code></td>
+          <td>Sticky footer content pinned to the bottom of the panel.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </section>
 
+<!-- ── Sheet instances ─────────────────────────────────────────── -->
+
+<ui-lib-bottom-sheet [(visible)]="basicOpen">
+  <p>This is the basic bottom sheet. Click the backdrop or press <kbd>Escape</kbd> to close.</p>
+</ui-lib-bottom-sheet>
+
+<ui-lib-bottom-sheet [(visible)]="headerOpen" header="Share">
+  <p>Choose where to share this item. The header includes a built-in close button.</p>
+</ui-lib-bottom-sheet>
+
+<ui-lib-bottom-sheet [(visible)]="footerOpen" header="Confirm action">
+  <p>This sheet has a sticky footer with action buttons projected via the <code>[bottomSheetFooter]</code> slot.</p>
+  <div bottomSheetFooter class="demo-footer-actions">
+    <button class="demo-btn demo-btn--outline" type="button" (click)="footerOpen.set(false)">
+      Cancel
+    </button>
+    <button class="demo-btn" type="button" (click)="footerOpen.set(false)">
+      Confirm
+    </button>
+  </div>
+</ui-lib-bottom-sheet>
+
+<ui-lib-bottom-sheet [(visible)]="noBackdropOpen" header="Backdrop locked" [closeOnBackdrop]="false">
+  <p>The backdrop click is disabled. Use the close button or press <kbd>Escape</kbd> to dismiss.</p>
+</ui-lib-bottom-sheet>
+
+<ui-lib-bottom-sheet [(visible)]="materialOpen" header="Material variant" variant="material">
+  <p>Material variant — larger corner radius, elevation shadow, and indigo close button.</p>
+</ui-lib-bottom-sheet>
+
+<ui-lib-bottom-sheet [(visible)]="bootstrapOpen" header="Bootstrap variant" variant="bootstrap">
+  <p>Bootstrap variant — sharp corners, flat shadow, and standard styling.</p>
+</ui-lib-bottom-sheet>
+
+<ui-lib-bottom-sheet [(visible)]="minimalOpen" header="Minimal variant" variant="minimal">
+  <p>Minimal variant — subtle shadow, medium radius, and clean styling.</p>
+</ui-lib-bottom-sheet>
