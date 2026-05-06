@@ -36,6 +36,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `BottomSheet` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
+- `ConfirmDialog` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `StyleClass` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -105,6 +107,52 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-06 [ConfirmDialog component]
+Changed:
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.types.ts (new — types: ConfirmDialogVariant/ButtonSeverity/Position/DefaultFocus + ConfirmationConfig interface)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.service.ts (new — ConfirmationService with signal-based confirmation state)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.ts (new component — ViewEncapsulation.None/OnPush/standalone + FocusTrap + scroll lock + service integration)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.html (new template — backdrop + alertdialog panel with header/content/footer)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.scss (new — 3 variants + 6 severity button colours + animations + CSS variables)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.spec.ts (31 unit tests)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/README.md (API docs)
+  - projects/ui-lib-custom/confirm-dialog/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/confirm-dialog/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (confirm-dialog added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (confirm-dialog import test added)
+  - projects/demo/src/app/pages/confirm-dialog/confirm-dialog-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/confirm-dialog/confirm-dialog-demo.component.html (8 sections + API tables)
+  - projects/demo/src/app/pages/confirm-dialog/confirm-dialog-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from ConfirmDialog)
+  - AI_AGENT_CONTEXT.md (updated)
+State: ConfirmDialog component fully complete.
+  Selector: ui-lib-confirm-dialog. model() visible for two-way binding. Inputs: key, header, message,
+  icon, acceptLabel, rejectLabel, acceptIcon, rejectIcon, acceptSeverity, rejectSeverity,
+  closable, dismissableMask, blockScroll, position, defaultFocus, variant, styleClass.
+  Outputs: accepted (void), rejected (void).
+  ConfirmationService: confirm(config) sets active config signal; close(key?) clears it.
+  Service integration: component effect listens to ConfirmationService.confirmation() signal;
+  key-matching ensures targeted calls reach only the right dialog instance.
+  Critical bug fixed: service effect must check serviceConfig() !== null before resetting visible,
+  otherwise declarative [(visible)] binding is overridden when service has no active config.
+  Focus trap: FocusTrap from ui-lib-custom/core activated via afterNextRender.
+  defaultFocus: programmatic focus to accept/reject button after open.
+  Three variants: material (pill buttons, large radius), bootstrap (border, flat), minimal (subtle border, 0ms animation).
+  6 button severities: primary/secondary/success/danger/warning/info.
+  5 positions: center/top/bottom/left/right.
+  role="alertdialog" + aria-modal + aria-labelledby + aria-describedby.
+  31 tests pass. 85/85 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/confirm-dialog/ projects/demo/src/app/pages/confirm-dialog/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/confirm-dialog Built, zero errors,
+  npx.cmd jest --testPathPatterns=confirm-dialog --no-coverage (31/31 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (85/85 PASS).
+Terminal notes: Service effect must guard reset with `this.serviceConfig() !== null` check.
+  Without this, the effect sees config=null + visible=true from declarative binding and
+  immediately calls visible.set(false), overriding the parent's [(visible)] binding.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-06 [BottomSheet component]
 Changed:

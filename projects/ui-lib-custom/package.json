@@ -312,6 +312,10 @@
     "./bottom-sheet": {
       "esm2022": "./esm2022/bottom-sheet/index.mjs",
       "esm": "./esm2022/bottom-sheet/index.mjs"
+    },
+    "./confirm-dialog": {
+      "esm2022": "./esm2022/confirm-dialog/index.mjs",
+      "esm": "./esm2022/confirm-dialog/index.mjs"
     }
   },
   "typesVersions": {
@@ -516,6 +520,9 @@
       ],
       "bottom-sheet": [
         "./bottom-sheet/index.d.ts"
+      ],
+      "confirm-dialog": [
+        "./confirm-dialog/index.d.ts"
       ]
     }
   }

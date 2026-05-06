@@ -1,5 +1,318 @@
-<section class="confirm-dialog-demo" data-testid="confirm-dialog-demo">
-  <h1>ConfirmDialog</h1>
-  <p>Coming soon.</p>
-</section>
+<div class="demo-page">
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">ConfirmDialog</h1>
+    <p class="demo-hero__subtitle">
+      A modal confirmation overlay with configurable accept/reject actions. Supports both declarative
+      binding and programmatic use via <code>ConfirmationService</code>.
+    </p>
+  </div>
 
+  <!-- Result banner -->
+  <div class="demo-result-banner">
+    <span class="demo-result-label">Last action:</span>
+    <span class="demo-result-value">{{ lastResult() }}</span>
+  </div>
+
+  <!-- Section: Basic -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__desc">
+      Declarative usage — bind <code>[(visible)]</code> and listen to <code>(accepted)</code> /
+      <code>(rejected)</code> outputs.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" (click)="confirmBasic()">Open Basic Dialog</button>
+    </div>
+
+    <ui-lib-confirm-dialog
+      [(visible)]="basicVisible"
+      header="Basic Confirmation"
+      message="Are you sure you want to proceed with this action?"
+      (accepted)="onAccepted('Basic')"
+      (rejected)="onRejected('Basic')"
+    />
+  </section>
+
+  <!-- Section: Dismissable mask -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Dismissable Backdrop</h2>
+    <p class="demo-section__desc">
+      Set <code>dismissableMask</code> to close the dialog by clicking the backdrop.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" (click)="confirmDismissable()">Open — Click backdrop to close</button>
+    </div>
+
+    <ui-lib-confirm-dialog
+      [(visible)]="dismissableVisible"
+      header="Dismissable"
+      message="Click anywhere outside this dialog to close it."
+      [dismissableMask]="true"
+      (accepted)="onAccepted('Dismissable')"
+      (rejected)="onRejected('Dismissable')"
+    />
+  </section>
+
+  <!-- Section: No close button -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Non-Closable</h2>
+    <p class="demo-section__desc">
+      Set <code>closable="false"</code> to require the user to choose an action.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" (click)="confirmNoClose()">Open — No close button</button>
+    </div>
+
+    <ui-lib-confirm-dialog
+      [(visible)]="noCloseVisible"
+      header="Action Required"
+      message="You must accept or reject to continue."
+      [closable]="false"
+      (accepted)="onAccepted('No-close')"
+      (rejected)="onRejected('No-close')"
+    />
+  </section>
+
+  <!-- Section: With icon -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">With Icon</h2>
+    <p class="demo-section__desc">
+      Pass an icon CSS class via the <code>icon</code> input to render a visual cue beside the
+      message.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" (click)="confirmWithIcon()">Open — With icon</button>
+    </div>
+
+    <ui-lib-confirm-dialog
+      [(visible)]="iconVisible"
+      header="Warning"
+      message="This action may have unintended consequences. Do you want to continue?"
+      icon="pi pi-exclamation-triangle"
+      (accepted)="onAccepted('Icon')"
+      (rejected)="onRejected('Icon')"
+    />
+  </section>
+
+  <!-- Section: Danger severity -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Danger Severity</h2>
+    <p class="demo-section__desc">
+      Use <code>acceptSeverity="danger"</code> to signal a destructive action.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn demo-btn--danger" (click)="confirmDanger()">Delete item</button>
+    </div>
+
+    <ui-lib-confirm-dialog
+      [(visible)]="dangerVisible"
+      header="Delete Item"
+      message="This item will be permanently deleted. This action cannot be undone."
+      icon="pi pi-trash"
+      acceptLabel="Delete"
+      rejectLabel="Cancel"
+      acceptSeverity="danger"
+      rejectSeverity="secondary"
+      (accepted)="onAccepted('Delete')"
+      (rejected)="onRejected('Delete')"
+    />
+  </section>
+
+  <!-- Section: Position -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Top Position</h2>
+    <p class="demo-section__desc">
+      Use <code>position="top"</code> to anchor the dialog to the top of the viewport.
+    </p>
+    <div class="demo-card">
+      <button class="demo-btn" (click)="confirmPosition()">Open — Top position</button>
+    </div>
+
+    <ui-lib-confirm-dialog
+      [(visible)]="positionVisible"
+      header="Top Position"
+      message="This dialog is anchored to the top of the viewport."
+      position="top"
+      (accepted)="onAccepted('Top')"
+      (rejected)="onRejected('Top')"
+    />
+  </section>
+
+  <!-- Section: Service-driven -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Programmatic — ConfirmationService</h2>
+    <p class="demo-section__desc">
+      Use <code>ConfirmationService.confirm(&#123; ... &#125;)</code> to trigger the dialog from any
+      component. Place a single <code>&lt;ui-lib-confirm-dialog /&gt;</code> in your layout shell.
+    </p>
+    <div class="demo-card demo-card--row">
+      <button class="demo-btn" (click)="confirmViaService()">Confirm via service</button>
+      <button class="demo-btn demo-btn--danger" (click)="confirmDeleteViaService()">
+        Delete via service
+      </button>
+    </div>
+
+    <!-- Shared service dialog — no key means it catches all keyless service calls -->
+    <ui-lib-confirm-dialog />
+  </section>
+
+  <!-- Section: Variants -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__desc">
+      Three variants adapt the visual style to your project theme. Use the <code>variant</code> input
+      or rely on <code>ThemeConfigService</code> for the global default.
+    </p>
+    <div class="demo-card demo-card--row">
+      @for (variant of variants; track variant) {
+        <button class="demo-btn" (click)="confirmVariant(variant)">
+          {{ variant | titlecase }}
+        </button>
+      }
+    </div>
+
+    <!-- One dialog per variant, each listening to its own key -->
+    @for (variant of variants; track variant) {
+      <ui-lib-confirm-dialog [key]="'variant-' + variant" [variant]="variant" />
+    }
+  </section>
+
+  <!-- API Reference -->
+  <section class="demo-section demo-section--api">
+    <h2 class="demo-section__title">API Reference</h2>
+
+    <h3 class="demo-api__subtitle">Inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean</code> (model)</td>
+          <td><code>false</code></td>
+          <td>Two-way visibility binding</td>
+        </tr>
+        <tr>
+          <td><code>key</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Targets service calls to this instance</td>
+        </tr>
+        <tr>
+          <td><code>header</code></td>
+          <td><code>string</code></td>
+          <td><code>'Confirmation'</code></td>
+          <td>Dialog title</td>
+        </tr>
+        <tr>
+          <td><code>message</code></td>
+          <td><code>string</code></td>
+          <td><code>'Are you sure…'</code></td>
+          <td>Confirmation message</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>CSS class for message icon</td>
+        </tr>
+        <tr>
+          <td><code>acceptLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'Yes'</code></td>
+          <td>Accept button label</td>
+        </tr>
+        <tr>
+          <td><code>rejectLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'No'</code></td>
+          <td>Reject button label</td>
+        </tr>
+        <tr>
+          <td><code>acceptSeverity</code></td>
+          <td><code>ConfirmDialogButtonSeverity</code></td>
+          <td><code>'primary'</code></td>
+          <td>Accept button colour scheme</td>
+        </tr>
+        <tr>
+          <td><code>rejectSeverity</code></td>
+          <td><code>ConfirmDialogButtonSeverity</code></td>
+          <td><code>'secondary'</code></td>
+          <td>Reject button colour scheme</td>
+        </tr>
+        <tr>
+          <td><code>closable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Show/hide the × close button</td>
+        </tr>
+        <tr>
+          <td><code>dismissableMask</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Close on backdrop click</td>
+        </tr>
+        <tr>
+          <td><code>blockScroll</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Lock body scroll while open</td>
+        </tr>
+        <tr>
+          <td><code>position</code></td>
+          <td><code>ConfirmDialogPosition</code></td>
+          <td><code>'center'</code></td>
+          <td>Panel position on the viewport</td>
+        </tr>
+        <tr>
+          <td><code>defaultFocus</code></td>
+          <td><code>ConfirmDialogDefaultFocus</code></td>
+          <td><code>'accept'</code></td>
+          <td>Which button gets initial focus</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>ConfirmDialogVariant | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant override</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS classes on the host</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-api__subtitle">Outputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Payload</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>accepted</code></td>
+          <td><code>void</code></td>
+          <td>Emitted when the user clicks Accept</td>
+        </tr>
+        <tr>
+          <td><code>rejected</code></td>
+          <td><code>void</code></td>
+          <td>Emitted when the user clicks Reject or closes</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
