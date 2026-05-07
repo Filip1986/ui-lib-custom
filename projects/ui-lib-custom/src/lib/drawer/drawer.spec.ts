@@ -317,7 +317,7 @@ describe('Drawer', (): void => {
   describe('outputs', (): void => {
     it('should emit shown when opened', (): void => {
       const drawerEl: HTMLElement = getElement(fixture, 'ui-lib-drawer');
-      const drawer: Drawer = fixture.debugElement.children[0].componentInstance as Drawer;
+      const drawer: Drawer = fixture.debugElement.children[0]!.componentInstance as Drawer;
       let emitted: boolean = false;
       drawer.shown.subscribe((): void => {
         emitted = true;
@@ -331,7 +331,7 @@ describe('Drawer', (): void => {
     it('should emit hidden when closed after being open', (): void => {
       host.isVisible.set(true);
       fixture.detectChanges();
-      const drawer: Drawer = fixture.debugElement.children[0].componentInstance as Drawer;
+      const drawer: Drawer = fixture.debugElement.children[0]!.componentInstance as Drawer;
       let emitted: boolean = false;
       drawer.hidden.subscribe((): void => {
         emitted = true;
