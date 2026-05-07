@@ -1,5 +1,201 @@
-<section class="confirm-popup-demo" data-testid="confirm-popup-demo">
-  <h1>ConfirmPopup</h1>
-  <p>Coming soon.</p>
-</section>
+<div class="demo-page">
+  <!-- Global ConfirmPopup instance (service-driven) -->
+  <ui-lib-confirm-popup />
 
+  <!-- Declarative ConfirmPopup instance (key-scoped) -->
+  <ui-lib-confirm-popup
+    key="declarative"
+    [(visible)]="declarativeVisible"
+    message="This is a declarative popup — driven by [(visible)] binding."
+    acceptLabel="Got it"
+    rejectLabel="Close"
+    (accepted)="lastResult.set('Declarative accepted')"
+    (rejected)="lastResult.set('Declarative rejected')"
+  />
+
+  <!-- ---- Hero ---- -->
+  <section class="demo-hero">
+    <h1 class="demo-hero__title">ConfirmPopup</h1>
+    <p class="demo-hero__subtitle">
+      A lightweight anchored popup for inline confirmations — positions itself next to the trigger
+      element with an arrow indicator. No modal backdrop, less visual disruption than ConfirmDialog.
+    </p>
+  </section>
+
+  <!-- ---- Basic usage ---- -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__desc">
+      Call <code>ConfirmPopupService.confirm(&#123; target, message &#125;)</code> from a click
+      handler, passing <code>event.currentTarget</code> as the anchor.
+    </p>
+    <div class="demo-row">
+      <button class="demo-btn" (click)="confirmBasic($event)">Confirm action</button>
+    </div>
+
+    <pre class="demo-code">// component.ts
+this.confirmPopupService.confirm(&#123;
+  target: event.currentTarget as HTMLElement,
+  message: 'Are you sure you want to proceed?',
+  accept: () =&gt; this.proceed(),
+&#125;);</pre>
+  </section>
+
+  <!-- ---- With icon ---- -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">With Icon &amp; Custom Labels</h2>
+    <p class="demo-section__desc">
+      Pass an <code>icon</code> CSS class (PrimeIcons / FontAwesome) to render an icon beside the
+      message. Customise button labels and severity independently.
+    </p>
+    <div class="demo-row">
+      <button class="demo-btn demo-btn--danger" (click)="confirmWithIcon($event)">
+        Delete file
+      </button>
+    </div>
+
+    <pre class="demo-code">this.confirmPopupService.confirm(&#123;
+  target: event.currentTarget as HTMLElement,
+  message: 'Are you sure you want to delete this file?',
+  icon: 'pi pi-exclamation-triangle',
+  acceptLabel: 'Delete',
+  rejectLabel: 'Keep',
+  acceptSeverity: 'danger',
+  accept: () =&gt; this.deleteFile(),
+&#125;);</pre>
+  </section>
+
+  <!-- ---- Button severities ---- -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Button Severities</h2>
+    <p class="demo-section__desc">
+      The accept and reject buttons support six severity values:
+      <code>primary</code>, <code>secondary</code>, <code>success</code>,
+      <code>danger</code>, <code>warning</code>, <code>info</code>.
+    </p>
+    <div class="demo-row demo-row--wrap">
+      @for (severity of severities; track severity) {
+        <button class="demo-btn" (click)="confirmSeverity($event, severity)">
+          {{ severity | titlecase }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- ---- Design variants ---- -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__desc">
+      The popup supports three design variants: <code>material</code> (pill buttons, large radius),
+      <code>bootstrap</code> (border, square corners), and <code>minimal</code> (subtle, flat).
+      Each trigger below opens a popup in its respective variant.
+    </p>
+    <div class="demo-row demo-row--wrap">
+      @for (variant of variants; track variant) {
+        <ui-lib-confirm-popup [key]="variant" [variant]="variant" />
+        <button class="demo-btn" (click)="confirmVariant($event, variant)">
+          {{ variant | titlecase }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- ---- Declarative usage ---- -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Declarative Usage</h2>
+    <p class="demo-section__desc">
+      Use <code>[(visible)]</code> for full two-way binding without the service.
+      Outputs <code>(accepted)</code> and <code>(rejected)</code> let you react to user choices.
+    </p>
+    <div class="demo-row">
+      <button class="demo-btn" (click)="declarativeVisible.set(true)">Open declarative popup</button>
+    </div>
+
+    <pre class="demo-code">&lt;ui-lib-confirm-popup
+  key="declarative"
+  [(visible)]="visible"
+  message="Proceed with this action?"
+  acceptLabel="Yes, proceed"
+  rejectLabel="Cancel"
+  (accepted)="onAccepted()"
+  (rejected)="onRejected()"
+/&gt;</pre>
+  </section>
+
+  <!-- ---- Result log ---- -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Result Log</h2>
+    <p class="demo-section__desc">Last interaction result:</p>
+    <div class="demo-result">
+      <span class="demo-result__label">Result:</span>
+      <span class="demo-result__value">{{ lastResult() }}</span>
+    </div>
+  </section>
+
+  <!-- ---- API reference ---- -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">API Reference</h2>
+
+    <h3 class="demo-table__heading">Inputs</h3>
+    <div class="demo-table-wrapper">
+      <table class="demo-table">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>visible</code></td><td><code>model&lt;boolean&gt;</code></td><td><code>false</code></td><td>Two-way visibility binding</td></tr>
+          <tr><td><code>key</code></td><td><code>string</code></td><td><code>''</code></td><td>Key for targeting a specific popup instance</td></tr>
+          <tr><td><code>message</code></td><td><code>string</code></td><td><code>'Are you sure…'</code></td><td>Confirmation message text</td></tr>
+          <tr><td><code>icon</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Icon CSS class before the message</td></tr>
+          <tr><td><code>acceptLabel</code></td><td><code>string</code></td><td><code>'Yes'</code></td><td>Accept button label</td></tr>
+          <tr><td><code>rejectLabel</code></td><td><code>string</code></td><td><code>'No'</code></td><td>Reject button label</td></tr>
+          <tr><td><code>acceptSeverity</code></td><td><code>ConfirmPopupButtonSeverity</code></td><td><code>'primary'</code></td><td>Accept button colour severity</td></tr>
+          <tr><td><code>rejectSeverity</code></td><td><code>ConfirmPopupButtonSeverity</code></td><td><code>'secondary'</code></td><td>Reject button colour severity</td></tr>
+          <tr><td><code>defaultFocus</code></td><td><code>ConfirmPopupDefaultFocus</code></td><td><code>'accept'</code></td><td>Button focused on open</td></tr>
+          <tr><td><code>variant</code></td><td><code>ConfirmPopupVariant | null</code></td><td><code>null</code></td><td>Design variant (inherits from theme when null)</td></tr>
+          <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS classes on host</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-table__heading">Outputs</h3>
+    <div class="demo-table-wrapper">
+      <table class="demo-table">
+        <thead>
+          <tr>
+            <th>Output</th>
+            <th>Payload</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>accepted</code></td><td><code>void</code></td><td>Emitted when accept button is clicked</td></tr>
+          <tr><td><code>rejected</code></td><td><code>void</code></td><td>Emitted when reject / overlay / Escape is triggered</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-table__heading">ConfirmPopupService</h3>
+    <div class="demo-table-wrapper">
+      <table class="demo-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Signature</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>confirm</code></td><td><code>(config: ConfirmPopupConfig) =&gt; void</code></td><td>Show popup anchored to target</td></tr>
+          <tr><td><code>close</code></td><td><code>(key?: string) =&gt; void</code></td><td>Programmatically close popup</td></tr>
+          <tr><td><code>confirmation</code></td><td><code>Signal&lt;ConfirmPopupConfig | null&gt;</code></td><td>Current config signal</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

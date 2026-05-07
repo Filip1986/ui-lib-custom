@@ -316,6 +316,10 @@
     "./confirm-dialog": {
       "esm2022": "./esm2022/confirm-dialog/index.mjs",
       "esm": "./esm2022/confirm-dialog/index.mjs"
+    },
+    "./confirm-popup": {
+      "esm2022": "./esm2022/confirm-popup/index.mjs",
+      "esm": "./esm2022/confirm-popup/index.mjs"
     }
   },
   "typesVersions": {
@@ -523,6 +527,9 @@
       ],
       "confirm-dialog": [
         "./confirm-dialog/index.d.ts"
+      ],
+      "confirm-popup": [
+        "./confirm-popup/index.d.ts"
       ]
     }
   }
