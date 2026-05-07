@@ -1,5 +1,187 @@
 <section class="drawer-demo" data-testid="drawer-demo">
-  <h1>Drawer</h1>
-  <p>Coming soon.</p>
-</section>
 
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">Drawer</h1>
+    <p class="demo-hero__description">
+      A panel that slides in from the edge of the viewport. Supports four positions,
+      three design variants, and flexible content projection.
+    </p>
+  </div>
+
+  <!-- Basic -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">Click to open a right-side drawer with a header and content.</p>
+    <div class="demo-section__content">
+      <button class="demo-btn" type="button" (click)="basicOpen.set(true)">Open Drawer</button>
+    </div>
+
+    <ui-lib-drawer [(visible)]="basicOpen" header="Basic Drawer">
+      <p>This is the default drawer sliding in from the right. Use <code>[(visible)]</code> to control open state.</p>
+      <p>You can project any content inside the drawer body.</p>
+    </ui-lib-drawer>
+  </div>
+
+  <!-- Positions -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Positions</h2>
+    <p class="demo-section__description">
+      Use the <code>position</code> input to slide the drawer in from any edge.
+    </p>
+    <div class="demo-section__content demo-section__content--row">
+      <button class="demo-btn" type="button" (click)="openPosition('left')">Left</button>
+      <button class="demo-btn" type="button" (click)="openPosition('right')">Right</button>
+      <button class="demo-btn" type="button" (click)="openPosition('top')">Top</button>
+      <button class="demo-btn" type="button" (click)="openPosition('bottom')">Bottom</button>
+    </div>
+
+    <ui-lib-drawer
+      [(visible)]="positionOpen"
+      [header]="currentPosition() | titlecase"
+      [position]="currentPosition()"
+    >
+      <p>Drawer is sliding in from the <strong>{{ currentPosition() }}</strong>.</p>
+    </ui-lib-drawer>
+  </div>
+
+  <!-- Variants -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__description">
+      Three design variants match the library's global theme: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
+    </p>
+    <div class="demo-section__content demo-section__content--row">
+      <button class="demo-btn demo-btn--material" type="button" (click)="openVariant('material')">Material</button>
+      <button class="demo-btn demo-btn--bootstrap" type="button" (click)="openVariant('bootstrap')">Bootstrap</button>
+      <button class="demo-btn demo-btn--minimal" type="button" (click)="openVariant('minimal')">Minimal</button>
+    </div>
+
+    <ui-lib-drawer
+      [(visible)]="variantOpen"
+      [variant]="currentVariant()"
+      [header]="currentVariant() + ' Variant'"
+    >
+      <p>This drawer uses the <strong>{{ currentVariant() }}</strong> design variant.</p>
+    </ui-lib-drawer>
+  </div>
+
+  <!-- No modal -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Without Backdrop</h2>
+    <p class="demo-section__description">
+      Set <code>[modal]="false"</code> to remove the backdrop — the rest of the page stays interactive.
+    </p>
+    <div class="demo-section__content">
+      <button class="demo-btn" type="button" (click)="noBackdropOpen.set(true)">Open (no backdrop)</button>
+    </div>
+
+    <ui-lib-drawer [(visible)]="noBackdropOpen" header="No Backdrop" [modal]="false">
+      <p>The page behind this drawer remains scrollable and interactive.</p>
+      <button class="demo-btn demo-btn--sm" type="button" (click)="noBackdropOpen.set(false)">Close</button>
+    </ui-lib-drawer>
+  </div>
+
+  <!-- Footer slot -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">With Footer</h2>
+    <p class="demo-section__description">
+      Project an element with <code>drawerFooter</code> attribute to render a sticky footer.
+    </p>
+    <div class="demo-section__content">
+      <button class="demo-btn" type="button" (click)="footerOpen.set(true)">Open with Footer</button>
+    </div>
+
+    <ui-lib-drawer [(visible)]="footerOpen" header="Settings" size="380px">
+      <div class="demo-settings">
+        <label class="demo-settings__row">
+          <span>Notifications</span>
+          <input type="checkbox" />
+        </label>
+        <label class="demo-settings__row">
+          <span>Dark mode</span>
+          <input type="checkbox" />
+        </label>
+        <label class="demo-settings__row">
+          <span>Analytics</span>
+          <input type="checkbox" />
+        </label>
+      </div>
+      <div drawerFooter class="demo-footer-actions">
+        <button class="demo-btn demo-btn--ghost" type="button" (click)="footerOpen.set(false)">Cancel</button>
+        <button class="demo-btn" type="button" (click)="footerOpen.set(false)">Save changes</button>
+      </div>
+    </ui-lib-drawer>
+  </div>
+
+  <!-- Full-screen -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Full Screen</h2>
+    <p class="demo-section__description">
+      Set <code>size="100vw"</code> (or <code>100vh</code> for top/bottom) for a full-screen drawer.
+    </p>
+    <div class="demo-section__content">
+      <button class="demo-btn" type="button" (click)="fullScreenOpen.set(true)">Open Full Screen</button>
+    </div>
+
+    <ui-lib-drawer [(visible)]="fullScreenOpen" header="Full Screen Drawer" size="100vw">
+      <p>This drawer spans the full viewport width.</p>
+      <button class="demo-btn" type="button" (click)="fullScreenOpen.set(false)">Close</button>
+    </ui-lib-drawer>
+  </div>
+
+  <!-- API Reference -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API Reference</h2>
+
+    <h3 class="demo-subsection__title">Inputs</h3>
+    <div class="demo-api-table-wrapper">
+      <table class="demo-api-table">
+        <thead>
+          <tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>visible</code></td><td><code>model&lt;boolean&gt;</code></td><td><code>false</code></td><td>Two-way binding to control open/close.</td></tr>
+          <tr><td><code>header</code></td><td><code>string</code></td><td><code>''</code></td><td>Header title text.</td></tr>
+          <tr><td><code>position</code></td><td><code>'left'|'right'|'top'|'bottom'</code></td><td><code>'right'</code></td><td>Which edge the drawer slides from.</td></tr>
+          <tr><td><code>size</code></td><td><code>string</code></td><td><code>'300px'</code></td><td>Panel width (left/right) or height (top/bottom).</td></tr>
+          <tr><td><code>modal</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show the semi-transparent backdrop.</td></tr>
+          <tr><td><code>closeOnBackdrop</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Close on backdrop click.</td></tr>
+          <tr><td><code>closeOnEscape</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Close on Escape key.</td></tr>
+          <tr><td><code>blockScroll</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Lock body scroll while open.</td></tr>
+          <tr><td><code>showCloseButton</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show the built-in X close button.</td></tr>
+          <tr><td><code>variant</code></td><td><code>DrawerVariant | null</code></td><td><code>null</code></td><td>Visual variant (inherits from theme service).</td></tr>
+          <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS classes on the host.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-subsection__title">Outputs</h3>
+    <div class="demo-api-table-wrapper">
+      <table class="demo-api-table">
+        <thead>
+          <tr><th>Output</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>shown</code></td><td><code>void</code></td><td>Emits after the drawer opens.</td></tr>
+          <tr><td><code>hidden</code></td><td><code>void</code></td><td>Emits after the drawer closes.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-subsection__title">Content Projection</h3>
+    <div class="demo-api-table-wrapper">
+      <table class="demo-api-table">
+        <thead>
+          <tr><th>Slot</th><th>Selector</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Body</td><td><em>(default)</em></td><td>Scrollable main content.</td></tr>
+          <tr><td>Custom header</td><td><code>[drawerHeader]</code></td><td>Replaces the header title area.</td></tr>
+          <tr><td>Footer</td><td><code>[drawerFooter]</code></td><td>Sticky footer at the bottom of the panel.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
