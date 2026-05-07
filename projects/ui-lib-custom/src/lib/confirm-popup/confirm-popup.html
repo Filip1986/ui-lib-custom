@@ -1,0 +1,46 @@
+@if (visible()) {
+  <!-- Transparent overlay catches click-away to dismiss the popup -->
+  <div class="ui-lib-confirm-popup__overlay" (click)="onOverlayClick()"></div>
+
+  <!-- The floating popup panel, anchored near the target element -->
+  <div
+    [class]="panelClasses()"
+    [style.top.px]="panelTop()"
+    [style.left.px]="panelLeft()"
+    role="alertdialog"
+    aria-modal="true"
+    tabindex="-1"
+    [attr.aria-describedby]="messageId"
+    (keydown)="onPanelKeydown($event)"
+  >
+    <!-- Arrow pointing toward the target element -->
+    <div
+      class="ui-lib-confirm-popup__arrow"
+      [style.left.px]="arrowLeftOffset()"
+      aria-hidden="true"
+    ></div>
+
+    <div class="ui-lib-confirm-popup__content" [id]="messageId">
+      @if (resolvedIcon()) {
+        <i [class]="resolvedIcon()" class="ui-lib-confirm-popup__icon" aria-hidden="true"></i>
+      }
+      <p class="ui-lib-confirm-popup__message">{{ resolvedMessage() }}</p>
+    </div>
+
+    <div class="ui-lib-confirm-popup__footer">
+      <button type="button" [class]="rejectBtnClasses()" (click)="handleReject()">
+        @if (resolvedRejectIcon()) {
+          <i [class]="resolvedRejectIcon()" aria-hidden="true"></i>
+        }
+        {{ resolvedRejectLabel() }}
+      </button>
+
+      <button type="button" [class]="acceptBtnClasses()" (click)="handleAccept()">
+        @if (resolvedAcceptIcon()) {
+          <i [class]="resolvedAcceptIcon()" aria-hidden="true"></i>
+        }
+        {{ resolvedAcceptLabel() }}
+      </button>
+    </div>
+  </div>
+}

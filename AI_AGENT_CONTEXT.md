@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** BottomSheet component complete; resuming backlog
+- **Active focus:** ConfirmPopup component complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
@@ -37,6 +37,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `BottomSheet` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `ConfirmDialog` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+
+- `ConfirmPopup` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Ripple` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollTop` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -107,6 +109,49 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-07 [ConfirmPopup component]
+Changed:
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.types.ts (new — ConfirmPopupVariant/ButtonSeverity/DefaultFocus/Placement/Config types)
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.service.ts (new — ConfirmPopupService with signal-based confirmation state)
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.ts (new — anchor popup component; positions relative to target element with arrow)
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.html (new — overlay + fixed panel with arrow, content, footer)
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.scss (new — 3 variants + 6 severity button colours + CSS arrow + enter transition)
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.spec.ts (37 unit tests)
+  - projects/ui-lib-custom/src/lib/confirm-popup/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/confirm-popup/README.md (API docs)
+  - projects/ui-lib-custom/confirm-popup/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/confirm-popup/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (confirm-popup added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (confirm-popup import test added)
+  - projects/demo/src/app/pages/confirm-popup/confirm-popup-demo.component.ts (full demo)
+  - projects/demo/src/app/pages/confirm-popup/confirm-popup-demo.component.html (hero + 5 sections + API tables)
+  - projects/demo/src/app/pages/confirm-popup/confirm-popup-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from ConfirmPopup)
+  - AI_AGENT_CONTEXT.md (updated)
+State: ConfirmPopup component fully complete.
+  Selector: ui-lib-confirm-popup. model() visible for two-way binding. Inputs: key, message, icon,
+  acceptLabel, rejectLabel, acceptIcon, rejectIcon, acceptSeverity, rejectSeverity, defaultFocus,
+  variant, styleClass. Outputs: accepted (void), rejected (void).
+  ConfirmPopupService: confirm(config) sets active config signal; close(key?) clears it.
+  Positioning: computes panel position in afterNextRender from target.getBoundingClientRect();
+  prefers above target, falls back to below; arrow offset clamped to point at target center.
+  Arrow: CSS border-triangle pointing toward the trigger element.
+  Click-away: transparent overlay (no visual backdrop) dismisses popup on click.
+  Escape key closes popup. Focus trap activated on open. defaultFocus moves focus to accept/reject.
+  Three variants: material (pill buttons, large radius), bootstrap (border, flat), minimal (subtle).
+  6 button severities: primary/secondary/success/danger/warning/info.
+  role="alertdialog" + aria-modal + aria-describedby.
+  37 tests pass. 86/86 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/confirm-popup/ projects/demo/src/app/pages/confirm-popup/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/confirm-popup Built, zero errors,
+  npx.cmd jest --testPathPatterns=confirm-popup --no-coverage (37/37 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (86/86 PASS).
+Terminal notes: Use textContent!.trim() (non-null assertion) in specs — textContent?.trim() triggers
+  @typescript-eslint/no-unnecessary-condition. Use getElement() helper that throws when not found,
+  returning non-null HTMLElement, then call .click() directly without ?..
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-06 [ConfirmDialog component]
 Changed:

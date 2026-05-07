@@ -570,7 +570,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/confirm-popup',
           group: 'Overlay',
-          badge: 'TODO',
         },
         {
           label: 'Dialog',
