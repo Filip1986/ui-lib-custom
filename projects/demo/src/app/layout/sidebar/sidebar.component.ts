@@ -582,7 +582,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/drawer',
           group: 'Overlay',
-          badge: 'TODO',
         },
         {
           label: 'DynamicDialog',

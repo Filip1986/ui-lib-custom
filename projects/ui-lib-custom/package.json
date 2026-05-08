@@ -320,6 +320,10 @@
     "./confirm-popup": {
       "esm2022": "./esm2022/confirm-popup/index.mjs",
       "esm": "./esm2022/confirm-popup/index.mjs"
+    },
+    "./drawer": {
+      "esm2022": "./esm2022/drawer/index.mjs",
+      "esm": "./esm2022/drawer/index.mjs"
     }
   },
   "typesVersions": {
@@ -530,6 +534,9 @@
       ],
       "confirm-popup": [
         "./confirm-popup/index.d.ts"
+      ],
+      "drawer": [
+        "./drawer/index.d.ts"
       ]
     }
   }
