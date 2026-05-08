@@ -329,6 +329,10 @@
       "esm2022": "./esm2022/popover/index.mjs",
       "esm": "./esm2022/popover/index.mjs"
     },
+    "./fieldset": {
+      "esm2022": "./esm2022/fieldset/index.mjs",
+      "esm": "./esm2022/fieldset/index.mjs"
+    },
     "./tooltip": {
       "esm2022": "./esm2022/tooltip/index.mjs",
       "esm": "./esm2022/tooltip/index.mjs"
@@ -548,6 +552,9 @@
       ],
       "popover": [
         "./popover/index.d.ts"
+      ],
+      "fieldset": [
+        "./fieldset/index.d.ts"
       ],
       "tooltip": [
         "./tooltip/index.d.ts"

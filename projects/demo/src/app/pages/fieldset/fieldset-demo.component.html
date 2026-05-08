@@ -1,0 +1,280 @@
+<div class="demo-page">
+
+  <!-- ── Hero ────────────────────────────────────────────────────────────── -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">Fieldset</h1>
+    <p class="demo-hero__description">
+      A labelled content container with an optional collapse/expand animation.
+      Use it to group related form fields or information sections under a clear heading.
+    </p>
+    <p class="demo-hero__import">
+      <code>import &#123; Fieldset &#125; from 'ui-lib-custom/fieldset';</code>
+    </p>
+  </div>
+
+  <!-- ── Basic ────────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
+      A simple non-toggleable fieldset with a legend label and body content.
+    </p>
+    <div class="demo-preview">
+      <ui-lib-fieldset legend="Personal Information">
+        <div class="demo-form-grid">
+          <div class="demo-field">
+            <label class="demo-label">First Name</label>
+            <input class="demo-input" type="text" value="Jane" readonly />
+          </div>
+          <div class="demo-field">
+            <label class="demo-label">Last Name</label>
+            <input class="demo-input" type="text" value="Doe" readonly />
+          </div>
+          <div class="demo-field">
+            <label class="demo-label">Email</label>
+            <input class="demo-input" type="email" value="jane.doe@example.com" readonly />
+          </div>
+          <div class="demo-field">
+            <label class="demo-label">Phone</label>
+            <input class="demo-input" type="tel" value="+1 555 0100" readonly />
+          </div>
+        </div>
+      </ui-lib-fieldset>
+    </div>
+    <pre class="demo-code"><code>&lt;ui-lib-fieldset legend="Personal Information"&gt;
+  &lt;!-- content --&gt;
+&lt;/ui-lib-fieldset&gt;</code></pre>
+  </section>
+
+  <!-- ── Toggleable ───────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Toggleable</h2>
+    <p class="demo-section__description">
+      Set <code>[toggleable]="true"</code> to let users collapse and expand
+      the panel. Use <code>[(collapsed)]</code> for two-way binding.
+    </p>
+    <div class="demo-preview">
+      <ui-lib-fieldset
+        legend="Advanced Options"
+        [toggleable]="true"
+        [(collapsed)]="isBasicCollapsed"
+      >
+        <div class="demo-form-grid">
+          <div class="demo-field">
+            <label class="demo-label">Timeout (ms)</label>
+            <input class="demo-input" type="number" value="3000" readonly />
+          </div>
+          <div class="demo-field">
+            <label class="demo-label">Max Retries</label>
+            <input class="demo-input" type="number" value="3" readonly />
+          </div>
+        </div>
+      </ui-lib-fieldset>
+      <p class="demo-state-label">
+        Collapsed: <strong>{{ isBasicCollapsed() }}</strong>
+      </p>
+    </div>
+    <pre class="demo-code"><code>&lt;ui-lib-fieldset
+  legend="Advanced Options"
+  [toggleable]="true"
+  [(collapsed)]="isCollapsed"
+&gt;
+  &lt;!-- content --&gt;
+&lt;/ui-lib-fieldset&gt;</code></pre>
+  </section>
+
+  <!-- ── Pre-collapsed ────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Pre-collapsed</h2>
+    <p class="demo-section__description">
+      Pass <code>[collapsed]="true"</code> to start the fieldset in its
+      collapsed state.
+    </p>
+    <div class="demo-preview">
+      <ui-lib-fieldset
+        legend="Hidden by Default"
+        [toggleable]="true"
+        [(collapsed)]="isAdvancedCollapsed"
+      >
+        <p class="demo-paragraph">
+          This content is hidden initially. Click the legend to reveal it.
+        </p>
+      </ui-lib-fieldset>
+    </div>
+    <pre class="demo-code"><code>&lt;ui-lib-fieldset
+  legend="Hidden by Default"
+  [toggleable]="true"
+  [collapsed]="true"
+&gt;
+  &lt;p&gt;Revealed on click&lt;/p&gt;
+&lt;/ui-lib-fieldset&gt;</code></pre>
+  </section>
+
+  <!-- ── Custom Legend ────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Custom Legend</h2>
+    <p class="demo-section__description">
+      Project any HTML into the legend area using the
+      <code>[fieldsetLegend]</code> attribute selector.
+    </p>
+    <div class="demo-preview">
+      <ui-lib-fieldset [toggleable]="true">
+        <span fieldsetLegend class="demo-custom-legend">
+          <i class="pi pi-user demo-legend-icon"></i>
+          User <strong>Profile</strong>
+        </span>
+        <p class="demo-paragraph">
+          Custom legend content with icons and formatted text.
+        </p>
+      </ui-lib-fieldset>
+    </div>
+    <pre class="demo-code"><code>&lt;ui-lib-fieldset [toggleable]="true"&gt;
+  &lt;span fieldsetLegend&gt;
+    &lt;i class="pi pi-user"&gt;&lt;/i&gt; User &lt;strong&gt;Profile&lt;/strong&gt;
+  &lt;/span&gt;
+  &lt;p&gt;Body content&lt;/p&gt;
+&lt;/ui-lib-fieldset&gt;</code></pre>
+  </section>
+
+  <!-- ── Variants ─────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
+      Three built-in design variants: <code>material</code>,
+      <code>bootstrap</code>, and <code>minimal</code>.
+    </p>
+    <div class="demo-preview demo-preview--column">
+      @for (variant of variants; track variant) {
+        <ui-lib-fieldset
+          [legend]="variant"
+          [variant]="variant"
+          [toggleable]="true"
+        >
+          <p class="demo-paragraph">
+            Content inside the <strong>{{ variant }}</strong> variant fieldset.
+          </p>
+        </ui-lib-fieldset>
+      }
+    </div>
+    <pre class="demo-code"><code>&lt;ui-lib-fieldset variant="material" legend="Material" /&gt;
+&lt;ui-lib-fieldset variant="bootstrap" legend="Bootstrap" /&gt;
+&lt;ui-lib-fieldset variant="minimal" legend="Minimal" /&gt;</code></pre>
+  </section>
+
+  <!-- ── Toggle Event ─────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Toggle Event</h2>
+    <p class="demo-section__description">
+      Listen to the <code>(toggled)</code> output to react when the panel opens or closes.
+    </p>
+    <div class="demo-preview">
+      <ui-lib-fieldset
+        legend="Event Demo"
+        [toggleable]="true"
+        (toggled)="isBasicCollapsed.set($event.collapsed)"
+      >
+        <p class="demo-paragraph">Toggle me to see the event fire.</p>
+      </ui-lib-fieldset>
+    </div>
+    <pre class="demo-code"><code>&lt;ui-lib-fieldset
+  legend="Event Demo"
+  [toggleable]="true"
+  (toggled)="onToggle($event)"
+&gt;&lt;/ui-lib-fieldset&gt;
+
+// component.ts
+onToggle(event: FieldsetToggleEvent): void &#123;
+  console.log('collapsed:', event.collapsed);
+&#125;</code></pre>
+  </section>
+
+  <!-- ── API ──────────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 class="demo-api__subtitle">Inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>legend</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Text label rendered in the legend header.</td>
+        </tr>
+        <tr>
+          <td><code>toggleable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Enables collapse/expand on legend click.</td>
+        </tr>
+        <tr>
+          <td><code>collapsed</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Current collapsed state. Supports <code>[(collapsed)]</code> two-way binding.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Visual variant. Falls back to global theme when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes on the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-api__subtitle">Outputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>toggled</code></td>
+          <td><code>FieldsetToggleEvent</code></td>
+          <td>
+            Emitted when the panel collapses or expands.
+            Carries <code>&#123; collapsed: boolean &#125;</code>.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-api__subtitle">Content Projection</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Slot</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>[fieldsetLegend]</code></td>
+          <td>Custom HTML for the legend / header area.</td>
+        </tr>
+        <tr>
+          <td><em>default</em></td>
+          <td>Body content rendered inside the panel.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>

@@ -87,6 +87,7 @@ import type * as UiLibConfirmDialog from 'ui-lib-custom/confirm-dialog';
 import type * as UiLibConfirmPopup from 'ui-lib-custom/confirm-popup';
 import type * as UiLibDrawer from 'ui-lib-custom/drawer';
 import type * as UiLibPopover from 'ui-lib-custom/popover';
+import type * as UiLibFieldset from 'ui-lib-custom/fieldset';
 import type * as UiLibTooltip from 'ui-lib-custom/tooltip';
 
 describe('Secondary Entry Points', (): void => {
@@ -610,6 +611,11 @@ describe('Secondary Entry Points', (): void => {
   it('should import from popover', async (): Promise<void> => {
     const mod: typeof UiLibPopover = await import('ui-lib-custom/popover');
     expect(mod.Popover).toBeDefined();
+  });
+
+  it('should import from fieldset', async (): Promise<void> => {
+    const mod: typeof UiLibFieldset = await import('ui-lib-custom/fieldset');
+    expect(mod.Fieldset).toBeDefined();
   });
 
   it('should import from tooltip', async (): Promise<void> => {

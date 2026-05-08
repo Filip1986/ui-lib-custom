@@ -1,0 +1,34 @@
+<div
+  class="ui-lib-fieldset__legend"
+  [id]="legendId"
+  [class.ui-lib-fieldset__legend--toggleable]="toggleable()"
+  [attr.role]="toggleable() ? 'button' : null"
+  [attr.tabindex]="toggleable() ? 0 : null"
+  [attr.aria-expanded]="toggleable() ? !collapsed() : null"
+  [attr.aria-controls]="toggleable() ? contentId : null"
+  (click)="handleClick()"
+  (keydown.enter)="handleKeydown($event)"
+  (keydown.space)="handleKeydown($event)"
+>
+  @if (toggleable()) {
+    <span
+      class="ui-lib-fieldset__toggle-icon"
+      [class.ui-lib-fieldset__toggle-icon--collapsed]="collapsed()"
+      aria-hidden="true"
+    ></span>
+  }
+  <ng-content select="[fieldsetLegend]" />
+  @if (legend()) {
+    <span class="ui-lib-fieldset__legend-text">{{ legend() }}</span>
+  }
+</div>
+<div
+  class="ui-lib-fieldset__content-wrapper"
+  [class.ui-lib-fieldset__content-wrapper--collapsed]="toggleable() && collapsed()"
+  [id]="contentId"
+  [attr.aria-hidden]="(toggleable() && collapsed()) ? 'true' : null"
+>
+  <div class="ui-lib-fieldset__content-inner">
+    <ng-content />
+  </div>
+</div>
