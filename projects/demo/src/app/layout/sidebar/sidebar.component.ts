@@ -631,7 +631,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/panel',
           group: 'Panel',
-          badge: 'TODO',
         },
         {
           label: 'ScrollPanel',

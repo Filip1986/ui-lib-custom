@@ -89,6 +89,7 @@ import type * as UiLibDrawer from 'ui-lib-custom/drawer';
 import type * as UiLibPopover from 'ui-lib-custom/popover';
 import type * as UiLibFieldset from 'ui-lib-custom/fieldset';
 import type * as UiLibTooltip from 'ui-lib-custom/tooltip';
+import type * as UiLibPanel from 'ui-lib-custom/panel';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -621,5 +622,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from tooltip', async (): Promise<void> => {
     const mod: typeof UiLibTooltip = await import('ui-lib-custom/tooltip');
     expect(mod.Tooltip).toBeDefined();
+  });
+
+  it('should import from panel', async (): Promise<void> => {
+    const mod: typeof UiLibPanel = await import('ui-lib-custom/panel');
+    expect(mod.Panel).toBeDefined();
   });
 });
