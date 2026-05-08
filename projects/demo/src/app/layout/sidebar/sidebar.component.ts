@@ -594,7 +594,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/popover',
           group: 'Overlay',
-          badge: 'TODO',
         },
         {
           label: 'Tooltip',

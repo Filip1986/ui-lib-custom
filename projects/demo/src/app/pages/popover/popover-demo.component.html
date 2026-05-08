@@ -1,0 +1,312 @@
+<div class="demo-page">
+
+  <!-- ── Hero ────────────────────────────────────────────────────────────── -->
+  <section class="demo-hero">
+    <h1 class="demo-hero__title">Popover</h1>
+    <p class="demo-hero__subtitle">
+      A lightweight floating panel anchored to a trigger element. Supports arbitrary
+      projected content, an optional header, and auto-placement above or below the trigger.
+    </p>
+  </section>
+
+  <!-- ── Basic ─────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__desc">
+      Use a template reference on the trigger and call <code>toggle()</code> with the
+      trigger element. The popover positions itself automatically.
+    </p>
+
+    <div class="demo-row">
+      <button #basicTrigger class="demo-btn demo-btn--primary" (click)="basicPopover.toggle(basicTrigger)">
+        Toggle Popover
+      </button>
+
+      <ui-lib-popover #basicPopover>
+        <p class="demo-popover-text">
+          This is the popover body. It can contain any HTML or component content.
+        </p>
+      </ui-lib-popover>
+    </div>
+
+    <pre class="demo-code"><code>&lt;button #trigger (click)="op.toggle(trigger)"&gt;Toggle&lt;/button&gt;
+
+&lt;ui-lib-popover #op&gt;
+  &lt;p&gt;Popover body content.&lt;/p&gt;
+&lt;/ui-lib-popover&gt;</code></pre>
+  </section>
+
+  <!-- ── Header & Close button ─────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Header &amp; Close Button</h2>
+    <p class="demo-section__desc">
+      Provide a <code>header</code> string to render a title bar. Enable
+      <code>showCloseButton</code> to add an × button inside the header.
+    </p>
+
+    <div class="demo-row">
+      <button #headerTrigger class="demo-btn demo-btn--primary" (click)="headerPopover.toggle(headerTrigger)">
+        Open with Header
+      </button>
+
+      <ui-lib-popover #headerPopover header="User Details" [showCloseButton]="true">
+        <div class="demo-popover-profile">
+          <div class="demo-popover-profile__avatar">JD</div>
+          <div>
+            <p class="demo-popover-profile__name">Jane Doe</p>
+            <p class="demo-popover-profile__role">Product Designer</p>
+          </div>
+        </div>
+      </ui-lib-popover>
+    </div>
+
+    <pre class="demo-code"><code>&lt;ui-lib-popover #op header="User Details" [showCloseButton]="true"&gt;
+  &lt;!-- content --&gt;
+&lt;/ui-lib-popover&gt;</code></pre>
+  </section>
+
+  <!-- ── Rich Content ──────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Rich Content</h2>
+    <p class="demo-section__desc">
+      The popover body accepts any projected content — text, lists, actions, or nested components.
+    </p>
+
+    <div class="demo-row">
+      <button #richTrigger class="demo-btn demo-btn--secondary" (click)="richPopover.toggle(richTrigger)">
+        Show Actions
+      </button>
+
+      <ui-lib-popover #richPopover header="Quick Actions" [showCloseButton]="true">
+        <ul class="demo-popover-actions">
+          <li class="demo-popover-actions__item">
+            <span class="demo-popover-actions__icon">&#x270F;&#xFE0F;</span> Edit
+          </li>
+          <li class="demo-popover-actions__item">
+            <span class="demo-popover-actions__icon">&#x1F4CB;</span> Duplicate
+          </li>
+          <li class="demo-popover-actions__item demo-popover-actions__item--danger">
+            <span class="demo-popover-actions__icon">&#x1F5D1;&#xFE0F;</span> Delete
+          </li>
+        </ul>
+      </ui-lib-popover>
+    </div>
+  </section>
+
+  <!-- ── Variants ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__desc">
+      Three design variants follow the library's visual system.
+    </p>
+
+    <div class="demo-row demo-row--gap">
+      @for (variant of variants; track variant) {
+        <button
+          #variantTrigger
+          class="demo-btn demo-btn--secondary"
+          (click)="variantPopover.toggle(variantTrigger)"
+        >
+          {{ variant }}
+        </button>
+
+        <ui-lib-popover #variantPopover [variant]="variant" [header]="variant">
+          <p class="demo-popover-text">
+            This popover uses the <strong>{{ variant }}</strong> design variant.
+          </p>
+        </ui-lib-popover>
+      }
+    </div>
+  </section>
+
+  <!-- ── Non-dismissable ───────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Non-dismissable</h2>
+    <p class="demo-section__desc">
+      Set <code>[dismissable]="false"</code> to prevent click-away from closing the popover.
+      The user must use the close button or press Escape.
+    </p>
+
+    <div class="demo-row">
+      <button #noClickTrigger class="demo-btn demo-btn--primary" (click)="noClickPopover.toggle(noClickTrigger)">
+        Open (no click-away)
+      </button>
+
+      <ui-lib-popover
+        #noClickPopover
+        header="Sticky Popover"
+        [showCloseButton]="true"
+        [dismissable]="false"
+      >
+        <p class="demo-popover-text">
+          Clicking outside will <strong>not</strong> close this popover.
+          Use the &#x00D7; button or press Escape.
+        </p>
+      </ui-lib-popover>
+    </div>
+  </section>
+
+  <!-- ── Events ────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Events</h2>
+    <p class="demo-section__desc">
+      Subscribe to <code>(shown)</code> and <code>(hidden)</code> to react to open/close transitions.
+    </p>
+
+    <div class="demo-row">
+      <button #eventTrigger class="demo-btn demo-btn--primary" (click)="eventPopover.toggle(eventTrigger)">
+        Open
+      </button>
+
+      <ui-lib-popover
+        #eventPopover
+        (shown)="onShown()"
+        (hidden)="onHidden()"
+      >
+        <p class="demo-popover-text">Watch the event log below.</p>
+      </ui-lib-popover>
+    </div>
+
+    <p class="demo-event-log">Last event: <strong>{{ lastEvent() }}</strong></p>
+  </section>
+
+  <!-- ── Declarative ───────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Declarative <code>[(visible)]</code></h2>
+    <p class="demo-section__desc">
+      Control visibility with a two-way model binding instead of template refs.
+      The popover will position itself relative to the viewport center when no target is set.
+    </p>
+
+    <div class="demo-row">
+      <button
+        class="demo-btn demo-btn--primary"
+        (click)="declarativeVisible.set(!declarativeVisible())"
+      >
+        {{ declarativeVisible() ? 'Hide' : 'Show' }} Popover
+      </button>
+    </div>
+
+    <ui-lib-popover
+      [(visible)]="declarativeVisible"
+      header="Declarative Control"
+      [showCloseButton]="true"
+    >
+      <p class="demo-popover-text">
+        Driven by <code>[(visible)]</code>.
+        Current state: <strong>{{ declarativeVisible() ? 'open' : 'closed' }}</strong>
+      </p>
+    </ui-lib-popover>
+
+    <pre class="demo-code"><code>&lt;ui-lib-popover [(visible)]="isOpen"&gt;...&lt;/ui-lib-popover&gt;</code></pre>
+  </section>
+
+  <!-- ── API ───────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 class="demo-subsection__title">Inputs</h3>
+    <table class="demo-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Two-way visibility binding via <code>[(visible)]</code>.</td>
+        </tr>
+        <tr>
+          <td><code>header</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Optional header text shown at the top of the panel.</td>
+        </tr>
+        <tr>
+          <td><code>showCloseButton</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Renders a close (&#x00D7;) button in the header area.</td>
+        </tr>
+        <tr>
+          <td><code>dismissable</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Clicking outside the panel closes the popover.</td>
+        </tr>
+        <tr>
+          <td><code>closeOnEscape</code></td>
+          <td><code>boolean</code></td>
+          <td><code>true</code></td>
+          <td>Pressing Escape closes the popover.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant; inherits from the global theme when <code>null</code>.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS classes on the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-subsection__title">Outputs</h3>
+    <table class="demo-table">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Payload</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>shown</code></td>
+          <td><code>void</code></td>
+          <td>Emitted after the popover becomes visible.</td>
+        </tr>
+        <tr>
+          <td><code>hidden</code></td>
+          <td><code>void</code></td>
+          <td>Emitted after the popover is hidden.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-subsection__title">Public Methods</h3>
+    <table class="demo-table">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>show(target: HTMLElement)</code></td>
+          <td>Show the popover anchored to <code>target</code>.</td>
+        </tr>
+        <tr>
+          <td><code>hide()</code></td>
+          <td>Hide the popover.</td>
+        </tr>
+        <tr>
+          <td><code>toggle(target: HTMLElement)</code></td>
+          <td>Show if hidden, hide if visible.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>

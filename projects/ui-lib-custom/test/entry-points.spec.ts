@@ -86,6 +86,7 @@ import type * as UiLibBottomSheet from 'ui-lib-custom/bottom-sheet';
 import type * as UiLibConfirmDialog from 'ui-lib-custom/confirm-dialog';
 import type * as UiLibConfirmPopup from 'ui-lib-custom/confirm-popup';
 import type * as UiLibDrawer from 'ui-lib-custom/drawer';
+import type * as UiLibPopover from 'ui-lib-custom/popover';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -603,5 +604,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from drawer', async (): Promise<void> => {
     const mod: typeof UiLibDrawer = await import('ui-lib-custom/drawer');
     expect(mod.Drawer).toBeDefined();
+  });
+
+  it('should import from popover', async (): Promise<void> => {
+    const mod: typeof UiLibPopover = await import('ui-lib-custom/popover');
+    expect(mod.Popover).toBeDefined();
   });
 });
