@@ -455,13 +455,7 @@ export class SidebarComponent {
           route: '/block-ui',
           group: 'Misc',
         },
-        {
-          label: 'Bottom Sheet',
-          icon: 'pi pi-circle',
-          route: '/bottom-sheet',
-          group: 'Overlay',
-          badge: 'TODO',
-        },
+
         {
           label: 'Chip',
           icon: 'pi pi-circle',
@@ -551,7 +545,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/terminal',
           group: 'Misc',
-          badge: 'TODO',
         },
         {
           label: 'BottomSheet',
