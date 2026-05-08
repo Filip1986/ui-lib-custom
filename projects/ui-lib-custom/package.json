@@ -341,6 +341,10 @@
       "esm2022": "./esm2022/panel/index.mjs",
       "esm": "./esm2022/panel/index.mjs"
     },
+    "./stepper": {
+      "esm2022": "./esm2022/stepper/index.mjs",
+      "esm": "./esm2022/stepper/index.mjs"
+    },
     "./scroll-panel": {
       "esm2022": "./esm2022/scroll-panel/index.mjs",
       "esm": "./esm2022/scroll-panel/index.mjs"
@@ -569,6 +573,9 @@
       ],
       "panel": [
         "./panel/index.d.ts"
+      ],
+      "stepper": [
+        "./stepper/index.d.ts"
       ],
       "scroll-panel": [
         "./scroll-panel/index.d.ts"

@@ -90,6 +90,7 @@ import type * as UiLibPopover from 'ui-lib-custom/popover';
 import type * as UiLibFieldset from 'ui-lib-custom/fieldset';
 import type * as UiLibTooltip from 'ui-lib-custom/tooltip';
 import type * as UiLibPanel from 'ui-lib-custom/panel';
+import type * as UiLibStepper from 'ui-lib-custom/stepper';
 import type * as UiLibScrollPanel from 'ui-lib-custom/scroll-panel';
 
 describe('Secondary Entry Points', (): void => {
@@ -628,6 +629,12 @@ describe('Secondary Entry Points', (): void => {
   it('should import from panel', async (): Promise<void> => {
     const mod: typeof UiLibPanel = await import('ui-lib-custom/panel');
     expect(mod.Panel).toBeDefined();
+  });
+
+  it('should import from stepper', async (): Promise<void> => {
+    const mod: typeof UiLibStepper = await import('ui-lib-custom/stepper');
+    expect(mod.Stepper).toBeDefined();
+    expect(mod.StepperPanel).toBeDefined();
   });
 
   it('should import from scroll-panel', async (): Promise<void> => {
