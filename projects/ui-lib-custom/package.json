@@ -328,6 +328,10 @@
     "./popover": {
       "esm2022": "./esm2022/popover/index.mjs",
       "esm": "./esm2022/popover/index.mjs"
+    },
+    "./tooltip": {
+      "esm2022": "./esm2022/tooltip/index.mjs",
+      "esm": "./esm2022/tooltip/index.mjs"
     }
   },
   "typesVersions": {
@@ -544,6 +548,9 @@
       ],
       "popover": [
         "./popover/index.d.ts"
+      ],
+      "tooltip": [
+        "./tooltip/index.d.ts"
       ]
     }
   }

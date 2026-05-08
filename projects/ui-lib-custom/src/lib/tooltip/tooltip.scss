@@ -1,0 +1,134 @@
+// Tooltip styles — included globally via the consuming app's stylesheet.
+// These rules target elements dynamically appended to document.body by the Tooltip directive.
+// Add `@use 'ui-lib-custom/src/lib/tooltip/tooltip.scss'` to your global styles file.
+
+.ui-lib-tooltip {
+  // ---- CSS custom properties ----
+  --uilib-tooltip-bg: #1f2937;
+  --uilib-tooltip-color: #ffffff;
+  --uilib-tooltip-border-radius: var(--uilib-radius-sm, 4px);
+  --uilib-tooltip-padding-x: 0.625rem;
+  --uilib-tooltip-padding-y: 0.375rem;
+  --uilib-tooltip-font-size: 0.8125rem;
+  --uilib-tooltip-max-width: 14rem;
+  --uilib-tooltip-arrow-size: 6px;
+  --uilib-tooltip-z-index: var(--uilib-z-tooltip, 1060);
+  --uilib-tooltip-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+  --uilib-tooltip-enter-duration: 140ms;
+  --uilib-tooltip-enter-easing: ease-out;
+
+  // ---- Base layout ----
+  position: fixed;
+  z-index: var(--uilib-tooltip-z-index);
+  background: var(--uilib-tooltip-bg);
+  color: var(--uilib-tooltip-color);
+  border-radius: var(--uilib-tooltip-border-radius);
+  padding: var(--uilib-tooltip-padding-y) var(--uilib-tooltip-padding-x);
+  font-size: var(--uilib-tooltip-font-size);
+  line-height: 1.4;
+  max-width: var(--uilib-tooltip-max-width);
+  box-shadow: var(--uilib-tooltip-shadow);
+  pointer-events: none;
+  word-break: break-word;
+
+  // Hidden state — fade + scale
+  opacity: 0;
+  transform: scale(0.92);
+  transition:
+    opacity var(--uilib-tooltip-enter-duration) var(--uilib-tooltip-enter-easing),
+    transform var(--uilib-tooltip-enter-duration) var(--uilib-tooltip-enter-easing);
+}
+
+// Visible state
+.ui-lib-tooltip--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// ---- Text content ----
+.ui-lib-tooltip__text {
+  position: relative;
+  z-index: 1;
+}
+
+// ---- Arrow ----
+.ui-lib-tooltip__arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+// pos-top: tooltip is ABOVE the host — arrow points DOWN at the bottom edge
+.ui-lib-tooltip--pos-top .ui-lib-tooltip__arrow {
+  top: 100%;
+  left: 50%;
+  margin-left: calc(-1 * var(--uilib-tooltip-arrow-size));
+  border-left: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-right: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-top: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
+}
+
+// pos-bottom: tooltip is BELOW the host — arrow points UP at the top edge
+.ui-lib-tooltip--pos-bottom .ui-lib-tooltip__arrow {
+  bottom: 100%;
+  left: 50%;
+  margin-left: calc(-1 * var(--uilib-tooltip-arrow-size));
+  border-left: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-right: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-bottom: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
+}
+
+// pos-left: tooltip is LEFT of the host — arrow points RIGHT at the right edge
+.ui-lib-tooltip--pos-left .ui-lib-tooltip__arrow {
+  left: 100%;
+  top: 50%;
+  margin-top: calc(-1 * var(--uilib-tooltip-arrow-size));
+  border-top: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-bottom: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-left: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
+}
+
+// pos-right: tooltip is RIGHT of the host — arrow points LEFT at the left edge
+.ui-lib-tooltip--pos-right .ui-lib-tooltip__arrow {
+  right: 100%;
+  top: 50%;
+  margin-top: calc(-1 * var(--uilib-tooltip-arrow-size));
+  border-top: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-bottom: var(--uilib-tooltip-arrow-size) solid transparent;
+  border-right: var(--uilib-tooltip-arrow-size) solid var(--uilib-tooltip-bg);
+}
+
+// ---- Variant: material ----
+// Larger radius, elevated shadow, more generous padding
+.ui-lib-tooltip--material {
+  --uilib-tooltip-bg: #212121;
+  --uilib-tooltip-border-radius: var(--uilib-radius-md, 6px);
+  --uilib-tooltip-padding-x: 0.75rem;
+  --uilib-tooltip-padding-y: 0.5rem;
+  --uilib-tooltip-shadow: 0 4px 12px rgb(0 0 0 / 0.28);
+}
+
+// ---- Variant: bootstrap ----
+// Darker background, tight radius, no shadow, faster transition
+.ui-lib-tooltip--bootstrap {
+  --uilib-tooltip-bg: #343a40;
+  --uilib-tooltip-border-radius: var(--uilib-radius-xs, 3px);
+  --uilib-tooltip-shadow: none;
+  --uilib-tooltip-enter-duration: 80ms;
+}
+
+// ---- Variant: minimal ----
+// Uses the page foreground colour for a high-contrast tooltip, no shadow
+.ui-lib-tooltip--minimal {
+  --uilib-tooltip-bg: var(--uilib-page-fg, #1f2937);
+  --uilib-tooltip-border-radius: var(--uilib-radius-xs, 2px);
+  --uilib-tooltip-shadow: none;
+  --uilib-tooltip-enter-duration: 60ms;
+}
+
+// ---- Reduced motion ----
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-tooltip {
+    --uilib-tooltip-enter-duration: 0ms;
+  }
+}
