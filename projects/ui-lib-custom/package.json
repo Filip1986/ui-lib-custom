@@ -336,6 +336,10 @@
     "./tooltip": {
       "esm2022": "./esm2022/tooltip/index.mjs",
       "esm": "./esm2022/tooltip/index.mjs"
+    },
+    "./panel": {
+      "esm2022": "./esm2022/panel/index.mjs",
+      "esm": "./esm2022/panel/index.mjs"
     }
   },
   "typesVersions": {
@@ -558,6 +562,9 @@
       ],
       "tooltip": [
         "./tooltip/index.d.ts"
+      ],
+      "panel": [
+        "./panel/index.d.ts"
       ]
     }
   }

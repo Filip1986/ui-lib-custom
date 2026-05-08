@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Panel` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fieldset` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Tooltip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Popover` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -114,6 +115,49 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-08 [Panel component]
+Changed:
+  - projects/ui-lib-custom/src/lib/panel/panel.types.ts (new — PanelVariant/PanelToggleEvent types)
+  - projects/ui-lib-custom/src/lib/panel/panel.ts (new — Panel component; signal inputs/model; toggle logic; host classes)
+  - projects/ui-lib-custom/src/lib/panel/panel.html (new — header div + actions area + content-wrapper with grid collapse + footer slot)
+  - projects/ui-lib-custom/src/lib/panel/panel.scss (new — 3 variants + CSS vars + grid-row collapse animation + dark mode + reduced motion)
+  - projects/ui-lib-custom/src/lib/panel/panel.spec.ts (32 unit tests across 3 describe blocks)
+  - projects/ui-lib-custom/src/lib/panel/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/panel/README.md (API docs)
+  - projects/ui-lib-custom/panel/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/panel/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (panel added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (panel import test added)
+  - projects/demo/src/app/pages/panel/panel-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/panel/panel-demo.component.html (hero + 7 sections + API tables)
+  - projects/demo/src/app/pages/panel/panel-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from Panel)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Panel component fully complete.
+  Selector: ui-lib-panel. model() collapsed for two-way binding. Inputs: header (string),
+  toggleable (boolean, default false), collapsed (model, default false), variant, styleClass.
+  Output: toggled (PanelToggleEvent { collapsed: boolean, originalEvent?: Event }).
+  Content projection: default slot (body) + [panelHeader] (custom header HTML) +
+  [panelIcons] (action buttons in header right area) + [panelFooter] (footer below body).
+  Host: role="region" + aria-labelledby pointing to header div id.
+  Toggle button: aria-expanded + aria-controls when toggleable.
+  Toggle icon: CSS chevron rotated via --collapsed modifier class.
+  Collapse animation: CSS grid-row (1fr → 0fr) on content-wrapper; content-inner has overflow:hidden + min-height:0.
+  Footer: always rendered; uses CSS :not(:empty) to only add padding/border when content is projected.
+  Three variants: material (12px radius, box shadow, circular toggle), bootstrap (4px, flat), minimal (4px, no transition).
+  Dark mode via [data-theme='dark'] selector. Reduced motion: transition 0ms.
+  exactOptionalPropertyTypes fix: emit uses conditional spread so originalEvent is only included when defined.
+  32 tests pass. 91/91 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/panel/ projects/demo/src/app/pages/panel/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/panel Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/panel --no-coverage (32/32 PASS in panel.spec.ts),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (91/91 PASS).
+Terminal notes: exactOptionalPropertyTypes: true requires that optional properties are never assigned
+  `undefined` explicitly. Fix: use conditional spread `event !== undefined ? { ...event } : {}` pattern
+  instead of passing `originalEvent: event` directly when event may be undefined.
+Next step: knip baseline + dead-code cleanup, or next component from queue (ScrollPanel, Splitter, Stepper, etc).
 
 Date: 2026-05-08 [Fieldset component]
 Changed:

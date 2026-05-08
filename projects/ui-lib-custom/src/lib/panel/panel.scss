@@ -1,0 +1,218 @@
+// -------------------------------------------------------------------------
+// Panel component
+// Pattern: --uilib-panel-{property}[-{variant}][-{state}]
+// -------------------------------------------------------------------------
+
+// ---- Design tokens -------------------------------------------------------
+ui-lib-panel {
+  --uilib-panel-border-color: var(--uilib-surface-300, #d1d5db);
+  --uilib-panel-border-radius: var(--uilib-radius-md, 6px);
+  --uilib-panel-header-bg: var(--uilib-surface, #ffffff);
+  --uilib-panel-header-color: var(--uilib-color-text, #374151);
+  --uilib-panel-header-font-size: 0.9375rem;
+  --uilib-panel-header-font-weight: 600;
+  --uilib-panel-header-padding: 0.75rem 1rem;
+  --uilib-panel-content-padding: 1rem;
+  --uilib-panel-footer-bg: var(--uilib-surface-50, #f9fafb);
+  --uilib-panel-footer-padding: 0.75rem 1rem;
+  --uilib-panel-toggle-color: var(--uilib-color-primary, #6366f1);
+  --uilib-panel-toggle-hover-bg: var(--uilib-surface-100, #f3f4f6);
+  --uilib-panel-toggle-size: 1.75rem;
+  --uilib-panel-transition: 200ms ease;
+}
+
+// ---- Base host -----------------------------------------------------------
+.ui-lib-panel {
+  display: block;
+  border: 1px solid var(--uilib-panel-border-color);
+  border-radius: var(--uilib-panel-border-radius);
+  overflow: hidden;
+
+  // ---- Header area -------------------------------------------------------
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: var(--uilib-panel-header-padding);
+    color: var(--uilib-panel-header-color);
+    font-size: var(--uilib-panel-header-font-size);
+    font-weight: var(--uilib-panel-header-font-weight);
+    font-family: var(--uilib-font-ui, inherit);
+    background: var(--uilib-panel-header-bg);
+    border-bottom: 1px solid var(--uilib-panel-border-color);
+    line-height: 1.5;
+    user-select: none;
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+  }
+
+  // ---- Header actions (icons + toggle button) ----------------------------
+  &__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  // ---- Toggle button -----------------------------------------------------
+  &__toggle-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--uilib-panel-toggle-size);
+    height: var(--uilib-panel-toggle-size);
+    padding: 0;
+    border: none;
+    border-radius: calc(var(--uilib-panel-border-radius) / 2);
+    background: transparent;
+    color: var(--uilib-panel-toggle-color);
+    cursor: pointer;
+    transition:
+      background-color var(--uilib-panel-transition),
+      color var(--uilib-panel-transition);
+
+    &:hover {
+      background-color: var(--uilib-panel-toggle-hover-bg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-panel-toggle-color);
+      outline-offset: 1px;
+    }
+  }
+
+  // ---- Toggle icon (chevron) ---------------------------------------------
+  &__toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--uilib-panel-transition);
+
+    &::before {
+      content: '';
+      display: block;
+      width: 0.45rem;
+      height: 0.45rem;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform var(--uilib-panel-transition);
+    }
+
+    &--collapsed::before {
+      transform: rotate(-45deg) translateY(2px);
+    }
+  }
+
+  // ---- Content area (three-layer grid-row collapse animation) ------------
+  // Layer 1: clip wrapper — overflow:hidden + grid-row drives the height
+  &__content-wrapper {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows var(--uilib-panel-transition);
+
+    &--collapsed {
+      grid-template-rows: 0fr;
+    }
+  }
+
+  // Layer 2: overflow clip (min-height:0 lets grid shrink past content)
+  &__content-inner {
+    overflow: hidden;
+    min-height: 0;
+    padding: var(--uilib-panel-content-padding);
+  }
+
+  // ---- Footer area -------------------------------------------------------
+  &__footer {
+    background: var(--uilib-panel-footer-bg);
+
+    &:not(:empty) {
+      padding: var(--uilib-panel-footer-padding);
+      border-top: 1px solid var(--uilib-panel-border-color);
+    }
+  }
+
+  // =========================================================================
+  // Variant: material
+  // =========================================================================
+  &--variant-material {
+    --uilib-panel-border-color: var(--uilib-surface-200, #e5e7eb);
+    --uilib-panel-border-radius: 12px;
+    --uilib-panel-toggle-color: var(--uilib-color-primary, #6366f1);
+    --uilib-panel-toggle-hover-bg: var(--uilib-surface-50, #f9fafb);
+    --uilib-panel-footer-bg: var(--uilib-surface-50, #f9fafb);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 1px 2px rgba(0, 0, 0, 0.04);
+
+    .ui-lib-panel__toggle-button {
+      border-radius: 50%;
+    }
+  }
+
+  // =========================================================================
+  // Variant: bootstrap
+  // =========================================================================
+  &--variant-bootstrap {
+    --uilib-panel-border-color: #dee2e6;
+    --uilib-panel-border-radius: 4px;
+    --uilib-panel-toggle-color: #0d6efd;
+    --uilib-panel-toggle-hover-bg: #f8f9fa;
+    --uilib-panel-footer-bg: #f8f9fa;
+    --uilib-panel-header-font-weight: 500;
+
+    .ui-lib-panel__toggle-button {
+      border-radius: 4px;
+    }
+  }
+
+  // =========================================================================
+  // Variant: minimal
+  // =========================================================================
+  &--variant-minimal {
+    --uilib-panel-border-color: var(--uilib-surface-200, #e5e7eb);
+    --uilib-panel-border-radius: 4px;
+    --uilib-panel-toggle-color: var(--uilib-color-text, #374151);
+    --uilib-panel-toggle-hover-bg: var(--uilib-surface-100, #f3f4f6);
+    --uilib-panel-footer-bg: transparent;
+    --uilib-panel-transition: 0ms;
+  }
+
+  // =========================================================================
+  // Dark-mode adjustments
+  // =========================================================================
+  [data-theme='dark'] &,
+  &[data-theme='dark'] {
+    --uilib-panel-border-color: var(--uilib-surface-600, #4b5563);
+    --uilib-panel-header-color: var(--uilib-surface-100, #f3f4f6);
+    --uilib-panel-header-bg: var(--uilib-surface-800, #1f2937);
+    --uilib-panel-toggle-hover-bg: var(--uilib-surface-700, #374151);
+    --uilib-panel-footer-bg: var(--uilib-surface-800, #1f2937);
+
+    &.ui-lib-panel--variant-bootstrap {
+      --uilib-panel-border-color: rgba(255, 255, 255, 0.15);
+      --uilib-panel-header-bg: #212529;
+      --uilib-panel-toggle-hover-bg: #343a40;
+      --uilib-panel-footer-bg: #212529;
+    }
+
+    &.ui-lib-panel--variant-minimal {
+      --uilib-panel-border-color: var(--uilib-surface-700, #374151);
+      --uilib-panel-header-color: var(--uilib-surface-200, #e5e7eb);
+    }
+  }
+
+  // =========================================================================
+  // Reduced motion
+  // =========================================================================
+  @media (prefers-reduced-motion: reduce) {
+    --uilib-panel-transition: 0ms;
+  }
+}
