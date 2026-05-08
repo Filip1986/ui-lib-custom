@@ -1,0 +1,142 @@
+// -------------------------------------------------------------------------
+// ScrollPanel component
+// Pattern: --uilib-scroll-panel-{property}[-{variant}][-{state}]
+// -------------------------------------------------------------------------
+
+// ---- Design tokens -------------------------------------------------------
+ui-lib-scroll-panel {
+  --uilib-scroll-panel-border-color: var(--uilib-surface-300, #d1d5db);
+  --uilib-scroll-panel-border-radius: var(--uilib-radius-md, 6px);
+  --uilib-scroll-panel-bg: var(--uilib-surface, #ffffff);
+  --uilib-scroll-panel-scrollbar-width: 8px;
+  --uilib-scroll-panel-scrollbar-track-bg: var(--uilib-surface-100, #f3f4f6);
+  --uilib-scroll-panel-scrollbar-thumb-bg: var(--uilib-surface-400, #9ca3af);
+  --uilib-scroll-panel-scrollbar-thumb-bg-hover: var(--uilib-color-primary, #6366f1);
+  --uilib-scroll-panel-scrollbar-radius: 4px;
+  --uilib-scroll-panel-transition: 200ms ease;
+}
+
+// ---- Base host -----------------------------------------------------------
+.ui-lib-scroll-panel {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--uilib-scroll-panel-border-color);
+  border-radius: var(--uilib-scroll-panel-border-radius);
+  background: var(--uilib-scroll-panel-bg);
+
+  // ---- Scrollable content wrapper ----------------------------------------
+  &__content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    // Firefox scrollbar styling
+    scrollbar-width: thin;
+    scrollbar-color: var(--uilib-scroll-panel-scrollbar-thumb-bg)
+      var(--uilib-scroll-panel-scrollbar-track-bg);
+
+    // Webkit scrollbar styling (Chrome, Safari, Edge)
+    &::-webkit-scrollbar {
+      width: var(--uilib-scroll-panel-scrollbar-width);
+      height: var(--uilib-scroll-panel-scrollbar-width);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--uilib-scroll-panel-scrollbar-track-bg);
+      border-radius: var(--uilib-scroll-panel-scrollbar-radius);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--uilib-scroll-panel-scrollbar-thumb-bg);
+      border-radius: var(--uilib-scroll-panel-scrollbar-radius);
+      transition: background-color var(--uilib-scroll-panel-transition);
+
+      &:hover {
+        background: var(--uilib-scroll-panel-scrollbar-thumb-bg-hover);
+      }
+    }
+
+    &::-webkit-scrollbar-corner {
+      background: var(--uilib-scroll-panel-scrollbar-track-bg);
+    }
+  }
+
+  // =========================================================================
+  // Variant: material
+  // =========================================================================
+  &--variant-material {
+    --uilib-scroll-panel-border-color: var(--uilib-surface-200, #e5e7eb);
+    --uilib-scroll-panel-border-radius: 12px;
+    --uilib-scroll-panel-scrollbar-width: 6px;
+    --uilib-scroll-panel-scrollbar-track-bg: var(--uilib-surface-50, #f9fafb);
+    --uilib-scroll-panel-scrollbar-thumb-bg: var(--uilib-surface-300, #d1d5db);
+    --uilib-scroll-panel-scrollbar-thumb-bg-hover: var(--uilib-color-primary, #6366f1);
+    --uilib-scroll-panel-scrollbar-radius: 99px;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.08),
+      0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  // =========================================================================
+  // Variant: bootstrap
+  // =========================================================================
+  &--variant-bootstrap {
+    --uilib-scroll-panel-border-color: #dee2e6;
+    --uilib-scroll-panel-border-radius: 4px;
+    --uilib-scroll-panel-scrollbar-width: 8px;
+    --uilib-scroll-panel-scrollbar-track-bg: #f8f9fa;
+    --uilib-scroll-panel-scrollbar-thumb-bg: #adb5bd;
+    --uilib-scroll-panel-scrollbar-thumb-bg-hover: #0d6efd;
+    --uilib-scroll-panel-scrollbar-radius: 2px;
+  }
+
+  // =========================================================================
+  // Variant: minimal
+  // =========================================================================
+  &--variant-minimal {
+    --uilib-scroll-panel-border-color: var(--uilib-surface-200, #e5e7eb);
+    --uilib-scroll-panel-border-radius: 4px;
+    --uilib-scroll-panel-scrollbar-width: 4px;
+    --uilib-scroll-panel-scrollbar-track-bg: transparent;
+    --uilib-scroll-panel-scrollbar-thumb-bg: var(--uilib-surface-300, #d1d5db);
+    --uilib-scroll-panel-scrollbar-thumb-bg-hover: var(--uilib-surface-500, #6b7280);
+    --uilib-scroll-panel-scrollbar-radius: 99px;
+    --uilib-scroll-panel-transition: 0ms;
+    border: none;
+    box-shadow: none;
+  }
+
+  // =========================================================================
+  // Dark-mode adjustments
+  // =========================================================================
+  [data-theme='dark'] &,
+  &[data-theme='dark'] {
+    --uilib-scroll-panel-border-color: var(--uilib-surface-600, #4b5563);
+    --uilib-scroll-panel-bg: var(--uilib-surface-800, #1f2937);
+    --uilib-scroll-panel-scrollbar-track-bg: var(--uilib-surface-700, #374151);
+    --uilib-scroll-panel-scrollbar-thumb-bg: var(--uilib-surface-500, #6b7280);
+    --uilib-scroll-panel-scrollbar-thumb-bg-hover: var(--uilib-color-primary, #818cf8);
+
+    &.ui-lib-scroll-panel--variant-bootstrap {
+      --uilib-scroll-panel-border-color: rgba(255, 255, 255, 0.15);
+      --uilib-scroll-panel-bg: #212529;
+      --uilib-scroll-panel-scrollbar-track-bg: #343a40;
+      --uilib-scroll-panel-scrollbar-thumb-bg: #6c757d;
+      --uilib-scroll-panel-scrollbar-thumb-bg-hover: #0d6efd;
+    }
+
+    &.ui-lib-scroll-panel--variant-minimal {
+      --uilib-scroll-panel-scrollbar-track-bg: transparent;
+      --uilib-scroll-panel-scrollbar-thumb-bg: var(--uilib-surface-600, #4b5563);
+      --uilib-scroll-panel-scrollbar-thumb-bg-hover: var(--uilib-surface-400, #9ca3af);
+    }
+  }
+
+  // =========================================================================
+  // Reduced motion
+  // =========================================================================
+  @media (prefers-reduced-motion: reduce) {
+    --uilib-scroll-panel-transition: 0ms;
+  }
+}

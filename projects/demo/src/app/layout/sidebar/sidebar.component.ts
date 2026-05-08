@@ -637,7 +637,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/scroll-panel',
           group: 'Panel',
-          badge: 'TODO',
         },
         {
           label: 'Splitter',
