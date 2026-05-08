@@ -20,12 +20,13 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Drawer component complete; resuming backlog
+- **Active focus:** Popover component complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
+- `Popover` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Drawer` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Divider` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -111,6 +112,47 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-08 [Popover component]
+Changed:
+  - projects/ui-lib-custom/src/lib/popover/popover.types.ts (new — PopoverVariant/PopoverPlacement types)
+  - projects/ui-lib-custom/src/lib/popover/popover.ts (new — Popover component; signal inputs/model; show/hide/toggle methods; FocusTrap; positioning)
+  - projects/ui-lib-custom/src/lib/popover/popover.html (new — overlay + panel with arrow, optional header, close button, ng-content body)
+  - projects/ui-lib-custom/src/lib/popover/popover.scss (new — 3 variants + CSS vars + enter animation + arrow + reduced motion)
+  - projects/ui-lib-custom/src/lib/popover/popover.spec.ts (31 unit tests)
+  - projects/ui-lib-custom/src/lib/popover/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/popover/README.md (API docs)
+  - projects/ui-lib-custom/popover/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/popover/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (popover added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (popover import test added)
+  - projects/demo/src/app/pages/popover/popover-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/popover/popover-demo.component.html (hero + 7 sections + API tables)
+  - projects/demo/src/app/pages/popover/popover-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from Popover)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Popover component fully complete.
+  Selector: ui-lib-popover. model() visible for two-way binding. Inputs: header, showCloseButton,
+  dismissable (default true), closeOnEscape (default true), variant, styleClass.
+  Outputs: shown, hidden. Content projection: default ng-content slot for body.
+  Public methods: show(target), hide(), toggle(target) — called via template ref or viewChild.
+  Host: position:fixed; inset:0; pointer-events:none when closed, display:none when closed.
+  Positioning: computes panel position in afterNextRender from target.getBoundingClientRect();
+  prefers below target, falls back to above when below doesn't fit; arrow offset clamped to target center.
+  Arrow: CSS border-triangle pointing toward the trigger element.
+  Transparent overlay (class --active only when dismissable) dismisses on click.
+  Escape key closes panel. FocusTrap activated on open.
+  Three variants: material (large radius, deep shadow), bootstrap (border, flat shadow), minimal (border, subtle).
+  role="dialog" + aria-modal="false". Close button has aria-label="Close".
+  31 tests pass. 88/88 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/popover/ projects/demo/src/app/pages/popover/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/popover Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/popover --no-coverage (31/31 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (88/88 PASS).
+Terminal notes: All jest it() callbacks need explicit (): void return type. Use By.directive(Popover)
+  to query child component instance in tests (avoids debugElement predicate typedef issues).
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-07 [Drawer component]
 Changed:

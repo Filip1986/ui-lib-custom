@@ -324,6 +324,10 @@
     "./drawer": {
       "esm2022": "./esm2022/drawer/index.mjs",
       "esm": "./esm2022/drawer/index.mjs"
+    },
+    "./popover": {
+      "esm2022": "./esm2022/popover/index.mjs",
+      "esm": "./esm2022/popover/index.mjs"
     }
   },
   "typesVersions": {
@@ -537,6 +541,9 @@
       ],
       "drawer": [
         "./drawer/index.d.ts"
+      ],
+      "popover": [
+        "./popover/index.d.ts"
       ]
     }
   }

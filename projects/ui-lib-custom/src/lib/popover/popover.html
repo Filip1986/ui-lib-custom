@@ -1,0 +1,48 @@
+@if (visible()) {
+  <!-- Transparent overlay catches click-away to dismiss -->
+  <div
+    class="ui-lib-popover__overlay"
+    [class.ui-lib-popover__overlay--active]="dismissable()"
+    (click)="onOverlayClick()"
+  ></div>
+
+  <!-- Floating panel anchored near the target element -->
+  <div
+    [class]="panelClasses()"
+    [style.top.px]="panelTop()"
+    [style.left.px]="panelLeft()"
+    role="dialog"
+    aria-modal="false"
+    tabindex="-1"
+    (keydown)="onPanelKeydown($event)"
+  >
+    <!-- Arrow pointing toward the trigger element -->
+    <div
+      class="ui-lib-popover__arrow"
+      [style.left.px]="arrowLeftOffset()"
+      aria-hidden="true"
+    ></div>
+
+    @if (header() || showCloseButton()) {
+      <div class="ui-lib-popover__header">
+        @if (header()) {
+          <span class="ui-lib-popover__title">{{ header() }}</span>
+        }
+        @if (showCloseButton()) {
+          <button
+            type="button"
+            class="ui-lib-popover__close-btn"
+            aria-label="Close"
+            (click)="hide()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        }
+      </div>
+    }
+
+    <div class="ui-lib-popover__content">
+      <ng-content />
+    </div>
+  </div>
+}
