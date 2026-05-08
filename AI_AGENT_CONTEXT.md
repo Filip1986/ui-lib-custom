@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Fieldset` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Popover` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Drawer` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
@@ -112,6 +113,48 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-08 [Fieldset component]
+Changed:
+  - projects/ui-lib-custom/src/lib/fieldset/fieldset.types.ts (new — FieldsetVariant/FieldsetToggleEvent types)
+  - projects/ui-lib-custom/src/lib/fieldset/fieldset.ts (new — Fieldset component; signal inputs/model; toggle logic; host classes)
+  - projects/ui-lib-custom/src/lib/fieldset/fieldset.html (new — legend div + content-wrapper with grid collapse animation)
+  - projects/ui-lib-custom/src/lib/fieldset/fieldset.scss (new — 3 variants + CSS vars + grid-row collapse animation + dark mode + reduced motion)
+  - projects/ui-lib-custom/src/lib/fieldset/fieldset.spec.ts (30 unit tests across 3 describe blocks)
+  - projects/ui-lib-custom/src/lib/fieldset/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/fieldset/README.md (API docs)
+  - projects/ui-lib-custom/fieldset/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/fieldset/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (fieldset added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (fieldset import test added)
+  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.html (hero + 6 sections + API tables)
+  - projects/demo/src/app/pages/fieldset/fieldset-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from Fieldset)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Fieldset component fully complete.
+  Selector: ui-lib-fieldset. model() collapsed for two-way binding. Inputs: legend (string),
+  toggleable (boolean, default false), collapsed (model, default false), variant, styleClass.
+  Output: toggled (FieldsetToggleEvent { collapsed: boolean }).
+  Content projection: default slot (body) + [fieldsetLegend] attribute slot (custom legend HTML).
+  Host: role="group" + aria-labelledby pointing to legend div id.
+  Legend div: role="button" + tabindex="0" + aria-expanded + aria-controls when toggleable.
+  Toggle icon: CSS chevron rotated via --collapsed modifier class.
+  Collapse animation: CSS grid-row (1fr → 0fr) on content-wrapper; content-inner has overflow:hidden + min-height:0.
+  Three variants: material (12px radius, box shadow), bootstrap (4px, flat), minimal (4px, no transition).
+  Dark mode via [data-theme='dark'] selector. Reduced motion: transition 0ms.
+  Event type fix: (keydown.enter)/(keydown.space) emit Event (not KeyboardEvent) — handler accepts Event.
+  Unique IDs test moved to separate describe block (cannot re-configure TestBed inside it()).
+  30 tests pass. 89/89 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/fieldset/ projects/demo/src/app/pages/fieldset/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/fieldset Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/fieldset --no-coverage (30/30 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (89/89 PASS).
+Terminal notes: (keydown.enter) and (keydown.space) bindings pass Event not KeyboardEvent to handler —
+  use Event parameter type. Tests that re-configure TestBed must be in a separate describe block with
+  their own beforeEach, not inside an it() of an already-instantiated suite.
+Next step: knip baseline + dead-code cleanup, or next component from queue (Panel, ScrollPanel, etc).
 
 Date: 2026-05-08 [Popover component]
 Changed:

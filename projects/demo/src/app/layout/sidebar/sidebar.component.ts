@@ -626,7 +626,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/fieldset',
           group: 'Panel',
-          badge: 'TODO',
         },
         {
           label: 'Panel',
