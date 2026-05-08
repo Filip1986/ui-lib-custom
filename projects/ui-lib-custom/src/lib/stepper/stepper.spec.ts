@@ -5,7 +5,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { Stepper } from './stepper';
@@ -131,7 +131,7 @@ class TestHostComponent {
 class LinearHostComponent {
   public readonly currentStep: WritableSignal<number> = signal<number>(0);
   public readonly isThirdDisabled: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly stepper: WritableSignal<Stepper | undefined> = viewChild<Stepper>('stepper');
+  public readonly stepper: Signal<Stepper | undefined> = viewChild<Stepper>('stepper');
 }
 
 @Component({
