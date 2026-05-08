@@ -20,12 +20,13 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Tooltip directive complete; resuming backlog
+- **Active focus:** Stepper compound component complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
+- `Stepper` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Panel` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fieldset` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Tooltip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -115,6 +116,52 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-08 [Stepper component]
+Changed:
+  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts (new — StepperVariant/StepperOrientation/StepChangeEvent types)
+  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts (new — StepperPanel child marker component; contentChild signal refs for #stepperContent/#stepperFooter/#stepperHeader)
+  - projects/ui-lib-custom/src/lib/stepper/stepper.ts (new — Stepper parent component; model() activeStep; linear/orientation/variant inputs; contentChildren(StepperPanel); nextStep/prevStep/goToStep methods; keyboard navigation)
+  - projects/ui-lib-custom/src/lib/stepper/stepper.html (new — horizontal branch: nav + panels; vertical branch: inline step-row layout with side indicator + separator)
+  - projects/ui-lib-custom/src/lib/stepper/stepper.scss (new — 3 variants + horizontal/vertical layouts + active/completed/disabled states + CSS vars + dark mode + reduced motion)
+  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts (40 unit tests across 3 describe blocks)
+  - projects/ui-lib-custom/src/lib/stepper/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/stepper/README.md (API docs)
+  - projects/ui-lib-custom/stepper/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/stepper/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (stepper added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (stepper import test added)
+  - projects/demo/src/app/pages/stepper/stepper-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/stepper/stepper-demo.component.html (hero + 5 sections + API tables)
+  - projects/demo/src/app/pages/stepper/stepper-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from Stepper)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Stepper component fully complete.
+  Compound component: Stepper (parent) + StepperPanel (child marker).
+  Selector: ui-lib-stepper + ui-lib-stepper-panel.
+  model() activeStep for two-way binding (0-based index).
+  Inputs: linear (boolean), orientation (horizontal/vertical), variant, styleClass.
+  Output: stepChange (StepChangeEvent { activeStep, previousStep }).
+  Public methods: nextStep(), prevStep(), goToStep(index), isFirstStep(), isLastStep().
+  StepperPanel collects template refs via contentChild signals:
+    #stepperContent → active panel body, #stepperFooter → action buttons area, #stepperHeader → custom header label.
+  Horizontal layout: nav bar (step headers + separators) then panels section below.
+  Vertical layout: each step row has left side (indicator circle + vertical separator line) and right side (label + inline content).
+  Linear mode: only steps ≤ activeStep are accessible; disabled input blocks a panel regardless.
+  Completed steps show SVG checkmark. Active indicator has box-shadow ring (material).
+  Three variants: material (circular, indigo ring, primary fill), bootstrap (rounded-rect, blue active, green complete), minimal (transparent, border-only, no animation).
+  Keyboard: ArrowRight/Left (H) or ArrowDown/Up (V) + Home/End to navigate.
+  ARIA: role=tablist on nav, role=tab + aria-selected + aria-current=step on headers, role=tabpanel + aria-labelledby on panels.
+  40 tests pass. 92/92 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/stepper/ projects/demo/src/app/pages/stepper/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/stepper Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/stepper --no-coverage (40/40 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (92/92 PASS).
+Terminal notes: static class property used as ID counter should be removed in favour of a module-level
+  let counter when ESLint prefer-readonly fires on it. Remove unused helper functions from spec before
+  running lint — @typescript-eslint/no-unused-vars catches them.
+Next step: knip baseline + dead-code cleanup, or next component from queue (ScrollPanel, Splitter, etc).
 
 Date: 2026-05-08 [Panel component]
 Changed:

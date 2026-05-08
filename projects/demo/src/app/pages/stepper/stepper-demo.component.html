@@ -1,0 +1,626 @@
+<div class="demo-page">
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">Stepper</h1>
+    <p class="demo-hero__subtitle">
+      A multi-step wizard component for guiding users through sequential workflows.
+      Supports horizontal and vertical orientations, linear enforcement, and three design variants.
+    </p>
+  </div>
+
+  <!-- ── Basic Usage ─────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Basic Usage</h2>
+    <p class="demo-section__desc">
+      A simple three-step horizontal stepper. Users can click any step header to navigate freely.
+    </p>
+
+    <div class="demo-card">
+      <ui-lib-stepper [(activeStep)]="basicStep" #basicStepper>
+        <ui-lib-stepper-panel header="Personal Info">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Personal Information</h3>
+              <p>Enter your name, email, and date of birth.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--primary" type="button" (click)="basicStepper.nextStep()">
+                Next
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+
+        <ui-lib-stepper-panel header="Address">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Delivery Address</h3>
+              <p>Provide your shipping address details.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--secondary" type="button" (click)="basicStepper.prevStep()">
+                Back
+              </button>
+              <button class="demo-btn demo-btn--primary" type="button" (click)="basicStepper.nextStep()">
+                Next
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+
+        <ui-lib-stepper-panel header="Confirmation">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Confirm Your Order</h3>
+              <p>Review everything and submit when ready.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--secondary" type="button" (click)="basicStepper.prevStep()">
+                Back
+              </button>
+              <button class="demo-btn demo-btn--success" type="button" (click)="basicStep.set(0)">
+                Submit &amp; Reset
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+      </ui-lib-stepper>
+    </div>
+  </section>
+
+  <!-- ── Linear Mode ────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Linear Mode</h2>
+    <p class="demo-section__desc">
+      With <code>linear</code> enabled, users must complete steps in order. Clicking ahead is blocked.
+    </p>
+
+    <div class="demo-card">
+      <ui-lib-stepper [(activeStep)]="linearStep" [linear]="true" #linearStepper>
+        <ui-lib-stepper-panel header="Account">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Create Account</h3>
+              <p>Complete this step before proceeding. Click Next to unlock the next step.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--primary" type="button" (click)="linearStepper.nextStep()">
+                Next
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+
+        <ui-lib-stepper-panel header="Billing">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Billing Details</h3>
+              <p>Step 2 of 3 is now unlocked. Step 3 is still locked.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--secondary" type="button" (click)="linearStepper.prevStep()">
+                Back
+              </button>
+              <button class="demo-btn demo-btn--primary" type="button" (click)="linearStepper.nextStep()">
+                Next
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+
+        <ui-lib-stepper-panel header="Review">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Final Review</h3>
+              <p>All steps are now complete.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--secondary" type="button" (click)="linearStepper.prevStep()">
+                Back
+              </button>
+              <button class="demo-btn demo-btn--success" type="button" (click)="linearStep.set(0)">
+                Done
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+      </ui-lib-stepper>
+    </div>
+  </section>
+
+  <!-- ── Vertical Orientation ───────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Vertical Orientation</h2>
+    <p class="demo-section__desc">
+      Set <code>orientation="vertical"</code> to stack steps vertically with inline content.
+    </p>
+
+    <div class="demo-card">
+      <ui-lib-stepper [(activeStep)]="verticalStep" orientation="vertical" #verticalStepper>
+        <ui-lib-stepper-panel header="Select Plan">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Choose Your Plan</h3>
+              <p>Select the subscription tier that fits your needs.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--primary" type="button" (click)="verticalStepper.nextStep()">
+                Continue
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+
+        <ui-lib-stepper-panel header="Payment">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Payment Method</h3>
+              <p>Enter your payment details securely.</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--secondary" type="button" (click)="verticalStepper.prevStep()">
+                Back
+              </button>
+              <button class="demo-btn demo-btn--primary" type="button" (click)="verticalStepper.nextStep()">
+                Continue
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+
+        <ui-lib-stepper-panel header="Confirmation">
+          <ng-template #stepperContent>
+            <div class="demo-step-content">
+              <h3>Subscription Confirmed</h3>
+              <p>Your plan is active. Welcome aboard!</p>
+            </div>
+          </ng-template>
+          <ng-template #stepperFooter>
+            <div class="demo-step-footer">
+              <button class="demo-btn demo-btn--secondary" type="button" (click)="verticalStepper.prevStep()">
+                Back
+              </button>
+              <button class="demo-btn demo-btn--success" type="button" (click)="verticalStep.set(0)">
+                Finish
+              </button>
+            </div>
+          </ng-template>
+        </ui-lib-stepper-panel>
+      </ui-lib-stepper>
+    </div>
+  </section>
+
+  <!-- ── Variants ────────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__desc">
+      Three variants to match your design system: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
+    </p>
+
+    <div class="demo-variants">
+      <div class="demo-variant-block">
+        <h3 class="demo-variant-label">Material</h3>
+        <div class="demo-card">
+          <ui-lib-stepper [(activeStep)]="materialStep" variant="material" #materialStepper>
+            <ui-lib-stepper-panel header="Step One">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Material design variant step.</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--primary" type="button" (click)="materialStepper.nextStep()">Next</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+            <ui-lib-stepper-panel header="Step Two">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Second step content.</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--secondary" type="button" (click)="materialStepper.prevStep()">Back</button>
+                  <button class="demo-btn demo-btn--primary" type="button" (click)="materialStepper.nextStep()">Next</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+            <ui-lib-stepper-panel header="Step Three">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Final step!</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--secondary" type="button" (click)="materialStepper.prevStep()">Back</button>
+                  <button class="demo-btn demo-btn--success" type="button" (click)="materialStep.set(0)">Reset</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+          </ui-lib-stepper>
+        </div>
+      </div>
+
+      <div class="demo-variant-block">
+        <h3 class="demo-variant-label">Bootstrap</h3>
+        <div class="demo-card">
+          <ui-lib-stepper [(activeStep)]="bootstrapStep" variant="bootstrap" #bootstrapStepper>
+            <ui-lib-stepper-panel header="Step One">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Bootstrap variant step.</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--primary" type="button" (click)="bootstrapStepper.nextStep()">Next</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+            <ui-lib-stepper-panel header="Step Two">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Second step content.</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--secondary" type="button" (click)="bootstrapStepper.prevStep()">Back</button>
+                  <button class="demo-btn demo-btn--primary" type="button" (click)="bootstrapStepper.nextStep()">Next</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+            <ui-lib-stepper-panel header="Step Three">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Final step!</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--secondary" type="button" (click)="bootstrapStepper.prevStep()">Back</button>
+                  <button class="demo-btn demo-btn--success" type="button" (click)="bootstrapStep.set(0)">Reset</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+          </ui-lib-stepper>
+        </div>
+      </div>
+
+      <div class="demo-variant-block">
+        <h3 class="demo-variant-label">Minimal</h3>
+        <div class="demo-card">
+          <ui-lib-stepper [(activeStep)]="minimalStep" variant="minimal" #minimalStepper>
+            <ui-lib-stepper-panel header="Step One">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Minimal variant step.</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--primary" type="button" (click)="minimalStepper.nextStep()">Next</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+            <ui-lib-stepper-panel header="Step Two">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Second step content.</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--secondary" type="button" (click)="minimalStepper.prevStep()">Back</button>
+                  <button class="demo-btn demo-btn--primary" type="button" (click)="minimalStepper.nextStep()">Next</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+            <ui-lib-stepper-panel header="Step Three">
+              <ng-template #stepperContent>
+                <div class="demo-step-content"><p>Final step!</p></div>
+              </ng-template>
+              <ng-template #stepperFooter>
+                <div class="demo-step-footer">
+                  <button class="demo-btn demo-btn--secondary" type="button" (click)="minimalStepper.prevStep()">Back</button>
+                  <button class="demo-btn demo-btn--success" type="button" (click)="minimalStep.set(0)">Reset</button>
+                </div>
+              </ng-template>
+            </ui-lib-stepper-panel>
+          </ui-lib-stepper>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Playground ──────────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">Playground</h2>
+    <p class="demo-section__desc">Experiment with all configuration options live.</p>
+
+    <div class="demo-card demo-card--playground">
+      <div class="demo-controls">
+        <div class="demo-control-group">
+          <label class="demo-control-label">Variant</label>
+          <div class="demo-control-buttons">
+            @for (variant of variants; track variant) {
+              <button
+                class="demo-chip"
+                [class.demo-chip--active]="playgroundVariant() === variant"
+                type="button"
+                (click)="setPlaygroundVariant(variant)"
+              >
+                {{ variant }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="demo-control-group">
+          <label class="demo-control-label">Orientation</label>
+          <div class="demo-control-buttons">
+            @for (orient of orientations; track orient) {
+              <button
+                class="demo-chip"
+                [class.demo-chip--active]="playgroundOrientation() === orient"
+                type="button"
+                (click)="setPlaygroundOrientation(orient)"
+              >
+                {{ orient }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="demo-control-group">
+          <label class="demo-control-label">Linear</label>
+          <div class="demo-control-buttons">
+            <button
+              class="demo-chip"
+              [class.demo-chip--active]="!playgroundLinear()"
+              type="button"
+              (click)="playgroundLinear.set(false); playgroundStep.set(0)"
+            >
+              Off
+            </button>
+            <button
+              class="demo-chip"
+              [class.demo-chip--active]="playgroundLinear()"
+              type="button"
+              (click)="playgroundLinear.set(true); playgroundStep.set(0)"
+            >
+              On
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-playground-stepper">
+        <ui-lib-stepper
+          [(activeStep)]="playgroundStep"
+          [variant]="playgroundVariant()"
+          [orientation]="playgroundOrientation()"
+          [linear]="playgroundLinear()"
+          (stepChange)="handleStepChange($event)"
+          #playgroundStepper
+        >
+          <ui-lib-stepper-panel header="Details">
+            <ng-template #stepperContent>
+              <div class="demo-step-content">
+                <h3>Step 1: Enter Details</h3>
+                <p>Provide the required information to proceed.</p>
+              </div>
+            </ng-template>
+            <ng-template #stepperFooter>
+              <div class="demo-step-footer">
+                <button class="demo-btn demo-btn--primary" type="button" (click)="playgroundStepper.nextStep()">
+                  Next
+                </button>
+              </div>
+            </ng-template>
+          </ui-lib-stepper-panel>
+
+          <ui-lib-stepper-panel header="Settings">
+            <ng-template #stepperContent>
+              <div class="demo-step-content">
+                <h3>Step 2: Configure Settings</h3>
+                <p>Adjust preferences and options.</p>
+              </div>
+            </ng-template>
+            <ng-template #stepperFooter>
+              <div class="demo-step-footer">
+                <button class="demo-btn demo-btn--secondary" type="button" (click)="playgroundStepper.prevStep()">
+                  Back
+                </button>
+                <button class="demo-btn demo-btn--primary" type="button" (click)="playgroundStepper.nextStep()">
+                  Next
+                </button>
+              </div>
+            </ng-template>
+          </ui-lib-stepper-panel>
+
+          <ui-lib-stepper-panel header="Review">
+            <ng-template #stepperContent>
+              <div class="demo-step-content">
+                <h3>Step 3: Review</h3>
+                <p>Confirm your selections and submit.</p>
+              </div>
+            </ng-template>
+            <ng-template #stepperFooter>
+              <div class="demo-step-footer">
+                <button class="demo-btn demo-btn--secondary" type="button" (click)="playgroundStepper.prevStep()">
+                  Back
+                </button>
+                <button class="demo-btn demo-btn--success" type="button" (click)="playgroundStep.set(0)">
+                  Submit
+                </button>
+              </div>
+            </ng-template>
+          </ui-lib-stepper-panel>
+        </ui-lib-stepper>
+      </div>
+
+      @if (lastStepChange()) {
+        <div class="demo-event-log">
+          <strong>Last stepChange event:</strong>
+          activeStep={{ lastStepChange()!.activeStep }}, previousStep={{ lastStepChange()!.previousStep }}
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ── API Reference ───────────────────────────────────────────────────── -->
+  <section class="demo-section">
+    <h2 class="demo-section__title">API Reference</h2>
+
+    <h3 class="demo-api-subtitle">Stepper — <code>ui-lib-stepper</code></h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>activeStep</code></td>
+          <td><code>number</code></td>
+          <td><code>0</code></td>
+          <td>Active step index (0-based). Supports two-way binding with <code>[(activeStep)]</code>.</td>
+        </tr>
+        <tr>
+          <td><code>linear</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When true, users must progress through steps sequentially.</td>
+        </tr>
+        <tr>
+          <td><code>orientation</code></td>
+          <td><code>'horizontal' | 'vertical'</code></td>
+          <td><code>'horizontal'</code></td>
+          <td>Layout orientation of the stepper.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant. Falls back to ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes to apply to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="demo-api-table demo-api-table--mt">
+      <thead>
+        <tr>
+          <th>Output</th>
+          <th>Payload</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>stepChange</code></td>
+          <td><code>StepChangeEvent</code></td>
+          <td>Emitted after the active step changes. Contains <code>activeStep</code> and <code>previousStep</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="demo-api-table demo-api-table--mt">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>nextStep()</code></td>
+          <td>Advances to the next step if one exists.</td>
+        </tr>
+        <tr>
+          <td><code>prevStep()</code></td>
+          <td>Returns to the previous step if one exists.</td>
+        </tr>
+        <tr>
+          <td><code>goToStep(index)</code></td>
+          <td>Navigates directly to the given step index.</td>
+        </tr>
+        <tr>
+          <td><code>isFirstStep()</code></td>
+          <td>Returns true when on the first step.</td>
+        </tr>
+        <tr>
+          <td><code>isLastStep()</code></td>
+          <td>Returns true when on the last step.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="demo-api-subtitle demo-api-subtitle--mt">StepperPanel — <code>ui-lib-stepper-panel</code></h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>header</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>Text label shown in the step header.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Prevents navigation to this step.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="demo-api-table demo-api-table--mt">
+      <thead>
+        <tr>
+          <th>Content Slot</th>
+          <th>Template Variable</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Step content</td>
+          <td><code>#stepperContent</code></td>
+          <td>Main body rendered in the active step's content area.</td>
+        </tr>
+        <tr>
+          <td>Step footer</td>
+          <td><code>#stepperFooter</code></td>
+          <td>Footer area — typically holds navigation buttons.</td>
+        </tr>
+        <tr>
+          <td>Custom header</td>
+          <td><code>#stepperHeader</code></td>
+          <td>Custom HTML for the step header label (overrides <code>header</code> input).</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>

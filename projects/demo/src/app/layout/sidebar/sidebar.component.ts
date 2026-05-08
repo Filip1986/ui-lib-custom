@@ -651,7 +651,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/stepper',
           group: 'Panel',
-          badge: 'TODO',
         },
         {
           label: 'Tabs',
