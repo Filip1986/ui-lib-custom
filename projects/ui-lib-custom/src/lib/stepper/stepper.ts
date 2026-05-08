@@ -48,7 +48,7 @@ let stepperIdCounter: number = 0;
 @Component({
   selector: 'ui-lib-stepper',
   standalone: true,
-  imports: [CommonModule, StepperPanel],
+  imports: [CommonModule],
   templateUrl: './stepper.html',
   styleUrl: './stepper.scss',
   encapsulation: ViewEncapsulation.None,
