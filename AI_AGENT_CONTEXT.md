@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `ScrollPanel` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Panel` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Fieldset` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Tooltip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -115,6 +116,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-08 [ScrollPanel component]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.types.ts (new — ScrollPanelVariant type)
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts (new — ScrollPanel component; signal inputs; host classes; ThemeConfigService integration)
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html (new — single content wrapper div with ng-content)
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss (new — 3 variants + CSS vars for scrollbar styling + dark mode + reduced motion)
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.spec.ts (14 unit tests across 4 describe blocks)
+  - projects/ui-lib-custom/src/lib/scroll-panel/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/scroll-panel/README.md (API docs)
+  - projects/ui-lib-custom/scroll-panel/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/scroll-panel/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (scroll-panel added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (scroll-panel import test added)
+  - projects/demo/src/app/pages/scroll-panel/scroll-panel-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/scroll-panel/scroll-panel-demo.component.html (hero + 5 sections + API tables)
+  - projects/demo/src/app/pages/scroll-panel/scroll-panel-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from ScrollPanel)
+  - AI_AGENT_CONTEXT.md (updated)
+State: ScrollPanel component fully complete.
+  Selector: ui-lib-scroll-panel. Inputs: variant (ScrollPanelVariant | null), styleClass (string | null).
+  No outputs. Content projection: single default slot inside .ui-lib-scroll-panel__content.
+  The content wrapper has overflow:auto + full CSS custom scrollbar theming via ::-webkit-scrollbar
+  pseudo-elements and scrollbar-width/scrollbar-color for Firefox.
+  Three variants: material (12px radius, thin 6px pill scrollbar, box shadow), bootstrap (4px radius,
+  8px flat scrollbar), minimal (no border/shadow, 4px pill transparent-track scrollbar).
+  Dark mode via [data-theme='dark'] selector. Reduced motion: transition 0ms.
+  14 tests pass. 92/92 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/scroll-panel/ projects/demo/src/app/pages/scroll-panel/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/scroll-panel Built, zero errors,
+  npx.cmd jest --testPathPatterns=scroll-panel --no-coverage (14/14 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (92/92 PASS).
+Terminal notes: ESLint exit code 1 in PowerShell even on success — use Bash tool for ESLint verification
+  (EXIT:0 confirmed clean). Build and jest both confirmed green via Bash.
+Next step: knip baseline + dead-code cleanup, or next component from queue (Splitter, Stepper, etc).
 
 Date: 2026-05-08 [Panel component]
 Changed:
