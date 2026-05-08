@@ -20,12 +20,13 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Popover component complete; resuming backlog
+- **Active focus:** Tooltip directive complete; resuming backlog
 - **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
+- `Tooltip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Popover` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Drawer` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
@@ -112,6 +113,49 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-08 [Tooltip directive]
+Changed:
+  - projects/ui-lib-custom/src/lib/tooltip/tooltip.types.ts (new — TooltipVariant/TooltipPosition/TooltipEvent types)
+  - projects/ui-lib-custom/src/lib/tooltip/tooltip.ts (new — Tooltip directive; signal inputs; lazy DOM creation; 4 positions with auto-flip; show/hide delays; aria-describedby; Escape key)
+  - projects/ui-lib-custom/src/lib/tooltip/tooltip.scss (new — base styles + 4 position arrow variants + 3 design variants + reduced motion)
+  - projects/ui-lib-custom/src/lib/tooltip/tooltip.spec.ts (34 unit tests)
+  - projects/ui-lib-custom/src/lib/tooltip/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/tooltip/README.md (API docs)
+  - projects/ui-lib-custom/tooltip/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/tooltip/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (tooltip added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (tooltip import test added)
+  - projects/demo/src/styles.scss (added @use for tooltip.scss)
+  - projects/demo/src/app/pages/tooltip/tooltip-demo.component.ts (full demo — replaced placeholder)
+  - projects/demo/src/app/pages/tooltip/tooltip-demo.component.html (hero + 7 sections + API table)
+  - projects/demo/src/app/pages/tooltip/tooltip-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from Tooltip)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Tooltip directive fully complete.
+  Selector: [uiLibTooltip]. Inputs: uiLibTooltip (string, the label text), tooltipPosition
+  (top/bottom/left/right, default top), tooltipEvent (hover/focus/both, default hover),
+  showDelay (number ms, default 0), hideDelay (number ms, default 0),
+  tooltipDisabled (boolean, default false), tooltipVariant (TooltipVariant|null, falls back to ThemeConfigService).
+  Tooltip element created lazily (on first show) and appended to document.body.
+  Positioned via position:fixed; auto-flips when viewport space is insufficient.
+  Four positions: top/bottom/left/right, each with a matching CSS arrow (border-trick).
+  Show/hide delay via setTimeout. Escape key dismisses. aria-describedby set on host while visible.
+  Three variants: material (larger radius, elevated shadow), bootstrap (dark #343a40, tight radius),
+  minimal (uses --uilib-page-fg, no shadow). Styles loaded globally via @use in demo styles.scss.
+  resolvePosition() guards against jsdom zero-dimensions (keeps requested position when tooltip has no measurable size).
+  34 tests pass. 89/89 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/tooltip/ projects/demo/src/app/pages/tooltip/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/tooltip Built, zero errors,
+  npx.cmd jest --testPathPatterns=src/lib/tooltip --no-coverage (34/34 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (89/89 PASS).
+Terminal notes: resolvePosition() uses getBoundingClientRect() which returns all zeros in jsdom.
+  Guard with `if (tooltipRect.width === 0 && tooltipRect.height === 0) return requested` to prevent
+  incorrect position flipping in test environment.
+  Directive styles are NOT component styles; they live in tooltip.scss and must be @used once in
+  the app's global stylesheet (demo/src/styles.scss pattern).
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-08 [Popover component]
 Changed:
