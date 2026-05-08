@@ -92,6 +92,7 @@ import type * as UiLibTooltip from 'ui-lib-custom/tooltip';
 import type * as UiLibPanel from 'ui-lib-custom/panel';
 import type * as UiLibStepper from 'ui-lib-custom/stepper';
 import type * as UiLibScrollPanel from 'ui-lib-custom/scroll-panel';
+import type * as UiLibToolbar from 'ui-lib-custom/toolbar';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -640,5 +641,10 @@ describe('Secondary Entry Points', (): void => {
   it('should import from scroll-panel', async (): Promise<void> => {
     const mod: typeof UiLibScrollPanel = await import('ui-lib-custom/scroll-panel');
     expect(mod.ScrollPanel).toBeDefined();
+  });
+
+  it('should import from toolbar', async (): Promise<void> => {
+    const mod: typeof UiLibToolbar = await import('ui-lib-custom/toolbar');
+    expect(mod.Toolbar).toBeDefined();
   });
 });

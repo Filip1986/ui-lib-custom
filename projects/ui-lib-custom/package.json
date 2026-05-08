@@ -297,6 +297,10 @@
       "esm2022": "./esm2022/divider/index.mjs",
       "esm": "./esm2022/divider/index.mjs"
     },
+    "./toolbar": {
+      "esm2022": "./esm2022/toolbar/index.mjs",
+      "esm": "./esm2022/toolbar/index.mjs"
+    },
     "./tag": {
       "esm2022": "./esm2022/tag/index.mjs",
       "esm": "./esm2022/tag/index.mjs"
@@ -579,6 +583,9 @@
       ],
       "scroll-panel": [
         "./scroll-panel/index.d.ts"
+      ],
+      "toolbar": [
+        "./toolbar/index.d.ts"
       ]
     }
   }
