@@ -1,7 +1,7 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideIcons } from '@ng-icons/core';
-import { lucideAlertCircle } from '@ng-icons/lucide';
+import { lucideAlertCircle, lucideAlignHorizontalSpaceAround } from '@ng-icons/lucide';
 import { Icon } from 'ui-lib-custom/icon';
 
 describe('Icon', (): void => {
@@ -11,7 +11,7 @@ describe('Icon', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Icon],
-      providers: [provideIcons({ lucideAlertCircle })],
+      providers: [provideIcons({ lucideAlertCircle, lucideAlignHorizontalSpaceAround })],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Icon);
@@ -37,6 +37,15 @@ describe('Icon', (): void => {
 
     const resolvedName: () => string = component.resolvedName as () => string;
     expect(resolvedName()).toBe('lucideAlertCircle');
+  });
+
+  it('maps more-horizontal alias to semantic more icon', (): void => {
+    fixture.componentRef.setInput('library', 'lucide');
+    fixture.componentRef.setInput('name', 'more-horizontal');
+    fixture.detectChanges();
+
+    const resolvedName: () => string = component.resolvedName as () => string;
+    expect(resolvedName()).toBe('lucideAlignHorizontalSpaceAround');
   });
 
   it('maps sizes using token mapping', (): void => {

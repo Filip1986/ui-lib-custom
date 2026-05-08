@@ -33,6 +33,25 @@ const hasKnownPrefix: (value: string) => boolean = (value: string): boolean => {
   return prefixes.some((p: string): boolean => value.toLowerCase().startsWith(p));
 };
 
+const ICON_NAME_ALIASES: Record<string, SemanticIcon> = {
+  add: 'add',
+  plus: 'add',
+  remove: 'remove',
+  minus: 'remove',
+  edit: 'edit',
+  pencil: 'edit',
+  delete: 'delete',
+  trash: 'delete',
+  close: 'close',
+  times: 'close',
+  x: 'x',
+  share: 'share',
+  'share-nodes': 'share',
+  more: 'more',
+  'more-horizontal': 'more',
+  'ellipsis-h': 'more',
+} as const;
+
 /**
  * Icon component that resolves semantic names to the active icon library.
  */
@@ -73,7 +92,7 @@ export class Icon {
 
   public readonly resolvedName: Signal<string> = computed<string>((): string => {
     const library: IconLibrary = this.iconService.resolveLibrary(this.library(), this.variant());
-    const raw: string | SemanticIcon = this.name();
+    const raw: string | SemanticIcon = this.resolveAliasedName(this.name());
     const base: string =
       this.semantic() || this.isSemanticIcon(raw)
         ? this.iconService.resolveIcon(raw as SemanticIcon, library)
@@ -99,6 +118,11 @@ export class Icon {
 
   private isSemanticIcon(value: string | SemanticIcon): value is SemanticIcon {
     return SEMANTIC_ICONS.includes(value as SemanticIcon);
+  }
+
+  private resolveAliasedName(value: string | SemanticIcon): string | SemanticIcon {
+    const normalized: string = value.toLowerCase();
+    return ICON_NAME_ALIASES[normalized] ?? value;
   }
 
   public onKeydown(event: KeyboardEvent): void {
