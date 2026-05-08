@@ -600,7 +600,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/tooltip',
           group: 'Overlay',
-          badge: 'TODO',
         },
         {
           label: 'Accordion',

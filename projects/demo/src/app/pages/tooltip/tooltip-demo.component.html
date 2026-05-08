@@ -1,5 +1,249 @@
 <section class="tooltip-demo" data-testid="tooltip-demo">
-  <h1>Tooltip</h1>
-  <p>Coming soon.</p>
-</section>
 
+  <!-- Hero -->
+  <div class="tooltip-hero">
+    <h1 class="tooltip-hero__title">Tooltip</h1>
+    <p class="tooltip-hero__lead">
+      An attribute directive that attaches a floating label to any host element.
+      Triggered by hover or focus, supports four positions, show/hide delays,
+      three design variants, and auto-flip when space is limited.
+    </p>
+    <div class="tooltip-hero__tags">
+      <span class="tooltip-tag">Directive</span>
+      <span class="tooltip-tag">Overlay</span>
+      <span class="tooltip-tag">A11y</span>
+    </div>
+  </div>
+
+  <!-- Section 1: Basic -->
+  <div class="tooltip-section">
+    <h2 class="tooltip-section__title">Basic</h2>
+    <p class="tooltip-section__desc">
+      Add <code>[uiLibTooltip]</code> with the label text to any element.
+      The tooltip appears above the host by default.
+    </p>
+    <div class="tooltip-row">
+      <button class="demo-btn" uiLibTooltip="Save the document">Save</button>
+      <button class="demo-btn" uiLibTooltip="Delete this item">Delete</button>
+      <button class="demo-btn" uiLibTooltip="Share with others">Share</button>
+    </div>
+    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Save the document"&gt;Save&lt;/button&gt;</code></pre>
+  </div>
+
+  <!-- Section 2: Positions -->
+  <div class="tooltip-section">
+    <h2 class="tooltip-section__title">Positions</h2>
+    <p class="tooltip-section__desc">
+      Use <code>tooltipPosition</code> to control placement:
+      <code>top</code>, <code>bottom</code>, <code>left</code>, or <code>right</code>.
+      The tooltip flips automatically if there is insufficient space in the requested direction.
+    </p>
+    <div class="tooltip-row tooltip-row--positions">
+      <button class="demo-btn" uiLibTooltip="Top tooltip" tooltipPosition="top">Top</button>
+      <button class="demo-btn" uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</button>
+      <button class="demo-btn" uiLibTooltip="Left tooltip" tooltipPosition="left">Left</button>
+      <button class="demo-btn" uiLibTooltip="Right tooltip" tooltipPosition="right">Right</button>
+    </div>
+    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Top tooltip" tooltipPosition="top"&gt;Top&lt;/button&gt;
+&lt;button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom"&gt;Bottom&lt;/button&gt;
+&lt;button uiLibTooltip="Left tooltip" tooltipPosition="left"&gt;Left&lt;/button&gt;
+&lt;button uiLibTooltip="Right tooltip" tooltipPosition="right"&gt;Right&lt;/button&gt;</code></pre>
+  </div>
+
+  <!-- Section 3: Focus event -->
+  <div class="tooltip-section">
+    <h2 class="tooltip-section__title">Focus event</h2>
+    <p class="tooltip-section__desc">
+      Set <code>tooltipEvent="focus"</code> to show the tooltip on keyboard focus instead of hover.
+      Useful for form inputs to provide contextual guidance.
+      Use <code>"both"</code> to support both hover and focus.
+    </p>
+    <div class="tooltip-row">
+      <input
+        class="demo-input"
+        placeholder="Tab to this field"
+        uiLibTooltip="Enter your full name"
+        tooltipEvent="focus"
+      />
+      <input
+        class="demo-input"
+        placeholder="Hover or tab here"
+        uiLibTooltip="Accepts hover and focus"
+        tooltipEvent="both"
+      />
+    </div>
+    <pre class="tooltip-code"><code>&lt;input uiLibTooltip="Enter your full name" tooltipEvent="focus" /&gt;
+&lt;input uiLibTooltip="Accepts hover and focus" tooltipEvent="both" /&gt;</code></pre>
+  </div>
+
+  <!-- Section 4: Show and hide delays -->
+  <div class="tooltip-section">
+    <h2 class="tooltip-section__title">Show &amp; hide delays</h2>
+    <p class="tooltip-section__desc">
+      Use <code>showDelay</code> and <code>hideDelay</code> (milliseconds) to
+      debounce rapid mouse movements. Useful in dense UIs to avoid tooltip flicker.
+    </p>
+    <div class="tooltip-row">
+      <button
+        class="demo-btn"
+        uiLibTooltip="Appears after 400 ms"
+        [showDelay]="400"
+      >
+        400 ms show delay
+      </button>
+      <button
+        class="demo-btn"
+        uiLibTooltip="Stays 600 ms after leaving"
+        [hideDelay]="600"
+      >
+        600 ms hide delay
+      </button>
+      <button
+        class="demo-btn"
+        uiLibTooltip="Both delays combined"
+        [showDelay]="300"
+        [hideDelay]="400"
+      >
+        Show 300 ms / Hide 400 ms
+      </button>
+    </div>
+    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Appears after 400 ms" [showDelay]="400"&gt;Hover&lt;/button&gt;</code></pre>
+  </div>
+
+  <!-- Section 5: Disabled -->
+  <div class="tooltip-section">
+    <h2 class="tooltip-section__title">Disabled</h2>
+    <p class="tooltip-section__desc">
+      Set <code>[tooltipDisabled]="true"</code> to suppress the tooltip entirely.
+      Bind to a signal for runtime toggling.
+    </p>
+    <div class="tooltip-row">
+      <button
+        class="demo-btn"
+        uiLibTooltip="You will never see this"
+        [tooltipDisabled]="tooltipDisabled()"
+      >
+        {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
+      </button>
+      <button class="demo-btn demo-btn--secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
+        Toggle disabled
+      </button>
+    </div>
+    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Hidden" [tooltipDisabled]="isDisabled"&gt;Hover&lt;/button&gt;</code></pre>
+  </div>
+
+  <!-- Section 6: Variants -->
+  <div class="tooltip-section">
+    <h2 class="tooltip-section__title">Variants</h2>
+    <p class="tooltip-section__desc">
+      Three design variants are available: <code>material</code>, <code>bootstrap</code>,
+      and <code>minimal</code>. When <code>tooltipVariant</code> is not set, the variant
+      is inherited from <code>ThemeConfigService</code>.
+    </p>
+    <div class="tooltip-row">
+      <button
+        class="demo-btn"
+        uiLibTooltip="Material variant — larger radius and elevated shadow"
+        tooltipVariant="material"
+        tooltipPosition="bottom"
+      >
+        Material
+      </button>
+      <button
+        class="demo-btn"
+        uiLibTooltip="Bootstrap variant — dark background, tight radius"
+        tooltipVariant="bootstrap"
+        tooltipPosition="bottom"
+      >
+        Bootstrap
+      </button>
+      <button
+        class="demo-btn"
+        uiLibTooltip="Minimal variant — uses page foreground colour"
+        tooltipVariant="minimal"
+        tooltipPosition="bottom"
+      >
+        Minimal
+      </button>
+    </div>
+    <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Material tooltip" tooltipVariant="material"&gt;Material&lt;/button&gt;</code></pre>
+  </div>
+
+  <!-- Section 7: Long text -->
+  <div class="tooltip-section">
+    <h2 class="tooltip-section__title">Long text</h2>
+    <p class="tooltip-section__desc">
+      The tooltip wraps text at <code>14rem</code> max width and breaks long words automatically.
+    </p>
+    <div class="tooltip-row">
+      <button
+        class="demo-btn"
+        uiLibTooltip="This is a much longer tooltip that wraps onto multiple lines when the content exceeds the maximum width."
+        tooltipPosition="bottom"
+      >
+        Hover for long text
+      </button>
+    </div>
+  </div>
+
+  <!-- API table -->
+  <div class="tooltip-section tooltip-api">
+    <h2 class="tooltip-section__title">API</h2>
+    <h3 class="tooltip-api__subtitle">Selector: <code>[uiLibTooltip]</code></h3>
+    <table class="tooltip-api__table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>uiLibTooltip</code></td>
+          <td><code>string</code></td>
+          <td><code>''</code></td>
+          <td>The tooltip label text.</td>
+        </tr>
+        <tr>
+          <td><code>tooltipPosition</code></td>
+          <td><code>'top' | 'bottom' | 'left' | 'right'</code></td>
+          <td><code>'top'</code></td>
+          <td>Preferred position. Flips automatically when space is lacking.</td>
+        </tr>
+        <tr>
+          <td><code>tooltipEvent</code></td>
+          <td><code>'hover' | 'focus' | 'both'</code></td>
+          <td><code>'hover'</code></td>
+          <td>Which host events trigger the tooltip.</td>
+        </tr>
+        <tr>
+          <td><code>showDelay</code></td>
+          <td><code>number</code></td>
+          <td><code>0</code></td>
+          <td>Milliseconds to wait before showing.</td>
+        </tr>
+        <tr>
+          <td><code>hideDelay</code></td>
+          <td><code>number</code></td>
+          <td><code>0</code></td>
+          <td>Milliseconds to wait before hiding.</td>
+        </tr>
+        <tr>
+          <td><code>tooltipDisabled</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Prevent the tooltip from showing.</td>
+        </tr>
+        <tr>
+          <td><code>tooltipVariant</code></td>
+          <td><code>TooltipVariant | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant. Falls back to <code>ThemeConfigService</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
