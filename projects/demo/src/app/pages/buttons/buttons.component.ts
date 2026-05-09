@@ -13,6 +13,8 @@ import {
   TableColumnComponent,
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
+import { Panel } from 'ui-lib-custom/panel';
+import { Card } from 'ui-lib-custom/card';
 
 interface ButtonLogEntry {
   timestamp: string;
@@ -33,7 +35,15 @@ interface ApiRow {
 @Component({
   selector: 'app-buttons',
   standalone: true,
-  imports: [Button, ButtonGroup, TableComponent, TableColumnComponent, TableColumnBodyDirective],
+  imports: [
+    Button,
+    ButtonGroup,
+    TableComponent,
+    TableColumnComponent,
+    TableColumnBodyDirective,
+    Panel,
+    Card,
+  ],
   templateUrl: './buttons.component.html',
   styleUrl: './buttons.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

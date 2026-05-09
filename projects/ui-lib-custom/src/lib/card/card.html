@@ -23,6 +23,7 @@
         <div class="ui-lib-card__title">
           <ng-content select="[card-header]"></ng-content>
         </div>
+        <ng-content select="[card-subtitle]"></ng-content>
         @if (subtitle()) {
           <div class="ui-lib-card__subtitle">{{ subtitle() }}</div>
         }
