@@ -618,7 +618,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/divider',
           group: 'Panel',
-          badge: 'TODO',
         },
         {
           label: 'Fieldset',
