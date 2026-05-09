@@ -661,7 +661,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/toolbar',
           group: 'Panel',
-          badge: 'TODO',
         },
       ]),
     },

@@ -1,630 +1,232 @@
-<app-doc-page-layout [sections]="sections">
-  <div class="doc-header" docHeader>
-    <h1>Button</h1>
-    <p class="doc-description">
-      Flexible button components with multiple design variants, colors, and sizes. Adjust the
-      controls below to see the live preview update.
+<div class="buttons-demo">
+  <header class="buttons-demo__header">
+    <h1 class="buttons-demo__title">Button</h1>
+    <p class="buttons-demo__subtitle">
+      Flexible button components with multiple design variants, appearances, sizes, and states.
     </p>
-  </div>
 
-  <app-code-preview [code]="buttonExample">
-    <app-button-basic-example />
-  </app-code-preview>
+    <!-- Variant switcher -->
+    <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
+      @for (v of variants; track v) {
+        <button
+          type="button"
+          class="buttons-demo__variant-btn"
+          [class.buttons-demo__variant-btn--active]="activeVariant() === v"
+          (click)="setVariant(v)"
+        >
+          {{ v }}
+        </button>
+      }
+    </div>
+  </header>
 
-  <ui-lib-card class="control-card" [showHeader]="true" [showFooter]="false">
-    <div card-header>Style</div>
-    <div class="card-body">
-      <p class="card-description">Variant, appearance, color, size, and icon alignment.</p>
-      <div class="control-grid">
-        <div class="control">
-          <label>Variant</label>
-          <div class="chips">
-            @for (v of variants; track v) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="variant() === v ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="selectVariant(v)"
-                >{{ v }}</ui-lib-button
-              >
-            }
-          </div>
-          <label class="inline-toggle"
-            ><input
-              type="checkbox"
-              [checked]="useGlobalVariant()"
-              (change)="setFollowThemeVariant($any($event.target).checked)"
-            />
-            Follow theme variant</label
-          >
+  <!-- ── Section 1: Basic ──────────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Basic</h2>
+    <p class="buttons-demo__section-desc">Default button with primary severity.</p>
+
+    <div class="buttons-demo__row">
+      <ui-lib-button [variant]="activeVariant()" (click)="logEvent('Default clicked')">
+        Default
+      </ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" severity="primary" (click)="logEvent('Primary clicked')">
+        Primary
+      </ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" severity="secondary" (click)="logEvent('Secondary clicked')">
+        Secondary
+      </ui-lib-button>
+    </div>
+  </section>
+
+  <!-- ── Section 2: Appearances ───────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Appearances</h2>
+    <p class="buttons-demo__section-desc">
+      Use <code>appearance</code> to switch between <code>solid</code>, <code>outline</code>, and
+      <code>ghost</code> fills.
+    </p>
+
+    <div class="buttons-demo__row">
+      @for (a of appearances; track a) {
+        <ui-lib-button [variant]="activeVariant()" [appearance]="a" severity="primary" (click)="logEvent(a + ' clicked')">
+          {{ a }}
+        </ui-lib-button>
+      }
+    </div>
+  </section>
+
+  <!-- ── Section 3: Severities ────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Severities</h2>
+    <p class="buttons-demo__section-desc">
+      All available severity values applied to a solid button.
+    </p>
+
+    <div class="buttons-demo__row buttons-demo__row--wrap">
+      @for (s of severities; track s) {
+        <ui-lib-button [variant]="activeVariant()" [severity]="s" (click)="logEvent(s + ' clicked')">
+          {{ s }}
+        </ui-lib-button>
+      }
+    </div>
+  </section>
+
+  <!-- ── Section 4: Sizes ──────────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Sizes</h2>
+    <p class="buttons-demo__section-desc">
+      Three size options: <code>small</code>, <code>medium</code>, and <code>large</code>.
+    </p>
+
+    <div class="buttons-demo__size-grid">
+      @for (s of sizes; track s) {
+        <div>
+          <p class="buttons-demo__size-label">{{ s }}</p>
+          <ui-lib-button [variant]="activeVariant()" [size]="s" severity="primary">
+            {{ s }}
+          </ui-lib-button>
         </div>
+      }
+    </div>
+  </section>
 
-        <div class="control">
-          <label>Appearance</label>
-          <div class="chips">
-            @for (a of appearances; track a) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="appearance() === a ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="appearance.set(a)"
-                >{{ a }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
+  <!-- ── Section 5: Icons ──────────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Icons</h2>
+    <p class="buttons-demo__section-desc">
+      Add icons on any side with <code>icon</code> and <code>iconPosition</code>.
+    </p>
 
-        <div class="control">
-          <label>Color</label>
-          <div class="chips">
-            @for (c of colors; track c) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="color() === c ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="color.set(c)"
-                >{{ c }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
+    <div class="buttons-demo__row buttons-demo__row--wrap">
+      <ui-lib-button [variant]="activeVariant()" icon="arrow-left">Back</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" icon="arrow-right" iconPosition="right">Next</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="top">Profile</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="bottom">Profile</ui-lib-button>
+      <ui-lib-button
+        [variant]="activeVariant()"
+        icon="more-horizontal"
+        [iconOnly]="true"
+        ariaLabel="More options"
+      ></ui-lib-button>
+    </div>
+  </section>
 
-        <div class="control">
-          <label>Size</label>
-          <div class="chips">
-            @for (s of sizes; track s) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="size() === s ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="size.set(s)"
-                >{{ s }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
+  <!-- ── Section 6: Raised & Rounded ─────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Raised &amp; Rounded</h2>
+    <p class="buttons-demo__section-desc">
+      <code>raised</code> adds a drop shadow; <code>rounded</code> yields a pill shape.
+    </p>
 
-        <div class="control">
-          <label>Icon position</label>
-          <div class="chips">
-            @for (p of iconPositions; track p) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="iconPosition() === p ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="iconPosition.set(p)"
-                >{{ p }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
+    <div class="buttons-demo__row buttons-demo__row--wrap">
+      <ui-lib-button [variant]="activeVariant()" [raised]="true" severity="primary">Raised</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [rounded]="true" severity="primary">Rounded</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [raised]="true" [rounded]="true" severity="primary">Raised + Rounded</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [rounded]="true" severity="success" [outlined]="true">Outlined Pill</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [rounded]="true" [text]="true">Text Pill</ui-lib-button>
+    </div>
+  </section>
 
-        <div class="control">
-          <label>Icon</label>
-          <div class="chips">
-            @for (name of ['search', 'close', 'menu', 'arrow-right', 'check']; track name) {
-              <ui-lib-button
-                class="control-chip"
-                size="small"
-                [variant]="'minimal'"
-                [appearance]="demoIcon() === name ? 'solid' : 'ghost'"
-                color="primary"
-                (click)="demoIcon.set(name)"
-                >{{ name }}</ui-lib-button
-              >
-            }
-          </div>
-        </div>
+  <!-- ── Section 7: States ────────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">States</h2>
+    <p class="buttons-demo__section-desc">
+      <code>disabled</code> prevents interaction; <code>loading</code> shows a spinner and blocks clicks.
+    </p>
+
+    <div class="buttons-demo__row">
+      <ui-lib-button [variant]="activeVariant()" [disabled]="true" severity="primary">Disabled</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [loading]="true" severity="primary">Loading</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [loading]="true" severity="secondary" appearance="outline">Loading outline</ui-lib-button>
+    </div>
+  </section>
+
+  <!-- ── Section 8: Badges ────────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Badges</h2>
+    <p class="buttons-demo__section-desc">
+      Use the <code>badge</code> input to overlay a small counter on the button.
+    </p>
+
+    <div class="buttons-demo__row">
+      <ui-lib-button [variant]="activeVariant()" badge="5" severity="primary">Notifications</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" badge="99+" badgeColor="danger" severity="secondary">Messages</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" badge="1" [iconOnly]="true" icon="mail" ariaLabel="Mail"></ui-lib-button>
+    </div>
+  </section>
+
+  <!-- ── Section 9: Link & Text ───────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Link &amp; Text</h2>
+    <p class="buttons-demo__section-desc">
+      <code>text</code> renders a ghost-style button; <code>link</code> renders a hyperlink-style appearance.
+    </p>
+
+    <div class="buttons-demo__row">
+      <ui-lib-button [variant]="activeVariant()" [text]="true" severity="primary">Text Primary</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [text]="true" severity="secondary">Text Secondary</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [link]="true" severity="primary">Link Primary</ui-lib-button>
+      <ui-lib-button [variant]="activeVariant()" [link]="true" severity="info">Info Link</ui-lib-button>
+    </div>
+  </section>
+
+  <!-- ── Section 10: Button Groups ────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Button Groups</h2>
+    <p class="buttons-demo__section-desc">
+      Wrap buttons in <code>ui-lib-button-group</code> to join them visually. Use
+      <code>[vertical]="true"</code> for a stacked layout.
+    </p>
+
+    <div class="buttons-demo__group-grid">
+      <div>
+        <p class="buttons-demo__size-label">Horizontal</p>
+        <ui-lib-button-group>
+          <ui-lib-button [variant]="activeVariant()" severity="primary" (click)="logEvent('Save clicked')">Save</ui-lib-button>
+          <ui-lib-button [variant]="activeVariant()" severity="secondary" (click)="logEvent('Edit clicked')">Edit</ui-lib-button>
+          <ui-lib-button [variant]="activeVariant()" severity="danger" (click)="logEvent('Delete clicked')">Delete</ui-lib-button>
+        </ui-lib-button-group>
+      </div>
+
+      <div>
+        <p class="buttons-demo__size-label">Vertical</p>
+        <ui-lib-button-group [vertical]="true">
+          <ui-lib-button [variant]="activeVariant()">Top</ui-lib-button>
+          <ui-lib-button [variant]="activeVariant()">Middle</ui-lib-button>
+          <ui-lib-button [variant]="activeVariant()">Bottom</ui-lib-button>
+        </ui-lib-button-group>
       </div>
     </div>
-  </ui-lib-card>
+  </section>
 
-  <ui-lib-grid class="controls-grid" [spacing]="4" minColumnWidth="260px">
-    <ui-lib-card class="control-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>State &amp; content</div>
-      <div class="card-body">
-        <p class="card-description">Toggle behavior and update the label.</p>
+  <!-- ── Section 11: Full Width ────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Full Width</h2>
+    <p class="buttons-demo__section-desc">
+      Set <code>[fullWidth]="true"</code> for a button that fills its container.
+    </p>
 
-        <div class="toggles">
-          <label
-            ><input
-              type="checkbox"
-              [checked]="disabled()"
-              (change)="disabled.set($any($event.target).checked)"
-            />
-            Disabled</label
-          >
-          <label
-            ><input
-              type="checkbox"
-              [checked]="loading()"
-              (change)="loading.set($any($event.target).checked)"
-            />
-            Loading</label
-          >
-          <label
-            ><input
-              type="checkbox"
-              [checked]="fullWidth()"
-              (change)="fullWidth.set($any($event.target).checked)"
-            />
-            Full width</label
-          >
-        </div>
+    <ui-lib-button [variant]="activeVariant()" [fullWidth]="true" severity="primary" (click)="logEvent('Full width clicked')">
+      Full Width Button
+    </ui-lib-button>
+  </section>
 
-        <div class="control">
-          <label>Label</label>
-          <input
-            type="text"
-            aria-label="Button label"
-            [value]="label()"
-            (input)="label.set($any($event.target).value)"
-          />
-        </div>
-
-        <div class="control">
-          <label class="inline-toggle"
-            ><input
-              type="checkbox"
-              [checked]="useLocalTheme()"
-              (change)="useLocalTheme.set($any($event.target).checked)"
-            />
-            Use local theme overrides</label
-          >
-        </div>
-      </div>
-    </ui-lib-card>
-
-    <ui-lib-card class="control-card viewport-width-card" [showHeader]="true" [showFooter]="false">
-      <div card-header>Viewport width</div>
-      <div class="viewport-controls">
-        <div class="preset-buttons">
-          @for (preset of viewportPresets; track preset.key) {
-            <ui-lib-button size="small" appearance="ghost" (click)="setViewportPreset(preset)">{{
-              preset.label
-            }}</ui-lib-button>
+  <!-- ── Event log ─────────────────────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Event Log</h2>
+    <div class="buttons-demo__log-panel">
+      @if (eventLog().length === 0) {
+        <p class="buttons-demo__log-empty">Interact with the buttons above to see events.</p>
+      } @else {
+        <ul class="buttons-demo__log-list">
+          @for (entry of eventLog(); track entry.timestamp + entry.message) {
+            <li class="buttons-demo__log-entry">
+              <span class="buttons-demo__log-time">{{ entry.timestamp }}</span>
+              <span class="buttons-demo__log-msg">{{ entry.message }}</span>
+            </li>
           }
-          <div class="custom">
-            <label>Custom</label>
-            <input
-              type="number"
-              aria-label="Custom viewport width"
-              min="200"
-              max="2000"
-              [ngModel]="viewportCustomWidth()"
-              (ngModelChange)="setViewportCustomWidth($event)"
-            />
-            <ui-lib-button size="small" appearance="ghost" (click)="applyViewportCustom()"
-              >Apply</ui-lib-button
-            >
-          </div>
-        </div>
-        <div class="controls">
-          <span class="dims">{{ viewportDisplayWidth() }} × {{ viewportDisplayHeight() }}px</span>
-          <ui-lib-button size="small" appearance="ghost" (click)="rotateViewport()"
-            >Rotate</ui-lib-button
-          >
-        </div>
-      </div>
-    </ui-lib-card>
-
-    <ui-lib-card
-      class="control-card viewport-density-card"
-      [showHeader]="true"
-      [showFooter]="false"
-    >
-      <div card-header>Density</div>
-      <div class="density-controls">
-        <ui-lib-button
-          size="small"
-          appearance="ghost"
-          (click)="setViewportDensity('default')"
-          [class.active]="viewport?.densityValue() === 'default'"
-          >Default</ui-lib-button
-        >
-        <ui-lib-button
-          size="small"
-          appearance="ghost"
-          (click)="setViewportDensity('comfortable')"
-          [class.active]="viewport?.densityValue() === 'comfortable'"
-          >Comfortable</ui-lib-button
-        >
-        <ui-lib-button
-          size="small"
-          appearance="ghost"
-          (click)="setViewportDensity('compact')"
-          [class.active]="viewport?.densityValue() === 'compact'"
-          >Compact</ui-lib-button
-        >
-      </div>
-    </ui-lib-card>
-  </ui-lib-grid>
-
-  <div class="doc-tabs">
-    <ui-lib-tabs
-      variant="minimal"
-      size="small"
-      [selectedValue]="activeTab()"
-      (selectedChange)="onTabChange($event.value)"
-    >
-      <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
-      <ui-lib-tab value="variants" label="Variants"></ui-lib-tab>
-      <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
-      <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
-      <ui-lib-tab value="performance" label="Performance"></ui-lib-tab>
-      <ui-lib-tab value="examples" label="Examples"></ui-lib-tab>
-      <ui-lib-tab value="accessibility" label="Accessibility"></ui-lib-tab>
-    </ui-lib-tabs>
-  </div>
-
-  @if (activeTab() === 'playground') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="playground" data-doc-anchor>
-      <div card-header>Playground</div>
-      <p>Configure variant, appearance, color, size, and state to preview the button.</p>
-
-      <app-doc-demo-viewport>
-        <div class="doc-demo centered" [appThemeScope]="appliedTheme()">
-          <ui-lib-button
-            [variant]="variant()"
-            [appearance]="appearance()"
-            [color]="color()"
-            [size]="size()"
-            [disabled]="disabled()"
-            [loading]="loading()"
-            [fullWidth]="fullWidth()"
-            [iconPosition]="iconPosition()"
-            [icon]="demoIcon()"
-          >
-            {{ label() }}
-          </ui-lib-button>
-
-          <ui-lib-icon-button
-            class="demo-icon-only"
-            [variant]="variant()"
-            [icon]="demoIcon()"
-            ariaLabel="Icon button"
-          />
-        </div>
-      </app-doc-demo-viewport>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'variants') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="variants" data-doc-anchor>
-      <div card-header>Variants</div>
-      <p>Compare the three button variants side-by-side with the same configuration.</p>
-
-      <app-variant-comparison>
-        <div material>
-          <ui-lib-button
-            variant="material"
-            [appearance]="appearance()"
-            [color]="color()"
-            [size]="size()"
-            [icon]="demoIcon()"
-          >
-            {{ label() }}
-          </ui-lib-button>
-        </div>
-
-        <div bootstrap>
-          <ui-lib-button
-            variant="bootstrap"
-            [appearance]="appearance()"
-            [color]="color()"
-            [size]="size()"
-            [icon]="demoIcon()"
-          >
-            {{ label() }}
-          </ui-lib-button>
-        </div>
-
-        <div minimal>
-          <ui-lib-button
-            variant="minimal"
-            [appearance]="appearance()"
-            [color]="color()"
-            [size]="size()"
-            [icon]="demoIcon()"
-          >
-            {{ label() }}
-          </ui-lib-button>
-        </div>
-      </app-variant-comparison>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'api-reference') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="api-reference" data-doc-anchor>
-      <div card-header>API Reference</div>
-      <table class="doc-properties">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal'</code></td>
-            <td><code>'material'</code></td>
-            <td>Visual style of the button</td>
-          </tr>
-          <tr>
-            <td><code>appearance</code></td>
-            <td><code>'solid' | 'outline' | 'ghost'</code></td>
-            <td><code>'solid'</code></td>
-            <td>Fill style of the button</td>
-          </tr>
-          <tr>
-            <td><code>severity</code></td>
-            <td>
-              <code>primary | secondary | success | info | warning | help | danger | contrast</code>
-            </td>
-            <td><code>'primary'</code></td>
-            <td>Theme severity (color)</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'small' | 'medium' | 'large'</code></td>
-            <td><code>'medium'</code></td>
-            <td>Button size</td>
-          </tr>
-          <tr>
-            <td><code>raised</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Elevated shadow</td>
-          </tr>
-          <tr>
-            <td><code>rounded</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Pill shape</td>
-          </tr>
-          <tr>
-            <td><code>text</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Text/ghost style</td>
-          </tr>
-          <tr>
-            <td><code>outlined</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Outlined style</td>
-          </tr>
-          <tr>
-            <td><code>link</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Link-like appearance</td>
-          </tr>
-          <tr>
-            <td><code>badge</code></td>
-            <td><code>string | number | null</code></td>
-            <td><code>null</code></td>
-            <td>Badge content</td>
-          </tr>
-          <tr>
-            <td><code>badgeColor</code></td>
-            <td><code>BadgeSeverity</code></td>
-            <td><code>'danger'</code></td>
-            <td>Badge severity/color</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>SemanticIcon | string | null</code></td>
-            <td><code>null</code></td>
-            <td>Icon name</td>
-          </tr>
-          <tr>
-            <td><code>iconPosition</code></td>
-            <td><code>'left' | 'right' | 'top' | 'bottom'</code></td>
-            <td><code>'left'</code></td>
-            <td>Icon placement</td>
-          </tr>
-          <tr>
-            <td><code>loading</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Loading state with spinner</td>
-          </tr>
-          <tr>
-            <td><code>disabled</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Disable the button</td>
-          </tr>
-        </tbody>
-      </table>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'usage') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="usage" data-doc-anchor>
-      <div card-header>Usage</div>
-      <app-doc-code-snippet title="Usage" [code]="snippets.usage"></app-doc-code-snippet>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'performance') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="performance" data-doc-anchor>
-      <div card-header>Performance Features</div>
-      <ul class="doc-list">
-        <li><strong>OnPush Change Detection</strong> - only re-renders when inputs change</li>
-        <li><strong>Signal-Based</strong> - uses Angular signals for optimal reactivity</li>
-        <li><strong>Single Element</strong> - renders as single DOM element (no wrappers)</li>
-        <li><strong>Design Tokens</strong> - uses centralized design system</li>
-        <li><strong>Zero Runtime Logic</strong> - all styles computed via memoized signals</li>
-        <li><strong>Host Bindings</strong> - direct style application (no ngClass overhead)</li>
-      </ul>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'examples') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="examples" data-doc-anchor>
-      <div card-header>Examples</div>
-      <div class="examples">
-        <ui-lib-stack [gap]="4">
-          <section>
-            <h3>Basic</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button>Default</ui-lib-button>
-              <ui-lib-button severity="primary">Primary</ui-lib-button>
-              <ui-lib-button severity="secondary">Secondary</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Icons</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button icon="arrow-left">Back</ui-lib-button>
-              <ui-lib-button icon="arrow-right" iconPosition="right">Next</ui-lib-button>
-              <ui-lib-button icon="user" iconPosition="top">Profile</ui-lib-button>
-              <ui-lib-button
-                icon="more-horizontal"
-                [iconOnly]="true"
-                aria-label="More"
-              ></ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Loading</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button [loading]="true">Saving</ui-lib-button>
-              <ui-lib-button [loading]="true" severity="secondary">Loading</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Severities</h3>
-            <ui-lib-inline spacing="sm">
-              @for (s of severities; track s) {
-                <ui-lib-button [severity]="s">{{ s }}</ui-lib-button>
-              }
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Raised</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button [raised]="true">Primary</ui-lib-button>
-              <ui-lib-button [raised]="true" color="secondary">Secondary</ui-lib-button>
-              <ui-lib-button [raised]="true" color="success">Success</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Rounded</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button [rounded]="true">Primary</ui-lib-button>
-              <ui-lib-button [rounded]="true" severity="success">Success</ui-lib-button>
-              <ui-lib-button [rounded]="true" severity="danger">Danger</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Text</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button [text]="true">Text</ui-lib-button>
-              <ui-lib-button [text]="true" severity="secondary">Secondary</ui-lib-button>
-              <ui-lib-button [text]="true" severity="danger">Danger</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Outlined</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button [outlined]="true">Primary</ui-lib-button>
-              <ui-lib-button [outlined]="true" severity="help">Help</ui-lib-button>
-              <ui-lib-button [outlined]="true" severity="contrast">Contrast</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Link</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button [link]="true">Link</ui-lib-button>
-              <ui-lib-button [link]="true" severity="info">Info Link</ui-lib-button>
-              <ui-lib-button [link]="true" severity="contrast">Dark Link</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Badges</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button badge="5">Notifications</ui-lib-button>
-              <ui-lib-button badge="99+" badgeColor="danger">Messages</ui-lib-button>
-              <ui-lib-button badge="1" [iconOnly]="true" icon="mail"></ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Button Groups</h3>
-            <ui-lib-stack [gap]="2">
-              <ui-lib-button-group>
-                <ui-lib-button>Save</ui-lib-button>
-                <ui-lib-button severity="danger">Delete</ui-lib-button>
-                <ui-lib-button [text]="true">Cancel</ui-lib-button>
-              </ui-lib-button-group>
-              <ui-lib-button-group [vertical]="true">
-                <ui-lib-button>Top</ui-lib-button>
-                <ui-lib-button>Middle</ui-lib-button>
-                <ui-lib-button>Bottom</ui-lib-button>
-              </ui-lib-button-group>
-            </ui-lib-stack>
-          </section>
-
-          <section>
-            <h3>Sizes</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button size="small">Small</ui-lib-button>
-              <ui-lib-button size="medium">Medium</ui-lib-button>
-              <ui-lib-button size="large">Large</ui-lib-button>
-            </ui-lib-inline>
-          </section>
-
-          <section>
-            <h3>Combinations</h3>
-            <ui-lib-inline spacing="sm">
-              <ui-lib-button [raised]="true" [rounded]="true" severity="primary"
-                >Raised Pill</ui-lib-button
-              >
-              <ui-lib-button [text]="true" [rounded]="true">Text Pill</ui-lib-button>
-              <ui-lib-button [outlined]="true" [rounded]="true" severity="danger"
-                >Outline Pill</ui-lib-button
-              >
-            </ui-lib-inline>
-          </section>
-        </ui-lib-stack>
-      </div>
-    </ui-lib-card>
-  }
-
-  @if (activeTab() === 'accessibility') {
-    <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
-      <div card-header>Accessibility</div>
-      <ul class="doc-list">
-        <li>Keyboard: Tab to focus, Enter/Space activate the button.</li>
-        <li>Use <code>aria-label</code> for icon-only buttons.</li>
-        <li>Set <code>disabled</code> to prevent focus and interaction.</li>
-        <li>When loading, consider <code>aria-busy="true"</code> for screen readers.</li>
-      </ul>
-    </ui-lib-card>
-  }
-</app-doc-page-layout>
+        </ul>
+      }
+    </div>
+  </section>
+</div>

@@ -36,6 +36,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Drawer` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Divider` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Toolbar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
 - `Terminal` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
@@ -953,6 +954,37 @@ Verification:
   ng build ui-lib-custom — ui-lib-custom/divider Built, zero errors/warnings,
   npx jest "divider.spec.ts" --no-coverage (19/19 PASS),
   npx jest "entry-points.spec.ts" --no-coverage (81/81 PASS, divider test included).
+Terminal notes: No issues. All commands ran cleanly in PowerShell.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
+
+---
+
+Date: 2026-05-08
+Changed:
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.types.ts (new — ToolbarVariant, ToolbarSize)
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.ts (new — Toolbar component, signal inputs, ViewEncapsulation.None + OnPush + standalone)
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.html (new — template with start/center/end ng-content slots)
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.scss (new — flex layout, size modifiers sm/md/lg, variant styles, dark-mode)
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.spec.ts (new — 16 unit tests)
+  - projects/ui-lib-custom/src/lib/toolbar/index.ts (new — barrel)
+  - projects/ui-lib-custom/src/lib/toolbar/README.md (new — API contract)
+  - projects/ui-lib-custom/toolbar/ng-package.json (new — secondary entry point)
+  - projects/ui-lib-custom/toolbar/package.json (new — secondary entry point)
+  - projects/ui-lib-custom/package.json (toolbar added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (toolbar import test added)
+  - projects/demo/src/app/pages/toolbar/toolbar-demo.component.ts (full demo replacing placeholder)
+  - projects/demo/src/app/pages/toolbar/toolbar-demo.component.html (full demo — hero + 6 sections + playground + API table)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Toolbar component fully complete. PrimeNG-inspired horizontal toolbar with three content projection
+  slots (uiToolbarStart, uiToolbarCenter, uiToolbarEnd). Start and end groups flex:1, center stays
+  geometrically centered. Three size tokens (sm/md/lg), three design variants (material/bootstrap/minimal),
+  dark mode adjustments, role="toolbar" + optional aria-label. Secondary entry point wired. 16/16 tests pass,
+  94/94 entry-points pass, library builds zero warnings.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/toolbar/ projects/demo/src/app/pages/toolbar/ --max-warnings 0 (CLEAN),
+  ng build ui-lib-custom — ui-lib-custom/toolbar Built, zero errors/warnings,
+  npx jest --testPathPatterns=toolbar --no-coverage (16/16 PASS),
+  npx jest --testPathPatterns=entry-points.spec.ts --no-coverage (94/94 PASS, toolbar test included).
 Terminal notes: No issues. All commands ran cleanly in PowerShell.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 

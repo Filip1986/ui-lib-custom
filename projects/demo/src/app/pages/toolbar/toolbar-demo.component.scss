@@ -1,0 +1,215 @@
+// ── Page container ────────────────────────────────────────────────────────────
+.demo-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  font-family: var(--uilib-font-body, sans-serif);
+  color: var(--uilib-color-text, #374151);
+}
+
+// ── Hero ─────────────────────────────────────────────────────────────────────
+.demo-hero {
+  margin-bottom: 3rem;
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--uilib-page-fg, #111827);
+    margin: 0 0 0.5rem;
+  }
+
+  &__desc {
+    font-size: 1rem;
+    color: var(--uilib-surface-600, #4b5563);
+    margin: 0 0 1.25rem;
+    line-height: 1.6;
+
+    code {
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.875em;
+      background: var(--uilib-surface-100, #f3f4f6);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      color: var(--uilib-color-primary, #6366f1);
+    }
+  }
+
+  &__preview {
+    background: var(--uilib-surface-50, #f9fafb);
+    border: 1px solid var(--uilib-surface-200, #e5e7eb);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+.demo-section {
+  margin-bottom: 3rem;
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.375rem;
+    color: var(--uilib-page-fg, #111827);
+  }
+
+  &__desc {
+    font-size: 0.9375rem;
+    color: var(--uilib-surface-600, #4b5563);
+    margin: 0 0 1rem;
+    line-height: 1.6;
+
+    code {
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.875em;
+      background: var(--uilib-surface-100, #f3f4f6);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      color: var(--uilib-color-primary, #6366f1);
+    }
+  }
+}
+
+// ── Variant group (per-variant label + example) ───────────────────────────────
+.demo-variant-group {
+  margin-bottom: 1.5rem;
+
+  &__label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-family: var(--uilib-font-mono, monospace);
+    color: var(--uilib-surface-500, #6b7280);
+    margin: 0 0 0.5rem;
+    text-transform: capitalize;
+  }
+}
+
+// ── Toolbar title helper used inside toolbar slots ────────────────────────────
+.demo-toolbar-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--uilib-color-text, #374151);
+}
+
+// ── Small action buttons used inside toolbar slots ────────────────────────────
+.demo-btn {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--uilib-surface-300, #d1d5db);
+  border-radius: 6px;
+  background: var(--uilib-surface-0, #ffffff);
+  color: var(--uilib-color-text, #374151);
+  font-size: 0.8125rem;
+  font-family: var(--uilib-font-ui, inherit);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+
+  &:hover {
+    border-color: var(--uilib-color-primary, #6366f1);
+    color: var(--uilib-color-primary, #6366f1);
+  }
+
+  &--active {
+    background: var(--uilib-color-primary, #6366f1);
+    border-color: var(--uilib-color-primary, #6366f1);
+    color: #ffffff;
+
+    &:hover {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      color: #ffffff;
+    }
+  }
+}
+
+// ── Playground layout ─────────────────────────────────────────────────────────
+.demo-playground {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--uilib-surface-50, #f9fafb);
+    border: 1px solid var(--uilib-surface-200, #e5e7eb);
+    border-radius: 8px;
+    order: -1; // controls left, preview right on desktop
+
+    @media (min-width: 641px) {
+      order: 0;
+    }
+  }
+
+  &__preview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.demo-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--uilib-color-text, #374151);
+
+  &__label {
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--uilib-surface-600, #4b5563);
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+}
+
+// ── API table ─────────────────────────────────────────────────────────────────
+.demo-api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+
+  th {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    background: var(--uilib-surface-100, #f3f4f6);
+    border-bottom: 2px solid var(--uilib-surface-200, #e5e7eb);
+    font-weight: 600;
+    color: var(--uilib-color-text, #374151);
+  }
+
+  td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--uilib-surface-100, #f3f4f6);
+    color: var(--uilib-surface-700, #374151);
+    vertical-align: top;
+
+    code {
+      font-family: var(--uilib-font-mono, monospace);
+      font-size: 0.8125em;
+      background: var(--uilib-surface-100, #f3f4f6);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}

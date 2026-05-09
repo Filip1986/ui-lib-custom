@@ -1,0 +1,254 @@
+<section class="demo-page" data-testid="toolbar-demo">
+
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">Toolbar</h1>
+    <p class="demo-hero__desc">
+      A horizontal container with start, center, and end content projection slots.
+      Use the <code>uiToolbarStart</code>, <code>uiToolbarCenter</code>, and
+      <code>uiToolbarEnd</code> attribute selectors to place content in the corresponding slot.
+    </p>
+    <div class="demo-hero__preview">
+      <ui-lib-toolbar>
+        <div uiToolbarStart>
+          <button class="demo-btn" type="button">← Back</button>
+          <button class="demo-btn" type="button">⊞ Grid</button>
+        </div>
+        <div uiToolbarCenter>
+          <strong>My Application</strong>
+        </div>
+        <div uiToolbarEnd>
+          <button class="demo-btn" type="button">🔔</button>
+          <button class="demo-btn" type="button">⚙ Settings</button>
+        </div>
+      </ui-lib-toolbar>
+    </div>
+  </div>
+
+  <!-- Section 1: Start Only -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Start Only</h2>
+    <p class="demo-section__desc">
+      Project content using the <code>uiToolbarStart</code> attribute selector.
+    </p>
+    <ui-lib-toolbar>
+      <div uiToolbarStart>
+        <button class="demo-btn" type="button">New</button>
+        <button class="demo-btn" type="button">Open</button>
+        <button class="demo-btn" type="button">Save</button>
+      </div>
+    </ui-lib-toolbar>
+  </div>
+
+  <!-- Section 2: Start and End -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Start and End</h2>
+    <p class="demo-section__desc">
+      Use both <code>uiToolbarStart</code> and <code>uiToolbarEnd</code> to place content on opposite sides.
+    </p>
+    <ui-lib-toolbar>
+      <div uiToolbarStart>
+        <button class="demo-btn" type="button">Cut</button>
+        <button class="demo-btn" type="button">Copy</button>
+        <button class="demo-btn" type="button">Paste</button>
+      </div>
+      <div uiToolbarEnd>
+        <button class="demo-btn" type="button">Undo</button>
+        <button class="demo-btn" type="button">Redo</button>
+      </div>
+    </ui-lib-toolbar>
+  </div>
+
+  <!-- Section 3: All Three Slots -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">All Three Slots</h2>
+    <p class="demo-section__desc">
+      Combine all three slots — start, center, and end — for a full toolbar layout.
+    </p>
+    <ui-lib-toolbar>
+      <div uiToolbarStart>
+        <button class="demo-btn" type="button">← Back</button>
+        <button class="demo-btn" type="button">→ Forward</button>
+      </div>
+      <div uiToolbarCenter>
+        <span>Page Title</span>
+      </div>
+      <div uiToolbarEnd>
+        <button class="demo-btn" type="button">Share</button>
+        <button class="demo-btn" type="button">Print</button>
+      </div>
+    </ui-lib-toolbar>
+  </div>
+
+  <!-- Section 4: Sizes -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__desc">
+      Use the <code>size</code> input to control toolbar height and spacing:
+      <code>sm</code>, <code>md</code> (default), or <code>lg</code>.
+    </p>
+    @for (size of sizes; track size) {
+      <div style="margin-bottom: 1rem">
+        <p class="demo-section__desc" style="margin-bottom: 0.25rem"><code>size="{{ size }}"</code></p>
+        <ui-lib-toolbar [size]="size">
+          <div uiToolbarStart>
+            <button class="demo-btn" type="button">Action</button>
+            <button class="demo-btn" type="button">Another</button>
+          </div>
+          <div uiToolbarEnd>
+            <span>{{ size }}</span>
+          </div>
+        </ui-lib-toolbar>
+      </div>
+    }
+  </div>
+
+  <!-- Section 5: Design Variants -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__desc">
+      Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
+    </p>
+    @for (variant of variants; track variant) {
+      <div class="demo-variant-group">
+        <h3 class="demo-variant-group__label">{{ variant }}</h3>
+        <ui-lib-toolbar [variant]="variant">
+          <div uiToolbarStart>
+            <button class="demo-btn" type="button">Start Action</button>
+          </div>
+          <div uiToolbarCenter>
+            <span>{{ variant }}</span>
+          </div>
+          <div uiToolbarEnd>
+            <button class="demo-btn" type="button">End Action</button>
+          </div>
+        </ui-lib-toolbar>
+      </div>
+    }
+  </div>
+
+  <!-- Section 6: Interactive Playground -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Playground</h2>
+    <p class="demo-section__desc">Customise the toolbar using the controls below.</p>
+
+    <div class="demo-playground">
+      <div class="demo-playground__preview">
+        <ui-lib-toolbar [variant]="playgroundVariant()" [size]="playgroundSize()">
+          <div uiToolbarStart>
+            <button class="demo-btn" type="button">← Back</button>
+            <button class="demo-btn" type="button">⊞</button>
+          </div>
+          <div uiToolbarCenter>
+            <strong>{{ playgroundVariant() }} / {{ playgroundSize() }}</strong>
+          </div>
+          <div uiToolbarEnd>
+            <button class="demo-btn" type="button">Share</button>
+            <button class="demo-btn" type="button">⚙</button>
+          </div>
+        </ui-lib-toolbar>
+      </div>
+
+      <div class="demo-playground__controls">
+        <!-- Variant -->
+        <div class="demo-control">
+          <span class="demo-control__label">Variant</span>
+          <div class="demo-control__buttons">
+            @for (variant of variants; track variant) {
+              <button
+                type="button"
+                class="demo-btn"
+                [class.demo-btn--active]="playgroundVariant() === variant"
+                (click)="setVariant(variant)"
+              >{{ variant }}</button>
+            }
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div class="demo-control">
+          <span class="demo-control__label">Size</span>
+          <div class="demo-control__buttons">
+            @for (size of sizes; track size) {
+              <button
+                type="button"
+                class="demo-btn"
+                [class.demo-btn--active]="playgroundSize() === size"
+                (click)="setSize(size)"
+              >{{ size }}</button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Table -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">API</h2>
+
+    <h3 style="margin-bottom: 0.5rem">Inputs</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant; inherits from ThemeConfigService when null.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Controls toolbar height and padding.</td>
+        </tr>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Accessible label; recommended when multiple toolbars are on one page.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Additional CSS classes added to the host element.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem">Content Projection Slots</h3>
+    <table class="demo-api-table">
+      <thead>
+        <tr>
+          <th>Selector</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>[uiToolbarStart]</code></td>
+          <td>Content projected into the leading (left) group.</td>
+        </tr>
+        <tr>
+          <td><code>[uiToolbarCenter]</code></td>
+          <td>Content projected into the centered group.</td>
+        </tr>
+        <tr>
+          <td><code>[uiToolbarEnd]</code></td>
+          <td>Content projected into the trailing (right) group.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
