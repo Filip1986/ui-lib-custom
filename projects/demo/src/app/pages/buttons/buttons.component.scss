@@ -114,6 +114,14 @@
   align-items: flex-start;
 }
 
+// ── Tactile Style ─────────────────────────────────────────────────────────────
+
+.buttons-demo__tactile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
 // ── Accessibility ─────────────────────────────────────────────────────────────
 
 .buttons-demo__a11y-title {

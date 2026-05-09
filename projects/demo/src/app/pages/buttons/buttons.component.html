@@ -247,7 +247,30 @@
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 12: Accessibility ──────────────────────────────────────── -->
+  <!-- ── Section 12: Tactile Style ───────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
+      <span card-header>Tactile Style</span>
+      <span card-subtitle>
+        Use <code>appearance="tactile"</code> for glossy 3D buttons with gradient fills, inset
+        highlights, and a press-down active state. Combine with any <code>severity</code> to pick
+        the colour palette.
+      </span>
+
+      <div class="buttons-demo__tactile-grid">
+        <ui-lib-button appearance="tactile" severity="warning" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile warning clicked')">Search</ui-lib-button>
+        <ui-lib-button appearance="tactile" severity="primary" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile primary clicked')">Search</ui-lib-button>
+        <ui-lib-button appearance="tactile" severity="success" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile success clicked')">Search</ui-lib-button>
+        <ui-lib-button appearance="tactile" severity="danger"  icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile danger clicked')">Search</ui-lib-button>
+        <ui-lib-button appearance="tactile" severity="contrast" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile contrast clicked')">Search</ui-lib-button>
+        <ui-lib-button appearance="tactile" severity="info"    icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile info clicked')">Search</ui-lib-button>
+        <ui-lib-button appearance="tactile" severity="help"    icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile help clicked')">Search</ui-lib-button>
+        <ui-lib-button appearance="tactile" severity="secondary" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile secondary clicked')">Search</ui-lib-button>
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Section 13: Accessibility ──────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <h2 class="buttons-demo__a11y-title">Accessibility</h2>
     <p class="buttons-demo__a11y-desc">

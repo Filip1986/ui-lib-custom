@@ -11,7 +11,7 @@
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
-| `appearance` | `'solid' \| 'outline' \| 'ghost'` | `'solid'` | Overridden by `text` (→ ghost) and `outlined` (→ outline) |
+| `appearance` | `'solid' \| 'outline' \| 'ghost' \| 'tactile'` | `'solid'` | Overridden by `text` (→ ghost) and `outlined` (→ outline). `tactile` renders a glossy 3D button with gradient fill, inset highlight, lift-on-hover, and press-down active state; colour is controlled by `severity` |
 | `size` | `'sm' \| 'md' \| 'lg' \| 'small' \| 'medium' \| 'large'` | `'md'` | Short and long aliases accepted |
 | `color` | `ButtonSeverity` | `'primary'` | Alias for `severity`; `severity` takes precedence when both are set |
 | `severity` | `ButtonSeverity \| null` | `null` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'warning' \| 'help' \| 'danger' \| 'contrast'` |
@@ -59,4 +59,9 @@ _none_
 >
   Save
 </ui-lib-button>
+
+<!-- tactile (glossy 3D) appearance - severity drives the gradient colour -->
+<ui-lib-button appearance="tactile" severity="primary" icon="search">Search</ui-lib-button>
+<ui-lib-button appearance="tactile" severity="success" icon="check">Confirm</ui-lib-button>
+<ui-lib-button appearance="tactile" severity="danger"  icon="trash">Delete</ui-lib-button>
 ```

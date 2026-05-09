@@ -22,7 +22,7 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { SHARED_DEFAULTS, SHARED_SIZES } from 'ui-lib-custom/core';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
-export type ButtonAppearance = 'solid' | 'outline' | 'ghost';
+export type ButtonAppearance = 'solid' | 'outline' | 'ghost' | 'tactile';
 export type ButtonSeverity =
   | 'primary'
   | 'secondary'

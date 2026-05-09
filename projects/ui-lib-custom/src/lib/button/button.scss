@@ -101,6 +101,14 @@ ui-lib-button {
     var(--uilib-button-danger-fg, var(--uilib-color-neutral-50))
   );
 
+  /* Tactile appearance token defaults */
+  --uilib-button-tactile-from: #4aa6ff;
+  --uilib-button-tactile-to: #278eff;
+  --uilib-button-tactile-border: #1a77d9;
+  --uilib-button-tactile-fg: #fff;
+  --uilib-button-tactile-radius: 1.25rem;
+  --uilib-button-tactile-border-width: 2.5px;
+
   --uilib-button-padding-x-small: calc(
     var(--uilib-button-padding-x-small-base, 1rem) * var(--uilib-density, 1)
   );
@@ -230,6 +238,109 @@ ui-lib-button .ui-lib-button {
     background-color: transparent;
     color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
     border-color: transparent;
+  }
+
+  &--appearance-tactile {
+    background: linear-gradient(
+      to bottom,
+      var(--uilib-button-tactile-from),
+      var(--uilib-button-tactile-to)
+    );
+    border-color: var(--uilib-button-tactile-border);
+    border-width: var(--uilib-button-tactile-border-width);
+    color: var(--uilib-button-tactile-fg);
+    border-radius: var(--uilib-button-tactile-radius);
+    letter-spacing: -0.01em;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      inset 0 3px 1px rgba(255, 255, 255, 0.35),
+      inset 0 -3px 2px rgba(0, 0, 0, 0.08),
+      0 10px 25px -5px rgba(0, 0, 0, 0.1);
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background: linear-gradient(
+        to bottom,
+        var(--uilib-button-tactile-from),
+        var(--uilib-button-tactile-to)
+      );
+      color: var(--uilib-button-tactile-fg);
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+      box-shadow:
+        inset 0 3px 1px rgba(255, 255, 255, 0.4),
+        inset 0 -3px 2px rgba(0, 0, 0, 0.08),
+        0 15px 30px -8px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      background: linear-gradient(
+        to bottom,
+        var(--uilib-button-tactile-from),
+        var(--uilib-button-tactile-to)
+      );
+      transform: translateY(1px);
+      filter: brightness(0.95);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.2),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Per-severity gradient colour tokens */
+    &.ui-lib-button--primary {
+      --uilib-button-tactile-from: #4aa6ff;
+      --uilib-button-tactile-to: #278eff;
+      --uilib-button-tactile-border: #1a77d9;
+      --uilib-button-tactile-fg: #fff;
+    }
+
+    &.ui-lib-button--secondary {
+      --uilib-button-tactile-from: #525969;
+      --uilib-button-tactile-to: #3e434f;
+      --uilib-button-tactile-border: #2d313a;
+      --uilib-button-tactile-fg: #fff;
+    }
+
+    &.ui-lib-button--success {
+      --uilib-button-tactile-from: #66d68c;
+      --uilib-button-tactile-to: #45c671;
+      --uilib-button-tactile-border: #2da861;
+      --uilib-button-tactile-fg: #fff;
+    }
+
+    &.ui-lib-button--danger {
+      --uilib-button-tactile-from: #f57d74;
+      --uilib-button-tactile-to: #f05e53;
+      --uilib-button-tactile-border: #d14940;
+      --uilib-button-tactile-fg: #fff;
+    }
+
+    &.ui-lib-button--warning {
+      --uilib-button-tactile-from: #ffa05e;
+      --uilib-button-tactile-to: #ff853d;
+      --uilib-button-tactile-border: #e87428;
+      --uilib-button-tactile-fg: #fff;
+    }
+
+    &.ui-lib-button--info {
+      --uilib-button-tactile-from: #42c9e5;
+      --uilib-button-tactile-to: #17b5d4;
+      --uilib-button-tactile-border: #159bb7;
+      --uilib-button-tactile-fg: #fff;
+    }
+
+    &.ui-lib-button--help {
+      --uilib-button-tactile-from: #bd88ff;
+      --uilib-button-tactile-to: #a665fe;
+      --uilib-button-tactile-border: #8c4ee6;
+      --uilib-button-tactile-fg: #fff;
+    }
+
+    &.ui-lib-button--contrast {
+      --uilib-button-tactile-from: #ffe079;
+      --uilib-button-tactile-to: #ffcf49;
+      --uilib-button-tactile-border: #e0b840;
+      --uilib-button-tactile-fg: #3c414d;
+    }
   }
 
   &--text {
