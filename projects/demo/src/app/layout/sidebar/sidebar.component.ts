@@ -581,7 +581,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/dynamic-dialog',
           group: 'Overlay',
-          badge: 'TODO',
         },
         {
           label: 'Upload',

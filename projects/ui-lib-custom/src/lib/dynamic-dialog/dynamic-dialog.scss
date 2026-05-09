@@ -1,0 +1,200 @@
+// DynamicDialog — shell container rendered by DialogService.open().
+// The host sits fixed over the full viewport; the panel floats above a backdrop.
+
+.ui-lib-dynamic-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: var(--uilib-z-overlay, 1100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  // All direct children receive pointer events so the invisible host doesn't block clicks.
+  > * {
+    pointer-events: auto;
+  }
+
+  // ---- Position variants ----
+  &--top {
+    align-items: flex-start;
+    padding-top: var(--uilib-dynamic-dialog-offset, 2rem);
+  }
+
+  &--bottom {
+    align-items: flex-end;
+    padding-bottom: var(--uilib-dynamic-dialog-offset, 2rem);
+  }
+
+  &--left {
+    justify-content: flex-start;
+    padding-left: var(--uilib-dynamic-dialog-offset, 2rem);
+  }
+
+  &--right {
+    justify-content: flex-end;
+    padding-right: var(--uilib-dynamic-dialog-offset, 2rem);
+  }
+
+  // ---- Backdrop ----
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--uilib-dynamic-dialog-backdrop-bg, rgba(0, 0, 0, 0.4));
+    z-index: 0;
+    animation: uilib-dynamic-dialog-fade-in var(--uilib-transition-base, 0.2s) ease;
+  }
+
+  // ---- Panel ----
+  &__panel {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--uilib-dynamic-dialog-bg, var(--uilib-surface, #fff));
+    border-radius: var(--uilib-dynamic-dialog-radius, var(--uilib-radius-lg, 12px));
+    box-shadow: var(
+      --uilib-dynamic-dialog-shadow,
+      var(--uilib-shadow-xl, 0 20px 60px rgba(0, 0, 0, 0.25), 0 8px 20px rgba(0, 0, 0, 0.15))
+    );
+    min-width: var(--uilib-dynamic-dialog-min-width, 300px);
+    max-width: var(--uilib-dynamic-dialog-max-width, 90vw);
+    max-height: var(--uilib-dynamic-dialog-max-height, 90vh);
+    animation: uilib-dynamic-dialog-enter var(--uilib-transition-base, 0.2s)
+      cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+
+    // ---- Variants ----
+    &.ui-lib-dynamic-dialog--variant-material {
+      border-radius: var(--uilib-dynamic-dialog-radius-material, 12px);
+      box-shadow:
+        0 11px 15px -7px rgba(0, 0, 0, 0.2),
+        0 24px 38px 3px rgba(0, 0, 0, 0.14),
+        0 9px 46px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    &.ui-lib-dynamic-dialog--variant-bootstrap {
+      border-radius: var(--uilib-dynamic-dialog-radius-bootstrap, 4px);
+      border: 1px solid var(--uilib-surface-border, #dee2e6);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    &.ui-lib-dynamic-dialog--variant-minimal {
+      border-radius: var(--uilib-dynamic-dialog-radius-minimal, 8px);
+      border: 1px solid var(--uilib-surface-border, #e9ecef);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  // ---- Header ----
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: var(--uilib-dynamic-dialog-header-padding, 1.25rem 1.5rem 1rem);
+    border-bottom: 1px solid
+      var(--uilib-dynamic-dialog-header-border, var(--uilib-surface-border, #e9ecef));
+    flex-shrink: 0;
+  }
+
+  &__title {
+    flex: 1;
+    font-weight: 600;
+    font-size: var(--uilib-dynamic-dialog-title-size, 1.125rem);
+    color: var(--uilib-dynamic-dialog-title-color, var(--uilib-page-fg, #212121));
+    line-height: 1.3;
+  }
+
+  &__close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--uilib-dynamic-dialog-close-color, var(--uilib-page-fg-muted, #6c757d));
+    transition:
+      background-color var(--uilib-transition-base, 0.2s) ease,
+      color var(--uilib-transition-base, 0.2s) ease;
+
+    &:hover {
+      background: var(--uilib-dynamic-dialog-close-hover-bg, rgba(0, 0, 0, 0.06));
+      color: var(--uilib-page-fg, #212121);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-color-primary, #6366f1);
+      outline-offset: 2px;
+    }
+  }
+
+  &__close-icon {
+    display: block;
+    pointer-events: none;
+  }
+
+  // ---- Content area ----
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--uilib-dynamic-dialog-content-padding, 1.5rem);
+  }
+}
+
+// ---- Animations ----
+@keyframes uilib-dynamic-dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes uilib-dynamic-dialog-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// ---- Dark mode ----
+[data-theme='dark'] {
+  .ui-lib-dynamic-dialog__panel {
+    background: var(--uilib-dynamic-dialog-bg-dark, var(--uilib-surface, #1e1e2e));
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.6),
+      0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .ui-lib-dynamic-dialog__header {
+    border-bottom-color: var(--uilib-surface-border, rgba(255, 255, 255, 0.1));
+  }
+
+  .ui-lib-dynamic-dialog__close-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// ---- Reduced motion ----
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-dynamic-dialog__panel {
+    animation: none;
+  }
+
+  .ui-lib-dynamic-dialog__backdrop {
+    animation: none;
+  }
+}
