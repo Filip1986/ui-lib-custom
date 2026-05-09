@@ -352,6 +352,10 @@
     "./scroll-panel": {
       "esm2022": "./esm2022/scroll-panel/index.mjs",
       "esm": "./esm2022/scroll-panel/index.mjs"
+    },
+    "./dynamic-dialog": {
+      "esm2022": "./esm2022/dynamic-dialog/index.mjs",
+      "esm": "./esm2022/dynamic-dialog/index.mjs"
     }
   },
   "typesVersions": {
@@ -583,6 +587,9 @@
       ],
       "scroll-panel": [
         "./scroll-panel/index.d.ts"
+      ],
+      "dynamic-dialog": [
+        "./dynamic-dialog/index.d.ts"
       ],
       "toolbar": [
         "./toolbar/index.d.ts"
