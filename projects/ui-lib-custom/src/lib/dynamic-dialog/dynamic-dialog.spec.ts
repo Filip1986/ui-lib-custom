@@ -4,11 +4,10 @@ import {
   provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import type { DebugElement, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import type { DebugElement } from '@angular/platform-browser';
 import { DynamicDialog } from './dynamic-dialog';
 import { DynamicDialogRef } from './dynamic-dialog-ref';
 import { DialogService } from './dynamic-dialog.service';
