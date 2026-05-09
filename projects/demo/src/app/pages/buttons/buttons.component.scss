@@ -137,6 +137,116 @@
   align-items: flex-start;
 }
 
+// ── Accessibility ─────────────────────────────────────────────────────────────
+
+.buttons-demo__a11y-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+.buttons-demo__a11y-card {
+  background: var(--uilib-surface-color-alt, #f9fafb);
+  border: 1px solid var(--uilib-border-color, #e5e7eb);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.buttons-demo__a11y-card-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--uilib-text-color, #111827);
+}
+
+.buttons-demo__a11y-list {
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--uilib-text-color-secondary, #374151);
+  line-height: 1.6;
+
+  code {
+    font-family: var(--uilib-font-mono, monospace);
+    font-size: 0.8125rem;
+    background: var(--uilib-surface-color, #fff);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    color: var(--uilib-text-color, #374151);
+    border: 1px solid var(--uilib-border-color, #e5e7eb);
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--uilib-text-color, #111827);
+  }
+}
+
+.buttons-demo__kbd {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  font-family: var(--uilib-font-mono, monospace);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--uilib-text-color, #374151);
+  background: var(--uilib-surface-color, #fff);
+  border: 1px solid var(--uilib-border-color, #d1d5db);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.buttons-demo__a11y-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.buttons-demo__a11y-demo-label {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--uilib-text-color-secondary, #6b7280);
+  line-height: 1.6;
+
+  code {
+    font-family: var(--uilib-font-mono, monospace);
+    font-size: 0.8125rem;
+    background: var(--uilib-surface-color-alt, #f3f4f6);
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    color: var(--uilib-text-color, #374151);
+  }
+}
+
+// ── API Reference ─────────────────────────────────────────────────────────────
+
+.buttons-demo__table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.buttons-demo__api-code {
+  font-family: var(--uilib-font-mono, monospace);
+  font-size: 0.8125rem;
+  background: var(--uilib-surface-color-alt, #f3f4f6);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  color: var(--uilib-text-color, #374151);
+  white-space: pre-wrap;
+  word-break: break-word;
+
+  &--name {
+    font-weight: 600;
+    color: var(--uilib-primary-color, #3b82f6);
+  }
+}
+
 // ── Event log ─────────────────────────────────────────────────────────────────
 
 .buttons-demo__log-panel {

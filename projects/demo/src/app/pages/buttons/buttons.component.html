@@ -211,6 +211,174 @@
     </ui-lib-button>
   </section>
 
+  <!-- ── Section 12: Accessibility ──────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">Accessibility</h2>
+    <p class="buttons-demo__section-desc">
+      <code>ui-lib-button</code> renders a native <code>&lt;button&gt;</code> element and inherits full
+      keyboard and screen-reader support by default.
+    </p>
+
+    <div class="buttons-demo__a11y-grid">
+
+      <!-- Keyboard navigation card -->
+      <div class="buttons-demo__a11y-card">
+        <h3 class="buttons-demo__a11y-card-title">Keyboard navigation</h3>
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            <kbd class="buttons-demo__kbd">Tab</kbd> /
+            <kbd class="buttons-demo__kbd">Shift + Tab</kbd>
+            — moves focus to / from the button.
+          </li>
+          <li>
+            <kbd class="buttons-demo__kbd">Space</kbd> /
+            <kbd class="buttons-demo__kbd">Enter</kbd>
+            — activates the button (native browser behaviour).
+          </li>
+          <li>
+            Disabled buttons (<code>[disabled]="true"</code>) are excluded from the tab order automatically.
+          </li>
+          <li>
+            Use <code>tabIndex</code> to adjust the order or remove a button from the sequence
+            (<code>[tabIndex]="-1"</code>).
+          </li>
+        </ul>
+      </div>
+
+      <!-- ARIA attributes card -->
+      <div class="buttons-demo__a11y-card">
+        <h3 class="buttons-demo__a11y-card-title">ARIA attributes</h3>
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            <strong>Icon-only buttons</strong> must provide <code>ariaLabel</code> — without visible text
+            there is no accessible name for screen readers.
+          </li>
+          <li>
+            <code>ariaPressed</code> — set to <code>true</code> / <code>false</code> on toggle buttons to
+            communicate pressed state (<code>role="button"</code> + <code>aria-pressed</code>).
+          </li>
+          <li>
+            <code>ariaChecked</code> — use with <code>role="checkbox"</code> or <code>role="radio"</code>
+            when the button represents a checkable item.
+          </li>
+          <li>
+            <code>role</code> — override the implicit ARIA role when using the button element in a
+            specialised context (e.g., <code>role="menuitem"</code>).
+          </li>
+        </ul>
+      </div>
+
+      <!-- Colour and contrast card -->
+      <div class="buttons-demo__a11y-card">
+        <h3 class="buttons-demo__a11y-card-title">Colour &amp; contrast</h3>
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            All built-in severity colours are tested to meet <strong>WCAG 2.1 AA</strong> contrast
+            requirements (4.5 : 1 for text, 3 : 1 for large text / UI components).
+          </li>
+          <li>
+            The <code>ghost</code> appearance may render below 3 : 1 on some custom backgrounds — test
+            with your palette before shipping.
+          </li>
+          <li>
+            Never rely on colour alone to convey meaning: pair colour with an icon and/or visible text.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Loading state card -->
+      <div class="buttons-demo__a11y-card">
+        <h3 class="buttons-demo__a11y-card-title">Loading state</h3>
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            When <code>[loading]="true"</code>, the button is automatically disabled so it cannot be
+            re-activated, and the spinner is hidden from screen readers (<code>aria-hidden="true"</code>).
+          </li>
+          <li>
+            Pair the loading button with a live region (<code>aria-live="polite"</code>) in your template
+            to announce progress or completion to assistive technology.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Live demo: icon-only with ariaLabel -->
+    <div class="buttons-demo__a11y-demo">
+      <p class="buttons-demo__a11y-demo-label">
+        Icon-only with <code>ariaLabel</code> — inspect the DOM or use a screen reader to verify:
+      </p>
+      <div class="buttons-demo__row">
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="trash"
+          [iconOnly]="true"
+          severity="danger"
+          ariaLabel="Delete item"
+          (click)="logEvent('Delete item (icon-only) clicked')"
+        ></ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="edit"
+          [iconOnly]="true"
+          severity="info"
+          ariaLabel="Edit item"
+          (click)="logEvent('Edit item (icon-only) clicked')"
+        ></ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="save"
+          [iconOnly]="true"
+          severity="success"
+          ariaLabel="Save item"
+          (click)="logEvent('Save item (icon-only) clicked')"
+        ></ui-lib-button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section 13: API Reference ────────────────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <h2 class="buttons-demo__section-title">API Reference</h2>
+    <p class="buttons-demo__section-desc">
+      All inputs accepted by <code>ui-lib-button</code>. Import from
+      <code>ui-lib-custom/button</code>.
+    </p>
+
+    <div class="buttons-demo__table-wrap">
+      <ui-lib-table
+        [value]="apiRows"
+        [variant]="activeVariant()"
+        [stripedRows]="true"
+        [rowHover]="true"
+        ariaLabel="Button component API reference"
+      >
+        <!-- Input name column -->
+        <ui-lib-table-column field="name" header="Input" width="140px">
+          <ng-template uiTableColumnBody let-row>
+            <code class="buttons-demo__api-code buttons-demo__api-code--name">{{ row.name }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+
+        <!-- Type column -->
+        <ui-lib-table-column field="type" header="Type" width="280px">
+          <ng-template uiTableColumnBody let-row>
+            <code class="buttons-demo__api-code">{{ row.type }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+
+        <!-- Default column -->
+        <ui-lib-table-column field="default" header="Default" width="100px">
+          <ng-template uiTableColumnBody let-row>
+            <code class="buttons-demo__api-code">{{ row.default }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+
+        <!-- Description column -->
+        <ui-lib-table-column field="description" header="Description" />
+      </ui-lib-table>
+    </div>
+  </section>
+
   <!-- ── Event log ─────────────────────────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <h2 class="buttons-demo__section-title">Event Log</h2>
