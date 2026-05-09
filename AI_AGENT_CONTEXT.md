@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `DynamicDialog` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Stepper` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollPanel` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Panel` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -117,6 +118,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-09 [DynamicDialog component]
+Changed:
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.types.ts (new — DynamicDialogVariant/Position/Config/DYNAMIC_DIALOG_CONFIG token)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog-ref.ts (new — DynamicDialogRef class with onClose observable; close()/destroy())
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.service.ts (new — DialogService.open(); createComponent + ApplicationRef; cleanup on onClose)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.ts (new — DynamicDialog container; viewChild VCR; afterNextRender; focus trap; blockScroll)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.html (new — backdrop, panel, header, close button, ng-container#dynamicContent)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.scss (new — 5 positions, 3 variants, enter animation, dark mode, reduced motion)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.spec.ts (new — 30 tests across DynamicDialogRef/DynamicDialog/DialogService/reactive-input)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/index.ts (barrel)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/README.md (API docs)
+  - projects/ui-lib-custom/dynamic-dialog/ng-package.json (secondary entry point)
+  - projects/ui-lib-custom/dynamic-dialog/package.json (secondary entry point)
+  - projects/ui-lib-custom/package.json (dynamic-dialog added to exports + typesVersions)
+  - projects/ui-lib-custom/test/entry-points.spec.ts (dynamic-dialog import test added)
+  - projects/demo/src/app/pages/dynamic-dialog/dynamic-dialog-demo.component.ts (full demo — 3 guest components + 7 demo methods)
+  - projects/demo/src/app/pages/dynamic-dialog/dynamic-dialog-demo.component.html (hero + 8 sections + API tables)
+  - projects/demo/src/app/pages/dynamic-dialog/dynamic-dialog-demo.component.scss (full demo styles)
+  - projects/demo/src/app/layout/sidebar/sidebar.component.ts (removed badge:'TODO' from DynamicDialog)
+  - AI_AGENT_CONTEXT.md (updated)
+State: DynamicDialog component fully complete.
+  Architecture: DialogService.open(component, config) → createComponent(DynamicDialog) → document.body.appendChild.
+  Guest component injected via element-level Injector providing DynamicDialogRef + DYNAMIC_DIALOG_CONFIG.
+  Container uses viewChild.required('dynamicContent', {read:ViewContainerRef}) + afterNextRender to create guest + activate focus trap.
+  DynamicDialogRef: onClose observable (Subject); close(data?) emits+completes; _destroy() completes only.
+  Positions: center/top/bottom/left/right. Variants: material/bootstrap/minimal.
+  Features: blockScroll, dismissableMask (backdrop click), closable (× button), Escape key, custom width/height.
+  30 tests pass. 94 entry-point tests pass. ESLint 0 warnings. Build zero errors.
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/dynamic-dialog/ projects/demo/src/app/pages/dynamic-dialog/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — ui-lib-custom/dynamic-dialog Built, zero errors,
+  npx.cmd jest --testPathPatterns=dynamic-dialog --no-coverage (30/30 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (94/94 PASS).
+Terminal notes: fixture.nativeElement is typed as `any` by Angular — must cast to HTMLElement before calling
+  querySelector to avoid @typescript-eslint/no-unsafe-* errors. Added queryElement<T>() helper in spec.
+  jest.DoneCallback calls should use block-body arrow functions ({ done(); }) not expression-body to avoid
+  unsafe-return when done()'s return type is inferred as any.
+Next step: knip baseline + dead-code cleanup, or next component from queue.
 
 Date: 2026-05-08 [Stepper component]
 Changed:

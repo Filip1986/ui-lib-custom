@@ -1,5 +1,208 @@
-<section class="dynamic-dialog-demo" data-testid="dynamic-dialog-demo">
-  <h1>DynamicDialog</h1>
-  <p>Coming soon.</p>
-</section>
+<section class="dynamic-dialog-demo">
+  <!-- Hero -->
+  <div class="demo-hero">
+    <h1 class="demo-hero__title">DynamicDialog</h1>
+    <p class="demo-hero__lead">
+      Programmatically open <strong>any Angular component</strong> inside a configurable modal
+      shell. No template tag required — just inject <code>DialogService</code> and call
+      <code>open()</code>.
+    </p>
+  </div>
 
+  <!-- Basic Usage -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Basic Usage</h2>
+    <p class="demo-section__desc">
+      Call <code>dialogService.open(Component, config)</code> from any class that injects
+      <code>DialogService</code>.
+    </p>
+    <div class="demo-card">
+      <div class="demo-card__preview">
+        <button type="button" class="demo-btn demo-btn--primary" (click)="openSimple()">
+          Open Dialog
+        </button>
+      </div>
+      <pre class="demo-card__code"><code>const ref = this.dialogService.open(MyComponent, &#123;
+  header: 'Welcome',
+  width: '32rem',
+&#125;);</code></pre>
+    </div>
+  </div>
+
+  <!-- Passing Data -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Passing Data to the Guest Component</h2>
+    <p class="demo-section__desc">
+      Pass arbitrary data through <code>config.data</code>. The guest component reads it by
+      injecting <code>DYNAMIC_DIALOG_CONFIG</code>.
+    </p>
+    <div class="demo-card">
+      <div class="demo-card__preview demo-card__preview--col">
+        <button type="button" class="demo-btn demo-btn--primary" (click)="openWithData()">
+          Open with Data
+        </button>
+        @if (lastResult) {
+          <p class="demo-result">Result: <strong>{{ lastResult }}</strong></p>
+        }
+      </div>
+      <pre class="demo-card__code"><code>// Caller
+const ref = this.dialogService.open(DataDialogContentComponent, &#123;
+  header: 'User Details',
+  data: &#123; userId: 42, name: 'Filip Luca' &#125;,
+&#125;);
+ref.onClose.subscribe((result) =&gt; console.log(result));
+
+// Guest component
+config = inject(DYNAMIC_DIALOG_CONFIG);
+ref    = inject(DynamicDialogRef);
+
+this.userId = (this.config.data as any).userId;
+this.ref.close(&#123; confirmed: true &#125;);</code></pre>
+    </div>
+  </div>
+
+  <!-- Scrollable Content -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Fixed Height &amp; Scrollable Content</h2>
+    <p class="demo-section__desc">
+      Set <code>height</code> on the config to give the dialog a fixed viewport height. The
+      content area scrolls automatically.
+    </p>
+    <div class="demo-card">
+      <div class="demo-card__preview">
+        <button type="button" class="demo-btn demo-btn--primary" (click)="openScrollable()">
+          Open Scrollable
+        </button>
+      </div>
+      <pre class="demo-card__code"><code>this.dialogService.open(LongContentComponent, &#123;
+  header: 'Scrollable',
+  width: '38rem',
+  height: '50vh',
+&#125;);</code></pre>
+    </div>
+  </div>
+
+  <!-- Variants -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__desc">
+      Pass <code>variant</code> to override the inherited theme setting for a single dialog.
+    </p>
+    <div class="demo-card">
+      <div class="demo-card__preview demo-card__preview--row">
+        <button type="button" class="demo-btn demo-btn--primary" (click)="openWithVariant('material')">
+          Material
+        </button>
+        <button type="button" class="demo-btn demo-btn--secondary" (click)="openWithVariant('bootstrap')">
+          Bootstrap
+        </button>
+        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithVariant('minimal')">
+          Minimal
+        </button>
+      </div>
+      <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; variant: 'bootstrap' &#125;);</code></pre>
+    </div>
+  </div>
+
+  <!-- Positions -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Viewport Positions</h2>
+    <p class="demo-section__desc">
+      Use <code>position</code> to anchor the dialog to the center or any edge of the
+      viewport.
+    </p>
+    <div class="demo-card">
+      <div class="demo-card__preview demo-card__preview--grid">
+        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('top')">Top</button>
+        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('center')">Center</button>
+        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('bottom')">Bottom</button>
+        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('left')">Left</button>
+        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('right')">Right</button>
+      </div>
+      <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; position: 'top' &#125;);</code></pre>
+    </div>
+  </div>
+
+  <!-- Configuration options -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Configuration Options</h2>
+    <div class="demo-card">
+      <div class="demo-card__preview demo-card__preview--col">
+        <button type="button" class="demo-btn demo-btn--secondary" (click)="openDismissable()">
+          Dismissable Mask
+        </button>
+        <button type="button" class="demo-btn demo-btn--secondary" (click)="openNoHeader()">
+          No Header / No Close Button
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Reference -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">DynamicDialogConfig</h2>
+    <div class="demo-api-table-wrapper">
+      <table class="demo-api-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>header</code></td><td><code>string</code></td><td><code>''</code></td><td>Dialog title text</td></tr>
+          <tr><td><code>width</code></td><td><code>string</code></td><td>—</td><td>CSS width of the panel</td></tr>
+          <tr><td><code>height</code></td><td><code>string</code></td><td>—</td><td>CSS height of the panel</td></tr>
+          <tr><td><code>modal</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show semi-transparent backdrop</td></tr>
+          <tr><td><code>closable</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Show × close button in header</td></tr>
+          <tr><td><code>dismissableMask</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Click backdrop to close</td></tr>
+          <tr><td><code>blockScroll</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Lock body scroll while open</td></tr>
+          <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS class on host</td></tr>
+          <tr><td><code>data</code></td><td><code>unknown</code></td><td>—</td><td>Passed to guest via <code>DYNAMIC_DIALOG_CONFIG</code></td></tr>
+          <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td>inherited</td><td>Design variant override</td></tr>
+          <tr><td><code>position</code></td><td><code>'center' | 'top' | 'bottom' | 'left' | 'right'</code></td><td><code>'center'</code></td><td>Viewport anchor position</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h2 class="demo-section__title">DynamicDialogRef</h2>
+    <div class="demo-api-table-wrapper">
+      <table class="demo-api-table">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>onClose</code></td><td><code>Observable&lt;unknown&gt;</code></td><td>Emits once when dialog closes (with optional data)</td></tr>
+          <tr><td><code>close(data?)</code></td><td><code>void</code></td><td>Close the dialog and pass optional return data</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h2 class="demo-section__title">Injection Tokens</h2>
+    <div class="demo-api-table-wrapper">
+      <table class="demo-api-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>DYNAMIC_DIALOG_CONFIG</code></td><td><code>DynamicDialogConfig</code></td><td>Full config available to guest components via <code>inject()</code></td></tr>
+          <tr><td><code>DynamicDialogRef</code></td><td><code>DynamicDialogRef</code></td><td>Dialog handle available to guest components via <code>inject()</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
