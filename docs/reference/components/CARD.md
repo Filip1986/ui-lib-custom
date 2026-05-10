@@ -2,45 +2,26 @@
 
 ## Overview
 
-A flexible card container with optional header and footer slots, elevation levels, and variant styling. Designed for standalone use with OnPush change detection and CSS-variable theming.
+A flexible card container with optional header, subtitle, and footer slots, elevation levels, and variant styling. Supports per-card scoped theming via the `theme` input without any provider setup.
 
-**Import**
+**Selector:** `ui-lib-card`
+**Package:** `ui-lib-custom/card`
+
 ```typescript
 import { Card } from 'ui-lib-custom/card';
 ```
-
-**Location:** `projects/ui-lib-custom/src/lib/card/card.ts`
 
 ---
 
 ## Features
 
-- ✅ Signal-powered inputs for reactive updates.
-- 🎨 CSS variable theming with design-token fallbacks.
-- ♿ Accessible content structure via semantic projection.
-- 🧪 Unit-tested for slot projection and class application.
-- 🎛️ Variants: material, bootstrap, minimal.
-- 🧩 Header/footer slots, subtitle, icons, and close action.
-
----
-
-## Usage
-```typescript
-import { Card } from 'ui-lib-custom/card';
-
-@Component({
-  standalone: true,
-  imports: [Card],
-  template: `
-    <ui-lib-card>
-      <div card-header>Title</div>
-      Body content
-      <div card-footer>Actions</div>
-    </ui-lib-card>
-  `
-})
-export class Example {}
-```
+- Signal-powered inputs for reactive updates
+- CSS-variable theming with design-token fallbacks
+- Three visual variants: `material`, `bootstrap`, `minimal`
+- Elevation tokens: `none`, `low`, `medium`, `high`
+- Four content projection slots: header, rich subtitle, body, footer
+- Optional closable header with `closed` output
+- Per-card scoped theme via `theme` input (no provider required)
 
 ---
 
@@ -49,29 +30,32 @@ export class Example {}
 ### Inputs
 
 | Input | Type | Default | Description |
-| --- | --- | --- | --- |
-| `variant` | `CardVariant` | `'material'` | Visual style. |
-| `elevation` | `CardElevation` | `'medium'` | Shadow intensity. |
-| `bordered` | `boolean` | `false` | Adds a border. |
-| `hoverable` | `boolean` | `false` | Adds hover shadow and lift. |
-| `showHeader` | `boolean \| null` | `null` | Force header visibility (default shows if slot exists). |
-| `showFooter` | `boolean \| null` | `null` | Force footer visibility (default shows if slot exists). |
-| `shadow` | `string \| null` | `null` | Overrides shadow CSS vars. |
-| `headerBg` | `string \| null` | `null` | Overrides header background CSS var. |
-| `footerBg` | `string \| null` | `null` | Overrides footer background CSS var. |
-| `headerIcon` | `SemanticIcon \| string \| null` | `null` | Optional icon shown in header. |
-| `closable` | `boolean` | `false` | Shows a close icon and emits `closed`. |
-| `subtitle` | `string \| null` | `null` | Optional subtitle under header slot. |
+|---|---|---|---|
+| `variant` | `CardVariant \| null` | `null` | Visual style; inherits from `ThemeConfigService` when null |
+| `elevation` | `CardElevation` | `'medium'` | Shadow depth token |
+| `bordered` | `boolean` | `false` | Adds a visible border |
+| `hoverable` | `boolean` | `false` | Adds hover highlight; makes the card keyboard-activatable as a button |
+| `showHeader` | `boolean \| null` | `null` | Hides the header section when explicitly set to `false` |
+| `showFooter` | `boolean \| null` | `null` | Hides the footer section when explicitly set to `false` |
+| `shadow` | `string \| null` | `null` | Inline override for `--uilib-card-shadow` |
+| `headerBg` | `string \| null` | `null` | Inline override for `--uilib-card-header-bg` |
+| `footerBg` | `string \| null` | `null` | Inline override for `--uilib-card-footer-bg` |
+| `headerIcon` | `SemanticIcon \| string \| null` | `null` | Icon shown at the start of the header row |
+| `closable` | `boolean` | `false` | Shows a close button in the header; emits `closed` on click |
+| `subtitle` | `string \| null` | `null` | Plain-text subtitle rendered below the header slot; use `[card-subtitle]` when rich HTML markup is needed |
+| `ariaLabel` | `string \| null` | `null` | Accessible label; meaningful only when `hoverable` is true |
+| `theme` | `ThemeScopeInput \| null` | `null` | Scoped theme override applied as CSS variables directly on the host element |
 
 ### Outputs
 
-| Output | Type | Description |
-| --- | --- | --- |
-| `closed` | `void` | Emitted when the close icon is clicked. |
+| Output | Payload | Description |
+|---|---|---|
+| `closed` | `void` | Emitted when the close button is clicked; only present when `[closable]="true"` |
 
 ### Types
+
 ```typescript
-type CardVariant = 'material' | 'bootstrap' | 'minimal';
+type CardVariant   = 'material' | 'bootstrap' | 'minimal';
 type CardElevation = 'none' | 'low' | 'medium' | 'high';
 ```
 
@@ -81,77 +65,74 @@ type CardElevation = 'none' | 'low' | 'medium' | 'high';
 
 Cards project content using attribute selectors:
 
-```html
-<ui-lib-card>
-  <div card-header>Title</div>
-  <p>Content goes here</p>
-  <div card-footer>Actions</div>
-</ui-lib-card>
-```
+| Slot | Selector | Notes |
+|---|---|---|
+| Title | `[card-header]` | Projected into the header title area |
+| Rich subtitle | `[card-subtitle]` | Projected below the title; use when the `subtitle` input is insufficient (e.g. inline `<code>` tags) |
+| Body | _(default)_ | Projected into the card body |
+| Footer | `[card-footer]` | Projected into the footer bar; hidden when `[showFooter]="false"` |
 
-| Slot | Selector | Purpose |
-| --- | --- | --- |
-| Header | `[card-header]` | Title/header area (optional). |
-| Body | default slot | Main content. |
-| Footer | `[card-footer]` | Actions or metadata (optional). |
+> `subtitle` input and `[card-subtitle]` slot are mutually exclusive — if both are provided, the slot takes precedence.
 
 ---
 
-## Theming & CSS Variables
+## Usage
 
-| Variable | Purpose |
-| --- | --- |
-| `--uilib-card-bg` | Card background. |
-| `--uilib-card-text-color` | Card text color. |
-| `--uilib-card-border` | Card border color. |
-| `--uilib-card-border-width` | Border width. |
-| `--uilib-card-radius` | Card radius. |
-| `--uilib-card-header-padding` | Header padding. |
-| `--uilib-card-body-padding` | Body padding. |
-| `--uilib-card-footer-padding` | Footer padding. |
-| `--uilib-card-header-bg` | Header background. |
-| `--uilib-card-footer-bg` | Footer background. |
-| `--uilib-card-shadow` | Base shadow. |
-| `--uilib-card-shadow-hover` | Hover shadow. |
-| `--uilib-card-shadow-none` | No shadow. |
-| `--uilib-card-shadow-low` | Low shadow. |
-| `--uilib-card-shadow-medium` | Medium shadow. |
-| `--uilib-card-shadow-high` | High shadow. |
+### Basic card with header and body
 
----
-
-## Examples
-
-### Basic Usage
 ```html
-<ui-lib-card>
-  <div card-header>Card Title</div>
-  <p>Cards can host arbitrary content and actions.</p>
-  <div card-footer>Footer actions</div>
+<ui-lib-card variant="material" [bordered]="true">
+  <span card-header>Card Title</span>
+  <p>Body content goes here.</p>
 </ui-lib-card>
 ```
 
-### Variant + Elevation
+### Plain-text subtitle via input
+
+```html
+<ui-lib-card subtitle="Secondary description">
+  <span card-header>Card Title</span>
+  <p>Body content.</p>
+</ui-lib-card>
+```
+
+### Rich subtitle with inline markup via slot
+
+```html
+<ui-lib-card>
+  <span card-header>Appearances</span>
+  <span card-subtitle>
+    Use <code>appearance</code> to switch between <code>solid</code>, <code>outline</code>, and <code>ghost</code>.
+  </span>
+  <p>Body content.</p>
+</ui-lib-card>
+```
+
+### Closable card with footer
+
+```html
+<ui-lib-card [closable]="true" (closed)="onClose()">
+  <span card-header>Dismissible</span>
+  Main content.
+  <span card-footer>Footer text</span>
+</ui-lib-card>
+```
+
+### Variant and elevation
+
 ```html
 <ui-lib-card variant="bootstrap" elevation="high" [bordered]="true">
-  <div card-header>Bootstrap Card</div>
+  <span card-header>Bootstrap Card</span>
   Content
 </ui-lib-card>
 ```
 
-### Hoverable Minimal
-```html
-<ui-lib-card variant="minimal" [hoverable]="true">
-  <div card-header>Minimal</div>
-  Hover me
-</ui-lib-card>
-```
+### Hoverable minimal
 
-### Header Icon + Close
 ```html
-<ui-lib-card [headerIcon]="'info'" [closable]="true" (closed)="onClose()">
-  <div card-header>Info</div>
-  Closable card body
+<ui-lib-card variant="minimal" [hoverable]="true" ariaLabel="Open profile">
+  <span card-header>Minimal</span>
+  Click me
 </ui-lib-card>
 ```
 
@@ -159,68 +140,89 @@ Cards project content using attribute selectors:
 
 ## Scoped Theming
 
-Override the theme for a specific card and its children:
+The `theme` input accepts a `ThemeScopeInput` object and applies CSS variables directly on the card's host element, enabling per-card overrides without a provider — this has no PrimeNG equivalent.
+
+```typescript
+import type { ThemeScopeInput } from 'ui-lib-custom/theme';
+
+darkCardTheme: ThemeScopeInput = { mode: 'dark' };
+brandCardTheme: ThemeScopeInput = {
+  colors: { primary: '#ff5722' }
+};
+```
 
 ```html
-<!-- Dark card in light page -->
-<ui-lib-card theme="dark">
-  <p>This card uses dark theme</p>
+<!-- Dark card on a light page -->
+<ui-lib-card [theme]="darkCardTheme">
+  <span card-header>Dark Card</span>
+  <p>This card uses dark theme regardless of page theme.</p>
   <ui-lib-button>Also dark</ui-lib-button>
 </ui-lib-card>
 
-<!-- Custom colors -->
-<ui-lib-card [theme]="{ colors: { primary: '#ff5722' } }">
-  <ui-lib-button color="primary">Orange button</ui-lib-button>
-</ui-lib-card>
-
-<!-- Full preset -->
-<ui-lib-card [theme]="{ preset: customPreset }">
-  Fully customized
+<!-- Custom brand colors scoped to this card -->
+<ui-lib-card [theme]="brandCardTheme">
+  <ui-lib-button>Orange button</ui-lib-button>
 </ui-lib-card>
 ```
 
 ---
 
+## Theming & CSS Variables
+
+| Variable | Purpose |
+|---|---|
+| `--uilib-card-bg` | Card background |
+| `--uilib-card-text-color` | Card text color |
+| `--uilib-card-border` | Card border color |
+| `--uilib-card-border-width` | Border width |
+| `--uilib-card-radius` | Card border radius |
+| `--uilib-card-header-padding` | Header area padding |
+| `--uilib-card-body-padding` | Body area padding |
+| `--uilib-card-footer-padding` | Footer area padding |
+| `--uilib-card-header-bg` | Header background |
+| `--uilib-card-footer-bg` | Footer background |
+| `--uilib-card-shadow` | Base shadow |
+| `--uilib-card-shadow-hover` | Shadow on hover |
+| `--uilib-card-shadow-none` | Shadow for `elevation="none"` |
+| `--uilib-card-shadow-low` | Shadow for `elevation="low"` |
+| `--uilib-card-shadow-medium` | Shadow for `elevation="medium"` |
+| `--uilib-card-shadow-high` | Shadow for `elevation="high"` |
+
+---
+
 ## Accessibility
 
-### Keyboard Interaction
+The card is a container — ARIA semantics belong to child elements.
+
 | Key | Action |
-| --- | --- |
-| Tab | Focus interactive elements inside the card |
+|---|---|
+| Tab | Moves focus through interactive elements inside the card |
+| Enter / Space | Activates the card (only when `hoverable` is true) |
 
-### ARIA Attributes
-| Attribute | Usage |
-| --- | --- |
-| n/a | Card is a container; apply ARIA to child controls |
-
-### Focus Management
-- Card does not trap focus.
-- Focus indicators belong to child controls.
-
-### Screen Reader Behavior
-- Use headings in header slots for clear structure.
-- Close icon should have an accessible label via surrounding context.
-
-### Known Issues & Solutions
-- Avoid using a bare icon as the only affordance for close; pair with text or aria label.
+**Guidelines:**
+- Use heading elements inside `[card-header]` for clear document structure.
+- When `hoverable` is true, set `ariaLabel` to describe the card's action.
+- The close button carries an accessible label automatically — do not suppress it.
+- Avoid using a bare icon as the only close affordance; the library renders a labelled button.
 
 ---
 
 ## Best Practices
 
 **Do:**
-- Keep header content concise and use the subtitle for secondary text.
-- Use `elevation` and `bordered` consistently within a page.
-- Use `hoverable` only when the card is interactive.
+- Keep header content concise; use `subtitle` / `[card-subtitle]` for secondary text.
+- Use `elevation` and `bordered` consistently across lists of cards.
+- Use `hoverable` only when the entire card is interactive.
 
-**Don’t:**
-- Put critical actions only inside the header icon without additional labels.
-- Mix multiple variants in the same list of cards without a clear reason.
+**Don't:**
+- Pass a plain string to `theme` — it takes a `ThemeScopeInput` object.
+- Mix multiple variants in the same card list without a clear design reason.
+- Omit `ariaLabel` on hoverable cards — they render as buttons and need a description.
 
 ---
 
 ## Related
 
-- `docs/reference/components/BUTTON.md`
-- `docs/reference/components/ICON.md`
-- `docs/reference/components/ACCORDION.md`
+- [`BUTTON.md`](BUTTON.md)
+- [`ICON.md`](ICON.md)
+- [`ACCORDION.md`](ACCORDION.md)
