@@ -14,9 +14,9 @@ import { provideUiLibIcons } from 'ui-lib-custom/icon';
 import { By } from '@angular/platform-browser';
 
 import { Button } from './button';
-import type { ButtonColor, ButtonVariant, ButtonSize } from './button';
+import type { ButtonSeverity, ButtonVariant, ButtonSize } from './button';
 import { SHARED_VARIANT_OPTIONS } from 'ui-lib-custom/core';
-import { BUTTON_COLORS } from './button.constants';
+import { BUTTON_SEVERITIES } from './button.constants';
 import { Icon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -84,7 +84,7 @@ describe('Button', (): void => {
 
   it('applies classes from inputs', (): void => {
     fixture.componentRef.setInput('variant', 'bootstrap');
-    fixture.componentRef.setInput('size', 'large');
+    fixture.componentRef.setInput('size', 'lg');
     fixture.componentRef.setInput('severity', 'danger');
     fixture.componentRef.setInput('appearance', 'outline');
     fixture.detectChanges();
@@ -127,65 +127,29 @@ describe('Button', (): void => {
     expect(resolvedName()).toBe('lucideAudioWaveform');
   });
 
-  describe('New modifiers', (): void => {
-    it('applies btn-raised class when raised is true', (): void => {
+  describe('Modifier inputs', (): void => {
+    it('applies raised class when raised is true', (): void => {
       fixture.componentRef.setInput('raised', true);
       fixture.detectChanges();
 
       expect(getButton().classList.contains('ui-lib-button--raised')).toBeTruthy();
     });
 
-    it('applies btn-rounded class when rounded is true', (): void => {
-      fixture.componentRef.setInput('rounded', true);
+    it('applies pill class when pill is true', (): void => {
+      fixture.componentRef.setInput('pill', true);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains('ui-lib-button--rounded')).toBeTruthy();
+      expect(getButton().classList.contains('ui-lib-button--pill')).toBeTruthy();
     });
 
-    it('applies btn-text class when text is true', (): void => {
-      fixture.componentRef.setInput('text', true);
-      fixture.detectChanges();
-
-      expect(getButton().classList.contains('ui-lib-button--text')).toBeTruthy();
-    });
-
-    it('applies btn-link class when link is true', (): void => {
-      fixture.componentRef.setInput('link', true);
-      fixture.detectChanges();
-
-      expect(getButton().classList.contains('ui-lib-button--link')).toBeTruthy();
-    });
-  });
-
-  describe('Modifier combinations', (): void => {
-    it('applies raised and rounded together', (): void => {
+    it('applies raised and pill together', (): void => {
       fixture.componentRef.setInput('raised', true);
-      fixture.componentRef.setInput('rounded', true);
+      fixture.componentRef.setInput('pill', true);
       fixture.detectChanges();
 
       const btn: HTMLButtonElement = getButton();
       expect(btn.classList.contains('ui-lib-button--raised')).toBeTruthy();
-      expect(btn.classList.contains('ui-lib-button--rounded')).toBeTruthy();
-    });
-
-    it('applies text and rounded together', (): void => {
-      fixture.componentRef.setInput('text', true);
-      fixture.componentRef.setInput('rounded', true);
-      fixture.detectChanges();
-
-      const btn: HTMLButtonElement = getButton();
-      expect(btn.classList.contains('ui-lib-button--text')).toBeTruthy();
-      expect(btn.classList.contains('ui-lib-button--rounded')).toBeTruthy();
-    });
-
-    it('applies outlined and rounded together', (): void => {
-      fixture.componentRef.setInput('outlined', true);
-      fixture.componentRef.setInput('rounded', true);
-      fixture.detectChanges();
-
-      const btn: HTMLButtonElement = getButton();
-      expect(btn.classList.contains('ui-lib-button--outlined')).toBeTruthy();
-      expect(btn.classList.contains('ui-lib-button--rounded')).toBeTruthy();
+      expect(btn.classList.contains('ui-lib-button--pill')).toBeTruthy();
     });
   });
 
@@ -213,9 +177,9 @@ describe('Button', (): void => {
       expect((badgeText as string).trim()).toBe('7');
     });
 
-    it('applies badge color class', (): void => {
+    it('applies badge severity class', (): void => {
       fixture.componentRef.setInput('badge', '1');
-      fixture.componentRef.setInput('badgeColor', 'info');
+      fixture.componentRef.setInput('badgeSeverity', 'info');
       fixture.detectChanges();
 
       const badgeEl: HTMLElement | null = getBadge();
@@ -224,7 +188,7 @@ describe('Button', (): void => {
     });
   });
 
-  describe('Backward compatibility defaults', (): void => {
+  describe('Default classes', (): void => {
     it('keeps default classes for variant, size, severity, and appearance', (): void => {
       fixture.detectChanges();
 
@@ -299,25 +263,31 @@ describe('Button', (): void => {
     });
   });
 
-  it('applies each severity/color class', (): void => {
-    const colors: ButtonColor[] = [...BUTTON_COLORS];
+  it('applies each severity class', (): void => {
+    const severities: ButtonSeverity[] = [...BUTTON_SEVERITIES];
 
-    colors.forEach((color: ButtonColor): void => {
-      fixture.componentRef.setInput('color', color);
+    severities.forEach((severity: ButtonSeverity): void => {
+      fixture.componentRef.setInput('severity', severity);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains(`ui-lib-button--${color}`)).toBeTruthy();
+      const expected: string =
+        severity === 'warn' ? 'ui-lib-button--warning' : `ui-lib-button--${severity}`;
+      expect(getButton().classList.contains(expected)).toBeTruthy();
     });
   });
 
   it('applies each size class', (): void => {
-    const sizes: ButtonSize[] = ['small', 'medium', 'large'];
+    const sizes: Array<[ButtonSize, string]> = [
+      ['sm', 'small'],
+      ['md', 'medium'],
+      ['lg', 'large'],
+    ];
 
-    sizes.forEach((size: ButtonSize): void => {
+    sizes.forEach(([size, cssName]: [ButtonSize, string]): void => {
       fixture.componentRef.setInput('size', size);
       fixture.detectChanges();
 
-      expect(getButton().classList.contains(`ui-lib-button--size-${size}`)).toBeTruthy();
+      expect(getButton().classList.contains(`ui-lib-button--size-${cssName}`)).toBeTruthy();
     });
   });
 
@@ -400,38 +370,6 @@ describe('Button', (): void => {
     expect(getButton().classList.contains('ui-lib-button--warning')).toBeTruthy();
   });
 
-  it('uses contrast severity when contrast is true', (): void => {
-    fixture.componentRef.setInput('contrast', true);
-    fixture.detectChanges();
-
-    expect(getButton().classList.contains('ui-lib-button--contrast')).toBeTruthy();
-  });
-
-  it('prefers ghost appearance when text is true', (): void => {
-    fixture.componentRef.setInput('appearance', 'solid');
-    fixture.componentRef.setInput('text', true);
-    fixture.detectChanges();
-
-    expect(getButton().classList.contains('ui-lib-button--appearance-ghost')).toBeTruthy();
-  });
-
-  it('prefers outline appearance when outlined is true', (): void => {
-    fixture.componentRef.setInput('appearance', 'solid');
-    fixture.componentRef.setInput('outlined', true);
-    fixture.detectChanges();
-
-    expect(getButton().classList.contains('ui-lib-button--appearance-outline')).toBeTruthy();
-  });
-
-  it('applies icon-only class when iconOnlyInput is true', (): void => {
-    fixture.componentRef.setInput('icon', 'lucideAudioWaveform');
-    fixture.componentRef.setInput('iconOnlyInput', true);
-    fixture.componentRef.setInput('iconOnly', null);
-    fixture.detectChanges();
-
-    expect(getButton().classList.contains('ui-lib-button--icon-only')).toBeTruthy();
-  });
-
   it('adds vertical class for top or bottom icon positions', (): void => {
     fixture.componentRef.setInput('icon', 'lucideAudioWaveform');
     fixture.componentRef.setInput('iconPosition', 'top');
@@ -445,7 +383,7 @@ describe('Button', (): void => {
     expect(getButton().classList.contains('ui-lib-button--vertical')).toBeTruthy();
   });
 
-  it('maps badge severity help and contrast to supported badge colors', (): void => {
+  it('maps badge severity help to info badge color', (): void => {
     fixture.componentRef.setInput('badge', '1');
     fixture.componentRef.setInput('badgeSeverity', 'help');
     fixture.detectChanges();
@@ -474,6 +412,27 @@ describe('Button', (): void => {
 
     expect(shadowValue).toContain('0 4px 8px');
     expect(shadowHoverValue).toContain('0 4px 8px');
+  });
+
+  it('applies all new appearance values as CSS classes', (): void => {
+    const newAppearances: string[] = [
+      'soft',
+      'glass',
+      'gradient',
+      'elevated',
+      'neon',
+      'flat',
+      'link',
+    ];
+
+    newAppearances.forEach((appearance: string): void => {
+      fixture.componentRef.setInput('appearance', appearance);
+      fixture.detectChanges();
+
+      expect(
+        getButton().classList.contains(`ui-lib-button--appearance-${appearance}`)
+      ).toBeTruthy();
+    });
   });
 
   it('applies dark theme variables', (): void => {

@@ -19,10 +19,20 @@ import type { IconSize, SemanticIcon } from 'ui-lib-custom/icon';
 import { Badge } from 'ui-lib-custom/badge';
 import type { BadgeColor } from 'ui-lib-custom/badge';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { SHARED_DEFAULTS, SHARED_SIZES } from 'ui-lib-custom/core';
 
 export type ButtonVariant = 'material' | 'bootstrap' | 'minimal';
-export type ButtonAppearance = 'solid' | 'outline' | 'ghost' | 'tactile';
+export type ButtonAppearance =
+  | 'solid'
+  | 'outline'
+  | 'ghost'
+  | 'tactile'
+  | 'link'
+  | 'soft'
+  | 'glass'
+  | 'gradient'
+  | 'elevated'
+  | 'neon'
+  | 'flat';
 export type ButtonSeverity =
   | 'primary'
   | 'secondary'
@@ -33,14 +43,13 @@ export type ButtonSeverity =
   | 'help'
   | 'danger'
   | 'contrast';
-export type ButtonSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
-export type ButtonColor = ButtonSeverity;
+export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 export type IconPosition = 'left' | 'right' | 'top' | 'bottom';
 export type BadgeSeverity = ButtonSeverity | 'neutral';
 
 /**
- * Action button component with variants, appearances, and states.
+ * Action button component with 11 appearances, 9 severities, and orthogonal pill / raised modifiers.
  */
 @Component({
   selector: 'ui-lib-button',
@@ -56,8 +65,7 @@ export class Button implements AfterViewChecked {
 
   public readonly variant: InputSignal<ButtonVariant | null> = input<ButtonVariant | null>(null);
   public readonly appearance: InputSignal<ButtonAppearance> = input<ButtonAppearance>('solid');
-  public readonly size: InputSignal<ButtonSize> = input<ButtonSize>(SHARED_DEFAULTS.Size);
-  public readonly color: InputSignal<ButtonColor> = input<ButtonColor>('primary');
+  public readonly size: InputSignal<ButtonSize> = input<ButtonSize>('md');
   public readonly severity: InputSignal<ButtonSeverity | null> = input<ButtonSeverity | null>(null);
   public readonly type: InputSignal<ButtonType> = input<ButtonType>('button');
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
@@ -68,22 +76,13 @@ export class Button implements AfterViewChecked {
   public readonly icon: InputSignal<SemanticIcon | string | null> = input<
     SemanticIcon | string | null
   >(null);
-  public readonly iconOnly: InputSignal<boolean | null> = input<boolean | null>(null);
-  /** @deprecated Use iconOnly instead. */
-  public readonly iconOnlyInput: InputSignal<boolean> = input<boolean>(false);
+  public readonly iconOnly: InputSignal<boolean> = input<boolean>(false);
   public readonly raised: InputSignal<boolean> = input<boolean>(false);
-  public readonly rounded: InputSignal<boolean> = input<boolean>(false);
-  public readonly text: InputSignal<boolean> = input<boolean>(false);
-  public readonly outlined: InputSignal<boolean> = input<boolean>(false);
-  public readonly link: InputSignal<boolean> = input<boolean>(false);
-  public readonly contrast: InputSignal<boolean> = input<boolean>(false);
+  public readonly pill: InputSignal<boolean> = input<boolean>(false);
   public readonly badge: InputSignal<string | number | null | undefined> = input<
     string | number | null | undefined
   >(null);
-  public readonly badgeColor: InputSignal<BadgeSeverity> = input<BadgeSeverity>('danger');
-  public readonly badgeSeverity: InputSignal<BadgeSeverity | null> = input<BadgeSeverity | null>(
-    null
-  );
+  public readonly badgeSeverity: InputSignal<BadgeSeverity> = input<BadgeSeverity>('danger');
   public readonly badgeClass: InputSignal<string | null> = input<string | null>(null);
   public readonly loadingIcon: InputSignal<SemanticIcon | string> = input<SemanticIcon | string>(
     'spinner'
@@ -101,24 +100,18 @@ export class Button implements AfterViewChecked {
   private readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
     'small' | 'medium' | 'large'
   >((): 'small' | 'medium' | 'large' => {
-    const size: ButtonSize = this.size();
-    const map: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
-      [SHARED_SIZES.Sm]: 'small',
-      [SHARED_SIZES.Md]: 'medium',
-      [SHARED_SIZES.Lg]: 'large',
-      small: 'small',
-      medium: 'medium',
-      large: 'large',
+    const sizeMap: Record<ButtonSize, 'small' | 'medium' | 'large'> = {
+      sm: 'small',
+      md: 'medium',
+      lg: 'large',
     };
-    return map[size];
+    return sizeMap[this.size()];
   });
 
   public readonly effectiveVariant: Signal<ButtonVariant> = computed<ButtonVariant>(
     (): ButtonVariant => this.variant() ?? this.themeConfig.variant()
   );
-  public readonly iconOnlyComputed: Signal<boolean> = computed<boolean>(
-    (): boolean => this.iconOnly() ?? this.iconOnlyInput()
-  );
+
   public readonly iconSize: Signal<IconSize> = computed<IconSize>((): IconSize => {
     const sizeMap: Record<'small' | 'medium' | 'large', IconSize> = {
       small: 'sm',
@@ -130,24 +123,8 @@ export class Button implements AfterViewChecked {
 
   public readonly effectiveSeverity: Signal<ButtonSeverity> = computed<ButtonSeverity>(
     (): ButtonSeverity => {
-      const severity: ButtonSeverity = this.contrast()
-        ? 'contrast'
-        : (this.severity() ?? this.color());
+      const severity: ButtonSeverity = this.severity() ?? 'primary';
       return severity === 'warn' ? 'warning' : severity;
-    }
-  );
-
-  public readonly effectiveAppearance: Signal<ButtonAppearance> = computed<ButtonAppearance>(
-    (): ButtonAppearance => {
-      if (this.text()) {
-        return 'ghost';
-      }
-
-      if (this.outlined()) {
-        return 'outline';
-      }
-
-      return this.appearance();
     }
   );
 
@@ -156,15 +133,9 @@ export class Button implements AfterViewChecked {
     return badgeValue !== null && badgeValue !== undefined;
   });
 
-  public readonly normalizeBadgeSeverity: Signal<BadgeSeverity> = computed<BadgeSeverity>(
-    (): BadgeSeverity => {
-      const inputSeverity: BadgeSeverity = this.badgeSeverity() ?? this.badgeColor();
-      return inputSeverity === 'warn' ? 'warning' : inputSeverity;
-    }
-  );
-
   public readonly badgeColorResolved: Signal<BadgeColor> = computed<BadgeColor>((): BadgeColor => {
-    const severity: BadgeSeverity = this.normalizeBadgeSeverity();
+    const raw: BadgeSeverity = this.badgeSeverity();
+    const severity: BadgeSeverity = raw === 'warn' ? 'warning' : raw;
     const allowed: BadgeColor[] = [
       'primary',
       'secondary',
@@ -178,15 +149,9 @@ export class Button implements AfterViewChecked {
     if ((allowed as string[]).includes(severity)) {
       return severity as BadgeColor;
     }
-
     if (severity === 'help') {
       return 'info';
     }
-
-    if (severity === 'contrast') {
-      return 'neutral';
-    }
-
     return 'neutral';
   });
 
@@ -196,61 +161,22 @@ export class Button implements AfterViewChecked {
       `ui-lib-button--${this.effectiveVariant()}`,
       `ui-lib-button--size-${this.normalizedSize()}`,
       `ui-lib-button--${this.effectiveSeverity()}`,
-      `ui-lib-button--appearance-${this.effectiveAppearance()}`,
+      `ui-lib-button--appearance-${this.appearance()}`,
       `ui-lib-button--icon-${this.iconPosition()}`,
     ];
 
-    if (this.fullWidth()) {
-      classes.push('ui-lib-button--full-width');
-    }
-
-    if (this.disabled() || this.loading()) {
-      classes.push('ui-lib-button--disabled');
-    }
-
-    if (this.loading()) {
-      classes.push('ui-lib-button--loading');
-    }
-
-    if (this.icon()) {
-      classes.push('ui-lib-button--has-icon');
-    }
-
-    if (this.iconOnlyComputed()) {
-      classes.push('ui-lib-button--icon-only');
-    }
-
-    if (this.raised()) {
-      classes.push('ui-lib-button--raised');
-    }
-
-    if (this.rounded()) {
-      classes.push('ui-lib-button--rounded');
-    }
-
-    if (this.text()) {
-      classes.push('ui-lib-button--text');
-    }
-
-    if (this.outlined()) {
-      classes.push('ui-lib-button--outlined');
-    }
-
-    if (this.link()) {
-      classes.push('ui-lib-button--link');
-    }
-
-    if (this.hasBadge()) {
-      classes.push('ui-lib-button--has-badge');
-    }
-
+    if (this.fullWidth()) classes.push('ui-lib-button--full-width');
+    if (this.disabled() || this.loading()) classes.push('ui-lib-button--disabled');
+    if (this.loading()) classes.push('ui-lib-button--loading');
+    if (this.icon()) classes.push('ui-lib-button--has-icon');
+    if (this.iconOnly()) classes.push('ui-lib-button--icon-only');
+    if (this.raised()) classes.push('ui-lib-button--raised');
+    if (this.pill()) classes.push('ui-lib-button--pill');
+    if (this.hasBadge()) classes.push('ui-lib-button--has-badge');
     if (this.iconPosition() === 'top' || this.iconPosition() === 'bottom') {
       classes.push('ui-lib-button--vertical');
     }
-
-    if (this.focused()) {
-      classes.push('ui-lib-button--focused');
-    }
+    if (this.focused()) classes.push('ui-lib-button--focused');
 
     return classes.join(' ');
   });
@@ -258,17 +184,15 @@ export class Button implements AfterViewChecked {
   public readonly ariaDisabled: Signal<boolean | null> = computed<boolean | null>(
     (): boolean | null => (this.disabled() || this.loading() ? true : null)
   );
+
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
-      if (this.loading()) {
-        return this.ariaLabel() ?? 'Loading';
-      }
-      if (this.iconOnlyComputed()) {
-        return this.ariaLabel() ?? 'Button';
-      }
+      if (this.loading()) return this.ariaLabel() ?? 'Loading';
+      if (this.iconOnly()) return this.ariaLabel() ?? 'Button';
       return this.ariaLabel();
     }
   );
+
   public readonly isDisabled: Signal<boolean> = computed<boolean>(
     (): boolean => this.disabled() || this.loading()
   );

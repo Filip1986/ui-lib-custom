@@ -30,7 +30,7 @@ interface ApiRow {
 
 /**
  * Demo page for the Button component.
- * Shows all variants, appearances, severities, sizes, icons, and states.
+ * Shows all appearances, severities, sizes, icons, modifiers, and states.
  */
 @Component({
   selector: 'app-buttons',
@@ -54,7 +54,22 @@ export class ButtonsComponent {
   public readonly eventLog: WritableSignal<ButtonLogEntry[]> = signal<ButtonLogEntry[]>([]);
 
   public readonly variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
-  public readonly appearances: ButtonAppearance[] = ['solid', 'outline', 'ghost'];
+  public readonly matrixAppearances: ButtonAppearance[] = ['solid', 'outline', 'ghost', 'soft'];
+
+  public readonly appearances: ButtonAppearance[] = [
+    'solid',
+    'outline',
+    'ghost',
+    'soft',
+    'link',
+    'flat',
+    'elevated',
+    'gradient',
+    'glass',
+    'neon',
+    'tactile',
+  ];
+
   public readonly severities: ButtonSeverity[] = [
     'primary',
     'secondary',
@@ -65,7 +80,8 @@ export class ButtonsComponent {
     'danger',
     'contrast',
   ];
-  public readonly sizes: ButtonSize[] = ['small', 'medium', 'large'];
+
+  public readonly sizes: ButtonSize[] = ['sm', 'md', 'lg'];
 
   public readonly apiRows: ApiRow[] = [
     {
@@ -76,28 +92,22 @@ export class ButtonsComponent {
     },
     {
       name: 'appearance',
-      type: "'solid' | 'outline' | 'ghost'",
+      type: "'solid' | 'outline' | 'ghost' | 'soft' | 'link' | 'flat' | 'elevated' | 'gradient' | 'glass' | 'neon' | 'tactile'",
       default: "'solid'",
-      description: 'Fill style. Overridden by the text and outlined shorthand inputs.',
+      description:
+        'Visual style. All 11 appearances compose with any severity and the pill / raised modifiers.',
     },
     {
       name: 'severity',
-      type: 'ButtonSeverity | null',
+      type: "'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'warning' | 'help' | 'danger' | 'contrast' | null",
       default: 'null',
-      description:
-        'Semantic colour role (primary, secondary, success, info, warn, warning, help, danger, contrast). Takes precedence over color.',
-    },
-    {
-      name: 'color',
-      type: 'ButtonSeverity',
-      default: "'primary'",
-      description: 'Alias for severity. Used when severity is not set.',
+      description: 'Semantic colour role. Defaults to primary when null.',
     },
     {
       name: 'size',
-      type: "'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large'",
+      type: "'sm' | 'md' | 'lg'",
       default: "'md'",
-      description: 'Button size. Short and long aliases are both accepted.',
+      description: 'Button size.',
     },
     {
       name: 'type',
@@ -137,8 +147,8 @@ export class ButtonsComponent {
     },
     {
       name: 'iconOnly',
-      type: 'boolean | null',
-      default: 'null',
+      type: 'boolean',
+      default: 'false',
       description:
         'Hides the projected label and applies icon-only styles. Must be paired with ariaLabel.',
     },
@@ -146,37 +156,13 @@ export class ButtonsComponent {
       name: 'raised',
       type: 'boolean',
       default: 'false',
-      description: 'Adds a drop shadow beneath the button.',
+      description: 'Orthogonal modifier — adds a drop shadow beneath the button.',
     },
     {
-      name: 'rounded',
+      name: 'pill',
       type: 'boolean',
       default: 'false',
-      description: 'Applies full pill border-radius.',
-    },
-    {
-      name: 'text',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shorthand for appearance="ghost".',
-    },
-    {
-      name: 'outlined',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shorthand for appearance="outline".',
-    },
-    {
-      name: 'link',
-      type: 'boolean',
-      default: 'false',
-      description: 'Renders the button with a hyperlink-style appearance.',
-    },
-    {
-      name: 'contrast',
-      type: 'boolean',
-      default: 'false',
-      description: 'Shorthand that forces severity="contrast".',
+      description: 'Orthogonal modifier — applies full pill border-radius (999px).',
     },
     {
       name: 'fullWidth',
@@ -191,16 +177,11 @@ export class ButtonsComponent {
       description: 'Counter value overlaid on the button as a badge.',
     },
     {
-      name: 'badgeColor',
+      name: 'badgeSeverity',
       type: 'BadgeSeverity',
       default: "'danger'",
-      description: 'Badge colour. badgeSeverity takes precedence when set.',
-    },
-    {
-      name: 'badgeSeverity',
-      type: 'BadgeSeverity | null',
-      default: 'null',
-      description: 'Semantic severity for the badge overlay.',
+      description:
+        "Semantic severity for the badge overlay. Accepts all ButtonSeverity values plus 'neutral'.",
     },
     {
       name: 'badgeClass',

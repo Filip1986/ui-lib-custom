@@ -1,4 +1,4 @@
-<div class="topbar">
+﻿<div class="topbar">
   <div class="topbar-left">
     <button class="menu-button" (click)="onMenuButtonClick()" aria-label="Toggle sidebar">
       <i class="pi pi-bars"></i>
@@ -30,7 +30,7 @@
 
     <div class="variant-switcher" role="group" aria-label="Component variant">
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="variant() === 'material'"
         (click)="setVariant('material')"
@@ -39,7 +39,7 @@
         Material
       </ui-lib-button>
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="variant() === 'bootstrap'"
         (click)="setVariant('bootstrap')"
@@ -48,7 +48,7 @@
         Bootstrap
       </ui-lib-button>
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="variant() === 'minimal'"
         (click)="setVariant('minimal')"
@@ -60,7 +60,7 @@
 
     <div class="shape-switcher" role="group" aria-label="Component shape">
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="shape() === 'sharp'"
         (click)="setShape('sharp')"
@@ -69,7 +69,7 @@
         Sharp
       </ui-lib-button>
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="shape() === 'rounded'"
         (click)="setShape('rounded')"
@@ -78,7 +78,7 @@
         Rounded
       </ui-lib-button>
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="shape() === 'soft'"
         (click)="setShape('soft')"
@@ -87,7 +87,7 @@
         Soft
       </ui-lib-button>
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="shape() === 'pill'"
         (click)="setShape('pill')"
@@ -99,7 +99,7 @@
 
     <div class="density-switcher" role="group" aria-label="Component density">
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="density() === 'compact'"
         (click)="setDensity('compact')"
@@ -108,7 +108,7 @@
         Compact
       </ui-lib-button>
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="density() === 'default'"
         (click)="setDensity('default')"
@@ -117,7 +117,7 @@
         Default
       </ui-lib-button>
       <ui-lib-button
-        size="small"
+        size="sm"
         appearance="ghost"
         [class.active]="density() === 'comfortable'"
         (click)="setDensity('comfortable')"
@@ -141,7 +141,7 @@
     </a>
     <ui-lib-button
       variant="minimal"
-      size="small"
+      size="sm"
       appearance="ghost"
       (click)="onThemeToggle()"
       aria-label="Toggle dark mode"

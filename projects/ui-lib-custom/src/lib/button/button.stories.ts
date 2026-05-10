@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { Button } from './button';
-import type { ButtonAppearance, ButtonColor, ButtonSize, ButtonVariant } from './button';
+import type { ButtonAppearance, ButtonSeverity, ButtonSize, ButtonVariant } from './button';
 import {
   SHARED_DEFAULTS,
   SHARED_SIZE_OPTIONS,
@@ -12,7 +12,7 @@ type ButtonStoryArgs = {
   label: string;
   variant: ButtonVariant | null;
   size: ButtonSize;
-  color: ButtonColor;
+  severity: ButtonSeverity;
   appearance: ButtonAppearance;
   disabled: boolean;
   loading: boolean;
@@ -32,9 +32,9 @@ const meta: Meta<ButtonStoryArgs> = {
     label: { control: 'text' },
     variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
     size: { control: 'select', options: SHARED_SIZE_OPTIONS },
-    color: {
+    severity: {
       control: 'select',
-      options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info'],
+      options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'help', 'contrast'],
     },
     disabled: { control: 'boolean' },
     loading: { control: 'boolean' },
@@ -54,7 +54,7 @@ const renderButton: (args: Partial<ButtonStoryArgs>) => {
     <ui-lib-button
       [variant]="variant"
       [size]="size"
-      [color]="color"
+      [severity]="severity"
       [disabled]="disabled"
       [loading]="loading"
       [appearance]="appearance"
@@ -71,7 +71,7 @@ export const Default: Story = {
     label: 'Button',
     variant: null,
     size: SHARED_DEFAULTS.Size,
-    color: 'primary',
+    severity: 'primary',
     appearance: 'solid',
     disabled: false,
     loading: false,
@@ -122,7 +122,7 @@ export const DarkMode: Story = {
     label: 'Dark mode',
     variant: 'material',
     size: SHARED_DEFAULTS.Size,
-    color: 'primary',
+    severity: 'primary',
     appearance: 'solid',
   },
 };
@@ -133,7 +133,7 @@ export const FullApi: Story = {
     label: 'Full API',
     variant: 'bootstrap',
     size: 'lg',
-    color: 'secondary',
+    severity: 'secondary',
     appearance: 'outline',
     icon: 'plus',
     disabled: false,

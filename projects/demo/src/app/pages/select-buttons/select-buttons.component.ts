@@ -161,7 +161,7 @@ export class Example {
     { label: 'Opt 3', value: 'opt3' },
   ];
 
-  public readonly sizes: SelectButtonSize[] = ['small', 'medium', 'large'];
+  public readonly sizes: SelectButtonSize[] = ['sm', 'md', 'lg'];
   public readonly variants: SelectButtonVariant[] = ['material', 'bootstrap', 'minimal'];
 
   public markInvalidTouched(): void {

@@ -2,66 +2,142 @@
 
 **Selector:** `ui-lib-button`
 **Package:** `ui-lib-custom/button`
-**Content projection:** yes — button label text (and any inline markup) is projected as content
+**Content projection:** yes — button label text is projected as `<ng-content>`. There is no `label` input and no `clicked` output; use native `(click)` on the host.
 
-> No `label` input — button text is always projected as `<ng-content>`. There is no `clicked` output; use native `(click)` on the host element.
+## Architecture
+
+The Button uses a **two-axis model**:
+
+| Axis | Input | Controls |
+|------|-------|----------|
+| Visual style | `appearance` | Shape, fill, border, effects |
+| Colour semantic | `severity` | Which palette is applied |
+
+Every appearance composes with every severity, giving you 11 × 9 = 99 combinations from a single component. Two orthogonal modifiers (`pill`, `raised`) overlay on top without conflicting with either axis.
 
 ## Inputs
 
+### Primary axes
+
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
-| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
-| `appearance` | `'solid' \| 'outline' \| 'ghost' \| 'tactile'` | `'solid'` | Overridden by `text` (→ ghost) and `outlined` (→ outline). `tactile` renders a glossy 3D button with gradient fill, inset highlight, lift-on-hover, and press-down active state; colour is controlled by `severity` |
-| `size` | `'sm' \| 'md' \| 'lg' \| 'small' \| 'medium' \| 'large'` | `'md'` | Short and long aliases accepted |
-| `color` | `ButtonSeverity` | `'primary'` | Alias for `severity`; `severity` takes precedence when both are set |
-| `severity` | `ButtonSeverity \| null` | `null` | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warn' \| 'warning' \| 'help' \| 'danger' \| 'contrast'` |
-| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type attribute |
+| `appearance` | `ButtonAppearance` | `'solid'` | Visual style — see table below |
+| `severity` | `ButtonSeverity \| null` | `null` | Colour role — defaults to `primary` when null |
+| `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Design system variant; falls back to global theme |
+
+### Appearance values
+
+| Value | Visual effect |
+|-------|--------------|
+| `solid` | Filled background (default) |
+| `outline` | Transparent fill, coloured border |
+| `ghost` | No border, no fill — hover reveals subtle bg |
+| `soft` | Low-opacity tinted fill — great for secondary actions |
+| `link` | Hyperlink-style, no button chrome, underlined |
+| `flat` | Filled, no shadow, no border — maximum contrast |
+| `elevated` | Filled with colour-matched drop shadow; lifts on hover |
+| `gradient` | Two-tone diagonal gradient fill |
+| `glass` | Frosted glass with `backdrop-filter: blur` |
+| `neon` | Outline with glow ring on hover |
+| `tactile` | 3D glossy gradient with inset highlight and press-down state |
+
+### Severity values
+
+`'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'warning' | 'help' | 'danger' | 'contrast'`
+
+`warn` is normalised to `warning` internally.
+
+### Orthogonal modifiers
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
+| `pill` | `boolean` | `false` | Applies 999 px border-radius (capsule shape) |
+| `raised` | `boolean` | `false` | Adds a drop shadow |
+
+### Size & layout
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
+| `fullWidth` | `boolean` | `false` | Fills the container width |
+
+### State
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
 | `disabled` | `boolean` | `false` | |
-| `loading` | `boolean` | `false` | Shows spinner icon; disables interaction |
-| `fullWidth` | `boolean` | `false` | |
+| `loading` | `boolean` | `false` | Shows spinner; blocks interaction |
+| `loadingIcon` | `SemanticIcon \| string` | `'spinner'` | Icon during loading |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type |
+
+### Icon
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
 | `icon` | `SemanticIcon \| string \| null` | `null` | Icon name |
 | `iconPosition` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'left'` | |
-| `iconOnly` | `boolean \| null` | `null` | When true, hides label and adds icon-only styles |
-| `raised` | `boolean` | `false` | Adds drop shadow |
-| `rounded` | `boolean` | `false` | Full pill border-radius |
-| `text` | `boolean` | `false` | Shorthand for `appearance="ghost"` |
-| `outlined` | `boolean` | `false` | Shorthand for `appearance="outline"` |
-| `link` | `boolean` | `false` | Renders as a text link |
-| `contrast` | `boolean` | `false` | Forces `severity="contrast"` |
-| `badge` | `string \| number \| null` | `null` | Badge value overlaid on the button |
-| `badgeColor` | `BadgeSeverity` | `'danger'` | Badge colour; `badgeSeverity` takes precedence when set |
-| `badgeSeverity` | `BadgeSeverity \| null` | `null` | |
+| `iconOnly` | `boolean` | `false` | Hides label; must be paired with `ariaLabel` |
+
+### Badge
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
+| `badge` | `string \| number \| null` | `null` | Counter overlaid on the button |
+| `badgeSeverity` | `BadgeSeverity` | `'danger'` | Badge colour |
 | `badgeClass` | `string \| null` | `null` | Extra CSS class on the badge wrapper |
-| `loadingIcon` | `SemanticIcon \| string` | `'spinner'` | Icon shown during loading state |
-| `shadow` | `string \| null` | `null` | Inline CSS value applied to `--uilib-button-shadow` |
+
+### ARIA & advanced
+
+| Name | Type | Default | Notes |
+|------|------|---------|-------|
+| `ariaLabel` | `string \| null` | `null` | Required when `iconOnly` is true |
+| `ariaPressed` | `boolean \| null` | `null` | For toggle buttons |
+| `ariaChecked` | `boolean \| null` | `null` | For checkable roles |
 | `role` | `string \| null` | `null` | ARIA role override |
 | `tabIndex` | `number \| null` | `null` | |
-| `ariaPressed` | `boolean \| null` | `null` | |
-| `ariaChecked` | `boolean \| null` | `null` | |
-| `ariaLabel` | `string \| null` | `null` | Required when `iconOnly` is true |
+| `shadow` | `string \| null` | `null` | Inline value for `--uilib-button-shadow` |
 
 ## Outputs
 
-_none_
+_none_ — use native `(click)` on the host element.
 
 ## Usage
 
 ```html
-<!-- minimal example -->
+<!-- Minimal -->
 <ui-lib-button>Save</ui-lib-button>
 
-<!-- icon button with severity and loading state -->
-<ui-lib-button
-  [icon]="'save'"
-  severity="success"
-  [loading]="isSaving"
-  (click)="save()"
->
-  Save
+<!-- Two-axis: appearance + severity -->
+<ui-lib-button appearance="outline" severity="danger" (click)="delete()">Delete</ui-lib-button>
+<ui-lib-button appearance="soft"    severity="success">Confirm</ui-lib-button>
+<ui-lib-button appearance="ghost"   severity="primary">Cancel</ui-lib-button>
+
+<!-- Orthogonal modifiers compose with any appearance -->
+<ui-lib-button appearance="outline" severity="primary" [pill]="true">Pill Outline</ui-lib-button>
+<ui-lib-button appearance="solid"   severity="primary" [raised]="true">Raised</ui-lib-button>
+<ui-lib-button appearance="soft"    severity="danger"  [pill]="true" [raised]="true">
+  Pill + Raised
 </ui-lib-button>
 
-<!-- tactile (glossy 3D) appearance - severity drives the gradient colour -->
-<ui-lib-button appearance="tactile" severity="primary" icon="search">Search</ui-lib-button>
-<ui-lib-button appearance="tactile" severity="success" icon="check">Confirm</ui-lib-button>
-<ui-lib-button appearance="tactile" severity="danger"  icon="trash">Delete</ui-lib-button>
+<!-- Expressive styles -->
+<ui-lib-button appearance="elevated" severity="primary" icon="layers">Elevated</ui-lib-button>
+<ui-lib-button appearance="gradient" severity="primary">Gradient</ui-lib-button>
+<ui-lib-button appearance="glass"    severity="info"   [pill]="true">Glass Pill</ui-lib-button>
+<ui-lib-button appearance="neon"     severity="success">Neon</ui-lib-button>
+<ui-lib-button appearance="tactile"  severity="primary" icon="search">Tactile</ui-lib-button>
+
+<!-- Link style -->
+<ui-lib-button appearance="link" severity="primary">Learn more</ui-lib-button>
+
+<!-- States -->
+<ui-lib-button [loading]="isSaving" severity="success" (click)="save()">Save</ui-lib-button>
+<ui-lib-button [disabled]="true" severity="primary">Disabled</ui-lib-button>
+
+<!-- Icon-only (ariaLabel required) -->
+<ui-lib-button icon="trash" [iconOnly]="true" severity="danger" ariaLabel="Delete item" />
+
+<!-- Sizes -->
+<ui-lib-button size="sm" severity="primary">Small</ui-lib-button>
+<ui-lib-button size="md" severity="primary">Medium</ui-lib-button>
+<ui-lib-button size="lg" severity="primary">Large</ui-lib-button>
 ```

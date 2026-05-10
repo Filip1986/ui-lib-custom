@@ -1,9 +1,6 @@
-import type { ButtonColor } from './button';
+import type { ButtonSeverity } from './button';
 
-/**
- * Shared button color/severity options.
- */
-export const BUTTON_COLORS: readonly ButtonColor[] = [
+export const BUTTON_SEVERITIES: readonly ButtonSeverity[] = [
   'primary',
   'secondary',
   'success',

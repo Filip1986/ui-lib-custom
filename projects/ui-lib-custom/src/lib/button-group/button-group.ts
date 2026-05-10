@@ -43,9 +43,6 @@ export class ButtonGroup {
       sm: 'small',
       md: 'medium',
       lg: 'large',
-      small: 'small',
-      medium: 'medium',
-      large: 'large',
     };
     return map[size];
   });

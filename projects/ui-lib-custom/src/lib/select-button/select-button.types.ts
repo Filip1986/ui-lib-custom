@@ -18,7 +18,7 @@ export interface SelectButtonChangeEvent {
 export type SelectButtonSelectionChangeEvent = SelectButtonChangeEvent;
 
 export type SelectButtonVariant = 'material' | 'bootstrap' | 'minimal';
-export type SelectButtonSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
+export type SelectButtonSize = 'sm' | 'md' | 'lg';
 
 export interface SelectButtonItemContext {
   $implicit: SelectButtonOption;

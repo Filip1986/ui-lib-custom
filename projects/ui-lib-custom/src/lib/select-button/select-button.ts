@@ -130,9 +130,6 @@ export class SelectButton implements ControlValueAccessor {
       [SHARED_SIZES.Sm]: 'small',
       [SHARED_SIZES.Md]: 'medium',
       [SHARED_SIZES.Lg]: 'large',
-      small: 'small',
-      medium: 'medium',
-      large: 'large',
     };
     return map[size];
   });

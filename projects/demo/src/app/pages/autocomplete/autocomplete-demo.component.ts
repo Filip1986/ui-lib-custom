@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+﻿import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormControl,
@@ -181,9 +181,9 @@ export class AutoCompleteDemoComponent {
     <small>{{ countrySuggestions.length }} options</small>
   </ng-template>
 </ui-lib-autocomplete>`,
-    sizes: `<ui-lib-autocomplete size="small" />
-<ui-lib-autocomplete size="medium" />
-<ui-lib-autocomplete size="large" />`,
+    sizes: `<ui-lib-autocomplete size="sm" />
+<ui-lib-autocomplete size="md" />
+<ui-lib-autocomplete size="lg" />`,
     filled: `<ui-lib-autocomplete [filled]="true" [showClear]="true" />`,
     states: `<ui-lib-autocomplete [disabled]="true" />
 <ui-lib-autocomplete [invalid]="true" />`,

@@ -1,5 +1,5 @@
 export type AutoCompleteVariant = 'material' | 'bootstrap' | 'minimal';
-export type AutoCompleteSize = 'small' | 'medium' | 'large';
+export type AutoCompleteSize = 'sm' | 'md' | 'lg';
 export type AutoCompleteDropdownMode = 'blank' | 'current';
 
 export interface AutoCompleteCompleteEvent {
