@@ -1,18 +1,17 @@
-import { CommonModule } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostListener,
-  ViewChild,
   ViewEncapsulation,
   computed,
   forwardRef,
   input,
   signal,
   inject,
+  viewChild,
 } from '@angular/core';
-import type { TemplateRef, InputSignal, WritableSignal, Signal } from '@angular/core';
+import type { InputSignal, OnDestroy, Signal, TemplateRef, WritableSignal } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -47,7 +46,7 @@ let selectIdCounter: number = 0;
 @Component({
   selector: 'ui-lib-select',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [NgTemplateOutlet, FormsModule],
   templateUrl: './select.html',
   styleUrl: './select.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -67,7 +66,7 @@ let selectIdCounter: number = 0;
     '[class.uilib-inputwrapper-filled]': 'hasValue()',
     '[attr.aria-expanded]': 'open() ? "true" : "false"',
     '[attr.aria-haspopup]': '"listbox"',
-    '[attr.aria-controls]': 'listboxId() || null',
+    '[attr.aria-controls]': 'open() ? listboxId() : null',
     '[attr.aria-activedescendant]': 'activeDescendantId() || null',
     '[attr.aria-label]': 'ariaLabel() || null',
     '[attr.aria-labelledby]': 'resolvedLabelledBy() || null',
@@ -78,7 +77,7 @@ let selectIdCounter: number = 0;
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class UiLibSelect implements ControlValueAccessor {
+export class UiLibSelect implements ControlValueAccessor, OnDestroy {
   public readonly listboxRole: string = SELECT_LISTBOX_ROLE;
   public readonly ungroupedKey: string = SELECT_UNGROUPED_KEY;
   public readonly optionIdSeparator: string = SELECT_OPTION_ID_SEPARATOR;
@@ -99,9 +98,15 @@ export class UiLibSelect implements ControlValueAccessor {
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
   public readonly required: InputSignal<boolean> = input<boolean>(false);
 
-  @ViewChild('panel', { static: false }) public panel?: ElementRef<HTMLDivElement>;
-  @ViewChild('inputEl', { static: false }) public inputEl?: ElementRef<HTMLInputElement>;
-  @ViewChild('controlEl', { static: false }) public controlEl?: ElementRef<HTMLDivElement>;
+  /** Signal query for the panel element — undefined when panel is closed. */
+  public readonly panel: Signal<ElementRef<HTMLDivElement> | undefined> =
+    viewChild<ElementRef<HTMLDivElement>>('panel');
+  /** Signal query for the search input — undefined when panel is closed or not searchable. */
+  public readonly inputEl: Signal<ElementRef<HTMLInputElement> | undefined> =
+    viewChild<ElementRef<HTMLInputElement>>('inputEl');
+  /** Signal query for the control element. */
+  public readonly controlEl: Signal<ElementRef<HTMLDivElement> | undefined> =
+    viewChild<ElementRef<HTMLDivElement>>('controlEl');
 
   public readonly open: WritableSignal<boolean> = signal<boolean>(false);
   public readonly filter: WritableSignal<string> = signal<string>('');
@@ -112,9 +117,20 @@ export class UiLibSelect implements ControlValueAccessor {
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly document: Document = inject(DOCUMENT);
 
   private onChange: (value: SelectCvaValue) => void = (): void => {};
   private onTouched: () => void = (): void => {};
+
+  /**
+   * Bound document click handler — stored so the same reference can be removed
+   * when the panel closes or the component is destroyed.
+   */
+  private readonly docClickHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
+    if (this.open() && !this.el.nativeElement.contains(event.target as Node)) {
+      this.closePanel();
+    }
+  };
 
   public registerOnChange(fn: (value: SelectCvaValue) => void): void {
     this.onChange = fn;
@@ -242,6 +258,16 @@ export class UiLibSelect implements ControlValueAccessor {
       )
   );
 
+  /**
+   * Announcement text for the screen-reader live region when filtering in searchable mode.
+   * Returns an empty string (no announcement) when the panel is closed or no filter term is set.
+   */
+  public readonly filteredResultsAnnouncement: Signal<string> = computed<string>((): string => {
+    if (!this.searchable() || !this.open() || !this.filter()) return '';
+    const count: number = this.filteredOptions().length;
+    return count === 1 ? '1 result available' : `${count} results available`;
+  });
+
   public writeValue(obj: SelectCvaValue): void {
     if (this.multiple()) {
       this.internalValue.set(Array.isArray(obj) ? obj : obj === null ? [] : [obj]);
@@ -271,7 +297,9 @@ export class UiLibSelect implements ControlValueAccessor {
     const selectedIndex: number = this.getSelectedIndex();
     const fallbackIndex: number = this.findFirstEnabledIndex();
     this.focusedIndex.set(selectedIndex >= 0 ? selectedIndex : fallbackIndex);
-    queueMicrotask((): void => this.inputEl?.nativeElement.focus());
+    queueMicrotask((): void => this.inputEl()?.nativeElement.focus());
+    // Attach document click listener only while the panel is open.
+    this.document.addEventListener('click', this.docClickHandler);
   }
 
   public closePanel(): void {
@@ -280,6 +308,13 @@ export class UiLibSelect implements ControlValueAccessor {
     this.filter.set('');
     this.onTouched();
     this.el.nativeElement.focus();
+    // Remove the document click listener now that the panel is closed.
+    this.document.removeEventListener('click', this.docClickHandler);
+  }
+
+  public ngOnDestroy(): void {
+    // Guard against component being destroyed while panel is still open.
+    this.document.removeEventListener('click', this.docClickHandler);
   }
 
   public selectOption(opt: SelectOption): void {
@@ -355,14 +390,6 @@ export class UiLibSelect implements ControlValueAccessor {
     this.focusedIndex.set(fallbackIndex);
   }
 
-  @HostListener('document:click', ['$event'])
-  public onDocClick(event: MouseEvent): void {
-    if (this.open() && !this.el.nativeElement.contains(event.target as Node)) {
-      this.closePanel();
-    }
-  }
-
-  @HostListener('keydown', ['$event'])
   public onKeydown(event: KeyboardEvent): void {
     if (this.isDisabled() || this.loading()) return;
 
@@ -425,8 +452,6 @@ export class UiLibSelect implements ControlValueAccessor {
     }
     return String(opt ?? '');
   }
-
-  constructor() {}
 
   private handleTypeahead(char: string): void {
     const opts: SelectOption[] = this.filteredOptions();

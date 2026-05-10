@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -70,7 +70,7 @@ const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
 @Component({
   selector: 'ui-lib-autocomplete',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [NgTemplateOutlet, FormsModule],
   templateUrl: './autocomplete.html',
   styleUrl: './autocomplete.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -234,6 +234,22 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
+  /**
+   * Targeted outside-click listener — registered only when the panel is open.
+   * Using a named field ensures `addEventListener` / `removeEventListener` receive
+   * the same function reference so the listener can be cleanly removed.
+   */
+  private readonly docClickHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
+    const targetNode: Node | null = event.target as Node | null;
+    const clickedInsideHost: boolean =
+      targetNode !== null && this.hostElement.nativeElement.contains(targetNode);
+    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
+    const clickedInsidePanel: boolean = targetNode !== null && panel?.contains(targetNode) === true;
+    if (!clickedInsideHost && !clickedInsidePanel) {
+      this.hidePanel();
+    }
+  };
+
   private onChange: (value: unknown) => void = (): void => {};
   private onTouched: () => void = (): void => {};
 
@@ -253,6 +269,27 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
       return this.getOptionId(index);
     }
   );
+
+  /**
+   * Accessible name for the listbox panel.
+   * Falls back to 'Suggestions' so axe-core's aria-input-field-name rule is always satisfied
+   * even when the consumer provides no ariaLabel input.
+   */
+  protected readonly listboxLabel: Signal<string> = computed<string>((): string => {
+    return this.ariaLabel() ?? 'Suggestions';
+  });
+
+  /** Announcement text for the aria-live region — announced to screen readers when suggestions arrive. */
+  protected readonly resultsAnnouncement: Signal<string> = computed<string>((): string => {
+    if (!this.panelVisible() || this.loading()) {
+      return '';
+    }
+    const count: number = this.visibleOptions().length;
+    if (count === 0) {
+      return '';
+    }
+    return count === 1 ? '1 result available' : `${count} results available`;
+  });
 
   protected readonly hasValue: Signal<boolean> = computed<boolean>((): boolean => {
     const value: unknown = this.modelValue();
@@ -823,9 +860,11 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
     if (this.virtualScrollEnabled()) {
       this.virtualScrollTop.set(0);
     }
+    this.documentRef.addEventListener('click', this.docClickHandler);
   }
 
   public hidePanel(): void {
+    this.documentRef.removeEventListener('click', this.docClickHandler);
     this.panelVisible.set(false);
     this.activeIndexState.set(-1);
   }
@@ -844,25 +883,11 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
       this.debounceTimer = null;
     }
 
+    this.documentRef.removeEventListener('click', this.docClickHandler);
+
     const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
     if (panel?.isConnected) {
       panel.remove();
-    }
-  }
-
-  @HostListener('document:click', ['$event'])
-  public onDocumentClick(event: MouseEvent): void {
-    if (!this.panelVisible()) {
-      return;
-    }
-
-    const targetNode: Node | null = event.target as Node | null;
-    const clickedInsideHost: boolean =
-      targetNode !== null && this.hostElement.nativeElement.contains(targetNode);
-    const panel: HTMLElement | null = this.panelElement()?.nativeElement ?? null;
-    const clickedInsidePanel: boolean = targetNode !== null && panel?.contains(targetNode) === true;
-    if (!clickedInsideHost && !clickedInsidePanel) {
-      this.hidePanel();
     }
   }
 

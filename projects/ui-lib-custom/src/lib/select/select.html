@@ -15,7 +15,8 @@
     </div>
     <div class="ui-lib-select__actions">
       @if (loading()) {
-        <span class="ui-lib-select__spinner"></span>
+        <!-- aria-hidden: spinner is decorative; loading state communicated via aria-disabled on host -->
+        <span class="ui-lib-select__spinner" aria-hidden="true"></span>
       }
       @if (displayValue()) {
         <button
@@ -24,14 +25,60 @@
           (click)="$event.stopPropagation(); clear()"
           aria-label="Clear selection"
         >
-          ×
+          <!-- Inline SVG X — same path as Dialog/Drawer close buttons; no raw Unicode characters -->
+          <svg
+            class="ui-lib-select__clear-icon"
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6L17.6 19l1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"
+              fill="currentColor"
+            />
+          </svg>
         </button>
       }
-      <span class="ui-lib-select__arrow">▾</span>
+      <!-- aria-hidden: ▾ is decorative; expanded state communicated via aria-expanded on host -->
+      <span class="ui-lib-select__arrow" aria-hidden="true">▾</span>
     </div>
   </div>
 
+  <!--
+    Screen-reader live region — announces filtered result counts when searchable.
+    Lives outside @if(open()) so the browser can track content changes across open/close cycles.
+  -->
+  @if (searchable()) {
+    <div
+      class="ui-lib-select__sr-live"
+      aria-live="polite"
+      aria-atomic="true"
+    >{{ filteredResultsAnnouncement() }}</div>
+  }
+
   @if (open()) {
+    <!--
+      Search input lives OUTSIDE the listbox element.
+      role="listbox" may only own role="option" and role="group" elements;
+      placing any other element inside it violates aria-required-children.
+    -->
+    @if (searchable()) {
+      <div class="ui-lib-select__search">
+        <input
+          #inputEl
+          type="text"
+          [value]="filter()"
+          (input)="onFilter($any($event.target).value)"
+          placeholder="Search..."
+          aria-label="Search options"
+          aria-autocomplete="list"
+          [attr.aria-controls]="listboxId()"
+        />
+      </div>
+    }
+
     <div
       class="ui-lib-select__panel"
       #panel
@@ -40,46 +87,73 @@
       [attr.aria-label]="placeholder()"
       [attr.aria-multiselectable]="multiple() ? 'true' : null"
     >
-      @if (searchable()) {
-        <div class="ui-lib-select__search">
-          <input
-            #inputEl
-            type="text"
-            [value]="filter()"
-            (input)="onFilter($any($event.target).value)"
-            placeholder="Search..."
-            aria-label="Search options"
-          />
-        </div>
-      }
-
       @for (groupKey of groupKeys(); track groupKey) {
         @if (groupKey !== ungroupedKey) {
-          <div class="ui-lib-select__group">{{ groupKey }}</div>
-        }
-        @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
+          <!--
+            Named group uses role="group" + aria-label for AT.
+            The visual group label is rendered via CSS content: attr(aria-label) on ::before,
+            keeping the DOM clean (no extra divs inside the listbox or group).
+          -->
           <div
-            class="ui-lib-select__option"
-            [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
-            [class.ui-lib-select__option--active]="
-              (optionIndexMap().get(opt) ?? -1) === focusedIndex()
-            "
-            [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
-            [class.ui-lib-select__option--disabled]="opt.disabled"
-            (click)="selectOption(opt)"
-            (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
-            role="option"
-            [attr.aria-selected]="selectedValues().has(opt.value)"
-            [attr.aria-disabled]="opt.disabled ? 'true' : null"
+            role="group"
+            [attr.aria-label]="groupKey"
+            class="ui-lib-select__group-container"
           >
-            @if (optionTemplate()) {
-              <ng-container
-                *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"
-              ></ng-container>
-            } @else {
-              <span>{{ opt.label }}</span>
+            @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
+              <div
+                class="ui-lib-select__option"
+                [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
+                [class.ui-lib-select__option--active]="
+                  (optionIndexMap().get(opt) ?? -1) === focusedIndex()
+                "
+                [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
+                [class.ui-lib-select__option--disabled]="opt.disabled"
+                (click)="selectOption(opt)"
+                (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
+                role="option"
+                [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
+                [attr.aria-disabled]="opt.disabled ? 'true' : null"
+                [attr.aria-setsize]="filteredOptions().length"
+                [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
+              >
+                @if (optionTemplate()) {
+                  <ng-container
+                    *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"
+                  ></ng-container>
+                } @else {
+                  <span>{{ opt.label }}</span>
+                }
+              </div>
             }
           </div>
+        } @else {
+          <!-- Ungrouped options render directly as children of the listbox -->
+          @for (opt of groupedOptions()[groupKey]; track opt.label + opt.value) {
+            <div
+              class="ui-lib-select__option"
+              [id]="controlId() + optionIdSeparator + (optionIndexMap().get(opt) ?? -1)"
+              [class.ui-lib-select__option--active]="
+                (optionIndexMap().get(opt) ?? -1) === focusedIndex()
+              "
+              [class.ui-lib-select__option--selected]="selectedValues().has(opt.value)"
+              [class.ui-lib-select__option--disabled]="opt.disabled"
+              (click)="selectOption(opt)"
+              (mouseenter)="setActiveIndex(optionIndexMap().get(opt) ?? -1)"
+              role="option"
+              [attr.aria-selected]="selectedValues().has(opt.value) ? 'true' : 'false'"
+              [attr.aria-disabled]="opt.disabled ? 'true' : null"
+              [attr.aria-setsize]="filteredOptions().length"
+              [attr.aria-posinset]="(optionIndexMap().get(opt) ?? -1) + 1"
+            >
+              @if (optionTemplate()) {
+                <ng-container
+                  *ngTemplateOutlet="optionTemplate(); context: { $implicit: opt }"
+                ></ng-container>
+              } @else {
+                <span>{{ opt.label }}</span>
+              }
+            </div>
+          }
         }
       }
 

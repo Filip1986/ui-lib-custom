@@ -19,8 +19,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | #   | Component     | Key a11y concern                                                       | Status     |
 |-----|---------------|------------------------------------------------------------------------|------------|
 | 1   | Dialog        | Focus trap, `aria-modal`, `role=dialog`, restores focus on close       | ✅ Done     |
-| 2   | Select        | Combobox/listbox ARIA pattern — the hardest form control to get right  | ⏳ Queued   |
-| 3   | AutoComplete  | Combobox with live region announcements, `aria-activedescendant`       | ⏳ Queued   |
+| 2   | Select        | Combobox/listbox ARIA pattern — the hardest form control to get right  | ✅ Done     |
+| 3   | AutoComplete  | Combobox with live region announcements, `aria-activedescendant`       | ✅ Done     |
 | 4   | DynamicDialog | Same as Dialog + programmatic creation lifecycle                       | ✅ Done     |
 | 5   | Drawer        | Side dialog, focus management, `aria-modal`                            | ✅ Done     |
 | 6   | ConfirmDialog | `role=alertdialog`, default focus on confirm action                    | ⏳ Queued   |
@@ -154,8 +154,8 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Button        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Input         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Select        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| AutoComplete  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
+| AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | CascadeSelect | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Checkbox      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

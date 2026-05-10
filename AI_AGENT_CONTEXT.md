@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Stepper compound component complete; resuming backlog
-- **Next queue:** `knip` baseline and dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo`/z-index manager), component v2 enhancements by priority
+- `Active focus:** Stepper compound component complete; resuming backlog
+- **Next queue:** AutoComplete hardening COMPLETE → ConfirmDialog hardening is next (Tier 1, #6); then ConfirmPopup, Popover, Tooltip, Toast
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
@@ -34,6 +34,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Tooltip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Popover` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Drawer` -> ✅ complete + hardened (6-phase evolution, score 8.5/10, a11y spec added)
+- `Select` -> ✅ complete + hardened (6-phase evolution, score 8.2/10, 49 a11y tests, all axe-core pass)
+- `AutoComplete` -> ✅ complete + hardened (6-phase evolution, score 8.2/10, 52 a11y tests, all axe-core pass)
 
 - `Divider` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Toolbar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -1180,4 +1182,97 @@ Verification:
 Terminal notes: No issues. All commands ran cleanly in PowerShell.
 Next step: knip baseline + dead-code cleanup, or next component from queue.
 
+
+
+---
+
+Date: 2026-05-10
+Changed:
+  - projects/ui-lib-custom/src/lib/select/select.ts
+      (migrated @ViewChild → viewChild signals; removed @HostListener duplicate that caused double-firing;
+       replaced document-level click listener with targeted open-only listener via DOCUMENT + DestroyRef;
+       replaced CommonModule import with NgTemplateOutlet; removed empty constructor)
+  - projects/ui-lib-custom/src/lib/select/select.html
+      (fixed aria-controls to be null when panel closed; added aria-setsize/aria-posinset to options;
+       added aria-multiselectable to listbox; added aria-hidden to arrow span and spinner span;
+       replaced raw × character in clear button with inline SVG + aria-hidden; moved search input
+       OUTSIDE the listbox (was incorrectly inside role="listbox"); added role="combobox",
+       aria-autocomplete, aria-expanded, aria-controls to search input; added live region for filter count;
+       updated grouped options to use CSS ::before for visual group header instead of DOM div —
+       keeps listbox clean and avoids aria-required-children axe violation)
+  - projects/ui-lib-custom/src/lib/select/select.scss
+      (removed dead .ui-lib-select__group rule; added ::before rule on .ui-lib-select__group-container
+       using content: attr(aria-label) for visual group name display via CSS only)
+  - projects/ui-lib-custom/src/lib/select/select.a11y.spec.ts (new — 49 comprehensive a11y tests
+       covering closed/open state, keyboard nav, multi-select, disabled, searchable, groups, axe-core)
+  - projects/ui-lib-custom/src/lib/select/README.md (expanded — keyboard nav table, ARIA pattern docs,
+       group option docs, optionTemplate usage example)
+  - docs/COMPONENT_SCORES.md (Select row updated: 8.2 avg, all categories ≥8, status ✅ Done)
+  - AI_AGENT_CONTEXT.md (updated)
+State: Select component fully hardened via 6-phase evolution workflow. All 145 tests pass (96 unit + 49 a11y).
+  All 6 axe-core automated checks pass including grouped options (aria-required-children resolved
+  by moving from DOM group header div to CSS ::before approach). Key fixes: @ViewChild → viewChild signals,
+  double-firing @HostListener removed, global click listener scoped to open-only, full combobox ARIA 1.2
+  pattern implemented, aria-activedescendant, live region, groups aria pattern. Score: 8.2/10 (all ≥ 8).
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/select/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom (zero errors/warnings, 28s),
+  npx.cmd jest --testPathPatterns=src/lib/select --no-coverage (145/145 pass — select.spec.ts + select.a11y.spec.ts + select-button.*),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (95/95 PASS).
+Terminal notes: axe-core aria-required-children for grouped listbox — the visual group header div
+  (even with aria-hidden) cannot be a child of role="group" inside role="listbox". Solution: removed
+  all DOM group header divs and replaced with CSS content: attr(aria-label) on ::before pseudo-element.
+  This is the cleanest ARIA-compliant approach: no extra DOM nodes, no violations.
+Next step: AutoComplete hardening — key a11y concern: combobox + live region announcements + aria-activedescendant.
+
+---
+
+Date: 2026-05-10
+Changed:
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.ts
+      (replaced CommonModule with NgTemplateOutlet; replaced global @HostListener('document:click')
+       with targeted open-only addEventListener via stored docClickHandler field; added listboxLabel()
+       computed signal for accessible listbox panel name with fallback 'Suggestions'; added
+       resultsAnnouncement() computed signal for live region; removed empty constructor)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.html
+      (chip list changed from <ul>/<li> to <div>/<div> to prevent axes listitem violation when
+       role="group" overrides the <ul> semantic list role; chip container now role="group" with
+       aria-label="Selected items"; chip remove/clear/dropdown icons replaced with inline SVGs +
+       aria-hidden="true"; live region always in DOM (polite, atomic); listbox panel gains
+       [attr.aria-label]="listboxLabel()"; option groups: NO DOM label divs, visual labels via CSS
+       ::before {content: attr(aria-label)} — same technique as Select hardening; all options get
+       aria-setsize + aria-posinset across flat, virtual-scroll, and grouped variants)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.scss
+      (removed .ui-autocomplete-option-group-label DOM rule; added ::before pseudo-element rule
+       for group visual headers; added .ui-autocomplete-option-group-header rule; added
+       .ui-autocomplete-sr-live visually-hidden rule; added .ui-autocomplete-icon display rule)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.spec.ts
+      (1 test fixed: chip role expectation changed from 'option' to null — chips are token displays
+       not listbox options; group-label DOM element assertion updated to query by role="group")
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.a11y.spec.ts (NEW — 52 a11y tests)
+      (9 describe blocks: closed-state ARIA, open-state ARIA, keyboard nav, multiple/chip mode,
+       disabled state, dropdown+clear, grouped ARIA, live region, axe-core automated checks;
+       all 7 axe-core scenario tests pass; fixed lint: getAcInstance uses double-cast for
+       componentInstance access; liveRegion?.textContent patterns fixed to (x ?? '').trim())
+  - docs/COMPONENT_SCORES.md (AutoComplete row updated: 8.2 avg, all categories ≥8, status ✅ Done;
+      queue entry #3 updated ⏳ → ✅)
+  - AI_AGENT_CONTEXT.md (updated)
+State: AutoComplete component fully hardened. 96/96 tests pass (44 unit + 52 a11y). All 7 axe-core
+  automated checks pass. Key fixes: targeted document-click listener (open-only), chip container
+  changed to <div role="group"> (avoids listitem semantic violation when ul gets role="group"),
+  listbox panel gets aria-label via listboxLabel() computed with 'Suggestions' fallback,
+  CSS ::before for group visual headers (no DOM label divs), all options aria-setsize + aria-posinset,
+  inline SVG icons, live region. Score: 8.2/10 (all categories ≥ 8).
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/autocomplete/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom (zero errors/warnings),
+  npx.cmd jest --testPathPatterns=autocomplete --no-coverage (96/96 PASS),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (95/95 PASS).
+Terminal notes:
+  Two axe violations diagnosed via temporary diagnostic spec (axe-debug.spec.ts, deleted after use):
+  1. aria-input-field-name on role="listbox" panel — fixed by adding listboxLabel() with fallback.
+  2. listitem violation — <li> inside <ul role="group"> has implicit role="listitem" which
+     requires a list/menu/menubar parent; role="group" does not qualify. Fixed by changing <ul>/<li>
+     to <div>/<div> (no implicit listitem role). Same issue would affect any <ul> with overridden role.
+Next step: ConfirmDialog hardening (Tier 1, #6) — key a11y: role=alertdialog, default focus on confirm.
 

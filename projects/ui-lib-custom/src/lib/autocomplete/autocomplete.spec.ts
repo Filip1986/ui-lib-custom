@@ -520,7 +520,7 @@ describe('UiLibAutoComplete', (): void => {
         0,
         'chip'
       );
-      expect(chip.getAttribute('role')).toBe('option');
+      expect(chip.getAttribute('role')).toBeNull(); // chips are token displays, not listbox options
       expect(chip.getAttribute('aria-label')).toBeTruthy();
     });
   });
@@ -633,7 +633,9 @@ describe('UiLibAutoComplete', (): void => {
       component.showPanel();
       fixture.detectChanges();
 
-      expect(hostEl().querySelectorAll('.ui-autocomplete-option-group-label').length).toBe(2);
+      expect(hostEl().querySelectorAll('.ui-autocomplete-option-group[role="group"]').length).toBe(
+        2
+      );
       expect(hostEl().querySelectorAll('.ui-autocomplete-option').length).toBe(2);
     });
 
