@@ -208,7 +208,9 @@ describe('Drawer', (): void => {
     });
 
     it('close button should use an inline SVG icon, not PrimeNG pi classes', (): void => {
-      const svg: SVGElement | null = queryElement<SVGElement>(fixture, '.ui-lib-drawer__close svg');
+      const svg: SVGElement | null = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector<SVGElement>('.ui-lib-drawer__close svg');
       expect(svg).toBeTruthy();
       const piSpan: HTMLElement | null = queryElement(fixture, '.ui-lib-drawer__close .pi');
       expect(piSpan).toBeNull();
