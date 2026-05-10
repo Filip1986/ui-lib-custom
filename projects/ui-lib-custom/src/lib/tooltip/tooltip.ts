@@ -1,5 +1,6 @@
 import { Directive, ElementRef, inject, input, NgZone } from '@angular/core';
 import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { TooltipEvent, TooltipPosition, TooltipVariant } from './tooltip.types';
 
@@ -52,6 +53,7 @@ export class Tooltip implements OnInit, OnDestroy {
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly ngZone: NgZone = inject(NgZone);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly document: Document = inject(DOCUMENT);
 
   /** Unique ID used for `aria-describedby` linking. */
   public readonly tooltipId: string;
@@ -82,9 +84,19 @@ export class Tooltip implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.clearAllTimers();
     this.teardownListeners();
+    this.elementRef.nativeElement.removeAttribute('aria-describedby');
     this.destroyTooltipElement();
   }
 
+  /**
+   * Binds DOM event listeners based on the current `tooltipEvent` input value.
+   * Called once at ngOnInit. Listener configuration does NOT reactively update
+   * if `tooltipEvent` changes after initialization — this is by design (static setup).
+   *
+   * WCAG 1.4.13: any event mode that includes hover MUST also include focus/blur so
+   * keyboard users see the same tooltip as mouse users. The `'hover'` default therefore
+   * binds both mouseenter/mouseleave AND focus/blur.
+   */
   private setupListeners(): void {
     const host: HTMLElement = this.elementRef.nativeElement;
     const event: TooltipEvent = this.tooltipEvent();
@@ -100,16 +112,17 @@ export class Tooltip implements OnInit, OnDestroy {
       host.addEventListener('mouseleave', this.mouseLeaveListener);
     }
 
-    if (event === 'focus' || event === 'both') {
-      this.focusListener = (): void => {
-        this.scheduleShow();
-      };
-      this.blurListener = (): void => {
-        this.scheduleHide();
-      };
-      host.addEventListener('focus', this.focusListener);
-      host.addEventListener('blur', this.blurListener);
-    }
+    // WCAG 1.4.13 — all event modes must also bind focus/blur.
+    // 'hover' alone satisfies mouse users but fails keyboard users. Binding focus/blur
+    // for every mode ensures keyboard users always get the same tooltip as mouse users.
+    this.focusListener = (): void => {
+      this.scheduleShow();
+    };
+    this.blurListener = (): void => {
+      this.scheduleHide();
+    };
+    host.addEventListener('focus', this.focusListener);
+    host.addEventListener('blur', this.blurListener);
 
     this.keydownListener = (keyEvent: KeyboardEvent): void => {
       if (keyEvent.key === 'Escape' && this.isVisible) {
@@ -118,7 +131,7 @@ export class Tooltip implements OnInit, OnDestroy {
         this.hideTooltipImmediately();
       }
     };
-    document.addEventListener('keydown', this.keydownListener);
+    this.document.addEventListener('keydown', this.keydownListener);
   }
 
   private teardownListeners(): void {
@@ -140,7 +153,7 @@ export class Tooltip implements OnInit, OnDestroy {
       this.blurListener = null;
     }
     if (this.keydownListener) {
-      document.removeEventListener('keydown', this.keydownListener);
+      this.document.removeEventListener('keydown', this.keydownListener);
       this.keydownListener = null;
     }
   }
@@ -212,20 +225,20 @@ export class Tooltip implements OnInit, OnDestroy {
     if (this.tooltipElement) {
       return;
     }
-    const el: HTMLDivElement = document.createElement('div');
+    const el: HTMLDivElement = this.document.createElement('div');
     el.setAttribute('role', 'tooltip');
     el.setAttribute('id', this.tooltipId);
 
-    const arrow: HTMLDivElement = document.createElement('div');
+    const arrow: HTMLDivElement = this.document.createElement('div');
     arrow.className = 'ui-lib-tooltip__arrow';
     arrow.setAttribute('aria-hidden', 'true');
 
-    const text: HTMLDivElement = document.createElement('div');
+    const text: HTMLDivElement = this.document.createElement('div');
     text.className = 'ui-lib-tooltip__text';
 
     el.appendChild(arrow);
     el.appendChild(text);
-    document.body.appendChild(el);
+    this.document.body.appendChild(el);
     this.tooltipElement = el;
   }
 
@@ -281,8 +294,8 @@ export class Tooltip implements OnInit, OnDestroy {
 
     const hostRect: DOMRect = host.getBoundingClientRect();
     const tooltipRect: DOMRect = el.getBoundingClientRect();
-    const viewportWidth: number = window.innerWidth;
-    const viewportHeight: number = window.innerHeight;
+    const viewportWidth: number = this.document.defaultView?.innerWidth ?? 0;
+    const viewportHeight: number = this.document.defaultView?.innerHeight ?? 0;
     const gap: number = 8;
 
     const position: TooltipPosition = this.resolvePosition(
