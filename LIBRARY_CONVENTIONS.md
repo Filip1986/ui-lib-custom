@@ -23,7 +23,10 @@ Use this section for rules that still cause real regressions and should be check
 
 ### Environment
 
-- **Terminal:** Use **PowerShell** for all terminal commands. Never bash, cmd, or other shells.
+- **Terminal:** Use **`bash.exe`** for all terminal commands (the workspace default shell on Windows).
+  - **Do not use PowerShell** — ESLint exits with code 1 even on clean runs under PowerShell, making pass/fail indistinguishable. Always use `bash.exe`.
+  - If PowerShell blocks `.ps1` shims (execution policy), run the `.cmd` equivalents (`npm.cmd`, `npx.cmd`) from `bash.exe` instead. Record any workarounds in the session handoff.
+  - All command examples in this file and in `AGENTS.md` assume `bash.exe` syntax.
 - **Custom Components First:** Always use `ui-lib-*` components in demos and new features.
   Never reach for PrimeNG or Angular Material as a substitute when a custom equivalent exists.
   This enforces dogfooding, surfaces gaps, and ensures library consistency.
