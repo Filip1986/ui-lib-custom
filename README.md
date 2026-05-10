@@ -1,6 +1,29 @@
-# UI Components Library
+# ui-lib-custom
 
-A flexible Angular UI component library with multiple design variants (Material, Bootstrap, and Minimal) that can be easily integrated into your Angular projects.
+> **The modern Angular UI platform developers wished existed.**
+
+The UI library that makes Angular developers feel what React developers felt when modern UI ecosystems exploded — excited, fast, creative, confident.
+
+Not another Angular component library. **A new standard for what Angular UI development should feel like.**
+
+---
+
+## North Star
+
+> *Lost in the details? Come back here.*
+
+| Document | What it answers |
+|---|---|
+| [Vision](docs/VISION.md) | Why this exists and what it is trying to become |
+| [Roadmap](docs/ROADMAP.md) | Where we are and what "ready to go public" actually means |
+| [Launch Strategy](docs/LAUNCH_STRATEGY.md) | How the world finds this — and why the quality of the work is the marketing |
+| [Competitive Strategy](docs/COMPETITIVE_STRATEGY.md) | How to position this when the time comes |
+| [Component Scores](docs/COMPONENT_SCORES.md) | The scoreboard — every component, every category, honest numbers |
+
+**Current committed wow factor:** Elite Accessibility — the most accessible Angular component library ever built.
+Every component. Full keyboard navigation. Correct ARIA. Tested. No exceptions.
+
+---
 
 ## Importing Components
 
@@ -43,12 +66,13 @@ import { Button } from 'ui-lib-custom';
 
 Quick links:
 
-- 🌟 [Vision](docs/VISION.md) - Why this library exists and where it's going
-- 🧭 [Component Creation Guide](COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for adding new components
-- 🚀 [Quick Start Guide](docs/getting-started/QUICK_START.md) - Get started in 5 minutes
-- 📘 [Integration Examples](docs/guides/INTEGRATION_EXAMPLE.md) - Real-world usage examples
-- 🏗️ [Architecture](docs/architecture/ARCHITECTURE.md) - System design and structure
-- 📦 [Publishing Guide](docs/guides/PUBLISHING_GUIDE.md) - How to publish and distribute
+- [Vision](docs/VISION.md) — Why this library exists and where it's going
+- [Roadmap](docs/ROADMAP.md) — The path from now to public launch
+- [Launch Strategy](docs/LAUNCH_STRATEGY.md) — How the world finds this when it's ready
+- [Component Creation Guide](COMPONENT_CREATION_GUIDE.md) — End-to-end workflow for adding new components
+- [Quick Start Guide](docs/getting-started/QUICK_START.md) — Get started in 5 minutes
+- [Integration Examples](docs/guides/INTEGRATION_EXAMPLE.md) — Real-world usage examples
+- [Architecture](docs/architecture/ARCHITECTURE.md) — System design and structure
 
 ## Features
 
