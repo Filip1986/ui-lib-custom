@@ -3,12 +3,10 @@ import type { Type } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
 import { ButtonsComponent } from './pages/buttons/buttons.component';
 import { CardsComponent } from './pages/cards/cards.component';
-import { LoginComponent } from './pages/login/login.component';
 import { BadgesComponent } from './pages/badges/badges.component';
 import { ThemesComponent } from './pages/themes/themes.component';
 import { InputsComponent } from './pages/inputs/inputs.component';
 import { SelectComponent } from './pages/select/select.component';
-import { SidebarMenuDemoComponent } from './pages/sidebar-menu/sidebar-menu.component';
 import { ProjectStarterComponent } from './pages/project-starter/project-starter.component';
 import { ShadowsComponent } from './pages/shadows/shadows.component';
 import { CheckboxesComponent } from './pages/checkboxes/checkboxes.component';
@@ -86,17 +84,11 @@ export const routes: Routes = [
     component: LayoutExamplesSectionComponent,
     title: 'Examples - UI Components Library',
   },
-  { path: 'login', component: LoginComponent, title: 'Login Forms - UI Components Library' },
   { path: 'themes', component: ThemesComponent, title: 'Themes - UI Components Library' },
   { path: 'input-text', component: InputsComponent, title: 'Input Text - UI Components Library' },
   { path: 'inputs', redirectTo: 'input-text', pathMatch: 'full' },
   { path: 'select', component: SelectComponent, title: 'Select - UI Components Library' },
   { path: 'checkbox', component: CheckboxesComponent, title: 'Checkbox - UI Components Library' },
-  {
-    path: 'sidebar-menu',
-    component: SidebarMenuDemoComponent,
-    title: 'Sidebar Menu - UI Components Library',
-  },
   {
     path: 'project-starter',
     component: ProjectStarterComponent,

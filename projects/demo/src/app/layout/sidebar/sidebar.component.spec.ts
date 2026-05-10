@@ -147,35 +147,7 @@ describe('SidebarComponent ordering', (): void => {
       'Menu',
       'Menubar',
       'PanelMenu',
-      'Sidebar Menu',
       'TieredMenu',
-    ]);
-  });
-
-  it('keeps Login Forms out of Components grouping', (): void => {
-    const items: NavItem[] = getComponentsItems();
-    const labels: string[] = items.map((item: NavItem): string => item.label);
-
-    expect(labels).not.toContain('Blocks');
-    expect(labels).not.toContain('Login Forms');
-  });
-
-  it('adds UI Blocks as a collapsed top-level section with Authentication group', (): void => {
-    const uiBlocksMenu: NavItem | undefined = getTopLevelMenu('UI Blocks');
-
-    expect(uiBlocksMenu).toBeTruthy();
-    expect(uiBlocksMenu?.expanded).toBe(false);
-    expect(uiBlocksMenu?.items).toEqual([
-      {
-        label: 'Authentication',
-        isGroupLabel: true,
-      },
-      {
-        label: 'Login Forms',
-        icon: 'pi pi-sign-in',
-        route: '/login',
-        group: 'Authentication',
-      },
     ]);
   });
 
