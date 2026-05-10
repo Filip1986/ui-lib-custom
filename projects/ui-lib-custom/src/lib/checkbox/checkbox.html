@@ -25,7 +25,7 @@
   <span class="ui-lib-checkbox__icon ui-lib-checkbox__icon--indeterminate" aria-hidden="true"></span>
 </div>
 <div class="ui-lib-checkbox__content">
-  <label class="ui-lib-checkbox__label" [id]="labelElementId" [attr.for]="getNativeInputId()">
+  <label class="ui-lib-checkbox__label" [id]="labelElementId" [htmlFor]="getNativeInputId()">
     @if (label()) {
       {{ label() }}
     }

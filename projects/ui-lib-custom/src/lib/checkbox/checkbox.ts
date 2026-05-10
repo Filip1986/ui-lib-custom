@@ -184,7 +184,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
     return String(rawValue);
   });
 
-  private readonly indeterminateRenderEffect: AfterRenderRef = afterRenderEffect((): void => {
+  private readonly syncIndeterminatePropertyEffect: AfterRenderRef = afterRenderEffect((): void => {
     const nativeInputElement: HTMLInputElement | undefined = this.nativeInputRef()?.nativeElement;
     if (!nativeInputElement) {
       return;
