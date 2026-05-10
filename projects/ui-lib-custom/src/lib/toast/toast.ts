@@ -58,6 +58,9 @@ const ANIMATION_DURATION_MS: number = 300;
     '[class]': 'hostClasses()',
     role: 'region',
     '[attr.aria-label]': '"Notifications"',
+    // aria-live and aria-atomic are intentionally absent — role="region" is a structural
+    // landmark, not a live region. Each child item manages its own announcement urgency
+    // via role="alert" (error) or role="status" (success/info/warn).
   },
 })
 export class Toast {
@@ -93,12 +96,6 @@ export class Toast {
 
   /** Active auto-dismiss timer handles keyed by message ID. */
   private readonly timers: Map<string, ReturnType<typeof setTimeout>> = new Map<
-    string,
-    ReturnType<typeof setTimeout>
-  >();
-
-  /** Animation cleanup timer handles keyed by message ID — cleared on destroy to prevent leaks. */
-  private readonly animationTimers: Map<string, ReturnType<typeof setTimeout>> = new Map<
     string,
     ReturnType<typeof setTimeout>
   >();
@@ -166,10 +163,6 @@ export class Toast {
         clearTimeout(timer);
       }
       this.timers.clear();
-      for (const timer of this.animationTimers.values()) {
-        clearTimeout(timer);
-      }
-      this.animationTimers.clear();
     });
   }
 
@@ -207,8 +200,11 @@ export class Toast {
   }
 
   /**
-   * Dismiss a toast: cancel its auto-dismiss timer, play the exit animation,
-   * then remove it from the service after the animation completes.
+   * Dismiss a toast by ID: cancel its auto-dismiss timer, apply the exit animation class,
+   * then remove it from the service after `ANIMATION_DURATION_MS` (300ms) to allow
+   * the CSS exit animation to complete.
+   *
+   * Safe to call on already-dismissed IDs — the timer guard handles the no-op case.
    */
   public dismiss(messageId: string): void {
     // Cancel the scheduled auto-dismiss timer if still pending.
@@ -224,8 +220,7 @@ export class Toast {
     );
 
     // After the animation finishes, remove the message from the service.
-    const animTimer: ReturnType<typeof setTimeout> = setTimeout((): void => {
-      this.animationTimers.delete(messageId);
+    setTimeout((): void => {
       this.toastService.remove(messageId);
       this.closingIds.update((current: Set<string>): Set<string> => {
         const next: Set<string> = new Set<string>(current);
@@ -233,6 +228,5 @@ export class Toast {
         return next;
       });
     }, ANIMATION_DURATION_MS);
-    this.animationTimers.set(messageId, animTimer);
   }
 }

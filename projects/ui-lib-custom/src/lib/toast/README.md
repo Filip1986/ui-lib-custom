@@ -2,58 +2,43 @@
 
 **Selector:** `ui-lib-toast`
 **Package:** `ui-lib-custom/toast`
-**Content projection:** none — data-driven via `ToastService`
+**Content projection:** no — none
 
-> Toast is driven entirely by `ToastService.add()`. Place one `<ui-lib-toast />` in your app shell
-> (outside the router outlet) and inject `ToastService` from anywhere to trigger notifications.
-
----
+> Toast is driven entirely by `ToastService.add()` — place one `<ui-lib-toast />` instance in the app shell (outside the router outlet) and inject `ToastService` wherever you need to trigger a notification.
 
 ## Inputs
 
-| Name | Type | Default | Notes |
-|------|------|---------|-------|
-| `position` | `ToastPosition` | `'top-right'` | Screen position of the toast container |
-| `life` | `number` | `3000` | Default auto-dismiss duration in ms; per-message `life` overrides this |
-| `variant` | `ToastVariant \| null` | `null` | Falls back to `ThemeConfigService` global variant when null |
-| `key` | `string \| null` | `null` | When set, only messages with a matching `key` are displayed |
-| `styleClass` | `string \| null` | `null` | Additional CSS class(es) on the host element |
+| Name         | Type                                                                                              | Default       | Notes                                                                                           |
+|--------------|---------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------------|
+| `position`   | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left' \| 'top-center' \| 'bottom-center'` | `'top-right'` | Screen position of the toast container                                                          |
+| `life`       | `number`                                                                                          | `3000`        | Default auto-dismiss duration in ms; individual messages can override via their `life` property |
+| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null`                                                  | `null`        | Falls back to `ThemeConfigService` global variant when null                                     |
+| `key`        | `string \| null`                                                                                  | `null`        | When set, only messages with a matching `key` are shown; enables multiple toast regions         |
+| `styleClass` | `string \| null`                                                                                  | `null`        | Additional CSS class(es) on the host element                                                    |
 
 ## Outputs
 
 _none_
 
----
+## `ToastMessage` Interface
 
-## ToastService API
-
-| Method | Signature | Description |
-|--------|-----------|-------------|
-| `add` | `(message: ToastMessage) => void` | Enqueue a notification. Auto-generates an `id` if one is not provided. |
-| `remove` | `(id: string) => void` | Remove a message by its ID (called automatically after exit animation). |
-| `clear` | `(key?: string) => void` | Clear all messages, or only those matching `key`. |
-
-### `ToastMessage` interface
-
-| Property | Type | Default | Notes |
-|----------|------|---------|-------|
-| `id` | `string` | auto | Unique identifier — auto-generated when omitted |
-| `key` | `string` | — | Routes the message to the container with the matching `key` |
-| `severity` | `'success' \| 'info' \| 'warn' \| 'error'` | `'info'` | Controls colour palette and default icon |
-| `summary` | `string` | — | Bold headline of the notification |
-| `detail` | `string` | — | Body text of the notification |
-| `life` | `number` | container `life` | Per-message auto-dismiss duration in ms |
-| `sticky` | `boolean` | `false` | When `true`, never auto-dismisses |
-| `closable` | `boolean` | `true` | When `false`, the close button is hidden |
-| `icon` | `string` | severity default | Custom icon name overriding the severity default |
-| `styleClass` | `string` | — | Extra CSS class(es) on the item element |
-
----
+| Property       | Type                                       | Default          | Description                                                |
+|----------------|--------------------------------------------|------------------|------------------------------------------------------------|
+| `id`           | `string \| undefined`                      | auto-generated   | Unique identifier. Auto-generated if omitted.              |
+| `key`          | `string \| undefined`                      | —                | Routes this message to the matching `Toast` container key. |
+| `severity`     | `'success' \| 'info' \| 'warn' \| 'error'` | `'info'`         | Controls colour palette and default icon.                  |
+| `summary`      | `string \| undefined`                      | —                | Bold headline text shown above detail.                     |
+| `detail`       | `string \| undefined`                      | —                | Body text for the notification.                            |
+| `life`         | `number \| undefined`                      | container `life` | Auto-dismiss duration ms — overrides container default.    |
+| `sticky`       | `boolean \| undefined`                     | `false`          | When true, the toast never auto-dismisses.                 |
+| `closable`     | `boolean \| undefined`                     | `true`           | When false, the dismiss button is hidden.                  |
+| `icon`         | `string \| undefined`                      | severity default | Custom icon name — overrides the severity default.         |
+| `styleClass`   | `string \| undefined`                      | —                | Additional CSS class(es) on the item element.              |
 
 ## Usage
 
 ```html
-<!-- app.html — place once, outside the router outlet -->
+<!-- app.component.html — place once, outside the router outlet -->
 <router-outlet />
 <ui-lib-toast position="top-right" />
 ```
@@ -66,90 +51,68 @@ this.toastService.add({ severity: 'success', summary: 'Saved', detail: 'Changes 
 this.toastService.add({ severity: 'error', summary: 'Failed', sticky: true });
 ```
 
-### Multiple containers with keys
+## Multiple Containers Pattern
+
+Use the `key` input to route messages to specific toast containers — useful when you need
+notifications in different screen regions simultaneously.
 
 ```html
-<ui-lib-toast position="top-right" />
-<ui-lib-toast position="bottom-left" key="system" />
+<!-- App shell — two toast regions -->
+<ui-lib-toast position="top-right" key="global" />
+<ui-lib-toast position="bottom-center" key="form-feedback" />
 ```
 
-```ts
-// Routes to the bottom-left container only
-this.toastService.add({ key: 'system', severity: 'warn', summary: 'Low disk space' });
+```typescript
+// Route to specific container
+toastService.add({ key: 'form-feedback', severity: 'error', summary: 'Validation failed' });
+toastService.add({ key: 'global', severity: 'success', summary: 'Profile saved' });
 ```
 
----
+## Notification Lifecycle
+
+1. **Enter** — `ToastService.add()` inserts a message into the signal queue; the component renders it and plays the `uilib-toast-enter` keyframe animation.
+2. **Auto-dismiss** — After `life` ms (or `message.life` if overridden), `dismiss()` is called automatically (skipped for `sticky: true` messages).
+3. **Exit** — `dismiss()` applies the `--closing` CSS class which plays the `uilib-toast-exit` keyframe, then removes the message from the service after `300ms`.
+
+## CSS Custom Properties
+
+| Property                           | Default                            | Description                                                                                     |
+|------------------------------------|------------------------------------|-------------------------------------------------------------------------------------------------|
+| `--uilib-toast-width`              | `22rem`                            | Width of the toast container                                                                    |
+| `--uilib-toast-gap`                | `0.5rem`                           | Gap between stacked toasts                                                                      |
+| `--uilib-toast-z-index`            | `var(--uilib-z-overlay, 1100)`     | Stack order                                                                                     |
+| `--uilib-toast-offset`             | `1.25rem`                          | Distance from screen edge                                                                       |
+| `--uilib-toast-animation-duration` | `300ms`                            | Enter/exit animation duration (set to `0ms` automatically for `prefers-reduced-motion: reduce`) |
+| `--uilib-toast-item-padding`       | `0.875rem 1rem`                    | Inner padding of each item                                                                      |
+| `--uilib-toast-item-radius`        | `var(--uilib-radius-md, 0.375rem)` | Item corner radius                                                                              |
+| `--uilib-toast-item-font-size`     | `0.875rem`                         | Item text size                                                                                  |
 
 ## Accessibility
 
 ### ARIA features
 
-| Feature | Implementation |
-|---------|---------------|
-| Container landmark | `role="region" aria-label="Notifications"` on the host element |
-| Error announcements | `role="alert"` on `error` severity items — implies `aria-live="assertive"` |
-| Polite announcements | `role="status"` on `success`, `info`, `warn` items — implies `aria-live="polite"` |
-| No redundant live regions | Container has no `aria-live`; only items carry live-region semantics |
-| Contextual close label | Close button: `aria-label="Dismiss: {summary}"` — distinct per notification |
-| Decorative icons | Severity icon and close icon both carry `aria-hidden="true"` |
-| Reduced motion | `@media (prefers-reduced-motion: reduce)` collapses animation duration to `0ms` |
+| Feature                      | Detail                                                                                                                                                                                                              |
+|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `role="region"`              | Applied to the `<ui-lib-toast>` host element — identifies the notification area as a page landmark.                                                                                                                 |
+| `aria-label="Notifications"` | Names the region for screen reader landmark navigation.                                                                                                                                                             |
+| `role="alert"`               | Applied to **error** severity items — implies `aria-live="assertive"` and `aria-atomic="true"`. Screen readers interrupt immediately to announce the content.                                                       |
+| `role="status"`              | Applied to **success**, **info**, and **warn** items — implies `aria-live="polite"` and `aria-atomic="true"`. Screen readers announce when idle.                                                                    |
+| Close button `aria-label`    | `"Dismiss: {summary}"` — includes the notification summary so users can identify which toast they are closing when multiple toasts are visible. Falls back to `"Dismiss: {detail}"` then `"Dismiss: notification"`. |
+| Icon `aria-hidden`           | The severity icon and close button icon are both `aria-hidden="true"` — they are decorative and convey no additional information to screen reader users beyond what the text provides.                              |
+| Reduced motion               | `@media (prefers-reduced-motion: reduce)` sets `--uilib-toast-animation-duration: 0ms` — slide animations are disabled for users who prefer reduced motion.                                                         |
 
-### ARIA design rationale
-
-The WAI-ARIA pattern for toast notifications requires different urgency per severity:
-
-- **`role="alert"`** (`aria-live="assertive"`) is reserved for `error` messages that demand immediate attention.
-- **`role="status"`** (`aria-live="polite"`) is used for all other severities — the screen reader announces them at the next available opportunity without interrupting the user.
-
-Mixing `role="alert"` with an explicit `aria-live="polite"` attribute is invalid — `role="alert"` always implies assertive. The container carries no `aria-live` to avoid creating a parent live region that conflicts with the item-level semantics.
+> **Note:** The container (`<ui-lib-toast>`) does **not** have `aria-live` or `aria-atomic` — `role="region"` is a structural landmark, not a live region. Each child item manages its own announcement urgency via `role="alert"` or `role="status"`, both of which imply `aria-atomic="true"`.
 
 ### Keyboard navigation
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Move focus to the next interactive element (close button) |
-| `Shift+Tab` | Move focus to the previous interactive element |
-| `Enter` / `Space` | Activate the focused close button — dismisses that notification |
+| Key                 | Behaviour                                                                            |
+|---------------------|--------------------------------------------------------------------------------------|
+| Tab                 | Cycles through visible dismiss buttons (one per closable toast)                      |
+| Enter / Space       | Activates the focused dismiss button — starts exit animation, then removes the toast |
+| No Escape handler   | Toasts are non-modal — no global Escape handler needed. Focus is never trapped.      |
 
-> Toast items are non-modal and non-blocking. Focus is never automatically moved into the toast container. Users reach the close button naturally via sequential Tab navigation.
+### Severity and urgency
 
-### Consumer responsibilities
-
-- Always provide a meaningful `summary` — it becomes part of the close button's `aria-label` (`"Dismiss: {summary}"`).
-- Use `severity: 'error'` only for genuine errors requiring immediate attention; it maps to `aria-live="assertive"` and will interrupt the user.
-- For notifications that must persist until the user takes action, set `sticky: true` so the message is not auto-dismissed before it is read.
-
----
-
-## Design variants
-
-| Variant | Character |
-|---------|-----------|
-| `material` | Elevated white/dark surface, coloured icons, no border |
-| `bootstrap` | Coloured tinted background with border, matching severity palette |
-| `minimal` | White/dark surface with a coloured left accent stripe |
-
----
-
-## CSS custom properties
-
-| Property | Default | Description |
-|----------|---------|-------------|
-| `--uilib-toast-width` | `22rem` | Width of the toast container |
-| `--uilib-toast-gap` | `0.5rem` | Vertical gap between stacked toasts |
-| `--uilib-toast-z-index` | `var(--uilib-z-overlay, 1100)` | Stack order |
-| `--uilib-toast-offset` | `1.25rem` | Distance from the viewport edge |
-| `--uilib-toast-animation-duration` | `300ms` | Enter/exit animation duration |
-| `--uilib-toast-item-padding` | `0.875rem 1rem` | Padding inside each item |
-| `--uilib-toast-item-radius` | `var(--uilib-radius-md)` | Border radius of each item |
-| `--uilib-toast-item-shadow` | `var(--uilib-shadow-lg)` | Box shadow of each item |
-| `--uilib-toast-item-font-size` | `0.875rem` | Font size of item text |
-
----
-
-## Public properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `effectiveVariant` | `Signal<ToastVariant>` | Resolved variant — own input or ThemeConfigService fallback |
-| `visibleMessages` | `Signal<ToastMessage[]>` | Currently visible messages, filtered by `key` |
+- **Error** → `role="alert"` — assertive, interrupts immediately. Use for failures requiring immediate user attention.
+- **Warn / Info / Success** → `role="status"` — polite, waits for a pause. Use for confirmations and informational messages.
+- Do **not** misuse `role="alert"` for routine confirmations — it is reserved for genuinely critical information.

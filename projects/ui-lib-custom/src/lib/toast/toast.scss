@@ -357,3 +357,11 @@ ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item--error {
   --uilib-toast-item-bg: var(--uilib-color-neutral-800, #262626);
   --uilib-toast-item-fg: var(--uilib-color-neutral-100, #f5f5f5);
 }
+
+// ─── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-toast {
+    --uilib-toast-animation-duration: 0ms;
+  }
+}

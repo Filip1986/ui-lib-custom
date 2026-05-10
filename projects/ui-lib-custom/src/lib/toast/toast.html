@@ -22,7 +22,7 @@
       <button
         type="button"
         class="ui-lib-toast__close"
-        [attr.aria-label]="'Dismiss: ' + (message.summary || 'notification')"
+        [attr.aria-label]="'Dismiss: ' + (message.summary || message.detail || 'notification')"
         (click)="dismiss(message.id ?? '')"
       >
         <ui-lib-icon

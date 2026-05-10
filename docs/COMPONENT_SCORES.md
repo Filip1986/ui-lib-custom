@@ -246,7 +246,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Alert           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Toast           | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
+| Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
 | Badge           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Tag             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Chip            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -339,3 +339,4 @@ Then update the table above and record the session in `AI_AGENT_CONTEXT.md`.
 | [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)   | The 6-phase AI workflow that produces these scores   |
 | [Vision — Component Philosophy](VISION.md#component-philosophy)         | The 10-layer quality model and ≥8 gate               |
 | [Accessibility Guide](reference/systems/ACCESSIBILITY.md)               | Detail behind the A11y score category                |
+

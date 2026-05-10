@@ -1,12 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  provideZonelessChangeDetection,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import {
   bootstrapInfoCircle,
   bootstrapCheckCircle,
@@ -15,12 +11,28 @@ import {
   bootstrapX,
 } from '@ng-icons/bootstrap-icons';
 import { provideIcons } from '@ng-icons/core';
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { Toast } from './toast';
 import { ToastService } from './toast.service';
-import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
-import type { ToastSeverity } from './toast.types';
+import type { ToastMessage, ToastPosition } from './toast.types';
 
-// ── Host component ─────────────────────────────────────────────────────────────
+// ─── Typed query helpers ───────────────────────────────────────────────────────
+
+function queryEl<T extends HTMLElement>(
+  fixture: ComponentFixture<unknown>,
+  selector: string
+): T | null {
+  return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
+}
+
+function queryAllEl<T extends HTMLElement>(
+  fixture: ComponentFixture<unknown>,
+  selector: string
+): T[] {
+  return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
+}
+
+// ─── Host component ────────────────────────────────────────────────────────────
 
 @Component({
   standalone: true,
@@ -29,243 +41,379 @@ import type { ToastSeverity } from './toast.types';
   template: `<ui-lib-toast [position]="position()" />`,
 })
 class ToastA11yHostComponent {
-  public readonly position: WritableSignal<'top-right' | 'bottom-left'> = signal<
-    'top-right' | 'bottom-left'
-  >('top-right');
+  public readonly position: WritableSignal<ToastPosition> = signal<ToastPosition>('top-right');
 }
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
+// ─── Setup helpers ─────────────────────────────────────────────────────────────
 
-function getHost(fixture: ComponentFixture<ToastA11yHostComponent>): HTMLElement {
-  const host: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-    'ui-lib-toast'
-  );
-  if (!host) throw new Error('Expected ui-lib-toast host to exist');
-  return host;
+async function createFixture(): Promise<{
+  fixture: ComponentFixture<ToastA11yHostComponent>;
+  toastService: ToastService;
+}> {
+  await TestBed.configureTestingModule({
+    imports: [ToastA11yHostComponent],
+    providers: [
+      provideZonelessChangeDetection(),
+      provideIcons({
+        bootstrapInfoCircle,
+        bootstrapCheckCircle,
+        bootstrapExclamationOctagon,
+        bootstrapExclamationTriangle,
+        bootstrapX,
+      }),
+    ],
+  }).compileComponents();
+
+  const fixture: ComponentFixture<ToastA11yHostComponent> =
+    TestBed.createComponent(ToastA11yHostComponent);
+  const toastService: ToastService = TestBed.inject(ToastService);
+  fixture.detectChanges();
+  await fixture.whenStable();
+  return { fixture, toastService };
 }
 
-function getItems(fixture: ComponentFixture<ToastA11yHostComponent>): HTMLElement[] {
-  return Array.from(
-    (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-toast__item')
-  );
-}
-
-function addMessage(
+async function addMessage(
   fixture: ComponentFixture<ToastA11yHostComponent>,
   toastService: ToastService,
-  severity: ToastSeverity = 'info',
-  summary: string = 'Test notification',
-  options: { closable?: boolean; sticky?: boolean } = {}
-): void {
-  const msg: Parameters<ToastService['add']>[0] = { severity, summary, sticky: true, ...options };
-  toastService.add(msg);
+  message: ToastMessage
+): Promise<void> {
+  toastService.add(message);
   fixture.detectChanges();
+  await fixture.whenStable();
 }
 
-// ── Suite ──────────────────────────────────────────────────────────────────────
+// ─── Tests ────────────────────────────────────────────────────────────────────
 
 describe('Toast Accessibility', (): void => {
-  let fixture: ComponentFixture<ToastA11yHostComponent>;
-  let toastService: ToastService;
-
-  beforeEach(async (): Promise<void> => {
-    await TestBed.configureTestingModule({
-      imports: [ToastA11yHostComponent],
-      providers: [
-        provideZonelessChangeDetection(),
-        provideIcons({
-          bootstrapInfoCircle,
-          bootstrapCheckCircle,
-          bootstrapExclamationOctagon,
-          bootstrapExclamationTriangle,
-          bootstrapX,
-        }),
-      ],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ToastA11yHostComponent);
-    toastService = TestBed.inject(ToastService);
-    fixture.detectChanges();
-  });
-
   afterEach((): void => {
-    toastService.clear();
+    TestBed.inject(ToastService).clear();
   });
 
-  // ── Container ARIA ─────────────────────────────────────────────────────────
+  // ─── Container ARIA ─────────────────────────────────────────────────────────
 
   describe('container ARIA', (): void => {
-    it('has role="region" on the host', (): void => {
-      const host: HTMLElement = getHost(fixture);
-      expect(host.getAttribute('role')).toBe('region');
+    it('should have role="region" on the host element', async (): Promise<void> => {
+      const { fixture } = await createFixture();
+      const toastHost: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-toast') as HTMLElement;
+      expect(toastHost.getAttribute('role')).toBe('region');
     });
 
-    it('has aria-label="Notifications" on the host', (): void => {
-      const host: HTMLElement = getHost(fixture);
-      expect(host.getAttribute('aria-label')).toBe('Notifications');
+    it('should have aria-label="Notifications" on the host element', async (): Promise<void> => {
+      const { fixture } = await createFixture();
+      const toastHost: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-toast') as HTMLElement;
+      expect(toastHost.getAttribute('aria-label')).toBe('Notifications');
     });
 
-    it('does NOT have aria-live on the host (live regions are on items)', (): void => {
-      const host: HTMLElement = getHost(fixture);
-      expect(host.getAttribute('aria-live')).toBeNull();
+    it('should NOT have aria-live attribute on the host element', async (): Promise<void> => {
+      const { fixture } = await createFixture();
+      const toastHost: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-toast') as HTMLElement;
+      expect(toastHost.getAttribute('aria-live')).toBeNull();
     });
 
-    it('does NOT have aria-atomic on the host', (): void => {
-      const host: HTMLElement = getHost(fixture);
-      expect(host.getAttribute('aria-atomic')).toBeNull();
-    });
-  });
-
-  // ── Item roles per severity ────────────────────────────────────────────────
-
-  describe('item role per severity', (): void => {
-    it('error toast has role="alert" (assertive live region)', (): void => {
-      addMessage(fixture, toastService, 'error', 'Error occurred');
-      const items: HTMLElement[] = getItems(fixture);
-      expect(items.length).toBe(1);
-      expect(items[0]?.getAttribute('role')).toBe('alert');
-    });
-
-    it('success toast has role="status" (polite live region)', (): void => {
-      addMessage(fixture, toastService, 'success', 'Saved successfully');
-      const items: HTMLElement[] = getItems(fixture);
-      expect(items[0]?.getAttribute('role')).toBe('status');
-    });
-
-    it('info toast has role="status"', (): void => {
-      addMessage(fixture, toastService, 'info', 'Info message');
-      const items: HTMLElement[] = getItems(fixture);
-      expect(items[0]?.getAttribute('role')).toBe('status');
-    });
-
-    it('warn toast has role="status"', (): void => {
-      addMessage(fixture, toastService, 'warn', 'Warning message');
-      const items: HTMLElement[] = getItems(fixture);
-      expect(items[0]?.getAttribute('role')).toBe('status');
-    });
-
-    it('items do NOT have a standalone aria-live attribute', (): void => {
-      addMessage(fixture, toastService, 'error', 'Critical');
-      addMessage(fixture, toastService, 'success', 'Done');
-      const items: HTMLElement[] = getItems(fixture);
-      for (const item of items) {
-        expect(item.getAttribute('aria-live')).toBeNull();
-      }
+    it('should NOT have aria-atomic attribute on the host element', async (): Promise<void> => {
+      const { fixture } = await createFixture();
+      const toastHost: HTMLElement = queryEl<HTMLElement>(fixture, 'ui-lib-toast') as HTMLElement;
+      expect(toastHost.getAttribute('aria-atomic')).toBeNull();
     });
   });
 
-  // ── Close button ───────────────────────────────────────────────────────────
+  // ─── Item ARIA roles ─────────────────────────────────────────────────────────
 
-  describe('close button', (): void => {
-    it('has a contextual aria-label including the summary', (): void => {
-      addMessage(fixture, toastService, 'success', 'File uploaded');
-      const closeBtn: HTMLElement | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector<HTMLElement>('.ui-lib-toast__close');
-      expect(closeBtn).not.toBeNull();
-      expect(closeBtn?.getAttribute('aria-label')).toBe('Dismiss: File uploaded');
+  describe('item ARIA roles', (): void => {
+    it('should set role="alert" on an error severity item', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'error',
+        summary: 'Upload failed',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('alert');
     });
 
-    it('falls back to "Dismiss: notification" when summary is absent', (): void => {
-      toastService.add({ detail: 'No summary here', sticky: true });
-      fixture.detectChanges();
-      const closeBtn: HTMLElement | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector<HTMLElement>('.ui-lib-toast__close');
-      expect(closeBtn?.getAttribute('aria-label')).toBe('Dismiss: notification');
+    it('should set role="status" on a success severity item', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'success',
+        summary: 'Saved',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('status');
     });
 
-    it('is not present when closable=false', (): void => {
-      addMessage(fixture, toastService, 'info', 'Permanent', { closable: false });
-      const closeBtn: HTMLElement | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector<HTMLElement>('.ui-lib-toast__close');
-      expect(closeBtn).toBeNull();
+    it('should set role="status" on an info severity item', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'info',
+        summary: 'Info notice',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('status');
     });
 
-    it('is a <button type="button">', (): void => {
-      addMessage(fixture, toastService, 'info', 'Test');
-      const closeBtn: HTMLButtonElement | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector<HTMLButtonElement>('.ui-lib-toast__close');
-      expect(closeBtn?.tagName).toBe('BUTTON');
-      expect(closeBtn?.getAttribute('type')).toBe('button');
+    it('should set role="status" on a warn severity item', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'warn',
+        summary: 'Heads up',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('status');
     });
 
-    it('close button icon is aria-hidden', (): void => {
-      addMessage(fixture, toastService, 'info', 'Test');
-      const closeBtn: HTMLElement | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector<HTMLElement>('.ui-lib-toast__close');
-      const icon: HTMLElement | null = closeBtn?.querySelector('[aria-hidden]') ?? null;
-      expect(icon?.getAttribute('aria-hidden')).toBe('true');
+    it('should NOT have aria-live attribute on items (role drives announcement urgency)', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'error',
+        summary: 'Critical error',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('aria-live')).toBeNull();
     });
   });
 
-  // ── Severity icon ──────────────────────────────────────────────────────────
+  // ─── Icon accessibility ──────────────────────────────────────────────────────
 
-  describe('severity icon', (): void => {
-    it('severity icon is aria-hidden', (): void => {
-      addMessage(fixture, toastService, 'success', 'Done');
-      const icon: HTMLElement | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector<HTMLElement>('.ui-lib-toast__icon');
-      expect(icon?.getAttribute('aria-hidden')).toBe('true');
+  describe('icon accessibility', (): void => {
+    it('should have aria-hidden="true" on the severity icon inside each item', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'success',
+        summary: 'Done',
+        sticky: true,
+      });
+      const severityIcon: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__icon');
+      expect(severityIcon?.getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('should have aria-hidden="true" on the close button icon', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { summary: 'Test', sticky: true });
+      const closeIcon: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__close ui-lib-icon');
+      expect(closeIcon?.getAttribute('aria-hidden')).toBe('true');
     });
   });
 
-  // ── Multiple messages ──────────────────────────────────────────────────────
+  // ─── Close button accessibility ──────────────────────────────────────────────
 
-  describe('multiple messages', (): void => {
-    it('each item has its own role based on severity', (): void => {
-      addMessage(fixture, toastService, 'success', 'A');
-      addMessage(fixture, toastService, 'error', 'B');
-      addMessage(fixture, toastService, 'info', 'C');
-      const items: HTMLElement[] = getItems(fixture);
-      expect(items.length).toBe(3);
-      expect(items[0]?.getAttribute('role')).toBe('status');
-      expect(items[1]?.getAttribute('role')).toBe('alert');
-      expect(items[2]?.getAttribute('role')).toBe('status');
-    });
-
-    it('each close button has a distinct aria-label', (): void => {
-      addMessage(fixture, toastService, 'success', 'First');
-      addMessage(fixture, toastService, 'error', 'Second');
-      const closeBtns: HTMLElement[] = Array.from(
-        (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-toast__close')
+  describe('close button accessibility', (): void => {
+    it('should have type="button" on the close button', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { summary: 'Test', sticky: true });
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
       );
-      expect(closeBtns.length).toBe(2);
-      expect(closeBtns[0]?.getAttribute('aria-label')).toBe('Dismiss: First');
-      expect(closeBtns[1]?.getAttribute('aria-label')).toBe('Dismiss: Second');
+      expect(closeButton?.getAttribute('type')).toBe('button');
+    });
+
+    it('should include the message summary in the close button aria-label', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { summary: 'Changes saved', sticky: true });
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: Changes saved');
+    });
+
+    it('should use detail as fallback aria-label when summary is absent', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { detail: 'File upload failed', sticky: true });
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: File upload failed');
+    });
+
+    it('should fall back to "notification" when neither summary nor detail is set', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { severity: 'info', sticky: true });
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: notification');
+    });
+
+    it('should not render the close button when closable=false', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        summary: 'Persistent',
+        closable: false,
+        sticky: true,
+      });
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      expect(closeButton).toBeNull();
+    });
+
+    it('should have the close button focusable (no tabindex=-1 or disabled)', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { summary: 'Focusable', sticky: true });
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      expect(closeButton?.getAttribute('tabindex')).not.toBe('-1');
+      expect(closeButton?.hasAttribute('disabled')).toBe(false);
     });
   });
 
-  // ── axe-core ──────────────────────────────────────────────────────────────
+  // ─── Keyboard accessibility ──────────────────────────────────────────────────
 
-  describe('axe-core', (): void => {
-    it('passes axe with no visible toasts', async (): Promise<void> => {
+  describe('keyboard accessibility', (): void => {
+    it('should dismiss the toast when the close button is activated via click (Enter/Space)', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { summary: 'Keyboard dismiss', sticky: true });
+
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      closeButton?.click();
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.classList.contains('ui-lib-toast__item--closing')).toBe(true);
+    });
+
+    it('should give each close button a distinct aria-label when multiple toasts are visible', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      toastService.add({ severity: 'success', summary: 'File saved', sticky: true });
+      toastService.add({ severity: 'error', summary: 'Upload failed', sticky: true });
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const closeButtons: HTMLButtonElement[] = queryAllEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      const labels: (string | null)[] = closeButtons.map((btn: HTMLButtonElement): string | null =>
+        btn.getAttribute('aria-label')
+      );
+      expect(labels[0]).toBe('Dismiss: File saved');
+      expect(labels[1]).toBe('Dismiss: Upload failed');
+      expect(new Set(labels).size).toBe(2);
+    });
+
+    it('should include summary in the close button aria-label for a sticky toast', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'warn',
+        summary: 'Action required',
+        sticky: true,
+      });
+      const closeButton: HTMLButtonElement | null = queryEl<HTMLButtonElement>(
+        fixture,
+        '.ui-lib-toast__close'
+      );
+      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: Action required');
+    });
+  });
+
+  // ─── Live region announcement correctness ────────────────────────────────────
+
+  describe('live region announcement correctness', (): void => {
+    it('should use role="alert" for error toast (assertive — interrupts immediately)', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'error',
+        summary: 'Error occurred',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('alert');
+    });
+
+    it('should use role="status" for success toast (polite — waits for idle)', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'success',
+        summary: 'Saved',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('status');
+    });
+
+    it('should use role="status" for info toast', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, { severity: 'info', summary: 'FYI', sticky: true });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('status');
+    });
+
+    it('should use role="status" for warn toast', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'warn',
+        summary: 'Caution',
+        sticky: true,
+      });
+      const item: HTMLElement | null = queryEl(fixture, '.ui-lib-toast__item');
+      expect(item?.getAttribute('role')).toBe('status');
+    });
+  });
+
+  // ─── axe-core automated checks ───────────────────────────────────────────────
+
+  describe('axe-core automated checks', (): void => {
+    it('should pass axe — empty state (no toasts)', async (): Promise<void> => {
+      const { fixture } = await createFixture();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
 
-    it('passes axe with a success toast', async (): Promise<void> => {
-      addMessage(fixture, toastService, 'success', 'Changes saved');
+    it('should pass axe — with error toast visible', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'error',
+        summary: 'Upload failed',
+        detail: 'The file exceeded the size limit.',
+        sticky: true,
+      });
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
 
-    it('passes axe with an error toast', async (): Promise<void> => {
-      addMessage(fixture, toastService, 'error', 'Request failed');
+    it('should pass axe — with success toast visible', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'success',
+        summary: 'Changes saved',
+        detail: 'Your profile has been updated.',
+        sticky: true,
+      });
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
 
-    it('passes axe with multiple toasts of mixed severity', async (): Promise<void> => {
-      addMessage(fixture, toastService, 'success', 'Saved');
-      addMessage(fixture, toastService, 'warn', 'Low disk space');
-      addMessage(fixture, toastService, 'error', 'Network error');
+    it('should pass axe — with multiple mixed-severity toasts visible', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      toastService.add({ severity: 'success', summary: 'Profile saved', sticky: true });
+      toastService.add({ severity: 'error', summary: 'Network error', sticky: true });
+      toastService.add({ severity: 'info', summary: 'New message', sticky: true });
+      toastService.add({ severity: 'warn', summary: 'Low disk space', sticky: true });
+      fixture.detectChanges();
+      await fixture.whenStable();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
 
-    it('passes axe with a non-closable toast', async (): Promise<void> => {
-      addMessage(fixture, toastService, 'info', 'Loading…', { closable: false });
+    it('should pass axe — sticky toast with closable=false', async (): Promise<void> => {
+      const { fixture, toastService } = await createFixture();
+      await addMessage(fixture, toastService, {
+        severity: 'warn',
+        summary: 'Session expiring',
+        detail: 'You will be logged out in 5 minutes.',
+        sticky: true,
+        closable: false,
+      });
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
   });

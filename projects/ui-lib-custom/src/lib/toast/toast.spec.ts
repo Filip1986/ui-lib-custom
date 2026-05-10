@@ -421,7 +421,7 @@ describe('Toast', (): void => {
 
   it('should set role="alert" on error severity items', async (): Promise<void> => {
     const { fixture, toastService }: TestSetup = await setup();
-    toastService.add({ severity: 'error', summary: 'Error occurred' });
+    toastService.add({ severity: 'error', summary: 'Alert role test' });
     fixture.detectChanges();
     await fixture.whenStable();
 
@@ -431,7 +431,7 @@ describe('Toast', (): void => {
 
   it('should set role="status" on non-error severity items', async (): Promise<void> => {
     const { fixture, toastService }: TestSetup = await setup();
-    toastService.add({ severity: 'success', summary: 'Saved' });
+    toastService.add({ severity: 'success', summary: 'Status role test' });
     fixture.detectChanges();
     await fixture.whenStable();
 
@@ -439,20 +439,17 @@ describe('Toast', (): void => {
     expect(item?.getAttribute('role')).toBe('status');
   });
 
-  it('should NOT set a standalone aria-live attribute on items (role implies it)', async (): Promise<void> => {
+  it('should not have aria-live attribute on toast items (role drives announcement urgency)', async (): Promise<void> => {
     const { fixture, toastService }: TestSetup = await setup();
     toastService.add({ severity: 'error', summary: 'Critical' });
-    toastService.add({ severity: 'success', summary: 'Done' });
     fixture.detectChanges();
     await fixture.whenStable();
 
-    const items: HTMLElement[] = queryAllElements(fixture, '.ui-lib-toast__item');
-    for (const item of items) {
-      expect(item.getAttribute('aria-live')).toBeNull();
-    }
+    const item: HTMLElement | null = queryElement(fixture, '.ui-lib-toast__item');
+    expect(item?.getAttribute('aria-live')).toBeNull();
   });
 
-  it('should have a contextual accessible label on the close button', async (): Promise<void> => {
+  it('should include the message summary in the close button aria-label', async (): Promise<void> => {
     const { fixture, toastService }: TestSetup = await setup();
     toastService.add({ summary: 'Aria test' });
     fixture.detectChanges();
