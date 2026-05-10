@@ -9,6 +9,7 @@
 
 ## Big Picture
 - **Project vision and long-term direction:** see `docs/VISION.md` — this is the emotional and strategic north star for every decision.
+- **Current committed "wow factor": Elite Accessibility** — every component must meet the accessibility standard described in `docs/VISION.md#-committed--elite-accessibility`. When in doubt on any a11y trade-off, the answer is always: go further, not less.
 - Monorepo-style Angular workspace with 3 projects in `angular.json`: library (`projects/ui-lib-custom`), demo app (`projects/demo`), and minimal app (`projects/minimal`).
 - Library architecture is secondary-entry-point first (tree-shaking), with primary barrel kept for backward compatibility (`projects/ui-lib-custom/src/public-api.ts`).
 - Cross-cutting concerns are split into dedicated entry points: `ui-lib-custom/theme` (theme services/directives), `ui-lib-custom/tokens` (`design-tokens.ts`), `ui-lib-custom/core` (shared types/constants to avoid type cycles), `ui-lib-custom/a11y`, and `ui-lib-custom/testing`.

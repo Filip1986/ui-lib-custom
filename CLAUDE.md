@@ -36,6 +36,7 @@ Do not skip step 1. It tells you exactly what is in-flight and what is next.
 
 These rules apply to every task, no exceptions:
 
+- **Elite Accessibility is the current strategic priority** — keyboard navigation, correct ARIA, focus management, reduced motion, screen reader support, and WCAG 2.1 AA are non-negotiable on every component. When any a11y trade-off arises, always go further, not less. See `docs/VISION.md` for the full commitment.
 - **`ViewEncapsulation.None`** on every library component — mandatory for CSS variable cascading and animations
 - **`ChangeDetectionStrategy.OnPush`** on every component
 - **Standalone components only** — no NgModules

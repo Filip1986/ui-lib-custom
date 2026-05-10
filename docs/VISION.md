@@ -346,17 +346,49 @@ This scorecard is what separates a component library from a legendary UI ecosyst
 
 ## The "Wow Factor"
 
-The library needs undeniable strengths. Potential signature areas:
+Legendary libraries are not great at everything at once. They commit to one undeniable strength first — then build the next, and the next, until every layer is exceptional. This is the roadmap.
 
-- the best Angular table/grid,
-- astonishingly good theming,
-- unbelievably polished animations,
-- unmatched forms experience,
-- elite accessibility,
-- frictionless composability,
-- exceptional DX.
+### 🏆 Committed — Elite Accessibility
 
-There must be at least one area where developers say:
+> **"The most accessible Angular component library ever built."**
+
+This is the current committed wow factor. Every component will be held to a standard that makes accessibility engineers stop and say: *"Nothing else in Angular comes close."*
+
+What elite accessibility means here — not a checklist, a culture:
+
+- **Full keyboard navigation** on every interactive component, without exception
+- **Correct ARIA semantics** — not bolted on, designed in from the start
+- **Focus management** that feels native and effortless
+- **Screen reader experience** tested against NVDA, JAWS, and VoiceOver
+- **Reduced motion** support built into every animation
+- **High contrast** mode compatibility across all variants
+- **WCAG 2.1 AA compliance** as the floor — AAA as the aspiration
+- **axe-core audits** passing with zero violations by default
+- **Accessibility documented** per component — not buried in a guide, visible on every demo page
+
+The goal: **enterprises adopt it because it's the only Angular library they trust for a11y without custom overrides.**
+
+This is not a feature. It is the foundation everything else is built on.
+
+> See [Accessibility Guide](reference/systems/ACCESSIBILITY.md) for implementation standards and audit process.
+
+---
+
+### 📋 Queued Wow Factors
+
+Once elite accessibility is achieved and maintained, the next committed strengths will be pursued in order:
+
+| # | Wow Factor                           | What "nothing else comes close" means                                                                        |
+|---|--------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| 2 | **Astonishingly good theming**       | Runtime switching, design token system, brand customization that takes minutes not days                      |
+| 3 | **Unmatched forms experience**       | The best typed, reactive, signal-native forms DX in Angular — ever                                           |
+| 4 | **Exceptional DX**                   | APIs so predictable and autocomplete so accurate that developers never reach for docs for basic usage        |
+| 5 | **Unbelievably polished animations** | Motion that makes developers say "how did they do that"                                                      |
+| 6 | **The best Angular table/grid**      | Performance, composability, and API quality that makes every other Angular data grid feel like a spreadsheet |
+
+Each wow factor gets its moment. Each gets committed to fully before the next is declared. No spreading thin.
+
+There must always be **at least one area** where developers say:
 
 > **"Nothing else in Angular comes close."**
 
