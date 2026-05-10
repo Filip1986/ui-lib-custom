@@ -20,9 +20,9 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** TieredMenu hardening COMPLETE (Tier 2, #13); next is ContextMenu
+- **Active focus:** Storybook coverage expansion COMPLETE (PR #36); next is ContextMenu hardening
 - **Next queue:** ContextMenu hardening (Tier 2, #14) — key a11y: same as TieredMenu + trigger `aria-haspopup=menu`
-- **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
+- **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
@@ -196,7 +196,8 @@ Next step: TieredMenu hardening (Tier 2, #13) — key a11y: nested role=menu, su
 
 
 Date: 2026-05-10 [Menubar component — 6-phase hardening COMPLETE]
-Changed:
+→ Archived to docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+Placeholder:
   - projects/ui-lib-custom/src/lib/menubar/menubar.ts
       • MODERATE FIX: module-level `let nextMenubarId: number = 0` counter added
       • Added `menubarId` and `rootListId` public readonly strings (unique per instance)
@@ -282,13 +283,40 @@ Verification:
 Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
   aria-required-children axe rule is a false positive for role="menu" with role="none" li wrappers
   per WAI-ARIA spec — skip it in MENUBAR_AXE_RULES with an explanatory comment.
-  fixture.destroy() in afterEach does NOT remove from document.body — each test appends and
-  destroys cleanly when fixture is referenced (no residual DOM across tests due to per-test TBed).
-Next step: Menu hardening (Tier 2, #12) — key a11y: role=menu, keyboard nav, separator roles.
+  (Content archived — see docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md)
 
 
 Date: 2026-05-10 [Toast component — 6-phase hardening COMPLETE]
 → Archived to docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+
+
+Date: 2026-05-10 [Storybook coverage — 11 new story files]
+Changed:
+  - projects/ui-lib-custom/src/lib/dialog/dialog.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/drawer/drawer.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/popover/popover.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/tooltip/tooltip.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/toast/toast.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/menubar/menubar.stories.ts (CREATED)
+  - projects/ui-lib-custom/src/lib/menu/menu.stories.ts (CREATED)
+State: Storybook coverage raised from ~25% to ~55% of published components. Each file has
+  Default/Variants(material+bootstrap+minimal)/States/DarkMode/FullApi stories.
+  Service-driven overlays use applicationConfig() for provider injection.
+  Tooltip uses directive pattern ([uiLibTooltip]). All 11 files pass ESLint + typecheck.
+  PR #36 open at https://github.com/Filip1986/ui-lib-custom/pull/36
+Verification:
+  npx eslint <all 11 story files> --max-warnings 0 (CLEAN, EXIT:0)
+  npm run typecheck (PASS, zero errors)
+  git commit ffcf9ed — pre-commit lint-staged CLEAN
+Terminal notes: Storybook build-storybook fails due to pre-existing compodoc version mismatch
+  (npx pulls deprecated compodoc@0.0.41 instead of @compodoc/compodoc). Not caused by new files.
+  Use `npm run storybook` (ng run ui-lib-custom:storybook) to run Storybook in dev mode.
+Next step: ContextMenu hardening (Tier 2, #14) — key a11y: trigger aria-haspopup=menu,
+  escape/click-outside focus restoration, same as TieredMenu pattern.
 
 ---
 
