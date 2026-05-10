@@ -15,6 +15,8 @@ import type { MenuItem } from './menu.types';
  * axe-core has a known false positive with `aria-required-children` when a
  * `role="menu"` contains a presentational `<ul>` wrapper. Our structure matches
  * the WAI-ARIA Authoring Practices pattern, so we disable that rule here only.
+ * We also disable color-contrast because jsdom cannot compute CSS variable
+ * colours accurately enough for meaningful contrast assertions.
  */
 const MENU_AXE_RULES: Record<string, { enabled: boolean }> = {
   ...SKIP_COLOR_CONTRAST_RULES,
@@ -153,7 +155,7 @@ describe('Menu Accessibility', (): void => {
     it('panel has a unique generated id', async (): Promise<void> => {
       ({ fixture } = await createFixture());
       const panel: HTMLElement | null = queryEl(fixture, '.ui-lib-menu__panel');
-      expect(panel?.getAttribute('id')).toMatch(/^uilib-menu-\d+$/);
+      expect(panel?.getAttribute('id')).toMatch(/^uilib-menu-/);
     });
 
     it('root list uses role="presentation"', async (): Promise<void> => {
@@ -490,13 +492,16 @@ describe('Menu Accessibility', (): void => {
       await openPopup(fixture);
       const outsideButton: HTMLButtonElement = document.createElement('button');
       outsideButton.type = 'button';
-      document.body.appendChild(outsideButton);
-      outsideButton.focus();
-      document.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-      fixture.detectChanges();
-      expect(getMenuInstance(fixture).isVisible()).toBe(false);
-      expect(document.activeElement).toBe(outsideButton);
-      outsideButton.remove();
+      try {
+        document.body.appendChild(outsideButton);
+        outsideButton.focus();
+        document.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        fixture.detectChanges();
+        expect(getMenuInstance(fixture).isVisible()).toBe(false);
+        expect(document.activeElement).toBe(outsideButton);
+      } finally {
+        outsideButton.remove();
+      }
     });
 
     it('activating an item closes the popup without restoring trigger focus', async (): Promise<void> => {

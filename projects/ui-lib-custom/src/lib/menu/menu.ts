@@ -123,7 +123,7 @@ export class Menu implements OnDestroy {
   public readonly rovingIndex: WritableSignal<number> = signal<number>(0);
 
   /** Unique ID for this Menu instance. */
-  public readonly menuId: string = `uilib-menu-${++nextMenuId}`;
+  public readonly menuId: string = this.generateId();
 
   // ── Dependencies ──────────────────────────────────────────────────────────
 
@@ -273,13 +273,7 @@ export class Menu implements OnDestroy {
       return;
     }
     const target: EventTarget | null = event.currentTarget;
-    const activeElement: HTMLElement | null = this.documentRef.activeElement as HTMLElement | null;
-    this.previousFocusEl =
-      activeElement && activeElement !== this.documentRef.body
-        ? activeElement
-        : target instanceof HTMLElement
-          ? target
-          : null;
+    this.capturePreviousFocus(target);
     event.stopPropagation();
     if (target instanceof HTMLElement) {
       const rect: DOMRect = target.getBoundingClientRect();
@@ -445,6 +439,32 @@ export class Menu implements OnDestroy {
   private restoreFocus(): void {
     this.previousFocusEl?.focus();
     this.previousFocusEl = null;
+  }
+
+  /** Captures the best focus restoration target before the popup opens. */
+  private capturePreviousFocus(target: EventTarget | null): void {
+    const activeElement: HTMLElement | null = this.documentRef.activeElement as HTMLElement | null;
+    if (activeElement && activeElement !== this.documentRef.body) {
+      this.previousFocusEl = activeElement;
+      return;
+    }
+    if (target instanceof HTMLElement) {
+      this.previousFocusEl = target;
+      return;
+    }
+    this.previousFocusEl = null;
+  }
+
+  /** Generates a stable unique ID for this Menu instance. */
+  private generateId(): string {
+    if (
+      typeof globalThis.crypto !== 'undefined' &&
+      typeof globalThis.crypto.randomUUID === 'function'
+    ) {
+      return `uilib-menu-${globalThis.crypto.randomUUID()}`;
+    }
+    nextMenuId += 1;
+    return `uilib-menu-${nextMenuId}`;
   }
 
   /**
