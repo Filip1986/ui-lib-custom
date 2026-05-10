@@ -356,6 +356,14 @@
     "./dynamic-dialog": {
       "esm2022": "./esm2022/dynamic-dialog/index.mjs",
       "esm": "./esm2022/dynamic-dialog/index.mjs"
+    },
+    "./alert": {
+      "esm2022": "./esm2022/alert/index.mjs",
+      "esm": "./esm2022/alert/index.mjs"
+    },
+    "./icon-button": {
+      "esm2022": "./esm2022/icon-button/index.mjs",
+      "esm": "./esm2022/icon-button/index.mjs"
     }
   },
   "typesVersions": {
@@ -593,6 +601,12 @@
       ],
       "toolbar": [
         "./toolbar/index.d.ts"
+      ],
+      "alert": [
+        "./alert/index.d.ts"
+      ],
+      "icon-button": [
+        "./icon-button/index.d.ts"
       ]
     }
   }

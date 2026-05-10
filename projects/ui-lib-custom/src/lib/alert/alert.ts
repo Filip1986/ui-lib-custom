@@ -10,8 +10,8 @@ import {
   type OutputEmitterRef,
   type Signal,
 } from '@angular/core';
-import { Icon } from '../icon';
-import type { StatusIcon } from '../icon';
+import { Icon } from 'ui-lib-custom/icon';
+import type { StatusIcon } from 'ui-lib-custom/icon';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { AlertSeverity, AlertVariant } from './alert.types';
 
