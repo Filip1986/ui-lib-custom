@@ -121,6 +121,7 @@ export class LongDialogContentComponent {
 @Component({
   selector: 'app-dynamic-dialog-demo',
   standalone: true,
+  imports: [Button],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
