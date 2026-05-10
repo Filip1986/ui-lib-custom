@@ -272,9 +272,9 @@ export class Menu implements OnDestroy {
     if (!this.popup()) {
       return;
     }
+    event.stopPropagation();
     const target: EventTarget | null = event.currentTarget;
     this.capturePreviousFocus(target);
-    event.stopPropagation();
     if (target instanceof HTMLElement) {
       const rect: DOMRect = target.getBoundingClientRect();
       this.menuX.set(rect.left);
@@ -464,7 +464,7 @@ export class Menu implements OnDestroy {
       return `uilib-menu-${globalThis.crypto.randomUUID()}`;
     }
     nextMenuId += 1;
-    return `uilib-menu-${nextMenuId}`;
+    return `uilib-menu-${Date.now()}-${nextMenuId}-${Math.random().toString(36).slice(2, 8)}`;
   }
 
   /**

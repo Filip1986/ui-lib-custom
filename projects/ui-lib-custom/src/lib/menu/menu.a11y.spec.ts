@@ -80,8 +80,6 @@ function makeMouseEvent(trigger?: HTMLElement): MouseEvent {
   const event: MouseEvent = new MouseEvent('click', {
     bubbles: true,
     cancelable: true,
-    clientX: 120,
-    clientY: 160,
   });
   if (trigger) {
     Object.defineProperty(event, 'currentTarget', { value: trigger });
