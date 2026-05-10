@@ -65,6 +65,7 @@
               [items]="item.items!"
               [level]="level() + 1"
               (itemActivated)="itemActivated.emit($event)"
+              (escapePanel)="activeIndex.set(-1)"
             />
           </div>
         }

@@ -45,6 +45,13 @@ export class MenubarSubComponent {
   public readonly itemActivated: OutputEmitterRef<MenubarCommandEvent> =
     output<MenubarCommandEvent>();
 
+  /**
+   * Emitted when the user presses Escape or ArrowLeft while no nested sub-panel
+   * is open, requesting the parent to close this panel and return focus to the
+   * triggering root item.
+   */
+  public readonly escapePanel: OutputEmitterRef<void> = output<void>();
+
   // ── Internal state ───────────────────────────────────────────────────────
 
   /** Index of the item whose nested sub-panel is open (-1 = none). */
@@ -143,7 +150,13 @@ export class MenubarSubComponent {
       case KEYBOARD_KEYS.ArrowLeft:
       case KEYBOARD_KEYS.Escape: {
         event.preventDefault();
-        this.activeIndex.set(-1);
+        if (this.activeIndex() !== -1) {
+          // Close nested sub-panel within this submenu
+          this.activeIndex.set(-1);
+        } else {
+          // Already at the root of this sub-level — signal the parent to close this panel
+          this.escapePanel.emit();
+        }
         break;
       }
       case KEYBOARD_KEYS.ArrowDown: {

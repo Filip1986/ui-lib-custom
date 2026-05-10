@@ -20,14 +20,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Toast hardening COMPLETE (Tier 1, #10); next is Menubar
-- **Next queue:** Menubar hardening (Tier 2, #11) — key a11y: role=menubar, full arrow-key nav, aria-haspopup, submenu keyboard control
+- **Active focus:** Menubar hardening COMPLETE (Tier 2, #11); next is Menu
+- **Next queue:** Menu hardening (Tier 2, #12) — key a11y: role=menu, keyboard nav, separator roles
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
 - `Tooltip` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 66 tests — 34 unit + 32 a11y)
 - `Toast` -> ✅ complete + hardened (6-phase evolution, score 9.1/10, 60 tests — 29 unit + 31 a11y)
+- `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
 
 ---
 
@@ -41,6 +42,98 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-10 [Menubar component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/menubar/menubar.ts
+      • MODERATE FIX: module-level `let nextMenubarId: number = 0` counter added
+      • Added `menubarId` and `rootListId` public readonly strings (unique per instance)
+      • Added `rovingIndex: WritableSignal<number>` (roving tabindex pattern)
+      • Added `getRootTabIndex(item, index): string` template helper
+      • CRITICAL FIX: ArrowRight/ArrowLeft/Home/End added to `onRootItemKeyDown()` — implements
+        full WAI-ARIA menubar keyboard pattern; keyboard users can now navigate between root items
+      • Added `focusRootItem(index)` private helper with wrap-around and rovingIndex update
+      • Updated `closePanel()` to accept `returnFocus: boolean = true` parameter
+        — Escape key calls `closePanel(true)` (restore focus); click-outside calls `closePanel(false)`
+      • Added `onSubMenuEscape(index)` — closes panel and restores focus to root item via afterNextRender
+      • Updated `onRootItemClick` and `onRootItemKeyDown` to set `rovingIndex` on activation
+      • Updated click-outside and global keydown handlers to pass correct `returnFocus` value
+  - projects/ui-lib-custom/src/lib/menubar/menubar.html
+      • MODERATE FIX: `aria-controls="ui-menubar-root-list"` → `[attr.aria-controls]="rootListId"` (dynamic)
+      • MODERATE FIX: `id="ui-menubar-root-list"` → `[attr.id]="rootListId"` (dynamic, instance-unique)
+      • Updated both `<a>` branches: `[attr.tabindex]="item.disabled ? '-1' : '0'"` → `[attr.tabindex]="getRootTabIndex(item, $index)"`
+      • Added `(escapePanel)="onSubMenuEscape($index)"` to root-level `<ui-lib-menubar-sub>`
+  - projects/ui-lib-custom/src/lib/menubar/menubar-submenu.ts
+      • Added `escapePanel: OutputEmitterRef<void> = output<void>()` output
+      • MODERATE FIX: Updated `ArrowLeft`/`Escape` handler to emit `escapePanel` when no nested panel is
+        open (previously always called `activeIndex.set(-1)` which couldn't propagate upward)
+  - projects/ui-lib-custom/src/lib/menubar/menubar-submenu.html
+      • Added `(escapePanel)="activeIndex.set(-1)"` to nested `<ui-lib-menubar-sub>` (propagates close upward)
+  - projects/ui-lib-custom/src/lib/menubar/menubar.scss
+      • MODERATE FIX: Added `:focus-visible` ring to `.ui-lib-menubar__toggle` (was missing — all
+        interactive elements must have :focus-visible ring)
+      • MODERATE FIX: Added `@media (prefers-reduced-motion: reduce)` at end of file —
+        sets `--uilib-menubar-transition: 0ms` to disable panel appear animation and transitions
+  - projects/ui-lib-custom/src/lib/menubar/menubar.a11y.spec.ts (CREATED — 42 a11y tests)
+      • 8 describe blocks: nav landmark (3), menubar ARIA structure (9), submenu ARIA structure (7),
+        hamburger toggle button (5), roving tabindex (4), keyboard nav root level (5),
+        keyboard nav submenu level (3), axe-core (4)
+      • Uses `MENUBAR_AXE_RULES` (skips color-contrast + aria-required-children)
+        — aria-required-children is a known false positive with role="none" li wrappers per WAI-ARIA spec
+      • document.body.appendChild(fixture.nativeElement) for focus tests in jsdom
+      • afterEach: fixture.destroy() for DOM cleanup
+  - projects/ui-lib-custom/src/lib/menubar/README.md
+      • Replaced 1-section stub with full documentation:
+        MenubarItem interface table, Public Properties table, Content Projection table,
+        ARIA structure table, keyboard navigation table, roving tabindex section,
+        multiple navbars guidance, CSS custom properties table (7 tokens)
+  - docs/COMPONENT_SCORES.md
+      • Menubar queue entry: ⏳ Queued → ✅ Done (Tier 2 #11)
+      • Menubar score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+  - AI_AGENT_CONTEXT.md (this file — status updated)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (Popover handoff archived)
+State: Menubar component fully evolved through all 6 phases. Score 9.0/10.
+  Phase 3 (A11y — priority):
+    • CRITICAL FIX: ArrowLeft/Right/Home/End navigation on root level — implements full ARIA
+      menubar keyboard pattern; previously keyboard users had no way to navigate between root
+      items without Tab (which should exit the menubar, not cycle within it)
+    • MODERATE FIX: Unique instance ID counter (nextMenubarId) + rootListId — eliminates
+      duplicate-ID bug when multiple Menubar instances appear on the same page
+    • MODERATE FIX: Roving tabindex on root items — only one root item in the tab sequence;
+      Tab now exits the menubar (correct ARIA menubar behavior)
+    • MODERATE FIX: Escape/ArrowLeft from level-1 submenu returns focus to the triggering
+      root item (via escapePanel output from MenubarSubComponent + onSubMenuEscape)
+    • MODERATE FIX: closePanel(returnFocus) — Escape restores focus; click-outside does not
+    • MODERATE FIX: Toggle button :focus-visible ring added (was the only interactive element without one)
+    • MODERATE FIX: @media (prefers-reduced-motion: reduce) added — sets transition to 0ms
+    • Created menubar.a11y.spec.ts with 42 tests (all pass)
+    • Pre-existing a11y features verified intact: nav landmark, role=menubar, role=menu,
+      role=none on li wrappers, role=menuitem, aria-haspopup, aria-expanded, aria-disabled,
+      aria-hidden on icons/carets/toggle-bars, aria-orientation=vertical, role=separator,
+      DOCUMENT injection, ngOnDestroy listener cleanup, afterNextRender for focus
+  Phase 1 (Architecture): nextMenubarId counter, menubarId, rootListId, rovingIndex all added.
+    closePanel(returnFocus) param, focusRootItem(), onSubMenuEscape() all added.
+  Phase 2 (DX): README fully updated — MenubarItem interface table, Public Properties,
+    Content Projection, ARIA structure, keyboard nav, roving tabindex, multiple navbars, CSS vars.
+  Phase 4 (Performance): No structural changes. All patterns verified — effect() for global
+    listeners, afterNextRender({ injector }) for focus, computed visibleItems, querySelector at event time.
+  Phase 5 (Composability): No API changes. Two slot projection, ariaLabel uniqueness, command +
+    itemClick dual pattern, recursive nesting all verified.
+  Phase 6 (Polish): Toggle :focus-visible ring added. Reduced motion added. All other styling
+    verified intact — caret rotation, panel appear animation, nested right-open, mobile inline,
+    dark mode, 3 variants, disabled pointer-events.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/menubar/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=menubar --no-coverage (84/84 PASS — 42 unit + 42 a11y)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
+Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
+  aria-required-children axe rule is a false positive for role="menu" with role="none" li wrappers
+  per WAI-ARIA spec — skip it in MENUBAR_AXE_RULES with an explanatory comment.
+  fixture.destroy() in afterEach does NOT remove from document.body — each test appends and
+  destroys cleanly when fixture is referenced (no residual DOM across tests due to per-test TBed).
+Next step: Menu hardening (Tier 2, #12) — key a11y: role=menu, keyboard nav, separator roles.
+
 
 Date: 2026-05-10 [Toast component — 6-phase hardening COMPLETE]
 Changed:
@@ -56,179 +149,27 @@ Changed:
       • MODERATE FIX: Added @media (prefers-reduced-motion: reduce) — sets --uilib-toast-animation-duration: 0ms
   - projects/ui-lib-custom/src/lib/toast/toast.spec.ts
       • Updated 4 ARIA tests to reflect corrected role/aria-live behaviour
-        (role="alert" only for error; role="status" for non-error; no aria-live on items;
-         close button aria-label now "Dismiss: {summary}")
   - projects/ui-lib-custom/src/lib/toast/toast.a11y.spec.ts (CREATED — 31 a11y tests)
-      • 7 describe blocks: container ARIA (4), item ARIA roles (5), icon accessibility (2),
-        close button accessibility (6), keyboard accessibility (3), live region correctness (4),
-        axe-core automated checks (5) — uses checkA11y(fixture) not axe(document.body);
-        region rule NOT skipped (toast has role="region" and items are inside it)
   - projects/ui-lib-custom/src/lib/toast/README.md
-      • Added ToastMessage interface table (10 properties)
-      • Added Multiple Containers Pattern section with key routing example
-      • Added Notification Lifecycle section (enter → auto-dismiss → exit)
-      • Added CSS Custom Properties table (8 tokens)
-      • Added comprehensive Accessibility section: ARIA features table (7 rows), keyboard nav table, severity/urgency guidance
+      • Added ToastMessage interface table, Multiple Containers Pattern, Lifecycle, CSS vars, Accessibility section
   - docs/COMPONENT_SCORES.md
       • Toast queue entry: ⏳ Queued → ✅ Done (Tier 1 #10)
       • Toast score row: 9/10/9/9/9/9/9/9/9/9 avg 9.1 🟢
   - AI_AGENT_CONTEXT.md (this file — status updated)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (ConfirmPopup handoff archived)
 State: Toast component fully evolved through all 6 phases. Score 9.1/10.
-  Phase 3 (A11y — priority):
-    • CRITICAL FIX: Removed aria-live="polite" and aria-atomic="false" from container host binding
-      — role="region" is a structural landmark, not a live region; child items manage their own
-      announcements via role
-    • CRITICAL FIX: role="alert" now only for error severity; role="status" for success/info/warn
-      — removes incorrectly assertive announcement for non-critical toasts
-    • CRITICAL FIX: Removed [attr.aria-live] from item element — redundant/ineffective when set
-      on a role="alert" or role="status" element; the role already implies the correct aria-live value
-    • MODERATE FIX: Close button aria-label now "Dismiss: {summary}" — specific when multiple
-      toasts are visible; falls back to detail then "notification"
-    • MODERATE FIX: Added @media (prefers-reduced-motion: reduce) to SCSS
-      — sets --uilib-toast-animation-duration: 0ms
-    • Created toast.a11y.spec.ts with 31 tests
-    • Pre-existing a11y features verified intact: role="region", aria-label="Notifications",
-      aria-hidden on icons, type="button" on close button, closable guard, sticky guard,
-      key filtering, timer management, DestroyRef cleanup, closingIds animation
-  Phase 1 (Architecture): No structural changes. dismiss() JSDoc updated. Architecture verified.
-    ANIMATION_DURATION_MS and counter explicitly typed. No DOCUMENT injection needed.
-  Phase 2 (DX): README fully updated — ToastMessage interface table, Multiple Containers Pattern,
-    Notification Lifecycle, CSS Custom Properties table (8 tokens), full Accessibility section.
-  Phase 4 (Performance): No structural changes. All performance patterns verified —
-    effect() reactive timers, Map O(1) lookup, DestroyRef cleanup, CSS keyframes, @for track.
-  Phase 5 (Composability): No API changes. key routing, sticky, life layering, clear(key),
-    closable all verified correct.
-  Phase 6 (Polish): No styling changes needed. Close button ring ✅ opacity ✅ transition ✅
-    animation direction per position ✅ dark mode ✅ minimal accent ✅ pointer-events ✅
-    Reduced motion override added in Phase 3.
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toast/ --max-warnings 0 (CLEAN, EXIT:0)
   node_modules/.bin/jest --testPathPatterns=toast --no-coverage (60/60 PASS — 29 unit + 31 a11y)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
   node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
 Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
-  checkA11y(fixture) is correct for Toast (renders inside fixture, not appended to document.body).
-  Do NOT skip the region axe rule for Toast — it has role="region" and its items are inside it.
-  fixture.nativeElement must be cast to HTMLElement before calling querySelector (no-unsafe-call).
-Next step: Menubar hardening (Tier 2, #11) — key a11y: role=menubar, full arrow-key nav,
-  aria-haspopup, submenu keyboard control.
+Next step: Menubar hardening (Tier 2, #11).
 
 
-Changed:
-  - projects/ui-lib-custom/src/lib/tooltip/tooltip.ts
-      • Added `import { DOCUMENT } from '@angular/common'`
-      • Added `private readonly document: Document = inject(DOCUMENT)` (SSR-safe)
-      • Replaced all `document.*` calls → `this.document.*` (createElement, addEventListener, removeEventListener, body.appendChild)
-      • Replaced `window.innerWidth/innerHeight` → `this.document.defaultView?.innerWidth/innerHeight ?? 0`
-      • WCAG 1.4.13 FIX: focus/blur listeners now bound for ALL tooltipEvent modes (previously only 'focus'/'both')
-        — removed `if (event === 'focus' || event === 'both')` guard; focus listeners always registered
-      • Added JSDoc to `setupListeners()` explaining static config and WCAG 1.4.13 rationale
-      • Added `this.elementRef.nativeElement.removeAttribute('aria-describedby')` in `ngOnDestroy()`
-        — ensures host is clean when directive is destroyed while tooltip is visible
-  - projects/ui-lib-custom/src/lib/tooltip/tooltip.a11y.spec.ts (CREATED — 32 a11y tests)
-      • 7 describe blocks: host-element ARIA (8), tooltip element ARIA structure (5), tooltipId (2),
-        keyboard accessibility WCAG 1.4.13 (4), Escape key dismissal (3), tooltipDisabled (3),
-        lifecycle and cleanup (3), axe-core (4)
-      • axe checks use TOOLTIP_AXE_RULES (disables color-contrast + region) — region rule skipped
-        because overlay element is correctly outside landmark structure
-      • afterEach destroys fixture (via currentFixture pattern) to prevent DOM accumulation
-  - projects/ui-lib-custom/src/lib/tooltip/README.md
-      • Replaced 4-bullet accessibility section with full ARIA features table (12 rows)
-      • Added keyboard navigation table
-      • Added consumer guidance section (tooltipEvent selection + tooltipId usage example)
-      • Updated Inputs table to note that `tooltipEvent="hover"` now also includes focus (WCAG 1.4.13)
-  - docs/COMPONENT_SCORES.md
-      • Tooltip queue entry: ⏳ Queued → ✅ Done (Tier 1 #9)
-      • Tooltip score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
-  - AI_AGENT_CONTEXT.md (this file)
-State: Tooltip directive fully evolved through all 6 phases. Score 9.0/10.
-  Phase 3 (A11y — priority):
-    • CRITICAL FIX: WCAG 1.4.13 — hover mode now also binds focus/blur; keyboard users see same tooltip as mouse users
-    • MINOR FIX: DOCUMENT injected (SSR-safe); replaced all direct document.*/window.* calls
-    • MINOR FIX: ngOnDestroy now removes aria-describedby from host element
-    • Created tooltip.a11y.spec.ts with 32 tests (all pass)
-    • Pre-existing a11y features verified intact: role=tooltip, aria-describedby lifecycle, aria-hidden arrow,
-      Escape key, pointer-events:none, reduced motion, lazy DOM, ngZone.runOutsideAngular
-  Phase 1 (Architecture): DOCUMENT injection added; module-level counter and TOOLTIP_CLEANUP_DELAY_MS verified.
-  Phase 2 (DX): README Accessibility section now comprehensive — ARIA table + keyboard nav + consumer guidance.
-  Phase 4 (Performance): runOutsideAngular, rAF for visible class, lazy creation, timer management all verified. No changes.
-  Phase 5 (Composability): Directive pattern, tooltipId public, tooltipDisabled, showDelay/hideDelay all verified. No changes.
-  Phase 6 (Polish): arrow colors, reduced motion, opacity+transform transition, pointer-events:none, word-break all verified. No changes.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tooltip/ --max-warnings 0 (CLEAN, EXIT:0)
-  node_modules/.bin/jest --testPathPatterns=tooltip --no-coverage (66/66 PASS — 34 unit + 32 a11y)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
-Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs). axe `region` rule fires for overlay content appended to document.body outside landmarks — this is correct behaviour, not a violation; skip `region` in tooltip a11y axe calls.
-Next step: Toast hardening (Tier 1, #10) — key a11y: aria-live=assertive live region, dismiss button keyboard access, role=status vs role=alert.
-
-
-  - projects/ui-lib-custom/src/lib/popover/popover.ts
-      • Added `import { DOCUMENT } from '@angular/common'`
-      • Added module-level `let nextPopoverId: number = 0` counter
-      • Added `private generateId(): string` method (crypto.randomUUID with counter fallback)
-      • Added `public readonly panelId: string` (unique stable panel ID)
-      • Added `public readonly titleId: string` (panel-id-based title ID for aria-labelledby)
-      • Added `private readonly document: Document = inject(DOCUMENT)` (SSR-safe)
-      • Added `private previousFocusEl: HTMLElement | null = null` field
-      • Updated `show()`: captures `document.activeElement` (falls back to `target`) into `previousFocusEl` before opening
-      • Updated visibility effect false branch: restores `previousFocusEl?.focus()` on close, clears field
-      • Updated `ngOnDestroy()`: nulls out `previousFocusEl`
-  - projects/ui-lib-custom/src/lib/popover/popover.html
-      • Added `[id]="panelId"` to the panel div
-      • Added `[attr.aria-labelledby]="header() ? titleId : null"` to panel (WCAG 4.1.2 — dialog needs accessible name)
-      • Added `[attr.aria-label]="header() ? null : 'Popover'"` to panel (fallback when no header)
-      • Added `[id]="titleId"` to the title span
-      • Added `aria-hidden="true"` to overlay div (decorative click-catcher hidden from AT)
-      • Replaced `<span aria-hidden="true">&times;</span>` with inline SVG close icon (consistent with Dialog/Drawer/ConfirmDialog)
-  - projects/ui-lib-custom/src/lib/popover/popover.scss
-      • Removed `font-size: 1.125rem; line-height: 1;` from close button (glyph-only properties; SVG uses width/height attributes)
-  - projects/ui-lib-custom/src/lib/popover/popover.a11y.spec.ts (CREATED — 33 a11y tests)
-      • 7 describe blocks: closed state (3), open-state ARIA (8), close button (3),
-        focus management (5), keyboard behaviour (4), panelId (3), axe-core (4)
-      • Covers: role=dialog, aria-modal, tabindex, aria-labelledby/label mutual exclusion,
-        titleId linkage, overlay/arrow aria-hidden, close btn label/SVG, focus restoration
-        via close-btn/Escape/overlay, declarative-close no-throw, keyboard/dismiss guards, panelId, 4 axe scenarios
-  - projects/ui-lib-custom/src/lib/popover/README.md
-      • Added Public properties table (panelId, titleId)
-      • Updated showCloseButton description (SVG ×)
-      • Updated shown output: noted it won't fire in Jest (afterNextRender limitation)
-      • Replaced bare bullet-list with full ARIA features table + keyboard navigation table
-      • Added "Consumer accessibility responsibilities" section with aria-controls/aria-expanded usage example
-  - docs/COMPONENT_SCORES.md
-      • Popover queue entry: ⏳ Queued → ✅ Done (Tier 1 #8)
-      • Popover score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
-  - AI_AGENT_CONTEXT.md (this file — status updated)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (AutoComplete handoff archived)
-State: Popover component fully evolved through all 6 phases. Score 9.0/10.
-  Phase 3 (A11y — priority):
-    • CRITICAL FIX: aria-labelledby added to panel (header text as accessible name — satisfies WCAG 4.1.2)
-    • CRITICAL FIX: aria-label="Popover" fallback when no header
-    • CRITICAL FIX: focus restored to trigger element on close (previousFocusEl, captured in show())
-    • MINOR FIX: overlay div has aria-hidden="true"
-    • POLISH FIX: close button &times; replaced with inline SVG (consistent with Dialog/Drawer/ConfirmDialog)
-    • Created popover.a11y.spec.ts with 33 tests (all pass)
-    • Pre-existing a11y features verified intact: role=dialog, aria-modal=false, tabindex=-1,
-      arrow aria-hidden, aria-label=Close on close btn, FocusTrap, Escape key, reduced motion,
-      :focus-visible ring, transition on close button hover
-  Phase 1 (Architecture): module-level nextPopoverId counter + generateId() + panelId + titleId added.
-  Phase 2 (DX): README fully updated — ARIA table, keyboard nav table, consumer responsibilities section, panelId/titleId documented.
-  Phase 4 (Performance): afterNextRender({ injector }) injection-context-safe verified. lastVisible guard verified. FocusTrap lazy. previousFocusEl captured synchronously in show(). shown emitted in afterNextRender — won't fire in Jest (documented in README and code comment). No changes needed.
-  Phase 5 (Composability): template-ref + declarative patterns both supported. panelId enables aria-controls wiring. ng-content projection correct. No service layer needed. No changes needed.
-  Phase 6 (Polish): SVG close icon applied. font-size/line-height removed from SCSS. :focus-visible ring ✅ transition ✅ arrow colors ✅ bootstrap border arrow ✅ reduced motion ✅.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/popover/ --max-warnings 0 (CLEAN, EXIT:0)
-  node_modules/.bin/jest --testPathPatterns=popover --no-coverage (63/63 PASS — 30 unit + 33 a11y)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
-Terminal notes: Run ESLint from bash.exe only (PowerShell returns exit 1 even on clean runs). DOCUMENT must be imported from @angular/common (not @angular/core). Module-level `let` counter requires explicit `: number` type annotation.
-Next step: Tooltip hardening (Tier 1, #9) — key a11y: aria-describedby lifecycle, cleanup on element unmount.
-
-Date: 2026-05-10 [ConfirmPopup component — 6-phase hardening COMPLETE]
+Date: 2026-05-10 [Tooltip directive — 6-phase hardening COMPLETE]
 → Archived to docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
 
-
 ---
+
 
 

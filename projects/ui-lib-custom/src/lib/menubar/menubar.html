@@ -13,7 +13,7 @@
     type="button"
     [attr.aria-expanded]="mobileMenuOpen() ? 'true' : 'false'"
     aria-label="Toggle navigation menu"
-    aria-controls="ui-menubar-root-list"
+    [attr.aria-controls]="rootListId"
     (click)="toggleMobileMenu()"
   >
     <span class="ui-lib-menubar__toggle-bar" aria-hidden="true"></span>
@@ -25,7 +25,7 @@
   <ul
     class="ui-lib-menubar__root-list"
     [class.ui-lib-menubar__root-list--open]="mobileMenuOpen()"
-    id="ui-menubar-root-list"
+    [attr.id]="rootListId"
     role="menubar"
   >
     @for (item of visibleItems(); track $index) {
@@ -49,7 +49,7 @@
               [attr.aria-disabled]="item.disabled ? 'true' : null"
               [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
               [attr.aria-expanded]="item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null"
-              [attr.tabindex]="item.disabled ? '-1' : '0'"
+              [attr.tabindex]="getRootTabIndex(item, $index)"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"
             >
@@ -67,7 +67,7 @@
               [attr.aria-disabled]="item.disabled ? 'true' : null"
               [attr.aria-haspopup]="item.items?.length ? 'menu' : null"
               [attr.aria-expanded]="item.items?.length ? (isPanelOpen($index) ? 'true' : 'false') : null"
-              [attr.tabindex]="item.disabled ? '-1' : '0'"
+              [attr.tabindex]="getRootTabIndex(item, $index)"
               (click)="onRootItemClick($event, item, $index)"
               (keydown)="onRootItemKeyDown($event, item, $index)"
             >
@@ -89,6 +89,7 @@
                 [items]="item.items!"
                 [level]="1"
                 (itemActivated)="onItemActivated($event)"
+                (escapePanel)="onSubMenuEscape($index)"
               />
             </div>
           }

@@ -34,7 +34,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component   | Key a11y concern                                                                | Status     |
 |------|-------------|---------------------------------------------------------------------------------|------------|
-| 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ⏳ Queued   |
+| 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done     |
 | 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ⏳ Queued   |
 | 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ⏳ Queued   |
 | 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ⏳ Queued   |
@@ -215,7 +215,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Menu        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | MegaMenu    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Menubar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | PanelMenu   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | TieredMenu  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Stepper     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

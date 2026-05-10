@@ -322,6 +322,12 @@
   padding: 0.5rem;
   margin-left: auto;
   color: var(--uilib-menubar-toggle-color);
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary, #007bff);
+    outline-offset: 2px;
+    border-radius: var(--uilib-radius-sm, 3px);
+  }
 }
 
 .ui-lib-menubar__toggle-bar {
@@ -525,5 +531,13 @@
 
   .ui-lib-menubar--variant-bootstrap {
     --uilib-menubar-bar-bg: #0d1117;
+  }
+}
+
+// ─── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-menubar {
+    --uilib-menubar-transition: 0ms;
   }
 }

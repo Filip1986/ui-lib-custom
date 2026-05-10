@@ -38,6 +38,9 @@ export type {
 /** Default accessible label exported for test assertions. */
 export const MENUBAR_DEFAULT_ARIA_LABEL: string = 'Navigation';
 
+/** Auto-incrementing counter to generate unique IDs for each Menubar instance. */
+let nextMenubarId: number = 0;
+
 /**
  * Menubar component — a PrimeNG-inspired horizontal navigation bar where
  * top-level items can open single-column dropdown submenus. Submenus support
@@ -102,6 +105,18 @@ export class Menubar implements OnDestroy {
   /** Whether the mobile navigation menu is expanded. */
   public readonly mobileMenuOpen: WritableSignal<boolean> = signal<boolean>(false);
 
+  /** Unique ID for this Menubar instance — used to link the toggle button to the root list. */
+  public readonly menubarId: string = `uilib-menubar-${++nextMenubarId}`;
+
+  /** ID of the root list element — used for aria-controls on the toggle button. */
+  public readonly rootListId: string = `${this.menubarId}-root-list`;
+
+  /**
+   * Index of the root item that holds the tab stop (roving tabindex).
+   * Only this item gets tabindex="0"; all others get "-1".
+   */
+  public readonly rovingIndex: WritableSignal<number> = signal<number>(0);
+
   // ── Dependencies ─────────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
@@ -140,7 +155,7 @@ export class Menubar implements OnDestroy {
 
   private readonly clickOutsideHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
     if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-      this.closePanel();
+      this.closePanel(false);
     }
   };
 
@@ -148,7 +163,7 @@ export class Menubar implements OnDestroy {
     event: KeyboardEvent
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
-      this.closePanel();
+      this.closePanel(true);
     }
   };
 
@@ -192,6 +207,18 @@ export class Menubar implements OnDestroy {
     return classes.join(' ');
   }
 
+  /**
+   * Returns the tabindex for a root item link (roving tabindex pattern).
+   * Only the currently active roving item gets tabindex="0"; all others get "-1".
+   * Disabled items always get tabindex="-1".
+   */
+  public getRootTabIndex(item: MenubarItem, index: number): string {
+    if (item.disabled) {
+      return '-1';
+    }
+    return this.rovingIndex() === index ? '0' : '-1';
+  }
+
   // ── Event handlers ────────────────────────────────────────────────────────────
 
   /** Handles a click on a root-level navigation item. */
@@ -200,6 +227,8 @@ export class Menubar implements OnDestroy {
       event.preventDefault();
       return;
     }
+
+    this.rovingIndex.set(index);
 
     if (item.items?.length) {
       event.preventDefault();
@@ -214,7 +243,7 @@ export class Menubar implements OnDestroy {
     if (item.command) {
       item.command({ item, originalEvent: event });
     }
-    this.closePanel();
+    this.closePanel(false);
   }
 
   /** Handles keyboard events on a root-level navigation item link. */
@@ -226,6 +255,7 @@ export class Menubar implements OnDestroy {
         if (item.disabled) {
           return;
         }
+        this.rovingIndex.set(index);
         if (item.items?.length) {
           this.activeIndex.set(this.activeIndex() === index ? -1 : index);
           if (this.activeIndex() === index) {
@@ -238,13 +268,14 @@ export class Menubar implements OnDestroy {
           }
         } else if (item.command) {
           item.command({ item, originalEvent: event });
-          this.closePanel();
+          this.closePanel(false);
         }
         break;
       }
       case KEYBOARD_KEYS.ArrowDown: {
         if (item.items?.length) {
           event.preventDefault();
+          this.rovingIndex.set(index);
           this.activeIndex.set(index);
           afterNextRender(
             (): void => {
@@ -255,9 +286,29 @@ export class Menubar implements OnDestroy {
         }
         break;
       }
+      case KEYBOARD_KEYS.ArrowRight: {
+        event.preventDefault();
+        this.focusRootItem(index + 1);
+        break;
+      }
+      case KEYBOARD_KEYS.ArrowLeft: {
+        event.preventDefault();
+        this.focusRootItem(index - 1);
+        break;
+      }
+      case KEYBOARD_KEYS.Home: {
+        event.preventDefault();
+        this.focusRootItem(0);
+        break;
+      }
+      case KEYBOARD_KEYS.End: {
+        event.preventDefault();
+        this.focusRootItem(this.visibleItems().length - 1);
+        break;
+      }
       case KEYBOARD_KEYS.Escape: {
         event.preventDefault();
-        this.closePanel();
+        this.closePanel(true);
         break;
       }
     }
@@ -269,7 +320,27 @@ export class Menubar implements OnDestroy {
    */
   public onItemActivated(event: MenubarCommandEvent): void {
     this.itemClick.emit(event);
-    this.closePanel();
+    this.closePanel(false);
+  }
+
+  /**
+   * Called when the user presses Escape or ArrowLeft at the top of a submenu panel.
+   * Closes the panel and returns focus to the triggering root item.
+   */
+  public onSubMenuEscape(index: number): void {
+    this.closePanel(false); // Do not auto-focus via closePanel — we focus manually
+    this.rovingIndex.set(index);
+    afterNextRender(
+      (): void => {
+        const links: NodeListOf<HTMLElement> =
+          this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
+            '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link'
+          );
+        const link: HTMLElement | undefined = Array.from(links)[index];
+        link?.focus();
+      },
+      { injector: this.injector }
+    );
   }
 
   /** Toggles the mobile navigation menu. */
@@ -282,9 +353,44 @@ export class Menubar implements OnDestroy {
 
   // ── Private helpers ───────────────────────────────────────────────────────────
 
-  /** Closes the currently open dropdown panel. */
-  private closePanel(): void {
+  /**
+   * Closes the currently open dropdown panel.
+   *
+   * @param returnFocus - When true (default), focuses the root item at the
+   *   previously active index. Pass false when closing on click-outside or
+   *   item activation (focus should stay wherever the user clicked/navigated).
+   */
+  private closePanel(returnFocus: boolean = true): void {
+    const previousIndex: number = this.activeIndex();
     this.activeIndex.set(-1);
+    if (returnFocus && previousIndex !== -1) {
+      const links: NodeListOf<HTMLElement> =
+        this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
+          '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link'
+        );
+      const link: HTMLElement | undefined = Array.from(links)[previousIndex];
+      link?.focus();
+    }
+  }
+
+  /**
+   * Focuses the root-level menuitem at the given index (roving tabindex helper).
+   * Wraps around when the index exceeds the bounds.
+   * Updates `rovingIndex` so the tab stop follows focus.
+   */
+  private focusRootItem(index: number): void {
+    const items: MenubarItem[] = this.visibleItems();
+    if (items.length === 0) {
+      return;
+    }
+    const wrappedIndex: number = ((index % items.length) + items.length) % items.length;
+    this.rovingIndex.set(wrappedIndex);
+    const links: NodeListOf<HTMLElement> =
+      this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
+        '.ui-lib-menubar__root-list > .ui-lib-menubar__root-item > .ui-lib-menubar__root-link'
+      );
+    const link: HTMLElement | undefined = Array.from(links)[wrappedIndex];
+    link?.focus();
   }
 
   /** Focuses the first focusable link in the currently open dropdown panel. */

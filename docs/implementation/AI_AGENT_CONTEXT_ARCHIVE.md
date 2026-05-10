@@ -4,6 +4,28 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-10 [Popover component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/popover/popover.ts
+      • Added module-level `let nextPopoverId: number = 0` counter
+      • Added `public readonly panelId: string` and `public readonly titleId: string`
+      • Added `private readonly document: Document = inject(DOCUMENT)` (SSR-safe)
+      • Added `private previousFocusEl: HTMLElement | null = null` field
+      • Updated `show()`: captures `document.activeElement` into `previousFocusEl`
+      • Updated visibility effect false branch: restores `previousFocusEl?.focus()` on close
+  - projects/ui-lib-custom/src/lib/popover/popover.html
+      • Added `[id]="panelId"`, `[attr.aria-labelledby]`, `[attr.aria-label]="'Popover'"` fallback
+      • Added `aria-hidden="true"` to overlay div
+      • Replaced `&times;` close button with inline SVG
+  - projects/ui-lib-custom/src/lib/popover/popover.scss
+      • Removed glyph-only CSS from close button
+  - projects/ui-lib-custom/src/lib/popover/popover.a11y.spec.ts (CREATED — 33 tests)
+  - projects/ui-lib-custom/src/lib/popover/README.md (fully updated)
+  - docs/COMPONENT_SCORES.md — Popover: ✅ Done, score 9.0 🟢
+State: Complete. Score 9.0/10.
+Verification: ESLint clean, 63/63 tests pass, build zero errors.
+Next step: Tooltip hardening.
+
 Date: 2026-05-10 [ConfirmPopup component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.ts
