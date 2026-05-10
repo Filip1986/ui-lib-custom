@@ -14,7 +14,9 @@ Before doing anything else, read these files in order:
 
 1. `AI_AGENT_CONTEXT.md` — component inventory, active work, file map
 2. `LIBRARY_CONVENTIONS.md` — all architectural rules (the source of truth)
-3. This file — the creation workflow
+3. `docs/VISION.md` — the 10-layer mental model and quality scorecard
+4. `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md` — the master prompt and 6-phase workflow for any improvement or hardening work
+5. This file — the creation workflow
 
 If any convention below conflicts with `LIBRARY_CONVENTIONS.md`, that file wins.
 

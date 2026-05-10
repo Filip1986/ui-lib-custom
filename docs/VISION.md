@@ -242,11 +242,11 @@ Do not chase component quantity. Instead: **fewer components, dramatically highe
 
 The first components must feel exceptional:
 
-| Priority | Component |
-|----------|-----------|
-| ✅ Core | Button, Input, Select, Card, Tabs, Badge |
-| 🎯 Next | Dialog, Dropdown, Tooltip, Toast, Menu |
-| 🔭 Horizon | Table, Command Palette, FormField, Overlay system |
+| Priority   | Component                                          |
+|------------|----------------------------------------------------|
+| ✅ Core     | Button, Input, Select, Card, Tabs, Badge           |
+| 🎯 Next    | Dialog, Dropdown, Tooltip, Toast, Menu             |
+| 🔭 Horizon | Table, Command Palette, FormField, Overlay system  |
 
 Every component should feel: **refined, intentional, delightful.**
 
@@ -290,6 +290,27 @@ For every component, follow this operating system:
 | 8    | **Delight** — the final layer; does it feel *exceptional*?         |
 
 This is the operating system for every component built in this library.
+
+### Component Quality Scorecard
+
+Before a component ships, it must be scored on each dimension. **A component ships only when every category scores ≥ 8.**
+
+| Category                    | Required Score |
+|-----------------------------|----------------|
+| API clarity                 | ≥ 8            |
+| Accessibility               | ≥ 8            |
+| Performance                 | ≥ 8            |
+| Composability               | ≥ 8            |
+| Theming                     | ≥ 8            |
+| Developer experience        | ≥ 8            |
+| Documentation               | ≥ 8            |
+| Visual & interaction polish | ≥ 8            |
+| Angular integration         | ≥ 8            |
+| Emotional quality           | ≥ 8            |
+
+This scorecard is what separates a component library from a legendary UI ecosystem.
+
+> See the scoreable template and AI evolution prompts in [`docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`](prompts/COMPONENT_EVOLUTION_PROMPTS.md).
 
 ---
 
@@ -401,14 +422,14 @@ The ultimate emotional outcome:
 
 ## Related Documents
 
-| Document | Relevance |
-|----------|-----------|
-| [Architecture](architecture/ARCHITECTURE.md) | How the vision is implemented structurally |
-| [Design Tokens](reference/systems/DESIGN_TOKENS.md) | Token system backing the theming vision |
-| [Theming Guide](guides/THEMING_GUIDE.md) | Runtime theming — a signature feature |
-| [Accessibility Guide](reference/systems/ACCESSIBILITY.md) | A11y as architecture — not afterthought |
-| [Performance Guide](reference/systems/PERFORMANCE.md) | Performance targets and budgets |
-| [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) | Standards for building to vision quality |
-| [Library Conventions](../LIBRARY_CONVENTIONS.md) | Engineering rules that enforce the vision |
-| [Project Summary](reference/project/PROJECT_SUMMARY.md) | Current state vs. vision |
+| Document                                                   | Relevance                                    |
+|------------------------------------------------------------|----------------------------------------------|
+| [Architecture](architecture/ARCHITECTURE.md)               | How the vision is implemented structurally   |
+| [Design Tokens](reference/systems/DESIGN_TOKENS.md)        | Token system backing the theming vision      |
+| [Theming Guide](guides/THEMING_GUIDE.md)                   | Runtime theming — a signature feature        |
+| [Accessibility Guide](reference/systems/ACCESSIBILITY.md)  | A11y as architecture — not afterthought      |
+| [Performance Guide](reference/systems/PERFORMANCE.md)      | Performance targets and budgets              |
+| [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) | Standards for building to vision quality     |
+| [Library Conventions](../LIBRARY_CONVENTIONS.md)           | Engineering rules that enforce the vision    |
+| [Project Summary](reference/project/PROJECT_SUMMARY.md)    | Current state vs. vision                     |
 

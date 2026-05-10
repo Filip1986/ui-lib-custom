@@ -196,6 +196,15 @@ Planning and parity research docs are consolidated under:
 
 ---
 
+## 🤖 AI Prompts
+
+Ready-to-use prompts for working with AI on this library:
+
+- **[Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)** — master prompt, 6-phase workflow (Architecture → DX → A11y → Performance → Composability → Emotional Polish), and the quality scorecard (every category must score ≥ 8 before a component ships)
+- **[Timeline Component Prompts](prompts/TIMELINE_PROMPTS.md)** — example of a per-component prompt sequence
+
+---
+
 ## 🎯 Quick Navigation
 
 ### By Task
