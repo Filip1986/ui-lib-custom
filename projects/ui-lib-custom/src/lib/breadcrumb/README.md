@@ -17,11 +17,12 @@
 | `styleClass` | `string \| null` | `null` | Extra CSS class appended to the host `<nav>` element |
 | `ariaLabel` | `string` | `'Breadcrumb'` | Accessible label for the `<nav>` landmark |
 
-**`BreadcrumbItem` shape:** `{ label?, icon?, iconAriaLabel?, url?, routerLink?, target?, command?, disabled?, styleClass? }`
+**`BreadcrumbItem` shape:** `{ id?, label?, icon?, iconAriaLabel?, url?, routerLink?, target?, command?, disabled?, styleClass? }`
 
 - Use `url` for regular anchor navigation (`href`).
 - Use `routerLink` for Angular Router navigation.
 - For icon-only items, set `iconAriaLabel` (home defaults to `"Home"` if omitted).
+- Optionally provide `id` for stable item tracking when labels can repeat/change.
 
 ## Outputs
 

@@ -1,5 +1,5 @@
 <ol class="ui-lib-breadcrumb__list">
-  @for (item of allItems(); track item.label ?? $index) {
+  @for (item of allItems(); track item.id ?? item.label ?? $index) {
     <li
       class="ui-lib-breadcrumb__item"
       [class.ui-lib-breadcrumb__item--active]="isLastItem($index)"

@@ -6,6 +6,8 @@ export type BreadcrumbSize = 'sm' | 'md' | 'lg';
 
 /** A single item in the breadcrumb trail. */
 export interface BreadcrumbItem {
+  /** Stable optional key used for list rendering/identity tracking. */
+  id?: string;
   /** Display label for the item. */
   label?: string;
   /** External URL for anchor href-based navigation. */
