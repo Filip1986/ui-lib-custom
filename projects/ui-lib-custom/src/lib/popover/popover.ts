@@ -21,9 +21,13 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { PopoverPlacement, PopoverVariant } from './popover.types';
+
+// Module-level fallback counter for environments without crypto.randomUUID().
+let nextPopoverId: number = 0;
 
 /**
  * Popover — a lightweight floating panel anchored to a trigger element.
@@ -55,9 +59,17 @@ export class Popover implements OnDestroy {
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly document: Document = inject(DOCUMENT);
 
   private focusTrap: FocusTrap | null = null;
   private lastVisible: boolean = false;
+  private previousFocusEl: HTMLElement | null = null;
+
+  /** Stable unique ID for the panel element. Consumers can use this for aria-controls. */
+  public readonly panelId: string = this.generateId();
+
+  /** ID for the title element — used by aria-labelledby when a header is rendered. */
+  public readonly titleId: string = `${this.panelId}-title`;
 
   private readonly targetElement: WritableSignal<HTMLElement | null> = signal<HTMLElement | null>(
     null
@@ -169,6 +181,9 @@ export class Popover implements OnDestroy {
       } else {
         this.positionReady.set(false);
         this.deactivateFocusTrap();
+        // Restore focus to the element that had focus before the popover opened.
+        this.previousFocusEl?.focus();
+        this.previousFocusEl = null;
         this.hidden.emit();
       }
     });
@@ -176,6 +191,7 @@ export class Popover implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.deactivateFocusTrap();
+    this.previousFocusEl = null;
   }
 
   /** Toggle visibility: show if hidden, hide if visible. */
@@ -189,6 +205,11 @@ export class Popover implements OnDestroy {
 
   /** Show the popover anchored to the given target element. */
   public show(target: HTMLElement): void {
+    // Capture focus before the popover takes it over.
+    // Prefer document.activeElement (keyboard-triggered show), fall back to target
+    // (mouse-triggered show where activeElement may still be body).
+    const active: HTMLElement | null = this.document.activeElement as HTMLElement | null;
+    this.previousFocusEl = active && active !== this.document.body ? active : target;
     this.targetElement.set(target);
     this.visible.set(true);
   }
@@ -213,6 +234,17 @@ export class Popover implements OnDestroy {
       event.stopPropagation();
       this.hide();
     }
+  }
+
+  private generateId(): string {
+    if (
+      typeof globalThis.crypto !== 'undefined' &&
+      typeof globalThis.crypto.randomUUID === 'function'
+    ) {
+      return `ui-lib-popover-${globalThis.crypto.randomUUID()}`;
+    }
+    nextPopoverId += 1;
+    return `ui-lib-popover-${nextPopoverId}`;
   }
 
   private computeAndSetPosition(): void {

@@ -2,18 +2,22 @@
   <!-- Transparent overlay catches click-away to dismiss -->
   <div
     class="ui-lib-popover__overlay"
+    aria-hidden="true"
     [class.ui-lib-popover__overlay--active]="dismissable()"
     (click)="onOverlayClick()"
   ></div>
 
   <!-- Floating panel anchored near the target element -->
   <div
+    [id]="panelId"
     [class]="panelClasses()"
     [style.top.px]="panelTop()"
     [style.left.px]="panelLeft()"
     role="dialog"
     aria-modal="false"
     tabindex="-1"
+    [attr.aria-labelledby]="header() ? titleId : null"
+    [attr.aria-label]="header() ? null : 'Popover'"
     (keydown)="onPanelKeydown($event)"
   >
     <!-- Arrow pointing toward the trigger element -->
@@ -26,7 +30,7 @@
     @if (header() || showCloseButton()) {
       <div class="ui-lib-popover__header">
         @if (header()) {
-          <span class="ui-lib-popover__title">{{ header() }}</span>
+          <span class="ui-lib-popover__title" [id]="titleId">{{ header() }}</span>
         }
         @if (showCloseButton()) {
           <button
@@ -35,7 +39,22 @@
             aria-label="Close"
             (click)="hide()"
           >
-            <span aria-hidden="true">&times;</span>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              width="14"
+              height="14"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
           </button>
         }
       </div>

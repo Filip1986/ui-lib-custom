@@ -4,6 +4,28 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-10 [AutoComplete component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.ts (targeted listener, listboxLabel, resultsAnnouncement, removed empty constructor)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.html (chip div/role=group, SVG icons, live region, listbox aria-label, CSS ::before groups, aria-setsize/posinset)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.scss (group ::before, sr-live visually-hidden, icon display rule)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.spec.ts (1 test fixed: chip role assertion)
+  - projects/ui-lib-custom/src/lib/autocomplete/autocomplete.a11y.spec.ts (NEW — 52 a11y tests, all pass)
+  - docs/COMPONENT_SCORES.md (AutoComplete: 8.2 avg ✅ Done, queue #3 → ✅)
+  - AI_AGENT_CONTEXT.md (updated)
+State: AutoComplete fully hardened. 96/96 tests pass (44 unit + 52 a11y). All 7 axe-core checks pass.
+Verification:
+  node_modules\.bin\eslint projects/ui-lib-custom/src/lib/autocomplete/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules\.bin\jest --testPathPatterns=autocomplete --no-coverage (96/96 PASS)
+  node_modules\.bin\jest --testPathPatterns=entry-points --no-coverage (95/95 PASS)
+  node_modules\.bin\ng build ui-lib-custom (zero errors/warnings)
+Terminal notes: aria-input-field-name violation on role="listbox" — fixed by listboxLabel() computed.
+  listitem violation — <li> inside <ul role="group"> has implicit listitem role rejected by axe.
+  Fix: change <ul>/<li> to <div>/<div>. CSS ::before group headers — cleanest ARIA-compliant approach.
+Next step: ConfirmDialog hardening (Tier 1, #6).
+
+---
+
 Date: 2026-04-29 [context-menu session]
 Changed:
   - projects/ui-lib-custom/src/lib/context-menu/ (new — types, component, template, SCSS, spec, barrel)

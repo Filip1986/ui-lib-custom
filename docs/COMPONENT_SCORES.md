@@ -25,7 +25,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 5   | Drawer        | Side dialog, focus management, `aria-modal`                            | ✅ Done     |
 | 6   | ConfirmDialog | `role=alertdialog`, default focus on confirm action, focus restoration | ✅ Done     |
 | 7   | ConfirmPopup  | `role=alertdialog` anchored, click-away without losing a11y            | ✅ Done     |
-| 8   | Popover       | `aria-expanded`, `aria-controls`, dismiss without losing focus context | ⏳ Queued   |
+| 8   | Popover       | `aria-expanded`, `aria-controls`, dismiss without losing focus context | ✅ Done     |
 | 9   | Tooltip       | `aria-describedby` lifecycle — attached and cleaned up correctly       | ⏳ Queued   |
 | 10  | Toast         | Live region (`aria-live=assertive`), dismiss keyboard access           | ⏳ Queued   |
 
@@ -199,7 +199,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | DynamicDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Drawer        | 9   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | BottomSheet   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Popover       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Popover       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Tooltip       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ConfirmDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 | 🟢     |
 | ConfirmPopup  | 9   | 9    | 9    | 9    | 9     | 8   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
