@@ -158,7 +158,7 @@ describe('CascadeSelect accessibility', (): void => {
 
   function getOptionByText(text: string): HTMLElement {
     const option: HTMLElement | undefined = getOptions().find(
-      (optionElement: HTMLElement): boolean => optionElement.textContent.trim() === text
+      (optionElement: HTMLElement): boolean => optionElement.textContent.trim().includes(text)
     );
     if (!option) {
       throw new Error(`Expected option "${text}" to exist.`);
@@ -240,11 +240,9 @@ describe('CascadeSelect accessibility', (): void => {
 
   it('sets aria-selected true for selected leaf', (): void => {
     openPanel();
-    let options: HTMLElement[] = getOptions();
-    options[0]?.click();
+    getOptionByText('Australia').click();
     fixture.detectChanges();
-    options = getOptions();
-    options[2]?.click();
+    getOptionByText('New South Wales').click();
     fixture.detectChanges();
     getOptionByText('Sydney').click();
     fixture.detectChanges();

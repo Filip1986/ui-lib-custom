@@ -787,8 +787,8 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     }
 
     this.setActiveOption(childLevel, firstEnabledChildOption, event);
-    // When the first child is a group, keep that level collapsed until the next explicit
-    // ArrowRight / interaction, instead of auto-opening two levels in one keystroke.
+    // During ArrowRight navigation, if the first child is also a group, keep that child level
+    // collapsed so one key press advances exactly one level.
     if (this.isOptionGroup(firstEnabledChildOption, childLevel)) {
       this.activePath.set(this.activePath().slice(0, childLevel));
     }
@@ -810,7 +810,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.focusedLevel.set(parentLevel);
     const nextPath: unknown[] = this.buildGroupPathFromMap(nextActiveMap);
     const parentOption: unknown | undefined = nextActiveMap.get(parentLevel);
-    // If the parent option is a group, keep focus on it but collapse deeper descendants.
+    // Exclude the parent group from activePath so moving left collapses its child list.
     if (parentOption && this.isOptionGroup(parentOption, parentLevel)) {
       this.activePath.set(nextPath.slice(0, parentLevel));
     } else {
