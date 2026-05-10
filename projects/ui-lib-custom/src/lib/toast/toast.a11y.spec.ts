@@ -57,7 +57,8 @@ function addMessage(
   summary: string = 'Test notification',
   options: { closable?: boolean; sticky?: boolean } = {}
 ): void {
-  toastService.add({ severity, summary, sticky: true, closable: options.closable, ...options });
+  const msg: Parameters<ToastService['add']>[0] = { severity, summary, sticky: true, ...options };
+  toastService.add(msg);
   fixture.detectChanges();
 }
 
