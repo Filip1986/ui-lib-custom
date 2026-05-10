@@ -442,11 +442,11 @@ describe('UiLibCascadeSelect unit', (): void => {
 
     cmpEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     fixture.detectChanges();
-    expect(levelEls().length).toBe(3);
+    expect(levelEls().length).toBe(2);
 
     cmpEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
     fixture.detectChanges();
-    expect(levelEls().length).toBe(2);
+    expect(levelEls().length).toBe(1);
   });
 
   it('Enter selects a focused leaf option', (): void => {

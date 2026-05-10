@@ -41,7 +41,7 @@
 </div>
 
 @if (panelVisible()) {
-  <div #panelElement class="ui-lib-cascade-select__panel" [attr.id]="panelId()" role="tree">
+  <div #panelElement class="ui-lib-cascade-select__panel">
     @if (headerTemplate()) {
       <div class="ui-lib-cascade-select__header">
         <ng-container *ngTemplateOutlet="headerTemplate()"></ng-container>
@@ -59,22 +59,24 @@
     } @else {
       <div class="ui-lib-cascade-select__columns">
         @for (levelOptions of visibleLevels(); track $index; let level = $index) {
-          <ul class="ui-lib-cascade-select__level" [attr.role]="getLevelRole(level)">
+          <ul
+            class="ui-lib-cascade-select__level"
+            role="listbox"
+            [attr.id]="getLevelListboxId(level)"
+            [attr.aria-label]="getLevelAriaLabel(level)"
+          >
             @for (
               option of levelOptions;
-              track optionTrackBy($index, option);
-              let optionIndex = $index
+              track optionTrackBy($index, option)
             ) {
               <li
                 class="ui-lib-cascade-select__option"
-                [attr.id]="getOptionId(level, optionIndex)"
-                role="treeitem"
-                [attr.aria-level]="level + 1"
-                [attr.aria-setsize]="levelOptions.length"
-                [attr.aria-posinset]="optionIndex + 1"
+                [attr.id]="getItemId(option, level)"
+                role="option"
+                [attr.aria-haspopup]="isOptionGroupAtLevel(option, level) ? 'listbox' : null"
                 [attr.aria-expanded]="
                   isOptionGroupAtLevel(option, level)
-                    ? isOptionActive(level, option)
+                    ? isSubListOpen(option, level)
                       ? 'true'
                       : 'false'
                     : null

@@ -84,9 +84,9 @@ const CASCADE_SELECT_PANEL_MODE_CLASSES: readonly string[] = [
     '[class]': 'hostClasses()',
     '[attr.role]': '"combobox"',
     '[attr.aria-expanded]': 'panelVisible() ? "true" : "false"',
-    '[attr.aria-haspopup]': '"tree"',
-    '[attr.aria-controls]': 'panelVisible() ? panelId() : null',
-    '[attr.aria-activedescendant]': 'activeDescendantId() || null',
+    '[attr.aria-haspopup]': '"listbox"',
+    '[attr.aria-controls]': 'listboxId',
+    '[attr.aria-activedescendant]': 'focusedItemId() || null',
     '[attr.aria-disabled]': 'isDisabled() || loading() ? "true" : null',
     '[attr.aria-invalid]': 'invalid() ? "true" : null',
     '[attr.aria-label]': 'ariaLabel() || null',
@@ -182,6 +182,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   public readonly activeOptionPerLevel: WritableSignal<Map<number, unknown>> = signal<
     Map<number, unknown>
   >(new Map<number, unknown>());
+  public readonly focusedItemId: WritableSignal<string> = signal<string>('');
   public readonly internalValue: WritableSignal<unknown | null> = signal<unknown | null>(null);
 
   private readonly focusedLevel: WritableSignal<number> = signal<number>(0);
@@ -199,19 +200,18 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     { read: ElementRef }
   );
 
-  private readonly uniqueIdValue: string = `${CASCADE_SELECT_IDS.Prefix}-${++cascadeSelectIdCounter}`;
+  public readonly cascadeSelectId: string = `${CASCADE_SELECT_IDS.Prefix}-${++cascadeSelectIdCounter}`;
+  public readonly listboxId: string = `${this.cascadeSelectId}-listbox`;
 
   private onModelChange: (value: unknown) => void = (): void => {};
   private onModelTouched: () => void = (): void => {};
 
   public readonly controlId: Signal<string> = computed<string>((): string => {
     const id: string = this.inputId().trim();
-    return id || `${this.uniqueIdValue}-control`;
+    return id || `${this.cascadeSelectId}-control`;
   });
 
-  public readonly panelId: Signal<string> = computed<string>(
-    (): string => `${this.uniqueIdValue}-panel`
-  );
+  public readonly panelId: Signal<string> = computed<string>((): string => this.listboxId);
 
   public readonly effectiveVariant: Signal<CascadeSelectVariant> = computed<CascadeSelectVariant>(
     (): CascadeSelectVariant => this.variant() ?? this.themeConfig.variant()
@@ -253,28 +253,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   });
 
   public readonly activeDescendantId: Signal<string | null> = computed<string | null>(
-    (): string | null => {
-      if (!this.panelVisible()) {
-        return null;
-      }
-
-      const currentLevel: number = this.focusedLevel();
-      const currentOptions: unknown[] = this.getOptionsForLevel(currentLevel);
-      const currentActiveOption: unknown | undefined =
-        this.activeOptionPerLevel().get(currentLevel);
-      if (!currentActiveOption) {
-        return null;
-      }
-
-      const currentIndex: number = currentOptions.findIndex(
-        (option: unknown): boolean => option === currentActiveOption
-      );
-      if (currentIndex < 0) {
-        return null;
-      }
-
-      return this.getOptionId(currentLevel, currentIndex);
-    }
+    (): string | null => this.focusedItemId() || null
   );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
@@ -349,6 +328,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.panelVisible.set(false);
     this.activePath.set([]);
     this.activeOptionPerLevel.set(new Map<number, unknown>());
+    this.focusedItemId.set('');
     this.focusedLevel.set(0);
     this.onModelTouched();
     this.onHide.emit({ originalEvent: event });
@@ -392,11 +372,42 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
   }
 
   public getOptionId(level: number, index: number): string {
-    return `${this.uniqueIdValue}-option-${level}-${index}`;
+    const option: unknown | undefined = this.getOptionsForLevel(level)[index];
+    if (!option) {
+      return `${this.cascadeSelectId}-item-${level}-${index}`;
+    }
+    return this.getItemId(option, level);
   }
 
-  public getLevelRole(level: number): 'tree' | 'group' {
-    return level === 0 ? 'tree' : 'group';
+  public getItemId(item: unknown, level: number): string {
+    const resolvedValue: unknown = this.resolveOptionValue(item);
+    const baseValue: string = String(resolvedValue ?? this.resolveOptionLabel(item));
+    const normalizedValue: string = baseValue
+      .trim()
+      .replace(/[^A-Za-z0-9_-]+/g, '-')
+      .toLowerCase();
+    return `${this.cascadeSelectId}-item-${level}-${normalizedValue || 'option'}`;
+  }
+
+  public isSubListOpen(item: unknown, level: number): boolean {
+    const pathOption: unknown | undefined = this.activePath()[level];
+    return pathOption === item;
+  }
+
+  public getLevelListboxId(level: number): string {
+    return level === 0 ? this.listboxId : `${this.cascadeSelectId}-listbox-${level}`;
+  }
+
+  public getLevelAriaLabel(level: number): string {
+    if (level === 0) {
+      return this.placeholder();
+    }
+
+    const parent: unknown | undefined = this.activePath()[level - 1];
+    if (!parent) {
+      return this.placeholder();
+    }
+    return this.resolveOptionLabel(parent);
   }
 
   public optionTrackBy(index: number, option: unknown): string {
@@ -682,6 +693,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.activeOptionPerLevel.set(activeMap);
     this.activePath.set(groupPath);
     this.focusedLevel.set(Math.max(0, pathToSelectedOption.length - 1));
+    this.syncFocusedItemIdFromActiveMap();
   }
 
   private initializeNavigationFromRoot(): void {
@@ -695,6 +707,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.activeOptionPerLevel.set(activeMap);
     this.activePath.set([]);
     this.focusedLevel.set(0);
+    this.syncFocusedItemIdFromActiveMap();
   }
 
   private setActiveOption(level: number, option: unknown, event: Event): void {
@@ -706,6 +719,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
     this.activeOptionPerLevel.set(nextActiveMap);
     this.focusedLevel.set(level);
+    this.focusedItemId.set(this.getItemId(option, level));
 
     const nextPath: unknown[] = this.buildGroupPathFromMap(nextActiveMap);
     this.activePath.set(nextPath);
@@ -772,6 +786,9 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     }
 
     this.setActiveOption(childLevel, firstEnabledChildOption, event);
+    if (this.isOptionGroup(firstEnabledChildOption, childLevel)) {
+      this.activePath.set(this.activePath().slice(0, childLevel));
+    }
   }
 
   private moveToParentLevel(event: KeyboardEvent): void {
@@ -788,9 +805,14 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
     this.activeOptionPerLevel.set(nextActiveMap);
     this.focusedLevel.set(parentLevel);
-    this.activePath.set(this.buildGroupPathFromMap(nextActiveMap));
-
+    const nextPath: unknown[] = this.buildGroupPathFromMap(nextActiveMap);
     const parentOption: unknown | undefined = nextActiveMap.get(parentLevel);
+    if (parentOption && this.isOptionGroup(parentOption, parentLevel)) {
+      this.activePath.set(nextPath.slice(0, parentLevel));
+    } else {
+      this.activePath.set(nextPath);
+    }
+
     if (parentOption) {
       this.onGroupChange.emit({ originalEvent: event, level: parentLevel, value: parentOption });
     }
@@ -810,6 +832,16 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     if (lastEnabledOption !== null) {
       this.setActiveOption(currentLevel, lastEnabledOption, event);
     }
+  }
+
+  private syncFocusedItemIdFromActiveMap(): void {
+    const level: number = this.focusedLevel();
+    const activeOption: unknown | undefined = this.activeOptionPerLevel().get(level);
+    if (!activeOption) {
+      this.focusedItemId.set('');
+      return;
+    }
+    this.focusedItemId.set(this.getItemId(activeOption, level));
   }
 
   private findFirstEnabledOption(level: number): unknown | null {

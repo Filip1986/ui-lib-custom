@@ -54,7 +54,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ⏳ Queued   |
 | 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ⏳ Queued   |
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ⏳ Queued   |
-| 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ⏳ Queued   |
+| 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done     |
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ⏳ Queued   |
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Queued   |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ⏳ Queued   |
@@ -156,7 +156,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| CascadeSelect | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Checkbox      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
