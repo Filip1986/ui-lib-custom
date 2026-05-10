@@ -6,13 +6,17 @@
 
 ## Project Overview
 
-`ui-lib-custom` is a PrimeNG-inspired Angular component library — lighter, tree-shakable, and easy to theme. It lives in a monorepo-style Angular workspace with three projects:
+`ui-lib-custom` is a next-generation Angular UI ecosystem — signals-first, tree-shakable, accessibility-native, and design-token-driven. It lives in a monorepo-style Angular workspace with three projects:
 
 - `projects/ui-lib-custom` — the library itself (secondary-entry-point architecture)
 - `projects/demo` — demo application with live Theme Editor
 - `projects/minimal` — minimal app used for tree-shaking verification
 
-**Goal:** Enable rapid project bootstrapping with pre-built component variants (Material, Bootstrap, Minimal), runtime CSS-variable theming, and theme presets saved/loaded as JSON.
+**Goal:** Build the most modern, performant, accessible, composable, and developer-loved Angular UI ecosystem ever built — the library that makes Angular developers feel what React developers felt when modern UI ecosystems exploded. APIs that feel intelligent, components that feel effortless, performance that feels invisible, and an experience that feels years ahead of the current Angular ecosystem.
+
+**Current committed "wow factor":** Elite Accessibility — every component meets the standard described in `docs/VISION.md`. When any trade-off arises, always go further on accessibility, not less.
+
+> Full strategic context: [`docs/VISION.md`](docs/VISION.md)
 
 ---
 

@@ -417,6 +417,12 @@ The project should be developed with:
 
 AI becomes: **a force multiplier for quality and consistency.**
 
+This is not aspirational — the concrete AI workflow for this project is already built:
+
+> **[Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)** — the master prompt, 6-phase refinement workflow (Architecture → DX → Accessibility → Performance → Composability → Emotional Polish), and the quality scorecard template used to gate every component release.
+>
+> **[Component Quality Scores](COMPONENT_SCORES.md)** — the living hardening backlog; all 70+ components tracked against the ≥ 8 scorecard gate, updated after every evolution session.
+
 ---
 
 ## Long-Term Vision
