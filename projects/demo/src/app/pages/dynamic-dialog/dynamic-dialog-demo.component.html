@@ -18,9 +18,9 @@
     </p>
     <div class="demo-card">
       <div class="demo-card__preview">
-        <button type="button" class="demo-btn demo-btn--primary" (click)="openSimple()">
+        <ui-lib-button type="button" severity="primary" (click)="openSimple()">
           Open Dialog
-        </button>
+        </ui-lib-button>
       </div>
       <pre class="demo-card__code"><code>const ref = this.dialogService.open(MyComponent, &#123;
   header: 'Welcome',
@@ -38,9 +38,9 @@
     </p>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--col">
-        <button type="button" class="demo-btn demo-btn--primary" (click)="openWithData()">
+        <ui-lib-button type="button" severity="primary" (click)="openWithData()">
           Open with Data
-        </button>
+        </ui-lib-button>
         @if (lastResult) {
           <p class="demo-result">Result: <strong>{{ lastResult }}</strong></p>
         }
@@ -70,9 +70,9 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
     </p>
     <div class="demo-card">
       <div class="demo-card__preview">
-        <button type="button" class="demo-btn demo-btn--primary" (click)="openScrollable()">
+        <ui-lib-button type="button" severity="primary" (click)="openScrollable()">
           Open Scrollable
-        </button>
+        </ui-lib-button>
       </div>
       <pre class="demo-card__code"><code>this.dialogService.open(LongContentComponent, &#123;
   header: 'Scrollable',
@@ -90,15 +90,15 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
     </p>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--row">
-        <button type="button" class="demo-btn demo-btn--primary" (click)="openWithVariant('material')">
+        <ui-lib-button type="button" severity="primary" (click)="openWithVariant('material')">
           Material
-        </button>
-        <button type="button" class="demo-btn demo-btn--secondary" (click)="openWithVariant('bootstrap')">
+        </ui-lib-button>
+        <ui-lib-button type="button" severity="secondary" (click)="openWithVariant('bootstrap')">
           Bootstrap
-        </button>
-        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithVariant('minimal')">
+        </ui-lib-button>
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithVariant('minimal')">
           Minimal
-        </button>
+        </ui-lib-button>
       </div>
       <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; variant: 'bootstrap' &#125;);</code></pre>
     </div>
@@ -113,11 +113,11 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
     </p>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--grid">
-        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('top')">Top</button>
-        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('center')">Center</button>
-        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('bottom')">Bottom</button>
-        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('left')">Left</button>
-        <button type="button" class="demo-btn demo-btn--ghost" (click)="openWithPosition('right')">Right</button>
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('top')">Top</ui-lib-button>
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('center')">Center</ui-lib-button>
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('bottom')">Bottom</ui-lib-button>
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('left')">Left</ui-lib-button>
+        <ui-lib-button type="button" appearance="ghost" (click)="openWithPosition('right')">Right</ui-lib-button>
       </div>
       <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; position: 'top' &#125;);</code></pre>
     </div>
@@ -128,12 +128,12 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
     <h2 class="demo-section__title">Configuration Options</h2>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--col">
-        <button type="button" class="demo-btn demo-btn--secondary" (click)="openDismissable()">
+        <ui-lib-button type="button" severity="secondary" (click)="openDismissable()">
           Dismissable Mask
-        </button>
-        <button type="button" class="demo-btn demo-btn--secondary" (click)="openNoHeader()">
+        </ui-lib-button>
+        <ui-lib-button type="button" severity="secondary" (click)="openNoHeader()">
           No Header / No Close Button
-        </button>
+        </ui-lib-button>
       </div>
     </div>
   </div>

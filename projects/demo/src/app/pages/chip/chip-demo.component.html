@@ -95,7 +95,7 @@
     @if (removedChips().length > 0) {
       <p class="chip-section__desc chip-removed-log">
         Removed: {{ removedChips().join(', ') }}
-        <button class="chip-reset-btn" (click)="resetChips()">Reset</button>
+        <ui-lib-button appearance="link" size="sm" type="button" (click)="resetChips()">Reset</ui-lib-button>
       </p>
     }
     <pre class="chip-code"><code>&lt;ui-lib-chip label="Angular" [removable]="true" (onRemove)="onRemove()" /&gt;</code></pre>
@@ -158,13 +158,15 @@
           <span class="chip-control__label">Size</span>
           <div class="chip-control__options">
             @for (size of sizes; track size) {
-              <button
-                class="chip-control__btn"
-                [class.chip-control__btn--active]="playgroundSize() === size"
+              <ui-lib-button
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                type="button"
                 (click)="setSize(size)"
               >
                 {{ size }}
-              </button>
+              </ui-lib-button>
             }
           </div>
         </div>
@@ -172,33 +174,39 @@
           <span class="chip-control__label">Variant</span>
           <div class="chip-control__options">
             @for (variant of variants; track variant) {
-              <button
-                class="chip-control__btn"
-                [class.chip-control__btn--active]="playgroundVariant() === variant"
+              <ui-lib-button
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                type="button"
                 (click)="setVariant(variant)"
               >
                 {{ variant }}
-              </button>
+              </ui-lib-button>
             }
           </div>
         </div>
         <div class="chip-control">
           <span class="chip-control__label">Options</span>
           <div class="chip-control__options">
-            <button
-              class="chip-control__btn"
-              [class.chip-control__btn--active]="playgroundRemovable()"
+            <ui-lib-button
+              [appearance]="playgroundRemovable() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
               (click)="toggleRemovable()"
             >
               removable
-            </button>
-            <button
-              class="chip-control__btn"
-              [class.chip-control__btn--active]="playgroundIcon() !== null"
+            </ui-lib-button>
+            <ui-lib-button
+              [appearance]="playgroundIcon() !== null ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
               (click)="toggleIcon()"
             >
               icon
-            </button>
+            </ui-lib-button>
           </div>
         </div>
       </div>

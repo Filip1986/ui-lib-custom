@@ -128,11 +128,13 @@
         <label class="demo-control__label">Orientation</label>
         <div class="demo-control__buttons">
           @for (option of ['horizontal', 'vertical']; track option) {
-            <button
-              class="demo-control__btn"
-              [class.demo-control__btn--active]="interactiveOrientation() === option"
+            <ui-lib-button
+              [appearance]="interactiveOrientation() === option ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
               (click)="setOrientation($any(option))"
-            >{{ option }}</button>
+            >{{ option }}</ui-lib-button>
           }
         </div>
       </div>
@@ -141,11 +143,13 @@
         <label class="demo-control__label">Label Position</label>
         <div class="demo-control__buttons">
           @for (option of ['start', 'end']; track option) {
-            <button
-              class="demo-control__btn"
-              [class.demo-control__btn--active]="interactiveLabelPosition() === option"
+            <ui-lib-button
+              [appearance]="interactiveLabelPosition() === option ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
               (click)="setLabelPosition($any(option))"
-            >{{ option }}</button>
+            >{{ option }}</ui-lib-button>
           }
         </div>
       </div>
@@ -154,11 +158,13 @@
         <label class="demo-control__label">Size</label>
         <div class="demo-control__buttons">
           @for (option of ['sm', 'md', 'lg']; track option) {
-            <button
-              class="demo-control__btn"
-              [class.demo-control__btn--active]="interactiveSize() === option"
+            <ui-lib-button
+              [appearance]="interactiveSize() === option ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
               (click)="setSize($any(option))"
-            >{{ option }}</button>
+            >{{ option }}</ui-lib-button>
           }
         </div>
       </div>
@@ -167,11 +173,13 @@
         <label class="demo-control__label">Variant</label>
         <div class="demo-control__buttons">
           @for (option of ['material', 'bootstrap', 'minimal']; track option) {
-            <button
-              class="demo-control__btn"
-              [class.demo-control__btn--active]="interactiveVariant() === option"
+            <ui-lib-button
+              [appearance]="interactiveVariant() === option ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              type="button"
               (click)="setVariant($any(option))"
-            >{{ option }}</button>
+            >{{ option }}</ui-lib-button>
           }
         </div>
       </div>

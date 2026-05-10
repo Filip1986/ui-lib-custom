@@ -9,6 +9,7 @@ import { Card } from 'ui-lib-custom/card';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
+import { Button } from 'ui-lib-custom/button';
 
 interface LoginVariant {
   id: string;
@@ -38,6 +39,7 @@ type TabKey = 'variants' | 'api-reference';
     LoginForm,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
+    Button,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

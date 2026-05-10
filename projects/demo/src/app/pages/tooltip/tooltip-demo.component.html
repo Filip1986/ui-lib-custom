@@ -23,9 +23,9 @@
       The tooltip appears above the host by default.
     </p>
     <div class="tooltip-row">
-      <button class="demo-btn" uiLibTooltip="Save the document">Save</button>
-      <button class="demo-btn" uiLibTooltip="Delete this item">Delete</button>
-      <button class="demo-btn" uiLibTooltip="Share with others">Share</button>
+      <ui-lib-button uiLibTooltip="Save the document">Save</ui-lib-button>
+      <ui-lib-button uiLibTooltip="Delete this item">Delete</ui-lib-button>
+      <ui-lib-button uiLibTooltip="Share with others">Share</ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Save the document"&gt;Save&lt;/button&gt;</code></pre>
   </div>
@@ -39,10 +39,10 @@
       The tooltip flips automatically if there is insufficient space in the requested direction.
     </p>
     <div class="tooltip-row tooltip-row--positions">
-      <button class="demo-btn" uiLibTooltip="Top tooltip" tooltipPosition="top">Top</button>
-      <button class="demo-btn" uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</button>
-      <button class="demo-btn" uiLibTooltip="Left tooltip" tooltipPosition="left">Left</button>
-      <button class="demo-btn" uiLibTooltip="Right tooltip" tooltipPosition="right">Right</button>
+      <ui-lib-button uiLibTooltip="Top tooltip" tooltipPosition="top">Top</ui-lib-button>
+      <ui-lib-button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom">Bottom</ui-lib-button>
+      <ui-lib-button uiLibTooltip="Left tooltip" tooltipPosition="left">Left</ui-lib-button>
+      <ui-lib-button uiLibTooltip="Right tooltip" tooltipPosition="right">Right</ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Top tooltip" tooltipPosition="top"&gt;Top&lt;/button&gt;
 &lt;button uiLibTooltip="Bottom tooltip" tooltipPosition="bottom"&gt;Bottom&lt;/button&gt;
@@ -84,28 +84,25 @@
       debounce rapid mouse movements. Useful in dense UIs to avoid tooltip flicker.
     </p>
     <div class="tooltip-row">
-      <button
-        class="demo-btn"
+      <ui-lib-button
         uiLibTooltip="Appears after 400 ms"
         [showDelay]="400"
       >
         400 ms show delay
-      </button>
-      <button
-        class="demo-btn"
+      </ui-lib-button>
+      <ui-lib-button
         uiLibTooltip="Stays 600 ms after leaving"
         [hideDelay]="600"
       >
         600 ms hide delay
-      </button>
-      <button
-        class="demo-btn"
+      </ui-lib-button>
+      <ui-lib-button
         uiLibTooltip="Both delays combined"
         [showDelay]="300"
         [hideDelay]="400"
       >
         Show 300 ms / Hide 400 ms
-      </button>
+      </ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Appears after 400 ms" [showDelay]="400"&gt;Hover&lt;/button&gt;</code></pre>
   </div>
@@ -118,16 +115,15 @@
       Bind to a signal for runtime toggling.
     </p>
     <div class="tooltip-row">
-      <button
-        class="demo-btn"
+      <ui-lib-button
         uiLibTooltip="You will never see this"
         [tooltipDisabled]="tooltipDisabled()"
       >
         {{ tooltipDisabled() ? 'Tooltip disabled' : 'Tooltip enabled' }}
-      </button>
-      <button class="demo-btn demo-btn--secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
+      </ui-lib-button>
+      <ui-lib-button severity="secondary" (click)="tooltipDisabled.set(!tooltipDisabled())">
         Toggle disabled
-      </button>
+      </ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Hidden" [tooltipDisabled]="isDisabled"&gt;Hover&lt;/button&gt;</code></pre>
   </div>
@@ -141,30 +137,27 @@
       is inherited from <code>ThemeConfigService</code>.
     </p>
     <div class="tooltip-row">
-      <button
-        class="demo-btn"
+      <ui-lib-button
         uiLibTooltip="Material variant — larger radius and elevated shadow"
         tooltipVariant="material"
         tooltipPosition="bottom"
       >
         Material
-      </button>
-      <button
-        class="demo-btn"
+      </ui-lib-button>
+      <ui-lib-button
         uiLibTooltip="Bootstrap variant — dark background, tight radius"
         tooltipVariant="bootstrap"
         tooltipPosition="bottom"
       >
         Bootstrap
-      </button>
-      <button
-        class="demo-btn"
+      </ui-lib-button>
+      <ui-lib-button
         uiLibTooltip="Minimal variant — uses page foreground colour"
         tooltipVariant="minimal"
         tooltipPosition="bottom"
       >
         Minimal
-      </button>
+      </ui-lib-button>
     </div>
     <pre class="tooltip-code"><code>&lt;button uiLibTooltip="Material tooltip" tooltipVariant="material"&gt;Material&lt;/button&gt;</code></pre>
   </div>
@@ -176,13 +169,12 @@
       The tooltip wraps text at <code>14rem</code> max width and breaks long words automatically.
     </p>
     <div class="tooltip-row">
-      <button
-        class="demo-btn"
+      <ui-lib-button
         uiLibTooltip="This is a much longer tooltip that wraps onto multiple lines when the content exceeds the maximum width."
         tooltipPosition="bottom"
       >
         Hover for long text
-      </button>
+      </ui-lib-button>
     </div>
   </div>
 

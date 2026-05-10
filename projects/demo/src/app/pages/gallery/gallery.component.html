@@ -106,13 +106,15 @@
 
     <div class="demo-controls demo-controls--row">
       @for (pos of positionOptions; track pos) {
-        <button
-          class="demo-chip"
-          [class.demo-chip--active]="thumbnailsPosition() === pos"
+        <ui-lib-button
+          [appearance]="thumbnailsPosition() === pos ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
+          type="button"
           (click)="onPositionChange(pos)"
         >
           {{ pos }}
-        </button>
+        </ui-lib-button>
       }
     </div>
 
@@ -235,13 +237,15 @@
 
     <div class="demo-controls demo-controls--row">
       @for (v of variantOptions; track v) {
-        <button
-          class="demo-chip"
-          [class.demo-chip--active]="selectedVariant() === v"
+        <ui-lib-button
+          [appearance]="selectedVariant() === v ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
+          type="button"
           (click)="selectedVariant.set(v)"
         >
           {{ v }}
-        </button>
+        </ui-lib-button>
       }
     </div>
 
@@ -272,13 +276,15 @@
 
     <div class="demo-controls demo-controls--row">
       @for (s of sizeOptions; track s) {
-        <button
-          class="demo-chip"
-          [class.demo-chip--active]="selectedSize() === s"
+        <ui-lib-button
+          [appearance]="selectedSize() === s ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
+          type="button"
           (click)="selectedSize.set(s)"
         >
           {{ s }}
-        </button>
+        </ui-lib-button>
       }
     </div>
 

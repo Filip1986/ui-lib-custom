@@ -3,13 +3,14 @@ import type { WritableSignal } from '@angular/core';
 import { Avatar } from 'ui-lib-custom/avatar';
 import { AvatarGroup } from 'ui-lib-custom/avatar';
 import type { AvatarSize, AvatarShape, AvatarVariant } from 'ui-lib-custom/avatar';
+import { Button } from 'ui-lib-custom/button';
 /**
  * Demo page for the Avatar and AvatarGroup components.
  */
 @Component({
   selector: 'app-avatar-demo',
   standalone: true,
-  imports: [Avatar, AvatarGroup],
+  imports: [Avatar, AvatarGroup, Button],
   templateUrl: './avatar-demo.component.html',
   styleUrl: './avatar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

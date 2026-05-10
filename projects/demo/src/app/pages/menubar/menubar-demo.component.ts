@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Menubar } from 'ui-lib-custom/menubar';
+import { Button } from 'ui-lib-custom/button';
 import type {
   MenubarCommandEvent,
   MenubarItem,
@@ -14,7 +15,7 @@ import type {
 @Component({
   selector: 'app-menubar-demo',
   standalone: true,
-  imports: [Menubar],
+  imports: [Menubar, Button],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import type { WritableSignal } from '@angular/core';
 import { ConfirmPopup, ConfirmPopupService } from 'ui-lib-custom/confirm-popup';
 import type { ConfirmPopupButtonSeverity, ConfirmPopupVariant } from 'ui-lib-custom/confirm-popup';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the ConfirmPopup component.
@@ -10,7 +11,7 @@ import type { ConfirmPopupButtonSeverity, ConfirmPopupVariant } from 'ui-lib-cus
 @Component({
   selector: 'app-confirm-popup-demo',
   standalone: true,
-  imports: [ConfirmPopup, TitleCasePipe],
+  imports: [ConfirmPopup, TitleCasePipe, Button],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

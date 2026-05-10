@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GalleriaComponent } from 'ui-lib-custom/galleria';
+import { Button } from 'ui-lib-custom/button';
 import type {
   GalleriaSize,
   GalleriaThumbnailsPosition,
@@ -67,7 +68,7 @@ const DEMO_IMAGES: GalleriaImage[] = [
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [GalleriaComponent, FormsModule],
+  imports: [GalleriaComponent, FormsModule, Button],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -22,7 +22,7 @@
       <code>(rejected)</code> outputs.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" (click)="confirmBasic()">Open Basic Dialog</button>
+      <ui-lib-button (click)="confirmBasic()">Open Basic Dialog</ui-lib-button>
     </div>
 
     <ui-lib-confirm-dialog
@@ -41,7 +41,7 @@
       Set <code>dismissableMask</code> to close the dialog by clicking the backdrop.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" (click)="confirmDismissable()">Open — Click backdrop to close</button>
+      <ui-lib-button (click)="confirmDismissable()">Open — Click backdrop to close</ui-lib-button>
     </div>
 
     <ui-lib-confirm-dialog
@@ -61,7 +61,7 @@
       Set <code>closable="false"</code> to require the user to choose an action.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" (click)="confirmNoClose()">Open — No close button</button>
+      <ui-lib-button (click)="confirmNoClose()">Open — No close button</ui-lib-button>
     </div>
 
     <ui-lib-confirm-dialog
@@ -82,7 +82,7 @@
       message.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" (click)="confirmWithIcon()">Open — With icon</button>
+      <ui-lib-button (click)="confirmWithIcon()">Open — With icon</ui-lib-button>
     </div>
 
     <ui-lib-confirm-dialog
@@ -102,7 +102,7 @@
       Use <code>acceptSeverity="danger"</code> to signal a destructive action.
     </p>
     <div class="demo-card">
-      <button class="demo-btn demo-btn--danger" (click)="confirmDanger()">Delete item</button>
+      <ui-lib-button severity="danger" (click)="confirmDanger()">Delete item</ui-lib-button>
     </div>
 
     <ui-lib-confirm-dialog
@@ -126,7 +126,7 @@
       Use <code>position="top"</code> to anchor the dialog to the top of the viewport.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" (click)="confirmPosition()">Open — Top position</button>
+      <ui-lib-button (click)="confirmPosition()">Open — Top position</ui-lib-button>
     </div>
 
     <ui-lib-confirm-dialog
@@ -147,10 +147,10 @@
       component. Place a single <code>&lt;ui-lib-confirm-dialog /&gt;</code> in your layout shell.
     </p>
     <div class="demo-card demo-card--row">
-      <button class="demo-btn" (click)="confirmViaService()">Confirm via service</button>
-      <button class="demo-btn demo-btn--danger" (click)="confirmDeleteViaService()">
+      <ui-lib-button (click)="confirmViaService()">Confirm via service</ui-lib-button>
+      <ui-lib-button severity="danger" (click)="confirmDeleteViaService()">
         Delete via service
-      </button>
+      </ui-lib-button>
     </div>
 
     <!-- Shared service dialog — no key means it catches all keyless service calls -->
@@ -166,9 +166,9 @@
     </p>
     <div class="demo-card demo-card--row">
       @for (variant of variants; track variant) {
-        <button class="demo-btn" (click)="confirmVariant(variant)">
+        <ui-lib-button (click)="confirmVariant(variant)">
           {{ variant | titlecase }}
-        </button>
+        </ui-lib-button>
       }
     </div>
 

@@ -20,9 +20,9 @@
       semi-transparent white, suitable for dark or coloured surfaces.
     </p>
     <div class="demo-card demo-card--pad">
-      <button class="demo-btn demo-btn--primary" uiLibRipple>Primary Button</button>
-      <button class="demo-btn demo-btn--secondary" uiLibRipple>Secondary Button</button>
-      <button class="demo-btn demo-btn--danger" uiLibRipple>Danger Button</button>
+      <ui-lib-button severity="primary" uiLibRipple>Primary Button</ui-lib-button>
+      <ui-lib-button severity="secondary" uiLibRipple>Secondary Button</ui-lib-button>
+      <ui-lib-button severity="danger" uiLibRipple>Danger Button</ui-lib-button>
     </div>
   </div>
 
@@ -34,13 +34,13 @@
       white surfaces where white would be invisible.
     </p>
     <div class="demo-card demo-card--pad demo-card--light">
-      <button
-        class="demo-btn demo-btn--light"
+      <ui-lib-button
+        appearance="soft"
         uiLibRipple
         [rippleColor]="'rgba(0,0,0,0.12)'"
       >
         Light Button
-      </button>
+      </ui-lib-button>
       <div
         class="demo-surface"
         uiLibRipple
@@ -59,15 +59,15 @@
       <code>'300ms'</code> or <code>'1s'</code>.
     </p>
     <div class="demo-card demo-card--pad">
-      <button class="demo-btn demo-btn--primary" uiLibRipple [rippleDuration]="'200ms'">
+      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'200ms'">
         Fast (200ms)
-      </button>
-      <button class="demo-btn demo-btn--primary" uiLibRipple>
+      </ui-lib-button>
+      <ui-lib-button severity="primary" uiLibRipple>
         Default (600ms)
-      </button>
-      <button class="demo-btn demo-btn--primary" uiLibRipple [rippleDuration]="'1200ms'">
+      </ui-lib-button>
+      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'1200ms'">
         Slow (1200ms)
-      </button>
+      </ui-lib-button>
     </div>
   </div>
 
@@ -79,8 +79,8 @@
       interactive. Toggle the button below to see the difference.
     </p>
     <div class="demo-card demo-card--pad">
-      <button
-        class="demo-btn demo-btn--primary"
+      <ui-lib-button
+        severity="primary"
         uiLibRipple
         [disabled]="isDisabled()"
       >
@@ -89,10 +89,10 @@
         } @else {
           Ripple enabled — click to see wave
         }
-      </button>
-      <button class="demo-btn demo-btn--secondary" (click)="toggleDisabled()">
+      </ui-lib-button>
+      <ui-lib-button severity="secondary" (click)="toggleDisabled()">
         Toggle ripple (currently: {{ isDisabled() ? 'OFF' : 'ON' }})
-      </button>
+      </ui-lib-button>
     </div>
   </div>
 
@@ -193,4 +193,3 @@
   </div>
 
 </section>
-

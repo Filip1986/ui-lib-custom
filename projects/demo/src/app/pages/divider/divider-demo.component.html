@@ -176,18 +176,20 @@
         <div class="demo-control">
           <span class="demo-control__label">Orientation</span>
           <div class="demo-control__buttons">
-            <button
+            <ui-lib-button
               type="button"
-              class="demo-btn"
-              [class.demo-btn--active]="playgroundOrientation() === 'horizontal'"
+              [appearance]="playgroundOrientation() === 'horizontal' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
               (click)="setOrientation('horizontal')"
-            >horizontal</button>
-            <button
+            >horizontal</ui-lib-button>
+            <ui-lib-button
               type="button"
-              class="demo-btn"
-              [class.demo-btn--active]="playgroundOrientation() === 'vertical'"
+              [appearance]="playgroundOrientation() === 'vertical' ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
               (click)="setOrientation('vertical')"
-            >vertical</button>
+            >vertical</ui-lib-button>
           </div>
         </div>
 
@@ -196,12 +198,13 @@
           <span class="demo-control__label">Type</span>
           <div class="demo-control__buttons">
             @for (type of types; track type) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-btn"
-                [class.demo-btn--active]="playgroundType() === type"
+                [appearance]="playgroundType() === type ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setType(type)"
-              >{{ type }}</button>
+              >{{ type }}</ui-lib-button>
             }
           </div>
         </div>
@@ -212,21 +215,23 @@
           <div class="demo-control__buttons">
             @if (playgroundOrientation() === 'horizontal') {
               @for (align of horizontalAligns; track align) {
-                <button
+                <ui-lib-button
                   type="button"
-                  class="demo-btn"
-                  [class.demo-btn--active]="playgroundAlign() === align"
+                  [appearance]="playgroundAlign() === align ? 'solid' : 'outline'"
+                  severity="primary"
+                  size="sm"
                   (click)="setAlign(align)"
-                >{{ align }}</button>
+                >{{ align }}</ui-lib-button>
               }
             } @else {
               @for (align of verticalAligns; track align) {
-                <button
+                <ui-lib-button
                   type="button"
-                  class="demo-btn"
-                  [class.demo-btn--active]="playgroundAlign() === align"
+                  [appearance]="playgroundAlign() === align ? 'solid' : 'outline'"
+                  severity="primary"
+                  size="sm"
                   (click)="setAlign(align)"
-                >{{ align }}</button>
+                >{{ align }}</ui-lib-button>
               }
             }
           </div>
@@ -237,12 +242,13 @@
           <span class="demo-control__label">Variant</span>
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-btn"
-                [class.demo-btn--active]="playgroundVariant() === variant"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setVariant(variant)"
-              >{{ variant }}</button>
+              >{{ variant }}</ui-lib-button>
             }
           </div>
         </div>
@@ -250,12 +256,13 @@
         <!-- Content -->
         <div class="demo-control">
           <span class="demo-control__label">Label</span>
-          <button
+          <ui-lib-button
             type="button"
-            class="demo-btn"
-            [class.demo-btn--active]="playgroundHasContent()"
+            [appearance]="playgroundHasContent() ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
             (click)="toggleContent()"
-          >{{ playgroundHasContent() ? 'On' : 'Off' }}</button>
+          >{{ playgroundHasContent() ? 'On' : 'Off' }}</ui-lib-button>
         </div>
       </div>
     </div>
@@ -313,4 +320,3 @@
   </div>
 
 </section>
-

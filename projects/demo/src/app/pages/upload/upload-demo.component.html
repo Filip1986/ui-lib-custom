@@ -8,14 +8,15 @@
     <!-- Variant switcher -->
     <div class="upload-demo__variant-switcher" role="group" aria-label="Select variant">
       @for (variant of variants; track variant) {
-        <button
+        <ui-lib-button
           type="button"
-          class="upload-demo__variant-btn"
-          [class.upload-demo__variant-btn--active]="activeVariant() === variant"
+          [appearance]="activeVariant() === variant ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
           (click)="setVariant(variant)"
         >
           {{ variant }}
-        </button>
+        </ui-lib-button>
       }
     </div>
   </header>

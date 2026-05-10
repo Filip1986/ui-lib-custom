@@ -202,12 +202,13 @@
           <label class="demo-playground__label">Variant</label>
           <div class="demo-playground__buttons">
             @for (v of variants; track v) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-playground__btn"
-                [class.demo-playground__btn--active]="variant() === v"
+                [appearance]="variant() === v ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setVariant(v)"
-              >{{ v }}</button>
+              >{{ v }}</ui-lib-button>
             }
           </div>
         </div>
@@ -216,12 +217,13 @@
           <label class="demo-playground__label">Size</label>
           <div class="demo-playground__buttons">
             @for (s of sizes; track s) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-playground__btn"
-                [class.demo-playground__btn--active]="size() === s"
+                [appearance]="size() === s ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setSize(s)"
-              >{{ s }}</button>
+              >{{ s }}</ui-lib-button>
             }
           </div>
         </div>
@@ -230,12 +232,13 @@
           <label class="demo-playground__label">Position</label>
           <div class="demo-playground__buttons">
             @for (p of positions; track p) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-playground__btn"
-                [class.demo-playground__btn--active]="position() === p"
+                [appearance]="position() === p ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setPosition(p)"
-              >{{ p }}</button>
+              >{{ p }}</ui-lib-button>
             }
           </div>
         </div>
@@ -243,18 +246,20 @@
         <div class="demo-playground__control-group">
           <label class="demo-playground__label">Magnification</label>
           <div class="demo-playground__buttons">
-            <button
+            <ui-lib-button
               type="button"
-              class="demo-playground__btn"
-              [class.demo-playground__btn--active]="magnification()"
+              [appearance]="magnification() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
               (click)="magnification.set(true)"
-            >On</button>
-            <button
+            >On</ui-lib-button>
+            <ui-lib-button
               type="button"
-              class="demo-playground__btn"
-              [class.demo-playground__btn--active]="!magnification()"
+              [appearance]="!magnification() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
               (click)="magnification.set(false)"
-            >Off</button>
+            >Off</ui-lib-button>
           </div>
         </div>
       </div>

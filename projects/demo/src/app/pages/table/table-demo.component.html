@@ -13,11 +13,13 @@
       <label class="control-label">Variant</label>
       <div class="control-buttons">
         @for (v of variants; track v) {
-          <button
-            class="control-btn"
-            [class.control-btn--active]="activeVariant() === v"
+          <ui-lib-button
+            [appearance]="activeVariant() === v ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
+            type="button"
             (click)="activeVariant.set(v)"
-          >{{ v }}</button>
+          >{{ v }}</ui-lib-button>
         }
       </div>
     </div>
@@ -25,11 +27,13 @@
       <label class="control-label">Selection</label>
       <div class="control-buttons">
         @for (mode of selectionModes; track mode.value) {
-          <button
-            class="control-btn"
-            [class.control-btn--active]="selectionMode() === mode.value"
+          <ui-lib-button
+            [appearance]="selectionMode() === mode.value ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
+            type="button"
             (click)="selectionMode.set(mode.value)"
-          >{{ mode.label }}</button>
+          >{{ mode.label }}</ui-lib-button>
         }
       </div>
     </div>

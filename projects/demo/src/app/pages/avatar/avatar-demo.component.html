@@ -164,12 +164,13 @@
           <label class="av-control-label">Size</label>
           <div class="av-btn-row">
             @for (size of sizes; track size) {
-              <button
-                class="av-btn"
-                [class.av-btn--active]="playgroundSize() === size"
+              <ui-lib-button
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 type="button"
                 (click)="setSize(size)"
-              >{{ size }}</button>
+              >{{ size }}</ui-lib-button>
             }
           </div>
         </div>
@@ -177,12 +178,13 @@
           <label class="av-control-label">Shape</label>
           <div class="av-btn-row">
             @for (shape of shapes; track shape) {
-              <button
-                class="av-btn"
-                [class.av-btn--active]="playgroundShape() === shape"
+              <ui-lib-button
+                [appearance]="playgroundShape() === shape ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 type="button"
                 (click)="setShape(shape)"
-              >{{ shape }}</button>
+              >{{ shape }}</ui-lib-button>
             }
           </div>
         </div>
@@ -190,12 +192,13 @@
           <label class="av-control-label">Variant</label>
           <div class="av-btn-row">
             @for (variant of variants; track variant) {
-              <button
-                class="av-btn"
-                [class.av-btn--active]="playgroundVariant() === variant"
+              <ui-lib-button
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 type="button"
                 (click)="setVariant(variant)"
-              >{{ variant }}</button>
+              >{{ variant }}</ui-lib-button>
             }
           </div>
         </div>

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Message } from 'ui-lib-custom/message';
 import type { MessageSeverity, MessageVariant, MessageSize } from 'ui-lib-custom/message';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Message component.
@@ -9,7 +10,7 @@ import type { MessageSeverity, MessageVariant, MessageSize } from 'ui-lib-custom
 @Component({
   selector: 'app-message-demo',
   standalone: true,
-  imports: [Message],
+  imports: [Message, Button],
   templateUrl: './message-demo.component.html',
   styleUrl: './message-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

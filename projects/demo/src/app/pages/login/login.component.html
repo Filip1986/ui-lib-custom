@@ -111,17 +111,18 @@
               <div class="code-block-container">
                 <div class="code-block-header">
                   <span class="code-block-title">1. Import the Component</span>
-                  <button
-                    class="copy-button"
+                  <ui-lib-button
+                    appearance="ghost"
+                    size="sm"
+                    type="button"
                     (click)="copyToClipboard(variant.importCode, variant.id + '-import')"
-                    [class.copied]="isCopied(variant.id + '-import')"
                   >
                     @if (isCopied(variant.id + '-import')) {
                       <span>✓ Copied!</span>
                     } @else {
                       <span>Copy</span>
                     }
-                  </button>
+                  </ui-lib-button>
                 </div>
                 <pre class="code-block"><code>{{ variant.importCode }}</code></pre>
               </div>
@@ -129,17 +130,18 @@
               <div class="code-block-container">
                 <div class="code-block-header">
                   <span class="code-block-title">2. Use in Template</span>
-                  <button
-                    class="copy-button"
+                  <ui-lib-button
+                    appearance="ghost"
+                    size="sm"
+                    type="button"
                     (click)="copyToClipboard(variant.usageCode, variant.id + '-usage')"
-                    [class.copied]="isCopied(variant.id + '-usage')"
                   >
                     @if (isCopied(variant.id + '-usage')) {
                       <span>✓ Copied!</span>
                     } @else {
                       <span>Copy</span>
                     }
-                  </button>
+                  </ui-lib-button>
                 </div>
                 <pre class="code-block"><code>{{ variant.usageCode }}</code></pre>
               </div>
@@ -147,17 +149,18 @@
               <div class="code-block-container">
                 <div class="code-block-header">
                   <span class="code-block-title">3. Implement Event Handlers</span>
-                  <button
-                    class="copy-button"
+                  <ui-lib-button
+                    appearance="ghost"
+                    size="sm"
+                    type="button"
                     (click)="copyToClipboard(eventHandlersCode, 'event-handlers')"
-                    [class.copied]="isCopied('event-handlers')"
                   >
                     @if (isCopied('event-handlers')) {
                       <span>✓ Copied!</span>
                     } @else {
                       <span>Copy</span>
                     }
-                  </button>
+                  </ui-lib-button>
                 </div>
                 <pre class="code-block"><code>{{ eventHandlersCode }}</code></pre>
               </div>

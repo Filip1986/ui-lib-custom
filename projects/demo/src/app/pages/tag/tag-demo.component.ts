@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Tag } from 'ui-lib-custom/tag';
 import type { TagSeverity, TagSize, TagVariant } from 'ui-lib-custom/tag';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Tag component.
@@ -9,7 +10,7 @@ import type { TagSeverity, TagSize, TagVariant } from 'ui-lib-custom/tag';
 @Component({
   selector: 'app-tag-demo',
   standalone: true,
-  imports: [Tag],
+  imports: [Tag, Button],
   templateUrl: './tag-demo.component.html',
   styleUrl: './tag-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

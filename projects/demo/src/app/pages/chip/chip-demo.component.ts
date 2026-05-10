@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Chip } from 'ui-lib-custom/chip';
 import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Chip component.
@@ -9,7 +10,7 @@ import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
 @Component({
   selector: 'app-chip-demo',
   standalone: true,
-  imports: [Chip],
+  imports: [Chip, Button],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

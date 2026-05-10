@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
 import type { WritableSignal } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToggleSwitch } from 'ui-lib-custom/toggle-switch';
+import { Button } from 'ui-lib-custom/button';
 import type { ToggleSwitchSize, ToggleSwitchVariant } from 'ui-lib-custom/toggle-switch';
 import { Card } from 'ui-lib-custom/card';
 
@@ -11,7 +12,7 @@ import { Card } from 'ui-lib-custom/card';
 @Component({
   selector: 'app-toggle-switch-demo',
   standalone: true,
-  imports: [ToggleSwitch, Card, FormsModule, ReactiveFormsModule],
+  imports: [ToggleSwitch, Card, FormsModule, ReactiveFormsModule, Button],
   templateUrl: './toggle-switch-demo.component.html',
   styleUrl: './toggle-switch-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -43,9 +43,9 @@
     <h2>Popup Mode</h2>
     <p>Set <code>[popup]="true"</code> and control visibility via <code>toggle(event)</code>, <code>show(event)</code>, or <code>hide()</code>.</p>
     <div class="demo-preview">
-      <button class="demo-trigger-btn" (click)="popupMenu.toggle($event)">
+      <ui-lib-button severity="primary" type="button" (click)="popupMenu.toggle($any($event.currentTarget))">
         Open Menu &#9660;
-      </button>
+      </ui-lib-button>
       <ui-lib-tiered-menu
         #popupMenu
         [model]="popupItems"
@@ -62,21 +62,9 @@
     <h2>Variants</h2>
     <p>Choose from <code>material</code>, <code>bootstrap</code>, or <code>minimal</code>.</p>
     <div class="demo-controls">
-      <button
-        class="demo-control-btn"
-        [class.demo-control-btn--active]="variant() === 'material'"
-        (click)="setVariant('material')"
-      >material</button>
-      <button
-        class="demo-control-btn"
-        [class.demo-control-btn--active]="variant() === 'bootstrap'"
-        (click)="setVariant('bootstrap')"
-      >bootstrap</button>
-      <button
-        class="demo-control-btn"
-        [class.demo-control-btn--active]="variant() === 'minimal'"
-        (click)="setVariant('minimal')"
-      >minimal</button>
+      <ui-lib-button [appearance]="variant() === 'material' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('material')">material</ui-lib-button>
+      <ui-lib-button [appearance]="variant() === 'bootstrap' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('bootstrap')">bootstrap</ui-lib-button>
+      <ui-lib-button [appearance]="variant() === 'minimal' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('minimal')">minimal</ui-lib-button>
     </div>
     <div class="demo-preview demo-preview--narrow">
       <ui-lib-tiered-menu
@@ -91,21 +79,9 @@
     <h2>Sizes</h2>
     <p>Three sizes available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.</p>
     <div class="demo-controls">
-      <button
-        class="demo-control-btn"
-        [class.demo-control-btn--active]="size() === 'sm'"
-        (click)="setSize('sm')"
-      >sm</button>
-      <button
-        class="demo-control-btn"
-        [class.demo-control-btn--active]="size() === 'md'"
-        (click)="setSize('md')"
-      >md</button>
-      <button
-        class="demo-control-btn"
-        [class.demo-control-btn--active]="size() === 'lg'"
-        (click)="setSize('lg')"
-      >lg</button>
+      <ui-lib-button [appearance]="size() === 'sm' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('sm')">sm</ui-lib-button>
+      <ui-lib-button [appearance]="size() === 'md' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('md')">md</ui-lib-button>
+      <ui-lib-button [appearance]="size() === 'lg' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('lg')">lg</ui-lib-button>
     </div>
     <div class="demo-preview demo-preview--narrow">
       <ui-lib-tiered-menu

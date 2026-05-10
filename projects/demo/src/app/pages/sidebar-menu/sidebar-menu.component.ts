@@ -7,6 +7,7 @@ import type { SidebarMenuItem, SidebarVariant } from 'ui-lib-custom';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
 import { Card } from 'ui-lib-custom/card';
+import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -27,6 +28,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage';
     Tab,
     Card,
     SidebarMenu,
+    Button,
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     DocCodeSnippetComponent,

@@ -13,6 +13,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
 import { UiLibInput } from 'ui-lib-custom/input';
+import { Button } from 'ui-lib-custom/button';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 
@@ -46,6 +47,7 @@ type FloatLabelDemoSnippetKey =
     UiLibInput,
     UiLibSelect,
     FloatLabelComponent,
+    Button,
   ],
   templateUrl: './float-label-demo.html',
   styleUrl: './float-label-demo.scss',

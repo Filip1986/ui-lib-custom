@@ -149,8 +149,8 @@
           proceeding with registration or purchase.
         </p>
         <div panelFooter class="demo-footer-actions">
-          <button type="button" class="demo-btn demo-btn--secondary">Decline</button>
-          <button type="button" class="demo-btn demo-btn--primary">Accept</button>
+          <ui-lib-button type="button" severity="secondary">Decline</ui-lib-button>
+          <ui-lib-button type="button" severity="primary">Accept</ui-lib-button>
         </div>
       </ui-lib-panel>
     </div>
@@ -209,12 +209,13 @@
           <span>Variant</span>
           <div class="demo-variant-buttons">
             @for (v of variants; track v) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-variant-btn"
-                [class.demo-variant-btn--active]="playgroundVariant() === v"
+                [appearance]="playgroundVariant() === v ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setPlaygroundVariant(v)"
-              >{{ v }}</button>
+              >{{ v }}</ui-lib-button>
             }
           </div>
         </div>

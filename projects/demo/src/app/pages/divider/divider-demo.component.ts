@@ -7,6 +7,7 @@ import type {
   DividerType,
   DividerVariant,
 } from 'ui-lib-custom/divider';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Divider component.
@@ -14,7 +15,7 @@ import type {
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
-  imports: [Divider],
+  imports: [Divider, Button],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

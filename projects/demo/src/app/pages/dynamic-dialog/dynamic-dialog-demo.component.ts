@@ -10,6 +10,7 @@ import type {
   DynamicDialogVariant,
   DynamicDialogPosition,
 } from 'ui-lib-custom/dynamic-dialog';
+import { Button } from 'ui-lib-custom/button';
 
 // ---- Guest components rendered inside the dialog ----
 
@@ -19,12 +20,13 @@ import type {
 @Component({
   selector: 'app-simple-dialog-content',
   standalone: true,
+  imports: [Button],
   template: `
     <p style="margin: 0 0 1.5rem">
       This content was loaded dynamically from <code>SimpleDialogContentComponent</code>. The dialog
       shell — header, close button, backdrop — is provided by <code>DialogService</code>.
     </p>
-    <button type="button" class="demo-btn demo-btn--primary" (click)="close()">Got it</button>
+    <ui-lib-button type="button" severity="primary" (click)="close()">Got it</ui-lib-button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -49,6 +51,7 @@ interface UserData {
 @Component({
   selector: 'app-data-dialog-content',
   standalone: true,
+  imports: [Button],
   template: `
     <dl class="dialog-data-list">
       <dt>User ID</dt>
@@ -59,8 +62,8 @@ interface UserData {
       <dd>{{ role }}</dd>
     </dl>
     <div style="display:flex;gap:0.75rem;margin-top:1.5rem;justify-content:flex-end">
-      <button type="button" class="demo-btn demo-btn--secondary" (click)="cancel()">Cancel</button>
-      <button type="button" class="demo-btn demo-btn--primary" (click)="confirm()">Confirm</button>
+      <ui-lib-button type="button" severity="secondary" (click)="cancel()">Cancel</ui-lib-button>
+      <ui-lib-button type="button" severity="primary" (click)="confirm()">Confirm</ui-lib-button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -118,6 +121,7 @@ export class LongDialogContentComponent {
 @Component({
   selector: 'app-dynamic-dialog-demo',
   standalone: true,
+  imports: [Button],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

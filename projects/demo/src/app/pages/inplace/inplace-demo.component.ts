@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Inplace } from 'ui-lib-custom/inplace';
 import type { InplaceVariant } from 'ui-lib-custom/inplace';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Inplace component.
@@ -9,7 +10,7 @@ import type { InplaceVariant } from 'ui-lib-custom/inplace';
 @Component({
   selector: 'app-inplace-demo',
   standalone: true,
-  imports: [Inplace],
+  imports: [Inplace, Button],
   templateUrl: './inplace-demo.component.html',
   styleUrl: './inplace-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

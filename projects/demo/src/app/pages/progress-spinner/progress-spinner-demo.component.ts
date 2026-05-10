@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { ProgressSpinner } from 'ui-lib-custom/progress-spinner';
+import { Button } from 'ui-lib-custom/button';
 import type { ProgressSpinnerSize, ProgressSpinnerVariant } from 'ui-lib-custom/progress-spinner';
 
 /**
@@ -9,7 +10,7 @@ import type { ProgressSpinnerSize, ProgressSpinnerVariant } from 'ui-lib-custom/
 @Component({
   selector: 'app-progress-spinner-demo',
   standalone: true,
-  imports: [ProgressSpinner],
+  imports: [ProgressSpinner, Button],
   templateUrl: './progress-spinner-demo.component.html',
   styleUrl: './progress-spinner-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
