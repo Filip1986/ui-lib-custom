@@ -240,17 +240,47 @@ The docs should make developers think:
 
 Do not chase component quantity. Instead: **fewer components, dramatically higher quality.**
 
-The first components must feel exceptional:
-
-| Priority   | Component                                          |
-|------------|----------------------------------------------------|
-| ✅ Core     | Button, Input, Select, Card, Tabs, Badge           |
-| 🎯 Next    | Dialog, Dropdown, Tooltip, Toast, Menu             |
-| 🔭 Horizon | Table, Command Palette, FormField, Overlay system  |
-
 Every component should feel: **refined, intentional, delightful.**
 
 > See [Component Reference](reference/components/) for individual API documentation.
+
+### Current Component Landscape
+
+The foundation is comprehensive. The focus is now on depth, not breadth — evolving every shipped component toward layer 10 of the quality model.
+
+**✅ Shipped (70+ components across all categories)**
+
+| Category                   | Components                                                                                                                                                           |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Core inputs**            | Button, Input, Textarea, Select, Checkbox, RadioButton, ToggleButton, ToggleSwitch, SelectButton, InputNumber, InputMask, InputOtp, Rating, Knob, KeyFilter          |
+| **Layout**                 | Layout primitives (Stack / Inline / Grid / Container), Divider, Toolbar, Fluid, Fieldset, Panel, ScrollPanel                                                         |
+| **Overlay & modal**        | Dialog, DynamicDialog, Drawer, BottomSheet, Popover, Tooltip, ConfirmDialog, ConfirmPopup                                                                            |
+| **Navigation & menus**     | Breadcrumb, ContextMenu, Dock, Menu, MegaMenu, Menubar, PanelMenu, TieredMenu, Stepper                                                                               |
+| **Data display**           | Table, TreeTable, Tree, TreeSelect, DataView, VirtualScroller, Timeline, OrderList, OrganizationChart, PickList, Paginator, Carousel, Galleria, Chart                |
+| **Feedback & status**      | Alert, Badge, Tag, Chip, Message, Skeleton, ProgressBar, ProgressSpinner, MeterGroup                                                                                 |
+| **Utilities & directives** | Ripple, ScrollTop, StyleClass, FocusTrap, AnimateOnScroll, AutoFocus, Bind, BlockUI, ClassNames, Inplace, Image, ImageCompare, Avatar, Upload, SplitButton, Terminal |
+
+**🔧 Active backlog**
+
+| Item                                                                   | Type             |
+|------------------------------------------------------------------------|------------------|
+| Component v2 evolution — quality scorecard pass on existing components | Hardening        |
+| Documentation completeness — Input, Select, Card, Layout gaps          | Documentation    |
+| Pending secondary entry points — `icon-button`, `alert`                | Infrastructure   |
+| Overlay `appendTo` / z-index manager                                   | Infrastructure   |
+| `knip` dead-code baseline + constants extraction pass                  | Cleanup          |
+| Storybook integration                                                  | DX               |
+| Broader axe-core audit                                                 | Accessibility    |
+
+**🔭 Horizon**
+
+| Item                       | Type      |
+|----------------------------|-----------|
+| Runtime variant switcher   | Theming   |
+| Theme preset management    | Theming   |
+| Command Palette            | Component |
+| Visual theme builder       | Tooling   |
+| AI-assisted UI composition | Ecosystem |
 
 ### The Core Mental Model
 
