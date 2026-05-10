@@ -569,11 +569,15 @@ describe('SelectButton', (): void => {
     });
 
     it('size classes applied correctly', (): void => {
-      const sizes: SelectButtonSize[] = ['small', 'medium', 'large'];
-      sizes.forEach((size: SelectButtonSize): void => {
+      const cases: [SelectButtonSize, string][] = [
+        ['sm', 'small'],
+        ['md', 'medium'],
+        ['lg', 'large'],
+      ];
+      cases.forEach(([size, cls]: [SelectButtonSize, string]): void => {
         fixture.componentInstance.size.set(size);
         fixture.detectChanges();
-        expect(hostEl().className).toContain(`ui-lib-select-button--${size}`);
+        expect(hostEl().className).toContain(`ui-lib-select-button--${cls}`);
       });
     });
   });
