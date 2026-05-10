@@ -199,10 +199,10 @@ describe('Accordion Accessibility', (): void => {
     it('updates aria-expanded to "true" on the toggled header button', async (): Promise<void> => {
       const fixture: ComponentFixture<BasicHostComponent> = await createBasicFixture();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      buttons[0].click();
+      buttons[0]!.click();
       fixture.detectChanges();
-      expect(buttons[0].getAttribute('aria-expanded')).toBe('true');
-      expect(buttons[1].getAttribute('aria-expanded')).toBe('false');
+      expect(buttons[0]!.getAttribute('aria-expanded')).toBe('true');
+      expect(buttons[1]!.getAttribute('aria-expanded')).toBe('false');
     });
 
     it('links each header button id to the panel region aria-labelledby', async (): Promise<void> => {
@@ -211,9 +211,9 @@ describe('Accordion Accessibility', (): void => {
       const regions: HTMLElement[] = getPanelRegions(fixture);
       expect(buttons.length).toBe(regions.length);
       for (let i: number = 0; i < buttons.length; i += 1) {
-        const buttonId: string | null = buttons[i].getAttribute('id');
+        const buttonId: string | null = buttons[i]!.getAttribute('id');
         expect(buttonId).toBeTruthy();
-        expect(regions[i].getAttribute('aria-labelledby')).toBe(buttonId);
+        expect(regions[i]!.getAttribute('aria-labelledby')).toBe(buttonId);
       }
     });
 
@@ -222,9 +222,9 @@ describe('Accordion Accessibility', (): void => {
       const buttons: HTMLButtonElement[] = getButtons(fixture);
       const regions: HTMLElement[] = getPanelRegions(fixture);
       for (let i: number = 0; i < buttons.length; i += 1) {
-        const controls: string | null = buttons[i].getAttribute('aria-controls');
+        const controls: string | null = buttons[i]!.getAttribute('aria-controls');
         expect(controls).toBeTruthy();
-        expect(regions[i].getAttribute('id')).toBe(controls);
+        expect(regions[i]!.getAttribute('id')).toBe(controls);
       }
     });
 
@@ -245,7 +245,7 @@ describe('Accordion Accessibility', (): void => {
       fixture.componentInstance.disableSecond.set(true);
       fixture.detectChanges();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      expect(buttons[1].getAttribute('aria-disabled')).toBe('true');
+      expect(buttons[1]!.getAttribute('aria-disabled')).toBe('true');
     });
 
     it('does NOT set HTML disabled attribute on disabled header buttons', async (): Promise<void> => {
@@ -253,7 +253,7 @@ describe('Accordion Accessibility', (): void => {
       fixture.componentInstance.disableSecond.set(true);
       fixture.detectChanges();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      expect(buttons[1].hasAttribute('disabled')).toBe(false);
+      expect(buttons[1]!.hasAttribute('disabled')).toBe(false);
     });
 
     it('keeps disabled header buttons in the tab sequence (no tabindex=-1)', async (): Promise<void> => {
@@ -262,7 +262,7 @@ describe('Accordion Accessibility', (): void => {
       fixture.detectChanges();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
       // tabindex attribute should not be -1; buttons are naturally focusable
-      expect(buttons[1].getAttribute('tabindex')).not.toBe('-1');
+      expect(buttons[1]!.getAttribute('tabindex')).not.toBe('-1');
     });
 
     it('does not toggle a disabled panel on Enter key', async (): Promise<void> => {
@@ -270,9 +270,9 @@ describe('Accordion Accessibility', (): void => {
       fixture.componentInstance.disableSecond.set(true);
       fixture.detectChanges();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      dispatchKey(buttons[1], 'Enter');
+      dispatchKey(buttons[1]!, 'Enter');
       fixture.detectChanges();
-      expect(buttons[1].getAttribute('aria-expanded')).toBe('false');
+      expect(buttons[1]!.getAttribute('aria-expanded')).toBe('false');
     });
   });
 
@@ -314,33 +314,33 @@ describe('Accordion Accessibility', (): void => {
     it('toggles a panel on Enter key', async (): Promise<void> => {
       const fixture: ComponentFixture<BasicHostComponent> = await createBasicFixture();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      dispatchKey(buttons[0], 'Enter');
+      dispatchKey(buttons[0]!, 'Enter');
       fixture.detectChanges();
-      expect(buttons[0].getAttribute('aria-expanded')).toBe('true');
+      expect(buttons[0]!.getAttribute('aria-expanded')).toBe('true');
     });
 
     it('toggles a panel on Space key', async (): Promise<void> => {
       const fixture: ComponentFixture<BasicHostComponent> = await createBasicFixture();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      dispatchKey(buttons[2], ' ');
+      dispatchKey(buttons[2]!, ' ');
       fixture.detectChanges();
-      expect(buttons[2].getAttribute('aria-expanded')).toBe('true');
+      expect(buttons[2]!.getAttribute('aria-expanded')).toBe('true');
     });
 
     it('moves focus to next panel on ArrowDown', async (): Promise<void> => {
       const fixture: ComponentFixture<BasicHostComponent> = await createBasicFixture();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      buttons[0].focus();
-      dispatchKey(buttons[0], 'ArrowDown');
-      expect(document.activeElement).toBe(buttons[1]);
+      buttons[0]!.focus();
+      dispatchKey(buttons[0]!, 'ArrowDown');
+      expect(document.activeElement).toBe(buttons[1]!);
     });
 
     it('moves focus to previous panel on ArrowUp', async (): Promise<void> => {
       const fixture: ComponentFixture<BasicHostComponent> = await createBasicFixture();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      buttons[2].focus();
-      dispatchKey(buttons[2], 'ArrowUp');
-      expect(document.activeElement).toBe(buttons[1]);
+      buttons[2]!.focus();
+      dispatchKey(buttons[2]!, 'ArrowUp');
+      expect(document.activeElement).toBe(buttons[1]!);
     });
   });
 
@@ -354,15 +354,15 @@ describe('Accordion Accessibility', (): void => {
       const buttons: HTMLButtonElement[] = getButtons(fixture);
 
       // Open panel 0
-      buttons[0].click();
+      buttons[0]!.click();
       fixture.detectChanges();
-      expect(buttons[0].getAttribute('aria-expanded')).toBe('true');
+      expect(buttons[0]!.getAttribute('aria-expanded')).toBe('true');
 
       // Open panel 2 — panel 0 must collapse
-      buttons[2].click();
+      buttons[2]!.click();
       fixture.detectChanges();
-      expect(buttons[0].getAttribute('aria-expanded')).toBe('false');
-      expect(buttons[2].getAttribute('aria-expanded')).toBe('true');
+      expect(buttons[0]!.getAttribute('aria-expanded')).toBe('false');
+      expect(buttons[2]!.getAttribute('aria-expanded')).toBe('true');
     });
   });
 
@@ -379,7 +379,7 @@ describe('Accordion Accessibility', (): void => {
       fixture.componentInstance.expandMode.set('multiple');
       fixture.detectChanges();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      buttons[0].click();
+      buttons[0]!.click();
       fixture.detectChanges();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
@@ -389,9 +389,9 @@ describe('Accordion Accessibility', (): void => {
       fixture.componentInstance.expandMode.set('multiple');
       fixture.detectChanges();
       const buttons: HTMLButtonElement[] = getButtons(fixture);
-      buttons[0].click();
+      buttons[0]!.click();
       fixture.detectChanges();
-      buttons[2].click();
+      buttons[2]!.click();
       fixture.detectChanges();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
