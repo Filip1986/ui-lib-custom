@@ -90,11 +90,11 @@ interface CountryNode {
 
 | Key | Behavior |
 |---|---|
-| `ArrowDown` / `ArrowUp` | Opens popup (if closed) and moves active option within current level |
+| `ArrowDown` / `ArrowUp` | Opens panel (if closed) and moves active option within current level |
 | `ArrowRight` | Opens the focused group and moves focus to first option in the child list |
 | `ArrowLeft` | Closes the current sub-list and moves focus back to parent level |
 | `Enter` / `Space` | Selects focused leaf option (or expands focused group) |
-| `Escape` / `Tab` | Closes popup |
+| `Escape` / `Tab` | Closes panel |
 | `Home` / `End` | Moves focus to first/last enabled option in the current level |
 
 ## ARIA pattern

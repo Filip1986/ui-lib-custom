@@ -376,17 +376,18 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     if (!option) {
       return `${this.cascadeSelectId}-item-${level}-${index}`;
     }
-    return this.getItemId(option, level);
+    return this.getItemId(option, level, index);
   }
 
-  public getItemId(item: unknown, level: number): string {
+  public getItemId(item: unknown, level: number, index?: number): string {
     const resolvedValue: unknown = this.resolveOptionValue(item);
     const baseValue: string = String(resolvedValue ?? this.resolveOptionLabel(item));
     const normalizedValue: string = baseValue
       .trim()
       .replace(/[^A-Za-z0-9_-]+/g, '-')
       .toLowerCase();
-    return `${this.cascadeSelectId}-item-${level}-${normalizedValue || 'option'}`;
+    const safeIndex: number = index ?? -1;
+    return `${this.cascadeSelectId}-item-${level}-${safeIndex}-${normalizedValue || 'option'}`;
   }
 
   public isSubListOpen(item: unknown, level: number): boolean {
@@ -719,7 +720,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
 
     this.activeOptionPerLevel.set(nextActiveMap);
     this.focusedLevel.set(level);
-    this.focusedItemId.set(this.getItemId(option, level));
+    this.focusedItemId.set(this.resolveItemIdAtLevel(option, level));
 
     const nextPath: unknown[] = this.buildGroupPathFromMap(nextActiveMap);
     this.activePath.set(nextPath);
@@ -786,6 +787,8 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     }
 
     this.setActiveOption(childLevel, firstEnabledChildOption, event);
+    // When the first child is a group, keep that level collapsed until the next explicit
+    // ArrowRight / interaction, instead of auto-opening two levels in one keystroke.
     if (this.isOptionGroup(firstEnabledChildOption, childLevel)) {
       this.activePath.set(this.activePath().slice(0, childLevel));
     }
@@ -807,6 +810,7 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
     this.focusedLevel.set(parentLevel);
     const nextPath: unknown[] = this.buildGroupPathFromMap(nextActiveMap);
     const parentOption: unknown | undefined = nextActiveMap.get(parentLevel);
+    // If the parent option is a group, keep focus on it but collapse deeper descendants.
     if (parentOption && this.isOptionGroup(parentOption, parentLevel)) {
       this.activePath.set(nextPath.slice(0, parentLevel));
     } else {
@@ -841,7 +845,14 @@ export class UiLibCascadeSelect implements ControlValueAccessor, AfterViewChecke
       this.focusedItemId.set('');
       return;
     }
-    this.focusedItemId.set(this.getItemId(activeOption, level));
+    this.focusedItemId.set(this.resolveItemIdAtLevel(activeOption, level));
+  }
+
+  private resolveItemIdAtLevel(item: unknown, level: number): string {
+    const itemIndex: number = this.getOptionsForLevel(level).findIndex(
+      (candidate: unknown): boolean => candidate === item
+    );
+    return this.getItemId(item, level, itemIndex >= 0 ? itemIndex : undefined);
   }
 
   private findFirstEnabledOption(level: number): unknown | null {

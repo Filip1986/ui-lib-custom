@@ -67,11 +67,12 @@
           >
             @for (
               option of levelOptions;
-              track optionTrackBy($index, option)
+              track optionTrackBy($index, option);
+              let optionIndex = $index
             ) {
               <li
                 class="ui-lib-cascade-select__option"
-                [attr.id]="getItemId(option, level)"
+                [attr.id]="getItemId(option, level, optionIndex)"
                 role="option"
                 [attr.aria-haspopup]="isOptionGroupAtLevel(option, level) ? 'listbox' : null"
                 [attr.aria-expanded]="

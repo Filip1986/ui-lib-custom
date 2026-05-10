@@ -156,6 +156,16 @@ describe('CascadeSelect accessibility', (): void => {
     return Array.from(hostEl().querySelectorAll('li[role="option"]'));
   }
 
+  function getOptionByText(text: string): HTMLElement {
+    const option: HTMLElement | undefined = getOptions().find(
+      (optionElement: HTMLElement): boolean => optionElement.textContent.trim() === text
+    );
+    if (!option) {
+      throw new Error(`Expected option "${text}" to exist.`);
+    }
+    return option;
+  }
+
   function openPanel(): void {
     triggerEl().click();
     fixture.detectChanges();
@@ -236,8 +246,7 @@ describe('CascadeSelect accessibility', (): void => {
     options = getOptions();
     options[2]?.click();
     fixture.detectChanges();
-    options = getOptions();
-    options[4]?.click();
+    getOptionByText('Sydney').click();
     fixture.detectChanges();
     openPanel();
     const selectedOption: HTMLElement | null = hostEl().querySelector(
