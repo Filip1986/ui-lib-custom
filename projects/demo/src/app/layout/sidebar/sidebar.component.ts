@@ -354,12 +354,6 @@ export class SidebarComponent {
           group: 'Media',
         },
         {
-          label: 'Sidebar Menu',
-          icon: 'pi pi-circle',
-          route: '/sidebar-menu',
-          group: 'Menu',
-        },
-        {
           label: 'Breadcrumb',
           icon: 'pi pi-circle',
           route: '/breadcrumb',
@@ -660,19 +654,6 @@ export class SidebarComponent {
           icon: 'pi pi-circle',
           route: '/toolbar',
           group: 'Panel',
-        },
-      ]),
-    },
-    {
-      label: 'UI Blocks',
-      icon: 'pi pi-clone',
-      expanded: false,
-      items: this.buildGroupedSubmenuItems([
-        {
-          label: 'Login Forms',
-          icon: 'pi pi-sign-in',
-          route: '/login',
-          group: 'Authentication',
         },
       ]),
     },
