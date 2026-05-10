@@ -4,6 +4,10 @@
 
 ---
 
+> 🌟 **Mental model:** Every component in this library must reach **layer 10** — not stop at layer 1 or 2 like most libraries. The full layered model and the per-component workflow (Analyze → Refactor → Harden → Polish → Document → Benchmark → Integrate → Delight) are defined in [`docs/VISION.md — Component Philosophy`](docs/VISION.md#component-philosophy).
+
+---
+
 ## Step 0 — Mandatory Reading
 
 Before doing anything else, read these files in order:

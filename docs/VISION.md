@@ -252,6 +252,45 @@ Every component should feel: **refined, intentional, delightful.**
 
 > See [Component Reference](reference/components/) for individual API documentation.
 
+### The Core Mental Model
+
+Every component should evolve through these layers:
+
+```
+Basic Functionality
+  → API Quality
+    → Composability
+      → Accessibility
+        → Performance
+          → Theming
+            → DX Polish
+              → Documentation
+                → Edge Cases
+                  → Emotional Delight
+                    → Ecosystem Integration
+```
+
+Most libraries stop at layer 1 or 2.
+
+**The goal is to reach layer 10.**
+
+### The Component Workflow
+
+For every component, follow this operating system:
+
+| Step | Action                                                             |
+|------|--------------------------------------------------------------------|
+| 1    | **Analyze** — understand requirements, API surface, and edge cases |
+| 2    | **Refactor** — clean up structure, naming, and internal design     |
+| 3    | **Harden** — tests, types, error states, boundary conditions       |
+| 4    | **Polish** — animations, transitions, micro-interactions           |
+| 5    | **Document** — README, reference doc, inline examples              |
+| 6    | **Benchmark** — bundle size, render cost, re-render frequency      |
+| 7    | **Integrate** — demo page, Storybook story, entry-point spec       |
+| 8    | **Delight** — the final layer; does it feel *exceptional*?         |
+
+This is the operating system for every component built in this library.
+
 ---
 
 ## The "Wow Factor"
