@@ -283,7 +283,7 @@ Before marking any component as complete, score it on each dimension. **A compon
 | Angular integration         |              |       |
 | Emotional quality           |              |       |
 
-Copy this table into your working notes or the component's `README.md` during review.
+After scoring, update **[`docs/COMPONENT_SCORES.md`](../COMPONENT_SCORES.md)** — that is the single source of truth for all component scores and the hardening backlog. Copy the template below into your working notes during the session, then transfer the results.
 
 ---
 

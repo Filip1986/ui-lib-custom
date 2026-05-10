@@ -58,7 +58,7 @@
 
 ## When Adding/Changing Components
 - Start with `COMPONENT_CREATION_GUIDE.md` for the component creation workflow and prompt sequencing.
-- When **improving or hardening** an existing component, use the 6-phase prompts in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`. Score the component on the quality scorecard before marking it complete — every category must be ≥ 8.
+- When **improving or hardening** an existing component, use the 6-phase prompts in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`. Score the component on the quality scorecard before marking it complete — every category must be ≥ 8. Record the scores in `docs/COMPONENT_SCORES.md` (the single source of truth for all component scores and the hardening backlog).
 - Update `projects/ui-lib-custom/src/public-api.ts` only when primary-barrel compatibility is intended.
 - For new secondary entry points, add `<entry>/package.json`, `<entry>/public-api.ts`, and `<entry>/ng-package.json`, then update `projects/ui-lib-custom/package.json` exports + `typesVersions`.
 - Add/adjust entry-point import tests in `projects/ui-lib-custom/test/entry-points.spec.ts`.

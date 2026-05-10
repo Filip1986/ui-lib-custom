@@ -201,6 +201,7 @@ Planning and parity research docs are consolidated under:
 Ready-to-use prompts for working with AI on this library:
 
 - **[Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)** — master prompt, 6-phase workflow (Architecture → DX → A11y → Performance → Composability → Emotional Polish), and the quality scorecard (every category must score ≥ 8 before a component ships)
+- **[Component Quality Scores](COMPONENT_SCORES.md)** — the hardening backlog; scores for all 70+ components, updated after each evolution session
 - **[Timeline Component Prompts](prompts/TIMELINE_PROMPTS.md)** — example of a per-component prompt sequence
 
 ---
@@ -209,19 +210,19 @@ Ready-to-use prompts for working with AI on this library:
 
 ### By Task
 
-| I want to... | Go to... |
-|-------------|----------|
-| **Understand the why** | [Vision](VISION.md) |
-| **Get started quickly** | [Quick Start Guide](getting-started/QUICK_START.md) |
-| **Test in a new project** | [Testing Guide](getting-started/TEST_GUIDE.md) |
-| **See real-world examples** | [Integration Examples](guides/INTEGRATION_EXAMPLE.md) |
-| **Publish the library** | [Publishing Guide](guides/PUBLISHING_GUIDE.md) |
-| **Learn the component APIs** | [API Reference](../README.md) |
-| **Understand the architecture** | [Architecture Docs](architecture/ARCHITECTURE.md) |
-| **Get a project overview** | [Project Summary](reference/project/PROJECT_SUMMARY.md) |
-| **See version upgrade history** | [Update Log](reference/project/UPDATE_LOG.md) |
-| **Verify everything works** | [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) |
-| **Understand Dialog internals** | [Dialog Implementation](implementation/DIALOG_IMPLEMENTATION.md) |
+| I want to...                    | Go to...                                                              |
+|---------------------------------|-----------------------------------------------------------------------|
+| **Understand the why**          | [Vision](VISION.md)                                                   |
+| **Get started quickly**         | [Quick Start Guide](getting-started/QUICK_START.md)                   |
+| **Test in a new project**       | [Testing Guide](getting-started/TEST_GUIDE.md)                        |
+| **See real-world examples**     | [Integration Examples](guides/INTEGRATION_EXAMPLE.md)                 |
+| **Publish the library**         | [Publishing Guide](guides/PUBLISHING_GUIDE.md)                        |
+| **Learn the component APIs**    | [API Reference](../README.md)                                         |
+| **Understand the architecture** | [Architecture Docs](architecture/ARCHITECTURE.md)                     |
+| **Get a project overview**      | [Project Summary](reference/project/PROJECT_SUMMARY.md)               |
+| **See version upgrade history** | [Update Log](reference/project/UPDATE_LOG.md)                         |
+| **Verify everything works**     | [Verification Checklist](reference/project/VERIFICATION_CHECKLIST.md) |
+| **Understand Dialog internals** | [Dialog Implementation](implementation/DIALOG_IMPLEMENTATION.md)      |
 
 ### By Role
 
