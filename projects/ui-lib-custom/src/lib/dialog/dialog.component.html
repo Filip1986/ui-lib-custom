@@ -15,6 +15,7 @@
       tabindex="-1"
       [attr.aria-modal]="modal() || null"
       [attr.aria-labelledby]="labelledById()"
+      [attr.aria-describedby]="ariaDescribedBy() ?? null"
       (keydown)="onPanelKeydown($event)"
     >
       <div class="ui-lib-dialog-header" (pointerdown)="onHeaderPointerDown($event)">

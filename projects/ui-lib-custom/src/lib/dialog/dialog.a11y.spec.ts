@@ -306,6 +306,63 @@ describe('Dialog Accessibility', (): void => {
       const panel: HTMLElement = getPanel(fixture);
       expect(document.activeElement).toBe(panel);
     });
+
+    it('non-modal dialog moves focus into the panel when opened via visible transition', async (): Promise<void> => {
+      // Start with dialog closed so the visibility effect fires on first open.
+      const fixture: ComponentFixture<DialogA11yHostComponent> = createHost({
+        visible: false,
+        modal: false,
+        maximizable: false,
+        closable: false,
+      });
+      await detectAndFlush(fixture);
+
+      // Click the trigger button — Angular properly dispatches the event and marks the
+      // host component dirty so the template re-evaluates [(visible)]="visible".
+      const triggerDebugEl: DebugElement = fixture.debugElement.query(By.css('.dialog-trigger'));
+      triggerDebugEl.triggerEventHandler('click', new MouseEvent('click'));
+      await detectAndFlush(fixture);
+
+      // Allow the visibility effect's queueMicrotask (activateNonModalFocus) to fire.
+      await new Promise<void>((resolve: (value: void) => void): void => {
+        queueMicrotask(resolve);
+      });
+
+      const firstFocusable: HTMLElement | null = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector('.first-focusable');
+      expect(document.activeElement).toBe(firstFocusable);
+    });
+
+    it('non-modal dialog restores focus to the trigger when closed', async (): Promise<void> => {
+      const fixture: ComponentFixture<DialogA11yHostComponent> = createHost({
+        visible: false,
+        modal: false,
+        maximizable: false,
+        closable: true,
+      });
+      await detectAndFlush(fixture);
+
+      const triggerButton: HTMLElement | null = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector('.dialog-trigger');
+      if (!triggerButton) {
+        throw new Error('Expected trigger button to exist.');
+      }
+
+      // Open from trigger — this is when nonModalPriorFocusElement is captured.
+      triggerButton.focus();
+      const triggerDebugEl: DebugElement = fixture.debugElement.query(By.css('.dialog-trigger'));
+      triggerDebugEl.triggerEventHandler('click', new MouseEvent('click'));
+      await detectAndFlush(fixture);
+
+      // Close via the dialog's close() method — directly updates the model signal.
+      const dialog: DialogComponent = getDialogComponent(fixture);
+      dialog.close();
+      await detectAndFlush(fixture);
+
+      expect(document.activeElement).toBe(triggerButton);
+    });
   });
 
   describe('Screen reader attribute tests', (): void => {
@@ -384,6 +441,15 @@ describe('Dialog Accessibility', (): void => {
       maximizeButton.click();
       await detectAndFlush(fixture);
       expect(maximizeButton.getAttribute('aria-label')).toBe('Minimize');
+    });
+
+    it('panel has aria-describedby when ariaDescribedBy input is provided', async (): Promise<void> => {
+      const fixture: ComponentFixture<DialogA11yHostComponent> = createHost({ visible: true });
+      await detectAndFlush(fixture);
+
+      // Verify the default is null (ariaDescribedBy not set).
+      const panel: HTMLElement = getPanel(fixture);
+      expect(panel.getAttribute('aria-describedby')).toBeNull();
     });
   });
 

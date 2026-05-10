@@ -24,7 +24,8 @@
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| undefined` | `undefined` | Falls back to `ThemeConfigService` global variant |
 | `headless` | `boolean` | `false` | Disables built-in shell; projects `[uiLibDialogHeadless]` content instead |
 | `ariaLabelledBy` | `string \| undefined` | `undefined` | Explicit `aria-labelledby` override |
-| `styleClass` | `string \| null` | — | Not present; use the host element directly |
+| `ariaDescribedBy` | `string \| undefined` | `undefined` | `aria-describedby` pointing to a description element |
+| `styleClass` | `string \| null` | `null` | Additional CSS class(es) applied to the dialog panel |
 
 ## Outputs
 

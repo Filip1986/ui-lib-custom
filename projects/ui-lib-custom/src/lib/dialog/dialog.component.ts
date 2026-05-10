@@ -1,10 +1,9 @@
-import { DOCUMENT, isPlatformBrowser, CommonModule, NgStyle } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   PLATFORM_ID,
-  ViewChild,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -15,6 +14,7 @@ import {
   model,
   output,
   signal,
+  viewChild,
   type InputSignal,
   type ModelSignal,
   type OnDestroy,
@@ -28,13 +28,24 @@ import { DIALOG_DEFAULTS, DIALOG_POSITION_CLASS_MAP } from './dialog.constants';
 import type { DialogPosition, DialogVariant } from './dialog.types';
 import type { BackdropAnimationParams, DialogAnimationParams } from './dialog-animations';
 
+/** CSS selector matching all focusable elements in the dialog panel. */
+const DIALOG_FOCUSABLE_SELECTOR: string = [
+  'a[href]',
+  'button:not([disabled])',
+  'textarea:not([disabled])',
+  'input:not([disabled]):not([type="hidden"])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+  '[contenteditable="true"]',
+].join(', ');
+
 /**
  * Dialog component with modal/backdrop and responsive behavior.
  */
 @Component({
   selector: 'ui-lib-dialog',
   standalone: true,
-  imports: [CommonModule, NgStyle],
+  imports: [NgStyle],
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -95,9 +106,10 @@ export class DialogComponent implements OnDestroy {
   private dragPanelHeight: number = 0;
   private lastVisible: boolean = false;
   private focusTrap: FocusTrap | null = null;
+  private nonModalPriorFocusElement: HTMLElement | null = null;
 
-  @ViewChild('panelElement')
-  public panelElement?: ElementRef<HTMLElement>;
+  public readonly panelElement: Signal<ElementRef<HTMLElement> | undefined> =
+    viewChild<ElementRef<HTMLElement>>('panelElement');
 
   /** Controls dialog visibility. Supports two-way binding with [(visible)]. */
   public readonly visible: ModelSignal<boolean> = model<boolean>(DIALOG_DEFAULTS.Visible);
@@ -149,6 +161,14 @@ export class DialogComponent implements OnDestroy {
   public readonly ariaLabelledBy: InputSignal<string | undefined> = input<string | undefined>(
     undefined
   );
+
+  /** Optional aria-describedby pointing to an element that describes the dialog purpose. */
+  public readonly ariaDescribedBy: InputSignal<string | undefined> = input<string | undefined>(
+    undefined
+  );
+
+  /** Optional additional CSS class(es) applied to the dialog panel element. */
+  public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
   /** Enables headless rendering mode. */
   public readonly headless: InputSignal<boolean> = input<boolean>(DIALOG_DEFAULTS.Headless);
@@ -244,6 +264,11 @@ export class DialogComponent implements OnDestroy {
       classes.push('ui-lib-dialog-panel--dragging');
     }
 
+    const custom: string | null = this.styleClass();
+    if (custom) {
+      classes.push(custom);
+    }
+
     return classes.join(' ');
   });
 
@@ -331,9 +356,20 @@ export class DialogComponent implements OnDestroy {
       this.lastVisible = isVisible;
 
       if (isVisible) {
+        // Capture the currently-focused element for non-modal focus restoration on close.
+        if (this.isBrowser && !this.modal()) {
+          const active: Element | null = this.document.activeElement;
+          this.nonModalPriorFocusElement = active instanceof HTMLElement ? active : null;
+        }
         this.applyScrollLock();
         this.setupBreakpointListeners();
-        queueMicrotask((): void => this.show.emit());
+        queueMicrotask((): void => {
+          this.show.emit();
+          // Move focus into the panel for non-modal dialogs after Angular renders.
+          if (this.isBrowser && this.visible() && !this.modal()) {
+            this.activateNonModalFocus();
+          }
+        });
       } else {
         this.releaseScrollLock();
         this.cleanupBreakpointListeners();
@@ -341,6 +377,10 @@ export class DialogComponent implements OnDestroy {
         this.stopDragging();
         this.resetDragOffset();
         this.responsiveWidth.set(null);
+        // Restore focus for non-modal dialogs (modal dialogs are handled by FocusTrap.deactivate).
+        if (!this.modal()) {
+          this.restoreNonModalFocus();
+        }
         queueMicrotask((): void => this.hide.emit());
       }
     });
@@ -399,7 +439,7 @@ export class DialogComponent implements OnDestroy {
       return;
     }
 
-    const panel: HTMLElement | undefined = this.panelElement?.nativeElement;
+    const panel: HTMLElement | undefined = this.panelElement()?.nativeElement;
     if (!panel) {
       return;
     }
@@ -462,7 +502,7 @@ export class DialogComponent implements OnDestroy {
     }
 
     const container: HTMLElement =
-      this.panelElement?.nativeElement ?? this.hostElement.nativeElement;
+      this.panelElement()?.nativeElement ?? this.hostElement.nativeElement;
 
     this.deactivateFocusTrap();
     this.focusTrap = new FocusTrap(container);
@@ -473,6 +513,38 @@ export class DialogComponent implements OnDestroy {
   private deactivateFocusTrap(): void {
     this.focusTrap?.deactivate();
     this.focusTrap = null;
+  }
+
+  /**
+   * Moves keyboard focus into the dialog panel for non-modal dialogs.
+   * Focuses the first interactive element found, or the panel itself as fallback.
+   */
+  private activateNonModalFocus(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const panel: HTMLElement | undefined = this.panelElement()?.nativeElement;
+    if (!panel) {
+      return;
+    }
+
+    const firstFocusable: HTMLElement | null =
+      panel.querySelector<HTMLElement>(DIALOG_FOCUSABLE_SELECTOR);
+    if (firstFocusable) {
+      firstFocusable.focus();
+    } else {
+      // panel already has tabindex="-1" in the template
+      panel.focus();
+    }
+  }
+
+  /** Restores keyboard focus to the element that was active before a non-modal dialog opened. */
+  private restoreNonModalFocus(): void {
+    if (this.nonModalPriorFocusElement?.isConnected) {
+      this.nonModalPriorFocusElement.focus();
+    }
+    this.nonModalPriorFocusElement = null;
   }
 
   private applyScrollLock(): void {

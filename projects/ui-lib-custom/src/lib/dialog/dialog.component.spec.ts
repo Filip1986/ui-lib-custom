@@ -923,5 +923,41 @@ describe('DialogComponent', (): void => {
       const panel: HTMLElement = getRequiredPanelElement(fixture);
       expect(panel.style.width).toBe('');
     });
+
+    it('should apply styleClass to the panel element', async (): Promise<void> => {
+      const fixture: ComponentFixture<DialogComponent> = createStandaloneDialog();
+      fixture.componentRef.setInput('visible', true);
+      fixture.componentRef.setInput('styleClass', 'my-custom-class another-class');
+      await detectAndFlush(fixture);
+
+      const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+        '.ui-lib-dialog-panel'
+      );
+      expect(panel?.classList.contains('my-custom-class')).toBe(true);
+      expect(panel?.classList.contains('another-class')).toBe(true);
+    });
+
+    it('should not add aria-describedby when ariaDescribedBy is not set', async (): Promise<void> => {
+      const fixture: ComponentFixture<DialogComponent> = createStandaloneDialog();
+      fixture.componentRef.setInput('visible', true);
+      await detectAndFlush(fixture);
+
+      const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+        '.ui-lib-dialog-panel'
+      );
+      expect(panel?.getAttribute('aria-describedby')).toBeNull();
+    });
+
+    it('should set aria-describedby on the panel when ariaDescribedBy is provided', async (): Promise<void> => {
+      const fixture: ComponentFixture<DialogComponent> = createStandaloneDialog();
+      fixture.componentRef.setInput('visible', true);
+      fixture.componentRef.setInput('ariaDescribedBy', 'my-description-id');
+      await detectAndFlush(fixture);
+
+      const panel: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+        '.ui-lib-dialog-panel'
+      );
+      expect(panel?.getAttribute('aria-describedby')).toBe('my-description-id');
+    });
   });
 });
