@@ -43,7 +43,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ⏳ Queued   |
 | 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ⏳ Queued   |
 | 19   | Stepper     | `role=tablist` variant, `aria-current=step`, linear mode enforcement            | ⏳ Queued   |
-| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ⏳ Queued   |
+| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ✅ Done     |
 
 ### Tier 3 — Form Controls
 *Focus: Label association, validation state announcements, group roles, indeterminate states.*
@@ -210,7 +210,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |-------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Tabs        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Accordion   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Breadcrumb  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Breadcrumb  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ContextMenu | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |

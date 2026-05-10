@@ -2,7 +2,7 @@
 
 **Selector:** `ui-lib-breadcrumb`
 **Package:** `ui-lib-custom/breadcrumb`
-**Content projection:** yes — optional `<ng-template #separator>` for a custom separator character or element
+**Content projection:** yes — optional `<ng-template #separator>` for custom separators and `<ng-template #firstItem>` for custom home-item content
 
 > Items are driven by a `BreadcrumbItem[]` data array (not projected child components). Each item can be a router link, a plain URL anchor, or a command callback — all three navigation patterns are handled differently in the template.
 
@@ -17,7 +17,11 @@
 | `styleClass` | `string \| null` | `null` | Extra CSS class appended to the host `<nav>` element |
 | `ariaLabel` | `string` | `'Breadcrumb'` | Accessible label for the `<nav>` landmark |
 
-**`BreadcrumbItem` shape:** `{ label?, icon?, url?, routerLink?, target?, command?, disabled?, styleClass? }`
+**`BreadcrumbItem` shape:** `{ label?, icon?, iconAriaLabel?, url?, routerLink?, target?, command?, disabled?, styleClass? }`
+
+- Use `url` for regular anchor navigation (`href`).
+- Use `routerLink` for Angular Router navigation.
+- For icon-only items, set `iconAriaLabel` (home defaults to `"Home"` if omitted).
 
 ## Outputs
 
@@ -35,4 +39,18 @@
 <ui-lib-breadcrumb [items]="crumbs">
   <ng-template #separator>›</ng-template>
 </ui-lib-breadcrumb>
+
+<!-- Custom home item content -->
+<ui-lib-breadcrumb [items]="crumbs" [home]="{ icon: 'pi pi-home', url: '/' }">
+  <ng-template #firstItem let-item>
+    <span aria-hidden="true" class="pi pi-home"></span>
+    <span>{{ item.iconAriaLabel ?? 'Home' }}</span>
+  </ng-template>
+</ui-lib-breadcrumb>
 ```
+
+## CSS Custom Properties
+
+- `--uilib-breadcrumb-separator-content` — default separator character for empty separator slots
+- `--uilib-breadcrumb-link-color`, `--uilib-breadcrumb-link-color-hover`
+- `--uilib-breadcrumb-current-color`, `--uilib-breadcrumb-separator-color`

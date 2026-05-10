@@ -17,6 +17,8 @@ export interface BreadcrumbItem {
    * Rendered as a plain `<span>` with this class applied.
    */
   icon?: string;
+  /** Accessible name for icon-only items (for example, home icon without visible label). */
+  iconAriaLabel?: string;
   /** Link target attribute (e.g. `_blank`). Only used when `url` is set. */
   target?: string;
   /** When true, the item is non-interactive and visually muted. */
