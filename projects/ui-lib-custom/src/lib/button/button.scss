@@ -12,12 +12,7 @@ ui-lib-button {
   --uilib-font-size-lg: 1.125rem;
   --uilib-font-weight-semibold: 600;
 
-  /* Radius tokens */
-  /* removed hardcoded radius defaults to honor theme vars */
-
-  /* Shadow tokens removed to honor theme-provided values */
-
-  /* Component-level variables (CSS-var first, no hardcoded colors) */
+  /* Component-level variables */
   --uilib-button-radius: var(--uilib-shape-base, 6px);
   --uilib-button-gap: var(--uilib-space-2, 0.5rem);
   --uilib-button-transition: all 0.2s ease;
@@ -45,36 +40,6 @@ ui-lib-button {
 
   display: inline-flex;
 
-  --uilib-button-radius-rounded: var(--uilib-button-radius-rounded, var(--uilib-shape-base, 6px));
-  --uilib-button-radius-pill: var(--uilib-button-radius-pill, var(--uilib-shape-base, 6px));
-  --uilib-button-text-fg: var(--uilib-button-text-fg, var(--uilib-button-primary-fg, inherit));
-  --uilib-button-text-fg-hover: var(
-    --uilib-button-text-fg-hover,
-    var(--uilib-button-primary-fg, var(--uilib-button-text-fg, inherit))
-  );
-  --uilib-button-text-bg: var(--uilib-button-text-bg, transparent);
-  --uilib-button-text-bg-hover: var(--uilib-button-text-bg-hover, transparent);
-  --uilib-button-outline-border: var(
-    --uilib-button-outline-border,
-    var(--uilib-button-primary-border, currentColor)
-  );
-  --uilib-button-outline-border-hover: var(
-    --uilib-button-outline-border-hover,
-    var(--uilib-button-outline-border)
-  );
-  --uilib-button-outline-fg: var(
-    --uilib-button-outline-fg,
-    var(--uilib-button-primary-fg, inherit)
-  );
-  --uilib-button-outline-fg-hover: var(
-    --uilib-button-outline-fg-hover,
-    var(--uilib-button-outline-fg)
-  );
-  --uilib-button-outline-bg: var(--uilib-button-outline-bg, transparent);
-  --uilib-button-outline-bg-hover: var(
-    --uilib-button-outline-bg-hover,
-    var(--uilib-button-outline-bg)
-  );
   --uilib-button-shadow-raised: var(
     --uilib-button-shadow-raised,
     var(--uilib-button-shadow, var(--uilib-shadow-md, none))
@@ -91,14 +56,6 @@ ui-lib-button {
   --uilib-button-badge-padding: var(
     --uilib-button-badge-padding,
     var(--uilib-space-1) var(--uilib-space-2)
-  );
-  --uilib-button-badge-bg: var(
-    --uilib-button-badge-bg,
-    var(--uilib-button-danger-bg, currentColor)
-  );
-  --uilib-button-badge-fg: var(
-    --uilib-button-badge-fg,
-    var(--uilib-button-danger-fg, var(--uilib-color-neutral-50))
   );
 
   /* Tactile appearance token defaults */
@@ -156,18 +113,8 @@ ui-lib-button button {
   align-self: stretch;
 }
 
-ui-lib-button button:focus-visible {
-  outline: 2px solid var(--uilib-button-focus-color);
-  outline-offset: 2px;
-  box-shadow: var(--uilib-button-focus-ring);
-}
-
-ui-lib-button button:focus {
-  outline: 2px solid var(--uilib-button-focus-color);
-  outline-offset: 2px;
-  box-shadow: var(--uilib-button-focus-ring);
-}
-
+ui-lib-button button:focus-visible,
+ui-lib-button button:focus,
 ui-lib-button button.ui-lib-button--focused {
   outline: 2px solid var(--uilib-button-focus-color);
   outline-offset: 2px;
@@ -227,7 +174,8 @@ ui-lib-button .ui-lib-button {
     --uilib-button-font-size: var(--uilib-button-font-size-large);
   }
 
-  /* Appearance modifiers */
+  /* ── Appearance modifiers ──────────────────────────────────────────────── */
+
   &--appearance-outline {
     background-color: transparent;
     color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
@@ -238,6 +186,159 @@ ui-lib-button .ui-lib-button {
     background-color: transparent;
     color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
     border-color: transparent;
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background-color: color-mix(
+        in srgb,
+        var(--uilib-button-border, var(--uilib-button-bg, currentColor)) 8%,
+        transparent
+      );
+    }
+  }
+
+  &--appearance-link {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--uilib-button-border, var(--uilib-button-bg, currentColor));
+    text-decoration: underline;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background-color: transparent;
+      box-shadow: none;
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      opacity: 0.65;
+    }
+  }
+
+  &--appearance-soft {
+    background-color: color-mix(in srgb, var(--uilib-button-bg) 15%, transparent);
+    color: var(--uilib-button-border, var(--uilib-button-bg));
+    border-color: transparent;
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background-color: color-mix(in srgb, var(--uilib-button-bg) 25%, transparent);
+      color: var(--uilib-button-border, var(--uilib-button-bg));
+      box-shadow: none;
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      background-color: color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+    }
+  }
+
+  &--appearance-glass {
+    background-color: color-mix(in srgb, var(--uilib-button-bg) 18%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-color: color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+    color: var(--uilib-button-fg);
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background-color: color-mix(in srgb, var(--uilib-button-bg) 28%, transparent);
+      border-color: color-mix(in srgb, var(--uilib-button-bg) 50%, transparent);
+      color: var(--uilib-button-fg);
+    }
+  }
+
+  &--appearance-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--uilib-button-bg),
+      color-mix(in srgb, var(--uilib-button-bg) 72%, #000)
+    );
+    border-color: transparent;
+    color: var(--uilib-button-fg);
+
+    &:hover:not(.ui-lib-button--disabled) {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+      background: linear-gradient(
+        135deg,
+        var(--uilib-button-bg),
+        color-mix(in srgb, var(--uilib-button-bg) 72%, #000)
+      );
+      color: var(--uilib-button-fg);
+      box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--uilib-button-bg) 45%, transparent);
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      filter: brightness(0.95);
+      transform: translateY(0);
+    }
+  }
+
+  &--appearance-elevated {
+    background-color: var(--uilib-button-bg);
+    color: var(--uilib-button-fg);
+    border-color: transparent;
+    box-shadow:
+      0 4px 12px -2px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent),
+      0 2px 4px -1px color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background-color: var(--uilib-button-bg-hover, var(--uilib-button-bg));
+      color: var(--uilib-button-fg);
+      transform: translateY(-2px);
+      box-shadow:
+        0 8px 20px -4px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent),
+        0 4px 8px -2px color-mix(in srgb, var(--uilib-button-bg) 35%, transparent);
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px -1px color-mix(in srgb, var(--uilib-button-bg) 55%, transparent);
+    }
+  }
+
+  &--appearance-neon {
+    background-color: transparent;
+    color: var(--uilib-button-border, var(--uilib-button-bg));
+    border-color: var(--uilib-button-border, var(--uilib-button-bg));
+    border-width: 2px;
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background-color: color-mix(
+        in srgb,
+        var(--uilib-button-border, var(--uilib-button-bg)) 10%,
+        transparent
+      );
+      color: var(--uilib-button-border, var(--uilib-button-bg));
+      box-shadow:
+        0 0 10px 2px
+          color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 70%, transparent),
+        0 0 22px 4px
+          color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 35%, transparent);
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      box-shadow: 0 0 6px 1px
+        color-mix(in srgb, var(--uilib-button-border, var(--uilib-button-bg)) 70%, transparent);
+    }
+  }
+
+  &--appearance-flat {
+    background-color: var(--uilib-button-bg);
+    color: var(--uilib-button-fg);
+    border-color: transparent;
+    box-shadow: none;
+
+    &:hover:not(.ui-lib-button--disabled) {
+      filter: brightness(0.9);
+      background-color: var(--uilib-button-bg);
+      box-shadow: none;
+      color: var(--uilib-button-fg);
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      filter: brightness(0.8);
+    }
   }
 
   &--appearance-tactile {
@@ -343,37 +444,7 @@ ui-lib-button .ui-lib-button {
     }
   }
 
-  &--text {
-    --uilib-button-bg: var(--uilib-button-text-bg);
-    --uilib-button-bg-hover: var(--uilib-button-text-bg-hover, var(--uilib-button-bg));
-    --uilib-button-border: transparent;
-    --uilib-button-fg: var(--uilib-button-text-fg);
-    --uilib-button-fg-hover: var(--uilib-button-text-fg-hover, var(--uilib-button-fg));
-
-    &:hover:not(.ui-lib-button--disabled) {
-      background-color: var(
-        --uilib-button-text-hover-bg,
-        var(--uilib-button-text-bg-hover, var(--uilib-button-bg, transparent))
-      );
-    }
-  }
-
-  &--outlined {
-    --uilib-button-bg: var(--uilib-button-outline-bg);
-    --uilib-button-bg-hover: var(--uilib-button-outline-bg-hover, var(--uilib-button-bg));
-    --uilib-button-border: var(--uilib-button-outline-border);
-    --uilib-button-fg: var(--uilib-button-outline-fg);
-    --uilib-button-fg-hover: var(--uilib-button-outline-fg-hover, var(--uilib-button-fg));
-  }
-
-  &--link {
-    --uilib-button-bg: transparent;
-    --uilib-button-border: transparent;
-    --uilib-button-fg: var(--uilib-button-primary-fg, currentColor);
-    text-decoration: underline;
-    padding: 0;
-    border: none;
-  }
+  /* ── Design variant overrides ─────────────────────────────────────────── */
 
   &--bootstrap {
     --uilib-button-radius: var(--uilib-shape-base, 6px);
@@ -389,7 +460,7 @@ ui-lib-button .ui-lib-button {
       );
     }
 
-    &.ui-lib-button--link {
+    &.ui-lib-button--appearance-link {
       color: var(--uilib-button-fg, var(--uilib-button-primary-fg, currentColor));
       text-decoration: underline;
       padding: 0;
@@ -410,11 +481,7 @@ ui-lib-button .ui-lib-button {
       --uilib-button-shadow-hover: var(--uilib-shadow-sm, var(--uilib-shadow-xs, none));
     }
 
-    &.ui-lib-button--rounded {
-      --uilib-button-radius: var(--uilib-shape-base, 6px);
-    }
-
-    &.ui-lib-button--text {
+    &.ui-lib-button--appearance-ghost {
       --uilib-button-bg: transparent;
       --uilib-button-fg: var(--uilib-button-border, currentColor);
 
@@ -433,7 +500,8 @@ ui-lib-button .ui-lib-button {
     }
   }
 
-  /* Severity palettes via CSS vars */
+  /* ── Severity palettes via CSS vars ───────────────────────────────────── */
+
   &--primary {
     --uilib-button-bg: var(--uilib-button-primary-bg);
     --uilib-button-bg-hover: var(--uilib-button-primary-bg-hover);
@@ -513,15 +581,19 @@ ui-lib-button .ui-lib-button {
     --uilib-button-fg: var(--uilib-button-contrast-fg, var(--uilib-color-neutral-50));
   }
 
+  /* ── Icon layout ──────────────────────────────────────────────────────── */
+
   .ui-lib-button__icon {
     flex-shrink: 0;
 
     &--loading {
       animation: uilib-spin 1s linear infinite;
     }
+
     &--start {
       order: 0;
     }
+
     &--end {
       order: 2;
     }
@@ -549,6 +621,8 @@ ui-lib-button .ui-lib-button {
     }
   }
 
+  /* ── Orthogonal modifiers ─────────────────────────────────────────────── */
+
   &--raised {
     --uilib-button-shadow: var(--uilib-button-shadow-raised);
     --uilib-button-shadow-hover: var(--uilib-button-shadow-raised-hover);
@@ -562,10 +636,12 @@ ui-lib-button .ui-lib-button {
     }
   }
 
-  &--rounded {
-    --uilib-button-radius: var(--uilib-shape-base, 6px);
-    border-radius: var(--uilib-shape-base, 6px);
+  &--pill {
+    --uilib-button-radius: 999px;
+    border-radius: 999px;
   }
+
+  /* ── Badge ────────────────────────────────────────────────────────────── */
 
   &--has-badge {
     position: relative;
@@ -608,6 +684,7 @@ ui-lib-button .ui-lib-button__spinner {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -641,7 +718,7 @@ ui-lib-button .ui-lib-button__spinner {
 
   --uilib-button-info-bg: var(--uilib-color-info-600);
   --uilib-button-info-bg-hover: var(--uilib-color-info-700);
-  --uilib-button_info-border: var(--uilib-color-info-600);
+  --uilib-button-info-border: var(--uilib-color-info-600);
   --uilib-button-info-fg: #0b1220;
 
   --uilib-button-contrast-bg: var(--uilib-text-dark-primary);

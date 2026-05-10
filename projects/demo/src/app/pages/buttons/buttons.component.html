@@ -2,7 +2,8 @@
   <header class="buttons-demo__header">
     <h1 class="buttons-demo__title">Button</h1>
     <p class="buttons-demo__subtitle">
-      Flexible button components with multiple design variants, appearances, sizes, and states.
+      Flexible button component with 11 appearances, 9 severities, and orthogonal pill / raised
+      modifiers — all from a single <code>ui-lib-button</code> element.
     </p>
 
     <!-- Variant switcher -->
@@ -24,7 +25,7 @@
   <section class="buttons-demo__section">
     <ui-lib-card
       [variant]="activeVariant()"
-      subtitle="Default button with primary severity."
+      subtitle="Default solid button with primary severity."
       [showFooter]="false"
     >
       <span card-header>Basic</span>
@@ -50,15 +51,15 @@
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 2: Appearances ───────────────────────────────────────────── -->
+  <!-- ── Section 2: All Appearances ──────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Appearances</span>
+      <span card-header>All Appearances</span>
       <span card-subtitle>
-        Use <code>appearance</code> to switch between <code>solid</code>, <code>outline</code>, and
-        <code>ghost</code> fills.
+        Use <code>appearance</code> to pick any of the 11 visual styles. Every appearance composes
+        with any <code>severity</code>.
       </span>
-      <div class="buttons-demo__row">
+      <div class="buttons-demo__row buttons-demo__row--wrap">
         @for (a of appearances; track a) {
           <ui-lib-button
             [variant]="activeVariant()"
@@ -73,23 +74,30 @@
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 3: Severities ────────────────────────────────────────────── -->
+  <!-- ── Section 3: Appearance × Severity matrix ─────────────────────────── -->
   <section class="buttons-demo__section">
-    <ui-lib-card
-      [variant]="activeVariant()"
-      subtitle="All available severity values applied to a solid button."
-      [showFooter]="false"
-    >
-      <span card-header>Severities</span>
-      <div class="buttons-demo__row buttons-demo__row--wrap">
-        @for (s of severities; track s) {
-          <ui-lib-button
-            [variant]="activeVariant()"
-            [severity]="s"
-            (click)="logEvent(s + ' clicked')"
-          >
-            {{ s }}
-          </ui-lib-button>
+    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
+      <span card-header>Appearance × Severity</span>
+      <span card-subtitle>
+        Key appearances paired with every severity — demonstrating the two-axis model.
+      </span>
+      <div class="buttons-demo__matrix">
+        @for (a of ['solid', 'outline', 'ghost', 'soft']; track a) {
+          <div class="buttons-demo__matrix-row">
+            <span class="buttons-demo__matrix-label">{{ a }}</span>
+            <div class="buttons-demo__row buttons-demo__row--wrap">
+              @for (s of severities; track s) {
+                <ui-lib-button
+                  [variant]="activeVariant()"
+                  [appearance]="a"
+                  [severity]="s"
+                  size="sm"
+                >
+                  {{ s }}
+                </ui-lib-button>
+              }
+            </div>
+          </div>
         }
       </div>
     </ui-lib-card>
@@ -100,7 +108,7 @@
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Sizes</span>
       <span card-subtitle>
-        Three size options: <code>small</code>, <code>medium</code>, and <code>large</code>.
+        Three sizes: <code>sm</code>, <code>md</code>, and <code>lg</code>.
       </span>
       <div class="buttons-demo__size-grid">
         @for (s of sizes; track s) {
@@ -120,36 +128,67 @@
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Icons</span>
       <span card-subtitle>
-        Add icons on any side with <code>icon</code> and <code>iconPosition</code>.
+        Add icons on any side with <code>icon</code> and <code>iconPosition</code>. Set
+        <code>iconOnly</code> for square icon-only buttons.
       </span>
       <div class="buttons-demo__row buttons-demo__row--wrap">
         <ui-lib-button [variant]="activeVariant()" icon="arrow-left">Back</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" icon="arrow-right" iconPosition="right">Next</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="top">Profile</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="bottom">Profile</ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" icon="arrow-right" iconPosition="right">
+          Next
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="top">
+          Profile
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" icon="user" iconPosition="bottom">
+          Profile
+        </ui-lib-button>
         <ui-lib-button
           [variant]="activeVariant()"
           icon="more-horizontal"
           [iconOnly]="true"
           ariaLabel="More options"
-        ></ui-lib-button>
+        />
       </div>
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 6: Raised & Rounded ─────────────────────────────────────── -->
+  <!-- ── Section 6: Pill & Raised modifiers ──────────────────────────────── -->
   <section class="buttons-demo__section">
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Raised &amp; Rounded</span>
+      <span card-header>Pill &amp; Raised</span>
       <span card-subtitle>
-        <code>raised</code> adds a drop shadow; <code>rounded</code> yields a pill shape.
+        <code>pill</code> applies a full 999 px border-radius; <code>raised</code> adds a drop
+        shadow. Both are orthogonal modifiers that compose with any appearance or severity.
       </span>
       <div class="buttons-demo__row buttons-demo__row--wrap">
-        <ui-lib-button [variant]="activeVariant()" [raised]="true" severity="primary">Raised</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [rounded]="true" severity="primary">Rounded</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [raised]="true" [rounded]="true" severity="primary">Raised + Rounded</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [rounded]="true" severity="success" [outlined]="true">Outlined Pill</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [rounded]="true" [text]="true">Text Pill</ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [raised]="true" severity="primary">
+          Raised
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [pill]="true" severity="primary">
+          Pill
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [raised]="true" [pill]="true" severity="primary">
+          Raised + Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          [pill]="true"
+          severity="success"
+          appearance="outline"
+        >
+          Outline Pill
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [pill]="true" appearance="ghost">
+          Ghost Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          [pill]="true"
+          appearance="soft"
+          severity="danger"
+        >
+          Soft Pill
+        </ui-lib-button>
       </div>
     </ui-lib-card>
   </section>
@@ -159,12 +198,24 @@
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>States</span>
       <span card-subtitle>
-        <code>disabled</code> prevents interaction; <code>loading</code> shows a spinner and blocks clicks.
+        <code>disabled</code> prevents interaction; <code>loading</code> shows a spinner and blocks
+        clicks.
       </span>
       <div class="buttons-demo__row">
-        <ui-lib-button [variant]="activeVariant()" [disabled]="true" severity="primary">Disabled</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [loading]="true" severity="primary">Loading</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [loading]="true" severity="secondary" appearance="outline">Loading outline</ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [disabled]="true" severity="primary">
+          Disabled
+        </ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" [loading]="true" severity="primary">
+          Loading
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          [loading]="true"
+          severity="secondary"
+          appearance="outline"
+        >
+          Loading outline
+        </ui-lib-button>
       </div>
     </ui-lib-card>
   </section>
@@ -174,47 +225,247 @@
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Badges</span>
       <span card-subtitle>
-        Use the <code>badge</code> input to overlay a small counter on the button.
+        Use the <code>badge</code> input to overlay a small counter. Control colour with
+        <code>badgeSeverity</code>.
       </span>
       <div class="buttons-demo__row">
-        <ui-lib-button [variant]="activeVariant()" badge="5" severity="primary">Notifications</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" badge="99+" badgeColor="danger" severity="secondary">Messages</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" badge="1" [iconOnly]="true" icon="mail" ariaLabel="Mail"></ui-lib-button>
+        <ui-lib-button [variant]="activeVariant()" badge="5" severity="primary">
+          Notifications
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          badge="99+"
+          badgeSeverity="danger"
+          severity="secondary"
+        >
+          Messages
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          badge="1"
+          [iconOnly]="true"
+          icon="mail"
+          ariaLabel="Mail"
+        />
       </div>
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 9: Link & Text ───────────────────────────────────────────── -->
+  <!-- ── Section 9: Tactile ───────────────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Link &amp; Text</span>
+      <span card-header>Tactile</span>
       <span card-subtitle>
-        <code>text</code> renders a ghost-style button; <code>link</code> renders a hyperlink-style appearance.
+        <code>appearance="tactile"</code> renders a glossy 3D button with gradient fill, inset
+        highlight, and a press-down active state. Severity controls the colour palette.
       </span>
-      <div class="buttons-demo__row">
-        <ui-lib-button [variant]="activeVariant()" [text]="true" severity="primary">Text Primary</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [text]="true" severity="secondary">Text Secondary</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [link]="true" severity="primary">Link Primary</ui-lib-button>
-        <ui-lib-button [variant]="activeVariant()" [link]="true" severity="info">Info Link</ui-lib-button>
+      <div class="buttons-demo__tactile-grid">
+        <ui-lib-button
+          appearance="tactile"
+          severity="primary"
+          icon="search"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile primary clicked')"
+        >
+          Primary
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="success"
+          icon="check"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile success clicked')"
+        >
+          Success
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="danger"
+          icon="trash"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile danger clicked')"
+        >
+          Danger
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="warning"
+          icon="alert-triangle"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile warning clicked')"
+        >
+          Warning
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="info"
+          icon="info"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile info clicked')"
+        >
+          Info
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="help"
+          icon="help-circle"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile help clicked')"
+        >
+          Help
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="secondary"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile secondary clicked')"
+        >
+          Secondary
+        </ui-lib-button>
+        <ui-lib-button
+          appearance="tactile"
+          severity="contrast"
+          [variant]="activeVariant()"
+          (click)="logEvent('Tactile contrast clicked')"
+        >
+          Contrast
+        </ui-lib-button>
       </div>
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 10: Button Groups ────────────────────────────────────────── -->
+  <!-- ── Section 10: Expressive appearances ──────────────────────────────── -->
+  <section class="buttons-demo__section">
+    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
+      <span card-header>Expressive Appearances</span>
+      <span card-subtitle>
+        <code>elevated</code>, <code>gradient</code>, <code>glass</code>, and <code>neon</code>
+        showcase advanced CSS effects — each driven by the same severity tokens.
+      </span>
+      <div class="buttons-demo__row buttons-demo__row--wrap">
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="elevated"
+          severity="primary"
+          icon="layers"
+          (click)="logEvent('Elevated clicked')"
+        >
+          Elevated
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="elevated"
+          severity="success"
+          icon="check"
+          (click)="logEvent('Elevated success clicked')"
+        >
+          Elevated Success
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="gradient"
+          severity="primary"
+          icon="sparkles"
+          (click)="logEvent('Gradient primary clicked')"
+        >
+          Gradient
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="gradient"
+          severity="danger"
+          icon="flame"
+          (click)="logEvent('Gradient danger clicked')"
+        >
+          Gradient Danger
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="glass"
+          severity="primary"
+          icon="droplets"
+          (click)="logEvent('Glass primary clicked')"
+        >
+          Glass
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="glass"
+          severity="info"
+          [pill]="true"
+          (click)="logEvent('Glass pill clicked')"
+        >
+          Glass Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="neon"
+          severity="primary"
+          (click)="logEvent('Neon primary clicked')"
+        >
+          Neon
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="neon"
+          severity="success"
+          [pill]="true"
+          (click)="logEvent('Neon success clicked')"
+        >
+          Neon Pill
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="flat"
+          severity="primary"
+          (click)="logEvent('Flat primary clicked')"
+        >
+          Flat
+        </ui-lib-button>
+        <ui-lib-button
+          [variant]="activeVariant()"
+          appearance="flat"
+          severity="secondary"
+          (click)="logEvent('Flat secondary clicked')"
+        >
+          Flat Secondary
+        </ui-lib-button>
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Section 11: Button Groups ────────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Button Groups</span>
       <span card-subtitle>
-        Wrap buttons in <code>ui-lib-button-group</code> to join them visually. Use
-        <code>[vertical]="true"</code> for a stacked layout.
+        Wrap buttons in <code>ui-lib-button-group</code> to join them visually.
       </span>
       <div class="buttons-demo__group-grid">
         <div>
           <p class="buttons-demo__size-label">Horizontal</p>
           <ui-lib-button-group>
-            <ui-lib-button [variant]="activeVariant()" severity="primary" (click)="logEvent('Save clicked')">Save</ui-lib-button>
-            <ui-lib-button [variant]="activeVariant()" severity="secondary" (click)="logEvent('Edit clicked')">Edit</ui-lib-button>
-            <ui-lib-button [variant]="activeVariant()" severity="danger" (click)="logEvent('Delete clicked')">Delete</ui-lib-button>
+            <ui-lib-button
+              [variant]="activeVariant()"
+              severity="primary"
+              (click)="logEvent('Save clicked')"
+            >
+              Save
+            </ui-lib-button>
+            <ui-lib-button
+              [variant]="activeVariant()"
+              severity="secondary"
+              (click)="logEvent('Edit clicked')"
+            >
+              Edit
+            </ui-lib-button>
+            <ui-lib-button
+              [variant]="activeVariant()"
+              severity="danger"
+              (click)="logEvent('Delete clicked')"
+            >
+              Delete
+            </ui-lib-button>
           </ui-lib-button-group>
         </div>
         <div>
@@ -229,7 +480,7 @@
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 11: Full Width ────────────────────────────────────────────── -->
+  <!-- ── Section 12: Full Width ────────────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Full Width</span>
@@ -247,29 +498,6 @@
     </ui-lib-card>
   </section>
 
-  <!-- ── Section 12: Tactile Style ───────────────────────────────────────── -->
-  <section class="buttons-demo__section">
-    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
-      <span card-header>Tactile Style</span>
-      <span card-subtitle>
-        Use <code>appearance="tactile"</code> for glossy 3D buttons with gradient fills, inset
-        highlights, and a press-down active state. Combine with any <code>severity</code> to pick
-        the colour palette.
-      </span>
-
-      <div class="buttons-demo__tactile-grid">
-        <ui-lib-button appearance="tactile" severity="warning" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile warning clicked')">Search</ui-lib-button>
-        <ui-lib-button appearance="tactile" severity="primary" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile primary clicked')">Search</ui-lib-button>
-        <ui-lib-button appearance="tactile" severity="success" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile success clicked')">Search</ui-lib-button>
-        <ui-lib-button appearance="tactile" severity="danger"  icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile danger clicked')">Search</ui-lib-button>
-        <ui-lib-button appearance="tactile" severity="contrast" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile contrast clicked')">Search</ui-lib-button>
-        <ui-lib-button appearance="tactile" severity="info"    icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile info clicked')">Search</ui-lib-button>
-        <ui-lib-button appearance="tactile" severity="help"    icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile help clicked')">Search</ui-lib-button>
-        <ui-lib-button appearance="tactile" severity="secondary" icon="search" [variant]="activeVariant()" (click)="logEvent('Tactile secondary clicked')">Search</ui-lib-button>
-      </div>
-    </ui-lib-card>
-  </section>
-
   <!-- ── Section 13: Accessibility ──────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <h2 class="buttons-demo__a11y-title">Accessibility</h2>
@@ -279,126 +507,109 @@
     </p>
 
     <div class="buttons-demo__a11y-grid">
-        <!-- Keyboard navigation panel -->
-        <ui-lib-panel header="Keyboard navigation" [variant]="activeVariant()">
-          <ul class="buttons-demo__a11y-list">
-            <li>
-              <kbd class="buttons-demo__kbd">Tab</kbd> /
-              <kbd class="buttons-demo__kbd">Shift + Tab</kbd>
-              — moves focus to / from the button.
-            </li>
-            <li>
-              <kbd class="buttons-demo__kbd">Space</kbd> /
-              <kbd class="buttons-demo__kbd">Enter</kbd>
-              — activates the button (native browser behaviour).
-            </li>
-            <li>
-              Disabled buttons (<code>[disabled]="true"</code>) are excluded from the tab order
-              automatically.
-            </li>
-            <li>
-              Use <code>tabIndex</code> to adjust the order or remove a button from the sequence
-              (<code>[tabIndex]="-1"</code>).
-            </li>
-          </ul>
-        </ui-lib-panel>
+      <ui-lib-panel header="Keyboard navigation" [variant]="activeVariant()">
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            <kbd class="buttons-demo__kbd">Tab</kbd> /
+            <kbd class="buttons-demo__kbd">Shift + Tab</kbd>
+            — moves focus to / from the button.
+          </li>
+          <li>
+            <kbd class="buttons-demo__kbd">Space</kbd> /
+            <kbd class="buttons-demo__kbd">Enter</kbd>
+            — activates the button (native browser behaviour).
+          </li>
+          <li>
+            Disabled buttons (<code>[disabled]="true"</code>) are excluded from the tab order
+            automatically.
+          </li>
+        </ul>
+      </ui-lib-panel>
 
-        <!-- ARIA attributes panel -->
-        <ui-lib-panel header="ARIA attributes" [variant]="activeVariant()">
-          <ul class="buttons-demo__a11y-list">
-            <li>
-              <strong>Icon-only buttons</strong> must provide <code>ariaLabel</code> — without visible
-              text there is no accessible name for screen readers.
-            </li>
-            <li>
-              <code>ariaPressed</code> — set to <code>true</code> / <code>false</code> on toggle
-              buttons to communicate pressed state (<code>role="button"</code> +
-              <code>aria-pressed</code>).
-            </li>
-            <li>
-              <code>ariaChecked</code> — use with <code>role="checkbox"</code> or
-              <code>role="radio"</code> when the button represents a checkable item.
-            </li>
-            <li>
-              <code>role</code> — override the implicit ARIA role when using the button element in a
-              specialised context (e.g., <code>role="menuitem"</code>).
-            </li>
-          </ul>
-        </ui-lib-panel>
+      <ui-lib-panel header="ARIA attributes" [variant]="activeVariant()">
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            <strong>Icon-only buttons</strong> must provide <code>ariaLabel</code> — without visible
+            text there is no accessible name for screen readers.
+          </li>
+          <li>
+            <code>ariaPressed</code> — set on toggle buttons to communicate pressed state.
+          </li>
+          <li>
+            <code>ariaChecked</code> — use with <code>role="checkbox"</code> or
+            <code>role="radio"</code>.
+          </li>
+        </ul>
+      </ui-lib-panel>
 
-        <!-- Colour and contrast panel -->
-        <ui-lib-panel header="Colour &amp; contrast" [variant]="activeVariant()">
-          <ul class="buttons-demo__a11y-list">
-            <li>
-              All built-in severity colours are tested to meet <strong>WCAG 2.1 AA</strong> contrast
-              requirements (4.5 : 1 for text, 3 : 1 for large text / UI components).
-            </li>
-            <li>
-              The <code>ghost</code> appearance may render below 3 : 1 on some custom backgrounds —
-              test with your palette before shipping.
-            </li>
-            <li>
-              Never rely on colour alone to convey meaning: pair colour with an icon and/or visible text.
-            </li>
-          </ul>
-        </ui-lib-panel>
+      <ui-lib-panel header="Colour &amp; contrast" [variant]="activeVariant()">
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            All built-in severity colours are tested to meet <strong>WCAG 2.1 AA</strong> contrast
+            requirements (4.5 : 1 for text).
+          </li>
+          <li>
+            The <code>ghost</code>, <code>neon</code>, and <code>glass</code> appearances may render
+            below 3 : 1 on some custom backgrounds — test with your palette before shipping.
+          </li>
+          <li>Never rely on colour alone to convey meaning.</li>
+        </ul>
+      </ui-lib-panel>
 
-        <!-- Loading state panel -->
-        <ui-lib-panel header="Loading state" [variant]="activeVariant()">
-          <ul class="buttons-demo__a11y-list">
-            <li>
-              When <code>[loading]="true"</code>, the button is automatically disabled so it cannot be
-              re-activated, and the spinner is hidden from screen readers
-              (<code>aria-hidden="true"</code>).
-            </li>
-            <li>
-              Pair the loading button with a live region (<code>aria-live="polite"</code>) in your
-              template to announce progress or completion to assistive technology.
-            </li>
-          </ul>
-        </ui-lib-panel>
-      </div>
+      <ui-lib-panel header="Loading state" [variant]="activeVariant()">
+        <ul class="buttons-demo__a11y-list">
+          <li>
+            When <code>[loading]="true"</code>, the button is automatically disabled and
+            <code>aria-busy="true"</code> is applied.
+          </li>
+          <li>
+            Pair the loading button with a live region (<code>aria-live="polite"</code>) to announce
+            progress to assistive technology.
+          </li>
+        </ul>
+      </ui-lib-panel>
+    </div>
 
-      <!-- Live demo: icon-only with ariaLabel -->
-      <div class="buttons-demo__a11y-demo">
-        <p class="buttons-demo__a11y-demo-label">
-          Icon-only with <code>ariaLabel</code> — inspect the DOM or use a screen reader to verify:
-        </p>
-        <div class="buttons-demo__row">
-          <ui-lib-button
-            [variant]="activeVariant()"
-            icon="trash"
-            [iconOnly]="true"
-            severity="danger"
-            ariaLabel="Delete item"
-            (click)="logEvent('Delete item (icon-only) clicked')"
-          ></ui-lib-button>
-          <ui-lib-button
-            [variant]="activeVariant()"
-            icon="edit"
-            [iconOnly]="true"
-            severity="info"
-            ariaLabel="Edit item"
-            (click)="logEvent('Edit item (icon-only) clicked')"
-          ></ui-lib-button>
-          <ui-lib-button
-            [variant]="activeVariant()"
-            icon="save"
-            [iconOnly]="true"
-            severity="success"
-            ariaLabel="Save item"
-            (click)="logEvent('Save item (icon-only) clicked')"
-          ></ui-lib-button>
+    <div class="buttons-demo__a11y-demo">
+      <p class="buttons-demo__a11y-demo-label">
+        Icon-only with <code>ariaLabel</code> — inspect the DOM or use a screen reader to verify:
+      </p>
+      <div class="buttons-demo__row">
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="trash"
+          [iconOnly]="true"
+          severity="danger"
+          ariaLabel="Delete item"
+          (click)="logEvent('Delete item (icon-only) clicked')"
+        />
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="edit"
+          [iconOnly]="true"
+          severity="info"
+          ariaLabel="Edit item"
+          (click)="logEvent('Edit item (icon-only) clicked')"
+        />
+        <ui-lib-button
+          [variant]="activeVariant()"
+          icon="save"
+          [iconOnly]="true"
+          severity="success"
+          ariaLabel="Save item"
+          (click)="logEvent('Save item (icon-only) clicked')"
+        />
       </div>
     </div>
   </section>
 
-  <!-- ── Section 13: API Reference ────────────────────────────────────────── -->
+  <!-- ── Section 14: API Reference ────────────────────────────────────────── -->
   <section class="buttons-demo__section">
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>API Reference</span>
       <span card-subtitle>
-        All inputs accepted by <code>ui-lib-button</code>. Import from <code>ui-lib-custom/button</code>.
+        All inputs accepted by <code>ui-lib-button</code>. Import from
+        <code>ui-lib-custom/button</code>.
       </span>
       <div class="buttons-demo__table-wrap">
         <ui-lib-table
@@ -408,12 +619,12 @@
           [rowHover]="true"
           ariaLabel="Button component API reference"
         >
-          <ui-lib-table-column field="name" header="Input" width="140px">
+          <ui-lib-table-column field="name" header="Input" width="160px">
             <ng-template uiTableColumnBody let-row>
               <code class="buttons-demo__api-code buttons-demo__api-code--name">{{ row.name }}</code>
             </ng-template>
           </ui-lib-table-column>
-          <ui-lib-table-column field="type" header="Type" width="280px">
+          <ui-lib-table-column field="type" header="Type" width="300px">
             <ng-template uiTableColumnBody let-row>
               <code class="buttons-demo__api-code">{{ row.type }}</code>
             </ng-template>
@@ -431,7 +642,11 @@
 
   <!-- ── Event log ─────────────────────────────────────────────────────────── -->
   <section class="buttons-demo__section">
-    <ui-lib-card [variant]="activeVariant()" subtitle="Interact with the buttons above to see events." [showFooter]="false">
+    <ui-lib-card
+      [variant]="activeVariant()"
+      subtitle="Interact with the buttons above to see events."
+      [showFooter]="false"
+    >
       <span card-header>Event Log</span>
       <div class="buttons-demo__log-panel">
         @if (eventLog().length === 0) {
