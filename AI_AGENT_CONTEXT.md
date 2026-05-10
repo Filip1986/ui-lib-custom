@@ -33,7 +33,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Fieldset` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Tooltip` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Popover` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
-- `Drawer` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `Drawer` -> ✅ complete + hardened (6-phase evolution, score 8.5/10, a11y spec added)
 
 - `Divider` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Toolbar` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -120,7 +120,86 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-10 [DynamicDialog component — 6-phase evolution hardening]
+Date: 2026-05-10 [Drawer component — 6-phase evolution hardening]
+Changed:
+  - projects/ui-lib-custom/src/lib/drawer/drawer.ts
+      • Added module-level nextDrawerId counter + generateDrawerId() (avoids static class field lint issue)
+      • Added FocusTrap import from ui-lib-custom/core
+      • Added ariaDescribedby: InputSignal<string | undefined> = input<string | undefined>(undefined)
+      • Added drawerId: string = generateDrawerId() + titleId: Signal<string> computed
+      • Fixed host [attr.aria-hidden]: '!visible() ? true : null' (was '!visible()' which gave false instead of null)
+      • Added focusTrap: FocusTrap | null = null private field
+      • Effect on open: activate FocusTrap in afterNextRender({ injector }) — saves prior focus + moves focus inside
+      • Effect on close: deactivate FocusTrap (restores focus to prior element) before emitting hidden
+      • ngOnDestroy: also deactivates FocusTrap to handle component destruction while open
+      • Removed manual panel.focus() call (FocusTrap.activate() handles this)
+  - projects/ui-lib-custom/src/lib/drawer/drawer.html
+      • Removed redundant [attr.aria-hidden]="!visible()" from panel (host-only now controls this)
+      • Fixed [attr.aria-modal]="visible() && modal() ? 'true' : null" (was missing modal() condition)
+      • Replaced [attr.aria-label]="header() || null" with [attr.aria-labelledby]="header() ? titleId() : null"
+      • Added [attr.aria-label]="header() ? null : 'Drawer'" as fallback accessible name
+      • Added [attr.aria-describedby]="ariaDescribedby() ?? null"
+      • Added [attr.id]="titleId()" to the title span for aria-labelledby target
+      • Replaced <span class="pi pi-times"> PrimeNG icon with inline SVG (same path as Dialog close icon)
+  - projects/ui-lib-custom/src/lib/drawer/drawer.scss
+      • Added @media (prefers-color-scheme: dark) fallback (ui-lib-drawer:not([data-theme='light']))
+      • Added @media (prefers-reduced-motion: reduce) { --uilib-drawer-transition-duration: 0ms }
+  - projects/ui-lib-custom/src/lib/drawer/drawer.spec.ts
+      • Updated 'should remove aria-hidden from host when open' (was expecting 'false', now null)
+      • Updated 'should set aria-labelledby pointing to title element' (replaced old aria-label test)
+      • Added 'should not set aria-modal when visible but modal=false'
+      • Added 'should use aria-label="Drawer" when no header text'
+      • Added 'should set aria-describedby when ariaDescribedby is provided'
+      • Added 'should not set aria-describedby when ariaDescribedby is not provided'
+      • Added 'panel should not have a redundant aria-hidden attribute'
+      • Added 'close button should use inline SVG icon, not PrimeNG pi classes'
+      • Added [ariaDescribedby] binding + WritableSignal to TestHostComponent
+      • Total: 40 unit tests (was 35 + 5 new)
+  - projects/ui-lib-custom/src/lib/drawer/drawer.a11y.spec.ts (NEW)
+      • 25 a11y tests: 3 axe-core, 10 ARIA, 3 focus management, 4 keyboard, 1 axe rationale doc
+      • Covers: aria-modal conditional, aria-labelledby, aria-label fallback, aria-describedby,
+        host aria-hidden, no panel aria-hidden, close button SVG, FocusTrap tab wrap, focus restore on close
+  - projects/ui-lib-custom/src/lib/drawer/README.md
+      • Added ariaDescribedby to Inputs table
+      • Replaced oversimplified Accessibility section with full accurate description of all a11y features
+  - docs/COMPONENT_SCORES.md
+      • Drawer row updated to 9/9/8/8/9/8/9/8/9/8 avg 8.5 🟢 (Tier 1 #5 → ✅ Done)
+  - AI_AGENT_CONTEXT.md (this file)
+
+State: Drawer component fully evolved through all 6 phases. Production-quality score 8.5/10.
+  Phase 3 (A11y — priority):
+    • FocusTrap activated on open (Tab/Shift+Tab wraps within panel focusable elements)
+    • focus restored on close (FocusTrap.deactivate() calls restoreFocus() internally)
+    • aria-modal fixed: only true when BOTH visible=true AND modal=true
+    • aria-labelledby on panel pointing to title span id when header set
+    • aria-label="Drawer" fallback when no header text
+    • ariaDescribedby input for optional description association
+    • host aria-hidden: null (removed) when open, true when closed
+    • panel no longer has redundant aria-hidden
+    • PrimeNG pi.pi-times replaced with inline SVG (same shape as Dialog)
+    • Created drawer.a11y.spec.ts with 25 tests
+  Phase 1 (Architecture): module-level counter + generateDrawerId(); FocusTrap class integration.
+  Phase 2 (DX): ariaDescribedby input documented in README. Accurate Accessibility section.
+  Phase 4 (Performance): afterNextRender({ injector }) already correct; verified injection-context-safe.
+    FocusTrap created lazily (once on first open), reused across open/close cycles.
+  Phase 5 (Composability): 3 slots + 4 positions + 3 variants unchanged; all still working.
+  Phase 6 (Polish): prefers-color-scheme dark fallback added; prefers-reduced-motion 0ms added.
+
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/drawer/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — Built, zero errors,
+  npx.cmd jest --testPathPatterns=drawer --no-coverage (65/65 PASS — 40 unit + 25 a11y),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (95/95 PASS).
+
+Terminal notes: Replacing oldString that spans import block with full file content concatenates instead of
+  replacing — use targeted replacements for specific strings only. FocusTrap.deactivate() restores
+  focus internally (captures activeElement at activate() time). No need for separate priorFocusElement field.
+  Optional chain ?.activate() on a non-null type triggers @typescript-eslint/no-unnecessary-condition —
+  fix by changing the cast type to include | null: { focusTrap: X | null }.focusTrap?.activate().
+
+Next step: Continue Tier 1 queue — Drawer ✅ done, next is Select (#2) or ConfirmDialog (#6).
+
+
 Changed:
   - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.types.ts
       • Added ariaLabel?: string — accessible label when no visible header is rendered

@@ -14,9 +14,24 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import type { InputSignal, ModelSignal, OnDestroy, OutputEmitterRef, Signal } from '@angular/core';
+import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { DrawerPosition, DrawerVariant } from './drawer.types';
 export type { DrawerPosition, DrawerVariant } from './drawer.types';
+
+// ── Module-level ID counter (avoids static class field + prefer-readonly lint) ──
+let nextDrawerId: number = 0;
+
+function generateDrawerId(): string {
+  if (
+    typeof globalThis.crypto !== 'undefined' &&
+    typeof globalThis.crypto.randomUUID === 'function'
+  ) {
+    return `ui-lib-drawer-${globalThis.crypto.randomUUID()}`;
+  }
+  nextDrawerId += 1;
+  return `ui-lib-drawer-${nextDrawerId}`;
+}
 
 /**
  * Drawer — a panel that slides in from the edge of the viewport.
@@ -40,7 +55,8 @@ export type { DrawerPosition, DrawerVariant } from './drawer.types';
   host: {
     '[class]': 'hostClasses()',
     '[style.--uilib-drawer-size]': 'size()',
-    '[attr.aria-hidden]': '!visible()',
+    // aria-hidden="true" hides all children from AT when closed; null (removed) when open
+    '[attr.aria-hidden]': '!visible() ? true : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -70,6 +86,13 @@ export class Drawer implements OnDestroy {
   public readonly blockScroll: InputSignal<boolean> = input<boolean>(true);
   /** Whether to show the built-in close button in the header. */
   public readonly showCloseButton: InputSignal<boolean> = input<boolean>(true);
+  /**
+   * `id` of an element that describes the drawer panel.
+   * When provided, the value is set on the panel's `aria-describedby` attribute.
+   */
+  public readonly ariaDescribedby: InputSignal<string | undefined> = input<string | undefined>(
+    undefined
+  );
   /** Visual design variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<DrawerVariant | null> = input<DrawerVariant | null>(null);
   /** Additional CSS classes applied to the host element. */
@@ -79,6 +102,14 @@ export class Drawer implements OnDestroy {
   public readonly shown: OutputEmitterRef<void> = output<void>();
   /** Emits after the drawer finishes closing. */
   public readonly hidden: OutputEmitterRef<void> = output<void>();
+
+  /** Unique id for this drawer instance. */
+  private readonly drawerId: string = generateDrawerId();
+
+  /** Stable title element id for `aria-labelledby`. */
+  public readonly titleId: Signal<string> = computed<string>(
+    (): string => `${this.drawerId}-title`
+  );
 
   private readonly effectiveVariant: Signal<DrawerVariant> = computed<DrawerVariant>(
     (): DrawerVariant => this.variant() ?? this.themeConfig.variant()
@@ -97,6 +128,9 @@ export class Drawer implements OnDestroy {
     return classes.join(' ');
   });
 
+  /** Focus trap — created lazily on first open, reused across open/close cycles. */
+  private focusTrap: FocusTrap | null = null;
+
   constructor() {
     let previousVisible: boolean | null = null;
 
@@ -109,11 +143,20 @@ export class Drawer implements OnDestroy {
         }
         if (previousVisible === false) {
           this.shown.emit();
+          // Use afterNextRender with injector so it is safe when the effect re-runs
+          // outside the constructor (avoids NG0203 injection context errors).
           afterNextRender(
             (): void => {
               const panel: HTMLElement | null =
                 this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-drawer__panel');
-              panel?.focus();
+              if (panel) {
+                // Create FocusTrap once; reuse across open/close cycles.
+                if (!this.focusTrap) {
+                  this.focusTrap = new FocusTrap(panel);
+                }
+                // activate() saves prior focus and moves focus inside the panel.
+                this.focusTrap.activate();
+              }
             },
             { injector: this.injector }
           );
@@ -121,6 +164,8 @@ export class Drawer implements OnDestroy {
       } else {
         this.document.body.classList.remove('ui-lib-drawer-scroll-lock');
         if (previousVisible === true) {
+          // deactivate() restores focus to the element that was focused when activate() was called.
+          this.focusTrap?.deactivate();
           this.hidden.emit();
         }
       }
@@ -131,6 +176,7 @@ export class Drawer implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.document.body.classList.remove('ui-lib-drawer-scroll-lock');
+    this.focusTrap?.deactivate();
   }
 
   /** Close the drawer. */

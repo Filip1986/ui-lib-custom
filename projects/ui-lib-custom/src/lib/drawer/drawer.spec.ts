@@ -42,6 +42,7 @@ function queryElement<T extends HTMLElement>(
       [showCloseButton]="showCloseButton()"
       [variant]="variant()"
       [styleClass]="styleClass()"
+      [ariaDescribedby]="ariaDescribedby()"
     >
       <p class="test-content">Drawer body</p>
       <div drawerFooter class="test-footer">Footer</div>
@@ -63,6 +64,9 @@ class TestHostComponent {
     null
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaDescribedby: WritableSignal<string | undefined> = signal<string | undefined>(
+    undefined
+  );
 }
 
 describe('Drawer', (): void => {
@@ -108,8 +112,8 @@ describe('Drawer', (): void => {
 
   describe('visibility', (): void => {
     it('should not have --open class when closed', (): void => {
-      const host: HTMLElement = getElement(fixture, 'ui-lib-drawer');
-      expect(host.classList.contains('ui-lib-drawer--open')).toBe(false);
+      const drawerHost: HTMLElement = getElement(fixture, 'ui-lib-drawer');
+      expect(drawerHost.classList.contains('ui-lib-drawer--open')).toBe(false);
     });
 
     it('should add --open class when visible is true', (): void => {
@@ -131,11 +135,11 @@ describe('Drawer', (): void => {
       expect(drawerHost.getAttribute('aria-hidden')).toBe('true');
     });
 
-    it('should set aria-hidden="false" on host when open', (): void => {
+    it('should remove aria-hidden from host when open', (): void => {
       host.isVisible.set(true);
       fixture.detectChanges();
       const drawerHost: HTMLElement = getElement(fixture, 'ui-lib-drawer');
-      expect(drawerHost.getAttribute('aria-hidden')).toBe('false');
+      expect(drawerHost.getAttribute('aria-hidden')).toBeNull();
     });
   });
 
@@ -201,6 +205,13 @@ describe('Drawer', (): void => {
       button.click();
       fixture.detectChanges();
       expect(host.isVisible()).toBe(false);
+    });
+
+    it('close button should use an inline SVG icon, not PrimeNG pi classes', (): void => {
+      const svg: SVGElement | null = queryElement<SVGElement>(fixture, '.ui-lib-drawer__close svg');
+      expect(svg).toBeTruthy();
+      const piSpan: HTMLElement | null = queryElement(fixture, '.ui-lib-drawer__close .pi');
+      expect(piSpan).toBeNull();
     });
   });
 
@@ -291,7 +302,7 @@ describe('Drawer', (): void => {
       expect(panel.getAttribute('role')).toBe('dialog');
     });
 
-    it('should set aria-modal when visible', (): void => {
+    it('should set aria-modal="true" when visible and modal=true', (): void => {
       host.isVisible.set(true);
       fixture.detectChanges();
       const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
@@ -303,14 +314,55 @@ describe('Drawer', (): void => {
       expect(panel.getAttribute('aria-modal')).toBeNull();
     });
 
-    it('should set aria-label from header input', (): void => {
+    it('should not set aria-modal when visible but modal=false', (): void => {
+      host.modal.set(false);
+      host.isVisible.set(true);
+      fixture.detectChanges();
       const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
-      expect(panel.getAttribute('aria-label')).toBe('Test Header');
+      expect(panel.getAttribute('aria-modal')).toBeNull();
+    });
+
+    it('should set aria-labelledby pointing to the title element when header is set', (): void => {
+      const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
+      const labelledById: string | null = panel.getAttribute('aria-labelledby');
+      expect(labelledById).toBeTruthy();
+      const titleEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+        `#${labelledById}`
+      );
+      expect(titleEl).toBeTruthy();
+      expect(titleEl?.textContent!.trim()).toBe('Test Header');
+    });
+
+    it('should use aria-label="Drawer" when no header text is set', (): void => {
+      host.headerText.set('');
+      host.showCloseButton.set(false);
+      fixture.detectChanges();
+      const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
+      expect(panel.getAttribute('aria-label')).toBe('Drawer');
+      expect(panel.getAttribute('aria-labelledby')).toBeNull();
+    });
+
+    it('should set aria-describedby when ariaDescribedby is provided', (): void => {
+      host.ariaDescribedby.set('my-description');
+      fixture.detectChanges();
+      const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
+      expect(panel.getAttribute('aria-describedby')).toBe('my-description');
+    });
+
+    it('should not set aria-describedby when ariaDescribedby is not provided', (): void => {
+      const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
+      expect(panel.getAttribute('aria-describedby')).toBeNull();
     });
 
     it('should have tabindex="-1" on the panel', (): void => {
       const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
       expect(panel.getAttribute('tabindex')).toBe('-1');
+    });
+
+    it('panel should not have a redundant aria-hidden attribute', (): void => {
+      const panel: HTMLElement = getElement(fixture, '.ui-lib-drawer__panel');
+      // aria-hidden is now on the host only; panel must not duplicate it
+      expect(panel.hasAttribute('aria-hidden')).toBe(false);
     });
   });
 

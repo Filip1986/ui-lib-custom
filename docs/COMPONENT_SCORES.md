@@ -22,7 +22,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 2   | Select        | Combobox/listbox ARIA pattern — the hardest form control to get right  | ⏳ Queued   |
 | 3   | AutoComplete  | Combobox with live region announcements, `aria-activedescendant`       | ⏳ Queued   |
 | 4   | DynamicDialog | Same as Dialog + programmatic creation lifecycle                       | ✅ Done     |
-| 5   | Drawer        | Side dialog, focus management, `aria-modal`                            | ⏳ Queued   |
+| 5   | Drawer        | Side dialog, focus management, `aria-modal`                            | ✅ Done     |
 | 6   | ConfirmDialog | `role=alertdialog`, default focus on confirm action                    | ⏳ Queued   |
 | 7   | ConfirmPopup  | `role=alertdialog` anchored, click-away without losing a11y            | ⏳ Queued   |
 | 8   | Popover       | `aria-expanded`, `aria-controls`, dismiss without losing focus context | ⏳ Queued   |
@@ -197,7 +197,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Dialog        | 9   | 9    | 8    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 8.6 | 🟢     |
 | DynamicDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 | 🟢     |
-| Drawer        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Drawer        | 9   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | BottomSheet   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Popover       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Tooltip       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
