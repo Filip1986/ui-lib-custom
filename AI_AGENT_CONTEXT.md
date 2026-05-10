@@ -20,15 +20,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Menubar hardening COMPLETE (Tier 2, #11); next is Menu
-- **Next queue:** Menu hardening (Tier 2, #12) — key a11y: role=menu, keyboard nav, separator roles
+- **Active focus:** Menu hardening COMPLETE (Tier 2, #12); next is TieredMenu
+- **Next queue:** TieredMenu hardening (Tier 2, #13) — key a11y: nested role=menu, left-arrow closes submenu
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
-- `Tooltip` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 66 tests — 34 unit + 32 a11y)
-- `Toast` -> ✅ complete + hardened (6-phase evolution, score 9.1/10, 60 tests — 29 unit + 31 a11y)
+- `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
+- `Toast` -> ✅ complete + hardened (6-phase evolution, score 9.1/10, 60 tests — 29 unit + 31 a11y)
 
 ---
 
@@ -42,6 +42,76 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-10 [Menu component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/menu/menu.ts
+      • CRITICAL FIX: Added module-level `let nextMenuId: number = 0` counter + `menuId`
+        public readonly field for unique per-instance IDs
+      • Added `rovingIndex: WritableSignal<number>` and `getTabIndex(item, flatIndex): string`
+        to implement a real roving tabindex pattern
+      • CRITICAL FIX: `moveFocus()` now wraps with modulo arithmetic instead of stopping at edges
+      • CRITICAL FIX: Added `previousFocusEl: HTMLElement | null` and `restoreFocus()` pattern
+        — popup now captures the trigger/current focus on open and restores on Escape close
+      • MODERATE FIX: `hide(restoreFocus: boolean = false)` added so Escape restores focus,
+        while click-outside / activation / Tab closes do not steal focus back
+      • MODERATE FIX: Added `Tab` handling in `onItemKeyDown()` — popup closes and allows
+        natural focus continuation
+      • Updated click-outside and global Escape handlers to use the correct close behaviour
+      • Updated `onItemFocus()` and `focusByFlatIndex()` to keep `rovingIndex` in sync
+  - projects/ui-lib-custom/src/lib/menu/menu.html
+      • CRITICAL FIX: Removed `aria-hidden="true"` from all `role="separator"` items
+      • CRITICAL FIX: Replaced `tabindex="0"` on all enabled items with
+        `[attr.tabindex]="getTabIndex(...)"` on grouped and ungrouped links
+      • Added `[attr.id]="menuId"` to the panel
+  - projects/ui-lib-custom/src/lib/menu/menu.scss
+      • MODERATE FIX: Popup panel now uses subtle slide-in polish
+        (`translateY(-4px) -> translateY(0)` + opacity)
+      • MODERATE FIX: Added `@media (prefers-reduced-motion: reduce)` to disable transitions
+  - projects/ui-lib-custom/src/lib/menu/menu.spec.ts
+      • Updated legacy assertions to match roving tabindex + separator semantics
+  - projects/ui-lib-custom/src/lib/menu/menu.a11y.spec.ts (CREATED — 45 a11y tests)
+      • 10 describe blocks: static ARIA structure (6), grouped structure (5), separator semantics (4),
+        roving tabindex (5), arrow keys (5), activation keys (4), Tab popup behaviour (3),
+        popup focus management (5), disabled items (4), axe-core (4)
+      • Uses `MENU_AXE_RULES` (skips color-contrast + aria-required-children false positive)
+      • document.body.appendChild(fixture.nativeElement) for focus tests in jsdom
+      • afterEach: fixture.destroy() for DOM cleanup
+  - projects/ui-lib-custom/src/lib/menu/README.md
+      • Replaced the stub with full MenuItem table, public properties, keyboard navigation,
+        ARIA structure, popup trigger guidance, composability notes, CSS variables, reduced-motion notes
+  - docs/COMPONENT_SCORES.md
+      • Menu queue entry: ⏳ Queued -> ✅ Done (Tier 2 #12)
+      • Menu score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+  - AI_AGENT_CONTEXT.md (this file — status updated)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (Toast handoff archived)
+State: Menu component fully evolved through all 6 phases. Score 9.0/10.
+  Phase 3 (A11y — priority):
+    • CRITICAL FIX: Roving tabindex implemented — only one enabled item is tabbable at a time
+    • CRITICAL FIX: `role="separator"` items no longer use invalid `aria-hidden="true"`
+    • CRITICAL FIX: Arrow-key navigation wraps at both ends
+    • CRITICAL FIX: Popup Escape close restores focus to the trigger
+    • MODERATE FIX: Tab closes popup and exits naturally
+    • MODERATE FIX: Added reduced-motion handling for popup animation
+    • Created menu.a11y.spec.ts with 45 tests (all pass)
+  Phase 1 (Architecture): nextMenuId/menuId, previousFocusEl/restoreFocus, rovingIndex,
+    getTabIndex(), hide(restoreFocus), wrapped moveFocus() all added.
+  Phase 2 (DX): README fully rewritten with API, accessibility, popup usage, CSS vars, composability.
+  Phase 4 (Performance): Existing effect/listener cleanup and afterNextRender patterns verified intact.
+  Phase 5 (Composability): README documents data-driven limits (`itemTemplate` not supported) and
+    recommends a MenuTriggerDirective-style wrapper in consuming code for richer trigger composition.
+  Phase 6 (Polish): Popup slide-in animation added, reduced-motion respected, existing variants/dark mode preserved.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/menu/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=menu --no-coverage (352/352 PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
+Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
+  `aria-required-children` is a false positive for our role="menu" + presentational wrapper structure
+  — skip it in `MENU_AXE_RULES` with an explanatory comment.
+  Focus tests in jsdom require `document.body.appendChild(fixture.nativeElement)`.
+Next step: TieredMenu hardening (Tier 2, #13) — key a11y: nested role=menu, submenu close semantics.
+
 
 Date: 2026-05-10 [Menubar component — 6-phase hardening COMPLETE]
 Changed:
@@ -136,40 +206,8 @@ Next step: Menu hardening (Tier 2, #12) — key a11y: role=menu, keyboard nav, s
 
 
 Date: 2026-05-10 [Toast component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/toast/toast.ts
-      • CRITICAL FIX: Removed aria-live="polite" and aria-atomic="false" from container host binding
-        — role="region" is a structural landmark, not a live region; added explanatory comment
-      • Updated dismiss() JSDoc to document animation delay and no-op safety
-  - projects/ui-lib-custom/src/lib/toast/toast.html
-      • CRITICAL FIX: [attr.role] now conditional — role="alert" for error severity only, role="status" for success/info/warn
-      • CRITICAL FIX: Removed [attr.aria-live] binding — redundant/ineffective (role already implies live region urgency)
-      • MODERATE FIX: Close button aria-label updated to "Dismiss: {summary}" — falls back to detail then "notification"
-  - projects/ui-lib-custom/src/lib/toast/toast.scss
-      • MODERATE FIX: Added @media (prefers-reduced-motion: reduce) — sets --uilib-toast-animation-duration: 0ms
-  - projects/ui-lib-custom/src/lib/toast/toast.spec.ts
-      • Updated 4 ARIA tests to reflect corrected role/aria-live behaviour
-  - projects/ui-lib-custom/src/lib/toast/toast.a11y.spec.ts (CREATED — 31 a11y tests)
-  - projects/ui-lib-custom/src/lib/toast/README.md
-      • Added ToastMessage interface table, Multiple Containers Pattern, Lifecycle, CSS vars, Accessibility section
-  - docs/COMPONENT_SCORES.md
-      • Toast queue entry: ⏳ Queued → ✅ Done (Tier 1 #10)
-      • Toast score row: 9/10/9/9/9/9/9/9/9/9 avg 9.1 🟢
-  - AI_AGENT_CONTEXT.md (this file — status updated)
-State: Toast component fully evolved through all 6 phases. Score 9.1/10.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toast/ --max-warnings 0 (CLEAN, EXIT:0)
-  node_modules/.bin/jest --testPathPatterns=toast --no-coverage (60/60 PASS — 29 unit + 31 a11y)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
-Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
-Next step: Menubar hardening (Tier 2, #11).
-
-
-Date: 2026-05-10 [Tooltip directive — 6-phase hardening COMPLETE]
 → Archived to docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
 
 ---
-
 
 
