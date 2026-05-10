@@ -163,6 +163,7 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 - A11y: ARIA roles, keyboard nav, focus management
 - Demo page created and route verified
 - `README.md` written in `projects/ui-lib-custom/src/lib/<component>/` with accurate inputs, outputs, projection, and usage example
+- **Score recorded in `docs/COMPONENT_SCORES.md`** — all 10 categories evaluated; component only considered production-quality when every category ≥ 8
 - `AI_AGENT_CONTEXT.md` inventory updated
 - `ng build ui-lib-custom` zero warnings
 
@@ -182,13 +183,16 @@ npx eslint projects/demo/src/app/pages/<component>/ --max-warnings 0
 
 ```
 docs/
-├── getting-started/   QUICK_START.md, TEST_GUIDE.md
-├── guides/            INTEGRATION_EXAMPLE.md, PUBLISHING_GUIDE.md, ACCESSIBILITY_TESTING.md, THEMING_GUIDE.md
+├── VISION.md              # Strategic north star — read this first on every session
+├── COMPONENT_SCORES.md    # Quality scorecard results + prioritized hardening backlog
+├── getting-started/       QUICK_START.md, TEST_GUIDE.md
+├── guides/                INTEGRATION_EXAMPLE.md, PUBLISHING_GUIDE.md, ACCESSIBILITY_TESTING.md, THEMING_GUIDE.md
+├── prompts/               COMPONENT_EVOLUTION_PROMPTS.md, TIMELINE_PROMPTS.md
 ├── reference/
-│   ├── components/    One .md per component (API + usage + theming + a11y)
-│   ├── systems/       DESIGN_TOKENS.md, LAYOUT_SYSTEM.md, THEMING.md, ACCESSIBILITY.md
-│   └── project/       PROJECT_SUMMARY.md, UPDATE_LOG.md, VERIFICATION_CHECKLIST.md
-└── architecture/      ARCHITECTURE.md
+│   ├── components/        One .md per component (API + usage + theming + a11y)
+│   ├── systems/           DESIGN_TOKENS.md, LAYOUT_SYSTEM.md, THEMING.md, ACCESSIBILITY.md
+│   └── project/           PROJECT_SUMMARY.md, UPDATE_LOG.md, VERIFICATION_CHECKLIST.md
+└── architecture/          ARCHITECTURE.md
 ```
 
 When adding or changing a component, always update:
@@ -212,14 +216,4 @@ Next step: <single most logical next action>
 
 Keep only the newest 3 handoffs in `AI_AGENT_CONTEXT.md`. Move older ones to `docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md`. Never write stable architectural rules into `AI_AGENT_CONTEXT.md` — those go in `AGENTS.md` / `LIBRARY_CONVENTIONS.md`.
 
----
-
-## Current State (as of 2026-04-21)
-
-- **Milestone:** Component foundation hardening + documentation completeness
-- **Recently completed:** InputMask, InputNumber, SplitButton, Chart, DataView (all fully implemented, tested, demo'd, documented)
-- **Next queue:** `knip` baseline + dead-code cleanup, constants extraction pass, overlay follow-ups (`appendTo` / z-index manager), component v2 enhancements
-- **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
-- **Documentation gaps:** `Input`, `Select`, `Card`, `Layout` docs incomplete
-- **Pending secondary entry points:** `icon-button`, `alert`
-- **Known build warning (pre-existing):** SCSS budget warnings in `button` and `date-picker` — not a blocker
+> **Current session state** is always in `AI_AGENT_CONTEXT.md` — not this file. Read that first.
