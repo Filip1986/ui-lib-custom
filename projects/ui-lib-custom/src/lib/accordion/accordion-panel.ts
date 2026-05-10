@@ -119,8 +119,24 @@ export class AccordionPanel implements OnDestroy {
     this.context ? this.context.isPanelExpanded(this.resolvedId()) : this.internalExpanded()
   );
 
-  public readonly headerId: Signal<string> = computed<string>((): string => `${this.uid}-header`);
-  public readonly panelId: Signal<string> = computed<string>((): string => `${this.uid}-panel`);
+  public readonly headerId: Signal<string> = computed<string>((): string => {
+    if (this.context) {
+      const index: number = this.context.getPanelIndex(this);
+      if (index >= 0) {
+        return this.context.headerButtonId(index);
+      }
+    }
+    return `${this.uid}-header`;
+  });
+  public readonly panelId: Signal<string> = computed<string>((): string => {
+    if (this.context) {
+      const index: number = this.context.getPanelIndex(this);
+      if (index >= 0) {
+        return this.context.panelId(index);
+      }
+    }
+    return `${this.uid}-panel`;
+  });
 
   public toggle(): void {
     if (this.disabled()) {

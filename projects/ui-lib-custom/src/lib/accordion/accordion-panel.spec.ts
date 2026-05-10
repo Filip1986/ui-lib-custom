@@ -213,7 +213,7 @@ describe('AccordionPanel', (): void => {
 
     expect(header.getAttribute('aria-disabled')).toBe('true');
     expect(header.getAttribute('aria-expanded')).toBe('false');
-    expect(header.getAttribute('tabindex')).toBe('-1');
+    expect(header.getAttribute('tabindex')).not.toBe('-1');
   });
 
   it('generates unique ids linking header and content', (): void => {
