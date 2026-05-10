@@ -37,7 +37,7 @@ import { UiLibInput } from 'ui-lib-custom/input';
 | `variant` | `InputVariant \| null` | `null` | Visual style; inherits from global theme when null |
 | `size` | `InputSize` | `'md'` | Size scale |
 | `type` | `InputType` | `'text'` | Any valid HTML input type |
-| `labelFloat` | `InputLabelFloat` | `'over'` | Label position / floating behaviour |
+| `labelFloat` | `'over' \| 'in' \| 'on'` | `'over'` | Label position / floating behaviour — see Floating Label Modes below |
 | `placeholder` | `string` | `''` | Placeholder text |
 | `error` | `string \| null` | `null` | Error message rendered below the input; announces via live region |
 | `disabled` | `boolean` | `false` | Disabled state |
@@ -56,7 +56,7 @@ None. Use Angular forms bindings: `[(ngModel)]` or `formControlName`.
 ```typescript
 type InputVariant   = 'material' | 'bootstrap' | 'minimal';
 type InputSize      = 'sm' | 'md' | 'lg';
-type InputLabelFloat = 'over' | 'in' | 'out';
+type InputLabelFloat = 'over' | 'in' | 'on';
 type InputType      = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url';
 ```
 
@@ -89,9 +89,9 @@ The input supports two named slots for inline addons:
 
 | Mode | Behaviour |
 |---|---|
-| `over` | Label sits above the field; placeholder remains visible at all times |
-| `in` | Label floats inside the field and lifts on focus or when a value exists |
-| `out` | Label is always rendered above the field boundary (never inside) |
+| `over` | Label sits statically above the field; placeholder is visible at all times |
+| `in` | Label starts inside the field and lifts to the top-inside when focused or a value exists |
+| `on` | Label starts inside the field and lifts onto the border edge with a background chip when focused or a value exists (the classic "outlined" Material-style float) |
 
 ---
 
@@ -205,13 +205,23 @@ export class MyComponent {
 
 **Do:**
 - Always set `label` — never rely on placeholder text alone.
-- Use `labelFloat="in"` for compact UIs; `labelFloat="out"` for outlined styles.
+- Use `labelFloat="in"` for compact UIs; `labelFloat="on"` for outlined (border-chip) styles.
 - Provide `error` messages instead of relying solely on color.
 
 **Don't:**
 - Enable `showClear` on read-only or disabled fields.
 - Show `showCounter` without also setting `maxLength`.
 - Use placeholder as a substitute for a label.
+
+---
+
+## Edge Cases
+
+- `showCounter` without `maxLength`: renders the current character count alone (`12`) rather than a fraction (`12 / 30`). Always set `maxLength` when using `showCounter` to give users a useful cap indicator.
+- `showClear` is suppressed while the field is disabled — the clear button only renders when both `showClear` is true and the field is enabled.
+- `showTogglePassword` has no effect unless `type="password"`.
+- Placeholder is only visible in `labelFloat="over"` mode. In `'in'` and `'on'` modes the label itself acts as the visual placeholder; setting `placeholder` in those modes has no visible effect.
+- `error` changes are announced to screen readers via `LiveAnnouncerService`. Rapidly toggling `error` may cause duplicate announcements — debounce error updates in high-frequency validation scenarios.
 
 ---
 

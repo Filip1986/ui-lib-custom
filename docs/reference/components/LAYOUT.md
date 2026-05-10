@@ -26,14 +26,15 @@ Centers content with a max-width constraint and uniform padding.
 |---|---|---|---|
 | `size` | `ContainerSize` | `'lg'` | Max-width token |
 | `centered` | `boolean` | `false` | Applies `margin: auto` to center horizontally |
-| `inset` | `InsetToken \| null` | `null` | Semantic uniform padding (preferred); maps to `--uilib-inset-*` tokens |
+| `inset` | `'sm' \| 'md' \| 'lg' \| 'xl' \| null` | `null` | Semantic uniform padding (preferred); maps to `--uilib-inset-*` tokens. Note: `'xs'` is not accepted by Container |
 | `padding` | `SpacingToken` | `4` | Back-compat numeric padding token; ignored when `inset` is set |
 
 ### Types
 
 ```typescript
 type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-type InsetToken    = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+// Container's inset excludes 'xs' — use padding for sub-sm spacing
+type ContainerInset = 'sm' | 'md' | 'lg' | 'xl';
 ```
 
 ### Example
@@ -165,6 +166,16 @@ type GridJustify = 'start' | 'center' | 'end' | 'stretch';
   <ui-lib-card>Gamma</ui-lib-card>
 </ui-lib-grid>
 ```
+
+---
+
+## Edge Cases
+
+- **`spacing` overrides `gap`**: when `spacing` is set (non-null), the `gap` input is ignored entirely. `gap` is a back-compat convenience for numeric spacing tokens when semantic tokens aren't needed.
+- **`minColumnWidth` overrides `columns`**: when `minColumnWidth` is provided on `<ui-lib-grid>`, the grid switches to `repeat(auto-fit, minmax(value, 1fr))` and the `columns` input has no effect.
+- **Container `inset` does not accept `'xs'`**: the `inset` input type is `Exclude<InsetToken, 'xs'>` — passing `'xs'` will cause a TypeScript type error. Use `padding` with a small numeric token for sub-`sm` padding.
+- **No extra DOM nodes**: all four primitives use an inline `<ng-content />` template and apply layout styles via host bindings. They add zero extra elements to the DOM — the component element itself is the layout box.
+- **Inline always wraps**: `<ui-lib-inline>` has `flex-wrap: wrap` baked in; this cannot be overridden via inputs. Use `<ui-lib-stack direction="horizontal">` for a non-wrapping row.
 
 ---
 
