@@ -7,9 +7,11 @@
   [style.width]="resolvedWidth()"
   [style.height]="resolvedHeight()"
   role="dialog"
-  aria-modal="true"
+  [attr.aria-modal]="resolvedModal() ? 'true' : null"
   tabindex="-1"
   [attr.aria-labelledby]="resolvedHeader() ? headerId : null"
+  [attr.aria-label]="resolvedAriaLabel()"
+  [attr.aria-describedby]="resolvedAriaDescribedby()"
   (keydown)="onPanelKeydown($event)"
 >
   @if (showHeader()) {

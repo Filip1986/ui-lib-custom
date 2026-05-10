@@ -188,6 +188,25 @@
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  ui-lib-dynamic-dialog:not([data-theme='light']) {
+    .ui-lib-dynamic-dialog__panel {
+      background: var(--uilib-dynamic-dialog-bg-dark, var(--uilib-surface, #1e1e2e));
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .ui-lib-dynamic-dialog__header {
+      border-bottom-color: var(--uilib-surface-border, rgba(255, 255, 255, 0.1));
+    }
+
+    .ui-lib-dynamic-dialog__close-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+}
+
 // ---- Reduced motion ----
 @media (prefers-reduced-motion: reduce) {
   .ui-lib-dynamic-dialog__panel {

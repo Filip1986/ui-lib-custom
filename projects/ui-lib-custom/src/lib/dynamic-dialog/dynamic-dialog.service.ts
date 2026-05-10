@@ -46,6 +46,11 @@ export class DialogService {
    * @returns DynamicDialogRef — use it to close the dialog or subscribe to its close event.
    */
   public open<C>(component: Type<C>, config: DynamicDialogConfig = {}): DynamicDialogRef {
+    // Capture the currently-focused element BEFORE creating the dialog so focus can be
+    // restored when the dialog closes — required for WCAG 2.1 SC 3.2.2 / 2.4.3.
+    const priorFocusElement: HTMLElement | null =
+      this.document.activeElement instanceof HTMLElement ? this.document.activeElement : null;
+
     const ref: DynamicDialogRef = new DynamicDialogRef();
     const mergedConfig: DynamicDialogConfig = {
       modal: true,
@@ -81,6 +86,12 @@ export class DialogService {
 
     // Clean up the container after the dialog signals it should close.
     ref.onClose.subscribe((): void => {
+      // Restore focus to the element that was active before the dialog opened.
+      // Must happen before DOM removal so the element is still the document's
+      // sequential focus point (not already detached).
+      if (priorFocusElement?.isConnected) {
+        priorFocusElement.focus();
+      }
       this.applicationRef.detachView(containerRef.hostView);
       element.remove();
       containerRef.destroy();

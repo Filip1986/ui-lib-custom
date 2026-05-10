@@ -14,6 +14,20 @@ import {
   viewChild,
 } from '@angular/core';
 import type { InputSignal, OnDestroy, Signal, Type, WritableSignal } from '@angular/core';
+
+// ---- Module-level ID counter (avoids static class field + prefer-readonly lint issue) ----
+let nextDynamicDialogId: number = 0;
+
+function generateDynamicDialogId(): string {
+  if (
+    typeof globalThis.crypto !== 'undefined' &&
+    typeof globalThis.crypto.randomUUID === 'function'
+  ) {
+    return `ui-lib-dynamic-dialog-${globalThis.crypto.randomUUID()}`;
+  }
+  nextDynamicDialogId += 1;
+  return `ui-lib-dynamic-dialog-${nextDynamicDialogId}`;
+}
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { DynamicDialogRef } from './dynamic-dialog-ref';
@@ -59,8 +73,7 @@ export class DynamicDialog implements OnDestroy {
     null
   );
 
-  private static nextId: number = 0;
-  private readonly componentId: string = DynamicDialog.generateId();
+  private readonly componentId: string = generateDynamicDialogId();
 
   /** @internal — set by DialogService via ComponentRef.setInput(). */
   public readonly componentType: InputSignal<Type<unknown> | null> = input<Type<unknown> | null>(
@@ -117,6 +130,20 @@ export class DynamicDialog implements OnDestroy {
   /** Whether the header row should be rendered (needs title text OR close button). */
   public readonly showHeader: Signal<boolean> = computed<boolean>(
     (): boolean => Boolean(this.resolvedHeader()) || this.resolvedClosable()
+  );
+
+  /**
+   * Accessible label for the panel used when no visible `header` text is configured.
+   * Returns null when a header is present (aria-labelledby takes priority).
+   * Defaults to 'Dialog' so screen readers always have a meaningful dialog label.
+   */
+  public readonly resolvedAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => (!this.resolvedHeader() ? (this.config.ariaLabel ?? 'Dialog') : null)
+  );
+
+  /** ID of an element that describes the dialog purpose, or null when not configured. */
+  public readonly resolvedAriaDescribedby: Signal<string | null> = computed<string | null>(
+    (): string | null => this.config.ariaDescribedby ?? null
   );
 
   /** ID for aria-labelledby on the panel. */
@@ -224,16 +251,5 @@ export class DynamicDialog implements OnDestroy {
     }
     this.document.body.style.overflow = previousOverflow;
     this.previousBodyOverflow.set(null);
-  }
-
-  private static generateId(): string {
-    if (
-      typeof globalThis.crypto !== 'undefined' &&
-      typeof globalThis.crypto.randomUUID === 'function'
-    ) {
-      return `ui-lib-dynamic-dialog-${globalThis.crypto.randomUUID()}`;
-    }
-    DynamicDialog.nextId += 1;
-    return `ui-lib-dynamic-dialog-${DynamicDialog.nextId}`;
   }
 }

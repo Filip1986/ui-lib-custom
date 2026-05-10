@@ -120,7 +120,59 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-10 [Dialog component — 6-phase evolution hardening]
+Date: 2026-05-10 [DynamicDialog component — 6-phase evolution hardening]
+Changed:
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.types.ts
+      • Added ariaLabel?: string — accessible label when no visible header is rendered
+      • Added ariaDescribedby?: string — maps to aria-describedby on the panel
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.ts
+      • Moved nextId counter from private static class field to module-level let nextDynamicDialogId
+      • Replaced static generateId() with module-level generateDynamicDialogId() function
+      • Added resolvedAriaLabel computed: returns config.ariaLabel ?? 'Dialog' when no header, null when header present
+      • Added resolvedAriaDescribedby computed: returns config.ariaDescribedby ?? null
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.html
+      • Fixed aria-modal: changed from hardcoded "true" to [attr.aria-modal]="resolvedModal() ? 'true' : null"
+      • Added [attr.aria-label]="resolvedAriaLabel()" — provides accessible name when no header
+      • Added [attr.aria-describedby]="resolvedAriaDescribedby()" — description region support
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.service.ts
+      • Capture document.activeElement as priorFocusElement before createComponent()
+      • Restore priorFocusElement.focus() in onClose subscription BEFORE DOM removal
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.scss
+      • Added @media (prefers-color-scheme: dark) fallback alongside existing [data-theme='dark']
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/dynamic-dialog.a11y.spec.ts (NEW)
+      • 32 a11y tests: axe-core checks, ARIA attribute tests, focus management, focus restoration, keyboard interaction
+  - projects/ui-lib-custom/src/lib/dynamic-dialog/README.md
+      • Added ariaLabel and ariaDescribedby to DynamicDialogConfig table; updated modal description
+  - docs/COMPONENT_SCORES.md
+      • DynamicDialog row updated to 9/9/8/8/8/8/8/8/9/8 avg 8.3 🟢 (Tier 1 #4 → ✅ Done)
+  - AI_AGENT_CONTEXT.md (this file)
+
+State: DynamicDialog component fully evolved through all 6 phases. Production-quality score 8.3/10.
+  Phase 3 (A11y — priority):
+    • Fixed aria-modal: non-modal dialogs no longer have aria-modal="true"
+    • Added aria-label fallback so dialogs always have an accessible name
+    • Added ariaDescribedby support via config
+    • Implemented focus restoration: service captures prior focus on open(), restores in onClose cleanup
+    • Created dynamic-dialog.a11y.spec.ts with 32 tests (axe, ARIA, focus, keyboard)
+    • dark mode respects @media (prefers-color-scheme: dark) in addition to [data-theme='dark']
+  Phase 1 (Architecture): module-level counter replaces static class field; generateDynamicDialogId() module function.
+  Phase 2 (DX): ariaLabel + ariaDescribedby config fields documented in README.
+  Phase 4 (Performance): afterNextRender({injector}) in constructor is injection-context-safe (verified ✅). blockScroll synchronously in constructor is intentional — prevents scroll flicker.
+  Phase 5 (Composability): guest injection via element injector chain verified ✅. Multiple dialogs supported ✅.
+  Phase 6 (Polish): @media (prefers-color-scheme: dark) fallback added. Existing :focus-visible + animation + reduced-motion already excellent.
+
+Verification:
+  npx.cmd eslint projects/ui-lib-custom/src/lib/dynamic-dialog/ --max-warnings 0 (CLEAN, EXIT:0),
+  npx.cmd ng build ui-lib-custom — Built, zero errors,
+  npx.cmd jest --testPathPatterns=dynamic-dialog --no-coverage (62/62 PASS — 30 unit + 32 a11y),
+  npx.cmd jest --testPathPatterns=entry-points --no-coverage (95/95 PASS).
+
+Terminal notes: Module-level let counter avoids potential @typescript-eslint/prefer-readonly lint concern
+  on static class fields. aria-modal must be conditional — hardcoding "true" breaks non-modal dialog
+  semantics. Focus restoration must happen BEFORE element.remove() so priorFocusElement.isConnected
+  is still true at restoration time.
+
+Next step: Continue Tier 1 queue — DynamicDialog ✅ done, next is Drawer (#5) or Drawer already built; check scores and pick next queued hardening target.
 Changed:
   - projects/ui-lib-custom/src/lib/dialog/dialog.component.ts
       • Removed CommonModule (only NgStyle needed)

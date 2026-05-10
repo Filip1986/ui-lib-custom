@@ -33,6 +33,17 @@ export interface DynamicDialogConfig {
   variant?: DynamicDialogVariant | null;
   /** Viewport anchor position of the dialog panel. Default: 'center'. */
   position?: DynamicDialogPosition;
+  /**
+   * Accessible label for the dialog panel used when no visible header text is rendered.
+   * When `header` is provided this is ignored (aria-labelledby takes precedence).
+   * Defaults to 'Dialog' when neither `header` nor `ariaLabel` are provided.
+   */
+  ariaLabel?: string;
+  /**
+   * ID of an element that describes the dialog purpose (maps to aria-describedby).
+   * The referenced element must exist in the DOM when the dialog is open.
+   */
+  ariaDescribedby?: string;
 }
 
 /** Injection token used by guest components to read DynamicDialogConfig. */
