@@ -58,8 +58,9 @@ const ANIMATION_DURATION_MS: number = 300;
     '[class]': 'hostClasses()',
     role: 'region',
     '[attr.aria-label]': '"Notifications"',
-    'aria-live': 'polite',
-    'aria-atomic': 'false',
+    // aria-live and aria-atomic are intentionally absent — role="region" is a structural
+    // landmark, not a live region. Each child item manages its own announcement urgency
+    // via role="alert" (error) or role="status" (success/info/warn).
   },
 })
 export class Toast {
@@ -199,8 +200,11 @@ export class Toast {
   }
 
   /**
-   * Dismiss a toast: cancel its auto-dismiss timer, play the exit animation,
-   * then remove it from the service after the animation completes.
+   * Dismiss a toast by ID: cancel its auto-dismiss timer, apply the exit animation class,
+   * then remove it from the service after `ANIMATION_DURATION_MS` (300ms) to allow
+   * the CSS exit animation to complete.
+   *
+   * Safe to call on already-dismissed IDs — the timer guard handles the no-op case.
    */
   public dismiss(messageId: string): void {
     // Cancel the scheduled auto-dismiss timer if still pending.

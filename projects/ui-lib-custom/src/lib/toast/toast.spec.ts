@@ -419,9 +419,9 @@ describe('Toast', (): void => {
     expect(toastHost.getAttribute('aria-label')).toBe('Notifications');
   });
 
-  it('should set role="alert" on each toast item', async (): Promise<void> => {
+  it('should set role="alert" on error severity items', async (): Promise<void> => {
     const { fixture, toastService }: TestSetup = await setup();
-    toastService.add({ summary: 'Alert role test' });
+    toastService.add({ severity: 'error', summary: 'Alert role test' });
     fixture.detectChanges();
     await fixture.whenStable();
 
@@ -429,33 +429,33 @@ describe('Toast', (): void => {
     expect(item?.getAttribute('role')).toBe('alert');
   });
 
-  it('should set aria-live="assertive" for error severity', async (): Promise<void> => {
+  it('should set role="status" on non-error severity items', async (): Promise<void> => {
+    const { fixture, toastService }: TestSetup = await setup();
+    toastService.add({ severity: 'success', summary: 'Status role test' });
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const item: HTMLElement | null = queryElement(fixture, '.ui-lib-toast__item');
+    expect(item?.getAttribute('role')).toBe('status');
+  });
+
+  it('should not have aria-live attribute on toast items (role drives announcement urgency)', async (): Promise<void> => {
     const { fixture, toastService }: TestSetup = await setup();
     toastService.add({ severity: 'error', summary: 'Critical' });
     fixture.detectChanges();
     await fixture.whenStable();
 
     const item: HTMLElement | null = queryElement(fixture, '.ui-lib-toast__item');
-    expect(item?.getAttribute('aria-live')).toBe('assertive');
+    expect(item?.getAttribute('aria-live')).toBeNull();
   });
 
-  it('should set aria-live="polite" for non-error severity', async (): Promise<void> => {
-    const { fixture, toastService }: TestSetup = await setup();
-    toastService.add({ severity: 'success', summary: 'Polite' });
-    fixture.detectChanges();
-    await fixture.whenStable();
-
-    const item: HTMLElement | null = queryElement(fixture, '.ui-lib-toast__item');
-    expect(item?.getAttribute('aria-live')).toBe('polite');
-  });
-
-  it('should have an accessible label on the close button', async (): Promise<void> => {
+  it('should include the message summary in the close button aria-label', async (): Promise<void> => {
     const { fixture, toastService }: TestSetup = await setup();
     toastService.add({ summary: 'Aria test' });
     fixture.detectChanges();
     await fixture.whenStable();
 
     const closeButton: HTMLElement | null = queryElement(fixture, '.ui-lib-toast__close');
-    expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss notification');
+    expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss: Aria test');
   });
 });

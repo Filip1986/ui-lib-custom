@@ -20,13 +20,14 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Tooltip hardening COMPLETE (Tier 1, #9); next is Toast
-- **Next queue:** Toast hardening (Tier 1, #10) — key a11y: aria-live=assertive live region, dismiss button keyboard access, role=status vs role=alert
+- **Active focus:** Toast hardening COMPLETE (Tier 1, #10); next is Menubar
+- **Next queue:** Menubar hardening (Tier 2, #11) — key a11y: role=menubar, full arrow-key nav, aria-haspopup, submenu keyboard control
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
 - `Tooltip` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 66 tests — 34 unit + 32 a11y)
+- `Toast` -> ✅ complete + hardened (6-phase evolution, score 9.1/10, 60 tests — 29 unit + 31 a11y)
 
 ---
 
@@ -41,7 +42,79 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-10 [Tooltip directive — 6-phase hardening COMPLETE]
+Date: 2026-05-10 [Toast component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/toast/toast.ts
+      • CRITICAL FIX: Removed aria-live="polite" and aria-atomic="false" from container host binding
+        — role="region" is a structural landmark, not a live region; added explanatory comment
+      • Updated dismiss() JSDoc to document animation delay and no-op safety
+  - projects/ui-lib-custom/src/lib/toast/toast.html
+      • CRITICAL FIX: [attr.role] now conditional — role="alert" for error severity only, role="status" for success/info/warn
+      • CRITICAL FIX: Removed [attr.aria-live] binding — redundant/ineffective (role already implies live region urgency)
+      • MODERATE FIX: Close button aria-label updated to "Dismiss: {summary}" — falls back to detail then "notification"
+  - projects/ui-lib-custom/src/lib/toast/toast.scss
+      • MODERATE FIX: Added @media (prefers-reduced-motion: reduce) — sets --uilib-toast-animation-duration: 0ms
+  - projects/ui-lib-custom/src/lib/toast/toast.spec.ts
+      • Updated 4 ARIA tests to reflect corrected role/aria-live behaviour
+        (role="alert" only for error; role="status" for non-error; no aria-live on items;
+         close button aria-label now "Dismiss: {summary}")
+  - projects/ui-lib-custom/src/lib/toast/toast.a11y.spec.ts (CREATED — 31 a11y tests)
+      • 7 describe blocks: container ARIA (4), item ARIA roles (5), icon accessibility (2),
+        close button accessibility (6), keyboard accessibility (3), live region correctness (4),
+        axe-core automated checks (5) — uses checkA11y(fixture) not axe(document.body);
+        region rule NOT skipped (toast has role="region" and items are inside it)
+  - projects/ui-lib-custom/src/lib/toast/README.md
+      • Added ToastMessage interface table (10 properties)
+      • Added Multiple Containers Pattern section with key routing example
+      • Added Notification Lifecycle section (enter → auto-dismiss → exit)
+      • Added CSS Custom Properties table (8 tokens)
+      • Added comprehensive Accessibility section: ARIA features table (7 rows), keyboard nav table, severity/urgency guidance
+  - docs/COMPONENT_SCORES.md
+      • Toast queue entry: ⏳ Queued → ✅ Done (Tier 1 #10)
+      • Toast score row: 9/10/9/9/9/9/9/9/9/9 avg 9.1 🟢
+  - AI_AGENT_CONTEXT.md (this file — status updated)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (ConfirmPopup handoff archived)
+State: Toast component fully evolved through all 6 phases. Score 9.1/10.
+  Phase 3 (A11y — priority):
+    • CRITICAL FIX: Removed aria-live="polite" and aria-atomic="false" from container host binding
+      — role="region" is a structural landmark, not a live region; child items manage their own
+      announcements via role
+    • CRITICAL FIX: role="alert" now only for error severity; role="status" for success/info/warn
+      — removes incorrectly assertive announcement for non-critical toasts
+    • CRITICAL FIX: Removed [attr.aria-live] from item element — redundant/ineffective when set
+      on a role="alert" or role="status" element; the role already implies the correct aria-live value
+    • MODERATE FIX: Close button aria-label now "Dismiss: {summary}" — specific when multiple
+      toasts are visible; falls back to detail then "notification"
+    • MODERATE FIX: Added @media (prefers-reduced-motion: reduce) to SCSS
+      — sets --uilib-toast-animation-duration: 0ms
+    • Created toast.a11y.spec.ts with 31 tests
+    • Pre-existing a11y features verified intact: role="region", aria-label="Notifications",
+      aria-hidden on icons, type="button" on close button, closable guard, sticky guard,
+      key filtering, timer management, DestroyRef cleanup, closingIds animation
+  Phase 1 (Architecture): No structural changes. dismiss() JSDoc updated. Architecture verified.
+    ANIMATION_DURATION_MS and counter explicitly typed. No DOCUMENT injection needed.
+  Phase 2 (DX): README fully updated — ToastMessage interface table, Multiple Containers Pattern,
+    Notification Lifecycle, CSS Custom Properties table (8 tokens), full Accessibility section.
+  Phase 4 (Performance): No structural changes. All performance patterns verified —
+    effect() reactive timers, Map O(1) lookup, DestroyRef cleanup, CSS keyframes, @for track.
+  Phase 5 (Composability): No API changes. key routing, sticky, life layering, clear(key),
+    closable all verified correct.
+  Phase 6 (Polish): No styling changes needed. Close button ring ✅ opacity ✅ transition ✅
+    animation direction per position ✅ dark mode ✅ minimal accent ✅ pointer-events ✅
+    Reduced motion override added in Phase 3.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toast/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=toast --no-coverage (60/60 PASS — 29 unit + 31 a11y)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
+Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
+  checkA11y(fixture) is correct for Toast (renders inside fixture, not appended to document.body).
+  Do NOT skip the region axe rule for Toast — it has role="region" and its items are inside it.
+  fixture.nativeElement must be cast to HTMLElement before calling querySelector (no-unsafe-call).
+Next step: Menubar hardening (Tier 2, #11) — key a11y: role=menubar, full arrow-key nav,
+  aria-haspopup, submenu keyboard control.
+
+
 Changed:
   - projects/ui-lib-custom/src/lib/tooltip/tooltip.ts
       • Added `import { DOCUMENT } from '@angular/common'`
@@ -153,54 +226,9 @@ Terminal notes: Run ESLint from bash.exe only (PowerShell returns exit 1 even on
 Next step: Tooltip hardening (Tier 1, #9) — key a11y: aria-describedby lifecycle, cleanup on element unmount.
 
 Date: 2026-05-10 [ConfirmPopup component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.ts
-      • Removed `private static nextId: number = 0` class field
-      • Added module-level `let nextConfirmPopupId: number = 0` counter (consistent with Drawer/DynamicDialog/ConfirmDialog pattern)
-      • Updated `generateId()` to use `nextConfirmPopupId` instead of `ConfirmPopup.nextId`
-      • Added `import { DOCUMENT } from '@angular/common'`
-      • Added `private readonly document: Document = inject(DOCUMENT)`
-      • Added `private previousFocusEl: HTMLElement | null = null` field
-      • Visibility effect: captures `document.activeElement` (falls back to `targetElement()`) before open;
-        restores `previousFocusEl.focus()` on close and clears the field
-      • ngOnDestroy: nulls out `previousFocusEl`
-      • Added `panelAriaLabel: Signal<string>` computed signal returning `resolvedMessage()` (accessible name for alertdialog)
-  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.html
-      • Added `[attr.aria-label]="panelAriaLabel()"` to the panel div (WCAG 4.1.2 — alertdialog must have name)
-      • Added `aria-hidden="true"` to the overlay div (decorative click-catcher hidden from AT)
-  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.a11y.spec.ts (CREATED — 30 a11y tests)
-      • 7 describe blocks: closed state (3), open-state ARIA (8), focus management (6),
-        keyboard behaviour (3), overlay dismiss (2), service-driven (3), axe-core (4)
-      • Covers: aria-label, aria-modal, aria-describedby, aria-hidden overlay/arrow/icon,
-        focus btn presence, focus restoration via accept/Escape/service, service-driven aria-label,
-        defaultFocus override, 4 axe-core scenarios
-  - projects/ui-lib-custom/src/lib/confirm-popup/README.md
-      • Replaced bare bullet-list with full ARIA features table + keyboard navigation table
-      • Documents: aria-label (from message text), aria-describedby, focus trap, focus restoration,
-        arrow/overlay aria-hidden, reduced motion, :focus-visible rings
-  - docs/COMPONENT_SCORES.md
-      • ConfirmPopup queue entry: ⏳ Queued → ✅ Done (Tier 1 #7)
-      • ConfirmPopup score row: 9/9/9/9/9/8/9/9/9/9 avg 8.9 🟢
-  - AI_AGENT_CONTEXT.md (this file — status updated to hardened)
-State: ConfirmPopup component fully evolved through all 6 phases. Score 8.9/10.
-  Phase 3 (A11y — priority):
-    • CRITICAL FIX: `aria-label` added to alertdialog panel (message text as accessible name — role=alertdialog requires accessible name per WCAG 4.1.2)
-    • CRITICAL FIX: focus restored to trigger element on close (previousFocusEl pattern, captures document.activeElement at open time, falls back to targetElement())
-    • MINOR FIX: overlay div has aria-hidden="true"
-    • Created confirm-popup.a11y.spec.ts with 30 tests (all pass)
-    • Pre-existing a11y features verified intact: role=alertdialog, aria-modal, tabindex=-1, aria-describedby, arrow aria-hidden, icon aria-hidden, FocusTrap, focusDefaultButton, Escape key, reduced motion
-  Phase 1 (Architecture): module-level nextConfirmPopupId counter replaces static class field.
-  Phase 2 (DX): README Accessibility section now comprehensive — full ARIA table + keyboard nav table.
-  Phase 4 (Performance): afterNextRender({ injector }) pattern verified injection-context-safe. lastVisible guard verified. FocusTrap lazy + deactivated on close. computeAndSetPosition in afterNextRender only. positionReady prevents flicker.
-  Phase 5 (Composability): Service + callbacks + key targeting is correct for anchored non-modal popup. No changes needed.
-  Phase 6 (Polish): SCSS verified — :focus-visible on all buttons ✅, transition on hover ✅, arrow colors match bg ✅, bootstrap border-matching arrow ✅, reduced motion 0ms ✅.
-Verification:
-  node_modules\.bin\eslint projects/ui-lib-custom/src/lib/confirm-popup/ --max-warnings 0 (CLEAN, EXIT:0)
-  node_modules\.bin\jest --testPathPatterns=confirm-popup --no-coverage (66/66 PASS — 36 unit + 30 a11y)
-  node_modules\.bin\jest --testPathPatterns=entry-points --no-coverage (95/95 PASS)
-  node_modules\.bin\ng build ui-lib-custom — Built, zero errors, zero warnings
-Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs). DOCUMENT from @angular/common must be imported alongside the Angular core imports — it's not in @angular/core.
-Next step: Popover hardening (Tier 1, #8) — key a11y: aria-expanded, aria-controls, dismiss without losing focus context.
+→ Archived to docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
 
 
 ---
+
+

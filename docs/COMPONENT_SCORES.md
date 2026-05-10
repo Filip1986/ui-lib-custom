@@ -27,7 +27,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 7   | ConfirmPopup  | `role=alertdialog` anchored, click-away without losing a11y            | ✅ Done     |
 | 8   | Popover       | `aria-expanded`, `aria-controls`, dismiss without losing focus context | ✅ Done     |
 | 9   | Tooltip       | `aria-describedby` lifecycle — attached and cleaned up correctly       | ✅ Done     |
-| 10  | Toast         | Live region (`aria-live=assertive`), dismiss keyboard access           | ⏳ Queued   |
+| 10  | Toast         | Live region (`aria-live=assertive`), dismiss keyboard access           | ✅ Done     |
 
 ### Tier 2 — Navigation & Menu Patterns
 *Focus: `role=menu/menubar/menuitem`, arrow key navigation, `aria-expanded` on submenus, `aria-current` on active items.*
@@ -246,7 +246,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Alert           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Toast           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
 | Badge           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Tag             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Chip            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

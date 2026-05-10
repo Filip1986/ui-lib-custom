@@ -4,7 +4,32 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
-Date: 2026-05-10 [ConfirmDialog component — 6-phase hardening COMPLETE]
+Date: 2026-05-10 [ConfirmPopup component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.ts
+      • Removed `private static nextId: number = 0` class field
+      • Added module-level `let nextConfirmPopupId: number = 0` counter
+      • Updated `generateId()` to use `nextConfirmPopupId` instead of `ConfirmPopup.nextId`
+      • Added `import { DOCUMENT } from '@angular/common'`
+      • Added `private readonly document: Document = inject(DOCUMENT)`
+      • Added `private previousFocusEl: HTMLElement | null = null` field
+      • Visibility effect: captures `document.activeElement` before open; restores on close
+      • Added `panelAriaLabel: Signal<string>` computed signal (accessible name for alertdialog)
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.html
+      • Added `[attr.aria-label]="panelAriaLabel()"` to the panel div
+      • Added `aria-hidden="true"` to the overlay div
+  - projects/ui-lib-custom/src/lib/confirm-popup/confirm-popup.a11y.spec.ts (CREATED — 30 a11y tests)
+  - projects/ui-lib-custom/src/lib/confirm-popup/README.md — full ARIA table + keyboard nav table
+  - docs/COMPONENT_SCORES.md — ConfirmPopup row: 9/9/9/9/9/8/9/9/9/9 avg 8.9 🟢 (Tier 1 #7 ✅ Done)
+State: ConfirmPopup fully hardened — 6 phases complete. Score 8.9/10.
+Verification:
+  eslint projects/ui-lib-custom/src/lib/confirm-popup/ --max-warnings 0 (CLEAN)
+  jest --testPathPatterns=confirm-popup --no-coverage (66/66 PASS)
+  ng build ui-lib-custom — zero errors, zero warnings
+Next step: Popover hardening (Tier 1, #8).
+
+---
+
 Changed:
   - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.ts
       • Removed `private static nextId: number = 0` class field (static lint risk)

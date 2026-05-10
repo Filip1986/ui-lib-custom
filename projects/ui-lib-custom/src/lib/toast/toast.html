@@ -2,8 +2,7 @@
   <div
     class="ui-lib-toast__item"
     [class]="itemClass(message)"
-    role="alert"
-    [attr.aria-live]="message.severity === 'error' ? 'assertive' : 'polite'"
+    [attr.role]="message.severity === 'error' ? 'alert' : 'status'"
   >
     <ui-lib-icon
       class="ui-lib-toast__icon"
@@ -23,7 +22,7 @@
       <button
         type="button"
         class="ui-lib-toast__close"
-        aria-label="Dismiss notification"
+        [attr.aria-label]="'Dismiss: ' + (message.summary || message.detail || 'notification')"
         (click)="dismiss(message.id ?? '')"
       >
         <ui-lib-icon
