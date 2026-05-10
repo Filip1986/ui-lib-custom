@@ -1,5 +1,5 @@
 <!-- Toast containers — one per position used in the demo -->
-<ui-lib-toast [position]="selectedPosition" [variant]="selectedVariant" />
+<ui-lib-toast [position]="selectedPosition()" [variant]="selectedVariant()" />
 <ui-lib-toast position="bottom-left" key="secondary" />
 
 <div class="toast-demo">
@@ -80,10 +80,10 @@
           @for (pos of positions; track pos) {
             <ui-lib-button
               type="button"
-              [appearance]="selectedPosition === pos ? 'solid' : 'outline'"
+              [appearance]="selectedPosition() === pos ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
-              (click)="selectedPosition = pos"
+              (click)="selectedPosition.set(pos)"
             >{{ pos }}</ui-lib-button>
           }
         </div>
@@ -95,10 +95,10 @@
           @for (v of variants; track v) {
             <ui-lib-button
               type="button"
-              [appearance]="selectedVariant === v ? 'solid' : 'outline'"
+              [appearance]="selectedVariant() === v ? 'solid' : 'outline'"
               severity="primary"
               size="sm"
-              (click)="selectedVariant = v"
+              (click)="selectedVariant.set(v)"
             >{{ v }}</ui-lib-button>
           }
         </div>
