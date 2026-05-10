@@ -7,13 +7,21 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { ThemeVariant } from 'ui-lib-custom/theme';
 import { ThemeEditorComponent } from './shared/theme-editor/theme-editor.component';
+import { Toast } from 'ui-lib-custom/toast';
 
 /**
  * Demo app shell that wires layout and theme controls.
  */
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, TopbarComponent, SidebarComponent, ThemeEditorComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    TopbarComponent,
+    SidebarComponent,
+    ThemeEditorComponent,
+    Toast,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Toast } from 'ui-lib-custom/toast';
-import { ToastService } from 'ui-lib-custom/toast';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
+import { Toast, ToastService } from 'ui-lib-custom/toast';
 import type { ToastPosition, ToastSeverity, ToastVariant } from 'ui-lib-custom/toast';
 import { Button } from 'ui-lib-custom/button';
 
@@ -19,10 +19,11 @@ export class ToastDemoComponent {
   private readonly toastService: ToastService = inject(ToastService);
 
   /** Currently selected position for interactive demos. */
-  public selectedPosition: ToastPosition = 'top-right';
+  public readonly selectedPosition: WritableSignal<ToastPosition> =
+    signal<ToastPosition>('top-right');
 
   /** Currently selected variant for interactive demos. */
-  public selectedVariant: ToastVariant = 'bootstrap';
+  public readonly selectedVariant: WritableSignal<ToastVariant> = signal<ToastVariant>('bootstrap');
 
   /** Available positions for the position switcher. */
   public readonly positions: ToastPosition[] = [
@@ -154,7 +155,7 @@ export class ToastDemoComponent {
     this.toastService.add({
       severity,
       summary: severity.charAt(0).toUpperCase() + severity.slice(1),
-      detail: 'Showing at ' + this.selectedPosition + ' (' + this.selectedVariant + ').',
+      detail: `Showing at ${this.selectedPosition()} (${this.selectedVariant()}).`,
       life: 5000,
     });
   }

@@ -58,8 +58,6 @@ const ANIMATION_DURATION_MS: number = 300;
     '[class]': 'hostClasses()',
     role: 'region',
     '[attr.aria-label]': '"Notifications"',
-    'aria-live': 'polite',
-    'aria-atomic': 'false',
   },
 })
 export class Toast {
@@ -95,6 +93,12 @@ export class Toast {
 
   /** Active auto-dismiss timer handles keyed by message ID. */
   private readonly timers: Map<string, ReturnType<typeof setTimeout>> = new Map<
+    string,
+    ReturnType<typeof setTimeout>
+  >();
+
+  /** Animation cleanup timer handles keyed by message ID — cleared on destroy to prevent leaks. */
+  private readonly animationTimers: Map<string, ReturnType<typeof setTimeout>> = new Map<
     string,
     ReturnType<typeof setTimeout>
   >();
@@ -162,6 +166,10 @@ export class Toast {
         clearTimeout(timer);
       }
       this.timers.clear();
+      for (const timer of this.animationTimers.values()) {
+        clearTimeout(timer);
+      }
+      this.animationTimers.clear();
     });
   }
 
@@ -216,7 +224,8 @@ export class Toast {
     );
 
     // After the animation finishes, remove the message from the service.
-    setTimeout((): void => {
+    const animTimer: ReturnType<typeof setTimeout> = setTimeout((): void => {
+      this.animationTimers.delete(messageId);
       this.toastService.remove(messageId);
       this.closingIds.update((current: Set<string>): Set<string> => {
         const next: Set<string> = new Set<string>(current);
@@ -224,5 +233,6 @@ export class Toast {
         return next;
       });
     }, ANIMATION_DURATION_MS);
+    this.animationTimers.set(messageId, animTimer);
   }
 }

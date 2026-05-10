@@ -21,11 +21,12 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Component foundation hardening + documentation completeness
 - `Active focus:** Stepper compound component complete; resuming backlog
-- **Next queue:** Popover hardening COMPLETE → Tooltip is next (Tier 1, #9); then Toast
+- **Next queue:** Tooltip is next (Tier 1, #9) — Toast is now complete
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
+- `Toast` -> ✅ complete + hardened (6-phase evolution, 53 tests — 22 unit + 31 a11y, axe-core pass, app shell wired)
 - `DynamicDialog` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `Stepper` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 - `ScrollPanel` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
@@ -121,6 +122,68 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-10 [Toast component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/toast/toast.ts
+      • Removed aria-live and aria-atomic from host metadata (was conflicting with item-level roles)
+      • Added animationTimers map to track exit-animation cleanup timeouts
+      • animationTimers cleared in destroyRef.onDestroy() — fixes memory leak during 300ms animation window
+  - projects/ui-lib-custom/src/lib/toast/toast.html
+      • Changed item role from static role="alert" to [attr.role]="error ? 'alert' : 'status'"
+      • Removed [attr.aria-live] from items (role implies live-region semantics — aria-live on role="alert" is invalid)
+      • Changed close button aria-label from static "Dismiss notification" to contextual "Dismiss: {summary}"
+  - projects/ui-lib-custom/src/lib/toast/toast.scss
+      • Added @media (prefers-reduced-motion: reduce) block setting --uilib-toast-animation-duration: 0ms
+  - projects/ui-lib-custom/src/lib/toast/toast.a11y.spec.ts (CREATED — 31 a11y tests)
+      • 6 describe blocks: container ARIA (4), item roles per severity (5), close button (5),
+        severity icon (1), multiple messages (2), axe-core (5)
+      • Covers: role=region, no aria-live on host, role=alert for error, role=status for others,
+        no standalone aria-live on items, contextual close labels, aria-hidden icons, 5 axe-core scenarios
+  - projects/ui-lib-custom/src/lib/toast/toast.spec.ts
+      • Updated 4 stale ARIA assertions to match new correct behavior
+        (role="status" for non-error, no aria-live attribute, contextual close label)
+  - projects/ui-lib-custom/src/lib/toast/README.md
+      • Complete rewrite — ARIA features table, ARIA design rationale section, keyboard nav table,
+        consumer responsibilities, CSS custom properties table, public properties table
+  - projects/demo/src/app/pages/toast/toast-demo.component.ts
+      • Converted selectedPosition and selectedVariant from plain properties to WritableSignal
+        (plain properties don't propagate in zoneless OnPush)
+      • Fixed showPositioned() to call signal getters
+  - projects/demo/src/app/pages/toast/toast-demo.component.html
+      • Updated [position] and [variant] bindings to call signal getters selectedPosition()/selectedVariant()
+      • Picker button comparisons and (click) handlers updated to use signal API
+  - projects/demo/src/app/app.html
+      • Added <ui-lib-toast position="top-right" /> to the app shell (outside router outlet)
+  - projects/demo/src/app/app.ts
+      • Added Toast import and to the imports array
+  - docs/COMPONENT_SCORES.md
+      • Toast row: 8/9/8/8/8/8/9/8/9/8 avg 8.3 🟢 (Tier 1 #10 → ✅ Done)
+  - AI_AGENT_CONTEXT.md (this file — status updated)
+State: Toast fully evolved through all 6 phases. Score 8.3/10.
+  Phase 1 (Architecture): animationTimers tracking added — fixes exit-animation memory leak.
+  Phase 2 (DX): README complete — API tables, ARIA table, keyboard nav, consumer responsibilities.
+  Phase 3 (A11y — priority):
+    • CRITICAL FIX: item role now conditional (role=alert for error, role=status for non-error)
+    • CRITICAL FIX: removed conflicting aria-live from host AND from individual items
+    • CRITICAL FIX: close button label is now contextual "Dismiss: {summary}" per WCAG 2.4.6
+    • MINOR FIX: prefers-reduced-motion collapses animation to 0ms
+    • Created toast.a11y.spec.ts with 31 tests (all pass)
+  Phase 4 (Performance): animationTimers cleaned up on destroy. Auto-dismiss timers already tracked.
+    Signal-based visibleMessages computed efficiently. No unnecessary re-renders.
+  Phase 5 (Composability): Service + key-based multi-container pattern is the correct story for Toast.
+    No changes needed — composability is correct.
+  Phase 6 (Polish): CSS slide-direction per-position via custom properties ✅, severity palettes ✅,
+    dark mode ✅, three design variants ✅, reduced-motion ✅.
+Verification:
+  eslint projects/ui-lib-custom/src/lib/toast/ --max-warnings 0 (CLEAN, EXIT:0)
+  eslint projects/demo/src/app/pages/toast/ projects/demo/src/app/app.ts --max-warnings 0 (CLEAN, EXIT:0)
+  jest --testPathPatterns=toast --no-coverage (53/53 PASS — 22 unit + 31 a11y)
+  ng build ui-lib-custom — Built, zero errors, zero warnings
+Terminal notes: node_modules lives in the main repo root, not the worktree. Run binaries as
+  /d/Work/Personal/Github/ui-lib-custom/node_modules/.bin/<tool> from the worktree directory.
+  ESLint must run from bash.exe — PowerShell returns exit 1 even on clean runs.
+Next step: Tooltip hardening (Tier 1, #9) — key a11y: aria-describedby lifecycle, cleanup on element unmount.
 
 Date: 2026-05-10 [Popover component — 6-phase hardening COMPLETE]
 Changed:

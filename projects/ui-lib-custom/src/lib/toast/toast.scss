@@ -298,6 +298,14 @@ ui-lib-toast.ui-lib-toast--minimal .ui-lib-toast__item--error {
   --uilib-toast-item-border-color: transparent;
 }
 
+// ─── Reduced motion ───────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-toast {
+    --uilib-toast-animation-duration: 0ms;
+  }
+}
+
 // ─── Dark mode ────────────────────────────────────────────────────────────────
 
 [data-theme='dark'] ui-lib-toast .ui-lib-toast__item--success {
