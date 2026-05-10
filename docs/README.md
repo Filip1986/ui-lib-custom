@@ -2,10 +2,13 @@
 
 Welcome to the UI Components Library documentation! This documentation is organized to help you find what you need quickly.
 
+> 🌟 **New here?** Start with the **[Vision — why this library exists and where it's going](VISION.md)**.
+
 ## 📖 Documentation Structure
 
 ```
 docs/
+├── VISION.md            # Project vision, philosophy, and long-term goals
 ├── getting-started/     # Start here if you're new
 ├── guides/              # How-to guides and examples
 ├── research/            # Research notes and parity investigations
@@ -160,6 +163,18 @@ npm run build-storybook
 
 ---
 
+## 🌟 Vision
+
+**Understand the why behind the library:**
+
+- **[Vision](VISION.md)** - Philosophy, strategic positioning, emotional design goals, and long-term roadmap
+  - Core philosophy (Angular-native, DX-first, A11y as architecture, performance, composability)
+  - Strategic positioning and the "wow factor"
+  - AI-native development philosophy
+  - Long-term evolution from component library → UI ecosystem → enterprise platform
+
+---
+
 ## 🏗️ Architecture
 
 **Understand the system design:**
@@ -187,6 +202,7 @@ Planning and parity research docs are consolidated under:
 
 | I want to... | Go to... |
 |-------------|----------|
+| **Understand the why** | [Vision](VISION.md) |
 | **Get started quickly** | [Quick Start Guide](getting-started/QUICK_START.md) |
 | **Test in a new project** | [Testing Guide](getting-started/TEST_GUIDE.md) |
 | **See real-world examples** | [Integration Examples](guides/INTEGRATION_EXAMPLE.md) |
@@ -207,7 +223,8 @@ Planning and parity research docs are consolidated under:
 4. [Integration Examples](guides/INTEGRATION_EXAMPLE.md) - Real-world examples
 
 **🚀 Contributor (Developing the Library)**
-1. [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for new components
+1. [Vision](VISION.md) - Understand the goals and philosophy
+2. [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) - End-to-end workflow for new components
 2. [Architecture Documentation](architecture/ARCHITECTURE.md) - System design
 3. [Project Summary](reference/project/PROJECT_SUMMARY.md) - What's been built
 4. [Update Log](reference/project/UPDATE_LOG.md) - Version history and upgrades
