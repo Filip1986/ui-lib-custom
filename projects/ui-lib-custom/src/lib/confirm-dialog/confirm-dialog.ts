@@ -33,6 +33,9 @@ import type {
   ConfirmDialogVariant,
 } from './confirm-dialog.types';
 
+// Module-level counter used as a fallback when crypto.randomUUID() is unavailable.
+let nextConfirmDialogId: number = 0;
+
 /**
  * ConfirmDialog — a modal confirmation overlay with configurable accept/reject actions.
  *
@@ -63,8 +66,6 @@ import type {
   encapsulation: ViewEncapsulation.None,
 })
 export class ConfirmDialog implements OnDestroy {
-  private static nextId: number = 0;
-
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly confirmationService: ConfirmationService = inject(ConfirmationService);
   private readonly document: Document = inject(DOCUMENT);
@@ -73,6 +74,7 @@ export class ConfirmDialog implements OnDestroy {
     inject<ElementRef<HTMLElement>>(ElementRef);
 
   private focusTrap: FocusTrap | null = null;
+  private previousFocusEl: HTMLElement | null = null;
   private readonly previousBodyOverflow: WritableSignal<string | null> = signal<string | null>(
     null
   );
@@ -327,6 +329,8 @@ export class ConfirmDialog implements OnDestroy {
       this.lastVisible = isVisible;
 
       if (isVisible) {
+        // Capture the element that has focus right now, before the dialog takes over.
+        this.previousFocusEl = this.document.activeElement as HTMLElement | null;
         this.applyScrollLock();
         afterNextRender(
           (): void => {
@@ -340,6 +344,9 @@ export class ConfirmDialog implements OnDestroy {
       } else {
         this.releaseScrollLock();
         this.deactivateFocusTrap();
+        // Restore focus to the element that had it before the dialog opened.
+        this.previousFocusEl?.focus();
+        this.previousFocusEl = null;
       }
     });
   }
@@ -347,6 +354,7 @@ export class ConfirmDialog implements OnDestroy {
   public ngOnDestroy(): void {
     this.releaseScrollLock();
     this.deactivateFocusTrap();
+    this.previousFocusEl = null;
   }
 
   /** Handle backdrop clicks — rejects and closes when dismissableMask is enabled. */
@@ -452,7 +460,7 @@ export class ConfirmDialog implements OnDestroy {
     ) {
       return `ui-lib-confirm-dialog-${globalThis.crypto.randomUUID()}`;
     }
-    ConfirmDialog.nextId += 1;
-    return `ui-lib-confirm-dialog-${ConfirmDialog.nextId}`;
+    nextConfirmDialogId += 1;
+    return `ui-lib-confirm-dialog-${nextConfirmDialogId}`;
   }
 }

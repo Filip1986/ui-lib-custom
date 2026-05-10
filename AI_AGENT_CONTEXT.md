@@ -48,7 +48,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - `BottomSheet` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
-- `ConfirmDialog` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
+- `ConfirmDialog` -> ✅ complete + hardened (6-phase evolution, score 8.3/10, 59 tests — 31 unit + 28 a11y)
 
 - `ConfirmPopup` -> ✅ complete (implementation/tests/entry-point/demo/ESLint/build all green)
 
@@ -121,6 +121,55 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-10 [ConfirmDialog component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.ts
+      • Removed `private static nextId: number = 0` class field (static lint risk)
+      • Added module-level `let nextConfirmDialogId: number = 0` counter (consistent with Drawer/DynamicDialog pattern)
+      • Updated `generateId()` to use `nextConfirmDialogId` instead of `ConfirmDialog.nextId`
+      • (Previously added in prior session): `private previousFocusEl: HTMLElement | null = null`;
+        visibility effect captures `document.activeElement` on open, restores on close; ngOnDestroy clears field
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.scss
+      • Added `transition: background-color 120ms ease, color 120ms ease` to close button
+      • Added `&:focus-visible { outline: 2px solid var(--uilib-color-primary-400, #818cf8); outline-offset: 2px; }` to close button
+      (Previously added in prior session): `aria-hidden="true"` on backdrop div
+  - projects/ui-lib-custom/src/lib/confirm-dialog/README.md
+      • Replaced bare bullet-list accessibility section with full table + keyboard nav table
+      • Documents: role=alertdialog, aria-modal, aria-labelledby, aria-describedby, FocusTrap,
+        defaultFocus, focus restoration on close, Escape key, aria-label="Close", backdrop aria-hidden,
+        scroll lock, reduced motion, focus rings
+  - projects/ui-lib-custom/src/lib/confirm-dialog/confirm-dialog.a11y.spec.ts (created in prior session)
+      • 28 a11y tests — closed state, open-state ARIA, focus management (incl. focus restoration),
+        keyboard behaviour, backdrop, service-driven, 4 axe-core checks
+  - docs/COMPONENT_SCORES.md
+      • ConfirmDialog row: 9/9/8/8/8/8/8/8/9/8 avg 8.3 🟢 (Tier 1 #6 → ✅ Done)
+  - AI_AGENT_CONTEXT.md (this file)
+
+State: ConfirmDialog component fully evolved through all 6 phases. Score 8.3/10.
+  Phase 1 (Architecture): module-level nextConfirmDialogId counter replaces static class field.
+  Phase 2 (DX): README.md Accessibility section now comprehensive — full table + keyboard nav table.
+  Phase 3 (A11y — priority, done in prior session):
+    • CRITICAL FIX: Focus restored to trigger element on accept/reject/Escape/close-button
+    • MINOR FIX: Backdrop has aria-hidden="true"
+    • 28 a11y tests in confirm-dialog.a11y.spec.ts
+    • Pre-existing: role=alertdialog, aria-modal, aria-labelledby, aria-describedby, tabindex=-1,
+      aria-label="Close", SVG aria-hidden, FocusTrap, Escape key, scroll lock, reduced-motion
+  Phase 4 (Performance): afterNextRender({ injector }) pattern is correct and injection-context-safe.
+    FocusTrap created lazily, reused across open/close cycles. lastVisible guard prevents unnecessary work.
+  Phase 5 (Composability): Service+callbacks pattern is the correct composability story for a modal
+    confirmation dialog. Key-based targeting supports multi-instance on same page. No changes needed.
+  Phase 6 (Polish): close button now has transition + :focus-visible ring (matched accept/reject buttons).
+
+Verification:
+  node_modules\.bin\eslint projects/ui-lib-custom/src/lib/confirm-dialog/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules\.bin\jest --testPathPatterns=confirm-dialog --no-coverage (59/59 PASS — 31 unit + 28 a11y)
+  node_modules\.bin\ng build ui-lib-custom — Built, zero errors, zero warnings
+
+Terminal notes: Module-level `let` counter requires explicit `: number` type annotation — lint rule
+  @typescript-eslint/typedef fires without it. Always annotate module-level variables in this project.
+
+Next step: ConfirmPopup hardening (Tier 1, #7) — key a11y: role=alertdialog anchored, focus restoration, click-away.
 
 Date: 2026-05-10 [Drawer component — 6-phase evolution hardening]
 Changed:
