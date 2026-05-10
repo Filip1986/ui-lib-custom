@@ -35,7 +35,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | #    | Component   | Key a11y concern                                                                | Status     |
 |------|-------------|---------------------------------------------------------------------------------|------------|
 | 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done     |
-| 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ⏳ Queued   |
+| 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done     |
 | 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ⏳ Queued   |
 | 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ⏳ Queued   |
 | 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ⏳ Queued   |
@@ -213,7 +213,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Breadcrumb  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ContextMenu | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Menu        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | MegaMenu    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | PanelMenu   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -339,4 +339,3 @@ Then update the table above and record the session in `AI_AGENT_CONTEXT.md`.
 | [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)   | The 6-phase AI workflow that produces these scores   |
 | [Vision — Component Philosophy](VISION.md#component-philosophy)         | The 10-layer quality model and ≥8 gate               |
 | [Accessibility Guide](reference/systems/ACCESSIBILITY.md)               | Detail behind the A11y score category                |
-

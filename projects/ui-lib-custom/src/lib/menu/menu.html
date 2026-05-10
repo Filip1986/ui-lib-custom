@@ -6,17 +6,14 @@
     [class.ui-lib-menu__panel--positioned]="!popup() || isPositioned()"
     [style.left.px]="popup() ? menuX() : null"
     [style.top.px]="popup() ? menuY() : null"
+    [attr.id]="menuId"
     role="menu"
     [attr.aria-label]="ariaLabel()"
   >
     <ul class="ui-lib-menu__list" role="presentation">
       @for (item of visibleItems(); track $index) {
         @if (item.separator) {
-          <li
-            class="ui-lib-menu__separator"
-            role="separator"
-            aria-hidden="true"
-          ></li>
+          <li class="ui-lib-menu__separator" role="separator"></li>
         } @else if (item.items?.length) {
           <!-- Group header with labelled child items -->
           <li class="ui-lib-menu__item-group" role="presentation">
@@ -33,11 +30,7 @@
             >
               @for (groupItem of getVisibleGroupItems(item); track $index) {
                 @if (groupItem.separator) {
-                  <li
-                    class="ui-lib-menu__separator"
-                    role="separator"
-                    aria-hidden="true"
-                  ></li>
+                  <li class="ui-lib-menu__separator" role="separator"></li>
                 } @else {
                   <li
                     class="ui-lib-menu__item"
@@ -54,7 +47,7 @@
                         [href]="groupItem.url"
                         [attr.target]="groupItem.target || null"
                         [attr.aria-disabled]="groupItem.disabled ? 'true' : null"
-                        [attr.tabindex]="groupItem.disabled ? '-1' : '0'"
+                        [attr.tabindex]="getTabIndex(groupItem, getFlatIndex(groupItem))"
                         (click)="onItemActivate($event, groupItem)"
                         (keydown)="onItemKeyDown($event, groupItem)"
                         (focus)="onItemFocus(groupItem)"
@@ -74,7 +67,7 @@
                           : 'ui-lib-menu__link'"
                         role="menuitem"
                         [attr.aria-disabled]="groupItem.disabled ? 'true' : null"
-                        [attr.tabindex]="groupItem.disabled ? '-1' : '0'"
+                        [attr.tabindex]="getTabIndex(groupItem, getFlatIndex(groupItem))"
                         (click)="onItemActivate($event, groupItem)"
                         (keydown)="onItemKeyDown($event, groupItem)"
                         (focus)="onItemFocus(groupItem)"
@@ -109,7 +102,7 @@
                 [href]="item.url"
                 [attr.target]="item.target || null"
                 [attr.aria-disabled]="item.disabled ? 'true' : null"
-                [attr.tabindex]="item.disabled ? '-1' : '0'"
+                [attr.tabindex]="getTabIndex(item, getFlatIndex(item))"
                 (click)="onItemActivate($event, item)"
                 (keydown)="onItemKeyDown($event, item)"
                 (focus)="onItemFocus(item)"
@@ -129,7 +122,7 @@
                   : 'ui-lib-menu__link'"
                 role="menuitem"
                 [attr.aria-disabled]="item.disabled ? 'true' : null"
-                [attr.tabindex]="item.disabled ? '-1' : '0'"
+                [attr.tabindex]="getTabIndex(item, getFlatIndex(item))"
                 (click)="onItemActivate($event, item)"
                 (keydown)="onItemKeyDown($event, item)"
                 (focus)="onItemFocus(item)"

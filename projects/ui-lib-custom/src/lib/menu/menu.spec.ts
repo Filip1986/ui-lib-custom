@@ -535,20 +535,22 @@ describe('Menu', (): void => {
       }
     });
 
-    it('should apply tabindex=0 to enabled items', (): void => {
-      const fixture: ComponentFixture<HostComponent> = createFixture([{ label: 'Enabled' }]);
-      const link: HTMLElement | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector<HTMLElement>('.ui-lib-menu__link');
-      expect(link?.getAttribute('tabindex')).toBe('0');
+    it('should apply roving tabindex to enabled items', (): void => {
+      const fixture: ComponentFixture<HostComponent> = createFixture([
+        { label: 'First' },
+        { label: 'Second' },
+      ]);
+      const links: HTMLElement[] = getMenuLinks(fixture);
+      expect(links[0]?.getAttribute('tabindex')).toBe('0');
+      expect(links[1]?.getAttribute('tabindex')).toBe('-1');
     });
 
-    it('should apply aria-hidden to separator elements', (): void => {
+    it('should not apply aria-hidden to separator elements', (): void => {
       const fixture: ComponentFixture<HostComponent> = createFixture();
       const separator: HTMLElement | null = (
         fixture.nativeElement as HTMLElement
       ).querySelector<HTMLElement>('.ui-lib-menu__separator');
-      expect(separator?.getAttribute('aria-hidden')).toBe('true');
+      expect(separator?.hasAttribute('aria-hidden')).toBe(false);
     });
 
     it('should apply aria-hidden to group label elements', (): void => {

@@ -4,6 +4,36 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-10 [Toast component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/toast/toast.ts
+      • CRITICAL FIX: Removed aria-live="polite" and aria-atomic="false" from container host binding
+        — role="region" is a structural landmark, not a live region; added explanatory comment
+      • Updated dismiss() JSDoc to document animation delay and no-op safety
+  - projects/ui-lib-custom/src/lib/toast/toast.html
+      • CRITICAL FIX: [attr.role] now conditional — role="alert" for error severity only, role="status" for success/info/warn
+      • CRITICAL FIX: Removed [attr.aria-live] binding — redundant/ineffective (role already implies live region urgency)
+      • MODERATE FIX: Close button aria-label updated to "Dismiss: {summary}" — falls back to detail then "notification"
+  - projects/ui-lib-custom/src/lib/toast/toast.scss
+      • MODERATE FIX: Added @media (prefers-reduced-motion: reduce) — sets --uilib-toast-animation-duration: 0ms
+  - projects/ui-lib-custom/src/lib/toast/toast.spec.ts
+      • Updated 4 ARIA tests to reflect corrected role/aria-live behaviour
+  - projects/ui-lib-custom/src/lib/toast/toast.a11y.spec.ts (CREATED — 31 a11y tests)
+  - projects/ui-lib-custom/src/lib/toast/README.md
+      • Added ToastMessage interface table, Multiple Containers Pattern, Lifecycle, CSS vars, Accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Toast queue entry: ⏳ Queued → ✅ Done (Tier 1 #10)
+      • Toast score row: 9/10/9/9/9/9/9/9/9/9 avg 9.1 🟢
+  - AI_AGENT_CONTEXT.md (this file — status updated)
+State: Toast component fully evolved through all 6 phases. Score 9.1/10.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toast/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=toast --no-coverage (60/60 PASS — 29 unit + 31 a11y)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
+Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
+Next step: Menubar hardening (Tier 2, #11).
+
 Date: 2026-05-10 [Popover component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/popover/popover.ts

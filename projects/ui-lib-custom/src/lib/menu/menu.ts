@@ -28,6 +28,9 @@ export type { MenuItem, MenuItemCommandEvent, MenuSize, MenuVariant } from './me
 /** Default accessible label exported for test assertions. */
 export const MENU_DEFAULT_ARIA_LABEL: string = 'Menu';
 
+/** Auto-incrementing counter to generate unique IDs for each Menu instance. */
+let nextMenuId: number = 0;
+
 /**
  * Menu component — a panel of navigable items. Supports both static (inline)
  * and popup modes. Items can be grouped under labelled headers, separated by
@@ -113,6 +116,15 @@ export class Menu implements OnDestroy {
   /** Index within `flatFocusableItems()` of the currently focused item. */
   public readonly focusedFlatIndex: WritableSignal<number> = signal<number>(-1);
 
+  /**
+   * Index of the item that currently holds the tab stop (roving tabindex).
+   * Only this item gets `tabindex="0"`; all others get `-1`.
+   */
+  public readonly rovingIndex: WritableSignal<number> = signal<number>(0);
+
+  /** Unique ID for this Menu instance. */
+  public readonly menuId: string = this.generateId();
+
   // ── Dependencies ──────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
@@ -120,6 +132,7 @@ export class Menu implements OnDestroy {
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector: Injector = inject(Injector);
+  private previousFocusEl: HTMLElement | null = null;
 
   // ── View children ─────────────────────────────────────────────────────────
 
@@ -186,7 +199,7 @@ export class Menu implements OnDestroy {
 
   private readonly clickOutsideHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
     if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-      this.hide();
+      this.hide(false);
     }
   };
 
@@ -194,7 +207,7 @@ export class Menu implements OnDestroy {
     event: KeyboardEvent
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
-      this.hide();
+      this.hide(true);
     }
   };
 
@@ -261,6 +274,7 @@ export class Menu implements OnDestroy {
     }
     event.stopPropagation();
     const target: EventTarget | null = event.currentTarget;
+    this.capturePreviousFocus(target);
     if (target instanceof HTMLElement) {
       const rect: DOMRect = target.getBoundingClientRect();
       this.menuX.set(rect.left);
@@ -274,11 +288,16 @@ export class Menu implements OnDestroy {
   }
 
   /** Hides the popup menu. No-op when already hidden or when `popup` is false. */
-  public hide(): void {
+  public hide(restoreFocus: boolean = false): void {
     if (!this.popup() || !this.isVisible()) {
       return;
     }
     this.isVisible.set(false);
+    if (restoreFocus) {
+      this.restoreFocus();
+    } else {
+      this.previousFocusEl = null;
+    }
     this.menuHide.emit();
   }
 
@@ -295,6 +314,14 @@ export class Menu implements OnDestroy {
    */
   public getFlatIndex(item: MenuItem): number {
     return this.flatFocusableItems().indexOf(item);
+  }
+
+  /** Returns the correct tabindex value for a menu item (roving tabindex). */
+  public getTabIndex(item: MenuItem, flatIndex: number): string {
+    if (item.disabled) {
+      return '-1';
+    }
+    return flatIndex === this.rovingIndex() ? '0' : '-1';
   }
 
   // ── Event handlers (called from template) ────────────────────────────────
@@ -353,10 +380,16 @@ export class Menu implements OnDestroy {
         this.onItemActivate(event, item);
         break;
       }
+      case KEYBOARD_KEYS.Tab: {
+        if (this.popup()) {
+          this.hide(false);
+        }
+        break;
+      }
       case KEYBOARD_KEYS.Escape: {
         if (this.popup()) {
           event.preventDefault();
-          this.hide();
+          this.hide(true);
         }
         break;
       }
@@ -365,7 +398,9 @@ export class Menu implements OnDestroy {
 
   /** Tracks focus changes to update `focusedFlatIndex`. */
   public onItemFocus(item: MenuItem): void {
-    this.focusedFlatIndex.set(this.getFlatIndex(item));
+    const flatIndex: number = this.getFlatIndex(item);
+    this.focusedFlatIndex.set(flatIndex);
+    this.rovingIndex.set(flatIndex);
   }
 
   // ── Private helpers ───────────────────────────────────────────────────────
@@ -373,10 +408,11 @@ export class Menu implements OnDestroy {
   /** Moves keyboard focus forward or backward through the flat focusable list. */
   private moveFocus(fromIndex: number, direction: 1 | -1): void {
     const total: number = this.flatFocusableItems().length;
-    const nextIndex: number = fromIndex + direction;
-    if (nextIndex >= 0 && nextIndex < total) {
-      this.focusByFlatIndex(nextIndex);
+    if (total === 0) {
+      return;
     }
+    const nextIndex: number = (fromIndex + direction + total) % total;
+    this.focusByFlatIndex(nextIndex);
   }
 
   /**
@@ -393,9 +429,42 @@ export class Menu implements OnDestroy {
     );
     const link: HTMLElement | undefined = links[index];
     if (link) {
+      this.rovingIndex.set(index);
       this.focusedFlatIndex.set(index);
       link.focus();
     }
+  }
+
+  /** Restores focus to the previously focused trigger element. */
+  private restoreFocus(): void {
+    this.previousFocusEl?.focus();
+    this.previousFocusEl = null;
+  }
+
+  /** Captures the best focus restoration target before the popup opens. */
+  private capturePreviousFocus(target: EventTarget | null): void {
+    const activeElement: HTMLElement | null = this.documentRef.activeElement as HTMLElement | null;
+    if (activeElement && activeElement !== this.documentRef.body) {
+      this.previousFocusEl = activeElement;
+      return;
+    }
+    if (target instanceof HTMLElement) {
+      this.previousFocusEl = target;
+      return;
+    }
+    this.previousFocusEl = null;
+  }
+
+  /** Generates a stable unique ID for this Menu instance. */
+  private generateId(): string {
+    if (
+      typeof globalThis.crypto !== 'undefined' &&
+      typeof globalThis.crypto.randomUUID === 'function'
+    ) {
+      return `uilib-menu-${globalThis.crypto.randomUUID()}`;
+    }
+    nextMenuId += 1;
+    return `uilib-menu-${Date.now()}-${nextMenuId}-${Math.random().toString(36).slice(2, 8)}`;
   }
 
   /**

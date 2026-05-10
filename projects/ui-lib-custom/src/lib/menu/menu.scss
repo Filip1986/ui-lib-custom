@@ -90,11 +90,15 @@ ui-lib-menu .ui-lib-menu__panel--popup {
 
   // Hidden until position is adjusted to prevent a one-frame flash
   opacity: 0;
-  transition: opacity 0.08s ease;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.1s ease,
+    transform 0.1s ease;
 }
 
 ui-lib-menu .ui-lib-menu__panel--positioned {
   opacity: 1;
+  transform: translateY(0);
 }
 
 // ── List ────────────────────────────────────────────────────────────────────
@@ -276,4 +280,14 @@ ui-lib-menu.ui-lib-menu--variant-minimal .ui-lib-menu__link {
   --uilib-menu-item-color-disabled: var(--uilib-color-neutral-600, #4b5563);
   --uilib-menu-group-label-color: var(--uilib-color-neutral-400, #9ca3af);
   --uilib-menu-separator-color: var(--uilib-color-neutral-700, #374151);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-menu .ui-lib-menu__panel--popup {
+    transition: none;
+  }
+
+  ui-lib-menu .ui-lib-menu__link {
+    transition: none;
+  }
 }
