@@ -2,39 +2,26 @@
 
 ## Overview
 
-A form input with floating label modes, validation states, and optional helpers (clear button, password toggle, counter). Built with standalone + OnPush and CSS-variable theming.
+A form input with floating label modes, validation states, and optional helpers (clear button, password toggle, character counter). Implements `ControlValueAccessor` — use `ngModel` or `formControlName`. Built with standalone + OnPush and CSS-variable theming.
 
-**Import**
+**Selector:** `ui-lib-input`
+**Package:** `ui-lib-custom/input`
+
 ```typescript
 import { UiLibInput } from 'ui-lib-custom/input';
 ```
-
-**Location:** `projects/ui-lib-custom/src/lib/input/input.ts`
 
 ---
 
 ## Features
 
-- ✅ Signal-powered inputs for reactive updates.
-- 🎨 CSS-variable theming with design-token fallbacks.
-- ♿ Accessible validation and required states.
-- 🧪 ControlValueAccessor support for template-driven and reactive forms.
-- 🧩 Floating label modes: over, in, on.
-- 🧰 Optional clear button, password toggle, and character counter.
-
----
-
-## Usage
-```typescript
-import { UiLibInput } from 'ui-lib-custom/input';
-
-@Component({
-  standalone: true,
-  imports: [UiLibInput],
-  template: `<ui-lib-input label="Email" placeholder="you@example.com" />`
-})
-export class Example {}
-```
+- Signal-powered inputs for reactive updates
+- CSS-variable theming with design-token fallbacks
+- Accessible validation and required states (`aria-invalid`, `aria-describedby`, `aria-required`)
+- `ControlValueAccessor` support for template-driven and reactive forms
+- Floating label modes: `over`, `in`, `out`
+- Optional clear button, password toggle, and character counter
+- Content projection slots for prefix and suffix addons
 
 ---
 
@@ -43,63 +30,106 @@ export class Example {}
 ### Inputs
 
 | Input | Type | Default | Description |
-| --- | --- | --- | --- |
-| `id` | `string \| null` | `null` | Custom input id (auto-generated when null). |
-| `name` | `string \| null` | `null` | Input name attribute. |
-| `variant` | `InputVariant` | `'material'` | Visual style. |
-| `type` | `InputType` | `'text'` | Input type. |
-| `label` | `string` | `''` | Label text. |
-| `labelFloat` | `InputLabelFloat` | `'over'` | Floating label mode. |
-| `placeholder` | `string` | `''` | Placeholder text. |
-| `error` | `string` | `''` | Error message; non-empty sets error styles. |
-| `disabled` | `boolean` | `false` | Disabled state. |
-| `required` | `boolean` | `false` | Required state (adds indicator + aria-required). |
-| `showCounter` | `boolean` | `false` | Show character counter when `maxLength` is set. |
-| `maxLength` | `number \| null` | `null` | Maximum length for counter display. |
-| `showClear` | `boolean` | `false` | Show clear button when value is non-empty. |
-| `showTogglePassword` | `boolean` | `false` | Show toggle button for password visibility. |
+|---|---|---|---|
+| `id` | `string \| null` | `null` | Forwarded to the native `<input>` id (auto-generated when null) |
+| `name` | `string \| null` | `null` | Forwarded to the native `<input>` name attribute |
+| `label` | `string` | `''` | Rendered as a `<label>` element associated with the input |
+| `variant` | `InputVariant \| null` | `null` | Visual style; inherits from global theme when null |
+| `size` | `InputSize` | `'md'` | Size scale |
+| `type` | `InputType` | `'text'` | Any valid HTML input type |
+| `labelFloat` | `InputLabelFloat` | `'over'` | Label position / floating behaviour |
+| `placeholder` | `string` | `''` | Placeholder text |
+| `error` | `string \| null` | `null` | Error message rendered below the input; announces via live region |
+| `disabled` | `boolean` | `false` | Disabled state |
+| `required` | `boolean` | `false` | Required state — adds visual indicator and `aria-required` |
+| `showCounter` | `boolean` | `false` | Shows character count; requires `maxLength` to display the fraction |
+| `maxLength` | `number \| null` | `null` | Maximum length for counter display |
+| `showClear` | `boolean` | `false` | Shows an inline clear button when the field has a value |
+| `showTogglePassword` | `boolean` | `false` | Shows a visibility toggle button; only meaningful when `type="password"` |
 
 ### Outputs
 
 None. Use Angular forms bindings: `[(ngModel)]` or `formControlName`.
 
 ### Types
+
 ```typescript
-type InputVariant = 'material' | 'bootstrap' | 'minimal';
-type InputLabelFloat = 'over' | 'in' | 'on';
-type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url';
+type InputVariant   = 'material' | 'bootstrap' | 'minimal';
+type InputSize      = 'sm' | 'md' | 'lg';
+type InputLabelFloat = 'over' | 'in' | 'out';
+type InputType      = 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url';
 ```
+
+---
+
+## Content Projection
+
+The input supports two named slots for inline addons:
+
+```html
+<ui-lib-input label="Username" [(ngModel)]="username">
+  <span prefix>@</span>
+</ui-lib-input>
+
+<ui-lib-input label="Search" [(ngModel)]="query">
+  <ui-lib-icon suffix icon="search" />
+</ui-lib-input>
+```
+
+| Slot | Selector | Position |
+|---|---|---|
+| Prefix | `[prefix]` | Inside the field, before the input |
+| Suffix | `[suffix]` | Inside the field, after the input |
+
+> The `label` input renders a `<label>` element — it is not projected content. Prefix/suffix elements must carry the `prefix` or `suffix` attribute selector.
 
 ---
 
 ## Floating Label Modes
 
-| Mode | Behavior |
-| --- | --- |
-| `over` | Label sits above the field; placeholder remains visible. |
-| `in` | Label floats inside the field; moves on focus or when value exists. |
-| `on` | Label floats above with background chip; useful for outlined styles. |
+| Mode | Behaviour |
+|---|---|
+| `over` | Label sits above the field; placeholder remains visible at all times |
+| `in` | Label floats inside the field and lifts on focus or when a value exists |
+| `out` | Label is always rendered above the field boundary (never inside) |
 
 ---
 
-## Validation States
+## Form Integration
 
-- Error state is triggered when `error` has a non-empty value.
-- Required indicator renders when `required=true`.
-- `aria-invalid` and `aria-describedby` are set when an error is present.
-- Error messages are announced to screen readers when they change.
-
----
-
-## Error Announcements
-
-Form errors are automatically announced to screen readers:
+### Template-driven
 
 ```html
-<ui-lib-input label="Email" [error]="emailError" />
+<ui-lib-input name="email" label="Email" [(ngModel)]="email" />
 ```
 
-When `error` changes, the message is announced via an aria-live region.
+### Reactive Forms
+
+```html
+<form [formGroup]="form">
+  <ui-lib-input label="Email" formControlName="email" />
+</form>
+```
+
+### Form State Styling
+
+When used with Angular forms the host element receives `ng-touched`, `ng-dirty`, `ng-invalid`, and `ng-disabled` classes. Styles react via CSS variables:
+
+| Variable | Purpose |
+|---|---|
+| `--uilib-input-border-touched` | Border color when the control is touched |
+| `--uilib-input-border-dirty` | Border color when the control is dirty |
+| `--uilib-input-error` | Border and text color when invalid |
+
+---
+
+## Validation & Error Announcements
+
+Error state is triggered when `error` is a non-empty string. The message is rendered below the input and announced to screen readers via an `aria-live` region.
+
+```html
+<ui-lib-input label="Email" [error]="emailError" [(ngModel)]="email" />
+```
 
 ### Manual Announcements
 
@@ -124,100 +154,69 @@ export class MyComponent {
 ## Theming & CSS Variables
 
 | Variable | Purpose |
-| --- | --- |
-| `--uilib-input-bg` | Field background. |
-| `--uilib-input-border` | Field border. |
-| `--uilib-input-border-focus` | Focus border color. |
-| `--uilib-input-text` | Input text color. |
-| `--uilib-input-placeholder` | Placeholder + helper color. |
-| `--uilib-input-radius` | Border radius. |
-| `--uilib-input-error` | Error color. |
-| `--uilib-input-label-color` | Label color. |
-| `--uilib-input-label-bg` | Floating label background (mode `on`). |
-| `--uilib-input-label-floating-scale` | Floating label scale. |
-| `--uilib-input-label-offset-x` | Floating label x offset. |
-| `--uilib-input-label-padding-x` | Floating label padding x. |
-| `--uilib-input-label-padding-y` | Floating label padding y. |
-| `--uilib-input-label-on-offset` | Floating label offset (on). |
-| `--uilib-input-float-in-extra-pad` | Extra padding for `in` mode. |
-| `--uilib-input-padding-x` | Horizontal padding. |
-| `--uilib-input-padding-y` | Vertical padding. |
-| `--uilib-input-min-height` | Minimum height. |
-
----
-
-## Form Integration
-
-### Template-driven
-```html
-<ui-lib-input name="email" label="Email" [(ngModel)]="email" />
-```
-
-### Reactive Forms
-```html
-<form [formGroup]="form">
-  <ui-lib-input label="Email" formControlName="email" />
-</form>
-```
-
----
-
-## Form State Styling
-
-When used with Angular forms, the host element receives `ng-touched`, `ng-dirty`, `ng-invalid`, and `ng-disabled` classes. The input styles react via CSS variables:
-
-| Variable | Purpose |
-| --- | --- |
-| `--uilib-input-border-touched` | Border color when the control is touched. |
-| `--uilib-input-border-dirty` | Border color when the control is dirty. |
-| `--uilib-input-error` | Border and text color when invalid. |
+|---|---|
+| `--uilib-input-bg` | Field background |
+| `--uilib-input-border` | Field border color |
+| `--uilib-input-border-focus` | Focus border color |
+| `--uilib-input-text` | Input text color |
+| `--uilib-input-placeholder` | Placeholder and helper text color |
+| `--uilib-input-radius` | Border radius |
+| `--uilib-input-error` | Error color (border + text) |
+| `--uilib-input-label-color` | Label text color |
+| `--uilib-input-label-bg` | Floating label chip background (mode `out`) |
+| `--uilib-input-label-floating-scale` | Scale applied to the floating label |
+| `--uilib-input-label-offset-x` | Floating label horizontal offset |
+| `--uilib-input-label-padding-x` | Floating label chip horizontal padding |
+| `--uilib-input-label-padding-y` | Floating label chip vertical padding |
+| `--uilib-input-label-on-offset` | Floating label vertical offset (mode `out`) |
+| `--uilib-input-float-in-extra-pad` | Extra top padding added in `in` mode |
+| `--uilib-input-padding-x` | Field horizontal padding |
+| `--uilib-input-padding-y` | Field vertical padding |
+| `--uilib-input-min-height` | Minimum field height |
 
 ---
 
 ## Accessibility
 
 ### Keyboard Interaction
+
 | Key | Action |
-| --- | --- |
+|---|---|
 | Tab | Focus the input |
-| Enter | Submit parent form |
+| Enter | Submit parent form (native browser behaviour) |
 
 ### ARIA Attributes
-| Attribute | Usage |
-| --- | --- |
+
+| Attribute | When set |
+|---|---|
 | `aria-required` | When `required` is true |
-| `aria-invalid` | When `error` is set |
-| `aria-describedby` | Links error text |
+| `aria-invalid` | When `error` is non-null |
+| `aria-describedby` | Links to the error message element |
 
-### Focus Management
-- Focus ring uses the input focus styles and `:focus-within` on the field.
-- Clear and toggle buttons are keyboard accessible.
+### Screen Reader Behaviour
 
-### Screen Reader Behavior
-- Label text is associated with the input.
-- Error text is announced via `aria-describedby`.
-
-### Known Issues & Solutions
-- Avoid placeholder-only labels; always set `label`.
+- The `label` element is associated with the native `<input>` via `for`/`id`.
+- Error text is announced via `aria-describedby` and an `aria-live` region when it changes.
+- Clear and toggle-password buttons are focusable and carry descriptive `aria-label` values.
 
 ---
 
 ## Best Practices
 
 **Do:**
-- Use `labelFloat="on"` with outlined styles and `labelFloat="in"` for compact UIs.
+- Always set `label` — never rely on placeholder text alone.
+- Use `labelFloat="in"` for compact UIs; `labelFloat="out"` for outlined styles.
 - Provide `error` messages instead of relying solely on color.
-- Keep placeholder text short and illustrative.
 
-**Don’t:**
-- Use placeholder as the only label.
+**Don't:**
 - Enable `showClear` on read-only or disabled fields.
-- Show counters without setting `maxLength`.
+- Show `showCounter` without also setting `maxLength`.
+- Use placeholder as a substitute for a label.
 
 ---
 
 ## Related
 
-- `docs/reference/components/CARD.md`
-- `docs/reference/components/SELECT.md`
-- `docs/reference/components/CHECKBOX.md`
+- [`SELECT.md`](SELECT.md)
+- [`CHECKBOX.md`](CHECKBOX.md)
+- [`CARD.md`](CARD.md)
