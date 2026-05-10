@@ -109,28 +109,42 @@ describe('Checkbox Accessibility', (): void => {
     return fixture.nativeElement as HTMLElement;
   }
 
+  function getRequiredElement<TElement extends Element>(
+    selector: string,
+    rootElement: ParentNode = hostElement()
+  ): TElement {
+    const element: TElement | null = rootElement.querySelector(selector) as TElement | null;
+    if (!element) {
+      throw new Error(`Expected element "${selector}" to exist in checkbox accessibility test.`);
+    }
+
+    return element;
+  }
+
   function firstCheckboxElement(): HTMLElement {
-    return hostElement().querySelectorAll('ui-lib-checkbox')[0] as HTMLElement;
+    return getRequiredElement<HTMLElement>('ui-lib-checkbox:first-of-type');
   }
 
   function secondCheckboxElement(): HTMLElement {
-    return hostElement().querySelectorAll('ui-lib-checkbox')[1] as HTMLElement;
+    return getRequiredElement<HTMLElement>('ui-lib-checkbox:nth-of-type(2)');
   }
 
   function firstInputElement(): HTMLInputElement {
-    return firstCheckboxElement().querySelector(
-      '.ui-lib-checkbox__native-input'
-    ) as HTMLInputElement;
+    return getRequiredElement<HTMLInputElement>(
+      '.ui-lib-checkbox__native-input',
+      firstCheckboxElement()
+    );
   }
 
   function secondInputElement(): HTMLInputElement {
-    return secondCheckboxElement().querySelector(
-      '.ui-lib-checkbox__native-input'
-    ) as HTMLInputElement;
+    return getRequiredElement<HTMLInputElement>(
+      '.ui-lib-checkbox__native-input',
+      secondCheckboxElement()
+    );
   }
 
   function firstLabelElement(): HTMLLabelElement {
-    return firstCheckboxElement().querySelector('.ui-lib-checkbox__label') as HTMLLabelElement;
+    return getRequiredElement<HTMLLabelElement>('.ui-lib-checkbox__label', firstCheckboxElement());
   }
 
   it('binds generated input id and label for attributes', (): void => {
