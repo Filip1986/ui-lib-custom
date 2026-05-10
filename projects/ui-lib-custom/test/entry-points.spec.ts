@@ -94,6 +94,8 @@ import type * as UiLibStepper from 'ui-lib-custom/stepper';
 import type * as UiLibScrollPanel from 'ui-lib-custom/scroll-panel';
 import type * as UiLibDynamicDialog from 'ui-lib-custom/dynamic-dialog';
 import type * as UiLibToolbar from 'ui-lib-custom/toolbar';
+import type * as UiLibAlert from 'ui-lib-custom/alert';
+import type * as UiLibIconButton from 'ui-lib-custom/icon-button';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -655,5 +657,15 @@ describe('Secondary Entry Points', (): void => {
   it('should import from toolbar', async (): Promise<void> => {
     const mod: typeof UiLibToolbar = await import('ui-lib-custom/toolbar');
     expect(mod.Toolbar).toBeDefined();
+  });
+
+  it('should import from alert', async (): Promise<void> => {
+    const mod: typeof UiLibAlert = await import('ui-lib-custom/alert');
+    expect(mod.Alert).toBeDefined();
+  });
+
+  it('should import from icon-button', async (): Promise<void> => {
+    const mod: typeof UiLibIconButton = await import('ui-lib-custom/icon-button');
+    expect(mod.IconButton).toBeDefined();
   });
 });

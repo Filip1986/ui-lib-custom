@@ -7,9 +7,9 @@ import {
   type InputSignal,
   type Signal,
 } from '@angular/core';
-import { Icon } from '../icon';
-import type { IconSize } from '../icon';
-import type { SemanticIcon } from '../icon';
+import { Icon } from 'ui-lib-custom/icon';
+import type { IconSize } from 'ui-lib-custom/icon';
+import type { SemanticIcon } from 'ui-lib-custom/icon';
 import { SHARED_DEFAULTS, SHARED_SIZES } from 'ui-lib-custom/core';
 import type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';
 
