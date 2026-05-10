@@ -44,7 +44,7 @@ import { Card } from 'ui-lib-custom/card';
 | `closable` | `boolean` | `false` | Shows a close button in the header; emits `closed` on click |
 | `subtitle` | `string \| null` | `null` | Plain-text subtitle rendered below the header slot; use `[card-subtitle]` when rich HTML markup is needed |
 | `ariaLabel` | `string \| null` | `null` | Accessible label; meaningful only when `hoverable` is true |
-| `theme` | `ThemeScopeInput \| null` | `null` | Scoped theme override applied as CSS variables directly on the host element |
+| `theme` | `ThemeScopeInput \| null` | `null` | Scoped theme override: pass `'light'` / `'dark'` as a shorthand, or a `ThemeScopeConfig` object for full control |
 
 ### Outputs
 
@@ -57,6 +57,17 @@ import { Card } from 'ui-lib-custom/card';
 ```typescript
 type CardVariant   = 'material' | 'bootstrap' | 'minimal';
 type CardElevation = 'none' | 'low' | 'medium' | 'high';
+
+// ThemeScopeInput accepts a string shorthand or a config object:
+type ThemeScopeInput = 'light' | 'dark' | ThemeScopeConfig | null;
+
+interface ThemeScopeConfig {
+  colorScheme?: 'light' | 'dark';    // sets data-theme attribute
+  preset?: ThemePreset;               // full preset to apply
+  colors?: Partial<ThemePresetColors>; // partial color overrides
+  variant?: ThemeVariant;             // variant override
+  variables?: Record<string, string>; // raw CSS variable overrides
+}
 ```
 
 ---
@@ -140,28 +151,41 @@ Cards project content using attribute selectors:
 
 ## Scoped Theming
 
-The `theme` input accepts a `ThemeScopeInput` object and applies CSS variables directly on the card's host element, enabling per-card overrides without a provider — this has no PrimeNG equivalent.
+The `theme` input applies CSS variables and data attributes directly on the card's host element, enabling per-card theme overrides without a provider. Two forms are supported:
+
+**String shorthand** — switches color scheme only:
+
+```html
+<!-- Dark card on a light page -->
+<ui-lib-card theme="dark">
+  <span card-header>Dark Card</span>
+  <p>This card renders in dark mode regardless of the page theme.</p>
+</ui-lib-card>
+```
+
+**Config object** — full per-card control:
 
 ```typescript
 import type { ThemeScopeInput } from 'ui-lib-custom/theme';
 
-darkCardTheme: ThemeScopeInput = { mode: 'dark' };
 brandCardTheme: ThemeScopeInput = {
   colors: { primary: '#ff5722' }
+};
+
+darkCardTheme: ThemeScopeInput = {
+  colorScheme: 'dark'
 };
 ```
 
 ```html
-<!-- Dark card on a light page -->
-<ui-lib-card [theme]="darkCardTheme">
-  <span card-header>Dark Card</span>
-  <p>This card uses dark theme regardless of page theme.</p>
-  <ui-lib-button>Also dark</ui-lib-button>
-</ui-lib-card>
-
 <!-- Custom brand colors scoped to this card -->
 <ui-lib-card [theme]="brandCardTheme">
   <ui-lib-button>Orange button</ui-lib-button>
+</ui-lib-card>
+
+<!-- Raw CSS variable overrides -->
+<ui-lib-card [theme]="{ variables: { '--uilib-card-bg': '#1a1a2e' } }">
+  <span card-header>Custom</span>
 </ui-lib-card>
 ```
 
@@ -207,6 +231,16 @@ The card is a container — ARIA semantics belong to child elements.
 
 ---
 
+## Edge Cases
+
+- **`subtitle` vs `[card-subtitle]`**: if both are provided, the `[card-subtitle]` slot takes visual precedence — the projected rich content replaces the plain-text subtitle. Avoid providing both simultaneously.
+- **`hoverable` without `ariaLabel`**: the card renders with `role="button"` semantics but no accessible name, which will fail axe-core audits. Always set `ariaLabel` on hoverable cards.
+- **`closable` without a header slot**: the close button still renders in the header row. Provide a `[card-header]` slot or use `subtitle` so the header area has visible content alongside the button.
+- **`theme` string shorthand vs config object**: passing `theme="dark"` is equivalent to `[theme]="{ colorScheme: 'dark' }"`. Removing `theme` (setting it to `null`) restores the page-level theme immediately.
+- **`showHeader="false"`**: hides the entire header section including the icon, subtitle, and close button — not just the projected `[card-header]` slot.
+
+---
+
 ## Best Practices
 
 **Do:**
@@ -215,7 +249,7 @@ The card is a container — ARIA semantics belong to child elements.
 - Use `hoverable` only when the entire card is interactive.
 
 **Don't:**
-- Pass a plain string to `theme` — it takes a `ThemeScopeInput` object.
+- Pass a raw CSS value or arbitrary object to `theme` — it must be `'light'`, `'dark'`, a `ThemeScopeConfig` object, or `null`.
 - Mix multiple variants in the same card list without a clear design reason.
 - Omit `ariaLabel` on hoverable cards — they render as buttons and need a description.
 

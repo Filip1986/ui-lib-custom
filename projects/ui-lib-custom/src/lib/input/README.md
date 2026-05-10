@@ -16,7 +16,7 @@
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
 | `type` | `InputType` | `'text'` | Any valid HTML input type |
-| `labelFloat` | `'over' \| 'in' \| 'out'` | `'over'` | Label position / floating behaviour |
+| `labelFloat` | `'over' \| 'in' \| 'on'` | `'over'` | Label position / floating behaviour |
 | `placeholder` | `string` | `''` | |
 | `error` | `string \| null` | `null` | Error message rendered below the input; announces via live region |
 | `disabled` | `boolean` | `false` | |
