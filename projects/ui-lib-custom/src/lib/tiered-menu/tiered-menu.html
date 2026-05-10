@@ -1,6 +1,7 @@
 @if (shouldRenderPanel()) {
   <div
     #panelRef
+    [attr.id]="menuId"
     class="ui-lib-tiered-menu__panel"
     [class.ui-lib-tiered-menu__panel--popup]="popup()"
     [class.ui-lib-tiered-menu__panel--positioned]="isPositioned()"
@@ -10,7 +11,9 @@
     <ui-lib-tiered-menu-sub
       [items]="model()"
       [level]="0"
+      [ariaLabel]="ariaLabel()"
       (itemActivated)="onItemActivated($event)"
+      (escapeMenu)="onEscapeMenu()"
     />
   </div>
 }

@@ -26,8 +26,8 @@
   cursor: pointer;
   border-radius: var(--uilib-tiered-menu-item-radius, 0.25rem);
   transition:
-    background var(--uilib-transition-fast, 0.15s ease),
-    color var(--uilib-transition-fast, 0.15s ease);
+    background var(--uilib-transition-fast, 0.12s ease-out),
+    color var(--uilib-transition-fast, 0.12s ease-out);
   white-space: nowrap;
   font-size: var(--uilib-tiered-menu-font-size, 0.875rem);
   font-family: var(--uilib-font-ui, inherit);
@@ -101,7 +101,7 @@
   );
   padding: var(--uilib-tiered-menu-list-padding, 0.25rem 0);
   min-width: var(--uilib-tiered-menu-min-width, 12rem);
-  animation: uilib-tiered-menu-panel-in var(--uilib-transition-fast, 0.15s ease) both;
+  animation: uilib-tiered-menu-panel-in var(--uilib-transition-fast, 0.12s ease-out) both;
 }
 
 @keyframes uilib-tiered-menu-panel-in {
@@ -112,5 +112,17 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+// ── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-tiered-menu__submenu-wrapper {
+    animation: none;
+  }
+
+  .ui-lib-tiered-menu__link {
+    transition: none;
   }
 }

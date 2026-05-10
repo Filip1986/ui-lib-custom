@@ -36,7 +36,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |------|-------------|---------------------------------------------------------------------------------|------------|
 | 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done     |
 | 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done     |
-| 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ⏳ Queued   |
+| 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done     |
 | 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ⏳ Queued   |
 | 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ⏳ Queued   |
 | 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ⏳ Queued   |
@@ -217,7 +217,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | MegaMenu    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | PanelMenu   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| TieredMenu  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stepper     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | SpeedDial   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 

@@ -39,6 +39,9 @@ export type {
 /** Default accessible label exported for test assertions. */
 export const TIERED_MENU_DEFAULT_ARIA_LABEL: string = 'Menu';
 
+/** Module-level counter for unique instance IDs. */
+let nextTieredMenuId: number = 0;
+
 /**
  * TieredMenu component — a nested flyout menu supporting arbitrarily deep
  * hierarchies. Works in two modes:
@@ -73,6 +76,14 @@ export const TIERED_MENU_DEFAULT_ARIA_LABEL: string = 'Menu';
   },
 })
 export class TieredMenu implements OnDestroy {
+  // ── Instance identity ─────────────────────────────────────────────────────
+
+  /**
+   * Unique id for the panel element, e.g. `'ui-lib-tiered-menu-1'`.
+   * Use this on the trigger: `[attr.aria-controls]="menu.menuId"`.
+   */
+  public readonly menuId: string = `ui-lib-tiered-menu-${++nextTieredMenuId}`;
+
   // ── Inputs ────────────────────────────────────────────────────────────────
 
   /** Array of menu items to display. */
@@ -127,6 +138,9 @@ export class TieredMenu implements OnDestroy {
   /** Vertical position of the popup panel (CSS `top`, in px). */
   public readonly panelY: WritableSignal<number> = signal<number>(0);
 
+  /** Element that had focus when the popup was opened — restored on Escape close. */
+  private previousFocusEl: HTMLElement | null = null;
+
   // ── Dependencies ──────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
@@ -171,7 +185,7 @@ export class TieredMenu implements OnDestroy {
 
   private readonly clickOutsideHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
     if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-      this.hide();
+      this.hide(false);
     }
   };
 
@@ -179,7 +193,7 @@ export class TieredMenu implements OnDestroy {
     event: KeyboardEvent
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
-      this.hide();
+      this.hide(true);
     }
   };
 
@@ -228,6 +242,7 @@ export class TieredMenu implements OnDestroy {
     if (!this.popup()) {
       return;
     }
+    this.previousFocusEl = this.documentRef.activeElement as HTMLElement | null;
     const trigger: HTMLElement = event.currentTarget as HTMLElement;
     const rect: DOMRect = trigger.getBoundingClientRect();
     this.panelX.set(rect.left + window.scrollX);
@@ -236,13 +251,31 @@ export class TieredMenu implements OnDestroy {
     this.menuShow.emit(event);
   }
 
-  /** Hides the popup menu. No-op when already hidden or in inline mode. */
-  public hide(): void {
+  /**
+   * Hides the popup menu. No-op when already hidden or in inline mode.
+   * @param restoreFocus When `true` (the default for the public API), focus is
+   *   returned to the element that had focus when `show()` was called.
+   *   Internal callers pass `false` for click-outside and item-activation
+   *   dismissals where restoring focus is not desired.
+   */
+  public hide(restoreFocus: boolean = true): void {
     if (!this.popup() || !this.isVisible()) {
       return;
     }
     this.isVisible.set(false);
     this.menuHide.emit();
+    if (restoreFocus && this.previousFocusEl) {
+      const elToFocus: HTMLElement = this.previousFocusEl;
+      this.previousFocusEl = null;
+      afterNextRender(
+        (): void => {
+          elToFocus.focus();
+        },
+        { injector: this.injector }
+      );
+    } else {
+      this.previousFocusEl = null;
+    }
   }
 
   /** Toggles the popup menu. No-op in inline mode. */
@@ -251,7 +284,7 @@ export class TieredMenu implements OnDestroy {
       return;
     }
     if (this.isVisible()) {
-      this.hide();
+      this.hide(false); // user clicked toggle — focus stays on trigger naturally
     } else {
       this.show(event);
     }
@@ -270,7 +303,18 @@ export class TieredMenu implements OnDestroy {
   public onItemActivated(commandEvent: TieredMenuItemCommandEvent): void {
     this.itemClick.emit(commandEvent);
     if (this.popup()) {
-      this.hide();
+      this.hide(false);
+    }
+  }
+
+  /**
+   * Handles the `escapeMenu` output from the root TieredMenuSubComponent.
+   * Emitted on Escape or Tab key presses inside any sub-level.
+   * In popup mode, closes the panel and restores focus to the trigger.
+   */
+  public onEscapeMenu(): void {
+    if (this.popup()) {
+      this.hide(true);
     }
   }
 

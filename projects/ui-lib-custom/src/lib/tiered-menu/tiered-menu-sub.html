@@ -1,13 +1,13 @@
 <ul
   class="ui-lib-tiered-menu__list"
   role="menu"
+  [attr.aria-label]="ariaLabel() || null"
 >
   @for (item of visibleItems(); track $index) {
     @if (item.separator) {
       <li
         class="ui-lib-tiered-menu__separator"
         role="separator"
-        aria-hidden="true"
       ></li>
     } @else {
       <li
@@ -46,7 +46,9 @@
             <ui-lib-tiered-menu-sub
               [items]="item.items ?? []"
               [level]="level() + 1"
+              [ariaLabel]="item.label ?? ''"
               (itemActivated)="onNestedItemActivated($event)"
+              (escapeMenu)="onNestedEscapeMenu($index)"
             />
           </div>
         }

@@ -20,15 +20,15 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Menu hardening COMPLETE (Tier 2, #12); next is TieredMenu
-- **Next queue:** TieredMenu hardening (Tier 2, #13) — key a11y: nested role=menu, left-arrow closes submenu
+- **Active focus:** TieredMenu hardening COMPLETE (Tier 2, #13); next is ContextMenu
+- **Next queue:** ContextMenu hardening (Tier 2, #14) — key a11y: same as TieredMenu + trigger `aria-haspopup=menu`
 - **Horizon:** Runtime variant switcher, theme preset management, Storybook integration, broader axe-core audit
 
 ### Component/Docs Delta (Active Only)
 
+- `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
-- `Toast` -> ✅ complete + hardened (6-phase evolution, score 9.1/10, 60 tests — 29 unit + 31 a11y)
 
 ---
 
@@ -42,6 +42,88 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-10 [TieredMenu component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu.ts
+      • Added module-level `let nextTieredMenuId: number = 0` counter
+      • Added `public readonly menuId: string` (unique per instance, e.g. `'ui-lib-tiered-menu-1'`)
+      • Added `private previousFocusEl: HTMLElement | null = null` for focus restoration
+      • `show()` now captures `documentRef.activeElement` as `previousFocusEl`
+      • `hide(restoreFocus: boolean = true)` — public API defaults to restoring focus;
+        internal click-outside and toggle-close pass `false` explicitly
+      • `clickOutsideHandler` updated to call `hide(false)` (no restore on outside click)
+      • `keydownHandler` Escape updated to call `hide(true)` (restore focus)
+      • Added `onEscapeMenu()` — receives `escapeMenu` output from root TieredMenuSub;
+        calls `hide(true)` in popup mode (closes + restores focus)
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu.html
+      • Added `[attr.id]="menuId"` to panel `<div>` for unique ID binding
+      • Added `[ariaLabel]="ariaLabel()"` to root `<ui-lib-tiered-menu-sub>`
+      • Added `(escapeMenu)="onEscapeMenu()"` binding on root sub
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu-sub.ts
+      • Added `ariaLabel: InputSignal<string>` input (default `''`)
+      • Added `escapeMenu: OutputEmitterRef<void>` output
+      • Split `ArrowLeft` and `Escape` cases in `onItemKeyDown()`:
+          - ArrowLeft: `activeIndex.set(-1)` only (no emit, does not close popup)
+          - Escape: `activeIndex.set(-1)` + `escapeMenu.emit()` (propagates up to popup close)
+      • Added Tab case in `onItemKeyDown()`: emit `escapeMenu` WITHOUT `preventDefault()`
+        so Tab key moves focus naturally while popup closes
+      • Added `onNestedEscapeMenu(index: number)`: closes child flyout + re-emits `escapeMenu` upward
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu-sub.html
+      • CRITICAL FIX: Removed `aria-hidden="true"` from separator `<li role="separator">`
+      • Added `[attr.aria-label]="ariaLabel() || null"` to root `<ul role="menu">`
+      • Added `[ariaLabel]="item.label ?? ''"` to nested `<ui-lib-tiered-menu-sub>`
+        so every `<ul role="menu">` has an accessible name
+      • Added `(escapeMenu)="onNestedEscapeMenu($index)"` to nested sub for propagation chain
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables popup slide-in animation
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu-sub.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables flyout animation + link transitions
+  - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu.a11y.spec.ts
+      • Fixed naming conflict in `PopupHostComponent`: template ref `#menu` → `#tieredMenu`,
+        class property `menu` → `menuRef` (prevents Angular template variable shadowing)
+      • Updated all `fixture.componentInstance.menu()` calls to `menuRef()`
+      • Updated `openPopup` helper to use `menuRef()`
+  - docs/COMPONENT_SCORES.md
+      • TieredMenu queue: ⏳ Queued → ✅ Done (Tier 2 #13)
+      • TieredMenu score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+  - AI_AGENT_CONTEXT.md (this file — status updated)
+State: TieredMenu component fully evolved through all 6 phases. Score 9.0/10.
+  Phase 3 (A11y — priority):
+    • CRITICAL FIX: Separator `aria-hidden="true"` removed — `role="separator"` conveys
+      structural grouping to screen readers; `aria-hidden` was suppressing that info
+    • CRITICAL FIX: `ariaLabel` now flows to root `<ul role="menu">` — all menus
+      have an accessible name; root gets the component's `ariaLabel` input,
+      nested menus get the parent item's label
+    • CRITICAL FIX: `menuId` unique per instance — panel gets `[attr.id]="menuId"`;
+      trigger can use `[attr.aria-controls]="menu.menuId"` for correct ARIA wiring
+    • CRITICAL FIX: Focus restoration — `show()` captures `previousFocusEl`;
+      `hide(true)` restores via `afterNextRender`; global Escape + `onEscapeMenu()` both
+      call `hide(true)`; click-outside passes `hide(false)`
+    • MODERATE FIX: `escapeMenu` propagation chain — each sub emits on Escape/Tab;
+      parent subs relay via `onNestedEscapeMenu()`; root TieredMenu closes popup
+    • MODERATE FIX: Tab closes popup without `preventDefault` — Tab key navigates
+      naturally while popup panel is dismissed
+    • MODERATE FIX: ArrowLeft / Escape split — ArrowLeft at any level closes child
+      flyout only; Escape propagates all the way up to popup close
+    • MODERATE FIX: `@media (prefers-reduced-motion: reduce)` added to both SCSS files
+  Phase 1 (Architecture): nextTieredMenuId, menuId, previousFocusEl, hide(restoreFocus),
+    onEscapeMenu(), ariaLabel input, escapeMenu output, onNestedEscapeMenu() all added.
+  Phase 2 (DX): README (pre-existing) already documents all new APIs accurately.
+  Phase 4 (Performance): No structural changes. Existing signal/effect/cleanup patterns intact.
+  Phase 5 (Composability): escapeMenu output enables custom wrappers to observe dismiss events.
+  Phase 6 (Polish): Reduced-motion blocks added to both SCSS files.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tiered-menu/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=tiered-menu --no-coverage (70/70 PASS — 28 unit + 42 a11y)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
+Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
+  Template variable shadowing: avoid naming both a class Signal property and a template ref
+  variable with the same name — Angular gives precedence to the template variable.
+  afterNextRender focus restoration fires on the next detectChanges() in test context.
+Next step: ContextMenu hardening (Tier 2, #14) — same as TieredMenu + trigger aria-haspopup=menu.
+
 
 Date: 2026-05-10 [Menu component — 6-phase hardening COMPLETE]
 Changed:

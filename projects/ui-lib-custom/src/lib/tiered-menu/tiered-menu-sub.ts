@@ -39,11 +39,26 @@ export class TieredMenuSubComponent {
    */
   public readonly level: InputSignal<number> = input<number>(0);
 
+  /**
+   * Accessible name for the `<ul role="menu">` at this level.
+   * - Root level: passed from `TieredMenu.ariaLabel` input (e.g. `'Menu'`).
+   * - Nested levels: the parent item's label (e.g. `'File'`).
+   */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
+
   // ── Outputs ──────────────────────────────────────────────────────────────
 
   /** Emitted when a leaf item is activated; bubbles up to the root `TieredMenu`. */
   public readonly itemActivated: OutputEmitterRef<TieredMenuItemCommandEvent> =
     output<TieredMenuItemCommandEvent>();
+
+  /**
+   * Emitted when Escape or Tab is pressed inside this sub or any of its
+   * descendants. The root `TieredMenu` listens to this on the level-0 sub and
+   * calls `hide(true)` to close the popup and restore focus to the trigger.
+   * Intermediate sub-levels relay this upward via `onNestedEscapeMenu()`.
+   */
+  public readonly escapeMenu: OutputEmitterRef<void> = output<void>();
 
   // ── Internal state ────────────────────────────────────────────────────────
 
@@ -141,10 +156,21 @@ export class TieredMenuSubComponent {
         }
         break;
       }
-      case KEYBOARD_KEYS.ArrowLeft:
+      case KEYBOARD_KEYS.ArrowLeft: {
+        event.preventDefault();
+        this.activeIndex.set(-1);
+        break;
+      }
       case KEYBOARD_KEYS.Escape: {
         event.preventDefault();
         this.activeIndex.set(-1);
+        this.escapeMenu.emit();
+        break;
+      }
+      case KEYBOARD_KEYS.Tab: {
+        // Do NOT prevent default — Tab must move browser focus naturally.
+        // Signal the root TieredMenu to close the popup panel.
+        this.escapeMenu.emit();
         break;
       }
       case KEYBOARD_KEYS.ArrowDown: {
@@ -173,6 +199,15 @@ export class TieredMenuSubComponent {
   /** Re-emits an `itemActivated` event from a deeper sub-level. */
   public onNestedItemActivated(commandEvent: TieredMenuItemCommandEvent): void {
     this.itemActivated.emit(commandEvent);
+  }
+
+  /**
+   * Handles `escapeMenu` relayed from a nested sub-level.
+   * Closes the active child flyout at this level and propagates the signal upward.
+   */
+  public onNestedEscapeMenu(_index: number): void {
+    this.activeIndex.set(-1);
+    this.escapeMenu.emit();
   }
 
   // ── Private helpers ───────────────────────────────────────────────────────

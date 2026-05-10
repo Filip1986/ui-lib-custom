@@ -28,7 +28,7 @@
       &.ui-lib-tiered-menu__panel--positioned {
         opacity: 1;
         pointer-events: auto;
-        animation: uilib-tiered-menu-in var(--uilib-transition-fast, 0.15s ease) both;
+        animation: uilib-tiered-menu-in var(--uilib-transition-fast, 0.12s ease-out) both;
       }
     }
   }
@@ -149,4 +149,23 @@
   --uilib-tiered-menu-item-color: var(--uilib-color-text, #f9fafb);
   --uilib-tiered-menu-item-bg-hover: var(--uilib-surface-hover, #374151);
   --uilib-tiered-menu-separator-color: var(--uilib-color-border, #374151);
+}
+
+// ── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-tiered-menu__panel--popup.ui-lib-tiered-menu__panel--positioned {
+    animation: none;
+  }
+
+  @keyframes uilib-tiered-menu-in {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
