@@ -21,6 +21,7 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { ConfirmPopupService } from './confirm-popup.service';
@@ -31,6 +32,9 @@ import type {
   ConfirmPopupPlacement,
   ConfirmPopupVariant,
 } from './confirm-popup.types';
+
+// Module-level fallback counter for environments without crypto.randomUUID().
+let nextConfirmPopupId: number = 0;
 
 /**
  * ConfirmPopup — a lightweight anchored confirmation popup with accept/reject actions.
@@ -64,16 +68,16 @@ import type {
   encapsulation: ViewEncapsulation.None,
 })
 export class ConfirmPopup implements OnDestroy {
-  private static nextId: number = 0;
-
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly confirmPopupService: ConfirmPopupService = inject(ConfirmPopupService);
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly document: Document = inject(DOCUMENT);
 
   private focusTrap: FocusTrap | null = null;
   private lastVisible: boolean = false;
+  private previousFocusEl: HTMLElement | null = null;
 
   private readonly serviceConfig: WritableSignal<ConfirmPopupConfig | null> =
     signal<ConfirmPopupConfig | null>(null);
@@ -209,6 +213,11 @@ export class ConfirmPopup implements OnDestroy {
       (): ConfirmPopupDefaultFocus => this.serviceConfig()?.defaultFocus ?? this.defaultFocus()
     );
 
+  /** Accessible name for the panel — the message text serves as the alertdialog label. */
+  public readonly panelAriaLabel: Signal<string> = computed<string>((): string =>
+    this.resolvedMessage()
+  );
+
   /** Effective variant — falls back to ThemeConfigService. */
   public readonly effectiveVariant: Signal<ConfirmPopupVariant> = computed<ConfirmPopupVariant>(
     (): ConfirmPopupVariant => this.variant() ?? this.themeConfig.variant()
@@ -299,6 +308,13 @@ export class ConfirmPopup implements OnDestroy {
       this.lastVisible = isVisible;
 
       if (isVisible) {
+        // Capture current focus before the popup takes it over.
+        // Prefer document.activeElement (keyboard-triggered clicks), fall back to targetElement
+        // (mouse-triggered clicks where activeElement may still be body from the programmatic open).
+        const active: HTMLElement | null = this.document.activeElement as HTMLElement | null;
+        this.previousFocusEl =
+          active && active !== this.document.body ? active : (this.targetElement() ?? null);
+
         this.positionReady.set(false);
         afterNextRender(
           (): void => {
@@ -314,12 +330,16 @@ export class ConfirmPopup implements OnDestroy {
       } else {
         this.positionReady.set(false);
         this.deactivateFocusTrap();
+        // Restore focus to the element that had it (or triggered the popup).
+        this.previousFocusEl?.focus();
+        this.previousFocusEl = null;
       }
     });
   }
 
   public ngOnDestroy(): void {
     this.deactivateFocusTrap();
+    this.previousFocusEl = null;
   }
 
   /** Handle click on the transparent overlay — dismisses the popup. */
@@ -463,7 +483,7 @@ export class ConfirmPopup implements OnDestroy {
     ) {
       return `ui-lib-confirm-popup-${globalThis.crypto.randomUUID()}`;
     }
-    ConfirmPopup.nextId += 1;
-    return `ui-lib-confirm-popup-${ConfirmPopup.nextId}`;
+    nextConfirmPopupId += 1;
+    return `ui-lib-confirm-popup-${nextConfirmPopupId}`;
   }
 }

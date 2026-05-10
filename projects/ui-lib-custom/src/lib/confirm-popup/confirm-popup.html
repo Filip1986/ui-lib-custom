@@ -1,6 +1,6 @@
 @if (visible()) {
   <!-- Transparent overlay catches click-away to dismiss the popup -->
-  <div class="ui-lib-confirm-popup__overlay" (click)="onOverlayClick()"></div>
+  <div class="ui-lib-confirm-popup__overlay" aria-hidden="true" (click)="onOverlayClick()"></div>
 
   <!-- The floating popup panel, anchored near the target element -->
   <div
@@ -10,6 +10,7 @@
     role="alertdialog"
     aria-modal="true"
     tabindex="-1"
+    [attr.aria-label]="panelAriaLabel()"
     [attr.aria-describedby]="messageId"
     (keydown)="onPanelKeydown($event)"
   >
