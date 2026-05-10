@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
 import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import { Button } from 'ui-lib-custom/button';
 import type {
   TieredMenuItem,
   TieredMenuItemCommandEvent,
@@ -13,7 +14,7 @@ import type {
 @Component({
   selector: 'app-tiered-menu-demo',
   standalone: true,
-  imports: [TieredMenu],
+  imports: [TieredMenu, Button],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

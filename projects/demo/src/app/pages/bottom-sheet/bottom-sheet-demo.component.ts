@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
 import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the BottomSheet component.
@@ -9,7 +10,7 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
 @Component({
   selector: 'app-bottom-sheet-demo',
   standalone: true,
-  imports: [BottomSheet],
+  imports: [BottomSheet, Button],
   templateUrl: './bottom-sheet-demo.component.html',
   styleUrl: './bottom-sheet-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

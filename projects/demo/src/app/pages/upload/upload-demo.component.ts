@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { UploadComponent } from 'ui-lib-custom/upload';
+import { Button } from 'ui-lib-custom/button';
 import { UploadEmptyDirective, UploadFileDirective } from 'ui-lib-custom/upload';
 import type {
   UploadHandlerEvent,
@@ -21,7 +22,7 @@ interface UploadLogEntry {
 @Component({
   selector: 'app-upload-demo',
   standalone: true,
-  imports: [UploadComponent, UploadEmptyDirective, UploadFileDirective],
+  imports: [UploadComponent, UploadEmptyDirective, UploadFileDirective, Button],
   templateUrl: './upload-demo.component.html',
   styleUrl: './upload-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

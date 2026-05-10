@@ -78,12 +78,13 @@
         <span class="toast-demo__picker-label">Position</span>
         <div class="toast-demo__chip-row">
           @for (pos of positions; track pos) {
-            <button
+            <ui-lib-button
               type="button"
-              class="toast-demo__chip"
-              [class.toast-demo__chip--active]="selectedPosition === pos"
+              [appearance]="selectedPosition === pos ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
               (click)="selectedPosition = pos"
-            >{{ pos }}</button>
+            >{{ pos }}</ui-lib-button>
           }
         </div>
       </div>
@@ -92,12 +93,13 @@
         <span class="toast-demo__picker-label">Variant</span>
         <div class="toast-demo__chip-row">
           @for (v of variants; track v) {
-            <button
+            <ui-lib-button
               type="button"
-              class="toast-demo__chip"
-              [class.toast-demo__chip--active]="selectedVariant === v"
+              [appearance]="selectedVariant === v ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
               (click)="selectedVariant = v"
-            >{{ v }}</button>
+            >{{ v }}</ui-lib-button>
           }
         </div>
       </div>

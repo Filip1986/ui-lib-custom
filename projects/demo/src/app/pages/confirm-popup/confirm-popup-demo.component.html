@@ -30,7 +30,7 @@
       handler, passing <code>event.currentTarget</code> as the anchor.
     </p>
     <div class="demo-row">
-      <button class="demo-btn" (click)="confirmBasic($event)">Confirm action</button>
+      <ui-lib-button (click)="confirmBasic($event)">Confirm action</ui-lib-button>
     </div>
 
     <pre class="demo-code">// component.ts
@@ -49,9 +49,9 @@ this.confirmPopupService.confirm(&#123;
       message. Customise button labels and severity independently.
     </p>
     <div class="demo-row">
-      <button class="demo-btn demo-btn--danger" (click)="confirmWithIcon($event)">
+      <ui-lib-button severity="danger" (click)="confirmWithIcon($event)">
         Delete file
-      </button>
+      </ui-lib-button>
     </div>
 
     <pre class="demo-code">this.confirmPopupService.confirm(&#123;
@@ -75,9 +75,9 @@ this.confirmPopupService.confirm(&#123;
     </p>
     <div class="demo-row demo-row--wrap">
       @for (severity of severities; track severity) {
-        <button class="demo-btn" (click)="confirmSeverity($event, severity)">
+        <ui-lib-button (click)="confirmSeverity($event, severity)">
           {{ severity | titlecase }}
-        </button>
+        </ui-lib-button>
       }
     </div>
   </section>
@@ -93,9 +93,9 @@ this.confirmPopupService.confirm(&#123;
     <div class="demo-row demo-row--wrap">
       @for (variant of variants; track variant) {
         <ui-lib-confirm-popup [key]="variant" [variant]="variant" />
-        <button class="demo-btn" (click)="confirmVariant($event, variant)">
+        <ui-lib-button (click)="confirmVariant($event, variant)">
           {{ variant | titlecase }}
-        </button>
+        </ui-lib-button>
       }
     </div>
   </section>
@@ -108,7 +108,7 @@ this.confirmPopupService.confirm(&#123;
       Outputs <code>(accepted)</code> and <code>(rejected)</code> let you react to user choices.
     </p>
     <div class="demo-row">
-      <button class="demo-btn" (click)="declarativeVisible.set(true)">Open declarative popup</button>
+      <ui-lib-button (click)="declarativeVisible.set(true)">Open declarative popup</ui-lib-button>
     </div>
 
     <pre class="demo-code">&lt;ui-lib-confirm-popup

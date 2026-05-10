@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the classNames utility and ClassNamesPipe.
@@ -8,7 +9,7 @@ import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names';
 @Component({
   selector: 'app-class-names-demo',
   standalone: true,
-  imports: [ClassNamesPipe],
+  imports: [ClassNamesPipe, Button],
   templateUrl: './class-names-demo.component.html',
   styleUrl: './class-names-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

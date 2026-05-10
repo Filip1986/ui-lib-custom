@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/c
 import type { WritableSignal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VirtualScrollerComponent } from 'ui-lib-custom/virtual-scroller';
+import { Button } from 'ui-lib-custom/button';
 import { ScrollerItemDirective, ScrollerLoaderDirective } from 'ui-lib-custom/virtual-scroller';
 import type { VirtualScrollerLazyLoadEvent } from 'ui-lib-custom/virtual-scroller';
 
@@ -59,7 +60,13 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
 @Component({
   selector: 'app-scroller-demo',
   standalone: true,
-  imports: [CommonModule, VirtualScrollerComponent, ScrollerItemDirective, ScrollerLoaderDirective],
+  imports: [
+    CommonModule,
+    VirtualScrollerComponent,
+    ScrollerItemDirective,
+    ScrollerLoaderDirective,
+    Button,
+  ],
   templateUrl: './scroller-demo.component.html',
   styleUrl: './scroller-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

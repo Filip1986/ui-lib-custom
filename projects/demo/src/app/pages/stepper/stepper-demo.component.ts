@@ -3,6 +3,7 @@ import type { WritableSignal } from '@angular/core';
 import { Stepper } from 'ui-lib-custom/stepper';
 import { StepperPanel } from 'ui-lib-custom/stepper';
 import type { StepChangeEvent, StepperOrientation, StepperVariant } from 'ui-lib-custom/stepper';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Stepper component.
@@ -10,7 +11,7 @@ import type { StepChangeEvent, StepperOrientation, StepperVariant } from 'ui-lib
 @Component({
   selector: 'app-stepper-demo',
   standalone: true,
-  imports: [Stepper, StepperPanel],
+  imports: [Stepper, StepperPanel, Button],
   templateUrl: './stepper-demo.component.html',
   styleUrl: './stepper-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

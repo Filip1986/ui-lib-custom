@@ -78,30 +78,33 @@ classNames('btn', null, undefined, false, 'icon')
 
     <div class="demo-card demo-playground">
       <div class="demo-playground__controls">
-        <button
-          class="demo-toggle"
-          [class.demo-toggle--on]="isActive()"
+        <ui-lib-button
+          [appearance]="isActive() ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
           (click)="toggleActive()"
           type="button"
         >
           active: {{ isActive() }}
-        </button>
-        <button
-          class="demo-toggle"
-          [class.demo-toggle--on]="isDisabled()"
+        </ui-lib-button>
+        <ui-lib-button
+          [appearance]="isDisabled() ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
           (click)="toggleDisabled()"
           type="button"
         >
           disabled: {{ isDisabled() }}
-        </button>
-        <button
-          class="demo-toggle"
-          [class.demo-toggle--on]="isHighlighted()"
+        </ui-lib-button>
+        <ui-lib-button
+          [appearance]="isHighlighted() ? 'solid' : 'outline'"
+          severity="primary"
+          size="sm"
           (click)="toggleHighlighted()"
           type="button"
         >
           highlighted: {{ isHighlighted() }}
-        </button>
+        </ui-lib-button>
       </div>
 
       <div class="demo-playground__result">

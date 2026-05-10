@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Dock } from 'ui-lib-custom/dock';
+import { Button } from 'ui-lib-custom/button';
 import type {
   DockItem,
   DockItemCommandEvent,
@@ -15,7 +16,7 @@ import type {
 @Component({
   selector: 'app-dock-demo',
   standalone: true,
-  imports: [Dock],
+  imports: [Dock, Button],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

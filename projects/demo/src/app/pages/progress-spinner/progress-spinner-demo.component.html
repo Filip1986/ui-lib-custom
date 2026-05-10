@@ -161,21 +161,9 @@
         <div class="ps-control">
           <span class="ps-control__label">size</span>
           <div class="ps-control__buttons">
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveSize() === 'sm'"
-              (click)="setSize('sm')"
-            >sm</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveSize() === 'md'"
-              (click)="setSize('md')"
-            >md</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveSize() === 'lg'"
-              (click)="setSize('lg')"
-            >lg</button>
+            <ui-lib-button [appearance]="interactiveSize() === 'sm' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('sm')">sm</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveSize() === 'md' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('md')">md</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveSize() === 'lg' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setSize('lg')">lg</ui-lib-button>
           </div>
         </div>
 
@@ -183,21 +171,9 @@
         <div class="ps-control">
           <span class="ps-control__label">variant</span>
           <div class="ps-control__buttons">
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveVariant() === 'material'"
-              (click)="setVariant('material')"
-            >material</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveVariant() === 'bootstrap'"
-              (click)="setVariant('bootstrap')"
-            >bootstrap</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveVariant() === 'minimal'"
-              (click)="setVariant('minimal')"
-            >minimal</button>
+            <ui-lib-button [appearance]="interactiveVariant() === 'material' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('material')">material</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveVariant() === 'bootstrap' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('bootstrap')">bootstrap</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveVariant() === 'minimal' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setVariant('minimal')">minimal</ui-lib-button>
           </div>
         </div>
 
@@ -205,21 +181,9 @@
         <div class="ps-control">
           <span class="ps-control__label">animationDuration</span>
           <div class="ps-control__buttons">
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveDuration() === '4s'"
-              (click)="setDuration('4s')"
-            >4s</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveDuration() === '2s'"
-              (click)="setDuration('2s')"
-            >2s</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveDuration() === '750ms'"
-              (click)="setDuration('750ms')"
-            >750ms</button>
+            <ui-lib-button [appearance]="interactiveDuration() === '4s' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setDuration('4s')">4s</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveDuration() === '2s' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setDuration('2s')">2s</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveDuration() === '750ms' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setDuration('750ms')">750ms</ui-lib-button>
           </div>
         </div>
 
@@ -227,26 +191,10 @@
         <div class="ps-control">
           <span class="ps-control__label">strokeWidth</span>
           <div class="ps-control__buttons">
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveStrokeWidth() === '1'"
-              (click)="setStrokeWidth('1')"
-            >1</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveStrokeWidth() === '2'"
-              (click)="setStrokeWidth('2')"
-            >2</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveStrokeWidth() === '4'"
-              (click)="setStrokeWidth('4')"
-            >4</button>
-            <button
-              class="ps-btn"
-              [class.ps-btn--active]="interactiveStrokeWidth() === '6'"
-              (click)="setStrokeWidth('6')"
-            >6</button>
+            <ui-lib-button [appearance]="interactiveStrokeWidth() === '1' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('1')">1</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveStrokeWidth() === '2' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('2')">2</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveStrokeWidth() === '4' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('4')">4</ui-lib-button>
+            <ui-lib-button [appearance]="interactiveStrokeWidth() === '6' ? 'solid' : 'outline'" severity="primary" size="sm" type="button" (click)="setStrokeWidth('6')">6</ui-lib-button>
           </div>
         </div>
       </div>

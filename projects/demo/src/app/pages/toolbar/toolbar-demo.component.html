@@ -11,15 +11,15 @@
     <div class="demo-hero__preview">
       <ui-lib-toolbar>
         <div uiToolbarStart>
-          <button class="demo-btn" type="button">← Back</button>
-          <button class="demo-btn" type="button">⊞ Grid</button>
+          <ui-lib-button type="button">← Back</ui-lib-button>
+          <ui-lib-button type="button">⊞ Grid</ui-lib-button>
         </div>
         <div uiToolbarCenter>
           <strong>My Application</strong>
         </div>
         <div uiToolbarEnd>
-          <button class="demo-btn" type="button">🔔</button>
-          <button class="demo-btn" type="button">⚙ Settings</button>
+          <ui-lib-button type="button">🔔</ui-lib-button>
+          <ui-lib-button type="button">⚙ Settings</ui-lib-button>
         </div>
       </ui-lib-toolbar>
     </div>
@@ -33,9 +33,9 @@
     </p>
     <ui-lib-toolbar>
       <div uiToolbarStart>
-        <button class="demo-btn" type="button">New</button>
-        <button class="demo-btn" type="button">Open</button>
-        <button class="demo-btn" type="button">Save</button>
+        <ui-lib-button type="button">New</ui-lib-button>
+        <ui-lib-button type="button">Open</ui-lib-button>
+        <ui-lib-button type="button">Save</ui-lib-button>
       </div>
     </ui-lib-toolbar>
   </div>
@@ -48,13 +48,13 @@
     </p>
     <ui-lib-toolbar>
       <div uiToolbarStart>
-        <button class="demo-btn" type="button">Cut</button>
-        <button class="demo-btn" type="button">Copy</button>
-        <button class="demo-btn" type="button">Paste</button>
+        <ui-lib-button type="button">Cut</ui-lib-button>
+        <ui-lib-button type="button">Copy</ui-lib-button>
+        <ui-lib-button type="button">Paste</ui-lib-button>
       </div>
       <div uiToolbarEnd>
-        <button class="demo-btn" type="button">Undo</button>
-        <button class="demo-btn" type="button">Redo</button>
+        <ui-lib-button type="button">Undo</ui-lib-button>
+        <ui-lib-button type="button">Redo</ui-lib-button>
       </div>
     </ui-lib-toolbar>
   </div>
@@ -67,15 +67,15 @@
     </p>
     <ui-lib-toolbar>
       <div uiToolbarStart>
-        <button class="demo-btn" type="button">← Back</button>
-        <button class="demo-btn" type="button">→ Forward</button>
+        <ui-lib-button type="button">← Back</ui-lib-button>
+        <ui-lib-button type="button">→ Forward</ui-lib-button>
       </div>
       <div uiToolbarCenter>
         <span>Page Title</span>
       </div>
       <div uiToolbarEnd>
-        <button class="demo-btn" type="button">Share</button>
-        <button class="demo-btn" type="button">Print</button>
+        <ui-lib-button type="button">Share</ui-lib-button>
+        <ui-lib-button type="button">Print</ui-lib-button>
       </div>
     </ui-lib-toolbar>
   </div>
@@ -92,8 +92,8 @@
         <p class="demo-section__desc" style="margin-bottom: 0.25rem"><code>size="{{ size }}"</code></p>
         <ui-lib-toolbar [size]="size">
           <div uiToolbarStart>
-            <button class="demo-btn" type="button">Action</button>
-            <button class="demo-btn" type="button">Another</button>
+            <ui-lib-button type="button">Action</ui-lib-button>
+            <ui-lib-button type="button">Another</ui-lib-button>
           </div>
           <div uiToolbarEnd>
             <span>{{ size }}</span>
@@ -114,13 +114,13 @@
         <h3 class="demo-variant-group__label">{{ variant }}</h3>
         <ui-lib-toolbar [variant]="variant">
           <div uiToolbarStart>
-            <button class="demo-btn" type="button">Start Action</button>
+            <ui-lib-button type="button">Start Action</ui-lib-button>
           </div>
           <div uiToolbarCenter>
             <span>{{ variant }}</span>
           </div>
           <div uiToolbarEnd>
-            <button class="demo-btn" type="button">End Action</button>
+            <ui-lib-button type="button">End Action</ui-lib-button>
           </div>
         </ui-lib-toolbar>
       </div>
@@ -136,15 +136,15 @@
       <div class="demo-playground__preview">
         <ui-lib-toolbar [variant]="playgroundVariant()" [size]="playgroundSize()">
           <div uiToolbarStart>
-            <button class="demo-btn" type="button">← Back</button>
-            <button class="demo-btn" type="button">⊞</button>
+            <ui-lib-button type="button">← Back</ui-lib-button>
+            <ui-lib-button type="button">⊞</ui-lib-button>
           </div>
           <div uiToolbarCenter>
             <strong>{{ playgroundVariant() }} / {{ playgroundSize() }}</strong>
           </div>
           <div uiToolbarEnd>
-            <button class="demo-btn" type="button">Share</button>
-            <button class="demo-btn" type="button">⚙</button>
+            <ui-lib-button type="button">Share</ui-lib-button>
+            <ui-lib-button type="button">⚙</ui-lib-button>
           </div>
         </ui-lib-toolbar>
       </div>
@@ -155,12 +155,13 @@
           <span class="demo-control__label">Variant</span>
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-btn"
-                [class.demo-btn--active]="playgroundVariant() === variant"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setVariant(variant)"
-              >{{ variant }}</button>
+              >{{ variant }}</ui-lib-button>
             }
           </div>
         </div>
@@ -170,12 +171,13 @@
           <span class="demo-control__label">Size</span>
           <div class="demo-control__buttons">
             @for (size of sizes; track size) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-btn"
-                [class.demo-btn--active]="playgroundSize() === size"
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setSize(size)"
-              >{{ size }}</button>
+              >{{ size }}</ui-lib-button>
             }
           </div>
         </div>
@@ -251,4 +253,3 @@
   </div>
 
 </section>
-

@@ -60,9 +60,9 @@
       @if (playgroundClosed()) {
         <div class="message-demo__dismissed">
           Message dismissed.
-          <button class="message-demo__reset-btn" type="button" (click)="resetPlayground()">
+          <ui-lib-button appearance="link" size="sm" type="button" (click)="resetPlayground()">
             Show again
-          </button>
+          </ui-lib-button>
         </div>
       } @else {
         <ui-lib-message
@@ -187,9 +187,9 @@
         }
       }
       @if (closedSeverities().size > 0) {
-        <button class="message-demo__reset-btn" type="button" (click)="resetClosable()">
+        <ui-lib-button appearance="link" size="sm" type="button" (click)="resetClosable()">
           Restore dismissed messages
-        </button>
+        </ui-lib-button>
       }
     </div>
   </section>

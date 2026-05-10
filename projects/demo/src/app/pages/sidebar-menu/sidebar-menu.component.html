@@ -29,9 +29,9 @@
         <div class="control-group">
           <div class="label">Variant</div>
           @for (v of variants; track v) {
-            <button class="chip" [class.active]="variant() === v" (click)="setVariant(v)">
+            <ui-lib-button [appearance]="variant() === v ? 'solid' : 'outline'" severity="primary" size="sm" (click)="setVariant(v)">
               {{ v }}
-            </button>
+            </ui-lib-button>
           }
         </div>
         <div class="control-group toggles">
@@ -69,7 +69,7 @@
                   <span class="pi pi-user"></span>
                   <span class="name">Jane Doe</span>
                 </div>
-                <button class="logout" type="button">Logout</button>
+                <ui-lib-button appearance="ghost" size="sm" type="button">Logout</ui-lib-button>
               </div>
             </ui-lib-sidebar-menu>
           </div>

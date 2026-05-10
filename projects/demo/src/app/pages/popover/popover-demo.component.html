@@ -18,9 +18,9 @@
     </p>
 
     <div class="demo-row">
-      <button #basicTrigger class="demo-btn demo-btn--primary" (click)="basicPopover.toggle(basicTrigger)">
+      <ui-lib-button severity="primary" (click)="basicPopover.toggle($any($event.currentTarget))">
         Toggle Popover
-      </button>
+      </ui-lib-button>
 
       <ui-lib-popover #basicPopover>
         <p class="demo-popover-text">
@@ -45,9 +45,9 @@
     </p>
 
     <div class="demo-row">
-      <button #headerTrigger class="demo-btn demo-btn--primary" (click)="headerPopover.toggle(headerTrigger)">
+      <ui-lib-button severity="primary" (click)="headerPopover.toggle($any($event.currentTarget))">
         Open with Header
-      </button>
+      </ui-lib-button>
 
       <ui-lib-popover #headerPopover header="User Details" [showCloseButton]="true">
         <div class="demo-popover-profile">
@@ -73,9 +73,9 @@
     </p>
 
     <div class="demo-row">
-      <button #richTrigger class="demo-btn demo-btn--secondary" (click)="richPopover.toggle(richTrigger)">
+      <ui-lib-button severity="secondary" (click)="richPopover.toggle($any($event.currentTarget))">
         Show Actions
-      </button>
+      </ui-lib-button>
 
       <ui-lib-popover #richPopover header="Quick Actions" [showCloseButton]="true">
         <ul class="demo-popover-actions">
@@ -102,13 +102,12 @@
 
     <div class="demo-row demo-row--gap">
       @for (variant of variants; track variant) {
-        <button
-          #variantTrigger
-          class="demo-btn demo-btn--secondary"
-          (click)="variantPopover.toggle(variantTrigger)"
+        <ui-lib-button
+          severity="secondary"
+          (click)="variantPopover.toggle($any($event.currentTarget))"
         >
           {{ variant }}
-        </button>
+        </ui-lib-button>
 
         <ui-lib-popover #variantPopover [variant]="variant" [header]="variant">
           <p class="demo-popover-text">
@@ -128,9 +127,9 @@
     </p>
 
     <div class="demo-row">
-      <button #noClickTrigger class="demo-btn demo-btn--primary" (click)="noClickPopover.toggle(noClickTrigger)">
+      <ui-lib-button severity="primary" (click)="noClickPopover.toggle($any($event.currentTarget))">
         Open (no click-away)
-      </button>
+      </ui-lib-button>
 
       <ui-lib-popover
         #noClickPopover
@@ -154,9 +153,9 @@
     </p>
 
     <div class="demo-row">
-      <button #eventTrigger class="demo-btn demo-btn--primary" (click)="eventPopover.toggle(eventTrigger)">
+      <ui-lib-button severity="primary" (click)="eventPopover.toggle($any($event.currentTarget))">
         Open
-      </button>
+      </ui-lib-button>
 
       <ui-lib-popover
         #eventPopover
@@ -179,12 +178,12 @@
     </p>
 
     <div class="demo-row">
-      <button
-        class="demo-btn demo-btn--primary"
+      <ui-lib-button
+        severity="primary"
         (click)="declarativeVisible.set(!declarativeVisible())"
       >
         {{ declarativeVisible() ? 'Hide' : 'Show' }} Popover
-      </button>
+      </ui-lib-button>
     </div>
 
     <ui-lib-popover

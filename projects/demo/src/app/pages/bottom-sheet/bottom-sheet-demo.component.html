@@ -17,9 +17,9 @@
       <kbd>Escape</kbd> to dismiss.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" type="button" (click)="basicOpen.set(true)">
+      <ui-lib-button type="button" (click)="basicOpen.set(true)">
         Open Sheet
-      </button>
+      </ui-lib-button>
     </div>
     <div class="demo-code">
       <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen"&#62;
@@ -35,9 +35,9 @@
       Pass <code>header</code> to render a title bar with a close button.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" type="button" (click)="headerOpen.set(true)">
+      <ui-lib-button type="button" (click)="headerOpen.set(true)">
         Open with Header
-      </button>
+      </ui-lib-button>
     </div>
     <div class="demo-code">
       <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen" header="Share"&#62;
@@ -54,9 +54,9 @@
       area pinned to the bottom of the panel.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" type="button" (click)="footerOpen.set(true)">
+      <ui-lib-button type="button" (click)="footerOpen.set(true)">
         Open with Footer
-      </button>
+      </ui-lib-button>
     </div>
     <div class="demo-code">
       <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen" header="Confirm"&#62;
@@ -76,9 +76,9 @@
       Set <code>[closeOnBackdrop]="false"</code> to prevent clicking the backdrop from closing the sheet.
     </p>
     <div class="demo-card">
-      <button class="demo-btn" type="button" (click)="noBackdropOpen.set(true)">
+      <ui-lib-button type="button" (click)="noBackdropOpen.set(true)">
         Open (backdrop locked)
-      </button>
+      </ui-lib-button>
     </div>
   </div>
 
@@ -91,13 +91,12 @@
     </p>
     <div class="demo-card demo-card--row">
       @for (variant of variants; track variant) {
-        <button
-          class="demo-btn"
+        <ui-lib-button
           type="button"
           (click)="openVariant(variant)"
         >
           {{ variant }}
-        </button>
+        </ui-lib-button>
       }
     </div>
   </div>
@@ -221,12 +220,12 @@
 <ui-lib-bottom-sheet [(visible)]="footerOpen" header="Confirm action">
   <p>This sheet has a sticky footer with action buttons projected via the <code>[bottomSheetFooter]</code> slot.</p>
   <div bottomSheetFooter class="demo-footer-actions">
-    <button class="demo-btn demo-btn--outline" type="button" (click)="footerOpen.set(false)">
+    <ui-lib-button appearance="outline" type="button" (click)="footerOpen.set(false)">
       Cancel
-    </button>
-    <button class="demo-btn" type="button" (click)="footerOpen.set(false)">
+    </ui-lib-button>
+    <ui-lib-button type="button" (click)="footerOpen.set(false)">
       Confirm
-    </button>
+    </ui-lib-button>
   </div>
 </ui-lib-bottom-sheet>
 

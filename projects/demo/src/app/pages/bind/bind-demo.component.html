@@ -46,33 +46,35 @@
           <span class="bd-control-label">id preset</span>
           <div class="bd-btn-row">
             @for (preset of idPresets; track preset) {
-              <button
-                class="bd-btn"
-                [class.bd-btn--active]="activeIdPreset() === preset"
+              <ui-lib-button
+                [appearance]="activeIdPreset() === preset ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 type="button"
                 (click)="setPreset(preset)"
               >
                 {{ preset }}
-              </button>
+              </ui-lib-button>
             }
           </div>
         </div>
         <div class="bd-control-group">
           <span class="bd-control-label">title (tooltip)</span>
-          <button class="bd-btn" type="button" (click)="cycleTooltip()">
+          <ui-lib-button size="sm" type="button" (click)="cycleTooltip()">
             Cycle: &ldquo;{{ tooltipLabel() }}&rdquo;
-          </button>
+          </ui-lib-button>
         </div>
         <div class="bd-control-group">
           <span class="bd-control-label">tabIndex</span>
-          <button
-            class="bd-btn"
-            [class.bd-btn--active]="includeTabIndex()"
+          <ui-lib-button
+            [appearance]="includeTabIndex() ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
             type="button"
             (click)="toggleTabIndex()"
           >
             @if (includeTabIndex()) { Included } @else { Excluded }
-          </button>
+          </ui-lib-button>
         </div>
       </div>
       <div

@@ -8,6 +8,7 @@ import type {
   TreeTableSelectionMode,
   TreeTableVariant,
 } from 'ui-lib-custom/tree-table';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the TreeTable component.
@@ -17,7 +18,7 @@ import type {
 @Component({
   selector: 'app-tree-table-demo',
   standalone: true,
-  imports: [TreeTableComponent, TreeTableColumnComponent, TreeTableColumnBodyDirective],
+  imports: [TreeTableComponent, TreeTableColumnComponent, TreeTableColumnBodyDirective, Button],
   templateUrl: './tree-table-demo.component.html',
   styleUrl: './tree-table-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

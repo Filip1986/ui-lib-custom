@@ -109,12 +109,13 @@
             <label class="demo-control-label">Variant</label>
             <div class="demo-control-buttons">
               @for (v of variants; track v) {
-                <button
+                <ui-lib-button
                   type="button"
-                  class="demo-pill-btn"
-                  [class.demo-pill-btn--active]="playgroundVariant() === v"
+                  [appearance]="playgroundVariant() === v ? 'solid' : 'outline'"
+                  severity="primary"
+                  size="sm"
                   (click)="setPlaygroundVariant(v)"
-                >{{ v }}</button>
+                >{{ v }}</ui-lib-button>
               }
             </div>
           </div>
@@ -123,12 +124,13 @@
             <label class="demo-control-label">Size</label>
             <div class="demo-control-buttons">
               @for (s of sizes; track s) {
-                <button
+                <ui-lib-button
                   type="button"
-                  class="demo-pill-btn"
-                  [class.demo-pill-btn--active]="playgroundSize() === s"
+                  [appearance]="playgroundSize() === s ? 'solid' : 'outline'"
+                  severity="primary"
+                  size="sm"
                   (click)="setPlaygroundSize(s)"
-                >{{ s }}</button>
+                >{{ s }}</ui-lib-button>
               }
             </div>
           </div>

@@ -10,6 +10,7 @@ import {
   TableExpansionDirective,
 } from 'ui-lib-custom/table';
 import type { TableSelectionMode, TableSortEvent, TableVariant } from 'ui-lib-custom/table';
+import { Button } from 'ui-lib-custom/button';
 
 interface Product {
   id: number;
@@ -33,6 +34,7 @@ interface Product {
     TableColumnBodyDirective,
     TableEmptyDirective,
     TableExpansionDirective,
+    Button,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',

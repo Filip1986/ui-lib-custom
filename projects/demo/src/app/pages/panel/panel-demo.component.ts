@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Panel } from 'ui-lib-custom/panel';
 import type { PanelToggleEvent, PanelVariant } from 'ui-lib-custom/panel';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Panel component.
@@ -9,7 +10,7 @@ import type { PanelToggleEvent, PanelVariant } from 'ui-lib-custom/panel';
 @Component({
   selector: 'app-panel-demo',
   standalone: true,
-  imports: [Panel],
+  imports: [Panel, Button],
   templateUrl: './panel-demo.component.html',
   styleUrl: './panel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

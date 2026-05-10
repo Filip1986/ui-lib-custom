@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Fluid, FluidDirective } from 'ui-lib-custom/fluid';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Fluid component and FluidDirective.
@@ -9,7 +10,7 @@ import { Fluid, FluidDirective } from 'ui-lib-custom/fluid';
 @Component({
   selector: 'app-fluid-demo',
   standalone: true,
-  imports: [Fluid, FluidDirective],
+  imports: [Fluid, FluidDirective, Button],
   templateUrl: './fluid-demo.component.html',
   styleUrl: './fluid-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

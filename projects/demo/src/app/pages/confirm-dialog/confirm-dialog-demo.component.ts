@@ -6,6 +6,7 @@ import type {
   ConfirmDialogButtonSeverity,
   ConfirmDialogVariant,
 } from 'ui-lib-custom/confirm-dialog';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the ConfirmDialog component.
@@ -13,7 +14,7 @@ import type {
 @Component({
   selector: 'app-confirm-dialog-demo',
   standalone: true,
-  imports: [ConfirmDialog, TitleCasePipe],
+  imports: [ConfirmDialog, TitleCasePipe, Button],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

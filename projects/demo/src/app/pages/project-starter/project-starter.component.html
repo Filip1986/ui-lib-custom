@@ -35,7 +35,7 @@
             [ngModel]="themeName()"
             (ngModelChange)="themeName.set($event)"
           />
-          <button type="button" class="chip" (click)="saveTheme()">Save Theme</button>
+          <ui-lib-button type="button" severity="primary" size="sm" (click)="saveTheme()">Save Theme</ui-lib-button>
         </div>
         <div class="control-group">
           <label>Saved themes</label>
@@ -49,14 +49,15 @@
               <option [value]="name">{{ name }}</option>
             }
           </select>
-          <button
+          <ui-lib-button
             type="button"
-            class="chip"
+            appearance="ghost"
+            size="sm"
             (click)="deleteTheme(selectedSaved())"
             [disabled]="!selectedSaved()"
           >
             Delete
-          </button>
+          </ui-lib-button>
         </div>
         <div class="control-group">
           <label>Import theme.json</label>
@@ -67,9 +68,9 @@
           />
         </div>
         <div class="actions">
-          <button type="button" class="chip primary" (click)="exportStarterPackage()">
+          <ui-lib-button type="button" severity="primary" (click)="exportStarterPackage()">
             Download Starter Package
-          </button>
+          </ui-lib-button>
         </div>
         @if (message()) {
           <div class="message">{{ message() }}</div>

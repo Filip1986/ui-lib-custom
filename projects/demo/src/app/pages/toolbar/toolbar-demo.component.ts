@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Toolbar } from 'ui-lib-custom/toolbar';
 import type { ToolbarSize, ToolbarVariant } from 'ui-lib-custom/toolbar';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Toolbar component.
@@ -9,7 +10,7 @@ import type { ToolbarSize, ToolbarVariant } from 'ui-lib-custom/toolbar';
 @Component({
   selector: 'app-toolbar-demo',
   standalone: true,
-  imports: [Toolbar],
+  imports: [Toolbar, Button],
   templateUrl: './toolbar-demo.component.html',
   styleUrl: './toolbar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

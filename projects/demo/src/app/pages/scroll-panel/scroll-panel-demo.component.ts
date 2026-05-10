@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { ScrollPanel } from 'ui-lib-custom/scroll-panel';
 import type { ScrollPanelVariant } from 'ui-lib-custom/scroll-panel';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the ScrollPanel component.
@@ -9,7 +10,7 @@ import type { ScrollPanelVariant } from 'ui-lib-custom/scroll-panel';
 @Component({
   selector: 'app-scroll-panel-demo',
   standalone: true,
-  imports: [ScrollPanel],
+  imports: [ScrollPanel, Button],
   templateUrl: './scroll-panel-demo.component.html',
   styleUrl: './scroll-panel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

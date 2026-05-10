@@ -132,8 +132,8 @@
     <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-progress-bar [value]="dynamicValue()" />
       <div class="demo-controls">
-        <button class="demo-btn" type="button" (click)="increment()">+10</button>
-        <button class="demo-btn demo-btn--secondary" type="button" (click)="reset()">Reset</button>
+        <ui-lib-button type="button" (click)="increment()">+10</ui-lib-button>
+        <ui-lib-button severity="secondary" type="button" (click)="reset()">Reset</ui-lib-button>
         <span class="demo-value-display">{{ dynamicValue() }}%</span>
       </div>
     </div>

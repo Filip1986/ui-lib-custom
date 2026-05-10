@@ -127,9 +127,9 @@
                   <label>Required on</label>
                 </uilib-float-label>
               </div>
-              <button type="button" class="demo-button" (click)="markInvalidAsDirty()">
+              <ui-lib-button type="button" severity="primary" (click)="markInvalidAsDirty()">
                 Mark invalid controls dirty
-              </button>
+              </ui-lib-button>
             </form>
           </ui-lib-card>
         </app-code-preview>
@@ -152,7 +152,7 @@
                 <textarea placeholder=" " rows="3" formControlName="bio"></textarea>
                 <label>Bio</label>
               </uilib-float-label>
-              <button type="submit" class="demo-button">Submit reactive form</button>
+              <ui-lib-button type="submit" severity="primary">Submit reactive form</ui-lib-button>
               <pre class="value-pre">{{ submittedReactiveValue | json }}</pre>
             </form>
           </ui-lib-card>

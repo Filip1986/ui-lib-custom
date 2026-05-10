@@ -116,12 +116,13 @@
           <span class="demo-control__label">Severity</span>
           <div class="demo-control__buttons">
             @for (severity of severities; track severity) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-btn"
-                [class.demo-btn--active]="playgroundSeverity() === severity"
+                [appearance]="playgroundSeverity() === severity ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setSeverity(severity)"
-              >{{ severityLabels[severity] }}</button>
+              >{{ severityLabels[severity] }}</ui-lib-button>
             }
           </div>
         </div>
@@ -131,12 +132,13 @@
           <span class="demo-control__label">Size</span>
           <div class="demo-control__buttons">
             @for (size of sizes; track size) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-btn"
-                [class.demo-btn--active]="playgroundSize() === size"
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setSize(size)"
-              >{{ size }}</button>
+              >{{ size }}</ui-lib-button>
             }
           </div>
         </div>
@@ -146,12 +148,13 @@
           <span class="demo-control__label">Variant</span>
           <div class="demo-control__buttons">
             @for (variant of variants; track variant) {
-              <button
+              <ui-lib-button
                 type="button"
-                class="demo-btn"
-                [class.demo-btn--active]="playgroundVariant() === variant"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
                 (click)="setVariant(variant)"
-              >{{ variant }}</button>
+              >{{ variant }}</ui-lib-button>
             }
           </div>
         </div>
@@ -159,23 +162,25 @@
         <!-- Rounded -->
         <div class="demo-control">
           <span class="demo-control__label">Rounded</span>
-          <button
+          <ui-lib-button
             type="button"
-            class="demo-btn"
-            [class.demo-btn--active]="playgroundRounded()"
+            [appearance]="playgroundRounded() ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
             (click)="toggleRounded()"
-          >{{ playgroundRounded() ? 'On' : 'Off' }}</button>
+          >{{ playgroundRounded() ? 'On' : 'Off' }}</ui-lib-button>
         </div>
 
         <!-- Icon -->
         <div class="demo-control">
           <span class="demo-control__label">Icon</span>
-          <button
+          <ui-lib-button
             type="button"
-            class="demo-btn"
-            [class.demo-btn--active]="playgroundIcon() !== null"
+            [appearance]="playgroundIcon() !== null ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
             (click)="toggleIcon()"
-          >{{ playgroundIcon() ? 'On' : 'Off' }}</button>
+          >{{ playgroundIcon() ? 'On' : 'Off' }}</ui-lib-button>
         </div>
       </div>
     </div>
@@ -241,4 +246,3 @@
   </div>
 
 </section>
-

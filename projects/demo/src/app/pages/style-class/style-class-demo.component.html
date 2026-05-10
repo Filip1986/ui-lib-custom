@@ -24,13 +24,13 @@
 
     <div class="demo-card">
       <div class="demo-card__preview">
-        <button
-          class="sc-btn"
+        <ui-lib-button
           [uiLibStyleClass]="'@next'"
           toggleClass="sc-panel--open"
+          type="button"
         >
           Toggle Panel
-        </button>
+        </ui-lib-button>
         <div class="sc-panel">
           <p>This panel is shown/hidden via a CSS class toggle.</p>
           <p>No JavaScript animation — just CSS.</p>
@@ -59,17 +59,17 @@
 
     <div class="demo-card">
       <div class="demo-card__preview">
-        <button
-          class="sc-btn"
+        <ui-lib-button
           [uiLibStyleClass]="'@next'"
           enterFromClass="sc-fade--hidden"
           enterActiveClass="sc-fade-in"
           leaveActiveClass="sc-fade-out"
           leaveToClass="sc-fade--hidden"
           [hideOnOutsideClick]="true"
+          type="button"
         >
           Show Panel (click outside to hide)
-        </button>
+        </ui-lib-button>
         <div class="sc-panel sc-panel--fade sc-fade--hidden">
           <strong>Fade Panel</strong>
           <p>Click outside to close this panel.</p>
@@ -100,17 +100,17 @@
 
     <div class="demo-card">
       <div class="demo-card__preview">
-        <button
-          class="sc-btn"
+        <ui-lib-button
           [uiLibStyleClass]="'@next'"
           enterFromClass="sc-slide--hidden"
           enterActiveClass="sc-slide-down"
           enterDoneClass="sc-slide--open"
           leaveActiveClass="sc-slide-up"
           leaveDoneClass="sc-slide--hidden"
+          type="button"
         >
           Toggle Slide
-        </button>
+        </ui-lib-button>
         <div class="sc-panel sc-panel--slide sc-slide--hidden">
           <strong>Slide Panel</strong>
           <p>This panel slides in/out using enterDoneClass and leaveDoneClass.</p>
@@ -144,25 +144,27 @@
         <!-- @prev -->
         <div class="sc-selector-row">
           <div class="sc-badge sc-badge--prev">@prev target</div>
-          <button
-            class="sc-btn sc-btn--sm"
+          <ui-lib-button
+            size="sm"
             [uiLibStyleClass]="'@prev'"
             toggleClass="sc-badge--active"
+            type="button"
           >
             Toggle @prev
-          </button>
+          </ui-lib-button>
         </div>
 
         <!-- @parent -->
         <div class="sc-selector-row sc-parent-wrapper">
           <span class="sc-badge sc-badge--parent">@parent wrapper</span>
-          <button
-            class="sc-btn sc-btn--sm"
+          <ui-lib-button
+            size="sm"
             [uiLibStyleClass]="'@parent'"
             toggleClass="sc-parent--active"
+            type="button"
           >
             Toggle @parent
-          </button>
+          </ui-lib-button>
         </div>
 
       </div>
@@ -191,13 +193,13 @@
 
     <div class="demo-card">
       <div class="demo-card__preview">
-        <button
-          class="sc-btn"
+        <ui-lib-button
           [uiLibStyleClass]="'#sc-remote-panel'"
           toggleClass="sc-panel--open"
+          type="button"
         >
           Toggle Remote Panel
-        </button>
+        </ui-lib-button>
         <div id="sc-remote-panel" class="sc-panel sc-panel--remote">
           <p>This panel is targeted by <code>#sc-remote-panel</code> CSS selector.</p>
         </div>

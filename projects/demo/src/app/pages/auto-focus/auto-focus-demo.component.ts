@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { AutoFocus } from 'ui-lib-custom/auto-focus';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the AutoFocus directive.
@@ -9,7 +10,7 @@ import { AutoFocus } from 'ui-lib-custom/auto-focus';
 @Component({
   selector: 'app-auto-focus-demo',
   standalone: true,
-  imports: [AutoFocus],
+  imports: [AutoFocus, Button],
   templateUrl: './auto-focus-demo.component.html',
   styleUrl: './auto-focus-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

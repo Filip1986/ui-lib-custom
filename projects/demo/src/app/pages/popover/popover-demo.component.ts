@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { Popover } from 'ui-lib-custom/popover';
 import type { PopoverVariant } from 'ui-lib-custom/popover';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the Popover component.
@@ -9,7 +10,7 @@ import type { PopoverVariant } from 'ui-lib-custom/popover';
 @Component({
   selector: 'app-popover-demo',
   standalone: true,
-  imports: [Popover],
+  imports: [Popover, Button],
   templateUrl: './popover-demo.component.html',
   styleUrl: './popover-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -14,7 +14,7 @@
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">Click to open a right-side drawer with a header and content.</p>
     <div class="demo-section__content">
-      <button class="demo-btn" type="button" (click)="basicOpen.set(true)">Open Drawer</button>
+      <ui-lib-button type="button" (click)="basicOpen.set(true)">Open Drawer</ui-lib-button>
     </div>
 
     <ui-lib-drawer [(visible)]="basicOpen" header="Basic Drawer">
@@ -30,10 +30,10 @@
       Use the <code>position</code> input to slide the drawer in from any edge.
     </p>
     <div class="demo-section__content demo-section__content--row">
-      <button class="demo-btn" type="button" (click)="openPosition('left')">Left</button>
-      <button class="demo-btn" type="button" (click)="openPosition('right')">Right</button>
-      <button class="demo-btn" type="button" (click)="openPosition('top')">Top</button>
-      <button class="demo-btn" type="button" (click)="openPosition('bottom')">Bottom</button>
+      <ui-lib-button type="button" (click)="openPosition('left')">Left</ui-lib-button>
+      <ui-lib-button type="button" (click)="openPosition('right')">Right</ui-lib-button>
+      <ui-lib-button type="button" (click)="openPosition('top')">Top</ui-lib-button>
+      <ui-lib-button type="button" (click)="openPosition('bottom')">Bottom</ui-lib-button>
     </div>
 
     <ui-lib-drawer
@@ -52,9 +52,9 @@
       Three design variants match the library's global theme: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
     </p>
     <div class="demo-section__content demo-section__content--row">
-      <button class="demo-btn demo-btn--material" type="button" (click)="openVariant('material')">Material</button>
-      <button class="demo-btn demo-btn--bootstrap" type="button" (click)="openVariant('bootstrap')">Bootstrap</button>
-      <button class="demo-btn demo-btn--minimal" type="button" (click)="openVariant('minimal')">Minimal</button>
+      <ui-lib-button variant="material" type="button" (click)="openVariant('material')">Material</ui-lib-button>
+      <ui-lib-button variant="bootstrap" type="button" (click)="openVariant('bootstrap')">Bootstrap</ui-lib-button>
+      <ui-lib-button variant="minimal" type="button" (click)="openVariant('minimal')">Minimal</ui-lib-button>
     </div>
 
     <ui-lib-drawer
@@ -73,12 +73,12 @@
       Set <code>[modal]="false"</code> to remove the backdrop — the rest of the page stays interactive.
     </p>
     <div class="demo-section__content">
-      <button class="demo-btn" type="button" (click)="noBackdropOpen.set(true)">Open (no backdrop)</button>
+      <ui-lib-button type="button" (click)="noBackdropOpen.set(true)">Open (no backdrop)</ui-lib-button>
     </div>
 
     <ui-lib-drawer [(visible)]="noBackdropOpen" header="No Backdrop" [modal]="false">
       <p>The page behind this drawer remains scrollable and interactive.</p>
-      <button class="demo-btn demo-btn--sm" type="button" (click)="noBackdropOpen.set(false)">Close</button>
+      <ui-lib-button size="sm" type="button" (click)="noBackdropOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
   </div>
 
@@ -89,7 +89,7 @@
       Project an element with <code>drawerFooter</code> attribute to render a sticky footer.
     </p>
     <div class="demo-section__content">
-      <button class="demo-btn" type="button" (click)="footerOpen.set(true)">Open with Footer</button>
+      <ui-lib-button type="button" (click)="footerOpen.set(true)">Open with Footer</ui-lib-button>
     </div>
 
     <ui-lib-drawer [(visible)]="footerOpen" header="Settings" size="380px">
@@ -108,8 +108,8 @@
         </label>
       </div>
       <div drawerFooter class="demo-footer-actions">
-        <button class="demo-btn demo-btn--ghost" type="button" (click)="footerOpen.set(false)">Cancel</button>
-        <button class="demo-btn" type="button" (click)="footerOpen.set(false)">Save changes</button>
+        <ui-lib-button appearance="ghost" type="button" (click)="footerOpen.set(false)">Cancel</ui-lib-button>
+        <ui-lib-button type="button" (click)="footerOpen.set(false)">Save changes</ui-lib-button>
       </div>
     </ui-lib-drawer>
   </div>
@@ -121,12 +121,12 @@
       Set <code>size="100vw"</code> (or <code>100vh</code> for top/bottom) for a full-screen drawer.
     </p>
     <div class="demo-section__content">
-      <button class="demo-btn" type="button" (click)="fullScreenOpen.set(true)">Open Full Screen</button>
+      <ui-lib-button type="button" (click)="fullScreenOpen.set(true)">Open Full Screen</ui-lib-button>
     </div>
 
     <ui-lib-drawer [(visible)]="fullScreenOpen" header="Full Screen Drawer" size="100vw">
       <p>This drawer spans the full viewport width.</p>
-      <button class="demo-btn" type="button" (click)="fullScreenOpen.set(false)">Close</button>
+      <ui-lib-button type="button" (click)="fullScreenOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
   </div>
 

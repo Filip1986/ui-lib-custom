@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/c
 import type { WritableSignal, Signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { Bind } from 'ui-lib-custom/bind';
+import { Button } from 'ui-lib-custom/button';
 /**
  * Demo page for the Bind directive.
  * Demonstrates basic usage, dynamic binding updates, and the full input API.
@@ -9,7 +10,7 @@ import { Bind } from 'ui-lib-custom/bind';
 @Component({
   selector: 'app-bind-demo',
   standalone: true,
-  imports: [Bind, JsonPipe],
+  imports: [Bind, JsonPipe, Button],
   templateUrl: './bind-demo.component.html',
   styleUrl: './bind-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

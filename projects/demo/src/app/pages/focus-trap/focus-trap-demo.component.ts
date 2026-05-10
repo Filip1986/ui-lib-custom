@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the FocusTrap directive.
@@ -9,7 +10,7 @@ import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
 @Component({
   selector: 'app-focus-trap-demo',
   standalone: true,
-  imports: [FocusTrapDirective],
+  imports: [FocusTrapDirective, Button],
   templateUrl: './focus-trap-demo.component.html',
   styleUrl: './focus-trap-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { ProgressBar } from 'ui-lib-custom/progress-bar';
 import type { ProgressBarVariant } from 'ui-lib-custom/progress-bar';
+import { Button } from 'ui-lib-custom/button';
 
 /**
  * Demo page for the ProgressBar component.
@@ -9,7 +10,7 @@ import type { ProgressBarVariant } from 'ui-lib-custom/progress-bar';
 @Component({
   selector: 'app-progress-bar-demo',
   standalone: true,
-  imports: [ProgressBar],
+  imports: [ProgressBar, Button],
   templateUrl: './progress-bar-demo.component.html',
   styleUrl: './progress-bar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

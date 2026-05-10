@@ -13,12 +13,13 @@
       <span class="demo-control-label">Variant</span>
       <div class="demo-button-group">
         @for (v of ['material', 'bootstrap', 'minimal']; track v) {
-          <button
+          <ui-lib-button
             type="button"
-            class="demo-btn"
-            [class.demo-btn--active]="activeVariant() === v"
+            [appearance]="activeVariant() === v ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
             (click)="setVariant($any(v))"
-          >{{ v }}</button>
+          >{{ v }}</ui-lib-button>
         }
       </div>
     </div>
@@ -98,12 +99,13 @@
         <span class="demo-control-label">Mode</span>
         <div class="demo-button-group">
           @for (m of ['single', 'multiple', 'checkbox', null]; track m) {
-            <button
+            <ui-lib-button
               type="button"
-              class="demo-btn demo-btn--sm"
-              [class.demo-btn--active]="selectionMode() === m"
+              size="sm"
+              [appearance]="selectionMode() === m ? 'solid' : 'outline'"
+              severity="primary"
               (click)="setSelectionMode($any(m))"
-            >{{ m ?? 'none' }}</button>
+            >{{ m ?? 'none' }}</ui-lib-button>
           }
         </div>
       </div>

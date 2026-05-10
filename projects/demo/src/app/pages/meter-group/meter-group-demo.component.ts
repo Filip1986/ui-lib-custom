@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
 import { MeterGroup } from 'ui-lib-custom/meter-group';
+import { Button } from 'ui-lib-custom/button';
 import type {
   MeterGroupLabelPosition,
   MeterGroupOrientation,
@@ -15,7 +16,7 @@ import type {
 @Component({
   selector: 'app-meter-group-demo',
   standalone: true,
-  imports: [MeterGroup],
+  imports: [MeterGroup, Button],
   templateUrl: './meter-group-demo.component.html',
   styleUrl: './meter-group-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
