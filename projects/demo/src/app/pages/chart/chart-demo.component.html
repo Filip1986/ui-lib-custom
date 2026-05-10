@@ -199,19 +199,19 @@
           <ui-lib-stack [gap]="3">
             <ui-lib-inline [gap]="2" align="center">
               <ui-lib-button
-                [color]="selectedThemeProfile === 'material' ? 'primary' : 'secondary'"
+                [severity]="selectedThemeProfile === 'material' ? 'primary' : 'secondary'"
                 (click)="setThemeProfile('material', themeBridgeChart)"
               >
                 Material
               </ui-lib-button>
               <ui-lib-button
-                [color]="selectedThemeProfile === 'bootstrap' ? 'primary' : 'secondary'"
+                [severity]="selectedThemeProfile === 'bootstrap' ? 'primary' : 'secondary'"
                 (click)="setThemeProfile('bootstrap', themeBridgeChart)"
               >
                 Bootstrap
               </ui-lib-button>
               <ui-lib-button
-                [color]="selectedThemeProfile === 'minimal' ? 'primary' : 'secondary'"
+                [severity]="selectedThemeProfile === 'minimal' ? 'primary' : 'secondary'"
                 (click)="setThemeProfile('minimal', themeBridgeChart)"
               >
                 Minimal

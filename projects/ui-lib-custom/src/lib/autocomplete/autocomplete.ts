@@ -87,9 +87,9 @@ const AUTOCOMPLETE_PANEL_MODE_CLASSES: readonly string[] = [
     '[class.ui-lib-autocomplete--material]': 'variant() === "material"',
     '[class.ui-lib-autocomplete--bootstrap]': 'variant() === "bootstrap"',
     '[class.ui-lib-autocomplete--minimal]': 'variant() === "minimal"',
-    '[class.ui-lib-autocomplete--small]': 'size() === "small"',
-    '[class.ui-lib-autocomplete--medium]': 'size() === "medium"',
-    '[class.ui-lib-autocomplete--large]': 'size() === "large"',
+    '[class.ui-lib-autocomplete--small]': 'normalizedSize() === "small"',
+    '[class.ui-lib-autocomplete--medium]': 'normalizedSize() === "medium"',
+    '[class.ui-lib-autocomplete--large]': 'normalizedSize() === "large"',
     '[class.ui-lib-autocomplete--multiple]': 'multiple()',
     '[class.ui-lib-autocomplete--disabled]': 'isDisabled()',
     '[class.ui-lib-autocomplete--invalid]': 'invalid()',
@@ -138,7 +138,7 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
 
   public readonly variant: InputSignal<AutoCompleteVariant> =
     input<AutoCompleteVariant>('material');
-  public readonly size: InputSignal<AutoCompleteSize> = input<AutoCompleteSize>('medium');
+  public readonly size: InputSignal<AutoCompleteSize> = input<AutoCompleteSize>('md');
   public readonly placeholder: InputSignal<string> = input<string>('');
   public readonly showClear: InputSignal<boolean> = input<boolean>(false);
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
@@ -260,6 +260,17 @@ export class UiLibAutoComplete implements ControlValueAccessor, AfterViewChecked
       return Array.isArray(value) && value.length > 0;
     }
     return value !== null && value !== '';
+  });
+
+  public readonly normalizedSize: Signal<'small' | 'medium' | 'large'> = computed<
+    'small' | 'medium' | 'large'
+  >((): 'small' | 'medium' | 'large' => {
+    const map: Record<AutoCompleteSize, 'small' | 'medium' | 'large'> = {
+      sm: 'small',
+      md: 'medium',
+      lg: 'large',
+    };
+    return map[this.size()];
   });
 
   protected readonly isDisabled: Signal<boolean> = computed<boolean>(

@@ -183,13 +183,16 @@ describe('UiLibAutoComplete', (): void => {
     });
 
     it('renders with each size class', (): void => {
-      (['small', 'medium', 'large'] as const).forEach(
-        (size: 'small' | 'medium' | 'large'): void => {
-          fixture.componentRef.setInput('size', size);
-          fixture.detectChanges();
-          expect(cmpEl().classList.contains(`ui-lib-autocomplete--${size}`)).toBeTruthy();
-        }
-      );
+      (['sm', 'md', 'lg'] as const).forEach((size: 'sm' | 'md' | 'lg'): void => {
+        const cls: Record<'sm' | 'md' | 'lg', string> = {
+          sm: 'small',
+          md: 'medium',
+          lg: 'large',
+        };
+        fixture.componentRef.setInput('size', size);
+        fixture.detectChanges();
+        expect(cmpEl().classList.contains(`ui-lib-autocomplete--${cls[size]}`)).toBeTruthy();
+      });
     });
 
     it('renders dropdown button when dropdown is true', (): void => {

@@ -54,6 +54,7 @@ export class ButtonsComponent {
   public readonly eventLog: WritableSignal<ButtonLogEntry[]> = signal<ButtonLogEntry[]>([]);
 
   public readonly variants: ButtonVariant[] = ['material', 'bootstrap', 'minimal'];
+  public readonly matrixAppearances: ButtonAppearance[] = ['solid', 'outline', 'ghost', 'soft'];
 
   public readonly appearances: ButtonAppearance[] = [
     'solid',

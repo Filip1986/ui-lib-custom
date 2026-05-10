@@ -82,7 +82,7 @@
         Key appearances paired with every severity — demonstrating the two-axis model.
       </span>
       <div class="buttons-demo__matrix">
-        @for (a of ['solid', 'outline', 'ghost', 'soft']; track a) {
+        @for (a of matrixAppearances; track a) {
           <div class="buttons-demo__matrix-row">
             <span class="buttons-demo__matrix-label">{{ a }}</span>
             <div class="buttons-demo__row buttons-demo__row--wrap">
