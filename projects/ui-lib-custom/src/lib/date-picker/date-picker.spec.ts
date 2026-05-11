@@ -840,7 +840,7 @@ describe('DatePickerComponent', (): void => {
           hostElement(fixture),
           '.ui-lib-datepicker__prev-button'
         ).getAttribute('aria-label')
-      ).toBe('Previous month');
+      ).toMatch(/^Previous month,/);
     });
   });
 

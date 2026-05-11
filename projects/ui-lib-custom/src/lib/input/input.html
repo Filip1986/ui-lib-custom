@@ -4,7 +4,7 @@
       <span class="ui-input-label-text">
         {{ label() }}
         @if (required()) {
-          <span class="required-indicator">*</span>
+          <span class="required-indicator" aria-hidden="true">*</span>
         }
       </span>
     </label>
@@ -21,7 +21,7 @@
           <span class="ui-input-label-text">
             {{ label() }}
             @if (required()) {
-              <span class="required-indicator">*</span>
+              <span class="required-indicator" aria-hidden="true">*</span>
             }
           </span>
         </label>
@@ -35,9 +35,9 @@
         [placeholder]="displayPlaceholder()"
         [disabled]="isDisabled()"
         [required]="required() || null"
-        [attr.aria-invalid]="error() ? 'true' : null"
+        [attr.aria-invalid]="isInvalid() ? 'true' : null"
         [attr.aria-required]="required() ? 'true' : null"
-        [attr.aria-describedby]="describedById()"
+        [attr.aria-describedby]="ariaDescribedBy()"
         [value]="value()"
         (input)="onInput($any($event.target).value)"
         (focus)="onFocus()"
@@ -69,8 +69,13 @@
 
   <div class="ui-input-meta">
     @if (error()) {
-      <div class="ui-input-error-text" [id]="describedById()" role="alert">
+      <div class="ui-input-error-text" [id]="errorId()" role="alert">
         {{ error() }}
+      </div>
+    }
+    @if (hint()) {
+      <div class="ui-input-hint-text" [id]="hintId()">
+        {{ hint() }}
       </div>
     }
     @if (showCounter() && maxLength()) {

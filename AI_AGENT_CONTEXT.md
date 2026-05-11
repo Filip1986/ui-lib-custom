@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** ColorPicker accessibility hardening COMPLETE (Phase 3, #28); next is Password (#29)
-- **Next queue:** Password hardening (Tier 3, #29) — strength meter live region, show/hide toggle button aria-label
+- **Active focus:** MegaMenu accessibility hardening COMPLETE (6-phase, #16); next is Tabs (#17)
+- **Next queue:** Tabs hardening (Tier 2, #17) — role=tablist/tab/tabpanel, arrow nav, aria-selected
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -30,6 +30,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
+- `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
 
 ---
 
@@ -73,6 +74,61 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Installed dependencies via `npm install` in fresh clone before running validation commands.
 Next step: Table (#32) hardening — start Tier 4 Data Display.
+
+Date: 2026-05-11 [MegaMenu component — 6-phase Hardening COMPLETE (#16)]
+Changed:
+  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.ts
+      • Added module-level `let nextMegaMenuId: number = 0` counter
+      • Added `menuId`, `panelId` public readonly strings for ARIA wiring
+      • Added `rovingIndex: WritableSignal<number>` for root-level roving tabindex
+      • Added `panelOpened: OutputEmitterRef<MegaMenuItem>` and `panelClosed: OutputEmitterRef<void>` outputs
+      • Added `getRootTabIndex(item, index): string` for template tabindex binding
+      • Added `getRootItemClass(item, index): string` to clean up template class logic
+      • Updated `onTopItemClick` to set rovingIndex, emit panelOpened/panelClosed
+      • Updated `onTopItemKeyDown`: ArrowRight/Left navigate root items; ArrowDown/Up for vertical;
+        Home/End; all paths set rovingIndex; Enter/Space focus first panel item via afterNextRender
+      • Updated `onSubItemKeyDown`: ArrowUp/Down within column, ArrowLeft/Right between columns, Escape restores focus
+      • Updated click-outside handler to call `closePanel(false)` (no focus restore)
+      • Updated global Escape handler to call `closePanel(true)` (restore focus)
+      • Updated `closePanel(returnFocus=true)`: restores focus to triggering root link on keyboard close
+      • Added `focusRootItem(index)`: sets rovingIndex + calls `.focus()` with wrap-around
+      • Added `focusPanelItemInDirection(direction, fromEl)`: column-aware panel keyboard nav
+  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.html
+      • CRITICAL: `aria-haspopup="true"` → `aria-haspopup="menu"` (correct WAI-ARIA value)
+      • CRITICAL: Added `[attr.aria-orientation]="orientation()"` to root `<ul role="menubar">`
+      • CRITICAL: Added `[attr.aria-controls]="item.items?.length ? panelId : null"` on root links
+      • CRITICAL: Added `[attr.id]="panelId"` on mega panel `<div>`
+      • CRITICAL: Added `[attr.aria-label]="item.label ? (item.label + ' submenu') : null"` on panel
+      • CRITICAL: Added `[attr.aria-label]="column.header || null"` on column `<ul role="menu">`
+      • Changed root link tabindex from `item.disabled ? '-1' : '0'` to `getRootTabIndex(item, $index)`
+      • Replaced duplicate `@if (item.url)` / `@else` <a> blocks with single `<a [href]="...">` pattern
+      • Replaced messy `[class]`/`[class.x]`/`class` combination on `<li>` with `[class]="getRootItemClass(...)"`
+      • Fixed `track $index` in `@for` loops to track by label/header
+  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block with `--uilib-mega-menu-transition: 0ms`
+  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.a11y.spec.ts (CREATED — 44 tests)
+      • Nav landmark, menubar ARIA structure, aria-controls/panelId wiring
+      • Mega panel: aria-label, column role="menu" + aria-label, sub-item ARIA
+      • Roving tabindex: default first, ArrowRight/Left/Home/End move tab stop
+      • Panel keyboard nav: ArrowDown/Up within column, ArrowRight/Left between columns
+      • Focus restore: Escape from sub-item returns focus to triggering root item
+      • panelOpened output: subscription test
+      • axe-core: empty, closed, Products panel open, Company panel open
+  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.spec.ts
+      • Updated `aria-haspopup` test expectation from `'true'` to `'menu'` (correct value)
+  - projects/ui-lib-custom/src/lib/mega-menu/README.md
+      • Added MegaMenuSubColumn / MegaMenuSubItem tables, public API table, ARIA pattern table,
+        keyboard nav table, column aria-label guidance
+  - docs/COMPONENT_SCORES.md
+      • MegaMenu: ⏳ Queued → ✅ Done; score row 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: MegaMenu fully hardened. 95 tests pass (51 unit + 44 a11y). Build clean.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/mega-menu/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=mega-menu --no-coverage (95/95 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: node_modules/.bin/ prefix required for all CLI tools; npm install required first.
+Next step: Tabs hardening (Tier 2, #17) — role=tablist/tab/tabpanel, arrow nav, aria-selected.
 
 Date: 2026-05-11 [ColorPicker component — Phase 3 Accessibility Hardening COMPLETE (#28)]
 Changed:
@@ -445,5 +501,41 @@ Terminal notes: Storybook build-storybook fails due to pre-existing compodoc ver
   Use `npm run storybook` (ng run ui-lib-custom:storybook) to run Storybook in dev mode.
 Next step: ContextMenu hardening (Tier 2, #14) — key a11y: trigger aria-haspopup=menu,
   escape/click-outside focus restoration, same as TieredMenu pattern.
+
+---
+
+Date: 2026-05-11 [DatePicker — 6-phase hardening Phase 3 COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.ts
+      + module counter `nextDatePickerId` and `instanceId` property
+      + `liveRegionId` computed signal (`resolvedInputId() + '-live'`)
+      + `weekDayFullLabels` computed signal (full day names ordered by firstDayOfWeek)
+      + `currentMonthYearLabel` computed signal (`monthLabel() + ' ' + yearLabel()`)
+      + `prevMonthLabel` computed signal ("Month Year" for prev month)
+      + `nextMonthLabel` computed signal ("Month Year" for next month)
+      + `getDateAriaLabel()` improved — includes "today" and "selected" suffixes
+      + `resolvedInputId()` fallback now includes instance ID for uniqueness
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.html
+      + prev/next button aria-labels updated to "Previous month, <Month Year>"
+      + `<th role="columnheader">` now has `[attr.abbr]` and `[attr.aria-label]` with full day names
+      + live region `<div aria-live="polite" aria-atomic="true">` added to panel footer
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.scss
+      + `.ui-lib-datepicker__live-region` visually-hidden style block added
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.a11y.spec.ts (CREATED)
+      + 38 tests across: trigger ARIA, dialog ARIA, nav buttons, grid ARIA, unique IDs,
+        keyboard interaction, focus management, axe-core
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts
+      + prev-button aria-label assertion updated from `.toBe('Previous month')` to `.toMatch(/^Previous month,/)`
+  - docs/COMPONENT_SCORES.md — DatePicker (#24) ⏳ → ✅ Done
+State: DatePicker 6-phase hardening Phase 3 complete. All 138 tests pass (38 new a11y tests).
+  prefers-reduced-motion was already present. Build clean, zero warnings.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/date-picker/ --max-warnings 0 (CLEAN)
+  node_modules/.bin/jest --testPathPatterns=date-picker --no-coverage (138/138 PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom (BUILD OK, zero warnings)
+Terminal notes: Dependencies not pre-installed — ran `npm install` first.
+  Module counter resets per TestBed, so resolved IDs in tests use instance-based suffix.
+Next step: CascadeSelect followup (#25) — verify existing a11y spec covers all required patterns.
 
 ---
