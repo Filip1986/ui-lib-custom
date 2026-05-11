@@ -6,6 +6,7 @@ export type {
   TabsSize,
   TabsValue,
   TabsOrientation,
+  TabsActivation,
   TabsMode,
   TabsAlignment,
   TabsLazyMode,
