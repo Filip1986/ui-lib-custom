@@ -89,8 +89,8 @@ describe('Input Accessibility', (): void => {
     } = {
       variant,
       setVariant: (value: ThemeVariant): void => variant.set(value),
-      getPreset: buildPreset,
-      preset: buildPreset,
+      getPreset: (): ThemePreset => buildPreset(),
+      preset: (): ThemePreset => buildPreset(),
     };
 
     await TestBed.configureTestingModule({
@@ -128,7 +128,9 @@ describe('Input Accessibility', (): void => {
   // ── Label association ──────────────────────────────────────────────────────
 
   it('assigns a generated id to the native input', (): void => {
-    expect(nativeInput().id).toMatch(/^ui-lib-input-\d+$/);
+    const id: string = nativeInput().id;
+    expect(id).toBeTruthy();
+    expect(id).toMatch(/^ui-lib-input-\d+$/);
   });
 
   it('sets label[for] matching the native input id', (): void => {
