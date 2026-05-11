@@ -52,6 +52,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-11 [ContextMenu — 6-phase hardening COMPLETE (#14)]
+Changed:
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.ts
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.html
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.scss
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/context-menu/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: Complete
+  Phase 3 (A11y):
+    • CRITICAL FIX: Removed aria-hidden="true" from role="separator" items (top-level + submenu)
+    • CRITICAL FIX: Added roving tabindex for top-level items (single tabindex="0")
+    • CRITICAL FIX: Added focus capture/restore flow for Escape/programmatic close paths
+    • MODERATE FIX: Tab key now closes the menu without blocking natural tab order
+    • MODERATE FIX: Added prefers-reduced-motion handling for panel/caret transitions
+    • Created context-menu.a11y.spec.ts (31 tests)
+  Phase 1: Added module-level ID counter + contextMenuId and rovingIndex reset on show.
+  Phase 2: README now documents trigger ARIA pattern, keyboard map, accessibility notes, and CSS variables.
+  Phase 4: Verified existing performance patterns; no structural perf regressions introduced.
+  Phase 5: Composability API unchanged (`show/hide/toggle`, `itemClick`, `command`, `global`, `visible`).
+  Phase 6: Verified focus-visible ring, disabled interaction lockout, submenu caret rotation, and panel transition polish.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/context-menu/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=context-menu --no-coverage (86/86 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. Captured UI screenshot at `/tmp/context-menu-hardening.png`.
+Next step: PanelMenu hardening (Tier 2, #15).
+
 Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -89,34 +119,4 @@ Verification:
   npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
 Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
-Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
-  - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
