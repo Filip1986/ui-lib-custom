@@ -6,6 +6,8 @@
 
 > Implements `ControlValueAccessor`; use `ngModel` or reactive forms. The `label` input renders a `<label>` element — it is not projected content. Prefix/suffix content must carry the `prefix` or `suffix` attribute selector.
 
+> **Accessibility note:** A `placeholder` alone is **not** an accessible label. Always provide a `label` input so the `<label>` element is rendered and associated with the native input via `for`/`id`. Placeholder text disappears once the user types and is not reliably announced by all screen readers.
+
 ## Inputs
 
 | Name | Type | Default | Notes |
@@ -18,7 +20,9 @@
 | `type` | `InputType` | `'text'` | Any valid HTML input type |
 | `labelFloat` | `'over' \| 'in' \| 'on'` | `'over'` | Label position / floating behaviour |
 | `placeholder` | `string` | `''` | |
-| `error` | `string \| null` | `null` | Error message rendered below the input; announces via live region |
+| `error` | `string \| null` | `null` | Error message rendered below the input; announces via live region; implies `aria-invalid` |
+| `hint` | `string \| null` | `null` | Helper text rendered below the input; linked via `aria-describedby` |
+| `invalid` | `boolean` | `false` | Marks the field invalid (sets `aria-invalid`) without requiring an error message |
 | `disabled` | `boolean` | `false` | |
 | `required` | `boolean` | `false` | |
 | `showCounter` | `boolean` | `false` | Shows character count; requires `maxLength` to display fraction |
@@ -35,6 +39,13 @@ _none_
 ```html
 <!-- minimal example -->
 <ui-lib-input label="Email" type="email" [(ngModel)]="email" />
+
+<!-- with hint text -->
+<ui-lib-input
+  label="Email"
+  hint="We'll never share your email"
+  [(ngModel)]="email"
+/>
 
 <!-- with prefix icon, error, and character counter -->
 <ui-lib-input
