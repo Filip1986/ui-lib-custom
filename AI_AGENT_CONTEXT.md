@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Card accessibility hardening COMPLETE (6-phase, #51); also merged: Chart (#72), Chip (#54), ContextMenu (#14)
+- **Active focus:** BottomSheet accessibility hardening COMPLETE (6-phase, #76); also merged: Card (#51), Chart (#72), Chip (#54), ContextMenu (#14)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -42,6 +42,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
 - `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
+- `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 
 ---
 
@@ -55,6 +56,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
+Changed:
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
+      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
+      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
+      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
+      • Added `private focusTrap: FocusTrap | null = null` field
+      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
+      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
+      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
+      • Added `[id]="titleId"` to the title span for the ARIA association
+      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
+      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
+      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
+      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
+      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
+  - docs/COMPONENT_SCORES.md
+      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
 Changed:
@@ -120,34 +153,3 @@ Verification:
 Terminal notes: `npm install` required in fresh clone before tools are available.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Chip component — 6-phase hardening COMPLETE (#54)]
-Changed:
-  - projects/ui-lib-custom/src/lib/chip/chip.ts
-      • Added module-level `nextChipId` unique ID counter; exposed stable `chipId` string on host via `[id]` binding
-      • Added `selectable` and `selected` inputs, `selectedChange` output
-      • Added `hostRole` computed signal: `'group'` when removable (avoids nested-interactive ARIA violation), `'option'` otherwise
-      • Added `ariaSelected` computed signal: `'true'`/`'false'` for non-removable selectable chips; null otherwise
-      • Added `tabIndex` computed signal: `0` for selectable chips, null otherwise
-      • Added `onHostClick` and `onHostKeyDown` host event handlers (Space / Enter toggles selection)
-      • Changed `onRemoveClick` to call `event.stopPropagation()` before emitting
-      • Changed host from static `role: 'option'` to dynamic `[attr.role]: 'hostRole()'`
-  - projects/ui-lib-custom/src/lib/chip/chip.scss
-      • Added `.ui-lib-chip--selectable` block with `cursor: pointer` and `:focus-visible` ring
-      • Added `.ui-lib-chip--selected` block with `filter: brightness(1.15)`
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling all chip transitions
-  - projects/ui-lib-custom/src/lib/chip/chip.spec.ts
-      • Updated TestHostComponent to wire `selectable`, `selected`, and `selectedChange`
-      • Replaced `'should apply role="option" on host'` with explicit non-removable/removable role tests
-      • Added 10 new unit tests
-  - projects/ui-lib-custom/src/lib/chip/chip.a11y.spec.ts (CREATED — 18 tests)
-  - projects/ui-lib-custom/src/lib/chip/README.md
-  - docs/COMPONENT_SCORES.md
-      • Chip #54: ⏳ Queued → ✅ Done; score row populated (avg 8.5)
-State: Chip hardening complete. Dynamic role, selectable toggle, prefers-reduced-motion, focus-visible, unique IDs, and 18 a11y tests in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chip/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=chip --no-coverage (48/48 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass (or resume from queue).
