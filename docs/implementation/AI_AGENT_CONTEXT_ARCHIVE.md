@@ -4,6 +4,45 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [Stepper component — accessibility hardening COMPLETE (#19)]
+Changed:
+  - projects/ui-lib-custom/src/lib/stepper/stepper.ts
+      • Replaced local component id field with module-level `nextStepperId` + public `stepperId`
+      • Added `ariaLabel` input (`'Progress'` default), exported `STEPPER_DEFAULT_ARIA_LABEL`
+      • Added computed `stepItems` metadata for active/completed/disabled/error state
+      • Added `getStepAriaLabel()` for rich screen-reader labels and `isStepDisabled()`
+  - projects/ui-lib-custom/src/lib/stepper/stepper.html
+      • Kept tablist pattern, added rich `aria-label` on each step tab, `aria-disabled` for locked steps
+      • Rendered all tabpanel shells with stable ids so tabs always reference valid panels
+      • Replaced DOM separator elements with CSS-only connectors to satisfy axe `aria-required-children`
+  - projects/ui-lib-custom/src/lib/stepper/stepper.scss
+      • Added error-state tokens/styles, connector pseudo-elements, pointer-events lockout, stronger reduced-motion handling
+  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts
+      • Added `error` input for invalid step state
+  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts
+      • Added exported `StepperItem` accessibility metadata interface
+  - projects/ui-lib-custom/src/lib/stepper/index.ts
+      • Re-exported `StepperItem`
+  - projects/ui-lib-custom/src/lib/stepper/stepper.a11y.spec.ts (CREATED — 22 tests)
+      • Added role/aria-label/state coverage, linear lockout assertions, vertical semantics, multi-instance ids, axe checks
+  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts
+      • Removed separator DOM assertion after connector moved to CSS pseudo-elements
+  - projects/ui-lib-custom/src/lib/stepper/README.md
+      • Documented ARIA pattern, `ariaLabel`, `error`, keyboard support, screen-reader label format, CSS vars
+  - docs/COMPONENT_SCORES.md
+      • Stepper queue entry: ⏳ Queued → ✅ Done
+      • Stepper score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Stepper hardening complete. Rich step announcements, locked linear mode semantics, error state support, and dedicated a11y coverage are all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/stepper/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=stepper --no-coverage (61/61 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `aria-required-children` axe failure was resolved by moving connector lines from DOM separator elements to CSS pseudo-elements inside the step wrappers.
+Next step: Table (#32) hardening — role=grid, aria-sort, row selection, and pagination announcements.
+
+---
+
 Date: 2026-05-11 [Tabs component — 6-phase Hardening COMPLETE (#17)]
 Changed:
   - projects/ui-lib-custom/src/lib/tabs/tabs.ts
