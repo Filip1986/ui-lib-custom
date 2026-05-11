@@ -1287,3 +1287,24 @@ Changed:
   - projects/demo/src/app/pages/menu/ (new demo page)
 State: Menu component fully complete. Entry-point tests passing. ESLint clean. Build zero errors.
 Next step: MegaMenu or Menubar.
+
+Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
+Changed:
+  - projects/ui-lib-custom/src/lib/table/table.component.ts
+      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
+      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
+      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
+      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
+  - projects/ui-lib-custom/src/lib/table/table.component.html
+      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
+      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
+  - projects/ui-lib-custom/src/lib/table/table.component.scss
+      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
+  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
+      • Updated sortable-header tabindex expectations to match roving tabindex behavior
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
+  - projects/ui-lib-custom/src/lib/table/README.md
+  - docs/COMPONENT_SCORES.md — Table: ⏳ Queued → ✅ Done; score avg 8.6
+State: Table hardening complete. Dynamic grid/table semantics, roving grid keyboard navigation, reduced-motion, and a11y coverage.
+Verification: All four verification commands PASS.
+Next step: TreeTable (#33) hardening.

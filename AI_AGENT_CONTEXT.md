@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Table accessibility hardening COMPLETE (6-phase, #32); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** Chart accessibility hardening COMPLETE (6-phase, #72); next is TreeTable (#33, Tier 4 Data Display)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -38,6 +38,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 
 ---
 
@@ -51,6 +52,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
+Changed:
+  - projects/ui-lib-custom/src/lib/chart/chart.component.ts
+      • Added module-level `nextChartId: number` for unique instance IDs
+      • Added `chartId`, `tableId`, `datasetRows`, and `tableLabels` computed properties
+      • Added `showDataTable` input (default `true`) to control the visually-hidden data table
+      • Added `prefers-reduced-motion` detection → sets `animation: false` in Chart.js options when preferred
+      • Added `formatDataValue` helper for multi-type data point normalisation
+  - projects/ui-lib-custom/src/lib/chart/chart.component.html
+      • Added `aria-describedby` on canvas (links to the data table when `showDataTable` is true)
+      • Added visually-hidden `<table>` with `<caption>`, `<thead>` (label columns + "Dataset" header), and `<tbody>` (one row per dataset)
+  - projects/ui-lib-custom/src/lib/chart/chart.component.scss
+      • Added `.ui-lib-chart__sr-table` visually-hidden class
+      • Added `@media (prefers-reduced-motion: reduce)` override for canvas transitions/animations
+  - projects/ui-lib-custom/src/lib/chart/chart.types.ts
+      • Added `ChartDatasetRow` interface for the accessible table rows
+  - projects/ui-lib-custom/src/lib/chart/chart.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure, data table rendering, unique IDs, reduced-motion, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/chart/README.md
+      • Added ARIA table, keyboard table, CSS custom properties table, and accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Chart: ⏳ Queued → ✅ Done; score row populated (avg 8.9)
+State: Chart hardening complete. Visually-hidden data table, aria-describedby linkage, unique IDs, reduced-motion
+  support, and 21 a11y regression tests are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chart/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=chart --no-coverage (96/96 PASS — 75 unit + 21 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `npm install` required in fresh clone before tools are available.
+Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
 Changed:
@@ -89,34 +122,4 @@ Verification:
   npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
 Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
-Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
-  - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.

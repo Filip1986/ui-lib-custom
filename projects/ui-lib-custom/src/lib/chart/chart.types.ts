@@ -59,6 +59,12 @@ export interface ChartClickEvent {
   readonly chart: ChartInstance;
 }
 
+/** A single dataset row used for the accessible data table alternative. */
+export interface ChartDatasetRow {
+  readonly label: string;
+  readonly values: string[];
+}
+
 /** Normalized theme tokens consumed by `ChartThemeService`. */
 export interface ChartThemeTokens {
   readonly fontFamily: string;

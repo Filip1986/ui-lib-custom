@@ -119,7 +119,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 69   | Upload          | Drop zone announcement, file list management              | ⏳ Queued   |
 | 70   | Terminal        | `role=log`, command input labeling                        | ⏳ Queued   |
 | 71   | Timeline        | Semantic list structure, orientation                      | ⏳ Queued   |
-| 72   | Chart           | Accessible data table alternative, `aria-label`           | ⏳ Queued   |
+| 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ⏳ Queued   |
 | 75   | ScrollTop       | `aria-label` on button                                    | ⏳ Queued   |
@@ -239,7 +239,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Paginator         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Carousel          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Galleria          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Chart             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
 ## Feedback & Status
 
