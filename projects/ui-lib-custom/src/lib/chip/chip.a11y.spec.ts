@@ -3,6 +3,7 @@ import {
   Component,
   provideZonelessChangeDetection,
   signal,
+  type Type,
   type WritableSignal,
 } from '@angular/core';
 import type { DebugElement } from '@angular/core';
@@ -135,18 +136,16 @@ class SelectableChipHostComponent {
 // Fixture helpers
 // ---------------------------------------------------------------------------
 
-async function createFixture<T>(component: new () => T): Promise<ComponentFixture<T>> {
+async function createFixture<T>(component: Type<T>): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
-    imports: [component as Parameters<typeof TestBed.configureTestingModule>[0]['imports'][0]],
+    imports: [component],
     providers: [
       provideZonelessChangeDetection(),
       { provide: ThemeConfigService, useValue: buildMockTheme() },
     ],
   }).compileComponents();
 
-  const fixture: ComponentFixture<T> = TestBed.createComponent(
-    component as Parameters<typeof TestBed.createComponent>[0]
-  );
+  const fixture: ComponentFixture<T> = TestBed.createComponent(component);
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
   await fixture.whenStable();

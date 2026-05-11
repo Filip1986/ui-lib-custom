@@ -42,7 +42,7 @@ let nextChipId: number = 0;
     '[attr.aria-selected]': 'ariaSelected()',
     '[attr.tabindex]': 'tabIndex()',
     '[id]': 'chipId',
-    '(click)': 'onHostClick($event)',
+    '(click)': 'onHostClick()',
     '(keydown)': 'onHostKeyDown($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -165,7 +165,7 @@ export class Chip {
   );
 
   /** Handles host click — toggles selection for selectable chips. */
-  public onHostClick(_event: MouseEvent): void {
+  public onHostClick(): void {
     if (!this.selectable()) {
       return;
     }
