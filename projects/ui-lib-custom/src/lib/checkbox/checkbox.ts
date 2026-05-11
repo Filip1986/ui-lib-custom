@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import {
+  type AfterRenderRef,
+  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
   forwardRef,
@@ -11,7 +12,9 @@ import {
   model,
   inject,
   signal,
+  viewChild,
   type AfterViewInit,
+  type ElementRef,
   type InputSignal,
   type ModelSignal,
   type OutputEmitterRef,
@@ -36,7 +39,7 @@ export type {
   CheckboxAppearance,
 } from './checkbox.types';
 
-let checkboxId: number = 0;
+let nextCheckboxId: number = 0;
 
 /**
  * Checkbox component with accessible labeling and indeterminate support.
@@ -97,13 +100,14 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   private onCvaChange: (value: unknown | unknown[]) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};
 
-  private readonly controlId: string = `ui-lib-checkbox-${++checkboxId}`;
-  public readonly labelElementId: string = `${this.controlId}-label`;
-  public readonly descriptionElementId: string = `${this.controlId}-description`;
+  public readonly checkboxId: string = `ui-lib-checkbox-${++nextCheckboxId}`;
+  public readonly labelElementId: string = `${this.checkboxId}-label`;
+  public readonly descriptionElementId: string = `${this.checkboxId}-description`;
 
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
-  private readonly hostElement: ElementRef = inject(ElementRef);
+  private readonly nativeInputRef: Signal<ElementRef<HTMLInputElement> | undefined> =
+    viewChild<ElementRef<HTMLInputElement>>('nativeInput');
 
   public readonly effectiveVariant: Signal<CheckboxVariant> = computed<CheckboxVariant>(
     (): CheckboxVariant => this.variant() ?? this.themeConfig.variant()
@@ -180,6 +184,15 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
     return String(rawValue);
   });
 
+  private readonly syncIndeterminatePropertyEffect: AfterRenderRef = afterRenderEffect((): void => {
+    const nativeInputElement: HTMLInputElement | undefined = this.nativeInputRef()?.nativeElement;
+    if (!nativeInputElement) {
+      return;
+    }
+
+    nativeInputElement.indeterminate = this.indeterminate();
+  });
+
   public ngAfterViewInit(): void {
     if (!this.autofocus() || this.isDisabled()) {
       return;
@@ -187,7 +200,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
 
     queueMicrotask((): void => {
       if (!this.isDisabled()) {
-        this.getNativeInputElement()?.focus();
+        this.nativeInputRef()?.nativeElement.focus();
       }
     });
   }
@@ -195,6 +208,12 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   public onHostClick(event: MouseEvent): void {
     const targetElement: EventTarget | null = event.target;
     if (targetElement instanceof HTMLInputElement) {
+      return;
+    }
+    if (
+      targetElement instanceof HTMLElement &&
+      targetElement.closest('.ui-lib-checkbox__label') !== null
+    ) {
       return;
     }
 
@@ -267,16 +286,7 @@ export class Checkbox implements ControlValueAccessor, AfterViewInit {
   }
 
   public getNativeInputId(): string {
-    return this.inputId() ?? `${this.controlId}-input`;
-  }
-
-  private getNativeInputElement(): HTMLInputElement | null {
-    const hostNativeElement: unknown = this.hostElement.nativeElement;
-    if (!(hostNativeElement instanceof HTMLElement)) {
-      return null;
-    }
-
-    return hostNativeElement.querySelector('.ui-lib-checkbox__native-input');
+    return this.inputId() ?? `${this.checkboxId}-input`;
   }
 
   private normalizeGroupValue(value: unknown): unknown[] {
