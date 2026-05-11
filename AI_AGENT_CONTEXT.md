@@ -52,6 +52,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-11 [Avatar component — accessibility hardening COMPLETE (#65)]
+Changed:
+  - projects/ui-lib-custom/src/lib/avatar/avatar.ts
+      • Added unique instance IDs, full-name `name` input, image-alt fallback resolution, and automatic `listitem` role when nested in AvatarGroup
+  - projects/ui-lib-custom/src/lib/avatar/avatar.html
+      • Switched image alt binding to computed fallback alt (`imageAlt` → `name` → `label` → `Avatar`)
+  - projects/ui-lib-custom/src/lib/avatar/avatar.scss
+      • Added `:focus-visible` treatment and `prefers-reduced-motion` safety override
+  - projects/ui-lib-custom/src/lib/avatar/avatar-group.ts
+      • Added unique group IDs, `role=list`, overflow inputs/announcement text, and AvatarGroup DI context token
+  - projects/ui-lib-custom/src/lib/avatar/avatar-group.html
+      • Added accessible `+N` overflow listitem
+  - projects/ui-lib-custom/src/lib/avatar/avatar-group.scss
+      • Added overflow badge styles and reduced-motion override
+  - projects/ui-lib-custom/src/lib/avatar/avatar.spec.ts
+      • Updated group role expectation to `list` and added overflow/fallback assertions
+  - projects/ui-lib-custom/src/lib/avatar/avatar.a11y.spec.ts (CREATED — 16 tests)
+      • Added ARIA structure, label fallback, decorative internals, grouped-list semantics, unique-id, and axe coverage
+  - projects/ui-lib-custom/src/lib/avatar/README.md
+      • Expanded API docs with `name` and group overflow inputs, plus ARIA/keyboard/CSS variable sections
+  - docs/COMPONENT_SCORES.md
+      • Avatar #65 moved from ⏳ Queued to ✅ Done with completed score row (avg 8.2)
+State: Avatar hardening is complete. Alt propagation, icon/initial naming, grouped list semantics, overflow announcement labeling, reduced-motion guardrails, and dedicated a11y regression coverage are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/avatar/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=avatar --no-coverage (36/36 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `node_modules` was missing in the fresh clone; ran `npm install` first. Took manual demo screenshot at `/tmp/avatar-demo.png` after launching `npm run serve:demo`.
+Next step: Resume backlog sequence after Avatar #65 completion.
+
 Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -89,34 +120,4 @@ Verification:
   npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
 Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
-Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
-  - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.

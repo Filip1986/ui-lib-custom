@@ -112,7 +112,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 62   | ScrollPanel     | Keyboard-scrollable region label                          | ⏳ Queued   |
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ⏳ Queued   |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ⏳ Queued   |
-| 65   | Avatar          | `alt` propagation, group context                          | ⏳ Queued   |
+| 65   | Avatar          | `alt` propagation, group context                          | ✅ Done     |
 | 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Queued   |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ⏳ Queued   |
 | 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ⏳ Queued   |
@@ -261,7 +261,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Card            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Avatar          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Avatar          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Icon            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ButtonGroup     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

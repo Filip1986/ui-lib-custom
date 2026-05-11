@@ -12,6 +12,7 @@ import type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
     <ui-lib-avatar
       [image]="image"
       [imageAlt]="imageAlt"
+      [name]="name"
       [label]="label"
       [icon]="icon"
       [size]="size"
@@ -24,7 +25,8 @@ import type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
 })
 class TestHostComponent {
   public image: string | null = null;
-  public imageAlt: string = 'Avatar';
+  public imageAlt: string = '';
+  public name: string | null = null;
   public label: string | null = null;
   public icon: string | null = null;
   public size: AvatarSize = 'md';
@@ -38,7 +40,7 @@ class TestHostComponent {
   standalone: true,
   imports: [AvatarGroup, Avatar],
   template: `
-    <ui-lib-avatar-group [ariaLabel]="groupAriaLabel">
+    <ui-lib-avatar-group [ariaLabel]="groupAriaLabel" [overflowCount]="overflowCount">
       <ui-lib-avatar label="AA" />
       <ui-lib-avatar label="BB" />
     </ui-lib-avatar-group>
@@ -46,6 +48,7 @@ class TestHostComponent {
 })
 class GroupTestHostComponent {
   public groupAriaLabel: string | null = 'Team members';
+  public overflowCount: number = 2;
 }
 describe('Avatar', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -144,6 +147,18 @@ describe('Avatar', (): void => {
     const { el } = bootstrap({ image: '/foo.jpg', imageAlt: 'Jane Doe' });
     expect(el.getAttribute('aria-label')).toBe('Jane Doe');
   });
+  it('falls back image alt text to name when imageAlt is empty', (): void => {
+    const { fixture } = bootstrap({ image: '/foo.jpg', imageAlt: '', name: 'Jane Doe' });
+    const image: HTMLImageElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-lib-avatar__image'
+    ) as HTMLImageElement;
+    expect(image.getAttribute('alt')).toBe('Jane Doe');
+    expect(
+      (fixture.nativeElement as HTMLElement)
+        .querySelector('ui-lib-avatar')
+        ?.getAttribute('aria-label')
+    ).toBe('Jane Doe');
+  });
   it('applies role="img"', (): void => {
     const { el } = bootstrap();
     expect(el.getAttribute('role')).toBe('img');
@@ -173,14 +188,14 @@ describe('AvatarGroup', (): void => {
     ) as HTMLElement;
     expect(groupEl).toBeTruthy();
   });
-  it('applies role="group"', (): void => {
+  it('applies role="list"', (): void => {
     const fixture: ComponentFixture<GroupTestHostComponent> =
       TestBed.createComponent(GroupTestHostComponent);
     fixture.detectChanges();
     const groupEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-avatar-group'
     ) as HTMLElement;
-    expect(groupEl.getAttribute('role')).toBe('group');
+    expect(groupEl.getAttribute('role')).toBe('list');
   });
   it('applies aria-label to group', (): void => {
     const fixture: ComponentFixture<GroupTestHostComponent> =
@@ -190,5 +205,15 @@ describe('AvatarGroup', (): void => {
       'ui-lib-avatar-group'
     ) as HTMLElement;
     expect(groupEl.getAttribute('aria-label')).toBe('Team members');
+  });
+  it('renders an overflow counter when overflowCount is provided', (): void => {
+    const fixture: ComponentFixture<GroupTestHostComponent> =
+      TestBed.createComponent(GroupTestHostComponent);
+    fixture.detectChanges();
+    const overflowEl: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-lib-avatar-group__overflow'
+    ) as HTMLElement;
+    expect(overflowEl).toBeTruthy();
+    expect(overflowEl.textContent.trim()).toBe('+2');
   });
 });

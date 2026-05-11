@@ -7,6 +7,27 @@ ui-lib-avatar-group {
   flex-direction: row;
   align-items: center;
 }
+.ui-lib-avatar-group__overflow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--uilib-avatar-size-md, 2.5rem);
+  height: var(--uilib-avatar-size-md, 2.5rem);
+  margin-left: var(--uilib-avatar-group-overlap, -0.75rem);
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  background: var(--uilib-avatar-group-overflow-bg, var(--uilib-color-neutral-200, #e5e7eb));
+  color: var(--uilib-avatar-group-overflow-fg, var(--uilib-color-neutral-900, #111827));
+  font-size: var(--uilib-avatar-font-size-sm, 0.75rem);
+  font-weight: 600;
+}
 .ui-lib-avatar-group ui-lib-avatar + ui-lib-avatar {
   margin-left: var(--uilib-avatar-group-overlap, -0.75rem);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-avatar-group,
+  .ui-lib-avatar-group__overflow {
+    transition: none !important;
+    animation: none !important;
+  }
 }
