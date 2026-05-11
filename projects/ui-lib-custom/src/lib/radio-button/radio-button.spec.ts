@@ -374,9 +374,30 @@ describe('RadioButton', (): void => {
 
   // ── Tab index ─────────────────────────────────────────────────────────────
 
-  it('applies tabindex to native input', (): void => {
+  it('sets tabindex to -1 for an unselected radio (roving tabindex)', (): void => {
+    expect(getNativeInput(fixture).getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('sets tabindex to 0 when the radio becomes checked', (): void => {
+    const radioButton: RadioButton = fixture.debugElement.query(
+      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton
+    ).componentInstance as RadioButton;
+
+    radioButton.writeValue('option-a');
+    fixture.detectChanges();
+
+    expect(getNativeInput(fixture).getAttribute('tabindex')).toBe('0');
+  });
+
+  it('sets tabindex to the explicit tabindex value when the radio is checked', (): void => {
+    const radioButton: RadioButton = fixture.debugElement.query(
+      (debugEl: DebugElement): boolean => debugEl.componentInstance instanceof RadioButton
+    ).componentInstance as RadioButton;
+
+    radioButton.writeValue('option-a');
     host.tabindex.set(2);
     fixture.detectChanges();
+
     expect(getNativeInput(fixture).getAttribute('tabindex')).toBe('2');
   });
 
