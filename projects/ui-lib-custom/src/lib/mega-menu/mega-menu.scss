@@ -496,3 +496,13 @@
     --uilib-mega-menu-bar-bg: #0d1117;
   }
 }
+
+// -----------------------------------------------------------------------------
+// Reduced motion
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-mega-menu {
+    --uilib-mega-menu-transition: 0ms;
+  }
+}
