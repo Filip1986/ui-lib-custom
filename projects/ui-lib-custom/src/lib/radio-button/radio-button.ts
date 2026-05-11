@@ -156,18 +156,18 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
   });
 
   /**
-   * Effective tab index implementing the WAI-ARIA roving tabindex pattern:
-   * - disabled → -1
-   * - checked (selected in group) → explicit tabindex or 0
-   * - unchecked → -1 (only the selected/first radio is in the tab sequence)
+   * Effective tab index for the native input.
+   * - disabled → -1 (removed from tab order)
+   * - enabled → tabindex() (defaults to 0)
+   *
+   * Note: For native `<input type="radio">` elements sharing the same `name`,
+   * browsers natively implement the WAI-ARIA roving tabindex pattern — only the
+   * selected radio (or the first if none are selected) is reachable via Tab.
+   * Our arrow-key handler provides the in-group keyboard navigation.
    */
-  public readonly hostTabIndex: Signal<number> = computed<number>((): number => {
-    if (this.isDisabled()) {
-      return -1;
-    }
-
-    return this.isChecked() ? this.tabindex() : -1;
-  });
+  public readonly hostTabIndex: Signal<number> = computed<number>((): number =>
+    this.isDisabled() ? -1 : this.tabindex()
+  );
 
   /**
    * Resolved aria-labelledby: null when an explicit ariaLabel is provided;
@@ -256,9 +256,14 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
 
     event.preventDefault();
 
+    const escapedName: string =
+      typeof CSS !== 'undefined' && CSS.escape
+        ? CSS.escape(nameAttr)
+        : nameAttr.replace(/["\\]/g, '\\$&');
+
     const allInputs: HTMLInputElement[] = Array.from(
       document.querySelectorAll<HTMLInputElement>(
-        `.ui-lib-radio-button__native-input[name="${nameAttr}"]`
+        `.ui-lib-radio-button__native-input[name="${escapedName}"]`
       )
     ).filter(
       (input: HTMLInputElement): boolean => !input.closest('.ui-lib-radio-button--disabled')

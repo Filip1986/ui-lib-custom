@@ -35,14 +35,14 @@
 
 ## Keyboard Navigation
 
-The component implements roving tabindex and full keyboard navigation for radio groups.
+The component adds explicit arrow-key navigation on top of native browser radio group behaviour.
 
 | Key | Action |
 |-----|--------|
-| `Tab` | Enters the group; focuses the selected radio (or the first if none selected) |
+| `Tab` | Enters the group; browsers natively focus the selected radio (or the first if none selected) |
 | `Shift+Tab` | Leaves the group |
-| `ArrowDown` / `ArrowRight` | Moves focus to the next radio in the group, wrapping around; selects it |
-| `ArrowUp` / `ArrowLeft` | Moves focus to the previous radio in the group, wrapping around; selects it |
+| `ArrowDown` / `ArrowRight` | Moves focus to the next non-disabled radio, wrapping around; selects it |
+| `ArrowUp` / `ArrowLeft` | Moves focus to the previous non-disabled radio, wrapping around; selects it |
 | `Space` | Selects the currently focused radio (native browser behaviour) |
 
 Disabled radios are automatically skipped during arrow-key navigation.

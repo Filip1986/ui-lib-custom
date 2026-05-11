@@ -31,7 +31,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
-- `RadioButton` -> ✅ complete + hardened (6-phase, 66 tests — 41 unit + 25 a11y)
+- `RadioButton` -> ✅ complete + hardened (6-phase, 64 tests — 40 unit + 24 a11y)
 
 ---
 
@@ -79,10 +79,10 @@ Changed:
       • Updated inputs table to document roving tabindex in tabindex field, aria notes
   - docs/COMPONENT_SCORES.md
       • RadioButton: ⏳ Queued → ✅ Done
-State: RadioButton fully hardened. 66 tests pass (41 unit + 25 a11y). Build clean.
+State: RadioButton fully hardened. 64 tests pass (40 unit + 24 a11y). Build clean.
 Verification:
   npx eslint projects/ui-lib-custom/src/lib/radio-button/ --max-warnings 0 (EXIT 0)
-  node_modules/.bin/jest --testPathPatterns=radio-button --no-coverage (66/66 PASS)
+  node_modules/.bin/jest --testPathPatterns=radio-button --no-coverage (64/64 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: node_modules/.bin/ prefix required for jest/ng; npx works for eslint after npm install.
