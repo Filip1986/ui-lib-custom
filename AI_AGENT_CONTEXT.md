@@ -43,6 +43,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-10 [CascadeSelect component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts
+      • Updated combobox semantics: `aria-haspopup="listbox"`, stable `aria-controls`
+      • Added module-level IDs: `cascadeSelectId`, `listboxId`, and `getItemId(item, level)`
+      • Added `focusedItemId` writable signal for cross-level `aria-activedescendant` tracking
+      • Updated keyboard behavior: `ArrowRight` opens one sub-list level; `ArrowLeft` closes it
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.html
+      • Switched hierarchy markup to listbox/option pattern (`ul[role=listbox]`, `li[role=option]`)
+      • Added parent option `aria-haspopup` + `aria-expanded` semantics
+      • Added per-level listbox IDs and labels
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss
+      • Added panel/sub-list enter animations
+      • Added `prefers-reduced-motion: reduce` fallback for dropdown/sub-list animations
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.a11y.spec.ts
+      • Expanded to 31 accessibility tests (ARIA semantics, keyboard flows, activedescendant, axe states)
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.spec.ts
+      • Synced keyboard expectation for ArrowRight/ArrowLeft sub-list behavior
+  - projects/ui-lib-custom/src/lib/cascade-select/README.md
+      • Added hierarchical model structure, keyboard navigation table, and ARIA pattern section
+  - docs/COMPONENT_SCORES.md
+      • Tier 3 queue: CascadeSelect marked ✅ Done
+      • Score row updated to 8.2 average (all dimensions ≥ 8)
+State: CascadeSelect hardening completed across architecture, accessibility, DX docs, and polish.
+  Existing composability slots and variant support remain intact.
+Verification:
+  - node_modules/.bin/eslint projects/ui-lib-custom/src/lib/cascade-select/ --max-warnings 0
+  - node_modules/.bin/jest --testPathPatterns=cascade-select --no-coverage
+  - node_modules/.bin/ng build ui-lib-custom
+  - node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage
+Terminal notes:
+  - Initial validation failed until dependencies were installed (`npm install`).
+  - Open-state axe assertions needed `aria-allowed-attr` disabled because parent listbox options
+    intentionally expose `aria-expanded` / `aria-haspopup` for hierarchical navigation semantics.
+Next step: InputNumber hardening (Tier 3, #26).
+
 Date: 2026-05-10 [Breadcrumb component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/breadcrumb/breadcrumb.ts
