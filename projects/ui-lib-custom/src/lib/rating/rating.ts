@@ -49,10 +49,10 @@ let ratingIdCounter: number = 0;
     },
   ],
   host: {
-    role: 'radiogroup',
+    '[attr.role]': 'hostRole()',
     '[class]': 'hostClasses()',
-    '[attr.aria-label]': 'ariaLabel()',
-    '[attr.aria-labelledby]': 'ariaLabelledby()',
+    '[attr.aria-label]': 'hostAriaLabelValue()',
+    '[attr.aria-labelledby]': 'readonly() ? null : ariaLabelledby()',
     '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
     '(keydown)': 'onKeyDown($event)',
   },
@@ -164,6 +164,24 @@ export class Rating implements ControlValueAccessor {
 
   // ── Computed ──────────────────────────────────────────────────────────────
 
+  /** ARIA role for the host element: "img" in read-only mode, "radiogroup" otherwise. */
+  public readonly hostRole: Signal<string> = computed<string>((): string =>
+    this.readonly() ? 'img' : 'radiogroup'
+  );
+
+  /**
+   * Computed aria-label for the host element.
+   * In read-only mode returns a descriptive "Rating: N out of M stars" string.
+   * Otherwise returns the consumer-supplied ariaLabel.
+   */
+  public readonly hostAriaLabelValue: Signal<string> = computed<string>((): string => {
+    if (this.readonly()) {
+      const currentValue: number | null = this.value();
+      return `Rating: ${currentValue ?? 0} out of ${this.stars()} stars`;
+    }
+    return this.ariaLabel();
+  });
+
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<RatingVariant> = computed<RatingVariant>(
     (): RatingVariant => this.variant() ?? this.themeConfig.variant()
@@ -243,7 +261,7 @@ export class Rating implements ControlValueAccessor {
    * selected) receives tabindex=0; all others receive -1.
    */
   public getStarTabIndex(star: number): number {
-    if (this.isDisabled()) {
+    if (this.isDisabled() || this.readonly()) {
       return -1;
     }
 
@@ -262,7 +280,7 @@ export class Rating implements ControlValueAccessor {
 
   /** Human-readable aria-label for a single star element. */
   public getStarAriaLabel(star: number): string {
-    return `${star} of ${this.stars()}`;
+    return `${star} ${star === 1 ? 'star' : 'stars'}`;
   }
 
   /** CSS classes for the star icon element, merging the custom icon class when provided. */

@@ -167,3 +167,19 @@ ui-lib-rating.ui-lib-rating--variant-minimal {
   --uilib-rating-star-hover-color: var(--uilib-color-primary-dark, #fbbf24);
   --uilib-rating-cancel-color: var(--uilib-color-neutral-500, #6b7280);
 }
+
+// ── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-rating .ui-lib-rating__star,
+  ui-lib-rating .ui-lib-rating__cancel {
+    transition: none;
+  }
+
+  ui-lib-rating:not(.ui-lib-rating--disabled):not(.ui-lib-rating--readonly)
+    .ui-lib-rating__star:hover,
+  ui-lib-rating:not(.ui-lib-rating--disabled):not(.ui-lib-rating--readonly)
+    .ui-lib-rating__cancel:hover {
+    transform: none;
+  }
+}

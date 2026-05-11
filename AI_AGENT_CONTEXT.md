@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** RadioButton (#23) and Password (#29) accessibility hardening COMPLETE; next is Rating (#30)
-- **Next queue:** Rating hardening (Tier 3, #30) — role=radiogroup or role=slider, keyboard interaction
+- **Active focus:** Rating accessibility hardening COMPLETE (6-phase, #30); next is Table (#32, Tier 4 Data Display)
+- **Next queue:** Table hardening (Tier 4, #32) — role=grid, column sort aria-sort, row selection aria-selected, pagination
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -33,6 +33,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
 - `RadioButton` -> ✅ complete + hardened (6-phase, 64 tests — 40 unit + 24 a11y)
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
+- `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 
 ---
 
@@ -46,6 +47,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Rating component — accessibility hardening COMPLETE (#30)]
+Changed:
+  - projects/ui-lib-custom/src/lib/rating/rating.ts
+      • Changed host `role: 'radiogroup'` (static) to `'[attr.role]': 'hostRole()'` (dynamic)
+      • Added `hostRole` computed signal: returns `'img'` when `readonly()`, `'radiogroup'` otherwise
+      • Added `hostAriaLabelValue` computed signal: descriptive "Rating: N out of M stars" in read-only mode, consumer `ariaLabel` otherwise
+      • Updated `[attr.aria-label]` and `[attr.aria-labelledby]` host bindings to use new computed values
+      • Fixed `getStarAriaLabel` to return "N star" / "N stars" format (was "N of M")
+      • Fixed `getStarTabIndex` to return -1 when `readonly()` (was only checking `isDisabled()`)
+  - projects/ui-lib-custom/src/lib/rating/rating.html
+      • Wrapped entire template in `@if (!readonly()) { ... } @else { ... }`
+      • Interactive branch: cancel button + stars with `role="radio"`, ARIA attrs, event handlers
+      • Read-only branch: decorative-only stars with `aria-hidden="true"`, no interactive attrs
+  - projects/ui-lib-custom/src/lib/rating/rating.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block: `transition: none` on star/cancel + `transform: none` on hover
+  - projects/ui-lib-custom/src/lib/rating/rating.spec.ts
+      • Updated `getStarAriaLabel` test to match new "N star(s)" format (was "N of M")
+  - projects/ui-lib-custom/src/lib/rating/rating.a11y.spec.ts (CREATED — 22 tests)
+      • Interactive: radiogroup role, aria-label, star role=radio, aria-checked, "N star(s)" aria-labels, star-icon aria-hidden
+      • Roving tabindex: first star tab=0 when no value; selected star tab=0, others tab=-1
+      • Keyboard: ArrowRight increments, ArrowLeft decrements, clamp at min/max
+      • Read-only: host role=img, descriptive aria-label, no interactive stars, all stars aria-hidden, cancel hidden
+      • axe-core: default state, value selected, read-only, disabled
+  - projects/ui-lib-custom/src/lib/rating/README.md
+      • Added ARIA Pattern A documentation, read-only mode behavior, pattern rationale, keyboard nav table, CVA section
+  - docs/COMPONENT_SCORES.md
+      • Rating: ⏳ Queued → ✅ Done
+State: Rating hardening complete. Dynamic role (radiogroup/img), read-only ARIA branch, reduced-motion SCSS, 22 new a11y tests.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/rating/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=rating --no-coverage (75/75 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: node_modules/.bin/ prefix required for all CLI tools; npm install required first in fresh clone.
+Next step: Table (#32) hardening — start Tier 4 Data Display.
 
 Date: 2026-05-11 [RadioButton component — 6-phase Hardening COMPLETE (#23)]
 Changed:
@@ -112,82 +149,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Installed dependencies via `npm install` in fresh clone before running validation commands.
 Next step: Table (#32) hardening — start Tier 4 Data Display.
-
-Date: 2026-05-11 [MegaMenu component — 6-phase Hardening COMPLETE (#16)]
-Changed:
-  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.ts
-      • Added module-level `let nextMegaMenuId: number = 0` counter
-      • Added `menuId`, `panelId` public readonly strings for ARIA wiring
-      • Added `rovingIndex: WritableSignal<number>` for root-level roving tabindex
-      • Added `panelOpened: OutputEmitterRef<MegaMenuItem>` and `panelClosed: OutputEmitterRef<void>` outputs
-      • Added `getRootTabIndex(item, index): string` for template tabindex binding
-      • Added `getRootItemClass(item, index): string` to clean up template class logic
-      • Updated `onTopItemClick` to set rovingIndex, emit panelOpened/panelClosed
-      • Updated `onTopItemKeyDown`: ArrowRight/Left navigate root items; ArrowDown/Up for vertical;
-        Home/End; all paths set rovingIndex; Enter/Space focus first panel item via afterNextRender
-      • Updated `onSubItemKeyDown`: ArrowUp/Down within column, ArrowLeft/Right between columns, Escape restores focus
-      • Updated click-outside handler to call `closePanel(false)` (no focus restore)
-      • Updated global Escape handler to call `closePanel(true)` (restore focus)
-      • Updated `closePanel(returnFocus=true)`: restores focus to triggering root link on keyboard close
-      • Added `focusRootItem(index)`: sets rovingIndex + calls `.focus()` with wrap-around
-      • Added `focusPanelItemInDirection(direction, fromEl)`: column-aware panel keyboard nav
-  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.html
-      • CRITICAL: `aria-haspopup="true"` → `aria-haspopup="menu"` (correct WAI-ARIA value)
-      • CRITICAL: Added `[attr.aria-orientation]="orientation()"` to root `<ul role="menubar">`
-      • CRITICAL: Added `[attr.aria-controls]="item.items?.length ? panelId : null"` on root links
-      • CRITICAL: Added `[attr.id]="panelId"` on mega panel `<div>`
-      • CRITICAL: Added `[attr.aria-label]="item.label ? (item.label + ' submenu') : null"` on panel
-      • CRITICAL: Added `[attr.aria-label]="column.header || null"` on column `<ul role="menu">`
-      • Changed root link tabindex from `item.disabled ? '-1' : '0'` to `getRootTabIndex(item, $index)`
-  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block with `--uilib-mega-menu-transition: 0ms`
-  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.a11y.spec.ts (CREATED — 44 tests)
-  - docs/COMPONENT_SCORES.md
-      • MegaMenu: ⏳ Queued → ✅ Done; score row 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
-State: MegaMenu fully hardened. 95 tests pass (51 unit + 44 a11y). Build clean.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/mega-menu/ --max-warnings 0 (EXIT 0)
-  node_modules/.bin/jest --testPathPatterns=mega-menu --no-coverage (95/95 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: node_modules/.bin/ prefix required for all CLI tools; npm install required first.
-Next step: Tabs hardening (Tier 2, #17) — role=tablist/tab/tabpanel, arrow nav, aria-selected.
-
-Date: 2026-05-11 [InputNumber component — Phase 3 Accessibility Hardening COMPLETE (#26)]
-Changed:
-  - projects/ui-lib-custom/src/lib/input-number/input-number.component.ts
-      • Added `label` signal input (used in spinner button aria-labels: "Increment {label}")
-      • Added `required` signal input — sets `aria-required="true"` on the inner input
-      • Added `formattedValue` computed signal — reactive `aria-valuetext` from `value()` + `numberFormatConfig()`
-      • Input element: added `[attr.aria-valuetext]`, `[attr.aria-required]`, `[attr.aria-invalid]`
-      • All spinner buttons: replaced `[disabled]` with `[attr.aria-disabled]` + `[attr.aria-label]`
-      • Added `onSpinKeyDown(event, direction)` handler — Enter/Space activates spinner buttons from keyboard
-      • Updated `onSpinMouseDown` — guards against disabled/at-min/at-max states explicitly
-  - projects/ui-lib-custom/src/lib/input-number/input-number.component.scss
-      • Updated `:hover/:active` button selectors to also exclude `[aria-disabled='true']`
-      • Added `[aria-disabled='true']` selector for disabled button styles
-      • Added `@media (prefers-reduced-motion: reduce)` — sets `--uilib-input-number-transition: none`
-  - projects/ui-lib-custom/src/lib/input-number/input-number.a11y.spec.ts (CREATED — 27 tests)
-      • role=spinbutton, aria-valuenow, aria-valuemin/max, aria-valuetext, aria-label/labelledby
-      • aria-required, aria-invalid, button type=button, button aria-labels (Increment/Decrement)
-      • aria-disabled on buttons at min/max/disabled; keyboard nav (ArrowUp/Down, PageUp/Down, Home/End)
-      • axe-core: default, at-min, at-max, invalid states
-  - projects/ui-lib-custom/src/lib/input-number/input-number.component.spec.ts
-      • Updated "buttons disabled when at boundary" test to check aria-disabled attribute
-  - projects/ui-lib-custom/src/lib/input-number/README.md
-      • Added `label` and `required` inputs to the inputs table
-      • Added Keyboard Navigation table (ArrowUp/Down, PageUp/Down, Home/End)
-      • Added Accessibility section: aria-valuetext format table, spinner button label pattern, aria-disabled note
-  - docs/COMPONENT_SCORES.md
-      • InputNumber: ⏳ Queued → ✅ Done; score row 9.0/10 avg 🟢
-State: InputNumber Phase 3 (Accessibility) complete. 27 a11y tests + 119 existing tests all pass.
-  Next queue item: Slider (#27) — role=slider, aria-valuenow/min/max/valuetext, arrow key step.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-number/ --max-warnings 0 (CLEAN, EXIT:0)
-  node_modules/.bin/jest --testPathPatterns=input-number --no-coverage (146/146 PASS — 119 unit + 27 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors, zero warnings)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS via pre-push hook)
-Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
-  a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
-Next step: Slider (#27) — role=slider, aria-valuenow/min/max/valuetext, arrow key step.
