@@ -6,7 +6,8 @@
     [attr.id]="triggerId()"
     [style.background-color]="displayColor()"
     [disabled]="isDisabled()"
-    [attr.aria-label]="'Choose color'"
+    [attr.aria-label]="'Color: ' + displayColor() + ', click to open picker'"
+    aria-haspopup="dialog"
     [attr.aria-expanded]="panelVisible() ? 'true' : 'false'"
     [attr.aria-controls]="panelVisible() ? panelId() : null"
     [attr.tabindex]="tabindex()"
@@ -20,6 +21,9 @@
 @if (inline() || panelVisible()) {
   <div
     #panelElement
+    role="dialog"
+    aria-label="Color picker"
+    aria-modal="false"
     class="ui-lib-colorpicker__panel"
     [attr.id]="panelId()"
     [attr.data-placement]="panelPlacement()"
@@ -27,35 +31,96 @@
     (click)="$event.stopPropagation()"
     (keydown)="onPanelKeydown($event)"
   >
-    <div
-      #colorAreaElement
-      class="ui-lib-colorpicker__color-area"
-      [style.background-color]="hueOnlyColor()"
-      [attr.tabindex]="isDisabled() ? -1 : 0"
-      [attr.aria-label]="'Saturation and brightness selector'"
-      (mousedown)="onColorAreaMouseDown($event)"
-      (touchstart)="onColorAreaTouchStart($event)"
-      (keydown)="onColorAreaKeydown($event)"
-    >
-      <div class="ui-lib-colorpicker__color-area-gradient"></div>
+    <div class="ui-lib-colorpicker__controls">
       <div
-        class="ui-lib-colorpicker__selector"
-        [style.left.%]="selectorLeft()"
-        [style.top.%]="selectorTop()"
-      ></div>
+        #colorAreaElement
+        class="ui-lib-colorpicker__color-area"
+        aria-hidden="true"
+        tabindex="-1"
+        [style.background-color]="hueOnlyColor()"
+        (mousedown)="onColorAreaMouseDown($event)"
+        (touchstart)="onColorAreaTouchStart($event)"
+        (keydown)="onColorAreaKeydown($event)"
+      >
+        <div class="ui-lib-colorpicker__color-area-gradient"></div>
+        <div
+          class="ui-lib-colorpicker__selector"
+          [style.left.%]="selectorLeft()"
+          [style.top.%]="selectorTop()"
+        ></div>
+      </div>
+
+      <div
+        #hueElement
+        class="ui-lib-colorpicker__hue"
+        role="slider"
+        aria-label="Hue"
+        aria-valuemin="0"
+        aria-valuemax="359"
+        [attr.aria-valuenow]="hue()"
+        [attr.aria-valuetext]="hue() + ' degrees'"
+        [attr.tabindex]="isDisabled() ? -1 : 0"
+        (mousedown)="onHueMouseDown($event)"
+        (touchstart)="onHueTouchStart($event)"
+        (keydown)="onHueKeydown($event)"
+      >
+        <div class="ui-lib-colorpicker__hue-handle" [style.top.%]="hueHandleTop()"></div>
+      </div>
     </div>
 
-    <div
-      #hueElement
-      class="ui-lib-colorpicker__hue"
-      [attr.tabindex]="isDisabled() ? -1 : 0"
-      [attr.aria-label]="'Hue selector'"
-      (mousedown)="onHueMouseDown($event)"
-      (touchstart)="onHueTouchStart($event)"
-      (keydown)="onHueKeydown($event)"
-    >
-      <div class="ui-lib-colorpicker__hue-handle" [style.top.%]="hueHandleTop()"></div>
+    <div class="ui-lib-colorpicker__inputs">
+      <div class="ui-lib-colorpicker__input-group ui-lib-colorpicker__input-group--hex">
+        <label [attr.for]="hexInputId()" class="ui-lib-colorpicker__input-label">Hex</label>
+        <input
+          [attr.id]="hexInputId()"
+          type="text"
+          class="ui-lib-colorpicker__text-input"
+          [value]="hexDisplayValue()"
+          [disabled]="isDisabled()"
+          (change)="onHexInputChange($event)"
+        />
+      </div>
+      <div class="ui-lib-colorpicker__input-row">
+        <div class="ui-lib-colorpicker__input-group">
+          <label [attr.for]="hueInputId()" class="ui-lib-colorpicker__input-label">H</label>
+          <input
+            [attr.id]="hueInputId()"
+            type="number"
+            class="ui-lib-colorpicker__number-input"
+            [value]="hue()"
+            min="0"
+            max="359"
+            [disabled]="isDisabled()"
+            (change)="onHueInputChange($event)"
+          />
+        </div>
+        <div class="ui-lib-colorpicker__input-group">
+          <label [attr.for]="satInputId()" class="ui-lib-colorpicker__input-label">S</label>
+          <input
+            [attr.id]="satInputId()"
+            type="number"
+            class="ui-lib-colorpicker__number-input"
+            [value]="saturation()"
+            min="0"
+            max="100"
+            [disabled]="isDisabled()"
+            (change)="onSatInputChange($event)"
+          />
+        </div>
+        <div class="ui-lib-colorpicker__input-group">
+          <label [attr.for]="brightInputId()" class="ui-lib-colorpicker__input-label">B</label>
+          <input
+            [attr.id]="brightInputId()"
+            type="number"
+            class="ui-lib-colorpicker__number-input"
+            [value]="brightness()"
+            min="0"
+            max="100"
+            [disabled]="isDisabled()"
+            (change)="onBrightInputChange($event)"
+          />
+        </div>
+      </div>
     </div>
   </div>
 }
-

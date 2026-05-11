@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Storybook coverage expansion COMPLETE (PR #36); next is ContextMenu hardening
-- **Next queue:** ContextMenu hardening (Tier 2, #14) — key a11y: same as TieredMenu + trigger `aria-haspopup=menu`
+- **Active focus:** ColorPicker accessibility hardening COMPLETE (Phase 3, #28); next is Password (#29)
+- **Next queue:** Password hardening (Tier 3, #29) — strength meter live region, show/hide toggle button aria-label
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -43,7 +43,50 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-10 [axe-core full-page sweep — Playwright e2e infrastructure]
+Date: 2026-05-11 [ColorPicker component — Phase 3 Accessibility Hardening COMPLETE (#28)]
+Changed:
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.constants.ts
+      • Added HexInputSuffix, HueInputSuffix, SatInputSuffix, BrightInputSuffix to COLOR_PICKER_IDS
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.ts
+      • Added hexInputId, hueInputId, satInputId, brightInputId computed signals
+      • Added hexDisplayValue computed signal (6-char hex without '#' for hex input binding)
+      • Added onHexInputChange, onHueInputChange, onSatInputChange, onBrightInputChange handlers
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.html
+      • CRITICAL: Trigger — added aria-haspopup="dialog"; updated aria-label to 'Color: {hex}, click to open picker'
+      • CRITICAL: Panel — added role="dialog", aria-label="Color picker", aria-modal="false"
+      • CRITICAL: Color area — added aria-hidden="true", changed tabindex to static "-1"
+      • CRITICAL: Hue slider — added role="slider", aria-label="Hue", aria-valuemin/max/now/text
+      • NEW: Controls wrapper div (ui-lib-colorpicker__controls) for flex row layout
+      • NEW: Keyboard-accessible inputs section with hex text input + H/S/B number inputs, all with associated <label> elements
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.scss
+      • Panel changed from flex-row to flex-column; added .ui-lib-colorpicker__controls flex row
+      • Added styles for .ui-lib-colorpicker__inputs, __input-row, __input-group, __input-label,
+        __text-input, __number-input (focus rings, compact sizing, spinner removal)
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.a11y.spec.ts (CREATED — 30 tests)
+      • Trigger: type=button, aria-haspopup=dialog, aria-label contains color, aria-expanded
+      • Panel: role=dialog, aria-label="Color picker", aria-modal=false
+      • Color area: aria-hidden=true, tabindex=-1
+      • Hue slider: role=slider, aria-label, aria-valuemin/max/now/text
+      • Hex input: label associated via for/id; value is 6-char hex
+      • H/S/B inputs: all labels associated; values in correct ranges
+      • Escape: closes picker, restores focus to trigger
+      • axe-core: closed state, open state, inline mode — all pass
+  - projects/ui-lib-custom/src/lib/color-picker/README.md
+      • Added Keyboard Access section, Supported Formats table
+  - docs/COMPONENT_SCORES.md
+      • ColorPicker: ⏳ Queued → ✅ Done; score row 8.2/10 avg 🟢
+State: ColorPicker Phase 3 (Accessibility) complete. 30 a11y tests + 55 existing tests all pass.
+  Next queue item: Password (#29) — strength meter live region, toggle visibility button label.
+Verification:
+  eslint projects/ui-lib-custom/src/lib/color-picker/ --max-warnings 0 (CLEAN, EXIT:0)
+  jest --testPathPatterns=color-picker --no-coverage (85/85 PASS — 55 unit + 30 a11y)
+  jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  ng build ui-lib-custom — Built, zero errors
+Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
+  a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
+Next step: Password (#29) — strength meter live region, show/hide toggle button aria-label.
+
+
 Changed:
   - e2e/a11y-full-sweep.spec.ts (CREATED)
       • Visits all 91 non-redirect demo routes from app.routes.ts

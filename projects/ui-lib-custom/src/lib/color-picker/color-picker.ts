@@ -169,9 +169,29 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     (): string => `${this.generatedId}-${COLOR_PICKER_IDS.PanelSuffix}`
   );
 
+  public readonly hexInputId: Signal<string> = computed<string>(
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.HexInputSuffix}`
+  );
+
+  public readonly hueInputId: Signal<string> = computed<string>(
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.HueInputSuffix}`
+  );
+
+  public readonly satInputId: Signal<string> = computed<string>(
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.SatInputSuffix}`
+  );
+
+  public readonly brightInputId: Signal<string> = computed<string>(
+    (): string => `${this.generatedId}-${COLOR_PICKER_IDS.BrightInputSuffix}`
+  );
+
   public readonly displayColor: Signal<string> = computed<string>((): string => {
     return `#${hsbToHex(this.currentHsb())}`;
   });
+
+  public readonly hexDisplayValue: Signal<string> = computed<string>((): string =>
+    hsbToHex(this.currentHsb())
+  );
 
   public readonly hueOnlyColor: Signal<string> = computed<string>((): string => {
     return `hsl(${this.hue()}, 100%, 50%)`;
@@ -421,6 +441,54 @@ export class ColorPicker implements ControlValueAccessor, AfterViewChecked, OnDe
     if (event.key === KEYBOARD_KEYS.ArrowDown || event.key === KEYBOARD_KEYS.ArrowLeft) {
       event.preventDefault();
       this.applyHsbUpdate(this.hue() - hueStep, this.saturation(), this.brightness(), event);
+    }
+  }
+
+  public onHexInputChange(event: Event): void {
+    if (this.isDisabled()) {
+      return;
+    }
+
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    const parsed: HsbColor | null = toHsbColor(input.value.trim());
+    if (parsed) {
+      this.applyHsbUpdate(parsed.h, parsed.s, parsed.b, event);
+    }
+  }
+
+  public onHueInputChange(event: Event): void {
+    if (this.isDisabled()) {
+      return;
+    }
+
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    const value: number = Number.parseInt(input.value, 10);
+    if (!Number.isNaN(value)) {
+      this.applyHsbUpdate(value, this.saturation(), this.brightness(), event);
+    }
+  }
+
+  public onSatInputChange(event: Event): void {
+    if (this.isDisabled()) {
+      return;
+    }
+
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    const value: number = Number.parseInt(input.value, 10);
+    if (!Number.isNaN(value)) {
+      this.applyHsbUpdate(this.hue(), value, this.brightness(), event);
+    }
+  }
+
+  public onBrightInputChange(event: Event): void {
+    if (this.isDisabled()) {
+      return;
+    }
+
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    const value: number = Number.parseInt(input.value, 10);
+    if (!Number.isNaN(value)) {
+      this.applyHsbUpdate(this.hue(), this.saturation(), value, event);
     }
   }
 

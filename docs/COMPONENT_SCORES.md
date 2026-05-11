@@ -57,7 +57,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ⏳ Queued   |
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ⏳ Queued   |
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Queued   |
-| 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ⏳ Queued   |
+| 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done     |
 | 29   | Password      | Strength meter live region, toggle visibility button label                 | ⏳ Queued   |
 | 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Queued   |
 | 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ⏳ Queued   |
@@ -169,7 +169,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Knob          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| ColorPicker   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ColorPicker   | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | KeyFilter     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 
 ## Layout
