@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Table accessibility hardening COMPLETE (6-phase, #32); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** Chart accessibility hardening COMPLETE (6-phase, #72); next is TreeTable (#33, Tier 4 Data Display)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -38,6 +38,9 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
+- `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
+- `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 
 ---
 
@@ -51,6 +54,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
+Changed:
+  - projects/ui-lib-custom/src/lib/chart/chart.component.ts
+      • Added module-level `nextChartId: number` for unique instance IDs
+      • Added `chartId`, `tableId`, `datasetRows`, and `tableLabels` computed properties
+      • Added `showDataTable` input (default `true`) to control the visually-hidden data table
+      • Added `prefers-reduced-motion` detection → sets `animation: false` in Chart.js options when preferred
+      • Added `formatDataValue` helper for multi-type data point normalisation
+  - projects/ui-lib-custom/src/lib/chart/chart.component.html
+      • Added `aria-describedby` on canvas (links to the data table when `showDataTable` is true)
+      • Added visually-hidden `<table>` with `<caption>`, `<thead>` (label columns + "Dataset" header), and `<tbody>` (one row per dataset)
+  - projects/ui-lib-custom/src/lib/chart/chart.component.scss
+      • Added `.ui-lib-chart__sr-table` visually-hidden class
+      • Added `@media (prefers-reduced-motion: reduce)` override for canvas transitions/animations
+  - projects/ui-lib-custom/src/lib/chart/chart.types.ts
+      • Added `ChartDatasetRow` and `ChartAccessibleDataset` interfaces
+  - projects/ui-lib-custom/src/lib/chart/chart.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure, data table rendering, unique IDs, reduced-motion, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/chart/README.md
+      • Added ARIA table, keyboard table, CSS custom properties table, and accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Chart: ⏳ Queued → ✅ Done; score row populated (avg 8.9)
+State: Chart hardening complete. Visually-hidden data table, aria-describedby linkage, unique IDs, reduced-motion
+  support, and 21 a11y regression tests are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chart/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=chart --no-coverage (96/96 PASS — 75 unit + 21 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `npm install` required in fresh clone before tools are available.
+Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [Chip component — 6-phase hardening COMPLETE (#54)]
 Changed:
@@ -72,14 +107,7 @@ Changed:
       • Replaced `'should apply role="option" on host'` with explicit non-removable/removable role tests
       • Added 10 new unit tests (selectable class, selected class, aria-selected, tabindex, Space/Enter keyboard, unique ID)
   - projects/ui-lib-custom/src/lib/chip/chip.a11y.spec.ts (CREATED — 18 tests)
-      • axe-core checks for basic, image, icon, removable, selectable, selected chips
-      • ARIA structure: role per removable state, imageAlt passthrough, aria-hidden on icons, remove button label
-      • Selectable state: aria-selected false/true, tabindex presence
-      • Keyboard: Space and Enter toggle selectedChange
-      • Unique IDs: format and uniqueness assertions
   - projects/ui-lib-custom/src/lib/chip/README.md
-      • Added `selectable`, `selected` inputs and `selectedChange` output to tables
-      • Added ARIA attributes table, keyboard interaction table, screen reader notes
   - docs/COMPONENT_SCORES.md
       • Chip #54: ⏳ Queued → ✅ Done; score row populated (avg 8.5)
 State: Chip hardening complete. Dynamic role, selectable toggle, prefers-reduced-motion, focus-visible, unique IDs, and 18 a11y tests in place.
@@ -88,7 +116,7 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=chip --no-coverage (48/48 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation. Removable chip uses `role="group"` (not `role="option"`) to avoid nested-interactive axe violation; non-removable chips keep `role="option"`.
+Terminal notes: Fresh clone required `npm install` before validation.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass (or resume from queue).
 
 Date: 2026-05-11 [ContextMenu — 6-phase hardening COMPLETE (#14)]
@@ -110,26 +138,9 @@ State: Complete
     • Created context-menu.a11y.spec.ts (31 tests)
   Phase 1: Added module-level ID counter + contextMenuId and rovingIndex reset on show.
   Phase 2: README now documents trigger ARIA pattern, keyboard map, accessibility notes, and CSS variables.
-  Phase 4: Verified existing performance patterns; no structural perf regressions introduced.
-  Phase 5: Composability API unchanged (`show/hide/toggle`, `itemClick`, `command`, `global`, `visible`).
-  Phase 6: Verified focus-visible ring, disabled interaction lockout, submenu caret rotation, and panel transition polish.
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/context-menu/ --max-warnings 0 (PASS)
   node_modules/.bin/jest --testPathPatterns=context-menu --no-coverage (86/86 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation. Captured UI screenshot at `/tmp/context-menu-hardening.png`.
 Next step: PanelMenu hardening (Tier 2, #15).
-
-Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the newest conflict against origin/main by preserving the current Table → TreeTable session state
-      • Kept active handoffs trimmed to the newest three entries and moved the older Stepper handoff to the archive
-State: Branch is merged with the latest origin/main again. This merge only required resolving AI_AGENT_CONTEXT.md; no library source files changed in the incoming main branch.
-Verification:
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: The repository is now fully unshallowed locally after `git fetch --unshallow origin`; merge conflict was isolated to AI_AGENT_CONTEXT.md.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
