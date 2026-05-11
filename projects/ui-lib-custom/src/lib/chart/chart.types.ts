@@ -59,6 +59,22 @@ export interface ChartClickEvent {
   readonly chart: ChartInstance;
 }
 
+/** A single dataset row used for the accessible data table alternative. */
+export interface ChartDatasetRow {
+  readonly label: string;
+  readonly values: string[];
+}
+
+/**
+ * Minimal shape used internally when extracting dataset label and data values
+ * for the accessible data table. Chart.js dataset generics are complex; this
+ * interface captures only the fields needed for the accessibility table.
+ */
+export interface ChartAccessibleDataset {
+  readonly label?: string;
+  readonly data: readonly unknown[];
+}
+
 /** Normalized theme tokens consumed by `ChartThemeService`. */
 export interface ChartThemeTokens {
   readonly fontFamily: string;
