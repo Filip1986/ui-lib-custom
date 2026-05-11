@@ -14,6 +14,9 @@ import type { ControlValueAccessor } from '@angular/forms';
 import { PASSWORD_DEFAULTS } from './password.types';
 import type { PasswordSize, PasswordStrength, PasswordVariant } from './password.types';
 
+/** Module-level counter for generating unique IDs across all Password instances. */
+let nextPasswordId: number = 0;
+
 /** Password field with strength meter, mask toggle, and ControlValueAccessor integration. */
 @Component({
   selector: 'uilib-password',
@@ -45,6 +48,12 @@ import type { PasswordSize, PasswordStrength, PasswordVariant } from './password
   },
 })
 export class PasswordComponent implements ControlValueAccessor {
+  /** Unique ID for the inner native input element. */
+  public readonly passwordId: string = 'ui-lib-password-' + ++nextPasswordId;
+
+  /** ID for the strength live region — use as `aria-describedby` on an associated label. */
+  public readonly strengthId: string = this.passwordId + '-strength';
+
   /** Design variant: material, bootstrap, or minimal. */
   public readonly variant: InputSignal<PasswordVariant> = input<PasswordVariant>('material');
 
@@ -194,6 +203,21 @@ export class PasswordComponent implements ControlValueAccessor {
       return this.strongLabel();
     }
     return this.promptLabel();
+  });
+
+  /** Accessible description announced via live region when password strength changes. */
+  protected readonly strengthDescription: Signal<string> = computed<string>((): string => {
+    const strengthValue: PasswordStrength | null = this.strength();
+    if (strengthValue === 'weak') {
+      return 'Password strength: Weak';
+    }
+    if (strengthValue === 'medium') {
+      return 'Password strength: Medium';
+    }
+    if (strengthValue === 'strong') {
+      return 'Password strength: Strong';
+    }
+    return 'Password strength: None';
   });
 
   /** Native input type — switches between "password" and "text" when the mask is toggled. */

@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** MegaMenu accessibility hardening COMPLETE (6-phase, #16); next is Tabs (#17)
-- **Next queue:** Tabs hardening (Tier 2, #17) — role=tablist/tab/tabpanel, arrow nav, aria-selected
+- **Active focus:** Password accessibility hardening COMPLETE (6-phase, #29); next is Rating (#30)
+- **Next queue:** Rating hardening (Tier 3, #30) — role=radiogroup or role=slider, keyboard interaction
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -31,6 +31,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
+- `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 
 ---
 
@@ -44,6 +45,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Knob component — accessibility hardening COMPLETE (#31)]
+Changed:
+  - projects/ui-lib-custom/src/lib/knob/knob.component.ts
+      • Moved slider semantics to host (`role=slider`, `aria-valuenow/min/max/valuetext`, keyboard + pointer handlers)
+      • Added `getValueText()` helper for `aria-valuetext`
+      • Added requestAnimationFrame-throttled drag updates and RAF cleanup on pointer-up/destroy
+  - projects/ui-lib-custom/src/lib/knob/knob.component.html
+      • Marked SVG as decorative (`aria-hidden="true"`, `focusable="false"`)
+      • Removed interactive ARIA/event bindings from SVG
+  - projects/ui-lib-custom/src/lib/knob/knob.component.scss
+      • Added `prefers-reduced-motion: reduce` block (`--uilib-knob-transition-duration: 0ms`)
+  - projects/ui-lib-custom/src/lib/knob/knob.component.spec.ts
+      • Updated ARIA assertions to target knob host element semantics
+  - projects/ui-lib-custom/src/lib/knob/knob.a11y.spec.ts (CREATED — 21 tests)
+      • Added role/ARIA assertions, keyboard equivalence coverage, disabled behavior, decorative SVG checks
+      • Added axe checks for default, min, max, and disabled states
+  - projects/ui-lib-custom/src/lib/knob/README.md
+      • Added accessibility behavior and keyboard support table
+  - docs/COMPONENT_SCORES.md
+      • Knob queue status set to ✅ Done; score row populated (avg 8.2)
+State: Knob hardening complete with host-level slider semantics, keyboard parity for drag operations,
+  decorative SVG semantics, reduced-motion support, and dedicated a11y test coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/knob/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=knob --no-coverage (56/56 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Installed dependencies via `npm install` in fresh clone before running validation commands.
+Next step: Table (#32) hardening — start Tier 4 Data Display.
 
 Date: 2026-05-11 [MegaMenu component — 6-phase Hardening COMPLETE (#16)]
 Changed:
@@ -137,46 +168,3 @@ Verification:
 Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
   a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
 Next step: Slider (#27) — role=slider, aria-valuenow/min/max/valuetext, arrow key step.
-Date: 2026-05-11 [ColorPicker component — Phase 3 Accessibility Hardening COMPLETE (#28)]
-Changed:
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.constants.ts
-      • Added HexInputSuffix, HueInputSuffix, SatInputSuffix, BrightInputSuffix to COLOR_PICKER_IDS
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.ts
-      • Added hexInputId, hueInputId, satInputId, brightInputId computed signals
-      • Added hexDisplayValue computed signal (6-char hex without '#' for hex input binding)
-      • Added onHexInputChange, onHueInputChange, onSatInputChange, onBrightInputChange handlers
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.html
-      • CRITICAL: Trigger — added aria-haspopup="dialog"; updated aria-label to 'Color: {hex}, click to open picker'
-      • CRITICAL: Panel — added role="dialog", aria-label="Color picker", aria-modal="false"
-      • CRITICAL: Color area — added aria-hidden="true", changed tabindex to static "-1"
-      • CRITICAL: Hue slider — added role="slider", aria-label="Hue", aria-valuemin/max/now/text
-      • NEW: Controls wrapper div (ui-lib-colorpicker__controls) for flex row layout
-      • NEW: Keyboard-accessible inputs section with hex text input + H/S/B number inputs, all with associated <label> elements
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.scss
-      • Panel changed from flex-row to flex-column; added .ui-lib-colorpicker__controls flex row
-      • Added styles for .ui-lib-colorpicker__inputs, __input-row, __input-group, __input-label,
-        __text-input, __number-input (focus rings, compact sizing, spinner removal)
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.a11y.spec.ts (CREATED — 30 tests)
-      • Trigger: type=button, aria-haspopup=dialog, aria-label contains color, aria-expanded
-      • Panel: role=dialog, aria-label="Color picker", aria-modal=false
-      • Color area: aria-hidden=true, tabindex=-1
-      • Hue slider: role=slider, aria-label, aria-valuemin/max/now/text
-      • Hex input: label associated via for/id; value is 6-char hex
-      • H/S/B inputs: all labels associated; values in correct ranges
-      • Escape: closes picker, restores focus to trigger
-      • axe-core: closed state, open state, inline mode — all pass
-  - projects/ui-lib-custom/src/lib/color-picker/README.md
-      • Added Keyboard Access section, Supported Formats table
-  - docs/COMPONENT_SCORES.md
-      • ColorPicker: ⏳ Queued → ✅ Done; score row 8.2/10 avg 🟢
-State: ColorPicker Phase 3 (Accessibility) complete. 30 a11y tests + 55 existing tests all pass.
-  Next queue item: Password (#29) — strength meter live region, toggle visibility button label.
-Verification:
-  eslint projects/ui-lib-custom/src/lib/color-picker/ --max-warnings 0 (CLEAN, EXIT:0)
-  jest --testPathPatterns=color-picker --no-coverage (85/85 PASS — 55 unit + 30 a11y)
-  jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  ng build ui-lib-custom — Built, zero errors
-Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
-  a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
-Next step: Password (#29) — strength meter live region, show/hide toggle button aria-label.
-

@@ -44,3 +44,21 @@
 <!-- percentage display with ngModel -->
 <uilib-knob [(ngModel)]="brightness" [max]="100" valueTemplate="{value}%" />
 ```
+
+## Accessibility
+
+- The host element uses `role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, and `aria-valuetext`.
+- `aria-valuetext` is derived from `valueTemplate` (for example `'{value}%'` announces as percent).
+- The internal SVG is decorative only (`aria-hidden="true"` and `focusable="false"`).
+- The visible value label is not a live region (to avoid duplicate announcements).
+
+### Keyboard support
+
+| Key | Behavior |
+|---|---|
+| `ArrowRight` / `ArrowUp` | Increase by `step` |
+| `ArrowLeft` / `ArrowDown` | Decrease by `step` |
+| `PageUp` | Increase by `step * 10` |
+| `PageDown` | Decrease by `step * 10` |
+| `Home` | Set to `min` |
+| `End` | Set to `max` |
