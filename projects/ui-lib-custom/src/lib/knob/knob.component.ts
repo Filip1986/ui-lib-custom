@@ -48,6 +48,20 @@ let knobIdCounter: number = 0;
   ],
   host: {
     class: 'uilib-knob',
+    role: 'slider',
+    '[attr.id]': 'inputId()',
+    '[attr.tabindex]': 'effectiveTabindex()',
+    '[attr.aria-label]': 'ariaLabel() || null',
+    '[attr.aria-valuemin]': 'min()',
+    '[attr.aria-valuemax]': 'max()',
+    '[attr.aria-valuenow]': 'clampedValue()',
+    '[attr.aria-valuetext]': 'getValueText()',
+    '[attr.aria-disabled]': 'isControlDisabled() ? "true" : null',
+    '[attr.aria-readonly]': 'readonly() ? "true" : null',
+    '(focus)': 'onFocusEvent($event)',
+    '(blur)': 'onBlurEvent($event)',
+    '(keydown)': 'onKeyDown($event)',
+    '(pointerdown)': 'onPointerDown($event)',
     '[class.uilib-knob-sm]': 'size() === "sm"',
     '[class.uilib-knob-md]': 'size() === "md"',
     '[class.uilib-knob-lg]': 'size() === "lg"',
@@ -147,6 +161,8 @@ export class KnobComponent implements ControlValueAccessor {
   private dragStartY: number = 0;
   private dragStartValue: number = 0;
   private isDragging: boolean = false;
+  private pendingPointerY: number | null = null;
+  private dragAnimationFrameId: number | null = null;
 
   /** Bound listener references so they can be removed cleanly. */
   private readonly boundPointerMove: (event: PointerEvent) => void = (
@@ -199,6 +215,11 @@ export class KnobComponent implements ControlValueAccessor {
     this.isControlDisabled() ? -1 : this.tabindex()
   );
 
+  /** Human-readable value used for aria-valuetext. */
+  public getValueText(): string {
+    return this.formattedValue();
+  }
+
   /** SVG `d` attribute for the full 270° track arc. */
   protected readonly trackPath: Signal<string> = computed<string>((): string => {
     const startCoords: { x: number; y: number } = this.arcCoords(KNOB_SVG.startAngleDeg);
@@ -238,6 +259,7 @@ export class KnobComponent implements ControlValueAccessor {
   constructor() {
     // Remove global pointer listeners if the component is destroyed mid-drag
     this.destroyRef.onDestroy((): void => {
+      this.clearDragAnimationFrame();
       this.removeGlobalPointerListeners();
     });
   }
@@ -346,18 +368,31 @@ export class KnobComponent implements ControlValueAccessor {
     if (!this.isDragging) {
       return;
     }
+    this.pendingPointerY = event.clientY;
+    if (this.dragAnimationFrameId !== null) {
+      return;
+    }
 
-    // Dragging upward increases value; scale sensitivity to arc range
-    const deltaY: number = this.dragStartY - event.clientY;
-    const range: number = this.max() - this.min();
-    // 150px of drag covers the full range — provides comfortable granularity
-    const deltaValue: number = (deltaY / 150) * range;
-    const newValue: number = this.snapToStep(this.dragStartValue + deltaValue);
-    this.updateValue(newValue);
+    this.dragAnimationFrameId = requestAnimationFrame((): void => {
+      this.dragAnimationFrameId = null;
+      if (this.pendingPointerY === null) {
+        return;
+      }
+      // Dragging upward increases value; scale sensitivity to arc range
+      const deltaY: number = this.dragStartY - this.pendingPointerY;
+      const range: number = this.max() - this.min();
+      // 150px of drag covers the full range — provides comfortable granularity
+      const deltaValue: number = (deltaY / 150) * range;
+      const newValue: number = this.snapToStep(this.dragStartValue + deltaValue);
+      this.pendingPointerY = null;
+      this.updateValue(newValue);
+    });
   }
 
   private onPointerUp(): void {
     this.isDragging = false;
+    this.pendingPointerY = null;
+    this.clearDragAnimationFrame();
     this.onModelTouched();
     this.removeGlobalPointerListeners();
   }
@@ -365,6 +400,13 @@ export class KnobComponent implements ControlValueAccessor {
   private removeGlobalPointerListeners(): void {
     document.removeEventListener('pointermove', this.boundPointerMove);
     document.removeEventListener('pointerup', this.boundPointerUp);
+  }
+
+  private clearDragAnimationFrame(): void {
+    if (this.dragAnimationFrameId !== null) {
+      cancelAnimationFrame(this.dragAnimationFrameId);
+      this.dragAnimationFrameId = null;
+    }
   }
 
   private stepValue(delta: number): void {
