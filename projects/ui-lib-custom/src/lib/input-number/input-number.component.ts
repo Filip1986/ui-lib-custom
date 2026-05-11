@@ -301,9 +301,10 @@ export class InputNumberComponent implements ControlValueAccessor {
       if (currentValue === null) return null;
       const config: NumberFormatConfig = this.numberFormatConfig();
       if (!this.format()) {
-        return `${config.prefix ?? ''}${String(currentValue)}${config.suffix ?? ''}` || null;
+        return `${config.prefix ?? ''}${String(currentValue)}${config.suffix ?? ''}`;
       }
-      return this.numberFormatService.formatValue(currentValue) || null;
+      const formatted: string = this.numberFormatService.formatValue(currentValue);
+      return formatted.length > 0 ? formatted : null;
     }
   );
 
@@ -475,7 +476,7 @@ export class InputNumberComponent implements ControlValueAccessor {
   }
 
   public onSpinKeyDown(event: KeyboardEvent, direction: -1 | 1): void {
-    if (event.key !== 'Enter' && event.key !== ' ') {
+    if (event.key !== 'Enter' && event.key !== ' ' && event.key !== 'Spacebar') {
       return;
     }
 

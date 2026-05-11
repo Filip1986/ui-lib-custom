@@ -84,7 +84,7 @@ When the input element is focused:
 | `Home` | Jump to `min` (if set) |
 | `End` | Jump to `max` (if set) |
 
-Spinner buttons also respond to `Enter` and `Space` when keyboard-focused.
+Spinner buttons also respond to `Enter` and `Space` when keyboard focused.
 
 ## Accessibility
 
