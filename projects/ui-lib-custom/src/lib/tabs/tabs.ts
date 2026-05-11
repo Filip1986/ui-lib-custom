@@ -30,6 +30,7 @@ import { Tab } from './tab';
 import { TabPanel } from './tab-panel';
 import type {
   TabContext,
+  TabsActivation,
   TabsAlignment,
   TabsLazyMode,
   TabsMode,
@@ -50,6 +51,8 @@ import {
 type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 
 type TabsSelection = { value: TabsValue | null; index: number };
+
+let nextTabsInstanceId: number = 0;
 
 export type TabsContextItem = TabContext & {
   ref: Tab;
@@ -85,8 +88,7 @@ interface ScrollMetrics {
   },
 })
 export class Tabs implements OnDestroy, AfterViewInit {
-  private static nextId: number = 0;
-  public readonly uid: string = `ui-lib-tabs-${++Tabs.nextId}`;
+  public readonly tabsId: string = `ui-lib-tabs-${++nextTabsInstanceId}`;
 
   private readonly elementRef: ElementRef<HTMLElement> = inject(
     ElementRef
@@ -97,7 +99,9 @@ export class Tabs implements OnDestroy, AfterViewInit {
   public readonly variant: InputSignal<TabsVariant | null> = input<TabsVariant | null>(null);
   public readonly size: InputSignal<TabsSize> = input<TabsSize>(SHARED_DEFAULTS.Size);
   public readonly orientation: InputSignal<TabsOrientation> = input<TabsOrientation>('horizontal');
+  public readonly activation: InputSignal<TabsActivation> = input<TabsActivation>('auto');
   public readonly align: InputSignal<TabsAlignment> = input<TabsAlignment>('start');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   /** Controls panel rendering vs navigation-only mode. */
   public readonly mode: InputSignal<TabsMode> = input<TabsMode>('default');
   public readonly selectedValue: InputSignal<TabsValue | null> = input<TabsValue | null>(null);
@@ -161,7 +165,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
     (): boolean => this.mode() === 'navigation'
   );
   private readonly tabListId: Signal<string> = computed<string>(
-    (): string => `${this.uid}-tablist`
+    (): string => `${this.tabsId}-tablist`
   );
   protected readonly hostDir: Signal<'ltr' | 'rtl' | null> = computed<'ltr' | 'rtl' | null>(
     (): 'ltr' | 'rtl' | null => {
@@ -456,12 +460,12 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
   /** Stable DOM id for a tab trigger. */
   public tabId(index: number): string {
-    return `${this.uid}-tab-${index}`;
+    return `${this.tabsId}-tab-${index}`;
   }
 
   /** Stable DOM id for a tab panel. */
   public panelId(index: number): string {
-    return `${this.uid}-panel-${index}`;
+    return `${this.tabsId}-panel-${index}`;
   }
 
   /** Computes tabindex for roving focus. */
@@ -495,13 +499,24 @@ export class Tabs implements OnDestroy, AfterViewInit {
     const key: string = event.key;
     if (key === KEYBOARD_KEYS.Home) {
       event.preventDefault();
-      this.focusIndex(this.firstEnabledIndex());
+      this.focusBoundary('first');
       return;
     }
 
     if (key === KEYBOARD_KEYS.End) {
       event.preventDefault();
-      this.focusIndex(this.lastEnabledIndex());
+      this.focusBoundary('last');
+      return;
+    }
+
+    if (
+      key === KEYBOARD_KEYS.Tab &&
+      !event.shiftKey &&
+      !this.isNavigationMode() &&
+      this.isActive(currentIndex)
+    ) {
+      event.preventDefault();
+      this.focusActivePanel();
       return;
     }
 
@@ -516,12 +531,14 @@ export class Tabs implements OnDestroy, AfterViewInit {
 
     if (forward) {
       event.preventDefault();
-      this.focusNext(currentIndex);
+      this.focusAdjacent(currentIndex, 1);
+      return;
     }
 
     if (backward) {
       event.preventDefault();
-      this.focusPrev(currentIndex);
+      this.focusAdjacent(currentIndex, -1);
+      return;
     }
 
     if (key === KEYBOARD_KEYS.Enter || key === KEYBOARD_KEYS.Space) {
@@ -533,26 +550,26 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
   }
 
-  private focusNext(currentIndex: number): void {
-    const tabs: TabsContextItem[] = this.tabContexts();
-    for (let i: number = currentIndex + 1; i < tabs.length; i++) {
-      const tab: TabsContextItem | undefined = tabs[i];
-      if (tab && !tab.disabled) {
-        this.focusIndex(i);
-        this.onSelect(tab);
-        break;
-      }
-    }
+  private focusBoundary(boundary: 'first' | 'last'): void {
+    const index: number = boundary === 'first' ? this.firstEnabledIndex() : this.lastEnabledIndex();
+    this.focusIndex(index);
+    this.selectFocusedIndex(index);
   }
 
-  private focusPrev(currentIndex: number): void {
+  private focusAdjacent(currentIndex: number, step: 1 | -1): void {
     const tabs: TabsContextItem[] = this.tabContexts();
-    for (let i: number = currentIndex - 1; i >= 0; i--) {
-      const tab: TabsContextItem | undefined = tabs[i];
+    if (tabs.length === 0) {
+      return;
+    }
+
+    let index: number = currentIndex;
+    for (let offset: number = 0; offset < tabs.length; offset += 1) {
+      index = (index + step + tabs.length) % tabs.length;
+      const tab: TabsContextItem | undefined = tabs[index];
       if (tab && !tab.disabled) {
-        this.focusIndex(i);
-        this.onSelect(tab);
-        break;
+        this.focusIndex(index);
+        this.selectFocusedIndex(index);
+        return;
       }
     }
   }
@@ -580,6 +597,17 @@ export class Tabs implements OnDestroy, AfterViewInit {
     if (btn) {
       this.scheduleScrollIntoView(index);
       btn.focus();
+    }
+  }
+
+  private selectFocusedIndex(index: number): void {
+    if (index < 0 || this.activation() !== 'auto') {
+      return;
+    }
+
+    const tab: TabsContextItem | undefined = this.tabContexts()[index];
+    if (tab) {
+      this.onSelect(tab);
     }
   }
 
@@ -757,7 +785,7 @@ export class Tabs implements OnDestroy, AfterViewInit {
         return;
       }
       const options: ScrollIntoViewOptions = {
-        behavior: 'smooth',
+        behavior: this.prefersReducedMotion() ? 'auto' : 'smooth',
         block: 'nearest',
         inline: 'nearest',
       };
@@ -845,28 +873,28 @@ export class Tabs implements OnDestroy, AfterViewInit {
     rtlAxis: RtlScrollAxis
   ): void {
     if (axis === 'vertical') {
-      list.scrollTo({ top: position, behavior: 'smooth' });
+      list.scrollTo({ top: position, behavior: this.scrollBehaviorMode() });
       return;
     }
 
     if (!isRtl) {
-      list.scrollTo({ left: position, behavior: 'smooth' });
+      list.scrollTo({ left: position, behavior: this.scrollBehaviorMode() });
       return;
     }
 
     const max: number = Math.max(0, list.scrollWidth - list.clientWidth);
 
     if (rtlAxis === 'negative') {
-      list.scrollTo({ left: -position, behavior: 'smooth' });
+      list.scrollTo({ left: -position, behavior: this.scrollBehaviorMode() });
       return;
     }
 
     if (rtlAxis === 'reverse') {
-      list.scrollTo({ left: max - position, behavior: 'smooth' });
+      list.scrollTo({ left: max - position, behavior: this.scrollBehaviorMode() });
       return;
     }
 
-    list.scrollTo({ left: position, behavior: 'smooth' });
+    list.scrollTo({ left: position, behavior: this.scrollBehaviorMode() });
   }
 
   private scrollByStep(direction: 'prev' | 'next'): void {
@@ -910,5 +938,17 @@ export class Tabs implements OnDestroy, AfterViewInit {
     }
 
     return 'default';
+  }
+
+  private scrollBehaviorMode(): ScrollBehavior {
+    return this.prefersReducedMotion() ? 'auto' : 'smooth';
+  }
+
+  private prefersReducedMotion(): boolean {
+    return (
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
   }
 }

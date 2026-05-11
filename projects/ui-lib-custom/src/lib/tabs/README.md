@@ -17,7 +17,9 @@
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant; inherits from `ThemeConfigService` when null |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token (also accepts `'small'`, `'medium'`, `'large'`) |
 | `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Tab list orientation |
+| `activation` | `'auto' \| 'manual'` | `'auto'` | Arrow keys either activate immediately or only move focus until `Enter` / `Space` is pressed |
 | `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | `'start'` | Alignment of tab triggers in the list |
+| `ariaLabel` | `string \| null` | `null` | Accessible label applied to the tablist when no visible heading labels it |
 | `mode` | `'default' \| 'navigation'` | `'default'` | `'navigation'` disables panel rendering for router use |
 | `selectedValue` | `TabsValue \| null` | `null` | Controlled selection by value |
 | `selectedIndex` | `number \| null` | `null` | Controlled selection by index |
@@ -75,3 +77,30 @@ Use `[uiLibTabContent]` directive on an `<ng-template>` for content rendered out
   <ui-lib-tab value="b" label="Tab B">Content B</ui-lib-tab>
 </ui-lib-tabs>
 ```
+
+## Accessibility
+
+- `ui-lib-tabs` renders a semantic tab pattern: `role="tablist"`, `role="tab"`, and `role="tabpanel"`.
+- Each instance generates unique `tabId()` / `panelId()` values so multiple tab groups can share a page without duplicate IDs.
+- Active tabs expose `aria-selected="true"` with `tabindex="0"`; inactive tabs expose `aria-selected="false"` with `tabindex="-1"`.
+- Disabled tabs expose `aria-disabled="true"` and are skipped by arrow-key navigation.
+- `activation="auto"` follows automatic activation. `activation="manual"` moves focus with arrow keys and waits for `Enter` or `Space` before selecting.
+
+### Keyboard support
+
+| Key | Behavior |
+|-----|----------|
+| `Tab` | Leaves the tablist and moves focus into the active panel |
+| `ArrowLeft` / `ArrowRight` | Move between horizontal tabs (wraps and skips disabled tabs) |
+| `ArrowUp` / `ArrowDown` | Move between vertical tabs (wraps and skips disabled tabs) |
+| `Home` / `End` | Jump to the first / last enabled tab |
+| `Enter` / `Space` | Activate the focused tab in manual mode |
+
+### CSS custom properties
+
+- `--uilib-tabs-transition`
+- `--uilib-tabs-indicator-color`
+- `--uilib-tabs-indicator-height`
+- `--uilib-tabs-bg`
+- `--uilib-tabs-border`
+- `--uilib-tab-bg-active`
