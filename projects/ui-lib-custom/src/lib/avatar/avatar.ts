@@ -9,8 +9,10 @@ import {
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { AVATAR_GROUP_CONTEXT } from './avatar-group';
 import type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
 export type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
+let nextAvatarId: number = 0;
 /**
  * Avatar - Represents a person or object with an image, initials, or icon.
  *
@@ -30,17 +32,25 @@ export type { AvatarSize, AvatarShape, AvatarVariant } from './avatar.types';
   host: {
     '[class]': 'avatarClasses()',
     '[attr.aria-label]': 'ariaLabelResolved()',
-    '[attr.role]': '"img"',
+    '[attr.role]': 'hostRole()',
+    '[attr.id]': 'instanceId',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class Avatar {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly isInAvatarGroup: boolean =
+    inject(AVATAR_GROUP_CONTEXT, {
+      optional: true,
+    }) === true;
+  public readonly instanceId: string = `ui-lib-avatar-${(nextAvatarId += 1)}`;
   /** URL of the image to display */
   public readonly image: InputSignal<string | null> = input<string | null>(null);
   /** Alternative text for the image */
-  public readonly imageAlt: InputSignal<string> = input<string>('Avatar');
+  public readonly imageAlt: InputSignal<string> = input<string>('');
+  /** Full name announced by assistive technologies */
+  public readonly name: InputSignal<string | null> = input<string | null>(null);
   /** Text label (typically initials) to display when no image is provided */
   public readonly label: InputSignal<string | null> = input<string | null>(null);
   /** CSS class string for an icon (e.g. "pi pi-user") to display when no image or label */
@@ -55,6 +65,9 @@ export class Avatar {
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
   /** Accessible label override for the avatar */
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  public readonly hostRole: Signal<'img' | 'listitem'> = computed<'img' | 'listitem'>(
+    (): 'img' | 'listitem' => (this.isInAvatarGroup ? 'listitem' : 'img')
+  );
   private readonly effectiveVariant: Signal<AvatarVariant> = computed<AvatarVariant>(
     (): AvatarVariant => {
       const direct: AvatarVariant | null = this.variant();
@@ -83,10 +96,15 @@ export class Avatar {
       const override: string | null = this.ariaLabel();
       if (override) return override;
       const img: string | null = this.image();
-      if (img) return this.imageAlt();
-      return this.label();
+      if (img) return this.resolvedImageAlt();
+      return this.name() || this.label() || 'Avatar';
     }
   );
+  public readonly resolvedImageAlt: Signal<string> = computed<string>((): string => {
+    const configuredAlt: string = this.imageAlt().trim();
+    if (configuredAlt) return configuredAlt;
+    return this.name() || this.label() || 'Avatar';
+  });
   /** Whether to show the image slot */
   public readonly showImage: Signal<boolean> = computed<boolean>(
     (): boolean => this.image() !== null

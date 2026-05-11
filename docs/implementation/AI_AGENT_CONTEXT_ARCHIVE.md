@@ -4,12 +4,6 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
-# AI Agent Context Archive
-
-This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT_CONTEXT.md`.
-
----
-
 Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
 Changed:
   - projects/ui-lib-custom/src/lib/chart/chart.component.ts
@@ -43,7 +37,6 @@ Terminal notes: `npm install` required in fresh clone before tools are available
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
 ---
-
 Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
 Changed:
   - projects/ui-lib-custom/src/lib/table/table.component.ts
