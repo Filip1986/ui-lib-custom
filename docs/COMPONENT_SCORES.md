@@ -39,7 +39,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done     |
 | 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ⏳ Queued   |
 | 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ⏳ Queued   |
-| 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ⏳ Queued   |
+| 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done    |
 | 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ⏳ Queued   |
 | 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ✅ Done     |
 | 19   | Stepper     | `role=tablist` variant, `aria-current=step`, linear mode enforcement            | ⏳ Queued   |
@@ -214,7 +214,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | ContextMenu | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| MegaMenu    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| MegaMenu    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | PanelMenu   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |

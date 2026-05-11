@@ -43,6 +43,9 @@ export type {
 /** Default accessible label exported for test assertions. */
 export const MEGA_MENU_DEFAULT_ARIA_LABEL: string = 'Navigation';
 
+/** Auto-incrementing counter to generate unique IDs for each MegaMenu instance. */
+let nextMegaMenuId: number = 0;
+
 /**
  * MegaMenu component — a horizontal (or vertical) navigation bar where
  * top-level items can open multi-column mega panels of sub-items.
@@ -99,6 +102,12 @@ export class MegaMenu implements OnDestroy {
   public readonly itemClick: OutputEmitterRef<MegaMenuCommandEvent> =
     output<MegaMenuCommandEvent>();
 
+  /** Emitted when a mega panel opens. Carries the top-level item that triggered it. */
+  public readonly panelOpened: OutputEmitterRef<MegaMenuItem> = output<MegaMenuItem>();
+
+  /** Emitted when the currently open mega panel closes. */
+  public readonly panelClosed: OutputEmitterRef<void> = output<void>();
+
   // ── Internal state ────────────────────────────────────────────────────────
 
   /**
@@ -112,6 +121,24 @@ export class MegaMenu implements OnDestroy {
    * positioned correctly after first render.
    */
   public readonly isPanelPositioned: WritableSignal<boolean> = signal<boolean>(false);
+
+  /**
+   * Unique ID for this MegaMenu instance — used for ARIA relationships.
+   * @example 'ui-lib-mega-menu-1'
+   */
+  public readonly menuId: string = `ui-lib-mega-menu-${++nextMegaMenuId}`;
+
+  /**
+   * ID assigned to the open mega-panel `<div>`.
+   * Root items with sub-items set `aria-controls` to this value.
+   */
+  public readonly panelId: string = `${this.menuId}-panel`;
+
+  /**
+   * Index of the root item that holds the tab stop (roving tabindex pattern).
+   * Only this item gets `tabindex="0"`; all others get `"-1"`.
+   */
+  public readonly rovingIndex: WritableSignal<number> = signal<number>(0);
 
   // ── Dependencies ──────────────────────────────────────────────────────────
 
@@ -153,7 +180,7 @@ export class MegaMenu implements OnDestroy {
 
   private readonly clickOutsideHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
     if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-      this.closePanel();
+      this.closePanel(false);
     }
   };
 
@@ -161,7 +188,7 @@ export class MegaMenu implements OnDestroy {
     event: KeyboardEvent
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
-      this.closePanel();
+      this.closePanel(true);
     }
   };
 
@@ -211,6 +238,35 @@ export class MegaMenu implements OnDestroy {
     return column.items.filter((item: MegaMenuSubItem): boolean => item.visible !== false);
   }
 
+  /**
+   * Returns the tabindex for a root item link (roving tabindex pattern).
+   * Only the item at `rovingIndex` gets `"0"`; all others get `"-1"`.
+   * Disabled items always get `"-1"`.
+   */
+  public getRootTabIndex(item: MegaMenuItem, index: number): string {
+    if (item.disabled) {
+      return '-1';
+    }
+    return this.rovingIndex() === index ? '0' : '-1';
+  }
+
+  /**
+   * Returns the CSS classes for a root-level `<li>` item.
+   */
+  public getRootItemClass(item: MegaMenuItem, index: number): string {
+    const classes: string[] = ['ui-lib-mega-menu__root-item'];
+    if (item.disabled) {
+      classes.push('ui-lib-mega-menu__root-item--disabled');
+    }
+    if (this.isPanelOpen(index)) {
+      classes.push('ui-lib-mega-menu__root-item--active');
+    }
+    if (item.styleClass) {
+      classes.push(item.styleClass);
+    }
+    return classes.join(' ');
+  }
+
   // ── Event handlers (called from template) ────────────────────────────────
 
   /**
@@ -223,13 +279,17 @@ export class MegaMenu implements OnDestroy {
       return;
     }
 
+    this.rovingIndex.set(index);
+
     if (item.items?.length) {
       // Toggle the mega panel
       event.preventDefault();
       if (this.activeIndex() === index) {
-        this.closePanel();
+        this.closePanel(false);
+        this.panelClosed.emit();
       } else {
         this.activeIndex.set(index);
+        this.panelOpened.emit(item);
       }
       return;
     }
@@ -244,11 +304,13 @@ export class MegaMenu implements OnDestroy {
       // a placeholder sub-item derived from the top-level item itself.
       item.command({ item: item as unknown as MegaMenuSubItem, originalEvent: event });
     }
-    this.closePanel();
+    this.closePanel(false);
   }
 
   /** Handles keydown events on a top-level item link. */
   public onTopItemKeyDown(event: KeyboardEvent, item: MegaMenuItem, index: number): void {
+    const isHorizontal: boolean = this.orientation() === 'horizontal';
+
     switch (event.key) {
       case KEYBOARD_KEYS.Enter:
       case KEYBOARD_KEYS.Space: {
@@ -256,28 +318,68 @@ export class MegaMenu implements OnDestroy {
         if (item.disabled) {
           return;
         }
+        this.rovingIndex.set(index);
         if (item.items?.length) {
           if (this.activeIndex() === index) {
-            this.closePanel();
+            this.closePanel(true);
+            this.panelClosed.emit();
           } else {
             this.activeIndex.set(index);
+            this.panelOpened.emit(item);
+            afterNextRender(
+              (): void => {
+                this.focusFirstPanelItem();
+              },
+              { injector: this.injector }
+            );
           }
         } else if (item.command) {
           item.command({ item: item as unknown as MegaMenuSubItem, originalEvent: event });
-          this.closePanel();
+          this.closePanel(false);
         }
         break;
       }
       case KEYBOARD_KEYS.Escape: {
         event.preventDefault();
-        this.closePanel();
+        this.closePanel(true);
         break;
       }
       case KEYBOARD_KEYS.ArrowDown: {
-        if (this.orientation() === 'horizontal' && item.items?.length) {
+        if (isHorizontal && item.items?.length) {
           event.preventDefault();
+          this.rovingIndex.set(index);
           this.activeIndex.set(index);
-          // Focus the first sub-item after panel opens
+          this.panelOpened.emit(item);
+          afterNextRender(
+            (): void => {
+              this.focusFirstPanelItem();
+            },
+            { injector: this.injector }
+          );
+        } else if (!isHorizontal) {
+          // Vertical: ArrowDown navigates to the next root item
+          event.preventDefault();
+          this.focusRootItem(index + 1);
+        }
+        break;
+      }
+      case KEYBOARD_KEYS.ArrowUp: {
+        if (!isHorizontal) {
+          // Vertical: ArrowUp navigates to the previous root item
+          event.preventDefault();
+          this.focusRootItem(index - 1);
+        }
+        break;
+      }
+      case KEYBOARD_KEYS.ArrowRight: {
+        event.preventDefault();
+        if (isHorizontal) {
+          this.focusRootItem(index + 1);
+        } else if (item.items?.length) {
+          // Vertical: ArrowRight opens the panel
+          this.rovingIndex.set(index);
+          this.activeIndex.set(index);
+          this.panelOpened.emit(item);
           afterNextRender(
             (): void => {
               this.focusFirstPanelItem();
@@ -287,12 +389,30 @@ export class MegaMenu implements OnDestroy {
         }
         break;
       }
+      case KEYBOARD_KEYS.ArrowLeft: {
+        event.preventDefault();
+        if (isHorizontal) {
+          this.focusRootItem(index - 1);
+        }
+        break;
+      }
+      case KEYBOARD_KEYS.Home: {
+        event.preventDefault();
+        this.focusRootItem(0);
+        break;
+      }
+      case KEYBOARD_KEYS.End: {
+        event.preventDefault();
+        this.focusRootItem(this.visibleItems().length - 1);
+        break;
+      }
     }
   }
 
   /**
    * Handles keyboard events on sub-items inside the mega panel.
-   * Supports ArrowUp/Down within a column, Escape to close.
+   * Supports ArrowUp/Down within a column, ArrowLeft/Right between columns,
+   * and Escape to close and restore focus to the triggering root item.
    */
   public onSubItemKeyDown(event: KeyboardEvent, item: MegaMenuSubItem): void {
     switch (event.key) {
@@ -304,12 +424,32 @@ export class MegaMenu implements OnDestroy {
       }
       case KEYBOARD_KEYS.Escape: {
         event.preventDefault();
-        this.closePanel();
+        this.closePanel(true);
         break;
       }
       case KEYBOARD_KEYS.Tab: {
-        // Close panel on Tab to let focus leave naturally
-        this.closePanel();
+        // Close panel on Tab to let focus leave naturally (do not restore focus)
+        this.closePanel(false);
+        break;
+      }
+      case KEYBOARD_KEYS.ArrowDown: {
+        event.preventDefault();
+        this.focusPanelItemInDirection('down', event.target as HTMLElement);
+        break;
+      }
+      case KEYBOARD_KEYS.ArrowUp: {
+        event.preventDefault();
+        this.focusPanelItemInDirection('up', event.target as HTMLElement);
+        break;
+      }
+      case KEYBOARD_KEYS.ArrowRight: {
+        event.preventDefault();
+        this.focusPanelItemInDirection('right', event.target as HTMLElement);
+        break;
+      }
+      case KEYBOARD_KEYS.ArrowLeft: {
+        event.preventDefault();
+        this.focusPanelItemInDirection('left', event.target as HTMLElement);
         break;
       }
     }
@@ -330,14 +470,51 @@ export class MegaMenu implements OnDestroy {
     if (item.command) {
       item.command({ item, originalEvent: event });
     }
-    this.closePanel();
+    this.closePanel(false);
   }
 
   // ── Private helpers ───────────────────────────────────────────────────────
 
-  /** Closes the currently open mega panel. */
-  private closePanel(): void {
+  /**
+   * Closes the currently open mega panel.
+   *
+   * @param returnFocus - When `true` (Escape / keyboard), focuses the root item
+   *   at the previously active index. Pass `false` when closing on click-outside
+   *   or sub-item activation so focus stays where the user clicked/navigated.
+   */
+  private closePanel(returnFocus: boolean = true): void {
+    const previousIndex: number = this.activeIndex();
     this.activeIndex.set(-1);
+    if (returnFocus && previousIndex !== -1) {
+      const links: HTMLElement[] = Array.from(
+        this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
+          '.ui-lib-mega-menu__root-item > .ui-lib-mega-menu__root-link'
+        )
+      );
+      const link: HTMLElement | undefined = links[previousIndex];
+      link?.focus();
+    }
+  }
+
+  /**
+   * Focuses the root-level item at the given index (roving tabindex helper).
+   * Wraps around at either end of the list.
+   * Updates `rovingIndex` so the tab stop follows focus.
+   */
+  private focusRootItem(index: number): void {
+    const items: MegaMenuItem[] = this.visibleItems();
+    if (items.length === 0) {
+      return;
+    }
+    const wrappedIndex: number = ((index % items.length) + items.length) % items.length;
+    this.rovingIndex.set(wrappedIndex);
+    const links: HTMLElement[] = Array.from(
+      this.elementRef.nativeElement.querySelectorAll<HTMLElement>(
+        '.ui-lib-mega-menu__root-item > .ui-lib-mega-menu__root-link'
+      )
+    );
+    const link: HTMLElement | undefined = links[wrappedIndex];
+    link?.focus();
   }
 
   /** Focuses the first focusable sub-item link in the currently open panel. */
@@ -347,6 +524,64 @@ export class MegaMenu implements OnDestroy {
     );
     if (panel) {
       panel.focus();
+    }
+  }
+
+  /**
+   * Moves focus within the open mega panel in the given direction.
+   *
+   * - `up` / `down`: navigate within the same column (wrapping).
+   * - `left` / `right`: jump to the first focusable item in the adjacent column (wrapping).
+   */
+  private focusPanelItemInDirection(
+    direction: 'up' | 'down' | 'left' | 'right',
+    fromEl: HTMLElement
+  ): void {
+    const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
+      '.ui-lib-mega-menu__panel--open'
+    );
+    if (!panel) {
+      return;
+    }
+
+    const columns: HTMLElement[] = Array.from(
+      panel.querySelectorAll<HTMLElement>('ul[role="menu"]')
+    );
+    const colIndex: number = columns.findIndex((col: HTMLElement): boolean => col.contains(fromEl));
+    if (colIndex === -1) {
+      return;
+    }
+
+    if (direction === 'down' || direction === 'up') {
+      const column: HTMLElement | undefined = columns[colIndex];
+      if (!column) {
+        return;
+      }
+      const items: HTMLElement[] = Array.from(
+        column.querySelectorAll<HTMLElement>(
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+        )
+      );
+      const currentItemIndex: number = items.indexOf(fromEl);
+      if (currentItemIndex === -1) {
+        return;
+      }
+      const nextItemIndex: number =
+        direction === 'down'
+          ? (currentItemIndex + 1) % items.length
+          : (currentItemIndex - 1 + items.length) % items.length;
+      items[nextItemIndex]?.focus();
+    } else {
+      const totalColumns: number = columns.length;
+      const nextColIndex: number =
+        direction === 'right'
+          ? (colIndex + 1) % totalColumns
+          : (colIndex - 1 + totalColumns) % totalColumns;
+      const firstItem: HTMLElement | null =
+        columns[nextColIndex]?.querySelector<HTMLElement>(
+          '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
+        ) ?? null;
+      firstItem?.focus();
     }
   }
 }
