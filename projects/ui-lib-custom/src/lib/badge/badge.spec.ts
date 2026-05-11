@@ -17,6 +17,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
       [size]="size"
       [pill]="pill"
       [dot]="dot"
+      [decorative]="decorative"
       [label]="label"
     >
       {{ content }}
@@ -29,6 +30,7 @@ class TestHostComponent {
   public size: BadgeSize = 'md';
   public pill: boolean = false;
   public dot: boolean = false;
+  public decorative: boolean = false;
   public label: string | null = null;
   public content: string = 'Badge';
 }
@@ -110,6 +112,16 @@ describe('Badge', (): void => {
     const { badgeElement } = bootstrap({ dot: true, label: 'online' });
     expect(badgeElement.getAttribute('role')).toBe('status');
     expect(badgeElement.getAttribute('aria-label')).toBe('online');
+    expect(badgeElement.getAttribute('aria-live')).toBe('polite');
+    expect(badgeElement.getAttribute('aria-atomic')).toBe('true');
+  });
+
+  it('sets aria-hidden for decorative badges', (): void => {
+    const { badgeElement } = bootstrap({ decorative: true, dot: true, label: 'ignored' });
+    expect(badgeElement.getAttribute('aria-hidden')).toBe('true');
+    expect(badgeElement.getAttribute('role')).toBeNull();
+    expect(badgeElement.getAttribute('aria-label')).toBeNull();
+    expect(badgeElement.getAttribute('aria-live')).toBeNull();
   });
 
   it('applies each color class', (): void => {

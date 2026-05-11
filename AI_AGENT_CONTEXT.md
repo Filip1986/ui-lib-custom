@@ -52,6 +52,32 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-11 [Badge component — accessibility hardening COMPLETE (#52)]
+Changed:
+  - projects/ui-lib-custom/src/lib/badge/badge.ts
+      • Added module-level `nextBadgeId` with per-instance host id binding
+      • Added `decorative` input and ARIA branching (`aria-hidden` for decorative, status live-region attrs for informative dot badges)
+      • Preserved `label` passthrough and dot fallback label semantics
+  - projects/ui-lib-custom/src/lib/badge/badge.scss
+      • Added `prefers-reduced-motion` override block (`transition: none`, `animation: none`)
+  - projects/ui-lib-custom/src/lib/badge/badge.spec.ts
+      • Added assertions for live-region attributes and decorative ARIA behavior
+  - projects/ui-lib-custom/src/lib/badge/badge.a11y.spec.ts
+      • Expanded to 12 tests covering ARIA structure, decorative/informational states, unique ids, keyboard non-focusability, and axe checks
+  - projects/ui-lib-custom/src/lib/badge/README.md
+      • Documented `decorative` input, ARIA behavior table, keyboard note, CSS custom properties, and accessibility usage guidance
+  - docs/COMPONENT_SCORES.md
+      • Badge queue status: ⏳ Queued → ✅ Done
+      • Badge score row populated (avg 8.4, 🟢)
+State: Badge hardening complete with explicit decorative semantics, improved informational badge announcements, unique host IDs, reduced-motion guardrails, and dedicated a11y regression coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/badge/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=badge --no-coverage (25/25 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Demo verified at `http://localhost:4200/badges`; screenshot captured at `/tmp/badge-demo.png` via Playwright script after `npx playwright install chromium`.
+Next step: Start Card (#51) Tier 6 hardening pass or proceed to next prioritized queue item.
+
 Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -89,34 +115,4 @@ Verification:
   npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
 Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
-Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
-  - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
