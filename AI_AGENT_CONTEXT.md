@@ -52,6 +52,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-11 [Chip component — 6-phase hardening COMPLETE (#54)]
+Changed:
+  - projects/ui-lib-custom/src/lib/chip/chip.ts
+      • Added module-level `nextChipId` unique ID counter; exposed stable `chipId` string on host via `[id]` binding
+      • Added `selectable` and `selected` inputs, `selectedChange` output
+      • Added `hostRole` computed signal: `'group'` when removable (avoids nested-interactive ARIA violation), `'option'` otherwise
+      • Added `ariaSelected` computed signal: `'true'`/`'false'` for non-removable selectable chips; null otherwise
+      • Added `tabIndex` computed signal: `0` for selectable chips, null otherwise
+      • Added `onHostClick` and `onHostKeyDown` host event handlers (Space / Enter toggles selection)
+      • Changed `onRemoveClick` to call `event.stopPropagation()` before emitting
+      • Changed host from static `role: 'option'` to dynamic `[attr.role]: 'hostRole()'`
+  - projects/ui-lib-custom/src/lib/chip/chip.scss
+      • Added `.ui-lib-chip--selectable` block with `cursor: pointer` and `:focus-visible` ring
+      • Added `.ui-lib-chip--selected` block with `filter: brightness(1.15)`
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all chip transitions
+  - projects/ui-lib-custom/src/lib/chip/chip.spec.ts
+      • Updated TestHostComponent to wire `selectable`, `selected`, and `selectedChange`
+      • Replaced `'should apply role="option" on host'` with explicit non-removable/removable role tests
+      • Added 10 new unit tests (selectable class, selected class, aria-selected, tabindex, Space/Enter keyboard, unique ID)
+  - projects/ui-lib-custom/src/lib/chip/chip.a11y.spec.ts (CREATED — 18 tests)
+      • axe-core checks for basic, image, icon, removable, selectable, selected chips
+      • ARIA structure: role per removable state, imageAlt passthrough, aria-hidden on icons, remove button label
+      • Selectable state: aria-selected false/true, tabindex presence
+      • Keyboard: Space and Enter toggle selectedChange
+      • Unique IDs: format and uniqueness assertions
+  - projects/ui-lib-custom/src/lib/chip/README.md
+      • Added `selectable`, `selected` inputs and `selectedChange` output to tables
+      • Added ARIA attributes table, keyboard interaction table, screen reader notes
+  - docs/COMPONENT_SCORES.md
+      • Chip #54: ⏳ Queued → ✅ Done; score row populated (avg 8.5)
+State: Chip hardening complete. Dynamic role, selectable toggle, prefers-reduced-motion, focus-visible, unique IDs, and 18 a11y tests in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chip/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=chip --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. Removable chip uses `role="group"` (not `role="option"`) to avoid nested-interactive axe violation; non-removable chips keep `role="option"`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass (or resume from queue).
+
 Date: 2026-05-11 [ContextMenu — 6-phase hardening COMPLETE (#14)]
 Changed:
   - projects/ui-lib-custom/src/lib/context-menu/context-menu.ts
@@ -93,30 +132,4 @@ Verification:
   npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
 Terminal notes: The repository is now fully unshallowed locally after `git fetch --unshallow origin`; merge conflict was isolated to AI_AGENT_CONTEXT.md.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Merge conflict resolution refresh for table hardening PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the new conflict against origin/main by keeping the latest Table → TreeTable session state
-      • Preserved the incoming Stepper hardening handoff and trimmed active handoffs back to the newest three entries
-  - docs/COMPONENT_SCORES.md
-  - projects/ui-lib-custom/src/lib/stepper/README.md
-  - projects/ui-lib-custom/src/lib/stepper/index.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.html
-  - projects/ui-lib-custom/src/lib/stepper/stepper.scss
-  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts
-      • Brought in the latest origin/main Stepper hardening changes as part of the merge
-State: Branch is merged with the latest origin/main again. The only manual conflict resolution was in AI_AGENT_CONTEXT.md; incoming Stepper changes are preserved as-is.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/stepper/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=stepper --no-coverage (61/61 PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.

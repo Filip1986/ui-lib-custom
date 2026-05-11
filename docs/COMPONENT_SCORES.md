@@ -101,7 +101,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 51   | Card            | API composability, slot flexibility, hover/focus polish   | ⏳ Queued   |
 | 52   | Badge           | Positioning variants, `aria-label` passthrough            | ⏳ Queued   |
 | 53   | Tag             | Dismissible variant `aria-label`                          | ⏳ Queued   |
-| 54   | Chip            | Remove button label, image alt passthrough                | ⏳ Queued   |
+| 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done    |
 | 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ⏳ Queued   |
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ⏳ Queued   |
 | 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ⏳ Queued   |
@@ -249,7 +249,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
 | Badge           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Tag             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Chip            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Skeleton        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ProgressBar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

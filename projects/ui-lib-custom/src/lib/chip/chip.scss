@@ -158,4 +158,30 @@ ui-lib-chip {
     --uilib-chip-color: var(--uilib-color-text, #f9fafb);
     --uilib-chip-border: 1px solid var(--uilib-surface-600, #4b5563);
   }
+
+  // ---- Selectable state -----------------------------------------------
+  &--selectable {
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+
+  // ---- Selected state --------------------------------------------------
+  &--selected {
+    filter: brightness(1.15);
+  }
+}
+
+// ---- Reduced motion -----------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-chip {
+    transition: none;
+
+    &__remove-button {
+      transition: none;
+    }
+  }
 }
