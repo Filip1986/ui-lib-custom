@@ -51,6 +51,10 @@ function createMultiDatasetData(): ChartData<'bar'> {
   };
 }
 
+function getCellText(cell: Element): string {
+  return (cell as HTMLElement).textContent.trim();
+}
+
 // ── Host components ──────────────────────────────────────────────────────────
 
 @Component({
@@ -214,9 +218,7 @@ describe('Chart Accessibility', (): void => {
 
       const hostEl: HTMLElement = fixture.nativeElement as HTMLElement;
       const headerCells: NodeListOf<Element> = hostEl.querySelectorAll('ui-lib-chart thead th');
-      const headerTexts: string[] = Array.from(headerCells).map((cell: Element): string =>
-        (cell as HTMLElement).textContent.trim()
-      );
+      const headerTexts: string[] = Array.from(headerCells).map(getCellText);
       expect(headerTexts).toContain('Dataset');
       expect(headerTexts).toContain('P0');
       expect(headerTexts).toContain('P1');
@@ -244,9 +246,7 @@ describe('Chart Accessibility', (): void => {
 
       const hostEl: HTMLElement = fixture.nativeElement as HTMLElement;
       const dataCells: NodeListOf<Element> = hostEl.querySelectorAll('ui-lib-chart tbody td');
-      const values: string[] = Array.from(dataCells).map((cell: Element): string =>
-        (cell as HTMLElement).textContent.trim()
-      );
+      const values: string[] = Array.from(dataCells).map(getCellText);
       expect(values).toEqual(['42', '84', '21']);
     });
 

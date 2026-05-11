@@ -22,6 +22,7 @@ import type {
   ChartThemeTokens,
   ChartType,
   ChartDatasetRow,
+  ChartAccessibleDataset,
 } from './chart.types';
 
 let nextChartId: number = 0;
@@ -118,12 +119,10 @@ export class ChartComponent {
     if (!chartData) {
       return [];
     }
-    return (chartData.datasets as unknown as Array<Record<string, unknown>>).map(
-      (dataset: Record<string, unknown>): ChartDatasetRow => ({
-        label: typeof dataset['label'] === 'string' ? dataset['label'] : '',
-        values: (dataset['data'] as unknown[]).map((point: unknown): string =>
-          this.formatDataValue(point)
-        ),
+    return (chartData.datasets as unknown as ChartAccessibleDataset[]).map(
+      (dataset: ChartAccessibleDataset): ChartDatasetRow => ({
+        label: typeof dataset.label === 'string' ? dataset.label : '',
+        values: [...dataset.data].map((point: unknown): string => this.formatDataValue(point)),
       })
     );
   });
