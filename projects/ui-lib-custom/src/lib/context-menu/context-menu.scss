@@ -76,11 +76,15 @@ ui-lib-context-menu .ui-lib-context-menu__panel {
 
   // Hidden until position is adjusted (prevents 1-frame flash at wrong location)
   opacity: 0;
-  transition: opacity 0.05s ease;
+  transform: translateY(2px);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
 }
 
 ui-lib-context-menu .ui-lib-context-menu__panel--positioned {
   opacity: 1;
+  transform: translateY(0);
 }
 
 // ── List ────────────────────────────────────────────────────────────────────
@@ -133,7 +137,7 @@ ui-lib-context-menu .ui-lib-context-menu__link:focus-visible {
 ui-lib-context-menu .ui-lib-context-menu__link[aria-disabled='true'] {
   color: var(--uilib-context-menu-item-color-disabled);
   pointer-events: none;
-  cursor: default;
+  cursor: not-allowed;
   opacity: 0.6;
 }
 
@@ -162,6 +166,14 @@ ui-lib-context-menu .ui-lib-context-menu__submenu-icon {
   font-size: 1em;
   opacity: 0.6;
   line-height: 1;
+  transition: transform 0.12s ease;
+}
+
+ui-lib-context-menu
+  .ui-lib-context-menu__item--active
+  > .ui-lib-context-menu__link
+  .ui-lib-context-menu__submenu-icon {
+  transform: rotate(90deg);
 }
 
 // ── Separator ────────────────────────────────────────────────────────────────
@@ -250,4 +262,18 @@ ui-lib-context-menu.ui-lib-context-menu--variant-minimal {
 
 ui-lib-context-menu.ui-lib-context-menu--variant-minimal .ui-lib-context-menu__link {
   border-radius: 0;
+}
+
+// ─── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-context-menu .ui-lib-context-menu__panel {
+    transition: none;
+    animation: none;
+    transform: none;
+  }
+
+  ui-lib-context-menu .ui-lib-context-menu__submenu-icon {
+    transition: none;
+  }
 }

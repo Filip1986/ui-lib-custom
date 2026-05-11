@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** BottomSheet accessibility hardening COMPLETE (6-phase, #76); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** BottomSheet accessibility hardening COMPLETE (6-phase, #76); also merged: Card (#51), Chart (#72), Chip (#54), ContextMenu (#14)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -38,6 +38,10 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
+- `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
+- `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
+- `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 
 ---
@@ -85,42 +89,67 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
+Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
 Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the newest conflict against origin/main by preserving the current Table → TreeTable session state
-      • Kept active handoffs trimmed to the newest three entries and moved the older Stepper handoff to the archive
-State: Branch is merged with the latest origin/main again. This merge only required resolving AI_AGENT_CONTEXT.md; no library source files changed in the incoming main branch.
-Verification:
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: The repository is now fully unshallowed locally after `git fetch --unshallow origin`; merge conflict was isolated to AI_AGENT_CONTEXT.md.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Merge conflict resolution refresh for table hardening PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the new conflict against origin/main by keeping the latest Table → TreeTable session state
-      • Preserved the incoming Stepper hardening handoff and trimmed active handoffs back to the newest three entries
+  - projects/ui-lib-custom/src/lib/card/card.ts
+      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
+      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
+  - projects/ui-lib-custom/src/lib/card/card.html
+      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
+      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
+  - projects/ui-lib-custom/src/lib/card/card.scss
+      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
+      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
+      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
+  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
+      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
+      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
+      • Added closable card accessible label coverage
+      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
+      • Added axe checks for basic, hoverable, closable, and multi-variant states
+  - projects/ui-lib-custom/src/lib/card/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
+      • Added full Accessibility section with examples, guidelines, and reduced-motion note
   - docs/COMPONENT_SCORES.md
-  - projects/ui-lib-custom/src/lib/stepper/README.md
-  - projects/ui-lib-custom/src/lib/stepper/index.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.html
-  - projects/ui-lib-custom/src/lib/stepper/stepper.scss
-  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts
-      • Brought in the latest origin/main Stepper hardening changes as part of the merge
-State: Branch is merged with the latest origin/main again. The only manual conflict resolution was in AI_AGENT_CONTEXT.md; incoming Stepper changes are preserved as-is.
+      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
+State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/stepper/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=stepper --no-coverage (61/61 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
+
+Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
+Changed:
+  - projects/ui-lib-custom/src/lib/chart/chart.component.ts
+      • Added module-level `nextChartId: number` for unique instance IDs
+      • Added `chartId`, `tableId`, `datasetRows`, and `tableLabels` computed properties
+      • Added `showDataTable` input (default `true`) to control the visually-hidden data table
+      • Added `prefers-reduced-motion` detection → sets `animation: false` in Chart.js options when preferred
+      • Added `formatDataValue` helper for multi-type data point normalisation
+  - projects/ui-lib-custom/src/lib/chart/chart.component.html
+      • Added `aria-describedby` on canvas (links to the data table when `showDataTable` is true)
+      • Added visually-hidden `<table>` with `<caption>`, `<thead>` (label columns + "Dataset" header), and `<tbody>` (one row per dataset)
+  - projects/ui-lib-custom/src/lib/chart/chart.component.scss
+      • Added `.ui-lib-chart__sr-table` visually-hidden class
+      • Added `@media (prefers-reduced-motion: reduce)` override for canvas transitions/animations
+  - projects/ui-lib-custom/src/lib/chart/chart.types.ts
+      • Added `ChartDatasetRow` and `ChartAccessibleDataset` interfaces
+  - projects/ui-lib-custom/src/lib/chart/chart.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure, data table rendering, unique IDs, reduced-motion, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/chart/README.md
+      • Added ARIA table, keyboard table, CSS custom properties table, and accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Chart: ⏳ Queued → ✅ Done; score row populated (avg 8.9)
+State: Chart hardening complete. Visually-hidden data table, aria-describedby linkage, unique IDs, reduced-motion
+  support, and 21 a11y regression tests are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chart/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=chart --no-coverage (96/96 PASS — 75 unit + 21 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `npm install` required in fresh clone before tools are available.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
