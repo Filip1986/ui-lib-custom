@@ -320,9 +320,11 @@ describe('TableComponent accessibility', (): void => {
           (debugElement: { componentInstance: unknown }): TableComponent =>
             debugElement.componentInstance as TableComponent
         );
+      const firstComponent: TableComponent = components[0]!;
+      const secondComponent: TableComponent = components[1]!;
 
-      expect(components[0].tableId).not.toBe(components[1].tableId);
-      expect(components[0].captionId).not.toBe(components[1].captionId);
+      expect(firstComponent.tableId).not.toBe(secondComponent.tableId);
+      expect(firstComponent.captionId).not.toBe(secondComponent.captionId);
     });
   });
 
@@ -418,9 +420,10 @@ describe('TableComponent accessibility', (): void => {
       const tabbableCells: HTMLElement[] = Array.from(
         root(fixture).querySelectorAll('[data-grid-row][data-grid-col][tabindex="0"]')
       );
+      const activeCell: HTMLElement = tabbableCells[0]!;
 
       expect(tabbableCells).toHaveLength(1);
-      expect(tabbableCells[0].textContent.trim()).toContain('Name');
+      expect(activeCell.textContent.trim()).toContain('Name');
     });
 
     it('ArrowRight moves focus to the next header cell', async (): Promise<void> => {
