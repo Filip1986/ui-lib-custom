@@ -267,6 +267,35 @@ function getGridCells(root: HTMLElement): HTMLElement[] {
   return Array.from(root.querySelectorAll('[role="gridcell"]'));
 }
 
+function getDateButtonSelector(date: Date): string {
+  return `button[data-date-key='${date.getFullYear()}-${date.getMonth()}-${date.getDate()}']`;
+}
+
+const MONTH_NAMES: readonly string[] = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const FULL_DAY_NAMES: readonly string[] = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
 describe('DatePicker Accessibility', (): void => {
@@ -428,21 +457,7 @@ describe('DatePicker Accessibility', (): void => {
         '.ui-lib-datepicker__prev-button'
       );
       const label: string = prevBtn!.getAttribute('aria-label') ?? '';
-      const monthNames: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      const hasMonthName: boolean = monthNames.some((name: string): boolean =>
+      const hasMonthName: boolean = MONTH_NAMES.some((name: string): boolean =>
         label.includes(name)
       );
       expect(hasMonthName).toBe(true);
@@ -467,21 +482,7 @@ describe('DatePicker Accessibility', (): void => {
         '.ui-lib-datepicker__next-button'
       );
       const label: string = nextBtn!.getAttribute('aria-label') ?? '';
-      const monthNames: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      const hasMonthName: boolean = monthNames.some((name: string): boolean =>
+      const hasMonthName: boolean = MONTH_NAMES.some((name: string): boolean =>
         label.includes(name)
       );
       expect(hasMonthName).toBe(true);
@@ -544,19 +545,10 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const headers: HTMLElement[] = getColumnHeaders(root);
-      const fullDayNames: string[] = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-      ];
       for (const header of headers) {
         const abbr: string | null = header.getAttribute('abbr');
         expect(abbr).toBeTruthy();
-        expect(fullDayNames).toContain(abbr);
+        expect(FULL_DAY_NAMES).toContain(abbr);
       }
     });
 
@@ -564,19 +556,10 @@ describe('DatePicker Accessibility', (): void => {
       const fixture: ComponentFixture<InlineHostComponent> = await createInlineFixture();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const headers: HTMLElement[] = getColumnHeaders(root);
-      const fullDayNames: string[] = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-      ];
       for (const header of headers) {
         const ariaLabel: string | null = header.getAttribute('aria-label');
         expect(ariaLabel).toBeTruthy();
-        expect(fullDayNames).toContain(ariaLabel);
+        expect(FULL_DAY_NAMES).toContain(ariaLabel);
       }
     });
 
@@ -655,7 +638,7 @@ describe('DatePicker Accessibility', (): void => {
       const picker: HTMLElement | null = root.querySelector('ui-lib-date-picker');
       expect(picker).toBeTruthy();
       const todayBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        `button[data-date-key='${today.getFullYear()}-${today.getMonth()}-${today.getDate()}']`
+        getDateButtonSelector(today)
       );
       if (todayBtn) {
         const label: string | null = todayBtn.getAttribute('aria-label');
@@ -672,7 +655,7 @@ describe('DatePicker Accessibility', (): void => {
       fixture.detectChanges();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const selectedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        `button[data-date-key='${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}']`
+        getDateButtonSelector(selectedDate)
       );
       expect(selectedBtn).toBeTruthy();
       const label: string | null = selectedBtn!.getAttribute('aria-label');
@@ -848,7 +831,7 @@ describe('DatePicker Accessibility', (): void => {
       fixture.detectChanges();
       const root: HTMLElement = fixture.nativeElement as HTMLElement;
       const focusedBtn: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
-        `button[data-date-key='${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}']`
+        getDateButtonSelector(selectedDate)
       );
       expect(focusedBtn).toBeTruthy();
       expect(focusedBtn!.getAttribute('tabindex')).toBe('0');
