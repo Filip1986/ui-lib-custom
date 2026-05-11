@@ -111,7 +111,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ⏳ Queued   |
 | 62   | ScrollPanel     | Keyboard-scrollable region label                          | ⏳ Queued   |
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ⏳ Queued   |
-| 64   | BlockUI         | `aria-busy` on blocked container                          | ⏳ Queued   |
+| 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done     |
 | 65   | Avatar          | `alt` propagation, group context                          | ⏳ Queued   |
 | 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Queued   |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ⏳ Queued   |
@@ -248,7 +248,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Alert           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
-| Badge           | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
+| Badge           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Tag             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -271,7 +271,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | ImageCompare    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Upload          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Inplace         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| BlockUI         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ClassNames      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Terminal        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Ripple          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
