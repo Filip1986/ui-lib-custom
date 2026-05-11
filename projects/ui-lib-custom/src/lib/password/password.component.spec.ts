@@ -546,13 +546,12 @@ describe('PasswordComponent', (): void => {
 
   // ── Accessibility ─────────────────────────────────────────────────────────────
   describe('accessibility', (): void => {
-    it('should set role="status" and aria-live="polite" on the strength panel', (): void => {
+    it('should render a visually-hidden live region with aria-live="polite" and aria-atomic="true" when feedback is enabled', (): void => {
       const fixture: ComponentFixture<TestHostComponent> = createFixture();
-      queryEl<HTMLInputElement>(fixture, 'input').dispatchEvent(new FocusEvent('focus'));
-      fixture.detectChanges();
-      const panel: HTMLElement = queryEl(fixture, '.uilib-password-panel');
-      expect(panel.getAttribute('role')).toBe('status');
-      expect(panel.getAttribute('aria-live')).toBe('polite');
+      const liveRegion: HTMLElement = queryEl(fixture, '.uilib-visually-hidden');
+      expect(liveRegion).toBeTruthy();
+      expect(liveRegion.getAttribute('aria-live')).toBe('polite');
+      expect(liveRegion.getAttribute('aria-atomic')).toBe('true');
     });
 
     it('should label toggle button as "Show password" when masked', (): void => {
