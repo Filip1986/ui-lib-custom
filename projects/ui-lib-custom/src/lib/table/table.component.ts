@@ -524,8 +524,7 @@ export class TableComponent {
 
   /** Total row count announced to assistive technology when rows are paginated. */
   public readonly ariaRowCount: Signal<number | null> = computed<number | null>(
-    (): number | null =>
-      this.paginator() ? this.totalRecords() + this.headerRowCount() : this.totalRecords()
+    (): number | null => (this.paginator() ? this.totalRecords() + this.headerRowCount() : null)
   );
 
   /** Normalized roving-focus target clamped to the currently rendered grid bounds. */
