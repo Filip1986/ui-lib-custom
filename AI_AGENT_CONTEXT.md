@@ -52,6 +52,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-11 [Chip component — 6-phase hardening COMPLETE (#54)]
+Changed:
+  - projects/ui-lib-custom/src/lib/chip/chip.ts
+      • Added module-level `nextChipId` unique ID counter; exposed stable `chipId` string on host via `[id]` binding
+      • Added `selectable` and `selected` inputs, `selectedChange` output
+      • Added `hostRole` computed signal: `'group'` when removable (avoids nested-interactive ARIA violation), `'option'` otherwise
+      • Added `ariaSelected` computed signal: `'true'`/`'false'` for non-removable selectable chips; null otherwise
+      • Added `tabIndex` computed signal: `0` for selectable chips, null otherwise
+      • Added `onHostClick` and `onHostKeyDown` host event handlers (Space / Enter toggles selection)
+      • Changed `onRemoveClick` to call `event.stopPropagation()` before emitting
+      • Changed host from static `role: 'option'` to dynamic `[attr.role]: 'hostRole()'`
+  - projects/ui-lib-custom/src/lib/chip/chip.scss
+      • Added `.ui-lib-chip--selectable` block with `cursor: pointer` and `:focus-visible` ring
+      • Added `.ui-lib-chip--selected` block with `filter: brightness(1.15)`
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all chip transitions
+  - projects/ui-lib-custom/src/lib/chip/chip.spec.ts
+      • Updated TestHostComponent to wire `selectable`, `selected`, and `selectedChange`
+      • Replaced `'should apply role="option" on host'` with explicit non-removable/removable role tests
+      • Added 10 new unit tests (selectable class, selected class, aria-selected, tabindex, Space/Enter keyboard, unique ID)
+  - projects/ui-lib-custom/src/lib/chip/chip.a11y.spec.ts (CREATED — 18 tests)
+      • axe-core checks for basic, image, icon, removable, selectable, selected chips
+      • ARIA structure: role per removable state, imageAlt passthrough, aria-hidden on icons, remove button label
+      • Selectable state: aria-selected false/true, tabindex presence
+      • Keyboard: Space and Enter toggle selectedChange
+      • Unique IDs: format and uniqueness assertions
+  - projects/ui-lib-custom/src/lib/chip/README.md
+      • Added `selectable`, `selected` inputs and `selectedChange` output to tables
+      • Added ARIA attributes table, keyboard interaction table, screen reader notes
+  - docs/COMPONENT_SCORES.md
+      • Chip #54: ⏳ Queued → ✅ Done; score row populated (avg 8.5)
+State: Chip hardening complete. Dynamic role, selectable toggle, prefers-reduced-motion, focus-visible, unique IDs, and 18 a11y tests in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chip/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=chip --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. Removable chip uses `role="group"` (not `role="option"`) to avoid nested-interactive axe violation; non-removable chips keep `role="option"`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass (or resume from queue).
+
 Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -89,34 +128,4 @@ Verification:
   npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
 Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
-Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
-  - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.

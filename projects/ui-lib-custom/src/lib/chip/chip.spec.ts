@@ -25,10 +25,13 @@ import type { ChipSize, ChipVariant } from './chip.types';
       [imageAlt]="imageAlt()"
       [removable]="removable()"
       [removeIcon]="removeIcon()"
+      [selectable]="selectable()"
+      [selected]="selected()"
       [size]="size()"
       [variant]="variant()"
       [styleClass]="styleClass()"
       (removed)="lastRemoveEvent = $event"
+      (selectedChange)="lastSelectedChange = $event"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,10 +43,13 @@ class TestHostComponent {
   public readonly imageAlt: WritableSignal<string> = signal<string>('Chip');
   public readonly removable: WritableSignal<boolean> = signal<boolean>(false);
   public readonly removeIcon: WritableSignal<string> = signal<string>('pi pi-times');
+  public readonly selectable: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly selected: WritableSignal<boolean> = signal<boolean>(false);
   public readonly size: WritableSignal<ChipSize> = signal<ChipSize>('md');
   public readonly variant: WritableSignal<ChipVariant | null> = signal<ChipVariant | null>(null);
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
   public lastRemoveEvent: MouseEvent | null = null;
+  public lastSelectedChange: boolean | null = null;
 }
 
 // ---- Helpers ----------------------------------------------------------
@@ -222,11 +228,21 @@ describe('Chip', (): void => {
     expect(button.getAttribute('aria-label')).toBe('Remove');
   });
 
-  it('should apply role="option" on host', (): void => {
+  it('should apply role="option" on host when not removable', (): void => {
     const { fixture } = setup();
     const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
       .nativeElement as HTMLElement;
     expect(chip.getAttribute('role')).toBe('option');
+  });
+
+  it('should apply role="group" on host when removable', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.removable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.getAttribute('role')).toBe('group');
   });
 
   it('should set aria-label on host from label input', async (): Promise<void> => {
@@ -249,5 +265,96 @@ describe('Chip', (): void => {
       By.css('.ui-lib-chip__remove-button span')
     ).nativeElement as HTMLElement;
     expect(iconSpan.className).toContain('pi-trash');
+  });
+
+  it('should assign a unique chipId to each instance', (): void => {
+    const { fixture } = setup();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.getAttribute('id')).toMatch(/^ui-lib-chip-\d+$/);
+  });
+
+  it('should add selectable class when selectable is true', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.className).toContain('ui-lib-chip--selectable');
+  });
+
+  it('should add selected class when selectable and selected are true', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    host.selected.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.className).toContain('ui-lib-chip--selected');
+  });
+
+  it('should set aria-selected="false" when selectable and not selected', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('should set aria-selected="true" when selectable and selected', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    host.selected.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('should set tabindex="0" when selectable', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    expect(chip.getAttribute('tabindex')).toBe('0');
+  });
+
+  it('should emit selectedChange when Space is pressed on selectable chip', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    chip.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+    expect(host.lastSelectedChange).toBe(true);
+  });
+
+  it('should emit selectedChange when Enter is pressed on selectable chip', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.selectable.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    chip.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    expect(host.lastSelectedChange).toBe(true);
+  });
+
+  it('should not emit selectedChange on keydown when not selectable', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const chip: HTMLElement = fixture.debugElement.query(By.css('ui-lib-chip'))
+      .nativeElement as HTMLElement;
+    chip.dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true }));
+    expect(host.lastSelectedChange).toBeNull();
   });
 });
