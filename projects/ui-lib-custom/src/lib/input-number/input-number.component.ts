@@ -73,10 +73,13 @@ let inputNumberIdCounter: number = 0;
       <button
         type="button"
         class="uilib-input-number-button uilib-input-number-button-up"
-        [disabled]="isControlDisabled() || !canIncrement()"
+        [attr.aria-label]="'Increment ' + (label() || 'value')"
+        [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, 1)"
         (mouseup)="stopSpinRepeat()"
         (mouseleave)="stopSpinRepeat()"
+        (keydown)="onSpinKeyDown($event, 1)"
+        (keyup)="stopSpinRepeat()"
       >
         ▲
       </button>
@@ -86,10 +89,13 @@ let inputNumberIdCounter: number = 0;
       <button
         type="button"
         class="uilib-input-number-button uilib-input-number-button-down"
-        [disabled]="isControlDisabled() || !canDecrement()"
+        [attr.aria-label]="'Decrement ' + (label() || 'value')"
+        [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, -1)"
         (mouseup)="stopSpinRepeat()"
         (mouseleave)="stopSpinRepeat()"
+        (keydown)="onSpinKeyDown($event, -1)"
+        (keyup)="stopSpinRepeat()"
       >
         −
       </button>
@@ -113,9 +119,12 @@ let inputNumberIdCounter: number = 0;
         [attr.aria-valuemin]="min()"
         [attr.aria-valuemax]="max()"
         [attr.aria-valuenow]="value()"
+        [attr.aria-valuetext]="formattedValue()"
         [attr.aria-label]="ariaLabel() || null"
         [attr.aria-labelledby]="ariaLabelledBy() || null"
         [attr.aria-describedby]="ariaDescribedBy() || null"
+        [attr.aria-required]="required() ? 'true' : null"
+        [attr.aria-invalid]="invalid() ? 'true' : null"
         [attr.tabindex]="tabindex()"
         [attr.autocomplete]="autocomplete()"
         [class.uilib-input-number-input]="true"
@@ -139,20 +148,26 @@ let inputNumberIdCounter: number = 0;
         <button
           type="button"
           class="uilib-input-number-button uilib-input-number-button-up"
-          [disabled]="isControlDisabled() || !canIncrement()"
+          [attr.aria-label]="'Increment ' + (label() || 'value')"
+          [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
           (mousedown)="onSpinMouseDown($event, 1)"
           (mouseup)="stopSpinRepeat()"
           (mouseleave)="stopSpinRepeat()"
+          (keydown)="onSpinKeyDown($event, 1)"
+          (keyup)="stopSpinRepeat()"
         >
           ▲
         </button>
         <button
           type="button"
           class="uilib-input-number-button uilib-input-number-button-down"
-          [disabled]="isControlDisabled() || !canDecrement()"
+          [attr.aria-label]="'Decrement ' + (label() || 'value')"
+          [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
           (mousedown)="onSpinMouseDown($event, -1)"
           (mouseup)="stopSpinRepeat()"
           (mouseleave)="stopSpinRepeat()"
+          (keydown)="onSpinKeyDown($event, -1)"
+          (keyup)="stopSpinRepeat()"
         >
           ▼
         </button>
@@ -163,10 +178,13 @@ let inputNumberIdCounter: number = 0;
       <button
         type="button"
         class="uilib-input-number-button uilib-input-number-button-up"
-        [disabled]="isControlDisabled() || !canIncrement()"
+        [attr.aria-label]="'Increment ' + (label() || 'value')"
+        [attr.aria-disabled]="isControlDisabled() || !canIncrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, 1)"
         (mouseup)="stopSpinRepeat()"
         (mouseleave)="stopSpinRepeat()"
+        (keydown)="onSpinKeyDown($event, 1)"
+        (keyup)="stopSpinRepeat()"
       >
         +
       </button>
@@ -176,10 +194,13 @@ let inputNumberIdCounter: number = 0;
       <button
         type="button"
         class="uilib-input-number-button uilib-input-number-button-down"
-        [disabled]="isControlDisabled() || !canDecrement()"
+        [attr.aria-label]="'Decrement ' + (label() || 'value')"
+        [attr.aria-disabled]="isControlDisabled() || !canDecrement() ? 'true' : null"
         (mousedown)="onSpinMouseDown($event, -1)"
         (mouseup)="stopSpinRepeat()"
         (mouseleave)="stopSpinRepeat()"
+        (keydown)="onSpinKeyDown($event, -1)"
+        (keyup)="stopSpinRepeat()"
       >
         ▼
       </button>
@@ -231,6 +252,8 @@ export class InputNumberComponent implements ControlValueAccessor {
   public readonly variant: InputSignal<'material' | 'bootstrap' | 'minimal' | null> = input<
     'material' | 'bootstrap' | 'minimal' | null
   >(null);
+  public readonly label: InputSignal<string | undefined> = input<string | undefined>(undefined);
+  public readonly required: InputSignal<boolean> = input<boolean>(false);
   public readonly ariaLabel: InputSignal<string | undefined> = input<string | undefined>(undefined);
   public readonly ariaLabelledBy: InputSignal<string | undefined> = input<string | undefined>(
     undefined
@@ -270,6 +293,20 @@ export class InputNumberComponent implements ControlValueAccessor {
   protected readonly effectiveVariant: Signal<'material' | 'bootstrap' | 'minimal'> = computed<
     'material' | 'bootstrap' | 'minimal'
   >((): 'material' | 'bootstrap' | 'minimal' => this.variant() ?? this.themeConfig.variant());
+
+  /** Human-readable formatted value for aria-valuetext. Null when no value is set. */
+  protected readonly formattedValue: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const currentValue: number | null = this.value();
+      if (currentValue === null) return null;
+      const config: NumberFormatConfig = this.numberFormatConfig();
+      if (!this.format()) {
+        return `${config.prefix ?? ''}${String(currentValue)}${config.suffix ?? ''}`;
+      }
+      const formatted: string = this.numberFormatService.formatValue(currentValue);
+      return formatted.length > 0 ? formatted : null;
+    }
+  );
 
   private readonly numberFormatConfig: Signal<NumberFormatConfig> = computed<NumberFormatConfig>(
     (): NumberFormatConfig => {
@@ -426,8 +463,38 @@ export class InputNumberComponent implements ControlValueAccessor {
       return;
     }
 
+    if (direction === 1 && !this.canIncrement()) {
+      return;
+    }
+
+    if (direction === -1 && !this.canDecrement()) {
+      return;
+    }
+
     this.spinBy(direction);
     this.startSpinRepeat(direction);
+  }
+
+  public onSpinKeyDown(event: KeyboardEvent, direction: -1 | 1): void {
+    if (event.key !== 'Enter' && event.key !== ' ' && event.key !== 'Spacebar') {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (this.isControlDisabled() || this.readonly()) {
+      return;
+    }
+
+    if (direction === 1 && !this.canIncrement()) {
+      return;
+    }
+
+    if (direction === -1 && !this.canDecrement()) {
+      return;
+    }
+
+    this.spinBy(direction);
   }
 
   public stopSpinRepeat(): void {

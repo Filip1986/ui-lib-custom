@@ -152,3 +152,42 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: node_modules/.bin/ prefix required for all CLI tools; npm install required first.
 Next step: Tabs hardening (Tier 2, #17) — role=tablist/tab/tabpanel, arrow nav, aria-selected.
+
+Date: 2026-05-11 [InputNumber component — Phase 3 Accessibility Hardening COMPLETE (#26)]
+Changed:
+  - projects/ui-lib-custom/src/lib/input-number/input-number.component.ts
+      • Added `label` signal input (used in spinner button aria-labels: "Increment {label}")
+      • Added `required` signal input — sets `aria-required="true"` on the inner input
+      • Added `formattedValue` computed signal — reactive `aria-valuetext` from `value()` + `numberFormatConfig()`
+      • Input element: added `[attr.aria-valuetext]`, `[attr.aria-required]`, `[attr.aria-invalid]`
+      • All spinner buttons: replaced `[disabled]` with `[attr.aria-disabled]` + `[attr.aria-label]`
+      • Added `onSpinKeyDown(event, direction)` handler — Enter/Space activates spinner buttons from keyboard
+      • Updated `onSpinMouseDown` — guards against disabled/at-min/at-max states explicitly
+  - projects/ui-lib-custom/src/lib/input-number/input-number.component.scss
+      • Updated `:hover/:active` button selectors to also exclude `[aria-disabled='true']`
+      • Added `[aria-disabled='true']` selector for disabled button styles
+      • Added `@media (prefers-reduced-motion: reduce)` — sets `--uilib-input-number-transition: none`
+  - projects/ui-lib-custom/src/lib/input-number/input-number.a11y.spec.ts (CREATED — 27 tests)
+      • role=spinbutton, aria-valuenow, aria-valuemin/max, aria-valuetext, aria-label/labelledby
+      • aria-required, aria-invalid, button type=button, button aria-labels (Increment/Decrement)
+      • aria-disabled on buttons at min/max/disabled; keyboard nav (ArrowUp/Down, PageUp/Down, Home/End)
+      • axe-core: default, at-min, at-max, invalid states
+  - projects/ui-lib-custom/src/lib/input-number/input-number.component.spec.ts
+      • Updated "buttons disabled when at boundary" test to check aria-disabled attribute
+  - projects/ui-lib-custom/src/lib/input-number/README.md
+      • Added `label` and `required` inputs to the inputs table
+      • Added Keyboard Navigation table (ArrowUp/Down, PageUp/Down, Home/End)
+      • Added Accessibility section: aria-valuetext format table, spinner button label pattern, aria-disabled note
+  - docs/COMPONENT_SCORES.md
+      • InputNumber: ⏳ Queued → ✅ Done; score row 9.0/10 avg 🟢
+State: InputNumber Phase 3 (Accessibility) complete. 27 a11y tests + 119 existing tests all pass.
+  Next queue item: Slider (#27) — role=slider, aria-valuenow/min/max/valuetext, arrow key step.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-number/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=input-number --no-coverage (146/146 PASS — 119 unit + 27 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors, zero warnings)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  npm run typecheck (PASS via pre-push hook)
+Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
+  a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
+Next step: Slider (#27) — role=slider, aria-valuenow/min/max/valuetext, arrow key step.
