@@ -44,10 +44,6 @@ function getPanelFooter(fixture: ComponentFixture<unknown>): HTMLElement | null 
   return getStepperElement(fixture).querySelector('.ui-lib-stepper__panel-footer');
 }
 
-function getSeparators(fixture: ComponentFixture<unknown>): NodeListOf<HTMLElement> {
-  return getStepperElement(fixture).querySelectorAll<HTMLElement>('.ui-lib-stepper__separator');
-}
-
 // ── Test host components ─────────────────────────────────────────────────────
 
 @Component({
@@ -184,11 +180,6 @@ describe('Stepper', (): void => {
       expect(labels[0]!.textContent!.trim()).toBe('Step One');
       expect(labels[1]!.textContent!.trim()).toBe('Step Two');
       expect(labels[2]!.textContent!.trim()).toBe('Step Three');
-    });
-
-    it('should render separators between steps', (): void => {
-      const separators: NodeListOf<HTMLElement> = getSeparators(fixture);
-      expect(separators.length).toBe(2);
     });
 
     it('should render active panel content for step 0', (): void => {

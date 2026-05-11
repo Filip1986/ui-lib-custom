@@ -4,6 +4,40 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [Tabs component — 6-phase Hardening COMPLETE (#17)]
+Changed:
+  - projects/ui-lib-custom/src/lib/tabs/tabs.ts
+      • Switched to module-scoped instance IDs (`tabsId`) and kept public `tabId()` / `panelId()` helpers stable per instance
+      • Added `activation` input (`'auto' | 'manual'`) and `ariaLabel` input for tablist labelling
+      • Hardened keyboard behavior: wrap-around arrow navigation, Home/End support, manual activation support, disabled-tab skipping, and Tab-to-panel focus handoff
+      • Added reduced-motion-aware scroll behavior for focus and scroll buttons
+  - projects/ui-lib-custom/src/lib/tabs/tabs.html
+      • Bound `aria-label` on the tablist
+      • Made `aria-selected` and `aria-disabled` explicit string semantics on tab buttons
+  - projects/ui-lib-custom/src/lib/tabs/tabs.scss
+      • Removed CSS-driven inactive panel hiding in favor of the existing `[hidden]` behavior
+      • Added `prefers-reduced-motion` overrides for transitions and scrolling
+  - projects/ui-lib-custom/src/lib/tabs/tabs.types.ts
+      • Added `TabsActivation` public type
+  - projects/ui-lib-custom/src/lib/tabs/index.ts
+      • Re-exported `TabsActivation`
+  - projects/ui-lib-custom/src/lib/tabs/tabs.a11y.spec.ts
+      • Expanded coverage for ARIA wiring, unique IDs across instances, auto/manual activation, vertical orientation, Home/End, disabled-tab skipping, Tab-to-panel focus flow, and axe-core
+  - projects/ui-lib-custom/src/lib/tabs/README.md
+      • Documented activation mode, aria-label, keyboard support, disabled handling, and key CSS custom properties
+  - docs/COMPONENT_SCORES.md
+      • Tabs: ⏳ Queued → ✅ Done
+State: Tabs hardening complete. IDs are unique across instances, keyboard interaction supports auto/manual activation, inactive panels rely on `[hidden]`, and dedicated accessibility coverage is in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tabs/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=tabs --no-coverage (41/41 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before lint/test/build commands were available.
+Next step: Accordion (#18).
+
+---
+
 Date: 2026-05-11 [Rating component — accessibility hardening COMPLETE (#30)]
 Changed:
   - projects/ui-lib-custom/src/lib/rating/rating.ts

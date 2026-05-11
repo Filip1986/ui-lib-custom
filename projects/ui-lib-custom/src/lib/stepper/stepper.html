@@ -1,23 +1,31 @@
 @if (isHorizontal()) {
-  <nav class="ui-lib-stepper__nav" role="tablist" aria-label="Steps">
-    @for (panel of panels(); track $index; let index = $index; let last = $last) {
-      <div [class]="stepClasses(index, panel)">
+  <nav
+    class="ui-lib-stepper__nav"
+    role="tablist"
+    [attr.aria-label]="ariaLabel()"
+    aria-orientation="horizontal"
+  >
+    @for (step of stepItems(); track step.id; let index = $index) {
+      <div [class]="stepClasses(step)" role="presentation">
         <button
           type="button"
           class="ui-lib-stepper__step-header"
           role="tab"
-          [id]="stepId(index)"
-          [attr.aria-selected]="isStepActive(index)"
-          [attr.aria-controls]="contentId(index)"
-          [attr.aria-current]="isStepActive(index) ? 'step' : null"
-          [attr.aria-disabled]="!isStepAccessible(index, panel) ? true : null"
-          [attr.tabindex]="isStepActive(index) ? 0 : -1"
-          [disabled]="!isStepAccessible(index, panel)"
+          [id]="step.id"
+          [attr.aria-label]="getStepAriaLabel(step, index, stepItems().length)"
+          [attr.aria-selected]="step.active"
+          [attr.aria-controls]="step.contentId"
+          [attr.aria-current]="step.active ? 'step' : null"
+          [attr.aria-disabled]="step.disabled ? 'true' : null"
+          [attr.tabindex]="step.active ? 0 : -1"
+          [disabled]="step.disabled"
           (click)="goToStep(index)"
           (keydown)="onKeydown($event, index)"
         >
           <span class="ui-lib-stepper__step-indicator" aria-hidden="true">
-            @if (isStepCompleted(index)) {
+            @if (step.error) {
+              {{ index + 1 }}
+            } @else if (step.completed) {
               <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="ui-lib-stepper__checkmark" aria-hidden="true">
                 <path d="M2 6L5 9L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -26,63 +34,69 @@
             }
           </span>
           <span class="ui-lib-stepper__step-label">
-            @if (panel.headerTemplate()) {
-              <ng-container [ngTemplateOutlet]="panel.headerTemplate() ?? null" />
+            @if (step.panel.headerTemplate()) {
+              <ng-container [ngTemplateOutlet]="step.panel.headerTemplate() ?? null" />
             } @else {
-              {{ panel.header() }}
+              {{ step.panel.header() }}
             }
           </span>
         </button>
-        @if (!last) {
-          <span class="ui-lib-stepper__separator" aria-hidden="true"></span>
-        }
       </div>
     }
   </nav>
 
   <div class="ui-lib-stepper__panels">
-    @for (panel of panels(); track $index; let index = $index) {
-      @if (isStepActive(index)) {
-        <div
-          class="ui-lib-stepper__panel"
-          role="tabpanel"
-          [id]="contentId(index)"
-          [attr.aria-labelledby]="stepId(index)"
-        >
+    @for (step of stepItems(); track step.id) {
+      <div
+        class="ui-lib-stepper__panel"
+        role="tabpanel"
+        [id]="step.contentId"
+        [attr.aria-labelledby]="step.id"
+        [hidden]="!step.active"
+      >
+        @if (step.active) {
           <div class="ui-lib-stepper__panel-content">
-            <ng-container [ngTemplateOutlet]="panel.contentTemplate() ?? null" />
+            <ng-container [ngTemplateOutlet]="step.panel.contentTemplate() ?? null" />
           </div>
-          @if (panel.footerTemplate()) {
+          @if (step.panel.footerTemplate()) {
             <div class="ui-lib-stepper__panel-footer">
-              <ng-container [ngTemplateOutlet]="panel.footerTemplate() ?? null" />
+              <ng-container [ngTemplateOutlet]="step.panel.footerTemplate() ?? null" />
             </div>
           }
-        </div>
-      }
+        }
+      </div>
     }
   </div>
 } @else {
   <!-- Vertical layout: each step has its content inline below the header -->
-  <div class="ui-lib-stepper__vertical-list" role="tablist" aria-label="Steps" aria-orientation="vertical">
-    @for (panel of panels(); track $index; let index = $index; let last = $last) {
-      <div [class]="stepClasses(index, panel)">
+  <div
+    class="ui-lib-stepper__vertical-list"
+    role="tablist"
+    [attr.aria-label]="ariaLabel()"
+    aria-orientation="vertical"
+  >
+    @for (step of stepItems(); track step.id; let index = $index) {
+      <div [class]="stepClasses(step)" role="presentation">
         <div class="ui-lib-stepper__step-row">
           <div class="ui-lib-stepper__step-side">
             <button
               type="button"
               class="ui-lib-stepper__step-indicator"
               role="tab"
-              [id]="stepId(index)"
-              [attr.aria-selected]="isStepActive(index)"
-              [attr.aria-controls]="contentId(index)"
-              [attr.aria-current]="isStepActive(index) ? 'step' : null"
-              [attr.aria-disabled]="!isStepAccessible(index, panel) ? true : null"
-              [attr.tabindex]="isStepActive(index) ? 0 : -1"
-              [disabled]="!isStepAccessible(index, panel)"
+              [id]="step.id"
+              [attr.aria-label]="getStepAriaLabel(step, index, stepItems().length)"
+              [attr.aria-selected]="step.active"
+              [attr.aria-controls]="step.contentId"
+              [attr.aria-current]="step.active ? 'step' : null"
+              [attr.aria-disabled]="step.disabled ? 'true' : null"
+              [attr.tabindex]="step.active ? 0 : -1"
+              [disabled]="step.disabled"
               (click)="goToStep(index)"
               (keydown)="onKeydown($event, index)"
             >
-              @if (isStepCompleted(index)) {
+              @if (step.error) {
+                {{ index + 1 }}
+              } @else if (step.completed) {
                 <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="ui-lib-stepper__checkmark" aria-hidden="true">
                   <path d="M2 6L5 9L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -90,37 +104,35 @@
                 {{ index + 1 }}
               }
             </button>
-            @if (!last) {
-              <span class="ui-lib-stepper__separator" aria-hidden="true"></span>
-            }
           </div>
 
           <div class="ui-lib-stepper__step-main">
             <div class="ui-lib-stepper__step-label">
-              @if (panel.headerTemplate()) {
-                <ng-container [ngTemplateOutlet]="panel.headerTemplate() ?? null" />
+              @if (step.panel.headerTemplate()) {
+                <ng-container [ngTemplateOutlet]="step.panel.headerTemplate() ?? null" />
               } @else {
-                {{ panel.header() }}
+                {{ step.panel.header() }}
               }
             </div>
 
-            @if (isStepActive(index)) {
-              <div
-                class="ui-lib-stepper__panel"
-                role="tabpanel"
-                [id]="contentId(index)"
-                [attr.aria-labelledby]="stepId(index)"
-              >
+            <div
+              class="ui-lib-stepper__panel"
+              role="tabpanel"
+              [id]="step.contentId"
+              [attr.aria-labelledby]="step.id"
+              [hidden]="!step.active"
+            >
+              @if (step.active) {
                 <div class="ui-lib-stepper__panel-content">
-                  <ng-container [ngTemplateOutlet]="panel.contentTemplate() ?? null" />
+                  <ng-container [ngTemplateOutlet]="step.panel.contentTemplate() ?? null" />
                 </div>
-                @if (panel.footerTemplate()) {
+                @if (step.panel.footerTemplate()) {
                   <div class="ui-lib-stepper__panel-footer">
-                    <ng-container [ngTemplateOutlet]="panel.footerTemplate() ?? null" />
+                    <ng-container [ngTemplateOutlet]="step.panel.footerTemplate() ?? null" />
                   </div>
                 }
-              </div>
-            }
+              }
+            </div>
           </div>
         </div>
       </div>
