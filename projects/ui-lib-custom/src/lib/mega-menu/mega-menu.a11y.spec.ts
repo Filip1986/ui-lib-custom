@@ -485,13 +485,15 @@ describe('MegaMenu Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const allColumnMenus: HTMLElement[] = queryAllEl(fixture, 'ul[role="menu"]');
       expect(allColumnMenus.length).toBeGreaterThanOrEqual(2);
+      const col0: HTMLElement = allColumnMenus[0] as HTMLElement;
+      const col1: HTMLElement = allColumnMenus[1] as HTMLElement;
       const firstColLinks: HTMLElement[] = Array.from(
-        allColumnMenus[0].querySelectorAll<HTMLElement>(
+        col0.querySelectorAll<HTMLElement>(
           '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
         )
       );
       const secondColLinks: HTMLElement[] = Array.from(
-        allColumnMenus[1].querySelectorAll<HTMLElement>(
+        col1.querySelectorAll<HTMLElement>(
           '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
         )
       );
@@ -506,13 +508,15 @@ describe('MegaMenu Accessibility', (): void => {
       await openRootPanel(fixture, 0);
       const allColumnMenus: HTMLElement[] = queryAllEl(fixture, 'ul[role="menu"]');
       expect(allColumnMenus.length).toBeGreaterThanOrEqual(2);
+      const col0: HTMLElement = allColumnMenus[0] as HTMLElement;
+      const col1: HTMLElement = allColumnMenus[1] as HTMLElement;
       const firstColLinks: HTMLElement[] = Array.from(
-        allColumnMenus[0].querySelectorAll<HTMLElement>(
+        col0.querySelectorAll<HTMLElement>(
           '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
         )
       );
       const secondColLinks: HTMLElement[] = Array.from(
-        allColumnMenus[1].querySelectorAll<HTMLElement>(
+        col1.querySelectorAll<HTMLElement>(
           '.ui-lib-mega-menu__sub-link:not([aria-disabled="true"])'
         )
       );
