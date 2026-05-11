@@ -49,11 +49,11 @@ let ratingIdCounter: number = 0;
     },
   ],
   host: {
-    role: 'radiogroup',
+    '[attr.role]': 'hostRole()',
     '[class]': 'hostClasses()',
-    '[attr.aria-label]': 'ariaLabel()',
-    '[attr.aria-labelledby]': 'ariaLabelledby()',
-    '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
+    '[attr.aria-label]': 'effectiveAriaLabel()',
+    '[attr.aria-labelledby]': 'effectiveAriaLabelledby()',
+    '[attr.aria-disabled]': '!readonly() && isDisabled() ? "true" : null',
     '(keydown)': 'onKeyDown($event)',
   },
 })
@@ -163,6 +163,32 @@ export class Rating implements ControlValueAccessor {
   ) as ElementRef<HTMLElement>;
 
   // ── Computed ──────────────────────────────────────────────────────────────
+
+  /** Dynamic host role: "img" in read-only mode; "radiogroup" in interactive mode. */
+  public readonly hostRole: Signal<string> = computed<string>((): string =>
+    this.readonly() ? 'img' : 'radiogroup'
+  );
+
+  /**
+   * Effective aria-label for the host element.
+   * In read-only mode: a fully descriptive "Rating: N out of M stars" string that
+   * makes the host self-contained as a role="img" landmark.
+   * In interactive mode: passes through the `ariaLabel` input value.
+   */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>((): string => {
+    if (this.readonly()) {
+      return `Rating: ${this.value() ?? 0} out of ${this.stars()} stars`;
+    }
+    return this.ariaLabel();
+  });
+
+  /**
+   * Effective aria-labelledby.
+   * Cleared in read-only mode so the host's computed aria-label is not overridden.
+   */
+  public readonly effectiveAriaLabelledby: Signal<string | null> = computed<string | null>(
+    (): string | null => (this.readonly() ? null : this.ariaLabelledby())
+  );
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<RatingVariant> = computed<RatingVariant>(

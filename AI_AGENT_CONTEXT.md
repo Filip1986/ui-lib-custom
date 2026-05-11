@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** RadioButton (#23) and Password (#29) accessibility hardening COMPLETE; next is Rating (#30)
-- **Next queue:** Rating hardening (Tier 3, #30) — role=radiogroup or role=slider, keyboard interaction
+- **Active focus:** Rating (#30) accessibility hardening COMPLETE; next is Knob (#31) [already done per previous handoff]
+- **Next queue:** Table hardening (Tier 4, #32) — role=grid, column sort aria-sort, row selection aria-selected
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -33,6 +33,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
 - `RadioButton` -> ✅ complete + hardened (6-phase, 64 tests — 40 unit + 24 a11y)
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
+- `Rating` -> ✅ complete + hardened (6-phase, 81 tests — 55 unit + 26 a11y)
 
 ---
 
@@ -191,3 +192,44 @@ Verification:
 Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
   a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
 Next step: Slider (#27) — role=slider, aria-valuenow/min/max/valuetext, arrow key step.
+
+Date: 2026-05-11 [Rating component — 6-phase Hardening COMPLETE (#30)]
+Changed:
+  - projects/ui-lib-custom/src/lib/rating/rating.ts
+      • Changed host `role: 'radiogroup'` static attr to `'[attr.role]': 'hostRole()'` dynamic binding
+      • Changed host `aria-label` to `effectiveAriaLabel()` and `aria-labelledby` to `effectiveAriaLabelledby()`
+      • Added guard `!readonly()` to host `aria-disabled` binding (role="img" is non-interactive)
+      • Added `hostRole` computed: returns 'img' when readonly, 'radiogroup' otherwise
+      • Added `effectiveAriaLabel` computed: "Rating: N out of M stars" in read-only; ariaLabel() otherwise
+      • Added `effectiveAriaLabelledby` computed: null in read-only; ariaLabelledby() otherwise
+  - projects/ui-lib-custom/src/lib/rating/rating.html
+      • Cancel button: changed `@if (cancel())` → `@if (cancel() && !readonly())` (hides in read-only)
+      • Stars: replaced single `<span>` with `@if (readonly()) / @else` branching in the @for loop
+        - Read-only branch: `aria-hidden="true"`, no role, no tabindex, no event handlers
+        - Interactive branch: unchanged `role="radio"` + full ARIA + event handling
+  - projects/ui-lib-custom/src/lib/rating/rating.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block setting transition: none on star/cancel
+  - projects/ui-lib-custom/src/lib/rating/rating.a11y.spec.ts (CREATED — 26 tests)
+      • Interactive mode: role=radiogroup, aria-label, role=radio per star, aria-checked, aria-label "N of M"
+        format, aria-posinset/setsize, roving tabindex, ArrowRight/Left/Up/Down keyboard nav
+      • Read-only mode: role=img, descriptive aria-label, stars aria-hidden, no role=radio, no cancel button
+        keyboard input ignored
+      • Disabled state: aria-disabled=true on host, all stars tabindex=-1,
+        no aria-disabled in read-only mode
+      • axe-core: default, with selection, disabled, read-only with value, read-only no value
+  - projects/ui-lib-custom/src/lib/rating/README.md
+      • Added ARIA Pattern section documenting Pattern A (radiogroup) choice and read-only (role=img) behavior
+      • Added Keyboard Navigation table
+      • Added Accessibility section with screen reader behavior notes
+      • Added ControlValueAccessor section with ngModel and reactive forms examples
+      • Updated cancel input note: hidden automatically in read-only mode
+  - docs/COMPONENT_SCORES.md
+      • Rating: ⏳ Queued → ✅ Done
+State: Rating fully hardened. 81 tests pass (55 unit + 26 a11y). Build clean.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/rating/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=rating --no-coverage (81/81 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors, zero warnings)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: node_modules/.bin/ prefix required for all CLI tools; npm install required first.
+Next step: Table hardening (Tier 4, #32) — role=grid, aria-sort, aria-selected.
