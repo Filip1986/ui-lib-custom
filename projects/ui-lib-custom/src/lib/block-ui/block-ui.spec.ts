@@ -131,7 +131,7 @@ describe('BlockUI', (): void => {
   it('should remove aria-hidden from mask when blocked', (): void => {
     const { fixture } = bootstrap({ blocked: true });
     const mask: HTMLElement = getElement(fixture, '.ui-lib-block-ui__mask');
-    expect(mask.getAttribute('aria-hidden')).toBe('false');
+    expect(mask.getAttribute('aria-hidden')).toBeNull();
   });
 
   it('should project default content', (): void => {
@@ -182,5 +182,35 @@ describe('BlockUI', (): void => {
     const { fixture } = bootstrap();
     const mask: HTMLElement = getElement(fixture, '.ui-lib-block-ui__mask');
     expect(mask.getAttribute('role')).toBe('status');
+  });
+
+  it('should set aria-disabled to true on host when blocked', (): void => {
+    const { host } = bootstrap({ blocked: true });
+    expect(host.getAttribute('aria-disabled')).toBe('true');
+  });
+
+  it('should remove aria-disabled from host when not blocked', (): void => {
+    const { host } = bootstrap({ blocked: false });
+    expect(host.getAttribute('aria-disabled')).toBeNull();
+  });
+
+  it('should set inert on content wrapper when blocked', (): void => {
+    const { fixture } = bootstrap({ blocked: true });
+    const content: HTMLElement = getElement(fixture, '.ui-lib-block-ui__content');
+    expect(content.hasAttribute('inert')).toBe(true);
+  });
+
+  it('should remove inert from content wrapper when not blocked', (): void => {
+    const { fixture } = bootstrap({ blocked: false });
+    const content: HTMLElement = getElement(fixture, '.ui-lib-block-ui__content');
+    expect(content.hasAttribute('inert')).toBe(false);
+  });
+
+  it('should generate a unique id on the host element', (): void => {
+    const { host: host1 } = bootstrap();
+    const { host: host2 } = bootstrap();
+    expect(host1.id).toMatch(/^ui-lib-block-ui-\d+$/);
+    expect(host2.id).toMatch(/^ui-lib-block-ui-\d+$/);
+    expect(host1.id).not.toBe(host2.id);
   });
 });

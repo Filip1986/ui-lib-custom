@@ -14,6 +14,8 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { BlockUIVariant } from './block-ui.types';
 export type { BlockUIVariant } from './block-ui.types';
 
+let nextBlockUiId: number = 0;
+
 /**
  * BlockUI - Blocks user interaction on a section of the page by overlaying a mask.
  *
@@ -32,14 +34,19 @@ export type { BlockUIVariant } from './block-ui.types';
   templateUrl: './block-ui.html',
   styleUrl: './block-ui.scss',
   host: {
+    '[attr.id]': 'instanceId',
     '[class]': 'hostClasses()',
     '[attr.aria-busy]': 'blocked()',
+    '[attr.aria-disabled]': 'blocked() ? true : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class BlockUI {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  /** Unique instance identifier (auto-generated). */
+  public readonly instanceId: string = `ui-lib-block-ui-${++nextBlockUiId}`;
 
   /** Whether the content is blocked from user interaction. Supports two-way binding. */
   public readonly blocked: ModelSignal<boolean> = model<boolean>(false);

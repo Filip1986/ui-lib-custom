@@ -4,6 +4,46 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+# AI Agent Context Archive
+
+This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT_CONTEXT.md`.
+
+---
+
+Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
+Changed:
+  - projects/ui-lib-custom/src/lib/chart/chart.component.ts
+      • Added module-level `nextChartId: number` for unique instance IDs
+      • Added `chartId`, `tableId`, `datasetRows`, and `tableLabels` computed properties
+      • Added `showDataTable` input (default `true`) to control the visually-hidden data table
+      • Added `prefers-reduced-motion` detection → sets `animation: false` in Chart.js options when preferred
+      • Added `formatDataValue` helper for multi-type data point normalisation
+  - projects/ui-lib-custom/src/lib/chart/chart.component.html
+      • Added `aria-describedby` on canvas (links to the data table when `showDataTable` is true)
+      • Added visually-hidden `<table>` with `<caption>`, `<thead>` (label columns + "Dataset" header), and `<tbody>` (one row per dataset)
+  - projects/ui-lib-custom/src/lib/chart/chart.component.scss
+      • Added `.ui-lib-chart__sr-table` visually-hidden class
+      • Added `@media (prefers-reduced-motion: reduce)` override for canvas transitions/animations
+  - projects/ui-lib-custom/src/lib/chart/chart.types.ts
+      • Added `ChartDatasetRow` and `ChartAccessibleDataset` interfaces
+  - projects/ui-lib-custom/src/lib/chart/chart.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure, data table rendering, unique IDs, reduced-motion, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/chart/README.md
+      • Added ARIA table, keyboard table, CSS custom properties table, and accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Chart: ⏳ Queued → ✅ Done; score row populated (avg 8.9)
+State: Chart hardening complete. Visually-hidden data table, aria-describedby linkage, unique IDs, reduced-motion
+  support, and 21 a11y regression tests are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chart/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=chart --no-coverage (96/96 PASS — 75 unit + 21 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `npm install` required in fresh clone before tools are available.
+Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
+
+---
+
 Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
 Changed:
   - projects/ui-lib-custom/src/lib/table/table.component.ts
