@@ -26,6 +26,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ### Component/Docs Delta (Active Only)
 
+- `Accordion` -> ✅ complete + hardened (6-phase, score 9.0/10, 51 tests — 33 unit + 18 a11y)
 - `TieredMenu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 70 tests — 28 unit + 42 a11y)
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
@@ -160,6 +161,74 @@ Terminal notes:
     `npx playwright screenshot` after `npx playwright install chromium`
 Next step: Input hardening (#21) — start Tier 3 form controls with label/validation ARIA pass.
 
+
+Date: 2026-05-10 [Accordion component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/accordion/accordion-context.ts
+      • Added `accordionId: string` to AccordionContext interface
+      • Added `headerButtonId: (index: number) => string` to AccordionContext interface
+      • Added `panelId: (index: number) => string` to AccordionContext interface
+      • Added `getPanelIndex: (panel: AccordionPanel) => number` to AccordionContext interface
+  - projects/ui-lib-custom/src/lib/accordion/accordion.ts
+      • Added module-level `let nextAccordionId: number = 0` counter
+      • Added `public readonly accordionId: string` (unique per instance, e.g. `'ui-lib-accordion-1'`)
+      • Added `public headerButtonId(index: number): string` — returns `${accordionId}-header-${index}`
+      • Added `public panelId(index: number): string` — returns `${accordionId}-panel-${index}`
+      • Added `public getPanelIndex(panel: AccordionPanel): number` — returns panel's zero-based index
+  - projects/ui-lib-custom/src/lib/accordion/accordion-panel.ts
+      • Updated `headerId()` computed signal: uses `context.headerButtonId(context.getPanelIndex(this))`
+        when inside an accordion (falls back to UUID-based ID when standalone)
+      • Updated `panelId()` computed signal: uses `context.panelId(context.getPanelIndex(this))`
+        when inside an accordion (falls back to UUID-based ID when standalone)
+  - projects/ui-lib-custom/src/lib/accordion/accordion-panel.html
+      • CRITICAL FIX: Removed `[attr.tabindex]="disabled() ? -1 : 0"` — aria-disabled pattern
+        keeps disabled buttons in the tab sequence; tabindex=-1 was incorrectly removing them
+  - projects/ui-lib-custom/src/lib/accordion/accordion-panel.spec.ts
+      • Updated `does not toggle when disabled` test: `tabindex=-1` → `.not.toBe('-1')` to match
+        the corrected aria-disabled pattern (button stays in tab order)
+  - projects/ui-lib-custom/src/lib/accordion/accordion.a11y.spec.ts (EXPANDED — 18 a11y tests)
+      • 6 describe blocks: ARIA attributes (5 tests), Disabled state (4 tests),
+        Unique IDs across instances (2 tests), Keyboard interaction (4 tests),
+        Single expand mode aria consistency (1 test), axe-core (3 tests)
+      • Added `provideZonelessChangeDetection()` to TestBed setup
+      • Added `document.body.appendChild(fixture.nativeElement)` for focus tests in jsdom
+      • Tests verify: aria-expanded, aria-controls→id linkage, aria-labelledby→headerId,
+        role="region", aria-disabled (not HTML disabled), tabindex not -1 on disabled,
+        unique IDs across instances, ID pattern format, keyboard Enter/Space/ArrowDown/ArrowUp,
+        single-mode consistency, axe all-collapsed/one-expanded/multiple-expanded
+  - docs/COMPONENT_SCORES.md
+      • Accordion queue entry: ⏳ Queued → ✅ Done (Tier 2 #18)
+      • Accordion score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+  - AI_AGENT_CONTEXT.md (this file — status updated)
+State: Accordion component fully hardened through all 6 phases. Score 9.0/10.
+  Phase 3 (A11y — priority):
+    • CRITICAL FIX: Accordion-level ID counter (`nextAccordionId`) + index-based DOM IDs —
+      header button gets `ui-lib-accordion-N-header-M`, panel gets `ui-lib-accordion-N-panel-M`;
+      eliminates any risk of ID collisions across multiple accordion instances on the same page
+    • CRITICAL FIX: Removed `tabindex=-1` on disabled header buttons — aria-disabled pattern
+      keeps buttons in the tab sequence; JS `toggle()` and CSS `pointer-events: none` guard
+      interaction without removing keyboard reachability
+    • Pre-existing correct: `<button>` (not `<a>` or `<div>`), aria-expanded, aria-controls,
+      role="region", aria-labelledby, aria-disabled (not HTML disabled), Enter/Space toggle,
+      Arrow key navigation, prefers-reduced-motion in SCSS — all verified intact
+  Phase 1 (Architecture): nextAccordionId counter, accordionId, headerButtonId(), panelId(),
+    getPanelIndex() all added to Accordion and AccordionContext interface.
+  Phase 2 (DX): README accurate; existing API docs cover all inputs/outputs.
+  Phase 4 (Performance): Signal-based expansion state with Set for O(1) lookup — intact.
+  Phase 5 (Composability): expandedChange/panelToggle outputs already present — intact.
+  Phase 6 (Polish): prefers-reduced-motion already in SCSS — intact.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/accordion/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=accordion --no-coverage (51/51 PASS — 33 unit + 18 a11y)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
+Terminal notes: `provideZonelessChangeDetection()` required in TestBed for signal-based components.
+  document.body.appendChild(fixture.nativeElement) required for focus tests in jsdom.
+Next step: Stepper hardening (Tier 2, #19) — key a11y: role=tablist variant, aria-current=step,
+  linear mode enforcement.
+
+
+Date: 2026-05-10 [axe-core full-page sweep — Playwright e2e infrastructure]
 Changed:
   - e2e/a11y-full-sweep.spec.ts (CREATED)
       • Visits all 91 non-redirect demo routes from app.routes.ts

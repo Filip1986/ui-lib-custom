@@ -18,6 +18,8 @@ import {
 import { AccordionPanel } from './accordion-panel';
 import { ACCORDION_CONTEXT } from './accordion-context';
 import type { AccordionContext } from './accordion-context';
+
+let nextAccordionId: number = 0;
 import type {
   AccordionChangeEvent,
   AccordionExpandMode,
@@ -61,6 +63,8 @@ interface AccordionPanelContext {
 })
 export class Accordion implements AccordionContext {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  public readonly accordionId: string = `ui-lib-accordion-${String(++nextAccordionId)}`;
 
   public readonly variant: InputSignal<AccordionVariant | null> = input<AccordionVariant | null>(
     null
@@ -192,6 +196,18 @@ export class Accordion implements AccordionContext {
 
   public unregisterPanel(panel: AccordionPanel): void {
     this.registeredPanels.delete(panel);
+  }
+
+  public headerButtonId(index: number): string {
+    return `${this.accordionId}-header-${index}`;
+  }
+
+  public panelId(index: number): string {
+    return `${this.accordionId}-panel-${index}`;
+  }
+
+  public getPanelIndex(panel: AccordionPanel): number {
+    return this.panels().indexOf(panel);
   }
 
   public onKeydown(event: KeyboardEvent): void {
