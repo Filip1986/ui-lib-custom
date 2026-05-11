@@ -53,7 +53,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ⏳ Queued   |
 | 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done     |
 | 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ⏳ Queued   |
-| 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ⏳ Queued   |
+| 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done     |
 | 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done     |
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ✅ Done     |
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Queued   |

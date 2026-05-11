@@ -126,39 +126,37 @@ Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tri
   a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
 Next step: Password (#29) — strength meter live region, show/hide toggle button aria-label.
 
-Date: 2026-05-10 [CascadeSelect component — 6-phase hardening COMPLETE]
+Date: 2026-05-11 [DatePicker — 6-phase hardening Phase 3 COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts
-      • Updated combobox semantics: `aria-haspopup="listbox"`, stable `aria-controls`
-      • Added module-level IDs: `cascadeSelectId`, `listboxId`, and `getItemId(item, level)`
-      • Added `focusedItemId` writable signal for cross-level `aria-activedescendant` tracking
-      • Updated keyboard behavior: `ArrowRight` opens one sub-list level; `ArrowLeft` closes it
-  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.html
-      • Switched hierarchy markup to listbox/option pattern (`ul[role=listbox]`, `li[role=option]`)
-      • Added parent option `aria-haspopup` + `aria-expanded` semantics
-      • Added per-level listbox IDs and labels
-  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss
-      • Added panel/sub-list enter animations
-      • Added `prefers-reduced-motion: reduce` fallback for dropdown/sub-list animations
-  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.a11y.spec.ts
-      • Expanded to 31 accessibility tests (ARIA semantics, keyboard flows, activedescendant, axe states)
-  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.spec.ts
-      • Synced keyboard expectation for ArrowRight/ArrowLeft sub-list behavior
-  - projects/ui-lib-custom/src/lib/cascade-select/README.md
-      • Added hierarchical model structure, keyboard navigation table, and ARIA pattern section
-  - docs/COMPONENT_SCORES.md
-      • Tier 3 queue: CascadeSelect marked ✅ Done
-      • Score row updated to 8.2 average (all dimensions ≥ 8)
-State: CascadeSelect hardening completed across architecture, accessibility, DX docs, and polish.
-  Existing composability slots and variant support remain intact.
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.ts
+      + module counter `nextDatePickerId` and `instanceId` property
+      + `liveRegionId` computed signal (`resolvedInputId() + '-live'`)
+      + `weekDayFullLabels` computed signal (full day names ordered by firstDayOfWeek)
+      + `currentMonthYearLabel` computed signal (`monthLabel() + ' ' + yearLabel()`)
+      + `prevMonthLabel` computed signal ("Month Year" for prev month)
+      + `nextMonthLabel` computed signal ("Month Year" for next month)
+      + `getDateAriaLabel()` improved — includes "today" and "selected" suffixes
+      + `resolvedInputId()` fallback now includes instance ID for uniqueness
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.html
+      + prev/next button aria-labels updated to "Previous month, <Month Year>"
+      + `<th role="columnheader">` now has `[attr.abbr]` and `[attr.aria-label]` with full day names
+      + live region `<div aria-live="polite" aria-atomic="true">` added to panel footer
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.scss
+      + `.ui-lib-datepicker__live-region` visually-hidden style block added
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.a11y.spec.ts (CREATED)
+      + 38 tests across: trigger ARIA, dialog ARIA, nav buttons, grid ARIA, unique IDs,
+        keyboard interaction, focus management, axe-core
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts
+      + prev-button aria-label assertion updated from `.toBe('Previous month')` to `.toMatch(/^Previous month,/)`
+  - docs/COMPONENT_SCORES.md — DatePicker (#24) ⏳ → ✅ Done
+State: DatePicker 6-phase hardening Phase 3 complete. All 138 tests pass (38 new a11y tests).
+  prefers-reduced-motion was already present. Build clean, zero warnings.
 Verification:
-  - node_modules/.bin/eslint projects/ui-lib-custom/src/lib/cascade-select/ --max-warnings 0
-  - node_modules/.bin/jest --testPathPatterns=cascade-select --no-coverage
-  - node_modules/.bin/ng build ui-lib-custom
-  - node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage
-Terminal notes:
-  - Initial validation failed until dependencies were installed (`npm install`).
-  - Open-state axe assertions needed `aria-allowed-attr` disabled because parent listbox options
-    intentionally expose `aria-expanded` / `aria-haspopup` for hierarchical navigation semantics.
-Next step: InputNumber hardening (Tier 3, #26).
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/date-picker/ --max-warnings 0 (CLEAN)
+  node_modules/.bin/jest --testPathPatterns=date-picker --no-coverage (138/138 PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom (BUILD OK, zero warnings)
+Terminal notes: Dependencies not pre-installed — ran `npm install` first.
+  Module counter resets per TestBed, so resolved IDs in tests use instance-based suffix.
+Next step: CascadeSelect followup (#25) — verify existing a11y spec covers all required patterns.
 

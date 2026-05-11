@@ -55,6 +55,8 @@ export class UiLibInput implements ControlValueAccessor {
   public readonly labelFloat: InputSignal<InputLabelFloat> = input<InputLabelFloat>('over');
   public readonly placeholder: InputSignal<string> = input<string>('');
   public readonly error: InputSignal<string | null> = input<string | null>(null);
+  public readonly hint: InputSignal<string | null> = input<string | null>(null);
+  public readonly invalid: InputSignal<boolean> = input<boolean>(false);
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
   public readonly required: InputSignal<boolean> = input<boolean>(false);
   public readonly showCounter: InputSignal<boolean> = input<boolean>(false);
@@ -73,8 +75,22 @@ export class UiLibInput implements ControlValueAccessor {
   public readonly controlId: Signal<string> = computed<string>(
     (): string => this.id() ?? `ui-lib-input-${++inputIdCounter}`
   );
-  public readonly describedById: Signal<string | undefined> = computed<string | undefined>(
-    (): string | undefined => (this.error() ? `${this.controlId()}-error` : undefined)
+  public readonly errorId: Signal<string> = computed<string>(
+    (): string => `${this.controlId()}-error`
+  );
+  public readonly hintId: Signal<string> = computed<string>(
+    (): string => `${this.controlId()}-hint`
+  );
+  public readonly isInvalid: Signal<boolean> = computed<boolean>(
+    (): boolean => this.invalid() || Boolean(this.error())
+  );
+  public readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const parts: string[] = [];
+      if (this.error()) parts.push(this.errorId());
+      if (this.hint()) parts.push(this.hintId());
+      return parts.length > 0 ? parts.join(' ') : null;
+    }
   );
   public readonly displayPlaceholder: Signal<string> = computed<string>((): string =>
     this.labelFloat() === 'over' ? this.placeholder() : ''
@@ -100,7 +116,7 @@ export class UiLibInput implements ControlValueAccessor {
     ];
     if (this.labelFloat() !== 'over') classes.push('ui-input-has-floating');
     if (this.isDisabled()) classes.push('ui-input-disabled');
-    if (this.error()) classes.push('ui-input-error');
+    if (this.isInvalid()) classes.push('ui-input-error');
     if (this.isFloating()) classes.push('ui-input-floating-active');
     return classes.join(' ');
   });
