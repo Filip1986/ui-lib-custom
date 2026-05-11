@@ -31,6 +31,9 @@ export type {
 
 /** Default value exported for entry-point test assertions. */
 export const BREADCRUMB_DEFAULT_ARIA_LABEL: string = 'Breadcrumb';
+export const BREADCRUMB_DEFAULT_HOME_ARIA_LABEL: string = 'Home';
+
+let nextBreadcrumbId: number = 0;
 
 /**
  * Breadcrumb component for displaying hierarchical navigation trails.
@@ -48,15 +51,20 @@ export const BREADCRUMB_DEFAULT_ARIA_LABEL: string = 'Breadcrumb';
   encapsulation: ViewEncapsulation.None,
   host: {
     role: 'navigation',
+    '[attr.id]': 'breadcrumbId',
     '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'hostClasses()',
   },
 })
 export class Breadcrumb {
+  public readonly breadcrumbId: string = `ui-lib-breadcrumb-${++nextBreadcrumbId}`;
+
   // ── Inputs ────────────────────────────────────────────────────────────────
 
   /** Array of navigation items to display after the optional home item. */
-  public readonly items: InputSignal<BreadcrumbItem[]> = input<BreadcrumbItem[]>([]);
+  public readonly model: InputSignal<BreadcrumbItem[]> = input<BreadcrumbItem[]>([], {
+    alias: 'items',
+  });
 
   /** Optional home item pinned as the first crumb. */
   public readonly home: InputSignal<BreadcrumbItem | null> = input<BreadcrumbItem | null>(null);
@@ -90,6 +98,10 @@ export class Breadcrumb {
   public readonly separatorTemplate: Signal<TemplateRef<unknown> | undefined> =
     contentChild<TemplateRef<unknown>>('separator');
 
+  /** Custom template for the first (home) item content. */
+  public readonly firstItemTemplate: Signal<TemplateRef<unknown> | undefined> =
+    contentChild<TemplateRef<unknown>>('firstItem');
+
   // ── Dependencies ─────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
@@ -108,7 +120,7 @@ export class Breadcrumb {
   public readonly allItems: Signal<BreadcrumbItem[]> = computed<BreadcrumbItem[]>(
     (): BreadcrumbItem[] => {
       const homeItem: BreadcrumbItem | null = this.home();
-      return homeItem ? [homeItem, ...this.items()] : [...this.items()];
+      return homeItem ? [homeItem, ...this.model()] : [...this.model()];
     }
   );
 
@@ -133,6 +145,28 @@ export class Breadcrumb {
   /** Returns true when the item at the given index is the last (active) crumb. */
   public isLastItem(index: number): boolean {
     return index === this.allItems().length - 1;
+  }
+
+  /** Returns true when the item is the generated home item. */
+  public isHomeItem(index: number): boolean {
+    return this.home() !== null && index === 0;
+  }
+
+  /** Computes the accessible label for icon-only breadcrumb items. */
+  public getItemAriaLabel(item: BreadcrumbItem, index: number): string | null {
+    if (item.label) {
+      return null;
+    }
+
+    if (!item.icon) {
+      return null;
+    }
+
+    if (item.iconAriaLabel) {
+      return item.iconAriaLabel;
+    }
+
+    return this.isHomeItem(index) ? BREADCRUMB_DEFAULT_HOME_ARIA_LABEL : null;
   }
 
   /**
