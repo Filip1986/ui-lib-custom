@@ -155,7 +155,16 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
     return classes.join(' ');
   });
 
-  /** Effective tab index: -1 when disabled. */
+  /**
+   * Effective tab index for the native input.
+   * - disabled → -1 (removed from tab order)
+   * - enabled → tabindex() (defaults to 0)
+   *
+   * Note: For native `<input type="radio">` elements sharing the same `name`,
+   * browsers natively implement the WAI-ARIA roving tabindex pattern — only the
+   * selected radio (or the first if none are selected) is reachable via Tab.
+   * Our arrow-key handler provides the in-group keyboard navigation.
+   */
   public readonly hostTabIndex: Signal<number> = computed<number>((): number =>
     this.isDisabled() ? -1 : this.tabindex()
   );
@@ -227,6 +236,57 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
   public onNativeBlur(event: FocusEvent): void {
     this.onCvaTouched();
     this.blur.emit(event);
+  }
+
+  /**
+   * Implements roving tabindex keyboard navigation for the radio group.
+   * ArrowDown/Right moves to the next non-disabled sibling; ArrowUp/Left moves
+   * to the previous non-disabled sibling — both wrapping around.
+   */
+  public onNativeKeydown(event: KeyboardEvent): void {
+    const key: string = event.key;
+    if (key !== 'ArrowDown' && key !== 'ArrowRight' && key !== 'ArrowUp' && key !== 'ArrowLeft') {
+      return;
+    }
+
+    const nameAttr: string | null = this.name();
+    if (!nameAttr) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const escapedName: string =
+      typeof CSS !== 'undefined' && CSS.escape
+        ? CSS.escape(nameAttr)
+        : nameAttr.replace(/["\\]/g, '\\$&');
+
+    const allInputs: HTMLInputElement[] = Array.from(
+      document.querySelectorAll<HTMLInputElement>(
+        `.ui-lib-radio-button__native-input[name="${escapedName}"]`
+      )
+    ).filter(
+      (input: HTMLInputElement): boolean => !input.closest('.ui-lib-radio-button--disabled')
+    );
+
+    if (allInputs.length === 0) {
+      return;
+    }
+
+    const currentInput: HTMLInputElement | null = this.getNativeInputElement();
+    const currentIndex: number = currentInput ? allInputs.indexOf(currentInput) : -1;
+    if (currentIndex === -1) {
+      return;
+    }
+
+    const direction: number = key === 'ArrowDown' || key === 'ArrowRight' ? 1 : -1;
+    const nextIndex: number = (currentIndex + direction + allInputs.length) % allInputs.length;
+    const nextInput: HTMLInputElement | undefined = allInputs[nextIndex];
+
+    if (nextInput) {
+      nextInput.focus();
+      nextInput.click();
+    }
   }
 
   // ── ControlValueAccessor ────────────────────────────────────────────────────
