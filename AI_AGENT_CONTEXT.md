@@ -38,6 +38,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
+- `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 
 ---
@@ -68,7 +70,7 @@ Changed:
       • Added `.ui-lib-chart__sr-table` visually-hidden class
       • Added `@media (prefers-reduced-motion: reduce)` override for canvas transitions/animations
   - projects/ui-lib-custom/src/lib/chart/chart.types.ts
-      • Added `ChartDatasetRow` interface for the accessible table rows
+      • Added `ChartDatasetRow` and `ChartAccessibleDataset` interfaces
   - projects/ui-lib-custom/src/lib/chart/chart.a11y.spec.ts (CREATED — 21 tests)
       • ARIA structure, data table rendering, unique IDs, reduced-motion, and axe-core coverage
   - projects/ui-lib-custom/src/lib/chart/README.md
@@ -85,41 +87,60 @@ Verification:
 Terminal notes: `npm install` required in fresh clone before tools are available.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
+Date: 2026-05-11 [Chip component — 6-phase hardening COMPLETE (#54)]
 Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the newest conflict against origin/main by preserving the current Table → TreeTable session state
-      • Kept active handoffs trimmed to the newest three entries and moved the older Stepper handoff to the archive
-State: Branch is merged with the latest origin/main again. This merge only required resolving AI_AGENT_CONTEXT.md; no library source files changed in the incoming main branch.
-Verification:
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: The repository is now fully unshallowed locally after `git fetch --unshallow origin`; merge conflict was isolated to AI_AGENT_CONTEXT.md.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Merge conflict resolution refresh for table hardening PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the new conflict against origin/main by keeping the latest Table → TreeTable session state
-      • Preserved the incoming Stepper hardening handoff and trimmed active handoffs back to the newest three entries
+  - projects/ui-lib-custom/src/lib/chip/chip.ts
+      • Added module-level `nextChipId` unique ID counter; exposed stable `chipId` string on host via `[id]` binding
+      • Added `selectable` and `selected` inputs, `selectedChange` output
+      • Added `hostRole` computed signal: `'group'` when removable (avoids nested-interactive ARIA violation), `'option'` otherwise
+      • Added `ariaSelected` computed signal: `'true'`/`'false'` for non-removable selectable chips; null otherwise
+      • Added `tabIndex` computed signal: `0` for selectable chips, null otherwise
+      • Added `onHostClick` and `onHostKeyDown` host event handlers (Space / Enter toggles selection)
+      • Changed `onRemoveClick` to call `event.stopPropagation()` before emitting
+      • Changed host from static `role: 'option'` to dynamic `[attr.role]: 'hostRole()'`
+  - projects/ui-lib-custom/src/lib/chip/chip.scss
+      • Added `.ui-lib-chip--selectable` block with `cursor: pointer` and `:focus-visible` ring
+      • Added `.ui-lib-chip--selected` block with `filter: brightness(1.15)`
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all chip transitions
+  - projects/ui-lib-custom/src/lib/chip/chip.spec.ts
+      • Updated TestHostComponent to wire `selectable`, `selected`, and `selectedChange`
+      • Replaced `'should apply role="option" on host'` with explicit non-removable/removable role tests
+      • Added 10 new unit tests (selectable class, selected class, aria-selected, tabindex, Space/Enter keyboard, unique ID)
+  - projects/ui-lib-custom/src/lib/chip/chip.a11y.spec.ts (CREATED — 18 tests)
+  - projects/ui-lib-custom/src/lib/chip/README.md
   - docs/COMPONENT_SCORES.md
-  - projects/ui-lib-custom/src/lib/stepper/README.md
-  - projects/ui-lib-custom/src/lib/stepper/index.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.html
-  - projects/ui-lib-custom/src/lib/stepper/stepper.scss
-  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts
-      • Brought in the latest origin/main Stepper hardening changes as part of the merge
-State: Branch is merged with the latest origin/main again. The only manual conflict resolution was in AI_AGENT_CONTEXT.md; incoming Stepper changes are preserved as-is.
+      • Chip #54: ⏳ Queued → ✅ Done; score row populated (avg 8.5)
+State: Chip hardening complete. Dynamic role, selectable toggle, prefers-reduced-motion, focus-visible, unique IDs, and 18 a11y tests in place.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/stepper/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=stepper --no-coverage (61/61 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/chip/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=chip --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
+Terminal notes: Fresh clone required `npm install` before validation.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass (or resume from queue).
+
+Date: 2026-05-11 [ContextMenu — 6-phase hardening COMPLETE (#14)]
+Changed:
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.ts
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.html
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.scss
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/context-menu/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: Complete
+  Phase 3 (A11y):
+    • CRITICAL FIX: Removed aria-hidden="true" from role="separator" items (top-level + submenu)
+    • CRITICAL FIX: Added roving tabindex for top-level items (single tabindex="0")
+    • CRITICAL FIX: Added focus capture/restore flow for Escape/programmatic close paths
+    • MODERATE FIX: Tab key now closes the menu without blocking natural tab order
+    • MODERATE FIX: Added prefers-reduced-motion handling for panel/caret transitions
+    • Created context-menu.a11y.spec.ts (31 tests)
+  Phase 1: Added module-level ID counter + contextMenuId and rovingIndex reset on show.
+  Phase 2: README now documents trigger ARIA pattern, keyboard map, accessibility notes, and CSS variables.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/context-menu/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=context-menu --no-coverage (86/86 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Next step: PanelMenu hardening (Tier 2, #15).

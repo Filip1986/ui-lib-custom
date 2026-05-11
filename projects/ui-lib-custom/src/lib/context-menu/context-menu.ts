@@ -38,6 +38,9 @@ export type {
 /** Default accessible label exported for test assertions. */
 export const CONTEXT_MENU_DEFAULT_ARIA_LABEL: string = 'Context Menu';
 
+/** Module-level counter for unique ContextMenu IDs. */
+let nextContextMenuId: number = 0;
+
 /**
  * ContextMenu component — an overlay menu triggered on right-click (or programmatically
  * via `show(event)` / `toggle(event)`). Supports nested submenus, keyboard navigation,
@@ -62,6 +65,11 @@ export const CONTEXT_MENU_DEFAULT_ARIA_LABEL: string = 'Context Menu';
   },
 })
 export class ContextMenu implements OnDestroy {
+  // ── Instance identity ─────────────────────────────────────────────────────
+
+  /** Unique ID for this ContextMenu instance. */
+  public readonly contextMenuId: string = `uilib-context-menu-${++nextContextMenuId}`;
+
   // ── Inputs ────────────────────────────────────────────────────────────────
 
   /** Array of menu items to display in the context menu. */
@@ -122,6 +130,12 @@ export class ContextMenu implements OnDestroy {
   /** Index of the most-recently focused top-level menu item (-1 = none). */
   public readonly focusedIndex: WritableSignal<number> = signal<number>(-1);
 
+  /**
+   * Index of the top-level item that currently holds the tab stop.
+   * Only this item gets `tabindex="0"`; all others get `-1`.
+   */
+  public readonly rovingIndex: WritableSignal<number> = signal<number>(0);
+
   // ── Dependencies ──────────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
@@ -129,6 +143,7 @@ export class ContextMenu implements OnDestroy {
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector: Injector = inject(Injector);
+  private previousFocusEl: HTMLElement | null = null;
 
   // ── View children ─────────────────────────────────────────────────────────
 
@@ -163,6 +178,14 @@ export class ContextMenu implements OnDestroy {
       this.model().filter((item: ContextMenuItem): boolean => item.visible !== false)
   );
 
+  /** Top-level, focusable (non-separator, non-disabled) items in DOM order. */
+  public readonly flatFocusableItems: Signal<ContextMenuItem[]> = computed<ContextMenuItem[]>(
+    (): ContextMenuItem[] =>
+      this.visibleItems().filter(
+        (item: ContextMenuItem): boolean => !item.separator && !item.disabled
+      )
+  );
+
   // ── Event listener bound methods ──────────────────────────────────────────
 
   private readonly contextMenuHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
@@ -171,7 +194,7 @@ export class ContextMenu implements OnDestroy {
 
   private readonly clickOutsideHandler: (event: MouseEvent) => void = (event: MouseEvent): void => {
     if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-      this.hide();
+      this.hide(false);
     }
   };
 
@@ -179,7 +202,7 @@ export class ContextMenu implements OnDestroy {
     event: KeyboardEvent
   ): void => {
     if (event.key === KEYBOARD_KEYS.Escape) {
-      this.hide();
+      this.hide(true);
     }
   };
 
@@ -235,29 +258,36 @@ export class ContextMenu implements OnDestroy {
    */
   public show(event: MouseEvent): void {
     event.preventDefault();
+    this.capturePreviousFocus(event);
     this.menuX.set(event.clientX);
     this.menuY.set(event.clientY);
     this.activeSubmenuIndex.set(null);
     this.focusedIndex.set(-1);
+    this.rovingIndex.set(0);
     this.isVisible.set(true);
     this.menuShow.emit(event);
   }
 
   /** Hides the context menu. No-op when already hidden. */
-  public hide(): void {
+  public hide(restoreFocus: boolean = true): void {
     if (!this.isVisible()) {
       return;
     }
     this.isVisible.set(false);
     this.activeSubmenuIndex.set(null);
     this.focusedIndex.set(-1);
+    if (restoreFocus) {
+      this.restoreFocus();
+    } else {
+      this.previousFocusEl = null;
+    }
     this.menuHide.emit();
   }
 
   /** Toggles the context menu at the cursor position of the given event. */
   public toggle(event: MouseEvent): void {
     if (this.isVisible()) {
-      this.hide();
+      this.hide(false);
     } else {
       this.show(event);
     }
@@ -268,6 +298,19 @@ export class ContextMenu implements OnDestroy {
   /** Returns the visible sub-items of a parent item (filters `visible === false`). */
   public getVisibleSubItems(item: ContextMenuItem): ContextMenuItem[] {
     return (item.items ?? []).filter((sub: ContextMenuItem): boolean => sub.visible !== false);
+  }
+
+  /** Returns the flat focusable index for a top-level item. */
+  public getFlatIndex(item: ContextMenuItem): number {
+    return this.flatFocusableItems().indexOf(item);
+  }
+
+  /** Returns the correct tabindex value for a top-level item (roving tabindex). */
+  public getTabIndex(item: ContextMenuItem, flatIndex: number): string {
+    if (item.disabled) {
+      return '-1';
+    }
+    return this.rovingIndex() === flatIndex ? '0' : '-1';
   }
 
   // ── Event handlers (called from the template) ─────────────────────────────
@@ -298,7 +341,7 @@ export class ContextMenu implements OnDestroy {
     if (item.command) {
       item.command({ item, originalEvent: event });
     }
-    this.hide();
+    this.hide(false);
   }
 
   /** Handles a click or keyboard activation on a nested submenu item. */
@@ -312,7 +355,7 @@ export class ContextMenu implements OnDestroy {
     if (subItem.command) {
       subItem.command({ item: subItem, originalEvent: event });
     }
-    this.hide();
+    this.hide(false);
   }
 
   /**
@@ -326,19 +369,25 @@ export class ContextMenu implements OnDestroy {
       this.activeSubmenuIndex.set(null);
     }
     this.focusedIndex.set(index);
+    const flatIndex: number = this.getFlatIndex(item);
+    if (flatIndex >= 0) {
+      this.rovingIndex.set(flatIndex);
+    }
   }
 
   /** Handles keyboard events on top-level menu item links. */
   public onItemKeyDown(event: KeyboardEvent, item: ContextMenuItem, index: number): void {
+    const currentFlatIndex: number = this.getFlatIndex(item);
+
     switch (event.key) {
       case KEYBOARD_KEYS.ArrowDown: {
         event.preventDefault();
-        this.moveFocus(index, 1);
+        this.moveFocus(currentFlatIndex, 1);
         break;
       }
       case KEYBOARD_KEYS.ArrowUp: {
         event.preventDefault();
-        this.moveFocus(index, -1);
+        this.moveFocus(currentFlatIndex, -1);
         break;
       }
       case KEYBOARD_KEYS.ArrowRight: {
@@ -374,19 +423,32 @@ export class ContextMenu implements OnDestroy {
       }
       case KEYBOARD_KEYS.Escape: {
         event.preventDefault();
-        this.hide();
+        this.hide(true);
         break;
       }
       case KEYBOARD_KEYS.Home: {
         event.preventDefault();
-        this.focusByVisibleIndex(0);
+        this.focusByFlatIndex(0);
         break;
       }
       case KEYBOARD_KEYS.End: {
         event.preventDefault();
-        this.focusByVisibleIndex(this.visibleItems().length - 1);
+        this.focusByFlatIndex(this.flatFocusableItems().length - 1);
         break;
       }
+      case KEYBOARD_KEYS.Tab: {
+        this.hide(false);
+        break;
+      }
+    }
+  }
+
+  /** Tracks focus changes to keep roving tabindex in sync. */
+  public onItemFocus(item: ContextMenuItem, index: number): void {
+    this.focusedIndex.set(index);
+    const flatIndex: number = this.getFlatIndex(item);
+    if (flatIndex >= 0) {
+      this.rovingIndex.set(flatIndex);
     }
   }
 
@@ -409,13 +471,17 @@ export class ContextMenu implements OnDestroy {
       case KEYBOARD_KEYS.Escape: {
         event.preventDefault();
         this.activeSubmenuIndex.set(null);
-        this.focusByVisibleIndex(this.focusedIndex());
+        this.focusByFlatIndex(this.rovingIndex());
         break;
       }
       case KEYBOARD_KEYS.Enter:
       case KEYBOARD_KEYS.Space: {
         event.preventDefault();
         this.onSubItemActivate(event, subItem);
+        break;
+      }
+      case KEYBOARD_KEYS.Tab: {
+        this.hide(false);
         break;
       }
     }
@@ -425,45 +491,68 @@ export class ContextMenu implements OnDestroy {
 
   /** Moves keyboard focus to the next or previous navigable top-level item. */
   private moveFocus(fromIndex: number, direction: 1 | -1): void {
-    const items: ContextMenuItem[] = this.visibleItems();
-    let next: number = fromIndex + direction;
-    while (next >= 0 && next < items.length) {
-      if (!items[next]?.separator && !items[next]?.disabled) {
-        this.focusByVisibleIndex(next);
-        return;
-      }
-      next += direction;
+    const total: number = this.flatFocusableItems().length;
+    if (total === 0) {
+      return;
     }
+    const safeStartIndex: number = fromIndex >= 0 ? fromIndex : 0;
+    const nextIndex: number = (safeStartIndex + direction + total) % total;
+    this.focusByFlatIndex(nextIndex);
   }
 
   /** Focuses the first non-separator, non-disabled top-level item. */
   private focusFirstItem(): void {
-    const items: ContextMenuItem[] = this.visibleItems();
-    for (let index: number = 0; index < items.length; index++) {
-      if (!items[index]?.separator && !items[index]?.disabled) {
-        this.focusByVisibleIndex(index);
-        break;
-      }
+    if (this.flatFocusableItems().length > 0) {
+      this.focusByFlatIndex(0);
     }
   }
 
   /**
-   * Focuses the top-level link element at visible-item index `index`.
+   * Focuses the top-level link element at flat focusable index `index`.
    * Uses a direct DOM query within the panel for minimal coupling.
    */
-  private focusByVisibleIndex(index: number): void {
+  private focusByFlatIndex(index: number): void {
     const panel: HTMLElement | null = this.panelRef()?.nativeElement ?? null;
     if (!panel) {
       return;
     }
     const links: NodeListOf<HTMLElement> = panel.querySelectorAll<HTMLElement>(
-      ':scope > .ui-lib-context-menu__list > .ui-lib-context-menu__item > .ui-lib-context-menu__link'
+      ':scope > .ui-lib-context-menu__list > .ui-lib-context-menu__item > ' +
+        '.ui-lib-context-menu__link:not([aria-disabled="true"])'
     );
     const link: HTMLElement | undefined = links[index];
     if (link) {
-      this.focusedIndex.set(index);
+      this.rovingIndex.set(index);
+      const focusedItem: ContextMenuItem | undefined = this.flatFocusableItems()[index];
+      const visibleIndex: number =
+        focusedItem !== undefined ? this.visibleItems().indexOf(focusedItem) : -1;
+      this.focusedIndex.set(visibleIndex);
       link.focus();
     }
+  }
+
+  /** Captures the best focus restoration target before the menu opens. */
+  private capturePreviousFocus(event: MouseEvent): void {
+    const activeElement: HTMLElement | null = this.documentRef.activeElement as HTMLElement | null;
+    if (activeElement && activeElement !== this.documentRef.body) {
+      this.previousFocusEl = activeElement;
+      return;
+    }
+    if (event.currentTarget instanceof HTMLElement) {
+      this.previousFocusEl = event.currentTarget;
+      return;
+    }
+    if (event.target instanceof HTMLElement) {
+      this.previousFocusEl = event.target;
+      return;
+    }
+    this.previousFocusEl = null;
+  }
+
+  /** Restores focus to the element active before `show()` and clears the reference. */
+  private restoreFocus(): void {
+    this.previousFocusEl?.focus();
+    this.previousFocusEl = null;
   }
 
   /**
