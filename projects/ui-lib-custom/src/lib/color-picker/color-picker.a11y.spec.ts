@@ -270,10 +270,10 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('hex input label is associated via for/id', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
-      const hexInputs: NodeListOf<HTMLInputElement> =
-        host.querySelectorAll<HTMLInputElement>('input[type="text"]');
-      expect(hexInputs.length).toBeGreaterThan(0);
-      const hexInput: HTMLInputElement = hexInputs[0];
+      const hexInput: HTMLInputElement | null = host.querySelector<HTMLInputElement>(
+        '.ui-lib-colorpicker__text-input'
+      );
+      if (!hexInput) throw new Error('Expected hex input to exist');
       const inputId: string = hexInput.id;
       expect(inputId).toBeTruthy();
       const label: HTMLLabelElement | null = host.querySelector<HTMLLabelElement>(
@@ -307,8 +307,9 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('all number inputs have associated labels', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
-      const numberInputs: NodeListOf<HTMLInputElement> =
-        host.querySelectorAll<HTMLInputElement>('input[type="number"]');
+      const numberInputs: NodeListOf<HTMLInputElement> = host.querySelectorAll<HTMLInputElement>(
+        '.ui-lib-colorpicker__number-input'
+      );
       expect(numberInputs.length).toBe(3);
       numberInputs.forEach((input: HTMLInputElement): void => {
         const inputId: string = input.id;
@@ -322,9 +323,9 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('H input value is a number in range 0–359', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
-      const numberInputs: NodeListOf<HTMLInputElement> =
-        host.querySelectorAll<HTMLInputElement>('input[type="number"]');
-      const hInput: HTMLInputElement = numberInputs[0];
+      const hInput: HTMLInputElement | null =
+        host.querySelector<HTMLInputElement>(`input[id$="-h-input"]`);
+      if (!hInput) throw new Error('Expected H input to exist');
       const value: number = Number.parseInt(hInput.value, 10);
       expect(value).toBeGreaterThanOrEqual(0);
       expect(value).toBeLessThanOrEqual(359);
@@ -332,9 +333,9 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('S input value is a number in range 0–100', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
-      const numberInputs: NodeListOf<HTMLInputElement> =
-        host.querySelectorAll<HTMLInputElement>('input[type="number"]');
-      const sInput: HTMLInputElement = numberInputs[1];
+      const sInput: HTMLInputElement | null =
+        host.querySelector<HTMLInputElement>(`input[id$="-s-input"]`);
+      if (!sInput) throw new Error('Expected S input to exist');
       const value: number = Number.parseInt(sInput.value, 10);
       expect(value).toBeGreaterThanOrEqual(0);
       expect(value).toBeLessThanOrEqual(100);
@@ -342,9 +343,9 @@ describe('ColorPicker Accessibility', (): void => {
 
     it('B input value is a number in range 0–100', (): void => {
       const host: HTMLElement = fixture.nativeElement as HTMLElement;
-      const numberInputs: NodeListOf<HTMLInputElement> =
-        host.querySelectorAll<HTMLInputElement>('input[type="number"]');
-      const bInput: HTMLInputElement = numberInputs[2];
+      const bInput: HTMLInputElement | null =
+        host.querySelector<HTMLInputElement>(`input[id$="-b-input"]`);
+      if (!bInput) throw new Error('Expected B input to exist');
       const value: number = Number.parseInt(bInput.value, 10);
       expect(value).toBeGreaterThanOrEqual(0);
       expect(value).toBeLessThanOrEqual(100);
