@@ -10,9 +10,12 @@
   [attr.tabindex]="hostTabIndex()"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledbyResolved()"
+  [attr.aria-required]="required() ? 'true' : null"
+  [attr.aria-disabled]="isDisabled() ? 'true' : null"
   (click)="onSelect($event)"
   (focus)="onFocusIn($event)"
   (blur)="onNativeBlur($event)"
+  (keydown)="onNativeKeydown($event)"
 />
 
 <!-- Custom visual circle indicator -->

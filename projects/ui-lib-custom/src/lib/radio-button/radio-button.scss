@@ -200,3 +200,16 @@ ui-lib-radio-button.ui-lib-radio-button--variant-minimal.radio-button--filled
   --uilib-radio-button-focus-ring: 0 0 0 3px
     color-mix(in srgb, var(--uilib-color-primary-dark) 35%, transparent);
 }
+
+// ── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-radio-button {
+    --uilib-radio-button-transition-duration: 0ms;
+  }
+
+  ui-lib-radio-button .ui-lib-radio-button__box,
+  ui-lib-radio-button .ui-lib-radio-button__icon {
+    transition: none;
+  }
+}
