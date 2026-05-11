@@ -262,13 +262,13 @@ describe('Card Accessibility', (): void => {
 
   it('multiple card instances: title IDs are unique', async (): Promise<void> => {
     const fixture: ComponentFixture<TwoCardHost> = await setup(TwoCardHost);
-    const titles: NodeListOf<HTMLElement> = (fixture.nativeElement as HTMLElement).querySelectorAll(
-      '.ui-lib-card__title'
+    const titles: HTMLElement[] = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('.ui-lib-card__title')
     );
     expect(titles.length).toBe(2);
-    expect(titles[0].id).toBeTruthy();
-    expect(titles[1].id).toBeTruthy();
-    expect(titles[0].id).not.toBe(titles[1].id);
+    expect(titles[0]?.id).toBeTruthy();
+    expect(titles[1]?.id).toBeTruthy();
+    expect(titles[0]?.id).not.toBe(titles[1]?.id);
   });
 
   it('hoverable card: Enter key triggers click', async (): Promise<void> => {
