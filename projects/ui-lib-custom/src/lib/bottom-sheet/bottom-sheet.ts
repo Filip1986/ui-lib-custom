@@ -11,12 +11,17 @@ import {
   input,
   model,
   output,
+  PLATFORM_ID,
   ViewEncapsulation,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import type { InputSignal, ModelSignal, OnDestroy, OutputEmitterRef, Signal } from '@angular/core';
+import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { BottomSheetVariant } from './bottom-sheet.types';
 export type { BottomSheetVariant } from './bottom-sheet.types';
+
+let nextBottomSheetId: number = 0;
 
 /**
  * BottomSheet — a slide-up overlay panel anchored to the bottom of the viewport.
@@ -50,6 +55,15 @@ export class BottomSheet implements OnDestroy {
   private readonly injector: Injector = inject(Injector);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly platformId: object = inject(PLATFORM_ID);
+  private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
+
+  private focusTrap: FocusTrap | null = null;
+
+  /** Stable unique ID for this bottom-sheet instance. */
+  public readonly instanceId: string = `ui-lib-bottom-sheet-${++nextBottomSheetId}`;
+  /** ID of the title element used for `aria-labelledby` association. */
+  public readonly titleId: string = `${this.instanceId}-title`;
 
   /** Whether the sheet is open. Supports two-way binding via `[(visible)]`. */
   public readonly visible: ModelSignal<boolean> = model<boolean>(false);
@@ -98,20 +112,19 @@ export class BottomSheet implements OnDestroy {
         this.document.body.classList.add('ui-lib-bottom-sheet-scroll-lock');
         if (previousVisible === false) {
           this.shown.emit();
-          afterNextRender(
-            (): void => {
-              const panel: HTMLElement | null =
-                this.elementRef.nativeElement.querySelector<HTMLElement>(
-                  '.ui-lib-bottom-sheet__panel'
-                );
-              panel?.focus();
-            },
-            { injector: this.injector }
-          );
+          if (this.isBrowser) {
+            afterNextRender(
+              (): void => {
+                this.activateFocusTrap();
+              },
+              { injector: this.injector }
+            );
+          }
         }
       } else {
         this.document.body.classList.remove('ui-lib-bottom-sheet-scroll-lock');
         if (previousVisible === true) {
+          this.deactivateFocusTrap();
           this.hidden.emit();
         }
       }
@@ -122,6 +135,7 @@ export class BottomSheet implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.document.body.classList.remove('ui-lib-bottom-sheet-scroll-lock');
+    this.deactivateFocusTrap();
   }
 
   /** Close the sheet. */
@@ -141,5 +155,24 @@ export class BottomSheet implements OnDestroy {
     if (this.closeOnEscape() && this.visible()) {
       this.close();
     }
+  }
+
+  /** Activates the focus trap on the sheet panel, moving focus inside and trapping Tab. */
+  private activateFocusTrap(): void {
+    const panel: HTMLElement | null = this.elementRef.nativeElement.querySelector<HTMLElement>(
+      '.ui-lib-bottom-sheet__panel'
+    );
+    if (!panel) {
+      return;
+    }
+    this.deactivateFocusTrap();
+    this.focusTrap = new FocusTrap(panel);
+    this.focusTrap.activate();
+  }
+
+  /** Deactivates the focus trap and restores focus to the previously focused element. */
+  private deactivateFocusTrap(): void {
+    this.focusTrap?.deactivate();
+    this.focusTrap = null;
   }
 }
