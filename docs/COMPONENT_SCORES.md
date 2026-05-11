@@ -51,7 +51,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | #    | Component     | Key a11y concern                                                           | Status     |
 |------|---------------|----------------------------------------------------------------------------|------------|
 | 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ⏳ Queued   |
-| 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ⏳ Queued   |
+| 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done     |
 | 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ⏳ Queued   |
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ⏳ Queued   |
 | 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done     |
@@ -157,7 +157,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| Checkbox      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleSwitch  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

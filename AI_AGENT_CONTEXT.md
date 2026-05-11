@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Storybook coverage expansion COMPLETE (PR #36); next is ContextMenu hardening
-- **Next queue:** ContextMenu hardening (Tier 2, #14) — key a11y: same as TieredMenu + trigger `aria-haspopup=menu`
+- **Active focus:** Checkbox hardening COMPLETE (Tier 3, #22)
+- **Next queue:** RadioButton hardening (Tier 3, #23) — key a11y: `role=radiogroup`, `aria-required`, keyboard focus between siblings
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -78,6 +78,45 @@ Terminal notes:
   - Open-state axe assertions needed `aria-allowed-attr` disabled because parent listbox options
     intentionally expose `aria-expanded` / `aria-haspopup` for hierarchical navigation semantics.
 Next step: InputNumber hardening (Tier 3, #26).
+
+Date: 2026-05-10 [Checkbox component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/checkbox/checkbox.ts
+      • Renamed module counter to `nextCheckboxId` and exposed per-instance `checkboxId`
+      • Added `viewChild` + `afterRenderEffect` sync so native input `.indeterminate` property follows the `indeterminate` signal
+      • Kept `ariaChecked` tri-state behavior (`false` / `true` / `mixed`) intact
+      • Updated host click handling to avoid double-toggle when clicking associated internal label
+  - projects/ui-lib-custom/src/lib/checkbox/checkbox.html
+      • Added native input template ref (`#nativeInput`) for indeterminate property sync
+      • Added `aria-required` and `aria-disabled` bindings
+      • Updated visible label element to `<label>` with `for` mapped to native input `id`
+      • Marked checkmark and indeterminate icons as `aria-hidden="true"`
+  - projects/ui-lib-custom/src/lib/checkbox/checkbox.scss
+      • Added `--uilib-checkbox-transition-duration` token and wired transitions to it
+      • Added `@media (prefers-reduced-motion: reduce)` to set transition duration to `0ms`
+  - projects/ui-lib-custom/src/lib/checkbox/checkbox.a11y.spec.ts
+      • Expanded from 1 test to 20 tests covering id/for linkage, aria-checked tri-state,
+        required/disabled aria reflection, icon aria-hidden, unique ids, and 5 axe scenarios
+        (unchecked, checked, indeterminate, disabled, required)
+  - projects/ui-lib-custom/src/lib/checkbox/README.md
+      • Added explicit accessibility behavior notes (`aria-checked`, `aria-required`, `aria-disabled`)
+      • Documented group-labeling as consumer responsibility (`fieldset/legend` or `role="group"`)
+      • Added CVA/forms note and CSS custom property + reduced-motion note
+  - docs/COMPONENT_SCORES.md
+      • Tier 3 queue row #22 Checkbox: ⏳ Queued → ✅ Done
+      • Checkbox score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Checkbox hardening complete with accessibility-critical requirements implemented
+  (indeterminate mixed state, unique ids, explicit label association, reduced motion support,
+  group-labeling documentation, and expanded a11y test coverage).
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/checkbox/ --max-warnings 0 (CLEAN, EXIT:0)
+  node_modules/.bin/jest --testPathPatterns=checkbox --no-coverage (67/67 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  Screenshot: /tmp/checkbox-hardening.png (demo route: /checkbox)
+Terminal notes: Playwright browser binaries were installed with `npx playwright install chromium`
+  to capture demo screenshot in this environment.
+Next step: RadioButton hardening (Tier 3, #23).
 
 Date: 2026-05-10 [axe-core full-page sweep — Playwright e2e infrastructure]
 Changed:
@@ -379,4 +418,3 @@ Next step: ContextMenu hardening (Tier 2, #14) — key a11y: trigger aria-haspop
   escape/click-outside focus restoration, same as TieredMenu pattern.
 
 ---
-
