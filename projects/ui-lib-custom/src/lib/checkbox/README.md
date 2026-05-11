@@ -50,3 +50,42 @@
 <ui-lib-checkbox label="Angular" [value]="'angular'" [(ngModel)]="selected" />
 <ui-lib-checkbox label="React" [value]="'react'" [(ngModel)]="selected" />
 ```
+
+## Accessibility notes
+
+- The component uses a native `<input type="checkbox">` and keeps `aria-checked` in sync with all three states: `"false"`, `"true"`, and `"mixed"` (`indeterminate`).
+- `required` maps to both the native required behavior and `aria-required`.
+- `disabled` maps to both native disabled behavior and `aria-disabled`.
+- The visual checkmark/dash icons are decorative (`aria-hidden="true"`).
+
+### Group labeling (consumer responsibility)
+
+`ui-lib-checkbox` does not wrap related checkboxes into a semantic group automatically. For multiple related choices, wrap them in a labeled group:
+
+```html
+<fieldset>
+  <legend>Notification types</legend>
+  <ui-lib-checkbox label="Email" [(checked)]="emailEnabled" />
+  <ui-lib-checkbox label="SMS" [(checked)]="smsEnabled" />
+</fieldset>
+```
+
+or
+
+```html
+<div role="group" aria-labelledby="notifications-group-label">
+  <span id="notifications-group-label">Notification types</span>
+  <ui-lib-checkbox label="Email" [(checked)]="emailEnabled" />
+  <ui-lib-checkbox label="SMS" [(checked)]="smsEnabled" />
+</div>
+```
+
+## Forms integration
+
+`ui-lib-checkbox` implements `ControlValueAccessor`, so it works with both template-driven and reactive Angular forms.
+
+## CSS custom properties
+
+- `--uilib-checkbox-transition-duration` controls checkbox motion timing.
+- Reduced motion is respected automatically:
+  - `@media (prefers-reduced-motion: reduce) { --uilib-checkbox-transition-duration: 0ms; }`

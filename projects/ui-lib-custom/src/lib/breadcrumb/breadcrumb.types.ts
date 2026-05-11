@@ -6,6 +6,8 @@ export type BreadcrumbSize = 'sm' | 'md' | 'lg';
 
 /** A single item in the breadcrumb trail. */
 export interface BreadcrumbItem {
+  /** Stable optional key used for list rendering/identity tracking. */
+  id?: string;
   /** Display label for the item. */
   label?: string;
   /** External URL for anchor href-based navigation. */
@@ -17,6 +19,8 @@ export interface BreadcrumbItem {
    * Rendered as a plain `<span>` with this class applied.
    */
   icon?: string;
+  /** Accessible name for icon-only items (for example, home icon without visible label). */
+  iconAriaLabel?: string;
   /** Link target attribute (e.g. `_blank`). Only used when `url` is set. */
   target?: string;
   /** When true, the item is non-interactive and visually muted. */

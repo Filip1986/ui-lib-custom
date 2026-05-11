@@ -53,6 +53,8 @@ ui-lib-cascade-select.ui-lib-cascade-select {
   --uilib-cascade-select-submenu-gap: 0;
 
   --uilib-cascade-select-transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  --uilib-cascade-select-panel-animation-duration: 0.16s;
+  --uilib-cascade-select-level-animation-duration: 0.18s;
   --uilib-cascade-select-loading-size: 1rem;
 
   position: relative;
@@ -138,6 +140,8 @@ ui-lib-cascade-select .ui-lib-cascade-select__panel,
   background: var(--uilib-cascade-select-panel-bg);
   box-shadow: var(--uilib-cascade-select-panel-shadow);
   overflow: hidden;
+  animation: uilib-cascade-select-panel-in var(--uilib-cascade-select-panel-animation-duration)
+    ease-out;
 }
 
 ui-lib-cascade-select .ui-lib-cascade-select__panel.ui-lib-cascade-select__panel--overlay,
@@ -196,6 +200,8 @@ ui-lib-cascade-select .ui-lib-cascade-select__level,
   overflow: auto;
   border-inline-end: 1px solid
     color-mix(in srgb, var(--uilib-cascade-select-panel-border) 60%, transparent);
+  animation: uilib-cascade-select-level-in var(--uilib-cascade-select-level-animation-duration)
+    ease-out;
 }
 
 ui-lib-cascade-select .ui-lib-cascade-select__level:last-child,
@@ -387,5 +393,37 @@ ui-lib-cascade-select.ui-lib-cascade-select--minimal .ui-lib-cascade-select__opt
 @keyframes uilib-cascade-select-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes uilib-cascade-select-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes uilib-cascade-select-level-in {
+  from {
+    opacity: 0;
+    transform: translateX(0.375rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-cascade-select .ui-lib-cascade-select__panel,
+  .ui-lib-cascade-select__panel,
+  ui-lib-cascade-select .ui-lib-cascade-select__level,
+  .ui-lib-cascade-select__level {
+    animation: none;
+    transition: none;
   }
 }

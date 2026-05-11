@@ -99,6 +99,10 @@ export const COLOR_PICKER_IDS: {
   readonly SpectrumSuffix: 'spectrum';
   readonly HueSuffix: 'hue';
   readonly HiddenInputSuffix: 'input';
+  readonly HexInputSuffix: 'hex-input';
+  readonly HueInputSuffix: 'h-input';
+  readonly SatInputSuffix: 's-input';
+  readonly BrightInputSuffix: 'b-input';
 } = {
   Prefix: 'ui-lib-colorpicker',
   TriggerSuffix: 'trigger',
@@ -106,4 +110,8 @@ export const COLOR_PICKER_IDS: {
   SpectrumSuffix: 'spectrum',
   HueSuffix: 'hue',
   HiddenInputSuffix: 'input',
+  HexInputSuffix: 'hex-input',
+  HueInputSuffix: 'h-input',
+  SatInputSuffix: 's-input',
+  BrightInputSuffix: 'b-input',
 } as const;

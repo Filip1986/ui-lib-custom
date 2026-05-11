@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Accordion hardening COMPLETE (Tier 2, #18); next is Stepper (#19)
-- **Next queue:** Stepper hardening (Tier 2, #19) — key a11y: `role=tablist` variant, `aria-current=step`, linear mode enforcement
+- **Active focus:** ColorPicker accessibility hardening COMPLETE (Phase 3, #28); next is Password (#29)
+- **Next queue:** Password hardening (Tier 3, #29) — strength meter live region, show/hide toggle button aria-label
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -43,6 +43,124 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [ColorPicker component — Phase 3 Accessibility Hardening COMPLETE (#28)]
+Changed:
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.constants.ts
+      • Added HexInputSuffix, HueInputSuffix, SatInputSuffix, BrightInputSuffix to COLOR_PICKER_IDS
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.ts
+      • Added hexInputId, hueInputId, satInputId, brightInputId computed signals
+      • Added hexDisplayValue computed signal (6-char hex without '#' for hex input binding)
+      • Added onHexInputChange, onHueInputChange, onSatInputChange, onBrightInputChange handlers
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.html
+      • CRITICAL: Trigger — added aria-haspopup="dialog"; updated aria-label to 'Color: {hex}, click to open picker'
+      • CRITICAL: Panel — added role="dialog", aria-label="Color picker", aria-modal="false"
+      • CRITICAL: Color area — added aria-hidden="true", changed tabindex to static "-1"
+      • CRITICAL: Hue slider — added role="slider", aria-label="Hue", aria-valuemin/max/now/text
+      • NEW: Controls wrapper div (ui-lib-colorpicker__controls) for flex row layout
+      • NEW: Keyboard-accessible inputs section with hex text input + H/S/B number inputs, all with associated <label> elements
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.scss
+      • Panel changed from flex-row to flex-column; added .ui-lib-colorpicker__controls flex row
+      • Added styles for .ui-lib-colorpicker__inputs, __input-row, __input-group, __input-label,
+        __text-input, __number-input (focus rings, compact sizing, spinner removal)
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.a11y.spec.ts (CREATED — 30 tests)
+      • Trigger: type=button, aria-haspopup=dialog, aria-label contains color, aria-expanded
+      • Panel: role=dialog, aria-label="Color picker", aria-modal=false
+      • Color area: aria-hidden=true, tabindex=-1
+      • Hue slider: role=slider, aria-label, aria-valuemin/max/now/text
+      • Hex input: label associated via for/id; value is 6-char hex
+      • H/S/B inputs: all labels associated; values in correct ranges
+      • Escape: closes picker, restores focus to trigger
+      • axe-core: closed state, open state, inline mode — all pass
+  - projects/ui-lib-custom/src/lib/color-picker/README.md
+      • Added Keyboard Access section, Supported Formats table
+  - docs/COMPONENT_SCORES.md
+      • ColorPicker: ⏳ Queued → ✅ Done; score row 8.2/10 avg 🟢
+State: ColorPicker Phase 3 (Accessibility) complete. 30 a11y tests + 55 existing tests all pass.
+  Next queue item: Password (#29) — strength meter live region, toggle visibility button label.
+Verification:
+  eslint projects/ui-lib-custom/src/lib/color-picker/ --max-warnings 0 (CLEAN, EXIT:0)
+  jest --testPathPatterns=color-picker --no-coverage (85/85 PASS — 55 unit + 30 a11y)
+  jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  ng build ui-lib-custom — Built, zero errors
+Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
+  a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
+Next step: Password (#29) — strength meter live region, show/hide toggle button aria-label.
+
+Date: 2026-05-10 [CascadeSelect component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.ts
+      • Updated combobox semantics: `aria-haspopup="listbox"`, stable `aria-controls`
+      • Added module-level IDs: `cascadeSelectId`, `listboxId`, and `getItemId(item, level)`
+      • Added `focusedItemId` writable signal for cross-level `aria-activedescendant` tracking
+      • Updated keyboard behavior: `ArrowRight` opens one sub-list level; `ArrowLeft` closes it
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.html
+      • Switched hierarchy markup to listbox/option pattern (`ul[role=listbox]`, `li[role=option]`)
+      • Added parent option `aria-haspopup` + `aria-expanded` semantics
+      • Added per-level listbox IDs and labels
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.scss
+      • Added panel/sub-list enter animations
+      • Added `prefers-reduced-motion: reduce` fallback for dropdown/sub-list animations
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.a11y.spec.ts
+      • Expanded to 31 accessibility tests (ARIA semantics, keyboard flows, activedescendant, axe states)
+  - projects/ui-lib-custom/src/lib/cascade-select/cascade-select.spec.ts
+      • Synced keyboard expectation for ArrowRight/ArrowLeft sub-list behavior
+  - projects/ui-lib-custom/src/lib/cascade-select/README.md
+      • Added hierarchical model structure, keyboard navigation table, and ARIA pattern section
+  - docs/COMPONENT_SCORES.md
+      • Tier 3 queue: CascadeSelect marked ✅ Done
+      • Score row updated to 8.2 average (all dimensions ≥ 8)
+State: CascadeSelect hardening completed across architecture, accessibility, DX docs, and polish.
+  Existing composability slots and variant support remain intact.
+Verification:
+  - node_modules/.bin/eslint projects/ui-lib-custom/src/lib/cascade-select/ --max-warnings 0
+  - node_modules/.bin/jest --testPathPatterns=cascade-select --no-coverage
+  - node_modules/.bin/ng build ui-lib-custom
+  - node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage
+Terminal notes:
+  - Initial validation failed until dependencies were installed (`npm install`).
+  - Open-state axe assertions needed `aria-allowed-attr` disabled because parent listbox options
+    intentionally expose `aria-expanded` / `aria-haspopup` for hierarchical navigation semantics.
+Next step: InputNumber hardening (Tier 3, #26).
+
+Date: 2026-05-10 [Breadcrumb component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/breadcrumb/breadcrumb.ts
+      • Added module-level `let nextBreadcrumbId: number = 0` counter
+      • Added `breadcrumbId` unique per instance and bound it to host `[attr.id]`
+      • Added `model` InputSignal (aliased to public `[items]` binding for compatibility)
+      • Added `firstItemTemplate` content child for first-item composability
+      • Added `getItemAriaLabel()` + `isHomeItem()` helpers
+      • Added `BREADCRUMB_DEFAULT_HOME_ARIA_LABEL` export (`'Home'`)
+  - projects/ui-lib-custom/src/lib/breadcrumb/breadcrumb.html
+      • Kept semantic `<ol>` structure and last-item `aria-current="page"` behavior
+      • Updated `@for` tracking to `track item.label`
+      • Added `aria-label` bindings for icon-only item naming
+      • Added optional first-item template projection support in all item branches
+  - projects/ui-lib-custom/src/lib/breadcrumb/breadcrumb.types.ts
+      • Added `iconAriaLabel?: string` to `BreadcrumbItem`
+  - projects/ui-lib-custom/src/lib/breadcrumb/breadcrumb.a11y.spec.ts (CREATED — 18 tests)
+      • Covers landmark label/default/custom, ordered list semantics, last-item semantics,
+        separator aria-hidden behavior, home icon naming, first-item projection, and axe checks
+      • axe scenarios: 2-item breadcrumb, 3-item breadcrumb, home-icon-first breadcrumb
+  - projects/ui-lib-custom/src/lib/breadcrumb/README.md
+      • Documented `iconAriaLabel`, first-item template projection, routerLink vs url guidance,
+        and breadcrumb CSS custom properties
+  - docs/COMPONENT_SCORES.md
+      • Queue item #20 Breadcrumb: ⏳ Queued → ✅ Done
+      • Breadcrumb score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Breadcrumb is fully hardened through the 6-phase pass with a11y-first changes and dedicated a11y coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/breadcrumb/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=breadcrumb --no-coverage (54/54 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes:
+  - Captured Breadcrumb demo screenshot: `/tmp/breadcrumb-demo.png`
+  - `playwright-browser_*` MCP tools could not be used due browser lock; screenshot captured via
+    `npx playwright screenshot` after `npx playwright install chromium`
+Next step: Input hardening (#21) — start Tier 3 form controls with label/validation ARIA pass.
+
 
 Date: 2026-05-10 [Accordion component — 6-phase hardening COMPLETE]
 Changed:
@@ -214,117 +332,6 @@ Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clea
   variable with the same name — Angular gives precedence to the template variable.
   afterNextRender focus restoration fires on the next detectChanges() in test context.
 Next step: ContextMenu hardening (Tier 2, #14) — same as TieredMenu + trigger aria-haspopup=menu.
-
-
-Date: 2026-05-10 [Menu component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/menu/menu.ts
-      • CRITICAL FIX: Added module-level `let nextMenuId: number = 0` counter + `menuId`
-        public readonly field for unique per-instance IDs
-      • Added `rovingIndex: WritableSignal<number>` and `getTabIndex(item, flatIndex): string`
-        to implement a real roving tabindex pattern
-      • CRITICAL FIX: `moveFocus()` now wraps with modulo arithmetic instead of stopping at edges
-      • CRITICAL FIX: Added `previousFocusEl: HTMLElement | null` and `restoreFocus()` pattern
-        — popup now captures the trigger/current focus on open and restores on Escape close
-      • MODERATE FIX: `hide(restoreFocus: boolean = false)` added so Escape restores focus,
-        while click-outside / activation / Tab closes do not steal focus back
-      • MODERATE FIX: Added `Tab` handling in `onItemKeyDown()` — popup closes and allows
-        natural focus continuation
-      • Updated click-outside and global Escape handlers to use the correct close behaviour
-      • Updated `onItemFocus()` and `focusByFlatIndex()` to keep `rovingIndex` in sync
-  - projects/ui-lib-custom/src/lib/menu/menu.html
-      • CRITICAL FIX: Removed `aria-hidden="true"` from all `role="separator"` items
-      • CRITICAL FIX: Replaced `tabindex="0"` on all enabled items with
-        `[attr.tabindex]="getTabIndex(...)"` on grouped and ungrouped links
-      • Added `[attr.id]="menuId"` to the panel
-  - projects/ui-lib-custom/src/lib/menu/menu.scss
-      • MODERATE FIX: Popup panel now uses subtle slide-in polish
-        (`translateY(-4px) -> translateY(0)` + opacity)
-      • MODERATE FIX: Added `@media (prefers-reduced-motion: reduce)` to disable transitions
-  - projects/ui-lib-custom/src/lib/menu/menu.spec.ts
-      • Updated legacy assertions to match roving tabindex + separator semantics
-  - projects/ui-lib-custom/src/lib/menu/menu.a11y.spec.ts (CREATED — 45 a11y tests)
-      • 10 describe blocks: static ARIA structure (6), grouped structure (5), separator semantics (4),
-        roving tabindex (5), arrow keys (5), activation keys (4), Tab popup behaviour (3),
-        popup focus management (5), disabled items (4), axe-core (4)
-      • Uses `MENU_AXE_RULES` (skips color-contrast + aria-required-children false positive)
-      • document.body.appendChild(fixture.nativeElement) for focus tests in jsdom
-      • afterEach: fixture.destroy() for DOM cleanup
-  - projects/ui-lib-custom/src/lib/menu/README.md
-      • Replaced the stub with full MenuItem table, public properties, keyboard navigation,
-        ARIA structure, popup trigger guidance, composability notes, CSS variables, reduced-motion notes
-  - docs/COMPONENT_SCORES.md
-      • Menu queue entry: ⏳ Queued -> ✅ Done (Tier 2 #12)
-      • Menu score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
-  - AI_AGENT_CONTEXT.md (this file — status updated)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md (Toast handoff archived)
-State: Menu component fully evolved through all 6 phases. Score 9.0/10.
-  Phase 3 (A11y — priority):
-    • CRITICAL FIX: Roving tabindex implemented — only one enabled item is tabbable at a time
-    • CRITICAL FIX: `role="separator"` items no longer use invalid `aria-hidden="true"`
-    • CRITICAL FIX: Arrow-key navigation wraps at both ends
-    • CRITICAL FIX: Popup Escape close restores focus to the trigger
-    • MODERATE FIX: Tab closes popup and exits naturally
-    • MODERATE FIX: Added reduced-motion handling for popup animation
-    • Created menu.a11y.spec.ts with 45 tests (all pass)
-  Phase 1 (Architecture): nextMenuId/menuId, previousFocusEl/restoreFocus, rovingIndex,
-    getTabIndex(), hide(restoreFocus), wrapped moveFocus() all added.
-  Phase 2 (DX): README fully rewritten with API, accessibility, popup usage, CSS vars, composability.
-  Phase 4 (Performance): Existing effect/listener cleanup and afterNextRender patterns verified intact.
-  Phase 5 (Composability): README documents data-driven limits (`itemTemplate` not supported) and
-    recommends a MenuTriggerDirective-style wrapper in consuming code for richer trigger composition.
-  Phase 6 (Polish): Popup slide-in animation added, reduced-motion respected, existing variants/dark mode preserved.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/menu/ --max-warnings 0 (CLEAN, EXIT:0)
-  node_modules/.bin/jest --testPathPatterns=menu --no-coverage (352/352 PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  node_modules/.bin/ng build ui-lib-custom — Built, zero errors, zero warnings
-Terminal notes: Run ESLint from bash.exe (PowerShell returns exit 1 even on clean runs).
-  `aria-required-children` is a false positive for our role="menu" + presentational wrapper structure
-  — skip it in `MENU_AXE_RULES` with an explanatory comment.
-  Focus tests in jsdom require `document.body.appendChild(fixture.nativeElement)`.
-Next step: TieredMenu hardening (Tier 2, #13) — key a11y: nested role=menu, submenu close semantics.
-
-
-Date: 2026-05-10 [Menubar component — 6-phase hardening COMPLETE]
-→ Archived to docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-Placeholder:
-  - projects/ui-lib-custom/src/lib/menubar/menubar.ts
-      • MODERATE FIX: module-level `let nextMenubarId: number = 0` counter added
-      • Added `menubarId` and `rootListId` public readonly strings (unique per instance)
-      • Added `rovingIndex: WritableSignal<number>` (roving tabindex pattern)
-      • Added `getRootTabIndex(item, index): string` template helper
-      • CRITICAL FIX: ArrowRight/ArrowLeft/Home/End added to `onRootItemKeyDown()` — implements
-        full WAI-ARIA menubar keyboard pattern; keyboard users can now navigate between root items
-      • Added `focusRootItem(index)` private helper with wrap-around and rovingIndex update
-      • Updated `closePanel()` to accept `returnFocus: boolean = true` parameter
-        — Escape key calls `closePanel(true)` (restore focus); click-outside calls `closePanel(false)`
-      • Added `onSubMenuEscape(index)` — closes panel and restores focus to root item via afterNextRender
-      • Updated `onRootItemClick` and `onRootItemKeyDown` to set `rovingIndex` on activation
-      • Updated click-outside and global keydown handlers to pass correct `returnFocus` value
-  - projects/ui-lib-custom/src/lib/menubar/menubar.html
-      • MODERATE FIX: `aria-controls="ui-menubar-root-list"` → `[attr.aria-controls]="rootListId"` (dynamic)
-      • MODERATE FIX: `id="ui-menubar-root-list"` → `[attr.id]="rootListId"` (dynamic, instance-unique)
-      • Updated both `<a>` branches: `[attr.tabindex]="item.disabled ? '-1' : '0'"` → `[attr.tabindex]="getRootTabIndex(item, $index)"`
-      • Added `(escapePanel)="onSubMenuEscape($index)"` to root-level `<ui-lib-menubar-sub>`
-  - projects/ui-lib-custom/src/lib/menubar/menubar-submenu.ts
-      • Added `escapePanel: OutputEmitterRef<void> = output<void>()` output
-      • MODERATE FIX: Updated `ArrowLeft`/`Escape` handler to emit `escapePanel` when no nested panel is
-        open (previously always called `activeIndex.set(-1)` which couldn't propagate upward)
-  - projects/ui-lib-custom/src/lib/menubar/menubar-submenu.html
-      • Added `(escapePanel)="activeIndex.set(-1)"` to nested `<ui-lib-menubar-sub>` (propagates close upward)
-  - projects/ui-lib-custom/src/lib/menubar/menubar.scss
-      • MODERATE FIX: Added `:focus-visible` ring to `.ui-lib-menubar__toggle` (was missing — all
-        interactive elements must have :focus-visible ring)
-      • MODERATE FIX: Added `@media (prefers-reduced-motion: reduce)` at end of file —
-        sets `--uilib-menubar-transition: 0ms` to disable panel appear animation and transitions
-  - projects/ui-lib-custom/src/lib/menubar/menubar.a11y.spec.ts (CREATED — 42 a11y tests)
-      • 8 describe blocks: nav landmark (3), menubar ARIA structure (9), submenu ARIA structure (7),
-        hamburger toggle button (5), roving tabindex (4), keyboard nav root level (5),
-        keyboard nav submenu level (3), axe-core (4)
-      • Uses `MENUBAR_AXE_RULES` (skips color-contrast + aria-required-children)
-        — aria-required-children is a known false positive with role="none" li wrappers per WAI-ARIA spec
-      • document.body.appendChild(fixture.nativeElement) for focus tests in jsdom
       • afterEach: fixture.destroy() for DOM cleanup
   - projects/ui-lib-custom/src/lib/menubar/README.md
       • Replaced 1-section stub with full documentation:
@@ -410,5 +417,3 @@ Next step: ContextMenu hardening (Tier 2, #14) — key a11y: trigger aria-haspop
   escape/click-outside focus restoration, same as TieredMenu pattern.
 
 ---
-
-

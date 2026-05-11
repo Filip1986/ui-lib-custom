@@ -76,11 +76,18 @@ ui-lib-color-picker .ui-lib-colorpicker__panel,
   border-radius: var(--uilib-colorpicker-panel-border-radius, 6px);
   box-shadow: var(--uilib-colorpicker-panel-shadow, 0 4px 12px rgb(0 0 0 / 15%));
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
   gap: 0.75rem;
   transition:
     opacity var(--uilib-colorpicker-transition-duration, 200ms) ease,
     box-shadow var(--uilib-colorpicker-transition-duration, 200ms) ease;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__controls,
+.ui-lib-colorpicker__controls {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
 }
 
 ui-lib-color-picker.ui-lib-colorpicker:not(.ui-lib-colorpicker--inline) .ui-lib-colorpicker__panel {
@@ -248,4 +255,92 @@ ui-lib-color-picker.ui-lib-colorpicker--minimal .ui-lib-colorpicker__panel {
   box-shadow: none;
   border-color: color-mix(in srgb, var(--uilib-border, #d1d5db) 70%, transparent);
   background: color-mix(in srgb, var(--uilib-surface, #fff) 96%, transparent);
+}
+
+/* ── Keyboard-accessible inputs ───────────────────────────────────────────── */
+
+ui-lib-color-picker .ui-lib-colorpicker__inputs,
+.ui-lib-colorpicker__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__input-row,
+.ui-lib-colorpicker__input-row {
+  display: flex;
+  gap: 0.375rem;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__input-group,
+.ui-lib-colorpicker__input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__input-group--hex,
+.ui-lib-colorpicker__input-group--hex {
+  flex: none;
+  width: 100%;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__input-label,
+.ui-lib-colorpicker__input-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--uilib-text-secondary, #6b7280);
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__text-input,
+.ui-lib-colorpicker__text-input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.1875rem 0.375rem;
+  font-size: 0.6875rem;
+  font-family: var(--uilib-font-mono, monospace);
+  border: 1px solid var(--uilib-colorpicker-panel-border-color, #e5e7eb);
+  border-radius: var(--uilib-radius-sm, 3px);
+  background: transparent;
+  color: inherit;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__number-input,
+.ui-lib-colorpicker__number-input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.1875rem 0.25rem;
+  font-size: 0.6875rem;
+  border: 1px solid var(--uilib-colorpicker-panel-border-color, #e5e7eb);
+  border-radius: var(--uilib-radius-sm, 3px);
+  background: transparent;
+  color: inherit;
+  text-align: center;
+  line-height: 1.4;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__number-input::-webkit-inner-spin-button,
+ui-lib-color-picker .ui-lib-colorpicker__number-input::-webkit-outer-spin-button,
+.ui-lib-colorpicker__number-input::-webkit-inner-spin-button,
+.ui-lib-colorpicker__number-input::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+ui-lib-color-picker .ui-lib-colorpicker__text-input:focus-visible,
+.ui-lib-colorpicker__text-input:focus-visible,
+ui-lib-color-picker .ui-lib-colorpicker__number-input:focus-visible,
+.ui-lib-colorpicker__number-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--uilib-color-primary-600, #1e88e5) 30%, transparent);
+  border-color: var(--uilib-color-primary-600, #1e88e5);
 }
