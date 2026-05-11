@@ -59,7 +59,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ✅ Done     |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done     |
 | 29   | Password      | Strength meter live region, toggle visibility button label                 | ✅ Done     |
-| 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Queued   |
+| 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ✅ Done     |
 | 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ✅ Done     |
 
 ### Tier 4 — Data Display
