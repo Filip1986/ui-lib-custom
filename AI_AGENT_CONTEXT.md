@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Table accessibility hardening COMPLETE (6-phase, #32); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** BottomSheet accessibility hardening COMPLETE (6-phase, #76); next is TreeTable (#33, Tier 4 Data Display)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -38,6 +38,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 
 ---
 
@@ -51,6 +52,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
+Changed:
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
+      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
+      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
+      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
+      • Added `private focusTrap: FocusTrap | null = null` field
+      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
+      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
+      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
+      • Added `[id]="titleId"` to the title span for the ARIA association
+      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
+      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
+      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
+      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
+      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
+  - docs/COMPONENT_SCORES.md
+      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
 Changed:
@@ -91,32 +124,3 @@ Verification:
 Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
-Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
-  - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.

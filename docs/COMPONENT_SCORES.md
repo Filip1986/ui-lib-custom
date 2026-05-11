@@ -123,7 +123,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ⏳ Queued   |
 | 75   | ScrollTop       | `aria-label` on button                                    | ⏳ Queued   |
-| 76   | BottomSheet     | `role=dialog`, focus management                           | ⏳ Queued   |
+| 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
 
 > **Queue status key:** ⏳ Queued · 🔄 In progress · ✅ Done (all scores ≥ 8)
 
@@ -198,7 +198,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Dialog        | 9   | 9    | 8    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 8.6 | 🟢     |
 | DynamicDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Drawer        | 9   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
-| BottomSheet   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| BottomSheet   | 8   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Popover       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Tooltip       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ConfirmDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 | 🟢     |
