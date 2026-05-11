@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Table accessibility hardening COMPLETE (6-phase, #32); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); next is TreeTable (#33, Tier 4 Data Display)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -37,6 +37,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
+- `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
 
 ---
@@ -91,32 +92,33 @@ Verification:
 Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
+Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
+      • Added module-level `let nextBlockUiId: number = 0` counter
+      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
+      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
+      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
+      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
+      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
+      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
+      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
+      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
+      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
+  - projects/ui-lib-custom/src/lib/block-ui/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
   - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
+      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
+State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
+  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
+Terminal notes: Fresh clone required `npm install` before validation.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.

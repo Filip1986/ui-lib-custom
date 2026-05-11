@@ -19,6 +19,11 @@ ui-lib-block-ui {
   position: relative;
 }
 
+/* ── Content wrapper ────────────────────────────────────────────── */
+.ui-lib-block-ui__content {
+  display: contents;
+}
+
 /* ── Mask ───────────────────────────────────────────────────────── */
 .ui-lib-block-ui__mask {
   position: absolute;
@@ -37,6 +42,13 @@ ui-lib-block-ui {
 .ui-lib-block-ui__mask--visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-block-ui__mask {
+    transition: none;
+  }
 }
 
 /* ── Variant: material ──────────────────────────────────────────── */
