@@ -3,6 +3,7 @@
   [attr.role]="hoverable() ? 'button' : null"
   [attr.tabindex]="hoverable() ? 0 : null"
   [attr.aria-label]="hoverable() ? ariaLabel() || null : null"
+  [attr.aria-labelledby]="(!hoverable() && headerVisible()) ? titleId : null"
   (keydown)="onKeydown($event)"
   [style.--uilib-card-shadow]="shadow()"
   [style.--uilib-card-shadow-hover]="shadow()"
@@ -20,7 +21,7 @@
         />
       }
       <div class="ui-lib-card__header-text">
-        <div class="ui-lib-card__title">
+        <div class="ui-lib-card__title" [id]="titleId">
           <ng-content select="[card-header]"></ng-content>
         </div>
         <ng-content select="[card-subtitle]"></ng-content>

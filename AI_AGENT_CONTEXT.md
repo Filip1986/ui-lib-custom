@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Chart accessibility hardening COMPLETE (6-phase, #72); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** Card accessibility hardening COMPLETE (6-phase, #51); also merged: Chart (#72), Chip (#54), ContextMenu (#14)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -38,6 +38,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
 - `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
 - `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
@@ -54,6 +55,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
+Changed:
+  - projects/ui-lib-custom/src/lib/card/card.ts
+      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
+      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
+  - projects/ui-lib-custom/src/lib/card/card.html
+      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
+      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
+  - projects/ui-lib-custom/src/lib/card/card.scss
+      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
+      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
+      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
+  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
+      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
+      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
+      • Added closable card accessible label coverage
+      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
+      • Added axe checks for basic, hoverable, closable, and multi-variant states
+  - projects/ui-lib-custom/src/lib/card/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
+      • Added full Accessibility section with examples, guidelines, and reduced-motion note
+  - docs/COMPONENT_SCORES.md
+      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
+State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
 
 Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
 Changed:
@@ -105,7 +138,7 @@ Changed:
   - projects/ui-lib-custom/src/lib/chip/chip.spec.ts
       • Updated TestHostComponent to wire `selectable`, `selected`, and `selectedChange`
       • Replaced `'should apply role="option" on host'` with explicit non-removable/removable role tests
-      • Added 10 new unit tests (selectable class, selected class, aria-selected, tabindex, Space/Enter keyboard, unique ID)
+      • Added 10 new unit tests
   - projects/ui-lib-custom/src/lib/chip/chip.a11y.spec.ts (CREATED — 18 tests)
   - projects/ui-lib-custom/src/lib/chip/README.md
   - docs/COMPONENT_SCORES.md
@@ -118,29 +151,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass (or resume from queue).
-
-Date: 2026-05-11 [ContextMenu — 6-phase hardening COMPLETE (#14)]
-Changed:
-  - projects/ui-lib-custom/src/lib/context-menu/context-menu.ts
-  - projects/ui-lib-custom/src/lib/context-menu/context-menu.html
-  - projects/ui-lib-custom/src/lib/context-menu/context-menu.scss
-  - projects/ui-lib-custom/src/lib/context-menu/context-menu.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/context-menu/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: Complete
-  Phase 3 (A11y):
-    • CRITICAL FIX: Removed aria-hidden="true" from role="separator" items (top-level + submenu)
-    • CRITICAL FIX: Added roving tabindex for top-level items (single tabindex="0")
-    • CRITICAL FIX: Added focus capture/restore flow for Escape/programmatic close paths
-    • MODERATE FIX: Tab key now closes the menu without blocking natural tab order
-    • MODERATE FIX: Added prefers-reduced-motion handling for panel/caret transitions
-    • Created context-menu.a11y.spec.ts (31 tests)
-  Phase 1: Added module-level ID counter + contextMenuId and rovingIndex reset on show.
-  Phase 2: README now documents trigger ARIA pattern, keyboard map, accessibility notes, and CSS variables.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/context-menu/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=context-menu --no-coverage (86/86 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: PanelMenu hardening (Tier 2, #15).

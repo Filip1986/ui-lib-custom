@@ -98,7 +98,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component       | Primary focus                                             | Status     |
 |------|-----------------|-----------------------------------------------------------|------------|
-| 51   | Card            | API composability, slot flexibility, hover/focus polish   | ⏳ Queued   |
+| 51   | Card            | API composability, slot flexibility, hover/focus polish   | ✅ Done    |
 | 52   | Badge           | Positioning variants, `aria-label` passthrough            | ⏳ Queued   |
 | 53   | Tag             | Dismissible variant `aria-label`                          | ⏳ Queued   |
 | 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done    |
@@ -176,6 +176,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component   | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
+| Card        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Inline      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

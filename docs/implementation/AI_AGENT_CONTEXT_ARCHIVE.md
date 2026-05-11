@@ -1359,3 +1359,29 @@ Changed:
 State: Branch merged with origin/main. Manual conflict resolution isolated to AI_AGENT_CONTEXT.md.
 Verification: All four verification commands PASS.
 Next step: TreeTable (#33) hardening.
+
+Date: 2026-05-11 [ContextMenu — 6-phase hardening COMPLETE (#14)]
+Changed:
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.ts
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.html
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.scss
+  - projects/ui-lib-custom/src/lib/context-menu/context-menu.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/context-menu/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: Complete
+  Phase 3 (A11y):
+    • CRITICAL FIX: Removed aria-hidden="true" from role="separator" items (top-level + submenu)
+    • CRITICAL FIX: Added roving tabindex for top-level items (single tabindex="0")
+    • CRITICAL FIX: Added focus capture/restore flow for Escape/programmatic close paths
+    • MODERATE FIX: Tab key now closes the menu without blocking natural tab order
+    • MODERATE FIX: Added prefers-reduced-motion handling for panel/caret transitions
+    • Created context-menu.a11y.spec.ts (31 tests)
+  Phase 1: Added module-level ID counter + contextMenuId and rovingIndex reset on show.
+  Phase 2: README now documents trigger ARIA pattern, keyboard map, accessibility notes, and CSS variables.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/context-menu/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=context-menu --no-coverage (86/86 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Next step: PanelMenu hardening (Tier 2, #15).
