@@ -4,6 +4,7 @@ import {
   computed,
   contentChild,
   contentChildren,
+  ElementRef,
   inject,
   input,
   model,
@@ -54,7 +55,7 @@ import { PaginatorComponent } from 'ui-lib-custom/paginator';
 import type { PaginatorPageEvent } from 'ui-lib-custom/paginator';
 
 /** Monotonic counter for unique element IDs. */
-let tableIdCounter: number = 0;
+let nextTableId: number = 0;
 
 /**
  * Table component — displays tabular data with sorting, filtering, selection,
@@ -86,6 +87,8 @@ export class TableComponent {
   // ---------------------------------------------------------------------------
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly hostElement: ElementRef<HTMLElement> =
+    inject<ElementRef<HTMLElement>>(ElementRef);
 
   // ---------------------------------------------------------------------------
   // Data inputs
@@ -343,12 +346,27 @@ export class TableComponent {
   // ---------------------------------------------------------------------------
 
   /** Unique ID prefix for this instance. */
-  public readonly componentId: string = `ui-lib-table-${++tableIdCounter}`;
+  public readonly tableId: string = `ui-lib-table-${++nextTableId}`;
+
+  /** Unique ID for the visible caption container when present. */
+  public readonly captionId: string = `${this.tableId}-caption`;
+
+  /** Backward-compatible alias for the table instance ID. */
+  public readonly componentId: string = this.tableId;
 
   /** Per-column filter values, keyed by column field. */
   public readonly columnFilters: WritableSignal<Map<string, string>> = signal<Map<string, string>>(
     new Map()
   );
+
+  /** Roving focus position used for keyboard navigation in grid mode. */
+  private readonly activeGridCell: WritableSignal<{ row: number; column: number }> = signal<{
+    row: number;
+    column: number;
+  }>({
+    row: 0,
+    column: 0,
+  });
 
   /** Index of the last-clicked row for Shift-click range selection. */
   private lastClickedRowIndex: number = -1;
@@ -463,6 +481,62 @@ export class TableComponent {
     return selArray.length > 0;
   });
 
+  /** `true` when the table exposes interactive grid behavior. */
+  public readonly isInteractiveGrid: Signal<boolean> = computed<boolean>((): boolean => {
+    if (this.selectionMode() !== null) {
+      return true;
+    }
+    if (this.expansionTemplate() !== undefined) {
+      return true;
+    }
+    return this.columns().some((column: TableColumnComponent): boolean => column.sortable());
+  });
+
+  /** ARIA role for the table element. */
+  public readonly tableRole: Signal<'grid' | 'table'> = computed<'grid' | 'table'>(
+    (): 'grid' | 'table' => (this.isInteractiveGrid() ? 'grid' : 'table')
+  );
+
+  /** Optional caption linkage used when no explicit aria-label is supplied. */
+  public readonly tableAriaLabelledBy: Signal<string | null> = computed<string | null>(
+    (): string | null =>
+      this.ariaLabel() === null && (this.captionTemplate() !== undefined || this.caption() !== null)
+        ? this.captionId
+        : null
+  );
+
+  /** `aria-multiselectable` value for grid mode. */
+  public readonly gridAriaMultiselectable: Signal<'true' | 'false' | null> = computed<
+    'true' | 'false' | null
+  >((): 'true' | 'false' | null => {
+    if (this.tableRole() !== 'grid' || this.selectionMode() === null) {
+      return null;
+    }
+    return this.selectionMode() === 'multiple' || this.selectionMode() === 'checkbox'
+      ? 'true'
+      : 'false';
+  });
+
+  /** Header rows rendered before the body rows, used for `aria-rowindex` math. */
+  public readonly headerRowCount: Signal<number> = computed<number>((): number =>
+    this.hasColumnFilters() ? 2 : 1
+  );
+
+  /** Total row count announced to assistive technology when rows are paginated. */
+  public readonly ariaRowCount: Signal<number | null> = computed<number | null>(
+    (): number | null =>
+      this.paginator() ? this.totalRecords() + this.headerRowCount() : this.totalRecords()
+  );
+
+  /** Normalized roving-focus target clamped to the currently rendered grid bounds. */
+  private readonly normalizedActiveGridCell: Signal<{ row: number; column: number }> = computed<{
+    row: number;
+    column: number;
+  }>((): { row: number; column: number } => {
+    const activeCell: { row: number; column: number } = this.activeGridCell();
+    return this.clampGridPosition(activeCell.row, activeCell.column);
+  });
+
   // ---------------------------------------------------------------------------
   // Public helpers (called from template)
   // ---------------------------------------------------------------------------
@@ -565,6 +639,122 @@ export class TableComponent {
     if (this.sortOrder() === 1) return 'ascending';
     if (this.sortOrder() === -1) return 'descending';
     return 'none';
+  }
+
+  /**
+   * Returns a descriptive accessible label for sortable column headers.
+   */
+  public sortableColumnAriaLabel(column: TableColumnComponent): string {
+    const label: string = column.header() || column.field() || 'Column';
+    const field: string = column.sortField() ?? column.field();
+    return this.ariaSortValue(field) === 'ascending'
+      ? `Sort by ${label} descending`
+      : `Sort by ${label} ascending`;
+  }
+
+  /**
+   * Returns the zero-based column offset contributed by special leading columns.
+   */
+  public leadingColumnCount(): number {
+    return (this.expansionTemplate() ? 1 : 0) + (this.selectionMode() === 'checkbox' ? 1 : 0);
+  }
+
+  /**
+   * Returns the zero-based grid column index for a data column.
+   */
+  public dataColumnIndex(columnIndex: number): number {
+    return this.leadingColumnCount() + columnIndex;
+  }
+
+  /**
+   * Converts a zero-based grid column index into a one-based `aria-colindex`.
+   */
+  public ariaColumnIndex(columnIndex: number): number {
+    return columnIndex + 1;
+  }
+
+  /**
+   * Returns the one-based `aria-rowindex` for the header row when pagination is enabled.
+   */
+  public headerAriaRowIndex(rowOffset: number): number | null {
+    if (!this.paginator()) {
+      return null;
+    }
+    return rowOffset + 1;
+  }
+
+  /**
+   * Returns the one-based `aria-rowindex` for a visible body row when pagination is enabled.
+   */
+  public bodyAriaRowIndex(rowIndex: number): number | null {
+    if (!this.paginator()) {
+      return null;
+    }
+    return this.headerRowCount() + this.first() + rowIndex + 1;
+  }
+
+  /**
+   * Returns the row coordinate used by keyboard navigation for a visible body row.
+   */
+  public bodyGridRowIndex(rowIndex: number): number {
+    return rowIndex + 1;
+  }
+
+  /**
+   * Returns the tabindex for a grid cell in roving-tabindex mode.
+   */
+  public gridCellTabIndex(row: number, column: number): '0' | '-1' | null {
+    if (this.tableRole() !== 'grid' || this.disabled()) {
+      return null;
+    }
+    const activeCell: { row: number; column: number } = this.normalizedActiveGridCell();
+    return activeCell.row === row && activeCell.column === column ? '0' : '-1';
+  }
+
+  /**
+   * Updates the roving-focus target when a focusable grid cell receives focus.
+   */
+  public onGridCellFocus(row: number, column: number): void {
+    if (this.tableRole() !== 'grid' || this.disabled()) {
+      return;
+    }
+    this.activeGridCell.set({ row, column });
+  }
+
+  /**
+   * Moves roving focus between grid cells with arrow, Home, and End keys.
+   */
+  public onGridCellKeydown(event: KeyboardEvent, row: number, column: number): void {
+    if (this.tableRole() !== 'grid' || this.disabled()) {
+      return;
+    }
+
+    let nextPosition: { row: number; column: number } | null = null;
+    switch (event.key) {
+      case 'ArrowRight':
+        nextPosition = this.clampGridPosition(row, column + 1);
+        break;
+      case 'ArrowLeft':
+        nextPosition = this.clampGridPosition(row, column - 1);
+        break;
+      case 'ArrowDown':
+        nextPosition = this.clampGridPosition(row + 1, column);
+        break;
+      case 'ArrowUp':
+        nextPosition = this.clampGridPosition(row - 1, column);
+        break;
+      case 'Home':
+        nextPosition = this.clampGridPosition(row, 0);
+        break;
+      case 'End':
+        nextPosition = this.clampGridPosition(row, this.totalColumnCount() - 1);
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    this.focusGridCell(nextPosition.row, nextPosition.column);
   }
 
   /**
@@ -931,5 +1121,29 @@ export class TableComponent {
       }
       return undefined;
     }, row as unknown);
+  }
+
+  private totalColumnCount(): number {
+    return Math.max(this.columns().length + this.leadingColumnCount(), 1);
+  }
+
+  private clampGridPosition(row: number, column: number): { row: number; column: number } {
+    const maxRow: number = Math.max(this.displayedRows().length, 0);
+    const maxColumn: number = Math.max(this.totalColumnCount() - 1, 0);
+    return {
+      row: Math.min(Math.max(row, 0), maxRow),
+      column: Math.min(Math.max(column, 0), maxColumn),
+    };
+  }
+
+  private focusGridCell(row: number, column: number): void {
+    const nextPosition: { row: number; column: number } = this.clampGridPosition(row, column);
+    this.activeGridCell.set(nextPosition);
+
+    const targetElement: HTMLElement | null =
+      this.hostElement.nativeElement.querySelector<HTMLElement>(
+        `[data-grid-row="${nextPosition.row}"][data-grid-col="${nextPosition.column}"]`
+      );
+    targetElement?.focus();
   }
 }

@@ -79,6 +79,19 @@
 | `frozen` | `boolean` | `false` | Sticky column on the left |
 | `styleClass` | `string \| null` | `null` | Extra class on every `<td>` and `<th>` in this column |
 
+### Column definition shape
+
+Use one `<ui-lib-table-column>` per visible column. The effective column definition is:
+
+```ts
+interface TableColumnDefinition {
+  field: string;
+  header: string;
+  sortable?: boolean;
+  width?: string | null;
+}
+```
+
 ---
 
 ## Usage
@@ -97,3 +110,43 @@
   </ui-lib-table-column>
 </ui-lib-table>
 ```
+
+## Selection modes
+
+| Mode | Behavior |
+|------|----------|
+| `null` | No row selection; rows do not expose `aria-selected` |
+| `'single'` | One selected row at a time; the grid exposes `aria-multiselectable="false"` |
+| `'multiple'` | Click/keyboard selection across multiple rows; the grid exposes `aria-multiselectable="true"` |
+| `'checkbox'` | Selection uses a checkbox column and `aria-multiselectable="true"` |
+
+## Keyboard navigation
+
+Interactive tables render with `role="grid"` and use roving tabindex across header and body cells.
+
+| Key | Behavior |
+|-----|----------|
+| `Tab` / `Shift+Tab` | Enter or leave the grid from the currently active cell |
+| `ArrowLeft` / `ArrowRight` | Move focus between cells in the same row |
+| `ArrowUp` / `ArrowDown` | Move focus to the previous or next row in the same column |
+| `Home` / `End` | Move focus to the first or last cell in the current row |
+| `Enter` / `Space` | Activate the focused sortable header or selectable row |
+
+## Pagination notes
+
+- When `[paginator]="true"`, the table exposes `aria-rowcount` for the full filtered dataset.
+- Visible body rows receive `aria-rowindex` so assistive technology can announce their position in the paginated result set.
+- Built-in pagination remains client-side; use `pageChanged` to coordinate server-side data fetching if needed.
+
+## CSS custom properties
+
+| Variable | Purpose |
+|----------|---------|
+| `--uilib-table-border-color` | Grid and wrapper border color |
+| `--uilib-table-header-bg` | Header row background |
+| `--uilib-table-row-bg-hover` | Hovered row background |
+| `--uilib-table-row-bg-selected` | Selected row background |
+| `--uilib-table-selection-border-color` | Focus ring and selection accent |
+| `--uilib-table-sort-icon-color-active` | Active sort indicator color |
+| `--uilib-table-caption-bg` | Caption background |
+| `--uilib-table-paginator-margin-top` | Space above the embedded paginator |

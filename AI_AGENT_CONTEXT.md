@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Rating accessibility hardening COMPLETE (6-phase, #30); next is Table (#32, Tier 4 Data Display)
-- **Next queue:** Table hardening (Tier 4, #32) — role=grid, column sort aria-sort, row selection aria-selected, pagination
+- **Active focus:** Table accessibility hardening COMPLETE (6-phase, #32); next is TreeTable (#33, Tier 4 Data Display)
+- **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -34,6 +34,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `RadioButton` -> ✅ complete + hardened (6-phase, 64 tests — 40 unit + 24 a11y)
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
+- `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
 
 ---
 
@@ -47,6 +48,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
+Changed:
+  - projects/ui-lib-custom/src/lib/table/table.component.ts
+      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
+      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
+      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
+      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
+  - projects/ui-lib-custom/src/lib/table/table.component.html
+      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
+      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
+  - projects/ui-lib-custom/src/lib/table/table.component.scss
+      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
+  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
+      • Updated sortable-header tabindex expectations to match roving tabindex behavior
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
+      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
+  - projects/ui-lib-custom/src/lib/table/README.md
+      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
+  - docs/COMPONENT_SCORES.md
+      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
+State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
+  reduced-motion support, and dedicated a11y regression coverage are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
+Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [Rating component — accessibility hardening COMPLETE (#30)]
 Changed:
@@ -119,33 +150,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: node_modules/.bin/ prefix required for jest/ng; npx works for eslint after npm install.
 Next step: Rating hardening (Tier 3, #30).
-
-Date: 2026-05-11 [Knob component — accessibility hardening COMPLETE (#31)]
-Changed:
-  - projects/ui-lib-custom/src/lib/knob/knob.component.ts
-      • Moved slider semantics to host (`role=slider`, `aria-valuenow/min/max/valuetext`, keyboard + pointer handlers)
-      • Added `getValueText()` helper for `aria-valuetext`
-      • Added requestAnimationFrame-throttled drag updates and RAF cleanup on pointer-up/destroy
-  - projects/ui-lib-custom/src/lib/knob/knob.component.html
-      • Marked SVG as decorative (`aria-hidden="true"`, `focusable="false"`)
-      • Removed interactive ARIA/event bindings from SVG
-  - projects/ui-lib-custom/src/lib/knob/knob.component.scss
-      • Added `prefers-reduced-motion: reduce` block (`--uilib-knob-transition-duration: 0ms`)
-  - projects/ui-lib-custom/src/lib/knob/knob.component.spec.ts
-      • Updated ARIA assertions to target knob host element semantics
-  - projects/ui-lib-custom/src/lib/knob/knob.a11y.spec.ts (CREATED — 21 tests)
-      • Added role/ARIA assertions, keyboard equivalence coverage, disabled behavior, decorative SVG checks
-      • Added axe checks for default, min, max, and disabled states
-  - projects/ui-lib-custom/src/lib/knob/README.md
-      • Added accessibility behavior and keyboard support table
-  - docs/COMPONENT_SCORES.md
-      • Knob queue status set to ✅ Done; score row populated (avg 8.2)
-State: Knob hardening complete with host-level slider semantics, keyboard parity for drag operations,
-  decorative SVG semantics, reduced-motion support, and dedicated a11y test coverage.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/knob/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=knob --no-coverage (56/56 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Installed dependencies via `npm install` in fresh clone before running validation commands.
-Next step: Table (#32) hardening — start Tier 4 Data Display.
