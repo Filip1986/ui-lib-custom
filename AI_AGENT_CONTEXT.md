@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Checkbox hardening COMPLETE (Tier 3, #22)
-- **Next queue:** RadioButton hardening (Tier 3, #23) — key a11y: `role=radiogroup`, `aria-required`, keyboard focus between siblings
+- **Active focus:** ColorPicker accessibility hardening COMPLETE (Phase 3, #28); next is Password (#29)
+- **Next queue:** Password hardening (Tier 3, #29) — strength meter live region, show/hide toggle button aria-label
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -42,6 +42,49 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [ColorPicker component — Phase 3 Accessibility Hardening COMPLETE (#28)]
+Changed:
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.constants.ts
+      • Added HexInputSuffix, HueInputSuffix, SatInputSuffix, BrightInputSuffix to COLOR_PICKER_IDS
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.ts
+      • Added hexInputId, hueInputId, satInputId, brightInputId computed signals
+      • Added hexDisplayValue computed signal (6-char hex without '#' for hex input binding)
+      • Added onHexInputChange, onHueInputChange, onSatInputChange, onBrightInputChange handlers
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.html
+      • CRITICAL: Trigger — added aria-haspopup="dialog"; updated aria-label to 'Color: {hex}, click to open picker'
+      • CRITICAL: Panel — added role="dialog", aria-label="Color picker", aria-modal="false"
+      • CRITICAL: Color area — added aria-hidden="true", changed tabindex to static "-1"
+      • CRITICAL: Hue slider — added role="slider", aria-label="Hue", aria-valuemin/max/now/text
+      • NEW: Controls wrapper div (ui-lib-colorpicker__controls) for flex row layout
+      • NEW: Keyboard-accessible inputs section with hex text input + H/S/B number inputs, all with associated <label> elements
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.scss
+      • Panel changed from flex-row to flex-column; added .ui-lib-colorpicker__controls flex row
+      • Added styles for .ui-lib-colorpicker__inputs, __input-row, __input-group, __input-label,
+        __text-input, __number-input (focus rings, compact sizing, spinner removal)
+  - projects/ui-lib-custom/src/lib/color-picker/color-picker.a11y.spec.ts (CREATED — 30 tests)
+      • Trigger: type=button, aria-haspopup=dialog, aria-label contains color, aria-expanded
+      • Panel: role=dialog, aria-label="Color picker", aria-modal=false
+      • Color area: aria-hidden=true, tabindex=-1
+      • Hue slider: role=slider, aria-label, aria-valuemin/max/now/text
+      • Hex input: label associated via for/id; value is 6-char hex
+      • H/S/B inputs: all labels associated; values in correct ranges
+      • Escape: closes picker, restores focus to trigger
+      • axe-core: closed state, open state, inline mode — all pass
+  - projects/ui-lib-custom/src/lib/color-picker/README.md
+      • Added Keyboard Access section, Supported Formats table
+  - docs/COMPONENT_SCORES.md
+      • ColorPicker: ⏳ Queued → ✅ Done; score row 8.2/10 avg 🟢
+State: ColorPicker Phase 3 (Accessibility) complete. 30 a11y tests + 55 existing tests all pass.
+  Next queue item: Password (#29) — strength meter live region, toggle visibility button label.
+Verification:
+  eslint projects/ui-lib-custom/src/lib/color-picker/ --max-warnings 0 (CLEAN, EXIT:0)
+  jest --testPathPatterns=color-picker --no-coverage (85/85 PASS — 55 unit + 30 a11y)
+  jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  ng build ui-lib-custom — Built, zero errors
+Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
+  a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
+Next step: Password (#29) — strength meter live region, show/hide toggle button aria-label.
 
 Date: 2026-05-10 [CascadeSelect component — 6-phase hardening COMPLETE]
 Changed:
@@ -117,46 +160,6 @@ Terminal notes:
     `npx playwright screenshot` after `npx playwright install chromium`
 Next step: Input hardening (#21) — start Tier 3 form controls with label/validation ARIA pass.
 
-Date: 2026-05-10 [Checkbox component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/checkbox/checkbox.ts
-      • Renamed module counter to `nextCheckboxId` and exposed per-instance `checkboxId`
-      • Added `viewChild` + `afterRenderEffect` sync so native input `.indeterminate` property follows the `indeterminate` signal
-      • Kept `ariaChecked` tri-state behavior (`false` / `true` / `mixed`) intact
-      • Updated host click handling to avoid double-toggle when clicking associated internal label
-  - projects/ui-lib-custom/src/lib/checkbox/checkbox.html
-      • Added native input template ref (`#nativeInput`) for indeterminate property sync
-      • Added `aria-required` and `aria-disabled` bindings
-      • Updated visible label element to `<label>` with `for` mapped to native input `id`
-      • Marked checkmark and indeterminate icons as `aria-hidden="true"`
-  - projects/ui-lib-custom/src/lib/checkbox/checkbox.scss
-      • Added `--uilib-checkbox-transition-duration` token and wired transitions to it
-      • Added `@media (prefers-reduced-motion: reduce)` to set transition duration to `0ms`
-  - projects/ui-lib-custom/src/lib/checkbox/checkbox.a11y.spec.ts
-      • Expanded from 1 test to 20 tests covering id/for linkage, aria-checked tri-state,
-        required/disabled aria reflection, icon aria-hidden, unique ids, and 5 axe scenarios
-        (unchecked, checked, indeterminate, disabled, required)
-  - projects/ui-lib-custom/src/lib/checkbox/README.md
-      • Added explicit accessibility behavior notes (`aria-checked`, `aria-required`, `aria-disabled`)
-      • Documented group-labeling as consumer responsibility (`fieldset/legend` or `role="group"`)
-      • Added CVA/forms note and CSS custom property + reduced-motion note
-  - docs/COMPONENT_SCORES.md
-      • Tier 3 queue row #22 Checkbox: ⏳ Queued → ✅ Done
-      • Checkbox score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
-State: Checkbox hardening complete with accessibility-critical requirements implemented
-  (indeterminate mixed state, unique ids, explicit label association, reduced motion support,
-  group-labeling documentation, and expanded a11y test coverage).
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/checkbox/ --max-warnings 0 (CLEAN, EXIT:0)
-  node_modules/.bin/jest --testPathPatterns=checkbox --no-coverage (67/67 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  Screenshot: /tmp/checkbox-hardening.png (demo route: /checkbox)
-Terminal notes: Playwright browser binaries were installed with `npx playwright install chromium`
-  to capture demo screenshot in this environment.
-Next step: RadioButton hardening (Tier 3, #23).
-
-Date: 2026-05-10 [axe-core full-page sweep — Playwright e2e infrastructure]
 Changed:
   - e2e/a11y-full-sweep.spec.ts (CREATED)
       • Visits all 91 non-redirect demo routes from app.routes.ts

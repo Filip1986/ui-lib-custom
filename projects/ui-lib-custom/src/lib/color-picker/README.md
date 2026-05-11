@@ -27,6 +27,29 @@
 | `onShow` | `void` | Popup panel opened |
 | `onHide` | `void` | Popup panel closed |
 
+## Keyboard Access
+
+The 2D saturation/brightness canvas area is marked `aria-hidden="true"` and is not in the keyboard tab order. Full keyboard access is provided through the numeric and text inputs at the bottom of the panel:
+
+| Input | Label | Range | Action |
+|-------|-------|-------|--------|
+| Hex | `Hex` | 6-char hex | Type a hex value (e.g. `ff0000`) and press Enter or blur |
+| Hue | `H` | 0 – 359 | Type or use arrow keys on the number input |
+| Saturation | `S` | 0 – 100 | Type or use arrow keys on the number input |
+| Brightness | `B` | 0 – 100 | Type or use arrow keys on the number input |
+
+The hue slider div also supports arrow keys when focused directly (keyboard accelerator: +Shift for 10-step jumps).
+
+**Escape** closes the popup panel and returns focus to the trigger button.
+
+## Supported Formats
+
+| Format | Output type | Example |
+|--------|-------------|---------|
+| `'hex'` | `string` (6-char, no `#`) | `'ff0000'` |
+| `'rgb'` | `{ r, g, b }` | `{ r: 255, g: 0, b: 0 }` |
+| `'hsb'` | `{ h, s, b }` | `{ h: 0, s: 100, b: 100 }` |
+
 ## Usage
 
 ```html
@@ -36,3 +59,4 @@
 <!-- inline picker -->
 <ui-lib-color-picker [inline]="true" format="rgb" [(ngModel)]="selectedColor" />
 ```
+
