@@ -895,14 +895,14 @@ describe('TableComponent', (): void => {
       });
     });
 
-    it('should have tabindex=0 on sortable headers', (): void => {
+    it('should use roving tabindex on sortable headers', (): void => {
       const sortableHeaders: NodeListOf<HTMLElement> = queryAll(
         fixture,
         '.ui-lib-table__th--sortable'
       );
-      sortableHeaders.forEach((header: HTMLElement): void => {
-        expect(header.getAttribute('tabindex')).toBe('0');
-      });
+      expect(sortableHeaders[0]?.getAttribute('tabindex')).toBe('0');
+      expect(sortableHeaders[1]?.getAttribute('tabindex')).toBe('-1');
+      expect(sortableHeaders[2]?.getAttribute('tabindex')).toBe('-1');
     });
   });
 });

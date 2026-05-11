@@ -324,6 +324,11 @@
   vertical-align: middle;
   word-break: break-word;
 
+  &:focus-visible {
+    outline: 2px solid var(--uilib-table-selection-border-color);
+    outline-offset: -2px;
+  }
+
   &--expander,
   &--checkbox {
     width: 3rem;
@@ -424,6 +429,12 @@
 .ui-lib-table__empty-cell {
   padding: 2.5rem var(--uilib-table-cell-padding-x);
   text-align: center;
+}
+
+.ui-lib-table__empty-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ui-lib-table__empty-message {
@@ -564,4 +575,12 @@
 .ui-lib-table--disabled {
   opacity: 0.6;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-table__row,
+  .ui-lib-table__filter-input,
+  .ui-lib-table__expander-btn {
+    transition: none;
+  }
 }
