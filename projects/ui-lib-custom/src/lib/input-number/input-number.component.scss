@@ -183,17 +183,24 @@ uilib-input-number .uilib-input-number-button {
   transition: var(--uilib-input-number-transition);
 }
 
-uilib-input-number .uilib-input-number-button:hover:not(:disabled) {
+uilib-input-number .uilib-input-number-button:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--uilib-input-number-button-hover-background);
 }
 
-uilib-input-number .uilib-input-number-button:active:not(:disabled) {
+uilib-input-number .uilib-input-number-button:active:not(:disabled):not([aria-disabled='true']) {
   background: var(--uilib-input-number-button-active-background);
 }
 
-uilib-input-number .uilib-input-number-button:disabled {
+uilib-input-number .uilib-input-number-button:disabled,
+uilib-input-number .uilib-input-number-button[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: var(--uilib-input-number-button-disabled-opacity);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  uilib-input-number {
+    --uilib-input-number-transition: none;
+  }
 }
 
 uilib-input-number.uilib-input-number-stacked .uilib-input-number-button-group {
