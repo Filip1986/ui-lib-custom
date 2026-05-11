@@ -22,7 +22,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - **Current milestone:** Component foundation hardening + documentation completeness
 - **Active focus:** Accordion hardening COMPLETE (Tier 2, #18); next is Stepper (#19)
 - **Next queue:** Stepper hardening (Tier 2, #19) — key a11y: `role=tablist` variant, `aria-current=step`, linear mode enforcement
-- **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit
+- **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
 
@@ -110,7 +110,31 @@ Next step: Stepper hardening (Tier 2, #19) — key a11y: role=tablist variant, a
   linear mode enforcement.
 
 
+Date: 2026-05-10 [axe-core full-page sweep — Playwright e2e infrastructure]
+Changed:
+  - e2e/a11y-full-sweep.spec.ts (CREATED)
+      • Visits all 91 non-redirect demo routes from app.routes.ts
+      • Each route: page.goto + waitForLoadState('networkidle') + AxeBuilder
+      • Tags: wcag2a, wcag2aa, wcag21a, wcag21aa
+      • Globally disabled: color-contrast (theming deferred), aria-required-children
+        (false positive for role="menu" + role="none" li wrapper per WAI-ARIA spec)
+      • Violations attached as axe-violations.json on failure for easy triage
+      • runAxeSweep() helper keeps per-test body one-liner for readability
+  - package.json
+      • Added "test:a11y:e2e:sweep": "playwright test e2e/a11y-full-sweep.spec.ts"
+      • Updated "test:a11y:all" to include sweep after the existing e2e pass
+State: Sweep infrastructure complete. Run npm run test:a11y:e2e:sweep (requires demo
+  running at localhost:4200) to surface existing violations across all 70+ components.
+  The sweep asserts zero violations — pages with pre-existing violations will fail and
+  produce an attached JSON report pinpointing exact rule, element, and impact level.
+Verification: File created; package.json scripts verified. No demo server available
+  to do a live run in this session.
+Terminal notes: playwright test picks up all *.spec.ts in e2e/ automatically; the sweep
+  is also available as a named script for targeted runs without the full suite.
+Next step: ContextMenu hardening (Tier 2, #14) OR run the sweep against a live demo
+  to identify the highest-severity violations across unscored components.
 
+Date: 2026-05-10 [TieredMenu component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/tiered-menu/tiered-menu.ts
       • Added module-level `let nextTieredMenuId: number = 0` counter
