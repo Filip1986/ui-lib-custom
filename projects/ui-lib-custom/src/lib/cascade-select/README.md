@@ -65,3 +65,44 @@
   [(ngModel)]="value"
 />
 ```
+
+## Hierarchical data model
+
+`CascadeSelect` expects a nested object tree. Root options are passed through `options`, and each
+level uses the matching key from `optionGroupChildren`.
+
+```typescript
+interface CountryNode {
+  name: string;
+  code: string;
+  states: Array<{
+    name: string;
+    cities: Array<{ cname: string; code: string }>;
+  }>;
+}
+```
+
+- `optionGroupChildren[0]` resolves the first nested level (`states`)
+- `optionGroupChildren[1]` resolves the second nested level (`cities`)
+- leaf values are emitted via `optionValue` when configured
+
+## Keyboard navigation
+
+| Key | Behavior |
+|---|---|
+| `ArrowDown` / `ArrowUp` | Opens panel (if closed) and moves active option within current level |
+| `ArrowRight` | Opens the focused group and moves focus to first option in the child list |
+| `ArrowLeft` | Closes the current sub-list and moves focus back to parent level |
+| `Enter` / `Space` | Selects focused leaf option (or expands focused group) |
+| `Escape` / `Tab` | Closes panel |
+| `Home` / `End` | Moves focus to first/last enabled option in the current level |
+
+## ARIA pattern
+
+- Trigger host uses `role="combobox"` with `aria-haspopup="listbox"`, `aria-expanded`,
+  `aria-controls`, and `aria-activedescendant`.
+- Each visible level is rendered as `<ul role="listbox">`.
+- Options are rendered as `<li role="option">`.
+- Parent options expose `aria-haspopup="listbox"` and `aria-expanded`.
+- `aria-activedescendant` always points at the currently keyboard-focused option, including
+  nested sub-lists.

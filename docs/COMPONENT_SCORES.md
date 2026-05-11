@@ -43,7 +43,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ⏳ Queued   |
 | 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ⏳ Queued   |
 | 19   | Stepper     | `role=tablist` variant, `aria-current=step`, linear mode enforcement            | ⏳ Queued   |
-| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ⏳ Queued   |
+| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ✅ Done     |
 
 ### Tier 3 — Form Controls
 *Focus: Label association, validation state announcements, group roles, indeterminate states.*
@@ -51,10 +51,10 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | #    | Component     | Key a11y concern                                                           | Status     |
 |------|---------------|----------------------------------------------------------------------------|------------|
 | 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ⏳ Queued   |
-| 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ⏳ Queued   |
+| 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done     |
 | 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ⏳ Queued   |
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ⏳ Queued   |
-| 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ⏳ Queued   |
+| 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done     |
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ⏳ Queued   |
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Queued   |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done     |
@@ -156,8 +156,8 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| CascadeSelect | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Checkbox      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
+| Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleSwitch  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -210,7 +210,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |-------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Tabs        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Accordion   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Breadcrumb  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Breadcrumb  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ContextMenu | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |

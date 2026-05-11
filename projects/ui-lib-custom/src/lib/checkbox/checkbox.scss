@@ -35,6 +35,7 @@ ui-lib-checkbox {
   --uilib-checkbox-size-lg: 1.5rem;
   --uilib-checkbox-font: var(--uilib-font-ui, inherit);
   --uilib-checkbox-padding-base: 0rem;
+  --uilib-checkbox-transition-duration: 150ms;
 
   display: inline-flex;
   position: relative;
@@ -94,9 +95,9 @@ ui-lib-checkbox .ui-lib-checkbox__box {
   align-items: center;
   position: relative;
   transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease,
-    box-shadow 0.15s ease;
+    border-color var(--uilib-checkbox-transition-duration) ease,
+    background-color var(--uilib-checkbox-transition-duration) ease,
+    box-shadow var(--uilib-checkbox-transition-duration) ease;
 }
 
 ui-lib-checkbox:not(.ui-lib-checkbox--disabled) .ui-lib-checkbox__box {
@@ -134,7 +135,7 @@ ui-lib-checkbox .ui-lib-checkbox__icon {
   height: 60%;
   opacity: 0;
   color: var(--uilib-checkbox-check-color);
-  transition: opacity 0.1s ease;
+  transition: opacity var(--uilib-checkbox-transition-duration) ease;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -253,4 +254,10 @@ ui-lib-checkbox.ui-lib-checkbox--variant-minimal.checkbox--filled {
   --uilib-checkbox-description-color: var(--uilib-text-dark-secondary);
   --uilib-checkbox-focus-ring: 0 0 0 3px
     color-mix(in srgb, var(--uilib-color-primary-dark) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-checkbox {
+    --uilib-checkbox-transition-duration: 0ms;
+  }
 }

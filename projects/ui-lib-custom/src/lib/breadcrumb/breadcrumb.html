@@ -1,5 +1,5 @@
 <ol class="ui-lib-breadcrumb__list">
-  @for (item of allItems(); track $index) {
+  @for (item of allItems(); track item.id ?? item.label ?? $index) {
     <li
       class="ui-lib-breadcrumb__item"
       [class.ui-lib-breadcrumb__item--active]="isLastItem($index)"
@@ -11,13 +11,21 @@
           class="ui-lib-breadcrumb__link"
           [routerLink]="item.routerLink"
           [attr.target]="item.target ?? null"
+          [attr.aria-label]="getItemAriaLabel(item, $index)"
           (click)="onItemClick($event, item)"
         >
-          @if (item.icon) {
-            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
-          }
-          @if (item.label) {
-            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          @if (isHomeItem($index) && firstItemTemplate(); as firstItemTpl) {
+            <ng-container
+              [ngTemplateOutlet]="firstItemTpl"
+              [ngTemplateOutletContext]="{ $implicit: item, item: item }"
+            />
+          } @else {
+            @if (item.icon) {
+              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+            @if (item.label) {
+              <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+            }
           }
         </a>
       }
@@ -28,13 +36,21 @@
           class="ui-lib-breadcrumb__link"
           [href]="item.url"
           [attr.target]="item.target ?? null"
+          [attr.aria-label]="getItemAriaLabel(item, $index)"
           (click)="onItemClick($event, item)"
         >
-          @if (item.icon) {
-            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
-          }
-          @if (item.label) {
-            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          @if (isHomeItem($index) && firstItemTemplate(); as firstItemTpl) {
+            <ng-container
+              [ngTemplateOutlet]="firstItemTpl"
+              [ngTemplateOutletContext]="{ $implicit: item, item: item }"
+            />
+          } @else {
+            @if (item.icon) {
+              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+            @if (item.label) {
+              <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+            }
           }
         </a>
       }
@@ -44,15 +60,23 @@
         <button
           type="button"
           class="ui-lib-breadcrumb__link ui-lib-breadcrumb__link--button"
+          [attr.aria-label]="getItemAriaLabel(item, $index)"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
           (click)="onItemClick($event, item)"
           (keydown)="onItemKeyDown($event, item)"
         >
-          @if (item.icon) {
-            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
-          }
-          @if (item.label) {
-            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          @if (isHomeItem($index) && firstItemTemplate(); as firstItemTpl) {
+            <ng-container
+              [ngTemplateOutlet]="firstItemTpl"
+              [ngTemplateOutletContext]="{ $implicit: item, item: item }"
+            />
+          } @else {
+            @if (item.icon) {
+              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+            @if (item.label) {
+              <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+            }
           }
         </button>
       }
@@ -62,13 +86,21 @@
         <span
           class="ui-lib-breadcrumb__current"
           [attr.aria-current]="isLastItem($index) ? 'page' : null"
+          [attr.aria-label]="getItemAriaLabel(item, $index)"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
         >
-          @if (item.icon) {
-            <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
-          }
-          @if (item.label) {
-            <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+          @if (isHomeItem($index) && firstItemTemplate(); as firstItemTpl) {
+            <ng-container
+              [ngTemplateOutlet]="firstItemTpl"
+              [ngTemplateOutletContext]="{ $implicit: item, item: item }"
+            />
+          } @else {
+            @if (item.icon) {
+              <span class="ui-lib-breadcrumb__item-icon {{ item.icon }}" aria-hidden="true"></span>
+            }
+            @if (item.label) {
+              <span class="ui-lib-breadcrumb__label">{{ item.label }}</span>
+            }
           }
         </span>
       }
@@ -84,4 +116,3 @@
     </li>
   }
 </ol>
-

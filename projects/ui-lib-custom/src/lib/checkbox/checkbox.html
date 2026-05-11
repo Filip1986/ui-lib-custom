@@ -1,4 +1,5 @@
 <input
+  #nativeInput
   [class]="nativeInputClasses()"
   type="checkbox"
   [id]="getNativeInputId()"
@@ -12,22 +13,24 @@
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledby()"
   [attr.aria-checked]="ariaChecked()"
+  [attr.aria-required]="required() ? 'true' : null"
+  [attr.aria-disabled]="isDisabled() ? 'true' : null"
   [attr.aria-describedby]="ariaDescribedby()"
   (click)="onToggle($event)"
   (focus)="onFocusIn($event)"
   (blur)="onNativeBlur($event)"
 />
 <div class="ui-lib-checkbox__box" role="presentation" aria-hidden="true">
-  <span [class]="checkIconClasses()"></span>
-  <span class="ui-lib-checkbox__icon ui-lib-checkbox__icon--indeterminate"></span>
+  <span [class]="checkIconClasses()" aria-hidden="true"></span>
+  <span class="ui-lib-checkbox__icon ui-lib-checkbox__icon--indeterminate" aria-hidden="true"></span>
 </div>
 <div class="ui-lib-checkbox__content">
-  <span class="ui-lib-checkbox__label" [id]="labelElementId">
+  <label class="ui-lib-checkbox__label" [id]="labelElementId" [htmlFor]="getNativeInputId()">
     @if (label()) {
       {{ label() }}
     }
     <ng-content />
-  </span>
+  </label>
   @if (showDescription()) {
     <span class="ui-lib-checkbox__description" [id]="descriptionElementId">
       {{ description() }}

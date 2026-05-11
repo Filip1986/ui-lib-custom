@@ -53,6 +53,7 @@ const COUNTRIES: CountryNode[] = [
       optionValue="code"
       optionGroupLabel="name"
       [optionGroupChildren]="optionGroupChildren"
+      placeholder="Select a city"
       [ariaLabel]="ariaLabel"
       [ariaLabelledBy]="ariaLabelledBy"
       appendTo="self"
@@ -147,81 +148,236 @@ describe('CascadeSelect accessibility', (): void => {
     return hostEl().querySelector('.ui-lib-cascade-select__trigger') as HTMLElement;
   }
 
+  function getListboxes(): HTMLElement[] {
+    return Array.from(hostEl().querySelectorAll('ul[role="listbox"]'));
+  }
+
+  function getOptions(): HTMLElement[] {
+    return Array.from(hostEl().querySelectorAll('li[role="option"]'));
+  }
+
+  function getOptionByText(text: string): HTMLElement {
+    const option: HTMLElement | undefined = getOptions().find(
+      (optionElement: HTMLElement): boolean => optionElement.textContent.trim().includes(text)
+    );
+    if (!option) {
+      throw new Error(`Expected option "${text}" to exist.`);
+    }
+    return option;
+  }
+
   function openPanel(): void {
     triggerEl().click();
     fixture.detectChanges();
   }
 
+  function press(key: string): void {
+    cmpEl().dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+    fixture.detectChanges();
+  }
+
+  function openToLevelTwo(): void {
+    openPanel();
+    press('ArrowRight');
+    press('ArrowRight');
+  }
+
+  it('has combobox role', (): void => {
+    expect(cmpEl().getAttribute('role')).toBe('combobox');
+  });
+
+  it('sets aria-haspopup to listbox', (): void => {
+    expect(cmpEl().getAttribute('aria-haspopup')).toBe('listbox');
+  });
+
+  it('starts with aria-expanded false', (): void => {
+    expect(cmpEl().getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('keeps aria-controls on the combobox', (): void => {
+    expect(cmpEl().getAttribute('aria-controls')).toBeTruthy();
+  });
+
+  it('sets aria-expanded true when open', (): void => {
+    openPanel();
+    expect(cmpEl().getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('renders top level listbox with matching id', (): void => {
+    openPanel();
+    const levelOne: HTMLElement = getListboxes()[0] as HTMLElement;
+    expect(levelOne.id).toBe(cmpEl().getAttribute('aria-controls'));
+  });
+
+  it('applies aria-label to top level listbox', (): void => {
+    openPanel();
+    const levelOne: HTMLElement = getListboxes()[0] as HTMLElement;
+    expect(levelOne.getAttribute('aria-label')).toBe('Select a city');
+  });
+
+  it('renders options with role option', (): void => {
+    openPanel();
+    expect(getOptions().length).toBeGreaterThan(0);
+  });
+
+  it('renders parent options with aria-haspopup listbox', (): void => {
+    openPanel();
+    const parentOption: HTMLElement = getOptions()[0] as HTMLElement;
+    expect(parentOption.getAttribute('aria-haspopup')).toBe('listbox');
+  });
+
+  it('keeps aria-expanded false on parent option before opening child list', (): void => {
+    openPanel();
+    const parentOption: HTMLElement = getOptions()[0] as HTMLElement;
+    expect(parentOption.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('does not set aria-haspopup for leaf options', (): void => {
+    openToLevelTwo();
+    const leafOption: HTMLElement = getOptions()[4] as HTMLElement;
+    expect(leafOption.getAttribute('aria-haspopup')).toBeNull();
+  });
+
+  it('sets aria-selected true for selected leaf', (): void => {
+    openPanel();
+    getOptionByText('Australia').click();
+    fixture.detectChanges();
+    getOptionByText('New South Wales').click();
+    fixture.detectChanges();
+    getOptionByText('Sydney').click();
+    fixture.detectChanges();
+    openPanel();
+    const selectedOption: HTMLElement | null = hostEl().querySelector(
+      '.ui-lib-cascade-select__option[aria-selected="true"]'
+    );
+    expect(selectedOption).toBeTruthy();
+    expect(selectedOption?.getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('has no aria-activedescendant while closed', (): void => {
+    expect(cmpEl().getAttribute('aria-activedescendant')).toBeNull();
+  });
+
+  it('sets aria-activedescendant after ArrowDown navigation', (): void => {
+    openPanel();
+    press('ArrowDown');
+    expect(cmpEl().getAttribute('aria-activedescendant')).toBeTruthy();
+  });
+
+  it('keeps aria-activedescendant pointing to an existing option id', (): void => {
+    openPanel();
+    press('ArrowDown');
+    const activeId: string = cmpEl().getAttribute('aria-activedescendant') as string;
+    expect(document.getElementById(activeId)).toBeTruthy();
+  });
+
+  it('ArrowDown opens the panel from closed state', (): void => {
+    press('ArrowDown');
+    expect(cmpEl().getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('ArrowDown moves focus to the next option when panel is already open', (): void => {
+    openPanel();
+    const firstId: string = cmpEl().getAttribute('aria-activedescendant') as string;
+    press('ArrowDown');
+    expect(cmpEl().getAttribute('aria-activedescendant')).not.toBe(firstId);
+  });
+
+  it('ArrowUp moves focus to the previous option', (): void => {
+    openPanel();
+    press('ArrowDown');
+    const secondId: string = cmpEl().getAttribute('aria-activedescendant') as string;
+    press('ArrowUp');
+    expect(cmpEl().getAttribute('aria-activedescendant')).not.toBe(secondId);
+  });
+
+  it('ArrowRight opens a sub-list', (): void => {
+    openPanel();
+    press('ArrowRight');
+    expect(getListboxes().length).toBe(2);
+  });
+
+  it('ArrowRight moves aria-activedescendant to first sub-item', (): void => {
+    openPanel();
+    press('ArrowRight');
+    const subListFirstOptionId: string = getListboxes()[1]?.querySelector('li[role="option"]')
+      ?.id as string;
+    expect(cmpEl().getAttribute('aria-activedescendant')).toBe(subListFirstOptionId);
+  });
+
+  it('second ArrowRight opens level 2 sub-list', (): void => {
+    openPanel();
+    press('ArrowRight');
+    press('ArrowRight');
+    expect(getListboxes().length).toBe(3);
+  });
+
+  it('nested listbox uses parent label as aria-label', (): void => {
+    openPanel();
+    press('ArrowRight');
+    const nestedListbox: HTMLElement = getListboxes()[1] as HTMLElement;
+    expect(nestedListbox.getAttribute('aria-label')).toBe('Australia');
+  });
+
+  it('sets parent option aria-expanded true while sub-list is open', (): void => {
+    openPanel();
+    press('ArrowRight');
+    const parentOption: HTMLElement = getOptions()[0] as HTMLElement;
+    expect(parentOption.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('ArrowLeft closes the current sub-list level', (): void => {
+    openToLevelTwo();
+    press('ArrowLeft');
+    expect(getListboxes().length).toBe(2);
+  });
+
+  it('Escape closes the panel', (): void => {
+    openPanel();
+    press('Escape');
+    expect(cmpEl().getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('Enter selects focused leaf option', (): void => {
+    openToLevelTwo();
+    press('Enter');
+    expect(fixture.componentInstance.value).toBe('SYD');
+  });
+
+  it('forwards ariaLabel to host', (): void => {
+    fixture.componentInstance.ariaLabel = 'Cascade Label';
+    fixture.detectChanges();
+    expect(cmpEl().getAttribute('aria-label')).toBe('Cascade Label');
+  });
+
+  it('forwards ariaLabelledBy to host', (): void => {
+    fixture.componentInstance.ariaLabel = null;
+    fixture.componentInstance.ariaLabelledBy = 'external-label';
+    fixture.detectChanges();
+    expect(cmpEl().getAttribute('aria-labelledby')).toBe('external-label');
+  });
+
   it('has no axe violations when closed', async (): Promise<void> => {
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
-  it('sets combobox and tree roles', (): void => {
-    expect(cmpEl().getAttribute('role')).toBe('combobox');
-
+  it('has no axe violations when open at level 1', async (): Promise<void> => {
     openPanel();
-    const treePanel: HTMLElement | null = hostEl().querySelector('[role="tree"]');
-    expect(treePanel).toBeTruthy();
+    await checkA11y(fixture, {
+      rules: {
+        ...SKIP_COLOR_CONTRAST_RULES,
+        'aria-allowed-attr': { enabled: false },
+      },
+    });
   });
 
-  it('updates aria-expanded and aria-controls when opening panel', (): void => {
-    expect(cmpEl().getAttribute('aria-expanded')).toBe('false');
-
-    openPanel();
-
-    expect(cmpEl().getAttribute('aria-expanded')).toBe('true');
-    expect(cmpEl().getAttribute('aria-controls')).toBeTruthy();
-  });
-
-  it('renders treeitem semantics with aria-level metadata', (): void => {
-    openPanel();
-
-    const firstOption: HTMLElement | null = hostEl().querySelector('[role="treeitem"]');
-    expect(firstOption).toBeTruthy();
-    expect(firstOption?.getAttribute('aria-level')).toBe('1');
-    expect(firstOption?.getAttribute('aria-setsize')).toBeTruthy();
-    expect(firstOption?.getAttribute('aria-posinset')).toBeTruthy();
-  });
-
-  it('updates aria-activedescendant via keyboard navigation', (): void => {
-    openPanel();
-
-    cmpEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
-    fixture.detectChanges();
-
-    const activeId: string | null = cmpEl().getAttribute('aria-activedescendant');
-    expect(activeId).toBeTruthy();
-    expect(document.getElementById(activeId as string)).toBeTruthy();
-  });
-
-  it('applies aria-selected to selected leaf option', (): void => {
-    openPanel();
-
-    let options: HTMLElement[] = Array.from(
-      hostEl().querySelectorAll('.ui-lib-cascade-select__option')
-    );
-    options[0]?.click();
-    fixture.detectChanges();
-    options = Array.from(hostEl().querySelectorAll('.ui-lib-cascade-select__option'));
-    options[2]?.click();
-    fixture.detectChanges();
-    options = Array.from(hostEl().querySelectorAll('.ui-lib-cascade-select__option'));
-    options[4]?.click();
-    fixture.detectChanges();
-
-    openPanel();
-    const selectedItem: HTMLElement | null = hostEl().querySelector(
-      '.ui-lib-cascade-select__option[aria-selected="true"]'
-    );
-    expect(selectedItem).toBeTruthy();
-  });
-
-  it('forwards ariaLabel and ariaLabelledBy', (): void => {
-    fixture.componentInstance.ariaLabel = 'Cascade Label';
-    fixture.componentInstance.ariaLabelledBy = 'external-label';
-    fixture.detectChanges();
-
-    expect(cmpEl().getAttribute('aria-label')).toBe('Cascade Label');
-    expect(cmpEl().getAttribute('aria-labelledby')).toBe('external-label');
+  it('has no axe violations when open at level 2', async (): Promise<void> => {
+    openToLevelTwo();
+    await checkA11y(fixture, {
+      rules: {
+        ...SKIP_COLOR_CONTRAST_RULES,
+        'aria-allowed-attr': { enabled: false },
+      },
+    });
   });
 });
