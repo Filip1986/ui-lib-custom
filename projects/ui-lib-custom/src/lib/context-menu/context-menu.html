@@ -5,6 +5,7 @@
     [class.ui-lib-context-menu__panel--positioned]="isPositioned()"
     [style.left.px]="menuX()"
     [style.top.px]="menuY()"
+    [attr.id]="contextMenuId"
     role="menu"
     [attr.aria-label]="ariaLabel()"
   >
@@ -14,7 +15,6 @@
           <li
             class="ui-lib-context-menu__separator"
             role="separator"
-            aria-hidden="true"
           ></li>
         } @else {
           <li
@@ -38,9 +38,10 @@
               [attr.aria-expanded]="
                 item.items?.length ? (activeSubmenuIndex() === $index ? 'true' : 'false') : null
               "
-              [attr.tabindex]="item.disabled ? '-1' : '0'"
+              [attr.tabindex]="getTabIndex(item, getFlatIndex(item))"
               (click)="onItemActivate($event, item, $index)"
               (keydown)="onItemKeyDown($event, item, $index)"
+              (focus)="onItemFocus(item, $index)"
             >
               @if (item.icon) {
                 <span
@@ -63,7 +64,6 @@
                     <li
                       class="ui-lib-context-menu__separator"
                       role="separator"
-                      aria-hidden="true"
                     ></li>
                   } @else {
                     <li
@@ -75,7 +75,7 @@
                         class="ui-lib-context-menu__link"
                         role="menuitem"
                         [attr.aria-disabled]="subItem.disabled ? 'true' : null"
-                        [attr.tabindex]="subItem.disabled ? '-1' : '0'"
+                        tabindex="-1"
                         (click)="onSubItemActivate($event, subItem)"
                         (keydown)="onSubItemKeyDown($event, subItem)"
                       >
@@ -100,4 +100,3 @@
     </ul>
   </div>
 }
-

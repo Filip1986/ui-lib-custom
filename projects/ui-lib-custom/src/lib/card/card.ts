@@ -27,6 +27,8 @@ import type { CardVariant, CardElevation } from './card.types';
 
 export type { CardVariant, CardElevation } from './card.types';
 
+let nextCardId: number = 0;
+
 /**
  * Card container component with optional header, footer, and theme scope.
  */
@@ -58,6 +60,8 @@ export class Card {
 
   /** Optional scoped theme override */
   public readonly theme: InputSignal<ThemeScopeInput | null> = input<ThemeScopeInput | null>(null);
+
+  public readonly titleId: string;
 
   private readonly el: ElementRef<HTMLElement> = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
@@ -94,6 +98,7 @@ export class Card {
   });
 
   constructor() {
+    this.titleId = `ui-lib-card-title-${nextCardId++}`;
     effect((): void => {
       this.applyThemeScope();
     });
