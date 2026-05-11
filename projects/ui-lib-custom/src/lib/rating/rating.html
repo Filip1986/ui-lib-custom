@@ -1,48 +1,64 @@
-<!-- Cancel / clear button — visible when cancel input is true -->
-@if (cancel()) {
-  <span
-    class="ui-lib-rating__cancel"
-    role="button"
-    [attr.tabindex]="getCancelTabIndex()"
-    [attr.aria-label]="'Clear rating'"
-    [attr.aria-disabled]="isDisabled() ? 'true' : null"
-    (click)="onCancelClick($event)"
-    (keydown.enter)="onCancelClick($event)"
-    (keydown.space)="onCancelClick($event)"
-  >
-    @if (cancelIconTemplate(); as cancelTpl) {
-      <ng-container [ngTemplateOutlet]="cancelTpl" />
-    } @else {
-      <span [class]="getCancelIconClass()" aria-hidden="true"></span>
-    }
-  </span>
-}
+@if (!readonly()) {
+  <!-- Cancel / clear button — visible when cancel input is true -->
+  @if (cancel()) {
+    <span
+      class="ui-lib-rating__cancel"
+      role="button"
+      [attr.tabindex]="getCancelTabIndex()"
+      [attr.aria-label]="'Clear rating'"
+      [attr.aria-disabled]="isDisabled() ? 'true' : null"
+      (click)="onCancelClick($event)"
+      (keydown.enter)="onCancelClick($event)"
+      (keydown.space)="onCancelClick($event)"
+    >
+      @if (cancelIconTemplate(); as cancelTpl) {
+        <ng-container [ngTemplateOutlet]="cancelTpl" />
+      } @else {
+        <span [class]="getCancelIconClass()" aria-hidden="true"></span>
+      }
+    </span>
+  }
 
-<!-- Star icons -->
-@for (star of starsArray(); track star) {
-  <span
-    [class]="'ui-lib-rating__star' + (isStarActive(star) ? ' ui-lib-rating__star--on' : '')"
-    role="radio"
-    [attr.aria-checked]="isStarChecked(star) ? 'true' : 'false'"
-    [attr.aria-label]="getStarAriaLabel(star)"
-    [attr.aria-posinset]="star"
-    [attr.aria-setsize]="stars()"
-    [attr.tabindex]="getStarTabIndex(star)"
-    [attr.aria-disabled]="isDisabled() ? 'true' : null"
-    (click)="onStarClick(star, $event)"
-    (mouseenter)="onStarHover(star)"
-    (mouseleave)="onStarLeave()"
-    (focus)="onStarFocus($event)"
-    (blur)="onStarBlur($event)"
-  >
-    @if (getIconTemplate(star); as iconTpl) {
-      <ng-container [ngTemplateOutlet]="iconTpl" />
-    } @else {
-      <span
-        [class]="getStarIconClass(star)"
-        [ngStyle]="getStarIconStyle(star)"
-        aria-hidden="true"
-      ></span>
-    }
-  </span>
+  <!-- Interactive star icons — Pattern A: radiogroup with roving tabindex -->
+  @for (star of starsArray(); track star) {
+    <span
+      [class]="'ui-lib-rating__star' + (isStarActive(star) ? ' ui-lib-rating__star--on' : '')"
+      role="radio"
+      [attr.aria-checked]="isStarChecked(star) ? 'true' : 'false'"
+      [attr.aria-label]="getStarAriaLabel(star)"
+      [attr.aria-posinset]="star"
+      [attr.aria-setsize]="stars()"
+      [attr.tabindex]="getStarTabIndex(star)"
+      [attr.aria-disabled]="isDisabled() ? 'true' : null"
+      (click)="onStarClick(star, $event)"
+      (mouseenter)="onStarHover(star)"
+      (mouseleave)="onStarLeave()"
+      (focus)="onStarFocus($event)"
+      (blur)="onStarBlur($event)"
+    >
+      @if (getIconTemplate(star); as iconTpl) {
+        <ng-container [ngTemplateOutlet]="iconTpl" />
+      } @else {
+        <span
+          [class]="getStarIconClass(star)"
+          [ngStyle]="getStarIconStyle(star)"
+          aria-hidden="true"
+        ></span>
+      }
+    </span>
+  }
+} @else {
+  <!-- Read-only: decorative stars only — host carries role="img" and aria-label -->
+  @for (star of starsArray(); track star) {
+    <span
+      [class]="'ui-lib-rating__star' + (isStarActive(star) ? ' ui-lib-rating__star--on' : '')"
+      aria-hidden="true"
+    >
+      @if (getIconTemplate(star); as iconTpl) {
+        <ng-container [ngTemplateOutlet]="iconTpl" />
+      } @else {
+        <span [class]="getStarIconClass(star)" aria-hidden="true"></span>
+      }
+    </span>
+  }
 }

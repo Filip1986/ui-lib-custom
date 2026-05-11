@@ -362,9 +362,10 @@ describe('Rating', (): void => {
     });
   });
 
-  it('getStarAriaLabel returns "N of M" format', (): void => {
+  it('getStarAriaLabel returns "N star(s)" format', (): void => {
     const rating: Rating = getRatingInstance(fixture);
-    expect(rating.getStarAriaLabel(3)).toBe('3 of 5');
+    expect(rating.getStarAriaLabel(1)).toBe('1 star');
+    expect(rating.getStarAriaLabel(3)).toBe('3 stars');
   });
 
   // ── Keyboard navigation ───────────────────────────────────────────────────

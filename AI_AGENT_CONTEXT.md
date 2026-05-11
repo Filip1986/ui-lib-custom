@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Password accessibility hardening COMPLETE (6-phase, #29); next is Rating (#30)
-- **Next queue:** Rating hardening (Tier 3, #30) — role=radiogroup or role=slider, keyboard interaction
+- **Active focus:** Rating accessibility hardening COMPLETE (6-phase, #30); next is Table (#32, Tier 4 Data Display)
+- **Next queue:** Table hardening (Tier 4, #32) — role=grid, column sort aria-sort, row selection aria-selected, pagination
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -32,6 +32,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
+- `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 
 ---
 
@@ -45,6 +46,42 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Rating component — accessibility hardening COMPLETE (#30)]
+Changed:
+  - projects/ui-lib-custom/src/lib/rating/rating.ts
+      • Changed host `role: 'radiogroup'` (static) to `'[attr.role]': 'hostRole()'` (dynamic)
+      • Added `hostRole` computed signal: returns `'img'` when `readonly()`, `'radiogroup'` otherwise
+      • Added `hostAriaLabelValue` computed signal: descriptive "Rating: N out of M stars" in read-only mode, consumer `ariaLabel` otherwise
+      • Updated `[attr.aria-label]` and `[attr.aria-labelledby]` host bindings to use new computed values
+      • Fixed `getStarAriaLabel` to return "N star" / "N stars" format (was "N of M")
+      • Fixed `getStarTabIndex` to return -1 when `readonly()` (was only checking `isDisabled()`)
+  - projects/ui-lib-custom/src/lib/rating/rating.html
+      • Wrapped entire template in `@if (!readonly()) { ... } @else { ... }`
+      • Interactive branch: cancel button + stars with `role="radio"`, ARIA attrs, event handlers
+      • Read-only branch: decorative-only stars with `aria-hidden="true"`, no interactive attrs
+  - projects/ui-lib-custom/src/lib/rating/rating.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block: `transition: none` on star/cancel + `transform: none` on hover
+  - projects/ui-lib-custom/src/lib/rating/rating.spec.ts
+      • Updated `getStarAriaLabel` test to match new "N star(s)" format (was "N of M")
+  - projects/ui-lib-custom/src/lib/rating/rating.a11y.spec.ts (CREATED — 22 tests)
+      • Interactive: radiogroup role, aria-label, star role=radio, aria-checked, "N star(s)" aria-labels, star-icon aria-hidden
+      • Roving tabindex: first star tab=0 when no value; selected star tab=0, others tab=-1
+      • Keyboard: ArrowRight increments, ArrowLeft decrements, clamp at min/max
+      • Read-only: host role=img, descriptive aria-label, no interactive stars, all stars aria-hidden, cancel hidden
+      • axe-core: default state, value selected, read-only, disabled
+  - projects/ui-lib-custom/src/lib/rating/README.md
+      • Added ARIA Pattern A documentation, read-only mode behavior, pattern rationale, keyboard nav table, CVA section
+  - docs/COMPONENT_SCORES.md
+      • Rating: ⏳ Queued → ✅ Done
+State: Rating hardening complete. Dynamic role (radiogroup/img), read-only ARIA branch, reduced-motion SCSS, 22 new a11y tests.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/rating/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=rating --no-coverage (75/75 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: node_modules/.bin/ prefix required for all CLI tools; npm install required first in fresh clone.
+Next step: Knob (#31) — already done. Table (#32) hardening — start Tier 4 Data Display.
 
 Date: 2026-05-11 [Knob component — accessibility hardening COMPLETE (#31)]
 Changed:

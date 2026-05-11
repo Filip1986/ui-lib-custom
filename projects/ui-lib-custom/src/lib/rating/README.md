@@ -6,6 +6,28 @@
 
 > `value` is a `model()` signal — use `[(value)]` for two-way binding. The component implements `ControlValueAccessor` for `ngModel` and reactive forms. Clicking the already-selected star deselects it (toggles off). Keyboard: arrow keys change value, digit keys 1–9 jump directly, Delete/Backspace clears (when `cancel` is true).
 
+## ARIA Pattern — Pattern A: radiogroup (chosen)
+
+This component uses **Pattern A (radiogroup)** for interactive mode:
+
+- The host element carries `role="radiogroup"` and `aria-label`.
+- Each star renders as `role="radio"` with `aria-checked` and a human-readable `aria-label` (`"1 star"`, `"2 stars"`, …).
+- Focus is managed with a roving `tabindex`: the active star has `tabindex="0"`; all others have `tabindex="-1"`. When no value is selected, the first star holds `tabindex="0"`.
+- Arrow keys both move focus and immediately commit the new value.
+
+### Read-only mode
+
+When `readonly="true"` the component switches to a **read-only display role**:
+
+- The host carries `role="img"` and a descriptive `aria-label` (e.g. `"Rating: 3 out of 5 stars"`).
+- All star elements are rendered as decorative spans with `aria-hidden="true"`.
+- No interactive elements (buttons, tabindex, event handlers) are present.
+- The cancel button is never shown in read-only mode.
+
+### Why Pattern A (not Pattern B: slider)?
+
+Pattern A maps naturally to the discrete 1-to-N integer selection semantics of a star rating. `role=radiogroup` communicates "choose exactly one option from a set", which is more accurate than `role=slider` for this use case. Each option has a meaningful label ("3 stars"), making the choice self-describing.
+
 ## Inputs
 
 | Name | Type | Default | Notes |
@@ -14,10 +36,10 @@
 | `stars` | `number` | `5` | Number of star icons to render. |
 | `cancel` | `boolean` | `true` | Shows a clear/cancel button and enables Delete/Backspace keyboard clearing. |
 | `disabled` | `boolean` | `false` | Disables the component. Also controlled via CVA `setDisabledState`. |
-| `readonly` | `boolean` | `false` | Visible but not interactive. |
+| `readonly` | `boolean` | `false` | Visible but not interactive. Changes role to `"img"`. |
 | `autofocus` | `boolean` | `false` | Focuses the first star after first render. |
-| `ariaLabel` | `string` | `'Rating'` | Accessible label for the radiogroup element. |
-| `ariaLabelledby` | `string \| null` | `null` | Overrides `ariaLabel` when set. |
+| `ariaLabel` | `string` | `'Rating'` | Accessible label for the radiogroup element. Overridden with descriptive text in read-only mode. |
+| `ariaLabelledby` | `string \| null` | `null` | Overrides `ariaLabel` when set. Ignored in read-only mode. |
 | `iconOnClass` | `string \| null` | `null` | Extra CSS class on filled star icons. |
 | `iconOnStyle` | `Record<string, string> \| null` | `null` | Inline styles on filled star icons. |
 | `iconOffClass` | `string \| null` | `null` | Extra CSS class on empty star icons. |
@@ -36,6 +58,29 @@
 | `focus` | `FocusEvent` | Emitted when any star receives focus. |
 | `blur` | `FocusEvent` | Emitted when any star loses focus. |
 
+## Keyboard navigation
+
+| Key | Action |
+|-----|--------|
+| `ArrowRight` / `ArrowUp` | Increase rating by one (max = `stars`). |
+| `ArrowLeft` / `ArrowDown` | Decrease rating by one (min = 1). |
+| `Delete` / `Backspace` | Clear rating (only when `cancel` is true). |
+| `1`–`9` | Set rating directly to that digit (if within `stars` range). |
+
+## ControlValueAccessor
+
+The component implements `ControlValueAccessor` and works with `ngModel` and reactive forms:
+
+```html
+<!-- ngModel -->
+<ui-lib-rating [(ngModel)]="rating" />
+
+<!-- Reactive form -->
+<ui-lib-rating [formControl]="ratingControl" />
+```
+
+Programmatic disable via `FormControl.disable()` is propagated through `setDisabledState`.
+
 ## Usage
 
 ```html
@@ -44,4 +89,7 @@
 
 <!-- ten stars, no cancel button, reactive form -->
 <ui-lib-rating [stars]="10" [cancel]="false" [formControl]="ratingControl" (change)="onRate($event)" />
+
+<!-- read-only display (role="img", aria-label describes the value) -->
+<ui-lib-rating [readonly]="true" [(ngModel)]="rating" />
 ```
