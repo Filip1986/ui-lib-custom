@@ -79,7 +79,7 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
 </ui-lib-bottom-sheet>
 ```
 
-## CSS variables
+## CSS custom properties
 
 | Variable | Default | Description |
 |---|---|---|
@@ -89,19 +89,47 @@ import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
 | `--uilib-bottom-sheet-backdrop-bg` | `rgba(0,0,0,.48)` | Backdrop overlay colour. |
 | `--uilib-bottom-sheet-z-index` | `var(--uilib-z-overlay, 1000)` | Stack order of the sheet. |
 | `--uilib-bottom-sheet-transition-duration` | `0.32s` | Slide-in/out animation duration. |
+| `--uilib-bottom-sheet-transition-easing` | `cubic-bezier(0.32, 0.72, 0, 1)` | Slide-in/out animation easing. |
 | `--uilib-bottom-sheet-padding` | `var(--uilib-spacing-5, 1.25rem)` | Internal content padding. |
+| `--uilib-bottom-sheet-header-bg` | `transparent` | Header background colour. |
+| `--uilib-bottom-sheet-header-border` | `1px solid …` | Header bottom border. |
+| `--uilib-bottom-sheet-title-color` | `var(--uilib-color-text-primary, #1a1a1a)` | Header title text colour. |
 | `--uilib-bottom-sheet-title-font-size` | `1rem` | Header title font size. |
 | `--uilib-bottom-sheet-title-font-weight` | `600` | Header title font weight. |
+| `--uilib-bottom-sheet-close-color` | `var(--uilib-color-text-secondary, #6b7280)` | Close button icon colour. |
+| `--uilib-bottom-sheet-close-hover-bg` | `var(--uilib-color-surface-hover, …)` | Close button hover background. |
 | `--uilib-bottom-sheet-close-size` | `2rem` | Close button width/height. |
+
+## ARIA attributes
+
+| Attribute | Element | Description |
+|---|---|---|
+| `role="dialog"` | Panel | Marks the sheet as a dialog region. |
+| `aria-modal="true"` | Panel | Signals to screen readers that content behind the sheet is inert (only when open). |
+| `aria-labelledby` | Panel | References the header title element when `header` is provided. |
+| `aria-hidden="true"` | Host, Backdrop | Hides the component (and backdrop) from screen readers when closed. |
+| `aria-label="Close"` | Close button | Accessible name for the icon-only close button. |
+| `aria-hidden="true"` | Close icon SVG | Marks the decorative SVG icon as presentational. |
+| `tabindex="-1"` | Panel | Enables programmatic focus on the panel itself. |
+
+## Keyboard interactions
+
+| Key | Behaviour |
+|---|---|
+| `Escape` | Closes the sheet (when `closeOnEscape` is `true`) and returns focus to the previously focused element. |
+| `Tab` | Cycles focus forward through all focusable elements inside the panel. Wraps from last to first. |
+| `Shift+Tab` | Cycles focus backward. Wraps from first to last. |
 
 ## Accessibility
 
-- `role="dialog"` on the panel with `aria-modal="true"` when open.
-- `aria-label` set to the `header` input value when provided.
-- The panel receives focus when opened (via `tabindex="-1"` + programmatic focus).
-- `Escape` key closes the sheet (configurable via `closeOnEscape`).
+- **Focus trap** — When the sheet opens, focus is moved inside the panel and Tab/Shift+Tab are trapped within it. The `FocusTrap` utility from `ui-lib-custom/core` handles both trapping and restoration.
+- **Focus restoration** — When the sheet closes, focus automatically returns to the element that was focused before the sheet opened.
+- **`role="dialog"`** on the panel with `aria-modal="true"` when open.
+- **`aria-labelledby`** pointing to the header title span (unique per instance) when `header` is provided.
+- Unique per-instance IDs (`instanceId`, `titleId`) ensure correct ARIA associations in pages with multiple sheets.
 - Scroll is locked on `<body>` while the sheet is open.
 - Host element has `aria-hidden="true"` when closed.
+- All animations respect `prefers-reduced-motion: reduce` — transitions are disabled when the user prefers reduced motion.
 
 ## Variants
 

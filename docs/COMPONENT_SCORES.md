@@ -37,7 +37,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done     |
 | 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done     |
 | 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done     |
-| 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ⏳ Queued   |
+| 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ✅ Done     |
 | 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ⏳ Queued   |
 | 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done    |
 | 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ✅ Done     |
@@ -98,10 +98,10 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component       | Primary focus                                             | Status     |
 |------|-----------------|-----------------------------------------------------------|------------|
-| 51   | Card            | API composability, slot flexibility, hover/focus polish   | ⏳ Queued   |
+| 51   | Card            | API composability, slot flexibility, hover/focus polish   | ✅ Done    |
 | 52   | Badge           | Positioning variants, `aria-label` passthrough            | ⏳ Queued   |
 | 53   | Tag             | Dismissible variant `aria-label`                          | ⏳ Queued   |
-| 54   | Chip            | Remove button label, image alt passthrough                | ⏳ Queued   |
+| 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done    |
 | 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ⏳ Queued   |
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ⏳ Queued   |
 | 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ⏳ Queued   |
@@ -119,11 +119,11 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 69   | Upload          | Drop zone announcement, file list management              | ⏳ Queued   |
 | 70   | Terminal        | `role=log`, command input labeling                        | ⏳ Queued   |
 | 71   | Timeline        | Semantic list structure, orientation                      | ⏳ Queued   |
-| 72   | Chart           | Accessible data table alternative, `aria-label`           | ⏳ Queued   |
+| 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ⏳ Queued   |
 | 75   | ScrollTop       | `aria-label` on button                                    | ⏳ Queued   |
-| 76   | BottomSheet     | `role=dialog`, focus management                           | ⏳ Queued   |
+| 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
 
 > **Queue status key:** ⏳ Queued · 🔄 In progress · ✅ Done (all scores ≥ 8)
 
@@ -176,6 +176,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component   | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
+| Card        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Inline      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -198,7 +199,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Dialog        | 9   | 9    | 8    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 8.6 | 🟢     |
 | DynamicDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Drawer        | 9   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
-| BottomSheet   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| BottomSheet   | 8   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Popover       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Tooltip       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ConfirmDialog | 9   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.3 | 🟢     |
@@ -211,7 +212,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Tabs        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Accordion   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Breadcrumb  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| ContextMenu | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ContextMenu | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | MegaMenu    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
@@ -239,7 +240,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Paginator         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Carousel          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Galleria          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Chart             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
 ## Feedback & Status
 
@@ -249,7 +250,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
 | Badge           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Tag             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Chip            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Skeleton        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ProgressBar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

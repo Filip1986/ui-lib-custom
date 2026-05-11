@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Table accessibility hardening COMPLETE (6-phase, #32); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** BottomSheet accessibility hardening COMPLETE (6-phase, #76); also merged: Card (#51), Chart (#72), Chip (#54), ContextMenu (#14)
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -38,6 +38,11 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
+- `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
+- `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
+- `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
+- `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 
 ---
 
@@ -51,6 +56,59 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Merge conflict resolution for avatar hardening PR]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved merge conflict after merging `origin/main` into avatar hardening branch
+      • Preserved active focus state and kept only the newest 3 handoffs
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/bottom-sheet/*
+  - projects/ui-lib-custom/src/lib/card/*
+  - projects/ui-lib-custom/src/lib/chart/*
+  - projects/ui-lib-custom/src/lib/chip/*
+  - projects/ui-lib-custom/src/lib/context-menu/*
+      • Brought in latest `origin/main` hardening changes as part of merge
+State: Branch is merged with latest `origin/main`. Manual conflict resolution was only in `AI_AGENT_CONTEXT.md`; incoming component hardening changes are preserved.
+Verification:
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  npm run typecheck (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+Terminal notes: Repository was unshallowed (`git fetch --unshallow origin`) before merge per workflow requirements.
+Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
+Changed:
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
+      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
+      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
+      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
+      • Added `private focusTrap: FocusTrap | null = null` field
+      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
+      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
+      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
+      • Added `[id]="titleId"` to the title span for the ARIA association
+      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
+      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
+      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
+      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
+      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
+  - docs/COMPONENT_SCORES.md
+      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [Avatar component — accessibility hardening COMPLETE (#65)]
 Changed:
@@ -82,42 +140,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: `node_modules` was missing in the fresh clone; ran `npm install` first. Took manual demo screenshot at `/tmp/avatar-demo.png` after launching `npm run serve:demo`.
 Next step: Resume backlog sequence after Avatar #65 completion.
-
-Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the newest conflict against origin/main by preserving the current Table → TreeTable session state
-      • Kept active handoffs trimmed to the newest three entries and moved the older Stepper handoff to the archive
-State: Branch is merged with the latest origin/main again. This merge only required resolving AI_AGENT_CONTEXT.md; no library source files changed in the incoming main branch.
-Verification:
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: The repository is now fully unshallowed locally after `git fetch --unshallow origin`; merge conflict was isolated to AI_AGENT_CONTEXT.md.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Merge conflict resolution refresh for table hardening PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the new conflict against origin/main by keeping the latest Table → TreeTable session state
-      • Preserved the incoming Stepper hardening handoff and trimmed active handoffs back to the newest three entries
-  - docs/COMPONENT_SCORES.md
-  - projects/ui-lib-custom/src/lib/stepper/README.md
-  - projects/ui-lib-custom/src/lib/stepper/index.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.html
-  - projects/ui-lib-custom/src/lib/stepper/stepper.scss
-  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts
-      • Brought in the latest origin/main Stepper hardening changes as part of the merge
-State: Branch is merged with the latest origin/main again. The only manual conflict resolution was in AI_AGENT_CONTEXT.md; incoming Stepper changes are preserved as-is.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/stepper/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=stepper --no-coverage (61/61 PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
