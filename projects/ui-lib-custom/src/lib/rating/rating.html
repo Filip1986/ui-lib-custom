@@ -57,7 +57,7 @@
       @if (getIconTemplate(star); as iconTpl) {
         <ng-container [ngTemplateOutlet]="iconTpl" />
       } @else {
-        <span [class]="getStarIconClass(star)" aria-hidden="true"></span>
+        <span [class]="getStarIconClass(star)"></span>
       }
     </span>
   }
