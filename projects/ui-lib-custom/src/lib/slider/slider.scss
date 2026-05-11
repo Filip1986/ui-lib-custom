@@ -255,3 +255,24 @@
     --uilib-slider-focus-ring-color: rgba(17, 24, 39, 0.25);
   }
 }
+
+// ---------------------------------------------------------------------------
+// prefers-reduced-motion — disable all transitions when user requests it
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-slider {
+    --uilib-slider-fill-transition: none;
+
+    .ui-lib-slider__handle {
+      transition: none;
+    }
+
+    &.ui-lib-slider--animate .ui-lib-slider__fill {
+      transition: none;
+    }
+
+    &.ui-lib-slider--animate .ui-lib-slider__handle {
+      transition: none;
+    }
+  }
+}

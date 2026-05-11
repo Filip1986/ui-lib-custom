@@ -33,6 +33,25 @@
 | `onChange` | `SliderChangeEvent` | Emitted on every user-driven value change during drag or keyboard interaction. |
 | `onSlideEnd` | `SliderSlideEndEvent` | Emitted when the user releases a drag interaction. |
 
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `ArrowRight` / `ArrowUp` | Increment by `step` |
+| `ArrowLeft` / `ArrowDown` | Decrement by `step` |
+| `PageUp` | Increment by `step × 10` |
+| `PageDown` | Decrement by `step × 10` |
+| `Home` | Jump to minimum value |
+| `End` | Jump to maximum value |
+
+## Accessibility
+
+- Handle: `role="slider"`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, `aria-valuetext`, `aria-orientation`, `aria-disabled`
+- Fill bar: `aria-hidden="true"` (decorative)
+- Range mode: start handle uses `aria-label="Minimum value"` and its `aria-valuemax` is constrained to the current end value; end handle uses `aria-label="Maximum value"` and its `aria-valuemin` is constrained to the current start value
+- Disabled: `aria-disabled="true"` on the handle; keyboard interaction is blocked
+- Respects `prefers-reduced-motion` — transitions are disabled when the user prefers reduced motion
+
 ## Usage
 
 ```html
@@ -41,4 +60,10 @@
 
 <!-- range slider with ngModel -->
 <ui-lib-slider [range]="true" [(value)]="priceRange" [min]="0" [max]="1000" [step]="10" />
+
+<!-- vertical slider -->
+<ui-lib-slider orientation="vertical" [(value)]="level" />
+
+<!-- with accessible label -->
+<ui-lib-slider ariaLabel="Volume" [(value)]="volume" />
 ```

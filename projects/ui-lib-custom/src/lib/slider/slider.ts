@@ -32,6 +32,9 @@ import type {
   SliderVariant,
 } from './slider.types';
 
+/** Module-level counter — gives every mounted slider a unique DOM ID. */
+let nextSliderId: number = 0;
+
 /** Internal discriminator for which handle is being manipulated. */
 type SliderHandle = 'single' | 'start' | 'end';
 
@@ -108,6 +111,13 @@ export class Slider implements ControlValueAccessor {
 
   /** Additional CSS class(es) appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
+
+  // ---------------------------------------------------------------------------
+  // Identity
+  // ---------------------------------------------------------------------------
+
+  /** Unique DOM id for this slider instance. */
+  public readonly sliderId: string = 'ui-lib-slider-' + ++nextSliderId;
 
   // ---------------------------------------------------------------------------
   // Model
@@ -252,6 +262,21 @@ export class Slider implements ControlValueAccessor {
     const end: number = this.endPercent();
     return this.isHorizontal() ? { left: end + '%' } : { bottom: end + '%' };
   });
+
+  /** Human-readable text for the single handle (used as aria-valuetext). */
+  protected readonly singleValueText: Signal<string> = computed<string>((): string =>
+    String(this.singleValue())
+  );
+
+  /** Human-readable text for the range start handle (used as aria-valuetext). */
+  protected readonly startValueText: Signal<string> = computed<string>((): string =>
+    String(this.rangeStartValue())
+  );
+
+  /** Human-readable text for the range end handle (used as aria-valuetext). */
+  protected readonly endValueText: Signal<string> = computed<string>((): string =>
+    String(this.rangeEndValue())
+  );
 
   protected readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
