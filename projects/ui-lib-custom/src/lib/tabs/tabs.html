@@ -37,7 +37,7 @@
         [id]="tabId(tab.index)"
         [attr.aria-selected]="isActive(tab.index) ? 'true' : 'false'"
         [attr.aria-controls]="!isNavigation() ? panelId(tab.index) : null"
-        [attr.aria-disabled]="tab.disabled || disabled() ? 'true' : null"
+        [attr.aria-disabled]="tab.disabled || disabled() ? 'true' : 'false'"
         [attr.tabindex]="tabTabIndex(tab.index, tab.disabled)"
         (click)="onSelect(tab)"
         (focus)="onFocus(tab)"
