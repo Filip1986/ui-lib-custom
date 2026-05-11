@@ -37,6 +37,9 @@ export class StepperPanel {
   /** Whether this step is disabled. In linear mode, disabled state is ignored. */
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
 
+  /** Whether this step is currently in an error state. */
+  public readonly error: InputSignal<boolean> = input<boolean>(false);
+
   /** Template rendered as the step's main content. Reference with `#stepperContent`. */
   public readonly contentTemplate: Signal<TemplateRef<unknown> | undefined> =
     contentChild<TemplateRef<unknown>>('stepperContent');

@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Rating accessibility hardening COMPLETE (6-phase, #30); next is Table (#32, Tier 4 Data Display)
+- **Active focus:** Stepper accessibility hardening COMPLETE (6-phase, #19); next remaining queued component is Table (#32, Tier 4 Data Display)
 - **Next queue:** Table hardening (Tier 4, #32) — role=grid, column sort aria-sort, row selection aria-selected, pagination
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -31,6 +31,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
+- `Stepper` -> ✅ complete + hardened (6-phase, score 9.0/10, 61 tests — 39 unit + 22 a11y)
 - `RadioButton` -> ✅ complete + hardened (6-phase, 64 tests — 40 unit + 24 a11y)
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
@@ -47,6 +48,43 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-11 [Stepper component — accessibility hardening COMPLETE (#19)]
+Changed:
+  - projects/ui-lib-custom/src/lib/stepper/stepper.ts
+      • Replaced local component id field with module-level `nextStepperId` + public `stepperId`
+      • Added `ariaLabel` input (`'Progress'` default), exported `STEPPER_DEFAULT_ARIA_LABEL`
+      • Added computed `stepItems` metadata for active/completed/disabled/error state
+      • Added `getStepAriaLabel()` for rich screen-reader labels and `isStepDisabled()`
+  - projects/ui-lib-custom/src/lib/stepper/stepper.html
+      • Kept tablist pattern, added rich `aria-label` on each step tab, `aria-disabled` for locked steps
+      • Rendered all tabpanel shells with stable ids so tabs always reference valid panels
+      • Replaced DOM separator elements with CSS-only connectors to satisfy axe `aria-required-children`
+  - projects/ui-lib-custom/src/lib/stepper/stepper.scss
+      • Added error-state tokens/styles, connector pseudo-elements, pointer-events lockout, stronger reduced-motion handling
+  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts
+      • Added `error` input for invalid step state
+  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts
+      • Added exported `StepperItem` accessibility metadata interface
+  - projects/ui-lib-custom/src/lib/stepper/index.ts
+      • Re-exported `StepperItem`
+  - projects/ui-lib-custom/src/lib/stepper/stepper.a11y.spec.ts (CREATED — 22 tests)
+      • Added role/aria-label/state coverage, linear lockout assertions, vertical semantics, multi-instance ids, axe checks
+  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts
+      • Removed separator DOM assertion after connector moved to CSS pseudo-elements
+  - projects/ui-lib-custom/src/lib/stepper/README.md
+      • Documented ARIA pattern, `ariaLabel`, `error`, keyboard support, screen-reader label format, CSS vars
+  - docs/COMPONENT_SCORES.md
+      • Stepper queue entry: ⏳ Queued → ✅ Done
+      • Stepper score row: 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Stepper hardening complete. Rich step announcements, locked linear mode semantics, error state support, and dedicated a11y coverage are all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/stepper/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=stepper --no-coverage (61/61 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `aria-required-children` axe failure was resolved by moving connector lines from DOM separator elements to CSS pseudo-elements inside the step wrappers.
+Next step: Table (#32) hardening — role=grid, aria-sort, row selection, and pagination announcements.
 
 Date: 2026-05-11 [Rating component — accessibility hardening COMPLETE (#30)]
 Changed:
@@ -119,33 +157,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: node_modules/.bin/ prefix required for jest/ng; npx works for eslint after npm install.
 Next step: Rating hardening (Tier 3, #30).
-
-Date: 2026-05-11 [Knob component — accessibility hardening COMPLETE (#31)]
-Changed:
-  - projects/ui-lib-custom/src/lib/knob/knob.component.ts
-      • Moved slider semantics to host (`role=slider`, `aria-valuenow/min/max/valuetext`, keyboard + pointer handlers)
-      • Added `getValueText()` helper for `aria-valuetext`
-      • Added requestAnimationFrame-throttled drag updates and RAF cleanup on pointer-up/destroy
-  - projects/ui-lib-custom/src/lib/knob/knob.component.html
-      • Marked SVG as decorative (`aria-hidden="true"`, `focusable="false"`)
-      • Removed interactive ARIA/event bindings from SVG
-  - projects/ui-lib-custom/src/lib/knob/knob.component.scss
-      • Added `prefers-reduced-motion: reduce` block (`--uilib-knob-transition-duration: 0ms`)
-  - projects/ui-lib-custom/src/lib/knob/knob.component.spec.ts
-      • Updated ARIA assertions to target knob host element semantics
-  - projects/ui-lib-custom/src/lib/knob/knob.a11y.spec.ts (CREATED — 21 tests)
-      • Added role/ARIA assertions, keyboard equivalence coverage, disabled behavior, decorative SVG checks
-      • Added axe checks for default, min, max, and disabled states
-  - projects/ui-lib-custom/src/lib/knob/README.md
-      • Added accessibility behavior and keyboard support table
-  - docs/COMPONENT_SCORES.md
-      • Knob queue status set to ✅ Done; score row populated (avg 8.2)
-State: Knob hardening complete with host-level slider semantics, keyboard parity for drag operations,
-  decorative SVG semantics, reduced-motion support, and dedicated a11y test coverage.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/knob/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=knob --no-coverage (56/56 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Installed dependencies via `npm install` in fresh clone before running validation commands.
-Next step: Table (#32) hardening — start Tier 4 Data Display.

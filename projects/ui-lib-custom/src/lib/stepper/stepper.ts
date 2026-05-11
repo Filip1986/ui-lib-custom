@@ -13,11 +13,31 @@ import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angula
 import { CommonModule } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { StepperPanel } from './stepper-panel';
-import type { StepChangeEvent, StepperOrientation, StepperVariant } from './stepper.types';
+import type {
+  StepChangeEvent,
+  StepperItem,
+  StepperOrientation,
+  StepperVariant,
+} from './stepper.types';
 
-export type { StepChangeEvent, StepperOrientation, StepperVariant } from './stepper.types';
+export type {
+  StepChangeEvent,
+  StepperItem,
+  StepperOrientation,
+  StepperVariant,
+} from './stepper.types';
 
-let stepperIdCounter: number = 0;
+interface StepperRenderItem extends StepperItem {
+  readonly id: string;
+  readonly contentId: string;
+  readonly panel: StepperPanel;
+  readonly active: boolean;
+  readonly accessible: boolean;
+}
+
+export const STEPPER_DEFAULT_ARIA_LABEL: string = 'Progress';
+
+let nextStepperId: number = 0;
 
 /**
  * Stepper — a multi-step wizard component for guided sequential workflows.
@@ -58,9 +78,9 @@ let stepperIdCounter: number = 0;
   },
 })
 export class Stepper {
-  private readonly componentId: string = `ui-lib-stepper-${(stepperIdCounter += 1)}`;
-
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  public readonly stepperId: string = `ui-lib-stepper-${(nextStepperId += 1)}`;
 
   /** Currently active step index (0-based). Two-way bindable. */
   public readonly activeStep: ModelSignal<number> = model<number>(0);
@@ -70,6 +90,9 @@ export class Stepper {
    * Skipping to later steps is blocked until prior steps have been visited.
    */
   public readonly linear: InputSignal<boolean> = input<boolean>(false);
+
+  /** Accessible label announced for the step navigation container. */
+  public readonly ariaLabel: InputSignal<string> = input<string>(STEPPER_DEFAULT_ARIA_LABEL);
 
   /** Layout orientation: 'horizontal' (default) or 'vertical'. */
   public readonly orientation: InputSignal<StepperOrientation> =
@@ -110,24 +133,33 @@ export class Stepper {
     (): boolean => this.orientation() === 'horizontal'
   );
 
+  /** Computed step metadata used for rendering, styling, and accessibility. */
+  public readonly stepItems: Signal<readonly StepperRenderItem[]> = computed<
+    readonly StepperRenderItem[]
+  >((): readonly StepperRenderItem[] =>
+    this.panels().map(
+      (panel: StepperPanel, index: number): StepperRenderItem => this.buildStepItem(panel, index)
+    )
+  );
+
   /** Stable DOM id for a step header element. */
   public stepId(index: number): string {
-    return `${this.componentId}-step-${index}`;
+    return `${this.stepperId}-step-${index}`;
   }
 
   /** Stable DOM id for a step content panel. */
   public contentId(index: number): string {
-    return `${this.componentId}-content-${index}`;
+    return `${this.stepperId}-content-${index}`;
   }
 
   /** Returns true when the given step index is the active step. */
   public isStepActive(index: number): boolean {
-    return this.activeStep() === index;
+    return this.stepItems()[index]?.active ?? false;
   }
 
   /** Returns true when the given step has already been passed (index < activeStep). */
   public isStepCompleted(index: number): boolean {
-    return index < this.activeStep();
+    return this.stepItems()[index]?.completed ?? false;
   }
 
   /**
@@ -135,25 +167,49 @@ export class Stepper {
    * In linear mode, only steps up to the current active step are accessible.
    */
   public isStepAccessible(index: number, panel: StepperPanel): boolean {
-    if (panel.disabled()) {
-      return false;
+    return this.buildStepItem(panel, index).accessible;
+  }
+
+  /** Returns true when the given step is unavailable for interaction. */
+  public isStepDisabled(index: number): boolean {
+    return this.stepItems()[index]?.disabled ?? false;
+  }
+
+  /** Builds a rich screen-reader label for a step header. */
+  public getStepAriaLabel(step: StepperItem, index: number, total: number): string {
+    const baseLabel: string = `Step ${index + 1} of ${total}: ${step.label}`;
+
+    if (step.error) {
+      return `${baseLabel} — error, please fix`;
     }
-    if (!this.linear()) {
-      return true;
+    if (step.completed) {
+      return `${baseLabel} — completed`;
     }
-    return index <= this.activeStep();
+    if (this.isStepActive(index)) {
+      return `${baseLabel} — current`;
+    }
+    if (step.disabled && this.linear()) {
+      return `${baseLabel} — unavailable until previous steps are complete`;
+    }
+    if (step.disabled) {
+      return `${baseLabel} — unavailable`;
+    }
+    return baseLabel;
   }
 
   /** Computes the CSS classes for a step element. */
-  public stepClasses(index: number, panel: StepperPanel): string {
+  public stepClasses(step: StepperRenderItem): string {
     const classes: string[] = ['ui-lib-stepper__step'];
-    if (this.isStepActive(index)) {
+    if (step.active) {
       classes.push('ui-lib-stepper__step--active');
     }
-    if (this.isStepCompleted(index)) {
+    if (step.completed) {
       classes.push('ui-lib-stepper__step--completed');
     }
-    if (!this.isStepAccessible(index, panel)) {
+    if (step.error) {
+      classes.push('ui-lib-stepper__step--error');
+    }
+    if (step.disabled) {
       classes.push('ui-lib-stepper__step--disabled');
     }
     return classes.join(' ');
@@ -161,12 +217,11 @@ export class Stepper {
 
   /** Navigates to the given step index if it is accessible. */
   public goToStep(targetIndex: number): void {
-    const allPanels: readonly StepperPanel[] = this.panels();
-    const panel: StepperPanel | undefined = allPanels[targetIndex];
-    if (!panel) {
+    const targetStep: StepperRenderItem | undefined = this.stepItems()[targetIndex];
+    if (!targetStep) {
       return;
     }
-    if (!this.isStepAccessible(targetIndex, panel)) {
+    if (!targetStep.accessible) {
       return;
     }
     const previousStep: number = this.activeStep();
@@ -256,5 +311,41 @@ export class Stepper {
         }
       }
     }
+  }
+
+  private buildStepItem(panel: StepperPanel, index: number): StepperRenderItem {
+    const isActive: boolean = this.activeStep() === index;
+    const isCompleted: boolean = index < this.activeStep();
+    const isAccessible: boolean = this.isPanelAccessible(index, panel);
+
+    return {
+      id: this.stepId(index),
+      contentId: this.contentId(index),
+      panel,
+      label: this.getStepLabel(panel, index),
+      completed: isCompleted,
+      disabled: !isAccessible,
+      error: panel.error(),
+      active: isActive,
+      accessible: isAccessible,
+    };
+  }
+
+  private getStepLabel(panel: StepperPanel, index: number): string {
+    const trimmedHeader: string = panel.header().trim();
+    if (trimmedHeader) {
+      return trimmedHeader;
+    }
+    return `Step ${index + 1}`;
+  }
+
+  private isPanelAccessible(index: number, panel: StepperPanel): boolean {
+    if (panel.disabled()) {
+      return false;
+    }
+    if (!this.linear()) {
+      return true;
+    }
+    return index <= this.activeStep();
   }
 }
