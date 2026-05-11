@@ -159,7 +159,18 @@ ui-lib-rating.ui-lib-rating--variant-minimal {
   --uilib-rating-star-off-color: var(--uilib-color-neutral-200, #e5e7eb);
 }
 
-// ── Dark mode mixin ────────────────────────────────────────────────────────────
+// ── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-rating {
+    --uilib-rating-transition-duration: 0ms;
+
+    .ui-lib-rating__star,
+    .ui-lib-rating__cancel {
+      transition: none;
+    }
+  }
+}
 
 @mixin rating-dark-theme {
   --uilib-rating-star-off-color: var(--uilib-color-neutral-600, #4b5563);
