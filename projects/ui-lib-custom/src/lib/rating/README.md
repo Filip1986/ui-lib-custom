@@ -6,12 +6,27 @@
 
 > `value` is a `model()` signal — use `[(value)]` for two-way binding. The component implements `ControlValueAccessor` for `ngModel` and reactive forms. Clicking the already-selected star deselects it (toggles off). Keyboard: arrow keys change value, digit keys 1–9 jump directly, Delete/Backspace clears (when `cancel` is true).
 
-## ARIA Pattern
+## ARIA Pattern — Pattern A: radiogroup (chosen)
 
-The Rating component implements **Pattern A: radiogroup** for interactive use.
+This component uses **Pattern A (radiogroup)** for interactive mode:
 
-- **Interactive mode** (`readonly=false`): The host element has `role="radiogroup"` and each star has `role="radio"` with `aria-checked`, `aria-label="N of M"`, `aria-posinset`, and `aria-setsize`. A roving `tabindex` keeps the selected star (or first star when nothing is selected) in the natural tab order.
-- **Read-only mode** (`readonly=true`): The host element changes to `role="img"` with a self-contained `aria-label` of `"Rating: N out of M stars"`. All star elements are marked `aria-hidden="true"` because the host conveys all information. The cancel button is not rendered.
+- The host element carries `role="radiogroup"` and `aria-label`.
+- Each star renders as `role="radio"` with `aria-checked` and a human-readable `aria-label` (`"1 star"`, `"2 stars"`, …).
+- Focus is managed with a roving `tabindex`: the active star has `tabindex="0"`; all others have `tabindex="-1"`. When no value is selected, the first star holds `tabindex="0"`.
+- Arrow keys both move focus and immediately commit the new value.
+
+### Read-only mode
+
+When `readonly="true"` the component switches to a **read-only display role**:
+
+- The host carries `role="img"` and a descriptive `aria-label` (e.g. `"Rating: 3 out of 5 stars"`).
+- All star elements are rendered as decorative spans with `aria-hidden="true"`.
+- No interactive elements (buttons, tabindex, event handlers) are present.
+- The cancel button is never shown in read-only mode.
+
+### Why Pattern A (not Pattern B: slider)?
+
+Pattern A maps naturally to the discrete 1-to-N integer selection semantics of a star rating. `role=radiogroup` communicates "choose exactly one option from a set", which is more accurate than `role=slider` for this use case. Each option has a meaningful label ("3 stars"), making the choice self-describing.
 
 ## Inputs
 
@@ -19,12 +34,12 @@ The Rating component implements **Pattern A: radiogroup** for interactive use.
 |------|------|---------|-------|
 | `value` | `number \| null` | `null` | Current rating. Two-way bindable via `[(value)]` or `ngModel`. |
 | `stars` | `number` | `5` | Number of star icons to render. |
-| `cancel` | `boolean` | `true` | Shows a clear/cancel button and enables Delete/Backspace keyboard clearing. Hidden automatically in read-only mode. |
+| `cancel` | `boolean` | `true` | Shows a clear/cancel button and enables Delete/Backspace keyboard clearing. |
 | `disabled` | `boolean` | `false` | Disables the component. Also controlled via CVA `setDisabledState`. |
-| `readonly` | `boolean` | `false` | Visible but not interactive. Changes host role to `"img"` with a descriptive aria-label. |
+| `readonly` | `boolean` | `false` | Visible but not interactive. Changes role to `"img"`. |
 | `autofocus` | `boolean` | `false` | Focuses the first star after first render. |
-| `ariaLabel` | `string` | `'Rating'` | Accessible label for the radiogroup element (interactive mode only). |
-| `ariaLabelledby` | `string \| null` | `null` | Overrides `ariaLabel` when set (interactive mode only). |
+| `ariaLabel` | `string` | `'Rating'` | Accessible label for the radiogroup element. Overridden with descriptive text in read-only mode. |
+| `ariaLabelledby` | `string \| null` | `null` | Overrides `ariaLabel` when set. Ignored in read-only mode. |
 | `iconOnClass` | `string \| null` | `null` | Extra CSS class on filled star icons. |
 | `iconOnStyle` | `Record<string, string> \| null` | `null` | Inline styles on filled star icons. |
 | `iconOffClass` | `string \| null` | `null` | Extra CSS class on empty star icons. |
@@ -43,35 +58,18 @@ The Rating component implements **Pattern A: radiogroup** for interactive use.
 | `focus` | `FocusEvent` | Emitted when any star receives focus. |
 | `blur` | `FocusEvent` | Emitted when any star loses focus. |
 
-## Keyboard Navigation
+## Keyboard navigation
 
 | Key | Action |
 |-----|--------|
-| `ArrowRight` / `ArrowUp` | Increase rating by 1 (capped at `stars`) |
-| `ArrowLeft` / `ArrowDown` | Decrease rating by 1 (floor is 1) |
-| `Delete` / `Backspace` | Clear rating (only when `cancel` is `true`) |
-| `1`–`9` | Set rating to that digit (if within `stars` range) |
-
-## Accessibility
-
-The component uses **Pattern A: radiogroup** (ARIA 1.1 radio group pattern).
-
-```html
-<!-- Interactive: host is radiogroup, each star is a radio -->
-<ui-lib-rating ariaLabel="Product rating" [(value)]="rating" />
-
-<!-- Read-only: host becomes role="img" with descriptive aria-label -->
-<ui-lib-rating [readonly]="true" [value]="4" [cancel]="false" />
-<!-- Renders as: <ui-lib-rating role="img" aria-label="Rating: 4 out of 5 stars"> -->
-```
-
-Screen reader behaviour:
-- Interactive: announced as "Rating group. 3 of 5, radio, 3 of 5" (varies by AT).
-- Read-only: announced as "Rating: 3 out of 5 stars, image".
+| `ArrowRight` / `ArrowUp` | Increase rating by one (max = `stars`). |
+| `ArrowLeft` / `ArrowDown` | Decrease rating by one (min = 1). |
+| `Delete` / `Backspace` | Clear rating (only when `cancel` is true). |
+| `1`–`9` | Set rating directly to that digit (if within `stars` range). |
 
 ## ControlValueAccessor
 
-The component implements `ControlValueAccessor`, enabling integration with Angular reactive forms and `ngModel`.
+The component implements `ControlValueAccessor` and works with `ngModel` and reactive forms:
 
 ```html
 <!-- ngModel -->
@@ -81,24 +79,17 @@ The component implements `ControlValueAccessor`, enabling integration with Angul
 <ui-lib-rating [formControl]="ratingControl" />
 ```
 
-`setDisabledState` is supported: the form group's `disable()` / `enable()` calls propagate to the component.
+Programmatic disable via `FormControl.disable()` is propagated through `setDisabledState`.
 
 ## Usage
 
 ```html
-<!-- Basic five-star rating with ngModel -->
+<!-- basic five-star rating with ngModel -->
 <ui-lib-rating [(ngModel)]="rating" />
 
-<!-- Ten stars, no cancel button, reactive form -->
+<!-- ten stars, no cancel button, reactive form -->
 <ui-lib-rating [stars]="10" [cancel]="false" [formControl]="ratingControl" (change)="onRate($event)" />
 
-<!-- Read-only display (role="img") -->
-<ui-lib-rating [readonly]="true" [cancel]="false" [value]="averageRating" />
-
-<!-- Custom icon templates -->
-<ui-lib-rating [(ngModel)]="rating">
-  <ng-template #onicon>❤️</ng-template>
-  <ng-template #officon>🤍</ng-template>
-</ui-lib-rating>
+<!-- read-only display (role="img", aria-label describes the value) -->
+<ui-lib-rating [readonly]="true" [(ngModel)]="rating" />
 ```
-

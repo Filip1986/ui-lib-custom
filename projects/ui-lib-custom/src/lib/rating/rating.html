@@ -1,43 +1,26 @@
-<!-- Cancel / clear button — visible in interactive mode only -->
-@if (cancel() && !readonly()) {
-  <span
-    class="ui-lib-rating__cancel"
-    role="button"
-    [attr.tabindex]="getCancelTabIndex()"
-    [attr.aria-label]="'Clear rating'"
-    [attr.aria-disabled]="isDisabled() ? 'true' : null"
-    (click)="onCancelClick($event)"
-    (keydown.enter)="onCancelClick($event)"
-    (keydown.space)="onCancelClick($event)"
-  >
-    @if (cancelIconTemplate(); as cancelTpl) {
-      <ng-container [ngTemplateOutlet]="cancelTpl" />
-    } @else {
-      <span [class]="getCancelIconClass()" aria-hidden="true"></span>
-    }
-  </span>
-}
-
-<!-- Star icons -->
-@for (star of starsArray(); track star) {
-  @if (readonly()) {
-    <!-- Read-only star: purely decorative; host role="img" provides the accessible label -->
+@if (!readonly()) {
+  <!-- Cancel / clear button — visible when cancel input is true -->
+  @if (cancel()) {
     <span
-      [class]="'ui-lib-rating__star' + (isStarActive(star) ? ' ui-lib-rating__star--on' : '')"
-      aria-hidden="true"
+      class="ui-lib-rating__cancel"
+      role="button"
+      [attr.tabindex]="getCancelTabIndex()"
+      [attr.aria-label]="'Clear rating'"
+      [attr.aria-disabled]="isDisabled() ? 'true' : null"
+      (click)="onCancelClick($event)"
+      (keydown.enter)="onCancelClick($event)"
+      (keydown.space)="onCancelClick($event)"
     >
-      @if (getIconTemplate(star); as iconTpl) {
-        <ng-container [ngTemplateOutlet]="iconTpl" />
+      @if (cancelIconTemplate(); as cancelTpl) {
+        <ng-container [ngTemplateOutlet]="cancelTpl" />
       } @else {
-        <span
-          [class]="getStarIconClass(star)"
-          [ngStyle]="getStarIconStyle(star)"
-          aria-hidden="true"
-        ></span>
+        <span [class]="getCancelIconClass()" aria-hidden="true"></span>
       }
     </span>
-  } @else {
-    <!-- Interactive star: role=radio with full ARIA and event handling -->
+  }
+
+  <!-- Interactive star icons — Pattern A: radiogroup with roving tabindex -->
+  @for (star of starsArray(); track star) {
     <span
       [class]="'ui-lib-rating__star' + (isStarActive(star) ? ' ui-lib-rating__star--on' : '')"
       role="radio"
@@ -61,6 +44,20 @@
           [ngStyle]="getStarIconStyle(star)"
           aria-hidden="true"
         ></span>
+      }
+    </span>
+  }
+} @else {
+  <!-- Read-only: decorative stars only — host carries role="img" and aria-label -->
+  @for (star of starsArray(); track star) {
+    <span
+      [class]="'ui-lib-rating__star' + (isStarActive(star) ? ' ui-lib-rating__star--on' : '')"
+      aria-hidden="true"
+    >
+      @if (getIconTemplate(star); as iconTpl) {
+        <ng-container [ngTemplateOutlet]="iconTpl" />
+      } @else {
+        <span [class]="getStarIconClass(star)"></span>
       }
     </span>
   }

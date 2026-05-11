@@ -51,9 +51,9 @@ let ratingIdCounter: number = 0;
   host: {
     '[attr.role]': 'hostRole()',
     '[class]': 'hostClasses()',
-    '[attr.aria-label]': 'effectiveAriaLabel()',
-    '[attr.aria-labelledby]': 'effectiveAriaLabelledby()',
-    '[attr.aria-disabled]': '!readonly() && isDisabled() ? "true" : null',
+    '[attr.aria-label]': 'hostAriaLabelValue()',
+    '[attr.aria-labelledby]': 'readonly() ? null : ariaLabelledby()',
+    '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
     '(keydown)': 'onKeyDown($event)',
   },
 })
@@ -164,31 +164,23 @@ export class Rating implements ControlValueAccessor {
 
   // ── Computed ──────────────────────────────────────────────────────────────
 
-  /** Dynamic host role: "img" in read-only mode; "radiogroup" in interactive mode. */
+  /** ARIA role for the host element: "img" in read-only mode, "radiogroup" otherwise. */
   public readonly hostRole: Signal<string> = computed<string>((): string =>
     this.readonly() ? 'img' : 'radiogroup'
   );
 
   /**
-   * Effective aria-label for the host element.
-   * In read-only mode: a fully descriptive "Rating: N out of M stars" string that
-   * makes the host self-contained as a role="img" landmark.
-   * In interactive mode: passes through the `ariaLabel` input value.
+   * Computed aria-label for the host element.
+   * In read-only mode returns a descriptive "Rating: N out of M stars" string.
+   * Otherwise returns the consumer-supplied ariaLabel.
    */
-  public readonly effectiveAriaLabel: Signal<string> = computed<string>((): string => {
+  public readonly hostAriaLabelValue: Signal<string> = computed<string>((): string => {
     if (this.readonly()) {
-      return `Rating: ${this.value() ?? 0} out of ${this.stars()} stars`;
+      const currentValue: number | null = this.value();
+      return `Rating: ${currentValue ?? 0} out of ${this.stars()} stars`;
     }
     return this.ariaLabel();
   });
-
-  /**
-   * Effective aria-labelledby.
-   * Cleared in read-only mode so the host's computed aria-label is not overridden.
-   */
-  public readonly effectiveAriaLabelledby: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.readonly() ? null : this.ariaLabelledby())
-  );
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<RatingVariant> = computed<RatingVariant>(
@@ -269,7 +261,7 @@ export class Rating implements ControlValueAccessor {
    * selected) receives tabindex=0; all others receive -1.
    */
   public getStarTabIndex(star: number): number {
-    if (this.isDisabled()) {
+    if (this.isDisabled() || this.readonly()) {
       return -1;
     }
 
@@ -288,7 +280,7 @@ export class Rating implements ControlValueAccessor {
 
   /** Human-readable aria-label for a single star element. */
   public getStarAriaLabel(star: number): string {
-    return `${star} of ${this.stars()}`;
+    return `${star} ${star === 1 ? 'star' : 'stars'}`;
   }
 
   /** CSS classes for the star icon element, merging the custom icon class when provided. */
