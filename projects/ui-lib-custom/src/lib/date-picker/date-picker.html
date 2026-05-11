@@ -72,7 +72,7 @@
               type="button"
               class="ui-lib-datepicker__prev-button"
               [disabled]="isDisabled() || !canNavigatePrev()"
-              aria-label="Previous month"
+              [attr.aria-label]="'Previous month, ' + prevMonthLabel()"
               (click)="navigateMonth(-1)"
             >
               ‹
@@ -130,7 +130,7 @@
               type="button"
               class="ui-lib-datepicker__next-button"
               [disabled]="isDisabled() || !canNavigateNext()"
-              aria-label="Next month"
+              [attr.aria-label]="'Next month, ' + nextMonthLabel()"
               (click)="navigateMonth(1)"
             >
               ›
@@ -155,7 +155,13 @@
                           <th class="ui-lib-datepicker__week-header" scope="col" role="columnheader">Wk</th>
                         }
                         @for (weekDayLabel of weekDayLabels(); track weekDayLabel + '-' + $index) {
-                          <th class="ui-lib-datepicker__week-day" scope="col" role="columnheader">{{ weekDayLabel }}</th>
+                          <th
+                            class="ui-lib-datepicker__week-day"
+                            scope="col"
+                            role="columnheader"
+                            [attr.abbr]="weekDayFullLabels()[$index]"
+                            [attr.aria-label]="weekDayFullLabels()[$index]"
+                          >{{ weekDayLabel }}</th>
                         }
                       </tr>
                     </thead>
@@ -427,7 +433,13 @@
           </button>
         </div>
       }
+
+      <div
+        [attr.id]="liveRegionId()"
+        class="ui-lib-datepicker__live-region"
+        aria-live="polite"
+        aria-atomic="true"
+      >{{ currentMonthYearLabel() }}</div>
     </div>
   }
 </div>
-

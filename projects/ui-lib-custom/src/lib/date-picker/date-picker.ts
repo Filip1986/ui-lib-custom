@@ -69,6 +69,8 @@ const DATE_PICKER_PANEL_MODE_CLASSES: readonly string[] = [
   'ui-lib-datepicker__panel--minimal',
 ];
 
+let nextDatePickerId: number = 0;
+
 @Component({
   selector: 'ui-lib-date-picker',
   standalone: true,
@@ -197,6 +199,8 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
 
+  private readonly instanceId: string = `${++nextDatePickerId}`;
+
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
   private readonly modelValue: WritableSignal<DatePickerValue> = signal<DatePickerValue>(null);
 
@@ -238,8 +242,14 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
 
   public readonly resolvedInputId: Signal<string> = computed<string>((): string => {
     const configuredInputId: string = this.inputId().trim();
-    return configuredInputId.length > 0 ? configuredInputId : 'ui-lib-datepicker-input';
+    return configuredInputId.length > 0
+      ? configuredInputId
+      : `ui-lib-datepicker-input-${this.instanceId}`;
   });
+
+  public readonly liveRegionId: Signal<string> = computed<string>(
+    (): string => `${this.resolvedInputId()}-live`
+  );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
@@ -287,6 +297,34 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
       const dayIndex: number = (firstDayIndex + index) % 7;
       return labels[dayIndex] ?? '';
     });
+  });
+
+  public readonly weekDayFullLabels: Signal<string[]> = computed<string[]>((): string[] => {
+    const fullNames: string[] = this.locale().dayNames;
+    const firstDayIndex: number = this.normalizeWeekday(this.firstDayOfWeek());
+
+    return Array.from({ length: 7 }, (_: unknown, index: number): string => {
+      const dayIndex: number = (firstDayIndex + index) % 7;
+      return fullNames[dayIndex] ?? '';
+    });
+  });
+
+  public readonly currentMonthYearLabel: Signal<string> = computed<string>(
+    (): string => `${this.monthLabel()} ${this.yearLabel()}`
+  );
+
+  public readonly prevMonthLabel: Signal<string> = computed<string>((): string => {
+    const currentDate: Date = createDate(this.currentYear(), this.currentMonth(), 1);
+    const prevDate: Date = addMonths(currentDate, -1);
+    const prevMonthName: string = this.locale().monthNames[prevDate.getMonth()] ?? '';
+    return `${prevMonthName} ${prevDate.getFullYear()}`;
+  });
+
+  public readonly nextMonthLabel: Signal<string> = computed<string>((): string => {
+    const currentDate: Date = createDate(this.currentYear(), this.currentMonth(), 1);
+    const nextDate: Date = addMonths(currentDate, 1);
+    const nextMonthName: string = this.locale().monthNames[nextDate.getMonth()] ?? '';
+    return `${nextMonthName} ${nextDate.getFullYear()}`;
   });
 
   public readonly visibleMonthStarts: Signal<Date[]> = computed<Date[]>((): Date[] => {
@@ -1182,11 +1220,21 @@ export class DatePickerComponent implements ControlValueAccessor, AfterViewCheck
     const monthName: string = this.locale().monthNames[dateMeta.month] ?? '';
     const baseLabel: string = `${monthName} ${dateMeta.day}, ${dateMeta.year}`;
 
-    if (this.isRangeBetween(dateMeta)) {
-      return `${baseLabel}, in selected range`;
+    const suffixes: string[] = [];
+
+    if (dateMeta.today) {
+      suffixes.push('today');
     }
 
-    return baseLabel;
+    if (dateMeta.selected) {
+      suffixes.push('selected');
+    }
+
+    if (this.isRangeBetween(dateMeta)) {
+      suffixes.push('in selected range');
+    }
+
+    return suffixes.length > 0 ? `${baseLabel}, ${suffixes.join(', ')}` : baseLabel;
   }
 
   public getDateCellClasses(dateMeta: DatePickerDateMeta): string {

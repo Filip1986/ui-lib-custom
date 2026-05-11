@@ -417,3 +417,39 @@ Next step: ContextMenu hardening (Tier 2, #14) — key a11y: trigger aria-haspop
   escape/click-outside focus restoration, same as TieredMenu pattern.
 
 ---
+
+Date: 2026-05-11 [DatePicker — 6-phase hardening Phase 3 COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.ts
+      + module counter `nextDatePickerId` and `instanceId` property
+      + `liveRegionId` computed signal (`resolvedInputId() + '-live'`)
+      + `weekDayFullLabels` computed signal (full day names ordered by firstDayOfWeek)
+      + `currentMonthYearLabel` computed signal (`monthLabel() + ' ' + yearLabel()`)
+      + `prevMonthLabel` computed signal ("Month Year" for prev month)
+      + `nextMonthLabel` computed signal ("Month Year" for next month)
+      + `getDateAriaLabel()` improved — includes "today" and "selected" suffixes
+      + `resolvedInputId()` fallback now includes instance ID for uniqueness
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.html
+      + prev/next button aria-labels updated to "Previous month, <Month Year>"
+      + `<th role="columnheader">` now has `[attr.abbr]` and `[attr.aria-label]` with full day names
+      + live region `<div aria-live="polite" aria-atomic="true">` added to panel footer
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.scss
+      + `.ui-lib-datepicker__live-region` visually-hidden style block added
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.a11y.spec.ts (CREATED)
+      + 38 tests across: trigger ARIA, dialog ARIA, nav buttons, grid ARIA, unique IDs,
+        keyboard interaction, focus management, axe-core
+  - projects/ui-lib-custom/src/lib/date-picker/date-picker.spec.ts
+      + prev-button aria-label assertion updated from `.toBe('Previous month')` to `.toMatch(/^Previous month,/)`
+  - docs/COMPONENT_SCORES.md — DatePicker (#24) ⏳ → ✅ Done
+State: DatePicker 6-phase hardening Phase 3 complete. All 138 tests pass (38 new a11y tests).
+  prefers-reduced-motion was already present. Build clean, zero warnings.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/date-picker/ --max-warnings 0 (CLEAN)
+  node_modules/.bin/jest --testPathPatterns=date-picker --no-coverage (138/138 PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  node_modules/.bin/ng build ui-lib-custom (BUILD OK, zero warnings)
+Terminal notes: Dependencies not pre-installed — ran `npm install` first.
+  Module counter resets per TestBed, so resolved IDs in tests use instance-based suffix.
+Next step: CascadeSelect followup (#25) — verify existing a11y spec covers all required patterns.
+
+---
