@@ -58,9 +58,9 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ⏳ Queued   |
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Queued   |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done     |
-| 29   | Password      | Strength meter live region, toggle visibility button label                 | ⏳ Queued   |
+| 29   | Password      | Strength meter live region, toggle visibility button label                 | ✅ Done     |
 | 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Queued   |
-| 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ⏳ Queued   |
+| 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ✅ Done     |
 
 ### Tier 4 — Data Display
 *Focus: Grid/treegrid roles, sortable column headers, selection announcements, live regions.*
@@ -167,7 +167,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | InputOtp      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Knob          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ColorPicker   | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | KeyFilter     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

@@ -166,3 +166,9 @@
     --uilib-knob-text-color: #f9fafb;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .uilib-knob {
+    --uilib-knob-transition-duration: 0ms;
+  }
+}

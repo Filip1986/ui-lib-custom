@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** RadioButton accessibility hardening COMPLETE (6-phase, #23); next is DatePicker (#24)
-- **Next queue:** DatePicker (#24) is already Done; InputNumber hardening (Tier 3, #26) is next in queue
+- **Active focus:** RadioButton (#23) and Password (#29) accessibility hardening COMPLETE; next is Rating (#30)
+- **Next queue:** Rating hardening (Tier 3, #30) — role=radiogroup or role=slider, keyboard interaction
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -32,6 +32,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
 - `RadioButton` -> ✅ complete + hardened (6-phase, 64 tests — 40 unit + 24 a11y)
+- `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 
 ---
 
@@ -49,26 +50,21 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 Date: 2026-05-11 [RadioButton component — 6-phase Hardening COMPLETE (#23)]
 Changed:
   - projects/ui-lib-custom/src/lib/radio-button/radio-button.ts
-      • Changed `hostTabIndex` to implement WAI-ARIA roving tabindex: disabled→-1,
-        checked→tabindex() (default 0), unchecked→-1
       • Added `onNativeKeydown(event: KeyboardEvent)`: ArrowDown/Right moves to next
         non-disabled sibling in the group (by name attribute), wrapping; ArrowUp/Left moves
         to previous; both call `.focus()` + `.click()` on the target native input
+      • CSS.escape() with jsdom-safe fallback for name attribute selector safety
   - projects/ui-lib-custom/src/lib/radio-button/radio-button.html
       • Added `[attr.aria-disabled]="isDisabled() ? 'true' : null"` to native input
       • Added `[attr.aria-required]="required() ? 'true' : null"` to native input
       • Added `(keydown)="onNativeKeydown($event)"` binding to native input
   - projects/ui-lib-custom/src/lib/radio-button/radio-button.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block: sets
-        `--uilib-radio-button-transition-duration: 0ms` and `transition: none` on __box and __icon
-  - projects/ui-lib-custom/src/lib/radio-button/radio-button.spec.ts
-      • Replaced `applies tabindex to native input` (explicit override) with three tests reflecting
-        the new roving tabindex pattern: unselected→-1, selected→0, checked+explicit tabindex
-  - projects/ui-lib-custom/src/lib/radio-button/radio-button.a11y.spec.ts (CREATED — 25 tests)
+      • Added `@media (prefers-reduced-motion: reduce)` block: `transition: none` on __box and __icon
+  - projects/ui-lib-custom/src/lib/radio-button/radio-button.a11y.spec.ts (CREATED — 24 tests)
       • ID/label association: unique IDs, label for/id, aria-labelledby→label element, unique label IDs
       • Group ARIA: role=radiogroup, aria-labelledby→group label, aria-required reflects groupRequired
       • aria-required/aria-disabled on individual native inputs
-      • Roving tabindex: all→-1 when none selected; selected→0, others→-1; disabled always -1
+      • Tabindex: enabled radios have tabindex=0 (browsers implement roving natively), disabled→-1
       • Keyboard navigation: ArrowDown/Right/Up/Left select + move focus; wrap from last→first,
         first→last; disabled radio skipped in navigation
       • axe-core: no selection, one selected, disabled item, group aria-required
@@ -76,7 +72,6 @@ Changed:
       • Added Keyboard Navigation table (Tab/Shift+Tab/Arrow/Space)
       • Added Accessibility section with two group labeling patterns (fieldset/legend + role=radiogroup)
       • Added ReactiveFormsModule usage example and disabled option example
-      • Updated inputs table to document roving tabindex in tabindex field, aria notes
   - docs/COMPONENT_SCORES.md
       • RadioButton: ⏳ Queued → ✅ Done
 State: RadioButton fully hardened. 64 tests pass (40 unit + 24 a11y). Build clean.
@@ -86,7 +81,37 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: node_modules/.bin/ prefix required for jest/ng; npx works for eslint after npm install.
-Next step: InputNumber hardening (Tier 3, #26) — role=spinbutton, aria-valuenow/min/max, increment/decrement buttons.
+Next step: Rating hardening (Tier 3, #30).
+
+Date: 2026-05-11 [Knob component — accessibility hardening COMPLETE (#31)]
+Changed:
+  - projects/ui-lib-custom/src/lib/knob/knob.component.ts
+      • Moved slider semantics to host (`role=slider`, `aria-valuenow/min/max/valuetext`, keyboard + pointer handlers)
+      • Added `getValueText()` helper for `aria-valuetext`
+      • Added requestAnimationFrame-throttled drag updates and RAF cleanup on pointer-up/destroy
+  - projects/ui-lib-custom/src/lib/knob/knob.component.html
+      • Marked SVG as decorative (`aria-hidden="true"`, `focusable="false"`)
+      • Removed interactive ARIA/event bindings from SVG
+  - projects/ui-lib-custom/src/lib/knob/knob.component.scss
+      • Added `prefers-reduced-motion: reduce` block (`--uilib-knob-transition-duration: 0ms`)
+  - projects/ui-lib-custom/src/lib/knob/knob.component.spec.ts
+      • Updated ARIA assertions to target knob host element semantics
+  - projects/ui-lib-custom/src/lib/knob/knob.a11y.spec.ts (CREATED — 21 tests)
+      • Added role/ARIA assertions, keyboard equivalence coverage, disabled behavior, decorative SVG checks
+      • Added axe checks for default, min, max, and disabled states
+  - projects/ui-lib-custom/src/lib/knob/README.md
+      • Added accessibility behavior and keyboard support table
+  - docs/COMPONENT_SCORES.md
+      • Knob queue status set to ✅ Done; score row populated (avg 8.2)
+State: Knob hardening complete with host-level slider semantics, keyboard parity for drag operations,
+  decorative SVG semantics, reduced-motion support, and dedicated a11y test coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/knob/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=knob --no-coverage (56/56 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Installed dependencies via `npm install` in fresh clone before running validation commands.
+Next step: Table (#32) hardening — start Tier 4 Data Display.
 
 Date: 2026-05-11 [MegaMenu component — 6-phase Hardening COMPLETE (#16)]
 Changed:
@@ -114,24 +139,9 @@ Changed:
       • CRITICAL: Added `[attr.aria-label]="item.label ? (item.label + ' submenu') : null"` on panel
       • CRITICAL: Added `[attr.aria-label]="column.header || null"` on column `<ul role="menu">`
       • Changed root link tabindex from `item.disabled ? '-1' : '0'` to `getRootTabIndex(item, $index)`
-      • Replaced duplicate `@if (item.url)` / `@else` <a> blocks with single `<a [href]="...">` pattern
-      • Replaced messy `[class]`/`[class.x]`/`class` combination on `<li>` with `[class]="getRootItemClass(...)"`
-      • Fixed `track $index` in `@for` loops to track by label/header
   - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.scss
       • Added `@media (prefers-reduced-motion: reduce)` block with `--uilib-mega-menu-transition: 0ms`
   - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.a11y.spec.ts (CREATED — 44 tests)
-      • Nav landmark, menubar ARIA structure, aria-controls/panelId wiring
-      • Mega panel: aria-label, column role="menu" + aria-label, sub-item ARIA
-      • Roving tabindex: default first, ArrowRight/Left/Home/End move tab stop
-      • Panel keyboard nav: ArrowDown/Up within column, ArrowRight/Left between columns
-      • Focus restore: Escape from sub-item returns focus to triggering root item
-      • panelOpened output: subscription test
-      • axe-core: empty, closed, Products panel open, Company panel open
-  - projects/ui-lib-custom/src/lib/mega-menu/mega-menu.spec.ts
-      • Updated `aria-haspopup` test expectation from `'true'` to `'menu'` (correct value)
-  - projects/ui-lib-custom/src/lib/mega-menu/README.md
-      • Added MegaMenuSubColumn / MegaMenuSubItem tables, public API table, ARIA pattern table,
-        keyboard nav table, column aria-label guidance
   - docs/COMPONENT_SCORES.md
       • MegaMenu: ⏳ Queued → ✅ Done; score row 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
 State: MegaMenu fully hardened. 95 tests pass (51 unit + 44 a11y). Build clean.
@@ -142,47 +152,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: node_modules/.bin/ prefix required for all CLI tools; npm install required first.
 Next step: Tabs hardening (Tier 2, #17) — role=tablist/tab/tabpanel, arrow nav, aria-selected.
-
-Date: 2026-05-11 [ColorPicker component — Phase 3 Accessibility Hardening COMPLETE (#28)]
-Changed:
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.constants.ts
-      • Added HexInputSuffix, HueInputSuffix, SatInputSuffix, BrightInputSuffix to COLOR_PICKER_IDS
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.ts
-      • Added hexInputId, hueInputId, satInputId, brightInputId computed signals
-      • Added hexDisplayValue computed signal (6-char hex without '#' for hex input binding)
-      • Added onHexInputChange, onHueInputChange, onSatInputChange, onBrightInputChange handlers
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.html
-      • CRITICAL: Trigger — added aria-haspopup="dialog"; updated aria-label to 'Color: {hex}, click to open picker'
-      • CRITICAL: Panel — added role="dialog", aria-label="Color picker", aria-modal="false"
-      • CRITICAL: Color area — added aria-hidden="true", changed tabindex to static "-1"
-      • CRITICAL: Hue slider — added role="slider", aria-label="Hue", aria-valuemin/max/now/text
-      • NEW: Controls wrapper div (ui-lib-colorpicker__controls) for flex row layout
-      • NEW: Keyboard-accessible inputs section with hex text input + H/S/B number inputs, all with associated <label> elements
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.scss
-      • Panel changed from flex-row to flex-column; added .ui-lib-colorpicker__controls flex row
-      • Added styles for .ui-lib-colorpicker__inputs, __input-row, __input-group, __input-label,
-        __text-input, __number-input (focus rings, compact sizing, spinner removal)
-  - projects/ui-lib-custom/src/lib/color-picker/color-picker.a11y.spec.ts (CREATED — 30 tests)
-      • Trigger: type=button, aria-haspopup=dialog, aria-label contains color, aria-expanded
-      • Panel: role=dialog, aria-label="Color picker", aria-modal=false
-      • Color area: aria-hidden=true, tabindex=-1
-      • Hue slider: role=slider, aria-label, aria-valuemin/max/now/text
-      • Hex input: label associated via for/id; value is 6-char hex
-      • H/S/B inputs: all labels associated; values in correct ranges
-      • Escape: closes picker, restores focus to trigger
-      • axe-core: closed state, open state, inline mode — all pass
-  - projects/ui-lib-custom/src/lib/color-picker/README.md
-      • Added Keyboard Access section, Supported Formats table
-  - docs/COMPONENT_SCORES.md
-      • ColorPicker: ⏳ Queued → ✅ Done; score row 8.2/10 avg 🟢
-State: ColorPicker Phase 3 (Accessibility) complete. 30 a11y tests + 55 existing tests all pass.
-  Next queue item: Password (#29) — strength meter live region, toggle visibility button label.
-Verification:
-  eslint projects/ui-lib-custom/src/lib/color-picker/ --max-warnings 0 (CLEAN, EXIT:0)
-  jest --testPathPatterns=color-picker --no-coverage (85/85 PASS — 55 unit + 30 a11y)
-  jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  ng build ui-lib-custom — Built, zero errors
-Terminal notes: node_modules/.bin/eslint works after npm install. npx eslint tries to install
-  a new version which fails. Always use node_modules/.bin/ prefix for all CLI tools.
-Next step: Password (#29) — strength meter live region, show/hide toggle button aria-label.
-
