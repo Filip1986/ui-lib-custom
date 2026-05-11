@@ -284,10 +284,6 @@ ui-lib-tabs ui-lib-tab-panel.ui-lib-tab-panel {
   color: var(--uilib-tabs-color-resolved);
 }
 
-ui-lib-tabs ui-lib-tab-panel.ui-lib-tab-panel:not(.ui-lib-tab-panel--active) {
-  display: none;
-}
-
 /* Variant: Material */
 ui-lib-tabs .ui-lib-tabs__list.ui-lib-tabs.ui-lib-tabs--material {
   border-bottom: var(--uilib-tabs-border-width-resolved) solid
@@ -392,4 +388,14 @@ ui-lib-tabs[data-orientation='vertical'] .ui-lib-tabs__panels {
   --uilib-tab-bg-hover: color-mix(in srgb, var(--uilib-text-dark-primary) 6%, transparent);
   --uilib-tab-bg-active: color-mix(in srgb, var(--uilib-text-dark-primary) 10%, transparent);
   --uilib-focus-ring-color: var(--uilib-color-primary-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-tabs {
+    --uilib-tabs-transition: 0ms linear;
+  }
+
+  ui-lib-tabs[data-scroll-arrows] .ui-lib-tabs__list {
+    scroll-behavior: auto;
+  }
 }

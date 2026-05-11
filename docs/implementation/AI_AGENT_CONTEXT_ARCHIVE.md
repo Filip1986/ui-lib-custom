@@ -4,6 +4,38 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [Knob component — accessibility hardening COMPLETE (#31)]
+Changed:
+  - projects/ui-lib-custom/src/lib/knob/knob.component.ts
+      • Moved slider semantics to host (`role=slider`, `aria-valuenow/min/max/valuetext`, keyboard + pointer handlers)
+      • Added `getValueText()` helper for `aria-valuetext`
+      • Added requestAnimationFrame-throttled drag updates and RAF cleanup on pointer-up/destroy
+  - projects/ui-lib-custom/src/lib/knob/knob.component.html
+      • Marked SVG as decorative (`aria-hidden="true"`, `focusable="false"`)
+      • Removed interactive ARIA/event bindings from SVG
+  - projects/ui-lib-custom/src/lib/knob/knob.component.scss
+      • Added `prefers-reduced-motion: reduce` block (`--uilib-knob-transition-duration: 0ms`)
+  - projects/ui-lib-custom/src/lib/knob/knob.component.spec.ts
+      • Updated ARIA assertions to target knob host element semantics
+  - projects/ui-lib-custom/src/lib/knob/knob.a11y.spec.ts (CREATED — 21 tests)
+      • Added role/ARIA assertions, keyboard equivalence coverage, disabled behavior, decorative SVG checks
+      • Added axe checks for default, min, max, and disabled states
+  - projects/ui-lib-custom/src/lib/knob/README.md
+      • Added accessibility behavior and keyboard support table
+  - docs/COMPONENT_SCORES.md
+      • Knob queue status set to ✅ Done; score row populated (avg 8.2)
+State: Knob hardening complete with host-level slider semantics, keyboard parity for drag operations,
+  decorative SVG semantics, reduced-motion support, and dedicated a11y test coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/knob/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=knob --no-coverage (56/56 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Installed dependencies via `npm install` in fresh clone before running validation commands.
+Next step: Table (#32) hardening — start Tier 4 Data Display.
+
+---
+
 Date: 2026-05-10 [Toast component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/toast/toast.ts

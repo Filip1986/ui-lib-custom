@@ -3,6 +3,7 @@ import type { TemplateRef } from '@angular/core';
 export type TabsVariant = 'material' | 'bootstrap' | 'minimal';
 export type TabsSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
 export type TabsOrientation = 'horizontal' | 'vertical';
+export type TabsActivation = 'auto' | 'manual';
 export type TabsAlignment = 'start' | 'center' | 'end' | 'stretch';
 export type TabsLazyMode = false | 'unmount' | 'keep-alive';
 export type TabsScrollBehavior = 'auto' | 'arrows' | 'overflow-menu';
