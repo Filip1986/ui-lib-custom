@@ -4,12 +4,6 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
-# AI Agent Context Archive
-
-This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT_CONTEXT.md`.
-
----
-
 Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
 Changed:
   - projects/ui-lib-custom/src/lib/chart/chart.component.ts
