@@ -453,9 +453,9 @@ describe('InputNumberComponent', (): void => {
       setInputs(fixture, { showButtons: true, min: 0, max: 1 });
       writeValue(fixture, 1);
 
-      expect(spinButton(fixture, 'up').disabled).toBeTruthy();
+      expect(spinButton(fixture, 'up').getAttribute('aria-disabled')).toBe('true');
       writeValue(fixture, 0);
-      expect(spinButton(fixture, 'down').disabled).toBeTruthy();
+      expect(spinButton(fixture, 'down').getAttribute('aria-disabled')).toBe('true');
     });
 
     it('spinner starts from 0 when value is null', (): void => {
