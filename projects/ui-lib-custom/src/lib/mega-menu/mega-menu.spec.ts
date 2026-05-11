@@ -446,7 +446,7 @@ describe('MegaMenu', (): void => {
     it('should set aria-haspopup on top-level items that have a panel', (): void => {
       const fixture: ComponentFixture<HostComponent> = createFixture();
       const links: HTMLElement[] = getRootLinks(fixture);
-      expect(links[0]?.getAttribute('aria-haspopup')).toBe('true');
+      expect(links[0]?.getAttribute('aria-haspopup')).toBe('menu');
     });
 
     it('should set aria-expanded="false" on closed panel items', (): void => {
