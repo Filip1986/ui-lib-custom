@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** MegaMenu accessibility hardening COMPLETE (6-phase, #16); next is Tabs (#17)
-- **Next queue:** Tabs hardening (Tier 2, #17) — role=tablist/tab/tabpanel, arrow nav, aria-selected
+- **Active focus:** Password accessibility hardening COMPLETE (6-phase, #29); next is Rating (#30)
+- **Next queue:** Rating hardening (Tier 3, #30) — role=radiogroup or role=slider, keyboard interaction
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
 ### Component/Docs Delta (Active Only)
@@ -31,6 +31,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Menu` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 89 tests — 44 unit + 45 a11y)
 - `Menubar` -> ✅ complete + hardened (6-phase evolution, score 9.0/10, 84 tests — 42 unit + 42 a11y)
 - `MegaMenu` -> ✅ complete + hardened (6-phase, score 9.0/10, 95 tests — 51 unit + 44 a11y)
+- `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 
 ---
 
@@ -246,6 +247,51 @@ Terminal notes:
   - `playwright-browser_*` MCP tools could not be used due browser lock; screenshot captured via
     `npx playwright screenshot` after `npx playwright install chromium`
 Next step: Input hardening (#21) — start Tier 3 form controls with label/validation ARIA pass.
+
+Date: 2026-05-11 [Password component — 6-phase hardening COMPLETE (#29)]
+Changed:
+  - projects/ui-lib-custom/src/lib/password/password.component.ts
+      • Added `let nextPasswordId: number = 0` module-level counter
+      • Added `public readonly passwordId: string` (auto-generated unique id)
+      • Added `public readonly strengthId: string` (= passwordId + "-strength")
+      • Added `protected readonly strengthDescription: Signal<string>` computed — returns
+        "Password strength: None/Weak/Medium/Strong" for screen reader announcements
+  - projects/ui-lib-custom/src/lib/password/password.component.html
+      • Input: `[id]` now uses `inputId() ?? passwordId` (auto-id with override support)
+      • Input: Added `[attr.aria-describedby]="feedback() ? strengthId : null"`
+      • Toggle button: Added `[attr.aria-pressed]="passwordVisible()"`
+      • SVG icons: Added `focusable="false"` to all icons (alongside existing `aria-hidden="true"`)
+      • Added persistent visually-hidden live region (`aria-live="polite"`, `aria-atomic="true"`,
+        class `uilib-visually-hidden`) bound to `strengthId` — always in DOM when `feedback` is true
+      • Removed `role="status"`, `aria-live`, `aria-atomic` from visual panel (live region handles this)
+      • Visual panel `.uilib-password-meter-text` marked `aria-hidden="true"` (decorative)
+  - projects/ui-lib-custom/src/lib/password/password.component.scss
+      • Added `.uilib-visually-hidden` utility class (SR-only pattern)
+      • Changed meter-fill transitions to use CSS vars
+        `--uilib-password-meter-transition-duration` / `--uilib-password-meter-color-transition-duration`
+      • Added `@media (prefers-reduced-motion: reduce)` block setting both vars to 0ms
+  - projects/ui-lib-custom/src/lib/password/password.a11y.spec.ts (CREATED — 24 tests)
+      • Input id pattern, unique IDs, aria-describedby wiring
+      • Live region: aria-live/atomic, always present, strength text at empty/weak/strong
+      • Visual meter: aria-hidden
+      • Toggle button: type, aria-label Show/Hide, aria-pressed false/true, icon aria-hidden + focusable=false
+      • axe-core: empty, weak password, strong password, toggle-visible state
+  - projects/ui-lib-custom/src/lib/password/password.component.spec.ts
+      • Updated `accessibility` describe: replaced `role="status"` panel test with live-region test
+  - projects/ui-lib-custom/src/lib/password/README.md
+      • Added Public properties table (`passwordId`, `strengthId`)
+      • Added Accessibility section: label association pattern, live region description, toggle button
+      • Updated Usage with label + #ref pattern examples
+  - docs/COMPONENT_SCORES.md
+      • Password (#29): ⏳ Queued → ✅ Done
+State: Password fully hardened. 73 tests pass (49 unit + 24 a11y). Build clean with zero warnings.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/password/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=password --no-coverage (73/73 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero warnings)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: node_modules/.bin/ prefix required; npm install needed first in a fresh clone.
+Next step: Rating hardening (Tier 3, #30) — role=radiogroup or role=slider pattern.
 
 
 Date: 2026-05-10 [Accordion component — 6-phase hardening COMPLETE]
