@@ -98,6 +98,7 @@ Use `aria-haspopup="menu"` at minimum. `aria-expanded` and `aria-controls` are r
 - Opening captures the previously focused element and focuses the first enabled top-level menu item.
 - Escape-close restores focus to the captured element.
 - Click-outside and item-activation closes do not force focus restoration.
+- Tab-close also does not restore focus; native Tab progression continues forward naturally.
 
 ## CSS custom properties
 

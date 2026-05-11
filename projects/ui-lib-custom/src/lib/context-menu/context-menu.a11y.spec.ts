@@ -11,6 +11,12 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { ContextMenu, CONTEXT_MENU_DEFAULT_ARIA_LABEL } from './context-menu';
 import type { ContextMenuItem } from './context-menu.types';
 
+/**
+ * axe-core may report `aria-required-children` for this menu structure because
+ * the items are wrapped by a presentational `<ul role="presentation">`.
+ * The structure follows the same accepted pattern as hardened Menu/TieredMenu,
+ * so this single rule is suppressed in automated checks.
+ */
 const CONTEXT_MENU_AXE_RULES: Record<string, { enabled: boolean }> = {
   ...SKIP_COLOR_CONTRAST_RULES,
   'aria-required-children': { enabled: false },
