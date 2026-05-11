@@ -15,12 +15,16 @@
   --uilib-stepper-indicator-bg-completed: var(--uilib-color-primary-500, #6366f1);
   --uilib-stepper-indicator-color-completed: #ffffff;
   --uilib-stepper-indicator-border-completed: 2px solid var(--uilib-color-primary-500, #6366f1);
+  --uilib-stepper-indicator-bg-error: var(--uilib-color-danger-500, #dc2626);
+  --uilib-stepper-indicator-color-error: #ffffff;
+  --uilib-stepper-indicator-border-error: 2px solid var(--uilib-color-danger-500, #dc2626);
   --uilib-stepper-indicator-bg-disabled: var(--uilib-surface-b, #f3f4f6);
   --uilib-stepper-indicator-color-disabled: var(--uilib-color-surface-400, #9ca3af);
   --uilib-stepper-indicator-border-disabled: 2px solid var(--uilib-surface-d, #e5e7eb);
   --uilib-stepper-label-color: var(--uilib-page-fg, #374151);
   --uilib-stepper-label-color-active: var(--uilib-color-primary-600, #4f46e5);
   --uilib-stepper-label-color-completed: var(--uilib-page-fg, #374151);
+  --uilib-stepper-label-color-error: var(--uilib-color-danger-600, #b91c1c);
   --uilib-stepper-label-color-disabled: var(--uilib-color-surface-400, #9ca3af);
   --uilib-stepper-label-font-size: 0.875rem;
   --uilib-stepper-label-font-weight: 500;
@@ -65,8 +69,23 @@
       border: var(--uilib-stepper-indicator-border-completed);
     }
 
-    .ui-lib-stepper__separator {
+    &::after,
+    .ui-lib-stepper__step-side::after {
       background-color: var(--uilib-stepper-indicator-bg-completed);
+    }
+  }
+
+  .ui-lib-stepper__step--error {
+    .ui-lib-stepper__step-header .ui-lib-stepper__step-indicator,
+    .ui-lib-stepper__step-indicator {
+      background: var(--uilib-stepper-indicator-bg-error);
+      color: var(--uilib-stepper-indicator-color-error);
+      border: var(--uilib-stepper-indicator-border-error);
+    }
+
+    .ui-lib-stepper__step-label {
+      color: var(--uilib-stepper-label-color-error);
+      font-weight: 600;
     }
   }
 
@@ -77,6 +96,7 @@
       color: var(--uilib-stepper-indicator-color-disabled);
       border: var(--uilib-stepper-indicator-border-disabled);
       cursor: not-allowed;
+      pointer-events: none;
     }
 
     .ui-lib-stepper__step-label {
@@ -129,8 +149,23 @@
       flex: 1;
       min-width: 0;
 
+      &::after {
+        content: '';
+        flex: 1;
+        height: var(--uilib-stepper-separator-thickness);
+        min-width: 1rem;
+        background-color: var(--uilib-stepper-separator-color);
+        transition:
+          background-color var(--uilib-stepper-transition),
+          opacity var(--uilib-stepper-transition);
+      }
+
       &:last-child {
         flex: 0 0 auto;
+
+        &::after {
+          display: none;
+        }
       }
     }
 
@@ -164,14 +199,6 @@
         font-family: inherit;
       }
     }
-
-    .ui-lib-stepper__separator {
-      flex: 1;
-      height: var(--uilib-stepper-separator-thickness);
-      background-color: var(--uilib-stepper-separator-color);
-      min-width: 1rem;
-    }
-
     .ui-lib-stepper__panels {
       margin-top: 0.5rem;
     }
@@ -203,6 +230,18 @@
       flex-direction: column;
       align-items: center;
       flex-shrink: 0;
+
+      &::after {
+        content: '';
+        width: var(--uilib-stepper-separator-thickness);
+        flex: 1;
+        min-height: 1.5rem;
+        margin: 0.25rem 0;
+        background-color: var(--uilib-stepper-separator-color);
+        transition:
+          background-color var(--uilib-stepper-transition),
+          opacity var(--uilib-stepper-transition);
+      }
     }
 
     .ui-lib-stepper__step-indicator {
@@ -223,13 +262,8 @@
         outline-offset: 2px;
       }
     }
-
-    .ui-lib-stepper__separator {
-      width: var(--uilib-stepper-separator-thickness);
-      flex: 1;
-      min-height: 1.5rem;
-      background-color: var(--uilib-stepper-separator-color);
-      margin: 0.25rem 0;
+    .ui-lib-stepper__step:last-child .ui-lib-stepper__step-side::after {
+      display: none;
     }
 
     .ui-lib-stepper__step-main {
@@ -389,5 +423,13 @@
   // ── Reduced motion ──────────────────────────────────────────────────────────
   @media (prefers-reduced-motion: reduce) {
     --uilib-stepper-transition: none;
+
+    .ui-lib-stepper__step-header,
+    .ui-lib-stepper__step-indicator,
+    .ui-lib-stepper__step::after,
+    .ui-lib-stepper__step-side::after,
+    .ui-lib-stepper__step-label {
+      transition: none;
+    }
   }
 }
