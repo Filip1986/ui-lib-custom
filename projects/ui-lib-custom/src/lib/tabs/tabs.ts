@@ -52,7 +52,7 @@ type RtlScrollAxis = 'default' | 'negative' | 'reverse';
 
 type TabsSelection = { value: TabsValue | null; index: number };
 
-let nextTabsId: number = 0;
+let nextTabsInstanceId: number = 0;
 
 export type TabsContextItem = TabContext & {
   ref: Tab;
@@ -88,7 +88,7 @@ interface ScrollMetrics {
   },
 })
 export class Tabs implements OnDestroy, AfterViewInit {
-  public readonly tabsId: string = `ui-lib-tabs-${++nextTabsId}`;
+  public readonly tabsId: string = `ui-lib-tabs-${++nextTabsInstanceId}`;
 
   private readonly elementRef: ElementRef<HTMLElement> = inject(
     ElementRef
