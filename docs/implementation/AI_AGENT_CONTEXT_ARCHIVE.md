@@ -4,6 +4,44 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [RadioButton component — 6-phase Hardening COMPLETE (#23)]
+Changed:
+  - projects/ui-lib-custom/src/lib/radio-button/radio-button.ts
+      • Added `onNativeKeydown(event: KeyboardEvent)`: ArrowDown/Right moves to next
+        non-disabled sibling in the group (by name attribute), wrapping; ArrowUp/Left moves
+        to previous; both call `.focus()` + `.click()` on the target native input
+      • CSS.escape() with jsdom-safe fallback for name attribute selector safety
+  - projects/ui-lib-custom/src/lib/radio-button/radio-button.html
+      • Added `[attr.aria-disabled]="isDisabled() ? 'true' : null"` to native input
+      • Added `[attr.aria-required]="required() ? 'true' : null"` to native input
+      • Added `(keydown)="onNativeKeydown($event)"` binding to native input
+  - projects/ui-lib-custom/src/lib/radio-button/radio-button.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block: `transition: none` on __box and __icon
+  - projects/ui-lib-custom/src/lib/radio-button/radio-button.a11y.spec.ts (CREATED — 24 tests)
+      • ID/label association: unique IDs, label for/id, aria-labelledby→label element, unique label IDs
+      • Group ARIA: role=radiogroup, aria-labelledby→group label, aria-required reflects groupRequired
+      • aria-required/aria-disabled on individual native inputs
+      • Tabindex: enabled radios have tabindex=0 (browsers implement roving natively), disabled→-1
+      • Keyboard navigation: ArrowDown/Right/Up/Left select + move focus; wrap from last→first,
+        first→last; disabled radio skipped in navigation
+      • axe-core: no selection, one selected, disabled item, group aria-required
+  - projects/ui-lib-custom/src/lib/radio-button/README.md
+      • Added Keyboard Navigation table (Tab/Shift+Tab/Arrow/Space)
+      • Added Accessibility section with two group labeling patterns (fieldset/legend + role=radiogroup)
+      • Added ReactiveFormsModule usage example and disabled option example
+  - docs/COMPONENT_SCORES.md
+      • RadioButton: ⏳ Queued → ✅ Done
+State: RadioButton fully hardened. 64 tests pass (40 unit + 24 a11y). Build clean.
+Verification:
+  npx eslint projects/ui-lib-custom/src/lib/radio-button/ --max-warnings 0 (EXIT 0)
+  node_modules/.bin/jest --testPathPatterns=radio-button --no-coverage (64/64 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: node_modules/.bin/ prefix required for jest/ng; npx works for eslint after npm install.
+Next step: Rating hardening (Tier 3, #30).
+
+---
+
 Date: 2026-05-11 [Knob component — accessibility hardening COMPLETE (#31)]
 Changed:
   - projects/ui-lib-custom/src/lib/knob/knob.component.ts

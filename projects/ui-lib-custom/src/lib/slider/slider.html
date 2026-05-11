@@ -3,7 +3,7 @@
   (pointerdown)="onTrackPointerDown($event)"
 >
   <div class="ui-lib-slider__track" #trackRef>
-    <div class="ui-lib-slider__fill" [style]="fillStyle()"></div>
+    <div class="ui-lib-slider__fill" aria-hidden="true" [style]="fillStyle()"></div>
 
     @if (!range()) {
       <div
@@ -12,6 +12,7 @@
         [attr.aria-valuemin]="min()"
         [attr.aria-valuemax]="max()"
         [attr.aria-valuenow]="singleValue()"
+        [attr.aria-valuetext]="singleValueText()"
         [attr.aria-orientation]="orientation()"
         [attr.aria-label]="ariaLabel()"
         [attr.aria-labelledby]="ariaLabelledBy()"
@@ -32,6 +33,7 @@
         [attr.aria-valuemin]="min()"
         [attr.aria-valuemax]="rangeEndValue()"
         [attr.aria-valuenow]="rangeStartValue()"
+        [attr.aria-valuetext]="startValueText()"
         [attr.aria-orientation]="orientation()"
         [attr.aria-label]="ariaLabel() ?? 'Minimum value'"
         [attr.aria-labelledby]="ariaLabelledBy()"
@@ -49,6 +51,7 @@
         [attr.aria-valuemin]="rangeStartValue()"
         [attr.aria-valuemax]="max()"
         [attr.aria-valuenow]="rangeEndValue()"
+        [attr.aria-valuetext]="endValueText()"
         [attr.aria-orientation]="orientation()"
         [attr.aria-label]="ariaLabel() ?? 'Maximum value'"
         [attr.aria-labelledby]="ariaLabelledBy()"
