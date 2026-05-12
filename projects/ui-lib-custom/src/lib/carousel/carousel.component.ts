@@ -29,8 +29,10 @@ import type {
 } from '@angular/core';
 import {
   CAROUSEL_ARIA_NEXT_LABEL,
+  CAROUSEL_ARIA_PAUSE_LABEL,
+  CAROUSEL_ARIA_PLAY_LABEL,
   CAROUSEL_ARIA_PREV_LABEL,
-  CAROUSEL_ARIA_SLIDE_ROLEDESCRIPTION,
+  CAROUSEL_ARIA_REGION_LABEL,
   CAROUSEL_DEFAULT_NUM_SCROLL,
   CAROUSEL_DEFAULT_NUM_VISIBLE,
   CAROUSEL_DEFAULT_ORIENTATION,
@@ -81,6 +83,8 @@ import type {
     '[class.uilib-carousel-md]': 'size() === "md"',
     '[class.uilib-carousel-lg]': 'size() === "lg"',
     role: 'region',
+    '[attr.aria-label]': 'ariaLabel() || "Carousel"',
+    'aria-roledescription': 'carousel',
   },
 })
 export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDestroy {
@@ -182,6 +186,15 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   /** ARIA label for the "next" button. */
   public readonly nextAriaLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_NEXT_LABEL);
 
+  /** ARIA label for the carousel landmark region. Falls back to `'Carousel'`. */
+  public readonly ariaLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_REGION_LABEL);
+
+  /** ARIA label for the autoplay pause button (when playing). */
+  public readonly pauseLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_PAUSE_LABEL);
+
+  /** ARIA label for the autoplay resume button (when paused). */
+  public readonly playLabel: InputSignal<string> = input<string>(CAROUSEL_ARIA_PLAY_LABEL);
+
   // ─── Outputs ─────────────────────────────────────────────────────────────────
 
   /** Emitted whenever the active page changes. */
@@ -254,6 +267,12 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
   /** Whether autoplay is currently allowed (set to false after manual nav). */
   private autoplayAllowed: boolean = false;
 
+  /** Whether autoplay is currently active (exposed for template). */
+  public readonly playing: WritableSignal<boolean> = signal<boolean>(false);
+
+  /** Whether the user has explicitly paused autoplay via the pause button. */
+  private userPaused: boolean = false;
+
   /** Injected style element for per-component item-width rules. */
   private styleElement: HTMLStyleElement | null = null;
 
@@ -305,6 +324,14 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
     }
   );
 
+  /** ARIA label for the autoplay pause/resume button (reactive to `playing` state). */
+  public readonly autoplayButtonLabel: Signal<string> = computed((): string =>
+    this.playing() ? this.pauseLabel() : this.playLabel()
+  );
+
+  /** Total number of real slides (excluding clones). */
+  public readonly totalSlides: Signal<number> = computed((): number => this.value().length);
+
   // ─── Constructor ─────────────────────────────────────────────────────────────
 
   constructor() {
@@ -328,7 +355,11 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   public ngAfterContentInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.autoplayAllowed = this.autoplayInterval() > 0;
+      const prefersReducedMotion: boolean =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      this.autoplayAllowed = this.autoplayInterval() > 0 && !prefersReducedMotion;
 
       if (this.responsiveOptions().length > 0) {
         this.applyResponsiveOptions();
@@ -391,6 +422,19 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
     event.preventDefault();
   }
 
+  /** Toggle autoplay pause/resume (used by the pause button in template). */
+  public toggleAutoplay(): void {
+    if (this.playing()) {
+      this.userPaused = true;
+      this.stopAutoplay();
+    } else {
+      this.userPaused = false;
+      if (isPlatformBrowser(this.platformId)) {
+        this.startAutoplay();
+      }
+    }
+  }
+
   // ─── Index helpers (used in template) ────────────────────────────────────────
 
   /** First index of the currently visible window into the value array. */
@@ -423,14 +467,14 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   // ─── ARIA helpers (used in template) ─────────────────────────────────────────
 
-  /** ARIA label for a numbered slide. */
+  /** ARIA label for a numbered slide — `"Slide N of M"`. */
   public ariaSlideNumber(index: number): string {
-    return `${CAROUSEL_ARIA_SLIDE_ROLEDESCRIPTION} ${index + 1}`;
+    return `Slide ${index + 1} of ${this.totalSlides()}`;
   }
 
   /** ARIA label for a numbered indicator dot. */
   public ariaPageLabel(page: number): string {
-    return `Page ${page + 1}`;
+    return `Go to slide ${page + 1}`;
   }
 
   /** Whether orientation is vertical — used in template and SCSS helpers. */
@@ -676,6 +720,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
       }, this.autoplayInterval());
     });
     this.autoplayAllowed = true;
+    this.playing.set(true);
   }
 
   /** Stop the autoplay timer. */
@@ -685,6 +730,7 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
       this.autoplayTimerId = null;
     }
     this.autoplayAllowed = false;
+    this.playing.set(false);
   }
 
   /** Bind a window resize listener for responsive option recalculation. */

@@ -70,19 +70,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/tree/tree.ts
-  - projects/ui-lib-custom/src/lib/tree/tree-node.html
-State: Restored the missing `TreeContext` methods on `Tree`, reintroduced optional `hostId` support so `TreeSelect` can wire `aria-controls` to the popup tree, and aligned tree rows with the context API by exposing stable row ids/labels plus decorative icon hiding. The original `TS2420` compile error is fixed and the related tree/tree-select accessibility test slice is green again.
-Verification:
-  .\node_modules\.bin\ng.cmd build ui-lib-custom (PASS)
-  .\node_modules\.bin\jest.cmd --testPathPatterns src/lib/tree/ tree-select --no-coverage (172/172 PASS)
-Terminal notes: Initial Jest command using `|` in `--testPathPatterns` was parsed by PowerShell as a pipeline; reran successfully with separate pattern arguments.
-Next step: Commit the verified Tree / TreeSelect repair.
-
 Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -134,4 +121,45 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-12 [Carousel component — accessibility hardening COMPLETE (#45)]
+Changed:
+  - projects/ui-lib-custom/src/lib/carousel/carousel.constants.ts
+      • Added CAROUSEL_ARIA_REGION_LABEL, CAROUSEL_ARIA_PAUSE_LABEL, CAROUSEL_ARIA_PLAY_LABEL
+      • Updated CAROUSEL_ARIA_PREV_LABEL to 'Previous slide', CAROUSEL_ARIA_NEXT_LABEL to 'Next slide'
+  - projects/ui-lib-custom/src/lib/carousel/carousel.component.ts
+      • Added host bindings: aria-label (from ariaLabel input), aria-roledescription="carousel"
+      • Added inputs: ariaLabel, pauseLabel, playLabel
+      • Added playing writable signal and userPaused flag
+      • Added autoplayButtonLabel computed signal
+      • Added totalSlides computed signal
+      • Disabled autoplay when prefers-reduced-motion: reduce is detected
+      • Updated ariaSlideNumber() → "Slide N of M" format
+      • Updated ariaPageLabel() → "Go to slide N"
+      • Added toggleAutoplay() public method for pause button
+      • startAutoplay/stopAutoplay now update playing signal
+  - projects/ui-lib-custom/src/lib/carousel/carousel.component.html
+      • Added autoplay pause/resume button with dynamic aria-label
+      • Added aria-atomic="false" to content area live region
+      • Added role="group" to all slide items
+      • Changed indicator list from tablist/tab/aria-selected to plain ol/aria-current pattern
+  - projects/ui-lib-custom/src/lib/carousel/carousel.component.scss
+      • Added autoplay button styles
+      • Added @media (prefers-reduced-motion: reduce) block suppressing transitions
+  - projects/ui-lib-custom/src/lib/carousel/carousel.component.spec.ts
+      • Updated ariaSlideNumber / ariaPageLabel expectations to new format
+      • Updated indicator tests to use aria-current instead of aria-selected/tablist
+  - projects/ui-lib-custom/src/lib/carousel/carousel.a11y.spec.ts (CREATED — 26 tests)
+      • region landmark, slide semantics, prev/next labels, indicator aria-current, autoplay pause, keyboard nav, axe-core
+  - projects/ui-lib-custom/src/lib/carousel/README.md
+      • Full inputs table with new i18n inputs, autoplay API, keyboard shortcuts table, accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Carousel #45: ⏳ Queued → ✅ Done (scores: API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
+State: Carousel hardening complete. Region landmark, aria-roledescription, per-slide "Slide N of M" labels, role="group" on slides, aria-current on active indicator, autoplay pause button (WCAG 2.1 SC 2.2.2), prefers-reduced-motion CSS+JS suppression, and 26 a11y regression tests all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/carousel/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=carousel --no-coverage (70 PASS — 44 unit + 26 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Standard npm install required first. Indicator tablist/tab pattern replaced with plain list + aria-current per carousel ARIA pattern guidance.
+Next step: Galleria hardening (Tier 5, #46).
 
