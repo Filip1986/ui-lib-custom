@@ -59,7 +59,7 @@ public readonly items: SplitButtonItem[] = [
 | `text` | `boolean` | `false` | Applies text-style button presentation. |
 | `outlined` | `boolean` | `false` | Applies outlined button presentation. |
 | `dropdownIcon` | `string` | `'chevron-down'` | Menu trigger icon when no custom template is provided. |
-| `buttonAriaLabel` | `string \| null` | `null` | Accessible name for the main button (falls back to `label`). |
+| `buttonAriaLabel` | `string \| null` | `null` | Accessible name for the main button; otherwise falls back to `label` or the icon-only fallback when no text is present. |
 | `menuButtonAriaLabel` | `string \| null` | `null` | Accessible name for menu trigger and menu label fallback. |
 | `tabindex` | `number` | `0` | Tab order value applied to both trigger buttons. |
 | `styleClass` | `string \| null` | `null` | Additional host class names. |
@@ -100,7 +100,7 @@ public readonly items: SplitButtonItem[] = [
 | `disabled` | `boolean` | Marks menu item as non-interactive. |
 | `separator` | `boolean` | Renders a separator row instead of a command item. |
 | `tooltip` | `string` | Native title fallback for tooltip text. |
-| `url` | `string` | Opens URL via `window.open`. |
+| `url` | `string` | Opens a URL using the current document window. |
 | `target` | `string` | Window target used with `url` (`_self`, `_blank`, etc). |
 | `routerLink` | `string \| unknown[]` | Router navigation target when Angular Router is available. |
 | `styleClass` | `string` | Additional metadata class field for consumers/templates. |
@@ -171,7 +171,10 @@ public readonly items: SplitButtonItem[] = [
 - Menu trigger exposes `aria-haspopup="menu"`, `aria-expanded`, and `aria-controls`.
 - Popup list uses `role="menu"`; actionable rows use `role="menuitem"`; separators use `role="separator"`.
 - Disabled menu rows expose `aria-disabled="true"` and are removed from keyboard activation paths.
+- Decorative icons are marked `aria-hidden="true"`.
+- SplitButton generates unique host and menu IDs for stable menu relationships.
 - Escape handling and post-command close behavior return focus to menu trigger for predictable keyboard flow.
+- Reduced-motion mode disables the spinner, menu entrance animation, and button transitions.
 - Consumers should provide meaningful labels when using custom content templates.
 
 ---

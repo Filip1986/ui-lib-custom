@@ -4,16 +4,26 @@
     class="ui-lib-split-button__default-button"
     [disabled]="isMainButtonDisabled()"
     [attr.tabindex]="tabindex()"
-    [attr.aria-label]="buttonAriaLabel() || label() || null"
+    [attr.aria-label]="resolvedButtonAriaLabel()"
     (click)="onMainButtonClick($event)"
     (keydown)="onMainButtonKeydown($event)"
   >
     @if (loading()) {
-      <ui-lib-icon [name]="loadingIcon()" class="ui-lib-split-button__loading-icon" size="sm" />
+      <ui-lib-icon
+        [name]="loadingIcon()"
+        class="ui-lib-split-button__loading-icon"
+        size="sm"
+        aria-hidden="true"
+      />
     }
 
     @if (!loading() && iconPosition() === 'left' && icon()) {
-      <ui-lib-icon [name]="icon()!" class="ui-lib-split-button__icon ui-lib-split-button__icon--start" size="sm" />
+      <ui-lib-icon
+        [name]="icon()!"
+        class="ui-lib-split-button__icon ui-lib-split-button__icon--start"
+        size="sm"
+        aria-hidden="true"
+      />
     }
 
     @if (contentTemplate()) {
@@ -23,7 +33,12 @@
     }
 
     @if (!loading() && iconPosition() === 'right' && icon()) {
-      <ui-lib-icon [name]="icon()!" class="ui-lib-split-button__icon ui-lib-split-button__icon--end" size="sm" />
+      <ui-lib-icon
+        [name]="icon()!"
+        class="ui-lib-split-button__icon ui-lib-split-button__icon--end"
+        size="sm"
+        aria-hidden="true"
+      />
     }
   </button>
 
@@ -43,7 +58,7 @@
     @if (dropdownIconTemplate()) {
       <ng-container [ngTemplateOutlet]="dropdownIconTemplate()!" />
     } @else {
-      <ui-lib-icon [name]="dropdownIcon()" size="sm" />
+      <ui-lib-icon [name]="dropdownIcon()" size="sm" aria-hidden="true" />
     }
   </button>
 </div>
@@ -55,7 +70,7 @@
     class="ui-lib-split-button__menu"
     [attr.aria-label]="menuButtonAriaLabel() || 'Menu'"
   >
-    @for (item of visibleItems(); track $index; let i = $index) {
+    @for (item of visibleItems(); track trackVisibleItem($index, item); let i = $index) {
       @if (item.separator) {
         <li role="separator" class="ui-lib-split-button__separator"></li>
       } @else {
@@ -70,13 +85,18 @@
             [attr.tabindex]="item.disabled ? -1 : 0"
             [attr.href]="item.url ?? null"
             [attr.target]="item.url ? (item.target || '_self') : null"
-            [id]="itemId(i)"
+            [id]="itemId(i, item)"
             [attr.data-menu-item-index]="i"
             (click)="onItemClick($event, item, i)"
             (keydown)="onItemKeydown($event, item, i)"
           >
             @if (item.icon) {
-              <ui-lib-icon [name]="item.icon" size="sm" class="ui-lib-split-button__menu-item-icon" />
+              <ui-lib-icon
+                [name]="item.icon"
+                size="sm"
+                class="ui-lib-split-button__menu-item-icon"
+                aria-hidden="true"
+              />
             }
             <span class="ui-lib-split-button__menu-item-label">{{ item.label }}</span>
           </a>

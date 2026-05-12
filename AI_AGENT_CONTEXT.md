@@ -63,6 +63,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [SplitButton component — accessibility hardening COMPLETE (#68)]
+Changed:
+  - projects/ui-lib-custom/src/lib/split-button/split-button.component.ts
+      • Renamed the module-level instance counter to `nextSplitButtonId`, exposed a public `instanceId`, and bound it to the host `id`
+      • Added `resolvedButtonAriaLabel` fallback logic for icon-only primary buttons without projected text
+      • Added stable per-item track keys/IDs for menu rendering
+      • Switched URL opening to `document.defaultView?.open(...)` for safer browser-only access
+  - projects/ui-lib-custom/src/lib/split-button/split-button.component.html
+      • Marked default decorative icons as `aria-hidden="true"`
+      • Wired primary button accessible-name fallback and stable `@for` tracking
+      • Kept menu trigger/menu/item ARIA semantics aligned with the hardened menu-button pattern
+  - projects/ui-lib-custom/src/lib/split-button/split-button.component.scss
+      • Added `prefers-reduced-motion: reduce` overrides for button/menu transitions and loading/menu animations
+  - projects/ui-lib-custom/src/lib/split-button/split-button.a11y.spec.ts (CREATED — 22 tests)
+      • Added ARIA structure assertions, keyboard-navigation coverage, unique-ID checks, decorative-icon checks, and axe-core validation
+  - projects/ui-lib-custom/src/lib/split-button/README.md
+      • Rewrote the README with full inputs/outputs, ARIA table, keyboard table, CSS custom properties table, and accessibility notes
+  - docs/reference/components/SPLITBUTTON.md
+      • Synced reference docs with icon-only accessible-name fallback, decorative icon handling, unique IDs, and reduced-motion behavior
+  - docs/reference/components/README.md
+      • Added SplitButton hardening highlights to the component index
+  - docs/COMPONENT_SCORES.md
+      • SplitButton #68: ⏳ Queued → ✅ Done; populated score row (API 9, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.6)
+State: SplitButton hardening complete. Menu-button ARIA behavior remains intact, icon-only primary actions now get a safe accessible-name fallback, decorative icons are hidden from assistive tech, reduced-motion support is explicit, and a dedicated 22-test accessibility suite is in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/split-button/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=split-button --no-coverage (78/78 PASS — 56 unit + 22 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/split-button-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
 Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
 Changed:
   - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
@@ -124,31 +156,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
-Changed:
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
-      • Added module-level `let nextProgressSpinnerId: number = 0` counter
-      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
-      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
-      • Added dark mode overrides for bootstrap and minimal variant arc colours
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
-      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
-      • ariaLabel reactive updates, two-instance ID uniqueness
-      • Visual state (size classes sm/lg)
-      • axe-core automated checks (5 states)
-  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
-      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
-  - docs/COMPONENT_SCORES.md
-      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
-Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.

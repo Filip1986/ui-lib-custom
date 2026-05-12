@@ -374,3 +374,16 @@
     transform: translateY(0);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  :host .ui-lib-split-button__default-button,
+  :host .ui-lib-split-button__menu-button,
+  :host .ui-lib-split-button__menu-item {
+    transition: none;
+  }
+
+  :host .ui-lib-split-button__menu,
+  :host .ui-lib-split-button__loading-icon {
+    animation: none;
+  }
+}
