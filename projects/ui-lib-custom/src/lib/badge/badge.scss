@@ -233,3 +233,10 @@ ui-lib-badge.ui-lib-badge--dot.ui-lib-badge--size-lg {
   --uilib-badge-fg: var(--uilib-text-dark-primary);
   --uilib-badge-border: var(--uilib-border-dark);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-badge.ui-lib-badge {
+    transition: none !important;
+    animation: none !important;
+  }
+}

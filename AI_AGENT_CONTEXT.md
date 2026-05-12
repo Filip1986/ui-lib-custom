@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14), and Avatar (#65) also merged
+- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 
@@ -40,6 +40,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
 - `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
+- `Badge` -> ✅ complete + hardened (6-phase, score 8.4/10, 25 tests — 13 unit + 12 a11y)
 - `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
 - `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
@@ -121,33 +122,34 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Avatar component — accessibility hardening COMPLETE (#65)]
+Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
 Changed:
-  - projects/ui-lib-custom/src/lib/avatar/avatar.ts
-      • Added unique instance IDs, full-name `name` input, image-alt fallback resolution, and automatic `listitem` role when nested in AvatarGroup
-  - projects/ui-lib-custom/src/lib/avatar/avatar.html
-      • Switched image alt binding to computed fallback alt (`imageAlt` → `name` → `label` → `Avatar`)
-  - projects/ui-lib-custom/src/lib/avatar/avatar.scss
-      • Added `:focus-visible` treatment and `prefers-reduced-motion` safety override
-  - projects/ui-lib-custom/src/lib/avatar/avatar-group.ts
-      • Added unique group IDs, `role=list`, overflow inputs/announcement text, and AvatarGroup DI context token
-  - projects/ui-lib-custom/src/lib/avatar/avatar-group.html
-      • Added accessible `+N` overflow listitem
-  - projects/ui-lib-custom/src/lib/avatar/avatar-group.scss
-      • Added overflow badge styles and reduced-motion override
-  - projects/ui-lib-custom/src/lib/avatar/avatar.spec.ts
-      • Updated group role expectation to `list` and added overflow/fallback assertions
-  - projects/ui-lib-custom/src/lib/avatar/avatar.a11y.spec.ts (CREATED — 16 tests)
-      • Added ARIA structure, label fallback, decorative internals, grouped-list semantics, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/avatar/README.md
-      • Expanded API docs with `name` and group overflow inputs, plus ARIA/keyboard/CSS variable sections
+  - projects/ui-lib-custom/src/lib/card/card.ts
+      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
+      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
+  - projects/ui-lib-custom/src/lib/card/card.html
+      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
+      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
+  - projects/ui-lib-custom/src/lib/card/card.scss
+      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
+      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
+      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
+  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
+      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
+      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
+      • Added closable card accessible label coverage
+      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
+      • Added axe checks for basic, hoverable, closable, and multi-variant states
+  - projects/ui-lib-custom/src/lib/card/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
+      • Added full Accessibility section with examples, guidelines, and reduced-motion note
   - docs/COMPONENT_SCORES.md
-      • Avatar #65 moved from ⏳ Queued to ✅ Done with completed score row (avg 8.2)
-State: Avatar hardening is complete. Alt propagation, icon/initial naming, grouped list semantics, overflow announcement labeling, reduced-motion guardrails, and dedicated a11y regression coverage are in place.
+      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
+State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/avatar/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=avatar --no-coverage (36/36 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: `node_modules` was missing in the fresh clone; ran `npm install` first. Took manual demo screenshot at `/tmp/avatar-demo.png` after launching `npm run serve:demo`.
-Next step: Resume backlog sequence after Avatar #65 completion.
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
