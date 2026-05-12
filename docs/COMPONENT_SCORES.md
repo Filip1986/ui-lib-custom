@@ -84,7 +84,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |------|-----------------|-------------------------------------------------------------------------------------|------------|
 | 41   | Button          | `aria-disabled` vs `disabled`, icon-only `aria-label`, loading state announcement   | ✅ Done    |
 | 42   | Alert           | `role=alert` vs `role=status`, dismiss button label                                 | ✅ Done     |
-| 43   | Message         | Same as Alert — live region role correctness                                        | ⏳ Queued   |
+| 43   | Message         | Same as Alert — live region role correctness                                        | ✅ Done    |
 | 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ✅ Done     |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
 | 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
@@ -251,7 +251,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Badge           | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | Tag             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
-| Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Message         | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | Skeleton        | 9   | 9    | 9    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | ProgressBar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | ProgressSpinner | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |

@@ -21,7 +21,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Component foundation hardening + documentation completeness
 - **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
-- **Next queue:** Alert hardening (Tier 5, #42) — next after Button
+- **Next queue:** Message hardening (Tier 5, #43) — COMPLETE. ProgressBar hardening (#44) is next.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `Message` -> ✅ complete + hardened (6-phase, score 8.6/10, 50 tests — 32 unit + 18 a11y)
 
 ---
 
@@ -124,34 +125,26 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
 
-Date: 2026-05-12 [PickList component — 6-phase hardening COMPLETE (#40)]
+Date: 2026-05-12 [Message component — 6-phase hardening COMPLETE (#43)]
 Changed:
-  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.html
-      • Added `aria-hidden="true"` to all decorative `<ui-lib-icon>` elements inside buttons
-      • Moved empty-state `<li>` outside `<ul role="listbox">` (fixes ARIA required-children violation); changed to `<p>` / `<div>` elements
-  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.scss
-      • Added `@media (prefers-reduced-motion: reduce)` override block
-      • Added `margin: 0` to `.ui-lib-pick-list__empty` for `<p>` element reset
-  - projects/ui-lib-custom/src/lib/pick-list/pick-list.a11y.spec.ts (CREATED — 31 tests)
-      • 6 axe-core automated checks (default, selected, disabled, filtered, empty, variant states)
-      • 13 ARIA structure assertions (roles, labels, multiselectable, IDs, selected states, icon aria-hidden, button labels)
-      • 10 keyboard navigation tests (ArrowDown/Up, Home/End, Space/Enter, Ctrl+A, Escape, Ctrl+ArrowRight/Left)
-      • 4 live region / transfer announcement tests
-      • 3 variant axe checks (material, bootstrap, minimal)
-  - projects/ui-lib-custom/src/lib/pick-list/README.md
-      • Added `sourceAriaLabel`, `targetAriaLabel`, and all button aria-label inputs to the inputs table
-      • Added Accessibility section with ARIA table, Keyboard table, multi-select guide
-      • Added CSS Custom Properties table
+  - projects/ui-lib-custom/src/lib/message/message.ts
+      • Added module-level `nextMessageId` counter, `messageId` input, `resolvedId` computed signal
+      • Dynamic `liveRole` (`alert` for error/warn, `status` for others) and `ariaLive` computed signals
+      • Host now binds `[attr.id]`, `[attr.role]`, `[attr.aria-live]`, `aria-atomic="true"`
+  - projects/ui-lib-custom/src/lib/message/message.scss
+      • Added `prefers-reduced-motion: reduce` override
+  - projects/ui-lib-custom/src/lib/message/message.spec.ts
+      • Updated role/aria-live tests to reflect dynamic behavior; added aria-atomic, stable-id, and consumer-id tests
+  - projects/ui-lib-custom/src/lib/message/message.a11y.spec.ts (CREATED — 18 tests)
+      • role/aria-live assertions for all six severities, aria-atomic, stable auto-id, consumer messageId, icon aria-hidden, axe-core checks
+  - projects/ui-lib-custom/src/lib/message/README.md
+      • Added `messageId` input, accessibility table (role/aria-live by severity), inline form validation wiring guide, CSS custom properties table
   - docs/COMPONENT_SCORES.md
-      • PickList #40: ⏳ Queued → ✅ Done
-      • Scores: API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived the DataView (#38) handoff to keep only the newest 3 in this file
-State: PickList hardening complete. Fixed genuine ARIA bug (non-option children inside listbox), added decorative icon aria-hidden, reduced-motion SCSS, comprehensive a11y spec (31 tests, all pass), and updated README + score bookkeeping.
+      • Message #43: ⏳ Queued → ✅ Done (API 9, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.6)
+State: Message hardening complete. The component now meets full live-region semantics matching Alert (#42): severity-aware role + aria-live, aria-atomic, stable auto-generated IDs for aria-describedby association, and prefers-reduced-motion styles.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/pick-list/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=pick-list --no-coverage (91/91 PASS — 60 unit + 31 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/message/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/message --no-coverage (50/50 PASS — 32 unit + 18 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: npm install required (fresh clone). The structural HTML fix (empty state outside listbox) affects how tests query the empty state but all 91 tests pass.
-Next step: Continue Tier 4 queue hardening with remaining queued components.
+Next step: ProgressBar hardening (Tier 5, #44).
