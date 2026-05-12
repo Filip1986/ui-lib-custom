@@ -1,39 +1,46 @@
-<section class="ripple-demo" data-testid="ripple-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
-  <div class="demo-hero">
-    <h1 class="demo-title">Ripple</h1>
-    <p class="demo-subtitle">
+  <!-- ---- Overview / Hero -------------------------------------------- -->
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Ripple</h1>
+      <code class="demo-page-header__import">import &#123; Ripple &#125; from 'ui-lib-custom/ripple'</code>
+    </div>
+    <p class="demo-page-header__description">
       A directive that adds a Material-style circular wave effect to any element on click.
-      Drop <code>uiLibRipple</code> on any host — button, card, list item, or custom element.
+      Apply <code>[uiLibRipple]</code> to any host — button, card, list item, or custom element.
+      Purely decorative: it does not alter ARIA semantics or keyboard behaviour.
     </p>
-    <p class="demo-import">
-      <code>import &#123; Ripple &#125; from 'ui-lib-custom/ripple';</code>
-    </p>
-  </div>
+    <div class="demo-page-header__preview">
+      <ui-lib-button severity="primary" uiLibRipple>Primary</ui-lib-button>
+      <ui-lib-button severity="secondary" uiLibRipple>Secondary</ui-lib-button>
+      <ui-lib-button severity="danger" uiLibRipple>Danger</ui-lib-button>
+    </div>
+  </header>
 
-  <!-- ── Basic ─────────────────────────────────────────────────────────────── -->
-  <div class="demo-section">
-    <h2 class="demo-section-title">Basic</h2>
-    <p class="demo-section-desc">
-      Add <code>uiLibRipple</code> to any element. The default ripple colour is a
-      semi-transparent white, suitable for dark or coloured surfaces.
+  <!-- ---- Basic ---------------------------------------------------- -->
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
+      Add <code>uiLibRipple</code> to any element. The default ripple colour is a semi-transparent
+      white, suitable for dark or coloured surfaces.
     </p>
-    <div class="demo-card demo-card--pad">
+    <div class="demo-section__preview">
       <ui-lib-button severity="primary" uiLibRipple>Primary Button</ui-lib-button>
       <ui-lib-button severity="secondary" uiLibRipple>Secondary Button</ui-lib-button>
       <ui-lib-button severity="danger" uiLibRipple>Danger Button</ui-lib-button>
     </div>
-  </div>
+    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+  </section>
 
-  <!-- ── Dark ripple ───────────────────────────────────────────────────────── -->
-  <div class="demo-section">
-    <h2 class="demo-section-title">Dark ripple (light surfaces)</h2>
-    <p class="demo-section-desc">
-      Use <code>[rippleColor]="'rgba(0,0,0,0.12)'"</code> for light-coloured or
-      white surfaces where white would be invisible.
+  <!-- ---- Dark ripple ---------------------------------------------- -->
+  <section class="demo-section" id="dark-ripple" data-doc-anchor>
+    <h2 class="demo-section__title">Dark Ripple</h2>
+    <p class="demo-section__description">
+      Use <code>[rippleColor]="'rgba(0,0,0,0.12)'"</code> for light-coloured or white surfaces
+      where the default white ripple would be invisible.
     </p>
-    <div class="demo-card demo-card--pad demo-card--light">
+    <div class="demo-section__preview demo-ripple-light-surface">
       <ui-lib-button
         appearance="soft"
         uiLibRipple
@@ -42,48 +49,40 @@
         Light Button
       </ui-lib-button>
       <div
-        class="demo-surface"
+        class="demo-ripple-surface"
         uiLibRipple
         [rippleColor]="'rgba(99,102,241,0.25)'"
       >
         Click me — card surface
       </div>
     </div>
-  </div>
+    <app-doc-code-snippet title="Dark ripple" [code]="snippets.darkRipple" />
+  </section>
 
-  <!-- ── Custom duration ──────────────────────────────────────────────────── -->
-  <div class="demo-section">
-    <h2 class="demo-section-title">Custom duration</h2>
-    <p class="demo-section-desc">
-      Control speed with <code>[rippleDuration]</code>. Use CSS values like
-      <code>'300ms'</code> or <code>'1s'</code>.
+  <!-- ---- Custom duration ------------------------------------------ -->
+  <section class="demo-section" id="custom-duration" data-doc-anchor>
+    <h2 class="demo-section__title">Custom Duration</h2>
+    <p class="demo-section__description">
+      Control the animation speed with <code>[rippleDuration]</code>. Accepts any CSS time value
+      such as <code>'200ms'</code> or <code>'1.2s'</code>.
     </p>
-    <div class="demo-card demo-card--pad">
-      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'200ms'">
-        Fast (200ms)
-      </ui-lib-button>
-      <ui-lib-button severity="primary" uiLibRipple>
-        Default (600ms)
-      </ui-lib-button>
-      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'1200ms'">
-        Slow (1200ms)
-      </ui-lib-button>
+    <div class="demo-section__preview">
+      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'200ms'">Fast (200ms)</ui-lib-button>
+      <ui-lib-button severity="primary" uiLibRipple>Default (600ms)</ui-lib-button>
+      <ui-lib-button severity="primary" uiLibRipple [rippleDuration]="'1200ms'">Slow (1200ms)</ui-lib-button>
     </div>
-  </div>
+    <app-doc-code-snippet title="Custom duration" [code]="snippets.customDuration" />
+  </section>
 
-  <!-- ── Disabled ─────────────────────────────────────────────────────────── -->
-  <div class="demo-section">
-    <h2 class="demo-section-title">Disabled</h2>
-    <p class="demo-section-desc">
-      Set <code>[disabled]="true"</code> to suppress the ripple while keeping the host
-      interactive. Toggle the button below to see the difference.
+  <!-- ---- Disabled ------------------------------------------------- -->
+  <section class="demo-section" id="disabled" data-doc-anchor>
+    <h2 class="demo-section__title">Disabled</h2>
+    <p class="demo-section__description">
+      Set <code>[disabled]="true"</code> to suppress the wave while keeping the host element
+      fully interactive. Toggle the button below to compare the two states.
     </p>
-    <div class="demo-card demo-card--pad">
-      <ui-lib-button
-        severity="primary"
-        uiLibRipple
-        [disabled]="isDisabled()"
-      >
+    <div class="demo-section__preview">
+      <ui-lib-button severity="primary" uiLibRipple [disabled]="isDisabled()">
         @if (isDisabled()) {
           Ripple disabled — click has no wave
         } @else {
@@ -94,102 +93,198 @@
         Toggle ripple (currently: {{ isDisabled() ? 'OFF' : 'ON' }})
       </ui-lib-button>
     </div>
-  </div>
+    <app-doc-code-snippet title="Disabled" [code]="snippets.disabled" />
+  </section>
 
-  <!-- ── On non-button elements ───────────────────────────────────────────── -->
-  <div class="demo-section">
-    <h2 class="demo-section-title">Any element</h2>
-    <p class="demo-section-desc">
-      The directive can be applied to any HTML element — <code>&lt;div&gt;</code>,
-      <code>&lt;li&gt;</code>, images, or custom components.
+  <!-- ---- Any element ---------------------------------------------- -->
+  <section class="demo-section" id="any-element" data-doc-anchor>
+    <h2 class="demo-section__title">Any Element</h2>
+    <p class="demo-section__description">
+      The directive works on any HTML element — <code>&lt;div&gt;</code>,
+      <code>&lt;li&gt;</code>, images, or custom components. The host automatically
+      receives <code>position: relative</code> and <code>overflow: hidden</code>.
     </p>
-    <div class="demo-card demo-card--pad">
-      <ul class="demo-list">
-        <li class="demo-list-item" uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">
+    <div class="demo-section__preview demo-section__preview--column">
+      <ul class="demo-ripple-list">
+        <li class="demo-ripple-list-item" uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">
           List item one
         </li>
-        <li class="demo-list-item" uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">
+        <li class="demo-ripple-list-item" uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">
           List item two
         </li>
-        <li class="demo-list-item" uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">
+        <li class="demo-ripple-list-item" uiLibRipple [rippleColor]="'rgba(99,102,241,0.2)'">
           List item three
         </li>
       </ul>
     </div>
+    <app-doc-code-snippet title="Any element" [code]="snippets.anyElement" />
+  </section>
+
+  <!-- ---- API ------------------------------------------------------ -->
+  <section class="demo-section" id="api" data-doc-anchor>
+
+    <div id="api-inputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Inputs</h3>
+      <p class="demo-section__description">
+        Selector: <code>[uiLibRipple]</code>
+      </p>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>When <code>true</code>, no ripple wave is produced on click.</td>
+          </tr>
+          <tr>
+            <td><code>rippleColor</code></td>
+            <td><code>string</code></td>
+            <td><code>''</code></td>
+            <td>
+              Inline override for <code>--uilib-ripple-color</code>.
+              Any valid CSS colour (e.g. <code>rgba(0,0,0,0.12)</code>).
+            </td>
+          </tr>
+          <tr>
+            <td><code>rippleDuration</code></td>
+            <td><code>string</code></td>
+            <td><code>''</code></td>
+            <td>
+              Inline override for <code>--uilib-ripple-duration</code>
+              (e.g. <code>'400ms'</code>).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="api-css" data-doc-anchor>
+      <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--uilib-ripple-color</code></td>
+            <td><code>rgba(255, 255, 255, 0.35)</code></td>
+            <td>Wave background colour.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-ripple-duration</code></td>
+            <td><code>600ms</code></td>
+            <td>Animation duration.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-ripple-easing</code></td>
+            <td><code>cubic-bezier(0.4, 0, 0.2, 1)</code></td>
+            <td>Animation timing function.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- ---- Accessibility -------------------------------------------- -->
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+
+    <div id="a11y-aria" data-doc-anchor>
+      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Attribute</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Host element</td>
+            <td><em>none added</em></td>
+            <td>
+              The directive is purely decorative — it does not alter <code>role</code>,
+              <code>aria-*</code>, or tab-stop behaviour.
+            </td>
+          </tr>
+          <tr>
+            <td>Wave <code>&lt;span&gt;</code></td>
+            <td><em>none</em></td>
+            <td>
+              <code>pointer-events: none</code> and contains no text — transparent to
+              assistive technologies.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="a11y-keyboard" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Enter</code></td>
+            <td>
+              Fires the native <code>click</code> event on <code>&lt;button&gt;</code> /
+              <code>&lt;a&gt;</code> elements — ripple responds automatically.
+            </td>
+          </tr>
+          <tr>
+            <td><code>Space</code></td>
+            <td>Same as above for <code>&lt;button&gt;</code> elements.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-section__subtitle">Notes</h3>
+    <ul class="doc-list">
+      <li>
+        The Ripple directive is a <strong>visual enhancement only</strong> — it carries no
+        semantic meaning and does not change the host's ARIA attributes or keyboard behaviour.
+      </li>
+      <li>
+        When the user has enabled <strong>Reduce Motion</strong>, the ripple is completely
+        suppressed in two layers: the JavaScript handler skips spawning the wave element, and
+        a CSS <code>@media (prefers-reduced-motion: reduce)</code> block sets
+        <code>animation: none; display: none</code> as a defence-in-depth measure.
+      </li>
+      <li>
+        The click listener is only registered in browser environments
+        (<code>isPlatformBrowser</code> check) — <strong>SSR-safe</strong>.
+      </li>
+    </ul>
+
+  </section>
+
+  <!-- ---- TOC Rail ------------------------------------------------- -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-  <!-- ── API ──────────────────────────────────────────────────────────────── -->
-  <div class="demo-section">
-    <h2 class="demo-section-title">API</h2>
-
-    <h3 class="demo-api-subtitle">Selector</h3>
-    <p><code>[uiLibRipple]</code></p>
-
-    <h3 class="demo-api-subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>disabled</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>When <code>true</code>, no ripple wave is produced on click.</td>
-        </tr>
-        <tr>
-          <td><code>rippleColor</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>
-            Inline override for <code>--uilib-ripple-color</code>.
-            Any valid CSS colour (e.g. <code>rgba(0,0,0,0.12)</code>).
-          </td>
-        </tr>
-        <tr>
-          <td><code>rippleDuration</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>
-            Inline override for <code>--uilib-ripple-duration</code>
-            (e.g. <code>400ms</code>).
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 class="demo-api-subtitle">CSS variables</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Variable</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-ripple-color</code></td>
-          <td><code>rgba(255, 255, 255, 0.35)</code></td>
-          <td>Wave background colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-ripple-duration</code></td>
-          <td><code>600ms</code></td>
-          <td>Animation duration.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-ripple-easing</code></td>
-          <td><code>cubic-bezier(0.4, 0, 0.2, 1)</code></td>
-          <td>Animation timing function.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-</section>
+</app-doc-page-layout>

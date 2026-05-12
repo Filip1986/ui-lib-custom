@@ -1,130 +1,132 @@
-<section class="block-ui-demo" data-testid="block-ui-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="bud-hero">
-    <h1 class="bud-hero__title">BlockUI</h1>
-    <p class="bud-hero__lead">
-      Overlay a mask over any section to prevent user interaction — useful for loading states,
-      disabled form sections, and confirmation flows. Wrap content in
-      <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[blocked]</code> to toggle the mask.
-    </p>
-    <div class="bud-hero__tags">
-      <span class="bud-tag">Misc</span>
-      <span class="bud-tag">Overlay</span>
+  <!-- ---- Overview / Hero -------------------------------------------- -->
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>BlockUI</h1>
+      <code class="demo-page-header__import">import &#123; BlockUI &#125; from 'ui-lib-custom/block-ui'</code>
     </div>
-  </div>
-
-  <!-- Section 1: Basic usage -->
-  <div class="bud-section">
-    <h2 class="bud-section__title">Basic Usage</h2>
-    <p class="bud-section__desc">
-      Toggle <code>blocked</code> to overlay a semi-transparent mask on the wrapped content.
-      The content underneath remains in the DOM but pointer events are disabled.
+    <p class="demo-page-header__description">
+      Overlay a mask over any section to prevent user interaction — ideal for loading states,
+      disabled form sections, and confirmation flows. Wrap content in
+      <code>&lt;ui-lib-block-ui&gt;</code> and bind <code>[(blocked)]</code> to toggle the mask.
+      Blocked content receives the <code>inert</code> attribute, making all descendants
+      non-focusable by keyboard.
     </p>
-    <div class="bud-demo-card">
-      <ui-lib-button (click)="toggleBasic()">Toggle Block</ui-lib-button>
-      <div class="bud-spacer"></div>
-      <ui-lib-block-ui [blocked]="basicBlocked()" styleClass="bud-target">
-        <div class="bud-panel">
+    <div class="demo-page-header__preview">
+      <ui-lib-block-ui [blocked]="false">
+        <div class="demo-block-panel demo-block-panel--preview">
+          <strong>Protected content</strong>
+          <p>Bind <code>[(blocked)]</code> to overlay the mask.</p>
+        </div>
+      </ui-lib-block-ui>
+    </div>
+  </header>
+
+  <!-- ---- Basic ---------------------------------------------------- -->
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
+      Toggle <code>blocked</code> to overlay a semi-transparent mask on the wrapped content.
+      The content remains in the DOM but receives <code>inert</code>, preventing pointer
+      events and keyboard focus.
+    </p>
+    <div class="demo-section__preview demo-section__preview--column">
+      <ui-lib-button (click)="toggleBasic()">
+        {{ basicBlocked() ? 'Unblock' : 'Block' }} content
+      </ui-lib-button>
+      <ui-lib-block-ui [blocked]="basicBlocked()" styleClass="demo-block-rounded">
+        <div class="demo-block-panel">
           <h3>Panel Content</h3>
-          <p>This content is blocked when the mask is active. You cannot interact with the button below while blocked.</p>
+          <p>This content is blocked when the mask is active. The button below cannot be reached by keyboard while blocked.</p>
           <ui-lib-button severity="secondary">Blocked Button</ui-lib-button>
         </div>
       </ui-lib-block-ui>
     </div>
-    <pre class="bud-code"><code>&lt;ui-lib-block-ui [(blocked)]="isBlocked"&gt;
-  &lt;!-- your content --&gt;
-&lt;/ui-lib-block-ui&gt;</code></pre>
-  </div>
+    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+  </section>
 
-  <!-- Section 2: Custom mask content -->
-  <div class="bud-section">
-    <h2 class="bud-section__title">Custom Mask Content</h2>
-    <p class="bud-section__desc">
-      Project content into the mask using the <code>blockTemplate</code> attribute selector.
-      This is ideal for spinners, progress indicators, or status messages.
+  <!-- ---- Custom Mask ---------------------------------------------- -->
+  <section class="demo-section" id="custom-mask" data-doc-anchor>
+    <h2 class="demo-section__title">Custom Mask</h2>
+    <p class="demo-section__description">
+      Project content into the mask overlay using the <code>[blockTemplate]</code> attribute
+      selector. Ideal for spinners, progress indicators, or status messages. The mask element
+      has <code>role="status"</code> and <code>aria-live="polite"</code>, so projected text is
+      announced by screen readers when the component becomes blocked.
     </p>
-    <div class="bud-demo-card">
-      <ui-lib-button (click)="toggleSpinner()">Toggle Block</ui-lib-button>
-      <div class="bud-spacer"></div>
-      <ui-lib-block-ui [blocked]="spinnerBlocked()" styleClass="bud-target">
-        <div class="bud-panel">
+    <div class="demo-section__preview demo-section__preview--column">
+      <ui-lib-button (click)="toggleSpinner()">
+        {{ spinnerBlocked() ? 'Unblock' : 'Block' }} with spinner
+      </ui-lib-button>
+      <ui-lib-block-ui [blocked]="spinnerBlocked()" styleClass="demo-block-rounded">
+        <div class="demo-block-panel">
           <h3>Form Section</h3>
           <p>Submitting this form will block the section while processing.</p>
           <ui-lib-button severity="secondary">Submit</ui-lib-button>
         </div>
-        <div blockTemplate class="bud-spinner-content">
-          <div class="bud-spinner" role="img" aria-label="Loading"></div>
-          <span class="bud-spinner-label">Processing…</span>
+        <div blockTemplate class="demo-block-spinner-content">
+          <div class="demo-block-spinner" role="img" aria-label="Loading"></div>
+          <span class="demo-block-spinner-label">Processing…</span>
         </div>
       </ui-lib-block-ui>
     </div>
-    <pre class="bud-code"><code>&lt;ui-lib-block-ui [blocked]="isBlocked"&gt;
-  &lt;!-- protected content --&gt;
-  &lt;div blockTemplate&gt;
-    &lt;!-- custom mask content, e.g. a spinner --&gt;
-  &lt;/div&gt;
-&lt;/ui-lib-block-ui&gt;</code></pre>
-  </div>
+    <app-doc-code-snippet title="Custom mask" [code]="snippets.customMask" />
+  </section>
 
-  <!-- Section 3: Variants -->
-  <div class="bud-section">
-    <h2 class="bud-section__title">Variants</h2>
-    <p class="bud-section__desc">
-      Three visual variants adjust the mask opacity and backdrop treatment to match your design system.
+  <!-- ---- Variants ------------------------------------------------- -->
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
+      Three visual variants adjust the mask opacity and backdrop treatment to match your design
+      system. When <code>variant</code> is <code>null</code> (default), it inherits from
+      <code>ThemeConfigService</code>.
     </p>
-    <div class="bud-variant-grid">
+    <div class="demo-section__preview demo-block-variant-grid">
 
-      <!-- material -->
-      <div class="bud-variant-cell">
-        <span class="bud-variant-label">material</span>
-        <ui-lib-button size="sm" (click)="toggleMaterial()">Toggle</ui-lib-button>
-        <ui-lib-block-ui
-          variant="material"
-          [blocked]="materialBlocked()"
-          styleClass="bud-target bud-target--sm"
-        >
-          <div class="bud-mini-panel">Material-style content</div>
-          <span blockTemplate class="bud-mask-label">Blocked</span>
+      <div class="demo-block-variant-cell">
+        <span class="demo-block-variant-label">material</span>
+        <ui-lib-button size="sm" (click)="toggleMaterial()">
+          {{ materialBlocked() ? 'Unblock' : 'Block' }}
+        </ui-lib-button>
+        <ui-lib-block-ui variant="material" [blocked]="materialBlocked()" styleClass="demo-block-rounded">
+          <div class="demo-block-mini-panel">Material-style content</div>
+          <span blockTemplate class="demo-block-mask-label">Blocked</span>
         </ui-lib-block-ui>
       </div>
 
-      <!-- bootstrap -->
-      <div class="bud-variant-cell">
-        <span class="bud-variant-label">bootstrap</span>
-        <ui-lib-button size="sm" (click)="toggleBootstrap()">Toggle</ui-lib-button>
-        <ui-lib-block-ui
-          variant="bootstrap"
-          [blocked]="bootstrapBlocked()"
-          styleClass="bud-target bud-target--sm"
-        >
-          <div class="bud-mini-panel">Bootstrap-style content</div>
-          <span blockTemplate class="bud-mask-label">Blocked</span>
+      <div class="demo-block-variant-cell">
+        <span class="demo-block-variant-label">bootstrap</span>
+        <ui-lib-button size="sm" (click)="toggleBootstrap()">
+          {{ bootstrapBlocked() ? 'Unblock' : 'Block' }}
+        </ui-lib-button>
+        <ui-lib-block-ui variant="bootstrap" [blocked]="bootstrapBlocked()" styleClass="demo-block-rounded">
+          <div class="demo-block-mini-panel">Bootstrap-style content</div>
+          <span blockTemplate class="demo-block-mask-label">Blocked</span>
         </ui-lib-block-ui>
       </div>
 
-      <!-- minimal -->
-      <div class="bud-variant-cell">
-        <span class="bud-variant-label">minimal</span>
-        <ui-lib-button size="sm" (click)="toggleMinimal()">Toggle</ui-lib-button>
-        <ui-lib-block-ui
-          variant="minimal"
-          [blocked]="minimalBlocked()"
-          styleClass="bud-target bud-target--sm"
-        >
-          <div class="bud-mini-panel">Minimal-style content</div>
-          <span blockTemplate class="bud-mask-label">Blocked</span>
+      <div class="demo-block-variant-cell">
+        <span class="demo-block-variant-label">minimal</span>
+        <ui-lib-button size="sm" (click)="toggleMinimal()">
+          {{ minimalBlocked() ? 'Unblock' : 'Block' }}
+        </ui-lib-button>
+        <ui-lib-block-ui variant="minimal" [blocked]="minimalBlocked()" styleClass="demo-block-rounded">
+          <div class="demo-block-mini-panel">Minimal-style content</div>
+          <span blockTemplate class="demo-block-mask-label">Blocked</span>
         </ui-lib-block-ui>
       </div>
 
     </div>
-  </div>
+    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
+  </section>
 
-  <!-- Section 4: API Reference -->
-  <div class="bud-section">
-    <h2 class="bud-section__title">API Reference</h2>
-    <div class="bud-api-table-wrap">
-      <table class="bud-api-table">
+  <!-- ---- API ------------------------------------------------------ -->
+  <section class="demo-section" id="api" data-doc-anchor>
+
+    <div id="api-inputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Inputs</h3>
+      <table class="doc-properties">
         <thead>
           <tr>
             <th>Input</th>
@@ -138,49 +140,224 @@
             <td><code>blocked</code></td>
             <td><code>boolean</code></td>
             <td><code>false</code></td>
-            <td>Whether the content is blocked. Supports two-way binding via <code>[(blocked)]</code>.</td>
+            <td>
+              Whether the content is blocked. Two-way bindable via <code>[(blocked)]</code>.
+              A <code>model()</code> signal internally.
+            </td>
           </tr>
           <tr>
             <td><code>variant</code></td>
             <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
             <td><code>null</code></td>
-            <td>Visual variant. Inherits from <code>ThemeConfigService</code> when not set.</td>
+            <td>Visual variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
           </tr>
           <tr>
             <td><code>styleClass</code></td>
             <td><code>string | null</code></td>
             <td><code>null</code></td>
-            <td>Additional CSS classes applied to the host element.</td>
+            <td>Additional CSS class(es) applied to the host element.</td>
           </tr>
           <tr>
             <td><code>baseZIndex</code></td>
             <td><code>number</code></td>
             <td><code>0</code></td>
-            <td>Base z-index for the mask layer. Uses the CSS variable default when 0.</td>
+            <td>Base z-index for the mask layer. Uses the CSS variable default when <code>0</code>.</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="bud-api-table-wrap">
-      <table class="bud-api-table">
+
+    <div id="api-slots" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Content Slots</h3>
+      <table class="doc-properties">
         <thead>
           <tr>
-            <th>Content Slot</th>
+            <th>Slot</th>
             <th>Description</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><code>default</code></td>
+            <td><em>default</em></td>
             <td>The content to be protected by the block mask.</td>
           </tr>
           <tr>
-            <td><code>blockTemplate</code></td>
-            <td>Content projected into the mask overlay (e.g. a spinner or message).</td>
+            <td><code>[blockTemplate]</code></td>
+            <td>
+              Content projected into the mask overlay (e.g. a spinner or status message).
+              Announced by screen readers via the mask's live region.
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+
+    <div id="api-css" data-doc-anchor>
+      <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--uilib-block-ui-mask-bg</code></td>
+            <td><code>rgba(0,0,0,0.4)</code></td>
+            <td>Mask background colour (overridden per variant).</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-block-ui-mask-bg-material</code></td>
+            <td><code>rgba(0,0,0,0.3)</code></td>
+            <td>Mask colour for the <code>material</code> variant.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-block-ui-mask-bg-bootstrap</code></td>
+            <td><code>rgba(0,0,0,0.5)</code></td>
+            <td>Mask colour for the <code>bootstrap</code> variant.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-block-ui-mask-bg-minimal</code></td>
+            <td><code>rgba(0,0,0,0.15)</code></td>
+            <td>Mask colour for the <code>minimal</code> variant.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-block-ui-transition-duration</code></td>
+            <td><code>0.2s</code></td>
+            <td>Fade duration; overridden to <code>0</code> under <code>prefers-reduced-motion</code>.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-block-ui-transition</code></td>
+            <td><code>opacity var(…) ease</code></td>
+            <td>Full transition shorthand.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-block-ui-z-index</code></td>
+            <td><code>var(--uilib-z-overlay, 100)</code></td>
+            <td>Z-index of the mask layer.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- ---- Accessibility -------------------------------------------- -->
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+
+    <div id="a11y-aria" data-doc-anchor>
+      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Attribute</th>
+            <th>When</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Host (<code>ui-lib-block-ui</code>)</td>
+            <td><code>aria-busy="true"</code></td>
+            <td><code>blocked = true</code></td>
+          </tr>
+          <tr>
+            <td>Host</td>
+            <td><code>aria-busy="false"</code></td>
+            <td><code>blocked = false</code></td>
+          </tr>
+          <tr>
+            <td>Host</td>
+            <td><code>aria-disabled="true"</code></td>
+            <td><code>blocked = true</code> (removed when false)</td>
+          </tr>
+          <tr>
+            <td>Mask element</td>
+            <td><code>role="status"</code></td>
+            <td>Always present</td>
+          </tr>
+          <tr>
+            <td>Mask element</td>
+            <td><code>aria-live="polite"</code></td>
+            <td>Always present — announces projected mask content to screen readers</td>
+          </tr>
+          <tr>
+            <td>Mask element</td>
+            <td><code>aria-hidden="true"</code></td>
+            <td><code>blocked = false</code> (removed when blocked)</td>
+          </tr>
+          <tr>
+            <td>Content wrapper</td>
+            <td><code>inert=""</code></td>
+            <td><code>blocked = true</code> — makes all descendants non-focusable</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="a11y-keyboard" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Interaction</th>
+            <th>Behaviour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Tab</code> / <code>Shift+Tab</code></td>
+            <td>
+              Keyboard focus cannot enter the blocked content while <code>blocked = true</code> —
+              the content wrapper receives <code>inert</code>, making all descendants non-focusable.
+            </td>
+          </tr>
+          <tr>
+            <td>Any key</td>
+            <td>
+              No special handling on the mask overlay itself. All standard keyboard interactions
+              remain available outside the blocked area.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-section__subtitle">Notes</h3>
+    <ul class="doc-list">
+      <li>
+        <strong>Focus prevention:</strong> The protected content wrapper receives the
+        <code>inert</code> HTML attribute when <code>blocked = true</code>. This prevents all
+        interactive descendants (buttons, links, inputs) from receiving keyboard focus or
+        pointer events — no custom focus trap is needed.
+      </li>
+      <li>
+        <strong>Live region:</strong> The mask element carries <code>role="status"</code> and
+        <code>aria-live="polite"</code>. Screen readers will announce any text projected via
+        <code>[blockTemplate]</code> when the component becomes blocked (e.g. "Processing…").
+      </li>
+      <li>
+        <strong><code>aria-busy</code>:</strong> Signals to assistive technologies that the
+        container is loading or processing, suppressing interaction expectations.
+      </li>
+      <li>
+        All transitions respect <code>prefers-reduced-motion: reduce</code> — the opacity
+        transition is set to <code>0</code> duration.
+      </li>
+    </ul>
+
+  </section>
+
+  <!-- ---- TOC Rail ------------------------------------------------- -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>
