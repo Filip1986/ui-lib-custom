@@ -63,38 +63,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
+Date: 2026-05-12 [Terminal component — 6-phase hardening COMPLETE (#70)]
 Changed:
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
-      • Added module-level `nextMeterGroupId` counter and unique host `instanceId`
-      • Added `ariaLabel` input and wired group ARIA label to template
-      • Fixed segment percentage calculation to respect `min`/`max` range (`(value - min) / (max - min)`)
-      • Added computed `totalValue` + `totalAnnouncement` for live total announcements
-      • Added stable segment track helper and richer per-segment aria-label formatter
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html
-      • Updated segment `@for` loops to use stable track keys
-      • Bound group `aria-label` to `ariaLabel` input
-      • Updated segment `aria-label` output to include value-range phrasing
-      • Added polite/atomic live region for total announcement text
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss
-      • Added visually-hidden live-region utility class
-      • Added `prefers-reduced-motion: reduce` override to disable meter transitions
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts
-      • Added tests for custom group aria-label, min/max-relative percentage calculation, and unique host IDs
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.a11y.spec.ts (CREATED — 18 tests)
-      • Added ARIA structure, decorative aria-hidden, live region total updates, keyboard non-focusability, unique IDs, and axe checks
-  - projects/ui-lib-custom/src/lib/meter-group/README.md
-      • Added `ariaLabel` input docs, ARIA attributes table, keyboard interaction table, and expanded accessibility notes
+  - projects/ui-lib-custom/src/lib/terminal/terminal.ts
+      • Added module-level `let nextTerminalId: number = 0` counter
+      • Added `public readonly terminalId: string` bound to host `[attr.id]`
+      • Added `public readonly outputId: string` for the output live-region div
+  - projects/ui-lib-custom/src/lib/terminal/terminal.html
+      • Wrapped welcome message + history items in `<div class="ui-lib-terminal__output" role="log" [attr.id]="outputId" aria-label="Terminal output" aria-atomic="false">`
+      • Removed `aria-live="polite"` from individual `__response` divs (role=log on container implies it)
+  - projects/ui-lib-custom/src/lib/terminal/terminal.scss
+      • Added `&__output { flex: 1; display: flex; flex-direction: column }` layout rule
+      • Added `:focus-visible` ring to `__input` using `--uilib-terminal-input-caret-color`
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all animations/transitions
+  - projects/ui-lib-custom/src/lib/terminal/terminal.a11y.spec.ts (CREATED — 14 tests)
+      • ARIA structure (5): role=region, aria-label, role=log on output, aria-label on output, input label, prompt aria-hidden
+      • Unique IDs (3): host instance id pattern, output id derived from host, two-instance uniqueness
+      • Keyboard interaction (4): Enter submit, Enter on empty, ArrowUp history, ArrowDown clears
+      • axe-core checks (5): no welcome, with welcome, with history, bootstrap variant, minimal variant
+  - projects/ui-lib-custom/src/lib/terminal/README.md
+      • Added full ARIA attributes table (host, output div, input, prompt spans)
+      • Replaced one-liner accessibility section with detailed notes (live region, focus, reduced motion)
   - docs/COMPONENT_SCORES.md
-      • MeterGroup #57 queue status: ⏳ Queued → ✅ Done
-      • MeterGroup score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
-State: MeterGroup hardening complete. Segment ARIA labels now include value context, totals are announced through a live region, unique instance IDs are generated, reduced-motion support is in place, and dedicated a11y regression coverage is added.
+      • Terminal #70 queue status: ⏳ Queued → ✅ Done
+      • Utilities & Directives table: Terminal row populated — 9/9/9/8/9/9/9/9/9/9 avg 8.9 🟢
+State: Terminal hardening complete. Output area now has role=log (live region), unique instance IDs generated, :focus-visible ring on input, prefers-reduced-motion override in SCSS, and 14-test a11y regression suite covering ARIA structure, keyboard navigation, and axe-core automated checks.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/meter-group/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=meter-group --no-coverage (45/45 PASS — 27 unit + 18 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/terminal/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=terminal --no-coverage (41/41 PASS — 27 unit + 14 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
+Terminal notes: npm install required on fresh clone.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]

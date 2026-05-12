@@ -4,6 +4,42 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
+Changed:
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
+      • Added module-level `nextMeterGroupId` counter and unique host `instanceId`
+      • Added `ariaLabel` input and wired group ARIA label to template
+      • Fixed segment percentage calculation to respect `min`/`max` range (`(value - min) / (max - min)`)
+      • Added computed `totalValue` + `totalAnnouncement` for live total announcements
+      • Added stable segment track helper and richer per-segment aria-label formatter
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html
+      • Updated segment `@for` loops to use stable track keys
+      • Bound group `aria-label` to `ariaLabel` input
+      • Updated segment `aria-label` output to include value-range phrasing
+      • Added polite/atomic live region for total announcement text
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss
+      • Added visually-hidden live-region utility class
+      • Added `prefers-reduced-motion: reduce` override to disable meter transitions
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts
+      • Added tests for custom group aria-label, min/max-relative percentage calculation, and unique host IDs
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.a11y.spec.ts (CREATED — 18 tests)
+      • Added ARIA structure, decorative aria-hidden, live region total updates, keyboard non-focusability, unique IDs, and axe checks
+  - projects/ui-lib-custom/src/lib/meter-group/README.md
+      • Added `ariaLabel` input docs, ARIA attributes table, keyboard interaction table, and expanded accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • MeterGroup #57 queue status: ⏳ Queued → ✅ Done
+      • MeterGroup score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
+State: MeterGroup hardening complete. Segment ARIA labels now include value context, totals are announced through a live region, unique instance IDs are generated, reduced-motion support is in place, and dedicated a11y regression coverage is added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/meter-group/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=meter-group --no-coverage (45/45 PASS — 27 unit + 18 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
 Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
   - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
