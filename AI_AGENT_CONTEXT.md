@@ -60,37 +60,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
-Changed:
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
-      • Added module-level `let nextBlockUiId: number = 0` counter
-      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
-      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
-      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
-      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
-      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
-      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
-      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
-      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
-      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
-  - projects/ui-lib-custom/src/lib/block-ui/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
-  - docs/COMPONENT_SCORES.md
-      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
-State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
-  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
 Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
 Changed:
   - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
@@ -154,3 +123,36 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available.
 Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
+
+Date: 2026-05-12 [Paginator component — accessibility hardening COMPLETE (#37)]
+Changed:
+  - projects/ui-lib-custom/src/lib/paginator/paginator.component.ts
+      • Added module-level `nextPaginatorId` and unique `instanceId` host binding (`id`)
+      • Added host `role="navigation"` binding
+      • Added computed `pageAnnouncement` live-region text and `getPageLinkAriaLabel(...)`
+  - projects/ui-lib-custom/src/lib/paginator/paginator.component.html
+      • Added hidden polite live region (`.uilib-paginator-live`) for page announcements
+      • Updated icon-button aria-labels to explicit “Go to ... page” phrasing
+      • Updated page-link aria-labels to include current-page wording
+      • Removed list/listitem roles from non-list markup and switched `@for` track to `pageLink`
+  - projects/ui-lib-custom/src/lib/paginator/paginator.component.scss
+      • Added visually-hidden live-region utility class
+      • Switched jump input + rows select focus styles to `:focus-visible`
+      • Added `prefers-reduced-motion` transition disable override
+  - projects/ui-lib-custom/src/lib/paginator/paginator.component.spec.ts
+      • Expanded ARIA assertions for host role/id, nav labels, and live region announcements
+  - projects/ui-lib-custom/src/lib/paginator/paginator.a11y.spec.ts (CREATED — 20 tests)
+      • Added axe-core checks, ARIA structure checks, keyboard interaction coverage, live-region verification, and unique-ID test
+  - projects/ui-lib-custom/src/lib/paginator/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Paginator #37 moved from ⏳ Queued to ✅ Done; score row populated (avg 8.5)
+State: Paginator hardening complete with live announcements, stronger ARIA semantics, reduced-motion coverage, focus-visible consistency, and dedicated a11y regression tests.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/paginator/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=paginator --no-coverage (62/62 PASS — unit + a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
+  npm run typecheck (PASS)
+Terminal notes: `playwright-browser_*` tools were blocked by an existing browser lock in this environment; captured UI evidence with `node_modules/.bin/playwright screenshot` after `npx playwright install chromium`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid semantics pass.
