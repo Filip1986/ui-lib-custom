@@ -7,3 +7,8 @@
     <span class="ui-lib-progress-bar__label">{{ displayLabel() }}</span>
   }
 </div>
+@if (clampedValue() === 100) {
+  <span aria-live="polite" aria-atomic="true" class="ui-lib-progress-bar__sr-only">
+    {{ completionLabel() !== null ? completionLabel() : 'Complete' }}
+  </span>
+}

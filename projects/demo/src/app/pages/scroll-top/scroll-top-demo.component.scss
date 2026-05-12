@@ -1,22 +1,14 @@
-.scroll-top-demo {
+@use '../../shared/styles/doc-page.scss';
+
+// Extra bottom padding so the fixed ScrollTop button doesn't overlap content
+.demo-page {
   max-width: 860px;
-  margin: 0 auto;
   padding: 2rem 1.5rem 6rem;
   font-family: var(--uilib-font-ui, system-ui, sans-serif);
-
-  h1 {
-    margin: 0 0 0.5rem;
-    font-size: 1.5rem;
-    color: var(--uilib-page-fg);
-  }
-
-  p {
-    margin: 0;
-    color: var(--uilib-muted);
-  }
 }
 
 // ---- Hero -------------------------------------------------------------------
+
 .demo-hero {
   margin-bottom: 3rem;
 
@@ -44,6 +36,7 @@
 }
 
 // ---- Sections ---------------------------------------------------------------
+
 .demo-section {
   margin-bottom: 3rem;
 
@@ -107,6 +100,7 @@
 }
 
 // ---- Filler -----------------------------------------------------------------
+
 .demo-scroll-filler {
   margin-top: 4rem;
 }
@@ -134,6 +128,7 @@
 }
 
 // ---- Hint & Code ------------------------------------------------------------
+
 .demo-hint {
   font-size: 0.9rem;
   color: #6b7280;
@@ -158,6 +153,7 @@
 }
 
 // ---- Variant labels & static demo wrappers ---------------------------------
+
 .demo-variant-wrapper {
   display: flex;
   flex-direction: column;
@@ -180,6 +176,7 @@
 }
 
 // ---- Scrollable container demo ----------------------------------------------
+
 .demo-scrollable-container {
   position: relative;
   height: 260px;
@@ -200,30 +197,20 @@
   }
 }
 
-// ---- API table --------------------------------------------------------------
+// ---- API table (all-sides borders, overrides shared border-bottom default) ---
+
 .demo-api-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
   margin-top: 0.5rem;
 
   th {
     background: #f3f4f6;
-    text-align: left;
-    padding: 0.5rem 0.75rem;
     border: 1px solid #e5e7eb;
-    font-weight: 600;
   }
 
   td {
-    padding: 0.5rem 0.75rem;
     border: 1px solid #e5e7eb;
-    vertical-align: top;
 
     code {
-      background: #f3f4f6;
-      padding: 0.1em 0.35em;
-      border-radius: 3px;
       font-size: 0.8rem;
       color: #111827;
     }

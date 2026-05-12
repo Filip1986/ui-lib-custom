@@ -1,7 +1,8 @@
+@use '../../shared/styles/doc-page.scss';
+
+// Tree demo needs extra width for deep node hierarchies
 .demo-page {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
 }
 
 .demo-header {
