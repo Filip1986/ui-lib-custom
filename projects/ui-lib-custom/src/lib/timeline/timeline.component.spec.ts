@@ -293,6 +293,10 @@ describe('TimelineComponent', (): void => {
       const timeline: HTMLElement = getTimeline();
       expect(timeline.getAttribute('role')).toBe('list');
     });
+    it('should generate a unique host id', (): void => {
+      const timeline: HTMLElement = getTimeline();
+      expect(timeline.getAttribute('id')).toMatch(/^ui-lib-timeline-\d+$/);
+    });
     it('should have role="listitem" on each event', (): void => {
       const events: HTMLElement[] = queryAll('.ui-lib-timeline__event');
       for (const event of events) {
@@ -305,11 +309,17 @@ describe('TimelineComponent', (): void => {
       const timeline: HTMLElement = getTimeline();
       expect(timeline.getAttribute('aria-label')).toBe('Project milestones');
     });
-    it('should set aria-label on each event item', (): void => {
+    it('should label each event from its content container', (): void => {
       const events: HTMLElement[] = queryAll('.ui-lib-timeline__event');
       events.forEach((event: HTMLElement, index: number): void => {
-        expect(event.getAttribute('aria-label')).toBe(`Event ${index + 1}`);
+        expect(event.getAttribute('aria-labelledby')).toBe(`${getTimeline().id}-content-${index}`);
       });
+    });
+    it('should render fallback content when no content template is provided', (): void => {
+      const defaultContents: HTMLElement[] = queryAll('.ui-lib-timeline__default-content');
+      expect(
+        defaultContents.map((element: HTMLElement): string => element.textContent.trim())
+      ).toEqual(['Event One — 2024-01-01', 'Event Two — 2024-02-01', 'Event Three — 2024-03-01']);
     });
   });
   // -------------------------------------------------------------------------

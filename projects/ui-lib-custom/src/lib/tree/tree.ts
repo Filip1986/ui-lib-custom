@@ -37,6 +37,9 @@ import type {
   TreeVariant,
 } from './tree.types';
 
+/** Module-level counter for generating unique tree instance IDs. */
+let nextTreeId: number = 0;
+
 /**
  * Tree renders a hierarchical data structure with expand/collapse, three
  * selection modes (single, multiple, checkbox), optional filtering, and
@@ -63,6 +66,9 @@ import type {
     class: 'ui-lib-tree',
     '[class]': 'hostClasses()',
     role: 'tree',
+    '[attr.id]': 'instanceId',
+    '[attr.aria-label]': 'hostAriaLabel()',
+    '[attr.aria-multiselectable]': 'hostAriaMultiselectable()',
     '(keydown)': 'onKeydown($event)',
   },
   providers: [
@@ -77,6 +83,9 @@ export class Tree implements TreeContext {
   private readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+
+  /** Unique instance ID for this tree (aria-label binding, potential future aria-owns). */
+  public readonly instanceId: string = `ui-lib-tree-${++nextTreeId}`;
 
   /** Reactive tick. Incremented after any tree mutation to force re-render. */
   private readonly tick: WritableSignal<number> = signal(0);
@@ -113,6 +122,9 @@ export class Tree implements TreeContext {
 
   /** Extra CSS class applied to the host element. */
   public readonly styleClass: InputSignal<string> = input<string>('');
+
+  /** Accessible label for the tree widget. Used as `aria-label` on the host. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -162,6 +174,19 @@ export class Tree implements TreeContext {
     ]
       .filter(Boolean)
       .join(' ')
+  );
+
+  /** `aria-label` value for the host — `null` when the input is empty. */
+  public readonly hostAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => this.ariaLabel() || null
+  );
+
+  /** `aria-multiselectable` for the host — `true` in multiple/checkbox modes, otherwise `null`. */
+  public readonly hostAriaMultiselectable: Signal<true | null> = computed<true | null>(
+    (): true | null => {
+      const mode: TreeSelectionMode = this.selectionMode();
+      return mode === 'multiple' || mode === 'checkbox' ? true : null;
+    }
   );
 
   /** Map from node `type` → registered TemplateRef. */
@@ -374,16 +399,16 @@ export class Tree implements TreeContext {
       event.preventDefault();
       const focused: HTMLElement | undefined = items[focusedIndex];
       if (focused) {
-        // Expand the focused node if collapsed — find matching node and toggle
-        this.expandFocusedNode(focused);
+        this.expandOrFocusChild(focused, items, focusedIndex);
       }
     } else if (key === KEYBOARD_KEYS.ArrowLeft && focusedIndex >= 0) {
       event.preventDefault();
       const focused: HTMLElement | undefined = items[focusedIndex];
       if (focused) {
-        // Collapse the focused node if expanded
-        this.collapseFocusedNode(focused);
+        this.collapseOrFocusParent(focused);
       }
+    } else if (key.length === 1 && /^[a-zA-Z0-9]$/.test(key)) {
+      this.focusItemByTypeAhead(key, items, focusedIndex);
     }
   }
 
@@ -520,19 +545,100 @@ export class Tree implements TreeContext {
     items[clampedIndex]?.focus();
   }
 
-  private expandFocusedNode(focused: HTMLElement): void {
+  /**
+   * ArrowRight handler.
+   * If the item is expanded: move focus to the first child (next item in flat order).
+   * If the item is collapsed: expand it (focus stays on current item).
+   * If the item is a leaf: no action.
+   */
+  private expandOrFocusChild(
+    focused: HTMLElement,
+    items: HTMLElement[],
+    focusedIndex: number
+  ): void {
     const toggleButton: HTMLElement | null =
       focused.querySelector<HTMLElement>('.uilib-tree-node-toggle');
-    if (toggleButton && !toggleButton.classList.contains('uilib-tree-node-toggle--expanded')) {
+    if (!toggleButton) {
+      // Leaf node: no action
+      return;
+    }
+    if (toggleButton.classList.contains('uilib-tree-node-toggle--expanded')) {
+      // Already expanded: focus first child (next item in flattened order)
+      this.focusItemAtIndex(items, focusedIndex + 1);
+    } else {
+      // Collapsed: expand it; focus stays on this item
       toggleButton.click();
     }
   }
 
-  private collapseFocusedNode(focused: HTMLElement): void {
+  /**
+   * ArrowLeft handler.
+   * If the item is expanded: collapse it (focus stays on current item).
+   * If the item is collapsed or a leaf: move focus to the parent treeitem.
+   */
+  private collapseOrFocusParent(focused: HTMLElement): void {
     const toggleButton: HTMLElement | null =
       focused.querySelector<HTMLElement>('.uilib-tree-node-toggle');
-    if (toggleButton && toggleButton.classList.contains('uilib-tree-node-toggle--expanded')) {
+    const isExpanded: boolean =
+      toggleButton?.classList.contains('uilib-tree-node-toggle--expanded') ?? false;
+
+    if (toggleButton && isExpanded) {
+      // Expanded: collapse it
       toggleButton.click();
+    } else {
+      // Leaf or collapsed: move focus to the nearest ancestor treeitem
+      const parent: HTMLElement | null = this.findParentTreeItem(focused);
+      if (parent) {
+        parent.focus();
+      }
+    }
+  }
+
+  /**
+   * Traverses DOM ancestors to find the nearest parent element with `role="treeitem"`.
+   * Because tree items and their child groups are siblings inside the component host
+   * (not nested), we locate the nearest ancestor `[role="group"]` and then look for
+   * the `[role="treeitem"]` that is a direct child of the same parent element.
+   */
+  private findParentTreeItem(focused: HTMLElement): HTMLElement | null {
+    let current: HTMLElement | null = focused.parentElement;
+    while (current) {
+      if (current.getAttribute('role') === 'group') {
+        // The parent treeitem is a direct child of the same host element as this group
+        const hostEl: HTMLElement | null = current.parentElement;
+        return hostEl
+          ? (hostEl.querySelector<HTMLElement>(':scope > [role="treeitem"]') ?? null)
+          : null;
+      }
+      current = current.parentElement;
+    }
+    return null;
+  }
+
+  /**
+   * Type-ahead navigation.
+   * On a printable alphanumeric key press, moves focus to the next visible treeitem
+   * whose label starts with that character (case-insensitive, wraps around).
+   */
+  private focusItemByTypeAhead(char: string, items: HTMLElement[], focusedIndex: number): void {
+    if (items.length === 0) {
+      return;
+    }
+    const lowerChar: string = char.toLowerCase();
+    const start: number = focusedIndex >= 0 ? focusedIndex + 1 : 0;
+    for (let offset: number = 0; offset < items.length; offset++) {
+      const index: number = (start + offset) % items.length;
+      const item: HTMLElement | undefined = items[index];
+      if (!item) {
+        continue;
+      }
+      const labelEl: Element | null = item.querySelector('.uilib-tree-node-label');
+      const source: Element = labelEl ?? item;
+      const text: string = source.textContent.trim().toLowerCase();
+      if (text.startsWith(lowerChar)) {
+        item.focus();
+        return;
+      }
     }
   }
 }
