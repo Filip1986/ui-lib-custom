@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `ProgressBar` -> ✅ complete + hardened (6-phase, score 8.6/10, 47 tests — 27 unit + 20 a11y)
 
 ---
 
@@ -75,26 +76,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
-
-Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
-Changed:
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
-  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/data-view/README.md
-  - docs/reference/components/DATAVIEW.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
-Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
 
 Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
 Changed:
@@ -143,3 +124,31 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
+Date: 2026-05-12 [ProgressBar component — 6-phase hardening COMPLETE (#44)]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.ts
+      • Added inputs: `ariaLabel`, `ariaLabelledBy`, `ariaValueText`, `completionLabel`
+      • Added computed signals: `indeterminate`, `ariaValueNow`, `valueText`, `resolvedAriaLabel`
+      • Updated host bindings: `aria-valuenow` uses `ariaValueNow()` (null in indeterminate, not "0"), `aria-valuetext` added, `aria-labelledby` added
+      • Removed old computed `ariaLabel` property (replaced by input + `resolvedAriaLabel` computed)
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.html
+      • Added polite live region (`aria-live="polite"`, `aria-atomic="true"`) when `clampedValue() === 100`
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.scss
+      • Added `__sr-only` utility class for screen-reader-only content
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling fill animation/transition
+  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.a11y.spec.ts (CREATED — 20 tests)
+      • ARIA structure, aria-valuetext, aria-label/labelledby, completion live region, axe-core checks
+  - projects/ui-lib-custom/src/lib/progress-bar/README.md
+      • Added new inputs table, ARIA attributes table, i18n note, completion announcement docs, updated examples
+  - docs/COMPONENT_SCORES.md
+      • ProgressBar #44: ⏳ Queued → ✅ Done; scored 8.6 avg
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the DataView handoff to keep only the newest 3 here
+State: ProgressBar hardening complete. All 6 phases addressed: `aria-valuenow` absent in indeterminate, `aria-valuetext` with i18n override, `aria-labelledby` support, polite completion live region, reduced-motion CSS, and dedicated a11y spec with axe-core validation.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-bar/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=progress-bar --no-coverage (47/47 PASS — 27 unit + 20 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Next step: Carousel hardening (Tier 5, #45).
