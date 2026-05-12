@@ -20,6 +20,12 @@
 | `trackBy` | `TrackByFunction<T> \| null` | `null` | Custom track-by for the item loop. |
 | `dataKey` | `string \| null` | `null` | Property key used for tracking when `trackBy` is null. |
 | `ariaLabel` | `string` | `'Data list'` | Accessible label on the host element. |
+| `controlsAriaLabel` | `string` | `'Data view controls'` | Accessible name for the built-in controls group. |
+| `filterAriaLabel` | `string` | `'Filter items'` | Accessible name for the filter input. |
+| `filterPlaceholder` | `string` | `'Filter items'` | Placeholder text for the filter input. |
+| `sortAriaLabel` | `string` | `'Sort items'` | Accessible name for the sort dropdown. |
+| `listLayoutAriaLabel` | `string` | `'Show list view'` | Accessible name for list-layout toggle button. |
+| `gridLayoutAriaLabel` | `string` | `'Show grid view'` | Accessible name for grid-layout toggle button. |
 | `paginator` | `boolean` | `false` | Enables built-in pagination controls. |
 | `rows` | `number` | `10` | Items per page. |
 | `first` | `number` | `0` | Zero-based index of the first record. Two-way bindable via `[(first)]`. |
@@ -55,3 +61,36 @@
   </ng-template>
 </ui-lib-data-view>
 ```
+
+## ARIA map
+
+| Element | ARIA behavior |
+|---|---|
+| Host `<ui-lib-data-view>` | `aria-label` from `ariaLabel` input, `aria-busy` while loading, unique generated host `id` |
+| Controls wrapper | `role="group"` with accessible name from `controlsAriaLabel` |
+| Filter input | `type="search"` with accessible name from `filterAriaLabel` |
+| Sort dropdown | Accessible name from `sortAriaLabel` |
+| Layout toggle buttons | `aria-pressed` reflects active layout and each button has configurable `aria-label` |
+| Layout announcement region | Hidden `aria-live="polite"` + `aria-atomic="true"` region announces list/grid changes |
+| Content wrapper | `role="list"` with `role="listitem"` children |
+| Paginator ellipsis | `aria-hidden="true"` |
+
+## Keyboard interactions
+
+| Control | Keys | Result |
+|---|---|---|
+| Filter input | Standard text input keys | Filters rendered records by text |
+| Sort dropdown | Standard select keys | Emits `sortChange` with selected order |
+| List/Grid toggle buttons | `Enter`, `Space` | Switches active layout and updates announcement |
+| Paginator buttons | `Enter`, `Space` | Navigates between pages when paginator is enabled |
+
+## CSS variables
+
+| Variable | Purpose |
+|---|---|
+| `--uilib-data-view-focus-ring` | Focus-visible ring applied to all interactive controls |
+| `--uilib-data-view-paginator-button-size` | Shared control height for paginator/buttons/selects |
+| `--uilib-data-view-paginator-active-bg` | Active background for selected page/layout button |
+| `--uilib-data-view-paginator-active-fg` | Foreground color for selected page/layout button |
+| `--uilib-data-view-grid-columns` | Grid column count in grid layout |
+| `--uilib-data-view-grid-gap` | Grid gap in grid layout |
