@@ -60,6 +60,29 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Button component — glass-shadow appearance polish]
+Changed:
+  - projects/ui-lib-custom/src/lib/button/button.scss
+      • Exposed remaining glass-shadow style values as CSS custom properties (`active-x/y`, font weight, letter spacing, gradient angle, opacity)
+      • Replaced remaining hardcoded glass-shadow active/gradient/opacity values with token usage
+  - projects/ui-lib-custom/src/lib/button/button.spec.ts
+      • Added `glass-shadow` coverage to the appearance class regression test matrix
+  - projects/ui-lib-custom/src/lib/button/button.ts
+      • Updated component description to reflect 12 appearances
+  - projects/ui-lib-custom/src/lib/button/README.md
+      • Updated appearance count math, documented `glass-shadow`, and added a usage example
+  - projects/demo/src/app/pages/buttons/buttons.component.html
+      • Updated demo copy to 12 appearances
+      • Wired the dedicated Glass Shadow demo buttons to the active variant switcher
+State: Glass-shadow button appearance is fully wired with tokenized styling values, docs/test coverage, and a variant-aware demo section. No broader button hardening work was started.
+Verification:
+  npm install (PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ projects/demo/src/app/pages/buttons/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=projects/ui-lib-custom/src/lib/button --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+Terminal notes: Fresh clone required `npm install` before validation. An initial ESLint retry using `--ext .ts,.scss,.html` failed by parsing SCSS with the wrong parser; the repository's standard directory-based ESLint command succeeded. Captured the updated demo screenshot after starting `npm run serve:demo` and installing Playwright Chromium locally.
+Next step: Resume the queued hardening track with TreeTable (#33) when button appearance follow-up is no longer needed.
+
 Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
   - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
@@ -122,35 +145,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
-Changed:
-  - projects/ui-lib-custom/src/lib/card/card.ts
-      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
-      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
-  - projects/ui-lib-custom/src/lib/card/card.html
-      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
-      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
-  - projects/ui-lib-custom/src/lib/card/card.scss
-      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
-      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
-      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
-  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
-      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
-      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
-      • Added closable card accessible label coverage
-      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
-      • Added axe checks for basic, hoverable, closable, and multi-variant states
-  - projects/ui-lib-custom/src/lib/card/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
-      • Added full Accessibility section with examples, guidelines, and reduced-motion note
-  - docs/COMPONENT_SCORES.md
-      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
-State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available.
-Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.

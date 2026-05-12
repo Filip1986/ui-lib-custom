@@ -4,6 +4,40 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
+Changed:
+  - projects/ui-lib-custom/src/lib/card/card.ts
+      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
+      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
+  - projects/ui-lib-custom/src/lib/card/card.html
+      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
+      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
+  - projects/ui-lib-custom/src/lib/card/card.scss
+      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
+      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
+      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
+  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
+      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
+      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
+      • Added closable card accessible label coverage
+      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
+      • Added axe checks for basic, hoverable, closable, and multi-variant states
+  - projects/ui-lib-custom/src/lib/card/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
+      • Added full Accessibility section with examples, guidelines, and reduced-motion note
+  - docs/COMPONENT_SCORES.md
+      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
+State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
+
+---
+
 Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
 Changed:
   - projects/ui-lib-custom/src/lib/chart/chart.component.ts

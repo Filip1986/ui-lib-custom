@@ -50,7 +50,7 @@ export type IconPosition = 'left' | 'right' | 'top' | 'bottom';
 export type BadgeSeverity = ButtonSeverity | 'neutral';
 
 /**
- * Action button component with 11 appearances, 9 severities, and orthogonal pill / raised modifiers.
+ * Action button component with 12 appearances, 9 severities, and orthogonal pill / raised modifiers.
  */
 @Component({
   selector: 'ui-lib-button',
