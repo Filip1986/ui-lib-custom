@@ -109,7 +109,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
 | 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ⏳ Queued   |
-| 62   | ScrollPanel     | Keyboard-scrollable region label                          | ⏳ Queued   |
+| 62   | ScrollPanel     | Keyboard-scrollable region label                          | ✅ Done     |
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ⏳ Queued   |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done     |
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done     |
@@ -190,7 +190,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fieldset    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| ScrollPanel | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ScrollPanel | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
 ## Overlay & Modal
 
