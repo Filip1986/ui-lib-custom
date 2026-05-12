@@ -103,12 +103,15 @@ export class Message {
    */
   public readonly messageId: InputSignal<string | null> = input<string | null>(null);
 
+  /** Per-instance fallback ID, generated exactly once at construction. */
+  private readonly _instanceId: string = `ui-lib-message-${nextMessageId++}`;
+
   /** Emitted when the close button is activated. */
   public readonly close: OutputEmitterRef<void> = output<void>();
 
   /** Stable host `id` — consumer-provided or auto-generated. */
   public readonly resolvedId: Signal<string> = computed<string>(
-    (): string => this.messageId() ?? `ui-lib-message-${nextMessageId++}`
+    (): string => this.messageId() ?? this._instanceId
   );
 
   /**
