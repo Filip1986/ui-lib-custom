@@ -70,6 +70,19 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
+      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
+State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
+Verification:
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
 Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
 Changed:
   - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
@@ -102,80 +115,16 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
-      • Added module-level `let nextScrollPanelId: number = 0` counter and unique `componentId`/`contentId`
-      • Added `ariaLabel` input (`string | null`, default `null`) wired to `__content` via `[attr.aria-label]`
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html
-      • Added `role="region"`, `tabindex="0"`, `[id]="contentId"`, `[attr.aria-label]="ariaLabel()"` to `__content` div
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss
-      • Added `outline: none` + `:focus-visible` ring on `__content`
-  - projects/ui-lib-custom/src/lib/scroll-panel/README.md
-      • Added `ariaLabel` input to inputs table
-      • Added ARIA attributes table, keyboard interaction table, expanded accessibility section
-      • Updated usage examples to show `ariaLabel` in context
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.a11y.spec.ts (CREATED — 16 tests)
-      • axe-core checks (3): labelled, unlabelled, all variants
-      • ARIA structure (6): role=region, tabindex=0, aria-label present/absent, id format, unique IDs
-      • Dynamic label (2): aria-label updates on signal change, removed on null
-      • Keyboard (3): focusable, ArrowDown no error, PageDown no error
-      • Multi-variant (1): all 3 variants expose role+tabindex
-  - docs/COMPONENT_SCORES.md
-      • ScrollPanel #62: ⏳ Queued → ✅ Done
-      • Layout table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
-State: ScrollPanel hardening complete. Scrollable region is now keyboard-accessible (tabindex=0, role=region), has an ariaLabel input for screen reader context, unique stable IDs per instance, and :focus-visible ring for visible focus indicator.
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Resolved additive archive conflict by keeping the Skeleton handoff alongside entries already on `origin/main`
+      • Archived the prior Upload handoff to keep only the newest 3 entries in the active context file
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
+      • Resolved formatting-only merge conflict in pagination live-region coverage without changing assertions
+State: The Skeleton PR branch now has a true merge commit against the current `origin/main`. Remaining conflicts were limited to the archive handoff log and a formatting-only overlap in the Table accessibility spec.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Continue with Tier 6 queue — Tag (#53), Skeleton (#55), Divider (#58) or Toolbar (#59).
-
-Date: 2026-05-12 [TreeTable component — accessibility hardening COMPLETE (#33)]
-Changed:
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.types.ts
-      • Added `setsize: number` and `posinset: number` fields to `TreeTableFlatNode`
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.ts
-      • Added module-level `let nextTreeTableId: number = 0` counter
-      • Added `ElementRef` injection and `instanceId` property
-      • Added `ariaLabel` input signal (falls back to caption, then 'Tree table')
-      • Updated `buildFlatList` to compute `setsize` and `posinset` per sibling group
-      • Fixed `onKeydown` to scope row query to host element (was `document.querySelectorAll`)
-      • Added `ArrowRight` expand/navigate-child and `ArrowLeft` collapse/parent keyboard handlers
-      • Added `findNodeByKey` private helper for keyboard expand/collapse
-      • Added `focusParentRow` private helper for ArrowLeft parent navigation
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.html
-      • Updated `aria-label` binding to use `ariaLabel() || caption() || 'Tree table'`
-      • Added `[attr.aria-setsize]`, `[attr.aria-posinset]`, `[attr.aria-rowindex]`, `[attr.data-key]` on body rows
-      • Added `role="gridcell"` on checkbox selection `<td>` with `aria-colindex="1"`
-      • Added `[attr.role]` on data `<td>` (rowheader on expander column, gridcell on others) + `[attr.aria-colindex]`
-      • Added `aria-label="Select all rows"` + visually-hidden text to header checkbox span
-      • Added `aria-label="Select row"` to row checkbox spans
-      • Added `.uilib-tree-table-sr-only` span inside header selection `<th>` for `empty-table-header` axe rule
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.scss
-      • Added `.uilib-tree-table-sr-only` visually-hidden utility class
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.a11y.spec.ts (CREATED — 44 tests)
-      • ARIA structure (treegrid role, aria-label, ariaLabel input, caption fallback, default fallback)
-      • Row roles and aria-level at each depth (level 1, 2, 3)
-      • aria-expanded true/false/absent for expanded/collapsed/leaf rows; expand and collapse via toggle
-      • aria-setsize and aria-posinset for root rows, child rows, single-child grandchildren
-      • Cell roles (rowheader, gridcell, checkbox gridcell, aria-colindex)
-      • Keyboard: ArrowDown/Up navigation, clamping, ArrowRight expand, ArrowRight navigate-child, ArrowRight leaf no-op, ArrowLeft collapse, ArrowLeft parent navigation, ArrowLeft root no-op, Home/End
-      • Unique instanceId per instance, format check
-      • Empty table structure
-      • axe-core: empty, one-level, two-level expanded, collapsed, checkbox modes
-  - projects/ui-lib-custom/src/lib/tree-table/README.md
-      • Added `ariaLabel` input, ARIA structure diagram, ARIA attributes table, keyboard interaction table, CSS vars table, accessibility notes
-  - docs/COMPONENT_SCORES.md
-      • TreeTable #33: ⏳ Queued → ✅ Done
-      • Data Display table: TreeTable row populated (API 9, A11y 9, Perf 8, Comp 8, Theme 8, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
-State: TreeTable hardening complete. aria-setsize/posinset, role="rowheader"/gridcell, ArrowRight/ArrowLeft keyboard navigation, ElementRef-scoped row queries, prefers-reduced-motion SCSS, and SR-only accessible names for checkbox spans all in place. 44-test a11y regression suite covers full treegrid WAI-ARIA pattern.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-table/ --max-warnings 0 (PASS)
-  npx jest --testPathPatterns=tree-table --no-coverage (85/85 PASS — 41 unit + 44 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  npx jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: axe-core 4.11.1 flagged checkbox `<span role="checkbox">` with no accessible name (`aria-toggle-field-name`) and the `<th>` with only `aria-label` but no text content (`empty-table-header`). Fixed by adding `aria-label="Select all rows/row"` to spans and a `.uilib-tree-table-sr-only` span inside the header th.
-Next step: Tree (#34) hardening — `role=tree`, `role=treeitem`, expand/collapse keyboard navigation.
+  node_modules/.bin/jest --testPathPatterns=table.a11y --no-coverage (88/88 PASS — table + tree-table a11y suites)
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the real merge. Fresh session also required `npm install` before Jest and the pinned TypeScript toolchain were available.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
