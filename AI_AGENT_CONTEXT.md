@@ -46,6 +46,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
+- `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
 
 ---
 
@@ -59,6 +60,40 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
+Changed:
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
+      • Added module-level `nextMeterGroupId` counter and unique host `instanceId`
+      • Added `ariaLabel` input and wired group ARIA label to template
+      • Fixed segment percentage calculation to respect `min`/`max` range (`(value - min) / (max - min)`)
+      • Added computed `totalValue` + `totalAnnouncement` for live total announcements
+      • Added stable segment track helper and richer per-segment aria-label formatter
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html
+      • Updated segment `@for` loops to use stable track keys
+      • Bound group `aria-label` to `ariaLabel` input
+      • Updated segment `aria-label` output to include value-range phrasing
+      • Added polite/atomic live region for total announcement text
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss
+      • Added visually-hidden live-region utility class
+      • Added `prefers-reduced-motion: reduce` override to disable meter transitions
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts
+      • Added tests for custom group aria-label, min/max-relative percentage calculation, and unique host IDs
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.a11y.spec.ts (CREATED — 18 tests)
+      • Added ARIA structure, decorative aria-hidden, live region total updates, keyboard non-focusability, unique IDs, and axe checks
+  - projects/ui-lib-custom/src/lib/meter-group/README.md
+      • Added `ariaLabel` input docs, ARIA attributes table, keyboard interaction table, and expanded accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • MeterGroup #57 queue status: ⏳ Queued → ✅ Done
+      • MeterGroup score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
+State: MeterGroup hardening complete. Segment ARIA labels now include value context, totals are announced through a live region, unique instance IDs are generated, reduced-motion support is in place, and dedicated a11y regression coverage is added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/meter-group/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=meter-group --no-coverage (45/45 PASS — 27 unit + 18 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
@@ -122,35 +157,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
-Changed:
-  - projects/ui-lib-custom/src/lib/card/card.ts
-      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
-      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
-  - projects/ui-lib-custom/src/lib/card/card.html
-      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
-      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
-  - projects/ui-lib-custom/src/lib/card/card.scss
-      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
-      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
-      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
-  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
-      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
-      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
-      • Added closable card accessible label coverage
-      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
-      • Added axe checks for basic, hoverable, closable, and multi-variant states
-  - projects/ui-lib-custom/src/lib/card/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
-      • Added full Accessibility section with examples, guidelines, and reduced-motion note
-  - docs/COMPONENT_SCORES.md
-      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
-State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available.
-Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
