@@ -2,7 +2,7 @@
   <header class="buttons-demo__header">
     <h1 class="buttons-demo__title">Button</h1>
     <p class="buttons-demo__subtitle">
-      Flexible button component with 12 appearances, 9 severities, and orthogonal pill / raised
+      Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised
       modifiers — all from a single <code>ui-lib-button</code> element.
     </p>
 
@@ -156,6 +156,97 @@
             [disabled]="true"
           >
             Glass Shadow
+          </ui-lib-button>
+        </div>
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Section: Framed ──────────────────────────────────────────────────────── -->
+  <section class="buttons-demo__section buttons-demo__section--framed">
+    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
+      <span card-header>Framed</span>
+      <span card-subtitle>
+        A premium geometric design: solid button body framed by a thick outer border, with an
+        L-shaped offset frame that shifts on hover and snaps on press. Customize colors via
+        <code>--uilib-button-framed-bg</code>, <code>--uilib-button-framed-border-color</code>, and
+        <code>--uilib-button-framed-frame-color</code>.
+      </span>
+      <div class="buttons-demo__framed-showcase">
+        <!-- Default (yellow + white border + yellow frame) -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Default</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            (click)="logEvent('Framed clicked')"
+          >
+            Button
+          </ui-lib-button>
+        </div>
+
+        <!-- Custom: electric blue -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Electric</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            style="
+              --uilib-button-framed-bg: #00d4ff;
+              --uilib-button-framed-fg: #000000;
+              --uilib-button-framed-border-color: #ffffff;
+              --uilib-button-framed-frame-color: #00d4ff;
+            "
+            (click)="logEvent('Framed electric clicked')"
+          >
+            Electric
+          </ui-lib-button>
+        </div>
+
+        <!-- Custom: hot pink -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Hot Pink</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            style="
+              --uilib-button-framed-bg: #ff2d78;
+              --uilib-button-framed-fg: #ffffff;
+              --uilib-button-framed-border-color: #ffffff;
+              --uilib-button-framed-frame-color: #ff2d78;
+            "
+            (click)="logEvent('Framed pink clicked')"
+          >
+            Hot Pink
+          </ui-lib-button>
+        </div>
+
+        <!-- Small size -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Small</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="sm"
+            (click)="logEvent('Framed small clicked')"
+          >
+            Small
+          </ui-lib-button>
+        </div>
+
+        <!-- Disabled state -->
+        <div class="buttons-demo__framed-cell">
+          <p class="buttons-demo__framed-label">Disabled</p>
+          <ui-lib-button
+            [variant]="activeVariant()"
+            appearance="framed"
+            size="lg"
+            [disabled]="true"
+          >
+            Button
           </ui-lib-button>
         </div>
       </div>

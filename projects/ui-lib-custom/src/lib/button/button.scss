@@ -58,6 +58,36 @@ ui-lib-button {
     var(--uilib-space-1) var(--uilib-space-2)
   );
 
+  /* Framed appearance token defaults
+   * --uilib-button-framed-stroke is the single master size token.
+   * It controls the white outer border, the offset frame border, and the gap
+   * between them simultaneously (gap = offset − frame-border = stroke).
+   * Change only this one value to rescale all three uniformly.
+   */
+  --uilib-button-framed-stroke: 4px;
+  --uilib-button-framed-bg: #ffc82c;
+  --uilib-button-framed-fg: #000000;
+  --uilib-button-framed-border-color: #ffffff;
+  /* outer border width = stroke */
+  --uilib-button-framed-border-width: var(--uilib-button-framed-stroke);
+  --uilib-button-framed-frame-color: #ffc82c;
+  /* frame line width = stroke */
+  --uilib-button-framed-frame-border-width: var(--uilib-button-framed-stroke);
+  /* resting offset = 2×stroke  →  gap = offset − frame-border = stroke ✓ */
+  --uilib-button-framed-frame-offset-x: calc(2 * var(--uilib-button-framed-stroke));
+  --uilib-button-framed-frame-offset-y: calc(2 * var(--uilib-button-framed-stroke));
+  /* hover: frame moves 1 extra stroke further out */
+  --uilib-button-framed-frame-hover-offset-x: calc(3 * var(--uilib-button-framed-stroke));
+  --uilib-button-framed-frame-hover-offset-y: calc(3 * var(--uilib-button-framed-stroke));
+  /* active: frame stays at resting position while button translates toward it */
+  --uilib-button-framed-frame-active-offset-x: calc(2 * var(--uilib-button-framed-stroke));
+  --uilib-button-framed-frame-active-offset-y: calc(2 * var(--uilib-button-framed-stroke));
+  /* button body snaps 1 stroke toward the frame on press */
+  --uilib-button-framed-active-translate-x: var(--uilib-button-framed-stroke);
+  --uilib-button-framed-active-translate-y: var(--uilib-button-framed-stroke);
+  --uilib-button-framed-font-weight: 500;
+  --uilib-button-framed-letter-spacing: -0.025em;
+
   /* Glass-shadow appearance token defaults */
   --uilib-button-glass-shadow-from: #ff5f6d;
   --uilib-button-glass-shadow-to: #ffc371;
@@ -392,6 +422,44 @@ ui-lib-button .ui-lib-button {
 
     &:active:not(.ui-lib-button--disabled) {
       filter: brightness(0.8);
+    }
+  }
+
+  &--appearance-framed {
+    background-color: var(--uilib-button-framed-bg);
+    color: var(--uilib-button-framed-fg);
+    border: var(--uilib-button-framed-border-width) solid var(--uilib-button-framed-border-color);
+    border-radius: 0;
+    font-weight: var(--uilib-button-framed-font-weight);
+    letter-spacing: var(--uilib-button-framed-letter-spacing);
+    position: relative;
+    z-index: 1;
+    box-shadow: none;
+    transition:
+      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background-color: var(--uilib-button-framed-bg);
+      color: var(--uilib-button-framed-fg);
+      box-shadow: none;
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      transform: translate(
+        var(--uilib-button-framed-active-translate-x),
+        var(--uilib-button-framed-active-translate-y)
+      );
+      background-color: var(--uilib-button-framed-bg);
+      box-shadow: none;
+    }
+
+    /* Increase outline-offset to keep the focus ring clear of the thick white border */
+    &:focus-visible,
+    &:focus,
+    &.ui-lib-button--focused {
+      outline-offset: 4px;
     }
   }
 
@@ -779,12 +847,64 @@ ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow.ui-lib-button--p
   border-radius: 999px;
 }
 
+/* ── Framed: offset L-frame via host ::after ──────────────────────────────── */
+
+ui-lib-button:has(button.ui-lib-button--appearance-framed) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-right: var(--uilib-button-framed-frame-border-width) solid
+      var(--uilib-button-framed-frame-color);
+    border-bottom: var(--uilib-button-framed-frame-border-width) solid
+      var(--uilib-button-framed-frame-color);
+    transform: translate(
+      var(--uilib-button-framed-frame-offset-x),
+      var(--uilib-button-framed-frame-offset-y)
+    );
+    transition:
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+ui-lib-button:has(
+    button.ui-lib-button--appearance-framed:hover:not(.ui-lib-button--disabled)
+  )::after {
+  transform: translate(
+    var(--uilib-button-framed-frame-hover-offset-x),
+    var(--uilib-button-framed-frame-hover-offset-y)
+  );
+}
+
+ui-lib-button:has(
+    button.ui-lib-button--appearance-framed:active:not(.ui-lib-button--disabled)
+  )::after {
+  transform: translate(
+    var(--uilib-button-framed-frame-active-offset-x),
+    var(--uilib-button-framed-frame-active-offset-y)
+  );
+  opacity: 0.5;
+}
+
 @media (prefers-reduced-motion: reduce) {
   ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow)::after {
     transition: none;
   }
 
   ui-lib-button button.ui-lib-button--appearance-glass-shadow {
+    transition: none;
+  }
+
+  ui-lib-button:has(button.ui-lib-button--appearance-framed)::after {
+    transition: none;
+  }
+
+  ui-lib-button button.ui-lib-button--appearance-framed {
     transition: none;
   }
 }
