@@ -167,8 +167,10 @@
     color: var(--uilib-listbox-filter-input-placeholder-color);
   }
 
-  &:focus {
-    box-shadow: none;
+  &:focus-visible {
+    outline: 2px solid var(--uilib-primary-color, #3b82f6);
+    outline-offset: 2px;
+    box-shadow: var(--uilib-listbox-filter-focus-ring);
   }
 }
 
@@ -205,10 +207,22 @@
   outline: none;
   flex: 1;
 
-  &:focus {
+  &:focus-visible {
     outline: none;
     box-shadow: var(--uilib-listbox-focus-ring);
   }
+}
+
+.ui-lib-listbox__sr-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .ui-lib-listbox__list {
@@ -335,6 +349,11 @@
     height: var(--uilib-listbox-checkbox-size);
     cursor: pointer;
     accent-color: var(--uilib-primary-color, #3b82f6);
+
+    &:focus-visible {
+      outline: 2px solid var(--uilib-primary-color, #3b82f6);
+      outline-offset: 2px;
+    }
   }
 }
 
@@ -430,5 +449,12 @@
     background: transparent;
     text-decoration: underline;
     outline: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-listbox__item,
+  .ui-lib-listbox__checkbox {
+    transition: none;
   }
 }

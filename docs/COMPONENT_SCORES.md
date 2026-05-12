@@ -71,7 +71,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ⏳ Queued   |
 | 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ⏳ Queued   |
 | 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ⏳ Queued   |
-| 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ⏳ Queued   |
+| 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done     |
 | 37   | Paginator  | Live region announcing page change, button labels                               | ⏳ Queued   |
 | 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ⏳ Queued   |
 | 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ⏳ Queued   |
@@ -230,7 +230,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | TreeTable         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Tree              | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | TreeSelect        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Listbox           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | DataView          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | VirtualScroller   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Timeline          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

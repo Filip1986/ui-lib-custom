@@ -3,7 +3,15 @@
   @if (filter()) {
     <div class="ui-lib-listbox__filter-container">
       <span class="ui-lib-listbox__filter-icon" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          width="14"
+          height="14"
+          aria-hidden="true"
+          focusable="false"
+        >
           <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
         </svg>
       </span>
@@ -40,6 +48,8 @@
   }
 
   <!-- Scrollable list -->
+  <div class="ui-lib-listbox__sr-live" aria-live="polite" aria-atomic="true">{{ liveRegionMessage() }}</div>
+
   <div
     #listElement
     class="ui-lib-listbox__list-container"
@@ -75,7 +85,7 @@
       </div>
     } @else {
       <ul class="ui-lib-listbox__list" role="presentation">
-        @for (item of flatItems(); track $index) {
+        @for (item of flatItems(); track trackByFlatItem(item, $index)) {
           @if (item.type === 'group') {
             <!-- Group header -->
             <li class="ui-lib-listbox__group-header" role="presentation" aria-hidden="true">
@@ -110,7 +120,15 @@
                     [class.ui-lib-listbox__checkbox--checked]="isSelected(item.value)"
                   >
                     @if (isSelected(item.value)) {
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" fill="currentColor" width="10" height="10">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 12 12"
+                        fill="currentColor"
+                        width="10"
+                        height="10"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
                         <path fill-rule="evenodd" d="M10.28 1.78a.75.75 0 0 0-1.06 0L5.25 5.72 2.78 3.25a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z" clip-rule="evenodd"/>
                       </svg>
                     }

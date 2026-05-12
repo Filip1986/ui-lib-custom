@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  PLATFORM_ID,
   ViewEncapsulation,
   computed,
   forwardRef,
@@ -21,7 +22,7 @@ import type {
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import type { ControlValueAccessor } from '@angular/forms';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
@@ -234,7 +235,9 @@ export class ListboxComponent implements ControlValueAccessor {
   // Internal state
   // ---------------------------------------------------------------------------
 
-  private readonly componentId: string = `ui-lib-listbox-${++listboxIdCounter}`;
+  private readonly componentId: string = `ui-lib-listbox-${listboxIdCounter++}`;
+  private readonly platformId: object = inject<object>(PLATFORM_ID);
+  private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
 
   /** Value managed by CVA. Stored as an array for uniform internal handling. */
   public readonly internalValue: WritableSignal<unknown[]> = signal<unknown[]>([]);
@@ -247,6 +250,9 @@ export class ListboxComponent implements ControlValueAccessor {
 
   /** Whether the list container itself is focused. */
   public readonly listFocused: WritableSignal<boolean> = signal<boolean>(false);
+
+  /** Screen reader announcement text for dynamic listbox updates. */
+  public readonly liveRegionMessage: WritableSignal<string> = signal<string>('');
 
   private onChange: (value: unknown) => void = (): void => {};
   private onTouched: () => void = (): void => {};
@@ -290,9 +296,9 @@ export class ListboxComponent implements ControlValueAccessor {
   /** ID for the focused option, used for `aria-activedescendant`. */
   public readonly activeDescendantId: Signal<string | null> = computed<string | null>(
     (): string | null => {
-      const index: number = this.focusedOptionIndex();
-      if (index < 0) return null;
-      return `${this.componentId}${LISTBOX_OPTION_ID_SEPARATOR}${index}`;
+      const focusedRow: ListboxOptionRow | undefined = this.optionRows()[this.focusedOptionIndex()];
+      if (!focusedRow) return null;
+      return this.optionId(focusedRow.optionIndex);
     }
   );
 
@@ -469,6 +475,15 @@ export class ListboxComponent implements ControlValueAccessor {
     return `${this.componentId}${LISTBOX_OPTION_ID_SEPARATOR}${optionIndex}`;
   }
 
+  /**
+   * Stable track key for mixed group/option list rows.
+   */
+  public trackByFlatItem(item: ListboxFlatItem, index: number): string {
+    return item.type === 'option'
+      ? `option-${item.optionIndex}`
+      : `group-${index}-${item.label.toLowerCase()}`;
+  }
+
   // ---------------------------------------------------------------------------
   // Selection handlers
   // ---------------------------------------------------------------------------
@@ -494,7 +509,11 @@ export class ListboxComponent implements ControlValueAccessor {
     }
 
     this.updateValue(newValue, event);
-    this.focusedOptionIndex.set(row.optionIndex);
+    this.focusedOptionIndex.set(
+      this.optionRows().findIndex(
+        (optionRow: ListboxOptionRow): boolean => optionRow.optionIndex === row.optionIndex
+      )
+    );
   }
 
   /**
@@ -526,6 +545,7 @@ export class ListboxComponent implements ControlValueAccessor {
     const query: string = inputElement.value;
     this.filterValue.set(query);
     this.focusedOptionIndex.set(-1);
+    this.announceFilterResult();
     this.filterChange.emit({ originalEvent: event, filter: query });
   }
 
@@ -595,6 +615,7 @@ export class ListboxComponent implements ControlValueAccessor {
     );
     this.onChange(value);
     this.selectionChange.emit({ originalEvent: event, value });
+    this.announceSelectionChange(value);
   }
 
   private moveFocus(direction: 1 | -1): void {
@@ -611,7 +632,7 @@ export class ListboxComponent implements ControlValueAccessor {
 
     if (next < 0 || next >= rows.length) return;
     this.focusedOptionIndex.set(next);
-    this.scrollOptionIntoView(next);
+    this.scrollOptionIntoView(rows[next]!.optionIndex);
   }
 
   private focusFirst(): void {
@@ -619,7 +640,7 @@ export class ListboxComponent implements ControlValueAccessor {
     const firstEnabled: number = rows.findIndex((row: ListboxOptionRow): boolean => !row.disabled);
     if (firstEnabled >= 0) {
       this.focusedOptionIndex.set(firstEnabled);
-      this.scrollOptionIntoView(firstEnabled);
+      this.scrollOptionIntoView(rows[firstEnabled]!.optionIndex);
     }
   }
 
@@ -634,7 +655,7 @@ export class ListboxComponent implements ControlValueAccessor {
     }
     if (lastEnabled >= 0) {
       this.focusedOptionIndex.set(lastEnabled);
-      this.scrollOptionIntoView(lastEnabled);
+      this.scrollOptionIntoView(rows[lastEnabled]!.optionIndex);
     }
   }
 
@@ -646,11 +667,50 @@ export class ListboxComponent implements ControlValueAccessor {
   }
 
   private scrollOptionIntoView(optionIndex: number): void {
+    if (!this.isBrowser) return;
     const listElement: ElementRef<HTMLElement> | undefined = this.listRef();
     if (!listElement) return;
     const optionElement: HTMLElement | null = listElement.nativeElement.querySelector<HTMLElement>(
       `[id="${this.optionId(optionIndex)}"]`
     );
     optionElement?.scrollIntoView({ block: 'nearest' });
+  }
+
+  private announceFilterResult(): void {
+    const query: string = this.filterValue().trim();
+    if (!query) {
+      this.liveRegionMessage.set('');
+      return;
+    }
+
+    const resultCount: number = this.optionRows().length;
+    this.liveRegionMessage.set(
+      `${resultCount} ${resultCount === 1 ? 'result' : 'results'} available.`
+    );
+  }
+
+  private announceSelectionChange(value: unknown): void {
+    if (this.multiple()) {
+      const selectedCount: number = Array.isArray(value) ? value.length : 0;
+      this.liveRegionMessage.set(
+        `${selectedCount} ${selectedCount === 1 ? 'option' : 'options'} selected.`
+      );
+      return;
+    }
+
+    if (value === null || value === undefined) {
+      this.liveRegionMessage.set('Selection cleared.');
+      return;
+    }
+
+    const selectedLabel: string = this.findLabelForValue(value) ?? 'Option selected';
+    this.liveRegionMessage.set(`Selected ${selectedLabel}.`);
+  }
+
+  private findLabelForValue(value: unknown): string | null {
+    const matchedOption: ListboxOptionRow | undefined = this.optionRows().find(
+      (row: ListboxOptionRow): boolean => row.value === value
+    );
+    return matchedOption?.label ?? null;
   }
 }

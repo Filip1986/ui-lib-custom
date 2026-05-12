@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** Listbox accessibility hardening COMPLETE (6-phase, #36); BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -60,36 +60,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
+Date: 2026-05-12 [Listbox component — accessibility hardening COMPLETE (#36)]
 Changed:
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
-      • Added module-level `let nextBlockUiId: number = 0` counter
-      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
-      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
-      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
-      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
-      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
-      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
-      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
-      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
-      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
-  - projects/ui-lib-custom/src/lib/block-ui/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
+  - projects/ui-lib-custom/src/lib/listbox/listbox.component.ts
+      • Switched to module-level monotonic instance ids with `listboxIdCounter++`
+      • Added SSR-safe scroll handling using `isPlatformBrowser` + `PLATFORM_ID`
+      • Fixed `aria-activedescendant` mapping to option row ids across grouped/filter states
+      • Added stable `trackByFlatItem` keys for mixed group/option rendering
+      • Added polite live-region announcement state for filter and selection updates
+  - projects/ui-lib-custom/src/lib/listbox/listbox.component.html
+      • Added sr-only live region (`aria-live="polite"`, `aria-atomic="true"`)
+      • Added decorative icon guards (`aria-hidden="true"`, `focusable="false"`) on SVGs
+      • Switched `@for` tracking to stable component track function
+  - projects/ui-lib-custom/src/lib/listbox/listbox.component.scss
+      • Added `:focus-visible` rings for filter input, list container, and toggle-all checkbox
+      • Added sr-only live-region utility class
+      • Added `@media (prefers-reduced-motion: reduce)` override for item/checkbox transitions
+  - projects/ui-lib-custom/src/lib/listbox/listbox.a11y.spec.ts (CREATED — 33 tests)
+      • Added ARIA structure, keyboard + `aria-activedescendant`, live region, unique id, and axe checks
+  - projects/ui-lib-custom/src/lib/listbox/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes
   - docs/COMPONENT_SCORES.md
-      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
-State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
-  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
+      • Listbox #36: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
+State: Listbox hardening complete. Unique ids, resilient `aria-activedescendant`, reduced-motion support,
+  focus-visible treatment, and dedicated a11y regression coverage are in place.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/listbox/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=listbox --no-coverage (88/88 PASS — 55 unit + 33 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
+Terminal notes: Fresh clone required `npm install` before validation. Screenshot captured via Playwright CLI: https://github.com/user-attachments/assets/b1aa76ec-c07a-426d-af62-2a7fdd539e6c
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
 Changed:
