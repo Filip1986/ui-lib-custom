@@ -191,3 +191,10 @@ ui-lib-divider {
     }
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-divider {
+    transition: none;
+    animation: none;
+  }
+}
