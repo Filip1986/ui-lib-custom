@@ -53,6 +53,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 - `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
+- `DataView` -> ✅ complete + hardened (6-phase, 64 tests — unit + a11y)
 - `Fieldset` -> ✅ complete + hardened (6-phase, score 9.0/10, 53 tests — 30 unit + 23 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
@@ -71,25 +72,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
+Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
 Changed:
-  - AI_AGENT_CONTEXT.md
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
+  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/data-view/README.md
+  - docs/reference/components/DATAVIEW.md
   - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/tree/tree.ts
-  - projects/ui-lib-custom/src/lib/tree/tree.html
-  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
-  - projects/ui-lib-custom/src/lib/tree/tree-node.html
-  - projects/ui-lib-custom/src/lib/tree/tree.scss
-State: Merged the latest `origin/main` into the TreeSelect accessibility branch again, reconciled the repeated Tree/docs conflicts, preserved the already-validated TreeSelect + Tree accessibility behavior, and kept the newer Skeleton bookkeeping from `main`.
+State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
-Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
+Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
+Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
 
 Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
 Changed:
