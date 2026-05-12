@@ -71,6 +71,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [SplitButton PR — merge conflict resolution COMPLETE (round 5)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflicts against the newer upstream tracking state from `origin/main`
+      • Kept only the newest 3 active handoffs by moving the older Skeleton merge-resolution handoff into the archive
+  - docs/COMPONENT_SCORES.md
+      • Preserved SplitButton #68 as ✅ Done while keeping upstream Terminal #70 as ✅ Done
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Preserved the existing SplitButton/ScrollTop archive history and archived the older Skeleton round-2 merge handoff from the active context
+State: The SplitButton PR branch now reconciles the latest `origin/main` tracking-file conflicts without losing existing SplitButton completion records or the newer upstream bookkeeping from main.
+Verification:
+  node_modules/.bin/jest --testPathPatterns='split-button|terminal|entry-points' --no-coverage (PASS)
+  npm run typecheck (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before the real merge. Fresh session also required `npm install` before Jest and the pinned local TypeScript toolchain were available.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
 Date: 2026-05-12 [SplitButton PR — merge conflict resolution COMPLETE (round 4)]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -103,17 +120,4 @@ Verification:
   npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
 Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before the real merge. Fresh session also required `npm install` before Jest and the pinned local TypeScript toolchain were available.
-Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
-
-Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
-      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
-State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
-Verification:
-  npm run typecheck (PASS)
-Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
 Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.

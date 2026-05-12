@@ -4,6 +4,19 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
+      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
+State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
+Verification:
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
 Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE]
 Changed:
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
