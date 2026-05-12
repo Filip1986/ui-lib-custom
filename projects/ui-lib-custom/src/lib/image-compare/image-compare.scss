@@ -189,3 +189,10 @@ ui-lib-image-compare {
     --uilib-image-compare-handle-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   }
 }
+
+// ─── Reduced motion ───────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  .uilib-image-compare__handle {
+    transition: none;
+  }
+}

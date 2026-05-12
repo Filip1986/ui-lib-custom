@@ -30,6 +30,8 @@ import type { ImageCompareSize, ImageCompareVariant } from './image-compare.type
 
 export type { ImageCompareSize, ImageCompareVariant } from './image-compare.types';
 
+let nextImageCompareId: number = 0;
+
 /**
  * ImageCompare component — renders two images with a draggable slider divider
  * so the user can compare a "before" (left) and "after" (right) image.
@@ -58,6 +60,7 @@ export type { ImageCompareSize, ImageCompareVariant } from './image-compare.type
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'hostClasses()',
+    '[id]': 'instanceId',
   },
 })
 export class ImageCompareComponent {
@@ -65,6 +68,11 @@ export class ImageCompareComponent {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+
+  // ─── Instance identity ───────────────────────────────────────────────────────
+
+  /** Unique DOM id for this component instance. */
+  public readonly instanceId: string = `ui-lib-image-compare-${++nextImageCompareId}`;
 
   // ─── View queries ────────────────────────────────────────────────────────────
 
@@ -146,6 +154,11 @@ export class ImageCompareComponent {
   /** CSS `left` percentage string for the handle/divider. */
   public readonly handlePosition: Signal<string> = computed<string>(
     (): string => `${this.clampedValue()}%`
+  );
+
+  /** Human-readable value text for screen readers (e.g. "45 percent"). */
+  public readonly ariaValueText: Signal<string> = computed<string>(
+    (): string => `${Math.round(this.clampedValue())} percent`
   );
 
   /** Clip path for the right image — shows the portion to the right of the divider. */

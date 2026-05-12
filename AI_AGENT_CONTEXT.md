@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 
 ---
 
@@ -75,26 +76,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
-
-Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
-Changed:
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
-  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/data-view/README.md
-  - docs/reference/components/DATAVIEW.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
-Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
 
 Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
 Changed:
@@ -143,3 +124,30 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
+Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
+Changed:
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
+      • Added module-level `nextImageCompareId` counter and unique host `instanceId`
+      • Bound `[id]` to `instanceId` in host metadata
+      • Added `ariaValueText` computed signal (`"N percent"` format)
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.html
+      • Added `[attr.aria-valuetext]="ariaValueText()"` to the handle
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling handle transitions
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure, keyboard nav, image alt, decorative aria-hidden, disabled state, unique ID, and axe-core assertions
+  - projects/ui-lib-custom/src/lib/image-compare/README.md
+      • Updated `ariaLabel` default, added Keyboard Interaction table, ARIA Attributes table, CSS Custom Properties table, and Accessibility section
+  - docs/COMPONENT_SCORES.md
+      • ImageCompare #67: ⏳ Queued → ✅ Done (scores: API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived oldest DataView handoff to keep only the newest 3 in this file
+State: ImageCompare hardening complete. Component now has aria-valuetext, unique generated IDs per instance, prefers-reduced-motion SCSS guard, and a full 21-test a11y spec (role=slider, ARIA value attrs, image alt, decorative aria-hidden, keyboard nav, disabled state, axe-core).
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image-compare/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=image-compare --no-coverage (60/60 PASS — 39 unit + 21 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
+Next step: Continue Tier 6 queue with remaining queued components.
