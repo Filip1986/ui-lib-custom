@@ -62,7 +62,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
-- `ProgressBar` -> ✅ complete + hardened (6-phase, score 8.6/10, 47 tests — 27 unit + 20 a11y)
 
 ---
 
@@ -125,30 +124,34 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
 
-Date: 2026-05-12 [ProgressBar component — 6-phase hardening COMPLETE (#44)]
+Date: 2026-05-12 [PickList component — 6-phase hardening COMPLETE (#40)]
 Changed:
-  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.ts
-      • Added inputs: `ariaLabel`, `ariaLabelledBy`, `ariaValueText`, `completionLabel`
-      • Added computed signals: `indeterminate`, `ariaValueNow`, `valueText`, `resolvedAriaLabel`
-      • Updated host bindings: `aria-valuenow` uses `ariaValueNow()` (null in indeterminate, not "0"), `aria-valuetext` added, `aria-labelledby` added
-      • Removed old computed `ariaLabel` property (replaced by input + `resolvedAriaLabel` computed)
-  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.html
-      • Added polite live region (`aria-live="polite"`, `aria-atomic="true"`) when `clampedValue() === 100`
-  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.scss
-      • Added `__sr-only` utility class for screen-reader-only content
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling fill animation/transition
-  - projects/ui-lib-custom/src/lib/progress-bar/progress-bar.a11y.spec.ts (CREATED — 20 tests)
-      • ARIA structure, aria-valuetext, aria-label/labelledby, completion live region, axe-core checks
-  - projects/ui-lib-custom/src/lib/progress-bar/README.md
-      • Added new inputs table, ARIA attributes table, i18n note, completion announcement docs, updated examples
+  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.html
+      • Added `aria-hidden="true"` to all decorative `<ui-lib-icon>` elements inside buttons
+      • Moved empty-state `<li>` outside `<ul role="listbox">` (fixes ARIA required-children violation); changed to `<p>` / `<div>` elements
+  - projects/ui-lib-custom/src/lib/pick-list/pick-list.component.scss
+      • Added `@media (prefers-reduced-motion: reduce)` override block
+      • Added `margin: 0` to `.ui-lib-pick-list__empty` for `<p>` element reset
+  - projects/ui-lib-custom/src/lib/pick-list/pick-list.a11y.spec.ts (CREATED — 31 tests)
+      • 6 axe-core automated checks (default, selected, disabled, filtered, empty, variant states)
+      • 13 ARIA structure assertions (roles, labels, multiselectable, IDs, selected states, icon aria-hidden, button labels)
+      • 10 keyboard navigation tests (ArrowDown/Up, Home/End, Space/Enter, Ctrl+A, Escape, Ctrl+ArrowRight/Left)
+      • 4 live region / transfer announcement tests
+      • 3 variant axe checks (material, bootstrap, minimal)
+  - projects/ui-lib-custom/src/lib/pick-list/README.md
+      • Added `sourceAriaLabel`, `targetAriaLabel`, and all button aria-label inputs to the inputs table
+      • Added Accessibility section with ARIA table, Keyboard table, multi-select guide
+      • Added CSS Custom Properties table
   - docs/COMPONENT_SCORES.md
-      • ProgressBar #44: ⏳ Queued → ✅ Done; scored 8.6 avg
+      • PickList #40: ⏳ Queued → ✅ Done
+      • Scores: API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived the DataView handoff to keep only the newest 3 here
-State: ProgressBar hardening complete. All 6 phases addressed: `aria-valuenow` absent in indeterminate, `aria-valuetext` with i18n override, `aria-labelledby` support, polite completion live region, reduced-motion CSS, and dedicated a11y spec with axe-core validation.
+      • Archived the DataView (#38) handoff to keep only the newest 3 in this file
+State: PickList hardening complete. Fixed genuine ARIA bug (non-option children inside listbox), added decorative icon aria-hidden, reduced-motion SCSS, comprehensive a11y spec (31 tests, all pass), and updated README + score bookkeeping.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-bar/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=progress-bar --no-coverage (47/47 PASS — 27 unit + 20 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/pick-list/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=pick-list --no-coverage (91/91 PASS — 60 unit + 31 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Carousel hardening (Tier 5, #45).
+Terminal notes: npm install required (fresh clone). The structural HTML fix (empty state outside listbox) affects how tests query the empty state but all 91 tests pass.
+Next step: Continue Tier 4 queue hardening with remaining queued components.
