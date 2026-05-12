@@ -101,9 +101,9 @@
               [class.uilib-carousel-item-start]="isItemFirst($index)"
               [class.uilib-carousel-item-end]="isItemLast($index)"
               [attr.aria-hidden]="!isItemActive($index)"
+              [attr.aria-label]="ariaSlideNumber($index)"
               role="group"
               [attr.aria-roledescription]="'slide'"
-              [attr.aria-label]="ariaSlideNumber($index)"
             >
               @if (itemTemplate()) {
                 <ng-container

@@ -355,9 +355,9 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
 
   public ngAfterContentInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const prefersReducedMotion: boolean =
-        typeof window !== 'undefined' &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const prefersReducedMotion: boolean = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
 
       this.autoplayAllowed = this.autoplayInterval() > 0 && !prefersReducedMotion;
 

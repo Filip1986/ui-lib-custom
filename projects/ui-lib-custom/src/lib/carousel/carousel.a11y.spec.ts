@@ -341,20 +341,19 @@ describe('Carousel Accessibility', (): void => {
       fixture.componentInstance.autoplayInterval.set(3000);
       fixture.componentInstance.pauseLabel.set('Automatische Wiedergabe pausieren');
       fixture.detectChanges();
-      // The button label is pauseLabel when playing, playLabel when paused.
-      // In JSDOM environment without browser APIs the autoplay doesn't start,
-      // so playing() stays false and we see playLabel by default.
-      // Verify the component stores the custom pauseLabel correctly:
-      const carousel: CarouselComponent | null = (
-        fixture.nativeElement as HTMLElement
-      ).querySelector('ui-lib-carousel') as CarouselComponent | null;
-      void carousel; // tested via label transitions below
-      // Toggle autoplay to start playing state
+      // Simulate playing state by clicking the resume button (which calls toggleAutoplay)
+      // then verify the aria-label switches to the custom pauseLabel
       const pauseBtn: HTMLButtonElement | null = queryElement<HTMLButtonElement>(
         fixture,
         '.uilib-carousel-autoplay-button'
       );
+      // Initial state: not playing, shows playLabel
       expect(pauseBtn?.getAttribute('aria-label')).toBe('Resume autoplay');
+      // Click to start playing
+      pauseBtn?.click();
+      fixture.detectChanges();
+      // Now playing: should show the custom pauseLabel
+      expect(pauseBtn?.getAttribute('aria-label')).toBe('Automatische Wiedergabe pausieren');
     });
   });
 
