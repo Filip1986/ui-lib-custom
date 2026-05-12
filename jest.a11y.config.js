@@ -15,12 +15,18 @@ module.exports = {
     '<rootDir>/projects/.*/dist/',
     '<rootDir>/tmp/',
     '<rootDir>/.angular/',
+    // Exclude Claude AI worktrees — these contain duplicate package.json name fields
+    // that cause jest-haste-map collisions locally. GitHub Actions never has this folder.
+    '<rootDir>/.claude/',
+    // Separator-agnostic fallback required on Windows (backslash paths)
+    '[/\\\\]\\.claude[/\\\\]',
   ],
   watchPathIgnorePatterns: [
     '<rootDir>/dist/',
     '<rootDir>/projects/.*/dist/',
     '<rootDir>/tmp/',
     '<rootDir>/.angular/',
+    '<rootDir>/.claude/',
   ],
   transform: {
     '^.+\\.(ts|js|html)$': [

@@ -60,6 +60,34 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
+      • Added module-level `let nextProgressSpinnerId: number = 0` counter
+      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
+      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
+      • Added dark mode overrides for bootstrap and minimal variant arc colours
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
+      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
+      • ariaLabel reactive updates, two-instance ID uniqueness
+      • Visual state (size classes sm/lg)
+      • axe-core automated checks (5 states)
+  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
+      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
+  - docs/COMPONENT_SCORES.md
+      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
+State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
+Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
+
 Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
   - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
@@ -123,34 +151,3 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
-Changed:
-  - projects/ui-lib-custom/src/lib/card/card.ts
-      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
-      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
-  - projects/ui-lib-custom/src/lib/card/card.html
-      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
-      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
-  - projects/ui-lib-custom/src/lib/card/card.scss
-      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
-      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
-      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
-  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
-      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
-      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
-      • Added closable card accessible label coverage
-      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
-      • Added axe checks for basic, hoverable, closable, and multi-variant states
-  - projects/ui-lib-custom/src/lib/card/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
-      • Added full Accessibility section with examples, guidelines, and reduced-motion note
-  - docs/COMPONENT_SCORES.md
-      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
-State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available.
-Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
