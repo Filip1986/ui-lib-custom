@@ -159,31 +159,34 @@ describe('Inplace', (): void => {
     expect(el.className).toContain('ui-lib-inplace--disabled');
   });
 
-  it('should set aria-disabled when disabled', async (): Promise<void> => {
+  it('should set the native disabled property on the display button when disabled', async (): Promise<void> => {
     const { fixture, host } = setup();
     host.disabled.set(true);
     fixture.detectChanges();
     await fixture.whenStable();
-    const display: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__display'))
-      .nativeElement as HTMLElement;
-    expect(display.getAttribute('aria-disabled')).toBe('true');
+    const display: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-inplace__display')
+    ).nativeElement as HTMLButtonElement;
+    expect(display.disabled).toBe(true);
   });
 
-  it('should have tabindex="0" on display when not disabled', (): void => {
+  it('should have display button in tab order when not disabled', (): void => {
     const { fixture } = setup();
-    const display: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__display'))
-      .nativeElement as HTMLElement;
-    expect(display.getAttribute('tabindex')).toBe('0');
+    const display: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-inplace__display')
+    ).nativeElement as HTMLButtonElement;
+    expect(display.tabIndex).toBe(0);
   });
 
-  it('should remove tabindex from display when disabled', async (): Promise<void> => {
+  it('should remove display button from tab order when disabled', async (): Promise<void> => {
     const { fixture, host } = setup();
     host.disabled.set(true);
     fixture.detectChanges();
     await fixture.whenStable();
-    const display: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__display'))
-      .nativeElement as HTMLElement;
-    expect(display.getAttribute('tabindex')).toBeNull();
+    const display: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-inplace__display')
+    ).nativeElement as HTMLButtonElement;
+    expect(display.disabled).toBe(true);
   });
 
   it('should not render close button when closable is false', (): void => {
@@ -289,5 +292,60 @@ describe('Inplace', (): void => {
       By.css('.ui-lib-inplace__close-button span')
     ).nativeElement as HTMLElement;
     expect(iconSpan.className).toContain('pi-check');
+  });
+
+  it('should have aria-expanded="false" on display button when inactive', (): void => {
+    const { fixture } = setup();
+    const display: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__display'))
+      .nativeElement as HTMLElement;
+    expect(display.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('should have aria-expanded="true" on display button when active', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.activeState.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const display: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__display'))
+      .nativeElement as HTMLElement;
+    expect(display.getAttribute('aria-expanded')).toBe('true');
+  });
+
+  it('should have aria-controls on display button pointing to content id', (): void => {
+    const { fixture } = setup();
+    const display: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__display'))
+      .nativeElement as HTMLElement;
+    const content: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__content'))
+      .nativeElement as HTMLElement;
+    expect(display.getAttribute('aria-controls')).toBeTruthy();
+    expect(display.getAttribute('aria-controls')).toBe(content.getAttribute('id'));
+  });
+
+  it('should have a unique host id', (): void => {
+    const { fixture } = setup();
+    const el: HTMLElement = fixture.debugElement.query(By.css('ui-lib-inplace'))
+      .nativeElement as HTMLElement;
+    expect(el.id).toMatch(/^ui-lib-inplace-\d+$/);
+  });
+
+  it('should deactivate on Escape keydown inside the content area', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.activeState.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const content: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__content'))
+      .nativeElement as HTMLElement;
+    const event: KeyboardEvent = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
+    content.dispatchEvent(event);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(host.activeState()).toBe(false);
+  });
+
+  it('should have aria-label on display button', (): void => {
+    const { fixture } = setup();
+    const display: HTMLElement = fixture.debugElement.query(By.css('.ui-lib-inplace__display'))
+      .nativeElement as HTMLElement;
+    expect(display.getAttribute('aria-label')).toBe('Click to edit');
   });
 });

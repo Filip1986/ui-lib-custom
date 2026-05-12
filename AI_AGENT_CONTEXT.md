@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14), **Input (#21)** also merged
+- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** Alert hardening (Tier 5, #42) — next after Button
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `Inplace` -> ✅ complete + hardened (6-phase, score 8.9/10, 47 tests — 27 unit + 20 a11y)
 
 ---
 
@@ -124,30 +125,43 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
 
-Date: 2026-05-12 [Input component — 6-phase hardening COMPLETE (#21)]
+Date: 2026-05-12 [Inplace component — 6-phase hardening COMPLETE (#63)]
 Changed:
-  - projects/ui-lib-custom/src/lib/input/input.ts
-      • Renamed module-level counter from `inputIdCounter` to `nextInputId`
-      • Added stable class field `inputId` (avoids side effect in computed)
-      • Updated `controlId` computed to reference `this.inputId` instead of incrementing in computed
-      • Added `readonly: InputSignal<boolean>` input
-  - projects/ui-lib-custom/src/lib/input/input.html
-      • Added `[readOnly]="readonly()"` and `[attr.aria-readonly]="readonly() ? 'true' : null"` bindings
-  - projects/ui-lib-custom/src/lib/input/input.a11y.spec.ts
-      • Added `readonly` writable signal to host component + template binding
-      • Added 4 readonly tests (aria-readonly absent, set, native readOnly, cleared)
-      • Added axe-core readonly state check (65 tests total — up from 60)
-  - projects/ui-lib-custom/src/lib/input/README.md
-      • Added `readonly` row to inputs table with `disabled` vs `readonly` semantic note
+  - projects/ui-lib-custom/src/lib/inplace/inplace.ts
+      • Added module-level `nextInplaceId` counter; unique `instanceId`, `displayId`, `contentId` per instance
+      • Injected `ElementRef` + `Injector` for post-render focus management
+      • Converted display trigger: display slot now a native `<button>` with `aria-expanded`, `aria-controls`, `aria-label`
+      • Added `displayLabel` + `closeLabel` inputs (i18n-friendly, default to existing strings)
+      • `activate()` uses `afterNextRender` to focus first focusable element in content slot
+      • `deactivate()` uses `afterNextRender` to restore focus to the display button
+      • Added `onContentKeydown()` — Escape deactivates and stops propagation
+      • Host binding `[id]`: `instanceId`
+  - projects/ui-lib-custom/src/lib/inplace/inplace.html
+      • Display: `<div role="button">` → native `<button type="button">` with `[disabled]`, `[attr.aria-expanded]`, `[attr.aria-controls]`, `[attr.aria-label]`
+      • Content wrapper: added `[id]="contentId"`, `[attr.aria-hidden]="!active() || null"`, `(keydown)="onContentKeydown($event)"`
+      • Close button: `aria-label="Close editor"` → `[attr.aria-label]="closeLabel()"`
+  - projects/ui-lib-custom/src/lib/inplace/inplace.scss
+      • Added `@media (prefers-reduced-motion: reduce)` overrides for display + close-button transitions
+  - projects/ui-lib-custom/src/lib/inplace/inplace.spec.ts
+      • Updated 3 disabled/tabindex tests for native `<button>` semantics
+      • Added 7 new tests: aria-expanded states, aria-controls, host ID, Escape deactivation, aria-label
+  - projects/ui-lib-custom/src/lib/inplace/inplace.a11y.spec.ts (CREATED — 20 tests)
+      • axe-core checks for default/active-closable/disabled/multi-variant states
+      • ARIA structure: button element, aria-expanded false/true, aria-controls, aria-label, close icon aria-hidden, unique host IDs
+      • Disabled state: native disabled attribute, aria-expanded still present
+      • Keyboard: Enter/Space activate, Escape deactivates, aria-expanded state transitions
+  - projects/ui-lib-custom/src/lib/inplace/README.md
+      • Added `displayLabel` + `closeLabel` input rows; full ARIA attributes table; keyboard table; accessibility section
   - docs/COMPONENT_SCORES.md
-      • Input #21: ⏳ Queued → ✅ Done
+      • Inplace #63: ⏳ Queued → ✅ Done
+      • Utilities table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived DataView handoff to keep only the newest 3 in this file
-State: Input hardening complete. Component already had strong a11y foundations (label for/id, aria-invalid, aria-required, aria-describedby, error/hint live regions, prefers-reduced-motion). This session added the missing `readonly` input + aria-readonly bindings, stabilized the ID counter pattern, and extended the a11y spec from 30 to 35 tests.
+      • Archived the DataView handoff to keep only the newest 3 in this file
+State: Inplace hardening complete. Display trigger is now a native button with correct aria-expanded/aria-controls semantics. Focus management (activate → content, deactivate → display button) is implemented via afterNextRender. Escape key deactivates. Content is aria-hidden when inactive. i18n-friendly displayLabel/closeLabel inputs added. 47 tests pass (27 unit + 20 a11y).
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/input/" --no-coverage (65/65 PASS — 30 unit + 35 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/inplace/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=inplace --no-coverage (47/47 PASS — 27 unit + 20 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: npm install required on fresh clone. All checks green first run.
-Next step: Table hardening (Tier 4, #32).
+Terminal notes: axe flagged unlabeled `<input>` inside hidden content slot when JSDOM doesn't compute CSS; resolved by adding `[attr.aria-hidden]="!active() || null"` to content wrapper (matches fieldset/panel pattern).
+Next step: Continue Tier 6 queue — Toolbar (#59) or Image (#66) hardening.

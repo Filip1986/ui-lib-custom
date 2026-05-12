@@ -16,14 +16,16 @@ import { Inplace } from 'ui-lib-custom/inplace';
 
 ## Inputs
 
-| Input        | Type                                            | Default       | Description                                                              |
-|--------------|-------------------------------------------------|---------------|--------------------------------------------------------------------------|
-| `active`     | `boolean`                                       | `false`       | Two-way bindable via `model()`. Controls whether the editor is visible.  |
-| `disabled`   | `boolean`                                       | `false`       | Prevents activation when `true`.                                         |
-| `closable`   | `boolean`                                       | `false`       | Renders a close button inside the content slot.                          |
-| `closeIcon`  | `string`                                        | `'pi pi-times'` | CSS class for the close button icon.                                   |
-| `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`       | Visual variant; falls back to `ThemeConfigService` when `null`.          |
-| `styleClass` | `string \| null`                                | `null`        | Extra CSS classes added to the host element.                             |
+| Input          | Type                                            | Default          | Description                                                              |
+|----------------|-------------------------------------------------|------------------|--------------------------------------------------------------------------|
+| `active`       | `boolean`                                       | `false`          | Two-way bindable via `model()`. Controls whether the editor is visible.  |
+| `disabled`     | `boolean`                                       | `false`          | Prevents activation when `true`.                                         |
+| `closable`     | `boolean`                                       | `false`          | Renders a close button inside the content slot.                          |
+| `closeIcon`    | `string`                                        | `'pi pi-times'`  | CSS class for the close button icon.                                     |
+| `displayLabel` | `string`                                        | `'Click to edit'`| Accessible label for the display button. Override for i18n.              |
+| `closeLabel`   | `string`                                        | `'Close editor'` | Accessible label for the close button. Override for i18n.                |
+| `variant`      | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`          | Visual variant; falls back to `ThemeConfigService` when `null`.          |
+| `styleClass`   | `string \| null`                                | `null`           | Extra CSS classes added to the host element.                             |
 
 ## Outputs
 
@@ -95,30 +97,63 @@ import { Inplace } from 'ui-lib-custom/inplace';
 </ui-lib-inplace>
 ```
 
+### i18n labels
+
+```html
+<ui-lib-inplace displayLabel="Klicken zum Bearbeiten" closeLabel="Editor schließen">
+  <span inplaceDisplay>Inhalt</span>
+  <input inplaceContent type="text" />
+</ui-lib-inplace>
+```
+
 ## CSS Variables
 
-| Variable                                   | Default                          | Description                             |
-|--------------------------------------------|----------------------------------|-----------------------------------------|
-| `--uilib-inplace-display-cursor`           | `pointer`                        | Cursor on display slot                  |
-| `--uilib-inplace-display-padding`          | `0.25rem 0.375rem`               | Padding on display slot                 |
-| `--uilib-inplace-display-border-radius`    | `var(--uilib-radius-sm)`         | Border radius of display slot           |
-| `--uilib-inplace-display-bg-hover`         | `rgba(0,0,0,0.04)`               | Hover background of display slot        |
-| `--uilib-inplace-display-transition`       | `background-color 0.15s ease`    | Transition on display slot hover        |
-| `--uilib-inplace-display-border`           | `1px dashed transparent`         | Border around display slot              |
-| `--uilib-inplace-display-border-hover`     | `1px dashed primary`             | Border on display slot hover            |
-| `--uilib-inplace-content-gap`              | `0.5rem`                         | Gap between content slot and close btn  |
-| `--uilib-inplace-close-button-size`        | `1.75rem`                        | Width/height of close button            |
-| `--uilib-inplace-close-button-bg`          | `transparent`                    | Close button background                 |
-| `--uilib-inplace-close-button-color`       | `var(--uilib-color-text)`        | Close button icon colour                |
-| `--uilib-inplace-close-button-bg-hover`    | `rgba(0,0,0,0.08)`               | Close button hover background           |
-| `--uilib-inplace-close-button-border-radius`| `var(--uilib-radius-full)`      | Close button shape                      |
-| `--uilib-inplace-disabled-opacity`         | `0.5`                            | Opacity when disabled                   |
+| Variable                                    | Default                          | Description                             |
+|---------------------------------------------|----------------------------------|-----------------------------------------|
+| `--uilib-inplace-display-cursor`            | `pointer`                        | Cursor on display slot                  |
+| `--uilib-inplace-display-padding`           | `0.25rem 0.375rem`               | Padding on display slot                 |
+| `--uilib-inplace-display-border-radius`     | `var(--uilib-radius-sm)`         | Border radius of display slot           |
+| `--uilib-inplace-display-bg-hover`          | `rgba(0,0,0,0.04)`               | Hover background of display slot        |
+| `--uilib-inplace-display-transition`        | `background-color 0.15s ease`    | Transition on display slot hover        |
+| `--uilib-inplace-display-border`            | `1px dashed transparent`         | Border around display slot              |
+| `--uilib-inplace-display-border-hover`      | `1px dashed primary`             | Border on display slot hover            |
+| `--uilib-inplace-content-gap`               | `0.5rem`                         | Gap between content slot and close btn  |
+| `--uilib-inplace-close-button-size`         | `1.75rem`                        | Width/height of close button            |
+| `--uilib-inplace-close-button-bg`           | `transparent`                    | Close button background                 |
+| `--uilib-inplace-close-button-color`        | `var(--uilib-color-text)`        | Close button icon colour                |
+| `--uilib-inplace-close-button-bg-hover`     | `rgba(0,0,0,0.08)`               | Close button hover background           |
+| `--uilib-inplace-close-button-border-radius`| `var(--uilib-radius-full)`       | Close button shape                      |
+| `--uilib-inplace-disabled-opacity`          | `0.5`                            | Opacity when disabled                   |
 
 ## Accessibility
 
-- Display slot has `role="button"`, `tabindex="0"` and `aria-label="Click to edit"`.
-- Keyboard: `Enter` and `Space` activate the editor from the display slot.
-- `aria-disabled="true"` is set on the display slot when `[disabled]="true"`.
-- `tabindex` is removed from display when disabled.
-- Close button has `aria-label="Close editor"`.
+### ARIA attributes
+
+| Element          | Attribute         | Value / Notes                                                                    |
+|------------------|-------------------|----------------------------------------------------------------------------------|
+| Display button   | `role`            | Implicit `button` (native `<button>` element)                                    |
+| Display button   | `aria-expanded`   | `"false"` when inactive; `"true"` when active                                   |
+| Display button   | `aria-controls`   | ID of the content wrapper, so ATs know which region is controlled                |
+| Display button   | `aria-label`      | Defaults to `"Click to edit"`. Override with `[displayLabel]` for i18n.          |
+| Display button   | `disabled`        | Native `disabled` attribute when `[disabled]="true"`                            |
+| Close button     | `aria-label`      | Defaults to `"Close editor"`. Override with `[closeLabel]` for i18n.            |
+| Close button icon| `aria-hidden`     | `"true"` — decorative icon excluded from the accessibility tree                 |
+| Content wrapper  | `id`              | Unique generated ID (`ui-lib-inplace-N-content`), referenced by `aria-controls` |
+| Host element     | `id`              | Unique generated ID (`ui-lib-inplace-N`) per instance                           |
+
+### Keyboard interaction
+
+| Key               | Context          | Action                                                              |
+|-------------------|------------------|---------------------------------------------------------------------|
+| `Enter` / `Space` | Display button   | Activates the editor; focus moves to the first focusable content element |
+| `Escape`          | Content area     | Deactivates the editor; focus returns to the display button         |
+| `Tab`             | Content area     | Moves between focusable elements inside the content slot            |
+
+### Notes
+
+- The display trigger is a native `<button>` so keyboard and screen reader behaviour is built in.
+- On activation, focus automatically moves to the first focusable element (`input`, `button`, etc.) inside the `[inplaceContent]` slot.
+- On deactivation (close button click, Escape key, or `active` set to `false` programmatically), focus returns to the display button.
+- All hover/border transitions respect `prefers-reduced-motion: reduce` (transitions are disabled).
+- The display button uses `:focus-visible` for keyboard focus rings; the close button does too.
 

@@ -110,7 +110,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
 | 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ✅ Done     |
 | 62   | ScrollPanel     | Keyboard-scrollable region label                          | ✅ Done     |
-| 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ⏳ Queued   |
+| 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ✅ Done     |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done     |
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done     |
 | 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Queued   |
@@ -270,7 +270,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ImageCompare    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
-| Inplace         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Inplace         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ClassNames      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Terminal        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
