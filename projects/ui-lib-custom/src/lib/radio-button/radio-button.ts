@@ -257,9 +257,7 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
     event.preventDefault();
 
     const escapedName: string =
-      typeof CSS !== 'undefined' && CSS.escape
-        ? CSS.escape(nameAttr)
-        : nameAttr.replace(/["\\]/g, '\\$&');
+      typeof CSS !== 'undefined' ? CSS.escape(nameAttr) : nameAttr.replace(/["\\]/g, '\\$&');
 
     const allInputs: HTMLInputElement[] = Array.from(
       document.querySelectorAll<HTMLInputElement>(

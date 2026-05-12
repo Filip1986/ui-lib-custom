@@ -136,3 +136,34 @@
     }
   }
 }
+
+// ---------------------------------------------------------------------------
+// Dark mode overrides
+// ---------------------------------------------------------------------------
+
+[data-theme='dark'] .ui-lib-progress-spinner--variant-bootstrap .ui-lib-progress-spinner__circle,
+.ui-lib-progress-spinner--variant-bootstrap[data-theme='dark'] .ui-lib-progress-spinner__circle {
+  stroke: var(--uilib-progress-spinner-color-bootstrap-dark, #6ea8fe);
+}
+
+[data-theme='dark'] .ui-lib-progress-spinner--variant-minimal .ui-lib-progress-spinner__circle,
+.ui-lib-progress-spinner--variant-minimal[data-theme='dark'] .ui-lib-progress-spinner__circle {
+  stroke: var(--uilib-progress-spinner-color-minimal-dark, #6b7280);
+}
+
+// ---------------------------------------------------------------------------
+// Reduced motion — audience: users who prefer minimal animation
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-progress-spinner__svg {
+    animation: none;
+  }
+
+  .ui-lib-progress-spinner__circle {
+    animation: none;
+    // Show the arc at a fixed partial draw so it is still recognisable
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+}

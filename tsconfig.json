@@ -20,6 +20,7 @@
     "target": "ES2022",
     "module": "preserve",
     "resolveJsonModule": true,
+    "ignoreDeprecations": "5.0",
     "baseUrl": "./",
     "paths": {
       "ui-lib-custom": ["./projects/ui-lib-custom/src/public-api.ts", "./dist/ui-lib-custom"],

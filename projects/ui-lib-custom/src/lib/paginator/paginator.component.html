@@ -1,5 +1,8 @@
 @if (shouldShow()) {
   <div class="uilib-paginator-content" [class]="styleClass()">
+    <span class="uilib-paginator-live" aria-live="polite" aria-atomic="true">
+      {{ pageAnnouncement() }}
+    </span>
 
     <!-- Left slot for custom content -->
     <ng-content select="[paginatorLeft]" />
@@ -18,7 +21,7 @@
         class="uilib-paginator-button uilib-paginator-first"
         [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
         [disabled]="isFirstPage() || isEmpty()"
-        aria-label="First page"
+        aria-label="Go to first page"
         [attr.aria-disabled]="isFirstPage() || isEmpty()"
         (click)="changePageToFirst($event)"
       >
@@ -36,7 +39,7 @@
       class="uilib-paginator-button uilib-paginator-prev"
       [class.uilib-paginator-button--disabled]="isFirstPage() || isEmpty()"
       [disabled]="isFirstPage() || isEmpty()"
-      aria-label="Previous page"
+      aria-label="Go to previous page"
       [attr.aria-disabled]="isFirstPage() || isEmpty()"
       (click)="changePageToPrev($event)"
     >
@@ -48,14 +51,13 @@
 
     <!-- Windowed page-link buttons -->
     @if (showPageLinks()) {
-      <span class="uilib-paginator-pages" role="list">
-        @for (pageLink of pageLinks(); track $index) {
+      <span class="uilib-paginator-pages">
+        @for (pageLink of pageLinks(); track pageLink) {
           <button
             type="button"
-            role="listitem"
             class="uilib-paginator-button uilib-paginator-page"
             [class.uilib-paginator-page--selected]="pageLink - 1 === currentPage()"
-            [attr.aria-label]="'Page ' + pageLink"
+            [attr.aria-label]="getPageLinkAriaLabel(pageLink)"
             [attr.aria-current]="pageLink - 1 === currentPage() ? 'page' : null"
             (click)="onPageLinkClick($event, pageLink)"
           >
@@ -71,7 +73,7 @@
       class="uilib-paginator-button uilib-paginator-next"
       [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
       [disabled]="isLastPage() || isEmpty()"
-      aria-label="Next page"
+      aria-label="Go to next page"
       [attr.aria-disabled]="isLastPage() || isEmpty()"
       (click)="changePageToNext($event)"
     >
@@ -88,7 +90,7 @@
         class="uilib-paginator-button uilib-paginator-last"
         [class.uilib-paginator-button--disabled]="isLastPage() || isEmpty()"
         [disabled]="isLastPage() || isEmpty()"
-        aria-label="Last page"
+        aria-label="Go to last page"
         [attr.aria-disabled]="isLastPage() || isEmpty()"
         (click)="changePageToLast($event)"
       >

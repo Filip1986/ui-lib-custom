@@ -4,6 +4,73 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
+Changed:
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
+      • Added module-level `let nextBlockUiId: number = 0` counter
+      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
+      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
+      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
+      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
+      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
+      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
+      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
+      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
+      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
+  - projects/ui-lib-custom/src/lib/block-ui/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
+  - docs/COMPONENT_SCORES.md
+      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
+State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
+  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation.
+Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
+
+---
+
+Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
+Changed:
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
+      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
+      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
+      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
+      • Added `private focusTrap: FocusTrap | null = null` field
+      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
+      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
+      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
+      • Added `[id]="titleId"` to the title span for the ARIA association
+      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
+      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
+      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
+      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
+      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
+  - docs/COMPONENT_SCORES.md
+      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
 Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
 Changed:
   - projects/ui-lib-custom/src/lib/card/card.ts

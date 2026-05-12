@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** Ripple accessibility hardening COMPLETE (6-phase, #74); BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -38,6 +38,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
+- `Ripple` -> ✅ complete + hardened (6-phase, score 8.7/10, 29 tests — 19 unit + 10 a11y)
 - `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
 - `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
@@ -94,6 +95,73 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-12 [Merge conflict resolution for glass-shadow button PR]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved merge conflict by preserving the newest three handoffs in active context
+      • Added this merge-resolution handoff and kept recent session state concise
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the displaced older handoff during the merge resolution
+  - tsconfig.json
+      • Added `compilerOptions.ignoreDeprecations: "5.0"` so the TypeScript 5.9 pre-push `npm run typecheck` hook passes with the existing `baseUrl` setting
+State: Branch is merged with the latest origin/main. Merge conflicts were limited to session-context files, and the pre-push typecheck blocker was resolved without changing application logic.
+Verification:
+  npm install (PASS)
+  npm run typecheck (PASS)
+Terminal notes: Repository was a shallow clone, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before merging. Initial typecheck first failed on the `baseUrl` deprecation gate, and then on missing local packages until `npm install` was rerun.
+Next step: Continue with the next queued component hardening item once this PR is mergeable again.
+
+Date: 2026-05-12 [Button component — glass-shadow appearance polish]
+Changed:
+  - projects/ui-lib-custom/src/lib/button/button.scss
+      • Exposed remaining glass-shadow style values as CSS custom properties (`active-x/y`, font weight, letter spacing, gradient angle, opacity)
+      • Replaced remaining hardcoded glass-shadow active/gradient/opacity values with token usage
+  - projects/ui-lib-custom/src/lib/button/button.spec.ts
+      • Added `glass-shadow` coverage to the appearance class regression test matrix
+  - projects/ui-lib-custom/src/lib/button/button.ts
+      • Updated component description to reflect 12 appearances
+  - projects/ui-lib-custom/src/lib/button/README.md
+      • Updated appearance count math, documented `glass-shadow`, and added a usage example
+  - projects/demo/src/app/pages/buttons/buttons.component.html
+      • Updated demo copy to 12 appearances
+      • Wired the dedicated Glass Shadow demo buttons to the active variant switcher
+State: Glass-shadow button appearance is fully wired with tokenized styling values, docs/test coverage, and a variant-aware demo section. No broader button hardening work was started.
+Verification:
+  npm install (PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ projects/demo/src/app/pages/buttons/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=projects/ui-lib-custom/src/lib/button --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+Terminal notes: Fresh clone required `npm install` before validation. An initial ESLint retry using `--ext .ts,.scss,.html` failed by parsing SCSS with the wrong parser; the repository's standard directory-based ESLint command succeeded. Captured the updated demo screenshot after starting `npm run serve:demo` and installing Playwright Chromium locally.
+Next step: Resume the queued hardening track with TreeTable (#33) when button appearance follow-up is no longer needed.
+
+Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
+      • Added module-level `let nextProgressSpinnerId: number = 0` counter
+      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
+      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
+      • Added dark mode overrides for bootstrap and minimal variant arc colours
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
+      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
+      • ariaLabel reactive updates, two-instance ID uniqueness
+      • Visual state (size classes sm/lg)
+      • axe-core automated checks (5 states)
+  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
+      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
+  - docs/COMPONENT_SCORES.md
+      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
+State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
+Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
 
 Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
@@ -156,4 +224,38 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-12 [Ripple directive — accessibility hardening COMPLETE (#74)]
+Changed:
+  - projects/ui-lib-custom/src/lib/ripple/ripple.ts
+      • Imported `PLATFORM_ID` from `@angular/core` and `isPlatformBrowser` from `@angular/common`
+      • Added `private readonly platformId: object = inject(PLATFORM_ID)` field
+      • Added `isPlatformBrowser` guard in `ngOnInit` — click listener only registered in browser environments (SSR safety)
+      • Added `private prefersReducedMotion(): boolean` method — checks `window.matchMedia('(prefers-reduced-motion: reduce)').matches`
+      • Added early return in `spawnWave()` when `prefersReducedMotion()` is true — wave element is never created (not just instant)
+  - projects/ui-lib-custom/src/lib/ripple/ripple.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block with `animation: none; display: none` on `.ui-lib-ripple-wave` (defence-in-depth)
+  - projects/ui-lib-custom/src/lib/ripple/ripple.a11y.spec.ts (CREATED — 10 tests)
+      • axe-core checks: basic, disabled, after-wave-spawn
+      • Decorative: no ARIA role, no aria-label/aria-labelledby added to host
+      • Wave span contains no text content
+      • Reduced motion: wave NOT spawned when matchMedia returns true; wave IS spawned when false
+      • Keyboard: simulated click (Enter/Space) triggers wave
+      • Disabled: no wave spawned
+      • Multi-instance: passes axe; waves confined to own host
+  - projects/ui-lib-custom/src/lib/ripple/README.md
+      • Added ARIA attributes table (none — purely decorative)
+      • Added keyboard interaction table (Enter/Space via native click)
+      • Renamed "CSS variables" section to "CSS custom properties"
+      • Expanded Accessibility section with reduced-motion dual-layer explanation, screen reader note, SSR safety note
+  - docs/COMPONENT_SCORES.md
+      • Ripple #74: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 9, Comp 8, Theme 8, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.7)
+State: Ripple hardening complete. prefers-reduced-motion fully suppresses wave creation (JS + CSS), SSR safe, 10-test a11y regression suite in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/ripple/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=ripple --no-coverage (29/29 PASS — 19 unit + 10 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
