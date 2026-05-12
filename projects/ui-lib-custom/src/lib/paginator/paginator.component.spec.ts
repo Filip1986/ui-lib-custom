@@ -379,6 +379,8 @@ describe('PaginatorComponent', (): void => {
     const paginatorElement: HTMLElement = queryRequired(fixture, 'ui-lib-paginator')
       .nativeElement as HTMLElement;
     expect(paginatorElement.getAttribute('aria-label')).toBe('Pagination');
+    expect(paginatorElement.getAttribute('role')).toBe('navigation');
+    expect(paginatorElement.getAttribute('id')).toMatch(/^ui-lib-paginator-\d+$/);
   });
   it('should mark the selected page with aria-current="page"', (): void => {
     const firstButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 0);
@@ -387,16 +389,34 @@ describe('PaginatorComponent', (): void => {
     expect(secondButton.getAttribute('aria-current')).toBeNull();
   });
   it('should have aria-label on nav buttons', (): void => {
+    const firstButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-first');
     const previousButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-prev');
     const nextButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-next');
-    expect(previousButton.getAttribute('aria-label')).toBe('Previous page');
-    expect(nextButton.getAttribute('aria-label')).toBe('Next page');
+    const lastButton: HTMLButtonElement = getNavButton(fixture, '.uilib-paginator-last');
+    expect(firstButton.getAttribute('aria-label')).toBe('Go to first page');
+    expect(previousButton.getAttribute('aria-label')).toBe('Go to previous page');
+    expect(nextButton.getAttribute('aria-label')).toBe('Go to next page');
+    expect(lastButton.getAttribute('aria-label')).toBe('Go to last page');
   });
   it('should have numbered aria-label on page-link buttons', (): void => {
     const firstButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 0);
-    const fifthButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 4);
-    expect(firstButton.getAttribute('aria-label')).toBe('Page 1');
-    expect(fifthButton.getAttribute('aria-label')).toBe('Page 5');
+    const secondButton: HTMLButtonElement = getPageButtonAtIndex(fixture, 1);
+    expect(firstButton.getAttribute('aria-label')).toBe('Page 1, current page');
+    expect(secondButton.getAttribute('aria-label')).toBe('Go to page 2');
+  });
+  it('should render a polite live region that announces current page', (): void => {
+    const liveRegion: HTMLElement = queryRequired(fixture, '.uilib-paginator-live')
+      .nativeElement as HTMLElement;
+    expect(liveRegion.getAttribute('aria-live')).toBe('polite');
+    expect(liveRegion.getAttribute('aria-atomic')).toBe('true');
+    expect(getTrimmedTextContent(liveRegion)).toBe('Page 1 of 10');
+  });
+  it('should announce "No pages available" in live region when empty', (): void => {
+    host.totalRecords.set(0);
+    fixture.detectChanges();
+    const liveRegion: HTMLElement = queryRequired(fixture, '.uilib-paginator-live')
+      .nativeElement as HTMLElement;
+    expect(getTrimmedTextContent(liveRegion)).toBe('No pages available');
   });
   it('should export PAGINATOR_DEFAULTS with expected keys', (): void => {
     expect(PAGINATOR_DEFAULTS.ROWS).toBe(10);
