@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { UploadComponent } from './upload.component';
 
@@ -222,7 +223,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.addFiles([createFakeFile('report.pdf', 1024, 'application/pdf')]);
       fixture.detectChanges();
@@ -237,7 +238,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<MultipleHostComponent> =
         await createFixture(MultipleHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.addFiles([createFakeFile('file-a.txt'), createFakeFile('file-b.txt')]);
       fixture.detectChanges();
@@ -251,7 +252,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.addFiles([createFakeFile('document.txt')]);
       fixture.detectChanges();
@@ -265,7 +266,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       // Use a non-image file to avoid URL.createObjectURL (not available in jsdom)
       component.addFiles([createFakeFile('document.txt', 1024, 'text/plain')]);
@@ -286,7 +287,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       // Trigger a validation error by providing an oversized file (maxFileSize defaults to null,
       // so we need to set messages directly via processFiles with wrong type).
@@ -307,7 +308,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.validationMessages.set([{ summary: 'Error', detail: 'Something went wrong.' }]);
       fixture.detectChanges();
@@ -341,7 +342,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       const fakeEvent: DragEvent = fakeDragEvent();
       component.onDragEnter(fakeEvent);
@@ -356,7 +357,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.onDragEnter(fakeDragEvent());
       fixture.detectChanges();
@@ -403,7 +404,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.addFiles([createFakeFile('data.csv')]);
       fixture.detectChanges();
@@ -429,7 +430,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.addFiles([
         createFakeFile('report.pdf', 1024, 'application/pdf'),
@@ -445,7 +446,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.validationMessages.set([
         { summary: 'Invalid file type', detail: 'note.xyz: Invalid file type. Allowed: image/*.' },
@@ -466,7 +467,7 @@ describe('Upload Accessibility', (): void => {
       const fixture: ComponentFixture<DefaultHostComponent> =
         await createFixture(DefaultHostComponent);
 
-      const component: UploadComponent = fixture.debugElement.children[0]
+      const component: UploadComponent = fixture.debugElement.query(By.directive(UploadComponent))
         .componentInstance as UploadComponent;
       component.onDragEnter(fakeDragEvent());
       fixture.detectChanges();

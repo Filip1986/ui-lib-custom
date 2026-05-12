@@ -1520,3 +1520,27 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Next step: PanelMenu hardening (Tier 2, #15).
+
+Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
+Changed:
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
+      • Added module-level `nextMeterGroupId` counter and unique host `instanceId`
+      • Added `ariaLabel` input and wired group ARIA label to template
+      • Fixed segment percentage calculation to respect `min`/`max` range (`(value - min) / (max - min)`)
+      • Added computed `totalValue` + `totalAnnouncement` for live total announcements
+      • Added stable segment track helper and richer per-segment aria-label formatter
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html
+      • Updated segment `@for` loops to use stable track keys
+      • Bound group `aria-label` to `ariaLabel` input
+      • Updated segment `aria-label` output to include value-range phrasing
+      • Added polite/atomic live region for total announcement text
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss
+      • Added visually-hidden live-region utility class
+      • Added `prefers-reduced-motion: reduce` override to disable meter transitions
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.a11y.spec.ts (CREATED — 18 tests)
+  - projects/ui-lib-custom/src/lib/meter-group/README.md
+  - docs/COMPONENT_SCORES.md: MeterGroup #57 ⏳ → ✅ (avg 8.3)
+State: MeterGroup hardening complete.
+Verification: eslint PASS, jest 45/45 PASS, ng build PASS, entry-points 97/97 PASS
+Next step: TreeTable (#33) hardening.
