@@ -17,6 +17,8 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { TerminalService } from './terminal.service';
 import type { TerminalHistoryItem, TerminalVariant } from './terminal.types';
 
+let nextTerminalId: number = 0;
+
 export type { TerminalHistoryItem, TerminalVariant } from './terminal.types';
 export { TerminalService } from './terminal.service';
 
@@ -52,6 +54,7 @@ export { TerminalService } from './terminal.service';
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'hostClasses()',
+    '[attr.id]': 'terminalId',
     role: 'region',
     'aria-label': 'Terminal',
   },
@@ -59,6 +62,12 @@ export { TerminalService } from './terminal.service';
 export class Terminal implements AfterViewChecked {
   private readonly terminalService: TerminalService = inject(TerminalService);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  /** Unique instance identifier — used to generate stable element IDs. */
+  public readonly terminalId: string = `ui-lib-terminal-${++nextTerminalId}`;
+
+  /** Stable ID for the output live region (role=log). */
+  public readonly outputId: string = `${this.terminalId}-output`;
 
   @ViewChild('commandInput') private readonly commandInput?: ElementRef<HTMLInputElement>;
   @ViewChild('terminalContent') private readonly terminalContent?: ElementRef<HTMLDivElement>;

@@ -38,10 +38,10 @@ export class TreeNodeComponent {
   /** Nesting depth used for left-padding indentation. */
   public readonly depth: InputSignal<number> = input<number>(0);
 
-  /** Number of visible siblings in the current group. */
+  /** Total number of siblings at this level (for `aria-setsize`). */
   public readonly setsize: InputSignal<number> = input<number>(1);
 
-  /** 1-based index within the current visible sibling group. */
+  /** 1-based position within the sibling group (for `aria-posinset`). */
   public readonly posinset: InputSignal<number> = input<number>(1);
 
   /** Returns `true` when the node has visible children to expand. */
@@ -57,9 +57,5 @@ export class TreeNodeComponent {
       return currentNode.expandedIcon ?? currentNode.icon ?? '';
     }
     return currentNode.collapsedIcon ?? currentNode.icon ?? '';
-  }
-
-  protected handleFocus(): void {
-    this.treeContext.setFocusedNode(this.node());
   }
 }

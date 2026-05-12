@@ -6,7 +6,7 @@
       class="uilib-tree-filter-input"
       [placeholder]="filterPlaceholder()"
       [value]="filterText()"
-      aria-label="Filter tree"
+      aria-label="Filter tree nodes"
       (input)="onFilterInput($event)"
     />
     <span class="uilib-tree-filter-icon pi pi-search" aria-hidden="true"></span>
@@ -15,15 +15,17 @@
 
 <!-- Root nodes — role="none" because role="tree" is on the host element -->
 <ul class="uilib-tree-root" role="none">
-  @for (rootNode of visibleRootNodes(); track rootNode.key; let rootIndex = $index) {
-    <li role="none">
-      <ui-lib-tree-node
-        [node]="rootNode"
-        [depth]="0"
-        [setsize]="visibleRootNodes().length"
-        [posinset]="rootIndex + 1"
-      />
-    </li>
+  @for (rootNode of value(); track rootNode.key; let i = $index) {
+    @if (isNodeFiltered(rootNode)) {
+      <li role="none">
+        <ui-lib-tree-node
+          [node]="rootNode"
+          [depth]="0"
+          [setsize]="value().length"
+          [posinset]="i + 1"
+        />
+      </li>
+    }
   } @empty {
     <li class="uilib-tree-empty" role="presentation">
       <span class="uilib-tree-empty-message">No items to display</span>

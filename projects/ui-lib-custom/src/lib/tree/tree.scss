@@ -399,13 +399,14 @@
   --uilib-tree-filter-color: #ffffffde;
 }
 
+// ─── Reduced-motion overrides ─────────────────────────────────────────────────
+
 @media (prefers-reduced-motion: reduce) {
-  .ui-lib-tree .uilib-tree-node-row,
-  .ui-lib-tree .uilib-tree-node-toggle,
-  .ui-lib-tree .uilib-tree-toggle-icon,
-  .ui-lib-tree .uilib-tree-node-checkbox,
-  .ui-lib-tree .uilib-tree-filter-input {
-    animation: none !important;
-    transition: none !important;
+  .uilib-tree-node-row,
+  .uilib-tree-node-toggle,
+  .uilib-tree-toggle-icon,
+  .uilib-tree-node-checkbox,
+  .uilib-tree-filter-input {
+    transition: none;
   }
 }
