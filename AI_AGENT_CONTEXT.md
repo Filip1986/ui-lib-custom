@@ -125,30 +125,51 @@ Verification:
 Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
+Date: 2026-05-12 [Tree — 6-phase hardening COMPLETE (#34)]
 Changed:
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
-      • Added module-level `let nextProgressSpinnerId: number = 0` counter
-      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
-      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
-      • Added dark mode overrides for bootstrap and minimal variant arc colours
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
-      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
-      • ariaLabel reactive updates, two-instance ID uniqueness
-      • Visual state (size classes sm/lg)
-      • axe-core automated checks (5 states)
-  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
-      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+      • Added module-level `let nextTreeId: number = 0` counter + `instanceId` property
+      • Added `ariaLabel` input; computed `hostAriaLabel()` / `hostAriaMultiselectable()` signals
+      • Host bindings: `[attr.id]`, `[attr.aria-label]`, `[attr.aria-multiselectable]`
+      • Replaced `expandFocusedNode`/`collapseFocusedNode` with `expandOrFocusChild`/`collapseOrFocusParent`
+      • Added `findParentTreeItem` (group-sibling traversal pattern, not raw ancestor chain)
+      • Added `focusItemByTypeAhead` method (alphanumeric type-ahead, wraps around, case-insensitive)
+  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
+      • Added `setsize` input (default 1) and `posinset` input (default 1)
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+      • Bound `aria-level`, `aria-setsize`, `aria-posinset`, `aria-disabled` on `[role="treeitem"]`
+      • Moved `aria-checked` from nested `role="checkbox"` span to the treeitem itself
+      • Checkbox span now has `aria-hidden="true"` (state lives on treeitem per WAI-ARIA)
+      • Passed `[setsize]` and `[posinset]` to recursive child nodes
+  - projects/ui-lib-custom/src/lib/tree/tree.html
+      • Fixed double `role="tree"`: inner `<ul>` changed to `role="none"` (host has `role="tree"`)
+      • Root `@for` loop passes `[setsize]="value().length"` and `[posinset]="i + 1"`
+  - projects/ui-lib-custom/src/lib/tree/tree.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
+  - projects/ui-lib-custom/src/lib/tree/tree.a11y.spec.ts (CREATED — 55 tests)
+      • Role structure (5): role=tree on host, aria-label, inner ul=role=none, treeitem, group
+      • aria-level (3): depth 1/2/3 verified
+      • aria-setsize/aria-posinset (5): present on all items, correct root setsize=3, correct positions
+      • aria-expanded (3): true/false/absent on leaf
+      • aria-multiselectable (4): null/single/multiple/checkbox modes
+      • aria-selected (3): false unselected, true selected, absent in checkbox mode
+      • aria-checked (4): false unchecked, true checked, mixed partial, no nested role=checkbox
+      • aria-disabled (2): true on selectable=false, absent otherwise
+      • Unique instance IDs (1): two instances get different IDs
+      • Keyboard nav (8): ArrowDown/Up, Home, End, ArrowRight×3, ArrowLeft×3
+      • Type-ahead (6): d/p/m keys, wrap-around, case-insensitive, non-printable ignores
+      • Toggle ARIA (3): expand/collapse labels, tabindex=-1
+      • Filter ARIA (1): aria-label on filter input
+      • axe (5): basic, single, multiple, checkbox, partial-checked
+  - projects/ui-lib-custom/src/lib/tree/README.md
+      • Added `ariaLabel` input, full ARIA attributes table, keyboard interaction table, accessibility section
   - docs/COMPONENT_SCORES.md
-      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
+      • Tree #34: ⏳ Queued → ✅ Done; scores 9/8/9/9/9/9/8/8/9/8 avg 8.6 🟢
+State: Tree hardening complete. All critical WAI-ARIA tree pattern attributes (aria-level, aria-setsize, aria-posinset, aria-checked on treeitem, aria-disabled, aria-multiselectable) are in place. Type-ahead nav, ArrowLeft parent-focus, ArrowRight child-focus, and prefers-reduced-motion implemented.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/tree/" --no-coverage (93/93 PASS — 38 unit + 55 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
-Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
+Terminal notes: `findParentTreeItem` required a group-sibling traversal strategy (not a raw ancestor chain) because the parent treeitem div and child group ul are siblings inside the component host, not parent-child.
+Next step: TreeSelect (#35) hardening — Tier 4, combobox+tree popup pattern.
+
