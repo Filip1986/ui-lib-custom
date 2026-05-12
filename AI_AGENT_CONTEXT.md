@@ -90,6 +90,34 @@ Verification:
 Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
 Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
 
+Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
+Changed:
+  - projects/ui-lib-custom/src/lib/divider/divider.ts
+      • Added module-level `nextDividerId` counter and unique host `dividerId`
+      • Added `ariaLabel` + `decorative` inputs and computed ARIA bindings (`ariaOrientation`, `resolvedAriaLabel`, `ariaHidden`)
+      • Bound host `id`, `aria-label`, and `aria-hidden` while keeping separator semantics
+  - projects/ui-lib-custom/src/lib/divider/divider.scss
+      • Added `prefers-reduced-motion: reduce` override
+  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts
+      • Added coverage for generated ids, decorative `aria-hidden`, and labeled divider behavior
+  - projects/ui-lib-custom/src/lib/divider/divider.a11y.spec.ts (CREATED — 12 tests)
+      • Added ARIA structure assertions, keyboard/non-live-region checks, and axe-core checks for default/vertical/decorative/labeled states
+  - projects/ui-lib-custom/src/lib/divider/README.md
+      • Added `ariaLabel` + `decorative` input docs, ARIA behavior table, keyboard table, and expanded accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Divider #58: ⏳ Queued → ✅ Done
+      • Layout table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the previous oldest handoff to keep only the newest 3 in this file
+State: Divider hardening complete. The host now supports decorative vs. labeled accessibility semantics, generated stable ids per instance, reduced-motion styling fallback, updated DX docs, and dedicated divider a11y regression coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/divider/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=divider --no-coverage (36/36 PASS — 24 unit + 12 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
+Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
 Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
 Changed:
   - AI_AGENT_CONTEXT.md

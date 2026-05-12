@@ -25,6 +25,8 @@ import { Divider } from 'ui-lib-custom/divider';
 | `align`       | `'left' \| 'center' \| 'right' \| 'top' \| 'bottom' \| null`         | `null`       | Position of projected content. Horizontal: `left`/`center`/`right`. Vertical: `top`/`center`/`bottom`. Resolves to `center` when null. |
 | `variant`     | `'material' \| 'bootstrap' \| 'minimal' \| null`                      | `null`       | Design variant; inherits from `ThemeConfigService` when null.                                                                            |
 | `styleClass`  | `string \| null`                                                      | `null`       | Additional CSS classes applied to the host element.                                                                                      |
+| `ariaLabel`   | `string \| null`                                                      | `null`       | Accessible name for meaningful/labeled dividers. Empty strings are ignored.                                                             |
+| `decorative`  | `boolean`                                                             | `false`      | Marks the divider as decorative-only and sets `aria-hidden="true"` when no `ariaLabel` is set.                                         |
 
 ---
 
@@ -107,6 +109,27 @@ When no content is projected, the divider renders as a clean, uninterrupted line
 
 ## Accessibility
 
-- Host element has `role="separator"`.
-- `aria-orientation` reflects the current `orientation` input (`"horizontal"` or `"vertical"`).
+### ARIA behavior
 
+| Scenario | Role | `aria-orientation` | `aria-hidden` | `aria-label` |
+|----------|------|--------------------|---------------|--------------|
+| Default divider | `separator` | `horizontal` | _none_ | _none_ |
+| Vertical divider | `separator` | `vertical` | _none_ | _none_ |
+| Decorative divider (`decorative=true`) | `separator` | follows `orientation` | `true` | _none_ |
+| Labeled divider (`ariaLabel` set) | `separator` | follows `orientation` | _none_ | value of `ariaLabel` |
+
+### Keyboard behavior
+
+Divider is non-interactive and not focusable by default:
+
+| Key | Behavior |
+|-----|----------|
+| `Tab` | Skips divider |
+| `Enter` / `Space` | No action |
+
+### Accessibility notes
+
+- Host element always uses `role="separator"`.
+- `aria-orientation` reflects `orientation` (`horizontal`/`vertical`).
+- Decorative usage is supported through `decorative`.
+- For meaningful divider text/icons, provide `ariaLabel`.
