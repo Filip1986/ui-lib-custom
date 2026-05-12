@@ -64,7 +64,7 @@ class MultipleHostComponent {}
 
 @Component({
   standalone: true,
-  imports: [UploadComponent, UploadComponent],
+  imports: [UploadComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ui-lib-upload />
@@ -300,8 +300,7 @@ describe('Upload Accessibility', (): void => {
 
       const alerts: HTMLElement[] = queryAllEl(fixture, '[role="alert"]');
       expect(alerts.length).toBeGreaterThanOrEqual(1);
-      const alertEl: HTMLElement = alerts[0]!;
-      expect(alertEl.getAttribute('aria-live')).toBe('assertive');
+      expect(alerts[0]?.getAttribute('aria-live')).toBe('assertive');
     });
 
     it('dismiss button has aria-label="Dismiss validation messages"', async (): Promise<void> => {
