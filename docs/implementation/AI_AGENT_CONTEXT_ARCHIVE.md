@@ -1521,8 +1521,33 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Next step: PanelMenu hardening (Tier 2, #15).
 
----
-
+Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]
+Changed:
+  - projects/ui-lib-custom/src/lib/panel/panel.a11y.spec.ts (CREATED — 23 tests)
+      • axe-core checks (4): basic, toggleable expanded, toggleable collapsed, all variants
+      • ARIA structure (5): role=region, aria-labelledby→header id, header id format, unique IDs, content id format
+      • Toggle button ARIA (6): absent when non-toggleable, aria-expanded true/false, aria-controls, accessible label, icon aria-hidden
+      • Content visibility ARIA (3): aria-hidden when collapsed, null when expanded, null when non-toggleable
+      • Keyboard interaction (3): Enter collapses, Space collapses, Enter expands collapsed panel
+      • Content projection (2): custom header rendered, aria-expanded present with custom header
+  - projects/ui-lib-custom/src/lib/panel/README.md
+      • Expanded CSS custom properties table (added font-size, font-weight, toggle-size entries)
+      • Added full ARIA attributes table (host, header div, content div, toggle button, toggle icon)
+      • Added keyboard interaction table (Tab, Enter, Space)
+      • Replaced one-liner accessibility section with detailed accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Panel #60: ⏳ Queued → ✅ Done in Tier 6 hardening queue
+      • Layout table: Panel row populated — 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Panel hardening complete. All ARIA attributes were already in place (role=region, aria-labelledby,
+  aria-expanded, aria-controls, aria-hidden, prefers-reduced-motion, unique IDs, :focus-visible ring).
+  Deliverable is the new 23-test a11y spec + expanded README documentation.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/panel/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=panel --no-coverage (110/110 PASS — 87 unit + 23 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
 Changed:
   - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
@@ -1550,4 +1575,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
 Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
-
