@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { TieredMenu } from 'ui-lib-custom/tiered-menu';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -8,10 +8,24 @@ import type {
   TieredMenuVariant,
   TieredMenuSize,
 } from 'ui-lib-custom/tiered-menu';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import {
+  TableComponent,
+  TableColumnComponent,
+  TableColumnBodyDirective,
+} from 'ui-lib-custom/table';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+
+interface AriaRow {
+  readonly element: string;
+  readonly attribute: string;
+  readonly value: string;
+  readonly notes: string;
+}
+
+interface KeyboardRow {
+  readonly key: string;
+  readonly action: string;
+}
 
 /**
  * Demo page for the TieredMenu component.
@@ -19,44 +33,19 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-tiered-menu-demo',
   standalone: true,
-  imports: [TieredMenu, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    TieredMenu,
+    Button,
+    TableComponent,
+    TableColumnComponent,
+    TableColumnBodyDirective,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TieredMenuDemoComponent {
-  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
-    viewChild(DocPageLayoutComponent);
-
-  public readonly sections: DocSection[] = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'basic', label: 'Basic (Inline)' },
-    { id: 'nested', label: 'Nested Submenus' },
-    { id: 'popup', label: 'Popup Mode' },
-    { id: 'variants', label: 'Variants' },
-    { id: 'sizes', label: 'Sizes' },
-    { id: 'item-states', label: 'Item States' },
-    { id: 'url-items', label: 'URL Items' },
-    {
-      id: 'api',
-      label: 'API',
-      children: [
-        { id: 'api-inputs', label: 'Inputs' },
-        { id: 'api-outputs', label: 'Outputs' },
-        { id: 'api-methods', label: 'Methods' },
-        { id: 'api-item', label: 'TieredMenuItem' },
-      ],
-    },
-    {
-      id: 'accessibility',
-      label: 'Accessibility',
-      children: [
-        { id: 'a11y-aria', label: 'ARIA Attributes' },
-        { id: 'a11y-keyboard', label: 'Keyboard' },
-      ],
-    },
-  ];
-
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;
@@ -209,6 +198,97 @@ import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
     { label: 'Logout', icon: 'pi pi-sign-out' },
   ];
 
+  // ── Accessibility data ────────────────────────────────────────────────────
+
+  public readonly ariaRows: AriaRow[] = [
+    {
+      element: 'Root <code>&lt;ul&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"menu"</code>',
+      notes: 'Identifies the list as a menu widget.',
+    },
+    {
+      element: 'Root <code>&lt;ul&gt;</code>',
+      attribute: '<code>aria-label</code>',
+      value: '<code>ariaLabel</code> input',
+      notes: 'Accessible name for the root panel, defaults to <code>"Menu"</code>.',
+    },
+    {
+      element: 'Nested <code>&lt;ul&gt;</code>',
+      attribute: '<code>aria-label</code>',
+      value: 'Parent item label',
+      notes: 'Each sub-panel is named after its parent item for screen reader context.',
+    },
+    {
+      element: '<code>&lt;li&gt;</code> wrapper',
+      attribute: '<code>role</code>',
+      value: '<code>"none"</code>',
+      notes: 'Removes implicit list-item semantics, preserving the menuitem role on the link.',
+    },
+    {
+      element: 'Leaf <code>&lt;a&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"menuitem"</code>',
+      notes: 'Identifies each interactive item as a menu item.',
+    },
+    {
+      element: 'Parent <code>&lt;a&gt;</code>',
+      attribute: '<code>aria-haspopup</code>',
+      value: '<code>"menu"</code>',
+      notes: 'Signals that the item controls a submenu.',
+    },
+    {
+      element: 'Parent <code>&lt;a&gt;</code>',
+      attribute: '<code>aria-expanded</code>',
+      value: '<code>"true"</code> / <code>"false"</code>',
+      notes: 'Reflects whether the flyout sub-panel is currently open.',
+    },
+    {
+      element: 'Disabled <code>&lt;a&gt;</code>',
+      attribute: '<code>aria-disabled</code>',
+      value: '<code>"true"</code>',
+      notes: 'Communicates non-interactive state without removing focus management.',
+    },
+    {
+      element: 'Separator <code>&lt;li&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"separator"</code>',
+      notes: 'Conveys structural grouping without <code>aria-hidden</code>.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardRow[] = [
+    {
+      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd>',
+      action: 'Navigate between items in the current list (wraps).',
+    },
+    {
+      key: '<kbd>Home</kbd> / <kbd>End</kbd>',
+      action: 'Jump to the first or last item in the current list.',
+    },
+    {
+      key: '<kbd>ArrowRight</kbd>',
+      action: 'Open the flyout for an item with nested children; focus first child item.',
+    },
+    {
+      key: '<kbd>ArrowLeft</kbd>',
+      action: 'Close the current flyout and return focus to the parent item. No-op at root level.',
+    },
+    {
+      key: '<kbd>Enter</kbd> / <kbd>Space</kbd>',
+      action: "Activate the focused leaf item or toggle a parent's flyout.",
+    },
+    {
+      key: '<kbd>Escape</kbd>',
+      action:
+        'Close the innermost open flyout; propagates up through nested levels. In popup mode, closes the entire panel and restores trigger focus.',
+    },
+    {
+      key: '<kbd>Tab</kbd>',
+      action: 'Closes popup panel and moves focus naturally to the next focusable element.',
+    },
+  ];
+
   public onItemClick(event: TieredMenuItemCommandEvent): void {
     this.lastEvent.set(`Clicked: ${event.item.label ?? '(no label)'}`);
   }
@@ -219,9 +299,5 @@ import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
 
   public setSize(value: TieredMenuSize): void {
     this.size.set(value);
-  }
-
-  public scrollTo(id: string): void {
-    this.layout()?.scrollToSection(id);
   }
 }
