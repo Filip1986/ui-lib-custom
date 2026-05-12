@@ -25,6 +25,8 @@ import type {
       [align]="align()"
       [variant]="variant()"
       [styleClass]="styleClass()"
+      [ariaLabel]="ariaLabel()"
+      [decorative]="decorative()"
       >{{ content() }}</ui-lib-divider
     >
   `,
@@ -39,6 +41,8 @@ class TestHostComponent {
     null
   );
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly decorative: WritableSignal<boolean> = signal<boolean>(false);
   public readonly content: WritableSignal<string> = signal<string>('');
 }
 
@@ -153,6 +157,36 @@ describe('Divider', (): void => {
     host.orientation.set('vertical');
     fixture.detectChanges();
     expect(getDividerElement().getAttribute('aria-orientation')).toBe('vertical');
+  });
+
+  it('should have a generated unique id on the host', (): void => {
+    expect(getDividerElement().getAttribute('id')).toMatch(/^ui-lib-divider-\d+$/);
+  });
+
+  it('should set aria-hidden="true" when decorative and no ariaLabel is provided', (): void => {
+    host.decorative.set(true);
+    fixture.detectChanges();
+    expect(getDividerElement().getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('should set aria-label when ariaLabel is provided', (): void => {
+    host.ariaLabel.set('Section divider');
+    fixture.detectChanges();
+    expect(getDividerElement().getAttribute('aria-label')).toBe('Section divider');
+  });
+
+  it('should trim aria-label and remove it when empty', (): void => {
+    host.ariaLabel.set('   ');
+    fixture.detectChanges();
+    expect(getDividerElement().getAttribute('aria-label')).toBeNull();
+  });
+
+  it('should keep divider exposed when decorative is true but ariaLabel is provided', (): void => {
+    host.decorative.set(true);
+    host.ariaLabel.set('Content separator');
+    fixture.detectChanges();
+    expect(getDividerElement().getAttribute('aria-hidden')).toBeNull();
+    expect(getDividerElement().getAttribute('aria-label')).toBe('Content separator');
   });
 
   it('should render the content div', (): void => {

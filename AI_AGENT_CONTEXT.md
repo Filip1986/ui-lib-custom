@@ -58,6 +58,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
 - `DataView` -> ✅ complete + hardened (6-phase, score 8.5/10, 64 tests — 43 unit + 21 a11y)
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
+- `Divider` -> ✅ complete + hardened (6-phase, score 8.7/10, 36 tests — 24 unit + 12 a11y)
 
 ---
 
@@ -92,37 +93,33 @@ Verification:
 Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
 Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
 
-Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
 Changed:
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
-      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
-      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
-      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
-      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
-      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
-      • Bound button aria-label to the resolved non-empty label
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
-      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
-      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
-      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
-  - projects/ui-lib-custom/src/lib/scroll-top/README.md
-      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
-      • Updated API table docs to reflect the new default button aria-label
+  - projects/ui-lib-custom/src/lib/divider/divider.ts
+      • Added module-level `nextDividerId` counter and unique host `dividerId`
+      • Added `ariaLabel` + `decorative` inputs and computed ARIA bindings (`ariaOrientation`, `resolvedAriaLabel`, `ariaHidden`)
+      • Bound host `id`, `aria-label`, and `aria-hidden` while keeping separator semantics
+  - projects/ui-lib-custom/src/lib/divider/divider.scss
+      • Added `prefers-reduced-motion: reduce` override
+  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts
+      • Added coverage for generated ids, decorative `aria-hidden`, and labeled divider behavior
+  - projects/ui-lib-custom/src/lib/divider/divider.a11y.spec.ts (CREATED — 12 tests)
+      • Added ARIA structure assertions, keyboard/non-live-region checks, and axe-core checks for default/vertical/decorative/labeled states
+  - projects/ui-lib-custom/src/lib/divider/README.md
+      • Added `ariaLabel` + `decorative` input docs, ARIA behavior table, keyboard table, and expanded accessibility notes
   - docs/COMPONENT_SCORES.md
-      • ScrollTop #75: ⏳ Queued → ✅ Done
-      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
-State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
+      • Divider #58: ⏳ Queued → ✅ Done
+      • Layout table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the previous oldest handoff to keep only the newest 3 in this file
+State: Divider hardening complete. The host now supports decorative vs. labeled accessibility semantics, generated stable ids per instance, reduced-motion styling fallback, updated DX docs, and dedicated divider a11y regression coverage.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/divider/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=divider --no-coverage (36/36 PASS — 24 unit + 12 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
+Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
 
 Date: 2026-05-12 [Carousel component — accessibility hardening COMPLETE (#45)]
 Changed:
@@ -164,4 +161,3 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
 Terminal notes: Standard npm install required first. Indicator tablist/tab pattern replaced with plain list + aria-current per carousel ARIA pattern guidance.
 Next step: Galleria hardening (Tier 5, #46).
-
