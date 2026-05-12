@@ -36,6 +36,39 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
+Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+  - projects/ui-lib-custom/src/lib/tree/tree.html
+  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+  - projects/ui-lib-custom/src/lib/tree/tree.scss
+State: Merged the latest `origin/main` into the TreeSelect accessibility branch again, reconciled the repeated Tree/docs conflicts, preserved the already-validated TreeSelect + Tree accessibility behavior, and kept the newer Skeleton bookkeeping from `main`.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
+Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
+
+Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+State: Restored the missing `TreeContext` methods on `Tree`, reintroduced optional `hostId` support so `TreeSelect` can wire `aria-controls` to the popup tree, and aligned tree rows with the context API by exposing stable row ids/labels plus decorative icon hiding. The original `TS2420` compile error is fixed and the related tree/tree-select accessibility test slice is green again.
+Verification:
+  .\node_modules\.bin\ng.cmd build ui-lib-custom (PASS)
+  .\node_modules\.bin\jest.cmd --testPathPatterns src/lib/tree/ tree-select --no-coverage (172/172 PASS)
+Terminal notes: Initial Jest command using `|` in `--testPathPatterns` was parsed by PowerShell as a pipeline; reran successfully with separate pattern arguments.
+Next step: Commit the verified Tree / TreeSelect repair.
+
 ---
 
 Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
