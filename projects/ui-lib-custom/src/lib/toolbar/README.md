@@ -29,7 +29,7 @@ import type { ToolbarVariant, ToolbarSize } from 'ui-lib-custom/toolbar';
 |--------------|----------------------------------------------|----------|--------------------------------------------------------------------------|
 | `variant`    | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`   | Design variant. Inherits from `ThemeConfigService` when `null`.          |
 | `size`       | `'sm' \| 'md' \| 'lg'`                      | `'md'`   | Controls toolbar height and padding.                                     |
-| `ariaLabel`  | `string \| null`                             | `null`   | Accessible label. Recommended when multiple toolbars appear on one page. |
+| `ariaLabel`  | `string \| null`                             | `null`   | Accessible label. Falls back to `"Toolbar"` when omitted. |
 | `styleClass` | `string \| null`                             | `null`   | Additional CSS classes added to the host element.                        |
 
 ---
@@ -132,8 +132,31 @@ import type { ToolbarVariant, ToolbarSize } from 'ui-lib-custom/toolbar';
 
 ## Accessibility
 
-- The host element has `role="toolbar"` applied automatically.
-- Provide `ariaLabel` when multiple toolbars appear on the same page so screen readers can distinguish them.
-- Ensure interactive elements inside the toolbar are keyboard-accessible.
-- Follow WAI-ARIA Toolbar Pattern: arrow keys should navigate between toolbar items when custom keyboard management is needed.
+### ARIA attributes
 
+| Element | Attribute | Value |
+|---------|-----------|-------|
+| `ui-lib-toolbar` host | `role` | `toolbar` |
+| `ui-lib-toolbar` host | `aria-label` | `ariaLabel` input, falling back to `"Toolbar"` |
+| `ui-lib-toolbar` host | `aria-orientation` | `horizontal` |
+| `ui-lib-toolbar` host | `id` | Auto-generated `ui-lib-toolbar-*` instance id |
+| Projected interactive items | `tabindex` | Managed with roving tabindex (`0` for active item, `-1` for the rest) |
+
+### Keyboard support
+
+| Key | Behavior |
+|-----|----------|
+| `Tab` / `Shift+Tab` | Enters or exits the toolbar using the currently active item |
+| `ArrowRight` / `ArrowDown` | Moves focus to the next enabled toolbar item |
+| `ArrowLeft` / `ArrowUp` | Moves focus to the previous enabled toolbar item |
+| `Home` | Moves focus to the first enabled toolbar item |
+| `End` | Moves focus to the last enabled toolbar item |
+
+### Accessibility notes
+
+- The host element applies the WAI-ARIA toolbar pattern automatically, including roving tabindex for projected interactive controls.
+- Text-entry controls such as `input`, `textarea`, and `select` keep their native arrow-key behavior; toolbar navigation does not override their caret or option handling.
+- Provide a custom `ariaLabel` whenever multiple toolbars appear on the same page so each landmark is announced distinctly.
+- Decorative icons inside projected controls should use `aria-hidden="true"`.
+- Icon-only projected buttons must provide their own accessible name (for example `aria-label="More formatting"`).
+- Toolbar focus indicators use `:focus-visible`, and toolbar motion is disabled when `prefers-reduced-motion: reduce` is enabled.

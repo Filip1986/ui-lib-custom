@@ -68,6 +68,17 @@ ui-lib-toolbar {
     }
   }
 
+  [data-ui-lib-toolbar-item='true'] {
+    transition:
+      outline-color 160ms ease,
+      box-shadow 160ms ease;
+
+    &:focus-visible {
+      outline: 0.125rem solid var(--uilib-color-primary, #6366f1);
+      outline-offset: 0.125rem;
+    }
+  }
+
   // =========================================================================
   // Size modifiers
   // =========================================================================
@@ -150,5 +161,12 @@ ui-lib-toolbar {
       --uilib-toolbar-background: transparent;
       --uilib-toolbar-border-color: var(--uilib-surface-700, #374151);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-toolbar,
+  .ui-lib-toolbar [data-ui-lib-toolbar-item='true'] {
+    transition: none !important;
   }
 }

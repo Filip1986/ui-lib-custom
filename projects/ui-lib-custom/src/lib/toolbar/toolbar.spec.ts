@@ -100,13 +100,21 @@ describe('Toolbar', (): void => {
   });
 
   it('should not have aria-label by default', (): void => {
-    expect(getToolbarElement().getAttribute('aria-label')).toBeNull();
+    expect(getToolbarElement().getAttribute('aria-label')).toBe('Toolbar');
   });
 
   it('should apply aria-label when provided', (): void => {
     host.ariaLabel.set('Main toolbar');
     fixture.detectChanges();
     expect(getToolbarElement().getAttribute('aria-label')).toBe('Main toolbar');
+  });
+
+  it('should expose a unique toolbar id', (): void => {
+    expect(getToolbarElement().id).toMatch(/^ui-lib-toolbar-\d+$/);
+  });
+
+  it('should set aria-orientation to horizontal', (): void => {
+    expect(getToolbarElement().getAttribute('aria-orientation')).toBe('horizontal');
   });
 
   it('should render start group wrapper', (): void => {
