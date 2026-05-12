@@ -66,10 +66,12 @@
   }
 
   <!-- ── Hidden native file input ────────────────────────────────────────── -->
+  <label [for]="fileInputId" class="ui-lib-upload__sr-only">Choose files to upload</label>
   <input
     #fileInput
     type="file"
     class="ui-lib-upload__input"
+    [id]="fileInputId"
     [attr.multiple]="multiple() ? '' : null"
     [attr.accept]="accept() || null"
     [attr.disabled]="disabled() ? '' : null"
@@ -85,7 +87,7 @@
     <div
       class="ui-lib-upload__content"
       role="region"
-      aria-label="File upload drop zone"
+      aria-label="File upload area"
       [attr.aria-disabled]="disabled() || null"
       (dragenter)="onDragEnter($event)"
       (dragover)="onDragOver($event)"
@@ -176,6 +178,9 @@
 
     </div>
   }
+
+  <!-- ── Drag-over live region (polite screen-reader announcement) ──────── -->
+  <div class="ui-lib-upload__sr-only" aria-live="polite" aria-atomic="true">{{ dragStatusMessage() }}</div>
 
   <!-- ── Validation messages ─────────────────────────────────────────────── -->
   @if (validationMessages().length > 0) {
