@@ -53,7 +53,7 @@ export type {
 
 export { TREE_SELECT_DEFAULTS } from './tree-select.constants';
 
-let treeSelectIdCounter: number = 0;
+let nextTreeSelectId: number = 0;
 
 /**
  * TreeSelect renders a hierarchical tree structure inside a dropdown panel,
@@ -87,10 +87,12 @@ let treeSelectIdCounter: number = 0;
   host: {
     class: 'ui-lib-tree-select',
     '[class]': 'hostClasses()',
+    '[attr.id]': 'instanceId',
     role: 'combobox',
     '[attr.aria-expanded]': 'panelVisible() ? "true" : "false"',
     '[attr.aria-haspopup]': '"tree"',
-    '[attr.aria-controls]': 'panelId',
+    '[attr.aria-controls]': 'panelVisible() ? treeId : null',
+    '[attr.aria-describedby]': 'liveRegionId',
     '[attr.aria-label]': 'ariaLabel() || null',
     '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
     '[attr.aria-invalid]': 'invalid() ? "true" : null',
@@ -107,8 +109,10 @@ export class TreeSelect implements ControlValueAccessor {
 
   // ─── Instance ID ──────────────────────────────────────────────────────────
 
-  private readonly instanceId: string = `${TREE_SELECT_ID_PREFIX}-${++treeSelectIdCounter}`;
+  private readonly instanceId: string = `${TREE_SELECT_ID_PREFIX}-${nextTreeSelectId++}`;
   public readonly panelId: string = `${this.instanceId}-panel`;
+  public readonly treeId: string = `${this.instanceId}-tree`;
+  public readonly liveRegionId: string = `${this.instanceId}-live-region`;
 
   // ─── CVA state ────────────────────────────────────────────────────────────
 
@@ -267,6 +271,37 @@ export class TreeSelect implements ControlValueAccessor {
     return (sel as TreeNode).label ?? '';
   });
 
+  public readonly treeAriaLabel: Signal<string> = computed<string>((): string => {
+    const ariaLabel: string | null = this.ariaLabel();
+    if (ariaLabel?.trim()) {
+      return ariaLabel;
+    }
+
+    const placeholder: string = this.placeholder().trim();
+    return placeholder || 'Tree select options';
+  });
+
+  public readonly selectionAnnouncement: Signal<string> = computed<string>((): string => {
+    const selection: TreeNode | TreeNode[] | null = this.selection();
+    if (selection === null) {
+      return 'No item selected';
+    }
+
+    if (Array.isArray(selection)) {
+      if (selection.length === 0) {
+        return 'No item selected';
+      }
+
+      if (selection.length === 1) {
+        return `${selection[0]?.label ?? 'Item'} selected`;
+      }
+
+      return `${selection.length} items selected`;
+    }
+
+    return `${selection.label ?? 'Item'} selected`;
+  });
+
   // ─── ControlValueAccessor ─────────────────────────────────────────────────
 
   public registerOnChange(fn: (value: TreeNode | TreeNode[] | null) => void): void {
@@ -294,13 +329,21 @@ export class TreeSelect implements ControlValueAccessor {
     if (event) {
       this.show.emit({ originalEvent: event });
     }
+    queueMicrotask((): void => {
+      this.focusPopupContent();
+    });
   }
 
   /** Closes the dropdown panel and marks the component as touched. */
-  public closePanel(event?: Event | null): void {
+  public closePanel(event?: Event | null, restoreFocus: boolean = false): void {
     this.panelVisible.set(false);
     this.cvaOnTouched();
     this.hide.emit({ originalEvent: event ?? null });
+    if (restoreFocus) {
+      queueMicrotask((): void => {
+        this.elementRef.nativeElement.focus();
+      });
+    }
   }
 
   /** Toggles the dropdown panel open/closed. */
@@ -320,7 +363,7 @@ export class TreeSelect implements ControlValueAccessor {
 
     if (this.selectionMode() === 'single') {
       // Close the panel on single selection
-      this.closePanel(event.originalEvent);
+      this.closePanel(event.originalEvent, true);
     }
 
     this.cvaOnChange(this.selection());
@@ -362,19 +405,27 @@ export class TreeSelect implements ControlValueAccessor {
   public onKeydown(event: KeyboardEvent): void {
     if (this.isDisabled()) return;
 
+    const eventTarget: EventTarget | null = event.target;
+    const isHostTarget: boolean = eventTarget === this.elementRef.nativeElement;
+
     switch (event.key) {
       case KEYBOARD_KEYS.Enter:
       case KEYBOARD_KEYS.Space:
+      case KEYBOARD_KEYS.ArrowDown:
+        if (!isHostTarget) {
+          break;
+        }
         event.preventDefault();
         if (!this.panelVisible()) {
           this.openPanel(event);
+        } else {
+          this.focusPopupContent();
         }
         break;
       case KEYBOARD_KEYS.Escape:
         if (this.panelVisible()) {
           event.preventDefault();
-          this.closePanel(event);
-          this.elementRef.nativeElement.focus();
+          this.closePanel(event, true);
         }
         break;
       case KEYBOARD_KEYS.Tab:
@@ -394,5 +445,24 @@ export class TreeSelect implements ControlValueAccessor {
     if (this.panelVisible() && !this.elementRef.nativeElement.contains(event.target as Node)) {
       this.closePanel(event);
     }
+  }
+
+  private focusPopupContent(): void {
+    if (!this.panelVisible()) {
+      return;
+    }
+
+    const filterInput: HTMLInputElement | null =
+      this.elementRef.nativeElement.querySelector<HTMLInputElement>('.uilib-tree-filter-input');
+    if (filterInput) {
+      filterInput.focus();
+      return;
+    }
+
+    const activeTreeItem: HTMLElement | null =
+      this.elementRef.nativeElement.querySelector<HTMLElement>(
+        '.ui-lib-tree [role="treeitem"][tabindex="0"]'
+      );
+    activeTreeItem?.focus();
   }
 }

@@ -398,3 +398,14 @@
   --uilib-tree-filter-bg: var(--uilib-color-surface-dark, #1e1e1e);
   --uilib-tree-filter-color: #ffffffde;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-tree .uilib-tree-node-row,
+  .ui-lib-tree .uilib-tree-node-toggle,
+  .ui-lib-tree .uilib-tree-toggle-icon,
+  .ui-lib-tree .uilib-tree-node-checkbox,
+  .ui-lib-tree .uilib-tree-filter-input {
+    animation: none !important;
+    transition: none !important;
+  }
+}

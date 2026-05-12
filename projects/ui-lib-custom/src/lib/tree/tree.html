@@ -14,13 +14,16 @@
 }
 
 <!-- Root nodes -->
-<ul class="uilib-tree-root" role="tree">
-  @for (rootNode of value(); track rootNode.key) {
-    @if (isNodeFiltered(rootNode)) {
-      <li role="none">
-        <ui-lib-tree-node [node]="rootNode" [depth]="0" />
-      </li>
-    }
+<ul class="uilib-tree-root" role="presentation">
+  @for (rootNode of visibleRootNodes(); track rootNode.key; let rootIndex = $index) {
+    <li role="none">
+      <ui-lib-tree-node
+        [node]="rootNode"
+        [depth]="0"
+        [setsize]="visibleRootNodes().length"
+        [posinset]="rootIndex + 1"
+      />
+    </li>
   } @empty {
     <li class="uilib-tree-empty" role="presentation">
       <span class="uilib-tree-empty-message">No items to display</span>

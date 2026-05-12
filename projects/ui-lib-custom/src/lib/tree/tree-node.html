@@ -4,11 +4,19 @@
   [class.uilib-tree-node-row--selectable]="node().selectable !== false && treeContext.selectionMode() !== null && treeContext.selectionMode() !== 'checkbox'"
   [class]="node().styleClass ?? ''"
   [style.padding-inline-start.px]="depth() * 20"
+  [id]="treeContext.getTreeItemId(node())"
   role="treeitem"
+  [attr.aria-level]="treeContext.getNodeLevel(node())"
   [attr.aria-expanded]="hasChildren() ? treeContext.isNodeExpanded(node()) : null"
   [attr.aria-selected]="treeContext.selectionMode() !== 'checkbox' ? treeContext.isNodeSelected(node()) : null"
-  tabindex="0"
+  [attr.aria-setsize]="setsize()"
+  [attr.aria-posinset]="posinset()"
+  [attr.aria-disabled]="node().selectable === false ? 'true' : null"
+  [attr.aria-checked]="treeContext.selectionMode() === 'checkbox' ? (treeContext.isNodePartiallySelected(node()) ? 'mixed' : treeContext.isNodeSelected(node())) : null"
+  [attr.data-node-label]="node().label ?? ''"
+  [attr.tabindex]="treeContext.getNodeTabIndex(node())"
   (click)="treeContext.handleNodeClick($event, node())"
+  (focus)="handleFocus()"
   (keydown.enter)="treeContext.handleNodeClick($event, node())"
   (keydown.space)="$event.preventDefault(); treeContext.handleNodeClick($event, node())"
 >
@@ -22,7 +30,7 @@
       tabindex="-1"
       (click)="$event.stopPropagation(); treeContext.handleNodeToggle($event, node())"
     >
-      <span class="uilib-tree-toggle-icon"></span>
+      <span class="uilib-tree-toggle-icon" aria-hidden="true"></span>
     </button>
   } @else {
     <span class="uilib-tree-node-leaf-spacer" aria-hidden="true"></span>
@@ -34,9 +42,7 @@
       class="uilib-tree-node-checkbox"
       [class.uilib-tree-node-checkbox--checked]="treeContext.isNodeSelected(node())"
       [class.uilib-tree-node-checkbox--partial]="treeContext.isNodePartiallySelected(node())"
-      role="checkbox"
-      [attr.aria-checked]="treeContext.isNodePartiallySelected(node()) ? 'mixed' : treeContext.isNodeSelected(node())"
-      [attr.aria-label]="node().label ?? 'Node'"
+      aria-hidden="true"
       tabindex="-1"
       (click)="$event.stopPropagation(); treeContext.handleCheckboxToggle($event, node())"
     ></span>
@@ -61,12 +67,15 @@
 <!-- Recursive children -->
 @if (hasChildren() && treeContext.isNodeExpanded(node())) {
   <ul class="uilib-tree-children" role="group">
-    @for (child of node().children!; track child.key) {
-      @if (treeContext.isNodeFiltered(child)) {
-        <li role="none">
-          <ui-lib-tree-node [node]="child" [depth]="depth() + 1" />
-        </li>
-      }
+    @for (child of treeContext.getVisibleChildren(node()); track child.key; let childIndex = $index) {
+      <li role="none">
+        <ui-lib-tree-node
+          [node]="child"
+          [depth]="depth() + 1"
+          [setsize]="treeContext.getVisibleChildren(node()).length"
+          [posinset]="childIndex + 1"
+        />
+      </li>
     }
   </ul>
 }

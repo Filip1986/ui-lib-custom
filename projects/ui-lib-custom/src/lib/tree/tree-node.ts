@@ -38,6 +38,12 @@ export class TreeNodeComponent {
   /** Nesting depth used for left-padding indentation. */
   public readonly depth: InputSignal<number> = input<number>(0);
 
+  /** Number of visible siblings in the current group. */
+  public readonly setsize: InputSignal<number> = input<number>(1);
+
+  /** 1-based index within the current visible sibling group. */
+  public readonly posinset: InputSignal<number> = input<number>(1);
+
   /** Returns `true` when the node has visible children to expand. */
   protected hasChildren(): boolean {
     const currentNode: TreeNode = this.node();
@@ -51,5 +57,9 @@ export class TreeNodeComponent {
       return currentNode.expandedIcon ?? currentNode.icon ?? '';
     }
     return currentNode.collapsedIcon ?? currentNode.icon ?? '';
+  }
+
+  protected handleFocus(): void {
+    this.treeContext.setFocusedNode(this.node());
   }
 }

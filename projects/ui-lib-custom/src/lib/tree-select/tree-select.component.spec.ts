@@ -399,7 +399,8 @@ describe('TreeSelect', (): void => {
   describe('Accessibility', (): void => {
     beforeEach((): void => setup());
 
-    it('should have aria-controls pointing to panel ID', (): void => {
+    it('should set aria-controls to the popup tree id when open', (): void => {
+      clickTrigger();
       const host: HTMLElement = getHost();
       const ariaControls: string | null = host.getAttribute('aria-controls');
       expect(ariaControls).toBeTruthy();
