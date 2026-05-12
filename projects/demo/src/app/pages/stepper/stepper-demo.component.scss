@@ -1,6 +1,7 @@
+@use '../../shared/styles/doc-page.scss';
+
+// Extra bottom padding so floating controls don't overlap content
 .demo-page {
-  max-width: 900px;
-  margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
 }
 
@@ -203,6 +204,7 @@
   padding: 1.5rem;
 }
 
+// Stepper event log has a distinct monospace pill style
 .demo-event-log {
   font-size: 0.8125rem;
   color: var(--uilib-color-surface-600, #6b7280);

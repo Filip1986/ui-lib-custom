@@ -85,7 +85,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 41   | Button          | `aria-disabled` vs `disabled`, icon-only `aria-label`, loading state announcement   | ✅ Done    |
 | 42   | Alert           | `role=alert` vs `role=status`, dismiss button label                                 | ✅ Done     |
 | 43   | Message         | Same as Alert — live region role correctness                                        | ⏳ Queued   |
-| 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ⏳ Queued   |
+| 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ✅ Done     |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
 | 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
 | 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
@@ -253,7 +253,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Skeleton        | 9   | 9    | 9    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| ProgressBar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ProgressBar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | ProgressSpinner | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | MeterGroup      | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 
