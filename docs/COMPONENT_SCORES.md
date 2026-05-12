@@ -50,7 +50,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component     | Key a11y concern                                                           | Status     |
 |------|---------------|----------------------------------------------------------------------------|------------|
-| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ⏳ Queued   |
+| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ✅ Done     |
 | 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done     |
 | 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ✅ Done     |
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done     |
@@ -75,7 +75,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
 | 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ✅ Done     |
 | 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ✅ Done     |
-| 40   | PickList   | Dual-list pattern, transfer action announcements                                | ⏳ Queued   |
+| 40   | PickList   | Dual-list pattern, transfer action announcements                                | ✅ Done     |
 
 ### Tier 5 — Feedback, Status & Foundational
 *Focus: Live regions, icon-only button labels, landmark roles, reduced motion.*
@@ -84,13 +84,13 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |------|-----------------|-------------------------------------------------------------------------------------|------------|
 | 41   | Button          | `aria-disabled` vs `disabled`, icon-only `aria-label`, loading state announcement   | ✅ Done    |
 | 42   | Alert           | `role=alert` vs `role=status`, dismiss button label                                 | ✅ Done     |
-| 43   | Message         | Same as Alert — live region role correctness                                        | ⏳ Queued   |
-| 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ⏳ Queued   |
+| 43   | Message         | Same as Alert — live region role correctness                                        | ✅ Done    |
+| 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ✅ Done     |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
 | 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
 | 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
 | 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ⏳ Queued   |
-| 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ⏳ Queued   |
+| 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ✅ Done     |
 | 50   | VirtualScroller | Accessible scroll region, keyboard scrolling                                        | ⏳ Queued   |
 
 ### Tier 6 — Layout, Utility & Polish
@@ -164,7 +164,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | SelectButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| InputOtp      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
@@ -236,7 +236,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| PickList          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| PickList          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Carousel          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Galleria          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
@@ -251,9 +251,9 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Badge           | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | Tag             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
-| Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Message         | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | Skeleton        | 9   | 9    | 9    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| ProgressBar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ProgressBar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | ProgressSpinner | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | MeterGroup      | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 

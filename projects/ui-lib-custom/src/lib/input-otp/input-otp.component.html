@@ -7,7 +7,8 @@
     [disabled]="isControlDisabled()"
     [readOnly]="readonly()"
     [tabindex]="tabindex()"
-    [attr.aria-label]="'OTP digit ' + (index + 1) + ' of ' + length()"
+    [attr.aria-label]="getCellAriaLabel(index)"
+    [attr.aria-invalid]="invalid() ? 'true' : null"
     [attr.autocomplete]="index === 0 ? 'one-time-code' : 'off'"
     [attr.maxlength]="index === 0 ? length() : 1"
     [class]="styleClass()"
@@ -19,3 +20,13 @@
     (paste)="onCellPaste($event)"
   />
 }
+
+@if (invalid()) {
+  <span [id]="errorId()" role="alert" class="uilib-input-otp-error">
+    <ng-content select="[inputOtpError]" />
+  </span>
+}
+
+<span aria-live="polite" aria-atomic="true" class="uilib-input-otp-sr-only">
+  {{ liveAnnouncement() }}
+</span>

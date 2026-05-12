@@ -24,6 +24,7 @@
 | `hint` | `string \| null` | `null` | Helper text rendered below the input; linked via `aria-describedby` |
 | `invalid` | `boolean` | `false` | Marks the field invalid (sets `aria-invalid`) without requiring an error message |
 | `disabled` | `boolean` | `false` | |
+| `readonly` | `boolean` | `false` | Sets `readOnly` on the native input and `aria-readonly="true"`. The field remains in the tab order and its value is still submitted with a form, unlike `disabled`. |
 | `required` | `boolean` | `false` | |
 | `showCounter` | `boolean` | `false` | Shows character count; requires `maxLength` to display fraction |
 | `maxLength` | `number \| null` | `null` | |

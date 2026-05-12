@@ -300,6 +300,7 @@
   text-align: center;
   color: var(--uilib-text-color-secondary, #6b7280);
   list-style: none;
+  margin: 0;
 }
 
 // =============================================================================
@@ -444,6 +445,20 @@
   --uilib-pick-list-header-bg: #f8f9fa;
   --uilib-pick-list-header-border: 1px solid #dee2e6;
   --uilib-pick-list-item-border-bottom: 1px solid #dee2e6;
+}
+
+// =============================================================================
+// Reduced-motion override
+// =============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-pick-list,
+  .ui-lib-pick-list__item,
+  .ui-lib-pick-list__control-btn,
+  .ui-lib-pick-list__transfer-btn,
+  .ui-lib-pick-list__filter-input {
+    transition: none;
+  }
 }
 
 // =============================================================================

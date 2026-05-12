@@ -1,7 +1,12 @@
-.upload-demo {
+@use '../../shared/styles/doc-page.scss';
+
+// Narrower canvas; flex-column stacks sections with consistent gap
+.demo-page {
   max-width: 860px;
-  margin: 0 auto;
   padding: 2rem 1.5rem;
+}
+
+.upload-demo {
   display: flex;
   flex-direction: column;
   gap: 3rem;
