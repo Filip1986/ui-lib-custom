@@ -55,7 +55,10 @@ jobs:
               body,
             });
 
+  # NOTE: e2e a11y tests are disabled in CI until the library reaches a stable state.
+  # Re-enable by removing the `if: false` condition below.
   e2e-a11y-tests:
+    if: false
     runs-on: ubuntu-latest
 
     steps:

@@ -4,7 +4,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { JsonPipe } from '@angular/common';
 import { Rating } from 'ui-lib-custom/rating';
 import type { RatingChangeEvent, RatingRateEvent } from 'ui-lib-custom/rating';
-import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -18,7 +17,6 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   standalone: true,
   imports: [
     Rating,
-    Button,
     FormsModule,
     ReactiveFormsModule,
     JsonPipe,
