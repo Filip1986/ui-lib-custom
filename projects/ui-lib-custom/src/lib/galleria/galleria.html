@@ -10,6 +10,7 @@
   <!-- Fullscreen open button -->
   @if (fullScreen() && !visible()) {
     <button
+      #fullScreenTriggerButtonElement
       type="button"
       class="uilib-galleria__fullscreen-btn"
       [attr.aria-label]="fullscreenAriaLabel"
@@ -110,8 +111,8 @@
             [ngTemplateOutlet]="itemTemplate()!"
             [ngTemplateOutletContext]="{ $implicit: currentItem()! }"
           />
-        } @else if (resolveCurrentItemSrc()) {
-          <img [src]="resolveCurrentItemSrc()" [attr.alt]="resolveCurrentItemAlt()" />
+        } @else if (resolveCurrentItemSrc(); as currentItemSrc) {
+          <img [src]="currentItemSrc" [attr.alt]="resolveCurrentItemAlt()" loading="eager" />
         }
       </div>
 
@@ -265,9 +266,9 @@
                 [ngTemplateOutlet]="thumbnailTemplate()!"
                 [ngTemplateOutletContext]="{ $implicit: item }"
               />
-            } @else if (resolveThumbnailSrc(item)) {
+            } @else if (resolveThumbnailSrc(item); as thumbnailSrc) {
               <img
-                [src]="resolveThumbnailSrc(item)"
+                [src]="thumbnailSrc"
                 [attr.alt]="resolveThumbnailAlt(item)"
                 loading="lazy"
               />

@@ -136,6 +136,11 @@ export class GalleriaComponent implements OnDestroy {
   public readonly fullScreenContainerElement: Signal<ElementRef<HTMLElement> | undefined> =
     viewChild<ElementRef<HTMLElement>>('fullScreenContainerElement');
 
+  /** Fullscreen trigger button used for focus restoration fallback. */
+  public readonly fullScreenTriggerButtonElement: Signal<
+    ElementRef<HTMLButtonElement> | undefined
+  > = viewChild<ElementRef<HTMLButtonElement>>('fullScreenTriggerButtonElement');
+
   // ─── Inputs ──────────────────────────────────────────────────────────────────
 
   /** Array of data items to display. */
@@ -374,9 +379,7 @@ export class GalleriaComponent implements OnDestroy {
       }
 
       queueMicrotask((): void => {
-        if (this.fullScreen() && this.visible()) {
-          this.activateFocusTrap();
-        }
+        this.activateFocusTrap();
       });
     });
   }
@@ -602,8 +605,10 @@ export class GalleriaComponent implements OnDestroy {
       return;
     }
 
-    const container: HTMLElement =
-      this.fullScreenContainerElement()?.nativeElement ?? this.hostElement.nativeElement;
+    const container: HTMLElement | undefined = this.fullScreenContainerElement()?.nativeElement;
+    if (!container) {
+      return;
+    }
 
     this.deactivateFocusTrap();
     this.focusTrap = new FocusTrap(container);
@@ -621,9 +626,7 @@ export class GalleriaComponent implements OnDestroy {
         this.fullScreenTriggerElement.focus();
       } else {
         const fallbackTrigger: HTMLButtonElement | null =
-          this.hostElement.nativeElement.querySelector<HTMLButtonElement>(
-            '.uilib-galleria__fullscreen-btn'
-          );
+          this.fullScreenTriggerButtonElement()?.nativeElement ?? null;
         fallbackTrigger?.focus();
       }
       this.fullScreenTriggerElement = null;
