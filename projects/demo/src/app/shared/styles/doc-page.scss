@@ -656,3 +656,164 @@
     display: none;
   }
 }
+
+// ==========================================================================
+// Shared demo-page styles
+// Used by all component demo pages via @use '../../shared/styles/doc-page.scss'
+// ==========================================================================
+
+// ---- Page wrapper --------------------------------------------------------
+
+.demo-page {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.demo-page__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.demo-page__description {
+  color: var(--uilib-muted, #6b7280);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+// ---- Preview modifier: narrow --------------------------------------------
+
+.demo-section__preview--narrow {
+  max-width: 280px;
+}
+
+// ---- Variant / size controls ---------------------------------------------
+
+.demo-section__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.demo-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.demo-control-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--uilib-muted, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.demo-control-buttons {
+  display: flex;
+  gap: 0.375rem;
+}
+
+// ---- Event log -----------------------------------------------------------
+
+.demo-event-log {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.demo-event-log__empty {
+  font-size: 0.875rem;
+  color: var(--uilib-muted, #6b7280);
+  font-style: italic;
+}
+
+.demo-event-log__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.demo-event-log__entry {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--uilib-surface-100, #f8f9fa);
+  border-radius: 4px;
+  border-left: 3px solid var(--uilib-color-primary, #6366f1);
+}
+
+// ---- Plain-text bullet list ----------------------------------------------
+
+.demo-list {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+  color: var(--uilib-muted, #6b7280);
+  font-size: 0.9rem;
+  line-height: 1.7;
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  kbd,
+  code {
+    font-size: 0.85em;
+  }
+}
+
+// ---- API table -----------------------------------------------------------
+
+.demo-api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+
+  th {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    background: var(--uilib-surface-100, #f8f9fa);
+    border-bottom: 2px solid var(--uilib-color-border, #dee2e6);
+    font-weight: 600;
+  }
+
+  td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--uilib-color-border, #dee2e6);
+    vertical-align: top;
+  }
+
+  code,
+  kbd {
+    background: var(--uilib-surface-100, #f1f3f5);
+    padding: 0.125rem 0.375rem;
+    border-radius: 3px;
+    font-size: 0.8125rem;
+  }
+}
+
+// ---- Accessibility tables (ui-lib-table) ---------------------------------
+
+.demo-a11y-table {
+  margin-bottom: 1.5rem;
+
+  kbd {
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    background: var(--uilib-surface-100, #f3f4f6);
+    border: 1px solid var(--uilib-color-border, #dee2e6);
+    border-radius: 3px;
+    font-size: 0.8125rem;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  code {
+    font-size: 0.8125rem;
+  }
+}
