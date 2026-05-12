@@ -1,5 +1,6 @@
-import { Directive, ElementRef, NgZone, inject, input } from '@angular/core';
+import { PLATFORM_ID, Directive, ElementRef, NgZone, inject, input } from '@angular/core';
 import type { InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * Ripple directive — adds a Material-style circular ripple effect to any element on click.
@@ -40,11 +41,15 @@ export class Ripple implements OnInit, OnDestroy {
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly ngZone: NgZone = inject(NgZone);
+  private readonly platformId: object = inject(PLATFORM_ID);
 
   private clickListener: ((event: MouseEvent) => void) | null = null;
 
   /** @inheritdoc */
   public ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     this.ngZone.runOutsideAngular((): void => {
       this.clickListener = (event: MouseEvent): void => {
         this.onHostClick(event);
@@ -76,8 +81,24 @@ export class Ripple implements OnInit, OnDestroy {
     this.spawnWave(event);
   }
 
+  /**
+   * Returns `true` when the user has requested reduced motion via the OS
+   * accessibility setting. Under reduced motion the ripple must not fire at all.
+   */
+  private prefersReducedMotion(): boolean {
+    return (
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+  }
+
   /** Create, position, animate, and clean up a single ripple wave element. */
   private spawnWave(event: MouseEvent): void {
+    if (this.prefersReducedMotion()) {
+      return;
+    }
+
     const host: HTMLElement = this.elementRef.nativeElement;
     const rect: DOMRect = host.getBoundingClientRect();
 

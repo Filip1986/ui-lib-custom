@@ -65,6 +65,8 @@ ui-lib-button {
   --uilib-button-glass-shadow-y: 8px;
   --uilib-button-glass-shadow-hover-x: 12px; /* Tailwind translate-3 = 0.75rem = 12px */
   --uilib-button-glass-shadow-hover-y: 12px;
+  --uilib-button-glass-shadow-active-x: 4px; /* Tailwind translate-1 = 0.25rem = 4px */
+  --uilib-button-glass-shadow-active-y: 4px;
   --uilib-button-glass-shadow-glow-blur: 0.2px;
   --uilib-button-glass-shadow-blur-amount: 8px;
   --uilib-button-glass-shadow-bg: rgba(255, 255, 255, 0.2);
@@ -72,6 +74,10 @@ ui-lib-button {
   --uilib-button-glass-shadow-border-color: rgba(255, 255, 255, 0.2);
   --uilib-button-glass-shadow-border-hover: rgba(255, 255, 255, 0.35);
   --uilib-button-glass-shadow-fg: #000;
+  --uilib-button-glass-shadow-font-weight: 500;
+  --uilib-button-glass-shadow-letter-spacing: -0.025em;
+  --uilib-button-glass-shadow-gradient-angle: 90deg;
+  --uilib-button-glass-shadow-opacity: 0.9;
 
   /* Tactile appearance token defaults */
   --uilib-button-tactile-from: #4aa6ff;
@@ -271,8 +277,8 @@ ui-lib-button .ui-lib-button {
     box-shadow: none;
     position: relative;
     z-index: 1;
-    font-weight: 500; /* Tailwind font-medium */
-    letter-spacing: -0.025em; /* Tailwind tracking-tight */
+    font-weight: var(--uilib-button-glass-shadow-font-weight); /* Tailwind font-medium */
+    letter-spacing: var(--uilib-button-glass-shadow-letter-spacing); /* Tailwind tracking-tight */
     transition:
       background 0.3s ease,
       transform 0.3s ease,
@@ -287,7 +293,10 @@ ui-lib-button .ui-lib-button {
 
     &:active:not(.ui-lib-button--disabled) {
       /* Button snaps 4px toward shadow (Tailwind translate-1 = 0.25rem = 4px) */
-      transform: translate(4px, 4px);
+      transform: translate(
+        var(--uilib-button-glass-shadow-active-x),
+        var(--uilib-button-glass-shadow-active-y)
+      );
       background: var(--uilib-button-glass-shadow-bg);
     }
   }
@@ -736,7 +745,7 @@ ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow) {
     inset: 0;
     border-radius: var(--uilib-button-radius, 6px);
     background: linear-gradient(
-      90deg,
+      var(--uilib-button-glass-shadow-gradient-angle),
       var(--uilib-button-glass-shadow-from, #ff5f6d) 0%,
       var(--uilib-button-glass-shadow-to, #ffc371) 100%
     );
@@ -745,7 +754,7 @@ ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow) {
       var(--uilib-button-glass-shadow-x, 8px),
       var(--uilib-button-glass-shadow-y, 8px)
     );
-    opacity: 0.9;
+    opacity: var(--uilib-button-glass-shadow-opacity);
     transition: transform 0.3s ease;
     pointer-events: none;
     z-index: 0;
