@@ -4,6 +4,41 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
+Changed:
+  - projects/ui-lib-custom/src/lib/divider/divider.ts
+  - projects/ui-lib-custom/src/lib/divider/divider.scss
+  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts
+  - projects/ui-lib-custom/src/lib/divider/divider.a11y.spec.ts (CREATED — 12 tests)
+  - projects/ui-lib-custom/src/lib/divider/README.md
+  - docs/COMPONENT_SCORES.md
+State: Divider hardening complete. The host now supports decorative vs. labeled accessibility semantics, generated stable ids per instance, reduced-motion styling fallback, updated DX docs, and dedicated divider a11y regression coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/divider/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=divider --no-coverage (36/36 PASS — 24 unit + 12 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
+---
+
+Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
+Changed:
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
+  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/data-view/README.md
+  - docs/reference/components/DATAVIEW.md
+  - docs/COMPONENT_SCORES.md
+State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Next step: Continue Tier 5 queue hardening with Carousel (#45).
+
+---
+
 Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -72,6 +107,39 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+  - projects/ui-lib-custom/src/lib/tree/tree.html
+  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+  - projects/ui-lib-custom/src/lib/tree/tree.scss
+State: Merged the latest `origin/main` into the TreeSelect accessibility branch again, reconciled the repeated Tree/docs conflicts, preserved the already-validated TreeSelect + Tree accessibility behavior, and kept the newer Skeleton bookkeeping from `main`.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
+Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
+
+Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+State: Restored the missing `TreeContext` methods on `Tree`, reintroduced optional `hostId` support so `TreeSelect` can wire `aria-controls` to the popup tree, and aligned tree rows with the context API by exposing stable row ids/labels plus decorative icon hiding. The original `TS2420` compile error is fixed and the related tree/tree-select accessibility test slice is green again.
+Verification:
+  .\node_modules\.bin\ng.cmd build ui-lib-custom (PASS)
+  .\node_modules\.bin\jest.cmd --testPathPatterns src/lib/tree/ tree-select --no-coverage (172/172 PASS)
+Terminal notes: Initial Jest command using `|` in `--testPathPatterns` was parsed by PowerShell as a pipeline; reran successfully with separate pattern arguments.
+Next step: Commit the verified Tree / TreeSelect repair.
 
 ---
 
@@ -162,6 +230,40 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. `npm run build:demo` succeeded with pre-existing SCSS budget warnings in button/date-picker. Static demo screenshot captured at `/tmp/skeleton-hardening.png`; `ng serve` detached startup was unreliable, so the built demo was served with `python3 -m http.server`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
+Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
+      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
+      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
+      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
+      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
+      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
+      • Bound button aria-label to the resolved non-empty label
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
+      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
+      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
+      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/scroll-top/README.md
+      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
+      • Updated API table docs to reflect the new default button aria-label
+  - docs/COMPONENT_SCORES.md
+      • ScrollTop #75: ⏳ Queued → ✅ Done
+      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
+State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 ---

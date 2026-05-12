@@ -87,7 +87,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 43   | Message         | Same as Alert — live region role correctness                                        | ⏳ Queued   |
 | 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ⏳ Queued   |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
-| 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ⏳ Queued   |
+| 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
 | 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
 | 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ⏳ Queued   |
 | 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ⏳ Queued   |
@@ -108,7 +108,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 58   | Divider         | `role=separator` + `aria-orientation`                     | ✅ Done     |
 | 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
-| 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ⏳ Queued   |
+| 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ✅ Done     |
 | 62   | ScrollPanel     | Keyboard-scrollable region label                          | ✅ Done     |
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ⏳ Queued   |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done     |
@@ -120,7 +120,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 70   | Terminal        | `role=log`, command input labeling                        | ✅ Done     |
 | 71   | Timeline        | Semantic list structure, orientation                      | ✅ Done     |
 | 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
-| 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
+| 73   | FocusTrap       | Correct sentinel node strategy                            | ✅ Done     |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ✅ Done     |
 | 75   | ScrollTop       | `aria-label` on button                                    | ✅ Done     |
 | 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
@@ -188,7 +188,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Toolbar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Fieldset    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Fieldset    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ScrollPanel | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
@@ -239,7 +239,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | PickList          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Carousel          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
-| Galleria          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Galleria          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
 ## Feedback & Status
@@ -277,7 +277,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
 | ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| FocusTrap       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| FocusTrap       | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | AnimateOnScroll | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | AutoFocus       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Bind            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
