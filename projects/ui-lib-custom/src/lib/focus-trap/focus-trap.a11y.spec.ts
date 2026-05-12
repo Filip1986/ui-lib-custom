@@ -152,8 +152,8 @@ describe('FocusTrapDirective (a11y)', (): void => {
       fixture.nativeElement as HTMLElement
     ).querySelector<HTMLElement>('#trap') as HTMLElement;
     const { start, end }: { start: HTMLElement; end: HTMLElement } = querySentinels(container);
-    expect(start.dataset.uiLibFocusTrapSentinel).toBe('start');
-    expect(end.dataset.uiLibFocusTrapSentinel).toBe('end');
+    expect(start.dataset['uiLibFocusTrapSentinel']).toBe('start');
+    expect(end.dataset['uiLibFocusTrapSentinel']).toBe('end');
   });
 
   it('marks sentinel nodes aria-hidden and tabbable', async (): Promise<void> => {
