@@ -37,6 +37,74 @@ Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass
 
 ---
 
+Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
+Changed:
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
+      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
+      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
+      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
+      • Added `private focusTrap: FocusTrap | null = null` field
+      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
+      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
+      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
+      • Added `[id]="titleId"` to the title span for the ARIA association
+      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
+      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
+      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
+      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
+      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
+  - docs/COMPONENT_SCORES.md
+      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
+Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
+Changed:
+  - projects/ui-lib-custom/src/lib/card/card.ts
+      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
+      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
+  - projects/ui-lib-custom/src/lib/card/card.html
+      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
+      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
+  - projects/ui-lib-custom/src/lib/card/card.scss
+      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
+      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
+      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
+  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
+      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
+      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
+      • Added closable card accessible label coverage
+      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
+      • Added axe checks for basic, hoverable, closable, and multi-variant states
+  - projects/ui-lib-custom/src/lib/card/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
+      • Added full Accessibility section with examples, guidelines, and reduced-motion note
+  - docs/COMPONENT_SCORES.md
+      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
+State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
+
+---
+
 Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
 Changed:
   - projects/ui-lib-custom/src/lib/chart/chart.component.ts

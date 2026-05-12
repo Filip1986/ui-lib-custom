@@ -91,7 +91,7 @@ const basicModel: PanelMenuItem[] = [
 describe('PanelMenu', (): void => {
   // ── Rendering ─────────────────────────────────────────────────────────────
 
-  it('renders a container with aria role and label', (): void => {
+  it('renders a navigation container with aria role and label', (): void => {
     const { fixture, host, el } = setup();
     host.model.set(basicModel);
     host.ariaLabel.set('Navigation');
@@ -99,7 +99,7 @@ describe('PanelMenu', (): void => {
 
     const container: HTMLElement | null = el.querySelector('.ui-lib-panel-menu__container');
     expect(container).toBeTruthy();
-    expect(container?.getAttribute('role')).toBe('menu');
+    expect(container?.getAttribute('role')).toBe('navigation');
     expect(container?.getAttribute('aria-label')).toBe('Navigation');
   });
 

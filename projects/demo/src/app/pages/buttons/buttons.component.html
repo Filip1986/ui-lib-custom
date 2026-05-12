@@ -2,7 +2,7 @@
   <header class="buttons-demo__header">
     <h1 class="buttons-demo__title">Button</h1>
     <p class="buttons-demo__subtitle">
-      Flexible button component with 11 appearances, 9 severities, and orthogonal pill / raised
+      Flexible button component with 12 appearances, 9 severities, and orthogonal pill / raised
       modifiers — all from a single <code>ui-lib-button</code> element.
     </p>
 
@@ -89,6 +89,7 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Default (warm)</p>
           <ui-lib-button
+            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             (click)="logEvent('Glass Shadow clicked')"
@@ -101,6 +102,7 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Cool gradient</p>
           <ui-lib-button
+            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             style="
@@ -117,6 +119,7 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Mint gradient</p>
           <ui-lib-button
+            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             style="
@@ -133,6 +136,7 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Pill modifier</p>
           <ui-lib-button
+            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             [pill]="true"
@@ -146,6 +150,7 @@
         <div class="buttons-demo__glass-shadow-cell">
           <p class="buttons-demo__glass-shadow-label">Disabled</p>
           <ui-lib-button
+            [variant]="activeVariant()"
             appearance="glass-shadow"
             size="lg"
             [disabled]="true"

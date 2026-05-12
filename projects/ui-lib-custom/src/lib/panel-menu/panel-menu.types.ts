@@ -28,6 +28,8 @@ export interface PanelMenuPanelToggleEvent {
  * (clickable actions / navigation links).
  */
 export interface PanelMenuItem {
+  /** Optional stable identity key for tracking and automation hooks. */
+  id?: string;
   /** Display label. */
   label?: string;
   /** Icon class or semantic icon name rendered before the label. */

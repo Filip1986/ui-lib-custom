@@ -56,6 +56,33 @@ Override the global defaults in your stylesheet:
 | `rippleColor`    | `string`  | `''`    | Inline override for `--uilib-ripple-color`. Any valid CSS colour (e.g. `rgba(...)`). |
 | `rippleDuration` | `string`  | `''`    | Inline override for `--uilib-ripple-duration` (e.g. `'400ms'`).                    |
 
+## CSS custom properties
+
+| Variable                  | Default                         | Description                         |
+| ------------------------- | ------------------------------- | ------------------------------------ |
+| `--uilib-ripple-color`    | `rgba(255, 255, 255, 0.35)`     | Wave background colour.             |
+| `--uilib-ripple-duration` | `600ms`                         | Animation duration.                 |
+| `--uilib-ripple-easing`   | `cubic-bezier(0.4, 0, 0.2, 1)` | Animation timing function.          |
+
+## ARIA attributes
+
+The Ripple directive is **purely decorative** — it does not alter the host element's ARIA semantics in any way.
+
+| Attribute | Where applied | Value | Notes |
+| --------- | ------------- | ----- | ----- |
+| *(none)*  | —             | —     | No ARIA attributes are added or modified. |
+
+The wave `<span>` element contains no text and has `pointer-events: none`, so it is transparent to assistive technologies.
+
+## Keyboard interaction
+
+| Key       | Behaviour                                                                 |
+| --------- | ------------------------------------------------------------------------- |
+| `Enter`   | Fires the native `click` event on `<button>` / `<a>` — ripple responds.  |
+| `Space`   | Same as above for `<button>` elements.                                    |
+
+No extra key wiring is needed. The directive listens to `click` events, and browsers naturally fire `click` on `Enter`/`Space` for interactive elements.
+
 ## How it works
 
 1. On `click`, a `<span class="ui-lib-ripple-wave">` is appended inside the host element.
@@ -65,17 +92,25 @@ Override the global defaults in your stylesheet:
 
 The host element automatically receives `position: relative` and `overflow: hidden` via the `ui-lib-ripple` class so the wave is clipped inside the element bounds.
 
-## CSS variables
-
-| Variable                  | Default                          | Description                          |
-| ------------------------- | -------------------------------- | ------------------------------------ |
-| `--uilib-ripple-color`    | `rgba(255, 255, 255, 0.35)`      | Wave background colour.              |
-| `--uilib-ripple-duration` | `600ms`                          | Animation duration.                  |
-| `--uilib-ripple-easing`   | `cubic-bezier(0.4, 0, 0.2, 1)`  | Animation timing function.           |
-
 ## Accessibility
 
-- The directive does not alter the host's role, tab-stop, or keyboard behaviour.
-- The wave `<span>` is `pointer-events: none` and invisible to screen readers (`aria-hidden` is not needed as it contains no text).
-- For keyboard-activated controls (e.g. `<button>`) the ripple is triggered via the click event which fires on `Enter`/`Space` by default — no extra wiring required.
+### Decorative only
+
+The Ripple directive is a visual enhancement — it carries no semantic meaning. It does **not** change the host's `role`, tab-stop, keyboard behaviour, or any ARIA attribute.
+
+### `prefers-reduced-motion`
+
+When the user has enabled the **Reduce Motion** accessibility setting, the ripple animation is **completely suppressed** — the wave element is never added to the DOM. This is enforced in two layers:
+
+1. **JavaScript (primary):** `window.matchMedia('(prefers-reduced-motion: reduce)').matches` is checked on every click. If `true`, `spawnWave()` returns immediately — no DOM mutation occurs.
+2. **CSS (defence-in-depth):** A `@media (prefers-reduced-motion: reduce)` block sets `animation: none; display: none` on `.ui-lib-ripple-wave`, ensuring no animation can run even if the element were somehow added.
+
+### Screen readers
+
+- The wave `<span>` is `pointer-events: none` and contains no text, so it is invisible to screen readers.
+- For keyboard-activated controls (e.g. `<button>`) the ripple is triggered via the `click` event which fires on `Enter`/`Space` by default — no extra wiring required.
+
+### SSR safety
+
+The click listener is only registered in browser environments (`isPlatformBrowser` check in `ngOnInit`). Server-side rendering is fully supported.
 
