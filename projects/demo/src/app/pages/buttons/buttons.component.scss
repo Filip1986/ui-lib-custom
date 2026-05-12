@@ -315,3 +315,38 @@
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.45);
 }
+
+// ── Framed showcase ────────────────────────────────────────────────────────────
+
+.buttons-demo__section--framed {
+  // Dark background to match the reference design's premium dark canvas
+  ui-lib-card {
+    background: #0f0f0f !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
+.buttons-demo__framed-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem 5rem;
+  // Extra bottom padding gives room for the offset frame to breathe
+  padding: 2rem 1rem 3rem;
+  align-items: flex-end;
+}
+
+.buttons-demo__framed-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.buttons-demo__framed-label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}

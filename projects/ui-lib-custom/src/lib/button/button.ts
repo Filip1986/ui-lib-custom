@@ -33,7 +33,8 @@ export type ButtonAppearance =
   | 'gradient'
   | 'elevated'
   | 'neon'
-  | 'flat';
+  | 'flat'
+  | 'framed';
 export type ButtonSeverity =
   | 'primary'
   | 'secondary'

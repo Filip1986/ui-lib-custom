@@ -69,6 +69,7 @@ export class ButtonsComponent {
     'glass-shadow',
     'neon',
     'tactile',
+    'framed',
   ];
 
   public readonly severities: ButtonSeverity[] = [
@@ -93,7 +94,7 @@ export class ButtonsComponent {
     },
     {
       name: 'appearance',
-      type: "'solid' | 'outline' | 'ghost' | 'soft' | 'link' | 'flat' | 'elevated' | 'gradient' | 'glass' | 'glass-shadow' | 'neon' | 'tactile'",
+      type: "'solid' | 'outline' | 'ghost' | 'soft' | 'link' | 'flat' | 'elevated' | 'gradient' | 'glass' | 'glass-shadow' | 'neon' | 'tactile' | 'framed'",
       default: "'solid'",
       description:
         'Visual style. All 12 appearances compose with any severity and the pill / raised modifiers.',
