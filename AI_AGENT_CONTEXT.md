@@ -63,6 +63,37 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Skeleton component — 6-phase hardening COMPLETE (#55)]
+Changed:
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.ts
+      • Added module-level `nextSkeletonId` counter and unique host `instanceId`
+      • Added `loading` and `ariaLabel` inputs with trimmed `effectiveAriaLabel`
+      • Moved accessibility semantics to host (`role=status`, `aria-live`, `aria-atomic`, `aria-busy`, `aria-label`) while loading
+      • Limited skeleton sizing/shape/variant classes to the loading state so projected content renders cleanly once loading completes
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.html
+      • Added always-rendered content projection wrapper with `aria-hidden`/`inert` while loading
+      • Added decorative placeholder wrapper and shimmer node with `aria-hidden="true"`
+      • Removes the placeholder from the DOM once `loading` becomes false
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.scss
+      • Added zero-layout `display: contents` content wrapper and loading-only placeholder styles
+      • Added `prefers-reduced-motion: reduce` override to stop shimmer animation
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.spec.ts
+      • Updated unit coverage for aria-busy, decorative aria-hidden, unique ids, and projected content reveal
+  - projects/ui-lib-custom/src/lib/skeleton/skeleton.a11y.spec.ts (CREATED — 18 tests)
+      • Added ARIA structure, loading completion, focus/instance behaviour, and axe-core regression coverage
+  - projects/ui-lib-custom/src/lib/skeleton/README.md
+      • Added `loading`/`ariaLabel` docs, ARIA attributes table, keyboard table, projected-content example, and accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Skeleton #55: ⏳ Queued → ✅ Done; score row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.6)
+State: Skeleton hardening complete. Decorative placeholder nodes are hidden from assistive tech, the host now announces loading with aria-busy + aria-label, projected content can replace the skeleton cleanly, reduced-motion support is in place, and dedicated a11y regression coverage was added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/skeleton/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=skeleton --no-coverage (41/41 PASS — 23 unit + 18 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. `npm run build:demo` succeeded with pre-existing SCSS budget warnings in button/date-picker. Static demo screenshot captured at `/tmp/skeleton-hardening.png`; `ng serve` detached startup was unreliable, so the built demo was served with `python3 -m http.server`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
 Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
 Changed:
   - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
@@ -124,31 +155,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
-Changed:
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
-      • Added module-level `let nextProgressSpinnerId: number = 0` counter
-      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
-      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
-      • Added dark mode overrides for bootstrap and minimal variant arc colours
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
-      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
-      • ariaLabel reactive updates, two-instance ID uniqueness
-      • Visual state (size classes sm/lg)
-      • axe-core automated checks (5 states)
-  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
-      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
-  - docs/COMPONENT_SCORES.md
-      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
-Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.

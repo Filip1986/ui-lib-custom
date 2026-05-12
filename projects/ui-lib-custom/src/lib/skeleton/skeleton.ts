@@ -11,6 +11,8 @@ import {
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skeleton.types';
 
+let nextSkeletonId: number = 0;
+
 export type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skeleton.types';
 
 /**
@@ -30,17 +32,28 @@ export type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skelet
   templateUrl: './skeleton.html',
   styleUrl: './skeleton.scss',
   host: {
+    '[attr.id]': 'instanceId',
     '[class]': 'hostClasses()',
-    '[style.width]': 'effectiveWidth()',
-    '[style.height]': 'effectiveHeight()',
-    '[style.border-radius]': 'effectiveBorderRadius()',
-    'aria-hidden': 'true',
+    '[attr.role]': 'loading() ? "status" : null',
+    '[attr.aria-live]': 'loading() ? "polite" : null',
+    '[attr.aria-atomic]': 'loading() ? "true" : null',
+    '[attr.aria-busy]': 'loading()',
+    '[attr.aria-label]': 'loading() ? effectiveAriaLabel() : null',
+    '[style.width]': 'loading() ? effectiveWidth() : null',
+    '[style.height]': 'loading() ? effectiveHeight() : null',
+    '[style.border-radius]': 'loading() ? effectiveBorderRadius() : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class Skeleton {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  /** Unique host ID for this instance. */
+  public readonly instanceId: string = `ui-lib-skeleton-${++nextSkeletonId}`;
+
+  /** Whether the skeleton placeholder is still loading. */
+  public readonly loading: InputSignal<boolean> = input<boolean>(true);
 
   /** Shape of the skeleton placeholder. */
   public readonly shape: InputSignal<SkeletonShape> = input<SkeletonShape>('rectangle');
@@ -71,20 +84,32 @@ export class Skeleton {
   /** Additional CSS classes applied to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
+  /** Accessible label announced while the loading placeholder is active. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('Loading content');
+
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<SkeletonVariant> = computed<SkeletonVariant>(
     (): SkeletonVariant => this.variant() ?? this.themeConfig.variant()
   );
 
+  /** Resolved accessible label — trims empty values back to a sensible default. */
+  public readonly effectiveAriaLabel: Signal<string> = computed<string>((): string => {
+    const label: string = this.ariaLabel().trim();
+    return label.length > 0 ? label : 'Loading content';
+  });
+
   /** Computed CSS classes applied to the host element. */
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
-    const classes: string[] = [
-      'ui-lib-skeleton',
-      `ui-lib-skeleton--shape-${this.shape()}`,
-      `ui-lib-skeleton--variant-${this.effectiveVariant()}`,
-    ];
-    if (this.animation() === 'wave') {
-      classes.push('ui-lib-skeleton--wave');
+    const classes: string[] = ['ui-lib-skeleton'];
+    if (this.loading()) {
+      classes.push(
+        'ui-lib-skeleton--loading',
+        `ui-lib-skeleton--shape-${this.shape()}`,
+        `ui-lib-skeleton--variant-${this.effectiveVariant()}`
+      );
+      if (this.animation() === 'wave') {
+        classes.push('ui-lib-skeleton--wave');
+      }
     }
     const extra: string | null = this.styleClass();
     if (extra) {
