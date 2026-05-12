@@ -21,7 +21,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Component foundation hardening + documentation completeness
 - **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
-- **Next queue:** SpeedDial hardening (Tier 5, #47) — icon-only action labels and expanded-state semantics
+- **Next queue:** Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45)
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -92,6 +92,26 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validations. Playwright browsers were installed with `npx playwright install chromium` to capture `/tmp/galleria-hardening.png`.
 Next step: SpeedDial hardening (Tier 5, #47).
 
+Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
+Changed:
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
+  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/data-view/README.md
+  - docs/reference/components/DATAVIEW.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
+Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
+
 Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -104,23 +124,3 @@ Verification:
   .\node_modules\.bin\jest.cmd --testPathPatterns src/lib/tree/ tree-select --no-coverage (172/172 PASS)
 Terminal notes: Initial Jest command using `|` in `--testPathPatterns` was parsed by PowerShell as a pipeline; reran successfully with separate pattern arguments.
 Next step: Commit the verified Tree / TreeSelect repair.
-
-Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/COMPONENT_SCORES.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/tree/tree.ts
-  - projects/ui-lib-custom/src/lib/tree/tree.html
-  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
-  - projects/ui-lib-custom/src/lib/tree/tree-node.html
-  - projects/ui-lib-custom/src/lib/tree/tree.scss
-State: Merged the latest `origin/main` into the TreeSelect accessibility branch again, reconciled the repeated Tree/docs conflicts, preserved the already-validated TreeSelect + Tree accessibility behavior, and kept the newer Skeleton bookkeeping from `main`.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
-Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
