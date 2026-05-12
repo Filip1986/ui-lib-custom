@@ -60,6 +60,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Merge conflict resolution for glass-shadow button PR]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved merge conflict by preserving the newest three handoffs in active context
+      • Added this merge-resolution handoff and kept recent session state concise
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the displaced older handoff during the merge resolution
+  - tsconfig.json
+      • Added `compilerOptions.ignoreDeprecations: "5.0"` so the TypeScript 5.9 pre-push `npm run typecheck` hook passes with the existing `baseUrl` setting
+State: Branch is merged with the latest origin/main. Merge conflicts were limited to session-context files, and the pre-push typecheck blocker was resolved without changing application logic.
+Verification:
+  npm install (PASS)
+  npm run typecheck (PASS)
+Terminal notes: Repository was a shallow clone, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before merging. Initial typecheck first failed on the `baseUrl` deprecation gate, and then on missing local packages until `npm install` was rerun.
+Next step: Continue with the next queued component hardening item once this PR is mergeable again.
+
+Date: 2026-05-12 [Button component — glass-shadow appearance polish]
+Changed:
+  - projects/ui-lib-custom/src/lib/button/button.scss
+      • Exposed remaining glass-shadow style values as CSS custom properties (`active-x/y`, font weight, letter spacing, gradient angle, opacity)
+      • Replaced remaining hardcoded glass-shadow active/gradient/opacity values with token usage
+  - projects/ui-lib-custom/src/lib/button/button.spec.ts
+      • Added `glass-shadow` coverage to the appearance class regression test matrix
+  - projects/ui-lib-custom/src/lib/button/button.ts
+      • Updated component description to reflect 12 appearances
+  - projects/ui-lib-custom/src/lib/button/README.md
+      • Updated appearance count math, documented `glass-shadow`, and added a usage example
+  - projects/demo/src/app/pages/buttons/buttons.component.html
+      • Updated demo copy to 12 appearances
+      • Wired the dedicated Glass Shadow demo buttons to the active variant switcher
+State: Glass-shadow button appearance is fully wired with tokenized styling values, docs/test coverage, and a variant-aware demo section. No broader button hardening work was started.
+Verification:
+  npm install (PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ projects/demo/src/app/pages/buttons/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=projects/ui-lib-custom/src/lib/button --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+Terminal notes: Fresh clone required `npm install` before validation. An initial ESLint retry using `--ext .ts,.scss,.html` failed by parsing SCSS with the wrong parser; the repository's standard directory-based ESLint command succeeded. Captured the updated demo screenshot after starting `npm run serve:demo` and installing Playwright Chromium locally.
+Next step: Resume the queued hardening track with TreeTable (#33) when button appearance follow-up is no longer needed.
+
 Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
 Changed:
   - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
@@ -87,67 +126,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
 Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
-
-Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
-Changed:
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
-      • Added module-level `let nextBlockUiId: number = 0` counter
-      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
-      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
-      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
-      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
-      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
-      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
-      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
-      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
-      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
-  - projects/ui-lib-custom/src/lib/block-ui/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
-  - docs/COMPONENT_SCORES.md
-      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
-State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
-  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
-Changed:
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
-      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
-      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
-      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
-      • Added `private focusTrap: FocusTrap | null = null` field
-      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
-      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
-      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
-      • Added `[id]="titleId"` to the title span for the ARIA association
-      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
-      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
-      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
-      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
-  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
-      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
-  - docs/COMPONENT_SCORES.md
-      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
-State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-

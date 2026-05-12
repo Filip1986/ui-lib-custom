@@ -13,7 +13,7 @@ The Button uses a **two-axis model**:
 | Visual style | `appearance` | Shape, fill, border, effects |
 | Colour semantic | `severity` | Which palette is applied |
 
-Every appearance composes with every severity, giving you 11 × 9 = 99 combinations from a single component. Two orthogonal modifiers (`pill`, `raised`) overlay on top without conflicting with either axis.
+Every appearance composes with every severity, giving you 12 × 9 = 108 combinations from a single component. Two orthogonal modifiers (`pill`, `raised`) overlay on top without conflicting with either axis.
 
 ## Inputs
 
@@ -38,6 +38,7 @@ Every appearance composes with every severity, giving you 11 × 9 = 99 combinati
 | `elevated` | Filled with colour-matched drop shadow; lifts on hover |
 | `gradient` | Two-tone diagonal gradient fill |
 | `glass` | Frosted glass with `backdrop-filter: blur` |
+| `glass-shadow` | Frosted glass foreground with an offset gradient shadow layer |
 | `neon` | Outline with glow ring on hover |
 | `tactile` | 3D glossy gradient with inset highlight and press-down state |
 
@@ -123,6 +124,7 @@ _none_ — use native `(click)` on the host element.
 <ui-lib-button appearance="elevated" severity="primary" icon="layers">Elevated</ui-lib-button>
 <ui-lib-button appearance="gradient" severity="primary">Gradient</ui-lib-button>
 <ui-lib-button appearance="glass"    severity="info"   [pill]="true">Glass Pill</ui-lib-button>
+<ui-lib-button appearance="glass-shadow">Glass Shadow</ui-lib-button>
 <ui-lib-button appearance="neon"     severity="success">Neon</ui-lib-button>
 <ui-lib-button appearance="tactile"  severity="primary" icon="search">Tactile</ui-lib-button>
 
