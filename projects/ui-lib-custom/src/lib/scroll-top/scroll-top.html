@@ -1,9 +1,10 @@
 <button
   type="button"
   class="ui-lib-scroll-top__button"
-  [attr.aria-label]="buttonAriaLabel()"
+  [attr.aria-hidden]="isVisible() ? null : 'true'"
+  [attr.aria-label]="resolvedButtonAriaLabel()"
+  [attr.tabindex]="isVisible() ? null : -1"
   (click)="scrollToTop()"
 >
   <span [class]="icon()" aria-hidden="true"></span>
 </button>
-

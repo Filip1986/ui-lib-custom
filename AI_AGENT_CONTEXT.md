@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** MeterGroup and Panel accessibility hardening COMPLETE (6-phase, #57/#60); Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** ScrollTop, MeterGroup, and Panel accessibility hardening COMPLETE (6-phase, #75/#57/#60); Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -49,6 +49,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 - `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
+- `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
 
 ---
 
@@ -62,6 +63,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
+      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
+      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
+      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
+      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
+      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
+      • Bound button aria-label to the resolved non-empty label
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
+      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
+      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
+      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/scroll-top/README.md
+      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
+      • Updated API table docs to reflect the new default button aria-label
+  - docs/COMPONENT_SCORES.md
+      • ScrollTop #75: ⏳ Queued → ✅ Done
+      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
+State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
 Changed:
@@ -124,31 +157,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
-Changed:
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
-      • Added module-level `let nextProgressSpinnerId: number = 0` counter
-      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
-      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
-      • Added dark mode overrides for bootstrap and minimal variant arc colours
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
-      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
-      • ariaLabel reactive updates, two-instance ID uniqueness
-      • Visual state (size classes sm/lg)
-      • axe-core automated checks (5 states)
-  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
-      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
-  - docs/COMPONENT_SCORES.md
-      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
-Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.

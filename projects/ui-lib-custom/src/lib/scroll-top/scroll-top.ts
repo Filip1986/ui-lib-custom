@@ -1,3 +1,4 @@
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +16,6 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type {
   ScrollTopBehavior,
@@ -30,6 +30,8 @@ export type {
   ScrollTopTarget,
   ScrollTopVariant,
 } from './scroll-top.types';
+
+let nextScrollTopId: number = 0;
 
 /**
  * ScrollTop — a floating "back to top" button that appears after the user
@@ -57,17 +59,24 @@ export type {
   styleUrl: './scroll-top.scss',
   host: {
     '[class]': 'hostClasses()',
+    '[attr.id]': 'scrollTopId',
+    '[attr.aria-hidden]': 'isVisible() ? null : "true"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollTop implements OnInit {
+  private static readonly defaultAriaLabel: string = 'Scroll to top';
+
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly documentRef: Document = inject(DOCUMENT);
   private readonly ngZone: NgZone = inject(NgZone);
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
+
+  public readonly scrollTopId: string = `ui-lib-scroll-top-${++nextScrollTopId}`;
 
   /** Scroll distance in pixels before the button becomes visible. */
   public readonly threshold: InputSignal<number> = input<number>(400);
@@ -82,7 +91,7 @@ export class ScrollTop implements OnInit {
   public readonly behavior: InputSignal<ScrollTopBehavior> = input<ScrollTopBehavior>('smooth');
 
   /** Accessible label for the button. */
-  public readonly buttonAriaLabel: InputSignal<string> = input<string>('Back to top');
+  public readonly buttonAriaLabel: InputSignal<string> = input<string>(ScrollTop.defaultAriaLabel);
 
   /** Size of the button. */
   public readonly size: InputSignal<ScrollTopSize> = input<ScrollTopSize>('md');
@@ -97,6 +106,12 @@ export class ScrollTop implements OnInit {
 
   /** Whether the button is currently visible (scroll position exceeds threshold). */
   public readonly isVisible: WritableSignal<boolean> = signal<boolean>(false);
+
+  /** Resolved button aria-label with a non-empty fallback for icon-only usage. */
+  public readonly resolvedButtonAriaLabel: Signal<string> = computed<string>((): string => {
+    const ariaLabel: string = this.buttonAriaLabel().trim();
+    return ariaLabel.length > 0 ? ariaLabel : ScrollTop.defaultAriaLabel;
+  });
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ScrollTopVariant> = computed<ScrollTopVariant>(
@@ -132,6 +147,7 @@ export class ScrollTop implements OnInit {
 
     this.ngZone.runOutsideAngular((): void => {
       this.bindScrollListener();
+      this.checkScrollPosition();
     });
 
     this.destroyRef.onDestroy((): void => {
@@ -141,8 +157,9 @@ export class ScrollTop implements OnInit {
 
   /** Scrolls back to the top of the target (window or parent element). */
   public scrollToTop(): void {
+    const defaultView: Window | null = this.documentRef.defaultView;
     if (this.target() === 'window') {
-      window.scrollTo({ top: 0, behavior: this.behavior() });
+      defaultView?.scrollTo({ top: 0, behavior: this.behavior() });
     } else {
       const parentEl: HTMLElement | null = this.elementRef.nativeElement.parentElement;
       parentEl?.scrollTo({ top: 0, behavior: this.behavior() });
@@ -155,7 +172,7 @@ export class ScrollTop implements OnInit {
 
   private bindScrollListener(): void {
     if (this.target() === 'window') {
-      this.scrollEventTarget = window;
+      this.scrollEventTarget = this.documentRef.defaultView;
     } else {
       this.scrollEventTarget = this.elementRef.nativeElement.parentElement;
     }
@@ -183,7 +200,8 @@ export class ScrollTop implements OnInit {
     let scrollTop: number = 0;
 
     if (this.target() === 'window') {
-      scrollTop = window.scrollY;
+      const defaultView: Window | null = this.documentRef.defaultView;
+      scrollTop = defaultView ? defaultView.scrollY : this.documentRef.documentElement.scrollTop;
     } else {
       const parentEl: HTMLElement | null = this.elementRef.nativeElement.parentElement;
       scrollTop = parentEl?.scrollTop ?? 0;

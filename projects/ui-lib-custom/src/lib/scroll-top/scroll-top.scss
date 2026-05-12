@@ -162,4 +162,35 @@ ui-lib-scroll-top {
     --uilib-scroll-top-color: var(--uilib-color-text, #f9fafb);
     --uilib-scroll-top-border: 1px solid var(--uilib-surface-600, #4b5563);
   }
+
+  [data-theme='dark'] &--variant-material,
+  &--variant-material[data-theme='dark'] {
+    --uilib-scroll-top-bg: var(--uilib-color-primary, #818cf8);
+    --uilib-scroll-top-bg-hover: var(--uilib-color-primary-dark, #6366f1);
+    --uilib-scroll-top-shadow: 0 4px 12px rgba(99, 102, 241, 0.45);
+    --uilib-scroll-top-shadow-hover: 0 6px 18px rgba(99, 102, 241, 0.55);
+  }
+
+  [data-theme='dark'] &--variant-bootstrap,
+  &--variant-bootstrap[data-theme='dark'] {
+    --uilib-scroll-top-bg: #3b82f6;
+    --uilib-scroll-top-bg-hover: #2563eb;
+    --uilib-scroll-top-shadow: 0 2px 6px rgba(59, 130, 246, 0.35);
+    --uilib-scroll-top-shadow-hover: 0 4px 10px rgba(59, 130, 246, 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-scroll-top,
+  .ui-lib-scroll-top__button {
+    transition: none;
+  }
+
+  .ui-lib-scroll-top {
+    transform: none;
+  }
+
+  .ui-lib-scroll-top__button:active {
+    transform: none;
+  }
 }
