@@ -32,12 +32,12 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 ### Tier 2 — Navigation & Menu Patterns
 *Focus: `role=menu/menubar/menuitem`, arrow key navigation, `aria-expanded` on submenus, `aria-current` on active items.*
 
-| #    | Component   | Key a11y concern                                                                | Status     |
-|------|-------------|---------------------------------------------------------------------------------|------------|
-| 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done     |
-| 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done     |
-| 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done     |
-| 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ✅ Done     |
+| #    | Component   | Key a11y concern                                                                | Status       |
+|------|-------------|---------------------------------------------------------------------------------|--------------|
+| 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done       |
+| 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done       |
+| 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done       |
+| 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ✅ Done       |
 | 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ✅ Done     |
 | 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done    |
 | 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ✅ Done     |
