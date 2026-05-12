@@ -107,6 +107,19 @@ ui-lib-progress-bar {
     --uilib-progress-bar-track-bg: var(--uilib-surface-700, #374151);
     --uilib-progress-bar-label-color: #f9fafb;
   }
+
+  // ---- Screen-reader only utility ---------------------------------
+  &__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }
 
 // ---- Keyframe: indeterminate oscillation -------------------------
@@ -121,5 +134,13 @@ ui-lib-progress-bar {
 
   100% {
     margin-left: 110%;
+  }
+}
+
+// ---- Reduced motion -----------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-progress-bar__fill {
+    animation: none;
+    transition: none;
   }
 }
