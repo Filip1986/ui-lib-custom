@@ -168,8 +168,28 @@ All tokens follow the pattern `--uilib-terminal-{property}[-{variant}]`:
 
 ## Accessibility
 
-- Host has `role="region"` and `aria-label="Terminal"`.
-- The input has `aria-label="Terminal command input"`.
-- Prompt spans are `aria-hidden="true"` to avoid redundant screen-reader noise.
-- Each response has `aria-live="polite"` to announce new output.
+### ARIA attributes
+
+| Element                            | Attribute                      | Value / Notes                                           |
+| ---------------------------------- | ------------------------------ | ------------------------------------------------------- |
+| `ui-lib-terminal` host             | `role`                         | `region`                                                |
+| `ui-lib-terminal` host             | `aria-label`                   | `"Terminal"`                                            |
+| `ui-lib-terminal` host             | `id`                           | `ui-lib-terminal-{n}` (unique per instance)             |
+| `.ui-lib-terminal__output` div     | `role`                         | `log` (implies `aria-live="polite"`, `aria-relevant="additions text"`) |
+| `.ui-lib-terminal__output` div     | `aria-label`                   | `"Terminal output"`                                     |
+| `.ui-lib-terminal__output` div     | `id`                           | `ui-lib-terminal-{n}-output`                            |
+| `.ui-lib-terminal__output` div     | `aria-atomic`                  | `false` — individual entries are announced incrementally |
+| `.ui-lib-terminal__input` input    | `aria-label`                   | `"Terminal command input"`                              |
+| `.ui-lib-terminal__input` input    | `aria-autocomplete`            | `none`                                                  |
+| `.ui-lib-terminal__prompt` spans   | `aria-hidden`                  | `true` — decorative, not read aloud                     |
+
+### Notes
+
+- The output area uses `role="log"` which is a live region that announces new content as it is added. Screen readers will read out new commands and responses automatically without moving focus.
+- The command input is always focusable and labelled; clicking anywhere on the terminal surface focuses it.
+- Prompt symbols (`$`, `>`, `~`) are wrapped in `aria-hidden="true"` spans so they are not read by screen readers.
+- Focus is never trapped inside the terminal — keyboard users can Tab out at any time.
+- Keyboard focus on the input shows a visible outline (`outline: 2px solid`) drawn using the current prompt-caret colour, so it adapts to all three design variants.
+- Animations and transitions honour `prefers-reduced-motion: reduce` — all durations are collapsed to `0.01ms` when the OS preference is set.
+- See **Keyboard navigation** above for key bindings.
 

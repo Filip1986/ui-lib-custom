@@ -1,18 +1,26 @@
 <div class="ui-lib-terminal__content" #terminalContent (click)="focusInput()">
-  @if (welcomeMessage()) {
-    <div class="ui-lib-terminal__welcome">{{ welcomeMessage() }}</div>
-  }
-  @for (item of history(); track $index) {
-    <div class="ui-lib-terminal__history-item">
-      <div class="ui-lib-terminal__command-row">
-        <span class="ui-lib-terminal__prompt" aria-hidden="true">{{ prompt() }}</span>
-        <span class="ui-lib-terminal__command-text">{{ item.command }}</span>
+  <div
+    class="ui-lib-terminal__output"
+    role="log"
+    [attr.id]="outputId"
+    aria-label="Terminal output"
+    aria-atomic="false"
+  >
+    @if (welcomeMessage()) {
+      <div class="ui-lib-terminal__welcome">{{ welcomeMessage() }}</div>
+    }
+    @for (item of history(); track $index) {
+      <div class="ui-lib-terminal__history-item">
+        <div class="ui-lib-terminal__command-row">
+          <span class="ui-lib-terminal__prompt" aria-hidden="true">{{ prompt() }}</span>
+          <span class="ui-lib-terminal__command-text">{{ item.command }}</span>
+        </div>
+        @if (item.response !== null) {
+          <div class="ui-lib-terminal__response">{{ item.response }}</div>
+        }
       </div>
-      @if (item.response !== null) {
-        <div class="ui-lib-terminal__response" aria-live="polite">{{ item.response }}</div>
-      }
-    </div>
-  }
+    }
+  </div>
   <div class="ui-lib-terminal__input-row">
     <span class="ui-lib-terminal__prompt" aria-hidden="true">{{ prompt() }}</span>
     <input
