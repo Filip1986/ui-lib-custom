@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  type DebugElement,
   provideZonelessChangeDetection,
   signal,
   type Type,
@@ -262,7 +263,9 @@ describe('Tag Accessibility', (): void => {
     const fixture: ComponentFixture<DismissibleTagHostComponent> = await createFixture(
       DismissibleTagHostComponent
     );
-    const tagInstance: Tag = fixture.debugElement.children[0].children[0].componentInstance as Tag;
+    const tagInstance: Tag = fixture.debugElement.query(
+      (element: DebugElement): boolean => element.name === 'ui-lib-tag'
+    ).componentInstance as Tag;
     let emissionCount: number = 0;
     tagInstance.removed.subscribe((): void => {
       emissionCount += 1;
