@@ -12,6 +12,12 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { PANEL_MENU_DEFAULT_ARIA_LABEL, PanelMenu } from './panel-menu';
 import type { PanelMenuItem } from './panel-menu.types';
 
+/**
+ * PanelMenu renders nested structural `<li role="none">` wrappers and recursive
+ * submenu containers. axe's `aria-required-children` rule reports false positives
+ * for this pattern even though runtime semantics are valid (`menuitem` descendants
+ * remain present and keyboard navigation is explicitly covered in tests).
+ */
 const SKIP_PANEL_MENU_STRUCTURE_RULES: Record<string, { enabled: boolean }> = {
   ...SKIP_COLOR_CONTRAST_RULES,
   'aria-required-children': { enabled: false },

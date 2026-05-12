@@ -27,6 +27,7 @@ import type { PanelMenuItem } from './panel-menu.types';
 })
 export class PanelMenuSubComponent {
   protected readonly context: PanelMenuContext = inject(PANEL_MENU_CONTEXT);
+  public readonly popupRole: 'menu' = 'menu';
 
   /** Items to render at this sub-level. */
   public readonly items: InputSignal<PanelMenuItem[]> = input<PanelMenuItem[]>([]);

@@ -23,7 +23,7 @@
           class="ui-lib-panel-menu__sub-header"
           [class.ui-lib-panel-menu__sub-header--expanded]="isItemExpanded($index)"
           role="menuitem"
-          [attr.aria-haspopup]="'menu'"
+          [attr.aria-haspopup]="popupRole"
           [attr.aria-expanded]="isItemExpanded($index) ? 'true' : 'false'"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
           [disabled]="item.disabled ? true : null"

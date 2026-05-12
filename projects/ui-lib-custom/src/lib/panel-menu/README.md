@@ -58,7 +58,7 @@
 | Element | Semantics |
 |---|---|
 | Root container | `role="navigation"` + `aria-label` |
-| Root list | `role="list"` |
+| Root list wrapper | Structural container for root panels/separators |
 | Root expandable header | `<button>` + `aria-expanded` + `aria-controls` + `aria-haspopup="menu"` |
 | Root panel content | `role="region"` + `id` + `aria-labelledby` + collapsed `aria-hidden="true"` |
 | Sub-list | `role="menu"` |

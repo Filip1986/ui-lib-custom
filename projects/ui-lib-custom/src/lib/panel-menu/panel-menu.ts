@@ -95,6 +95,7 @@ export class PanelMenu implements PanelMenuContext {
   /** Accessible label applied to the root container (aria-label). */
   public readonly ariaLabel: InputSignal<string> = input<string>(PANEL_MENU_DEFAULT_ARIA_LABEL);
   public readonly panelMenuId: string = `uilib-panel-menu-${++nextPanelMenuId}`;
+  public readonly popupRole: 'menu' = 'menu';
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 
@@ -343,8 +344,8 @@ export class PanelMenu implements PanelMenuContext {
     }
     return Array.from(
       host.querySelectorAll<HTMLElement>(
-        ':scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > li > .ui-lib-panel-menu__header:not([disabled]), ' +
-          ':scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > li > .ui-lib-panel-menu__root-link:not([aria-disabled="true"])'
+        `:scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > .ui-lib-panel-menu__panel > .ui-lib-panel-menu__header:not([disabled]),
+         :scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > .ui-lib-panel-menu__panel > .ui-lib-panel-menu__root-link:not([aria-disabled="true"])`
       )
     );
   }
