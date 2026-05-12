@@ -1,3 +1,5 @@
+@use '../../shared/styles/doc-page.scss';
+
 .doc-tabs {
   margin-bottom: 1rem;
 }
@@ -106,7 +108,10 @@
   background: var(--uilib-surface, #fff);
   color: var(--uilib-color-text-secondary, #6b7280);
   border: 1px solid var(--uilib-color-border, #e5e7eb);
-  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease,
+    background 150ms ease;
 }
 
 .custom-indicator.active {

@@ -21,6 +21,8 @@ import type { ControlValueAccessor } from '@angular/forms';
 import { INPUT_OTP_DEFAULTS } from './input-otp.types';
 import type { InputOtpChangeEvent, InputOtpSize } from './input-otp.types';
 
+let nextInputOtpId: number = 0;
+
 /**
  * InputOtp component — renders N individual input cells for one-time password entry.
  * Supports CVA (ngModel / reactive forms), keyboard navigation, paste, mask, and integer-only modes.
@@ -41,6 +43,11 @@ import type { InputOtpChangeEvent, InputOtpSize } from './input-otp.types';
   ],
   host: {
     class: 'uilib-input-otp',
+    '[attr.id]': 'otpId()',
+    '[attr.role]': '"group"',
+    '[attr.aria-label]': 'groupAriaLabel()',
+    '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
+    '[attr.aria-describedby]': 'errorDescribedBy()',
     '[class.uilib-input-otp-sm]': 'size() === "sm"',
     '[class.uilib-input-otp-lg]': 'size() === "lg"',
     '[class.uilib-input-otp-filled]': 'filled()',
@@ -52,6 +59,24 @@ import type { InputOtpChangeEvent, InputOtpSize } from './input-otp.types';
 export class InputOtpComponent implements ControlValueAccessor {
   /** Number of OTP input cells to render. */
   public readonly length: InputSignal<number> = input<number>(INPUT_OTP_DEFAULTS.length);
+
+  /** Optional explicit id for the OTP group container. */
+  public readonly id: InputSignal<string | null> = input<string | null>(null);
+
+  /** Accessible name for the OTP group container. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>('One-time passcode');
+
+  /** Optional external label element id for the OTP group container. */
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+
+  /** Prefix for cell position labels, used for i18n customization. */
+  public readonly digitAriaLabelPrefix: InputSignal<string> = input<string>('Digit');
+
+  /** Connector text for cell position labels, used for i18n customization. */
+  public readonly digitAriaLabelConnector: InputSignal<string> = input<string>('of');
+
+  /** Text announced in live region after a successful paste. */
+  public readonly pasteAnnouncement: InputSignal<string> = input<string>('Code entered.');
 
   /** When true, each cell renders as a password field (dots). */
   public readonly mask: InputSignal<boolean> = input<boolean>(INPUT_OTP_DEFAULTS.mask);
@@ -101,6 +126,8 @@ export class InputOtpComponent implements ControlValueAccessor {
 
   // CVA disabled state set by forms API.
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
+  private readonly generatedOtpId: string = `ui-lib-input-otp-${nextInputOtpId++}`;
+  private readonly pasteAnnouncementMessage: WritableSignal<string> = signal<string>('');
 
   private onModelChange: (value: string) => void = (): void => {};
   private onModelTouched: () => void = (): void => {};
@@ -124,9 +151,33 @@ export class InputOtpComponent implements ControlValueAccessor {
     this.integerOnly() ? 'numeric' : 'text'
   );
 
+  protected readonly otpId: Signal<string> = computed<string>(
+    (): string => this.id() ?? this.generatedOtpId
+  );
+
+  protected readonly errorDescribedBy: Signal<string | null> = computed<string | null>(
+    (): string | null => (this.invalid() ? `${this.otpId()}-error` : null)
+  );
+
+  protected readonly groupAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => (this.ariaLabelledBy() ? null : (this.ariaLabel() ?? 'One-time passcode'))
+  );
+
+  protected readonly errorId: Signal<string> = computed<string>(
+    (): string => `${this.otpId()}-error`
+  );
+
+  protected readonly liveAnnouncement: Signal<string> = computed<string>((): string =>
+    this.pasteAnnouncementMessage()
+  );
+
   /** Combined disabled state from input and CVA. */
   protected isControlDisabled(): boolean {
     return this.disabled() || this.cvaDisabled();
+  }
+
+  protected getCellAriaLabel(index: number): string {
+    return `${this.digitAriaLabelPrefix()} ${index + 1} ${this.digitAriaLabelConnector()} ${this.length()}`;
   }
 
   /** Return the current token at a given cell index. */
@@ -301,6 +352,7 @@ export class InputOtpComponent implements ControlValueAccessor {
     // Focus the first empty cell after the paste, or the last cell.
     const firstEmpty: number = updated.findIndex((token: string): boolean => token === '');
     this.focusCell(firstEmpty >= 0 ? firstEmpty : this.length() - 1);
+    this.announcePasteCompletion();
   }
 
   /** Extract the single accepted character from raw input value. */
@@ -342,5 +394,12 @@ export class InputOtpComponent implements ControlValueAccessor {
       ref.nativeElement.focus();
       ref.nativeElement.select();
     }
+  }
+
+  private announcePasteCompletion(): void {
+    this.pasteAnnouncementMessage.set('');
+    void Promise.resolve().then((): void => {
+      this.pasteAnnouncementMessage.set(this.pasteAnnouncement());
+    });
   }
 }
