@@ -15,6 +15,7 @@ import type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skelet
   imports: [Skeleton],
   template: `
     <ui-lib-skeleton
+      [loading]="loadingSignal()"
       [shape]="shapeSignal()"
       [width]="widthSignal()"
       [height]="heightSignal()"
@@ -23,11 +24,15 @@ import type { SkeletonAnimation, SkeletonShape, SkeletonVariant } from './skelet
       [animation]="animationSignal()"
       [variant]="variantSignal()"
       [styleClass]="styleClassSignal()"
-    />
+      [ariaLabel]="ariaLabelSignal()"
+    >
+      <span class="loaded-content">Loaded content</span>
+    </ui-lib-skeleton>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
+  public readonly loadingSignal: WritableSignal<boolean> = signal<boolean>(true);
   public readonly shapeSignal: WritableSignal<SkeletonShape> = signal<SkeletonShape>('rectangle');
   public readonly widthSignal: WritableSignal<string> = signal<string>('100%');
   public readonly heightSignal: WritableSignal<string> = signal<string>('1rem');
@@ -38,6 +43,7 @@ class TestHostComponent {
   public readonly variantSignal: WritableSignal<SkeletonVariant | null> =
     signal<SkeletonVariant | null>(null);
   public readonly styleClassSignal: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaLabelSignal: WritableSignal<string> = signal<string>('Loading content');
 }
 
 function setup(configure?: (host: TestHostComponent) => void): {
@@ -175,14 +181,37 @@ describe('Skeleton', (): void => {
     expect(skeleton.classList).toContain('my-custom-class');
   });
 
-  it('should have aria-hidden attribute', (): void => {
+  it('should have aria-busy="true" by default', (): void => {
     const { skeleton } = setup();
-    expect(skeleton.getAttribute('aria-hidden')).toBe('true');
+    expect(skeleton.getAttribute('aria-busy')).toBe('true');
   });
 
-  it('should render the shimmer inner element', (): void => {
+  it('should render the placeholder as aria-hidden while loading', (): void => {
+    const { skeleton } = setup();
+    const placeholder: Element | null = skeleton.querySelector('.ui-lib-skeleton__placeholder');
+    expect(placeholder?.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('should render the shimmer inner element as aria-hidden', (): void => {
     const { skeleton } = setup();
     const shimmer: Element | null = skeleton.querySelector('.ui-lib-skeleton__shimmer');
     expect(shimmer).toBeTruthy();
+    expect(shimmer?.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('should apply a unique host id', (): void => {
+    const { skeleton } = setup();
+    expect(skeleton.id).toMatch(/^ui-lib-skeleton-\d+$/);
+  });
+
+  it('should render projected content and remove the placeholder when loading is false', (): void => {
+    const { skeleton } = setup((host: TestHostComponent): void => {
+      host.loadingSignal.set(false);
+    });
+    expect(skeleton.getAttribute('aria-busy')).toBe('false');
+    expect(skeleton.querySelector('.ui-lib-skeleton__placeholder')).toBeNull();
+    const loadedContent: Element = skeleton.querySelector('.loaded-content') as Element;
+    const contentText: string = loadedContent.textContent as string;
+    expect(contentText.trim()).toBe('Loaded content');
   });
 });

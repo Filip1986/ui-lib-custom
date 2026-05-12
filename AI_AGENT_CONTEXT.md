@@ -71,6 +71,36 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [SplitButton PR — merge conflict resolution COMPLETE (round 3)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflicts against the newer Skeleton merge-resolution notes from `origin/main`
+      • Kept SplitButton marked complete in the active focus list while limiting recent handoffs to the newest 3 entries
+  - docs/COMPONENT_SCORES.md
+      • Preserved SplitButton #68 as ✅ Done while keeping upstream Skeleton/ScrollTop status updates intact
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the older SplitButton handoff while preserving the upstream Skeleton archive history
+State: The SplitButton PR branch now reconciles the latest `origin/main` tracking-file conflicts without losing the existing SplitButton completion records or the newer Skeleton updates from main.
+Verification:
+  node_modules/.bin/jest --testPathPatterns='split-button|skeleton|entry-points' --no-coverage (PASS)
+  npm run typecheck (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before the real merge. Fresh session also required `npm install` before Jest and the pinned local TypeScript toolchain were available.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
+      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
+State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
+Verification:
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
 Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
 Changed:
   - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
@@ -102,65 +132,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [SplitButton component — accessibility hardening COMPLETE (#68)]
-Changed:
-  - projects/ui-lib-custom/src/lib/split-button/split-button.component.ts
-      • Renamed the module-level instance counter to `nextSplitButtonId`, exposed a public `instanceId`, and bound it to the host `id`
-      • Added `resolvedButtonAriaLabel` fallback logic for icon-only primary buttons without projected text
-      • Added stable per-item track keys/IDs for menu rendering
-      • Switched URL opening to `document.defaultView?.open(...)` for safer browser-only access
-  - projects/ui-lib-custom/src/lib/split-button/split-button.component.html
-      • Marked default decorative icons as `aria-hidden="true"`
-      • Wired primary button accessible-name fallback and stable `@for` tracking
-      • Kept menu trigger/menu/item ARIA semantics aligned with the hardened menu-button pattern
-  - projects/ui-lib-custom/src/lib/split-button/split-button.component.scss
-      • Added `prefers-reduced-motion: reduce` overrides for button/menu transitions and loading/menu animations
-  - projects/ui-lib-custom/src/lib/split-button/split-button.a11y.spec.ts (CREATED — 22 tests)
-      • Added ARIA structure assertions, keyboard-navigation coverage, unique-ID checks, decorative-icon checks, and axe-core validation
-  - projects/ui-lib-custom/src/lib/split-button/README.md
-      • Rewrote the README with full inputs/outputs, ARIA table, keyboard table, CSS custom properties table, and accessibility notes
-  - docs/reference/components/SPLITBUTTON.md
-      • Synced reference docs with icon-only accessible-name fallback, decorative icon handling, unique IDs, and reduced-motion behavior
-  - docs/reference/components/README.md
-      • Added SplitButton hardening highlights to the component index
-  - docs/COMPONENT_SCORES.md
-      • SplitButton #68: ⏳ Queued → ✅ Done; populated score row (API 9, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.6)
-State: SplitButton hardening complete. Menu-button ARIA behavior remains intact, icon-only primary actions now get a safe accessible-name fallback, decorative icons are hidden from assistive tech, reduced-motion support is explicit, and a dedicated 22-test accessibility suite is in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/split-button/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=split-button --no-coverage (78/78 PASS — 56 unit + 22 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/split-button-hardening.png`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
-Changed:
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
-      • Added module-level `let nextScrollPanelId: number = 0` counter and unique `componentId`/`contentId`
-      • Added `ariaLabel` input (`string | null`, default `null`) wired to `__content` via `[attr.aria-label]`
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html
-      • Added `role="region"`, `tabindex="0"`, `[id]="contentId"`, `[attr.aria-label]="ariaLabel()"` to `__content` div
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss
-      • Added `outline: none` + `:focus-visible` ring on `__content`
-  - projects/ui-lib-custom/src/lib/scroll-panel/README.md
-      • Added `ariaLabel` input to inputs table
-      • Added ARIA attributes table, keyboard interaction table, expanded accessibility section
-      • Updated usage examples to show `ariaLabel` in context
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.a11y.spec.ts (CREATED — 16 tests)
-      • axe-core checks (3): labelled, unlabelled, all variants
-      • ARIA structure (6): role=region, tabindex=0, aria-label present/absent, id format, unique IDs
-      • Dynamic label (2): aria-label updates on signal change, removed on null
-      • Keyboard (3): focusable, ArrowDown no error, PageDown no error
-      • Multi-variant (1): all 3 variants expose role+tabindex
-  - docs/COMPONENT_SCORES.md
-      • ScrollPanel #62: ⏳ Queued → ✅ Done
-      • Layout table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
-State: ScrollPanel hardening complete. Scrollable region is now keyboard-accessible (tabindex=0, role=region), has an ariaLabel input for screen reader context, unique stable IDs per instance, and :focus-visible ring for visible focus indicator.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Continue with Tier 6 queue — Tag (#53), Skeleton (#55), Divider (#58) or Toolbar (#59).
