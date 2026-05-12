@@ -4,6 +4,27 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
+Changed:
+  - projects/ui-lib-custom/src/lib/card/card.ts
+      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
+      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
+  - projects/ui-lib-custom/src/lib/card/card.html
+      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
+      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
+  - projects/ui-lib-custom/src/lib/card/card.scss
+      • Added `:focus-visible` ring on `&--hoverable`
+      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors
+      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
+  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
+  - projects/ui-lib-custom/src/lib/card/README.md — ARIA attributes table, keyboard table, CSS props table, a11y section
+  - docs/COMPONENT_SCORES.md — Card: ⏳ Queued → ✅ Done (avg 9.0/10)
+State: Card hardening complete.
+Verification: eslint PASS, jest 34/34 PASS, ng build PASS, entry-points 97/97 PASS
+Next step: Badge (#52) hardening.
+
+---
+
 Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
 Changed:
   - projects/ui-lib-custom/src/lib/chart/chart.component.ts

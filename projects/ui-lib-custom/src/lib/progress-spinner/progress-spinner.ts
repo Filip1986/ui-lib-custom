@@ -12,6 +12,9 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { PROGRESS_SPINNER_DEFAULTS } from './progress-spinner.types';
 import type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spinner.types';
 
+/** Module-level counter for unique ProgressSpinner host IDs. */
+let nextProgressSpinnerId: number = 0;
+
 export type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spinner.types';
 
 /**
@@ -41,6 +44,7 @@ export type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spi
   styleUrl: './progress-spinner.scss',
   host: {
     '[class]': 'hostClasses()',
+    '[attr.id]': 'spinnerId',
     role: 'status',
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-busy]': '"true"',
@@ -50,6 +54,9 @@ export type { ProgressSpinnerSize, ProgressSpinnerVariant } from './progress-spi
 })
 export class ProgressSpinner {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  /** Unique host ID for this instance (used to associate aria relationships). */
+  public readonly spinnerId: string = `uilib-progress-spinner-${++nextProgressSpinnerId}`;
 
   // ---------------------------------------------------------------------------
   // Public inputs
