@@ -227,3 +227,15 @@ ui-lib-image {
     --uilib-image-error-color: rgba(255, 255, 255, 0.4);
   }
 }
+// ─── Reduced motion ───────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-image {
+    --uilib-image-preview-transition: none;
+  }
+  .uilib-image__indicator {
+    transition: none;
+  }
+  .uilib-image__toolbar-btn {
+    transition: none;
+  }
+}

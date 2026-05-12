@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `Image` -> ✅ complete + hardened (6-phase, score 8.8/10, 54 tests — 33 unit + 21 a11y)
 
 ---
 
@@ -75,26 +76,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
-
-Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
-Changed:
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
-  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/data-view/README.md
-  - docs/reference/components/DATAVIEW.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
-Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
 
 Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
 Changed:
@@ -143,3 +124,41 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
+Date: 2026-05-12 [Image component — 6-phase hardening COMPLETE (#66)]
+Changed:
+  - projects/ui-lib-custom/src/lib/image/image.ts
+      • Added DOCUMENT + PLATFORM_ID injection for SSR safety
+      • Added FocusTrap import from ui-lib-custom/core; activates trap when preview overlay opens
+      • Added viewChild for #imageMask container reference
+      • Added effect() watching previewVisible to activate/deactivate focus trap via queueMicrotask
+      • Added previewTriggerElement storage + restorePreviewTriggerFocus() with queueMicrotask
+      • Added ngOnDestroy to clean up focus trap on component destroy
+      • Updated openPreview() to capture document.activeElement before setting previewVisible
+      • Updated closePreview() to call restorePreviewTriggerFocus()
+      • Updated onMaskKeyDown() to also call event.stopPropagation() on Escape
+      • Fixed aria-controls on preview indicator: only present while overlay is open; added aria-expanded
+  - projects/ui-lib-custom/src/lib/image/image.html
+      • Added #imageMask template ref to the preview overlay div
+      • Changed aria-controls to conditional (only when previewVisible); added aria-expanded to indicator
+  - projects/ui-lib-custom/src/lib/image/image.scss
+      • Added prefers-reduced-motion: reduce overrides for indicator, toolbar-btn transitions and preview-transition token
+  - projects/ui-lib-custom/src/lib/image/image.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure: alt text, indicator labels, aria-haspopup, dialog role/aria-modal, toolbar role, aria-label on all buttons, decorative SVG icons hidden, preview image alt
+      • Keyboard: Escape closes + focus restoration, close button focus restoration, focus trap via Tab key
+      • Zoom disabled state: aria-disabled on zoom-in/out at limits
+      • axe-core: no-preview, preview-indicator, preview-open states
+  - projects/ui-lib-custom/src/lib/image/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, accessibility section with alt text, preview dialog, error state, and reduced motion documentation
+  - docs/COMPONENT_SCORES.md
+      • Image #66: ⏳ Queued → ✅ Done (score 8.8/10)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the DataView handoff to keep only the newest 3
+State: Image hardening complete. Preview overlay now has a full focus trap (FocusTrap from ui-lib-custom/core), focus is restored to the indicator on close, aria-controls is only set when the dialog exists in DOM, aria-expanded reflects state, prefers-reduced-motion overrides added, 21 a11y tests all green.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/image --no-coverage (88/88 PASS — 33 unit + 21 a11y + 34 image-compare)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required npm install before validation.
+Next step: ImageCompare hardening (#67) — slider role=slider + aria-valuetext.
