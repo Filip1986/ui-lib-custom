@@ -4,6 +4,28 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
+Changed:
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
+  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/data-view/README.md
+  - docs/reference/components/DATAVIEW.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
+Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
+
+---
+
 Date: 2026-05-12 [Carousel component — accessibility hardening COMPLETE (#45)]
 Changed:
   - projects/ui-lib-custom/src/lib/carousel/carousel.constants.ts

@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `Inplace` -> ✅ complete + hardened (6-phase, score 8.9/10, 47 tests — 27 unit + 20 a11y)
 
 ---
 
@@ -75,26 +76,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
-
-Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
-Changed:
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
-  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/data-view/README.md
-  - docs/reference/components/DATAVIEW.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
-Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
 
 Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
 Changed:
@@ -143,3 +124,44 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
+Date: 2026-05-12 [Inplace component — 6-phase hardening COMPLETE (#63)]
+Changed:
+  - projects/ui-lib-custom/src/lib/inplace/inplace.ts
+      • Added module-level `nextInplaceId` counter; unique `instanceId`, `displayId`, `contentId` per instance
+      • Injected `ElementRef` + `Injector` for post-render focus management
+      • Converted display trigger: display slot now a native `<button>` with `aria-expanded`, `aria-controls`, `aria-label`
+      • Added `displayLabel` + `closeLabel` inputs (i18n-friendly, default to existing strings)
+      • `activate()` uses `afterNextRender` to focus first focusable element in content slot
+      • `deactivate()` uses `afterNextRender` to restore focus to the display button
+      • Added `onContentKeydown()` — Escape deactivates and stops propagation
+      • Host binding `[id]`: `instanceId`
+  - projects/ui-lib-custom/src/lib/inplace/inplace.html
+      • Display: `<div role="button">` → native `<button type="button">` with `[disabled]`, `[attr.aria-expanded]`, `[attr.aria-controls]`, `[attr.aria-label]`
+      • Content wrapper: added `[id]="contentId"`, `[attr.aria-hidden]="!active() || null"`, `(keydown)="onContentKeydown($event)"`
+      • Close button: `aria-label="Close editor"` → `[attr.aria-label]="closeLabel()"`
+  - projects/ui-lib-custom/src/lib/inplace/inplace.scss
+      • Added `@media (prefers-reduced-motion: reduce)` overrides for display + close-button transitions
+  - projects/ui-lib-custom/src/lib/inplace/inplace.spec.ts
+      • Updated 3 disabled/tabindex tests for native `<button>` semantics
+      • Added 7 new tests: aria-expanded states, aria-controls, host ID, Escape deactivation, aria-label
+  - projects/ui-lib-custom/src/lib/inplace/inplace.a11y.spec.ts (CREATED — 20 tests)
+      • axe-core checks for default/active-closable/disabled/multi-variant states
+      • ARIA structure: button element, aria-expanded false/true, aria-controls, aria-label, close icon aria-hidden, unique host IDs
+      • Disabled state: native disabled attribute, aria-expanded still present
+      • Keyboard: Enter/Space activate, Escape deactivates, aria-expanded state transitions
+  - projects/ui-lib-custom/src/lib/inplace/README.md
+      • Added `displayLabel` + `closeLabel` input rows; full ARIA attributes table; keyboard table; accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Inplace #63: ⏳ Queued → ✅ Done
+      • Utilities table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the DataView handoff to keep only the newest 3 in this file
+State: Inplace hardening complete. Display trigger is now a native button with correct aria-expanded/aria-controls semantics. Focus management (activate → content, deactivate → display button) is implemented via afterNextRender. Escape key deactivates. Content is aria-hidden when inactive. i18n-friendly displayLabel/closeLabel inputs added. 47 tests pass (27 unit + 20 a11y).
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/inplace/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=inplace --no-coverage (47/47 PASS — 27 unit + 20 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: axe flagged unlabeled `<input>` inside hidden content slot when JSDOM doesn't compute CSS; resolved by adding `[attr.aria-hidden]="!active() || null"` to content wrapper (matches fieldset/panel pattern).
+Next step: Continue Tier 6 queue — Toolbar (#59) or Image (#66) hardening.

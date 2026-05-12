@@ -1,8 +1,11 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   inject,
+  Injector,
   input,
   model,
   output,
@@ -17,12 +20,19 @@ import type { InplaceVariant } from './inplace.types';
 
 export type { InplaceVariant } from './inplace.types';
 
+/** Auto-incrementing counter to generate a unique DOM id per Inplace instance. */
+let nextInplaceId: number = 0;
+
 /**
  * Inplace — inline editing component that toggles between a display and content slot.
  *
- * Click the display slot to activate the editor; use the optional close button
- * (or set `active` programmatically) to deactivate.  Supports three design variants
- * (material / bootstrap / minimal) and falls back to the global ThemeConfigService.
+ * The display trigger is a native `<button>` with `aria-expanded` and `aria-controls`
+ * so screen readers announce the toggle state correctly.  On activation, focus moves
+ * to the first focusable element inside the content slot; on deactivation it returns
+ * to the display button.  Pressing Escape while the content is active also deactivates.
+ *
+ * Supports three design variants (material / bootstrap / minimal) and falls back to
+ * the global ThemeConfigService.
  *
  * @example
  * <ui-lib-inplace>
@@ -37,12 +47,24 @@ export type { InplaceVariant } from './inplace.types';
   styleUrl: './inplace.scss',
   host: {
     '[class]': 'hostClasses()',
+    '[id]': 'instanceId',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class Inplace {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef) as ElementRef<HTMLElement>;
+  private readonly injector: Injector = inject(Injector);
+
+  /** Auto-generated unique ID for this component instance. */
+  public readonly instanceId: string = `ui-lib-inplace-${(nextInplaceId += 1)}`;
+
+  /** ID of the display button element. */
+  public readonly displayId: string = `${this.instanceId}-display`;
+
+  /** ID of the content wrapper element (used for `aria-controls` on the display button). */
+  public readonly contentId: string = `${this.instanceId}-content`;
 
   /** Whether the inplace editor is currently active (two-way bindable). */
   public readonly active: ModelSignal<boolean> = model<boolean>(false);
@@ -55,6 +77,12 @@ export class Inplace {
 
   /** Icon class for the close button (e.g. "pi pi-times"). */
   public readonly closeIcon: InputSignal<string> = input<string>('pi pi-times');
+
+  /** Accessible label for the display button. Override for i18n. */
+  public readonly displayLabel: InputSignal<string> = input<string>('Click to edit');
+
+  /** Accessible label for the close button. Override for i18n. */
+  public readonly closeLabel: InputSignal<string> = input<string>('Close editor');
 
   /** Visual variant — inherits from ThemeConfigService when not set. */
   public readonly variant: InputSignal<InplaceVariant | null> = input<InplaceVariant | null>(null);
@@ -92,14 +120,14 @@ export class Inplace {
     return classes.join(' ');
   });
 
-  /** Activates the inplace editor when the display slot is clicked (if not disabled). */
+  /** Handles click on the display button (guard is a safety belt; native disabled prevents events). */
   public onDisplayClick(): void {
     if (!this.disabled()) {
       this.activate();
     }
   }
 
-  /** Activates the inplace editor on Enter or Space keydown (if not disabled). */
+  /** Handles keydown on the display button — Enter or Space activate the editor. */
   public onDisplayKeydown(event: KeyboardEvent): void {
     if (!this.disabled() && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault();
@@ -107,15 +135,48 @@ export class Inplace {
     }
   }
 
-  /** Switches to the active (editing) state and emits `activated`. */
+  /** Handles keydown inside the content area — Escape deactivates the editor. */
+  public onContentKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      this.deactivate();
+    }
+  }
+
+  /**
+   * Switches to the active (editing) state, emits `activated`, and moves
+   * keyboard focus to the first focusable element inside the content slot.
+   */
   public activate(): void {
     this.active.set(true);
     this.activated.emit();
+    afterNextRender(
+      (): void => {
+        const contentEl: HTMLElement | null =
+          this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-inplace__content');
+        const focusable: HTMLElement | null | undefined = contentEl?.querySelector<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        focusable?.focus();
+      },
+      { injector: this.injector }
+    );
   }
 
-  /** Switches back to the display (inactive) state and emits `deactivated`. */
+  /**
+   * Switches back to the display (inactive) state, emits `deactivated`, and
+   * restores keyboard focus to the display button.
+   */
   public deactivate(): void {
     this.active.set(false);
     this.deactivated.emit();
+    afterNextRender(
+      (): void => {
+        const displayBtn: HTMLElement | null =
+          this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-inplace__display');
+        displayBtn?.focus();
+      },
+      { injector: this.injector }
+    );
   }
 }
