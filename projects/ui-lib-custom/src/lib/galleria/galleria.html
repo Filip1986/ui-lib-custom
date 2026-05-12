@@ -3,7 +3,7 @@
   class="uilib-galleria__container"
   [class.uilib-galleria__container--hidden]="fullScreen() && visible()"
   [ngStyle]="containerStyle()"
-  [attr.id]="'ui-lib-galleria-' + activeIndex()"
+  [attr.id]="containerId()"
 >
   <ng-container [ngTemplateOutlet]="galleriaBody" />
 
@@ -34,10 +34,13 @@
   >
     <div
       class="uilib-galleria__fullscreen-container"
+      #fullScreenContainerElement
+      [attr.id]="lightboxId()"
       role="dialog"
       aria-modal="true"
-      [attr.aria-label]="ariaLabel()"
+      [attr.aria-label]="lightboxAriaLabel()"
       (click)="onFullScreenContainerClick($event)"
+      (keydown)="onLightboxKeyDown($event)"
     >
       <!-- Close button -->
       <button
@@ -87,7 +90,7 @@
           class="uilib-galleria__item-nav uilib-galleria__item-nav--prev"
           [class.uilib-galleria__item-nav--disabled]="!canNavigatePrev()"
           [disabled]="!canNavigatePrev() || undefined"
-          [attr.aria-label]="prevAriaLabel"
+          [attr.aria-label]="previousItemAriaLabel()"
           (click)="navigatePrev($event)"
         >
           <svg class="uilib-galleria__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -98,15 +101,17 @@
 
       <!-- Active item -->
       <div
-        class="uilib-galleria__item"
+        class="uilib-galleria__item uilib-galleria__slide"
         role="group"
         [attr.aria-label]="'Image ' + (activeIndex() + 1) + ' of ' + value().length"
       >
         @if (itemTemplate()) {
           <ng-container
             [ngTemplateOutlet]="itemTemplate()!"
-            [ngTemplateOutletContext]="{ $implicit: currentItem() }"
+            [ngTemplateOutletContext]="{ $implicit: currentItem()! }"
           />
+        } @else if (resolveCurrentItemSrc()) {
+          <img [src]="resolveCurrentItemSrc()" [attr.alt]="resolveCurrentItemAlt()" />
         }
       </div>
 
@@ -117,7 +122,7 @@
           class="uilib-galleria__item-nav uilib-galleria__item-nav--next"
           [class.uilib-galleria__item-nav--disabled]="!canNavigateNext()"
           [disabled]="!canNavigateNext() || undefined"
-          [attr.aria-label]="nextAriaLabel"
+          [attr.aria-label]="nextItemAriaLabel()"
           (click)="navigateNext($event)"
         >
           <svg class="uilib-galleria__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -129,10 +134,10 @@
       <!-- Caption overlay -->
       @if (captionTemplate()) {
         <div class="uilib-galleria__caption">
-          <ng-container
-            [ngTemplateOutlet]="captionTemplate()!"
-            [ngTemplateOutletContext]="{ $implicit: currentItem() }"
-          />
+            <ng-container
+              [ngTemplateOutlet]="captionTemplate()!"
+              [ngTemplateOutletContext]="{ $implicit: currentItem()! }"
+            />
         </div>
       }
 
@@ -238,32 +243,41 @@
     }
 
     <!-- Thumbnail items -->
-    <div
+    <ul
       class="uilib-galleria__thumbnail-items"
       [class.uilib-galleria__thumbnail-items--vertical]="isVertical()"
+      role="list"
     >
       @for (item of visibleThumbnails(); track thumbnailFirstIndex() + $index) {
-        <div
-          class="uilib-galleria__thumbnail-item"
-          [class.uilib-galleria__thumbnail-item--active]="thumbnailFirstIndex() + $index === activeIndex()"
-          role="button"
-          tabindex="0"
-          [attr.aria-label]="'View image ' + (thumbnailFirstIndex() + $index + 1)"
-          [attr.aria-pressed]="thumbnailFirstIndex() + $index === activeIndex()"
-          (click)="navigateTo(thumbnailFirstIndex() + $index)"
-          (keydown)="onThumbnailKeyDown($event, thumbnailFirstIndex() + $index)"
-        >
-          @if (thumbnailTemplate()) {
-            <ng-container
-              [ngTemplateOutlet]="thumbnailTemplate()!"
-              [ngTemplateOutletContext]="{ $implicit: item }"
-            />
-          } @else {
-            <span class="uilib-galleria__thumbnail-index">{{ thumbnailFirstIndex() + $index + 1 }}</span>
-          }
-        </div>
+        <li class="uilib-galleria__thumbnail-list-item">
+          <button
+            type="button"
+            class="uilib-galleria__thumbnail-item"
+            [class.uilib-galleria__thumbnail-item--active]="thumbnailFirstIndex() + $index === activeIndex()"
+            [attr.data-thumbnail-index]="thumbnailFirstIndex() + $index"
+            [attr.aria-label]="resolveThumbnailAriaLabel(item, thumbnailFirstIndex() + $index)"
+            [attr.aria-current]="thumbnailFirstIndex() + $index === activeIndex() ? 'true' : null"
+            (click)="navigateTo(thumbnailFirstIndex() + $index)"
+            (keydown)="onThumbnailKeyDown($event, thumbnailFirstIndex() + $index)"
+          >
+            @if (thumbnailTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="thumbnailTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: item }"
+              />
+            } @else if (resolveThumbnailSrc(item)) {
+              <img
+                [src]="resolveThumbnailSrc(item)"
+                [attr.alt]="resolveThumbnailAlt(item)"
+                loading="lazy"
+              />
+            } @else {
+              <span class="uilib-galleria__thumbnail-index">{{ thumbnailFirstIndex() + $index + 1 }}</span>
+            }
+          </button>
+        </li>
       }
-    </div>
+    </ul>
 
     <!-- Scroll forward -->
     @if (showThumbnailNavigators()) {

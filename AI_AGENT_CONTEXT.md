@@ -21,7 +21,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Component foundation hardening + documentation completeness
 - **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
-- **Next queue:** DataView hardening (Tier 4, #38) — sort/filter labels and list/grid toggle announcements
+- **Next queue:** SpeedDial hardening (Tier 5, #47) — icon-only action labels and expanded-state semantics
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -70,6 +70,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Galleria component — accessibility hardening COMPLETE (#46)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/galleria/galleria.ts
+  - projects/ui-lib-custom/src/lib/galleria/galleria.html
+  - projects/ui-lib-custom/src/lib/galleria/galleria.scss
+  - projects/ui-lib-custom/src/lib/galleria/galleria.types.ts
+  - projects/ui-lib-custom/src/lib/galleria/index.ts
+  - projects/ui-lib-custom/src/lib/galleria/galleria.spec.ts
+  - projects/ui-lib-custom/src/lib/galleria/galleria.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/galleria/README.md
+State: Galleria hardening is complete across the 6-phase prompt with priority accessibility fixes: fullscreen now behaves like a true dialog (`role="dialog"`, `aria-modal`, focus trap lifecycle, Escape close, focus restoration), item/thumbnail alt propagation is enforced via typed `GalleriaItem`, thumbnail strip semantics were upgraded to keyboard-navigable list buttons with `aria-current`, and previous/next/lightbox labels now support explicit inputs with safe fallbacks. Added reduced-motion CSS coverage and a dedicated 16-test a11y regression suite.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/galleria/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=galleria --no-coverage (55/55 PASS — 39 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validations. Playwright browsers were installed with `npx playwright install chromium` to capture `/tmp/galleria-hardening.png`.
+Next step: SpeedDial hardening (Tier 5, #47).
+
 Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -102,36 +124,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
 Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
-
-Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
-Changed:
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
-      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
-      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
-      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
-      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
-      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
-      • Bound button aria-label to the resolved non-empty label
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
-      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
-      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
-      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
-  - projects/ui-lib-custom/src/lib/scroll-top/README.md
-      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
-      • Updated API table docs to reflect the new default button aria-label
-  - docs/COMPONENT_SCORES.md
-      • ScrollTop #75: ⏳ Queued → ✅ Done
-      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
-State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
