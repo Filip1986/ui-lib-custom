@@ -83,6 +83,34 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. An initial ESLint retry using `--ext .ts,.scss,.html` failed by parsing SCSS with the wrong parser; the repository's standard directory-based ESLint command succeeded. Captured the updated demo screenshot after starting `npm run serve:demo` and installing Playwright Chromium locally.
 Next step: Resume the queued hardening track with TreeTable (#33) when button appearance follow-up is no longer needed.
 
+Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
+      • Added module-level `let nextProgressSpinnerId: number = 0` counter
+      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
+      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
+      • Added dark mode overrides for bootstrap and minimal variant arc colours
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
+      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
+      • ariaLabel reactive updates, two-instance ID uniqueness
+      • Visual state (size classes sm/lg)
+      • axe-core automated checks (5 states)
+  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
+      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
+  - docs/COMPONENT_SCORES.md
+      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
+State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
+Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
+
 Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
   - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
@@ -113,35 +141,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
-Changed:
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
-      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
-      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
-      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
-      • Added `private focusTrap: FocusTrap | null = null` field
-      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
-      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
-      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
-      • Added `[id]="titleId"` to the title span for the ARIA association
-      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
-      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
-      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
-  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
-      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
-  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
-      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
-  - docs/COMPONENT_SCORES.md
-      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
-State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
