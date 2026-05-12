@@ -620,6 +620,8 @@ Individual component documentation with complete API references and implementati
 
 - [SPLITBUTTON.md](SPLITBUTTON.md) - API reference and usage guide
 
+**Highlights:** Hardened split menu-button semantics, keyboard navigation, and reduced-motion support.
+
 
 
 **Status:** ✅ Complete
@@ -875,4 +877,3 @@ Each component should have two documentation files:
 | VirtualScroller | High-performance virtual scrolling container with lazy loading and custom templates | 3 | - | - | ✅ Complete |
 
 | Rating | Star-rating control with hover preview and form integration | 3 | - | 3 (`sm`/`md`/`lg`) | ✅ Complete |
-

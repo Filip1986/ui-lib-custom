@@ -38,7 +38,7 @@ import type {
   SplitButtonVariant,
 } from './split-button.types';
 
-let splitButtonInstanceCounter: number = 0;
+let nextSplitButtonId: number = 0;
 
 /**
  * SplitButton scaffold component with primary action and dropdown trigger controls.
@@ -52,6 +52,7 @@ let splitButtonInstanceCounter: number = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
+    '[attr.id]': 'instanceId',
     '[class]': 'hostClasses()',
   },
 })
@@ -61,7 +62,13 @@ export class SplitButtonComponent {
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly documentRef: Document = inject(DOCUMENT);
   private readonly router: Router | null = inject(Router, { optional: true });
-  private readonly hostId: string = splitButtonId(splitButtonInstanceCounter++);
+  private readonly trackedItemKeys: WeakMap<SplitButtonItem, string> = new WeakMap<
+    SplitButtonItem,
+    string
+  >();
+  private nextTrackedItemId: number = 0;
+
+  public readonly instanceId: string = splitButtonId(nextSplitButtonId++);
 
   public readonly label: InputSignal<string> = input<string>('');
   public readonly icon: InputSignal<string | null> = input<string | null>(null);
@@ -169,10 +176,48 @@ export class SplitButtonComponent {
     (): boolean => this.disabled() || this.menuButtonDisabled()
   );
 
-  public readonly menuId: Signal<string> = computed<string>((): string => `${this.hostId}-menu`);
+  public readonly resolvedButtonAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const explicitLabel: string | null = this.buttonAriaLabel();
+      if (explicitLabel && explicitLabel.trim().length > 0) {
+        return explicitLabel;
+      }
 
-  public itemId(index: number): string {
-    return `${this.hostId}-item-${index}`;
+      const label: string = this.label().trim();
+      if (label.length > 0) {
+        return label;
+      }
+
+      if (this.contentTemplate()) {
+        return null;
+      }
+
+      if (this.icon() || this.loading()) {
+        return 'Action';
+      }
+
+      return null;
+    }
+  );
+
+  public readonly menuId: Signal<string> = computed<string>(
+    (): string => `${this.instanceId}-menu`
+  );
+
+  public itemId(index: number, item: SplitButtonItem): string {
+    return `${this.instanceId}-item-${this.trackVisibleItem(index, item)}`;
+  }
+
+  public trackVisibleItem(index: number, item: SplitButtonItem): string {
+    const existingTrackKey: string | undefined = this.trackedItemKeys.get(item);
+    if (existingTrackKey) {
+      return existingTrackKey;
+    }
+
+    const generatedTrackKey: string = `${index}-${this.nextTrackedItemId}`;
+    this.nextTrackedItemId += 1;
+    this.trackedItemKeys.set(item, generatedTrackKey);
+    return generatedTrackKey;
   }
 
   public onMainButtonClick(event: MouseEvent): void {
@@ -299,7 +344,7 @@ export class SplitButtonComponent {
 
     if (item.url) {
       event.preventDefault();
-      window.open(item.url, item.target || '_self');
+      this.documentRef.defaultView?.open(item.url, item.target || '_self');
       this.closeMenu(event, { focusMenuButton: true });
       return;
     }

@@ -115,9 +115,9 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done     |
 | 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Queued   |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ⏳ Queued   |
-| 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ⏳ Queued   |
+| 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ✅ Done     |
 | 69   | Upload          | Drop zone announcement, file list management              | ✅ Done     |
-| 70   | Terminal        | `role=log`, command input labeling                        | ✅ Done    |
+| 70   | Terminal        | `role=log`, command input labeling                        | ✅ Done     |
 | 71   | Timeline        | Semantic list structure, orientation                      | ✅ Done     |
 | 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
@@ -266,7 +266,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Icon            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ButtonGroup     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| SplitButton     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| SplitButton     | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ImageCompare    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
