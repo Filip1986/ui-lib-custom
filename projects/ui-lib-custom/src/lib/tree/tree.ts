@@ -45,6 +45,8 @@ interface VisibleTreeNodeMetadata {
   posinset: number;
 }
 
+const TYPE_AHEAD_KEY_PATTERN: RegExp = /^[a-zA-Z0-9]$/;
+
 let nextTreeId: number = 0;
 
 /**
@@ -556,7 +558,7 @@ export class Tree implements TreeContext {
       if (focused) {
         this.collapseOrFocusParent(focused);
       }
-    } else if (key.length === 1 && /^[a-zA-Z0-9]$/.test(key)) {
+    } else if (key.length === 1 && TYPE_AHEAD_KEY_PATTERN.test(key)) {
       event.preventDefault();
       this.focusItemByTypeAhead(key, items, focusedIndex);
     }
@@ -785,7 +787,8 @@ export class Tree implements TreeContext {
       const labelElement: Element | null = item.querySelector('.uilib-tree-node-label');
       let labelText: string = '';
       if (labelElement !== null) {
-        labelText = labelElement.textContent.trim().toLowerCase();
+        const labelNode: Node = labelElement;
+        labelText = (labelNode.textContent ?? '').trim().toLowerCase();
       }
       const sourceText: string = dataNodeLabel || labelText;
 
