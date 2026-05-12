@@ -72,7 +72,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ⏳ Queued   |
 | 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ⏳ Queued   |
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ⏳ Queued   |
-| 37   | Paginator  | Live region announcing page change, button labels                               | ⏳ Queued   |
+| 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
 | 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ⏳ Queued   |
 | 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ⏳ Queued   |
 | 40   | PickList   | Dual-list pattern, transfer action announcements                                | ⏳ Queued   |
@@ -237,7 +237,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | PickList          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Paginator         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Carousel          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Galleria          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
