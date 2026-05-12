@@ -17,3 +17,15 @@ export interface GalleriaResponsiveOption {
   /** Number of thumbnails visible at this breakpoint. */
   numVisible: number;
 }
+
+/** Data model for a gallery item. */
+export interface GalleriaItem {
+  /** Full-sized media source URL. */
+  src: string;
+  /** Accessible description for the full-sized media. */
+  alt: string;
+  /** Optional thumbnail source URL. Falls back to `src` when omitted. */
+  thumbnailSrc?: string;
+  /** Optional thumbnail description. Falls back to `alt` when omitted. */
+  thumbnailAlt?: string;
+}

@@ -82,12 +82,12 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component       | Key a11y concern                                                                    | Status     |
 |------|-----------------|-------------------------------------------------------------------------------------|------------|
-| 41   | Button          | `aria-disabled` vs `disabled`, icon-only `aria-label`, loading state announcement   | ⏳ Queued   |
+| 41   | Button          | `aria-disabled` vs `disabled`, icon-only `aria-label`, loading state announcement   | ✅ Done    |
 | 42   | Alert           | `role=alert` vs `role=status`, dismiss button label                                 | ✅ Done     |
 | 43   | Message         | Same as Alert — live region role correctness                                        | ⏳ Queued   |
 | 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ⏳ Queued   |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ⏳ Queued   |
-| 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ⏳ Queued   |
+| 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
 | 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
 | 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ⏳ Queued   |
 | 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ⏳ Queued   |
@@ -108,7 +108,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 58   | Divider         | `role=separator` + `aria-orientation`                     | ✅ Done     |
 | 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
-| 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ⏳ Queued   |
+| 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ✅ Done     |
 | 62   | ScrollPanel     | Keyboard-scrollable region label                          | ✅ Done     |
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ⏳ Queued   |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done     |
@@ -151,7 +151,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component     | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
-| Button        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Button        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Input         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
@@ -188,7 +188,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Toolbar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Fieldset    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Fieldset    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ScrollPanel | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
@@ -239,7 +239,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | PickList          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Carousel          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Galleria          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Galleria          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
 ## Feedback & Status

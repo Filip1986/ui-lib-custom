@@ -91,6 +91,8 @@ export class Button implements AfterViewChecked {
   );
   public readonly role: InputSignal<string | null> = input<string | null>(null);
   public readonly tabIndex: InputSignal<number | null> = input<number | null>(null);
+  public readonly softDisabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly loadingLabel: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaPressed: InputSignal<boolean | null> = input<boolean | null>(null);
   public readonly ariaChecked: InputSignal<boolean | null> = input<boolean | null>(null);
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
@@ -169,6 +171,8 @@ export class Button implements AfterViewChecked {
 
     if (this.fullWidth()) classes.push('ui-lib-button--full-width');
     if (this.disabled() || this.loading()) classes.push('ui-lib-button--disabled');
+    if (this.softDisabled() && !this.disabled() && !this.loading())
+      classes.push('ui-lib-button--soft-disabled');
     if (this.loading()) classes.push('ui-lib-button--loading');
     if (this.icon()) classes.push('ui-lib-button--has-icon');
     if (this.iconOnly()) classes.push('ui-lib-button--icon-only');
@@ -184,12 +188,12 @@ export class Button implements AfterViewChecked {
   });
 
   public readonly ariaDisabled: Signal<boolean | null> = computed<boolean | null>(
-    (): boolean | null => (this.disabled() || this.loading() ? true : null)
+    (): boolean | null => (this.disabled() || this.loading() || this.softDisabled() ? true : null)
   );
 
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
-      if (this.loading()) return this.ariaLabel() ?? 'Loading';
+      if (this.loading()) return this.loadingLabel() ?? this.ariaLabel() ?? 'Loading';
       if (this.iconOnly()) return this.ariaLabel() ?? 'Button';
       return this.ariaLabel();
     }
@@ -201,6 +205,13 @@ export class Button implements AfterViewChecked {
 
   public setFocused(isFocused: boolean): void {
     this.focused.set(isFocused);
+  }
+
+  public onButtonClick(event: MouseEvent): void {
+    if (this.softDisabled()) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
   }
 
   public ngAfterViewChecked(): void {

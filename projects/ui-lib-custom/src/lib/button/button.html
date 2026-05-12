@@ -15,6 +15,7 @@
   [style.pointer-events]="isDisabled() ? 'none' : null"
   (focus)="setFocused(true)"
   (blur)="setFocused(false)"
+  (click)="onButtonClick($event)"
 >
   @if ((iconPosition() === 'left' || iconPosition() === 'top') && icon()) {
     <ui-lib-icon

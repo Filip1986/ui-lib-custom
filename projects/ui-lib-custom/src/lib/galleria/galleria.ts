@@ -1,7 +1,10 @@
+import { DOCUMENT, isPlatformBrowser, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   NgZone,
+  PLATFORM_ID,
   ViewEncapsulation,
   computed,
   contentChild,
@@ -11,6 +14,7 @@ import {
   model,
   output,
   signal,
+  viewChild,
   type InputSignal,
   type ModelSignal,
   type OnDestroy,
@@ -19,13 +23,11 @@ import {
   type TemplateRef,
   type WritableSignal,
 } from '@angular/core';
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
   GALLERIA_ARIA_CLOSE_LABEL,
   GALLERIA_ARIA_FULLSCREEN_LABEL,
-  GALLERIA_ARIA_NEXT_LABEL,
-  GALLERIA_ARIA_PREV_LABEL,
   GALLERIA_ARIA_REGION_LABEL,
   GALLERIA_ARIA_THUMBNAIL_NEXT_LABEL,
   GALLERIA_ARIA_THUMBNAIL_PREV_LABEL,
@@ -36,6 +38,7 @@ import {
 import type {
   GalleriaIndicatorsPosition,
   GalleriaResponsiveOption,
+  GalleriaItem,
   GalleriaSize,
   GalleriaThumbnailsPosition,
   GalleriaVariant,
@@ -43,6 +46,7 @@ import type {
 
 export type {
   GalleriaIndicatorsPosition,
+  GalleriaItem,
   GalleriaResponsiveOption,
   GalleriaSize,
   GalleriaThumbnailsPosition,
@@ -92,22 +96,28 @@ let galleriaIdCounter: number = 0;
 export class GalleriaComponent implements OnDestroy {
   // ─── Injected services ───────────────────────────────────────────────────────
 
+  private readonly platformId: object = inject(PLATFORM_ID);
+  private readonly hostElement: ElementRef<HTMLElement> = inject(
+    ElementRef
+  ) as ElementRef<HTMLElement>;
+  private readonly document: Document = inject(DOCUMENT);
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly zone: NgZone = inject(NgZone);
+  private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
 
   // ─── Content queries ─────────────────────────────────────────────────────────
 
   /** Template for rendering each main gallery item. Exposes `$implicit` as the item data. */
-  public readonly itemTemplate: Signal<TemplateRef<{ $implicit: unknown }> | undefined> =
-    contentChild<TemplateRef<{ $implicit: unknown }>>('galleriaItem');
+  public readonly itemTemplate: Signal<TemplateRef<{ $implicit: GalleriaItem }> | undefined> =
+    contentChild<TemplateRef<{ $implicit: GalleriaItem }>>('galleriaItem');
 
   /** Template for rendering each thumbnail. Exposes `$implicit` as the item data. */
-  public readonly thumbnailTemplate: Signal<TemplateRef<{ $implicit: unknown }> | undefined> =
-    contentChild<TemplateRef<{ $implicit: unknown }>>('galleriaThumbnail');
+  public readonly thumbnailTemplate: Signal<TemplateRef<{ $implicit: GalleriaItem }> | undefined> =
+    contentChild<TemplateRef<{ $implicit: GalleriaItem }>>('galleriaThumbnail');
 
   /** Template for the caption overlay on the active item. Exposes `$implicit` as the item data. */
-  public readonly captionTemplate: Signal<TemplateRef<{ $implicit: unknown }> | undefined> =
-    contentChild<TemplateRef<{ $implicit: unknown }>>('galleriaCaption');
+  public readonly captionTemplate: Signal<TemplateRef<{ $implicit: GalleriaItem }> | undefined> =
+    contentChild<TemplateRef<{ $implicit: GalleriaItem }>>('galleriaCaption');
 
   /** Optional header template rendered above the gallery. */
   public readonly headerTemplate: Signal<TemplateRef<unknown> | undefined> =
@@ -122,10 +132,19 @@ export class GalleriaComponent implements OnDestroy {
     TemplateRef<{ $implicit: number; active: boolean }> | undefined
   > = contentChild<TemplateRef<{ $implicit: number; active: boolean }>>('galleriaIndicator');
 
+  /** Fullscreen container element used for the focus trap lifecycle. */
+  public readonly fullScreenContainerElement: Signal<ElementRef<HTMLElement> | undefined> =
+    viewChild<ElementRef<HTMLElement>>('fullScreenContainerElement');
+
+  /** Fullscreen trigger button used for focus restoration fallback. */
+  public readonly fullScreenTriggerButtonElement: Signal<
+    ElementRef<HTMLButtonElement> | undefined
+  > = viewChild<ElementRef<HTMLButtonElement>>('fullScreenTriggerButtonElement');
+
   // ─── Inputs ──────────────────────────────────────────────────────────────────
 
   /** Array of data items to display. */
-  public readonly value: InputSignal<unknown[]> = input<unknown[]>([]);
+  public readonly value: InputSignal<GalleriaItem[]> = input<GalleriaItem[]>([]);
 
   /** Number of thumbnails visible in the strip. */
   public readonly numVisible: InputSignal<number> = input<number>(GALLERIA_DEFAULT_NUM_VISIBLE);
@@ -198,6 +217,15 @@ export class GalleriaComponent implements OnDestroy {
   /** Accessible label for the gallery landmark. Defaults to the built-in region label constant. */
   public readonly ariaLabel: InputSignal<string> = input<string>(GALLERIA_ARIA_REGION_LABEL);
 
+  /** Accessible label for the fullscreen dialog container. */
+  public readonly lightboxLabel: InputSignal<string | null> = input<string | null>(null);
+
+  /** Accessible label for the previous-item navigation button. */
+  public readonly prevLabel: InputSignal<string | null> = input<string | null>(null);
+
+  /** Accessible label for the next-item navigation button. */
+  public readonly nextLabel: InputSignal<string | null> = input<string | null>(null);
+
   // ─── Two-way bindings ─────────────────────────────────────────────────────────
 
   /** Active item index — supports two-way binding. */
@@ -220,6 +248,8 @@ export class GalleriaComponent implements OnDestroy {
   public readonly isItemHovered: WritableSignal<boolean> = signal<boolean>(false);
 
   private autoPlayTimer: ReturnType<typeof setInterval> | null = null;
+  private focusTrap: FocusTrap | null = null;
+  private fullScreenTriggerElement: HTMLElement | null = null;
 
   private readonly componentId: string = `ui-lib-galleria-${++galleriaIdCounter}`;
 
@@ -231,8 +261,8 @@ export class GalleriaComponent implements OnDestroy {
   );
 
   /** Currently active item. */
-  public readonly currentItem: Signal<unknown> = computed<unknown>(
-    (): unknown => this.value()[this.activeIndex()] ?? null
+  public readonly currentItem: Signal<GalleriaItem | null> = computed<GalleriaItem | null>(
+    (): GalleriaItem | null => this.value()[this.activeIndex()] ?? null
   );
 
   /** True when the thumbnail strip is positioned to the left or right of the item. */
@@ -266,8 +296,9 @@ export class GalleriaComponent implements OnDestroy {
   );
 
   /** Slice of value[] shown in the thumbnail strip. */
-  public readonly visibleThumbnails: Signal<unknown[]> = computed<unknown[]>((): unknown[] =>
-    this.value().slice(this.thumbnailFirstIndex(), this.thumbnailFirstIndex() + this.numVisible())
+  public readonly visibleThumbnails: Signal<GalleriaItem[]> = computed<GalleriaItem[]>(
+    (): GalleriaItem[] =>
+      this.value().slice(this.thumbnailFirstIndex(), this.thumbnailFirstIndex() + this.numVisible())
   );
 
   /** Navigation arrows visibility considering both `showItemNavigators` and hover state. */
@@ -297,9 +328,32 @@ export class GalleriaComponent implements OnDestroy {
     return classes.join(' ');
   });
 
+  /** ID used for the inline gallery container. */
+  public readonly containerId: Signal<string> = computed<string>(
+    (): string => `${this.componentId}-container`
+  );
+
+  /** ID used for the fullscreen dialog container. */
+  public readonly lightboxId: Signal<string> = computed<string>(
+    (): string => `${this.componentId}-lightbox`
+  );
+
+  /** Resolved previous-item aria-label. */
+  public readonly previousItemAriaLabel: Signal<string> = computed<string>((): string =>
+    this.getLabelOrFallback(this.prevLabel(), 'Previous image')
+  );
+
+  /** Resolved next-item aria-label. */
+  public readonly nextItemAriaLabel: Signal<string> = computed<string>((): string =>
+    this.getLabelOrFallback(this.nextLabel(), 'Next image')
+  );
+
+  /** Resolved fullscreen dialog aria-label. */
+  public readonly lightboxAriaLabel: Signal<string> = computed<string>((): string =>
+    this.getLabelOrFallback(this.lightboxLabel(), GALLERIA_ARIA_REGION_LABEL)
+  );
+
   // ARIA label constants exposed to the template.
-  public readonly prevAriaLabel: string = GALLERIA_ARIA_PREV_LABEL;
-  public readonly nextAriaLabel: string = GALLERIA_ARIA_NEXT_LABEL;
   public readonly closeAriaLabel: string = GALLERIA_ARIA_CLOSE_LABEL;
   public readonly fullscreenAriaLabel: string = GALLERIA_ARIA_FULLSCREEN_LABEL;
   public readonly thumbnailPrevAriaLabel: string = GALLERIA_ARIA_THUMBNAIL_PREV_LABEL;
@@ -316,10 +370,23 @@ export class GalleriaComponent implements OnDestroy {
         this.stopAutoPlay();
       }
     });
+
+    effect((): void => {
+      const shouldTrapFocus: boolean = this.fullScreen() && this.visible();
+      if (!shouldTrapFocus) {
+        this.deactivateFocusTrap();
+        return;
+      }
+
+      queueMicrotask((): void => {
+        this.activateFocusTrap();
+      });
+    });
   }
 
   public ngOnDestroy(): void {
     this.stopAutoPlay();
+    this.deactivateFocusTrap();
   }
 
   // ─── Navigation ──────────────────────────────────────────────────────────────
@@ -386,17 +453,29 @@ export class GalleriaComponent implements OnDestroy {
 
   /** Open the fullscreen overlay. */
   public openFullScreen(): void {
+    const activeElement: Element | null = this.document.activeElement;
+    this.fullScreenTriggerElement = activeElement instanceof HTMLElement ? activeElement : null;
     this.visible.set(true);
   }
 
   /** Close the fullscreen overlay. */
   public closeFullScreen(): void {
     this.visible.set(false);
+    this.restoreFullScreenTriggerFocus();
   }
 
   /** Stop propagation so clicking inside the fullscreen container does not close it. */
   public onFullScreenContainerClick(event: MouseEvent): void {
     event.stopPropagation();
+  }
+
+  /** Close fullscreen on Escape key. */
+  public onLightboxKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      this.closeFullScreen();
+    }
   }
 
   // ─── Hover tracking ───────────────────────────────────────────────────────────
@@ -413,12 +492,42 @@ export class GalleriaComponent implements OnDestroy {
 
   // ─── Thumbnail keyboard support ───────────────────────────────────────────────
 
-  /** Handle keyboard activation (Enter / Space) on a thumbnail button. */
+  /** Handle keyboard activation and arrow navigation on a thumbnail button. */
   public onThumbnailKeyDown(event: KeyboardEvent, index: number): void {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       this.navigateTo(index);
+      return;
     }
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      this.navigateTo(0);
+      this.focusThumbnail(0);
+      return;
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      const lastIndex: number = this.value().length - 1;
+      this.navigateTo(lastIndex);
+      this.focusThumbnail(lastIndex);
+      return;
+    }
+
+    const horizontalStep: number =
+      event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+    const verticalStep: number = event.key === 'ArrowDown' ? 1 : event.key === 'ArrowUp' ? -1 : 0;
+    const step: number = this.isVertical() ? verticalStep : horizontalStep;
+
+    if (step === 0) {
+      return;
+    }
+
+    event.preventDefault();
+    const nextIndex: number = this.clampIndex(index + step);
+    this.navigateTo(nextIndex);
+    this.focusThumbnail(nextIndex);
   }
 
   // ─── Autoplay ────────────────────────────────────────────────────────────────
@@ -452,5 +561,119 @@ export class GalleriaComponent implements OnDestroy {
     } else if (activeIndex >= firstIndex + numVisible) {
       this.thumbnailFirstIndex.set(activeIndex - numVisible + 1);
     }
+  }
+
+  /** Resolve the source URL for the current active image. */
+  public resolveCurrentItemSrc(): string | null {
+    return this.currentItem()?.src ?? null;
+  }
+
+  /** Resolve the alt text for the current active image, falling back to decorative alt text. */
+  public resolveCurrentItemAlt(): string {
+    const altText: string | undefined = this.currentItem()?.alt;
+    return this.getTrimmedOrEmpty(altText);
+  }
+
+  /** Resolve the source URL for a thumbnail image. */
+  public resolveThumbnailSrc(item: GalleriaItem): string | null {
+    const source: string | undefined = item.thumbnailSrc ?? item.src;
+    return this.getTrimmedOrNull(source);
+  }
+
+  /** Resolve the alt text for a thumbnail image. */
+  public resolveThumbnailAlt(item: GalleriaItem): string {
+    return this.getTrimmedOrEmpty(item.thumbnailAlt ?? item.alt);
+  }
+
+  /** Resolve the accessible name for a thumbnail button. */
+  public resolveThumbnailAriaLabel(item: GalleriaItem, index: number): string {
+    const thumbnailLabel: string | null = this.getTrimmedOrNull(item.thumbnailAlt);
+    if (thumbnailLabel) {
+      return thumbnailLabel;
+    }
+
+    const itemLabel: string | null = this.getTrimmedOrNull(item.alt);
+    if (itemLabel) {
+      return itemLabel;
+    }
+
+    return `Thumbnail ${index + 1}`;
+  }
+
+  private activateFocusTrap(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const container: HTMLElement | undefined = this.fullScreenContainerElement()?.nativeElement;
+    if (!container) {
+      return;
+    }
+
+    this.deactivateFocusTrap();
+    this.focusTrap = new FocusTrap(container);
+    this.focusTrap.activate();
+  }
+
+  private deactivateFocusTrap(): void {
+    this.focusTrap?.deactivate();
+    this.focusTrap = null;
+  }
+
+  private restoreFullScreenTriggerFocus(): void {
+    queueMicrotask((): void => {
+      if (this.fullScreenTriggerElement?.isConnected) {
+        this.fullScreenTriggerElement.focus();
+      } else {
+        const fallbackTrigger: HTMLButtonElement | null =
+          this.fullScreenTriggerButtonElement()?.nativeElement ?? null;
+        fallbackTrigger?.focus();
+      }
+      this.fullScreenTriggerElement = null;
+    });
+  }
+
+  private clampIndex(index: number): number {
+    const itemCount: number = this.value().length;
+    if (itemCount === 0) {
+      return 0;
+    }
+
+    return Math.max(0, Math.min(index, itemCount - 1));
+  }
+
+  private focusThumbnail(index: number): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    queueMicrotask((): void => {
+      if (!this.document.defaultView) {
+        return;
+      }
+
+      const root: ParentNode = this.hostElement.nativeElement;
+      const target: HTMLButtonElement | null = root.querySelector<HTMLButtonElement>(
+        `[data-thumbnail-index="${index}"]`
+      );
+      target?.focus();
+    });
+  }
+
+  private getLabelOrFallback(value: string | null | undefined, fallback: string): string {
+    return this.getTrimmedOrNull(value) ?? fallback;
+  }
+
+  private getTrimmedOrNull(value: string | null | undefined): string | null {
+    if (!value) {
+      return null;
+    }
+
+    const trimmedValue: string = value.trim();
+    return trimmedValue.length > 0 ? trimmedValue : null;
+  }
+
+  private getTrimmedOrEmpty(value: string | null | undefined): string {
+    return this.getTrimmedOrNull(value) ?? '';
   }
 }
