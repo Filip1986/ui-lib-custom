@@ -102,7 +102,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 52   | Badge           | Positioning variants, `aria-label` passthrough            | ✅ Done     |
 | 53   | Tag             | Dismissible variant `aria-label`                          | ✅ Done     |
 | 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done     |
-| 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ⏳ Queued   |
+| 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ✅ Done     |
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ✅ Done     |
 | 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ✅ Done     |
 | 58   | Divider         | `role=separator` + `aria-orientation`                     | ⏳ Queued   |
@@ -252,7 +252,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Tag             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Skeleton        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Skeleton        | 9   | 9    | 9    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | ProgressBar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ProgressSpinner | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | MeterGroup      | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |

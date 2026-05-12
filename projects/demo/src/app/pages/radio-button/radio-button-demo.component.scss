@@ -1,40 +1,42 @@
-.radio-button-demo {
-  padding: 2rem;
-  max-width: 800px;
-}
+@use '../../shared/styles/doc-page.scss';
 
-.radio-button-demo h1 {
-  margin-bottom: 0.5rem;
-}
+// ---- RadioButton-specific demo helpers -----------------------------
 
-.radio-button-demo h2 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-}
-
-.radio-button-demo h3 {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--uilib-color-neutral-600, #6b7280);
-}
-
-.demo-group {
+.demo-radio-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.demo-group--vertical {
   flex-direction: column;
-  align-items: flex-start;
+  gap: 0.5rem;
 }
 
-.demo-hint {
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  color: var(--uilib-color-neutral-600, #6b7280);
+.demo-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.demo-radio-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--uilib-muted, #6b7280);
+}
+
+// ---- Variant comparison rows ---------------------------------------
+
+.demo-radio-variant-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.demo-radio-variant-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--uilib-muted, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  width: 5rem;
+  flex-shrink: 0;
 }

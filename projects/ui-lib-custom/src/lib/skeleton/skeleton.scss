@@ -14,10 +14,29 @@ ui-lib-skeleton {
 // ---- Host element ------------------------------------------------
 .ui-lib-skeleton {
   display: block;
-  background-color: var(--uilib-skeleton-bg);
-  border-radius: var(--uilib-skeleton-border-radius);
   position: relative;
-  overflow: hidden;
+
+  &__content {
+    display: contents;
+  }
+
+  &__content--hidden {
+    display: none;
+  }
+
+  &__placeholder {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  &--loading {
+    background-color: var(--uilib-skeleton-bg);
+    border-radius: var(--uilib-skeleton-border-radius);
+    overflow: hidden;
+  }
 
   // ---- Shimmer inner element -------------------------------------
   &__shimmer {
@@ -92,5 +111,12 @@ ui-lib-skeleton {
 
   100% {
     background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-skeleton--wave .ui-lib-skeleton__shimmer {
+    animation: none;
+    background-position: 50% 0;
   }
 }

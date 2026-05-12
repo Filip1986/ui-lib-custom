@@ -694,9 +694,8 @@ describe('TableComponent accessibility', (): void => {
     it('updates the pagination live region when the page changes', async (): Promise<void> => {
       const fixture: ComponentFixture<PaginatedHostComponent> =
         await createFixture(PaginatedHostComponent);
-      const pageButtons: NodeListOf<HTMLButtonElement> = root(fixture).querySelectorAll<HTMLButtonElement>(
-        '.uilib-paginator-page'
-      );
+      const pageButtons: NodeListOf<HTMLButtonElement> =
+        root(fixture).querySelectorAll<HTMLButtonElement>('.uilib-paginator-page');
 
       pageButtons[1]?.click();
       fixture.detectChanges();

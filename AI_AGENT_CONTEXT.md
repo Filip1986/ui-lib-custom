@@ -70,38 +70,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Terminal component — 6-phase hardening COMPLETE (#70)]
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
 Changed:
-  - projects/ui-lib-custom/src/lib/terminal/terminal.ts
-      • Added module-level `let nextTerminalId: number = 0` counter
-      • Added `public readonly terminalId: string` bound to host `[attr.id]`
-      • Added `public readonly outputId: string` for the output live-region div
-  - projects/ui-lib-custom/src/lib/terminal/terminal.html
-      • Wrapped welcome message + history items in `<div class="ui-lib-terminal__output" role="log" [attr.id]="outputId" aria-label="Terminal output" aria-atomic="false">`
-      • Removed `aria-live="polite"` from individual `__response` divs (role=log on container implies it)
-  - projects/ui-lib-custom/src/lib/terminal/terminal.scss
-      • Added `&__output { flex: 1; display: flex; flex-direction: column }` layout rule
-      • Added `:focus-visible` ring to `__input` using `--uilib-terminal-input-caret-color`
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling all animations/transitions
-  - projects/ui-lib-custom/src/lib/terminal/terminal.a11y.spec.ts (CREATED — 14 tests)
-      • ARIA structure (5): role=region, aria-label, role=log on output, aria-label on output, input label, prompt aria-hidden
-      • Unique IDs (3): host instance id pattern, output id derived from host, two-instance uniqueness
-      • Keyboard interaction (4): Enter submit, Enter on empty, ArrowUp history, ArrowDown clears
-      • axe-core checks (5): no welcome, with welcome, with history, bootstrap variant, minimal variant
-  - projects/ui-lib-custom/src/lib/terminal/README.md
-      • Added full ARIA attributes table (host, output div, input, prompt spans)
-      • Replaced one-liner accessibility section with detailed notes (live region, focus, reduced motion)
-  - docs/COMPONENT_SCORES.md
-      • Terminal #70 queue status: ⏳ Queued → ✅ Done
-      • Utilities & Directives table: Terminal row populated — 9/9/9/8/9/9/9/9/9/9 avg 8.9 🟢
-State: Terminal hardening complete. Output area now has role=log (live region), unique instance IDs generated, :focus-visible ring on input, prefers-reduced-motion override in SCSS, and 14-test a11y regression suite covering ARIA structure, keyboard navigation, and axe-core automated checks.
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
+      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
+State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/terminal/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=terminal --no-coverage (41/41 PASS — 27 unit + 14 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: npm install required on fresh clone.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
 
 Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
 Changed:
@@ -135,29 +115,14 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
-      • Added module-level `let nextScrollPanelId: number = 0` counter and unique `componentId`/`contentId`
-      • Added `ariaLabel` input (`string | null`, default `null`) wired to `__content` via `[attr.aria-label]`
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html
-      • Added `role="region"`, `tabindex="0"`, `[id]="contentId"`, `[attr.aria-label]="ariaLabel()"` to `__content` div
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss
-      • Added `outline: none` + `:focus-visible` ring on `__content`
-  - projects/ui-lib-custom/src/lib/scroll-panel/README.md
-      • Added `ariaLabel` input to inputs table
-      • Added ARIA attributes table, keyboard interaction table, expanded accessibility section
-      • Updated usage examples to show `ariaLabel` in context
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.a11y.spec.ts (CREATED — 16 tests)
-      • axe-core checks (3): labelled, unlabelled, all variants
-      • ARIA structure (6): role=region, tabindex=0, aria-label present/absent, id format, unique IDs
-      • Dynamic label (2): aria-label updates on signal change, removed on null
-      • Keyboard (3): focusable, ArrowDown no error, PageDown no error
-      • Multi-variant (1): all 3 variants expose role+tabindex
-  - docs/COMPONENT_SCORES.md
-      • ScrollPanel #62: ⏳ Queued → ✅ Done
-      • Layout table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
-State: ScrollPanel hardening complete. Scrollable region is now keyboard-accessible (tabindex=0, role=region), has an ariaLabel input for screen reader context, unique stable IDs per instance, and :focus-visible ring for visible focus indicator.
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Resolved additive archive conflict by keeping the Skeleton handoff alongside entries already on `origin/main`
+      • Archived the prior Upload handoff to keep only the newest 3 entries in the active context file
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
+      • Resolved formatting-only merge conflict in pagination live-region coverage without changing assertions
+State: The Skeleton PR branch now has a true merge commit against the current `origin/main`. Remaining conflicts were limited to the archive handoff log and a formatting-only overlap in the Table accessibility spec.
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
   node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
@@ -212,3 +177,7 @@ Verification:
   npx jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: axe-core 4.11.1 flagged checkbox `<span role="checkbox">` with no accessible name (`aria-toggle-field-name`) and the `<th>` with only `aria-label` but no text content (`empty-table-header`). Fixed by adding `aria-label="Select all rows/row"` to spans and a `.uilib-tree-table-sr-only` span inside the header th.
 Next step: Tree (#34) hardening — `role=tree`, `role=treeitem`, expand/collapse keyboard navigation.
+node_modules/.bin/jest --testPathPatterns=table.a11y --no-coverage (88/88 PASS — table + tree-table a11y suites)
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the real merge. Fresh session also required `npm install` before Jest and the pinned TypeScript toolchain were available.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
