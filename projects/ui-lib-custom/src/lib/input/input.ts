@@ -21,7 +21,7 @@ import type { InputVariant, InputLabelFloat, InputType, InputSize } from './inpu
 
 export type { InputVariant, InputLabelFloat, InputType, InputSize } from './input.types';
 
-let inputIdCounter: number = 0;
+let nextInputId: number = 0;
 
 /**
  * Text input component with floating labels and validation states.
@@ -58,6 +58,7 @@ export class UiLibInput implements ControlValueAccessor {
   public readonly hint: InputSignal<string | null> = input<string | null>(null);
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
   public readonly disabled: InputSignal<boolean> = input<boolean>(false);
+  public readonly readonly: InputSignal<boolean> = input<boolean>(false);
   public readonly required: InputSignal<boolean> = input<boolean>(false);
   public readonly showCounter: InputSignal<boolean> = input<boolean>(false);
   public readonly maxLength: InputSignal<number | null> = input<number | null>(null);
@@ -72,8 +73,9 @@ export class UiLibInput implements ControlValueAccessor {
   private onChange: (value: string) => void = (): void => {};
   private onTouched: () => void = (): void => {};
 
+  public readonly inputId: string = `ui-lib-input-${nextInputId++}`;
   public readonly controlId: Signal<string> = computed<string>(
-    (): string => this.id() ?? `ui-lib-input-${++inputIdCounter}`
+    (): string => this.id() ?? this.inputId
   );
   public readonly errorId: Signal<string> = computed<string>(
     (): string => `${this.controlId()}-error`

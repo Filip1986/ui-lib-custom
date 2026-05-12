@@ -21,9 +21,8 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
 Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
-
----
 
 Date: 2026-05-12 [Carousel component — accessibility hardening COMPLETE (#45)]
 Changed:
