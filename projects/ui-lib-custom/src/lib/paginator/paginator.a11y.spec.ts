@@ -9,14 +9,14 @@ import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { PaginatorComponent } from './paginator.component';
 
-function queryElement<T extends HTMLElement>(
+function queryElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
   selector: string
 ): T | null {
   return (fixture.nativeElement as HTMLElement).querySelector<T>(selector);
 }
 
-function queryRequiredElement<T extends HTMLElement>(
+function queryRequiredElement<T extends Element>(
   fixture: ComponentFixture<unknown>,
   selector: string
 ): T {
@@ -27,7 +27,7 @@ function queryRequiredElement<T extends HTMLElement>(
   return element;
 }
 
-function queryElements<T extends HTMLElement>(
+function queryElements<T extends Element>(
   fixture: ComponentFixture<unknown>,
   selector: string
 ): T[] {
