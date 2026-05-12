@@ -27,6 +27,8 @@ export type {
   MeterSegment,
 } from './meter-group.types';
 
+let nextMeterGroupId: number = 0;
+
 /**
  * MeterGroup — segmented progress/meter bar component.
  *
@@ -49,6 +51,7 @@ export type {
   templateUrl: './meter-group.html',
   styleUrl: './meter-group.scss',
   host: {
+    '[attr.id]': 'instanceId',
     '[class]': 'hostClasses()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,6 +59,9 @@ export type {
 })
 export class MeterGroup {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  /** Unique instance identifier (auto-generated). */
+  public readonly instanceId: string = `ui-lib-meter-group-${++nextMeterGroupId}`;
 
   /** Array of meter segments to render. */
   public readonly values: InputSignal<MeterItem[]> = input<MeterItem[]>([]);
@@ -87,6 +93,9 @@ export class MeterGroup {
 
   /** Additional CSS classes to attach to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
+
+  /** Accessible label for the meter container group. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('Meter group');
 
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<MeterGroupVariant> = computed<MeterGroupVariant>(
@@ -121,14 +130,40 @@ export class MeterGroup {
       if (span === 0) {
         return [];
       }
+      const min: number = this.min();
+      const max: number = this.max();
       return this.values().map((item: MeterItem): MeterSegment => {
-        const clampedValue: number = Math.min(Math.max(item.value, this.min()), this.max());
+        const clampedValue: number = Math.min(Math.max(item.value, min), max);
         return {
           ...item,
           value: clampedValue,
-          percentage: (clampedValue / span) * 100,
+          percentage: ((clampedValue - min) / span) * 100,
         };
       });
     }
   );
+
+  /** Sum of all rendered segment values. */
+  public readonly totalValue: Signal<number> = computed<number>((): number =>
+    this.meterSegments().reduce(
+      (sum: number, segment: MeterSegment): number => sum + segment.value,
+      0
+    )
+  );
+
+  /** Screen-reader announcement string for the current total. */
+  public readonly totalAnnouncement: Signal<string> = computed<string>(
+    (): string => `Total: ${this.totalValue()}`
+  );
+
+  /** Returns a stable key for segment rendering. */
+  public trackSegment(index: number, segment: MeterSegment): string {
+    return `${index}-${segment.label}-${segment.value}`;
+  }
+
+  /** Returns an aria-label for a segment including value and range context. */
+  public getSegmentAriaLabel(segment: MeterSegment, index: number): string {
+    const label: string = segment.label.trim() || `Segment ${index + 1}`;
+    return `${label}: ${segment.value} of ${this.max()}`;
+  }
 }

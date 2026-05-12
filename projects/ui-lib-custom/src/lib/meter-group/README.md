@@ -26,6 +26,7 @@ import type { MeterItem } from 'ui-lib-custom/meter-group';
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant (falls back to ThemeConfigService) |
 | `styleClass` | `string \| null` | `null` | Extra CSS classes on the host |
+| `ariaLabel` | `string` | `'Meter group'` | Accessible label for the meter container group |
 
 ## MeterItem interface
 
@@ -81,9 +82,35 @@ storageItems: MeterItem[] = [
 | `--uilib-meter-group-label-color` | Legend label text colour |
 | `--uilib-meter-group-label-value-color` | Legend value text colour |
 | `--uilib-meter-group-swatch-size` | Legend colour swatch size |
+| `--uilib-meter-group-swatch-border-radius` | Legend swatch border radius |
+| `--uilib-meter-group-transition` | Segment transition shorthand |
+
+## ARIA attributes
+
+| Element | Attribute | Description |
+|---|---|---|
+| `.ui-lib-meter-group__meters` | `role="group"` | Groups all meter segments as one semantic meter group |
+| `.ui-lib-meter-group__meters` | `aria-label` | Uses `ariaLabel` input (`'Meter group'` default) |
+| `.ui-lib-meter-group__meter` | `role="meter"` | Announces each segment as a meter |
+| `.ui-lib-meter-group__meter` | `aria-valuenow` | Segment value clamped to `min`/`max` |
+| `.ui-lib-meter-group__meter` | `aria-valuemin` | Lower bound from `min` |
+| `.ui-lib-meter-group__meter` | `aria-valuemax` | Upper bound from `max` |
+| `.ui-lib-meter-group__meter` | `aria-label` | Human-readable segment text (`"<label>: <value> of <max>"`) |
+| `.ui-lib-meter-group__sr-total` | `aria-live="polite"` | Announces computed total changes |
+| `.ui-lib-meter-group__sr-total` | `aria-atomic="true"` | Reads total message as a complete phrase |
+
+## Keyboard interaction
+
+MeterGroup is informational (non-interactive). It does not add tabbable/focusable controls.
+
+| Key | Behaviour |
+|---|---|
+| `Tab` / `Shift+Tab` | Skips meter segments and legend items |
+| Arrow keys / Enter / Space | No component-specific keyboard handling |
 
 ## Accessibility
 
-- The meter container carries `role="group"` with `aria-label="Meter group"`.
-- Each segment carries `role="meter"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, and `aria-label` (label + value).
-- The legend is a `<ul>` with `aria-label="Legend"`.
+- Meter segments expose full meter semantics with value range and descriptive labels.
+- Decorative legend swatches/icons are `aria-hidden="true"` so screen readers announce only useful text.
+- A hidden live region announces segment total updates (for dynamic data changes).
+- Segment transitions are disabled for users with `prefers-reduced-motion: reduce`.
