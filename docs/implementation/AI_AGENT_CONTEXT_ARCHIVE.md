@@ -36,7 +36,6 @@ Terminal notes: Fresh clone required `npm install` before validation. `npm run b
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 ---
-
 Date: 2026-05-12 [Upload component — 6-phase hardening COMPLETE (#69)]
 Changed:
   - projects/ui-lib-custom/src/lib/upload/upload.component.ts
@@ -74,6 +73,153 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: jsdom does not support DragEvent — used `fakeDragEvent()` stub. `children[0]` array access flagged by TypeScript `noUncheckedIndexedAccess`; replaced with `fixture.debugElement.query(By.directive(UploadComponent)).componentInstance`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
+Changed:
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
+      • Added module-level `nextMeterGroupId` counter and unique host `instanceId`
+      • Added `ariaLabel` input and wired group ARIA label to template
+      • Fixed segment percentage calculation to respect `min`/`max` range (`(value - min) / (max - min)`)
+      • Added computed `totalValue` + `totalAnnouncement` for live total announcements
+      • Added stable segment track helper and richer per-segment aria-label formatter
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html
+      • Updated segment `@for` loops to use stable track keys
+      • Bound group `aria-label` to `ariaLabel` input
+      • Updated segment `aria-label` output to include value-range phrasing
+      • Added polite/atomic live region for total announcement text
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss
+      • Added visually-hidden live-region utility class
+      • Added `prefers-reduced-motion: reduce` override to disable meter transitions
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts
+      • Added tests for custom group aria-label, min/max-relative percentage calculation, and unique host IDs
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.a11y.spec.ts (CREATED — 18 tests)
+      • Added ARIA structure, decorative aria-hidden, live region total updates, keyboard non-focusability, unique IDs, and axe checks
+  - projects/ui-lib-custom/src/lib/meter-group/README.md
+      • Added `ariaLabel` input docs, ARIA attributes table, keyboard interaction table, and expanded accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • MeterGroup #57 queue status: ⏳ Queued → ✅ Done
+      • MeterGroup score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
+State: MeterGroup hardening complete. Segment ARIA labels now include value context, totals are announced through a live region, unique instance IDs are generated, reduced-motion support is in place, and dedicated a11y regression coverage is added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/meter-group/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=meter-group --no-coverage (45/45 PASS — 27 unit + 18 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
+Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]
+Changed:
+  - projects/ui-lib-custom/src/lib/panel/panel.a11y.spec.ts (CREATED — 23 tests)
+      • axe-core checks (4): basic, toggleable expanded, toggleable collapsed, all variants
+      • ARIA structure (5): role=region, aria-labelledby→header id, header id format, unique IDs, content id format
+      • Toggle button ARIA (6): absent when non-toggleable, aria-expanded true/false, aria-controls, accessible label, icon aria-hidden
+      • Content visibility ARIA (3): aria-hidden when collapsed, null when expanded, null when non-toggleable
+      • Keyboard interaction (3): Enter collapses, Space collapses, Enter expands collapsed panel
+      • Content projection (2): custom header rendered, aria-expanded present with custom header
+  - projects/ui-lib-custom/src/lib/panel/README.md
+      • Expanded CSS custom properties table (added font-size, font-weight, toggle-size entries)
+      • Added full ARIA attributes table (host, header div, content div, toggle button, toggle icon)
+      • Added keyboard interaction table (Tab, Enter, Space)
+      • Replaced one-liner accessibility section with detailed accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Panel #60: ⏳ Queued → ✅ Done in Tier 6 hardening queue
+      • Layout table: Panel row populated — 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Panel hardening complete. All ARIA attributes were already in place (role=region, aria-labelledby,
+  aria-expanded, aria-controls, aria-hidden, prefers-reduced-motion, unique IDs, :focus-visible ring).
+  Deliverable is the new 23-test a11y spec + expanded README documentation.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/panel/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=panel --no-coverage (110/110 PASS — 87 unit + 23 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
+Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
+      • Added module-level `let nextScrollPanelId: number = 0` counter and unique `componentId`/`contentId`
+      • Added `ariaLabel` input (`string | null`, default `null`) wired to `__content` via `[attr.aria-label]`
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html
+      • Added `role="region"`, `tabindex="0"`, `[id]="contentId"`, `[attr.aria-label]="ariaLabel()"` to `__content` div
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss
+      • Added `outline: none` + `:focus-visible` ring on `__content`
+  - projects/ui-lib-custom/src/lib/scroll-panel/README.md
+      • Added `ariaLabel` input to inputs table
+      • Added ARIA attributes table, keyboard interaction table, expanded accessibility section
+      • Updated usage examples to show `ariaLabel` in context
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.a11y.spec.ts (CREATED — 16 tests)
+      • axe-core checks (3): labelled, unlabelled, all variants
+      • ARIA structure (6): role=region, tabindex=0, aria-label present/absent, id format, unique IDs
+      • Dynamic label (2): aria-label updates on signal change, removed on null
+      • Keyboard (3): focusable, ArrowDown no error, PageDown no error
+      • Multi-variant (1): all 3 variants expose role+tabindex
+  - docs/COMPONENT_SCORES.md
+      • ScrollPanel #62: ⏳ Queued → ✅ Done
+      • Layout table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
+State: ScrollPanel hardening complete. Scrollable region is now keyboard-accessible (tabindex=0, role=region), has an ariaLabel input for screen reader context, unique stable IDs per instance, and :focus-visible ring for visible focus indicator.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Next step: Continue with Tier 6 queue — Tag (#53), Skeleton (#55), Divider (#58) or Toolbar (#59).
+
+---
+
+Date: 2026-05-12 [TreeTable component — accessibility hardening COMPLETE (#33)]
+Changed:
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.types.ts
+      • Added `setsize: number` and `posinset: number` fields to `TreeTableFlatNode`
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.ts
+      • Added module-level `let nextTreeTableId: number = 0` counter
+      • Added `ElementRef` injection and `instanceId` property
+      • Added `ariaLabel` input signal (falls back to caption, then 'Tree table')
+      • Updated `buildFlatList` to compute `setsize` and `posinset` per sibling group
+      • Fixed `onKeydown` to scope row query to host element (was `document.querySelectorAll`)
+      • Added `ArrowRight` expand/navigate-child and `ArrowLeft` collapse/parent keyboard handlers
+      • Added `findNodeByKey` private helper for keyboard expand/collapse
+      • Added `focusParentRow` private helper for ArrowLeft parent navigation
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.html
+      • Updated `aria-label` binding to use `ariaLabel() || caption() || 'Tree table'`
+      • Added `[attr.aria-setsize]`, `[attr.aria-posinset]`, `[attr.aria-rowindex]`, `[attr.data-key]` on body rows
+      • Added `role="gridcell"` on checkbox selection `<td>` with `aria-colindex="1"`
+      • Added `[attr.role]` on data `<td>` (rowheader on expander column, gridcell on others) + `[attr.aria-colindex]`
+      • Added `aria-label="Select all rows"` + visually-hidden text to header checkbox span
+      • Added `aria-label="Select row"` to row checkbox spans
+      • Added `.uilib-tree-table-sr-only` span inside header selection `<th>` for `empty-table-header` axe rule
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.scss
+      • Added `.uilib-tree-table-sr-only` visually-hidden utility class
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.a11y.spec.ts (CREATED — 44 tests)
+      • ARIA structure (treegrid role, aria-label, ariaLabel input, caption fallback, default fallback)
+      • Row roles and aria-level at each depth (level 1, 2, 3)
+      • aria-expanded true/false/absent for expanded/collapsed/leaf rows; expand and collapse via toggle
+      • aria-setsize and aria-posinset for root rows, child rows, single-child grandchildren
+      • Cell roles (rowheader, gridcell, checkbox gridcell, aria-colindex)
+      • Keyboard: ArrowDown/Up navigation, clamping, ArrowRight expand, ArrowRight navigate-child, ArrowRight leaf no-op, ArrowLeft collapse, ArrowLeft parent navigation, ArrowLeft root no-op, Home/End
+      • Unique instanceId per instance, format check
+      • Empty table structure
+      • axe-core: empty, one-level, two-level expanded, collapsed, checkbox modes
+  - projects/ui-lib-custom/src/lib/tree-table/README.md
+      • Added `ariaLabel` input, ARIA structure diagram, ARIA attributes table, keyboard interaction table, CSS vars table, accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • TreeTable #33: ⏳ Queued → ✅ Done
+      • Data Display table: TreeTable row populated (API 9, A11y 9, Perf 8, Comp 8, Theme 8, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: TreeTable hardening complete. aria-setsize/posinset, role="rowheader"/gridcell, ArrowRight/ArrowLeft keyboard navigation, ElementRef-scoped row queries, prefers-reduced-motion SCSS, and SR-only accessible names for checkbox spans all in place. 44-test a11y regression suite covers full treegrid WAI-ARIA pattern.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-table/ --max-warnings 0 (PASS)
+  npx jest --testPathPatterns=tree-table --no-coverage (85/85 PASS — 41 unit + 44 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  npx jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: axe-core 4.11.1 flagged checkbox `<span role="checkbox">` with no accessible name (`aria-toggle-field-name`) and the `<th>` with only `aria-label` but no text content (`empty-table-header`). Fixed by adding `aria-label="Select all rows/row"` to spans and a `.uilib-tree-table-sr-only` span inside the header th.
+Next step: Tree (#34) hardening — `role=tree`, `role=treeitem`, expand/collapse keyboard navigation.
 
 ---
 
