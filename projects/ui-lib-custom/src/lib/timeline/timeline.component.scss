@@ -19,6 +19,7 @@
   --uilib-timeline-opposite-min-width: 6rem;
   --uilib-timeline-font-size: 1rem;
   --uilib-timeline-color: var(--uilib-text-color, #1f2937);
+  --uilib-timeline-focus-ring-color: var(--uilib-primary-color, #3b82f6);
   display: flex;
   color: var(--uilib-timeline-color);
   font-size: var(--uilib-timeline-font-size);
@@ -28,6 +29,15 @@
 // =============================================================================
 .ui-lib-timeline__event {
   display: contents;
+}
+
+.ui-lib-timeline__event:focus-within {
+  .ui-lib-timeline__content,
+  .ui-lib-timeline__opposite {
+    border-radius: var(--uilib-radius-md, 0.5rem);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--uilib-timeline-focus-ring-color) 22%, transparent);
+  }
 }
 // =============================================================================
 // Layout: Vertical (default)
@@ -194,6 +204,10 @@
   box-sizing: border-box;
   transition: transform var(--uilib-transition-fast, 150ms ease);
 }
+
+.ui-lib-timeline__default-content {
+  display: block;
+}
 // =============================================================================
 // Size variants
 // =============================================================================
@@ -257,4 +271,31 @@
   --uilib-timeline-marker-bg: var(--uilib-surface-color, #ffffff);
   --uilib-timeline-marker-border-color: var(--uilib-border-color, #dee2e6);
   --uilib-timeline-marker-border-width: 1px;
+}
+
+[data-theme='dark'] {
+  .ui-lib-timeline--bootstrap {
+    --uilib-timeline-connector-color: color-mix(
+      in srgb,
+      var(--uilib-border-color, #495057) 85%,
+      transparent
+    );
+    --uilib-timeline-marker-bg: var(--uilib-surface-color, #111827);
+  }
+
+  .ui-lib-timeline--minimal {
+    --uilib-timeline-marker-bg: var(--uilib-surface-color, #111827);
+    --uilib-timeline-marker-border-color: color-mix(
+      in srgb,
+      var(--uilib-border-color, #495057) 85%,
+      transparent
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-timeline__dot {
+    transform: none !important;
+    transition: none;
+  }
 }

@@ -45,6 +45,8 @@ import {
   UPLOAD_INVALID_FILE_TYPE_MESSAGE,
 } from './upload.constants';
 
+let nextUploadId: number = 0;
+
 /**
  * Advanced file upload component with drag-and-drop, multi-file support,
  * image thumbnails, file validation, and three design variants.
@@ -209,6 +211,14 @@ export class UploadComponent implements OnDestroy {
     { read: TemplateRef }
   );
 
+  // ─── Instance identity ─────────────────────────────────────────────────────
+
+  /** Unique numeric identifier for this instance, used to generate element IDs. */
+  private readonly instanceId: number = nextUploadId++;
+
+  /** Stable HTML `id` for the hidden `<input type="file">` element. */
+  public readonly fileInputId: string = `ui-lib-upload-input-${this.instanceId}`;
+
   // ─── View refs ─────────────────────────────────────────────────────────────
 
   /** Reference to the hidden `<input type="file">` element. */
@@ -219,6 +229,12 @@ export class UploadComponent implements OnDestroy {
 
   /** Whether a drag operation is currently hovering over the drop zone. */
   public readonly isDragOver: WritableSignal<boolean> = signal<boolean>(false);
+
+  /**
+   * Polite live-region message that announces drag-and-drop state changes to
+   * screen readers. Cleared when the drag leaves or a drop is completed.
+   */
+  public readonly dragStatusMessage: WritableSignal<string> = signal<string>('');
 
   /** Active validation error messages. Cleared when the user dismisses them. */
   public readonly validationMessages: WritableSignal<UploadValidationMessage[]> = signal<
@@ -312,6 +328,7 @@ export class UploadComponent implements OnDestroy {
     event.stopPropagation();
     if (!this.disabled()) {
       this.isDragOver.set(true);
+      this.dragStatusMessage.set('Files are over the drop zone');
     }
   }
 
@@ -326,6 +343,7 @@ export class UploadComponent implements OnDestroy {
     event.preventDefault();
     event.stopPropagation();
     this.isDragOver.set(false);
+    this.dragStatusMessage.set('');
   }
 
   /** Handles `drop` on the drop zone. */
@@ -333,6 +351,7 @@ export class UploadComponent implements OnDestroy {
     event.preventDefault();
     event.stopPropagation();
     this.isDragOver.set(false);
+    this.dragStatusMessage.set('');
     if (this.disabled()) {
       return;
     }
