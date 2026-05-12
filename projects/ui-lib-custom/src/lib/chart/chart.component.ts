@@ -4,6 +4,7 @@ import {
   DestroyRef,
   ElementRef,
   ViewEncapsulation,
+  computed,
   effect,
   inject,
   input,
@@ -20,7 +21,11 @@ import type {
   ChartSize,
   ChartThemeTokens,
   ChartType,
+  ChartDatasetRow,
+  ChartAccessibleDataset,
 } from './chart.types';
+
+let nextChartId: number = 0;
 
 /**
  * Generic Chart.js wrapper component with theme-aware reactive updates.
@@ -68,6 +73,9 @@ export class ChartComponent {
   /** ARIA label applied to the rendered canvas. */
   public readonly ariaLabel: InputSignal<string> = input<string>('Chart');
 
+  /** When true, renders a visually-hidden data table as an accessible alternative to the canvas. */
+  public readonly showDataTable: InputSignal<boolean> = input<boolean>(true);
+
   /** Optional host height override. */
   public readonly height: InputSignal<string | null> = input<string | null>(null);
 
@@ -98,6 +106,37 @@ export class ChartComponent {
   private chartInstance: Chart<ChartType> | null = null;
 
   private renderedType: ChartType | null = null;
+
+  /** Unique numeric ID for this chart instance. */
+  protected readonly chartId: number = nextChartId++;
+
+  /** ID of the visually-hidden data table element. */
+  protected readonly tableId: string = `ui-lib-chart-table-${this.chartId}`;
+
+  /** Dataset rows derived from the current `data()` for the accessible table. */
+  protected readonly datasetRows: Signal<ChartDatasetRow[]> = computed((): ChartDatasetRow[] => {
+    const chartData: ChartData<ChartType> | null = this.data();
+    if (!chartData) {
+      return [];
+    }
+    return (chartData.datasets as unknown as ChartAccessibleDataset[]).map(
+      (dataset: ChartAccessibleDataset): ChartDatasetRow => ({
+        label: typeof dataset.label === 'string' ? dataset.label : '',
+        values: [...dataset.data].map((point: unknown): string => this.formatDataValue(point)),
+      })
+    );
+  });
+
+  /** Column headers derived from the current `data()` labels for the accessible table. */
+  protected readonly tableLabels: Signal<string[]> = computed((): string[] => {
+    const chartData: ChartData<ChartType> | null = this.data();
+    if (!chartData || !chartData.labels) {
+      return [];
+    }
+    return (chartData.labels as unknown[]).map((label: unknown): string =>
+      label !== null && label !== undefined ? String(label) : ''
+    );
+  });
 
   constructor() {
     this.chartThemeService = new ChartThemeService();
@@ -183,9 +222,15 @@ export class ChartComponent {
     const themeOptions: Partial<ChartOptions<ChartType>> =
       this.chartThemeService.buildChartOptions(themeTokens);
 
+    const prefersReducedMotion: boolean =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const baseOptions: Partial<ChartOptions<ChartType>> = {
       responsive: this.responsive(),
       maintainAspectRatio: this.maintainAspectRatio(),
+      animation: prefersReducedMotion ? false : undefined,
       onClick: (
         event: ChartEvent,
         activeElements: ActiveElement[],
@@ -400,6 +445,28 @@ export class ChartComponent {
         },
       },
     } as ChartOptions<ChartType>;
+  }
+
+  private formatDataValue(point: unknown): string {
+    if (point === null || point === undefined) {
+      return '';
+    }
+    if (typeof point === 'number') {
+      return String(point);
+    }
+    if (Array.isArray(point)) {
+      return (point as number[]).join('–');
+    }
+    if (typeof point === 'object') {
+      const record: Record<string, unknown> = point as Record<string, unknown>;
+      if (typeof record['y'] === 'number') {
+        return String(record['y']);
+      }
+      if (typeof record['v'] === 'number') {
+        return String(record['v']);
+      }
+    }
+    return String(point);
   }
 
   private destroyChart(): void {

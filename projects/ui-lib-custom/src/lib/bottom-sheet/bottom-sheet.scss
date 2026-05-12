@@ -198,3 +198,24 @@ ui-lib-bottom-sheet {
     --uilib-bottom-sheet-backdrop-bg: rgba(0, 0, 0, 0.48);
   }
 }
+
+/* ── Close icon (inline SVG) ────────────────────────────────────── */
+.ui-lib-bottom-sheet__close-icon {
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-bottom-sheet__panel {
+    transition: none;
+  }
+
+  .ui-lib-bottom-sheet__backdrop {
+    transition: none;
+  }
+
+  .ui-lib-bottom-sheet__close {
+    transition: none;
+  }
+}

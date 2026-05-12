@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Table accessibility hardening COMPLETE (6-phase, #32); next is TreeTable (#33, Tier 4 Data Display)
+- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -38,7 +38,14 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
+- `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
+- `Badge` -> ✅ complete + hardened (6-phase, score 8.4/10, 25 tests — 13 unit + 12 a11y)
+- `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
+- `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
+- `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
+- `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 
 ---
 
@@ -53,71 +60,97 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-11 [Latest merge conflict verification for table hardening PR]
+Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the newest conflict against origin/main by preserving the current Table → TreeTable session state
-      • Kept active handoffs trimmed to the newest three entries and moved the older Stepper handoff to the archive
-State: Branch is merged with the latest origin/main again. This merge only required resolving AI_AGENT_CONTEXT.md; no library source files changed in the incoming main branch.
-Verification:
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: The repository is now fully unshallowed locally after `git fetch --unshallow origin`; merge conflict was isolated to AI_AGENT_CONTEXT.md.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Merge conflict resolution refresh for table hardening PR]
-Changed:
-  - AI_AGENT_CONTEXT.md
-      • Resolved the new conflict against origin/main by keeping the latest Table → TreeTable session state
-      • Preserved the incoming Stepper hardening handoff and trimmed active handoffs back to the newest three entries
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
+      • Added module-level `let nextBlockUiId: number = 0` counter
+      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
+      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
+      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
+      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
+      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
+      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
+      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
+      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
+      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
+  - projects/ui-lib-custom/src/lib/block-ui/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
   - docs/COMPONENT_SCORES.md
-  - projects/ui-lib-custom/src/lib/stepper/README.md
-  - projects/ui-lib-custom/src/lib/stepper/index.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper-panel.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.html
-  - projects/ui-lib-custom/src/lib/stepper/stepper.scss
-  - projects/ui-lib-custom/src/lib/stepper/stepper.spec.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.ts
-  - projects/ui-lib-custom/src/lib/stepper/stepper.types.ts
-      • Brought in the latest origin/main Stepper hardening changes as part of the merge
-State: Branch is merged with the latest origin/main again. The only manual conflict resolution was in AI_AGENT_CONTEXT.md; incoming Stepper changes are preserved as-is.
+      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
+State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
+  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/stepper/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=stepper --no-coverage (61/61 PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-  npm run typecheck (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: Fresh clone again required `npm install` before local validation because `node_modules/.bin/*` tools were absent.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-11 [Table component — accessibility hardening COMPLETE (#32)]
-Changed:
-  - projects/ui-lib-custom/src/lib/table/table.component.ts
-      • Replaced the old component-only ID with module-level `nextTableId: number`, `tableId`, and `captionId`
-      • Added dynamic `tableRole` (`grid` for sortable/selectable tables, `table` otherwise)
-      • Added caption-based `aria-labelledby`, `aria-multiselectable`, paginated `aria-rowcount`, and roving grid focus helpers
-      • Added keyboard cell navigation with Arrow/Home/End handling for interactive grid mode
-  - projects/ui-lib-custom/src/lib/table/table.component.html
-      • Added rowgroup/row/columnheader/gridcell semantics, `aria-rowindex` / `aria-colindex`, row selection state, and empty-state live region
-      • Wired roving tabindex attributes/data hooks to auto-generated header and body cells
-  - projects/ui-lib-custom/src/lib/table/table.component.scss
-      • Added focus-visible styling for focusable cells and a reduced-motion override for row/filter/expander transitions
-  - projects/ui-lib-custom/src/lib/table/table.component.spec.ts
-      • Updated sortable-header tabindex expectations to match roving tabindex behavior
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts (CREATED — 33 tests)
-      • Added ARIA structure, accessible-name, sorting, selection, keyboard navigation, pagination, disabled-state, empty-state, unique-id, and axe coverage
-  - projects/ui-lib-custom/src/lib/table/README.md
-      • Added column definition shape, selection modes, keyboard navigation, pagination notes, and CSS custom properties documentation
-  - docs/COMPONENT_SCORES.md
-      • Table: ⏳ Queued → ✅ Done; score row populated (avg 8.6)
-State: Table hardening complete. Dynamic grid/table semantics, caption wiring, roving grid keyboard navigation,
-  reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/table/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=table --no-coverage (125/125 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation; GitHub Actions CI run 25663127263 is green on attempt 2 (lint/build/typecheck/test/storybook).
+Terminal notes: Fresh clone required `npm install` before validation.
 Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
+Changed:
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.ts
+      • Added module-level `nextBottomSheetId` counter; exposed `instanceId` and `titleId` as unique per-instance strings
+      • Imported `isPlatformBrowser` from `@angular/common` and `PLATFORM_ID` for SSR safety
+      • Imported `FocusTrap` from `ui-lib-custom/core`; replaced `panel?.focus()` with full focus trap lifecycle (activate on open, deactivate on close with automatic focus restoration)
+      • Added `private focusTrap: FocusTrap | null = null` field
+      • Added `activateFocusTrap()` and `deactivateFocusTrap()` private methods
+      • Wired `deactivateFocusTrap()` into `ngOnDestroy` to prevent memory leaks
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.html
+      • Switched `[attr.aria-label]` → `[attr.aria-labelledby]` referencing `titleId`
+      • Added `[id]="titleId"` to the title span for the ARIA association
+      • Removed redundant `[attr.aria-hidden]` from the panel (host-level `aria-hidden` is sufficient)
+      • Replaced `<span class="pi pi-times">` close icon with an inline SVG (`aria-hidden="true"`, `focusable="false"`)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions on panel, backdrop, and close button
+      • Added `.ui-lib-bottom-sheet__close-icon` display rule for the SVG
+  - projects/ui-lib-custom/src/lib/bottom-sheet/bottom-sheet.a11y.spec.ts (CREATED — 24 tests)
+      • axe-core checks (3), ARIA attribute assertions (11), focus management (4), keyboard interaction (2), unique ID (2)
+  - projects/ui-lib-custom/src/lib/bottom-sheet/README.md
+      • Added ARIA attributes table, keyboard interactions table, expanded CSS custom properties table, and updated accessibility section
+  - docs/COMPONENT_SCORES.md
+      • BottomSheet #76: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: BottomSheet hardening complete. Full focus trap with restoration, aria-labelledby with unique per-instance IDs, reduced-motion support, SVG close icon, and 24-test a11y regression suite are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bottom-sheet/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=bottom-sheet --no-coverage (50/50 PASS — 26 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
+Changed:
+  - projects/ui-lib-custom/src/lib/card/card.ts
+      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
+      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
+  - projects/ui-lib-custom/src/lib/card/card.html
+      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
+      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
+  - projects/ui-lib-custom/src/lib/card/card.scss
+      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
+      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
+      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
+  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
+      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
+      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
+      • Added closable card accessible label coverage
+      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
+      • Added axe checks for basic, hoverable, closable, and multi-variant states
+  - projects/ui-lib-custom/src/lib/card/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
+      • Added full Accessibility section with examples, guidelines, and reduced-motion note
+  - docs/COMPONENT_SCORES.md
+      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
+State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.

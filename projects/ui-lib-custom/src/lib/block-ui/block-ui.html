@@ -1,9 +1,11 @@
-<ng-content />
+<div class="ui-lib-block-ui__content" [attr.inert]="blocked() ? '' : null">
+  <ng-content />
+</div>
 <div
   class="ui-lib-block-ui__mask"
   [class.ui-lib-block-ui__mask--visible]="blocked()"
   [style.z-index]="maskZIndex()"
-  [attr.aria-hidden]="!blocked()"
+  [attr.aria-hidden]="blocked() ? null : 'true'"
   role="status"
   aria-live="polite"
 >

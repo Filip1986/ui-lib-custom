@@ -1,1 +1,10 @@
 <ng-content />
+@if (resolvedOverflowCount() > 0) {
+  <span
+    class="ui-lib-avatar-group__overflow"
+    role="listitem"
+    [attr.aria-label]="overflowAnnouncement()"
+  >
+    +{{ resolvedOverflowCount() }}
+  </span>
+}
