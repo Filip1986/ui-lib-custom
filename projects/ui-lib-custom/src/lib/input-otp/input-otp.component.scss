@@ -29,6 +29,7 @@ uilib-input-otp {
 
   // Layout
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--uilib-input-otp-gap);
 }
@@ -113,6 +114,12 @@ uilib-input-otp.uilib-input-otp-invalid .uilib-input-otp-cell {
   border-color: var(--uilib-input-otp-invalid-border-color);
 }
 
+uilib-input-otp .uilib-input-otp-error {
+  width: 100%;
+  color: var(--uilib-color-danger-600, currentColor);
+  font-size: var(--uilib-font-size-sm, 0.875rem);
+}
+
 // ---------------------------------------------------------------------------
 // Disabled state
 // ---------------------------------------------------------------------------
@@ -168,5 +175,23 @@ uilib-input-otp.uilib-input-otp-readonly .uilib-input-otp-cell {
   &:focus-visible {
     background: var(--uilib-input-otp-bg);
     border-color: var(--uilib-input-otp-focus-border-color);
+  }
+}
+
+uilib-input-otp .uilib-input-otp-sr-only {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  padding: 0;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  uilib-input-otp .uilib-input-otp-cell {
+    transition: none;
   }
 }

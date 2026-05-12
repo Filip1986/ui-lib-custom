@@ -90,7 +90,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
 | 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
 | 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ⏳ Queued   |
-| 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ⏳ Queued   |
+| 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ✅ Done     |
 | 50   | VirtualScroller | Accessible scroll region, keyboard scrolling                                        | ⏳ Queued   |
 
 ### Tier 6 — Layout, Utility & Polish
@@ -164,7 +164,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | SelectButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| InputOtp      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
