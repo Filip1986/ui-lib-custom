@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14), **Input (#21)** also merged
 - **Next queue:** Alert hardening (Tier 5, #42) — next after Button
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -76,26 +76,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
-Changed:
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
-  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
-  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/data-view/README.md
-  - docs/reference/components/DATAVIEW.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
-Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
-
 Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -143,3 +123,31 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
+Date: 2026-05-12 [Input component — 6-phase hardening COMPLETE (#21)]
+Changed:
+  - projects/ui-lib-custom/src/lib/input/input.ts
+      • Renamed module-level counter from `inputIdCounter` to `nextInputId`
+      • Added stable class field `inputId` (avoids side effect in computed)
+      • Updated `controlId` computed to reference `this.inputId` instead of incrementing in computed
+      • Added `readonly: InputSignal<boolean>` input
+  - projects/ui-lib-custom/src/lib/input/input.html
+      • Added `[readOnly]="readonly()"` and `[attr.aria-readonly]="readonly() ? 'true' : null"` bindings
+  - projects/ui-lib-custom/src/lib/input/input.a11y.spec.ts
+      • Added `readonly` writable signal to host component + template binding
+      • Added 4 readonly tests (aria-readonly absent, set, native readOnly, cleared)
+      • Added axe-core readonly state check (65 tests total — up from 60)
+  - projects/ui-lib-custom/src/lib/input/README.md
+      • Added `readonly` row to inputs table with `disabled` vs `readonly` semantic note
+  - docs/COMPONENT_SCORES.md
+      • Input #21: ⏳ Queued → ✅ Done
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived DataView handoff to keep only the newest 3 in this file
+State: Input hardening complete. Component already had strong a11y foundations (label for/id, aria-invalid, aria-required, aria-describedby, error/hint live regions, prefers-reduced-motion). This session added the missing `readonly` input + aria-readonly bindings, stabilized the ID counter pattern, and extended the a11y spec from 30 to 35 tests.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/input/" --no-coverage (65/65 PASS — 30 unit + 35 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: npm install required on fresh clone. All checks green first run.
+Next step: Table hardening (Tier 4, #32).

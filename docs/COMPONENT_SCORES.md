@@ -50,7 +50,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component     | Key a11y concern                                                           | Status     |
 |------|---------------|----------------------------------------------------------------------------|------------|
-| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ⏳ Queued   |
+| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ✅ Done     |
 | 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done     |
 | 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ✅ Done     |
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done     |
