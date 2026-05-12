@@ -75,18 +75,19 @@ Changed:
   - AI_AGENT_CONTEXT.md
   - docs/COMPONENT_SCORES.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
   - projects/ui-lib-custom/src/lib/tree/tree.ts
   - projects/ui-lib-custom/src/lib/tree/tree.html
   - projects/ui-lib-custom/src/lib/tree/tree-node.ts
   - projects/ui-lib-custom/src/lib/tree/tree-node.html
   - projects/ui-lib-custom/src/lib/tree/tree.scss
-State: Merged the latest `origin/main` into the TreeSelect accessibility branch, reconciled the repeated Tree/docs conflicts, and preserved the already-validated TreeSelect + Tree accessibility behavior.
+State: Merged the latest `origin/main` into the TreeSelect accessibility branch again, reconciled the repeated Tree/docs conflicts plus the new Table a11y spec overlap, and preserved the already-validated TreeSelect + Tree accessibility behavior.
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
   node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: `origin/main` advanced again after the previous merge resolution, so a second merge + conflict pass was required.
+Terminal notes: `origin/main` advanced again after the previous merge resolution, so a third merge + conflict pass was required. `table.a11y.spec.ts` only needed the newer base-branch formatting.
 Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
 
 Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
