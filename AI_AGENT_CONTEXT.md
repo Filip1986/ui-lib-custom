@@ -53,6 +53,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 - `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
+- `Fieldset` -> ✅ complete + hardened (6-phase, score 9.0/10, 53 tests — 30 unit + 23 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
 - `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
@@ -69,19 +70,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
-
-Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/tree/tree.ts
-  - projects/ui-lib-custom/src/lib/tree/tree-node.html
-State: Restored the missing `TreeContext` methods on `Tree`, reintroduced optional `hostId` support so `TreeSelect` can wire `aria-controls` to the popup tree, and aligned tree rows with the context API by exposing stable row ids/labels plus decorative icon hiding. The original `TS2420` compile error is fixed and the related tree/tree-select accessibility test slice is green again.
-Verification:
-  .\node_modules\.bin\ng.cmd build ui-lib-custom (PASS)
-  .\node_modules\.bin\jest.cmd --testPathPatterns src/lib/tree/ tree-select --no-coverage (172/172 PASS)
-Terminal notes: Initial Jest command using `|` in `--testPathPatterns` was parsed by PowerShell as a pipeline; reran successfully with separate pattern arguments.
-Next step: Commit the verified Tree / TreeSelect repair.
 
 Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
 Changed:
@@ -135,3 +123,25 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
+Date: 2026-05-12 [Fieldset — 6-phase hardening COMPLETE (#61)]
+Changed:
+  - projects/ui-lib-custom/src/lib/fieldset/fieldset.a11y.spec.ts (CREATED — 23 tests)
+      • 4 axe-core automated checks (basic, toggleable expanded, collapsed, all variants)
+      • 6 ARIA structure assertions (role=group, aria-labelledby, id formats, unique ids, decorative icon)
+      • 5 legend toggle ARIA checks (role, aria-expanded true/false, aria-controls)
+      • 3 content visibility checks (aria-hidden collapsed/expanded/non-toggleable)
+      • 3 keyboard interaction checks (Enter collapse, Space collapse, Enter expand)
+      • 2 content projection checks (custom legend rendered, aria-expanded present)
+  - projects/ui-lib-custom/src/lib/fieldset/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
+      • Expanded accessibility section with reduced-motion and unique-ID details
+  - docs/COMPONENT_SCORES.md
+      • Fieldset #61: ⏳ Queued → ✅ Done (Layout table row: 9/9/9/9/9/9/9/9/9/9 avg 9.0)
+State: Fieldset hardening complete. Component was already well-implemented (role=group, aria-labelledby, unique IDs, aria-expanded, aria-hidden, focus-visible ring, prefers-reduced-motion). Hardening added comprehensive a11y regression coverage and expanded documentation. No functional code changes were required — the component was already production-quality.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/fieldset/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=fieldset --no-coverage (53/53 PASS — 30 unit + 23 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Divider (#58) hardening — role=separator + aria-orientation.

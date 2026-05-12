@@ -4,6 +4,21 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+State: Restored the missing `TreeContext` methods on `Tree`, reintroduced optional `hostId` support so `TreeSelect` can wire `aria-controls` to the popup tree, and aligned tree rows with the context API by exposing stable row ids/labels plus decorative icon hiding. The original `TS2420` compile error is fixed and the related tree/tree-select accessibility test slice is green again.
+Verification:
+  .\node_modules\.bin\ng.cmd build ui-lib-custom (PASS)
+  .\node_modules\.bin\jest.cmd --testPathPatterns src/lib/tree/ tree-select --no-coverage (172/172 PASS)
+Terminal notes: Initial Jest command using `|` in `--testPathPatterns` was parsed by PowerShell as a pipeline; reran successfully with separate pattern arguments.
+Next step: Commit the verified Tree / TreeSelect repair.
+
+---
+
 Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
 Changed:
   - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
