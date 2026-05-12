@@ -130,14 +130,60 @@ describe('Message', (): void => {
     expect(messageElement).toBeTruthy();
   });
 
-  it('has role="status" on the host element', (): void => {
+  it('has role="status" on the host element for default info severity', (): void => {
     const { messageElement } = bootstrap();
     expect(messageElement.getAttribute('role')).toBe('status');
   });
 
-  it('has aria-live="polite" on the host element', (): void => {
+  it('has role="alert" on the host element for error severity', (): void => {
+    const { messageElement } = bootstrap({ severity: 'error' });
+    expect(messageElement.getAttribute('role')).toBe('alert');
+  });
+
+  it('has role="alert" on the host element for warn severity', (): void => {
+    const { messageElement } = bootstrap({ severity: 'warn' });
+    expect(messageElement.getAttribute('role')).toBe('alert');
+  });
+
+  it('has aria-live="polite" on the host element for default info severity', (): void => {
     const { messageElement } = bootstrap();
     expect(messageElement.getAttribute('aria-live')).toBe('polite');
+  });
+
+  it('has aria-live="assertive" on the host element for error severity', (): void => {
+    const { messageElement } = bootstrap({ severity: 'error' });
+    expect(messageElement.getAttribute('aria-live')).toBe('assertive');
+  });
+
+  it('has aria-atomic="true" on the host element', (): void => {
+    const { messageElement } = bootstrap();
+    expect(messageElement.getAttribute('aria-atomic')).toBe('true');
+  });
+
+  it('has a stable auto-generated id on the host element', (): void => {
+    const { messageElement } = bootstrap();
+    expect(messageElement.id).toMatch(/^ui-lib-message-\d+$/);
+  });
+
+  it('uses consumer-supplied messageId as the host id', (): void => {
+    const TEST_TEMPLATE_WITH_ID: string =
+      '<ui-lib-message [messageId]="\'form-error\'" severity="error" text="Required" />';
+
+    @Component({
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      standalone: true,
+      imports: [Message],
+      template: TEST_TEMPLATE_WITH_ID,
+    })
+    class HostWithIdComponent {}
+
+    const fixture: ComponentFixture<HostWithIdComponent> =
+      TestBed.createComponent(HostWithIdComponent);
+    fixture.detectChanges();
+    const el: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-message'
+    ) as HTMLElement;
+    expect(el.id).toBe('form-error');
   });
 
   it('always carries the base ui-lib-message class', (): void => {

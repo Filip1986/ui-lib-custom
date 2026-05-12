@@ -32,11 +32,13 @@ export type { ProgressBarMode, ProgressBarSize, ProgressBarVariant } from './pro
   host: {
     '[class]': 'hostClasses()',
     role: 'progressbar',
-    '[attr.aria-valuenow]': 'mode() === "determinate" ? clampedValue() : null',
+    '[attr.aria-valuenow]': 'ariaValueNow()',
     '[attr.aria-valuemin]': '"0"',
     '[attr.aria-valuemax]': '"100"',
-    '[attr.aria-label]': 'ariaLabel()',
-    '[attr.aria-busy]': 'mode() === "indeterminate" ? true : null',
+    '[attr.aria-valuetext]': 'valueText()',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
+    '[attr.aria-labelledby]': 'ariaLabelledBy() || null',
+    '[attr.aria-busy]': 'indeterminate() ? true : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -69,9 +71,36 @@ export class ProgressBar {
   /** Additional CSS classes applied to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
+  /**
+   * Accessible label for the progress bar.
+   * Auto-set to "Loading" in indeterminate mode when not provided.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+
+  /** ID of an external element that labels this progress bar (`aria-labelledby`). */
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+
+  /**
+   * Human-readable value text announced by screen readers.
+   * Overrides the default computed text — useful for i18n
+   * (e.g., `"75 Prozent"` or `"Chargement"`).
+   */
+  public readonly ariaValueText: InputSignal<string | null> = input<string | null>(null);
+
+  /**
+   * Message read by a polite live region when progress reaches 100%.
+   * Defaults to `"Complete"` when not set.
+   */
+  public readonly completionLabel: InputSignal<string | null> = input<string | null>(null);
+
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<ProgressBarVariant> = computed<ProgressBarVariant>(
     (): ProgressBarVariant => this.variant() ?? this.themeConfig.variant()
+  );
+
+  /** True when the bar is in indeterminate mode. */
+  protected readonly indeterminate: Signal<boolean> = computed<boolean>(
+    (): boolean => this.mode() === 'indeterminate'
   );
 
   /** Computed CSS classes applied to the host element. */
@@ -81,7 +110,7 @@ export class ProgressBar {
       `ui-lib-progress-bar--variant-${this.effectiveVariant()}`,
       `ui-lib-progress-bar--size-${this.size()}`,
     ];
-    if (this.mode() === 'indeterminate') {
+    if (this.indeterminate()) {
       classes.push('ui-lib-progress-bar--indeterminate');
     }
     const extra: string | null = this.styleClass();
@@ -105,8 +134,36 @@ export class ProgressBar {
     return `${Math.round(this.clampedValue())}%`;
   });
 
-  /** Accessible label used in indeterminate mode where aria-valuenow is absent. */
-  public readonly ariaLabel: Signal<string | null> = computed<string | null>((): string | null =>
-    this.mode() === 'indeterminate' ? 'Loading' : null
+  /**
+   * `aria-valuenow` value.
+   * Returns `null` (attribute omitted) in indeterminate mode so screen readers
+   * interpret the absence as "unknown progress".
+   */
+  protected readonly ariaValueNow: Signal<number | null> = computed<number | null>(
+    (): number | null => (this.indeterminate() ? null : this.clampedValue())
+  );
+
+  /** Human-readable value text for screen readers (`aria-valuetext`). */
+  protected readonly valueText: Signal<string> = computed<string>((): string => {
+    const override: string | null = this.ariaValueText();
+    if (override !== null) {
+      return override;
+    }
+    return this.indeterminate() ? 'Loading\u2026' : `${this.clampedValue()}%`;
+  });
+
+  /**
+   * Resolved `aria-label` value.
+   * The `ariaLabel` input takes precedence; falls back to `"Loading"` in
+   * indeterminate mode so screen readers always have a meaningful description.
+   */
+  protected readonly resolvedAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const labelInput: string | null = this.ariaLabel();
+      if (labelInput !== null) {
+        return labelInput;
+      }
+      return this.indeterminate() ? 'Loading' : null;
+    }
   );
 }

@@ -23,6 +23,7 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
       [invalid]="invalid()"
       [required]="required()"
       [disabled]="disabled()"
+      [readonly]="readonly()"
       [id]="inputId()"
       [labelFloat]="labelFloat()"
     />
@@ -37,6 +38,7 @@ class InputA11yHostComponent {
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly required: WritableSignal<boolean> = signal<boolean>(false);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly readonly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly inputId: WritableSignal<string | null> = signal<string | null>(null);
   public readonly labelFloat: WritableSignal<'over' | 'in' | 'on'> = signal<'over' | 'in' | 'on'>(
     'over'
@@ -300,6 +302,36 @@ describe('Input Accessibility', (): void => {
     expect(nativeInput().disabled).toBe(true);
   });
 
+  // ── Readonly state ────────────────────────────────────────────────────────
+
+  it('omits aria-readonly by default', (): void => {
+    expect(nativeInput().getAttribute('aria-readonly')).toBeNull();
+  });
+
+  it('sets aria-readonly="true" when readonly', (): void => {
+    fixture.componentInstance.readonly.set(true);
+    fixture.detectChanges();
+
+    expect(nativeInput().getAttribute('aria-readonly')).toBe('true');
+  });
+
+  it('sets the HTML readonly attribute on the native input when readonly', (): void => {
+    fixture.componentInstance.readonly.set(true);
+    fixture.detectChanges();
+
+    expect(nativeInput().readOnly).toBe(true);
+  });
+
+  it('clears aria-readonly when readonly is unset', (): void => {
+    fixture.componentInstance.readonly.set(true);
+    fixture.detectChanges();
+
+    fixture.componentInstance.readonly.set(false);
+    fixture.detectChanges();
+
+    expect(nativeInput().getAttribute('aria-readonly')).toBeNull();
+  });
+
   // ── axe-core checks ──────────────────────────────────────────────────────
 
   it('has no accessibility violations in default state', async (): Promise<void> => {
@@ -344,6 +376,13 @@ describe('Input Accessibility', (): void => {
 
   it('has no accessibility violations with floating label (in)', async (): Promise<void> => {
     fixture.componentInstance.labelFloat.set('in');
+    fixture.detectChanges();
+
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+
+  it('has no accessibility violations when readonly', async (): Promise<void> => {
+    fixture.componentInstance.readonly.set(true);
     fixture.detectChanges();
 
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });

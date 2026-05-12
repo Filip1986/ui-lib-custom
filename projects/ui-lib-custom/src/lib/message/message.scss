@@ -191,6 +191,14 @@ ui-lib-message.ui-lib-message--minimal.ui-lib-message--contrast {
   border-left-color: var(--uilib-color-neutral-800, #262626);
 }
 
+// ─── Reduced motion ───────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-message {
+    transition: none;
+    animation: none;
+  }
+}
+
 // ─── Dark mode ────────────────────────────────────────────────────────────────
 [data-theme='dark'] ui-lib-message.ui-lib-message--success {
   --uilib-message-bg: color-mix(in srgb, var(--uilib-color-success-900, #14532d) 60%, transparent);

@@ -141,3 +141,13 @@ ui-lib-inplace {
     --uilib-inplace-close-button-bg-hover: var(--uilib-surface-600, #4b5563);
   }
 }
+
+// ---- Reduced-motion override -----------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-inplace {
+    &__display,
+    &__close-button {
+      transition: none;
+    }
+  }
+}

@@ -1,5 +1,7 @@
+@use '../../shared/styles/doc-page.scss';
+
+// TreeTable needs extra width for multi-column data
 .demo-page {
-  padding: 2rem;
   max-width: 1100px;
 }
 
@@ -31,7 +33,6 @@
 }
 
 .demo-subsection-title {
-  font-size: 1rem;
   font-weight: 600;
   margin: 1rem 0 0.5rem;
   color: var(--uilib-color-text-secondary, #616161);
@@ -69,6 +70,7 @@
   }
 }
 
+// Horizontal layout — label and buttons on one row
 .demo-control-group {
   display: flex;
   align-items: center;

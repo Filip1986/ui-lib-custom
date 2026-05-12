@@ -1,7 +1,8 @@
+@use '../../shared/styles/doc-page.scss';
+
+// Table demo needs extra width for data-heavy examples
 .demo-page {
-  padding: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 .demo-header {
