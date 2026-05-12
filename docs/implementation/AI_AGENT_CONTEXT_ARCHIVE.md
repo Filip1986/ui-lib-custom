@@ -22,11 +22,19 @@ Changed:
       • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
   - projects/ui-lib-custom/src/lib/scroll-top/README.md
       • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
+      • Updated API table docs to reflect the new default button aria-label
   - docs/COMPONENT_SCORES.md
       • ScrollTop #75: ⏳ Queued → ✅ Done
-State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order.
-Verification: node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS)
-Next step: TreeTable (#33) hardening.
+      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
+State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 ---
 

@@ -92,6 +92,12 @@ import {
 | `trackBy` | `TrackByFunction<T> \| null` | `null` | Custom item tracking function. |
 | `dataKey` | `string \| null` | `null` | Fallback key for item tracking when `trackBy` is not set. |
 | `ariaLabel` | `string` | `'Data list'` | Host `aria-label`. |
+| `controlsAriaLabel` | `string` | `'Data view controls'` | Accessible label for built-in control group. |
+| `filterAriaLabel` | `string` | `'Filter items'` | Accessible label for filter input. |
+| `filterPlaceholder` | `string` | `'Filter items'` | Placeholder for filter input. |
+| `sortAriaLabel` | `string` | `'Sort items'` | Accessible label for sort dropdown. |
+| `listLayoutAriaLabel` | `string` | `'Show list view'` | Accessible label for list toggle button. |
+| `gridLayoutAriaLabel` | `string` | `'Show grid view'` | Accessible label for grid toggle button. |
 | `paginator` | `boolean` | `false` | Enables built-in paginator controls. |
 | `rows` | `number` | `10` | Rows per page. |
 | `first` | `number` | `0` | Zero-based first-row index (`[(first)]` supported). |
@@ -355,8 +361,12 @@ When no explicit component variant override is set, variant styles come from the
 - Data container uses `role="list"`; each rendered item wrapper uses `role="listitem"`.
 - Host supports `aria-label` via `ariaLabel` input.
 - Host sets `aria-busy="true"` during loading.
+- Built-in filter and sort controls expose explicit ARIA labels (`filterAriaLabel`, `sortAriaLabel`).
+- List/grid toggle buttons expose `aria-pressed` and configurable accessible names.
+- Hidden polite live region announces layout mode changes (`List view selected` / `Grid view selected`).
 - Paginator uses semantic `<nav aria-label="Pagination">`.
 - Current page button uses `aria-current="page"`.
+- Paginator ellipsis markers are decorative only (`aria-hidden="true"`).
 - Disabled paginator buttons expose disabled semantics (`disabled` + `aria-disabled` in browsers/AT mappings).
 
 ---
@@ -366,5 +376,4 @@ When no explicit component variant override is set, variant styles come from the
 - Client-side pagination slices only the rendered page segment at render time.
 - Item identity is stable with `trackBy`; `dataKey` provides a lightweight fallback key strategy.
 - Server-side mode (`totalRecords` set) avoids local slicing assumptions and delegates page data fetching to consumer logic.
-
 
