@@ -12,6 +12,7 @@ import { By } from '@angular/platform-browser';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { TableColumnComponent } from './table-column.component';
 import { TableComponent } from './table.component';
+import { TableExpansionDirective } from './table-templates.directive';
 
 interface Product {
   id: number;
@@ -146,6 +147,47 @@ class PaginatedHostComponent {
   imports: [TableComponent, TableColumnComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
+    <ui-lib-table
+      [value]="rows"
+      dataKey="id"
+      selectionMode="checkbox"
+      [(selection)]="selection"
+      caption="Checkbox products"
+    >
+      <ui-lib-table-column field="name" header="Name" />
+      <ui-lib-table-column field="category" header="Category" />
+    </ui-lib-table>
+  `,
+})
+class CheckboxSelectionHostComponent {
+  public readonly rows: Product[] = PRODUCTS;
+  public selection: Product[] = [];
+}
+
+@Component({
+  standalone: true,
+  imports: [TableComponent, TableColumnComponent, TableExpansionDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ui-lib-table [value]="rows" dataKey="id" caption="Expandable products">
+      <ui-lib-table-column field="name" header="Name" />
+      <ui-lib-table-column field="category" header="Category" />
+
+      <ng-template uiTableExpansion let-row let-index="index">
+        <div class="expanded-row-content">Expanded {{ row.name }} {{ index }}</div>
+      </ng-template>
+    </ui-lib-table>
+  `,
+})
+class ExpandableHostComponent {
+  public readonly rows: Product[] = PRODUCTS;
+}
+
+@Component({
+  standalone: true,
+  imports: [TableComponent, TableColumnComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
     <ui-lib-table [value]="[]" caption="Empty products">
       <ui-lib-table-column field="name" header="Name" [sortable]="true" />
     </ui-lib-table>
@@ -209,14 +251,27 @@ function cellAt<T>(fixture: ComponentFixture<T>, row: number, column: number): H
   ) as HTMLElement;
 }
 
-function pressKey(target: HTMLElement, key: string): KeyboardEvent {
+function pressKey(
+  target: HTMLElement,
+  key: string,
+  eventInit: Partial<KeyboardEventInit> = {}
+): KeyboardEvent {
   const event: KeyboardEvent = new KeyboardEvent('keydown', {
     key,
     bubbles: true,
     cancelable: true,
+    ...eventInit,
   });
   target.dispatchEvent(event);
   return event;
+}
+
+function sortAnnouncementRegion<T>(fixture: ComponentFixture<T>): HTMLElement {
+  return root(fixture).querySelectorAll('.ui-lib-table__sr-only')[0] as HTMLElement;
+}
+
+function paginationAnnouncementRegion<T>(fixture: ComponentFixture<T>): HTMLElement {
+  return root(fixture).querySelectorAll('.ui-lib-table__sr-only')[1] as HTMLElement;
 }
 
 describe('TableComponent accessibility', (): void => {
@@ -371,6 +426,19 @@ describe('TableComponent accessibility', (): void => {
 
       expect(headerCells(fixture)[0]?.getAttribute('aria-label')).toBe('Sort by Name ascending');
     });
+
+    it('announces sort changes in a polite live region', async (): Promise<void> => {
+      const fixture: ComponentFixture<InteractiveHostComponent> =
+        await createFixture(InteractiveHostComponent);
+
+      headerCells(fixture)[1]?.click();
+      fixture.detectChanges();
+
+      expect(sortAnnouncementRegion(fixture).getAttribute('aria-live')).toBe('polite');
+      expect(sortAnnouncementRegion(fixture).textContent.trim()).toBe(
+        'Table sorted by Category, ascending.'
+      );
+    });
   });
 
   describe('Row selection', (): void => {
@@ -410,6 +478,53 @@ describe('TableComponent accessibility', (): void => {
       );
 
       expect(tableElement(fixture).getAttribute('aria-multiselectable')).toBe('false');
+    });
+  });
+
+  describe('Expandable rows', (): void => {
+    it('wires expansion toggles to their controlled row IDs', async (): Promise<void> => {
+      const fixture: ComponentFixture<ExpandableHostComponent> =
+        await createFixture(ExpandableHostComponent);
+      const component: TableComponent = fixture.debugElement.query(By.directive(TableComponent))
+        .componentInstance as TableComponent;
+      const toggleButton: HTMLButtonElement = root(fixture).querySelector(
+        '.ui-lib-table__expander-btn'
+      ) as HTMLButtonElement;
+
+      expect(toggleButton.getAttribute('aria-expanded')).toBe('false');
+      expect(toggleButton.getAttribute('aria-controls')).toBe(component.getExpandedRowId(0));
+    });
+
+    it('applies the generated expansion row ID when a row is expanded', async (): Promise<void> => {
+      const fixture: ComponentFixture<ExpandableHostComponent> =
+        await createFixture(ExpandableHostComponent);
+      const component: TableComponent = fixture.debugElement.query(By.directive(TableComponent))
+        .componentInstance as TableComponent;
+      const toggleButton: HTMLButtonElement = root(fixture).querySelector(
+        '.ui-lib-table__expander-btn'
+      ) as HTMLButtonElement;
+
+      toggleButton.click();
+      fixture.detectChanges();
+
+      const expandedRow: HTMLElement = root(fixture).querySelector(
+        '.ui-lib-table__expansion-row'
+      ) as HTMLElement;
+      expect(toggleButton.getAttribute('aria-expanded')).toBe('true');
+      expect(expandedRow.id).toBe(component.getExpandedRowId(0));
+    });
+
+    it('activates the expansion toggle with Enter from the focused grid cell', async (): Promise<void> => {
+      const fixture: ComponentFixture<ExpandableHostComponent> =
+        await createFixture(ExpandableHostComponent);
+      document.body.appendChild(fixture.nativeElement);
+      const expanderCell: HTMLElement = cellAt(fixture, 1, 0);
+
+      expanderCell.focus();
+      pressKey(expanderCell, 'Enter');
+      fixture.detectChanges();
+
+      expect(root(fixture).querySelector('.ui-lib-table__expansion-row')).toBeTruthy();
     });
   });
 
@@ -481,6 +596,41 @@ describe('TableComponent accessibility', (): void => {
       expect(document.activeElement).toBe(cellAt(fixture, 0, 0));
     });
 
+    it('Ctrl+End moves focus to the last grid cell', async (): Promise<void> => {
+      const fixture: ComponentFixture<InteractiveHostComponent> =
+        await createFixture(InteractiveHostComponent);
+      document.body.appendChild(fixture.nativeElement);
+      const firstHeader: HTMLElement = cellAt(fixture, 0, 0);
+
+      firstHeader.focus();
+      pressKey(firstHeader, 'End', { ctrlKey: true });
+      fixture.detectChanges();
+
+      expect(document.activeElement).toBe(cellAt(fixture, 3, 2));
+    });
+
+    it('Ctrl+Home moves focus to the first grid cell', async (): Promise<void> => {
+      const fixture: ComponentFixture<InteractiveHostComponent> =
+        await createFixture(InteractiveHostComponent);
+      document.body.appendChild(fixture.nativeElement);
+      const lastBodyCell: HTMLElement = cellAt(fixture, 3, 2);
+
+      lastBodyCell.focus();
+      pressKey(lastBodyCell, 'Home', { ctrlKey: true });
+      fixture.detectChanges();
+
+      expect(document.activeElement).toBe(cellAt(fixture, 0, 0));
+    });
+
+    it('does not trap Tab key navigation inside the grid', async (): Promise<void> => {
+      const fixture: ComponentFixture<InteractiveHostComponent> =
+        await createFixture(InteractiveHostComponent);
+      const firstHeader: HTMLElement = cellAt(fixture, 0, 0);
+      const event: KeyboardEvent = pressKey(firstHeader, 'Tab');
+
+      expect(event.defaultPrevented).toBe(false);
+    });
+
     it('Enter on a focused body cell selects the row in single-selection mode', async (): Promise<void> => {
       const fixture: ComponentFixture<SingleSelectionHostComponent> = await createFixture(
         SingleSelectionHostComponent
@@ -493,6 +643,21 @@ describe('TableComponent accessibility', (): void => {
       fixture.detectChanges();
 
       expect(bodyRows(fixture)[0]?.getAttribute('aria-selected')).toBe('true');
+    });
+
+    it('removes embedded checkbox controls from the tab order in grid mode', async (): Promise<void> => {
+      const fixture: ComponentFixture<CheckboxSelectionHostComponent> = await createFixture(
+        CheckboxSelectionHostComponent
+      );
+      const headerCheckbox: HTMLInputElement = root(fixture).querySelector(
+        'thead .ui-lib-table__checkbox'
+      ) as HTMLInputElement;
+      const rowCheckbox: HTMLInputElement = root(fixture).querySelector(
+        'tbody .ui-lib-table__checkbox'
+      ) as HTMLInputElement;
+
+      expect(headerCheckbox.getAttribute('tabindex')).toBe('-1');
+      expect(rowCheckbox.getAttribute('tabindex')).toBe('-1');
     });
   });
 
@@ -516,6 +681,27 @@ describe('TableComponent accessibility', (): void => {
       expect(tableElement(fixture).getAttribute('aria-rowcount')).toBe('5');
       expect(rows[0]?.getAttribute('aria-rowindex')).toBe('2');
       expect(rows[1]?.getAttribute('aria-rowindex')).toBe('3');
+    });
+
+    it('announces pagination state through a polite live region', async (): Promise<void> => {
+      const fixture: ComponentFixture<PaginatedHostComponent> =
+        await createFixture(PaginatedHostComponent);
+
+      expect(paginationAnnouncementRegion(fixture).getAttribute('aria-live')).toBe('polite');
+      expect(paginationAnnouncementRegion(fixture).textContent.trim()).toBe('Page 1 of 2');
+    });
+
+    it('updates the pagination live region when the page changes', async (): Promise<void> => {
+      const fixture: ComponentFixture<PaginatedHostComponent> =
+        await createFixture(PaginatedHostComponent);
+      const pageButtons: NodeListOf<HTMLButtonElement> = root(fixture).querySelectorAll<HTMLButtonElement>(
+        '.uilib-paginator-page'
+      );
+
+      pageButtons[1]?.click();
+      fixture.detectChanges();
+
+      expect(paginationAnnouncementRegion(fixture).textContent.trim()).toBe('Page 2 of 2');
     });
   });
 
@@ -560,6 +746,19 @@ describe('TableComponent accessibility', (): void => {
       );
 
       bodyRows(fixture)[0]?.click();
+      fixture.detectChanges();
+
+      await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+    });
+
+    it('passes axe for expanded rows', async (): Promise<void> => {
+      const fixture: ComponentFixture<ExpandableHostComponent> =
+        await createFixture(ExpandableHostComponent);
+      const toggleButton: HTMLButtonElement = root(fixture).querySelector(
+        '.ui-lib-table__expander-btn'
+      ) as HTMLButtonElement;
+
+      toggleButton.click();
       fixture.detectChanges();
 
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
