@@ -74,7 +74,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ⏳ Queued   |
 | 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
 | 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ⏳ Queued   |
-| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ⏳ Queued   |
+| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ✅ Done     |
 | 40   | PickList   | Dual-list pattern, transfer action announcements                                | ⏳ Queued   |
 
 ### Tier 5 — Feedback, Status & Foundational
