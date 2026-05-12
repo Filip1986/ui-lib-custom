@@ -1,40 +1,57 @@
-<div class="demo-page">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">Panel</h1>
-    <p class="demo-hero__description">
-      A flexible content container with an optional collapsible body, header actions, and footer slot.
-      Supports three design variants and a smooth CSS grid-row collapse animation.
+  <!-- ══════════════════════════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════════════════════ -->
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Panel</h1>
+      <code class="demo-page-header__import">import &#123; Panel &#125; from 'ui-lib-custom/panel'</code>
+    </div>
+    <p class="demo-page-header__description">
+      A flexible content container with an optional collapsible body, a custom header slot,
+      header action icons, and a footer slot. Supports three design variants and a smooth
+      CSS grid-row collapse animation.
     </p>
-    <code class="demo-hero__import">import &#123; Panel &#125; from 'ui-lib-custom/panel';</code>
-  </div>
+    <div class="demo-page-header__preview">
+      <ui-lib-panel header="Introduction" variant="material">
+        <p style="margin:0; font-size:0.875rem;">Panel body content goes here.</p>
+      </ui-lib-panel>
+    </div>
+  </header>
 
-  <!-- Basic -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       BASIC
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
-    <p class="demo-section__desc">A simple panel with a header string and body content.</p>
-    <div class="demo-section__preview">
+    <p class="demo-section__description">
+      Set the <code>header</code> input to display a simple labelled panel. The body accepts
+      any projected content.
+    </p>
+    <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-panel header="Introduction">
         <p>
-          The Panel component is a lightweight wrapper that groups related content under a labelled
-          header. It renders as a bordered card with a header area, body, and optional footer.
+          The Panel component is a lightweight wrapper that groups related content under a
+          labelled header. It renders as a bordered card with a header area, body, and
+          optional footer.
         </p>
       </ui-lib-panel>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-panel header="Introduction"&gt;
-  &lt;p&gt;Panel body content.&lt;/p&gt;
-&lt;/ui-lib-panel&gt;</code></pre>
+    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
   </section>
 
-  <!-- Toggleable -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       TOGGLEABLE
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="toggleable" data-doc-anchor>
     <h2 class="demo-section__title">Toggleable</h2>
-    <p class="demo-section__desc">
-      Set <code>[toggleable]="true"</code> to display a chevron button in the header that collapses
-      or expands the body with a smooth CSS animation.
+    <p class="demo-section__description">
+      Set <code>[toggleable]="true"</code> to display a chevron button in the header.
+      Use <code>[(collapsed)]</code> for two-way binding and <code>(toggled)</code> to
+      receive a <code>PanelToggleEvent</code> on every state change.
     </p>
-    <div class="demo-section__preview">
+    <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-panel
         header="Collapsible Section"
         [toggleable]="true"
@@ -42,57 +59,55 @@
         (toggled)="handleToggle($event)"
       >
         <p>
-          This content is collapsible. Click the chevron button in the header to toggle visibility.
-          The collapse animation uses the CSS <code>grid-template-rows</code> technique for a smooth
-          height transition without JavaScript.
+          This content is collapsible. Click the chevron button in the header to toggle
+          visibility. The collapse animation uses the CSS <code>grid-template-rows</code>
+          technique for a smooth height transition.
         </p>
         <p>
-          The two-way <code>[(collapsed)]</code> binding keeps the parent in sync with the current
-          state, and the <code>(toggled)</code> output emits a <code>PanelToggleEvent</code> on
-          every change.
+          The two-way <code>[(collapsed)]</code> binding keeps the parent in sync, and the
+          <code>(toggled)</code> output emits a <code>PanelToggleEvent</code> on every change.
         </p>
       </ui-lib-panel>
       @if (lastToggleEvent()) {
         <p class="demo-event-badge">
-          Last event: collapsed = <strong>{{ lastToggleEvent()!.collapsed }}</strong>
+          Last event — collapsed: <strong>{{ lastToggleEvent()!.collapsed }}</strong>
         </p>
       }
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-panel
-  header="Collapsible Section"
-  [toggleable]="true"
-  [(collapsed)]="isCollapsed"
-  (toggled)="handleToggle($event)"
-&gt;
-  &lt;p&gt;Panel body content.&lt;/p&gt;
-&lt;/ui-lib-panel&gt;</code></pre>
+    <app-doc-code-snippet title="Toggleable" [code]="snippets.toggleable" />
   </section>
 
-  <!-- Collapsed by default -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       COLLAPSED BY DEFAULT
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="collapsed-default" data-doc-anchor>
     <h2 class="demo-section__title">Collapsed by Default</h2>
-    <p class="demo-section__desc">
-      Pass <code>[collapsed]="true"</code> (or initialise the model signal as <code>true</code>)
-      to start the panel in collapsed state.
+    <p class="demo-section__description">
+      Initialise the <code>collapsed</code> model signal as <code>true</code> to start the
+      panel in a collapsed state.
     </p>
-    <div class="demo-section__preview">
-      <ui-lib-panel header="Advanced Options" [toggleable]="true" [(collapsed)]="isStartCollapsed">
+    <div class="demo-section__preview demo-section__preview--column">
+      <ui-lib-panel
+        header="Advanced Options"
+        [toggleable]="true"
+        [(collapsed)]="isStartCollapsed"
+      >
         <p>This panel starts collapsed. Click the chevron to reveal the content.</p>
       </ui-lib-panel>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-panel header="Advanced Options" [toggleable]="true" [collapsed]="true"&gt;
-  &lt;p&gt;Hidden until expanded.&lt;/p&gt;
-&lt;/ui-lib-panel&gt;</code></pre>
+    <app-doc-code-snippet title="Collapsed by Default" [code]="snippets.collapsedDefault" />
   </section>
 
-  <!-- Custom header -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       CUSTOM HEADER
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="custom-header" data-doc-anchor>
     <h2 class="demo-section__title">Custom Header</h2>
-    <p class="demo-section__desc">
-      Project rich HTML into the header using the <code>[panelHeader]</code> attribute selector.
-      This replaces the plain text header.
+    <p class="demo-section__description">
+      Project rich HTML into the header using the <code>[panelHeader]</code> attribute
+      selector. This replaces the plain text header while preserving the toggle button.
     </p>
-    <div class="demo-section__preview">
+    <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-panel [toggleable]="true">
         <span panelHeader class="demo-custom-header">
           <span class="demo-custom-header__icon">&#9733;</span>
@@ -100,53 +115,47 @@
           <span class="demo-custom-header__badge">New</span>
         </span>
         <p>
-          The custom header slot lets you place any HTML — icons, badges, status indicators — into
-          the panel title area.
+          The custom header slot lets you place any HTML — icons, badges, status indicators
+          — into the panel title area.
         </p>
       </ui-lib-panel>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-panel [toggleable]="true"&gt;
-  &lt;span panelHeader&gt;
-    &lt;strong&gt;Featured&lt;/strong&gt;
-    &lt;span class="badge"&gt;New&lt;/span&gt;
-  &lt;/span&gt;
-  &lt;p&gt;Body content.&lt;/p&gt;
-&lt;/ui-lib-panel&gt;</code></pre>
+    <app-doc-code-snippet title="Custom Header" [code]="snippets.customHeader" />
   </section>
 
-  <!-- Header icons -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       HEADER ICONS
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="header-icons" data-doc-anchor>
     <h2 class="demo-section__title">Header Icons</h2>
-    <p class="demo-section__desc">
-      Project action buttons or icons into the right side of the header using the
-      <code>[panelIcons]</code> attribute selector. The icons appear before the built-in
-      toggle button.
+    <p class="demo-section__description">
+      Project action buttons into the header right side using the <code>[panelIcons]</code>
+      attribute selector. They are inserted before the built-in toggle button.
     </p>
-    <div class="demo-section__preview">
+    <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-panel header="Report" [toggleable]="true">
         <button panelIcons type="button" class="demo-icon-btn" title="Refresh">&#8635;</button>
         <button panelIcons type="button" class="demo-icon-btn" title="Download">&#8595;</button>
         <p>Panel body with custom action icons in the header.</p>
       </ui-lib-panel>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-panel header="Report" [toggleable]="true"&gt;
-  &lt;button panelIcons type="button"&gt;Refresh&lt;/button&gt;
-  &lt;p&gt;Body content.&lt;/p&gt;
-&lt;/ui-lib-panel&gt;</code></pre>
+    <app-doc-code-snippet title="Header Icons" [code]="snippets.headerIcons" />
   </section>
 
-  <!-- Footer -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="footer" data-doc-anchor>
     <h2 class="demo-section__title">Footer</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Project content into the footer using the <code>[panelFooter]</code> attribute selector.
-      The footer renders below the body and is always visible regardless of collapsed state.
+      The footer renders below the body and stays visible regardless of collapsed state.
     </p>
-    <div class="demo-section__preview">
+    <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-panel header="Terms of Service" [toggleable]="true">
         <p>
-          By using this service you agree to the terms outlined below. Please read carefully before
-          proceeding with registration or purchase.
+          By using this service you agree to the terms outlined below. Please read carefully
+          before proceeding.
         </p>
         <div panelFooter class="demo-footer-actions">
           <ui-lib-button type="button" severity="secondary">Decline</ui-lib-button>
@@ -154,135 +163,436 @@
         </div>
       </ui-lib-panel>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-panel header="Terms of Service"&gt;
-  &lt;p&gt;Body content.&lt;/p&gt;
-  &lt;div panelFooter&gt;
-    &lt;button type="button"&gt;Decline&lt;/button&gt;
-    &lt;button type="button"&gt;Accept&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/ui-lib-panel&gt;</code></pre>
+    <app-doc-code-snippet title="Footer" [code]="snippets.footer" />
   </section>
 
-  <!-- Variants -->
-  <section class="demo-section">
-    <h2 class="demo-section__title">Variants</h2>
-    <p class="demo-section__desc">Three design variants: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.</p>
-    <div class="demo-section__preview demo-variants-grid">
+  <!-- ══════════════════════════════════════════════════════════════════
+       DESIGN VARIANTS
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Design Variants</h2>
+    <p class="demo-section__description">
+      Three design variants: <code>material</code> (rounded corners, subtle shadow),
+      <code>bootstrap</code> (flat border, square corners), and <code>minimal</code>
+      (no shadow, instant toggle). When <code>variant</code> is <code>null</code>
+      (the default), the active theme from <code>ThemeConfigService</code> is used.
+    </p>
+    <div class="demo-panel-variants">
       <ui-lib-panel header="Material Panel" variant="material" [toggleable]="true">
-        <p>Rounded corners with a subtle box shadow. Toggle button is circular.</p>
+        <p style="margin:0; font-size:0.875rem;">Rounded corners with a subtle shadow. Toggle button is circular.</p>
       </ui-lib-panel>
       <ui-lib-panel header="Bootstrap Panel" variant="bootstrap" [toggleable]="true">
-        <p>Flat styling with a 4 px border radius and bold border.</p>
+        <p style="margin:0; font-size:0.875rem;">Flat styling with a 4 px border radius and bold border.</p>
       </ui-lib-panel>
       <ui-lib-panel header="Minimal Panel" variant="minimal" [toggleable]="true">
-        <p>Minimal styling with no shadow and instant toggle (0 ms transition).</p>
+        <p style="margin:0; font-size:0.875rem;">No shadow and instant toggle (0 ms transition).</p>
       </ui-lib-panel>
     </div>
-    <pre class="demo-section__code"><code>&lt;ui-lib-panel header="Panel" variant="material" /&gt;
-&lt;ui-lib-panel header="Panel" variant="bootstrap" /&gt;
-&lt;ui-lib-panel header="Panel" variant="minimal" /&gt;</code></pre>
+    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
   </section>
 
-  <!-- Playground -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       PLAYGROUND
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
+    <p class="demo-section__description">Customise the panel using the controls below.</p>
+
     <div class="demo-playground">
-      <div class="demo-playground__controls">
-        <label class="demo-control">
-          <span>Toggleable</span>
-          <input
-            type="checkbox"
-            [checked]="playgroundToggleable()"
-            (change)="playgroundToggleable.set($any($event.target).checked)"
-          />
-        </label>
-        <label class="demo-control">
-          <span>Collapsed</span>
-          <input
-            type="checkbox"
-            [checked]="playgroundCollapsed()"
-            (change)="playgroundCollapsed.set($any($event.target).checked)"
-            [disabled]="!playgroundToggleable()"
-          />
-        </label>
-        <div class="demo-control">
-          <span>Variant</span>
-          <div class="demo-variant-buttons">
-            @for (v of variants; track v) {
-              <ui-lib-button
-                type="button"
-                [appearance]="playgroundVariant() === v ? 'solid' : 'outline'"
-                severity="primary"
-                size="sm"
-                (click)="setPlaygroundVariant(v)"
-              >{{ v }}</ui-lib-button>
-            }
-          </div>
-        </div>
-      </div>
       <div class="demo-playground__preview">
         <ui-lib-panel
           header="Playground Panel"
           [toggleable]="playgroundToggleable()"
           [(collapsed)]="playgroundCollapsed"
           [variant]="playgroundVariant()"
+          style="width:100%"
         >
-          <p>Edit the controls above to see the panel change in real time.</p>
-          <p>Variant: <strong>{{ playgroundVariant() }}</strong> — Toggleable: <strong>{{ playgroundToggleable() }}</strong></p>
-          <div panelFooter class="demo-footer-info">
-            Footer area — always visible.
-          </div>
+          <p style="margin:0 0 0.5rem;">
+            Variant: <strong>{{ playgroundVariant() }}</strong> —
+            Toggleable: <strong>{{ playgroundToggleable() }}</strong>
+          </p>
+          <p style="margin:0; font-size:0.875rem; color: var(--uilib-muted)">
+            Edit the controls to see the panel change in real time.
+          </p>
+          <div panelFooter class="demo-footer-info">Footer — always visible.</div>
         </ui-lib-panel>
+      </div>
+
+      <div class="demo-playground__controls">
+        <!-- Toggleable -->
+        <div class="demo-control">
+          <span class="demo-control__label">Toggleable</span>
+          <div class="demo-control__buttons">
+            <ui-lib-button
+              type="button"
+              [appearance]="playgroundToggleable() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              (click)="togglePlaygroundToggleable()"
+            >{{ playgroundToggleable() ? 'On' : 'Off' }}</ui-lib-button>
+          </div>
+        </div>
+
+        <!-- Collapsed -->
+        <div class="demo-control">
+          <span class="demo-control__label">Collapsed</span>
+          <div class="demo-control__buttons">
+            <ui-lib-button
+              type="button"
+              [appearance]="playgroundCollapsed() && playgroundToggleable() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              (click)="togglePlaygroundCollapsed()"
+            >{{ playgroundCollapsed() ? 'On' : 'Off' }}</ui-lib-button>
+          </div>
+        </div>
+
+        <!-- Variant -->
+        <div class="demo-control">
+          <span class="demo-control__label">Variant</span>
+          <div class="demo-control__buttons">
+            @for (variant of variants; track variant) {
+              <ui-lib-button
+                type="button"
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                (click)="setPlaygroundVariant(variant)"
+              >{{ variant }}</ui-lib-button>
+            }
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- API -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       API
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
-    <h3 class="demo-section__subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th><th>Type</th><th>Default</th><th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><code>header</code></td><td><code>string</code></td><td><code>''</code></td><td>Header title text.</td></tr>
-        <tr><td><code>toggleable</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether the body can be collapsed.</td></tr>
-        <tr><td><code>collapsed</code></td><td><code>boolean</code> (model)</td><td><code>false</code></td><td>Two-way bound collapsed state.</td></tr>
-        <tr><td><code>variant</code></td><td><code>'material' | 'bootstrap' | 'minimal' | null</code></td><td><code>null</code></td><td>Design variant. Falls back to ThemeConfigService.</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string | null</code></td><td><code>null</code></td><td>Extra CSS classes added to the host element.</td></tr>
-      </tbody>
-    </table>
+    <!-- Inputs -->
+    <div id="api-inputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Inputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>header</code></td>
+            <td><code>string</code></td>
+            <td><code>''</code></td>
+            <td>Header title text. Use <code>[panelHeader]</code> projection for rich HTML.</td>
+          </tr>
+          <tr>
+            <td><code>toggleable</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Whether the body can be collapsed and expanded.</td>
+          </tr>
+          <tr>
+            <td><code>collapsed</code></td>
+            <td><code>boolean</code> (model)</td>
+            <td><code>false</code></td>
+            <td>Two-way bound collapsed state. Use <code>[(collapsed)]</code> with a signal.</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+            <td><code>null</code></td>
+            <td>Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
+          </tr>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Additional CSS classes added to the host element.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <h3 class="demo-section__subtitle">Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Output</th><th>Type</th><th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><code>toggled</code></td><td><code>PanelToggleEvent</code></td><td>Emitted when the collapsed state changes. Carries <code>collapsed</code> boolean and optional <code>originalEvent</code>.</td></tr>
-      </tbody>
-    </table>
+    <!-- Outputs -->
+    <div id="api-outputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Outputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Output</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>toggled</code></td>
+            <td><code>PanelToggleEvent</code></td>
+            <td>Emitted when the collapsed state changes via the toggle button.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="demo-section__description" style="margin-top:0.75rem;">
+        <code>PanelToggleEvent</code> shape:
+        <code>&#123; collapsed: boolean; originalEvent?: Event &#125;</code>
+      </p>
+    </div>
 
-    <h3 class="demo-section__subtitle">Content Projection</h3>
-    <table class="demo-api-table">
+    <!-- Content Projection -->
+    <div id="api-projection" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Content Projection</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Slot</th><th>Selector</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Body</td>
+            <td><em>(default)</em></td>
+            <td>Main body content.</td>
+          </tr>
+          <tr>
+            <td>Custom header</td>
+            <td><code>[panelHeader]</code></td>
+            <td>Replaces the text header area. The toggle button is preserved.</td>
+          </tr>
+          <tr>
+            <td>Header icons</td>
+            <td><code>[panelIcons]</code></td>
+            <td>Action elements placed in the header right area, before the toggle button.</td>
+          </tr>
+          <tr>
+            <td>Footer</td>
+            <td><code>[panelFooter]</code></td>
+            <td>Content below the body. Always visible regardless of collapsed state.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       CSS CUSTOM PROPERTIES
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="css-vars" data-doc-anchor>
+    <h2 class="demo-section__title">CSS Custom Properties</h2>
+    <p class="demo-section__description">
+      Override any of these on the host element or an ancestor to theme the panel without
+      touching component internals.
+    </p>
+    <table class="doc-properties">
       <thead>
-        <tr>
-          <th>Slot</th><th>Selector</th><th>Description</th>
-        </tr>
+        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
       </thead>
       <tbody>
-        <tr><td>Body</td><td><em>(default)</em></td><td>Main body content.</td></tr>
-        <tr><td>Custom header</td><td><code>[panelHeader]</code></td><td>Replaces the text header area.</td></tr>
-        <tr><td>Header icons</td><td><code>[panelIcons]</code></td><td>Action buttons in the header right area.</td></tr>
-        <tr><td>Footer</td><td><code>[panelFooter]</code></td><td>Footer content below the body.</td></tr>
+        <tr>
+          <td><code>--uilib-panel-border-color</code></td>
+          <td><code>var(--uilib-surface-300)</code></td>
+          <td>Panel border colour.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-border-radius</code></td>
+          <td><code>var(--uilib-radius-md)</code></td>
+          <td>Panel corner radius.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-header-bg</code></td>
+          <td><code>var(--uilib-surface)</code></td>
+          <td>Header background.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-header-color</code></td>
+          <td><code>var(--uilib-color-text)</code></td>
+          <td>Header text colour.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-header-font-size</code></td>
+          <td><code>0.9375rem</code></td>
+          <td>Header font size.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-header-font-weight</code></td>
+          <td><code>600</code></td>
+          <td>Header font weight.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-header-padding</code></td>
+          <td><code>0.75rem 1rem</code></td>
+          <td>Header padding.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-content-padding</code></td>
+          <td><code>1rem</code></td>
+          <td>Body content padding.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-footer-bg</code></td>
+          <td><code>var(--uilib-surface-50)</code></td>
+          <td>Footer background.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-footer-padding</code></td>
+          <td><code>0.75rem 1rem</code></td>
+          <td>Footer padding.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-toggle-color</code></td>
+          <td><code>var(--uilib-color-primary)</code></td>
+          <td>Toggle button icon colour.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-toggle-hover-bg</code></td>
+          <td><code>var(--uilib-surface-100)</code></td>
+          <td>Toggle button hover background.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-toggle-size</code></td>
+          <td><code>1.75rem</code></td>
+          <td>Toggle button width and height.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-panel-transition</code></td>
+          <td><code>200ms ease</code></td>
+          <td>Collapse animation duration and easing.</td>
+        </tr>
       </tbody>
     </table>
   </section>
 
-</div>
+  <!-- ══════════════════════════════════════════════════════════════════
+       ACCESSIBILITY
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+    <h2 class="demo-section__title">Accessibility</h2>
+
+    <!-- ARIA -->
+    <div id="a11y-aria" data-doc-anchor>
+      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Element</th><th>Attribute</th><th>Value</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Host</td>
+            <td><code>role</code></td>
+            <td><code>region</code></td>
+            <td>Marks the panel as a named landmark region.</td>
+          </tr>
+          <tr>
+            <td>Host</td>
+            <td><code>aria-labelledby</code></td>
+            <td>Header <code>id</code></td>
+            <td>Points to the header element to give the region an accessible name.</td>
+          </tr>
+          <tr>
+            <td>Header <code>&lt;div&gt;</code></td>
+            <td><code>id</code></td>
+            <td><code>ui-lib-panel-&#123;n&#125;-header</code></td>
+            <td>Unique per-instance; referenced by <code>aria-labelledby</code>.</td>
+          </tr>
+          <tr>
+            <td>Content <code>&lt;div&gt;</code></td>
+            <td><code>id</code></td>
+            <td><code>ui-lib-panel-&#123;n&#125;-content</code></td>
+            <td>Unique per-instance; referenced by <code>aria-controls</code>.</td>
+          </tr>
+          <tr>
+            <td>Content <code>&lt;div&gt;</code></td>
+            <td><code>aria-hidden</code></td>
+            <td><code>true</code> when collapsed</td>
+            <td>Removed when expanded so AT reads the body content.</td>
+          </tr>
+          <tr>
+            <td>Toggle <code>&lt;button&gt;</code></td>
+            <td><code>aria-expanded</code></td>
+            <td><code>true</code> / <code>false</code></td>
+            <td>Communicates the current open/closed state to screen readers.</td>
+          </tr>
+          <tr>
+            <td>Toggle <code>&lt;button&gt;</code></td>
+            <td><code>aria-controls</code></td>
+            <td>Content <code>id</code></td>
+            <td>Associates the button with the region it controls.</td>
+          </tr>
+          <tr>
+            <td>Toggle <code>&lt;button&gt;</code></td>
+            <td><code>aria-label</code></td>
+            <td><code>Toggle panel</code></td>
+            <td>Descriptive label for the icon-only button.</td>
+          </tr>
+          <tr>
+            <td>Toggle icon <code>&lt;span&gt;</code></td>
+            <td><code>aria-hidden</code></td>
+            <td><code>true</code></td>
+            <td>Decorative chevron is hidden from assistive technology.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Keyboard -->
+    <div id="a11y-keyboard" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Key</th><th>Target</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Tab</code></td>
+            <td>Toggle button</td>
+            <td>Moves focus to or away from the toggle button.</td>
+          </tr>
+          <tr>
+            <td><code>Enter</code></td>
+            <td>Toggle button</td>
+            <td>Toggles the panel open or collapsed.</td>
+          </tr>
+          <tr>
+            <td><code>Space</code></td>
+            <td>Toggle button</td>
+            <td>Toggles the panel open or collapsed.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Notes -->
+    <h3 class="demo-section__subtitle">Notes</h3>
+    <ul class="doc-list">
+      <li>
+        The panel host uses <code>role="region"</code> and <code>aria-labelledby</code>
+        so screen readers can announce it as a named landmark. Only use Panel for content
+        that warrants landmark navigation — avoid wrapping every minor section.
+      </li>
+      <li>
+        When collapsed, the content wrapper gains <code>aria-hidden="true"</code> so
+        assistive technologies skip hidden body content entirely.
+      </li>
+      <li>
+        The toggle button uses <code>aria-expanded</code> to communicate current state;
+        the value updates reactively as the panel opens and closes.
+      </li>
+      <li>
+        Focus is never moved programmatically on toggle — the user retains focus on the
+        toggle button, which is the expected pattern for show/hide regions.
+      </li>
+      <li>
+        All collapse/expand animations respect
+        <code>@media (prefers-reduced-motion: reduce)</code> — the transition duration
+        is set to <code>0ms</code> for users who prefer reduced motion.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       TOC RAIL
+  ══════════════════════════════════════════════════════════════════ -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>
