@@ -275,60 +275,50 @@
     <!-- Inputs -->
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>header</code></td>
-            <td><code>string</code></td>
-            <td><code>''</code></td>
-            <td>Header title text. Use <code>[panelHeader]</code> projection for rich HTML.</td>
-          </tr>
-          <tr>
-            <td><code>toggleable</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Whether the body can be collapsed and expanded.</td>
-          </tr>
-          <tr>
-            <td><code>collapsed</code></td>
-            <td><code>boolean</code> (model)</td>
-            <td><code>false</code></td>
-            <td>Two-way bound collapsed state. Use <code>[(collapsed)]</code> with a signal.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes added to the host element.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Input" field="input" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.input"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Type" field="type" width="220px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.type"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Default" field="default" width="120px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.default"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Description" field="description">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.description"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
 
     <!-- Outputs -->
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Output</th><th>Type</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>toggled</code></td>
-            <td><code>PanelToggleEvent</code></td>
-            <td>Emitted when the collapsed state changes via the toggle button.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Output" field="output" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.output"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Type" field="type" width="200px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.type"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Description" field="description">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.description"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
       <p class="demo-section__description" style="margin-top:0.75rem;">
         <code>PanelToggleEvent</code> shape:
         <code>&#123; collapsed: boolean; originalEvent?: Event &#125;</code>
@@ -338,33 +328,23 @@
     <!-- Content Projection -->
     <div id="api-projection" data-doc-anchor>
       <h3 class="demo-section__subtitle">Content Projection</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Slot</th><th>Selector</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Body</td>
-            <td><em>(default)</em></td>
-            <td>Main body content.</td>
-          </tr>
-          <tr>
-            <td>Custom header</td>
-            <td><code>[panelHeader]</code></td>
-            <td>Replaces the text header area. The toggle button is preserved.</td>
-          </tr>
-          <tr>
-            <td>Header icons</td>
-            <td><code>[panelIcons]</code></td>
-            <td>Action elements placed in the header right area, before the toggle button.</td>
-          </tr>
-          <tr>
-            <td>Footer</td>
-            <td><code>[panelFooter]</code></td>
-            <td>Content below the body. Always visible regardless of collapsed state.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="projectionRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Slot" field="slot" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.slot"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Selector" field="selector" width="180px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.selector"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Description" field="description">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.description"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
   </section>
 
@@ -377,83 +357,23 @@
       Override any of these on the host element or an ancestor to theme the panel without
       touching component internals.
     </p>
-    <table class="doc-properties">
-      <thead>
-        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-panel-border-color</code></td>
-          <td><code>var(--uilib-surface-300)</code></td>
-          <td>Panel border colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-border-radius</code></td>
-          <td><code>var(--uilib-radius-md)</code></td>
-          <td>Panel corner radius.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-header-bg</code></td>
-          <td><code>var(--uilib-surface)</code></td>
-          <td>Header background.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-header-color</code></td>
-          <td><code>var(--uilib-color-text)</code></td>
-          <td>Header text colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-header-font-size</code></td>
-          <td><code>0.9375rem</code></td>
-          <td>Header font size.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-header-font-weight</code></td>
-          <td><code>600</code></td>
-          <td>Header font weight.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-header-padding</code></td>
-          <td><code>0.75rem 1rem</code></td>
-          <td>Header padding.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-content-padding</code></td>
-          <td><code>1rem</code></td>
-          <td>Body content padding.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-footer-bg</code></td>
-          <td><code>var(--uilib-surface-50)</code></td>
-          <td>Footer background.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-footer-padding</code></td>
-          <td><code>0.75rem 1rem</code></td>
-          <td>Footer padding.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-toggle-color</code></td>
-          <td><code>var(--uilib-color-primary)</code></td>
-          <td>Toggle button icon colour.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-toggle-hover-bg</code></td>
-          <td><code>var(--uilib-surface-100)</code></td>
-          <td>Toggle button hover background.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-toggle-size</code></td>
-          <td><code>1.75rem</code></td>
-          <td>Toggle button width and height.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-panel-transition</code></td>
-          <td><code>200ms ease</code></td>
-          <td>Collapse animation duration and easing.</td>
-        </tr>
-      </tbody>
-    </table>
+    <ui-lib-table [value]="cssTokenRows" styleClass="demo-a11y-table">
+      <ui-lib-table-column header="Variable" field="variable" width="280px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.variable"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Default" field="default" width="220px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.default"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Description" field="description">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.description"></span>
+        </ng-template>
+      </ui-lib-table-column>
+    </ui-lib-table>
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -465,94 +385,50 @@
     <!-- ARIA -->
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Element</th><th>Attribute</th><th>Value</th><th>Notes</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Host</td>
-            <td><code>role</code></td>
-            <td><code>region</code></td>
-            <td>Marks the panel as a named landmark region.</td>
-          </tr>
-          <tr>
-            <td>Host</td>
-            <td><code>aria-labelledby</code></td>
-            <td>Header <code>id</code></td>
-            <td>Points to the header element to give the region an accessible name.</td>
-          </tr>
-          <tr>
-            <td>Header <code>&lt;div&gt;</code></td>
-            <td><code>id</code></td>
-            <td><code>ui-lib-panel-&#123;n&#125;-header</code></td>
-            <td>Unique per-instance; referenced by <code>aria-labelledby</code>.</td>
-          </tr>
-          <tr>
-            <td>Content <code>&lt;div&gt;</code></td>
-            <td><code>id</code></td>
-            <td><code>ui-lib-panel-&#123;n&#125;-content</code></td>
-            <td>Unique per-instance; referenced by <code>aria-controls</code>.</td>
-          </tr>
-          <tr>
-            <td>Content <code>&lt;div&gt;</code></td>
-            <td><code>aria-hidden</code></td>
-            <td><code>true</code> when collapsed</td>
-            <td>Removed when expanded so AT reads the body content.</td>
-          </tr>
-          <tr>
-            <td>Toggle <code>&lt;button&gt;</code></td>
-            <td><code>aria-expanded</code></td>
-            <td><code>true</code> / <code>false</code></td>
-            <td>Communicates the current open/closed state to screen readers.</td>
-          </tr>
-          <tr>
-            <td>Toggle <code>&lt;button&gt;</code></td>
-            <td><code>aria-controls</code></td>
-            <td>Content <code>id</code></td>
-            <td>Associates the button with the region it controls.</td>
-          </tr>
-          <tr>
-            <td>Toggle <code>&lt;button&gt;</code></td>
-            <td><code>aria-label</code></td>
-            <td><code>Toggle panel</code></td>
-            <td>Descriptive label for the icon-only button.</td>
-          </tr>
-          <tr>
-            <td>Toggle icon <code>&lt;span&gt;</code></td>
-            <td><code>aria-hidden</code></td>
-            <td><code>true</code></td>
-            <td>Decorative chevron is hidden from assistive technology.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Element" field="element" width="200px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.element"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Attribute" field="attribute" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.attribute"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Value" field="value" width="180px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.value"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Notes" field="notes">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.notes"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
 
     <!-- Keyboard -->
     <div id="a11y-keyboard" data-doc-anchor>
       <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Key</th><th>Target</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Tab</code></td>
-            <td>Toggle button</td>
-            <td>Moves focus to or away from the toggle button.</td>
-          </tr>
-          <tr>
-            <td><code>Enter</code></td>
-            <td>Toggle button</td>
-            <td>Toggles the panel open or collapsed.</td>
-          </tr>
-          <tr>
-            <td><code>Space</code></td>
-            <td>Toggle button</td>
-            <td>Toggles the panel open or collapsed.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="keyboardRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Key" field="key" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.key"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Target" field="target" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.target"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Action" field="action">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.action"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
 
     <!-- Notes -->

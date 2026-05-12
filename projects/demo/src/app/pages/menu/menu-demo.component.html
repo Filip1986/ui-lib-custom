@@ -258,137 +258,104 @@
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>model</code></td>
-          <td><code>MenuItem[]</code></td>
-          <td><code>[]</code></td>
-          <td>Items to render. Top-level items with an <code>items</code> array act as labelled group headers.</td>
-        </tr>
-        <tr>
-          <td><code>popup</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
-        </tr>
-        <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size token controlling item padding and font size.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS class applied to the host element.</td>
-        </tr>
-        <tr>
-          <td><code>ariaLabel</code></td>
-          <td><code>string</code></td>
-          <td><code>'Menu'</code></td>
-          <td>Accessible label for the <code>role="menu"</code> panel. Provide a unique value when multiple menus appear on screen.</td>
-        </tr>
-      </tbody>
-    </table>
+    <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
+      <ui-lib-table-column header="Name" field="name" width="160px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.name"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Type" field="type" width="220px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.type"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Default" field="default" width="120px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.default"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Description" field="description">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.description"></span>
+        </ng-template>
+      </ui-lib-table-column>
+    </ui-lib-table>
 
     <h3 class="demo-section__subtitle">Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Name</th><th>Payload</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>itemClick</code></td>
-          <td><code>MenuItemCommandEvent</code></td>
-          <td>Emitted when a non-disabled leaf item is activated (click or keyboard).</td>
-        </tr>
-        <tr>
-          <td><code>menuShow</code></td>
-          <td><code>MouseEvent</code></td>
-          <td>Emitted when the popup panel becomes visible. Popup mode only.</td>
-        </tr>
-        <tr>
-          <td><code>menuHide</code></td>
-          <td><code>void</code></td>
-          <td>Emitted when the popup panel is hidden. Popup mode only.</td>
-        </tr>
-      </tbody>
-    </table>
+    <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
+      <ui-lib-table-column header="Name" field="name" width="160px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.name"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Payload" field="payload" width="200px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.payload"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Description" field="description">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.description"></span>
+        </ng-template>
+      </ui-lib-table-column>
+    </ui-lib-table>
 
     <h3 class="demo-section__subtitle">Methods</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Name</th><th>Parameters</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>toggle(event)</code></td>
-          <td><code>MouseEvent</code></td>
-          <td>Toggles the popup open or closed anchored to the trigger. No-op in inline mode.</td>
-        </tr>
-        <tr>
-          <td><code>show(event)</code></td>
-          <td><code>MouseEvent</code></td>
-          <td>Shows the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.</td>
-        </tr>
-        <tr>
-          <td><code>hide()</code></td>
-          <td>—</td>
-          <td>Hides the popup and restores focus to the trigger element. No-op in inline mode.</td>
-        </tr>
-      </tbody>
-    </table>
+    <ui-lib-table [value]="methodRows" styleClass="demo-a11y-table">
+      <ui-lib-table-column header="Name" field="name" width="160px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.name"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Parameters" field="parameters" width="160px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.parameters"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Description" field="description">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.description"></span>
+        </ng-template>
+      </ui-lib-table-column>
+    </ui-lib-table>
 
     <h3 class="demo-section__subtitle">MenuItem</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>label</code></td><td><code>string?</code></td><td>Display text for the item or group header.</td></tr>
-        <tr><td><code>icon</code></td><td><code>string?</code></td><td>Icon class rendered in a decorative <code>&lt;span aria-hidden="true"&gt;</code>.</td></tr>
-        <tr><td><code>disabled</code></td><td><code>boolean?</code></td><td>When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and excluded from keyboard navigation.</td></tr>
-        <tr><td><code>separator</code></td><td><code>boolean?</code></td><td>Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.</td></tr>
-        <tr><td><code>visible</code></td><td><code>boolean?</code></td><td>When explicitly <code>false</code>, excludes the item from rendering.</td></tr>
-        <tr><td><code>items</code></td><td><code>MenuItem[]?</code></td><td>Child items — makes the parent a labelled group header (<code>role="group"</code>).</td></tr>
-        <tr><td><code>url</code></td><td><code>string?</code></td><td>Renders the item as <code>&lt;a href="..."&gt;</code>.</td></tr>
-        <tr><td><code>target</code></td><td><code>string?</code></td><td><code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).</td></tr>
-        <tr><td><code>styleClass</code></td><td><code>string?</code></td><td>Extra CSS class added to the rendered link element.</td></tr>
-        <tr><td><code>command</code></td><td><code>function?</code></td><td>Callback invoked when the item is activated (click or keyboard).</td></tr>
-      </tbody>
-    </table>
+    <ui-lib-table [value]="menuItemRows" styleClass="demo-a11y-table">
+      <ui-lib-table-column header="Property" field="property" width="160px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.property"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Type" field="type" width="160px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.type"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Description" field="description">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.description"></span>
+        </ng-template>
+      </ui-lib-table-column>
+    </ui-lib-table>
 
     <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr><th>Token</th><th>Default</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>--uilib-menu-bg</code></td><td><code>var(--uilib-surface-overlay, #fff)</code></td><td>Panel background colour.</td></tr>
-        <tr><td><code>--uilib-menu-border</code></td><td><code>1px solid var(--uilib-color-neutral-200)</code></td><td>Panel border.</td></tr>
-        <tr><td><code>--uilib-menu-shadow</code></td><td><code>var(--uilib-shadow-md)</code></td><td>Panel box-shadow.</td></tr>
-        <tr><td><code>--uilib-menu-radius</code></td><td><code>var(--uilib-radius-md, 0.375rem)</code></td><td>Panel border-radius.</td></tr>
-        <tr><td><code>--uilib-menu-min-width</code></td><td><code>12rem</code></td><td>Minimum panel width.</td></tr>
-        <tr><td><code>--uilib-menu-padding</code></td><td><code>var(--uilib-spacing-1, 0.25rem)</code></td><td>Vertical panel padding.</td></tr>
-        <tr><td><code>--uilib-menu-item-padding-y</code></td><td><code>var(--uilib-spacing-2, 0.5rem)</code></td><td>Item vertical padding.</td></tr>
-        <tr><td><code>--uilib-menu-item-padding-x</code></td><td><code>var(--uilib-spacing-3, 0.75rem)</code></td><td>Item horizontal padding.</td></tr>
-        <tr><td><code>--uilib-menu-item-bg-hover</code></td><td><code>var(--uilib-color-neutral-100, #f3f4f6)</code></td><td>Hover/focus background.</td></tr>
-        <tr><td><code>--uilib-menu-item-color-disabled</code></td><td><code>var(--uilib-color-neutral-400, #9ca3af)</code></td><td>Disabled item text colour.</td></tr>
-        <tr><td><code>--uilib-menu-separator-color</code></td><td><code>var(--uilib-color-neutral-200, #e5e7eb)</code></td><td>Separator line colour.</td></tr>
-        <tr><td><code>--uilib-menu-focus-shadow</code></td><td><code>0 0 0 2px color-mix(...)</code></td><td>Focus-visible ring.</td></tr>
-      </tbody>
-    </table>
+    <ui-lib-table [value]="cssTokenRows" styleClass="demo-a11y-table">
+      <ui-lib-table-column header="Token" field="token" width="260px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.token"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Default" field="default" width="260px">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.default"></span>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Description" field="description">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.description"></span>
+        </ng-template>
+      </ui-lib-table-column>
+    </ui-lib-table>
   </section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->

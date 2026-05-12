@@ -22,6 +22,37 @@ interface KeyboardRow {
   readonly action: string;
 }
 
+interface InputRow {
+  readonly name: string;
+  readonly type: string;
+  readonly default: string;
+  readonly description: string;
+}
+
+interface OutputRow {
+  readonly name: string;
+  readonly payload: string;
+  readonly description: string;
+}
+
+interface MethodRow {
+  readonly name: string;
+  readonly parameters: string;
+  readonly description: string;
+}
+
+interface MenuItemRow {
+  readonly property: string;
+  readonly type: string;
+  readonly description: string;
+}
+
+interface CssTokenRow {
+  readonly token: string;
+  readonly default: string;
+  readonly description: string;
+}
+
 /**
  * Demo page for the Menu component.
  */
@@ -243,6 +274,210 @@ onItemClick(event: MenuItemCommandEvent): void {
     { label: 'Item One', icon: 'pi pi-circle' },
     { label: 'Item Two', icon: 'pi pi-circle' },
     { label: 'Item Three', icon: 'pi pi-circle' },
+  ];
+
+  // ── API data ──────────────────────────────────────────────────────────────
+
+  public readonly inputRows: InputRow[] = [
+    {
+      name: '<code>model</code>',
+      type: '<code>MenuItem[]</code>',
+      default: '<code>[]</code>',
+      description:
+        'Items to render. Top-level items with an <code>items</code> array act as labelled group headers.',
+    },
+    {
+      name: '<code>popup</code>',
+      type: '<code>boolean</code>',
+      default: '<code>false</code>',
+      description:
+        'When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.',
+    },
+    {
+      name: '<code>variant</code>',
+      type: "<code>'material' | 'bootstrap' | 'minimal' | null</code>",
+      default: '<code>null</code>',
+      description:
+        'Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.',
+    },
+    {
+      name: '<code>size</code>',
+      type: "<code>'sm' | 'md' | 'lg'</code>",
+      default: "<code>'md'</code>",
+      description: 'Size token controlling item padding and font size.',
+    },
+    {
+      name: '<code>styleClass</code>',
+      type: '<code>string | null</code>',
+      default: '<code>null</code>',
+      description: 'Extra CSS class applied to the host element.',
+    },
+    {
+      name: '<code>ariaLabel</code>',
+      type: '<code>string</code>',
+      default: "<code>'Menu'</code>",
+      description:
+        'Accessible label for the <code>role="menu"</code> panel. Provide a unique value when multiple menus appear on screen.',
+    },
+  ];
+
+  public readonly outputRows: OutputRow[] = [
+    {
+      name: '<code>itemClick</code>',
+      payload: '<code>MenuItemCommandEvent</code>',
+      description: 'Emitted when a non-disabled leaf item is activated (click or keyboard).',
+    },
+    {
+      name: '<code>menuShow</code>',
+      payload: '<code>MouseEvent</code>',
+      description: 'Emitted when the popup panel becomes visible. Popup mode only.',
+    },
+    {
+      name: '<code>menuHide</code>',
+      payload: '<code>void</code>',
+      description: 'Emitted when the popup panel is hidden. Popup mode only.',
+    },
+  ];
+
+  public readonly methodRows: MethodRow[] = [
+    {
+      name: '<code>toggle(event)</code>',
+      parameters: '<code>MouseEvent</code>',
+      description:
+        'Toggles the popup open or closed anchored to the trigger. No-op in inline mode.',
+    },
+    {
+      name: '<code>show(event)</code>',
+      parameters: '<code>MouseEvent</code>',
+      description:
+        'Shows the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.',
+    },
+    {
+      name: '<code>hide()</code>',
+      parameters: '—',
+      description:
+        'Hides the popup and restores focus to the trigger element. No-op in inline mode.',
+    },
+  ];
+
+  public readonly menuItemRows: MenuItemRow[] = [
+    {
+      property: '<code>label</code>',
+      type: '<code>string?</code>',
+      description: 'Display text for the item or group header.',
+    },
+    {
+      property: '<code>icon</code>',
+      type: '<code>string?</code>',
+      description:
+        'Icon class rendered in a decorative <code>&lt;span aria-hidden="true"&gt;</code>.',
+    },
+    {
+      property: '<code>disabled</code>',
+      type: '<code>boolean?</code>',
+      description:
+        'When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and excluded from keyboard navigation.',
+    },
+    {
+      property: '<code>separator</code>',
+      type: '<code>boolean?</code>',
+      description: 'Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.',
+    },
+    {
+      property: '<code>visible</code>',
+      type: '<code>boolean?</code>',
+      description: 'When explicitly <code>false</code>, excludes the item from rendering.',
+    },
+    {
+      property: '<code>items</code>',
+      type: '<code>MenuItem[]?</code>',
+      description:
+        'Child items — makes the parent a labelled group header (<code>role="group"</code>).',
+    },
+    {
+      property: '<code>url</code>',
+      type: '<code>string?</code>',
+      description: 'Renders the item as <code>&lt;a href="..."&gt;</code>.',
+    },
+    {
+      property: '<code>target</code>',
+      type: '<code>string?</code>',
+      description:
+        "<code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).",
+    },
+    {
+      property: '<code>styleClass</code>',
+      type: '<code>string?</code>',
+      description: 'Extra CSS class added to the rendered link element.',
+    },
+    {
+      property: '<code>command</code>',
+      type: '<code>function?</code>',
+      description: 'Callback invoked when the item is activated (click or keyboard).',
+    },
+  ];
+
+  public readonly cssTokenRows: CssTokenRow[] = [
+    {
+      token: '<code>--uilib-menu-bg</code>',
+      default: '<code>var(--uilib-surface-overlay, #fff)</code>',
+      description: 'Panel background colour.',
+    },
+    {
+      token: '<code>--uilib-menu-border</code>',
+      default: '<code>1px solid var(--uilib-color-neutral-200)</code>',
+      description: 'Panel border.',
+    },
+    {
+      token: '<code>--uilib-menu-shadow</code>',
+      default: '<code>var(--uilib-shadow-md)</code>',
+      description: 'Panel box-shadow.',
+    },
+    {
+      token: '<code>--uilib-menu-radius</code>',
+      default: '<code>var(--uilib-radius-md, 0.375rem)</code>',
+      description: 'Panel border-radius.',
+    },
+    {
+      token: '<code>--uilib-menu-min-width</code>',
+      default: '<code>12rem</code>',
+      description: 'Minimum panel width.',
+    },
+    {
+      token: '<code>--uilib-menu-padding</code>',
+      default: '<code>var(--uilib-spacing-1, 0.25rem)</code>',
+      description: 'Vertical panel padding.',
+    },
+    {
+      token: '<code>--uilib-menu-item-padding-y</code>',
+      default: '<code>var(--uilib-spacing-2, 0.5rem)</code>',
+      description: 'Item vertical padding.',
+    },
+    {
+      token: '<code>--uilib-menu-item-padding-x</code>',
+      default: '<code>var(--uilib-spacing-3, 0.75rem)</code>',
+      description: 'Item horizontal padding.',
+    },
+    {
+      token: '<code>--uilib-menu-item-bg-hover</code>',
+      default: '<code>var(--uilib-color-neutral-100, #f3f4f6)</code>',
+      description: 'Hover/focus background.',
+    },
+    {
+      token: '<code>--uilib-menu-item-color-disabled</code>',
+      default: '<code>var(--uilib-color-neutral-400, #9ca3af)</code>',
+      description: 'Disabled item text colour.',
+    },
+    {
+      token: '<code>--uilib-menu-separator-color</code>',
+      default: '<code>var(--uilib-color-neutral-200, #e5e7eb)</code>',
+      description: 'Separator line colour.',
+    },
+    {
+      token: '<code>--uilib-menu-focus-shadow</code>',
+      default: '<code>0 0 0 2px color-mix(...)</code>',
+      description: 'Focus-visible ring.',
+    },
   ];
 
   // ── Accessibility data ────────────────────────────────────────────────────
