@@ -21,7 +21,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Component foundation hardening + documentation completeness
 - **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
-- **Next queue:** DataView hardening (Tier 4, #38) — sort/filter labels and list/grid toggle announcements
+- **Next queue:** Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45)
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -69,6 +69,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-12 [Galleria component — accessibility hardening COMPLETE (#46)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/galleria/galleria.ts
+  - projects/ui-lib-custom/src/lib/galleria/galleria.html
+  - projects/ui-lib-custom/src/lib/galleria/galleria.scss
+  - projects/ui-lib-custom/src/lib/galleria/galleria.types.ts
+  - projects/ui-lib-custom/src/lib/galleria/index.ts
+  - projects/ui-lib-custom/src/lib/galleria/galleria.spec.ts
+  - projects/ui-lib-custom/src/lib/galleria/galleria.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/galleria/README.md
+State: Galleria hardening is complete across the 6-phase prompt with priority accessibility fixes: fullscreen now behaves like a true dialog (`role="dialog"`, `aria-modal`, focus trap lifecycle, Escape close, focus restoration), item/thumbnail alt propagation is enforced via typed `GalleriaItem`, thumbnail strip semantics were upgraded to keyboard-navigable list buttons with `aria-current`, and previous/next/lightbox labels now support explicit inputs with safe fallbacks. Added reduced-motion CSS coverage and a dedicated 16-test a11y regression suite.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/galleria/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=galleria --no-coverage (55/55 PASS — 39 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validations. Playwright browsers were installed with `npx playwright install chromium` to capture `/tmp/galleria-hardening.png`.
+Next step: SpeedDial hardening (Tier 5, #47).
 
 Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
 Changed:
