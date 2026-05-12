@@ -20,7 +20,6 @@ import type {
   WritableSignal,
 } from '@angular/core';
 
-let nextTreeTableId: number = 0;
 import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
@@ -38,6 +37,9 @@ import type {
   TreeTableSortOrder,
   TreeTableVariant,
 } from './tree-table.types';
+
+/** Module-level counter — ensures each `TreeTableComponent` instance gets a unique numeric ID. */
+let nextTreeTableId: number = 0;
 
 /**
  * TreeTable renders hierarchical data as an expandable table.
@@ -528,7 +530,8 @@ export class TreeTableComponent {
     const filterText: string = this.globalFilterText().trim().toLowerCase();
     const sorted: TreeTableNode[] = this.applySortToNodes(nodes);
 
-    // Determine which nodes pass the filter to compute accurate setsize/posinset.
+    // Pre-filter to visible siblings so setsize/posinset computation and the
+    // render loop both iterate the same set exactly once (no double-filter).
     const visibleSiblings: TreeTableNode[] = filterText
       ? sorted.filter((node: TreeTableNode): boolean =>
           this.nodeOrDescendantMatchesFilter(node, filterText)
@@ -537,10 +540,7 @@ export class TreeTableComponent {
     const setsize: number = visibleSiblings.length;
     let posinset: number = 0;
 
-    for (const node of sorted) {
-      if (filterText && !this.nodeOrDescendantMatchesFilter(node, filterText)) {
-        continue;
-      }
+    for (const node of visibleSiblings) {
       posinset++;
       result.push({ node, depth, setsize, posinset });
       if (!node.leaf && node.children?.length && this.isExpanded(node)) {
