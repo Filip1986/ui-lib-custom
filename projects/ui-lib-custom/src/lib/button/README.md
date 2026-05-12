@@ -66,7 +66,8 @@ Every appearance composes with every severity, giving you 12 × 9 = 108 combinat
 
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
-| `disabled` | `boolean` | `false` | |
+| `disabled` | `boolean` | `false` | Applies native `disabled` attribute — removes button from tab order entirely |
+| `softDisabled` | `boolean` | `false` | Applies `aria-disabled="true"` without native disabled — button stays keyboard-discoverable; clicks are silently blocked |
 | `loading` | `boolean` | `false` | Shows spinner; blocks interaction |
 | `loadingIcon` | `SemanticIcon \| string` | `'spinner'` | Icon during loading |
 | `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Native button type |
@@ -91,12 +92,27 @@ Every appearance composes with every severity, giving you 12 × 9 = 108 combinat
 
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
-| `ariaLabel` | `string \| null` | `null` | Required when `iconOnly` is true |
-| `ariaPressed` | `boolean \| null` | `null` | For toggle buttons |
+| `ariaLabel` | `string \| null` | `null` | **Required** when `iconOnly` is `true`; also overrides the button's AT label during loading when no `loadingLabel` is provided |
+| `loadingLabel` | `string \| null` | `null` | AT-only label announced while `loading` is `true` (e.g. `'Saving…'`). Falls back to `ariaLabel`, then `'Loading'` |
+| `ariaPressed` | `boolean \| null` | `null` | For toggle buttons — binds `aria-pressed` |
 | `ariaChecked` | `boolean \| null` | `null` | For checkable roles |
 | `role` | `string \| null` | `null` | ARIA role override |
 | `tabIndex` | `number \| null` | `null` | |
 | `shadow` | `string \| null` | `null` | Inline value for `--uilib-button-shadow` |
+
+### ARIA attribute mapping
+
+| Scenario | Bound attribute | Value |
+|----------|-----------------|-------|
+| `iconOnly=true`, `ariaLabel="…"` | `aria-label` | provided value |
+| `iconOnly=true`, no `ariaLabel` | `aria-label` | `'Button'` (fallback) |
+| `loading=true`, `loadingLabel="…"` | `aria-label` | provided `loadingLabel` |
+| `loading=true`, no `loadingLabel`, `ariaLabel="…"` | `aria-label` | provided `ariaLabel` |
+| `loading=true`, neither set | `aria-label` | `'Loading'` |
+| `loading=true` | `aria-busy` | `'true'` |
+| `disabled=true` or `loading=true` | `aria-disabled` | `'true'` |
+| `softDisabled=true` | `aria-disabled` | `'true'` (no native `disabled`) |
+| `ariaPressed=true/false` | `aria-pressed` | `'true'` / `'false'` |
 
 ## Outputs
 
@@ -132,8 +148,9 @@ _none_ — use native `(click)` on the host element.
 <ui-lib-button appearance="link" severity="primary">Learn more</ui-lib-button>
 
 <!-- States -->
-<ui-lib-button [loading]="isSaving" severity="success" (click)="save()">Save</ui-lib-button>
-<ui-lib-button [disabled]="true" severity="primary">Disabled</ui-lib-button>
+<ui-lib-button [loading]="isSaving" severity="success" loadingLabel="Saving…" (click)="save()">Save</ui-lib-button>
+<ui-lib-button [disabled]="true" severity="primary">Disabled (removed from tab order)</ui-lib-button>
+<ui-lib-button [softDisabled]="true" severity="primary">Soft Disabled (keyboard-discoverable)</ui-lib-button>
 
 <!-- Icon-only (ariaLabel required) -->
 <ui-lib-button icon="trash" [iconOnly]="true" severity="danger" ariaLabel="Delete item" />

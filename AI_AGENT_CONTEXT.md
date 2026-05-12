@@ -55,7 +55,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
-- `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
+- `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 
 ---
 
@@ -103,35 +103,39 @@ Verification:
 Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
 Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
 
-Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Date: 2026-05-12 [Button component — accessibility hardening COMPLETE (#41)]
 Changed:
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
-      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
-      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
-      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
-      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
-      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
-      • Bound button aria-label to the resolved non-empty label
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
-      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
-      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
-      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
-  - projects/ui-lib-custom/src/lib/scroll-top/README.md
-      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
-      • Updated API table docs to reflect the new default button aria-label
+  - projects/ui-lib-custom/src/lib/button/button.ts
+      • Added `softDisabled` input (boolean, default false): keeps button keyboard-discoverable via `aria-disabled="true"` without native `disabled`
+      • Added `loadingLabel` input (string | null, default null): overrides AT label while loading
+      • Updated `ariaDisabled` computed to include `softDisabled()` in the `true` condition
+      • Updated `ariaLabelResolved` to prefer `loadingLabel()` over `ariaLabel()` during loading, with `'Loading'` as final fallback
+      • Updated `buttonClasses` to add `ui-lib-button--soft-disabled` class (opacity, cursor)
+      • Added `onButtonClick()` handler: calls `event.preventDefault()/stopImmediatePropagation()` when `softDisabled` is true
+  - projects/ui-lib-custom/src/lib/button/button.html
+      • Added `(click)="onButtonClick($event)"` binding for soft-disabled click prevention
+  - projects/ui-lib-custom/src/lib/button/button.scss
+      • Added `.ui-lib-button--soft-disabled` rule (opacity + cursor: not-allowed, no pointer-events override)
+      • Extended `@media (prefers-reduced-motion: reduce)` block to suppress all button transitions and loading spinner animation globally
+  - projects/ui-lib-custom/src/lib/button/button.a11y.spec.ts (REWRITTEN — 24 tests)
+      • Text button accessible name, icon-only aria-label, fallback 'Button' label
+      • Native disabled (disabled attr, aria-disabled, tab order)
+      • Soft disabled (no native disabled, aria-disabled, tab order preserved, click blocked)
+      • Loading (aria-busy, aria-disabled, loadingLabel override, ariaLabel fallback, 'Loading' fallback)
+      • Toggle/aria-pressed (true, false, absent)
+      • type="button" default, axe-core for 6 states
+  - projects/ui-lib-custom/src/lib/button/README.md
+      • Added `softDisabled` and `loadingLabel` to the State inputs table
+      • Added ARIA attribute mapping table and updated ariaLabel required-when note
   - docs/COMPONENT_SCORES.md
-      • ScrollTop #75: ⏳ Queued → ✅ Done
-      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
-State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
+      • Button #41: ⏳ Queued → ✅ Done
+      • Core Inputs table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
+State: Button hardening complete. softDisabled provides keyboard-discoverable disabled state, loadingLabel enables AT-friendly loading announcements, reduced-motion is suppressed globally, and 24 dedicated a11y tests give full regression coverage.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/button --no-coverage (72/72 PASS — 48 unit + 24 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+Terminal notes: None — all commands ran in linux bash directly.
+Next step: Alert hardening (Tier 5, #42).
 

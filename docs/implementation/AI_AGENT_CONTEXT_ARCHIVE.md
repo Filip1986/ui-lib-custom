@@ -4,6 +4,32 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
+      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
+      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
+      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
+      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
+      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
+      • Bound button aria-label to the resolved non-empty label
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
+      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
+      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
+      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/scroll-top/README.md
+      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • ScrollTop #75: ⏳ Queued → ✅ Done
+State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order.
+Verification: node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS)
+Next step: TreeTable (#33) hardening.
+
+---
+
 Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
 Changed:
   - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
