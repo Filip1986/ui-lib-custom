@@ -43,12 +43,15 @@ function queryEl(fixture: ComponentFixture<unknown>, selector: string): HTMLElem
   template: `
     <uilib-input-otp
       [length]="length()"
+      [ariaLabel]="ariaLabel()"
+      [ariaLabelledBy]="ariaLabelledBy()"
       [mask]="mask()"
       [integerOnly]="integerOnly()"
       [filled]="filled()"
       [disabled]="disabled()"
       [readonly]="readonly()"
       [invalid]="invalid()"
+      [pasteAnnouncement]="pasteAnnouncement()"
       [size]="size()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
@@ -56,17 +59,25 @@ function queryEl(fixture: ComponentFixture<unknown>, selector: string): HTMLElem
       (focused)="onFocused($event)"
       (blurred)="onBlurred($event)"
       (completed)="onCompleted($event)"
-    />
+    >
+      <span inputOtpError>Invalid code</span>
+    </uilib-input-otp>
+    <span id="otp-label">Verification code</span>
   `,
 })
 class InputOtpHostComponent {
   public readonly length: WritableSignal<number> = signal<number>(4);
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
+    'One-time passcode'
+  );
+  public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
   public readonly mask: WritableSignal<boolean> = signal<boolean>(false);
   public readonly integerOnly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly filled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly readonly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly pasteAnnouncement: WritableSignal<string> = signal<string>('Code entered.');
   public readonly size: WritableSignal<'sm' | 'md' | 'lg'> = signal<'sm' | 'md' | 'lg'>('md');
   public value: string = '';
 
@@ -184,12 +195,47 @@ describe('InputOtpComponent', (): void => {
       expect(host.classList).toContain('uilib-input-otp');
     });
 
+    it('should generate a stable host id', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      const host: HTMLElement = queryEl(fixture, 'uilib-input-otp');
+      const initialId: string = host.id;
+      fixture.componentInstance.length.set(6);
+      fixture.detectChanges();
+      expect(host.id).toBe(initialId);
+      expect(initialId).toMatch(/^ui-lib-input-otp-\d+$/);
+    });
+
     it('should set aria-label on each cell', async (): Promise<void> => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
       const cells: HTMLInputElement[] = queryAll(fixture, 'input.uilib-input-otp-cell');
-      expect(cells[0]?.getAttribute('aria-label')).toBe('OTP digit 1 of 4');
-      expect(cells[3]?.getAttribute('aria-label')).toBe('OTP digit 4 of 4');
+      expect(cells[0]?.getAttribute('aria-label')).toBe('Digit 1 of 4');
+      expect(cells[3]?.getAttribute('aria-label')).toBe('Digit 4 of 4');
+    });
+
+    it('should set role="group" on host', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      const host: HTMLElement = queryEl(fixture, 'uilib-input-otp');
+      expect(host.getAttribute('role')).toBe('group');
+    });
+
+    it('should apply aria-label to host by default', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      const host: HTMLElement = queryEl(fixture, 'uilib-input-otp');
+      expect(host.getAttribute('aria-label')).toBe('One-time passcode');
+    });
+
+    it('should use aria-labelledby and omit aria-label when ariaLabelledBy is set', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      fixture.componentInstance.ariaLabelledBy.set('otp-label');
+      fixture.detectChanges();
+      const host: HTMLElement = queryEl(fixture, 'uilib-input-otp');
+      expect(host.getAttribute('aria-labelledby')).toBe('otp-label');
+      expect(host.getAttribute('aria-label')).toBeNull();
     });
 
     it('should set autocomplete="one-time-code" on first cell only', async (): Promise<void> => {
@@ -268,6 +314,37 @@ describe('InputOtpComponent', (): void => {
       fixture.componentInstance.invalid.set(true);
       fixture.detectChanges();
       expect(queryEl(fixture, 'uilib-input-otp').classList).toContain('uilib-input-otp-invalid');
+    });
+
+    it('should set aria-invalid on every cell when invalid=true', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      fixture.componentInstance.invalid.set(true);
+      fixture.detectChanges();
+      queryAll(fixture, 'input.uilib-input-otp-cell').forEach((cell: HTMLInputElement): void => {
+        expect(cell.getAttribute('aria-invalid')).toBe('true');
+      });
+    });
+
+    it('should connect host aria-describedby to alert error element when invalid=true', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      fixture.componentInstance.invalid.set(true);
+      fixture.detectChanges();
+      const host: HTMLElement = queryEl(fixture, 'uilib-input-otp');
+      const errorElement: HTMLElement = queryEl(fixture, '.uilib-input-otp-error');
+      expect(errorElement.getAttribute('role')).toBe('alert');
+      expect(host.getAttribute('aria-describedby')).toBe(errorElement.id);
+    });
+
+    it('should clear host aria-describedby when invalid=false', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      fixture.componentInstance.invalid.set(true);
+      fixture.detectChanges();
+      fixture.componentInstance.invalid.set(false);
+      fixture.detectChanges();
+      expect(queryEl(fixture, 'uilib-input-otp').getAttribute('aria-describedby')).toBeNull();
     });
 
     it('should apply filled class', async (): Promise<void> => {
@@ -504,6 +581,20 @@ describe('InputOtpComponent', (): void => {
       expect(component['getToken'](1)).toBe('');
     });
 
+    it('should move focus to previous cell on Backspace when current cell is empty', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      const component: InputOtpComponent = fixture.debugElement.query(
+        By.directive(InputOtpComponent)
+      ).componentInstance as InputOtpComponent;
+      const spy: jest.SpyInstance = jest.spyOn(
+        component as unknown as { focusCell: (index: number) => void },
+        'focusCell'
+      );
+      component['onCellKeydown'](createKeydownEvent('Backspace', ''), 2);
+      expect(spy).toHaveBeenCalledWith(1);
+    });
+
     it('should clear current cell on Delete', async (): Promise<void> => {
       const fixture: ComponentFixture<InputOtpHostComponent> =
         await createFixture(InputOtpHostComponent);
@@ -552,6 +643,20 @@ describe('InputOtpComponent', (): void => {
       jest.spyOn(event, 'preventDefault');
       component['onCellKeydown'](event, 0);
       expect(event.preventDefault).not.toHaveBeenCalled();
+    });
+
+    it('should move focus to next cell when valid input is entered', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      const component: InputOtpComponent = fixture.debugElement.query(
+        By.directive(InputOtpComponent)
+      ).componentInstance as InputOtpComponent;
+      const spy: jest.SpyInstance = jest.spyOn(
+        component as unknown as { focusCell: (index: number) => void },
+        'focusCell'
+      );
+      component['onCellInput'](createInputEvent('1'), 0);
+      expect(spy).toHaveBeenCalledWith(1);
     });
   });
 
@@ -609,6 +714,33 @@ describe('InputOtpComponent', (): void => {
       fixture.detectChanges();
 
       expect(component['getToken'](0)).toBe('');
+    });
+
+    it('should focus last cell after filling all cells from paste', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      const component: InputOtpComponent = fixture.debugElement.query(
+        By.directive(InputOtpComponent)
+      ).componentInstance as InputOtpComponent;
+      const spy: jest.SpyInstance = jest.spyOn(
+        component as unknown as { focusCell: (index: number) => void },
+        'focusCell'
+      );
+      component['onCellPaste'](createPasteEvent('1234'));
+      expect(spy).toHaveBeenCalledWith(3);
+    });
+
+    it('should update the live paste announcement text after paste', async (): Promise<void> => {
+      const fixture: ComponentFixture<InputOtpHostComponent> =
+        await createFixture(InputOtpHostComponent);
+      const component: InputOtpComponent = fixture.debugElement.query(
+        By.directive(InputOtpComponent)
+      ).componentInstance as InputOtpComponent;
+      component['onCellPaste'](createPasteEvent('1234'));
+      await Promise.resolve();
+      fixture.detectChanges();
+      const liveRegion: HTMLElement = queryEl(fixture, '.uilib-input-otp-sr-only');
+      expect(liveRegion.textContent.trim()).toBe('Code entered.');
     });
   });
 
