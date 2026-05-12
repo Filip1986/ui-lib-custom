@@ -32,13 +32,13 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 ### Tier 2 — Navigation & Menu Patterns
 *Focus: `role=menu/menubar/menuitem`, arrow key navigation, `aria-expanded` on submenus, `aria-current` on active items.*
 
-| #    | Component   | Key a11y concern                                                                | Status     |
-|------|-------------|---------------------------------------------------------------------------------|------------|
-| 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done     |
-| 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done     |
-| 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done     |
-| 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ✅ Done     |
-| 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ⏳ Queued   |
+| #    | Component   | Key a11y concern                                                                | Status       |
+|------|-------------|---------------------------------------------------------------------------------|--------------|
+| 11   | Menubar     | `role=menubar`, full arrow-key nav, `aria-haspopup`, submenu keyboard control   | ✅ Done       |
+| 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done       |
+| 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done       |
+| 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ✅ Done       |
+| 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ✅ Done     |
 | 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done    |
 | 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ✅ Done     |
 | 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ✅ Done     |
@@ -72,9 +72,9 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ⏳ Queued   |
 | 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ⏳ Queued   |
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ⏳ Queued   |
-| 37   | Paginator  | Live region announcing page change, button labels                               | ⏳ Queued   |
+| 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
 | 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ⏳ Queued   |
-| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ⏳ Queued   |
+| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ✅ Done     |
 | 40   | PickList   | Dual-list pattern, transfer action announcements                                | ⏳ Queued   |
 
 ### Tier 5 — Feedback, Status & Foundational
@@ -98,12 +98,12 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component       | Primary focus                                             | Status     |
 |------|-----------------|-----------------------------------------------------------|------------|
-| 51   | Card            | API composability, slot flexibility, hover/focus polish   | ✅ Done    |
+| 51   | Card            | API composability, slot flexibility, hover/focus polish   | ✅ Done     |
 | 52   | Badge           | Positioning variants, `aria-label` passthrough            | ✅ Done     |
 | 53   | Tag             | Dismissible variant `aria-label`                          | ⏳ Queued   |
-| 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done    |
+| 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done     |
 | 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ⏳ Queued   |
-| 56   | ProgressSpinner | `role=status`, `aria-label`                               | ⏳ Queued   |
+| 56   | ProgressSpinner | `role=status`, `aria-label`                               | ✅ Done     |
 | 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ⏳ Queued   |
 | 58   | Divider         | `role=separator` + `aria-orientation`                     | ⏳ Queued   |
 | 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
@@ -121,7 +121,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 71   | Timeline        | Semantic list structure, orientation                      | ⏳ Queued   |
 | 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
-| 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ⏳ Queued   |
+| 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ✅ Done     |
 | 75   | ScrollTop       | `aria-label` on button                                    | ⏳ Queued   |
 | 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
 
@@ -217,7 +217,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | MegaMenu    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| PanelMenu   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| PanelMenu   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stepper     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | SpeedDial   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -237,7 +237,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | PickList          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Paginator         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Carousel          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Galleria          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
@@ -254,7 +254,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Skeleton        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ProgressBar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| ProgressSpinner | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ProgressSpinner | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | MeterGroup      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 
 ## Utilities & Directives
@@ -274,7 +274,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ClassNames      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Terminal        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Ripple          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
 | ScrollTop       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FocusTrap       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -335,9 +335,9 @@ Then update the table above and record the session in `AI_AGENT_CONTEXT.md`.
 
 ## Related Documents
 
-| Document                                                                | Relevance                                            |
-|-------------------------------------------------------------------------|------------------------------------------------------|
-| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)             | **NEW (2026-05-11)** — Index of all 48 session prompts, work queue, and key focus areas |
-| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)   | The 6-phase AI workflow + 33 accumulated lessons from all hardenings |
-| [Vision — Component Philosophy](VISION.md#component-philosophy)         | The 10-layer quality model and ≥8 gate               |
-| [Accessibility Guide](reference/systems/ACCESSIBILITY.md)               | Detail behind the A11y score category                |
+| Document                                                                  | Relevance                                                                               |
+|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)               | **NEW (2026-05-11)** — Index of all 48 session prompts, work queue, and key focus areas |
+| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)     | The 6-phase AI workflow + 33 accumulated lessons from all hardenings                    |
+| [Vision — Component Philosophy](VISION.md#component-philosophy)           | The 10-layer quality model and ≥8 gate                                                  |
+| [Accessibility Guide](reference/systems/ACCESSIBILITY.md)                 | Detail behind the A11y score category                                                   |

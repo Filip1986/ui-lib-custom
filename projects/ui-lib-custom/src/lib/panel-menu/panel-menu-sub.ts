@@ -27,6 +27,7 @@ import type { PanelMenuItem } from './panel-menu.types';
 })
 export class PanelMenuSubComponent {
   protected readonly context: PanelMenuContext = inject(PANEL_MENU_CONTEXT);
+  public readonly popupRole: 'menu' = 'menu';
 
   /** Items to render at this sub-level. */
   public readonly items: InputSignal<PanelMenuItem[]> = input<PanelMenuItem[]>([]);
@@ -108,6 +109,11 @@ export class PanelMenuSubComponent {
         this.moveFocus(event.currentTarget as HTMLElement, -1);
         break;
       }
+      case KEYBOARD_KEYS.Escape: {
+        event.preventDefault();
+        this.focusParentPanelHeader(event.currentTarget as HTMLElement);
+        break;
+      }
     }
   }
 
@@ -134,5 +140,17 @@ export class PanelMenuSubComponent {
     }
     const nextIndex: number = (currentIndex + direction + focusables.length) % focusables.length;
     focusables[nextIndex]?.focus();
+  }
+
+  private focusParentPanelHeader(current: HTMLElement): void {
+    const panelRegion: HTMLElement | null = current.closest(
+      '.ui-lib-panel-menu__content[role="region"]'
+    );
+    const labelledBy: string | null = panelRegion?.getAttribute('aria-labelledby') ?? null;
+    if (!labelledBy) {
+      return;
+    }
+    const parentHeader: HTMLElement | null = current.ownerDocument.getElementById(labelledBy);
+    parentHeader?.focus();
   }
 }

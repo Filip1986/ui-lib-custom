@@ -61,3 +61,14 @@
     opacity: 0;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Reduced-motion override (defence-in-depth — the directive also guards this)
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-ripple-wave {
+    animation: none;
+    display: none;
+  }
+}

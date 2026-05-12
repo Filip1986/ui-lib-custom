@@ -149,6 +149,7 @@
   gap: var(--uilib-paginator-gap);
   padding: var(--uilib-paginator-padding);
   flex-wrap: wrap;
+  position: relative;
 }
 
 .uilib-paginator-pages {
@@ -221,6 +222,18 @@
   padding: 0 0.5rem;
 }
 
+.uilib-paginator-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 // ── Jump-to-page input ────────────────────────────────────────────────────────
 .uilib-paginator-jtp-input {
   width: var(--uilib-paginator-jtp-width);
@@ -246,7 +259,7 @@
     appearance: textfield;
   }
 
-  &:focus {
+  &:focus-visible {
     border-color: var(--uilib-color-primary, #6366f1);
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
   }
@@ -271,7 +284,7 @@
   outline: none;
   transition: var(--uilib-paginator-transition);
 
-  &:focus {
+  &:focus-visible {
     border-color: var(--uilib-color-primary, #6366f1);
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
   }
@@ -279,5 +292,13 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uilib-paginator-button,
+  .uilib-paginator-jtp-input,
+  .uilib-paginator-rpp-select {
+    transition: none;
   }
 }
