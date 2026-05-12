@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** ScrollPanel (#62), TreeTable (#33), Tree (#34), Timeline (#71) and Upload (#69) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), Timeline (#71) and Upload (#69) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeSelect hardening (Tier 4, #35) — combobox + tree popup pattern
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -55,6 +55,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
+- `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
 
 ---
 
@@ -68,6 +69,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
+      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
+      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
+      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
+      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
+      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
+      • Bound button aria-label to the resolved non-empty label
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
+      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
+      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
+      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/scroll-top/README.md
+      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
+      • Updated API table docs to reflect the new default button aria-label
+  - docs/COMPONENT_SCORES.md
+      • ScrollTop #75: ⏳ Queued → ✅ Done
+      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
+State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
 Changed:
@@ -146,45 +179,3 @@ Verification:
   npx jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: axe-core 4.11.1 flagged checkbox `<span role="checkbox">` with no accessible name (`aria-toggle-field-name`) and the `<th>` with only `aria-label` but no text content (`empty-table-header`). Fixed by adding `aria-label="Select all rows/row"` to spans and a `.uilib-tree-table-sr-only` span inside the header th.
 Next step: Tree (#34) hardening — `role=tree`, `role=treeitem`, expand/collapse keyboard navigation.
-
-
-Date: 2026-05-12 [Upload component — 6-phase hardening COMPLETE (#69)]
-Changed:
-  - projects/ui-lib-custom/src/lib/upload/upload.component.ts
-      • Added module-level `let nextUploadId: number = 0` counter
-      • Added `instanceId`, `fileInputId` (stable HTML id per instance)
-      • Added `dragStatusMessage: WritableSignal<string>` for polite live-region announcements
-      • Updated `onDragEnter` to set drag status message; `onDragLeave`/`onDrop` to clear it
-  - projects/ui-lib-custom/src/lib/upload/upload.component.html
-      • Added visually-hidden `<label [for]="fileInputId">` for the hidden file input
-      • Added `[id]="fileInputId"` to `<input type="file">`
-      • Updated drop zone `aria-label` from "File upload drop zone" to "File upload area"
-      • Added `aria-live="polite"` / `aria-atomic="true"` drag-status live region
-  - projects/ui-lib-custom/src/lib/upload/upload.component.scss
-      • Added `.ui-lib-upload__sr-only` visually-hidden utility class
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables all transitions
-  - projects/ui-lib-custom/src/lib/upload/upload.a11y.spec.ts (CREATED — 25 tests)
-      • Toolbar semantics (5): role=toolbar, button text, aria-disabled default, disabled host
-      • Drop zone semantics (3): role=region, aria-label, aria-disabled states
-      • File input (4): aria-hidden, tabindex, unique id, label association
-      • File list semantics (4): role=list, aria-label, listitem, aria-label per remove btn
-      • Validation (2): role=alert + aria-live, dismiss button aria-label
-      • Drag-over live region (4): presence, default empty, drag-enter, drag-leave
-      • Unique IDs (1): two-instance ID uniqueness
-      • Keyboard interaction (2): Choose focusable, remove focusable
-      • axe-core checks (5): default, with files, with errors, disabled, drag-over
-  - projects/ui-lib-custom/src/lib/upload/README.md
-      • Added ARIA attributes table (28 rows), keyboard interaction table, CSS custom properties table, accessibility section
-  - docs/COMPONENT_SCORES.md
-      • Upload #69: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: Upload hardening complete. Unique instance IDs, drag-over live region, reduced-motion, file-input label, and 25-test a11y regression suite all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/upload/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=upload --no-coverage (66/66 PASS — 36 unit + 30 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: jsdom does not support DragEvent — used `fakeDragEvent()` stub. `children[0]` array access flagged by TypeScript `noUncheckedIndexedAccess`; replaced with `fixture.debugElement.query(By.directive(UploadComponent)).componentInstance`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-
-

@@ -122,7 +122,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ✅ Done     |
-| 75   | ScrollTop       | `aria-label` on button                                    | ⏳ Queued   |
+| 75   | ScrollTop       | `aria-label` on button                                    | ✅ Done     |
 | 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
 
 > **Queue status key:** ⏳ Queued · 🔄 In progress · ✅ Done (all scores ≥ 8)
@@ -275,7 +275,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | ClassNames      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Terminal        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
-| ScrollTop       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FocusTrap       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | AnimateOnScroll | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
