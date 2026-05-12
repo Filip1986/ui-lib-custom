@@ -31,7 +31,9 @@ export type { AlertSeverity, AlertVariant } from './alert.types';
   host: {
     class: 'ui-lib-alert',
     '[class]': 'hostClasses()',
-    role: 'alert',
+    '[attr.role]': 'liveRole()',
+    '[attr.aria-live]': 'ariaLive()',
+    'aria-atomic': 'true',
   },
 })
 export class Alert {
@@ -40,6 +42,7 @@ export class Alert {
   public readonly severity: InputSignal<AlertSeverity> = input<AlertSeverity>('info');
   public readonly variant: InputSignal<AlertVariant | null> = input<AlertVariant | null>(null);
   public readonly dismissible: InputSignal<boolean> = input<boolean>(false);
+  public readonly dismissLabel: InputSignal<string | null> = input<string | null>(null);
 
   public readonly dismissed: OutputEmitterRef<void> = output<void>();
 
@@ -55,6 +58,15 @@ export class Alert {
 
   public readonly effectiveVariant: Signal<AlertVariant> = computed<AlertVariant>(
     (): AlertVariant => this.variant() ?? this.themeConfig.variant()
+  );
+
+  public readonly liveRole: Signal<'alert' | 'status'> = computed<'alert' | 'status'>(
+    (): 'alert' | 'status' =>
+      this.severity() === 'error' || this.severity() === 'warning' ? 'alert' : 'status'
+  );
+
+  public readonly ariaLive: Signal<'assertive' | 'polite'> = computed<'assertive' | 'polite'>(
+    (): 'assertive' | 'polite' => (this.liveRole() === 'alert' ? 'assertive' : 'polite')
   );
 
   public readonly hostClasses: Signal<string> = computed<string>((): string => {

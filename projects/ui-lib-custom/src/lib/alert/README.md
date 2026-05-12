@@ -13,6 +13,7 @@
 | `severity` | `'success' \| 'error' \| 'warning' \| 'info'` | `'info'` | Controls icon and colour treatment |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to theme service variant when `null` |
 | `dismissible` | `boolean` | `false` | Renders a close icon; clicking it emits `dismissed` |
+| `dismissLabel` | `string \| null` | `null` | Optional i18n label for the dismiss button. Falls back to `"Dismiss alert"` |
 
 ## Outputs
 
@@ -27,3 +28,27 @@
   Your session will expire in 5 minutes.
 </ui-lib-alert>
 ```
+
+## Severity & Live Region Behavior
+
+| Severity | Role | `aria-live` |
+|----------|------|-------------|
+| `error` | `alert` | `assertive` |
+| `warning` | `alert` | `assertive` |
+| `success` | `status` | `polite` |
+| `info` | `status` | `polite` |
+
+The host always sets `aria-atomic="true"` so screen readers announce the full message when text updates.
+
+## Accessibility Notes
+
+- The severity icon is decorative and uses `aria-hidden="true"`.
+- The dismiss button uses a native `<button type="button">` and always has an accessible name.
+- Use `dismissLabel` for localization/i18n in non-English applications.
+
+## CSS Custom Properties
+
+| Variable | Purpose |
+|----------|---------|
+| `--uilib-alert-bg` | Alert background color |
+| `--uilib-alert-fg` | Alert foreground/text color |

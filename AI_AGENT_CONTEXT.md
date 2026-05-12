@@ -70,6 +70,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/reference/components/ALERT.md
+  - projects/ui-lib-custom/src/lib/alert/README.md
+  - projects/ui-lib-custom/src/lib/alert/alert.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.html
+  - projects/ui-lib-custom/src/lib/alert/alert.scss
+  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
+State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements. Added dedicated alert accessibility regression tests and updated score/docs bookkeeping.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/alert/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/alert --no-coverage (41/41 PASS — 28 unit + 13 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Demo screenshot captured at `/tmp/alert-hardening.png`. Playwright MCP browser lock prevented direct playwright-browser usage; installed Playwright Chromium and captured the screenshot via a Node Playwright script.
+Next step: Message hardening (Tier 5, #43).
+
 Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -102,36 +122,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
 Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
-
-Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
-Changed:
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
-      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
-      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
-      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
-      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
-      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
-      • Bound button aria-label to the resolved non-empty label
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
-      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
-      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
-      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
-  - projects/ui-lib-custom/src/lib/scroll-top/README.md
-      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
-      • Updated API table docs to reflect the new default button aria-label
-  - docs/COMPONENT_SCORES.md
-      • ScrollTop #75: ⏳ Queued → ✅ Done
-      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
-State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-

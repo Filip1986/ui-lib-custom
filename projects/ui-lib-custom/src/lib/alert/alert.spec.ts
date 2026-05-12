@@ -25,6 +25,7 @@ import { provideUiLibIcons } from '../icon/icon.providers';
       [severity]="severity()"
       [variant]="variant()"
       [dismissible]="dismissible()"
+      [dismissLabel]="dismissLabel()"
       (dismissed)="dismissCount = dismissCount + 1"
     >
       Alert content
@@ -36,6 +37,7 @@ class AlertHostComponent {
   public readonly severity: WritableSignal<AlertSeverity> = signal<AlertSeverity>('info');
   public readonly variant: WritableSignal<AlertVariant | null> = signal<AlertVariant | null>(null);
   public readonly dismissible: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly dismissLabel: WritableSignal<string | null> = signal<string | null>(null);
 
   public dismissCount: number = 0;
 }
@@ -49,6 +51,7 @@ function setup(
     severity: AlertSeverity;
     variant: AlertVariant | null;
     dismissible: boolean;
+    dismissLabel: string | null;
   }> = {}
 ): {
   fixture: ComponentFixture<AlertHostComponent>;
@@ -66,6 +69,7 @@ function setup(
   if (overrides.severity !== undefined) host.severity.set(overrides.severity);
   if (overrides.variant !== undefined) host.variant.set(overrides.variant);
   if (overrides.dismissible !== undefined) host.dismissible.set(overrides.dismissible);
+  if (overrides.dismissLabel !== undefined) host.dismissLabel.set(overrides.dismissLabel);
 
   fixture.detectChanges();
 
@@ -115,6 +119,28 @@ describe('Alert', (): void => {
     it('statusIcon falls back to "info" for unknown severity', (): void => {
       const { component } = setup({ severity: 'unknown' as AlertSeverity });
       expect(component.statusIcon()).toBe('info');
+    });
+  });
+
+  describe('live region semantics', (): void => {
+    it('uses role="status" and polite live region for success', (): void => {
+      const { fixture } = setup({ severity: 'success' });
+      const alertElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+        'ui-lib-alert'
+      ) as HTMLElement;
+      expect(alertElement.getAttribute('role')).toBe('status');
+      expect(alertElement.getAttribute('aria-live')).toBe('polite');
+      expect(alertElement.getAttribute('aria-atomic')).toBe('true');
+    });
+
+    it('uses role="alert" and assertive live region for error', (): void => {
+      const { fixture } = setup({ severity: 'error' });
+      const alertElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+        'ui-lib-alert'
+      ) as HTMLElement;
+      expect(alertElement.getAttribute('role')).toBe('alert');
+      expect(alertElement.getAttribute('aria-live')).toBe('assertive');
+      expect(alertElement.getAttribute('aria-atomic')).toBe('true');
     });
   });
 
@@ -174,13 +200,30 @@ describe('Alert', (): void => {
       expect(closeBtn).toBeTruthy();
     });
 
-    it('close button has role=button and aria-label', (): void => {
+    it('close button has native button semantics and default aria-label', (): void => {
       const { fixture } = setup({ dismissible: true });
-      const closeBtn: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-alert__close'
-      );
-      expect(closeBtn?.getAttribute('role')).toBe('button');
+      const closeBtn: HTMLButtonElement | null = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector('.ui-lib-alert__close');
+      expect(closeBtn?.tagName.toLowerCase()).toBe('button');
+      expect(closeBtn?.type).toBe('button');
       expect(closeBtn?.getAttribute('aria-label')).toBe('Dismiss alert');
+    });
+
+    it('close button allows custom dismissLabel input', (): void => {
+      const { fixture } = setup({ dismissible: true, dismissLabel: 'Zamknij alert' });
+      const closeBtn: HTMLButtonElement | null = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector('.ui-lib-alert__close');
+      expect(closeBtn?.getAttribute('aria-label')).toBe('Zamknij alert');
+    });
+
+    it('severity icon is decorative', (): void => {
+      const { fixture } = setup();
+      const severityIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+        '.ui-lib-alert__icon'
+      );
+      expect(severityIcon?.getAttribute('aria-hidden')).toBe('true');
     });
 
     it('emits dismissed event when onDismiss is called', (): void => {
@@ -234,12 +277,13 @@ describe('Alert', (): void => {
       fixture.componentRef.setInput('dismissible', true);
       fixture.detectChanges();
 
-      const closeIcon: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-lib-alert__close'
-      );
-      expect(closeIcon).toBeTruthy();
-      expect(closeIcon?.getAttribute('role')).toBe('button');
-      expect(closeIcon?.getAttribute('aria-label')).toBe('Dismiss alert');
+      const closeButton: HTMLButtonElement | null = (
+        fixture.nativeElement as HTMLElement
+      ).querySelector('.ui-lib-alert__close');
+      expect(closeButton).toBeTruthy();
+      expect(closeButton?.tagName.toLowerCase()).toBe('button');
+      expect(closeButton?.type).toBe('button');
+      expect(closeButton?.getAttribute('aria-label')).toBe('Dismiss alert');
     });
   });
 });
