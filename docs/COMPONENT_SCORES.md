@@ -73,7 +73,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ✅ Done     |
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done     |
 | 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
-| 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ⏳ Queued   |
+| 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ✅ Done     |
 | 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ✅ Done     |
 | 40   | PickList   | Dual-list pattern, transfer action announcements                                | ⏳ Queued   |
 
@@ -231,7 +231,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Tree              | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | TreeSelect        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| DataView          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| DataView          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | VirtualScroller   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

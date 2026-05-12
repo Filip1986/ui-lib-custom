@@ -103,6 +103,64 @@
   <ng-container [ngTemplateOutlet]="paginatorTemplate" />
 }
 
+<div class="ui-lib-data-view__controls" role="group" [attr.aria-label]="controlsAriaLabel()">
+  <label class="ui-lib-data-view__control-field" [attr.for]="filterInputId">
+    <span class="ui-lib-data-view__control-label">Filter</span>
+    <input
+      class="ui-lib-data-view__filter-input"
+      [id]="filterInputId"
+      type="search"
+      [placeholder]="filterPlaceholder()"
+      [attr.aria-label]="filterAriaLabel()"
+      (input)="onFilterInput($event)"
+    />
+  </label>
+
+  <label class="ui-lib-data-view__control-field" [attr.for]="sortSelectId">
+    <span class="ui-lib-data-view__control-label">Sort</span>
+    <select
+      class="ui-lib-data-view__sort-select"
+      [id]="sortSelectId"
+      [value]="sortOrder()"
+      [attr.aria-label]="sortAriaLabel()"
+      (change)="onSortSelectChange($event)"
+    >
+      <option value="1">Ascending</option>
+      <option value="-1">Descending</option>
+    </select>
+  </label>
+
+  <div class="ui-lib-data-view__layout-toggle" role="group" aria-label="View mode">
+    <button
+      class="ui-lib-data-view__layout-button"
+      type="button"
+      [attr.aria-label]="listLayoutAriaLabel()"
+      [attr.aria-pressed]="layout() === 'list'"
+      (click)="onLayoutToggle('list')"
+    >
+      List
+    </button>
+    <button
+      class="ui-lib-data-view__layout-button"
+      type="button"
+      [attr.aria-label]="gridLayoutAriaLabel()"
+      [attr.aria-pressed]="layout() === 'grid'"
+      (click)="onLayoutToggle('grid')"
+    >
+      Grid
+    </button>
+  </div>
+</div>
+
+<span
+  class="ui-lib-data-view__sr-live"
+  [id]="layoutLiveRegionId"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  {{ layoutLiveAnnouncement() }}
+</span>
+
 @if (loading()) {
   <div class="ui-lib-data-view__loading">
     @if (loadingTemplate()) {
@@ -151,4 +209,3 @@
     <ng-container [ngTemplateOutlet]="footerTemplate()!" />
   </div>
 }
-

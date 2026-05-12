@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { TieredMenu } from 'ui-lib-custom/tiered-menu';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -7,6 +8,10 @@ import type {
   TieredMenuVariant,
   TieredMenuSize,
 } from 'ui-lib-custom/tiered-menu';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the TieredMenu component.
@@ -14,18 +19,111 @@ import type {
 @Component({
   selector: 'app-tiered-menu-demo',
   standalone: true,
-  imports: [TieredMenu, Button],
+  imports: [TieredMenu, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
   templateUrl: './tiered-menu-demo.component.html',
   styleUrl: './tiered-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TieredMenuDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic (Inline)' },
+    { id: 'nested', label: 'Nested Submenus' },
+    { id: 'popup', label: 'Popup Mode' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'item-states', label: 'Item States' },
+    { id: 'url-items', label: 'URL Items' },
+    {
+      id: 'api',
+      label: 'API',
+      children: [
+        { id: 'api-inputs', label: 'Inputs' },
+        { id: 'api-outputs', label: 'Outputs' },
+        { id: 'api-methods', label: 'Methods' },
+        { id: 'api-item', label: 'TieredMenuItem' },
+      ],
+    },
+    {
+      id: 'accessibility',
+      label: 'Accessibility',
+      children: [
+        { id: 'a11y-aria', label: 'ARIA Attributes' },
+        { id: 'a11y-keyboard', label: 'Keyboard' },
+      ],
+    },
+  ];
+
+  public readonly snippets: {
+    readonly import: string;
+    readonly basic: string;
+    readonly nested: string;
+    readonly popup: string;
+    readonly variants: string;
+    readonly sizes: string;
+    readonly itemStates: string;
+    readonly urlItems: string;
+  } = {
+    import: `import { TieredMenu } from 'ui-lib-custom/tiered-menu';
+import type { TieredMenuItem } from 'ui-lib-custom/tiered-menu';`,
+    basic: `<ui-lib-tiered-menu [model]="items" (itemClick)="onItemClick($event)" />`,
+    nested: `items: TieredMenuItem[] = [
+  {
+    label: 'File', icon: 'pi pi-file',
+    items: [
+      { label: 'New',  icon: 'pi pi-plus' },
+      {
+        label: 'Export', icon: 'pi pi-download',
+        items: [
+          { label: 'PDF',   icon: 'pi pi-file-pdf' },
+          { label: 'CSV',   icon: 'pi pi-table' },
+        ],
+      },
+    ],
+  },
+];`,
+    popup: `<!-- trigger button wires aria-haspopup, aria-expanded, aria-controls -->
+<ui-lib-button
+  [attr.aria-haspopup]="'menu'"
+  [attr.aria-expanded]="popupMenu.isVisible()"
+  [attr.aria-controls]="popupMenu.menuId"
+  (click)="popupMenu.toggle($event)"
+>
+  Open Menu ▾
+</ui-lib-button>
+<ui-lib-tiered-menu #popupMenu [model]="items" [popup]="true" />`,
+    variants: `<ui-lib-tiered-menu [model]="items" variant="material"  />
+<ui-lib-tiered-menu [model]="items" variant="bootstrap" />
+<ui-lib-tiered-menu [model]="items" variant="minimal"   />`,
+    sizes: `<ui-lib-tiered-menu [model]="items" size="sm" />
+<ui-lib-tiered-menu [model]="items" size="md" />
+<ui-lib-tiered-menu [model]="items" size="lg" />`,
+    itemStates: `items: TieredMenuItem[] = [
+  { label: 'Enabled',  icon: 'pi pi-check' },
+  { label: 'Disabled', icon: 'pi pi-ban',  disabled: true },
+  { label: 'Hidden',   visible: false },
+  { separator: true },
+  {
+    label: 'With Command',
+    command: (event) => console.log('clicked', event.item.label),
+  },
+];`,
+    urlItems: `items: TieredMenuItem[] = [
+  { label: 'GitHub',        url: 'https://github.com',  target: '_blank' },
+  { label: 'Documentation', url: 'https://angular.dev', target: '_blank' },
+  { separator: true },
+  { label: 'No URL item' },
+];`,
+  } as const;
+
   public readonly variant: WritableSignal<TieredMenuVariant> =
     signal<TieredMenuVariant>('material');
   public readonly size: WritableSignal<TieredMenuSize> = signal<TieredMenuSize>('md');
   public readonly lastEvent: WritableSignal<string> = signal<string>('');
 
-  /** Simple flat menu used in the basic example. */
   public readonly basicItems: TieredMenuItem[] = [
     { label: 'New File', icon: 'pi pi-file' },
     { label: 'Open', icon: 'pi pi-folder-open' },
@@ -36,7 +134,6 @@ export class TieredMenuDemoComponent {
     { label: 'Exit', icon: 'pi pi-times' },
   ];
 
-  /** Three-level deep nested menu for the nested example. */
   public readonly nestedItems: TieredMenuItem[] = [
     {
       label: 'File',
@@ -75,7 +172,6 @@ export class TieredMenuDemoComponent {
     { label: 'Quit', icon: 'pi pi-power-off' },
   ];
 
-  /** Items with some disabled and hidden entries. */
   public readonly stateItems: TieredMenuItem[] = [
     { label: 'Enabled', icon: 'pi pi-check' },
     { label: 'Disabled', icon: 'pi pi-ban', disabled: true },
@@ -89,7 +185,6 @@ export class TieredMenuDemoComponent {
     },
   ];
 
-  /** Items with URLs. */
   public readonly urlItems: TieredMenuItem[] = [
     { label: 'GitHub', url: 'https://github.com', target: '_blank' },
     { label: 'Documentation', url: 'https://angular.dev', target: '_blank' },
@@ -97,7 +192,6 @@ export class TieredMenuDemoComponent {
     { label: 'No URL item' },
   ];
 
-  /** Items for the popup example. */
   public readonly popupItems: TieredMenuItem[] = [
     { label: 'Profile', icon: 'pi pi-user' },
     { label: 'Settings', icon: 'pi pi-cog' },
@@ -125,5 +219,9 @@ export class TieredMenuDemoComponent {
 
   public setSize(value: TieredMenuSize): void {
     this.size.set(value);
+  }
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
   }
 }
