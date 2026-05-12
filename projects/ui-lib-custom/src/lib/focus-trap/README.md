@@ -108,6 +108,12 @@ If you need imperative control (non-Angular or service-level overlays), use the 
 
 ```ts
 import { FocusTrap } from 'ui-lib-custom/core';
+
+const trap = new FocusTrap(dialogElement);
+trap.activate();
+
+// Later:
+trap.deactivate();
 ```
 
 ## Host class
