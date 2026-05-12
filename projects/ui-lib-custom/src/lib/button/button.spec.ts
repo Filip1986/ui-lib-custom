@@ -418,6 +418,7 @@ describe('Button', (): void => {
     const newAppearances: string[] = [
       'soft',
       'glass',
+      'glass-shadow',
       'gradient',
       'elevated',
       'neon',

@@ -61,6 +61,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Merge conflict resolution for glass-shadow button PR]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved merge conflict by preserving the newest three handoffs in active context
+      • Added this merge-resolution handoff and kept recent session state concise
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the displaced older handoff during the merge resolution
+  - tsconfig.json
+      • Added `compilerOptions.ignoreDeprecations: "5.0"` so the TypeScript 5.9 pre-push `npm run typecheck` hook passes with the existing `baseUrl` setting
+State: Branch is merged with the latest origin/main. Merge conflicts were limited to session-context files, and the pre-push typecheck blocker was resolved without changing application logic.
+Verification:
+  npm install (PASS)
+  npm run typecheck (PASS)
+Terminal notes: Repository was a shallow clone, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before merging. Initial typecheck first failed on the `baseUrl` deprecation gate, and then on missing local packages until `npm install` was rerun.
+Next step: Continue with the next queued component hardening item once this PR is mergeable again.
+
+Date: 2026-05-12 [Button component — glass-shadow appearance polish]
+Changed:
+  - projects/ui-lib-custom/src/lib/button/button.scss
+      • Exposed remaining glass-shadow style values as CSS custom properties (`active-x/y`, font weight, letter spacing, gradient angle, opacity)
+      • Replaced remaining hardcoded glass-shadow active/gradient/opacity values with token usage
+  - projects/ui-lib-custom/src/lib/button/button.spec.ts
+      • Added `glass-shadow` coverage to the appearance class regression test matrix
+  - projects/ui-lib-custom/src/lib/button/button.ts
+      • Updated component description to reflect 12 appearances
+  - projects/ui-lib-custom/src/lib/button/README.md
+      • Updated appearance count math, documented `glass-shadow`, and added a usage example
+  - projects/demo/src/app/pages/buttons/buttons.component.html
+      • Updated demo copy to 12 appearances
+      • Wired the dedicated Glass Shadow demo buttons to the active variant switcher
+State: Glass-shadow button appearance is fully wired with tokenized styling values, docs/test coverage, and a variant-aware demo section. No broader button hardening work was started.
+Verification:
+  npm install (PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ projects/demo/src/app/pages/buttons/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=projects/ui-lib-custom/src/lib/button --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+Terminal notes: Fresh clone required `npm install` before validation. An initial ESLint retry using `--ext .ts,.scss,.html` failed by parsing SCSS with the wrong parser; the repository's standard directory-based ESLint command succeeded. Captured the updated demo screenshot after starting `npm run serve:demo` and installing Playwright Chromium locally.
+Next step: Resume the queued hardening track with TreeTable (#33) when button appearance follow-up is no longer needed.
+
 Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
 Changed:
   - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
