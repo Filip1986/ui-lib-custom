@@ -1,231 +1,397 @@
-<section class="bottom-sheet-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-title">BottomSheet</h1>
-    <p class="demo-subtitle">
-      A slide-up overlay panel anchored to the bottom of the viewport. Ideal for contextual actions,
-      share menus, and quick forms on mobile and desktop.
+  <!-- ---- Overview / Hero -------------------------------------------- -->
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>BottomSheet</h1>
+      <code class="demo-page-header__import">import &#123; BottomSheet &#125; from 'ui-lib-custom/bottom-sheet'</code>
+    </div>
+    <p class="demo-page-header__description">
+      A slide-up overlay panel anchored to the bottom of the viewport. Ideal for contextual
+      actions, share menus, and quick forms on mobile and desktop. Includes a focus trap,
+      focus restoration on close, scroll locking, and full keyboard + screen-reader support.
     </p>
-  </div>
+    <div class="demo-page-header__preview">
+      <ui-lib-button (click)="basicOpen.set(true)">Open Sheet</ui-lib-button>
+    </div>
+  </header>
 
-  <!-- Basic -->
-  <div class="demo-section">
+  <!-- ---- Basic ---------------------------------------------------- -->
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Bind <code>[(visible)]</code> to control the sheet. Click the backdrop or press
-      <kbd>Escape</kbd> to dismiss.
+      <kbd>Escape</kbd> to dismiss. Sheet instances live outside the layout wrapper
+      so they render at the correct stacking context.
     </p>
-    <div class="demo-card">
-      <ui-lib-button type="button" (click)="basicOpen.set(true)">
-        Open Sheet
-      </ui-lib-button>
+    <div class="demo-section__preview demo-section__preview--center">
+      <ui-lib-button (click)="basicOpen.set(true)">Open Sheet</ui-lib-button>
     </div>
-    <div class="demo-code">
-      <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen"&#62;
-  &#60;p&#62;Sheet content goes here.&#60;/p&#62;
-&#60;/ui-lib-bottom-sheet&#62;</code></pre>
-    </div>
-  </div>
+    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+  </section>
 
-  <!-- With header -->
-  <div class="demo-section">
+  <!-- ---- With Header ---------------------------------------------- -->
+  <section class="demo-section" id="with-header" data-doc-anchor>
     <h2 class="demo-section__title">With Header</h2>
-    <p class="demo-section__desc">
-      Pass <code>header</code> to render a title bar with a close button.
+    <p class="demo-section__description">
+      Pass the <code>header</code> input to render a title bar with an accessible close button.
+      The panel gets <code>aria-labelledby</code> pointing to the title automatically.
     </p>
-    <div class="demo-card">
-      <ui-lib-button type="button" (click)="headerOpen.set(true)">
-        Open with Header
-      </ui-lib-button>
+    <div class="demo-section__preview demo-section__preview--center">
+      <ui-lib-button (click)="headerOpen.set(true)">Open with Header</ui-lib-button>
     </div>
-    <div class="demo-code">
-      <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen" header="Share"&#62;
-  &#60;p&#62;Choose where to share.&#60;/p&#62;
-&#60;/ui-lib-bottom-sheet&#62;</code></pre>
-    </div>
-  </div>
+    <app-doc-code-snippet title="With header" [code]="snippets.withHeader" />
+  </section>
 
-  <!-- With footer slot -->
-  <div class="demo-section">
+  <!-- ---- Footer Slot ---------------------------------------------- -->
+  <section class="demo-section" id="footer-slot" data-doc-anchor>
     <h2 class="demo-section__title">Footer Slot</h2>
-    <p class="demo-section__desc">
-      Project an element with the <code>[bottomSheetFooter]</code> attribute for a sticky action
-      area pinned to the bottom of the panel.
+    <p class="demo-section__description">
+      Project an element with the <code>[bottomSheetFooter]</code> attribute for a sticky
+      action area pinned to the bottom of the panel.
     </p>
-    <div class="demo-card">
-      <ui-lib-button type="button" (click)="footerOpen.set(true)">
-        Open with Footer
-      </ui-lib-button>
+    <div class="demo-section__preview demo-section__preview--center">
+      <ui-lib-button (click)="footerOpen.set(true)">Open with Footer</ui-lib-button>
     </div>
-    <div class="demo-code">
-      <pre><code>&#60;ui-lib-bottom-sheet [(visible)]="isOpen" header="Confirm"&#62;
-  &#60;p&#62;Are you sure you want to proceed?&#60;/p&#62;
-  &#60;div bottomSheetFooter&#62;
-    &#60;button (click)="isOpen.set(false)"&#62;Cancel&#60;/button&#62;
-    &#60;button (click)="confirm()"&#62;Confirm&#60;/button&#62;
-  &#60;/div&#62;
-&#60;/ui-lib-bottom-sheet&#62;</code></pre>
-    </div>
-  </div>
+    <app-doc-code-snippet title="Footer slot" [code]="snippets.footerSlot" />
+  </section>
 
-  <!-- No backdrop close -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">Disable Backdrop Dismiss</h2>
-    <p class="demo-section__desc">
-      Set <code>[closeOnBackdrop]="false"</code> to prevent clicking the backdrop from closing the sheet.
+  <!-- ---- Backdrop Dismiss ----------------------------------------- -->
+  <section class="demo-section" id="backdrop-dismiss" data-doc-anchor>
+    <h2 class="demo-section__title">Backdrop Dismiss</h2>
+    <p class="demo-section__description">
+      Set <code>[closeOnBackdrop]="false"</code> to prevent clicking the backdrop from
+      closing the sheet. The close button and <kbd>Escape</kbd> key still work.
     </p>
-    <div class="demo-card">
-      <ui-lib-button type="button" (click)="noBackdropOpen.set(true)">
-        Open (backdrop locked)
-      </ui-lib-button>
+    <div class="demo-section__preview demo-section__preview--center">
+      <ui-lib-button (click)="noBackdropOpen.set(true)">Open (backdrop locked)</ui-lib-button>
     </div>
-  </div>
+    <app-doc-code-snippet title="Disable backdrop dismiss" [code]="snippets.backdropDismiss" />
+  </section>
 
-  <!-- Variants -->
-  <div class="demo-section">
+  <!-- ---- Variants ------------------------------------------------- -->
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
-    <p class="demo-section__desc">
-      Three design variants adapt the panel shape and shadow to your chosen design system:
-      <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
+    <p class="demo-section__description">
+      Three design variants adjust the panel shape and shadow. When <code>variant</code> is
+      <code>null</code> (default), it inherits from <code>ThemeConfigService</code>.
     </p>
-    <div class="demo-card demo-card--row">
+    <div class="demo-section__preview">
       @for (variant of variants; track variant) {
-        <ui-lib-button
-          type="button"
-          (click)="openVariant(variant)"
-        >
-          {{ variant }}
-        </ui-lib-button>
+        <ui-lib-button (click)="openVariant(variant)">{{ variant }}</ui-lib-button>
       }
     </div>
+    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
+  </section>
+
+  <!-- ---- API ------------------------------------------------------ -->
+  <section class="demo-section" id="api" data-doc-anchor>
+
+    <div id="api-inputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Inputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>visible</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Controls open/close state. Two-way bindable via <code>[(visible)]</code>. A <code>model()</code> signal internally.</td>
+          </tr>
+          <tr>
+            <td><code>header</code></td>
+            <td><code>string</code></td>
+            <td><code>''</code></td>
+            <td>Optional header text. When set, renders a title bar with a close button and wires <code>aria-labelledby</code>.</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+            <td><code>null</code></td>
+            <td>Visual variant. Inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
+          </tr>
+          <tr>
+            <td><code>showBackdrop</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>Whether to show the semi-transparent backdrop behind the panel.</td>
+          </tr>
+          <tr>
+            <td><code>closeOnBackdrop</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>Whether clicking the backdrop closes the sheet.</td>
+          </tr>
+          <tr>
+            <td><code>closeOnEscape</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>Whether pressing <kbd>Escape</kbd> closes the sheet.</td>
+          </tr>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Additional CSS classes applied to the host element.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="api-outputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Outputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Output</th>
+            <th>Payload</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>(shown)</code></td>
+            <td><code>void</code></td>
+            <td>Emits after the sheet transitions to open.</td>
+          </tr>
+          <tr>
+            <td><code>(hidden)</code></td>
+            <td><code>void</code></td>
+            <td>Emits after the sheet transitions to closed.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="api-slots" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Content Slots</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Selector</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><em>default</em></td>
+            <td>Main body content rendered inside a scrollable content area.</td>
+          </tr>
+          <tr>
+            <td><code>[bottomSheetFooter]</code></td>
+            <td>Sticky footer pinned to the bottom of the panel. Hidden when empty.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="api-css" data-doc-anchor>
+      <h3 class="demo-section__subtitle">CSS Custom Properties</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--uilib-bottom-sheet-panel-bg</code></td>
+            <td><code>var(--uilib-surface, #fff)</code></td>
+            <td>Panel background colour.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-panel-shadow</code></td>
+            <td>elevation shadow</td>
+            <td>Box-shadow above the panel.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-border-radius</code></td>
+            <td><code>16px</code></td>
+            <td>Top corner radius of the panel.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-backdrop-bg</code></td>
+            <td><code>rgba(0,0,0,.48)</code></td>
+            <td>Backdrop overlay colour.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-z-index</code></td>
+            <td><code>var(--uilib-z-overlay, 1000)</code></td>
+            <td>Stack order of the sheet.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-transition-duration</code></td>
+            <td><code>0.32s</code></td>
+            <td>Slide-in/out animation duration. Overridden to <code>0</code> under <code>prefers-reduced-motion</code>.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-transition-easing</code></td>
+            <td><code>cubic-bezier(0.32, 0.72, 0, 1)</code></td>
+            <td>Slide-in/out animation easing.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-padding</code></td>
+            <td><code>var(--uilib-spacing-5, 1.25rem)</code></td>
+            <td>Internal content padding.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-header-border</code></td>
+            <td><code>1px solid …</code></td>
+            <td>Header bottom border.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-title-color</code></td>
+            <td><code>var(--uilib-color-text-primary)</code></td>
+            <td>Header title text colour.</td>
+          </tr>
+          <tr>
+            <td><code>--uilib-bottom-sheet-close-color</code></td>
+            <td><code>var(--uilib-color-text-secondary)</code></td>
+            <td>Close button icon colour.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- ---- Accessibility -------------------------------------------- -->
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+
+    <div id="a11y-aria" data-doc-anchor>
+      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Attribute</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Panel</td>
+            <td><code>role="dialog"</code></td>
+            <td>Marks the sheet as a dialog region.</td>
+          </tr>
+          <tr>
+            <td>Panel</td>
+            <td><code>aria-modal="true"</code></td>
+            <td>Signals to screen readers that content behind the sheet is inert (only when open).</td>
+          </tr>
+          <tr>
+            <td>Panel</td>
+            <td><code>aria-labelledby</code></td>
+            <td>References the header title element when <code>header</code> is provided.</td>
+          </tr>
+          <tr>
+            <td>Panel</td>
+            <td><code>tabindex="-1"</code></td>
+            <td>Enables programmatic focus on the panel element itself on open.</td>
+          </tr>
+          <tr>
+            <td>Host / Backdrop</td>
+            <td><code>aria-hidden="true"</code></td>
+            <td>Hides the component and backdrop from screen readers when closed.</td>
+          </tr>
+          <tr>
+            <td>Close button</td>
+            <td><code>aria-label="Close"</code></td>
+            <td>Accessible name for the icon-only close button.</td>
+          </tr>
+          <tr>
+            <td>Close icon SVG</td>
+            <td><code>aria-hidden="true"</code></td>
+            <td>Decorative — the button's <code>aria-label</code> provides the accessible name.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="a11y-keyboard" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Escape</code></td>
+            <td>Closes the sheet (when <code>[closeOnEscape]="true"</code>) and returns focus to the previously focused element.</td>
+          </tr>
+          <tr>
+            <td><code>Tab</code></td>
+            <td>Cycles focus forward through all focusable elements inside the panel. Wraps from last to first.</td>
+          </tr>
+          <tr>
+            <td><code>Shift+Tab</code></td>
+            <td>Cycles focus backward. Wraps from first to last.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-section__subtitle">Notes</h3>
+    <ul class="doc-list">
+      <li>
+        <strong>Focus trap:</strong> When the sheet opens, focus is moved inside the panel and
+        <kbd>Tab</kbd> / <kbd>Shift+Tab</kbd> are trapped within it via the <code>FocusTrap</code>
+        utility from <code>ui-lib-custom/core</code>.
+      </li>
+      <li>
+        <strong>Focus restoration:</strong> When the sheet closes, focus automatically returns
+        to the element that was focused before the sheet opened.
+      </li>
+      <li>
+        Scroll is locked on <code>&lt;body&gt;</code> while the sheet is open.
+      </li>
+      <li>
+        All animations respect <code>prefers-reduced-motion: reduce</code> — transitions are
+        disabled when the user prefers reduced motion.
+      </li>
+    </ul>
+
+  </section>
+
+  <!-- ---- TOC Rail ------------------------------------------------- -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-  <!-- API table -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">API</h2>
+</app-doc-page-layout>
 
-    <h3 class="demo-api__subtitle">Inputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>visible</code></td>
-          <td><code>model&lt;boolean&gt;</code></td>
-          <td><code>false</code></td>
-          <td>Controls open/close state. Supports two-way binding via <code>[(visible)]</code>.</td>
-        </tr>
-        <tr>
-          <td><code>header</code></td>
-          <td><code>string</code></td>
-          <td><code>''</code></td>
-          <td>Optional header text. When set, renders a title bar with a close button.</td>
-        </tr>
-        <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Visual variant. Inherits from <code>ThemeConfigService</code> when null.</td>
-        </tr>
-        <tr>
-          <td><code>showBackdrop</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Whether to show the semi-transparent backdrop behind the panel.</td>
-        </tr>
-        <tr>
-          <td><code>closeOnBackdrop</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Whether clicking the backdrop closes the sheet.</td>
-        </tr>
-        <tr>
-          <td><code>closeOnEscape</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Whether pressing Escape closes the sheet.</td>
-        </tr>
-        <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes applied to the host element.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 class="demo-api__subtitle">Outputs</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Output</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>shown</code></td>
-          <td><code>void</code></td>
-          <td>Emits when the sheet transitions to open.</td>
-        </tr>
-        <tr>
-          <td><code>hidden</code></td>
-          <td><code>void</code></td>
-          <td>Emits when the sheet transitions to closed.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 class="demo-api__subtitle">Content Projection</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Selector</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>(default)</code></td>
-          <td>Main body content rendered inside a scrollable content area.</td>
-        </tr>
-        <tr>
-          <td><code>[bottomSheetFooter]</code></td>
-          <td>Sticky footer content pinned to the bottom of the panel.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-</section>
-
-<!-- ── Sheet instances ─────────────────────────────────────────── -->
+<!-- Sheet instances outside the layout so they render at correct stacking context -->
 
 <ui-lib-bottom-sheet [(visible)]="basicOpen">
   <p>This is the basic bottom sheet. Click the backdrop or press <kbd>Escape</kbd> to close.</p>
 </ui-lib-bottom-sheet>
 
 <ui-lib-bottom-sheet [(visible)]="headerOpen" header="Share">
-  <p>Choose where to share this item. The header includes a built-in close button.</p>
+  <p>Choose where to share this item. The header includes a built-in close button and is wired to <code>aria-labelledby</code> automatically.</p>
 </ui-lib-bottom-sheet>
 
 <ui-lib-bottom-sheet [(visible)]="footerOpen" header="Confirm action">
   <p>This sheet has a sticky footer with action buttons projected via the <code>[bottomSheetFooter]</code> slot.</p>
-  <div bottomSheetFooter class="demo-footer-actions">
-    <ui-lib-button appearance="outline" type="button" (click)="footerOpen.set(false)">
-      Cancel
-    </ui-lib-button>
-    <ui-lib-button type="button" (click)="footerOpen.set(false)">
-      Confirm
-    </ui-lib-button>
+  <div bottomSheetFooter class="demo-sheet-footer-actions">
+    <ui-lib-button appearance="outline" (click)="footerOpen.set(false)">Cancel</ui-lib-button>
+    <ui-lib-button (click)="footerOpen.set(false)">Confirm</ui-lib-button>
   </div>
 </ui-lib-bottom-sheet>
 
@@ -234,13 +400,13 @@
 </ui-lib-bottom-sheet>
 
 <ui-lib-bottom-sheet [(visible)]="materialOpen" header="Material variant" variant="material">
-  <p>Material variant — larger corner radius, elevation shadow, and indigo close button.</p>
+  <p>Larger corner radius (20 px), elevation shadow, and indigo close button accent.</p>
 </ui-lib-bottom-sheet>
 
 <ui-lib-bottom-sheet [(visible)]="bootstrapOpen" header="Bootstrap variant" variant="bootstrap">
-  <p>Bootstrap variant — sharp corners, flat shadow, and standard styling.</p>
+  <p>Sharp corners (4 px), flat box-shadow, and standard Bootstrap-style look.</p>
 </ui-lib-bottom-sheet>
 
 <ui-lib-bottom-sheet [(visible)]="minimalOpen" header="Minimal variant" variant="minimal">
-  <p>Minimal variant — subtle shadow, medium radius, and clean styling.</p>
+  <p>Subtle shadow, medium radius (12 px), and a clean low-contrast style.</p>
 </ui-lib-bottom-sheet>
