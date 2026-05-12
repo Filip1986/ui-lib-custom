@@ -48,6 +48,7 @@ function query<T extends HTMLElement>(fixture: ComponentFixture<unknown>, select
       [size]="size()"
       [variant]="variant()"
       [styleClass]="styleClass()"
+      [ariaLabel]="ariaLabel()"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,6 +69,7 @@ class TestHostComponent {
   public readonly variant: WritableSignal<MeterGroupVariant | null> =
     signal<MeterGroupVariant | null>(null);
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaLabel: WritableSignal<string> = signal<string>('Meter group');
 }
 
 function setup(): { fixture: ComponentFixture<TestHostComponent>; host: TestHostComponent } {
@@ -147,6 +149,15 @@ describe('MeterGroup', (): void => {
     const { fixture } = setup();
     const [first]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
     expect(first!.getAttribute('aria-label')).toContain('Apps');
+  });
+
+  it('should set custom aria-label on meter group container', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.ariaLabel.set('Storage usage');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const container: HTMLElement = query(fixture, '.ui-lib-meter-group__meters');
+    expect(container.getAttribute('aria-label')).toBe('Storage usage');
   });
 
   it('should render legend labels when showLabels is true', (): void => {
@@ -243,6 +254,17 @@ describe('MeterGroup', (): void => {
     expect(first!.style.width).toBe('10%');
   });
 
+  it('should calculate percentage relative to min and max', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.min.set(10);
+    host.max.set(110);
+    host.values.set([{ label: 'Scoped', value: 20, color: '#000' }]);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const [first]: HTMLElement[] = queryAll(fixture, '.ui-lib-meter-group__meter');
+    expect(first!.style.width).toBe('10%');
+  });
+
   it('should render no segments when values is empty', async (): Promise<void> => {
     const { fixture, host } = setup();
     host.values.set([]);
@@ -270,5 +292,24 @@ describe('MeterGroup', (): void => {
       By.css('.ui-lib-meter-group__label-swatch .pi-star')
     );
     expect(iconDebug).toBeTruthy();
+  });
+
+  it('should generate unique host id per component instance', (): void => {
+    setup();
+    const firstFixture: ComponentFixture<TestHostComponent> =
+      TestBed.createComponent(TestHostComponent);
+    const secondFixture: ComponentFixture<TestHostComponent> =
+      TestBed.createComponent(TestHostComponent);
+    firstFixture.detectChanges();
+    secondFixture.detectChanges();
+    const firstHostElement: HTMLElement = firstFixture.nativeElement as HTMLElement;
+    const secondHostElement: HTMLElement = secondFixture.nativeElement as HTMLElement;
+    const first: HTMLElement = firstHostElement.querySelector('ui-lib-meter-group') as HTMLElement;
+    const second: HTMLElement = secondHostElement.querySelector(
+      'ui-lib-meter-group'
+    ) as HTMLElement;
+    expect(first.id).toMatch(/^ui-lib-meter-group-\d+$/);
+    expect(second.id).toMatch(/^ui-lib-meter-group-\d+$/);
+    expect(first.id).not.toBe(second.id);
   });
 });

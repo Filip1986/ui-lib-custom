@@ -104,7 +104,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done     |
 | 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ⏳ Queued   |
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ✅ Done     |
-| 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ⏳ Queued   |
+| 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ✅ Done     |
 | 58   | Divider         | `role=separator` + `aria-orientation`                     | ⏳ Queued   |
 | 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
@@ -255,7 +255,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Skeleton        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ProgressBar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ProgressSpinner | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
-| MeterGroup      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| MeterGroup      | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 
 ## Utilities & Directives
 

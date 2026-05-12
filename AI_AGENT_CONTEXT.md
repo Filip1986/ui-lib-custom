@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** Panel accessibility hardening COMPLETE (6-phase, #60); Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** MeterGroup and Panel accessibility hardening COMPLETE (6-phase, #57/#60); Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -47,6 +47,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
+- `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 
 ---
@@ -61,6 +62,40 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
+Changed:
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
+      • Added module-level `nextMeterGroupId` counter and unique host `instanceId`
+      • Added `ariaLabel` input and wired group ARIA label to template
+      • Fixed segment percentage calculation to respect `min`/`max` range (`(value - min) / (max - min)`)
+      • Added computed `totalValue` + `totalAnnouncement` for live total announcements
+      • Added stable segment track helper and richer per-segment aria-label formatter
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html
+      • Updated segment `@for` loops to use stable track keys
+      • Bound group `aria-label` to `ariaLabel` input
+      • Updated segment `aria-label` output to include value-range phrasing
+      • Added polite/atomic live region for total announcement text
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss
+      • Added visually-hidden live-region utility class
+      • Added `prefers-reduced-motion: reduce` override to disable meter transitions
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts
+      • Added tests for custom group aria-label, min/max-relative percentage calculation, and unique host IDs
+  - projects/ui-lib-custom/src/lib/meter-group/meter-group.a11y.spec.ts (CREATED — 18 tests)
+      • Added ARIA structure, decorative aria-hidden, live region total updates, keyboard non-focusability, unique IDs, and axe checks
+  - projects/ui-lib-custom/src/lib/meter-group/README.md
+      • Added `ariaLabel` input docs, ARIA attributes table, keyboard interaction table, and expanded accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • MeterGroup #57 queue status: ⏳ Queued → ✅ Done
+      • MeterGroup score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
+State: MeterGroup hardening complete. Segment ARIA labels now include value context, totals are announced through a live region, unique instance IDs are generated, reduced-motion support is in place, and dedicated a11y regression coverage is added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/meter-group/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=meter-group --no-coverage (45/45 PASS — 27 unit + 18 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]
 Changed:
@@ -117,26 +152,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
 Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
-
-Date: 2026-05-12 [Button component — glass-shadow appearance polish]
-Changed:
-  - projects/ui-lib-custom/src/lib/button/button.scss
-      • Exposed remaining glass-shadow style values as CSS custom properties (`active-x/y`, font weight, letter spacing, gradient angle, opacity)
-      • Replaced remaining hardcoded glass-shadow active/gradient/opacity values with token usage
-  - projects/ui-lib-custom/src/lib/button/button.spec.ts
-      • Added `glass-shadow` coverage to the appearance class regression test matrix
-  - projects/ui-lib-custom/src/lib/button/button.ts
-      • Updated component description to reflect 12 appearances
-  - projects/ui-lib-custom/src/lib/button/README.md
-      • Updated appearance count math, documented `glass-shadow`, and added a usage example
-  - projects/demo/src/app/pages/buttons/buttons.component.html
-      • Updated demo copy to 12 appearances
-      • Wired the dedicated Glass Shadow demo buttons to the active variant switcher
-State: Glass-shadow button appearance is fully wired with tokenized styling values, docs/test coverage, and a variant-aware demo section. No broader button hardening work was started.
-Verification:
-  npm install (PASS)
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ projects/demo/src/app/pages/buttons/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=projects/ui-lib-custom/src/lib/button --no-coverage (48/48 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-Terminal notes: Fresh clone required `npm install` before validation. An initial ESLint retry using `--ext .ts,.scss,.html` failed by parsing SCSS with the wrong parser; the repository's standard directory-based ESLint command succeeded. Captured the updated demo screenshot after starting `npm run serve:demo` and installing Playwright Chromium locally.
-Next step: Resume the queued hardening track with TreeTable (#33) when button appearance follow-up is no longer needed.

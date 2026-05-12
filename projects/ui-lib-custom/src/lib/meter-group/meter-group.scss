@@ -107,6 +107,18 @@ ui-lib-meter-group {
     font-variant-numeric: tabular-nums;
   }
 
+  &__sr-total {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   // ---- Size: sm ---------------------------------------------------
   &--size-sm {
     --uilib-meter-group-height: var(--uilib-meter-group-height-sm);
@@ -201,5 +213,11 @@ ui-lib-meter-group {
     --uilib-meter-group-bg: var(--uilib-surface-700, #374151);
     --uilib-meter-group-label-color: var(--uilib-color-text, #f9fafb);
     --uilib-meter-group-label-value-color: var(--uilib-surface-400, #9ca3af);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-meter-group__meter {
+    transition: none;
   }
 }
