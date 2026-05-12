@@ -3,8 +3,9 @@ import {
   Component,
   provideZonelessChangeDetection,
   signal,
+  type WritableSignal,
 } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import type { DebugElement } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { Tag } from './tag';
@@ -22,6 +23,8 @@ import type { TagSeverity, TagSize, TagVariant } from './tag.types';
       [size]="tagSize()"
       [variant]="tagVariant()"
       [styleClass]="tagStyleClass()"
+      [dismissible]="tagDismissible()"
+      [removeIcon]="tagRemoveIcon()"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,6 +37,8 @@ class TestHostComponent {
   public readonly tagSize: WritableSignal<TagSize> = signal<TagSize>('md');
   public readonly tagVariant: WritableSignal<TagVariant | null> = signal<TagVariant | null>(null);
   public readonly tagStyleClass: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly tagDismissible: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly tagRemoveIcon: WritableSignal<string> = signal<string>('pi pi-times');
 }
 
 describe('Tag', (): void => {
@@ -164,8 +169,14 @@ describe('Tag', (): void => {
     expect(getTagElement().getAttribute('aria-label')).toBe('Active');
   });
 
-  it('should have role="status" on the host', (): void => {
+  it('should have role="status" on the host by default', (): void => {
     expect(getTagElement().getAttribute('role')).toBe('status');
+  });
+
+  it('should switch host role to group when dismissible is true', (): void => {
+    host.tagDismissible.set(true);
+    fixture.detectChanges();
+    expect(getTagElement().getAttribute('role')).toBe('group');
   });
 
   it('should remove aria-label when value is null', (): void => {
@@ -188,5 +199,60 @@ describe('Tag', (): void => {
     fixture.detectChanges();
     const iconSpan: Element | null = getTagElement().querySelector('.ui-lib-tag__icon');
     expect(iconSpan?.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('should render remove button with default aria-label when dismissible', (): void => {
+    host.tagDismissible.set(true);
+    fixture.detectChanges();
+    const removeButton: HTMLButtonElement | null = getTagElement().querySelector(
+      '.ui-lib-tag__remove-button'
+    );
+    expect(removeButton).toBeTruthy();
+    expect(removeButton?.getAttribute('aria-label')).toBe('Remove tag');
+  });
+
+  it('should include tag value in remove button aria-label', (): void => {
+    host.tagDismissible.set(true);
+    host.tagValue.set('Python');
+    fixture.detectChanges();
+    const removeButton: HTMLButtonElement | null = getTagElement().querySelector(
+      '.ui-lib-tag__remove-button'
+    );
+    expect(removeButton?.getAttribute('aria-label')).toBe('Remove Python tag');
+  });
+
+  it('should mark remove icon as aria-hidden', (): void => {
+    host.tagDismissible.set(true);
+    host.tagRemoveIcon.set('pi pi-times-circle');
+    fixture.detectChanges();
+    const removeIcon: HTMLElement | null = getTagElement().querySelector(
+      '.ui-lib-tag__remove-button span'
+    );
+    expect(removeIcon?.getAttribute('aria-hidden')).toBe('true');
+    expect(removeIcon?.classList).toContain('pi-times-circle');
+  });
+
+  it('should emit removed output when remove button is clicked', (): void => {
+    host.tagDismissible.set(true);
+    fixture.detectChanges();
+
+    const tagInstance: Tag = fixture.debugElement.query(
+      (element: DebugElement): boolean => element.name === 'ui-lib-tag'
+    ).componentInstance as Tag;
+    const removedEvents: MouseEvent[] = [];
+    tagInstance.removed.subscribe((event: MouseEvent): void => {
+      removedEvents.push(event);
+    });
+
+    const removeButton: HTMLButtonElement = getTagElement().querySelector(
+      '.ui-lib-tag__remove-button'
+    ) as HTMLButtonElement;
+    removeButton.click();
+
+    expect(removedEvents).toHaveLength(1);
+  });
+
+  it('should assign a unique tag id', (): void => {
+    expect(getTagElement().id).toMatch(/^ui-lib-tag-\d+$/);
   });
 });

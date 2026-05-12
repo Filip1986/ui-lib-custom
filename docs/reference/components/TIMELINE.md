@@ -140,12 +140,33 @@ All tokens are set on `.ui-lib-timeline` and can be overridden per-instance or g
 | `--uilib-timeline-opposite-min-width` | `6rem` | Minimum width of the opposite column. |
 | `--uilib-timeline-font-size` | `1rem` | Base font size for the component. |
 | `--uilib-timeline-color` | `var(--uilib-text-color, #1f2937)` | Text colour. |
+| `--uilib-timeline-focus-ring-color` | `var(--uilib-primary-color, #3b82f6)` | Focus-within ring colour when projected controls receive focus. |
 ---
 ## Accessibility
-- The host element has `role="list"` and `[attr.aria-label]`.
-- Each event element has `role="listitem"` and an auto-generated `aria-label` (`"Event 1"`, `"Event 2"`, …).
-- The marker wrapper has `aria-hidden="true"` to keep decorative dots out of the a11y tree.
-- Connectors are decorative `<span>` elements and carry no semantic meaning.
+### ARIA attributes
+
+| Element | Attribute | Value | Description |
+|---|---|---|---|
+| Host (`ui-lib-timeline`) | `role` | `list` | Exposes the timeline as a semantic list |
+| Host | `id` | `ui-lib-timeline-{n}` | Auto-generated unique instance id |
+| Host | `aria-label` | `ariaLabel` input | Accessible name for the full list |
+| Event row | `role` | `listitem` | Announces each event as a list item |
+| Event row | `aria-labelledby` | Content id + optional opposite id | Uses visible text to label each event |
+| Connectors / marker dot | `aria-hidden` | `true` | Hides decorative timeline chrome from assistive tech |
+
+### Keyboard interaction
+
+The timeline itself is non-interactive, so the host and event rows stay out of the tab order.
+Projected buttons, links, and other controls keep their native keyboard behaviour, and the event
+row shows a visible focus-within ring when projected content receives focus.
+
+### Additional notes
+
+- When no `uiTimelineContent` template is supplied, the component renders fallback text from common
+  item fields such as `title`, `label`, `name`, `status`, `date`, or `description`.
+- The marker wrapper is decorative by design, so both the wrapper and the default dot are hidden
+  from assistive technologies.
+- `@media (prefers-reduced-motion: reduce)` disables marker hover transitions.
 ---
 ## TypeScript Types
 ```typescript
