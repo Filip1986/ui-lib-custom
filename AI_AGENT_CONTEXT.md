@@ -70,6 +70,19 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [TreeContext contract + TreeSelect tree host id repaired]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+State: Restored the missing `TreeContext` methods on `Tree`, reintroduced optional `hostId` support so `TreeSelect` can wire `aria-controls` to the popup tree, and aligned tree rows with the context API by exposing stable row ids/labels plus decorative icon hiding. The original `TS2420` compile error is fixed and the related tree/tree-select accessibility test slice is green again.
+Verification:
+  .\node_modules\.bin\ng.cmd build ui-lib-custom (PASS)
+  .\node_modules\.bin\jest.cmd --testPathPatterns src/lib/tree/ tree-select --no-coverage (172/172 PASS)
+Terminal notes: Initial Jest command using `|` in `--testPathPatterns` was parsed by PowerShell as a pipeline; reran successfully with separate pattern arguments.
+Next step: Commit the verified Tree / TreeSelect repair.
+
 Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -122,32 +135,3 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
-Changed:
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
-      • Added module-level `let nextScrollPanelId: number = 0` counter and unique `componentId`/`contentId`
-      • Added `ariaLabel` input (`string | null`, default `null`) wired to `__content` via `[attr.aria-label]`
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html
-      • Added `role="region"`, `tabindex="0"`, `[id]="contentId"`, `[attr.aria-label]="ariaLabel()"` to `__content` div
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss
-      • Added `outline: none` + `:focus-visible` ring on `__content`
-  - projects/ui-lib-custom/src/lib/scroll-panel/README.md
-      • Added `ariaLabel` input to inputs table
-      • Added ARIA attributes table, keyboard interaction table, expanded accessibility section
-      • Updated usage examples to show `ariaLabel` in context
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.a11y.spec.ts (CREATED — 16 tests)
-      • axe-core checks (3): labelled, unlabelled, all variants
-      • ARIA structure (6): role=region, tabindex=0, aria-label present/absent, id format, unique IDs
-      • Dynamic label (2): aria-label updates on signal change, removed on null
-      • Keyboard (3): focusable, ArrowDown no error, PageDown no error
-      • Multi-variant (1): all 3 variants expose role+tabindex
-  - docs/COMPONENT_SCORES.md
-      • ScrollPanel #62: ⏳ Queued → ✅ Done
-      • Layout table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
-State: ScrollPanel hardening complete. Scrollable region is now keyboard-accessible (tabindex=0, role=region), has an ariaLabel input for screen reader context, unique stable IDs per instance, and :focus-visible ring for visible focus indicator.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Continue with Tier 6 queue — Tag (#53), Skeleton (#55), Divider (#58) or Toolbar (#59).

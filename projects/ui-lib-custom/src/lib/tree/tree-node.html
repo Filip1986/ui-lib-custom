@@ -4,6 +4,8 @@
   [class.uilib-tree-node-row--selectable]="node().selectable !== false && treeContext.selectionMode() !== null && treeContext.selectionMode() !== 'checkbox'"
   [class]="node().styleClass ?? ''"
   [style.padding-inline-start.px]="depth() * 20"
+  [attr.id]="treeContext.getTreeItemId(node())"
+  [attr.data-node-label]="node().label ?? null"
   role="treeitem"
   [attr.aria-level]="depth() + 1"
   [attr.aria-setsize]="setsize()"
@@ -12,8 +14,9 @@
   [attr.aria-selected]="treeContext.selectionMode() !== 'checkbox' ? treeContext.isNodeSelected(node()) : null"
   [attr.aria-checked]="treeContext.selectionMode() === 'checkbox' ? (treeContext.isNodePartiallySelected(node()) ? 'mixed' : treeContext.isNodeSelected(node())) : null"
   [attr.aria-disabled]="node().selectable === false ? true : null"
-  tabindex="0"
+  [attr.tabindex]="treeContext.getNodeTabIndex(node())"
   (click)="treeContext.handleNodeClick($event, node())"
+  (focus)="treeContext.setFocusedNode(node())"
   (keydown.enter)="treeContext.handleNodeClick($event, node())"
   (keydown.space)="$event.preventDefault(); treeContext.handleNodeClick($event, node())"
 >
@@ -27,7 +30,7 @@
       tabindex="-1"
       (click)="$event.stopPropagation(); treeContext.handleNodeToggle($event, node())"
     >
-      <span class="uilib-tree-toggle-icon"></span>
+      <span class="uilib-tree-toggle-icon" aria-hidden="true"></span>
     </button>
   } @else {
     <span class="uilib-tree-node-leaf-spacer" aria-hidden="true"></span>

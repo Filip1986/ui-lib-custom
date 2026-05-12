@@ -66,7 +66,7 @@ let nextTreeId: number = 0;
     class: 'ui-lib-tree',
     '[class]': 'hostClasses()',
     role: 'tree',
-    '[attr.id]': 'instanceId',
+    '[attr.id]': 'hostElementId()',
     '[attr.aria-label]': 'hostAriaLabel()',
     '[attr.aria-multiselectable]': 'hostAriaMultiselectable()',
     '(keydown)': 'onKeydown($event)',
@@ -89,6 +89,9 @@ export class Tree implements TreeContext {
 
   /** Reactive tick. Incremented after any tree mutation to force re-render. */
   private readonly tick: WritableSignal<number> = signal(0);
+
+  /** Currently focused node key for roving-tabindex support. */
+  private readonly focusedNodeKey: WritableSignal<string | null> = signal<string | null>(null);
 
   // ─── Inputs ────────────────────────────────────────────────────────────────
 
@@ -125,6 +128,9 @@ export class Tree implements TreeContext {
 
   /** Accessible label for the tree widget. Used as `aria-label` on the host. */
   public readonly ariaLabel: InputSignal<string> = input<string>('');
+
+  /** Optional explicit host id. Falls back to the generated instance id. */
+  public readonly hostId: InputSignal<string | null> = input<string | null>(null);
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -180,6 +186,12 @@ export class Tree implements TreeContext {
   public readonly hostAriaLabel: Signal<string | null> = computed<string | null>(
     (): string | null => this.ariaLabel() || null
   );
+
+  /** Host `id` value — explicit `hostId` when provided, else the generated instance id. */
+  public readonly hostElementId: Signal<string> = computed<string>((): string => {
+    const providedHostId: string | null = this.hostId()?.trim() ?? null;
+    return providedHostId || this.instanceId;
+  });
 
   /** `aria-multiselectable` for the host — `true` in multiple/checkbox modes, otherwise `null`. */
   public readonly hostAriaMultiselectable: Signal<true | null> = computed<true | null>(
@@ -249,6 +261,53 @@ export class Tree implements TreeContext {
     return (currentSelection as TreeNode[]).some(
       (selected: TreeNode): boolean => selected.key === node.key
     );
+  }
+
+  /** Returns the generated DOM id for the given tree row. */
+  public getTreeItemId(node: TreeNode): string {
+    return `${this.hostElementId()}-item-${this.sanitizeNodeKey(node.key)}`;
+  }
+
+  /** Returns the node's tree level using 1-based indexing. */
+  public getNodeLevel(node: TreeNode): number {
+    const path: TreeNode[] | null = this.findVisibleNodePath(node.key);
+    return path?.length ?? 1;
+  }
+
+  /** Returns the visible sibling count for the node's current group. */
+  public getNodeSetSize(node: TreeNode): number {
+    const visibleSiblings: TreeNode[] = this.getVisibleSiblings(node);
+    return visibleSiblings.length || 1;
+  }
+
+  /** Returns the 1-based visible sibling position for the node's current group. */
+  public getNodePosInSet(node: TreeNode): number {
+    const visibleSiblings: TreeNode[] = this.getVisibleSiblings(node);
+    const index: number = visibleSiblings.findIndex(
+      (sibling: TreeNode): boolean => sibling.key === node.key
+    );
+    return index >= 0 ? index + 1 : 1;
+  }
+
+  /** Returns the node's currently visible children. */
+  public getVisibleChildren(node: TreeNode): TreeNode[] {
+    return (node.children ?? []).filter((child: TreeNode): boolean => this.isNodeFiltered(child));
+  }
+
+  /** Returns the tabindex to apply to the node row. */
+  public getNodeTabIndex(node: TreeNode): number {
+    const focusedKey: string | null = this.focusedNodeKey();
+    if (focusedKey !== null) {
+      return focusedKey === node.key ? 0 : -1;
+    }
+
+    const firstVisibleNode: TreeNode | null = this.getVisibleFlatNodes()[0] ?? null;
+    return firstVisibleNode?.key === node.key ? 0 : -1;
+  }
+
+  /** Marks the node as the current focus target. */
+  public setFocusedNode(node: TreeNode): void {
+    this.focusedNodeKey.set(node.key);
   }
 
   /**
@@ -538,6 +597,75 @@ export class Tree implements TreeContext {
       visit(rootNode);
     }
     return keys;
+  }
+
+  /** Returns the visible root-level nodes in DOM order. */
+  private getVisibleRootNodes(): TreeNode[] {
+    return this.value().filter((node: TreeNode): boolean => this.isNodeFiltered(node));
+  }
+
+  /** Returns the visible siblings for the given node. */
+  private getVisibleSiblings(node: TreeNode): TreeNode[] {
+    const path: TreeNode[] | null = this.findVisibleNodePath(node.key);
+    if (!path) {
+      return this.getVisibleRootNodes();
+    }
+
+    const parentNode: TreeNode | undefined = path[path.length - 2];
+    return parentNode ? this.getVisibleChildren(parentNode) : this.getVisibleRootNodes();
+  }
+
+  /** Returns the visible node path from root to the target key, or `null` when missing. */
+  private findVisibleNodePath(targetKey: string): TreeNode[] | null {
+    const visit: (nodes: TreeNode[], ancestors: TreeNode[]) => TreeNode[] | null = (
+      nodes: TreeNode[],
+      ancestors: TreeNode[]
+    ): TreeNode[] | null => {
+      for (const node of nodes) {
+        if (!this.isNodeFiltered(node)) {
+          continue;
+        }
+
+        const currentPath: TreeNode[] = [...ancestors, node];
+        if (node.key === targetKey) {
+          return currentPath;
+        }
+
+        const childPath: TreeNode[] | null = visit(this.getVisibleChildren(node), currentPath);
+        if (childPath) {
+          return childPath;
+        }
+      }
+
+      return null;
+    };
+
+    return visit(this.getVisibleRootNodes(), []);
+  }
+
+  /** Returns the currently visible nodes in flattened DOM order. */
+  private getVisibleFlatNodes(): TreeNode[] {
+    const flattenedNodes: TreeNode[] = [];
+    const visit: (nodes: TreeNode[]) => void = (nodes: TreeNode[]): void => {
+      for (const node of nodes) {
+        if (!this.isNodeFiltered(node)) {
+          continue;
+        }
+
+        flattenedNodes.push(node);
+        if (this.isNodeExpanded(node)) {
+          visit(this.getVisibleChildren(node));
+        }
+      }
+    };
+
+    visit(this.getVisibleRootNodes());
+    return flattenedNodes;
+  }
+
+  /** Normalizes a TreeNode key so it is safe to embed in an HTML id attribute. */
+  private sanitizeNodeKey(key: string): string {
+    return key.replace(/[^A-Za-z0-9_:-]+/g, '-');
   }
 
   private focusItemAtIndex(items: HTMLElement[], index: number): void {
