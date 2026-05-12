@@ -412,7 +412,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture(
         (host: TreeA11yHost): void => {
           host.selectionMode.set('single');
-          host.selection.set(buildNodes()[0]);
+          host.selection.set(buildNodes()[0] as TreeNode);
         }
       );
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
@@ -446,7 +446,7 @@ describe('Tree — accessibility', (): void => {
 
     it('should set aria-checked="true" on a fully checked item', async (): Promise<void> => {
       const nodes: TreeNode[] = buildCheckboxNodes();
-      const apple: TreeNode = nodes[0].children![0];
+      const apple: TreeNode = nodes[0]!.children![0]!;
       const fixture: ComponentFixture<CheckboxTreeHost> = await createCheckboxFixture(
         (host: CheckboxTreeHost): void => {
           host.selection.set([apple]);
@@ -538,8 +538,8 @@ describe('Tree — accessibility', (): void => {
         (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('ui-lib-tree')
       );
       expect(trees.length).toBe(2);
-      const id1: string | null = trees[0].getAttribute('id');
-      const id2: string | null = trees[1].getAttribute('id');
+      const id1: string | null = trees[0]!.getAttribute('id');
+      const id2: string | null = trees[1]!.getAttribute('id');
       expect(id1).toBeTruthy();
       expect(id2).toBeTruthy();
       expect(id1).not.toBe(id2);
@@ -555,32 +555,32 @@ describe('Tree — accessibility', (): void => {
     it('ArrowDown should move focus to the next treeitem', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[0].focus();
-      dispatchKeydown(items[0], 'ArrowDown');
+      items[0]!.focus();
+      dispatchKeydown(items[0] as HTMLElement, 'ArrowDown');
       expect(document.activeElement).toBe(items[1]);
     });
 
     it('ArrowUp should move focus to the previous treeitem', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[1].focus();
-      dispatchKeydown(items[1], 'ArrowUp');
+      items[1]!.focus();
+      dispatchKeydown(items[1] as HTMLElement, 'ArrowUp');
       expect(document.activeElement).toBe(items[0]);
     });
 
     it('Home should move focus to the first treeitem', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[items.length - 1].focus();
-      dispatchKeydown(items[items.length - 1], 'Home');
+      items[items.length - 1]!.focus();
+      dispatchKeydown(items[items.length - 1] as HTMLElement, 'Home');
       expect(document.activeElement).toBe(items[0]);
     });
 
     it('End should move focus to the last visible treeitem', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[0].focus();
-      dispatchKeydown(items[0], 'End');
+      items[0]!.focus();
+      dispatchKeydown(items[0] as HTMLElement, 'End');
       expect(document.activeElement).toBe(items[items.length - 1]);
     });
 
@@ -604,7 +604,7 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       // Documents (items[0]) is expanded — ArrowRight should move focus to Work (items[1])
-      const docs: HTMLElement = items[0];
+      const docs: HTMLElement = items[0] as HTMLElement;
       expect(docs.getAttribute('aria-expanded')).toBe('true');
       docs.focus();
       dispatchKeydown(docs, 'ArrowRight');
@@ -626,7 +626,7 @@ describe('Tree — accessibility', (): void => {
     it('ArrowLeft on an expanded branch should collapse it', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      const docs: HTMLElement = items[0];
+      const docs: HTMLElement = items[0] as HTMLElement;
       expect(docs.getAttribute('aria-expanded')).toBe('true');
       docs.focus();
       dispatchKeydown(docs, 'ArrowLeft');
@@ -674,8 +674,8 @@ describe('Tree — accessibility', (): void => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
       // Focus Movies (last) — 'd' should wrap to Documents
-      items[items.length - 1].focus();
-      dispatchKeydown(items[items.length - 1], 'd');
+      items[items.length - 1]!.focus();
+      dispatchKeydown(items[items.length - 1] as HTMLElement, 'd');
       const documents: HTMLElement | undefined = items.find(
         (item: HTMLElement): boolean => item.textContent.trim() === 'Documents'
       );
@@ -685,8 +685,8 @@ describe('Tree — accessibility', (): void => {
     it('pressing "p" should focus Pictures', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[0].focus();
-      dispatchKeydown(items[0], 'p');
+      items[0]!.focus();
+      dispatchKeydown(items[0] as HTMLElement, 'p');
       const pictures: HTMLElement | undefined = items.find(
         (item: HTMLElement): boolean => item.textContent.trim() === 'Pictures'
       );
@@ -696,8 +696,8 @@ describe('Tree — accessibility', (): void => {
     it('pressing "m" should focus Movies', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[0].focus();
-      dispatchKeydown(items[0], 'm');
+      items[0]!.focus();
+      dispatchKeydown(items[0] as HTMLElement, 'm');
       const movies: HTMLElement | undefined = items.find(
         (item: HTMLElement): boolean => item.textContent.trim() === 'Movies'
       );
@@ -721,9 +721,9 @@ describe('Tree — accessibility', (): void => {
     it('type-ahead should be case-insensitive', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[0].focus();
+      items[0]!.focus();
       // Uppercase 'P' should still find Pictures
-      dispatchKeydown(items[0], 'P');
+      dispatchKeydown(items[0] as HTMLElement, 'P');
       const pictures: HTMLElement | undefined = items.find(
         (item: HTMLElement): boolean => item.textContent.trim() === 'Pictures'
       );
@@ -733,8 +733,8 @@ describe('Tree — accessibility', (): void => {
     it('should not trigger type-ahead for non-printable keys', async (): Promise<void> => {
       const fixture: ComponentFixture<TreeA11yHost> = await createTreeA11yFixture();
       const items: HTMLElement[] = queryAll(fixture.nativeElement as Element, '[role="treeitem"]');
-      items[0].focus();
-      dispatchKeydown(items[0], 'Shift');
+      items[0]!.focus();
+      dispatchKeydown(items[0] as HTMLElement, 'Shift');
       expect(document.activeElement).toBe(items[0]);
     });
   });
