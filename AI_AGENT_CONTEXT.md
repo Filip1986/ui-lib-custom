@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** Ripple accessibility hardening COMPLETE (6-phase, #74); BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -38,6 +38,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
 - `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
+- `Ripple` -> ✅ complete + hardened (6-phase, score 8.7/10, 29 tests — 19 unit + 10 a11y)
 - `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
 - `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
@@ -123,34 +124,36 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. `isPlatformBrowser` must be imported from `@angular/common`, not `@angular/core`, to satisfy @typescript-eslint/no-unsafe-call.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-11 [Card component — accessibility hardening COMPLETE (#51)]
+Date: 2026-05-12 [Ripple directive — accessibility hardening COMPLETE (#74)]
 Changed:
-  - projects/ui-lib-custom/src/lib/card/card.ts
-      • Added module-scope `let nextCardId: number = 0` for unique instance IDs
-      • Added `public readonly titleId: string` initialized in constructor to `ui-lib-card-title-${nextCardId++}`
-  - projects/ui-lib-custom/src/lib/card/card.html
-      • Added `[attr.aria-labelledby]` — links card container to its title when not hoverable and header is visible
-      • Added `[id]="titleId"` on the `.ui-lib-card__title` div for the labelledby target
-  - projects/ui-lib-custom/src/lib/card/card.scss
-      • Added `:focus-visible` ring on `&--hoverable` (outline + box-shadow glow using `--uilib-color-primary` / `--uilib-focus-ring`)
-      • Applied the `card-dark-theme` mixin via `[data-theme='dark']` selectors (both host-scoped and parent-scoped)
-      • Added `@media (prefers-reduced-motion: reduce)` — disables `transition` and removes `translateY` transforms
-  - projects/ui-lib-custom/src/lib/card/card.a11y.spec.ts (EXPANDED — 24 tests, up from 1)
-      • Added ARIA structure (role, tabindex, aria-label, aria-labelledby, title ID format)
-      • Added keyboard interaction (Enter/Space trigger click; non-hoverable doesn't)
-      • Added closable card accessible label coverage
-      • Added unique IDs, multi-instance ID uniqueness, and dynamic label (signal) update
-      • Added axe checks for basic, hoverable, closable, and multi-variant states
-  - projects/ui-lib-custom/src/lib/card/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
-      • Added full Accessibility section with examples, guidelines, and reduced-motion note
+  - projects/ui-lib-custom/src/lib/ripple/ripple.ts
+      • Imported `PLATFORM_ID` from `@angular/core` and `isPlatformBrowser` from `@angular/common`
+      • Added `private readonly platformId: object = inject(PLATFORM_ID)` field
+      • Added `isPlatformBrowser` guard in `ngOnInit` — click listener only registered in browser environments (SSR safety)
+      • Added `private prefersReducedMotion(): boolean` method — checks `window.matchMedia('(prefers-reduced-motion: reduce)').matches`
+      • Added early return in `spawnWave()` when `prefersReducedMotion()` is true — wave element is never created (not just instant)
+  - projects/ui-lib-custom/src/lib/ripple/ripple.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block with `animation: none; display: none` on `.ui-lib-ripple-wave` (defence-in-depth)
+  - projects/ui-lib-custom/src/lib/ripple/ripple.a11y.spec.ts (CREATED — 10 tests)
+      • axe-core checks: basic, disabled, after-wave-spawn
+      • Decorative: no ARIA role, no aria-label/aria-labelledby added to host
+      • Wave span contains no text content
+      • Reduced motion: wave NOT spawned when matchMedia returns true; wave IS spawned when false
+      • Keyboard: simulated click (Enter/Space) triggers wave
+      • Disabled: no wave spawned
+      • Multi-instance: passes axe; waves confined to own host
+  - projects/ui-lib-custom/src/lib/ripple/README.md
+      • Added ARIA attributes table (none — purely decorative)
+      • Added keyboard interaction table (Enter/Space via native click)
+      • Renamed "CSS variables" section to "CSS custom properties"
+      • Expanded Accessibility section with reduced-motion dual-layer explanation, screen reader note, SSR safety note
   - docs/COMPONENT_SCORES.md
-      • Card: ⏳ Queued → ✅ Done; score row added to Layout table (avg 9.0/10)
-State: Card hardening complete. Focus ring, dark mode, reduced motion, unique IDs, aria-labelledby, and 24 a11y tests all in place.
+      • Ripple #74: ⏳ Queued → ✅ Done; score row populated (API 8, A11y 9, Perf 9, Comp 8, Theme 8, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.7)
+State: Ripple hardening complete. prefers-reduced-motion fully suppresses wave creation (JS + CSS), SSR safe, 10-test a11y regression suite in place.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/card/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=card --no-coverage (34/34 PASS — 10 unit + 24 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/ripple/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=ripple --no-coverage (29/29 PASS — 19 unit + 10 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available.
-Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
+Terminal notes: Fresh clone required `npm install` before validation.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
