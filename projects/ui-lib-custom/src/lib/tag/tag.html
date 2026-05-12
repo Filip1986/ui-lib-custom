@@ -5,4 +5,13 @@
   <span class="ui-lib-tag__value">{{ value() }}</span>
 }
 <ng-content />
-
+@if (dismissible()) {
+  <button
+    type="button"
+    class="ui-lib-tag__remove-button"
+    [attr.aria-label]="removeAriaLabel()"
+    (click)="onRemoveClick($event)"
+  >
+    <span [class]="removeIcon()" aria-hidden="true"></span>
+  </button>
+}
