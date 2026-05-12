@@ -63,6 +63,52 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [TreeSelect component — accessibility hardening COMPLETE (#35)]
+Changed:
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+      • Added module-level `nextTreeId` and generated tree ids
+      • Added visible-node metadata helpers for `aria-level`, `aria-setsize`, `aria-posinset`, visible-child lookup, and roving tabindex
+      • Added `aria-multiselectable`, improved ArrowRight/ArrowLeft behavior, and type-ahead support
+      • Synced focus state from treeitem movement and fixed host/child ArrowDown handling inside TreeSelect popup
+  - projects/ui-lib-custom/src/lib/tree/tree.html
+      • Switched root list to `role="presentation"` and rendered visible root nodes only
+      • Passed sibling metadata into recursive tree nodes
+  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
+      • Added `setsize`/`posinset` inputs and focus callback into TreeContext
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+      • Added generated item ids, `aria-level`, `aria-setsize`, `aria-posinset`, `aria-disabled`, and checkbox `aria-checked`
+      • Marked toggle glyphs decorative and rendered visible children through TreeContext helpers
+  - projects/ui-lib-custom/src/lib/tree/tree.scss
+      • Added `prefers-reduced-motion: reduce` override for tree transitions
+  - projects/ui-lib-custom/src/lib/tree/tree-context.ts
+      • Expanded TreeContext contract with focus and structural metadata helpers
+  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.ts
+      • Added public instance id, popup tree id, live region id, selection announcement, and popup tree aria-label
+      • Added popup focus management, close-and-restore-focus behavior, and host-only open-key handling
+      • Bound host `aria-describedby` and conditional `aria-controls`
+  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.html
+      • Switched popup container away from dialog semantics and applied tree id/label directly to embedded tree
+      • Added polite live region for selection announcements
+  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.scss
+      • Added clear-button focus-visible styling, visually-hidden live region utility, and reduced-motion override
+  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.spec.ts
+      • Updated aria-controls assertion for open-state tree linkage
+  - projects/ui-lib-custom/src/lib/tree-select/tree-select.a11y.spec.ts (CREATED — 38 tests)
+      • Added axe checks, combobox/tree ARIA assertions, live region coverage, keyboard navigation, focus restoration, and unique-id checks
+  - projects/ui-lib-custom/src/lib/tree-select/README.md
+      • Rewrote API docs with ARIA table, keyboard table, accessibility notes, and CSS variable table
+  - docs/COMPONENT_SCORES.md
+      • TreeSelect #35: ⏳ Queued → ✅ Done
+      • Data Display row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
+State: TreeSelect hardening complete. The component now follows the combobox + tree popup pattern with tree semantics from the hardened Tree component, closes and restores focus on single selection, announces selection changes through a polite live region, and has dedicated a11y regression coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-select/ projects/ui-lib-custom/src/lib/tree/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (117/117 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh shell required `npm install` again before validation. Demo screenshot captured at `/tmp/tree-select-hardening.png`.
+Next step: TreeTable (#33) hardening — keep Tier 4 tree semantics aligned across treegrid and tree popup components.
+
 Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
 Changed:
   - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
@@ -124,31 +170,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
-Changed:
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
-      • Added module-level `let nextProgressSpinnerId: number = 0` counter
-      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
-      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
-      • Added dark mode overrides for bootstrap and minimal variant arc colours
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
-      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
-      • ariaLabel reactive updates, two-instance ID uniqueness
-      • Visual state (size classes sm/lg)
-      • axe-core automated checks (5 states)
-  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
-      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
-  - docs/COMPONENT_SCORES.md
-      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
-Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.

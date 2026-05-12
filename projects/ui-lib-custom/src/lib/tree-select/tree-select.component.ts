@@ -109,7 +109,7 @@ export class TreeSelect implements ControlValueAccessor {
 
   // ─── Instance ID ──────────────────────────────────────────────────────────
 
-  private readonly instanceId: string = `${TREE_SELECT_ID_PREFIX}-${nextTreeSelectId++}`;
+  public readonly instanceId: string = `${TREE_SELECT_ID_PREFIX}-${nextTreeSelectId++}`;
   public readonly panelId: string = `${this.instanceId}-panel`;
   public readonly treeId: string = `${this.instanceId}-tree`;
   public readonly liveRegionId: string = `${this.instanceId}-live-region`;
