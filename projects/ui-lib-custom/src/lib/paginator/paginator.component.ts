@@ -10,6 +10,8 @@ import {
 import type { InputSignal, ModelSignal, OutputEmitterRef, Signal } from '@angular/core';
 import type { PaginatorPageEvent, PaginatorSize, PaginatorVariant } from './paginator.types';
 
+let nextPaginatorId: number = 0;
+
 /** Default values for the Paginator component. */
 export const PAGINATOR_DEFAULTS: {
   readonly ROWS: number;
@@ -44,10 +46,14 @@ export const PAGINATOR_DEFAULTS: {
     '[class.ui-lib-paginator--md]': 'size() === "md"',
     '[class.ui-lib-paginator--lg]': 'size() === "lg"',
     '[class.ui-lib-paginator--empty]': 'isEmpty()',
+    '[attr.id]': 'instanceId',
+    '[attr.role]': '"navigation"',
     '[attr.aria-label]': 'ariaLabel()',
   },
 })
 export class PaginatorComponent {
+  public readonly instanceId: string = `ui-lib-paginator-${nextPaginatorId++}`;
+
   /** Total number of records across all pages. */
   public readonly totalRecords: InputSignal<number> = input<number>(0);
 
@@ -180,6 +186,22 @@ export class PaginatorComponent {
       .replace('{rows}', String(rowCount))
       .replace('{totalRecords}', String(total));
   });
+
+  /** Screen-reader announcement text for the active page. */
+  public readonly pageAnnouncement: Signal<string> = computed<string>((): string => {
+    const count: number = this.pageCount();
+    if (count === 0) {
+      return 'No pages available';
+    }
+    return `Page ${this.currentPage() + 1} of ${count}`;
+  });
+
+  /** Accessible label for a numbered page-link button. */
+  public getPageLinkAriaLabel(pageLink: number): string {
+    return pageLink - 1 === this.currentPage()
+      ? `Page ${pageLink}, current page`
+      : `Go to page ${pageLink}`;
+  }
 
   // ── Page navigation ────────────────────────────────────────────────────────
 

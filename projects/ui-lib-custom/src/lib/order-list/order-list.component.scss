@@ -398,3 +398,19 @@
   --uilib-order-list-item-border-bottom: 1px solid var(--uilib-border-color, #e5e7eb);
   --uilib-order-list-focus-ring: 0 0 0 2px var(--uilib-primary-color, #3b82f6);
 }
+
+// =============================================================================
+// Reduced motion
+// =============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-order-list {
+    --uilib-order-list-transition: none;
+  }
+
+  .ui-lib-order-list__control-btn,
+  .ui-lib-order-list__filter-input,
+  .ui-lib-order-list__item {
+    transition: none;
+  }
+}
