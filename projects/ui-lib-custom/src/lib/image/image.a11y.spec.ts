@@ -270,7 +270,7 @@ describe('Image Accessibility', (): void => {
     const buttons: HTMLButtonElement[] = getToolbarBtns(fixture);
     const zoomInBtn: HTMLButtonElement = buttons[0]!;
 
-    // Click zoom-in until disabled
+    // Click zoom-in until disabled (max=5, start=1, step=0.1 → 40 steps to reach max; 45 is more than enough)
     for (let index: number = 0; index < 45; index++) {
       zoomInBtn.click();
     }
@@ -287,6 +287,7 @@ describe('Image Accessibility', (): void => {
     const buttons: HTMLButtonElement[] = getToolbarBtns(fixture);
     const zoomOutBtn: HTMLButtonElement = buttons[1]!;
 
+    // Click zoom-out until disabled (min=0.1, start=1, step=0.1 → 9 steps to reach min; 15 is more than enough)
     for (let index: number = 0; index < 15; index++) {
       zoomOutBtn.click();
     }
