@@ -246,86 +246,49 @@
 
     <div id="api-inputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Inputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>value</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Text label rendered inside the tag.</td>
-          </tr>
-          <tr>
-            <td><code>icon</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>PrimeIcons CSS class for a leading decorative icon.</td>
-          </tr>
-          <tr>
-            <td><code>severity</code></td>
-            <td><code>'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast'</code></td>
-            <td><code>'primary'</code></td>
-            <td>Colour palette for the tag.</td>
-          </tr>
-          <tr>
-            <td><code>rounded</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Applies fully rounded (pill) corners.</td>
-          </tr>
-          <tr>
-            <td><code>size</code></td>
-            <td><code>'sm' | 'md' | 'lg'</code></td>
-            <td><code>'md'</code></td>
-            <td>Size of the tag.</td>
-          </tr>
-          <tr>
-            <td><code>variant</code></td>
-            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-            <td><code>null</code></td>
-            <td>Design variant; inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
-          </tr>
-          <tr>
-            <td><code>styleClass</code></td>
-            <td><code>string | null</code></td>
-            <td><code>null</code></td>
-            <td>Additional CSS classes added to the host element.</td>
-          </tr>
-          <tr>
-            <td><code>dismissible</code></td>
-            <td><code>boolean</code></td>
-            <td><code>false</code></td>
-            <td>Renders an inline dismiss button.</td>
-          </tr>
-          <tr>
-            <td><code>removeIcon</code></td>
-            <td><code>string</code></td>
-            <td><code>'pi pi-times'</code></td>
-            <td>CSS class for the dismiss button icon.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="inputRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Input" field="name" width="120px">
+          <ng-template uiTableColumnBody let-row>
+            <code>{{ row.name }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Type" field="type" width="260px">
+          <ng-template uiTableColumnBody let-row>
+            <code>{{ row.type }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Default" field="default" width="90px">
+          <ng-template uiTableColumnBody let-row>
+            <code>{{ row.default }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Description" field="description">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.description"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
 
     <div id="api-outputs" data-doc-anchor>
       <h3 class="demo-section__subtitle">Outputs</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Output</th><th>Type</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>removed</code></td>
-            <td><code>OutputEmitterRef&lt;MouseEvent&gt;</code></td>
-            <td>
-              Emitted when the dismiss button is clicked. The tag is not auto-removed —
-              control visibility from the parent.
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="outputRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Output" field="name" width="120px">
+          <ng-template uiTableColumnBody let-row>
+            <code>{{ row.name }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Type" field="type" width="220px">
+          <ng-template uiTableColumnBody let-row>
+            <code [innerHTML]="row.type"></code>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Description" field="description">
+          <ng-template uiTableColumnBody let-row>
+            <span>{{ row.description }}</span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
   </section>
 
@@ -338,83 +301,23 @@
       Override any of these on the host element or an ancestor to theme the tag without
       touching component internals.
     </p>
-    <table class="doc-properties">
-      <thead>
-        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--uilib-tag-bg-primary</code></td>
-          <td><code>var(--uilib-color-primary, #6366f1)</code></td>
-          <td>Background for <code>primary</code> severity.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-color-primary</code></td>
-          <td><code>#ffffff</code></td>
-          <td>Text colour for <code>primary</code> severity.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-bg-success</code></td>
-          <td><code>var(--uilib-color-success, #22c55e)</code></td>
-          <td>Background for <code>success</code> severity.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-color-success</code></td>
-          <td><code>#ffffff</code></td>
-          <td>Text colour for <code>success</code> severity.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-bg-danger</code></td>
-          <td><code>var(--uilib-color-danger, #ef4444)</code></td>
-          <td>Background for <code>danger</code> severity.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-color-danger</code></td>
-          <td><code>#ffffff</code></td>
-          <td>Text colour for <code>danger</code> severity.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-border-radius</code></td>
-          <td><code>var(--uilib-radius-sm, 0.375rem)</code></td>
-          <td>Border radius. Overridden to <code>9999px</code> when <code>[rounded]="true"</code>.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-padding-y</code></td>
-          <td><code>0.25rem</code></td>
-          <td>Vertical padding (md size).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-padding-x</code></td>
-          <td><code>0.5rem</code></td>
-          <td>Horizontal padding (md size).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-font-size</code></td>
-          <td><code>0.75rem</code></td>
-          <td>Font size (md size).</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-font-weight</code></td>
-          <td><code>700</code></td>
-          <td>Font weight.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-remove-button-size</code></td>
-          <td><code>1.25em</code></td>
-          <td>Size of the dismiss button.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-remove-button-bg-hover</code></td>
-          <td><code>rgba(255, 255, 255, 0.2)</code></td>
-          <td>Hover background for the dismiss button.</td>
-        </tr>
-        <tr>
-          <td><code>--uilib-tag-remove-button-transition</code></td>
-          <td><code>background-color 0.15s ease</code></td>
-          <td>Transition applied to the dismiss button.</td>
-        </tr>
-      </tbody>
-    </table>
+    <ui-lib-table [value]="cssVarRows" styleClass="demo-a11y-table">
+      <ui-lib-table-column header="Variable" field="variable" width="260px">
+        <ng-template uiTableColumnBody let-row>
+          <code>{{ row.variable }}</code>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Default" field="default" width="220px">
+        <ng-template uiTableColumnBody let-row>
+          <code>{{ row.default }}</code>
+        </ng-template>
+      </ui-lib-table-column>
+      <ui-lib-table-column header="Description" field="description">
+        <ng-template uiTableColumnBody let-row>
+          <span [innerHTML]="row.description"></span>
+        </ng-template>
+      </ui-lib-table-column>
+    </ui-lib-table>
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════
@@ -425,73 +328,49 @@
 
     <div id="a11y-aria" data-doc-anchor>
       <h3 class="demo-section__subtitle">ARIA Attributes</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Attribute</th><th>Element</th><th>Value</th><th>Notes</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>id</code></td>
-            <td>Host</td>
-            <td><code>ui-lib-tag-&#123;n&#125;</code></td>
-            <td>Auto-generated, unique per instance.</td>
-          </tr>
-          <tr>
-            <td><code>role</code></td>
-            <td>Host</td>
-            <td><code>status</code> or <code>group</code></td>
-            <td>
-              <code>status</code> by default; switches to <code>group</code> when
-              <code>dismissible</code> is true so AT announces both the label and the button.
-            </td>
-          </tr>
-          <tr>
-            <td><code>aria-label</code></td>
-            <td>Host</td>
-            <td><em>value</em></td>
-            <td>Set to the tag's text value. Omitted when <code>value</code> is null.</td>
-          </tr>
-          <tr>
-            <td><code>aria-hidden</code></td>
-            <td>Leading icon</td>
-            <td><code>true</code></td>
-            <td>Decorative icon is always hidden from assistive technology.</td>
-          </tr>
-          <tr>
-            <td><code>aria-label</code></td>
-            <td>Dismiss button</td>
-            <td><code>Remove &#123;value&#125; tag</code></td>
-            <td>Auto-generated from <code>value</code>. Falls back to <code>Remove tag</code>.</td>
-          </tr>
-          <tr>
-            <td><code>aria-hidden</code></td>
-            <td>Dismiss button icon</td>
-            <td><code>true</code></td>
-            <td>Decorative button icon is hidden from assistive technology.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="ariaRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Attribute" field="attribute" width="140px">
+          <ng-template uiTableColumnBody let-row>
+            <code>{{ row.attribute }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Element" field="element" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span>{{ row.element }}</span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Value" field="value" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <code>{{ row.value }}</code>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Notes" field="notes">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.notes"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
 
     <div id="a11y-keyboard" data-doc-anchor>
       <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
-      <table class="doc-properties">
-        <thead>
-          <tr><th>Key</th><th>Target</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Tab</code></td>
-            <td>Dismiss button</td>
-            <td>Moves focus to the button when <code>dismissible</code> is true.</td>
-          </tr>
-          <tr>
-            <td><code>Enter</code> / <code>Space</code></td>
-            <td>Dismiss button</td>
-            <td>Activates the native button and emits the <code>removed</code> event.</td>
-          </tr>
-        </tbody>
-      </table>
+      <ui-lib-table [value]="keyboardRows" styleClass="demo-a11y-table">
+        <ui-lib-table-column header="Key" field="key" width="200px">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.key"></span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Target" field="target" width="160px">
+          <ng-template uiTableColumnBody let-row>
+            <span>{{ row.target }}</span>
+          </ng-template>
+        </ui-lib-table-column>
+        <ui-lib-table-column header="Action" field="action">
+          <ng-template uiTableColumnBody let-row>
+            <span [innerHTML]="row.action"></span>
+          </ng-template>
+        </ui-lib-table-column>
+      </ui-lib-table>
     </div>
 
     <h3 class="demo-section__subtitle">Notes</h3>

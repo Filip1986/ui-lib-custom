@@ -3,10 +3,47 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { Tag } from 'ui-lib-custom/tag';
 import type { TagSeverity, TagSize, TagVariant } from 'ui-lib-custom/tag';
 import { Button } from 'ui-lib-custom/button';
+import {
+  TableComponent,
+  TableColumnComponent,
+  TableColumnBodyDirective,
+} from 'ui-lib-custom/table';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
+
+interface TagInputRow {
+  readonly name: string;
+  readonly type: string;
+  readonly default: string;
+  readonly description: string;
+}
+
+interface TagOutputRow {
+  readonly name: string;
+  readonly type: string;
+  readonly description: string;
+}
+
+interface CssVarRow {
+  readonly variable: string;
+  readonly default: string;
+  readonly description: string;
+}
+
+interface AriaRow {
+  readonly attribute: string;
+  readonly element: string;
+  readonly value: string;
+  readonly notes: string;
+}
+
+interface KeyboardRow {
+  readonly key: string;
+  readonly target: string;
+  readonly action: string;
+}
 
 /**
  * Demo page for the Tag component.
@@ -14,7 +51,16 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-tag-demo',
   standalone: true,
-  imports: [Tag, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    Tag,
+    Button,
+    TableComponent,
+    TableColumnComponent,
+    TableColumnBodyDirective,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './tag-demo.component.html',
   styleUrl: './tag-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,6 +96,191 @@ export class TagDemoComponent {
       ],
     },
   ];
+
+  // ---- API table data -------------------------------------------------------
+
+  public readonly inputRows: TagInputRow[] = [
+    {
+      name: 'value',
+      type: 'string | null',
+      default: 'null',
+      description: 'Text label rendered inside the tag.',
+    },
+    {
+      name: 'icon',
+      type: 'string | null',
+      default: 'null',
+      description: 'PrimeIcons CSS class for a leading decorative icon.',
+    },
+    {
+      name: 'severity',
+      type: "'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast'",
+      default: "'primary'",
+      description: 'Colour palette for the tag.',
+    },
+    {
+      name: 'rounded',
+      type: 'boolean',
+      default: 'false',
+      description: 'Applies fully rounded (pill) corners.',
+    },
+    { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Size of the tag.' },
+    {
+      name: 'variant',
+      type: "'material' | 'bootstrap' | 'minimal' | null",
+      default: 'null',
+      description:
+        'Design variant; inherits from <code>ThemeConfigService</code> when <code>null</code>.',
+    },
+    {
+      name: 'styleClass',
+      type: 'string | null',
+      default: 'null',
+      description: 'Additional CSS classes added to the host element.',
+    },
+    {
+      name: 'dismissible',
+      type: 'boolean',
+      default: 'false',
+      description: 'Renders an inline dismiss button.',
+    },
+    {
+      name: 'removeIcon',
+      type: 'string',
+      default: "'pi pi-times'",
+      description: 'CSS class for the dismiss button icon.',
+    },
+  ];
+
+  public readonly outputRows: TagOutputRow[] = [
+    {
+      name: 'removed',
+      type: 'OutputEmitterRef&lt;MouseEvent&gt;',
+      description:
+        'Emitted when the dismiss button is clicked. The tag is not auto-removed — control visibility from the parent.',
+    },
+  ];
+
+  public readonly cssVarRows: CssVarRow[] = [
+    {
+      variable: '--uilib-tag-bg-primary',
+      default: 'var(--uilib-color-primary, #6366f1)',
+      description: 'Background for <code>primary</code> severity.',
+    },
+    {
+      variable: '--uilib-tag-color-primary',
+      default: '#ffffff',
+      description: 'Text colour for <code>primary</code> severity.',
+    },
+    {
+      variable: '--uilib-tag-bg-success',
+      default: 'var(--uilib-color-success, #22c55e)',
+      description: 'Background for <code>success</code> severity.',
+    },
+    {
+      variable: '--uilib-tag-color-success',
+      default: '#ffffff',
+      description: 'Text colour for <code>success</code> severity.',
+    },
+    {
+      variable: '--uilib-tag-bg-danger',
+      default: 'var(--uilib-color-danger, #ef4444)',
+      description: 'Background for <code>danger</code> severity.',
+    },
+    {
+      variable: '--uilib-tag-color-danger',
+      default: '#ffffff',
+      description: 'Text colour for <code>danger</code> severity.',
+    },
+    {
+      variable: '--uilib-tag-border-radius',
+      default: 'var(--uilib-radius-sm, 0.375rem)',
+      description:
+        'Border radius. Overridden to <code>9999px</code> when <code>[rounded]="true"</code>.',
+    },
+    {
+      variable: '--uilib-tag-padding-y',
+      default: '0.25rem',
+      description: 'Vertical padding (md size).',
+    },
+    {
+      variable: '--uilib-tag-padding-x',
+      default: '0.5rem',
+      description: 'Horizontal padding (md size).',
+    },
+    { variable: '--uilib-tag-font-size', default: '0.75rem', description: 'Font size (md size).' },
+    { variable: '--uilib-tag-font-weight', default: '700', description: 'Font weight.' },
+    {
+      variable: '--uilib-tag-remove-button-size',
+      default: '1.25em',
+      description: 'Size of the dismiss button.',
+    },
+    {
+      variable: '--uilib-tag-remove-button-bg-hover',
+      default: 'rgba(255, 255, 255, 0.2)',
+      description: 'Hover background for the dismiss button.',
+    },
+    {
+      variable: '--uilib-tag-remove-button-transition',
+      default: 'background-color 0.15s ease',
+      description: 'Transition applied to the dismiss button.',
+    },
+  ];
+
+  public readonly ariaRows: AriaRow[] = [
+    {
+      attribute: 'id',
+      element: 'Host',
+      value: 'ui-lib-tag-{n}',
+      notes: 'Auto-generated, unique per instance.',
+    },
+    {
+      attribute: 'role',
+      element: 'Host',
+      value: 'status or group',
+      notes:
+        '<code>status</code> by default; switches to <code>group</code> when <code>dismissible</code> is true so AT announces both the label and the button.',
+    },
+    {
+      attribute: 'aria-label',
+      element: 'Host',
+      value: '{value}',
+      notes: "Set to the tag's text value. Omitted when <code>value</code> is null.",
+    },
+    {
+      attribute: 'aria-hidden',
+      element: 'Leading icon',
+      value: 'true',
+      notes: 'Decorative icon is always hidden from assistive technology.',
+    },
+    {
+      attribute: 'aria-label',
+      element: 'Dismiss button',
+      value: 'Remove {value} tag',
+      notes: 'Auto-generated from <code>value</code>. Falls back to <code>Remove tag</code>.',
+    },
+    {
+      attribute: 'aria-hidden',
+      element: 'Dismiss button icon',
+      value: 'true',
+      notes: 'Decorative button icon is hidden from assistive technology.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardRow[] = [
+    {
+      key: 'Tab',
+      target: 'Dismiss button',
+      action: 'Moves focus to the button when <code>dismissible</code> is true.',
+    },
+    {
+      key: 'Enter / Space',
+      target: 'Dismiss button',
+      action: 'Activates the native button and emits the <code>removed</code> event.',
+    },
+  ];
+
+  // ---- Severity / size / variant lists ------------------------------------
 
   public readonly severities: TagSeverity[] = [
     'primary',
