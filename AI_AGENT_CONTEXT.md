@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** TreeTable (#33) and Timeline (#71) accessibility hardening COMPLETE (6-phase); Upload (#69), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
-- **Next queue:** Tree hardening (Tier 4, #34) — `role=tree`, `role=treeitem`, expand/collapse keyboard, aria-label
+- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71) and Upload (#69) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Next queue:** DataView hardening (Tier 4, #38) — sort/filter labels and list/grid toggle announcements
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -42,7 +42,10 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
 - `TreeTable` -> ✅ complete + hardened (6-phase, score 8.5/10, 85 tests — 41 unit + 44 a11y)
+- `Tree` -> ✅ complete + hardened (6-phase, score 8.6/10, 93 tests — 38 unit + 55 a11y)
 - `Timeline` -> ✅ complete + hardened (6-phase, score 8.3/10, 48 tests — 33 unit + 15 a11y)
+- `Upload` -> ✅ complete + hardened (6-phase, score 8.9/10, 66 tests — 36 unit + 30 a11y)
+- `Tag` -> ✅ complete + hardened (6-phase, score 8.9/10, 40 tests — 26 unit + 14 a11y)
 - `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
 - `Badge` -> ✅ complete + hardened (6-phase, score 8.4/10, 25 tests — 13 unit + 12 a11y)
 - `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
@@ -51,6 +54,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
 - `MeterGroup` -> ✅ complete + hardened (6-phase, score 8.3/10, 45 tests — 27 unit + 18 a11y)
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
+- `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
+- `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
 
 ---
 
@@ -75,68 +80,73 @@ Changed:
   - projects/ui-lib-custom/src/lib/tree/tree-node.ts
   - projects/ui-lib-custom/src/lib/tree/tree-node.html
   - projects/ui-lib-custom/src/lib/tree/tree.scss
-  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.html
-State: Merged `origin/main` into the TreeSelect accessibility branch and reconciled overlapping Tree/TreeSelect changes. Preserved TreeSelect popup-tree semantics while keeping the newer Tree host id/aria-label behavior and base-branch score/history updates.
+State: Merged the latest `origin/main` into the TreeSelect accessibility branch, reconciled the repeated Tree/docs conflicts, and preserved the already-validated TreeSelect + Tree accessibility behavior.
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
   node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Repo had to be unshallowed before merge. `npm install` was required again in the fresh shell.
-Next step: Commit the merge resolution and reply on the PR thread with the merge commit hash.
+Terminal notes: `origin/main` advanced again after the previous merge resolution, so a second merge + conflict pass was required.
+Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
 
-Date: 2026-05-12 [TreeSelect component — accessibility hardening COMPLETE (#35)]
+Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
 Changed:
-  - projects/ui-lib-custom/src/lib/tree/tree.ts
-  - projects/ui-lib-custom/src/lib/tree/tree.html
-  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
-  - projects/ui-lib-custom/src/lib/tree/tree-node.html
-  - projects/ui-lib-custom/src/lib/tree/tree.scss
-  - projects/ui-lib-custom/src/lib/tree/tree-context.ts
-  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.ts
-  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.html
-  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.scss
-  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.spec.ts
-  - projects/ui-lib-custom/src/lib/tree-select/tree-select.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/tree-select/README.md
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
+      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
+      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
+      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
+      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
+      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
+      • Bound button aria-label to the resolved non-empty label
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
+      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
+      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
+      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/scroll-top/README.md
+      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
+      • Updated API table docs to reflect the new default button aria-label
   - docs/COMPONENT_SCORES.md
-State: TreeSelect hardening complete. The component now follows the combobox + tree popup pattern with tree semantics from the hardened Tree component, closes and restores focus on single selection, announces selection changes through a polite live region, and has dedicated a11y regression coverage.
+      • ScrollTop #75: ⏳ Queued → ✅ Done
+      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
+State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-select/ projects/ui-lib-custom/src/lib/tree/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (117/117 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh shell required `npm install` again before validation. Demo screenshot captured at `/tmp/tree-select-hardening.png`.
-Next step: TreeTable (#33) hardening — keep Tier 4 tree semantics aligned across treegrid and tree popup components.
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
-Date: 2026-05-12 [Tree — 6-phase hardening COMPLETE (#34)]
+Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
 Changed:
-  - projects/ui-lib-custom/src/lib/tree/tree.ts
-      • Added module-level `let nextTreeId: number = 0` counter + `instanceId` property
-      • Added `ariaLabel` input; computed `hostAriaLabel()` / `hostAriaMultiselectable()` signals
-      • Host bindings: `[attr.id]`, `[attr.aria-label]`, `[attr.aria-multiselectable]`
-      • Replaced `expandFocusedNode`/`collapseFocusedNode` with `expandOrFocusChild`/`collapseOrFocusParent`
-      • Added `findParentTreeItem` (group-sibling traversal pattern, not raw ancestor chain)
-      • Added `focusItemByTypeAhead` method (alphanumeric type-ahead, wraps around, case-insensitive)
-  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
-      • Added `setsize` input (default 1) and `posinset` input (default 1)
-  - projects/ui-lib-custom/src/lib/tree/tree-node.html
-      • Bound `aria-level`, `aria-setsize`, `aria-posinset`, `aria-disabled` on `[role="treeitem"]`
-      • Moved `aria-checked` from nested `role="checkbox"` span to the treeitem itself
-      • Checkbox span now has `aria-hidden="true"` (state lives on treeitem per WAI-ARIA)
-      • Passed `[setsize]` and `[posinset]` to recursive child nodes
-  - projects/ui-lib-custom/src/lib/tree/tree.html
-      • Fixed double `role="tree"`: inner `<ul>` changed to `role="none"` (host has `role="tree"`)
-      • Root `@for` loop passes `[setsize]="value().length"` and `[posinset]="i + 1"`
-  - projects/ui-lib-custom/src/lib/tree/tree.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
-  - projects/ui-lib-custom/src/lib/tree/tree.a11y.spec.ts (CREATED — 55 tests)
-  - projects/ui-lib-custom/src/lib/tree/README.md
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
+      • Added module-level `let nextScrollPanelId: number = 0` counter and unique `componentId`/`contentId`
+      • Added `ariaLabel` input (`string | null`, default `null`) wired to `__content` via `[attr.aria-label]`
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html
+      • Added `role="region"`, `tabindex="0"`, `[id]="contentId"`, `[attr.aria-label]="ariaLabel()"` to `__content` div
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss
+      • Added `outline: none` + `:focus-visible` ring on `__content`
+  - projects/ui-lib-custom/src/lib/scroll-panel/README.md
+      • Added `ariaLabel` input to inputs table
+      • Added ARIA attributes table, keyboard interaction table, expanded accessibility section
+      • Updated usage examples to show `ariaLabel` in context
+  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.a11y.spec.ts (CREATED — 16 tests)
+      • axe-core checks (3): labelled, unlabelled, all variants
+      • ARIA structure (6): role=region, tabindex=0, aria-label present/absent, id format, unique IDs
+      • Dynamic label (2): aria-label updates on signal change, removed on null
+      • Keyboard (3): focusable, ArrowDown no error, PageDown no error
+      • Multi-variant (1): all 3 variants expose role+tabindex
   - docs/COMPONENT_SCORES.md
-State: Tree hardening complete. All critical WAI-ARIA tree pattern attributes (aria-level, aria-setsize, aria-posinset, aria-checked on treeitem, aria-disabled, aria-multiselectable) are in place. Type-ahead nav, ArrowLeft parent-focus, ArrowRight child-focus, and prefers-reduced-motion are implemented.
+      • ScrollPanel #62: ⏳ Queued → ✅ Done
+      • Layout table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
+State: ScrollPanel hardening complete. Scrollable region is now keyboard-accessible (tabindex=0, role=region), has an ariaLabel input for screen reader context, unique stable IDs per instance, and :focus-visible ring for visible focus indicator.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/tree/" --no-coverage (93/93 PASS — 38 unit + 55 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: `findParentTreeItem` required a group-sibling traversal strategy because the parent treeitem div and child group ul are siblings inside the component host, not parent-child.
-Next step: TreeSelect (#35) hardening — Tier 4, combobox + tree popup pattern.
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Next step: Continue with Tier 6 queue — Tag (#53), Skeleton (#55), Divider (#58) or Toolbar (#59).

@@ -23,7 +23,7 @@ import { ScrollTop } from 'ui-lib-custom/scroll-top';
 | `target`          | `'window' \| 'parent'`                     | `'window'`      | Scroll target: the global window or the immediate parent element. |
 | `icon`            | `string`                                   | `'pi pi-arrow-up'` | CSS class(es) for the icon inside the button.              |
 | `behavior`        | `'smooth' \| 'auto'`                       | `'smooth'`      | Native scroll-behavior applied when scrolling to top.         |
-| `buttonAriaLabel` | `string`                                   | `'Back to top'` | Accessible label for the button element.                      |
+| `buttonAriaLabel` | `string`                                   | `'Scroll to top'` | Accessible label for the icon-only button element.          |
 | `size`            | `'sm' \| 'md' \| 'lg'`                    | `'md'`          | Button size.                                                  |
 | `variant`         | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null`   | Visual variant. Falls back to `ThemeConfigService` when `null`. |
 | `styleClass`      | `string \| null`                           | `null`          | Additional CSS classes added to the host element.             |
@@ -38,23 +38,29 @@ import { ScrollTop } from 'ui-lib-custom/scroll-top';
 
 None — this component does not project content.
 
-## CSS variables
+## CSS custom properties
 
 All tokens are declared on the `ui-lib-scroll-top` host selector and can be overridden globally or locally.
 
-| Variable                              | Default (material)                    |
-|---------------------------------------|---------------------------------------|
-| `--uilib-scroll-top-size`             | `3rem`                                |
-| `--uilib-scroll-top-bg`               | `var(--uilib-color-primary, #6366f1)` |
-| `--uilib-scroll-top-color`            | `#ffffff`                             |
-| `--uilib-scroll-top-border`           | `none`                                |
-| `--uilib-scroll-top-border-radius`    | `50%`                                 |
-| `--uilib-scroll-top-shadow`           | `0 4px 12px rgba(0,0,0,0.2)`         |
-| `--uilib-scroll-top-icon-size`        | `1.25rem`                             |
-| `--uilib-scroll-top-bottom`           | `2rem`                                |
-| `--uilib-scroll-top-right`            | `2rem`                                |
-| `--uilib-scroll-top-z-index`          | `var(--uilib-z-overlay, 1000)`        |
-| `--uilib-scroll-top-transition`       | `opacity 0.3s ease, transform 0.3s ease` |
+| Variable                              | Default (material)                    | Description |
+|---------------------------------------|---------------------------------------|-------------|
+| `--uilib-scroll-top-size`             | `3rem`                                | Default button size |
+| `--uilib-scroll-top-size-sm`          | `2.25rem`                             | Small size override |
+| `--uilib-scroll-top-size-lg`          | `3.75rem`                             | Large size override |
+| `--uilib-scroll-top-bg`               | `var(--uilib-color-primary, #6366f1)` | Button background |
+| `--uilib-scroll-top-bg-hover`         | `var(--uilib-color-primary-dark, #4f46e5)` | Hover background |
+| `--uilib-scroll-top-color`            | `#ffffff`                             | Icon colour |
+| `--uilib-scroll-top-border`           | `none`                                | Button border |
+| `--uilib-scroll-top-border-radius`    | `50%`                                 | Button corner radius |
+| `--uilib-scroll-top-shadow`           | `0 4px 12px rgba(0,0,0,0.2)`          | Default elevation |
+| `--uilib-scroll-top-shadow-hover`     | `0 6px 16px rgba(0,0,0,0.28)`         | Hover elevation |
+| `--uilib-scroll-top-icon-size`        | `1.25rem`                             | Default icon size |
+| `--uilib-scroll-top-icon-size-sm`     | `1rem`                                | Small icon size |
+| `--uilib-scroll-top-icon-size-lg`     | `1.5rem`                              | Large icon size |
+| `--uilib-scroll-top-bottom`           | `2rem`                                | Window-target bottom offset |
+| `--uilib-scroll-top-right`            | `2rem`                                | Window-target right offset |
+| `--uilib-scroll-top-z-index`          | `var(--uilib-z-overlay, 1000)`        | Floating layer order |
+| `--uilib-scroll-top-transition`       | `opacity 0.3s ease, transform 0.3s ease` | Reveal motion |
 
 ## Usage examples
 
@@ -102,7 +108,32 @@ The parent must have `position: relative` and `overflow-y: auto` (or `scroll`).
 
 ## Accessibility
 
-- Renders a `<button type="button">` element with a descriptive `aria-label` (`buttonAriaLabel` input, default `'Back to top'`).
-- The host element is invisible (`opacity: 0; pointer-events: none`) until the scroll threshold is exceeded, keeping the button out of focus order when hidden.
-- The icon span is `aria-hidden="true"` so screen readers rely solely on the button label.
+### ARIA attributes
 
+| Element | Attribute | Purpose |
+|---------|-----------|---------|
+| `ui-lib-scroll-top` host | `id` | Unique instance id for DOM stability and testing |
+| `ui-lib-scroll-top` host | `aria-hidden="true"` when hidden | Removes the hidden control from the accessibility tree |
+| `button` | `type="button"` | Prevents accidental form submission |
+| `button` | `aria-label` | Announces the icon-only action; defaults to `'Scroll to top'` |
+| `button` | `tabindex="-1"` when hidden | Removes the hidden control from keyboard tab order |
+| `button` | `aria-hidden="true"` when hidden | Keeps assistive technology aligned with the hidden visual state |
+| icon `<span>` | `aria-hidden="true"` | Marks the icon as decorative |
+
+### Keyboard interaction
+
+| Key | Behaviour |
+|-----|-----------|
+| `Tab` | Skips the control while hidden; focuses the button when visible |
+| `Enter` | Activates the native button and scrolls to the top |
+| `Space` | Activates the native button and scrolls to the top |
+
+### Accessibility notes
+
+- The button uses a guaranteed non-empty accessible name. Blank `buttonAriaLabel` values fall back to `'Scroll to top'`.
+- Hidden state is handled in both the visual layer and the accessibility layer: the host/button are `aria-hidden`, and the button is removed from the tab order until visible.
+- The button includes a visible `:focus-visible` ring for keyboard users.
+- The icon is decorative only, so screen readers announce just the button label.
+- `@media (prefers-reduced-motion: reduce)` disables reveal/press transitions.
+- All three variants include dark-mode token overrides.
+- No live region is required because activation causes an immediate, perceivable scroll action rather than an asynchronous status change.

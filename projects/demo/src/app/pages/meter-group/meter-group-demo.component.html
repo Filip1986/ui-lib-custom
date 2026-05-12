@@ -1,309 +1,520 @@
-<section class="meter-group-demo">
-  <!-- ---- Hero --------------------------------------------------------- -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">MeterGroup</h1>
-    <p class="demo-hero__subtitle">
-      Visualise multiple proportional values as a single segmented bar — ideal for storage,
-      resource usage, and survey breakdowns.
-    </p>
-    <p class="demo-hero__import">
-      <code>import &#123; MeterGroup &#125; from 'ui-lib-custom/meter-group'</code>
-    </p>
-  </div>
+<app-doc-page-layout [sections]="sections">
 
-  <!-- ---- Basic -------------------------------------------------------- -->
-  <div class="demo-section">
+  <!-- ---- Overview / Hero -------------------------------------------- -->
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>MeterGroup</h1>
+      <code class="demo-page-header__import">import &#123; MeterGroup &#125; from 'ui-lib-custom/meter-group'</code>
+    </div>
+    <p class="demo-page-header__description">
+      Segmented progress bar that visualises multiple values as proportional coloured segments.
+      Ideal for storage usage, resource allocation, and survey breakdowns.
+    </p>
+    <div class="demo-page-header__preview">
+      <ui-lib-meter-group [values]="basicItems" />
+    </div>
+  </header>
+
+  <!-- ---- Basic ---------------------------------------------------- -->
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
       Pass an array of <code>MeterItem</code> objects via <code>[values]</code>.
-      Each item needs a <code>label</code>, a numeric <code>value</code>, and a CSS
-      <code>color</code>.  The legend is rendered below the bar by default.
-    </p>
-    <div class="demo-section__preview">
-      <ui-lib-meter-group [values]="basicItems" />
-    </div>
-    <pre class="demo-code"><code>storageItems: MeterItem[] = [
-  &#123; label: 'Apps',     value: 16, color: '#34d399' &#125;,
-  &#123; label: 'Messages', value: 8,  color: '#818cf8' &#125;,
-  &#123; label: 'Media',    value: 24, color: '#fb923c' &#125;,
-  &#123; label: 'System',   value: 10, color: '#f87171' &#125;,
-];
-
-&lt;ui-lib-meter-group [values]="storageItems" /&gt;</code></pre>
-  </div>
-
-  <!-- ---- Label position ----------------------------------------------- -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">Label position</h2>
-    <p class="demo-section__description">
-      Use <code>labelPosition="start"</code> to move the legend above (horizontal) or to the
-      left (vertical) of the bar.  Icons can be added via the optional <code>icon</code> field on
-      each item (any PrimeIcons class string).
+      Each item requires a <code>label</code>, a numeric <code>value</code>, and a CSS
+      <code>color</code>. The legend renders below the bar by default.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
-      <div class="demo-subsection">
-        <p class="demo-subsection__label">labelPosition="start"</p>
+      <ui-lib-meter-group [values]="basicItems" />
+    </div>
+    <app-doc-code-snippet title="Basic" [code]="snippets.basic" />
+  </section>
+
+  <!-- ---- Label Position ------------------------------------------- -->
+  <section class="demo-section" id="label-position" data-doc-anchor>
+    <h2 class="demo-section__title">Label Position</h2>
+    <p class="demo-section__description">
+      Use <code>labelPosition="start"</code> to move the legend above the bar.
+      Items can include an optional <code>icon</code> (a PrimeIcons class) shown
+      inside the legend swatch.
+    </p>
+    <div class="demo-section__preview demo-section__preview--column">
+      <div class="demo-meter-subsection">
+        <p class="demo-meter-subsection__label">labelPosition="start"</p>
         <ui-lib-meter-group [values]="storageItems" labelPosition="start" />
       </div>
-      <div class="demo-subsection">
-        <p class="demo-subsection__label">labelPosition="end" (default)</p>
+      <div class="demo-meter-subsection">
+        <p class="demo-meter-subsection__label">labelPosition="end" (default)</p>
         <ui-lib-meter-group [values]="storageItems" labelPosition="end" />
       </div>
     </div>
-  </div>
+    <app-doc-code-snippet title="Label position" [code]="snippets.labelPosition" />
+  </section>
 
-  <!-- ---- Sizes -------------------------------------------------------- -->
-  <div class="demo-section">
+  <!-- ---- Sizes ---------------------------------------------------- -->
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__description">
       Three bar thicknesses: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
-      @for (size of ['sm', 'md', 'lg']; track size) {
-        <div class="demo-subsection">
-          <p class="demo-subsection__label">size="{{ size }}"</p>
-          <ui-lib-meter-group [values]="variantItems" [size]="$any(size)" [showLabels]="false" />
+      @for (size of sizes; track size) {
+        <div class="demo-meter-subsection">
+          <p class="demo-meter-subsection__label">size="{{ size }}"</p>
+          <ui-lib-meter-group [values]="variantItems" [size]="size" [showLabels]="false" />
         </div>
       }
     </div>
-  </div>
+    <app-doc-code-snippet title="Sizes" [code]="snippets.sizes" />
+  </section>
 
-  <!-- ---- Variants ----------------------------------------------------- -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">Variants</h2>
+  <!-- ---- Design Variants ------------------------------------------ -->
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__description">
-      Three design variants — <code>material</code> (pill-shaped, soft), <code>bootstrap</code>
-      (squared corners, no gap), and <code>minimal</code> (flat, almost square).
+      Three design variants: <code>material</code> (pill-shaped, soft shadow),
+      <code>bootstrap</code> (squared corners, no gap), and
+      <code>minimal</code> (flat, almost square). When <code>variant</code> is
+      <code>null</code> (the default), it inherits from <code>ThemeConfigService</code>.
     </p>
     <div class="demo-section__preview demo-section__preview--column">
-      @for (variant of ['material', 'bootstrap', 'minimal']; track variant) {
-        <div class="demo-subsection">
-          <p class="demo-subsection__label">variant="{{ variant }}"</p>
-          <ui-lib-meter-group [values]="variantItems" [variant]="$any(variant)" [showLabels]="false" />
+      @for (variant of variants; track variant) {
+        <div class="demo-meter-subsection">
+          <p class="demo-meter-subsection__label">variant="{{ variant }}"</p>
+          <ui-lib-meter-group [values]="variantItems" [variant]="variant" [showLabels]="false" />
         </div>
       }
     </div>
-  </div>
+    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
+  </section>
 
-  <!-- ---- Vertical orientation ----------------------------------------- -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">Vertical orientation</h2>
+  <!-- ---- Vertical Orientation -------------------------------------- -->
+  <section class="demo-section" id="vertical" data-doc-anchor>
+    <h2 class="demo-section__title">Vertical Orientation</h2>
     <p class="demo-section__description">
       Set <code>orientation="vertical"</code> to stack segments vertically.
       The legend is placed to the right by default (<code>labelPosition="end"</code>).
     </p>
-    <div class="demo-section__preview demo-section__preview--row">
-      <div class="demo-subsection">
-        <p class="demo-subsection__label">Legend end (right)</p>
+    <div class="demo-section__preview">
+      <div class="demo-meter-subsection">
+        <p class="demo-meter-subsection__label">Legend end (right)</p>
         <ui-lib-meter-group [values]="cpuItems" orientation="vertical" labelPosition="end" />
       </div>
-      <div class="demo-subsection">
-        <p class="demo-subsection__label">Legend start (left)</p>
+      <div class="demo-meter-subsection">
+        <p class="demo-meter-subsection__label">Legend start (left)</p>
         <ui-lib-meter-group [values]="cpuItems" orientation="vertical" labelPosition="start" />
       </div>
     </div>
-  </div>
+    <app-doc-code-snippet title="Vertical" [code]="snippets.vertical" />
+  </section>
 
-  <!-- ---- No labels ---------------------------------------------------- -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">No legend</h2>
+  <!-- ---- No Legend ------------------------------------------------ -->
+  <section class="demo-section" id="no-legend" data-doc-anchor>
+    <h2 class="demo-section__title">No Legend</h2>
     <p class="demo-section__description">
-      Set <code>[showLabels]="false"</code> to render the bar without a legend — useful as an
-      inline indicator.
+      Set <code>[showLabels]="false"</code> to render the bar without a legend —
+      useful as a compact inline indicator.
     </p>
-    <div class="demo-section__preview">
+    <div class="demo-section__preview demo-section__preview--column">
       <ui-lib-meter-group [values]="basicItems" [showLabels]="false" />
     </div>
-  </div>
+    <app-doc-code-snippet title="No legend" [code]="snippets.noLegend" />
+  </section>
 
-  <!-- ---- Interactive -------------------------------------------------- -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">Interactive</h2>
-    <p class="demo-section__description">
-      Explore all combinations of orientation, label position, size, and variant.
-    </p>
-
-    <div class="demo-controls">
-      <div class="demo-control">
-        <label class="demo-control__label">Orientation</label>
-        <div class="demo-control__buttons">
-          @for (option of ['horizontal', 'vertical']; track option) {
-            <ui-lib-button
-              [appearance]="interactiveOrientation() === option ? 'solid' : 'outline'"
-              severity="primary"
-              size="sm"
-              type="button"
-              (click)="setOrientation($any(option))"
-            >{{ option }}</ui-lib-button>
-          }
-        </div>
+  <!-- ---- Playground ----------------------------------------------- -->
+  <section class="demo-section" id="playground" data-doc-anchor>
+    <h2 class="demo-section__title">Playground</h2>
+    <div class="demo-playground demo-playground--column">
+      <div class="demo-playground__preview demo-playground__preview--full">
+        <ui-lib-meter-group
+          [values]="playgroundItems()"
+          [orientation]="playgroundOrientation()"
+          [labelPosition]="playgroundLabelPosition()"
+          [size]="playgroundSize()"
+          [variant]="playgroundVariant()"
+        />
       </div>
-
-      <div class="demo-control">
-        <label class="demo-control__label">Label Position</label>
-        <div class="demo-control__buttons">
-          @for (option of ['start', 'end']; track option) {
-            <ui-lib-button
-              [appearance]="interactiveLabelPosition() === option ? 'solid' : 'outline'"
-              severity="primary"
-              size="sm"
-              type="button"
-              (click)="setLabelPosition($any(option))"
-            >{{ option }}</ui-lib-button>
-          }
+      <div class="demo-meter-controls">
+        <div class="demo-control">
+          <span class="demo-control__label">Orientation</span>
+          <div class="demo-control__buttons">
+            @for (option of orientations; track option) {
+              <ui-lib-button
+                [appearance]="playgroundOrientation() === option ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                type="button"
+                (click)="setOrientation(option)"
+              >{{ option }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
-
-      <div class="demo-control">
-        <label class="demo-control__label">Size</label>
-        <div class="demo-control__buttons">
-          @for (option of ['sm', 'md', 'lg']; track option) {
-            <ui-lib-button
-              [appearance]="interactiveSize() === option ? 'solid' : 'outline'"
-              severity="primary"
-              size="sm"
-              type="button"
-              (click)="setSize($any(option))"
-            >{{ option }}</ui-lib-button>
-          }
+        <div class="demo-control">
+          <span class="demo-control__label">Label Position</span>
+          <div class="demo-control__buttons">
+            @for (option of labelPositions; track option) {
+              <ui-lib-button
+                [appearance]="playgroundLabelPosition() === option ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                type="button"
+                (click)="setLabelPosition(option)"
+              >{{ option }}</ui-lib-button>
+            }
+          </div>
         </div>
-      </div>
-
-      <div class="demo-control">
-        <label class="demo-control__label">Variant</label>
-        <div class="demo-control__buttons">
-          @for (option of ['material', 'bootstrap', 'minimal']; track option) {
-            <ui-lib-button
-              [appearance]="interactiveVariant() === option ? 'solid' : 'outline'"
-              severity="primary"
-              size="sm"
-              type="button"
-              (click)="setVariant($any(option))"
-            >{{ option }}</ui-lib-button>
-          }
+        <div class="demo-control">
+          <span class="demo-control__label">Size</span>
+          <div class="demo-control__buttons">
+            @for (size of sizes; track size) {
+              <ui-lib-button
+                [appearance]="playgroundSize() === size ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                type="button"
+                (click)="setSize(size)"
+              >{{ size }}</ui-lib-button>
+            }
+          </div>
+        </div>
+        <div class="demo-control">
+          <span class="demo-control__label">Variant</span>
+          <div class="demo-control__buttons">
+            @for (variant of variants; track variant) {
+              <ui-lib-button
+                [appearance]="playgroundVariant() === variant ? 'solid' : 'outline'"
+                severity="primary"
+                size="sm"
+                type="button"
+                (click)="setVariant(variant)"
+              >{{ variant }}</ui-lib-button>
+            }
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="demo-section__preview">
-      <ui-lib-meter-group
-        [values]="interactiveItems()"
-        [orientation]="interactiveOrientation()"
-        [labelPosition]="interactiveLabelPosition()"
-        [size]="interactiveSize()"
-        [variant]="interactiveVariant()"
-      />
+  <!-- ---- API ------------------------------------------------------ -->
+  <section class="demo-section" id="api" data-doc-anchor>
+
+    <div id="api-inputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Inputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>values</code></td>
+            <td><code>MeterItem[]</code></td>
+            <td><code>[]</code></td>
+            <td>Array of meter segments to render.</td>
+          </tr>
+          <tr>
+            <td><code>min</code></td>
+            <td><code>number</code></td>
+            <td><code>0</code></td>
+            <td>Minimum value of the range.</td>
+          </tr>
+          <tr>
+            <td><code>max</code></td>
+            <td><code>number</code></td>
+            <td><code>100</code></td>
+            <td>Maximum value of the range.</td>
+          </tr>
+          <tr>
+            <td><code>orientation</code></td>
+            <td><code>'horizontal' | 'vertical'</code></td>
+            <td><code>'horizontal'</code></td>
+            <td>Bar direction.</td>
+          </tr>
+          <tr>
+            <td><code>showLabels</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>Show or hide the legend.</td>
+          </tr>
+          <tr>
+            <td><code>labelPosition</code></td>
+            <td><code>'start' | 'end'</code></td>
+            <td><code>'end'</code></td>
+            <td>Legend placement — <code>start</code> is above / left, <code>end</code> is below / right.</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>'sm' | 'md' | 'lg'</code></td>
+            <td><code>'md'</code></td>
+            <td>Bar thickness size token.</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+            <td><code>null</code></td>
+            <td>Visual design variant; falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
+          </tr>
+          <tr>
+            <td><code>ariaLabel</code></td>
+            <td><code>string</code></td>
+            <td><code>'Meter group'</code></td>
+            <td>Accessible label for the meter container group (<code>aria-label</code> on the group element).</td>
+          </tr>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Extra CSS classes appended to the host element.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
 
-  <!-- ---- API table ---------------------------------------------------- -->
-  <div class="demo-section">
-    <h2 class="demo-section__title">API</h2>
+    <div id="api-meter-item" data-doc-anchor>
+      <h3 class="demo-section__subtitle">MeterItem</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>label</code></td>
+            <td><code>string</code></td>
+            <td>Yes</td>
+            <td>Display label shown in the legend and used as the segment <code>aria-label</code>.</td>
+          </tr>
+          <tr>
+            <td><code>value</code></td>
+            <td><code>number</code></td>
+            <td>Yes</td>
+            <td>Numeric value measured against <code>min</code> / <code>max</code>.</td>
+          </tr>
+          <tr>
+            <td><code>color</code></td>
+            <td><code>string</code></td>
+            <td>Yes</td>
+            <td>CSS colour string for the segment fill (hex, rgb, hsl, named colour).</td>
+          </tr>
+          <tr>
+            <td><code>icon</code></td>
+            <td><code>string</code></td>
+            <td>No</td>
+            <td>Optional PrimeIcons class shown inside the legend colour swatch.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <h3 class="demo-section__subtitle">MeterGroup inputs</h3>
-    <table class="demo-api-table">
+  </section>
+
+  <!-- ---- CSS Custom Properties ------------------------------------ -->
+  <section class="demo-section" id="css-vars" data-doc-anchor>
+    <h2 class="demo-section__title">CSS Custom Properties</h2>
+    <table class="doc-properties">
       <thead>
         <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
+          <th>Variable</th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><code>values</code></td>
-          <td><code>MeterItem[]</code></td>
-          <td><code>[]</code></td>
-          <td>Array of meter segments to render.</td>
+          <td><code>--uilib-meter-group-height</code></td>
+          <td>Bar height (horizontal orientation).</td>
         </tr>
         <tr>
-          <td><code>min</code></td>
-          <td><code>number</code></td>
-          <td><code>0</code></td>
-          <td>Minimum value of the range.</td>
+          <td><code>--uilib-meter-group-height-sm</code></td>
+          <td>Bar height for <code>size="sm"</code>.</td>
         </tr>
         <tr>
-          <td><code>max</code></td>
-          <td><code>number</code></td>
-          <td><code>100</code></td>
-          <td>Maximum value of the range.</td>
+          <td><code>--uilib-meter-group-height-lg</code></td>
+          <td>Bar height for <code>size="lg"</code>.</td>
         </tr>
         <tr>
-          <td><code>orientation</code></td>
-          <td><code>'horizontal' | 'vertical'</code></td>
-          <td><code>'horizontal'</code></td>
-          <td>Bar direction.</td>
+          <td><code>--uilib-meter-group-width-vertical</code></td>
+          <td>Bar width (vertical orientation).</td>
         </tr>
         <tr>
-          <td><code>showLabels</code></td>
-          <td><code>boolean</code></td>
-          <td><code>true</code></td>
-          <td>Show or hide the legend.</td>
+          <td><code>--uilib-meter-group-height-vertical</code></td>
+          <td>Bar height (vertical orientation).</td>
         </tr>
         <tr>
-          <td><code>labelPosition</code></td>
-          <td><code>'start' | 'end'</code></td>
-          <td><code>'end'</code></td>
-          <td>Legend placement — start is above/left, end is below/right.</td>
+          <td><code>--uilib-meter-group-border-radius</code></td>
+          <td>Bar and segment corner radius.</td>
         </tr>
         <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Bar thickness size token.</td>
+          <td><code>--uilib-meter-group-bg</code></td>
+          <td>Background track colour.</td>
         </tr>
         <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Visual design variant; falls back to ThemeConfigService when null.</td>
+          <td><code>--uilib-meter-group-segment-gap</code></td>
+          <td>Gap between segments.</td>
         </tr>
         <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Extra CSS classes appended to the host element.</td>
+          <td><code>--uilib-meter-group-label-font-size</code></td>
+          <td>Legend font size.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-meter-group-label-color</code></td>
+          <td>Legend label text colour.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-meter-group-label-value-color</code></td>
+          <td>Legend value text colour.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-meter-group-swatch-size</code></td>
+          <td>Legend colour swatch size.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-meter-group-swatch-border-radius</code></td>
+          <td>Legend swatch border radius.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-meter-group-transition</code></td>
+          <td>Segment transition shorthand. Respects <code>prefers-reduced-motion: reduce</code>.</td>
         </tr>
       </tbody>
     </table>
+  </section>
 
-    <h3 class="demo-section__subtitle">MeterItem</h3>
-    <table class="demo-api-table">
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Required</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>label</code></td>
-          <td><code>string</code></td>
-          <td>Yes</td>
-          <td>Display label shown in the legend and as aria-label.</td>
-        </tr>
-        <tr>
-          <td><code>value</code></td>
-          <td><code>number</code></td>
-          <td>Yes</td>
-          <td>Numeric value measured against min/max.</td>
-        </tr>
-        <tr>
-          <td><code>color</code></td>
-          <td><code>string</code></td>
-          <td>Yes</td>
-          <td>CSS color string for the segment fill.</td>
-        </tr>
-        <tr>
-          <td><code>icon</code></td>
-          <td><code>string</code></td>
-          <td>No</td>
-          <td>Optional PrimeIcons class shown inside the legend swatch.</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- ---- Accessibility -------------------------------------------- -->
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+
+    <div id="a11y-aria" data-doc-anchor>
+      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Attribute</th>
+            <th>Value</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>.ui-lib-meter-group__meters</code></td>
+            <td><code>role="group"</code></td>
+            <td>—</td>
+            <td>Groups all meter segments as one semantic meter group.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__meters</code></td>
+            <td><code>aria-label</code></td>
+            <td>Value of <code>ariaLabel</code> input</td>
+            <td>Defaults to <code>"Meter group"</code>. Provide a meaningful label for the dataset.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__meter</code></td>
+            <td><code>role="meter"</code></td>
+            <td>—</td>
+            <td>Announces each segment as a meter to assistive technology.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__meter</code></td>
+            <td><code>aria-valuenow</code></td>
+            <td>Segment value (clamped to range)</td>
+            <td>Current value of the segment.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__meter</code></td>
+            <td><code>aria-valuemin</code></td>
+            <td>Value of <code>min</code> input</td>
+            <td>Lower bound of the range.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__meter</code></td>
+            <td><code>aria-valuemax</code></td>
+            <td>Value of <code>max</code> input</td>
+            <td>Upper bound of the range.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__meter</code></td>
+            <td><code>aria-label</code></td>
+            <td><code>"&lt;label&gt;: &lt;value&gt; of &lt;max&gt;"</code></td>
+            <td>Human-readable segment description announced by screen readers.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__sr-total</code></td>
+            <td><code>aria-live="polite"</code></td>
+            <td>—</td>
+            <td>Hidden live region that announces computed total changes for dynamic data.</td>
+          </tr>
+          <tr>
+            <td><code>.ui-lib-meter-group__sr-total</code></td>
+            <td><code>aria-atomic="true"</code></td>
+            <td>—</td>
+            <td>Reads the total announcement as a complete phrase.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="a11y-keyboard" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+      <p class="demo-section__description">
+        MeterGroup is informational and non-interactive — it adds no tabbable controls.
+      </p>
+      <table class="doc-properties">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Behaviour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Tab</code> / <code>Shift+Tab</code></td>
+            <td>Skips meter segments and legend items — nothing is focusable.</td>
+          </tr>
+          <tr>
+            <td>Arrow keys</td>
+            <td>No component-specific keyboard handling.</td>
+          </tr>
+          <tr>
+            <td><code>Enter</code> / <code>Space</code></td>
+            <td>No component-specific keyboard handling.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-section__subtitle">Notes</h3>
+    <ul class="doc-list">
+      <li>
+        Set a meaningful <code>ariaLabel</code> input (e.g. <code>"Storage usage"</code>) so
+        screen readers announce the dataset context rather than the generic default.
+      </li>
+      <li>
+        Decorative legend swatches and icons are <code>aria-hidden="true"</code> so screen
+        readers announce only the text label.
+      </li>
+      <li>
+        A hidden <code>aria-live="polite"</code> region announces segment total changes when
+        <code>[values]</code> is updated dynamically.
+      </li>
+      <li>All segment transitions respect <code>prefers-reduced-motion: reduce</code>.</li>
+    </ul>
+
+  </section>
+
+  <!-- ---- TOC Rail ------------------------------------------------- -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
-</section>
+
+</app-doc-page-layout>
