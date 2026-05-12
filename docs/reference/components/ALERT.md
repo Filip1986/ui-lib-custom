@@ -17,8 +17,8 @@ import { Alert } from 'ui-lib-custom';
 
 - ✅ Variant-aware styling (material, bootstrap, minimal).
 - 🎨 CSS variable theming with design-token fallbacks.
-- ♿ Accessible `role="alert"` for screen reader announcements.
-- 🧩 Optional dismiss action with icon button.
+- ♿ Severity-aware live region semantics (`role="alert"` for error/warning, `role="status"` for success/info).
+- 🧩 Optional dismiss action with a native button.
 
 ---
 
@@ -46,12 +46,13 @@ Dismissible:
 | `severity` | `'success' \| 'error' \| 'warning' \| 'info'` | `'info'` | Status tone used for icon and emphasis. |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual variant (falls back to global variant). |
 | `dismissible` | `boolean` | `false` | Shows a dismiss icon and enables the output. |
+| `dismissLabel` | `string \| null` | `null` | Optional i18n label for the dismiss button (`Dismiss alert` fallback). |
 
 ### Outputs
 
 | Output | Type | Description |
 | --- | --- | --- |
-| `dismissed` | `void` | Emitted when the dismiss icon is clicked. |
+| `dismissed` | `void` | Emitted when the dismiss button is clicked. |
 
 ---
 
@@ -83,8 +84,12 @@ Dismissible:
 
 ## Accessibility
 
-- Uses `role="alert"` to announce changes.
-- Dismiss icon provides an accessible label (`Dismiss alert`).
+- Uses severity-based live region roles:
+  - `error`/`warning` → `role="alert"` + `aria-live="assertive"`
+  - `success`/`info` → `role="status"` + `aria-live="polite"`
+- Host sets `aria-atomic="true"` so updates are announced as complete messages.
+- Dismiss button always has an accessible name (`dismissLabel` or `Dismiss alert` fallback).
+- Severity and close icons are decorative (`aria-hidden="true"`).
 
 ---
 

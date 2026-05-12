@@ -83,7 +83,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | #    | Component       | Key a11y concern                                                                    | Status     |
 |------|-----------------|-------------------------------------------------------------------------------------|------------|
 | 41   | Button          | `aria-disabled` vs `disabled`, icon-only `aria-label`, loading state announcement   | ✅ Done    |
-| 42   | Alert           | `role=alert` vs `role=status`, dismiss button label                                 | ⏳ Queued   |
+| 42   | Alert           | `role=alert` vs `role=status`, dismiss button label                                 | ✅ Done     |
 | 43   | Message         | Same as Alert — live region role correctness                                        | ⏳ Queued   |
 | 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ⏳ Queued   |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
@@ -246,7 +246,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
-| Alert           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Alert           | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
 | Badge           | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | Tag             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |

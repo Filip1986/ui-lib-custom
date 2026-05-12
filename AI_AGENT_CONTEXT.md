@@ -76,83 +76,70 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Galleria component — accessibility hardening COMPLETE (#46)]
+Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
+Changed:
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.html
+  - projects/ui-lib-custom/src/lib/data-view/data-view.component.scss
+  - projects/ui-lib-custom/src/lib/data-view/data-view.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/data-view/README.md
+  - docs/reference/components/DATAVIEW.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: DataView hardening complete. Added labeled filter/sort controls, list/grid toggle buttons with `aria-pressed`, a polite live region for view-mode announcements, unique host IDs, reduced-motion styles, and focus-visible rings across all interactive controls. Added a dedicated DataView accessibility suite and updated DataView docs/score status.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/data-view/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=data-view --no-coverage (64/64 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Playwright browsers were missing for screenshot capture; installed with `npx playwright install chromium`. Screenshot captured at `/tmp/data-view-hardening.png`.
+Next step: Continue Tier 5 queue hardening with Button (#41), Alert (#42), and Carousel (#45).
+
+Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
 Changed:
   - AI_AGENT_CONTEXT.md
   - docs/COMPONENT_SCORES.md
+  - docs/reference/components/ALERT.md
+  - projects/ui-lib-custom/src/lib/alert/README.md
+  - projects/ui-lib-custom/src/lib/alert/alert.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.html
+  - projects/ui-lib-custom/src/lib/alert/alert.scss
+  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
+State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements. Added dedicated alert accessibility regression tests and updated score/docs bookkeeping.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/alert/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/alert --no-coverage (41/41 PASS — 28 unit + 13 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Demo screenshot captured at `/tmp/alert-hardening.png`. Playwright MCP browser lock prevented direct playwright-browser usage; installed Playwright Chromium and captured the screenshot via a Node Playwright script.
+Next step: Message hardening (Tier 5, #43).
+
+Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
+Changed:
+  - projects/ui-lib-custom/src/lib/divider/divider.ts
+      • Added module-level `nextDividerId` counter and unique host `dividerId`
+      • Added `ariaLabel` + `decorative` inputs and computed ARIA bindings (`ariaOrientation`, `resolvedAriaLabel`, `ariaHidden`)
+      • Bound host `id`, `aria-label`, and `aria-hidden` while keeping separator semantics
+  - projects/ui-lib-custom/src/lib/divider/divider.scss
+      • Added `prefers-reduced-motion: reduce` override
+  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts
+      • Added coverage for generated ids, decorative `aria-hidden`, and labeled divider behavior
+  - projects/ui-lib-custom/src/lib/divider/divider.a11y.spec.ts (CREATED — 12 tests)
+      • Added ARIA structure assertions, keyboard/non-live-region checks, and axe-core checks for default/vertical/decorative/labeled states
+  - projects/ui-lib-custom/src/lib/divider/README.md
+      • Added `ariaLabel` + `decorative` input docs, ARIA behavior table, keyboard table, and expanded accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Divider #58: ⏳ Queued → ✅ Done
+      • Layout table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/galleria/galleria.ts
-  - projects/ui-lib-custom/src/lib/galleria/galleria.html
-  - projects/ui-lib-custom/src/lib/galleria/galleria.scss
-  - projects/ui-lib-custom/src/lib/galleria/galleria.types.ts
-  - projects/ui-lib-custom/src/lib/galleria/index.ts
-  - projects/ui-lib-custom/src/lib/galleria/galleria.spec.ts
-  - projects/ui-lib-custom/src/lib/galleria/galleria.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/galleria/README.md
-State: Galleria hardening is complete across the 6-phase prompt with priority accessibility fixes: fullscreen now behaves like a true dialog (`role="dialog"`, `aria-modal`, focus trap lifecycle, Escape close, focus restoration), item/thumbnail alt propagation is enforced via typed `GalleriaItem`, thumbnail strip semantics were upgraded to keyboard-navigable list buttons with `aria-current`, and previous/next/lightbox labels now support explicit inputs with safe fallbacks. Added reduced-motion CSS coverage and a dedicated 16-test a11y regression suite.
+      • Archived the previous oldest handoff to keep only the newest 3 in this file
+State: Divider hardening complete. The host now supports decorative vs. labeled accessibility semantics, generated stable ids per instance, reduced-motion styling fallback, updated DX docs, and dedicated divider a11y regression coverage.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/galleria/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=galleria --no-coverage (55/55 PASS — 39 unit + 16 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/divider/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=divider --no-coverage (36/36 PASS — 24 unit + 12 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validations. Playwright browsers were installed with `npx playwright install chromium` to capture `/tmp/galleria-hardening.png`.
-Next step: SpeedDial hardening (Tier 5, #47).
-
-Date: 2026-05-12 [Fieldset — 6-phase hardening COMPLETE (#61)]
-Changed:
-  - projects/ui-lib-custom/src/lib/fieldset/fieldset.a11y.spec.ts (CREATED — 23 tests)
-      • 4 axe-core automated checks (basic, toggleable expanded, collapsed, all variants)
-      • 6 ARIA structure assertions (role=group, aria-labelledby, id formats, unique ids, decorative icon)
-      • 5 legend toggle ARIA checks (role, aria-expanded true/false, aria-controls)
-      • 3 content visibility checks (aria-hidden collapsed/expanded/non-toggleable)
-      • 3 keyboard interaction checks (Enter collapse, Space collapse, Enter expand)
-      • 2 content projection checks (custom legend rendered, aria-expanded present)
-  - projects/ui-lib-custom/src/lib/fieldset/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table
-      • Expanded accessibility section with reduced-motion and unique-ID details
-  - docs/COMPONENT_SCORES.md
-      • Fieldset #61: ⏳ Queued → ✅ Done (Layout table row: 9/9/9/9/9/9/9/9/9/9 avg 9.0)
-State: Fieldset hardening complete. Component was already well-implemented (role=group, aria-labelledby, unique IDs, aria-expanded, aria-hidden, focus-visible ring, prefers-reduced-motion). Hardening added comprehensive a11y regression coverage and expanded documentation. No functional code changes were required — the component was already production-quality.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/fieldset/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=fieldset --no-coverage (53/53 PASS — 30 unit + 23 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available.
-Next step: Divider (#58) hardening — role=separator + aria-orientation.
-
-Date: 2026-05-12 [Button component — accessibility hardening COMPLETE (#41)]
-Changed:
-  - projects/ui-lib-custom/src/lib/button/button.ts
-      • Added `softDisabled` input (boolean, default false): keeps button keyboard-discoverable via `aria-disabled="true"` without native `disabled`
-      • Added `loadingLabel` input (string | null, default null): overrides AT label while loading
-      • Updated `ariaDisabled` computed to include `softDisabled()` in the `true` condition
-      • Updated `ariaLabelResolved` to prefer `loadingLabel()` over `ariaLabel()` during loading, with `'Loading'` as final fallback
-      • Updated `buttonClasses` to add `ui-lib-button--soft-disabled` class (opacity, cursor)
-      • Added `onButtonClick()` handler: calls `event.preventDefault()/stopImmediatePropagation()` when `softDisabled` is true
-  - projects/ui-lib-custom/src/lib/button/button.html
-      • Added `(click)="onButtonClick($event)"` binding for soft-disabled click prevention
-  - projects/ui-lib-custom/src/lib/button/button.scss
-      • Added `.ui-lib-button--soft-disabled` rule (opacity + cursor: not-allowed, no pointer-events override)
-      • Extended `@media (prefers-reduced-motion: reduce)` block to suppress all button transitions and loading spinner animation globally
-  - projects/ui-lib-custom/src/lib/button/button.a11y.spec.ts (REWRITTEN — 24 tests)
-      • Text button accessible name, icon-only aria-label, fallback 'Button' label
-      • Native disabled (disabled attr, aria-disabled, tab order)
-      • Soft disabled (no native disabled, aria-disabled, tab order preserved, click blocked)
-      • Loading (aria-busy, aria-disabled, loadingLabel override, ariaLabel fallback, 'Loading' fallback)
-      • Toggle/aria-pressed (true, false, absent)
-      • type="button" default, axe-core for 6 states
-  - projects/ui-lib-custom/src/lib/button/README.md
-      • Added `softDisabled` and `loadingLabel` to the State inputs table
-      • Added ARIA attribute mapping table and updated ariaLabel required-when note
-  - docs/COMPONENT_SCORES.md
-      • Button #41: ⏳ Queued → ✅ Done
-      • Core Inputs table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
-State: Button hardening complete. softDisabled provides keyboard-discoverable disabled state, loadingLabel enables AT-friendly loading announcements, reduced-motion is suppressed globally, and 24 dedicated a11y tests give full regression coverage.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=src/lib/button --no-coverage (72/72 PASS — 48 unit + 24 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: None — all commands ran in linux bash directly.
-Next step: Alert hardening (Tier 5, #42).
+Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
+Next step: Continue Tier 6 queue with Toolbar (#59) hardening.

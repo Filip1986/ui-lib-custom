@@ -3,18 +3,18 @@
   [name]="statusIcon()"
   [variant]="effectiveVariant()"
   size="lg"
+  aria-hidden="true"
 />
 <div class="ui-lib-alert__content">
   <ng-content />
 </div>
 @if (dismissible()) {
-  <ui-lib-icon
+  <button
+    type="button"
     class="ui-lib-alert__close"
-    name="close"
-    [variant]="effectiveVariant()"
-    size="sm"
-    [clickable]="true"
-    ariaLabel="Dismiss alert"
+    [attr.aria-label]="dismissLabel() ?? 'Dismiss alert'"
     (click)="onDismiss()"
-  />
+  >
+    <ui-lib-icon name="close" [variant]="effectiveVariant()" size="sm" aria-hidden="true" />
+  </button>
 }
