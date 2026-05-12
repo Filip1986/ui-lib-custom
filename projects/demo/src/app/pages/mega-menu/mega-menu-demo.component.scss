@@ -1,42 +1,18 @@
+@use '../../shared/styles/doc-page.scss';
+
+// MegaMenu needs a wider canvas than the default 900px
 .demo-page {
-  padding: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 .demo-page__header {
   margin-bottom: 2.5rem;
 }
 
-.demo-page__title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem;
-}
-
-.demo-page__description {
-  color: var(--uilib-color-text-secondary, #6c757d);
-  max-width: 700px;
-  line-height: 1.6;
-  margin: 0;
-}
-
 .demo-section {
   margin-bottom: 3rem;
   border-top: 1px solid var(--uilib-color-border, #dee2e6);
   padding-top: 1.5rem;
-}
-
-.demo-section__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem;
-}
-
-.demo-section__subtitle {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 1.5rem 0 0.5rem;
 }
 
 .demo-section__desc {
@@ -150,6 +126,7 @@
   border-radius: 6px;
 }
 
+// Horizontal layout (label + buttons on one row) overrides the shared vertical default
 .demo-control-group {
   display: flex;
   align-items: center;
@@ -157,17 +134,12 @@
 }
 
 .demo-control-label {
+  min-width: 90px;
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--uilib-color-text-secondary, #6c757d);
-  min-width: 90px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-}
-
-.demo-control-buttons {
-  display: flex;
-  gap: 0.375rem;
 }
 
 .demo-table-wrapper {

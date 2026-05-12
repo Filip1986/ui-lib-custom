@@ -1,6 +1,7 @@
+@use '../../shared/styles/doc-page.scss';
+
+// Slightly narrower horizontal padding on the scroll-panel demo
 .demo-page {
-  max-width: 900px;
-  margin: 0 auto;
   padding: 2rem 1.5rem;
 }
 
@@ -204,39 +205,4 @@
   --uilib-scroll-panel-scrollbar-thumb-bg-hover: #ea580c;
   --uilib-scroll-panel-scrollbar-track-bg: #fff7ed;
   --uilib-scroll-panel-border-color: #fed7aa;
-}
-
-// ── API table ─────────────────────────────────────────────────────────────────
-.demo-api-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-
-  th {
-    text-align: left;
-    padding: 0.5rem 0.75rem;
-    background: var(--uilib-surface-100, #f3f4f6);
-    border-bottom: 2px solid var(--uilib-surface-200, #e5e7eb);
-    font-weight: 600;
-    color: var(--uilib-color-text, #374151);
-  }
-
-  td {
-    padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid var(--uilib-surface-100, #f3f4f6);
-    color: var(--uilib-surface-700, #374151);
-    vertical-align: top;
-
-    code {
-      font-family: var(--uilib-font-mono, monospace);
-      font-size: 0.8125em;
-      background: var(--uilib-surface-100, #f3f4f6);
-      padding: 0.1em 0.35em;
-      border-radius: 3px;
-    }
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-  }
 }
