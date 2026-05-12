@@ -202,6 +202,11 @@ ui-lib-button .ui-lib-button {
     pointer-events: none;
   }
 
+  &--soft-disabled {
+    opacity: var(--uilib-button-disabled-opacity);
+    cursor: not-allowed;
+  }
+
   &--loading {
     cursor: wait;
   }
@@ -892,6 +897,14 @@ ui-lib-button:has(
 }
 
 @media (prefers-reduced-motion: reduce) {
+  ui-lib-button .ui-lib-button {
+    transition: none;
+  }
+
+  ui-lib-button .ui-lib-button__icon--loading {
+    animation: none;
+  }
+
   ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow)::after {
     transition: none;
   }

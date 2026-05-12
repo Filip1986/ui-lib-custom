@@ -6,6 +6,24 @@ import type {
   PanelMenuItem,
   PanelMenuPanelToggleEvent,
 } from 'ui-lib-custom/panel-menu';
+import {
+  TableComponent,
+  TableColumnComponent,
+  TableColumnBodyDirective,
+} from 'ui-lib-custom/table';
+import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+
+interface AriaRow {
+  readonly element: string;
+  readonly attribute: string;
+  readonly value: string;
+  readonly notes: string;
+}
+
+interface KeyboardRow {
+  readonly key: string;
+  readonly action: string;
+}
 
 /**
  * Demo page for the PanelMenu component.
@@ -13,12 +31,42 @@ import type {
 @Component({
   selector: 'app-panel-menu-demo',
   standalone: true,
-  imports: [PanelMenu],
+  imports: [
+    PanelMenu,
+    TableComponent,
+    TableColumnComponent,
+    TableColumnBodyDirective,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanelMenuDemoComponent {
+  public readonly snippets: {
+    readonly import: string;
+    readonly basic: string;
+    readonly expanded: string;
+    readonly multiple: string;
+    readonly urlItems: string;
+    readonly events: string;
+  } = {
+    import: `import { PanelMenu } from 'ui-lib-custom/panel-menu';
+import type { PanelMenuItem } from 'ui-lib-custom/panel-menu';`,
+    basic: `<ui-lib-panel-menu [model]="items" />`,
+    expanded: `items: PanelMenuItem[] = [
+  { label: 'File', expanded: true, items: [...] },
+  { label: 'Edit', items: [...] },
+];`,
+    multiple: `<ui-lib-panel-menu [model]="items" [multiple]="true" />`,
+    urlItems: `{ label: 'Angular Docs', url: 'https://angular.dev', target: '_blank' }`,
+    events: `<ui-lib-panel-menu
+  [model]="items"
+  (itemClick)="onItemClick($event)"
+  (panelToggle)="onPanelToggle($event)"
+/>`,
+  } as const;
+
   // ── Basic ───────────────────────────────────────────────────────────────
 
   public readonly basicModel: PanelMenuItem[] = [
@@ -185,11 +233,7 @@ export class PanelMenuDemoComponent {
       icon: 'pi pi-question-circle',
       items: [
         { label: 'Documentation', icon: 'pi pi-book' },
-        {
-          label: 'Community (offline)',
-          icon: 'pi pi-comments',
-          disabled: true,
-        },
+        { label: 'Community (offline)', icon: 'pi pi-comments', disabled: true },
       ],
     },
   ];
@@ -202,18 +246,8 @@ export class PanelMenuDemoComponent {
       icon: 'pi pi-external-link',
       expanded: true,
       items: [
-        {
-          label: 'Angular Docs',
-          icon: 'pi pi-book',
-          url: 'https://angular.dev',
-          target: '_blank',
-        },
-        {
-          label: 'GitHub',
-          icon: 'pi pi-github',
-          url: 'https://github.com',
-          target: '_blank',
-        },
+        { label: 'Angular Docs', icon: 'pi pi-book', url: 'https://angular.dev', target: '_blank' },
+        { label: 'GitHub', icon: 'pi pi-github', url: 'https://github.com', target: '_blank' },
         { label: 'Command Item', icon: 'pi pi-star' },
       ],
     },
@@ -253,7 +287,7 @@ export class PanelMenuDemoComponent {
     },
   ];
 
-  // ── Command callbacks ─────────────────────────────────────────────────
+  // ── Events ────────────────────────────────────────────────────────────
 
   public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
 
@@ -297,6 +331,110 @@ export class PanelMenuDemoComponent {
     const state: string = event.expanded ? 'expanded' : 'collapsed';
     this.logEvent(`panelToggle: "${event.item.label ?? ''}" ${state}`);
   }
+
+  // ── Accessibility data ────────────────────────────────────────────────
+
+  public readonly ariaRows: AriaRow[] = [
+    {
+      element: 'Root <code>&lt;nav&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"navigation"</code>',
+      notes: 'Root navigation landmark for the entire component.',
+    },
+    {
+      element: 'Root <code>&lt;nav&gt;</code>',
+      attribute: '<code>aria-label</code>',
+      value: '<code>ariaLabel</code> input',
+      notes: 'Accessible name; defaults to <code>"Panel Menu"</code>.',
+    },
+    {
+      element: 'Root header <code>&lt;button&gt;</code>',
+      attribute: '<code>aria-expanded</code>',
+      value: '<code>"true"</code> / <code>"false"</code>',
+      notes: 'Reflects whether the panel content is currently open.',
+    },
+    {
+      element: 'Root header <code>&lt;button&gt;</code>',
+      attribute: '<code>aria-controls</code>',
+      value: 'Panel content <code>id</code>',
+      notes: 'References the controlled panel region element.',
+    },
+    {
+      element: 'Root header <code>&lt;button&gt;</code>',
+      attribute: '<code>aria-haspopup</code>',
+      value: '<code>"menu"</code>',
+      notes: 'Signals the button controls a menu region.',
+    },
+    {
+      element: 'Panel content',
+      attribute: '<code>role</code>',
+      value: '<code>"region"</code>',
+      notes: "Groups the panel's items as a named, collapsible region.",
+    },
+    {
+      element: 'Panel content',
+      attribute: '<code>aria-labelledby</code>',
+      value: 'Header button <code>id</code>',
+      notes: 'Names the region after its panel header for screen readers.',
+    },
+    {
+      element: 'Panel content (collapsed)',
+      attribute: '<code>aria-hidden</code>',
+      value: '<code>"true"</code>',
+      notes: 'Hides collapsed panel content from assistive technology.',
+    },
+    {
+      element: 'Sub-list <code>&lt;ul&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"menu"</code>',
+      notes: 'Identifies the item list as a menu widget.',
+    },
+    {
+      element: 'Leaf item <code>&lt;a&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"menuitem"</code>',
+      notes: 'Marks each actionable item as a menu command.',
+    },
+    {
+      element: 'Separator <code>&lt;li&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"separator"</code>',
+      notes: 'Structural divider between item groups.',
+    },
+    {
+      element: 'Disabled items',
+      attribute: '<code>aria-disabled</code>',
+      value: '<code>"true"</code>',
+      notes: 'Communicates non-interactive state without removing from the DOM.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardRow[] = [
+    {
+      key: '<kbd>Enter</kbd> / <kbd>Space</kbd> on header',
+      action: 'Toggle the root panel open or closed.',
+    },
+    {
+      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> on header',
+      action: 'Move focus to the next or previous enabled root panel header (wraps).',
+    },
+    {
+      key: '<kbd>Home</kbd> / <kbd>End</kbd> on header',
+      action: 'Jump to the first or last enabled root panel header.',
+    },
+    {
+      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> on sub-item',
+      action: 'Move focus between items within the current sub-menu.',
+    },
+    {
+      key: '<kbd>Escape</kbd> on sub-item',
+      action: 'Return focus to the owning root panel header.',
+    },
+    {
+      key: '<kbd>Tab</kbd> / <kbd>Shift+Tab</kbd>',
+      action: 'Move focus naturally through the page via browser tab order.',
+    },
+  ];
 
   private logEvent(message: string): void {
     this.eventLog.update((log: string[]): string[] => [message, ...log].slice(0, 8));

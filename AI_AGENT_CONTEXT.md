@@ -21,7 +21,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 - **Current milestone:** Component foundation hardening + documentation completeness
 - **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
-- **Next queue:** SpeedDial hardening (Tier 5, #47) — next after Galleria
+- **Next queue:** Alert hardening (Tier 5, #42) — next after Button
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -61,6 +61,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
+- `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 
 ---
 
@@ -120,43 +121,38 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available.
 Next step: Divider (#58) hardening — role=separator + aria-orientation.
 
-Date: 2026-05-12 [Carousel component — accessibility hardening COMPLETE (#45)]
+Date: 2026-05-12 [Button component — accessibility hardening COMPLETE (#41)]
 Changed:
-  - projects/ui-lib-custom/src/lib/carousel/carousel.constants.ts
-      • Added CAROUSEL_ARIA_REGION_LABEL, CAROUSEL_ARIA_PAUSE_LABEL, CAROUSEL_ARIA_PLAY_LABEL
-      • Updated CAROUSEL_ARIA_PREV_LABEL to 'Previous slide', CAROUSEL_ARIA_NEXT_LABEL to 'Next slide'
-  - projects/ui-lib-custom/src/lib/carousel/carousel.component.ts
-      • Added host bindings: aria-label (from ariaLabel input), aria-roledescription="carousel"
-      • Added inputs: ariaLabel, pauseLabel, playLabel
-      • Added playing writable signal and userPaused flag
-      • Added autoplayButtonLabel computed signal
-      • Added totalSlides computed signal
-      • Disabled autoplay when prefers-reduced-motion: reduce is detected
-      • Updated ariaSlideNumber() → "Slide N of M" format
-      • Updated ariaPageLabel() → "Go to slide N"
-      • Added toggleAutoplay() public method for pause button
-      • startAutoplay/stopAutoplay now update playing signal
-  - projects/ui-lib-custom/src/lib/carousel/carousel.component.html
-      • Added autoplay pause/resume button with dynamic aria-label
-      • Added aria-atomic="false" to content area live region
-      • Added role="group" to all slide items
-      • Changed indicator list from tablist/tab/aria-selected to plain ol/aria-current pattern
-  - projects/ui-lib-custom/src/lib/carousel/carousel.component.scss
-      • Added autoplay button styles
-      • Added @media (prefers-reduced-motion: reduce) block suppressing transitions
-  - projects/ui-lib-custom/src/lib/carousel/carousel.component.spec.ts
-      • Updated ariaSlideNumber / ariaPageLabel expectations to new format
-      • Updated indicator tests to use aria-current instead of aria-selected/tablist
-  - projects/ui-lib-custom/src/lib/carousel/carousel.a11y.spec.ts (CREATED — 26 tests)
-      • region landmark, slide semantics, prev/next labels, indicator aria-current, autoplay pause, keyboard nav, axe-core
-  - projects/ui-lib-custom/src/lib/carousel/README.md
-      • Full inputs table with new i18n inputs, autoplay API, keyboard shortcuts table, accessibility notes
+  - projects/ui-lib-custom/src/lib/button/button.ts
+      • Added `softDisabled` input (boolean, default false): keeps button keyboard-discoverable via `aria-disabled="true"` without native `disabled`
+      • Added `loadingLabel` input (string | null, default null): overrides AT label while loading
+      • Updated `ariaDisabled` computed to include `softDisabled()` in the `true` condition
+      • Updated `ariaLabelResolved` to prefer `loadingLabel()` over `ariaLabel()` during loading, with `'Loading'` as final fallback
+      • Updated `buttonClasses` to add `ui-lib-button--soft-disabled` class (opacity, cursor)
+      • Added `onButtonClick()` handler: calls `event.preventDefault()/stopImmediatePropagation()` when `softDisabled` is true
+  - projects/ui-lib-custom/src/lib/button/button.html
+      • Added `(click)="onButtonClick($event)"` binding for soft-disabled click prevention
+  - projects/ui-lib-custom/src/lib/button/button.scss
+      • Added `.ui-lib-button--soft-disabled` rule (opacity + cursor: not-allowed, no pointer-events override)
+      • Extended `@media (prefers-reduced-motion: reduce)` block to suppress all button transitions and loading spinner animation globally
+  - projects/ui-lib-custom/src/lib/button/button.a11y.spec.ts (REWRITTEN — 24 tests)
+      • Text button accessible name, icon-only aria-label, fallback 'Button' label
+      • Native disabled (disabled attr, aria-disabled, tab order)
+      • Soft disabled (no native disabled, aria-disabled, tab order preserved, click blocked)
+      • Loading (aria-busy, aria-disabled, loadingLabel override, ariaLabel fallback, 'Loading' fallback)
+      • Toggle/aria-pressed (true, false, absent)
+      • type="button" default, axe-core for 6 states
+  - projects/ui-lib-custom/src/lib/button/README.md
+      • Added `softDisabled` and `loadingLabel` to the State inputs table
+      • Added ARIA attribute mapping table and updated ariaLabel required-when note
   - docs/COMPONENT_SCORES.md
-      • Carousel #45: ⏳ Queued → ✅ Done (scores: API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
-State: Carousel hardening complete. Region landmark, aria-roledescription, per-slide "Slide N of M" labels, role="group" on slides, aria-current on active indicator, autoplay pause button (WCAG 2.1 SC 2.2.2), prefers-reduced-motion CSS+JS suppression, and 26 a11y regression tests all in place.
+      • Button #41: ⏳ Queued → ✅ Done
+      • Core Inputs table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
+State: Button hardening complete. softDisabled provides keyboard-discoverable disabled state, loadingLabel enables AT-friendly loading announcements, reduced-motion is suppressed globally, and 24 dedicated a11y tests give full regression coverage.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/carousel/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=carousel --no-coverage (70 PASS — 44 unit + 26 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/button --no-coverage (72/72 PASS — 48 unit + 24 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: Standard npm install required first. Indicator tablist/tab pattern replaced with plain list + aria-current per carousel ARIA pattern guidance.
-Next step: Galleria hardening (Tier 5, #46).
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: None — all commands ran in linux bash directly.
+Next step: Alert hardening (Tier 5, #42).
