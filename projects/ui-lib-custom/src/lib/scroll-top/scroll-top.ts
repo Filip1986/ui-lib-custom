@@ -76,7 +76,7 @@ export class ScrollTop implements OnInit {
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
-  public readonly scrollTopId: string = `ui-lib-scroll-top-${++nextScrollTopId}`;
+  public readonly scrollTopId: string = `ui-lib-scroll-top-${nextScrollTopId++}`;
 
   /** Scroll distance in pixels before the button becomes visible. */
   public readonly threshold: InputSignal<number> = input<number>(400);
