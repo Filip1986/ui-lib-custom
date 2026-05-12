@@ -1,12 +1,26 @@
-import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
-import type { Signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { Menu } from 'ui-lib-custom/menu';
 import { Button } from 'ui-lib-custom/button';
-import type { MenuItem, MenuItemCommandEvent, MenuVariant, MenuSize } from 'ui-lib-custom/menu';
-import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
-import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { MenuItem, MenuItemCommandEvent } from 'ui-lib-custom/menu';
+import {
+  TableComponent,
+  TableColumnComponent,
+  TableColumnBodyDirective,
+} from 'ui-lib-custom/table';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
-import type { DocSection } from '../../shared/doc-page/doc-section.model';
+
+interface AriaRow {
+  readonly element: string;
+  readonly attribute: string;
+  readonly value: string;
+  readonly notes: string;
+}
+
+interface KeyboardRow {
+  readonly key: string;
+  readonly action: string;
+}
 
 /**
  * Demo page for the Menu component.
@@ -14,46 +28,20 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-menu-demo',
   standalone: true,
-  imports: [Menu, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    Menu,
+    Button,
+    TableComponent,
+    TableColumnComponent,
+    TableColumnBodyDirective,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './menu-demo.component.html',
   styleUrl: './menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuDemoComponent {
-  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
-    viewChild(DocPageLayoutComponent);
-
-  public readonly sections: DocSection[] = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'basic', label: 'Basic (Inline)' },
-    { id: 'separator', label: 'With Separator' },
-    { id: 'disabled', label: 'Disabled Items' },
-    { id: 'grouped', label: 'Grouped Items' },
-    { id: 'popup', label: 'Popup Mode' },
-    { id: 'popup-grouped', label: 'Popup with Groups' },
-    { id: 'commands', label: 'Commands & Events' },
-    { id: 'url-items', label: 'URL Items' },
-    { id: 'variants', label: 'Variants' },
-    { id: 'sizes', label: 'Sizes' },
-    {
-      id: 'api',
-      label: 'API',
-      children: [
-        { id: 'api-inputs', label: 'Inputs' },
-        { id: 'api-outputs', label: 'Outputs' },
-        { id: 'api-methods', label: 'Methods' },
-        { id: 'api-item', label: 'MenuItem' },
-      ],
-    },
-    {
-      id: 'accessibility',
-      label: 'Accessibility',
-      children: [
-        { id: 'a11y-aria', label: 'ARIA Attributes' },
-        { id: 'a11y-keyboard', label: 'Keyboard' },
-      ],
-    },
-  ];
+  public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
 
   public readonly snippets: {
     readonly import: string;
@@ -128,10 +116,6 @@ onItemClick(event: MenuItemCommandEvent): void {
 <ui-lib-menu [model]="items" size="md" />
 <ui-lib-menu [model]="items" size="lg" />`,
   } as const;
-
-  public readonly variant: WritableSignal<MenuVariant> = signal<MenuVariant>('material');
-  public readonly size: WritableSignal<MenuSize> = signal<MenuSize>('md');
-  public readonly eventLog: WritableSignal<string[]> = signal<string[]>([]);
 
   public readonly basicItems: MenuItem[] = [
     { label: 'Profile', icon: 'pi pi-user' },
@@ -261,20 +245,104 @@ onItemClick(event: MenuItemCommandEvent): void {
     { label: 'Item Three', icon: 'pi pi-circle' },
   ];
 
+  // ── Accessibility data ────────────────────────────────────────────────────
+
+  public readonly ariaRows: AriaRow[] = [
+    {
+      element: 'Panel <code>&lt;div&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"menu"</code>',
+      notes: 'Root semantic container for the command list.',
+    },
+    {
+      element: 'Panel <code>&lt;div&gt;</code>',
+      attribute: '<code>aria-label</code>',
+      value: '<code>ariaLabel</code> input',
+      notes: 'Accessible name; provide a unique value when multiple menus are on screen.',
+    },
+    {
+      element: 'Root <code>&lt;ul&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"presentation"</code>',
+      notes: 'Presentational wrapper; semantic role is carried by the panel.',
+    },
+    {
+      element: 'Group <code>&lt;ul&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"group"</code>',
+      notes: 'Announces labelled item sections to screen readers.',
+    },
+    {
+      element: 'Group <code>&lt;ul&gt;</code>',
+      attribute: '<code>aria-label</code>',
+      value: 'Parent item label',
+      notes: 'Group label matches the visual section header.',
+    },
+    {
+      element: 'Item <code>&lt;li&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"none"</code>',
+      notes: 'Neutral wrapper; the interactive link carries the semantic role.',
+    },
+    {
+      element: 'Item link <code>&lt;a&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"menuitem"</code>',
+      notes: 'Identifies each interactive item as a menu command.',
+    },
+    {
+      element: 'Disabled link',
+      attribute: '<code>aria-disabled</code>',
+      value: '<code>"true"</code>',
+      notes: 'Communicates non-interactive state without removing the element.',
+    },
+    {
+      element: 'Separator <code>&lt;li&gt;</code>',
+      attribute: '<code>role</code>',
+      value: '<code>"separator"</code>',
+      notes: 'Exposed as a structural separator inside the menu.',
+    },
+    {
+      element: 'Group label <code>&lt;div&gt;</code>',
+      attribute: '<code>aria-hidden</code>',
+      value: '<code>"true"</code>',
+      notes:
+        'Visual heading only; group is named via <code>aria-label</code> on the <code>&lt;ul&gt;</code>.',
+    },
+    {
+      element: 'Icons',
+      attribute: '<code>aria-hidden</code>',
+      value: '<code>"true"</code>',
+      notes: 'Decorative only — not announced by screen readers.',
+    },
+  ];
+
+  public readonly keyboardRows: KeyboardRow[] = [
+    {
+      key: '<kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd>',
+      action: 'Move focus to the next or previous enabled item (wraps, skips disabled).',
+    },
+    {
+      key: '<kbd>Home</kbd> / <kbd>End</kbd>',
+      action: 'Jump to the first or last enabled item.',
+    },
+    {
+      key: '<kbd>Enter</kbd> / <kbd>Space</kbd>',
+      action: 'Activate the focused item.',
+    },
+    {
+      key: '<kbd>Escape</kbd>',
+      action:
+        'Close the popup panel and restore focus to the trigger element. No-op in inline mode.',
+    },
+    {
+      key: '<kbd>Tab</kbd>',
+      action: 'Close the popup and move focus naturally to the next focusable element.',
+    },
+  ];
+
   public onItemClick(event: MenuItemCommandEvent): void {
-    this.logEvent(`itemClick output: "${event.item.label ?? ''}"`);
-  }
-
-  public setVariant(value: MenuVariant): void {
-    this.variant.set(value);
-  }
-
-  public setSize(value: MenuSize): void {
-    this.size.set(value);
-  }
-
-  public scrollTo(id: string): void {
-    this.layout()?.scrollToSection(id);
+    this.logEvent(`itemClick: "${event.item.label ?? ''}"`);
   }
 
   private logEvent(message: string): void {

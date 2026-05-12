@@ -105,7 +105,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ✅ Done     |
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ✅ Done     |
 | 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ✅ Done     |
-| 58   | Divider         | `role=separator` + `aria-orientation`                     | ⏳ Queued   |
+| 58   | Divider         | `role=separator` + `aria-orientation`                     | ✅ Done     |
 | 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
 | 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ⏳ Queued   |
@@ -120,7 +120,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 70   | Terminal        | `role=log`, command input labeling                        | ✅ Done     |
 | 71   | Timeline        | Semantic list structure, orientation                      | ✅ Done     |
 | 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
-| 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
+| 73   | FocusTrap       | Correct sentinel node strategy                            | ✅ Done     |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ✅ Done     |
 | 75   | ScrollTop       | `aria-label` on button                                    | ✅ Done     |
 | 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
@@ -185,7 +185,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | IconField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FormField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Divider     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Toolbar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fieldset    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -277,7 +277,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
 | ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| FocusTrap       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| FocusTrap       | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | AnimateOnScroll | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | AutoFocus       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Bind            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

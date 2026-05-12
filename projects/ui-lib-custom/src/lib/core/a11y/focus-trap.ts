@@ -8,14 +8,25 @@ const FOCUSABLE_SELECTOR: string = [
   '[contenteditable="true"]',
 ].join(', ');
 
+let nextFocusTrapId: number = 0;
+
 /**
  * Reusable keyboard focus trap for overlay containers.
  */
 export class FocusTrap {
   private readonly container: HTMLElement;
+  private readonly instanceId: number = nextFocusTrapId++;
   private previousFocusedElement: HTMLElement | null = null;
   private active: boolean = false;
   private addedContainerTabIndex: boolean = false;
+  private startSentinel: HTMLElement | null = null;
+  private endSentinel: HTMLElement | null = null;
+  private readonly onStartSentinelFocus: () => void = (): void => {
+    this.focusLastElement();
+  };
+  private readonly onEndSentinelFocus: () => void = (): void => {
+    this.focusFirstElement();
+  };
 
   private readonly onKeydown: (event: KeyboardEvent) => void = (event: KeyboardEvent): void => {
     this.handleKeydown(event);
@@ -34,6 +45,7 @@ export class FocusTrap {
     const activeElement: Element | null = this.container.ownerDocument.activeElement;
     this.previousFocusedElement = activeElement instanceof HTMLElement ? activeElement : null;
 
+    this.attachSentinels();
     this.container.addEventListener('keydown', this.onKeydown);
     this.focusInitialTarget();
     this.active = true;
@@ -46,6 +58,7 @@ export class FocusTrap {
     }
 
     this.container.removeEventListener('keydown', this.onKeydown);
+    this.detachSentinels();
 
     if (this.addedContainerTabIndex) {
       this.container.removeAttribute('tabindex');
@@ -98,13 +111,27 @@ export class FocusTrap {
   }
 
   private focusInitialTarget(): void {
+    this.focusFirstElement();
+  }
+
+  private focusFirstElement(): void {
     const firstFocusable: HTMLElement | undefined = this.getFocusableElements().at(0);
-    if (firstFocusable) {
-      firstFocusable.focus();
+    if (!firstFocusable) {
+      this.focusContainer();
       return;
     }
 
-    this.focusContainer();
+    firstFocusable.focus();
+  }
+
+  private focusLastElement(): void {
+    const lastFocusable: HTMLElement | undefined = this.getFocusableElements().at(-1);
+    if (!lastFocusable) {
+      this.focusContainer();
+      return;
+    }
+
+    lastFocusable.focus();
   }
 
   private focusContainer(): void {
@@ -137,5 +164,44 @@ export class FocusTrap {
 
   private hasDom(): boolean {
     return this.container.ownerDocument.defaultView !== null;
+  }
+
+  private attachSentinels(): void {
+    if (this.startSentinel || this.endSentinel) {
+      return;
+    }
+
+    const documentRef: Document = this.container.ownerDocument;
+    const startSentinel: HTMLElement = documentRef.createElement('span');
+    const endSentinel: HTMLElement = documentRef.createElement('span');
+    this.configureSentinel(startSentinel, 'start');
+    this.configureSentinel(endSentinel, 'end');
+    this.container.before(startSentinel);
+    this.container.after(endSentinel);
+    startSentinel.addEventListener('focus', this.onStartSentinelFocus);
+    endSentinel.addEventListener('focus', this.onEndSentinelFocus);
+    this.startSentinel = startSentinel;
+    this.endSentinel = endSentinel;
+  }
+
+  private configureSentinel(sentinel: HTMLElement, position: 'start' | 'end'): void {
+    sentinel.setAttribute('tabindex', '0');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.setAttribute('data-ui-lib-focus-trap-sentinel', position);
+    sentinel.id = `ui-lib-focus-trap-${position}-${this.instanceId}`;
+    sentinel.style.position = 'fixed';
+    sentinel.style.width = '1px';
+    sentinel.style.height = '1px';
+    sentinel.style.opacity = '0';
+    sentinel.style.pointerEvents = 'none';
+  }
+
+  private detachSentinels(): void {
+    this.startSentinel?.removeEventListener('focus', this.onStartSentinelFocus);
+    this.endSentinel?.removeEventListener('focus', this.onEndSentinelFocus);
+    this.startSentinel?.remove();
+    this.endSentinel?.remove();
+    this.startSentinel = null;
+    this.endSentinel = null;
   }
 }
