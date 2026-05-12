@@ -38,12 +38,12 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done       |
 | 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done       |
 | 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ✅ Done       |
-| 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ⏳ Queued     |
-| 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done       |
-| 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ✅ Done       |
-| 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ✅ Done       |
-| 19   | Stepper     | `role=tablist` variant, `aria-current=step`, linear mode enforcement            | ✅ Done       |
-| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ✅ Done       |
+| 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ✅ Done     |
+| 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done    |
+| 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ✅ Done     |
+| 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ✅ Done     |
+| 19   | Stepper     | `role=tablist` variant, `aria-current=step`, linear mode enforcement            | ✅ Done     |
+| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ✅ Done     |
 
 ### Tier 3 — Form Controls
 *Focus: Label association, validation state announcements, group roles, indeterminate states.*
@@ -217,7 +217,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | MegaMenu    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| PanelMenu   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| PanelMenu   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stepper     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | SpeedDial   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

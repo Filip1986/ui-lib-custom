@@ -58,6 +58,12 @@ ui-lib-panel-menu .ui-lib-panel-menu__container {
   gap: 0;
 }
 
+ui-lib-panel-menu .ui-lib-panel-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 // ── Root separator ──────────────────────────────────────────────────────────
 
 ui-lib-panel-menu .ui-lib-panel-menu__separator {
@@ -116,6 +122,17 @@ ui-lib-panel-menu .ui-lib-panel-menu__header[disabled] {
   cursor: default;
   opacity: 0.5;
   pointer-events: none;
+}
+
+ui-lib-panel-menu .ui-lib-panel-menu__root-link {
+  text-decoration: none;
+}
+
+ui-lib-panel-menu .ui-lib-panel-menu__root-link[aria-disabled='true'] {
+  color: var(--uilib-panel-menu-item-color-disabled);
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
 }
 
 ui-lib-panel-menu .ui-lib-panel-menu__header--expanded {
@@ -440,4 +457,15 @@ ui-lib-panel-menu.ui-lib-panel-menu--variant-minimal {
   --uilib-panel-menu-item-bg-hover: var(--uilib-color-neutral-700, #374151);
   --uilib-panel-menu-item-color-disabled: var(--uilib-color-neutral-600, #4b5563);
   --uilib-panel-menu-separator-color: var(--uilib-color-neutral-700, #374151);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-panel-menu .ui-lib-panel-menu__header-toggle,
+  ui-lib-panel-menu .ui-lib-panel-menu__content,
+  ui-lib-panel-menu .ui-lib-panel-menu__sub-content,
+  ui-lib-panel-menu .ui-lib-panel-menu__sub-toggle,
+  ui-lib-panel-menu .ui-lib-panel-menu__sub-list {
+    transition: none;
+    animation: none;
+  }
 }
