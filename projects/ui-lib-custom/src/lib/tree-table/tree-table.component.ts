@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -18,6 +19,8 @@ import type {
   Signal,
   WritableSignal,
 } from '@angular/core';
+
+let nextTreeTableId: number = 0;
 import { NgTemplateOutlet } from '@angular/common';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
@@ -69,6 +72,14 @@ export class TreeTableComponent {
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private readonly elementRef: ElementRef<HTMLElement> = inject(
+    ElementRef
+  ) as ElementRef<HTMLElement>;
+
+  // ─── Instance identity ─────────────────────────────────────────────────────
+
+  /** Unique numeric instance identifier for stable element IDs. */
+  public readonly instanceId: string = `ui-lib-tree-table-${++nextTreeTableId}`;
 
   // ─── Reactive tick ─────────────────────────────────────────────────────────
 
@@ -130,6 +141,12 @@ export class TreeTableComponent {
 
   /** Extra CSS class applied to the host element. */
   public readonly styleClass: InputSignal<string> = input<string>('');
+
+  /**
+   * Accessible name for the treegrid.
+   * Falls back to `caption` text, then to `'Tree table'` when both are empty.
+   */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -423,8 +440,9 @@ export class TreeTableComponent {
   /** WAI-ARIA keyboard navigation on the host element. */
   public onKeydown(event: KeyboardEvent): void {
     const key: string = event.key;
+    const host: HTMLElement = this.elementRef.nativeElement;
     const rows: HTMLElement[] = Array.from(
-      document.querySelectorAll<HTMLElement>('.ui-lib-tree-table tr[role="row"][tabindex="0"]')
+      host.querySelectorAll<HTMLElement>('tr[role="row"][tabindex="0"]')
     );
     const focusedIndex: number = rows.findIndex(
       (row: HTMLElement): boolean => row === document.activeElement
@@ -442,6 +460,61 @@ export class TreeTableComponent {
     } else if (key === KEYBOARD_KEYS.End) {
       event.preventDefault();
       this.focusRowAtIndex(rows, rows.length - 1);
+    } else if (key === KEYBOARD_KEYS.ArrowRight) {
+      event.preventDefault();
+      if (focusedIndex < 0) {
+        return;
+      }
+      const focusedRow: HTMLElement | undefined = rows[focusedIndex];
+      if (!focusedRow) {
+        return;
+      }
+      const ariaExpanded: string | null = focusedRow.getAttribute('aria-expanded');
+      if (ariaExpanded === 'false') {
+        // Collapsed parent: expand it, focus stays on the same row.
+        const nodeKey: string | null = focusedRow.getAttribute('data-key');
+        if (nodeKey) {
+          const node: TreeTableNode | null = this.findNodeByKey(this.value(), nodeKey);
+          if (node) {
+            node.expanded = true;
+            this.nodeExpand.emit({ originalEvent: event, node });
+            this.tick.update((count: number): number => count + 1);
+            this.cdr.markForCheck();
+          }
+        }
+      } else if (ariaExpanded === 'true') {
+        // Expanded parent: move focus to first child (next row in flat list).
+        this.focusRowAtIndex(rows, focusedIndex + 1);
+      }
+      // Leaf (ariaExpanded === null): no action.
+    } else if (key === KEYBOARD_KEYS.ArrowLeft) {
+      event.preventDefault();
+      if (focusedIndex < 0) {
+        return;
+      }
+      const focusedRow: HTMLElement | undefined = rows[focusedIndex];
+      if (!focusedRow) {
+        return;
+      }
+      const ariaExpanded: string | null = focusedRow.getAttribute('aria-expanded');
+      const level: number = parseInt(focusedRow.getAttribute('aria-level') ?? '1', 10);
+      if (ariaExpanded === 'true') {
+        // Expanded parent: collapse it, focus stays on the same row.
+        const nodeKey: string | null = focusedRow.getAttribute('data-key');
+        if (nodeKey) {
+          const node: TreeTableNode | null = this.findNodeByKey(this.value(), nodeKey);
+          if (node) {
+            node.expanded = false;
+            this.nodeCollapse.emit({ originalEvent: event, node });
+            this.tick.update((count: number): number => count + 1);
+            this.cdr.markForCheck();
+          }
+        }
+      } else if (level > 1) {
+        // Collapsed parent or leaf at deeper level: move focus to parent row.
+        this.focusParentRow(rows, focusedIndex, level);
+      }
+      // Root-level collapsed/leaf: no action.
     }
   }
 
@@ -455,11 +528,21 @@ export class TreeTableComponent {
     const filterText: string = this.globalFilterText().trim().toLowerCase();
     const sorted: TreeTableNode[] = this.applySortToNodes(nodes);
 
+    // Determine which nodes pass the filter to compute accurate setsize/posinset.
+    const visibleSiblings: TreeTableNode[] = filterText
+      ? sorted.filter((node: TreeTableNode): boolean =>
+          this.nodeOrDescendantMatchesFilter(node, filterText)
+        )
+      : sorted;
+    const setsize: number = visibleSiblings.length;
+    let posinset: number = 0;
+
     for (const node of sorted) {
       if (filterText && !this.nodeOrDescendantMatchesFilter(node, filterText)) {
         continue;
       }
-      result.push({ node, depth });
+      posinset++;
+      result.push({ node, depth, setsize, posinset });
       if (!node.leaf && node.children?.length && this.isExpanded(node)) {
         this.buildFlatList(node.children, depth + 1, result);
       }
@@ -582,5 +665,38 @@ export class TreeTableComponent {
   private focusRowAtIndex(rows: HTMLElement[], index: number): void {
     const clampedIndex: number = Math.max(0, Math.min(index, rows.length - 1));
     rows[clampedIndex]?.focus();
+  }
+
+  /**
+   * Searches the tree recursively for a node with the given key.
+   * Returns `null` when not found.
+   */
+  private findNodeByKey(nodes: TreeTableNode[], key: string): TreeTableNode | null {
+    for (const node of nodes) {
+      if (node.key === key) {
+        return node;
+      }
+      if (node.children?.length) {
+        const found: TreeTableNode | null = this.findNodeByKey(node.children, key);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Focuses the nearest ancestor row (first preceding row with `aria-level`
+   * equal to `currentLevel - 1`).
+   */
+  private focusParentRow(rows: HTMLElement[], fromIndex: number, currentLevel: number): void {
+    for (let i: number = fromIndex - 1; i >= 0; i--) {
+      const level: number = parseInt(rows[i]!.getAttribute('aria-level') ?? '1', 10);
+      if (level === currentLevel - 1) {
+        rows[i]!.focus();
+        return;
+      }
+    }
   }
 }

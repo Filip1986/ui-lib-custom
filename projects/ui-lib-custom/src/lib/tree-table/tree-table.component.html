@@ -27,7 +27,7 @@
   <table
     class="uilib-tree-table-table"
     role="treegrid"
-    [attr.aria-label]="caption() || 'Tree table'"
+    [attr.aria-label]="ariaLabel() || caption() || 'Tree table'"
   >
     <!-- Column width hints -->
     <colgroup>
@@ -46,13 +46,14 @@
           <th
             scope="col"
             class="uilib-tree-table-th uilib-tree-table-th-selection"
-            aria-label="Select all rows"
           >
+            <span class="uilib-tree-table-sr-only">Select all rows</span>
             <span
               class="uilib-tree-table-checkbox"
               [class.uilib-tree-table-checkbox--checked]="isAllSelected()"
               [class.uilib-tree-table-checkbox--partial]="isSomeSelected()"
               role="checkbox"
+              aria-label="Select all rows"
               [attr.aria-checked]="isSomeSelected() ? 'mixed' : isAllSelected()"
               tabindex="0"
               (click)="handleSelectAll($event)"
@@ -99,7 +100,7 @@
 
     <!-- Body -->
     <tbody class="uilib-tree-table-tbody">
-      @for (flatNode of flatVisibleNodes(); track flatNode.node.key) {
+      @for (flatNode of flatVisibleNodes(); track flatNode.node.key; let rowIndex = $index) {
         <tr
           class="uilib-tree-table-row"
           [class.uilib-tree-table-row--selected]="isSelected(flatNode.node)"
@@ -118,6 +119,10 @@
             hasChildren(flatNode.node) ? isExpanded(flatNode.node) : null
           "
           [attr.aria-level]="flatNode.depth + 1"
+          [attr.aria-setsize]="flatNode.setsize"
+          [attr.aria-posinset]="flatNode.posinset"
+          [attr.aria-rowindex]="rowIndex + 2"
+          [attr.data-key]="flatNode.node.key"
           role="row"
           tabindex="0"
           (click)="handleRowClick($event, flatNode.node)"
@@ -126,12 +131,17 @@
         >
           <!-- Checkbox column -->
           @if (selectionMode() === 'checkbox') {
-            <td class="uilib-tree-table-td uilib-tree-table-td-selection">
+            <td
+              class="uilib-tree-table-td uilib-tree-table-td-selection"
+              role="gridcell"
+              [attr.aria-colindex]="1"
+            >
               <span
                 class="uilib-tree-table-checkbox"
                 [class.uilib-tree-table-checkbox--checked]="isSelected(flatNode.node)"
                 [class.uilib-tree-table-checkbox--partial]="isPartiallySelected(flatNode.node)"
                 role="checkbox"
+                aria-label="Select row"
                 [attr.aria-checked]="
                   isPartiallySelected(flatNode.node)
                     ? 'mixed'
@@ -149,6 +159,8 @@
               class="uilib-tree-table-td"
               [class.uilib-tree-table-td-frozen]="column.frozen()"
               [class]="column.styleClass() ?? ''"
+              [attr.role]="colIndex === expanderColumnIndex() ? 'rowheader' : 'gridcell'"
+              [attr.aria-colindex]="selectionMode() === 'checkbox' ? colIndex + 2 : colIndex + 1"
             >
               <!-- Expander cell: indent + toggle button -->
               @if (colIndex === expanderColumnIndex()) {

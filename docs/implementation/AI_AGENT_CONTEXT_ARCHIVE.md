@@ -1520,3 +1520,20 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Next step: PanelMenu hardening (Tier 2, #15).
+
+Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
+      • Added module-level `let nextProgressSpinnerId: number = 0` counter
+      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
+      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
+      • Added dark mode overrides for bootstrap and minimal variant arc colours
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
+  - projects/ui-lib-custom/src/lib/progress-spinner/README.md (full rewrite)
+  - docs/COMPONENT_SCORES.md: ProgressSpinner #56 ⏳ → ✅ Done; avg 8.9
+State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, 16-test a11y suite.
+Verification: eslint PASS, jest 35/35 PASS, ng build PASS, entry-points 97/97 PASS
+Next step: MeterGroup (#57) hardening.
