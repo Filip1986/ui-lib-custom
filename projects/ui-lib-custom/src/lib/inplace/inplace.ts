@@ -23,6 +23,10 @@ export type { InplaceVariant } from './inplace.types';
 /** Auto-incrementing counter to generate a unique DOM id per Inplace instance. */
 let nextInplaceId: number = 0;
 
+/** CSS selector matching all standard focusable interactive elements. */
+const FOCUSABLE_SELECTOR: string =
+  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 /**
  * Inplace — inline editing component that toggles between a display and content slot.
  *
@@ -155,7 +159,7 @@ export class Inplace {
         const contentEl: HTMLElement | null =
           this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-inplace__content');
         const focusable: HTMLElement | null | undefined = contentEl?.querySelector<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          FOCUSABLE_SELECTOR
         );
         focusable?.focus();
       },
