@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** BlockUI accessibility hardening COMPLETE (6-phase, #64); BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** Panel accessibility hardening COMPLETE (6-phase, #60); BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -46,6 +46,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `ContextMenu` -> ✅ complete + hardened (6-phase, 86 tests — 55 unit + 31 a11y)
 - `Chart` -> ✅ complete + hardened (6-phase, score 8.9/10, 96 tests — 75 unit + 21 a11y)
 - `BottomSheet` -> ✅ complete + hardened (6-phase, score 8.5/10, 50 tests — 26 unit + 24 a11y)
+- `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 
 ---
 
@@ -59,37 +60,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
-
-Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
-Changed:
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
-      • Added module-level `let nextBlockUiId: number = 0` counter
-      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
-      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
-      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
-      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
-      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
-      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
-      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
-      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
-  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
-      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
-  - projects/ui-lib-custom/src/lib/block-ui/README.md
-      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
-  - docs/COMPONENT_SCORES.md
-      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
-State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
-  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation.
-Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
 
 Date: 2026-05-11 [BottomSheet component — accessibility hardening COMPLETE (#76)]
 Changed:
@@ -154,3 +124,31 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available.
 Next step: Badge (#52) hardening — Tier 6, positioning variants, `aria-label` passthrough.
+
+Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]
+Changed:
+  - projects/ui-lib-custom/src/lib/panel/panel.a11y.spec.ts (CREATED — 23 tests)
+      • axe-core checks (4): basic, toggleable expanded, toggleable collapsed, all variants
+      • ARIA structure (5): role=region, aria-labelledby→header id, header id format, unique IDs, content id format
+      • Toggle button ARIA (6): absent when non-toggleable, aria-expanded true/false, aria-controls, accessible label, icon aria-hidden
+      • Content visibility ARIA (3): aria-hidden when collapsed, null when expanded, null when non-toggleable
+      • Keyboard interaction (3): Enter collapses, Space collapses, Enter expands collapsed panel
+      • Content projection (2): custom header rendered, aria-expanded present with custom header
+  - projects/ui-lib-custom/src/lib/panel/README.md
+      • Expanded CSS custom properties table (added font-size, font-weight, toggle-size entries)
+      • Added full ARIA attributes table (host, header div, content div, toggle button, toggle icon)
+      • Added keyboard interaction table (Tab, Enter, Space)
+      • Replaced one-liner accessibility section with detailed accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Panel #60: ⏳ Queued → ✅ Done in Tier 6 hardening queue
+      • Layout table: Panel row populated — 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Panel hardening complete. All ARIA attributes were already in place (role=region, aria-labelledby,
+  aria-expanded, aria-controls, aria-hidden, prefers-reduced-motion, unique IDs, :focus-visible ring).
+  Deliverable is the new 23-test a11y spec + expanded README documentation.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/panel/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=panel --no-coverage (110/110 PASS — 87 unit + 23 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: npm install required. BlockUI handoff moved to archive.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.

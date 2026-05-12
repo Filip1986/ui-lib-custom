@@ -4,6 +4,39 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
+Changed:
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts
+      • Added module-level `let nextBlockUiId: number = 0` counter
+      • Added `public readonly instanceId: string` (unique per-instance, bound to host `[attr.id]`)
+      • Added `[attr.aria-disabled]: 'blocked() ? true : null'` to host bindings
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.html
+      • Wrapped default `<ng-content>` in `<div class="ui-lib-block-ui__content">` with `[attr.inert]="blocked() ? '' : null"` to prevent keyboard focus entering blocked content
+      • Fixed `[attr.aria-hidden]` on mask: now `null` when blocked (removes attribute), `'true'` when not blocked
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.scss
+      • Added `.ui-lib-block-ui__content { display: contents; }` for zero layout side-effects
+      • Added `@media (prefers-reduced-motion: reduce)` override to disable mask transition
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.spec.ts
+      • Updated `aria-hidden` assertion for blocked state (was 'false', now toBeNull)
+      • Added tests for `aria-disabled`, `inert` on content wrapper, and unique host id
+  - projects/ui-lib-custom/src/lib/block-ui/block-ui.a11y.spec.ts (CREATED — 15 tests)
+      • ARIA structure, focus-trap/inert, reactive unblock, axe-core (unblocked + blocked states)
+  - projects/ui-lib-custom/src/lib/block-ui/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, and accessibility notes section
+  - docs/COMPONENT_SCORES.md
+      • BlockUI: ⏳ Queued → ✅ Done; score 9.0/10 across all 10 categories
+State: BlockUI hardening complete. Focus trap via `inert`, aria-busy + aria-disabled, unique instance IDs,
+  prefers-reduced-motion support, and dedicated a11y regression coverage are in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/block-ui/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=block-ui --no-coverage (38/38 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation.
+Next step: TreeTable (#33) hardening — start Tier 4 Data Display treegrid pass.
+
+---
+
 Date: 2026-05-11 [Chart component — accessibility hardening COMPLETE (#72)]
 Changed:
   - projects/ui-lib-custom/src/lib/chart/chart.component.ts
