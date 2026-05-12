@@ -44,6 +44,8 @@ import { DATA_VIEW_DEFAULT_ROWS_PER_PAGE } from './data-view.constants';
 type DataViewPaginatorPosition = 'top' | 'bottom' | 'both';
 type DataViewPageNavigationItem = number | 'ellipsis-left' | 'ellipsis-right';
 
+let nextDataViewId: number = 0;
+
 /**
  * Core DataView shell that renders list/grid item templates with loading and empty states.
  */
@@ -64,6 +66,7 @@ type DataViewPageNavigationItem = number | 'ellipsis-left' | 'ellipsis-right';
     '[class.ui-lib-data-view--lg]': 'size() === "lg"',
     '[class.ui-lib-data-view--loading]': 'loading()',
     '[class.ui-lib-data-view--empty]': 'isEmpty() && !loading()',
+    '[attr.id]': 'dataViewId',
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-busy]': 'loading()',
   },
@@ -80,6 +83,12 @@ export class DataViewComponent<T> {
     input<TrackByFunction<T> | null>(null);
   public readonly dataKey: InputSignal<string | null> = input<string | null>(null);
   public readonly ariaLabel: InputSignal<string> = input<string>('Data list');
+  public readonly controlsAriaLabel: InputSignal<string> = input<string>('Data view controls');
+  public readonly filterAriaLabel: InputSignal<string> = input<string>('Filter items');
+  public readonly filterPlaceholder: InputSignal<string> = input<string>('Filter items');
+  public readonly sortAriaLabel: InputSignal<string> = input<string>('Sort items');
+  public readonly listLayoutAriaLabel: InputSignal<string> = input<string>('Show list view');
+  public readonly gridLayoutAriaLabel: InputSignal<string> = input<string>('Show grid view');
   public readonly paginator: InputSignal<boolean> = input<boolean>(false);
   public readonly rows: InputSignal<number> = input<number>(DATA_VIEW_DEFAULT_ROWS_PER_PAGE);
   public readonly first: ModelSignal<number> = model<number>(0);
@@ -129,6 +138,13 @@ export class DataViewComponent<T> {
   private readonly internalRows: WritableSignal<number> = signal<number>(
     DATA_VIEW_DEFAULT_ROWS_PER_PAGE
   );
+  private readonly filterQuery: WritableSignal<string> = signal<string>('');
+  private readonly layoutLiveMessage: WritableSignal<string> = signal<string>('List view selected');
+
+  public readonly dataViewId: string = `ui-lib-data-view-${nextDataViewId++}`;
+  public readonly filterInputId: string = `${this.dataViewId}-filter`;
+  public readonly sortSelectId: string = `${this.dataViewId}-sort`;
+  public readonly layoutLiveRegionId: string = `${this.dataViewId}-layout-live`;
 
   constructor() {
     effect((): void => {
@@ -141,10 +157,16 @@ export class DataViewComponent<T> {
         this.first.set(nextFirst);
       }
     });
+
+    effect((): void => {
+      this.layoutLiveMessage.set(
+        this.layout() === 'list' ? 'List view selected' : 'Grid view selected'
+      );
+    });
   }
 
   public readonly isEmpty: Signal<boolean> = computed<boolean>(
-    (): boolean => this.resolveItems().length === 0
+    (): boolean => this.resolveFilteredItems().length === 0
   );
   public readonly activeTemplate: Signal<
     TemplateRef<DataViewListItemContext<T> | DataViewGridItemContext<T>> | undefined
@@ -159,7 +181,7 @@ export class DataViewComponent<T> {
   );
   public readonly effectiveTotalRecords: Signal<number> = computed<number>((): number => {
     const explicitTotalRecords: number | null = this.totalRecords();
-    return explicitTotalRecords ?? this.resolveItems().length;
+    return explicitTotalRecords ?? this.resolveFilteredItems().length;
   });
   public readonly pageCount: Signal<number> = computed<number>((): number => {
     const totalRecords: number = this.effectiveTotalRecords();
@@ -214,17 +236,17 @@ export class DataViewComponent<T> {
   });
   public readonly displayedItems: Signal<T[]> = computed<T[]>((): T[] => {
     if (!this.paginator()) {
-      return this.resolveItems();
+      return this.resolveFilteredItems();
     }
 
     if (this.totalRecords() !== null) {
       // Server-side mode: caller provides only current page data.
-      return this.resolveItems();
+      return this.resolveFilteredItems();
     }
 
     const startIndex: number = this.first();
     const endIndex: number = startIndex + this.effectiveRows();
-    return this.resolveItems().slice(startIndex, endIndex);
+    return this.resolveFilteredItems().slice(startIndex, endIndex);
   });
   public readonly itemContexts: Signal<DataViewListItemContext<T>[]> = computed<
     DataViewListItemContext<T>[]
@@ -276,6 +298,28 @@ export class DataViewComponent<T> {
 
   public pageAriaLabel(pageIndex: number): string {
     return `Go to page ${pageIndex + 1}`;
+  }
+
+  public onFilterInput(event: Event): void {
+    const target: HTMLInputElement = event.target as HTMLInputElement;
+    this.filterQuery.set(target.value);
+  }
+
+  public onSortSelectChange(event: Event): void {
+    const target: HTMLSelectElement = event.target as HTMLSelectElement;
+    const sortOrder: DataViewSortOrder = target.value === '-1' ? -1 : 1;
+    this.emitSortChange(this.sortField() ?? 'default', sortOrder);
+  }
+
+  public onLayoutToggle(layout: DataViewLayout): void {
+    if (this.layout() === layout) {
+      return;
+    }
+    this.layout.set(layout);
+  }
+
+  public layoutLiveAnnouncement(): string {
+    return this.layoutLiveMessage();
   }
 
   public onPageChange(page: number): void {
@@ -346,6 +390,36 @@ export class DataViewComponent<T> {
   private resolveItems(): T[] {
     const items: unknown = this.value();
     return Array.isArray(items) ? (items as T[]) : [];
+  }
+
+  private resolveFilteredItems(): T[] {
+    const query: string = this.filterQuery().trim().toLowerCase();
+    const items: T[] = this.resolveItems();
+    if (query.length === 0) {
+      return items;
+    }
+
+    return items.filter((item: T): boolean => this.itemMatchesFilter(item, query));
+  }
+
+  private itemMatchesFilter(item: T, query: string): boolean {
+    if (item === null || item === undefined) {
+      return false;
+    }
+
+    if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean') {
+      return String(item).toLowerCase().includes(query);
+    }
+
+    if (typeof item === 'object') {
+      return Object.values(item as Record<string, unknown>).some((value: unknown): boolean =>
+        String(value ?? '')
+          .toLowerCase()
+          .includes(query)
+      );
+    }
+
+    return false;
   }
 
   private clampFirst(first: number): number {
