@@ -36,6 +36,7 @@ export type {
 
 /** Default accessible label exported for test assertions. */
 export const PANEL_MENU_DEFAULT_ARIA_LABEL: string = 'Panel Menu';
+let nextPanelMenuId: number = 0;
 
 /**
  * PanelMenu — a vertical, accordion-style navigation menu driven by a
@@ -93,6 +94,7 @@ export class PanelMenu implements PanelMenuContext {
 
   /** Accessible label applied to the root container (aria-label). */
   public readonly ariaLabel: InputSignal<string> = input<string>(PANEL_MENU_DEFAULT_ARIA_LABEL);
+  public readonly panelMenuId: string = `uilib-panel-menu-${++nextPanelMenuId}`;
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 
@@ -237,6 +239,14 @@ export class PanelMenu implements PanelMenuContext {
     return `${index}`;
   }
 
+  public getPanelHeaderId(index: number): string {
+    return `${this.panelMenuId}-header-${index}`;
+  }
+
+  public getPanelContentId(index: number): string {
+    return `${this.panelMenuId}-content-${index}`;
+  }
+
   // ── Event handlers (called from the root template) ────────────────────────
 
   /** Handles a click on a root panel header button. */
@@ -302,16 +312,7 @@ export class PanelMenu implements PanelMenuContext {
 
   /** Focuses the next/previous root header relative to `current`. */
   private focusRootHeader(current: HTMLElement, direction: 1 | -1): void {
-    const host: HTMLElement | null = current.closest('ui-lib-panel-menu');
-    if (!host) {
-      return;
-    }
-    const headers: HTMLElement[] = Array.from(
-      host.querySelectorAll<HTMLElement>(
-        ':scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__panel' +
-          ' > .ui-lib-panel-menu__header:not([disabled])'
-      )
-    );
+    const headers: HTMLElement[] = this.getRootFocusableElements(current);
     const currentIndex: number = headers.indexOf(current);
     if (currentIndex === -1) {
       return;
@@ -322,29 +323,29 @@ export class PanelMenu implements PanelMenuContext {
 
   /** Focuses the first non-disabled root header. */
   private focusFirstRootHeader(current: HTMLElement): void {
-    const host: HTMLElement | null = current.closest('ui-lib-panel-menu');
-    if (!host) {
+    const headers: HTMLElement[] = this.getRootFocusableElements(current);
+    if (headers.length === 0) {
       return;
     }
-    const first: HTMLElement | null = host.querySelector<HTMLElement>(
-      ':scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__panel' +
-        ' > .ui-lib-panel-menu__header:not([disabled])'
-    );
-    first?.focus();
+    headers[0]?.focus();
   }
 
   /** Focuses the last non-disabled root header. */
   private focusLastRootHeader(current: HTMLElement): void {
+    const headers: HTMLElement[] = this.getRootFocusableElements(current);
+    headers.at(-1)?.focus();
+  }
+
+  private getRootFocusableElements(current: HTMLElement): HTMLElement[] {
     const host: HTMLElement | null = current.closest('ui-lib-panel-menu');
     if (!host) {
-      return;
+      return [];
     }
-    const headers: HTMLElement[] = Array.from(
+    return Array.from(
       host.querySelectorAll<HTMLElement>(
-        ':scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__panel' +
-          ' > .ui-lib-panel-menu__header:not([disabled])'
+        ':scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > li > .ui-lib-panel-menu__header:not([disabled]), ' +
+          ':scope > .ui-lib-panel-menu__container > .ui-lib-panel-menu__list > li > .ui-lib-panel-menu__root-link:not([aria-disabled="true"])'
       )
     );
-    headers.at(-1)?.focus();
   }
 }

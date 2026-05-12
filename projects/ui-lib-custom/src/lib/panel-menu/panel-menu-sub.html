@@ -1,15 +1,14 @@
 <ul
   class="ui-lib-panel-menu__sub-list"
   [style.--pm-depth]="depth()"
-  role="group"
+  role="menu"
 >
-  @for (item of visibleItems(); track item) {
+  @for (item of visibleItems(); track item.id ?? item.label ?? $index) {
     @if (item.separator) {
       <!-- Separator -->
       <li
         class="ui-lib-panel-menu__sub-separator"
         role="separator"
-        aria-hidden="true"
       ></li>
     } @else if (item.items && item.items.length > 0) {
       <!-- Expandable sub-group -->
@@ -23,7 +22,9 @@
           type="button"
           class="ui-lib-panel-menu__sub-header"
           [class.ui-lib-panel-menu__sub-header--expanded]="isItemExpanded($index)"
-          [attr.aria-expanded]="isItemExpanded($index)"
+          role="menuitem"
+          [attr.aria-haspopup]="'menu'"
+          [attr.aria-expanded]="isItemExpanded($index) ? 'true' : 'false'"
           [attr.aria-disabled]="item.disabled ? 'true' : null"
           [disabled]="item.disabled ? true : null"
           (click)="onToggle($event, item, $index)"
