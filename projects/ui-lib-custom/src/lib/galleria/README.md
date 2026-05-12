@@ -2,9 +2,23 @@
 
 **Selector:** `ui-lib-galleria`
 **Package:** `ui-lib-custom/galleria`
-**Content projection:** yes — six named template refs: `#galleriaItem` (required), `#galleriaThumbnail`, `#galleriaCaption`, `#galleriaHeader`, `#galleriaFooter`, `#galleriaIndicator`
+**Content projection:** yes — six named template refs: `#galleriaItem`, `#galleriaThumbnail`, `#galleriaCaption`, `#galleriaHeader`, `#galleriaFooter`, `#galleriaIndicator`
 
 > Both `activeIndex` and `visible` are `model()` signals (two-way bindable). `visible` controls the fullscreen overlay — it only does anything when `[fullScreen]="true"` is also set. Without that input the fullscreen button is not rendered.
+
+## Item data model
+
+```ts
+interface GalleriaItem {
+  src: string;
+  alt: string;
+  thumbnailSrc?: string;
+  thumbnailAlt?: string;
+}
+```
+
+- `alt` is required and used for the default main image renderer.
+- If `alt`/`thumbnailAlt` are blank, Galleria falls back to `alt=""` (decorative image semantics) instead of omitting the attribute.
 
 ## Inputs
 
@@ -32,7 +46,10 @@
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size token |
 | `styleClass` | `string \| null` | `null` | Additional CSS class(es) on the host element |
 | `containerStyle` | `Record<string, string> \| null` | `null` | Inline styles for the gallery container element |
-| `ariaLabel` | `string` | `'Gallery'` | Accessible label for the gallery region landmark |
+| `ariaLabel` | `string` | `'Image gallery'` | Accessible label for the gallery region landmark |
+| `lightboxLabel` | `string \| null` | `null` | Accessible label for fullscreen dialog (`'Image gallery'` fallback) |
+| `prevLabel` | `string \| null` | `null` | Accessible label for previous-item navigation (`'Previous image'` fallback) |
+| `nextLabel` | `string \| null` | `null` | Accessible label for next-item navigation (`'Next image'` fallback) |
 
 ## Outputs
 
@@ -43,7 +60,10 @@
 ## Usage
 
 ```html
-<!-- gallery with thumbnails -->
+<!-- gallery with built-in image rendering -->
+<ui-lib-galleria [value]="images" [showThumbnails]="true" />
+
+<!-- gallery with custom templates -->
 <ui-lib-galleria [value]="images" [showThumbnails]="true">
   <ng-template #galleriaItem let-image>
     <img [src]="image.src" [alt]="image.alt" style="width: 100%" />
@@ -60,3 +80,13 @@
   </ng-template>
 </ui-lib-galleria>
 ```
+
+## Keyboard interaction
+
+| Target | Keys | Behavior |
+|---|---|---|
+| Fullscreen dialog | `Escape` | Closes fullscreen overlay |
+| Thumbnail buttons | `Enter` / `Space` | Activates thumbnail |
+| Thumbnail buttons (horizontal) | `ArrowLeft` / `ArrowRight` | Moves active thumbnail |
+| Thumbnail buttons (vertical) | `ArrowUp` / `ArrowDown` | Moves active thumbnail |
+| Thumbnail buttons | `Home` / `End` | Jumps to first/last thumbnail |

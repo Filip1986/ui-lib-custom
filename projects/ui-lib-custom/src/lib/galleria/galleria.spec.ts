@@ -34,6 +34,12 @@ function getAllThumbnailItems(fixture: ComponentFixture<unknown>): NodeListOf<HT
   );
 }
 
+function getAllThumbnailButtons(fixture: ComponentFixture<unknown>): NodeListOf<HTMLButtonElement> {
+  return (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLButtonElement>(
+    '.uilib-galleria__thumbnail-item'
+  );
+}
+
 function getNavPrev(fixture: ComponentFixture<unknown>): HTMLButtonElement | null {
   return (fixture.nativeElement as HTMLElement).querySelector<HTMLButtonElement>(
     '.uilib-galleria__item-nav--prev'
@@ -405,20 +411,19 @@ describe('GalleriaComponent', (): void => {
     expect(itemArea?.getAttribute('aria-label')).toContain('1 of');
   });
 
-  it('should have role="button" on thumbnail items', async (): Promise<void> => {
+  it('should render thumbnail items as native buttons', async (): Promise<void> => {
     await setup({ numVisible: 3 });
-    const thumbnails: NodeListOf<HTMLElement> = getAllThumbnailItems(fixture);
-    thumbnails.forEach((thumb: HTMLElement): void => {
-      expect(thumb.getAttribute('role')).toBe('button');
+    const thumbnails: NodeListOf<HTMLButtonElement> = getAllThumbnailButtons(fixture);
+    thumbnails.forEach((thumbnailButton: HTMLButtonElement): void => {
+      expect(thumbnailButton.tagName.toLowerCase()).toBe('button');
     });
   });
 
-  it('should have tabindex="0" on thumbnail items', async (): Promise<void> => {
+  it('should set aria-current on the active thumbnail button', async (): Promise<void> => {
     await setup({ numVisible: 3 });
-    const thumbnails: NodeListOf<HTMLElement> = getAllThumbnailItems(fixture);
-    thumbnails.forEach((thumb: HTMLElement): void => {
-      expect(thumb.getAttribute('tabindex')).toBe('0');
-    });
+    const thumbnails: NodeListOf<HTMLButtonElement> = getAllThumbnailButtons(fixture);
+    expect(thumbnails[0]?.getAttribute('aria-current')).toBe('true');
+    expect(thumbnails[1]?.getAttribute('aria-current')).toBeNull();
   });
 
   // ─── Variants ──────────────────────────────────────────────────────────────

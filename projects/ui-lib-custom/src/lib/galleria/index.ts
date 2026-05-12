@@ -2,6 +2,7 @@ import { GalleriaComponent } from './galleria';
 
 export { GalleriaComponent } from './galleria';
 export type {
+  GalleriaItem,
   GalleriaVariant,
   GalleriaSize,
   GalleriaThumbnailsPosition,
