@@ -40,7 +40,7 @@ class TestHostComponent {
   public readonly targetValue: WritableSignal<ScrollTopTarget> = signal<ScrollTopTarget>('window');
   public readonly icon: WritableSignal<string> = signal<string>('pi pi-arrow-up');
   public readonly behavior: WritableSignal<ScrollTopBehavior> = signal<ScrollTopBehavior>('smooth');
-  public readonly buttonAriaLabel: WritableSignal<string> = signal<string>('Back to top');
+  public readonly buttonAriaLabel: WritableSignal<string> = signal<string>('Scroll to top');
   public readonly size: WritableSignal<ScrollTopSize> = signal<ScrollTopSize>('md');
   public readonly variant: WritableSignal<ScrollTopVariant | null> =
     signal<ScrollTopVariant | null>(null);
@@ -142,12 +142,23 @@ describe('ScrollTop', (): void => {
     const button: HTMLButtonElement = fixture.debugElement.query(
       By.css('.ui-lib-scroll-top__button')
     ).nativeElement as HTMLButtonElement;
-    expect(button.getAttribute('aria-label')).toBe('Back to top');
+    expect(button.getAttribute('aria-label')).toBe('Scroll to top');
   });
 
   it('should update aria-label when buttonAriaLabel input changes', async (): Promise<void> => {
     const { fixture, host } = setup();
     host.buttonAriaLabel.set('Scroll to top');
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const button: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-scroll-top__button')
+    ).nativeElement as HTMLButtonElement;
+    expect(button.getAttribute('aria-label')).toBe('Scroll to top');
+  });
+
+  it('should fall back to the default aria-label when buttonAriaLabel is blank', async (): Promise<void> => {
+    const { fixture, host } = setup();
+    host.buttonAriaLabel.set('   ');
     fixture.detectChanges();
     await fixture.whenStable();
     const button: HTMLButtonElement = fixture.debugElement.query(
@@ -170,6 +181,7 @@ describe('ScrollTop', (): void => {
       .nativeElement as HTMLElement;
     expect(span.className).toContain('pi');
     expect(span.className).toContain('pi-arrow-up');
+    expect(span.getAttribute('aria-hidden')).toBe('true');
   });
 
   it('should update icon class when icon input changes', async (): Promise<void> => {
@@ -292,5 +304,33 @@ describe('ScrollTop', (): void => {
     const el: HTMLElement = fixture.debugElement.query(By.css('ui-lib-scroll-top'))
       .nativeElement as HTMLElement;
     expect(el.className).not.toContain('ui-lib-scroll-top--visible');
+  });
+
+  it('should keep the button out of the tab order when hidden', (): void => {
+    const { fixture } = setup();
+    const button: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-scroll-top__button')
+    ).nativeElement as HTMLButtonElement;
+    expect(button.getAttribute('tabindex')).toBe('-1');
+    expect(button.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('should restore the button tab order when visible', async (): Promise<void> => {
+    const { fixture, component } = setup();
+    component.isVisible.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const button: HTMLButtonElement = fixture.debugElement.query(
+      By.css('.ui-lib-scroll-top__button')
+    ).nativeElement as HTMLButtonElement;
+    expect(button.getAttribute('tabindex')).toBeNull();
+    expect(button.getAttribute('aria-hidden')).toBeNull();
+  });
+
+  it('should expose a unique host id', (): void => {
+    const { fixture } = setup();
+    const el: HTMLElement = fixture.debugElement.query(By.css('ui-lib-scroll-top'))
+      .nativeElement as HTMLElement;
+    expect(el.id).toMatch(/^ui-lib-scroll-top-\d+$/);
   });
 });

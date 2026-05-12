@@ -130,7 +130,28 @@ Interactive tables render with `role="grid"` and use roving tabindex across head
 | `ArrowLeft` / `ArrowRight` | Move focus between cells in the same row |
 | `ArrowUp` / `ArrowDown` | Move focus to the previous or next row in the same column |
 | `Home` / `End` | Move focus to the first or last cell in the current row |
+| `Ctrl+Home` / `Ctrl+End` | Move focus to the first or last focusable cell in the grid |
 | `Enter` / `Space` | Activate the focused sortable header or selectable row |
+
+## ARIA structure
+
+```text
+table[role="grid|table"]
+├─ thead[role="rowgroup"]
+│  └─ tr[role="row"]
+│     └─ th[role="columnheader"]
+└─ tbody[role="rowgroup"]
+   ├─ tr[role="row"][aria-selected][aria-expanded]
+   │  └─ td[role="gridcell|cell"]
+   └─ tr[role="row"] (expanded content)
+```
+
+## Accessibility notes
+
+- Sortable headers expose `aria-sort` and a polite live region announces `"Table sorted by {column}, {direction}."`
+- Selectable grids expose `aria-multiselectable`, and selectable body rows expose `aria-selected="true|false"`
+- Expandable rows expose `aria-expanded` on the row and toggle button, with `aria-controls` pointing to the generated expanded-row ID
+- Paginated tables announce `"Page N of M"` through a polite live region in addition to the embedded paginator semantics
 
 ## Pagination notes
 

@@ -109,7 +109,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
 | 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ⏳ Queued   |
-| 62   | ScrollPanel     | Keyboard-scrollable region label                          | ⏳ Queued   |
+| 62   | ScrollPanel     | Keyboard-scrollable region label                          | ✅ Done     |
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ⏳ Queued   |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done     |
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done     |
@@ -122,7 +122,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ✅ Done     |
-| 75   | ScrollTop       | `aria-label` on button                                    | ⏳ Queued   |
+| 75   | ScrollTop       | `aria-label` on button                                    | ✅ Done     |
 | 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
 
 > **Queue status key:** ⏳ Queued · 🔄 In progress · ✅ Done (all scores ≥ 8)
@@ -190,7 +190,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fieldset    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| ScrollPanel | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ScrollPanel | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 
 ## Overlay & Modal
 
@@ -275,7 +275,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | ClassNames      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Terminal        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
-| ScrollTop       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FocusTrap       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | AnimateOnScroll | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
