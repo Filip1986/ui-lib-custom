@@ -17,12 +17,24 @@
 | `icon` | `string \| null` | `null` | Custom icon name; overrides the default severity icon |
 | `closable` | `boolean` | `false` | Renders a close button when true |
 | `styleClass` | `string \| null` | `null` | Additional CSS class(es) on the host element |
+| `messageId` | `string \| null` | `null` | Explicit `id` for the host element. When omitted, an auto-generated `ui-lib-message-{n}` id is used. Pass the same value to `aria-describedby` on the associated form control for inline validation. |
 
 ## Outputs
 
 | Name | Payload | Notes |
 |------|---------|-------|
 | `close` | `void` | Emitted when the close button is activated; the caller is responsible for removing the message |
+
+## Accessibility
+
+| Severity | `role` | `aria-live` |
+|----------|--------|-------------|
+| `error`, `warn` | `alert` | `assertive` |
+| `success`, `info`, `secondary`, `contrast` | `status` | `polite` |
+
+`aria-atomic="true"` is always present so screen readers announce the full message on any update.
+
+The severity icon is decorative and always carries `aria-hidden="true"`.
 
 ## Usage
 
@@ -35,3 +47,42 @@
   Unsaved changes will be <strong>lost</strong>.
 </ui-lib-message>
 ```
+
+### Inline form validation (`aria-describedby`)
+
+Associate a `<ui-lib-message>` with a form field so screen readers announce the validation error when the field is focused:
+
+```html
+<!-- 1. Define a shared ID -->
+<input
+  id="email"
+  type="email"
+  [attr.aria-describedby]="emailError() ? 'email-error' : null"
+  [attr.aria-invalid]="emailError() ? 'true' : null"
+/>
+
+<!-- 2. Pass the same ID via messageId -->
+@if (emailError()) {
+  <ui-lib-message
+    messageId="email-error"
+    severity="error"
+    [text]="emailError()"
+  />
+}
+```
+
+## CSS Custom Properties
+
+| Property | Default | Description |
+|---|---|---|
+| `--uilib-message-bg` | `transparent` | Background colour |
+| `--uilib-message-fg` | `inherit` | Text colour |
+| `--uilib-message-border-color` | `transparent` | Border colour |
+| `--uilib-message-icon-color` | `currentColor` | Severity icon colour |
+| `--uilib-message-close-color` | `currentColor` | Close button colour |
+| `--uilib-message-radius` | `var(--uilib-radius-md)` | Border radius |
+| `--uilib-message-border-width` | `1px` | Border width |
+| `--uilib-message-padding-sm/md/lg` | — | Padding by size |
+| `--uilib-message-font-size-sm/md/lg` | — | Font size by size |
+| `--uilib-message-gap-sm/md/lg` | — | Gap between icon and content |
+

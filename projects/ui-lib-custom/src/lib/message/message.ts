@@ -17,6 +17,9 @@ import type { MessageSeverity, MessageVariant, MessageSize } from './message.typ
 
 export type { MessageSeverity, MessageVariant, MessageSize } from './message.types';
 
+/** Module-level counter for unique message IDs (SSR-safe: runs per module load). */
+let nextMessageId: number = 0;
+
 /** Maps MessageSeverity to the closest StatusIcon semantic name. */
 const SEVERITY_ICON_MAP: Record<MessageSeverity, StatusIcon> = {
   success: 'success',
@@ -34,11 +37,17 @@ const SEVERITY_ICON_MAP: Record<MessageSeverity, StatusIcon> = {
  * three design variants (material, bootstrap, minimal), and three sizes (sm, md, lg).
  * Content can be supplied via the `text` input or via content projection.
  *
+ * The component exposes a stable `id` (via `messageId` input or auto-generated) so
+ * parent form controls can wire up `aria-describedby` for inline validation messages.
+ *
  * @example
  * <ui-lib-message severity="success" text="Operation completed successfully." />
  * <ui-lib-message severity="warn" [closable]="true" (close)="onClose()">
  *   Unsaved changes will be lost.
  * </ui-lib-message>
+ * <!-- inline form validation -->
+ * <input [attr.aria-describedby]="msgId" aria-invalid="true" />
+ * <ui-lib-message [messageId]="msgId" severity="error" text="Field is required." />
  */
 @Component({
   selector: 'ui-lib-message',
@@ -51,8 +60,10 @@ const SEVERITY_ICON_MAP: Record<MessageSeverity, StatusIcon> = {
   host: {
     class: 'ui-lib-message',
     '[class]': 'hostClasses()',
-    role: 'status',
-    '[attr.aria-live]': '"polite"',
+    '[attr.id]': 'resolvedId()',
+    '[attr.role]': 'liveRole()',
+    '[attr.aria-live]': 'ariaLive()',
+    'aria-atomic': 'true',
   },
 })
 export class Message {
@@ -84,8 +95,36 @@ export class Message {
   /** Additional CSS class(es) to attach to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
+  /**
+   * Optional explicit `id` for the host element.
+   * When omitted an auto-generated `ui-lib-message-{n}` id is used.
+   * Consumers should bind this to the same value they pass to `aria-describedby`
+   * on the associated form control.
+   */
+  public readonly messageId: InputSignal<string | null> = input<string | null>(null);
+
   /** Emitted when the close button is activated. */
   public readonly close: OutputEmitterRef<void> = output<void>();
+
+  /** Stable host `id` — consumer-provided or auto-generated. */
+  public readonly resolvedId: Signal<string> = computed<string>(
+    (): string => this.messageId() ?? `ui-lib-message-${nextMessageId++}`
+  );
+
+  /**
+   * Live-region role:
+   * - `"alert"` (assertive) for `error` and `warn` severities
+   * - `"status"` (polite) for all other severities
+   */
+  public readonly liveRole: Signal<'alert' | 'status'> = computed<'alert' | 'status'>(
+    (): 'alert' | 'status' =>
+      this.severity() === 'error' || this.severity() === 'warn' ? 'alert' : 'status'
+  );
+
+  /** Matching `aria-live` politeness level derived from `liveRole`. */
+  public readonly ariaLive: Signal<'assertive' | 'polite'> = computed<'assertive' | 'polite'>(
+    (): 'assertive' | 'polite' => (this.liveRole() === 'alert' ? 'assertive' : 'polite')
+  );
 
   /** Resolved variant — falls back to the global ThemeConfigService variant. */
   public readonly effectiveVariant: Signal<MessageVariant> = computed<MessageVariant>(
