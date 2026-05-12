@@ -538,3 +538,31 @@
   --uilib-tree-table-filter-color: #ffffffde;
   --uilib-tree-table-filter-border: 1px solid rgba(255, 255, 255, 0.12);
 }
+
+// ─── Screen-reader-only utility ───────────────────────────────────────────────
+
+.uilib-tree-table-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ─── Reduced motion ───────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-tree-table {
+    .uilib-tree-table-row,
+    .uilib-tree-table-toggle,
+    .uilib-tree-table-toggle-icon,
+    .uilib-tree-table-filter-input,
+    .uilib-tree-table-checkbox {
+      transition: none;
+    }
+  }
+}
