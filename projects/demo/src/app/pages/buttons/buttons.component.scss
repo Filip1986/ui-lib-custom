@@ -281,3 +281,37 @@
 .buttons-demo__log-msg {
   color: var(--uilib-text-color, #374151);
 }
+
+// ── Glass Shadow showcase ─────────────────────────────────────────────────────
+
+.buttons-demo__section--glass-shadow {
+  // Dark background so the glassmorphic effect is prominent
+  ui-lib-card {
+    background: #111111 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
+.buttons-demo__glass-shadow-showcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem 4rem;
+  padding: 2rem 1rem;
+  align-items: flex-end;
+}
+
+.buttons-demo__glass-shadow-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttons-demo__glass-shadow-label {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}

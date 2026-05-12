@@ -58,6 +58,21 @@ ui-lib-button {
     var(--uilib-space-1) var(--uilib-space-2)
   );
 
+  /* Glass-shadow appearance token defaults */
+  --uilib-button-glass-shadow-from: #ff5f6d;
+  --uilib-button-glass-shadow-to: #ffc371;
+  --uilib-button-glass-shadow-x: 8px; /* Tailwind translate-2 = 0.5rem = 8px */
+  --uilib-button-glass-shadow-y: 8px;
+  --uilib-button-glass-shadow-hover-x: 12px; /* Tailwind translate-3 = 0.75rem = 12px */
+  --uilib-button-glass-shadow-hover-y: 12px;
+  --uilib-button-glass-shadow-glow-blur: 0.2px;
+  --uilib-button-glass-shadow-blur-amount: 8px;
+  --uilib-button-glass-shadow-bg: rgba(255, 255, 255, 0.2);
+  --uilib-button-glass-shadow-bg-hover: rgba(255, 255, 255, 0.28);
+  --uilib-button-glass-shadow-border-color: rgba(255, 255, 255, 0.2);
+  --uilib-button-glass-shadow-border-hover: rgba(255, 255, 255, 0.35);
+  --uilib-button-glass-shadow-fg: #000;
+
   /* Tactile appearance token defaults */
   --uilib-button-tactile-from: #4aa6ff;
   --uilib-button-tactile-to: #278eff;
@@ -244,6 +259,36 @@ ui-lib-button .ui-lib-button {
       background-color: color-mix(in srgb, var(--uilib-button-bg) 28%, transparent);
       border-color: color-mix(in srgb, var(--uilib-button-bg) 50%, transparent);
       color: var(--uilib-button-fg);
+    }
+  }
+
+  &--appearance-glass-shadow {
+    background: var(--uilib-button-glass-shadow-bg);
+    backdrop-filter: blur(var(--uilib-button-glass-shadow-blur-amount));
+    -webkit-backdrop-filter: blur(var(--uilib-button-glass-shadow-blur-amount));
+    border: 1px solid var(--uilib-button-glass-shadow-border-color);
+    color: var(--uilib-button-glass-shadow-fg);
+    box-shadow: none;
+    position: relative;
+    z-index: 1;
+    font-weight: 500; /* Tailwind font-medium */
+    letter-spacing: -0.025em; /* Tailwind tracking-tight */
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease,
+      border-color 0.3s ease;
+
+    &:hover:not(.ui-lib-button--disabled) {
+      background: var(--uilib-button-glass-shadow-bg-hover);
+      border-color: var(--uilib-button-glass-shadow-border-hover);
+      color: var(--uilib-button-glass-shadow-fg);
+      box-shadow: none;
+    }
+
+    &:active:not(.ui-lib-button--disabled) {
+      /* Button snaps 4px toward shadow (Tailwind translate-1 = 0.25rem = 4px) */
+      transform: translate(4px, 4px);
+      background: var(--uilib-button-glass-shadow-bg);
     }
   }
 
@@ -677,6 +722,61 @@ ui-lib-button .ui-lib-button__spinner {
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* ── Glass-shadow: offset gradient shadow layer via host ::after ──────────── */
+
+ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--uilib-button-radius, 6px);
+    background: linear-gradient(
+      90deg,
+      var(--uilib-button-glass-shadow-from, #ff5f6d) 0%,
+      var(--uilib-button-glass-shadow-to, #ffc371) 100%
+    );
+    filter: blur(var(--uilib-button-glass-shadow-glow-blur, 0.2px));
+    transform: translate(
+      var(--uilib-button-glass-shadow-x, 8px),
+      var(--uilib-button-glass-shadow-y, 8px)
+    );
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+ui-lib-button:has(
+    button.ui-lib-button--appearance-glass-shadow:hover:not(.ui-lib-button--disabled)
+  )::after {
+  /* Shadow shifts further out on hover (Tailwind translate-3 = 0.75rem = 12px) */
+  transform: translate(
+    var(--uilib-button-glass-shadow-hover-x, 12px),
+    var(--uilib-button-glass-shadow-hover-y, 12px)
+  );
+}
+
+/* On :active, the shadow stays at its hover position — only the button moves forward.
+   (Mirrors the original: shadow has no group-active class, button does.) */
+
+/* Pill modifier: match the shadow shape to the pill button */
+ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow.ui-lib-button--pill)::after {
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-button:has(button.ui-lib-button--appearance-glass-shadow)::after {
+    transition: none;
+  }
+
+  ui-lib-button button.ui-lib-button--appearance-glass-shadow {
+    transition: none;
   }
 }
 

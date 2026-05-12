@@ -56,7 +56,7 @@
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>All Appearances</span>
       <span card-subtitle>
-        Use <code>appearance</code> to pick any of the 11 visual styles. Every appearance composes
+        Use <code>appearance</code> to pick any of the 12 visual styles. Every appearance composes
         with any <code>severity</code>.
       </span>
       <div class="buttons-demo__row buttons-demo__row--wrap">
@@ -70,6 +70,89 @@
             {{ a }}
           </ui-lib-button>
         }
+      </div>
+    </ui-lib-card>
+  </section>
+
+  <!-- ── Section: Glass Shadow ──────────────────────────────────────────────── -->
+  <section class="buttons-demo__section buttons-demo__section--glass-shadow">
+    <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
+      <span card-header>Glass Shadow</span>
+      <span card-subtitle>
+        A two-layer effect: a vivid gradient shadow offset behind a glassmorphic foreground button.
+        Hover shifts the shadow outward; active press snaps the button toward it.
+        Customize colors via <code>--uilib-button-glass-shadow-from</code> and
+        <code>--uilib-button-glass-shadow-to</code>.
+      </span>
+      <div class="buttons-demo__glass-shadow-showcase">
+        <!-- Default warm gradient -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Default (warm)</p>
+          <ui-lib-button
+            appearance="glass-shadow"
+            size="lg"
+            (click)="logEvent('Glass Shadow clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Cool blue-purple gradient -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Cool gradient</p>
+          <ui-lib-button
+            appearance="glass-shadow"
+            size="lg"
+            style="
+              --uilib-button-glass-shadow-from: #667eea;
+              --uilib-button-glass-shadow-to: #764ba2;
+            "
+            (click)="logEvent('Glass Shadow cool clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Mint green gradient -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Mint gradient</p>
+          <ui-lib-button
+            appearance="glass-shadow"
+            size="lg"
+            style="
+              --uilib-button-glass-shadow-from: #11998e;
+              --uilib-button-glass-shadow-to: #38ef7d;
+            "
+            (click)="logEvent('Glass Shadow mint clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Pill variant -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Pill modifier</p>
+          <ui-lib-button
+            appearance="glass-shadow"
+            size="lg"
+            [pill]="true"
+            (click)="logEvent('Glass Shadow pill clicked')"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
+
+        <!-- Disabled state -->
+        <div class="buttons-demo__glass-shadow-cell">
+          <p class="buttons-demo__glass-shadow-label">Disabled</p>
+          <ui-lib-button
+            appearance="glass-shadow"
+            size="lg"
+            [disabled]="true"
+          >
+            Glass Shadow
+          </ui-lib-button>
+        </div>
       </div>
     </ui-lib-card>
   </section>

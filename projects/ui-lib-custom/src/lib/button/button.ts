@@ -29,6 +29,7 @@ export type ButtonAppearance =
   | 'link'
   | 'soft'
   | 'glass'
+  | 'glass-shadow'
   | 'gradient'
   | 'elevated'
   | 'neon'

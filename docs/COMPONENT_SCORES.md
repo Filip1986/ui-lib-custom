@@ -336,6 +336,7 @@ Then update the table above and record the session in `AI_AGENT_CONTEXT.md`.
 
 | Document                                                                | Relevance                                            |
 |-------------------------------------------------------------------------|------------------------------------------------------|
-| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)   | The 6-phase AI workflow that produces these scores   |
+| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)             | **NEW (2026-05-11)** — Index of all 48 session prompts, work queue, and key focus areas |
+| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)   | The 6-phase AI workflow + 33 accumulated lessons from all hardenings |
 | [Vision — Component Philosophy](VISION.md#component-philosophy)         | The 10-layer quality model and ≥8 gate               |
 | [Accessibility Guide](reference/systems/ACCESSIBILITY.md)               | Detail behind the A11y score category                |

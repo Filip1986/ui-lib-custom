@@ -66,6 +66,7 @@ export class ButtonsComponent {
     'elevated',
     'gradient',
     'glass',
+    'glass-shadow',
     'neon',
     'tactile',
   ];
@@ -92,10 +93,10 @@ export class ButtonsComponent {
     },
     {
       name: 'appearance',
-      type: "'solid' | 'outline' | 'ghost' | 'soft' | 'link' | 'flat' | 'elevated' | 'gradient' | 'glass' | 'neon' | 'tactile'",
+      type: "'solid' | 'outline' | 'ghost' | 'soft' | 'link' | 'flat' | 'elevated' | 'gradient' | 'glass' | 'glass-shadow' | 'neon' | 'tactile'",
       default: "'solid'",
       description:
-        'Visual style. All 11 appearances compose with any severity and the pill / raised modifiers.',
+        'Visual style. All 12 appearances compose with any severity and the pill / raised modifiers.',
     },
     {
       name: 'severity',
