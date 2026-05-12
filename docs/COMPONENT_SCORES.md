@@ -68,7 +68,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | #    | Component  | Key a11y concern                                                                | Status     |
 |------|------------|---------------------------------------------------------------------------------|------------|
 | 32   | Table      | `role=grid`, column sort `aria-sort`, row selection `aria-selected`, pagination | ✅ Done     |
-| 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ⏳ Queued   |
+| 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ✅ Done    |
 | 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ⏳ Queued   |
 | 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ✅ Done     |
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done     |
@@ -227,13 +227,13 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component         | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-------------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Table             | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| TreeTable         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| TreeTable         | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Tree              | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | TreeSelect        | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | DataView          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | VirtualScroller   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Timeline          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | PickList          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -249,7 +249,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Alert           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Toast           | 9   | 10   | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
 | Badge           | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
-| Tag             | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Tag             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Chip            | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Message         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Skeleton        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -269,7 +269,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | SplitButton     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ImageCompare    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Upload          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Inplace         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ClassNames      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
