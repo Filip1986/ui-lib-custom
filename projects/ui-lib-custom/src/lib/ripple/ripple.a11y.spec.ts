@@ -218,7 +218,9 @@ describe('Ripple (a11y)', (): void => {
     const fixture: ComponentFixture<MultiRippleHost> =
       await createFixture<MultiRippleHost>(MultiRippleHost);
     const root: HTMLElement = fixture.nativeElement as HTMLElement;
-    const [btn1, btn2]: HTMLElement[] = Array.from(root.querySelectorAll<HTMLElement>('button'));
+    const buttons: HTMLElement[] = Array.from(root.querySelectorAll<HTMLElement>('button'));
+    const btn1: HTMLElement = buttons[0] as HTMLElement;
+    const btn2: HTMLElement = buttons[1] as HTMLElement;
     click(btn1);
     expect(btn1.querySelector('.ui-lib-ripple-wave')).not.toBeNull();
     expect(btn2.querySelector('.ui-lib-ripple-wave')).toBeNull();
