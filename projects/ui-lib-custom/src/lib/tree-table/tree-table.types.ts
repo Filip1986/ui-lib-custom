@@ -106,4 +106,14 @@ export interface TreeTableFlatNode {
   node: TreeTableNode;
   /** Zero-based nesting depth used for indentation. */
   depth: number;
+  /**
+   * Number of siblings at this depth level under the same parent (visible after filtering).
+   * Used for `aria-setsize`.
+   */
+  setsize: number;
+  /**
+   * 1-based position among siblings at this depth level under the same parent
+   * (visible after filtering). Used for `aria-posinset`.
+   */
+  posinset: number;
 }
