@@ -4,14 +4,18 @@ import {
   computed,
   inject,
   input,
+  output,
   ViewEncapsulation,
   type InputSignal,
+  type OutputEmitterRef,
   type Signal,
 } from '@angular/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { TagSeverity, TagSize, TagVariant } from './tag.types';
 
 export type { TagSeverity, TagSize, TagVariant } from './tag.types';
+
+let nextTagId: number = 0;
 
 /**
  * Tag — compact label for status, category, or classification.
@@ -33,13 +37,17 @@ export type { TagSeverity, TagSize, TagVariant } from './tag.types';
   host: {
     '[class]': 'hostClasses()',
     '[attr.aria-label]': 'value() ?? null',
-    role: 'status',
+    '[attr.role]': 'hostRole()',
+    '[id]': 'tagId',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class Tag {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+
+  /** Stable unique ID for this tag instance. */
+  public readonly tagId: string = `ui-lib-tag-${++nextTagId}`;
 
   /** Text displayed inside the tag. */
   public readonly value: InputSignal<string | null> = input<string | null>(null);
@@ -68,6 +76,15 @@ export class Tag {
   /** Additional CSS classes to attach to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
+  /** When true, a remove button is rendered at the end of the tag. */
+  public readonly dismissible: InputSignal<boolean> = input<boolean>(false);
+
+  /** CSS class for the remove icon (defaults to "pi pi-times"). */
+  public readonly removeIcon: InputSignal<string> = input<string>('pi pi-times');
+
+  /** Emitted when the remove button is clicked. */
+  public readonly removed: OutputEmitterRef<MouseEvent> = output<MouseEvent>();
+
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<TagVariant> = computed<TagVariant>(
     (): TagVariant => this.variant() ?? this.themeConfig.variant()
@@ -95,4 +112,20 @@ export class Tag {
   public readonly showIcon: Signal<boolean> = computed<boolean>(
     (): boolean => this.icon() !== null
   );
+
+  /** Accessible label for the remove button. */
+  public readonly removeAriaLabel: Signal<string> = computed<string>((): string => {
+    const tagValue: string | null = this.value();
+    return tagValue ? `Remove ${tagValue} tag` : 'Remove tag';
+  });
+
+  /** Host role is status by default, group when dismissible to allow nested button semantics. */
+  public readonly hostRole: Signal<string> = computed<string>((): string =>
+    this.dismissible() ? 'group' : 'status'
+  );
+
+  /** Emits remove event when dismiss button is clicked. */
+  public onRemoveClick(event: MouseEvent): void {
+    this.removed.emit(event);
+  }
 }
