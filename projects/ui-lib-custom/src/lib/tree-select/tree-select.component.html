@@ -47,8 +47,8 @@
     <!-- Tree component -->
     @if (nodes().length > 0) {
       <ui-lib-tree
-        [attr.id]="treeId"
-        [attr.aria-label]="treeAriaLabel()"
+        [hostId]="treeId"
+        [ariaLabel]="treeAriaLabel()"
         [value]="nodes()"
         [selectionMode]="selectionMode()"
         [variant]="variant()"

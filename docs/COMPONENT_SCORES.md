@@ -68,8 +68,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | #    | Component  | Key a11y concern                                                                | Status     |
 |------|------------|---------------------------------------------------------------------------------|------------|
 | 32   | Table      | `role=grid`, column sort `aria-sort`, row selection `aria-selected`, pagination | ✅ Done     |
-| 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ✅ Done    |
-| 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ⏳ Queued   |
+| 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ✅ Done     |
+| 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ✅ Done     |
 | 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ✅ Done     |
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done     |
 | 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
@@ -100,7 +100,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |------|-----------------|-----------------------------------------------------------|------------|
 | 51   | Card            | API composability, slot flexibility, hover/focus polish   | ✅ Done     |
 | 52   | Badge           | Positioning variants, `aria-label` passthrough            | ✅ Done     |
-| 53   | Tag             | Dismissible variant `aria-label`                          | ⏳ Queued   |
+| 53   | Tag             | Dismissible variant `aria-label`                          | ✅ Done     |
 | 54   | Chip            | Remove button label, image alt passthrough                | ✅ Done     |
 | 55   | Skeleton        | `aria-busy` on container, `aria-hidden` on placeholder    | ⏳ Queued   |
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ✅ Done     |
@@ -116,9 +116,9 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Queued   |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ⏳ Queued   |
 | 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ⏳ Queued   |
-| 69   | Upload          | Drop zone announcement, file list management              | ⏳ Queued   |
+| 69   | Upload          | Drop zone announcement, file list management              | ✅ Done     |
 | 70   | Terminal        | `role=log`, command input labeling                        | ⏳ Queued   |
-| 71   | Timeline        | Semantic list structure, orientation                      | ⏳ Queued   |
+| 71   | Timeline        | Semantic list structure, orientation                      | ✅ Done     |
 | 72   | Chart           | Accessible data table alternative, `aria-label`           | ✅ Done     |
 | 73   | FocusTrap       | Correct sentinel node strategy                            | ⏳ Queued   |
 | 74   | Ripple          | Motion respects `prefers-reduced-motion`                  | ✅ Done     |
@@ -228,7 +228,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |-------------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Table             | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | TreeTable         | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
-| Tree              | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Tree              | 9   | 8    | 9    | 9    | 9     | 9   | 8    | 8      | 9       | 8    | 8.6 | 🟢     |
 | TreeSelect        | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | DataView          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

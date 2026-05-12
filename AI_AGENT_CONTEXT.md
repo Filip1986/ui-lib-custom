@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** MeterGroup and Panel accessibility hardening COMPLETE (6-phase, #57/#60); Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
-- **Next queue:** TreeTable hardening (Tier 4, #33) — `role=treegrid`, hierarchy semantics, expanded state, keyboard navigation
+- **Active focus:** TreeTable (#33) and Timeline (#71) accessibility hardening COMPLETE (6-phase); Upload (#69), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Next queue:** Tree hardening (Tier 4, #34) — `role=tree`, `role=treeitem`, expand/collapse keyboard, aria-label
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -41,6 +41,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Ripple` -> ✅ complete + hardened (6-phase, score 8.7/10, 29 tests — 19 unit + 10 a11y)
 - `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
 - `Table` -> ✅ complete + hardened (6-phase, 125 tests — 92 unit + 33 a11y)
+- `TreeTable` -> ✅ complete + hardened (6-phase, score 8.5/10, 85 tests — 41 unit + 44 a11y)
+- `Timeline` -> ✅ complete + hardened (6-phase, score 8.3/10, 48 tests — 33 unit + 15 a11y)
 - `Card` -> ✅ complete + hardened (6-phase, score 9.0/10, 34 tests — 10 unit + 24 a11y)
 - `Badge` -> ✅ complete + hardened (6-phase, score 8.4/10, 25 tests — 13 unit + 12 a11y)
 - `Chip` -> ✅ complete + hardened (6-phase, score 8.5/10, 48 tests — 30 unit + 18 a11y)
@@ -63,43 +65,41 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Merge conflicts resolved for TreeSelect accessibility PR]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+  - projects/ui-lib-custom/src/lib/tree/tree.html
+  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+  - projects/ui-lib-custom/src/lib/tree/tree.scss
+  - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.html
+State: Merged `origin/main` into the TreeSelect accessibility branch and reconciled overlapping Tree/TreeSelect changes. Preserved TreeSelect popup-tree semantics while keeping the newer Tree host id/aria-label behavior and base-branch score/history updates.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Repo had to be unshallowed before merge. `npm install` was required again in the fresh shell.
+Next step: Commit the merge resolution and reply on the PR thread with the merge commit hash.
+
 Date: 2026-05-12 [TreeSelect component — accessibility hardening COMPLETE (#35)]
 Changed:
   - projects/ui-lib-custom/src/lib/tree/tree.ts
-      • Added module-level `nextTreeId` and generated tree ids
-      • Added visible-node metadata helpers for `aria-level`, `aria-setsize`, `aria-posinset`, visible-child lookup, and roving tabindex
-      • Added `aria-multiselectable`, improved ArrowRight/ArrowLeft behavior, and type-ahead support
-      • Synced focus state from treeitem movement and fixed host/child ArrowDown handling inside TreeSelect popup
   - projects/ui-lib-custom/src/lib/tree/tree.html
-      • Switched root list to `role="presentation"` and rendered visible root nodes only
-      • Passed sibling metadata into recursive tree nodes
   - projects/ui-lib-custom/src/lib/tree/tree-node.ts
-      • Added `setsize`/`posinset` inputs and focus callback into TreeContext
   - projects/ui-lib-custom/src/lib/tree/tree-node.html
-      • Added generated item ids, `aria-level`, `aria-setsize`, `aria-posinset`, `aria-disabled`, and checkbox `aria-checked`
-      • Marked toggle glyphs decorative and rendered visible children through TreeContext helpers
   - projects/ui-lib-custom/src/lib/tree/tree.scss
-      • Added `prefers-reduced-motion: reduce` override for tree transitions
   - projects/ui-lib-custom/src/lib/tree/tree-context.ts
-      • Expanded TreeContext contract with focus and structural metadata helpers
   - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.ts
-      • Added public instance id, popup tree id, live region id, selection announcement, and popup tree aria-label
-      • Added popup focus management, close-and-restore-focus behavior, and host-only open-key handling
-      • Bound host `aria-describedby` and conditional `aria-controls`
   - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.html
-      • Switched popup container away from dialog semantics and applied tree id/label directly to embedded tree
-      • Added polite live region for selection announcements
   - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.scss
-      • Added clear-button focus-visible styling, visually-hidden live region utility, and reduced-motion override
   - projects/ui-lib-custom/src/lib/tree-select/tree-select.component.spec.ts
-      • Updated aria-controls assertion for open-state tree linkage
-  - projects/ui-lib-custom/src/lib/tree-select/tree-select.a11y.spec.ts (CREATED — 38 tests)
-      • Added axe checks, combobox/tree ARIA assertions, live region coverage, keyboard navigation, focus restoration, and unique-id checks
+  - projects/ui-lib-custom/src/lib/tree-select/tree-select.a11y.spec.ts
   - projects/ui-lib-custom/src/lib/tree-select/README.md
-      • Rewrote API docs with ARIA table, keyboard table, accessibility notes, and CSS variable table
   - docs/COMPONENT_SCORES.md
-      • TreeSelect #35: ⏳ Queued → ✅ Done
-      • Data Display row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
 State: TreeSelect hardening complete. The component now follows the combobox + tree popup pattern with tree semantics from the hardened Tree component, closes and restores focus on single selection, announces selection changes through a polite live region, and has dedicated a11y regression coverage.
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-select/ projects/ui-lib-custom/src/lib/tree/ --max-warnings 0 (PASS)
@@ -109,64 +109,34 @@ Verification:
 Terminal notes: Fresh shell required `npm install` again before validation. Demo screenshot captured at `/tmp/tree-select-hardening.png`.
 Next step: TreeTable (#33) hardening — keep Tier 4 tree semantics aligned across treegrid and tree popup components.
 
-Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
+Date: 2026-05-12 [Tree — 6-phase hardening COMPLETE (#34)]
 Changed:
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
-      • Added module-level `nextMeterGroupId` counter and unique host `instanceId`
-      • Added `ariaLabel` input and wired group ARIA label to template
-      • Fixed segment percentage calculation to respect `min`/`max` range (`(value - min) / (max - min)`)
-      • Added computed `totalValue` + `totalAnnouncement` for live total announcements
-      • Added stable segment track helper and richer per-segment aria-label formatter
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.html
-      • Updated segment `@for` loops to use stable track keys
-      • Bound group `aria-label` to `ariaLabel` input
-      • Updated segment `aria-label` output to include value-range phrasing
-      • Added polite/atomic live region for total announcement text
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.scss
-      • Added visually-hidden live-region utility class
-      • Added `prefers-reduced-motion: reduce` override to disable meter transitions
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.spec.ts
-      • Added tests for custom group aria-label, min/max-relative percentage calculation, and unique host IDs
-  - projects/ui-lib-custom/src/lib/meter-group/meter-group.a11y.spec.ts (CREATED — 18 tests)
-      • Added ARIA structure, decorative aria-hidden, live region total updates, keyboard non-focusability, unique IDs, and axe checks
-  - projects/ui-lib-custom/src/lib/meter-group/README.md
-      • Added `ariaLabel` input docs, ARIA attributes table, keyboard interaction table, and expanded accessibility notes
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+      • Added module-level `let nextTreeId: number = 0` counter + `instanceId` property
+      • Added `ariaLabel` input; computed `hostAriaLabel()` / `hostAriaMultiselectable()` signals
+      • Host bindings: `[attr.id]`, `[attr.aria-label]`, `[attr.aria-multiselectable]`
+      • Replaced `expandFocusedNode`/`collapseFocusedNode` with `expandOrFocusChild`/`collapseOrFocusParent`
+      • Added `findParentTreeItem` (group-sibling traversal pattern, not raw ancestor chain)
+      • Added `focusItemByTypeAhead` method (alphanumeric type-ahead, wraps around, case-insensitive)
+  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
+      • Added `setsize` input (default 1) and `posinset` input (default 1)
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+      • Bound `aria-level`, `aria-setsize`, `aria-posinset`, `aria-disabled` on `[role="treeitem"]`
+      • Moved `aria-checked` from nested `role="checkbox"` span to the treeitem itself
+      • Checkbox span now has `aria-hidden="true"` (state lives on treeitem per WAI-ARIA)
+      • Passed `[setsize]` and `[posinset]` to recursive child nodes
+  - projects/ui-lib-custom/src/lib/tree/tree.html
+      • Fixed double `role="tree"`: inner `<ul>` changed to `role="none"` (host has `role="tree"`)
+      • Root `@for` loop passes `[setsize]="value().length"` and `[posinset]="i + 1"`
+  - projects/ui-lib-custom/src/lib/tree/tree.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
+  - projects/ui-lib-custom/src/lib/tree/tree.a11y.spec.ts (CREATED — 55 tests)
+  - projects/ui-lib-custom/src/lib/tree/README.md
   - docs/COMPONENT_SCORES.md
-      • MeterGroup #57 queue status: ⏳ Queued → ✅ Done
-      • MeterGroup score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
-State: MeterGroup hardening complete. Segment ARIA labels now include value context, totals are announced through a live region, unique instance IDs are generated, reduced-motion support is in place, and dedicated a11y regression coverage is added.
+State: Tree hardening complete. All critical WAI-ARIA tree pattern attributes (aria-level, aria-setsize, aria-posinset, aria-checked on treeitem, aria-disabled, aria-multiselectable) are in place. Type-ahead nav, ArrowLeft parent-focus, ArrowRight child-focus, and prefers-reduced-motion are implemented.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/meter-group/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=meter-group --no-coverage (45/45 PASS — 27 unit + 18 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/tree/" --no-coverage (93/93 PASS — 38 unit + 55 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]
-Changed:
-  - projects/ui-lib-custom/src/lib/panel/panel.a11y.spec.ts (CREATED — 23 tests)
-      • axe-core checks (4): basic, toggleable expanded, toggleable collapsed, all variants
-      • ARIA structure (5): role=region, aria-labelledby→header id, header id format, unique IDs, content id format
-      • Toggle button ARIA (6): absent when non-toggleable, aria-expanded true/false, aria-controls, accessible label, icon aria-hidden
-      • Content visibility ARIA (3): aria-hidden when collapsed, null when expanded, null when non-toggleable
-      • Keyboard interaction (3): Enter collapses, Space collapses, Enter expands collapsed panel
-      • Content projection (2): custom header rendered, aria-expanded present with custom header
-  - projects/ui-lib-custom/src/lib/panel/README.md
-      • Expanded CSS custom properties table (added font-size, font-weight, toggle-size entries)
-      • Added full ARIA attributes table (host, header div, content div, toggle button, toggle icon)
-      • Added keyboard interaction table (Tab, Enter, Space)
-      • Replaced one-liner accessibility section with detailed accessibility notes
-  - docs/COMPONENT_SCORES.md
-      • Panel #60: ⏳ Queued → ✅ Done in Tier 6 hardening queue
-      • Layout table: Panel row populated — 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
-State: Panel hardening complete. All ARIA attributes were already in place (role=region, aria-labelledby,
-  aria-expanded, aria-controls, aria-hidden, prefers-reduced-motion, unique IDs, :focus-visible ring).
-  Deliverable is the new 23-test a11y spec + expanded README documentation.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/panel/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=panel --no-coverage (110/110 PASS — 87 unit + 23 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+Terminal notes: `findParentTreeItem` required a group-sibling traversal strategy because the parent treeitem div and child group ul are siblings inside the component host, not parent-child.
+Next step: TreeSelect (#35) hardening — Tier 4, combobox + tree popup pattern.

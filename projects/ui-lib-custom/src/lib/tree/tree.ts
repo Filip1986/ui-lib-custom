@@ -73,7 +73,9 @@ let nextTreeId: number = 0;
     class: 'ui-lib-tree',
     '[class]': 'hostClasses()',
     role: 'tree',
-    '[attr.aria-multiselectable]': 'isMultiselectable() ? "true" : null',
+    '[attr.id]': 'resolvedHostId()',
+    '[attr.aria-label]': 'hostAriaLabel()',
+    '[attr.aria-multiselectable]': 'hostAriaMultiselectable()',
     '(keydown)': 'onKeydown($event)',
   },
   providers: [
@@ -89,10 +91,15 @@ export class Tree implements TreeContext {
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
 
+  /** Unique instance ID for this tree. */
+  public readonly instanceId: string = `ui-lib-tree-${nextTreeId++}`;
+
+  /** Unique prefix used for generated treeitem ids. */
+  public readonly treeId: string = this.instanceId;
+
   /** Reactive tick. Incremented after any tree mutation to force re-render. */
   private readonly tick: WritableSignal<number> = signal(0);
   private readonly focusedNodeKey: WritableSignal<string | null> = signal<string | null>(null);
-  public readonly treeId: string = `ui-lib-tree-${nextTreeId++}`;
 
   // ─── Inputs ────────────────────────────────────────────────────────────────
 
@@ -126,6 +133,12 @@ export class Tree implements TreeContext {
 
   /** Extra CSS class applied to the host element. */
   public readonly styleClass: InputSignal<string> = input<string>('');
+
+  /** Optional host id override. Falls back to the generated instance id. */
+  public readonly hostId: InputSignal<string | null> = input<string | null>(null);
+
+  /** Accessible label for the tree widget. Used as `aria-label` on the host. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -175,6 +188,24 @@ export class Tree implements TreeContext {
     ]
       .filter(Boolean)
       .join(' ')
+  );
+
+  /** Host id value — caller supplied when present, otherwise the generated instance id. */
+  public readonly resolvedHostId: Signal<string> = computed<string>(
+    (): string => this.hostId() || this.instanceId
+  );
+
+  /** `aria-label` value for the host — `null` when the input is empty. */
+  public readonly hostAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => this.ariaLabel() || null
+  );
+
+  /** `aria-multiselectable` for the host — `true` in multiple/checkbox modes, otherwise `null`. */
+  public readonly hostAriaMultiselectable: Signal<true | null> = computed<true | null>(
+    (): true | null => {
+      const selectionMode: TreeSelectionMode = this.selectionMode();
+      return selectionMode === 'multiple' || selectionMode === 'checkbox' ? true : null;
+    }
   );
 
   /** Map from node `type` → registered TemplateRef. */
@@ -267,10 +298,16 @@ export class Tree implements TreeContext {
     (): string | null => {
       const currentSelection: TreeNode | TreeNode[] | null = this.selection();
       const visibleKeys: Set<string> = new Set(
-        this.visibleNodeMetadata().map((metadata: VisibleTreeNodeMetadata): string => metadata.node.key)
+        this.visibleNodeMetadata().map(
+          (metadata: VisibleTreeNodeMetadata): string => metadata.node.key
+        )
       );
 
-      if (currentSelection && !Array.isArray(currentSelection) && visibleKeys.has(currentSelection.key)) {
+      if (
+        currentSelection &&
+        !Array.isArray(currentSelection) &&
+        visibleKeys.has(currentSelection.key)
+      ) {
         return currentSelection.key;
       }
 
@@ -290,16 +327,13 @@ export class Tree implements TreeContext {
   private readonly activeFocusableNodeKey: Signal<string | null> = computed<string | null>(
     (): string | null => {
       const focusedNodeKey: string | null = this.focusedNodeKey();
-      const metadataByKey: ReadonlyMap<string, VisibleTreeNodeMetadata> = this.visibleNodeMetadataByKey();
+      const metadataByKey: ReadonlyMap<string, VisibleTreeNodeMetadata> =
+        this.visibleNodeMetadataByKey();
       if (focusedNodeKey && metadataByKey.has(focusedNodeKey)) {
         return focusedNodeKey;
       }
       return this.defaultFocusableNodeKey();
     }
-  );
-
-  public readonly isMultiselectable: Signal<boolean> = computed<boolean>(
-    (): boolean => this.selectionMode() === 'multiple' || this.selectionMode() === 'checkbox'
   );
 
   // ─── TreeContext implementation ────────────────────────────────────────────
@@ -514,7 +548,7 @@ export class Tree implements TreeContext {
       event.preventDefault();
       const focused: HTMLElement | undefined = items[focusedIndex];
       if (focused) {
-        this.expandOrFocusChild(focused);
+        this.expandOrFocusChild(focused, items, focusedIndex);
       }
     } else if (key === KEYBOARD_KEYS.ArrowLeft && focusedIndex >= 0) {
       event.preventDefault();
@@ -522,9 +556,9 @@ export class Tree implements TreeContext {
       if (focused) {
         this.collapseOrFocusParent(focused);
       }
-    } else if (/^[a-zA-Z0-9]$/.test(key) && key.length === 1) {
+    } else if (key.length === 1 && /^[a-zA-Z0-9]$/.test(key)) {
       event.preventDefault();
-      this.focusItemByTypeAhead(items, focusedIndex, key);
+      this.focusItemByTypeAhead(key, items, focusedIndex);
     }
   }
 
@@ -668,23 +702,35 @@ export class Tree implements TreeContext {
     target.focus();
   }
 
-  private expandOrFocusChild(focused: HTMLElement): void {
+  private expandOrFocusChild(
+    focused: HTMLElement,
+    items: HTMLElement[],
+    focusedIndex: number
+  ): void {
     const toggleButton: HTMLElement | null =
       focused.querySelector<HTMLElement>('.uilib-tree-node-toggle');
-    if (toggleButton && !toggleButton.classList.contains('uilib-tree-node-toggle--expanded')) {
+    if (!toggleButton) {
+      return;
+    }
+
+    if (!toggleButton.classList.contains('uilib-tree-node-toggle--expanded')) {
       toggleButton.click();
       return;
     }
 
     const currentNodeContainer: HTMLElement | null = focused.closest('ui-lib-tree-node');
-    const firstChild: HTMLElement | null = currentNodeContainer?.querySelector<HTMLElement>(
-      ':scope > .uilib-tree-children .uilib-tree-node-row'
-    ) ?? null;
+    const firstChild: HTMLElement | null =
+      currentNodeContainer?.querySelector<HTMLElement>(
+        ':scope > .uilib-tree-children .uilib-tree-node-row'
+      ) ?? null;
 
     if (firstChild) {
       this.syncFocusedNodeFromElement(firstChild);
       firstChild.focus();
+      return;
     }
+
+    this.focusItemAtIndex(items, focusedIndex + 1);
   }
 
   private collapseOrFocusParent(focused: HTMLElement): void {
@@ -695,37 +741,59 @@ export class Tree implements TreeContext {
       return;
     }
 
-    const currentNodeContainer: HTMLElement | null = focused.closest('ui-lib-tree-node');
-    const parentNodeContainer: HTMLElement | null =
-      currentNodeContainer?.parentElement?.closest<HTMLElement>('ui-lib-tree-node') ?? null;
-    const parentRow: HTMLElement | null =
-      parentNodeContainer?.querySelector<HTMLElement>('.uilib-tree-node-row') ?? null;
-
-    if (parentRow) {
-      this.syncFocusedNodeFromElement(parentRow);
-      parentRow.focus();
+    const parentTreeItem: HTMLElement | null = this.findParentTreeItem(focused);
+    if (parentTreeItem) {
+      this.syncFocusedNodeFromElement(parentTreeItem);
+      parentTreeItem.focus();
     }
   }
 
-  private focusItemByTypeAhead(
-    items: HTMLElement[],
-    focusedIndex: number,
-    searchTerm: string
-  ): void {
+  private findParentTreeItem(focused: HTMLElement): HTMLElement | null {
+    let currentElement: HTMLElement | null = focused.parentElement;
+
+    while (currentElement) {
+      if (currentElement.getAttribute('role') === 'group') {
+        const hostElement: HTMLElement | null = currentElement.parentElement;
+        return hostElement
+          ? (hostElement.querySelector<HTMLElement>(':scope > [role="treeitem"]') ?? null)
+          : null;
+      }
+
+      currentElement = currentElement.parentElement;
+    }
+
+    return null;
+  }
+
+  private focusItemByTypeAhead(char: string, items: HTMLElement[], focusedIndex: number): void {
     if (items.length === 0) {
       return;
     }
 
-    const normalizedSearchTerm: string = searchTerm.toLowerCase();
+    const normalizedCharacter: string = char.toLowerCase();
     const startIndex: number = focusedIndex >= 0 ? focusedIndex + 1 : 0;
-    const wrappedItems: HTMLElement[] = [...items.slice(startIndex), ...items.slice(0, startIndex)];
-    const match: HTMLElement | undefined = wrappedItems.find((item: HTMLElement): boolean =>
-      (item.getAttribute('data-node-label') ?? '').toLowerCase().startsWith(normalizedSearchTerm)
-    );
 
-    if (match) {
-      this.syncFocusedNodeFromElement(match);
-      match.focus();
+    for (let offset: number = 0; offset < items.length; offset++) {
+      const index: number = (startIndex + offset) % items.length;
+      const item: HTMLElement | undefined = items[index];
+      if (!item) {
+        continue;
+      }
+
+      const dataNodeLabel: string =
+        item.getAttribute('data-node-label')?.trim().toLowerCase() ?? '';
+      const labelElement: Element | null = item.querySelector('.uilib-tree-node-label');
+      let labelText: string = '';
+      if (labelElement !== null) {
+        labelText = labelElement.textContent.trim().toLowerCase();
+      }
+      const sourceText: string = dataNodeLabel || labelText;
+
+      if (sourceText.startsWith(normalizedCharacter)) {
+        this.syncFocusedNodeFromElement(item);
+        item.focus();
+        return;
+      }
     }
   }
 

@@ -13,8 +13,8 @@
   </div>
 }
 
-<!-- Root nodes -->
-<ul class="uilib-tree-root" role="presentation">
+<!-- Root nodes — role="none" because role="tree" is on the host element -->
+<ul class="uilib-tree-root" role="none">
   @for (rootNode of visibleRootNodes(); track rootNode.key; let rootIndex = $index) {
     <li role="none">
       <ui-lib-tree-node
