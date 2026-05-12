@@ -4,6 +4,73 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [Timeline component — accessibility hardening COMPLETE (#71)]
+Changed:
+  - projects/ui-lib-custom/src/lib/timeline/timeline.component.ts
+      • Renamed the module-level counter to `nextTimelineId` and bound a unique host `id` per instance
+      • Replaced generic per-item aria labels with `aria-labelledby` wiring based on generated content/opposite ids
+      • Added fallback event text generation from common item fields and a stable `trackItem()` helper
+  - projects/ui-lib-custom/src/lib/timeline/timeline.component.html
+      • Added generated ids for content/opposite regions used by each listitem's accessible name
+      • Added default content rendering when no content template is supplied
+      • Marked decorative connectors and default marker dots as `aria-hidden="true"`
+  - projects/ui-lib-custom/src/lib/timeline/timeline.component.scss
+      • Added focus-within ring styling for projected interactive content
+      • Added dark-mode token overrides for bootstrap/minimal variants
+      • Added `prefers-reduced-motion: reduce` override for marker transitions
+  - projects/ui-lib-custom/src/lib/timeline/timeline.component.spec.ts
+      • Updated accessibility assertions for generated ids / `aria-labelledby`
+      • Added fallback-content and host-id regression coverage
+  - projects/ui-lib-custom/src/lib/timeline/timeline.a11y.spec.ts (CREATED — 15 tests)
+      • Added ARIA structure, decorative aria-hidden, keyboard/tab-order, unique-id, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/timeline/README.md
+      • Added ARIA attributes table, keyboard interaction section, accessibility notes, and CSS custom properties table
+  - docs/reference/components/TIMELINE.md
+      • Synced public docs with the new accessibility behaviour and focus/reduced-motion notes
+  - docs/COMPONENT_SCORES.md
+      • Timeline #71 queue status: ⏳ Queued → ✅ Done
+      • Data Display score row populated (API 8, A11y 9, Perf 8, Comp 8, Theme 8, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.3)
+State: Timeline hardening complete. The component now exposes stable host ids, semantic listitem names derived from visible event content, decorative separators are hidden from assistive tech, reduced-motion handling is in place, and dedicated a11y regression coverage was added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/timeline/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=timeline --no-coverage (48/48 PASS — 33 unit + 15 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`; Playwright browser install was needed for the demo screenshot. Screenshot captured at `/tmp/timeline-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
+Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
+      • Added module-level `let nextProgressSpinnerId: number = 0` counter
+      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
+      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
+      • Added dark mode overrides for bootstrap and minimal variant arc colours
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
+      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
+      • ariaLabel reactive updates, two-instance ID uniqueness
+      • Visual state (size classes sm/lg)
+      • axe-core automated checks (5 states)
+  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
+      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
+  - docs/COMPONENT_SCORES.md
+      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
+State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
+Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
+
+---
+
 Date: 2026-05-11 [BlockUI component — accessibility hardening COMPLETE (#64)]
 Changed:
   - projects/ui-lib-custom/src/lib/block-ui/block-ui.ts

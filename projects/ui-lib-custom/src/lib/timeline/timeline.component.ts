@@ -25,7 +25,7 @@ import {
 } from './timeline-template-directives';
 import { TIMELINE_DEFAULTS } from './timeline.constants';
 /** Monotonic counter for unique Timeline element IDs. */
-let timelineIdCounter: number = 0;
+let nextTimelineId: number = 0;
 /**
  * Timeline component — renders a series of events along a vertical or horizontal axis.
  *
@@ -51,6 +51,7 @@ let timelineIdCounter: number = 0;
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'hostClasses()',
+    '[attr.id]': 'instanceId',
     '[attr.aria-label]': 'ariaLabel()',
     role: 'list',
   },
@@ -58,7 +59,7 @@ let timelineIdCounter: number = 0;
 export class TimelineComponent<T> {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   /** Unique instance id used for accessibility attributes. */
-  public readonly instanceId: string = `ui-lib-timeline-${(timelineIdCounter += 1)}`;
+  public readonly instanceId: string = `ui-lib-timeline-${nextTimelineId++}`;
   // ---------------------------------------------------------------------------
   // Inputs
   // ---------------------------------------------------------------------------
@@ -140,8 +141,109 @@ export class TimelineComponent<T> {
       })
     );
   });
-  /** Returns the aria label for an individual event item. */
-  public eventAriaLabel(index: number): string {
+
+  /** Returns a stable track key for the rendered item. */
+  public trackItem(index: number, context: TimelineItemContext<T>): unknown {
+    const item: T = context.$implicit;
+    if (this.isRecord(item)) {
+      const explicitId: string | number | null =
+        this.readTrackValue(item, 'id') ?? this.readTrackValue(item, 'key');
+      return explicitId ?? item;
+    }
+    return item ?? index;
+  }
+
+  /** Returns the element id used by an individual content container. */
+  public eventContentId(index: number): string {
+    return `${this.instanceId}-content-${index}`;
+  }
+
+  /** Returns the element id used by an individual opposite container. */
+  public eventOppositeId(index: number): string {
+    return `${this.instanceId}-opposite-${index}`;
+  }
+
+  /** Returns the ids that provide the accessible name for an event. */
+  public eventLabelledBy(context: TimelineItemContext<T>): string {
+    const labelledByIds: string[] = [this.eventContentId(context.index)];
+    if (this.oppositeTemplate()) {
+      labelledByIds.push(this.eventOppositeId(context.index));
+    }
+    return labelledByIds.join(' ');
+  }
+
+  /** Returns the fallback content rendered when no content template is provided. */
+  public defaultEventContent(item: T, index: number): string {
+    if (
+      typeof item === 'string' ||
+      typeof item === 'number' ||
+      typeof item === 'boolean' ||
+      typeof item === 'bigint'
+    ) {
+      return String(item);
+    }
+
+    if (this.isRecord(item)) {
+      const primaryText: string | null = this.readItemText(item, [
+        'ariaLabel',
+        'title',
+        'label',
+        'name',
+        'status',
+      ]);
+      const secondaryText: string | null = this.readItemText(item, [
+        'date',
+        'description',
+        'subtitle',
+      ]);
+
+      if (primaryText && secondaryText && primaryText !== secondaryText) {
+        return `${primaryText} — ${secondaryText}`;
+      }
+
+      if (primaryText) {
+        return primaryText;
+      }
+
+      if (secondaryText) {
+        return secondaryText;
+      }
+    }
+
     return `Event ${index + 1}`;
+  }
+
+  private isRecord(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null;
+  }
+
+  private readTrackValue(record: Record<string, unknown>, key: string): string | number | null {
+    const value: unknown = record[key];
+    if (typeof value === 'string') {
+      const trimmedValue: string = value.trim();
+      return trimmedValue.length > 0 ? trimmedValue : null;
+    }
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return value;
+    }
+    return null;
+  }
+
+  private readItemText(record: Record<string, unknown>, keys: readonly string[]): string | null {
+    for (const key of keys) {
+      const value: unknown = record[key];
+      if (
+        typeof value === 'string' ||
+        typeof value === 'number' ||
+        typeof value === 'boolean' ||
+        typeof value === 'bigint'
+      ) {
+        const text: string = String(value).trim();
+        if (text.length > 0) {
+          return text;
+        }
+      }
+    }
+    return null;
   }
 }
