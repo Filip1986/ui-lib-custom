@@ -201,10 +201,11 @@ describe('InputOtp Accessibility', (): void => {
     fixture.detectChanges();
     dispatchPaste('a1b2');
     const renderedCells: HTMLInputElement[] = cells();
-    expect(renderedCells[0].value).toBe('1');
-    expect(renderedCells[1].value).toBe('2');
-    expect(renderedCells[2].value).toBe('');
-    expect(renderedCells[3].value).toBe('');
+    expect(renderedCells.length).toBe(4);
+    expect(renderedCells[0]!.value).toBe('1');
+    expect(renderedCells[1]!.value).toBe('2');
+    expect(renderedCells[2]!.value).toBe('');
+    expect(renderedCells[3]!.value).toBe('');
   });
 
   it('supports custom group aria-label input', (): void => {
