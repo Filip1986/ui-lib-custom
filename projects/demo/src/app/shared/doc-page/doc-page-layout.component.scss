@@ -1,20 +1,19 @@
 :host {
   display: block;
-  --doc-rail-width: 250px;
+  --doc-rail-width: 220px;
   --doc-top-offset: 96px;
   --doc-anchor-offset: 96px;
 }
 
 .doc-page {
   display: block;
-  --doc-max-width: 1400px;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
 }
 
 .doc-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.25rem, 2vw, 2.5rem);
+  gap: clamp(1.5rem, 2.5vw, 3rem);
   align-items: flex-start;
 
   @media (min-width: 1025px) {
@@ -30,47 +29,26 @@
 .doc-body {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3rem;
 }
 
-.doc-rail {
-  width: 100%;
-  max-width: var(--doc-rail-width);
+/* Rail: sticky right column, hidden below 1025 px */
+.demo-page-rail {
   position: sticky;
   top: var(--doc-top-offset);
   align-self: start;
-  z-index: 1;
-  max-height: none;
-  overflow: visible;
-}
 
-.doc-rail__inner {
-  position: static;
-  max-height: none;
-  overflow: visible;
-}
-
-.doc-rail > ui-lib-card,
-.doc-rail__inner > ui-lib-card {
-  position: static;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 :host ::ng-deep [data-doc-anchor] {
   scroll-margin-top: var(--doc-anchor-offset);
 }
 
-@media (max-width: 1024px) {
-  .doc-layout {
-    gap: 1.25rem;
-  }
-
-  .doc-rail {
-    display: none;
-  }
-}
-
 @media (max-width: 768px) {
   .doc-page {
-    padding: 0 0 1.5rem;
+    padding-bottom: 2rem;
   }
 }
