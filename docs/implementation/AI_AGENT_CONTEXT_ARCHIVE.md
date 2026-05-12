@@ -37,6 +37,46 @@ Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 ---
 
+Date: 2026-05-12 [Upload component — 6-phase hardening COMPLETE (#69)]
+Changed:
+  - projects/ui-lib-custom/src/lib/upload/upload.component.ts
+      • Added module-level `let nextUploadId: number = 0` counter
+      • Added `instanceId`, `fileInputId` (stable HTML id per instance)
+      • Added `dragStatusMessage: WritableSignal<string>` for polite live-region announcements
+      • Updated `onDragEnter` to set drag status message; `onDragLeave`/`onDrop` to clear it
+  - projects/ui-lib-custom/src/lib/upload/upload.component.html
+      • Added visually-hidden `<label [for]="fileInputId">` for the hidden file input
+      • Added `[id]="fileInputId"` to `<input type="file">`
+      • Updated drop zone `aria-label` from "File upload drop zone" to "File upload area"
+      • Added `aria-live="polite"` / `aria-atomic="true"` drag-status live region
+  - projects/ui-lib-custom/src/lib/upload/upload.component.scss
+      • Added `.ui-lib-upload__sr-only` visually-hidden utility class
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables all transitions
+  - projects/ui-lib-custom/src/lib/upload/upload.a11y.spec.ts (CREATED — 25 tests)
+      • Toolbar semantics (5): role=toolbar, button text, aria-disabled default, disabled host
+      • Drop zone semantics (3): role=region, aria-label, aria-disabled states
+      • File input (4): aria-hidden, tabindex, unique id, label association
+      • File list semantics (4): role=list, aria-label, listitem, aria-label per remove btn
+      • Validation (2): role=alert + aria-live, dismiss button aria-label
+      • Drag-over live region (4): presence, default empty, drag-enter, drag-leave
+      • Unique IDs (1): two-instance ID uniqueness
+      • Keyboard interaction (2): Choose focusable, remove focusable
+      • axe-core checks (5): default, with files, with errors, disabled, drag-over
+  - projects/ui-lib-custom/src/lib/upload/README.md
+      • Added ARIA attributes table (28 rows), keyboard interaction table, CSS custom properties table, accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Upload #69: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
+State: Upload hardening complete. Unique instance IDs, drag-over live region, reduced-motion, file-input label, and 25-test a11y regression suite all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/upload/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=upload --no-coverage (66/66 PASS — 36 unit + 30 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: jsdom does not support DragEvent — used `fakeDragEvent()` stub. `children[0]` array access flagged by TypeScript `noUncheckedIndexedAccess`; replaced with `fixture.debugElement.query(By.directive(UploadComponent)).componentInstance`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
 Date: 2026-05-12 [Timeline component — accessibility hardening COMPLETE (#71)]
 Changed:
   - projects/ui-lib-custom/src/lib/timeline/timeline.component.ts

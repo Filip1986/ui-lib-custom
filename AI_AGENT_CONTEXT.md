@@ -69,6 +69,20 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE]
+Changed:
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Resolved additive archive conflict by keeping the Skeleton handoff alongside entries already on `origin/main`
+      • Archived the prior Upload handoff to keep only the newest 3 entries in the active context file
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
+      • Resolved formatting-only merge conflict in pagination live-region coverage without changing assertions
+State: The Skeleton PR branch now has a true merge commit against the current `origin/main`. Remaining conflicts were limited to the archive handoff log and a formatting-only overlap in the Table accessibility spec.
+Verification:
+  node_modules/.bin/jest --testPathPatterns=table.a11y --no-coverage (88/88 PASS — table + tree-table a11y suites)
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the real merge. Fresh session also required `npm install` before Jest and the pinned TypeScript toolchain were available.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
 Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
 Changed:
   - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
@@ -146,45 +160,4 @@ Verification:
   npx jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: axe-core 4.11.1 flagged checkbox `<span role="checkbox">` with no accessible name (`aria-toggle-field-name`) and the `<th>` with only `aria-label` but no text content (`empty-table-header`). Fixed by adding `aria-label="Select all rows/row"` to spans and a `.uilib-tree-table-sr-only` span inside the header th.
 Next step: Tree (#34) hardening — `role=tree`, `role=treeitem`, expand/collapse keyboard navigation.
-
-
-Date: 2026-05-12 [Upload component — 6-phase hardening COMPLETE (#69)]
-Changed:
-  - projects/ui-lib-custom/src/lib/upload/upload.component.ts
-      • Added module-level `let nextUploadId: number = 0` counter
-      • Added `instanceId`, `fileInputId` (stable HTML id per instance)
-      • Added `dragStatusMessage: WritableSignal<string>` for polite live-region announcements
-      • Updated `onDragEnter` to set drag status message; `onDragLeave`/`onDrop` to clear it
-  - projects/ui-lib-custom/src/lib/upload/upload.component.html
-      • Added visually-hidden `<label [for]="fileInputId">` for the hidden file input
-      • Added `[id]="fileInputId"` to `<input type="file">`
-      • Updated drop zone `aria-label` from "File upload drop zone" to "File upload area"
-      • Added `aria-live="polite"` / `aria-atomic="true"` drag-status live region
-  - projects/ui-lib-custom/src/lib/upload/upload.component.scss
-      • Added `.ui-lib-upload__sr-only` visually-hidden utility class
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables all transitions
-  - projects/ui-lib-custom/src/lib/upload/upload.a11y.spec.ts (CREATED — 25 tests)
-      • Toolbar semantics (5): role=toolbar, button text, aria-disabled default, disabled host
-      • Drop zone semantics (3): role=region, aria-label, aria-disabled states
-      • File input (4): aria-hidden, tabindex, unique id, label association
-      • File list semantics (4): role=list, aria-label, listitem, aria-label per remove btn
-      • Validation (2): role=alert + aria-live, dismiss button aria-label
-      • Drag-over live region (4): presence, default empty, drag-enter, drag-leave
-      • Unique IDs (1): two-instance ID uniqueness
-      • Keyboard interaction (2): Choose focusable, remove focusable
-      • axe-core checks (5): default, with files, with errors, disabled, drag-over
-  - projects/ui-lib-custom/src/lib/upload/README.md
-      • Added ARIA attributes table (28 rows), keyboard interaction table, CSS custom properties table, accessibility section
-  - docs/COMPONENT_SCORES.md
-      • Upload #69: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: Upload hardening complete. Unique instance IDs, drag-over live region, reduced-motion, file-input label, and 25-test a11y regression suite all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/upload/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=upload --no-coverage (66/66 PASS — 36 unit + 30 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: jsdom does not support DragEvent — used `fakeDragEvent()` stub. `children[0]` array access flagged by TypeScript `noUncheckedIndexedAccess`; replaced with `fixture.debugElement.query(By.directive(UploadComponent)).componentInstance`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-
 
