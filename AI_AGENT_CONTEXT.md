@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), Timeline (#71) and Upload (#69) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
+- **Active focus:** ScrollTop (#75), ScrollPanel (#62), SplitButton (#68), TreeTable (#33), Tree (#34), Timeline (#71) and Upload (#69) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** TreeSelect hardening (Tier 4, #35) — combobox + tree popup pattern
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -56,6 +56,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Panel` -> ✅ complete + hardened (6-phase, score 9.0/10, 110 tests — 87 unit + 23 a11y)
 - `ScrollPanel` -> ✅ complete + hardened (6-phase, score 8.9/10, 29 tests — 13 unit + 16 a11y)
 - `ScrollTop` -> ✅ complete + hardened (6-phase, score 8.4/10, 37 tests — 23 unit + 14 a11y)
+- `SplitButton` -> ✅ complete + hardened (6-phase, score 8.6/10, 78 tests — 56 unit + 22 a11y)
 
 ---
 
@@ -70,114 +71,53 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
+Date: 2026-05-12 [SplitButton PR — merge conflict resolution COMPLETE (round 5)]
 Changed:
   - AI_AGENT_CONTEXT.md
-      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
-      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
+      • Resolved additive handoff conflicts against the newer upstream tracking state from `origin/main`
+      • Kept only the newest 3 active handoffs by moving the older Skeleton merge-resolution handoff into the archive
+  - docs/COMPONENT_SCORES.md
+      • Preserved SplitButton #68 as ✅ Done while keeping upstream Terminal #70 as ✅ Done
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
-State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
+      • Preserved the existing SplitButton/ScrollTop archive history and archived the older Skeleton round-2 merge handoff from the active context
+State: The SplitButton PR branch now reconciles the latest `origin/main` tracking-file conflicts without losing existing SplitButton completion records or the newer upstream bookkeeping from main.
 Verification:
+  node_modules/.bin/jest --testPathPatterns='split-button|terminal|entry-points' --no-coverage (PASS)
   npm run typecheck (PASS)
-Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before the real merge. Fresh session also required `npm install` before Jest and the pinned local TypeScript toolchain were available.
 Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
 
-Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Date: 2026-05-12 [SplitButton PR — merge conflict resolution COMPLETE (round 4)]
 Changed:
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
-      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
-      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
-      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
-      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
-      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
-      • Bound button aria-label to the resolved non-empty label
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
-      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
-      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
-  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
-      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
-  - projects/ui-lib-custom/src/lib/scroll-top/README.md
-      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
-  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
-      • Updated API table docs to reflect the new default button aria-label
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflicts against the newer Terminal changes from `origin/main`
+      • Kept only the newest 3 active handoffs by moving the older ScrollTop handoff into the archive
   - docs/COMPONENT_SCORES.md
-      • ScrollTop #75: ⏳ Queued → ✅ Done
-      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
-State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
-Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE]
-Changed:
+      • Preserved SplitButton #68 as ✅ Done while also keeping upstream Terminal #70 as ✅ Done
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Resolved additive archive conflict by keeping the Skeleton handoff alongside entries already on `origin/main`
-      • Archived the prior Upload handoff to keep only the newest 3 entries in the active context file
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
-      • Resolved formatting-only merge conflict in pagination live-region coverage without changing assertions
-State: The Skeleton PR branch now has a true merge commit against the current `origin/main`. Remaining conflicts were limited to the archive handoff log and a formatting-only overlap in the Table accessibility spec.
+      • Preserved the existing SplitButton/Skeleton archive history and added the older ScrollTop handoff from the active context
+State: The SplitButton PR branch now reconciles the latest `origin/main` tracking-file conflicts without losing existing SplitButton completion records or the newer upstream Terminal updates from main.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Continue with Tier 6 queue — Tag (#53), Skeleton (#55), Divider (#58) or Toolbar (#59).
-
-Date: 2026-05-12 [TreeTable component — accessibility hardening COMPLETE (#33)]
-Changed:
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.types.ts
-      • Added `setsize: number` and `posinset: number` fields to `TreeTableFlatNode`
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.ts
-      • Added module-level `let nextTreeTableId: number = 0` counter
-      • Added `ElementRef` injection and `instanceId` property
-      • Added `ariaLabel` input signal (falls back to caption, then 'Tree table')
-      • Updated `buildFlatList` to compute `setsize` and `posinset` per sibling group
-      • Fixed `onKeydown` to scope row query to host element (was `document.querySelectorAll`)
-      • Added `ArrowRight` expand/navigate-child and `ArrowLeft` collapse/parent keyboard handlers
-      • Added `findNodeByKey` private helper for keyboard expand/collapse
-      • Added `focusParentRow` private helper for ArrowLeft parent navigation
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.html
-      • Updated `aria-label` binding to use `ariaLabel() || caption() || 'Tree table'`
-      • Added `[attr.aria-setsize]`, `[attr.aria-posinset]`, `[attr.aria-rowindex]`, `[attr.data-key]` on body rows
-      • Added `role="gridcell"` on checkbox selection `<td>` with `aria-colindex="1"`
-      • Added `[attr.role]` on data `<td>` (rowheader on expander column, gridcell on others) + `[attr.aria-colindex]`
-      • Added `aria-label="Select all rows"` + visually-hidden text to header checkbox span
-      • Added `aria-label="Select row"` to row checkbox spans
-      • Added `.uilib-tree-table-sr-only` span inside header selection `<th>` for `empty-table-header` axe rule
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.scss
-      • Added `.uilib-tree-table-sr-only` visually-hidden utility class
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
-  - projects/ui-lib-custom/src/lib/tree-table/tree-table.a11y.spec.ts (CREATED — 44 tests)
-      • ARIA structure (treegrid role, aria-label, ariaLabel input, caption fallback, default fallback)
-      • Row roles and aria-level at each depth (level 1, 2, 3)
-      • aria-expanded true/false/absent for expanded/collapsed/leaf rows; expand and collapse via toggle
-      • aria-setsize and aria-posinset for root rows, child rows, single-child grandchildren
-      • Cell roles (rowheader, gridcell, checkbox gridcell, aria-colindex)
-      • Keyboard: ArrowDown/Up navigation, clamping, ArrowRight expand, ArrowRight navigate-child, ArrowRight leaf no-op, ArrowLeft collapse, ArrowLeft parent navigation, ArrowLeft root no-op, Home/End
-      • Unique instanceId per instance, format check
-      • Empty table structure
-      • axe-core: empty, one-level, two-level expanded, collapsed, checkbox modes
-  - projects/ui-lib-custom/src/lib/tree-table/README.md
-      • Added `ariaLabel` input, ARIA structure diagram, ARIA attributes table, keyboard interaction table, CSS vars table, accessibility notes
-  - docs/COMPONENT_SCORES.md
-      • TreeTable #33: ⏳ Queued → ✅ Done
-      • Data Display table: TreeTable row populated (API 9, A11y 9, Perf 8, Comp 8, Theme 8, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
-State: TreeTable hardening complete. aria-setsize/posinset, role="rowheader"/gridcell, ArrowRight/ArrowLeft keyboard navigation, ElementRef-scoped row queries, prefers-reduced-motion SCSS, and SR-only accessible names for checkbox spans all in place. 44-test a11y regression suite covers full treegrid WAI-ARIA pattern.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-table/ --max-warnings 0 (PASS)
-  npx jest --testPathPatterns=tree-table --no-coverage (85/85 PASS — 41 unit + 44 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  npx jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: axe-core 4.11.1 flagged checkbox `<span role="checkbox">` with no accessible name (`aria-toggle-field-name`) and the `<th>` with only `aria-label` but no text content (`empty-table-header`). Fixed by adding `aria-label="Select all rows/row"` to spans and a `.uilib-tree-table-sr-only` span inside the header th.
-Next step: Tree (#34) hardening — `role=tree`, `role=treeitem`, expand/collapse keyboard navigation.
-node_modules/.bin/jest --testPathPatterns=table.a11y --no-coverage (88/88 PASS — table + tree-table a11y suites)
+  node_modules/.bin/jest --testPathPatterns='split-button|terminal|entry-points' --no-coverage (PASS)
   npm run typecheck (PASS)
-Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the real merge. Fresh session also required `npm install` before Jest and the pinned TypeScript toolchain were available.
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before the real merge. Fresh session also required `npm install` before Jest and the pinned local TypeScript toolchain were available.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
+Date: 2026-05-12 [SplitButton PR — merge conflict resolution COMPLETE (round 3)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflicts against the newer Skeleton merge-resolution notes from `origin/main`
+      • Kept SplitButton marked complete in the active focus list while limiting recent handoffs to the newest 3 entries
+  - docs/COMPONENT_SCORES.md
+      • Preserved SplitButton #68 as ✅ Done while keeping upstream Skeleton/ScrollTop status updates intact
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived the older SplitButton handoff while preserving the upstream Skeleton archive history
+State: The SplitButton PR branch now reconciles the latest `origin/main` tracking-file conflicts without losing the existing SplitButton completion records or the newer Skeleton updates from main.
+Verification:
+  node_modules/.bin/jest --testPathPatterns='split-button|skeleton|entry-points' --no-coverage (PASS)
+  npm run typecheck (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before the real merge. Fresh session also required `npm install` before Jest and the pinned local TypeScript toolchain were available.
 Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.

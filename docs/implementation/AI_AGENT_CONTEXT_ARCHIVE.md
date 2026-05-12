@@ -4,6 +4,97 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
+      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
+State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
+Verification:
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE]
+Changed:
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Resolved additive archive conflict by keeping the Skeleton handoff alongside entries already on `origin/main`
+      • Archived the prior Upload handoff to keep only the newest 3 entries in the active context file
+  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
+      • Resolved formatting-only merge conflict in pagination live-region coverage without changing assertions
+State: The Skeleton PR branch now has a true merge commit against the current `origin/main`. Remaining conflicts were limited to the archive handoff log and a formatting-only overlap in the Table accessibility spec.
+Verification:
+  node_modules/.bin/jest --testPathPatterns=table.a11y --no-coverage (88/88 PASS — table + tree-table a11y suites)
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the real merge. Fresh session also required `npm install` before Jest and the pinned TypeScript toolchain were available.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
+
+Date: 2026-05-12 [SplitButton component — accessibility hardening COMPLETE (#68)]
+Changed:
+  - projects/ui-lib-custom/src/lib/split-button/split-button.component.ts
+      • Renamed the module-level instance counter to `nextSplitButtonId`, exposed a public `instanceId`, and bound it to the host `id`
+      • Added `resolvedButtonAriaLabel` fallback logic for icon-only primary buttons without projected text
+      • Added stable per-item track keys/IDs for menu rendering
+      • Switched URL opening to `document.defaultView?.open(...)` for safer browser-only access
+  - projects/ui-lib-custom/src/lib/split-button/split-button.component.html
+      • Marked default decorative icons as `aria-hidden="true"`
+      • Wired primary button accessible-name fallback and stable `@for` tracking
+      • Kept menu trigger/menu/item ARIA semantics aligned with the hardened menu-button pattern
+  - projects/ui-lib-custom/src/lib/split-button/split-button.component.scss
+      • Added `prefers-reduced-motion: reduce` overrides for button/menu transitions and loading/menu animations
+  - projects/ui-lib-custom/src/lib/split-button/split-button.a11y.spec.ts (CREATED — 22 tests)
+      • Added ARIA structure assertions, keyboard-navigation coverage, unique-ID checks, decorative-icon checks, and axe-core validation
+  - projects/ui-lib-custom/src/lib/split-button/README.md
+      • Rewrote the README with full inputs/outputs, ARIA table, keyboard table, CSS custom properties table, and accessibility notes
+  - docs/reference/components/SPLITBUTTON.md
+      • Synced reference docs with icon-only accessible-name fallback, decorative icon handling, unique IDs, and reduced-motion behavior
+  - docs/reference/components/README.md
+      • Added SplitButton hardening highlights to the component index
+  - docs/COMPONENT_SCORES.md
+      • SplitButton #68: ⏳ Queued → ✅ Done; populated score row (API 9, A11y 9, Perf 8, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.6)
+State: SplitButton hardening complete. Menu-button ARIA behavior remains intact, icon-only primary actions now get a safe accessible-name fallback, decorative icons are hidden from assistive tech, reduced-motion support is explicit, and a dedicated 22-test accessibility suite is in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/split-button/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=split-button --no-coverage (78/78 PASS — 56 unit + 22 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/split-button-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
+Changed:
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.ts
+      • Added module-level `nextScrollTopId` counter and unique host `scrollTopId`
+      • Switched window access to `DOCUMENT`/`defaultView` for SSR-safe scroll handling
+      • Added non-empty `resolvedButtonAriaLabel` fallback (`'Scroll to top'`)
+      • Synced initial visibility on init and kept hidden state reflected through host `aria-hidden`
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.html
+      • Added hidden-state `aria-hidden` + `tabindex="-1"` handling on the button
+      • Bound button aria-label to the resolved non-empty label
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.scss
+      • Kept the existing focus-visible ring, added reduced-motion overrides, and added dark-mode overrides for material/bootstrap variants
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.spec.ts
+      • Updated default aria-label expectations and added coverage for fallback labels, hidden focusability, icon aria-hidden, and unique host ids
+  - projects/ui-lib-custom/src/lib/scroll-top/scroll-top.a11y.spec.ts (CREATED — 14 tests)
+      • Added ARIA structure, hidden/visible keyboard focusability, unique ids, threshold visibility, parent-target visibility, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/scroll-top/README.md
+      • Expanded CSS custom properties documentation, ARIA table, keyboard table, and accessibility notes
+  - projects/demo/src/app/pages/scroll-top/scroll-top-demo.component.html
+      • Updated API table docs to reflect the new default button aria-label
+  - docs/COMPONENT_SCORES.md
+      • ScrollTop #75: ⏳ Queued → ✅ Done
+      • Utilities & Directives table populated (API 8, A11y 9, Perf 8, Comp 8, Theme 9, DX 8, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.4)
+State: ScrollTop hardening complete. Hidden instances are now removed from the accessibility tree and tab order, the default label is guaranteed for the icon-only button, unique ids and SSR-safe scroll access are in place, and dedicated a11y regression coverage was added.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-top/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=scroll-top --no-coverage (37/37 PASS — 23 unit + 14 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
 Date: 2026-05-12 [Skeleton component — 6-phase hardening COMPLETE (#55)]
 Changed:
   - projects/ui-lib-custom/src/lib/skeleton/skeleton.ts
