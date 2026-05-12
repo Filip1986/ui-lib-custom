@@ -1,7 +1,7 @@
 <div
   class="ui-lib-tree-select__trigger"
   (click)="togglePanel($event)"
-  [attr.aria-owns]="panelId"
+  [attr.aria-controls]="panelVisible() ? treeId : null"
 >
   <!-- Value / placeholder display -->
   <span
@@ -43,15 +43,12 @@
 
 <!-- Dropdown panel -->
 @if (panelVisible()) {
-  <div
-    class="ui-lib-tree-select__panel"
-    [id]="panelId"
-    role="dialog"
-    [attr.aria-label]="ariaLabel() || placeholder()"
-  >
+  <div class="ui-lib-tree-select__panel" [id]="panelId">
     <!-- Tree component -->
     @if (nodes().length > 0) {
       <ui-lib-tree
+        [hostId]="treeId"
+        [ariaLabel]="treeAriaLabel()"
         [value]="nodes()"
         [selectionMode]="selectionMode()"
         [variant]="variant()"
@@ -72,3 +69,11 @@
   </div>
 }
 
+<span
+  class="ui-lib-tree-select__sr-live"
+  [id]="liveRegionId"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  {{ selectionAnnouncement() }}
+</span>

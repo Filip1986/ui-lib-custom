@@ -76,6 +76,12 @@ ui-lib-tree-select .ui-lib-tree-select__clear {
   &:hover {
     color: var(--uilib-page-fg);
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--uilib-color-primary-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 ui-lib-tree-select .ui-lib-tree-select__chevron {
@@ -142,6 +148,18 @@ ui-lib-tree-select .ui-lib-tree-select__empty {
   padding: 0.75rem;
   text-align: center;
   color: var(--uilib-muted);
+}
+
+ui-lib-tree-select .ui-lib-tree-select__sr-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 // ─── Size modifiers ─────────────────────────────────────────────────────────
@@ -226,4 +244,14 @@ ui-lib-tree-select.ui-lib-tree-select--variant-minimal .ui-lib-tree-select__trig
 ui-lib-tree-select.ui-lib-tree-select--variant-minimal .ui-lib-tree-select__panel {
   box-shadow: none;
   border-color: var(--uilib-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-tree-select .ui-lib-tree-select__trigger,
+  ui-lib-tree-select .ui-lib-tree-select__chevron,
+  ui-lib-tree-select .ui-lib-tree-select__panel,
+  ui-lib-tree-select .ui-lib-tree-select__spinner {
+    animation: none !important;
+    transition: none !important;
+  }
 }

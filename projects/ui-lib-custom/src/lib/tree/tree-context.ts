@@ -9,6 +9,20 @@ import type { TreeNode, TreeSelectionMode } from './tree.types';
 export interface TreeContext {
   /** Returns the current selection mode. */
   selectionMode(): TreeSelectionMode;
+  /** Returns the generated DOM id for the tree row. */
+  getTreeItemId(node: TreeNode): string;
+  /** Returns the tree level for the node (1-based). */
+  getNodeLevel(node: TreeNode): number;
+  /** Returns the sibling count for the node within its visible group. */
+  getNodeSetSize(node: TreeNode): number;
+  /** Returns the 1-based sibling position for the node within its visible group. */
+  getNodePosInSet(node: TreeNode): number;
+  /** Returns the visible children for the node. */
+  getVisibleChildren(node: TreeNode): TreeNode[];
+  /** Returns the tabindex to apply to the tree row. */
+  getNodeTabIndex(node: TreeNode): number;
+  /** Marks the node as the current focus target. */
+  setFocusedNode(node: TreeNode): void;
   /** Returns `true` when the given node is in the current selection. */
   isNodeSelected(node: TreeNode): boolean;
   /** Returns `true` when the node is partially selected (checkbox mode only). */
