@@ -1,22 +1,28 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  PLATFORM_ID,
   ViewEncapsulation,
   computed,
   contentChild,
+  effect,
   inject,
   model,
   input,
   output,
   signal,
+  viewChild,
+  type ElementRef,
   type InputSignal,
   type ModelSignal,
+  type OnDestroy,
   type OutputEmitterRef,
   type Signal,
   type TemplateRef,
   type WritableSignal,
 } from '@angular/core';
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgStyle, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
+import { FocusTrap } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import {
   IMAGE_ARIA_CLOSE_LABEL,
@@ -64,10 +70,13 @@ let imageIdCounter: number = 0;
     '[class]': 'hostClasses()',
   },
 })
-export class ImageComponent {
+export class ImageComponent implements OnDestroy {
   // ─── Injected services ───────────────────────────────────────────────────────
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly document: Document = inject(DOCUMENT);
+  private readonly platformId: object = inject(PLATFORM_ID);
+  private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
 
   // ─── Content queries ─────────────────────────────────────────────────────────
 
@@ -78,6 +87,12 @@ export class ImageComponent {
   /** Custom template rendered when the image fails to load. */
   public readonly errorTemplate: Signal<TemplateRef<unknown> | undefined> =
     contentChild<TemplateRef<unknown>>('imageError');
+
+  // ─── View queries ─────────────────────────────────────────────────────────────
+
+  /** Reference to the preview overlay mask element. */
+  private readonly maskElement: Signal<ElementRef<HTMLElement> | undefined> =
+    viewChild<ElementRef<HTMLElement>>('imageMask');
 
   // ─── Inputs ──────────────────────────────────────────────────────────────────
 
@@ -152,6 +167,14 @@ export class ImageComponent {
 
   public readonly componentId: string = `ui-lib-image-${++imageIdCounter}`;
 
+  // ─── Focus management ────────────────────────────────────────────────────────
+
+  /** Active focus-trap instance while the preview overlay is open. */
+  private focusTrap: FocusTrap | null = null;
+
+  /** Element that had focus when the preview was opened; used for focus restoration. */
+  private previewTriggerElement: HTMLElement | null = null;
+
   // ─── ARIA label constants exposed to the template ─────────────────────────────
 
   public readonly closeAriaLabel: string = IMAGE_ARIA_CLOSE_LABEL;
@@ -209,6 +232,26 @@ export class ImageComponent {
     return extra ? `${base} ${extra}` : base;
   });
 
+  // ─── Lifecycle ────────────────────────────────────────────────────────────────
+
+  constructor() {
+    effect((): void => {
+      const visible: boolean = this.previewVisible();
+      if (!visible) {
+        this.deactivateFocusTrap();
+        return;
+      }
+
+      queueMicrotask((): void => {
+        this.activateFocusTrap();
+      });
+    });
+  }
+
+  public ngOnDestroy(): void {
+    this.deactivateFocusTrap();
+  }
+
   // ─── Event handlers ───────────────────────────────────────────────────────────
 
   /** Handle successful image load. */
@@ -241,6 +284,8 @@ export class ImageComponent {
 
   /** Open the preview overlay and reset transform state. */
   public openPreview(): void {
+    const activeElement: Element | null = this.document.activeElement;
+    this.previewTriggerElement = activeElement instanceof HTMLElement ? activeElement : null;
     this.zoomScale.set(1);
     this.rotateAngle.set(0);
     this.previewVisible.set(true);
@@ -249,6 +294,7 @@ export class ImageComponent {
   /** Close the preview overlay. */
   public closePreview(): void {
     this.previewVisible.set(false);
+    this.restorePreviewTriggerFocus();
   }
 
   /** Close the overlay when clicking the backdrop (outside the image). */
@@ -262,6 +308,7 @@ export class ImageComponent {
   public onMaskKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
       event.preventDefault();
+      event.stopPropagation();
       this.closePreview();
     }
   }
@@ -292,5 +339,39 @@ export class ImageComponent {
   /** Rotate the preview image 90 degrees clockwise. */
   public rotateRight(): void {
     this.rotateAngle.set(this.rotateAngle() + IMAGE_ROTATE_STEP);
+  }
+
+  // ─── Focus trap management ────────────────────────────────────────────────────
+
+  /** Activate the focus trap on the preview overlay container. */
+  private activateFocusTrap(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const container: HTMLElement | undefined = this.maskElement()?.nativeElement;
+    if (!container) {
+      return;
+    }
+
+    this.deactivateFocusTrap();
+    this.focusTrap = new FocusTrap(container);
+    this.focusTrap.activate();
+  }
+
+  /** Deactivate and discard the current focus trap without restoring focus. */
+  private deactivateFocusTrap(): void {
+    this.focusTrap?.deactivate();
+    this.focusTrap = null;
+  }
+
+  /** Restore focus to the element that triggered the preview. */
+  private restorePreviewTriggerFocus(): void {
+    queueMicrotask((): void => {
+      if (this.previewTriggerElement?.isConnected) {
+        this.previewTriggerElement.focus();
+      }
+      this.previewTriggerElement = null;
+    });
   }
 }

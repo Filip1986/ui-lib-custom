@@ -255,8 +255,7 @@ describe('Inplace Accessibility', (): void => {
 
   describe('keyboard interaction', (): void => {
     it('Enter key on display button activates the editor', async (): Promise<void> => {
-      const fixture: ComponentFixture<InteractiveInplaceHost> =
-        await setup(InteractiveInplaceHost);
+      const fixture: ComponentFixture<InteractiveInplaceHost> = await setup(InteractiveInplaceHost);
       const host: InteractiveInplaceHost = fixture.componentInstance;
       getDisplayButton(fixture).dispatchEvent(
         new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
@@ -267,8 +266,7 @@ describe('Inplace Accessibility', (): void => {
     });
 
     it('Space key on display button activates the editor', async (): Promise<void> => {
-      const fixture: ComponentFixture<InteractiveInplaceHost> =
-        await setup(InteractiveInplaceHost);
+      const fixture: ComponentFixture<InteractiveInplaceHost> = await setup(InteractiveInplaceHost);
       const host: InteractiveInplaceHost = fixture.componentInstance;
       getDisplayButton(fixture).dispatchEvent(
         new KeyboardEvent('keydown', { key: ' ', bubbles: true })
@@ -279,8 +277,7 @@ describe('Inplace Accessibility', (): void => {
     });
 
     it('Escape key inside content wrapper deactivates the editor', async (): Promise<void> => {
-      const fixture: ComponentFixture<InteractiveInplaceHost> =
-        await setup(InteractiveInplaceHost);
+      const fixture: ComponentFixture<InteractiveInplaceHost> = await setup(InteractiveInplaceHost);
       const host: InteractiveInplaceHost = fixture.componentInstance;
       host.active.set(true);
       fixture.detectChanges();
@@ -294,8 +291,7 @@ describe('Inplace Accessibility', (): void => {
     });
 
     it('aria-expanded transitions from false to true on activation', async (): Promise<void> => {
-      const fixture: ComponentFixture<InteractiveInplaceHost> =
-        await setup(InteractiveInplaceHost);
+      const fixture: ComponentFixture<InteractiveInplaceHost> = await setup(InteractiveInplaceHost);
       const host: InteractiveInplaceHost = fixture.componentInstance;
       expect(getDisplayButton(fixture).getAttribute('aria-expanded')).toBe('false');
       host.active.set(true);
@@ -305,8 +301,7 @@ describe('Inplace Accessibility', (): void => {
     });
 
     it('aria-expanded transitions from true to false on deactivation', async (): Promise<void> => {
-      const fixture: ComponentFixture<InteractiveInplaceHost> =
-        await setup(InteractiveInplaceHost);
+      const fixture: ComponentFixture<InteractiveInplaceHost> = await setup(InteractiveInplaceHost);
       const host: InteractiveInplaceHost = fixture.componentInstance;
       host.active.set(true);
       fixture.detectChanges();

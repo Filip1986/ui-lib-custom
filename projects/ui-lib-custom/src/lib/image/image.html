@@ -45,7 +45,8 @@
       [class.uilib-image__indicator--visible]="isHovered()"
       [attr.aria-label]="ariaLabel()"
       [attr.aria-haspopup]="'dialog'"
-      [attr.aria-controls]="componentId + '-preview'"
+      [attr.aria-controls]="previewVisible() ? componentId + '-preview' : null"
+      [attr.aria-expanded]="previewVisible()"
       (click)="openPreview()"
     >
       @if (indicatorTemplate()) {
@@ -71,6 +72,7 @@
 <!-- ─── Preview overlay ───────────────────────────────────────────────────────── -->
 @if (preview() && previewVisible()) {
   <div
+    #imageMask
     class="uilib-image__mask"
     role="dialog"
     aria-modal="true"

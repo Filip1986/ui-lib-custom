@@ -58,7 +58,9 @@ const FOCUSABLE_SELECTOR: string =
 })
 export class Inplace {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
-  private readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef) as ElementRef<HTMLElement>;
+  private readonly elementRef: ElementRef<HTMLElement> = inject(
+    ElementRef
+  ) as ElementRef<HTMLElement>;
   private readonly injector: Injector = inject(Injector);
 
   /** Auto-generated unique ID for this component instance. */
@@ -158,9 +160,8 @@ export class Inplace {
       (): void => {
         const contentEl: HTMLElement | null =
           this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-inplace__content');
-        const focusable: HTMLElement | null | undefined = contentEl?.querySelector<HTMLElement>(
-          FOCUSABLE_SELECTOR
-        );
+        const focusable: HTMLElement | null | undefined =
+          contentEl?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
         focusable?.focus();
       },
       { injector: this.injector }

@@ -62,7 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
-- `Inplace` -> ✅ complete + hardened (6-phase, score 8.9/10, 47 tests — 27 unit + 20 a11y)
+- `Image` -> ✅ complete + hardened (6-phase, score 8.8/10, 54 tests — 33 unit + 21 a11y)
 
 ---
 
@@ -125,43 +125,40 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
 
-Date: 2026-05-12 [Inplace component — 6-phase hardening COMPLETE (#63)]
+Date: 2026-05-12 [Image component — 6-phase hardening COMPLETE (#66)]
 Changed:
-  - projects/ui-lib-custom/src/lib/inplace/inplace.ts
-      • Added module-level `nextInplaceId` counter; unique `instanceId`, `displayId`, `contentId` per instance
-      • Injected `ElementRef` + `Injector` for post-render focus management
-      • Converted display trigger: display slot now a native `<button>` with `aria-expanded`, `aria-controls`, `aria-label`
-      • Added `displayLabel` + `closeLabel` inputs (i18n-friendly, default to existing strings)
-      • `activate()` uses `afterNextRender` to focus first focusable element in content slot
-      • `deactivate()` uses `afterNextRender` to restore focus to the display button
-      • Added `onContentKeydown()` — Escape deactivates and stops propagation
-      • Host binding `[id]`: `instanceId`
-  - projects/ui-lib-custom/src/lib/inplace/inplace.html
-      • Display: `<div role="button">` → native `<button type="button">` with `[disabled]`, `[attr.aria-expanded]`, `[attr.aria-controls]`, `[attr.aria-label]`
-      • Content wrapper: added `[id]="contentId"`, `[attr.aria-hidden]="!active() || null"`, `(keydown)="onContentKeydown($event)"`
-      • Close button: `aria-label="Close editor"` → `[attr.aria-label]="closeLabel()"`
-  - projects/ui-lib-custom/src/lib/inplace/inplace.scss
-      • Added `@media (prefers-reduced-motion: reduce)` overrides for display + close-button transitions
-  - projects/ui-lib-custom/src/lib/inplace/inplace.spec.ts
-      • Updated 3 disabled/tabindex tests for native `<button>` semantics
-      • Added 7 new tests: aria-expanded states, aria-controls, host ID, Escape deactivation, aria-label
-  - projects/ui-lib-custom/src/lib/inplace/inplace.a11y.spec.ts (CREATED — 20 tests)
-      • axe-core checks for default/active-closable/disabled/multi-variant states
-      • ARIA structure: button element, aria-expanded false/true, aria-controls, aria-label, close icon aria-hidden, unique host IDs
-      • Disabled state: native disabled attribute, aria-expanded still present
-      • Keyboard: Enter/Space activate, Escape deactivates, aria-expanded state transitions
-  - projects/ui-lib-custom/src/lib/inplace/README.md
-      • Added `displayLabel` + `closeLabel` input rows; full ARIA attributes table; keyboard table; accessibility section
+  - projects/ui-lib-custom/src/lib/image/image.ts
+      • Added DOCUMENT + PLATFORM_ID injection for SSR safety
+      • Added FocusTrap import from ui-lib-custom/core; activates trap when preview overlay opens
+      • Added viewChild for #imageMask container reference
+      • Added effect() watching previewVisible to activate/deactivate focus trap via queueMicrotask
+      • Added previewTriggerElement storage + restorePreviewTriggerFocus() with queueMicrotask
+      • Added ngOnDestroy to clean up focus trap on component destroy
+      • Updated openPreview() to capture document.activeElement before setting previewVisible
+      • Updated closePreview() to call restorePreviewTriggerFocus()
+      • Updated onMaskKeyDown() to also call event.stopPropagation() on Escape
+      • Fixed aria-controls on preview indicator: only present while overlay is open; added aria-expanded
+  - projects/ui-lib-custom/src/lib/image/image.html
+      • Added #imageMask template ref to the preview overlay div
+      • Changed aria-controls to conditional (only when previewVisible); added aria-expanded to indicator
+  - projects/ui-lib-custom/src/lib/image/image.scss
+      • Added prefers-reduced-motion: reduce overrides for indicator, toolbar-btn transitions and preview-transition token
+  - projects/ui-lib-custom/src/lib/image/image.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure: alt text, indicator labels, aria-haspopup, dialog role/aria-modal, toolbar role, aria-label on all buttons, decorative SVG icons hidden, preview image alt
+      • Keyboard: Escape closes + focus restoration, close button focus restoration, focus trap via Tab key
+      • Zoom disabled state: aria-disabled on zoom-in/out at limits
+      • axe-core: no-preview, preview-indicator, preview-open states
+  - projects/ui-lib-custom/src/lib/image/README.md
+      • Added ARIA attributes table, keyboard interaction table, CSS custom properties table, accessibility section with alt text, preview dialog, error state, and reduced motion documentation
   - docs/COMPONENT_SCORES.md
-      • Inplace #63: ⏳ Queued → ✅ Done
-      • Utilities table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+      • Image #66: ⏳ Queued → ✅ Done (score 8.8/10)
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived the DataView handoff to keep only the newest 3 in this file
-State: Inplace hardening complete. Display trigger is now a native button with correct aria-expanded/aria-controls semantics. Focus management (activate → content, deactivate → display button) is implemented via afterNextRender. Escape key deactivates. Content is aria-hidden when inactive. i18n-friendly displayLabel/closeLabel inputs added. 47 tests pass (27 unit + 20 a11y).
+      • Archived the DataView handoff to keep only the newest 3
+State: Image hardening complete. Preview overlay now has a full focus trap (FocusTrap from ui-lib-custom/core), focus is restored to the indicator on close, aria-controls is only set when the dialog exists in DOM, aria-expanded reflects state, prefers-reduced-motion overrides added, 21 a11y tests all green.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/inplace/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=inplace --no-coverage (47/47 PASS — 27 unit + 20 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/image --no-coverage (88/88 PASS — 33 unit + 21 a11y + 34 image-compare)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: axe flagged unlabeled `<input>` inside hidden content slot when JSDOM doesn't compute CSS; resolved by adding `[attr.aria-hidden]="!active() || null"` to content wrapper (matches fieldset/panel pattern).
-Next step: Continue Tier 6 queue — Toolbar (#59) or Image (#66) hardening.
+Terminal notes: Fresh clone required npm install before validation.
+Next step: ImageCompare hardening (#67) — slider role=slider + aria-valuetext.
