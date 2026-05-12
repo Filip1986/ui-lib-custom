@@ -1,4 +1,10 @@
 <div class="ui-lib-table__wrapper">
+  <span class="ui-lib-table__sr-only" aria-live="polite" aria-atomic="true">
+    {{ sortAnnouncement() }}
+  </span>
+  <span class="ui-lib-table__sr-only" aria-live="polite" aria-atomic="true">
+    {{ paginationAnnouncement() }}
+  </span>
 
   <!-- Caption slot -->
   @if (captionTemplate()) {
@@ -50,7 +56,9 @@
                 data-grid-col="0"
                 (focus)="onGridCellFocus(0, 0)"
                 (keydown)="onGridCellKeydown($event, 0, 0)"
-              ></th>
+              >
+                <span class="ui-lib-table__sr-only">Row expansion</span>
+              </th>
             }
             <!-- Checkbox selection column -->
             @if (selectionMode() === 'checkbox') {
@@ -72,6 +80,7 @@
                   [checked]="allRowsSelected()"
                   [indeterminate]="someRowsSelected()"
                   [disabled]="disabled()"
+                  [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
                   (change)="onHeaderCheckboxChange($event)"
                   aria-label="Select all rows"
                 />
@@ -210,7 +219,6 @@
               role="row"
               [attr.aria-rowindex]="bodyAriaRowIndex(rowIndex)"
               [attr.aria-selected]="selectionMode() ? (isRowSelected(row) ? 'true' : 'false') : null"
-              [attr.aria-expanded]="expansionTemplate() ? isRowExpanded(row) : null"
               [attr.aria-disabled]="disabled() ? 'true' : null"
               (click)="onRowClick($event, row, rowIndex)"
               (keydown.enter)="onRowClick($any($event), row, rowIndex)"
@@ -235,7 +243,9 @@
                     [class.ui-lib-table__expander-btn--expanded]="isRowExpanded(row)"
                     (click)="onExpansionToggle($event, row, rowIndex)"
                     [attr.aria-expanded]="isRowExpanded(row)"
-                    aria-label="Toggle row expansion"
+                    [attr.aria-controls]="getExpandedRowId(rowIndex)"
+                    [attr.aria-label]="expansionToggleAriaLabel(row, rowIndex)"
+                    [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ui-lib-table__expander-icon">
                       @if (isRowExpanded(row)) {
@@ -266,6 +276,7 @@
                     class="ui-lib-table__checkbox"
                     [checked]="isRowSelected(row)"
                     [disabled]="disabled()"
+                    [attr.tabindex]="tableRole() === 'grid' ? '-1' : null"
                     (change)="onRowCheckboxChange($event, row, rowIndex)"
                     [attr.aria-label]="'Select row ' + (rowIndex + 1)"
                   />
@@ -302,11 +313,15 @@
 
             <!-- Expansion row -->
             @if (expansionTemplate() && isRowExpanded(row)) {
-              <tr class="ui-lib-table__expansion-row" role="row">
+              <tr
+                class="ui-lib-table__expansion-row"
+                [attr.role]="tableRole() === 'grid' ? 'presentation' : 'row'"
+                [id]="getExpandedRowId(rowIndex)"
+              >
                 <td
                   class="ui-lib-table__expansion-cell"
-                  [attr.role]="tableRole() === 'grid' ? 'gridcell' : 'cell'"
-                  [attr.aria-colindex]="1"
+                  [attr.role]="tableRole() === 'grid' ? 'presentation' : 'cell'"
+                  [attr.aria-colindex]="tableRole() === 'grid' ? null : 1"
                   [attr.colspan]="columns().length + (selectionMode() === 'checkbox' ? 1 : 0) + 1"
                 >
                   <ng-container

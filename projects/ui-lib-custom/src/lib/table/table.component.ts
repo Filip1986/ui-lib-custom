@@ -527,6 +527,32 @@ export class TableComponent {
     (): number | null => (this.paginator() ? this.totalRecords() + this.headerRowCount() : null)
   );
 
+  /** Screen-reader announcement for the active sort state. */
+  public readonly sortAnnouncement: Signal<string> = computed<string>((): string => {
+    const activeSort: { field: string; order: TableSortOrder } | null = this.activeSortState();
+    if (activeSort === null || activeSort.order === 0) {
+      return '';
+    }
+
+    return `Table sorted by ${this.sortColumnLabel(activeSort.field)}, ${
+      activeSort.order === 1 ? 'ascending' : 'descending'
+    }.`;
+  });
+
+  /** Screen-reader announcement for the current paginator state. */
+  public readonly paginationAnnouncement: Signal<string> = computed<string>((): string => {
+    if (!this.paginator()) {
+      return '';
+    }
+
+    const pageCount: number = this.pageCount();
+    if (pageCount === 0) {
+      return 'No pages available';
+    }
+
+    return `Page ${this.currentPage() + 1} of ${pageCount}`;
+  });
+
   /** Normalized roving-focus target clamped to the currently rendered grid bounds. */
   private readonly normalizedActiveGridCell: Signal<{ row: number; column: number }> = computed<{
     row: number;
@@ -700,6 +726,20 @@ export class TableComponent {
   }
 
   /**
+   * Returns the unique expansion-row ID for a given visible row index.
+   */
+  public getExpandedRowId(rowIndex: number): string {
+    return `${this.tableId}-expanded-row-${rowIndex}`;
+  }
+
+  /**
+   * Returns the accessible label for an expansion toggle button.
+   */
+  public expansionToggleAriaLabel(row: unknown, rowIndex: number): string {
+    return `${this.isRowExpanded(row) ? 'Collapse' : 'Expand'} row ${rowIndex + 1}`;
+  }
+
+  /**
    * Returns the tabindex for a grid cell in roving-tabindex mode.
    */
   public gridCellTabIndex(row: number, column: number): '0' | '-1' | null {
@@ -730,6 +770,14 @@ export class TableComponent {
 
     let nextPosition: { row: number; column: number } | null = null;
     switch (event.key) {
+      case 'Enter':
+      case ' ':
+      case 'Spacebar':
+        if (this.activateEmbeddedGridControl(row, column)) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        return;
       case 'ArrowRight':
         nextPosition = this.clampGridPosition(row, column + 1);
         break;
@@ -743,10 +791,16 @@ export class TableComponent {
         nextPosition = this.clampGridPosition(row - 1, column);
         break;
       case 'Home':
-        nextPosition = this.clampGridPosition(row, 0);
+        nextPosition =
+          event.ctrlKey || event.metaKey
+            ? this.clampGridPosition(0, 0)
+            : this.clampGridPosition(row, 0);
         break;
       case 'End':
-        nextPosition = this.clampGridPosition(row, this.totalColumnCount() - 1);
+        nextPosition =
+          event.ctrlKey || event.metaKey
+            ? this.clampGridPosition(this.displayedRows().length, this.totalColumnCount() - 1)
+            : this.clampGridPosition(row, this.totalColumnCount() - 1);
         break;
       default:
         return;
@@ -1126,6 +1180,42 @@ export class TableComponent {
     return Math.max(this.columns().length + this.leadingColumnCount(), 1);
   }
 
+  private pageCount(): number {
+    const rowCount: number = this.rows();
+    return rowCount > 0 ? Math.ceil(this.totalRecords() / rowCount) : 0;
+  }
+
+  private currentPage(): number {
+    const rowCount: number = this.rows();
+    return rowCount > 0 ? Math.floor(this.first() / rowCount) : 0;
+  }
+
+  private activeSortState(): { field: string; order: TableSortOrder } | null {
+    if (this.multiSortMode() && this.multiSortMeta().length > 0) {
+      const primarySort: TableSortMeta | undefined = this.multiSortMeta()[0];
+      return primarySort === undefined ? null : primarySort;
+    }
+
+    const field: string | null = this.sortField();
+    if (field === null || this.sortOrder() === 0) {
+      return null;
+    }
+
+    return { field, order: this.sortOrder() };
+  }
+
+  private sortColumnLabel(field: string): string {
+    const matchedColumn: TableColumnComponent | undefined = this.columns().find(
+      (column: TableColumnComponent): boolean => (column.sortField() ?? column.field()) === field
+    );
+
+    if (matchedColumn === undefined) {
+      return field;
+    }
+
+    return matchedColumn.header() || matchedColumn.field() || field;
+  }
+
   private clampGridPosition(row: number, column: number): { row: number; column: number } {
     const maxRow: number = Math.max(this.displayedRows().length, 0);
     const maxColumn: number = Math.max(this.totalColumnCount() - 1, 0);
@@ -1144,5 +1234,28 @@ export class TableComponent {
         `[data-grid-row="${nextPosition.row}"][data-grid-col="${nextPosition.column}"]`
       );
     targetElement?.focus();
+  }
+
+  private activateEmbeddedGridControl(row: number, column: number): boolean {
+    const targetElement: HTMLElement | null =
+      this.hostElement.nativeElement.querySelector<HTMLElement>(
+        `[data-grid-row="${row}"][data-grid-col="${column}"]`
+      );
+
+    if (targetElement === null) {
+      return false;
+    }
+
+    const embeddedControl: HTMLButtonElement | HTMLInputElement | null =
+      targetElement.querySelector<HTMLButtonElement | HTMLInputElement>(
+        'button:not([disabled]), input:not([disabled])'
+      );
+
+    if (embeddedControl === null) {
+      return false;
+    }
+
+    embeddedControl.click();
+    return true;
   }
 }

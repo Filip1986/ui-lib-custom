@@ -1,85 +1,129 @@
-<section class="demo-page" data-testid="tag-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">Tag</h1>
-    <p class="demo-hero__desc">
+  <!-- ══════════════════════════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════════════════════ -->
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Tag</h1>
+      <code class="demo-page-header__import">import &#123; Tag &#125; from 'ui-lib-custom/tag'</code>
+    </div>
+    <p class="demo-page-header__description">
       A compact label that communicates status, category, or classification at a glance.
-      Supports seven severity colours, three sizes, three design variants, and optional icons.
+      Supports seven severity colours, three sizes, three design variants, optional icons,
+      and an accessible dismiss button.
     </p>
-    <div class="demo-hero__preview">
-      <ui-lib-tag value="New" severity="primary" />
+    <div class="demo-page-header__preview">
+      <ui-lib-tag value="New"     severity="primary" />
       <ui-lib-tag value="Success" severity="success" />
       <ui-lib-tag value="Warning" severity="warn" />
-      <ui-lib-tag value="Danger" severity="danger" />
-      <ui-lib-tag value="Info" severity="info" icon="pi pi-info-circle" />
+      <ui-lib-tag value="Danger"  severity="danger" />
+      <ui-lib-tag value="Info"    severity="info" icon="pi pi-info-circle" />
     </div>
-  </div>
+  </header>
 
-  <!-- Section 1: Severity -->
-  <div class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       SEVERITY
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="severity" data-doc-anchor>
     <h2 class="demo-section__title">Severity</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Use the <code>severity</code> input to communicate meaning through colour.
+      Seven values are available: <code>primary</code>, <code>secondary</code>,
+      <code>success</code>, <code>info</code>, <code>warn</code>, <code>danger</code>,
+      and <code>contrast</code>.
     </p>
-    <div class="demo-row">
+    <div class="demo-section__preview">
       @for (severity of severities; track severity) {
         <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" />
       }
     </div>
-  </div>
+    <app-doc-code-snippet title="Severity" [code]="snippets.severity" />
+  </section>
 
-  <!-- Section 2: Sizes -->
-  <div class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       SIZES
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
-    <div class="demo-row demo-row--align-center">
-      <ui-lib-tag value="Small" size="sm" severity="primary" />
+    <div class="demo-section__preview demo-section__preview--center">
+      <ui-lib-tag value="Small"  size="sm" severity="primary" />
       <ui-lib-tag value="Medium" size="md" severity="primary" />
-      <ui-lib-tag value="Large" size="lg" severity="primary" />
+      <ui-lib-tag value="Large"  size="lg" severity="primary" />
     </div>
-  </div>
+    <app-doc-code-snippet title="Sizes" [code]="snippets.sizes" />
+  </section>
 
-  <!-- Section 3: Rounded -->
-  <div class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       ROUNDED
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="rounded" data-doc-anchor>
     <h2 class="demo-section__title">Rounded</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Set <code>[rounded]="true"</code> to apply fully rounded (pill) corners.
     </p>
-    <div class="demo-row">
+    <div class="demo-section__preview">
       @for (severity of severities; track severity) {
         <ui-lib-tag [value]="severityLabels[severity]" [severity]="severity" [rounded]="true" />
       }
     </div>
-  </div>
+    <app-doc-code-snippet title="Rounded" [code]="snippets.rounded" />
+  </section>
 
-  <!-- Section 4: With Icons -->
-  <div class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       WITH ICONS
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="icons" data-doc-anchor>
     <h2 class="demo-section__title">With Icons</h2>
-    <p class="demo-section__desc">
+    <p class="demo-section__description">
       Provide a PrimeIcons class via the <code>icon</code> input to render a leading icon.
+      Icons are always marked <code>aria-hidden="true"</code> — they are decorative.
     </p>
-    <div class="demo-row">
-      <ui-lib-tag value="Primary" icon="pi pi-tag" severity="primary" />
-      <ui-lib-tag value="Success" icon="pi pi-check-circle" severity="success" />
+    <div class="demo-section__preview">
+      <ui-lib-tag value="Primary" icon="pi pi-tag"                  severity="primary" />
+      <ui-lib-tag value="Success" icon="pi pi-check-circle"         severity="success" />
       <ui-lib-tag value="Warning" icon="pi pi-exclamation-triangle" severity="warn" />
-      <ui-lib-tag value="Danger" icon="pi pi-times-circle" severity="danger" />
-      <ui-lib-tag value="Info" icon="pi pi-info-circle" severity="info" />
-      <ui-lib-tag value="Rounded" icon="pi pi-star" severity="secondary" [rounded]="true" />
+      <ui-lib-tag value="Danger"  icon="pi pi-times-circle"         severity="danger" />
+      <ui-lib-tag value="Info"    icon="pi pi-info-circle"          severity="info" />
     </div>
-  </div>
+    <app-doc-code-snippet title="Icons" [code]="snippets.icons" />
+  </section>
 
-  <!-- Section 5: Design Variants -->
-  <div class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       DISMISSIBLE
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="dismissible" data-doc-anchor>
+    <h2 class="demo-section__title">Dismissible</h2>
+    <p class="demo-section__description">
+      Set <code>[dismissible]="true"</code> to render a remove button.
+      The button receives an auto-generated <code>aria-label</code> such as
+      <code>Remove Python tag</code>. The tag does not auto-hide — control
+      visibility from the parent via the <code>(removed)</code> output.
+    </p>
+    <div class="demo-section__preview">
+      <ui-lib-tag value="Python" severity="info"    [dismissible]="true" />
+      <ui-lib-tag value="Urgent" severity="danger"  [dismissible]="true" icon="pi pi-flag" />
+      <ui-lib-tag value="Stable" severity="success" [dismissible]="true" [rounded]="true" />
+    </div>
+    <app-doc-code-snippet title="Dismissible" [code]="snippets.dismissible" />
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       DESIGN VARIANTS
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Design Variants</h2>
-    <p class="demo-section__desc">
-      Switch between <code>material</code>, <code>bootstrap</code>, and <code>minimal</code> styles.
+    <p class="demo-section__description">
+      Three design variants: <code>material</code>, <code>bootstrap</code>, and
+      <code>minimal</code>. When <code>variant</code> is <code>null</code> (the default),
+      the active theme from <code>ThemeConfigService</code> is used.
     </p>
     @for (variant of variants; track variant) {
       <div class="demo-variant-group">
-        <h3 class="demo-variant-group__label">{{ variant }}</h3>
+        <p class="demo-variant-group__label">{{ variant }}</p>
         <div class="demo-row">
           @for (severity of severities; track severity) {
             <ui-lib-tag
@@ -91,12 +135,15 @@
         </div>
       </div>
     }
-  </div>
+    <app-doc-code-snippet title="Variants" [code]="snippets.variants" />
+  </section>
 
-  <!-- Section 6: Interactive Playground -->
-  <div class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       PLAYGROUND
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
-    <p class="demo-section__desc">Customise the tag using the controls below.</p>
+    <p class="demo-section__description">Customise the tag using the controls below.</p>
 
     <div class="demo-playground">
       <div class="demo-playground__preview">
@@ -107,6 +154,7 @@
           [variant]="playgroundVariant()"
           [rounded]="playgroundRounded()"
           [icon]="playgroundIcon()"
+          [dismissible]="playgroundDismissible()"
         />
       </div>
 
@@ -159,90 +207,321 @@
           </div>
         </div>
 
-        <!-- Rounded -->
+        <!-- Toggles -->
         <div class="demo-control">
-          <span class="demo-control__label">Rounded</span>
-          <ui-lib-button
-            type="button"
-            [appearance]="playgroundRounded() ? 'solid' : 'outline'"
-            severity="primary"
-            size="sm"
-            (click)="toggleRounded()"
-          >{{ playgroundRounded() ? 'On' : 'Off' }}</ui-lib-button>
-        </div>
-
-        <!-- Icon -->
-        <div class="demo-control">
-          <span class="demo-control__label">Icon</span>
-          <ui-lib-button
-            type="button"
-            [appearance]="playgroundIcon() !== null ? 'solid' : 'outline'"
-            severity="primary"
-            size="sm"
-            (click)="toggleIcon()"
-          >{{ playgroundIcon() ? 'On' : 'Off' }}</ui-lib-button>
+          <span class="demo-control__label">Options</span>
+          <div class="demo-control__buttons">
+            <ui-lib-button
+              type="button"
+              [appearance]="playgroundRounded() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              (click)="toggleRounded()"
+            >Rounded</ui-lib-button>
+            <ui-lib-button
+              type="button"
+              [appearance]="playgroundIcon() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              (click)="toggleIcon()"
+            >Icon</ui-lib-button>
+            <ui-lib-button
+              type="button"
+              [appearance]="playgroundDismissible() ? 'solid' : 'outline'"
+              severity="primary"
+              size="sm"
+              (click)="toggleDismissible()"
+            >Dismissible</ui-lib-button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- API Table -->
-  <div class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       API
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
-    <table class="demo-api-table">
+
+    <div id="api-inputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Inputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Input</th><th>Type</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>value</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Text label rendered inside the tag.</td>
+          </tr>
+          <tr>
+            <td><code>icon</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>PrimeIcons CSS class for a leading decorative icon.</td>
+          </tr>
+          <tr>
+            <td><code>severity</code></td>
+            <td><code>'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast'</code></td>
+            <td><code>'primary'</code></td>
+            <td>Colour palette for the tag.</td>
+          </tr>
+          <tr>
+            <td><code>rounded</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Applies fully rounded (pill) corners.</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><code>'sm' | 'md' | 'lg'</code></td>
+            <td><code>'md'</code></td>
+            <td>Size of the tag.</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+            <td><code>null</code></td>
+            <td>Design variant; inherits from <code>ThemeConfigService</code> when <code>null</code>.</td>
+          </tr>
+          <tr>
+            <td><code>styleClass</code></td>
+            <td><code>string | null</code></td>
+            <td><code>null</code></td>
+            <td>Additional CSS classes added to the host element.</td>
+          </tr>
+          <tr>
+            <td><code>dismissible</code></td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>Renders an inline dismiss button.</td>
+          </tr>
+          <tr>
+            <td><code>removeIcon</code></td>
+            <td><code>string</code></td>
+            <td><code>'pi pi-times'</code></td>
+            <td>CSS class for the dismiss button icon.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="api-outputs" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Outputs</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Output</th><th>Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>removed</code></td>
+            <td><code>OutputEmitterRef&lt;MouseEvent&gt;</code></td>
+            <td>
+              Emitted when the dismiss button is clicked. The tag is not auto-removed —
+              control visibility from the parent.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       CSS CUSTOM PROPERTIES
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="css-vars" data-doc-anchor>
+    <h2 class="demo-section__title">CSS Custom Properties</h2>
+    <p class="demo-section__description">
+      Override any of these on the host element or an ancestor to theme the tag without
+      touching component internals.
+    </p>
+    <table class="doc-properties">
       <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
+        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td><code>value</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Text label rendered inside the tag.</td>
+          <td><code>--uilib-tag-bg-primary</code></td>
+          <td><code>var(--uilib-color-primary, #6366f1)</code></td>
+          <td>Background for <code>primary</code> severity.</td>
         </tr>
         <tr>
-          <td><code>icon</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>PrimeIcons CSS class for a leading icon.</td>
+          <td><code>--uilib-tag-color-primary</code></td>
+          <td><code>#ffffff</code></td>
+          <td>Text colour for <code>primary</code> severity.</td>
         </tr>
         <tr>
-          <td><code>severity</code></td>
-          <td><code>'primary' | 'secondary' | 'success' | 'info' | 'warn' | 'danger' | 'contrast'</code></td>
-          <td><code>'primary'</code></td>
-          <td>Colour palette for the tag.</td>
+          <td><code>--uilib-tag-bg-success</code></td>
+          <td><code>var(--uilib-color-success, #22c55e)</code></td>
+          <td>Background for <code>success</code> severity.</td>
         </tr>
         <tr>
-          <td><code>rounded</code></td>
-          <td><code>boolean</code></td>
-          <td><code>false</code></td>
-          <td>When true, applies fully rounded (pill) corners.</td>
+          <td><code>--uilib-tag-color-success</code></td>
+          <td><code>#ffffff</code></td>
+          <td>Text colour for <code>success</code> severity.</td>
         </tr>
         <tr>
-          <td><code>size</code></td>
-          <td><code>'sm' | 'md' | 'lg'</code></td>
-          <td><code>'md'</code></td>
-          <td>Size of the tag.</td>
+          <td><code>--uilib-tag-bg-danger</code></td>
+          <td><code>var(--uilib-color-danger, #ef4444)</code></td>
+          <td>Background for <code>danger</code> severity.</td>
         </tr>
         <tr>
-          <td><code>variant</code></td>
-          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-          <td><code>null</code></td>
-          <td>Design variant; inherits from ThemeConfigService when null.</td>
+          <td><code>--uilib-tag-color-danger</code></td>
+          <td><code>#ffffff</code></td>
+          <td>Text colour for <code>danger</code> severity.</td>
         </tr>
         <tr>
-          <td><code>styleClass</code></td>
-          <td><code>string | null</code></td>
-          <td><code>null</code></td>
-          <td>Additional CSS classes added to the host element.</td>
+          <td><code>--uilib-tag-border-radius</code></td>
+          <td><code>var(--uilib-radius-sm, 0.375rem)</code></td>
+          <td>Border radius. Overridden to <code>9999px</code> when <code>[rounded]="true"</code>.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-tag-padding-y</code></td>
+          <td><code>0.25rem</code></td>
+          <td>Vertical padding (md size).</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-tag-padding-x</code></td>
+          <td><code>0.5rem</code></td>
+          <td>Horizontal padding (md size).</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-tag-font-size</code></td>
+          <td><code>0.75rem</code></td>
+          <td>Font size (md size).</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-tag-font-weight</code></td>
+          <td><code>700</code></td>
+          <td>Font weight.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-tag-remove-button-size</code></td>
+          <td><code>1.25em</code></td>
+          <td>Size of the dismiss button.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-tag-remove-button-bg-hover</code></td>
+          <td><code>rgba(255, 255, 255, 0.2)</code></td>
+          <td>Hover background for the dismiss button.</td>
+        </tr>
+        <tr>
+          <td><code>--uilib-tag-remove-button-transition</code></td>
+          <td><code>background-color 0.15s ease</code></td>
+          <td>Transition applied to the dismiss button.</td>
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       ACCESSIBILITY
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+    <h2 class="demo-section__title">Accessibility</h2>
+
+    <div id="a11y-aria" data-doc-anchor>
+      <h3 class="demo-section__subtitle">ARIA Attributes</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Attribute</th><th>Element</th><th>Value</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>id</code></td>
+            <td>Host</td>
+            <td><code>ui-lib-tag-&#123;n&#125;</code></td>
+            <td>Auto-generated, unique per instance.</td>
+          </tr>
+          <tr>
+            <td><code>role</code></td>
+            <td>Host</td>
+            <td><code>status</code> or <code>group</code></td>
+            <td>
+              <code>status</code> by default; switches to <code>group</code> when
+              <code>dismissible</code> is true so AT announces both the label and the button.
+            </td>
+          </tr>
+          <tr>
+            <td><code>aria-label</code></td>
+            <td>Host</td>
+            <td><em>value</em></td>
+            <td>Set to the tag's text value. Omitted when <code>value</code> is null.</td>
+          </tr>
+          <tr>
+            <td><code>aria-hidden</code></td>
+            <td>Leading icon</td>
+            <td><code>true</code></td>
+            <td>Decorative icon is always hidden from assistive technology.</td>
+          </tr>
+          <tr>
+            <td><code>aria-label</code></td>
+            <td>Dismiss button</td>
+            <td><code>Remove &#123;value&#125; tag</code></td>
+            <td>Auto-generated from <code>value</code>. Falls back to <code>Remove tag</code>.</td>
+          </tr>
+          <tr>
+            <td><code>aria-hidden</code></td>
+            <td>Dismiss button icon</td>
+            <td><code>true</code></td>
+            <td>Decorative button icon is hidden from assistive technology.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="a11y-keyboard" data-doc-anchor>
+      <h3 class="demo-section__subtitle">Keyboard Interaction</h3>
+      <table class="doc-properties">
+        <thead>
+          <tr><th>Key</th><th>Target</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Tab</code></td>
+            <td>Dismiss button</td>
+            <td>Moves focus to the button when <code>dismissible</code> is true.</td>
+          </tr>
+          <tr>
+            <td><code>Enter</code> / <code>Space</code></td>
+            <td>Dismiss button</td>
+            <td>Activates the native button and emits the <code>removed</code> event.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="demo-section__subtitle">Notes</h3>
+    <ul class="doc-list">
+      <li>All interactive dismiss controls receive <code>:focus-visible</code> ring styles.</li>
+      <li>
+        Decorative icons — both the leading icon and the dismiss icon — are always marked
+        <code>aria-hidden="true"</code>.
+      </li>
+      <li>
+        Transitions are suppressed under
+        <code>@media (prefers-reduced-motion: reduce)</code>.
+      </li>
+      <li>
+        Do not rely on colour alone to convey severity — pair it with a visible text label
+        or icon.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       TOC RAIL
+  ══════════════════════════════════════════════════════════════════ -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>

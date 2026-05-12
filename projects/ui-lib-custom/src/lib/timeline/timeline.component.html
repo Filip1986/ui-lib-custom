@@ -1,10 +1,13 @@
-@for (context of itemContexts(); track context.index) {
+@for (context of itemContexts(); track trackItem(context.index, context)) {
   <div
     class="ui-lib-timeline__event"
     role="listitem"
-    [attr.aria-label]="eventAriaLabel(context.index)"
+    [attr.aria-labelledby]="eventLabelledBy(context)"
   >
-    <div class="ui-lib-timeline__opposite">
+    <div
+      class="ui-lib-timeline__opposite"
+      [attr.id]="oppositeTemplate() ? eventOppositeId(context.index) : null"
+    >
       @if (oppositeTemplate()) {
         <ng-container
           [ngTemplateOutlet]="oppositeTemplate()!"
@@ -14,7 +17,10 @@
     </div>
     <div class="ui-lib-timeline__separator">
       @if (!context.first) {
-        <span class="ui-lib-timeline__connector ui-lib-timeline__connector--before"></span>
+        <span
+          class="ui-lib-timeline__connector ui-lib-timeline__connector--before"
+          aria-hidden="true"
+        ></span>
       }
       <div class="ui-lib-timeline__marker" aria-hidden="true">
         @if (markerTemplate()) {
@@ -23,19 +29,26 @@
             [ngTemplateOutletContext]="context"
           />
         } @else {
-          <span class="ui-lib-timeline__dot"></span>
+          <span class="ui-lib-timeline__dot" aria-hidden="true"></span>
         }
       </div>
       @if (!context.last) {
-        <span class="ui-lib-timeline__connector ui-lib-timeline__connector--after"></span>
+        <span
+          class="ui-lib-timeline__connector ui-lib-timeline__connector--after"
+          aria-hidden="true"
+        ></span>
       }
     </div>
-    <div class="ui-lib-timeline__content">
+    <div class="ui-lib-timeline__content" [attr.id]="eventContentId(context.index)">
       @if (contentTemplate()) {
         <ng-container
           [ngTemplateOutlet]="contentTemplate()!"
           [ngTemplateOutletContext]="context"
         />
+      } @else {
+        <span class="ui-lib-timeline__default-content">
+          {{ defaultEventContent(context.$implicit, context.index) }}
+        </span>
       }
     </div>
   </div>

@@ -43,6 +43,11 @@ ui-lib-tag {
   --uilib-tag-letter-spacing: 0.025em;
   --uilib-tag-line-height: 1;
   --uilib-tag-transition: var(--uilib-transition-base, background-color 0.2s ease, color 0.2s ease);
+  --uilib-tag-remove-button-size: 1.25em;
+  --uilib-tag-remove-button-bg: transparent;
+  --uilib-tag-remove-button-bg-hover: rgba(255, 255, 255, 0.2);
+  --uilib-tag-remove-button-color: currentColor;
+  --uilib-tag-remove-button-transition: background-color 0.15s ease;
 
   // sm tokens
   --uilib-tag-padding-y-sm: 0.125rem;
@@ -81,6 +86,37 @@ ui-lib-tag {
 
   &__value {
     line-height: 1;
+  }
+
+  &__remove-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--uilib-tag-remove-button-size);
+    height: var(--uilib-tag-remove-button-size);
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--uilib-tag-remove-button-bg);
+    color: var(--uilib-tag-remove-button-color);
+    cursor: pointer;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: var(--uilib-tag-remove-button-transition);
+
+    &:hover {
+      background: var(--uilib-tag-remove-button-bg-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 1px;
+    }
+
+    span {
+      font-size: 0.7em;
+      pointer-events: none;
+    }
   }
 
   // ---- Rounded modifier --------------------------------------------
@@ -197,36 +233,43 @@ ui-lib-tag {
     &.ui-lib-tag--severity-primary {
       --uilib-tag-bg-primary: rgba(99, 102, 241, 0.12);
       --uilib-tag-color-primary: #4f46e5;
+      --uilib-tag-remove-button-bg-hover: rgba(79, 70, 229, 0.18);
     }
 
     &.ui-lib-tag--severity-secondary {
       --uilib-tag-bg-secondary: var(--uilib-surface-100, #f3f4f6);
       --uilib-tag-color-secondary: var(--uilib-color-text, #374151);
+      --uilib-tag-remove-button-bg-hover: rgba(55, 65, 81, 0.12);
     }
 
     &.ui-lib-tag--severity-success {
       --uilib-tag-bg-success: rgba(34, 197, 94, 0.12);
       --uilib-tag-color-success: #15803d;
+      --uilib-tag-remove-button-bg-hover: rgba(21, 128, 61, 0.16);
     }
 
     &.ui-lib-tag--severity-info {
       --uilib-tag-bg-info: rgba(59, 130, 246, 0.12);
       --uilib-tag-color-info: #1d4ed8;
+      --uilib-tag-remove-button-bg-hover: rgba(29, 78, 216, 0.16);
     }
 
     &.ui-lib-tag--severity-warn {
       --uilib-tag-bg-warn: rgba(245, 158, 11, 0.12);
       --uilib-tag-color-warn: #b45309;
+      --uilib-tag-remove-button-bg-hover: rgba(180, 83, 9, 0.16);
     }
 
     &.ui-lib-tag--severity-danger {
       --uilib-tag-bg-danger: rgba(239, 68, 68, 0.12);
       --uilib-tag-color-danger: #b91c1c;
+      --uilib-tag-remove-button-bg-hover: rgba(185, 28, 28, 0.16);
     }
 
     &.ui-lib-tag--severity-contrast {
       --uilib-tag-bg-contrast: var(--uilib-surface-900, #111827);
       --uilib-tag-color-contrast: #ffffff;
+      --uilib-tag-remove-button-bg-hover: rgba(255, 255, 255, 0.2);
     }
 
     &.ui-lib-tag--rounded {
@@ -265,6 +308,16 @@ ui-lib-tag {
     &.ui-lib-tag--severity-danger {
       --uilib-tag-bg-danger: rgba(248, 113, 113, 0.15);
       --uilib-tag-color-danger: #f87171;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-tag {
+    transition: none;
+
+    &__remove-button {
+      transition: none;
     }
   }
 }

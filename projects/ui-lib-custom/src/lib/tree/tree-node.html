@@ -5,8 +5,13 @@
   [class]="node().styleClass ?? ''"
   [style.padding-inline-start.px]="depth() * 20"
   role="treeitem"
+  [attr.aria-level]="depth() + 1"
+  [attr.aria-setsize]="setsize()"
+  [attr.aria-posinset]="posinset()"
   [attr.aria-expanded]="hasChildren() ? treeContext.isNodeExpanded(node()) : null"
   [attr.aria-selected]="treeContext.selectionMode() !== 'checkbox' ? treeContext.isNodeSelected(node()) : null"
+  [attr.aria-checked]="treeContext.selectionMode() === 'checkbox' ? (treeContext.isNodePartiallySelected(node()) ? 'mixed' : treeContext.isNodeSelected(node())) : null"
+  [attr.aria-disabled]="node().selectable === false ? true : null"
   tabindex="0"
   (click)="treeContext.handleNodeClick($event, node())"
   (keydown.enter)="treeContext.handleNodeClick($event, node())"
@@ -28,16 +33,13 @@
     <span class="uilib-tree-node-leaf-spacer" aria-hidden="true"></span>
   }
 
-  <!-- Checkbox (checkbox selection mode only) -->
+  <!-- Checkbox (checkbox selection mode only — visual indicator; state is on the treeitem) -->
   @if (treeContext.selectionMode() === 'checkbox') {
     <span
       class="uilib-tree-node-checkbox"
       [class.uilib-tree-node-checkbox--checked]="treeContext.isNodeSelected(node())"
       [class.uilib-tree-node-checkbox--partial]="treeContext.isNodePartiallySelected(node())"
-      role="checkbox"
-      [attr.aria-checked]="treeContext.isNodePartiallySelected(node()) ? 'mixed' : treeContext.isNodeSelected(node())"
-      [attr.aria-label]="node().label ?? 'Node'"
-      tabindex="-1"
+      aria-hidden="true"
       (click)="$event.stopPropagation(); treeContext.handleCheckboxToggle($event, node())"
     ></span>
   }
@@ -61,10 +63,15 @@
 <!-- Recursive children -->
 @if (hasChildren() && treeContext.isNodeExpanded(node())) {
   <ul class="uilib-tree-children" role="group">
-    @for (child of node().children!; track child.key) {
+    @for (child of node().children!; track child.key; let i = $index) {
       @if (treeContext.isNodeFiltered(child)) {
         <li role="none">
-          <ui-lib-tree-node [node]="child" [depth]="depth() + 1" />
+          <ui-lib-tree-node
+            [node]="child"
+            [depth]="depth() + 1"
+            [setsize]="node().children!.length"
+            [posinset]="i + 1"
+          />
         </li>
       }
     }
