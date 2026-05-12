@@ -65,6 +65,13 @@ ui-lib-terminal {
     scrollbar-color: var(--uilib-terminal-scrollbar-thumb) var(--uilib-terminal-scrollbar-bg);
   }
 
+  // ---- Output live region (role=log) --------------------------------
+  &__output {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
   // ---- Parts -------------------------------------------------------
   &__welcome {
     color: var(--uilib-terminal-welcome-color);
@@ -119,6 +126,12 @@ ui-lib-terminal {
     caret-color: var(--uilib-terminal-input-caret-color);
     padding: 0;
 
+    &:focus-visible {
+      outline: 2px solid var(--uilib-terminal-input-caret-color);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
     &::selection {
       background: rgba(255, 255, 255, 0.2);
     }
@@ -166,5 +179,15 @@ ui-lib-terminal {
     --uilib-terminal-input-caret-color: #58a6ff;
     --uilib-terminal-scrollbar-bg: #161b22;
     --uilib-terminal-scrollbar-thumb: #30363d;
+  }
+}
+
+// ---- Reduced motion override ----------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-terminal {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
