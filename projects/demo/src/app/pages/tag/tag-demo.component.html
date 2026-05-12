@@ -71,7 +71,21 @@
     </div>
   </div>
 
-  <!-- Section 5: Design Variants -->
+  <!-- Section 5: Dismissible -->
+  <div class="demo-section">
+    <h2 class="demo-section__title">Dismissible</h2>
+    <p class="demo-section__desc">
+      Set <code>[dismissible]="true"</code> to render a remove button with a specific
+      <code>aria-label</code> (for example, <code>Remove Python tag</code>).
+    </p>
+    <div class="demo-row">
+      <ui-lib-tag value="Python" severity="info" [dismissible]="true" />
+      <ui-lib-tag value="Urgent" severity="danger" [dismissible]="true" icon="pi pi-flag" />
+      <ui-lib-tag value="Stable" severity="success" [dismissible]="true" [rounded]="true" />
+    </div>
+  </div>
+
+  <!-- Section 6: Design Variants -->
   <div class="demo-section">
     <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__desc">
@@ -93,7 +107,7 @@
     }
   </div>
 
-  <!-- Section 6: Interactive Playground -->
+  <!-- Section 7: Interactive Playground -->
   <div class="demo-section">
     <h2 class="demo-section__title">Playground</h2>
     <p class="demo-section__desc">Customise the tag using the controls below.</p>
@@ -240,6 +254,18 @@
           <td><code>string | null</code></td>
           <td><code>null</code></td>
           <td>Additional CSS classes added to the host element.</td>
+        </tr>
+        <tr>
+          <td><code>dismissible</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When true, renders an inline dismiss button.</td>
+        </tr>
+        <tr>
+          <td><code>removeIcon</code></td>
+          <td><code>string</code></td>
+          <td><code>'pi pi-times'</code></td>
+          <td>CSS class used for the dismiss button icon.</td>
         </tr>
       </tbody>
     </table>
