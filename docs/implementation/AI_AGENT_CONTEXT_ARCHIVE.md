@@ -169,6 +169,56 @@ Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
 
 ---
 
+Date: 2026-05-12 [TreeTable component — accessibility hardening COMPLETE (#33)]
+Changed:
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.types.ts
+      • Added `setsize: number` and `posinset: number` fields to `TreeTableFlatNode`
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.ts
+      • Added module-level `let nextTreeTableId: number = 0` counter
+      • Added `ElementRef` injection and `instanceId` property
+      • Added `ariaLabel` input signal (falls back to caption, then 'Tree table')
+      • Updated `buildFlatList` to compute `setsize` and `posinset` per sibling group
+      • Fixed `onKeydown` to scope row query to host element (was `document.querySelectorAll`)
+      • Added `ArrowRight` expand/navigate-child and `ArrowLeft` collapse/parent keyboard handlers
+      • Added `findNodeByKey` private helper for keyboard expand/collapse
+      • Added `focusParentRow` private helper for ArrowLeft parent navigation
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.html
+      • Updated `aria-label` binding to use `ariaLabel() || caption() || 'Tree table'`
+      • Added `[attr.aria-setsize]`, `[attr.aria-posinset]`, `[attr.aria-rowindex]`, `[attr.data-key]` on body rows
+      • Added `role="gridcell"` on checkbox selection `<td>` with `aria-colindex="1"`
+      • Added `[attr.role]` on data `<td>` (rowheader on expander column, gridcell on others) + `[attr.aria-colindex]`
+      • Added `aria-label="Select all rows"` + visually-hidden text to header checkbox span
+      • Added `aria-label="Select row"` to row checkbox spans
+      • Added `.uilib-tree-table-sr-only` span inside header selection `<th>` for `empty-table-header` axe rule
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.component.scss
+      • Added `.uilib-tree-table-sr-only` visually-hidden utility class
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
+  - projects/ui-lib-custom/src/lib/tree-table/tree-table.a11y.spec.ts (CREATED — 44 tests)
+      • ARIA structure (treegrid role, aria-label, ariaLabel input, caption fallback, default fallback)
+      • Row roles and aria-level at each depth (level 1, 2, 3)
+      • aria-expanded true/false/absent for expanded/collapsed/leaf rows; expand and collapse via toggle
+      • aria-setsize and aria-posinset for root rows, child rows, single-child grandchildren
+      • Cell roles (rowheader, gridcell, checkbox gridcell, aria-colindex)
+      • Keyboard: ArrowDown/Up navigation, clamping, ArrowRight expand, ArrowRight navigate-child, ArrowRight leaf no-op, ArrowLeft collapse, ArrowLeft parent navigation, ArrowLeft root no-op, Home/End
+      • Unique instanceId per instance, format check
+      • Empty table structure
+      • axe-core: empty, one-level, two-level expanded, collapsed, checkbox modes
+  - projects/ui-lib-custom/src/lib/tree-table/README.md
+      • Added `ariaLabel` input, ARIA structure diagram, ARIA attributes table, keyboard interaction table, CSS vars table, accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • TreeTable #33: ⏳ Queued → ✅ Done
+      • Data Display table: TreeTable row populated (API 9, A11y 9, Perf 8, Comp 8, Theme 8, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.5)
+State: TreeTable hardening complete. aria-setsize/posinset, role="rowheader"/gridcell, ArrowRight/ArrowLeft keyboard navigation, ElementRef-scoped row queries, prefers-reduced-motion SCSS, and SR-only accessible names for checkbox spans all in place. 44-test a11y regression suite covers full treegrid WAI-ARIA pattern.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-table/ --max-warnings 0 (PASS)
+  npx jest --testPathPatterns=tree-table --no-coverage (85/85 PASS — 41 unit + 44 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  npx jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: axe-core 4.11.1 flagged checkbox `<span role="checkbox">` with no accessible name (`aria-toggle-field-name`) and the `<th>` with only `aria-label` but no text content (`empty-table-header`). Fixed by adding `aria-label="Select all rows/row"` to spans and a `.uilib-tree-table-sr-only` span inside the header th.
+Next step: Tree (#34) hardening — `role=tree`, `role=treeitem`, expand/collapse keyboard navigation.
+
+---
+
 Date: 2026-05-12 [Timeline component — accessibility hardening COMPLETE (#71)]
 Changed:
   - projects/ui-lib-custom/src/lib/timeline/timeline.component.ts

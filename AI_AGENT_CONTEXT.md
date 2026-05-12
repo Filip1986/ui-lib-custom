@@ -75,20 +75,32 @@ Changed:
   - AI_AGENT_CONTEXT.md
   - docs/COMPONENT_SCORES.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/table/table.a11y.spec.ts
   - projects/ui-lib-custom/src/lib/tree/tree.ts
   - projects/ui-lib-custom/src/lib/tree/tree.html
   - projects/ui-lib-custom/src/lib/tree/tree-node.ts
   - projects/ui-lib-custom/src/lib/tree/tree-node.html
   - projects/ui-lib-custom/src/lib/tree/tree.scss
-State: Merged the latest `origin/main` into the TreeSelect accessibility branch again, reconciled the repeated Tree/docs conflicts, preserved the already-validated TreeSelect + Tree accessibility behavior, and kept the newer Skeleton bookkeeping from `main`.
+State: Merged the latest `origin/main` into the TreeSelect accessibility branch again, reconciled the repeated Tree/docs conflicts, preserved the already-validated TreeSelect + Tree accessibility behavior, and kept the newer bookkeeping from `main` (including Terminal status and the TreeTable archive entry).
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
   node_modules/.bin/jest --testPathPatterns='src/lib/tree/|tree-select' --no-coverage (172/172 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fourth merge + conflict pass was required.
+Terminal notes: `origin/main` advanced again after the previous merge resolution, so a fifth merge + conflict pass was required.
 Next step: Commit the refreshed merge resolution and reply on the PR thread with the new merge commit hash.
+
+Date: 2026-05-12 [Skeleton PR — merge conflict resolution COMPLETE (round 2)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+      • Resolved additive handoff conflict with the new ScrollTop entry from `origin/main`
+      • Archived older ScrollPanel and TreeTable handoffs so the active context keeps only the newest 3 entries
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Preserved Skeleton, Upload, MeterGroup, and Panel archive entries from both sides of the merge
+State: The Skeleton PR branch now has a true merge commit against `origin/main` at `0d3bf39`. This round of conflicts was limited to session-context bookkeeping files only.
+Verification:
+  npm run typecheck (PASS)
+Terminal notes: Fresh clone was shallow again, so `git fetch --unshallow origin` and `git fetch origin main:refs/remotes/origin/main` were required before performing the merge.
+Next step: No further action for this PR unless `origin/main` advances again and introduces new conflicts.
 
 Date: 2026-05-12 [ScrollTop component — accessibility hardening COMPLETE (#75)]
 Changed:
@@ -121,33 +133,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/scroll-top-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [ScrollPanel — 6-phase hardening COMPLETE (#62)]
-Changed:
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.ts
-      • Added module-level `let nextScrollPanelId: number = 0` counter and unique `componentId`/`contentId`
-      • Added `ariaLabel` input (`string | null`, default `null`) wired to `__content` via `[attr.aria-label]`
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.html
-      • Added `role="region"`, `tabindex="0"`, `[id]="contentId"`, `[attr.aria-label]="ariaLabel()"` to `__content` div
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.scss
-      • Added `outline: none` + `:focus-visible` ring on `__content`
-  - projects/ui-lib-custom/src/lib/scroll-panel/README.md
-      • Added `ariaLabel` input to inputs table
-      • Added ARIA attributes table, keyboard interaction table, expanded accessibility section
-      • Updated usage examples to show `ariaLabel` in context
-  - projects/ui-lib-custom/src/lib/scroll-panel/scroll-panel.a11y.spec.ts (CREATED — 16 tests)
-      • axe-core checks (3): labelled, unlabelled, all variants
-      • ARIA structure (6): role=region, tabindex=0, aria-label present/absent, id format, unique IDs
-      • Dynamic label (2): aria-label updates on signal change, removed on null
-      • Keyboard (3): focusable, ArrowDown no error, PageDown no error
-      • Multi-variant (1): all 3 variants expose role+tabindex
-  - docs/COMPONENT_SCORES.md
-      • ScrollPanel #62: ⏳ Queued → ✅ Done
-      • Layout table row: 9/9/9/8/9/9/9/9/9/9 avg 8.9
-State: ScrollPanel hardening complete. Scrollable region is now keyboard-accessible (tabindex=0, role=region), has an ariaLabel input for screen reader context, unique stable IDs per instance, and :focus-visible ring for visible focus indicator.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/scroll-panel/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=scroll-panel --no-coverage (29/29 PASS — 13 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Continue with Tier 6 queue — Tag (#53), Skeleton (#55), Divider (#58) or Toolbar (#59).
