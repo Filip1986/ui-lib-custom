@@ -63,6 +63,38 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-12 [Tag component — 6-phase hardening COMPLETE (#53)]
+Changed:
+  - projects/ui-lib-custom/src/lib/tag/tag.ts
+      • Added module-level `nextTagId` counter and unique host `tagId`
+      • Added dismissible API: `dismissible`, `removeIcon`, and `removed` output
+      • Added computed `removeAriaLabel` (`Remove {value} tag` fallback `Remove tag`) and dynamic host role (`status`/`group`)
+  - projects/ui-lib-custom/src/lib/tag/tag.html
+      • Added dismiss button template with mandatory aria-label and decorative remove icon `aria-hidden="true"`
+  - projects/ui-lib-custom/src/lib/tag/tag.scss
+      • Added dismiss button tokens and styles including `:focus-visible` ring
+      • Added `@media (prefers-reduced-motion: reduce)` override for host + remove button transitions
+  - projects/ui-lib-custom/src/lib/tag/tag.spec.ts
+      • Expanded unit coverage for dismissible rendering, remove aria-labels, remove icon aria-hidden, removed output emission, role swap, and host id format
+  - projects/ui-lib-custom/src/lib/tag/tag.a11y.spec.ts (CREATED — 14 tests)
+      • Added axe-core checks, ARIA structure assertions, unique ID checks, dismiss button labeling semantics, and keyboard focusability coverage
+  - projects/ui-lib-custom/src/lib/tag/README.md
+      • Added dismissible API docs, outputs table, ARIA attributes table, keyboard interaction table, CSS custom properties updates, and accessibility notes
+  - projects/demo/src/app/pages/tag/tag-demo.component.html
+      • Added dismissible usage section and API table rows for `dismissible` and `removeIcon`
+  - docs/COMPONENT_SCORES.md
+      • Tag #53 queue status: ⏳ Queued → ✅ Done
+      • Feedback & Status table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+State: Tag hardening complete. Dismissible tags now expose specific remove button labels, decorative icons are hidden from AT, unique IDs are generated, focus-visible treatment exists for the interactive control, and reduced-motion handling is in place with dedicated a11y regression coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tag/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=tag --no-coverage (40/40 PASS — 26 unit + 14 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+  npm run build:demo (PASS; pre-existing SCSS budget warnings only)
+Terminal notes: Fresh clone required `npm install`. UI screenshot captured at `/tmp/tag-hardening.png`.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
 Date: 2026-05-12 [MeterGroup component — accessibility hardening COMPLETE (#57)]
 Changed:
   - projects/ui-lib-custom/src/lib/meter-group/meter-group.ts
@@ -124,31 +156,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
-
-Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
-Changed:
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
-      • Added module-level `let nextProgressSpinnerId: number = 0` counter
-      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
-      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
-      • Added dark mode overrides for bootstrap and minimal variant arc colours
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
-  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
-      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
-      • ariaLabel reactive updates, two-instance ID uniqueness
-      • Visual state (size classes sm/lg)
-      • axe-core automated checks (5 states)
-  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
-      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
-  - docs/COMPONENT_SCORES.md
-      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
-State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
-Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.

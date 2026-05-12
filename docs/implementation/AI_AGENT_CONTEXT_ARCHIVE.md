@@ -1520,3 +1520,34 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Next step: PanelMenu hardening (Tier 2, #15).
+
+---
+
+Date: 2026-05-12 [ProgressSpinner — 6-phase hardening COMPLETE (#56)]
+Changed:
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.ts
+      • Added module-level `let nextProgressSpinnerId: number = 0` counter
+      • Added `public readonly spinnerId: string` bound to host `[attr.id]`
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.html
+      • Added `aria-hidden="true"` and `focusable="false"` to the `<svg>` element
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.scss
+      • Added dark mode overrides for bootstrap and minimal variant arc colours
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables both rotate and dash animations, holds arc at fixed partial draw
+  - projects/ui-lib-custom/src/lib/progress-spinner/progress-spinner.a11y.spec.ts (CREATED — 16 tests)
+      • ARIA structure (role, aria-label, aria-busy, SVG aria-hidden, focusable, unique id)
+      • ariaLabel reactive updates, two-instance ID uniqueness
+      • Visual state (size classes sm/lg)
+      • axe-core automated checks (5 states)
+  - projects/ui-lib-custom/src/lib/progress-spinner/README.md
+      • Full rewrite: ARIA attributes table, keyboard section, reduced-motion note, screen reader UX guidance, dark mode CSS vars
+  - docs/COMPONENT_SCORES.md
+      • ProgressSpinner #56: ⏳ Queued → ✅ Done; scores API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9
+State: ProgressSpinner hardening complete. SVG aria-hidden, unique instance IDs, prefers-reduced-motion, dark mode, and 16-test a11y regression suite all in place.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/progress-spinner/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=progress-spinner --no-coverage (35/35 PASS — 19 unit + 16 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Dark mode SCSS nesting was invalid — had to write explicit flat selectors instead of `&--variant-*` nesting inside `[data-theme='dark'] .ui-lib-progress-spinner`.
+Next step: MeterGroup (#57) hardening — Tier 6 Feedback, segment aria-label values, totals announced.
+
