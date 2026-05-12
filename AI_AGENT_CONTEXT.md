@@ -216,3 +216,80 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install`; screenshot captured at `/tmp/meter-group-hardening.png`.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]
+Changed:
+  - projects/ui-lib-custom/src/lib/panel/panel.a11y.spec.ts (CREATED — 23 tests)
+      • axe-core checks (4): basic, toggleable expanded, toggleable collapsed, all variants
+      • ARIA structure (5): role=region, aria-labelledby→header id, header id format, unique IDs, content id format
+      • Toggle button ARIA (6): absent when non-toggleable, aria-expanded true/false, aria-controls, accessible label, icon aria-hidden
+      • Content visibility ARIA (3): aria-hidden when collapsed, null when expanded, null when non-toggleable
+      • Keyboard interaction (3): Enter collapses, Space collapses, Enter expands collapsed panel
+      • Content projection (2): custom header rendered, aria-expanded present with custom header
+  - projects/ui-lib-custom/src/lib/panel/README.md
+      • Expanded CSS custom properties table (added font-size, font-weight, toggle-size entries)
+      • Added full ARIA attributes table (host, header div, content div, toggle button, toggle icon)
+      • Added keyboard interaction table (Tab, Enter, Space)
+      • Replaced one-liner accessibility section with detailed accessibility notes
+  - docs/COMPONENT_SCORES.md
+      • Panel #60: ⏳ Queued → ✅ Done in Tier 6 hardening queue
+      • Layout table: Panel row populated — 9/9/9/9/9/9/9/9/9/9 avg 9.0 🟢
+State: Panel hardening complete. All ARIA attributes were already in place (role=region, aria-labelledby,
+  aria-expanded, aria-controls, aria-hidden, prefers-reduced-motion, unique IDs, :focus-visible ring).
+  Deliverable is the new 23-test a11y spec + expanded README documentation.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/panel/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=panel --no-coverage (110/110 PASS — 87 unit + 23 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
+Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+Date: 2026-05-12 [Tree — 6-phase hardening COMPLETE (#34)]
+Changed:
+  - projects/ui-lib-custom/src/lib/tree/tree.ts
+      • Added module-level `let nextTreeId: number = 0` counter + `instanceId` property
+      • Added `ariaLabel` input; computed `hostAriaLabel()` / `hostAriaMultiselectable()` signals
+      • Host bindings: `[attr.id]`, `[attr.aria-label]`, `[attr.aria-multiselectable]`
+      • Replaced `expandFocusedNode`/`collapseFocusedNode` with `expandOrFocusChild`/`collapseOrFocusParent`
+      • Added `findParentTreeItem` (group-sibling traversal pattern, not raw ancestor chain)
+      • Added `focusItemByTypeAhead` method (alphanumeric type-ahead, wraps around, case-insensitive)
+  - projects/ui-lib-custom/src/lib/tree/tree-node.ts
+      • Added `setsize` input (default 1) and `posinset` input (default 1)
+  - projects/ui-lib-custom/src/lib/tree/tree-node.html
+      • Bound `aria-level`, `aria-setsize`, `aria-posinset`, `aria-disabled` on `[role="treeitem"]`
+      • Moved `aria-checked` from nested `role="checkbox"` span to the treeitem itself
+      • Checkbox span now has `aria-hidden="true"` (state lives on treeitem per WAI-ARIA)
+      • Passed `[setsize]` and `[posinset]` to recursive child nodes
+  - projects/ui-lib-custom/src/lib/tree/tree.html
+      • Fixed double `role="tree"`: inner `<ul>` changed to `role="none"` (host has `role="tree"`)
+      • Root `@for` loop passes `[setsize]="value().length"` and `[posinset]="i + 1"`
+  - projects/ui-lib-custom/src/lib/tree/tree.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling all transitions
+  - projects/ui-lib-custom/src/lib/tree/tree.a11y.spec.ts (CREATED — 55 tests)
+      • Role structure (5): role=tree on host, aria-label, inner ul=role=none, treeitem, group
+      • aria-level (3): depth 1/2/3 verified
+      • aria-setsize/aria-posinset (5): present on all items, correct root setsize=3, correct positions
+      • aria-expanded (3): true/false/absent on leaf
+      • aria-multiselectable (4): null/single/multiple/checkbox modes
+      • aria-selected (3): false unselected, true selected, absent in checkbox mode
+      • aria-checked (4): false unchecked, true checked, mixed partial, no nested role=checkbox
+      • aria-disabled (2): true on selectable=false, absent otherwise
+      • Unique instance IDs (1): two instances get different IDs
+      • Keyboard nav (8): ArrowDown/Up, Home, End, ArrowRight×3, ArrowLeft×3
+      • Type-ahead (6): d/p/m keys, wrap-around, case-insensitive, non-printable ignores
+      • Toggle ARIA (3): expand/collapse labels, tabindex=-1
+      • Filter ARIA (1): aria-label on filter input
+      • axe (5): basic, single, multiple, checkbox, partial-checked
+  - projects/ui-lib-custom/src/lib/tree/README.md
+      • Added `ariaLabel` input, full ARIA attributes table, keyboard interaction table, accessibility section
+  - docs/COMPONENT_SCORES.md
+      • Tree #34: ⏳ Queued → ✅ Done; scores 9/8/9/9/9/9/8/8/9/8 avg 8.6 🟢
+State: Tree hardening complete. All critical WAI-ARIA tree pattern attributes (aria-level, aria-setsize, aria-posinset, aria-checked on treeitem, aria-disabled, aria-multiselectable) are in place. Type-ahead nav, ArrowLeft parent-focus, ArrowRight child-focus, and prefers-reduced-motion implemented.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/tree/" --no-coverage (93/93 PASS — 38 unit + 55 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: `findParentTreeItem` required a group-sibling traversal strategy (not a raw ancestor chain) because the parent treeitem div and child group ul are siblings inside the component host, not parent-child.
+Next step: TreeSelect (#35) hardening — Tier 4, combobox+tree popup pattern.
+

@@ -69,7 +69,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |------|------------|---------------------------------------------------------------------------------|------------|
 | 32   | Table      | `role=grid`, column sort `aria-sort`, row selection `aria-selected`, pagination | ✅ Done     |
 | 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ✅ Done    |
-| 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ⏳ Queued   |
+| 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ✅ Done     |
 | 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ⏳ Queued   |
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done     |
 | 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
@@ -228,7 +228,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |-------------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Table             | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | TreeTable         | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
-| Tree              | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Tree              | 9   | 8    | 9    | 9    | 9     | 9   | 8    | 8      | 9       | 8    | 8.6 | 🟢     |
 | TreeSelect        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | DataView          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

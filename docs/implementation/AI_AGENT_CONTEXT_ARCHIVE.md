@@ -1588,6 +1588,8 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Next step: PanelMenu hardening (Tier 2, #15).
 
+---
+
 Date: 2026-05-12 [Panel component — accessibility hardening COMPLETE (#60)]
 Changed:
   - projects/ui-lib-custom/src/lib/panel/panel.a11y.spec.ts (CREATED — 23 tests)
