@@ -385,6 +385,7 @@ describe('DataView Accessibility', (): void => {
         fixture,
         '.ui-lib-data-view__layout-button'
       );
+      expect(buttons.length).toBe(2);
       buttons[0]?.focus();
       expect(document.activeElement).toBe(buttons[0]);
       buttons[1]?.focus();
