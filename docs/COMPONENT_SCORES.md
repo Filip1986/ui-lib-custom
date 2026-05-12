@@ -86,7 +86,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 42   | Alert           | `role=alert` vs `role=status`, dismiss button label                                 | ✅ Done     |
 | 43   | Message         | Same as Alert — live region role correctness                                        | ⏳ Queued   |
 | 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ⏳ Queued   |
-| 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ⏳ Queued   |
+| 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
 | 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
 | 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
 | 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ⏳ Queued   |
@@ -238,7 +238,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | PickList          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
-| Carousel          | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Carousel          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Galleria          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | Chart             | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 

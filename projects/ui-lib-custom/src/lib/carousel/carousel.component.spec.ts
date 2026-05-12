@@ -591,34 +591,34 @@ describe('CarouselComponent', (): void => {
       expect(nextBtn?.getAttribute('aria-label')).toBeTruthy();
     });
 
-    it('should set role="tablist" on the indicator list', async (): Promise<void> => {
+    it('should not set role="tablist" on the indicator list (uses list semantics)', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const indicatorList: HTMLElement | null = queryElement<HTMLElement>(
         fixture,
         '.uilib-carousel-indicator-list'
       );
-      expect(indicatorList?.getAttribute('role')).toBe('tablist');
+      expect(indicatorList?.getAttribute('role')).toBeNull();
     });
 
-    it('should set role="tab" on indicator buttons', async (): Promise<void> => {
+    it('should not set role="tab" on indicator buttons (uses aria-current)', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const dotButtons: HTMLButtonElement[] = queryAllElements<HTMLButtonElement>(
         fixture,
         '.uilib-carousel-indicator-button'
       );
       for (const button of dotButtons) {
-        expect(button.getAttribute('role')).toBe('tab');
+        expect(button.getAttribute('role')).toBeNull();
       }
     });
 
-    it('should set aria-selected="true" on the active indicator button', async (): Promise<void> => {
+    it('should set aria-current="true" on the active indicator button', async (): Promise<void> => {
       const fixture: ComponentFixture<DefaultHostComponent> = await createDefaultFixture();
       const dotButtons: HTMLButtonElement[] = queryAllElements<HTMLButtonElement>(
         fixture,
         '.uilib-carousel-indicator-button'
       );
-      expect(dotButtons[0]!.getAttribute('aria-selected')).toBe('true');
-      expect(dotButtons[1]!.getAttribute('aria-selected')).toBe('false');
+      expect(dotButtons[0]!.getAttribute('aria-current')).toBe('true');
+      expect(dotButtons[1]!.getAttribute('aria-current')).toBeNull();
     });
 
     it('should apply aria-roledescription="slide" to each item', async (): Promise<void> => {
@@ -679,8 +679,8 @@ describe('CarouselComponent', (): void => {
       const carousel: CarouselComponent = fixture.debugElement.query(
         By.directive(CarouselComponent)
       ).componentInstance as CarouselComponent;
-      expect(carousel.ariaSlideNumber(0)).toBe('slide 1');
-      expect(carousel.ariaSlideNumber(4)).toBe('slide 5');
+      expect(carousel.ariaSlideNumber(0)).toBe('Slide 1 of 5');
+      expect(carousel.ariaSlideNumber(4)).toBe('Slide 5 of 5');
     });
 
     it('should produce correct ariaPageLabel', async (): Promise<void> => {
@@ -688,9 +688,8 @@ describe('CarouselComponent', (): void => {
       const carousel: CarouselComponent = fixture.debugElement.query(
         By.directive(CarouselComponent)
       ).componentInstance as CarouselComponent;
-      expect(carousel.ariaPageLabel(0)).toBe('Page 1');
-      expect(carousel.ariaPageLabel(0)).toBe('Page 1');
-      expect(carousel.ariaPageLabel(3)).toBe('Page 4');
+      expect(carousel.ariaPageLabel(0)).toBe('Go to slide 1');
+      expect(carousel.ariaPageLabel(3)).toBe('Go to slide 4');
     });
   });
 });
