@@ -313,7 +313,11 @@ describe('DataView Accessibility', (): void => {
         '.ui-lib-data-view__item'
       );
       expect(renderedItems.length).toBe(1);
-      expect(renderedItems[0].textContent.trim()).toContain('Beta Keyboard');
+      const firstRenderedItem: HTMLElement | undefined = renderedItems[0];
+      if (firstRenderedItem === undefined) {
+        throw new Error('Expected exactly one filtered item');
+      }
+      expect(firstRenderedItem.textContent.trim()).toContain('Beta Keyboard');
     });
 
     it('does not hide all items for empty filter input', (): void => {
