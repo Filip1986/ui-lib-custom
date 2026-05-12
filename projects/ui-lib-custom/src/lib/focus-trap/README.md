@@ -67,6 +67,23 @@ isTrapActive.set(false);
 | `Tab`         | Move to next focusable descendant; wraps to first after last.       |
 | `Shift + Tab` | Move to previous focusable descendant; wraps to last before first.  |
 
+## ARIA attributes
+
+FocusTrap does not change the host role semantics. It only adds hidden sentinel nodes around the trapped container while active.
+
+| Element | Attribute | Value | Purpose |
+| ------- | --------- | ----- | ------- |
+| Sentinel nodes (start/end) | `tabindex` | `0` | Keep both Tab and Shift+Tab cycles inside the trap. |
+| Sentinel nodes (start/end) | `aria-hidden` | `true` | Keep sentinels out of the accessibility tree. |
+
+## CSS custom properties
+
+This directive does not expose any CSS custom properties.
+
+| Variable | Default | Description |
+| -------- | ------- | ----------- |
+| _(none)_ | — | FocusTrap is behavior-only; no visual tokens are required. |
+
 ## Focusable elements
 
 The trap includes: `a[href]`, `button`, `input`, `select`, `textarea`, elements with a non-negative `tabindex`, and `[contenteditable="true"]`. Disabled and `aria-hidden` elements are excluded.
@@ -82,6 +99,16 @@ When the directive input is set to `false` or the directive is destroyed (e.g. t
 - Pair with `role="dialog"` and `aria-modal="true"` on modal containers.
 - Pair with `aria-labelledby` pointing to the dialog title.
 - Combine with scroll-lock on `<body>` for full overlay accessibility.
+- On activation, the first focusable descendant receives focus. If none exist, the container is focused.
+- On deactivation, focus is restored to the element that triggered activation when it is still connected.
+
+## Directive alternative
+
+If you need imperative control (non-Angular or service-level overlays), use the core utility directly:
+
+```ts
+import { FocusTrap } from 'ui-lib-custom/core';
+```
 
 ## Host class
 
