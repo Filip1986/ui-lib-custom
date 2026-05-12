@@ -23,6 +23,8 @@ export type {
   DividerVariant,
 } from './divider.types';
 
+let nextDividerId: number = 0;
+
 /**
  * Divider — a visual separator that can be horizontal or vertical, with
  * optional label/icon content projected into the middle.
@@ -50,14 +52,18 @@ export type {
   styleUrl: './divider.scss',
   host: {
     '[class]': 'hostClasses()',
+    '[attr.id]': 'dividerId',
     role: 'separator',
-    '[attr.aria-orientation]': 'orientation()',
+    '[attr.aria-orientation]': 'ariaOrientation()',
+    '[attr.aria-hidden]': 'ariaHidden()',
+    '[attr.aria-label]': 'resolvedAriaLabel()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class Divider {
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  protected readonly dividerId: string = `ui-lib-divider-${nextDividerId++}`;
 
   /**
    * Direction of the divider line.
@@ -88,6 +94,18 @@ export class Divider {
   /** Additional CSS classes to attach to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
 
+  /**
+   * Accessible label announced by assistive technologies.
+   * Set this when divider content is meaningful text.
+   */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+
+  /**
+   * Marks divider as decorative-only.
+   * When true (and no ariaLabel is set), the divider is hidden from assistive technologies.
+   */
+  public readonly decorative: InputSignal<boolean> = input<boolean>(false);
+
   /** Resolved variant — direct input wins, then falls back to global ThemeConfigService. */
   private readonly effectiveVariant: Signal<DividerVariant> = computed<DividerVariant>(
     (): DividerVariant => this.variant() ?? this.themeConfig.variant()
@@ -96,6 +114,28 @@ export class Divider {
   /** Resolved alignment — direct input wins, then defaults to `'center'`. */
   private readonly effectiveAlign: Signal<DividerAlign> = computed<DividerAlign>(
     (): DividerAlign => this.align() ?? 'center'
+  );
+
+  /** Trimmed aria label value, or null when empty. */
+  public readonly resolvedAriaLabel: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const ariaLabel: string | null = this.ariaLabel();
+      if (ariaLabel === null) {
+        return null;
+      }
+      const trimmedAriaLabel: string = ariaLabel.trim();
+      return trimmedAriaLabel.length > 0 ? trimmedAriaLabel : null;
+    }
+  );
+
+  /** ARIA orientation mirrors the current divider orientation. */
+  public readonly ariaOrientation: Signal<DividerOrientation> = computed<DividerOrientation>(
+    (): DividerOrientation => this.orientation()
+  );
+
+  /** Hide decorative-only dividers from the accessibility tree. */
+  public readonly ariaHidden: Signal<'true' | null> = computed<'true' | null>((): 'true' | null =>
+    this.decorative() && this.resolvedAriaLabel() === null ? 'true' : null
   );
 
   /** Computed CSS classes applied to the host element. */
