@@ -17,10 +17,19 @@ export const CAROUSEL_SWIPE_THRESHOLD: number = 20;
 export const CAROUSEL_TRANSITION_DURATION: number = 500;
 
 /** ARIA label for the "previous" navigation button. */
-export const CAROUSEL_ARIA_PREV_LABEL: string = 'Previous';
+export const CAROUSEL_ARIA_PREV_LABEL: string = 'Previous slide';
 
 /** ARIA label for the "next" navigation button. */
-export const CAROUSEL_ARIA_NEXT_LABEL: string = 'Next';
+export const CAROUSEL_ARIA_NEXT_LABEL: string = 'Next slide';
 
 /** ARIA roledescription applied to each slide item. */
 export const CAROUSEL_ARIA_SLIDE_ROLEDESCRIPTION: string = 'slide';
+
+/** Default ARIA label for the carousel landmark region. */
+export const CAROUSEL_ARIA_REGION_LABEL: string = 'Carousel';
+
+/** Default ARIA label for the autoplay pause button. */
+export const CAROUSEL_ARIA_PAUSE_LABEL: string = 'Pause autoplay';
+
+/** Default ARIA label for the autoplay resume button. */
+export const CAROUSEL_ARIA_PLAY_LABEL: string = 'Resume autoplay';

@@ -206,6 +206,48 @@
   margin-top: var(--uilib-spacing-3, 0.75rem);
 }
 
+// ─── Autoplay button ──────────────────────────────────────────────────────────
+
+.uilib-carousel-autoplay-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--uilib-carousel-nav-button-size);
+  height: var(--uilib-carousel-nav-button-size);
+  background: var(--uilib-carousel-nav-button-bg);
+  color: var(--uilib-carousel-nav-button-color);
+  border: var(--uilib-carousel-nav-button-border);
+  border-radius: var(--uilib-carousel-nav-button-radius);
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  align-self: center;
+  margin-bottom: var(--uilib-spacing-1, 0.25rem);
+
+  &:hover {
+    background: var(--uilib-carousel-nav-button-bg-hover);
+  }
+
+  &:focus-visible {
+    box-shadow: var(--uilib-carousel-indicator-focus-ring);
+  }
+}
+
+// ─── Reduced motion ───────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .uilib-carousel-item-list {
+    transition: none !important;
+  }
+
+  .uilib-carousel-prev-button,
+  .uilib-carousel-next-button,
+  .uilib-carousel-indicator-button {
+    transition: none !important;
+  }
+}
+
 // ─── Size tokens ──────────────────────────────────────────────────────────────
 
 .uilib-carousel-sm {

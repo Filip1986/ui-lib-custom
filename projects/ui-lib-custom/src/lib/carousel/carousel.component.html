@@ -8,9 +8,31 @@
 
   <!-- Content area: prev button + viewport + next button -->
   <div class="uilib-carousel-content-container">
+    <!-- Autoplay pause/resume button (only shown when autoplay is configured) -->
+    @if (autoplayInterval() > 0) {
+      <button
+        type="button"
+        class="uilib-carousel-autoplay-button"
+        [attr.aria-label]="autoplayButtonLabel()"
+        (click)="toggleAutoplay()"
+      >
+        @if (playing()) {
+          <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="4" width="4" height="16" />
+            <rect x="14" y="4" width="4" height="16" />
+          </svg>
+        } @else {
+          <svg class="uilib-carousel-nav-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <polygon points="5,3 19,12 5,21" />
+          </svg>
+        }
+      </button>
+    }
+
     <div
       class="uilib-carousel-content"
       [attr.aria-live]="autoplayInterval() > 0 ? 'polite' : 'off'"
+      aria-atomic="false"
     >
       <!-- Previous button -->
       @if (showNavigators()) {
@@ -59,6 +81,7 @@
               [class.uilib-carousel-item-start]="$index === 0"
               [class.uilib-carousel-item-end]="$index === clonedItemsForStarting.length - 1"
               [attr.aria-hidden]="true"
+              role="group"
               [attr.aria-roledescription]="'slide'"
             >
               @if (itemTemplate()) {
@@ -79,6 +102,7 @@
               [class.uilib-carousel-item-end]="isItemLast($index)"
               [attr.aria-hidden]="!isItemActive($index)"
               [attr.aria-label]="ariaSlideNumber($index)"
+              role="group"
               [attr.aria-roledescription]="'slide'"
             >
               @if (itemTemplate()) {
@@ -98,6 +122,7 @@
               [class.uilib-carousel-item-start]="$index === 0"
               [class.uilib-carousel-item-end]="$index === clonedItemsForFinishing.length - 1"
               [attr.aria-hidden]="true"
+              role="group"
               [attr.aria-roledescription]="'slide'"
             >
               @if (itemTemplate()) {
@@ -143,23 +168,20 @@
       <ol
         #indicatorContainer
         class="uilib-carousel-indicator-list"
-        role="tablist"
-        aria-label="Carousel pages"
+        aria-label="Slide indicators"
         (keydown)="onIndicatorKeydown($event)"
       >
         @for (dot of dotsArray(); track dot) {
           <li
             class="uilib-carousel-indicator"
             [class.uilib-carousel-indicator-active]="currentPage() === dot"
-            role="presentation"
           >
             <button
               type="button"
               class="uilib-carousel-indicator-button"
-              role="tab"
               [attr.tabindex]="currentPage() === dot ? 0 : -1"
               [attr.aria-label]="ariaPageLabel(dot)"
-              [attr.aria-selected]="currentPage() === dot"
+              [attr.aria-current]="currentPage() === dot ? 'true' : null"
               (click)="navigateToPage($event, dot)"
             ></button>
           </li>
