@@ -1,340 +1,570 @@
-<section class="menu-demo" data-testid="menu-demo">
-  <h1>Menu</h1>
-  <p>
-    A flexible navigation panel that supports both static (inline) and popup modes.
-    Items can be organised into labelled groups, separated by dividers, and decorated
-    with icons. Popup menus can be triggered by any element via <code>toggle(event)</code>.
-  </p>
+<app-doc-page-layout>
+  <!-- ── Header ─────────────────────────────────────────────────────────────── -->
+  <ng-container docHeader>
+    <h1>Menu</h1>
+    <p>
+      A flexible navigation panel supporting both inline and popup modes. Items can
+      be organised into labelled groups, separated by dividers, and decorated with
+      icons. Implements the <strong>roving tabindex</strong> pattern for accessible
+      keyboard navigation.
+    </p>
+    <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+  </ng-container>
 
-  <!-- ── Basic (static) ───────────────────────────────────────────────── -->
-  <h2>Basic</h2>
-  <p class="demo-hint">
-    In static mode the panel is always visible. Add items via the
-    <code>model</code> input.
-  </p>
-  <div class="demo-inline">
-    <ui-lib-menu [model]="basicItems" />
-  </div>
+  <!-- ── Rail ──────────────────────────────────────────────────────────────── -->
+  <ng-container docRail>
+    <app-doc-toc [sections]="sections" />
+  </ng-container>
 
-  <!-- ── With Separator ───────────────────────────────────────────────── -->
-  <h2>With Separator</h2>
-  <p class="demo-hint">
-    Add <code>&#123; separator: true &#125;</code> to insert a horizontal
-    divider between groups of related items.
-  </p>
-  <div class="demo-inline">
-    <ui-lib-menu [model]="separatorItems" />
-  </div>
+  <!-- ── Overview ──────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="overview" class="doc-section">
+    <h2>Overview</h2>
+    <p>
+      <code>Menu</code> renders an accessible, keyboard-navigable menu panel that
+      supports flat and grouped item lists. Two modes are available:
+    </p>
+    <ul>
+      <li>
+        <strong>Inline mode</strong> (default) — the panel is always visible in
+        the document flow.
+      </li>
+      <li>
+        <strong>Popup mode</strong> (<code>[popup]="true"</code>) — the panel
+        floats as a fixed overlay anchored to the trigger element; control
+        visibility with <code>toggle()</code>, <code>show()</code>, or
+        <code>hide()</code>.
+      </li>
+    </ul>
+    <p>
+      Unlike <code>TieredMenu</code>, the <code>Menu</code> component supports
+      <strong>labelled groups</strong> via top-level items with an
+      <code>items</code> array. These render as section headers within a flat
+      panel rather than flyout sub-menus.
+    </p>
+  </section>
 
-  <!-- ── Disabled Items ───────────────────────────────────────────────── -->
-  <h2>Disabled Items</h2>
-  <p class="demo-hint">
-    Set <code>disabled: true</code> on any item to make it non-interactive
-    and visually muted. Disabled items receive <code>aria-disabled="true"</code>
-    and are excluded from keyboard navigation.
-  </p>
-  <div class="demo-inline">
-    <ui-lib-menu [model]="disabledItems" />
-  </div>
-
-  <!-- ── Grouped ──────────────────────────────────────────────────────── -->
-  <h2>Grouped Items</h2>
-  <p class="demo-hint">
-    Provide an <code>items</code> array on a top-level entry to create a
-    labelled group. The parent's <code>label</code> becomes the group header.
-  </p>
-  <div class="demo-inline">
-    <ui-lib-menu [model]="groupedItems" />
-  </div>
-
-  <!-- ── Popup mode ───────────────────────────────────────────────────── -->
-  <h2>Popup Mode</h2>
-  <p class="demo-hint">
-    Set <code>[popup]="true"</code> and call <code>menu.toggle($event)</code>
-    on the trigger element. The panel floats near the trigger and closes on
-    outside click or <kbd>Escape</kbd>.
-  </p>
-  <div class="demo-row">
-    <ui-lib-button
-      label="Options"
-      icon="pi pi-ellipsis-v"
-      iconPosition="right"
-      (click)="popupMenu.toggle($event)"
-    />
-    <ui-lib-menu #popupMenu [model]="popupItems" [popup]="true" />
-  </div>
-
-  <!-- ── Popup with grouped items ─────────────────────────────────────── -->
-  <h2>Popup with Grouped Items</h2>
-  <p class="demo-hint">
-    Grouped items work in popup mode too — the groups are rendered inline
-    within the floating panel.
-  </p>
-  <div class="demo-row">
-    <ui-lib-button
-      label="File Menu"
-      icon="pi pi-bars"
-      (click)="popupGroupedMenu.toggle($event)"
-    />
-    <ui-lib-menu #popupGroupedMenu [model]="popupGroupedItems" [popup]="true" />
-  </div>
-
-  <!-- ── Command callback & itemClick ─────────────────────────────────── -->
-  <h2>Command Callback &amp; itemClick Output</h2>
-  <p class="demo-hint">
-    Use the <code>command</code> callback on individual items or listen to
-    the <code>itemClick</code> output on the component to react to activations.
-  </p>
-  <div class="demo-inline">
-    <ui-lib-menu [model]="commandItems" (itemClick)="onItemClick($event)" />
-  </div>
-  @if (eventLog().length > 0) {
-    <div class="demo-event-log" aria-live="polite">
-      @for (entry of eventLog(); track $index) {
-        <p>{{ entry }}</p>
-      }
+  <!-- ── Basic ─────────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="basic" class="doc-section">
+    <h2>Basic (Inline)</h2>
+    <p>
+      The default inline mode renders the menu panel directly in the document
+      flow. Pass a <code>MenuItem[]</code> via <code>[model]</code>.
+    </p>
+    <div class="doc-preview doc-preview--narrow">
+      <ui-lib-menu [model]="basicItems" (itemClick)="onItemClick($event)" />
     </div>
-  }
+    @if (eventLog().length > 0) {
+      <div class="doc-event-log" aria-live="polite">
+        @for (entry of eventLog(); track $index) {
+          <p>{{ entry }}</p>
+        }
+      </div>
+    }
+    <app-doc-code-snippet [code]="snippets.basic" language="html" />
+  </section>
 
-  <!-- ── URL items ─────────────────────────────────────────────────────── -->
-  <h2>URL Items</h2>
-  <p class="demo-hint">
-    Set <code>url</code> on an item to render it as a native <code>&lt;a&gt;</code>
-    link. Combine with <code>target="_blank"</code> to open in a new tab.
-  </p>
-  <div class="demo-inline">
-    <ui-lib-menu [model]="urlItems" />
-  </div>
-
-  <!-- ── Variants ─────────────────────────────────────────────────────── -->
-  <h2>Variants</h2>
-  <p class="demo-hint">
-    Three design-system variants: <code>material</code> (default),
-    <code>bootstrap</code>, and <code>minimal</code>.
-  </p>
-  <div class="demo-variants">
-    <div class="demo-variant-col">
-      <p class="demo-label">Material</p>
-      <ui-lib-menu [model]="variantItems" variant="material" />
+  <!-- ── With Separator ────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="separator" class="doc-section">
+    <h2>With Separator</h2>
+    <p>
+      Add <code>&#123; separator: true &#125;</code> to insert a horizontal
+      divider between groups of related items. Separators use
+      <code>role="separator"</code> for screen reader support.
+    </p>
+    <div class="doc-preview doc-preview--narrow">
+      <ui-lib-menu [model]="separatorItems" />
     </div>
-    <div class="demo-variant-col">
-      <p class="demo-label">Bootstrap</p>
-      <ui-lib-menu [model]="variantItems" variant="bootstrap" />
+    <app-doc-code-snippet [code]="snippets.separator" language="typescript" />
+  </section>
+
+  <!-- ── Disabled Items ────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="disabled" class="doc-section">
+    <h2>Disabled Items</h2>
+    <p>
+      Set <code>disabled: true</code> on any item to make it non-interactive and
+      visually muted. Disabled items receive <code>aria-disabled="true"</code>
+      and are excluded from the roving tabindex navigation.
+    </p>
+    <div class="doc-preview doc-preview--narrow">
+      <ui-lib-menu [model]="disabledItems" />
     </div>
-    <div class="demo-variant-col">
-      <p class="demo-label">Minimal</p>
-      <ui-lib-menu [model]="variantItems" variant="minimal" />
+  </section>
+
+  <!-- ── Grouped ───────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="grouped" class="doc-section">
+    <h2>Grouped Items</h2>
+    <p>
+      Provide an <code>items</code> array on a top-level entry to create a
+      labelled section. The parent's <code>label</code> becomes a visual group
+      header; the group receives <code>role="group"</code> with an
+      <code>aria-label</code> matching the header text.
+    </p>
+    <div class="doc-preview doc-preview--narrow">
+      <ui-lib-menu [model]="groupedItems" />
     </div>
-  </div>
+    <app-doc-code-snippet [code]="snippets.grouped" language="typescript" />
+  </section>
 
-  <!-- ── Sizes ────────────────────────────────────────────────────────── -->
-  <h2>Sizes</h2>
-  <p class="demo-hint">
-    Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
-  </p>
-  <div class="demo-sizes">
-    <div class="demo-size-col">
-      <p class="demo-label">Small</p>
-      <ui-lib-menu [model]="sizeItems" size="sm" />
+  <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="popup" class="doc-section">
+    <h2>Popup Mode</h2>
+    <p>
+      Set <code>[popup]="true"</code> and control visibility via
+      <code>toggle(event)</code>, <code>show(event)</code>, or
+      <code>hide()</code>. Wire the trigger button with
+      <code>aria-haspopup</code>, <code>aria-expanded</code>, and
+      <code>aria-controls</code> for screen reader support.
+    </p>
+    <div class="doc-preview">
+      <ui-lib-button
+        severity="primary"
+        type="button"
+        [attr.aria-haspopup]="'menu'"
+        [attr.aria-expanded]="popupMenu.isVisible()"
+        [attr.aria-controls]="popupMenu.menuId"
+        (click)="popupMenu.toggle($any($event.currentTarget))"
+      >
+        Options
+      </ui-lib-button>
+      <ui-lib-menu
+        #popupMenu
+        [model]="popupItems"
+        [popup]="true"
+        (itemClick)="onItemClick($event)"
+      />
     </div>
-    <div class="demo-size-col">
-      <p class="demo-label">Medium</p>
-      <ui-lib-menu [model]="sizeItems" size="md" />
+    @if (eventLog().length > 0) {
+      <div class="doc-event-log" aria-live="polite">
+        @for (entry of eventLog(); track $index) {
+          <p>{{ entry }}</p>
+        }
+      </div>
+    }
+    <app-doc-code-snippet [code]="snippets.popup" language="html" />
+  </section>
+
+  <!-- ── Popup Grouped ─────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="popup-grouped" class="doc-section">
+    <h2>Popup with Groups</h2>
+    <p>
+      Grouped items work in popup mode too — the labelled sections are rendered
+      inline within the floating panel.
+    </p>
+    <div class="doc-preview">
+      <ui-lib-button
+        severity="primary"
+        type="button"
+        [attr.aria-haspopup]="'menu'"
+        [attr.aria-expanded]="popupGroupedMenu.isVisible()"
+        [attr.aria-controls]="popupGroupedMenu.menuId"
+        (click)="popupGroupedMenu.toggle($any($event.currentTarget))"
+      >
+        File Menu
+      </ui-lib-button>
+      <ui-lib-menu
+        #popupGroupedMenu
+        [model]="popupGroupedItems"
+        [popup]="true"
+        (itemClick)="onItemClick($event)"
+      />
     </div>
-    <div class="demo-size-col">
-      <p class="demo-label">Large</p>
-      <ui-lib-menu [model]="sizeItems" size="lg" />
+    @if (eventLog().length > 0) {
+      <div class="doc-event-log" aria-live="polite">
+        @for (entry of eventLog(); track $index) {
+          <p>{{ entry }}</p>
+        }
+      </div>
+    }
+  </section>
+
+  <!-- ── Commands & Events ─────────────────────────────────────────────────── -->
+  <section data-doc-anchor="commands" class="doc-section">
+    <h2>Commands &amp; Events</h2>
+    <p>
+      Use the <code>command</code> callback on individual items for item-local
+      behaviour, or listen to the <code>(itemClick)</code> output for a central
+      event handler. Both fire on click and keyboard activation.
+    </p>
+    <div class="doc-preview doc-preview--narrow">
+      <ui-lib-menu [model]="commandItems" (itemClick)="onItemClick($event)" />
     </div>
-  </div>
+    @if (eventLog().length > 0) {
+      <div class="doc-event-log" aria-live="polite">
+        @for (entry of eventLog(); track $index) {
+          <p>{{ entry }}</p>
+        }
+      </div>
+    }
+    <app-doc-code-snippet [code]="snippets.commands" language="typescript" />
+  </section>
 
-  <!-- ── API Reference ─────────────────────────────────────────────────── -->
-  <h2>API Reference</h2>
+  <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="url-items" class="doc-section">
+    <h2>URL Items</h2>
+    <p>
+      Set <code>url</code> on an item to render it as a native
+      <code>&lt;a href&gt;</code> element. Combine with
+      <code>target="_blank"</code> to open in a new tab.
+    </p>
+    <div class="doc-preview doc-preview--narrow">
+      <ui-lib-menu [model]="urlItems" />
+    </div>
+    <app-doc-code-snippet [code]="snippets.urlItems" language="typescript" />
+  </section>
 
-  <h3>Menu Inputs</h3>
-  <table class="api-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Default</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>model</code></td>
-        <td><code>MenuItem[]</code></td>
-        <td><code>[]</code></td>
-        <td>Items to render. Top-level items with <code>items</code> act as group headers.</td>
-      </tr>
-      <tr>
-        <td><code>popup</code></td>
-        <td><code>boolean</code></td>
-        <td><code>false</code></td>
-        <td>When true, the panel is hidden and shown as a floating popup via <code>toggle()</code>.</td>
-      </tr>
-      <tr>
-        <td><code>variant</code></td>
-        <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
-        <td><code>null</code></td>
-        <td>Design variant. Falls back to <code>ThemeConfigService</code> when null.</td>
-      </tr>
-      <tr>
-        <td><code>size</code></td>
-        <td><code>'sm' | 'md' | 'lg'</code></td>
-        <td><code>'md'</code></td>
-        <td>Controls item padding and font size.</td>
-      </tr>
-      <tr>
-        <td><code>styleClass</code></td>
-        <td><code>string | null</code></td>
-        <td><code>null</code></td>
-        <td>Extra CSS class applied to the host element.</td>
-      </tr>
-      <tr>
-        <td><code>ariaLabel</code></td>
-        <td><code>string</code></td>
-        <td><code>'Menu'</code></td>
-        <td>Accessible label for the menu panel.</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- ── Variants ──────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="variants" class="doc-section">
+    <h2>Variants</h2>
+    <p>
+      Three design variants are available: <code>material</code>,
+      <code>bootstrap</code>, and <code>minimal</code>. When
+      <code>variant</code> is <code>null</code> (the default), the value falls
+      back to <code>ThemeConfigService</code>.
+    </p>
+    <div class="demo-menu-variant-grid">
+      <div class="demo-menu-variant-col">
+        <p class="demo-menu-variant-label">Material</p>
+        <ui-lib-menu [model]="variantItems" variant="material" />
+      </div>
+      <div class="demo-menu-variant-col">
+        <p class="demo-menu-variant-label">Bootstrap</p>
+        <ui-lib-menu [model]="variantItems" variant="bootstrap" />
+      </div>
+      <div class="demo-menu-variant-col">
+        <p class="demo-menu-variant-label">Minimal</p>
+        <ui-lib-menu [model]="variantItems" variant="minimal" />
+      </div>
+    </div>
+    <app-doc-code-snippet [code]="snippets.variants" language="html" />
+  </section>
 
-  <h3>Menu Outputs</h3>
-  <table class="api-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Payload</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>itemClick</code></td>
-        <td><code>MenuItemCommandEvent</code></td>
-        <td>Emitted when a non-disabled leaf item is activated (click or keyboard).</td>
-      </tr>
-      <tr>
-        <td><code>menuShow</code></td>
-        <td><code>MouseEvent</code></td>
-        <td>Emitted when the popup panel becomes visible.</td>
-      </tr>
-      <tr>
-        <td><code>menuHide</code></td>
-        <td><code>void</code></td>
-        <td>Emitted when the popup panel is hidden.</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="sizes" class="doc-section">
+    <h2>Sizes</h2>
+    <p>
+      Three size tokens: <code>sm</code>, <code>md</code> (default), and
+      <code>lg</code>. The size affects item padding and font size.
+    </p>
+    <div class="demo-menu-size-grid">
+      <div class="demo-menu-size-col">
+        <p class="demo-menu-variant-label">Small</p>
+        <ui-lib-menu [model]="sizeItems" size="sm" />
+      </div>
+      <div class="demo-menu-size-col">
+        <p class="demo-menu-variant-label">Medium</p>
+        <ui-lib-menu [model]="sizeItems" size="md" />
+      </div>
+      <div class="demo-menu-size-col">
+        <p class="demo-menu-variant-label">Large</p>
+        <ui-lib-menu [model]="sizeItems" size="lg" />
+      </div>
+    </div>
+    <app-doc-code-snippet [code]="snippets.sizes" language="html" />
+  </section>
 
-  <h3>Menu Methods</h3>
-  <table class="api-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Signature</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>toggle</code></td>
-        <td><code>(event: MouseEvent): void</code></td>
-        <td>Toggles the popup open/closed. No-op in static mode.</td>
-      </tr>
-      <tr>
-        <td><code>show</code></td>
-        <td><code>(event: MouseEvent): void</code></td>
-        <td>Shows the popup anchored to the trigger element. No-op in static mode.</td>
-      </tr>
-      <tr>
-        <td><code>hide</code></td>
-        <td><code>(): void</code></td>
-        <td>Hides the popup. No-op in static mode or when already hidden.</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- ── API ───────────────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="api" class="doc-section">
+    <h2>API</h2>
 
-  <h3>MenuItem Interface</h3>
-  <table class="api-table">
-    <thead>
-      <tr>
-        <th>Property</th>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><code>label</code></td>
-        <td><code>string</code></td>
-        <td>Display text for the item or group header.</td>
-      </tr>
-      <tr>
-        <td><code>icon</code></td>
-        <td><code>string</code></td>
-        <td>Icon class rendered before the label.</td>
-      </tr>
-      <tr>
-        <td><code>disabled</code></td>
-        <td><code>boolean</code></td>
-        <td>When true, the item is non-interactive.</td>
-      </tr>
-      <tr>
-        <td><code>separator</code></td>
-        <td><code>boolean</code></td>
-        <td>When true, renders a horizontal divider line.</td>
-      </tr>
-      <tr>
-        <td><code>visible</code></td>
-        <td><code>boolean</code></td>
-        <td>When <code>false</code>, the item is hidden from the list.</td>
-      </tr>
-      <tr>
-        <td><code>items</code></td>
-        <td><code>MenuItem[]</code></td>
-        <td>Child items. Makes the parent a group header.</td>
-      </tr>
-      <tr>
-        <td><code>url</code></td>
-        <td><code>string</code></td>
-        <td>When set, the item renders as a native anchor link.</td>
-      </tr>
-      <tr>
-        <td><code>target</code></td>
-        <td><code>string</code></td>
-        <td>Anchor <code>target</code> attribute for <code>url</code> items.</td>
-      </tr>
-      <tr>
-        <td><code>styleClass</code></td>
-        <td><code>string</code></td>
-        <td>Extra CSS class added to the item element.</td>
-      </tr>
-      <tr>
-        <td><code>command</code></td>
-        <td><code>(event: MenuItemCommandEvent) =&gt; void</code></td>
-        <td>Callback invoked when the item is activated.</td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Inputs -->
+    <h3 data-doc-anchor="api-inputs">Inputs</h3>
+    <table class="doc-api-table">
+      <thead>
+        <tr><th>Name</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>model</code></td>
+          <td><code>MenuItem[]</code></td>
+          <td><code>[]</code></td>
+          <td>Items to render. Top-level items with an <code>items</code> array act as labelled group headers.</td>
+        </tr>
+        <tr>
+          <td><code>popup</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>When <code>true</code>, renders as a floating fixed overlay. Control with <code>toggle()</code>, <code>show()</code>, or <code>hide()</code>.</td>
+        </tr>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>'material' | 'bootstrap' | 'minimal' | null</code></td>
+          <td><code>null</code></td>
+          <td>Design variant. Falls back to <code>ThemeConfigService</code> when <code>null</code>.</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td><code>'sm' | 'md' | 'lg'</code></td>
+          <td><code>'md'</code></td>
+          <td>Size token controlling item padding and font size.</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>Extra CSS class applied to the host element.</td>
+        </tr>
+        <tr>
+          <td><code>ariaLabel</code></td>
+          <td><code>string</code></td>
+          <td><code>'Menu'</code></td>
+          <td>Accessible label for the <code>role="menu"</code> panel. Provide a unique value when multiple menus appear on screen.</td>
+        </tr>
+      </tbody>
+    </table>
 
-  <!-- ── Keyboard Navigation ────────────────────────────────────────────── -->
-  <h2>Keyboard Navigation</h2>
-  <table class="api-table">
-    <thead>
-      <tr>
-        <th>Key</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Move focus to previous / next item.</td></tr>
-      <tr><td><kbd>Home</kbd></td><td>Move focus to the first item.</td></tr>
-      <tr><td><kbd>End</kbd></td><td>Move focus to the last item.</td></tr>
-      <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td>Activate the focused item.</td></tr>
-      <tr><td><kbd>Escape</kbd></td><td>Close the popup menu (popup mode only).</td></tr>
-      <tr><td><kbd>Tab</kbd></td><td>Move focus to the next focusable element outside the menu.</td></tr>
-    </tbody>
-  </table>
-</section>
+    <!-- Outputs -->
+    <h3 data-doc-anchor="api-outputs">Outputs</h3>
+    <table class="doc-api-table">
+      <thead>
+        <tr><th>Name</th><th>Payload</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>itemClick</code></td>
+          <td><code>MenuItemCommandEvent</code></td>
+          <td>Emitted when a non-disabled leaf item is activated (click or keyboard).</td>
+        </tr>
+        <tr>
+          <td><code>menuShow</code></td>
+          <td><code>MouseEvent</code></td>
+          <td>Emitted when the popup panel becomes visible. Popup mode only.</td>
+        </tr>
+        <tr>
+          <td><code>menuHide</code></td>
+          <td><code>void</code></td>
+          <td>Emitted when the popup panel is hidden. Popup mode only.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Methods -->
+    <h3 data-doc-anchor="api-methods">Methods</h3>
+    <table class="doc-api-table">
+      <thead>
+        <tr><th>Name</th><th>Parameters</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>toggle(event)</code></td>
+          <td><code>MouseEvent</code></td>
+          <td>Toggles the popup open or closed anchored to the trigger. No-op in inline mode.</td>
+        </tr>
+        <tr>
+          <td><code>show(event)</code></td>
+          <td><code>MouseEvent</code></td>
+          <td>Shows the popup anchored to <code>event.currentTarget</code>. No-op in inline mode.</td>
+        </tr>
+        <tr>
+          <td><code>hide()</code></td>
+          <td>—</td>
+          <td>Hides the popup and restores focus to the trigger element. No-op in inline mode.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- MenuItem -->
+    <h3 data-doc-anchor="api-item">MenuItem</h3>
+    <table class="doc-api-table">
+      <thead>
+        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>label</code></td>
+          <td><code>string?</code></td>
+          <td>Display text for the item or group header.</td>
+        </tr>
+        <tr>
+          <td><code>icon</code></td>
+          <td><code>string?</code></td>
+          <td>Icon class rendered in a decorative <code>&lt;span aria-hidden="true"&gt;</code>.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean?</code></td>
+          <td>When <code>true</code>, item is non-interactive; gets <code>aria-disabled="true"</code> and excluded from keyboard navigation.</td>
+        </tr>
+        <tr>
+          <td><code>separator</code></td>
+          <td><code>boolean?</code></td>
+          <td>Renders a <code>&lt;li role="separator"&gt;</code> horizontal divider.</td>
+        </tr>
+        <tr>
+          <td><code>visible</code></td>
+          <td><code>boolean?</code></td>
+          <td>When explicitly <code>false</code>, excludes the item from rendering.</td>
+        </tr>
+        <tr>
+          <td><code>items</code></td>
+          <td><code>MenuItem[]?</code></td>
+          <td>Child items — makes the parent a labelled group header (<code>role="group"</code>).</td>
+        </tr>
+        <tr>
+          <td><code>url</code></td>
+          <td><code>string?</code></td>
+          <td>Renders the item as <code>&lt;a href="..."&gt;</code>.</td>
+        </tr>
+        <tr>
+          <td><code>target</code></td>
+          <td><code>string?</code></td>
+          <td><code>target</code> attribute for URL-based items (e.g. <code>'_blank'</code>).</td>
+        </tr>
+        <tr>
+          <td><code>styleClass</code></td>
+          <td><code>string?</code></td>
+          <td>Extra CSS class added to the rendered link element.</td>
+        </tr>
+        <tr>
+          <td><code>command</code></td>
+          <td><code>function?</code></td>
+          <td>Callback invoked when the item is activated (click or keyboard).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CSS Custom Properties -->
+    <h3>CSS Custom Properties</h3>
+    <table class="doc-api-table">
+      <thead>
+        <tr><th>Token</th><th>Default</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>--uilib-menu-bg</code></td><td><code>var(--uilib-surface-overlay, #fff)</code></td><td>Panel background colour.</td></tr>
+        <tr><td><code>--uilib-menu-border</code></td><td><code>1px solid var(--uilib-color-neutral-200, #e5e7eb)</code></td><td>Panel border.</td></tr>
+        <tr><td><code>--uilib-menu-shadow</code></td><td><code>var(--uilib-shadow-md)</code></td><td>Panel box-shadow.</td></tr>
+        <tr><td><code>--uilib-menu-radius</code></td><td><code>var(--uilib-radius-md, 0.375rem)</code></td><td>Panel border-radius.</td></tr>
+        <tr><td><code>--uilib-menu-min-width</code></td><td><code>12rem</code></td><td>Minimum panel width.</td></tr>
+        <tr><td><code>--uilib-menu-padding</code></td><td><code>var(--uilib-spacing-1, 0.25rem)</code></td><td>Vertical panel padding.</td></tr>
+        <tr><td><code>--uilib-menu-item-padding-y</code></td><td><code>var(--uilib-spacing-2, 0.5rem)</code></td><td>Item vertical padding.</td></tr>
+        <tr><td><code>--uilib-menu-item-padding-x</code></td><td><code>var(--uilib-spacing-3, 0.75rem)</code></td><td>Item horizontal padding.</td></tr>
+        <tr><td><code>--uilib-menu-item-bg-hover</code></td><td><code>var(--uilib-color-neutral-100, #f3f4f6)</code></td><td>Hover/focus background.</td></tr>
+        <tr><td><code>--uilib-menu-item-color-hover</code></td><td><code>var(--uilib-color-neutral-900, #111827)</code></td><td>Hover/focus text colour.</td></tr>
+        <tr><td><code>--uilib-menu-item-color-disabled</code></td><td><code>var(--uilib-color-neutral-400, #9ca3af)</code></td><td>Disabled item text colour.</td></tr>
+        <tr><td><code>--uilib-menu-icon-gap</code></td><td><code>var(--uilib-spacing-2, 0.5rem)</code></td><td>Gap between icon and label.</td></tr>
+        <tr><td><code>--uilib-menu-separator-color</code></td><td><code>var(--uilib-color-neutral-200, #e5e7eb)</code></td><td>Separator line colour.</td></tr>
+        <tr><td><code>--uilib-menu-separator-my</code></td><td><code>var(--uilib-spacing-1, 0.25rem)</code></td><td>Separator vertical margin.</td></tr>
+        <tr><td><code>--uilib-menu-focus-shadow</code></td><td><code>0 0 0 2px color-mix(...)</code></td><td>Focus-visible ring.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
+  <section data-doc-anchor="accessibility" class="doc-section">
+    <h2>Accessibility</h2>
+
+    <!-- ARIA -->
+    <h3 data-doc-anchor="a11y-aria">ARIA Attributes</h3>
+    <table class="doc-api-table">
+      <thead>
+        <tr><th>Element</th><th>Attribute</th><th>Value</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Panel <code>&lt;div&gt;</code></td>
+          <td><code>role</code></td>
+          <td><code>"menu"</code></td>
+          <td>Root semantic container for the command list.</td>
+        </tr>
+        <tr>
+          <td>Panel <code>&lt;div&gt;</code></td>
+          <td><code>aria-label</code></td>
+          <td><code>ariaLabel</code> input</td>
+          <td>Accessible name; provide a unique value when multiple menus are on screen.</td>
+        </tr>
+        <tr>
+          <td>Root <code>&lt;ul&gt;</code></td>
+          <td><code>role</code></td>
+          <td><code>"presentation"</code></td>
+          <td>Presentational wrapper; semantic role is carried by the panel.</td>
+        </tr>
+        <tr>
+          <td>Group <code>&lt;ul&gt;</code></td>
+          <td><code>role</code></td>
+          <td><code>"group"</code></td>
+          <td>Announces labelled item sections to screen readers.</td>
+        </tr>
+        <tr>
+          <td>Group <code>&lt;ul&gt;</code></td>
+          <td><code>aria-label</code></td>
+          <td>Parent item label</td>
+          <td>Group label matches the visual section header.</td>
+        </tr>
+        <tr>
+          <td>Item <code>&lt;li&gt;</code></td>
+          <td><code>role</code></td>
+          <td><code>"none"</code></td>
+          <td>Neutral wrapper; the interactive link carries the semantic role.</td>
+        </tr>
+        <tr>
+          <td>Item link <code>&lt;a&gt;</code></td>
+          <td><code>role</code></td>
+          <td><code>"menuitem"</code></td>
+          <td>Identifies each interactive item as a menu command.</td>
+        </tr>
+        <tr>
+          <td>Disabled link</td>
+          <td><code>aria-disabled</code></td>
+          <td><code>"true"</code></td>
+          <td>Communicates non-interactive state without removing the element.</td>
+        </tr>
+        <tr>
+          <td>Separator <code>&lt;li&gt;</code></td>
+          <td><code>role</code></td>
+          <td><code>"separator"</code></td>
+          <td>Exposed as a structural separator inside the menu.</td>
+        </tr>
+        <tr>
+          <td>Group label <code>&lt;div&gt;</code></td>
+          <td><code>aria-hidden</code></td>
+          <td><code>"true"</code></td>
+          <td>Visual heading only; group is named via <code>aria-label</code> on the <code>&lt;ul&gt;</code>.</td>
+        </tr>
+        <tr>
+          <td>Icons</td>
+          <td><code>aria-hidden</code></td>
+          <td><code>"true"</code></td>
+          <td>Decorative only — not announced by screen readers.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Keyboard -->
+    <h3 data-doc-anchor="a11y-keyboard">Keyboard Navigation</h3>
+    <table class="doc-api-table">
+      <thead>
+        <tr><th>Key</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd></td><td>Move focus to the next or previous enabled item (wraps, skips disabled).</td></tr>
+        <tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>Jump to the first or last enabled item.</td></tr>
+        <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td>Activate the focused item.</td></tr>
+        <tr><td><kbd>Escape</kbd></td><td>Close the popup panel and restore focus to the trigger element. No-op in inline mode.</td></tr>
+        <tr><td><kbd>Tab</kbd></td><td>Close the popup and move focus naturally to the next focusable element.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Notes -->
+    <h3>Notes</h3>
+    <ul>
+      <li>
+        The <strong>roving tabindex</strong> pattern is used — only one item has
+        <code>tabindex="0"</code> at a time, all others use
+        <code>tabindex="-1"</code>. This reserves <kbd>Tab</kbd> for leaving
+        the menu rather than stepping through every item.
+      </li>
+      <li>
+        Focus is restored to the element that triggered the popup when the
+        panel closes via <kbd>Escape</kbd>, <kbd>Tab</kbd>, or a click outside.
+      </li>
+      <li>
+        Popup trigger ARIA wiring is the consumer's responsibility — expose
+        <code>menuId</code> and <code>isVisible()</code> for binding
+        <code>aria-controls</code> and <code>aria-expanded</code> on the trigger.
+      </li>
+      <li>
+        The popup slide-in animation is disabled when
+        <code>prefers-reduced-motion: reduce</code> is active.
+      </li>
+    </ul>
+  </section>
+</app-doc-page-layout>
