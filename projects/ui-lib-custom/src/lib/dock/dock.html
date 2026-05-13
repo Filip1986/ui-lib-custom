@@ -1,4 +1,4 @@
-<nav class="ui-lib-dock__container" [attr.aria-label]="'Dock'">
+<nav class="ui-lib-dock__container" [attr.aria-label]="ariaLabel()">
   <ul class="ui-lib-dock__list" role="list">
     @for (item of visibleItems(); track $index) {
       <li
@@ -9,51 +9,84 @@
         (mouseenter)="onItemMouseEnter($index)"
         (mouseleave)="onItemMouseLeave()"
       >
-        <!-- Anchor with routerLink -->
-        @if (item.routerLink && isClickable(item)) {
+        <!-- Anchor with routerLink (disabled: keeps element type, drops navigation) -->
+        @if (item.routerLink) {
           <a
             class="ui-lib-dock__item-link"
-            [routerLink]="item.routerLink"
+            [routerLink]="item.disabled ? null : item.routerLink"
             [attr.target]="item.target ?? null"
-            [attr.aria-label]="item.label ?? null"
+            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
             (click)="onItemClick($event, item)"
           >
-            @if (item.icon) {
-              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
+            @if (itemTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: item, index: $index }"
+              />
+            } @else {
+              @if (item.icon) {
+                <ui-lib-icon
+                  class="ui-lib-dock__item-icon"
+                  [name]="item.icon"
+                  aria-hidden="true"
+                />
+              }
             }
           </a>
         }
 
-        <!-- Anchor with external URL -->
-        @else if (item.url && isClickable(item)) {
+        <!-- Anchor with external URL (disabled: keeps element type, drops href) -->
+        @else if (item.url) {
           <a
             class="ui-lib-dock__item-link"
-            [href]="item.url"
+            [attr.href]="item.disabled ? null : item.url"
             [attr.target]="item.target ?? null"
-            [attr.aria-label]="item.label ?? null"
+            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
             (click)="onItemClick($event, item)"
           >
-            @if (item.icon) {
-              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
+            @if (itemTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: item, index: $index }"
+              />
+            } @else {
+              @if (item.icon) {
+                <ui-lib-icon
+                  class="ui-lib-dock__item-icon"
+                  [name]="item.icon"
+                  aria-hidden="true"
+                />
+              }
             }
           </a>
         }
 
-        <!-- Button for command-only items -->
-        @else if (item.command && isClickable(item)) {
+        <!-- Button for command-only items (disabled: button with disabled attribute) -->
+        @else if (item.command) {
           <button
             type="button"
             class="ui-lib-dock__item-link"
-            [attr.aria-label]="item.label ?? null"
+            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
             [attr.aria-disabled]="item.disabled ? 'true' : null"
             [disabled]="item.disabled ? true : null"
             (click)="onItemClick($event, item)"
             (keydown)="onItemKeyDown($event, item)"
           >
-            @if (item.icon) {
-              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
+            @if (itemTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: item, index: $index }"
+              />
+            } @else {
+              @if (item.icon) {
+                <ui-lib-icon
+                  class="ui-lib-dock__item-icon"
+                  [name]="item.icon"
+                  aria-hidden="true"
+                />
+              }
             }
           </button>
         }
@@ -62,16 +95,26 @@
         @else {
           <span
             class="ui-lib-dock__item-link ui-lib-dock__item-link--static"
-            [attr.aria-label]="item.label ?? null"
-            [attr.aria-disabled]="item.disabled ? 'true' : null"
+            [attr.aria-label]="item.ariaLabel ?? item.label ?? null"
           >
-            @if (item.icon) {
-              <ui-lib-icon class="ui-lib-dock__item-icon" [name]="item.icon" />
+            @if (itemTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: item, index: $index }"
+              />
+            } @else {
+              @if (item.icon) {
+                <ui-lib-icon
+                  class="ui-lib-dock__item-icon"
+                  [name]="item.icon"
+                  aria-hidden="true"
+                />
+              }
             }
           </span>
         }
 
-        <!-- Tooltip label -->
+        <!-- Tooltip label (decorative, hidden from AT) -->
         @if (item.label) {
           <div class="ui-lib-dock__tooltip" aria-hidden="true">{{ item.label }}</div>
         }

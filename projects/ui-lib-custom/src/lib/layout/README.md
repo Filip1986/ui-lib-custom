@@ -12,6 +12,7 @@
 **Selector:** `ui-lib-container`
 
 Centers content with a max-width constraint and uniform padding.
+Single host element — no wrapper divs, no extra DOM nodes.
 
 ### Inputs
 
@@ -19,12 +20,70 @@ Centers content with a max-width constraint and uniform padding.
 |------|------|---------|-------|
 | `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full'` | `'lg'` | Max-width via `--uilib-container-<size>` |
 | `centered` | `boolean` | `false` | Applies `margin: auto` to center horizontally |
-| `inset` | `InsetToken \| null` | `null` | Semantic uniform padding (preferred); maps to `--uilib-inset-*` |
+| `inset` | `'sm' \| 'md' \| 'lg' \| 'xl' \| null` | `null` | Semantic uniform padding (preferred); maps to `--uilib-inset-*` |
 | `padding` | `SpacingToken` | `4` | Back-compat numeric padding token; ignored when `inset` is set |
 
 ### Outputs
 
 _none_
+
+### Size presets
+
+| Size | Max-width | CSS variable override |
+|------|-----------|-----------------------|
+| `sm` | 640 px | `--uilib-container-sm` |
+| `md` | 768 px | `--uilib-container-md` |
+| `lg` | 1024 px *(default)* | `--uilib-container-lg` |
+| `xl` | 1280 px | `--uilib-container-xl` |
+| `2xl` | 1536 px | `--uilib-container-2xl` |
+| `full` | 100 % | `--uilib-container-full` |
+
+### Custom max-width override
+
+Override the max-width for any `size` by setting the corresponding CSS custom property on a parent
+or on the host element itself:
+
+```css
+/* site-wide narrower xl breakpoint */
+:root {
+  --uilib-container-xl: 1200px;
+}
+
+/* scoped override via style binding */
+```
+```html
+<ui-lib-container size="xl" style="--uilib-container-xl: 960px;">
+  <!-- content constrained to 960 px -->
+</ui-lib-container>
+```
+
+### Skip-link target support
+
+Containers that serve as landmark regions (e.g. the main page body) are frequently targeted by
+skip navigation links:
+
+```html
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<ui-lib-container id="main-content" size="xl" [centered]="true" inset="md">
+  <!-- page content -->
+</ui-lib-container>
+```
+
+When a static `id` attribute is present on the host element, the container automatically adds
+`tabindex="-1"` so keyboard users and assistive technology can programmatically focus it after
+activating the skip link.  The container does **not** appear in the natural tab order.
+
+> **Note:** Only static `id` attributes (plain HTML attribute syntax) trigger this behaviour.
+> Dynamic bindings (`[id]="someId"`) do not affect `tabindex`; apply `tabindex="-1"` manually
+> in that case.
+
+### Accessibility notes
+
+- Renders as a plain `<ui-lib-container>` custom element — **no** landmark role (`main`, `nav`,
+  `aside`, etc.) is added.  Wrapping in `<main>`, `<nav>`, etc. is the consumer's responsibility.
+- `overflow: hidden` is **never** applied.  Content at the edge of the max-width constraint
+  remains reachable for screen-magnification users who pan horizontally.
 
 ---
 
