@@ -128,6 +128,20 @@ ui-lib-toolbar {
   }
 
   // =========================================================================
+  // Focus-visible rings for interactive elements inside the toolbar
+  // =========================================================================
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--uilib-color-primary, #3b82f6);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  // =========================================================================
   // Dark-mode adjustments
   // =========================================================================
   [data-theme='dark'] &,
@@ -150,5 +164,16 @@ ui-lib-toolbar {
       --uilib-toolbar-background: transparent;
       --uilib-toolbar-border-color: var(--uilib-surface-700, #374151);
     }
+  }
+}
+
+// =============================================================================
+// Reduced-motion: disable transitions on the toolbar host and its direct groups
+// =============================================================================
+@media (prefers-reduced-motion: reduce) {
+  .ui-lib-toolbar,
+  .ui-lib-toolbar__group {
+    transition: none;
+    animation: none;
   }
 }

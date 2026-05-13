@@ -77,26 +77,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/COMPONENT_SCORES.md
-  - docs/reference/components/ALERT.md
-  - projects/ui-lib-custom/src/lib/alert/README.md
-  - projects/ui-lib-custom/src/lib/alert/alert.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.html
-  - projects/ui-lib-custom/src/lib/alert/alert.scss
-  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
-State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements. Added dedicated alert accessibility regression tests and updated score/docs bookkeeping.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/alert/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=src/lib/alert --no-coverage (41/41 PASS — 28 unit + 13 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Demo screenshot captured at `/tmp/alert-hardening.png`. Playwright MCP browser lock prevented direct playwright-browser usage; installed Playwright Chromium and captured the screenshot via a Node Playwright script.
-Next step: Message hardening (Tier 5, #43).
-
 Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
 Changed:
   - projects/ui-lib-custom/src/lib/divider/divider.ts
@@ -151,3 +131,40 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
 Next step: Continue Tier 6 queue with remaining queued components.
+
+Date: 2026-05-13 [Toolbar component — 6-phase hardening COMPLETE (#59)]
+Changed:
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.ts
+      • Added module-level `nextToolbarId` counter and unique host `toolbarId`
+      • Bound `[id]` to host metadata
+      • Injected `ElementRef` for DOM-querying keyboard navigation
+      • Added `(keydown)` and `(focusin)` host listeners for roving-tabindex navigation
+      • Implemented WAI-ARIA Toolbar Pattern: ArrowRight/Left/Up/Down, Home, End with wrap-around
+      • Added `afterNextRender` init to set initial roving tabindex on projected items
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.scss
+      • Added `:focus-visible` ring (2 px outline, outline-offset 2px) for all interactive elements
+      • Added `@media (prefers-reduced-motion: reduce)` block
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.spec.ts
+      • Added tests for unique ID, two-instance ID uniqueness, keyboard navigation (ArrowRight/Left, wrap, Home/End, tabindex updates)
+  - projects/ui-lib-custom/src/lib/toolbar/toolbar.a11y.spec.ts (CREATED — 20 tests)
+      • axe-core: default, no-label, icon-only
+      • ARIA: role=toolbar, aria-label, decorative aria-hidden, icon button aria-label
+      • Unique IDs: generated id pattern, two-instance uniqueness
+      • Roving tabindex: initial state, non-active items, focusin update
+      • Keyboard: ArrowRight/Left/Down/Up, wrap, Home, End, tabindex update after nav
+  - projects/ui-lib-custom/src/lib/toolbar/README.md
+      • Added ARIA Attributes table, Keyboard Interaction table, WAI-ARIA pattern link
+      • Expanded Accessibility section with icon-only button guidance and focus/motion notes
+  - docs/COMPONENT_SCORES.md
+      • Toolbar #59: ⏳ Queued → ✅ Done
+      • Layout table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived Alert #42 handoff to keep only newest 3 here
+State: Toolbar hardening complete. Component now has unique generated IDs, full WAI-ARIA Toolbar keyboard pattern (roving tabindex, arrow-key nav with wrap, Home/End), :focus-visible rings, prefers-reduced-motion guard, updated README with all tables, and 20-test a11y spec + 8 new keyboard nav unit tests (48 total: 27 unit + 20 a11y + 1 two-instance).
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toolbar/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=toolbar --no-coverage (48/48 PASS — 27 unit + 20 a11y + 1 ID uniqueness)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: No blocking issues. All validations green on first attempt after npm install.
+Next step: Continue Tier 6 queue — SpeedDial (#47) or SelectButton (#48) or VirtualScroller (#50).

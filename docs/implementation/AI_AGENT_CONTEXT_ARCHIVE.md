@@ -4,6 +4,23 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/reference/components/ALERT.md
+  - projects/ui-lib-custom/src/lib/alert/README.md
+  - projects/ui-lib-custom/src/lib/alert/alert.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.html
+  - projects/ui-lib-custom/src/lib/alert/alert.scss
+  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
+State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements.
+Verification: eslint PASS, 41/41 tests PASS, ng build PASS, entry-points 97/97 PASS.
+Next step: Message hardening (Tier 5, #43).
+
+---
+
 Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
 Changed:
   - projects/ui-lib-custom/src/lib/data-view/data-view.component.ts
