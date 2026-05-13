@@ -358,3 +358,20 @@ ui-lib-dock.ui-lib-dock--variant-bootstrap[data-theme='dark'] {
   --uilib-dock-border-color: var(--uilib-color-neutral-700, #374151);
   --uilib-dock-item-bg-hover: var(--uilib-color-neutral-700, #374151);
 }
+
+// ── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-dock .ui-lib-dock__item {
+    transition: none;
+    transform: none !important;
+  }
+
+  ui-lib-dock .ui-lib-dock__item-link {
+    transition: none;
+  }
+
+  ui-lib-dock .ui-lib-dock__tooltip {
+    transition: none;
+  }
+}
