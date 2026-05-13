@@ -300,18 +300,14 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<DefaultHostComponent> =
       await createFixture(DefaultHostComponent);
     await checkA11y(fixture, {
-      axeOptions: {
-        rules: SKIP_COLOR_CONTRAST_RULES,
-      },
+      rules: SKIP_COLOR_CONTRAST_RULES,
     });
   });
 
   it('axe passes for form field with hint', async (): Promise<void> => {
     const fixture: ComponentFixture<HintHostComponent> = await createFixture(HintHostComponent);
     await checkA11y(fixture, {
-      axeOptions: {
-        rules: SKIP_COLOR_CONTRAST_RULES,
-      },
+      rules: SKIP_COLOR_CONTRAST_RULES,
     });
   });
 
@@ -319,9 +315,7 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<InvalidHostComponent> =
       await createFixture(InvalidHostComponent);
     await checkA11y(fixture, {
-      axeOptions: {
-        rules: SKIP_COLOR_CONTRAST_RULES,
-      },
+      rules: SKIP_COLOR_CONTRAST_RULES,
     });
   });
 
@@ -329,9 +323,7 @@ describe('FormField Accessibility', (): void => {
     const fixture: ComponentFixture<DisabledHostComponent> =
       await createFixture(DisabledHostComponent);
     await checkA11y(fixture, {
-      axeOptions: {
-        rules: SKIP_COLOR_CONTRAST_RULES,
-      },
+      rules: SKIP_COLOR_CONTRAST_RULES,
     });
   });
 });
