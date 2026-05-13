@@ -15,6 +15,8 @@
 | `id` | `string \| null` | `null` | Forwarded to the native `<input>` id |
 | `name` | `string \| null` | `null` | Forwarded to the native `<input>` name |
 | `label` | `string` | `''` | Rendered as a `<label>` element above the input |
+| `ariaLabel` | `string \| null` | `null` | ARIA label on the native `<input>` — use when no visible label is rendered |
+| `ariaLabelledBy` | `string \| null` | `null` | Space-separated IDs of external elements that label the input |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
 | `type` | `InputType` | `'text'` | Any valid HTML input type |

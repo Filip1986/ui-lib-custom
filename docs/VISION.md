@@ -452,6 +452,86 @@ Potential future layers:
 
 ---
 
+## Business Model
+
+The library is free. That is not a temporary state — it is a permanent strategic commitment.
+Free is what builds the community. Community is what builds the trust. Trust is what builds
+every revenue stream that follows.
+
+The model that works — proven by PrimeTek (PrimeNG), AG Grid, and others — is:
+
+> **Give the world a genuinely exceptional free library. Monetise the ecosystem around it.**
+
+### Revenue Streams (in order of when they become viable)
+
+**1. Premium Templates & Blocks** *(viable after Public Beta)*
+
+Pre-built, production-ready page compositions using library components:
+- Dashboard layouts (analytics, admin, SaaS)
+- Authentication flows (login, register, forgot password, MFA)
+- Data-heavy pages (reports, data explorer, settings)
+- Marketing / landing page sections
+
+This is the PrimeTek model. Developers love the free components; teams buy the "ship a full
+dashboard in a day" template. One-time purchase per template pack or a small yearly subscription.
+No component is ever locked inside a template — templates are purely accelerators.
+
+**2. Premium Themes** *(viable after Public Beta)*
+
+Professionally designed, polished CSS token sets beyond the three built-in variants:
+- Branded presets (Stripe-style, Linear-style, shadcn-style, enterprise dark)
+- Industry packs (healthcare, fintech, e-commerce)
+- High-contrast / accessibility-optimised themes
+
+Themes are CSS variable overrides — no special component code, no lock-in. Developers can
+inspect and learn from every theme they buy.
+
+**3. Enterprise Data Grid** *(viable after Wow Factor #6 — The Best Angular Table)*
+
+The AG Grid model applied to Angular:
+- Free tier: all standard table features (sort, filter, pagination, selection, column resize)
+- Enterprise tier: server-side row model, row grouping, pivoting, Excel / CSV export, master-detail,
+  clipboard operations, range selection, status bar
+
+This is the highest-value single component in any UI ecosystem. Enterprise Angular teams spend
+serious money on data grids. Owning this space is worth more than 50 average components.
+
+**4. Support Contracts** *(viable after v1.0 GA)*
+
+- Priority issue response SLA
+- Private Slack / Discord channel with core team access
+- Architecture review sessions
+- Migration assistance for major versions
+
+Enterprise teams that standardise on the library need a human to call. This pays for
+sustainable development without compromising the open-source model.
+
+**5. Accessibility Audit Service** *(Horizon — long-term)*
+
+Given the library's Elite Accessibility commitment, there is a natural adjacent service:
+- Automated axe-core audit of a customer's app (not just this library's components)
+- Manual WCAG 2.1 AA audit report
+- Remediation guidance
+
+The library's a11y reputation makes this credible in a way no generic consultancy can match.
+
+---
+
+### What to Never Do
+
+- **Gate basic components behind a paywall.** One paywalled Button destroys ten years of
+  community goodwill overnight. Every component in the library stays free, forever.
+- **Create a "Community vs Enterprise" component split.** Fragmented component sets mean
+  fragmented documentation, fragmented issue tracking, and a community that never fully trusts
+  the free tier. Keep one library.
+- **Charge for fixes to accessibility bugs.** A11y is architecture — it is never a premium
+  feature. Any component that fails WCAG 2.1 AA gets fixed in the free tier, always.
+- **Rush to monetise before trust is earned.** Announcing a premium tier before the library
+  has a passionate user base produces nothing but resentment. The sequence matters:
+  quality → community → trust → revenue. Never in the other order.
+
+---
+
 ## Non-Negotiable Standards
 
 Every release must preserve:
