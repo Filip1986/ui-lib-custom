@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } fr
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { PasswordComponent } from '../password/password.component';
 import { UiLibInput } from '../input/input';
 import { InputMaskComponent } from '../input-mask/input-mask.component';
@@ -12,6 +10,15 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { IconFieldComponent } from './icon-field';
 import { InputIconComponent } from './input-icon';
 
+declare const __dirname: string;
+declare function require(moduleName: string): unknown;
+
+const { readFileSync } = require('fs') as {
+  readFileSync: (path: string, encoding: string) => string;
+};
+const { join } = require('path') as {
+  join: (...paths: string[]) => string;
+};
 const ICON_FIELD_STYLES: string = readFileSync(join(__dirname, 'icon-field.scss'), 'utf8');
 
 @Component({
