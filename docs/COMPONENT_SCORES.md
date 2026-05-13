@@ -88,7 +88,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ✅ Done     |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
 | 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
-| 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
+| 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ✅ Done     |
 | 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ✅ Done     |
 | 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ✅ Done     |
 | 50   | VirtualScroller | Accessible scroll region, keyboard scrolling                                        | ⏳ Queued   |
@@ -220,7 +220,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | PanelMenu   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stepper     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| SpeedDial   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| SpeedDial   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8.8 | 🟢     |
 
 ## Data Display
 

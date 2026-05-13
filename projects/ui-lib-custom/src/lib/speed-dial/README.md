@@ -41,6 +41,53 @@
 | `onBlur` | `FocusEvent` | Fired when the trigger button loses focus |
 | `onItemCommand` | `SpeedDialItemCommandEvent` | Fired when an action item is activated |
 
+## SpeedDialItem Interface
+
+```typescript
+interface SpeedDialItem {
+  label?: string;      // Always provide for icon-only actions — used as aria-label and tooltip
+  icon?: string;       // Icon name
+  command?: (event: SpeedDialItemCommandEvent) => void;
+  disabled?: boolean;
+  tooltip?: string;    // Visible tooltip text (falls back to label if omitted)
+  visible?: boolean;   // Hides item from the list when false
+  styleClass?: string;
+  [key: string]: unknown;
+}
+```
+
+> **Accessibility note:** Because SpeedDial action buttons are icon-only, `label` is functionally required for every item. An item without `label` will have no accessible name, which is a WCAG 2.1 Level A violation.
+
+## Keyboard Interaction
+
+| Key | Element | Action |
+|-----|---------|--------|
+| `Enter` / `Space` | Trigger button | Toggle open / close |
+| `ArrowDown` / `ArrowRight` | Trigger button (closed) | Open menu + focus first action |
+| `ArrowUp` / `ArrowLeft` | Trigger button (closed) | Open menu + focus last action |
+| `ArrowUp` / `ArrowDown` | Action button (direction: up/down) | Move focus between actions |
+| `ArrowLeft` / `ArrowRight` | Action button (direction: left/right) | Move focus between actions |
+| `Home` | Action button | Focus first enabled action |
+| `End` | Action button | Focus last enabled action |
+| `Escape` | Trigger or action button | Close menu; return focus to trigger |
+| `Tab` | Trigger or action button | Close menu; move to next focusable element |
+
+## ARIA Attributes
+
+| Attribute | Element | Value |
+|-----------|---------|-------|
+| `aria-expanded` | Trigger button | `"true"` when open, `"false"` when closed |
+| `aria-haspopup` | Trigger button | `"true"` |
+| `aria-controls` | Trigger button | ID of the action list element |
+| `aria-label` | Trigger button | Value of `buttonAriaLabel` → `ariaLabel` → `null` |
+| `aria-labelledby` | Trigger button | Value of `ariaLabelledBy` |
+| `role="menu"` | Action list `<ul>` | Announces as menu to assistive technology |
+| `aria-hidden` | Action list `<ul>` | `"true"` when closed (hidden from AT) |
+| `role="none"` | `<li>` wrappers | Removes list semantics; item semantics come from the button |
+| `role="menuitem"` | Action `<button>` | Correct semantics inside `role="menu"` |
+| `aria-label` | Action `<button>` | `item.label` — required for icon-only actions |
+| `aria-disabled` | Action `<button>` | `"true"` when item is disabled |
+
 ## Usage
 
 ```html
