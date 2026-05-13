@@ -143,7 +143,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Stack             | No landmark pollution, `as` tag semantics                      | ⏳ Needs hardening    |
 | Inline            | No landmark pollution, wrap + reading order                    | ⏳ Needs hardening    |
 | Grid              | Visual vs DOM order constraint, no overflow clipping           | ⏳ Needs hardening    |
-| Container         | No clipping, skip-link target compatibility                    | ⏳ Needs hardening    |
+| Container         | No clipping, skip-link target compatibility                    | ✅ Done               |
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                 | ⏳ Needs hardening    |
 | Dock              | `role=toolbar` or `navigation`, item labels, roving tabindex   | ⏳ Needs hardening    |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                        | ⏳ Needs hardening    |
@@ -210,7 +210,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Inline      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Container   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
