@@ -7,10 +7,6 @@ ui-lib-icon.ui-lib-icon {
   transition: var(--uilib-icon-transition, 150ms ease);
 }
 
-ui-lib-icon.ui-lib-icon--clickable {
-  cursor: pointer;
-}
-
 ui-lib-icon .ui-lib-icon__glyph {
   display: inline-flex;
 }

@@ -77,6 +77,33 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [Icon component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/icon/icon.ts
+  - projects/ui-lib-custom/src/lib/icon/icon.types.ts
+  - projects/ui-lib-custom/src/lib/icon/icon.scss
+  - projects/ui-lib-custom/src/lib/icon/icon.spec.ts
+  - projects/ui-lib-custom/src/lib/icon/icon.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/icon/README.md
+  - projects/ui-lib-custom/src/lib/theming/presets/light.ts
+  - projects/ui-lib-custom/src/lib/theming/presets/dark.ts
+  - projects/ui-lib-custom/src/lib/theming/presets/brand-example.ts
+  - projects/demo/src/app/shared/theme-editor/panels/icon-editor-panel.ts
+  - projects/demo/src/app/pages/icons/icons-demo.component.html
+  - docs/reference/components/ICON.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Icon now defaults to decorative semantics (`aria-hidden="true"`), only becomes informative when `ariaLabel` is provided (`role="img"` + `aria-label`), never receives keyboard focus (`tabindex="-1"`), trims blank labels back to decorative mode, and ships a dedicated 10-test accessibility suite. Size tokens now resolve to `em` values across the icon defaults, theme presets, and demo theme editor so icons scale with surrounding text, and the icon docs/demo guidance now direct clickable actions to button components instead of relying on icon names.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon/ projects/ui-lib-custom/src/lib/theming/presets/ projects/demo/src/app/shared/theme-editor/panels/icon-editor-panel.ts --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/icon/" --no-coverage (22/22 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
+  node_modules/.bin/ng build demo (PASS; pre-existing bundle/SCSS budget warnings only)
+Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so the built demo was served locally with `python3 -m http.server` and a screenshot was captured via a Node Playwright script at `/tmp/icon-hardening.png` after installing Chromium with `npx playwright install chromium`.
+Next step: Continue the remaining utility hardening queue, with IconButton as the closest follow-on to the icon accessibility changes.
+
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
@@ -114,22 +141,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
-
-Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.html
-  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
-  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
-  - projects/ui-lib-custom/src/lib/form-field/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
-Next step: Continue hardening the next queued new layout/form component prompt.
