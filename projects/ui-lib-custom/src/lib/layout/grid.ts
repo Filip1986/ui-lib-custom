@@ -23,6 +23,11 @@ const stackVar: (token: StackToken) => string = (token: StackToken): string =>
   `var(--uilib-stack-${token}, ${STACK_TOKENS[token]})`;
 const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string =>
   `var(--uilib-space-${token}, ${SPACING_TOKENS[token]})`;
+const DEFAULT_GRID_COLUMNS: GridColumns = 12;
+
+function isSpacingToken(value: number): value is SpacingToken {
+  return value in SPACING_TOKENS;
+}
 
 /**
  * Grid - A performant CSS Grid layout primitive
@@ -52,7 +57,9 @@ const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string 
 })
 export class Grid {
   /** Number of columns (using design tokens) */
-  public readonly columns: InputSignal<GridColumns | string> = input<GridColumns | string>(12);
+  public readonly columns: InputSignal<GridColumns | string> = input<GridColumns | string>(
+    DEFAULT_GRID_COLUMNS
+  );
 
   /** Alignment of items along the block axis */
   public readonly align: InputSignal<GridAlign> = input<GridAlign>('stretch');
@@ -95,7 +102,9 @@ export class Grid {
     }
     const columns: GridColumns | string = this.columns();
     if (typeof columns === 'string') {
-      return columns.trim().length > 0 ? columns : `repeat(${GRID_COLUMNS[12]}, 1fr)`;
+      return columns.trim().length > 0
+        ? columns
+        : `repeat(${GRID_COLUMNS[DEFAULT_GRID_COLUMNS]}, 1fr)`;
     }
     // Fixed column count
     return `repeat(${GRID_COLUMNS[columns]}, 1fr)`;
@@ -122,17 +131,19 @@ export class Grid {
     if (value === null) {
       return spaceVar(this.gap());
     }
-    return typeof value === 'number'
-      ? spaceVar(value as SpacingToken)
-      : stackVar(value as StackToken);
+    if (typeof value === 'number') {
+      return isSpacingToken(value) ? spaceVar(value) : spaceVar(this.gap());
+    }
+    return stackVar(value);
   }
 
   private resolveOptionalGap(value: StackToken | SpacingToken | number | null): string | null {
     if (value === null) {
       return null;
     }
-    return typeof value === 'number'
-      ? spaceVar(value as SpacingToken)
-      : stackVar(value as StackToken);
+    if (typeof value === 'number') {
+      return isSpacingToken(value) ? spaceVar(value) : spaceVar(this.gap());
+    }
+    return stackVar(value);
   }
 }
