@@ -78,10 +78,12 @@
 | Preview overlay (`.uilib-image__mask`) | `role` | `"dialog"` | When `preview` is enabled and overlay is open |
 | Preview overlay | `aria-modal` | `"true"` | Prevents interaction with background content |
 | Preview overlay | `aria-label` | `ariaLabel` input value | Accessible name for the dialog |
+| Preview overlay | `aria-describedby` | preview status live region ID | Announces zoom/rotation changes while open |
 | Toolbar | `role` | `"toolbar"` | Groups the zoom/rotate/close controls |
 | Toolbar | `aria-label` | `"Image controls"` | Describes the toolbar |
 | Toolbar buttons | `aria-label` | Per-button label | Zoom in/out, rotate left/right, close |
 | Zoom buttons | `aria-disabled` | `"true"` when at limit | Indicates disabled state to screen readers |
+| Preview status region | `aria-live` | `"polite"` | Announces zoom percentage and rotation changes |
 | Error placeholder | `role` | `"img"` | When the image fails to load |
 | Error placeholder | `aria-label` | `alt` or `"Image failed to load"` | Describes the error state |
 | All SVG icons | `aria-hidden` | `"true"` | Decorative icons are hidden from screen readers |
@@ -97,6 +99,9 @@
 | `Enter` / `Space` | Zoom Out button | Decreases zoom scale by one step |
 | `Enter` / `Space` | Rotate Left / Right | Rotates the image 90° in the corresponding direction |
 | `Enter` / `Space` | Close button | Closes the overlay and restores focus |
+| `+` / `=` / numpad `+` | Preview overlay open | Zooms in without moving focus away from the current control |
+| `-` / numpad `-` | Preview overlay open | Zooms out without moving focus away from the current control |
+| `ArrowLeft` / `ArrowRight` | Preview overlay open | Rotates the image 90° left or right |
 
 ## CSS Custom Properties
 
@@ -134,10 +139,10 @@ When `preview=true` and the overlay is opened:
 - The overlay is announced as a modal dialog (`role="dialog"`, `aria-modal="true"`).
 - A **focus trap** keeps keyboard focus inside the toolbar controls while the overlay is open.
 - Pressing **Escape** or activating the **Close** button dismisses the overlay and **restores focus** to the preview trigger button.
+- A polite live region announces the current zoom percentage and rotation so screen reader users receive feedback after toolbar actions or keyboard shortcuts.
 
 ### Error state
 When an image fails to load, the error placeholder uses `role="img"` with an `aria-label` equal to the `alt` input (or a default fallback message), ensuring the error state is accessible to screen readers.
 
 ### Reduced motion
 All transitions and animations are suppressed when `prefers-reduced-motion: reduce` is set in the user's operating system preferences.
-

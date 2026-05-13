@@ -28,24 +28,24 @@ Criteria live here. Never duplicate criteria into the scores file.**
 
 Before scoring any category, know where the standards come from:
 
-| Standard / Resource | Used in |
-|---|---|
-| [WAI-ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/) | Accessibility |
-| [WCAG 2.1 Understanding Docs](https://www.w3.org/WAI/WCAG21/Understanding/) | Accessibility |
-| [axe-core ruleset](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md) | Accessibility |
-| [Angular Performance Guide](https://angular.dev/best-practices/runtime-performance) | Performance |
-| [Angular SSR Guide](https://angular.dev/guide/ssr) | Performance, Angular Integration |
-| [web.dev — Core Web Vitals](https://web.dev/vitals/) | Performance |
-| [Angular Style Guide](https://angular.dev/style-guide) | Angular Integration |
-| [Angular Signals RFC + docs](https://angular.dev/guide/signals) | Angular Integration, API |
-| [Angular CDK Accessibility](https://material.angular.io/cdk/a11y/overview) | Accessibility, Composability |
-| [HTML Living Standard — WHATWG](https://html.spec.whatwg.org/multipage/) | HTML Semantics |
-| [CSS Cascading Variables — W3C](https://www.w3.org/TR/css-variables-1/) | Theming |
-| Angular Material source (github.com/angular/components) | API Benchmark |
-| Radix UI (radix-ui.com) | API Benchmark, Accessibility Benchmark |
-| Ark UI (ark-ui.com) | API Benchmark, Accessibility Benchmark |
-| Melt UI (melt-ui.com) | Composability Benchmark |
-| Headless UI (headlessui.com) | Composability Benchmark |
+| Standard / Resource                                                                               | Used in                                |
+|---------------------------------------------------------------------------------------------------|----------------------------------------|
+| [WAI-ARIA Authoring Practices Guide (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/)             | Accessibility                          |
+| [WCAG 2.1 Understanding Docs](https://www.w3.org/WAI/WCAG21/Understanding/)                       | Accessibility                          |
+| [axe-core ruleset](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md)   | Accessibility                          |
+| [Angular Performance Guide](https://angular.dev/best-practices/runtime-performance)               | Performance                            |
+| [Angular SSR Guide](https://angular.dev/guide/ssr)                                                | Performance, Angular Integration       |
+| [web.dev — Core Web Vitals](https://web.dev/vitals/)                                              | Performance                            |
+| [Angular Style Guide](https://angular.dev/style-guide)                                            | Angular Integration                    |
+| [Angular Signals RFC + docs](https://angular.dev/guide/signals)                                   | Angular Integration, API               |
+| [Angular CDK Accessibility](https://material.angular.io/cdk/a11y/overview)                        | Accessibility, Composability           |
+| [HTML Living Standard — WHATWG](https://html.spec.whatwg.org/multipage/)                          | HTML Semantics                         |
+| [CSS Cascading Variables — W3C](https://www.w3.org/TR/css-variables-1/)                           | Theming                                |
+| Angular Material source (github.com/angular/components)                                           | API Benchmark                          |
+| Radix UI (radix-ui.com)                                                                           | API Benchmark, Accessibility Benchmark |
+| Ark UI (ark-ui.com)                                                                               | API Benchmark, Accessibility Benchmark |
+| Melt UI (melt-ui.com)                                                                             | Composability Benchmark                |
+| Headless UI (headlessui.com)                                                                      | Composability Benchmark                |
 
 ---
 
@@ -462,13 +462,13 @@ Unchecked items (explicit backlog):
 When running the [6-phase evolution workflow](prompts/COMPONENT_EVOLUTION_PROMPTS.md) on a component,
 map the phases to the scoring categories as follows:
 
-| Evolution Phase | Primary Scoring Categories |
-|---|---|
-| Phase 1 — Architecture | Angular Integration, Performance |
-| Phase 2 — DX & API | API Clarity, Developer Experience, Competitive Parity |
-| Phase 3 — Accessibility | Accessibility, Competitive Parity (Radix UI / APG check) |
-| Phase 4 — Performance | Performance |
-| Phase 5 — Composability | Composability, Theming, Competitive Parity (Ark UI check) |
+| Evolution Phase            | Primary Scoring Categories                                    |
+|----------------------------|---------------------------------------------------------------|
+| Phase 1 — Architecture     | Angular Integration, Performance                              |
+| Phase 2 — DX & API         | API Clarity, Developer Experience, Competitive Parity         |
+| Phase 3 — Accessibility    | Accessibility, Competitive Parity (Radix UI / APG check)      |
+| Phase 4 — Performance      | Performance                                                   |
+| Phase 5 — Composability    | Composability, Theming, Competitive Parity (Ark UI check)     |
 | Phase 6 — Emotional Polish | Visual & Interaction Polish, Emotional Quality, Documentation |
 
 After every phase, re-tally only the affected categories. A full re-score is only necessary after Phase 6.
