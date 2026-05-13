@@ -124,32 +124,25 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
 
-Date: 2026-05-13 [ButtonGroup component — 6-phase hardening COMPLETE (new utilities queue item)]
+Date: 2026-05-13 [Bind utility — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/button-group/button-group.ts
-      • Added `ariaLabel` and `orientation` inputs and kept `vertical` as backward-compatible alias
-      • Switched to external template and added DEV_MODE warning when projected content exists without `ariaLabel`
-  - projects/ui-lib-custom/src/lib/button-group/button-group.html
-      • Added explicit `role="group"` container with `[attr.aria-label]="ariaLabel() || null"`
-  - projects/ui-lib-custom/src/lib/button-group/button-group.scss
-      • Updated selectors for inner group container
-      • Added CSS custom properties for connected border overlap and optional gap (`--uilib-button-group-connected-border-overlap`, `--uilib-button-group-gap`)
-  - projects/ui-lib-custom/src/lib/button-group/button-group.spec.ts
-      • Updated tests for inner group semantics, new orientation input, and ariaLabel binding
-  - projects/ui-lib-custom/src/lib/button-group/button-group.a11y.spec.ts (CREATED — 11 tests)
-      • Added role/aria-label/orientation checks, accessible-name preservation checks, DEV_MODE warning checks, and axe-core coverage
-  - projects/ui-lib-custom/src/lib/button-group/README.md
-      • Documented aria label requirement, orientation behavior, toolbar guidance, and styling hooks
-  - projects/ui-lib-custom/src/lib/button-group/button-group.stories.ts
-      • Updated Storybook controls to expose `orientation`
+  - projects/ui-lib-custom/src/lib/bind/bind.ts
+      • Hardened removal behavior to only clear dropped keys when Bind still owns the current property value
+      • Added typed internal helpers (`applyBindings`, `getPropertyValue`) for explicit, readable ownership logic
+  - projects/ui-lib-custom/src/lib/bind/bind.spec.ts
+      • Added ARIA non-interference regression coverage for `[attr.aria-label]`
+      • Added regression test that removed keys do not clear external host bindings
+      • Added composability test for `@if`, `@for`, and `@switch` contexts
+  - projects/ui-lib-custom/src/lib/bind/README.md
+      • Expanded purpose statement, control-flow usage examples, native Angular alternative guidance, and accessibility notes
   - docs/COMPONENT_SCORES.md
-      • New components queue row: ButtonGroup ⏳ Needs hardening → ✅ Done
-      • Utilities & Directives score row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
-State: ButtonGroup hardening complete. The component now enforces labeled group semantics with a dev warning for unlabeled projected groups, supports explicit orientation input while preserving compatibility, maintains per-button accessible naming, and has dedicated accessibility regression coverage.
+      • Marked Bind as ✅ Done in the new-components queue and populated Utilities & Directives score row (avg 8.7)
+  - AI_AGENT_CONTEXT.md
+      • Appended Bind handoff and retained newest 3 handoffs (older notes remain in archive)
+State: Bind hardening complete. The directive remains a lightweight template utility, now has safer key-removal semantics that avoid clobbering external bindings, verified ARIA non-interference, and composability coverage across Angular block syntax.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button-group/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/button-group/" --no-coverage (25/25 PASS — 14 unit + 11 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bind/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/bind/" --no-coverage (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Installed Playwright Chromium (`npx playwright install chromium`) and captured demo screenshot at `/tmp/button-group-hardening.png`.
-Next step: Continue remaining new-components hardening queue (for example IconButton, ToggleButton, or StyleClass).
+Terminal notes: Fresh clone required `npm install` before baseline checks because `node_modules/.bin/eslint` was initially missing.
+Next step: Continue Tier 6 utility hardening queue with ClassNames or remaining unscored utility entries.
