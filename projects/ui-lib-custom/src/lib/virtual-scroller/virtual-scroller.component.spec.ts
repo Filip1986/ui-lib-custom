@@ -33,6 +33,29 @@ function getComponent(fixture: ComponentFixture<unknown>): VirtualScrollerCompon
     .componentInstance as VirtualScrollerComponent;
 }
 
+function mockViewportMetrics(
+  element: HTMLElement,
+  metrics: {
+    scrollTop?: number;
+    scrollLeft?: number;
+    clientHeight?: number;
+    scrollHeight?: number;
+    clientWidth?: number;
+    scrollWidth?: number;
+  }
+): void {
+  Object.entries(metrics).forEach(([propertyName, value]: [string, number | undefined]): void => {
+    if (value === undefined) {
+      return;
+    }
+    Object.defineProperty(element, propertyName, {
+      configurable: true,
+      writable: true,
+      value,
+    });
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Default test host
 // ---------------------------------------------------------------------------
@@ -467,16 +490,7 @@ describe('VirtualScrollerComponent', (): void => {
     it('should scroll by one item height when ArrowDown is pressed', (): void => {
       const viewport: HTMLElement = query(fixture, '.uilib-scroller-viewport') as HTMLElement;
       const component: VirtualScrollerComponent = getComponent(fixture);
-      Object.defineProperty(viewport, 'scrollTop', {
-        configurable: true,
-        writable: true,
-        value: 25,
-      });
-      Object.defineProperty(viewport, 'scrollLeft', {
-        configurable: true,
-        writable: true,
-        value: 0,
-      });
+      mockViewportMetrics(viewport, { scrollTop: 25, scrollLeft: 0 });
 
       const scrollToSpy: jest.SpyInstance = jest
         .spyOn(component, 'scrollTo')
@@ -490,14 +504,7 @@ describe('VirtualScrollerComponent', (): void => {
     it('should scroll to the start and end with Home and End keys', (): void => {
       const viewport: HTMLElement = query(fixture, '.uilib-scroller-viewport') as HTMLElement;
       const component: VirtualScrollerComponent = getComponent(fixture);
-      Object.defineProperty(viewport, 'clientHeight', {
-        configurable: true,
-        value: 200,
-      });
-      Object.defineProperty(viewport, 'scrollHeight', {
-        configurable: true,
-        value: 1200,
-      });
+      mockViewportMetrics(viewport, { clientHeight: 200, scrollHeight: 1200 });
 
       const scrollToSpy: jest.SpyInstance = jest
         .spyOn(component, 'scrollTo')

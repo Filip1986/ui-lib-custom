@@ -1431,11 +1431,10 @@ export class VirtualScrollerComponent
   }
 
   /** @internal `aria-setsize` value for rendered list items. */
-  protected itemAriaSetSize(localIndex: number): string | null {
+  protected itemAriaSetSize(_localIndex: number): string | null {
     if (this.contentRole() === 'grid') {
       return null;
     }
-    void localIndex;
     return this.totalItemCount().toString();
   }
 
@@ -1546,7 +1545,9 @@ export class VirtualScrollerComponent
   }
 
   private formatTotalItemsMessage(totalItemCount: number): string {
-    const availableItemsText: string = this.availableItemsText().trim() || 'item(s) available.';
-    return `${totalItemCount.toString()} ${availableItemsText}`;
+    const availableItemsText: string = this.availableItemsText().trim();
+    return availableItemsText.length > 0
+      ? `${totalItemCount.toString()} ${availableItemsText}`
+      : totalItemCount.toString();
   }
 }

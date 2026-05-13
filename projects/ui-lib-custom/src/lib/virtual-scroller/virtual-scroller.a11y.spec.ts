@@ -69,6 +69,7 @@ async function setup(): Promise<ComponentFixture<VirtualScrollerA11yHostComponen
 }
 
 const AXE_EXCLUDED_SELECTORS: string[] = ['.uilib-scroller-spacer'];
+type RangeState = { first: number; last: number; rangeVersion: WritableSignal<number> };
 
 function getComponent(fixture: ComponentFixture<unknown>): VirtualScrollerComponent {
   return fixture.debugElement.query(By.directive(VirtualScrollerComponent))
@@ -93,29 +94,35 @@ function getRenderedItems(fixture: ComponentFixture<unknown>): HTMLElement[] {
   ) as HTMLElement[];
 }
 
+function mockViewportMetrics(
+  element: HTMLElement,
+  metrics: {
+    scrollTop?: number;
+    scrollLeft?: number;
+    clientHeight?: number;
+    scrollHeight?: number;
+    clientWidth?: number;
+    scrollWidth?: number;
+  }
+): void {
+  Object.entries(metrics).forEach(([propertyName, value]: [string, number | undefined]): void => {
+    if (value === undefined) {
+      return;
+    }
+    Object.defineProperty(element, propertyName, {
+      configurable: true,
+      writable: true,
+      value,
+    });
+  });
+}
+
 function primeRenderedRange(fixture: ComponentFixture<unknown>, first: number, last: number): void {
   const component: VirtualScrollerComponent = getComponent(fixture);
-  (
-    component as unknown as {
-      first: number;
-      last: number;
-      rangeVersion: WritableSignal<number>;
-    }
-  ).first = first;
-  (
-    component as unknown as {
-      first: number;
-      last: number;
-      rangeVersion: WritableSignal<number>;
-    }
-  ).last = last;
-  (
-    component as unknown as {
-      first: number;
-      last: number;
-      rangeVersion: WritableSignal<number>;
-    }
-  ).rangeVersion.update((version: number): number => version + 1);
+  const rangeState: RangeState = component as unknown as RangeState;
+  rangeState.first = first;
+  rangeState.last = last;
+  rangeState.rangeVersion.update((version: number): number => version + 1);
   fixture.detectChanges();
 }
 
@@ -198,16 +205,7 @@ describe('VirtualScroller Accessibility', (): void => {
     const component: VirtualScrollerComponent = getComponent(fixture);
     const viewport: HTMLElement = getViewport(fixture);
 
-    Object.defineProperty(viewport, 'scrollTop', {
-      configurable: true,
-      writable: true,
-      value: 40,
-    });
-    Object.defineProperty(viewport, 'scrollLeft', {
-      configurable: true,
-      writable: true,
-      value: 0,
-    });
+    mockViewportMetrics(viewport, { scrollTop: 40, scrollLeft: 0 });
 
     const scrollToSpy: jest.SpyInstance = jest
       .spyOn(component, 'scrollTo')
@@ -223,19 +221,10 @@ describe('VirtualScroller Accessibility', (): void => {
     const component: VirtualScrollerComponent = getComponent(fixture);
     const viewport: HTMLElement = getViewport(fixture);
 
-    Object.defineProperty(viewport, 'clientHeight', {
-      configurable: true,
-      value: 200,
-    });
-    Object.defineProperty(viewport, 'scrollTop', {
-      configurable: true,
-      writable: true,
-      value: 250,
-    });
-    Object.defineProperty(viewport, 'scrollLeft', {
-      configurable: true,
-      writable: true,
-      value: 0,
+    mockViewportMetrics(viewport, {
+      clientHeight: 200,
+      scrollTop: 250,
+      scrollLeft: 0,
     });
 
     const scrollToSpy: jest.SpyInstance = jest
@@ -254,21 +243,11 @@ describe('VirtualScroller Accessibility', (): void => {
     const component: VirtualScrollerComponent = getComponent(fixture);
     const viewport: HTMLElement = getViewport(fixture);
 
-    Object.defineProperty(viewport, 'clientHeight', {
-      configurable: true,
-      value: 200,
-    });
-    Object.defineProperty(viewport, 'scrollHeight', {
-      configurable: true,
-      value: 1200,
-    });
-    Object.defineProperty(viewport, 'clientWidth', {
-      configurable: true,
-      value: 300,
-    });
-    Object.defineProperty(viewport, 'scrollWidth', {
-      configurable: true,
-      value: 300,
+    mockViewportMetrics(viewport, {
+      clientHeight: 200,
+      scrollHeight: 1200,
+      clientWidth: 300,
+      scrollWidth: 300,
     });
 
     const scrollToSpy: jest.SpyInstance = jest
