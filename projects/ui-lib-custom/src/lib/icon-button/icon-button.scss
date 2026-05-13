@@ -3,14 +3,16 @@ ui-lib-icon-button {
 }
 
 ui-lib-icon-button .ui-lib-icon-button {
-  --uilib-icon-button-size: 2.75rem;
+  --uilib-icon-button-min-target-size: 2.75rem;
+  --uilib-icon-button-size: var(--uilib-icon-button-min-target-size);
+  --uilib-icon-button-disabled-opacity: 0.5;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   inline-size: var(--uilib-icon-button-size);
   block-size: var(--uilib-icon-button-size);
-  min-inline-size: 2.75rem;
-  min-block-size: 2.75rem;
+  min-inline-size: var(--uilib-icon-button-min-target-size);
+  min-block-size: var(--uilib-icon-button-min-target-size);
   border: none;
   background: none;
   padding: 0;
@@ -33,7 +35,7 @@ ui-lib-icon-button .ui-lib-icon-button:focus-visible {
 }
 
 ui-lib-icon-button .ui-lib-icon-button--disabled {
-  opacity: 0.5;
+  opacity: var(--uilib-icon-button-disabled-opacity);
 }
 
 ui-lib-icon-button .ui-lib-icon-button__icon {

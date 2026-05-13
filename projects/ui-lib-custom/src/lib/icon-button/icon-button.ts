@@ -17,6 +17,8 @@ import type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-
 
 export type { IconButtonSize, IconButtonVariant, IconButtonColor } from './icon-button.types';
 
+const ICON_BUTTON_LOADING_ARIA_LABEL: string = 'Loading, please wait';
+
 /**
  * Icon-only button component with size and variant support.
  */
@@ -58,7 +60,7 @@ export class IconButton implements AfterViewInit {
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
     (): string | null => {
       if (this.loading()) {
-        return 'Loading, please wait';
+        return ICON_BUTTON_LOADING_ARIA_LABEL;
       }
 
       const ariaLabel: string = this.ariaLabel().trim();
@@ -94,10 +96,8 @@ export class IconButton implements AfterViewInit {
   });
 
   public ngAfterViewInit(): void {
-    if (!isDevMode() || this.ariaLabel().trim().length > 0) {
-      return;
+    if (isDevMode() && this.ariaLabel().trim().length === 0) {
+      console.error('[ui-lib-icon-button] ariaLabel must not be empty for accessibility.');
     }
-
-    console.error('[ui-lib-icon-button] ariaLabel must not be empty for accessibility.');
   }
 }
