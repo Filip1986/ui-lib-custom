@@ -69,7 +69,7 @@ class InputGroupInputComposableHostComponent {}
     <label for="phone-input">Phone</label>
     <uilib-input-group>
       <uilib-input-group-addon addonLeft>
-        <span aria-hidden="true">+1</span>
+        <span aria-hidden="true" data-testid="phone-addon">+1</span>
       </uilib-input-group-addon>
       <uilib-input-mask id="phone-input" mask="(999) 999-9999" />
     </uilib-input-group>
@@ -84,7 +84,7 @@ class InputGroupInputMaskComposableHostComponent {}
   template: `
     <uilib-input-group>
       <uilib-input-group-addon addonLeft>
-        <span aria-hidden="true">$</span>
+        <span aria-hidden="true" data-testid="number-addon">$</span>
       </uilib-input-group-addon>
       <uilib-input-number label="Price" [value]="12" />
     </uilib-input-group>
@@ -99,7 +99,7 @@ class InputGroupInputNumberComposableHostComponent {}
   template: `
     <uilib-input-group>
       <uilib-input-group-addon addonRight>
-        <span aria-hidden="true">🔒</span>
+        <span aria-hidden="true" data-testid="password-addon">🔒</span>
       </uilib-input-group-addon>
       <uilib-password label="Password" />
     </uilib-input-group>
@@ -108,7 +108,7 @@ class InputGroupInputNumberComposableHostComponent {}
 })
 class InputGroupPasswordComposableHostComponent {}
 
-const createdFixtures: ComponentFixture<unknown>[] = [];
+const fixtures: ComponentFixture<unknown>[] = [];
 
 async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
@@ -117,10 +117,9 @@ async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>
   }).compileComponents();
 
   const fixture: ComponentFixture<T> = TestBed.createComponent(componentType);
-  document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
   await fixture.whenStable();
-  createdFixtures.push(fixture as ComponentFixture<unknown>);
+  fixtures.push(fixture as ComponentFixture<unknown>);
   return fixture;
 }
 
@@ -130,10 +129,9 @@ function getRootElement(fixture: ComponentFixture<unknown>): HTMLElement {
 
 describe('InputGroup accessibility', (): void => {
   afterEach((): void => {
-    createdFixtures.forEach((fixture: ComponentFixture<unknown>): void => fixture.destroy());
-    createdFixtures.length = 0;
+    fixtures.forEach((fixture: ComponentFixture<unknown>): void => fixture.destroy());
+    fixtures.length = 0;
     TestBed.resetTestingModule();
-    document.body.innerHTML = '';
   });
 
   it('default composition has no axe violations', async (): Promise<void> => {
@@ -162,8 +160,9 @@ describe('InputGroup accessibility', (): void => {
       '[data-testid="currency-addon"]'
     ) as HTMLElement;
 
+    expect(decorativeAddon.tagName.toLowerCase()).toBe('span');
     expect(decorativeAddon.getAttribute('tabindex')).toBeNull();
-    expect(decorativeAddon.matches('button,a,input,select,textarea,[tabindex]')).toBeFalsy();
+    expect(decorativeAddon.getAttribute('contenteditable')).toBeNull();
   });
 
   it('label for attribute targets the input id', async (): Promise<void> => {
@@ -235,31 +234,52 @@ describe('InputGroup accessibility', (): void => {
     const fixture: ComponentFixture<InputGroupInputComposableHostComponent> = await setup(
       InputGroupInputComposableHostComponent
     );
+    const decorativeAddon: HTMLElement = fixture.debugElement.query(
+      By.css('uilib-input-group-addon span')
+    ).nativeElement as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('ui-lib-input'))).toBeTruthy();
+    expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
   });
 
   it('composes with uilib-input-mask', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupInputMaskComposableHostComponent> = await setup(
       InputGroupInputMaskComposableHostComponent
     );
+    const rootElement: HTMLElement = getRootElement(fixture);
+    const decorativeAddon: HTMLElement = fixture.debugElement.query(
+      By.css('[data-testid="phone-addon"]')
+    ).nativeElement as HTMLElement;
+    const labelElement: HTMLLabelElement = rootElement.querySelector('label') as HTMLLabelElement;
+    const controlElement: HTMLElement = rootElement.querySelector('#phone-input') as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('uilib-input-mask'))).toBeTruthy();
+    expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
+    expect(labelElement.getAttribute('for')).toBe('phone-input');
+    expect(controlElement).toBeTruthy();
   });
 
   it('composes with uilib-input-number', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupInputNumberComposableHostComponent> = await setup(
       InputGroupInputNumberComposableHostComponent
     );
+    const decorativeAddon: HTMLElement = fixture.debugElement.query(
+      By.css('[data-testid="number-addon"]')
+    ).nativeElement as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('uilib-input-number'))).toBeTruthy();
+    expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
   });
 
   it('composes with uilib-password', async (): Promise<void> => {
     const fixture: ComponentFixture<InputGroupPasswordComposableHostComponent> = await setup(
       InputGroupPasswordComposableHostComponent
     );
+    const decorativeAddon: HTMLElement = fixture.debugElement.query(
+      By.css('[data-testid="password-addon"]')
+    ).nativeElement as HTMLElement;
 
     expect(fixture.debugElement.query(By.css('uilib-password'))).toBeTruthy();
+    expect(decorativeAddon.getAttribute('aria-hidden')).toBe('true');
   });
 });

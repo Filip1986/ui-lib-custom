@@ -40,7 +40,7 @@ _none_
 
 ## Accessibility guidance
 
-- Decorative addons (currency symbols, protocol prefixes, separators) should be rendered inside a node with `aria-hidden="true"` so they are not focusable or announced.
+- Decorative addons (currency symbols, protocol prefixes, separators) should be rendered inside a non-focusable node with `aria-hidden="true"` so they are not announced to screen readers.
 - Interactive addons must use real interactive elements (for example, `<button type="button">`), not generic `<div>` containers.
 - Icon-only addon buttons must always have an `aria-label`.
 - Keep `<label for="...">` associated with the actual input id inside the group, not with the group container.
