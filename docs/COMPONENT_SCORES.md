@@ -106,7 +106,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ✅ Done     |
 | 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ✅ Done     |
 | 58   | Divider         | `role=separator` + `aria-orientation`                     | ✅ Done     |
-| 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
+| 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ✅ Done     |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
 | 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ✅ Done     |
 | 62   | ScrollPanel     | Keyboard-scrollable region label                          | ✅ Done     |
@@ -186,7 +186,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FormField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| Toolbar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Toolbar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fieldset    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
