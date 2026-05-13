@@ -77,34 +77,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
-Changed:
-  - projects/ui-lib-custom/src/lib/divider/divider.ts
-      • Added module-level `nextDividerId` counter and unique host `dividerId`
-      • Added `ariaLabel` + `decorative` inputs and computed ARIA bindings (`ariaOrientation`, `resolvedAriaLabel`, `ariaHidden`)
-      • Bound host `id`, `aria-label`, and `aria-hidden` while keeping separator semantics
-  - projects/ui-lib-custom/src/lib/divider/divider.scss
-      • Added `prefers-reduced-motion: reduce` override
-  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts
-      • Added coverage for generated ids, decorative `aria-hidden`, and labeled divider behavior
-  - projects/ui-lib-custom/src/lib/divider/divider.a11y.spec.ts (CREATED — 12 tests)
-      • Added ARIA structure assertions, keyboard/non-live-region checks, and axe-core checks for default/vertical/decorative/labeled states
-  - projects/ui-lib-custom/src/lib/divider/README.md
-      • Added `ariaLabel` + `decorative` input docs, ARIA behavior table, keyboard table, and expanded accessibility notes
-  - docs/COMPONENT_SCORES.md
-      • Divider #58: ⏳ Queued → ✅ Done
-      • Layout table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived the previous oldest handoff to keep only the newest 3 in this file
-State: Divider hardening complete. The host now supports decorative vs. labeled accessibility semantics, generated stable ids per instance, reduced-motion styling fallback, updated DX docs, and dedicated divider a11y regression coverage.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/divider/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=divider --no-coverage (36/36 PASS — 24 unit + 12 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
-Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
-
 Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
 Changed:
   - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
@@ -151,3 +123,33 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
+
+Date: 2026-05-13 [ButtonGroup component — 6-phase hardening COMPLETE (new utilities queue item)]
+Changed:
+  - projects/ui-lib-custom/src/lib/button-group/button-group.ts
+      • Added `ariaLabel` and `orientation` inputs and kept `vertical` as backward-compatible alias
+      • Switched to external template and added DEV_MODE warning when projected content exists without `ariaLabel`
+  - projects/ui-lib-custom/src/lib/button-group/button-group.html
+      • Added explicit `role="group"` container with `[attr.aria-label]="ariaLabel() || null"`
+  - projects/ui-lib-custom/src/lib/button-group/button-group.scss
+      • Updated selectors for inner group container
+      • Added CSS custom properties for connected border overlap and optional gap (`--uilib-button-group-connected-border-overlap`, `--uilib-button-group-gap`)
+  - projects/ui-lib-custom/src/lib/button-group/button-group.spec.ts
+      • Updated tests for inner group semantics, new orientation input, and ariaLabel binding
+  - projects/ui-lib-custom/src/lib/button-group/button-group.a11y.spec.ts (CREATED — 11 tests)
+      • Added role/aria-label/orientation checks, accessible-name preservation checks, DEV_MODE warning checks, and axe-core coverage
+  - projects/ui-lib-custom/src/lib/button-group/README.md
+      • Documented aria label requirement, orientation behavior, toolbar guidance, and styling hooks
+  - projects/ui-lib-custom/src/lib/button-group/button-group.stories.ts
+      • Updated Storybook controls to expose `orientation`
+  - docs/COMPONENT_SCORES.md
+      • New components queue row: ButtonGroup ⏳ Needs hardening → ✅ Done
+      • Utilities & Directives score row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
+State: ButtonGroup hardening complete. The component now enforces labeled group semantics with a dev warning for unlabeled projected groups, supports explicit orientation input while preserving compatibility, maintains per-button accessible naming, and has dedicated accessibility regression coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/button-group/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/button-group/" --no-coverage (25/25 PASS — 14 unit + 11 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before baseline validation. Installed Playwright Chromium (`npx playwright install chromium`) and captured demo screenshot at `/tmp/button-group-hardening.png`.
+Next step: Continue remaining new-components hardening queue (for example IconButton, ToggleButton, or StyleClass).

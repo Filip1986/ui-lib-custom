@@ -149,7 +149,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                  | ⏳ Needs hardening  |
 | Icon            | `aria-hidden` by default, informative mode `aria-label`     | ⏳ Needs hardening  |
 | IconButton      | `aria-label` MANDATORY, icon `aria-hidden` inside           | ⏳ Needs hardening  |
-| ButtonGroup     | `role=group` with `aria-label`                              | ⏳ Needs hardening  |
+| ButtonGroup     | `role=group` with `aria-label`                              | ✅ Done  |
 | StyleClass      | `aria-expanded` on trigger, `aria-hidden` on target         | ⏳ Needs hardening  |
 | AnimateOnScroll | `prefers-reduced-motion` (CRITICAL — skip all animation)    | ⏳ Needs hardening  |
 | AutoFocus       | Only once on mount, no focus theft from dialogs             | ⏳ Needs hardening  |
@@ -294,7 +294,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Avatar          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Icon            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| ButtonGroup     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ButtonGroup     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | SplitButton     | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ImageCompare    | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
