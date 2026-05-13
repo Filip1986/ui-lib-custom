@@ -77,6 +77,41 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [TreeSelect scorebook + handoff sync]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: TreeSelect was already fully hardened in this branch, but its detailed score row had drifted from the queue status. Synced the scorebook to the completed TreeSelect state and added a fresh handoff after re-validating the component locally.
+Verification:
+  npm install (PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/tree-select/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=tree-select --no-coverage (79/79 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone initially lacked `node_modules`, so validation required `npm install`. GitHub Actions run `25783037567` on this branch finished with `action_required`, but `get_job_logs(... failed_only=true)` reported no failed jobs in the run.
+Next step: Message hardening (Tier 5, #43).
+
+Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/reference/components/ALERT.md
+  - projects/ui-lib-custom/src/lib/alert/README.md
+  - projects/ui-lib-custom/src/lib/alert/alert.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.html
+  - projects/ui-lib-custom/src/lib/alert/alert.scss
+  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
+State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements. Added dedicated alert accessibility regression tests and updated score/docs bookkeeping.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/alert/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/alert --no-coverage (41/41 PASS — 28 unit + 13 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Demo screenshot captured at `/tmp/alert-hardening.png`. Playwright MCP browser lock prevented direct playwright-browser usage; installed Playwright Chromium and captured the screenshot via a Node Playwright script.
+Next step: Message hardening (Tier 5, #43).
+
 Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
 Changed:
   - projects/ui-lib-custom/src/lib/divider/divider.ts
@@ -104,67 +139,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
 Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
-
-Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
-Changed:
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
-      • Added module-level `nextImageCompareId` counter and unique host `instanceId`
-      • Bound `[id]` to `instanceId` in host metadata
-      • Added `ariaValueText` computed signal (`"N percent"` format)
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.html
-      • Added `[attr.aria-valuetext]="ariaValueText()"` to the handle
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling handle transitions
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.a11y.spec.ts (CREATED — 21 tests)
-      • ARIA structure, keyboard nav, image alt, decorative aria-hidden, disabled state, unique ID, and axe-core assertions
-  - projects/ui-lib-custom/src/lib/image-compare/README.md
-      • Updated `ariaLabel` default, added Keyboard Interaction table, ARIA Attributes table, CSS Custom Properties table, and Accessibility section
-  - docs/COMPONENT_SCORES.md
-      • ImageCompare #67: ⏳ Queued → ✅ Done (scores: API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived oldest DataView handoff to keep only the newest 3 in this file
-State: ImageCompare hardening complete. Component now has aria-valuetext, unique generated IDs per instance, prefers-reduced-motion SCSS guard, and a full 21-test a11y spec (role=slider, ARIA value attrs, image alt, decorative aria-hidden, keyboard nav, disabled state, axe-core).
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image-compare/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=image-compare --no-coverage (60/60 PASS — 39 unit + 21 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
-Next step: Continue Tier 6 queue with remaining queued components.
-
-Date: 2026-05-13 [Toolbar component — 6-phase hardening COMPLETE (#59)]
-Changed:
-  - projects/ui-lib-custom/src/lib/toolbar/toolbar.ts
-      • Added module-level `nextToolbarId` counter and unique host `toolbarId`
-      • Bound `[id]` to host metadata
-      • Injected `ElementRef` for DOM-querying keyboard navigation
-      • Added `(keydown)` and `(focusin)` host listeners for roving-tabindex navigation
-      • Implemented WAI-ARIA Toolbar Pattern: ArrowRight/Left/Up/Down, Home, End with wrap-around
-      • Added `afterNextRender` init to set initial roving tabindex on projected items
-  - projects/ui-lib-custom/src/lib/toolbar/toolbar.scss
-      • Added `:focus-visible` ring (2 px outline, outline-offset 2px) for all interactive elements
-      • Added `@media (prefers-reduced-motion: reduce)` block
-  - projects/ui-lib-custom/src/lib/toolbar/toolbar.spec.ts
-      • Added tests for unique ID, two-instance ID uniqueness, keyboard navigation (ArrowRight/Left, wrap, Home/End, tabindex updates)
-  - projects/ui-lib-custom/src/lib/toolbar/toolbar.a11y.spec.ts (CREATED — 20 tests)
-      • axe-core: default, no-label, icon-only
-      • ARIA: role=toolbar, aria-label, decorative aria-hidden, icon button aria-label
-      • Unique IDs: generated id pattern, two-instance uniqueness
-      • Roving tabindex: initial state, non-active items, focusin update
-      • Keyboard: ArrowRight/Left/Down/Up, wrap, Home, End, tabindex update after nav
-  - projects/ui-lib-custom/src/lib/toolbar/README.md
-      • Added ARIA Attributes table, Keyboard Interaction table, WAI-ARIA pattern link
-      • Expanded Accessibility section with icon-only button guidance and focus/motion notes
-  - docs/COMPONENT_SCORES.md
-      • Toolbar #59: ⏳ Queued → ✅ Done
-      • Layout table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived Alert #42 handoff to keep only newest 3 here
-State: Toolbar hardening complete. Component now has unique generated IDs, full WAI-ARIA Toolbar keyboard pattern (roving tabindex, arrow-key nav with wrap, Home/End), :focus-visible rings, prefers-reduced-motion guard, updated README with all tables, and 20-test a11y spec + 8 new keyboard nav unit tests (48 total: 27 unit + 20 a11y + 1 two-instance).
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toolbar/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=toolbar --no-coverage (48/48 PASS — 27 unit + 20 a11y + 1 ID uniqueness)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: No blocking issues. All validations green on first attempt after npm install.
-Next step: Continue Tier 6 queue — SpeedDial (#47) or SelectButton (#48) or VirtualScroller (#50).

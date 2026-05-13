@@ -4,22 +4,32 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
-Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
+Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
 Changed:
-  - AI_AGENT_CONTEXT.md
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
+      • Added module-level `nextImageCompareId` counter and unique host `instanceId`
+      • Bound `[id]` to `instanceId` in host metadata
+      • Added `ariaValueText` computed signal (`"N percent"` format)
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.html
+      • Added `[attr.aria-valuetext]="ariaValueText()"` to the handle
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling handle transitions
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.a11y.spec.ts (CREATED — 21 tests)
+      • ARIA structure, keyboard nav, image alt, decorative aria-hidden, disabled state, unique ID, and axe-core assertions
+  - projects/ui-lib-custom/src/lib/image-compare/README.md
+      • Updated `ariaLabel` default, added Keyboard Interaction table, ARIA Attributes table, CSS Custom Properties table, and Accessibility section
   - docs/COMPONENT_SCORES.md
-  - docs/reference/components/ALERT.md
-  - projects/ui-lib-custom/src/lib/alert/README.md
-  - projects/ui-lib-custom/src/lib/alert/alert.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.html
-  - projects/ui-lib-custom/src/lib/alert/alert.scss
-  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
-State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements.
-Verification: eslint PASS, 41/41 tests PASS, ng build PASS, entry-points 97/97 PASS.
-Next step: Message hardening (Tier 5, #43).
-
----
+      • ImageCompare #67: ⏳ Queued → ✅ Done (scores: API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived oldest DataView handoff to keep only the newest 3 in this file
+State: ImageCompare hardening complete. Component now has aria-valuetext, unique generated IDs per instance, prefers-reduced-motion SCSS guard, and a full 21-test a11y spec (role=slider, ARIA value attrs, image alt, decorative aria-hidden, keyboard nav, disabled state, axe-core).
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image-compare/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=image-compare --no-coverage (60/60 PASS — 39 unit + 21 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
+Next step: Continue Tier 6 queue with remaining queued components.
 
 Date: 2026-05-12 [DataView component — accessibility hardening COMPLETE (#38)]
 Changed:
