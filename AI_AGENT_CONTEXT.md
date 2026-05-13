@@ -77,25 +77,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-13 [Fluid component + directive — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/fluid/fluid.a11y.spec.ts (CREATED — 10 tests)
-      • axe-core assertions for component, directive, directive-disabled, and nested states
-      • Structural guards: `ui-lib-fluid` class present, no inline overflow style (WCAG 1.4.10)
-      • ARIA-pollution guards: no role/aria-label/aria-labelledby added to host
-      • Projected content reachability check (not aria-hidden)
-  - docs/COMPONENT_SCORES.md
-      • Fluid "New Components" row: ⏳ Needs hardening → ✅ Done
-      • Fluid Layout scores row: 🔴 → 🟢 (API 9, A11y 9, Perf 9, Comp 9, Theme 8, DX 9, Docs 8, Polish 9, Angular 9, Feel 8 — avg 8.7)
-  - AI_AGENT_CONTEXT.md
-      • Archived oldest (ImageCompare) handoff to AI_AGENT_CONTEXT_ARCHIVE.md
-State: Fluid hardening complete. SCSS verified: `width: 100%` + `display: block` on host, `box-sizing: border-box` on all children — no `overflow: hidden` anywhere (WCAG 1.4.10 reflow compliance). Dedicated a11y spec covers axe-core, class guards, overflow guards, ARIA purity, and content reachability.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/fluid/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/fluid/" --no-coverage (19/19 PASS — 9 unit + 10 a11y)
-Terminal notes: No blocking issues. All tests and lint green on first attempt.
-Next step: Continue with remaining needs-hardening items in docs/prompts/needs-hardening/.
-
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
@@ -131,32 +112,24 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=virtual-scroller --no-coverage (39/39 PASS — 25 unit + 14 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation.
-Next step: Continue the remaining queued hardening work.
+Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
+Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
 
-Date: 2026-05-13 [FloatLabel component — 6-phase hardening COMPLETE]
+Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/float-label/float-label.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block — disables label transition
-  - projects/ui-lib-custom/src/lib/float-label/float-label.a11y.spec.ts (CREATED — 19 tests)
-      • axe-core: all 3 variants (over/in/on), filled state, textarea, focused state
-      • Label element type: real `<label>` not `<span>`/`<div>`, `for` attribute, DOM persistence
-      • Font size WCAG 1.4.4: active font-size is 0.75rem (12px), satisfies ≥11px requirement
-      • prefers-reduced-motion: SCSS block verified — scoped to `.uilib-float-label label`
-      • CSS-driven float state: variant modifier classes, label never removed from DOM
-  - projects/ui-lib-custom/src/lib/float-label/README.md
-      • Added Accessibility section: `<label for>` requirement, `prefers-reduced-motion` note,
-        font size note, screen reader behaviour, CSS Custom Properties table
-      • Improved usage examples with all 3 variants, `ui-lib-input`, textarea
+  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
+  - projects/ui-lib-custom/src/lib/form-field/form-field.html
+  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
+  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
+  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
+  - projects/ui-lib-custom/src/lib/form-field/README.md
   - docs/COMPONENT_SCORES.md
-      • FloatLabel: ⏳ Needs hardening → ✅ Done
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived ImageCompare handoff; kept newest 3 in AI_AGENT_CONTEXT.md
-State: FloatLabel hardening complete. Float animation is CSS-only (`:focus-within`, `:not(:placeholder-shown)`). prefers-reduced-motion SCSS guard added. a11y spec (19 tests) covers label association, axe in all states/variants, WCAG 1.4.4 font-size compliance, and reduced-motion stylesheet verification.
+  - AI_AGENT_CONTEXT.md
+State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/float-label/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/float-label/" --no-coverage (33/33 PASS — 14 unit + 19 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: npm install required on fresh clone. All green on first attempt.
-Next step: Continue remaining new component hardening from `docs/prompts/needs-hardening/`.
+Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
+Next step: Continue hardening the next queued new layout/form component prompt.

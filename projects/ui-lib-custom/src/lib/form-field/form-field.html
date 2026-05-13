@@ -1,15 +1,24 @@
-<div class="ui-form-field" [class.ui-form-field--error]="error()">
+<div class="ui-form-field" [class.ui-form-field--error]="showError()">
+  @if (label()) {
+    <label class="ui-form-field-label" [id]="labelId()" [for]="inputId()">
+      {{ label() }}
+      @if (required()) {
+        <span class="ui-form-field-required-indicator" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+
   <ng-content></ng-content>
 
-  @if (error()) {
-    <div [id]="errorId" class="ui-form-field-error" role="alert" aria-live="assertive">
-      {{ error() }}
+  @if (showHint()) {
+    <div [id]="hintId()" class="ui-form-field-hint">
+      {{ hint() }}
     </div>
   }
 
-  @if (hint() && !error()) {
-    <div [id]="hintId" class="ui-form-field-hint">
-      {{ hint() }}
+  @if (showError()) {
+    <div [id]="errorId()" class="ui-form-field-error" role="alert" aria-live="assertive">
+      {{ error() }}
     </div>
   }
 </div>
