@@ -77,6 +77,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: AnimateOnScroll now enforces `prefers-reduced-motion` by skipping observer/class animation paths and forcing visible static state, adds non-IntersectionObserver visible fallback for progressive enhancement, schedules class mutations via `requestAnimationFrame`, ships reduced-motion preset CSS safeguards, and includes a dedicated accessibility spec for reduced-motion + observer cleanup behavior.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/animate-on-scroll/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/animate-on-scroll/" --no-coverage (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
+Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
+
 Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
 Changed:
   - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
@@ -123,31 +141,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
-
-Date: 2026-05-13 [AutoFocus directive — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.ts
-      • Replaced timing with `requestAnimationFrame` deferred focus in `ngAfterViewInit`
-      • Added `disabled` (`InputSignal<boolean>`) and `selector` (`InputSignal<string | null>`) inputs
-      • Added guard logic to avoid stealing focus from existing focus managers (dialogs/focus traps)
-      • Added DEV mode warning for non-focusable host/selector targets
-  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.spec.ts
-      • Updated unit tests for disabled + selector APIs, deferred focus, and one-time mount behavior
-  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.a11y.spec.ts (CREATED — 10 tests)
-      • Added accessibility-focused regression coverage for mount focus, disabled behavior, selector targeting, one-time execution, and focus-theft prevention
-  - projects/ui-lib-custom/src/lib/auto-focus/README.md
-      • Updated API docs to `disabled`/`selector`, explicit opt-in guidance, and accessibility caveats
-  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.html
-      • Updated demo/API examples from `[autofocus]` to `[disabled]` and documented `selector`
-  - docs/COMPONENT_SCORES.md
-      • Marked AutoFocus as ✅ Done in queue and filled Utilities & Directives score row (avg 8.6)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived oldest Divider handoff to keep only newest 3 entries in this file
-State: AutoFocus now runs once on mount, defers focus with rAF, supports optional child-selector targeting, and avoids stealing focus when another interactive element is already focused. Docs, demo usage, and dedicated a11y tests are aligned with the hardened behavior.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/auto-focus/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/auto-focus/" --no-coverage (19/19 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Playwright browser was not installed initially (`chrome-headless-shell` missing), resolved via `npx playwright install chromium`. Demo screenshot captured at `/tmp/auto-focus-hardening.png` after serving demo on `http://127.0.0.1:4200/auto-focus`.
-Next step: Continue hardening the next queued utility/component (for example Image or ClassNames).

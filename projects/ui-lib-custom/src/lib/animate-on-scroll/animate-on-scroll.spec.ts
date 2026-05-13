@@ -11,6 +11,8 @@ import { AnimateOnScroll } from './animate-on-scroll';
 // ---------------------------------------------------------------------------
 
 let intersectionCallback: IntersectionObserverCallback;
+const originalRequestAnimationFrame: typeof globalThis.requestAnimationFrame =
+  globalThis.requestAnimationFrame;
 
 const mockObserver: {
   observe: jest.Mock;
@@ -61,6 +63,44 @@ class AnimateOnScrollHostComponent {
 }
 
 @Component({
+  selector: 'app-animate-on-scroll-repeat-host',
+  standalone: true,
+  imports: [AnimateOnScroll],
+  template: `
+    <div
+      uiLibAnimateOnScroll
+      enterClass="fade-in"
+      leaveClass="fade-out"
+      [once]="false"
+      (enter)="onEnter()"
+      (leave)="onLeave()"
+    ></div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class AnimateOnScrollRepeatHostComponent {
+  public enterCount: number = 0;
+  public leaveCount: number = 0;
+
+  public onEnter(): void {
+    this.enterCount++;
+  }
+
+  public onLeave(): void {
+    this.leaveCount++;
+  }
+}
+
+@Component({
+  selector: 'app-animate-on-scroll-disabled-host',
+  standalone: true,
+  imports: [AnimateOnScroll],
+  template: `<div uiLibAnimateOnScroll [disabled]="true"></div>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class AnimateOnScrollDisabledHostComponent {}
+
+@Component({
   selector: 'app-animate-on-scroll-empty-host',
   standalone: true,
   imports: [AnimateOnScroll],
@@ -87,6 +127,25 @@ function setupHost(): {
   );
   fixture.detectChanges();
   const host: AnimateOnScrollHostComponent = fixture.componentInstance;
+  const debugEl: DebugElement = fixture.debugElement.query(By.directive(AnimateOnScroll));
+  const element: HTMLElement = debugEl.nativeElement as HTMLElement;
+  return { fixture, host, element };
+}
+
+function setupRepeatHost(): {
+  fixture: ComponentFixture<AnimateOnScrollRepeatHostComponent>;
+  host: AnimateOnScrollRepeatHostComponent;
+  element: HTMLElement;
+} {
+  TestBed.configureTestingModule({
+    imports: [AnimateOnScrollRepeatHostComponent],
+    providers: [provideZonelessChangeDetection()],
+  });
+  const fixture: ComponentFixture<AnimateOnScrollRepeatHostComponent> = TestBed.createComponent(
+    AnimateOnScrollRepeatHostComponent
+  );
+  fixture.detectChanges();
+  const host: AnimateOnScrollRepeatHostComponent = fixture.componentInstance;
   const debugEl: DebugElement = fixture.debugElement.query(By.directive(AnimateOnScroll));
   const element: HTMLElement = debugEl.nativeElement as HTMLElement;
   return { fixture, host, element };
@@ -126,6 +185,15 @@ describe('AnimateOnScroll', (): void => {
         return mockObserver as unknown as IntersectionObserver;
       }
     ) as unknown as typeof IntersectionObserver;
+
+    globalThis.requestAnimationFrame = jest.fn((callback: FrameRequestCallback): number => {
+      callback(0);
+      return 1;
+    }) as typeof requestAnimationFrame;
+  });
+
+  afterAll((): void => {
+    globalThis.requestAnimationFrame = originalRequestAnimationFrame;
   });
 
   describe('creation', (): void => {
@@ -166,6 +234,13 @@ describe('AnimateOnScroll', (): void => {
       triggerIntersection(true);
       expect(host.enterCount).toBe(1);
     });
+
+    it('should schedule class mutations using requestAnimationFrame', (): void => {
+      setupHost();
+      const requestAnimationFrameMock: jest.Mock = globalThis.requestAnimationFrame as jest.Mock;
+      triggerIntersection(true);
+      expect(requestAnimationFrameMock).toHaveBeenCalled();
+    });
   });
 
   describe('once mode (default)', (): void => {
@@ -185,41 +260,13 @@ describe('AnimateOnScroll', (): void => {
 
   describe('repeat mode (once = false)', (): void => {
     it('should NOT call unobserve when once is false', (): void => {
-      const { fixture } = setupHost();
-      fixture.componentInstance.once = false;
-      fixture.detectChanges();
-
-      // Recreate so ngOnInit uses the new input
-      TestBed.resetTestingModule();
-
-      TestBed.configureTestingModule({
-        imports: [AnimateOnScrollHostComponent],
-        providers: [provideZonelessChangeDetection()],
-      });
-      const repeatFixture: ComponentFixture<AnimateOnScrollHostComponent> = TestBed.createComponent(
-        AnimateOnScrollHostComponent
-      );
-      repeatFixture.componentInstance.once = false;
-      repeatFixture.detectChanges();
-
+      setupRepeatHost();
       triggerIntersection(true);
       expect(mockObserver.unobserve).not.toHaveBeenCalled();
     });
 
     it('should add leaveClass and emit leave when once is false and element leaves', (): void => {
-      TestBed.configureTestingModule({
-        imports: [AnimateOnScrollHostComponent],
-        providers: [provideZonelessChangeDetection()],
-      });
-      const repeatFixture: ComponentFixture<AnimateOnScrollHostComponent> = TestBed.createComponent(
-        AnimateOnScrollHostComponent
-      );
-      repeatFixture.componentInstance.once = false;
-      repeatFixture.detectChanges();
-
-      const debugEl: DebugElement = repeatFixture.debugElement.query(By.directive(AnimateOnScroll));
-      const element: HTMLElement = debugEl.nativeElement as HTMLElement;
-      const host: AnimateOnScrollHostComponent = repeatFixture.componentInstance;
+      const { element, host } = setupRepeatHost();
 
       triggerIntersection(false);
       expect(element.classList.contains('fade-out')).toBe(true);
@@ -227,18 +274,7 @@ describe('AnimateOnScroll', (): void => {
     });
 
     it('should remove enterClass when element leaves in repeat mode', (): void => {
-      TestBed.configureTestingModule({
-        imports: [AnimateOnScrollHostComponent],
-        providers: [provideZonelessChangeDetection()],
-      });
-      const repeatFixture: ComponentFixture<AnimateOnScrollHostComponent> = TestBed.createComponent(
-        AnimateOnScrollHostComponent
-      );
-      repeatFixture.componentInstance.once = false;
-      repeatFixture.detectChanges();
-
-      const debugEl: DebugElement = repeatFixture.debugElement.query(By.directive(AnimateOnScroll));
-      const element: HTMLElement = debugEl.nativeElement as HTMLElement;
+      const { element } = setupRepeatHost();
 
       triggerIntersection(true);
       expect(element.classList.contains('fade-in')).toBe(true);
@@ -251,12 +287,11 @@ describe('AnimateOnScroll', (): void => {
   describe('disabled mode', (): void => {
     it('should NOT set up the observer when disabled is true', (): void => {
       TestBed.configureTestingModule({
-        imports: [AnimateOnScrollHostComponent],
+        imports: [AnimateOnScrollDisabledHostComponent],
         providers: [provideZonelessChangeDetection()],
       });
-      const disabledFixture: ComponentFixture<AnimateOnScrollHostComponent> =
-        TestBed.createComponent(AnimateOnScrollHostComponent);
-      disabledFixture.componentInstance.disabled = true;
+      const disabledFixture: ComponentFixture<AnimateOnScrollDisabledHostComponent> =
+        TestBed.createComponent(AnimateOnScrollDisabledHostComponent);
       disabledFixture.detectChanges();
 
       expect(mockObserver.observe).not.toHaveBeenCalled();
@@ -281,6 +316,18 @@ describe('AnimateOnScroll', (): void => {
       const { fixture } = setupHost();
       fixture.destroy();
       expect(mockObserver.disconnect).toHaveBeenCalledTimes(1);
+    });
+
+    it('should force visible static state when IntersectionObserver is unavailable', (): void => {
+      (
+        globalThis as unknown as { IntersectionObserver: typeof IntersectionObserver | undefined }
+      ).IntersectionObserver = undefined;
+
+      const { element } = setupHost();
+      expect(element.style.opacity).toBe('1');
+      expect(element.style.transform).toBe('none');
+      expect(element.style.transition).toBe('none');
+      expect(element.style.animation).toBe('none');
     });
   });
 });

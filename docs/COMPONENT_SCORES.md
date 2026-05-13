@@ -151,7 +151,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | IconButton      | `aria-label` MANDATORY, icon `aria-hidden` inside           | ⏳ Needs hardening  |
 | ButtonGroup     | `role=group` with `aria-label`                              | ✅ Done  |
 | StyleClass      | `aria-expanded` on trigger, `aria-hidden` on target         | ⏳ Needs hardening  |
-| AnimateOnScroll | `prefers-reduced-motion` (CRITICAL — skip all animation)    | ⏳ Needs hardening  |
+| AnimateOnScroll | `prefers-reduced-motion` (CRITICAL — skip all animation)    | ✅ Done             |
 | AutoFocus       | Only once on mount, no focus theft from dialogs             | ✅ Done             |
 | ClassNames      | No ARIA interference                                        | ✅ Done             |
 | Bind            | No ARIA interference                                        | ✅ Done            |
@@ -307,7 +307,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FocusTrap       | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
-| AnimateOnScroll | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| AnimateOnScroll | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | AutoFocus       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Bind            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fluid           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

@@ -27,7 +27,7 @@
  */
 
 :root {
-  --uilib-animate-on-scroll-duration: 600ms;
+  --uilib-animate-on-scroll-duration: var(--uilib-transition-duration, 600ms);
   --uilib-animate-on-scroll-easing: cubic-bezier(0.4, 0, 0.2, 1);
   --uilib-animate-on-scroll-distance: 30px;
   /** Per-element stagger delay — override on individual elements for stagger effects. */
@@ -139,4 +139,20 @@
       var(--uilib-animate-on-scroll-delay, 0ms),
     transform var(--uilib-animate-on-scroll-duration) var(--uilib-animate-on-scroll-easing)
       var(--uilib-animate-on-scroll-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uilib-aos-active,
+  .uilib-aos-fade-in,
+  .uilib-aos-slide-up,
+  .uilib-aos-slide-down,
+  .uilib-aos-slide-left,
+  .uilib-aos-slide-right,
+  .uilib-aos-zoom-in,
+  .uilib-aos-zoom-out {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
