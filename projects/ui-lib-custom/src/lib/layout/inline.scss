@@ -2,3 +2,8 @@
   --uilib-inline-fg: var(--uilib-text-dark-primary);
 }
 
+.ui-lib-inline__content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

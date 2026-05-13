@@ -13,9 +13,9 @@ import {
   INLINE_TOKENS,
   type InlineToken,
 } from 'ui-lib-custom/tokens';
-import type { InlineAlign, InlineJustify } from './inline.types';
+import type { InlineAlign, InlineJustify, InlineTag } from './inline.types';
 
-export type { InlineAlign, InlineJustify } from './inline.types';
+export type { InlineAlign, InlineJustify, InlineTag } from './inline.types';
 
 const inlineVar: (token: InlineToken) => string = (token: InlineToken): string =>
   `var(--uilib-inline-${token}, ${INLINE_TOKENS[token]})`;
@@ -31,19 +31,20 @@ const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string 
 @Component({
   selector: 'ui-lib-inline',
   standalone: true,
-  template: '<ng-content />',
+  templateUrl: './inline.html',
   host: {
-    '[style.display]': '"flex"',
-    '[style.flex-direction]': '"row"',
-    '[style.flex-wrap]': '"wrap"',
-    '[style.align-items]': 'align()',
-    '[style.justify-content]': '_justifyContent()',
-    '[style.gap]': '_gapValue()',
+    '[style.display]': '"contents"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class Inline {
+  /** Rendered HTML tag for semantics; defaults to a neutral block element. */
+  public readonly as: InputSignal<InlineTag | null> = input<InlineTag | null>(null);
+
+  /** Alias of `as` kept for API readability. */
+  public readonly tag: InputSignal<InlineTag | null> = input<InlineTag | null>(null);
+
   /** Alignment of items along the cross axis */
   public readonly align: InputSignal<InlineAlign> = input<InlineAlign>('center');
 
@@ -60,6 +61,11 @@ export class Inline {
 
   /** Back-compat numeric gap using spacing scale (remains supported). */
   public readonly gap: InputSignal<SpacingToken> = input<SpacingToken>(2);
+
+  /** Final rendered tag name (defaults to div). */
+  protected readonly _renderTag: Signal<InlineTag> = computed<InlineTag>(
+    (): InlineTag => this.as() ?? this.tag() ?? 'div'
+  );
 
   /** Computed justify-content value */
   protected readonly _justifyContent: Signal<string> = computed<string>((): string => {

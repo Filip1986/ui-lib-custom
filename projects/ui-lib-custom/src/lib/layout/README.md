@@ -115,10 +115,15 @@ _none_
 
 Horizontal, wrapping flex layout — ideal for tags, chips, and button groups.
 
+> Use **Inline** for horizontal, wrapping flows. Use **Stack** for linear vertical/horizontal
+> spacing where wrap behavior is not the primary need.
+
 ### Inputs
 
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
+| `as` | `'div' \| 'span' \| 'ul' \| 'ol'` | `'div'` | Semantic rendered element |
+| `tag` | `'div' \| 'span' \| 'ul' \| 'ol' \| null` | `null` | Alias for `as`; `as` takes precedence when both are set |
 | `align` | `InlineAlign` | `'center'` | `align-items` value |
 | `justify` | `InlineJustify` | `'start'` | `justify-content` value |
 | `spacing` | `InlineToken \| SpacingToken \| number \| null` | `null` | Semantic gap (preferred); maps to `--uilib-inline-*` |
@@ -127,6 +132,34 @@ Horizontal, wrapping flex layout — ideal for tags, chips, and button groups.
 ### Outputs
 
 _none_
+
+### Accessibility notes
+
+- Default render target is a neutral `<div>` (no landmark role added).
+- Set `as="span"` to keep inline flow semantics for inline text/content contexts.
+- When items wrap, keep DOM order equal to intended reading order. Do **not** use visual reordering
+  (`order`) to rearrange content independently of source order.
+
+### Recipes
+
+```html
+<!-- Inline chips in text flow -->
+<p>
+  Filters:
+  <ui-lib-inline as="span" spacing="sm">
+    <span>Frontend</span>
+    <span>Accessibility</span>
+    <span>Angular</span>
+  </ui-lib-inline>
+</p>
+
+<!-- Semantic list rendering -->
+<ui-lib-inline as="ul" spacing="sm">
+  <li>Fast</li>
+  <li>Typed</li>
+  <li>Accessible</li>
+</ui-lib-inline>
+```
 
 ---
 

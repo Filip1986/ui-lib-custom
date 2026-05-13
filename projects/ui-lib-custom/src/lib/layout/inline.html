@@ -1,0 +1,42 @@
+@switch (_renderTag()) {
+  @case ('span') {
+    <span
+      class="ui-lib-inline__content"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.gap]="_gapValue()"
+    >
+      <ng-content />
+    </span>
+  }
+  @case ('ul') {
+    <ul
+      class="ui-lib-inline__content"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.gap]="_gapValue()"
+    >
+      <ng-content />
+    </ul>
+  }
+  @case ('ol') {
+    <ol
+      class="ui-lib-inline__content"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.gap]="_gapValue()"
+    >
+      <ng-content />
+    </ol>
+  }
+  @default {
+    <div
+      class="ui-lib-inline__content"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.gap]="_gapValue()"
+    >
+      <ng-content />
+    </div>
+  }
+}

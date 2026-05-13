@@ -143,7 +143,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ⏳ Needs hardening      |
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
 | Stack             | No landmark pollution, `as` tag semantics                                                           | ⏳ Needs hardening      |
-| Inline            | No landmark pollution, wrap + reading order                                                         | ⏳ Needs hardening      |
+| Inline            | No landmark pollution, wrap + reading order                                                         | ✅ Done                 |
 | Grid              | Visual vs DOM order constraint, no overflow clipping                                                | ✅ Done                 |
 | Container         | No clipping, skip-link target compatibility                                                         | ✅ Done                 |
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
@@ -211,7 +211,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Card        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Inline      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Grid        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
+| Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconField   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
