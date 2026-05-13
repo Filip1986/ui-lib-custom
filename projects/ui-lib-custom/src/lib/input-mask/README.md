@@ -73,4 +73,4 @@
 
 ## Security note
 
-`InputMask` controls format, not secrecy. Do not use it as a security control for sensitive data. For secrets or credentials, use dedicated secure fields and backend validation/storage protections.
+`InputMask` controls format, not secrecy. Client-side mask validation can be bypassed, and masked/raw values still exist in browser memory and the DOM. Do not use InputMask as a security control for sensitive data. For secrets or credentials, use dedicated secure fields plus backend validation, encryption, and storage protections.

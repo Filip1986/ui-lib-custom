@@ -24,7 +24,15 @@ import { INPUT_MASK_DEFAULTS } from './input-mask.types';
 import type { Caret, InputMaskCompleteEvent, InputMaskSize } from './input-mask.types';
 import { MaskEngine } from './mask-engine';
 
-let nextInputMaskId: number = 0;
+const INPUT_MASK_DEFAULT_ERROR_MESSAGES: Readonly<{
+  incomplete: string;
+  invalid: string;
+}> = {
+  incomplete: 'Please complete the required format.',
+  invalid: 'The entered value does not match the required format.',
+} as const;
+
+let nextInputMaskInstanceId: number = 0;
 
 /**
  * InputMask component with CVA integration and mask-aware keyboard handling.
@@ -150,7 +158,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   protected readonly value: WritableSignal<string | null> = signal<string | null>(null);
   protected readonly isFilled: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly isFocused: WritableSignal<boolean> = signal<boolean>(false);
-  protected readonly inputMaskId: string = `ui-lib-input-mask-${nextInputMaskId++}`;
+  protected readonly inputMaskId: string = `ui-lib-input-mask-${nextInputMaskInstanceId++}`;
   protected readonly controlId: Signal<string> = computed<string>(
     (): string => this.id() ?? this.inputMaskId
   );
@@ -166,15 +174,15 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   protected readonly isInvalid: Signal<boolean> = computed<boolean>(
     (): boolean => this.invalid() || this.hasIncompleteMask()
   );
-  protected readonly showError: Signal<boolean> = computed<boolean>(
-    (): boolean => this.isInvalid() || Boolean(this.errorMessage())
+  protected readonly showError: Signal<boolean> = computed<boolean>((): boolean =>
+    this.isInvalid()
   );
   protected readonly resolvedErrorMessage: Signal<string> = computed<string>(
     (): string =>
       this.errorMessage() ??
       (this.hasIncompleteMask()
-        ? 'Please complete the required format.'
-        : 'The entered value does not match the required format.')
+        ? INPUT_MASK_DEFAULT_ERROR_MESSAGES.incomplete
+        : INPUT_MASK_DEFAULT_ERROR_MESSAGES.invalid)
   );
   protected readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
     (): string | null => {
@@ -450,7 +458,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
 
     event.preventDefault();
     this.updateModel(event);
-    this.syncIncompleteMaskState();
+    this.clearIncompleteMaskStateIfResolved();
 
     if (isCompleted) {
       this.completed.emit({
@@ -478,7 +486,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
       this.handleStandardInput(event);
     }
 
-    this.syncIncompleteMaskState();
+    this.clearIncompleteMaskStateIfResolved();
     this.inputChanged.emit(event);
   }
 
@@ -502,7 +510,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
       this.handleStandardInput(event);
     }
 
-    this.syncIncompleteMaskState();
+    this.clearIncompleteMaskStateIfResolved();
     this.inputChanged.emit(event);
   }
 
@@ -683,7 +691,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
     this.hasIncompleteMask.set(hasTypedCharacters && !this.maskEngine.isCompleted());
   }
 
-  private syncIncompleteMaskState(): void {
+  private clearIncompleteMaskStateIfResolved(): void {
     if (!this.hasIncompleteMask()) {
       return;
     }
