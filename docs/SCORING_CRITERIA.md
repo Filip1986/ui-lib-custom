@@ -393,6 +393,41 @@ Before scoring any category, know where the standards come from:
 
 ---
 
+## Category 11 — Competitive Parity & Differentiation
+
+> **Benchmark libraries:** Angular Material, PrimeNG, Radix UI, Ark UI, Melt UI
+> **Evidence file:** [`docs/COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md)
+>
+> This category answers two questions:
+> 1. Does this component do everything the best competing implementations do?
+> 2. Where does it go beyond what any of them offer?
+>
+> A score here is not about pride — it is about knowing with certainty that no developer
+> will switch away because a competing library does something this one does not.
+
+**Score = checked / 13 × 10**
+
+### Research (must be done before any other check in this category)
+- [ ] The equivalent component in **Angular Material** has been found, and its full input/output list has been reviewed and compared — URL recorded in the component's `COMPETITIVE_BENCHMARKS.md` entry
+- [ ] The equivalent component in **PrimeNG** has been found, and its full feature set has been reviewed and compared — URL recorded
+- [ ] The equivalent primitive in **Radix UI** has been found, and its props, keyboard model, and built-in ARIA behavior have been reviewed — URL recorded
+- [ ] The equivalent component in **Ark UI** has been found, and its composability patterns and API shape have been reviewed — URL recorded
+- [ ] The specific **WAI-ARIA APG pattern** for this component has been identified and its URL is recorded in the component README
+
+### Parity
+- [ ] No capability gap vs Angular Material that is not consciously excluded — every excluded gap has a one-line documented reason in the `COMPETITIVE_BENCHMARKS.md` entry
+- [ ] No capability gap vs PrimeNG that is not consciously excluded — same rule
+- [ ] No accessibility behaviour gap vs Radix UI — if Radix handles an ARIA state or keyboard case that this component does not, it is either implemented or its exclusion is documented
+- [ ] No composability gap vs Ark UI / Melt UI — if either offers a structural pattern (headless hook, slot, compound sub-component) that would genuinely improve this component's API, it is either adopted or its exclusion is documented
+
+### Differentiation (🚀 Beyond)
+- [ ] At least one feature or behaviour documented in `COMPETITIVE_BENCHMARKS.md` where this component does something Angular Material does not offer at all
+- [ ] At least one feature or behaviour documented where this component does something PrimeNG does not offer at all
+- [ ] At least one feature or behaviour documented where this component does something **no reference library offers** — a genuine differentiator unique to this library (signal-native API, zoneless support, runtime variant switching, SSR safety, etc.)
+- [ ] The component's comparison table in `COMPETITIVE_BENCHMARKS.md` is up to date — re-checked after any significant API change
+
+---
+
 ## Scoring Summary Template
 
 Copy this block into `docs/COMPONENT_SCORES.md` when recording a component result.
@@ -400,19 +435,20 @@ Copy this block into `docs/COMPONENT_SCORES.md` when recording a component resul
 ```
 ### ComponentName
 
-| Category                    | Score | Notes |
-|-----------------------------|-------|-------|
-| API Clarity                 |  /10  |       |
-| Accessibility               |  /10  |       |
-| Performance                 |  /10  |       |
-| Composability               |  /10  |       |
-| Theming                     |  /10  |       |
-| Developer Experience        |  /10  |       |
-| Documentation               |  /10  |       |
-| Visual & Interaction Polish |  /10  |       |
-| Angular Integration         |  /10  |       |
-| Emotional Quality           |  /10  |       |
-| **Production gate**         | **all ≥ 8.0** | ✅ Pass / ❌ Fail |
+| Category                            | Score | Notes |
+|-------------------------------------|-------|-------|
+| API Clarity                         |  /10  |       |
+| Accessibility                       |  /10  |       |
+| Performance                         |  /10  |       |
+| Composability                       |  /10  |       |
+| Theming                             |  /10  |       |
+| Developer Experience                |  /10  |       |
+| Documentation                       |  /10  |       |
+| Visual & Interaction Polish         |  /10  |       |
+| Angular Integration                 |  /10  |       |
+| Emotional Quality                   |  /10  |       |
+| Competitive Parity & Differentiation|  /10  |       |
+| **Production gate**                 | **all ≥ 8.0** | ✅ Pass / ❌ Fail |
 
 Unchecked items (explicit backlog):
 - Category X: item description
@@ -429,36 +465,15 @@ map the phases to the scoring categories as follows:
 | Evolution Phase | Primary Scoring Categories |
 |---|---|
 | Phase 1 — Architecture | Angular Integration, Performance |
-| Phase 2 — DX & API | API Clarity, Developer Experience |
-| Phase 3 — Accessibility | Accessibility |
+| Phase 2 — DX & API | API Clarity, Developer Experience, Competitive Parity |
+| Phase 3 — Accessibility | Accessibility, Competitive Parity (Radix UI / APG check) |
 | Phase 4 — Performance | Performance |
-| Phase 5 — Composability | Composability, Theming |
+| Phase 5 — Composability | Composability, Theming, Competitive Parity (Ark UI check) |
 | Phase 6 — Emotional Polish | Visual & Interaction Polish, Emotional Quality, Documentation |
 
 After every phase, re-tally only the affected categories. A full re-score is only necessary after Phase 6.
-
----
-
-## Competitive Benchmark Process (API & A11y Research)
-
-Before scoring any new or evolved component, run this research pass:
-
-1. **Angular Material** — find the equivalent component. Read its input/output list.
-   Note any input this library's component does not have. Decide: add it, or consciously exclude it.
-
-2. **Radix UI** — find the equivalent primitive. Read its props and its built-in accessibility behaviour.
-   Note any ARIA attribute or keyboard interaction that Radix handles which this component does not.
-   This is the most reliable a11y benchmark because Radix is built around the APG patterns.
-
-3. **Ark UI / Melt UI** — find the equivalent component. Note any composability or headless pattern
-   they offer that would improve this library's API.
-
-4. **APG Pattern** — find the exact pattern URL for this component type.
-   Cross-reference: does this component's keyboard model exactly match the APG?
-   Any deviation must be intentional and documented.
-
-Record the benchmark comparison URLs in the component README under a `## Benchmark` section.
-This makes future re-scores fast — you know exactly where to look.
+The Competitive Parity category should be tallied after Phase 2 and again after Phase 3 — those are the
+two phases where the benchmark research is most relevant.
 
 ---
 
