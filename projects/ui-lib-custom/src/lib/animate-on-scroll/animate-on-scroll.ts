@@ -66,7 +66,13 @@ export class AnimateOnScroll implements OnInit {
       return;
     }
 
+    if (this.userPrefersReducedMotion()) {
+      this.showElementWithoutAnimation();
+      return;
+    }
+
     if (typeof IntersectionObserver === 'undefined') {
+      this.showElementWithoutAnimation();
       return;
     }
 
@@ -124,12 +130,44 @@ export class AnimateOnScroll implements OnInit {
 
     const classes: string[] = classString.trim().split(/\s+/);
 
-    for (const cssClass of classes) {
-      if (add) {
-        element.classList.add(cssClass);
-      } else {
-        element.classList.remove(cssClass);
+    this.scheduleClassMutation((): void => {
+      for (const cssClass of classes) {
+        if (add) {
+          element.classList.add(cssClass);
+        } else {
+          element.classList.remove(cssClass);
+        }
       }
+    });
+  }
+
+  /** Ensure class mutations happen in animation frame when available. */
+  private scheduleClassMutation(mutation: () => void): void {
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame((): void => {
+        mutation();
+      });
+      return;
     }
+
+    mutation();
+  }
+
+  /** True when the user has enabled reduced motion at OS/browser level. */
+  private userPrefersReducedMotion(): boolean {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return false;
+    }
+
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  /** Force host element visible and static when animation should be skipped. */
+  private showElementWithoutAnimation(): void {
+    const element: HTMLElement = this.elementRef.nativeElement;
+    element.style.opacity = '1';
+    element.style.transform = 'none';
+    element.style.transition = 'none';
+    element.style.animation = 'none';
   }
 }
