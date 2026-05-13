@@ -63,7 +63,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `Dock` -> ✅ complete + hardened (6-phase, score 9.0/10, 73 tests — 45 unit + 28 a11y)
 
 ---
 
@@ -77,45 +76,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
-
-Date: 2026-05-13 [Dock component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/dock/dock.ts
-      • Added `ariaLabel` signal input (default 'Dock') for the nav landmark
-      • Added `itemTemplate` contentChild for custom item template slot (`#dockItemTemplate`)
-      • Imported `contentChild`, `type TemplateRef` from `@angular/core`
-  - projects/ui-lib-custom/src/lib/dock/dock.html
-      • Use `[attr.aria-label]="ariaLabel()"` on `<nav>` (was hardcoded 'Dock')
-      • Use `item.ariaLabel ?? item.label ?? null` on all interactive elements
-      • Add `aria-hidden="true"` to `<ui-lib-icon>` inside all item types
-      • Refactored disabled item rendering: command items → `<button disabled aria-disabled="true">`,
-        url/routerLink items → `<a aria-disabled="true">` without href/routerLink (not static spans),
-        static items → `<span>` without aria-disabled
-      • Added `#dockItemTemplate` ng-container outlet in each item branch (Phase 5)
-  - projects/ui-lib-custom/src/lib/dock/dock.types.ts
-      • Added `ariaLabel?: string` to `DockItem` interface
-  - projects/ui-lib-custom/src/lib/dock/dock.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block: item transition/transform none,
-        item-link transition none, tooltip transition none
-  - projects/ui-lib-custom/src/lib/dock/dock.a11y.spec.ts (CREATED — 28 tests)
-      • axe-core (4), ARIA structure (4), item accessible names (5), icon a11y (3),
-        disabled state (3), keyboard/Tab nav (3), empty edge case (1), custom template (4),
-        DockItem.ariaLabel type (1)
-  - projects/ui-lib-custom/src/lib/dock/README.md
-      • Added DockItem table with ariaLabel field, container role guidance, keyboard interaction
-        table, accessibility section, reduced-motion note, custom template usage example
-  - docs/COMPONENT_SCORES.md
-      • Dock: 🔴 → 🟢 (all 10 categories: 9, avg 9.0); needs-hardening row updated to ✅ Done
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived ImageCompare handoff to keep only the newest 3 in AI_AGENT_CONTEXT.md
-State: Dock 6-phase hardening complete. Nav landmark with configurable ariaLabel, per-item ariaLabel override field, aria-hidden icons, proper disabled element semantics (buttons/anchors, not spans), prefers-reduced-motion SCSS guard, custom item template slot, and 28-test a11y spec.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/dock/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/dock/" --no-coverage (73/73 PASS — 45 unit + 28 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available.
-Next step: Continue hardening remaining components in `docs/prompts/needs-hardening/`.
 
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
@@ -152,30 +112,32 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=virtual-scroller --no-coverage (39/39 PASS — 25 unit + 14 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
-Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
+Terminal notes: Fresh clone required `npm install` before baseline validation.
+Next step: Continue the remaining queued hardening work.
 
-Date: 2026-05-13 [Container layout component — 6-phase hardening COMPLETE]
+Date: 2026-05-13 [FloatLabel component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/layout/container.ts
-      • Added `HostAttributeToken('id')` injection to detect static consumer-supplied id
-      • Bound `[attr.tabindex]` to `"-1"` only when `_hostHasId` is true (skip-link target support)
-  - projects/ui-lib-custom/src/lib/layout/container.a11y.spec.ts (CREATED — 12 tests)
-      • landmark check, tabindex absent/present, axe passes (default, id, centered, inset),
-        no overflow:hidden, max-width applied, content projection, two named containers
-  - projects/ui-lib-custom/src/lib/layout/README.md
-      • Added size presets table (sm–full with pixel values and CSS variable names)
-      • Added custom max-width override section with CSS and template examples
-      • Added skip-link target usage section with code example and behaviour notes
-      • Added accessibility notes (no landmark role, no overflow:hidden)
+  - projects/ui-lib-custom/src/lib/float-label/float-label.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables label transition
+  - projects/ui-lib-custom/src/lib/float-label/float-label.a11y.spec.ts (CREATED — 19 tests)
+      • axe-core: all 3 variants (over/in/on), filled state, textarea, focused state
+      • Label element type: real `<label>` not `<span>`/`<div>`, `for` attribute, DOM persistence
+      • Font size WCAG 1.4.4: active font-size is 0.75rem (12px), satisfies ≥11px requirement
+      • prefers-reduced-motion: SCSS block verified — scoped to `.uilib-float-label label`
+      • CSS-driven float state: variant modifier classes, label never removed from DOM
+  - projects/ui-lib-custom/src/lib/float-label/README.md
+      • Added Accessibility section: `<label for>` requirement, `prefers-reduced-motion` note,
+        font size note, screen reader behaviour, CSS Custom Properties table
+      • Improved usage examples with all 3 variants, `ui-lib-input`, textarea
   - docs/COMPONENT_SCORES.md
-      • Container: ⏳ Needs hardening → ✅ Done (API 9, A11y 9, Perf 9, Comp 9, Theme 8, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+      • FloatLabel: ⏳ Needs hardening → ✅ Done
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived ImageCompare handoff (2026-05-12) to keep only the newest 3 here
-State: Container hardening complete. `tabindex="-1"` is set only when a static `id` attribute is present (HostAttributeToken), no overflow:hidden clipping, host renders as plain custom element with no landmark role, full 12-test a11y spec, and enriched README.
+      • Archived ImageCompare handoff; kept newest 3 in AI_AGENT_CONTEXT.md
+State: FloatLabel hardening complete. Float animation is CSS-only (`:focus-within`, `:not(:placeholder-shown)`). prefers-reduced-motion SCSS guard added. a11y spec (19 tests) covers label association, axe in all states/variants, WCAG 1.4.4 font-size compliance, and reduced-motion stylesheet verification.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/layout/container" --no-coverage (24/24 PASS — 12 unit + 12 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/float-label/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/float-label/" --no-coverage (33/33 PASS — 14 unit + 19 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
-Next step: Continue with remaining new-component hardening prompts in `docs/prompts/needs-hardening/`.
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: npm install required on fresh clone. All green on first attempt.
+Next step: Continue remaining new component hardening from `docs/prompts/needs-hardening/`.
