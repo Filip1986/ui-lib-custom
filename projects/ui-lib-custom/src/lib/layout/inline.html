@@ -1,7 +1,6 @@
 @switch (_renderTag()) {
   @case ('span') {
     <span
-      class="ui-lib-inline__content"
       [style.display]="'flex'"
       [style.flex-direction]="'row'"
       [style.flex-wrap]="'wrap'"
@@ -14,7 +13,6 @@
   }
   @case ('ul') {
     <ul
-      class="ui-lib-inline__content"
       [style.display]="'flex'"
       [style.flex-direction]="'row'"
       [style.flex-wrap]="'wrap'"
@@ -27,7 +25,6 @@
   }
   @case ('ol') {
     <ol
-      class="ui-lib-inline__content"
       [style.display]="'flex'"
       [style.flex-direction]="'row'"
       [style.flex-wrap]="'wrap'"
@@ -40,7 +37,6 @@
   }
   @default {
     <div
-      class="ui-lib-inline__content"
       [style.display]="'flex'"
       [style.flex-direction]="'row'"
       [style.flex-wrap]="'wrap'"
