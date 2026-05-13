@@ -13,6 +13,8 @@
 
 Work top to bottom. Priority is driven by the current committed wow factor — **Elite Accessibility** — so components with the most complex ARIA patterns and keyboard interactions lead. Within each tier, higher-usage components come first.
 
+> **Status key for this queue:** ✅ Done = all 10 scores ≥ 8 recorded in tables below · ⏳ Needs hardening = prompt exists in `docs/prompts/needs-hardening/` · 🔄 In progress
+
 ### Tier 1 — Overlays & Dialogs
 *Focus: Focus trap correctness, scroll lock, Escape handling, `aria-modal`, `role=dialog/alertdialog`, animation reduced-motion.*
 
@@ -38,44 +40,44 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 12   | Menu        | `role=menu`, keyboard nav, separator roles                                      | ✅ Done       |
 | 13   | TieredMenu  | Nested `role=menu`, left-arrow closes submenu                                   | ✅ Done       |
 | 14   | ContextMenu | Same as TieredMenu + trigger element `aria-haspopup=menu`                       | ✅ Done       |
-| 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ✅ Done     |
-| 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done    |
-| 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ✅ Done     |
-| 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ✅ Done     |
-| 19   | Stepper     | `role=tablist` variant, `aria-current=step`, linear mode enforcement            | ✅ Done     |
-| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ✅ Done     |
+| 15   | PanelMenu   | Mixed menubar + tree pattern, `aria-expanded` on panels                         | ✅ Done       |
+| 16   | MegaMenu    | Wide menu layout, keyboard trapping within columns                              | ✅ Done       |
+| 17   | Tabs        | `role=tablist/tab/tabpanel`, arrow nav, `aria-selected`                         | ✅ Done       |
+| 18   | Accordion   | `role=button` on headers, `aria-expanded`, `aria-controls`                      | ✅ Done       |
+| 19   | Stepper     | `role=tablist` variant, `aria-current=step`, linear mode enforcement            | ✅ Done       |
+| 20   | Breadcrumb  | `role=navigation`, `aria-label`, `aria-current=page` on last item               | ✅ Done       |
 
 ### Tier 3 — Form Controls
 *Focus: Label association, validation state announcements, group roles, indeterminate states.*
 
-| #    | Component     | Key a11y concern                                                           | Status     |
-|------|---------------|----------------------------------------------------------------------------|------------|
-| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ✅ Done     |
-| 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done     |
-| 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ✅ Done     |
-| 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done     |
-| 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done     |
-| 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ✅ Done     |
-| 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ✅ Done     |
-| 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done     |
-| 29   | Password      | Strength meter live region, toggle visibility button label                 | ✅ Done     |
-| 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ✅ Done     |
-| 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ✅ Done     |
+| #    | Component     | Key a11y concern                                                           | Status       |
+|------|---------------|----------------------------------------------------------------------------|--------------|
+| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ⏳ Needs hardening |
+| 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done       |
+| 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ⏳ Needs hardening |
+| 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done       |
+| 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done       |
+| 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ✅ Done       |
+| 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Needs hardening |
+| 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done       |
+| 29   | Password      | Strength meter live region, toggle visibility button label                 | ⏳ Needs hardening |
+| 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Needs hardening |
+| 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ✅ Done       |
 
 ### Tier 4 — Data Display
 *Focus: Grid/treegrid roles, sortable column headers, selection announcements, live regions.*
 
-| #    | Component  | Key a11y concern                                                                | Status     |
-|------|------------|---------------------------------------------------------------------------------|------------|
-| 32   | Table      | `role=grid`, column sort `aria-sort`, row selection `aria-selected`, pagination | ✅ Done     |
-| 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ✅ Done     |
-| 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ✅ Done     |
-| 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ✅ Done     |
-| 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done     |
-| 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done     |
-| 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ✅ Done     |
-| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ✅ Done     |
-| 40   | PickList   | Dual-list pattern, transfer action announcements                                | ✅ Done     |
+| #    | Component  | Key a11y concern                                                                | Status       |
+|------|------------|---------------------------------------------------------------------------------|--------------|
+| 32   | Table      | `role=grid`, column sort `aria-sort`, row selection `aria-selected`, pagination | ✅ Done       |
+| 33   | TreeTable  | `role=treegrid`, `aria-level/expanded/setsize/posinset`                         | ✅ Done       |
+| 34   | Tree       | `role=tree/treeitem`, full keyboard nav (arrows + Home/End + Type-ahead)        | ✅ Done       |
+| 35   | TreeSelect | Tree inside a popup — combines combobox + tree patterns                         | ✅ Done       |
+| 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done       |
+| 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done       |
+| 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ✅ Done       |
+| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ⏳ Needs hardening |
+| 40   | PickList   | Dual-list pattern, transfer action announcements                                | ✅ Done       |
 
 ### Tier 5 — Feedback, Status & Foundational
 *Focus: Live regions, icon-only button labels, landmark roles, reduced motion.*
@@ -113,7 +115,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ✅ Done     |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done     |
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done     |
-| 66   | Image           | Alt text, preview dialog a11y                             | ✅ Done     |
+| 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Needs hardening |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ✅ Done     |
 | 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ✅ Done     |
 | 69   | Upload          | Drop zone announcement, file list management              | ✅ Done     |
@@ -125,7 +127,34 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 75   | ScrollTop       | `aria-label` on button                                    | ✅ Done     |
 | 76   | BottomSheet     | `role=dialog`, focus management                           | ✅ Done     |
 
-> **Queue status key:** ⏳ Queued · 🔄 In progress · ✅ Done (all scores ≥ 8)
+### New Components (not in original 76-item queue — built but not yet formally scored)
+
+| Component       | Key a11y concern                                            | Status              |
+|-----------------|-------------------------------------------------------------|---------------------|
+| Textarea        | Label, aria-invalid, aria-readonly, resize a11y             | ⏳ Needs hardening  |
+| ToggleButton    | `aria-pressed`, icon-only `aria-label`                      | ⏳ Needs hardening  |
+| ToggleSwitch    | `role=switch`, `aria-checked`, Space key                    | ⏳ Needs hardening  |
+| InputMask       | Format hint `aria-describedby`, `aria-invalid`              | ⏳ Needs hardening  |
+| KeyFilter       | Format hint, silent block communication                     | ⏳ Needs hardening  |
+| FormField       | Full label+error+hint chain orchestration                   | ⏳ Needs hardening  |
+| FloatLabel      | Real label element, floated contrast ≥ 11px                 | ⏳ Needs hardening  |
+| InputGroup      | Decorative addons `aria-hidden`, button addon labels        | ⏳ Needs hardening  |
+| IconField       | Icon `aria-hidden` if decorative, no focus intercept        | ⏳ Needs hardening  |
+| Stack           | No landmark pollution, `as` tag semantics                   | ⏳ Needs hardening  |
+| Inline          | No landmark pollution, wrap + reading order                 | ⏳ Needs hardening  |
+| Grid            | Visual vs DOM order constraint, no overflow clipping        | ⏳ Needs hardening  |
+| Container       | No clipping, skip-link target compatibility                 | ⏳ Needs hardening  |
+| Fluid           | 400% zoom reflow (WCAG 1.4.10)                             | ⏳ Needs hardening  |
+| Dock            | `role=toolbar` or `navigation`, item labels, roving tabindex | ⏳ Needs hardening |
+| OrganizationChart | `role=tree/treeitem`, full keyboard nav                  | ⏳ Needs hardening  |
+| Icon            | `aria-hidden` by default, informative mode `aria-label`     | ⏳ Needs hardening  |
+| IconButton      | `aria-label` MANDATORY, icon `aria-hidden` inside           | ⏳ Needs hardening  |
+| ButtonGroup     | `role=group` with `aria-label`                              | ⏳ Needs hardening  |
+| StyleClass      | `aria-expanded` on trigger, `aria-hidden` on target         | ⏳ Needs hardening  |
+| AnimateOnScroll | `prefers-reduced-motion` (CRITICAL — skip all animation)    | ⏳ Needs hardening  |
+| AutoFocus       | Only once on mount, no focus theft from dialogs             | ⏳ Needs hardening  |
+| ClassNames      | No ARIA interference                                        | ⏳ Needs hardening  |
+| Bind            | No ARIA interference                                        | ⏳ Needs hardening  |
 
 ---
 
@@ -161,6 +190,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleSwitch  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | SelectButton  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -336,7 +366,7 @@ Then update the table above and record the session in `AI_AGENT_CONTEXT.md`.
 
 | Document                                                                  | Relevance                                                                               |
 |---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)               | **NEW (2026-05-11)** — Index of all 48 session prompts, work queue, and key focus areas |
-| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)     | The 6-phase AI workflow + 33 accumulated lessons from all hardenings                    |
+| [Hardening Prompt Index](prompts/HARDENING_PROMPT_INDEX.md)               | **Reconciled 2026-05-13** — index of all session prompts, split into `completed/` and `needs-hardening/` |
+| [Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)     | The 6-phase AI workflow + accumulated lessons from all hardenings                       |
 | [Vision — Component Philosophy](VISION.md#component-philosophy)           | The 10-layer quality model and ≥8 gate                                                  |
 | [Accessibility Guide](reference/systems/ACCESSIBILITY.md)                 | Detail behind the A11y score category                                                   |
