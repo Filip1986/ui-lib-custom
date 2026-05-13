@@ -12,6 +12,13 @@ export interface DockItem {
   /** Accessible label and tooltip text for the item. */
   label?: string;
   /**
+   * Dedicated accessible name for assistive technology.
+   * When provided, this takes priority over `label` as the `aria-label` on the
+   * interactive element. Useful when the visible tooltip text differs from the
+   * screen-reader announcement you want (e.g. `ariaLabel: 'Go to Home page'`).
+   */
+  ariaLabel?: string;
+  /**
    * Icon name passed to `<ui-lib-icon>`.
    * Accepts semantic names (e.g. `'home'`, `'settings'`, `'mail'`) or explicit
    * `@ng-icons` names (e.g. `'bootstrapHouse'`, `'lucideSearch'`).
