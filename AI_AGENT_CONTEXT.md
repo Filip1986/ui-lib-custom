@@ -131,5 +131,32 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=virtual-scroller --no-coverage (39/39 PASS — 25 unit + 14 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
-Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
+Terminal notes: Fresh clone required `npm install` before baseline validation.
+Next step: Continue the remaining queued hardening work.
+
+Date: 2026-05-13 [FloatLabel component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/float-label/float-label.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block — disables label transition
+  - projects/ui-lib-custom/src/lib/float-label/float-label.a11y.spec.ts (CREATED — 19 tests)
+      • axe-core: all 3 variants (over/in/on), filled state, textarea, focused state
+      • Label element type: real `<label>` not `<span>`/`<div>`, `for` attribute, DOM persistence
+      • Font size WCAG 1.4.4: active font-size is 0.75rem (12px), satisfies ≥11px requirement
+      • prefers-reduced-motion: SCSS block verified — scoped to `.uilib-float-label label`
+      • CSS-driven float state: variant modifier classes, label never removed from DOM
+  - projects/ui-lib-custom/src/lib/float-label/README.md
+      • Added Accessibility section: `<label for>` requirement, `prefers-reduced-motion` note,
+        font size note, screen reader behaviour, CSS Custom Properties table
+      • Improved usage examples with all 3 variants, `ui-lib-input`, textarea
+  - docs/COMPONENT_SCORES.md
+      • FloatLabel: ⏳ Needs hardening → ✅ Done
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived ImageCompare handoff; kept newest 3 in AI_AGENT_CONTEXT.md
+State: FloatLabel hardening complete. Float animation is CSS-only (`:focus-within`, `:not(:placeholder-shown)`). prefers-reduced-motion SCSS guard added. a11y spec (19 tests) covers label association, axe in all states/variants, WCAG 1.4.4 font-size compliance, and reduced-motion stylesheet verification.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/float-label/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/float-label/" --no-coverage (33/33 PASS — 14 unit + 19 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: npm install required on fresh clone. All green on first attempt.
+Next step: Continue remaining new component hardening from `docs/prompts/needs-hardening/`.

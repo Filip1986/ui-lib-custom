@@ -4,6 +4,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  contentChild,
   inject,
   input,
   output,
@@ -11,6 +12,7 @@ import {
   type InputSignal,
   type OutputEmitterRef,
   type Signal,
+  type TemplateRef,
   type WritableSignal,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -95,6 +97,30 @@ export class Dock {
 
   /** Extra CSS class appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
+
+  /**
+   * Accessible label for the dock's `<nav>` landmark.
+   * Displayed to screen-reader users and shown in accessibility trees.
+   * Defaults to `'Dock'`.
+   */
+  public readonly ariaLabel: InputSignal<string> = input<string>('Dock');
+
+  // ── Content templates ──────────────────────────────────────────────────────
+
+  /**
+   * Optional custom template for each dock item's content (replaces the default icon).
+   *
+   * Usage:
+   * ```html
+   * <ui-lib-dock [items]="items">
+   *   <ng-template #dockItemTemplate let-item let-index="index">
+   *     <img [src]="item.icon" [alt]="item.label" />
+   *   </ng-template>
+   * </ui-lib-dock>
+   * ```
+   */
+  public readonly itemTemplate: Signal<TemplateRef<unknown> | undefined> =
+    contentChild<TemplateRef<unknown>>('dockItemTemplate');
 
   // ── Outputs ───────────────────────────────────────────────────────────────
 

@@ -137,15 +137,15 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                 | ⏳ Needs hardening    |
 | KeyFilter         | Format hint, silent block communication                        | ⏳ Needs hardening    |
 | FormField         | Full label+error+hint chain orchestration                      | ⏳ Needs hardening    |
-| FloatLabel        | Real label element, floated contrast ≥ 11px                    | ⏳ Needs hardening    |
+| FloatLabel        | Real label element, floated contrast ≥ 11px                    | ✅ Done              |
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels           | ⏳ Needs hardening    |
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept           | ⏳ Needs hardening    |
 | Stack             | No landmark pollution, `as` tag semantics                      | ⏳ Needs hardening    |
 | Inline            | No landmark pollution, wrap + reading order                    | ⏳ Needs hardening    |
 | Grid              | Visual vs DOM order constraint, no overflow clipping           | ⏳ Needs hardening    |
-| Container         | No clipping, skip-link target compatibility                    | ⏳ Needs hardening    |
+| Container         | No clipping, skip-link target compatibility                    | ✅ Done               |
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                 | ✅ Done               |
-| Dock              | `role=toolbar` or `navigation`, item labels, roving tabindex   | ⏳ Needs hardening    |
+| Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)         |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                        | ⏳ Needs hardening    |
 | Icon              | `aria-hidden` by default, informative mode `aria-label`        | ⏳ Needs hardening    |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside              | ⏳ Needs hardening    |
@@ -210,7 +210,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Inline      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Container   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -243,7 +243,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Accordion   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Breadcrumb  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ContextMenu | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Dock        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | MegaMenu    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |

@@ -1,8 +1,10 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  HostAttributeToken,
   input,
   computed,
+  inject,
   ViewEncapsulation,
   type InputSignal,
   type Signal,
@@ -42,6 +44,7 @@ const containerVar: (size: ContainerSize) => string = (size: ContainerSize): str
     '[style.padding-right]': '_paddingValue()',
     '[style.padding-top]': '_paddingValue()',
     '[style.padding-bottom]': '_paddingValue()',
+    '[attr.tabindex]': '_hostHasId ? "-1" : null',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -81,4 +84,12 @@ export class Container {
     }
     return spaceVar(this.padding());
   });
+
+  /**
+   * Whether the host element has a consumer-supplied static `id` attribute.
+   * When true, `tabindex="-1"` is applied so skip links can programmatically
+   * focus this container (e.g. `<a href="#main-content">`).
+   */
+  protected readonly _hostHasId: boolean =
+    inject(new HostAttributeToken('id'), { optional: true }) !== null;
 }
