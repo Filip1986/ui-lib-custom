@@ -91,7 +91,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ✅ Done     |
 | 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ✅ Done     |
 | 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ✅ Done     |
-| 50   | VirtualScroller | Accessible scroll region, keyboard scrolling                                        | ⏳ Queued   |
+| 50   | VirtualScroller | Accessible scroll region, keyboard scrolling                                        | ✅ Done     |
 
 ### Tier 6 — Layout, Utility & Polish
 *Standard hardening — API, DX, theming, and polish pass. A11y concerns are minimal.*
@@ -232,7 +232,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | TreeSelect        | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | DataView          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
-| VirtualScroller   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| VirtualScroller   | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

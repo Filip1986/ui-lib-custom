@@ -30,6 +30,14 @@
 | `loading` | `boolean \| undefined` | `undefined` | External loading flag for the loading overlay. |
 | `trackByFn` | `((index: number, item: unknown) => unknown) \| undefined` | `undefined` | TrackBy function for the item loop. |
 | `tabIndex` | `number` | `0` | Tab index on the viewport element. |
+| `ariaLabel` | `string` | `'Scrollable list'` / `'Scrollable grid'` | Accessible label for the scroll region. Blank values fall back to a role-aware default. |
+| `contentRole` | `'list' \| 'grid'` | `'list'` | Exposes list or grid semantics on the scroll viewport and rendered item wrappers. |
+| `defaultListAriaLabel` | `string` | `'Scrollable list'` | Localizable fallback used when `contentRole="list"` and `ariaLabel` is blank. |
+| `defaultGridAriaLabel` | `string` | `'Scrollable grid'` | Localizable fallback used when `contentRole="grid"` and `ariaLabel` is blank. |
+| `loadingMessage` | `string` | `'Loading items…'` | Localizable live-region message for the initial loading state. |
+| `loadingMoreMessage` | `string` | `'Loading more items.'` | Localizable live-region message for incremental/lazy loading. |
+| `emptyMessage` | `string` | `'No items to display.'` | Localizable live-region message used when the total item count is zero. |
+| `availableItemsText` | `string` | `'item(s) available.'` | Localizable suffix appended after the announced total item count. |
 | `totalRecords` | `number \| undefined` | `undefined` | Total server-side record count used to pre-size the virtual spacer in lazy mode. |
 | `id` | `string` | auto | Unique HTML id on the viewport element. |
 | `styleClass` | `string` | `''` | Extra CSS class on the host element. |
@@ -64,4 +72,26 @@
 >
   <ng-template uiScrollerItem let-item>{{ item.name }}</ng-template>
 </ui-lib-virtual-scroller>
+
+<!-- grid semantics: row wrappers come from the component, cells come from your template -->
+<ui-lib-virtual-scroller
+  [items]="rows"
+  [itemSize]="48"
+  scrollHeight="320px"
+  contentRole="grid"
+  ariaLabel="Account results"
+  [totalRecords]="rows.length"
+>
+  <ng-template uiScrollerItem let-row>
+    <div role="gridcell">{{ row.name }}</div>
+  </ng-template>
+</ui-lib-virtual-scroller>
 ```
+
+## Accessibility
+
+- The viewport is keyboard focusable by default (`tabIndex=0`) and supports `ArrowUp`, `ArrowDown`, `PageUp`, `PageDown`, `Home`, and `End`. Horizontal and two-axis scrollers also support `ArrowLeft` and `ArrowRight`.
+- Use `contentRole="list"` for list semantics. The component applies `role="listitem"`, `aria-setsize`, and `aria-posinset` to each rendered item wrapper, using `totalRecords` when present so virtualized lazy lists still announce the full logical size.
+- Use `contentRole="grid"` when each rendered item is a row. The viewport exposes `aria-rowcount`, and each rendered row wrapper exposes `aria-rowindex`. Your projected row template should provide the inner `gridcell` content.
+- The built-in polite live region announces loading, empty, and total-count states. `loadingMessage`, `loadingMoreMessage`, `emptyMessage`, `availableItemsText`, `defaultListAriaLabel`, and `defaultGridAriaLabel` can be overridden for i18n or product-specific copy.
+- In lazy mode, set `totalRecords` so the live region and ARIA metadata reflect the full server-side dataset rather than only the currently loaded slice.
