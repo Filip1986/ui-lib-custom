@@ -182,9 +182,9 @@
     <ui-lib-card [showHeader]="true" [showFooter]="false" id="accessibility" data-doc-anchor>
       <div card-header>Accessibility</div>
       <ul class="doc-list">
-        <li>Provide <code>aria-label</code> for icon-only buttons and links.</li>
-        <li>Use meaningful icon names to convey intent in assistive tech.</li>
-        <li>Keep decorative icons hidden with <code>aria-hidden="true"</code>.</li>
+        <li>Decorative icons stay hidden with <code>aria-hidden="true"</code> by default.</li>
+        <li>Use <code>ariaLabel</code> only when the icon itself must be announced as an image.</li>
+        <li>For clickable actions, put the accessible name on the button or link rather than the icon name.</li>
       </ul>
     </ui-lib-card>
   }
