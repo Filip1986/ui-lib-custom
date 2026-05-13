@@ -4,6 +4,25 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
+Changed:
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
+      • Added module-level `nextImageCompareId` counter and unique host `instanceId`
+      • Bound `[id]` to `instanceId` in host metadata
+      • Added `ariaValueText` computed signal (`"N percent"` format)
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.html
+      • Added `[attr.aria-valuetext]="ariaValueText()"` to the handle
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling handle transitions
+  - projects/ui-lib-custom/src/lib/image-compare/image-compare.a11y.spec.ts (CREATED — 21 tests)
+  - projects/ui-lib-custom/src/lib/image-compare/README.md
+  - docs/COMPONENT_SCORES.md
+State: ImageCompare hardening complete. prefers-reduced-motion SCSS guard, unique IDs, aria-valuetext, 21-test a11y spec.
+Verification: All lint/test/build green.
+Next step: Continue Tier 6 queue.
+
+---
+
 Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
 Changed:
   - projects/ui-lib-custom/src/lib/divider/divider.ts
