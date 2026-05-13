@@ -1,40 +1,60 @@
-import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  provideZonelessChangeDetection,
+  signal,
+} from '@angular/core';
 import type { WritableSignal } from '@angular/core';
-import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { FormField } from './form-field';
 
-// ---------------------------------------------------------------------------
-// Host component
-// ---------------------------------------------------------------------------
-
 @Component({
   standalone: true,
   imports: [FormField],
   template: `
-    <ui-lib-form-field [error]="error()" [hint]="hint()">
+    <ui-lib-form-field
+      [label]="label()"
+      [error]="error()"
+      [hint]="hint()"
+      [required]="required()"
+      [invalid]="invalid()"
+      [disabled]="disabled()"
+      [inputId]="inputId()"
+    >
       <input type="text" />
     </ui-lib-form-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class FormFieldHostComponent {
+  public readonly label: WritableSignal<string | null> = signal<string | null>('Email');
   public readonly error: WritableSignal<string | null> = signal<string | null>(null);
   public readonly hint: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly required: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly inputId: WritableSignal<string | null> = signal<string | null>(null);
 }
 
-// ---------------------------------------------------------------------------
-// Helper
-// ---------------------------------------------------------------------------
-
-function setup(overrides: { error?: string | null; hint?: string | null } = {}): {
+function setup(
+  overrides: {
+    label?: string | null;
+    error?: string | null;
+    hint?: string | null;
+    required?: boolean;
+    invalid?: boolean;
+    disabled?: boolean;
+    inputId?: string | null;
+  } = {}
+): {
   fixture: ComponentFixture<FormFieldHostComponent>;
   host: FormFieldHostComponent;
   component: FormField;
   announcer: { announceError: jest.Mock };
+  input: HTMLInputElement;
 } {
   const announcer: { announceError: jest.Mock } = {
     announceError: jest.fn().mockResolvedValue(undefined),
@@ -52,212 +72,165 @@ function setup(overrides: { error?: string | null; hint?: string | null } = {}):
     TestBed.createComponent(FormFieldHostComponent);
   const host: FormFieldHostComponent = fixture.componentInstance;
 
+  if (overrides.label !== undefined) host.label.set(overrides.label);
   if (overrides.error !== undefined) host.error.set(overrides.error);
   if (overrides.hint !== undefined) host.hint.set(overrides.hint);
+  if (overrides.required !== undefined) host.required.set(overrides.required);
+  if (overrides.invalid !== undefined) host.invalid.set(overrides.invalid);
+  if (overrides.disabled !== undefined) host.disabled.set(overrides.disabled);
+  if (overrides.inputId !== undefined) host.inputId.set(overrides.inputId);
 
   fixture.detectChanges();
 
   const component: FormField = fixture.debugElement.query(By.directive(FormField))
     .componentInstance as FormField;
+  const input: HTMLInputElement = (fixture.nativeElement as HTMLElement).querySelector('input')!;
 
-  return { fixture, host, component, announcer };
+  return { fixture, host, component, announcer, input };
 }
 
-// ---------------------------------------------------------------------------
-// Tests
-// ---------------------------------------------------------------------------
-
 describe('FormField', (): void => {
-  describe('rendering', (): void => {
-    it('creates successfully', (): void => {
-      const { component } = setup();
-      expect(component).toBeTruthy();
-    });
-
-    it('renders projected content', (): void => {
-      const { fixture } = setup();
-      const input: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        'input'
-      );
-      expect(input).toBeTruthy();
-    });
-
-    it('applies base class to wrapper', (): void => {
-      const { fixture } = setup();
-      const wrapper: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field'
-      );
-      expect(wrapper).toBeTruthy();
-    });
+  it('renders projected input content', (): void => {
+    const { input } = setup();
+    expect(input).toBeTruthy();
   });
 
-  describe('error display', (): void => {
-    it('shows error message when error is set', (): void => {
-      const { fixture } = setup({ error: 'This field is required' });
-      const errorEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-error'
-      );
-      expect(errorEl).toBeTruthy();
-      expect(errorEl!.textContent!.trim()).toBe('This field is required');
-    });
+  it('renders label and wires htmlFor to input id', (): void => {
+    const { fixture, component } = setup();
+    const label: HTMLLabelElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-form-field-label'
+    ) as HTMLLabelElement;
 
-    it('hides error element when error is null', (): void => {
-      const { fixture } = setup({ error: null });
-      const errorEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-error'
-      );
-      expect(errorEl).toBeNull();
-    });
-
-    it('applies error modifier class when error is set', (): void => {
-      const { fixture } = setup({ error: 'Bad input' });
-      const wrapper: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field'
-      );
-      expect(wrapper?.classList.contains('ui-form-field--error')).toBe(true);
-    });
-
-    it('does NOT apply error modifier class when error is null', (): void => {
-      const { fixture } = setup({ error: null });
-      const wrapper: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field'
-      );
-      expect(wrapper?.classList.contains('ui-form-field--error')).toBe(false);
-    });
-
-    it('error element has role=alert and aria-live=assertive', (): void => {
-      const { fixture } = setup({ error: 'Required' });
-      const errorEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-error'
-      );
-      expect(errorEl?.getAttribute('role')).toBe('alert');
-      expect(errorEl?.getAttribute('aria-live')).toBe('assertive');
-    });
-
-    it('error element has unique id matching errorId', (): void => {
-      const { fixture, component } = setup({ error: 'Required' });
-      const errorEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-error'
-      );
-      expect(errorEl?.id).toBe(component.errorId);
-    });
+    expect(label).toBeTruthy();
+    expect(label.getAttribute('for')).toBe(component.inputId());
+    expect(label.id).toBe(component.labelId());
   });
 
-  describe('hint display', (): void => {
-    it('shows hint when hint is set and error is null', (): void => {
-      const { fixture } = setup({ hint: 'Enter your email address' });
-      const hintEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-hint'
-      );
-      expect(hintEl).toBeTruthy();
-      expect(hintEl!.textContent!.trim()).toBe('Enter your email address');
-    });
-
-    it('hides hint when error is present', (): void => {
-      const { fixture } = setup({ hint: 'Some hint', error: 'Some error' });
-      const hintEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-hint'
-      );
-      expect(hintEl).toBeNull();
-    });
-
-    it('hides hint when hint is null', (): void => {
-      const { fixture } = setup({ hint: null });
-      const hintEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-hint'
-      );
-      expect(hintEl).toBeNull();
-    });
-
-    it('hint element has unique id matching hintId', (): void => {
-      const { fixture, component } = setup({ hint: 'Hint text' });
-      const hintEl: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
-        '.ui-form-field-hint'
-      );
-      expect(hintEl?.id).toBe(component.hintId);
-    });
+  it('does not render label when label input is null', (): void => {
+    const { fixture } = setup({ label: null });
+    const label: HTMLLabelElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-form-field-label'
+    );
+    expect(label).toBeNull();
   });
 
-  describe('describedById getter', (): void => {
-    it('returns errorId when error is set', (): void => {
-      const { component } = setup({ error: 'Required' });
-      expect(component.describedById).toBe(component.errorId);
-    });
+  it('renders required indicator with aria-hidden when required', (): void => {
+    const { fixture } = setup({ required: true });
+    const indicator: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-form-field-required-indicator'
+    ) as HTMLElement;
 
-    it('returns hintId when hint is set and no error', (): void => {
-      const { component } = setup({ hint: 'Some hint' });
-      expect(component.describedById).toBe(component.hintId);
-    });
-
-    it('returns null when neither error nor hint is set', (): void => {
-      const { component } = setup();
-      expect(component.describedById).toBeNull();
-    });
+    expect(indicator).toBeTruthy();
+    expect(indicator.getAttribute('aria-hidden')).toBe('true');
   });
 
-  describe('live announcer', (): void => {
-    it('calls announceError when error first appears', (): void => {
-      const { fixture, host, announcer } = setup();
-
-      host.error.set('Required');
-      fixture.detectChanges();
-      TestBed.flushEffects();
-
-      expect(announcer.announceError).toHaveBeenCalledWith('Required');
-    });
-
-    it('does not call announceError for the same error twice', (): void => {
-      const { fixture, host, announcer } = setup({ error: 'Required' });
-      announcer.announceError.mockClear();
-
-      // Set the same error value again — should not re-announce
-      host.error.set('Required');
-      fixture.detectChanges();
-      TestBed.flushEffects();
-
-      expect(announcer.announceError).not.toHaveBeenCalled();
-    });
-
-    it('calls announceError when error changes to a new message', (): void => {
-      const { fixture, host, announcer } = setup({ error: 'Required' });
-      announcer.announceError.mockClear();
-
-      host.error.set('Too short');
-      fixture.detectChanges();
-      TestBed.flushEffects();
-
-      expect(announcer.announceError).toHaveBeenCalledWith('Too short');
-    });
-
-    it('does not call announceError when error is cleared to null', (): void => {
-      const { fixture, host, announcer } = setup({ error: 'Required' });
-      announcer.announceError.mockClear();
-
-      host.error.set(null);
-      fixture.detectChanges();
-      TestBed.flushEffects();
-
-      expect(announcer.announceError).not.toHaveBeenCalled();
-    });
+  it('applies generated input id when inputId is not provided', (): void => {
+    const { input, component } = setup();
+    expect(input.id).toBe(component.inputId());
+    expect(input.id).toMatch(/^form-field-\d+-input$/);
   });
 
-  describe('unique IDs', (): void => {
-    it('generates an errorId prefixed with form-field-', (): void => {
-      const { component } = setup({ error: 'Required' });
-      expect(component.errorId).toMatch(/^form-field-\d+-error$/);
-    });
+  it('applies explicit inputId when provided', (): void => {
+    const { input, component } = setup({ inputId: 'email-input' });
+    expect(component.inputId()).toBe('email-input');
+    expect(input.id).toBe('email-input');
+  });
 
-    it('generates a hintId prefixed with form-field-', (): void => {
-      const { component } = setup({ hint: 'Some hint' });
-      expect(component.hintId).toMatch(/^form-field-\d+-hint$/);
-    });
+  it('shows hint and links it in aria-describedby', (): void => {
+    const { fixture, input, component } = setup({ hint: 'Use work email' });
+    const hintElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-form-field-hint'
+    ) as HTMLElement;
 
-    it('errorId and hintId share the same unique prefix', (): void => {
-      const { component } = setup();
-      // e.g. form-field-3-error and form-field-3-hint
-      const errorBase: string = component.errorId.replace('-error', '');
-      const hintBase: string = component.hintId.replace('-hint', '');
-      expect(errorBase).toBe(hintBase);
+    expect(hintElement.id).toBe(component.hintId());
+    expect(input.getAttribute('aria-describedby')).toBe(component.hintId());
+  });
+
+  it('shows error with role=alert when invalid and error is set', (): void => {
+    const { fixture, component } = setup({ invalid: true, error: 'Required' });
+    const errorElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-form-field-error'
+    ) as HTMLElement;
+
+    expect(errorElement.id).toBe(component.errorId());
+    expect(errorElement.getAttribute('role')).toBe('alert');
+  });
+
+  it('renders error when error exists even if invalid input is false', (): void => {
+    const { fixture } = setup({ error: 'Required', invalid: false });
+    const errorElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-form-field-error'
+    );
+    expect(errorElement).toBeTruthy();
+  });
+
+  it('includes hint and error ids in aria-describedby when both are active', (): void => {
+    const { input, component } = setup({
+      hint: 'Use work email',
+      invalid: true,
+      error: 'Required',
     });
+    expect(input.getAttribute('aria-describedby')).toBe(
+      `${component.hintId()} ${component.errorId()}`
+    );
+  });
+
+  it('sets aria-invalid true when invalid', (): void => {
+    const { input } = setup({ invalid: true });
+    expect(input.getAttribute('aria-invalid')).toBe('true');
+  });
+
+  it('removes aria-invalid when not invalid and no error', (): void => {
+    const { input } = setup({ invalid: false, error: null });
+    expect(input.getAttribute('aria-invalid')).toBeNull();
+  });
+
+  it('sets aria-required=true when required', (): void => {
+    const { input } = setup({ required: true });
+    expect(input.getAttribute('aria-required')).toBe('true');
+  });
+
+  it('sets native disabled and aria-disabled when disabled', (): void => {
+    const { input } = setup({ disabled: true });
+    expect(input.disabled).toBe(true);
+    expect(input.getAttribute('aria-disabled')).toBe('true');
+  });
+
+  it('announces newly added error messages once', (): void => {
+    const { fixture, host, announcer } = setup();
+    host.error.set('Required');
+    host.invalid.set(true);
+    fixture.detectChanges();
+    TestBed.flushEffects();
+
+    expect(announcer.announceError).toHaveBeenCalledWith('Required');
+  });
+
+  it('does not re-announce the same error value', (): void => {
+    const { fixture, host, announcer } = setup({ invalid: true, error: 'Required' });
+    announcer.announceError.mockClear();
+
+    host.error.set('Required');
+    fixture.detectChanges();
+    TestBed.flushEffects();
+
+    expect(announcer.announceError).not.toHaveBeenCalled();
+  });
+
+  it('describedById returns combined hint and error ids when active', (): void => {
+    const { component } = setup({ hint: 'Hint', invalid: true, error: 'Error' });
+    expect(component.describedById).toBe(`${component.hintId()} ${component.errorId()}`);
+  });
+
+  it('describedById returns null when no hint or error is active', (): void => {
+    const { component } = setup();
+    expect(component.describedById).toBeNull();
+  });
+
+  it('errorId and hintId share same id prefix', (): void => {
+    const { component } = setup();
+    const errorPrefix: string = component.errorId().replace('-error', '');
+    const hintPrefix: string = component.hintId().replace('-hint', '');
+    expect(errorPrefix).toBe(hintPrefix);
   });
 });

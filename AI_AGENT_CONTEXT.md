@@ -95,33 +95,6 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
 Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
 
-Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
-Changed:
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
-      • Added module-level `nextImageCompareId` counter and unique host `instanceId`
-      • Bound `[id]` to `instanceId` in host metadata
-      • Added `ariaValueText` computed signal (`"N percent"` format)
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.html
-      • Added `[attr.aria-valuetext]="ariaValueText()"` to the handle
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling handle transitions
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.a11y.spec.ts (CREATED — 21 tests)
-      • ARIA structure, keyboard nav, image alt, decorative aria-hidden, disabled state, unique ID, and axe-core assertions
-  - projects/ui-lib-custom/src/lib/image-compare/README.md
-      • Updated `ariaLabel` default, added Keyboard Interaction table, ARIA Attributes table, CSS Custom Properties table, and Accessibility section
-  - docs/COMPONENT_SCORES.md
-      • ImageCompare #67: ⏳ Queued → ✅ Done (scores: API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived oldest DataView handoff to keep only the newest 3 in this file
-State: ImageCompare hardening complete. Component now has aria-valuetext, unique generated IDs per instance, prefers-reduced-motion SCSS guard, and a full 21-test a11y spec (role=slider, ARIA value attrs, image alt, decorative aria-hidden, keyboard nav, disabled state, axe-core).
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image-compare/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=image-compare --no-coverage (60/60 PASS — 39 unit + 21 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
-Next step: Continue Tier 6 queue with remaining queued components.
-
 Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -141,3 +114,22 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
+
+Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
+  - projects/ui-lib-custom/src/lib/form-field/form-field.html
+  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
+  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
+  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
+  - projects/ui-lib-custom/src/lib/form-field/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
+Next step: Continue hardening the next queued new layout/form component prompt.
