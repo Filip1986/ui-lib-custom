@@ -77,6 +77,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.scss
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.spec.ts
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/input-mask/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: InputMask now ships generated control/hint/error IDs, explicit `ariaLabel`/`ariaLabelledBy` inputs, mask format hint wiring via `aria-describedby`, incomplete-mask `aria-invalid` behavior on blur, optional projected error slot support, blocked-character live region announcements, and `aria-valuetext` that reads user-entered characters without placeholder noise. Added reduced-motion CSS safeguards and expanded accessibility coverage to a dedicated 20-test a11y suite.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-mask/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/input-mask/" --no-coverage (62/62 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs`) and no failed completed runs were present to inspect. Playwright browser lock required CLI capture flow; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/input-mask-hardening.png`.
+Next step: Continue hardening the next queued core input with the same label/error/hint semantics and blocked-character a11y feedback standard.
+
 Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/layout/inline.ts
@@ -114,23 +133,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
 Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
-
-Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/COMPONENT_SCORES.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/virtual-scroller/README.md
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.ts
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.html
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.scss
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.spec.ts
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.a11y.spec.ts
-State: VirtualScroller now exposes configurable list/grid semantics with fallback scroll-region labels, item count metadata (`aria-setsize`, `aria-posinset`, `aria-rowcount`, `aria-rowindex`), keyboard scrolling for Arrow/Page/Home/End keys, polite loading/empty/total-count announcements, reduced-motion scroll behavior, and synced external loading state. Added a dedicated 14-test accessibility suite plus updated README and score bookkeeping.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/virtual-scroller/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=virtual-scroller --no-coverage (39/39 PASS — 25 unit + 14 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
-Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
