@@ -290,7 +290,7 @@ describe('VirtualScroller Accessibility', (): void => {
     await fixture.whenStable();
 
     const liveRegionText: string = getLiveRegion(fixture).textContent.trim();
-    expect(liveRegionText).toBe('Loading more items. 50 items available.');
+    expect(liveRegionText).toBe('Loading more items. 50 item(s) available.');
   });
 
   it('announces empty state when there are no items to display', async (): Promise<void> => {

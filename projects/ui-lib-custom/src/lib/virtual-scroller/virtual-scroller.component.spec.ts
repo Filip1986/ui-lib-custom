@@ -275,6 +275,22 @@ describe('VirtualScrollerComponent', (): void => {
       expect(loader).toBeTruthy();
       expect(viewport?.getAttribute('aria-busy')).toBe('true');
     });
+
+    it('should remove aria-busy when loading becomes false', async (): Promise<void> => {
+      host.showLoader.set(true);
+      host.loading.set(true);
+      fixture.detectChanges();
+      await Promise.resolve();
+      fixture.detectChanges();
+
+      host.loading.set(false);
+      fixture.detectChanges();
+      await Promise.resolve();
+      fixture.detectChanges();
+
+      const viewport: HTMLElement | null = query(fixture, '.uilib-scroller-viewport');
+      expect(viewport?.getAttribute('aria-busy')).toBeNull();
+    });
   });
 
   describe('host classes', (): void => {

@@ -54,6 +54,15 @@ type VoidListener = (() => void) | null;
 /** Monotonic counter for generating unique element IDs. */
 let virtualScrollerIdCounter: number = 0;
 
+/** Additional keyboard key names used by the virtual scroller. */
+const VIRTUAL_SCROLLER_KEYBOARD_KEYS: {
+  readonly PageDown: 'PageDown';
+  readonly PageUp: 'PageUp';
+} = {
+  PageDown: 'PageDown',
+  PageUp: 'PageUp',
+} as const;
+
 /**
  * VirtualScroller renders only the items currently visible in the viewport
  * plus a configurable tolerance buffer, using CSS transforms to position the
@@ -185,6 +194,24 @@ export class VirtualScrollerComponent
 
   /** Structural role used by assistive technology for the rendered content. */
   public readonly contentRole: InputSignal<'list' | 'grid'> = input<'list' | 'grid'>('list');
+
+  /** Default fallback label used when no explicit list ariaLabel is provided. */
+  public readonly defaultListAriaLabel: InputSignal<string> = input<string>('Scrollable list');
+
+  /** Default fallback label used when no explicit grid ariaLabel is provided. */
+  public readonly defaultGridAriaLabel: InputSignal<string> = input<string>('Scrollable grid');
+
+  /** Localizable message announced while the first batch is loading. */
+  public readonly loadingMessage: InputSignal<string> = input<string>('Loading items…');
+
+  /** Localizable message announced while additional items are loading. */
+  public readonly loadingMoreMessage: InputSignal<string> = input<string>('Loading more items.');
+
+  /** Localizable message announced when the data set is empty. */
+  public readonly emptyMessage: InputSignal<string> = input<string>('No items to display.');
+
+  /** Localizable suffix appended after the announced total item count. */
+  public readonly availableItemsText: InputSignal<string> = input<string>('item(s) available.');
 
   /**
    * Total number of records available on the server.
@@ -333,7 +360,9 @@ export class VirtualScrollerComponent
     if (ariaLabel.length > 0) {
       return ariaLabel;
     }
-    return this.contentRole() === 'grid' ? 'Scrollable grid' : 'Scrollable list';
+    return this.contentRole() === 'grid'
+      ? this.defaultGridAriaLabel()
+      : this.defaultListAriaLabel();
   });
 
   /** @internal Total number of logical items or rows announced to assistive technology. */
@@ -360,11 +389,11 @@ export class VirtualScrollerComponent
     const totalItemCount: number = this.totalItemCount();
     if (this.internalLoading()) {
       return totalItemCount > 0
-        ? `Loading more items. ${this.formatTotalItemsMessage(totalItemCount)}`
-        : 'Loading items…';
+        ? `${this.loadingMoreMessage()} ${this.formatTotalItemsMessage(totalItemCount)}`
+        : this.loadingMessage();
     }
     if (totalItemCount === 0) {
-      return 'No items to display.';
+      return this.emptyMessage();
     }
     return this.formatTotalItemsMessage(totalItemCount);
   });
@@ -1010,14 +1039,14 @@ export class VirtualScrollerComponent
         event.preventDefault();
         this.scrollViewportBy(0, -this.resolveHorizontalScrollStep());
         return;
-      case 'PageDown':
+      case VIRTUAL_SCROLLER_KEYBOARD_KEYS.PageDown:
         event.preventDefault();
         this.scrollViewportBy(
           this.isHorizontal() ? 0 : Math.max(1, element.clientHeight),
           this.isHorizontal() ? Math.max(1, element.clientWidth) : 0
         );
         return;
-      case 'PageUp':
+      case VIRTUAL_SCROLLER_KEYBOARD_KEYS.PageUp:
         event.preventDefault();
         this.scrollViewportBy(
           this.isHorizontal() ? 0 : -Math.max(1, element.clientHeight),
@@ -1517,6 +1546,7 @@ export class VirtualScrollerComponent
   }
 
   private formatTotalItemsMessage(totalItemCount: number): string {
-    return `${totalItemCount.toString()} ${totalItemCount === 1 ? 'item' : 'items'} available.`;
+    const availableItemsText: string = this.availableItemsText().trim() || 'item(s) available.';
+    return `${totalItemCount.toString()} ${availableItemsText}`;
   }
 }
