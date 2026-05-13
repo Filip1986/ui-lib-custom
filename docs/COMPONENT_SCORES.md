@@ -129,32 +129,32 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 ### New Components (not in original 76-item queue — built but not yet formally scored)
 
-| Component         | Key a11y concern                                               | Status               |
-|-------------------|----------------------------------------------------------------|----------------------|
-| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                | ⏳ Needs hardening    |
-| ToggleButton      | `aria-pressed`, icon-only `aria-label`                         | ⏳ Needs hardening    |
-| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                       | ⏳ Needs hardening    |
-| InputMask         | Format hint `aria-describedby`, `aria-invalid`                 | ⏳ Needs hardening    |
-| KeyFilter         | Format hint, silent block communication                        | ⏳ Needs hardening    |
-| FormField         | Full label+error+hint chain orchestration                      | ✅ Done               |
-| FloatLabel        | Real label element, floated contrast ≥ 11px                    | ✅ Done              |
-| InputGroup        | Decorative addons `aria-hidden`, button addon labels           | ⏳ Needs hardening    |
-| IconField         | Icon `aria-hidden` if decorative, no focus intercept           | ⏳ Needs hardening    |
-| Stack             | No landmark pollution, `as` tag semantics                      | ⏳ Needs hardening    |
-| Inline            | No landmark pollution, wrap + reading order                    | ⏳ Needs hardening    |
-| Grid              | Visual vs DOM order constraint, no overflow clipping           | ⏳ Needs hardening    |
-| Container         | No clipping, skip-link target compatibility                    | ✅ Done               |
-| Fluid             | 400% zoom reflow (WCAG 1.4.10)                                 | ✅ Done               |
-| Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)         |
-| OrganizationChart | `role=tree/treeitem`, full keyboard nav                        | ⏳ Needs hardening    |
-| Icon              | `aria-hidden` by default, informative mode `aria-label`        | ⏳ Needs hardening    |
-| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside              | ⏳ Needs hardening    |
-| ButtonGroup       | `role=group` with `aria-label`                                 | ✅ Done               |
-| StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target            | ⏳ Needs hardening    |
-| AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)       | ✅ Done               |
-| AutoFocus         | Only once on mount, no focus theft from dialogs                | ✅ Done               |
-| ClassNames        | No ARIA interference                                           | ✅ Done               |
-| Bind              | No ARIA interference                                           | ✅ Done               |
+| Component         | Key a11y concern                                                                                    | Status                 |
+|-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
+| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ⏳ Needs hardening      |
+| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ⏳ Needs hardening      |
+| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening      |
+| InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ⏳ Needs hardening      |
+| KeyFilter         | Format hint, silent block communication                                                             | ⏳ Needs hardening      |
+| FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
+| FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
+| InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ⏳ Needs hardening      |
+| IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ⏳ Needs hardening      |
+| Stack             | No landmark pollution, `as` tag semantics                                                           | ⏳ Needs hardening      |
+| Inline            | No landmark pollution, wrap + reading order                                                         | ⏳ Needs hardening      |
+| Grid              | Visual vs DOM order constraint, no overflow clipping                                                | ⏳ Needs hardening      |
+| Container         | No clipping, skip-link target compatibility                                                         | ✅ Done                 |
+| Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
+| Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
+| OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ⏳ Needs hardening      |
+| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ⏳ Needs hardening      |
+| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ⏳ Needs hardening      |
+| ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
+| StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ⏳ Needs hardening      |
+| AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
+| AutoFocus         | Only once on mount, no focus theft from dialogs                                                     | ✅ Done                 |
+| ClassNames        | No ARIA interference                                                                                | ✅ Done                 |
+| Bind              | No ARIA interference                                                                                | ✅ Done                 |
 
 ---
 
