@@ -17,6 +17,7 @@ import {
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 
 let formFieldId: number = 0;
+type FormFieldControlElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 export interface FormFieldContext {
   readonly inputId: Signal<string>;
@@ -68,9 +69,8 @@ export class FormField implements FormFieldContext {
 
   private readonly uniqueId: string = `form-field-${++formFieldId}`;
   private readonly generatedInputId: string = `${this.uniqueId}-input`;
-  private readonly projectedControlElement: WritableSignal<
-    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null
-  > = signal<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null>(null);
+  private readonly projectedControlElement: WritableSignal<FormFieldControlElement | null> =
+    signal<FormFieldControlElement | null>(null);
   public readonly inputId: Signal<string> = computed<string>(
     (): string => this.inputIdOverride() ?? this.generatedInputId
   );
@@ -108,8 +108,11 @@ export class FormField implements FormFieldContext {
 
   constructor() {
     effect((): void => {
-      const projectedControl: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null =
-        this.resolveProjectedControl();
+      if (this.projectedControlElement()) {
+        return;
+      }
+
+      const projectedControl: FormFieldControlElement | null = this.resolveProjectedControl();
 
       if (projectedControl) {
         this.projectedControlElement.set(projectedControl);
@@ -127,13 +130,14 @@ export class FormField implements FormFieldContext {
     });
 
     effect((): void => {
-      const projectedControl: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null =
-        this.projectedControlElement();
+      const projectedControl: FormFieldControlElement | null = this.projectedControlElement();
       if (!projectedControl) {
         return;
       }
 
-      this.renderer.setAttribute(projectedControl, 'id', this.inputId());
+      if (projectedControl.id !== this.inputId()) {
+        this.renderer.setAttribute(projectedControl, 'id', this.inputId());
+      }
       this.setOptionalAttribute(
         projectedControl,
         'aria-labelledby',
@@ -144,13 +148,9 @@ export class FormField implements FormFieldContext {
       this.setOptionalAttribute(projectedControl, 'aria-required', this.required() ? 'true' : null);
       this.setOptionalAttribute(projectedControl, 'aria-disabled', this.disabled() ? 'true' : null);
       this.renderer.setProperty(projectedControl, 'required', this.required());
-
-      if (this.disabled()) {
-        this.renderer.setProperty(projectedControl, 'disabled', true);
-      } else {
-        this.renderer.setProperty(projectedControl, 'disabled', false);
-        this.renderer.removeAttribute(projectedControl, 'disabled');
-      }
+      this.setOptionalAttribute(projectedControl, 'required', this.required() ? '' : null);
+      this.renderer.setProperty(projectedControl, 'disabled', this.disabled());
+      this.setOptionalAttribute(projectedControl, 'disabled', this.disabled() ? '' : null);
     });
   }
 
@@ -161,22 +161,18 @@ export class FormField implements FormFieldContext {
     return this.describedBy();
   }
 
-  private resolveProjectedControl():
-    | HTMLInputElement
-    | HTMLSelectElement
-    | HTMLTextAreaElement
-    | null {
+  private resolveProjectedControl(): FormFieldControlElement | null {
     return (this.hostElementRef.nativeElement as HTMLElement).querySelector(
       'input, select, textarea'
     );
   }
 
   private setOptionalAttribute(
-    element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+    element: FormFieldControlElement,
     attributeName: string,
     value: string | null
   ): void {
-    if (value) {
+    if (value !== null) {
       this.renderer.setAttribute(element, attributeName, value);
       return;
     }

@@ -156,7 +156,7 @@ describe('FormField', (): void => {
     expect(errorElement.getAttribute('role')).toBe('alert');
   });
 
-  it('renders error when error exists even if invalid input is false', (): void => {
+  it('renders error when error text is provided regardless of invalid flag', (): void => {
     const { fixture } = setup({ error: 'Required', invalid: false });
     const errorElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
       '.ui-form-field-error'
