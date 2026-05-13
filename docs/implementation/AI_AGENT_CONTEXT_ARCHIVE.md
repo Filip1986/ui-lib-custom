@@ -4,6 +4,22 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/virtual-scroller/README.md
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.ts
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.html
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.scss
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.spec.ts
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.a11y.spec.ts
+State: VirtualScroller now exposes configurable list/grid semantics with fallback scroll-region labels, item count metadata, keyboard scrolling, polite announcements, reduced-motion scroll behavior, and synced external loading state.
+Next step: Continue the remaining queued hardening work.
+
+---
+
 Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/form-field/form-field.ts

@@ -49,6 +49,8 @@ export class UiLibInput implements ControlValueAccessor {
   public readonly id: InputSignal<string | null> = input<string | null>(null);
   public readonly name: InputSignal<string | null> = input<string | null>(null);
   public readonly label: InputSignal<string> = input<string>('');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
   public readonly variant: InputSignal<InputVariant | null> = input<InputVariant | null>(null);
   public readonly size: InputSignal<InputSize> = input<InputSize>(SHARED_DEFAULTS.Size);
   public readonly type: InputSignal<InputType> = input<InputType>('text');
