@@ -63,7 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `Image` -> ✅ complete + hardened (6-phase, score 8.7/10, 54 tests — 30 unit + 24 a11y)
+- `Image` -> ✅ complete + hardened (6-phase, score 8.7/10, 56 tests — 30 unit + 26 a11y)
 
 ---
 
@@ -88,10 +88,10 @@ Changed:
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Image now uses a stable `nextImageId` instance counter, wires preview IDs through the trigger/dialog relationship, adds a polite live region for zoom/rotation announcements, supports direct preview keyboard shortcuts (`+`, `-`, arrow keys), and restores focus from the actual trigger element more reliably. README and scoring were updated to reflect the finished hardening pass.
+State: Image now uses a stable `nextImageId` instance counter, wires preview IDs through the trigger/dialog relationship, adds a polite live region for zoom/rotation announcements (including distinct full-turn messaging), supports direct preview keyboard shortcuts (`+`, `-`, arrow keys, and code-based fallbacks), and restores focus from the actual trigger element more reliably. README and scoring were updated to reflect the finished hardening pass.
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=image --no-coverage (114/114 PASS)
+  node_modules/.bin/jest --testPathPatterns=image --no-coverage (116/116 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Demo screenshot captured at `/tmp/image-hardening.png`.

@@ -340,6 +340,41 @@ describe('Image Accessibility', (): void => {
     expect(liveRegion.textContent.trim()).toBe('Zoom 100%. Rotation 90 degrees.');
   });
 
+  it('announces completed full turns distinctly from the initial 0 degree state', async (): Promise<void> => {
+    const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
+    await openPreview(fixture);
+
+    for (let index: number = 0; index < 4; index++) {
+      getMask(fixture)!.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+      );
+    }
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const liveRegion: HTMLElement = getPreviewLiveRegion(fixture)!;
+    expect(liveRegion.textContent.trim()).toBe('Zoom 100%. Rotation 0 degrees after 1 full turn.');
+  });
+
+  it('supports zoom shortcut fallback via keyboard code values', async (): Promise<void> => {
+    const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
+    await openPreview(fixture);
+
+    getMask(fixture)!.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        key: 'Unidentified',
+        code: 'Equal',
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const liveRegion: HTMLElement = getPreviewLiveRegion(fixture)!;
+    expect(liveRegion.textContent.trim()).toBe('Zoom 110%. Rotation 0 degrees.');
+  });
+
   // ─── axe-core automated checks ────────────────────────────────────────────────
 
   it('passes axe checks for the default image (no preview)', async (): Promise<void> => {

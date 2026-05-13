@@ -218,7 +218,7 @@ export class ImageComponent implements OnDestroy {
       return '';
     }
 
-    return `Zoom ${this.zoomPercent()}%. Rotation ${this.normalizedRotateAngle()} degrees.`;
+    return `Zoom ${this.zoomPercent()}%. ${this.rotationAnnouncement()}`;
   });
 
   /** Composite CSS class string applied via the host binding. */
@@ -257,6 +257,19 @@ export class ImageComponent implements OnDestroy {
   public readonly normalizedRotateAngle: Signal<number> = computed<number>((): number => {
     const normalizedAngle: number = this.rotateAngle() % 360;
     return normalizedAngle < 0 ? normalizedAngle + 360 : normalizedAngle;
+  });
+
+  /** Rotation announcement string for the preview live region. */
+  public readonly rotationAnnouncement: Signal<string> = computed<string>((): string => {
+    const rawRotateAngle: number = this.rotateAngle();
+    const normalizedRotateAngle: number = this.normalizedRotateAngle();
+    const fullTurns: number = Math.trunc(Math.abs(rawRotateAngle) / 360);
+
+    if (rawRotateAngle !== 0 && normalizedRotateAngle === 0 && fullTurns > 0) {
+      return `Rotation 0 degrees after ${fullTurns} full turn${fullTurns === 1 ? '' : 's'}.`;
+    }
+
+    return `Rotation ${normalizedRotateAngle} degrees.`;
   });
 
   // ─── Lifecycle ────────────────────────────────────────────────────────────────
@@ -344,13 +357,13 @@ export class ImageComponent implements OnDestroy {
       return;
     }
 
-    if (event.key === '+' || event.key === '=') {
+    if (this.isZoomInShortcut(event)) {
       event.preventDefault();
       this.zoomIn();
       return;
     }
 
-    if (event.key === '-' || event.key === '_') {
+    if (this.isZoomOutShortcut(event)) {
       event.preventDefault();
       this.zoomOut();
       return;
@@ -428,5 +441,20 @@ export class ImageComponent implements OnDestroy {
       }
       this.previewTriggerElement = null;
     });
+  }
+
+  private isZoomInShortcut(event: KeyboardEvent): boolean {
+    return (
+      event.key === '+' || event.key === '=' || event.code === 'Equal' || event.code === 'NumpadAdd'
+    );
+  }
+
+  private isZoomOutShortcut(event: KeyboardEvent): boolean {
+    return (
+      event.key === '-' ||
+      event.key === '_' ||
+      event.code === 'Minus' ||
+      event.code === 'NumpadSubtract'
+    );
   }
 }
