@@ -77,6 +77,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [Fluid component + directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/fluid/fluid.a11y.spec.ts (CREATED — 10 tests)
+      • axe-core assertions for component, directive, directive-disabled, and nested states
+      • Structural guards: `ui-lib-fluid` class present, no inline overflow style (WCAG 1.4.10)
+      • ARIA-pollution guards: no role/aria-label/aria-labelledby added to host
+      • Projected content reachability check (not aria-hidden)
+  - docs/COMPONENT_SCORES.md
+      • Fluid "New Components" row: ⏳ Needs hardening → ✅ Done
+      • Fluid Layout scores row: 🔴 → 🟢 (API 9, A11y 9, Perf 9, Comp 9, Theme 8, DX 9, Docs 8, Polish 9, Angular 9, Feel 8 — avg 8.7)
+  - AI_AGENT_CONTEXT.md
+      • Archived oldest (ImageCompare) handoff to AI_AGENT_CONTEXT_ARCHIVE.md
+State: Fluid hardening complete. SCSS verified: `width: 100%` + `display: block` on host, `box-sizing: border-box` on all children — no `overflow: hidden` anywhere (WCAG 1.4.10 reflow compliance). Dedicated a11y spec covers axe-core, class guards, overflow guards, ARIA purity, and content reachability.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/fluid/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/fluid/" --no-coverage (19/19 PASS — 9 unit + 10 a11y)
+Terminal notes: No blocking issues. All tests and lint green on first attempt.
+Next step: Continue with remaining needs-hardening items in docs/prompts/needs-hardening/.
+
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
