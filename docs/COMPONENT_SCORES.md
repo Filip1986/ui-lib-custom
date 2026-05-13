@@ -152,7 +152,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | ButtonGroup     | `role=group` with `aria-label`                              | ✅ Done  |
 | StyleClass      | `aria-expanded` on trigger, `aria-hidden` on target         | ⏳ Needs hardening  |
 | AnimateOnScroll | `prefers-reduced-motion` (CRITICAL — skip all animation)    | ⏳ Needs hardening  |
-| AutoFocus       | Only once on mount, no focus theft from dialogs             | ⏳ Needs hardening  |
+| AutoFocus       | Only once on mount, no focus theft from dialogs             | ✅ Done             |
 | ClassNames      | No ARIA interference                                        | ✅ Done             |
 | Bind            | No ARIA interference                                        | ✅ Done            |
 
@@ -309,7 +309,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | FocusTrap       | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | AnimateOnScroll | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | AutoFocus       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Bind            | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
+| Bind            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fluid           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 
 ---

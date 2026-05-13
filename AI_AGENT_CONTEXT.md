@@ -124,25 +124,30 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
 
-Date: 2026-05-13 [Bind utility — 6-phase hardening COMPLETE]
+Date: 2026-05-13 [AutoFocus directive — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/bind/bind.ts
-      • Hardened removal behavior to only clear dropped keys when Bind still owns the current property value
-      • Added typed internal helpers (`applyBindings`, `getPropertyValue`) for explicit, readable ownership logic
-  - projects/ui-lib-custom/src/lib/bind/bind.spec.ts
-      • Added ARIA non-interference regression coverage for `[attr.aria-label]`
-      • Added regression test that removed keys do not clear external host bindings
-      • Added composability test for `@if`, `@for`, and `@switch` contexts
-  - projects/ui-lib-custom/src/lib/bind/README.md
-      • Expanded purpose statement, control-flow usage examples, native Angular alternative guidance, and accessibility notes
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.ts
+      • Replaced timing with `requestAnimationFrame` deferred focus in `ngAfterViewInit`
+      • Added `disabled` (`InputSignal<boolean>`) and `selector` (`InputSignal<string | null>`) inputs
+      • Added guard logic to avoid stealing focus from existing focus managers (dialogs/focus traps)
+      • Added DEV mode warning for non-focusable host/selector targets
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.spec.ts
+      • Updated unit tests for disabled + selector APIs, deferred focus, and one-time mount behavior
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.a11y.spec.ts (CREATED — 10 tests)
+      • Added accessibility-focused regression coverage for mount focus, disabled behavior, selector targeting, one-time execution, and focus-theft prevention
+  - projects/ui-lib-custom/src/lib/auto-focus/README.md
+      • Updated API docs to `disabled`/`selector`, explicit opt-in guidance, and accessibility caveats
+  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.html
+      • Updated demo/API examples from `[autofocus]` to `[disabled]` and documented `selector`
   - docs/COMPONENT_SCORES.md
-      • Marked Bind as ✅ Done in the new-components queue and populated Utilities & Directives score row (avg 8.7)
-  - AI_AGENT_CONTEXT.md
-      • Appended Bind handoff and retained newest 3 handoffs (older notes remain in archive)
-State: Bind hardening complete. The directive remains a lightweight template utility, now has safer key-removal semantics that avoid clobbering external bindings, verified ARIA non-interference, and composability coverage across Angular block syntax.
+      • Marked AutoFocus as ✅ Done in queue and filled Utilities & Directives score row (avg 8.6)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived oldest Divider handoff to keep only newest 3 entries in this file
+State: AutoFocus now runs once on mount, defers focus with rAF, supports optional child-selector targeting, and avoids stealing focus when another interactive element is already focused. Docs, demo usage, and dedicated a11y tests are aligned with the hardened behavior.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bind/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/bind/" --no-coverage (PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/auto-focus/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/auto-focus/" --no-coverage (19/19 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: Fresh clone required `npm install` before baseline checks because `node_modules/.bin/eslint` was initially missing.
-Next step: Continue Tier 6 utility hardening queue with ClassNames or remaining unscored utility entries.
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Playwright browser was not installed initially (`chrome-headless-shell` missing), resolved via `npx playwright install chromium`. Demo screenshot captured at `/tmp/auto-focus-hardening.png` after serving demo on `http://127.0.0.1:4200/auto-focus`.
+Next step: Continue hardening the next queued utility/component (for example Image or ClassNames).
