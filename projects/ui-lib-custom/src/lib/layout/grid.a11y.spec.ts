@@ -170,6 +170,6 @@ describe('Grid (a11y)', (): void => {
       string,
       unknown
     >;
-    expect(componentInstance.order).toBeUndefined();
+    expect(componentInstance['order']).toBeUndefined();
   });
 });
