@@ -77,6 +77,19 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [Inline layout scorecard sync]
+Changed:
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Synced the Layout score table with the already-completed Inline hardening state by filling the Inline row scores and marking it complete (🟢) to match queue status and completed implementation/tests.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/layout/inline" --no-coverage (27/27 PASS — 16 unit + 11 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone required `npm install` before baseline validation; no additional code changes were required for Inline behavior/tests.
+Next step: Continue with Stack hardening for layout parity (`as` semantics + landmark/read-order constraints).
+
 Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/layout/inline.ts
@@ -114,23 +127,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
 Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
-
-Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/COMPONENT_SCORES.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/virtual-scroller/README.md
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.ts
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.html
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.scss
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.spec.ts
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.a11y.spec.ts
-State: VirtualScroller now exposes configurable list/grid semantics with fallback scroll-region labels, item count metadata (`aria-setsize`, `aria-posinset`, `aria-rowcount`, `aria-rowindex`), keyboard scrolling for Arrow/Page/Home/End keys, polite loading/empty/total-count announcements, reduced-motion scroll behavior, and synced external loading state. Added a dedicated 14-test accessibility suite plus updated README and score bookkeeping.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/virtual-scroller/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=virtual-scroller --no-coverage (39/39 PASS — 25 unit + 14 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
-Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
