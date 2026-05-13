@@ -98,6 +98,6 @@ export class IconButton implements AfterViewInit {
       return;
     }
 
-    console.error('[ui-lib-icon-button] ariaLabel is required for accessibility.');
+    console.error('[ui-lib-icon-button] ariaLabel must not be empty for accessibility.');
   }
 }

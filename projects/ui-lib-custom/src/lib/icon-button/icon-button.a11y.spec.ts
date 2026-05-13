@@ -154,7 +154,7 @@ describe('IconButton Accessibility', (): void => {
     await createFixture(EmptyLabelHostComponent);
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      '[ui-lib-icon-button] ariaLabel is required for accessibility.'
+      '[ui-lib-icon-button] ariaLabel must not be empty for accessibility.'
     );
   });
 
@@ -177,6 +177,12 @@ describe('IconButton Accessibility', (): void => {
   it('axe: disabled state passes', async (): Promise<void> => {
     const fixture: ComponentFixture<DisabledHostComponent> =
       await createFixture(DisabledHostComponent);
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+
+  it('axe: loading state passes', async (): Promise<void> => {
+    const fixture: ComponentFixture<LoadingHostComponent> =
+      await createFixture(LoadingHostComponent);
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 });
