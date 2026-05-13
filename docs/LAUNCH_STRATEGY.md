@@ -201,5 +201,7 @@ The hardening work you are doing now IS the launch preparation. Every component 
 |---|---|
 | [`ROADMAP.md`](ROADMAP.md) | Phase gates that unlock each launch step |
 | [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md) | The benchmark repo and "Built Different" content |
+| [`COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) | The evidence base — parity tables and 🚀 differentiators per component |
 | [`VISION.md`](VISION.md) | The why behind every decision |
-| [`COMPONENT_SCORES.md`](../COMPONENT_SCORES.md) | The scoreboard that tells you when you're ready |
+| [`COMPONENT_SCORES.md`](COMPONENT_SCORES.md) | The scoreboard that tells you when you're ready |
+| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md) | The 149-checkpoint quality gate — what "ready" actually means |

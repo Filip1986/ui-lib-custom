@@ -281,3 +281,16 @@ Once v1.0 ships, the next committed strengths follow in order. Each gets its own
 **When a phase is complete:** update the Progress Summary table at the top of this file, then move to the next phase.
 
 **This document is the map. `AI_AGENT_CONTEXT.md` is the compass (current session state). `COMPONENT_SCORES.md` is the scoreboard.**
+
+---
+
+## Related Documents
+
+| Document | How it connects |
+|---|---|
+| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md) | Defines what "scored ≥ 8" actually means — the 149-checkpoint quality gate used throughout this roadmap |
+| [`COMPONENT_SCORES.md`](COMPONENT_SCORES.md) | Live scoreboard — the per-component record of which checkboxes are ticked |
+| [`COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) | Per-component parity tables (Category 11) — filled in during Phase 2 of each component's hardening |
+| [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md) | What happens in Phase 4 — the benchmark repo, "Built Different" content, and public claims |
+| [`LAUNCH_STRATEGY.md`](LAUNCH_STRATEGY.md) | The full sequenced launch path that Phase 4 and Phase 5 unlock |
+| [`VISION.md`](VISION.md) | The north star — re-read when making trade-off decisions at any phase boundary |

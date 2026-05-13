@@ -452,6 +452,8 @@ Individual component documentation with complete API references and implementati
 
 - [ICONFIELD.md](ICONFIELD.md) - API reference and usage guide
 
+**Highlights:** Decorative icons default to `aria-hidden`, stay out of the tab order, and the wrapper now reserves CSS-only padding for native inputs plus Input/Password/InputMask/InputNumber compositions.
+
 
 
 **Status:** ✅ Complete
@@ -842,7 +844,7 @@ Each component should have two documentation files:
 
 | Editor | Native rich-text editing with toolbar | 3 | - | 3 | ✅ Complete |
 
-| IconField | Input icon layout wrapper and icon container | - | - | Inherits input sizes | ✅ Complete |
+| IconField | Input icon layout wrapper with decorative-by-default a11y and broad projected-input support | - | - | Inherits input sizes | ✅ Complete |
 
 | InputGroup | Grouped control/addon layout wrapper pair | - | - | Inherits projected control sizes | ✅ Complete |
 

@@ -151,12 +151,12 @@ That is the "take over" outcome — executed through credibility, not claims.
 
 ## Competitors to Audit
 
-| Library          | Repo                              | Notes                                    |
-|------------------|-----------------------------------|------------------------------------------|
-| Angular Material | github.com/angular/components     | Official Google library, highest install base |
-| PrimeNG          | github.com/primefaces/primeng     | Most features, most stars in Angular ecosystem |
-| Ng-Zorro         | github.com/NG-ZORRO/ng-zorro-antd | Ant Design port, enterprise-focused      |
-| Ng-Bootstrap     | github.com/ng-bootstrap/ng-bootstrap | Bootstrap wrapper, widely used         |
+| Library          | Repo                                 | Notes                                          |
+|------------------|--------------------------------------|------------------------------------------------|
+| Angular Material | github.com/angular/components        | Official Google library, highest install base  |
+| PrimeNG          | github.com/primefaces/primeng        | Most features, most stars in Angular ecosystem |
+| Ng-Zorro         | github.com/NG-ZORRO/ng-zorro-antd    | Ant Design port, enterprise-focused            |
+| Ng-Bootstrap     | github.com/ng-bootstrap/ng-bootstrap | Bootstrap wrapper, widely used                 |
 
 ---
 
@@ -170,3 +170,17 @@ Do not start this process until:
 - [ ] You are genuinely proud of the quality — not just feature-complete
 
 Premature competitive publishing with an unfinished library is worse than silence.
+
+---
+
+## Related Documents
+
+| Document | How it connects |
+|---|---|
+| [`COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) | The internal per-component parity tables — the evidence base this strategy draws on. **This file is the strategy; that file is the data.** |
+| [`SCORING_CRITERIA.md`](SCORING_CRITERIA.md) | Category 11 (Competitive Parity & Differentiation) — the per-component scoring gate that tracks parity and 🚀 differentiators |
+| [`ROADMAP.md`](ROADMAP.md) | Phase 4 is when this strategy executes — the benchmark repo goes public, the "Built Different" content lands |
+| [`LAUNCH_STRATEGY.md`](LAUNCH_STRATEGY.md) | The full sequenced launch path — this strategy feeds into Step 5 (the launch event) |
+| [`VISION.md`](VISION.md) | The positioning north star — every claim must be consistent with the vision |
+
+> **Scope note:** This file covers competitive positioning against the **Angular ecosystem** (Angular Material, PrimeNG, Ng-Zorro, Ng-Bootstrap) for public-facing benchmarks. `COMPETITIVE_BENCHMARKS.md` covers internal API and a11y parity against **any UI library** including React-ecosystem references (Radix UI, Ark UI, Melt UI) — the best implementations regardless of framework. These are different audiences and different purposes; both are necessary.
