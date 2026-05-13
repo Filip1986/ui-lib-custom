@@ -1,5 +1,6 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideAlertCircle, lucideAlignHorizontalSpaceAround } from '@ng-icons/lucide';
 import { Icon } from 'ui-lib-custom/icon';
@@ -11,7 +12,10 @@ describe('Icon', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [Icon],
-      providers: [provideIcons({ lucideAlertCircle, lucideAlignHorizontalSpaceAround })],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideIcons({ lucideAlertCircle, lucideAlignHorizontalSpaceAround }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Icon);
@@ -53,37 +57,44 @@ describe('Icon', (): void => {
     fixture.detectChanges();
 
     const resolvedSize: () => string = component.resolvedSize as () => string;
-    expect(resolvedSize()).toBe('1.5rem');
+    expect(resolvedSize()).toBe('1.25em');
   });
 
-  it('marks clickable host class', (): void => {
-    fixture.componentRef.setInput('clickable', true);
-    fixture.detectChanges();
-
+  it('defaults to a decorative aria-hidden icon', (): void => {
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    expect(host.classList.contains('ui-lib-icon--clickable')).toBeTruthy();
+    expect(host.getAttribute('aria-hidden')).toBe('true');
+    expect(host.getAttribute('aria-label')).toBeNull();
+    expect(host.getAttribute('role')).toBeNull();
   });
 
-  it('sets role, tabindex, and aria-label when clickable', (): void => {
-    fixture.componentRef.setInput('clickable', true);
+  it('sets informative semantics when ariaLabel is provided', (): void => {
     fixture.componentRef.setInput('ariaLabel', 'Close');
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    expect(host.getAttribute('role')).toBe('button');
-    expect(host.getAttribute('tabindex')).toBe('0');
+    expect(host.getAttribute('role')).toBe('img');
+    expect(host.getAttribute('aria-hidden')).toBeNull();
     expect(host.getAttribute('aria-label')).toBe('Close');
   });
 
-  it('activates click on Enter key when clickable', (): void => {
+  it('trims blank ariaLabel values back to decorative mode', (): void => {
+    fixture.componentRef.setInput('ariaLabel', '   ');
+    fixture.detectChanges();
+
+    const host: HTMLElement = fixture.nativeElement as HTMLElement;
+    expect(host.getAttribute('aria-hidden')).toBe('true');
+    expect(host.getAttribute('aria-label')).toBeNull();
+    expect(host.getAttribute('role')).toBeNull();
+  });
+
+  it('never becomes keyboard-focusable even when clickable is requested', (): void => {
     fixture.componentRef.setInput('clickable', true);
     fixture.detectChanges();
 
     const host: HTMLElement = fixture.nativeElement as HTMLElement;
-    const clickSpy: jest.SpyInstance = jest.spyOn(host, 'click');
-    host.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
-
-    expect(clickSpy).toHaveBeenCalled();
+    expect(host.getAttribute('tabindex')).toBe('-1');
+    expect(host.tabIndex).toBe(-1);
+    expect(host.getAttribute('role')).toBeNull();
   });
 
   it('applies dark theme variables', (): void => {
