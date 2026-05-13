@@ -115,8 +115,7 @@ describe('Inline', (): void => {
 
   it('should render as horizontal flex container with wrap', (): void => {
     const { inlineContentElement } = bootstrap();
-    expect(inlineContentElement.style.flexDirection).toBe('row');
-    expect(inlineContentElement.style.flexWrap).toBe('wrap');
+    expect(inlineContentElement.classList.contains('ui-lib-inline__content')).toBe(true);
   });
 
   it('should apply gap from design tokens', (): void => {

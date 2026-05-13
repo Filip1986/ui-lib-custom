@@ -1,9 +1,7 @@
 @switch (_renderTag()) {
   @case ('span') {
     <span
-      [style.display]="'flex'"
-      [style.flex-direction]="'row'"
-      [style.flex-wrap]="'wrap'"
+      class="ui-lib-inline__content"
       [style.align-items]="align()"
       [style.justify-content]="_justifyContent()"
       [style.gap]="_gapValue()"
@@ -13,9 +11,7 @@
   }
   @case ('ul') {
     <ul
-      [style.display]="'flex'"
-      [style.flex-direction]="'row'"
-      [style.flex-wrap]="'wrap'"
+      class="ui-lib-inline__content"
       [style.align-items]="align()"
       [style.justify-content]="_justifyContent()"
       [style.gap]="_gapValue()"
@@ -25,9 +21,7 @@
   }
   @case ('ol') {
     <ol
-      [style.display]="'flex'"
-      [style.flex-direction]="'row'"
-      [style.flex-wrap]="'wrap'"
+      class="ui-lib-inline__content"
       [style.align-items]="align()"
       [style.justify-content]="_justifyContent()"
       [style.gap]="_gapValue()"
@@ -37,9 +31,7 @@
   }
   @default {
     <div
-      [style.display]="'flex'"
-      [style.flex-direction]="'row'"
-      [style.flex-wrap]="'wrap'"
+      class="ui-lib-inline__content"
       [style.align-items]="align()"
       [style.justify-content]="_justifyContent()"
       [style.gap]="_gapValue()"
