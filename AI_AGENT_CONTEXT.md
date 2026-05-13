@@ -62,7 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
-- `IconButton` -> ✅ complete + hardened (6-phase, score 8.6/10, 23 tests — 6 unit + 17 a11y)
+- `IconButton` -> ✅ complete + hardened (6-phase, score 8.6/10, 24 tests — 6 unit + 18 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 
 ---
@@ -94,7 +94,7 @@ Changed:
 State: IconButton now renders a native `<button>` with required `ariaLabel` input, dev-mode empty-label error logging, loading-aware aria-label/busy/disabled semantics, a decorative aria-hidden icon, 44px minimum tap target, focus-visible outline, and reduced-motion-safe spinner/transition behavior. Added dedicated unit + a11y coverage and refreshed docs/examples so every showcased icon button includes an explicit accessible label.
 Verification:
   - node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-button/ --max-warnings 0 (PASS)
-  - node_modules/.bin/jest --testPathPatterns="src/lib/icon-button/" --no-coverage (23/23 PASS)
+  - node_modules/.bin/jest --testPathPatterns="src/lib/icon-button/" --no-coverage (24/24 PASS)
   - node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   - node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before local validation. GitHub Actions runs on the branch are currently `action_required` with zero jobs started, so no remote failure logs were available yet. Screenshot captured from the demo icons page at `/tmp/icon-button-hardening.png` after installing Chromium with `npx playwright install chromium`.
