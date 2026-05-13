@@ -12,12 +12,11 @@ import { NgIcon } from '@ng-icons/core';
 import { IconService } from './icon.service';
 import {
   ICON_LIBRARY_PREFIX,
+  type ComponentVariant,
   type IconLibrary,
   type IconSize,
-  type ComponentVariant,
 } from './icon.types';
 import { SEMANTIC_ICONS, type SemanticIcon } from './icon.semantics';
-import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 
 const normalizeIconName: (value: string) => string = (value: string): string =>
   value
@@ -63,13 +62,11 @@ const ICON_NAME_ALIASES: Record<string, SemanticIcon> = {
   styleUrl: './icon.scss',
   host: {
     class: 'ui-lib-icon',
-    '[class.ui-lib-icon--clickable]': 'clickable()',
     '[style.--uilib-icon-color]': 'color()',
-    '[attr.role]': 'clickable() ? "button" : null',
-    '[attr.tabindex]': 'clickable() ? 0 : null',
+    '[attr.role]': 'ariaRole()',
+    '[attr.tabindex]': '-1',
     '[attr.aria-label]': 'ariaLabelResolved()',
     '[attr.aria-hidden]': 'ariaHidden()',
-    '(keydown)': 'onKeydown($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -110,10 +107,21 @@ export class Icon {
     this.iconService.getIconSize(this.size())
   );
   public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
-    (): string | null => (this.clickable() ? (this.ariaLabel() ?? 'Icon') : this.ariaLabel())
+    (): string | null => {
+      const ariaLabel: string | null = this.ariaLabel();
+      if (!ariaLabel) {
+        return null;
+      }
+
+      const trimmedAriaLabel: string = ariaLabel.trim();
+      return trimmedAriaLabel.length > 0 ? trimmedAriaLabel : null;
+    }
+  );
+  public readonly ariaRole: Signal<string | null> = computed<string | null>((): string | null =>
+    this.ariaLabelResolved() ? 'img' : null
   );
   public readonly ariaHidden: Signal<string | null> = computed<string | null>((): string | null =>
-    this.clickable() || this.ariaLabel() ? null : 'true'
+    this.ariaLabelResolved() ? null : 'true'
   );
 
   private isSemanticIcon(value: string | SemanticIcon): value is SemanticIcon {
@@ -123,13 +131,5 @@ export class Icon {
   private resolveAliasedName(value: string | SemanticIcon): string | SemanticIcon {
     const normalized: string = value.toLowerCase();
     return ICON_NAME_ALIASES[normalized] ?? value;
-  }
-
-  public onKeydown(event: KeyboardEvent): void {
-    if (!this.clickable()) return;
-    if (event.key === KEYBOARD_KEYS.Enter || event.key === KEYBOARD_KEYS.Space) {
-      event.preventDefault();
-      (event.currentTarget as HTMLElement).click();
-    }
   }
 }
