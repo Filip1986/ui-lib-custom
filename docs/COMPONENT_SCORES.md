@@ -88,8 +88,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 44   | ProgressBar     | `role=progressbar`, `aria-valuenow/min/max`, indeterminate labeling                 | ✅ Done     |
 | 45   | Carousel        | `role=region`, slide announcement, prev/next button labels                          | ✅ Done     |
 | 46   | Galleria        | Lightbox keyboard trap, image alt text propagation                                  | ✅ Done     |
-| 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ⏳ Queued   |
-| 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ⏳ Queued   |
+| 47   | SpeedDial       | `aria-expanded`, icon-only action button labels                                     | ✅ Done     |
+| 48   | SelectButton    | `role=group` of toggle buttons, `aria-pressed`                                      | ✅ Done     |
 | 49   | InputOtp        | Sequential focus management, paste handling announcement                            | ✅ Done     |
 | 50   | VirtualScroller | Accessible scroll region, keyboard scrolling                                        | ✅ Done     |
 
@@ -106,7 +106,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 56   | ProgressSpinner | `role=status`, `aria-label`                               | ✅ Done     |
 | 57   | MeterGroup      | Segment `aria-label` values, totals announced             | ✅ Done     |
 | 58   | Divider         | `role=separator` + `aria-orientation`                     | ✅ Done     |
-| 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ⏳ Queued   |
+| 59   | Toolbar         | `role=toolbar`, `aria-label`                              | ✅ Done     |
 | 60   | Panel           | `role=region`, `aria-labelledby`, toggle `aria-expanded`  | ✅ Done     |
 | 61   | Fieldset        | `role=group`, native fieldset/legend semantics            | ✅ Done     |
 | 62   | ScrollPanel     | Keyboard-scrollable region label                          | ✅ Done     |
@@ -158,17 +158,17 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleSwitch  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| SelectButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| SelectButton  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
+| Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | ColorPicker   | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | KeyFilter     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 
@@ -186,7 +186,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FormField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| Toolbar     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Toolbar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Fieldset    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
@@ -220,16 +220,16 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | PanelMenu   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | TieredMenu  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stepper     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| SpeedDial   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| SpeedDial   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8.8 | 🟢     |
 
 ## Data Display
 
 | Component         | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-------------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Table             | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| TreeTable         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Tree              | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| TreeSelect        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| TreeTable         | 9   | 9    | 8    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
+| Tree              | 9   | 8    | 9    | 9    | 9     | 9   | 8    | 8      | 9       | 8    | 8.6 | 🟢     |
+| TreeSelect        | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | Listbox           | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | DataView          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | VirtualScroller   | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
@@ -261,14 +261,13 @@ Scores are integers 1–10. `—` means not yet evaluated.
 
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
-| Card            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Avatar          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Icon            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ButtonGroup     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | SplitButton     | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| ImageCompare    | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ImageCompare    | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |

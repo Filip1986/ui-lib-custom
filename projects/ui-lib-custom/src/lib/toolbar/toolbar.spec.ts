@@ -36,6 +36,33 @@ class TestHostComponent {
   public readonly styleClass: WritableSignal<string | null> = signal<string | null>(null);
 }
 
+@Component({
+  standalone: true,
+  imports: [Toolbar],
+  template: `
+    <ui-lib-toolbar ariaLabel="Keyboard toolbar">
+      <div uiToolbarStart>
+        <button type="button">One</button>
+        <button type="button">Two</button>
+        <button type="button">Three</button>
+      </div>
+    </ui-lib-toolbar>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class KeyboardHostComponent {}
+
+@Component({
+  standalone: true,
+  imports: [Toolbar],
+  template: `
+    <ui-lib-toolbar ariaLabel="First" />
+    <ui-lib-toolbar ariaLabel="Second" />
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class TwoToolbarsComponent {}
+
 describe('Toolbar', (): void => {
   let fixture: ComponentFixture<TestHostComponent>;
   let host: TestHostComponent;
@@ -109,6 +136,10 @@ describe('Toolbar', (): void => {
     expect(getToolbarElement().getAttribute('aria-label')).toBe('Main toolbar');
   });
 
+  it('should assign a unique id matching the pattern', (): void => {
+    expect(getToolbarElement().getAttribute('id')).toMatch(/^ui-lib-toolbar-\d+$/);
+  });
+
   it('should render start group wrapper', (): void => {
     const startGroup: Element | null = getToolbarElement().querySelector(
       '.ui-lib-toolbar__group--start'
@@ -157,5 +188,112 @@ describe('Toolbar', (): void => {
     const endContent: Element | null = endGroup.querySelector('[data-testid="end-content"]');
     expect(endContent).toBeTruthy();
     expect(endContent!.textContent!.trim()).toBe('End');
+  });
+});
+
+describe('Toolbar unique IDs', (): void => {
+  it('two toolbar instances should have different ids', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [TwoToolbarsComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+    const twoFixture: ComponentFixture<TwoToolbarsComponent> =
+      TestBed.createComponent(TwoToolbarsComponent);
+    twoFixture.detectChanges();
+    const toolbars: NodeListOf<HTMLElement> = (
+      twoFixture.nativeElement as HTMLElement
+    ).querySelectorAll<HTMLElement>('ui-lib-toolbar');
+    const id0: string | null = toolbars[0]?.getAttribute('id') ?? null;
+    const id1: string | null = toolbars[1]?.getAttribute('id') ?? null;
+    expect(id0).toBeTruthy();
+    expect(id1).toBeTruthy();
+    expect(id0).not.toBe(id1);
+    twoFixture.destroy();
+  });
+});
+
+describe('Toolbar keyboard navigation', (): void => {
+  let fixture: ComponentFixture<KeyboardHostComponent>;
+
+  beforeEach(async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [KeyboardHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+    fixture = TestBed.createComponent(KeyboardHostComponent);
+    document.body.appendChild(fixture.nativeElement);
+    fixture.detectChanges();
+    await fixture.whenStable();
+  });
+
+  afterEach((): void => {
+    fixture.destroy();
+  });
+
+  function getButtons(): HTMLElement[] {
+    return Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLElement>('button')
+    );
+  }
+
+  function dispatchKey(target: HTMLElement, key: string): void {
+    target.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+  }
+
+  it('first button has tabindex="0" and others have tabindex="-1" after init', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    expect(buttons[0]?.getAttribute('tabindex')).toBe('0');
+    expect(buttons[1]?.getAttribute('tabindex')).toBe('-1');
+    expect(buttons[2]?.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('ArrowRight moves focus forward', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    buttons[0]?.focus();
+    dispatchKey(buttons[0] as HTMLElement, 'ArrowRight');
+    expect(document.activeElement).toBe(buttons[1]);
+  });
+
+  it('ArrowLeft moves focus backward', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    buttons[1]?.focus();
+    dispatchKey(buttons[1] as HTMLElement, 'ArrowLeft');
+    expect(document.activeElement).toBe(buttons[0]);
+  });
+
+  it('ArrowRight wraps to first from last', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    buttons[2]?.focus();
+    dispatchKey(buttons[2] as HTMLElement, 'ArrowRight');
+    expect(document.activeElement).toBe(buttons[0]);
+  });
+
+  it('ArrowLeft wraps to last from first', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    buttons[0]?.focus();
+    dispatchKey(buttons[0] as HTMLElement, 'ArrowLeft');
+    expect(document.activeElement).toBe(buttons[2]);
+  });
+
+  it('Home focuses the first button', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    buttons[2]?.focus();
+    dispatchKey(buttons[2] as HTMLElement, 'Home');
+    expect(document.activeElement).toBe(buttons[0]);
+  });
+
+  it('End focuses the last button', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    buttons[0]?.focus();
+    dispatchKey(buttons[0] as HTMLElement, 'End');
+    expect(document.activeElement).toBe(buttons[2]);
+  });
+
+  it('navigation updates tabindex on moved-to item', (): void => {
+    const buttons: HTMLElement[] = getButtons();
+    buttons[0]?.focus();
+    dispatchKey(buttons[0] as HTMLElement, 'ArrowRight');
+    expect(buttons[0]?.getAttribute('tabindex')).toBe('-1');
+    expect(buttons[1]?.getAttribute('tabindex')).toBe('0');
   });
 });
