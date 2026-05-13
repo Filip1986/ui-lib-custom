@@ -16,7 +16,7 @@ const meta: Meta = {
   parameters: { a11y: { disable: false } },
   argTypes: {
     variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
-    vertical: { control: 'boolean' },
+    orientation: { control: 'radio', options: ['horizontal', 'vertical'] },
     size: { control: 'select', options: SHARED_SIZE_OPTIONS },
   },
 };
