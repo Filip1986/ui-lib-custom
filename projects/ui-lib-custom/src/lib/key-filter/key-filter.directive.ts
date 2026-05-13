@@ -300,8 +300,12 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     }
 
     if (this.hintElement === null) {
-      this.hintElement = this.createHintElement();
-      this.eventTargetElement.insertAdjacentElement('afterend', this.hintElement);
+      const nextHintElement: HTMLSpanElement = this.createHintElement();
+      const wasInserted: boolean = this.insertHintElement(nextHintElement);
+      if (!wasInserted) {
+        return;
+      }
+      this.hintElement = nextHintElement;
     }
 
     this.addDescribedByReference(this.eventTargetElement, this.hintElement.id);
@@ -371,9 +375,6 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
       this.regex() === null ||
       this.hasWarnedForConflictingInputs
     ) {
-      if (this.pattern() === null || this.regex() === null) {
-        this.hasWarnedForConflictingInputs = false;
-      }
       return;
     }
 
@@ -401,5 +402,28 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
 
   private escapeForCharacterClass(characters: string): string {
     return characters.replace(/[\\\-\]\[]/g, '\\$&');
+  }
+
+  private insertHintElement(hintElement: HTMLSpanElement): boolean {
+    const targetElement: HTMLInputElement | HTMLTextAreaElement | null = this.eventTargetElement;
+    if (targetElement === null) {
+      return false;
+    }
+
+    const insertedElement: Element | null = targetElement.insertAdjacentElement(
+      'afterend',
+      hintElement
+    );
+    if (insertedElement !== null) {
+      return true;
+    }
+
+    const parentElement: HTMLElement | null = targetElement.parentElement;
+    if (parentElement === null) {
+      return false;
+    }
+
+    parentElement.appendChild(hintElement);
+    return true;
   }
 }
