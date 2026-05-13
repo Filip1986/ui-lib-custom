@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `Image` -> ✅ complete + hardened (6-phase, score 8.7/10, 54 tests — 30 unit + 24 a11y)
 
 ---
 
@@ -76,6 +77,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-13 [Image component — 6-phase hardening COMPLETE (#66)]
+Changed:
+  - projects/ui-lib-custom/src/lib/image/image.ts
+  - projects/ui-lib-custom/src/lib/image/image.html
+  - projects/ui-lib-custom/src/lib/image/image.scss
+  - projects/ui-lib-custom/src/lib/image/image.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/image/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Image now uses a stable `nextImageId` instance counter, wires preview IDs through the trigger/dialog relationship, adds a polite live region for zoom/rotation announcements, supports direct preview keyboard shortcuts (`+`, `-`, arrow keys), and restores focus from the actual trigger element more reliably. README and scoring were updated to reflect the finished hardening pass.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=image --no-coverage (114/114 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Demo screenshot captured at `/tmp/image-hardening.png`.
+Next step: Continue the remaining Tier 6 hardening queue or move back to the next prioritized prompt.
 
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
@@ -114,22 +134,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
-
-Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.html
-  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
-  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
-  - projects/ui-lib-custom/src/lib/form-field/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
-Next step: Continue hardening the next queued new layout/form component prompt.

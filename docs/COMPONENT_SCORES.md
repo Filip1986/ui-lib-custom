@@ -115,7 +115,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ✅ Done            |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done            |
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done            |
-| 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Needs hardening |
+| 66   | Image           | Alt text, preview dialog a11y                             | ✅ Done            |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ✅ Done            |
 | 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ✅ Done            |
 | 69   | Upload          | Drop zone announcement, file list management              | ✅ Done            |
@@ -296,7 +296,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ButtonGroup     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | SplitButton     | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Image           | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | ImageCompare    | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |

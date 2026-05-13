@@ -4,6 +4,27 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
+  - projects/ui-lib-custom/src/lib/form-field/form-field.html
+  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
+  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
+  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
+  - projects/ui-lib-custom/src/lib/form-field/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
+Next step: Continue hardening the next queued new layout/form component prompt.
+
+---
+
 Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
 Changed:
   - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
