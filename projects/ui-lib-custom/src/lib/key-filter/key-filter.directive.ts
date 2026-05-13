@@ -200,9 +200,11 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
 
     event.preventDefault();
 
-    const target: HTMLInputElement | HTMLTextAreaElement = (this.resolveTextTargetFromEvent(
-      event
-    ) ?? this.eventTargetElement) as HTMLInputElement | HTMLTextAreaElement;
+    const target: HTMLInputElement | HTMLTextAreaElement | null =
+      this.resolveActiveTextTarget(event);
+    if (target === null) {
+      return;
+    }
 
     const start: number = target.selectionStart ?? target.value.length;
     const end: number = target.selectionEnd ?? target.value.length;
@@ -230,9 +232,11 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     }
 
     event.preventDefault();
-    const target: HTMLInputElement | HTMLTextAreaElement = (this.resolveTextTargetFromEvent(
-      event
-    ) ?? this.eventTargetElement) as HTMLInputElement | HTMLTextAreaElement;
+    const target: HTMLInputElement | HTMLTextAreaElement | null =
+      this.resolveActiveTextTarget(event);
+    if (target === null) {
+      return;
+    }
 
     const start: number = target.selectionStart ?? target.value.length;
     const end: number = target.selectionEnd ?? target.value.length;
@@ -267,6 +271,16 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     }
 
     return this.isTextInputElement(eventTarget) ? eventTarget : null;
+  }
+
+  private resolveActiveTextTarget(event: Event): HTMLInputElement | HTMLTextAreaElement | null {
+    const eventTarget: HTMLInputElement | HTMLTextAreaElement | null =
+      this.resolveTextTargetFromEvent(event);
+    if (eventTarget !== null) {
+      return eventTarget;
+    }
+
+    return this.eventTargetElement;
   }
 
   private isTextInputElement(element: Element): element is HTMLInputElement | HTMLTextAreaElement {
