@@ -99,6 +99,62 @@ describe('classNames', (): void => {
       expect(result).toBe('btn btn--active');
     });
   });
+
+  describe('edge cases', (): void => {
+    it('treats an empty string as falsy and omits it', (): void => {
+      expect(classNames('foo', '', 'bar')).toBe('foo bar');
+    });
+
+    it('handles an object with no truthy values', (): void => {
+      expect(classNames({ a: false, b: null, c: undefined })).toBe('');
+    });
+  });
+
+  describe('ARIA class preservation', (): void => {
+    it('preserves ARIA-state class is-expanded when its condition is true', (): void => {
+      const result: string = classNames('panel', { 'is-expanded': true });
+      expect(result).toBe('panel is-expanded');
+    });
+
+    it('omits is-expanded when its condition is false without affecting other classes', (): void => {
+      const result: string = classNames('panel', { 'is-expanded': false });
+      expect(result).toBe('panel');
+    });
+
+    it('preserves is-disabled when true', (): void => {
+      const result: string = classNames('btn', { 'is-disabled': true });
+      expect(result).toBe('btn is-disabled');
+    });
+
+    it('preserves aria-hidden indicator class through array form', (): void => {
+      // Classes that signal ARIA state (e.g. used in CSS :has selectors) must pass through unchanged.
+      const result: string = classNames(['host', 'aria-hidden-target']);
+      expect(result).toBe('host aria-hidden-target');
+    });
+
+    it('preserves multiple ARIA-state classes when all conditions are true', (): void => {
+      const result: string = classNames({
+        'is-expanded': true,
+        'is-disabled': false,
+        'is-selected': true,
+        'is-hidden': false,
+      });
+      expect(result).toBe('is-expanded is-selected');
+    });
+
+    it('does not add or strip any unexpected classes', (): void => {
+      const input: Record<string, boolean> = {
+        foo: true,
+        'is-expanded': true,
+        bar: false,
+        'is-disabled': false,
+      };
+      const result: string = classNames(input);
+      expect(result).toBe('foo is-expanded');
+      expect(result).not.toContain('bar');
+      expect(result).not.toContain('is-disabled');
+    });
+  });
 });
 
 // ---------------------------------------------------------------------------

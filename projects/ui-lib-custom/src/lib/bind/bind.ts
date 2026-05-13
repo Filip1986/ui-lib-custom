@@ -35,23 +35,29 @@ export class Bind {
   private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly renderer: Renderer2 = inject(Renderer2);
-  /** Keys applied during the previous effect run; used to detect removals. */
-  private previousKeys: string[] = [];
+  /** Last values applied by this directive, used to detect safe removals. */
+  private previousBindings: Record<string, unknown> = {};
   constructor() {
     effect((): void => {
-      const bindings: Record<string, unknown> = this.uiLibBind();
-      const currentKeys: string[] = Object.keys(bindings);
-      // Reset DOM properties for keys that are no longer present.
-      for (const key of this.previousKeys) {
-        if (!(key in bindings)) {
-          this.renderer.setProperty(this.elementRef.nativeElement, key, null);
-        }
-      }
-      // Apply all current key-value pairs as DOM properties.
-      for (const [key, value] of Object.entries(bindings)) {
-        this.renderer.setProperty(this.elementRef.nativeElement, key, value);
-      }
-      this.previousKeys = currentKeys;
+      this.applyBindings(this.uiLibBind());
     });
+  }
+
+  private applyBindings(bindings: Record<string, unknown>): void {
+    // Reset removed keys only when this directive still owns the current value.
+    for (const [key, previousValue] of Object.entries(this.previousBindings)) {
+      if (!(key in bindings) && this.getPropertyValue(key) === previousValue) {
+        this.renderer.setProperty(this.elementRef.nativeElement, key, null);
+      }
+    }
+    // Apply all current key-value pairs as DOM properties.
+    for (const [key, value] of Object.entries(bindings)) {
+      this.renderer.setProperty(this.elementRef.nativeElement, key, value);
+    }
+    this.previousBindings = { ...bindings };
+  }
+
+  private getPropertyValue(key: string): unknown {
+    return Reflect.get(this.elementRef.nativeElement, key);
   }
 }
