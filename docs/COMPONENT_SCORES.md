@@ -150,7 +150,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ⏳ Needs hardening      |
 | Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done                 |
-| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ⏳ Needs hardening      |
+| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done                 |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
 | StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ⏳ Needs hardening      |
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
@@ -294,7 +294,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Avatar          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| Icon            | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
+| Icon            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ButtonGroup     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | SplitButton     | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |

@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `IconButton` -> ✅ complete + hardened (6-phase, score 8.6/10, 24 tests — 6 unit + 18 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 
 ---
@@ -77,26 +78,27 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-13 [IconField component — 6-phase hardening COMPLETE]
+Date: 2026-05-13 [IconButton component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/icon-field/input-icon.ts
-  - projects/ui-lib-custom/src/lib/icon-field/icon-field.scss
-  - projects/ui-lib-custom/src/lib/icon-field/icon-field.spec.ts
-  - projects/ui-lib-custom/src/lib/icon-field/icon-field.a11y.spec.ts (NEW, 12 tests)
-  - projects/ui-lib-custom/src/lib/icon-field/README.md
-  - docs/reference/components/ICONFIELD.md
-  - docs/reference/components/README.md
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.ts
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.html
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.scss
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.spec.ts
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/icon-button/README.md
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.stories.ts
+  - docs/reference/components/ICON_BUTTON.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: IconField now keeps `uilib-input-icon` decorative by default with `aria-hidden="true"` and `tabindex="-1"`, supports informative icon opt-in via `[decorative]="false"` + `ariaLabel`, preserves pointer-event passthrough, and extends CSS-only padding support to native `<input>`, `<ui-lib-input>`, `<uilib-password>`, `<uilib-input-mask>`, and `<uilib-input-number>`. Added dedicated accessibility regression coverage plus refreshed README/reference docs and score bookkeeping.
+State: IconButton now renders a native `<button>` with required `ariaLabel` input, dev-mode empty-label error logging, loading-aware aria-label/busy/disabled semantics, a decorative aria-hidden icon, 44px minimum tap target, focus-visible outline, and reduced-motion-safe spinner/transition behavior. Added dedicated unit + a11y coverage and refreshed docs/examples so every showcased icon button includes an explicit accessible label.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-field/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/icon-field/" --no-coverage (27/27 PASS — 15 unit + 12 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub MCP CI inspection found the current branch run in `action_required` state with no jobs/logs yet, so local validation was used. Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/icon-field-hardening.png`.
-Next step: Continue the remaining new layout/form hardening prompts after IconField.
+  - node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-button/ --max-warnings 0 (PASS)
+  - node_modules/.bin/jest --testPathPatterns="src/lib/icon-button/" --no-coverage (24/24 PASS)
+  - node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  - node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before local validation. GitHub Actions runs on the branch are currently `action_required` with zero jobs started, so no remote failure logs were available yet. Screenshot captured from the demo icons page at `/tmp/icon-button-hardening.png` after installing Chromium with `npx playwright install chromium`.
+Next step: Continue hardening the next queued utility/component prompt.
 
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
