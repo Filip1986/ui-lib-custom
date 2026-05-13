@@ -145,7 +145,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Grid              | Visual vs DOM order constraint, no overflow clipping           | ⏳ Needs hardening    |
 | Container         | No clipping, skip-link target compatibility                    | ✅ Done               |
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                 | ⏳ Needs hardening    |
-| Dock              | `role=toolbar` or `navigation`, item labels, roving tabindex   | ⏳ Needs hardening    |
+| Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)         |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                        | ⏳ Needs hardening    |
 | Icon              | `aria-hidden` by default, informative mode `aria-label`        | ⏳ Needs hardening    |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside              | ⏳ Needs hardening    |
@@ -243,7 +243,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Accordion   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Breadcrumb  | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ContextMenu | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| Dock        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Dock        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Menu        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | MegaMenu    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Menubar     | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
