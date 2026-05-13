@@ -53,7 +53,8 @@ export class KeyFilterDemoComponent {
   ];
 
   public readonly snippets: Record<KeyFilterDemoSnippetKey, string> = {
-    alphanum: '<input [uilibKeyFilter]="\'alphanum\'" placeholder="Alphanumeric only" />',
+    alphanum:
+      '<input [uilibKeyFilter]="\'alphanum\'" hintText="Letters and numbers only" placeholder="Alphanumeric only" />',
     alpha: '<input [uilibKeyFilter]="\'alpha\'" placeholder="Letters only" />',
     pint: '<input [uilibKeyFilter]="\'pint\'" placeholder="Positive integers only" />',
     int: '<input [uilibKeyFilter]="\'int\'" placeholder="Integers (with minus sign)" />',
