@@ -140,11 +140,13 @@ CSS Grid layout with fixed column count or responsive auto-fit.
 
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
-| `columns` | `GridColumns` (1–12) | `12` | Number of equal columns via `repeat(N, 1fr)` |
+| `columns` | `GridColumns (1–12) \| string` | `12` | Number of equal columns via `repeat(N, 1fr)` or custom template string (e.g. `2fr minmax(200px, 1fr)`) |
 | `align` | `GridAlign` | `'stretch'` | `align-items` value |
 | `justify` | `GridJustify` | `'stretch'` | `justify-items` value |
 | `spacing` | `StackToken \| SpacingToken \| number \| null` | `null` | Semantic gap (preferred); maps to `--uilib-stack-*` |
 | `gap` | `SpacingToken` | `4` | Back-compat numeric gap token; ignored when `spacing` is set |
+| `rowGap` | `StackToken \| SpacingToken \| number \| null` | `null` | Optional row-gap override; falls back to resolved `gap` |
+| `columnGap` | `StackToken \| SpacingToken \| number \| null` | `null` | Optional column-gap override; falls back to resolved `gap` |
 | `minColumnWidth` | `string \| undefined` | `undefined` | When set, uses `repeat(auto-fit, minmax(value, 1fr))` instead of fixed columns |
 
 ### Outputs
@@ -173,3 +175,9 @@ _none_
   <!-- cards -->
 </ui-lib-grid>
 ```
+
+### Grid accessibility constraints
+
+- `ui-lib-grid` is a layout primitive and adds **no** landmark semantics by default (no `main`, `nav`, `region`, etc.).
+- Keep DOM order aligned with reading order. Do **not** visually reorder items with CSS `order` in grid children unless you also provide an explicit accessibility justification and equivalent reading sequence.
+- When responsive layouts collapse from multiple columns to one column, screen readers continue to follow DOM order; structure markup in the final intended reading sequence.

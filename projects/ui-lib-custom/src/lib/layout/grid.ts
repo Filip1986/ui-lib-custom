@@ -36,17 +36,23 @@ const spaceVar: (token: SpacingToken) => string = (token: SpacingToken): string 
   template: '<ng-content />',
   host: {
     '[style.display]': '"grid"',
-    '[style.grid-template-columns]': '_gridTemplateColumns()',
+    '[style.--uilib-grid-columns]': '_gridTemplateColumns()',
+    '[style.--uilib-grid-gap]': '_gapValue()',
+    '[style.--uilib-grid-row-gap]': '_rowGapValue()',
+    '[style.--uilib-grid-column-gap]': '_columnGapValue()',
+    '[style.grid-template-columns]': '"var(--uilib-grid-columns)"',
     '[style.align-items]': 'align()',
     '[style.justify-items]': 'justify()',
-    '[style.gap]': '_gapValue()',
+    '[style.gap]': '"var(--uilib-grid-gap)"',
+    '[style.row-gap]': '"var(--uilib-grid-row-gap)"',
+    '[style.column-gap]': '"var(--uilib-grid-column-gap)"',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class Grid {
   /** Number of columns (using design tokens) */
-  public readonly columns: InputSignal<GridColumns> = input<GridColumns>(12);
+  public readonly columns: InputSignal<GridColumns | string> = input<GridColumns | string>(12);
 
   /** Alignment of items along the block axis */
   public readonly align: InputSignal<GridAlign> = input<GridAlign>('stretch');
@@ -65,6 +71,16 @@ export class Grid {
   /** Back-compat numeric gap using spacing scale (remains supported). */
   public readonly gap: InputSignal<SpacingToken> = input<SpacingToken>(4);
 
+  /** Optional row-gap override (falls back to gap when unset). */
+  public readonly rowGap: InputSignal<StackToken | SpacingToken | number | null> = input<
+    StackToken | SpacingToken | number | null
+  >(null);
+
+  /** Optional column-gap override (falls back to gap when unset). */
+  public readonly columnGap: InputSignal<StackToken | SpacingToken | number | null> = input<
+    StackToken | SpacingToken | number | null
+  >(null);
+
   /** Optional minimum column width (enables auto-fit) */
   public readonly minColumnWidth: InputSignal<string | undefined> = input<string | undefined>(
     undefined
@@ -77,18 +93,46 @@ export class Grid {
       // Auto-fit responsive grid
       return `repeat(auto-fit, minmax(${minWidth}, 1fr))`;
     }
+    const columns: GridColumns | string = this.columns();
+    if (typeof columns === 'string') {
+      return columns.trim().length > 0 ? columns : `repeat(${GRID_COLUMNS[12]}, 1fr)`;
+    }
     // Fixed column count
-    return `repeat(${GRID_COLUMNS[this.columns()]}, 1fr)`;
+    return `repeat(${GRID_COLUMNS[columns]}, 1fr)`;
   });
 
   /** Computed gap value from semantic spacing (falls back to numeric gap) */
   protected readonly _gapValue: Signal<string> = computed<string>((): string => {
-    const semantic: StackToken | SpacingToken | number | null = this.spacing();
-    if (semantic !== null) {
-      return typeof semantic === 'number'
-        ? spaceVar(semantic as SpacingToken)
-        : stackVar(semantic as StackToken);
-    }
-    return spaceVar(this.gap());
+    return this.resolveGap(this.spacing());
   });
+
+  /** Computed row-gap value (falls back to gap). */
+  protected readonly _rowGapValue: Signal<string> = computed<string>((): string => {
+    const resolvedRowGap: string | null = this.resolveOptionalGap(this.rowGap());
+    return resolvedRowGap ?? this._gapValue();
+  });
+
+  /** Computed column-gap value (falls back to gap). */
+  protected readonly _columnGapValue: Signal<string> = computed<string>((): string => {
+    const resolvedColumnGap: string | null = this.resolveOptionalGap(this.columnGap());
+    return resolvedColumnGap ?? this._gapValue();
+  });
+
+  private resolveGap(value: StackToken | SpacingToken | number | null): string {
+    if (value === null) {
+      return spaceVar(this.gap());
+    }
+    return typeof value === 'number'
+      ? spaceVar(value as SpacingToken)
+      : stackVar(value as StackToken);
+  }
+
+  private resolveOptionalGap(value: StackToken | SpacingToken | number | null): string | null {
+    if (value === null) {
+      return null;
+    }
+    return typeof value === 'number'
+      ? spaceVar(value as SpacingToken)
+      : stackVar(value as StackToken);
+  }
 }

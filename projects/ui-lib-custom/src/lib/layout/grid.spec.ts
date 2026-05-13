@@ -14,6 +14,8 @@ import type { GridColumns, SpacingToken, StackToken } from 'ui-lib-custom/tokens
       [columns]="columns"
       [gap]="gap"
       [spacing]="spacing"
+      [rowGap]="rowGap"
+      [columnGap]="columnGap"
       [align]="align"
       [justify]="justify"
       [minColumnWidth]="minColumnWidth"
@@ -26,9 +28,11 @@ import type { GridColumns, SpacingToken, StackToken } from 'ui-lib-custom/tokens
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  public columns: GridColumns = 12;
+  public columns: GridColumns | string = 12;
   public gap: SpacingToken = 4;
   public spacing: StackToken | SpacingToken | number | null = null;
+  public rowGap: StackToken | SpacingToken | number | null = null;
+  public columnGap: StackToken | SpacingToken | number | null = null;
   public align: GridAlign = 'stretch';
   public justify: GridJustify = 'stretch';
   public minColumnWidth: string | undefined = undefined;
@@ -96,22 +100,32 @@ describe('Grid', (): void => {
 
   it('should apply fixed column count by default', (): void => {
     const { gridElement } = bootstrap();
-    expect(gridElement.style.gridTemplateColumns).toBe('repeat(12, 1fr)');
+    expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe('repeat(12, 1fr)');
+    expect(gridElement.style.gridTemplateColumns).toBe('var(--uilib-grid-columns)');
   });
 
   it('should apply different column counts', (): void => {
     const { gridElement } = bootstrap({ columns: 4 });
-    expect(gridElement.style.gridTemplateColumns).toBe('repeat(4, 1fr)');
+    expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe('repeat(4, 1fr)');
+  });
+
+  it('should accept custom template string for columns', (): void => {
+    const { gridElement } = bootstrap({ columns: '2fr minmax(200px, 1fr)' });
+    expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe(
+      '2fr minmax(200px, 1fr)'
+    );
   });
 
   it('should apply responsive grid with minColumnWidth', (): void => {
     const { gridElement } = bootstrap({ minColumnWidth: '200px' });
-    expect(gridElement.style.gridTemplateColumns).toBe('repeat(auto-fit, minmax(200px, 1fr))');
+    expect(gridElement.style.getPropertyValue('--uilib-grid-columns')).toBe(
+      'repeat(auto-fit, minmax(200px, 1fr))'
+    );
   });
 
   it('should apply gap from design tokens', (): void => {
     const { gridElement } = bootstrap();
-    expect(gridElement.style.gap).toContain('1rem'); // gap 4 = 1rem fallback
+    expect(gridElement.style.getPropertyValue('--uilib-grid-gap')).toContain('1rem'); // gap 4 = 1rem fallback
   });
 
   it('should project content', (): void => {
@@ -141,12 +155,29 @@ describe('Grid', (): void => {
 
   it('uses semantic spacing tokens when spacing is set', (): void => {
     const { gridElement } = bootstrap({ spacing: 'md' });
-    expect(gridElement.style.gap).toContain('1rem');
+    expect(gridElement.style.getPropertyValue('--uilib-grid-gap')).toContain('1rem');
   });
 
   it('accepts numeric spacing when spacing is a number', (): void => {
     const { gridElement } = bootstrap({ spacing: 2 });
-    expect(gridElement.style.gap).toContain('0.5rem');
+    expect(gridElement.style.getPropertyValue('--uilib-grid-gap')).toContain('0.5rem');
+  });
+
+  it('uses row-gap fallback from main gap when rowGap is unset', (): void => {
+    const { gridElement } = bootstrap();
+    expect(gridElement.style.getPropertyValue('--uilib-grid-row-gap')).toContain('1rem');
+  });
+
+  it('uses explicit row-gap value when provided', (): void => {
+    const { gridElement } = bootstrap({ rowGap: 2 });
+    expect(gridElement.style.getPropertyValue('--uilib-grid-row-gap')).toContain('0.5rem');
+  });
+
+  it('uses explicit column-gap value when provided', (): void => {
+    const { gridElement } = bootstrap({ columnGap: 'sm' });
+    expect(gridElement.style.getPropertyValue('--uilib-grid-column-gap')).toContain(
+      'var(--uilib-stack-sm'
+    );
   });
 
   it('applies dark theme variables', (): void => {

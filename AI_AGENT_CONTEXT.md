@@ -77,6 +77,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [Grid layout primitive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/layout/grid.ts
+  - projects/ui-lib-custom/src/lib/layout/grid.spec.ts
+  - projects/ui-lib-custom/src/lib/layout/grid.a11y.spec.ts (NEW, 11 tests)
+  - projects/ui-lib-custom/src/lib/layout/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Grid now exposes host-level CSS custom properties (`--uilib-grid-columns`, `--uilib-grid-gap`, `--uilib-grid-row-gap`, `--uilib-grid-column-gap`) and supports optional `rowGap`/`columnGap` plus custom template-string `columns`. Added dedicated grid accessibility regression coverage (landmark neutrality, default axe checks, CSS variable application, DOM reading order retention under responsive collapse), and documented explicit WCAG reading-order constraint that forbids visual reordering without accessibility justification.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/layout/grid" --no-coverage (28/28 PASS — 17 unit + 11 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone initially lacked dependencies (`node_modules/.bin/eslint` missing), resolved via `npm install` before running required validations. Screenshot captured at `/tmp/grid-hardening.png`.
+Next step: Continue hardening remaining layout primitives in the new-component queue (Stack and Inline).
+
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
@@ -114,22 +131,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
-
-Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.html
-  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
-  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
-  - projects/ui-lib-custom/src/lib/form-field/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
-Next step: Continue hardening the next queued new layout/form component prompt.
