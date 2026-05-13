@@ -77,26 +77,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/COMPONENT_SCORES.md
-  - docs/reference/components/ALERT.md
-  - projects/ui-lib-custom/src/lib/alert/README.md
-  - projects/ui-lib-custom/src/lib/alert/alert.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.html
-  - projects/ui-lib-custom/src/lib/alert/alert.scss
-  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
-State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements. Added dedicated alert accessibility regression tests and updated score/docs bookkeeping.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/alert/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=src/lib/alert --no-coverage (41/41 PASS — 28 unit + 13 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Demo screenshot captured at `/tmp/alert-hardening.png`. Playwright MCP browser lock prevented direct playwright-browser usage; installed Playwright Chromium and captured the screenshot via a Node Playwright script.
-Next step: Message hardening (Tier 5, #43).
-
 Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
 Changed:
   - projects/ui-lib-custom/src/lib/divider/divider.ts
@@ -151,3 +131,29 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
 Next step: Continue Tier 6 queue with remaining queued components.
+
+Date: 2026-05-13 [SelectButton component — 6-phase hardening COMPLETE (#48)]
+Changed:
+  - projects/ui-lib-custom/src/lib/select-button/select-button.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block disabling button transitions
+  - projects/ui-lib-custom/src/lib/select-button/select-button.a11y.spec.ts (REWRITTEN — 19 tests)
+      • Replaced single axe-core test with 19 focused tests covering: group role (radiogroup/group),
+        accessible name (aria-label / aria-labelledby), item roles (radio/checkbox), aria-checked
+        for selected/unselected options, disabled option aria-disabled, roving tabindex, and
+        axe-core checks for single-select / labelled-by / multi-select / disabled-option /
+        component-disabled states
+  - projects/ui-lib-custom/src/lib/select-button/README.md
+      • Added ARIA Pattern table (single vs multi), group label requirement note,
+        Keyboard Interaction table, ARIA Attributes table, and CSS Custom Properties table
+  - docs/COMPONENT_SCORES.md
+      • SelectButton #48: ⏳ Queued → ✅ Done (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived oldest Alert handoff to keep only the newest 3 in this file
+State: SelectButton hardening complete. Component already had correct radiogroup/group roles, roving tabindex, and aria-checked via the Button sub-component. This pass added prefers-reduced-motion SCSS, expanded a11y spec from 1 → 19 tests, and comprehensive README documentation.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/select-button/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=select-button --no-coverage (76/76 PASS — 57 unit + 19 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
+Terminal notes: npm install required on fresh clone. All validations passed on first attempt.
+Next step: InputOtp hardening (Tier 5, #49).
