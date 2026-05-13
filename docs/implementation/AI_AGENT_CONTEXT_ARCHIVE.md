@@ -4,6 +4,23 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
+Changed:
+  - projects/ui-lib-custom/src/lib/divider/divider.ts
+      • Added module-level `nextDividerId` counter and unique host `dividerId`
+      • Added `ariaLabel` + `decorative` inputs and computed ARIA bindings
+      • Bound host `id`, `aria-label`, and `aria-hidden`
+  - projects/ui-lib-custom/src/lib/divider/divider.scss — prefers-reduced-motion override
+  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts — new id/decorative/labeled coverage
+  - projects/ui-lib-custom/src/lib/divider/divider.a11y.spec.ts (CREATED — 12 tests)
+  - projects/ui-lib-custom/src/lib/divider/README.md — ariaLabel/decorative docs
+  - docs/COMPONENT_SCORES.md — Divider #58: ⏳ → ✅ Done (avg 8.7)
+State: Divider hardening complete.
+Verification: ESLint PASS · Jest 36/36 PASS · ng build PASS
+Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
+
+---
+
 Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
 Changed:
   - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
