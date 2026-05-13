@@ -144,7 +144,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Inline            | No landmark pollution, wrap + reading order                    | ⏳ Needs hardening    |
 | Grid              | Visual vs DOM order constraint, no overflow clipping           | ⏳ Needs hardening    |
 | Container         | No clipping, skip-link target compatibility                    | ⏳ Needs hardening    |
-| Fluid             | 400% zoom reflow (WCAG 1.4.10)                                 | ⏳ Needs hardening    |
+| Fluid             | 400% zoom reflow (WCAG 1.4.10)                                 | ✅ Done               |
 | Dock              | `role=toolbar` or `navigation`, item labels, roving tabindex   | ⏳ Needs hardening    |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                        | ⏳ Needs hardening    |
 | Icon              | `aria-hidden` by default, informative mode `aria-label`        | ⏳ Needs hardening    |
@@ -217,7 +217,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | FormField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Toolbar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
-| Fluid       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Fluid       | 9   | 9    | 9    | 9    | 8     | 9   | 8    | 9      | 9       | 8    | 8.7 | 🟢     |
 | Fieldset    | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Panel       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | ScrollPanel | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
