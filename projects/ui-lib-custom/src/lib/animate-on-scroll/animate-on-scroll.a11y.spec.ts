@@ -201,6 +201,8 @@ describe('AnimateOnScroll (a11y)', (): void => {
     const element: HTMLElement = getAnimatedElement(fixture);
     expect(element.style.opacity).toBe('1');
     expect(element.style.transform).toBe('none');
+    expect(element.style.transition).toBe('none');
+    expect(element.style.animation).toBe('none');
   });
 
   it('does not leave hidden inline styles when reduced motion is not requested', async (): Promise<void> => {
