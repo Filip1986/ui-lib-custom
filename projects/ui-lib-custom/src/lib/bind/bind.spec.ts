@@ -39,6 +39,75 @@ class BindSignalHostComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class BindDefaultHostComponent {}
+
+@Component({
+  selector: 'app-bind-aria-host',
+  standalone: true,
+  imports: [Bind],
+  template: `<button [attr.aria-label]="ariaLabel()" [uiLibBind]="bindings()"></button>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class BindAriaHostComponent {
+  public readonly ariaLabel: WritableSignal<string> = signal<string>('Accessible label');
+  public readonly bindings: WritableSignal<Record<string, unknown>> = signal<
+    Record<string, unknown>
+  >({});
+}
+
+@Component({
+  selector: 'app-bind-override-host',
+  standalone: true,
+  imports: [Bind],
+  template: `<div [title]="externalTitle()" [uiLibBind]="bindings()"></div>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class BindExternalOverrideHostComponent {
+  public readonly externalTitle: WritableSignal<string> = signal<string>('External title');
+  public readonly bindings: WritableSignal<Record<string, unknown>> = signal<
+    Record<string, unknown>
+  >({});
+}
+
+@Component({
+  selector: 'app-bind-structural-host',
+  standalone: true,
+  imports: [Bind],
+  template: `
+    @if (showIf()) {
+      <section data-testid="if-target" [uiLibBind]="ifBindings()"></section>
+    }
+
+    @switch (mode()) {
+      @case ('alpha') {
+        <article data-testid="switch-target" [uiLibBind]="switchBindings()"></article>
+      }
+    }
+
+    @for (item of items(); track item.id) {
+      <div data-testid="for-target" [uiLibBind]="item.bindings"></div>
+    }
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class BindStructuralHostComponent {
+  public readonly showIf: WritableSignal<boolean> = signal<boolean>(true);
+  public readonly mode: WritableSignal<'alpha' | 'beta'> = signal<'alpha' | 'beta'>('alpha');
+  public readonly ifBindings: WritableSignal<Record<string, unknown>> = signal<
+    Record<string, unknown>
+  >({
+    title: 'if-title',
+  });
+  public readonly switchBindings: WritableSignal<Record<string, unknown>> = signal<
+    Record<string, unknown>
+  >({
+    id: 'switch-id',
+  });
+  public readonly items: WritableSignal<Array<{ id: string; bindings: Record<string, unknown> }>> =
+    signal<Array<{ id: string; bindings: Record<string, unknown> }>>([
+      { id: 'one', bindings: { title: 'first' } },
+      { id: 'two', bindings: { title: 'second' } },
+    ]);
+}
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -189,6 +258,45 @@ describe('Bind', (): void => {
       expect(element.id).toBe('base');
       expect(element.title).toBe('Now Added');
     });
+    it('should not override aria-* attributes managed by native Angular bindings', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindAriaHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindAriaHostComponent> =
+        TestBed.createComponent(BindAriaHostComponent);
+
+      fixture.componentInstance.bindings.set({ title: 'bind-title' });
+      fixture.detectChanges();
+
+      const element: HTMLElement = requireElement(fixture);
+      expect(element.getAttribute('aria-label')).toBe('Accessible label');
+
+      fixture.componentInstance.bindings.set({});
+      fixture.detectChanges();
+      expect(element.getAttribute('aria-label')).toBe('Accessible label');
+    });
+    it('should not clear external host bindings when a key is removed from uiLibBind', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindExternalOverrideHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindExternalOverrideHostComponent> = TestBed.createComponent(
+        BindExternalOverrideHostComponent
+      );
+
+      fixture.componentInstance.bindings.set({ title: 'bind-title' });
+      fixture.detectChanges();
+
+      fixture.componentInstance.externalTitle.set('External override');
+      fixture.detectChanges();
+
+      fixture.componentInstance.bindings.set({});
+      fixture.detectChanges();
+
+      const element: HTMLElement = requireElement(fixture);
+      expect(element.title).toBe('External override');
+    });
   });
   describe('edge cases', (): void => {
     it('should work on non-standard elements without throwing', (): void => {
@@ -207,6 +315,32 @@ describe('Bind', (): void => {
       const fixture: ComponentFixture<SpanHostComponent> =
         TestBed.createComponent(SpanHostComponent);
       expect((): void => fixture.detectChanges()).not.toThrow();
+    });
+    it('should compose correctly inside @if, @for, and @switch blocks', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindStructuralHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindStructuralHostComponent> = TestBed.createComponent(
+        BindStructuralHostComponent
+      );
+
+      fixture.detectChanges();
+
+      const hostElement: HTMLElement = fixture.nativeElement as HTMLElement;
+      const ifTarget: HTMLElement | null = hostElement.querySelector('[data-testid="if-target"]');
+      const switchTarget: HTMLElement | null = hostElement.querySelector(
+        '[data-testid="switch-target"]'
+      );
+      const forTargets: NodeListOf<HTMLElement> = hostElement.querySelectorAll(
+        '[data-testid="for-target"]'
+      );
+
+      expect(ifTarget?.title).toBe('if-title');
+      expect(switchTarget?.id).toBe('switch-id');
+      expect(forTargets.length).toBe(2);
+      expect(forTargets[0]?.title).toBe('first');
+      expect(forTargets[1]?.title).toBe('second');
     });
   });
 });
