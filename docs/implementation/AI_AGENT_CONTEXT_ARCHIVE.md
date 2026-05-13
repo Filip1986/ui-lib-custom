@@ -43,6 +43,28 @@ Next step: Galleria hardening (Tier 5, #46).
 
 ---
 
+Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/reference/components/ALERT.md
+  - projects/ui-lib-custom/src/lib/alert/README.md
+  - projects/ui-lib-custom/src/lib/alert/alert.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.html
+  - projects/ui-lib-custom/src/lib/alert/alert.scss
+  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
+  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
+State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements. Added dedicated alert accessibility regression tests and updated score/docs bookkeeping.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/alert/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=src/lib/alert --no-coverage (41/41 PASS — 28 unit + 13 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Demo screenshot captured at `/tmp/alert-hardening.png`. Playwright MCP browser lock prevented direct playwright-browser usage; installed Playwright Chromium and captured the screenshot via a Node Playwright script.
+Next step: Message hardening (Tier 5, #43).
+
+---
+
 Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
 Changed:
   - projects/ui-lib-custom/src/lib/divider/divider.ts

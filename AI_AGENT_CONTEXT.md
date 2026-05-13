@@ -77,26 +77,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Alert component — accessibility hardening COMPLETE (#42)]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/COMPONENT_SCORES.md
-  - docs/reference/components/ALERT.md
-  - projects/ui-lib-custom/src/lib/alert/README.md
-  - projects/ui-lib-custom/src/lib/alert/alert.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.html
-  - projects/ui-lib-custom/src/lib/alert/alert.scss
-  - projects/ui-lib-custom/src/lib/alert/alert.spec.ts
-  - projects/ui-lib-custom/src/lib/alert/alert.a11y.spec.ts
-State: Alert now uses severity-aware live region roles (`alert` for error/warning, `status` for success/info), sets `aria-live` + `aria-atomic="true"`, exposes i18n-friendly `dismissLabel`, uses a native dismiss button with decorative icons, and includes reduced-motion + focus-visible refinements. Added dedicated alert accessibility regression tests and updated score/docs bookkeeping.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/alert/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=src/lib/alert --no-coverage (41/41 PASS — 28 unit + 13 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Demo screenshot captured at `/tmp/alert-hardening.png`. Playwright MCP browser lock prevented direct playwright-browser usage; installed Playwright Chromium and captured the screenshot via a Node Playwright script.
-Next step: Message hardening (Tier 5, #43).
-
 Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
 Changed:
   - projects/ui-lib-custom/src/lib/divider/divider.ts
@@ -151,3 +131,23 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
 Next step: Continue Tier 6 queue with remaining queued components.
+
+Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
+Changed:
+  - AI_AGENT_CONTEXT.md
+  - docs/COMPONENT_SCORES.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+  - projects/ui-lib-custom/src/lib/virtual-scroller/README.md
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.ts
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.html
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.scss
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.spec.ts
+  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.a11y.spec.ts
+State: VirtualScroller now exposes configurable list/grid semantics with fallback scroll-region labels, item count metadata (`aria-setsize`, `aria-posinset`, `aria-rowcount`, `aria-rowindex`), keyboard scrolling for Arrow/Page/Home/End keys, polite loading/empty/total-count announcements, reduced-motion scroll behavior, and synced external loading state. Added a dedicated 14-test accessibility suite plus updated README and score bookkeeping.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/virtual-scroller/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=virtual-scroller --no-coverage (39/39 PASS — 25 unit + 14 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
+Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).

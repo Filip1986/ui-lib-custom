@@ -1,12 +1,17 @@
 @if (!disabled()) {
+  <div class="uilib-scroller-sr-only" aria-live="polite" aria-atomic="true">
+    {{ liveRegionMessage() }}
+  </div>
   <div
     #scrollerEl
     [attr.id]="id()"
     [attr.tabindex]="tabIndex()"
     class="uilib-scroller-viewport"
-    role="log"
-    aria-live="off"
-    [attr.aria-label]="'Virtual scroller'"
+    [attr.role]="contentRole()"
+    [attr.aria-label]="resolvedAriaLabel()"
+    [attr.aria-rowcount]="ariaRowCount()"
+    [attr.aria-busy]="internalLoading() ? 'true' : null"
+    (keydown)="onViewportKeydown($event)"
   >
     @if (contentTpl()) {
       <!-- User-supplied full content template — receives the loaded items slice and options object. -->
@@ -21,17 +26,26 @@
         class="uilib-scroller-content"
         [style]="contentStyle()"
         [class.uilib-scroller-loading]="internalLoading()"
+        role="presentation"
       >
         @for (item of loadedRows(); track trackItem($index, item)) {
-          @if (itemTpl()) {
-            <ng-container
-              [ngTemplateOutlet]="itemTpl()!"
-              [ngTemplateOutletContext]="{ $implicit: item, options: getItemOptions($index) }"
-            />
-          } @else {
-            <!-- Fallback when no item template is provided. -->
-            <div class="uilib-scroller-item-placeholder"></div>
-          }
+          <div
+            class="uilib-scroller-item"
+            [attr.role]="itemRole()"
+            [attr.aria-setsize]="itemAriaSetSize($index)"
+            [attr.aria-posinset]="itemAriaPosInSet($index)"
+            [attr.aria-rowindex]="itemAriaRowIndex($index)"
+          >
+            @if (itemTpl()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTpl()!"
+                [ngTemplateOutletContext]="{ $implicit: item, options: getItemOptions($index) }"
+              />
+            } @else {
+              <!-- Fallback when no item template is provided. -->
+              <div class="uilib-scroller-item-placeholder"></div>
+            }
+          </div>
         }
       </div>
     }
@@ -41,6 +55,7 @@
       <div
         class="uilib-scroller-spacer"
         [style]="spacerStyle()"
+        role="presentation"
         aria-hidden="true"
       ></div>
     }

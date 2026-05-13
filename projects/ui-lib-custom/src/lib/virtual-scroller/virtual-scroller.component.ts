@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   contentChild,
+  effect,
   inject,
   input,
   NgZone,
@@ -16,6 +17,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { isPlatformBrowser, NgTemplateOutlet } from '@angular/common';
+import { KEYBOARD_KEYS } from 'ui-lib-custom/core';
 import type {
   AfterViewChecked,
   AfterViewInit,
@@ -178,6 +180,12 @@ export class VirtualScrollerComponent
   /** Tab index on the viewport element. */
   public readonly tabIndex: InputSignal<number> = input<number>(0);
 
+  /** Accessible label for the scrollable region. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('');
+
+  /** Structural role used by assistive technology for the rendered content. */
+  public readonly contentRole: InputSignal<'list' | 'grid'> = input<'list' | 'grid'>('list');
+
   /**
    * Total number of records available on the server.
    * Used in lazy-loading mode to pre-size the virtual spacer so the
@@ -319,6 +327,48 @@ export class VirtualScrollerComponent
     return parts.join(' ');
   });
 
+  /** @internal Non-empty label for the scrollable region. */
+  protected readonly resolvedAriaLabel: Signal<string> = computed((): string => {
+    const ariaLabel: string = this.ariaLabel().trim();
+    if (ariaLabel.length > 0) {
+      return ariaLabel;
+    }
+    return this.contentRole() === 'grid' ? 'Scrollable grid' : 'Scrollable list';
+  });
+
+  /** @internal Total number of logical items or rows announced to assistive technology. */
+  protected readonly totalItemCount: Signal<number> = computed((): number => {
+    const totalRecords: number | undefined = this.totalRecords();
+    if (totalRecords !== undefined) {
+      return Math.max(0, totalRecords);
+    }
+    return this.items()?.length ?? 0;
+  });
+
+  /** @internal ARIA row count exposed when the component is used as a grid. */
+  protected readonly ariaRowCount: Signal<string | null> = computed((): string | null =>
+    this.contentRole() === 'grid' ? this.totalItemCount().toString() : null
+  );
+
+  /** @internal ARIA role applied to each rendered item wrapper. */
+  protected readonly itemRole: Signal<'listitem' | 'row'> = computed((): 'listitem' | 'row' =>
+    this.contentRole() === 'grid' ? 'row' : 'listitem'
+  );
+
+  /** @internal Polite live region text for loading, empty, and total-count states. */
+  protected readonly liveRegionMessage: Signal<string> = computed((): string => {
+    const totalItemCount: number = this.totalItemCount();
+    if (this.internalLoading()) {
+      return totalItemCount > 0
+        ? `Loading more items. ${this.formatTotalItemsMessage(totalItemCount)}`
+        : 'Loading items…';
+    }
+    if (totalItemCount === 0) {
+      return 'No items to display.';
+    }
+    return this.formatTotalItemsMessage(totalItemCount);
+  });
+
   /** @internal Items slice currently rendered in the DOM. */
   protected readonly loadedItems: Signal<unknown[]> = computed((): unknown[] => {
     // rangeVersion dependency forces recomputation when first/last change.
@@ -376,6 +426,15 @@ export class VirtualScrollerComponent
   // ---------------------------------------------------------------------------
   // Lifecycle
   // ---------------------------------------------------------------------------
+
+  constructor() {
+    effect((): void => {
+      const externalLoading: boolean | undefined = this.loading();
+      if (externalLoading !== undefined) {
+        this.internalLoading.set(externalLoading);
+      }
+    });
+  }
 
   public ngOnInit(): void {
     this.setInitialState();
@@ -915,6 +974,69 @@ export class VirtualScrollerComponent
     }
   }
 
+  /** @internal Keyboard scrolling support for keyboard-only users. */
+  protected onViewportKeydown(event: KeyboardEvent): void {
+    const element: HTMLElement | undefined = this.scrollerElementRef()?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    switch (event.key) {
+      case KEYBOARD_KEYS.ArrowDown:
+        if (this.isHorizontal()) {
+          return;
+        }
+        event.preventDefault();
+        this.scrollViewportBy(this.resolveVerticalScrollStep(), 0);
+        return;
+      case KEYBOARD_KEYS.ArrowUp:
+        if (this.isHorizontal()) {
+          return;
+        }
+        event.preventDefault();
+        this.scrollViewportBy(-this.resolveVerticalScrollStep(), 0);
+        return;
+      case KEYBOARD_KEYS.ArrowRight:
+        if (!this.isHorizontal() && !this.isBoth()) {
+          return;
+        }
+        event.preventDefault();
+        this.scrollViewportBy(0, this.resolveHorizontalScrollStep());
+        return;
+      case KEYBOARD_KEYS.ArrowLeft:
+        if (!this.isHorizontal() && !this.isBoth()) {
+          return;
+        }
+        event.preventDefault();
+        this.scrollViewportBy(0, -this.resolveHorizontalScrollStep());
+        return;
+      case 'PageDown':
+        event.preventDefault();
+        this.scrollViewportBy(
+          this.isHorizontal() ? 0 : Math.max(1, element.clientHeight),
+          this.isHorizontal() ? Math.max(1, element.clientWidth) : 0
+        );
+        return;
+      case 'PageUp':
+        event.preventDefault();
+        this.scrollViewportBy(
+          this.isHorizontal() ? 0 : -Math.max(1, element.clientHeight),
+          this.isHorizontal() ? -Math.max(1, element.clientWidth) : 0
+        );
+        return;
+      case KEYBOARD_KEYS.Home:
+        event.preventDefault();
+        this.scrollViewportToEdge('start');
+        return;
+      case KEYBOARD_KEYS.End:
+        event.preventDefault();
+        this.scrollViewportToEdge('end');
+        return;
+      default:
+        return;
+    }
+  }
+
   // ---------------------------------------------------------------------------
   // Scroll math helpers (extracted to avoid typedef issues with inline functions)
   // ---------------------------------------------------------------------------
@@ -1075,7 +1197,22 @@ export class VirtualScrollerComponent
 
   /** Scroll the viewport to an arbitrary position. */
   public scrollTo(options: ScrollToOptions): void {
-    this.scrollerElementRef()?.nativeElement.scrollTo(options);
+    const element: HTMLElement | undefined = this.scrollerElementRef()?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    if (typeof element.scrollTo === 'function') {
+      element.scrollTo(options);
+      return;
+    }
+
+    if (typeof options.top === 'number') {
+      element.scrollTop = options.top;
+    }
+    if (typeof options.left === 'number') {
+      element.scrollLeft = options.left;
+    }
   }
 
   /** Scroll so that the item at `index` becomes visible. */
@@ -1264,6 +1401,31 @@ export class VirtualScrollerComponent
     };
   }
 
+  /** @internal `aria-setsize` value for rendered list items. */
+  protected itemAriaSetSize(localIndex: number): string | null {
+    if (this.contentRole() === 'grid') {
+      return null;
+    }
+    void localIndex;
+    return this.totalItemCount().toString();
+  }
+
+  /** @internal `aria-posinset` value for rendered list items. */
+  protected itemAriaPosInSet(localIndex: number): string | null {
+    if (this.contentRole() === 'grid') {
+      return null;
+    }
+    return (this.getItemOptions(localIndex).index + 1).toString();
+  }
+
+  /** @internal `aria-rowindex` value for rendered grid rows. */
+  protected itemAriaRowIndex(localIndex: number): string | null {
+    if (this.contentRole() !== 'grid') {
+      return null;
+    }
+    return (this.getItemOptions(localIndex).index + 1).toString();
+  }
+
   /** @internal Returns loader metadata for a locally-rendered loader index. */
   protected getLoaderOptions(
     loaderIndex: number,
@@ -1306,5 +1468,55 @@ export class VirtualScrollerComponent
         extra?: Record<string, unknown>
       ): VirtualScrollerLoaderOptions => this.getLoaderOptions(loaderIndex, extra),
     };
+  }
+
+  private resolveVerticalScrollStep(): number {
+    const itemSize: number | [number, number] = this.itemSize();
+    return Math.max(1, Array.isArray(itemSize) ? itemSize[0] : itemSize);
+  }
+
+  private resolveHorizontalScrollStep(): number {
+    const itemSize: number | [number, number] = this.itemSize();
+    return Math.max(1, Array.isArray(itemSize) ? itemSize[1] : itemSize);
+  }
+
+  private scrollViewportBy(topDelta: number, leftDelta: number): void {
+    const element: HTMLElement | undefined = this.scrollerElementRef()?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    this.scrollTo({
+      top: Math.max(0, element.scrollTop + topDelta),
+      left: Math.max(0, element.scrollLeft + leftDelta),
+    });
+  }
+
+  private scrollViewportToEdge(edge: 'start' | 'end'): void {
+    const element: HTMLElement | undefined = this.scrollerElementRef()?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    const top: number =
+      edge === 'start' ? 0 : Math.max(0, element.scrollHeight - element.clientHeight);
+    const left: number =
+      edge === 'start' ? 0 : Math.max(0, element.scrollWidth - element.clientWidth);
+
+    if (this.isHorizontal()) {
+      this.scrollTo({ left });
+      return;
+    }
+
+    if (this.isBoth()) {
+      this.scrollTo({ top, left });
+      return;
+    }
+
+    this.scrollTo({ top });
+  }
+
+  private formatTotalItemsMessage(totalItemCount: number): string {
+    return `${totalItemCount.toString()} ${totalItemCount === 1 ? 'item' : 'items'} available.`;
   }
 }

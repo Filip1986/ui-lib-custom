@@ -28,6 +28,11 @@ function queryAll<T extends Element>(fixture: ComponentFixture<unknown>, selecto
   return Array.from((fixture.nativeElement as HTMLElement).querySelectorAll<T>(selector));
 }
 
+function getComponent(fixture: ComponentFixture<unknown>): VirtualScrollerComponent {
+  return fixture.debugElement.query(By.directive(VirtualScrollerComponent))
+    .componentInstance as VirtualScrollerComponent;
+}
+
 // ---------------------------------------------------------------------------
 // Default test host
 // ---------------------------------------------------------------------------
@@ -46,6 +51,10 @@ function queryAll<T extends Element>(fixture: ComponentFixture<unknown>, selecto
       [loading]="loading()"
       [showSpacer]="showSpacer()"
       [lazy]="lazy()"
+      [tabIndex]="tabIndex()"
+      [ariaLabel]="ariaLabel()"
+      [contentRole]="contentRole()"
+      [totalRecords]="totalRecords()"
       (lazyLoad)="onLazyLoad($event)"
       (scroll)="onScroll($event)"
     />
@@ -64,6 +73,12 @@ class TestHostComponent {
   );
   public readonly showSpacer: WritableSignal<boolean> = signal<boolean>(true);
   public readonly lazy: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly tabIndex: WritableSignal<number> = signal<number>(0);
+  public readonly ariaLabel: WritableSignal<string> = signal<string>('');
+  public readonly contentRole: WritableSignal<'list' | 'grid'> = signal<'list' | 'grid'>('list');
+  public readonly totalRecords: WritableSignal<number | undefined> = signal<number | undefined>(
+    undefined
+  );
 
   public lazyLoadEvents: VirtualScrollerLazyLoadEvent[] = [];
   public scrollEvents: VirtualScrollerScrollEvent[] = [];
@@ -118,10 +133,7 @@ describe('VirtualScrollerComponent', (): void => {
     });
 
     it('should create the component', (): void => {
-      const component: VirtualScrollerComponent = fixture.debugElement.query(
-        By.directive(VirtualScrollerComponent)
-      ).componentInstance as VirtualScrollerComponent;
-      expect(component).toBeTruthy();
+      expect(getComponent(fixture)).toBeTruthy();
     });
 
     it('should apply uilib-scroller class to host', (): void => {
@@ -251,6 +263,18 @@ describe('VirtualScrollerComponent', (): void => {
       const loader: HTMLElement | null = query(fixture, '.uilib-scroller-loader');
       expect(loader).toBeNull();
     });
+
+    it('should show loader overlay and aria-busy when loading is true', async (): Promise<void> => {
+      host.showLoader.set(true);
+      host.loading.set(true);
+      fixture.detectChanges();
+      await Promise.resolve();
+      fixture.detectChanges();
+      const loader: HTMLElement | null = query(fixture, '.uilib-scroller-loader');
+      const viewport: HTMLElement | null = query(fixture, '.uilib-scroller-viewport');
+      expect(loader).toBeTruthy();
+      expect(viewport?.getAttribute('aria-busy')).toBe('true');
+    });
   });
 
   describe('host classes', (): void => {
@@ -370,6 +394,49 @@ describe('VirtualScrollerComponent', (): void => {
 
   describe('accessibility', (): void => {
     let fixture: ComponentFixture<TestHostComponent>;
+    let host: TestHostComponent;
+
+    beforeEach(async (): Promise<void> => {
+      await TestBed.configureTestingModule({
+        imports: [TestHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      }).compileComponents();
+
+      fixture = TestBed.createComponent(TestHostComponent);
+      host = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+
+    it('should have role="list" and a fallback aria-label on the viewport', (): void => {
+      const viewport: HTMLElement | null = query(fixture, '.uilib-scroller-viewport');
+      expect(viewport?.getAttribute('role')).toBe('list');
+      expect(viewport?.getAttribute('aria-label')).toBe('Scrollable list');
+    });
+
+    it('should expose a tabindex on the viewport', (): void => {
+      const viewport: HTMLElement | null = query(fixture, '.uilib-scroller-viewport');
+      expect(viewport?.getAttribute('tabindex')).toBe('0');
+    });
+
+    it('should expose aria-rowcount when configured as a grid', (): void => {
+      host.contentRole.set('grid');
+      host.totalRecords.set(42);
+      host.ariaLabel.set('Results grid');
+      fixture.detectChanges();
+      const viewport: HTMLElement | null = query(fixture, '.uilib-scroller-viewport');
+      expect(viewport?.getAttribute('role')).toBe('grid');
+      expect(viewport?.getAttribute('aria-label')).toBe('Results grid');
+      expect(viewport?.getAttribute('aria-rowcount')).toBe('42');
+    });
+
+    it('should mark the spacer as aria-hidden', (): void => {
+      const spacer: HTMLElement | null = query(fixture, '.uilib-scroller-spacer');
+      expect(spacer?.getAttribute('aria-hidden')).toBe('true');
+    });
+  });
+
+  describe('keyboard scrolling', (): void => {
+    let fixture: ComponentFixture<TestHostComponent>;
 
     beforeEach(async (): Promise<void> => {
       await TestBed.configureTestingModule({
@@ -381,20 +448,50 @@ describe('VirtualScrollerComponent', (): void => {
       fixture.detectChanges();
     });
 
-    it('should have role="log" and aria-live="off" on the viewport', (): void => {
-      const viewport: HTMLElement | null = query(fixture, '.uilib-scroller-viewport');
-      expect(viewport?.getAttribute('role')).toBe('log');
-      expect(viewport?.getAttribute('aria-live')).toBe('off');
+    it('should scroll by one item height when ArrowDown is pressed', (): void => {
+      const viewport: HTMLElement = query(fixture, '.uilib-scroller-viewport') as HTMLElement;
+      const component: VirtualScrollerComponent = getComponent(fixture);
+      Object.defineProperty(viewport, 'scrollTop', {
+        configurable: true,
+        writable: true,
+        value: 25,
+      });
+      Object.defineProperty(viewport, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 0,
+      });
+
+      const scrollToSpy: jest.SpyInstance = jest
+        .spyOn(component, 'scrollTo')
+        .mockImplementation((): void => undefined);
+
+      viewport.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+      expect(scrollToSpy).toHaveBeenCalledWith({ top: 75, left: 0 });
     });
 
-    it('should expose a tabindex on the viewport', (): void => {
-      const viewport: HTMLElement | null = query(fixture, '.uilib-scroller-viewport');
-      expect(viewport?.getAttribute('tabindex')).toBe('0');
-    });
+    it('should scroll to the start and end with Home and End keys', (): void => {
+      const viewport: HTMLElement = query(fixture, '.uilib-scroller-viewport') as HTMLElement;
+      const component: VirtualScrollerComponent = getComponent(fixture);
+      Object.defineProperty(viewport, 'clientHeight', {
+        configurable: true,
+        value: 200,
+      });
+      Object.defineProperty(viewport, 'scrollHeight', {
+        configurable: true,
+        value: 1200,
+      });
 
-    it('should mark the spacer as aria-hidden', (): void => {
-      const spacer: HTMLElement | null = query(fixture, '.uilib-scroller-spacer');
-      expect(spacer?.getAttribute('aria-hidden')).toBe('true');
+      const scrollToSpy: jest.SpyInstance = jest
+        .spyOn(component, 'scrollTo')
+        .mockImplementation((): void => undefined);
+
+      viewport.dispatchEvent(new KeyboardEvent('keydown', { key: 'End' }));
+      viewport.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home' }));
+
+      expect(scrollToSpy).toHaveBeenNthCalledWith(1, { top: 1000 });
+      expect(scrollToSpy).toHaveBeenNthCalledWith(2, { top: 0 });
     });
   });
 });
