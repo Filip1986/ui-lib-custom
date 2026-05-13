@@ -63,7 +63,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `Image` -> ✅ complete + hardened (6-phase, score 8.7/10, 56 tests — 30 unit + 26 a11y)
 
 ---
 
@@ -78,24 +77,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-13 [Image component — 6-phase hardening COMPLETE (#66)]
+Date: 2026-05-13 [IconField component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/image/image.ts
-  - projects/ui-lib-custom/src/lib/image/image.html
-  - projects/ui-lib-custom/src/lib/image/image.scss
-  - projects/ui-lib-custom/src/lib/image/image.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/image/README.md
+  - projects/ui-lib-custom/src/lib/icon-field/input-icon.ts
+  - projects/ui-lib-custom/src/lib/icon-field/icon-field.scss
+  - projects/ui-lib-custom/src/lib/icon-field/icon-field.spec.ts
+  - projects/ui-lib-custom/src/lib/icon-field/icon-field.a11y.spec.ts (NEW, 12 tests)
+  - projects/ui-lib-custom/src/lib/icon-field/README.md
+  - docs/reference/components/ICONFIELD.md
+  - docs/reference/components/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Image now uses a stable `nextImageId` instance counter, wires preview IDs through the trigger/dialog relationship, adds a polite live region for zoom/rotation announcements (including distinct full-turn messaging), supports direct preview keyboard shortcuts (`+`, `-`, arrow keys, and code-based fallbacks), and restores focus from the actual trigger element more reliably. README and scoring were updated to reflect the finished hardening pass.
+State: IconField now keeps `uilib-input-icon` decorative by default with `aria-hidden="true"` and `tabindex="-1"`, supports informative icon opt-in via `[decorative]="false"` + `ariaLabel`, preserves pointer-event passthrough, and extends CSS-only padding support to native `<input>`, `<ui-lib-input>`, `<uilib-password>`, `<uilib-input-mask>`, and `<uilib-input-number>`. Added dedicated accessibility regression coverage plus refreshed README/reference docs and score bookkeeping.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=image --no-coverage (116/116 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-field/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/icon-field/" --no-coverage (27/27 PASS — 15 unit + 12 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Demo screenshot captured at `/tmp/image-hardening.png`.
-Next step: Continue the remaining Tier 6 hardening queue or move back to the next prioritized prompt.
+Terminal notes: GitHub MCP CI inspection found the current branch run in `action_required` state with no jobs/logs yet, so local validation was used. Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/icon-field-hardening.png`.
+Next step: Continue the remaining new layout/form hardening prompts after IconField.
 
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
