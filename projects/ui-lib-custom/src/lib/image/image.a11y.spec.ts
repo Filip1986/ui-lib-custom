@@ -65,6 +65,10 @@ function getMask(fixture: ComponentFixture<unknown>): HTMLElement | null {
   return getHostElement(fixture).querySelector<HTMLElement>('.uilib-image__mask');
 }
 
+function getPreviewLiveRegion(fixture: ComponentFixture<unknown>): HTMLElement | null {
+  return getHostElement(fixture).querySelector<HTMLElement>('.uilib-image__sr-live');
+}
+
 function getCloseBtn(fixture: ComponentFixture<unknown>): HTMLButtonElement | null {
   return getHostElement(fixture).querySelector<HTMLButtonElement>(
     '.uilib-image__toolbar-btn--close'
@@ -150,6 +154,17 @@ describe('Image Accessibility', (): void => {
     const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
     await openPreview(fixture);
     expect(getMask(fixture)?.getAttribute('aria-label')).toBeTruthy();
+  });
+
+  it('preview overlay describes the live status region', async (): Promise<void> => {
+    const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
+    await openPreview(fixture);
+
+    const mask: HTMLElement | null = getMask(fixture);
+    const liveRegion: HTMLElement | null = getPreviewLiveRegion(fixture);
+    expect(mask?.getAttribute('aria-describedby')).toBe(liveRegion?.getAttribute('id'));
+    expect(liveRegion?.getAttribute('aria-live')).toBe('polite');
+    expect(liveRegion?.getAttribute('aria-atomic')).toBe('true');
   });
 
   it('toolbar has role="toolbar" and an accessible label', async (): Promise<void> => {
@@ -295,6 +310,69 @@ describe('Image Accessibility', (): void => {
     await fixture.whenStable();
 
     expect(zoomOutBtn.getAttribute('aria-disabled')).toBe('true');
+  });
+
+  it('announces zoom changes when using keyboard shortcuts', async (): Promise<void> => {
+    const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
+    await openPreview(fixture);
+
+    getMask(fixture)!.dispatchEvent(
+      new KeyboardEvent('keydown', { key: '+', bubbles: true, cancelable: true })
+    );
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const liveRegion: HTMLElement = getPreviewLiveRegion(fixture)!;
+    expect(liveRegion.textContent.trim()).toBe('Zoom 110%. Rotation 0 degrees.');
+  });
+
+  it('announces rotation changes when using arrow key shortcuts', async (): Promise<void> => {
+    const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
+    await openPreview(fixture);
+
+    getMask(fixture)!.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+    );
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const liveRegion: HTMLElement = getPreviewLiveRegion(fixture)!;
+    expect(liveRegion.textContent.trim()).toBe('Zoom 100%. Rotation 90 degrees.');
+  });
+
+  it('announces completed full turns distinctly from the initial 0 degree state', async (): Promise<void> => {
+    const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
+    await openPreview(fixture);
+
+    for (let index: number = 0; index < 4; index++) {
+      getMask(fixture)!.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+      );
+    }
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const liveRegion: HTMLElement = getPreviewLiveRegion(fixture)!;
+    expect(liveRegion.textContent.trim()).toBe('Zoom 100%. Rotation 0 degrees after 1 full turn.');
+  });
+
+  it('supports zoom shortcut fallback via keyboard code values', async (): Promise<void> => {
+    const fixture: ComponentFixture<ImageA11yHostComponent> = await createFixture();
+    await openPreview(fixture);
+
+    getMask(fixture)!.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        key: 'Unidentified',
+        code: 'Equal',
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const liveRegion: HTMLElement = getPreviewLiveRegion(fixture)!;
+    expect(liveRegion.textContent.trim()).toBe('Zoom 110%. Rotation 0 degrees.');
   });
 
   // ─── axe-core automated checks ────────────────────────────────────────────────

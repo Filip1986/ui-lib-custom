@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `Image` -> ✅ complete + hardened (6-phase, score 8.7/10, 56 tests — 30 unit + 26 a11y)
 
 ---
 
@@ -77,32 +78,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-13 [Icon component — 6-phase hardening COMPLETE]
+Date: 2026-05-13 [Image component — 6-phase hardening COMPLETE (#66)]
 Changed:
-  - projects/ui-lib-custom/src/lib/icon/icon.ts
-  - projects/ui-lib-custom/src/lib/icon/icon.types.ts
-  - projects/ui-lib-custom/src/lib/icon/icon.scss
-  - projects/ui-lib-custom/src/lib/icon/icon.spec.ts
-  - projects/ui-lib-custom/src/lib/icon/icon.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/icon/README.md
-  - projects/ui-lib-custom/src/lib/theming/presets/light.ts
-  - projects/ui-lib-custom/src/lib/theming/presets/dark.ts
-  - projects/ui-lib-custom/src/lib/theming/presets/brand-example.ts
-  - projects/demo/src/app/shared/theme-editor/panels/icon-editor-panel.ts
-  - projects/demo/src/app/pages/icons/icons-demo.component.html
-  - docs/reference/components/ICON.md
+  - projects/ui-lib-custom/src/lib/image/image.ts
+  - projects/ui-lib-custom/src/lib/image/image.html
+  - projects/ui-lib-custom/src/lib/image/image.scss
+  - projects/ui-lib-custom/src/lib/image/image.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/image/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Icon now defaults to decorative semantics (`aria-hidden="true"`), only becomes informative when `ariaLabel` is provided (`role="img"` + `aria-label`), never receives keyboard focus (`tabindex="-1"`), trims blank labels back to decorative mode, and ships a dedicated 10-test accessibility suite. Size tokens now resolve to `em` values across the icon defaults, theme presets, and demo theme editor so icons scale with surrounding text, and the icon docs/demo guidance now direct clickable actions to button components instead of relying on icon names.
+State: Image now uses a stable `nextImageId` instance counter, wires preview IDs through the trigger/dialog relationship, adds a polite live region for zoom/rotation announcements (including distinct full-turn messaging), supports direct preview keyboard shortcuts (`+`, `-`, arrow keys, and code-based fallbacks), and restores focus from the actual trigger element more reliably. README and scoring were updated to reflect the finished hardening pass.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon/ projects/ui-lib-custom/src/lib/theming/presets/ projects/demo/src/app/shared/theme-editor/panels/icon-editor-panel.ts --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/icon/" --no-coverage (22/22 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=image --no-coverage (116/116 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
-  node_modules/.bin/ng build demo (PASS; pre-existing bundle/SCSS budget warnings only)
-Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so the built demo was served locally with `python3 -m http.server` and a screenshot was captured via a Node Playwright script at `/tmp/icon-hardening.png` after installing Chromium with `npx playwright install chromium`.
-Next step: Continue the remaining utility hardening queue, with IconButton as the closest follow-on to the icon accessibility changes.
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Demo screenshot captured at `/tmp/image-hardening.png`.
+Next step: Continue the remaining Tier 6 hardening queue or move back to the next prioritized prompt.
 
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
