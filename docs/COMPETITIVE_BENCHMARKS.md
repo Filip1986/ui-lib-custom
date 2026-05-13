@@ -65,6 +65,23 @@ checkbox for every component automatically — you do not need to re-document th
 
 ---
 
+## How This File Relates to COMPETITIVE_STRATEGY.md
+
+> **This file and [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md) are sister documents with different purposes.**
+>
+> | This file | COMPETITIVE_STRATEGY.md |
+> |---|---|
+> | Internal engineering tool | External positioning strategy |
+> | Tracks parity & 🚀 differentiators per component | Describes how to publish benchmark claims publicly |
+> | Benchmarks against **any UI library** (React, Svelte, Angular) — the best reference, regardless of framework | Benchmarks against **Angular ecosystem only** (Angular Material, PrimeNG, Ng-Zorro) — libraries users are actually choosing between |
+> | Feeds Category 11 scores in `COMPONENT_SCORES.md` | Feeds the "Built Different" section on the landing page |
+> | Run continuously during hardening | Executed during Phase 4 (Public Beta) |
+>
+> The evidence built in this file **becomes the content** of the competitive strategy at launch.
+> See [`ROADMAP.md`](ROADMAP.md) Phase 4 for when this data goes public.
+
+---
+
 ## Per-Component Comparison Tables
 
 Add a new entry for each component when it enters the hardening workflow.

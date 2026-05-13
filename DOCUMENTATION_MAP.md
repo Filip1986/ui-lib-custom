@@ -9,9 +9,13 @@ Quick reference guide to navigate the UI Components Library documentation.
 ```
 docs/
 ├── README.md                          # Main documentation index
-├── research/                          # Research notes and parity investigations
-│   ├── README.md                     # Research index
-│   └── ...
+├── VISION.md                          # Strategic north star — read first
+├── ROADMAP.md                         # Phase-by-phase path to v1.0 GA
+├── LAUNCH_STRATEGY.md                 # Sequenced build-in-public → announce path
+├── COMPETITIVE_STRATEGY.md            # When/how to publish benchmark claims publicly
+├── COMPETITIVE_BENCHMARKS.md          # Per-component parity tables (Category 11 evidence)
+├── SCORING_CRITERIA.md                # 149-checkpoint quality gate (11 categories)
+├── COMPONENT_SCORES.md                # Live scoreboard — all 70+ components
 ├── getting-started/                   # Quick start guides
 │   ├── QUICK_START.md                # 5-minute getting started
 │   ├── LAYOUT_QUICK_START.md         # Layout primitives guide
@@ -24,23 +28,22 @@ docs/
 │   └── ...
 ├── reference/                         # Technical reference
 │   ├── README.md                     # Reference index
-│   ├── components/                   # Component docs
-│   │   ├── README.md                 # Components index
-│   │   ├── BADGE.md                  # Badge API reference
-│   │   └── BADGE_IMPLEMENTATION.md   # Badge implementation
+│   ├── components/                   # Component docs (one file per component)
 │   ├── systems/                      # System docs
-│   │   ├── README.md                 # Systems index
 │   │   ├── DESIGN_TOKENS.md          # Design token reference
 │   │   ├── ACCESSIBILITY.md          # Accessibility guide
 │   │   ├── PERFORMANCE.md            # Performance guide
 │   │   ├── LAYOUT_SYSTEM.md          # Layout API reference
-│   │   ├── THEMING.md                # Theming guide
-│   │   └── LAYOUT_IMPLEMENTATION.md  # Layout implementation
+│   │   └── THEMING.md                # Theming guide
 │   └── project/                      # Project docs
-│       ├── README.md                 # Project index
 │       ├── PROJECT_SUMMARY.md        # Project overview
 │       ├── UPDATE_LOG.md             # Version history
 │       └── VERIFICATION_CHECKLIST.md # QA checklist
+├── prompts/                           # AI evolution prompts
+│   ├── COMPONENT_EVOLUTION_PROMPTS.md # Master prompt + 6-phase workflow
+│   ├── HARDENING_PROMPT_INDEX.md      # Index of per-component hardening prompts
+│   ├── completed/                    # Prompts for hardened components
+│   └── needs-hardening/              # Prompts for components still in queue
 └── architecture/                      # Architecture docs
     └── ARCHITECTURE.md               # System architecture
 ```
@@ -90,6 +93,18 @@ docs/
 2. [docs/reference/systems/DESIGN_TOKENS.md](docs/reference/systems/DESIGN_TOKENS.md) - Use design tokens
 3. [docs/reference/components/BADGE_IMPLEMENTATION.md](docs/reference/components/BADGE_IMPLEMENTATION.md) - See example implementation
 4. [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) - Follow architecture
+
+### 📊 I want to check or record a component quality score
+
+1. [docs/SCORING_CRITERIA.md](docs/SCORING_CRITERIA.md) — The 149-checkpoint criteria that define what each score means
+2. [docs/COMPONENT_SCORES.md](docs/COMPONENT_SCORES.md) — The live scoreboard for all components
+3. [docs/COMPETITIVE_BENCHMARKS.md](docs/COMPETITIVE_BENCHMARKS.md) — Per-component parity tables (Category 11 evidence)
+
+### 🚀 I want to understand the launch plan
+
+1. [docs/ROADMAP.md](docs/ROADMAP.md) — Phases 0–5, current progress, exit criteria
+2. [docs/LAUNCH_STRATEGY.md](docs/LAUNCH_STRATEGY.md) — The build-in-public → seed → announce sequence
+3. [docs/COMPETITIVE_STRATEGY.md](docs/COMPETITIVE_STRATEGY.md) — The public benchmark and "Built Different" content strategy
 
 ### 📊 I want project information
 
@@ -244,6 +259,9 @@ docs/
 
 ## 📊 Documentation Status
 
+> For the authoritative, up-to-date component documentation status see [`docs/DOC_STATUS.md`](docs/DOC_STATUS.md).
+> For component quality scores (hardening progress) see [`docs/COMPONENT_SCORES.md`](docs/COMPONENT_SCORES.md).
+
 | Component | API Docs | Implementation | Status |
 | --- | --- | --- | --- |
 | Badge | ✅ | ✅ | Complete |
@@ -252,12 +270,13 @@ docs/
 | Accordion | ✅ | ✅ | Complete |
 | Tabs | ✅ | ✅ | Complete |
 | Input | ✅ | ✅ | Complete |
+| Select | ✅ | — | API doc exists |
 | SelectButton | ✅ | ✅ | Complete |
 | Checkbox | ✅ | ❌ | API only |
 | Icon | ✅ | ❌ | API only |
 | Icon Button | ✅ | ❌ | API only |
-| Select | ❌ | ❌ | Missing |
-| Layout | ❌ | ❌ | Missing |
+| Layout | ✅ | — | API doc exists |
+| Dialog | ✅ | ✅ | Complete |
 
 ---
 
