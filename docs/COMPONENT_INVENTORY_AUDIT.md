@@ -167,6 +167,133 @@ Components or capabilities that this library ships and that no major reference l
 
 ---
 
+## Full Reference Inventories
+
+> Complete component lists for each audited library, preserved here for reference.
+> Use these when researching a specific component's API, a11y behaviour, or design decisions.
+> Verified against each library's documentation as of **2026-05-13**.
+
+---
+
+### Angular Material (~35 components)
+
+> Docs: https://material.angular.dev/components/categories
+> Philosophy: Opinionated Material Design 3, high quality, limited breadth.
+
+| Category | Components |
+|---|---|
+| **Form Controls** | Autocomplete, Checkbox, Chips (input), Datepicker, Date Range Picker, Form Field, Input, Radio Button, Select, Slide Toggle, Slider, Textarea |
+| **Navigation** | Bottom Nav Bar, Menu, Sidenav / Drawer, Tabs, Toolbar |
+| **Layout** | Card, Divider, Expansion Panel, Grid List, List, Stepper, Tree |
+| **Buttons & Indicators** | Button, Button Toggle, FAB (Floating Action Button), Icon Button, Badge, Progress Bar, Progress Spinner |
+| **Popups & Modals** | Bottom Sheet, Dialog, Snack Bar, Tooltip |
+| **Data Display** | Paginator, Sort, Table |
+| **CDK (Behaviour Primitives)** | Accordion, Drag & Drop, Focus Trap, Layout, Overlay, Portal, Scrolling, Virtual Scroll, A11y (FocusMonitor, LiveAnnouncer, AriaDescriber) |
+
+---
+
+### PrimeNG (~95 components)
+
+> Docs: https://primeng.org/
+> Philosophy: Maximum breadth — if you can think of it, PrimeNG has it.
+
+| Category | Components |
+|---|---|
+| **Form — Basic Inputs** | InputText, Textarea, InputNumber, InputMask, InputGroup, Password, InputOtp, AutoComplete, CascadeSelect, ColorPicker, KeyFilter |
+| **Form — Selection** | Checkbox, Tri-State Checkbox, RadioButton, ToggleSwitch, ToggleButton, SelectButton, MultiSelect, Listbox, Select (Dropdown), TreeSelect |
+| **Form — Date & Time** | DatePicker (Calendar), TimePicker |
+| **Form — Range & Misc** | Slider, Rating, Knob, Editor (Rich Text), Mention |
+| **Buttons** | Button, SplitButton, SpeedDial |
+| **Data — Table & Grid** | DataTable (Table), TreeTable, DataView |
+| **Data — Hierarchical** | Tree, TreeTable, OrderList, PickList, OrganizationChart |
+| **Data — Scroll & Virtual** | VirtualScroller, DeferredContent |
+| **Data — Pagination** | Paginator |
+| **Data — Media** | Carousel, Galleria, Image |
+| **Data — Charts** | Chart (Bar, Line, Pie, Doughnut, Radar, Polar Area) |
+| **Panels** | Panel, Accordion, Fieldset, Card, TabView (Tabs), Splitter, Divider, ScrollPanel, Toolbar |
+| **Overlay** | Dialog, DynamicDialog, Drawer (Sidebar), OverlayPanel (Popover), ConfirmDialog, ConfirmPopup, Tooltip |
+| **Messages & Feedback** | Message, Messages, Toast, Alert |
+| **Navigation** | Menu, Menubar, MegaMenu, PanelMenu, TieredMenu, ContextMenu, Breadcrumb, Steps (Stepper), TabMenu, Dock |
+| **Media & Misc** | Avatar, AvatarGroup, Badge, Tag, Chip, Skeleton, ProgressBar, ProgressSpinner, MeterGroup |
+| **Utility** | BlockUI, FocusTrap, ScrollTop, Ripple, StyleClass, AnimateOnScroll, AutoFocus, Inplace, Terminal, Watermark |
+
+---
+
+### Ng-Zorro — Ant Design for Angular (~75 components)
+
+> Docs: https://ng.ant.design/components/overview/en
+> Philosophy: Enterprise-grade, rich functionality, strong i18n, Ant Design system.
+
+| Category | Components |
+|---|---|
+| **General** | Button, Icon, Typography (Title / Text / Paragraph / Link / Code) |
+| **Layout** | Divider, Flex, Grid (Row / Col), Layout (Header / Sider / Content / Footer), Space, Splitter |
+| **Navigation** | Anchor, Breadcrumb, Dropdown, Menu, Page Header, Pagination, Steps, Tabs |
+| **Data Entry** | Auto Complete, Cascader (CascadeSelect), Checkbox, Color Picker, Date Picker, Date Range Picker, Form, Input, Input Number, Mention, Radio, Rate, Select, Slider, Switch (ToggleSwitch), Time Picker, Transfer, Tree Select, Upload |
+| **Data Display** | Avatar, Badge, Calendar (full view), Card, Carousel, Collapse (Accordion), Comment, Descriptions (Definition List), Empty (Empty State), Image, List, Popover, QR Code, Segmented, Statistic (+ Countdown), Table, Tag, Timeline, Tooltip, Tree, Tree View |
+| **Feedback** | Alert, Drawer, Message (Toast), Modal (Dialog), Notification, Popconfirm (ConfirmPopup), Progress (Bar + Circle), Result (Status Page), Skeleton, Spin (Loading overlay) |
+| **Other** | Affix, Back Top (ScrollTop), Float Button, Watermark |
+
+---
+
+### Ng-Bootstrap (~20 components)
+
+> Docs: https://ng-bootstrap.github.io/#/components
+> Philosophy: Thin Bootstrap 5 wrappers — familiar to Bootstrap users, limited beyond Bootstrap.
+
+| Category | Components |
+|---|---|
+| **Layout & Display** | Accordion, Alert, Badge, Card (via Bootstrap CSS), Collapse |
+| **Navigation** | Breadcrumb, Nav (Tabs / Pills), Pagination |
+| **Forms** | Datepicker, Rating, Timepicker, Typeahead (AutoComplete) |
+| **Overlays** | Dropdown, Modal, Offcanvas (Drawer), Popover, Tooltip |
+| **Feedback** | Progress, Spinner, Toast |
+| **Media** | Carousel |
+| **Utility** | Scrollspy |
+
+---
+
+### shadcn/ui (~71 components)
+
+> Docs: https://ui.shadcn.com/docs/components
+> Philosophy: Copy-paste React components — highest DX bar in any ecosystem.
+> Note: React library. Included as the DX and API design reference.
+
+| Category | Components |
+|---|---|
+| **Layout & Structure** | Aspect Ratio, Card, Resizable (Splitter), Scroll Area, Separator (Divider), Sidebar |
+| **Typography & Display** | Typography (H1–H4 / P / Lead / Muted / Code), Kbd, Badge, Avatar |
+| **Form — Inputs** | Input, Textarea, Checkbox, Radio Group, Select, Switch, Slider, Label, Input OTP |
+| **Form — Pickers** | Calendar (full view), Date Picker, Combobox (AutoComplete) |
+| **Buttons & Actions** | Button, Toggle, Toggle Group |
+| **Navigation** | Breadcrumb, Menubar, Navigation Menu, Pagination, Tabs |
+| **Overlays & Popups** | Alert Dialog, Dialog, Drawer, Dropdown Menu, Hover Card, Popover, Sheet (Drawer), Tooltip |
+| **Data Display** | Data Table, Table |
+| **Feedback & Status** | Alert, Progress, Skeleton, Sonner (Toast), Spinner, Toast |
+| **Command & Search** | Command (Command Palette) |
+| **Collapsible & Disclosure** | Accordion, Collapsible |
+| **Context & Menus** | Context Menu |
+| **Charts** | Chart (Recharts wrapper) |
+
+---
+
+### Radix UI Primitives (~30 primitives)
+
+> Docs: https://www.radix-ui.com/primitives/docs/overview/introduction
+> Philosophy: Unstyled, fully accessible, WAI-ARIA APG–compliant headless primitives.
+> Note: React library. Included as the a11y correctness reference.
+
+| Category | Primitives |
+|---|---|
+| **Disclosure** | Accordion, Collapsible |
+| **Overlay** | Alert Dialog, Dialog, Hover Card, Popover, Tooltip |
+| **Menu & Navigation** | Context Menu, Dropdown Menu, Menubar, Navigation Menu, Toolbar |
+| **Form Controls** | Checkbox, Form, Label, OTP Field (One-Time Password), Radio Group, Select, Slider, Switch, Toggle, Toggle Group |
+| **Data Display** | Avatar, Progress, Scroll Area, Separator, Tabs |
+| **Utility** | Aspect Ratio |
+
+---
+
 ## How to Use This Document
 
 **When adding a component from the Build Queue:**
