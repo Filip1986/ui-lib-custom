@@ -150,7 +150,7 @@ describe('AnimateOnScroll (a11y)', (): void => {
 
     intersectionCallback(
       [entry as IntersectionObserverEntry],
-      mockObserver as IntersectionObserver
+      mockObserver as unknown as IntersectionObserver
     );
     expect(requestAnimationFrameMock).toHaveBeenCalled();
     expect(host.enterCount).toBe(1);
@@ -195,7 +195,7 @@ describe('AnimateOnScroll (a11y)', (): void => {
 
   it('forces visible static state when IntersectionObserver is unavailable', async (): Promise<void> => {
     (
-      globalThis as typeof globalThis & { IntersectionObserver?: typeof IntersectionObserver }
+      globalThis as unknown as { IntersectionObserver: typeof IntersectionObserver | undefined }
     ).IntersectionObserver = undefined;
     const fixture: ComponentFixture<AnimateOnScrollA11yHostComponent> = await createFixture();
     const element: HTMLElement = getAnimatedElement(fixture);

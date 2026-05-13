@@ -320,9 +320,7 @@ describe('AnimateOnScroll', (): void => {
 
     it('should force visible static state when IntersectionObserver is unavailable', (): void => {
       (
-        globalThis as typeof globalThis & {
-          IntersectionObserver?: typeof IntersectionObserver;
-        }
+        globalThis as unknown as { IntersectionObserver: typeof IntersectionObserver | undefined }
       ).IntersectionObserver = undefined;
 
       const { element } = setupHost();
