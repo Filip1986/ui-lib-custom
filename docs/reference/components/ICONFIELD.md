@@ -35,6 +35,8 @@ import { IconFieldComponent, InputIconComponent } from 'ui-lib-custom/icon-field
 | Input | Type | Default | Description |
 | --- | --- | --- | --- |
 | `styleClass` | `string \| null` | `null` | CSS class list for class-based icon rendering, for example `pi pi-search`. |
+| `decorative` | `boolean` | `true` | Keeps the icon decorative by default with `aria-hidden="true"` and `tabindex="-1"`. |
+| `ariaLabel` | `string \| null` | `null` | Optional accessible name for the rare case where the icon itself must convey unique meaning. |
 
 ### Outputs
 
@@ -124,9 +126,12 @@ Neither component emits outputs; both are composition/layout wrappers.
 
 ## Accessibility Notes
 
-- Icons in `uilib-input-icon` are decorative by default; no extra ARIA role is required.
+- Icons in `uilib-input-icon` are decorative by default and receive `aria-hidden="true"` with `tabindex="-1"`.
 - `ui-lib-icon-field` styles `pointer-events: none` on icon container so pointer interaction passes through to input controls.
 - Keep actual accessible naming on the input (`label`, `aria-label`, `aria-labelledby`) rather than on icon wrappers.
+- If the icon communicates unique meaning that is not already conveyed by the field label or helper/error text, set `[decorative]="false"` and provide `ariaLabel`.
+- IconField reserves input padding with CSS variables up front, so the field does not shift when an icon is added or swapped.
+- Verified projected-control support includes native `<input>`, `<ui-lib-input>`, `<uilib-password>`, `<uilib-input-mask>`, and `<uilib-input-number>`.
 
 ---
 
@@ -139,4 +144,3 @@ Neither component emits outputs; both are composition/layout wrappers.
 | Input ecosystem | `pInputText` directive patterns | Supports both native `<input>` and `<ui-lib-input>` |
 | Size integration | Inherits from Prime input ecosystem | Inherits from projected input size classes; no dedicated size input |
 | Theming tokens | Prime theme variables | `--uilib-icon-field-*` CSS token surface |
-

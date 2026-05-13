@@ -6,13 +6,19 @@
 
   > input,
   > ui-lib-input,
+  > uilib-password,
+  > uilib-input-mask,
+  > uilib-input-number,
   > .ui-lib-input,
   > .ui-lib-input--sm,
   > .ui-lib-input--lg {
     width: 100%;
   }
 
-  > ui-lib-input {
+  > ui-lib-input,
+  > uilib-password,
+  > uilib-input-mask,
+  > uilib-input-number {
     display: block;
   }
 }
@@ -39,6 +45,9 @@
 
 .ui-lib-icon-field--left > input,
 .ui-lib-icon-field--left > ui-lib-input input,
+.ui-lib-icon-field--left > uilib-password input,
+.ui-lib-icon-field--left > uilib-input-mask input,
+.ui-lib-icon-field--left > uilib-input-number input,
 .ui-lib-icon-field--left > ui-lib-input .ui-input-field,
 .ui-lib-icon-field--left > .ui-lib-input,
 .ui-lib-icon-field--left > .ui-lib-input--sm,
@@ -48,6 +57,9 @@
 
 .ui-lib-icon-field--right > input,
 .ui-lib-icon-field--right > ui-lib-input input,
+.ui-lib-icon-field--right > uilib-password input,
+.ui-lib-icon-field--right > uilib-input-mask input,
+.ui-lib-icon-field--right > uilib-input-number input,
 .ui-lib-icon-field--right > ui-lib-input .ui-input-field,
 .ui-lib-icon-field--right > .ui-lib-input,
 .ui-lib-icon-field--right > .ui-lib-input--sm,

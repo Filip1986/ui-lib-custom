@@ -126,6 +126,20 @@ class InputIconUiLibIconHostComponent {}
 
 @Component({
   standalone: true,
+  imports: [InputIconComponent],
+  template: `
+    <uilib-input-icon
+      [decorative]="false"
+      ariaLabel="Warning icon"
+      styleClass="pi pi-exclamation-triangle"
+    />
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class InputIconInformativeHostComponent {}
+
+@Component({
+  standalone: true,
   imports: [FloatLabelComponent, IconFieldComponent, InputIconComponent],
   template: `
     <uilib-float-label>
@@ -421,5 +435,38 @@ describe('InputIconComponent', (): void => {
 
     expect(fixture.debugElement.query(By.css('uilib-input-icon ui-lib-icon'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('uilib-input-icon .stub-ui-lib-icon'))).toBeTruthy();
+  });
+
+  it('defaults decorative icons to aria-hidden and tabindex -1', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [InputIconBaseHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+
+    const fixture: ComponentFixture<InputIconBaseHostComponent> = TestBed.createComponent(
+      InputIconBaseHostComponent
+    );
+    fixture.detectChanges();
+
+    const inputIconElement: HTMLElement = getInputIconElement(fixture);
+    expect(inputIconElement.getAttribute('aria-hidden')).toBe('true');
+    expect(inputIconElement.getAttribute('tabindex')).toBe('-1');
+  });
+
+  it('supports informative icon labeling when decorative is disabled', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [InputIconInformativeHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+
+    const fixture: ComponentFixture<InputIconInformativeHostComponent> = TestBed.createComponent(
+      InputIconInformativeHostComponent
+    );
+    fixture.detectChanges();
+
+    const inputIconElement: HTMLElement = getInputIconElement(fixture);
+    expect(inputIconElement.getAttribute('aria-hidden')).toBeNull();
+    expect(inputIconElement.getAttribute('role')).toBe('img');
+    expect(inputIconElement.getAttribute('aria-label')).toBe('Warning icon');
   });
 });
