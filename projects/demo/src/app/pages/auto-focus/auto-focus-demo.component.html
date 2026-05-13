@@ -69,7 +69,7 @@
   <div class="af-section">
     <h2 class="af-section__title">Disable Autofocus</h2>
     <p class="af-section__desc">
-      Set <code>[autofocus]="false"</code> to prevent focus from being applied —
+      Set <code>[disabled]="true"</code> to prevent focus from being applied —
       for example when the feature is toggled off by the user.
     </p>
     <div class="af-demo-card">
@@ -83,10 +83,10 @@
         type="email"
         placeholder="Reload or toggle to see the effect"
         uiLibAutoFocus
-        [autofocus]="enableFocus()"
+        [disabled]="!enableFocus()"
       />
     </div>
-    <pre class="af-code"><code>&lt;input uiLibAutoFocus [autofocus]="isEnabled" /&gt;</code></pre>
+    <pre class="af-code"><code>&lt;input uiLibAutoFocus [disabled]="!isEnabled" /&gt;</code></pre>
   </div>
 
   <!-- ── Section 4: API ── -->
@@ -109,12 +109,19 @@
       </thead>
       <tbody>
         <tr>
-          <td><code>autofocus</code></td>
+          <td><code>disabled</code></td>
           <td><code>boolean</code></td>
-          <td><code>true</code></td>
+          <td><code>false</code></td>
           <td>
-            When <code>true</code>, the host element is focused after view
-            initialization. Set to <code>false</code> to skip focus.
+            When <code>true</code>, focus is skipped on mount.
+          </td>
+        </tr>
+        <tr>
+          <td><code>selector</code></td>
+          <td><code>string | null</code></td>
+          <td><code>null</code></td>
+          <td>
+            Optional child selector used as the focus target instead of the host.
           </td>
         </tr>
       </tbody>
@@ -122,4 +129,3 @@
   </div>
 
 </section>
-

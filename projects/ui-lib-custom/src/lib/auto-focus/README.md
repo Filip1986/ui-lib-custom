@@ -4,13 +4,15 @@
 **Package:** `ui-lib-custom/auto-focus`
 **Content projection:** no — none
 
-> Focus is applied via `setTimeout` (one macrotask delay) so it works reliably inside overlays and `@defer` blocks — unlike the native `autofocus` attribute which fires synchronously during parse.
+> Opt-in only: focus runs only when you explicitly add `uiLibAutoFocus` to an element.
+> Focus is deferred with `requestAnimationFrame` and runs once on mount.
 
 ## Inputs
 
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
-| `autofocus` | `boolean` | `true` | Set to `false` to disable autofocus conditionally |
+| `disabled` | `boolean` | `false` | Set to `true` to skip autofocus |
+| `selector` | `string \| null` | `null` | Optional child selector. When set, the matching child is focused instead of the host |
 
 ## Outputs
 
@@ -20,5 +22,21 @@ _none_
 
 ```html
 <input uiLibAutoFocus />
-<input uiLibAutoFocus [autofocus]="isNewRecord" />
+<input uiLibAutoFocus [disabled]="disableAutoFocus" />
+```
+
+```html
+<div uiLibAutoFocus selector="[data-initial-focus]">
+  <button data-initial-focus type="button">Primary action</button>
+</div>
+```
+
+## Accessibility notes
+
+- Auto-focus can be disruptive; use only when it improves keyboard flow.
+- Prefer user-initiated focus for dialogs/overlays when another focus manager is active.
+- Consider disabling auto-focus in reduced-motion/screen-reader-sensitive flows:
+
+```html
+<input uiLibAutoFocus [disabled]="prefersReducedMotion()" />
 ```

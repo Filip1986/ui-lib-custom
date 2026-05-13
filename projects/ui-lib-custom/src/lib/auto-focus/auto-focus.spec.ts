@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -14,18 +15,18 @@ import { AutoFocus } from './auto-focus';
   selector: 'app-auto-focus-host',
   standalone: true,
   imports: [AutoFocus],
-  template: `<input uiLibAutoFocus [autofocus]="autofocus" />`,
+  template: `<input uiLibAutoFocus [disabled]="disabled" />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusHostComponent {
-  public autofocus: boolean = true;
+  public disabled: boolean = false;
 }
 
 @Component({
   selector: 'app-auto-focus-disabled-host',
   standalone: true,
   imports: [AutoFocus],
-  template: `<input uiLibAutoFocus [autofocus]="false" />`,
+  template: `<input uiLibAutoFocus [disabled]="true" />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusDisabledHostComponent {}
@@ -38,6 +39,38 @@ class AutoFocusDisabledHostComponent {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusDefaultHostComponent {}
+
+@Component({
+  selector: 'app-auto-focus-selector-host',
+  standalone: true,
+  imports: [AutoFocus],
+  template: `
+    <div uiLibAutoFocus selector="[data-autofocus-target]">
+      <button type="button" data-autofocus-target>Focus target</button>
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class AutoFocusSelectorHostComponent {}
+
+@Component({
+  selector: 'app-auto-focus-rerender-host',
+  standalone: true,
+  imports: [AutoFocus],
+  template: `<input uiLibAutoFocus [disabled]="disabled()" />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class AutoFocusRerenderHostComponent {
+  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+}
+
+@Component({
+  standalone: true,
+  imports: [AutoFocus],
+  template: `<div uiLibAutoFocus></div>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class AutoFocusNonFocusableHostComponent {}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -53,12 +86,20 @@ function requireElement(fixture: ComponentFixture<unknown>): HTMLElement {
 // ---------------------------------------------------------------------------
 
 describe('AutoFocus', (): void => {
+  let requestAnimationFrameSpy: jest.SpyInstance<number, [FrameRequestCallback]>;
+
   beforeEach((): void => {
-    jest.useFakeTimers();
+    requestAnimationFrameSpy = jest
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation((callback: FrameRequestCallback): number => {
+        callback(performance.now());
+        return 1;
+      });
   });
 
   afterEach((): void => {
-    jest.useRealTimers();
+    requestAnimationFrameSpy.mockRestore();
+    TestBed.resetTestingModule();
   });
 
   describe('creation', (): void => {
@@ -88,7 +129,7 @@ describe('AutoFocus', (): void => {
     });
   });
 
-  describe('autofocus = true (default)', (): void => {
+  describe('default focus behavior', (): void => {
     it('should call focus on the host element after view init', (): void => {
       TestBed.configureTestingModule({
         imports: [AutoFocusDefaultHostComponent],
@@ -104,12 +145,12 @@ describe('AutoFocus', (): void => {
       );
 
       fixture.detectChanges();
-      jest.runAllTimers();
 
       expect(focusSpy).toHaveBeenCalledTimes(1);
+      expect(requestAnimationFrameSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should call focus when autofocus input is explicitly true', (): void => {
+    it('should call focus when disabled input is explicitly false', (): void => {
       TestBed.configureTestingModule({
         imports: [AutoFocusHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -123,14 +164,13 @@ describe('AutoFocus', (): void => {
       );
 
       fixture.detectChanges();
-      jest.runAllTimers();
 
       expect(focusSpy).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('autofocus = false', (): void => {
-    it('should NOT call focus when autofocus is false', (): void => {
+  describe('disabled', (): void => {
+    it('should NOT call focus when disabled is true', (): void => {
       TestBed.configureTestingModule({
         imports: [AutoFocusDisabledHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -145,12 +185,11 @@ describe('AutoFocus', (): void => {
       );
 
       fixture.detectChanges();
-      jest.runAllTimers();
 
       expect(focusSpy).not.toHaveBeenCalled();
     });
 
-    it('should NOT call focus when autofocus input changes from true to false before view init', (): void => {
+    it('should NOT call focus when disabled input changes from false to true before view init', (): void => {
       TestBed.configureTestingModule({
         imports: [AutoFocusHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -158,8 +197,7 @@ describe('AutoFocus', (): void => {
       const fixture: ComponentFixture<AutoFocusHostComponent> =
         TestBed.createComponent(AutoFocusHostComponent);
 
-      // Set false before detectChanges triggers ngAfterViewInit
-      fixture.componentInstance.autofocus = false;
+      fixture.componentInstance.disabled = true;
 
       const focusSpy: jest.SpyInstance = jest.spyOn(
         fixture.debugElement.query(By.directive(AutoFocus)).nativeElement as HTMLElement,
@@ -167,33 +205,73 @@ describe('AutoFocus', (): void => {
       );
 
       fixture.detectChanges();
-      jest.runAllTimers();
 
       expect(focusSpy).not.toHaveBeenCalled();
     });
   });
 
-  describe('edge cases', (): void => {
-    it('should not throw when applied to a non-focusable element', (): void => {
-      @Component({
-        selector: 'app-div-host',
-        standalone: true,
-        imports: [AutoFocus],
-        template: `<div uiLibAutoFocus></div>`,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-      })
-      class DivHostComponent {}
-
+  describe('selector support', (): void => {
+    it('should focus a matching child when selector is provided', (): void => {
       TestBed.configureTestingModule({
-        imports: [DivHostComponent],
+        imports: [AutoFocusSelectorHostComponent],
         providers: [provideZonelessChangeDetection()],
       });
-      const fixture: ComponentFixture<DivHostComponent> = TestBed.createComponent(DivHostComponent);
+      const fixture: ComponentFixture<AutoFocusSelectorHostComponent> = TestBed.createComponent(
+        AutoFocusSelectorHostComponent
+      );
+      const childButton: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+        '[data-autofocus-target]'
+      ) as HTMLElement;
+      const focusSpy: jest.SpyInstance = jest.spyOn(childButton, 'focus');
 
-      expect((): void => {
-        fixture.detectChanges();
-        jest.runAllTimers();
-      }).not.toThrow();
+      fixture.detectChanges();
+
+      expect(focusSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('single-run behavior', (): void => {
+    it('should focus only once and not on subsequent host re-renders', (): void => {
+      TestBed.configureTestingModule({
+        imports: [AutoFocusRerenderHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<AutoFocusRerenderHostComponent> = TestBed.createComponent(
+        AutoFocusRerenderHostComponent
+      );
+      const input: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+        'input'
+      ) as HTMLElement;
+      const focusSpy: jest.SpyInstance = jest.spyOn(input, 'focus');
+
+      fixture.detectChanges();
+      fixture.componentInstance.disabled.set(true);
+      fixture.detectChanges();
+      fixture.componentInstance.disabled.set(false);
+      fixture.detectChanges();
+
+      expect(focusSpy).toHaveBeenCalledTimes(1);
+      expect(requestAnimationFrameSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('edge cases', (): void => {
+    it('should not throw when applied to a non-focusable element and should log a dev warning', (): void => {
+      TestBed.configureTestingModule({
+        imports: [AutoFocusNonFocusableHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<AutoFocusNonFocusableHostComponent> = TestBed.createComponent(
+        AutoFocusNonFocusableHostComponent
+      );
+      const warnSpy: jest.SpyInstance = jest.spyOn(console, 'warn').mockImplementation((): void => {
+        return;
+      });
+
+      expect((): void => fixture.detectChanges()).not.toThrow();
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+
+      warnSpy.mockRestore();
     });
   });
 });
