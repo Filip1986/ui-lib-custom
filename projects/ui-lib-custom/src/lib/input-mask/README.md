@@ -27,6 +27,11 @@
 | `name` | `string \| undefined` | `undefined` | Native name attribute |
 | `fluid` | `boolean` | `false` | Stretch to fill container width |
 | `invalid` | `boolean` | `false` | Apply error styling |
+| `id` | `string \| null` | `null` | Optional explicit input ID (auto-generated otherwise) |
+| `ariaLabel` | `string \| null` | `null` | Accessible name for unlabeled/icon-only usage |
+| `ariaLabelledBy` | `string \| null` | `null` | ID reference to an external label element |
+| `maskHint` | `string \| null` | `null` | Screen-reader hint announced via `aria-describedby` (`mask` value is used when omitted) |
+| `errorMessage` | `string \| null` | `null` | Error text rendered when invalid/incomplete |
 
 ## Outputs
 
@@ -38,6 +43,24 @@
 | `inputChanged` | `Event` | Value changed while typing |
 | `cleared` | `void` | Clear button clicked |
 
+## Mask syntax
+
+| Token | Meaning | Default accepted chars |
+|---|---|---|
+| `9` | Required digit | `0-9` |
+| `a` | Required alpha character | `A-Z` / `a-z` (`characterPattern` input controls this) |
+| `*` | Required alphanumeric character | Combined `a` + digit |
+| `?` | Start of optional section | Characters after `?` are optional |
+| Any other char | Literal mask character | e.g. `(`, `)`, `/`, `-`, space |
+
+## Accessibility behavior
+
+- `aria-describedby` automatically includes the mask format hint element (`Format: ...`) and any active error element.
+- On blur, incomplete mask input sets `aria-invalid="true"` and links to the component error element.
+- Use `ariaLabel` or `ariaLabelledBy`; do not rely on placeholder text as the only label.
+- Invalid blocked characters are announced in a polite live region (not silently ignored).
+- `aria-valuetext` exposes typed user characters without empty-slot placeholders.
+
 ## Usage
 
 ```html
@@ -47,3 +70,7 @@
 <!-- date mask, emitting unmasked value -->
 <uilib-input-mask mask="99/99/9999" [unmask]="true" [(ngModel)]="rawDate" />
 ```
+
+## Security note
+
+`InputMask` controls format, not secrecy. Do not use it as a security control for sensitive data. For secrets or credentials, use dedicated secure fields and backend validation/storage protections.

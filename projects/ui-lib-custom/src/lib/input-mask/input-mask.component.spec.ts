@@ -24,6 +24,11 @@ import type { InputMaskCompleteEvent } from './input-mask.types';
       [fluid]="fluid"
       [invalid]="invalid"
       [disabled]="disabled"
+      [id]="id"
+      [ariaLabel]="ariaLabel"
+      [ariaLabelledBy]="ariaLabelledBy"
+      [maskHint]="maskHint"
+      [errorMessage]="errorMessage"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
       (completed)="onCompleted($event)"
@@ -45,6 +50,11 @@ class InputMaskHostComponent {
   public fluid: boolean = false;
   public invalid: boolean = false;
   public disabled: boolean = false;
+  public id: string | null = null;
+  public ariaLabel: string | null = null;
+  public ariaLabelledBy: string | null = null;
+  public maskHint: string | null = null;
+  public errorMessage: string | null = null;
   public value: string | null = null;
 
   public completedEvents: InputMaskCompleteEvent[] = [];
@@ -211,6 +221,41 @@ describe('InputMaskComponent', (): void => {
     expect(inputElement().disabled).toBeTruthy();
   });
 
+  it('binds aria-label and aria-labelledby attributes when provided', (): void => {
+    hostComponent().ariaLabel = 'Phone input';
+    hostComponent().ariaLabelledBy = 'phone-label';
+    fixture.detectChanges();
+
+    expect(inputElement().getAttribute('aria-label')).toBe('Phone input');
+    expect(inputElement().getAttribute('aria-labelledby')).toBe('phone-label');
+  });
+
+  it('links aria-describedby to generated hint id and renders default mask hint text', (): void => {
+    fixture.detectChanges();
+
+    const describedBy: string | null = inputElement().getAttribute('aria-describedby');
+    expect(describedBy).toMatch(/^ui-lib-input-mask-\d+-hint$/);
+
+    const hintElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      `#${describedBy as string}`
+    );
+    expect(hintElement).toBeTruthy();
+    expect((hintElement as HTMLElement).textContent.trim()).toBe(`Format: ${hostComponent().mask}`);
+  });
+
+  it('renders custom mask hint text when maskHint is provided', (): void => {
+    hostComponent().maskHint = '2 digits slash 2 digits slash 4 digits';
+    fixture.detectChanges();
+
+    const hintElement: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.uilib-input-mask-sr-only'
+    );
+    expect(hintElement).toBeTruthy();
+    expect((hintElement as HTMLElement).textContent.trim()).toBe(
+      `Format: ${hostComponent().maskHint}`
+    );
+  });
+
   it('formats phone input as (123) 456-7890', (): void => {
     typeMaskedText('1234567890');
     expect(inputElement().value).toBe('(123) 456-7890');
@@ -319,6 +364,28 @@ describe('InputMaskComponent', (): void => {
     blurInput();
 
     expect(inputElement().value).toContain('(123)');
+  });
+
+  it('sets aria-invalid and links error id when blur leaves mask incomplete', (): void => {
+    hostComponent().autoClear = false;
+    fixture.detectChanges();
+
+    typeMaskedText('123');
+    blurInput();
+
+    expect(inputElement().getAttribute('aria-invalid')).toBe('true');
+    expect(inputElement().getAttribute('aria-describedby')).toContain('-error');
+  });
+
+  it('announces blocked characters through the screen-reader live region', (): void => {
+    focusInput();
+    inputElement().dispatchEvent(keyboardEvent('keypress', 'A', 'A'.charCodeAt(0)));
+    fixture.detectChanges();
+
+    const liveRegion: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '[aria-live="polite"].uilib-input-mask-sr-only'
+    );
+    expect(liveRegion?.textContent).toContain('Character "A" does not match the expected format.');
   });
 
   it('preserves mask buffer on clear when keepBuffer is true', (): void => {

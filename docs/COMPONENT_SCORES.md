@@ -136,7 +136,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ⏳ Needs hardening      |
 | ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ⏳ Needs hardening      |
 | ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening      |
-| InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ⏳ Needs hardening      |
+| InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
 | KeyFilter         | Format hint, silent block communication                                                             | ⏳ Needs hardening      |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
@@ -195,7 +195,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | SelectButton  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| InputMask     | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| InputMask     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |

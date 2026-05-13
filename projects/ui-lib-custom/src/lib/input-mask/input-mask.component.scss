@@ -19,6 +19,7 @@ uilib-input-mask {
   );
   --uilib-input-mask-disabled-opacity: 0.6;
   --uilib-input-mask-clear-icon-size: 1rem;
+  --uilib-input-mask-error-color: var(--uilib-color-danger-600, currentColor);
 
   position: relative;
   display: inline-flex;
@@ -134,4 +135,29 @@ uilib-input-mask.uilib-input-mask-disabled .uilib-input-mask-clear-icon {
     var(--uilib-color-neutral-900, currentColor) 3%
   );
   box-shadow: none;
+}
+
+uilib-input-mask .uilib-input-mask-error {
+  color: var(--uilib-input-mask-error-color);
+  font-size: var(--uilib-font-size-sm, 0.875rem);
+  margin-top: var(--uilib-space-1, 0.25rem);
+}
+
+uilib-input-mask .uilib-input-mask-sr-only {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  padding: 0;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  uilib-input-mask,
+  uilib-input-mask input {
+    transition: none;
+  }
 }
