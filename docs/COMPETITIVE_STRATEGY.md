@@ -151,12 +151,12 @@ That is the "take over" outcome — executed through credibility, not claims.
 
 ## Competitors to Audit
 
-| Library          | Repo                              | Notes                                    |
-|------------------|-----------------------------------|------------------------------------------|
-| Angular Material | github.com/angular/components     | Official Google library, highest install base |
-| PrimeNG          | github.com/primefaces/primeng     | Most features, most stars in Angular ecosystem |
-| Ng-Zorro         | github.com/NG-ZORRO/ng-zorro-antd | Ant Design port, enterprise-focused      |
-| Ng-Bootstrap     | github.com/ng-bootstrap/ng-bootstrap | Bootstrap wrapper, widely used         |
+| Library          | Repo                                 | Notes                                          |
+|------------------|--------------------------------------|------------------------------------------------|
+| Angular Material | github.com/angular/components        | Official Google library, highest install base  |
+| PrimeNG          | github.com/primefaces/primeng        | Most features, most stars in Angular ecosystem |
+| Ng-Zorro         | github.com/NG-ZORRO/ng-zorro-antd    | Ant Design port, enterprise-focused            |
+| Ng-Bootstrap     | github.com/ng-bootstrap/ng-bootstrap | Bootstrap wrapper, widely used                 |
 
 ---
 

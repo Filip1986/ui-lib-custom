@@ -115,7 +115,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ✅ Done            |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done            |
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done            |
-| 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Needs hardening |
+| 66   | Image           | Alt text, preview dialog a11y                             | ✅ Done            |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ✅ Done            |
 | 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ✅ Done            |
 | 69   | Upload          | Drop zone announcement, file list management              | ✅ Done            |
@@ -147,7 +147,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ⏳ Needs hardening      |
-| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ⏳ Needs hardening      |
+| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done                 |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ⏳ Needs hardening      |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
 | StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ⏳ Needs hardening      |
@@ -292,11 +292,11 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component       | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-----------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Avatar          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| Icon            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Icon            | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ButtonGroup     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | SplitButton     | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Image           | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | ImageCompare    | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |

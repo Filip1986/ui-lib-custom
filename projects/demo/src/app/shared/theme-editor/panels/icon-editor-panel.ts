@@ -39,12 +39,12 @@ export class IconEditorPanel {
     'star',
   ];
   private readonly defaultSizes: Record<IconSize, string> = {
-    xs: '0.75rem',
-    sm: '1rem',
-    md: '1.25rem',
-    lg: '1.5rem',
-    xl: '2rem',
-    '2xl': '2.5rem',
+    xs: '0.75em',
+    sm: '0.875em',
+    md: '1em',
+    lg: '1.25em',
+    xl: '1.5em',
+    '2xl': '2em',
   };
 
   public readonly config: Signal<ThemeIconConfig> = computed<ThemeIconConfig>(
