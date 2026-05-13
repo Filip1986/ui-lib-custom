@@ -325,22 +325,24 @@ This is the operating system for every component built in this library.
 
 Before a component ships, it must be scored on each dimension. **A component ships only when every category scores ≥ 8.**
 
-| Category                    | Required Score |
-|-----------------------------|----------------|
-| API clarity                 | ≥ 8            |
-| Accessibility               | ≥ 8            |
-| Performance                 | ≥ 8            |
-| Composability               | ≥ 8            |
-| Theming                     | ≥ 8            |
-| Developer experience        | ≥ 8            |
-| Documentation               | ≥ 8            |
-| Visual & interaction polish | ≥ 8            |
-| Angular integration         | ≥ 8            |
-| Emotional quality           | ≥ 8            |
+| Category                              | Required Score |
+|---------------------------------------|----------------|
+| API clarity                           | ≥ 8            |
+| Accessibility                         | ≥ 8            |
+| Performance                           | ≥ 8            |
+| Composability                         | ≥ 8            |
+| Theming                               | ≥ 8            |
+| Developer experience                  | ≥ 8            |
+| Documentation                         | ≥ 8            |
+| Visual & interaction polish           | ≥ 8            |
+| Angular integration                   | ≥ 8            |
+| Emotional quality                     | ≥ 8            |
+| Competitive parity & differentiation  | ≥ 8            |
 
 This scorecard is what separates a component library from a legendary UI ecosystem.
 
-> See the scoreable template and AI evolution prompts in [`docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`](prompts/COMPONENT_EVOLUTION_PROMPTS.md).
+> **Criteria:** Every score is a count of binary checkboxes — not a gut feeling. See [`docs/SCORING_CRITERIA.md`](SCORING_CRITERIA.md) for the complete 149-checkpoint definition of what each category means.
+> **Prompts:** See [`docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`](prompts/COMPONENT_EVOLUTION_PROMPTS.md) for the 6-phase evolution workflow.
 
 ---
 
@@ -500,4 +502,9 @@ The ultimate emotional outcome:
 | [Component Creation Guide](../COMPONENT_CREATION_GUIDE.md) | Standards for building to vision quality     |
 | [Library Conventions](../LIBRARY_CONVENTIONS.md)           | Engineering rules that enforce the vision    |
 | [Project Summary](reference/project/PROJECT_SUMMARY.md)    | Current state vs. vision                     |
+| [Scoring Criteria](SCORING_CRITERIA.md)                    | The 149-checkpoint quality gate — what ≥ 8 actually means per category |
+| [Competitive Benchmarks](COMPETITIVE_BENCHMARKS.md)        | Per-component parity tables vs Angular Material, PrimeNG, Radix UI, Ark UI |
+| [Competitive Strategy](COMPETITIVE_STRATEGY.md)            | When and how to publish benchmark claims publicly |
+| [Roadmap](ROADMAP.md)                                      | Phase-by-phase path from hardening to v1.0 GA |
+| [Launch Strategy](LAUNCH_STRATEGY.md)                      | The sequenced path to a launch that resonates |
 

@@ -20,26 +20,26 @@ Exclusions are justified with a reason. Differentiators are stated precisely.
 
 ## Reference Libraries
 
-| Library | Why it is a benchmark | Docs |
-|---|---|---|
-| **Angular Material** | The Angular-native incumbent. Canonical baseline for what Angular developers expect. | material.angular.io |
-| **PrimeNG** | The most feature-complete Angular UI library in active use. The feature-richness baseline. | primeng.org |
-| **Radix UI** | The accessibility gold standard in any framework. Built directly around WAI-ARIA APG patterns. If Radix does it, it is correct. | radix-ui.com/primitives |
-| **Ark UI** | Modern headless component library (React/Vue/Solid). Best composability and API shape reference. | ark-ui.com |
-| **Melt UI** | Headless Svelte library. Best reference for builder-pattern composability and slot architecture. | melt-ui.com |
+| Library              | Why it is a benchmark                                                                                                           | Docs                    |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------|-------------------------|
+| **Angular Material** | The Angular-native incumbent. Canonical baseline for what Angular developers expect.                                            | material.angular.io     |
+| **PrimeNG**          | The most feature-complete Angular UI library in active use. The feature-richness baseline.                                      | primeng.org             |
+| **Radix UI**         | The accessibility gold standard in any framework. Built directly around WAI-ARIA APG patterns. If Radix does it, it is correct. | radix-ui.com/primitives |
+| **Ark UI**           | Modern headless component library (React/Vue/Solid). Best composability and API shape reference.                                | ark-ui.com              |
+| **Melt UI**          | Headless Svelte library. Best reference for builder-pattern composability and slot architecture.                                | melt-ui.com             |
 
 ---
 
 ## Legend
 
-| Symbol | Meaning |
-|---|---|
-| ✅ | Implemented — at full parity with the reference |
-| 🚀 | **Beyond** — this library does something the reference does not, or does it better |
-| ⚠️ | Partial — implemented but incomplete or with a known limitation |
-| ❌ | Gap — reference has this; this library does not yet — active backlog item |
-| `—` Excluded | Consciously decided not to implement — reason documented inline |
-| `N/A` | The reference library has no equivalent or the concept does not apply |
+| Symbol       | Meaning                                                                            |
+|--------------|------------------------------------------------------------------------------------|
+| ✅            | Implemented — at full parity with the reference                                    |
+| 🚀           | **Beyond** — this library does something the reference does not, or does it better |
+| ⚠️           | Partial — implemented but incomplete or with a known limitation                    |
+| ❌            | Gap — reference has this; this library does not yet — active backlog item          |
+| `—` Excluded | Consciously decided not to implement — reason documented inline                    |
+| `N/A`        | The reference library has no equivalent or the concept does not apply              |
 
 **A component only passes Category 11 when there are zero unresolved ❌ gaps.**
 A `—` Excluded entry is not a gap — it is a decision. Gaps that are accepted must be promoted to exclusions with a written reason.
@@ -52,16 +52,33 @@ These are capabilities that apply to **every** component in this library and tha
 reference library currently offers. They count toward the 🚀 "no reference library offers this"
 checkbox for every component automatically — you do not need to re-document them per component.
 
-| Differentiator | Angular Material | PrimeNG | Radix UI | Ark UI | Notes |
-|---|---|---|---|---|---|
-| Signal-native inputs (`input()`, `model()`, `output()`) | ❌ uses `@Input()` | ❌ uses `@Input()` | N/A | N/A | Angular 17+ signal API throughout |
-| Zoneless-compatible (`provideZonelessChangeDetection()`) | ⚠️ partial | ❌ | N/A | N/A | Every component tested zoneless |
-| SSR-safe out of the box (no `document`/`window` on server) | ✅ | ⚠️ partial | N/A | N/A | Guards enforced by convention |
-| Three runtime visual variants (material / bootstrap / minimal) | ❌ one design system | ❌ one design system | ❌ unstyled only | ❌ unstyled only | Variant switchable at runtime |
-| Design-token-driven via CSS custom properties (`--uilib-*`) | ⚠️ uses MDC tokens, less flexible | ⚠️ partial token coverage | ❌ | ❌ | Full token surface exposed |
-| `ViewEncapsulation.None` — cascade-friendly, no `::ng-deep` needed | ❌ Emulated encapsulation | ❌ Emulated encapsulation | N/A | N/A | Consumer can override freely |
-| Standalone-only, no NgModule | ✅ (recent) | ✅ (recent) | N/A | N/A | Native from day one |
-| Angular block syntax (`@if`, `@for`, `@switch`) throughout | ⚠️ migrating | ⚠️ migrating | N/A | N/A | 100% block syntax from day one |
+| Differentiator                                                     | Angular Material                  | PrimeNG                   | Radix UI        | Ark UI            | Notes                             |
+|--------------------------------------------------------------------|-----------------------------------|---------------------------|-----------------|-------------------|-----------------------------------|
+| Signal-native inputs (`input()`, `model()`, `output()`)            | ❌ uses `@Input()`                 | ❌ uses `@Input()`         | N/A             | N/A               | Angular 17+ signal API throughout |
+| Zoneless-compatible (`provideZonelessChangeDetection()`)           | ⚠️ partial                        | ❌                         | N/A             | N/A               | Every component tested zoneless   |
+| SSR-safe out of the box (no `document`/`window` on server)         | ✅                                 | ⚠️ partial                | N/A             | N/A               | Guards enforced by convention     |
+| Three runtime visual variants (material / bootstrap / minimal)     | ❌ one design system               | ❌ one design system       | ❌ unstyled only | ❌ unstyled only   | Variant switchable at runtime     |
+| Design-token-driven via CSS custom properties (`--uilib-*`)        | ⚠️ uses MDC tokens, less flexible | ⚠️ partial token coverage | ❌               | ❌                 | Full token surface exposed        |
+| `ViewEncapsulation.None` — cascade-friendly, no `::ng-deep` needed | ❌ Emulated encapsulation          | ❌ Emulated encapsulation  | N/A             | N/A               | Consumer can override freely      |
+| Standalone-only, no NgModule                                       | ✅ (recent)                        | ✅ (recent)                | N/A             | N/A               | Native from day one               |
+| Angular block syntax (`@if`, `@for`, `@switch`) throughout         | ⚠️ migrating                      | ⚠️ migrating              | N/A             | N/A               | 100% block syntax from day one    |
+
+---
+
+## How This File Relates to COMPETITIVE_STRATEGY.md
+
+> **This file and [`COMPETITIVE_STRATEGY.md`](COMPETITIVE_STRATEGY.md) are sister documents with different purposes.**
+>
+> | This file | COMPETITIVE_STRATEGY.md |
+> |---|---|
+> | Internal engineering tool | External positioning strategy |
+> | Tracks parity & 🚀 differentiators per component | Describes how to publish benchmark claims publicly |
+> | Benchmarks against **any UI library** (React, Svelte, Angular) — the best reference, regardless of framework | Benchmarks against **Angular ecosystem only** (Angular Material, PrimeNG, Ng-Zorro) — libraries users are actually choosing between |
+> | Feeds Category 11 scores in `COMPONENT_SCORES.md` | Feeds the "Built Different" section on the landing page |
+> | Run continuously during hardening | Executed during Phase 4 (Public Beta) |
+>
+> The evidence built in this file **becomes the content** of the competitive strategy at launch.
+> See [`ROADMAP.md`](ROADMAP.md) Phase 4 for when this data goes public.
 
 ---
 
@@ -114,25 +131,25 @@ Entries are in alphabetical order within each category grouping.
 
 ### Button
 
-| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
-|---|---|---|---|---|---|
-| Filled / solid variant | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Outlined variant | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Text / ghost variant | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Size variants (sm / md / lg) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Icon-only button | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Icon + label button | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Leading icon slot | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Trailing icon slot | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Loading / busy state | ❌ | ✅ | ❌ | ✅ | ✅ |
-| `aria-busy` on loading | ❌ | ⚠️ | ❌ | ⚠️ | 🚀 |
-| `aria-disabled` (not HTML `disabled`) | ⚠️ | ⚠️ | ✅ | ✅ | ✅ |
-| Ripple effect | ✅ | ✅ | ❌ | ❌ | ✅ |
-| Danger / destructive severity | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Link-style button (`routerLink` compatible) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Signal-native API (`input()`) | ❌ | ❌ | N/A | N/A | 🚀 |
-| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
-| Three runtime visual variants | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Feature / Behaviour                         | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|---------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Filled / solid variant                      | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Outlined variant                            | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Text / ghost variant                        | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Size variants (sm / md / lg)                | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Icon-only button                            | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Icon + label button                         | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Leading icon slot                           | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Trailing icon slot                          | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Loading / busy state                        | ❌                | ✅       | ❌        | ✅      | ✅                 |
+| `aria-busy` on loading                      | ❌                | ⚠️      | ❌        | ⚠️     | 🚀                |
+| `aria-disabled` (not HTML `disabled`)       | ⚠️               | ⚠️      | ✅        | ✅      | ✅                 |
+| Ripple effect                               | ✅                | ✅       | ❌        | ❌      | ✅                 |
+| Danger / destructive severity               | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Link-style button (`routerLink` compatible) | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Signal-native API (`input()`)               | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                         | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants               | ❌                | ❌       | ❌        | ❌      | 🚀                |
 
 #### Gaps
 _None — all ❌ reference rows are matched or consciously excluded._
@@ -153,25 +170,25 @@ _None — all ❌ reference rows are matched or consciously excluded._
 
 ### Select
 
-| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
-|---|---|---|---|---|---|
-| Single selection | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Multi-selection with chips | ✅ | ✅ | ❌ | ✅ | ✅ |
-| Searchable / filterable options | ❌ | ✅ | ❌ | ✅ | ✅ |
-| Option groups | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Custom option template | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Custom trigger / selected-value template | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Virtualized option list | ❌ | ✅ | ❌ | ❌ | ✅ |
-| APG Combobox keyboard model (arrows, Home/End, type-ahead) | ✅ | ⚠️ partial | ✅ | ✅ | ✅ |
-| `aria-activedescendant` pattern | ✅ | ⚠️ partial | ✅ | ✅ | ✅ |
-| `aria-expanded` on trigger | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Focus returns to trigger on close | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| `ControlValueAccessor` (Reactive Forms) | ✅ | ✅ | N/A | N/A | ✅ |
-| `disabled` individual options | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Loading state for async options | ❌ | ✅ | ❌ | ❌ | ✅ |
-| Signal-native API (`input()`) | ❌ | ❌ | N/A | N/A | 🚀 |
-| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
-| Three runtime visual variants | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Feature / Behaviour                                        | Angular Material | PrimeNG    | Radix UI | Ark UI | **ui-lib-custom** |
+|------------------------------------------------------------|------------------|------------|----------|--------|-------------------|
+| Single selection                                           | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Multi-selection with chips                                 | ✅                | ✅          | ❌        | ✅      | ✅                 |
+| Searchable / filterable options                            | ❌                | ✅          | ❌        | ✅      | ✅                 |
+| Option groups                                              | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Custom option template                                     | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Custom trigger / selected-value template                   | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Virtualized option list                                    | ❌                | ✅          | ❌        | ❌      | ✅                 |
+| APG Combobox keyboard model (arrows, Home/End, type-ahead) | ✅                | ⚠️ partial | ✅        | ✅      | ✅                 |
+| `aria-activedescendant` pattern                            | ✅                | ⚠️ partial | ✅        | ✅      | ✅                 |
+| `aria-expanded` on trigger                                 | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Focus returns to trigger on close                          | ✅                | ⚠️         | ✅        | ✅      | ✅                 |
+| `ControlValueAccessor` (Reactive Forms)                    | ✅                | ✅          | N/A      | N/A    | ✅                 |
+| `disabled` individual options                              | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Loading state for async options                            | ❌                | ✅          | ❌        | ❌      | ✅                 |
+| Signal-native API (`input()`)                              | ❌                | ❌          | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                        | ❌                | ❌          | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                              | ❌                | ❌          | ❌        | ❌      | 🚀                |
 
 #### Gaps
 _None — all ❌ reference rows are matched or consciously excluded._
@@ -192,23 +209,23 @@ _None — all ❌ reference rows are matched or consciously excluded._
 
 ### Input
 
-| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
-|---|---|---|---|---|---|
-| Text, email, password, number types | ✅ | ✅ | N/A | N/A | ✅ |
-| Label association (`<label for>` or `aria-labelledby`) | ✅ | ✅ | N/A | N/A | ✅ |
-| Floating label | ✅ | ✅ | ❌ | ❌ | ✅ |
-| Prefix / suffix icon slots | ✅ | ✅ | N/A | N/A | ✅ |
-| Prefix / suffix text slots | ✅ | ✅ | N/A | N/A | ✅ |
-| Helper text below input | ✅ | ✅ | N/A | N/A | ✅ |
-| Error message via `aria-describedby` | ✅ | ⚠️ | N/A | N/A | ✅ |
-| `aria-invalid` on error state | ✅ | ⚠️ | N/A | N/A | ✅ |
-| Character count | ❌ | ✅ | N/A | N/A | ✅ |
-| `ControlValueAccessor` | ✅ | ✅ | N/A | N/A | ✅ |
-| Clearable (× button) | ❌ | ✅ | N/A | N/A | ✅ |
-| Password visibility toggle with accessible label | ⚠️ | ✅ | N/A | N/A | ✅ |
-| Signal-native API | ❌ | ❌ | N/A | N/A | 🚀 |
-| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
-| Three runtime visual variants | ❌ | ❌ | N/A | N/A | 🚀 |
+| Feature / Behaviour                                    | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|--------------------------------------------------------|------------------|---------|----------|--------|-------------------|
+| Text, email, password, number types                    | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Label association (`<label for>` or `aria-labelledby`) | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Floating label                                         | ✅                | ✅       | ❌        | ❌      | ✅                 |
+| Prefix / suffix icon slots                             | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Prefix / suffix text slots                             | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Helper text below input                                | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Error message via `aria-describedby`                   | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| `aria-invalid` on error state                          | ✅                | ⚠️      | N/A      | N/A    | ✅                 |
+| Character count                                        | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| `ControlValueAccessor`                                 | ✅                | ✅       | N/A      | N/A    | ✅                 |
+| Clearable (× button)                                   | ❌                | ✅       | N/A      | N/A    | ✅                 |
+| Password visibility toggle with accessible label       | ⚠️               | ✅       | N/A      | N/A    | ✅                 |
+| Signal-native API                                      | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                                    | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                          | ❌                | ❌       | N/A      | N/A    | 🚀                |
 
 #### Gaps
 _None._
@@ -231,26 +248,26 @@ _None._
 
 ### Dialog
 
-| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
-|---|---|---|---|---|---|
-| `role=dialog` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `aria-modal=true` | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| `aria-labelledby` wired to header | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| `aria-describedby` wired to body | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Focus trap (CDK or equivalent) | ✅ | ⚠️ partial | ✅ | ✅ | ✅ |
-| Initial focus on first focusable element | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| Focus returns to trigger on close | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| Escape key closes dialog | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Backdrop click closes dialog (configurable) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Scroll lock on open | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Enter / exit animations | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `prefers-reduced-motion` respected | ⚠️ | ❌ | ✅ | ✅ | ✅ |
-| Maximisable | ❌ | ✅ | ❌ | ❌ | ✅ |
-| Draggable / resizable | ❌ | ✅ | ❌ | ❌ | ✅ |
-| Programmatic open / close API (service-based) | ❌ | ✅ | ❌ | ✅ | ✅ |
-| Signal-native API | ❌ | ❌ | N/A | N/A | 🚀 |
-| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
-| Three runtime visual variants | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Feature / Behaviour                           | Angular Material | PrimeNG    | Radix UI | Ark UI | **ui-lib-custom** |
+|-----------------------------------------------|------------------|------------|----------|--------|-------------------|
+| `role=dialog`                                 | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| `aria-modal=true`                             | ✅                | ⚠️         | ✅        | ✅      | ✅                 |
+| `aria-labelledby` wired to header             | ✅                | ⚠️         | ✅        | ✅      | ✅                 |
+| `aria-describedby` wired to body              | ✅                | ❌          | ✅        | ✅      | ✅                 |
+| Focus trap (CDK or equivalent)                | ✅                | ⚠️ partial | ✅        | ✅      | ✅                 |
+| Initial focus on first focusable element      | ✅                | ⚠️         | ✅        | ✅      | ✅                 |
+| Focus returns to trigger on close             | ✅                | ⚠️         | ✅        | ✅      | ✅                 |
+| Escape key closes dialog                      | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Backdrop click closes dialog (configurable)   | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Scroll lock on open                           | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| Enter / exit animations                       | ✅                | ✅          | ✅        | ✅      | ✅                 |
+| `prefers-reduced-motion` respected            | ⚠️               | ❌          | ✅        | ✅      | ✅                 |
+| Maximisable                                   | ❌                | ✅          | ❌        | ❌      | ✅                 |
+| Draggable / resizable                         | ❌                | ✅          | ❌        | ❌      | ✅                 |
+| Programmatic open / close API (service-based) | ❌                | ✅          | ❌        | ✅      | ✅                 |
+| Signal-native API                             | ❌                | ❌          | N/A      | N/A    | 🚀                |
+| Zoneless compatible                           | ❌                | ❌          | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                 | ❌                | ❌          | ❌        | ❌      | 🚀                |
 
 #### Gaps
 _None._
@@ -274,23 +291,23 @@ _None._
 
 ### Tabs
 
-| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
-|---|---|---|---|---|---|
-| `role=tablist` / `role=tab` / `role=tabpanel` | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `aria-selected` on active tab | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `aria-controls` tab → panel | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| `aria-labelledby` panel → tab | ✅ | ⚠️ | ✅ | ✅ | ✅ |
-| Arrow key navigation (left/right) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Home / End key navigation | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Disabled tab (not focusable, `aria-disabled`) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Lazy tab panel rendering | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Scrollable tab strip (overflow) | ✅ | ✅ | ❌ | ❌ | ✅ |
-| Closable / removable tabs | ❌ | ✅ | ❌ | ✅ | ✅ |
-| Tab with icon | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Tab with badge count | ❌ | ✅ | ❌ | ❌ | ✅ |
-| Signal-native API | ❌ | ❌ | N/A | N/A | 🚀 |
-| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
-| Three runtime visual variants | ❌ | ❌ | ❌ | ❌ | 🚀 |
+| Feature / Behaviour                           | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|-----------------------------------------------|------------------|---------|----------|--------|-------------------|
+| `role=tablist` / `role=tab` / `role=tabpanel` | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-selected` on active tab                 | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| `aria-controls` tab → panel                   | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| `aria-labelledby` panel → tab                 | ✅                | ⚠️      | ✅        | ✅      | ✅                 |
+| Arrow key navigation (left/right)             | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Home / End key navigation                     | ✅                | ❌       | ✅        | ✅      | ✅                 |
+| Disabled tab (not focusable, `aria-disabled`) | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Lazy tab panel rendering                      | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Scrollable tab strip (overflow)               | ✅                | ✅       | ❌        | ❌      | ✅                 |
+| Closable / removable tabs                     | ❌                | ✅       | ❌        | ✅      | ✅                 |
+| Tab with icon                                 | ✅                | ✅       | ✅        | ✅      | ✅                 |
+| Tab with badge count                          | ❌                | ✅       | ❌        | ❌      | ✅                 |
+| Signal-native API                             | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Zoneless compatible                           | ❌                | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                 | ❌                | ❌       | ❌        | ❌      | 🚀                |
 
 #### Gaps
 _None._
@@ -310,24 +327,24 @@ _None._
 
 ### Table
 
-| Feature / Behaviour | Angular Material | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
-|---|---|---|---|---|---|
-| `role=grid` | ⚠️ uses `role=table` | ✅ | N/A | N/A | ✅ |
-| Sortable columns (`aria-sort`) | ✅ | ✅ | N/A | N/A | ✅ |
-| Row selection (`aria-selected`) | ✅ | ✅ | N/A | N/A | ✅ |
-| Multi-row selection with checkbox | ✅ | ✅ | N/A | N/A | ✅ |
-| Column resizing | ❌ | ✅ | N/A | N/A | ✅ |
-| Column reordering | ❌ | ✅ | N/A | N/A | ✅ |
-| Row expansion | ❌ | ✅ | N/A | N/A | ✅ |
-| Frozen / sticky columns | ❌ | ✅ | N/A | N/A | ✅ |
-| Virtual scrolling (rows) | ❌ | ✅ | N/A | N/A | ✅ |
-| Paginator integration | ✅ | ✅ | N/A | N/A | ✅ |
-| Row reordering (drag) | ❌ | ✅ | N/A | N/A | ✅ |
-| Keyboard row navigation (arrow keys) | ⚠️ | ⚠️ | N/A | N/A | ✅ |
-| Live region for sort / filter change announcements | ❌ | ❌ | N/A | N/A | 🚀 |
-| Signal-native API | ❌ | ❌ | N/A | N/A | 🚀 |
-| Zoneless compatible | ❌ | ❌ | N/A | N/A | 🚀 |
-| Three runtime visual variants | ❌ | ❌ | N/A | N/A | 🚀 |
+| Feature / Behaviour                                | Angular Material       | PrimeNG | Radix UI | Ark UI | **ui-lib-custom** |
+|----------------------------------------------------|------------------------|---------|----------|--------|-------------------|
+| `role=grid`                                        | ⚠️ uses `role=table`   | ✅       | N/A      | N/A    | ✅                 |
+| Sortable columns (`aria-sort`)                     | ✅                      | ✅       | N/A      | N/A    | ✅                 |
+| Row selection (`aria-selected`)                    | ✅                      | ✅       | N/A      | N/A    | ✅                 |
+| Multi-row selection with checkbox                  | ✅                      | ✅       | N/A      | N/A    | ✅                 |
+| Column resizing                                    | ❌                      | ✅       | N/A      | N/A    | ✅                 |
+| Column reordering                                  | ❌                      | ✅       | N/A      | N/A    | ✅                 |
+| Row expansion                                      | ❌                      | ✅       | N/A      | N/A    | ✅                 |
+| Frozen / sticky columns                            | ❌                      | ✅       | N/A      | N/A    | ✅                 |
+| Virtual scrolling (rows)                           | ❌                      | ✅       | N/A      | N/A    | ✅                 |
+| Paginator integration                              | ✅                      | ✅       | N/A      | N/A    | ✅                 |
+| Row reordering (drag)                              | ❌                      | ✅       | N/A      | N/A    | ✅                 |
+| Keyboard row navigation (arrow keys)               | ⚠️                     | ⚠️      | N/A      | N/A    | ✅                 |
+| Live region for sort / filter change announcements | ❌                      | ❌       | N/A      | N/A    | 🚀                |
+| Signal-native API                                  | ❌                      | ❌       |  N/A     | N/A    | 🚀                |
+| Zoneless compatible                                | ❌                      | ❌       | N/A      | N/A    | 🚀                |
+| Three runtime visual variants                      | ❌                      | ❌       | N/A      | N/A    | 🚀                |
 
 #### Gaps
 _None._

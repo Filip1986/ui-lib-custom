@@ -10,8 +10,9 @@ import { IconButton } from 'ui-lib-custom';
 ## Usage
 ```html
 <ui-lib-icon-button icon="settings" ariaLabel="Settings" />
-<ui-lib-icon-button icon="edit" variant="bootstrap" color="primary" />
-<ui-lib-icon-button icon="delete" variant="minimal" color="danger" />
+<ui-lib-icon-button icon="edit" ariaLabel="Edit item" variant="bootstrap" color="primary" />
+<ui-lib-icon-button icon="delete" ariaLabel="Delete item" variant="minimal" color="danger" />
+<ui-lib-icon-button icon="refresh" ariaLabel="Refresh data" [loading]="isRefreshing()" />
 ```
 
 ## Inputs
@@ -22,7 +23,8 @@ import { IconButton } from 'ui-lib-custom';
 | `variant` | `'material' \| 'bootstrap' \| 'minimal'` | `'material'` | Design variant |
 | `color` | `'primary' \| 'secondary' \| 'danger' \| 'success' \| 'warning' \| null` | `null` | Optional color accent |
 | `disabled` | `boolean` | `false` | Disabled state |
-| `ariaLabel` | `string \| null` | `null` | Accessibility label (required for icon-only buttons) |
+| `loading` | `boolean` | `false` | Disables the button, swaps to a spinner, and announces loading |
+| `ariaLabel` | `string` | **required** | Accessibility label — mandatory for icon-only buttons |
 
 ## Notes
 - Inherits color from context unless `color` is provided (via CSS classes/vars in the component).
@@ -35,9 +37,9 @@ import { IconButton } from 'ui-lib-custom';
 ### Architecture
 
 - Standalone Angular component with `ChangeDetectionStrategy.OnPush` and `ViewEncapsulation.None`.
-- Composes `ui-lib-icon` as its only rendered child.
-- Uses signal inputs with computed selectors for host classes and icon-size mapping.
-- Host element carries interaction semantics (`role="button"`, `tabindex="0"`, `aria-disabled`).
+- Composes a native `<button type="button">` around `ui-lib-icon`.
+- Uses signal inputs with computed selectors for button classes, icon-size mapping, and loading-aware aria labels.
+- Native button semantics carry disabled, busy, and accessible-name behavior.
 
 ### Composition Strategy
 
@@ -47,15 +49,15 @@ import { IconButton } from 'ui-lib-custom';
 
 ### Styling Strategy
 
-- Host styles in `icon-button.scss` provide inline-flex centering, compact padding, and focus-visible outline.
-- Disabled state is enforced visually and behaviorally (`opacity`, `pointer-events: none`).
-- Icon child disables pointer events so host remains the interaction target.
+- Button styles in `icon-button.scss` provide a minimum 44 × 44px tap target, focus-visible outline, and loading spinner animation.
+- Disabled state is enforced visually while preserving native button behavior.
+- Reduced-motion styles disable button transitions and spinner animation.
 
 ### Accessibility
 
-- `ariaLabel` should be provided for icon-only affordances.
-- Keyboard users receive focus ring via `:focus-visible`.
-- Disabled state is mirrored in `aria-disabled`.
+- `ariaLabel` is mandatory for icon-only affordances; the icon name is never treated as the accessible label.
+- The inner icon is decorative and rendered with `aria-hidden="true"`.
+- Loading state announces `"Loading, please wait"` and disables the native button.
 
 ### Performance
 
@@ -65,8 +67,7 @@ import { IconButton } from 'ui-lib-custom';
 
 ### Testing Focus
 
+- native button semantics, loading announcement, and disabled behavior
 - variant/size/color/disabled class composition
-- host ARIA attributes and disabled behavior
 - icon-size mapping consistency
-- focus-visible and pointer behavior
-
+- focus-visible and reduced-motion behavior

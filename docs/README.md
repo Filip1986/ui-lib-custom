@@ -163,15 +163,14 @@ npm run build-storybook
 
 ---
 
-## 🌟 Vision
+## 🌟 Vision & Strategy
 
-**Understand the why behind the library:**
+**Understand the why behind the library and the path to launch:**
 
-- **[Vision](VISION.md)** - Philosophy, strategic positioning, emotional design goals, and long-term roadmap
-  - Core philosophy (Angular-native, DX-first, A11y as architecture, performance, composability)
-  - Strategic positioning and the "wow factor"
-  - AI-native development philosophy
-  - Long-term evolution from component library → UI ecosystem → enterprise platform
+- **[Vision](VISION.md)** — Philosophy, strategic positioning, emotional design goals, and long-term roadmap
+- **[Roadmap](ROADMAP.md)** — Phase-by-phase path from current hardening → Public Beta → v1.0 GA
+- **[Launch Strategy](LAUNCH_STRATEGY.md)** — The sequenced build-in-public → seed → announce path
+- **[Competitive Strategy](COMPETITIVE_STRATEGY.md)** — When and how to publish benchmark claims publicly (execute after Phase 3)
 
 ---
 
@@ -188,20 +187,16 @@ npm run build-storybook
 
 ---
 
-## 🔬 Research
-
-Planning and parity research docs are consolidated under:
-
-- **[Research Index](research/README.md)**
-
 ---
 
-## 🤖 AI Prompts
+## 🤖 AI Prompts & Quality System
 
-Ready-to-use prompts for working with AI on this library:
+Ready-to-use prompts and the scoring infrastructure for working with AI on this library:
 
-- **[Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)** — master prompt, 6-phase workflow (Architecture → DX → A11y → Performance → Composability → Emotional Polish), and the quality scorecard (every category must score ≥ 8 before a component ships)
-- **[Component Quality Scores](COMPONENT_SCORES.md)** — the hardening backlog; scores for all 70+ components, updated after each evolution session
+- **[Component Evolution Prompts](prompts/COMPONENT_EVOLUTION_PROMPTS.md)** — master prompt, 6-phase workflow (Architecture → DX → A11y → Performance → Composability → Emotional Polish)
+- **[Scoring Criteria](SCORING_CRITERIA.md)** — 149 binary checkboxes across 11 categories; defines exactly what every score number means — a score is a count, not an opinion
+- **[Component Quality Scores](COMPONENT_SCORES.md)** — the live scoreboard; scores for all 70+ components, updated after each evolution session
+- **[Competitive Benchmarks](COMPETITIVE_BENCHMARKS.md)** — per-component parity tables vs Angular Material, PrimeNG, Radix UI, Ark UI — evidence for Category 11 scores
 - **[Timeline Component Prompts](prompts/TIMELINE_PROMPTS.md)** — example of a per-component prompt sequence
 
 ---

@@ -4,8 +4,10 @@
 > Updated whenever a component completes a phase of the evolution workflow.
 > The hardening queue below is the active prioritized backlog — work top to bottom.
 
-**Gate:** A component is only considered production-quality when every category scores **≥ 8**.
+**Gate:** A component is only considered production-quality when every category scores **≥ 8** (11 categories total).
+**Criteria:** [`docs/SCORING_CRITERIA.md`](SCORING_CRITERIA.md) — the canonical checklist defining what each score number means. A score is a count of verified checkboxes, not a gut feeling.
 **Prompt:** Run the 6-phase evolution workflow from [`docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`](prompts/COMPONENT_EVOLUTION_PROMPTS.md).
+**Benchmarks:** [`docs/COMPETITIVE_BENCHMARKS.md`](COMPETITIVE_BENCHMARKS.md) — per-component parity tables (Category 11 evidence).
 
 ---
 
@@ -115,7 +117,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 63   | Inplace         | Display/edit toggle `aria-expanded`                       | ✅ Done            |
 | 64   | BlockUI         | `aria-busy` on blocked container                          | ✅ Done            |
 | 65   | Avatar          | `alt` propagation, group context                          | ✅ Done            |
-| 66   | Image           | Alt text, preview dialog a11y                             | ⏳ Needs hardening |
+| 66   | Image           | Alt text, preview dialog a11y                             | ✅ Done            |
 | 67   | ImageCompare    | Slider `role=slider` + `aria-valuetext`                   | ✅ Done            |
 | 68   | SplitButton     | Dropdown trigger `aria-haspopup`, menu keyboard nav       | ✅ Done            |
 | 69   | Upload          | Drop zone announcement, file list management              | ✅ Done            |
@@ -139,7 +141,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ⏳ Needs hardening      |
-| IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ⏳ Needs hardening      |
+| IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
 | Stack             | No landmark pollution, `as` tag semantics                                                           | ⏳ Needs hardening      |
 | Inline            | No landmark pollution, wrap + reading order                                                         | ⏳ Needs hardening      |
 | Grid              | Visual vs DOM order constraint, no overflow clipping                                                | ✅ Done                 |
@@ -147,8 +149,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ⏳ Needs hardening      |
-| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ⏳ Needs hardening      |
-| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ⏳ Needs hardening      |
+| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done                 |
+| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done                 |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
 | StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ⏳ Needs hardening      |
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
@@ -212,7 +214,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Grid        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| IconField   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| IconField   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | FormField   | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 9    | 8.7 | 🟢     |
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
@@ -296,7 +298,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | IconButton      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ButtonGroup     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | SplitButton     | 9   | 9    | 8    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
-| Image           | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Image           | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | ImageCompare    | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |

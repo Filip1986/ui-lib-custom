@@ -40,14 +40,15 @@
   <!-- Preview indicator overlay (visible on hover when preview is enabled) -->
   @if (preview() && !hasError()) {
     <button
+      #indicatorButton
       type="button"
       class="uilib-image__indicator"
       [class.uilib-image__indicator--visible]="isHovered()"
       [attr.aria-label]="ariaLabel()"
       [attr.aria-haspopup]="'dialog'"
-      [attr.aria-controls]="previewVisible() ? componentId + '-preview' : null"
+      [attr.aria-controls]="previewVisible() ? previewId : null"
       [attr.aria-expanded]="previewVisible()"
-      (click)="openPreview()"
+      (click)="openPreview(indicatorButton)"
     >
       @if (indicatorTemplate()) {
         <ng-container [ngTemplateOutlet]="indicatorTemplate()!" />
@@ -76,14 +77,24 @@
     class="uilib-image__mask"
     role="dialog"
     aria-modal="true"
-    [attr.id]="componentId + '-preview'"
+    [attr.id]="previewId"
     [attr.aria-label]="ariaLabel()"
+    [attr.aria-describedby]="previewStatusId"
     tabindex="-1"
     (click)="onMaskClick($event)"
     (keydown)="onMaskKeyDown($event)"
   >
+    <span class="uilib-image__sr-live" [attr.id]="previewStatusId" aria-live="polite" aria-atomic="true">
+      {{ previewStatusMessage() }}
+    </span>
+
     <!-- Toolbar -->
-    <div class="uilib-image__toolbar" role="toolbar" aria-label="Image controls">
+    <div
+      class="uilib-image__toolbar"
+      [attr.id]="previewToolbarId"
+      role="toolbar"
+      aria-label="Image controls"
+    >
       <!-- Zoom in -->
       <button
         type="button"
@@ -168,4 +179,3 @@
     </div>
   </div>
 }
-

@@ -7,8 +7,8 @@ import {
   contentChild,
   effect,
   inject,
-  model,
   input,
+  model,
   output,
   signal,
   viewChild,
@@ -40,7 +40,7 @@ import type { ImageSize, ImageVariant } from './image.types';
 
 export type { ImageSize, ImageVariant } from './image.types';
 
-let imageIdCounter: number = 0;
+let nextImageId: number = 0;
 
 /**
  * Image component with optional preview overlay, zoom, and rotation controls.
@@ -93,6 +93,10 @@ export class ImageComponent implements OnDestroy {
   /** Reference to the preview overlay mask element. */
   private readonly maskElement: Signal<ElementRef<HTMLElement> | undefined> =
     viewChild<ElementRef<HTMLElement>>('imageMask');
+
+  /** Reference to the preview trigger button for robust focus restoration. */
+  private readonly indicatorButtonElement: Signal<ElementRef<HTMLButtonElement> | undefined> =
+    viewChild<ElementRef<HTMLButtonElement>>('indicatorButton');
 
   // ─── Inputs ──────────────────────────────────────────────────────────────────
 
@@ -165,7 +169,10 @@ export class ImageComponent implements OnDestroy {
   /** Rotation angle in the preview overlay. */
   public readonly rotateAngle: WritableSignal<number> = signal<number>(0);
 
-  public readonly componentId: string = `ui-lib-image-${++imageIdCounter}`;
+  public readonly componentId: string = `ui-lib-image-${nextImageId++}`;
+  public readonly previewId: string = `${this.componentId}-preview`;
+  public readonly previewStatusId: string = `${this.componentId}-preview-status`;
+  public readonly previewToolbarId: string = `${this.componentId}-preview-toolbar`;
 
   // ─── Focus management ────────────────────────────────────────────────────────
 
@@ -205,6 +212,15 @@ export class ImageComponent implements OnDestroy {
     (): string => `scale(${this.zoomScale()}) rotate(${this.rotateAngle()}deg)`
   );
 
+  /** Live-region announcement for preview state changes while the overlay is open. */
+  public readonly previewStatusMessage: Signal<string> = computed<string>((): string => {
+    if (!this.previewVisible()) {
+      return '';
+    }
+
+    return `Zoom ${this.zoomPercent()}%. ${this.rotationAnnouncement()}`;
+  });
+
   /** Composite CSS class string applied via the host binding. */
   public readonly hostClasses: Signal<string> = computed<string>((): string => {
     const classes: string[] = [
@@ -230,6 +246,30 @@ export class ImageComponent implements OnDestroy {
     const base: string = 'uilib-image__img';
     const extra: string | null = this.imageClass();
     return extra ? `${base} ${extra}` : base;
+  });
+
+  /** Zoom percentage used for screen-reader announcements. */
+  public readonly zoomPercent: Signal<number> = computed<number>((): number =>
+    Math.round(this.zoomScale() * 100)
+  );
+
+  /** Rotation normalized to a positive degree value for announcements. */
+  public readonly normalizedRotateAngle: Signal<number> = computed<number>((): number => {
+    const normalizedAngle: number = this.rotateAngle() % 360;
+    return normalizedAngle < 0 ? normalizedAngle + 360 : normalizedAngle;
+  });
+
+  /** Rotation announcement string for the preview live region. */
+  public readonly rotationAnnouncement: Signal<string> = computed<string>((): string => {
+    const rawRotateAngle: number = this.rotateAngle();
+    const normalizedRotateAngle: number = this.normalizedRotateAngle();
+    const fullTurns: number = Math.trunc(Math.abs(rawRotateAngle) / 360);
+
+    if (rawRotateAngle !== 0 && normalizedRotateAngle === 0 && fullTurns > 0) {
+      return `Rotation 0 degrees after ${fullTurns} full turn${fullTurns === 1 ? '' : 's'}.`;
+    }
+
+    return `Rotation ${normalizedRotateAngle} degrees.`;
   });
 
   // ─── Lifecycle ────────────────────────────────────────────────────────────────
@@ -283,9 +323,13 @@ export class ImageComponent implements OnDestroy {
   // ─── Preview controls ─────────────────────────────────────────────────────────
 
   /** Open the preview overlay and reset transform state. */
-  public openPreview(): void {
+  public openPreview(triggerElement?: HTMLElement | null): void {
     const activeElement: Element | null = this.document.activeElement;
-    this.previewTriggerElement = activeElement instanceof HTMLElement ? activeElement : null;
+    this.previewTriggerElement =
+      triggerElement ??
+      (activeElement instanceof HTMLElement ? activeElement : null) ??
+      this.indicatorButtonElement()?.nativeElement ??
+      null;
     this.zoomScale.set(1);
     this.rotateAngle.set(0);
     this.previewVisible.set(true);
@@ -310,6 +354,30 @@ export class ImageComponent implements OnDestroy {
       event.preventDefault();
       event.stopPropagation();
       this.closePreview();
+      return;
+    }
+
+    if (this.isZoomInShortcut(event)) {
+      event.preventDefault();
+      this.zoomIn();
+      return;
+    }
+
+    if (this.isZoomOutShortcut(event)) {
+      event.preventDefault();
+      this.zoomOut();
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.rotateLeft();
+      return;
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      this.rotateRight();
     }
   }
 
@@ -373,5 +441,17 @@ export class ImageComponent implements OnDestroy {
       }
       this.previewTriggerElement = null;
     });
+  }
+
+  private isZoomInShortcut(event: KeyboardEvent): boolean {
+    // Intentionally combine key and code checks so layouts that emit different
+    // printable characters for the same physical key still retain zoom access.
+    return (
+      event.key === '+' || event.key === '=' || event.code === 'Equal' || event.code === 'NumpadAdd'
+    );
+  }
+
+  private isZoomOutShortcut(event: KeyboardEvent): boolean {
+    return event.key === '-' || event.code === 'Minus' || event.code === 'NumpadSubtract';
   }
 }
