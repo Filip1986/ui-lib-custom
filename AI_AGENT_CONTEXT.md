@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `Dock` -> ✅ complete + hardened (6-phase, score 9.0/10, 73 tests — 45 unit + 28 a11y)
 
 ---
 
@@ -76,6 +77,45 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-13 [Dock component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/dock/dock.ts
+      • Added `ariaLabel` signal input (default 'Dock') for the nav landmark
+      • Added `itemTemplate` contentChild for custom item template slot (`#dockItemTemplate`)
+      • Imported `contentChild`, `type TemplateRef` from `@angular/core`
+  - projects/ui-lib-custom/src/lib/dock/dock.html
+      • Use `[attr.aria-label]="ariaLabel()"` on `<nav>` (was hardcoded 'Dock')
+      • Use `item.ariaLabel ?? item.label ?? null` on all interactive elements
+      • Add `aria-hidden="true"` to `<ui-lib-icon>` inside all item types
+      • Refactored disabled item rendering: command items → `<button disabled aria-disabled="true">`,
+        url/routerLink items → `<a aria-disabled="true">` without href/routerLink (not static spans),
+        static items → `<span>` without aria-disabled
+      • Added `#dockItemTemplate` ng-container outlet in each item branch (Phase 5)
+  - projects/ui-lib-custom/src/lib/dock/dock.types.ts
+      • Added `ariaLabel?: string` to `DockItem` interface
+  - projects/ui-lib-custom/src/lib/dock/dock.scss
+      • Added `@media (prefers-reduced-motion: reduce)` block: item transition/transform none,
+        item-link transition none, tooltip transition none
+  - projects/ui-lib-custom/src/lib/dock/dock.a11y.spec.ts (CREATED — 28 tests)
+      • axe-core (4), ARIA structure (4), item accessible names (5), icon a11y (3),
+        disabled state (3), keyboard/Tab nav (3), empty edge case (1), custom template (4),
+        DockItem.ariaLabel type (1)
+  - projects/ui-lib-custom/src/lib/dock/README.md
+      • Added DockItem table with ariaLabel field, container role guidance, keyboard interaction
+        table, accessibility section, reduced-motion note, custom template usage example
+  - docs/COMPONENT_SCORES.md
+      • Dock: 🔴 → 🟢 (all 10 categories: 9, avg 9.0); needs-hardening row updated to ✅ Done
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived ImageCompare handoff to keep only the newest 3 in AI_AGENT_CONTEXT.md
+State: Dock 6-phase hardening complete. Nav landmark with configurable ariaLabel, per-item ariaLabel override field, aria-hidden icons, proper disabled element semantics (buttons/anchors, not spans), prefers-reduced-motion SCSS guard, custom item template slot, and 28-test a11y spec.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/dock/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/dock/" --no-coverage (73/73 PASS — 45 unit + 28 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available.
+Next step: Continue hardening remaining components in `docs/prompts/needs-hardening/`.
 
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
@@ -94,33 +134,6 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
 Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
-
-Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
-Changed:
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
-      • Added module-level `nextImageCompareId` counter and unique host `instanceId`
-      • Bound `[id]` to `instanceId` in host metadata
-      • Added `ariaValueText` computed signal (`"N percent"` format)
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.html
-      • Added `[attr.aria-valuetext]="ariaValueText()"` to the handle
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.scss
-      • Added `@media (prefers-reduced-motion: reduce)` block disabling handle transitions
-  - projects/ui-lib-custom/src/lib/image-compare/image-compare.a11y.spec.ts (CREATED — 21 tests)
-      • ARIA structure, keyboard nav, image alt, decorative aria-hidden, disabled state, unique ID, and axe-core assertions
-  - projects/ui-lib-custom/src/lib/image-compare/README.md
-      • Updated `ariaLabel` default, added Keyboard Interaction table, ARIA Attributes table, CSS Custom Properties table, and Accessibility section
-  - docs/COMPONENT_SCORES.md
-      • ImageCompare #67: ⏳ Queued → ✅ Done (scores: API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived oldest DataView handoff to keep only the newest 3 in this file
-State: ImageCompare hardening complete. Component now has aria-valuetext, unique generated IDs per instance, prefers-reduced-motion SCSS guard, and a full 21-test a11y spec (role=slider, ARIA value attrs, image alt, decorative aria-hidden, keyboard nav, disabled state, axe-core).
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/image-compare/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=image-compare --no-coverage (60/60 PASS — 39 unit + 21 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
-Next step: Continue Tier 6 queue with remaining queued components.
 
 Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
 Changed:
