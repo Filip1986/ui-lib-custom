@@ -100,7 +100,7 @@
 | `Enter` / `Space` | Rotate Left / Right | Rotates the image 90° in the corresponding direction |
 | `Enter` / `Space` | Close button | Closes the overlay and restores focus |
 | `+` / `=` / numpad `+` | Preview overlay open | Zooms in without moving focus away from the current control |
-| `-` / `_` / numpad `-` | Preview overlay open | Zooms out without moving focus away from the current control |
+| `-` / numpad `-` | Preview overlay open | Zooms out without moving focus away from the current control |
 | `ArrowLeft` / `ArrowRight` | Preview overlay open | Rotates the image 90° left or right |
 
 ## CSS Custom Properties

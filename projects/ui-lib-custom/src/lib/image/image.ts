@@ -444,17 +444,14 @@ export class ImageComponent implements OnDestroy {
   }
 
   private isZoomInShortcut(event: KeyboardEvent): boolean {
+    // Intentionally combine key and code checks so layouts that emit different
+    // printable characters for the same physical key still retain zoom access.
     return (
       event.key === '+' || event.key === '=' || event.code === 'Equal' || event.code === 'NumpadAdd'
     );
   }
 
   private isZoomOutShortcut(event: KeyboardEvent): boolean {
-    return (
-      event.key === '-' ||
-      event.key === '_' ||
-      event.code === 'Minus' ||
-      event.code === 'NumpadSubtract'
-    );
+    return event.key === '-' || event.code === 'Minus' || event.code === 'NumpadSubtract';
   }
 }
