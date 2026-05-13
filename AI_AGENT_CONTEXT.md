@@ -154,3 +154,28 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
+
+Date: 2026-05-13 [Container layout component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/layout/container.ts
+      • Added `HostAttributeToken('id')` injection to detect static consumer-supplied id
+      • Bound `[attr.tabindex]` to `"-1"` only when `_hostHasId` is true (skip-link target support)
+  - projects/ui-lib-custom/src/lib/layout/container.a11y.spec.ts (CREATED — 12 tests)
+      • landmark check, tabindex absent/present, axe passes (default, id, centered, inset),
+        no overflow:hidden, max-width applied, content projection, two named containers
+  - projects/ui-lib-custom/src/lib/layout/README.md
+      • Added size presets table (sm–full with pixel values and CSS variable names)
+      • Added custom max-width override section with CSS and template examples
+      • Added skip-link target usage section with code example and behaviour notes
+      • Added accessibility notes (no landmark role, no overflow:hidden)
+  - docs/COMPONENT_SCORES.md
+      • Container: ⏳ Needs hardening → ✅ Done (API 9, A11y 9, Perf 9, Comp 9, Theme 8, DX 9, Docs 9, Polish 9, Angular 9, Feel 9 — avg 8.9)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived ImageCompare handoff (2026-05-12) to keep only the newest 3 here
+State: Container hardening complete. `tabindex="-1"` is set only when a static `id` attribute is present (HostAttributeToken), no overflow:hidden clipping, host renders as plain custom element with no landmark role, full 12-test a11y spec, and enriched README.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/layout/container" --no-coverage (24/24 PASS — 12 unit + 12 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: No blocking issues. All tests and build green on first attempt after npm install.
+Next step: Continue with remaining new-component hardening prompts in `docs/prompts/needs-hardening/`.
