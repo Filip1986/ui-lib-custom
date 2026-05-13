@@ -153,7 +153,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | StyleClass      | `aria-expanded` on trigger, `aria-hidden` on target         | ⏳ Needs hardening  |
 | AnimateOnScroll | `prefers-reduced-motion` (CRITICAL — skip all animation)    | ⏳ Needs hardening  |
 | AutoFocus       | Only once on mount, no focus theft from dialogs             | ⏳ Needs hardening  |
-| ClassNames      | No ARIA interference                                        | ⏳ Needs hardening  |
+| ClassNames      | No ARIA interference                                        | ✅ Done             |
 | Bind            | No ARIA interference                                        | ⏳ Needs hardening  |
 
 ---
@@ -301,7 +301,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Upload          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Inplace         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | BlockUI         | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| ClassNames      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ClassNames      | 9   | 9    | 10   | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.1 | 🟢     |
 | Terminal        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
 | ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
