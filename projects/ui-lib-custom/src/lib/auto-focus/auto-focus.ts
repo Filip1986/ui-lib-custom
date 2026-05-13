@@ -102,6 +102,10 @@ export class AutoFocus implements AfterViewInit {
       return true;
     }
 
+    if (!this.isProgrammaticallyFocusable(activeElement)) {
+      return true;
+    }
+
     if (
       activeElement === target ||
       target.contains(activeElement) ||

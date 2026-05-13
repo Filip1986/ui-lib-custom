@@ -77,34 +77,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-12 [Divider component — 6-phase hardening COMPLETE (#58)]
-Changed:
-  - projects/ui-lib-custom/src/lib/divider/divider.ts
-      • Added module-level `nextDividerId` counter and unique host `dividerId`
-      • Added `ariaLabel` + `decorative` inputs and computed ARIA bindings (`ariaOrientation`, `resolvedAriaLabel`, `ariaHidden`)
-      • Bound host `id`, `aria-label`, and `aria-hidden` while keeping separator semantics
-  - projects/ui-lib-custom/src/lib/divider/divider.scss
-      • Added `prefers-reduced-motion: reduce` override
-  - projects/ui-lib-custom/src/lib/divider/divider.spec.ts
-      • Added coverage for generated ids, decorative `aria-hidden`, and labeled divider behavior
-  - projects/ui-lib-custom/src/lib/divider/divider.a11y.spec.ts (CREATED — 12 tests)
-      • Added ARIA structure assertions, keyboard/non-live-region checks, and axe-core checks for default/vertical/decorative/labeled states
-  - projects/ui-lib-custom/src/lib/divider/README.md
-      • Added `ariaLabel` + `decorative` input docs, ARIA behavior table, keyboard table, and expanded accessibility notes
-  - docs/COMPONENT_SCORES.md
-      • Divider #58: ⏳ Queued → ✅ Done
-      • Layout table row populated (API 9, A11y 9, Perf 9, Comp 8, Theme 9, DX 9, Docs 9, Polish 8, Angular 9, Feel 8 — avg 8.7)
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-      • Archived the previous oldest handoff to keep only the newest 3 in this file
-State: Divider hardening complete. The host now supports decorative vs. labeled accessibility semantics, generated stable ids per instance, reduced-motion styling fallback, updated DX docs, and dedicated divider a11y regression coverage.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/divider/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=divider --no-coverage (36/36 PASS — 24 unit + 12 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation. Divider UI screenshot captured at `/tmp/divider-hardening.png` via `npx playwright screenshot` after `npm run serve:demo`.
-Next step: Continue Tier 6 queue with Toolbar (#59) hardening.
-
 Date: 2026-05-12 [ImageCompare component — 6-phase hardening COMPLETE (#67)]
 Changed:
   - projects/ui-lib-custom/src/lib/image-compare/image-compare.ts
@@ -151,3 +123,31 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
+
+Date: 2026-05-13 [AutoFocus directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.ts
+      • Replaced timing with `requestAnimationFrame` deferred focus in `ngAfterViewInit`
+      • Added `disabled` (`InputSignal<boolean>`) and `selector` (`InputSignal<string | null>`) inputs
+      • Added guard logic to avoid stealing focus from existing focus managers (dialogs/focus traps)
+      • Added DEV mode warning for non-focusable host/selector targets
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.spec.ts
+      • Updated unit tests for disabled + selector APIs, deferred focus, and one-time mount behavior
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.a11y.spec.ts (CREATED — 10 tests)
+      • Added accessibility-focused regression coverage for mount focus, disabled behavior, selector targeting, one-time execution, and focus-theft prevention
+  - projects/ui-lib-custom/src/lib/auto-focus/README.md
+      • Updated API docs to `disabled`/`selector`, explicit opt-in guidance, and accessibility caveats
+  - projects/demo/src/app/pages/auto-focus/auto-focus-demo.component.html
+      • Updated demo/API examples from `[autofocus]` to `[disabled]` and documented `selector`
+  - docs/COMPONENT_SCORES.md
+      • Marked AutoFocus as ✅ Done in queue and filled Utilities & Directives score row (avg 8.6)
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+      • Archived oldest Divider handoff to keep only newest 3 entries in this file
+State: AutoFocus now runs once on mount, defers focus with rAF, supports optional child-selector targeting, and avoids stealing focus when another interactive element is already focused. Docs, demo usage, and dedicated a11y tests are aligned with the hardened behavior.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/auto-focus/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/auto-focus/" --no-coverage (19/19 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Playwright browser was not installed initially (`chrome-headless-shell` missing), resolved via `npx playwright install chromium`. Demo screenshot captured at `/tmp/auto-focus-hardening.png` after serving demo on `http://127.0.0.1:4200/auto-focus`.
+Next step: Continue hardening the next queued utility/component (for example Image or ClassNames).

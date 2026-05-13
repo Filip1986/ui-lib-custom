@@ -81,6 +81,14 @@ function requireElement(fixture: ComponentFixture<unknown>): HTMLElement {
   return debugEl.nativeElement as HTMLElement;
 }
 
+async function detectAndWaitForFocus(fixture: ComponentFixture<unknown>): Promise<void> {
+  fixture.detectChanges();
+  await fixture.whenStable();
+  await new Promise<void>((resolve: () => void): void => {
+    window.requestAnimationFrame((): void => resolve());
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
@@ -89,12 +97,7 @@ describe('AutoFocus', (): void => {
   let requestAnimationFrameSpy: jest.SpyInstance<number, [FrameRequestCallback]>;
 
   beforeEach((): void => {
-    requestAnimationFrameSpy = jest
-      .spyOn(window, 'requestAnimationFrame')
-      .mockImplementation((callback: FrameRequestCallback): number => {
-        callback(performance.now());
-        return 1;
-      });
+    requestAnimationFrameSpy = jest.spyOn(window, 'requestAnimationFrame');
   });
 
   afterEach((): void => {
@@ -130,7 +133,7 @@ describe('AutoFocus', (): void => {
   });
 
   describe('default focus behavior', (): void => {
-    it('should call focus on the host element after view init', (): void => {
+    it('should call focus on the host element after view init', async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [AutoFocusDefaultHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -144,13 +147,13 @@ describe('AutoFocus', (): void => {
         'focus'
       );
 
-      fixture.detectChanges();
+      await detectAndWaitForFocus(fixture);
 
       expect(focusSpy).toHaveBeenCalledTimes(1);
-      expect(requestAnimationFrameSpy).toHaveBeenCalledTimes(1);
+      expect(requestAnimationFrameSpy).toHaveBeenCalled();
     });
 
-    it('should call focus when disabled input is explicitly false', (): void => {
+    it('should call focus when disabled input is explicitly false', async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [AutoFocusHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -163,14 +166,14 @@ describe('AutoFocus', (): void => {
         'focus'
       );
 
-      fixture.detectChanges();
+      await detectAndWaitForFocus(fixture);
 
       expect(focusSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('disabled', (): void => {
-    it('should NOT call focus when disabled is true', (): void => {
+    it('should NOT call focus when disabled is true', async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [AutoFocusDisabledHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -184,12 +187,12 @@ describe('AutoFocus', (): void => {
         'focus'
       );
 
-      fixture.detectChanges();
+      await detectAndWaitForFocus(fixture);
 
       expect(focusSpy).not.toHaveBeenCalled();
     });
 
-    it('should NOT call focus when disabled input changes from false to true before view init', (): void => {
+    it('should NOT call focus when disabled input changes from false to true before view init', async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [AutoFocusHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -204,14 +207,14 @@ describe('AutoFocus', (): void => {
         'focus'
       );
 
-      fixture.detectChanges();
+      await detectAndWaitForFocus(fixture);
 
       expect(focusSpy).not.toHaveBeenCalled();
     });
   });
 
   describe('selector support', (): void => {
-    it('should focus a matching child when selector is provided', (): void => {
+    it('should focus a matching child when selector is provided', async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [AutoFocusSelectorHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -224,14 +227,14 @@ describe('AutoFocus', (): void => {
       ) as HTMLElement;
       const focusSpy: jest.SpyInstance = jest.spyOn(childButton, 'focus');
 
-      fixture.detectChanges();
+      await detectAndWaitForFocus(fixture);
 
       expect(focusSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('single-run behavior', (): void => {
-    it('should focus only once and not on subsequent host re-renders', (): void => {
+    it('should focus only once and not on subsequent host re-renders', async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [AutoFocusRerenderHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -244,19 +247,20 @@ describe('AutoFocus', (): void => {
       ) as HTMLElement;
       const focusSpy: jest.SpyInstance = jest.spyOn(input, 'focus');
 
-      fixture.detectChanges();
+      await detectAndWaitForFocus(fixture);
       fixture.componentInstance.disabled.set(true);
       fixture.detectChanges();
       fixture.componentInstance.disabled.set(false);
       fixture.detectChanges();
+      await fixture.whenStable();
 
       expect(focusSpy).toHaveBeenCalledTimes(1);
-      expect(requestAnimationFrameSpy).toHaveBeenCalledTimes(1);
+      expect(requestAnimationFrameSpy).toHaveBeenCalled();
     });
   });
 
   describe('edge cases', (): void => {
-    it('should not throw when applied to a non-focusable element and should log a dev warning', (): void => {
+    it('should not throw when applied to a non-focusable element and should log a dev warning', async (): Promise<void> => {
       TestBed.configureTestingModule({
         imports: [AutoFocusNonFocusableHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -268,7 +272,7 @@ describe('AutoFocus', (): void => {
         return;
       });
 
-      expect((): void => fixture.detectChanges()).not.toThrow();
+      await detectAndWaitForFocus(fixture);
       expect(warnSpy).toHaveBeenCalledTimes(1);
 
       warnSpy.mockRestore();

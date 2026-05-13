@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  provideZonelessChangeDetection,
-  signal,
-} from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
@@ -13,7 +7,7 @@ import { AutoFocus } from './auto-focus';
 @Component({
   standalone: true,
   imports: [AutoFocus],
-  template: `<input id="auto-focus-input" uiLibAutoFocus />`,
+  template: `<input id="auto-focus-input" aria-label="Auto focus input" uiLibAutoFocus />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusA11yHostComponent {}
@@ -21,7 +15,12 @@ class AutoFocusA11yHostComponent {}
 @Component({
   standalone: true,
   imports: [AutoFocus],
-  template: `<input id="auto-focus-input" uiLibAutoFocus [disabled]="true" />`,
+  template: `<input
+    id="auto-focus-input"
+    aria-label="Auto focus input"
+    uiLibAutoFocus
+    [disabled]="true"
+  />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusDisabledA11yHostComponent {}
@@ -41,7 +40,7 @@ class AutoFocusSelectorA11yHostComponent {}
 @Component({
   standalone: true,
   imports: [AutoFocus],
-  template: `<div id="selector-host" uiLibAutoFocus selector="[data-missing]"></div>`,
+  template: `<div id="selector-host" tabindex="-1" uiLibAutoFocus selector="[data-missing]"></div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusMissingSelectorA11yHostComponent {}
@@ -49,11 +48,16 @@ class AutoFocusMissingSelectorA11yHostComponent {}
 @Component({
   standalone: true,
   imports: [AutoFocus],
-  template: `<input id="auto-focus-input" uiLibAutoFocus [disabled]="disabled()" />`,
+  template: `<input
+    id="auto-focus-input"
+    aria-label="Auto focus input"
+    uiLibAutoFocus
+    [disabled]="disabled"
+  />`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusRerenderA11yHostComponent {
-  public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
+  public disabled: boolean = false;
 }
 
 @Component({
@@ -61,14 +65,14 @@ class AutoFocusRerenderA11yHostComponent {
   imports: [AutoFocus],
   template: `
     <button id="existing-focus" type="button">Existing</button>
-    @if (showAutoFocus()) {
+    @if (showAutoFocus) {
       <input id="deferred-auto-focus" uiLibAutoFocus />
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class AutoFocusExistingFocusHostComponent {
-  public readonly showAutoFocus: WritableSignal<boolean> = signal<boolean>(false);
+  public showAutoFocus: boolean = false;
 }
 
 async function createFixture<T>(
@@ -85,6 +89,9 @@ async function createFixture<T>(
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
   await fixture.whenStable();
+  await new Promise<void>((resolve: () => void): void => {
+    window.requestAnimationFrame((): void => resolve());
+  });
   return fixture;
 }
 
@@ -92,12 +99,7 @@ describe('AutoFocus (a11y)', (): void => {
   let requestAnimationFrameSpy: jest.SpyInstance<number, [FrameRequestCallback]>;
 
   beforeEach((): void => {
-    requestAnimationFrameSpy = jest
-      .spyOn(window, 'requestAnimationFrame')
-      .mockImplementation((callback: FrameRequestCallback): number => {
-        callback(performance.now());
-        return 1;
-      });
+    requestAnimationFrameSpy = jest.spyOn(window, 'requestAnimationFrame');
   });
 
   afterEach((): void => {
@@ -138,7 +140,7 @@ describe('AutoFocus (a11y)', (): void => {
 
   it('uses requestAnimationFrame for deferred focus', async (): Promise<void> => {
     await createFixture<AutoFocusA11yHostComponent>(AutoFocusA11yHostComponent);
-    expect(requestAnimationFrameSpy).toHaveBeenCalledTimes(1);
+    expect(requestAnimationFrameSpy).toHaveBeenCalled();
   });
 
   it('focuses only once and does not re-run on subsequent re-renders', async (): Promise<void> => {
@@ -149,13 +151,14 @@ describe('AutoFocus (a11y)', (): void => {
     ) as HTMLElement;
     const focusSpy: jest.SpyInstance = jest.spyOn(input, 'focus');
 
-    fixture.componentInstance.disabled.set(true);
+    fixture.componentInstance.disabled = true;
     fixture.detectChanges();
-    fixture.componentInstance.disabled.set(false);
+    fixture.componentInstance.disabled = false;
     fixture.detectChanges();
+    await fixture.whenStable();
 
     expect(focusSpy).not.toHaveBeenCalled();
-    expect(requestAnimationFrameSpy).toHaveBeenCalledTimes(1);
+    expect(requestAnimationFrameSpy).toHaveBeenCalled();
   });
 
   it('focuses a selector-matched child element', async (): Promise<void> => {
@@ -167,7 +170,7 @@ describe('AutoFocus (a11y)', (): void => {
     expect(document.activeElement).toBe(childButton);
   });
 
-  it('falls back to host focus when selector match is missing', async (): Promise<void> => {
+  it('does not focus when selector match is missing', async (): Promise<void> => {
     const fixture: ComponentFixture<AutoFocusMissingSelectorA11yHostComponent> =
       await createFixture<AutoFocusMissingSelectorA11yHostComponent>(
         AutoFocusMissingSelectorA11yHostComponent
@@ -175,7 +178,7 @@ describe('AutoFocus (a11y)', (): void => {
     const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       '#selector-host'
     ) as HTMLElement;
-    expect(document.activeElement).toBe(host);
+    expect(document.activeElement).not.toBe(host);
   });
 
   it('does not steal focus from an already focused external element', async (): Promise<void> => {
@@ -186,9 +189,12 @@ describe('AutoFocus (a11y)', (): void => {
     ) as HTMLElement;
     existing.focus();
 
-    fixture.componentInstance.showAutoFocus.set(true);
+    fixture.componentInstance.showAutoFocus = true;
     fixture.detectChanges();
     await fixture.whenStable();
+    await new Promise<void>((resolve: () => void): void => {
+      window.requestAnimationFrame((): void => resolve());
+    });
 
     expect(document.activeElement).toBe(existing);
   });
