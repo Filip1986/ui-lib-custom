@@ -77,6 +77,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [InputGroup component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/input-group/input-group.html
+  - projects/ui-lib-custom/src/lib/input-group/input-group.a11y.spec.ts (NEW, 12 tests)
+  - projects/ui-lib-custom/src/lib/input-group/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: InputGroup now supports explicit `[addonLeft]` and `[addonRight]` projection slots while preserving default projection, adds dedicated accessibility coverage for decorative addon hiding, icon-button addon labeling, label→input targeting, axe baseline, and composability with Input/InputMask/InputNumber/Password, and documents decorative vs interactive addon requirements in the component README.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-group/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/input-group/" --no-coverage (23/23 PASS — 11 unit + 12 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `playwright-browser` tool was locked by an existing browser profile, so screenshot capture used CLI Playwright after installing Chromium (`npx playwright install chromium`). Screenshot saved at `/tmp/input-group-hardening.png`.
+Next step: Continue hardening the next queued new component prompt (for example Stack or OrganizationChart).
+
 Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/layout/inline.ts
@@ -114,23 +131,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
 Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
-
-Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
-Changed:
-  - AI_AGENT_CONTEXT.md
-  - docs/COMPONENT_SCORES.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-  - projects/ui-lib-custom/src/lib/virtual-scroller/README.md
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.ts
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.html
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.scss
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.component.spec.ts
-  - projects/ui-lib-custom/src/lib/virtual-scroller/virtual-scroller.a11y.spec.ts
-State: VirtualScroller now exposes configurable list/grid semantics with fallback scroll-region labels, item count metadata (`aria-setsize`, `aria-posinset`, `aria-rowcount`, `aria-rowindex`), keyboard scrolling for Arrow/Page/Home/End keys, polite loading/empty/total-count announcements, reduced-motion scroll behavior, and synced external loading state. Added a dedicated 14-test accessibility suite plus updated README and score bookkeeping.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/virtual-scroller/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=virtual-scroller --no-coverage (39/39 PASS — 25 unit + 14 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
-Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).

@@ -140,7 +140,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | KeyFilter         | Format hint, silent block communication                                                             | ⏳ Needs hardening      |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
-| InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ⏳ Needs hardening      |
+| InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ✅ Done                 |
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
 | Stack             | No landmark pollution, `as` tag semantics                                                           | ⏳ Needs hardening      |
 | Inline            | No landmark pollution, wrap + reading order                                                         | ✅ Done                 |
@@ -215,7 +215,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconField   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| InputGroup  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | FormField   | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 9    | 8.7 | 🟢     |
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Toolbar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
