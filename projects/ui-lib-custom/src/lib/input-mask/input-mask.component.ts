@@ -30,7 +30,7 @@ const INPUT_MASK_DEFAULT_ERROR_MESSAGES: Readonly<{
 }> = {
   incomplete: 'Please complete the required format.',
   invalid: 'The entered value does not match the required format.',
-} as const;
+};
 
 let nextInputMaskInstanceId: number = 0;
 

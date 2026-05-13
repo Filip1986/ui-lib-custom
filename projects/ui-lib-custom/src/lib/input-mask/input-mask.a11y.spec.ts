@@ -111,7 +111,7 @@ function sendKeypress(input: HTMLInputElement, character: string): void {
     bubbles: true,
     cancelable: true,
   });
-  // InputMask normalizes legacy key events via `which`/`keyCode`, so tests set both explicitly.
+  // InputMask normalizes legacy key events via deprecated `which`/`keyCode`, so tests set both.
   Object.defineProperty(event, 'which', { value: keyCode });
   Object.defineProperty(event, 'keyCode', { value: keyCode });
   input.dispatchEvent(event);
