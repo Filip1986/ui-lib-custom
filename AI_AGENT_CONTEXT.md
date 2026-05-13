@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `IconButton` -> ✅ complete + hardened (6-phase, score 8.6/10, 23 tests — 6 unit + 17 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 
 ---
@@ -76,6 +77,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-13 [IconButton component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.ts
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.html
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.scss
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.spec.ts
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/icon-button/README.md
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.stories.ts
+  - docs/reference/components/ICON_BUTTON.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: IconButton now renders a native `<button>` with required `ariaLabel` input, dev-mode empty-label error logging, loading-aware aria-label/busy/disabled semantics, a decorative aria-hidden icon, 44px minimum tap target, focus-visible outline, and reduced-motion-safe spinner/transition behavior. Added dedicated unit + a11y coverage and refreshed docs/examples so every showcased icon button includes an explicit accessible label.
+Verification:
+  - node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-button/ --max-warnings 0 (PASS)
+  - node_modules/.bin/jest --testPathPatterns="src/lib/icon-button/" --no-coverage (23/23 PASS)
+  - node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  - node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before local validation. GitHub Actions runs on the branch are currently `action_required` with zero jobs started, so no remote failure logs were available yet. Screenshot captured from the demo icons page at `/tmp/icon-button-hardening.png` after installing Chromium with `npx playwright install chromium`.
+Next step: Continue hardening the next queued utility/component prompt.
 
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
@@ -114,22 +137,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
-
-Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.html
-  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
-  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
-  - projects/ui-lib-custom/src/lib/form-field/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
-Next step: Continue hardening the next queued new layout/form component prompt.

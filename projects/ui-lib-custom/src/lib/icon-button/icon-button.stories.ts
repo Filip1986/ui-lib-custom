@@ -16,16 +16,18 @@ const meta: Meta = {
   parameters: { a11y: { disable: false } },
   argTypes: {
     icon: { control: 'text' },
+    ariaLabel: { control: 'text' },
     size: { control: 'select', options: SHARED_SIZE_OPTIONS },
     variant: { control: 'select', options: SHARED_VARIANT_OPTIONS },
     disabled: { control: 'boolean' },
+    loading: { control: 'boolean' },
   },
 };
 
 export default meta;
 
 export const Default: Story = {
-  args: { icon: 'plus', size: SHARED_DEFAULTS.Size },
+  args: { icon: 'plus', ariaLabel: 'Add item', size: SHARED_DEFAULTS.Size },
 };
 
 export const Variants: Story = {
@@ -33,9 +35,9 @@ export const Variants: Story = {
     props: { themeVariants: SHARED_THEME_VARIANTS },
     template: `
       <div style="display:flex; gap:0.75rem;">
-        <ui-lib-icon-button icon="plus" [variant]="themeVariants.Material" />
-        <ui-lib-icon-button icon="plus" [variant]="themeVariants.Bootstrap" />
-        <ui-lib-icon-button icon="plus" [variant]="themeVariants.Minimal" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" [variant]="themeVariants.Material" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" [variant]="themeVariants.Bootstrap" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" [variant]="themeVariants.Minimal" />
       </div>
     `,
   }),
@@ -45,9 +47,9 @@ export const Sizes: Story = {
   render: (): { template: string } => ({
     template: `
       <div style="display:flex; gap:0.75rem;">
-        <ui-lib-icon-button icon="plus" size="sm" />
-        <ui-lib-icon-button icon="plus" size="md" />
-        <ui-lib-icon-button icon="plus" size="lg" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" size="sm" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" size="md" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" size="lg" />
       </div>
     `,
   }),
@@ -57,8 +59,9 @@ export const States: Story = {
   render: (): { template: string } => ({
     template: `
       <div style="display:flex; gap:0.75rem;">
-        <ui-lib-icon-button icon="plus" />
-        <ui-lib-icon-button icon="plus" disabled="true" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" />
+        <ui-lib-icon-button icon="plus" ariaLabel="Add item" disabled="true" />
+        <ui-lib-icon-button icon="refresh" ariaLabel="Refresh data" [loading]="true" />
       </div>
     `,
   }),
@@ -67,10 +70,17 @@ export const States: Story = {
 export const DarkMode: Story = {
   parameters: { globals: { mode: 'dark' } },
   render: (): { template: string } => ({
-    template: `<ui-lib-icon-button icon="plus" />`,
+    template: `<ui-lib-icon-button icon="plus" ariaLabel="Add item" />`,
   }),
 };
 
 export const FullApi: Story = {
-  args: { icon: 'plus', size: 'lg', variant: 'bootstrap', disabled: false },
+  args: {
+    icon: 'plus',
+    ariaLabel: 'Add item',
+    size: 'lg',
+    variant: 'bootstrap',
+    disabled: false,
+    loading: false,
+  },
 };
