@@ -77,6 +77,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/layout/inline.ts
+  - projects/ui-lib-custom/src/lib/layout/inline.html (NEW)
+  - projects/ui-lib-custom/src/lib/layout/inline.scss
+  - projects/ui-lib-custom/src/lib/layout/inline.types.ts
+  - projects/ui-lib-custom/src/lib/layout/inline.spec.ts
+  - projects/ui-lib-custom/src/lib/layout/inline.a11y.spec.ts (NEW, 11 tests)
+  - projects/ui-lib-custom/src/lib/layout/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Inline now supports semantic rendered tags through `as`/`tag` (`div` default with `span`/`ul`/`ol` options), preserves host-first projection without adding landmark roles, documents wrap/read-order constraints, and ships dedicated accessibility coverage for default semantics, tag alias behavior, and DOM-order safety.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/layout/inline" --no-coverage (27/27 PASS — 16 unit + 11 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via Node Playwright at `/tmp/inline-hardening.png`.
+Next step: Harden Stack with the same semantic `as`/`tag` and landmark/read-order constraints for layout parity.
+
 Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
@@ -114,22 +134,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright MCP browser lock prevented direct browser-tool capture, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via a Node Playwright script at `/tmp/virtual-scroller-hardening.png`.
 Next step: Continue the remaining queued hardening work (for example SpeedDial #47, SelectButton #48, or Toolbar #59).
-
-Date: 2026-05-13 [FormField component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/form-field/form-field.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.html
-  - projects/ui-lib-custom/src/lib/form-field/form-field.scss (NEW)
-  - projects/ui-lib-custom/src/lib/form-field/form-field.spec.ts
-  - projects/ui-lib-custom/src/lib/form-field/form-field.a11y.spec.ts (NEW, 25 tests)
-  - projects/ui-lib-custom/src/lib/form-field/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: FormField now provides a DI context token (`FORM_FIELD_CONTEXT`) and generated stable IDs for input/label/hint/error, renders a native label with required indicator (`aria-hidden`), wires projected native controls with `aria-labelledby`, combined `aria-describedby` (hint + error), `aria-invalid`, `aria-required`, and `aria-disabled`, and keeps `role=alert` error output with reduced-motion-safe error animation. Added dedicated a11y coverage and refreshed README usage guidance for native and built-in controls.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/form-field/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/form-field/" --no-coverage (44/44 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: CI workflow run checks were inspected via GitHub MCP (`list_workflow_runs` + `get_job_logs`). Storybook screenshot path was blocked by a compodoc CLI incompatibility (`unknown option -e`), so demo app was served instead and screenshot captured at `/tmp/form-field-hardening.png`.
-Next step: Continue hardening the next queued new layout/form component prompt.

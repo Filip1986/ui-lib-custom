@@ -2,15 +2,25 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { Inline } from './inline';
-import type { InlineAlign, InlineJustify } from './inline';
+import type { InlineAlign, InlineJustify, InlineTag } from './inline';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import type { InlineToken, SpacingToken } from 'ui-lib-custom/tokens';
+import { Stack } from './stack';
+import { Grid } from './grid';
+import { Container } from './container';
 
 @Component({
   standalone: true,
   imports: [Inline],
   template: `
-    <ui-lib-inline [gap]="gap" [spacing]="spacing" [align]="align" [justify]="justify">
+    <ui-lib-inline
+      [gap]="gap"
+      [spacing]="spacing"
+      [align]="align"
+      [justify]="justify"
+      [as]="asTag"
+      [tag]="tag"
+    >
       <span>Tag 1</span>
       <span>Tag 2</span>
       <span>Tag 3</span>
@@ -23,6 +33,8 @@ class TestHostComponent {
   public spacing: InlineToken | SpacingToken | number | null = null;
   public align: InlineAlign = 'center';
   public justify: InlineJustify = 'start';
+  public asTag: InlineTag | null = null;
+  public tag: InlineTag | null = null;
 }
 
 @Component({
@@ -37,10 +49,28 @@ class TestHostComponent {
 })
 class DefaultHostComponent {}
 
+@Component({
+  standalone: true,
+  imports: [Container, Stack, Grid, Inline],
+  template: `
+    <ui-lib-container>
+      <ui-lib-stack>
+        <ui-lib-grid [columns]="1">
+          <ui-lib-inline spacing="sm">
+            <span>Nested Item</span>
+          </ui-lib-inline>
+        </ui-lib-grid>
+      </ui-lib-stack>
+    </ui-lib-container>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class NestedLayoutHostComponent {}
+
 describe('Inline', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
-      imports: [TestHostComponent, DefaultHostComponent],
+      imports: [TestHostComponent, DefaultHostComponent, NestedLayoutHostComponent],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
@@ -49,6 +79,7 @@ describe('Inline', (): void => {
     fixture: ComponentFixture<TestHostComponent>;
     component: TestHostComponent;
     inlineElement: HTMLElement;
+    inlineContentElement: HTMLElement;
   } {
     const fixture: ComponentFixture<TestHostComponent> = TestBed.createComponent(TestHostComponent);
     const component: TestHostComponent = fixture.componentInstance;
@@ -57,7 +88,8 @@ describe('Inline', (): void => {
     const inlineElement: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
       'ui-lib-inline'
     ) as HTMLElement;
-    return { fixture, component, inlineElement };
+    const inlineContentElement: HTMLElement = inlineElement.firstElementChild as HTMLElement;
+    return { fixture, component, inlineElement, inlineContentElement };
   }
 
   function bootstrapDefault(): ComponentFixture<DefaultHostComponent> {
@@ -76,29 +108,30 @@ describe('Inline', (): void => {
   }
 
   it('should create', (): void => {
-    const { inlineElement } = bootstrap();
+    const { inlineElement, inlineContentElement } = bootstrap();
     expect(inlineElement).toBeTruthy();
+    expect(inlineContentElement).toBeTruthy();
   });
 
   it('should render as horizontal flex container with wrap', (): void => {
-    const { inlineElement } = bootstrap();
-    expect(inlineElement.style.flexDirection).toBe('row');
-    expect(inlineElement.style.flexWrap).toBe('wrap');
+    const { inlineContentElement } = bootstrap();
+    expect(inlineContentElement.style.flexDirection).toBe('row');
+    expect(inlineContentElement.style.flexWrap).toBe('wrap');
   });
 
   it('should apply gap from design tokens', (): void => {
-    const { inlineElement } = bootstrap();
-    expect(inlineElement.style.gap).toContain('0.5rem'); // gap 2 = 0.5rem fallback
+    const { inlineContentElement } = bootstrap();
+    expect(inlineContentElement.style.gap).toContain('0.5rem'); // gap 2 = 0.5rem fallback
   });
 
   it('should apply align-items', (): void => {
-    const { inlineElement } = bootstrap();
-    expect(inlineElement.style.alignItems).toBe('center');
+    const { inlineContentElement } = bootstrap();
+    expect(inlineContentElement.style.alignItems).toBe('center');
   });
 
   it('should apply justify-content', (): void => {
-    const { inlineElement } = bootstrap({ justify: 'space-between' });
-    expect(inlineElement.style.justifyContent).toBe('space-between');
+    const { inlineContentElement } = bootstrap({ justify: 'space-between' });
+    expect(inlineContentElement.style.justifyContent).toBe('space-between');
   });
 
   it('should project content', (): void => {
@@ -117,13 +150,53 @@ describe('Inline', (): void => {
   });
 
   it('uses semantic spacing tokens when spacing is set', (): void => {
-    const { inlineElement } = bootstrap({ spacing: 'sm' });
-    expect(inlineElement.style.gap).toContain('0.5rem');
+    const { inlineContentElement } = bootstrap({ spacing: 'sm' });
+    expect(inlineContentElement.style.gap).toContain('0.5rem');
   });
 
   it('accepts numeric spacing when spacing is a number', (): void => {
-    const { inlineElement } = bootstrap({ spacing: 4 });
-    expect(inlineElement.style.gap).toContain('1rem');
+    const { inlineContentElement } = bootstrap({ spacing: 4 });
+    expect(inlineContentElement.style.gap).toContain('1rem');
+  });
+
+  it('renders as div by default', (): void => {
+    const { inlineContentElement } = bootstrap();
+    expect(inlineContentElement.tagName.toLowerCase()).toBe('div');
+  });
+
+  it('renders as span when as is span', (): void => {
+    const { inlineContentElement } = bootstrap({ asTag: 'span' });
+    expect(inlineContentElement.tagName.toLowerCase()).toBe('span');
+  });
+
+  it('supports tag alias input', (): void => {
+    const { inlineContentElement } = bootstrap({ tag: 'ul' });
+    expect(inlineContentElement.tagName.toLowerCase()).toBe('ul');
+  });
+
+  it('prefers as over tag when both are provided', (): void => {
+    const { inlineContentElement } = bootstrap({ asTag: 'ol', tag: 'div' });
+    expect(inlineContentElement.tagName.toLowerCase()).toBe('ol');
+  });
+
+  it('does not apply CSS order to inline items by default', (): void => {
+    const { inlineElement } = bootstrap();
+    const firstItem: HTMLElement = inlineElement.querySelector('span') as HTMLElement;
+    expect(firstItem.style.order).toBe('');
+  });
+
+  it('composes inside container, stack, and grid', (): void => {
+    const fixture: ComponentFixture<NestedLayoutHostComponent> =
+      TestBed.createComponent(NestedLayoutHostComponent);
+    fixture.detectChanges();
+    const nestedInline: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-inline'
+    );
+    const nestedItem: HTMLElement | null = (fixture.nativeElement as HTMLElement).querySelector(
+      'ui-lib-inline span'
+    );
+    expect(nestedInline).toBeTruthy();
+    expect(nestedItem?.textContent).toBe('Nested Item');
   });
 
   it('applies dark theme variables', (): void => {

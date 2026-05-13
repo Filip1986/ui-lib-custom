@@ -2,3 +2,11 @@
   --uilib-inline-fg: var(--uilib-text-dark-primary);
 }
 
+.ui-lib-inline__content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: var(--uilib-inline-align);
+  justify-content: var(--uilib-inline-justify);
+  gap: var(--uilib-inline-gap);
+}
