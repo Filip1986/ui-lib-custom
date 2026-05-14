@@ -2,7 +2,7 @@
 
 **Selector:** `uilib-input-group`
 **Package:** `ui-lib-custom/input-group`
-**Content projection:** yes — project your input and any addon elements (buttons, text spans, icons) as direct children
+**Content projection:** yes — project your control and optional addons as direct children (`[addonLeft]`, default slot, `[addonRight]`)
 
 > This component is a pure layout stub — it has no inputs, no outputs, and no CVA. It only applies the root CSS class `uilib-input-group` to the host element. All visual composition is achieved through CSS and the projected content structure.
 
@@ -17,15 +17,30 @@ _none_
 ## Usage
 
 ```html
-<!-- text addon before the input -->
+<!-- decorative text addon (not focusable, hidden from a11y tree) -->
+<label for="username-input">Username</label>
 <uilib-input-group>
-  <span class="uilib-input-group-addon">@</span>
-  <input type="text" placeholder="Username" />
+  <uilib-input-group-addon addonLeft>
+    <span aria-hidden="true">@</span>
+  </uilib-input-group-addon>
+  <input id="username-input" type="text" placeholder="Username" />
 </uilib-input-group>
 
-<!-- button addon after the input -->
+<!-- icon-only button addon must have an aria-label -->
+<label for="search-input">Search</label>
 <uilib-input-group>
-  <input type="text" placeholder="Search term" />
-  <button type="button">Go</button>
+  <input id="search-input" type="text" placeholder="Search term" />
+  <uilib-input-group-addon addonRight>
+    <button type="button" aria-label="Run search">
+      <span aria-hidden="true">🔍</span>
+    </button>
+  </uilib-input-group-addon>
 </uilib-input-group>
 ```
+
+## Accessibility guidance
+
+- Decorative addons (currency symbols, protocol prefixes, separators) should be rendered inside a non-focusable node with `aria-hidden="true"` so they are not announced to screen readers.
+- Interactive addons must use real interactive elements (for example, `<button type="button">`), not generic `<div>` containers.
+- Icon-only addon buttons must always have an `aria-label`.
+- Keep `<label for="...">` associated with the actual input id inside the group, not with the group container.

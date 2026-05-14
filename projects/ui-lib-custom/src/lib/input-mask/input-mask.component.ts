@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   effect,
   forwardRef,
   input,
@@ -22,6 +23,16 @@ import type { ControlValueAccessor } from '@angular/forms';
 import { INPUT_MASK_DEFAULTS } from './input-mask.types';
 import type { Caret, InputMaskCompleteEvent, InputMaskSize } from './input-mask.types';
 import { MaskEngine } from './mask-engine';
+
+const INPUT_MASK_DEFAULT_ERROR_MESSAGES: Readonly<{
+  incomplete: string;
+  invalid: string;
+}> = {
+  incomplete: 'Please complete the required format.',
+  invalid: 'The entered value does not match the required format.',
+};
+
+let nextInputMaskInstanceId: number = 0;
 
 /**
  * InputMask component with CVA integration and mask-aware keyboard handling.
@@ -45,7 +56,7 @@ import { MaskEngine } from './mask-engine';
     '[class.uilib-input-mask-lg]': 'size() === "lg"',
     '[class.uilib-input-mask-filled]': 'filled()',
     '[class.uilib-input-mask-fluid]': 'fluid()',
-    '[class.uilib-input-mask-invalid]': 'invalid()',
+    '[class.uilib-input-mask-invalid]': 'isInvalid()',
     '[class.uilib-input-mask-disabled]': 'isControlDisabled()',
     '[class.uilib-inputwrapper-filled]': 'isFilled()',
     '[class.uilib-inputwrapper-focus]': 'isFocused()',
@@ -58,7 +69,13 @@ import { MaskEngine } from './mask-engine';
       [readonly]="readonly()"
       [placeholder]="placeholder()"
       [attr.name]="name()"
+      [id]="controlId()"
       [attr.autocomplete]="autocomplete()"
+      [attr.aria-label]="ariaLabel() || null"
+      [attr.aria-labelledby]="ariaLabelledBy() || null"
+      [attr.aria-invalid]="isInvalid() ? 'true' : null"
+      [attr.aria-describedby]="ariaDescribedBy()"
+      [attr.aria-valuetext]="ariaValueText()"
       [class.uilib-filled]="filled()"
       [class.uilib-input-sm]="size() === 'sm'"
       [class.uilib-input-lg]="size() === 'lg'"
@@ -72,9 +89,23 @@ import { MaskEngine } from './mask-engine';
     @if (showClear() && isFilled() && !isControlDisabled()) {
       <span class="uilib-input-mask-clear-icon" (click)="clear()"> × </span>
     }
+    @if (maskFormatHint()) {
+      <span [id]="hintId()" class="uilib-input-mask-sr-only">Format: {{ maskFormatHint() }}</span>
+    }
+    @if (showError()) {
+      <div [id]="errorId()" class="uilib-input-mask-error" role="alert" aria-live="assertive">
+        <ng-content select="[error]">{{ resolvedErrorMessage() }}</ng-content>
+      </div>
+    }
+    @if (blockedCharacterMessage()) {
+      <span class="uilib-input-mask-sr-only" aria-live="polite" aria-atomic="true">
+        {{ blockedCharacterMessage() }}
+      </span>
+    }
   `,
 })
 export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
+  public readonly id: InputSignal<string | null> = input<string | null>(null);
   public readonly mask: InputSignal<string> = input<string>('');
   public readonly slotChar: InputSignal<string> = input<string>(INPUT_MASK_DEFAULTS.slotChar);
   public readonly autoClear: InputSignal<boolean> = input<boolean>(INPUT_MASK_DEFAULTS.autoClear);
@@ -98,6 +129,10 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   public readonly name: InputSignal<string | undefined> = input<string | undefined>(undefined);
   public readonly fluid: InputSignal<boolean> = input<boolean>(false);
   public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+  public readonly maskHint: InputSignal<string | null> = input<string | null>(null);
+  public readonly errorMessage: InputSignal<string | null> = input<string | null>(null);
 
   public readonly completed: OutputEmitterRef<InputMaskCompleteEvent> =
     output<InputMaskCompleteEvent>();
@@ -115,10 +150,64 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   private androidChrome: boolean = false;
   private viewInitialized: boolean = false;
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
+  private readonly hasIncompleteMask: WritableSignal<boolean> = signal<boolean>(false);
+  protected readonly blockedCharacterMessage: WritableSignal<string | null> = signal<string | null>(
+    null
+  );
 
   protected readonly value: WritableSignal<string | null> = signal<string | null>(null);
   protected readonly isFilled: WritableSignal<boolean> = signal<boolean>(false);
   protected readonly isFocused: WritableSignal<boolean> = signal<boolean>(false);
+  protected readonly inputMaskId: string = `ui-lib-input-mask-${nextInputMaskInstanceId++}`;
+  protected readonly controlId: Signal<string> = computed<string>(
+    (): string => this.id() ?? this.inputMaskId
+  );
+  protected readonly hintId: Signal<string> = computed<string>(
+    (): string => `${this.controlId()}-hint`
+  );
+  protected readonly errorId: Signal<string> = computed<string>(
+    (): string => `${this.controlId()}-error`
+  );
+  protected readonly maskFormatHint: Signal<string | null> = computed<string | null>(
+    (): string | null => this.maskHint() ?? (this.mask().length > 0 ? this.mask() : null)
+  );
+  protected readonly isInvalid: Signal<boolean> = computed<boolean>(
+    (): boolean => this.invalid() || this.hasIncompleteMask()
+  );
+  protected readonly showError: Signal<boolean> = computed<boolean>((): boolean =>
+    this.isInvalid()
+  );
+  protected readonly resolvedErrorMessage: Signal<string> = computed<string>(
+    (): string =>
+      this.errorMessage() ??
+      (this.hasIncompleteMask()
+        ? INPUT_MASK_DEFAULT_ERROR_MESSAGES.incomplete
+        : INPUT_MASK_DEFAULT_ERROR_MESSAGES.invalid)
+  );
+  protected readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const ids: string[] = [];
+      if (this.maskFormatHint()) {
+        ids.push(this.hintId());
+      }
+      if (this.showError()) {
+        ids.push(this.errorId());
+      }
+      return ids.length > 0 ? ids.join(' ') : null;
+    }
+  );
+  protected readonly ariaValueText: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const currentValue: string = this.value() ?? '';
+
+      if (this.maskEngine === null) {
+        return currentValue.length > 0 ? currentValue : null;
+      }
+
+      const unmaskedValue: string = this.maskEngine.getUnmaskedValue();
+      return unmaskedValue.length > 0 ? unmaskedValue : null;
+    }
+  );
 
   private onModelChange: (value: string | null) => void = (): void => {};
 
@@ -216,6 +305,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
   public onFocus(event: Event): void {
     this.isFocused.set(true);
     this.focusText = this.getInputElement().value;
+    this.blockedCharacterMessage.set(null);
 
     if (this.caretTimeoutId !== null) {
       clearTimeout(this.caretTimeoutId);
@@ -248,6 +338,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
       this.checkVal(false);
     }
 
+    this.updateIncompleteMaskState();
     this.updateFilledState();
     this.blurred.emit(event);
 
@@ -350,6 +441,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
       this.maskEngine.shiftR(editablePosition);
 
       if (this.maskEngine.setChar(editablePosition, character)) {
+        this.blockedCharacterMessage.set(null);
         this.writeBuffer();
 
         const nextPosition: number = this.maskEngine.seekNext(editablePosition);
@@ -357,11 +449,16 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
 
         isCompleted = this.maskEngine.isCompleted();
         this.inputChanged.emit(event);
+      } else {
+        this.blockedCharacterMessage.set(
+          `Character "${character}" does not match the expected format.`
+        );
       }
     }
 
     event.preventDefault();
     this.updateModel(event);
+    this.clearIncompleteMaskStateIfResolved();
 
     if (isCompleted) {
       this.completed.emit({
@@ -389,6 +486,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
       this.handleStandardInput(event);
     }
 
+    this.clearIncompleteMaskStateIfResolved();
     this.inputChanged.emit(event);
   }
 
@@ -412,6 +510,7 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
       this.handleStandardInput(event);
     }
 
+    this.clearIncompleteMaskStateIfResolved();
     this.inputChanged.emit(event);
   }
 
@@ -433,6 +532,8 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
 
     this.value.set(null);
     this.onModelChange(null);
+    this.hasIncompleteMask.set(false);
+    this.blockedCharacterMessage.set(null);
     this.updateFilledState();
     this.cleared.emit();
   }
@@ -578,6 +679,24 @@ export class InputMaskComponent implements ControlValueAccessor, AfterViewInit, 
 
   private getInputElement(): HTMLInputElement {
     return this.inputEl().nativeElement;
+  }
+
+  private updateIncompleteMaskState(): void {
+    if (this.maskEngine === null) {
+      this.hasIncompleteMask.set(false);
+      return;
+    }
+
+    const hasTypedCharacters: boolean = this.maskEngine.getUnmaskedValue().length > 0;
+    this.hasIncompleteMask.set(hasTypedCharacters && !this.maskEngine.isCompleted());
+  }
+
+  private clearIncompleteMaskStateIfResolved(): void {
+    if (!this.hasIncompleteMask()) {
+      return;
+    }
+
+    this.updateIncompleteMaskState();
   }
 
   protected isControlDisabled(): boolean {
