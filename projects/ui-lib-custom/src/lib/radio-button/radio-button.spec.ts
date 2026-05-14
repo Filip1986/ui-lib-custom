@@ -57,6 +57,8 @@ function getLabel(fixture: ComponentFixture<unknown>): HTMLElement | null {
       [autofocus]="autofocus()"
       [ariaLabel]="ariaLabel()"
       [ariaLabelledby]="ariaLabelledby()"
+      [ariaDescribedby]="ariaDescribedby()"
+      [invalid]="invalid()"
       [variant]="variant()"
       [size]="size()"
       [appearance]="appearance()"
@@ -78,6 +80,8 @@ class HostComponent {
   public readonly autofocus: WritableSignal<boolean> = signal<boolean>(false);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
   public readonly ariaLabelledby: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaDescribedby: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly variant: WritableSignal<RadioButtonVariant> =
     signal<RadioButtonVariant>('material');
   public readonly size: WritableSignal<RadioButtonSize> = signal<RadioButtonSize>('md');
@@ -352,6 +356,24 @@ describe('RadioButton', (): void => {
     host.ariaLabelledby.set('external-label-id');
     fixture.detectChanges();
     expect(getNativeInput(fixture).getAttribute('aria-labelledby')).toBe('external-label-id');
+  });
+
+  it('sets aria-describedby when provided', (): void => {
+    host.ariaDescribedby.set('radio-help-text');
+    fixture.detectChanges();
+    expect(getNativeInput(fixture).getAttribute('aria-describedby')).toBe('radio-help-text');
+  });
+
+  it('sets aria-invalid when invalid is true', (): void => {
+    host.invalid.set(true);
+    fixture.detectChanges();
+    expect(getNativeInput(fixture).getAttribute('aria-invalid')).toBe('true');
+  });
+
+  it('applies invalid class when invalid is true', (): void => {
+    host.invalid.set(true);
+    fixture.detectChanges();
+    expect(getHostElement(fixture).classList.contains('ui-lib-radio-button--invalid')).toBe(true);
   });
 
   it('sets required attribute on native input', (): void => {
