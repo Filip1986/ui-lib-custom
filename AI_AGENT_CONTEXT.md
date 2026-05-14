@@ -77,6 +77,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.ts
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.spec.ts
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.a11y.spec.ts (NEW, 16 tests)
+  - projects/ui-lib-custom/src/lib/key-filter/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: KeyFilter now supports `hintText` with generated hint element wiring through `aria-describedby`, announces filtered paste removals via `LiveAnnouncerService`, uses listener setup/cleanup in `ngAfterViewInit`/`ngOnDestroy`, supports optional `pattern`/`regex` alias inputs with DEV-mode conflict warning, and adds dedicated accessibility regression coverage for key filtering, hint linkage, and paste announcement behavior.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/key-filter/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/key-filter/" --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`. Demo screenshot captured at `/tmp/key-filter-hardening.png` after installing Chromium with `npx playwright install chromium` and serving demo on `http://127.0.0.1:4200`.
+Next step: Continue hardening the next queued new component (Stack) with the same 6-phase workflow.
+
 Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
@@ -115,21 +133,3 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
 Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via Node Playwright at `/tmp/inline-hardening.png`.
 Next step: Harden Stack with the same semantic `as`/`tag` and landmark/read-order constraints for layout parity.
-
-Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.spec.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: AnimateOnScroll now enforces `prefers-reduced-motion` by skipping observer/class animation paths and forcing visible static state, adds non-IntersectionObserver visible fallback for progressive enhancement, schedules class mutations via `requestAnimationFrame`, ships reduced-motion preset CSS safeguards, and includes a dedicated accessibility spec for reduced-motion + observer cleanup behavior.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/animate-on-scroll/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/animate-on-scroll/" --no-coverage (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
-Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
