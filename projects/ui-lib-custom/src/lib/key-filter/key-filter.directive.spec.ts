@@ -17,7 +17,17 @@ import type { KeyFilterPreset } from './key-filter.types';
   selector: 'app-key-filter-host',
   standalone: true,
   imports: [KeyFilterDirective],
-  template: ` <input #testInput [uilibKeyFilter]="filter()" [keyFilterBypass]="bypass()" /> `,
+  template: `
+    <input
+      #testInput
+      [uilibKeyFilter]="filter()"
+      [keyFilterBypass]="bypass()"
+      [hintText]="hintText()"
+      [pattern]="pattern()"
+      [regex]="regex()"
+      [allowedChars]="allowedChars()"
+    />
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class KeyFilterHostComponent {
@@ -25,6 +35,14 @@ class KeyFilterHostComponent {
     KeyFilterPreset | RegExp
   >('alphanum');
   public readonly bypass: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly hintText: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly pattern: WritableSignal<KeyFilterPreset | null> = signal<KeyFilterPreset | null>(
+    null
+  );
+  public readonly regex: WritableSignal<RegExp | string | null> = signal<RegExp | string | null>(
+    null
+  );
+  public readonly allowedChars: WritableSignal<string | null> = signal<string | null>(null);
 }
 
 // ---------------------------------------------------------------------------
@@ -311,6 +329,65 @@ describe('KeyFilterDirective', (): void => {
         inputEl.dispatchEvent(event);
         expect(event.defaultPrevented).toBe(true);
       }
+    });
+  });
+
+  describe('pattern, regex, and allowedChars aliases', (): void => {
+    it('should apply the pattern input preset when provided', (): void => {
+      const { host, inputEl } = setup();
+      host.pattern.set('alpha');
+      TestBed.flushEffects();
+
+      const letterEvent: KeyboardEvent = makeKeydownEvent('a');
+      inputEl.dispatchEvent(letterEvent);
+      expect(letterEvent.defaultPrevented).toBe(false);
+
+      const digitEvent: KeyboardEvent = makeKeydownEvent('7');
+      inputEl.dispatchEvent(digitEvent);
+      expect(digitEvent.defaultPrevented).toBe(true);
+    });
+
+    it('should apply regex string input when provided', (): void => {
+      const { host, inputEl } = setup();
+      host.regex.set('[xyz]');
+      TestBed.flushEffects();
+
+      const allowedEvent: KeyboardEvent = makeKeydownEvent('x');
+      inputEl.dispatchEvent(allowedEvent);
+      expect(allowedEvent.defaultPrevented).toBe(false);
+
+      const blockedEvent: KeyboardEvent = makeKeydownEvent('a');
+      inputEl.dispatchEvent(blockedEvent);
+      expect(blockedEvent.defaultPrevented).toBe(true);
+    });
+
+    it('should allow only explicitly listed allowedChars', (): void => {
+      const { host, inputEl } = setup();
+      host.allowedChars.set('ABC123');
+      TestBed.flushEffects();
+
+      const allowedEvent: KeyboardEvent = makeKeydownEvent('B');
+      inputEl.dispatchEvent(allowedEvent);
+      expect(allowedEvent.defaultPrevented).toBe(false);
+
+      const blockedEvent: KeyboardEvent = makeKeydownEvent('z');
+      inputEl.dispatchEvent(blockedEvent);
+      expect(blockedEvent.defaultPrevented).toBe(true);
+    });
+
+    it('should warn when both pattern and regex are provided', (): void => {
+      const warnSpy: jest.SpyInstance = jest.spyOn(console, 'warn').mockImplementation((): void => {
+        return;
+      });
+      const { host } = setup();
+      host.pattern.set('alpha');
+      host.regex.set('[0-9]');
+      TestBed.flushEffects();
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        '[uilibKeyFilter] Both "pattern" and "regex" were provided. The "regex" input takes precedence.'
+      );
+      warnSpy.mockRestore();
     });
   });
 

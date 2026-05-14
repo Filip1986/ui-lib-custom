@@ -77,43 +77,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [Password component — formal 6-phase scoring COMPLETE (#29)]
+Date: 2026-05-13 [KeyFilter directive — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/password/password.component.ts
-  - projects/ui-lib-custom/src/lib/password/password.component.html
-  - projects/ui-lib-custom/src/lib/password/password.component.scss
-  - projects/ui-lib-custom/src/lib/password/password.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/password/README.md
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.ts
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.spec.ts
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.a11y.spec.ts (NEW, 16 tests)
+  - projects/ui-lib-custom/src/lib/key-filter/README.md
+  - projects/demo/src/app/pages/key-filter/key-filter-demo.component.html
+  - projects/demo/src/app/pages/key-filter/key-filter-demo.component.ts
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Password now enforces `role="status"` for strength live updates, dynamic `aria-describedby` chaining for strength + validation message, native `aria-invalid` semantics, typed `inputType` signal (`'text' | 'password'`), reduced-motion transition suppression, and expanded a11y regression coverage (including invalid/disabled axe scenarios and `aria-labelledby` forwarding). Formal Password scores are now recorded and status moved to ✅ Done.
+State: KeyFilter now supports accessible format hints via new `hintText` + `aria-describedby` wiring, announces filtered paste removals through `LiveAnnouncerService`, supports explicit `pattern`/`regex`/`allowedChars` aliases with DEV_MODE warning for conflicting `pattern` + `regex`, and attaches/removes listeners in `ngAfterViewInit`/`ngOnDestroy` while supporting native inputs plus `ui-lib-input`/`uilib-input-mask` host usage.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/password/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/password/" --no-coverage (80/80 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/key-filter/ projects/demo/src/app/pages/key-filter/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/key-filter/" --no-coverage (48/48 PASS — 32 unit + 16 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs` + `get_job_logs`); most recent runs were `action_required` with zero failed jobs available to inspect. Playwright screenshot captured at `/tmp/password-hardening.png` after installing Chromium (`npx playwright install chromium`).
-Next step: Continue to the next unscored Tier 3 control (Rating #30) with the same formal 6-phase scoring workflow.
-
-Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.scss
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: InputMask now ships generated control/hint/error IDs, explicit `ariaLabel`/`ariaLabelledBy` inputs, mask format hint wiring via `aria-describedby`, incomplete-mask `aria-invalid` behavior on blur, optional projected error slot support, blocked-character live region announcements, and `aria-valuetext` that reads user-entered characters without placeholder noise. Added reduced-motion CSS safeguards and expanded accessibility coverage to a dedicated 20-test a11y suite.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-mask/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/input-mask/" --no-coverage (62/62 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs`) and no failed completed runs were present to inspect. Playwright browser lock required CLI capture flow; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/input-mask-hardening.png`.
-Next step: Continue hardening the next queued core input with the same label/error/hint semantics and blocked-character a11y feedback standard.
+Terminal notes: Fresh clone required `npm install` before running checks. Playwright screenshot tooling required `npx playwright install chromium`; demo screenshot captured at `/tmp/key-filter-hardening.png`.
+Next step: Continue hardening next new utility directive in `docs/prompts/needs-hardening/`.
 
 Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
 Changed:
@@ -134,3 +116,21 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
 Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via Node Playwright at `/tmp/inline-hardening.png`.
 Next step: Harden Stack with the same semantic `as`/`tag` and landmark/read-order constraints for layout parity.
+
+Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: AnimateOnScroll now enforces `prefers-reduced-motion` by skipping observer/class animation paths and forcing visible static state, adds non-IntersectionObserver visible fallback for progressive enhancement, schedules class mutations via `requestAnimationFrame`, ships reduced-motion preset CSS safeguards, and includes a dedicated accessibility spec for reduced-motion + observer cleanup behavior.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/animate-on-scroll/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/animate-on-scroll/" --no-coverage (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
+Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
