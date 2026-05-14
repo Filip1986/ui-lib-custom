@@ -26,6 +26,8 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
       [readonly]="readonly()"
       [id]="inputId()"
       [labelFloat]="labelFloat()"
+      [ariaLabel]="ariaLabel()"
+      [ariaLabelledBy]="ariaLabelledBy()"
     />
     <ui-lib-input label="Second field" />
   `,
@@ -43,6 +45,8 @@ class InputA11yHostComponent {
   public readonly labelFloat: WritableSignal<'over' | 'in' | 'on'> = signal<'over' | 'in' | 'on'>(
     'over'
   );
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
 }
 
 describe('Input Accessibility', (): void => {
@@ -175,6 +179,28 @@ describe('Input Accessibility', (): void => {
       'label.ui-input-label-floating'
     ) as HTMLLabelElement;
     expect(floatingLabel.getAttribute('for')).toBe(nativeInput().id);
+  });
+
+  it('sets aria-label on the native input when ariaLabel is provided', (): void => {
+    fixture.componentInstance.ariaLabel.set('Email address');
+    fixture.detectChanges();
+
+    expect(nativeInput().getAttribute('aria-label')).toBe('Email address');
+  });
+
+  it('omits aria-label when ariaLabel is null', (): void => {
+    expect(nativeInput().getAttribute('aria-label')).toBeNull();
+  });
+
+  it('sets aria-labelledby on the native input when ariaLabelledBy is provided', (): void => {
+    fixture.componentInstance.ariaLabelledBy.set('external-label-id');
+    fixture.detectChanges();
+
+    expect(nativeInput().getAttribute('aria-labelledby')).toBe('external-label-id');
+  });
+
+  it('omits aria-labelledby when ariaLabelledBy is null', (): void => {
+    expect(nativeInput().getAttribute('aria-labelledby')).toBeNull();
   });
 
   // ── aria-required ──────────────────────────────────────────────────────────

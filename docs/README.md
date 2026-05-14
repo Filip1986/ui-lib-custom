@@ -171,6 +171,7 @@ npm run build-storybook
 - **[Roadmap](ROADMAP.md)** — Phase-by-phase path from current hardening → Public Beta → v1.0 GA
 - **[Launch Strategy](LAUNCH_STRATEGY.md)** — The sequenced build-in-public → seed → announce path
 - **[Competitive Strategy](COMPETITIVE_STRATEGY.md)** — When and how to publish benchmark claims publicly (execute after Phase 3)
+- **[Component Inventory Audit](COMPONENT_INVENTORY_AUDIT.md)** — Gap analysis across Angular Material, PrimeNG, Ng-Zorro, Ng-Bootstrap, shadcn/ui, Radix UI — what to add, what to exclude, what this library does that nobody else does
 
 ---
 
