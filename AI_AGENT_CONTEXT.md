@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `OrderList` -> ✅ complete + hardened (6-phase, score 8.7/10, 129 tests — 87 unit + 42 a11y)
 
 ---
 
@@ -77,25 +78,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [RadioButton component — 6-phase formal scoring COMPLETE]
+Date: 2026-05-14 [OrderList component — 6-phase hardening COMPLETE (#39)]
 Changed:
-  - projects/ui-lib-custom/src/lib/radio-button/radio-button.ts
-  - projects/ui-lib-custom/src/lib/radio-button/radio-button.html
-  - projects/ui-lib-custom/src/lib/radio-button/radio-button.scss
-  - projects/ui-lib-custom/src/lib/radio-button/radio-button.spec.ts
-  - projects/ui-lib-custom/src/lib/radio-button/radio-button.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/radio-button/README.md
+  - projects/ui-lib-custom/src/lib/order-list/order-list.component.html
+  - projects/ui-lib-custom/src/lib/order-list/order-list.component.scss
+  - projects/ui-lib-custom/src/lib/order-list/order-list.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/order-list/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: RadioButton hardening was formalized with explicit invalid/description inputs (`invalid`, `ariaDescribedby`), invalid ARIA wiring on native radio inputs, development warning when `name` is missing, `:focus-visible` focus-ring styling, and invalid visual state class support. Accessibility coverage expanded to 31 total tests across unit+a11y specs (including group/input invalid+describedby and native disabled assertions), and scoring was recorded as complete in COMPONENT_SCORES.
+State: Fixed genuine ARIA bug — the empty-state element was a `<li>` inside `role=listbox`, which is invalid (listbox must only contain `role=option` children). Moved empty state to a `<p>` element outside the `<ul>`, with `aria-live="polite"`, matching the fix pattern established in PickList (#40). Updated SCSS to use `<p>` selector. Added 5 new a11y tests covering the empty-state position, tag, and aria-live attributes (total: 129 tests — 87 unit + 42 a11y). Updated README with full ARIA table, keyboard table, and CSS variables table.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/radio-button/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/radio-button/" --no-coverage (71/71 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/order-list/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=order-list --no-coverage (129/129 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub Actions workflow runs were inspected through MCP (`list_workflow_runs`, `get_workflow_run`, `get_job_logs`) before implementation. Playwright MCP browser session lock required CLI capture fallback; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/radio-button-hardening.png`.
-Next step: Continue Tier 3 formal scoring queue with the next unscored component after RadioButton.
+Next step: Continue hardening remaining Tier 4/5 components. Next: Alert (#42).
 
 Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:
