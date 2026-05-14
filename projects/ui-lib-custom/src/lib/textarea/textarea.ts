@@ -28,7 +28,7 @@ import type { TextareaResize, TextareaSize, TextareaVariant } from './textarea.t
 export type { TextareaVariant, TextareaSize, TextareaResize } from './textarea.types';
 export { TEXTAREA_DEFAULTS } from './textarea.types';
 
-let nextTextareaId: number = 0;
+let textareaIdCounter: number = 0;
 
 /** Event payload emitted when the textarea value changes. */
 export interface TextareaChangeEvent {
@@ -189,7 +189,7 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
   // Computed signals
   // ---------------------------------------------------------------------------
 
-  protected readonly textareaId: string = `ui-lib-textarea-${++nextTextareaId}`;
+  protected readonly textareaId: string;
 
   protected readonly effectiveVariant: Signal<TextareaVariant> = computed<TextareaVariant>(
     (): TextareaVariant => this.variant() ?? this.themeConfig.variant()
@@ -291,6 +291,8 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
   // ---------------------------------------------------------------------------
 
   constructor() {
+    this.textareaId = `ui-lib-textarea-${textareaIdCounter++}`;
+
     effect((): void => {
       const elementRef: ElementRef<HTMLTextAreaElement> | undefined = this.textareaRef();
       if (!elementRef) {
@@ -390,6 +392,10 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
     }
 
     const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
+    // `normal`/unitless line-height values may not parse consistently, so fall back to uncapped
+    // auto-resize when the browser does not expose a computed pixel value.
+    // `normal`/unitless line-height values may not parse consistently, so fall back to uncapped
+    // auto-resize when the browser does not expose a computed pixel value.
     const lineHeight: number = Number.parseFloat(computedStyle.lineHeight);
     if (!Number.isFinite(lineHeight) || lineHeight <= 0) {
       element.style.height = `${nextHeight}px`;

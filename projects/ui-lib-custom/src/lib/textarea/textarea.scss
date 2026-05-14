@@ -102,7 +102,7 @@ ui-lib-textarea .ui-lib-textarea__control {
   }
 
   &:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--uilib-textarea-border-focus) 40%, transparent);
+    outline: 2px solid var(--uilib-textarea-border-focus);
     outline-offset: 2px;
   }
 
