@@ -1,7 +1,7 @@
 import {
-  computed,
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   effect,
   forwardRef,
@@ -392,8 +392,6 @@ export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
     }
 
     const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
-    // `normal`/unitless line-height values may not parse consistently, so fall back to uncapped
-    // auto-resize when the browser does not expose a computed pixel value.
     // `normal`/unitless line-height values may not parse consistently, so fall back to uncapped
     // auto-resize when the browser does not expose a computed pixel value.
     const lineHeight: number = Number.parseFloat(computedStyle.lineHeight);

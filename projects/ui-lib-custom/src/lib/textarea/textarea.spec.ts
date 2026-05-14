@@ -263,6 +263,8 @@ describe('UiLibTextarea - rendering', (): void => {
   });
 
   it('should not render error element when error is null', (): void => {
+    // The region stays mounted so projected [textareaError] content can remain stable in the DOM
+    // while visibility and announcement state are toggled by component state.
     const error: HTMLElement = queryEl(fixture, '.ui-lib-textarea__error');
     expect(error.classList.contains('ui-lib-textarea__message--hidden')).toBe(true);
   });
