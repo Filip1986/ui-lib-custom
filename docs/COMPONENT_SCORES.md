@@ -63,7 +63,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Needs hardening |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done            |
 | 29   | Password      | Strength meter live region, toggle visibility button label                 | ✅ Done            |
-| 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Needs hardening |
+| 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ✅ Done            |
 | 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ✅ Done            |
 
 ### Tier 4 — Data Display
@@ -198,7 +198,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | InputMask     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Password      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
+| Rating        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | ColorPicker   | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
