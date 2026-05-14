@@ -12,6 +12,7 @@ export const TEXTAREA_DEFAULTS: Readonly<{
   size: TextareaSize;
   resize: TextareaResize;
   rows: number;
+  maxRows: number | null;
   cols: number | null;
   disabled: boolean;
   readonly: boolean;
@@ -25,6 +26,7 @@ export const TEXTAREA_DEFAULTS: Readonly<{
   size: 'md',
   resize: 'vertical',
   rows: 3,
+  maxRows: null,
   cols: null,
   disabled: false,
   readonly: false,

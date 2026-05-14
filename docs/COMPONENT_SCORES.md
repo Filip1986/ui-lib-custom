@@ -133,7 +133,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | Component         | Key a11y concern                                                                                    | Status                 |
 |-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
-| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ⏳ Needs hardening      |
+| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (8.7)           |
 | ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ⏳ Needs hardening      |
 | ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening      |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
@@ -184,7 +184,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Button        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Input         | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.8 | 🟢     |
-| Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Textarea      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
@@ -192,7 +192,6 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | RadioButton   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 8    | 8.8 | 🟢     |
 | ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleSwitch  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | SelectButton  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |

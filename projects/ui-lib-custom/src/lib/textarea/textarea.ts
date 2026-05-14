@@ -1,18 +1,19 @@
 import {
+  computed,
   ChangeDetectionStrategy,
   Component,
-  ViewEncapsulation,
-  computed,
+  ElementRef,
   effect,
   forwardRef,
   inject,
   input,
   output,
   signal,
+  ViewEncapsulation,
   viewChild,
 } from '@angular/core';
 import type {
-  ElementRef,
+  AfterContentInit,
   InputSignal,
   OutputEmitterRef,
   Signal,
@@ -27,7 +28,7 @@ import type { TextareaResize, TextareaSize, TextareaVariant } from './textarea.t
 export type { TextareaVariant, TextareaSize, TextareaResize } from './textarea.types';
 export { TEXTAREA_DEFAULTS } from './textarea.types';
 
-let textareaIdCounter: number = 0;
+let nextTextareaId: number = 0;
 
 /** Event payload emitted when the textarea value changes. */
 export interface TextareaChangeEvent {
@@ -61,7 +62,7 @@ export interface TextareaChangeEvent {
     '[attr.aria-disabled]': 'isDisabled() ? "true" : null',
   },
 })
-export class UiLibTextarea implements ControlValueAccessor {
+export class UiLibTextarea implements AfterContentInit, ControlValueAccessor {
   // ---------------------------------------------------------------------------
   // Inputs
   // ---------------------------------------------------------------------------
@@ -77,6 +78,12 @@ export class UiLibTextarea implements ControlValueAccessor {
   /** Accessible label rendered above the textarea. */
   public readonly label: InputSignal<string> = input<string>('');
 
+  /** Accessible label used when no visible label is rendered. */
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
+
+  /** Space-separated ids of visible label elements for accessible-name composition. */
+  public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
+
   /** Placeholder text shown inside the textarea when it is empty. */
   public readonly placeholder: InputSignal<string> = input<string>(TEXTAREA_DEFAULTS.placeholder);
 
@@ -88,6 +95,11 @@ export class UiLibTextarea implements ControlValueAccessor {
 
   /** Number of visible text rows. */
   public readonly rows: InputSignal<number> = input<number>(TEXTAREA_DEFAULTS.rows);
+
+  /** Maximum number of text rows before auto-resize enables internal scrolling. */
+  public readonly maxRows: InputSignal<number | null> = input<number | null>(
+    TEXTAREA_DEFAULTS.maxRows
+  );
 
   /** Number of visible text columns. */
   public readonly cols: InputSignal<number | null> = input<number | null>(TEXTAREA_DEFAULTS.cols);
@@ -109,6 +121,9 @@ export class UiLibTextarea implements ControlValueAccessor {
   /** Whether the field is required. */
   public readonly required: InputSignal<boolean> = input<boolean>(TEXTAREA_DEFAULTS.required);
 
+  /** Whether the control should expose validation error semantics. */
+  public readonly invalid: InputSignal<boolean> = input<boolean>(false);
+
   /** When true, renders a character counter below the textarea. */
   public readonly showCounter: InputSignal<boolean> = input<boolean>(TEXTAREA_DEFAULTS.showCounter);
 
@@ -119,6 +134,9 @@ export class UiLibTextarea implements ControlValueAccessor {
 
   /** Error message rendered below the textarea and announced to screen readers. */
   public readonly error: InputSignal<string | null> = input<string | null>(null);
+
+  /** Hint text rendered below the textarea and associated through aria-describedby. */
+  public readonly hint: InputSignal<string | null> = input<string | null>(null);
 
   /** Additional CSS classes appended to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
@@ -152,6 +170,8 @@ export class UiLibTextarea implements ControlValueAccessor {
 
   protected readonly value: WritableSignal<string> = signal<string>('');
   protected readonly isFocused: WritableSignal<boolean> = signal<boolean>(false);
+  protected readonly hasProjectedError: WritableSignal<boolean> = signal<boolean>(false);
+  protected readonly hasProjectedHint: WritableSignal<boolean> = signal<boolean>(false);
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
 
   private onCvaChange: (value: string) => void = (): void => {};
@@ -162,10 +182,14 @@ export class UiLibTextarea implements ControlValueAccessor {
   // ---------------------------------------------------------------------------
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
+  private readonly hostElement: ElementRef<HTMLElement> =
+    inject<ElementRef<HTMLElement>>(ElementRef);
 
   // ---------------------------------------------------------------------------
   // Computed signals
   // ---------------------------------------------------------------------------
+
+  protected readonly textareaId: string = `ui-lib-textarea-${++nextTextareaId}`;
 
   protected readonly effectiveVariant: Signal<TextareaVariant> = computed<TextareaVariant>(
     (): TextareaVariant => this.variant() ?? this.themeConfig.variant()
@@ -176,11 +200,40 @@ export class UiLibTextarea implements ControlValueAccessor {
   );
 
   protected readonly controlId: Signal<string> = computed<string>(
-    (): string => this.inputId() ?? `ui-lib-textarea-${++textareaIdCounter}`
+    (): string => this.inputId() ?? this.textareaId
   );
 
-  protected readonly describedById: Signal<string | undefined> = computed<string | undefined>(
-    (): string | undefined => (this.error() ? `${this.controlId()}-error` : undefined)
+  protected readonly errorId: Signal<string> = computed<string>(
+    (): string => `${this.controlId()}-error`
+  );
+
+  protected readonly hintId: Signal<string> = computed<string>(
+    (): string => `${this.controlId()}-hint`
+  );
+
+  protected readonly isInvalid: Signal<boolean> = computed<boolean>(
+    (): boolean => this.invalid() || Boolean(this.error())
+  );
+
+  protected readonly showErrorRegion: Signal<boolean> = computed<boolean>(
+    (): boolean => this.isInvalid() && (Boolean(this.error()) || this.hasProjectedError())
+  );
+
+  protected readonly showHintRegion: Signal<boolean> = computed<boolean>(
+    (): boolean => Boolean(this.hint()) || this.hasProjectedHint()
+  );
+
+  protected readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const ids: string[] = [];
+      if (this.showErrorRegion()) {
+        ids.push(this.errorId());
+      }
+      if (this.showHintRegion()) {
+        ids.push(this.hintId());
+      }
+      return ids.length > 0 ? ids.join(' ') : null;
+    }
   );
 
   protected readonly currentLength: Signal<number> = computed<number>(
@@ -211,8 +264,12 @@ export class UiLibTextarea implements ControlValueAccessor {
       classes.push('ui-lib-textarea--focused');
     }
 
-    if (this.error()) {
+    if (this.isInvalid()) {
       classes.push('ui-lib-textarea--error');
+    }
+
+    if (this.autoResize()) {
+      classes.push('ui-lib-textarea--auto-resize');
     }
 
     if (this.value().length > 0) {
@@ -234,15 +291,29 @@ export class UiLibTextarea implements ControlValueAccessor {
   // ---------------------------------------------------------------------------
 
   constructor() {
-    // Re-measure whenever value changes and autoResize is on
     effect((): void => {
-      if (!this.autoResize()) {
+      const elementRef: ElementRef<HTMLTextAreaElement> | undefined = this.textareaRef();
+      if (!elementRef) {
         return;
       }
-      // Read value() so the effect re-runs on every change
+
+      const element: HTMLTextAreaElement = elementRef.nativeElement;
+      if (!this.autoResize()) {
+        element.style.height = '';
+        element.style.overflowY = '';
+        return;
+      }
+
       this.value();
+      this.maxRows();
       this.adjustHeight();
     });
+  }
+
+  public ngAfterContentInit(): void {
+    const hostElement: HTMLElement = this.hostElement.nativeElement;
+    this.hasProjectedError.set(Boolean(hostElement.querySelector('[textareaError]')));
+    this.hasProjectedHint.set(Boolean(hostElement.querySelector('[textareaHint]')));
   }
 
   // ---------------------------------------------------------------------------
@@ -306,9 +377,34 @@ export class UiLibTextarea implements ControlValueAccessor {
     if (!elementRef) {
       return;
     }
+
     const element: HTMLTextAreaElement = elementRef.nativeElement;
-    // Reset first so shrinking works correctly
     element.style.height = 'auto';
-    element.style.height = `${element.scrollHeight}px`;
+
+    const nextHeight: number = element.scrollHeight;
+    const maxRows: number | null = this.maxRows();
+    if (!maxRows) {
+      element.style.height = `${nextHeight}px`;
+      element.style.overflowY = 'hidden';
+      return;
+    }
+
+    const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
+    const lineHeight: number = Number.parseFloat(computedStyle.lineHeight);
+    if (!Number.isFinite(lineHeight) || lineHeight <= 0) {
+      element.style.height = `${nextHeight}px`;
+      element.style.overflowY = 'hidden';
+      return;
+    }
+
+    const paddingTop: number = Number.parseFloat(computedStyle.paddingTop) || 0;
+    const paddingBottom: number = Number.parseFloat(computedStyle.paddingBottom) || 0;
+    const borderTopWidth: number = Number.parseFloat(computedStyle.borderTopWidth) || 0;
+    const borderBottomWidth: number = Number.parseFloat(computedStyle.borderBottomWidth) || 0;
+    const maxHeight: number =
+      lineHeight * maxRows + paddingTop + paddingBottom + borderTopWidth + borderBottomWidth;
+
+    element.style.height = `${Math.min(nextHeight, maxHeight)}px`;
+    element.style.overflowY = nextHeight > maxHeight ? 'auto' : 'hidden';
   }
 }

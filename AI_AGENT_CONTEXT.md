@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `Textarea` -> ✅ complete + hardened (6-phase, score 8.7/10, 61 tests — 41 unit + 20 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 
 ---
@@ -76,6 +77,29 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-14 [Textarea component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/textarea/textarea.ts
+  - projects/ui-lib-custom/src/lib/textarea/textarea.html
+  - projects/ui-lib-custom/src/lib/textarea/textarea.scss
+  - projects/ui-lib-custom/src/lib/textarea/textarea.types.ts
+  - projects/ui-lib-custom/src/lib/textarea/textarea.spec.ts
+  - projects/ui-lib-custom/src/lib/textarea/textarea.a11y.spec.ts (NEW, 20 tests)
+  - projects/ui-lib-custom/src/lib/textarea/README.md
+  - docs/reference/components/TEXTAREA.md (NEW)
+  - docs/reference/components/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Textarea now uses stable per-instance generated ids, explicit `ariaLabel` / `ariaLabelledBy` inputs, composed hint+error `aria-describedby`, `invalid` state semantics, projected `[textareaHint]` and `[textareaError]` slots, optional `maxRows` auto-resize capping, reduced-motion-safe styling, and a dedicated 20-test accessibility regression suite.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/textarea/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/textarea/" --no-coverage (61/61 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. GitHub Actions workflow runs were checked via MCP (`list_workflow_runs`) and no recent completed failures were present to inspect. Demo screenshot captured at `/tmp/textarea-hardening.png`.
+Next step: Continue hardening the next unscored new core input component with the same label/error/hint semantics and reduced-motion baseline.
 
 Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
 Changed:
@@ -113,23 +137,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs`) and no failed completed runs were present to inspect. Playwright browser lock required CLI capture flow; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/input-mask-hardening.png`.
 Next step: Continue hardening the next queued core input with the same label/error/hint semantics and blocked-character a11y feedback standard.
-
-Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/layout/inline.ts
-  - projects/ui-lib-custom/src/lib/layout/inline.html (NEW)
-  - projects/ui-lib-custom/src/lib/layout/inline.scss
-  - projects/ui-lib-custom/src/lib/layout/inline.types.ts
-  - projects/ui-lib-custom/src/lib/layout/inline.spec.ts
-  - projects/ui-lib-custom/src/lib/layout/inline.a11y.spec.ts (NEW, 11 tests)
-  - projects/ui-lib-custom/src/lib/layout/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Inline now supports semantic rendered tags through `as`/`tag` (`div` default with `span`/`ul`/`ol` options), preserves host-first projection without adding landmark roles, documents wrap/read-order constraints, and ships dedicated accessibility coverage for default semantics, tag alias behavior, and DOM-order safety.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/layout/inline" --no-coverage (27/27 PASS — 16 unit + 11 a11y)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via Node Playwright at `/tmp/inline-hardening.png`.
-Next step: Harden Stack with the same semantic `as`/`tag` and landmark/read-order constraints for layout parity.
