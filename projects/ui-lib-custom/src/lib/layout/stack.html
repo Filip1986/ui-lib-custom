@@ -1,0 +1,114 @@
+@switch (_renderTag()) {
+  @case ('span') {
+    <span
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </span>
+  }
+  @case ('ul') {
+    <ul
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </ul>
+  }
+  @case ('ol') {
+    <ol
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </ol>
+  }
+  @case ('nav') {
+    <nav
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </nav>
+  }
+  @case ('section') {
+    <section
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </section>
+  }
+  @case ('main') {
+    <main
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </main>
+  }
+  @case ('aside') {
+    <aside
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </aside>
+  }
+  @default {
+    <div
+      class="ui-lib-stack__content"
+      [style.flex-direction]="_flexDirection()"
+      [style.align-items]="align()"
+      [style.justify-content]="_justifyContent()"
+      [style.flex-wrap]="_flexWrap()"
+      [style.gap]="_gapValue()"
+      [attr.aria-label]="_resolvedAriaLabel()"
+      [attr.role]="_resolvedRole()"
+    >
+      <ng-content />
+    </div>
+  }
+}
