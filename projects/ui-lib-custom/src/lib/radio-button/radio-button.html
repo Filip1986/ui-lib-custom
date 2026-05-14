@@ -10,7 +10,9 @@
   [attr.tabindex]="hostTabIndex()"
   [attr.aria-label]="ariaLabel()"
   [attr.aria-labelledby]="ariaLabelledbyResolved()"
+  [attr.aria-describedby]="ariaDescribedby()"
   [attr.aria-required]="required() ? 'true' : null"
+  [attr.aria-invalid]="invalid() ? 'true' : null"
   [attr.aria-disabled]="isDisabled() ? 'true' : null"
   (click)="onSelect($event)"
   (focus)="onFocusIn($event)"
@@ -36,4 +38,3 @@
 
 <!-- Projected content (alternative to label input) -->
 <ng-content />
-

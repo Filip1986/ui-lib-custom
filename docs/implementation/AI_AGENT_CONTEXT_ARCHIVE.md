@@ -4,6 +4,26 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: AnimateOnScroll now enforces `prefers-reduced-motion` by skipping observer/class animation paths and forcing visible static state, adds non-IntersectionObserver visible fallback for progressive enhancement, schedules class mutations via `requestAnimationFrame`, ships reduced-motion preset CSS safeguards, and includes a dedicated accessibility spec for reduced-motion + observer cleanup behavior.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/animate-on-scroll/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/animate-on-scroll/" --no-coverage (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
+Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
+
+---
+
 Date: 2026-05-13 [VirtualScroller component — accessibility hardening COMPLETE (#50)]
 Changed:
   - AI_AGENT_CONTEXT.md
@@ -2406,3 +2426,23 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: npm install required. Merged origin/main and resolved conflicts in AI_AGENT_CONTEXT.md and AI_AGENT_CONTEXT_ARCHIVE.md.
 Next step: TreeTable (#33) hardening — Tier 4 Data Display treegrid pass.
+
+---
+
+Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/animate-on-scroll/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: AnimateOnScroll now enforces `prefers-reduced-motion` by skipping observer/class animation paths and forcing visible static state, adds non-IntersectionObserver visible fallback for progressive enhancement, schedules class mutations via `requestAnimationFrame`, ships reduced-motion preset CSS safeguards, and includes a dedicated accessibility spec for reduced-motion + observer cleanup behavior.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/animate-on-scroll/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/animate-on-scroll/" --no-coverage (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
+Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
