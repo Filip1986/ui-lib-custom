@@ -10,8 +10,8 @@
 
 This component uses **Pattern A (radiogroup)** for interactive mode:
 
-- The host element carries `role="radiogroup"` and `aria-label`.
-- Each star renders as `role="radio"` with `aria-checked` and a human-readable `aria-label` (`"1 star"`, `"2 stars"`, …).
+- The host element carries `role="radiogroup"` and `aria-label` / `aria-labelledby`.
+- Each star renders as `role="radio"` with `aria-checked` and a human-readable `aria-label` (`"1 star out of 5"`, `"2 stars out of 5"`, …).
 - Focus is managed with a roving `tabindex`: the active star has `tabindex="0"`; all others have `tabindex="-1"`. When no value is selected, the first star holds `tabindex="0"`.
 - Arrow keys both move focus and immediately commit the new value.
 
@@ -38,7 +38,7 @@ Pattern A maps naturally to the discrete 1-to-N integer selection semantics of a
 | `disabled` | `boolean` | `false` | Disables the component. Also controlled via CVA `setDisabledState`. |
 | `readonly` | `boolean` | `false` | Visible but not interactive. Changes role to `"img"`. |
 | `autofocus` | `boolean` | `false` | Focuses the first star after first render. |
-| `ariaLabel` | `string` | `'Rating'` | Accessible label for the radiogroup element. Overridden with descriptive text in read-only mode. |
+| `ariaLabel` | `string \| null` | `null` | Accessible label for the radiogroup element. If omitted, the component falls back to `"Rating"` and logs a DEV-mode warning unless `ariaLabelledby` is provided. Overridden with descriptive text in read-only mode. |
 | `ariaLabelledby` | `string \| null` | `null` | Overrides `ariaLabel` when set. Ignored in read-only mode. |
 | `iconOnClass` | `string \| null` | `null` | Extra CSS class on filled star icons. |
 | `iconOnStyle` | `Record<string, string> \| null` | `null` | Inline styles on filled star icons. |
@@ -80,6 +80,10 @@ The component implements `ControlValueAccessor` and works with `ngModel` and rea
 ```
 
 Programmatic disable via `FormControl.disable()` is propagated through `setDisabledState`.
+
+## Accessible naming guidance
+
+Provide either `ariaLabel` or `ariaLabelledby` whenever no visible label exists. In DEV mode the component warns when both are omitted in interactive mode, even though it still falls back to `"Rating"` so the widget remains named for assistive technologies.
 
 ## Usage
 

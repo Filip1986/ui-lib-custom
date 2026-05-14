@@ -362,10 +362,10 @@ describe('Rating', (): void => {
     });
   });
 
-  it('getStarAriaLabel returns "N star(s)" format', (): void => {
+  it('getStarAriaLabel returns "N star(s) out of M" format', (): void => {
     const rating: Rating = getRatingInstance(fixture);
-    expect(rating.getStarAriaLabel(1)).toBe('1 star');
-    expect(rating.getStarAriaLabel(3)).toBe('3 stars');
+    expect(rating.getStarAriaLabel(1)).toBe('1 star out of 5');
+    expect(rating.getStarAriaLabel(3)).toBe('3 stars out of 5');
   });
 
   // ── Keyboard navigation ───────────────────────────────────────────────────
@@ -609,7 +609,7 @@ describe('Rating', (): void => {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [Rating, FormsModule],
-  template: `<ui-lib-rating [(ngModel)]="rating" />`,
+  template: `<ui-lib-rating [(ngModel)]="rating" ariaLabel="Form rating" />`,
 })
 class NgModelHostComponent {
   public rating: number | null = null;
@@ -670,7 +670,7 @@ describe('Rating — ngModel', (): void => {
   imports: [Rating, ReactiveFormsModule],
   template: `
     <form [formGroup]="form">
-      <ui-lib-rating formControlName="score" />
+      <ui-lib-rating formControlName="score" ariaLabel="Score rating" />
     </form>
   `,
 })

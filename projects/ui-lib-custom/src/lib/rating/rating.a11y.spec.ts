@@ -26,6 +26,7 @@ import { Rating } from './rating';
       [disabled]="disabled()"
       [cancel]="cancel()"
       [ariaLabel]="ariaLabel()"
+      [ariaLabelledby]="ariaLabelledby()"
     />
   `,
 })
@@ -34,7 +35,10 @@ class RatingA11yHostComponent {
   public readonly readonly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly cancel: WritableSignal<boolean> = signal<boolean>(true);
-  public readonly ariaLabel: WritableSignal<string> = signal<string>('Product rating');
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(
+    'Product rating'
+  );
+  public readonly ariaLabelledby: WritableSignal<string | null> = signal<string | null>(null);
 }
 
 // ── Shared test helpers ───────────────────────────────────────────────────────
@@ -87,7 +91,17 @@ function buildMockTheme(): {
   };
 }
 
-async function createFixture(): Promise<ComponentFixture<RatingA11yHostComponent>> {
+interface RatingA11yFixtureOptions {
+  readonly?: boolean;
+  disabled?: boolean;
+  cancel?: boolean;
+  ariaLabel?: string | null;
+  ariaLabelledby?: string | null;
+}
+
+async function createFixture(
+  options: RatingA11yFixtureOptions = {}
+): Promise<ComponentFixture<RatingA11yHostComponent>> {
   await TestBed.configureTestingModule({
     imports: [RatingA11yHostComponent],
     providers: [
@@ -98,6 +112,21 @@ async function createFixture(): Promise<ComponentFixture<RatingA11yHostComponent
 
   const fixture: ComponentFixture<RatingA11yHostComponent> =
     TestBed.createComponent(RatingA11yHostComponent);
+  if (options.readonly !== undefined) {
+    fixture.componentInstance.readonly.set(options.readonly);
+  }
+  if (options.disabled !== undefined) {
+    fixture.componentInstance.disabled.set(options.disabled);
+  }
+  if (options.cancel !== undefined) {
+    fixture.componentInstance.cancel.set(options.cancel);
+  }
+  if (options.ariaLabel !== undefined) {
+    fixture.componentInstance.ariaLabel.set(options.ariaLabel);
+  }
+  if (options.ariaLabelledby !== undefined) {
+    fixture.componentInstance.ariaLabelledby.set(options.ariaLabelledby);
+  }
   document.body.appendChild(fixture.nativeElement);
   fixture.detectChanges();
   await fixture.whenStable();
@@ -153,6 +182,10 @@ function dispatchKey(element: HTMLElement, key: string): void {
 // ── Accessibility tests ───────────────────────────────────────────────────────
 
 describe('Rating Accessibility', (): void => {
+  beforeEach((): void => {
+    jest.restoreAllMocks();
+  });
+
   afterEach((): void => {
     TestBed.resetTestingModule();
   });
@@ -168,6 +201,16 @@ describe('Rating Accessibility', (): void => {
     it('host aria-label reflects the consumer-supplied ariaLabel', async (): Promise<void> => {
       const fixture: ComponentFixture<RatingA11yHostComponent> = await createFixture();
       expect(getRatingHost(fixture).getAttribute('aria-label')).toBe('Product rating');
+    });
+
+    it('host prefers aria-labelledby over aria-label when both inputs are available', async (): Promise<void> => {
+      const fixture: ComponentFixture<RatingA11yHostComponent> = await createFixture({
+        ariaLabel: 'Fallback rating',
+        ariaLabelledby: 'rating-heading',
+      });
+      const host: HTMLElement = getRatingHost(fixture);
+      expect(host.getAttribute('aria-labelledby')).toBe('rating-heading');
+      expect(host.hasAttribute('aria-label')).toBe(false);
     });
 
     it('each star has role="radio"', async (): Promise<void> => {
@@ -198,12 +241,12 @@ describe('Rating Accessibility', (): void => {
       expect(stars[4]?.getAttribute('aria-checked')).toBe('false');
     });
 
-    it('each star aria-label is "N star" or "N stars"', async (): Promise<void> => {
+    it('each star aria-label includes the star number and maximum', async (): Promise<void> => {
       const fixture: ComponentFixture<RatingA11yHostComponent> = await createFixture();
       const stars: HTMLElement[] = getInteractiveStars(fixture);
-      expect(stars[0]?.getAttribute('aria-label')).toBe('1 star');
-      expect(stars[1]?.getAttribute('aria-label')).toBe('2 stars');
-      expect(stars[4]?.getAttribute('aria-label')).toBe('5 stars');
+      expect(stars[0]?.getAttribute('aria-label')).toBe('1 star out of 5');
+      expect(stars[1]?.getAttribute('aria-label')).toBe('2 stars out of 5');
+      expect(stars[4]?.getAttribute('aria-label')).toBe('5 stars out of 5');
     });
 
     it('star icons are aria-hidden', async (): Promise<void> => {
@@ -254,11 +297,31 @@ describe('Rating Accessibility', (): void => {
       expect(getRatingInstance(fixture).value()).toBe(3);
     });
 
+    it('ArrowUp increments the value by one', async (): Promise<void> => {
+      const fixture: ComponentFixture<RatingA11yHostComponent> = await createFixture();
+      setRatingValue(fixture, 2);
+
+      dispatchKey(getRatingHost(fixture), 'ArrowUp');
+      fixture.detectChanges();
+
+      expect(getRatingInstance(fixture).value()).toBe(3);
+    });
+
     it('ArrowLeft decrements the value by one', async (): Promise<void> => {
       const fixture: ComponentFixture<RatingA11yHostComponent> = await createFixture();
       setRatingValue(fixture, 4);
 
       dispatchKey(getRatingHost(fixture), 'ArrowLeft');
+      fixture.detectChanges();
+
+      expect(getRatingInstance(fixture).value()).toBe(3);
+    });
+
+    it('ArrowDown decrements the value by one', async (): Promise<void> => {
+      const fixture: ComponentFixture<RatingA11yHostComponent> = await createFixture();
+      setRatingValue(fixture, 4);
+
+      dispatchKey(getRatingHost(fixture), 'ArrowDown');
       fixture.detectChanges();
 
       expect(getRatingInstance(fixture).value()).toBe(3);
@@ -282,6 +345,18 @@ describe('Rating Accessibility', (): void => {
       fixture.detectChanges();
 
       expect(getRatingInstance(fixture).value()).toBe(1);
+    });
+
+    it('Delete clears the rating when cancel is enabled', async (): Promise<void> => {
+      const fixture: ComponentFixture<RatingA11yHostComponent> = await createFixture({
+        cancel: true,
+      });
+      setRatingValue(fixture, 4);
+
+      dispatchKey(getRatingHost(fixture), 'Delete');
+      fixture.detectChanges();
+
+      expect(getRatingInstance(fixture).value()).toBeNull();
     });
   });
 
@@ -343,6 +418,34 @@ describe('Rating Accessibility', (): void => {
         '.ui-lib-rating__cancel'
       );
       expect(cancelButton).toBeNull();
+    });
+
+    it('warns in dev mode when neither ariaLabel nor ariaLabelledby is provided', async (): Promise<void> => {
+      const warnSpy: jest.SpiedFunction<typeof console.warn> = jest
+        .spyOn(console, 'warn')
+        .mockImplementation((): void => {});
+
+      await createFixture({
+        ariaLabel: null,
+        ariaLabelledby: null,
+      });
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        '[ui-lib-rating] Missing accessible name. Provide ariaLabel or ariaLabelledby when no visible label is present.'
+      );
+    });
+
+    it('does not warn when ariaLabelledby provides the accessible name', async (): Promise<void> => {
+      const warnSpy: jest.SpiedFunction<typeof console.warn> = jest
+        .spyOn(console, 'warn')
+        .mockImplementation((): void => {});
+
+      await createFixture({
+        ariaLabel: null,
+        ariaLabelledby: 'rating-heading',
+      });
+
+      expect(warnSpy).not.toHaveBeenCalled();
     });
   });
 

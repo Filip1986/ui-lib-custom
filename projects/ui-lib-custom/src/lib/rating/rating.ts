@@ -9,6 +9,7 @@ import {
   contentChild,
   forwardRef,
   inject,
+  isDevMode,
   input,
   model,
   output,
@@ -26,6 +27,8 @@ import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
 
 export type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
+
+const DEFAULT_RATING_ARIA_LABEL: string = 'Rating';
 
 let ratingIdCounter: number = 0;
 
@@ -71,7 +74,7 @@ export class Rating implements ControlValueAccessor {
   /** When true, the first focusable star receives focus after the first render. */
   public readonly autofocus: InputSignal<boolean> = input<boolean>(false);
   /** Accessible label for the radiogroup element. */
-  public readonly ariaLabel: InputSignal<string> = input<string>('Rating');
+  public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   /** Explicit aria-labelledby override; overrides ariaLabel when set. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
   /** Custom CSS class appended to a filled star icon. */
@@ -148,6 +151,7 @@ export class Rating implements ControlValueAccessor {
    * Null when the pointer is not over any star.
    */
   private readonly hoverValue: WritableSignal<number | null> = signal<number | null>(null);
+  private hasWarnedMissingAccessibleName: boolean = false;
 
   private onCvaChange: (value: number | null) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};
@@ -174,13 +178,21 @@ export class Rating implements ControlValueAccessor {
    * In read-only mode returns a descriptive "Rating: N out of M stars" string.
    * Otherwise returns the consumer-supplied ariaLabel.
    */
-  public readonly hostAriaLabelValue: Signal<string> = computed<string>((): string => {
-    if (this.readonly()) {
-      const currentValue: number | null = this.value();
-      return `Rating: ${currentValue ?? 0} out of ${this.stars()} stars`;
+  public readonly hostAriaLabelValue: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      if (this.readonly()) {
+        const currentValue: number | null = this.value();
+        return `Rating: ${currentValue ?? 0} out of ${this.stars()} stars`;
+      }
+
+      if (this.ariaLabelledby()) {
+        return null;
+      }
+
+      const normalizedAriaLabel: string = this.ariaLabel()?.trim() ?? '';
+      return normalizedAriaLabel.length > 0 ? normalizedAriaLabel : DEFAULT_RATING_ARIA_LABEL;
     }
-    return this.ariaLabel();
-  });
+  );
 
   /** Resolved variant — falls back to global theme when not explicitly set. */
   public readonly effectiveVariant: Signal<RatingVariant> = computed<RatingVariant>(
@@ -228,6 +240,8 @@ export class Rating implements ControlValueAccessor {
 
   constructor() {
     afterNextRender((): void => {
+      this.warnWhenAccessibleNameIsMissing();
+
       if (this.autofocus() && !this.isDisabled()) {
         const firstStar: HTMLElement | null =
           this.elementRef.nativeElement.querySelector<HTMLElement>('.ui-lib-rating__star');
@@ -280,7 +294,7 @@ export class Rating implements ControlValueAccessor {
 
   /** Human-readable aria-label for a single star element. */
   public getStarAriaLabel(star: number): string {
-    return `${star} ${star === 1 ? 'star' : 'stars'}`;
+    return `${star} ${star === 1 ? 'star' : 'stars'} out of ${this.stars()}`;
   }
 
   /** CSS classes for the star icon element, merging the custom icon class when provided. */
@@ -472,5 +486,22 @@ export class Rating implements ControlValueAccessor {
     this.onCvaTouched();
     this.change.emit({ value: null, originalEvent: event });
     this.cleared.emit(event);
+  }
+
+  private warnWhenAccessibleNameIsMissing(): void {
+    if (!isDevMode() || this.readonly() || this.hasWarnedMissingAccessibleName) {
+      return;
+    }
+
+    const ariaLabel: string = this.ariaLabel()?.trim() ?? '';
+    const ariaLabelledby: string = this.ariaLabelledby()?.trim() ?? '';
+    if (ariaLabel.length > 0 || ariaLabelledby.length > 0) {
+      return;
+    }
+
+    this.hasWarnedMissingAccessibleName = true;
+    console.warn(
+      '[ui-lib-rating] Missing accessible name. Provide ariaLabel or ariaLabelledby when no visible label is present.'
+    );
   }
 }

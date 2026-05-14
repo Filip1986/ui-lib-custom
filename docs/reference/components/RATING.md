@@ -64,7 +64,7 @@ form = new FormGroup({
 | `readonly` | `boolean` | `false` | Makes the component visible but non-interactive. |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Visual design variant; falls back to `ThemeConfigService` when `null`. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Controls the star icon size. |
-| `ariaLabel` | `string` | `'Rating'` | Accessible label for the `radiogroup` host element. |
+| `ariaLabel` | `string \| null` | `null` | Accessible label for the `radiogroup` host element. Falls back to `"Rating"` and logs a DEV-mode warning when omitted without `ariaLabelledby`. |
 | `ariaLabelledby` | `string \| null` | `null` | Explicit `aria-labelledby` override; takes priority over `ariaLabel`. |
 | `iconOnClass` | `string \| null` | `null` | Extra CSS class applied to the icon element of a filled star. |
 | `iconOffClass` | `string \| null` | `null` | Extra CSS class applied to the icon element of an empty star. |
@@ -196,10 +196,11 @@ ui-lib-rating {
 ## Accessibility
 
 - Host element: `role="radiogroup"`, `aria-label` / `aria-labelledby` exposed as inputs.
-- Each star: `role="radio"`, `aria-checked`, `aria-label="N of M"`, `aria-posinset`, `aria-setsize`.
+- Each star: `role="radio"`, `aria-checked`, `aria-label="N star(s) out of M"`, `aria-posinset`, `aria-setsize`.
 - Cancel button: `role="button"`, `aria-label="Clear rating"`, keyboard-activatable via `Enter`/`Space`.
 - Disabled state propagated from parent form control via `ControlValueAccessor.setDisabledState`.
 - Roving `tabindex` keeps focus management compliant with ARIA radio-group pattern.
+- Read-only mode switches to `role="img"` with a descriptive value label and decorative `aria-hidden` stars.
 
 ---
 
@@ -210,4 +211,3 @@ ui-lib-rating {
 ## Source
 
 `projects/ui-lib-custom/src/lib/rating/`
-
