@@ -20,7 +20,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14), **Input (#21)** also merged
+- **Active focus:** ScrollTop (#75), ScrollPanel (#62), TreeTable (#33), Tree (#34), TreeSelect (#35), Timeline (#71), Upload (#69), and Skeleton (#55) accessibility hardening COMPLETE (6-phase); Tag (#53), ProgressSpinner (#56), Panel (#60), MeterGroup (#57), Ripple (#74), BlockUI (#64), BottomSheet (#76), Card (#51), Chart (#72), Chip (#54), ContextMenu (#14) also merged
 - **Next queue:** Alert hardening (Tier 5, #42) — next after Button
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
@@ -77,22 +77,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-13 [Input component — 6-phase hardening COMPLETE (Tier 3, #21)]
+Date: 2026-05-13 [Inline layout scorecard sync]
 Changed:
-  - projects/ui-lib-custom/src/lib/input/input.ts (added ariaLabel, ariaLabelledBy inputs)
-  - projects/ui-lib-custom/src/lib/input/input.html (bound aria-label, aria-labelledby)
-  - projects/ui-lib-custom/src/lib/input/input.a11y.spec.ts (added 4 ariaLabel/ariaLabelledBy tests → 39 total)
-  - projects/ui-lib-custom/src/lib/input/README.md (documented ariaLabel, ariaLabelledBy inputs)
-  - docs/COMPONENT_SCORES.md (Input: 🔴 → 🟢, score 8.8/10)
+  - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
-State: Input now supports ariaLabel and ariaLabelledBy signal inputs bound to the native input element, completing the label association story. All pre-existing a11y features (aria-invalid, aria-describedby, aria-required, aria-readonly, disabled, prefers-reduced-motion, label for/id association) were already in place. 69 tests (35 unit + 34 a11y).
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Synced the Layout score table with the already-completed Inline hardening state by filling the Inline row scores and marking it complete (🟢) to match queue status and completed implementation/tests.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/input/" --no-coverage (69/69 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/layout/inline" --no-coverage (27/27 PASS — 16 unit + 11 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: npm install required before validation. Build took ~44s.
-Next step: Table hardening (Tier 4, #32) — already marked Done. Continue with RadioButton (#23), Slider (#27), or Password (#29).
+Terminal notes: Fresh clone required `npm install` before baseline validation; no additional code changes were required for Inline behavior/tests.
+Next step: Continue with Stack hardening for layout parity (`as` semantics + landmark/read-order constraints).
 
 Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
 Changed:
