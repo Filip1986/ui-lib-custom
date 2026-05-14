@@ -1,2 +1,3 @@
-<ng-content />
-
+<ng-content select="[addonLeft]" />
+<ng-content select=":not([addonLeft]):not([addonRight])" />
+<ng-content select="[addonRight]" />

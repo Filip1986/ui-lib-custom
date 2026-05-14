@@ -77,18 +77,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-13 [Inline layout scorecard sync]
+Date: 2026-05-13 [InputGroup component — 6-phase hardening COMPLETE]
 Changed:
+  - projects/ui-lib-custom/src/lib/input-group/input-group.html
+  - projects/ui-lib-custom/src/lib/input-group/input-group.a11y.spec.ts (NEW, 12 tests)
+  - projects/ui-lib-custom/src/lib/input-group/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Synced the Layout score table with the already-completed Inline hardening state by filling the Inline row scores and marking it complete (🟢) to match queue status and completed implementation/tests.
+State: InputGroup now supports explicit `[addonLeft]` and `[addonRight]` projection slots while preserving default projection, adds dedicated accessibility coverage for decorative addon hiding, icon-button addon labeling, label→input targeting, axe baseline, and composability with Input/InputMask/InputNumber/Password, and documents decorative vs interactive addon requirements in the component README.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/layout/inline" --no-coverage (27/27 PASS — 16 unit + 11 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-group/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/input-group/" --no-coverage (23/23 PASS — 11 unit + 12 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: Fresh clone required `npm install` before baseline validation; no additional code changes were required for Inline behavior/tests.
-Next step: Continue with Stack hardening for layout parity (`as` semantics + landmark/read-order constraints).
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: `playwright-browser` tool was locked by an existing browser profile, so screenshot capture used CLI Playwright after installing Chromium (`npx playwright install chromium`). Screenshot saved at `/tmp/input-group-hardening.png`.
+Next step: Continue hardening the next queued new component prompt (for example Stack or OrganizationChart).
 
 Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
 Changed:
