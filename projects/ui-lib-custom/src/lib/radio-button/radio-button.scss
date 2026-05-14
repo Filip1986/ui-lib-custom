@@ -80,8 +80,8 @@ ui-lib-radio-button.ui-lib-radio-button--checked:not(.ui-lib-radio-button--disab
   background: var(--uilib-radio-button-bg-checked);
 }
 
-// Focus ring — visible when the native input is focused (keyboard / programmatic)
-ui-lib-radio-button:focus-within .ui-lib-radio-button__box {
+// Focus ring — visible only for keyboard-style focus
+ui-lib-radio-button .ui-lib-radio-button__native-input:focus-visible + .ui-lib-radio-button__box {
   box-shadow: var(--uilib-radio-button-focus-ring);
 }
 
@@ -144,7 +144,8 @@ ui-lib-radio-button.radio-button--filled .ui-lib-radio-button__box {
 // ── Validation states ────────────────────────────────────────────────────────
 
 ui-lib-radio-button.ng-invalid.ng-touched .ui-lib-radio-button__box,
-ui-lib-radio-button.ng-invalid.ng-dirty .ui-lib-radio-button__box {
+ui-lib-radio-button.ng-invalid.ng-dirty .ui-lib-radio-button__box,
+ui-lib-radio-button.ui-lib-radio-button--invalid .ui-lib-radio-button__box {
   border-color: var(--uilib-color-danger-600, #dc2626);
 }
 
