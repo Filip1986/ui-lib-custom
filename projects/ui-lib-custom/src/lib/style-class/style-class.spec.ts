@@ -100,6 +100,18 @@ class ScPrevHostComponent {}
 })
 class ScOutsideHostComponent {}
 
+@Component({
+  selector: 'app-sc-selector-host',
+  standalone: true,
+  imports: [StyleClass],
+  template: `
+    <button [uiLibStyleClass]="'#remote-panel'" [toggleClass]="'is-open'">Toggle</button>
+    <div id="remote-panel">Remote panel</div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class ScSelectorHostComponent {}
+
 // ---------------------------------------------------------------------------
 // Setup helpers
 // ---------------------------------------------------------------------------
@@ -220,6 +232,22 @@ describe('StyleClass (toggle mode)', (): void => {
       .nativeElement as HTMLElement;
     button.click();
     expect(parent.classList.contains('is-open')).toBe(true);
+  });
+
+  it('should resolve an arbitrary selector target', (): void => {
+    TestBed.configureTestingModule({
+      imports: [ScSelectorHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    });
+    const fixture: ComponentFixture<ScSelectorHostComponent> =
+      TestBed.createComponent(ScSelectorHostComponent);
+    fixture.detectChanges();
+    const button: HTMLElement = fixture.debugElement.query(By.css('button'))
+      .nativeElement as HTMLElement;
+    const target: HTMLElement = fixture.debugElement.query(By.css('#remote-panel'))
+      .nativeElement as HTMLElement;
+    button.click();
+    expect(target.classList.contains('is-open')).toBe(true);
   });
 });
 

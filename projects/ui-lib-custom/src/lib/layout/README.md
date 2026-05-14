@@ -97,7 +97,12 @@ Vertical or horizontal flex layout with design-token spacing.
 
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
+| `as` | `'div' \| 'span' \| 'ul' \| 'ol' \| 'nav' \| 'section' \| 'main' \| 'aside'` | `'div'` | Semantic rendered element |
+| `tag` | `'div' \| 'span' \| 'ul' \| 'ol' \| 'nav' \| 'section' \| 'main' \| 'aside' \| null` | `null` | Alias for `as`; `as` takes precedence when both are set |
+| `ariaLabel` | `string \| null` | `null` | Required when `as="nav"` to provide an accessible name |
+| `role` | `string \| null` | `null` | Optional ARIA role for non-list tags (for example `role="list"`) |
 | `direction` | `'vertical' \| 'horizontal'` | `'vertical'` | Maps to `flex-direction: column / row` |
+| `wrap` | `'nowrap' \| 'wrap' \| 'wrap-reverse'` | `'nowrap'` | Maps to `flex-wrap` |
 | `align` | `StackAlign` | `'stretch'` | `align-items` value |
 | `justify` | `StackJustify` | `'start'` | `justify-content` value |
 | `spacing` | `StackToken \| SpacingToken \| number \| null` | `null` | Semantic gap (preferred); maps to `--uilib-stack-*` |
@@ -106,6 +111,47 @@ Vertical or horizontal flex layout with design-token spacing.
 ### Outputs
 
 _none_
+
+### Accessibility notes
+
+- Default render target is a neutral `<div>` and does not add landmark semantics.
+- Use semantic tags explicitly with `as`/`tag` (for example `ul`, `nav`, `main`) when needed.
+- When `as="nav"`, always provide `ariaLabel` so the navigation landmark has an accessible name.
+- For list behavior, prefer native list tags (`as="ul"`/`as="ol"`). For non-list tags, you can set `role="list"`.
+- With `wrap`/`wrap-reverse`, keep DOM order equal to the intended reading order. Do **not** use CSS
+  `order` to visually rearrange items independently from source order.
+
+### Recipes
+
+```html
+<!-- Vertical form layout -->
+<ui-lib-stack spacing="md">
+  <label for="email">Email</label>
+  <input id="email" />
+  <label for="password">Password</label>
+  <input id="password" type="password" />
+</ui-lib-stack>
+
+<!-- Horizontal action row -->
+<ui-lib-stack direction="horizontal" justify="space-between" align="center" spacing="sm">
+  <button type="button">Cancel</button>
+  <button type="submit">Save</button>
+</ui-lib-stack>
+
+<!-- Semantic list -->
+<ui-lib-stack as="ul" spacing="sm">
+  <li>Alpha</li>
+  <li>Beta</li>
+  <li>Gamma</li>
+</ui-lib-stack>
+
+<!-- Navigation landmark -->
+<ui-lib-stack as="nav" ariaLabel="Primary navigation" direction="horizontal" spacing="md">
+  <a href="/overview">Overview</a>
+  <a href="/components">Components</a>
+  <a href="/tokens">Tokens</a>
+</ui-lib-stack>
+```
 
 ---
 

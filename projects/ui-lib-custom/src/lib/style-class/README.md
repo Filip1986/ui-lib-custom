@@ -82,10 +82,15 @@ import { StyleClass } from 'ui-lib-custom/style-class';
 ### Toggle Mode
 
 ```html
-<button [uiLibStyleClass]="'@next'" [toggleClass]="'is-open'">
+<button
+  type="button"
+  aria-controls="toggle-panel"
+  [uiLibStyleClass]="'@next'"
+  [toggleClass]="'is-open'"
+>
   Toggle Panel
 </button>
-<div>Content</div>
+<div id="toggle-panel">Content</div>
 ```
 
 ```css
@@ -99,6 +104,8 @@ div { display: none; }
 
 ```html
 <button
+  type="button"
+  aria-controls="my-panel"
   [uiLibStyleClass]="'#my-panel'"
   enterFromClass="hidden"
   enterActiveClass="fade-in"
@@ -170,4 +177,5 @@ div { display: none; }
 - The 500 ms fallback timeout ensures the directive works correctly even when no CSS transition or animation is defined (typical in test environments).
 - On `ngOnDestroy`, all event listeners are automatically removed and state is cleaned up.
 - The directive is SSR-safe: it checks `isPlatformBrowser(PLATFORM_ID)` before attaching DOM listeners.
-
+- For show/hide interactions, use a native interactive trigger such as `<button type="button">`, give the target a stable `id`, and connect the trigger with `aria-controls`. The directive keeps `aria-expanded` on the trigger and `aria-hidden` on the target in sync as the panel opens and closes.
+- When the user prefers reduced motion (`prefers-reduced-motion: reduce`), enter/leave animation classes are skipped and the directive applies the final visible/hidden state immediately instead of animating.

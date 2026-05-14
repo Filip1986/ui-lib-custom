@@ -52,6 +52,7 @@ function queryAll<T extends Element = HTMLElement>(
       [disabled]="disabled()"
       [readonly]="readonly()"
       [animate]="animate()"
+      [valueTextFn]="valueTextFn()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
       (onChange)="onChangeEvent($event)"
@@ -71,6 +72,9 @@ class SliderNgModelHostComponent {
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly readonly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly animate: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly valueTextFn: WritableSignal<(value: number) => string> = signal<
+    (value: number) => string
+  >((value: number): string => String(value));
   public value: number | [number, number] = 50;
   public readonly changeEvents: SliderChangeEvent[] = [];
   public readonly slideEndEvents: SliderSlideEndEvent[] = [];
@@ -516,6 +520,14 @@ describe('Slider - accessibility', (): void => {
     expect(handle.getAttribute('aria-orientation')).toBe('horizontal');
   });
 
+  it('handle formats aria-valuetext with valueTextFn', async (): Promise<void> => {
+    host.valueTextFn.set((value: number): string => `${value}%`);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const handle: HTMLElement = queryEl(fixture, '.ui-lib-slider__handle');
+    expect(handle.getAttribute('aria-valuetext')).toBe('40%');
+  });
+
   it('handle has aria-orientation=vertical when vertical', async (): Promise<void> => {
     host.orientation.set('vertical');
     fixture.detectChanges();
@@ -541,6 +553,21 @@ describe('Slider - accessibility', (): void => {
     const endHandle: HTMLElement = queryEl(fixture, '.ui-lib-slider__handle--end');
     expect(startHandle.getAttribute('aria-label')).toBe('Minimum value');
     expect(endHandle.getAttribute('aria-label')).toBe('Maximum value');
+  });
+
+  it('range handles format aria-valuetext with valueTextFn', async (): Promise<void> => {
+    host.range.set(true);
+    host.value = [20, 80];
+    host.valueTextFn.set((value: number): string => `$${value}`);
+    fixture.componentRef.changeDetectorRef.markForCheck();
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const startHandle: HTMLElement = queryEl(fixture, '.ui-lib-slider__handle--start');
+    const endHandle: HTMLElement = queryEl(fixture, '.ui-lib-slider__handle--end');
+    expect(startHandle.getAttribute('aria-valuetext')).toBe('$20');
+    expect(endHandle.getAttribute('aria-valuetext')).toBe('$80');
   });
 });
 

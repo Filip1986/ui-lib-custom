@@ -2,3 +2,6 @@
   --uilib-stack-fg: var(--uilib-text-dark-primary);
 }
 
+.ui-lib-stack__content {
+  display: flex;
+}
