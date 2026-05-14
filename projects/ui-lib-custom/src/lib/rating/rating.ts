@@ -28,6 +28,8 @@ import type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } fr
 
 export type { RatingVariant, RatingSize, RatingChangeEvent, RatingRateEvent } from './rating.types';
 
+const DEFAULT_RATING_ARIA_LABEL: string = 'Rating';
+
 let ratingIdCounter: number = 0;
 
 /**
@@ -188,7 +190,7 @@ export class Rating implements ControlValueAccessor {
       }
 
       const ariaLabel: string | null = this.ariaLabel();
-      return ariaLabel?.trim().length ? ariaLabel : 'Rating';
+      return ariaLabel?.trim().length ? ariaLabel : DEFAULT_RATING_ARIA_LABEL;
     }
   );
 
