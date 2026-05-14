@@ -18,11 +18,13 @@
       [rows]="rows()"
       [attr.cols]="cols() ?? null"
       [attr.maxlength]="maxLength() ?? null"
-      [attr.aria-label]="label() ? null : placeholder() || null"
-      [attr.aria-invalid]="error() ? 'true' : null"
+      [attr.aria-label]="ariaLabel() || null"
+      [attr.aria-labelledby]="ariaLabelledBy() || null"
+      [attr.aria-invalid]="isInvalid() ? 'true' : null"
       [attr.aria-required]="required() ? 'true' : null"
-      [attr.aria-describedby]="describedById()"
+      [attr.aria-describedby]="ariaDescribedBy()"
       [attr.aria-readonly]="readonly() ? 'true' : null"
+      [attr.aria-disabled]="isDisabled() ? 'true' : null"
       [disabled]="isDisabled()"
       [readOnly]="readonly()"
       [required]="required() || null"
@@ -35,18 +37,33 @@
   </div>
 
   <div class="ui-lib-textarea__meta">
-    @if (error()) {
+    <div class="ui-lib-textarea__messages">
+      <div
+        class="ui-lib-textarea__hint"
+        [id]="hintId()"
+        [class.ui-lib-textarea__message--hidden]="!showHintRegion()"
+      >
+        @if (hint() && !hasProjectedHint()) {
+          {{ hint() }}
+        }
+        <ng-content select="[textareaHint]" />
+      </div>
+
       <div
         class="ui-lib-textarea__error"
-        [id]="describedById()"
-        role="alert"
+        [id]="errorId()"
+        [attr.role]="showErrorRegion() ? 'alert' : null"
+        [class.ui-lib-textarea__message--hidden]="!showErrorRegion()"
       >
-        {{ error() }}
+        @if (error() && !hasProjectedError()) {
+          {{ error() }}
+        }
+        <ng-content select="[textareaError]" />
       </div>
-    }
+    </div>
 
     @if (showCounter()) {
-      <span class="ui-lib-textarea__counter" aria-live="polite">
+      <span class="ui-lib-textarea__counter">
         @if (maxLength()) {
           {{ currentLength() }} / {{ maxLength() }}
         } @else {
