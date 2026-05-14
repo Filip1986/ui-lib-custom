@@ -11,11 +11,10 @@
 | Name | Type | Default | Notes |
 |------|------|---------|-------|
 | `uilibKeyFilter` | `KeyFilterPreset \| RegExp` | `'alphanum'` | Built-in preset name or a custom `RegExp` tested per character |
-| `pattern` | `KeyFilterPreset \| null` | `null` | Optional preset alias. Use for template readability when passing a preset explicitly |
-| `regex` | `RegExp \| string \| null` | `null` | Optional custom regex alias. If both `pattern` and `regex` are set, `regex` takes precedence and a DEV_MODE warning is logged |
-| `allowedChars` | `string \| null` | `null` | Optional literal whitelist. Each character in the string is treated as allowed input |
 | `keyFilterBypass` | `boolean` | `false` | When `true`, all filtering is suspended |
-| `hintText` | `string \| null` | `null` | Accessible format guidance injected next to the target input and linked via `aria-describedby` |
+| `hintText` | `string \| null` | `null` | Accessible format hint text linked through `aria-describedby` |
+| `pattern` | `KeyFilterPreset \| null` | `null` | Optional preset alias; ignored when `regex` is also set |
+| `regex` | `RegExp \| null` | `null` | Optional custom regex alias with precedence over `pattern` |
 
 ## Built-in Presets (`KeyFilterPreset`)
 
@@ -40,30 +39,13 @@ _none_
 ```html
 <input [uilibKeyFilter]="'pint'" />
 <input [uilibKeyFilter]="customPattern" [keyFilterBypass]="bypassFilter" />
+<input [uilibKeyFilter]="'alpha'" [hintText]="'Letters only'" />
+<input [pattern]="'pint'" [regex]="/[0-9]/" />
 ```
 
-## Accessibility Guidance
+## Accessibility guidance
 
-When invalid keystrokes are blocked, always provide format guidance to assistive technology users:
-
-```html
-<label for="account-id">Account ID</label>
-<input id="account-id" [uilibKeyFilter]="'pint'" hintText="Numbers only" />
-```
-
-- `hintText` creates a linked helper description via `aria-describedby`.
-- On paste filtering, the directive announces:
-  `Characters not matching the allowed pattern were removed.`
-
-## Preset vs custom regex examples
-
-```html
-<!-- Preset alias -->
-<input [pattern]="'alpha'" hintText="Letters only" />
-
-<!-- Custom regex alias -->
-<input [regex]="'[A-Fa-f0-9]'" hintText="Hex characters only" />
-
-<!-- Literal whitelist -->
-<input allowedChars="ABC123" hintText="Allowed: A, B, C, 1, 2, 3" />
-```
+- Always provide `hintText` for strict filters (for example, `"Numbers only"` or `"Hex characters only"`).
+- The directive creates a hint element next to the host and links it with `aria-describedby`.
+- When pasted text is filtered, the directive announces:
+  `"Characters not matching the allowed pattern were removed."`

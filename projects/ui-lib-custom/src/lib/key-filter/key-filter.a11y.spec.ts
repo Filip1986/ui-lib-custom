@@ -4,327 +4,209 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { ComponentFixture } from '@angular/core/testing';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
-import { InputMaskComponent } from 'ui-lib-custom/input-mask';
-import { UiLibInput } from 'ui-lib-custom/input';
+import type { AriaLivePoliteness } from 'ui-lib-custom/a11y';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { KeyFilterDirective } from './key-filter.directive';
+import { makeKeydownEvent, makePasteEvent } from './key-filter.test-utils';
 import type { KeyFilterPreset } from './key-filter.types';
-
-const PASTE_FILTER_ANNOUNCEMENT: string =
-  'Characters not matching the allowed pattern were removed.';
 
 @Component({
   standalone: true,
   imports: [KeyFilterDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <label for="native-key-filter-input">Access code</label>
+    <label for="key-filter-input">Code</label>
+    <p id="external-help">Use uppercase letters.</p>
     <input
-      id="native-key-filter-input"
+      id="key-filter-input"
+      aria-describedby="external-help"
       [uilibKeyFilter]="filter()"
       [keyFilterBypass]="bypass()"
       [hintText]="hintText()"
-      [pattern]="pattern()"
-      [regex]="regexPattern()"
-      [allowedChars]="allowedCharacters()"
     />
-    <span id="existing-description">Existing description</span>
   `,
 })
-class NativeInputHostComponent {
+class KeyFilterA11yHostComponent {
   public readonly filter: WritableSignal<KeyFilterPreset | RegExp> = signal<
     KeyFilterPreset | RegExp
-  >('alphanum');
+  >('alpha');
   public readonly bypass: WritableSignal<boolean> = signal<boolean>(false);
-  public readonly hintText: WritableSignal<string | null> = signal<string | null>(
-    'Letters and digits only'
-  );
-  public readonly pattern: WritableSignal<KeyFilterPreset | null> = signal<KeyFilterPreset | null>(
-    null
-  );
-  public readonly regexPattern: WritableSignal<RegExp | string | null> = signal<
-    RegExp | string | null
-  >(null);
-  public readonly allowedCharacters: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly hintText: WritableSignal<string | null> = signal<string | null>('Letters only');
 }
 
-@Component({
-  standalone: true,
-  imports: [KeyFilterDirective, UiLibInput],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <ui-lib-input [uilibKeyFilter]="'alpha'" hintText="Letters only" /> `,
-})
-class UiLibInputHostComponent {}
+async function setup(): Promise<{
+  fixture: ComponentFixture<KeyFilterA11yHostComponent>;
+  host: KeyFilterA11yHostComponent;
+  input: HTMLInputElement;
+  liveAnnouncer: { announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]> };
+}> {
+  const liveAnnouncer: {
+    announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]>;
+  } = {
+    announce: jest.fn<Promise<void>, [string, AriaLivePoliteness?]>(
+      (): Promise<void> => Promise.resolve()
+    ),
+  };
 
-@Component({
-  standalone: true,
-  imports: [KeyFilterDirective, InputMaskComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <uilib-input-mask [uilibKeyFilter]="'pint'" hintText="Digits only" mask="9999" /> `,
-})
-class InputMaskHostComponent {}
-
-function makeKeydownEvent(key: string, options: Partial<KeyboardEventInit> = {}): KeyboardEvent {
-  return new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true, ...options });
-}
-
-function makePasteEvent(text: string): ClipboardEvent {
-  const EventConstructor: typeof ClipboardEvent =
-    typeof ClipboardEvent !== 'undefined'
-      ? ClipboardEvent
-      : (Event as unknown as typeof ClipboardEvent);
-  const event: ClipboardEvent = new EventConstructor('paste', { bubbles: true, cancelable: true });
-  Object.defineProperty(event, 'clipboardData', {
-    value: { getData: (): string => text },
-    writable: false,
-  });
-  return event;
-}
-
-async function createFixture<T>(
-  hostType: new () => T,
-  announceMock: jest.Mock = jest.fn().mockResolvedValue(undefined)
-): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
-    imports: [hostType],
+    imports: [KeyFilterA11yHostComponent],
     providers: [
       provideZonelessChangeDetection(),
-      {
-        provide: LiveAnnouncerService,
-        useValue: {
-          announce: announceMock,
-        },
-      },
+      { provide: LiveAnnouncerService, useValue: liveAnnouncer },
     ],
   }).compileComponents();
 
-  const fixture: ComponentFixture<T> = TestBed.createComponent(hostType);
-  document.body.appendChild(fixture.nativeElement);
+  const fixture: ComponentFixture<KeyFilterA11yHostComponent> = TestBed.createComponent(
+    KeyFilterA11yHostComponent
+  );
   fixture.detectChanges();
   await fixture.whenStable();
-  return fixture;
-}
 
-function nativeInputElement(fixture: ComponentFixture<NativeInputHostComponent>): HTMLInputElement {
-  return (fixture.nativeElement as HTMLElement).querySelector(
-    '#native-key-filter-input'
-  ) as HTMLInputElement;
-}
-
-function keyFilterHintElement(fixture: ComponentFixture<unknown>): HTMLSpanElement | null {
-  return (fixture.nativeElement as HTMLElement).querySelector(
-    '[data-uilib-key-filter-hint]'
-  ) as HTMLSpanElement | null;
+  return {
+    fixture,
+    host: fixture.componentInstance,
+    input: (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement,
+    liveAnnouncer,
+  };
 }
 
 describe('KeyFilter Accessibility', (): void => {
-  afterEach((): void => {
-    TestBed.resetTestingModule();
-    document.body.innerHTML = '';
-  });
-
-  it('has no accessibility violations for a labeled input with hint text', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
+  it('axe: has no accessibility violations with label and hint', async (): Promise<void> => {
+    const { fixture } = await setup();
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 
-  it('allows printable keys that match the active filter', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    const event: KeyboardEvent = makeKeydownEvent('a');
-    inputElement.dispatchEvent(event);
+  it('allows valid alphabetic keystrokes', async (): Promise<void> => {
+    const { input } = await setup();
+    const event: KeyboardEvent = makeKeydownEvent('A');
+    input.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(false);
   });
 
-  it('blocks printable keys that do not match the active filter', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    const event: KeyboardEvent = makeKeydownEvent('!');
-    inputElement.dispatchEvent(event);
+  it('blocks invalid keystrokes', async (): Promise<void> => {
+    const { input } = await setup();
+    const event: KeyboardEvent = makeKeydownEvent('7');
+    input.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(true);
   });
 
-  it('does not block non-printable keys', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    const event: KeyboardEvent = makeKeydownEvent('Backspace');
-    inputElement.dispatchEvent(event);
+  it('allows special navigation keys', async (): Promise<void> => {
+    const { input } = await setup();
+    const event: KeyboardEvent = makeKeydownEvent('Tab');
+    input.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(false);
   });
 
-  it('creates a hint element and links it from aria-describedby', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    const hintElement: HTMLSpanElement | null = keyFilterHintElement(fixture);
-
-    expect(hintElement).not.toBeNull();
-    expect(inputElement.getAttribute('aria-describedby')).toBe(hintElement?.id ?? null);
+  it('allows control key combinations', async (): Promise<void> => {
+    const { input } = await setup();
+    const event: KeyboardEvent = makeKeydownEvent('a', { ctrlKey: true });
+    input.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(false);
   });
 
-  it('preserves existing aria-describedby ids when adding the hint id', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    inputElement.setAttribute('aria-describedby', 'existing-description');
-    fixture.componentInstance.hintText.set('Letters and digits only (updated)');
-    TestBed.flushEffects();
-
-    const hintElement: HTMLSpanElement | null = keyFilterHintElement(fixture);
-    const describedBy: string = inputElement.getAttribute('aria-describedby') ?? '';
-
-    expect(describedBy.includes('existing-description')).toBe(true);
-    expect(describedBy.includes(hintElement?.id ?? '')).toBe(true);
+  it('creates a hint element when hintText is set', async (): Promise<void> => {
+    const { fixture } = await setup();
+    const hostElement: HTMLElement = fixture.nativeElement as HTMLElement;
+    const hint: HTMLElement | null = hostElement.querySelector('[id^="ui-lib-key-filter-hint-"]');
+    expect(hint).toBeTruthy();
+    expect((hint as HTMLElement).textContent).toBe('Letters only');
   });
 
-  it('removes the generated hint id when hintText is cleared', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    fixture.componentInstance.hintText.set(null);
-    TestBed.flushEffects();
-    fixture.detectChanges();
-
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    expect(keyFilterHintElement(fixture)).toBeNull();
-    expect(inputElement.getAttribute('aria-describedby')).toBeNull();
+  it('links the host input to the generated hint with aria-describedby', async (): Promise<void> => {
+    const { fixture, input } = await setup();
+    const hint: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '[id^="ui-lib-key-filter-hint-"]'
+    ) as HTMLElement;
+    const describedBy: string = input.getAttribute('aria-describedby') ?? '';
+    expect(describedBy).toContain(hint.id);
   });
 
-  it('updates the injected hint text when hintText changes', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    fixture.componentInstance.hintText.set('Numbers only');
+  it('preserves existing aria-describedby ids when adding hint text', async (): Promise<void> => {
+    const { input } = await setup();
+    const describedBy: string = input.getAttribute('aria-describedby') ?? '';
+    expect(describedBy).toContain('external-help');
+  });
+
+  it('removes generated hint linkage when hintText becomes null', async (): Promise<void> => {
+    const { fixture, host, input } = await setup();
+    host.hintText.set(null);
     TestBed.flushEffects();
     fixture.detectChanges();
+    await fixture.whenStable();
 
-    const hintElement: HTMLSpanElement | null = keyFilterHintElement(fixture);
-    expect((hintElement?.textContent ?? '').trim()).toBe('Numbers only');
+    expect(
+      (fixture.nativeElement as HTMLElement).querySelector('[id^="ui-lib-key-filter-hint-"]')
+    ).toBeNull();
+    expect(input.getAttribute('aria-describedby')).toBe('external-help');
   });
 
-  it('filters pasted characters and prevents the default paste behavior', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    fixture.componentInstance.filter.set('alpha');
+  it('updates generated hint text when hintText changes', async (): Promise<void> => {
+    const { fixture, host } = await setup();
+    host.hintText.set('Uppercase letters only');
     TestBed.flushEffects();
     fixture.detectChanges();
+    await fixture.whenStable();
 
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    const pasteEvent: ClipboardEvent = makePasteEvent('ab12cd');
-    inputElement.dispatchEvent(pasteEvent);
+    const hint: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+      '[id^="ui-lib-key-filter-hint-"]'
+    ) as HTMLElement;
+    expect(hint.textContent).toBe('Uppercase letters only');
+  });
+
+  it('strips blocked characters on paste', async (): Promise<void> => {
+    const { input } = await setup();
+    input.value = '';
+    const pasteEvent: ClipboardEvent = makePasteEvent('AB12CD');
+    input.dispatchEvent(pasteEvent);
 
     expect(pasteEvent.defaultPrevented).toBe(true);
-    expect(inputElement.value).toBe('abcd');
+    expect(input.value).toBe('ABCD');
   });
 
-  it('announces paste filtering through the live announcer', async (): Promise<void> => {
-    const announceMock: jest.Mock = jest.fn().mockResolvedValue(undefined);
-    const fixture: ComponentFixture<NativeInputHostComponent> = await createFixture(
-      NativeInputHostComponent,
-      announceMock
+  it('dispatches input event when paste filtering changes the value', async (): Promise<void> => {
+    const { input } = await setup();
+    let inputEventTriggered: boolean = false;
+    input.addEventListener('input', (): void => {
+      inputEventTriggered = true;
+    });
+
+    input.dispatchEvent(makePasteEvent('AB12'));
+    expect(inputEventTriggered).toBe(true);
+  });
+
+  it('announces removed characters on filtered paste', async (): Promise<void> => {
+    const { input, liveAnnouncer } = await setup();
+    input.dispatchEvent(makePasteEvent('AB12'));
+
+    expect(liveAnnouncer.announce).toHaveBeenCalledWith(
+      'Characters not matching the allowed pattern were removed.',
+      'polite'
     );
-    fixture.componentInstance.filter.set('alpha');
+  });
+
+  it('does not announce when pasted text already matches the pattern', async (): Promise<void> => {
+    const { input, liveAnnouncer } = await setup();
+    input.dispatchEvent(makePasteEvent('ABCD'));
+    expect(liveAnnouncer.announce).not.toHaveBeenCalled();
+  });
+
+  it('does not strip or announce pasted text in bypass mode', async (): Promise<void> => {
+    const { host, input, liveAnnouncer } = await setup();
+    host.bypass.set(true);
     TestBed.flushEffects();
-    fixture.detectChanges();
 
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    inputElement.dispatchEvent(makePasteEvent('ab12cd'));
-
-    expect(announceMock).toHaveBeenCalledWith(PASTE_FILTER_ANNOUNCEMENT);
+    const pasteEvent: ClipboardEvent = makePasteEvent('AB12');
+    input.dispatchEvent(pasteEvent);
+    expect(pasteEvent.defaultPrevented).toBe(false);
+    expect(input.value).toBe('');
+    expect(liveAnnouncer.announce).not.toHaveBeenCalled();
   });
 
-  it('does not announce when pasted text already matches the filter', async (): Promise<void> => {
-    const announceMock: jest.Mock = jest.fn().mockResolvedValue(undefined);
-    const fixture: ComponentFixture<NativeInputHostComponent> = await createFixture(
-      NativeInputHostComponent,
-      announceMock
-    );
-    fixture.componentInstance.filter.set('alpha');
-    TestBed.flushEffects();
-    fixture.detectChanges();
-
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-    inputElement.dispatchEvent(makePasteEvent('abcd'));
-
-    expect(announceMock).not.toHaveBeenCalled();
-  });
-
-  it('uses regex input when both pattern and regex are provided', async (): Promise<void> => {
-    const warningSpy: jest.SpyInstance = jest
-      .spyOn(console, 'warn')
-      .mockImplementation((): void => {
-        return;
-      });
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    fixture.componentInstance.pattern.set('alpha');
-    fixture.componentInstance.regexPattern.set('[0-9]');
-    TestBed.flushEffects();
-    fixture.detectChanges();
-
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-
-    const digitEvent: KeyboardEvent = makeKeydownEvent('5');
-    inputElement.dispatchEvent(digitEvent);
-    expect(digitEvent.defaultPrevented).toBe(false);
-
-    const letterEvent: KeyboardEvent = makeKeydownEvent('a');
-    inputElement.dispatchEvent(letterEvent);
-    expect(letterEvent.defaultPrevented).toBe(true);
-    warningSpy.mockRestore();
-  });
-
-  it('uses allowedChars as an explicit whitelist', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    fixture.componentInstance.allowedCharacters.set('XYZ');
-    TestBed.flushEffects();
-    fixture.detectChanges();
-
-    const inputElement: HTMLInputElement = nativeInputElement(fixture);
-
-    const allowedEvent: KeyboardEvent = makeKeydownEvent('X');
-    inputElement.dispatchEvent(allowedEvent);
-    expect(allowedEvent.defaultPrevented).toBe(false);
-
-    const blockedEvent: KeyboardEvent = makeKeydownEvent('A');
-    inputElement.dispatchEvent(blockedEvent);
-    expect(blockedEvent.defaultPrevented).toBe(true);
-  });
-
-  it('works when attached to ui-lib-input by filtering the internal native input', async (): Promise<void> => {
-    const fixture: ComponentFixture<UiLibInputHostComponent> =
-      await createFixture(UiLibInputHostComponent);
-    const inputElement: HTMLInputElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'ui-lib-input input'
-    ) as HTMLInputElement;
-
-    const blockedEvent: KeyboardEvent = makeKeydownEvent('7');
-    inputElement.dispatchEvent(blockedEvent);
-    expect(blockedEvent.defaultPrevented).toBe(true);
-  });
-
-  it('works when attached to uilib-input-mask by filtering the internal native input', async (): Promise<void> => {
-    const fixture: ComponentFixture<InputMaskHostComponent> =
-      await createFixture(InputMaskHostComponent);
-    const inputElement: HTMLInputElement = (fixture.nativeElement as HTMLElement).querySelector(
-      'uilib-input-mask input'
-    ) as HTMLInputElement;
-
-    const blockedEvent: KeyboardEvent = makeKeydownEvent('a');
-    inputElement.dispatchEvent(blockedEvent);
-    expect(blockedEvent.defaultPrevented).toBe(true);
-  });
-
-  it('cleans up the injected hint element when the host fixture is destroyed', async (): Promise<void> => {
-    const fixture: ComponentFixture<NativeInputHostComponent> =
-      await createFixture(NativeInputHostComponent);
-    const hintElement: HTMLSpanElement | null = keyFilterHintElement(fixture);
-    expect(hintElement).not.toBeNull();
-
-    fixture.destroy();
-    expect(document.body.contains(hintElement as Node)).toBe(false);
+  it('replaces selected text range with filtered paste content', async (): Promise<void> => {
+    const { input } = await setup();
+    input.value = 'WXYZ';
+    input.setSelectionRange(1, 3);
+    input.dispatchEvent(makePasteEvent('A1B2'));
+    expect(input.value).toBe('WABZ');
   });
 });

@@ -1,15 +1,5 @@
-import {
-  Directive,
-  computed,
-  effect,
-  ElementRef,
-  inject,
-  input,
-  isDevMode,
-  type InputSignal,
-  type Signal,
-} from '@angular/core';
-import type { AfterViewInit, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, Renderer2, effect, inject, input, isDevMode } from '@angular/core';
+import type { AfterViewInit, InputSignal, OnDestroy } from '@angular/core';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import { KEY_FILTER_DEFAULTS, KEY_FILTER_PRESET_PATTERNS } from './key-filter.types';
 import type { KeyFilterPreset } from './key-filter.types';
@@ -17,7 +7,19 @@ import type { KeyFilterPreset } from './key-filter.types';
 const PASTE_FILTER_ANNOUNCEMENT: string =
   'Characters not matching the allowed pattern were removed.';
 
-let nextHintElementId: number = 0;
+const VISUALLY_HIDDEN_STYLES: Readonly<Record<string, string>> = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: '0',
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  'white-space': 'nowrap',
+  border: '0',
+};
+
+let nextKeyFilterHintId: number = 0;
 
 /**
  * KeyFilter directive — restricts keyboard input on any `<input>` or
@@ -40,51 +42,18 @@ let nextHintElementId: number = 0;
   standalone: true,
 })
 export class KeyFilterDirective implements AfterViewInit, OnDestroy {
-  private readonly hostElementRef: ElementRef<HTMLElement> =
+  private readonly elementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly renderer: Renderer2 = inject(Renderer2);
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
 
-  private eventTargetElement: HTMLInputElement | HTMLTextAreaElement | null = null;
+  private removeKeydownListener: (() => void) | null = null;
+  private removePasteListener: (() => void) | null = null;
+  private removeDropListener: (() => void) | null = null;
   private hintElement: HTMLSpanElement | null = null;
-  private hasWarnedForConflictingInputs: boolean = false;
-  private hasWarnedForInvalidRegex: boolean = false;
-
-  private readonly keydownHandler: EventListener = (event: Event): void => {
-    this.onKeydown(event as KeyboardEvent);
-  };
-  private readonly pasteHandler: EventListener = (event: Event): void => {
-    this.onPaste(event as ClipboardEvent);
-  };
-  private readonly dropHandler: EventListener = (event: Event): void => {
-    this.onDrop(event as DragEvent);
-  };
-
-  private readonly activePattern: Signal<RegExp> = computed<RegExp>((): RegExp => {
-    const regexValue: RegExp | string | null = this.regex();
-    if (regexValue !== null) {
-      const resolvedRegex: RegExp | null = this.resolveCustomRegex(regexValue);
-      if (resolvedRegex !== null) {
-        return resolvedRegex;
-      }
-    }
-
-    const allowedCharacters: string | null = this.allowedChars();
-    if (allowedCharacters !== null && allowedCharacters.length > 0) {
-      return new RegExp(`[${this.escapeForCharacterClass(allowedCharacters)}]`);
-    }
-
-    const presetPattern: KeyFilterPreset | null = this.pattern();
-    if (presetPattern !== null) {
-      return KEY_FILTER_PRESET_PATTERNS[presetPattern];
-    }
-
-    const filter: KeyFilterPreset | RegExp = this.uilibKeyFilter();
-    if (filter instanceof RegExp) {
-      return filter;
-    }
-
-    return KEY_FILTER_PRESET_PATTERNS[filter];
-  });
+  private viewInitialized: boolean = false;
+  private hasWarnedPatternConflict: boolean = false;
+  private readonly patternCloneCache: WeakMap<RegExp, RegExp> = new WeakMap<RegExp, RegExp>();
 
   /**
    * The active filter: a preset name or a custom RegExp tested per character.
@@ -101,66 +70,60 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
   public readonly keyFilterBypass: InputSignal<boolean> = input<boolean>(
     KEY_FILTER_DEFAULTS.bypass
   );
-  /**
-   * Accessible helper text linked through `aria-describedby`.
-   */
   public readonly hintText: InputSignal<string | null> = input<string | null>(null);
-  /**
-   * Optional preset alias for `uilibKeyFilter`.
-   */
   public readonly pattern: InputSignal<KeyFilterPreset | null> = input<KeyFilterPreset | null>(
     null
   );
-  /**
-   * Optional custom regex alias for `uilibKeyFilter`.
-   */
-  public readonly regex: InputSignal<RegExp | string | null> = input<RegExp | string | null>(null);
-  /**
-   * Optional character whitelist. Each character is escaped and allowed literally.
-   */
-  public readonly allowedChars: InputSignal<string | null> = input<string | null>(null);
+  public readonly regex: InputSignal<RegExp | null> = input<RegExp | null>(null);
 
   constructor() {
     effect((): void => {
       this.pattern();
       this.regex();
-      this.warnIfPatternAndRegexAreBothProvided();
+      this.warnWhenPatternAndRegexAreBothSet();
     });
 
     effect((): void => {
-      this.hintText();
-      this.syncHintElement();
+      const hintText: string | null = this.hintText();
+      if (!this.viewInitialized) {
+        return;
+      }
+      this.syncHintElement(hintText);
     });
   }
 
   public ngAfterViewInit(): void {
-    this.eventTargetElement = this.resolveEventTargetElement();
-    if (this.eventTargetElement === null) {
-      return;
-    }
+    const hostElement: HTMLElement = this.elementRef.nativeElement;
+    this.removeKeydownListener = this.renderer.listen(
+      hostElement,
+      'keydown',
+      (event: KeyboardEvent): void => this.onKeydown(event)
+    );
+    this.removePasteListener = this.renderer.listen(
+      hostElement,
+      'paste',
+      (event: ClipboardEvent): void => this.onPaste(event)
+    );
+    this.removeDropListener = this.renderer.listen(hostElement, 'drop', (event: DragEvent): void =>
+      this.onDrop(event)
+    );
 
-    this.eventTargetElement.addEventListener('keydown', this.keydownHandler);
-    this.eventTargetElement.addEventListener('paste', this.pasteHandler);
-    this.eventTargetElement.addEventListener('drop', this.dropHandler);
-    this.syncHintElement();
+    this.viewInitialized = true;
+    this.syncHintElement(this.hintText());
   }
 
   public ngOnDestroy(): void {
-    if (this.eventTargetElement !== null) {
-      this.eventTargetElement.removeEventListener('keydown', this.keydownHandler);
-      this.eventTargetElement.removeEventListener('paste', this.pasteHandler);
-      this.eventTargetElement.removeEventListener('drop', this.dropHandler);
-    }
-
+    this.removeKeydownListener?.();
+    this.removePasteListener?.();
+    this.removeDropListener?.();
+    this.removeKeydownListener = null;
+    this.removePasteListener = null;
+    this.removeDropListener = null;
     this.removeHintElement();
   }
 
-  // ---------------------------------------------------------------------------
-  // Host event handlers
-  // ---------------------------------------------------------------------------
-
   /** Block keystrokes that do not match the active pattern. */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (this.keyFilterBypass()) {
       return;
     }
@@ -176,22 +139,22 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
       return;
     }
 
-    if (!this.activePattern().test(event.key)) {
+    if (!this.matchesPattern(this.resolvePattern(), event.key)) {
       event.preventDefault();
     }
   }
 
   /** Strip disallowed characters from pasted text. */
-  protected onPaste(event: ClipboardEvent): void {
+  private onPaste(event: ClipboardEvent): void {
     if (this.keyFilterBypass()) {
       return;
     }
 
     const pasted: string = event.clipboardData?.getData('text') ?? '';
-    const pattern: RegExp = this.activePattern();
+    const pattern: RegExp = this.resolvePattern();
     const filtered: string = pasted
       .split('')
-      .filter((character: string): boolean => pattern.test(character))
+      .filter((character: string): boolean => this.matchesPattern(pattern, character))
       .join('');
 
     if (filtered === pasted) {
@@ -200,31 +163,31 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
 
     event.preventDefault();
 
-    const target: HTMLInputElement | HTMLTextAreaElement | null =
-      this.resolveActiveTextTarget(event);
-    if (target === null) {
+    const target: HTMLInputElement | HTMLTextAreaElement | null = this.resolveTargetControl(
+      event.target
+    );
+    if (!target) {
       return;
     }
-
     const start: number = target.selectionStart ?? target.value.length;
     const end: number = target.selectionEnd ?? target.value.length;
     target.value = target.value.slice(0, start) + filtered + target.value.slice(end);
     target.setSelectionRange(start + filtered.length, start + filtered.length);
     target.dispatchEvent(new Event('input', { bubbles: true }));
-    void this.liveAnnouncer.announce(PASTE_FILTER_ANNOUNCEMENT);
+    void this.liveAnnouncer.announce(PASTE_FILTER_ANNOUNCEMENT, 'polite');
   }
 
   /** Strip disallowed characters from drag-and-dropped text. */
-  protected onDrop(event: DragEvent): void {
+  private onDrop(event: DragEvent): void {
     if (this.keyFilterBypass()) {
       return;
     }
 
     const dropped: string = event.dataTransfer?.getData('text') ?? '';
-    const pattern: RegExp = this.activePattern();
+    const pattern: RegExp = this.resolvePattern();
     const filtered: string = dropped
       .split('')
-      .filter((character: string): boolean => pattern.test(character))
+      .filter((character: string): boolean => this.matchesPattern(pattern, character))
       .join('');
 
     if (filtered === dropped) {
@@ -232,12 +195,12 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     }
 
     event.preventDefault();
-    const target: HTMLInputElement | HTMLTextAreaElement | null =
-      this.resolveActiveTextTarget(event);
-    if (target === null) {
+    const target: HTMLInputElement | HTMLTextAreaElement | null = this.resolveTargetControl(
+      event.target
+    );
+    if (!target) {
       return;
     }
-
     const start: number = target.selectionStart ?? target.value.length;
     const end: number = target.selectionEnd ?? target.value.length;
     target.value = target.value.slice(0, start) + filtered + target.value.slice(end);
@@ -249,181 +212,161 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
   // Private helpers
   // ---------------------------------------------------------------------------
 
-  private resolveEventTargetElement(): HTMLInputElement | HTMLTextAreaElement | null {
-    const hostElement: HTMLElement = this.hostElementRef.nativeElement;
-
-    if (this.isTextInputElement(hostElement)) {
-      return hostElement;
+  private matchesPattern(pattern: RegExp, value: string): boolean {
+    if (pattern.global || pattern.sticky) {
+      const safePattern: RegExp =
+        this.patternCloneCache.get(pattern) ?? new RegExp(pattern.source, pattern.flags);
+      this.patternCloneCache.set(pattern, safePattern);
+      safePattern.lastIndex = 0;
+      return safePattern.test(value);
     }
 
-    const nestedInput: Element | null = hostElement.querySelector('input, textarea');
-    if (nestedInput !== null && this.isTextInputElement(nestedInput)) {
-      return nestedInput;
+    return pattern.test(value);
+  }
+
+  /** Resolve the active filter to a RegExp instance. */
+  private resolvePattern(): RegExp {
+    const patternPreset: KeyFilterPreset | null = this.pattern();
+    const customRegex: RegExp | null = this.regex();
+
+    if (customRegex !== null) {
+      return customRegex;
     }
 
-    return null;
-  }
-
-  private resolveTextTargetFromEvent(event: Event): HTMLInputElement | HTMLTextAreaElement | null {
-    const eventTarget: EventTarget | null = event.target;
-    if (!(eventTarget instanceof Element)) {
-      return null;
+    if (patternPreset !== null) {
+      return KEY_FILTER_PRESET_PATTERNS[patternPreset];
     }
 
-    return this.isTextInputElement(eventTarget) ? eventTarget : null;
-  }
-
-  private resolveActiveTextTarget(event: Event): HTMLInputElement | HTMLTextAreaElement | null {
-    const eventTarget: HTMLInputElement | HTMLTextAreaElement | null =
-      this.resolveTextTargetFromEvent(event);
-    if (eventTarget !== null) {
-      return eventTarget;
+    const filter: KeyFilterPreset | RegExp = this.uilibKeyFilter();
+    if (filter instanceof RegExp) {
+      return filter;
     }
-
-    return this.eventTargetElement;
+    return KEY_FILTER_PRESET_PATTERNS[filter];
   }
 
-  private isTextInputElement(element: Element): element is HTMLInputElement | HTMLTextAreaElement {
-    const tagName: string = element.tagName.toLowerCase();
-    return tagName === 'input' || tagName === 'textarea';
-  }
+  private warnWhenPatternAndRegexAreBothSet(): void {
+    const patternPreset: KeyFilterPreset | null = this.pattern();
+    const customRegex: RegExp | null = this.regex();
+    const hasConflict: boolean = patternPreset !== null && customRegex !== null;
 
-  private syncHintElement(): void {
-    if (this.eventTargetElement === null) {
+    if (!hasConflict) {
+      this.hasWarnedPatternConflict = false;
       return;
     }
 
-    const hintMessage: string = (this.hintText() ?? '').trim();
-    if (hintMessage.length === 0) {
+    if (!isDevMode() || this.hasWarnedPatternConflict) {
+      return;
+    }
+
+    this.hasWarnedPatternConflict = true;
+    console.warn(
+      '[uilibKeyFilter] Both pattern and regex are set. The regex input takes precedence.'
+    );
+  }
+
+  private resolveTargetControl(
+    target: EventTarget | null
+  ): HTMLInputElement | HTMLTextAreaElement | null {
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+      return target;
+    }
+    return this.resolveHostControl();
+  }
+
+  private resolveHostControl(): HTMLInputElement | HTMLTextAreaElement | null {
+    const hostElement: HTMLElement = this.elementRef.nativeElement;
+    if (hostElement instanceof HTMLInputElement || hostElement instanceof HTMLTextAreaElement) {
+      return hostElement;
+    }
+
+    const nestedControl: Element | null = hostElement.querySelector('input, textarea');
+    if (nestedControl instanceof HTMLInputElement || nestedControl instanceof HTMLTextAreaElement) {
+      return nestedControl;
+    }
+    return null;
+  }
+
+  private syncHintElement(hintText: string | null): void {
+    const normalizedHintText: string = hintText?.trim() ?? '';
+    if (normalizedHintText.length === 0) {
       this.removeHintElement();
       return;
     }
 
-    if (this.hintElement === null) {
-      const nextHintElement: HTMLSpanElement = this.createHintElement();
-      const wasInserted: boolean = this.insertHintElement(nextHintElement);
-      if (!wasInserted) {
-        return;
-      }
-      this.hintElement = nextHintElement;
+    const hostElement: HTMLElement = this.elementRef.nativeElement;
+    const parentElement: HTMLElement | null = hostElement.parentElement;
+    const control: HTMLInputElement | HTMLTextAreaElement | null = this.resolveHostControl();
+    if (!parentElement || !control) {
+      return;
     }
 
-    this.addDescribedByReference(this.eventTargetElement, this.hintElement.id);
-    this.hintElement.textContent = hintMessage;
-  }
+    if (!this.hintElement) {
+      const rawHintElement: unknown = this.renderer.createElement('span');
+      if (!(rawHintElement instanceof HTMLSpanElement)) {
+        return;
+      }
+      const hintElement: HTMLSpanElement = rawHintElement;
+      const hintId: string = `ui-lib-key-filter-hint-${nextKeyFilterHintId++}`;
+      this.renderer.setAttribute(hintElement, 'id', hintId);
+      Object.entries(VISUALLY_HIDDEN_STYLES).forEach(
+        ([styleName, styleValue]: [string, string]): void => {
+          this.renderer.setStyle(hintElement, styleName, styleValue);
+        }
+      );
 
-  private createHintElement(): HTMLSpanElement {
-    const hintElement: HTMLSpanElement = document.createElement('span');
-    hintElement.id = `uilib-key-filter-hint-${nextHintElementId++}`;
-    hintElement.setAttribute('data-uilib-key-filter-hint', '');
-    hintElement.setAttribute('aria-live', 'polite');
-    Object.assign(hintElement.style, {
-      display: 'block',
-      marginTop: '0.25rem',
-      fontSize: '0.8125rem',
-      color: 'var(--uilib-surface-600, #64748b)',
-    });
-    return hintElement;
+      const nextSibling: ChildNode | null = hostElement.nextSibling;
+      if (nextSibling) {
+        this.renderer.insertBefore(parentElement, hintElement, nextSibling);
+      } else {
+        this.renderer.appendChild(parentElement, hintElement);
+      }
+      this.hintElement = hintElement;
+    }
+
+    this.renderer.setProperty(this.hintElement, 'textContent', normalizedHintText);
+    this.addDescribedById(control, this.hintElement.id);
   }
 
   private removeHintElement(): void {
-    if (this.hintElement === null) {
-      return;
+    const hintId: string | null = this.hintElement?.id ?? null;
+    if (hintId !== null) {
+      const control: HTMLInputElement | HTMLTextAreaElement | null = this.resolveHostControl();
+      if (control) {
+        this.removeDescribedById(control, hintId);
+      }
     }
 
-    if (this.eventTargetElement !== null) {
-      this.removeDescribedByReference(this.eventTargetElement, this.hintElement.id);
+    const parentNode: Node | null = this.hintElement?.parentNode ?? null;
+    if (parentNode && this.hintElement) {
+      this.renderer.removeChild(parentNode, this.hintElement);
     }
-
-    this.hintElement.remove();
     this.hintElement = null;
   }
 
-  private addDescribedByReference(element: Element, idToAdd: string): void {
-    const existingDescribedBy: string = element.getAttribute('aria-describedby') ?? '';
-    const tokens: string[] = existingDescribedBy
-      .split(/\s+/)
-      .map((token: string): string => token.trim())
-      .filter((token: string): boolean => token.length > 0);
-
-    if (!tokens.includes(idToAdd)) {
-      tokens.push(idToAdd);
-    }
-
-    element.setAttribute('aria-describedby', tokens.join(' '));
+  private addDescribedById(control: HTMLInputElement | HTMLTextAreaElement, id: string): void {
+    const existingIds: string[] = this.readAriaDescribedByIds(control).filter(
+      (existingId: string): boolean => existingId !== id
+    );
+    existingIds.push(id);
+    this.renderer.setAttribute(control, 'aria-describedby', existingIds.join(' '));
   }
 
-  private removeDescribedByReference(element: Element, idToRemove: string): void {
-    const existingDescribedBy: string = element.getAttribute('aria-describedby') ?? '';
-    const tokens: string[] = existingDescribedBy
-      .split(/\s+/)
-      .map((token: string): string => token.trim())
-      .filter((token: string): boolean => token.length > 0 && token !== idToRemove);
-
-    if (tokens.length === 0) {
-      element.removeAttribute('aria-describedby');
+  private removeDescribedById(control: HTMLInputElement | HTMLTextAreaElement, id: string): void {
+    const remainingIds: string[] = this.readAriaDescribedByIds(control).filter(
+      (existingId: string): boolean => existingId !== id
+    );
+    if (remainingIds.length === 0) {
+      this.renderer.removeAttribute(control, 'aria-describedby');
       return;
     }
-
-    element.setAttribute('aria-describedby', tokens.join(' '));
+    this.renderer.setAttribute(control, 'aria-describedby', remainingIds.join(' '));
   }
 
-  private warnIfPatternAndRegexAreBothProvided(): void {
-    if (
-      !isDevMode() ||
-      this.pattern() === null ||
-      this.regex() === null ||
-      this.hasWarnedForConflictingInputs
-    ) {
-      return;
-    }
-
-    console.warn(
-      '[uilibKeyFilter] Both "pattern" and "regex" were provided. The "regex" input takes precedence.'
-    );
-    this.hasWarnedForConflictingInputs = true;
-  }
-
-  private resolveCustomRegex(regexValue: RegExp | string): RegExp | null {
-    if (regexValue instanceof RegExp) {
-      return regexValue;
-    }
-
-    try {
-      return new RegExp(regexValue);
-    } catch (error: unknown) {
-      if (isDevMode() && !this.hasWarnedForInvalidRegex) {
-        console.warn('[uilibKeyFilter] Invalid "regex" input supplied.', error);
-        this.hasWarnedForInvalidRegex = true;
-      }
-      return null;
-    }
-  }
-
-  private escapeForCharacterClass(characters: string): string {
-    return characters.replace(/[\\\-\]\[]/g, '\\$&');
-  }
-
-  private insertHintElement(hintElement: HTMLSpanElement): boolean {
-    const targetElement: HTMLInputElement | HTMLTextAreaElement | null = this.eventTargetElement;
-    if (targetElement === null) {
-      return false;
-    }
-
-    const insertedElement: Element | null = targetElement.insertAdjacentElement(
-      'afterend',
-      hintElement
-    );
-    if (insertedElement !== null) {
-      return true;
-    }
-
-    const parentElement: HTMLElement | null = targetElement.parentElement;
-    if (parentElement === null) {
-      return false;
-    }
-
-    parentElement.appendChild(hintElement);
-    return true;
+  private readAriaDescribedByIds(control: HTMLInputElement | HTMLTextAreaElement): string[] {
+    const value: string = control.getAttribute('aria-describedby') ?? '';
+    return value
+      .split(/\s+/)
+      .map((entry: string): string => entry.trim())
+      .filter((entry: string): boolean => entry.length > 0);
   }
 }

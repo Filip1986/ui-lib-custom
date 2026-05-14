@@ -5,9 +5,12 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import type { DebugElement } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
+import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import type { AriaLivePoliteness } from 'ui-lib-custom/a11y';
 import { KeyFilterDirective } from './key-filter.directive';
 import { KEY_FILTER_PRESET_PATTERNS, KEY_FILTER_DEFAULTS } from './key-filter.types';
 import type { KeyFilterPreset } from './key-filter.types';
+import { makeKeydownEvent, makePasteEvent } from './key-filter.test-utils';
 
 // ---------------------------------------------------------------------------
 // Test host
@@ -18,14 +21,15 @@ import type { KeyFilterPreset } from './key-filter.types';
   standalone: true,
   imports: [KeyFilterDirective],
   template: `
+    <span id="existing-hint">Existing hint</span>
     <input
       #testInput
+      aria-describedby="existing-hint"
       [uilibKeyFilter]="filter()"
       [keyFilterBypass]="bypass()"
       [hintText]="hintText()"
       [pattern]="pattern()"
       [regex]="regex()"
-      [allowedChars]="allowedChars()"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,41 +43,31 @@ class KeyFilterHostComponent {
   public readonly pattern: WritableSignal<KeyFilterPreset | null> = signal<KeyFilterPreset | null>(
     null
   );
-  public readonly regex: WritableSignal<RegExp | string | null> = signal<RegExp | string | null>(
-    null
-  );
-  public readonly allowedChars: WritableSignal<string | null> = signal<string | null>(null);
-}
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-function makeKeydownEvent(key: string, options: Partial<KeyboardEventInit> = {}): KeyboardEvent {
-  return new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true, ...options });
-}
-
-function makePasteEvent(text: string): ClipboardEvent {
-  const EventCtor: typeof ClipboardEvent =
-    typeof ClipboardEvent !== 'undefined'
-      ? ClipboardEvent
-      : (Event as unknown as typeof ClipboardEvent);
-  const event: ClipboardEvent = new EventCtor('paste', { bubbles: true, cancelable: true });
-  Object.defineProperty(event, 'clipboardData', {
-    value: { getData: (_type: string): string => text },
-    writable: false,
-  });
-  return event;
+  public readonly regex: WritableSignal<RegExp | null> = signal<RegExp | null>(null);
 }
 
 function setup(): {
   host: KeyFilterHostComponent;
   inputEl: HTMLInputElement;
   directive: KeyFilterDirective;
+  liveAnnouncer: {
+    announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]>;
+  };
 } {
+  const liveAnnouncer: {
+    announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]>;
+  } = {
+    announce: jest.fn<Promise<void>, [string, AriaLivePoliteness?]>(
+      (): Promise<void> => Promise.resolve()
+    ),
+  };
+
   TestBed.configureTestingModule({
     imports: [KeyFilterHostComponent],
-    providers: [provideZonelessChangeDetection()],
+    providers: [
+      provideZonelessChangeDetection(),
+      { provide: LiveAnnouncerService, useValue: liveAnnouncer },
+    ],
   });
   const fixture: ComponentFixture<KeyFilterHostComponent> =
     TestBed.createComponent(KeyFilterHostComponent);
@@ -84,7 +78,7 @@ function setup(): {
   const inputEl: HTMLInputElement = debugEl.nativeElement as HTMLInputElement;
 
   const directive: KeyFilterDirective = debugEl.injector.get(KeyFilterDirective);
-  return { host, inputEl, directive };
+  return { host, inputEl, directive, liveAnnouncer };
 }
 
 // ---------------------------------------------------------------------------
@@ -332,65 +326,6 @@ describe('KeyFilterDirective', (): void => {
     });
   });
 
-  describe('pattern, regex, and allowedChars aliases', (): void => {
-    it('should apply the pattern input preset when provided', (): void => {
-      const { host, inputEl } = setup();
-      host.pattern.set('alpha');
-      TestBed.flushEffects();
-
-      const letterEvent: KeyboardEvent = makeKeydownEvent('a');
-      inputEl.dispatchEvent(letterEvent);
-      expect(letterEvent.defaultPrevented).toBe(false);
-
-      const digitEvent: KeyboardEvent = makeKeydownEvent('7');
-      inputEl.dispatchEvent(digitEvent);
-      expect(digitEvent.defaultPrevented).toBe(true);
-    });
-
-    it('should apply regex string input when provided', (): void => {
-      const { host, inputEl } = setup();
-      host.regex.set('[xyz]');
-      TestBed.flushEffects();
-
-      const allowedEvent: KeyboardEvent = makeKeydownEvent('x');
-      inputEl.dispatchEvent(allowedEvent);
-      expect(allowedEvent.defaultPrevented).toBe(false);
-
-      const blockedEvent: KeyboardEvent = makeKeydownEvent('a');
-      inputEl.dispatchEvent(blockedEvent);
-      expect(blockedEvent.defaultPrevented).toBe(true);
-    });
-
-    it('should allow only explicitly listed allowedChars', (): void => {
-      const { host, inputEl } = setup();
-      host.allowedChars.set('ABC123');
-      TestBed.flushEffects();
-
-      const allowedEvent: KeyboardEvent = makeKeydownEvent('B');
-      inputEl.dispatchEvent(allowedEvent);
-      expect(allowedEvent.defaultPrevented).toBe(false);
-
-      const blockedEvent: KeyboardEvent = makeKeydownEvent('z');
-      inputEl.dispatchEvent(blockedEvent);
-      expect(blockedEvent.defaultPrevented).toBe(true);
-    });
-
-    it('should warn when both pattern and regex are provided', (): void => {
-      const warnSpy: jest.SpyInstance = jest.spyOn(console, 'warn').mockImplementation((): void => {
-        return;
-      });
-      const { host } = setup();
-      host.pattern.set('alpha');
-      host.regex.set('[0-9]');
-      TestBed.flushEffects();
-
-      expect(warnSpy).toHaveBeenCalledWith(
-        '[uilibKeyFilter] Both "pattern" and "regex" were provided. The "regex" input takes precedence.'
-      );
-      warnSpy.mockRestore();
-    });
-  });
-
   describe('bypass mode', (): void => {
     it('should allow all keystrokes when bypass=true', (): void => {
       const { host, inputEl } = setup();
@@ -430,7 +365,7 @@ describe('KeyFilterDirective', (): void => {
     });
 
     it('should strip disallowed characters from paste', (): void => {
-      const { host, inputEl } = setup();
+      const { host, inputEl, liveAnnouncer } = setup();
       host.filter.set('alpha');
       TestBed.flushEffects();
       inputEl.value = '';
@@ -438,6 +373,10 @@ describe('KeyFilterDirective', (): void => {
       inputEl.dispatchEvent(event);
       expect(event.defaultPrevented).toBe(true);
       expect(inputEl.value).toBe('HelloWorld');
+      expect(liveAnnouncer.announce).toHaveBeenCalledWith(
+        'Characters not matching the allowed pattern were removed.',
+        'polite'
+      );
     });
 
     it('should allow full paste when bypass=true', (): void => {
@@ -461,6 +400,71 @@ describe('KeyFilterDirective', (): void => {
       const event: ClipboardEvent = makePasteEvent('abc123');
       inputEl.dispatchEvent(event);
       expect(inputEventFired).toBe(true);
+    });
+  });
+
+  describe('a11y hint text', (): void => {
+    it('should inject a hint element and link it via aria-describedby', (): void => {
+      const { host, inputEl } = setup();
+      host.hintText.set('Numbers only');
+      TestBed.flushEffects();
+
+      const parent: HTMLElement = inputEl.parentElement as HTMLElement;
+      const hint: HTMLElement | null = parent.querySelector('[id^="ui-lib-key-filter-hint-"]');
+      expect(hint).toBeTruthy();
+      expect((hint as HTMLElement).textContent).toBe('Numbers only');
+      expect(inputEl.getAttribute('aria-describedby')).toContain((hint as HTMLElement).id);
+      expect(inputEl.getAttribute('aria-describedby')).toContain('existing-hint');
+    });
+
+    it('should remove the hint id from aria-describedby when hintText is cleared', (): void => {
+      const { host, inputEl } = setup();
+      host.hintText.set('Numbers only');
+      TestBed.flushEffects();
+      const parent: HTMLElement = inputEl.parentElement as HTMLElement;
+      const hintId: string = (
+        parent.querySelector('[id^="ui-lib-key-filter-hint-"]') as HTMLElement
+      ).id;
+
+      host.hintText.set(null);
+      TestBed.flushEffects();
+
+      expect(parent.querySelector(`#${hintId}`)).toBeNull();
+      expect(inputEl.getAttribute('aria-describedby')).toBe('existing-hint');
+    });
+  });
+
+  describe('pattern and regex precedence', (): void => {
+    it('should prefer regex over pattern when both are set', (): void => {
+      const consoleWarnSpy: jest.SpyInstance = jest.spyOn(console, 'warn').mockImplementation();
+      const { host, inputEl } = setup();
+      host.pattern.set('alpha');
+      host.regex.set(/[0-9]/);
+      TestBed.flushEffects();
+
+      const letterEvent: KeyboardEvent = makeKeydownEvent('a');
+      inputEl.dispatchEvent(letterEvent);
+      expect(letterEvent.defaultPrevented).toBe(true);
+
+      const digitEvent: KeyboardEvent = makeKeydownEvent('5');
+      inputEl.dispatchEvent(digitEvent);
+      expect(digitEvent.defaultPrevented).toBe(false);
+      consoleWarnSpy.mockRestore();
+    });
+
+    it('should warn in dev mode when pattern and regex are both set', (): void => {
+      const consoleWarnSpy: jest.SpyInstance = jest.spyOn(console, 'warn').mockImplementation();
+      const { host } = setup();
+
+      host.pattern.set('alpha');
+      host.regex.set(/[0-9]/);
+      TestBed.flushEffects();
+
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        '[uilibKeyFilter] Both pattern and regex are set. The regex input takes precedence.'
+      );
+
+      consoleWarnSpy.mockRestore();
     });
   });
 });

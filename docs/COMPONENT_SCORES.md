@@ -137,7 +137,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ⏳ Needs hardening      |
 | ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening      |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
-| KeyFilter         | Format hint, silent block communication                                                             | ✅ Done                 |
+| KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.8)           |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ✅ Done                 |
@@ -202,7 +202,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | ColorPicker   | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| KeyFilter     | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
+| KeyFilter     | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 
 ## Layout
 
