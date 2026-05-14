@@ -1,13 +1,12 @@
 <button
   class="ui-lib-toggle-button__inner"
   type="button"
-  role="switch"
   [attr.id]="buttonId()"
-  [attr.aria-checked]="checked()"
-  [attr.aria-label]="ariaLabel()"
-  [attr.aria-labelledby]="ariaLabelledBy()"
+  [attr.aria-pressed]="ariaPressed()"
+  [attr.aria-label]="ariaLabelResolved()"
+  [attr.aria-labelledby]="ariaLabelledByResolved()"
   [attr.tabindex]="effectiveTabindex()"
-  [attr.disabled]="isDisabled() ? '' : null"
+  [disabled]="isDisabled()"
   (click)="onToggle($event)"
   (keydown)="onKeyDown($event)"
   (focus)="onFocus($event)"
@@ -20,7 +19,9 @@
       [variant]="effectiveVariant()"
     />
   }
-  <span class="ui-lib-toggle-button__label">{{ activeLabel() }}</span>
+  @if (hasVisibleLabel()) {
+    <span class="ui-lib-toggle-button__label">{{ activeLabel() }}</span>
+  }
   @if (iconRightClass()) {
     <ui-lib-icon
       class="ui-lib-toggle-button__icon ui-lib-toggle-button__icon--right"

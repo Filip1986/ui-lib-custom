@@ -133,8 +133,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | Component         | Key a11y concern                                                                                    | Status                 |
 |-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
-| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ⏳ Needs hardening      |
-| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ⏳ Needs hardening      |
+| Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (8.7)           |
+| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (8.8)           |
 | ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening      |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
 | KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.8)           |
@@ -142,7 +142,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ✅ Done                 |
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
-| Stack             | No landmark pollution, `as` tag semantics                                                           | ⏳ Needs hardening      |
+| Stack             | No landmark pollution, `as` tag semantics                                                           | ✅ Done (9.0)           |
 | Inline            | No landmark pollution, wrap + reading order                                                         | ✅ Done                 |
 | Grid              | Visual vs DOM order constraint, no overflow clipping                                                | ✅ Done                 |
 | Container         | No clipping, skip-link target compatibility                                                         | ✅ Done                 |
@@ -152,7 +152,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done                 |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done                 |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
-| StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ⏳ Needs hardening      |
+| StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ✅ Done (8.7)           |
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
 | AutoFocus         | Only once on mount, no focus theft from dialogs                                                     | ✅ Done                 |
 | ClassNames        | No ARIA interference                                                                                | ✅ Done                 |
@@ -184,15 +184,14 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Button        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Input         | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.8 | 🟢     |
-| Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Textarea      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | RadioButton   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 8    | 8.8 | 🟢     |
-| ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| ToggleButton  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | ToggleSwitch  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | SelectButton  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
@@ -209,7 +208,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component   | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Card        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Stack       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Inline      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
@@ -307,7 +306,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Terminal        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
 | ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
-| StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| StyleClass      | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | FocusTrap       | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | AnimateOnScroll | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | AutoFocus       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |

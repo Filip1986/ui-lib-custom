@@ -20,7 +20,9 @@ ui-lib-textarea {
   --uilib-textarea-label-color: var(--uilib-page-fg);
   --uilib-textarea-required-color: var(--uilib-color-danger-600);
   --uilib-textarea-error-color: var(--uilib-color-danger-600);
+  --uilib-textarea-hint-color: var(--uilib-muted);
   --uilib-textarea-counter-color: var(--uilib-muted);
+  --uilib-textarea-resize-color: var(--uilib-border);
   --uilib-textarea-radius: var(--uilib-shape-base, 6px);
   --uilib-textarea-disabled-opacity: 0.6;
 
@@ -99,6 +101,16 @@ ui-lib-textarea .ui-lib-textarea__control {
     color: var(--uilib-textarea-placeholder);
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--uilib-textarea-border-focus);
+    outline-offset: 2px;
+  }
+
+  &::-webkit-resizer {
+    background-color: color-mix(in srgb, var(--uilib-textarea-resize-color) 55%, transparent);
+    border-radius: 2px;
+  }
+
   // Disable the browser resize handle when auto-resize is active (applied via [style.resize] binding)
   // The binding handles this; this just ensures the field clip doesn't show the handle peeking.
   overflow: hidden;
@@ -122,9 +134,22 @@ ui-lib-textarea .ui-lib-textarea__meta {
   font-size: calc(var(--uilib-textarea-font-size) * 0.875);
 }
 
+ui-lib-textarea .ui-lib-textarea__messages {
+  display: grid;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+ui-lib-textarea .ui-lib-textarea__hint {
+  color: var(--uilib-textarea-hint-color);
+}
+
 ui-lib-textarea .ui-lib-textarea__error {
   color: var(--uilib-textarea-error-color);
-  flex: 1;
+}
+
+ui-lib-textarea .ui-lib-textarea__message--hidden {
+  display: none;
 }
 
 ui-lib-textarea .ui-lib-textarea__counter {
@@ -238,5 +263,14 @@ ui-lib-textarea.ui-lib-textarea--variant-material .ui-lib-textarea__field {
   --uilib-textarea-text: var(--uilib-text-dark-primary, #e0e0ff);
   --uilib-textarea-placeholder: var(--uilib-text-dark-secondary, #8888aa);
   --uilib-textarea-label-color: var(--uilib-text-dark-primary, #e0e0ff);
+  --uilib-textarea-hint-color: var(--uilib-text-dark-secondary, #8888aa);
   --uilib-textarea-counter-color: var(--uilib-text-dark-secondary, #8888aa);
+  --uilib-textarea-resize-color: var(--uilib-border-dark, #3a3a5c);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-textarea .ui-lib-textarea__field,
+  ui-lib-textarea .ui-lib-textarea__control {
+    transition: none;
+  }
 }
