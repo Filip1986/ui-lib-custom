@@ -78,7 +78,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done            |
 | 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done            |
 | 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ✅ Done            |
-| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ⏳ Needs hardening |
+| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ✅ Done            |
 | 40   | PickList   | Dual-list pattern, transfer action announcements                                | ✅ Done            |
 
 ### Tier 5 — Feedback, Status & Foundational
@@ -266,7 +266,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | DataView          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | VirtualScroller   | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
-| OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| OrderList         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | PickList          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |

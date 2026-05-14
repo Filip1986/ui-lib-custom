@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `OrderList` -> ✅ complete + hardened (6-phase, score 8.7/10, 129 tests — 87 unit + 42 a11y)
 
 ---
 
@@ -76,6 +77,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-14 [OrderList component — 6-phase hardening COMPLETE (#39)]
+Changed:
+  - projects/ui-lib-custom/src/lib/order-list/order-list.component.html
+  - projects/ui-lib-custom/src/lib/order-list/order-list.component.scss
+  - projects/ui-lib-custom/src/lib/order-list/order-list.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/order-list/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Fixed genuine ARIA bug — the empty-state element was a `<li>` inside `role=listbox`, which is invalid (listbox must only contain `role=option` children). Moved empty state to a `<p>` element outside the `<ul>`, with `aria-live="polite"`, matching the fix pattern established in PickList (#40). Updated SCSS to use `<p>` selector. Added 5 new a11y tests covering the empty-state position, tag, and aria-live attributes (total: 129 tests — 87 unit + 42 a11y). Updated README with full ARIA table, keyboard table, and CSS variables table.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/order-list/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns=order-list --no-coverage (129/129 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Next step: Continue hardening remaining Tier 4/5 components. Next: Alert (#42).
 
 Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:
@@ -115,21 +133,3 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
 Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via Node Playwright at `/tmp/inline-hardening.png`.
 Next step: Harden Stack with the same semantic `as`/`tag` and landmark/read-order constraints for layout parity.
-
-Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.spec.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: AnimateOnScroll now enforces `prefers-reduced-motion` by skipping observer/class animation paths and forcing visible static state, adds non-IntersectionObserver visible fallback for progressive enhancement, schedules class mutations via `requestAnimationFrame`, ships reduced-motion preset CSS safeguards, and includes a dedicated accessibility spec for reduced-motion + observer cleanup behavior.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/animate-on-scroll/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/animate-on-scroll/" --no-coverage (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
-Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.
