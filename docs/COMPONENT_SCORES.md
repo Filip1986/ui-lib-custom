@@ -60,7 +60,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done            |
 | 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done            |
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ✅ Done            |
-| 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Needs hardening |
+| 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ✅ Done            |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done            |
 | 29   | Password      | Strength meter live region, toggle visibility button label                 | ✅ Done            |
 | 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Needs hardening |
@@ -200,7 +200,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Password      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
-| Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
+| Slider        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 8      | 9       | 8    | 8.8 | 🟢     |
 | ColorPicker   | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | KeyFilter     | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 

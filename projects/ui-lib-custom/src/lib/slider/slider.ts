@@ -103,6 +103,11 @@ export class Slider implements ControlValueAccessor {
   /** aria-labelledby attribute forwarded to the handle element(s). */
   public readonly ariaLabelledBy: InputSignal<string | null> = input<string | null>(null);
 
+  /** Formats the spoken `aria-valuetext` for each handle. */
+  public readonly valueTextFn: InputSignal<(value: number) => string> = input<
+    (value: number) => string
+  >((value: number): string => String(value));
+
   /** Design variant override. When null the active global theme variant is used. */
   public readonly variant: InputSignal<SliderVariant | null> = input<SliderVariant | null>(null);
 
@@ -265,17 +270,17 @@ export class Slider implements ControlValueAccessor {
 
   /** Human-readable text for the single handle (used as aria-valuetext). */
   protected readonly singleValueText: Signal<string> = computed<string>((): string =>
-    String(this.singleValue())
+    this.valueTextFn()(this.singleValue())
   );
 
   /** Human-readable text for the range start handle (used as aria-valuetext). */
   protected readonly startValueText: Signal<string> = computed<string>((): string =>
-    String(this.rangeStartValue())
+    this.valueTextFn()(this.rangeStartValue())
   );
 
   /** Human-readable text for the range end handle (used as aria-valuetext). */
   protected readonly endValueText: Signal<string> = computed<string>((): string =>
-    String(this.rangeEndValue())
+    this.valueTextFn()(this.rangeEndValue())
   );
 
   protected readonly hostClasses: Signal<string> = computed<string>((): string => {
