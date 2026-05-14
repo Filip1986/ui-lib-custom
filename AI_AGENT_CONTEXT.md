@@ -63,7 +63,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `OrderList` -> ✅ complete + hardened (6-phase, score 8.7/10, 129 tests — 87 unit + 42 a11y)
 
 ---
 
@@ -78,22 +77,27 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [OrderList component — 6-phase hardening COMPLETE (#39)]
+Date: 2026-05-14 [OrganizationChart component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/order-list/order-list.component.html
-  - projects/ui-lib-custom/src/lib/order-list/order-list.component.scss
-  - projects/ui-lib-custom/src/lib/order-list/order-list.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/order-list/README.md
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.ts
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.html
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.scss
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.ts
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.html
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.spec.ts
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.a11y.spec.ts (NEW, 28 tests)
+  - projects/ui-lib-custom/src/lib/organization-chart/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Fixed genuine ARIA bug — the empty-state element was a `<li>` inside `role=listbox`, which is invalid (listbox must only contain `role=option` children). Moved empty state to a `<p>` element outside the `<ul>`, with `aria-live="polite"`, matching the fix pattern established in PickList (#40). Updated SCSS to use `<p>` selector. Added 5 new a11y tests covering the empty-state position, tag, and aria-live attributes (total: 129 tests — 87 unit + 42 a11y). Updated README with full ARIA table, keyboard table, and CSS variables table.
+State: OrganizationChart now renders a semantic root `role=tree` list with node-level `aria-level`/`aria-setsize`/`aria-posinset`, preserves `aria-expanded`/`aria-selected`, marks connector visuals as `aria-hidden`, adds full Arrow/Home/End/Enter/Space/type-ahead keyboard behavior, and introduces an optional projected `[listFallback]` slot for linear reading alternatives. Added a dedicated accessibility suite with ARIA, keyboard, decorative, fallback-slot, and axe coverage.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/order-list/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns=order-list --no-coverage (129/129 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/organization-chart/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/organization-chart/" --no-coverage (58/58 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Continue hardening remaining Tier 4/5 components. Next: Alert (#42).
+Terminal notes: Fresh clone required `npm install`; Playwright MCP browser was locked, so Chromium was installed via `npx playwright install chromium` and screenshot was captured using Node Playwright at `/tmp/organization-chart-hardening.png`.
+Next step: Continue with the next queued hardening prompt in `docs/prompts/needs-hardening/`.
 
 Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:
