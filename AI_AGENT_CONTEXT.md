@@ -36,7 +36,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Stepper` -> ✅ complete + hardened (6-phase, score 9.0/10, 61 tests — 39 unit + 22 a11y)
 - `RadioButton` -> ✅ complete + hardened (6-phase, 64 tests — 40 unit + 24 a11y)
 - `Password` -> ✅ complete + hardened (6-phase, 73 tests — 49 unit + 24 a11y)
-- `Slider` -> ✅ complete + hardened (6-phase, 75 tests — 47 unit + 28 a11y)
+- `Slider` -> ✅ complete + hardened (6-phase, score 8.8/10, 79 tests — 49 unit + 30 a11y)
 - `Rating` -> ✅ complete + hardened (6-phase, 75 tests — 53 unit + 22 a11y)
 - `Ripple` -> ✅ complete + hardened (6-phase, score 8.7/10, 29 tests — 19 unit + 10 a11y)
 - `BlockUI` -> ✅ complete + hardened (6-phase, score 9.0/10, 38 tests — 22 unit + 15 a11y + 1 updated)
@@ -77,25 +77,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [Stack layout component — 6-phase hardening COMPLETE]
+Date: 2026-05-14 [Slider component — formal scoring COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/layout/stack.ts
-  - projects/ui-lib-custom/src/lib/layout/stack.html (NEW)
-  - projects/ui-lib-custom/src/lib/layout/stack.scss
-  - projects/ui-lib-custom/src/lib/layout/stack.types.ts
-  - projects/ui-lib-custom/src/lib/layout/stack.spec.ts
-  - projects/ui-lib-custom/src/lib/layout/stack.a11y.spec.ts (NEW, 12 tests)
-  - projects/ui-lib-custom/src/lib/layout/README.md
+  - projects/ui-lib-custom/src/lib/slider/slider.ts
+  - projects/ui-lib-custom/src/lib/slider/slider.spec.ts
+  - projects/ui-lib-custom/src/lib/slider/slider.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/slider/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Stack now supports semantic rendering via `as`/`tag` (`div` default plus list/landmark tags), optional `ariaLabel` for `nav`, optional role passthrough for non-list tags, `wrap`/`wrap-reverse` flex behavior, and a dedicated accessibility regression suite covering default landmark neutrality, semantic list/nav rendering, wrap reading-order constraints, CSS gap/wrap host styles, and axe checks.
+State: Slider formal scoring is now complete. The component already met the core ARIA slider, keyboard, range, and reduced-motion requirements; this session added a `valueTextFn` input so `aria-valuetext` is customizable for single and dual-thumb modes, expanded regression coverage for formatted value text, refreshed README accessibility/CSS-variable guidance, and recorded formal queue/table scores.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/layout/stack" --no-coverage (31/31 PASS — 19 unit + 12 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/slider/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/slider/" --no-coverage (79/79 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright browser lock required CLI screenshot flow; Chromium was installed with `npx playwright install chromium` and screenshot captured at `/tmp/stack-hardening.png` after serving demo on `http://127.0.0.1:4200`.
-Next step: Continue layout hardening queue with the next unscored component (`Grid`) for full scorecard completion.
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: GitHub MCP workflow inspection showed the branch CI runs were `action_required` with zero jobs (`list_workflow_runs` + `get_workflow_run` + `get_job_logs`), so there was no failed CI job to debug. Demo served at `http://127.0.0.1:4200/slider`; Chromium was installed with `npx playwright install chromium` and the screenshot was captured at `/tmp/slider-hardening.png`.
+Next step: Continue formal scoring for the next queued component that still lacks recorded scores.
 
 Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
 Changed:

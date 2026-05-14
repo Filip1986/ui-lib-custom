@@ -22,6 +22,7 @@
 | `tabindex` | `number` | `0` | Tab index forwarded to each handle. |
 | `ariaLabel` | `string \| null` | `null` | Accessible label forwarded to handle element(s). |
 | `ariaLabelledBy` | `string \| null` | `null` | `aria-labelledby` forwarded to handle element(s). |
+| `valueTextFn` | `(value: number) => string` | `(value) => String(value)` | Formats `aria-valuetext` for screen readers in single and range modes. |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme when null. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component density. |
 | `styleClass` | `string \| null` | `null` | Extra CSS class appended to the host element. |
@@ -52,6 +53,16 @@
 - Disabled: `aria-disabled="true"` on the handle; keyboard interaction is blocked
 - Respects `prefers-reduced-motion` — transitions are disabled when the user prefers reduced motion
 
+### ARIA attribute behavior
+
+| Attribute | Source |
+|---|---|
+| `aria-valuenow` | Current numeric value for the active handle |
+| `aria-valuemin` / `aria-valuemax` | Global min/max in single mode; cross-constrained by the opposite thumb in range mode |
+| `aria-valuetext` | `valueTextFn(value)` for human-readable announcements |
+| `aria-orientation` | `horizontal` or `vertical` from the `orientation` input |
+| `aria-label` / `aria-labelledby` | Forwarded from inputs; range mode falls back to `Minimum value` / `Maximum value` when no label is supplied |
+
 ## Usage
 
 ```html
@@ -66,4 +77,27 @@
 
 <!-- with accessible label -->
 <ui-lib-slider ariaLabel="Volume" [(value)]="volume" />
+
+<!-- custom spoken value text -->
+<ui-lib-slider
+  ariaLabel="Volume"
+  [valueTextFn]="formatVolumeValue"
+  [(value)]="volume"
+/>
 ```
+
+```ts
+public readonly formatVolumeValue = (value: number): string => `${value}%`;
+```
+
+## CSS custom properties
+
+| Variable | Purpose |
+|---|---|
+| `--uilib-slider-track-color` | Track background color |
+| `--uilib-slider-fill-color` | Filled-range color |
+| `--uilib-slider-handle-bg` | Thumb background |
+| `--uilib-slider-handle-border` | Thumb border |
+| `--uilib-slider-focus-ring-color` | `:focus-visible` ring color |
+| `--uilib-slider-fill-transition` | Fill animation timing |
+| `--uilib-slider-vertical-height` | Vertical slider height |

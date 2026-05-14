@@ -28,6 +28,7 @@ import { Slider } from './slider';
       [orientation]="orientation()"
       [disabled]="disabled()"
       [ariaLabel]="ariaLabel()"
+      [valueTextFn]="valueTextFn()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
     />
@@ -44,6 +45,9 @@ class SliderA11yHostComponent {
   >('horizontal');
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>('Volume');
+  public readonly valueTextFn: WritableSignal<(value: number) => string> = signal<
+    (value: number) => string
+  >((value: number): string => String(value));
 }
 
 // ---------------------------------------------------------------------------
@@ -152,6 +156,13 @@ describe('Slider Accessibility', (): void => {
   it('aria-valuetext provides a human-readable string of the value', async (): Promise<void> => {
     const fixture: ComponentFixture<SliderA11yHostComponent> = await createFixture(67);
     expect(getHandle(fixture).getAttribute('aria-valuetext')).toBe('67');
+  });
+
+  it('aria-valuetext uses valueTextFn formatting', async (): Promise<void> => {
+    const fixture: ComponentFixture<SliderA11yHostComponent> = await createFixture(67);
+    fixture.componentInstance.valueTextFn.set((value: number): string => `${value} percent`);
+    fixture.detectChanges();
+    expect(getHandle(fixture).getAttribute('aria-valuetext')).toBe('67 percent');
   });
 
   // ── ARIA orientation ──────────────────────────────────────────────────────
@@ -300,6 +311,17 @@ describe('Slider Accessibility', (): void => {
     await fixture.whenStable();
     fixture.detectChanges();
     expect(getEndHandle(fixture).getAttribute('aria-valuemin')).toBe('30');
+  });
+
+  it('range mode: handles use valueTextFn formatting independently', async (): Promise<void> => {
+    const fixture: ComponentFixture<SliderA11yHostComponent> = await createFixture([30, 80]);
+    fixture.componentInstance.range.set(true);
+    fixture.componentInstance.valueTextFn.set((value: number): string => `Value ${value}`);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(getStartHandle(fixture).getAttribute('aria-valuetext')).toBe('Value 30');
+    expect(getEndHandle(fixture).getAttribute('aria-valuetext')).toBe('Value 80');
   });
 
   it('range mode: start handle responds to ArrowRight independently', async (): Promise<void> => {
