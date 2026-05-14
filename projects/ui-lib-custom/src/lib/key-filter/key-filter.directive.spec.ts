@@ -6,9 +6,11 @@ import { By } from '@angular/platform-browser';
 import type { DebugElement } from '@angular/core';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
+import type { AriaLivePoliteness } from 'ui-lib-custom/a11y';
 import { KeyFilterDirective } from './key-filter.directive';
 import { KEY_FILTER_PRESET_PATTERNS, KEY_FILTER_DEFAULTS } from './key-filter.types';
 import type { KeyFilterPreset } from './key-filter.types';
+import { makeKeydownEvent, makePasteEvent } from './key-filter.test-utils';
 
 // ---------------------------------------------------------------------------
 // Test host
@@ -44,39 +46,18 @@ class KeyFilterHostComponent {
   public readonly regex: WritableSignal<RegExp | null> = signal<RegExp | null>(null);
 }
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-function makeKeydownEvent(key: string, options: Partial<KeyboardEventInit> = {}): KeyboardEvent {
-  return new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true, ...options });
-}
-
-function makePasteEvent(text: string): ClipboardEvent {
-  const EventCtor: typeof ClipboardEvent =
-    typeof ClipboardEvent !== 'undefined'
-      ? ClipboardEvent
-      : (Event as unknown as typeof ClipboardEvent);
-  const event: ClipboardEvent = new EventCtor('paste', { bubbles: true, cancelable: true });
-  Object.defineProperty(event, 'clipboardData', {
-    value: { getData: (_type: string): string => text },
-    writable: false,
-  });
-  return event;
-}
-
 function setup(): {
   host: KeyFilterHostComponent;
   inputEl: HTMLInputElement;
   directive: KeyFilterDirective;
   liveAnnouncer: {
-    announce: jest.Mock<Promise<void>, [string, ('polite' | 'assertive' | 'off')?]>;
+    announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]>;
   };
 } {
   const liveAnnouncer: {
-    announce: jest.Mock<Promise<void>, [string, ('polite' | 'assertive' | 'off')?]>;
+    announce: jest.Mock<Promise<void>, [string, AriaLivePoliteness?]>;
   } = {
-    announce: jest.fn<Promise<void>, [string, ('polite' | 'assertive' | 'off')?]>(
+    announce: jest.fn<Promise<void>, [string, AriaLivePoliteness?]>(
       (): Promise<void> => Promise.resolve()
     ),
   };

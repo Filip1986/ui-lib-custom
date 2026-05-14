@@ -7,6 +7,18 @@ import type { KeyFilterPreset } from './key-filter.types';
 const PASTE_FILTER_ANNOUNCEMENT: string =
   'Characters not matching the allowed pattern were removed.';
 
+const VISUALLY_HIDDEN_STYLES: Readonly<Record<string, string>> = {
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: '0',
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  'white-space': 'nowrap',
+  border: '0',
+};
+
 let nextKeyFilterHintId: number = 0;
 
 /**
@@ -41,6 +53,7 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
   private hintElement: HTMLSpanElement | null = null;
   private viewInitialized: boolean = false;
   private hasWarnedPatternConflict: boolean = false;
+  private readonly patternCloneCache: WeakMap<RegExp, RegExp> = new WeakMap<RegExp, RegExp>();
 
   /**
    * The active filter: a preset name or a custom RegExp tested per character.
@@ -200,7 +213,14 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
   // ---------------------------------------------------------------------------
 
   private matchesPattern(pattern: RegExp, value: string): boolean {
-    pattern.lastIndex = 0;
+    if (pattern.global || pattern.sticky) {
+      const safePattern: RegExp =
+        this.patternCloneCache.get(pattern) ?? new RegExp(pattern.source, pattern.flags);
+      this.patternCloneCache.set(pattern, safePattern);
+      safePattern.lastIndex = 0;
+      return safePattern.test(value);
+    }
+
     return pattern.test(value);
   }
 
@@ -281,18 +301,18 @@ export class KeyFilterDirective implements AfterViewInit, OnDestroy {
     }
 
     if (!this.hintElement) {
-      const hintElement: HTMLSpanElement = document.createElement('span');
+      const rawHintElement: unknown = this.renderer.createElement('span');
+      if (!(rawHintElement instanceof HTMLSpanElement)) {
+        return;
+      }
+      const hintElement: HTMLSpanElement = rawHintElement;
       const hintId: string = `ui-lib-key-filter-hint-${nextKeyFilterHintId++}`;
       this.renderer.setAttribute(hintElement, 'id', hintId);
-      this.renderer.setStyle(hintElement, 'position', 'absolute');
-      this.renderer.setStyle(hintElement, 'width', '1px');
-      this.renderer.setStyle(hintElement, 'height', '1px');
-      this.renderer.setStyle(hintElement, 'padding', '0');
-      this.renderer.setStyle(hintElement, 'margin', '-1px');
-      this.renderer.setStyle(hintElement, 'overflow', 'hidden');
-      this.renderer.setStyle(hintElement, 'clip', 'rect(0, 0, 0, 0)');
-      this.renderer.setStyle(hintElement, 'white-space', 'nowrap');
-      this.renderer.setStyle(hintElement, 'border', '0');
+      Object.entries(VISUALLY_HIDDEN_STYLES).forEach(
+        ([styleName, styleValue]: [string, string]): void => {
+          this.renderer.setStyle(hintElement, styleName, styleValue);
+        }
+      );
 
       const nextSibling: ChildNode | null = hostElement.nextSibling;
       if (nextSibling) {

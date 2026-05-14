@@ -7,6 +7,7 @@ import { LiveAnnouncerService } from 'ui-lib-custom/a11y';
 import type { AriaLivePoliteness } from 'ui-lib-custom/a11y';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { KeyFilterDirective } from './key-filter.directive';
+import { makeKeydownEvent, makePasteEvent } from './key-filter.test-utils';
 import type { KeyFilterPreset } from './key-filter.types';
 
 @Component({
@@ -31,23 +32,6 @@ class KeyFilterA11yHostComponent {
   >('alpha');
   public readonly bypass: WritableSignal<boolean> = signal<boolean>(false);
   public readonly hintText: WritableSignal<string | null> = signal<string | null>('Letters only');
-}
-
-function makeKeyboardEvent(key: string, options: Partial<KeyboardEventInit> = {}): KeyboardEvent {
-  return new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true, ...options });
-}
-
-function makePasteEvent(text: string): ClipboardEvent {
-  const EventCtor: typeof ClipboardEvent =
-    typeof ClipboardEvent !== 'undefined'
-      ? ClipboardEvent
-      : (Event as unknown as typeof ClipboardEvent);
-  const event: ClipboardEvent = new EventCtor('paste', { bubbles: true, cancelable: true });
-  Object.defineProperty(event, 'clipboardData', {
-    value: { getData: (_type: string): string => text },
-    writable: false,
-  });
-  return event;
 }
 
 async function setup(): Promise<{
@@ -94,28 +78,28 @@ describe('KeyFilter Accessibility', (): void => {
 
   it('allows valid alphabetic keystrokes', async (): Promise<void> => {
     const { input } = await setup();
-    const event: KeyboardEvent = makeKeyboardEvent('A');
+    const event: KeyboardEvent = makeKeydownEvent('A');
     input.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(false);
   });
 
   it('blocks invalid keystrokes', async (): Promise<void> => {
     const { input } = await setup();
-    const event: KeyboardEvent = makeKeyboardEvent('7');
+    const event: KeyboardEvent = makeKeydownEvent('7');
     input.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(true);
   });
 
   it('allows special navigation keys', async (): Promise<void> => {
     const { input } = await setup();
-    const event: KeyboardEvent = makeKeyboardEvent('Tab');
+    const event: KeyboardEvent = makeKeydownEvent('Tab');
     input.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(false);
   });
 
   it('allows control key combinations', async (): Promise<void> => {
     const { input } = await setup();
-    const event: KeyboardEvent = makeKeyboardEvent('a', { ctrlKey: true });
+    const event: KeyboardEvent = makeKeydownEvent('a', { ctrlKey: true });
     input.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(false);
   });
