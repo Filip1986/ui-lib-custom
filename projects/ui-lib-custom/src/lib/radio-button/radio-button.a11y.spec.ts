@@ -23,6 +23,8 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
       role="radiogroup"
       aria-labelledby="rb-group-label"
       [attr.aria-required]="groupRequired() ? 'true' : null"
+      [attr.aria-invalid]="groupInvalid() ? 'true' : null"
+      [attr.aria-describedby]="groupInvalid() ? groupErrorId() : null"
     >
       <span id="rb-group-label">Preferred contact method</span>
       <ui-lib-radio-button
@@ -30,6 +32,8 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
         value="email"
         label="Email"
         [disabled]="firstDisabled()"
+        [invalid]="firstInvalid()"
+        [ariaDescribedby]="firstInvalid() ? firstErrorId() : null"
         [(ngModel)]="selectedContact"
       />
       <ui-lib-radio-button
@@ -39,6 +43,8 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
         [(ngModel)]="selectedContact"
       />
       <ui-lib-radio-button name="contact" value="mail" label="Mail" [(ngModel)]="selectedContact" />
+      <p [id]="firstErrorId()">Email option is currently invalid.</p>
+      <p [id]="groupErrorId()">Please select one contact method.</p>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,7 +52,11 @@ import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 class RadioButtonA11yHostComponent {
   public selectedContact: string = '';
   public readonly groupRequired: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly groupInvalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly firstDisabled: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly firstInvalid: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly firstErrorId: WritableSignal<string> = signal<string>('rb-email-error');
+  public readonly groupErrorId: WritableSignal<string> = signal<string>('rb-group-error');
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -287,10 +297,46 @@ describe('RadioButton Accessibility', (): void => {
     fixture.detectChanges();
 
     expect(nativeInputAt(fixture, 0).getAttribute('aria-disabled')).toBe('true');
+    expect(nativeInputAt(fixture, 0).disabled).toBe(true);
   });
 
   it('native input omits aria-disabled when not disabled', (): void => {
     expect(nativeInputAt(fixture, 0).getAttribute('aria-disabled')).toBeNull();
+    expect(nativeInputAt(fixture, 0).disabled).toBe(false);
+  });
+
+  // ── Invalid / describedby wiring ──────────────────────────────────────────
+
+  it('native input sets aria-invalid and aria-describedby when invalid is true', (): void => {
+    host.firstInvalid.set(true);
+    fixture.detectChanges();
+
+    const input: HTMLInputElement = nativeInputAt(fixture, 0);
+    expect(input.getAttribute('aria-invalid')).toBe('true');
+    expect(input.getAttribute('aria-describedby')).toBe(host.firstErrorId());
+  });
+
+  it('group wrapper sets aria-invalid and aria-describedby when groupInvalid is true', (): void => {
+    host.groupInvalid.set(true);
+    fixture.detectChanges();
+
+    const group: HTMLElement = queryRequired<HTMLElement>(
+      fixture.nativeElement as HTMLElement,
+      '[role="radiogroup"]',
+      'radiogroup'
+    );
+    expect(group.getAttribute('aria-invalid')).toBe('true');
+    expect(group.getAttribute('aria-describedby')).toBe(host.groupErrorId());
+  });
+
+  it('group wrapper omits aria-invalid and aria-describedby when groupInvalid is false', (): void => {
+    const group: HTMLElement = queryRequired<HTMLElement>(
+      fixture.nativeElement as HTMLElement,
+      '[role="radiogroup"]',
+      'radiogroup'
+    );
+    expect(group.getAttribute('aria-invalid')).toBeNull();
+    expect(group.getAttribute('aria-describedby')).toBeNull();
   });
 
   // ── Roving tabindex ───────────────────────────────────────────────────────
@@ -462,6 +508,15 @@ describe('RadioButton Accessibility', (): void => {
 
   it('has no accessibility violations with group aria-required', async (): Promise<void> => {
     host.groupRequired.set(true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+
+  it('has no accessibility violations with invalid group and option state', async (): Promise<void> => {
+    host.groupInvalid.set(true);
+    host.firstInvalid.set(true);
     fixture.detectChanges();
     await fixture.whenStable();
 

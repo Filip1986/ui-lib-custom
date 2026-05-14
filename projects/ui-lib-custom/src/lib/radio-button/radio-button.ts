@@ -7,6 +7,7 @@ import {
   computed,
   forwardRef,
   inject,
+  isDevMode,
   input,
   output,
   signal,
@@ -33,7 +34,7 @@ export type {
   RadioButtonChangeEvent,
 } from './radio-button.types';
 
-let radioButtonIdCounter: number = 0;
+let nextRadioButtonId: number = 0;
 
 /**
  * RadioButton component with accessible labeling and group selection support via ControlValueAccessor.
@@ -81,6 +82,10 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
   public readonly ariaLabel: InputSignal<string | null> = input<string | null>(null);
   /** Explicit aria-labelledby override. */
   public readonly ariaLabelledby: InputSignal<string | null> = input<string | null>(null);
+  /** Links to helper/error text element ids. */
+  public readonly ariaDescribedby: InputSignal<string | null> = input<string | null>(null);
+  /** Explicit invalid state for accessibility and styling. */
+  public readonly invalid: InputSignal<boolean> = input<boolean>(false);
   /** Design-system variant; falls back to ThemeConfigService when null. */
   public readonly variant: InputSignal<RadioButtonVariant | null> =
     input<RadioButtonVariant | null>(null);
@@ -109,7 +114,7 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
   private onCvaChange: (value: unknown) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};
 
-  private readonly controlId: string = `ui-lib-radio-button-${++radioButtonIdCounter}`;
+  private readonly controlId: string = `ui-lib-radio-button-${++nextRadioButtonId}`;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly hostElement: ElementRef = inject(ElementRef);
@@ -146,6 +151,10 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
 
     if (this.isDisabled()) {
       classes.push('ui-lib-radio-button--disabled');
+    }
+
+    if (this.invalid()) {
+      classes.push('ui-lib-radio-button--invalid');
     }
 
     if (this.appearance() === 'filled') {
@@ -188,6 +197,8 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
   );
 
   public ngAfterViewInit(): void {
+    this.warnWhenNameIsMissing();
+
     if (!this.autofocus() || this.isDisabled()) {
       return;
     }
@@ -331,5 +342,13 @@ export class RadioButton implements ControlValueAccessor, AfterViewInit {
     }
 
     return hostNativeElement.querySelector<HTMLInputElement>('.ui-lib-radio-button__native-input');
+  }
+
+  private warnWhenNameIsMissing(): void {
+    if (isDevMode() && !this.name()) {
+      console.warn(
+        '[RadioButton] Missing required "name" input. Radios must share the same name for native group keyboard behavior.'
+      );
+    }
   }
 }
