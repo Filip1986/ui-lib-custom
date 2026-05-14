@@ -39,7 +39,7 @@ export type {
   ToggleButtonChangeEvent,
 } from './toggle-button.types';
 
-let nextToggleButtonId: number = 0;
+let toggleButtonIdCounter: number = 0;
 
 /**
  * ToggleButton selects a boolean value via a button with distinct on/off labels and icons.
@@ -117,10 +117,12 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
   public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
+  private isSyncingPressedFromCheckedAlias: boolean = false;
+  private hasCheckedAliasInitialized: boolean = false;
   private onCvaChange: (value: boolean) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};
 
-  private readonly controlId: string = `ui-lib-toggle-button-${++nextToggleButtonId}`;
+  private readonly controlId: string = `ui-lib-toggle-button-${++toggleButtonIdCounter}`;
 
   private readonly themeConfig: ThemeConfigService = inject(ThemeConfigService);
   private readonly liveAnnouncer: LiveAnnouncerService = inject(LiveAnnouncerService);
@@ -229,7 +231,21 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
         return;
       }
 
+      this.isSyncingPressedFromCheckedAlias = true;
       this.pressed.set(checked);
+      this.isSyncingPressedFromCheckedAlias = false;
+    });
+
+    effect((): void => {
+      const pressed: boolean = this.pressed();
+      if (!this.hasCheckedAliasInitialized) {
+        this.hasCheckedAliasInitialized = true;
+        return;
+      }
+
+      if (!this.isSyncingPressedFromCheckedAlias) {
+        this.checkedChange.emit(pressed);
+      }
     });
   }
 
@@ -261,7 +277,6 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
 
     const nextChecked: boolean = !this.pressed();
     this.pressed.set(nextChecked);
-    this.checkedChange.emit(nextChecked);
     this.onCvaChange(nextChecked);
     this.onCvaTouched();
     this.change.emit({ originalEvent: event, checked: nextChecked });
