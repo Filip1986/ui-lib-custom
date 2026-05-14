@@ -142,7 +142,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ✅ Done                 |
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
-| Stack             | No landmark pollution, `as` tag semantics                                                           | ⏳ Needs hardening      |
+| Stack             | No landmark pollution, `as` tag semantics                                                           | ✅ Done (9.0)           |
 | Inline            | No landmark pollution, wrap + reading order                                                         | ✅ Done                 |
 | Grid              | Visual vs DOM order constraint, no overflow clipping                                                | ✅ Done                 |
 | Container         | No clipping, skip-link target compatibility                                                         | ✅ Done                 |
@@ -208,7 +208,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component   | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |-------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Card        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Stack       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Inline      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |

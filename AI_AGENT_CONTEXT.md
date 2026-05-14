@@ -63,7 +63,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `StyleClass` -> ✅ complete + hardened (6-phase, score 8.7/10, 30 tests — 17 unit + 13 a11y)
 
 ---
 
@@ -78,23 +77,25 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [StyleClass directive — 6-phase hardening COMPLETE]
+Date: 2026-05-14 [Stack layout component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/style-class/style-class.ts
-  - projects/ui-lib-custom/src/lib/style-class/style-class.spec.ts
-  - projects/ui-lib-custom/src/lib/style-class/style-class.a11y.spec.ts (NEW, 13 tests)
-  - projects/ui-lib-custom/src/lib/style-class/README.md
+  - projects/ui-lib-custom/src/lib/layout/stack.ts
+  - projects/ui-lib-custom/src/lib/layout/stack.html (NEW)
+  - projects/ui-lib-custom/src/lib/layout/stack.scss
+  - projects/ui-lib-custom/src/lib/layout/stack.types.ts
+  - projects/ui-lib-custom/src/lib/layout/stack.spec.ts
+  - projects/ui-lib-custom/src/lib/layout/stack.a11y.spec.ts (NEW, 12 tests)
+  - projects/ui-lib-custom/src/lib/layout/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: StyleClass now initializes and keeps `aria-expanded` on the trigger and `aria-hidden` on the target in sync for toggle and transition flows, respects initial hidden/open class state, skips enter/leave animation classes when `prefers-reduced-motion: reduce` is active, and adds dedicated accessibility regression coverage plus selector-target regression coverage.
+State: Stack now supports semantic rendering via `as`/`tag` (`div` default plus list/landmark tags), optional `ariaLabel` for `nav`, optional role passthrough for non-list tags, `wrap`/`wrap-reverse` flex behavior, and a dedicated accessibility regression suite covering default landmark neutrality, semantic list/nav rendering, wrap reading-order constraints, CSS gap/wrap host styles, and axe checks.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/style-class/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/style-class/" --no-coverage (30/30 PASS — 17 unit + 13 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/layout/stack" --no-coverage (31/31 PASS — 19 unit + 12 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before baseline validation. Demo screenshot captured at `/tmp/style-class-hardening.png` by building the demo, serving `dist/demo/browser` through a local SPA-fallback Node server on `127.0.0.1:4301`, and loading `/style-class` with Playwright after installing Chromium via `npx playwright install chromium`.
-Next step: Continue hardening the next queued new utility/component prompt with the same ARIA-state + reduced-motion regression standard.
+Terminal notes: Fresh clone required `npm install` before baseline validation. Playwright browser lock required CLI screenshot flow; Chromium was installed with `npx playwright install chromium` and screenshot captured at `/tmp/stack-hardening.png` after serving demo on `http://127.0.0.1:4200`.
+Next step: Continue layout hardening queue with the next unscored component (`Grid`) for full scorecard completion.
 
 Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
 Changed:

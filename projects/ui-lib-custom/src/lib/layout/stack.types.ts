@@ -7,3 +7,5 @@ export type StackJustify =
   | 'space-between'
   | 'space-around'
   | 'space-evenly';
+export type StackWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
+export type StackTag = 'div' | 'span' | 'ul' | 'ol' | 'nav' | 'section' | 'main' | 'aside';
