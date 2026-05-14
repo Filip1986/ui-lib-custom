@@ -127,6 +127,8 @@ export class StyleClass implements OnInit, OnDestroy {
       this.elementRef.nativeElement.addEventListener('click', this.clickListener as EventListener);
     });
 
+    this.initializeAriaState();
+
     this.destroyRef.onDestroy((): void => {
       this.cleanup();
     });
@@ -194,6 +196,7 @@ export class StyleClass implements OnInit, OnDestroy {
     const wasActive: boolean = target.classList.contains(cssClass);
     this.applyClasses(target, cssClass, !wasActive);
     this.isEntered = !wasActive;
+    this.syncAriaState(target, this.isEntered);
 
     if (!wasActive && this.hideOnOutsideClick()) {
       this.bindOutsideClickListener(target);
@@ -220,10 +223,31 @@ export class StyleClass implements OnInit, OnDestroy {
     if (!fromClass && !activeClass && !toClass && !doneClass) {
       // No transition classes configured — nothing to do
       this.isEntered = true;
+      this.syncAriaState(target, true);
+
+      if (this.hideOnOutsideClick()) {
+        this.bindOutsideClickListener(target);
+      }
+
       return;
     }
 
     this.isAnimating = true;
+    this.syncAriaState(target, true);
+
+    if (this.prefersReducedMotion()) {
+      this.applyClasses(target, this.enterFromClass(), false);
+      this.applyClasses(target, this.enterActiveClass(), false);
+      this.applyClasses(target, doneClass || toClass, true);
+      this.isAnimating = false;
+      this.isEntered = true;
+
+      if (this.hideOnOutsideClick()) {
+        this.bindOutsideClickListener(target);
+      }
+
+      return;
+    }
 
     // Step 1: apply enterFromClass
     this.applyClasses(target, fromClass, true);
@@ -273,10 +297,21 @@ export class StyleClass implements OnInit, OnDestroy {
     if (!fromClass && !activeClass && !toClass && !doneClass) {
       // No transition classes configured — nothing to do
       this.isEntered = false;
+      this.syncAriaState(target, false);
       return;
     }
 
     this.isAnimating = true;
+    this.syncAriaState(target, false);
+
+    if (this.prefersReducedMotion()) {
+      this.applyClasses(target, this.leaveFromClass(), false);
+      this.applyClasses(target, this.leaveActiveClass(), false);
+      this.applyClasses(target, doneClass || toClass, true);
+      this.isAnimating = false;
+      this.isEntered = false;
+      return;
+    }
 
     // Step 1: apply leaveFromClass
     this.applyClasses(target, fromClass, true);
@@ -373,19 +408,72 @@ export class StyleClass implements OnInit, OnDestroy {
    * Empty/blank strings are silently ignored.
    */
   private applyClasses(element: HTMLElement, classString: string, add: boolean): void {
-    if (!classString.trim()) {
-      return;
-    }
-
-    const classes: string[] = classString.trim().split(/\s+/);
-
-    for (const cssClass of classes) {
+    for (const cssClass of this.classNamesFromString(classString)) {
       if (add) {
         element.classList.add(cssClass);
       } else {
         element.classList.remove(cssClass);
       }
     }
+  }
+
+  private initializeAriaState(): void {
+    const target: HTMLElement | null = this.resolveTarget();
+    if (!target) {
+      return;
+    }
+
+    this.isEntered = this.determineInitialEnteredState(target);
+    this.syncAriaState(target, this.isEntered);
+
+    if (this.isEntered && this.hideOnOutsideClick()) {
+      this.bindOutsideClickListener(target);
+    }
+  }
+
+  private determineInitialEnteredState(target: HTMLElement): boolean {
+    const toggleClass: string = this.toggleClass();
+    if (this.targetHasAnyClass(target, toggleClass)) {
+      return true;
+    }
+
+    if (this.targetHasAnyClass(target, `${this.leaveDoneClass()} ${this.leaveToClass()}`)) {
+      return false;
+    }
+
+    if (this.targetHasAnyClass(target, `${this.enterDoneClass()} ${this.enterToClass()}`)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private targetHasAnyClass(target: HTMLElement, classString: string): boolean {
+    return this.classNamesFromString(classString).some((cssClass: string): boolean =>
+      target.classList.contains(cssClass)
+    );
+  }
+
+  private syncAriaState(target: HTMLElement, isExpanded: boolean): void {
+    const host: HTMLElement = this.elementRef.nativeElement;
+    host.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+
+    if (target !== host) {
+      target.setAttribute('aria-hidden', isExpanded ? 'false' : 'true');
+    }
+  }
+
+  private prefersReducedMotion(): boolean {
+    const defaultView: Window | null = this.document.defaultView;
+    return defaultView ? defaultView.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+  }
+
+  private classNamesFromString(classString: string): string[] {
+    if (!classString.trim()) {
+      return [];
+    }
+
+    return classString.trim().split(/\s+/);
   }
 
   /** Remove all listeners and cancel state. */
