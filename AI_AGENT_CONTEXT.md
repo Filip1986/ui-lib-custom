@@ -77,22 +77,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-13 [InputGroup component — 6-phase hardening COMPLETE]
+Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/input-group/input-group.html
-  - projects/ui-lib-custom/src/lib/input-group/input-group.a11y.spec.ts (NEW, 12 tests)
-  - projects/ui-lib-custom/src/lib/input-group/README.md
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.scss
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.spec.ts
+  - projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/input-mask/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: InputGroup now supports explicit `[addonLeft]` and `[addonRight]` projection slots while preserving default projection, adds dedicated accessibility coverage for decorative addon hiding, icon-button addon labeling, label→input targeting, axe baseline, and composability with Input/InputMask/InputNumber/Password, and documents decorative vs interactive addon requirements in the component README.
+State: InputMask now ships generated control/hint/error IDs, explicit `ariaLabel`/`ariaLabelledBy` inputs, mask format hint wiring via `aria-describedby`, incomplete-mask `aria-invalid` behavior on blur, optional projected error slot support, blocked-character live region announcements, and `aria-valuetext` that reads user-entered characters without placeholder noise. Added reduced-motion CSS safeguards and expanded accessibility coverage to a dedicated 20-test a11y suite.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-group/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/input-group/" --no-coverage (23/23 PASS — 11 unit + 12 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-mask/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/input-mask/" --no-coverage (62/62 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: `playwright-browser` tool was locked by an existing browser profile, so screenshot capture used CLI Playwright after installing Chromium (`npx playwright install chromium`). Screenshot saved at `/tmp/input-group-hardening.png`.
-Next step: Continue hardening the next queued new component prompt (for example Stack or OrganizationChart).
+Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs`) and no failed completed runs were present to inspect. Playwright browser lock required CLI capture flow; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/input-mask-hardening.png`.
+Next step: Continue hardening the next queued core input with the same label/error/hint semantics and blocked-character a11y feedback standard.
 
 Date: 2026-05-13 [Inline layout component — 6-phase hardening COMPLETE]
 Changed:
