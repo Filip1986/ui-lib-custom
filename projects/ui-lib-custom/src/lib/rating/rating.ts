@@ -189,8 +189,8 @@ export class Rating implements ControlValueAccessor {
         return null;
       }
 
-      const ariaLabel: string | null = this.ariaLabel();
-      return ariaLabel?.trim().length ? ariaLabel : DEFAULT_RATING_ARIA_LABEL;
+      const normalizedAriaLabel: string = this.ariaLabel()?.trim() ?? '';
+      return normalizedAriaLabel.length > 0 ? normalizedAriaLabel : DEFAULT_RATING_ARIA_LABEL;
     }
   );
 

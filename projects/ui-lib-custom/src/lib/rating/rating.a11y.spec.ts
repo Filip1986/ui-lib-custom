@@ -182,8 +182,11 @@ function dispatchKey(element: HTMLElement, key: string): void {
 // ── Accessibility tests ───────────────────────────────────────────────────────
 
 describe('Rating Accessibility', (): void => {
-  afterEach((): void => {
+  beforeEach((): void => {
     jest.restoreAllMocks();
+  });
+
+  afterEach((): void => {
     TestBed.resetTestingModule();
   });
 
