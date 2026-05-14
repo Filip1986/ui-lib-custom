@@ -54,7 +54,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 
 | #    | Component     | Key a11y concern                                                           | Status            |
 |------|---------------|----------------------------------------------------------------------------|-------------------|
-| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ⏳ Needs hardening |
+| 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ✅ Done            |
 | 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done            |
 | 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ⏳ Needs hardening |
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done            |
@@ -140,7 +140,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | KeyFilter         | Format hint, silent block communication                                                             | ⏳ Needs hardening      |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done                 |
-| InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ⏳ Needs hardening      |
+| InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ✅ Done                 |
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
 | Stack             | No landmark pollution, `as` tag semantics                                                           | ⏳ Needs hardening      |
 | Inline            | No landmark pollution, wrap + reading order                                                         | ✅ Done                 |
@@ -183,7 +183,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Component     | API | A11y | Perf | Comp | Theme | DX  | Docs | Polish | Angular | Feel | Avg | Status |
 |---------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Button        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
-| Input         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Input         | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.8 | 🟢     |
 | Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Select        | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
@@ -210,12 +210,12 @@ Scores are integers 1–10. `—` means not yet evaluated.
 |-------------|-----|------|------|------|-------|-----|------|--------|---------|------|-----|--------|
 | Card        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stack       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Inline      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Inline      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconField   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| InputGroup  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| InputGroup  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | FormField   | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 9    | 8.7 | 🟢     |
 | Divider     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Toolbar     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |

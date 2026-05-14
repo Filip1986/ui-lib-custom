@@ -36,6 +36,8 @@
         [disabled]="isDisabled()"
         [readOnly]="readonly()"
         [required]="required() || null"
+        [attr.aria-label]="ariaLabel() || null"
+        [attr.aria-labelledby]="ariaLabelledBy() || null"
         [attr.aria-invalid]="isInvalid() ? 'true' : null"
         [attr.aria-required]="required() ? 'true' : null"
         [attr.aria-readonly]="readonly() ? 'true' : null"
