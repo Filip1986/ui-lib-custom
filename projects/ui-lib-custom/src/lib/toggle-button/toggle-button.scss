@@ -116,6 +116,7 @@ ui-lib-toggle-button.ui-lib-toggle-button--checked .ui-lib-toggle-button__inner 
   background-color: var(--uilib-toggle-button-checked-bg);
   border-color: var(--uilib-toggle-button-checked-border);
   color: var(--uilib-toggle-button-checked-color);
+  font-weight: 600;
 }
 
 ui-lib-toggle-button.ui-lib-toggle-button--checked:not(.ui-lib-toggle-button--disabled)
@@ -238,4 +239,10 @@ ui-lib-toggle-button.ui-lib-toggle-button--variant-minimal {
 [data-theme='dark'] ui-lib-toggle-button,
 .dark ui-lib-toggle-button {
   @include toggle-button-dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-toggle-button .ui-lib-toggle-button__inner {
+    transition: none;
+  }
 }

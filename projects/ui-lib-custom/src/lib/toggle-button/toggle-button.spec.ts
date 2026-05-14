@@ -44,8 +44,8 @@ function getLabelText(fixture: ComponentFixture<unknown>): string {
     <ui-lib-toggle-button
       [onLabel]="onLabel"
       [offLabel]="offLabel"
-      [checked]="checked()"
-      (checkedChange)="checked.set($event)"
+      [pressed]="checked()"
+      (pressedChange)="checked.set($event)"
       [disabled]="disabled"
       [size]="size"
       [variant]="variant"
@@ -110,7 +110,7 @@ class ReactiveFormHostComponent {
   imports: [ToggleButton],
   template: `
     <ui-lib-toggle-button
-      [checked]="true"
+      [pressed]="true"
       [allowEmpty]="false"
       variant="material"
       onLabel="On"
@@ -172,26 +172,26 @@ describe('ToggleButton', (): void => {
       expect(getLabelText(fixture)).toBe('On');
     });
 
-    it('should render a button with role=switch', (): void => {
+    it('should render a native button element', (): void => {
       const fixture: ComponentFixture<TestHostComponent> =
         TestBed.createComponent(TestHostComponent);
       fixture.detectChanges();
-      expect(getButton(fixture).getAttribute('role')).toBe('switch');
+      expect(getButton(fixture).tagName).toBe('BUTTON');
     });
 
-    it('should set aria-checked=false when unchecked', (): void => {
+    it('should set aria-pressed=false when not pressed', (): void => {
       const fixture: ComponentFixture<TestHostComponent> =
         TestBed.createComponent(TestHostComponent);
       fixture.detectChanges();
-      expect(getButton(fixture).getAttribute('aria-checked')).toBe('false');
+      expect(getButton(fixture).getAttribute('aria-pressed')).toBe('false');
     });
 
-    it('should set aria-checked=true when checked', (): void => {
+    it('should set aria-pressed=true when pressed', (): void => {
       const fixture: ComponentFixture<TestHostComponent> =
         TestBed.createComponent(TestHostComponent);
       fixture.componentInstance.checked.set(true);
       fixture.detectChanges();
-      expect(getButton(fixture).getAttribute('aria-checked')).toBe('true');
+      expect(getButton(fixture).getAttribute('aria-pressed')).toBe('true');
     });
 
     it('should apply the base host class', (): void => {
