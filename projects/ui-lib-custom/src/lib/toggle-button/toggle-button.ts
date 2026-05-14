@@ -4,9 +4,11 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
+  effect,
   forwardRef,
   inject,
   input,
+  isDevMode,
   model,
   output,
   signal,
@@ -98,9 +100,13 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
     input<ToggleButtonVariant | null>(null);
   /** Additional CSS class(es) applied to the host element. */
   public readonly styleClass: InputSignal<string | null> = input<string | null>(null);
+  /** Backward-compatible checked input alias. Prefer `pressed`. */
+  public readonly checked: InputSignal<boolean | null> = input<boolean | null>(null);
 
-  /** Two-way bindable checked state. */
-  public readonly checked: ModelSignal<boolean> = model<boolean>(false);
+  /** Two-way bindable pressed state. */
+  public readonly pressed: ModelSignal<boolean> = model<boolean>(false);
+  /** Backward-compatible checkedChange output alias. Prefer `pressedChange`. */
+  public readonly checkedChange: OutputEmitterRef<boolean> = output<boolean>();
 
   /** Emitted when the toggle state changes. */
   public readonly change: OutputEmitterRef<ToggleButtonChangeEvent> =
@@ -111,6 +117,8 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
   public readonly blur: OutputEmitterRef<FocusEvent> = output<FocusEvent>();
 
   private readonly cvaDisabled: WritableSignal<boolean> = signal<boolean>(false);
+  private isSyncingPressedFromCheckedAlias: boolean = false;
+  private hasCheckedAliasInitialized: boolean = false;
   private onCvaChange: (value: boolean) => void = (): void => {};
   private onCvaTouched: () => void = (): void => {};
 
@@ -137,13 +145,45 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
 
   /** Label resolved from onLabel / offLabel according to the current checked state. */
   public readonly activeLabel: Signal<string> = computed<string>((): string =>
-    this.checked() ? this.onLabel() : this.offLabel()
+    this.pressed() ? this.onLabel() : this.offLabel()
   );
 
   /** Icon resolved from onIcon / offIcon according to the current checked state. */
   public readonly activeIcon: Signal<SemanticIcon | string | null> = computed<
     SemanticIcon | string | null
-  >((): SemanticIcon | string | null => (this.checked() ? this.onIcon() : this.offIcon()));
+  >((): SemanticIcon | string | null => (this.pressed() ? this.onIcon() : this.offIcon()));
+
+  public readonly hasVisibleLabel: Signal<boolean> = computed<boolean>(
+    (): boolean => this.activeLabel().trim().length > 0
+  );
+
+  public readonly ariaPressed: Signal<'true' | 'false'> = computed<'true' | 'false'>(
+    (): 'true' | 'false' => (this.pressed() ? 'true' : 'false')
+  );
+
+  public readonly ariaLabelResolved: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const ariaLabel: string | null = this.ariaLabel();
+      if (ariaLabel === null) {
+        return null;
+      }
+
+      const trimmedLabel: string = ariaLabel.trim();
+      return trimmedLabel.length > 0 ? trimmedLabel : null;
+    }
+  );
+
+  public readonly ariaLabelledByResolved: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const ariaLabelledBy: string | null = this.ariaLabelledBy();
+      if (ariaLabelledBy === null) {
+        return null;
+      }
+
+      const trimmedLabelledBy: string = ariaLabelledBy.trim();
+      return trimmedLabelledBy.length > 0 ? trimmedLabelledBy : null;
+    }
+  );
 
   /** Active icon when iconPos is 'left'; null otherwise. */
   public readonly iconLeftClass: Signal<SemanticIcon | string | null> = computed<
@@ -163,7 +203,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
       `ui-lib-toggle-button--size-${this.size()}`,
     ];
 
-    if (this.checked()) {
+    if (this.pressed()) {
       classes.push('ui-lib-toggle-button--checked');
     }
 
@@ -184,7 +224,34 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
     (): string => this.inputId() ?? `${this.controlId}-button`
   );
 
+  constructor() {
+    effect((): void => {
+      const checked: boolean | null = this.checked();
+      if (checked === null || checked === this.pressed()) {
+        return;
+      }
+
+      this.isSyncingPressedFromCheckedAlias = true;
+      this.pressed.set(checked);
+      this.isSyncingPressedFromCheckedAlias = false;
+    });
+
+    effect((): void => {
+      const pressed: boolean = this.pressed();
+      if (!this.hasCheckedAliasInitialized) {
+        this.hasCheckedAliasInitialized = true;
+        return;
+      }
+
+      if (!this.isSyncingPressedFromCheckedAlias) {
+        this.checkedChange.emit(pressed);
+      }
+    });
+  }
+
   public ngAfterViewInit(): void {
+    this.validateIconOnlyAriaLabel();
+
     if (!this.autofocus() || this.isDisabled()) {
       return;
     }
@@ -204,12 +271,12 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
     }
 
     // When allowEmpty is false and the button is already on, prevent unchecking.
-    if (!this.allowEmpty() && this.checked()) {
+    if (!this.allowEmpty() && this.pressed()) {
       return;
     }
 
-    const nextChecked: boolean = !this.checked();
-    this.checked.set(nextChecked);
+    const nextChecked: boolean = !this.pressed();
+    this.pressed.set(nextChecked);
     this.onCvaChange(nextChecked);
     this.onCvaTouched();
     this.change.emit({ originalEvent: event, checked: nextChecked });
@@ -217,6 +284,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
     const label: string = this.activeLabel();
     const state: string = nextChecked ? 'on' : 'off';
     void this.liveAnnouncer.announce(`${label} ${state}`, 'polite');
+    this.validateIconOnlyAriaLabel();
   }
 
   /** Handles keyboard events — Enter and Space activate the toggle. */
@@ -241,7 +309,7 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
   // ControlValueAccessor implementation
 
   public writeValue(value: boolean | null | undefined): void {
-    this.checked.set(Boolean(value));
+    this.pressed.set(Boolean(value));
   }
 
   public registerOnChange(fn: (value: boolean) => void): void {
@@ -262,5 +330,27 @@ export class ToggleButton implements ControlValueAccessor, AfterViewInit {
       return null;
     }
     return hostNativeElement.querySelector<HTMLButtonElement>('.ui-lib-toggle-button__inner');
+  }
+
+  private validateIconOnlyAriaLabel(): void {
+    if (!isDevMode()) {
+      return;
+    }
+
+    if (this.iconOnlyModeNeedsAriaLabel() && this.ariaLabelResolved() === null) {
+      console.error(
+        '[ui-lib-toggle-button] ariaLabel is required when the toggle button renders icon-only content.'
+      );
+    }
+  }
+
+  private iconOnlyModeNeedsAriaLabel(): boolean {
+    const onLabel: string = this.onLabel().trim();
+    const offLabel: string = this.offLabel().trim();
+    const hasOnIcon: boolean = Boolean(this.onIcon());
+    const hasOffIcon: boolean = Boolean(this.offIcon());
+    const onIsIconOnly: boolean = hasOnIcon && onLabel.length === 0;
+    const offIsIconOnly: boolean = hasOffIcon && offLabel.length === 0;
+    return onIsIconOnly || offIsIconOnly;
   }
 }

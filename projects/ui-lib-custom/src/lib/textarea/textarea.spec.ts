@@ -44,16 +44,21 @@ function queryAll<T extends Element = HTMLElement>(
   template: `
     <ui-lib-textarea
       [label]="label()"
+      [ariaLabel]="ariaLabel()"
+      [ariaLabelledBy]="ariaLabelledBy()"
       [placeholder]="placeholder()"
       [size]="size()"
       [variant]="variant()"
       [rows]="rows()"
+      [maxRows]="maxRows()"
       [disabled]="disabled()"
       [readonly]="readonly()"
       [required]="required()"
+      [invalid]="invalid()"
       [showCounter]="showCounter()"
       [maxLength]="maxLength()"
       [error]="error()"
+      [hint]="hint()"
       [autoResize]="autoResize()"
       [ngModelOptions]="{ standalone: true }"
       [(ngModel)]="value"
@@ -65,18 +70,23 @@ function queryAll<T extends Element = HTMLElement>(
 })
 class TextareaNgModelHostComponent {
   public readonly label: WritableSignal<string> = signal<string>('Description');
+  public readonly ariaLabel: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly ariaLabelledBy: WritableSignal<string | null> = signal<string | null>(null);
   public readonly placeholder: WritableSignal<string> = signal<string>('Enter text...');
   public readonly size: WritableSignal<TextareaSize> = signal<TextareaSize>('md');
   public readonly variant: WritableSignal<TextareaVariant | null> = signal<TextareaVariant | null>(
     null
   );
   public readonly rows: WritableSignal<number> = signal<number>(3);
+  public readonly maxRows: WritableSignal<number | null> = signal<number | null>(null);
   public readonly disabled: WritableSignal<boolean> = signal<boolean>(false);
   public readonly readonly: WritableSignal<boolean> = signal<boolean>(false);
   public readonly required: WritableSignal<boolean> = signal<boolean>(false);
+  public readonly invalid: WritableSignal<boolean> = signal<boolean>(false);
   public readonly showCounter: WritableSignal<boolean> = signal<boolean>(false);
   public readonly maxLength: WritableSignal<number | null> = signal<number | null>(null);
   public readonly error: WritableSignal<string | null> = signal<string | null>(null);
+  public readonly hint: WritableSignal<string | null> = signal<string | null>(null);
   public readonly autoResize: WritableSignal<boolean> = signal<boolean>(false);
   public value: string = '';
   public readonly inputEvents: TextareaChangeEvent[] = [];
@@ -253,8 +263,10 @@ describe('UiLibTextarea - rendering', (): void => {
   });
 
   it('should not render error element when error is null', (): void => {
-    const errors: HTMLElement[] = queryAll(fixture, '.ui-lib-textarea__error');
-    expect(errors.length).toBe(0);
+    // The region stays mounted so projected [textareaError] content can remain stable in the DOM
+    // while visibility and announcement state are toggled by component state.
+    const error: HTMLElement = queryEl(fixture, '.ui-lib-textarea__error');
+    expect(error.classList.contains('ui-lib-textarea__message--hidden')).toBe(true);
   });
 
   it('should set aria-describedby when error is present', async (): Promise<void> => {
@@ -632,11 +644,11 @@ describe('UiLibTextarea - accessibility', (): void => {
     expect(hostEl.getAttribute('aria-disabled')).toBe('true');
   });
 
-  it('should have aria-live on the counter', async (): Promise<void> => {
+  it('should not create a live region for the counter', async (): Promise<void> => {
     host.showCounter.set(true);
     fixture.detectChanges();
     await fixture.whenStable();
     const counter: HTMLElement = queryEl(fixture, '.ui-lib-textarea__counter');
-    expect(counter.getAttribute('aria-live')).toBe('polite');
+    expect(counter.hasAttribute('aria-live')).toBe(false);
   });
 });
