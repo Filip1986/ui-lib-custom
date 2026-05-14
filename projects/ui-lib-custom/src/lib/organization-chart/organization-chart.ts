@@ -35,7 +35,7 @@ import type {
 } from './organization-chart.types';
 
 /** Module-level counter for generating unique organization-chart instance IDs. */
-let nextOrganizationChartId: number = 0;
+let organizationChartIdCounter: number = 0;
 
 /**
  * OrganizationChart renders an interactive hierarchical tree of nodes.
@@ -81,7 +81,7 @@ export class OrganizationChart implements OrganizationChartContext {
   private readonly _tick: WritableSignal<number> = signal(0);
 
   /** Unique instance ID for this organization chart. */
-  public readonly instanceId: string = `ui-lib-organization-chart-${++nextOrganizationChartId}`;
+  public readonly instanceId: string = `ui-lib-organization-chart-${++organizationChartIdCounter}`;
 
   // ─── Inputs ────────────────────────────────────────────────────────────────
 
@@ -420,7 +420,8 @@ export class OrganizationChart implements OrganizationChartContext {
       }
       const labelElement: Element | null = item.querySelector('.uilib-org-chart-node-label');
       const source: Element = labelElement ?? item;
-      const text: string = source.textContent.trim().toLowerCase();
+      const sourceText: unknown = source.textContent;
+      const text: string = typeof sourceText === 'string' ? sourceText.trim().toLowerCase() : '';
       if (text.startsWith(lowerChar)) {
         item.focus();
         return;

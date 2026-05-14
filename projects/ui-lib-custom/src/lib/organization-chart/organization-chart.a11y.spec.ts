@@ -16,6 +16,8 @@ import type {
 
 const SKIP_ORG_CHART_STRUCTURE_RULES: Record<string, { enabled: boolean }> = {
   ...SKIP_COLOR_CONTRAST_RULES,
+  // Custom recursive component hosts wrap treeitems, which can cause false
+  // positives for aria-required-children in jsdom-based axe runs.
   'aria-required-children': { enabled: false },
 };
 

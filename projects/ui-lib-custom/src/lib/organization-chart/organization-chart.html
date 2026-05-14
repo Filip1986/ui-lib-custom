@@ -1,4 +1,4 @@
-<ul class="uilib-org-chart-root" role="tree" [attr.aria-label]="ariaLabel() || 'Organization'">
+<ul class="uilib-org-chart-root" role="tree" [attr.aria-label]="ariaLabel()">
   @for (rootNode of value(); track rootNode.key; let index = $index) {
     <li role="none">
       <ui-lib-organization-chart-node

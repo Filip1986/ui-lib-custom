@@ -9,7 +9,7 @@
   [attr.aria-posinset]="posinset()"
   [attr.aria-expanded]="hasChildren() ? isExpanded() : null"
   [attr.aria-selected]="ctx.selectionMode() ? isSelected() : null"
-  [attr.aria-disabled]="node().selectable === false ? true : null"
+  [attr.aria-disabled]="node().selectable === false || null"
   [attr.tabindex]="tabIndex()"
   (click)="onNodeClick($event)"
 >
