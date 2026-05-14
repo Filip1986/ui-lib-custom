@@ -82,54 +82,55 @@
     (keydown)="onListKeydown($event)"
     (dragleave)="onDragLeave($event)"
   >
-    @if (displayItems().length === 0) {
-      @if (emptyTemplate()) {
-        <li class="ui-lib-order-list__empty">
+    @for (item of displayItems(); track trackByFn($index, item)) {
+      <li
+        role="option"
+        class="ui-lib-order-list__item"
+        [class.ui-lib-order-list__item--selected]="isSelected(item)"
+        [class.ui-lib-order-list__item--dragging]="draggedIndex() === getValueIndex($index)"
+        [class.ui-lib-order-list__item--drop-before]="dragOverIndex() === $index && dragPosition() === 'before'"
+        [class.ui-lib-order-list__item--drop-after]="dragOverIndex() === $index && dragPosition() === 'after'"
+        [attr.aria-selected]="isSelected(item)"
+        [attr.id]="itemId($index)"
+        [tabindex]="focusedIndex() === $index ? 0 : -1"
+        [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
+        (click)="onItemClick($event, item, $index)"
+        (focus)="onItemFocus($event, $index)"
+        (dragstart)="onDragStart($event, $index)"
+        (dragover)="onDragOver($event, $index)"
+        (drop)="onDrop($event, $index)"
+        (dragend)="onDragEnd($event)"
+      >
+        @if (itemTemplate()) {
           <ng-container
-            [ngTemplateOutlet]="emptyTemplate()!"
-            [ngTemplateOutletContext]="emptyContext()"
+            [ngTemplateOutlet]="itemTemplate()!"
+            [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isSelected(item) }"
           />
-        </li>
-      } @else {
-        <li class="ui-lib-order-list__empty" aria-live="polite">
-          @if (isEmptyDueToFilter()) {
-            No items match the filter
-          } @else {
-            No items
-          }
-        </li>
-      }
-    } @else {
-      @for (item of displayItems(); track trackByFn($index, item)) {
-        <li
-          role="option"
-          class="ui-lib-order-list__item"
-          [class.ui-lib-order-list__item--selected]="isSelected(item)"
-          [class.ui-lib-order-list__item--dragging]="draggedIndex() === getValueIndex($index)"
-          [class.ui-lib-order-list__item--drop-before]="dragOverIndex() === $index && dragPosition() === 'before'"
-          [class.ui-lib-order-list__item--drop-after]="dragOverIndex() === $index && dragPosition() === 'after'"
-          [attr.aria-selected]="isSelected(item)"
-          [attr.id]="itemId($index)"
-          [tabindex]="focusedIndex() === $index ? 0 : -1"
-          [attr.draggable]="dragDrop() && !disabled() ? 'true' : null"
-          (click)="onItemClick($event, item, $index)"
-          (focus)="onItemFocus($event, $index)"
-          (dragstart)="onDragStart($event, $index)"
-          (dragover)="onDragOver($event, $index)"
-          (drop)="onDrop($event, $index)"
-          (dragend)="onDragEnd($event)"
-        >
-          @if (itemTemplate()) {
-            <ng-container
-              [ngTemplateOutlet]="itemTemplate()!"
-              [ngTemplateOutletContext]="{ $implicit: item, index: $index, selected: isSelected(item) }"
-            />
-          } @else {
-            {{ resolveItemLabel(item) }}
-          }
-        </li>
-      }
+        } @else {
+          {{ resolveItemLabel(item) }}
+        }
+      </li>
     }
   </ul>
+
+  <!-- Empty state (outside listbox to keep role=option purity) -->
+  @if (displayItems().length === 0) {
+    @if (emptyTemplate()) {
+      <div class="ui-lib-order-list__empty">
+        <ng-container
+          [ngTemplateOutlet]="emptyTemplate()!"
+          [ngTemplateOutletContext]="emptyContext()"
+        />
+      </div>
+    } @else {
+      <p class="ui-lib-order-list__empty" aria-live="polite">
+        @if (isEmptyDueToFilter()) {
+          No items match the filter
+        } @else {
+          No items
+        }
+      </p>
+    }
+  }
 </div>
 

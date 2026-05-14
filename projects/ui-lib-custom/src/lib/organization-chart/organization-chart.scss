@@ -37,6 +37,9 @@
     gap: var(--uilib-org-chart-gap);
     justify-content: center;
     align-items: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   // ─── Node wrapper (host of OrganizationChartNodeComponent) ───────────────
@@ -145,6 +148,9 @@
   .uilib-org-chart-children-row {
     display: flex;
     align-items: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   // Each child column: contributes the horizontal bar segment + vertical drop
@@ -153,6 +159,7 @@
     flex-direction: column;
     align-items: center;
     padding: 0 var(--uilib-org-chart-gap);
+    list-style: none;
 
     // Horizontal bar drawn via top border
     border-top: var(--uilib-org-chart-connector-width) solid var(--uilib-org-chart-connector-color);
@@ -178,6 +185,11 @@
       border-top: none;
       padding: 0;
     }
+  }
+
+  .uilib-org-chart-list-fallback {
+    margin-top: var(--uilib-org-chart-gap);
+    width: 100%;
   }
 
   // Vertical connector from horizontal bar down to child node
