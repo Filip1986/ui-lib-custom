@@ -62,8 +62,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
-- `Textarea` -> ✅ complete + hardened (6-phase, score 8.7/10, 61 tests — 41 unit + 20 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `StyleClass` -> ✅ complete + hardened (6-phase, score 8.7/10, 30 tests — 17 unit + 13 a11y)
 
 ---
 
@@ -78,28 +78,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [Textarea component — 6-phase hardening COMPLETE]
+Date: 2026-05-14 [StyleClass directive — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/textarea/textarea.ts
-  - projects/ui-lib-custom/src/lib/textarea/textarea.html
-  - projects/ui-lib-custom/src/lib/textarea/textarea.scss
-  - projects/ui-lib-custom/src/lib/textarea/textarea.types.ts
-  - projects/ui-lib-custom/src/lib/textarea/textarea.spec.ts
-  - projects/ui-lib-custom/src/lib/textarea/textarea.a11y.spec.ts (NEW, 20 tests)
-  - projects/ui-lib-custom/src/lib/textarea/README.md
-  - docs/reference/components/TEXTAREA.md (NEW)
-  - docs/reference/components/README.md
+  - projects/ui-lib-custom/src/lib/style-class/style-class.ts
+  - projects/ui-lib-custom/src/lib/style-class/style-class.spec.ts
+  - projects/ui-lib-custom/src/lib/style-class/style-class.a11y.spec.ts (NEW, 13 tests)
+  - projects/ui-lib-custom/src/lib/style-class/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Textarea now uses stable per-instance generated ids, explicit `ariaLabel` / `ariaLabelledBy` inputs, composed hint+error `aria-describedby`, `invalid` state semantics, projected `[textareaHint]` and `[textareaError]` slots, optional `maxRows` auto-resize capping, reduced-motion-safe styling, and a dedicated 20-test accessibility regression suite.
+State: StyleClass now initializes and keeps `aria-expanded` on the trigger and `aria-hidden` on the target in sync for toggle and transition flows, respects initial hidden/open class state, skips enter/leave animation classes when `prefers-reduced-motion: reduce` is active, and adds dedicated accessibility regression coverage plus selector-target regression coverage.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/textarea/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/textarea/" --no-coverage (61/61 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/style-class/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/style-class/" --no-coverage (30/30 PASS — 17 unit + 13 a11y)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. GitHub Actions workflow runs were checked via MCP (`list_workflow_runs`) and no recent completed failures were present to inspect. Demo screenshot captured at `/tmp/textarea-hardening.png`.
-Next step: Continue hardening the next unscored new core input component with the same label/error/hint semantics and reduced-motion baseline.
+Terminal notes: Fresh clone required `npm install` before baseline validation. Demo screenshot captured at `/tmp/style-class-hardening.png` by building the demo, serving `dist/demo/browser` through a local SPA-fallback Node server on `127.0.0.1:4301`, and loading `/style-class` with Playwright after installing Chromium via `npx playwright install chromium`.
+Next step: Continue hardening the next queued new utility/component prompt with the same ARIA-state + reduced-motion regression standard.
 
 Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
 Changed:

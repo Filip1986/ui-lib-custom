@@ -152,7 +152,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done                 |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done                 |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
-| StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ⏳ Needs hardening      |
+| StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ✅ Done (8.7)           |
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
 | AutoFocus         | Only once on mount, no focus theft from dialogs                                                     | ✅ Done                 |
 | ClassNames        | No ARIA interference                                                                                | ✅ Done                 |
@@ -306,7 +306,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Terminal        | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | Ripple          | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 9      | 9       | 9    | 8.7 | 🟢     |
 | ScrollTop       | 8   | 9    | 8    | 8    | 9     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
-| StyleClass      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| StyleClass      | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | FocusTrap       | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | AnimateOnScroll | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | AutoFocus       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
