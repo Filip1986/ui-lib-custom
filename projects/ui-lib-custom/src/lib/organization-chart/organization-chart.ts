@@ -297,7 +297,7 @@ export class OrganizationChart implements OrganizationChartContext {
     } else if ((key === KEYBOARD_KEYS.Enter || key === KEYBOARD_KEYS.Space) && focusedIndex >= 0) {
       event.preventDefault();
       items[focusedIndex]?.click();
-    } else if (key.length === 1 && /^[a-zA-Z0-9]$/.test(key)) {
+    } else if (key.length === 1 && /^[\p{L}\p{N}]$/u.test(key)) {
       this.focusItemByTypeAhead(key, items, focusedIndex);
     }
   }
