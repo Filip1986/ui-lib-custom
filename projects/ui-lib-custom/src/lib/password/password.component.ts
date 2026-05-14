@@ -54,6 +54,9 @@ export class PasswordComponent implements ControlValueAccessor {
   /** ID for the strength live region — use as `aria-describedby` on an associated label. */
   public readonly strengthId: string = this.passwordId + '-strength';
 
+  /** ID for the validation error message region when `invalid` is true. */
+  public readonly errorId: string = this.passwordId + '-error';
+
   /** Design variant: material, bootstrap, or minimal. */
   public readonly variant: InputSignal<PasswordVariant> = input<PasswordVariant>('material');
 
@@ -139,6 +142,11 @@ export class PasswordComponent implements ControlValueAccessor {
     undefined
   );
 
+  /** Optional validation error text announced when `invalid` is true. */
+  public readonly errorMessage: InputSignal<string | undefined> = input<string | undefined>(
+    undefined
+  );
+
   /** Emitted when the input receives focus. */
   public readonly focused: OutputEmitterRef<Event> = output<Event>();
 
@@ -221,8 +229,22 @@ export class PasswordComponent implements ControlValueAccessor {
   });
 
   /** Native input type — switches between "password" and "text" when the mask is toggled. */
-  protected readonly inputType: Signal<string> = computed<string>((): string =>
-    this.passwordVisible() ? 'text' : 'password'
+  protected readonly inputType: Signal<'text' | 'password'> = computed<'text' | 'password'>(
+    (): 'text' | 'password' => (this.passwordVisible() ? 'text' : 'password')
+  );
+
+  /** `aria-describedby` value combining strength and error references when available. */
+  protected readonly ariaDescribedBy: Signal<string | null> = computed<string | null>(
+    (): string | null => {
+      const ids: string[] = [];
+      if (this.feedback()) {
+        ids.push(this.strengthId);
+      }
+      if (this.invalid() && this.errorMessage()) {
+        ids.push(this.errorId);
+      }
+      return ids.length > 0 ? ids.join(' ') : null;
+    }
   );
 
   private onModelChange: (value: string | null) => void = (): void => {};

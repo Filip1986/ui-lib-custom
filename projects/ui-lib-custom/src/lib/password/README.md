@@ -26,6 +26,7 @@
 | `inputId` | `string \| undefined` | `undefined` | Overrides the auto-generated id on the native `<input>` |
 | `ariaLabel` | `string \| undefined` | `undefined` | |
 | `ariaLabelledBy` | `string \| undefined` | `undefined` | |
+| `errorMessage` | `string \| undefined` | `undefined` | Announces validation message when `invalid` is `true` |
 | `maxLength` | `number \| undefined` | `undefined` | |
 | `tabindex` | `number \| undefined` | `undefined` | |
 | `promptLabel` | `string` | `'Enter a password'` | Strength panel text before typing |
@@ -64,11 +65,12 @@ external `<label>` using the component reference:
 ```
 
 When `feedback` is enabled (default), the input automatically has `aria-describedby` pointing to
-the live region (`strengthId`), so assistive technology announces strength changes.
+the live region (`strengthId`), so assistive technology announces strength changes. If `invalid`
+and `errorMessage` are provided, `aria-describedby` includes the error id as well.
 
 ### Strength live region
 
-A visually-hidden `<div>` with `aria-live="polite"` and `aria-atomic="true"` is always present in
+A visually-hidden `<div role="status">` with `aria-live="polite"` and `aria-atomic="true"` is always present in
 the DOM when `feedback` is true. It announces:
 
 - `"Password strength: None"` — empty field
@@ -86,6 +88,16 @@ When `toggleMask` is enabled, a button with `aria-label` and `aria-pressed` is r
 - `aria-label="Show password"` / `"Hide password"` reflects current state
 - `aria-pressed="false"` / `"true"` communicates toggle state to AT
 - The button icon SVG has `aria-hidden="true"` and `focusable="false"`
+
+### Validation state (`aria-invalid` + error description)
+
+Set `invalid` to mark the native input with `aria-invalid="true"`. Provide `errorMessage` to render
+an error node linked by `aria-describedby`:
+
+```html
+<label [for]="passwordRef.passwordId">Password</label>
+<uilib-password #passwordRef [invalid]="true" errorMessage="Password is required" />
+```
 
 ## Usage
 
