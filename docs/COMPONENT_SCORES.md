@@ -56,13 +56,13 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |------|---------------|----------------------------------------------------------------------------|-------------------|
 | 21   | Input         | Label association, `aria-invalid`, `aria-describedby` for error messages   | ✅ Done            |
 | 22   | Checkbox      | `aria-checked=mixed` for indeterminate, group with `role=group`            | ✅ Done            |
-| 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ⏳ Needs hardening |
+| 23   | RadioButton   | `role=radiogroup`, `aria-required`, keyboard focus between siblings        | ✅ Done            |
 | 24   | DatePicker    | Extremely complex — calendar grid, month/year navigation, live region      | ✅ Done            |
 | 25   | CascadeSelect | Multi-level combobox — `aria-activedescendant` through levels              | ✅ Done            |
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ✅ Done            |
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Needs hardening |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done            |
-| 29   | Password      | Strength meter live region, toggle visibility button label                 | ⏳ Needs hardening |
+| 29   | Password      | Strength meter live region, toggle visibility button label                 | ✅ Done            |
 | 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Needs hardening |
 | 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ✅ Done            |
 
@@ -78,7 +78,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 36   | Listbox    | `role=listbox`, `aria-multiselectable`, keyboard selection                      | ✅ Done            |
 | 37   | Paginator  | Live region announcing page change, button labels                               | ✅ Done            |
 | 38   | DataView   | Sort/filter control labels, list/grid toggle announcement                       | ✅ Done            |
-| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ⏳ Needs hardening |
+| 39   | OrderList  | Drag-and-drop a11y, keyboard reorder alternative                                | ✅ Done            |
 | 40   | PickList   | Dual-list pattern, transfer action announcements                                | ✅ Done            |
 
 ### Tier 5 — Feedback, Status & Foundational
@@ -148,7 +148,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Container         | No clipping, skip-link target compatibility                                                         | ✅ Done                 |
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
-| OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ⏳ Needs hardening      |
+| OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ✅ Done (8.3)           |
 | Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done                 |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done                 |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
@@ -189,7 +189,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | AutoComplete  | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | CascadeSelect | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Checkbox      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| RadioButton   | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
+| RadioButton   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 9      | 9       | 8    | 8.8 | 🟢     |
 | ToggleButton  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | ToggleSwitch  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Textarea      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
@@ -197,7 +197,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
+| Password      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
@@ -266,8 +266,8 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | DataView          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | VirtualScroller   | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
-| OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| OrderList         | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
+| OrganizationChart | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | PickList          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Carousel          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |

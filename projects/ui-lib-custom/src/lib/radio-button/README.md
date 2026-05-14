@@ -12,15 +12,17 @@
 |------|------|---------|-------|
 | `label` | `string \| null` | `null` | Visible label text; projected content is an alternative |
 | `inputId` | `string \| null` | `null` | Forwarded to the native `<input>` id |
-| `name` | `string \| null` | `null` | Must be identical across all buttons in a group |
+| `name` | `string \| null` | `null` | **Required for grouped behavior**. Must be identical across all buttons in a group |
 | `value` | `unknown` | `null` | The value this radio button represents in the group |
 | `required` | `boolean` | `false` | Sets `aria-required` on the native input |
+| `invalid` | `boolean` | `false` | Sets `aria-invalid` and invalid visual styling |
 | `readonly` | `boolean` | `false` | |
 | `disabled` | `boolean` | `false` | Sets `aria-disabled` on the native input |
 | `tabindex` | `number` | `0` | Applied when the radio is checked (roving tabindex) |
 | `autofocus` | `boolean` | `false` | |
 | `ariaLabel` | `string \| null` | `null` | Used when no visible label is provided |
 | `ariaLabelledby` | `string \| null` | `null` | Explicit override; takes precedence over the auto-generated label id |
+| `ariaDescribedby` | `string \| null` | `null` | Forwards helper/error ids to `aria-describedby` on the native input |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Falls back to global theme variant when null |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
 | `appearance` | `'outlined' \| 'filled'` | `'outlined'` | |
@@ -73,6 +75,29 @@ Wrap radio buttons in a `<fieldset>`/`<legend>` or a `role="radiogroup"` element
 </div>
 ```
 
+### Group invalid/error wiring
+
+```html
+<div
+  role="radiogroup"
+  aria-labelledby="contact-label"
+  [attr.aria-invalid]="invalid ? 'true' : null"
+  [attr.aria-describedby]="invalid ? 'contact-error' : null"
+>
+  <span id="contact-label">Preferred contact method</span>
+  <ui-lib-radio-button
+    name="contact"
+    value="email"
+    label="Email"
+    [invalid]="invalid"
+    [ariaDescribedby]="invalid ? 'contact-error' : null"
+    [(ngModel)]="contact"
+  />
+  <ui-lib-radio-button name="contact" value="phone" label="Phone" [(ngModel)]="contact" />
+  <p id="contact-error">Please choose one option.</p>
+</div>
+```
+
 ## Usage
 
 ### With `ngModel`
@@ -111,3 +136,16 @@ public readonly deliveryCtrl = new FormControl('standard');
 </fieldset>
 ```
 
+## CSS Custom Properties
+
+| Variable | Purpose |
+|---|---|
+| `--uilib-radio-button-gap` | Spacing between circle and label |
+| `--uilib-radio-button-size-sm/md/lg` | Size tokens for the visual circle |
+| `--uilib-radio-button-border-color` | Default border color |
+| `--uilib-radio-button-border-hover` | Hover border color |
+| `--uilib-radio-button-border-active` | Active border color |
+| `--uilib-radio-button-bg` | Background for unselected state |
+| `--uilib-radio-button-bg-checked` | Background/border when selected |
+| `--uilib-radio-button-dot-color` | Inner dot color |
+| `--uilib-radio-button-focus-ring` | Focus-visible ring shadow |

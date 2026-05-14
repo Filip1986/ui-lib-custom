@@ -34,6 +34,9 @@ import type {
   OrganizationChartVariant,
 } from './organization-chart.types';
 
+/** Module-level counter for generating unique organization-chart instance IDs. */
+let organizationChartIdCounter: number = 0;
+
 /**
  * OrganizationChart renders an interactive hierarchical tree of nodes.
  * Supports single/multiple selection, collapsible subtrees, custom node
@@ -59,7 +62,6 @@ import type {
   host: {
     class: 'ui-lib-organization-chart',
     '[class]': 'hostClasses()',
-    role: 'tree',
     '(keydown)': 'onKeydown($event)',
   },
   providers: [
@@ -77,6 +79,9 @@ export class OrganizationChart implements OrganizationChartContext {
 
   /** Reactive version counter. Incremented after any tree mutation to force re-renders. */
   private readonly _tick: WritableSignal<number> = signal(0);
+
+  /** Unique instance ID for this organization chart. */
+  public readonly instanceId: string = `ui-lib-organization-chart-${++organizationChartIdCounter}`;
 
   // ─── Inputs ────────────────────────────────────────────────────────────────
 
@@ -99,6 +104,9 @@ export class OrganizationChart implements OrganizationChartContext {
 
   /** Extra CSS class applied to the host element. */
   public readonly styleClass: InputSignal<string> = input<string>('');
+
+  /** Accessible label for the tree. Applied to the root tree element. */
+  public readonly ariaLabel: InputSignal<string> = input<string>('Organization');
 
   // ─── Two-way binding ───────────────────────────────────────────────────────
 
@@ -255,6 +263,9 @@ export class OrganizationChart implements OrganizationChartContext {
     const allItems: NodeListOf<HTMLElement> =
       this.elementRef.nativeElement.querySelectorAll<HTMLElement>('[role="treeitem"]');
     const items: HTMLElement[] = Array.from(allItems);
+    if (items.length === 0) {
+      return;
+    }
     const focusedIndex: number = items.findIndex(
       (item: HTMLElement): boolean => item === document.activeElement
     );
@@ -271,6 +282,23 @@ export class OrganizationChart implements OrganizationChartContext {
     } else if (key === KEYBOARD_KEYS.End) {
       event.preventDefault();
       this.focusItemAtIndex(items, items.length - 1);
+    } else if (key === KEYBOARD_KEYS.ArrowRight && focusedIndex >= 0) {
+      event.preventDefault();
+      const focused: HTMLElement | undefined = items[focusedIndex];
+      if (focused) {
+        this.expandOrFocusChild(focused, items, focusedIndex);
+      }
+    } else if (key === KEYBOARD_KEYS.ArrowLeft && focusedIndex >= 0) {
+      event.preventDefault();
+      const focused: HTMLElement | undefined = items[focusedIndex];
+      if (focused) {
+        this.collapseOrFocusParent(focused);
+      }
+    } else if ((key === KEYBOARD_KEYS.Enter || key === KEYBOARD_KEYS.Space) && focusedIndex >= 0) {
+      event.preventDefault();
+      items[focusedIndex]?.click();
+    } else if (key.length === 1 && /^[\p{L}\p{N}]$/u.test(key)) {
+      this.focusItemByTypeAhead(key, items, focusedIndex);
     }
   }
 
@@ -315,5 +343,89 @@ export class OrganizationChart implements OrganizationChartContext {
   private focusItemAtIndex(items: HTMLElement[], index: number): void {
     const clampedIndex: number = Math.max(0, Math.min(index, items.length - 1));
     items[clampedIndex]?.focus();
+  }
+
+  /**
+   * ArrowRight handler.
+   * If collapsed: expand current item.
+   * If expanded: focus first child.
+   * If leaf: no action.
+   */
+  private expandOrFocusChild(
+    focused: HTMLElement,
+    items: HTMLElement[],
+    focusedIndex: number
+  ): void {
+    const toggleButton: HTMLElement | null = focused.querySelector<HTMLElement>(
+      '.uilib-org-chart-toggle-btn'
+    );
+    if (!toggleButton) {
+      return;
+    }
+
+    const isExpanded: boolean = focused.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      this.focusItemAtIndex(items, focusedIndex + 1);
+    } else {
+      toggleButton.click();
+    }
+  }
+
+  /**
+   * ArrowLeft handler.
+   * If expanded: collapse current item.
+   * Else: focus parent.
+   */
+  private collapseOrFocusParent(focused: HTMLElement): void {
+    const toggleButton: HTMLElement | null = focused.querySelector<HTMLElement>(
+      '.uilib-org-chart-toggle-btn'
+    );
+    const isExpanded: boolean = focused.getAttribute('aria-expanded') === 'true';
+    if (toggleButton && isExpanded) {
+      toggleButton.click();
+      return;
+    }
+
+    const parent: HTMLElement | null = this.findParentTreeItem(focused);
+    parent?.focus();
+  }
+
+  private findParentTreeItem(focused: HTMLElement): HTMLElement | null {
+    let current: HTMLElement | null = focused.parentElement;
+    while (current) {
+      if (current.getAttribute('role') === 'group') {
+        const hostElement: HTMLElement | null = current.parentElement;
+        return hostElement
+          ? (hostElement.querySelector<HTMLElement>(':scope > [role="treeitem"]') ?? null)
+          : null;
+      }
+      current = current.parentElement;
+    }
+    return null;
+  }
+
+  /** Type-ahead focus movement by first label character. */
+  private focusItemByTypeAhead(char: string, items: HTMLElement[], focusedIndex: number): void {
+    if (items.length === 0) {
+      return;
+    }
+    const lowerChar: string = char.toLowerCase();
+    const start: number = focusedIndex >= 0 ? focusedIndex + 1 : 0;
+
+    for (let offset: number = 0; offset < items.length; offset++) {
+      const index: number = (start + offset) % items.length;
+      const item: HTMLElement | undefined = items[index];
+      if (!item) {
+        continue;
+      }
+      const labelElement: Element | null = item.querySelector('.uilib-org-chart-node-label');
+      const source: Element = labelElement ?? item;
+      const sourceText: unknown = source.textContent;
+      const text: string = typeof sourceText === 'string' ? sourceText.trim().toLowerCase() : '';
+      if (text.startsWith(lowerChar)) {
+        item.focus();
+        return;
+      }
+    }
   }
 }

@@ -18,7 +18,12 @@
         </p>
         <app-code-preview [code]="snippet('alphanum')">
           <ui-lib-card>
-            <input class="demo-input" [uilibKeyFilter]="'alphanum'" placeholder="Alphanumeric only" />
+            <input
+              class="demo-input"
+              [uilibKeyFilter]="'alphanum'"
+              hintText="Letters and numbers only"
+              placeholder="Enter account ID"
+            />
           </ui-lib-card>
         </app-code-preview>
       </section>

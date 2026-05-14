@@ -177,6 +177,27 @@ class WithHeaderHostComponent {
   public readonly selection: WritableSignal<Fruit[]> = signal<Fruit[]>([]);
 }
 
+@Component({
+  standalone: true,
+  imports: [OrderListComponent, OrderListItemDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ui-lib-order-list
+      [value]="value()"
+      (valueChange)="value.set($any($event))"
+      [selection]="selection()"
+      (selectionChange)="selection.set($any($event))"
+      ariaLabel="Empty fruit list"
+    >
+      <ng-template uiOrderListItem let-item>{{ item.name }}</ng-template>
+    </ui-lib-order-list>
+  `,
+})
+class EmptyListHostComponent {
+  public readonly value: WritableSignal<Fruit[]> = signal<Fruit[]>([]);
+  public readonly selection: WritableSignal<Fruit[]> = signal<Fruit[]>([]);
+}
+
 // ---------------------------------------------------------------------------
 // Fixture factory
 // ---------------------------------------------------------------------------
@@ -637,6 +658,70 @@ describe('OrderList — axe-core (with header)', (): void => {
   });
 
   it('should pass axe when header is present', async (): Promise<void> => {
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Empty state ARIA structure
+// ---------------------------------------------------------------------------
+
+describe('OrderList — Empty state ARIA structure', (): void => {
+  let fixture: ComponentFixture<EmptyListHostComponent>;
+
+  beforeEach(async (): Promise<void> => {
+    fixture = await createFixture(EmptyListHostComponent);
+  });
+
+  afterEach((): void => {
+    cleanupFixture(fixture);
+  });
+
+  it('empty state should not be inside the listbox element', (): void => {
+    const listbox: HTMLElement = getListboxEl(fixture);
+    const emptyInside: Element | null = listbox.querySelector('.ui-lib-order-list__empty');
+    expect(emptyInside).toBeNull();
+  });
+
+  it('empty state should be rendered outside the listbox as a <p> element', (): void => {
+    const emptyEl: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-lib-order-list__empty'
+    );
+    expect(emptyEl).toBeTruthy();
+    expect(emptyEl!.tagName.toLowerCase()).toBe('p');
+  });
+
+  it('empty state should have aria-live="polite"', (): void => {
+    const emptyEl: Element | null = (fixture.nativeElement as HTMLElement).querySelector(
+      '.ui-lib-order-list__empty'
+    );
+    expect(emptyEl!.getAttribute('aria-live')).toBe('polite');
+  });
+
+  it('listbox should have no children when list is empty', (): void => {
+    const listbox: HTMLElement = getListboxEl(fixture);
+    const options: NodeListOf<Element> = listbox.querySelectorAll('[role="option"]');
+    expect(options.length).toBe(0);
+    expect(listbox.children.length).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// axe-core automated checks — empty list
+// ---------------------------------------------------------------------------
+
+describe('OrderList — axe-core (empty list)', (): void => {
+  let fixture: ComponentFixture<EmptyListHostComponent>;
+
+  beforeEach(async (): Promise<void> => {
+    fixture = await createFixture(EmptyListHostComponent);
+  });
+
+  afterEach((): void => {
+    cleanupFixture(fixture);
+  });
+
+  it('should pass axe when the list is empty', async (): Promise<void> => {
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 });

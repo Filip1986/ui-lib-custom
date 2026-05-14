@@ -145,7 +145,7 @@
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-mask.mjs", "maxSize": "10 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-number.mjs", "maxSize": "12 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-otp.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-key-filter.mjs", "maxSize": "3 kB" },
+    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-key-filter.mjs", "maxSize": "4 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-knob.mjs", "maxSize": "8 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-layout.mjs", "maxSize": "5 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-listbox.mjs", "maxSize": "13 kB" },
