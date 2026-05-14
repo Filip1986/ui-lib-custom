@@ -77,27 +77,24 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [OrganizationChart component — 6-phase hardening COMPLETE]
+Date: 2026-05-14 [Password component — formal 6-phase scoring COMPLETE (#29)]
 Changed:
-  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.ts
-  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.html
-  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.scss
-  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.ts
-  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.html
-  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.spec.ts
-  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.a11y.spec.ts (NEW, 28 tests)
-  - projects/ui-lib-custom/src/lib/organization-chart/README.md
+  - projects/ui-lib-custom/src/lib/password/password.component.ts
+  - projects/ui-lib-custom/src/lib/password/password.component.html
+  - projects/ui-lib-custom/src/lib/password/password.component.scss
+  - projects/ui-lib-custom/src/lib/password/password.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/password/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: OrganizationChart now renders a semantic root `role=tree` list with node-level `aria-level`/`aria-setsize`/`aria-posinset`, preserves `aria-expanded`/`aria-selected`, marks connector visuals as `aria-hidden`, adds full Arrow/Home/End/Enter/Space/type-ahead keyboard behavior, and introduces an optional projected `[listFallback]` slot for linear reading alternatives. Added a dedicated accessibility suite with ARIA, keyboard, decorative, fallback-slot, and axe coverage.
+State: Password now enforces `role="status"` for strength live updates, dynamic `aria-describedby` chaining for strength + validation message, native `aria-invalid` semantics, typed `inputType` signal (`'text' | 'password'`), reduced-motion transition suppression, and expanded a11y regression coverage (including invalid/disabled axe scenarios and `aria-labelledby` forwarding). Formal Password scores are now recorded and status moved to ✅ Done.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/organization-chart/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/organization-chart/" --no-coverage (58/58 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/password/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/password/" --no-coverage (80/80 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install`; Playwright MCP browser was locked, so Chromium was installed via `npx playwright install chromium` and screenshot was captured using Node Playwright at `/tmp/organization-chart-hardening.png`.
-Next step: Continue with the next queued hardening prompt in `docs/prompts/needs-hardening/`.
+Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs` + `get_job_logs`); most recent runs were `action_required` with zero failed jobs available to inspect. Playwright screenshot captured at `/tmp/password-hardening.png` after installing Chromium (`npx playwright install chromium`).
+Next step: Continue to the next unscored Tier 3 control (Rating #30) with the same formal 6-phase scoring workflow.
 
 Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:

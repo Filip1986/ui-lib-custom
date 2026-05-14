@@ -62,7 +62,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | 26   | InputNumber   | Spinner buttons, `role=spinbutton`, `aria-valuenow/min/max`                | ✅ Done            |
 | 27   | Slider        | `role=slider`, `aria-valuenow/min/max/valuetext`, arrow key step           | ⏳ Needs hardening |
 | 28   | ColorPicker   | Complex custom widget, keyboard access to hue/saturation/hex input         | ✅ Done            |
-| 29   | Password      | Strength meter live region, toggle visibility button label                 | ⏳ Needs hardening |
+| 29   | Password      | Strength meter live region, toggle visibility button label                 | ✅ Done            |
 | 30   | Rating        | `role=radiogroup` pattern or `role=slider`, keyboard interaction           | ⏳ Needs hardening |
 | 31   | Knob          | `role=slider`, `aria-valuenow`, drag-and-keyboard equivalence              | ✅ Done            |
 
@@ -197,7 +197,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | InputNumber   | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | InputMask     | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputOtp      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
-| Password      | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
+| Password      | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Rating        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
 | Knob          | 8   | 9    | 8    | 8    | 8     | 8   | 8    | 8      | 9       | 8    | 8.2 | 🟢     |
 | Slider        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🟡     |
