@@ -77,6 +77,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-14 [OrganizationChart component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.ts
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.html
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.scss
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.ts
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart-node.html
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.spec.ts
+  - projects/ui-lib-custom/src/lib/organization-chart/organization-chart.a11y.spec.ts (NEW, 28 tests)
+  - projects/ui-lib-custom/src/lib/organization-chart/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: OrganizationChart now renders a semantic root `role=tree` list with node-level `aria-level`/`aria-setsize`/`aria-posinset`, preserves `aria-expanded`/`aria-selected`, marks connector visuals as `aria-hidden`, adds full Arrow/Home/End/Enter/Space/type-ahead keyboard behavior, and introduces an optional projected `[listFallback]` slot for linear reading alternatives. Added a dedicated accessibility suite with ARIA, keyboard, decorative, fallback-slot, and axe coverage.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/organization-chart/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/organization-chart/" --no-coverage (58/58 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`; Playwright MCP browser was locked, so Chromium was installed via `npx playwright install chromium` and screenshot was captured using Node Playwright at `/tmp/organization-chart-hardening.png`.
+Next step: Continue with the next queued hardening prompt in `docs/prompts/needs-hardening/`.
+
 Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
@@ -115,21 +137,3 @@ Verification:
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
 Terminal notes: Fresh clone required `npm install` before validation. Playwright MCP browser remained locked, so Chromium was installed with `npx playwright install chromium` and the demo screenshot was captured via Node Playwright at `/tmp/inline-hardening.png`.
 Next step: Harden Stack with the same semantic `as`/`tag` and landmark/read-order constraints for layout parity.
-
-Date: 2026-05-13 [AnimateOnScroll directive — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.scss
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.spec.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/animate-on-scroll.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/animate-on-scroll/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-State: AnimateOnScroll now enforces `prefers-reduced-motion` by skipping observer/class animation paths and forcing visible static state, adds non-IntersectionObserver visible fallback for progressive enhancement, schedules class mutations via `requestAnimationFrame`, ships reduced-motion preset CSS safeguards, and includes a dedicated accessibility spec for reduced-motion + observer cleanup behavior.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/animate-on-scroll/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/animate-on-scroll/" --no-coverage (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Screenshot captured at `/tmp/animate-on-scroll-hardening.png`.
-Next step: Continue hardening remaining new utility directives in `docs/prompts/needs-hardening/`.

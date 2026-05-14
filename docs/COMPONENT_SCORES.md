@@ -148,7 +148,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Container         | No clipping, skip-link target compatibility                                                         | ✅ Done                 |
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
-| OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ⏳ Needs hardening      |
+| OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ✅ Done (8.3)           |
 | Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done                 |
 | IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done                 |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
@@ -267,7 +267,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | VirtualScroller   | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Timeline          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | OrderList         | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| OrganizationChart | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| OrganizationChart | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |
 | PickList          | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | Paginator         | 8   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.5 | 🟢     |
 | Carousel          | 8   | 9    | 8    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.3 | 🟢     |

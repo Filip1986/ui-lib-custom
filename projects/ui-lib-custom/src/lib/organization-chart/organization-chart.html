@@ -1,5 +1,16 @@
-<div class="uilib-org-chart-root">
-  @for (rootNode of value(); track rootNode.key) {
-    <ui-lib-organization-chart-node [node]="rootNode" [nodeIndex]="0" />
+<ul class="uilib-org-chart-root" role="tree" [attr.aria-label]="ariaLabel() || 'Organization'">
+  @for (rootNode of value(); track rootNode.key; let index = $index) {
+    <li role="none">
+      <ui-lib-organization-chart-node
+        [node]="rootNode"
+        [depth]="0"
+        [setsize]="value().length"
+        [posinset]="index + 1"
+      />
+    </li>
   }
+</ul>
+
+<div class="uilib-org-chart-list-fallback">
+  <ng-content select="[listFallback]" />
 </div>

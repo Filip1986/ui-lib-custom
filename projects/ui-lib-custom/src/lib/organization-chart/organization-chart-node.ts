@@ -36,11 +36,14 @@ export class OrganizationChartNodeComponent {
   public readonly node: InputSignal<OrganizationChartNode> =
     input.required<OrganizationChartNode>();
 
-  /**
-   * Depth level from the root (0 = root nodes).
-   * Used to set tabindex="0" on the first root-level node only.
-   */
-  public readonly nodeIndex: InputSignal<number> = input<number>(0);
+  /** Depth level from the root (0 = root nodes). */
+  public readonly depth: InputSignal<number> = input<number>(0);
+
+  /** Total number of siblings at this level (`aria-setsize`). */
+  public readonly setsize: InputSignal<number> = input<number>(1);
+
+  /** 1-based node position in its sibling group (`aria-posinset`). */
+  public readonly posinset: InputSignal<number> = input<number>(1);
 
   /** Injected parent context providing shared state and callbacks. */
   protected readonly ctx: OrganizationChartContext = inject(ORGANIZATION_CHART_CONTEXT);
@@ -65,9 +68,9 @@ export class OrganizationChartNodeComponent {
     (): boolean => Boolean(this.ctx.selectionMode()) && this.node().selectable !== false
   );
 
-  /** tabindex: 0 for root nodes, -1 for all descendants. */
+  /** tabindex: 0 for first root node, -1 for all others. */
   protected readonly tabIndex: Signal<number> = computed<number>((): number =>
-    this.nodeIndex() === 0 ? 0 : -1
+    this.depth() === 0 && this.posinset() === 1 ? 0 : -1
   );
 
   /** The TemplateRef registered for this node's type, or null. */
@@ -86,12 +89,6 @@ export class OrganizationChartNodeComponent {
   /** Handles click on the node cell for selection. */
   protected onNodeClick(event: MouseEvent): void {
     this.ctx.handleNodeClick(event, this.node());
-  }
-
-  /** Handles Enter/Space keyboard events on the node cell. */
-  protected onNodeKeydown(event: Event): void {
-    event.preventDefault();
-    this.ctx.handleNodeClick(event as MouseEvent, this.node());
   }
 
   /** Handles click on the expand/collapse toggle button. */

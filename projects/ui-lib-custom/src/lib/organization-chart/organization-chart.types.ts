@@ -19,6 +19,11 @@ export interface OrganizationChartNode {
    */
   expanded?: boolean;
   /**
+   * Optional preselection hint for consumer data models.
+   * Runtime selection state is still driven by the `selection` model binding.
+   */
+  selected?: boolean;
+  /**
    * When `false`, the node cannot be selected regardless of `selectionMode`.
    * Defaults to `true` when `undefined`.
    */

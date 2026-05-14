@@ -195,12 +195,12 @@ describe('OrganizationChart', (): void => {
   // ─── ARIA ────────────────────────────────────────────────────────────────────
 
   describe('ARIA', (): void => {
-    it('root element has role="tree"', async (): Promise<void> => {
+    it('root list element has role="tree"', async (): Promise<void> => {
       const fixture: ComponentFixture<TestHostComponent> = await setup();
-      const host: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
-        'ui-lib-organization-chart'
+      const rootTree: HTMLElement = (fixture.nativeElement as HTMLElement).querySelector(
+        '.uilib-org-chart-root'
       )!;
-      expect(host.getAttribute('role')).toBe('tree');
+      expect(rootTree.getAttribute('role')).toBe('tree');
     });
 
     it('node cells have role="treeitem"', async (): Promise<void> => {
