@@ -175,7 +175,15 @@ describe('Textarea Accessibility', (): void => {
       const fixture: ComponentFixture<TextareaMultipleInstanceHostComponent> = await createFixture(
         TextareaMultipleInstanceHostComponent
       );
-      const [firstTextarea, secondTextarea]: HTMLTextAreaElement[] = getTextareas(fixture);
+      const textareas: HTMLTextAreaElement[] = getTextareas(fixture);
+      const firstTextarea: HTMLTextAreaElement | undefined = textareas[0];
+      const secondTextarea: HTMLTextAreaElement | undefined = textareas[1];
+
+      expect(firstTextarea).toBeTruthy();
+      expect(secondTextarea).toBeTruthy();
+      if (!firstTextarea || !secondTextarea) {
+        throw new Error('Expected two textarea instances');
+      }
 
       expect(firstTextarea.id).not.toBe(secondTextarea.id);
     });
