@@ -62,6 +62,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Carousel` -> ✅ complete + hardened (6-phase, score 8.3/10, 70 tests — 44 unit + 26 a11y)
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
+- `Textarea` -> ✅ complete + hardened (6-phase, score 8.7/10, 61 tests — 41 unit + 20 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
 
 ---
@@ -77,25 +78,28 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-14 [ToggleButton component — 6-phase hardening COMPLETE]
+Date: 2026-05-14 [Textarea component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/toggle-button/toggle-button.ts
-  - projects/ui-lib-custom/src/lib/toggle-button/toggle-button.html
-  - projects/ui-lib-custom/src/lib/toggle-button/toggle-button.scss
-  - projects/ui-lib-custom/src/lib/toggle-button/toggle-button.spec.ts
-  - projects/ui-lib-custom/src/lib/toggle-button/toggle-button.a11y.spec.ts (NEW, 20 tests)
-  - projects/ui-lib-custom/src/lib/toggle-button/README.md
+  - projects/ui-lib-custom/src/lib/textarea/textarea.ts
+  - projects/ui-lib-custom/src/lib/textarea/textarea.html
+  - projects/ui-lib-custom/src/lib/textarea/textarea.scss
+  - projects/ui-lib-custom/src/lib/textarea/textarea.types.ts
+  - projects/ui-lib-custom/src/lib/textarea/textarea.spec.ts
+  - projects/ui-lib-custom/src/lib/textarea/textarea.a11y.spec.ts (NEW, 20 tests)
+  - projects/ui-lib-custom/src/lib/textarea/README.md
+  - docs/reference/components/TEXTAREA.md (NEW)
+  - docs/reference/components/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: ToggleButton now uses `aria-pressed` on native button semantics with canonical `pressed` model state, keeps backward-compatible `checked` input/output aliases for demo integration, computes normalized ARIA label/labelledby attributes, warns in dev mode when icon-only usage is missing `ariaLabel`, applies native disabled behavior, and includes reduced-motion styling and a dedicated accessibility regression suite.
+State: Textarea now uses stable per-instance generated ids, explicit `ariaLabel` / `ariaLabelledBy` inputs, composed hint+error `aria-describedby`, `invalid` state semantics, projected `[textareaHint]` and `[textareaError]` slots, optional `maxRows` auto-resize capping, reduced-motion-safe styling, and a dedicated 20-test accessibility regression suite.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toggle-button/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/toggle-button/" --no-coverage (56/56 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/textarea/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/textarea/" --no-coverage (61/61 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub Actions workflow runs were checked via MCP (`list_workflow_runs` + `get_job_logs`) and no failed jobs were present in the action-required run inspected. Demo screenshot captured at `/tmp/toggle-button-hardening.png` after starting `npm run serve:demo -- --host 127.0.0.1 --port 4200`.
-Next step: Continue hardening the next queued toggle input component (ToggleSwitch) with the same 6-phase workflow.
+Terminal notes: Fresh clone required `npm install` before validation tools were available. GitHub Actions workflow runs were checked via MCP (`list_workflow_runs`) and no recent completed failures were present to inspect. Demo screenshot captured at `/tmp/textarea-hardening.png`.
+Next step: Continue hardening the next unscored new core input component with the same label/error/hint semantics and reduced-motion baseline.
 
 Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
 Changed:

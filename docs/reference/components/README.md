@@ -214,6 +214,30 @@ Individual component documentation with complete API references and implementati
 
 
 
+### Textarea
+
+**Files:**
+
+- [TEXTAREA.md](TEXTAREA.md) - API reference and usage guide
+
+
+
+**Status:** ✅ Complete
+
+
+
+**Quick Links:**
+
+- [Live Demo](http://localhost:4200/textarea)
+
+- [Source Code](../../../projects/ui-lib-custom/src/lib/textarea/)
+
+
+
+---
+
+
+
 ### Select
 
 **Files:**
