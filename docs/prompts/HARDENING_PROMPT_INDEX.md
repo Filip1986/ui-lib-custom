@@ -116,18 +116,17 @@
 | AutoFocus         | 8.7   | `auto-focus-hardening-prompt.md`         |
 | ClassNames        | 9.1   | `class-names-hardening-prompt.md`        |
 | Bind              | 8.6   | `bind-hardening-prompt.md`               |
+| ToggleSwitch      | 8.8   | `toggle-switch-hardening-prompt.md`      |
+| Icon              | 8.7   | `icon-hardening-prompt.md`               |
+| IconButton        | 8.6   | `icon-button-hardening-prompt.md`        |
 
 ---
 
 ## Needs Hardening — Work Top to Bottom (prompt files in `docs/prompts/needs-hardening/`)
 
-> 3 components remain. Prompts are in `docs/prompts/needs-hardening/`. Last reconciled: 2026-05-15.
+> **0 components remain. All components in the original 76-item queue and all new components have been formally hardened and scored. 🎉**
 
-| Priority | Component    | Key A11y Focus                                                                              | Prompt File                         |
-|----------|--------------|---------------------------------------------------------------------------------------------|-------------------------------------|
-| 1        | ToggleSwitch | `role=switch` on `<input type=checkbox>`, label guard, aria-readonly, high-contrast track   | `toggle-switch-hardening-prompt.md` |
-| 2        | Icon         | decorative/informative modes, clickable+no-label DEV warning, SVG focusable=false           | `icon-hardening-prompt.md`          |
-| 3        | IconButton   | required ariaLabel, loading disable+announce, 44px touch target                             | `icon-button-hardening-prompt.md`   |
+_The `needs-hardening/` folder is empty. When a new component is added to the library, create a prompt file there and add it to this section._
 
 ---
 

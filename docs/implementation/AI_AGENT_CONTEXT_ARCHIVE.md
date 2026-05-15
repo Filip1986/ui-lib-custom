@@ -4,6 +4,26 @@ This file stores older `## Last Session` handoff notes migrated out of `AI_AGENT
 
 ---
 
+Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.ts
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.spec.ts
+  - projects/ui-lib-custom/src/lib/key-filter/key-filter.a11y.spec.ts (NEW, 16 tests)
+  - projects/ui-lib-custom/src/lib/key-filter/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: KeyFilter now supports `hintText` with generated hint element wiring through `aria-describedby`, announces filtered paste removals via `LiveAnnouncerService`, uses listener setup/cleanup in `ngAfterViewInit`/`ngOnDestroy`, supports optional `pattern`/`regex` alias inputs with DEV-mode conflict warning, and adds dedicated accessibility regression coverage for key filtering, hint linkage, and paste announcement behavior.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/key-filter/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/key-filter/" --no-coverage (48/48 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`. Demo screenshot captured at `/tmp/key-filter-hardening.png` after installing Chromium with `npx playwright install chromium` and serving demo on `http://127.0.0.1:4200`.
+Next step: Continue hardening the next queued new component (Stack) with the same 6-phase workflow.
+
+---
+
 Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
 Changed:
   - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts

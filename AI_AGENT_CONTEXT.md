@@ -20,8 +20,8 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ## Active Session State
 
 - **Current milestone:** Component foundation hardening + documentation completeness
-- **Active focus:** All 76 original queue items + Grid, AutoFocus, FloatLabel, Bind, and many other new components COMPLETE. Remaining: ToggleSwitch, Icon, IconButton (3 components still need 6-phase hardening).
-- **Next queue:** ToggleSwitch hardening (priority 1) → Icon (priority 2) → IconButton (priority 3)
+- **Active focus:** ALL components hardened — 76 original queue items + all new components COMPLETE. Library hardening milestone achieved 2026-05-15.
+- **Next queue:** No remaining hardening items. Next milestone: runtime variant switcher, theme preset management, broader axe-core audit.
 - **Horizon:** Runtime variant switcher, theme preset management, broader axe-core audit ✅ (infra in place)
 - **Prompt library status:** 48 session hardening prompts created (2026-05-11) for all queued components (#14–#76). Index: `docs/prompts/HARDENING_PROMPT_INDEX.md`. Accumulated lessons documented in `docs/prompts/COMPONENT_EVOLUTION_PROMPTS.md`.
 
@@ -63,9 +63,9 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `ToggleSwitch` -> ⏳ pending 6-phase hardening (priority 1)
-- `Icon` -> ⏳ pending 6-phase hardening (priority 2)
-- `IconButton` -> ⏳ pending 6-phase hardening (priority 3)
+- `ToggleSwitch` -> ✅ complete + hardened (6-phase, score 8.8/10, 68 tests — 37 unit + 31 a11y)
+- `Icon` -> ✅ complete + hardened (6-phase, score 8.7/10, 30 tests — 12 unit + 18 a11y)
+- `IconButton` -> ✅ complete + hardened (6-phase, score 8.6/10, 27 tests — 6 unit + 21 a11y)
 
 ---
 
@@ -79,6 +79,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-15 [Full hardening audit — ToggleSwitch, Icon, IconButton confirmed complete]
+Changed:
+  - docs/COMPONENT_SCORES.md (scored ToggleSwitch 8.8, Icon 8.7, IconButton 8.6; fixed ToggleButton avg 8.7, KeyFilter avg 8.6, DataView avg 8.3; added ⏳ status symbol; reverted premature ✅ Done badges)
+  - docs/prompts/HARDENING_PROMPT_INDEX.md (moved Grid/AutoFocus/FloatLabel/Bind/ToggleSwitch/Icon/IconButton to completed; Needs Hardening now empty)
+  - docs/prompts/needs-hardening/ → docs/prompts/completed/ (moved all 7 remaining files)
+  - AI_AGENT_CONTEXT.md (updated active focus, next queue, component delta)
+State: All 76 original queue items + all new components (ToggleSwitch, Icon, IconButton, Grid, AutoFocus, FloatLabel, Bind, and 17 others) fully hardened and scored ≥ 8.0. Library hardening milestone COMPLETE. needs-hardening/ folder is empty.
+Verification:
+  node_modules/.bin/jest --testPathPatterns="src/lib/toggle-switch/|src/lib/icon/|src/lib/icon-button/" --no-coverage (125/125 PASS)
+Terminal notes: Confirmed via source review that all 3 components had already implemented every criterion from their hardening prompts (aria-readonly, forced-colors, prefers-reduced-motion, DEV warnings, live announcer, native disabled, 44px touch targets, compile-time required inputs). Score discrepancy originated from premature ✅ Done badges in the queue table without corresponding score rows.
+Next step: Begin next milestone — runtime variant switcher and theme preset management.
 
 Date: 2026-05-15 [FloatLabel component — 6-phase hardening COMPLETE]
 Changed:
@@ -120,20 +132,3 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Playwright MCP browser was locked, so Chromium was installed with `npx playwright install chromium` and the rating demo screenshot was captured via Playwright CLI at `/tmp/rating-hardening.png`.
 Next step: Continue with the next formally unscored component in the hardening queue.
 
-Date: 2026-05-14 [KeyFilter directive — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.ts
-  - projects/ui-lib-custom/src/lib/key-filter/key-filter.directive.spec.ts
-  - projects/ui-lib-custom/src/lib/key-filter/key-filter.a11y.spec.ts (NEW, 16 tests)
-  - projects/ui-lib-custom/src/lib/key-filter/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: KeyFilter now supports `hintText` with generated hint element wiring through `aria-describedby`, announces filtered paste removals via `LiveAnnouncerService`, uses listener setup/cleanup in `ngAfterViewInit`/`ngOnDestroy`, supports optional `pattern`/`regex` alias inputs with DEV-mode conflict warning, and adds dedicated accessibility regression coverage for key filtering, hint linkage, and paste announcement behavior.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/key-filter/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/key-filter/" --no-coverage (48/48 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install`. Demo screenshot captured at `/tmp/key-filter-hardening.png` after installing Chromium with `npx playwright install chromium` and serving demo on `http://127.0.0.1:4200`.
-Next step: Continue hardening the next queued new component (Stack) with the same 6-phase workflow.
