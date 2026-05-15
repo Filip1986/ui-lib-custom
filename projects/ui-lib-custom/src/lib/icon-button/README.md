@@ -40,5 +40,7 @@ _none_
 ## Accessibility
 
 - `ariaLabel` is mandatory for icon-only buttons. The icon name is never used as the accessible label.
+- **`ariaLabel` is a compile-time required input** — omitting it is a TypeScript error. A DEV-mode `console.error` is also fired at runtime when the value is an empty string.
 - The inner icon is decorative and rendered with `aria-hidden="true"`.
 - Loading state announces `"Loading, please wait"` and disables the native button to prevent duplicate actions.
+- **i18n limitation:** The loading state aria-label (`"Loading, please wait"`) is currently English-only and hardcoded. Future versions will expose a localisation input.

@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `IconButton` -> ✅ complete + hardened (6-phase, score 8.8/10, 26 tests — 5 unit + 21 a11y)
 
 ---
 
@@ -76,6 +77,22 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-15 [IconButton component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.scss
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/icon-button/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: IconButton now has a corrected `prefers-reduced-motion` SCSS rule with matching specificity to override the loading spinner animation (the existing rule had lower specificity than the loading animation rule and would not have stopped it). a11y spec extended to 21 tests — added SmHostComponent and LgHostComponent and three size-based button-element tests. README updated with compile-time required ariaLabel note and English-only loading label i18n limitation. IconButton formally scored 8.8 in COMPONENT_SCORES.md.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-button/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/icon-button/" --no-coverage (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
+Next step: Continue with next component in the hardening queue.
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:
@@ -113,22 +130,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install`. Demo screenshot captured at `/tmp/key-filter-hardening.png` after installing Chromium with `npx playwright install chromium` and serving demo on `http://127.0.0.1:4200`.
 Next step: Continue hardening the next queued new component (Stack) with the same 6-phase workflow.
-
-Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.scss
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: InputMask now ships generated control/hint/error IDs, explicit `ariaLabel`/`ariaLabelledBy` inputs, mask format hint wiring via `aria-describedby`, incomplete-mask `aria-invalid` behavior on blur, optional projected error slot support, blocked-character live region announcements, and `aria-valuetext` that reads user-entered characters without placeholder noise. Added reduced-motion CSS safeguards and expanded accessibility coverage to a dedicated 20-test a11y suite.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-mask/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/input-mask/" --no-coverage (62/62 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs`) and no failed completed runs were present to inspect. Playwright browser lock required CLI capture flow; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/input-mask-hardening.png`.
-Next step: Continue hardening the next queued core input with the same label/error/hint semantics and blocked-character a11y feedback standard.
