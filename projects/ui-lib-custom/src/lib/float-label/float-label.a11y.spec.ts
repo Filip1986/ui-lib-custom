@@ -73,6 +73,19 @@ class FilledStateHost {}
 })
 class TextareaVariantHost {}
 
+@Component({
+  standalone: true,
+  imports: [FloatLabelComponent],
+  template: `
+    <uilib-float-label>
+      <input type="text" />
+      <label>Generated label</label>
+    </uilib-float-label>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class GeneratedAssociationHost {}
+
 // ─── Shared setup ─────────────────────────────────────────────────────────────
 
 const createdFixtures: ComponentFixture<unknown>[] = [];
@@ -153,6 +166,12 @@ describe('FloatLabel Accessibility', (): void => {
       fixture.detectChanges();
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
+
+    it('passes axe when the component auto-generates label/input wiring', async (): Promise<void> => {
+      const fixture: ComponentFixture<GeneratedAssociationHost> =
+        await setup(GeneratedAssociationHost);
+      await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+    });
   });
 
   // ── Label element type ────────────────────────────────────────────────────
@@ -203,6 +222,16 @@ describe('FloatLabel Accessibility', (): void => {
       const label: HTMLLabelElement = getLabelElement(fixture);
       expect(label.textContent!.trim()).toBe('Username');
     });
+
+    it('auto-generates the control id and label for association when omitted by the consumer', async (): Promise<void> => {
+      const fixture: ComponentFixture<GeneratedAssociationHost> =
+        await setup(GeneratedAssociationHost);
+      const label: HTMLLabelElement = getLabelElement(fixture);
+      const input: HTMLInputElement = getInputElement(fixture) as HTMLInputElement;
+
+      expect(input.id).toBeTruthy();
+      expect(label.getAttribute('for')).toBe(input.id);
+    });
   });
 
   // ── Font size (WCAG 1.4.4) ────────────────────────────────────────────────
@@ -230,6 +259,30 @@ describe('FloatLabel Accessibility', (): void => {
 
       // Verify the active font size token fallback is 0.75rem (12px), not smaller
       expect(stylesheetSource).toContain('--uilib-float-label-active-font-size, 0.75rem');
+    });
+
+    it('uses themed label color tokens for resting, active, and focused states', (): void => {
+      const fileSystem: { readFileSync: (filePath: string, encoding: string) => string } =
+        require('fs') as { readFileSync: (filePath: string, encoding: string) => string };
+      const pathModule: { join: (...parts: string[]) => string } = require('path') as {
+        join: (...parts: string[]) => string;
+      };
+      const processModule: { cwd: () => string } = require('process') as { cwd: () => string };
+
+      const stylesheetPath: string = pathModule.join(
+        processModule.cwd(),
+        'projects',
+        'ui-lib-custom',
+        'src',
+        'lib',
+        'float-label',
+        'float-label.scss'
+      );
+      const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
+
+      expect(stylesheetSource).toContain('--uilib-float-label-color');
+      expect(stylesheetSource).toContain('--uilib-float-label-active-color');
+      expect(stylesheetSource).toContain('--uilib-float-label-focus-color');
     });
   });
 
@@ -283,6 +336,38 @@ describe('FloatLabel Accessibility', (): void => {
     });
   });
 
+  describe('placeholder and pointer interaction', (): void => {
+    it('auto-injects the single-space placeholder required by :placeholder-shown selectors', async (): Promise<void> => {
+      const fixture: ComponentFixture<GeneratedAssociationHost> =
+        await setup(GeneratedAssociationHost);
+      const input: HTMLInputElement = getInputElement(fixture) as HTMLInputElement;
+
+      expect(input.getAttribute('placeholder')).toBe(' ');
+    });
+
+    it('keeps the projected label non-interactive while it overlays the control', (): void => {
+      const fileSystem: { readFileSync: (filePath: string, encoding: string) => string } =
+        require('fs') as { readFileSync: (filePath: string, encoding: string) => string };
+      const pathModule: { join: (...parts: string[]) => string } = require('path') as {
+        join: (...parts: string[]) => string;
+      };
+      const processModule: { cwd: () => string } = require('process') as { cwd: () => string };
+
+      const stylesheetPath: string = pathModule.join(
+        processModule.cwd(),
+        'projects',
+        'ui-lib-custom',
+        'src',
+        'lib',
+        'float-label',
+        'float-label.scss'
+      );
+      const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
+
+      expect(stylesheetSource).toContain('pointer-events: none');
+    });
+  });
+
   // ── CSS float state — CSS-driven ──────────────────────────────────────────
 
   describe('float state driven by CSS', (): void => {
@@ -313,6 +398,29 @@ describe('FloatLabel Accessibility', (): void => {
       const fixture: ComponentFixture<OnVariantHost> = await setup(OnVariantHost);
       const floatLabel: HTMLElement = getFloatLabel(fixture);
       expect(floatLabel.classList.contains('uilib-float-label--on')).toBeTruthy();
+    });
+
+    it('stylesheet uses :focus-within and :placeholder-shown-compatible selectors for float state', (): void => {
+      const fileSystem: { readFileSync: (filePath: string, encoding: string) => string } =
+        require('fs') as { readFileSync: (filePath: string, encoding: string) => string };
+      const pathModule: { join: (...parts: string[]) => string } = require('path') as {
+        join: (...parts: string[]) => string;
+      };
+      const processModule: { cwd: () => string } = require('process') as { cwd: () => string };
+
+      const stylesheetPath: string = pathModule.join(
+        processModule.cwd(),
+        'projects',
+        'ui-lib-custom',
+        'src',
+        'lib',
+        'float-label',
+        'float-label.scss'
+      );
+      const stylesheetSource: string = fileSystem.readFileSync(stylesheetPath, 'utf8');
+
+      expect(stylesheetSource).toContain(':focus-within label');
+      expect(stylesheetSource).toContain(':not(:placeholder-shown)');
     });
   });
 });

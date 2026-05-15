@@ -139,7 +139,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
 | KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.8)           |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
-| FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ⏳ Needs hardening (🔴) |
+| FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done (8.7)           |
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ✅ Done                 |
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
 | Stack             | No landmark pollution, `as` tag semantics                                                           | ✅ Done (9.0)           |
@@ -212,7 +212,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Inline      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
-| FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| FloatLabel  | 9   | 9    | 10   | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | IconField   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | InputGroup  | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |
 | FormField   | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 9    | 8.7 | 🟢     |

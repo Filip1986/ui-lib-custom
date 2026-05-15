@@ -7,9 +7,12 @@
     pointer-events: none;
     top: 50%;
     transform: translateY(-50%);
-    transition-property: all;
-    transition-timing-function: var(--uilib-float-label-transition-timing, ease);
-    transition-duration: var(--uilib-float-label-transition-duration, 0.2s);
+    transition:
+      top var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
+      transform var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
+      color var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
+      font-size var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease)),
+      background-color var(--uilib-float-label-transition, var(--uilib-transition-base, 0.2s ease));
     line-height: 1;
     inset-inline-start: var(--uilib-float-label-position-x, 0.75rem);
     color: var(--uilib-float-label-color, var(--uilib-text-secondary-color, #6b7280));
@@ -24,10 +27,9 @@
 }
 
 .uilib-float-label--over {
-  &:has(input:focus) label,
+  &:focus-within label,
   &:has(input:not(:placeholder-shown)) label,
   &:has(input:-webkit-autofill) label,
-  &:has(textarea:focus) label,
   &:has(textarea:not(:placeholder-shown)) label,
   &:has(.uilib-inputwrapper-focus) label,
   &:has(.uilib-inputwrapper-filled) label,
@@ -47,10 +49,9 @@
     padding-block-end: var(--uilib-float-label-in-input-padding-bottom, 0.5rem);
   }
 
-  &:has(input:focus) label,
+  &:focus-within label,
   &:has(input:not(:placeholder-shown)) label,
   &:has(input:-webkit-autofill) label,
-  &:has(textarea:focus) label,
   &:has(textarea:not(:placeholder-shown)) label,
   &:has(.uilib-inputwrapper-focus) label,
   &:has(.uilib-inputwrapper-filled) label,
@@ -63,10 +64,9 @@
 }
 
 .uilib-float-label--on {
-  &:has(input:focus) label,
+  &:focus-within label,
   &:has(input:not(:placeholder-shown)) label,
   &:has(input:-webkit-autofill) label,
-  &:has(textarea:focus) label,
   &:has(textarea:not(:placeholder-shown)) label,
   &:has(.uilib-inputwrapper-focus) label,
   &:has(.uilib-inputwrapper-filled) label,
@@ -75,7 +75,10 @@
     transform: translateY(-50%);
     font-size: var(--uilib-float-label-active-font-size, 0.75rem);
     font-weight: var(--uilib-float-label-active-font-weight, normal);
-    border-radius: var(--uilib-float-label-on-border-radius, 4px);
+    border-radius: var(
+      --uilib-float-label-on-border-radius,
+      var(--uilib-input-radius, var(--uilib-shape-base, 6px))
+    );
     background: var(--uilib-float-label-on-active-background, var(--uilib-surface-ground, #ffffff));
     padding: var(--uilib-float-label-on-active-padding, 0 0.25rem);
   }
@@ -89,9 +92,8 @@
   color: var(--uilib-float-label-active-color, var(--uilib-text-secondary-color, #6b7280));
 }
 
-.uilib-float-label:has(input:focus) label,
+.uilib-float-label:focus-within label,
 .uilib-float-label:has(input:-webkit-autofill) label,
-.uilib-float-label:has(textarea:focus) label,
 .uilib-float-label:has(.uilib-inputwrapper-focus) label {
   color: var(--uilib-float-label-focus-color, var(--uilib-primary-color, #3b82f6));
 }
