@@ -156,7 +156,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
 | AutoFocus         | Only once on mount, no focus theft from dialogs                                                     | ⏳ Needs hardening (🔴) |
 | ClassNames        | No ARIA interference                                                                                | ✅ Done (9.1)           |
-| Bind              | No ARIA interference                                                                                | ⏳ Needs hardening (🔴) |
+| Bind              | No ARIA interference                                                                                | ✅ Done (8.6)           |
 
 ---
 
@@ -310,7 +310,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | FocusTrap       | 8   | 9    | 9    | 8    | 8     | 8   | 9    | 8      | 9       | 8    | 8.4 | 🟢     |
 | AnimateOnScroll | 9   | 9    | 9    | 8    | 8     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 | AutoFocus       | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
-| Bind            | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Bind            | 8   | 9    | 9    | 9    | 8     | 9   | 9    | 8      | 9       | 8    | 8.6 | 🟢     |
 
 ---
 
