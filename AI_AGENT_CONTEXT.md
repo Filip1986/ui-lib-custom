@@ -77,21 +77,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-15 [Bind directive — 6-phase hardening COMPLETE]
+Date: 2026-05-15 [AutoFocus directive — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/bind/bind.ts
-  - projects/ui-lib-custom/src/lib/bind/bind.spec.ts
-  - projects/ui-lib-custom/src/lib/bind/README.md
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.ts
+  - projects/ui-lib-custom/src/lib/auto-focus/auto-focus.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/auto-focus/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Bind now normalizes kebab-case `aria-*` keys to their reflected DOM property names before diffing/applying, documents DOM-property vs attribute semantics plus performance/removal caveats, adds focused regression coverage for ARIA reflection, safe host-binding coexistence, object-reference reactivity, basic axe checks, and composition with `uiLibStyleClass`, and is formally scored/complete in the scorecard.
+State: AutoFocus now documents and verifies one-time mount-only focus behavior, yields to existing meaningful focus (including dialog/focus-trap ownership), warns with host-tag context for invalid selectors and non-focusable targets, and expands dedicated accessibility coverage to 16 a11y tests covering selector fallback, SSR guard, and focus-theft prevention.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bind/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/bind/" --no-coverage (21/21 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/auto-focus/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/auto-focus/" --no-coverage (24/24 PASS)
+  npm run typecheck (PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. The MCP browser was locked, so Chromium was installed with `npx playwright install chromium`, the demo was served at `http://127.0.0.1:4200/bind`, and a verification screenshot was captured at `/tmp/bind-hardening.png`.
-Next step: Continue with the next formally unscored utility directive hardening pass (AutoFocus).
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. GitHub Actions branch run `25905026417` was checked via MCP; it reported `action_required` before jobs/logs were available, and `get_workflow_run_logs_url` returned 404 at inspection time. Demo screenshot captured from `http://127.0.0.1:4200/auto-focus` at `/tmp/auto-focus-hardening.png` after installing Chromium with `npx playwright install chromium`.
+Next step: Continue the next unscored utility hardening prompt (for example Bind or Icon).
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:
