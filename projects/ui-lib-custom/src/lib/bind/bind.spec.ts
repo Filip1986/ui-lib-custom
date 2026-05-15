@@ -158,6 +158,14 @@ class BindStructuralHostComponent {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+type BindApplyBindingsInternal = {
+  applyBindings(bindings: Record<string, unknown>): void;
+};
+
+type BindGetPropertyValueInternal = {
+  getPropertyValue(key: string): unknown;
+};
+
 function requireElement(fixture: ComponentFixture<unknown>): HTMLElement {
   const debugEl: DebugElement = fixture.debugElement.query(By.directive(Bind));
   return debugEl.nativeElement as HTMLElement;
@@ -415,10 +423,7 @@ describe('Bind', (): void => {
 
       const directive: Bind = requireDirective(fixture);
       const applyBindingsSpy: jest.SpiedFunction<(bindings: Record<string, unknown>) => void> =
-        jest.spyOn(
-          directive as unknown as { applyBindings(bindings: Record<string, unknown>): void },
-          'applyBindings'
-        );
+        jest.spyOn(directive as unknown as BindApplyBindingsInternal, 'applyBindings');
 
       fixture.componentInstance.bindings.set({ title: 'same value' });
       fixture.detectChanges();
@@ -482,11 +487,9 @@ describe('Bind', (): void => {
         TestBed.createComponent(BindDefaultHostComponent);
       fixture.detectChanges();
 
-      const directiveWithInternals: { getPropertyValue(key: string): unknown } = requireDirective(
+      const directiveWithInternals: BindGetPropertyValueInternal = requireDirective(
         fixture
-      ) as unknown as {
-        getPropertyValue(key: string): unknown;
-      };
+      ) as unknown as BindGetPropertyValueInternal;
 
       expect(directiveWithInternals.getPropertyValue('doesNotExist')).toBeUndefined();
     });
