@@ -63,7 +63,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `IconButton` -> ✅ complete + hardened (6-phase, score 8.8/10, 26 tests — 5 unit + 21 a11y)
 
 ---
 
@@ -78,21 +77,26 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-15 [IconButton component — 6-phase hardening COMPLETE]
+Date: 2026-05-15 [FloatLabel component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/icon-button/icon-button.scss
-  - projects/ui-lib-custom/src/lib/icon-button/icon-button.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/icon-button/README.md
+  - projects/ui-lib-custom/src/lib/float-label/float-label.ts
+  - projects/ui-lib-custom/src/lib/float-label/float-label.scss
+  - projects/ui-lib-custom/src/lib/float-label/float-label.spec.ts
+  - projects/ui-lib-custom/src/lib/float-label/float-label.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/float-label/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: IconButton now has a corrected `prefers-reduced-motion` SCSS rule with matching specificity to override the loading spinner animation (the existing rule had lower specificity than the loading animation rule and would not have stopped it). a11y spec extended to 21 tests — added SmHostComponent and LgHostComponent and three size-based button-element tests. README updated with compile-time required ariaLabel note and English-only loading label i18n limitation. IconButton formally scored 8.8 in COMPONENT_SCORES.md.
+State: FloatLabel now auto-wires projected labels to native controls (including nested inputs inside wrapper components), injects the blank placeholder needed for CSS-only `:placeholder-shown` float detection when omitted, preserves CSS-only float state via `:focus-within`, mirrors projected label IDs to host-level controls like Select through `aria-labelledby`, and documents the legacy `uilib-` selector plus FormField/InputGroup composition guidance. Added focused unit + accessibility coverage for generated label/control wiring, placeholder injection, pointer-event safety, and stylesheet token contracts, and formally recorded FloatLabel as scored/complete.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-button/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/icon-button/" --no-coverage (PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
-Next step: Continue with next component in the hardening queue.
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/float-label/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/float-label/" --no-coverage (42/42 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation tools were available. Recent GitHub Actions runs on the working branch were checked via MCP and were `action_required` rather than failed-job runs. Playwright MCP browser was locked, so Chromium was installed with `npx playwright install chromium` and the float-label demo screenshot was captured via Node Playwright at `/tmp/float-label-hardening.png`.
+Next step: Continue with the next unscored new layout/utility component in `docs/prompts/needs-hardening/` using the same score-first hardening flow.
+
+---
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:

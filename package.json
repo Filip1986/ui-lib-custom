@@ -130,7 +130,7 @@
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-dynamic-dialog.mjs", "maxSize": "8 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-editor.mjs", "maxSize": "10 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-fieldset.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-float-label.mjs", "maxSize": "3 kB" },
+    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-float-label.mjs", "maxSize": "4 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-fluid.mjs", "maxSize": "3 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-focus-trap.mjs", "maxSize": "2 kB" },
     { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-galleria.mjs", "maxSize": "12 kB" },

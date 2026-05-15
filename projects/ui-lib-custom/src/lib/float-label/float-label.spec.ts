@@ -105,6 +105,19 @@ class InputHostComponent {
 
 @Component({
   standalone: true,
+  imports: [FloatLabelComponent],
+  template: `
+    <uilib-float-label>
+      <input type="text" />
+      <label>Generated association</label>
+    </uilib-float-label>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class GeneratedAssociationHostComponent {}
+
+@Component({
+  standalone: true,
   imports: [FloatLabelComponent, ReactiveFormsModule],
   template: `
     <form [formGroup]="form">
@@ -250,6 +263,18 @@ describe('FloatLabelComponent projection and structure', (): void => {
     expect((labelDebugElement.nativeElement as HTMLElement).textContent.trim()).toBe('Username');
   });
 
+  it('auto-associates a projected label with the generated input id', (): void => {
+    const labelElement: HTMLLabelElement = fixture.debugElement.query(
+      By.css('uilib-float-label > label')
+    ).nativeElement as HTMLLabelElement;
+    const inputElement: HTMLInputElement = fixture.debugElement.query(
+      By.css('uilib-float-label > input')
+    ).nativeElement as HTMLInputElement;
+
+    expect(inputElement.id).toBeTruthy();
+    expect(labelElement.htmlFor).toBe(inputElement.id);
+  });
+
   it('does not add wrapper nodes around projected content', (): void => {
     const floatLabel: HTMLElement = getFloatLabelElement(fixture);
     const childTagNames: string[] = Array.from(floatLabel.children).map(
@@ -273,6 +298,24 @@ describe('FloatLabelComponent integration contracts', (): void => {
 
     expect(fixture.debugElement.query(By.css('uilib-float-label > textarea'))).toBeTruthy();
     expect(fixture.debugElement.query(By.css('uilib-float-label > label'))).toBeTruthy();
+  });
+
+  it('injects the blank placeholder required for CSS-only floating labels', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [GeneratedAssociationHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+
+    const fixture: ComponentFixture<GeneratedAssociationHostComponent> = TestBed.createComponent(
+      GeneratedAssociationHostComponent
+    );
+    fixture.detectChanges();
+
+    const inputElement: HTMLInputElement = fixture.debugElement.query(
+      By.css('uilib-float-label input')
+    ).nativeElement as HTMLInputElement;
+
+    expect(inputElement.getAttribute('placeholder')).toBe(' ');
   });
 
   it('reflects Select wrapper state classes for filled and focus/open states', async (): Promise<void> => {
@@ -302,6 +345,27 @@ describe('FloatLabelComponent integration contracts', (): void => {
     expect(selectElement.classList.contains('uilib-inputwrapper-focus')).toBeTruthy();
   });
 
+  it('mirrors the projected label id to ui-lib-select via aria-labelledby', async (): Promise<void> => {
+    await TestBed.configureTestingModule({
+      imports: [SelectHostComponent],
+      providers: [provideZonelessChangeDetection()],
+    }).compileComponents();
+
+    const fixture: ComponentFixture<SelectHostComponent> =
+      TestBed.createComponent(SelectHostComponent);
+    fixture.detectChanges();
+
+    const selectElement: HTMLElement = fixture.debugElement.query(
+      By.css('uilib-float-label > ui-lib-select')
+    ).nativeElement as HTMLElement;
+    const labelElement: HTMLLabelElement = fixture.debugElement.query(
+      By.css('uilib-float-label > label')
+    ).nativeElement as HTMLLabelElement;
+
+    expect(labelElement.id).toBeTruthy();
+    expect(selectElement.getAttribute('aria-labelledby')).toContain(labelElement.id);
+  });
+
   it('reflects Input filled class and focus contract for nested input element', async (): Promise<void> => {
     await TestBed.configureTestingModule({
       imports: [InputHostComponent],
@@ -328,7 +392,11 @@ describe('FloatLabelComponent integration contracts', (): void => {
     fixture.detectChanges();
 
     const floatLabel: HTMLElement = getFloatLabelElement(fixture);
+    const labelElement: HTMLLabelElement = fixture.debugElement.query(
+      By.css('uilib-float-label > label')
+    ).nativeElement as HTMLLabelElement;
     expect(floatLabel.contains(nativeInput)).toBeTruthy();
+    expect(labelElement.htmlFor).toBe(nativeInput.id);
   });
 
   it('keeps invalid class combination in DOM for invalid-state selector coverage', async (): Promise<void> => {
@@ -421,5 +489,8 @@ describe('FloatLabelComponent stylesheet contract', (): void => {
     expect(stylesheetSource).toContain('.uilib-float-label--on {');
     expect(stylesheetSource).toContain(':has(.ng-invalid.ng-dirty) label');
     expect(stylesheetSource).toContain(':has(.uilib-inputwrapper-focus) label');
+    expect(stylesheetSource).toContain('&:focus-within label');
+    expect(stylesheetSource).toContain('--uilib-transition-base');
+    expect(stylesheetSource).toContain('--uilib-input-radius');
   });
 });
