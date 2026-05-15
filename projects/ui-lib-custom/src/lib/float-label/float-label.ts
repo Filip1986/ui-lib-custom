@@ -99,6 +99,8 @@ export class FloatLabelComponent implements AfterViewChecked {
     projectedControl: HTMLElement,
     nativeControl: FloatLabelNativeControl | null
   ): boolean {
+    const labelId: string = projectedLabel.id.trim();
+
     if (
       projectedLabel !== this.lastProjectedLabel ||
       projectedControl !== this.lastProjectedControl ||
@@ -107,18 +109,20 @@ export class FloatLabelComponent implements AfterViewChecked {
       return true;
     }
 
-    if (projectedLabel.id.trim().length === 0) {
+    if (labelId.length === 0) {
       return true;
     }
 
     if (nativeControl !== null) {
-      if (nativeControl.id.trim().length === 0 || projectedLabel.htmlFor !== nativeControl.id) {
+      const controlId: string = nativeControl.id.trim();
+
+      if (controlId.length === 0 || projectedLabel.htmlFor !== controlId) {
         return true;
       }
 
       if (
         !(nativeControl instanceof HTMLSelectElement) &&
-        (nativeControl.getAttribute('placeholder') ?? '').trim().length === 0
+        nativeControl.placeholder.trim().length === 0
       ) {
         return true;
       }
@@ -130,7 +134,7 @@ export class FloatLabelComponent implements AfterViewChecked {
       .split(/\s+/)
       .filter((token: string): boolean => token.length > 0);
 
-    return !labelledBy.includes(projectedLabel.id);
+    return !labelledBy.includes(labelId);
   }
 
   private resolveProjectedLabel(): HTMLLabelElement | null {
@@ -166,7 +170,7 @@ export class FloatLabelComponent implements AfterViewChecked {
   }
 
   private ensureElementId(element: HTMLElement, generatedId: string): string {
-    const existingId: string = element.getAttribute('id')?.trim() ?? '';
+    const existingId: string = element.id.trim();
 
     if (existingId.length > 0) {
       return existingId;
