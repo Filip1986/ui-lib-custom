@@ -14,7 +14,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import type { InputSignal, ModelSignal, OnDestroy, OutputEmitterRef, Signal } from '@angular/core';
-import { FocusTrap } from 'ui-lib-custom/core';
+import { claimOverlayZIndex, FocusTrap, releaseOverlayZIndex } from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type { DrawerPosition, DrawerVariant } from './drawer.types';
 export type { DrawerPosition, DrawerVariant } from './drawer.types';
@@ -142,6 +142,7 @@ export class Drawer implements OnDestroy {
           this.document.body.classList.add('ui-lib-drawer-scroll-lock');
         }
         if (previousVisible === false) {
+          claimOverlayZIndex(this.elementRef.nativeElement);
           this.shown.emit();
           // Use afterNextRender with injector so it is safe when the effect re-runs
           // outside the constructor (avoids NG0203 injection context errors).
@@ -164,6 +165,7 @@ export class Drawer implements OnDestroy {
       } else {
         this.document.body.classList.remove('ui-lib-drawer-scroll-lock');
         if (previousVisible === true) {
+          releaseOverlayZIndex(this.elementRef.nativeElement);
           // deactivate() restores focus to the element that was focused when activate() was called.
           this.focusTrap?.deactivate();
           this.hidden.emit();

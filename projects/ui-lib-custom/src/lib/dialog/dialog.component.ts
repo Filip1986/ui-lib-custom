@@ -22,7 +22,12 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
-import { FocusTrap, KEYBOARD_KEYS } from 'ui-lib-custom/core';
+import {
+  claimOverlayZIndex,
+  FocusTrap,
+  KEYBOARD_KEYS,
+  releaseOverlayZIndex,
+} from 'ui-lib-custom/core';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { DIALOG_DEFAULTS, DIALOG_POSITION_CLASS_MAP } from './dialog.constants';
 import type { DialogPosition, DialogVariant } from './dialog.types';
@@ -356,6 +361,7 @@ export class DialogComponent implements OnDestroy {
       this.lastVisible = isVisible;
 
       if (isVisible) {
+        claimOverlayZIndex(this.hostElement.nativeElement);
         // Capture the currently-focused element for non-modal focus restoration on close.
         if (this.isBrowser && !this.modal()) {
           const active: Element | null = this.document.activeElement;
@@ -371,6 +377,7 @@ export class DialogComponent implements OnDestroy {
           }
         });
       } else {
+        releaseOverlayZIndex(this.hostElement.nativeElement);
         this.releaseScrollLock();
         this.cleanupBreakpointListeners();
         this.deactivateFocusTrap();
