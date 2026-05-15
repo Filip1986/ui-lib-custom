@@ -89,10 +89,11 @@ State: AutoFocus now documents and verifies one-time mount-only focus behavior, 
 Verification:
   node_modules/.bin/eslint projects/ui-lib-custom/src/lib/auto-focus/ --max-warnings 0 (PASS)
   node_modules/.bin/jest --testPathPatterns="src/lib/auto-focus/" --no-coverage (24/24 PASS)
-  node_modules/.bin/ng build ui-lib-custom (baseline PASS; final re-run pending)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (baseline 97/97 PASS; final re-run pending)
-Terminal notes: Fresh clone required `npm install` before validation. GitHub Actions branch run `25905026417` was checked via MCP; it reported `action_required` before jobs/logs were available, and `get_workflow_run_logs_url` returned 404 at inspection time.
-Next step: Re-run final validation, capture the AutoFocus demo screenshot if needed, and close out the session.
+  npm run typecheck (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install` before validation. GitHub Actions branch run `25905026417` was checked via MCP; it reported `action_required` before jobs/logs were available, and `get_workflow_run_logs_url` returned 404 at inspection time. Demo screenshot captured from `http://127.0.0.1:4200/auto-focus` at `/tmp/auto-focus-hardening.png` after installing Chromium with `npx playwright install chromium`.
+Next step: Continue the next unscored utility hardening prompt (for example Bind or Icon).
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:

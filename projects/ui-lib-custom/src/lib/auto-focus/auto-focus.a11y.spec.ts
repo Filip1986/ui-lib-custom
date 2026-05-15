@@ -292,9 +292,9 @@ describe('AutoFocus (a11y)', (): void => {
   });
 
   it('does not re-focus when a descendant inside the target already has focus', async (): Promise<void> => {
-    let scheduledFrameCallback: FrameRequestCallback | null = null;
+    const scheduledFrame: { current: FrameRequestCallback | null } = { current: null };
     requestAnimationFrameSpy.mockImplementation((callback: FrameRequestCallback): number => {
-      scheduledFrameCallback = callback;
+      scheduledFrame.current = callback;
       return 1;
     });
 
@@ -314,16 +314,18 @@ describe('AutoFocus (a11y)', (): void => {
     const hostFocusSpy: jest.SpyInstance = jest.spyOn(host, 'focus');
 
     child.focus();
-    scheduledFrameCallback?.(0);
+    if (scheduledFrame.current) {
+      scheduledFrame.current(0);
+    }
 
     expect(document.activeElement).toBe(child);
     expect(hostFocusSpy).not.toHaveBeenCalled();
   });
 
   it('does not re-focus when the target is already active before the frame runs', async (): Promise<void> => {
-    let scheduledFrameCallback: FrameRequestCallback | null = null;
+    const scheduledFrame: { current: FrameRequestCallback | null } = { current: null };
     requestAnimationFrameSpy.mockImplementation((callback: FrameRequestCallback): number => {
-      scheduledFrameCallback = callback;
+      scheduledFrame.current = callback;
       return 1;
     });
 
@@ -341,7 +343,9 @@ describe('AutoFocus (a11y)', (): void => {
     const target: HTMLElement = requireElement('#self-focused-target');
     target.focus();
     const focusSpy: jest.SpyInstance = jest.spyOn(target, 'focus');
-    scheduledFrameCallback?.(0);
+    if (scheduledFrame.current) {
+      scheduledFrame.current(0);
+    }
 
     expect(document.activeElement).toBe(target);
     expect(focusSpy).not.toHaveBeenCalled();
