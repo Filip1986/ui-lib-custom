@@ -56,6 +56,11 @@ export class SidebarComponent {
           route: '/home',
         },
         {
+          label: 'Vision',
+          icon: 'pi pi-star',
+          route: '/vision',
+        },
+        {
           label: 'Project Starter',
           icon: 'pi pi-circle',
           route: '/project-starter',

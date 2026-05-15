@@ -825,6 +825,14 @@ export const routes: Routes = [
     title: 'Upload - UI Components Library',
   },
   {
+    path: 'vision',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/vision/vision.component').then(
+        (m: { VisionComponent: Type<unknown> }): Type<unknown> => m.VisionComponent
+      ),
+    title: 'Vision - UI Components Library',
+  },
+  {
     path: 'roadmap',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/roadmap/roadmap.component').then(
