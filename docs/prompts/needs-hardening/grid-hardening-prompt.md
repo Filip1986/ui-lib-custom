@@ -2,8 +2,9 @@
 
 **Component:** `ui-lib-custom/layout` · `<ui-lib-grid>`
 **Queue position:** Layout (new — not in original 76-item queue)
-**Generated:** 2026-05-13
-**Key a11y concern:** CSS Grid visual reordering MUST NOT misrepresent reading order; `order` property banned without explicit a11y note; responsive column collapse verified with screen reader.
+**Updated:** 2026-05-15
+**Key a11y concern:** CSS Grid visual reordering MUST NOT misrepresent reading order; `order`
+property banned without explicit a11y note; responsive column collapse verified with screen reader.
 
 ---
 
@@ -11,16 +12,24 @@
 
 1. `AI_AGENT_CONTEXT.md`, `LIBRARY_CONVENTIONS.md`, `docs/VISION.md`, `docs/COMPONENT_SCORES.md`
 2. `projects/ui-lib-custom/src/lib/layout/README.md`
-3. Full source: `layout/grid.ts`, `layout/grid.html`, `layout/grid.scss`, `layout/grid.spec.ts`, `layout/grid.types.ts`
+3. Full source: `layout/grid.ts`, `layout/grid.spec.ts`, `layout/grid.a11y.spec.ts`,
+   `layout/grid.types.ts`, `layout/grid.scss`
+4. Related siblings: `layout/stack.ts`, `layout/container.ts`
 
 ---
 
 ## Step 2 — What is already present (do NOT regress these)
 
-- `columns` input (number or template string) — VERIFY
-- `gap` / `rowGap` / `columnGap` inputs using spacing tokens — VERIFY
-- Responsive breakpoint inputs — VERIFY
-- Column span on child elements — VERIFY
+- `columns: InputSignal<GridColumns | string>` — accepts numeric token (`2`, `4`, `6`, `12`) or
+  custom CSS template string
+- `spacing: InputSignal<StackToken | SpacingToken | number | null>` — semantic gap (t-shirt sizes)
+- `gap: InputSignal<SpacingToken>` — legacy numeric spacing token (backward compat)
+- `rowGap` / `columnGap` override inputs
+- `minColumnWidth` input — enables `repeat(auto-fit, minmax(X, 1fr))` responsive grids
+- `align` / `justify` inputs for item alignment
+- Host bound CSS custom properties: `--uilib-grid-columns`, `--uilib-grid-gap`, etc.
+- No separate template file — inline `<ng-content />` template (correct for layout primitive)
+- `grid.a11y.spec.ts` likely already has basic coverage — read it before adding tests
 
 ---
 
@@ -29,40 +38,64 @@
 ### Phase 3 first — Accessibility Audit
 
 #### Issue 1 — Visual order vs. DOM order (CRITICAL)
-CSS Grid `order` property changes visual order without changing DOM order.
-**Policy:** Do NOT expose an `order` input. Document explicitly that consumers must keep DOM order
-matching reading order. Add this to the README as an a11y constraint.
+CSS Grid `order` property changes visual position without changing DOM/reading order.
+**Hard policy:** The `Grid` component does NOT expose an `order` input. This must be documented in
+the README as an explicit accessibility constraint.
 
-#### Issue 2 — Responsive grid collapse (MODERATE)
-When grid collapses from N columns to 1 on small viewports, verify screen reader
-reading order is still logical. Test with different `columns` values.
+Document this in README:
+> ⚠️ **A11y:** Never use CSS `order` on Grid children without ensuring DOM order still matches the
+> intended reading order. CSS Grid's `order` property is visual-only; screen readers follow DOM order.
 
-#### Issue 3 — Grid as landmark (LOW)
-Grid is a layout primitive. Default tag must be `<div>`. Verify no semantic landmark is added.
+#### Issue 2 — `display:grid` with no semantic role (VERIFY — CRITICAL)
+Grid renders as `<div style="display:grid">`. Verify:
+- No `role="grid"` emitted (that would declare an ARIA data grid widget — wrong for layout grids)
+- No `role="list"` emitted unless children genuinely form a list
 
-#### Deliverable — `grid.a11y.spec.ts` (aim 10–15 tests)
-- No spurious landmark
-- columns and gap CSS custom properties applied
-- axe passes: default
+#### Issue 3 — `minColumnWidth` responsive collapse (MODERATE)
+When using `repeat(auto-fit, …)` the grid collapses to 1 column on narrow viewports. Verify that
+reading order is logical at any column count. Add README note.
+
+#### Issue 4 — No overflow clip on grid children (CRITICAL)
+Grid must not apply `overflow: hidden` to children. Verify no style rules clip projected content.
+
+#### Deliverable — `grid.a11y.spec.ts` (aim 12–18 tests)
+- Host has `display: grid` applied
+- No `role` attribute on host (layout grid, not ARIA grid widget)
+- `--uilib-grid-columns` CSS var correctly reflects `columns` input (numeric and string)
+- `--uilib-grid-gap` correctly reflects `spacing` and `gap` inputs
+- `minColumnWidth` produces `repeat(auto-fit, minmax(X, 1fr))`
+- No `overflow: hidden` (or any overflow clipping)
+- axe passes: default (12-col), 2-col, auto-fit with minColumnWidth
 
 ---
 
 ### Phase 1 — Architecture Audit
-- `columns`, `gap`, `rowGap`, `columnGap` — typed and validated
-- CSS custom properties: `--uilib-grid-columns`, `--uilib-grid-gap`
+- `GRID_COLUMNS` token map — verify `GridColumns` union type covers all used values
+- `spacing` input takes priority over `gap` — verify precedence in `_gapValue` computed
+- `minColumnWidth` + `columns` interaction — `minColumnWidth` wins (auto-fit overrides fixed cols)
+- All gap resolution through `spaceVar` or `stackVar` helper — never raw px
 
 ### Phase 2 — DX Audit
-README: columns API, gap token reference, WCAG reading-order constraint, responsive usage.
+README must explain:
+- `spacing` (t-shirt sizes) vs `gap` (numeric token) — prefer `spacing` for new code
+- `minColumnWidth` for auto-responsive grids (the common use case)
+- WCAG reading order constraint (no `order` CSS)
+- All inputs with types and defaults
 
 ### Phase 4 — Performance Audit
-- Host binding only — CSS custom properties applied directly on `:host`
+- All computed values (`_gridTemplateColumns`, `_gapValue`, etc.) are `computed<string>()` — verify
+  no function signatures lack explicit return types
+- Host bindings only — zero DOM queries at runtime
 
 ### Phase 5 — Composability Audit
-- Grid columns / span on children verified
-- Works inside Container
+- Works inside `<ui-lib-container>`
+- Works inside `<ui-lib-stack>` as a row item
+- Child `span` support: `grid-column: span 2` on child elements (document in README)
 
 ### Phase 6 — Polish Audit
-- [ ] Gap values use spacing scale tokens, not raw px
+- [ ] Default 12-column grid matches the design system baseline
+- [ ] Gap values exposed as `--uilib-grid-gap` allow consumer override via CSS
+- [ ] Responsive breakpoint guidance in README (use `minColumnWidth` pattern)
 
 ---
 
@@ -75,4 +108,5 @@ node_modules/.bin/ng build ui-lib-custom
 ```
 
 ## Step 5 — Scoring and Step 6 — Handoff
-After all phases, add Grid row to `docs/COMPONENT_SCORES.md` and append handoff to `AI_AGENT_CONTEXT.md`.
+After all phases, add Grid row to `docs/COMPONENT_SCORES.md` and append handoff to
+`AI_AGENT_CONTEXT.md`.
