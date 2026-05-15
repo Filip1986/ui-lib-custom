@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `ToggleSwitch` -> ✅ complete + hardened (6-phase, score 8.8/10, 68 tests — 42 unit + 26 a11y)
 
 ---
 
@@ -76,6 +77,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-15 [ToggleSwitch — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.ts
+  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.html
+  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.scss
+  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.a11y.spec.ts (NEW, 26 tests)
+  - projects/ui-lib-custom/src/lib/toggle-switch/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+State: ToggleSwitch now has a DEV-mode `console.warn` when no accessible name is found (no `ariaLabel`, no `label`, no projected `<label for>`), `[attr.aria-readonly]` binding for readonly state, forced-colors track border, prefers-reduced-motion transitions disabled, focus ring changed from `:focus-within` to `:has(:focus-visible)` for keyboard-only focus ring, and 26 new a11y tests covering all label strategies, readonly/disabled ARIA, Space key, live announcer, CVA integration, and axe automated checks. README expanded with role=switch rationale, three label strategies, CVA examples, readonly vs disabled semantics, and i18n limitation note.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toggle-switch/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/toggle-switch/" --no-coverage (68/68 PASS — 42 unit + 26 a11y)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Next step: Continue with the next unscored component in the hardening queue (FloatLabel, Icon, IconButton, AutoFocus, or Bind per COMPONENT_SCORES.md).
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:
