@@ -108,7 +108,8 @@ ui-lib-toggle-switch.ui-lib-toggle-switch--checked:not(.ui-lib-toggle-switch--di
 }
 
 // ── Focus ring ─────────────────────────────────────────────────────────
-ui-lib-toggle-switch:focus-within .ui-lib-toggle-switch__track {
+ui-lib-toggle-switch:has(.ui-lib-toggle-switch__native-input:focus-visible)
+  .ui-lib-toggle-switch__track {
   box-shadow: var(--uilib-toggle-switch-focus-ring);
 }
 
@@ -210,6 +211,24 @@ ui-lib-toggle-switch.ng-touched .ui-lib-toggle-switch__track {
 ui-lib-toggle-switch.ng-invalid.ng-touched .ui-lib-toggle-switch__track,
 ui-lib-toggle-switch.ng-invalid.ng-dirty .ui-lib-toggle-switch__track {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--uilib-color-danger-600, #dc2626) 30%, transparent);
+}
+
+// ── Forced colors (Windows High Contrast) ─────────────────────────────
+@media (forced-colors: active) {
+  ui-lib-toggle-switch .ui-lib-toggle-switch__track {
+    border: 2px solid ButtonText;
+  }
+}
+
+// ── Reduced motion ─────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  ui-lib-toggle-switch .ui-lib-toggle-switch__thumb {
+    transition: none;
+  }
+
+  ui-lib-toggle-switch .ui-lib-toggle-switch__track {
+    transition: none;
+  }
 }
 
 // ── Dark mode ──────────────────────────────────────────────────────────

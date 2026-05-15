@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   inject,
   input,
+  isDevMode,
   ViewEncapsulation,
   type InputSignal,
   type Signal,
@@ -73,6 +75,17 @@ const ICON_NAME_ALIASES: Record<string, SemanticIcon> = {
 })
 export class Icon {
   private readonly iconService: IconService = inject(IconService);
+
+  constructor() {
+    effect((): void => {
+      if (isDevMode() && this.clickable() && !this.ariaLabel()) {
+        console.warn(
+          '[ui-lib-icon] clickable=true should only be used inside a button or link. ' +
+            'The icon itself is not interactive. Provide an ariaLabel if the icon is truly standalone informative.'
+        );
+      }
+    });
+  }
 
   public readonly name: InputSignal<string | SemanticIcon> = input.required<
     string | SemanticIcon

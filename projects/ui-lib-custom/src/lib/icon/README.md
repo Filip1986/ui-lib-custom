@@ -17,6 +17,7 @@
 | `library` | `IconLibrary \| null` | `null` | Override the active icon library for this instance |
 | `variant` | `'material' \| 'bootstrap' \| 'minimal' \| null` | `null` | Helps `IconService` choose variant-appropriate icons when resolving semantic names |
 | `semantic` | `boolean` | `false` | Force semantic resolution even if the name does not match a known `SemanticIcon` |
+| `clickable` | `boolean` | `false` | Styling hint: applies hover/cursor styling so the icon looks interactive. **Does not make the icon interactive** — the parent element (button or link) must provide all interaction semantics. See accessibility note below. |
 
 ## Outputs
 
@@ -40,6 +41,7 @@ _none_
 - Decorative is the default: icons render with `aria-hidden="true"` and `tabindex="-1"`.
 - Standalone informative icons must pass `ariaLabel`; the icon name is never used as the accessible name.
 - For clickable actions, use `ui-lib-button` or `ui-lib-icon-button` so button semantics come from the control, not the icon.
+- `clickable=true` is a **styling-only** hint. The icon remains non-interactive (`tabindex="-1"` is always set). Always place the icon inside a `<button>` or `<a>` element when interaction is needed. In development mode, a `console.warn` is emitted when `clickable=true` is combined with no `ariaLabel`, as this pattern likely indicates the icon is being used outside an interactive container.
 
 ## Size tokens
 
