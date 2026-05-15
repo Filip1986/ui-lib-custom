@@ -48,10 +48,30 @@ class GridCustomVarsHostComponent {}
 })
 class GridResponsiveHostComponent {}
 
+@Component({
+  standalone: true,
+  imports: [Grid],
+  template: `
+    <ui-lib-grid [columns]="2" spacing="md">
+      <div>Item A</div>
+      <div>Item B</div>
+      <div>Item C</div>
+      <div>Item D</div>
+    </ui-lib-grid>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class GridTwoColumnHostComponent {}
+
 describe('Grid (a11y)', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
-      imports: [GridA11yHostComponent, GridCustomVarsHostComponent, GridResponsiveHostComponent],
+      imports: [
+        GridA11yHostComponent,
+        GridCustomVarsHostComponent,
+        GridResponsiveHostComponent,
+        GridTwoColumnHostComponent,
+      ],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
@@ -171,5 +191,47 @@ describe('Grid (a11y)', (): void => {
       unknown
     >;
     expect(componentInstance['order']).toBeUndefined();
+  });
+
+  it('has display:grid applied to host', (): void => {
+    const fixture: ComponentFixture<GridA11yHostComponent> = createFixture(GridA11yHostComponent);
+    const gridElement: HTMLElement = getGridElement(fixture);
+    expect(getComputedStyle(gridElement).display).toBe('grid');
+  });
+
+  it('does not apply overflow:hidden or overflow:clip to grid host', (): void => {
+    const fixture: ComponentFixture<GridA11yHostComponent> = createFixture(GridA11yHostComponent);
+    const gridElement: HTMLElement = getGridElement(fixture);
+    const computed: CSSStyleDeclaration = getComputedStyle(gridElement);
+    expect(computed.overflow).not.toBe('hidden');
+    expect(computed.overflow).not.toBe('clip');
+    expect(computed.overflowX).not.toBe('hidden');
+    expect(computed.overflowX).not.toBe('clip');
+    expect(computed.overflowY).not.toBe('hidden');
+    expect(computed.overflowY).not.toBe('clip');
+  });
+
+  it('spacing input produces a stack token CSS var for grid gap', (): void => {
+    const fixture: ComponentFixture<GridCustomVarsHostComponent> = createFixture(
+      GridCustomVarsHostComponent
+    );
+    const gridElement: HTMLElement = getGridElement(fixture);
+    expect(gridElement.style.getPropertyValue('--uilib-grid-gap')).toContain(
+      'var(--uilib-stack-md'
+    );
+  });
+
+  it('passes axe with 2-column layout', async (): Promise<void> => {
+    const fixture: ComponentFixture<GridTwoColumnHostComponent> = createFixture(
+      GridTwoColumnHostComponent
+    );
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+
+  it('passes axe with responsive auto-fit layout', async (): Promise<void> => {
+    const fixture: ComponentFixture<GridResponsiveHostComponent> = createFixture(
+      GridResponsiveHostComponent
+    );
+    await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
   });
 });
