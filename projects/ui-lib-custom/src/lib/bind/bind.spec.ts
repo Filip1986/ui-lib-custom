@@ -5,6 +5,8 @@ import { By } from '@angular/platform-browser';
 import type { DebugElement } from '@angular/core';
 import { provideZonelessChangeDetection, signal } from '@angular/core';
 import type { WritableSignal } from '@angular/core';
+import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
+import { StyleClass } from '../style-class/style-class';
 import { Bind } from './bind';
 // ---------------------------------------------------------------------------
 // Test host components
@@ -44,14 +46,33 @@ class BindDefaultHostComponent {}
   selector: 'app-bind-aria-host',
   standalone: true,
   imports: [Bind],
-  template: `<button [attr.aria-label]="ariaLabel()" [uiLibBind]="bindings()"></button>`,
+  template: `<button
+    type="button"
+    [attr.aria-label]="ariaLabel()"
+    [uiLibBind]="bindings()"
+  ></button>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class BindAriaHostComponent {
-  public readonly ariaLabel: WritableSignal<string> = signal<string>('Accessible label');
+  public readonly ariaLabel: WritableSignal<string> = signal<string>('Angular label');
   public readonly bindings: WritableSignal<Record<string, unknown>> = signal<
     Record<string, unknown>
   >({});
+}
+
+@Component({
+  selector: 'app-bind-a11y-host',
+  standalone: true,
+  imports: [Bind],
+  template: `<button type="button" [uiLibBind]="bindings()">Open panel</button>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class BindA11yHostComponent {
+  public readonly bindings: WritableSignal<Record<string, unknown>> = signal<
+    Record<string, unknown>
+  >({
+    title: 'Open the details panel',
+  });
 }
 
 @Component({
@@ -66,6 +87,32 @@ class BindExternalOverrideHostComponent {
   public readonly bindings: WritableSignal<Record<string, unknown>> = signal<
     Record<string, unknown>
   >({});
+}
+
+@Component({
+  selector: 'app-bind-style-class-host',
+  standalone: true,
+  imports: [Bind, StyleClass],
+  template: `
+    <button
+      type="button"
+      [uiLibBind]="bindings()"
+      [uiLibStyleClass]="'@next'"
+      [toggleClass]="'is-open'"
+    >
+      Toggle panel
+    </button>
+    <div id="bind-style-class-target">Panel</div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class BindStyleClassHostComponent {
+  public readonly bindings: WritableSignal<Record<string, unknown>> = signal<
+    Record<string, unknown>
+  >({
+    title: 'Toggle the next panel',
+    ariaLabel: 'Toggle the next panel',
+  });
 }
 
 @Component({
@@ -111,14 +158,32 @@ class BindStructuralHostComponent {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+type BindApplyBindingsInternal = {
+  applyBindings(bindings: Record<string, unknown>): void;
+};
+
+type BindGetPropertyValueInternal = {
+  getPropertyValue(key: string): unknown;
+};
+
 function requireElement(fixture: ComponentFixture<unknown>): HTMLElement {
   const debugEl: DebugElement = fixture.debugElement.query(By.directive(Bind));
   return debugEl.nativeElement as HTMLElement;
+}
+
+function requireDirective(fixture: ComponentFixture<unknown>): Bind {
+  const debugEl: DebugElement = fixture.debugElement.query(By.directive(Bind));
+  return debugEl.injector.get(Bind);
 }
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
 describe('Bind', (): void => {
+  afterEach((): void => {
+    document.body.innerHTML = '';
+    TestBed.resetTestingModule();
+  });
+
   describe('creation', (): void => {
     it('should create the directive successfully', (): void => {
       TestBed.configureTestingModule({
@@ -191,6 +256,32 @@ describe('Bind', (): void => {
       const element: HTMLElement = requireElement(fixture);
       expect(element.tabIndex).toBe(5);
     });
+    it('should normalize kebab-case aria keys to reflected DOM properties', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindHostComponent> =
+        TestBed.createComponent(BindHostComponent);
+      fixture.componentInstance.bindings = { 'aria-label': 'Bound label' };
+      fixture.detectChanges();
+      const element: HTMLElement = requireElement(fixture);
+      expect(element.ariaLabel).toBe('Bound label');
+      expect(element.getAttribute('aria-label')).toBe('Bound label');
+    });
+    it('should set reflected ariaHidden state when using DOM property names', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindHostComponent> =
+        TestBed.createComponent(BindHostComponent);
+      fixture.componentInstance.bindings = { ariaHidden: 'true' };
+      fixture.detectChanges();
+      const element: HTMLElement = requireElement(fixture);
+      expect(element.ariaHidden).toBe('true');
+      expect(element.getAttribute('aria-hidden')).toBe('true');
+    });
     it('should set multiple properties in a single binding object', (): void => {
       TestBed.configureTestingModule({
         imports: [BindHostComponent],
@@ -243,6 +334,21 @@ describe('Bind', (): void => {
       // simply verify the binding was cleared rather than checking falsy.
       expect(element.title).not.toBe('Was Here');
     });
+    it('should remove reflected aria attributes when the directive still owns them', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindSignalHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindSignalHostComponent> =
+        TestBed.createComponent(BindSignalHostComponent);
+      fixture.componentInstance.bindings.set({ ariaHidden: 'true' });
+      fixture.detectChanges();
+      fixture.componentInstance.bindings.set({});
+      fixture.detectChanges();
+      const element: HTMLElement = requireElement(fixture);
+      expect(element.ariaHidden).toBeNull();
+      expect(element.getAttribute('aria-hidden')).toBeNull();
+    });
     it('should apply new properties when keys are added', (): void => {
       TestBed.configureTestingModule({
         imports: [BindSignalHostComponent],
@@ -258,7 +364,7 @@ describe('Bind', (): void => {
       expect(element.id).toBe('base');
       expect(element.title).toBe('Now Added');
     });
-    it('should not override aria-* attributes managed by native Angular bindings', (): void => {
+    it('should allow Angular attribute bindings to take over without unexpected clearing', (): void => {
       TestBed.configureTestingModule({
         imports: [BindAriaHostComponent],
         providers: [provideZonelessChangeDetection()],
@@ -266,15 +372,24 @@ describe('Bind', (): void => {
       const fixture: ComponentFixture<BindAriaHostComponent> =
         TestBed.createComponent(BindAriaHostComponent);
 
-      fixture.componentInstance.bindings.set({ title: 'bind-title' });
+      fixture.componentInstance.bindings.set({ 'aria-label': 'Bind label' });
       fixture.detectChanges();
 
       const element: HTMLElement = requireElement(fixture);
-      expect(element.getAttribute('aria-label')).toBe('Accessible label');
+      expect(element.ariaLabel).toBe('Bind label');
+      expect(element.getAttribute('aria-label')).toBe('Bind label');
+
+      fixture.componentInstance.ariaLabel.set('Angular override');
+      fixture.detectChanges();
+
+      expect(element.ariaLabel).toBe('Angular override');
+      expect(element.getAttribute('aria-label')).toBe('Angular override');
 
       fixture.componentInstance.bindings.set({});
       fixture.detectChanges();
-      expect(element.getAttribute('aria-label')).toBe('Accessible label');
+
+      expect(element.ariaLabel).toBe('Angular override');
+      expect(element.getAttribute('aria-label')).toBe('Angular override');
     });
     it('should not clear external host bindings when a key is removed from uiLibBind', (): void => {
       TestBed.configureTestingModule({
@@ -296,6 +411,27 @@ describe('Bind', (): void => {
 
       const element: HTMLElement = requireElement(fixture);
       expect(element.title).toBe('External override');
+    });
+    it('should rerun the effect when the binding object reference changes', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindSignalHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindSignalHostComponent> =
+        TestBed.createComponent(BindSignalHostComponent);
+      fixture.detectChanges();
+
+      const directive: Bind = requireDirective(fixture);
+      const applyBindingsSpy: jest.SpiedFunction<(bindings: Record<string, unknown>) => void> =
+        jest.spyOn(directive as unknown as BindApplyBindingsInternal, 'applyBindings');
+
+      fixture.componentInstance.bindings.set({ title: 'same value' });
+      fixture.detectChanges();
+
+      fixture.componentInstance.bindings.set({ title: 'same value' });
+      fixture.detectChanges();
+
+      expect(applyBindingsSpy).toHaveBeenCalledTimes(2);
     });
   });
   describe('edge cases', (): void => {
@@ -341,6 +477,56 @@ describe('Bind', (): void => {
       expect(forTargets.length).toBe(2);
       expect(forTargets[0]?.title).toBe('first');
       expect(forTargets[1]?.title).toBe('second');
+    });
+    it('should return undefined for unknown host properties during ownership checks', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindDefaultHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindDefaultHostComponent> =
+        TestBed.createComponent(BindDefaultHostComponent);
+      fixture.detectChanges();
+
+      const directiveWithInternals: BindGetPropertyValueInternal = requireDirective(
+        fixture
+      ) as unknown as BindGetPropertyValueInternal;
+
+      expect(directiveWithInternals.getPropertyValue('doesNotExist')).toBeUndefined();
+    });
+    it('should compose with uiLibStyleClass without interfering', (): void => {
+      TestBed.configureTestingModule({
+        imports: [BindStyleClassHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindStyleClassHostComponent> = TestBed.createComponent(
+        BindStyleClassHostComponent
+      );
+      fixture.detectChanges();
+
+      const hostElement: HTMLElement = fixture.nativeElement as HTMLElement;
+      const button: HTMLButtonElement = hostElement.querySelector('button') as HTMLButtonElement;
+      const target: HTMLElement = hostElement.querySelector(
+        '#bind-style-class-target'
+      ) as HTMLElement;
+
+      expect(button.title).toBe('Toggle the next panel');
+      expect(button.getAttribute('aria-label')).toBe('Toggle the next panel');
+
+      button.click();
+
+      expect(target.classList.contains('is-open')).toBe(true);
+    });
+    it('passes axe with uiLibBind applied to a basic element', async (): Promise<void> => {
+      TestBed.configureTestingModule({
+        imports: [BindA11yHostComponent],
+        providers: [provideZonelessChangeDetection()],
+      });
+      const fixture: ComponentFixture<BindA11yHostComponent> =
+        TestBed.createComponent(BindA11yHostComponent);
+
+      document.body.appendChild(fixture.nativeElement);
+
+      await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
   });
 });

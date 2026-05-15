@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } fr
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideIcons } from '@ng-icons/core';
-import { lucideAlertCircle } from '@ng-icons/lucide';
+import { lucideAlertCircle, lucideBadgeX, lucideBan } from '@ng-icons/lucide';
 import { checkA11y, SKIP_COLOR_CONTRAST_RULES } from '../../test/a11y-utils';
 import { Icon } from './icon';
 
@@ -38,12 +38,44 @@ class BlankLabelIconHost {}
 })
 class ClickableIconHost {}
 
+@Component({
+  standalone: true,
+  imports: [Icon],
+  template: `<ui-lib-icon
+    name="alert-circle"
+    library="lucide"
+    [clickable]="true"
+    ariaLabel="Close"
+  />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class ClickableInformativeIconHost {}
+
+@Component({
+  standalone: true,
+  imports: [Icon],
+  template: `<ui-lib-icon name="close" library="lucide" />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class CloseSemanticIconHost {}
+
+@Component({
+  standalone: true,
+  imports: [Icon],
+  template: `<ui-lib-icon name="trash" library="lucide" />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class TrashAliasIconHost {}
+
 const createdFixtures: ComponentFixture<unknown>[] = [];
 
 async function setup<T>(componentType: new () => T): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [componentType],
-    providers: [provideZonelessChangeDetection(), provideIcons({ lucideAlertCircle })],
+    providers: [
+      provideZonelessChangeDetection(),
+      provideIcons({ lucideAlertCircle, lucideBadgeX, lucideBan }),
+    ],
   }).compileComponents();
 
   const fixture: ComponentFixture<T> = TestBed.createComponent(componentType);
@@ -78,6 +110,11 @@ describe('Icon Accessibility', (): void => {
       const fixture: ComponentFixture<InformativeIconHost> = await setup(InformativeIconHost);
       await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
     });
+
+    it('blank ariaLabel icon (treated as decorative) has no accessibility violations', async (): Promise<void> => {
+      const fixture: ComponentFixture<BlankLabelIconHost> = await setup(BlankLabelIconHost);
+      await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+    });
   });
 
   describe('ARIA semantics', (): void => {
@@ -110,8 +147,21 @@ describe('Icon Accessibility', (): void => {
       expect(getHost(fixture).getAttribute('aria-hidden')).toBe('true');
     });
 
-    it('keeps the inner ng-icon glyph hidden from assistive technology', async (): Promise<void> => {
+    it('treats whitespace-only ariaLabel as decorative (trims to empty)', async (): Promise<void> => {
+      const fixture: ComponentFixture<BlankLabelIconHost> = await setup(BlankLabelIconHost);
+      const host: HTMLElement = getHost(fixture);
+      // whitespace-only ariaLabel must not produce an accessible name
+      expect(host.getAttribute('aria-label')).toBeNull();
+      expect(host.getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('keeps the inner ng-icon glyph hidden from assistive technology in informative mode', async (): Promise<void> => {
       const fixture: ComponentFixture<InformativeIconHost> = await setup(InformativeIconHost);
+      expect(getGlyph(fixture).getAttribute('aria-hidden')).toBe('true');
+    });
+
+    it('keeps the inner ng-icon glyph hidden from assistive technology in decorative mode', async (): Promise<void> => {
+      const fixture: ComponentFixture<DecorativeIconHost> = await setup(DecorativeIconHost);
       expect(getGlyph(fixture).getAttribute('aria-hidden')).toBe('true');
     });
   });
@@ -123,11 +173,51 @@ describe('Icon Accessibility', (): void => {
       expect(getHost(fixture).tabIndex).toBe(-1);
     });
 
+    it('is not keyboard-focusable in informative mode', async (): Promise<void> => {
+      const fixture: ComponentFixture<InformativeIconHost> = await setup(InformativeIconHost);
+      expect(getHost(fixture).getAttribute('tabindex')).toBe('-1');
+      expect(getHost(fixture).tabIndex).toBe(-1);
+    });
+
     it('never becomes focusable when clickable is set', async (): Promise<void> => {
       const fixture: ComponentFixture<ClickableIconHost> = await setup(ClickableIconHost);
       expect(getHost(fixture).getAttribute('tabindex')).toBe('-1');
       expect(getHost(fixture).tabIndex).toBe(-1);
       expect(getHost(fixture).getAttribute('role')).toBeNull();
+    });
+  });
+
+  describe('DEV mode warnings', (): void => {
+    it('logs a warning when clickable=true without ariaLabel', async (): Promise<void> => {
+      const warnSpy: jest.SpyInstance = jest
+        .spyOn(console, 'warn')
+        .mockImplementation((): void => {});
+      await setup(ClickableIconHost);
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('[ui-lib-icon]'));
+      warnSpy.mockRestore();
+    });
+
+    it('does not log a warning when clickable=true with ariaLabel provided', async (): Promise<void> => {
+      const warnSpy: jest.SpyInstance = jest
+        .spyOn(console, 'warn')
+        .mockImplementation((): void => {});
+      await setup(ClickableInformativeIconHost);
+      expect(warnSpy).not.toHaveBeenCalledWith(expect.stringContaining('[ui-lib-icon]'));
+      warnSpy.mockRestore();
+    });
+  });
+
+  describe('semantic name resolution', (): void => {
+    it('renders the semantic "close" icon without error', async (): Promise<void> => {
+      const fixture: ComponentFixture<CloseSemanticIconHost> = await setup(CloseSemanticIconHost);
+      expect(getHost(fixture)).toBeTruthy();
+      expect(getGlyph(fixture)).toBeTruthy();
+    });
+
+    it('resolves the "trash" alias to the "delete" semantic icon without error', async (): Promise<void> => {
+      const fixture: ComponentFixture<TrashAliasIconHost> = await setup(TrashAliasIconHost);
+      expect(getHost(fixture)).toBeTruthy();
+      expect(getGlyph(fixture)).toBeTruthy();
     });
   });
 });

@@ -222,15 +222,81 @@ CSS Grid layout with fixed column count or responsive auto-fit.
 | `columns` | `GridColumns (1–12) \| string` | `12` | Number of equal columns via `repeat(N, 1fr)` or custom template string (e.g. `2fr minmax(200px, 1fr)`) |
 | `align` | `GridAlign` | `'stretch'` | `align-items` value |
 | `justify` | `GridJustify` | `'stretch'` | `justify-items` value |
-| `spacing` | `StackToken \| SpacingToken \| number \| null` | `null` | Semantic gap (preferred); maps to `--uilib-stack-*` |
-| `gap` | `SpacingToken` | `4` | Back-compat numeric gap token; ignored when `spacing` is set |
+| `spacing` | `StackToken \| SpacingToken \| number \| null` | `null` | **Preferred** semantic gap; maps to `--uilib-stack-*` t-shirt sizes (`xs` · `sm` · `md` · `lg` · `xl`) |
+| `gap` | `SpacingToken` | `4` | Legacy numeric gap token (backward-compat); **ignored when `spacing` is set** |
 | `rowGap` | `StackToken \| SpacingToken \| number \| null` | `null` | Optional row-gap override; falls back to resolved `gap` |
 | `columnGap` | `StackToken \| SpacingToken \| number \| null` | `null` | Optional column-gap override; falls back to resolved `gap` |
-| `minColumnWidth` | `string \| undefined` | `undefined` | When set, uses `repeat(auto-fit, minmax(value, 1fr))` instead of fixed columns |
+| `minColumnWidth` | `string \| undefined` | `undefined` | When set, uses `repeat(auto-fit, minmax(value, 1fr))` instead of fixed columns — **takes precedence over `columns`** |
+
+> **`spacing` vs `gap`:** Prefer `spacing` for all new code. It uses the semantic t-shirt-size scale
+> (`xs`/`sm`/`md`/`lg`/`xl`) and maps to `--uilib-stack-*` CSS variables.  The numeric `gap` input
+> is kept for backward compatibility only.
 
 ### Outputs
 
 _none_
+
+### Responsive auto-fit grids
+
+Use `minColumnWidth` to create a self-collapsing grid that never needs breakpoint media queries:
+
+```html
+<!-- collapses naturally when viewport is narrower than 3 × 280 px -->
+<ui-lib-grid minColumnWidth="280px" spacing="md">
+  <ui-lib-card>...</ui-lib-card>
+  <ui-lib-card>...</ui-lib-card>
+  <ui-lib-card>...</ui-lib-card>
+</ui-lib-grid>
+```
+
+When `minColumnWidth` is set it overrides the `columns` input regardless of value.
+
+### Child spanning
+
+Children can span multiple columns using the standard `grid-column` CSS property:
+
+```html
+<ui-lib-grid [columns]="4" spacing="sm">
+  <div style="grid-column: span 2">Wide item</div>
+  <div>Normal</div>
+  <div>Normal</div>
+</ui-lib-grid>
+```
+
+### CSS custom property overrides
+
+The resolved gap is published as `--uilib-grid-gap` on the host element, allowing consumers to
+override spacing locally without changing inputs:
+
+```html
+<ui-lib-grid [columns]="3" spacing="md" style="--uilib-grid-gap: 2rem;">
+  <!-- custom gap applied -->
+</ui-lib-grid>
+```
+
+### Accessibility notes
+
+- `ui-lib-grid` is a **layout primitive** — it emits **no** ARIA role.  Never add `role="grid"` to a
+  layout grid; that role declares an interactive ARIA data-grid widget.  Landmark roles (`main`,
+  `nav`, `region`, etc.) are the consumer's responsibility.
+- **`overflow: hidden` is never applied.** Grid children remain fully accessible to screen-
+  magnification users who pan the viewport.
+- Keep **DOM order aligned with reading order** at every column count.  When the grid collapses from
+  multiple columns to one column on narrow viewports, screen readers follow DOM order; structure
+  markup in the final intended reading sequence before authoring multi-column layouts.
+
+> ⚠️ **A11y — CSS `order` is banned on Grid children.** The CSS `order` property changes the visual
+> position of a grid item without changing its position in the DOM.  Screen readers follow DOM order,
+> not visual order, so using `order` creates a mismatch between what sighted users see and what
+> assistive technology announces.  `ui-lib-grid` does **not** expose an `order` input for this
+> reason.  If you apply `order` to a child element via custom CSS, you must ensure the DOM order
+> still represents a logical reading sequence.
+
+> ⚠️ **A11y — `minColumnWidth` and responsive collapse.** When `repeat(auto-fit, …)` causes the
+> grid to collapse from multiple columns to a single column on narrow viewports, all content
+> becomes a single vertical stack.  Screen readers always follow the DOM order, so verify that the
+> source order is logical when read top-to-bottom.  Never rely on `order` to fix reading-order
+> problems at any column count.
 
 ---
 
@@ -249,14 +315,8 @@ _none_
   </ui-lib-stack>
 </ui-lib-container>
 
-<!-- responsive auto-fit grid -->
+<!-- responsive auto-fit grid — collapses automatically, no breakpoints needed -->
 <ui-lib-grid minColumnWidth="200px" spacing="md">
   <!-- cards -->
 </ui-lib-grid>
 ```
-
-### Grid accessibility constraints
-
-- `ui-lib-grid` is a layout primitive and adds **no** landmark semantics by default (no `main`, `nav`, `region`, etc.).
-- Keep DOM order aligned with reading order. Do **not** visually reorder items with CSS `order` in grid children unless you also provide an explicit accessibility justification and equivalent reading sequence.
-- When responsive layouts collapse from multiple columns to one column, screen readers continue to follow DOM order; structure markup in the final intended reading sequence.
