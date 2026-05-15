@@ -63,7 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `ToggleSwitch` -> ✅ complete + hardened (6-phase, score 8.8/10, 68 tests — 42 unit + 26 a11y)
+- `Grid` -> ✅ complete + hardened (6-phase, score 9.0/10, 35 tests — 19 unit + 16 a11y)
 
 ---
 
@@ -78,22 +78,19 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-15 [ToggleSwitch — 6-phase hardening COMPLETE]
+Date: 2026-05-15 [Grid layout component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.ts
-  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.html
-  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.scss
-  - projects/ui-lib-custom/src/lib/toggle-switch/toggle-switch.a11y.spec.ts (NEW, 26 tests)
-  - projects/ui-lib-custom/src/lib/toggle-switch/README.md
+  - projects/ui-lib-custom/src/lib/layout/grid.a11y.spec.ts (extended to 16 tests)
+  - projects/ui-lib-custom/src/lib/layout/README.md (Grid section enhanced)
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
-State: ToggleSwitch now has a DEV-mode `console.warn` when no accessible name is found (no `ariaLabel`, no `label`, no projected `<label for>`), `[attr.aria-readonly]` binding for readonly state, forced-colors track border, prefers-reduced-motion transitions disabled, focus ring changed from `:focus-within` to `:has(:focus-visible)` for keyboard-only focus ring, and 26 new a11y tests covering all label strategies, readonly/disabled ARIA, Space key, live announcer, CVA integration, and axe automated checks. README expanded with role=switch rationale, three label strategies, CVA examples, readonly vs disabled semantics, and i18n limitation note.
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Grid a11y spec extended from 11 to 16 tests covering display:grid, no-overflow, spacing CSS var, 2-col axe, auto-fit axe, order-ban, and DOM-reading-order preservation. README updated with explicit order ban (⚠️ callout), minColumnWidth responsive-collapse caveat, spacing-vs-gap preference, child span pattern, CSS override guidance, and responsive auto-fit recipe. COMPONENT_SCORES.md updated to 9.0 🟢.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/toggle-switch/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/toggle-switch/" --no-coverage (68/68 PASS — 42 unit + 26 a11y)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/layout/grid" --no-coverage (35/35 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Next step: Continue with the next unscored component in the hardening queue (FloatLabel, Icon, IconButton, AutoFocus, or Bind per COMPONENT_SCORES.md).
+Next step: Continue with next unscored component (ToggleSwitch, FloatLabel, AutoFocus, Bind, Icon, IconButton).
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:
@@ -131,22 +128,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install`. Demo screenshot captured at `/tmp/key-filter-hardening.png` after installing Chromium with `npx playwright install chromium` and serving demo on `http://127.0.0.1:4200`.
 Next step: Continue hardening the next queued new component (Stack) with the same 6-phase workflow.
-
-Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.scss
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: InputMask now ships generated control/hint/error IDs, explicit `ariaLabel`/`ariaLabelledBy` inputs, mask format hint wiring via `aria-describedby`, incomplete-mask `aria-invalid` behavior on blur, optional projected error slot support, blocked-character live region announcements, and `aria-valuetext` that reads user-entered characters without placeholder noise. Added reduced-motion CSS safeguards and expanded accessibility coverage to a dedicated 20-test a11y suite.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-mask/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/input-mask/" --no-coverage (62/62 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs`) and no failed completed runs were present to inspect. Playwright browser lock required CLI capture flow; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/input-mask-hardening.png`.
-Next step: Continue hardening the next queued core input with the same label/error/hint semantics and blocked-character a11y feedback standard.
