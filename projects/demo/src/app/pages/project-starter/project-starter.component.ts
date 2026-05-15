@@ -158,6 +158,7 @@ export class ProjectStarterComponent {
     readonly publishPackageJson: string;
     readonly publishSteps: string;
     readonly globalStyles: string;
+    readonly tooltipStyles: string;
   } = {
     usage: `import { ThemeConfigService } from 'ui-lib-custom/theme';
 
@@ -172,7 +173,11 @@ loadTheme(name: string) {
 }`,
     buildLib: `# Inside the ui-lib-custom workspace
 npm run build`,
-    npmLink1: `# Inside the built output
+    npmLink1: `# ⚠️  Run npm link from INSIDE dist/ui-lib-custom, not from the repo root.
+# The symlink must resolve to the dist directory so Angular's compiler
+# finds the package.json exports map. Linking from the repo root gives
+# a bare package.json with no exports and breaks template type-checking.
+
 cd dist/ui-lib-custom
 npm link`,
     npmLink2: `# Inside your other Angular project
@@ -180,21 +185,18 @@ npm link ui-lib-custom`,
     npmLinkImport: `// your-component.ts
 import { Component } from '@angular/core';
 import { Button } from 'ui-lib-custom/button';
-import { Card } from 'ui-lib-custom/card';
+import { Tooltip } from 'ui-lib-custom/tooltip';
 
 @Component({
   selector: 'app-example',
   standalone: true,
-  imports: [Button, Card],
+  imports: [Button, Tooltip],
   template: \`
-    <ui-lib-button variant="material" color="primary">
-      Hello from my project!
+    <ui-lib-button
+      uiLibTooltip="Saves your work"
+      tooltipPosition="bottom">
+      Save
     </ui-lib-button>
-
-    <ui-lib-card variant="material" elevation="medium">
-      <div card-header>My Card</div>
-      <p>Content here.</p>
-    </ui-lib-card>
   \`
 })
 export class ExampleComponent {}`,
@@ -222,7 +224,18 @@ npm publish --access public
 
 # Install in any project
 npm install @your-org/ui-lib-custom`,
-    globalStyles: `/* src/styles.scss in your project */
+    globalStyles: `/* src/styles.scss — theme tokens (required) */
 @import 'ui-lib-custom/themes/themes.css';`,
+    tooltipStyles: `/* src/styles.scss — body-level directive styles (add once per directive used)
+ *
+ * Tooltip (and similar directives) append their element to document.body,
+ * so their styles must be global — they cannot live inside a component's
+ * encapsulated stylesheet.
+ *
+ * Until these SCSS files land in the published dist/styles/ folder,
+ * reference them via a relative path from your global stylesheet
+ * to the library source directory:
+ */
+@use '../../ui-lib-custom/projects/ui-lib-custom/src/lib/tooltip/tooltip.scss';`,
   } as const;
 }

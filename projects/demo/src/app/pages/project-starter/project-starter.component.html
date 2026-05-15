@@ -194,7 +194,7 @@
           Re-run <code>npm run build</code> in this workspace and the consumer picks up changes immediately.
         </p>
         <app-doc-code-snippet
-          title="1. Register the link (inside this workspace)"
+          title="1. Register the link (run from dist/ui-lib-custom, not the repo root)"
           language="bash"
           [code]="snippets.npmLink1"
         ></app-doc-code-snippet>
@@ -204,7 +204,7 @@
           [code]="snippets.npmLink2"
         ></app-doc-code-snippet>
         <app-doc-code-snippet
-          title="3. Import components (secondary entry points)"
+          title="3. Import components and directives (secondary entry points)"
           language="typescript"
           [code]="snippets.npmLinkImport"
         ></app-doc-code-snippet>
@@ -212,6 +212,11 @@
           title="4. Add global theme styles (src/styles.scss)"
           language="scss"
           [code]="snippets.globalStyles"
+        ></app-doc-code-snippet>
+        <app-doc-code-snippet
+          title="5. Add body-level directive styles (e.g. Tooltip)"
+          language="scss"
+          [code]="snippets.tooltipStyles"
         ></app-doc-code-snippet>
       </section>
 
