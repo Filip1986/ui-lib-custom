@@ -63,7 +63,6 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `Grid` -> ✅ complete + hardened (6-phase, score 9.0/10, 35 tests — 19 unit + 16 a11y)
 
 ---
 
@@ -78,19 +77,21 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-15 [Grid layout component — 6-phase hardening COMPLETE]
+Date: 2026-05-15 [Bind directive — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/layout/grid.a11y.spec.ts (extended to 16 tests)
-  - projects/ui-lib-custom/src/lib/layout/README.md (Grid section enhanced)
+  - projects/ui-lib-custom/src/lib/bind/bind.ts
+  - projects/ui-lib-custom/src/lib/bind/bind.spec.ts
+  - projects/ui-lib-custom/src/lib/bind/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Grid a11y spec extended from 11 to 16 tests covering display:grid, no-overflow, spacing CSS var, 2-col axe, auto-fit axe, order-ban, and DOM-reading-order preservation. README updated with explicit order ban (⚠️ callout), minColumnWidth responsive-collapse caveat, spacing-vs-gap preference, child span pattern, CSS override guidance, and responsive auto-fit recipe. COMPONENT_SCORES.md updated to 9.0 🟢.
+State: Bind now normalizes kebab-case `aria-*` keys to their reflected DOM property names before diffing/applying, documents DOM-property vs attribute semantics plus performance/removal caveats, adds focused regression coverage for ARIA reflection, safe host-binding coexistence, object-reference reactivity, basic axe checks, and composition with `uiLibStyleClass`, and is formally scored/complete in the scorecard.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/layout/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/layout/grid" --no-coverage (35/35 PASS)
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/bind/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/bind/" --no-coverage (21/21 PASS)
   node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-Next step: Continue with next unscored component (ToggleSwitch, FloatLabel, AutoFocus, Bind, Icon, IconButton).
+Terminal notes: Fresh clone required `npm install` before validation tools were available. The MCP browser was locked, so Chromium was installed with `npx playwright install chromium`, the demo was served at `http://127.0.0.1:4200/bind`, and a verification screenshot was captured at `/tmp/bind-hardening.png`.
+Next step: Continue with the next formally unscored utility directive hardening pass (AutoFocus).
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:
