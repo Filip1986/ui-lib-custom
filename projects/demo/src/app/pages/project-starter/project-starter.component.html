@@ -16,6 +16,7 @@
       <ui-lib-tab value="playground" label="Playground"></ui-lib-tab>
       <ui-lib-tab value="api-reference" label="API Reference"></ui-lib-tab>
       <ui-lib-tab value="usage" label="Usage"></ui-lib-tab>
+      <ui-lib-tab value="local-install" label="Local Install"></ui-lib-tab>
     </ui-lib-tabs>
   </div>
 
@@ -166,6 +167,84 @@
         title="Theme persistence"
         [code]="snippets.usage"
       ></app-doc-code-snippet>
+    </ui-lib-card>
+  }
+
+  @if (activeTab() === 'local-install') {
+    <ui-lib-card [showHeader]="true" [showFooter]="false" id="local-install" data-doc-anchor>
+      <div card-header>Use this library in another project</div>
+      <p class="lead">
+        Three ways to consume <code>ui-lib-custom</code> locally before publishing to a registry.
+      </p>
+
+      <section class="local-install-section">
+        <h3>Step 0 — build the library</h3>
+        <p>Every method below requires a fresh build output in <code>dist/ui-lib-custom/</code>.</p>
+        <app-doc-code-snippet
+          title="Build"
+          language="bash"
+          [code]="snippets.buildLib"
+        ></app-doc-code-snippet>
+      </section>
+
+      <section class="local-install-section">
+        <h3>Method 1 — <code>npm link</code> <span class="badge-recommended">recommended for active dev</span></h3>
+        <p>
+          Creates a global symlink so your consumer project always sees the latest build.
+          Re-run <code>npm run build</code> in this workspace and the consumer picks up changes immediately.
+        </p>
+        <app-doc-code-snippet
+          title="1. Register the link (inside this workspace)"
+          language="bash"
+          [code]="snippets.npmLink1"
+        ></app-doc-code-snippet>
+        <app-doc-code-snippet
+          title="2. Use the link in your other project"
+          language="bash"
+          [code]="snippets.npmLink2"
+        ></app-doc-code-snippet>
+        <app-doc-code-snippet
+          title="3. Import components (secondary entry points)"
+          language="typescript"
+          [code]="snippets.npmLinkImport"
+        ></app-doc-code-snippet>
+        <app-doc-code-snippet
+          title="4. Add global theme styles (src/styles.scss)"
+          language="scss"
+          [code]="snippets.globalStyles"
+        ></app-doc-code-snippet>
+      </section>
+
+      <section class="local-install-section">
+        <h3>Method 2 — local file path</h3>
+        <p>
+          Point your <code>package.json</code> directly at the <code>dist/</code> folder.
+          No global symlink needed — good for one-off integration tests.
+        </p>
+        <app-doc-code-snippet
+          title="package.json + install"
+          language="json"
+          [code]="snippets.filePath"
+        ></app-doc-code-snippet>
+      </section>
+
+      <section class="local-install-section">
+        <h3>Method 3 — publish to npm</h3>
+        <p>
+          When you are ready to share the library, update the package name and publish from
+          <code>dist/ui-lib-custom/</code>.
+        </p>
+        <app-doc-code-snippet
+          title="Update package name"
+          language="json"
+          [code]="snippets.publishPackageJson"
+        ></app-doc-code-snippet>
+        <app-doc-code-snippet
+          title="Publish steps"
+          language="bash"
+          [code]="snippets.publishSteps"
+        ></app-doc-code-snippet>
+      </section>
     </ui-lib-card>
   }
 </app-doc-page-layout>
