@@ -135,7 +135,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
 | Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (8.7)           |
 | ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (8.8)           |
-| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening (🔴) |
+| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ✅ Done (8.8)           |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
 | KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.8)           |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
@@ -144,7 +144,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | IconField         | Icon `aria-hidden` if decorative, no focus intercept                                                | ✅ Done                 |
 | Stack             | No landmark pollution, `as` tag semantics                                                           | ✅ Done (9.0)           |
 | Inline            | No landmark pollution, wrap + reading order                                                         | ✅ Done                 |
-| Grid              | Visual vs DOM order constraint, no overflow clipping                                                | ⏳ Needs hardening (🔴) |
+| Grid              | Visual vs DOM order constraint, no overflow clipping                                                | ✅ Done (9.0)           |
 | Container         | No clipping, skip-link target compatibility                                                         | ✅ Done                 |
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
@@ -210,7 +210,7 @@ Scores are integers 1–10. `—` means not yet evaluated.
 | Card        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Stack       | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Inline      | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
-| Grid        | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
+| Grid        | 9   | 9    | 9    | 9    | 9     | 9   | 9    | 9      | 9       | 9    | 9.0 | 🟢     |
 | Container   | 9   | 9    | 9    | 9    | 8     | 9   | 9    | 9      | 9       | 9    | 8.9 | 🟢     |
 | FloatLabel  | —   | —    | —    | —    | —     | —   | —    | —      | —       | —    | —   | 🔴     |
 | IconField   | 9   | 9    | 9    | 8    | 9     | 9   | 9    | 8      | 9       | 8    | 8.7 | 🟢     |

@@ -7,6 +7,7 @@ import {
   forwardRef,
   inject,
   input,
+  isDevMode,
   model,
   output,
   signal,
@@ -165,6 +166,21 @@ export class ToggleSwitch implements ControlValueAccessor, AfterViewInit {
   );
 
   public ngAfterViewInit(): void {
+    if (isDevMode()) {
+      const hostNativeEl: HTMLElement = this.hostElement.nativeElement as HTMLElement;
+      const inputId: string = this.nativeInputId();
+      const hasLabel: boolean =
+        Boolean(this.ariaLabel()) ||
+        Boolean(this.label()) ||
+        Boolean(hostNativeEl.querySelector(`label[for="${inputId}"]`));
+      if (!hasLabel) {
+        console.warn(
+          '[ui-lib-toggle-switch] No accessible name found. ' +
+            'Provide ariaLabel, label input, or a projected <label>.'
+        );
+      }
+    }
+
     if (!this.autofocus() || this.isDisabled()) {
       return;
     }
