@@ -14,7 +14,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
 import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.component';
 
-type TabKey = 'playground' | 'api-reference' | 'usage';
+type TabKey = 'playground' | 'api-reference' | 'usage' | 'local-install';
 
 /**
  * Demo page for project starter guidance.
@@ -57,6 +57,7 @@ export class ProjectStarterComponent {
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },
     { id: 'usage', label: 'Usage' },
+    { id: 'local-install', label: 'Local Install' },
   ];
 
   public readonly activeTab: WritableSignal<TabKey> = signal<TabKey>('playground');
@@ -147,8 +148,18 @@ export class ProjectStarterComponent {
     this.savedThemes.set(this.themeService.listSavedThemes());
   }
 
-  public readonly snippets: { readonly usage: string } = {
-    usage: `import { ThemeConfigService } from 'ui-lib-custom';
+  public readonly snippets: {
+    readonly usage: string;
+    readonly buildLib: string;
+    readonly npmLink1: string;
+    readonly npmLink2: string;
+    readonly npmLinkImport: string;
+    readonly filePath: string;
+    readonly publishPackageJson: string;
+    readonly publishSteps: string;
+    readonly globalStyles: string;
+  } = {
+    usage: `import { ThemeConfigService } from 'ui-lib-custom/theme';
 
 constructor(private theme: ThemeConfigService) {}
 
@@ -159,5 +170,59 @@ saveTheme(name: string) {
 loadTheme(name: string) {
   this.theme.loadFromLocalStorage(name);
 }`,
+    buildLib: `# Inside the ui-lib-custom workspace
+npm run build`,
+    npmLink1: `# Inside the built output
+cd dist/ui-lib-custom
+npm link`,
+    npmLink2: `# Inside your other Angular project
+npm link ui-lib-custom`,
+    npmLinkImport: `// your-component.ts
+import { Component } from '@angular/core';
+import { Button } from 'ui-lib-custom/button';
+import { Card } from 'ui-lib-custom/card';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [Button, Card],
+  template: \`
+    <ui-lib-button variant="material" color="primary">
+      Hello from my project!
+    </ui-lib-button>
+
+    <ui-lib-card variant="material" elevation="medium">
+      <div card-header>My Card</div>
+      <p>Content here.</p>
+    </ui-lib-card>
+  \`
+})
+export class ExampleComponent {}`,
+    filePath: `// package.json in your other project
+{
+  "dependencies": {
+    "ui-lib-custom": "file:../ui-lib-custom/dist/ui-lib-custom"
+  }
+}
+
+// Then run:
+// npm install`,
+    publishPackageJson: `// projects/ui-lib-custom/package.json
+{
+  "name": "@your-org/ui-lib-custom",
+  "version": "1.0.0"
+}`,
+    publishSteps: `# Build for production
+npm run build
+
+# Publish from the dist output
+cd dist/ui-lib-custom
+npm login
+npm publish --access public
+
+# Install in any project
+npm install @your-org/ui-lib-custom`,
+    globalStyles: `/* src/styles.scss in your project */
+@import 'ui-lib-custom/themes/themes.css';`,
   } as const;
 }
