@@ -135,7 +135,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 |-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
 | Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (8.7)           |
 | ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (8.8)           |
-| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening (🔴) |
+| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ✅ Done (8.8)           |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
 | KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.8)           |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
