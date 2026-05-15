@@ -151,6 +151,23 @@
       Columns: API · A11y · Perf · Comp · Theme · DX · Docs · Polish · Angular · Feel
     </p>
 
+    <!-- Scoring methodology notice -->
+    <div class="scoring-method-notice" role="note" aria-label="Scoring methodology notice">
+      <div class="scoring-method-notice__icon">⚠️</div>
+      <div class="scoring-method-notice__body">
+        <strong class="scoring-method-notice__title">Current scores are hardening-session estimates, not full checkpoint audits</strong>
+        <p class="scoring-method-notice__detail">
+          These scores were assigned during 6-phase hardening sessions — a qualitative, holistic evaluation.
+          <strong>SCORING_CRITERIA.md</strong> defines a more rigorous standard: each category has a fixed checklist of
+          externally-anchored, verifiable items and <em>score = checked / total × 10</em>.
+          A "hardening 8" and a "checkpoint 8" are not the same thing.
+          A full re-audit of all 100 components against all 182 checkboxes across 11 categories is required
+          before these scores are externally credible — especially before publishing the benchmark article.
+          See <strong>Next Steps → SCORING_CRITERIA.md Full Checkpoint Audit</strong>.
+        </p>
+      </div>
+    </div>
+
     <!-- Filter bar -->
     <div class="scoreboard-filters">
       <input
@@ -240,9 +257,32 @@
     <!-- Scoring dimensions reference -->
     <details class="scoring-criteria-panel">
       <summary class="scoring-criteria-summary">
-        📐 Scoring Criteria — what each column measures
-        <span class="scoring-criteria-hint">(11 categories · checkpoint-anchored · score = checked / total × 10)</span>
+        📐 Scoring Criteria — what each column measures (SCORING_CRITERIA.md)
+        <span class="scoring-criteria-hint">Tier 1: hardening estimate · Tier 2: full checkpoint audit (pending)</span>
       </summary>
+      <div class="scoring-method-tiers">
+        <div class="scoring-tier scoring-tier--done">
+          <div class="scoring-tier__label">Tier 1 — Completed ✅</div>
+          <div class="scoring-tier__name">6-Phase Hardening Session</div>
+          <p class="scoring-tier__desc">
+            Each component went through a 6-phase evolution workflow: Architecture → DX &amp; API → Accessibility →
+            Performance → Composability → Emotional Polish. A holistic score was assigned at the end of each phase
+            based on qualitative assessment. All 100 components passed the ≥ 8 gate under this method.
+            <strong>These are the scores currently shown in this table.</strong>
+          </p>
+        </div>
+        <div class="scoring-tier scoring-tier--pending">
+          <div class="scoring-tier__label">Tier 2 — Pending ⬜</div>
+          <div class="scoring-tier__name">SCORING_CRITERIA.md Full Checkpoint Audit</div>
+          <p class="scoring-tier__desc">
+            Each category has a fixed checklist of externally-anchored, verifiable items (e.g. A11y has 28 checkpoints
+            against the WAI-ARIA APG, axe-core ruleset, and WCAG 2.1). <em>Score = verified checkboxes / total × 10.</em>
+            An unverified item is an explicit, visible backlog entry — not an unknown gap.
+            This audit is <strong>required before scores are externally credible</strong> and must be completed
+            before the benchmark article is written or the library is launched publicly.
+          </p>
+        </div>
+      </div>
       <div class="scoring-criteria-grid" role="list">
         @for (dim of scoringDimensions; track trackByDimension($index, dim)) {
           <div class="scoring-dim-card" [class.scoring-dim-card--gate]="dim.column === 'Cat. 11'" role="listitem">

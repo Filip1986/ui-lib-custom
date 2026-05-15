@@ -2357,9 +2357,15 @@ export class RoadmapComponent {
     status: 'done' | 'active' | 'queued';
   }[] = [
     {
-      label: 'Phase 3 complete — all 100 components ≥ 8',
+      label: 'Phase 3 complete — all 100 components ≥ 8 (hardening estimates)',
       gate: 'Required before seeding early access',
       status: 'done',
+    },
+    {
+      label:
+        'SCORING_CRITERIA.md full checkpoint audit — all 100 components re-scored against 182 verifiable checkpoints',
+      gate: 'Required before scores are externally credible — needed before benchmark article and v1.0',
+      status: 'queued',
     },
     {
       label: 'Internal axe-core audit clean',
@@ -2395,6 +2401,16 @@ export class RoadmapComponent {
 
   // ── Next Steps ────────────────────────────────────────────────────────────
   public readonly nextSteps: NextStep[] = [
+    {
+      title: 'SCORING_CRITERIA.md Full Checkpoint Audit',
+      description:
+        'Current scores were assigned during 6-phase hardening sessions (qualitative estimates). ' +
+        'SCORING_CRITERIA.md defines a rigorous checkpoint-counted standard: score = verified checkboxes / total × 10. ' +
+        'Every component needs a proper re-audit against all 11 categories (182 total checkpoints) before any score can be considered externally credible. ' +
+        'This is the single most important quality task before v1.0 — the axe-core benchmark article depends on it.',
+      priority: 'critical',
+      category: 'Quality',
+    },
     {
       title: 'Runtime Variant Switcher',
       description:
