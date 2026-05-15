@@ -63,6 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
+- `Icon` -> ✅ complete + hardened (6-phase, score 8.9/10, 30 tests — 12 unit + 20 a11y — DEV warn added)
 
 ---
 
@@ -76,6 +77,23 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 ---
 
 ## Recent Handoffs
+
+Date: 2026-05-15 [Icon component — 6-phase hardening COMPLETE]
+Changed:
+  - projects/ui-lib-custom/src/lib/icon/icon.ts
+  - projects/ui-lib-custom/src/lib/icon/icon.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/icon/README.md
+  - docs/COMPONENT_SCORES.md
+  - AI_AGENT_CONTEXT.md
+  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
+State: Icon now emits a DEV-mode `console.warn` via `effect()` when `clickable=true` is used without `ariaLabel` (styling-only flag misuse guard). The a11y spec was extended from 10 to 20 tests covering decorative default, informative mode, whitespace ariaLabel treated as decorative, tabindex=-1 in all modes, DEV warn assertions, ng-icon glyph aria-hidden in both modes, semantic `close` resolution, and `trash` alias resolution. README updated with `clickable` input row and expanded accessibility note. Icon scored at 8.9 and marked ✅ Done in COMPONENT_SCORES.md.
+Verification:
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/icon/" --no-coverage (30/30 PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
+Terminal notes: Fresh clone required `npm install`. All validations passed without issues.
+Next step: Continue with the next formally unscored component in the hardening queue (IconButton or AutoFocus).
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:
@@ -113,22 +131,3 @@ Verification:
   node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
 Terminal notes: Fresh clone required `npm install`. Demo screenshot captured at `/tmp/key-filter-hardening.png` after installing Chromium with `npx playwright install chromium` and serving demo on `http://127.0.0.1:4200`.
 Next step: Continue hardening the next queued new component (Stack) with the same 6-phase workflow.
-
-Date: 2026-05-13 [InputMask component — 6-phase hardening COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.scss
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.component.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/input-mask.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/input-mask/README.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: InputMask now ships generated control/hint/error IDs, explicit `ariaLabel`/`ariaLabelledBy` inputs, mask format hint wiring via `aria-describedby`, incomplete-mask `aria-invalid` behavior on blur, optional projected error slot support, blocked-character live region announcements, and `aria-valuetext` that reads user-entered characters without placeholder noise. Added reduced-motion CSS safeguards and expanded accessibility coverage to a dedicated 20-test a11y suite.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/input-mask/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/input-mask/" --no-coverage (62/62 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: GitHub Actions runs were checked via MCP (`list_workflow_runs`) and no failed completed runs were present to inspect. Playwright browser lock required CLI capture flow; Chromium was installed via `npx playwright install chromium` and screenshot captured at `/tmp/input-mask-hardening.png`.
-Next step: Continue hardening the next queued core input with the same label/error/hint semantics and blocked-character a11y feedback standard.
