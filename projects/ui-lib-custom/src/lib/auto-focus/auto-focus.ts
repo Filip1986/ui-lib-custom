@@ -40,6 +40,7 @@ export class AutoFocus implements AfterViewInit {
   private readonly document: Document = inject(DOCUMENT);
   private readonly platformId: object = inject(PLATFORM_ID);
   private readonly isBrowser: boolean = isPlatformBrowser(this.platformId);
+  private readonly hostTagName: string = `<${this.elementRef.nativeElement.tagName.toLowerCase()}>`;
 
   /** @inheritdoc */
   public ngAfterViewInit(): void {
@@ -59,7 +60,7 @@ export class AutoFocus implements AfterViewInit {
 
       if (isDevMode() && !this.isProgrammaticallyFocusable(target)) {
         console.warn(
-          '[ui-lib-custom/auto-focus] Host or selector target is not programmatically focusable. ' +
+          `[ui-lib-custom/auto-focus] ${this.hostTagName} host or selector target is not programmatically focusable. ` +
             'Add tabindex="-1" or provide a focusable selector target.'
         );
       }
@@ -81,7 +82,7 @@ export class AutoFocus implements AfterViewInit {
     } catch {
       if (isDevMode()) {
         console.warn(
-          `[ui-lib-custom/auto-focus] Invalid selector "${selectorValue}". Falling back to host element.`
+          `[ui-lib-custom/auto-focus] Invalid selector "${selectorValue}" on ${this.hostTagName}. Falling back to host element.`
         );
       }
       return hostElement;
