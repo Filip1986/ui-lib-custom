@@ -100,10 +100,12 @@
 | InputMask         | 8.7   | `input-mask-hardening-prompt.md`         |
 | KeyFilter         | 8.6   | `key-filter-hardening-prompt.md`         |
 | FormField         | 8.7   | `form-field-hardening-prompt.md`         |
+| FloatLabel        | 8.7   | `float-label-hardening-prompt.md`        |
 | InputGroup        | 8.7   | `input-group-hardening-prompt.md`        |
 | IconField         | 8.7   | `icon-field-hardening-prompt.md`         |
 | Stack             | 9.0   | `stack-hardening-prompt.md`              |
 | Inline            | 9.0   | `inline-hardening-prompt.md`             |
+| Grid              | 9.0   | `grid-hardening-prompt.md`               |
 | Container         | 8.9   | `container-hardening-prompt.md`          |
 | Fluid             | 8.7   | `fluid-hardening-prompt.md`              |
 | Dock              | 9.0   | `dock-hardening-prompt.md`               |
@@ -111,26 +113,21 @@
 | ButtonGroup       | 8.7   | `button-group-hardening-prompt.md`       |
 | StyleClass        | 8.7   | `style-class-hardening-prompt.md`        |
 | AnimateOnScroll   | 8.6   | `animate-on-scroll-hardening-prompt.md`  |
+| AutoFocus         | 8.7   | `auto-focus-hardening-prompt.md`         |
 | ClassNames        | 9.1   | `class-names-hardening-prompt.md`        |
+| Bind              | 8.6   | `bind-hardening-prompt.md`               |
 
 ---
 
 ## Needs Hardening — Work Top to Bottom (prompt files in `docs/prompts/needs-hardening/`)
 
-> 7 components remain. All prompts were updated 2026-05-15 to reflect current source code.
+> 3 components remain. Prompts are in `docs/prompts/needs-hardening/`. Last reconciled: 2026-05-15.
 
-| Priority | Component      | Key A11y Focus                                                                              | Prompt File                           |
-|----------|----------------|---------------------------------------------------------------------------------------------|---------------------------------------|
-| 1        | ToggleSwitch   | `role=switch` on `<input type=checkbox>`, label guard, aria-readonly, high-contrast track   | `toggle-switch-hardening-prompt.md`   |
-| 2        | Icon           | decorative/informative modes, clickable+no-label DEV warning, SVG focusable=false           | `icon-hardening-prompt.md`            |
-| 3        | IconButton     | required ariaLabel, loading disable+announce, 44px touch target                             | `icon-button-hardening-prompt.md`     |
-| 4        | Grid           | no ARIA data-grid role, no overflow clip, reading-order constraint documented               | `grid-hardening-prompt.md`            |
-| 5        | AutoFocus      | shouldFocusTarget logic, selector fallback, SSR guard, focus-theft prevention               | `auto-focus-hardening-prompt.md`      |
-| 6        | FloatLabel     | **scaffold needs full impl** — real `<label for>`, CSS-only float, contrast                 | `float-label-hardening-prompt.md`     |
-| 7        | Bind           | Renderer2/ARIA no-clobber, property vs attribute naming pitfalls                            | `bind-hardening-prompt.md`            |
-
-> **Note on FloatLabel (#6):** The current implementation is a scaffold. A design decision on the
-> label/input wiring strategy is required before the 6-phase audit can run.
+| Priority | Component    | Key A11y Focus                                                                              | Prompt File                         |
+|----------|--------------|---------------------------------------------------------------------------------------------|-------------------------------------|
+| 1        | ToggleSwitch | `role=switch` on `<input type=checkbox>`, label guard, aria-readonly, high-contrast track   | `toggle-switch-hardening-prompt.md` |
+| 2        | Icon         | decorative/informative modes, clickable+no-label DEV warning, SVG focusable=false           | `icon-hardening-prompt.md`          |
+| 3        | IconButton   | required ariaLabel, loading disable+announce, 44px touch target                             | `icon-button-hardening-prompt.md`   |
 
 ---
 

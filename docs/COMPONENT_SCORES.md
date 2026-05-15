@@ -134,10 +134,10 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Component         | Key a11y concern                                                                                    | Status                 |
 |-------------------|-----------------------------------------------------------------------------------------------------|------------------------|
 | Textarea          | Label, aria-invalid, aria-readonly, resize a11y                                                     | ✅ Done (8.7)           |
-| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (8.8)           |
-| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ✅ Done (8.8)           |
+| ToggleButton      | `aria-pressed`, icon-only `aria-label`                                                              | ✅ Done (8.7)           |
+| ToggleSwitch      | `role=switch`, `aria-checked`, Space key                                                            | ⏳ Needs hardening      |
 | InputMask         | Format hint `aria-describedby`, `aria-invalid`                                                      | ✅ Done (8.7)           |
-| KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.8)           |
+| KeyFilter         | Format hint, silent block communication                                                             | ✅ Done (8.6)           |
 | FormField         | Full label+error+hint chain orchestration                                                           | ✅ Done                 |
 | FloatLabel        | Real label element, floated contrast ≥ 11px                                                         | ✅ Done (8.7)           |
 | InputGroup        | Decorative addons `aria-hidden`, button addon labels                                                | ✅ Done                 |
@@ -149,8 +149,8 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Fluid             | 400% zoom reflow (WCAG 1.4.10)                                                                      | ✅ Done                 |
 | Dock              | `<nav>` with `aria-label`, item labels, `aria-hidden` icons, disabled button/anchor, reduced-motion | ✅ Done (9.0)           |
 | OrganizationChart | `role=tree/treeitem`, full keyboard nav                                                             | ✅ Done (8.3)           |
-| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ✅ Done (8.9)           |
-| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ✅ Done (8.8)           |
+| Icon              | `aria-hidden` by default, informative mode `aria-label`                                             | ⏳ Needs hardening      |
+| IconButton        | `aria-label` MANDATORY, icon `aria-hidden` inside                                                   | ⏳ Needs hardening      |
 | ButtonGroup       | `role=group` with `aria-label`                                                                      | ✅ Done                 |
 | StyleClass        | `aria-expanded` on trigger, `aria-hidden` on target                                                 | ✅ Done (8.7)           |
 | AnimateOnScroll   | `prefers-reduced-motion` (CRITICAL — skip all animation)                                            | ✅ Done                 |
@@ -165,6 +165,7 @@ Work top to bottom. Priority is driven by the current committed wow factor — *
 | Symbol | Meaning                                            |
 |--------|----------------------------------------------------|
 | 🔴     | Not yet scored — built but not formally evaluated  |
+| ⏳     | Needs hardening — prompt exists, not yet scored    |
 | 🟡     | In progress — partially scored, evolution underway |
 | 🟢     | Complete — all 10 categories ≥ 8                   |
 
