@@ -62,4 +62,8 @@ ui-lib-icon-button .ui-lib-icon-button--loading .ui-lib-icon-button__icon {
     transition: none;
     animation: none;
   }
+
+  ui-lib-icon-button .ui-lib-icon-button--loading .ui-lib-icon-button__icon {
+    animation: none;
+  }
 }

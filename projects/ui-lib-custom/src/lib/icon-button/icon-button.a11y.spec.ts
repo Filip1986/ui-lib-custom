@@ -37,6 +37,22 @@ class LoadingHostComponent {}
 })
 class EmptyLabelHostComponent {}
 
+@Component({
+  standalone: true,
+  imports: [IconButton],
+  template: `<ui-lib-icon-button icon="settings" ariaLabel="Open settings" size="sm" />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class SmHostComponent {}
+
+@Component({
+  standalone: true,
+  imports: [IconButton],
+  template: `<ui-lib-icon-button icon="settings" ariaLabel="Open settings" size="lg" />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class LgHostComponent {}
+
 async function createFixture<T>(hostType: new () => T): Promise<ComponentFixture<T>> {
   await TestBed.configureTestingModule({
     imports: [hostType],
@@ -184,5 +200,21 @@ describe('IconButton Accessibility', (): void => {
     const fixture: ComponentFixture<LoadingHostComponent> =
       await createFixture(LoadingHostComponent);
     await checkA11y(fixture, { rules: SKIP_COLOR_CONTRAST_RULES });
+  });
+
+  it('renders a button element for sm size', async (): Promise<void> => {
+    const fixture: ComponentFixture<SmHostComponent> = await createFixture(SmHostComponent);
+    expect(getButton(fixture).tagName).toBe('BUTTON');
+  });
+
+  it('renders a button element for md size (default)', async (): Promise<void> => {
+    const fixture: ComponentFixture<DefaultHostComponent> =
+      await createFixture(DefaultHostComponent);
+    expect(getButton(fixture).tagName).toBe('BUTTON');
+  });
+
+  it('renders a button element for lg size', async (): Promise<void> => {
+    const fixture: ComponentFixture<LgHostComponent> = await createFixture(LgHostComponent);
+    expect(getButton(fixture).tagName).toBe('BUTTON');
   });
 });

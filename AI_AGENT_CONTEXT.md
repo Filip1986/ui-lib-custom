@@ -63,7 +63,7 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 - `Galleria` -> ✅ complete + hardened (6-phase, score 8.3/10, 55 tests — 39 unit + 16 a11y)
 - `Button` -> ✅ complete + hardened (6-phase, score 8.9/10, 72 tests — 48 unit + 24 a11y)
 - `ImageCompare` -> ✅ complete + hardened (6-phase, score 8.9/10, 60 tests — 39 unit + 21 a11y)
-- `Icon` -> ✅ complete + hardened (6-phase, score 8.9/10, 30 tests — 12 unit + 20 a11y — DEV warn added)
+- `IconButton` -> ✅ complete + hardened (6-phase, score 8.8/10, 26 tests — 5 unit + 21 a11y)
 
 ---
 
@@ -78,22 +78,21 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
-Date: 2026-05-15 [Icon component — 6-phase hardening COMPLETE]
+Date: 2026-05-15 [IconButton component — 6-phase hardening COMPLETE]
 Changed:
-  - projects/ui-lib-custom/src/lib/icon/icon.ts
-  - projects/ui-lib-custom/src/lib/icon/icon.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/icon/README.md
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.scss
+  - projects/ui-lib-custom/src/lib/icon-button/icon-button.a11y.spec.ts
+  - projects/ui-lib-custom/src/lib/icon-button/README.md
   - docs/COMPONENT_SCORES.md
   - AI_AGENT_CONTEXT.md
   - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Icon now emits a DEV-mode `console.warn` via `effect()` when `clickable=true` is used without `ariaLabel` (styling-only flag misuse guard). The a11y spec was extended from 10 to 20 tests covering decorative default, informative mode, whitespace ariaLabel treated as decorative, tabindex=-1 in all modes, DEV warn assertions, ng-icon glyph aria-hidden in both modes, semantic `close` resolution, and `trash` alias resolution. README updated with `clickable` input row and expanded accessibility note. Icon scored at 8.9 and marked ✅ Done in COMPONENT_SCORES.md.
+State: IconButton now has a corrected `prefers-reduced-motion` SCSS rule with matching specificity to override the loading spinner animation (the existing rule had lower specificity than the loading animation rule and would not have stopped it). a11y spec extended to 21 tests — added SmHostComponent and LgHostComponent and three size-based button-element tests. README updated with compile-time required ariaLabel note and English-only loading label i18n limitation. IconButton formally scored 8.8 in COMPONENT_SCORES.md.
 Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/icon/" --no-coverage (30/30 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install`. All validations passed without issues.
-Next step: Continue with the next formally unscored component in the hardening queue (IconButton or AutoFocus).
+  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/icon-button/ --max-warnings 0 (PASS)
+  node_modules/.bin/jest --testPathPatterns="src/lib/icon-button/" --no-coverage (PASS)
+  node_modules/.bin/ng build ui-lib-custom (PASS)
+  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (PASS)
+Next step: Continue with next component in the hardening queue.
 
 Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
 Changed:
