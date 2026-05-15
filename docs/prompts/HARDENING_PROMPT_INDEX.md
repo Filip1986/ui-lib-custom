@@ -130,6 +130,58 @@ _The `needs-hardening/` folder is empty. When a new component is added to the li
 
 ---
 
+## Tier 2 — SCORING_CRITERIA.md Checkpoint Audits
+
+> **Status: Not yet started.** All 100 components have Tier 1 scores (hardening estimates).
+> Tier 2 produces checkpoint-verified scores (score = verified checkboxes / total × 10).
+> Required before benchmark article. Required before v1.0.
+>
+> **Prompt:** `docs/prompts/SCORING_CRITERIA_AUDIT_PROMPT.md`
+
+Run in priority order:
+
+### Priority 1 — Cited in the benchmark article (audit these first)
+
+| Component    | Tier 1 Avg | Tier 2 Status   | Risk                                             |
+|--------------|------------|-----------------|--------------------------------------------------|
+| Button       | 8.9        | ⬜ Not audited   | Low — but foundational                           |
+| Dialog       | 8.6        | ⬜ Not audited   | Medium — killer demo moment                      |
+| Select       | 8.2        | ⬜ Not audited   | High — hardest ARIA pattern, lowest Tier 1 score |
+| AutoComplete | 8.2        | ⬜ Not audited   | High — same reason as Select                     |
+| Toast        | 9.1        | ⬜ Not audited   | Medium — live region, a11y engineer scrutiny     |
+| Menubar      | 9.0        | ⬜ Not audited   | Medium — WAI-ARIA APG pattern benchmark          |
+| Table        | 8.6        | ⬜ Not audited   | Medium — enterprise scrutiny on grid ARIA        |
+
+### Priority 2 — Most at risk (currently 8.2–8.3 Tier 1 scores)
+
+| Component         | Tier 1 Avg | Tier 2 Status   |
+|-------------------|------------|-----------------|
+| Select            | 8.2        | ⬜ Not audited   |
+| AutoComplete      | 8.2        | ⬜ Not audited   |
+| CascadeSelect     | 8.2        | ⬜ Not audited   |
+| Knob              | 8.2        | ⬜ Not audited   |
+| ColorPicker       | 8.2        | ⬜ Not audited   |
+| Avatar            | 8.2        | ⬜ Not audited   |
+| DatePicker        | 8.3        | ⬜ Not audited   |
+| DynamicDialog     | 8.3        | ⬜ Not audited   |
+| ConfirmDialog     | 8.3        | ⬜ Not audited   |
+| DataView          | 8.3        | ⬜ Not audited   |
+| Timeline          | 8.3        | ⬜ Not audited   |
+| OrganizationChart | 8.3        | ⬜ Not audited   |
+| Carousel          | 8.3        | ⬜ Not audited   |
+| Galleria          | 8.3        | ⬜ Not audited   |
+| MeterGroup        | 8.3        | ⬜ Not audited   |
+| Badge             | 8.4        | ⬜ Not audited   |
+| ScrollTop         | 8.4        | ⬜ Not audited   |
+| FocusTrap         | 8.4        | ⬜ Not audited   |
+
+### Priority 3 — Remaining 75+ components
+
+All remaining components should be audited before v1.0. Work top-to-bottom through the
+completed hardenings table above, starting at the lowest Tier 1 average scores.
+
+---
+
 ## How to Use These Prompts
 
 1. Pick the next component in priority order (top to bottom within the Needs Hardening section).

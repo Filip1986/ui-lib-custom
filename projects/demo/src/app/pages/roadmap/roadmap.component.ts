@@ -2407,7 +2407,8 @@ export class RoadmapComponent {
         'Current scores were assigned during 6-phase hardening sessions (qualitative estimates). ' +
         'SCORING_CRITERIA.md defines a rigorous checkpoint-counted standard: score = verified checkboxes / total × 10. ' +
         'Every component needs a proper re-audit against all 11 categories (182 total checkpoints) before any score can be considered externally credible. ' +
-        'This is the single most important quality task before v1.0 — the axe-core benchmark article depends on it.',
+        'This is the single most important quality task before v1.0 — the axe-core benchmark article depends on it. ' +
+        'Prompt: docs/prompts/SCORING_CRITERIA_AUDIT_PROMPT.md · Priority order: docs/prompts/HARDENING_PROMPT_INDEX.md (Tier 2 section).',
       priority: 'critical',
       category: 'Quality',
     },
