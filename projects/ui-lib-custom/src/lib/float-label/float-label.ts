@@ -36,33 +36,51 @@ export class FloatLabelComponent implements AfterViewChecked {
   private readonly hostElementRef: ElementRef<HTMLElement> =
     inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly renderer: Renderer2 = inject(Renderer2);
+  private lastProjectedLabel: HTMLLabelElement | null = null;
+  private lastProjectedControl: HTMLElement | null = null;
+  private lastNativeControl: FloatLabelNativeControl | null = null;
 
   /** Defines the positioning of the label relative to the input. */
   public readonly variant: InputSignal<FloatLabelVariant> = input<FloatLabelVariant>('over');
 
   public ngAfterViewChecked(): void {
-    this.syncProjectedAccessibility();
-  }
-
-  private syncProjectedAccessibility(): void {
     const projectedLabel: HTMLLabelElement | null = this.resolveProjectedLabel();
     const projectedControl: HTMLElement | null = this.resolveProjectedControl();
 
     if (projectedLabel === null || projectedControl === null) {
+      this.lastProjectedLabel = projectedLabel;
+      this.lastProjectedControl = projectedControl;
+      this.lastNativeControl = null;
       return;
     }
 
-    const labelId: string = this.ensureElementId(
-      projectedLabel,
-      `uilib-float-label-label-${++nextFloatLabelLabelId}`
-    );
     const nativeControl: FloatLabelNativeControl | null =
       this.resolveNativeControl(projectedControl);
+
+    if (!this.needsSynchronization(projectedLabel, projectedControl, nativeControl)) {
+      return;
+    }
+
+    this.syncProjectedAccessibility(projectedLabel, projectedControl, nativeControl);
+    this.lastProjectedLabel = projectedLabel;
+    this.lastProjectedControl = projectedControl;
+    this.lastNativeControl = nativeControl;
+  }
+
+  private syncProjectedAccessibility(
+    projectedLabel: HTMLLabelElement,
+    projectedControl: HTMLElement,
+    nativeControl: FloatLabelNativeControl | null
+  ): void {
+    const labelId: string = this.ensureElementId(
+      projectedLabel,
+      `uilib-float-label-label-${nextFloatLabelLabelId++}`
+    );
 
     if (nativeControl !== null) {
       const controlId: string = this.ensureElementId(
         nativeControl,
-        `uilib-float-label-control-${++nextFloatLabelControlId}`
+        `uilib-float-label-control-${nextFloatLabelControlId++}`
       );
 
       if (projectedLabel.htmlFor !== controlId) {
@@ -74,6 +92,45 @@ export class FloatLabelComponent implements AfterViewChecked {
     }
 
     this.appendIdReference(projectedControl, 'aria-labelledby', labelId);
+  }
+
+  private needsSynchronization(
+    projectedLabel: HTMLLabelElement,
+    projectedControl: HTMLElement,
+    nativeControl: FloatLabelNativeControl | null
+  ): boolean {
+    if (
+      projectedLabel !== this.lastProjectedLabel ||
+      projectedControl !== this.lastProjectedControl ||
+      nativeControl !== this.lastNativeControl
+    ) {
+      return true;
+    }
+
+    if (projectedLabel.id.trim().length === 0) {
+      return true;
+    }
+
+    if (nativeControl !== null) {
+      if (nativeControl.id.trim().length === 0 || projectedLabel.htmlFor !== nativeControl.id) {
+        return true;
+      }
+
+      if (
+        !(nativeControl instanceof HTMLSelectElement) &&
+        (nativeControl.getAttribute('placeholder') ?? '').trim().length === 0
+      ) {
+        return true;
+      }
+
+      return false;
+    }
+
+    const labelledBy: string[] = (projectedControl.getAttribute('aria-labelledby') ?? '')
+      .split(/\s+/)
+      .filter((token: string): boolean => token.length > 0);
+
+    return !labelledBy.includes(projectedLabel.id);
   }
 
   private resolveProjectedLabel(): HTMLLabelElement | null {
