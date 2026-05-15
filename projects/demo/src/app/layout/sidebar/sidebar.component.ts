@@ -63,6 +63,18 @@ export class SidebarComponent {
       ],
     },
     {
+      label: 'Roadmap & Progress',
+      icon: 'pi pi-chart-bar',
+      expanded: false,
+      items: [
+        {
+          label: 'Overview',
+          icon: 'pi pi-circle',
+          route: '/roadmap',
+        },
+      ],
+    },
+    {
       label: 'Layout',
       icon: 'pi pi-th-large',
       expanded: false,

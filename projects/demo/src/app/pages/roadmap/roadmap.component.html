@@ -1,0 +1,303 @@
+<app-doc-page-layout [sections]="sections">
+
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <div class="doc-header" docHeader>
+    <h1>Library Roadmap &amp; Progress</h1>
+    <p class="doc-description">
+      A comprehensive view of where the library stands today, what has been achieved, what is
+      actively in-flight, and what comes next on the path to v1.0 and beyond.
+    </p>
+  </div>
+
+  <!-- ── Dashboard ──────────────────────────────────────────────────────── -->
+  <section id="dashboard" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">At a Glance</h2>
+    <p class="section-subtitle">Current state of the library as of May 2026 — component hardening milestone complete.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card stat-card--primary">
+        <div class="stat-icon">🧩</div>
+        <div class="stat-value">{{ totalComponents() }}</div>
+        <div class="stat-label">Total Components</div>
+        <div class="stat-detail">Across 7 categories</div>
+      </div>
+
+      <div class="stat-card stat-card--success">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value">{{ totalComponents() }} / {{ totalComponents() }}</div>
+        <div class="stat-label">Hardened &amp; Green</div>
+        <div class="stat-detail">All scored ≥ 8.0</div>
+      </div>
+
+      <div class="stat-card stat-card--gold">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-value">{{ averageScore() }}</div>
+        <div class="stat-label">Average Score</div>
+        <div class="stat-detail">Out of 10.0</div>
+      </div>
+
+      <div class="stat-card stat-card--accent">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-value">{{ perfectScoreCount() }}</div>
+        <div class="stat-label">Score ≥ 9.0</div>
+        <div class="stat-detail">Perfect or near-perfect</div>
+      </div>
+
+      <div class="stat-card stat-card--info">
+        <div class="stat-icon">🧪</div>
+        <div class="stat-value">2,500+</div>
+        <div class="stat-label">Tests Written</div>
+        <div class="stat-detail">Unit + a11y specs</div>
+      </div>
+
+      <div class="stat-card stat-card--milestone">
+        <div class="stat-icon">🚀</div>
+        <div class="stat-value">Phase 4</div>
+        <div class="stat-label">Current Target</div>
+        <div class="stat-detail">Public Beta prep</div>
+      </div>
+    </div>
+
+    <!-- Category breakdown -->
+    <div class="category-breakdown">
+      <h3 class="breakdown-title">Component Categories</h3>
+      <div class="category-chips">
+        @for (cat of categoryBreakdown(); track trackByCategory($index, cat)) {
+          <div class="category-chip">
+            <span class="category-chip__name">{{ cat.name }}</span>
+            <span class="category-chip__count">{{ cat.count }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Milestone Progress ─────────────────────────────────────────────── -->
+  <section id="milestone-progress" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Milestone Progress</h2>
+    <p class="section-subtitle">
+      6 phases from foundation cleanup to v1.0 GA. Phases 0–3 are complete — all 100 components hardened.
+    </p>
+
+    <div class="phases-timeline">
+      @for (phase of phases; track trackByPhaseId($index, phase)) {
+        <div class="phase-card" [class]="'phase-card--' + phase.status">
+          <div class="phase-header">
+            <div class="phase-badge">
+              @if (phase.status === 'complete') {
+                <span class="phase-icon">✅</span>
+              } @else if (phase.status === 'active') {
+                <span class="phase-icon phase-icon--pulse">🎯</span>
+              } @else {
+                <span class="phase-icon">⬜</span>
+              }
+              <span class="phase-number">Phase {{ phase.id }}</span>
+            </div>
+            <div class="phase-status-badge">
+              @if (phase.status === 'complete') {
+                <span class="status-pill status-pill--complete">COMPLETE</span>
+              } @else if (phase.status === 'active') {
+                <span class="status-pill status-pill--active">ACTIVE NEXT</span>
+              } @else {
+                <span class="status-pill status-pill--queued">QUEUED</span>
+              }
+            </div>
+          </div>
+
+          <h3 class="phase-name">{{ phase.name }}</h3>
+          <p class="phase-description">{{ phase.description }}</p>
+
+          @if (phase.milestone) {
+            <div class="phase-milestone">{{ phase.milestone }}</div>
+          }
+
+          @if (phase.componentCount !== null) {
+            <div class="phase-progress">
+              <div class="phase-progress__bar">
+                <div
+                  class="phase-progress__fill"
+                  [style.width.%]="phase.completedCount !== null ? (phase.completedCount / phase.componentCount) * 100 : 0"
+                ></div>
+              </div>
+              <span class="phase-progress__label">{{ phase.completedCount }} / {{ phase.componentCount }} components</span>
+            </div>
+          }
+
+          <div class="phase-exit-criteria">
+            <h4 class="exit-criteria-label">Exit Criteria</h4>
+            <ul class="exit-criteria-list">
+              @for (criterion of phase.exitCriteria; track trackByString($index, criterion)) {
+                <li class="exit-criteria-item">
+                  @if (phase.status === 'complete') {
+                    <span class="criterion-check">✓</span>
+                  } @else {
+                    <span class="criterion-check criterion-check--empty">○</span>
+                  }
+                  {{ criterion }}
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ── Component Scoreboard ───────────────────────────────────────────── -->
+  <section id="component-scoreboard" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Component Quality Scoreboard</h2>
+    <p class="section-subtitle">
+      Every component scored across 10 quality dimensions. Gate: all scores ≥ 8 = production-quality.
+      Columns: API · A11y · Perf · Comp · Theme · DX · Docs · Polish · Angular · Feel
+    </p>
+
+    <!-- Filter bar -->
+    <div class="scoreboard-filters">
+      <input
+        class="scoreboard-search"
+        type="search"
+        placeholder="Search components…"
+        [value]="searchQuery()"
+        (input)="onSearchChange($event)"
+        aria-label="Search components"
+      />
+      <div class="category-filter" role="group" aria-label="Filter by category">
+        @for (cat of categories; track trackByCategoryName($index, cat)) {
+          <button
+            class="category-filter__btn"
+            [class.active]="activeCategory() === cat"
+            (click)="setCategory(cat)"
+            [attr.aria-pressed]="activeCategory() === cat"
+            type="button"
+          >{{ cat }}</button>
+        }
+      </div>
+    </div>
+
+    <p class="scoreboard-count">
+      Showing {{ filteredComponents().length }} of {{ totalComponents() }} components
+    </p>
+
+    <!-- Score table -->
+    <div class="score-table-wrapper" role="region" aria-label="Component scores table">
+      <table class="score-table" aria-label="Component quality scores">
+        <thead>
+          <tr>
+            <th scope="col" class="col-name">Component</th>
+            <th scope="col" class="col-category">Category</th>
+            <th scope="col" class="col-score">API</th>
+            <th scope="col" class="col-score">A11y</th>
+            <th scope="col" class="col-score">Perf</th>
+            <th scope="col" class="col-score">Comp</th>
+            <th scope="col" class="col-score">Theme</th>
+            <th scope="col" class="col-score">DX</th>
+            <th scope="col" class="col-score">Docs</th>
+            <th scope="col" class="col-score">Polish</th>
+            <th scope="col" class="col-score">Angular</th>
+            <th scope="col" class="col-score">Feel</th>
+            <th scope="col" class="col-avg">Avg</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (component of filteredComponents(); track trackByName($index, component)) {
+            <tr class="score-row">
+              <td class="col-name">
+                <span class="component-name">{{ component.name }}</span>
+              </td>
+              <td class="col-category">
+                <span class="category-badge">{{ component.category }}</span>
+              </td>
+              <td class="col-score" [class]="getCellClass(component.api)">{{ component.api }}</td>
+              <td class="col-score" [class]="getCellClass(component.a11y)">{{ component.a11y }}</td>
+              <td class="col-score" [class]="getCellClass(component.perf)">{{ component.perf }}</td>
+              <td class="col-score" [class]="getCellClass(component.comp)">{{ component.comp }}</td>
+              <td class="col-score" [class]="getCellClass(component.theme)">{{ component.theme }}</td>
+              <td class="col-score" [class]="getCellClass(component.dx)">{{ component.dx }}</td>
+              <td class="col-score" [class]="getCellClass(component.docs)">{{ component.docs }}</td>
+              <td class="col-score" [class]="getCellClass(component.polish)">{{ component.polish }}</td>
+              <td class="col-score" [class]="getCellClass(component.angular)">{{ component.angular }}</td>
+              <td class="col-score" [class]="getCellClass(component.feel)">{{ component.feel }}</td>
+              <td class="col-avg" [class]="getScoreClass(component.avg)">
+                <strong>{{ component.avg }}</strong>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Score legend -->
+    <div class="score-legend" aria-label="Score color legend">
+      <span class="legend-title">Score Legend:</span>
+      <span class="legend-item cell-perfect">10 — Perfect</span>
+      <span class="legend-item cell-good">9 — Excellent</span>
+      <span class="legend-item cell-ok">8 — Production-Quality Gate</span>
+      <span class="legend-item score-gold">Avg ≥ 9.5 — Elite</span>
+      <span class="legend-item score-excellent">Avg ≥ 9.0 — Excellent</span>
+      <span class="legend-item score-good">Avg ≥ 8.5 — Strong</span>
+    </div>
+  </section>
+
+  <!-- ── Next Steps ─────────────────────────────────────────────────────── -->
+  <section id="next-steps" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Next Steps</h2>
+    <p class="section-subtitle">
+      The library hardening milestone is complete. These are the concrete actions standing between
+      here and the Public Beta launch.
+    </p>
+
+    <div class="next-steps-grid">
+      @for (step of nextSteps; track trackByTitle($index, step)) {
+        <div class="next-step-card" [class]="'next-step-card--' + step.priority">
+          <div class="next-step-header">
+            <div class="priority-tag" [class]="'priority-tag--' + step.priority">
+              @if (step.priority === 'critical') { 🔥 CRITICAL }
+              @else if (step.priority === 'high') { ⚡ HIGH }
+              @else { 📌 MEDIUM }
+            </div>
+            <div class="category-tag">{{ step.category }}</div>
+          </div>
+          <h3 class="next-step-title">{{ step.title }}</h3>
+          <p class="next-step-description">{{ step.description }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ── Wow Factors ────────────────────────────────────────────────────── -->
+  <section id="wow-factors" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">The Wow Factors Roadmap</h2>
+    <p class="section-subtitle">
+      Each "Wow Factor" is a committed narrative strength — something no other Angular library
+      comes close to. They are earned sequentially and permanently.
+    </p>
+
+    <div class="wow-factors-list">
+      @for (wow of wowFactors; track trackByWowNumber($index, wow)) {
+        <div class="wow-card" [class]="'wow-card--' + wow.status">
+          <div class="wow-card__header">
+            <div class="wow-number">WF{{ wow.number }}</div>
+            <div class="wow-status-badge">
+              @if (wow.status === 'achieved') {
+                <span class="wow-pill wow-pill--achieved">✅ ACHIEVED</span>
+              } @else if (wow.status === 'in-progress') {
+                <span class="wow-pill wow-pill--progress">🔄 IN PROGRESS</span>
+              } @else {
+                <span class="wow-pill wow-pill--queued">⬡ Post v1.0</span>
+              }
+            </div>
+          </div>
+          <h3 class="wow-title">{{ wow.title }}</h3>
+          <p class="wow-tagline">"{{ wow.tagline }}"</p>
+          <ul class="wow-items">
+            @for (item of wow.items; track trackByString($index, item)) {
+              <li class="wow-item">{{ item }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </section>
+
+</app-doc-page-layout>
+

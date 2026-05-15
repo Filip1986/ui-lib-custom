@@ -824,6 +824,14 @@ export const routes: Routes = [
       ),
     title: 'Upload - UI Components Library',
   },
+  {
+    path: 'roadmap',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/roadmap/roadmap.component').then(
+        (m: { RoadmapComponent: Type<unknown> }): Type<unknown> => m.RoadmapComponent
+      ),
+    title: 'Roadmap & Progress - UI Components Library',
+  },
   { path: '', redirectTo: 'shadows', pathMatch: 'full' },
   { path: '**', redirectTo: 'shadows' },
 ];
