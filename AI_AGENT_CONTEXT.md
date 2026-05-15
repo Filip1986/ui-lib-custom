@@ -80,6 +80,18 @@ Do not duplicate stable project rules here; link to `AGENTS.md` instead.
 
 ## Recent Handoffs
 
+Date: 2026-05-15 [Phase 0 infrastructure gaps closed — z-index manager wired into Dialog and Drawer]
+Changed:
+  - projects/ui-lib-custom/src/lib/dialog/dialog.component.ts (import + call claimOverlayZIndex on open, releaseOverlayZIndex on close)
+  - projects/ui-lib-custom/src/lib/drawer/drawer.ts (same pattern)
+  - docs/ROADMAP.md (Phase 0 all items checked off; Phases 1–3 marked complete; Phase 4 marked active; progress summary updated to reflect 76+ / 76 components green)
+State: Phase 0 COMPLETE. All five infrastructure items confirmed done (icon-button entry point, alert entry point, overlay z-index manager, knip, reference docs). Dialog and Drawer now participate in the shared claimOverlayZIndex stacking system — nested dropdowns (AutoComplete, CascadeSelect, ColorPicker, DatePicker) opened inside a dialog will always stack above it. ROADMAP now accurately reflects current state: Phase 4 (Public Beta) is the active phase.
+Verification:
+  eslint projects/ui-lib-custom/src/lib/dialog/ projects/ui-lib-custom/src/lib/drawer/ --max-warnings 0 (PASS)
+  ng build ui-lib-custom (PASS, zero errors, zero warnings)
+Terminal notes: node_modules not present in worktree — run all tools from main repo root (D:/Work/Personal/Github/ui-lib-custom) with paths pointing to worktree files.
+Next step: Begin Phase 4 — start with the full axe-core audit (npm run test:a11y:all) then Storybook integration, then npm publish prep.
+
 Date: 2026-05-15 [Full hardening audit — ToggleSwitch, Icon, IconButton confirmed complete]
 Changed:
   - docs/COMPONENT_SCORES.md (scored ToggleSwitch 8.8, Icon 8.7, IconButton 8.6; fixed ToggleButton avg 8.7, KeyFilter avg 8.6, DataView avg 8.3; added ⏳ status symbol; reverted premature ✅ Done badges)
@@ -111,24 +123,4 @@ Verification:
 Terminal notes: Fresh clone required `npm install` before validation tools were available. Recent GitHub Actions runs on the working branch were checked via MCP and were `action_required` rather than failed-job runs. Playwright MCP browser was locked, so Chromium was installed with `npx playwright install chromium` and the float-label demo screenshot was captured via Node Playwright at `/tmp/float-label-hardening.png`.
 Next step: Continue with the next unscored new layout/utility component in `docs/prompts/needs-hardening/` using the same score-first hardening flow.
 
----
-
-Date: 2026-05-14 [Rating component — formal scoring refresh COMPLETE]
-Changed:
-  - projects/ui-lib-custom/src/lib/rating/rating.ts
-  - projects/ui-lib-custom/src/lib/rating/rating.spec.ts
-  - projects/ui-lib-custom/src/lib/rating/rating.a11y.spec.ts
-  - projects/ui-lib-custom/src/lib/rating/README.md
-  - docs/reference/components/RATING.md
-  - docs/COMPONENT_SCORES.md
-  - AI_AGENT_CONTEXT.md
-  - docs/implementation/AI_AGENT_CONTEXT_ARCHIVE.md
-State: Rating now keeps `aria-labelledby` precedence over fallback `aria-label`, emits a DEV-mode warning when no accessible name is provided in interactive mode, exposes richer per-star labels (`N star(s) out of M`), and expands dedicated accessibility coverage to 28 focused tests while formally recording the component as scored/complete in the scorecard.
-Verification:
-  node_modules/.bin/eslint projects/ui-lib-custom/src/lib/rating/ --max-warnings 0 (PASS)
-  node_modules/.bin/jest --testPathPatterns="src/lib/rating/" --no-coverage (81/81 PASS)
-  node_modules/.bin/ng build ui-lib-custom (PASS, zero errors)
-  node_modules/.bin/jest --testPathPatterns=entry-points --no-coverage (97/97 PASS)
-Terminal notes: Fresh clone required `npm install` before validation tools were available. Playwright MCP browser was locked, so Chromium was installed with `npx playwright install chromium` and the rating demo screenshot was captured via Playwright CLI at `/tmp/rating-hardening.png`.
-Next step: Continue with the next formally unscored component in the hardening queue.
 
