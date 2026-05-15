@@ -236,6 +236,242 @@
       <span class="legend-item score-excellent">Avg ≥ 9.0 — Excellent</span>
       <span class="legend-item score-good">Avg ≥ 8.5 — Strong</span>
     </div>
+
+    <!-- Scoring dimensions reference -->
+    <details class="scoring-criteria-panel">
+      <summary class="scoring-criteria-summary">
+        📐 Scoring Criteria — what each column measures
+        <span class="scoring-criteria-hint">(11 categories · checkpoint-anchored · score = checked / total × 10)</span>
+      </summary>
+      <div class="scoring-criteria-grid" role="list">
+        @for (dim of scoringDimensions; track trackByDimension($index, dim)) {
+          <div class="scoring-dim-card" [class.scoring-dim-card--gate]="dim.column === 'Cat. 11'" role="listitem">
+            <div class="scoring-dim-header">
+              <span class="scoring-dim-column">{{ dim.column }}</span>
+              <span class="scoring-dim-checkpoints">{{ dim.checkpoints }} checkpoints</span>
+            </div>
+            <p class="scoring-dim-name">{{ dim.fullName }}</p>
+            <p class="scoring-dim-gate">{{ dim.gate }}</p>
+            <p class="scoring-dim-standard">Ref: {{ dim.standard }}</p>
+          </div>
+        }
+      </div>
+      <p class="scoring-criteria-source">
+        Full criteria with all checkboxes across 11 scoring categories:
+        <code>docs/SCORING_CRITERIA.md</code>
+      </p>
+    </details>
+  </section>
+
+  <!-- ── Build Queue ───────────────────────────────────────────────────── -->
+  <section id="build-queue" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Build Queue</h2>
+    <p class="section-subtitle">
+      Prioritised list of components to build next. Ordered by developer impact and competitive
+      gap. Low-complexity items first — maximum value before Public Beta.
+    </p>
+
+    <h3 class="queue-group-title">🚧 Active Queue — Pre-Public Beta</h3>
+    <div class="build-queue-list" role="list">
+      @for (item of buildQueue; track trackByPriority($index, item)) {
+        <div class="queue-item" role="listitem">
+          <div class="queue-item__priority">#{{ item.priority }}</div>
+          <div class="queue-item__body">
+            <div class="queue-item__header">
+              <span class="queue-item__name">{{ item.name }}</span>
+              <span class="queue-item__complexity" [class]="'complexity-badge--' + getComplexityClass(item.complexity)">
+                {{ item.complexity }}
+              </span>
+            </div>
+            <p class="queue-item__rationale">{{ item.rationale }}</p>
+            <span class="queue-item__reference">Ref: {{ item.reference }}</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <h3 class="queue-group-title queue-group-title--horizon">🔭 Horizon Queue — Post v1.0</h3>
+    <div class="build-queue-list" role="list">
+      @for (item of horizonQueue; track trackByPriority($index, item)) {
+        <div class="queue-item queue-item--horizon" role="listitem">
+          <div class="queue-item__priority">#{{ item.priority }}</div>
+          <div class="queue-item__body">
+            <div class="queue-item__header">
+              <span class="queue-item__name">{{ item.name }}</span>
+              <span class="queue-item__complexity" [class]="'complexity-badge--' + getComplexityClass(item.complexity)">
+                {{ item.complexity }}
+              </span>
+            </div>
+            <p class="queue-item__rationale">{{ item.rationale }}</p>
+            <span class="queue-item__reference">Ref: {{ item.reference }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ── Documentation Status ───────────────────────────────────────────── -->
+  <section id="documentation-status" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Documentation Status</h2>
+    <p class="section-subtitle">
+      Tracking formal reference docs, implementation docs, and demo pages per component.
+      {{ docCompleteCount() }} of {{ docStatusItems.length - 1 }} tracked components have complete formal documentation.
+    </p>
+
+    <div class="doc-status-table-wrapper" role="region" aria-label="Documentation status table">
+      <table class="doc-status-table" aria-label="Documentation status per component">
+        <thead>
+          <tr>
+            <th scope="col" class="doc-col-name">Component</th>
+            <th scope="col" class="doc-col-check">API Doc</th>
+            <th scope="col" class="doc-col-check">Impl Doc</th>
+            <th scope="col" class="doc-col-check">Demo Page</th>
+            <th scope="col" class="doc-col-status">Status</th>
+            <th scope="col" class="doc-col-notes">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of docStatusItems; track trackByComponent($index, item)) {
+            <tr class="doc-row" [class]="'doc-row--' + item.status">
+              <td class="doc-col-name">{{ item.component }}</td>
+              <td class="doc-col-check doc-check--center">
+                @if (item.hasApiDoc) { <span class="doc-check doc-check--yes" aria-label="Yes">✓</span> }
+                @else { <span class="doc-check doc-check--no" aria-label="No">✗</span> }
+              </td>
+              <td class="doc-col-check doc-check--center">
+                @if (item.hasImplDoc) { <span class="doc-check doc-check--yes" aria-label="Yes">✓</span> }
+                @else { <span class="doc-check doc-check--no" aria-label="No">✗</span> }
+              </td>
+              <td class="doc-col-check doc-check--center">
+                @if (item.hasDemoPage) { <span class="doc-check doc-check--yes" aria-label="Yes">✓</span> }
+                @else { <span class="doc-check doc-check--no" aria-label="No">✗</span> }
+              </td>
+              <td class="doc-col-status">
+                @if (item.status === 'complete') {
+                  <span class="doc-status-pill doc-status-pill--complete">Complete</span>
+                } @else if (item.status === 'partial') {
+                  <span class="doc-status-pill doc-status-pill--partial">Partial</span>
+                } @else {
+                  <span class="doc-status-pill doc-status-pill--missing">Missing</span>
+                }
+              </td>
+              <td class="doc-col-notes">{{ item.notes ?? '—' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Competitive Strategy ───────────────────────────────────────────── -->
+  <section id="competitive-strategy" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Competitive Positioning</h2>
+    <p class="section-subtitle">
+      How this library compares to Angular Material, PrimeNG, and Ng-Zorro on Angular modernity
+      checks — and where it goes beyond all of them.
+    </p>
+
+    <h3 class="competitive-group-title">Angular Modernity Scorecard</h3>
+    <div class="modernity-table-wrapper" role="region" aria-label="Angular modernity comparison">
+      <table class="modernity-table" aria-label="Angular modernity feature comparison">
+        <thead>
+          <tr>
+            <th scope="col" class="mod-col-check">Check</th>
+            <th scope="col" class="mod-col-lib">Angular Material</th>
+            <th scope="col" class="mod-col-lib">PrimeNG</th>
+            <th scope="col" class="mod-col-lib">Ng-Zorro</th>
+            <th scope="col" class="mod-col-lib mod-col-lib--this">This Library</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of modernityRows; track trackByCheck($index, row)) {
+            <tr class="mod-row">
+              <td class="mod-col-check">{{ row.check }}</td>
+              <td class="mod-col-lib" [class]="getModernityClass(row.angularMaterial)">
+                {{ getModernityLabel(row.angularMaterial) }}
+              </td>
+              <td class="mod-col-lib" [class]="getModernityClass(row.primeNG)">
+                {{ getModernityLabel(row.primeNG) }}
+              </td>
+              <td class="mod-col-lib" [class]="getModernityClass(row.ngZorro)">
+                {{ getModernityLabel(row.ngZorro) }}
+              </td>
+              <td class="mod-col-lib mod-col-lib--this" [class]="getModernityClass(row.thisLibrary)">
+                {{ getModernityLabel(row.thisLibrary) }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="competitive-group-title">Library-Wide Differentiators</h3>
+    <div class="differentiators-list" role="list">
+      @for (diff of differentiators; track trackByFeature($index, diff)) {
+        <div class="differentiator-card" [class.differentiator-card--unique]="diff.isUnique" role="listitem">
+          @if (diff.isUnique) {
+            <span class="unique-badge">🚀 Unique in Angular ecosystem</span>
+          }
+          <p class="differentiator-feature">{{ diff.feature }}</p>
+          <p class="differentiator-notes">{{ diff.notes }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ── Launch Sequence ────────────────────────────────────────────────── -->
+  <section id="launch-sequence" data-doc-anchor class="roadmap-section">
+    <h2 class="section-title">Launch Path</h2>
+    <p class="section-subtitle">
+      The sequenced strategy for going from "done" to "discovered." Build credibility before
+      announcement. Seed before launch. Education before marketing.
+    </p>
+
+    <div class="launch-readiness">
+      <h3 class="launch-readiness-title">Launch Readiness Gates</h3>
+      <div class="readiness-list" role="list">
+        @for (gate of launchReadiness; track trackByReadinessLabel($index, gate)) {
+          <div class="readiness-item" [class]="'readiness-item--' + gate.status" role="listitem">
+            <div class="readiness-icon">
+              @if (gate.status === 'done') { <span aria-label="Done">✅</span> }
+              @else if (gate.status === 'active') { <span aria-label="In progress">🔄</span> }
+              @else { <span aria-label="Queued">⬜</span> }
+            </div>
+            <div class="readiness-body">
+              <span class="readiness-label">{{ gate.label }}</span>
+              <span class="readiness-gate">{{ gate.gate }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="launch-steps">
+      @for (step of launchSteps; track trackByLaunchId($index, step)) {
+        <div class="launch-step" [class]="'launch-step--' + step.status">
+          <div class="launch-step__header">
+            <div class="launch-step__number">Step {{ step.id }}</div>
+            <div class="launch-step__status-pill">
+              @if (step.status === 'done') {
+                <span class="status-pill status-pill--complete">DONE</span>
+              } @else if (step.status === 'active') {
+                <span class="status-pill status-pill--active">ACTIVE</span>
+              } @else {
+                <span class="status-pill status-pill--queued">QUEUED</span>
+              }
+            </div>
+          </div>
+          <h3 class="launch-step__title">{{ step.title }}</h3>
+          <p class="launch-step__gate">🔒 Gate: {{ step.gate }}</p>
+          <p class="launch-step__description">{{ step.description }}</p>
+          <ul class="launch-step__actions">
+            @for (action of step.actions; track trackByString($index, action)) {
+              <li class="launch-step__action">{{ action }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
   </section>
 
   <!-- ── Next Steps ─────────────────────────────────────────────────────── -->

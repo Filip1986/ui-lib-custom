@@ -47,9 +47,59 @@ export interface WowFactor {
   items: string[];
 }
 
+export interface ScoringDimension {
+  column: string;
+  fullName: string;
+  checkpoints: number;
+  gate: string;
+  standard: string;
+}
+
+export interface BuildQueueItem {
+  priority: number;
+  name: string;
+  rationale: string;
+  complexity: 'Very Low' | 'Low' | 'Low-Medium' | 'Medium' | 'Medium-High' | 'High';
+  reference: string;
+  status: 'queued' | 'in-progress' | 'done' | 'horizon';
+}
+
+export interface DocStatusItem {
+  component: string;
+  hasApiDoc: boolean;
+  hasImplDoc: boolean;
+  hasDemoPage: boolean;
+  status: 'complete' | 'partial' | 'missing';
+  notes?: string;
+}
+
+export interface ModernityRow {
+  check: string;
+  angularMaterial: 'yes' | 'no' | 'partial';
+  primeNG: 'yes' | 'no' | 'partial';
+  ngZorro: 'yes' | 'no' | 'partial';
+  thisLibrary: 'yes' | 'no' | 'partial';
+}
+
+export interface Differentiator {
+  feature: string;
+  notes: string;
+  isUnique: boolean;
+}
+
+export interface LaunchStep {
+  id: number;
+  title: string;
+  description: string;
+  status: 'done' | 'active' | 'queued';
+  gate: string;
+  actions: string[];
+}
+
 /**
  * Roadmap and progress tracker page for the ui-lib-custom library.
- * Displays dashboard stats, milestone phases, component quality scores, next steps, and wow factors.
+ * Covers dashboard, milestones, scoreboard, build queue, docs status,
+ * competitive positioning, launch sequence, next steps, and wow factors.
  */
 @Component({
   selector: 'app-roadmap',
@@ -62,8 +112,12 @@ export interface WowFactor {
 export class RoadmapComponent {
   public readonly sections: DocSection[] = [
     { id: 'dashboard', label: 'Dashboard' },
-    { id: 'milestone-progress', label: 'Milestone Progress' },
-    { id: 'component-scoreboard', label: 'Component Scoreboard' },
+    { id: 'milestone-progress', label: 'Milestones' },
+    { id: 'component-scoreboard', label: 'Scoreboard' },
+    { id: 'build-queue', label: 'Build Queue' },
+    { id: 'documentation-status', label: 'Docs Status' },
+    { id: 'competitive-strategy', label: 'Competitive' },
+    { id: 'launch-sequence', label: 'Launch Path' },
     { id: 'next-steps', label: 'Next Steps' },
     { id: 'wow-factors', label: 'Wow Factors' },
   ];
@@ -85,7 +139,6 @@ export class RoadmapComponent {
 
   // ── Component score data ──────────────────────────────────────────────────
   public readonly allComponents: ComponentScore[] = [
-    // Core Inputs
     {
       name: 'Button',
       category: 'Core Inputs',
@@ -175,6 +228,21 @@ export class RoadmapComponent {
       angular: 9,
       feel: 8,
       avg: 8.2,
+    },
+    {
+      name: 'DatePicker',
+      category: 'Core Inputs',
+      api: 8,
+      a11y: 9,
+      perf: 8,
+      comp: 8,
+      theme: 8,
+      dx: 8,
+      docs: 9,
+      polish: 8,
+      angular: 9,
+      feel: 8,
+      avg: 8.3,
     },
     {
       name: 'Checkbox',
@@ -386,7 +454,6 @@ export class RoadmapComponent {
       feel: 8,
       avg: 8.6,
     },
-    // Layout
     {
       name: 'Card',
       category: 'Layout',
@@ -612,7 +679,6 @@ export class RoadmapComponent {
       feel: 9,
       avg: 8.9,
     },
-    // Overlay & Modal
     {
       name: 'Dialog',
       category: 'Overlay & Modal',
@@ -733,7 +799,6 @@ export class RoadmapComponent {
       feel: 9,
       avg: 8.9,
     },
-    // Navigation & Menus
     {
       name: 'Tabs',
       category: 'Navigation & Menus',
@@ -914,7 +979,6 @@ export class RoadmapComponent {
       feel: 8,
       avg: 8.8,
     },
-    // Data Display
     {
       name: 'Table',
       category: 'Data Display',
@@ -1140,7 +1204,6 @@ export class RoadmapComponent {
       feel: 9,
       avg: 8.9,
     },
-    // Feedback & Status
     {
       name: 'Alert',
       category: 'Feedback & Status',
@@ -1291,7 +1354,6 @@ export class RoadmapComponent {
       feel: 8,
       avg: 8.3,
     },
-    // Utilities & Directives
     {
       name: 'Avatar',
       category: 'Utilities & Directives',
@@ -1579,7 +1641,6 @@ export class RoadmapComponent {
     },
   ];
 
-  // ── Filtered components ───────────────────────────────────────────────────
   public readonly filteredComponents: Signal<ComponentScore[]> = computed<ComponentScore[]>(
     (): ComponentScore[] => {
       const query: string = this.searchQuery().toLowerCase().trim();
@@ -1592,7 +1653,6 @@ export class RoadmapComponent {
     }
   );
 
-  // ── Dashboard stats ───────────────────────────────────────────────────────
   public readonly totalComponents: Signal<number> = computed<number>(
     (): number => this.allComponents.length
   );
@@ -1632,9 +1692,9 @@ export class RoadmapComponent {
       componentCount: null,
       completedCount: null,
       exitCriteria: [
-        'Secondary entry points for all components created',
-        'Overlay appendTo / z-index manager in place',
-        'knip dead-code baseline complete',
+        'Secondary entry points for all components',
+        'Overlay appendTo / z-index manager',
+        'knip dead-code baseline',
         'Documentation gaps resolved for core components',
       ],
     },
@@ -1642,13 +1702,13 @@ export class RoadmapComponent {
       id: 1,
       name: 'Elite A11y — Overlays & Navigation',
       description:
-        'The most complex ARIA patterns correct, tested, and audited. Focus traps, aria-modal, menu keyboard navigation.',
+        'Focus traps, aria-modal, menu keyboard navigation — the patterns developers scrutinise first.',
       status: 'complete',
       componentCount: 17,
       completedCount: 17,
       exitCriteria: [
         'All 17 overlay & navigation components scored ≥ 8',
-        'Internal axe-core audit run — violations resolved',
+        'Internal axe-core audit — violations resolved',
         'Zero open a11y regressions in Tier 1 or Tier 2',
       ],
     },
@@ -1656,7 +1716,7 @@ export class RoadmapComponent {
       id: 2,
       name: 'Elite A11y — Forms & Data Display',
       description:
-        'Form controls and data components production-quality. Daily-driver components developers trust.',
+        'Form controls and data components production-quality — the daily-driver components teams trust.',
       status: 'complete',
       componentCount: 20,
       completedCount: 20,
@@ -1669,54 +1729,667 @@ export class RoadmapComponent {
     {
       id: 3,
       name: 'Full Coverage + Ecosystem',
-      description: 'Every component green. Library ready to be shown publicly.',
+      description:
+        'Every component green. 100 components hardened. Library ready to be shown publicly.',
       status: 'complete',
-      componentCount: 76,
-      completedCount: 76,
+      componentCount: 100,
+      completedCount: 100,
+      milestone: '🏆 Component Hardening Milestone ACHIEVED',
       exitCriteria: [
-        'All 76 original components scored ≥ 8',
-        'All new components (24+) scored ≥ 8',
-        'Storybook integration deployed',
-        'Full axe-core audit — zero violations target',
+        'All 76 original components scored ≥ 8 ✓',
+        'All 24+ new components scored ≥ 8 ✓',
+        'Storybook built',
         'npm run test:a11y:all passes',
       ],
-      milestone: 'Component Hardening Milestone ACHIEVED ✅',
     },
     {
       id: 4,
       name: 'Public Beta 🚀',
-      description: 'First public release. Library is on npm. Developers can use it.',
+      description: 'First public release. Library on npm. Developers can install and use it.',
       status: 'active',
       componentCount: null,
       completedCount: null,
+      milestone: '🎯 NEXT MAJOR MILESTONE',
       exitCriteria: [
         'npm publish — first public version (0.9.0)',
-        'Landing page live with benchmark claims',
-        'Documentation site live with interactive demos',
-        'Open benchmark repo published (axe-core, Angular modernity, bundle sizes)',
-        'Competitive positioning content ready',
-        'Community announcement — Angular channels, Dev.to, X/Twitter',
+        'Landing page live — "Built Different" benchmark section',
+        'Documentation site with interactive demos',
+        'Open benchmark repo published',
+        'Demo video recorded',
+        '10+ seed developers with positive signal',
+        'Angular community announcement',
       ],
-      milestone: 'NEXT MAJOR MILESTONE',
     },
     {
       id: 5,
       name: 'v1.0 General Availability 🏆',
-      description: 'Wow Factor #2 complete. The library is what it set out to be.',
+      description:
+        'Wow Factor #2 complete. Theming is astonishing. The library is what it set out to be.',
       status: 'queued',
       componentCount: null,
       completedCount: null,
+      milestone: '🎨 WOW FACTOR #2 TARGET',
       exitCriteria: [
         'Runtime theme switching — seamless, no flash',
-        'Full --uilib-* CSS var coverage across all components',
+        'Full --uilib-* CSS var coverage across all 100 components',
         'Theme preset management (multiple built-in presets)',
-        'Brand customization path — documented, < 30 min to custom brand',
-        'Every component at scorecard ≥ 9 average',
-        'Zero open a11y issues from community reports',
-        'Storybook stories cover all variants',
+        'Brand customization < 30 min documented path',
+        'Every component scorecard average ≥ 9',
+        'Zero open a11y community issues',
         'Version tagged 1.0.0 on npm',
       ],
-      milestone: 'WOW FACTOR #2 TARGET',
+    },
+  ];
+
+  // ── Scoring Dimensions (from SCORING_CRITERIA.md) ───────────────────────
+  public readonly scoringDimensions: ScoringDimension[] = [
+    {
+      column: 'API',
+      fullName: 'API Clarity',
+      checkpoints: 16,
+      gate: 'Inputs/outputs feel obvious without reading docs; consistent naming; intelligent defaults.',
+      standard: 'Angular Style Guide · TypeScript Handbook · Angular Material / Radix UI',
+    },
+    {
+      column: 'A11y',
+      fullName: 'Accessibility',
+      checkpoints: 28,
+      gate: 'Full keyboard nav, correct ARIA, screen reader tested, reduced motion, high contrast — zero axe-core violations.',
+      standard: 'WAI-ARIA APG · WCAG 2.1 AA · axe-core · Angular CDK',
+    },
+    {
+      column: 'Perf',
+      fullName: 'Performance',
+      checkpoints: 20,
+      gate: 'No unnecessary renders, signals used correctly, no memory leaks, tree-shaking verified, animations on transform/opacity only.',
+      standard: 'Angular Performance Guide · Core Web Vitals · Bundle budget ≤ 15 KB gzip',
+    },
+    {
+      column: 'Comp',
+      fullName: 'Composability',
+      checkpoints: 14,
+      gate: 'Content projection slots sufficient; developer can extend without forking; directive alternatives exist where useful.',
+      standard: 'Melt UI · Headless UI · Ark UI · Angular CDK',
+    },
+    {
+      column: 'Theme',
+      fullName: 'Theming',
+      checkpoints: 15,
+      gate: 'All visual properties exposed as --uilib-* CSS vars; dark mode works; runtime variant switching works.',
+      standard: 'CSS Custom Properties W3C · --uilib-{component}-{property}[-{variant}][-{state}]',
+    },
+    {
+      column: 'DX',
+      fullName: 'Developer Experience',
+      checkpoints: 17,
+      gate: 'TypeScript autocomplete excellent; error states clear; common use case requires ≤ 3 lines of consumer code.',
+      standard: 'shadcn/ui · Angular Material · Nuxt UI · TypeScript strict mode',
+    },
+    {
+      column: 'Docs',
+      fullName: 'Documentation',
+      checkpoints: 18,
+      gate: 'README has selector, all inputs/outputs, content projection, usage example, a11y notes, and edge cases.',
+      standard: 'Diátaxis framework · Radix UI docs · Nuxt UI docs',
+    },
+    {
+      column: 'Polish',
+      fullName: 'Visual & Interaction Polish',
+      checkpoints: 15,
+      gate: 'Animations feel smooth and intentional; all interactive states styled; no jarring reflows.',
+      standard: 'Vercel Design System · Radix UI Themes · Motion design principles',
+    },
+    {
+      column: 'Angular',
+      fullName: 'Angular Integration',
+      checkpoints: 16,
+      gate: 'Signals-first, OnPush, standalone, SSR-safe, hydration-safe, zoneless-compatible.',
+      standard: 'Angular Style Guide · Angular Signals · Angular SSR · Angular CDK',
+    },
+    {
+      column: 'Feel',
+      fullName: 'Emotional Quality',
+      checkpoints: 10,
+      gate: 'Using the component feels satisfying — a developer who uses it would not switch to another library.',
+      standard: 'No external standard — honest self-evaluation against 10 specific questions',
+    },
+    {
+      column: 'Cat. 11',
+      fullName: 'Competitive Parity & Differentiation',
+      checkpoints: 13,
+      gate: 'No unresolved capability gap vs Material or PrimeNG. At least one differentiator unique to this library. Does not affect the 10-column Avg score — gates production quality separately.',
+      standard: 'Angular Material · PrimeNG · Radix UI · Ark UI · Melt UI',
+    },
+  ];
+
+  // ── Build Queue ───────────────────────────────────────────────────────────
+  public readonly buildQueue: BuildQueueItem[] = [
+    {
+      priority: 1,
+      name: 'DateRangePicker',
+      rationale:
+        'Every major library has it. Date range selection is a daily developer need. PrimeNG, Material, Ng-Zorro all ship one.',
+      complexity: 'Medium',
+      reference: 'PrimeNG DatePicker / Material DateRangePicker',
+      status: 'queued',
+    },
+    {
+      priority: 2,
+      name: 'TimePicker',
+      rationale:
+        'Standalone time input; extremely common in scheduling / booking UIs. Very low a11y complexity.',
+      complexity: 'Low-Medium',
+      reference: 'PrimeNG TimePicker, Ng-Zorro TimePicker',
+      status: 'queued',
+    },
+    {
+      priority: 3,
+      name: 'Empty State',
+      rationale:
+        '"No data" placeholder; every app needs this; almost no library ships it as a proper component. Highest bang-for-buck.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Empty',
+      status: 'queued',
+    },
+    {
+      priority: 4,
+      name: 'Statistic / Number Display',
+      rationale:
+        'Key metric display with label + trend; ubiquitous in dashboards. Only Ng-Zorro has it — big differentiator.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Statistic',
+      status: 'queued',
+    },
+    {
+      priority: 5,
+      name: 'Typography',
+      rationale:
+        'Semantic Heading / Text / Code / Link with token-driven styling. shadcn and Ng-Zorro have it; gives library a complete design-system feel.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Typography, shadcn Typography',
+      status: 'queued',
+    },
+    {
+      priority: 6,
+      name: 'Descriptions / Definition List',
+      rationale:
+        'Key-value pair display; common in detail views. Only Ng-Zorro ships this — easy differentiator win.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Descriptions',
+      status: 'queued',
+    },
+    {
+      priority: 7,
+      name: 'Segmented Control',
+      rationale:
+        'View-switcher pattern (Grid/List, Day/Week/Month); distinct from SelectButton (which is a toggle).',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Segmented',
+      status: 'queued',
+    },
+    {
+      priority: 8,
+      name: 'Kbd / Keyboard Shortcut Badge',
+      rationale:
+        'Display keyboard shortcuts inline in tooltips and menus. Only shadcn ships this — small but DX-delightful differentiator.',
+      complexity: 'Very Low',
+      reference: 'shadcn/ui Kbd',
+      status: 'queued',
+    },
+    {
+      priority: 9,
+      name: 'Splitter / Resizable Panels',
+      rationale:
+        'Two or more resizable panes; needed in IDEs, dashboards, editors. PrimeNG, Ng-Zorro, shadcn all have it.',
+      complexity: 'Medium-High',
+      reference: 'PrimeNG Splitter, shadcn Resizable',
+      status: 'queued',
+    },
+    {
+      priority: 10,
+      name: 'Scroll Area',
+      rationale:
+        'Custom-styled scrollbar overlay preserving native scroll. Radix and shadcn ship it — no Angular libraries do.',
+      complexity: 'Medium',
+      reference: 'Radix ScrollArea, shadcn Scroll Area',
+      status: 'queued',
+    },
+    {
+      priority: 11,
+      name: 'Calendar (full view)',
+      rationale:
+        'Full month/year grid for scheduling and event display; distinct from DatePicker. 4 of 6 reference libraries have it.',
+      complexity: 'High',
+      reference: 'PrimeNG Calendar, Ng-Zorro Calendar',
+      status: 'queued',
+    },
+    {
+      priority: 12,
+      name: 'Navigation Menu',
+      rationale:
+        'Top-level horizontal nav with rich dropdown panels; distinct from Menubar. shadcn and Radix both have it first-class.',
+      complexity: 'Medium',
+      reference: 'Radix NavigationMenu, shadcn Navigation Menu',
+      status: 'queued',
+    },
+  ];
+
+  public readonly horizonQueue: BuildQueueItem[] = [
+    {
+      priority: 1,
+      name: 'Command Palette',
+      rationale:
+        'Already in VISION.md; high complexity; global keyboard shortcut management. The sexiest DX component.',
+      complexity: 'High',
+      reference: 'shadcn/ui Command',
+      status: 'horizon',
+    },
+    {
+      priority: 2,
+      name: 'Hover Card',
+      rationale:
+        'Rich tooltip-like card on hover; distinct from Tooltip. Needs deliberate API design.',
+      complexity: 'Medium',
+      reference: 'Radix HoverCard, shadcn Hover Card',
+      status: 'horizon',
+    },
+    {
+      priority: 3,
+      name: 'Collapsible',
+      rationale:
+        'Simple show/hide; simpler than Accordion. Accordion covers most cases but Collapsible is the semantic primitive.',
+      complexity: 'Low',
+      reference: 'Radix Collapsible, shadcn Collapsible',
+      status: 'horizon',
+    },
+    {
+      priority: 4,
+      name: 'Result / Status Page',
+      rationale: 'Full-area result states (success, error, 404, 403); useful in enterprise apps.',
+      complexity: 'Low',
+      reference: 'Ng-Zorro Result',
+      status: 'horizon',
+    },
+    {
+      priority: 5,
+      name: 'Anchor / TOC Navigation',
+      rationale: 'Scroll-anchored table of contents with active link highlighting.',
+      complexity: 'Medium',
+      reference: 'Ng-Zorro Anchor',
+      status: 'horizon',
+    },
+  ];
+
+  // ── Documentation Status ──────────────────────────────────────────────────
+  public readonly docStatusItems: DocStatusItem[] = [
+    {
+      component: 'Accordion',
+      hasApiDoc: true,
+      hasImplDoc: true,
+      hasDemoPage: true,
+      status: 'complete',
+    },
+    {
+      component: 'Alert',
+      hasApiDoc: true,
+      hasImplDoc: false,
+      hasDemoPage: false,
+      status: 'partial',
+      notes: 'No demo page · no implementation doc',
+    },
+    {
+      component: 'Badge',
+      hasApiDoc: true,
+      hasImplDoc: true,
+      hasDemoPage: true,
+      status: 'complete',
+    },
+    {
+      component: 'Button',
+      hasApiDoc: true,
+      hasImplDoc: true,
+      hasDemoPage: true,
+      status: 'complete',
+    },
+    { component: 'Card', hasApiDoc: true, hasImplDoc: true, hasDemoPage: true, status: 'complete' },
+    {
+      component: 'Checkbox',
+      hasApiDoc: true,
+      hasImplDoc: false,
+      hasDemoPage: true,
+      status: 'partial',
+      notes: 'Implementation doc missing',
+    },
+    {
+      component: 'Dialog',
+      hasApiDoc: true,
+      hasImplDoc: true,
+      hasDemoPage: true,
+      status: 'complete',
+    },
+    {
+      component: 'Icon',
+      hasApiDoc: true,
+      hasImplDoc: false,
+      hasDemoPage: true,
+      status: 'partial',
+      notes: 'Implementation doc missing',
+    },
+    {
+      component: 'IconButton',
+      hasApiDoc: true,
+      hasImplDoc: false,
+      hasDemoPage: false,
+      status: 'partial',
+      notes: 'No demo page · no implementation doc',
+    },
+    {
+      component: 'Input',
+      hasApiDoc: true,
+      hasImplDoc: true,
+      hasDemoPage: true,
+      status: 'complete',
+    },
+    {
+      component: 'Layout (Stack / Inline / Grid / Container)',
+      hasApiDoc: true,
+      hasImplDoc: false,
+      hasDemoPage: true,
+      status: 'partial',
+      notes: 'Implementation doc missing',
+    },
+    {
+      component: 'Select',
+      hasApiDoc: true,
+      hasImplDoc: false,
+      hasDemoPage: true,
+      status: 'partial',
+      notes: 'Implementation doc missing',
+    },
+    {
+      component: 'SelectButton',
+      hasApiDoc: true,
+      hasImplDoc: true,
+      hasDemoPage: true,
+      status: 'complete',
+    },
+    { component: 'Tabs', hasApiDoc: true, hasImplDoc: true, hasDemoPage: true, status: 'complete' },
+    {
+      component: 'All other 85+ components',
+      hasApiDoc: false,
+      hasImplDoc: false,
+      hasDemoPage: true,
+      status: 'partial',
+      notes: 'Component README.md exists · formal reference docs not yet written',
+    },
+  ];
+
+  public readonly docCompleteCount: Signal<number> = computed<number>(
+    (): number =>
+      this.docStatusItems.filter((item: DocStatusItem): boolean => item.status === 'complete')
+        .length
+  );
+
+  // ── Angular modernity scorecard ───────────────────────────────────────────
+  public readonly modernityRows: ModernityRow[] = [
+    {
+      check: 'Signal inputs (input(), model(), output())',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'Standalone components — no NgModule required',
+      angularMaterial: 'yes',
+      primeNG: 'yes',
+      ngZorro: 'partial',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'OnPush change detection by default',
+      angularMaterial: 'partial',
+      primeNG: 'partial',
+      ngZorro: 'partial',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'Zoneless-compatible (provideZonelessChangeDetection)',
+      angularMaterial: 'partial',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'SSR-safe (no document/window access on server)',
+      angularMaterial: 'yes',
+      primeNG: 'partial',
+      ngZorro: 'partial',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'Angular block syntax (@if / @for / @switch) 100%',
+      angularMaterial: 'partial',
+      primeNG: 'partial',
+      ngZorro: 'partial',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'ViewEncapsulation.None — no ::ng-deep needed',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'Runtime visual variants (3 themes switchable)',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'Full --uilib-* CSS token coverage',
+      angularMaterial: 'partial',
+      primeNG: 'partial',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+    },
+    {
+      check: 'Dedicated .a11y.spec.ts per component',
+      angularMaterial: 'no',
+      primeNG: 'no',
+      ngZorro: 'no',
+      thisLibrary: 'yes',
+    },
+  ];
+
+  // ── Differentiators ───────────────────────────────────────────────────────
+  public readonly differentiators: Differentiator[] = [
+    {
+      feature: 'Signal-native API throughout — no @Input()/@Output() decorators anywhere',
+      notes: 'No other Angular library has fully migrated to the Angular 17+ signal API.',
+      isUnique: true,
+    },
+    {
+      feature: 'Zoneless-compatible — every component tested with provideZonelessChangeDetection()',
+      notes: 'Material is partial, PrimeNG and Ng-Zorro both fail this.',
+      isUnique: true,
+    },
+    {
+      feature:
+        'Three runtime visual variants — material / bootstrap / minimal switchable at runtime',
+      notes:
+        'No other Angular library supports runtime variant switching. All others are locked to one design system.',
+      isUnique: true,
+    },
+    {
+      feature: 'ViewEncapsulation.None — consumer CSS works without ::ng-deep',
+      notes:
+        'Emulated encapsulation is the default everywhere else, forcing consumers through the deprecated ::ng-deep hack.',
+      isUnique: true,
+    },
+    {
+      feature: 'Dedicated .a11y.spec.ts per component — axe-core coverage at component level',
+      notes: 'No other Angular library ships dedicated accessibility spec files per component.',
+      isUnique: true,
+    },
+    {
+      feature: 'prefers-reduced-motion applied to every animation systematically',
+      notes: 'Most libraries apply this ad hoc or not at all. Applied systematically from day one.',
+      isUnique: true,
+    },
+    {
+      feature: 'BottomSheet as a first-class component — distinct from Drawer',
+      notes:
+        'Most Angular libraries do not distinguish bottom sheet from drawer. Unique in the Angular ecosystem.',
+      isUnique: false,
+    },
+    {
+      feature: 'ImageCompare — side-by-side image comparison slider',
+      notes: 'Unique in the Angular ecosystem. No other Angular library ships this.',
+      isUnique: true,
+    },
+    {
+      feature: 'Angular block syntax @if / @for / @switch — 100% from day one',
+      notes:
+        'Other libraries still migrating from *ngIf / *ngFor. This library never used the structural directive API.',
+      isUnique: false,
+    },
+  ];
+
+  // ── Launch sequence ───────────────────────────────────────────────────────
+  public readonly launchSteps: LaunchStep[] = [
+    {
+      id: 1,
+      title: 'Build in Public',
+      status: 'active',
+      description:
+        'GitHub commit history is already content. Make it visible. Post about technical problems — not about the library.',
+      gate: 'Ongoing — do this now',
+      actions: [
+        'Write commit messages that tell a story',
+        'Post in Angular communities about specific technical problems solved (e.g. "implementing combobox ARIA correctly")',
+        "Be present in Angular Discord — participate, don't advertise",
+        'By launch, developers will look at your history and see someone who did this properly for months',
+      ],
+    },
+    {
+      id: 2,
+      title: 'Establish Thought Leadership',
+      status: 'active',
+      description:
+        'Write articles about Angular UI problems — not the library. Education before announcement. Trust before launch.',
+      gate: 'Start now — Phase 1 axe-core audit required before the benchmark article',
+      actions: [
+        '📰 ARTICLE 1 (biggest pre-launch asset): "I ran axe-core on the 4 biggest Angular component libraries. Here\'s what I found." — a news event, not a blog post',
+        '📰 ARTICLE 2: "Why combobox is the hardest ARIA pattern to get right — and why every Angular library gets it wrong"',
+        '📰 ARTICLE 3: "What signals-first actually means for component API design"',
+        '📰 ARTICLE 4: "What the Angular UI ecosystem is still missing in 2026" — frame the gap; your library is the natural conclusion',
+      ],
+    },
+    {
+      id: 3,
+      title: 'Seed Early Access',
+      status: 'queued',
+      description:
+        'Before any public announcement, get 10–15 real Angular developers using it privately. Not friends — community people you respect.',
+      gate: 'After Phase 3 complete ✅ GATE IS NOW OPEN',
+      actions: [
+        'Identify 10–15 real Angular developers from the community (not friends)',
+        'Give early access with zero fanfare — ask for brutal, honest feedback',
+        'Collect authentic testimonials from those genuinely impressed',
+        'Launch with people already saying: "I\'ve been using this for two months and it\'s different."',
+        'That social proof is worth more than any announcement you can make',
+      ],
+    },
+    {
+      id: 4,
+      title: 'Go Where Angular Developers Live',
+      status: 'queued',
+      description:
+        'Not Product Hunt. Not Hacker News. The Angular community is tight and interconnected.',
+      gate: 'During seeding and approaching launch',
+      actions: [
+        '🎯 Angular Discord — be present during hardening, not just at launch',
+        '🐦 Twitter / X — the axe-core article goes here first',
+        '📧 Angular Weekly newsletter — submit for inclusion on launch week',
+        '🎤 ng-conf — a demo or talk here is legitimately transformative',
+        '✍️ Dev.to / Medium — publish educational articles for reach',
+        '🤝 Connect with: Manfred Steyer · Enea Jahollari · Brandon Roberts · Deborah Kurata · Santosh Yadav',
+      ],
+    },
+    {
+      id: 5,
+      title: 'The Launch Event',
+      status: 'queued',
+      description:
+        'One launch. One moment. Not a features list. A developer building something real.',
+      gate: '10+ seed developers with positive signal + docs site ready + benchmark article written',
+      actions: [
+        '🎬 Record a 4–5 min demo video — developer building something real with keyboard nav that just works',
+        '📊 Benchmark article drops the same day — "The most accessible Angular component library — here\'s the evidence."',
+        '🌐 The docs site IS the landing page — interactive playgrounds, copy-paste, a11y notes per component',
+        '⚡ One killer moment — a single interaction impressive enough to screenshot and share',
+        '🚫 Do NOT post "I made a thing" — lead with the problem and the reproducible evidence',
+      ],
+    },
+    {
+      id: 6,
+      title: 'Post-Launch Responsiveness IS the Marketing',
+      status: 'queued',
+      description:
+        'The Angular community is small enough that how you respond to the first 20 GitHub issues defines your reputation for years.',
+      gate: 'After launch',
+      actions: [
+        'Close issues fast · write thoughtful, detailed responses',
+        'Say thank you publicly · be honest when something is broken',
+        'Ship fixes visibly — changelog done right',
+        'The developers who feel heard become your most effective advocates forever',
+        'There is no marketing budget that buys what authentic responsiveness builds',
+      ],
+    },
+  ];
+
+  public readonly launchReadiness: {
+    label: string;
+    gate: string;
+    status: 'done' | 'active' | 'queued';
+  }[] = [
+    {
+      label: 'Phase 3 complete — all 100 components ≥ 8',
+      gate: 'Required before seeding early access',
+      status: 'done',
+    },
+    {
+      label: 'Internal axe-core audit clean',
+      gate: 'Required before writing the benchmark article',
+      status: 'active',
+    },
+    {
+      label: 'Benchmark article written and ready',
+      gate: 'Required before launch day',
+      status: 'queued',
+    },
+    {
+      label: 'Docs site genuinely impressive',
+      gate: 'Required before any public announcement',
+      status: 'queued',
+    },
+    {
+      label: 'Demo video recorded (4–5 min)',
+      gate: 'Required before launch day',
+      status: 'queued',
+    },
+    {
+      label: '10+ seed developers with positive signal',
+      gate: 'Required before launch day',
+      status: 'queued',
+    },
+    {
+      label: 'Open benchmark repo published (scripts + methodology + results)',
+      gate: 'Required before launch day',
+      status: 'queued',
     },
   ];
 
@@ -1725,56 +2398,84 @@ export class RoadmapComponent {
     {
       title: 'Runtime Variant Switcher',
       description:
-        'Implement seamless runtime switching between material / bootstrap / minimal variants without page reload or flash.',
+        'Seamless runtime switching between material / bootstrap / minimal variants without reload or flash. Core to Wow Factor #2.',
       priority: 'critical',
       category: 'Theming',
     },
     {
       title: 'Theme Preset Management',
       description:
-        'Build a theme preset system with multiple built-in presets (e.g. indigo, ocean, sunset) switchable at runtime.',
+        'Multiple built-in presets (indigo, ocean, sunset, midnight) switchable at runtime via ThemeConfigService.',
       priority: 'critical',
       category: 'Theming',
     },
     {
-      title: 'Full Axe-Core Audit',
+      title: 'Full Internal Axe-Core Audit',
       description:
-        'Run a comprehensive axe-core pass across all 100 components. Target: zero violations.',
-      priority: 'high',
+        'Run a comprehensive axe-core pass across all 100 components. This unlocks writing the benchmark article — the highest-impact pre-launch asset.',
+      priority: 'critical',
       category: 'Accessibility',
+    },
+    {
+      title: 'Benchmark Article — axe-core Audit Results',
+      description:
+        '"I ran axe-core on the 4 biggest Angular component libraries." Plan everything around this article. It\'s a news event in the Angular community.',
+      priority: 'high',
+      category: 'Content',
+    },
+    {
+      title: 'Seed 10–15 Early Adopters',
+      description:
+        'Gate is open — all 100 components ≥ 8. Identify real community developers, give early access, collect authentic testimonials. Launch with believers, not just an announcement.',
+      priority: 'high',
+      category: 'Launch',
+    },
+    {
+      title: 'Build Queue: Empty State + Typography + Statistic (priorities 3–5)',
+      description:
+        'Three Low-complexity components that signal a complete design-system. No other Angular library ships all three. Add before Public Beta.',
+      priority: 'high',
+      category: 'Components',
+    },
+    {
+      title: 'Complete Reference Documentation (85+ components)',
+      description:
+        'All 100 components have README.md, but formal reference docs and implementation docs are written for only 8. The docs site cannot launch without this.',
+      priority: 'high',
+      category: 'Documentation',
     },
     {
       title: 'Storybook Deployment',
       description:
-        'Deploy Storybook with stories covering all variants for every component. This is the public-facing demo.',
+        'Deploy Storybook with stories covering all variants for every component. The visual testing and public demo layer.',
       priority: 'high',
       category: 'Ecosystem',
     },
     {
-      title: 'npm Publication Path',
+      title: 'npm Publication Pipeline',
       description:
-        'Prepare package.json, provenance, documentation site, and CI/CD pipeline for first npm publish (0.9.0).',
-      priority: 'high',
+        'Prepare package.json metadata, provenance, CI/CD pipeline, and semantic versioning for first npm publish (0.9.0). Docs site must be ready first.',
+      priority: 'medium',
       category: 'Publishing',
     },
     {
-      title: 'Landing Page',
+      title: 'Open Benchmark Repo',
       description:
-        'Build "Built Different" landing page with verified a11y benchmark claims, Angular modernity scorecard, and bundle size comparisons.',
+        'Publish scripts + methodology + raw axe-core + Angular modernity results on GitHub. Invite scrutiny. The highest-credibility move available.',
       priority: 'medium',
-      category: 'Marketing',
+      category: 'Competitive',
     },
     {
-      title: 'Push Worst Avg Scores to ≥ 9',
+      title: 'Push 8.2–8.3 Components to ≥ 9 Avg',
       description:
-        'Components scored 8.2–8.3 need a targeted polish pass to close the gap before v1.0 GA (Select, AutoComplete, CascadeSelect, etc.).',
+        'Select, AutoComplete, CascadeSelect, Knob, ColorPicker, Avatar, DynamicDialog, ConfirmDialog, DataView, Timeline, MeterGroup — targeted polish pass before v1.0.',
       priority: 'medium',
       category: 'Quality',
     },
     {
-      title: 'Documentation Site',
+      title: 'Interactive Documentation Site (Docs IS the Landing Page)',
       description:
-        'Publish an interactive docs site with live demos, copy-paste examples, API tables, and per-component a11y notes.',
+        'Live playgrounds, copy-paste examples, a11y notes per component. The first impression is permanent — do not announce before this is impressive.',
       priority: 'medium',
       category: 'Ecosystem',
     },
@@ -1785,79 +2486,87 @@ export class RoadmapComponent {
     {
       number: 1,
       title: 'Elite Accessibility',
+      status: 'achieved',
       tagline:
         'No other Angular library comes close to this level of ARIA correctness and keyboard coverage.',
-      status: 'achieved',
       items: [
-        '100% of components scored ≥ 8 on accessibility',
-        'Full keyboard navigation on all interactive components',
-        'Correct ARIA roles, properties, and live regions',
-        'prefers-reduced-motion respected everywhere',
-        'High-contrast / forced-colors support',
-        'Screen-reader tested patterns',
+        '✅ 100 components scored ≥ 8 on accessibility',
+        '✅ Full keyboard navigation on every interactive component',
+        '✅ Correct ARIA roles, properties, and live regions — WAI-ARIA APG patterns',
+        '✅ prefers-reduced-motion respected systematically',
+        '✅ High-contrast / forced-colors support',
+        '✅ Dedicated .a11y.spec.ts files per component — unique in Angular ecosystem',
+        '✅ 2,500+ unit + a11y tests written',
+        '🔄 Full internal axe-core audit in progress',
       ],
     },
     {
       number: 2,
       title: 'Astonishingly Good Theming',
-      tagline: 'Runtime theme switching, design token system, brand customization in < 30 minutes.',
       status: 'in-progress',
+      tagline:
+        'Runtime theme switching, full design token system, brand customization in < 30 minutes.',
       items: [
-        '✅ CSS variable system (--uilib-*) in place across all components',
+        '✅ CSS variable system (--uilib-*) across all 100 components',
         '✅ Three variants: material / bootstrap / minimal',
-        '✅ ThemeConfigService with scoped theming support',
-        '🔄 Runtime variant switcher (no flash)',
+        '✅ ThemeConfigService with scoped theming (ThemeScopeDirective)',
+        '✅ Dark mode support',
+        '🔄 Runtime variant switcher (no flash) — critical next step',
         '🔄 Theme preset management (indigo, ocean, sunset…)',
-        '⬜ Visual theme builder (horizon)',
-        '⬜ Brand customization < 30 min documented path',
+        '⬜ Visual theme builder — horizon',
+        '⬜ Brand customization documented path (< 30 min)',
       ],
     },
     {
       number: 3,
       title: 'Unmatched Forms Experience',
-      tagline: 'Best typed, reactive, signal-native forms DX in Angular — ever.',
       status: 'queued',
+      tagline: 'Best typed, reactive, signal-native forms DX in Angular — ever.',
       items: [
-        'FormField + FloatLabel + InputGroup composition system ✅',
-        'Signal-native form control binding',
-        'Typed validation with signal-based error state',
-        'Complex form patterns (wizard, dynamic fields) first-class',
+        '✅ FormField + FloatLabel + InputGroup composition',
+        '✅ Signal-native form control binding',
+        '⬜ Signal-native validation and reactive error state',
+        '⬜ DateRangePicker + TimePicker completing the form suite',
+        '⬜ Complex patterns (wizard, dynamic fields) first-class',
       ],
     },
     {
       number: 4,
       title: 'Exceptional Developer Experience',
-      tagline: 'APIs so predictable developers never reach for docs for basic usage.',
       status: 'queued',
+      tagline: 'APIs so predictable developers never reach for docs for basic usage.',
       items: [
-        'Zero-config defaults for common use cases',
-        'Autocomplete that guides you correctly',
-        'Clear error messages for misuse',
-        'Consistent naming across all 100 components',
+        '✅ Consistent naming across all 100 components',
+        '✅ String-union public types — excellent autocomplete',
+        '⬜ Interactive docs with copy-paste examples',
+        '⬜ "Common tasks in ≤ 3 lines" verified across all components',
+        '⬜ Migration guide for major version upgrades',
       ],
     },
     {
       number: 5,
       title: 'Unbelievably Polished Animations',
-      tagline: 'Motion that makes developers say "how did they do that".',
       status: 'queued',
+      tagline: 'Motion that makes developers say "how did they do that".',
       items: [
-        'Physics-based spring animations',
-        'Consistent timing and easing design system',
-        'Choreographed enter/exit sequences',
-        'All animations controllable via CSS vars',
+        '✅ All animations respect prefers-reduced-motion',
+        '⬜ Physics-based spring animations',
+        '⬜ Consistent timing and easing design system',
+        '⬜ Choreographed enter/exit sequences',
+        '⬜ All animation timing controllable via CSS vars',
       ],
     },
     {
       number: 6,
       title: 'The Best Angular Table / Grid',
-      tagline: 'Performance + composability that makes every other grid feel old.',
       status: 'queued',
+      tagline: 'Performance + composability that makes every other grid feel old.',
       items: [
-        'Virtual scrolling with millions of rows',
-        'Column reorder, resize, pin — all accessible',
-        'Signal-based state management',
-        'Composable cell renderers',
+        '✅ Table: role=grid, aria-sort, aria-selected, pagination (score 8.6)',
+        '⬜ Virtual scrolling with millions of rows',
+        '⬜ Column reorder, resize, pin — all accessible',
+        '⬜ Signal-based state management throughout',
+        '⬜ Composable cell renderers with content projection',
       ],
     },
   ];
@@ -1876,6 +2585,24 @@ export class RoadmapComponent {
     return 'cell-ok';
   }
 
+  public getModernityClass(value: 'yes' | 'no' | 'partial'): string {
+    if (value === 'yes') return 'modernity-yes';
+    if (value === 'partial') return 'modernity-partial';
+    return 'modernity-no';
+  }
+
+  public getModernityLabel(value: 'yes' | 'no' | 'partial'): string {
+    if (value === 'yes') return '✅';
+    if (value === 'partial') return '⚠️';
+    return '❌';
+  }
+
+  public getComplexityClass(complexity: BuildQueueItem['complexity']): string {
+    if (complexity === 'Very Low' || complexity === 'Low') return 'complexity-low';
+    if (complexity === 'Low-Medium' || complexity === 'Medium') return 'complexity-medium';
+    return 'complexity-high';
+  }
+
   public onSearchChange(event: Event): void {
     const target: HTMLInputElement = event.target as HTMLInputElement;
     this.searchQuery.set(target.value);
@@ -1888,28 +2615,43 @@ export class RoadmapComponent {
   public trackByName(_index: number, item: ComponentScore): string {
     return item.name;
   }
-
   public trackByPhaseId(_index: number, phase: PhaseInfo): number {
     return phase.id;
   }
-
   public trackByTitle(_index: number, step: NextStep): string {
     return step.title;
   }
-
   public trackByWowNumber(_index: number, wow: WowFactor): number {
     return wow.number;
   }
-
   public trackByCategory(_index: number, item: { name: string; count: number }): string {
     return item.name;
   }
-
   public trackByString(_index: number, item: string): string {
     return item;
   }
-
   public trackByCategoryName(_index: number, item: string): string {
     return item;
+  }
+  public trackByPriority(_index: number, item: BuildQueueItem): number {
+    return item.priority;
+  }
+  public trackByComponent(_index: number, item: DocStatusItem): string {
+    return item.component;
+  }
+  public trackByCheck(_index: number, item: ModernityRow): string {
+    return item.check;
+  }
+  public trackByFeature(_index: number, item: Differentiator): string {
+    return item.feature;
+  }
+  public trackByLaunchId(_index: number, item: LaunchStep): number {
+    return item.id;
+  }
+  public trackByReadinessLabel(_index: number, item: { label: string }): string {
+    return item.label;
+  }
+  public trackByDimension(_index: number, item: ScoringDimension): string {
+    return item.column;
   }
 }
