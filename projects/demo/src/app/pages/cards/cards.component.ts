@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { CardVariant, CardElevation } from 'ui-lib-custom/card';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
@@ -47,6 +48,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   imports: [
     Card,
     Button,
+    CodeSnippet,
     Tabs,
     Tab,
     DocPageLayoutComponent,
@@ -63,6 +65,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsComponent {
+  public readonly importCode: string = "import { Card } from 'ui-lib-custom/card'";
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },

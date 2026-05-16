@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { FocusTrapDirective } from 'ui-lib-custom/focus-trap';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -13,12 +14,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-focus-trap-demo',
   standalone: true,
-  imports: [FocusTrapDirective, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, FocusTrapDirective, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './focus-trap-demo.component.html',
   styleUrl: './focus-trap-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FocusTrapDemoComponent {
+  public readonly importCode: string =
+    "import { FocusTrapDirective } from 'ui-lib-custom/focus-trap'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

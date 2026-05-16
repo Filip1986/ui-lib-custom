@@ -16,6 +16,7 @@ import {
   type NgForm,
 } from '@angular/forms';
 import { Checkbox } from 'ui-lib-custom/checkbox';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { CheckboxAppearance, CheckboxSize, CheckboxVariant } from 'ui-lib-custom/checkbox';
 import { Tabs, Tab } from 'ui-lib-custom/tabs';
 import type { TabsValue } from 'ui-lib-custom/tabs';
@@ -40,6 +41,7 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
   standalone: true,
   imports: [
     Checkbox,
+    CodeSnippet,
     Tabs,
     Tab,
     Card,
@@ -58,6 +60,8 @@ type CheckboxOption = { label: string; value: string; disabled?: boolean };
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxesComponent {
+  public readonly importCode: string = "import { Checkbox } from 'ui-lib-custom/checkbox'";
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },

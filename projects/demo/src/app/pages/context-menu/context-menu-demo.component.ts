@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ContextMenu } from 'ui-lib-custom/context-menu';
 import type { ContextMenuItem, ContextMenuItemCommandEvent } from 'ui-lib-custom/context-menu';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -12,12 +13,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-context-menu-demo',
   standalone: true,
-  imports: [ContextMenu, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, ContextMenu, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './context-menu-demo.component.html',
   styleUrl: './context-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuDemoComponent {
+  public readonly importCode: string = "import { ContextMenu } from 'ui-lib-custom/context-menu'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

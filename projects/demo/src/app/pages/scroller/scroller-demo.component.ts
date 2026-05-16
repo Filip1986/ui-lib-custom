@@ -5,6 +5,7 @@ import { VirtualScrollerComponent } from 'ui-lib-custom/virtual-scroller';
 import { Button } from 'ui-lib-custom/button';
 import { ScrollerItemDirective, ScrollerLoaderDirective } from 'ui-lib-custom/virtual-scroller';
 import type { VirtualScrollerLazyLoadEvent } from 'ui-lib-custom/virtual-scroller';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -64,6 +65,7 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
   selector: 'app-scroller-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     CommonModule,
     VirtualScrollerComponent,
     ScrollerItemDirective,
@@ -77,6 +79,8 @@ function makeLazyItems(first: number, last: number): LazyDemoItem[] {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollerDemoComponent {
+  public readonly importCode: string =
+    "import { VirtualScrollerComponent } from 'ui-lib-custom/virtual-scroller'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

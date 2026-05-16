@@ -13,6 +13,7 @@ import {
   TableColumnComponent,
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
@@ -37,6 +38,7 @@ interface KeyboardRow {
   selector: 'app-tiered-menu-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     TieredMenu,
     Button,
     TableComponent,
@@ -51,6 +53,7 @@ interface KeyboardRow {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TieredMenuDemoComponent {
+  public readonly importCode: string = "import { TieredMenu } from 'ui-lib-custom/tiered-menu'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
   public readonly sections: DocSection[] = [

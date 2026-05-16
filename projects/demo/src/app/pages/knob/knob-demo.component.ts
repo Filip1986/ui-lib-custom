@@ -6,6 +6,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { Card } from 'ui-lib-custom/card';
 import { KnobComponent } from 'ui-lib-custom/knob';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 type KnobDemoSnippetKey =
   | 'basic'
@@ -31,6 +32,7 @@ type KnobDemoSnippetKey =
     DocDemoViewportComponent,
     CodePreviewComponent,
     Card,
+    CodeSnippet,
     KnobComponent,
   ],
   templateUrl: './knob-demo.component.html',
@@ -38,6 +40,8 @@ type KnobDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KnobDemoComponent {
+  public readonly importCode: string = "import { KnobComponent } from 'ui-lib-custom/knob'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'sizes', label: 'Sizes' },

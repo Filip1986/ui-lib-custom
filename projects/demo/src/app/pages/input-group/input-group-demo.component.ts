@@ -11,6 +11,7 @@ import { Checkbox } from 'ui-lib-custom/checkbox';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { UiLibInput } from 'ui-lib-custom/input';
 import { InputGroupAddonComponent, InputGroupComponent } from 'ui-lib-custom/input-group';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 interface InputGroupSizeItem {
   readonly label: string;
@@ -41,6 +42,7 @@ type InputGroupDemoSnippetKey =
     Card,
     UiLibInput,
     Button,
+    CodeSnippet,
     Checkbox,
     FloatLabelComponent,
     InputGroupComponent,
@@ -51,6 +53,9 @@ type InputGroupDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputGroupDemoComponent {
+  public readonly importCode: string =
+    "import { InputGroupComponent, InputGroupAddonComponent } from 'ui-lib-custom/input-group'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'multiple', label: 'Multiple' },

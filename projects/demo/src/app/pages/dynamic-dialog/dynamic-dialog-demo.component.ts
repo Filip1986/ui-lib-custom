@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
 import type { OnInit, Signal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   DialogService,
   DynamicDialogRef,
@@ -124,12 +125,14 @@ export class LongDialogContentComponent {
 @Component({
   selector: 'app-dynamic-dialog-demo',
   standalone: true,
-  imports: [Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicDialogDemoComponent {
+  public readonly importCode: string =
+    "import { DialogService } from 'ui-lib-custom/dynamic-dialog'";
   private readonly dialogService: DialogService = inject(DialogService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

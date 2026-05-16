@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { MegaMenu } from 'ui-lib-custom/mega-menu';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -19,12 +20,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-mega-menu-demo',
   standalone: true,
-  imports: [MegaMenu, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, MegaMenu, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MegaMenuDemoComponent {
+  public readonly importCode: string = "import { MegaMenu } from 'ui-lib-custom/mega-menu'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

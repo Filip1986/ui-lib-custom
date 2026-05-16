@@ -3,6 +3,7 @@ import type { Signal, WritableSignal } from '@angular/core';
 import { ProgressSpinner } from 'ui-lib-custom/progress-spinner';
 import { Button } from 'ui-lib-custom/button';
 import type { ProgressSpinnerSize, ProgressSpinnerVariant } from 'ui-lib-custom/progress-spinner';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -13,12 +14,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-progress-spinner-demo',
   standalone: true,
-  imports: [ProgressSpinner, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, ProgressSpinner, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './progress-spinner-demo.component.html',
   styleUrl: './progress-spinner-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressSpinnerDemoComponent {
+  public readonly importCode: string =
+    "import { ProgressSpinner } from 'ui-lib-custom/progress-spinner'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

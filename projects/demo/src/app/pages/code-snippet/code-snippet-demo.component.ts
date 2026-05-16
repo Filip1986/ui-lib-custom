@@ -24,6 +24,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeSnippetDemoComponent {
+  public readonly importCode: string = "import { CodeSnippet } from 'ui-lib-custom/code-snippet'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { SelectButton } from 'ui-lib-custom/select-button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type {
   SelectButtonOption,
   SelectButtonSize,
@@ -34,6 +35,7 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
     FormsModule,
     ReactiveFormsModule,
     SelectButton,
+    CodeSnippet,
     Icon,
     Button,
     Card,
@@ -50,6 +52,8 @@ import { SelectButtonBasicExampleComponent } from '@demo/examples/select-button-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButtonsComponent {
+  public readonly importCode: string = "import { SelectButton } from 'ui-lib-custom/select-button'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'multiple', label: 'Multiple' },

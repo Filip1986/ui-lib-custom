@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Chip } from 'ui-lib-custom/chip';
 import type { ChipSize, ChipVariant } from 'ui-lib-custom/chip';
 import { Button } from 'ui-lib-custom/button';
@@ -14,12 +15,20 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-chip-demo',
   standalone: true,
-  imports: [Chip, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    CodeSnippet,
+    Chip,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './chip-demo.component.html',
   styleUrl: './chip-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipDemoComponent {
+  public readonly importCode: string = "import { Chip } from 'ui-lib-custom/chip'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

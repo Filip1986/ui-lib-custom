@@ -16,6 +16,7 @@ import { UiLibInput } from 'ui-lib-custom/input';
 import { Button } from 'ui-lib-custom/button';
 import { UiLibSelect } from 'ui-lib-custom/select';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 interface DemoOption {
   label: string;
@@ -47,6 +48,7 @@ type FloatLabelDemoSnippetKey =
     UiLibInput,
     UiLibSelect,
     FloatLabelComponent,
+    CodeSnippet,
     Button,
   ],
   templateUrl: './float-label-demo.html',
@@ -54,6 +56,9 @@ type FloatLabelDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FloatLabelDemoComponent {
+  public readonly importCode: string =
+    "import { FloatLabelComponent } from 'ui-lib-custom/float-label'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'variants', label: 'Variants' },

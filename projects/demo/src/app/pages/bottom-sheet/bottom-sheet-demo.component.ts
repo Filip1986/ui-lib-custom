@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { BottomSheet } from 'ui-lib-custom/bottom-sheet';
 import type { BottomSheetVariant } from 'ui-lib-custom/bottom-sheet';
 import { Button } from 'ui-lib-custom/button';
@@ -14,12 +15,20 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-bottom-sheet-demo',
   standalone: true,
-  imports: [BottomSheet, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    CodeSnippet,
+    BottomSheet,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './bottom-sheet-demo.component.html',
   styleUrl: './bottom-sheet-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomSheetDemoComponent {
+  public readonly importCode: string = "import { BottomSheet } from 'ui-lib-custom/bottom-sheet'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

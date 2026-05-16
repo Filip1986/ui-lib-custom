@@ -6,7 +6,13 @@
   <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
     <div class="demo-page-header__meta">
       <h1>Panel</h1>
-      <code class="demo-page-header__import">import &#123; Panel &#125; from 'ui-lib-custom/panel'</code>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="importCode"
+      />
     </div>
     <p class="demo-page-header__description">
       A flexible content container with an optional collapsible body, a custom header slot,

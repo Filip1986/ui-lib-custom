@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import type { NgForm } from '@angular/forms';
 import { UiLibInput } from 'ui-lib-custom/input';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { InputVariant, InputType, InputLabelFloat } from 'ui-lib-custom/input';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Card } from 'ui-lib-custom/card';
@@ -48,6 +49,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     UiLibInput,
     Button,
     Card,
+    CodeSnippet,
     Tabs,
     Tab,
     DocPageLayoutComponent,
@@ -64,6 +66,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputsComponent {
+  public readonly importCode: string = "import { UiLibInput } from 'ui-lib-custom/input'";
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },

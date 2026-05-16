@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names';
 import { Button } from 'ui-lib-custom/button';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -12,12 +13,14 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-class-names-demo',
   standalone: true,
-  imports: [ClassNamesPipe, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, ClassNamesPipe, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './class-names-demo.component.html',
   styleUrl: './class-names-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClassNamesDemoComponent {
+  public readonly importCode: string =
+    "import { classNames, ClassNamesPipe } from 'ui-lib-custom/class-names'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

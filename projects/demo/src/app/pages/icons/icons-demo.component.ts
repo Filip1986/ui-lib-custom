@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
 import type { Signal, WritableSignal } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Icon, SEMANTIC_ICONS } from 'ui-lib-custom/icon';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { SemanticIcon } from 'ui-lib-custom/icon';
 import type { IconSize } from 'ui-lib-custom/core';
 import { Button } from 'ui-lib-custom/button';
@@ -29,6 +30,7 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
     CommonModule,
     TitleCasePipe,
     Icon,
+    CodeSnippet,
     IconButton,
     Alert,
     Button,
@@ -47,6 +49,8 @@ type TabKey = 'playground' | 'api-reference' | 'usage' | 'accessibility';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconsDemoComponent {
+  public readonly importCode: string = "import { Icon } from 'ui-lib-custom/icon'";
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'api-reference', label: 'API Reference' },

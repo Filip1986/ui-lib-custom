@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/
 import type { Signal, WritableSignal } from '@angular/core';
 import { Ripple } from 'ui-lib-custom/ripple';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -13,12 +14,20 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-ripple-demo',
   standalone: true,
-  imports: [Ripple, Button, DocPageLayoutComponent, DocTocComponent, DocCodeSnippetComponent],
+  imports: [
+    CodeSnippet,
+    Ripple,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+    DocCodeSnippetComponent,
+  ],
   templateUrl: './ripple-demo.component.html',
   styleUrl: './ripple-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RippleDemoComponent {
+  public readonly importCode: string = "import { Ripple } from 'ui-lib-custom/ripple'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

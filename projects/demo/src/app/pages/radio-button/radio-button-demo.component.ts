@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { JsonPipe } from '@angular/common';
 import { RadioButton } from 'ui-lib-custom/radio-button';
 import type { RadioButtonChangeEvent } from 'ui-lib-custom/radio-button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -21,6 +22,7 @@ interface CityOption {
   selector: 'app-radio-button-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     RadioButton,
     FormsModule,
     ReactiveFormsModule,
@@ -34,6 +36,7 @@ interface CityOption {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioButtonDemoComponent {
+  public readonly importCode: string = "import { RadioButton } from 'ui-lib-custom/radio-button'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

@@ -11,6 +11,7 @@ import {
 import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UiLibSelect } from 'ui-lib-custom/select';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { SelectOption, SelectVariant } from 'ui-lib-custom/select';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import { Button } from 'ui-lib-custom/button';
@@ -47,6 +48,7 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
     FormsModule,
     UiLibSelect,
     Button,
+    CodeSnippet,
     Tabs,
     Tab,
     DocPageLayoutComponent,
@@ -63,6 +65,8 @@ type ViewportPreset = { key: string; label: string; width: number; height: numbe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent {
+  public readonly importCode: string = "import { UiLibSelect } from 'ui-lib-custom/select'";
+
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },

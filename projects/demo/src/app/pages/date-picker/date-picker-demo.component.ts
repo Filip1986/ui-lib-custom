@@ -13,6 +13,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DatePickerComponent } from 'ui-lib-custom/date-picker';
 import type { ThemeVariant } from 'ui-lib-custom/core';
 
@@ -53,6 +54,7 @@ type DatePickerDemoSnippetKey =
     CodePreviewComponent,
     Button,
     Card,
+    CodeSnippet,
     DatePickerComponent,
   ],
   templateUrl: './date-picker-demo.component.html',
@@ -60,6 +62,9 @@ type DatePickerDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerDemoComponent {
+  public readonly importCode: string =
+    "import { DatePickerComponent } from 'ui-lib-custom/date-picker'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'format', label: 'Format' },

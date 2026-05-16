@@ -14,6 +14,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { EditorComponent, EditorToolbarDirective } from 'ui-lib-custom/editor';
 import type { EditorSelectionChangeEvent, EditorTextChangeEvent } from 'ui-lib-custom/editor';
 
@@ -44,6 +45,7 @@ type EditorDemoSnippetKey =
     CodePreviewComponent,
     Button,
     Card,
+    CodeSnippet,
     EditorComponent,
     EditorToolbarDirective,
   ],
@@ -52,6 +54,8 @@ type EditorDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorDemoComponent {
+  public readonly importCode: string = "import { EditorComponent } from 'ui-lib-custom/editor'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'readonly', label: 'Readonly' },

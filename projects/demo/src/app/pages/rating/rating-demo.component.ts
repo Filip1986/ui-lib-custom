@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { JsonPipe } from '@angular/common';
 import { Rating } from 'ui-lib-custom/rating';
 import type { RatingChangeEvent, RatingRateEvent } from 'ui-lib-custom/rating';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
@@ -16,6 +17,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   selector: 'app-rating-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     Rating,
     FormsModule,
     ReactiveFormsModule,
@@ -29,6 +31,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RatingDemoComponent {
+  public readonly importCode: string = "import { Rating } from 'ui-lib-custom/rating'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

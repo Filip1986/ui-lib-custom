@@ -4,6 +4,7 @@ import { Stepper } from 'ui-lib-custom/stepper';
 import { StepperPanel } from 'ui-lib-custom/stepper';
 import type { StepChangeEvent, StepperOrientation, StepperVariant } from 'ui-lib-custom/stepper';
 import { Button } from 'ui-lib-custom/button';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
 import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
 import type { DocSection } from '../../shared/doc-page/doc-section.model';
@@ -14,12 +15,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-stepper-demo',
   standalone: true,
-  imports: [Stepper, StepperPanel, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Stepper, StepperPanel, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './stepper-demo.component.html',
   styleUrl: './stepper-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepperDemoComponent {
+  public readonly importCode: string = "import { Stepper } from 'ui-lib-custom/stepper'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

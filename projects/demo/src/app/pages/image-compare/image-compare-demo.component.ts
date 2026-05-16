@@ -5,6 +5,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ImageCompare } from 'ui-lib-custom/image-compare';
 
 type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' | 'customLabel';
@@ -20,6 +21,7 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
     DocDemoViewportComponent,
     CodePreviewComponent,
     Card,
+    CodeSnippet,
     ImageCompare,
   ],
   templateUrl: './image-compare-demo.component.html',
@@ -27,6 +29,8 @@ type SnippetKey = 'basic' | 'twoWayBinding' | 'sizes' | 'variants' | 'disabled' 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageCompareDemoComponent {
+  public readonly importCode: string = "import { ImageCompare } from 'ui-lib-custom/image-compare'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'two-way-binding', label: 'Two-Way Binding' },

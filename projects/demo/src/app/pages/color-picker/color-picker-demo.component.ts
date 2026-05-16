@@ -14,6 +14,7 @@ import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-
 import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { ColorPicker } from 'ui-lib-custom';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ColorPickerValue, HsbColor, RgbColor } from 'ui-lib-custom';
 
 type DemoSnippetKey =
@@ -41,6 +42,7 @@ type DemoSnippetKey =
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     ColorPicker,
   ],
   templateUrl: './color-picker-demo.component.html',
@@ -48,6 +50,8 @@ type DemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorPickerDemoComponent {
+  public readonly importCode: string = "import { ColorPicker } from 'ui-lib-custom'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'inline', label: 'Inline' },

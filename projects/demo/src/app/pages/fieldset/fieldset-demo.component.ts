@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Fieldset } from 'ui-lib-custom/fieldset';
 import type { FieldsetVariant } from 'ui-lib-custom/fieldset';
 import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
@@ -12,12 +13,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-fieldset-demo',
   standalone: true,
-  imports: [Fieldset, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Fieldset, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './fieldset-demo.component.html',
   styleUrl: './fieldset-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FieldsetDemoComponent {
+  public readonly importCode: string = "import { Fieldset } from 'ui-lib-custom/fieldset'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

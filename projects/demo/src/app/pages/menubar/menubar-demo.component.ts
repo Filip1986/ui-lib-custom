@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Menubar } from 'ui-lib-custom/menubar';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -18,12 +19,13 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-menubar-demo',
   standalone: true,
-  imports: [Menubar, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [CodeSnippet, Menubar, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarDemoComponent {
+  public readonly importCode: string = "import { Menubar } from 'ui-lib-custom/menubar'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

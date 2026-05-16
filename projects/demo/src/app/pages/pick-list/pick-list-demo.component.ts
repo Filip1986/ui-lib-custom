@@ -3,6 +3,7 @@ import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Stack } from 'ui-lib-custom/layout';
 import {
   PickListComponent,
@@ -112,6 +113,7 @@ const SNIPPETS: Record<string, string> = {
     DocPageLayoutComponent,
     CodePreviewComponent,
     Card,
+    CodeSnippet,
     Stack,
     PickListComponent,
     PickListItemDirective,
@@ -124,6 +126,9 @@ const SNIPPETS: Record<string, string> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PickListDemoComponent {
+  public readonly importCode: string =
+    "import { PickListComponent } from 'ui-lib-custom/pick-list'";
+
   // -------------------------------------------------------------------------
   // Sections
   // -------------------------------------------------------------------------

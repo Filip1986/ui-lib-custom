@@ -5,6 +5,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   BarChartComponent,
   ChartComponent,
@@ -68,6 +69,7 @@ type ThemeCssVariables = {
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     Stack,
     Inline,
     Grid,
@@ -82,6 +84,9 @@ type ThemeCssVariables = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartDemoComponent {
+  public readonly importCode: string =
+    "import { ChartComponent, BarChartComponent, LineChartComponent } from 'ui-lib-custom/chart'";
+
   private static defaultsProvided: boolean = false;
 
   public readonly sections: DocSection[] = [

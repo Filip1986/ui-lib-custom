@@ -7,6 +7,7 @@ import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewpor
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
 import { Card } from 'ui-lib-custom/card';
 import { ListboxComponent } from 'ui-lib-custom/listbox';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { ListboxChangeEvent, ListboxOption } from 'ui-lib-custom/listbox';
 
 type ListboxDemoSnippetKey =
@@ -32,6 +33,7 @@ type ListboxDemoSnippetKey =
     DocDemoViewportComponent,
     CodePreviewComponent,
     Card,
+    CodeSnippet,
     ListboxComponent,
   ],
   templateUrl: './listbox-demo.component.html',
@@ -39,6 +41,8 @@ type ListboxDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListboxDemoComponent {
+  public readonly importCode: string = "import { ListboxComponent } from 'ui-lib-custom/listbox'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'multiple', label: 'Multiple' },

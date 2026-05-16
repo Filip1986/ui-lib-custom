@@ -14,6 +14,7 @@ import { Card } from 'ui-lib-custom/card';
 import { Button } from 'ui-lib-custom/button';
 import { FloatLabelComponent } from 'ui-lib-custom/float-label';
 import { InputNumberComponent } from 'ui-lib-custom/input-number';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 type InputNumberSnippetKey =
   | 'numerals'
@@ -48,6 +49,7 @@ type InputNumberSnippetKey =
     CodePreviewComponent,
     Card,
     Button,
+    CodeSnippet,
     FloatLabelComponent,
     InputNumberComponent,
   ],
@@ -56,6 +58,9 @@ type InputNumberSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputNumberDemoComponent {
+  public readonly importCode: string =
+    "import { InputNumberComponent } from 'ui-lib-custom/input-number'";
+
   public readonly sections: DocSection[] = [
     { id: 'numerals', label: 'Numerals' },
     { id: 'decimal', label: 'Decimal' },

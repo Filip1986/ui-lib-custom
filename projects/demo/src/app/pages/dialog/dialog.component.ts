@@ -5,6 +5,7 @@ import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.co
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { Button } from 'ui-lib-custom/button';
 import { Card } from 'ui-lib-custom/card';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { Icon } from 'ui-lib-custom/icon';
 import { DialogComponent } from 'ui-lib-custom/dialog';
 import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
@@ -21,6 +22,7 @@ import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
     VariantComparisonComponent,
     Card,
     Button,
+    CodeSnippet,
     Icon,
     DialogComponent,
   ],
@@ -29,6 +31,8 @@ import type { DialogPosition, DialogVariant } from 'ui-lib-custom/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogDemoComponent {
+  public readonly importCode: string = "import { DialogComponent } from 'ui-lib-custom/dialog'";
+
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'custom-header-footer', label: 'Custom Header & Footer' },

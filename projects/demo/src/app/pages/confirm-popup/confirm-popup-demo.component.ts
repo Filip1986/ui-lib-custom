@@ -1,6 +1,7 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ConfirmPopup, ConfirmPopupService } from 'ui-lib-custom/confirm-popup';
 import type { ConfirmPopupButtonSeverity, ConfirmPopupVariant } from 'ui-lib-custom/confirm-popup';
 import { Button } from 'ui-lib-custom/button';
@@ -14,12 +15,21 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-confirm-popup-demo',
   standalone: true,
-  imports: [ConfirmPopup, TitleCasePipe, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    ConfirmPopup,
+    TitleCasePipe,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './confirm-popup-demo.component.html',
   styleUrl: './confirm-popup-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmPopupDemoComponent {
+  public readonly importCode: string =
+    "import { ConfirmPopup, ConfirmPopupService } from 'ui-lib-custom/confirm-popup'";
   private readonly confirmPopupService: ConfirmPopupService = inject(ConfirmPopupService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

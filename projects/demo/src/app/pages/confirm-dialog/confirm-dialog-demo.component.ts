@@ -1,6 +1,7 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { ConfirmDialog, ConfirmationService } from 'ui-lib-custom/confirm-dialog';
 import type {
   ConfirmDialogButtonSeverity,
@@ -17,12 +18,21 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
 @Component({
   selector: 'app-confirm-dialog-demo',
   standalone: true,
-  imports: [ConfirmDialog, TitleCasePipe, Button, DocPageLayoutComponent, DocTocComponent],
+  imports: [
+    CodeSnippet,
+    ConfirmDialog,
+    TitleCasePipe,
+    Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
+  ],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialogDemoComponent {
+  public readonly importCode: string =
+    "import { ConfirmDialog, ConfirmationService } from 'ui-lib-custom/confirm-dialog'";
   private readonly confirmationService: ConfirmationService = inject(ConfirmationService);
 
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =

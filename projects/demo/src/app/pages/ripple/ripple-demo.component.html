@@ -4,7 +4,13 @@
   <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
     <div class="demo-page-header__meta">
       <h1>Ripple</h1>
-      <code class="demo-page-header__import">import &#123; Ripple &#125; from 'ui-lib-custom/ripple'</code>
+      <ui-lib-code-snippet
+        language="typescript"
+        [showWindowChrome]="false"
+        [showLineNumbers]="false"
+        size="sm"
+        [code]="importCode"
+      />
     </div>
     <p class="demo-page-header__description">
       A directive that adds a Material-style circular wave effect to any element on click.
