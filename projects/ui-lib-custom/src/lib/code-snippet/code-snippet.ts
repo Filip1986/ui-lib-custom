@@ -2,6 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
+  CUSTOM_ELEMENTS_SCHEMA,
   input,
   output,
   signal,
@@ -12,12 +13,31 @@ import {
   type Signal,
   type WritableSignal,
 } from '@angular/core';
+import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
+import hljs from 'highlight.js/lib/core';
+import type { HighlightResult } from 'highlight.js';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
+import css from 'highlight.js/lib/languages/css';
+import scss from 'highlight.js/lib/languages/scss';
+import json from 'highlight.js/lib/languages/json';
+import bash from 'highlight.js/lib/languages/bash';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
 import type {
   CodeSnippetLanguage,
   CodeSnippetVariant,
   CodeSnippetSize,
 } from './code-snippet.types';
+
+// Register languages once at module level (tree-shakable subset)
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('css', css);
+hljs.registerLanguage('scss', scss);
+hljs.registerLanguage('json', json);
+hljs.registerLanguage('bash', bash);
 
 export type {
   CodeSnippetLanguage,
@@ -37,6 +57,30 @@ const LANGUAGE_LABELS: Record<CodeSnippetLanguage, string> = {
   text: 'Plain Text',
 } as const;
 
+const LANGUAGE_ICONS: Record<CodeSnippetLanguage, string | null> = {
+  javascript: 'logos:javascript',
+  typescript: 'logos:typescript-icon',
+  html: 'logos:html-5',
+  css: 'logos:css-3',
+  scss: 'logos:sass',
+  json: 'vscode-icons:file-type-json',
+  bash: 'logos:bash',
+  shell: 'logos:bash',
+  text: null,
+} as const;
+
+const HLJS_LANGUAGE_MAP: Record<CodeSnippetLanguage, string | null> = {
+  javascript: 'javascript',
+  typescript: 'typescript',
+  html: 'xml',
+  css: 'css',
+  scss: 'scss',
+  json: 'json',
+  bash: 'bash',
+  shell: 'bash',
+  text: null,
+} as const;
+
 /**
  * Code snippet display component with macOS-style window chrome, line numbers, and copy-to-clipboard.
  */
@@ -44,6 +88,7 @@ const LANGUAGE_LABELS: Record<CodeSnippetLanguage, string> = {
   selector: 'ui-lib-code-snippet',
   standalone: true,
   imports: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './code-snippet.html',
   styleUrl: './code-snippet.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -76,6 +121,7 @@ export class CodeSnippet {
   public readonly codeCopied: OutputEmitterRef<void> = output<void>();
 
   private readonly themeService: ThemeConfigService = inject(ThemeConfigService);
+  private readonly sanitizer: DomSanitizer = inject(DomSanitizer);
 
   /** Whether the copy-success state is currently active. */
   public readonly copied: WritableSignal<boolean> = signal<boolean>(false);
@@ -94,6 +140,10 @@ export class CodeSnippet {
     return LANGUAGE_LABELS[this.language()];
   });
 
+  public readonly languageIcon: Signal<string | null> = computed<string | null>(
+    (): string | null => LANGUAGE_ICONS[this.language()]
+  );
+
   public readonly accessibleLabel: Signal<string> = computed<string>((): string => {
     const filename: string | null = this.filename();
     const languageLabel: string = LANGUAGE_LABELS[this.language()];
@@ -110,6 +160,21 @@ export class CodeSnippet {
     const extra: string | null = this.styleClass();
     if (extra !== null) classes.push(extra);
     return classes.join(' ');
+  });
+
+  /** Syntax-highlighted HTML derived from the raw code + language. Safe to bind via [innerHTML]. */
+  public readonly highlightedHtml: Signal<SafeHtml> = computed<SafeHtml>((): SafeHtml => {
+    const lang: string | null = HLJS_LANGUAGE_MAP[this.language()];
+    const raw: string = this.code().trimEnd();
+    if (!lang) {
+      const escaped: string = raw
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      return this.sanitizer.bypassSecurityTrustHtml(escaped);
+    }
+    const result: HighlightResult = hljs.highlight(raw, { language: lang });
+    return this.sanitizer.bypassSecurityTrustHtml(result.value);
   });
 
   /** Handles the copy button click. Delegates to the async clipboard operation. */

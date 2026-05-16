@@ -1,107 +1,375 @@
-.code-snippet-demo {
-  &__hero {
-    max-width: 640px;
-  }
+// ── Host ─────────────────────────────────────────────────────────────────────
+:host {
+  display: block;
+  background: #020617;
+  min-height: 100%;
+}
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 1.25rem;
-  }
+// ── Page wrapper ──────────────────────────────────────────────────────────────
+.csd-page {
+  position: relative;
+  min-height: 100%;
+  color: #e2e8f0;
+  overflow-x: hidden;
+  font-family: 'Satoshi', var(--uilib-font-family-base, sans-serif);
 
-  &__variants {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  &__variant-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  &__variant-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--uilib-muted, #6b7280);
-    margin: 0;
-  }
-
-  &__sizes {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  &__playground {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  &__controls {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1rem;
+  ::selection {
+    background: rgba(99, 102, 241, 0.3);
   }
 }
 
-// ── Fieldset + toggle group ────────────────────────────────────────────────────
+// ── Decorative background blobs ───────────────────────────────────────────────
+.csd-bg-decor {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 
-.demo-fieldset {
-  border: 1px solid var(--uilib-border, rgba(0, 0, 0, 0.1));
-  border-radius: var(--uilib-radius-md, 0.5rem);
-  padding: 0.75rem 1rem;
+  &__blob {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    filter: blur(150px);
 
-  legend {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0 0.25rem;
-    color: var(--uilib-muted, #6b7280);
+    &--tl {
+      top: -10%;
+      left: -10%;
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    &--br {
+      bottom: -10%;
+      right: -10%;
+      background: rgba(217, 70, 239, 0.1);
+    }
   }
 }
 
-.demo-toggle-group {
+// ── Header ────────────────────────────────────────────────────────────────────
+.csd-header {
+  position: relative;
+  z-index: 10;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.375rem;
-  margin-top: 0.5rem;
-}
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  text-align: center;
 
-.demo-toggle-btn {
-  padding: 0.25rem 0.625rem;
-  border-radius: var(--uilib-radius-sm, 0.25rem);
-  border: 1px solid var(--uilib-border, rgba(0, 0, 0, 0.1));
-  background: transparent;
-  color: var(--uilib-page-fg, #1e293b);
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease;
-
-  &:hover {
-    background: var(--uilib-surface-alt, #f1f5f9);
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
   }
 
-  &--active {
-    background: var(--uilib-color-primary-600, #4f46e5);
-    border-color: var(--uilib-color-primary-600, #4f46e5);
-    color: #fff;
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 
-    &:hover {
-      background: var(--uilib-color-primary-700, #4338ca);
+    @media (min-width: 768px) {
+      align-items: flex-start;
     }
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--uilib-color-primary-500, #6366f1);
-    outline-offset: 2px;
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(15, 23, 42, 0.4);
+    padding: 0.625rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(51, 65, 85, 0.6);
+    backdrop-filter: blur(24px);
+    flex-shrink: 0;
+  }
+}
+
+// ── Badge pill ────────────────────────────────────────────────────────────────
+.csd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  animation: csd-fade-in 0.8s ease-out forwards;
+}
+
+// ── Title ─────────────────────────────────────────────────────────────────────
+.csd-title {
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+
+  &__break {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+
+  &__gradient {
+    display: inline-block;
+    background: linear-gradient(90deg, #818cf8, #e879f9, #818cf8);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: csd-gradient-x 6s ease infinite;
+  }
+}
+
+// ── Description ───────────────────────────────────────────────────────────────
+.csd-description {
+  color: #94a3b8;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  max-width: 36rem;
+  margin: 0;
+}
+
+// ── Header action buttons ─────────────────────────────────────────────────────
+.csd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  border: none;
+  font-family: inherit;
+
+  &--dark {
+    background: #1e293b;
+    color: #fff;
+
+    &:hover {
+      background: #334155;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: #e2e8f0;
+    border: 1px solid rgba(71, 85, 105, 0.5);
+
+    &:hover {
+      background: rgba(30, 41, 59, 0.8);
+      border-color: #475569;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// ── Snippet grid ──────────────────────────────────────────────────────────────
+.csd-main {
+  position: relative;
+  z-index: 10;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.csd-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.csd-card {
+}
+
+// ── Footer ────────────────────────────────────────────────────────────────────
+.csd-footer {
+  position: relative;
+  z-index: 10;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  color: #64748b;
+  font-size: 0.875rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    @media (min-width: 768px) {
+      align-items: flex-start;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  &__logo-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #6366f1;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: #fff;
+  }
+
+  &__copy {
+    margin: 0;
+    color: #64748b;
+  }
+
+  &__link {
+    color: #818cf8;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.15s;
+
+    &:hover {
+      color: #a5b4fc;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__nav-link {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.15s;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-left: 2rem;
+    border-left: 1px solid #1e293b;
+  }
+
+  &__social-link {
+    font-size: 1.25rem;
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.15s;
+
+    &:hover {
+      transform: scale(1.1);
+      color: #fff;
+    }
+
+    &[aria-label='Twitter']:hover {
+      color: #38bdf8;
+    }
+  }
+}
+
+// ── Scrollbar ─────────────────────────────────────────────────────────────────
+:host ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+:host ::-webkit-scrollbar-track {
+  background: #1e1e2e;
+}
+
+:host ::-webkit-scrollbar-thumb {
+  background: #262635;
+  border-radius: 4px;
+
+  &:hover {
+    background: #313244;
+  }
+}
+
+// ── Animations ────────────────────────────────────────────────────────────────
+@keyframes csd-gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes csd-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csd-badge {
+    animation: none;
+  }
+
+  .csd-title__gradient {
+    animation: none;
   }
 }

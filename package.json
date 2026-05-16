@@ -46,6 +46,7 @@
     "@ng-icons/bootstrap-icons": "^33.0.0",
     "@ng-icons/core": "^33.0.0",
     "@ng-icons/lucide": "^33.0.0",
+    "highlight.js": "^11.11.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -96,107 +97,410 @@
       "maxSize": "65 kB",
       "comment": "Primary barrel (gzip). Tightened from 590 kB. Prefer per-entry imports — this barrel is a legacy compatibility shim and should eventually be deprecated."
     },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-a11y.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-accordion.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-alert.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-animate-on-scroll.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-autocomplete.mjs", "maxSize": "20 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-auto-focus.mjs", "maxSize": "2 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-avatar.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-badge.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-bind.mjs", "maxSize": "2 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-block-ui.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-bottom-sheet.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-breadcrumb.mjs", "maxSize": "6 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-button.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-card.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-carousel.mjs", "maxSize": "13 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-cascade-select.mjs", "maxSize": "14 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-chart.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-checkbox.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-chip.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-class-names.mjs", "maxSize": "2 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-color-picker.mjs", "maxSize": "12 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-confirm-dialog.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-confirm-popup.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-context-menu.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-core.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-data-view.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-date-picker.mjs", "maxSize": "35 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-dialog.mjs", "maxSize": "12 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-divider.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-dock.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-drawer.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-dynamic-dialog.mjs", "maxSize": "8 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-editor.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-fieldset.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-float-label.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-fluid.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-focus-trap.mjs", "maxSize": "2 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-galleria.mjs", "maxSize": "12 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-icon.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-icon-button.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-icon-field.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-image.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-image-compare.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-inplace.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input.mjs", "maxSize": "6 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-group.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-mask.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-number.mjs", "maxSize": "12 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-otp.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-key-filter.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-knob.mjs", "maxSize": "8 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-layout.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-listbox.mjs", "maxSize": "13 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-mega-menu.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-menu.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-menubar.mjs", "maxSize": "11 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-message.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-meter-group.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-order-list.mjs", "maxSize": "15 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-organization-chart.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-paginator.mjs", "maxSize": "8 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-panel.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-panel-menu.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-password.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-pick-list.mjs", "maxSize": "18 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-popover.mjs", "maxSize": "8 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-progress-bar.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-progress-spinner.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-radio-button.mjs", "maxSize": "6 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-rating.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-ripple.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-scroll-panel.mjs", "maxSize": "3 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-scroll-top.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-select.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-select-button.mjs", "maxSize": "8 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-skeleton.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-slider.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-speed-dial.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-split-button.mjs", "maxSize": "10 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-stepper.mjs", "maxSize": "8 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-style-class.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-table.mjs", "maxSize": "20 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tabs.mjs", "maxSize": "13 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tag.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-terminal.mjs", "maxSize": "6 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-testing.mjs", "maxSize": "2 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-textarea.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-theme.mjs", "maxSize": "17 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tiered-menu.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-timeline.mjs", "maxSize": "6 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toast.mjs", "maxSize": "8 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toggle-button.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toggle-switch.mjs", "maxSize": "7 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tokens.mjs", "maxSize": "11 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toolbar.mjs", "maxSize": "4 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tooltip.mjs", "maxSize": "5 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tree.mjs", "maxSize": "12 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tree-select.mjs", "maxSize": "9 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tree-table.mjs", "maxSize": "15 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-upload.mjs", "maxSize": "14 kB" },
-    { "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-virtual-scroller.mjs", "maxSize": "15 kB" }
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-a11y.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-accordion.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-alert.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-animate-on-scroll.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-autocomplete.mjs",
+      "maxSize": "20 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-auto-focus.mjs",
+      "maxSize": "2 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-avatar.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-badge.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-bind.mjs",
+      "maxSize": "2 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-block-ui.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-bottom-sheet.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-breadcrumb.mjs",
+      "maxSize": "6 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-button.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-card.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-carousel.mjs",
+      "maxSize": "13 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-cascade-select.mjs",
+      "maxSize": "14 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-chart.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-checkbox.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-chip.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-class-names.mjs",
+      "maxSize": "2 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-color-picker.mjs",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-confirm-dialog.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-confirm-popup.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-context-menu.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-core.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-data-view.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-date-picker.mjs",
+      "maxSize": "35 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-dialog.mjs",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-divider.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-dock.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-drawer.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-dynamic-dialog.mjs",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-editor.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-fieldset.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-float-label.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-fluid.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-focus-trap.mjs",
+      "maxSize": "2 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-galleria.mjs",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-icon.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-icon-button.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-icon-field.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-image.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-image-compare.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-inplace.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input.mjs",
+      "maxSize": "6 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-group.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-mask.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-number.mjs",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-input-otp.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-key-filter.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-knob.mjs",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-layout.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-listbox.mjs",
+      "maxSize": "13 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-mega-menu.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-menu.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-menubar.mjs",
+      "maxSize": "11 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-message.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-meter-group.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-order-list.mjs",
+      "maxSize": "15 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-organization-chart.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-paginator.mjs",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-panel.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-panel-menu.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-password.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-pick-list.mjs",
+      "maxSize": "18 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-popover.mjs",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-progress-bar.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-progress-spinner.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-radio-button.mjs",
+      "maxSize": "6 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-rating.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-ripple.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-scroll-panel.mjs",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-scroll-top.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-select.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-select-button.mjs",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-skeleton.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-slider.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-speed-dial.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-split-button.mjs",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-stepper.mjs",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-style-class.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-table.mjs",
+      "maxSize": "20 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tabs.mjs",
+      "maxSize": "13 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tag.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-terminal.mjs",
+      "maxSize": "6 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-testing.mjs",
+      "maxSize": "2 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-textarea.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-theme.mjs",
+      "maxSize": "17 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tiered-menu.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-timeline.mjs",
+      "maxSize": "6 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toast.mjs",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toggle-button.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toggle-switch.mjs",
+      "maxSize": "7 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tokens.mjs",
+      "maxSize": "11 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-toolbar.mjs",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tooltip.mjs",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tree.mjs",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tree-select.mjs",
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-tree-table.mjs",
+      "maxSize": "15 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-upload.mjs",
+      "maxSize": "14 kB"
+    },
+    {
+      "path": "./dist/ui-lib-custom/fesm2022/ui-lib-custom-virtual-scroller.mjs",
+      "maxSize": "15 kB"
+    }
   ],
   "lint-staged": {
     "*.ts": [

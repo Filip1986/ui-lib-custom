@@ -154,6 +154,13 @@ ui-lib-code-snippet .ui-lib-code-snippet__tab-label {
   font-family: var(--uilib-font-ui, inherit), sans-serif;
 }
 
+ui-lib-code-snippet .ui-lib-code-snippet__tab-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
 // ─── Copy button ──────────────────────────────────────────────────────────────
 
 ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
@@ -301,5 +308,94 @@ ui-lib-code-snippet .ui-lib-code-snippet__code {
 
   ui-lib-code-snippet .ui-lib-code-snippet__dot {
     forced-color-adjust: none;
+  }
+}
+
+// ─── Syntax highlighting — One Dark palette ───────────────────────────────────
+// Scoped to the code element to avoid leaking into the rest of the page.
+
+ui-lib-code-snippet .ui-lib-code-snippet__code {
+  // Keywords: const, let, var, function, return, if, class, import, export …
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-doctag,
+  .hljs-formula,
+  .hljs-strong {
+    color: #c678dd;
+  }
+
+  // Strings, template literals, regular expressions
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-addition,
+  .hljs-meta .hljs-string {
+    color: #98c379;
+  }
+
+  // Function / class names
+  .hljs-title,
+  .hljs-title.function_,
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-link,
+  .hljs-meta,
+  .hljs-selector-id {
+    color: #61afef;
+  }
+
+  // Built-ins, class names in definitions
+  .hljs-built_in,
+  .hljs-title.class_,
+  .hljs-class .hljs-title {
+    color: #e6c07b;
+  }
+
+  // Numbers, boolean / null literals, CSS attribute selectors, variables
+  .hljs-attr,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-selector-class,
+  .hljs-selector-attr,
+  .hljs-selector-pseudo,
+  .hljs-number {
+    color: #d19a66;
+  }
+
+  // HTML tags, deletion markers
+  .hljs-section,
+  .hljs-name,
+  .hljs-selector-tag,
+  .hljs-deletion,
+  .hljs-subst,
+  .hljs-tag {
+    color: #e06c75;
+  }
+
+  // Literals: true, false, null
+  .hljs-literal {
+    color: #56b6c2;
+  }
+
+  // Operators, punctuation
+  .hljs-operator,
+  .hljs-punctuation {
+    color: #56b6c2;
+  }
+
+  // Comments
+  .hljs-comment,
+  .hljs-quote {
+    color: #5c6370;
+    font-style: italic;
+  }
+
+  // Markup: emphasis / underline
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-link {
+    text-decoration: underline;
   }
 }
