@@ -23,6 +23,9 @@ export class SyntaxHighlighterDemoComponent {
   public readonly importCode: string =
     "import { highlight, tokenize, escapeForCode } from 'ui-lib-custom/syntax-highlighter';";
 
+  public readonly syntaxTokenInterfaceCode: string =
+    'interface SyntaxToken {\n  readonly type: TokenType;\n  readonly value: string;\n}';
+
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

@@ -121,7 +121,7 @@
           <code>highlight(code: string, language: SyntaxLanguage): string</code>
         </h3>
         <p>
-          Returns an HTML string with <code>&lt;span class="uilib-token-{type}"&gt;</code>
+          Returns an HTML string with <code>&lt;span class="uilib-token-&#123;type&#125;"&gt;</code>
           wrappers. All code content is HTML-escaped before wrapping — the result is safe to
           set as <code>innerHTML</code>.
         </p>
@@ -155,7 +155,7 @@
 
       <h3 class="demo-section__subtitle" style="margin-top: 1.5rem;">SyntaxToken</h3>
       <app-doc-code-snippet
-        [code]="'interface SyntaxToken {\n  readonly type: TokenType;\n  readonly value: string;\n}'"
+        [code]="syntaxTokenInterfaceCode"
         language="typescript"
       />
     </section>
@@ -164,7 +164,7 @@
     <section id="tokens" class="demo-section">
       <h2 class="demo-section__title">Token Classes</h2>
       <p class="demo-section__description">
-        Each <code>&lt;span&gt;</code> carries a <code>uilib-token-{type}</code> CSS class.
+        Each <code>&lt;span&gt;</code> carries a <code>uilib-token-&#123;type&#125;</code> CSS class.
         Default colours are defined via CSS custom properties on the
         <code>ui-lib-code-snippet</code> host.
       </p>
