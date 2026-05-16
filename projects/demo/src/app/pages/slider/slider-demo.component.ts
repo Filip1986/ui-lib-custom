@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import type { DocSection } from '@demo/shared/doc-page/doc-section.model';
 import { CodePreviewComponent } from '@demo/shared/components/code-preview/code-preview.component';
 import { DocDemoViewportComponent } from '@demo/shared/doc-page/doc-demo-viewport.component';
@@ -31,6 +32,7 @@ type SliderDemoSnippetKey =
     DocPageLayoutComponent,
     DocDemoViewportComponent,
     CodePreviewComponent,
+    CodeSnippet,
     Card,
     Slider,
   ],
@@ -39,6 +41,7 @@ type SliderDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SliderDemoComponent {
+  public readonly importCode: string = "import { Slider } from 'ui-lib-custom/slider'";
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'range', label: 'Range' },

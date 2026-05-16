@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import {
   FormControl,
   FormGroup,
@@ -34,6 +35,7 @@ type TextareaDemoSnippetKey =
   selector: 'app-textarea-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     FormsModule,
     ReactiveFormsModule,
     DocPageLayoutComponent,
@@ -48,6 +50,7 @@ type TextareaDemoSnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaDemoComponent {
+  public readonly importCode: string = "import { UiLibTextarea } from 'ui-lib-custom/textarea'";
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'auto-resize', label: 'Auto Resize' },

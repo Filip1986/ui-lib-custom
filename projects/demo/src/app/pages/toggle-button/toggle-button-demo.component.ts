@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { Signal, WritableSignal } from '@angular/core';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocPageLayoutComponent } from '@demo/shared/doc-page/doc-page-layout.component';
@@ -35,6 +36,7 @@ type SnippetKey =
   selector: 'app-toggle-button-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     JsonPipe,
     FormsModule,
     ReactiveFormsModule,
@@ -50,6 +52,7 @@ type SnippetKey =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleButtonDemoComponent {
+  public readonly importCode: string = "import { ToggleButton } from 'ui-lib-custom/toggle-button'";
   public readonly sections: DocSection[] = [
     { id: 'basic', label: 'Basic' },
     { id: 'labels', label: 'Custom Labels' },

@@ -20,6 +20,7 @@ import type { DocSection } from '../../shared/doc-page/doc-section.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageDemoComponent {
+  public readonly importCode: string = "import { Message } from 'ui-lib-custom/message'";
   public readonly layout: Signal<DocPageLayoutComponent | undefined> =
     viewChild(DocPageLayoutComponent);
 

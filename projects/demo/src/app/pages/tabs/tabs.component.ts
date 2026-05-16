@@ -36,6 +36,7 @@ import { DocCodeSnippetComponent } from '@demo/shared/doc-page/doc-code-snippet.
 import { CodePreviewComponent } from '../../shared/components/code-preview/code-preview.component';
 import { VariantComparisonComponent } from '../../shared/components/variant-comparison/variant-comparison.component';
 import { TabsBasicExampleComponent } from '@demo/examples/tabs-basic-example.component';
+import { CodeSnippet } from 'ui-lib-custom/code-snippet';
 
 interface DemoTab {
   value: TabsValue;
@@ -62,6 +63,7 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   selector: 'app-tabs-demo',
   standalone: true,
   imports: [
+    CodeSnippet,
     CommonModule,
     FormsModule,
     Tabs,
@@ -86,6 +88,8 @@ type PerTabLazyOption = TabsLazyMode | 'inherit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent {
+  public readonly importCode: string =
+    "import { Tabs, Tab, TabLabel, TabContent } from 'ui-lib-custom/tabs'";
   public readonly sections: DocSection[] = [
     { id: 'playground', label: 'Playground' },
     { id: 'variants', label: 'Variants' },
