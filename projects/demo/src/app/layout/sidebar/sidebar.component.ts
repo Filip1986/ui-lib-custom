@@ -474,6 +474,12 @@ export class SidebarComponent {
           group: 'Misc',
         },
         {
+          label: 'CodeSnippet',
+          icon: 'pi pi-circle',
+          route: '/code-snippet',
+          group: 'Misc',
+        },
+        {
           label: 'ClassNames',
           icon: 'pi pi-circle',
           route: '/class-names',

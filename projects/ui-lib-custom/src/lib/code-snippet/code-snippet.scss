@@ -31,9 +31,6 @@ ui-lib-code-snippet {
   --uilib-code-snippet-padding-lg: 1rem 1.5rem;
   --uilib-code-snippet-line-height: 1.65;
 
-  // Transition
-  --uilib-code-snippet-transition: transform 0.25s ease, box-shadow 0.25s ease;
-
   display: block;
 }
 
@@ -46,7 +43,6 @@ ui-lib-code-snippet .ui-lib-code-snippet__card {
   background: var(--uilib-code-snippet-bg);
   color: var(--uilib-code-snippet-text);
   font-family: var(--uilib-code-snippet-font);
-  transition: var(--uilib-code-snippet-transition);
 
   // ── Size variants ──────────────────────────────────────────────────────────
 
@@ -69,13 +65,6 @@ ui-lib-code-snippet .ui-lib-code-snippet__card {
     box-shadow:
       0 4px 6px -1px rgba(0, 0, 0, 0.3),
       0 2px 4px -1px rgba(0, 0, 0, 0.2);
-
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 20px 25px -5px rgba(0, 0, 0, 0.4),
-        0 10px 10px -5px rgba(0, 0, 0, 0.2);
-    }
   }
 
   // ── Bootstrap variant ──────────────────────────────────────────────────────
@@ -84,10 +73,6 @@ ui-lib-code-snippet .ui-lib-code-snippet__card {
     border-radius: var(--uilib-radius-sm, 0.375rem);
     border-width: 2px;
     box-shadow: none;
-
-    &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    }
   }
 
   // ── Minimal variant ────────────────────────────────────────────────────────
@@ -96,10 +81,6 @@ ui-lib-code-snippet .ui-lib-code-snippet__card {
     border-radius: var(--uilib-radius-md, 0.5rem);
     border-color: transparent;
     box-shadow: none;
-
-    &:hover {
-      border-color: var(--uilib-code-snippet-border);
-    }
   }
 }
 
@@ -301,14 +282,6 @@ ui-lib-code-snippet .ui-lib-code-snippet__code {
 // ─── Reduced motion ───────────────────────────────────────────────────────────
 
 @media (prefers-reduced-motion: reduce) {
-  ui-lib-code-snippet .ui-lib-code-snippet__card {
-    transition: none;
-
-    &:hover {
-      transform: none;
-    }
-  }
-
   ui-lib-code-snippet .ui-lib-code-snippet__copy-btn {
     transition: none;
   }
