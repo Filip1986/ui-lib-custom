@@ -14,30 +14,14 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
-import hljs from 'highlight.js/lib/core';
-import type { HighlightResult } from 'highlight.js';
-import javascript from 'highlight.js/lib/languages/javascript';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
-import css from 'highlight.js/lib/languages/css';
-import scss from 'highlight.js/lib/languages/scss';
-import json from 'highlight.js/lib/languages/json';
-import bash from 'highlight.js/lib/languages/bash';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
+import { highlight, escapeForCode } from 'ui-lib-custom/syntax-highlighter';
+import type { SyntaxLanguage } from 'ui-lib-custom/syntax-highlighter';
 import type {
   CodeSnippetLanguage,
   CodeSnippetVariant,
   CodeSnippetSize,
 } from './code-snippet.types';
-
-// Register languages once at module level (tree-shakable subset)
-hljs.registerLanguage('javascript', javascript);
-hljs.registerLanguage('typescript', typescript);
-hljs.registerLanguage('xml', xml);
-hljs.registerLanguage('css', css);
-hljs.registerLanguage('scss', scss);
-hljs.registerLanguage('json', json);
-hljs.registerLanguage('bash', bash);
 
 export type {
   CodeSnippetLanguage,
@@ -57,6 +41,9 @@ const LANGUAGE_LABELS: Record<CodeSnippetLanguage, string> = {
   text: 'Plain Text',
 } as const;
 
+/** Languages the built-in syntax tokenizer supports. */
+const HIGHLIGHTED_LANGUAGES: Set<string> = new Set<string>(['typescript', 'html', 'scss', 'css']);
+
 const LANGUAGE_ICONS: Record<CodeSnippetLanguage, string | null> = {
   javascript: 'logos:javascript',
   typescript: 'logos:typescript-icon',
@@ -69,20 +56,9 @@ const LANGUAGE_ICONS: Record<CodeSnippetLanguage, string | null> = {
   text: null,
 } as const;
 
-const HLJS_LANGUAGE_MAP: Record<CodeSnippetLanguage, string | null> = {
-  javascript: 'javascript',
-  typescript: 'typescript',
-  html: 'xml',
-  css: 'css',
-  scss: 'scss',
-  json: 'json',
-  bash: 'bash',
-  shell: 'bash',
-  text: null,
-} as const;
-
 /**
  * Code snippet display component with macOS-style window chrome, line numbers, and copy-to-clipboard.
+ * TypeScript, HTML, SCSS, and CSS code is syntax-highlighted using the built-in tokenizer.
  */
 @Component({
   selector: 'ui-lib-code-snippet',
@@ -97,7 +73,7 @@ const HLJS_LANGUAGE_MAP: Record<CodeSnippetLanguage, string | null> = {
 export class CodeSnippet {
   /** The raw code string to display. */
   public readonly code: InputSignal<string> = input<string>('');
-  /** Programming language — used to label the tab. */
+  /** Programming language — used to label the tab and select the syntax tokenizer. */
   public readonly language: InputSignal<CodeSnippetLanguage> = input<CodeSnippetLanguage>('text');
   /** Optional filename shown in the tab bar. Falls back to the language label. */
   public readonly filename: InputSignal<string | null> = input<string | null>(null);
@@ -162,19 +138,14 @@ export class CodeSnippet {
     return classes.join(' ');
   });
 
-  /** Syntax-highlighted HTML derived from the raw code + language. Safe to bind via [innerHTML]. */
-  public readonly highlightedHtml: Signal<SafeHtml> = computed<SafeHtml>((): SafeHtml => {
-    const lang: string | null = HLJS_LANGUAGE_MAP[this.language()];
-    const raw: string = this.code().trimEnd();
-    if (!lang) {
-      const escaped: string = raw
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-      return this.sanitizer.bypassSecurityTrustHtml(escaped);
-    }
-    const result: HighlightResult = hljs.highlight(raw, { language: lang });
-    return this.sanitizer.bypassSecurityTrustHtml(result.value);
+  /** Syntax-highlighted HTML for the code body, safe to bind with [innerHTML]. */
+  public readonly highlightedCode: Signal<SafeHtml> = computed<SafeHtml>((): SafeHtml => {
+    const language: CodeSnippetLanguage = this.language();
+    const rawCode: string = this.code();
+    const html: string = HIGHLIGHTED_LANGUAGES.has(language)
+      ? highlight(rawCode, language as SyntaxLanguage)
+      : escapeForCode(rawCode);
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   });
 
   /** Handles the copy button click. Delegates to the async clipboard operation. */

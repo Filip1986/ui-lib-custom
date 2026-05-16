@@ -121,7 +121,7 @@ describe('CodeSnippet', (): void => {
     fixture.detectChanges();
     const tab: HTMLElement | null = query<HTMLElement>(fixture, '.ui-lib-code-snippet__tab-label');
     expect(tab).not.toBeNull();
-    expect((tab as HTMLElement).textContent?.trim()).toBe('TypeScript');
+    expect((tab as HTMLElement).textContent!.trim()).toBe('TypeScript');
   });
 
   it('shows the filename in the tab when provided', (): void => {
@@ -129,7 +129,7 @@ describe('CodeSnippet', (): void => {
     fixture.detectChanges();
     const tab: HTMLElement | null = query<HTMLElement>(fixture, '.ui-lib-code-snippet__tab-label');
     expect(tab).not.toBeNull();
-    expect((tab as HTMLElement).textContent?.trim()).toBe('main.ts');
+    expect((tab as HTMLElement).textContent!.trim()).toBe('main.ts');
   });
 
   // ── Visibility toggles ──────────────────────────────────────────────────────

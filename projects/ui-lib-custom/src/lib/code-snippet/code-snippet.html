@@ -1,8 +1,4 @@
-<div
-  [class]="rootClasses()"
-  role="region"
-  [attr.aria-label]="accessibleLabel()"
->
+<div [class]="rootClasses()" role="region" [attr.aria-label]="accessibleLabel()">
   <!-- Header: window chrome, filename tab, copy button -->
   <div class="ui-lib-code-snippet__header">
     @if (showWindowChrome()) {
@@ -69,10 +65,7 @@
   </div>
 
   <!-- Body: optional line numbers + code -->
-  <div
-    class="ui-lib-code-snippet__body"
-    [style.max-height]="maxHeight()"
-  >
+  <div class="ui-lib-code-snippet__body" [style.max-height]="maxHeight()">
     @if (showLineNumbers()) {
       <div class="ui-lib-code-snippet__line-numbers" aria-hidden="true">
         @for (line of lines(); track $index) {
@@ -85,7 +78,7 @@
       <pre
         class="ui-lib-code-snippet__pre"
         [attr.data-language]="language()"
-      ><code class="ui-lib-code-snippet__code" [innerHTML]="highlightedHtml()"></code></pre>
+      ><code class="ui-lib-code-snippet__code" [innerHTML]="highlightedCode()"></code></pre>
     </div>
   </div>
 </div>

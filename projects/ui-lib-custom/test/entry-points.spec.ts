@@ -97,6 +97,7 @@ import type * as UiLibDynamicDialog from 'ui-lib-custom/dynamic-dialog';
 import type * as UiLibToolbar from 'ui-lib-custom/toolbar';
 import type * as UiLibAlert from 'ui-lib-custom/alert';
 import type * as UiLibIconButton from 'ui-lib-custom/icon-button';
+import type * as UiLibSyntaxHighlighter from 'ui-lib-custom/syntax-highlighter';
 
 describe('Secondary Entry Points', (): void => {
   it('should import from primary', async (): Promise<void> => {
@@ -673,5 +674,12 @@ describe('Secondary Entry Points', (): void => {
   it('should import from icon-button', async (): Promise<void> => {
     const mod: typeof UiLibIconButton = await import('ui-lib-custom/icon-button');
     expect(mod.IconButton).toBeDefined();
+  });
+
+  it('should import from syntax-highlighter', async (): Promise<void> => {
+    const mod: typeof UiLibSyntaxHighlighter = await import('ui-lib-custom/syntax-highlighter');
+    expect(mod.highlight).toBeDefined();
+    expect(mod.tokenize).toBeDefined();
+    expect(mod.escapeForCode).toBeDefined();
   });
 });
