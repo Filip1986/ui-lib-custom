@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Breadcrumb } from 'ui-lib-custom/breadcrumb';
 import type { BreadcrumbItem, BreadcrumbItemClickEvent } from 'ui-lib-custom/breadcrumb';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the Breadcrumb component.
@@ -9,12 +12,29 @@ import type { BreadcrumbItem, BreadcrumbItemClickEvent } from 'ui-lib-custom/bre
 @Component({
   selector: 'app-breadcrumb-demo',
   standalone: true,
-  imports: [Breadcrumb],
+  imports: [Breadcrumb, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './breadcrumb-demo.component.html',
   styleUrl: './breadcrumb-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'with-home', label: 'With Home' },
+    { id: 'router-link', label: 'RouterLink' },
+    { id: 'custom-separator', label: 'Custom Separator' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'command-callback', label: 'Command Callback' },
+    { id: 'disabled-item', label: 'Disabled Item' },
+    { id: 'long-breadcrumb', label: 'Long Breadcrumb' },
+    { id: 'api', label: 'API' },
+  ];
+
   // ── Basic ──────────────────────────────────────────────────────────────────
 
   public readonly basicItems: BreadcrumbItem[] = [
@@ -105,6 +125,10 @@ export class BreadcrumbDemoComponent {
   ];
 
   // ── Event handler ─────────────────────────────────────────────────────────
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public onItemClick(event: BreadcrumbItemClickEvent): void {
     this.logEvent(`itemClick: ${event.item.label ?? 'unknown'}`);

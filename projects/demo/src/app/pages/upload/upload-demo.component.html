@@ -1,30 +1,34 @@
-<div class="demo-page upload-demo">
-  <header class="upload-demo__header">
-    <h1 class="upload-demo__title">Upload</h1>
-    <p class="upload-demo__subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Upload</h1>
+      <code class="demo-page-header__import">import { UploadComponent } from 'ui-lib-custom/upload'</code>
+    </div>
+    <p class="demo-page-header__description">
       Advanced file uploader with drag-and-drop, image previews, validation, and custom upload mode.
     </p>
-
-    <!-- Variant switcher -->
-    <div class="upload-demo__variant-switcher" role="group" aria-label="Select variant">
-      @for (variant of variants; track variant) {
-        <ui-lib-button
-          type="button"
-          [appearance]="activeVariant() === variant ? 'solid' : 'outline'"
-          severity="primary"
-          size="sm"
-          (click)="setVariant(variant)"
-        >
-          {{ variant }}
-        </ui-lib-button>
-      }
+    <div class="demo-page-header__preview">
+      <div class="upload-demo__variant-switcher" role="group" aria-label="Select variant">
+        @for (variant of variants; track variant) {
+          <ui-lib-button
+            type="button"
+            [appearance]="activeVariant() === variant ? 'solid' : 'outline'"
+            severity="primary"
+            size="sm"
+            (click)="setVariant(variant)"
+          >
+            {{ variant }}
+          </ui-lib-button>
+        }
+      </div>
     </div>
   </header>
 
   <!-- ── Section 1: Basic single-file upload ─────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Basic</h2>
-    <p class="upload-demo__section-desc">Single-file upload with default settings.</p>
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">Single-file upload with default settings.</p>
 
     <ui-lib-upload
       [variant]="activeVariant()"
@@ -35,9 +39,9 @@
   </section>
 
   <!-- ── Section 2: Multi-file upload ────────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Multiple Files</h2>
-    <p class="upload-demo__section-desc">Accepts up to 5 files, max 5 MB each.</p>
+  <section class="demo-section" id="multiple-files" data-doc-anchor>
+    <h2 class="demo-section__title">Multiple Files</h2>
+    <p class="demo-section__description">Accepts up to 5 files, max 5 MB each.</p>
 
     <ui-lib-upload
       [variant]="activeVariant()"
@@ -51,9 +55,9 @@
   </section>
 
   <!-- ── Section 3: Image-only upload ────────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Image Only</h2>
-    <p class="upload-demo__section-desc">
+  <section class="demo-section" id="image-only" data-doc-anchor>
+    <h2 class="demo-section__title">Image Only</h2>
+    <p class="demo-section__description">
       Restricts selection to image files. Thumbnails are shown for previews.
     </p>
 
@@ -76,9 +80,9 @@
   </section>
 
   <!-- ── Section 4: Custom upload handler ────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Custom Upload Handler</h2>
-    <p class="upload-demo__section-desc">
+  <section class="demo-section" id="custom-upload-handler" data-doc-anchor>
+    <h2 class="demo-section__title">Custom Upload Handler</h2>
+    <p class="demo-section__description">
       Set <code>customUpload="true"</code> and listen to <code>(uploadHandler)</code>
       to control the HTTP transport yourself.
     </p>
@@ -112,9 +116,9 @@
   </section>
 
   <!-- ── Section 5: Auto upload ───────────────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Auto Upload</h2>
-    <p class="upload-demo__section-desc">
+  <section class="demo-section" id="auto-upload" data-doc-anchor>
+    <h2 class="demo-section__title">Auto Upload</h2>
+    <p class="demo-section__description">
       Set <code>auto="true"</code> together with <code>customUpload="true"</code>
       to trigger the upload immediately after file selection.
       The Upload and Cancel buttons are hidden since they are not needed.
@@ -133,8 +137,8 @@
   </section>
 
   <!-- ── Section 6: Sizes ─────────────────────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Sizes</h2>
+  <section class="demo-section" id="sizes" data-doc-anchor>
+    <h2 class="demo-section__title">Sizes</h2>
     <div class="upload-demo__size-grid">
       @for (size of ['sm', 'md', 'lg']; track size) {
         <div>
@@ -146,9 +150,9 @@
   </section>
 
   <!-- ── Section 7: Custom file template ─────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Custom File Template</h2>
-    <p class="upload-demo__section-desc">
+  <section class="demo-section" id="custom-file-template" data-doc-anchor>
+    <h2 class="demo-section__title">Custom File Template</h2>
+    <p class="demo-section__description">
       Use the <code>uiUploadFile</code> directive to render each queued file
       with a completely custom template.
     </p>
@@ -168,8 +172,8 @@
   </section>
 
   <!-- ── Section 8: Disabled ─────────────────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Disabled</h2>
+  <section class="demo-section" id="disabled" data-doc-anchor>
+    <h2 class="demo-section__title">Disabled</h2>
 
     <ui-lib-upload
       [variant]="activeVariant()"
@@ -178,8 +182,8 @@
   </section>
 
   <!-- ── Event log ──────────────────────────────────────────────────────────── -->
-  <section class="upload-demo__section">
-    <h2 class="upload-demo__section-title">Event Log</h2>
+  <section class="demo-section" id="event-log" data-doc-anchor>
+    <h2 class="demo-section__title">Event Log</h2>
     <div class="upload-demo__log-panel upload-demo__log-panel--full">
       @if (eventLog().length === 0) {
         <p class="upload-demo__log-empty">Interact with the components above to see events.</p>
@@ -195,4 +199,14 @@
       }
     </div>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

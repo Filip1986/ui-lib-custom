@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   TableComponent,
@@ -11,6 +11,9 @@ import {
 } from 'ui-lib-custom/table';
 import type { TableSelectionMode, TableSortEvent, TableVariant } from 'ui-lib-custom/table';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface Product {
   id: number;
@@ -35,12 +38,28 @@ interface Product {
     TableEmptyDirective,
     TableExpansionDirective,
     Button,
+    DocPageLayoutComponent,
+    DocTocComponent,
   ],
   templateUrl: './table-demo.component.html',
   styleUrl: './table-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'interactive-demo', label: 'Interactive Demo' },
+    { id: 'all-variants', label: 'All Variants' },
+    { id: 'scrollable-table', label: 'Scrollable Table' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly products: WritableSignal<Product[]> = signal<Product[]>([
     {
       id: 1,

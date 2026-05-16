@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Placeholder demo page for the upcoming Starter Template.
@@ -6,8 +10,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-starter-template',
   standalone: true,
+  imports: [DocPageLayoutComponent, DocTocComponent],
   templateUrl: './starter-template.component.html',
   styleUrl: './starter-template.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StarterTemplateComponent {}
+export class StarterTemplateComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+  public readonly sections: DocSection[] = [{ id: 'overview', label: 'Overview' }];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+}

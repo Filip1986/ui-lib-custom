@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Message } from 'ui-lib-custom/message';
 import type { MessageSeverity, MessageVariant, MessageSize } from 'ui-lib-custom/message';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the Message component.
@@ -10,12 +13,30 @@ import { Button } from 'ui-lib-custom/button';
 @Component({
   selector: 'app-message-demo',
   standalone: true,
-  imports: [Message, Button],
+  imports: [Message, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './message-demo.component.html',
   styleUrl: './message-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'playground', label: 'Playground' },
+    { id: 'severities', label: 'Severities' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'closable', label: 'Closable' },
+    { id: 'content-projection', label: 'Content Projection' },
+    { id: 'api', label: 'API Reference' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly severities: MessageSeverity[] = [
     'success',
     'info',

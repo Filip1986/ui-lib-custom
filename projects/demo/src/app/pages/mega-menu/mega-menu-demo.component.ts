@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { MegaMenu } from 'ui-lib-custom/mega-menu';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -9,6 +9,9 @@ import type {
   MegaMenuSize,
   MegaMenuVariant,
 } from 'ui-lib-custom/mega-menu';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the MegaMenu component.
@@ -16,12 +19,32 @@ import type {
 @Component({
   selector: 'app-mega-menu-demo',
   standalone: true,
-  imports: [MegaMenu, Button],
+  imports: [MegaMenu, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './mega-menu-demo.component.html',
   styleUrl: './mega-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MegaMenuDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic-horizontal', label: 'Basic Horizontal' },
+    { id: 'vertical-orientation', label: 'Vertical Orientation' },
+    { id: 'disabled-items', label: 'Disabled Items & Separators' },
+    { id: 'command-callbacks', label: 'Command Callbacks' },
+    { id: 'item-click-output', label: 'itemClick Output' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'playground', label: 'Playground' },
+    { id: 'api', label: 'API Reference' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   // ── Basic model ───────────────────────────────────────────
 
   public readonly basicModel: MegaMenuItem[] = [

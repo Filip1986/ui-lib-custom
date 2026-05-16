@@ -1,28 +1,34 @@
-<div class="buttons-demo">
-  <header class="buttons-demo__header">
-    <h1 class="buttons-demo__title">Button</h1>
-    <p class="buttons-demo__subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Button</h1>
+      <code class="demo-page-header__import">import { Button } from 'ui-lib-custom/button'</code>
+    </div>
+    <p class="demo-page-header__description">
       Flexible button component with 13 appearances, 9 severities, and orthogonal pill / raised
       modifiers — all from a single <code>ui-lib-button</code> element.
     </p>
-
-    <!-- Variant switcher -->
-    <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
-      @for (v of variants; track v) {
-        <button
-          type="button"
-          class="buttons-demo__variant-btn"
-          [class.buttons-demo__variant-btn--active]="activeVariant() === v"
-          (click)="setVariant(v)"
-        >
-          {{ v }}
-        </button>
-      }
+    <div class="demo-page-header__preview">
+      <!-- Variant switcher -->
+      <div class="buttons-demo__variant-switcher" role="group" aria-label="Select variant">
+        @for (v of variants; track v) {
+          <button
+            type="button"
+            class="buttons-demo__variant-btn"
+            [class.buttons-demo__variant-btn--active]="activeVariant() === v"
+            (click)="setVariant(v)"
+          >
+            {{ v }}
+          </button>
+        }
+      </div>
     </div>
   </header>
 
   <!-- ── Section 1: Basic ──────────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic</h2>
     <ui-lib-card
       [variant]="activeVariant()"
       subtitle="Default solid button with primary severity."
@@ -52,7 +58,8 @@
   </section>
 
   <!-- ── Section 2: All Appearances ──────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="all-appearances" data-doc-anchor>
+    <h2 class="demo-section__title">All Appearances</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>All Appearances</span>
       <span card-subtitle>
@@ -75,7 +82,8 @@
   </section>
 
   <!-- ── Section: Glass Shadow ──────────────────────────────────────────────── -->
-  <section class="buttons-demo__section buttons-demo__section--glass-shadow">
+  <section class="demo-section buttons-demo__section--glass-shadow" id="glass-shadow" data-doc-anchor>
+    <h2 class="demo-section__title">Glass Shadow</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Glass Shadow</span>
       <span card-subtitle>
@@ -163,7 +171,8 @@
   </section>
 
   <!-- ── Section: Framed ──────────────────────────────────────────────────────── -->
-  <section class="buttons-demo__section buttons-demo__section--framed">
+  <section class="demo-section buttons-demo__section--framed" id="framed" data-doc-anchor>
+    <h2 class="demo-section__title">Framed</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Framed</span>
       <span card-subtitle>
@@ -254,7 +263,8 @@
   </section>
 
   <!-- ── Section 3: Appearance × Severity matrix ─────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="appearance-severity" data-doc-anchor>
+    <h2 class="demo-section__title">Appearance × Severity</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Appearance × Severity</span>
       <span card-subtitle>
@@ -283,7 +293,8 @@
   </section>
 
   <!-- ── Section 4: Sizes ──────────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
+    <h2 class="demo-section__title">Sizes</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Sizes</span>
       <span card-subtitle>
@@ -303,7 +314,8 @@
   </section>
 
   <!-- ── Section 5: Icons ──────────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="icons" data-doc-anchor>
+    <h2 class="demo-section__title">Icons</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Icons</span>
       <span card-subtitle>
@@ -332,7 +344,8 @@
   </section>
 
   <!-- ── Section 6: Pill & Raised modifiers ──────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="pill-raised" data-doc-anchor>
+    <h2 class="demo-section__title">Pill &amp; Raised</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Pill &amp; Raised</span>
       <span card-subtitle>
@@ -373,7 +386,8 @@
   </section>
 
   <!-- ── Section 7: States ────────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="states" data-doc-anchor>
+    <h2 class="demo-section__title">States</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>States</span>
       <span card-subtitle>
@@ -400,7 +414,8 @@
   </section>
 
   <!-- ── Section 8: Badges ────────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="badges" data-doc-anchor>
+    <h2 class="demo-section__title">Badges</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Badges</span>
       <span card-subtitle>
@@ -431,7 +446,8 @@
   </section>
 
   <!-- ── Section 9: Tactile ───────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="tactile" data-doc-anchor>
+    <h2 class="demo-section__title">Tactile</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Tactile</span>
       <span card-subtitle>
@@ -514,7 +530,8 @@
   </section>
 
   <!-- ── Section 10: Expressive appearances ──────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="expressive" data-doc-anchor>
+    <h2 class="demo-section__title">Expressive Appearances</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Expressive Appearances</span>
       <span card-subtitle>
@@ -614,7 +631,8 @@
   </section>
 
   <!-- ── Section 11: Button Groups ────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="button-groups" data-doc-anchor>
+    <h2 class="demo-section__title">Button Groups</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Button Groups</span>
       <span card-subtitle>
@@ -660,7 +678,8 @@
   </section>
 
   <!-- ── Section 12: Full Width ────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="full-width" data-doc-anchor>
+    <h2 class="demo-section__title">Full Width</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>Full Width</span>
       <span card-subtitle>
@@ -678,8 +697,8 @@
   </section>
 
   <!-- ── Section 13: Accessibility ──────────────────────────────────────── -->
-  <section class="buttons-demo__section">
-    <h2 class="buttons-demo__a11y-title">Accessibility</h2>
+  <section class="demo-section" id="accessibility" data-doc-anchor>
+    <h2 class="demo-section__title">Accessibility</h2>
     <p class="buttons-demo__a11y-desc">
       <code>ui-lib-button</code> renders a native <code>&lt;button&gt;</code> element and inherits
       full keyboard and screen-reader support by default.
@@ -783,7 +802,8 @@
   </section>
 
   <!-- ── Section 14: API Reference ────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API Reference</h2>
     <ui-lib-card [variant]="activeVariant()" [showFooter]="false">
       <span card-header>API Reference</span>
       <span card-subtitle>
@@ -820,7 +840,8 @@
   </section>
 
   <!-- ── Event log ─────────────────────────────────────────────────────────── -->
-  <section class="buttons-demo__section">
+  <section class="demo-section" id="event-log" data-doc-anchor>
+    <h2 class="demo-section__title">Event Log</h2>
     <ui-lib-card
       [variant]="activeVariant()"
       subtitle="Interact with the buttons above to see events."
@@ -843,4 +864,14 @@
       </div>
     </ui-lib-card>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

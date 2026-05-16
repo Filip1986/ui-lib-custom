@@ -1,13 +1,19 @@
-<div class="demo-page">
-  <h1 class="demo-page__title">Menubar</h1>
-  <p class="demo-page__description">
-    A horizontal navigation bar with dropdown submenus. Items can have nested sub-panels for
-    hierarchical navigation. Supports start/end content projection, three visual variants,
-    three sizes, and a responsive mobile toggle.
-  </p>
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Menubar</h1>
+      <code class="demo-page-header__import">import { Menubar } from 'ui-lib-custom/menubar'</code>
+    </div>
+    <p class="demo-page-header__description">
+      A horizontal navigation bar with dropdown submenus. Items can have nested sub-panels for
+      hierarchical navigation. Supports start/end content projection, three visual variants,
+      three sizes, and a responsive mobile toggle.
+    </p>
+  </header>
 
   <!-- Basic -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
       Top-level items with dropdown menus. Items with an
@@ -21,7 +27,7 @@
   </section>
 
   <!-- Nested submenus -->
-  <section class="demo-section">
+  <section class="demo-section" id="nested-submenus" data-doc-anchor>
     <h2 class="demo-section__title">Nested Submenus</h2>
     <p class="demo-section__description">
       Sub-items with an <code>items</code> array open a nested panel to the right.
@@ -33,7 +39,7 @@
   </section>
 
   <!-- Disabled items -->
-  <section class="demo-section">
+  <section class="demo-section" id="disabled-items" data-doc-anchor>
     <h2 class="demo-section__title">Disabled Items</h2>
     <p class="demo-section__description">
       Use <code>disabled: true</code> on root or sub items to prevent interaction.
@@ -44,7 +50,7 @@
   </section>
 
   <!-- Command callbacks -->
-  <section class="demo-section">
+  <section class="demo-section" id="command-callbacks" data-doc-anchor>
     <h2 class="demo-section__title">Command Callbacks</h2>
     <p class="demo-section__description">
       Attach a <code>command</code> function to any leaf item to react to activations.
@@ -56,7 +62,7 @@
   </section>
 
   <!-- itemClick output / event log -->
-  <section class="demo-section">
+  <section class="demo-section" id="item-click-output" data-doc-anchor>
     <h2 class="demo-section__title">itemClick Output</h2>
     <p class="demo-section__description">
       The <code>(itemClick)</code> output fires whenever a leaf item is activated.
@@ -78,7 +84,7 @@
   </section>
 
   <!-- Start / End slots -->
-  <section class="demo-section">
+  <section class="demo-section" id="start-end-slots" data-doc-anchor>
     <h2 class="demo-section__title">Start / End Slots</h2>
     <p class="demo-section__description">
       Project content into the bar using the <code>menubarStart</code> and
@@ -97,7 +103,7 @@
   </section>
 
   <!-- Variants -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three built-in design variants: <code>material</code>, <code>bootstrap</code>,
@@ -120,7 +126,7 @@
   </section>
 
   <!-- Sizes -->
-  <section class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__description">
       Three size tokens: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
@@ -142,7 +148,7 @@
   </section>
 
   <!-- Playground -->
-  <section class="demo-section">
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
     <p class="demo-section__description">Switch variant and size interactively.</p>
     <div class="demo-section__controls">
@@ -185,7 +191,7 @@
   </section>
 
   <!-- API Table -->
-  <section class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Menubar Inputs</h3>
@@ -247,4 +253,14 @@
       </tbody>
     </table>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { TimelineComponent } from 'ui-lib-custom/timeline';
 import {
   TimelineContentDirective,
@@ -11,6 +12,10 @@ import type {
   TimelineSize,
   TimelineVariant,
 } from 'ui-lib-custom/timeline';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
+
 interface ProjectEvent {
   status: string;
   date: string;
@@ -33,12 +38,32 @@ interface OrderStep {
     TimelineContentDirective,
     TimelineMarkerDirective,
     TimelineOppositeDirective,
+    DocPageLayoutComponent,
+    DocTocComponent,
   ],
   templateUrl: './timeline-demo.component.html',
   styleUrl: './timeline-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimelineDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic-vertical', label: 'Basic Vertical' },
+    { id: 'opposite-content', label: 'Opposite Content' },
+    { id: 'alternate-alignment', label: 'Alternate Alignment' },
+    { id: 'custom-markers', label: 'Custom Markers' },
+    { id: 'horizontal-layout', label: 'Horizontal Layout' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'right-alignment', label: 'Right Alignment' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   /** Events used in basic vertical demo. */
   public readonly basicEvents: ProjectEvent[] = [
     {

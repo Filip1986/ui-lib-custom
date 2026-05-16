@@ -1,25 +1,29 @@
-<section class="focus-trap-demo" data-testid="focus-trap-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="ft-hero">
-    <h1 class="ft-hero__title">FocusTrap</h1>
-    <p class="ft-hero__lead">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>FocusTrap</h1>
+      <code class="demo-page-header__import">import { FocusTrapDirective } from 'ui-lib-custom/focus-trap'</code>
+    </div>
+    <p class="demo-page-header__description">
       A directive that constrains keyboard focus within a container element.
       Tab and Shift+Tab cycle only among the focusable descendants of the host,
       preventing focus from escaping — essential for accessible modals, dialogs,
       and side panels.
     </p>
-    <div class="ft-hero__tags">
-      <span class="ft-tag">Directive</span>
-      <span class="ft-tag">Misc</span>
-      <span class="ft-tag">A11y</span>
+    <div class="demo-page-header__preview">
+      <div class="ft-hero__tags">
+        <span class="ft-tag">Directive</span>
+        <span class="ft-tag">Misc</span>
+        <span class="ft-tag">A11y</span>
+      </div>
     </div>
-  </div>
+  </header>
 
   <!-- ── Section 1: Basic usage ── -->
-  <div class="ft-section">
-    <h2 class="ft-section__title">Basic Usage</h2>
-    <p class="ft-section__desc">
+  <section class="demo-section" id="basic-usage" data-doc-anchor>
+    <h2 class="demo-section__title">Basic Usage</h2>
+    <p class="demo-section__desc">
       Add <code>uiLibFocusTrap</code> to any container. Tab navigation is
       constrained to focusable descendants of that element. Focus moves to the
       first focusable child on activation.
@@ -45,12 +49,12 @@
   &lt;input type="text" /&gt;
   &lt;button&gt;Submit&lt;/button&gt;
 &lt;/div&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ── Section 2: Toggle on/off ── -->
-  <div class="ft-section">
-    <h2 class="ft-section__title">Toggle Trap</h2>
-    <p class="ft-section__desc">
+  <section class="demo-section" id="toggle-trap" data-doc-anchor>
+    <h2 class="demo-section__title">Toggle Trap</h2>
+    <p class="demo-section__desc">
       Bind <code>[uiLibFocusTrap]</code> to a boolean signal to enable or disable
       the trap at runtime. When disabled, Tab behaves normally and focus is restored
       to the previously focused element.
@@ -84,12 +88,12 @@
     <pre class="ft-code"><code>&lt;div [uiLibFocusTrap]="isActive"&gt;
   &lt;input type="text" /&gt;
 &lt;/div&gt;</code></pre>
-  </div>
+  </section>
 
   <!-- ── Section 3: Modal overlay pattern ── -->
-  <div class="ft-section">
-    <h2 class="ft-section__title">Modal Overlay Pattern</h2>
-    <p class="ft-section__desc">
+  <section class="demo-section" id="modal-overlay-pattern" data-doc-anchor>
+    <h2 class="demo-section__title">Modal Overlay Pattern</h2>
+    <p class="demo-section__desc">
       The most common use case: wrapping a modal dialog so that keyboard users
       cannot interact with background content. When the modal closes, focus
       returns to the trigger button automatically.
@@ -110,11 +114,11 @@
     &lt;button (click)="closeModal()"&gt;Close&lt;/button&gt;
   &lt;/div&gt;
 &#125;</code></pre>
-  </div>
+  </section>
 
   <!-- ── Section 4: API ── -->
-  <div class="ft-section">
-    <h2 class="ft-section__title">API</h2>
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API</h2>
 
     <h3 class="ft-sub-title">Import</h3>
     <pre class="ft-code"><code>import {{ '{' }} FocusTrapDirective {{ '}' }} from 'ui-lib-custom/focus-trap';</code></pre>
@@ -173,9 +177,18 @@
       <code>[contenteditable="true"]</code>. Disabled and
       <code>aria-hidden</code> elements are excluded.
     </p>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>
 
 <!-- ── Modal overlay ── -->
 @if (isModalOpen()) {

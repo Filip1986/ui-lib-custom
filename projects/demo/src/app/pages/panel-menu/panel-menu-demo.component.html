@@ -1,14 +1,22 @@
-<div class="demo-page">
-  <h1 class="demo-page__title">PanelMenu</h1>
-  <p class="demo-page__description">
-    An accordion-style, hierarchical navigation menu driven by a data model. Root items act as
-    collapsible panels; leaf items are directly activatable. Implements the
-    <strong>accordion + menu</strong> accessibility pattern.
-  </p>
-  <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>PanelMenu</h1>
+      <code class="demo-page-header__import">import { PanelMenu } from 'ui-lib-custom/panel-menu'</code>
+    </div>
+    <p class="demo-page-header__description">
+      An accordion-style, hierarchical navigation menu driven by a data model. Root items act as
+      collapsible panels; leaf items are directly activatable. Implements the
+      <strong>accordion + menu</strong> accessibility pattern.
+    </p>
+    <div class="demo-page-header__preview">
+      <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+    </div>
+  </header>
 
   <!-- ── Basic ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
       Panel headers expand on click to reveal their child items.
@@ -20,7 +28,7 @@
   </section>
 
   <!-- ── Initially Expanded ─────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="initially-expanded" data-doc-anchor>
     <h2 class="demo-section__title">Initially Expanded</h2>
     <p class="demo-section__description">
       Set <code>expanded: true</code> on a root item to have it open on first render.
@@ -32,7 +40,7 @@
   </section>
 
   <!-- ── Multiple Mode ──────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="multiple-mode" data-doc-anchor>
     <h2 class="demo-section__title">Multiple Mode</h2>
     <p class="demo-section__description">
       By default only one panel can be open at a time. Set <code>[multiple]="true"</code> to allow
@@ -45,7 +53,7 @@
   </section>
 
   <!-- ── Nested Sub-Items ───────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="nested-sub-items" data-doc-anchor>
     <h2 class="demo-section__title">Nested Sub-Items</h2>
     <p class="demo-section__description">
       Items within a panel can also have their own <code>items</code> array, creating deeply nested
@@ -57,7 +65,7 @@
   </section>
 
   <!-- ── Disabled Items ─────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="disabled-items" data-doc-anchor>
     <h2 class="demo-section__title">Disabled Items</h2>
     <p class="demo-section__description">
       Set <code>disabled: true</code> on any item — root panels or leaf items — to prevent
@@ -69,7 +77,7 @@
   </section>
 
   <!-- ── URL Items ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="url-items" data-doc-anchor>
     <h2 class="demo-section__title">URL Items</h2>
     <p class="demo-section__description">
       Provide <code>url</code> on a leaf item to render it as an anchor tag. Use
@@ -82,7 +90,7 @@
   </section>
 
   <!-- ── Variants ───────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three design variants: <code>material</code>, <code>bootstrap</code>, and
@@ -106,7 +114,7 @@
   </section>
 
   <!-- ── Sizes ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__description">
       Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
@@ -128,7 +136,7 @@
   </section>
 
   <!-- ── Events ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="events" data-doc-anchor>
     <h2 class="demo-section__title">Events</h2>
     <p class="demo-section__description">
       <code>(itemClick)</code> fires when a leaf item is activated.
@@ -159,7 +167,7 @@
   </section>
 
   <!-- ── API ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
@@ -269,7 +277,7 @@
   </section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="accessibility" data-doc-anchor>
     <h2 class="demo-section__title">Accessibility</h2>
 
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -327,4 +335,14 @@
       </li>
     </ul>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

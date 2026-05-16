@@ -1,21 +1,23 @@
-<section class="style-class-demo" data-testid="style-class-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">StyleClass</h1>
-    <p class="demo-hero__description">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>StyleClass</h1>
+      <code class="demo-page-header__import">import &#123; StyleClass &#125; from 'ui-lib-custom/style-class'</code>
+    </div>
+    <p class="demo-page-header__description">
       A directive that manages CSS class enter/leave transitions on a target element.
       Useful for animated show/hide panels, menus, and overlays — all driven by CSS,
       zero JavaScript animation libraries required.
     </p>
-    <div class="demo-hero__badges">
+    <div class="demo-page-header__preview">
       <span class="badge badge--directive">Directive</span>
       <span class="badge badge--package">ui-lib-custom/style-class</span>
     </div>
-  </div>
+  </header>
 
   <!-- Section 1: Toggle Mode -->
-  <div class="demo-section">
+  <section class="demo-section" id="toggle-mode" data-doc-anchor>
     <h2 class="demo-section__title">Toggle Mode</h2>
     <p class="demo-section__description">
       Set <code>toggleClass</code> to add and remove a single CSS class on each click.
@@ -47,10 +49,10 @@
 &#x3C;div class="sc-panel"&#x3E;...&#x3C;/div&#x3E;</code></pre>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Section 2: Fade Animation -->
-  <div class="demo-section">
+  <section class="demo-section" id="fade-animation" data-doc-anchor>
     <h2 class="demo-section__title">Fade Animation</h2>
     <p class="demo-section__description">
       Use <code>enterActiveClass</code> / <code>leaveActiveClass</code> with CSS keyframe
@@ -88,10 +90,10 @@
 &#x3C;div class="hidden"&#x3E;...&#x3C;/div&#x3E;</code></pre>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Section 3: Slide Animation -->
-  <div class="demo-section">
+  <section class="demo-section" id="slide-animation" data-doc-anchor>
     <h2 class="demo-section__title">Slide Animation</h2>
     <p class="demo-section__description">
       Use the full <code>enterDoneClass</code> / <code>leaveDoneClass</code> lifecycle
@@ -128,10 +130,10 @@
 &#x3E;Toggle Slide&#x3C;/button&#x3E;</code></pre>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Section 4: Special Selectors -->
-  <div class="demo-section">
+  <section class="demo-section" id="special-selectors" data-doc-anchor>
     <h2 class="demo-section__title">Special Selectors</h2>
     <p class="demo-section__description">
       Use <code>@parent</code>, <code>@prev</code>, and <code>@grandparent</code>
@@ -182,10 +184,10 @@
 &#x3C;/div&#x3E;</code></pre>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Section 5: CSS Selector -->
-  <div class="demo-section">
+  <section class="demo-section" id="css-selector" data-doc-anchor>
     <h2 class="demo-section__title">CSS Selector</h2>
     <p class="demo-section__description">
       Pass any CSS selector to target a specific element elsewhere in the page.
@@ -214,10 +216,10 @@
 &#x3C;div id="my-panel"&#x3E;...&#x3C;/div&#x3E;</code></pre>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- API Table -->
-  <div class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
@@ -299,7 +301,15 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
-
+</app-doc-page-layout>

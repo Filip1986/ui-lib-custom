@@ -1,9 +1,17 @@
-<div class="toggle-switch-demo">
-  <h1 class="demo-title">ToggleSwitch</h1>
-  <p class="demo-subtitle">A sliding pill switch for toggling boolean values. Supports ngModel, reactive forms, three design variants, and full keyboard &amp; ARIA accessibility.</p>
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>ToggleSwitch</h1>
+      <code class="demo-page-header__import">import { ToggleSwitch } from 'ui-lib-custom/toggle-switch'</code>
+    </div>
+    <p class="demo-page-header__description">
+      A sliding pill switch for toggling boolean values. Supports ngModel, reactive forms, three design variants, and full keyboard &amp; ARIA accessibility.
+    </p>
+  </header>
 
   <!-- ── Basic ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <ui-lib-card>
       <div class="demo-row">
@@ -22,7 +30,7 @@
   </section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <ui-lib-card>
       <div class="demo-variants-grid">
@@ -46,7 +54,7 @@
   </section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <ui-lib-card>
       <div class="demo-sizes-row">
@@ -60,7 +68,7 @@
   </section>
 
   <!-- ── Disabled &amp; Readonly ─────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="disabled-readonly" data-doc-anchor>
     <h2 class="demo-section__title">Disabled &amp; Readonly</h2>
     <ui-lib-card>
       <div class="demo-row">
@@ -75,7 +83,7 @@
   </section>
 
   <!-- ── ngModel ───────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="ngmodel" data-doc-anchor>
     <h2 class="demo-section__title">Two-way binding (ngModel)</h2>
     <ui-lib-card>
       <div class="demo-row">
@@ -86,7 +94,7 @@
   </section>
 
   <!-- ── Reactive forms ────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="reactive-forms" data-doc-anchor>
     <h2 class="demo-section__title">Reactive Forms</h2>
     <ui-lib-card>
       <div class="demo-row">
@@ -100,7 +108,7 @@
   </section>
 
   <!-- ── Playground ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Playground</h2>
     <ui-lib-card>
       <div class="demo-playground">
@@ -158,5 +166,14 @@
       </div>
     </ui-lib-card>
   </section>
-</div>
 
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

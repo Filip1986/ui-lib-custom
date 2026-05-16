@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Dock } from 'ui-lib-custom/dock';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -9,6 +9,9 @@ import type {
   DockSize,
   DockVariant,
 } from 'ui-lib-custom/dock';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the Dock component.
@@ -16,12 +19,32 @@ import type {
 @Component({
   selector: 'app-dock-demo',
   standalone: true,
-  imports: [Dock, Button],
+  imports: [Dock, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './dock-demo.component.html',
   styleUrl: './dock-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DockDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'positions', label: 'Positions' },
+    { id: 'no-magnification', label: 'No Magnification' },
+    { id: 'disabled-items', label: 'Disabled Items' },
+    { id: 'link-items', label: 'Link Items' },
+    { id: 'playground', label: 'Interactive Playground' },
+    { id: 'api', label: 'API' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   // ── Controls ──────────────────────────────────────────────────────────────
 
   public readonly variant: WritableSignal<DockVariant> = signal<DockVariant>('material');

@@ -1,6 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, viewChild } from '@angular/core';
+import type { Signal } from '@angular/core';
 import { CarouselComponent } from 'ui-lib-custom/carousel';
 import type { CarouselResponsiveOption } from 'ui-lib-custom/carousel';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface DemoProduct {
   name: string;
@@ -17,12 +21,30 @@ interface DemoProduct {
 @Component({
   selector: 'app-carousel-demo',
   standalone: true,
-  imports: [CarouselComponent],
+  imports: [CarouselComponent, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './carousel-demo.component.html',
   styleUrl: './carousel-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'multiple-items', label: 'Multiple Items Visible' },
+    { id: 'circular-autoplay', label: 'Circular & Autoplay' },
+    { id: 'responsive', label: 'Responsive' },
+    { id: 'vertical', label: 'Vertical' },
+    { id: 'header-footer', label: 'Header & Footer Templates' },
+    { id: 'page-change', label: 'Page Change Event' },
+    { id: 'bootstrap-variant', label: 'Bootstrap Variant' },
+    { id: 'minimal-variant', label: 'Minimal Variant' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'hidden-controls', label: 'Hidden Navigators & Indicators' },
+  ];
+
   /** Sample products used across all demo scenarios. */
   public readonly products: DemoProduct[] = [
     { name: 'Bamboo Watch', category: 'Accessories', price: 65, image: '🎍' },
@@ -54,6 +76,10 @@ export class CarouselDemoComponent {
 
   /** Track the last emitted page index for the event demo. */
   public lastPage: number = 0;
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   /** Update the displayed page index when the carousel emits a page change. */
   public onPageChange(event: { page: number }): void {

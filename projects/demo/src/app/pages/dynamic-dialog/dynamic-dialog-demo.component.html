@@ -1,16 +1,19 @@
-<section class="dynamic-dialog-demo">
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">DynamicDialog</h1>
-    <p class="demo-hero__lead">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>DynamicDialog</h1>
+      <code class="demo-page-header__import">import { DialogService } from 'ui-lib-custom/dynamic-dialog'</code>
+    </div>
+    <p class="demo-page-header__description">
       Programmatically open <strong>any Angular component</strong> inside a configurable modal
       shell. No template tag required — just inject <code>DialogService</code> and call
       <code>open()</code>.
     </p>
-  </div>
+  </header>
 
   <!-- Basic Usage -->
-  <div class="demo-section">
+  <section class="demo-section" id="basic-usage" data-doc-anchor>
     <h2 class="demo-section__title">Basic Usage</h2>
     <p class="demo-section__desc">
       Call <code>dialogService.open(Component, config)</code> from any class that injects
@@ -27,10 +30,10 @@
   width: '32rem',
 &#125;);</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- Passing Data -->
-  <div class="demo-section">
+  <section class="demo-section" id="passing-data" data-doc-anchor>
     <h2 class="demo-section__title">Passing Data to the Guest Component</h2>
     <p class="demo-section__desc">
       Pass arbitrary data through <code>config.data</code>. The guest component reads it by
@@ -59,10 +62,10 @@ ref    = inject(DynamicDialogRef);
 this.userId = (this.config.data as any).userId;
 this.ref.close(&#123; confirmed: true &#125;);</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- Scrollable Content -->
-  <div class="demo-section">
+  <section class="demo-section" id="scrollable-content" data-doc-anchor>
     <h2 class="demo-section__title">Fixed Height &amp; Scrollable Content</h2>
     <p class="demo-section__desc">
       Set <code>height</code> on the config to give the dialog a fixed viewport height. The
@@ -80,10 +83,10 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
   height: '50vh',
 &#125;);</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- Variants -->
-  <div class="demo-section">
+  <section class="demo-section" id="design-variants" data-doc-anchor>
     <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__desc">
       Pass <code>variant</code> to override the inherited theme setting for a single dialog.
@@ -102,10 +105,10 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
       </div>
       <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; variant: 'bootstrap' &#125;);</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- Positions -->
-  <div class="demo-section">
+  <section class="demo-section" id="viewport-positions" data-doc-anchor>
     <h2 class="demo-section__title">Viewport Positions</h2>
     <p class="demo-section__desc">
       Use <code>position</code> to anchor the dialog to the center or any edge of the
@@ -121,10 +124,10 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
       </div>
       <pre class="demo-card__code"><code>this.dialogService.open(MyComponent, &#123; position: 'top' &#125;);</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- Configuration options -->
-  <div class="demo-section">
+  <section class="demo-section" id="configuration-options" data-doc-anchor>
     <h2 class="demo-section__title">Configuration Options</h2>
     <div class="demo-card">
       <div class="demo-card__preview demo-card__preview--col">
@@ -136,10 +139,10 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
         </ui-lib-button>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- API Reference -->
-  <div class="demo-section">
+  <section class="demo-section" id="dynamic-dialog-config" data-doc-anchor>
     <h2 class="demo-section__title">DynamicDialogConfig</h2>
     <div class="demo-api-table-wrapper">
       <table class="demo-api-table">
@@ -166,9 +169,9 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 
-  <div class="demo-section">
+  <section class="demo-section" id="dynamic-dialog-ref" data-doc-anchor>
     <h2 class="demo-section__title">DynamicDialogRef</h2>
     <div class="demo-api-table-wrapper">
       <table class="demo-api-table">
@@ -185,9 +188,9 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 
-  <div class="demo-section">
+  <section class="demo-section" id="injection-tokens" data-doc-anchor>
     <h2 class="demo-section__title">Injection Tokens</h2>
     <div class="demo-api-table-wrapper">
       <table class="demo-api-table">
@@ -204,5 +207,15 @@ this.ref.close(&#123; confirmed: true &#125;);</code></pre>
         </tbody>
       </table>
     </div>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
-</section>
+
+</app-doc-page-layout>

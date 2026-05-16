@@ -1,56 +1,56 @@
-<section class="aos-demo" data-testid="animated-on-scroll-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- HERO -->
-  <div class="aos-hero">
-    <div class="aos-hero__badge">Directive</div>
-    <h1 class="aos-hero__title">AnimateOnScroll</h1>
-    <p class="aos-hero__lead">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>AnimateOnScroll</h1>
+      <code class="demo-page-header__import">import { AnimateOnScroll } from 'ui-lib-custom/animate-on-scroll'</code>
+    </div>
+    <p class="demo-page-header__description">
       Trigger smooth CSS transitions as elements enter the viewport &mdash; powered
       entirely by the native <code>IntersectionObserver</code> API with no
       external animation libraries required.
     </p>
-    <div class="aos-hero__chips">
-      <span class="aos-chip uilib-aos-fade-in"
-            uiLibAnimateOnScroll enterClass="uilib-aos-active"
-            [threshold]="0"
-            style="--uilib-animate-on-scroll-delay: 0ms">
-        <i class="pi pi-bolt"></i> Native API
-      </span>
-      <span class="aos-chip uilib-aos-fade-in"
-            uiLibAnimateOnScroll enterClass="uilib-aos-active"
-            [threshold]="0"
-            style="--uilib-animate-on-scroll-delay: 80ms">
-        <i class="pi pi-check"></i> Zero dependencies
-      </span>
-      <span class="aos-chip uilib-aos-fade-in"
-            uiLibAnimateOnScroll enterClass="uilib-aos-active"
-            [threshold]="0"
-            style="--uilib-animate-on-scroll-delay: 160ms">
-        <i class="pi pi-palette"></i> CSS-variable theming
-      </span>
-      <span class="aos-chip uilib-aos-fade-in"
-            uiLibAnimateOnScroll enterClass="uilib-aos-active"
-            [threshold]="0"
-            style="--uilib-animate-on-scroll-delay: 240ms">
-        <i class="pi pi-refresh"></i> Enter &amp; leave events
-      </span>
+    <div class="demo-page-header__preview">
+      <div class="aos-hero__chips">
+        <span class="aos-chip uilib-aos-fade-in"
+              uiLibAnimateOnScroll enterClass="uilib-aos-active"
+              [threshold]="0"
+              style="--uilib-animate-on-scroll-delay: 0ms">
+          <i class="pi pi-bolt"></i> Native API
+        </span>
+        <span class="aos-chip uilib-aos-fade-in"
+              uiLibAnimateOnScroll enterClass="uilib-aos-active"
+              [threshold]="0"
+              style="--uilib-animate-on-scroll-delay: 80ms">
+          <i class="pi pi-check"></i> Zero dependencies
+        </span>
+        <span class="aos-chip uilib-aos-fade-in"
+              uiLibAnimateOnScroll enterClass="uilib-aos-active"
+              [threshold]="0"
+              style="--uilib-animate-on-scroll-delay: 160ms">
+          <i class="pi pi-palette"></i> CSS-variable theming
+        </span>
+        <span class="aos-chip uilib-aos-fade-in"
+              uiLibAnimateOnScroll enterClass="uilib-aos-active"
+              [threshold]="0"
+              style="--uilib-animate-on-scroll-delay: 240ms">
+          <i class="pi pi-refresh"></i> Enter &amp; leave events
+        </span>
+      </div>
     </div>
-    <p class="aos-hero__scroll-hint">
-      <i class="pi pi-arrow-down"></i> Scroll to see the animations in action
-    </p>
-  </div>
+  </header>
 
   <!-- FADE IN -->
-  <div class="aos-section">
+  <section class="demo-section" id="fade-in" data-doc-anchor>
+    <h2 class="demo-section__title">Fade In</h2>
+    <p class="demo-section__description">
+      Elements fade from fully transparent to fully opaque as they enter the
+      viewport. Use <code>class="uilib-aos-fade-in"</code> with
+      <code>enterClass="uilib-aos-active"</code>.
+    </p>
     <div class="aos-section__header uilib-aos-fade-in"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Preset</span>
-      <h2 class="aos-section__title">Fade In</h2>
-      <p class="aos-section__desc">
-        Elements fade from fully transparent to fully opaque as they enter the
-        viewport. Use <code>class="uilib-aos-fade-in"</code> with
-        <code>enterClass="uilib-aos-active"</code>.
-      </p>
     </div>
     <div class="aos-grid aos-grid--3">
       <div class="aos-card uilib-aos-fade-in"
@@ -75,18 +75,18 @@
         <p class="aos-card__text">Signal-based inputs, explicit types, and zero-config defaults.</p>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- SLIDE UP -->
-  <div class="aos-section aos-section--alt">
+  <section class="demo-section" id="slide-up" data-doc-anchor>
+    <h2 class="demo-section__title">Slide Up</h2>
+    <p class="demo-section__description">
+      Elements rise from slightly below their final position while fading in.
+      Ideal for stacked content lists and feature grids.
+    </p>
     <div class="aos-section__header uilib-aos-slide-right"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Preset</span>
-      <h2 class="aos-section__title">Slide Up</h2>
-      <p class="aos-section__desc">
-        Elements rise from slightly below their final position while fading in.
-        Ideal for stacked content lists and feature grids.
-      </p>
     </div>
     <div class="aos-grid aos-grid--3">
       <div class="aos-card uilib-aos-slide-up"
@@ -111,18 +111,18 @@
         <p class="aos-card__text">Signal inputs update the observer options without recreating.</p>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- SLIDE DOWN -->
-  <div class="aos-section">
+  <section class="demo-section" id="slide-down" data-doc-anchor>
+    <h2 class="demo-section__title">Slide Down</h2>
+    <p class="demo-section__description">
+      Elements drop from above their final position. Good for nav menus,
+      banners, or header-adjacent content.
+    </p>
     <div class="aos-section__header uilib-aos-slide-left"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Preset</span>
-      <h2 class="aos-section__title">Slide Down</h2>
-      <p class="aos-section__desc">
-        Elements drop from above their final position. Good for nav menus,
-        banners, or header-adjacent content.
-      </p>
     </div>
     <div class="aos-grid aos-grid--3">
       <div class="aos-card uilib-aos-slide-down"
@@ -147,18 +147,18 @@
         <p class="aos-card__text">Built-in filtering for data tables, listboxes, and tree views.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- SLIDE LEFT / RIGHT — alternating layout -->
-  <div class="aos-section aos-section--alt">
+  <!-- SLIDE LEFT / RIGHT -->
+  <section class="demo-section" id="slide-left-right" data-doc-anchor>
+    <h2 class="demo-section__title">Slide Left &amp; Right</h2>
+    <p class="demo-section__description">
+      Alternate direction for each row to create a dynamic timeline-style
+      reveal. Left slides in from the left; right slides in from the right.
+    </p>
     <div class="aos-section__header uilib-aos-fade-in"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Preset</span>
-      <h2 class="aos-section__title">Slide Left &amp; Right</h2>
-      <p class="aos-section__desc">
-        Alternate direction for each row to create a dynamic timeline-style
-        reveal. Left slides in from the left; right slides in from the right.
-      </p>
     </div>
     <div class="aos-split-list">
       <div class="aos-split-item">
@@ -201,18 +201,18 @@
         <div class="aos-split-item__spacer"></div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ZOOM IN / ZOOM OUT -->
-  <div class="aos-section">
+  <section class="demo-section" id="zoom" data-doc-anchor>
+    <h2 class="demo-section__title">Zoom In &amp; Zoom Out</h2>
+    <p class="demo-section__description">
+      Elements scale from slightly smaller (zoom in) or slightly larger
+      (zoom out) to their natural size while fading in.
+    </p>
     <div class="aos-section__header uilib-aos-slide-up"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Preset</span>
-      <h2 class="aos-section__title">Zoom In &amp; Zoom Out</h2>
-      <p class="aos-section__desc">
-        Elements scale from slightly smaller (zoom in) or slightly larger
-        (zoom out) to their natural size while fading in.
-      </p>
     </div>
     <div class="aos-grid aos-grid--2">
       <div class="aos-zoom-card uilib-aos-zoom-in"
@@ -232,19 +232,19 @@
         <p class="aos-zoom-card__text">Scales down from 115% to 100%</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- STAGGER — CSS variable delay -->
-  <div class="aos-section aos-section--alt">
+  <!-- STAGGER -->
+  <section class="demo-section" id="stagger" data-doc-anchor>
+    <h2 class="demo-section__title">Stagger Effect</h2>
+    <p class="demo-section__description">
+      Override <code>--uilib-animate-on-scroll-delay</code> on each element
+      with an increasing value. All elements share the same directive and
+      preset &mdash; only the CSS variable changes.
+    </p>
     <div class="aos-section__header uilib-aos-fade-in"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Technique</span>
-      <h2 class="aos-section__title">Stagger Effect</h2>
-      <p class="aos-section__desc">
-        Override <code>--uilib-animate-on-scroll-delay</code> on each element
-        with an increasing value. All elements share the same directive and
-        preset &mdash; only the CSS variable changes.
-      </p>
     </div>
     <div class="aos-stagger-row">
       <div class="aos-stagger-card uilib-aos-slide-up"
@@ -289,18 +289,18 @@
      uiLibAnimateOnScroll enterClass="uilib-aos-active"
      style="--uilib-animate-on-scroll-delay: 300ms"&gt;</code></pre>
     </div>
-  </div>
+  </section>
 
   <!-- REPEAT MODE -->
-  <div class="aos-section">
+  <section class="demo-section" id="repeat-on-scroll" data-doc-anchor>
+    <h2 class="demo-section__title">Repeat on Scroll</h2>
+    <p class="demo-section__description">
+      Set <code>[once]="false"</code> to re-animate every time the element
+      enters the viewport. Scroll these cards out of view and back again.
+    </p>
     <div class="aos-section__header uilib-aos-slide-right"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Technique</span>
-      <h2 class="aos-section__title">Repeat on Scroll</h2>
-      <p class="aos-section__desc">
-        Set <code>[once]="false"</code> to re-animate every time the element
-        enters the viewport. Scroll these cards out of view and back again.
-      </p>
     </div>
     <div class="aos-grid aos-grid--3">
       <div class="aos-card aos-card--repeat uilib-aos-zoom-in"
@@ -328,20 +328,20 @@
         <p class="aos-card__text">Animates every time it enters the viewport.</p>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- API REFERENCE -->
-  <div class="aos-section aos-section--alt aos-section--last">
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API</h2>
+    <p class="demo-section__description">
+      Apply the directive with the <code>uiLibAnimateOnScroll</code>
+      attribute selector. Import preset classes in your
+      <code>styles.scss</code>:
+      <code>@use 'path/to/animate-on-scroll.scss';</code>
+    </p>
     <div class="aos-section__header uilib-aos-fade-in"
          uiLibAnimateOnScroll enterClass="uilib-aos-active">
       <span class="aos-section__tag">Reference</span>
-      <h2 class="aos-section__title">API</h2>
-      <p class="aos-section__desc">
-        Apply the directive with the <code>uiLibAnimateOnScroll</code>
-        attribute selector. Import preset classes in your
-        <code>styles.scss</code>:
-        <code>@use 'path/to/animate-on-scroll.scss';</code>
-      </p>
     </div>
     <table class="aos-table uilib-aos-slide-up"
            uiLibAnimateOnScroll enterClass="uilib-aos-active">
@@ -428,6 +428,15 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>

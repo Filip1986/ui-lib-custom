@@ -1,16 +1,20 @@
-<div class="demo-page">
-  <header class="demo-header">
-    <h1 class="demo-title">Tree</h1>
-    <p class="demo-subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Tree</h1>
+      <code class="demo-page-header__import">import { Tree } from 'ui-lib-custom/tree'</code>
+    </div>
+    <p class="demo-page-header__description">
       Hierarchical data display with expand/collapse, selection modes, filtering,
       custom templates, and three design variants.
     </p>
   </header>
 
   <!-- ── Basic Tree ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Basic Tree</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="basic-tree" data-doc-anchor>
+    <h2 class="demo-section__title">Basic Tree</h2>
+    <p class="demo-section__description">
       A read-only tree with no selection. Click the chevron to expand or collapse subtrees.
     </p>
     <div class="demo-card">
@@ -19,9 +23,9 @@
   </section>
 
   <!-- ── Single Selection ────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Single Selection</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="single-selection" data-doc-anchor>
+    <h2 class="demo-section__title">Single Selection</h2>
+    <p class="demo-section__description">
       Click a node to select it. Click the same node again to deselect.
     </p>
     <div class="demo-card">
@@ -37,9 +41,9 @@
   </section>
 
   <!-- ── Multiple Selection ──────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Multiple Selection</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="multiple-selection" data-doc-anchor>
+    <h2 class="demo-section__title">Multiple Selection</h2>
+    <p class="demo-section__description">
       Click any number of nodes to build up a selection. Click again to deselect.
     </p>
     <div class="demo-card">
@@ -55,9 +59,9 @@
   </section>
 
   <!-- ── Checkbox Selection ──────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Checkbox Selection</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="checkbox-selection" data-doc-anchor>
+    <h2 class="demo-section__title">Checkbox Selection</h2>
+    <p class="demo-section__description">
       Checking a parent cascades to all its descendants. A dash indicates a partially
       selected parent.
     </p>
@@ -74,9 +78,9 @@
   </section>
 
   <!-- ── Filter ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Filter</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="filter" data-doc-anchor>
+    <h2 class="demo-section__title">Filter</h2>
+    <p class="demo-section__description">
       Type into the search box to filter the tree. Lenient mode (default) shows
       matching nodes and all their ancestors.
     </p>
@@ -90,9 +94,9 @@
   </section>
 
   <!-- ── Custom Template ─────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Custom Node Template</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="custom-node-template" data-doc-anchor>
+    <h2 class="demo-section__title">Custom Node Template</h2>
+    <p class="demo-section__description">
       Use <code>ng-template uiTreeNode</code> with an optional <code>uiTreeNodeType</code>
       to override rendering per node type. Unmatched nodes fall back to the default template.
     </p>
@@ -115,9 +119,9 @@
   </section>
 
   <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Sizes</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="sizes" data-doc-anchor>
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">
       Three sizes: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
     </p>
     <div class="demo-card demo-sizes-grid">
@@ -137,9 +141,9 @@
   </section>
 
   <!-- ── Variants ────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Variants</h2>
-    <p class="demo-section-desc">
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
       The three design variants — <code>material</code>, <code>bootstrap</code>,
       and <code>minimal</code> — adapt to the active theme.
     </p>
@@ -173,4 +177,14 @@
       </div>
     </div>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

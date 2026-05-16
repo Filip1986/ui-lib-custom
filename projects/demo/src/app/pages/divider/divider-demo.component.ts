@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Divider } from 'ui-lib-custom/divider';
 import type {
   DividerAlign,
@@ -8,6 +8,9 @@ import type {
   DividerVariant,
 } from 'ui-lib-custom/divider';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the Divider component.
@@ -15,12 +18,32 @@ import { Button } from 'ui-lib-custom/button';
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
-  imports: [Divider, Button],
+  imports: [Divider, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './divider-demo.component.html',
   styleUrl: './divider-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DividerDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'with-label', label: 'With Label' },
+    { id: 'alignment', label: 'Alignment' },
+    { id: 'line-types', label: 'Line Types' },
+    { id: 'vertical', label: 'Vertical' },
+    { id: 'vertical-alignment', label: 'Vertical Alignment' },
+    { id: 'design-variants', label: 'Design Variants' },
+    { id: 'playground', label: 'Playground' },
+    { id: 'api', label: 'API' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly types: DividerType[] = ['solid', 'dashed', 'dotted'];
   public readonly variants: DividerVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly horizontalAligns: DividerAlign[] = ['left', 'center', 'right'];

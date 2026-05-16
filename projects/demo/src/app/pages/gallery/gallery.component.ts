@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal, type WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  viewChild,
+  type WritableSignal,
+} from '@angular/core';
+import type { Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GalleriaComponent } from 'ui-lib-custom/galleria';
 import { Button } from 'ui-lib-custom/button';
@@ -7,6 +14,9 @@ import type {
   GalleriaThumbnailsPosition,
   GalleriaVariant,
 } from 'ui-lib-custom/galleria';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface GalleriaImage {
   src: string;
@@ -68,12 +78,34 @@ const DEMO_IMAGES: GalleriaImage[] = [
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [GalleriaComponent, FormsModule, Button],
+  imports: [GalleriaComponent, FormsModule, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'with-caption', label: 'With Caption' },
+    { id: 'indicators', label: 'Indicators' },
+    { id: 'thumbnail-position', label: 'Thumbnail Position' },
+    { id: 'indicators-on-item', label: 'Indicators on Item' },
+    { id: 'fullscreen', label: 'Fullscreen' },
+    { id: 'circular-autoplay', label: 'Circular & Autoplay' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'playground', label: 'Playground' },
+    { id: 'api', label: 'API' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly images: GalleriaImage[] = DEMO_IMAGES;
 
   // Basic demo state

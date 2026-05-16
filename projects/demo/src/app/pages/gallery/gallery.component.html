@@ -1,16 +1,20 @@
-<div class="demo-page">
-  <header class="demo-header">
-    <h1 class="demo-title">Galleria</h1>
-    <p class="demo-subtitle">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Galleria</h1>
+      <code class="demo-page-header__import">import { GalleriaComponent } from 'ui-lib-custom/galleria'</code>
+    </div>
+    <p class="demo-page-header__description">
       A media gallery component with thumbnail navigation, dot indicators,
       multiple layout positions, fullscreen mode, and autoplay support.
     </p>
   </header>
 
   <!-- ─── Basic ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Basic</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="basic" data-doc-anchor>
+    <h2 class="demo-section__title">Basic</h2>
+    <p class="demo-section__description">
       A gallery with item and thumbnail templates. Navigation arrows and a
       scrollable thumbnail strip are shown by default.
     </p>
@@ -41,9 +45,9 @@
   </section>
 
   <!-- ─── With caption ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">With Caption</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="with-caption" data-doc-anchor>
+    <h2 class="demo-section__title">With Caption</h2>
+    <p class="demo-section__description">
       Use the <code>#galleriaCaption</code> template slot to overlay a caption
       on the active item.
     </p>
@@ -72,9 +76,9 @@
   </section>
 
   <!-- ─── Indicators ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Indicators</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="indicators" data-doc-anchor>
+    <h2 class="demo-section__title">Indicators</h2>
+    <p class="demo-section__description">
       Replace the thumbnail strip with dot indicators by enabling
       <code>showIndicators</code> and setting <code>showThumbnails</code> to
       false.
@@ -97,9 +101,9 @@
   </section>
 
   <!-- ─── Thumbnail position ──────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Thumbnail Position</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="thumbnail-position" data-doc-anchor>
+    <h2 class="demo-section__title">Thumbnail Position</h2>
+    <p class="demo-section__description">
       The thumbnail strip can be positioned on any side using
       <code>thumbnailsPosition</code>: bottom (default), top, left, or right.
     </p>
@@ -140,9 +144,9 @@
   </section>
 
   <!-- ─── No thumbnails + indicators on item ──────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Indicators on Item</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="indicators-on-item" data-doc-anchor>
+    <h2 class="demo-section__title">Indicators on Item</h2>
+    <p class="demo-section__description">
       Set <code>showThumbnails="false"</code>, <code>showIndicators="true"</code>,
       and <code>showIndicatorsOnItem="true"</code> to overlay dots directly on
       the image.
@@ -166,9 +170,9 @@
   </section>
 
   <!-- ─── Fullscreen ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Fullscreen</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="fullscreen" data-doc-anchor>
+    <h2 class="demo-section__title">Fullscreen</h2>
+    <p class="demo-section__description">
       Enable <code>fullScreen</code> to show a maximize button. Clicking it opens
       the gallery in a full-screen overlay. The <code>visible</code> two-way
       binding controls open/close state.
@@ -199,9 +203,9 @@
   </section>
 
   <!-- ─── Circular + Autoplay ─────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Circular &amp; Autoplay</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="circular-autoplay" data-doc-anchor>
+    <h2 class="demo-section__title">Circular &amp; Autoplay</h2>
+    <p class="demo-section__description">
       With <code>circular="true"</code> navigation wraps around. Adding
       <code>autoPlay="true"</code> advances the gallery automatically every
       3 seconds.
@@ -228,9 +232,9 @@
   </section>
 
   <!-- ─── Variants ────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Variants</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="variants" data-doc-anchor>
+    <h2 class="demo-section__title">Variants</h2>
+    <p class="demo-section__description">
       Three design variants are available: <code>material</code>,
       <code>bootstrap</code>, and <code>minimal</code>.
     </p>
@@ -267,9 +271,9 @@
   </section>
 
   <!-- ─── Sizes ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Sizes</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="sizes" data-doc-anchor>
+    <h2 class="demo-section__title">Sizes</h2>
+    <p class="demo-section__description">
       The <code>size</code> input (<code>sm</code> / <code>md</code> /
       <code>lg</code>) controls the thumbnail strip sizing.
     </p>
@@ -307,9 +311,9 @@
   </section>
 
   <!-- ─── Playground ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">Playground</h2>
-    <p class="demo-section-description">
+  <section class="demo-section" id="playground" data-doc-anchor>
+    <h2 class="demo-section__title">Playground</h2>
+    <p class="demo-section__description">
       Combine all options to explore the Galleria API interactively.
     </p>
 
@@ -407,8 +411,8 @@
   </section>
 
   <!-- ─── API table ────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
-    <h2 class="demo-section-title">API</h2>
+  <section class="demo-section" id="api" data-doc-anchor>
+    <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-sub-title">Inputs</h3>
     <table class="demo-api-table">
@@ -470,4 +474,14 @@
       </tbody>
     </table>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

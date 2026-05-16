@@ -1,16 +1,18 @@
-<section class="drawer-demo" data-testid="drawer-demo">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- Hero -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">Drawer</h1>
-    <p class="demo-hero__description">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Drawer</h1>
+      <code class="demo-page-header__import">import { Drawer } from 'ui-lib-custom/drawer'</code>
+    </div>
+    <p class="demo-page-header__description">
       A panel that slides in from the edge of the viewport. Supports four positions,
       three design variants, and flexible content projection.
     </p>
-  </div>
+  </header>
 
   <!-- Basic -->
-  <div class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">Click to open a right-side drawer with a header and content.</p>
     <div class="demo-section__content">
@@ -21,10 +23,10 @@
       <p>This is the default drawer sliding in from the right. Use <code>[(visible)]</code> to control open state.</p>
       <p>You can project any content inside the drawer body.</p>
     </ui-lib-drawer>
-  </div>
+  </section>
 
   <!-- Positions -->
-  <div class="demo-section">
+  <section class="demo-section" id="positions" data-doc-anchor>
     <h2 class="demo-section__title">Positions</h2>
     <p class="demo-section__description">
       Use the <code>position</code> input to slide the drawer in from any edge.
@@ -43,10 +45,10 @@
     >
       <p>Drawer is sliding in from the <strong>{{ currentPosition() }}</strong>.</p>
     </ui-lib-drawer>
-  </div>
+  </section>
 
   <!-- Variants -->
-  <div class="demo-section">
+  <section class="demo-section" id="design-variants" data-doc-anchor>
     <h2 class="demo-section__title">Design Variants</h2>
     <p class="demo-section__description">
       Three design variants match the library's global theme: <code>material</code>, <code>bootstrap</code>, and <code>minimal</code>.
@@ -64,10 +66,10 @@
     >
       <p>This drawer uses the <strong>{{ currentVariant() }}</strong> design variant.</p>
     </ui-lib-drawer>
-  </div>
+  </section>
 
   <!-- No modal -->
-  <div class="demo-section">
+  <section class="demo-section" id="without-backdrop" data-doc-anchor>
     <h2 class="demo-section__title">Without Backdrop</h2>
     <p class="demo-section__description">
       Set <code>[modal]="false"</code> to remove the backdrop — the rest of the page stays interactive.
@@ -80,10 +82,10 @@
       <p>The page behind this drawer remains scrollable and interactive.</p>
       <ui-lib-button size="sm" type="button" (click)="noBackdropOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
-  </div>
+  </section>
 
   <!-- Footer slot -->
-  <div class="demo-section">
+  <section class="demo-section" id="with-footer" data-doc-anchor>
     <h2 class="demo-section__title">With Footer</h2>
     <p class="demo-section__description">
       Project an element with <code>drawerFooter</code> attribute to render a sticky footer.
@@ -112,10 +114,10 @@
         <ui-lib-button type="button" (click)="footerOpen.set(false)">Save changes</ui-lib-button>
       </div>
     </ui-lib-drawer>
-  </div>
+  </section>
 
   <!-- Full-screen -->
-  <div class="demo-section">
+  <section class="demo-section" id="full-screen" data-doc-anchor>
     <h2 class="demo-section__title">Full Screen</h2>
     <p class="demo-section__description">
       Set <code>size="100vw"</code> (or <code>100vh</code> for top/bottom) for a full-screen drawer.
@@ -128,10 +130,10 @@
       <p>This drawer spans the full viewport width.</p>
       <ui-lib-button type="button" (click)="fullScreenOpen.set(false)">Close</ui-lib-button>
     </ui-lib-drawer>
-  </div>
+  </section>
 
   <!-- API Reference -->
-  <div class="demo-section">
+  <section class="demo-section" id="api-reference" data-doc-anchor>
     <h2 class="demo-section__title">API Reference</h2>
 
     <h3 class="demo-subsection__title">Inputs</h3>
@@ -182,6 +184,15 @@
         </tbody>
       </table>
     </div>
+  </section>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
   </div>
 
-</section>
+</app-doc-page-layout>

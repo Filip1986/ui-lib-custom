@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Tree } from 'ui-lib-custom/tree';
 import { TreeNodeTemplateDirective } from 'ui-lib-custom/tree';
 import type { TreeNode, TreeSelectionMode } from 'ui-lib-custom/tree';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the Tree component.
@@ -12,12 +15,30 @@ import type { TreeNode, TreeSelectionMode } from 'ui-lib-custom/tree';
 @Component({
   selector: 'app-tree-demo',
   standalone: true,
-  imports: [Tree, TreeNodeTemplateDirective],
+  imports: [Tree, TreeNodeTemplateDirective, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './tree-demo.component.html',
   styleUrl: './tree-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic-tree', label: 'Basic Tree' },
+    { id: 'single-selection', label: 'Single Selection' },
+    { id: 'multiple-selection', label: 'Multiple Selection' },
+    { id: 'checkbox-selection', label: 'Checkbox Selection' },
+    { id: 'filter', label: 'Filter' },
+    { id: 'custom-node-template', label: 'Custom Node Template' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'variants', label: 'Variants' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   // ─── File-system demo data ────────────────────────────────────────────────
 
   public readonly fileSystemNodes: TreeNode[] = [

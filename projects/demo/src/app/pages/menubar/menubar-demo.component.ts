@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { Menubar } from 'ui-lib-custom/menubar';
 import { Button } from 'ui-lib-custom/button';
 import type {
@@ -8,6 +8,9 @@ import type {
   MenubarSize,
   MenubarVariant,
 } from 'ui-lib-custom/menubar';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the Menubar component.
@@ -15,12 +18,33 @@ import type {
 @Component({
   selector: 'app-menubar-demo',
   standalone: true,
-  imports: [Menubar, Button],
+  imports: [Menubar, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './menubar-demo.component.html',
   styleUrl: './menubar-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenubarDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'nested-submenus', label: 'Nested Submenus' },
+    { id: 'disabled-items', label: 'Disabled Items' },
+    { id: 'command-callbacks', label: 'Command Callbacks' },
+    { id: 'item-click-output', label: 'itemClick Output' },
+    { id: 'start-end-slots', label: 'Start / End Slots' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'playground', label: 'Playground' },
+    { id: 'api', label: 'API' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   // ── Basic model ───────────────────────────────────────────────────────────
 
   public readonly basicModel: MenubarItem[] = [

@@ -1,16 +1,23 @@
-<div class="demo-page">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- ── Hero ────────────────────────────────────────────────────────────── -->
-  <section class="demo-hero">
-    <h1 class="demo-hero__title">Popover</h1>
-    <p class="demo-hero__subtitle">
+  <!-- ══════════════════════════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════════════════════ -->
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Popover</h1>
+      <code class="demo-page-header__import">import &#123; Popover &#125; from 'ui-lib-custom/popover'</code>
+    </div>
+    <p class="demo-page-header__description">
       A lightweight floating panel anchored to a trigger element. Supports arbitrary
       projected content, an optional header, and auto-placement above or below the trigger.
     </p>
-  </section>
+  </header>
 
-  <!-- ── Basic ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       BASIC
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__desc">
       Use a template reference on the trigger and call <code>toggle()</code> with the
@@ -36,8 +43,10 @@
 &lt;/ui-lib-popover&gt;</code></pre>
   </section>
 
-  <!-- ── Header & Close button ─────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       HEADER & CLOSE BUTTON
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="header-close-button" data-doc-anchor>
     <h2 class="demo-section__title">Header &amp; Close Button</h2>
     <p class="demo-section__desc">
       Provide a <code>header</code> string to render a title bar. Enable
@@ -65,8 +74,10 @@
 &lt;/ui-lib-popover&gt;</code></pre>
   </section>
 
-  <!-- ── Rich Content ──────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       RICH CONTENT
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="rich-content" data-doc-anchor>
     <h2 class="demo-section__title">Rich Content</h2>
     <p class="demo-section__desc">
       The popover body accepts any projected content — text, lists, actions, or nested components.
@@ -93,8 +104,10 @@
     </div>
   </section>
 
-  <!-- ── Variants ──────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       VARIANTS
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__desc">
       Three design variants follow the library's visual system.
@@ -118,8 +131,10 @@
     </div>
   </section>
 
-  <!-- ── Non-dismissable ───────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       NON-DISMISSABLE
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="non-dismissable" data-doc-anchor>
     <h2 class="demo-section__title">Non-dismissable</h2>
     <p class="demo-section__desc">
       Set <code>[dismissable]="false"</code> to prevent click-away from closing the popover.
@@ -145,8 +160,10 @@
     </div>
   </section>
 
-  <!-- ── Events ────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       EVENTS
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="events" data-doc-anchor>
     <h2 class="demo-section__title">Events</h2>
     <p class="demo-section__desc">
       Subscribe to <code>(shown)</code> and <code>(hidden)</code> to react to open/close transitions.
@@ -169,8 +186,10 @@
     <p class="demo-event-log">Last event: <strong>{{ lastEvent() }}</strong></p>
   </section>
 
-  <!-- ── Declarative ───────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       DECLARATIVE
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="declarative" data-doc-anchor>
     <h2 class="demo-section__title">Declarative <code>[(visible)]</code></h2>
     <p class="demo-section__desc">
       Control visibility with a two-way model binding instead of template refs.
@@ -200,8 +219,10 @@
     <pre class="demo-code"><code>&lt;ui-lib-popover [(visible)]="isOpen"&gt;...&lt;/ui-lib-popover&gt;</code></pre>
   </section>
 
-  <!-- ── API ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <!-- ══════════════════════════════════════════════════════════════════
+       API
+  ══════════════════════════════════════════════════════════════════ -->
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-subsection__title">Inputs</h3>
@@ -308,4 +329,16 @@
     </table>
   </section>
 
-</div>
+  <!-- ══════════════════════════════════════════════════════════════════
+       TOC RAIL
+  ══════════════════════════════════════════════════════════════════ -->
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

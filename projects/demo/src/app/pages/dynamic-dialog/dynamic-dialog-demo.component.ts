@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import type { OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
+import type { OnInit, Signal } from '@angular/core';
 import {
   DialogService,
   DynamicDialogRef,
@@ -11,6 +11,9 @@ import type {
   DynamicDialogPosition,
 } from 'ui-lib-custom/dynamic-dialog';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 // ---- Guest components rendered inside the dialog ----
 
@@ -121,13 +124,33 @@ export class LongDialogContentComponent {
 @Component({
   selector: 'app-dynamic-dialog-demo',
   standalone: true,
-  imports: [Button],
+  imports: [Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './dynamic-dialog-demo.component.html',
   styleUrl: './dynamic-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicDialogDemoComponent {
   private readonly dialogService: DialogService = inject(DialogService);
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic-usage', label: 'Basic Usage' },
+    { id: 'passing-data', label: 'Passing Data' },
+    { id: 'scrollable-content', label: 'Scrollable Content' },
+    { id: 'design-variants', label: 'Design Variants' },
+    { id: 'viewport-positions', label: 'Viewport Positions' },
+    { id: 'configuration-options', label: 'Configuration Options' },
+    { id: 'dynamic-dialog-config', label: 'DynamicDialogConfig' },
+    { id: 'dynamic-dialog-ref', label: 'DynamicDialogRef' },
+    { id: 'injection-tokens', label: 'Injection Tokens' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   protected lastResult: string = '';
 

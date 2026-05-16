@@ -1,14 +1,22 @@
-<div class="demo-page">
-  <h1 class="demo-page__title">TieredMenu</h1>
-  <p class="demo-page__description">
-    A hierarchical flyout menu supporting arbitrarily deep nesting. Works in both
-    <strong>inline</strong> and <strong>popup</strong> modes. Fully accessible with roving focus,
-    ARIA roles, and keyboard navigation.
-  </p>
-  <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>TieredMenu</h1>
+      <code class="demo-page-header__import">import { TieredMenu } from 'ui-lib-custom/tiered-menu'</code>
+    </div>
+    <p class="demo-page-header__description">
+      A hierarchical flyout menu supporting arbitrarily deep nesting. Works in both
+      <strong>inline</strong> and <strong>popup</strong> modes. Fully accessible with roving focus,
+      ARIA roles, and keyboard navigation.
+    </p>
+    <div class="demo-page-header__preview">
+      <app-doc-code-snippet [code]="snippets.import" language="typescript" />
+    </div>
+  </header>
 
   <!-- ── Overview ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="overview-detail" data-doc-anchor>
     <h2 class="demo-section__title">Overview</h2>
     <p class="demo-section__description">
       <code>TieredMenu</code> renders an accessible, keyboard-navigable menu panel that supports
@@ -29,7 +37,7 @@
   </section>
 
   <!-- ── Basic ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic (Inline)</h2>
     <p class="demo-section__description">
       The default inline mode renders the menu panel directly in the document flow. Pass a
@@ -50,7 +58,7 @@
   </section>
 
   <!-- ── Nested ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="nested-submenus" data-doc-anchor>
     <h2 class="demo-section__title">Nested Submenus</h2>
     <p class="demo-section__description">
       Items with an <code>items</code> array open a right-arrow flyout sub-panel on hover or
@@ -70,7 +78,7 @@
   </section>
 
   <!-- ── Popup ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="popup-mode" data-doc-anchor>
     <h2 class="demo-section__title">Popup Mode</h2>
     <p class="demo-section__description">
       Set <code>[popup]="true"</code> and control visibility via <code>toggle(event)</code>,
@@ -107,7 +115,7 @@
   </section>
 
   <!-- ── Variants ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Choose from <code>material</code>, <code>bootstrap</code>, or <code>minimal</code>. When
@@ -137,7 +145,7 @@
   </section>
 
   <!-- ── Sizes ─────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__description">
       Three sizes are available: <code>sm</code>, <code>md</code> (default), and <code>lg</code>.
@@ -166,7 +174,7 @@
   </section>
 
   <!-- ── Item States ───────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="item-states" data-doc-anchor>
     <h2 class="demo-section__title">Item States</h2>
     <p class="demo-section__description">
       Items support <code>disabled</code>, <code>visible: false</code> (excluded from render),
@@ -187,7 +195,7 @@
   </section>
 
   <!-- ── URL Items ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="url-items" data-doc-anchor>
     <h2 class="demo-section__title">URL Items</h2>
     <p class="demo-section__description">
       Set <code>url</code> on an item to render it as an <code>&lt;a href&gt;</code> element.
@@ -200,7 +208,7 @@
   </section>
 
   <!-- ── API ───────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Inputs</h3>
@@ -339,7 +347,7 @@
   </section>
 
   <!-- ── Accessibility ─────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="accessibility" data-doc-anchor>
     <h2 class="demo-section__title">Accessibility</h2>
 
     <h3 class="demo-section__subtitle">ARIA Attributes</h3>
@@ -397,4 +405,14 @@
       </li>
     </ul>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

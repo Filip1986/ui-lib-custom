@@ -1,19 +1,18 @@
-<div class="demo-page">
+<app-doc-page-layout [sections]="sections">
 
-  <!-- ── Hero ────────────────────────────────────────────────────────────── -->
-  <div class="demo-hero">
-    <h1 class="demo-hero__title">Fieldset</h1>
-    <p class="demo-hero__description">
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Fieldset</h1>
+      <code class="demo-page-header__import">import { Fieldset } from 'ui-lib-custom/fieldset'</code>
+    </div>
+    <p class="demo-page-header__description">
       A labelled content container with an optional collapse/expand animation.
       Use it to group related form fields or information sections under a clear heading.
     </p>
-    <p class="demo-hero__import">
-      <code>import &#123; Fieldset &#125; from 'ui-lib-custom/fieldset';</code>
-    </p>
-  </div>
+  </header>
 
   <!-- ── Basic ────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
       A simple non-toggleable fieldset with a legend label and body content.
@@ -46,7 +45,7 @@
   </section>
 
   <!-- ── Toggleable ───────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="toggleable" data-doc-anchor>
     <h2 class="demo-section__title">Toggleable</h2>
     <p class="demo-section__description">
       Set <code>[toggleable]="true"</code> to let users collapse and expand
@@ -83,7 +82,7 @@
   </section>
 
   <!-- ── Pre-collapsed ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="pre-collapsed" data-doc-anchor>
     <h2 class="demo-section__title">Pre-collapsed</h2>
     <p class="demo-section__description">
       Pass <code>[collapsed]="true"</code> to start the fieldset in its
@@ -110,7 +109,7 @@
   </section>
 
   <!-- ── Custom Legend ────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="custom-legend" data-doc-anchor>
     <h2 class="demo-section__title">Custom Legend</h2>
     <p class="demo-section__description">
       Project any HTML into the legend area using the
@@ -136,7 +135,7 @@
   </section>
 
   <!-- ── Variants ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three built-in design variants: <code>material</code>,
@@ -161,7 +160,7 @@
   </section>
 
   <!-- ── Toggle Event ─────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="toggle-event" data-doc-anchor>
     <h2 class="demo-section__title">Toggle Event</h2>
     <p class="demo-section__description">
       Listen to the <code>(toggled)</code> output to react when the panel opens or closes.
@@ -188,7 +187,7 @@ onToggle(event: FieldsetToggleEvent): void &#123;
   </section>
 
   <!-- ── API ──────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-api__subtitle">Inputs</h3>
@@ -277,4 +276,13 @@ onToggle(event: FieldsetToggleEvent): void &#123;
     </table>
   </section>
 
-</div>
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>

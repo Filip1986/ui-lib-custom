@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { PanelMenu } from 'ui-lib-custom/panel-menu';
 import type {
   PanelMenuCommandEvent,
@@ -12,6 +12,9 @@ import {
   TableColumnBodyDirective,
 } from 'ui-lib-custom/table';
 import { DocCodeSnippetComponent } from '../../shared/doc-page/doc-code-snippet.component';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 interface AriaRow {
   readonly element: string;
@@ -37,12 +40,36 @@ interface KeyboardRow {
     TableColumnComponent,
     TableColumnBodyDirective,
     DocCodeSnippetComponent,
+    DocPageLayoutComponent,
+    DocTocComponent,
   ],
   templateUrl: './panel-menu-demo.component.html',
   styleUrl: './panel-menu-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanelMenuDemoComponent {
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'initially-expanded', label: 'Initially Expanded' },
+    { id: 'multiple-mode', label: 'Multiple Mode' },
+    { id: 'nested-sub-items', label: 'Nested Sub-Items' },
+    { id: 'disabled-items', label: 'Disabled Items' },
+    { id: 'url-items', label: 'URL Items' },
+    { id: 'variants', label: 'Variants' },
+    { id: 'sizes', label: 'Sizes' },
+    { id: 'events', label: 'Events' },
+    { id: 'api', label: 'API' },
+    { id: 'accessibility', label: 'Accessibility' },
+  ];
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
+
   public readonly snippets: {
     readonly import: string;
     readonly basic: string;

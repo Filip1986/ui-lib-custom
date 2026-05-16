@@ -1,12 +1,15 @@
 import { TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import type { WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, viewChild } from '@angular/core';
+import type { Signal, WritableSignal } from '@angular/core';
 import { ConfirmDialog, ConfirmationService } from 'ui-lib-custom/confirm-dialog';
 import type {
   ConfirmDialogButtonSeverity,
   ConfirmDialogVariant,
 } from 'ui-lib-custom/confirm-dialog';
 import { Button } from 'ui-lib-custom/button';
+import { DocPageLayoutComponent } from '../../shared/doc-page/doc-page-layout.component';
+import { DocTocComponent } from '../../shared/doc-page/doc-toc.component';
+import type { DocSection } from '../../shared/doc-page/doc-section.model';
 
 /**
  * Demo page for the ConfirmDialog component.
@@ -14,13 +17,29 @@ import { Button } from 'ui-lib-custom/button';
 @Component({
   selector: 'app-confirm-dialog-demo',
   standalone: true,
-  imports: [ConfirmDialog, TitleCasePipe, Button],
+  imports: [ConfirmDialog, TitleCasePipe, Button, DocPageLayoutComponent, DocTocComponent],
   templateUrl: './confirm-dialog-demo.component.html',
   styleUrl: './confirm-dialog-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialogDemoComponent {
   private readonly confirmationService: ConfirmationService = inject(ConfirmationService);
+
+  public readonly layout: Signal<DocPageLayoutComponent | undefined> =
+    viewChild(DocPageLayoutComponent);
+
+  public readonly sections: DocSection[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'basic', label: 'Basic' },
+    { id: 'dismissable-backdrop', label: 'Dismissable Backdrop' },
+    { id: 'non-closable', label: 'Non-Closable' },
+    { id: 'with-icon', label: 'With Icon' },
+    { id: 'danger-severity', label: 'Danger Severity' },
+    { id: 'position', label: 'Top Position' },
+    { id: 'programmatic', label: 'Programmatic' },
+    { id: 'design-variants', label: 'Design Variants' },
+    { id: 'api', label: 'API Reference' },
+  ];
 
   public readonly variants: ConfirmDialogVariant[] = ['material', 'bootstrap', 'minimal'];
   public readonly severities: ConfirmDialogButtonSeverity[] = [
@@ -45,6 +64,10 @@ export class ConfirmDialogDemoComponent {
 
   // Result log
   public readonly lastResult: WritableSignal<string> = signal<string>('—');
+
+  public scrollTo(id: string): void {
+    this.layout()?.scrollToSection(id);
+  }
 
   public confirmBasic(): void {
     this.basicVisible.set(true);

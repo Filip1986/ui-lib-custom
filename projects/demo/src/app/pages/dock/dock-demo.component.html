@@ -1,15 +1,19 @@
-<div class="demo-page">
-  <div class="demo-page__header">
-    <h1 class="demo-page__title">Dock</h1>
-    <p class="demo-page__description">
+<app-doc-page-layout [sections]="sections">
+
+  <header class="demo-page-header" id="overview" data-doc-anchor docHeader>
+    <div class="demo-page-header__meta">
+      <h1>Dock</h1>
+      <code class="demo-page-header__import">import { Dock } from 'ui-lib-custom/dock'</code>
+    </div>
+    <p class="demo-page-header__description">
       A macOS-style icon bar with a hover magnification effect. Items scale up smoothly when
       hovered, with neighbouring items receiving a proportional cascade. Supports four positions
       (bottom, top, left, right), three design variants, and three size tokens.
     </p>
-  </div>
+  </header>
 
   <!-- ── Basic ──────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="basic" data-doc-anchor>
     <h2 class="demo-section__title">Basic</h2>
     <p class="demo-section__description">
       Default dock positioned at the bottom with the material variant and magnification enabled.
@@ -35,7 +39,7 @@
   </section>
 
   <!-- ── Variants ───────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="variants" data-doc-anchor>
     <h2 class="demo-section__title">Variants</h2>
     <p class="demo-section__description">
       Three design variants are available: <code>material</code> (frosted glass),
@@ -62,7 +66,7 @@
   </section>
 
   <!-- ── Sizes ──────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="sizes" data-doc-anchor>
     <h2 class="demo-section__title">Sizes</h2>
     <p class="demo-section__description">
       The <code>size</code> input controls icon and item dimensions via design tokens.
@@ -88,7 +92,7 @@
   </section>
 
   <!-- ── Positions ──────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="positions" data-doc-anchor>
     <h2 class="demo-section__title">Positions</h2>
     <p class="demo-section__description">
       The dock can be anchored to any edge of its container. For vertical positions
@@ -118,7 +122,7 @@
   </section>
 
   <!-- ── No magnification ───────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="no-magnification" data-doc-anchor>
     <h2 class="demo-section__title">No Magnification</h2>
     <p class="demo-section__description">
       Set <code>[magnification]="false"</code> to render a static dock without the scale
@@ -138,7 +142,7 @@
   </section>
 
   <!-- ── Disabled items ─────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="disabled-items" data-doc-anchor>
     <h2 class="demo-section__title">Disabled Items</h2>
     <p class="demo-section__description">
       Individual items can be disabled by setting <code>disabled: true</code>. Disabled items
@@ -162,7 +166,7 @@
   </section>
 
   <!-- ── Link items ─────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="link-items" data-doc-anchor>
     <h2 class="demo-section__title">Link Items</h2>
     <p class="demo-section__description">
       Items with a <code>url</code> render as <code>&lt;a href&gt;</code> anchors.
@@ -189,7 +193,7 @@
   </section>
 
   <!-- ── Interactive playground ────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="playground" data-doc-anchor>
     <h2 class="demo-section__title">Interactive Playground</h2>
     <p class="demo-section__description">
       Adjust variant, size, position, and magnification settings below to explore combinations.
@@ -287,7 +291,7 @@
   </section>
 
   <!-- ── API ────────────────────────────────────────────────────────────────── -->
-  <section class="demo-section">
+  <section class="demo-section" id="api" data-doc-anchor>
     <h2 class="demo-section__title">API</h2>
 
     <h3 class="demo-section__subtitle">Dock Inputs</h3>
@@ -422,4 +426,14 @@
       </tbody>
     </table>
   </section>
-</div>
+
+  <div class="demo-page-rail" docRail>
+    <p class="demo-page-rail__title">On this page</p>
+    <app-doc-toc
+      [sections]="sections"
+      [activeId]="layout()?.activeSectionId() ?? null"
+      (sectionSelected)="scrollTo($event)"
+    />
+  </div>
+
+</app-doc-page-layout>
