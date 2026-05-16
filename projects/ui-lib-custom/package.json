@@ -368,6 +368,10 @@
     "./icon-button": {
       "esm2022": "./esm2022/icon-button/index.mjs",
       "esm": "./esm2022/icon-button/index.mjs"
+    },
+    "./syntax-highlighter": {
+      "esm2022": "./esm2022/syntax-highlighter/index.mjs",
+      "esm": "./esm2022/syntax-highlighter/index.mjs"
     }
   },
   "typesVersions": {
@@ -614,6 +618,9 @@
       ],
       "icon-button": [
         "./icon-button/index.d.ts"
+      ],
+      "syntax-highlighter": [
+        "./syntax-highlighter/index.d.ts"
       ]
     }
   }

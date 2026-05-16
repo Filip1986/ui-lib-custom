@@ -295,6 +295,15 @@ export const routes: Routes = [
     title: 'ClassNames - UI Components Library',
   },
   {
+    path: 'syntax-highlighter',
+    loadComponent: (): Promise<Type<unknown>> =>
+      import('./pages/syntax-highlighter/syntax-highlighter-demo.component').then(
+        (m: { SyntaxHighlighterDemoComponent: Type<unknown> }): Type<unknown> =>
+          m.SyntaxHighlighterDemoComponent
+      ),
+    title: 'SyntaxHighlighter - UI Components Library',
+  },
+  {
     path: 'date-picker',
     loadComponent: (): Promise<Type<unknown>> =>
       import('./pages/date-picker/date-picker-demo.component').then(

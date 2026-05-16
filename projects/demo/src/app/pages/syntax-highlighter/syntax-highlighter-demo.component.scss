@@ -1,0 +1,289 @@
+.demo-page {
+  max-width: 860px;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.demo-header {
+  margin-bottom: 3rem;
+
+  &__badge {
+    display: inline-block;
+    padding: 0.2rem 0.625rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--uilib-color-primary-100, #e0e7ff);
+    color: var(--uilib-color-primary-700, #4338ca);
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: var(--uilib-surface-text, inherit);
+  }
+
+  &__description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--uilib-surface-text-muted, #6b7280);
+    margin: 0 0 1.5rem;
+  }
+}
+
+// ─── Sections ─────────────────────────────────────────────────────────────────
+
+.demo-section {
+  margin-bottom: 3.5rem;
+
+  &__title {
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--uilib-surface-text, inherit);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--uilib-surface-border, #e5e7eb);
+  }
+
+  &__description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--uilib-surface-text-muted, #6b7280);
+    margin: 0 0 1.25rem;
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.875em;
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background: var(--uilib-surface-ground, #f3f4f6);
+      color: var(--uilib-surface-text, inherit);
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--uilib-surface-text, inherit);
+  }
+}
+
+// ─── Overview cards ───────────────────────────────────────────────────────────
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.overview-card {
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--uilib-surface-border, #e5e7eb);
+  background: var(--uilib-surface-card, #fff);
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background: var(--uilib-color-primary-100, #e0e7ff);
+    color: var(--uilib-color-primary-700, #4338ca);
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.375rem;
+    color: var(--uilib-surface-text, inherit);
+  }
+
+  &__body {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--uilib-surface-text-muted, #6b7280);
+    margin: 0;
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125em;
+      padding: 0.1em 0.3em;
+      border-radius: 0.2rem;
+      background: var(--uilib-surface-ground, #f3f4f6);
+    }
+  }
+}
+
+// ─── API blocks ───────────────────────────────────────────────────────────────
+
+.api-block {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--uilib-surface-border, #e5e7eb);
+  background: var(--uilib-surface-card, #fff);
+
+  &__signature {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0 0 0.625rem;
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 1em;
+      color: var(--uilib-color-primary-600, #4f46e5);
+    }
+  }
+
+  p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--uilib-surface-text-muted, #6b7280);
+    margin: 0;
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875em;
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      background: var(--uilib-surface-ground, #f3f4f6);
+      color: var(--uilib-surface-text, inherit);
+    }
+  }
+}
+
+.type-block {
+  padding: 0.75rem 1.125rem;
+  border-radius: 0.5rem;
+  background: var(--uilib-surface-ground, #f3f4f6);
+  border: 1px solid var(--uilib-surface-border, #e5e7eb);
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    color: var(--uilib-color-primary-700, #4338ca);
+  }
+}
+
+// ─── Token table ──────────────────────────────────────────────────────────────
+
+.token-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--uilib-surface-border, #e5e7eb);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.token-row {
+  display: grid;
+  grid-template-columns: 1fr 7rem 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--uilib-surface-border, #e5e7eb);
+  background: var(--uilib-surface-card, #fff);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &--header {
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--uilib-surface-text-muted, #6b7280);
+    background: var(--uilib-surface-ground, #f9fafb);
+  }
+
+  span {
+    color: var(--uilib-surface-text-muted, #6b7280);
+  }
+}
+
+// Token samples inside the table use the dark background so colours are visible
+.token-sample {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.8125rem;
+  padding: 0.2em 0.5em;
+  border-radius: 0.25rem;
+  background: #1e1e2e;
+}
+
+.token-swatch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--uilib-surface-text, inherit) !important;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 50%;
+    background: var(--swatch);
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+// ─── Token colour overrides for the table preview (dark bg) ──────────────────
+
+.token-sample.uilib-token-keyword {
+  color: #569cd6;
+  font-weight: 600;
+}
+.token-sample.uilib-token-string {
+  color: #ce9178;
+}
+.token-sample.uilib-token-comment {
+  color: #6a9955;
+  font-style: italic;
+}
+.token-sample.uilib-token-number {
+  color: #b5cea8;
+}
+.token-sample.uilib-token-decorator {
+  color: #dcdcaa;
+}
+.token-sample.uilib-token-type {
+  color: #4ec9b0;
+}
+.token-sample.uilib-token-function {
+  color: #dcdcaa;
+}
+.token-sample.uilib-token-variable {
+  color: #bd63c5;
+}
+.token-sample.uilib-token-at-rule {
+  color: #c586c0;
+}
+.token-sample.uilib-token-property {
+  color: #9cdcfe;
+}
+.token-sample.uilib-token-binding {
+  color: #4fc1ff;
+  font-weight: 500;
+}
+.token-sample.uilib-token-interpolation {
+  color: #dcdcaa;
+}
