@@ -14,8 +14,8 @@ import {
 } from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
 import { ThemeConfigService } from 'ui-lib-custom/theme';
-import { highlight, escapeForCode } from '../syntax-highlighter/syntax-highlighter';
-import type { SyntaxLanguage } from '../syntax-highlighter/syntax-highlighter.types';
+import { highlight, escapeForCode } from 'ui-lib-custom/syntax-highlighter';
+import type { SyntaxLanguage } from 'ui-lib-custom/syntax-highlighter';
 import type {
   CodeSnippetLanguage,
   CodeSnippetVariant,
